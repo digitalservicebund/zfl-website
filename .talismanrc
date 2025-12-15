@@ -6,6 +6,7 @@ allowed_patterns:
   - "secrets: inherit"
   - "key: ${{ runner.os }}"
   - GITOPS_DIGITALCHECK_APP_PRIVATE_KEY
+  - "public key"
 
 scopeconfig:
   - scope: node  # ignores files such as package-lock.json

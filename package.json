@@ -11,7 +11,8 @@
     "astro": "astro",
     "format:check": "prettier --check",
     "format:fix": "npm run format:fix-selected .",
-    "format:fix-selected": "prettier --write --ignore-unknown"
+    "format:fix-selected": "prettier --write --ignore-unknown",
+    "preinstall": "echo 'Please disable script execution for security reasons: npm config set ignore-scripts true' && exit 1"
   },
   "dependencies": {
     "@kern-ux/native": "^2.4.0",
