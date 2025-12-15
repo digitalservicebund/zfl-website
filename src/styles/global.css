@@ -1,0 +1,28 @@
+@layer theme, base, utilities;
+
+/* KERN UX */
+@import "@kern-ux/native/dist/fonts/fira-sans.css" layer(base);
+@import "@kern-ux/native/dist/kern.css" layer(base);
+
+@layer base {
+  body {
+    margin: 0;
+  }
+}
+
+@layer utilities {
+  .mx-auto {
+    margin-inline: auto;
+  }
+  .container {
+    max-width: 960px;
+    margin-inline: auto;
+  }
+}
+
+:root {
+  --color-zfl-main20: #e3e6f2;
+  --color-zfl-main80: #36349d;
+
+  --section-spacing-default: 80px;
+}

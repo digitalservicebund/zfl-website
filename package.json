@@ -3,12 +3,24 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
+    "audit:licences": "license-checker-rseidelsohn --production --excludePrivatePackages --onlyAllow 'MIT;BSD-3-Clause;BSD-2-Clause;0BSD;ISC;Apache-2.0;MPL-2.0;BlueOak-1.0.0;Custom: LICENSE;Unlicense' --summary",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format:check": "prettier --check",
+    "format:fix": "npm run format:fix-selected .",
+    "format:fix-selected": "prettier --write --ignore-unknown"
   },
   "dependencies": {
+    "@kern-ux/native": "^2.4.0",
     "astro": "^5.16.5"
-  }
+  },
+  "devDependencies": {
+    "prettier": "^3.7.4",
+    "prettier-plugin-astro": "0.14.1",
+    "prettier-plugin-organize-imports": "^4.3.0",
+    "license-checker-rseidelsohn": "^4.4.2"
+  },
+  "packageManager": "pnpm@9.15.0"
 }

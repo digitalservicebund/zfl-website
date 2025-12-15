@@ -1,0 +1,27 @@
+---
+interface Props {
+  class?: string;
+}
+const hasSubtitle = Astro.slots.has("subtitle");
+---
+
+<div class="hero">
+  <div class="container">
+    <slot />
+    {
+      hasSubtitle && (
+        <div class="kern-body">
+          <slot name="subtitle" />
+        </div>
+      )
+    }
+  </div>
+</div>
+
+<style>
+  .hero {
+    background: var(--color-zfl-main80);
+    --kern-color-layout-text-default: white;
+    padding: 56px 0 64px;
+  }
+</style>

@@ -1,0 +1,24 @@
+---
+interface Props {
+  size: "large" | "small" | "default";
+  style: "bold" | "muted" | "default";
+}
+
+const propMapSize = {
+  large: "kern-body--large",
+  small: "kern-body--small",
+  default: "",
+} satisfies Record<Props["size"], string>;
+
+const propMapStyle = {
+  bold: "kern-body--bold",
+  default: "",
+  muted: "kern-body--muted",
+} satisfies Record<Props["style"], string>;
+
+const { size = "default", style = "default" } = Astro.props;
+---
+
+<p class:list={["kern-body", propMapSize[size], propMapStyle[style]]}>
+  <slot />
+</p>

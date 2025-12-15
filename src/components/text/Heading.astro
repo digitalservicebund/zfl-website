@@ -1,0 +1,20 @@
+---
+interface Props {
+  level?: 1 | 2 | 3 | 4 | 5 | 6;
+  size?: "display" | "xLarge" | "large" | "medium" | "small";
+}
+
+const { level = 1, size = "large" } = Astro.props;
+
+const propMap = {
+  display: "kern-heading-display",
+  xLarge: "kern-heading-x-large",
+  large: "kern-heading-large",
+  medium: "kern-heading-medium",
+  small: "kern-heading-small",
+} satisfies Record<NonNullable<Props["size"]>, string>;
+
+const Tag: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" = `h${level}`;
+---
+
+<Tag class={propMap[size]}><slot /></Tag>

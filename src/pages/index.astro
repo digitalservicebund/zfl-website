@@ -1,11 +1,69 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import Container from "../components/Container.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import { Content as Vorteile } from "./_index/vorteile.md";
+import Card from "../components/Card.astro";
+import Heading from "../components/text/Heading.astro";
+import Banner from "../components/Banner.astro";
+import Link from "../components/text/Link.astro";
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Test page">
+  <main>
+    <Hero>
+      <Heading>Bessere Rechtsetzung in allen Phasen Ihres Vorhabens</Heading>
+      <Fragment slot="subtitle"
+        >Das Zentrum für Legistik unterstützt Sie bei der Ausarbeitung von
+        Regelungen. Sie stellen damit sicher, dass Ihr Vorhaben
+        betroffenenzentriert, praxistauglich und digital umsetzbar ist.
+      </Fragment>
+    </Hero>
+    <Banner>
+      Das Angebot befindet sich aktuell im Aufbau und wird schrittweise mit
+      Ihnen zusammen weiterentwickelt.
+    </Banner>
+    <Container style={{ paddingBlock: "var(--section-spacing-default)" }}>
+      <Vorteile />
+    </Container>
+    <div
+      style="background: var(--color-zfl-main20); padding-block: var(--section-spacing-default)"
+    >
+      <div class="offerings container">
+        <h2>Bereits verfügbare Angebote</h2>
+        <Card>
+          <h3 slot="header" class="kern-title">
+            Interdisziplinäre Expertise für Ihr Regelungsvorhaben
+          </h3>
+          <p>
+            Wir begleiten Sie mit einem interdisziplinärem Kompetenzteam. Sie
+            erhalten dadurch ein umfassendes Verständnis von Umsetzungsprozessen
+            und gestalten Ihr Vorhaben praxisnah und bürokratiearm.
+          </p>
+          <Link href="/begleitungen"
+            >Mehr Informationen zu interdisziplinären Kompetenzteams</Link
+          >
+        </Card>
+        <Card>
+          <h3 slot="header" class="kern-title">
+            In Schulungen praktisches Wissen erlangen
+          </h3>
+          <p>
+            Neue Methoden und Werkzeuge für die Rechtsetzung in
+            umsetzungsorientierten Schulungen kennenlernen.
+          </p>
+          <Link href="/schulungen">Mehr Informationen zu Schulungen</Link>
+        </Card>
+      </div>
+    </div>
+  </main>
 </Layout>
+
+<style>
+  .offerings {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+</style>

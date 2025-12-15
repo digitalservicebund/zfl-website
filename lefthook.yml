@@ -1,0 +1,28 @@
+commit-msg:
+  commands:
+    lint-commit-msg:
+      run: npx --yes commitlint --edit
+pre-commit:
+  parallel: true
+  commands:
+    lint:
+    check-format:
+      tags: style
+      run: npm run format:fix-selected {staged_files}
+      glob: "*.{js,cjs,mjs,ts,jsx,tsx,json,css,md,yml,yaml,html}"
+      stage_fixed: true
+    talisman:
+      tags: security audit
+      run: talisman --githook pre-commit
+    gitleaks:
+      tags: security audit
+      run: |
+        for file in {staged_files}; do
+          gitleaks dir -v --no-banner "$file"
+        done
+pre-push:
+  parallel: true
+  commands:
+    licenses-audit:
+      tags: licenses audit
+      run: npm run audit:licences
