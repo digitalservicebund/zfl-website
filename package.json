@@ -15,14 +15,16 @@
     "preinstall": "echo 'Please disable script execution for security reasons: npm config set ignore-scripts true' && exit 1"
   },
   "dependencies": {
+    "@iconify-json/material-symbols": "^1.2.50",
     "@kern-ux/native": "^2.4.0",
-    "astro": "^5.16.5"
+    "astro": "^5.16.5",
+    "astro-icon": "^1.1.5"
   },
   "devDependencies": {
+    "license-checker-rseidelsohn": "^4.4.2",
     "prettier": "^3.7.4",
     "prettier-plugin-astro": "0.14.1",
-    "prettier-plugin-organize-imports": "^4.3.0",
-    "license-checker-rseidelsohn": "^4.4.2"
+    "prettier-plugin-organize-imports": "^4.3.0"
   },
   "packageManager": "pnpm@9.15.0"
 }

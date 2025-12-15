@@ -11,16 +11,15 @@ import "../styles/global.css";
 ---
 
 <!doctype html>
-<html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title}</title>
-    <meta property="og:title" content={title} />
-    <meta property="twitter:title" content={title} />
-  </head>
+<html lang="de" data-kern-theme="light">
+  {/* disable dark mode for now*/}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <meta name="generator" content={Astro.generator} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <title>{title}</title>
+  <meta property="og:title" content={title} />
+  <meta property="twitter:title" content={title} />
   <body>
     <Kopfzeile />
     <slot />

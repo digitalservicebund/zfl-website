@@ -8,6 +8,8 @@ import Card from "../components/Card.astro";
 import Heading from "../components/text/Heading.astro";
 import Banner from "../components/Banner.astro";
 import Link from "../components/text/Link.astro";
+import { Icon } from "astro-icon/components";
+import Title from "../components/text/Title.astro";
 ---
 
 <Layout title="Test page">
@@ -24,18 +26,21 @@ import Link from "../components/text/Link.astro";
       Das Angebot befindet sich aktuell im Aufbau und wird schrittweise mit
       Ihnen zusammen weiterentwickelt.
     </Banner>
-    <Container style={{ paddingBlock: "var(--section-spacing-default)" }}>
+    <Container class="markdown" style="padding-block: 40px;">
+      {
+        /* challenge: how would we apply a kern-heading-large style to the
+        h2 from the Markdown file? Use Tailwind's @apply? */
+      }
       <Vorteile />
     </Container>
-    <div
-      style="background: var(--color-zfl-main20); padding-block: var(--section-spacing-default)"
-    >
+    <section>
       <div class="offerings container">
-        <h2>Bereits verfügbare Angebote</h2>
+        <Heading level={3}>Bereits verfügbare Angebote</Heading>
         <Card>
-          <h3 slot="header" class="kern-title">
+          <Icon slot="header" name="material-symbols:widgets-outline" />
+          <Title level={3} slot="header">
             Interdisziplinäre Expertise für Ihr Regelungsvorhaben
-          </h3>
+          </Title>
           <p>
             Wir begleiten Sie mit einem interdisziplinärem Kompetenzteam. Sie
             erhalten dadurch ein umfassendes Verständnis von Umsetzungsprozessen
@@ -46,9 +51,10 @@ import Link from "../components/text/Link.astro";
           >
         </Card>
         <Card>
-          <h3 slot="header" class="kern-title">
+          <Icon slot="header" name="material-symbols:fact-check-outline" />
+          <Title level={3} slot="header">
             In Schulungen praktisches Wissen erlangen
-          </h3>
+          </Title>
           <p>
             Neue Methoden und Werkzeuge für die Rechtsetzung in
             umsetzungsorientierten Schulungen kennenlernen.
@@ -56,14 +62,47 @@ import Link from "../components/text/Link.astro";
           <Link href="/schulungen">Mehr Informationen zu Schulungen</Link>
         </Card>
       </div>
-    </div>
+    </section>
+    <section>
+      <div class="container">
+        <Card
+          ><Icon
+            slot="header"
+            name="material-symbols:phone-enabled-outline"
+            style="transform: scaleX(-100%);"
+          />
+          <Title level={3} slot="header">Kontaktieren Sie uns</Title>
+        </Card>
+      </div>
+    </section>
   </main>
 </Layout>
 
 <style>
+  section {
+    padding-block: 40px;
+    .kern-card {
+      background: var(--color-zfl-main20);
+    }
+  }
+
+  section:nth-child(2n) {
+    background: var(--color-zfl-main20);
+    .kern-card {
+      background: white;
+    }
+  }
+
   .offerings {
     display: flex;
     flex-direction: column;
     gap: 40px;
+  }
+
+  [data-icon] {
+    /* see https://www.astroicon.dev/guides/styling/ */
+    width: 80px;
+    height: 80px;
+    color: var(--color-zfl-main80);
   }
 </style>
