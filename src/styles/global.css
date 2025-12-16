@@ -3,7 +3,6 @@
 /* KERN UX */
 @import "@kern-ux/native/dist/fonts/fira-sans.css" layer(base);
 @import "@kern-ux/native/dist/kern.css" layer(base);
-@source "@kern-ux/native/dist/kern.css";
 
 /* Tailwind without preflight (normalize) */
 @import "tailwindcss/theme.css" layer(theme);
@@ -16,6 +15,8 @@
 @source not inline("container");
 
 @theme {
+  --color-*: initial;
+
   --color-zfl-main20: #e3e6f2;
   --color-zfl-main80: #36349d;
 
@@ -25,6 +26,12 @@
 @layer base {
   body {
     margin: 0;
+  }
+
+  *,
+  ::before,
+  ::after {
+    border-color: var(--kern-color-layout-border);
   }
 }
 
@@ -36,11 +43,8 @@
     max-width: 960px;
     margin-inline: auto;
   }
+
+  .list-unstyled {
+    @apply p-0 [&_li]:list-none [&_ul]:p-0;
+  }
 }
-
-/* :root {
-  --color-zfl-main20: #e3e6f2;
-  --color-zfl-main80: #36349d;
-
-  --section-spacing-default: 80px;
-} */
