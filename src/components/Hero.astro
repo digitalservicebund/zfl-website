@@ -6,11 +6,11 @@ const hasSubtitle = Astro.slots.has("subtitle");
 ---
 
 <div class="hero">
-  <div class="container">
+  <div class="kern-container">
     <slot />
     {
       hasSubtitle && (
-        <div class="kern-body">
+        <div class="kern-body--large">
           <slot name="subtitle" />
         </div>
       )

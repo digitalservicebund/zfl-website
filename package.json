@@ -21,6 +21,7 @@
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.16.5",
     "astro-icon": "^1.1.5",
+    "rehype-add-classes": "^1.0.0",
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
