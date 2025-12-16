@@ -1,6 +1,5 @@
 ---
 import Layout from "./Layout.astro";
-import Container from "../components/Container.astro";
 
 import type { MarkdownLayoutProps } from "astro";
 
@@ -12,7 +11,7 @@ const { frontmatter } = Astro.props;
 ---
 
 <Layout title={frontmatter.title}>
-  <Container>
+  <div class="container markdown my-40">
     <slot />
-  </Container>
+  </div>
 </Layout>

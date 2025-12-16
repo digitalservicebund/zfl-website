@@ -44,4 +44,12 @@
   .list-unstyled {
     @apply p-0 [&_li]:list-none [&_ul]:p-0;
   }
+
+  .markdown {
+    address {
+      font-style: normal;
+      white-space: pre-line;
+      font-size: var(--kern-typography-font-size-static-medium, 18px);
+    }
+  }
 }
