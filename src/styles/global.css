@@ -11,9 +11,6 @@
 /* use the KERN UX theme */
 @import "@digitalservicebund/kern-ux-tailwind-theme/theme.css" layer(theme);
 
-/* disable Tailwind's container */
-@source not inline("container");
-
 @theme {
   --color-*: initial;
 
