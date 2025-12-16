@@ -3,6 +3,24 @@
 /* KERN UX */
 @import "@kern-ux/native/dist/fonts/fira-sans.css" layer(base);
 @import "@kern-ux/native/dist/kern.css" layer(base);
+@source "@kern-ux/native/dist/kern.css";
+
+/* Tailwind without preflight (normalize) */
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+/* use the KERN UX theme */
+@import "@digitalservicebund/kern-ux-tailwind-theme/theme.css" layer(theme);
+
+/* disable Tailwind's container */
+@source not inline("container");
+
+@theme {
+  --color-zfl-main20: #e3e6f2;
+  --color-zfl-main80: #36349d;
+
+  --section-spacing-default: 80px;
+}
 
 @layer base {
   body {
@@ -20,9 +38,9 @@
   }
 }
 
-:root {
+/* :root {
   --color-zfl-main20: #e3e6f2;
   --color-zfl-main80: #36349d;
 
   --section-spacing-default: 80px;
-}
+} */

@@ -1,0 +1,56 @@
+---
+import Container from "./Container.astro";
+import Link from "./text/Link.astro";
+---
+
+<style>
+  .footer {
+    border-top-width: var(--kern-metric-border-width-light);
+    border-top-color: var(--kern-color-layout-border);
+    border-top-style: solid;
+
+    padding: var(--kern-metric-space-default);
+
+    .parent-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-auto-flow: column;
+      align-items: end;
+      gap: var(--kern-metric-space-x-large);
+
+      &,
+      .list {
+        padding: 0;
+      }
+
+      li {
+        list-style: none;
+      }
+    }
+  }
+</style>
+
+<footer class="footer">
+  <ul class="parent-list kern-container">
+    <li>
+      <h3>Unterstützungsangebote</h3>
+      <ul class="list">
+        <li>
+          Support: <Link href="tel:015140767839">0151/40 76 78 39</Link> oder <a
+            href="support@zfl.bund.de">support@zfl.bund.de</a
+          >
+        </li>
+        <li><a href="/begleitungen">Begleitungen</a></li>
+        <li><Link href="/schulungen">Schulungen</Link></li>
+      </ul>
+    </li>
+
+    <li>
+      <ul class="list">
+        <li><Link href="/impressum">Impressum</Link></li>
+        <li><Link href="/datenschutz">Datenschutzerklärung</Link></li>
+        <li><Link href="/barrierefreiheit">Barrierefreiheit</Link></li>
+      </ul>
+    </li>
+  </ul>
+</footer>

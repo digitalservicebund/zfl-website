@@ -15,10 +15,13 @@
     "preinstall": "echo 'Please disable script execution for security reasons: npm config set ignore-scripts true' && exit 1"
   },
   "dependencies": {
+    "@digitalservicebund/kern-ux-tailwind-theme": "^1.1.0",
     "@iconify-json/material-symbols": "^1.2.50",
     "@kern-ux/native": "^2.4.0",
+    "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.16.5",
-    "astro-icon": "^1.1.5"
+    "astro-icon": "^1.1.5",
+    "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
     "license-checker-rseidelsohn": "^4.4.2",
