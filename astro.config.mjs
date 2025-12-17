@@ -6,9 +6,11 @@ import rehypeAddClasses from "rehype-add-classes";
 
 import tailwindcss from "@tailwindcss/vite";
 
+import react from "@astrojs/react";
+
 // https://astro.build/config
 export default defineConfig({
-  integrations: [icon()],
+  integrations: [icon(), react()],
   markdown: {
     rehypePlugins: [
       [rehypeAddClasses, { a: "kern-link", p: "kern-body", li: "kern-body" }],
