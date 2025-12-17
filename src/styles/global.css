@@ -18,6 +18,8 @@
   --color-zfl-main80: #36349d;
 
   --section-spacing-default: 80px;
+  --max-content-width: 960px;
+  --container-padding-inline: clamp(1rem, 5vw, 3rem);
 }
 
 @layer base {
@@ -37,8 +39,9 @@
     margin-inline: auto;
   }
   .container {
-    max-width: 960px;
+    max-width: var(--max-content-width);
     margin-inline: auto;
+    padding-inline: var(--container-padding-inline);
   }
 
   .list-unstyled {
@@ -51,5 +54,42 @@
       white-space: pre-line;
       font-size: var(--kern-typography-font-size-static-medium, 18px);
     }
+  }
+
+  .breakout-grid {
+    display: grid;
+    /* Creates a 3-column layout where the center column is fluid but capped
+     at a max-width, while the side columns act as flexible gutters.
+     This allows "breakout" elements to span from grid-start to grid-end
+     while standard content stays centered within content-start/end.
+    */
+    grid-template-columns:
+      [full-start] 1fr
+      [content-start] minmax(
+        min(
+          100% - 2 * var(--container-padding-inline),
+          var(--max-content-width)
+        ),
+        1fr
+      )
+      [content-end] 1fr
+      [full-end];
+  }
+
+  .breakout-grid > *:not(.breakout) {
+    grid-column: content;
+  }
+
+  .breakout-grid > .breakout {
+    grid-column: full;
+
+    display: grid;
+    grid-template-columns: subgrid;
+  }
+
+  /* Place content inside the breakout back in the center column.
+   To override, use e.g., grid-column: full; on the child element(s) */
+  .breakout > * {
+    grid-column: content;
   }
 }

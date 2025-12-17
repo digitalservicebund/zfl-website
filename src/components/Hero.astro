@@ -5,17 +5,15 @@ interface Props {
 const hasSubtitle = Astro.slots.has("subtitle");
 ---
 
-<div class="hero">
-  <div class="container">
-    <slot />
-    {
-      hasSubtitle && (
-        <div class="kern-body--large">
-          <slot name="subtitle" />
-        </div>
-      )
-    }
-  </div>
+<div class="hero breakout">
+  <slot />
+  {
+    hasSubtitle && (
+      <div class="kern-body--large">
+        <slot name="subtitle" />
+      </div>
+    )
+  }
 </div>
 
 <style>

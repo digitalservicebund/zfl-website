@@ -13,7 +13,7 @@ import Title from "../components/text/Title.astro";
 ---
 
 <Layout title="Test page">
-  <main>
+  <main class="breakout-grid">
     <Hero>
       <h1 class="kern-heading-x-large">
         Bessere Rechtsetzung in allen Phasen Ihres Vorhabens
@@ -28,15 +28,11 @@ import Title from "../components/text/Title.astro";
       Das Angebot befindet sich aktuell im Aufbau und wird schrittweise mit
       Ihnen zusammen weiterentwickelt.
     </Banner>
-    <Container class="markdown" style="padding-block: 40px;">
-      {
-        /* challenge: how would we apply a kern-heading-large style to the
-        h2 from the Markdown file? Use Tailwind's @apply? */
-      }
+    <div class="markdown py-40">
       <Vorteile />
-    </Container>
-    <section>
-      <div class="offerings container">
+    </div>
+    <section class="breakout">
+      <div class="space-y-40">
         <Heading level={3}>Bereits verfügbare Angebote</Heading>
         <Card>
           <Icon slot="header" name="material-symbols:widgets-outline" />
@@ -66,16 +62,14 @@ import Title from "../components/text/Title.astro";
       </div>
     </section>
     <section>
-      <div class="container">
-        <Card
-          ><Icon
-            slot="header"
-            name="material-symbols:phone-enabled-outline"
-            style="transform: scaleX(-100%);"
-          />
-          <Title level={3} slot="header">Kontaktieren Sie uns</Title>
-        </Card>
-      </div>
+      <Card
+        ><Icon
+          slot="header"
+          name="material-symbols:phone-enabled-outline"
+          style="transform: scaleX(-100%);"
+        />
+        <Title level={3} slot="header">Kontaktieren Sie uns</Title>
+      </Card>
     </section>
   </main>
 </Layout>
@@ -93,12 +87,6 @@ import Title from "../components/text/Title.astro";
     .kern-card {
       background: white;
     }
-  }
-
-  .offerings {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
   }
 
   [data-icon] {
