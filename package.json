@@ -22,7 +22,7 @@
     "@tailwindcss/vite": "^4.1.18",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
-    "astro": "^5.16.5",
+    "astro": "^5.16.6",
     "astro-icon": "^1.1.5",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
@@ -35,5 +35,10 @@
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-organize-imports": "^4.3.0"
   },
-  "packageManager": "pnpm@9.15.0"
+  "packageManager": "pnpm@9.15.0",
+  "pnpm": {
+    "overrides": {
+      "nth-check": "2.0.1"
+    }
+  }
 }
