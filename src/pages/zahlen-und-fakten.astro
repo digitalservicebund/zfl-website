@@ -1,0 +1,155 @@
+---
+import Hero from "../components/Hero.astro";
+import Heading from "../components/text/Heading.astro";
+import Badge from "../components/text/Badge.astro";
+import Layout from "../layouts/Layout.astro";
+// import { Icon } from "astro-icon/components";
+
+type DsData = {
+  title: string;
+  elements: {
+    badge: {
+      iconName: string;
+      text: string;
+    };
+    count: string;
+    description: string;
+  }[];
+}[];
+
+const dsData: DsData = [
+  {
+    title: "Anwendung des Digitalchecks",
+    elements: [
+      {
+        badge: {
+          iconName: "LocalActivityOutlined",
+          text: "Digitalcheck",
+        },
+        count: "850+",
+        description: "Regelungen wurden auf Digitalbezug geprüft.",
+      },
+      {
+        badge: {
+          iconName: "LocalActivityOutlined",
+          text: "Digitalcheck",
+        },
+        count: "470+",
+        description: "Regelungen sind den gesamten Digitalcheck durchlaufen.",
+      },
+      {
+        badge: {
+          iconName: "LocalActivityOutlined",
+          text: "Digitalcheck",
+        },
+        count: "120+",
+        description:
+          "Visualisierungen wurden erstellt und dem Regelungstext beigefügt.",
+      },
+    ],
+  },
+  {
+    title: "Beratung & Schulungen",
+    elements: [
+      {
+        badge: {
+          iconName: "VolunteerActivismOutlined",
+          text: "Unterstützung",
+        },
+        count: "400+",
+        description:
+          "Ministeriums-mitarbeitende wurden durch das Digitalcheck-Team geschult.",
+      },
+      {
+        badge: {
+          iconName: "VolunteerActivismOutlined",
+          text: "Unterstützung",
+        },
+        count: "15+",
+        description: "Regelungsvorhaben wurden durch Tasks Forces begleitet.",
+      },
+      {
+        badge: {
+          iconName: "VolunteerActivismOutlined",
+          text: "Unterstützung",
+        },
+        count: "170+",
+        description:
+          "Service Anrufe & Mails wurden vom Digitalcheck-Team bearbeitet.",
+      },
+    ],
+  },
+  {
+    title: "Fokusfeld Interoperabilität (seit Juni 2025)",
+    elements: [
+      {
+        badge: {
+          iconName: "StarOutlineOutlined",
+          text: "Interoperabilität",
+        },
+        count: "17",
+        description: "Vorhaben mit Interoperabilitätsbezug wurden eingereicht.",
+      },
+      {
+        badge: {
+          iconName: "StarOutlineOutlined",
+          text: "Interoperabilität",
+        },
+        count: "18",
+        description:
+          "Interoperabilitäts-beratunggespräche hat das Team durchgeführt.",
+      },
+    ],
+  },
+  {
+    title: "Ressortübergreifende Vernetzung",
+    elements: [
+      {
+        badge: {
+          iconName: "ShareOutlined",
+          text: "Vernetzung",
+        },
+        count: "20+",
+        description:
+          "Interministerielle Arbeitsgruppen haben zum Austausch & Vernetzung stattgefunden.",
+      },
+    ],
+  },
+];
+---
+
+<Layout title="Schulungen">
+  <main class="breakout-grid">
+    <Hero>
+      <Heading level={1}> Das Zentrum für Legistik in Zahlen </Heading>
+      <p>
+        Hier finden Sie aktuelle Daten zur Anwendung, unseren
+        Unterstützungsangeboten und der ressortübergreifenden Vernetzung.
+      </p>
+
+      <p>Start der Datenerhebung: 01.01.2023</p>
+    </Hero>
+
+    {
+      dsData.map(({ title, elements }) => (
+        <Fragment>
+          <Heading level={2} class="mb-40">
+            {title}
+          </Heading>
+          <ul class="list-unstyled grid items-stretch justify-between gap-40 sm:grid-cols-2 lg:grid-cols-3">
+            {elements.map((el) => (
+              <li class="bg-zfl-main20 min-w-240 space-y-16 px-32 py-40">
+                <Badge>{el.badge.text}</Badge>
+                {/* <Icon name={`material-symbols:${el.badge.iconName}`} /> */}
+                <p>
+                  <strong class="ds-heading-02-bold">{el.count}</strong>
+                </p>
+                <p>{el.description}</p>
+              </li>
+            ))}
+          </ul>
+        </Fragment>
+      ))
+    }
+  </main>
+</Layout>

@@ -45,7 +45,7 @@
   }
 
   .list-unstyled {
-    @apply p-0 [&_li]:list-none [&_ul]:p-0;
+    @apply p-0 [&_li]:list-none [&_ul]:p-0 m-0;
   }
 
   .markdown {
