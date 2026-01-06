@@ -1,3 +1,26 @@
-<mark>
+---
+import type { HTMLAttributes } from "astro/types";
+import { tv, type VariantProps } from "tailwind-variants";
+
+interface Props extends HTMLAttributes<"mark">, VariantProps<typeof styles> {
+  class?: string;
+}
+
+const styles = tv({
+  base: "ds-label-02-reg inline-flex flex-row items-center gap-4 self-start rounded-md bg-transparent p-4",
+  variants: {
+    look: {
+      hint: "text-zfl-main80",
+      gray: "bg-zfl-main20",
+      white: "bg-white",
+    },
+  },
+});
+
+const { class: className, look, ...attrs } = Astro.props;
+---
+
+<mark class={styles({ look, className })} {...attrs}>
+  <slot name="icon" />
   <slot />
 </mark>

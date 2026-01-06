@@ -7,6 +7,8 @@
   --font-sans: BundesSansWeb;
   --color-*: initial;
 
+  --color-white: white;
+
   --color-zfl-main20: #e3e6f2;
   --color-zfl-main80: #36349d;
 
@@ -190,7 +192,7 @@
   }
 
   .list-unstyled {
-    @apply p-0 [&_li]:list-none [&_ul]:p-0 m-0;
+    @apply p-0 [&_li]:list-none [&_ul]:p-0;
   }
 
   .markdown {

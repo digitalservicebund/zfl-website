@@ -3,5 +3,6 @@
     "*.css": "tailwindcss"
   },
   "typescript.tsdk": "node_modules/typescript/lib",
-  "eslint.validate": ["astro", "javascript", "typescript"]
+  "eslint.validate": ["astro", "javascript", "typescript"],
+  "tailwindCSS.classFunctions": ["tv"]
 }

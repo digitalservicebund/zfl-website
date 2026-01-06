@@ -3,7 +3,7 @@ import Hero from "../components/Hero.astro";
 import Heading from "../components/text/Heading.astro";
 import Badge from "../components/text/Badge.astro";
 import Layout from "../layouts/Layout.astro";
-// import { Icon } from "astro-icon/components";
+import { Icon } from "astro-icon/components";
 
 type DsData = {
   title: string;
@@ -23,24 +23,16 @@ const dsData: DsData = [
     elements: [
       {
         badge: {
-          iconName: "LocalActivityOutlined",
-          text: "Digitalcheck",
+          iconName: "local-activity-outline",
+          text: "Regelungschecks",
         },
         count: "850+",
         description: "Regelungen wurden auf Digitalbezug geprüft.",
       },
       {
         badge: {
-          iconName: "LocalActivityOutlined",
-          text: "Digitalcheck",
-        },
-        count: "470+",
-        description: "Regelungen sind den gesamten Digitalcheck durchlaufen.",
-      },
-      {
-        badge: {
-          iconName: "LocalActivityOutlined",
-          text: "Digitalcheck",
+          iconName: "local-activity-outline",
+          text: "Regelungschecks",
         },
         count: "120+",
         description:
@@ -53,16 +45,16 @@ const dsData: DsData = [
     elements: [
       {
         badge: {
-          iconName: "VolunteerActivismOutlined",
+          iconName: "volunteer-activism-outline",
           text: "Unterstützung",
         },
         count: "400+",
         description:
-          "Ministeriums-mitarbeitende wurden durch das Digitalcheck-Team geschult.",
+          "Ministeriums-mitarbeitende wurden durch das ZfL-Team geschult.",
       },
       {
         badge: {
-          iconName: "VolunteerActivismOutlined",
+          iconName: "volunteer-activism-outline",
           text: "Unterstützung",
         },
         count: "15+",
@@ -70,12 +62,11 @@ const dsData: DsData = [
       },
       {
         badge: {
-          iconName: "VolunteerActivismOutlined",
+          iconName: "volunteer-activism-outline",
           text: "Unterstützung",
         },
         count: "170+",
-        description:
-          "Service Anrufe & Mails wurden vom Digitalcheck-Team bearbeitet.",
+        description: "Service Anrufe & Mails wurden vom ZfL-Team bearbeitet.",
       },
     ],
   },
@@ -84,7 +75,7 @@ const dsData: DsData = [
     elements: [
       {
         badge: {
-          iconName: "StarOutlineOutlined",
+          iconName: "star-outline",
           text: "Interoperabilität",
         },
         count: "17",
@@ -92,7 +83,7 @@ const dsData: DsData = [
       },
       {
         badge: {
-          iconName: "StarOutlineOutlined",
+          iconName: "star-outline",
           text: "Interoperabilität",
         },
         count: "18",
@@ -106,7 +97,7 @@ const dsData: DsData = [
     elements: [
       {
         badge: {
-          iconName: "ShareOutlined",
+          iconName: "share-outline",
           text: "Vernetzung",
         },
         count: "20+",
@@ -119,7 +110,7 @@ const dsData: DsData = [
 ---
 
 <Layout title="Schulungen">
-  <main class="breakout-grid">
+  <main class="breakout-grid mb-80 space-y-80">
     <Hero>
       <Heading level={1}> Das Zentrum für Legistik in Zahlen </Heading>
       <p>
@@ -139,8 +130,13 @@ const dsData: DsData = [
           <ul class="list-unstyled grid items-stretch justify-between gap-40 sm:grid-cols-2 lg:grid-cols-3">
             {elements.map((el) => (
               <li class="bg-zfl-main20 min-w-240 space-y-16 px-32 py-40">
-                <Badge>{el.badge.text}</Badge>
-                {/* <Icon name={`material-symbols:${el.badge.iconName}`} /> */}
+                <Badge look="white">
+                  <Icon
+                    slot="icon"
+                    name={`material-symbols:${el.badge.iconName}`}
+                  />
+                  {el.badge.text}
+                </Badge>
                 <p>
                   <strong class="ds-heading-02-bold">{el.count}</strong>
                 </p>
