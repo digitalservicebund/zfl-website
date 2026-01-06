@@ -7,7 +7,7 @@ pre-commit:
   commands:
     lint:
       tags: style
-      run: pnpm lint
+      run: pnpm lint:fix-selected {staged_files}
     typecheck:
       tags: style
       run: pnpm typecheck

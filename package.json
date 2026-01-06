@@ -13,6 +13,7 @@
     "format:fix": "npm run format:fix-selected .",
     "format:fix-selected": "prettier --write --ignore-unknown",
     "lint": "eslint .",
+    "lint:fix-selected": "eslint --fix",
     "typecheck": "tsc --noEmit",
     "preinstall": "echo 'Please disable script execution for security reasons: npm config set ignore-scripts true' && exit 1"
   },
