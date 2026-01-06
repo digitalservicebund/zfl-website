@@ -1,0 +1,15 @@
+---
+interface Props {
+  date: string;
+  time: string;
+  location: string;
+}
+
+const { date, time, location } = Astro.props;
+---
+
+<li class="max-w-a11y flex flex-row justify-between">
+  <strong>{date}</strong>
+  <span>{time}</span>
+  <span>{location}</span>
+</li>

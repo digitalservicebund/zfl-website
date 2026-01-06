@@ -1,5 +1,5 @@
 ---
-layout: "../layouts/MarkdownPage.astro"
+layout: "@layouts/MarkdownPage.astro"
 title: Datenschutzerklärung
 ---
 

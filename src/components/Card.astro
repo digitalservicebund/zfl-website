@@ -1,15 +1,24 @@
 ---
-import { twMerge } from "tailwind-merge";
+import type { HTMLAttributes } from "astro/types";
+import { tv, type VariantProps } from "tailwind-variants";
+
+interface Props extends HTMLAttributes<"div">, VariantProps<typeof styles> {
+  class?: string;
+}
+
+export const styles = tv({
+  base: "flex scroll-my-40 flex-row gap-32 rounded-lg bg-white px-16 py-40 sm:px-80",
+  variants: {
+    look: {
+      gray: "bg-zfl-main20",
+    },
+  },
+});
+
+const { class: className, look, ...attrs } = Astro.props;
 ---
 
-<div
-  class={twMerge(
-    "flex scroll-my-40 flex-col gap-32 md:flex-row rounded-lg px-16 py-40 sm:px-80 bg-white",
-    Astro.props.class,
-  )}
->
-  <slot name="header" />
-  <div class="ds-stack ds-stack-16 grow wrap-break-word">
-    <slot />
-  </div>
+<div class={styles({ look })} {...attrs}>
+  <slot name="icon" />
+  <div class={className}><slot /></div>
 </div>

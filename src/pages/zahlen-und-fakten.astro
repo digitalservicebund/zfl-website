@@ -1,8 +1,8 @@
 ---
-import Hero from "../components/Hero.astro";
-import Heading from "../components/text/Heading.astro";
-import Badge from "../components/text/Badge.astro";
-import Layout from "../layouts/Layout.astro";
+import Hero from "@components/Hero.astro";
+import Heading from "@components/text/Heading.astro";
+import Badge from "@components/text/Badge.astro";
+import Layout from "@layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
 
 type DsData = {
@@ -112,7 +112,7 @@ const dsData: DsData = [
 <Layout title="Schulungen">
   <main class="breakout-grid mb-80 space-y-80">
     <Hero>
-      <Heading level={1}> Das Zentrum für Legistik in Zahlen </Heading>
+      <Heading level={1}>Das Zentrum für Legistik in Zahlen</Heading>
       <p>
         Hier finden Sie aktuelle Daten zur Anwendung, unseren
         Unterstützungsangeboten und der ressortübergreifenden Vernetzung.

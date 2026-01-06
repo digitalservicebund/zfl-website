@@ -1,0 +1,31 @@
+---
+import { Icon } from "astro-icon/components";
+import Card, { styles } from "./Card.astro";
+import type { VariantProps } from "tailwind-variants";
+
+type Props = VariantProps<typeof styles>;
+
+const { look } = Astro.props;
+---
+
+<Card look={look}
+  ><Icon
+    name="material-symbols:phone-enabled-outline"
+    class="text-zfl-main80 hidden size-80 -scale-x-100 sm:block"
+    slot="icon"
+  />
+  <h3>Kontaktieren Sie uns</h3>
+  <div class="space-y-8">
+    <p>
+      Wir unterstützen Sie gerne persönlich in allen Phasen der Regelungsarbeit.
+    </p>
+    <p>
+      Telefon: <a class="text-link" href="tel:015140767839">0151/40 76 78 39</a>
+    </p>
+    <p>
+      E-Mail: <a class="text-link" href="mailto:support@zfl.bund.de"
+        >support@zfl.bund.de</a
+      >
+    </p>
+  </div>
+</Card>
