@@ -2,7 +2,7 @@
 # https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
 version: 2
 updates:
-  - package-ecosystem: "pnpm"
+  - package-ecosystem: "npm"
     # Look for `package.json` and `lock` files in the `root` director
     directory: "/"
     schedule:
