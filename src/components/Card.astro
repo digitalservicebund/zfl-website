@@ -1,15 +1,8 @@
-<article class="kern-card h-[initial]">
-  <div class="kern-card__container">
-    <header
-      class="kern-card__header flex flex-row items-center gap-kern-space-default"
-    >
-      <slot name="header" />
-    </header>
-    <div class="kern-card__body">
-      <slot />
-    </div>
-    <div class="kern-card__footer">
-      <slot name="footer" />
-    </div>
+<div
+  class="flex scroll-my-40 flex-col gap-32 md:flex-row rounded-lg px-16 py-40 sm:px-80 bg-white"
+>
+  <slot name="header" />
+  <div class="ds-stack ds-stack-16 grow wrap-break-word">
+    <slot />
   </div>
-</article>
+</div>

@@ -4,9 +4,7 @@ import Hero from "../components/Hero.astro";
 
 import { Content as Vorteile } from "./_index/vorteile.md";
 import Card from "../components/Card.astro";
-import Heading from "../components/text/Heading.astro";
 import Banner from "../components/Banner.astro";
-import Link from "../components/text/Link.astro";
 import { Icon } from "astro-icon/components";
 import Title from "../components/text/Title.astro";
 ---
@@ -27,36 +25,40 @@ import Title from "../components/text/Title.astro";
       Das Angebot befindet sich aktuell im Aufbau und wird schrittweise mit
       Ihnen zusammen weiterentwickelt.
     </Banner>
-    <div class="markdown py-40">
+    <div class="markdown py-80">
       <Vorteile />
     </div>
-    <section class="breakout">
+    <section class="breakout py-40 md:py-80">
       <div class="space-y-40">
-        <Heading level={3}>Bereits verfügbare Angebote</Heading>
+        <h2>Bereits verfügbare Angebote</h2>
         <Card>
-          <Icon slot="header" name="material-symbols:widgets-outline" />
-          <Title level={3} slot="header">
-            Interdisziplinäre Expertise für Ihr Regelungsvorhaben
-          </Title>
+          <Icon
+            class="hidden sm:block size-80 text-zfl-main80"
+            name="material-symbols:widgets-outline"
+            slot="header"
+          />
+          <h3>Interdisziplinäre Expertise für Ihr Regelungsvorhaben</h3>
           <p class="kern-body">
             Wir begleiten Sie mit einem interdisziplinärem Kompetenzteam. Sie
             erhalten dadurch ein umfassendes Verständnis von Umsetzungsprozessen
             und gestalten Ihr Vorhaben praxisnah und bürokratiearm.
           </p>
-          <Link href="/begleitungen"
-            >Mehr Informationen zu interdisziplinären Kompetenzteams</Link
+          <a href="/begleitungen"
+            >Mehr Informationen zu interdisziplinären Kompetenzteams</a
           >
         </Card>
         <Card>
-          <Icon slot="header" name="material-symbols:fact-check-outline" />
-          <Title level={3} slot="header">
-            In Schulungen praktisches Wissen erlangen
-          </Title>
+          <Icon
+            slot="header"
+            name="material-symbols:fact-check-outline"
+            class="hidden sm:block size-80 text-zfl-main80"
+          />
+          <h3>In Schulungen praktisches Wissen erlangen</h3>
           <p class="kern-body">
             Neue Methoden und Werkzeuge für die Rechtsetzung in
             umsetzungsorientierten Schulungen kennenlernen.
           </p>
-          <Link href="/schulungen">Mehr Informationen zu Schulungen</Link>
+          <a href="/schulungen">Mehr Informationen zu Schulungen</a>
         </Card>
       </div>
     </section>
@@ -74,24 +76,10 @@ import Title from "../components/text/Title.astro";
 </Layout>
 
 <style>
-  section {
-    padding-block: 40px;
-    .kern-card {
-      background: var(--color-zfl-main20);
-    }
-  }
-
   section:nth-child(2n) {
     background: var(--color-zfl-main20);
     .kern-card {
       background: white;
     }
-  }
-
-  [data-icon] {
-    /* see https://www.astroicon.dev/guides/styling/ */
-    width: 80px;
-    height: 80px;
-    color: var(--color-zfl-main80);
   }
 </style>
