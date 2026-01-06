@@ -14,9 +14,7 @@ import alpinejs from "@astrojs/alpinejs";
 export default defineConfig({
   integrations: [icon(), react(), alpinejs()],
   markdown: {
-    rehypePlugins: [
-      [rehypeAddClasses, { a: "kern-link", p: "kern-body", li: "kern-body" }],
-    ],
+    rehypePlugins: [[rehypeAddClasses, { a: "text-link" }]],
   },
   vite: {
     plugins: [tailwindcss()],

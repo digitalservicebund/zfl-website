@@ -8,14 +8,12 @@ title: Impressum
 Diese Webseite ist ein Angebot des <br />
 Bundesministeriums für Digitales und Staatsmodernisierung (BMDS)
 
-<address>
-<strong>Postanschrift</strong>
+<address><strong>Postanschrift</strong>
 Alt-Moabit 140
 10557 Berlin
 </address>
 
-<address>
-<strong>Hausanschrift</strong>
+<address><strong>Hausanschrift</strong>
 Englische Straße 30
 10587 Berlin
 </address>

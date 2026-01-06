@@ -21,12 +21,6 @@
 }
 
 @layer base {
-  .zfl-style {
-    a {
-      color: var(--color-zfl-main80);
-    }
-  }
-
   html {
     /* Keep 16px, don't change! (e.g. angie library depends on it) */
     font-size: 16px;
@@ -48,6 +42,10 @@
 
   h3 {
     @apply ds-heading-03-reg;
+  }
+
+  h4 {
+    @apply font-bold;
   }
 
   a[href^="tel:"] {
@@ -124,7 +122,7 @@
 }
 
 @utility text-link {
-  @apply visited:text-ds-violet fill-blue-800 text-blue-800 underline decoration-1 underline-offset-4 active:text-black;
+  @apply visited:text-ds-violet text-zfl-main80 fill-blue-800 underline decoration-1 underline-offset-4 active:text-black;
 
   &:focus-visible {
     @apply text-blue-800! no-underline!;
@@ -180,9 +178,7 @@
   .ds-link-02-bold,
   .ds-link-03-reg,
   .ds-link-03-bold {
-    .zfl-style & {
-      color: var(--color-zfl-main80);
-    }
+    color: var(--color-zfl-main80);
   }
 }
 
@@ -193,15 +189,6 @@
 
   .list-unstyled {
     @apply p-0 [&_li]:list-none [&_ul]:p-0;
-  }
-
-  .markdown {
-    @apply space-y-16;
-
-    address {
-      font-style: normal;
-      white-space: pre-line;
-    }
   }
 }
 /*

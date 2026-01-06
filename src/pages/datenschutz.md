@@ -9,16 +9,22 @@ title: Datenschutzerklärung
 
 ### 1.1 Verantwortlicher und Datenschutzbeauftragte/r
 
-Verantwortlich für die Verarbeitung von personenbezogenen Daten ist das Bundesministerium für Digitales und Staatsmodernisierung
+Verantwortlich für die Verarbeitung von personenbezogenen Daten ist das
 
-Alt-Moabit 140  
-10557 Berlin  
+<address><strong>Bundesministerium für Digitales und Staatsmodernisierung</strong>
+Alt-Moabit 140
+10557 Berlin
+</address>
+
 E-Mail: info@bmds.bund.de
 
 Bei konkreten Fragen zum Schutz Ihrer Daten wenden Sie sich bitte an den Datenschutzbeauftragten des BMDS:
 
-Datenschutzbeauftragter des Bundesministeriums für Digitales und Staatsmodernisierung Alt-Moabit 140  
+<address><strong>Datenschutzbeauftragter des Bundesministeriums für Digitales und Staatsmodernisierung</strong>
+Alt-Moabit 140  
 10557 Berlin  
+</address>
+
 E-Mail: bds@bmds.bund.de
 
 ### 1.2 Personenbezogene Daten

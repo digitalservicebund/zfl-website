@@ -1,5 +1,12 @@
+---
+import { twMerge } from "tailwind-merge";
+---
+
 <div
-  class="flex scroll-my-40 flex-col gap-32 md:flex-row rounded-lg px-16 py-40 sm:px-80 bg-white"
+  class={twMerge(
+    "flex scroll-my-40 flex-col gap-32 md:flex-row rounded-lg px-16 py-40 sm:px-80 bg-white",
+    Astro.props.class,
+  )}
 >
   <slot name="header" />
   <div class="ds-stack ds-stack-16 grow wrap-break-word">

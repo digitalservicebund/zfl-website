@@ -11,7 +11,32 @@ const { frontmatter } = Astro.props;
 ---
 
 <Layout title={frontmatter.title}>
-  <div class="container markdown my-40">
+  <div class="markdown container my-40 lg:my-80">
     <slot />
   </div>
 </Layout>
+
+<style>
+  @reference "../styles/global.css";
+
+  .markdown {
+    @apply space-y-16;
+
+    address {
+      font-style: normal;
+      white-space: pre-line;
+    }
+
+    h2 {
+      margin-top: 2.5rem;
+    }
+
+    h3 {
+      margin-top: 1.5rem;
+    }
+
+    a {
+      @apply text-link;
+    }
+  }
+</style>
