@@ -1,4 +1,4 @@
-import { defineConfig } from "eslint/config";
+import { defineConfig, globalIgnores } from "eslint/config";
 
 import eslint from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
@@ -10,4 +10,5 @@ export default defineConfig(
   tseslint.configs.recommended,
   eslintPluginAstro.configs.recommended,
   eslintConfigPrettier,
+  globalIgnores([".astro/"]),
 );
