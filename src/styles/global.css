@@ -1,36 +1,208 @@
-@layer theme, base, utilities;
-
-/* KERN UX */
-@import "@kern-ux/native/dist/fonts/fira-sans.css" layer(base);
-@import "@kern-ux/native/dist/kern.css" layer(base);
-
-/* Tailwind without preflight (normalize) */
-@import "tailwindcss/theme.css" layer(theme);
-@import "tailwindcss/utilities.css" layer(utilities);
-
-/* use the KERN UX theme */
-@import "@digitalservicebund/kern-ux-tailwind-theme/theme.css" layer(theme);
+@import "@digitalservice4germany/angie/fonts.css" layer(base);
+@import "tailwindcss";
+@config "@digitalservice4germany/style-dictionary/tailwind";
+@plugin "@digitalservice4germany/angie";
 
 @theme {
+  --font-sans: BundesSansWeb;
   --color-*: initial;
 
   --color-zfl-main20: #e3e6f2;
   --color-zfl-main80: #36349d;
 
+  --color-ds-gray-600: #b8bdc3;
+  --color-ds-violet: #4c2c92;
+
   --section-spacing-default: 80px;
-  --max-content-width: 960px;
+  --max-content-width: 59rem;
   --container-padding-inline: clamp(1rem, 5vw, 3rem);
 }
 
 @layer base {
-  body {
-    margin: 0;
+  .zfl-style {
+    a {
+      color: var(--color-zfl-main80);
+    }
   }
 
-  *,
-  ::before,
-  ::after {
-    border-color: var(--kern-color-layout-border);
+  html {
+    /* Keep 16px, don't change! (e.g. angie library depends on it) */
+    font-size: 16px;
+  }
+
+  body {
+    margin: 0;
+    /* By default, text is 16px * 1.125 = 18px and line height is 150% of that (27px). */
+    @apply text-lg leading-[1.5em];
+  }
+
+  h1 {
+    @apply ds-heading-01-reg;
+  }
+
+  h2 {
+    @apply ds-heading-02-reg;
+  }
+
+  h3 {
+    @apply ds-heading-03-reg;
+  }
+
+  a[href^="tel:"] {
+    @apply whitespace-nowrap;
+  }
+
+  a,
+  button {
+    @apply cursor-pointer;
+  }
+
+  ul:not(.list-unstyled),
+  ol:not(.list-unstyled) {
+    @apply space-y-8 pl-24;
+  }
+
+  li > ul:not(.list-unstyled),
+  li > ol:not(.list-unstyled) {
+    @apply mt-8;
+  }
+
+  ul:not(.list-unstyled) {
+    @apply list-disc;
+  }
+
+  ol:not(.list-unstyled) {
+    @apply list-decimal;
+  }
+
+  h1,
+  h2,
+  .ds-heading-01-reg,
+  .ds-heading-02-reg,
+  .ds-heading-01-bold,
+  .ds-heading-02-bold {
+    /* 80ch @ 18px font size = 720px */
+    max-width: 720px;
+  }
+
+  h3,
+  .ds-heading-03-reg,
+  .ds-heading-03-bold,
+  p,
+  ul:not(.list-unstyled),
+  ol:not(.list-unstyled) {
+    @apply max-w-a11y;
+  }
+
+  *:focus-visible {
+    @apply no-underline outline-2 outline-offset-1 outline-blue-800;
+  }
+}
+
+@utility container {
+  @apply mx-auto;
+  max-width: var(--max-content-width);
+  padding-inline: var(--container-padding-inline);
+}
+
+@utility container-overhanging-background {
+  @apply mx-auto;
+  max-width: 63rem;
+  padding: 2.5rem 3rem 3rem;
+
+  margin-inline: var(--container-padding-inline);
+}
+
+@utility ds-button {
+  @apply max-sm:ds-button-full-width sm:ds-button-large;
+}
+
+@utility text-link {
+  @apply visited:text-ds-violet fill-blue-800 text-blue-800 underline decoration-1 underline-offset-4 active:text-black;
+
+  &:focus-visible {
+    @apply text-blue-800! no-underline!;
+  }
+
+  &:hover {
+    @apply decoration-[3px];
+  }
+
+  .text-white & {
+    @apply text-gray-100 visited:text-gray-300;
+  }
+
+  .zfl-style & {
+    color: var(--color-zfl-main80);
+  }
+}
+
+@utility increase-tap-area {
+  @apply relative inline-block;
+
+  &::before {
+    @apply absolute -top-12 -right-12 -bottom-12 -left-12 content-[''];
+  }
+}
+
+@utility max-w-a11y {
+  /* 70ch @ 18px font size = 630px */
+  max-width: 630px;
+}
+
+@layer components {
+  .summary-content {
+    .details & {
+      background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M9.5 17L14.5 12L9.5 7V17Z' fill='%23004B76'/%3E%3C/svg%3E%0A");
+      background-position: 0 calc(50% - 1px);
+    }
+
+    .details[open] & {
+      background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M7 9.5L12 14.5L17 9.5H7Z' fill='%23005576'/%3E%3C/svg%3E%0A");
+      background-position: 0 calc(50% - 1px);
+    }
+    &:hover {
+      @apply underline! decoration-2 underline-offset-2;
+    }
+  }
+}
+
+@layer utilities {
+  .ds-link-01-reg,
+  .ds-link-01-bold,
+  .ds-link-02-reg,
+  .ds-link-02-bold,
+  .ds-link-03-reg,
+  .ds-link-03-bold {
+    .zfl-style & {
+      color: var(--color-zfl-main80);
+    }
+  }
+  .ds-input,
+  .ds-checkbox,
+  .ds-textarea,
+  .ds-radio {
+    &,
+    &:hover {
+      background-color: white !important;
+    }
+
+    &.has-warning {
+      box-shadow: inset 0 0 0 0.125rem var(--color-ds-warning);
+
+      &:hover,
+      &:focus {
+        box-shadow: inset 0 0 0 0.25rem var(--color-ds-warning);
+      }
+    }
+
+    &.has-error {
+      box-shadow: inset 0 0 0 2px var(--color-ds-error);
+      &:hover,
+      &:focus {
+        box-shadow: inset 0 0 0 0.25rem var(--color-ds-error);
+      }
+    }
   }
 }
 

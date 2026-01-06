@@ -18,9 +18,9 @@
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
-    "@digitalservicebund/kern-ux-tailwind-theme": "^1.1.0",
+    "@digitalservice4germany/angie": "^2.4.0",
+    "@digitalservice4germany/style-dictionary": "^2.0.0",
     "@iconify-json/material-symbols": "^1.2.50",
-    "@kern-ux/native": "^2.4.0",
     "@tailwindcss/vite": "^4.1.18",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",

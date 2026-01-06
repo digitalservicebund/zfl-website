@@ -5,21 +5,13 @@ interface Props {
 const hasSubtitle = Astro.slots.has("subtitle");
 ---
 
-<div class="hero breakout">
+<div class="breakout bg-zfl-main80 text-white pt-56 pb-64">
   <slot />
   {
     hasSubtitle && (
-      <div class="kern-body--large">
+      <div class="mt-16 ds-subhead">
         <slot name="subtitle" />
       </div>
     )
   }
 </div>
-
-<style>
-  .hero {
-    background: var(--color-zfl-main80);
-    --kern-color-layout-text-default: white;
-    padding: 56px 0 64px;
-  }
-</style>

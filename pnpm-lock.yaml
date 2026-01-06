@@ -13,15 +13,15 @@ importers:
       "@astrojs/react":
         specifier: ^4.4.2
         version: 4.4.2(@types/node@25.0.3)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(jiti@2.6.1)(lightningcss@1.30.2)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      "@digitalservicebund/kern-ux-tailwind-theme":
-        specifier: ^1.1.0
-        version: 1.1.0(@kern-ux/native@2.4.0)(tailwindcss@4.1.18)
+      "@digitalservice4germany/angie":
+        specifier: ^2.4.0
+        version: 2.4.0
+      "@digitalservice4germany/style-dictionary":
+        specifier: ^2.0.0
+        version: 2.0.0
       "@iconify-json/material-symbols":
         specifier: ^1.2.50
         version: 1.2.50
-      "@kern-ux/native":
-        specifier: ^2.4.0
-        version: 2.4.0
       "@tailwindcss/vite":
         specifier: ^4.1.18
         version: 4.1.18(vite@6.4.1(@types/node@25.0.3)(jiti@2.6.1)(lightningcss@1.30.2))
@@ -310,14 +310,19 @@ packages:
       }
     engines: { node: ">=v18" }
 
-  "@digitalservicebund/kern-ux-tailwind-theme@1.1.0":
+  "@digitalservice4germany/angie@2.4.0":
     resolution:
       {
-        integrity: sha512-jPYP7WRoy9LdIEmDxGe4FE5tAvHJbY2lChEvkaKGG+HYxy/j3HwsOIfmPWlBz3/QscUvPDP2XHbci/SgpeDCHQ==,
+        integrity: sha512-2JTj2IQYHQieXca6qocC1n8gqDQrcfmlPfrm8DukcpH96CrFYhW7WlaVQJFMKSYGZK/Q3Cj2DEyYhqQR0KSb5w==,
       }
-    peerDependencies:
-      "@kern-ux/native": ^2.3.0
-      tailwindcss: ^4.1.12
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
+
+  "@digitalservice4germany/style-dictionary@2.0.0":
+    resolution:
+      {
+        integrity: sha512-P4qRe2OyIZsxtOsX4GY0JP5k0YyDimoeY/eQP5S2Ibr0T1uFoH3/7yOsXeNeAS15H1A4h81apfNakK019F835Q==,
+      }
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   "@emnapi/runtime@1.7.1":
     resolution:
@@ -931,12 +936,6 @@ packages:
     resolution:
       {
         integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==,
-      }
-
-  "@kern-ux/native@2.4.0":
-    resolution:
-      {
-        integrity: sha512-wZRRWidk7ZocPCB/2kXlFfOUyIsTQHXSqHSUlzbICorUkZ+9krrNZKLbuftUwv1Y/WUJSKHm0C4Gyzjka8YQtA==,
       }
 
   "@nodelib/fs.scandir@2.1.5":
@@ -5084,10 +5083,9 @@ snapshots:
       "@types/conventional-commits-parser": 5.0.2
       chalk: 5.6.2
 
-  "@digitalservicebund/kern-ux-tailwind-theme@1.1.0(@kern-ux/native@2.4.0)(tailwindcss@4.1.18)":
-    dependencies:
-      "@kern-ux/native": 2.4.0
-      tailwindcss: 4.1.18
+  "@digitalservice4germany/angie@2.4.0": {}
+
+  "@digitalservice4germany/style-dictionary@2.0.0": {}
 
   "@emnapi/runtime@1.7.1":
     dependencies:
@@ -5390,8 +5388,6 @@ snapshots:
     dependencies:
       "@jridgewell/resolve-uri": 3.1.2
       "@jridgewell/sourcemap-codec": 1.5.5
-
-  "@kern-ux/native@2.4.0": {}
 
   "@nodelib/fs.scandir@2.1.5":
     dependencies:
