@@ -8,9 +8,11 @@ import tailwindcss from "@tailwindcss/vite";
 
 import react from "@astrojs/react";
 
+import alpinejs from "@astrojs/alpinejs";
+
 // https://astro.build/config
 export default defineConfig({
-  integrations: [icon(), react()],
+  integrations: [icon(), react(), alpinejs()],
   markdown: {
     rehypePlugins: [
       [rehypeAddClasses, { a: "kern-link", p: "kern-body", li: "kern-body" }],

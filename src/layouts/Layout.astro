@@ -1,5 +1,4 @@
 ---
-import Kopfzeile from "../components/Kopfzeile.astro";
 import Footer from "../components/Footer.astro";
 interface Props {
   title: string;
@@ -9,6 +8,7 @@ const siteName = "Zentrum für Legistik";
 const title = pageTitle ? `${pageTitle} — ${siteName}` : siteName;
 
 import "../styles/global.css";
+import PageHeader from "../components/PageHeader.astro";
 ---
 
 <!doctype html>
@@ -22,7 +22,7 @@ import "../styles/global.css";
   <meta property="og:title" content={title} />
   <meta property="twitter:title" content={title} />
   <body>
-    <Kopfzeile />
+    <PageHeader />
     <slot />
     <Footer />
   </body>
