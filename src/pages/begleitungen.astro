@@ -1,5 +1,131 @@
 ---
+import Card from "@components/Card.astro";
+import Heading from "@components/text/Heading.astro";
 import Layout from "@layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
 ---
 
-<Layout title="Begleitungen" />
+<Layout title="Begleitungen">
+  <main class="breakout-grid">
+    <Heading class="mt-40 md:mt-80" level={1}>Begleitung für Vorhaben</Heading>
+
+    <div class="mt-40 gap-32 space-y-40 md:flex md:flex-row">
+      <img class="size-288 shrink-0 object-cover" src="/Begleitungen.png" />
+
+      <div>
+        <Heading level={2}
+          >Interdisziplinäre Expertise für praxisnahe und bürokratiearme
+          Regelungen nutzen</Heading
+        >
+        <p>
+          Ein interdisziplinäres Team mit Kompetenzen in Design,
+          Nutzerforschung, IT, Produkt- und Prozessmanagement begleitet sie
+          vertraulich und mit individuellem Fokus auf Ihr Vorhaben.
+        </p>
+        <p>
+          Nehmen Sie das Angebot bereits im frühen Erarbeitungsprozess in
+          Anspruch, damit die Begleitung die größte Wirkung erzielen kann.
+        </p>
+        <p>
+          <strong
+            >Kontaktieren Sie uns, um eine Begleitung für Ihr Vorhaben
+            anzufragen:
+          </strong>
+        </p>
+        <p>
+          Telefon:
+          <a href="tel:015140767839">0151/40 76 78 39</a>
+        </p>
+        <p>
+          E-Mail:
+          <a href="mailto:support@zfl.bund.de">support@zfl.bund.de</a>
+        </p>
+      </div>
+    </div>
+
+    <Heading class="mt-80" level={2}>Wirkung der Zusammenarbeit</Heading>
+
+    <p>
+      Wir unterstützen Sie dabei, Umsetzungsprozesse zu verstehen und
+      Anforderungen an praxisnahe und bürokratiearme Regelungen umzusetzen.
+    </p>
+    <p>
+      Durch Ihre Rechtsetzungs-Expertise in Kombination mit Methoden aus der
+      agilen Software-Entwicklung entstehen somit praxistaugliche und
+      zukunftsfähige Gesetze, die unter Anderem die Potenziale der
+      Digitalisierung bestmöglich ausschöpfen.
+    </p>
+
+    <Heading class="mt-40" level={3}>So unterstützen wir Sie konkret:</Heading>
+
+    <div class="mt-16 flex gap-32 max-md:flex-col">
+      <div class="flex gap-16 md:flex-col md:gap-32">
+        <Icon
+          class="text-zfl-main80 size-40 flex-none md:size-80"
+          name="material-symbols:account-tree-outline"
+        />
+        <div class="space-y-8">
+          <h3 class="ds-heading-03-bold sm:hyphens-none md:pr-32">
+            Sachverhalte visualisieren
+          </h3>
+          <p>
+            Komplexe Sachverhalte durch Prozess-Visualisierungen strukturieren,
+            interne und externe Abstimmung vereinfachen
+          </p>
+        </div>
+      </div>
+      <div class="flex gap-16 md:flex-col md:gap-32">
+        <Icon
+          class="text-zfl-main80 size-40 flex-none md:size-80"
+          name="material-symbols:lightbulb-outline"
+        />
+        <div class="space-y-8">
+          <h3 class="ds-heading-03-bold sm:hyphens-none md:pr-32">
+            Umsetzung mitdenken
+          </h3>
+          <p>
+            Betroffenen-Perspektive frühzeitig identifizieren, bestehende
+            Umsetzungshürden beheben
+          </p>
+        </div>
+      </div>
+      <div class="flex gap-16 md:flex-col md:gap-32">
+        <Icon
+          class="text-zfl-main80 size-40 flex-none md:size-80"
+          name="material-symbols:hub-outline"
+        />
+        <div class="space-y-8">
+          <h3 class="ds-heading-03-bold sm:hyphens-none md:pr-32">
+            Prozesse strukturieren
+          </h3>
+          <p>
+            Methodische Unterstützung nutzen, Anleitungen für Praxis- und
+            Digitaltauglichkeit erhalten
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="breakout mt-80 bg-[url('/Trainings.jpg')] bg-cover bg-center py-80"
+    >
+      <Card class="space-y-16">
+        <Heading level={3}
+          >Praxisbeispiel: Einsatz eines interdisziplinären Kompetenzteams für
+          das Stromsteuerrecht</Heading
+        >
+        <p>
+          „Die gründliche Analyse von Vollzugsprozessen hat uns geholfen, das
+          Zusammenspiel zwischen den Regelungen und der Administration besser zu
+          verstehen und so den digitalen Vollzug zu gestalten.“
+        </p>
+        <a
+          href="https://digitalcheck.bund.de/beispiele/regelungen/gesetz-zur-modernisierung-und-zum-buerokratieabbau-im-strom-und-energiesteuerrecht"
+          target="_blank"
+        >
+          Mehr erfahren
+        </a>
+      </Card>
+    </div>
+  </main>
+</Layout>

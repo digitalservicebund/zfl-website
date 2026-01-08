@@ -100,7 +100,8 @@
     @apply no-underline outline-2 outline-offset-1 outline-blue-800;
   }
 
-  p + a:not([class]) {
+  p + a:not([class]),
+  p > a:not([class]) {
     @apply text-link;
   }
 }
