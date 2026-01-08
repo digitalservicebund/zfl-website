@@ -4,6 +4,7 @@ import { tv, type VariantProps } from "tailwind-variants";
 
 interface Props extends HTMLAttributes<"div">, VariantProps<typeof styles> {
   class?: string;
+  wrapperClass?: string;
 }
 
 export const styles = tv({
@@ -15,10 +16,10 @@ export const styles = tv({
   },
 });
 
-const { class: className, look, ...attrs } = Astro.props;
+const { class: className, wrapperClass, look, ...attrs } = Astro.props;
 ---
 
-<div class={styles({ look })} {...attrs}>
+<div class={styles({ look, className: wrapperClass })} {...attrs}>
   <slot name="icon" />
   <div class={className}><slot /></div>
 </div>

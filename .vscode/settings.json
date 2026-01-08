@@ -4,5 +4,12 @@
   },
   "typescript.tsdk": "node_modules/typescript/lib",
   "eslint.validate": ["astro", "javascript", "typescript"],
-  "tailwindCSS.classFunctions": ["tv"]
+  "tailwindCSS.classFunctions": ["tv"],
+  "tailwindCSS.classAttributes": [
+    "class",
+    "className",
+    "ngClass",
+    "class:list",
+    "wrapperClass"
+  ]
 }
