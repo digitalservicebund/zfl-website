@@ -12,9 +12,7 @@ import SupportCard from "@components/SupportCard.astro";
 <Layout title="">
   <main class="breakout-grid">
     <Hero>
-      <h1 class="sm:hyphens-none">
-        Bessere Rechtsetzung in allen Phasen Ihres Vorhabens
-      </h1>
+      <h1>Bessere Rechtsetzung in allen Phasen Ihres Vorhabens</h1>
       <p slot="subtitle">
         Das Zentrum für Legistik unterstützt Sie bei der Ausarbeitung von
         Regelungen. Sie stellen damit sicher, dass Ihr Vorhaben
@@ -22,8 +20,11 @@ import SupportCard from "@components/SupportCard.astro";
       </p>
     </Hero>
     <Banner>
-      Das Angebot befindet sich aktuell im Aufbau und wird schrittweise mit
-      Ihnen zusammen weiterentwickelt.
+      <p class="mb-0 max-w-full">
+        Das Angebot befindet sich aktuell im Aufbau und wird schrittweise mit
+        Ihnen zusammen weiterentwickelt.
+      </p>
+      <a class="text-link" href="/daran-arbeiten-wir">Mehr dazu</a>
     </Banner>
     <div class="markdown py-80">
       <Vorteile />

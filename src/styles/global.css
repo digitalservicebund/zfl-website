@@ -93,7 +93,9 @@
   ul:not(.list-unstyled),
   ol:not(.list-unstyled) {
     @apply max-w-a11y;
-    @apply mb-8;
+    &:not(:last-child) {
+      @apply mb-8;
+    }
   }
 
   *:focus-visible {
