@@ -103,7 +103,8 @@
   }
 
   p + a:not([class]),
-  p > a:not([class]) {
+  p > a:not([class]),
+  li > a:not([class]) {
     @apply text-link;
   }
 }
