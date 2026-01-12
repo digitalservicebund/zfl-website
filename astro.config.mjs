@@ -10,9 +10,12 @@ import react from "@astrojs/react";
 
 import alpinejs from "@astrojs/alpinejs";
 
+import sitemap from "@astrojs/sitemap";
+
 // https://astro.build/config
 export default defineConfig({
-  integrations: [icon(), react(), alpinejs()],
+  site: "https://zfl.bund.de",
+  integrations: [icon(), react(), alpinejs(), sitemap()],
   markdown: {
     rehypePlugins: [[rehypeAddClasses, { a: "text-link" }]],
   },

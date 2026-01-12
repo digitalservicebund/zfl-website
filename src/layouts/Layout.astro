@@ -15,6 +15,7 @@ import Posthog from "@components/Posthog.astro";
 <!doctype html>
 <html lang="de" data-kern-theme="light">
   {/* disable dark mode for now*/}
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width" />
   <meta name="generator" content={Astro.generator} />
@@ -22,6 +23,8 @@ import Posthog from "@components/Posthog.astro";
   <title>{title}</title>
   <meta property="og:title" content={title} />
   <meta property="twitter:title" content={title} />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+
   <body>
     <PageHeader />
     <slot />
