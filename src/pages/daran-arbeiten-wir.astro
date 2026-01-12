@@ -1,9 +1,14 @@
 ---
 import Card from "@components/Card.astro";
 import Layout from "@layouts/Layout.astro";
+
+export const frontmatter = {
+  title: "Daran arbeiten wir",
+  sitemap: true,
+};
 ---
 
-<Layout title="Daran arbeiten wir">
+<Layout title={frontmatter.title}>
   <main class="breakout-grid mb-80">
     <h1 class="my-40">Daran arbeiten wir</h1>
     <p>

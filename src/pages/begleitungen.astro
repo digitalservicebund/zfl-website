@@ -3,9 +3,14 @@ import Card from "@components/Card.astro";
 import Heading from "@components/text/Heading.astro";
 import Layout from "@layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
+
+export const frontmatter = {
+  title: "Begleitungen",
+  sitemap: true,
+};
 ---
 
-<Layout title="Begleitungen">
+<Layout title={frontmatter.title}>
   <main class="breakout-grid">
     <Heading class="mt-40 md:mt-80" level={1}>Begleitung für Vorhaben</Heading>
 

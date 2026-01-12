@@ -5,6 +5,11 @@ import Badge from "@components/text/Badge.astro";
 import Layout from "@layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
 
+export const frontmatter = {
+  title: "Zahlen und Fakten",
+  sitemap: true,
+};
+
 type DsData = {
   title: string;
   elements: {
@@ -109,7 +114,7 @@ const dsData: DsData = [
 ];
 ---
 
-<Layout title="Schulungen">
+<Layout title={frontmatter.title}>
   <main class="breakout-grid mb-80 space-y-80">
     <Hero>
       <Heading level={1}>Das Zentrum für Legistik in Zahlen</Heading>

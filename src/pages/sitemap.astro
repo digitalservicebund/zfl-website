@@ -1,0 +1,54 @@
+---
+import Layout from "@layouts/Layout.astro";
+
+interface SitemapFrontmatter {
+  title?: string;
+  sitemap?: boolean;
+  order?: number;
+}
+
+type PageModule = {
+  frontmatter?: SitemapFrontmatter;
+};
+
+const modules = import.meta.glob<PageModule>("../pages/**/*.{astro,md,mdx}", {
+  eager: true,
+});
+
+const excludeList = [/.*sitemap.astro/, /_.*/, /.*404/];
+
+const pages = Object.entries(modules)
+  .filter(([path]) => !excludeList.some((regex) => regex.test(path)))
+  .map(([path, mod]) => {
+    const url =
+      path.replace("../pages", "").replace(/(\/index)?\.(astro|md|mdx)$/, "") ||
+      "/";
+
+    const title = mod.frontmatter?.title ?? "";
+
+    return {
+      url,
+      title,
+      order: mod.frontmatter?.order ?? 999,
+      sitemap: mod.frontmatter?.sitemap !== false && title,
+    };
+  })
+  .filter((page) => page.sitemap)
+  .sort((a, b) => a.order - b.order);
+---
+
+<Layout title="Sitemap">
+  <main class="breakout-grid space-y-80 py-40 md:py-80">
+    <h1>Sitemap</h1>
+
+    <ul>
+      {
+        pages.map((page) => (
+          <li>
+            <a href={page.url}>{page.title}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </main>
+</Layout>

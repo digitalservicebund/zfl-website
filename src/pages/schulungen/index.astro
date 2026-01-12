@@ -6,9 +6,14 @@ import Card from "@components/Card.astro";
 import Badge from "@components/text/Badge.astro";
 import Appointment from "./_appointment.astro";
 import SupportCard from "@components/SupportCard.astro";
+
+export const frontmatter = {
+  title: "Schulungen",
+  sitemap: true,
+};
 ---
 
-<Layout title="Schulungen">
+<Layout title={frontmatter.title}>
   <main class="breakout-grid">
     <Heading class="mt-40 mb-80 md:mt-80" level={1}>Schulungen</Heading>
 
