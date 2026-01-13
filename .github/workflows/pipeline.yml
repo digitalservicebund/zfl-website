@@ -1,17 +1,17 @@
 name: Pipeline
 
 on:
-  #  push:
-  #    branches:
-  #      - main
-  #    paths:
-  #      - src
-  #      - public
-  #      - nginx
-  #      - package.json
-  #      - Dockerfile
-  #  pull_request:
-  #    branches: [main]
+  push:
+    branches:
+      - main
+    paths:
+      - src
+      - public
+      - nginx
+      - package.json
+      - Dockerfile
+  pull_request:
+    branches: [main]
   # Allow running this workflow manually
   workflow_dispatch:
 
