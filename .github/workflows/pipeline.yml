@@ -99,7 +99,7 @@ jobs:
       - name: Deploy latest container image
         uses: digitalservicebund/argocd-deploy@auth-token # Use the auth-token branch for STACKIT
         with:
-          environment: staging-stackit
+          environment: staging
           version: ${{ github.sha }}
           deploying_repo: ${{ env.PACKAGE_NAME }}
           infra_repo: ${{ github.event.repository.name }}-infra
