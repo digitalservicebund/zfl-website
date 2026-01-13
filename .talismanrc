@@ -2,7 +2,11 @@ fileignoreconfig:
   - filename: .env.example
     ignore_detectors: [filename]
   - filename: .github/workflows/pipeline.yml
-    checksum: 3a8d458b6bcbd190d0e7c6d370553bf123b93c4f3888759cf6ac0c38f6ce557f
+    allowed_patterns:
+      - GITOPS_DIGITALCHECK_APP_ID
+      - GITOPS_DIGITALCHECK_APP_PRIVATE_KEY
+      - secrets
+      - "github_app_private_key:"
   - filename: src/env.d.ts
     checksum: 1fe1ffbe2eacad142f2455c1cc0b0229aeee2eb8768a1642b3de150687f64b0a
   - filename: src/components/Posthog.astro
@@ -11,7 +15,6 @@ allowed_patterns:
   - \@[a-z0-9]{40} # Allow fixing action hashes
   - "secrets: inherit"
   - "key: ${{ runner.os }}"
-  - GITOPS_DIGITALCHECK_APP_PRIVATE_KEY
   - "public key"
   - "secrets.GITHUB_TOKEN"
   - "POSTHOG_KEY"
