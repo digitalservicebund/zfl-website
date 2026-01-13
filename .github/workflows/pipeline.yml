@@ -4,13 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - src
-      - public
-      - nginx
-      - package.json
-      - Dockerfile
-      - .github/workflows
   pull_request:
     branches: [main]
   # Allow running this workflow manually
