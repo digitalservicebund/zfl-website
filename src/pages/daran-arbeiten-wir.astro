@@ -1,5 +1,6 @@
 ---
 import Card from "@components/Card.astro";
+import ExternalLink from "@components/ExternalLink.astro";
 import Layout from "@layouts/Layout.astro";
 
 export const frontmatter = {
@@ -31,6 +32,10 @@ export const frontmatter = {
       oder
       <a href="mailto:support@zfl.bund.de">support@zfl.bund.de</a>.
     </p>
+    <p>
+      Gut zu wissen: Das Zentrum für Legistik ist ein Bestandteil des Handlungsfelds „Bessere Rechtsetzung“ in der Modernisierungsagenda.<br />
+      <ExternalLink href="https://bmds.bund.de/themen/staatsmodernisierung/modernisierungsagenda-bund#c2065">Mehr Informationen zur Modernisierungsagenda</ExternalLink>
+    </p>
 
     <div class="breakout breakout-grid bg-zfl-main20 my-80 py-80">
       <h2>Aktuelle Arbeitspakete in Konzeption und Umsetzung</h2>
@@ -57,11 +62,10 @@ export const frontmatter = {
         <h3 class="mt-32">Konsolidierung der Instrumente</h3>
         <p>
           Unterschiedliche Checks und Arbeitshilfen (wie z.&nbsp;B. der
-          <a target="_blank" href="https://digitalcheck.bund.de/"
-            >Digitalcheck</a
-          >
+          <ExternalLink href="https://digitalcheck.bund.de/">Digitalcheck</ExternalLink>,
+          <ExternalLink href="https://www.gleichstellungs-check.de/">Gleichstellungscheck</ExternalLink>
           oder
-          <a target="_blank" href="https://jugend-check.de/">Jugendcheck</a>)
+          <ExternalLink href="https://jugend-check.de/">Jugendcheck</ExternalLink>)
           zielen in Teilen auf die gleiche Wirkung ab: Praxis- und
           digitaltaugliche Regelungen und Bürokratierückbau. Bei der
           Zusammenführung diverser Ansätze verfolgen wir das Ziel, Ihre
