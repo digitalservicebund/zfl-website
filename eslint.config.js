@@ -18,5 +18,5 @@ export default defineConfig(
     },
     extends: ["markdown/processor"],
   },
-  globalIgnores([".astro/"]),
+  globalIgnores([".astro/", "dist/"]),
 );
