@@ -1,0 +1,13 @@
+---
+import OpenInNewIconBase from "@digitalservicebund/icons/OpenInNew";
+
+interface Props {
+  href: string;
+}
+const { href } = Astro.props;
+---
+
+<a href={href} target="_blank" rel="noopener noreferrer" class="text-link flex items-center gap-4">
+  <slot />
+  <OpenInNewIconBase class="size-16" />
+</a>
