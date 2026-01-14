@@ -8,14 +8,16 @@ pre-commit:
     lint:
       tags: style
       run: pnpm lint:fix-selected {staged_files}
+      glob: "*.{js,cjs,mjs,ts,jsx,tsx,json,css,md,yml,yaml,html,astro}"
+      stage_fixed: true
     typecheck:
       tags: style
       run: pnpm typecheck
       glob: "*.{ts,tsx}"
     check-format:
       tags: style
-      run: npm run format:fix-selected {staged_files}
-      glob: "*.{js,cjs,mjs,ts,jsx,tsx,json,css,md,yml,yaml,html}"
+      run: pnpm run format:fix {staged_files}
+      glob: "*.{js,cjs,mjs,ts,jsx,tsx,json,css,md,yml,yaml,html,astro}"
       stage_fixed: true
     talisman:
       tags: security audit
