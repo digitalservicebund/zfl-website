@@ -6,9 +6,11 @@ interface Props {
 }
 const { href } = Astro.props;
 ---
+
 <a
   href={href}
   target="_blank"
   rel="noopener noreferrer"
   class="text-link inline-flex items-center gap-4"
-  ><slot /><OpenInNewIconBase className="inline-block" /></a>
+  ><slot /><OpenInNewIconBase className="inline-block" /></a
+>
