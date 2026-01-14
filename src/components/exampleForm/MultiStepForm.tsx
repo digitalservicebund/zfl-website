@@ -13,9 +13,9 @@ function StepOne(props: {
 }) {
   return (
     <div>
-      <h2 className="text-xl font-bold mb-4">Zwischendokumentation</h2>
+      <h2 className="mb-4 text-xl font-bold">Zwischendokumentation</h2>
       <div className="mb-4">
-        <label className="block mb-2" id="title">
+        <label className="mb-2 block" id="title">
           Titel Ihres Regelungsvorhabens
         </label>
         <input
@@ -24,7 +24,7 @@ function StepOne(props: {
           name="title"
           value={props.formData.title}
           onChange={props.onChange}
-          className="w-full p-2 border rounded"
+          className="w-full rounded border p-2"
           required
         />
       </div>
@@ -32,7 +32,7 @@ function StepOne(props: {
       <button
         type="button"
         onClick={props.onClick}
-        className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+        className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
       >
         Weiter
       </button>
@@ -49,11 +49,11 @@ function StepTwo(props: {
 }) {
   return (
     <div>
-      <h2 className="text-xl font-bold mb-4">
+      <h2 className="mb-4 text-xl font-bold">
         Auswirkungen auf Betroffene und an der Umsetzung Beteiligte
       </h2>
       <div className="mb-4">
-        <label id="answer" className="block mb-2">
+        <label id="answer" className="mb-2 block">
           Antwort
         </label>
         <p id="answer-details">
@@ -67,7 +67,7 @@ function StepTwo(props: {
           name="participation"
           value={props.formData.participation}
           onChange={props.onChange}
-          className="w-full p-2 border rounded"
+          className="w-full rounded border p-2"
           required
         />
       </div>
@@ -75,13 +75,13 @@ function StepTwo(props: {
         <button
           type="button"
           onClick={props.onClick}
-          className="bg-gray-300 py-2 px-4 rounded hover:bg-gray-400"
+          className="rounded bg-gray-300 px-4 py-2 hover:bg-gray-400"
         >
           Back
         </button>
         <button
           type="submit"
-          className="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
+          className="rounded bg-green-500 px-4 py-2 text-white hover:bg-green-600"
         >
           Submit
         </button>
@@ -126,7 +126,7 @@ export default function MultiStepForm() {
   };
 
   return (
-    <div className="p-4 border rounded-lg shadow col-[content]">
+    <div className="col-[content] rounded-lg border p-4 shadow">
       <form onSubmit={handleSubmit}>
         {step === 1 && (
           <StepOne

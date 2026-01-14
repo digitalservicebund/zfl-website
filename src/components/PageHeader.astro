@@ -58,7 +58,7 @@ const activeClasses = "border-zfl-main80 bg-zfl-main20";
           </a>
         ))
       }
-      <div class="ds-label-01-reg px-16 text-gray-800 text-nowrap">
+      <div class="ds-label-01-reg px-16 text-nowrap text-gray-800">
         Kontakt:{" "}
         <a href={ZFL_EMAIL.url} class="ds-link-01-reg inline"
           >{ZFL_EMAIL.display}</a
@@ -75,11 +75,11 @@ const activeClasses = "border-zfl-main80 bg-zfl-main20";
       >
         <Icon
           name="material-symbols:phone-enabled-outline"
-          class="-scale-x-100 size-24"
+          class="size-24 -scale-x-100"
         />
       </a>
       <button
-        class="hover:bg-zfl-main20 h-full border-b-4 border-transparent px-16 aria-expanded:border-zfl-main80 aria-expanded:bg-zfl-main20"
+        class="hover:bg-zfl-main20 aria-expanded:border-zfl-main80 aria-expanded:bg-zfl-main20 h-full border-b-4 border-transparent px-16"
         @click="mobileMenuOpen = !mobileMenuOpen"
         aria-label="Menü öffnen / schließen"
         :aria-expanded="mobileMenuOpen"
@@ -128,7 +128,7 @@ const activeClasses = "border-zfl-main80 bg-zfl-main20";
   </nav>
   <noscript>
     <div class="bg-yellow-200">
-      <div class="py-4 breakout-grid">
+      <div class="breakout-grid py-4">
         <p>
           <strong>Menü funktioniert nicht?</strong> Erlauben Sie JavaScript in den
           Browsereinstellungen oder navigieren Sie über den <a href="#footer"
