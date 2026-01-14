@@ -1,5 +1,6 @@
 @import "@digitalservice4germany/angie/fonts.css" layer(base);
 @import "tailwindcss";
+@import "material-symbols";
 @config "@digitalservice4germany/style-dictionary/tailwind";
 @plugin "@digitalservice4germany/angie";
 

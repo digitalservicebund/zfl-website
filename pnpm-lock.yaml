@@ -26,9 +26,6 @@ importers:
       '@digitalservice4germany/style-dictionary':
         specifier: ^2.0.0
         version: 2.0.0
-      '@digitalservicebund/icons':
-        specifier: ^2.1.0
-        version: 2.1.0
       '@iconify-json/material-symbols':
         specifier: ^1.2.50
         version: 1.2.50
@@ -53,6 +50,9 @@ importers:
       astro-icon:
         specifier: ^1.1.5
         version: 1.1.5
+      material-symbols:
+        specifier: ^0.40.2
+        version: 0.40.2
       react:
         specifier: ^19.2.3
         version: 19.2.3
@@ -262,10 +262,6 @@ packages:
   '@digitalservice4germany/style-dictionary@2.0.0':
     resolution: {integrity: sha512-P4qRe2OyIZsxtOsX4GY0JP5k0YyDimoeY/eQP5S2Ibr0T1uFoH3/7yOsXeNeAS15H1A4h81apfNakK019F835Q==}
     deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
-
-  '@digitalservicebund/icons@2.1.0':
-    resolution: {integrity: sha512-YuKVA1ZFXr5iK2HRXiqTn/4XtPVTchz5QplMip1J3opLqNEoHwIn5Vz/1mqLYjDAdd2hZjOROBBimJcXI1/VLQ==}
-    engines: {node: '>=18'}
 
   '@emnapi/runtime@1.7.1':
     resolution: {integrity: sha512-PVtJr5CmLwYAU9PZDMITZoR5iAOShYREoR45EyyLrbntV50mdePTgUn4AmOw90Ifcj+x2kRjdzr1HP3RrNiHGA==}
@@ -1976,6 +1972,9 @@ packages:
   markdown-table@3.0.4:
     resolution: {integrity: sha512-wiYz4+JrLyb/DqW2hkFJxP7Vd7JuTDm77fvbM8VfEQdmSMqcImWeeRbHwZjBjIFki/VaMK2BhFi7oUUZeM5bqw==}
 
+  material-symbols@0.40.2:
+    resolution: {integrity: sha512-QUJF1HztvcpP8pXHPPNESK05Thq/Zy8ub17T2xBDf4+gqx4KBs353lKHuVzE/eCYOtiB9JBlFOU7cjAI6vVMTQ==}
+
   mdast-util-definitions@6.0.0:
     resolution: {integrity: sha512-scTllyX6pnYNZH/AIp/0ePz6s4cZtARxImwoPJ7kS42n+MnVsI4XbnG6d4ibehRIldYMWM2LD7ImQblVhUejVQ==}
 
@@ -3241,8 +3240,6 @@ snapshots:
   '@digitalservice4germany/angie@2.4.0': {}
 
   '@digitalservice4germany/style-dictionary@2.0.0': {}
-
-  '@digitalservicebund/icons@2.1.0': {}
 
   '@emnapi/runtime@1.7.1':
     dependencies:
@@ -5015,6 +5012,8 @@ snapshots:
       source-map-js: 1.2.1
 
   markdown-table@3.0.4: {}
+
+  material-symbols@0.40.2: {}
 
   mdast-util-definitions@6.0.0:
     dependencies:

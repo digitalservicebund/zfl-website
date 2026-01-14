@@ -1,6 +1,4 @@
 ---
-import { OpenInNew as OpenInNewIconBase } from "@digitalservicebund/icons";
-
 interface Props {
   href: string;
 }
@@ -11,6 +9,8 @@ const { href } = Astro.props;
   href={href}
   target="_blank"
   rel="noopener noreferrer"
-  class="text-link inline-flex items-center gap-4"
-  ><slot /><OpenInNewIconBase className="inline-block" /></a
+  class="inline-flex items-center gap-4"
+  ><span class="text-link"><slot /></span><span
+    class="material-symbols-outlined text-link no-underline">open_in_new</span
+  ></a
 >
