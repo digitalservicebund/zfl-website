@@ -14,6 +14,9 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: "https://zfl.bund.de",
   integrations: [icon(), alpinejs(), sitemap()],
+  prefetch: {
+    prefetchAll: true,
+  },
   markdown: {
     rehypePlugins: [[rehypeAddClasses, { a: "text-link" }]],
   },
