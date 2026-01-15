@@ -22,7 +22,7 @@
     "@astrojs/sitemap": "^3.6.1",
     "@digitalservice4germany/angie": "^2.4.0",
     "@digitalservice4germany/style-dictionary": "^2.0.0",
-    "@iconify-json/material-symbols": "^1.2.50",
+    "@iconify-json/material-symbols": "^1.2.51",
     "@tailwindcss/vite": "^4.1.18",
     "@types/alpinejs": "^3.13.11",
     "alpinejs": "^3.15.3",
