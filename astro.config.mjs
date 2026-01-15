@@ -12,13 +12,16 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: "https://zfl.bund.de",
   integrations: [icon(), sitemap()],
-  prefetch: {
-    prefetchAll: true,
+  vite: {
+    plugins: [tailwindcss()],
   },
   markdown: {
     rehypePlugins: [[rehypeAddClasses, { a: "text-link" }]],
   },
-  vite: {
-    plugins: [tailwindcss()],
+  prefetch: {
+    prefetchAll: true,
+  },
+  experimental: {
+    csp: true,
   },
 });
