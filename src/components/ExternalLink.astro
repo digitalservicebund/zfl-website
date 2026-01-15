@@ -1,4 +1,6 @@
 ---
+import { Icon } from "astro-icon/components";
+
 interface Props {
   href: string;
 }
@@ -10,7 +12,8 @@ const { href } = Astro.props;
   target="_blank"
   rel="noopener noreferrer"
   class="inline-flex items-center gap-4"
-  ><span class="text-link"><slot /></span><span
-    class="material-symbols-outlined text-link no-underline">open_in_new</span
-  ></a
->
+  ><span class="text-link"><slot /></span><Icon
+    name="material-symbols:open-in-new-rounded"
+    class="text-link no-underline"
+  />
+</a>

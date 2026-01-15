@@ -31,7 +31,6 @@
     "alpinejs": "^3.15.3",
     "astro": "^5.16.6",
     "astro-icon": "^1.1.5",
-    "material-symbols": "^0.40.2",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "rehype-add-classes": "^1.0.0",
