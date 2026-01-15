@@ -20,10 +20,12 @@ import Posthog from "@components/Posthog.astro";
   <meta name="viewport" content="width=device-width" />
   <meta name="generator" content={Astro.generator} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+  <link rel="canonical" href={Astro.url} />
+
   <title>{title}</title>
   <meta property="og:title" content={title} />
   <meta property="twitter:title" content={title} />
-  <link rel="sitemap" href="/sitemap-index.xml" />
 
   <body>
     <PageHeader />

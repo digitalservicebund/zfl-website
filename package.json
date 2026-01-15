@@ -57,7 +57,7 @@
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.51.0"
   },
-  "packageManager": "pnpm@10.27.0",
+  "packageManager": "pnpm@10.28.0",
   "pnpm": {
     "overrides": {
       "nth-check": "2.0.1"
