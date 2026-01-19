@@ -5,7 +5,7 @@ title: Barrierefreiheit
 
 # Erklärung zur Barrierefreiheit
 
-Diese Erklärung gilt für die Webseite des Digitalcheck, erreichbar unter [digitalcheck.bund.de](https://digitalcheck.bund.de).
+Diese Erklärung gilt für die Webseite des Zentrums für Legistik, erreichbar unter [zfl.bund.de](https://zfl.bund.de).
 
 Als öffentliche Stelle im Sinne der Richtlinie (EU) 2016/2102 ist das Bundesministeriums für Digitales und Staatsmodernisierung (BMDS) bemüht, ihre Webauftritte im Einklang mit den Bestimmungen des Behindertengleichstellungsgesetzes des Bundes (BGG) sowie der Barrierefreien-Informationstechnik-Verordnung (BITV 2.0) zur Umsetzung der Richtlinie (EU) 2016/2102 barrierefrei zugänglich zu machen.
 
