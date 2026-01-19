@@ -9,6 +9,7 @@ test.describe("page titles", () => {
     test(`${route.url} has correct title`, async ({ page }) => {
       await page.goto(route.url);
       await expect(page).toHaveTitle(getTitle(route.title));
+      await expect(page.getByRole("heading", { level: 1 })).toBeDefined();
     });
   });
 });

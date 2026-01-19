@@ -11,9 +11,9 @@ const { frontmatter } = Astro.props;
 ---
 
 <Layout title={frontmatter.title}>
-  <div class="markdown container my-40 lg:my-80">
+  <main class="markdown container my-40 lg:my-80">
     <slot />
-  </div>
+  </main>
 </Layout>
 
 <style>
