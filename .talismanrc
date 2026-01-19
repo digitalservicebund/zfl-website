@@ -10,7 +10,7 @@ fileignoreconfig:
   - filename: src/env.d.ts
     checksum: 1fe1ffbe2eacad142f2455c1cc0b0229aeee2eb8768a1642b3de150687f64b0a
   - filename: src/layouts/Posthog.astro
-    checksum: 17c314d4c04726a89f347915d722b9740bede389700aa64610ef8d2d48aa9599
+    checksum: 050b9e802c7a1261b1fba612696ab5d3ae716f8e122edd316c91ab89233ec82d
   - filename: src/config/posthog.ts
     checksum: bfa6e5b573b6a00e9ca64d34be9c4cc9e35d91cf6753d751a3f4df7f334ea9c3
   - filename: nginx/nginx.template.conf

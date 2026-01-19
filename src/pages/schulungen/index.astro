@@ -6,6 +6,7 @@ import Card from "@components/Card.astro";
 import Badge from "@components/text/Badge.astro";
 import Appointment from "./_appointment.astro";
 import SupportCard from "@components/SupportCard.astro";
+import { ZFL_EMAIL } from "@config/constants";
 
 export const frontmatter = {
   title: "Schulungen",
@@ -101,7 +102,9 @@ export const frontmatter = {
         <Heading level={2}>Anmeldung</Heading>
         <p>
           Schicken Sie uns für eine Anmeldung den Schulungs- oder Modul-Namen
-          und Termin an die E-Mail und wir bestätigen die Anmeldung.
+          und Termin an die E-Mail <a href={ZFL_EMAIL.url}
+            >{ZFL_EMAIL.display}</a
+          > und wir bestätigen die Anmeldung.
         </p>
       </div>
     </Card>

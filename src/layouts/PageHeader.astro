@@ -3,15 +3,7 @@ import { twMerge } from "tailwind-merge";
 import Kopfzeile from "@layouts/Kopfzeile.astro";
 import { Icon } from "astro-icon/components";
 import { removeTrailingSlash } from "@utils/routesHelper";
-
-const ZFL_EMAIL = {
-  url: "mailto:support@zfl.bund.de",
-  display: "support@zfl.bund.de",
-};
-const ZFL_PHONE = {
-  display: "0151/40 76 78 39",
-  url: "tel:015140767839",
-};
+import { ZFL_EMAIL, ZFL_PHONE } from "@config/constants";
 
 const headerItems = [
   { url: "/begleitungen", title: "Begleitungen" },
