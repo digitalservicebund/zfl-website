@@ -39,9 +39,5 @@ export const getAllRoutes = (): SitemapFrontmatter[] => {
     .filter((route) => route.sitemap)
     .sort((a, b) => a.order - b.order);
 
-  routes.forEach((route) => {
-    console.log(`{url: "${route.url}", title: "${route.title}"}}`);
-  });
-
   return routes;
 };
