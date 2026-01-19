@@ -24,6 +24,6 @@ export default defineConfig({
     prefetchAll: true,
   },
   experimental: {
-    csp: true,
+    csp: false,
   },
 });
