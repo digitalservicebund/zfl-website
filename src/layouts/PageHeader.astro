@@ -18,7 +18,8 @@ const headerItems = [
   { url: "/schulungen", title: "Schulungen" },
 ];
 
-const { pathname: currentPath } = Astro.url;
+const { pathname } = Astro.url;
+const currentPath = removeTrailingSlash(pathname);
 
 const basicLinkClasses = "flex items-center hover:bg-zfl-main20";
 const activeClasses = "border-zfl-main80 bg-zfl-main20";
@@ -52,7 +53,7 @@ const activeClasses = "border-zfl-main80 bg-zfl-main20";
             class={twMerge(
               basicLinkClasses,
               "ds-label-01-reg relative h-full border-b-4 border-transparent px-16 whitespace-nowrap",
-              removeTrailingSlash(currentPath) === item.url && activeClasses,
+              currentPath === item.url && activeClasses,
             )}
           >
             {item.title}
