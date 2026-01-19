@@ -21,6 +21,7 @@ COPY --from=build /app/dist /usr/share/nginx/html
 COPY --from=build /app/dist_staging /usr/share/nginx/html_staging
 
 ENV NGINX_DIR=html
+ENV RESOLVER=1.1.1.1
 RUN mkdir /etc/nginx/sites-enabled
-CMD ["sh", "-c", "envsubst '$NGINX_DIR' < /etc/nginx/nginx.template.conf > /etc/nginx/sites-enabled/nginx.conf && nginx -g 'daemon off;'"]
+CMD ["sh", "-c", "envsubst '$NGINX_DIR,$RESOLVER' < /etc/nginx/nginx.template.conf > /etc/nginx/sites-enabled/nginx.conf && nginx -g 'daemon off;'"]
 EXPOSE 8080
