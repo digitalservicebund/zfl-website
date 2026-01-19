@@ -46,11 +46,6 @@ jobs:
 
       - name: Build and push
         uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83 # v6.18.0
-        env:
-          FEATURE_EXAMPLE: ${{ secrets.FEATURE_EXAMPLE }}
-          PUBLIC_POSTHOG_KEY: ${{ secrets.POSTHOG_KEY }}
-          PUBLIC_POSTHOG_API_HOST: ${{ secrets.POSTHOG_API_HOST }}
-          PUBLIC_POSTHOG_UI_HOST: ${{ secrets.POSTHOG_UI_HOST }}
         with:
           context: .
           push: true

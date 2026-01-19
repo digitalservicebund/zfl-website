@@ -1,7 +1,5 @@
 ---
-const posthogKey = import.meta.env.PUBLIC_POSTHOG_KEY;
-const apiHost = import.meta.env.PUBLIC_POSTHOG_API_HOST;
-const uiHost = import.meta.env.PUBLIC_POSTHOG_UI_HOST;
+import { apiHost, posthogKey, uiHost } from "../config/posthog";
 ---
 
 <posthog-init

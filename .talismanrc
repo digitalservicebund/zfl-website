@@ -9,8 +9,10 @@ fileignoreconfig:
       - "github_app_private_key:"
   - filename: src/env.d.ts
     checksum: 1fe1ffbe2eacad142f2455c1cc0b0229aeee2eb8768a1642b3de150687f64b0a
-  - filename: src/components/Posthog.astro
-    checksum: d395ec7104227b50584515c389c2f5ef652dd1f0611e1e6654dd0c692f1ef690
+  - filename: src/layouts/Posthog.astro
+    checksum: 17c314d4c04726a89f347915d722b9740bede389700aa64610ef8d2d48aa9599
+  - filename: src/config/posthog.ts
+    checksum: bfa6e5b573b6a00e9ca64d34be9c4cc9e35d91cf6753d751a3f4df7f334ea9c3
   - filename: nginx/nginx.template.conf
     allowed_patterns:
       - proxy_pass
@@ -20,7 +22,6 @@ allowed_patterns:
   - "key: ${{ runner.os }}"
   - "public key"
   - "secrets.GITHUB_TOKEN"
-  - "POSTHOG_KEY"
 
 scopeconfig:
   - scope: node # ignores files such as package-lock.json

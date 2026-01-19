@@ -12,6 +12,7 @@ const image = `${Astro.url}ogImage.png`;
 import "../styles/global.css";
 import PageHeader from "@layouts/PageHeader.astro";
 import Posthog from "@layouts/Posthog.astro";
+import { isProduction } from "../config/stage";
 ---
 
 <!doctype html>
@@ -50,6 +51,6 @@ import Posthog from "@layouts/Posthog.astro";
     <PageHeader />
     <slot />
     <Footer />
-    <Posthog />
+    {isProduction && <Posthog />}
   </body>
 </html>
