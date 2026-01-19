@@ -105,7 +105,7 @@ jobs:
       url: https://zfl.dev.tech.digitalservice.dev
     steps:
       - name: Deploy latest container image
-        uses: digitalservicebund/argocd-deploy@auth-token # Use the auth-token branch for STACKIT
+        uses: digitalservicebund/argocd-deploy@d14e68e4c78222189d8a20c1552639f33f93fe91
         with:
           environment: staging
           version: ${{ github.sha }}
@@ -129,7 +129,7 @@ jobs:
 
     steps:
       - name: Deploy latest container image
-        uses: digitalservicebund/argocd-deploy@auth-token # Use the auth-token branch for STACKIT
+        uses: digitalservicebund/argocd-deploy@d14e68e4c78222189d8a20c1552639f33f93fe91
         with:
           environment: production
           version: ${{ github.sha }}
