@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.4.9",
-    "@astrojs/sitemap": "^3.6.1",
+    "@astrojs/sitemap": "^3.7.0",
     "@digitalservice4germany/angie": "^2.4.0",
     "@digitalservice4germany/style-dictionary": "^2.0.0",
     "@iconify-json/material-symbols": "^1.2.50",
