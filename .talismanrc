@@ -16,6 +16,7 @@ fileignoreconfig:
   - filename: nginx/nginx.template.conf
     allowed_patterns:
       - proxy_pass
+      - sha256-[^\s]+
 allowed_patterns:
   - \@[a-z0-9]{40} # Allow fixing action hashes
   - "secrets: inherit"
