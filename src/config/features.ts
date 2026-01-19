@@ -5,4 +5,6 @@ export const FEATURES = {
 const stage = import.meta.env.PUBLIC_STAGE || "production";
 
 export const isProduction = stage === "production";
-export const isDevelopment = stage === "development";
+export const isStaging = stage === "staging";
+
+console.log("stage", stage);

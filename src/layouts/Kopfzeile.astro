@@ -1,5 +1,5 @@
 ---
-import { isDevelopment } from "../config/features";
+import { isStaging } from "../config/features";
 ---
 
 <div class="kern-kopfzeile">
@@ -14,9 +14,9 @@ import { isDevelopment } from "../config/features";
       </span>
       <span class="kern-kopfzeile__label">
         Offizielle Website – Bundesrepublik Deutschland{
-          isDevelopment && " (STAGING)"
-        }
-      </span>
+          isStaging && " (STAGING)"
+        }</span
+      >
     </div>
   </div>
 </div>

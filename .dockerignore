@@ -4,3 +4,5 @@ dist
 .github
 .idea
 .vscode
+.env
+.env.example
