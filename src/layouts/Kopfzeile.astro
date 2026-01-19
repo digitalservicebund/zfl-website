@@ -1,3 +1,7 @@
+---
+import { isDevelopment } from "../config/features";
+---
+
 <div class="kern-kopfzeile">
   <div class="kern-container">
     <div class="kern-kopfzeile__content">
@@ -9,7 +13,9 @@
         </svg>
       </span>
       <span class="kern-kopfzeile__label">
-        Offizielle Website – Bundesrepublik Deutschland
+        Offizielle Website – Bundesrepublik Deutschland{
+          isDevelopment && " (STAGING)"
+        }
       </span>
     </div>
   </div>
