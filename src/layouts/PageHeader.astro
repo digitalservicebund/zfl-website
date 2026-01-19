@@ -2,6 +2,7 @@
 import { twMerge } from "tailwind-merge";
 import Kopfzeile from "@layouts/Kopfzeile.astro";
 import { Icon } from "astro-icon/components";
+import { removeTrailingSlash } from "@utils/routesHelper";
 
 const ZFL_EMAIL = {
   url: "mailto:support@zfl.bund.de",
@@ -51,7 +52,7 @@ const activeClasses = "border-zfl-main80 bg-zfl-main20";
             class={twMerge(
               basicLinkClasses,
               "ds-label-01-reg relative h-full border-b-4 border-transparent px-16 whitespace-nowrap",
-              currentPath === item.url && activeClasses,
+              removeTrailingSlash(currentPath) === item.url && activeClasses,
             )}
           >
             {item.title}

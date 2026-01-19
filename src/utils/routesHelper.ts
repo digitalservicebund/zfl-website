@@ -41,3 +41,6 @@ export const getAllRoutes = (): SitemapFrontmatter[] => {
 
   return routes;
 };
+
+export const removeTrailingSlash = (path: string) =>
+  path.replace(/\/+$/, "").replace(/^$/, "/");
