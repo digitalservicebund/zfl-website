@@ -11,5 +11,8 @@
     "ngClass",
     "class:list",
     "wrapperClass"
-  ]
+  ],
+  "yaml.schemas": {
+    "https://www.schemastore.org/github-workflow.json": "pipeline.yml"
+  }
 }
