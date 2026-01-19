@@ -14,6 +14,9 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: "https://zfl.bund.de",
   integrations: [icon(), alpinejs(), sitemap()],
+  build: {
+    assets: "_astro",
+  },
   vite: {
     plugins: [tailwindcss()],
   },
