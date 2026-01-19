@@ -2,7 +2,9 @@
 node_modules
 dist
 .github
+.git
 .idea
 .vscode
 .env
 .env.example
+Dockerfile
