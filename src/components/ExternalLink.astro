@@ -11,9 +11,10 @@ const { href } = Astro.props;
   href={href}
   target="_blank"
   rel="noopener noreferrer"
-  class="inline-flex items-center gap-4"
-  ><span class="text-link"><slot /></span><Icon
+  class="text-link inline whitespace-nowrap"
+>
+  <slot /><Icon
     name="material-symbols:open-in-new-rounded"
-    class="text-link no-underline"
-  />
-</a>
+    class="mb-1 ml-2 inline no-underline"
+  /></a
+>
