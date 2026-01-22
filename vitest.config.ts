@@ -1,24 +1,27 @@
+/// <reference types="vitest/config" />
 import { getViteConfig } from "astro/config";
-import { defineConfig } from "vitest/config";
+// import type { UserConfig } from "vitest/config";
 
-const viteConfig = getViteConfig(
-  {},
+export default getViteConfig(
+  {
+    // @ts-expect-error ignore for now
+    test: {
+      chaiConfig: {
+        truncateThreshold: 200,
+      },
+      globals: true,
+      include: [
+        "**/*.test.{ts,tsx}",
+        "!tests/**",
+        "!**/*.browser.test.{ts,tsx}",
+      ],
+      typecheck: {
+        tsconfig: "./tsconfig.test.json",
+      },
+    },
+  },
   {
     site: "https://example.com/",
     trailingSlash: "always",
   },
 );
-
-export default defineConfig({
-  ...viteConfig,
-  test: {
-    chaiConfig: {
-      truncateThreshold: 200,
-    },
-    globals: true,
-    include: ["**/*.test.{ts,tsx}", "!tests/**", "!**/*.browser.test.{ts,tsx}"],
-    typecheck: {
-      tsconfig: "./tsconfig.test.json",
-    },
-  },
-});

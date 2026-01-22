@@ -36,8 +36,8 @@ importers:
         specifier: ^3.15.4
         version: 3.15.4
       astro:
-        specifier: ^5.16.12
-        version: 5.16.12(@types/node@25.0.10)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.56.0)(typescript@5.9.3)(yaml@2.8.2)
+        specifier: ^5.16.13
+        version: 5.16.13(@types/node@25.0.10)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.56.0)(typescript@5.9.3)(yaml@2.8.2)
       astro-icon:
         specifier: ^1.1.5
         version: 1.1.5
@@ -117,9 +117,6 @@ importers:
       typescript-eslint:
         specifier: ^8.53.1
         version: 8.53.1(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)
-      vite:
-        specifier: ^7.3.1
-        version: 7.3.1(@types/node@25.0.10)(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.8.2)
       vitest:
         specifier: ^4.0.17
         version: 4.0.17(@types/node@25.0.10)(@vitest/browser-playwright@4.0.17)(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.8.2)
@@ -1338,8 +1335,8 @@ packages:
   astro-seo@1.1.0:
     resolution: {integrity: sha512-G6LDNDyga30o+52v58jU7C35n3cORUzk7RSuY+xf/ZRbW6JiNplyaOO1VoYVKO+xzYNaBcxqNln2RFRR/wgJNQ==}
 
-  astro@5.16.12:
-    resolution: {integrity: sha512-R2LH1GW4JexpSMWffbpzkeZDAwbdZwI5BclXEwi+vIUPxQI+7Y9ZogJ5u4ukdYFGrcrie/0z+Od4i3MlR0nELQ==}
+  astro@5.16.13:
+    resolution: {integrity: sha512-k8Zgb38wpMpJf2LSVO5mSUx2MyDTA6s11UHLPOjUStbdQow3ueREf2J0lKgXnedGtolMm0eGMbnLp1lxs4sKTw==}
     engines: {node: 18.20.8 || ^20.3.0 || >=22.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
 
@@ -4602,7 +4599,7 @@ snapshots:
       - prettier-plugin-astro
       - typescript
 
-  astro@5.16.12(@types/node@25.0.10)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.56.0)(typescript@5.9.3)(yaml@2.8.2):
+  astro@5.16.13(@types/node@25.0.10)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.56.0)(typescript@5.9.3)(yaml@2.8.2):
     dependencies:
       '@astrojs/compiler': 2.13.0
       '@astrojs/internal-helpers': 0.7.5
