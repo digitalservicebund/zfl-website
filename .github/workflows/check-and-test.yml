@@ -6,6 +6,7 @@ on:
 env:
   PACKAGE_NAME: zfl-website
   ENVIRONMENT: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
+  PUBLIC_STAGE: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
 
 permissions:
   contents: read

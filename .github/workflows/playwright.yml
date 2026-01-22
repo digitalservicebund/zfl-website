@@ -1,6 +1,13 @@
 name: Playwright Tests
+
 on:
   workflow_call:
+
+env:
+  PACKAGE_NAME: zfl-website
+  ENVIRONMENT: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
+  PUBLIC_STAGE: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
+
 jobs:
   test:
     timeout-minutes: 60
