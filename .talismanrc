@@ -12,7 +12,7 @@ fileignoreconfig:
   - filename: src/layouts/Posthog.astro
     checksum: 050b9e802c7a1261b1fba612696ab5d3ae716f8e122edd316c91ab89233ec82d
   - filename: src/config/posthog.ts
-    checksum: bfa6e5b573b6a00e9ca64d34be9c4cc9e35d91cf6753d751a3f4df7f334ea9c3
+    checksum: c3d36ddcb67967108eba19a445602c9c74e1788dfcf20502d1da665a8be7f4ed
   - filename: .github/workflows/scan.yml
     checksum: 54f9b311242a69bb864655e38cfb084a21571baa520cca262d8363fcc038abe5
   - filename: nginx/nginx.template.conf
