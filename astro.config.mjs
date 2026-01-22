@@ -18,6 +18,7 @@ export default defineConfig({
     assets: "_astro",
   },
   vite: {
+    // @ts-expect-error https://github.com/withastro/astro/issues/14030#issuecomment-3027129338
     plugins: [tailwindcss()],
   },
   markdown: {
