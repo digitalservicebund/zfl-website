@@ -13,10 +13,13 @@
     "format:fix": "pnpm run format:fix-selected .",
     "format:fix-selected": "prettier --write --ignore-unknown",
     "lint": "eslint .",
+    "lint:fix": "pnpm run lint:fix-selected",
     "lint:fix-selected": "eslint --fix",
+    "test": "vitest",
     "test:e2e": "pnpm run build && playwright test --project=chromium",
     "typecheck": "tsc --noEmit",
-    "preinstall": "echo 'Please disable script execution for security reasons: npm config set ignore-scripts true' && exit 1"
+    "preinstall": "echo 'Please disable script execution for security reasons: npm config set ignore-scripts true' && exit 1",
+    "test:browser": "vitest"
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.4.9",
@@ -43,6 +46,7 @@
     "@playwright/test": "^1.57.0",
     "@types/node": "^25.0.9",
     "@typescript-eslint/parser": "^8.53.0",
+    "@vitest/browser-playwright": "^4.0.17",
     "astro-eslint-parser": "^1.2.2",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
@@ -54,7 +58,8 @@
     "prettier-plugin-organize-imports": "^4.3.0",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.53.0"
+    "typescript-eslint": "^8.53.0",
+    "vitest": "^4.0.17"
   },
   "packageManager": "pnpm@10.28.1",
   "pnpm": {

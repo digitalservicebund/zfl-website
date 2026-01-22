@@ -1,0 +1,52 @@
+name: Scan
+
+on:
+  workflow_call:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * *" # Every day at 8am
+
+jobs:
+  vulnerability-scan:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: validate github workflow files to have pinned versions
+        uses: digitalservicebund/github-actions-linter@7cb107efafe7cb97a58e685a08a1014744b89f71 # v0.1.15
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@b6643a29fecd7f34b3597bc6acb0a98b03d33ff8 # v0.33.1
+        env:
+          TRIVY_USERNAME: ${{ github.actor }}
+          TRIVY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+          TRIVY_DB_REPOSITORY: ghcr.io/aquasecurity/trivy-db,public.ecr.aws/aquasecurity/trivy-db
+        with:
+          scan-type: "fs"
+          format: "sarif"
+          output: "trivy-results.sarif"
+          severity: "CRITICAL,HIGH"
+          limit-severities-for-sarif: true
+          exit-code: 2 # Fail the build!
+          version: "v0.67.2"
+      - name: Check trivy results
+        if: always() # Bypass non-zero exit code
+        run: |
+          if grep -qE 'HIGH|CRITICAL' trivy-results.sarif; then
+            echo "Vulnerabilities found"
+            echo "### Found vulnerabilities in trivy results" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            RESULT=$(cat trivy-results.sarif | jq -r '[.runs[].results[].message.text] | join("\\n\\n")')
+            echo -e $RESULT >> $GITHUB_STEP_SUMMARY
+            echo -e $RESULT
+          fi
+      # Upload SARIF results to GitHub Security tab
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@cdefb33c0f6224e58673d9004f47f7cb3e328b89 # v4.31.10
+        if: always() # Bypass non-zero exit code
+        with:
+          sarif_file: "trivy-results.sarif"

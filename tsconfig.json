@@ -1,14 +1,5 @@
 {
-  "extends": "astro/tsconfigs/strict",
+  "extends": "./tsconfig.base.json",
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"],
-  "compilerOptions": {
-    "typeRoots": ["./node_modules/@types", "./src/types"],
-    "paths": {
-      "@components/*": ["./src/components/*"],
-      "@layouts/*": ["./src/layouts/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@config/*": ["./src/config/*"]
-    }
-  }
+  "exclude": ["**/*.test.ts", "**/*.test.tsx", "tests/**"]
 }
