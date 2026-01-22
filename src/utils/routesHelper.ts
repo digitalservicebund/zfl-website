@@ -1,3 +1,5 @@
+/// <reference types="vite/client" />
+
 export interface SitemapFrontmatter {
   url: string;
   title?: string;
