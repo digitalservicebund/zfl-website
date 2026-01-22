@@ -15,7 +15,7 @@ export const getAllRoutes = (): SitemapFrontmatter[] => {
     {
       eager: true,
     },
-  );
+  ) as Record<string, RouteModule>;
 
   const excludeList = [/.*sitemap.astro/, /_.*/, /.*404/];
 
