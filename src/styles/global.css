@@ -84,6 +84,7 @@
     /* 80ch @ 18px font size = 720px */
     max-width: 720px;
     @apply mb-8;
+    word-break: auto-phrase;
   }
 
   h3,
