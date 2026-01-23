@@ -9,6 +9,10 @@ fileignoreconfig:
       - "github_app_private_key:"
   - filename: src/env.d.ts
     checksum: 5038b8fab76b0de569a939642941f93de3d9b54a8a274b860b5163afd0b3a58f
+  - filename: .github/workflows/check-and-unit-test.yml
+    checksum: 21a01de2c6fa61ddc958ac374c388ec282caf9e985e218703ac3d8ceb88e2666
+  - filename: .github/workflows/playwright.yml
+    checksum: 5db1ebbd1b7a6ab88dc613af2d1656ff558519953ecb085c163a605ccac7415d
   - filename: src/layouts/Posthog.astro
     checksum: 050b9e802c7a1261b1fba612696ab5d3ae716f8e122edd316c91ab89233ec82d
   - filename: src/config/posthog.ts

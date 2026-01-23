@@ -2,6 +2,9 @@ name: Check and Unit Test
 
 on:
   workflow_call:
+    secrets:
+      SLACK_WEBHOOK_URL:
+        required: true
 
 env:
   PACKAGE_NAME: zfl-website
@@ -18,10 +21,23 @@ jobs:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
-          node-version: lts/*
+          node-version-file: .node-version
+          cache: pnpm
+          cache-dependency-path: "**/pnpm-lock.yaml"
+
+      - name: Cache pnpm dependencies
+        id: cache-pnpm-deps
+        uses: actions/cache@v5
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: npm install -g pnpm && pnpm install
+        if: steps.cache-npm-deps.outputs.cache-hit != 'true'
+        run: pnpm install
 
       - name: Audit used licences
         run: pnpm run audit:licences
@@ -37,3 +53,9 @@ jobs:
 
       - name: Run unit tests
         run: pnpm test
+
+      - name: Send failure to Slack
+        uses: digitalservicebund/notify-on-failure-gha@814d0c4b2ad6a3443e89c991f8657b10126510bf # v1.5.0
+        if: ${{ failure() }}
+        with:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

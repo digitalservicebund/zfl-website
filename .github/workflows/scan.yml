@@ -2,6 +2,9 @@ name: Scan
 
 on:
   workflow_call:
+    secrets:
+      SLACK_WEBHOOK_URL:
+        required: true
   workflow_dispatch:
   schedule:
     - cron: "0 6 * * *" # Every day at 8am
@@ -50,3 +53,9 @@ jobs:
         if: always() # Bypass non-zero exit code
         with:
           sarif_file: "trivy-results.sarif"
+
+      - name: Send status to Slack
+        uses: digitalservicebund/notify-on-failure-gha@814d0c4b2ad6a3443e89c991f8657b10126510bf # v1.5.0
+        if: ${{ failure() }}
+        with:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

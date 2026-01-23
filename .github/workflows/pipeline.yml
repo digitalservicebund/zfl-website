@@ -26,12 +26,18 @@ jobs:
       packages: read
       security-events: write
     uses: ./.github/workflows/scan.yml
+    secrets:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   check-and-unit-test:
     uses: ./.github/workflows/check-and-unit-test.yml
+    secrets:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   run-e2e-a11y-tests:
     uses: ./.github/workflows/playwright.yml
+    secrets:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   build-and-push-image:
     runs-on: ubuntu-latest
