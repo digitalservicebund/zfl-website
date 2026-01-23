@@ -34,7 +34,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        # if: steps.cache-pnpm-deps.outputs.cache-hit != 'true'
+        if: steps.cache-pnpm-deps.outputs.cache-hit != 'true'
         run: pnpm install
 
       - name: Get installed Playwright version

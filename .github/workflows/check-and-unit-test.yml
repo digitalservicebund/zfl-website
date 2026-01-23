@@ -25,18 +25,18 @@ jobs:
         with:
           cache: true
 
-      # - name: Cache pnpm dependencies
-      #   id: cache-pnpm-deps
-      #   uses: actions/cache@v5
-      #   with:
-      #     path: |
-      #       **/node_modules
-      #     key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-node-
+      - name: Cache pnpm dependencies
+        id: cache-pnpm-deps
+        uses: actions/cache@v5
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Install dependencies
-        # if: steps.cache-npm-deps.outputs.cache-hit != 'true'
+        if: steps.cache-npm-deps.outputs.cache-hit != 'true'
         run: pnpm install
 
       - name: Audit used licences
