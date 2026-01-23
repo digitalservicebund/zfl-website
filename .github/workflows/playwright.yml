@@ -58,7 +58,7 @@ jobs:
           key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
 
       - name: Install Playwright Browsers
-        # if: steps.playwright-cache-deps.outputs.cache-hit != 'true'
+        if: steps.playwright-cache-deps.outputs.cache-hit != 'true'
         run: pnpm exec playwright install --with-deps
 
       - name: Build App
