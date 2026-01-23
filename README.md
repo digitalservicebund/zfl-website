@@ -1,6 +1,6 @@
 # Zentrum für Legistik — Website
 
-This is an exemplary implementation for Zentrum für Legistik, based on Astro and KERN UX.
+This is the new implementation for Zentrum für Legistik, based on Astro and Tailwind.
 
 ## Development Setup
 
