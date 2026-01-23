@@ -20,28 +20,23 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
         with:
           cache: true
-      # - uses: actions/setup-node@v6
-      #   with:
-      #     node-version-file: .node-version
-      #     cache: pnpm
-      #     cache-dependency-path: "**/pnpm-lock.yaml"
 
-      - name: Cache pnpm dependencies
-        id: cache-pnpm-deps
-        uses: actions/cache@v5
-        with:
-          path: |
-            **/node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+      # - name: Cache pnpm dependencies
+      #   id: cache-pnpm-deps
+      #   uses: actions/cache@v5
+      #   with:
+      #     path: |
+      #       **/node_modules
+      #     key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-node-
 
       - name: Install dependencies
-        if: steps.cache-npm-deps.outputs.cache-hit != 'true'
+        # if: steps.cache-npm-deps.outputs.cache-hit != 'true'
         run: pnpm install
 
       - name: Audit used licences

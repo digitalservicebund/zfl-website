@@ -18,16 +18,10 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
         with:
           cache: true
-
-      # - uses: actions/setup-node@v6
-      #   with:
-      #     node-version-file: .node-version
-      #     cache: pnpm
-      #     cache-dependency-path: "**/pnpm-lock.yaml"
 
       - name: Cache pnpm dependencies
         id: cache-pnpm-deps
@@ -40,19 +34,31 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        if: steps.cache-npm-deps.outputs.cache-hit != 'true'
+        # if: steps.cache-pnpm-deps.outputs.cache-hit != 'true'
         run: pnpm install
+
+      - name: Get installed Playwright version
+        id: playwright-version
+        run: |
+          echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('@playwright/test/package.json').version)")" >> $GITHUB_ENV
+
+      - name: Cache playwright binaries
+        uses: actions/cache@v3
+        id: playwright-cache
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
 
       - name: Cache Playwright browsers
         id: playwright-cache-deps
         uses: actions/cache@v5
         with:
           path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: ${{ runner.os }}-playwright-
+          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
 
       - name: Install Playwright Browsers
-        if: steps.playwright-cache-deps.outputs.cache-hit != 'true'
+        # if: steps.playwright-cache-deps.outputs.cache-hit != 'true'
         run: pnpm exec playwright install --with-deps
 
       - name: Build App
