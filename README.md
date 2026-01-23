@@ -75,10 +75,32 @@ All commands are run from the root of the project, from a terminal:
 | `pnpm typecheck`       | Runs TypeScript to check for type errors          |
 | `pnpm format:check`    | Checks if files are formatted correctly           |
 | `pnpm format:fix`      | Automatically formats files using Prettier        |
+| `pnpm test`            | Runs unit tests with Vitest                       |
+| `pnpm test:e2e`        | Runs end-to-end tests with Playwright             |
 | `pnpm audit:licences`  | Audits dependency licenses                        |
 | `pnpm astro ...`       | Runs CLI commands like `astro add`, `astro check` |
 | `pnpm astro -- --help` | Gets help using the Astro CLI                     |
 
 ## Testing
 
-Not yet implemented.
+The project includes comprehensive testing with both unit and end-to-end tests:
+
+### Unit Testing
+
+- Uses **Vitest** for unit tests
+- Located in `src/**/*.test.ts` files
+- Run all unit tests: `pnpm test`
+- Run specific unit test: `pnpm test <filename>` (e.g., `pnpm test src/layouts/PageHeader.test.ts`)
+
+### End-to-End Testing
+
+- Uses **Playwright** for e2e tests
+- Located in `e2e/` directory
+- Run all e2e tests: `pnpm test:e2e` (requires build first)
+- Run specific e2e test: `pnpm test:e2e e2e/pageHeader.spec.ts`
+- Run tests with grep: `pnpm test:e2e -- --grep "<test name>"`
+
+### Accessibility Testing
+
+- Integrated with Playwright using `@axe-core/playwright`
+- Accessibility checks included in e2e test suite

@@ -18,8 +18,7 @@
     "test": "vitest",
     "test:e2e": "pnpm run build && playwright test --project=chromium",
     "typecheck": "tsc --noEmit",
-    "preinstall": "echo 'Please disable script execution for security reasons: npm config set ignore-scripts true' && exit 1",
-    "test:browser": "vitest"
+    "preinstall": "echo 'Please disable script execution for security reasons: npm config set ignore-scripts true' && exit 1"
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.4.9",
