@@ -3,7 +3,7 @@ import type { HTMLAttributes } from "astro/types";
 import { tv, type VariantProps } from "tailwind-variants";
 
 interface Props extends HTMLAttributes<"div">, VariantProps<typeof styles> {
-  class?: string;
+  contentClass?: string;
   wrapperClass?: string;
 }
 
@@ -20,10 +20,16 @@ const contentStyles = tv({
   base: "flex flex-col gap-16",
 });
 
-const { class: className, wrapperClass, look, ...attrs } = Astro.props;
+const { contentClass, wrapperClass, look, ...attrs } = Astro.props;
 ---
 
-<div class={styles({ look, className: wrapperClass })} {...attrs}>
-  <div class="shrink-0"><slot name="icon" /></div>
-  <div class={contentStyles({ className })}><slot /></div>
+<div class={styles({ look, class: wrapperClass })} {...attrs}>
+  {
+    Astro.slots.icon && (
+      <div class="shrink-0">
+        <slot name="icon" />
+      </div>
+    )
+  }
+  <div class={contentStyles({ class: contentClass })}><slot /></div>
 </div>
