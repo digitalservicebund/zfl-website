@@ -22,6 +22,9 @@ fileignoreconfig:
     checksum: c3d36ddcb67967108eba19a445602c9c74e1788dfcf20502d1da665a8be7f4ed
   - filename: src/env.d.ts
     checksum: 5038b8fab76b0de569a939642941f93de3d9b54a8a274b860b5163afd0b3a58f
+  - filename: sonar-project.properties
+    allowed_patterns:
+      - projectKey
   - filename: nginx/nginx.template.conf
     allowed_patterns:
       - proxy_pass

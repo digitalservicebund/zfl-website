@@ -1,0 +1,31 @@
+name: SonarQube Scan
+
+on:
+  workflow_call:
+    secrets:
+      SLACK_WEBHOOK_URL:
+        required: true
+
+env:
+  PACKAGE_NAME: zfl-website
+  ENVIRONMENT: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
+  PUBLIC_STAGE: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
+
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          # Disabling shallow clones is recommended for improving the relevancy of reporting
+          fetch-depth: 0
+
+      - name: Official SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v7.0.0
+
+      - name: Send failure to Slack
+        uses: digitalservicebund/notify-on-failure-gha@814d0c4b2ad6a3443e89c991f8657b10126510bf # v1.5.0
+        if: ${{ failure() }}
+        with:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
