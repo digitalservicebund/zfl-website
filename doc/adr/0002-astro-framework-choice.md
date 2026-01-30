@@ -24,10 +24,8 @@ We will adopt Astro as the primary framework for this project, using its static 
 Key aspects of the implementation:
 
 - Use Astro's static generation for optimal performance and SEO
-- Implement interactive components using Alpine.js where client-side functionality is required
 - Structure the application with Astro components for maintainable, reusable UI elements
 - Utilize TypeScript for type safety and improved developer experience
-- Utilize Astro's ecosystem for integrations (sitemap, SEO, etc.)
 
 ## Consequences
 
@@ -67,18 +65,6 @@ Key aspects of the implementation:
 
 - **Pros**: Vue ecosystem, good static generation
 - **Cons**: Vue learning curve, smaller TypeScript integration compared to Astro
-
-## Implementation example
-
-```astro
-<!-- Interactive components using Alpine.js -->
-<div x-data="{ open: false }">
-  <button @click="open = !open">Toggle</button>
-  <div x-show="open" class="content">
-    <slot />
-  </div>
-</div>
-```
 
 ## Future Considerations
 
