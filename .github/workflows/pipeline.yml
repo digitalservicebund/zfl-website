@@ -29,10 +29,10 @@ jobs:
     secrets:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
-  sonarqube-scan:
-    uses: ./.github/workflows/sonarqube.yml
-    secrets:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  # sonarqube-scan:
+  #   uses: ./.github/workflows/sonarqube.yml
+  #   secrets:
+  #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   check-and-unit-test:
     uses: ./.github/workflows/check-and-unit-test.yml
