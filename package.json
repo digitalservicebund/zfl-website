@@ -44,7 +44,7 @@
     "@eslint/markdown": "^7.5.1",
     "@playwright/test": "^1.58.0",
     "@types/node": "^25.0.10",
-    "@typescript-eslint/parser": "^8.53.1",
+    "@typescript-eslint/parser": "^8.54.0",
     "@vitest/browser-playwright": "^4.0.17",
     "astro-eslint-parser": "^1.2.2",
     "eslint": "^9.39.2",
