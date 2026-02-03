@@ -29,6 +29,8 @@ fileignoreconfig:
     allowed_patterns:
       - proxy_pass
       - sha256-[^\s]+
+  - filename: doc/adr/0004-configuration-management.md
+    checksum: e060a42f58db5df24d9562742e7be5ec6706d544764fceb6c36a3a11ec185fc3
 allowed_patterns:
   - \@[a-z0-9]{40} # Allow fixing action hashes
   - "secrets: inherit"

@@ -61,3 +61,5 @@ const { class: className, look, ...attrs } = Astro.props;
 ```
 
 In this example, the `Badge` component has a `look` variant that can be `hint`, `gray`, or `white`. The `tv` function is used to define the base classes and the variants. The `styles` function is then used to apply the correct classes to the `mark` element.
+
+More documentation can be found on the [tailwind-variants website](https://www.tailwind-variants.org/).
