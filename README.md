@@ -96,6 +96,7 @@ The project includes comprehensive testing with both unit and end-to-end tests:
 
 - Uses **Playwright** for e2e tests
 - Located in `e2e/` directory
+- Install browser binaries once: `pnpm exec playwright install`
 - Run all e2e tests: `pnpm test:e2e` (requires build first)
 - Run specific e2e test: `pnpm test:e2e e2e/pageHeader.spec.ts`
 - Run tests with grep: `pnpm test:e2e -- --grep "<test name>"`
