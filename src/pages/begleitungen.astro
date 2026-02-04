@@ -2,12 +2,11 @@
 import Card from "@components/Card.astro";
 import ExternalLink from "@components/ExternalLink.astro";
 import Heading from "@components/text/Heading.astro";
+import begleitungenImage from "@images/Begleitungen.png";
+import trainingsImage from "@images/Trainings.jpg";
 import Layout from "@layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
-import begleitungenImage from "@images/Begleitungen.png";
-import { Image } from "astro:assets";
-import trainingsImage from "@images/Trainings.jpg";
-import { getImage } from "astro:assets";
+import { getImage, Image } from "astro:assets";
 
 const trainingsImageAsset = await getImage({ src: trainingsImage });
 const trainingsImageAssetURL = `url("${trainingsImageAsset.src}")`;
