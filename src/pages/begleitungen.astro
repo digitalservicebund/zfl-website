@@ -10,6 +10,7 @@ import trainingsImage from "@images/Trainings.jpg";
 import { getImage } from "astro:assets";
 
 const trainingsImageAsset = await getImage({ src: trainingsImage });
+const trainingsImageAssetURL = `url("${trainingsImageAsset.src}")`;
 
 export const frontmatter = {
   title: "Begleitungen",
@@ -122,9 +123,7 @@ export const frontmatter = {
       </div>
     </div>
 
-    <div
-      class=`breakout mt-40 trainings-background py-80 bg-cover bg-center bg-[url("${trainingsImageAsset.src}")]`
-    >
+    <div class=`breakout mt-40 trainings-background py-80 bg-cover bg-center`>
       <Card>
         <Heading level={2}
           >Praxisbeispiel: Einsatz eines interdisziplinären Kompetenzteams für
@@ -144,3 +143,9 @@ export const frontmatter = {
     </div>
   </main>
 </Layout>
+
+<style define:vars={{ trainingsImageAssetURL }}>
+  .trainings-background {
+    background-image: var(--trainingsImageAssetURL);
+  }
+</style>
