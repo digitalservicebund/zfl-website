@@ -24,7 +24,7 @@ pre-push:
       stage_fixed: true
     check-format:
       tags: style
-      run: pnpm run format:fix-selected
+      run: pnpm format:fix-selected {staged_files}
       glob: "*.{js,cjs,mjs,ts,jsx,tsx,json,css,md,yml,yaml,html,astro}"
       stage_fixed: true
     typecheck:
