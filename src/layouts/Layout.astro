@@ -7,7 +7,7 @@ interface Props {
 const { title: pageTitle } = Astro.props;
 const siteName = "Zentrum für Legistik";
 const title = pageTitle ? `${pageTitle} — ${siteName}` : siteName;
-const SEOImage = `${Astro.url}SEO_ZfL.png`;
+const SEOImage = `${Astro.url.origin}/SEO_ZfL.png`;
 
 import "../styles/global.css";
 import PageHeader from "@layouts/PageHeader.astro";
