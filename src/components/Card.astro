@@ -26,7 +26,7 @@ const { contentClass, wrapperClass, look, ...attrs } = Astro.props;
 <div class={styles({ look, class: wrapperClass })} {...attrs}>
   {
     Astro.slots.icon && (
-      <div class="shrink-0">
+      <div class="shrink-0 max-sm:hidden">
         <slot name="icon" />
       </div>
     )
