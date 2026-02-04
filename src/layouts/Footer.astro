@@ -1,5 +1,7 @@
 ---
 import ExternalLink from "@components/ExternalLink.astro";
+import bmdsLogo from "@images/logo/bmds-logo.png";
+import { Image } from "astro:assets";
 ---
 
 <footer
@@ -83,11 +85,12 @@ import ExternalLink from "@components/ExternalLink.astro";
       <div
         class="space-y-16 sm:flex sm:flex-row sm:items-center sm:gap-48 sm:space-y-0"
       >
-        <img
-          src="/logo/bmds-logo.png"
+        <Image
+          src={bmdsLogo}
           alt="Logo des Bundesministerium für Digitales und Staatsmodernisierung"
-          width="120"
-        /><div class="max-w-2xl space-y-8">
+          class="w-128"
+        />
+        <div class="max-w-2xl space-y-8">
           <h3 class="ds-label-03-bold">Federführung</h3><div
             class="ds-stack ds-stack-8"
           >

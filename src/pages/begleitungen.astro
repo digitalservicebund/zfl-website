@@ -4,6 +4,12 @@ import ExternalLink from "@components/ExternalLink.astro";
 import Heading from "@components/text/Heading.astro";
 import Layout from "@layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
+import begleitungenImage from "@images/Begleitungen.png";
+import { Image } from "astro:assets";
+import trainingsImage from "@images/Trainings.jpg";
+import { getImage } from "astro:assets";
+
+const trainingsImageAsset = await getImage({ src: trainingsImage });
 
 export const frontmatter = {
   title: "Begleitungen",
@@ -16,10 +22,10 @@ export const frontmatter = {
     <Heading class="mt-40 md:mt-80" level={1}>Begleitung für Vorhaben</Heading>
 
     <div class="mt-40 gap-32 space-y-40 md:flex md:flex-row">
-      <img
-        class="size-192 shrink-0 object-cover md:size-288"
-        src="/Begleitungen.png"
-        alt=""
+      <Image
+        class="size-192 md:size-288"
+        src={begleitungenImage}
+        alt="Symbolbild für Begleitungen"
       />
 
       <div>
@@ -117,7 +123,7 @@ export const frontmatter = {
     </div>
 
     <div
-      class="breakout mt-40 bg-[url('/Trainings.jpg')] bg-cover bg-center py-80"
+      class=`breakout mt-40 trainings-background py-80 bg-cover bg-center bg-[url("${trainingsImageAsset.src}")]`
     >
       <Card>
         <Heading level={2}

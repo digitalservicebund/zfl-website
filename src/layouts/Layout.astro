@@ -7,7 +7,7 @@ interface Props {
 const { title: pageTitle } = Astro.props;
 const siteName = "Zentrum für Legistik";
 const title = pageTitle ? `${pageTitle} — ${siteName}` : siteName;
-const image = `${Astro.url}SEO_ZfL.png`;
+const SEOImage = `${Astro.url}SEO_ZfL.png`;
 
 import "../styles/global.css";
 import PageHeader from "@layouts/PageHeader.astro";
@@ -29,7 +29,7 @@ import { isProduction } from "@config/stage";
       basic: {
         title,
         type: "website",
-        image,
+        image: SEOImage,
       },
     }}
     extend={{
@@ -41,7 +41,7 @@ import { isProduction } from "@config/stage";
         { name: "twitter:title", content: title },
         {
           name: "twitter:image",
-          content: image,
+          content: SEOImage,
         },
       ],
     }}
