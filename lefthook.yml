@@ -5,20 +5,6 @@ commit-msg:
 pre-commit:
   parallel: true
   commands:
-    lint:
-      tags: style
-      run: pnpm lint:fix-selected {staged_files}
-      glob: "*.{js,cjs,mjs,ts,jsx,tsx,json,css,md,yml,yaml,html,astro}"
-      stage_fixed: true
-    typecheck:
-      tags: style
-      run: pnpm typecheck
-      glob: "*.{ts,tsx}"
-    check-format:
-      tags: style
-      run: pnpm run format:fix-selected {staged_files}
-      glob: "*.{js,cjs,mjs,ts,jsx,tsx,json,css,md,yml,yaml,html,astro}"
-      stage_fixed: true
     talisman:
       tags: security audit
       run: talisman --githook pre-commit
@@ -31,6 +17,20 @@ pre-commit:
 pre-push:
   parallel: true
   commands:
+    lint:
+      tags: style
+      run: pnpm lint:fix-selected {staged_files}
+      glob: "*.{js,cjs,mjs,ts,jsx,tsx,json,css,md,yml,yaml,html,astro}"
+      stage_fixed: true
+    check-format:
+      tags: style
+      run: pnpm run format:fix-selected {staged_files}
+      glob: "*.{js,cjs,mjs,ts,jsx,tsx,json,css,md,yml,yaml,html,astro}"
+      stage_fixed: true
+    typecheck:
+      tags: style
+      run: pnpm typecheck
+      glob: "*.{ts,tsx,astro}"
     licenses-audit:
       tags: licenses audit
-      run: npm run audit:licences
+      run: pnpm audit:licences
