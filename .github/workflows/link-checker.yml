@@ -1,0 +1,16 @@
+name: Link Checker
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 10 * * 1" # every Monday at 10 am
+
+jobs:
+  link-checker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Link Checker
+        uses: digitalservicebund/link-checker-gha@db5211f02ea1d09d29cb0c5714f67e7877bc4c29
+        with:
+          SITEMAP_URL: "https://zfl.bund.de/sitemap-0.xml"
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
