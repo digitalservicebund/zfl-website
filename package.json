@@ -18,6 +18,11 @@
     "test": "vitest",
     "test:e2e": "pnpm run build && playwright test --project=chromium",
     "typecheck": "tsc --noEmit",
+    "docker:build": "docker build -t zfl-website .",
+    "docker:run": "docker run -d -p 8080:8080 --name zfl-website zfl-website:latest",
+    "docker:stop": "docker stop zfl-website || true && docker rm zfl-website",
+    "docker:dev": "pnpm run docker:build && npm run docker:run",
+    "docker:logs": "docker logs -f zfl-website",
     "preinstall": "echo 'Please disable script execution for security reasons: npm config set ignore-scripts true' && exit 1"
   },
   "dependencies": {
