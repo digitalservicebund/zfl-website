@@ -16,21 +16,21 @@ import { apiHost, posthogKey, uiHost } from "@config/posthog";
         function g(t, e) {
           const o = e.split(".");
           // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-          2 == o.length && ((t = t[o[0]]), (e = o[1])),
+          (2 == o.length && ((t = t[o[0]]), (e = o[1])),
             (t[e] = function () {
               // eslint-disable-next-line prefer-rest-params
               t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
-            });
+            }));
         }
         // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-        ((p = t.createElement("script")).type = "text/javascript"),
+        (((p = t.createElement("script")).type = "text/javascript"),
           (p.crossOrigin = "anonymous"),
           (p.async = !0),
           (p.src = s.api_host + "/static/array.js"),
           (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(
             p,
             r,
-          );
+          ));
         let u = e;
         for (
           void 0 !== a ? (u = e[a] = []) : (a = "posthog"),
@@ -59,7 +59,7 @@ import { apiHost, posthogKey, uiHost } from "@config/posthog";
       }),
       (e.__SV = 1));
   })(document, window.posthog || []);
-  
+
   posthog.init(posthogKey, {
     api_host: apiHost,
     ui_host: uiHost,

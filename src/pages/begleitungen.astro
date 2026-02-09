@@ -1,6 +1,6 @@
 ---
 import Card from "@components/Card.astro";
-import ExternalLink from "@components/ExternalLink.astro";
+import Link from "@components/Link.astro";
 import Heading from "@components/text/Heading.astro";
 import begleitungenImage from "@images/Begleitungen.png";
 import trainingsImage from "@images/Trainings.jpg";
@@ -50,11 +50,11 @@ export const frontmatter = {
         </p>
         <p>
           Telefon:
-          <a href="tel:015140767839">0151/40 76 78 39</a>
+          <Link href="tel:015140767839">0151/40 76 78 39</Link>
         </p>
         <p>
           E-Mail:
-          <a href="mailto:support@zfl.bund.de">support@zfl.bund.de</a>
+          <Link href="mailto:support@zfl.bund.de">support@zfl.bund.de</Link>
         </p>
       </div>
     </div>
@@ -133,11 +133,11 @@ export const frontmatter = {
           Zusammenspiel zwischen den Regelungen und der Administration besser zu
           verstehen und so den digitalen Vollzug zu gestalten.“
         </p>
-        <ExternalLink
+        <Link
           href="https://digitalcheck.bund.de/beispiele/regelungen/gesetz-zur-modernisierung-und-zum-buerokratieabbau-im-strom-und-energiesteuerrecht"
         >
           Mehr erfahren
-        </ExternalLink>
+        </Link>
       </Card>
     </div>
   </main>

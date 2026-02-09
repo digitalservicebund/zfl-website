@@ -7,6 +7,7 @@ import Card from "@components/Card.astro";
 import Banner from "@components/Banner.astro";
 import { Icon } from "astro-icon/components";
 import SupportCard from "@components/SupportCard.astro";
+import Link from "@components/Link.astro";
 
 export const frontmatter = {
   title: "Zentrum für Legistik",
@@ -30,7 +31,7 @@ export const frontmatter = {
         Das Angebot befindet sich aktuell im Aufbau und wird schrittweise mit
         Ihnen zusammen weiterentwickelt.
       </p>
-      <a class="text-link" href="/daran-arbeiten-wir">Mehr dazu</a>
+      <Link href="/daran-arbeiten-wir">Mehr dazu</Link>
     </Banner>
     <div class="markdown py-80">
       <Vorteile />
@@ -50,8 +51,8 @@ export const frontmatter = {
             erhalten dadurch ein umfassendes Verständnis von Umsetzungsprozessen
             und gestalten Ihr Vorhaben praxisnah und bürokratiearm.
           </p>
-          <a href="/begleitungen"
-            >Mehr Informationen zu interdisziplinären Kompetenzteams</a
+          <Link href="/begleitungen"
+            >Mehr Informationen zu interdisziplinären Kompetenzteams</Link
           >
         </Card>
         <Card>
@@ -65,7 +66,7 @@ export const frontmatter = {
             Neue Methoden und Werkzeuge für die Rechtsetzung in
             umsetzungsorientierten Schulungen kennenlernen.
           </p>
-          <a href="/schulungen">Mehr Informationen zu Schulungen</a>
+          <Link href="/schulungen">Mehr Informationen zu Schulungen</Link>
         </Card>
       </div>
     </section>

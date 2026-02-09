@@ -1,0 +1,25 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  href: string;
+  class?: string;
+}
+
+const { href, class: className = "" } = Astro.props;
+const isExternal = href.startsWith("http");
+---
+
+<a
+  href={href}
+  class={`kern-link text-link ${className}`}
+  {...isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {}}
+  ><slot />{
+    isExternal && (
+      <Icon
+        name="material-symbols:open-in-new-rounded"
+        class="mb-1 ml-2 inline no-underline"
+      />
+    )
+  }</a
+>
