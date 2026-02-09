@@ -23,7 +23,7 @@ pnpm install
 
 #### Git Hooks
 
-For the provided Git hooks, you will need to install [lefthook](https://github.com/evilmartians/lefthook/blob/master/docs/full_guide.md), [talisman](https://github.com/talisman-code/talisman), and [gitleaks](https://github.com/gitleaks/gitleaks):
+For the provided Git hooks, you will need to install [lefthook](https://github.com/evilmartians/lefthook/), [talisman](https://github.com/thoughtworks/talisman), and [gitleaks](https://github.com/gitleaks/gitleaks):
 
 ```bash
 brew install lefthook talisman gitleaks
