@@ -1,6 +1,7 @@
 ---
 import Card from "@components/Card.astro";
 import Link from "@components/Link.astro";
+import { ZFL_EMAIL, ZFL_PHONE } from "@config/constants";
 import Layout from "@layouts/Layout.astro";
 
 export const frontmatter = {
@@ -28,9 +29,9 @@ export const frontmatter = {
     </p>
     <p>
       Kontaktieren Sie uns zu diesem Zweck unter
-      <Link href="tel:+4915140767839">0151 / 4076 7839</Link>
+      <Link href={ZFL_PHONE.url}>{ZFL_PHONE.display}</Link>
       oder
-      <Link href="mailto:support@zfl.bund.de">support@zfl.bund.de</Link>.
+      <Link href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</Link>.
     </p>
     <p>
       Gut zu wissen: Das Zentrum für Legistik ist ein Bestandteil des
@@ -57,7 +58,7 @@ export const frontmatter = {
           wir diese frühe Phase in der Rechtsetzung, für Legistinnen und
           Legisten, besser strukturieren und unterstützen?<br />
           <Link
-            href="mailto:support@zfl.bund.de?subject=Interesse%20am%20Thema%20%22Strukturierung%20der%20Fr%C3%BChphase%20f%C3%BCr%20Regelungsvorhaben%22"
+            href={`${ZFL_EMAIL.url}?subject=Interesse%20am%20Thema%20%22Strukturierung%20der%20Fr%C3%BChphase%20f%C3%BCr%20Regelungsvorhaben%22`}
             >Mitarbeiten an diesem Thema</Link
           >
           (öffnet E-Mail)
@@ -77,7 +78,7 @@ export const frontmatter = {
           Ansätze verfolgen wir das Ziel, Ihre Regelungsarbeit einfacher und
           effizienter zu gestalten.<br />
           <Link
-            href="mailto:support@zfl.bund.de?subject=Interesse%20am%20Thema%20%22Konsolidierung%20der%20Instrumente%22"
+            href={`${ZFL_EMAIL.url}?subject=Interesse%20am%20Thema%20%22Konsolidierung%20der%20Instrumente%22`}
             >Mitarbeiten an diesem Thema</Link
           > (öffnet E-Mail)
         </p>
@@ -88,7 +89,7 @@ export const frontmatter = {
           lernen Sie Methoden und Werkzeuge kennen, die Sie bei der Erarbeitung
           von praxisnahen und bürokratiearmen Regelungen unterstützen.<br />
           <Link
-            href="mailto:support@zfl.bund.de?subject=Interesse%20am%20Thema%20%22Erweiterung%20der%20Schulungs-Angebote%22"
+            href={`${ZFL_EMAIL.url}?subject=Interesse%20am%20Thema%20%22Erweiterung%20der%20Schulungs-Angebote%22`}
             >Mitarbeiten an diesem Thema</Link
           > (öffnet E-Mail)
         </p>
@@ -99,7 +100,7 @@ export const frontmatter = {
           Anforderungen an praxisnahe und bürokratiearme Regelungen umzusetzen.
           Wir erweitern das Angebot in Inhalt und Umfang.<br />
           <Link
-            href="mailto:support@zfl.bund.de?subject=Interesse%20am%20Thema%20%22Ausbau%20der%20Regelungsbegleitung%22"
+            href={`${ZFL_EMAIL.url}?subject=Interesse%20am%20Thema%20%22Ausbau%20der%20Regelungsbegleitung%22`}
             >Mitarbeiten an diesem Thema</Link
           > (öffnet E-Mail)
         </p>

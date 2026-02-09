@@ -1,5 +1,6 @@
 ---
 import Link from "@components/Link.astro";
+import { ZFL_EMAIL, ZFL_PHONE } from "@config/constants";
 import bmdsLogo from "@images/logo/bmds-logo.png";
 import { Image } from "astro:assets";
 
@@ -7,11 +8,11 @@ type FooterItem = { url: string; label: string; prefix?: string };
 
 const footerColumns: Record<string, FooterItem[]> = {
   Unterstützungsangebote: [
-    { prefix: "Support: ", url: "tel:015140767839", label: "0151/40 76 78 39" },
+    { prefix: "Support: ", url: ZFL_PHONE.url, label: ZFL_PHONE.display },
     {
       prefix: "Per Mail: ",
-      url: "mailto:support@zfl.bund.de",
-      label: "support@zfl.bund.de",
+      url: ZFL_EMAIL.url,
+      label: ZFL_EMAIL.display,
     },
     { url: "/begleitungen", label: "Begleitungen" },
     { url: "/schulungen", label: "Schulungen" },

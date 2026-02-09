@@ -2,6 +2,7 @@
 import Card from "@components/Card.astro";
 import Link from "@components/Link.astro";
 import Heading from "@components/text/Heading.astro";
+import { ZFL_EMAIL, ZFL_PHONE } from "@config/constants";
 import begleitungenImage from "@images/Begleitungen.png";
 import trainingsImage from "@images/Trainings.jpg";
 import Layout from "@layouts/Layout.astro";
@@ -50,11 +51,11 @@ export const frontmatter = {
         </p>
         <p>
           Telefon:
-          <Link href="tel:015140767839">0151/40 76 78 39</Link>
+          <Link href={ZFL_PHONE.url}>{ZFL_PHONE.display}</Link>
         </p>
         <p>
           E-Mail:
-          <Link href="mailto:support@zfl.bund.de">support@zfl.bund.de</Link>
+          <Link href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</Link>
         </p>
       </div>
     </div>

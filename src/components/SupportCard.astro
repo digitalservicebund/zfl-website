@@ -3,6 +3,7 @@ import { Icon } from "astro-icon/components";
 import Card, { styles } from "./Card.astro";
 import Link from "@components/Link.astro";
 import type { VariantProps } from "tailwind-variants";
+import { ZFL_EMAIL, ZFL_PHONE } from "@config/constants";
 
 type Props = VariantProps<typeof styles>;
 
@@ -21,12 +22,10 @@ const { look } = Astro.props;
       Wir unterstützen Sie gerne persönlich in allen Phasen der Regelungsarbeit.
     </p>
     <p>
-      Telefon: <Link href="tel:015140767839">0151/40 76 78 39</Link>
+      Telefon: <Link href={ZFL_PHONE.url}>{ZFL_PHONE.display}</Link>
     </p>
     <p>
-      E-Mail: <Link class="text-link" href="mailto:support@zfl.bund.de"
-        >support@zfl.bund.de</Link
-      >
+      E-Mail: <Link href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</Link>
     </p>
   </div>
 </Card>
