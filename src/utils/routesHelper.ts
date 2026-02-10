@@ -1,6 +1,6 @@
 /// <reference types="astro/client" />
 
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 
 export interface SitemapFrontmatter {
   url: string;
@@ -21,11 +21,12 @@ export const getAllRoutes = async (): Promise<SitemapFrontmatter[]> => {
     },
   ) as Record<string, RouteModule>;
 
-  const excludeList = [/.*sitemap.astro/, /_.*/, /.*404/, /\[slug\]/];
+  const excludeList = [/sitemap\.astro/, /\/_/, /404/, /\[slug\]/];
 
   const staticRoutes = Object.entries(modules)
     .filter(([path]) => !excludeList.some((regex) => regex.test(path)))
     .map(([path, mod]) => {
+      console.log("Processing route:", path);
       const url =
         path
           .replace("../pages", "")
@@ -43,7 +44,7 @@ export const getAllRoutes = async (): Promise<SitemapFrontmatter[]> => {
 
   // dynamic routes from content collections
   const pages = await getCollection("pages");
-  const dynamicRoutes = pages.map((page) => ({
+  const dynamicRoutes = pages.map((page: CollectionEntry<"pages">) => ({
     url: `/${page.slug}`,
     title: page.data.title ?? "",
     order: page.data.order ?? 999,
