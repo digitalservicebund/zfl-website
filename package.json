@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.4.9",
+    "@astrojs/mdx": "^4.3.13",
     "@astrojs/sitemap": "^3.7.0",
     "@digitalservice4germany/angie": "^2.4.0",
     "@digitalservice4germany/style-dictionary": "^2.0.0",
@@ -37,7 +38,6 @@
     "astro": "^5.17.1",
     "astro-icon": "^1.1.5",
     "astro-seo": "^1.1.0",
-    "rehype-add-classes": "^1.0.0",
     "sharp": "^0.34.5",
     "tailwind-merge": "^3.4.0",
     "tailwind-variants": "^3.2.2",
