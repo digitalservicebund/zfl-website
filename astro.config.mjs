@@ -30,4 +30,5 @@ export default defineConfig({
   experimental: {
     csp: false,
   },
+  trailingSlash: "never",
 });
