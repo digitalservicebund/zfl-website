@@ -29,7 +29,7 @@
   body {
     margin: 0;
     /* By default, text is 16px * 1.125 = 18px and line height is 150% of that (27px). */
-    @apply text-lg leading-[1.5em];
+    @apply text-lg leading-[1.5em] antialiased;
   }
 
   h1 {
