@@ -27,7 +27,7 @@ const dsData: DsData = [
     elements: [
       {
         badge: {
-          iconName: "local-activity-outline",
+          iconName: "outline-local-activity",
           text: "Regelungschecks",
         },
         count: "850+",
@@ -36,7 +36,7 @@ const dsData: DsData = [
       },
       {
         badge: {
-          iconName: "local-activity-outline",
+          iconName: "outline-local-activity",
           text: "Regelungschecks",
         },
         count: "120+",
@@ -50,7 +50,7 @@ const dsData: DsData = [
     elements: [
       {
         badge: {
-          iconName: "volunteer-activism-outline",
+          iconName: "outline-volunteer-activism",
           text: "Unterstützung",
         },
         count: "400+",
@@ -59,7 +59,7 @@ const dsData: DsData = [
       },
       {
         badge: {
-          iconName: "volunteer-activism-outline",
+          iconName: "outline-volunteer-activism",
           text: "Unterstützung",
         },
         count: "15+",
@@ -68,7 +68,7 @@ const dsData: DsData = [
       },
       {
         badge: {
-          iconName: "volunteer-activism-outline",
+          iconName: "outline-volunteer-activism",
           text: "Unterstützung",
         },
         count: "170+",
@@ -82,7 +82,7 @@ const dsData: DsData = [
     elements: [
       {
         badge: {
-          iconName: "star-outline",
+          iconName: "outline-star-outline",
           text: "Interoperabilität",
         },
         count: "17",
@@ -91,7 +91,7 @@ const dsData: DsData = [
       },
       {
         badge: {
-          iconName: "star-outline",
+          iconName: "outline-star-outline",
           text: "Interoperabilität",
         },
         count: "18",
@@ -105,7 +105,7 @@ const dsData: DsData = [
     elements: [
       {
         badge: {
-          iconName: "share-outline",
+          iconName: "outline-share",
           text: "Vernetzung",
         },
         count: "20+",
@@ -147,10 +147,7 @@ const dsData: DsData = [
             {elements.map((el) => (
               <li class="bg-zfl-main20 min-w-240 space-y-16 px-32 py-40">
                 <Badge look="white">
-                  <Icon
-                    slot="icon"
-                    name={`material-symbols:${el.badge.iconName}`}
-                  />
+                  <Icon slot="icon" name={`ic:${el.badge.iconName}`} />
                   {el.badge.text}
                 </Badge>
                 <p>

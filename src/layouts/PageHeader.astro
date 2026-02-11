@@ -68,10 +68,7 @@ const activeClasses = "border-zfl-main80 bg-zfl-main20";
         class="border-b-4 border-transparent"
         aria-label={ZFL_PHONE.display}
       >
-        <Icon
-          name="material-symbols:phone-enabled-outline"
-          class="size-24 -scale-x-100"
-        />
+        <Icon name="ic:twotone-phone-enabled" class="size-24 -scale-x-100" />
       </a>
       <button
         class="hover:bg-zfl-main20 aria-expanded:border-zfl-main80 aria-expanded:bg-zfl-main20 h-full border-b-4 border-transparent px-16"
@@ -80,14 +77,10 @@ const activeClasses = "border-zfl-main80 bg-zfl-main20";
         :aria-expanded="mobileMenuOpen"
         aria-controls="mobile-menu"
       >
-        <Icon
-          x-show="!mobileMenuOpen"
-          name="material-symbols:menu"
-          class="size-24"
-        />
+        <Icon x-show="!mobileMenuOpen" name="ic:twotone-menu" class="size-24" />
         <Icon
           x-show="mobileMenuOpen"
-          name="material-symbols:menu-open"
+          name="ic:twotone-menu-open"
           class="size-24"
           style="display: none;"
         />

@@ -19,11 +19,11 @@ Here is an example of how to use the `timer-outline` icon from the `material-sym
 import { Icon } from "astro-icon/components";
 ---
 
-<Icon name="material-symbols:timer-outline" />
+<Icon name="ic:outline-timer" />
 ```
 
 ### Finding Icons
 
-You can find all available icons in the [Material Symbols](https://icon-sets.iconify.design/material-symbols/) collection on the Iconify website.
+You can find all available icons in the [Google Material Icons](https://icon-sets.iconify.design/ic/) collection on the Iconify website.
 
-When you find an icon you want to use, just copy the name (e.g., `timer-outline`) and prefix it with `material-symbols:`.
+When you find an icon you want to use, just copy the name (e.g., `outliner-timer`) and prefix it with `ic:`.
