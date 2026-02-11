@@ -2,7 +2,6 @@
 import Card from "@components/Card.astro";
 import SupportCard from "@components/SupportCard.astro";
 import Badge from "@components/text/Badge.astro";
-import Heading from "@components/text/Heading.astro";
 import { ZFL_EMAIL } from "@config/constants";
 import Layout from "@layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
@@ -19,18 +18,16 @@ export const frontmatter = {
 
 <Layout title={frontmatter.title}>
   <main class="breakout-grid">
-    <Heading class="mt-40 mb-80 md:mt-80" level={1}>Schulungen</Heading>
+    <h1>Schulungen</h1>
 
-    <div class="gap-32 space-y-40 md:flex md:flex-row">
+    <div class="mt-40 gap-32 space-y-40 md:flex md:flex-row">
       <Image
         class="size-192 md:size-288"
         src={schulungenImage}
         alt="Symbolbild für Schulungen"
       />
       <div class="space-y-16">
-        <Heading level={2}
-          >In Schulungen praktisches Wissen und Kompetenzen erlangen</Heading
-        >
+        <h2>In Schulungen praktisches Wissen und Kompetenzen erlangen</h2>
         <p>
           In den umsetzungsorientierten Schulungen des Zentrum für Legistik
           lernen Sie Methoden und Werkzeuge kennen, die Sie bei der Erarbeitung
@@ -43,14 +40,14 @@ export const frontmatter = {
       <Badge class="mb-0">
         <Icon name="material-symbols:timer-outline" />Nächste Termine
       </Badge>
-      <Heading level={2} class="ds-heading-03-reg">
-        Zu diesen Schulungen können Sie sich direkt anmelden</Heading
-      >
+      <h2 class="ds-heading-03-reg">
+        Zu diesen Schulungen können Sie sich direkt anmelden
+      </h2>
       <div>
-        <Heading level={3} class="ds-subhead">
+        <h3 class="ds-subhead">
           Regelungen digitaltauglich gestalten – praktische Tipps für den
           Digitalcheck <span class="whitespace-nowrap">(1,5 Stunden)</span>
-        </Heading>
+        </h3>
         <p>
           Inhalte: Digitalcheck erfolgreich bearbeiten, digitaltaugliche
           Formulierungen, Anwenden der Prinzipien für Digitaltauglichkeit,
@@ -77,10 +74,10 @@ export const frontmatter = {
       </div>
 
       <div>
-        <Heading level={3} class="ds-subhead">
+        <h3 class="ds-subhead">
           Basisschulung für Legistinnen und Legisten
           <span class="whitespace-nowrap">(4 Tage)</span>
-        </Heading>
+        </h3>
         <p>
           Inhalte: Umsetzungsperspektive verstehen, Visualisierungen erstellen,
           Entscheidungsbäume ausarbeiten, Rechtsförmlichkeit und verständliche
@@ -102,7 +99,7 @@ export const frontmatter = {
       </div>
 
       <div>
-        <Heading level={3} class="ds-heading-03-bold">Anmeldung</Heading>
+        <h3 class="ds-heading-03-bold">Anmeldung</h3>
         <p>
           Schicken Sie uns für eine Anmeldung den Schulungs- oder Modul-Namen
           und Termin an die E-Mail <Link href={ZFL_EMAIL.url}

@@ -20,32 +20,7 @@ const { Content } = await page.render();
 ---
 
 <Layout title={page.data.title}>
-  <main class="markdown container my-40 lg:my-80">
+  <main class="container my-40 space-y-16 lg:my-80">
     <Content components={{ a: Link }} />
   </main>
 </Layout>
-
-<style>
-  @reference "../styles/global.css";
-
-  .markdown {
-    @apply space-y-16;
-
-    address {
-      font-style: normal;
-      white-space: pre-line;
-    }
-
-    h2 {
-      margin-top: 2.5rem;
-    }
-
-    h3 {
-      margin-top: 1.5rem;
-    }
-
-    a {
-      @apply text-link;
-    }
-  }
-</style>
