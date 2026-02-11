@@ -1,12 +1,12 @@
 ---
-import { twMerge } from "tailwind-merge";
-import Kopfzeile from "@layouts/Kopfzeile.astro";
 import Link from "@components/Link.astro";
-import { Icon } from "astro-icon/components";
-import { removeTrailingSlash } from "@utils/routesHelper";
 import { ZFL_EMAIL, ZFL_PHONE } from "@config/constants";
 import bundLogo from "@images/logo/bund-logo.png";
+import Kopfzeile from "@layouts/Kopfzeile.astro";
+import { removeTrailingSlash } from "@utils/routesHelper";
+import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
+import { twMerge } from "tailwind-merge";
 
 const headerItems = [
   { url: "/begleitungen", title: "Begleitungen" },
@@ -57,9 +57,7 @@ const activeClasses = "border-zfl-main80 bg-zfl-main20";
       }
       <div class="ds-label-01-reg px-16 text-nowrap text-gray-800">
         Kontakt:{" "}
-        <Link href={ZFL_EMAIL.url} class="ds-link-01-reg"
-          >{ZFL_EMAIL.display}</Link
-        >
+        <Link href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</Link>
       </div>
     </nav>
 
@@ -120,9 +118,7 @@ const activeClasses = "border-zfl-main80 bg-zfl-main20";
     }
     <div class="ds-label-01-reg ml-4 p-16 text-gray-800">
       Kontakt:{" "}
-      <Link href={ZFL_EMAIL.url} class="ds-link-01-reg"
-        >{ZFL_EMAIL.display}</Link
-      >
+      <Link href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</Link>
     </div>
   </nav>
   <noscript>
