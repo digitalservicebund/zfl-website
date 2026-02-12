@@ -1,6 +1,5 @@
 ---
 import Card from "@components/Card.astro";
-import Link from "@components/Link.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@config/constants";
 import begleitungenImage from "@images/Begleitungen.png";
 import trainingsImage from "@images/Trainings.jpg";
@@ -50,11 +49,11 @@ export const frontmatter = {
         </p>
         <p>
           Telefon:
-          <Link href={ZFL_PHONE.url}>{ZFL_PHONE.display}</Link>
+          <a class="text-link" href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>
         </p>
         <p>
           E-Mail:
-          <Link href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</Link>
+          <a class="text-link" href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
         </p>
       </div>
     </div>
@@ -133,11 +132,12 @@ export const frontmatter = {
           Zusammenspiel zwischen den Regelungen und der Administration besser zu
           verstehen und so den digitalen Vollzug zu gestalten.“
         </p>
-        <Link
+        <a
+          class="text-link"
           href="https://digitalcheck.bund.de/beispiele/regelungen/gesetz-zur-modernisierung-und-zum-buerokratieabbau-im-strom-und-energiesteuerrecht"
         >
           Mehr erfahren
-        </Link>
+        </a>
       </Card>
     </div>
   </main>

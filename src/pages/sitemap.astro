@@ -1,5 +1,4 @@
 ---
-import Link from "@components/Link.astro";
 import Layout from "@layouts/Layout.astro";
 import { getAllRoutes } from "@utils/routesHelper";
 
@@ -14,7 +13,9 @@ const pages = await getAllRoutes();
       {
         pages.map((page) => (
           <li>
-            <Link href={page.url}>{page.title}</Link>
+            <a class="text-link" href={page.url}>
+              {page.title}
+            </a>
           </li>
         ))
       }

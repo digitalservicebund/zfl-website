@@ -1,15 +1,11 @@
 // @ts-check
-import { defineConfig } from "astro/config";
-
-import icon from "astro-icon";
-
-import tailwindcss from "@tailwindcss/vite";
-
 import alpinejs from "@astrojs/alpinejs";
-
-import sitemap from "@astrojs/sitemap";
-
 import mdx from "@astrojs/mdx";
+import sitemap from "@astrojs/sitemap";
+import tailwindcss from "@tailwindcss/vite";
+import icon from "astro-icon";
+import { defineConfig } from "astro/config";
+import rehypeAddClasses from "rehype-add-classes";
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,6 +17,9 @@ export default defineConfig({
   vite: {
     // @ts-expect-error https://github.com/withastro/astro/issues/14030#issuecomment-3027129338
     plugins: [tailwindcss()],
+  },
+  markdown: {
+    rehypePlugins: [[rehypeAddClasses, { a: "text-link" }]],
   },
   prefetch: {
     prefetchAll: true,

@@ -1,5 +1,4 @@
 ---
-import Link from "@components/Link.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@config/constants";
 import bundLogo from "@images/logo/bund-logo.png";
 import Kopfzeile from "@components/global/Kopfzeile.astro";
@@ -57,7 +56,7 @@ const activeClasses = "border-zfl-main80 bg-zfl-main20";
       }
       <div class="ds-label-01-reg px-16 text-nowrap text-gray-800">
         Kontakt:{" "}
-        <Link href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</Link>
+        <a class="text-link" href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
       </div>
     </nav>
 
@@ -111,7 +110,7 @@ const activeClasses = "border-zfl-main80 bg-zfl-main20";
     }
     <div class="ds-label-01-reg ml-4 p-16 text-gray-800">
       Kontakt:{" "}
-      <Link href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</Link>
+      <a class="text-link" href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
     </div>
   </nav>
   <noscript>
@@ -119,8 +118,9 @@ const activeClasses = "border-zfl-main80 bg-zfl-main20";
       <div class="breakout-grid py-4">
         <p>
           <strong>Menü funktioniert nicht?</strong> Erlauben Sie JavaScript in den
-          Browsereinstellungen oder navigieren Sie über den <Link href="#footer"
-            >Footer</Link
+          Browsereinstellungen oder navigieren Sie über den <a
+            class="text-link"
+            href="#footer">Footer</a
           >.
         </p>
       </div>
