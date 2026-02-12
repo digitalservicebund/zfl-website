@@ -4,7 +4,7 @@ This project uses [astro-icon](https://github.com/natemoo-re/astro-icon) to disp
 
 ## Icon Set
 
-We are using the [Material Symbols](https://icon-sets.iconify.design/material-symbols/) icon set from [Iconify](https://iconify.design/).
+We are using the [Google Material Icons](https://icon-sets.iconify.design/ic/) icon set from [Iconify](https://iconify.design/).
 
 ## How to use
 
