@@ -1,7 +1,6 @@
 ---
 import Card from "@components/Card.astro";
 import Link from "@components/Link.astro";
-import Heading from "@components/text/Heading.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@config/constants";
 import begleitungenImage from "@images/Begleitungen.png";
 import trainingsImage from "@images/Trainings.jpg";
@@ -20,7 +19,7 @@ export const frontmatter = {
 
 <Layout title={frontmatter.title}>
   <main class="breakout-grid">
-    <Heading class="mt-40 md:mt-80" level={1}>Begleitung für Vorhaben</Heading>
+    <h1>Begleitung für Vorhaben</h1>
 
     <div class="mt-40 gap-32 space-y-40 md:flex md:flex-row">
       <Image
@@ -30,10 +29,10 @@ export const frontmatter = {
       />
 
       <div>
-        <Heading level={2}
-          >Interdisziplinäre Expertise für praxisnahe und bürokratiearme
-          Regelungen nutzen</Heading
-        >
+        <h2>
+          Interdisziplinäre Expertise für praxisnahe und bürokratiearme
+          Regelungen nutzen
+        </h2>
         <p>
           Ein interdisziplinäres Team mit Kompetenzen in Design,
           Nutzerforschung, IT, Produkt- und Prozessmanagement begleitet Sie
@@ -60,7 +59,7 @@ export const frontmatter = {
       </div>
     </div>
 
-    <Heading class="mt-80" level={2}>Wirkung der Zusammenarbeit</Heading>
+    <h2 class="mt-80">Wirkung der Zusammenarbeit</h2>
 
     <p>
       Wir unterstützen Sie dabei, Umsetzungsprozesse zu verstehen und
@@ -73,7 +72,7 @@ export const frontmatter = {
       Digitalisierung bestmöglich ausschöpfen.
     </p>
 
-    <Heading class="mt-40" level={3}>So unterstützen wir Sie konkret:</Heading>
+    <h3 class="mt-40">So unterstützen wir Sie konkret:</h3>
 
     <div class="mt-16 flex gap-32 max-md:flex-col">
       <div class="flex gap-16 md:flex-col md:gap-32">
@@ -125,10 +124,10 @@ export const frontmatter = {
 
     <div class=`breakout mt-40 trainings-background py-80 bg-cover bg-center`>
       <Card>
-        <Heading level={2}
-          >Praxisbeispiel: Einsatz eines interdisziplinären Kompetenzteams für
-          das Stromsteuerrecht</Heading
-        >
+        <h2>
+          Praxisbeispiel: Einsatz eines interdisziplinären Kompetenzteams für
+          das Stromsteuerrecht
+        </h2>
         <p>
           „Die gründliche Analyse von Vollzugsprozessen hat uns geholfen, das
           Zusammenspiel zwischen den Regelungen und der Administration besser zu
