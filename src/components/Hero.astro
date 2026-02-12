@@ -1,11 +1,16 @@
 ---
 interface Props {
   class?: string;
+  variant?: "gray";
 }
+const { variant } = Astro.props;
 const hasSubtitle = Astro.slots.has("subtitle");
+
+const bgClass =
+  variant === "gray" ? "bg-lavendel20" : "bg-zfl-main80 text-white";
 ---
 
-<div class="breakout bg-zfl-main80 space-y-16 pt-40 pb-48 text-white">
+<div class={`breakout space-y-16 pt-56 pb-64 ${bgClass}`}>
   <slot />
   {
     hasSubtitle && (

@@ -16,6 +16,8 @@
   --color-ds-gray-600: #b8bdc3;
   --color-ds-violet: #4c2c92;
 
+  --color-lavendel20: #f6f7fb;
+
   --section-spacing-default: 80px;
   --max-content-width: 59rem;
   --container-padding-inline: clamp(1rem, 5vw, 3rem);

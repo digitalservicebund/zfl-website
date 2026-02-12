@@ -1,5 +1,6 @@
 ---
 import Card from "@components/Card.astro";
+import Hero from "@components/Hero.astro";
 import Link from "@components/Link.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@config/constants";
 import begleitungenImage from "@images/Begleitungen.png";
@@ -19,108 +20,110 @@ export const frontmatter = {
 
 <Layout title={frontmatter.title}>
   <main class="breakout-grid">
-    <h1>Begleitung für Vorhaben</h1>
-
-    <div class="mt-40 gap-32 space-y-40 md:flex md:flex-row">
-      <Image
-        class="size-192 md:size-288"
-        src={begleitungenImage}
-        alt="Symbolbild für Begleitungen"
-      />
-
-      <div>
-        <h2>
-          Interdisziplinäre Expertise für praxisnahe und bürokratiearme
-          Regelungen nutzen
-        </h2>
-        <p>
-          Ein interdisziplinäres Team mit Kompetenzen in Design,
-          Nutzerforschung, IT, Produkt- und Prozessmanagement begleitet Sie
-          vertraulich und mit individuellem Fokus auf Ihr Vorhaben.
-        </p>
-        <p>
-          Nehmen Sie das Angebot bereits im frühen Erarbeitungsprozess in
-          Anspruch, damit die Begleitung die größte Wirkung erzielen kann.
-        </p>
-        <p>
-          <strong
-            >Kontaktieren Sie uns, um eine Begleitung für Ihr Vorhaben
-            anzufragen:
-          </strong>
-        </p>
-        <p>
-          Telefon:
-          <Link href={ZFL_PHONE.url}>{ZFL_PHONE.display}</Link>
-        </p>
-        <p>
-          E-Mail:
-          <Link href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</Link>
-        </p>
-      </div>
-    </div>
-
-    <h2 class="mt-80">Wirkung der Zusammenarbeit</h2>
-
-    <p>
-      Wir unterstützen Sie dabei, Umsetzungsprozesse zu verstehen und
-      Anforderungen an praxisnahe und bürokratiearme Regelungen umzusetzen.
-    </p>
-    <p>
-      Durch Ihre Rechtsetzungs-Expertise in Kombination mit Methoden aus der
-      agilen Software-Entwicklung entstehen somit praxistaugliche und
-      zukunftsfähige Gesetze, die unter anderem die Potenziale der
-      Digitalisierung bestmöglich ausschöpfen.
-    </p>
-
-    <h3 class="mt-40">So unterstützen wir Sie konkret:</h3>
-
-    <div class="mt-16 flex gap-32 max-md:flex-col">
-      <div class="flex gap-16 md:flex-col md:gap-32">
-        <Icon
-          class="text-zfl-main60 size-40 flex-none md:size-80"
-          name="ic:twotone-account-tree"
-        />
-        <div class="space-y-8">
-          <h3 class="ds-heading-03-bold sm:hyphens-none md:pr-32">
-            Sachverhalte visualisieren
-          </h3>
+    <Hero variant="gray">
+      <h1>Begleitung für Vorhaben</h1>
+      <div class="mt-40 gap-32 space-y-40 md:flex md:flex-row">
+        <div>
+          <h2>
+            Interdisziplinäre Expertise für praxisnahe und bürokratiearme
+            Regelungen nutzen
+          </h2>
           <p>
-            Komplexe Sachverhalte durch Prozess-Visualisierungen strukturieren,
-            interne und externe Abstimmung vereinfachen
+            Ein interdisziplinäres Team mit Kompetenzen in Design,
+            Nutzerforschung, IT, Produkt- und Prozessmanagement begleitet Sie
+            vertraulich und mit individuellem Fokus auf Ihr Vorhaben.
+          </p>
+          <p>
+            Nehmen Sie das Angebot bereits im frühen Erarbeitungsprozess in
+            Anspruch, damit die Begleitung die größte Wirkung erzielen kann.
+          </p>
+          <p>
+            <strong
+              >Kontaktieren Sie uns, um eine Begleitung für Ihr Vorhaben
+              anzufragen:
+            </strong>
+          </p>
+          <p>
+            Telefon:
+            <Link href={ZFL_PHONE.url}>{ZFL_PHONE.display}</Link>
+          </p>
+          <p>
+            E-Mail:
+            <Link href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</Link>
           </p>
         </div>
-      </div>
-      <div class="flex gap-16 md:flex-col md:gap-32">
-        <Icon
-          class="text-zfl-main60 size-40 flex-none md:size-80"
-          name="ic:twotone-lightbulb"
+        <Image
+          class="size-192 md:size-288"
+          src={begleitungenImage}
+          alt="Symbolbild für Begleitungen"
         />
-        <div class="space-y-8">
-          <h3 class="ds-heading-03-bold sm:hyphens-none md:pr-32">
-            Umsetzung mitdenken
-          </h3>
-          <p>
-            Betroffenen-Perspektive frühzeitig identifizieren, bestehende
-            Umsetzungshürden beheben
-          </p>
+      </div>
+    </Hero>
+
+    <section class="py-80">
+      <h2>Wirkung der Zusammenarbeit</h2>
+
+      <p>
+        Wir unterstützen Sie dabei, Umsetzungsprozesse zu verstehen und
+        Anforderungen an praxisnahe und bürokratiearme Regelungen umzusetzen.
+      </p>
+      <p>
+        Durch Ihre Rechtsetzungs-Expertise in Kombination mit Methoden aus der
+        agilen Software-Entwicklung entstehen somit praxistaugliche und
+        zukunftsfähige Gesetze, die unter anderem die Potenziale der
+        Digitalisierung bestmöglich ausschöpfen.
+      </p>
+
+      <h3 class="mt-40">So unterstützen wir Sie konkret:</h3>
+
+      <div class="mt-16 flex gap-32 max-md:flex-col">
+        <div class="flex gap-16 md:flex-col md:gap-32">
+          <Icon
+            class="text-zfl-main60 size-40 flex-none md:size-80"
+            name="ic:twotone-account-tree"
+          />
+          <div class="space-y-8">
+            <h3 class="ds-heading-03-bold sm:hyphens-none md:pr-32">
+              Sachverhalte visualisieren
+            </h3>
+            <p>
+              Komplexe Sachverhalte durch Prozess-Visualisierungen
+              strukturieren, interne und externe Abstimmung vereinfachen
+            </p>
+          </div>
+        </div>
+        <div class="flex gap-16 md:flex-col md:gap-32">
+          <Icon
+            class="text-zfl-main60 size-40 flex-none md:size-80"
+            name="ic:twotone-lightbulb"
+          />
+          <div class="space-y-8">
+            <h3 class="ds-heading-03-bold sm:hyphens-none md:pr-32">
+              Umsetzung mitdenken
+            </h3>
+            <p>
+              Betroffenen-Perspektive frühzeitig identifizieren, bestehende
+              Umsetzungshürden beheben
+            </p>
+          </div>
+        </div>
+        <div class="flex gap-16 md:flex-col md:gap-32">
+          <Icon
+            class="text-zfl-main60 size-40 flex-none md:size-80"
+            name="ic:twotone-hub"
+          />
+          <div class="space-y-8">
+            <h3 class="ds-heading-03-bold sm:hyphens-none md:pr-32">
+              Prozesse strukturieren
+            </h3>
+            <p>
+              Methodische Unterstützung nutzen, Anleitungen für Praxis- und
+              Digitaltauglichkeit erhalten
+            </p>
+          </div>
         </div>
       </div>
-      <div class="flex gap-16 md:flex-col md:gap-32">
-        <Icon
-          class="text-zfl-main60 size-40 flex-none md:size-80"
-          name="ic:twotone-hub"
-        />
-        <div class="space-y-8">
-          <h3 class="ds-heading-03-bold sm:hyphens-none md:pr-32">
-            Prozesse strukturieren
-          </h3>
-          <p>
-            Methodische Unterstützung nutzen, Anleitungen für Praxis- und
-            Digitaltauglichkeit erhalten
-          </p>
-        </div>
-      </div>
-    </div>
+    </section>
 
     <div class=`breakout mt-40 trainings-background py-80 bg-cover bg-center`>
       <Card>

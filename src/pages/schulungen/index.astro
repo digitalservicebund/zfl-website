@@ -9,6 +9,7 @@ import Appointment from "./_appointment.astro";
 import { Image } from "astro:assets";
 import schulungenImage from "@images/Schulungen.png";
 import Link from "@components/Link.astro";
+import Hero from "@components/Hero.astro";
 
 export const frontmatter = {
   title: "Schulungen",
@@ -18,25 +19,27 @@ export const frontmatter = {
 
 <Layout title={frontmatter.title}>
   <main class="breakout-grid">
-    <h1>Schulungen</h1>
-
-    <div class="mt-40 gap-32 space-y-40 md:flex md:flex-row">
-      <Image
-        class="size-192 md:size-288"
-        src={schulungenImage}
-        alt="Symbolbild für Schulungen"
-      />
-      <div class="space-y-16">
-        <h2>In Schulungen praktisches Wissen und Kompetenzen erlangen</h2>
-        <p>
-          In den umsetzungsorientierten Schulungen des Zentrum für Legistik
-          lernen Sie Methoden und Werkzeuge kennen, die Sie bei der Erarbeitung
-          von praxisnahen und bürokratiearmen Regelungen unterstützen.
-        </p>
+    <Hero variant="gray">
+      <h1>Schulungen</h1>
+      <div class="mt-40 gap-32 space-y-40 md:flex md:flex-row">
+        <div class="space-y-16">
+          <h2>In Schulungen praktisches Wissen und Kompetenzen erlangen</h2>
+          <p>
+            In den umsetzungsorientierten Schulungen des Zentrum für Legistik
+            lernen Sie Methoden und Werkzeuge kennen, die Sie bei der
+            Erarbeitung von praxisnahen und bürokratiearmen Regelungen
+            unterstützen.
+          </p>
+        </div>
+        <Image
+          class="size-192 md:size-288"
+          src={schulungenImage}
+          alt="Symbolbild für Schulungen"
+        />
       </div>
-    </div>
+    </Hero>
 
-    <Card look="gray" contentClass="gap-40" wrapperClass="mb-80 mt-40">
+    <Card look="gray" contentClass="gap-40" wrapperClass="my-80">
       <Badge class="mb-0">
         <Icon name="ic:outline-timer" />Nächste Termine
       </Badge>
