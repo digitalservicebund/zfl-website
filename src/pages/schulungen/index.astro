@@ -8,7 +8,6 @@ import { Icon } from "astro-icon/components";
 import Appointment from "./_appointment.astro";
 import { Image } from "astro:assets";
 import schulungenImage from "@images/Schulungen.png";
-import Link from "@components/Link.astro";
 
 export const frontmatter = {
   title: "Schulungen",
@@ -102,8 +101,8 @@ export const frontmatter = {
         <h3 class="font-bold">Anmeldung</h3>
         <p>
           Schicken Sie uns für eine Anmeldung den Schulungs- oder Modul-Namen
-          und Termin an die E-Mail <Link href={ZFL_EMAIL.url}
-            >{ZFL_EMAIL.display}</Link
+          und Termin an die E-Mail <a class="text-link" href={ZFL_EMAIL.url}
+            >{ZFL_EMAIL.display}</a
           > und wir bestätigen die Anmeldung.
         </p>
       </div>

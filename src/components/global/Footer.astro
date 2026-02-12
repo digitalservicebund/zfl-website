@@ -1,8 +1,7 @@
 ---
-import Link from "@components/Link.astro";
+import { Image } from "astro:assets";
 import { ZFL_EMAIL, ZFL_PHONE } from "@config/constants";
 import bmdsLogo from "@images/logo/bmds-logo.png";
-import { Image } from "astro:assets";
 
 type FooterItem = { url: string; label: string; prefix?: string };
 
@@ -46,9 +45,13 @@ const footerColumns: Record<string, FooterItem[]> = {
               {items.map((item) => (
                 <li>
                   {item.prefix}
-                  <Link class="increase-tap-area" href={item.url}>
+                  <a
+                    class="text-link"
+                    class="increase-tap-area"
+                    href={item.url}
+                  >
                     {item.label}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -73,9 +76,9 @@ const footerColumns: Record<string, FooterItem[]> = {
             <ul class="list-unstyled flex flex-col gap-8">
               <li>
                 Das Zentrum für Legistik entsteht im Auftrag des
-                <Link href="https://bmds.bund.de/">
+                <a class="text-link" href="https://bmds.bund.de/">
                   Bundesministerium für Digitales und Staatsmodernisierung
-                </Link>
+                </a>
               </li>
             </ul>
           </div>

@@ -1,6 +1,5 @@
 ---
 import Card from "@components/Card.astro";
-import Link from "@components/Link.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@config/constants";
 import Layout from "@layouts/Layout.astro";
 
@@ -29,16 +28,17 @@ export const frontmatter = {
     </p>
     <p>
       Kontaktieren Sie uns zu diesem Zweck unter
-      <Link href={ZFL_PHONE.url}>{ZFL_PHONE.display}</Link>
+      <a class="text-link" href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>
       oder
-      <Link href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</Link>.
+      <a class="text-link" href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>.
     </p>
     <p>
       Gut zu wissen: Das Zentrum für Legistik ist ein Bestandteil des
       Handlungsfelds „Bessere Rechtsetzung“ in der Modernisierungsagenda.<br />
-      <Link
+      <a
+        class="text-link"
         href="https://bmds.bund.de/themen/staatsmodernisierung/modernisierungsagenda-bund#c2065"
-        >Weitere Informationen zur Modernisierungsagenda</Link
+        >Weitere Informationen zur Modernisierungsagenda</a
       >
     </p>
 
@@ -57,9 +57,10 @@ export const frontmatter = {
           die Basis dafür, Gesetze wirksam und effizient umzusetzen. Wie können
           wir diese frühe Phase in der Rechtsetzung, für Legistinnen und
           Legisten, besser strukturieren und unterstützen?<br />
-          <Link
+          <a
+            class="text-link"
             href={`${ZFL_EMAIL.url}?subject=Interesse%20am%20Thema%20%22Strukturierung%20der%20Fr%C3%BChphase%20f%C3%BCr%20Regelungsvorhaben%22`}
-            >Mitarbeiten an diesem Thema</Link
+            >Mitarbeiten an diesem Thema</a
           >
           (öffnet E-Mail)
         </p>
@@ -67,19 +68,22 @@ export const frontmatter = {
         <h3 class="mt-32">Konsolidierung der Instrumente</h3>
         <p>
           Unterschiedliche Checks und Arbeitshilfen (wie z.&nbsp;B. der
-          <Link href="https://digitalcheck.bund.de/">Digitalcheck</Link>,
-          <Link href="https://www.gleichstellungs-check.de/"
-            >Gleichstellungscheck</Link
+          <a class="text-link" href="https://digitalcheck.bund.de/"
+            >Digitalcheck</a
+          >,
+          <a class="text-link" href="https://www.gleichstellungs-check.de/"
+            >Gleichstellungscheck</a
           >
           oder
-          <Link href="https://jugend-check.de/">Jugendcheck</Link>) zielen in
-          Teilen auf die gleiche Wirkung ab: Praxis- und digitaltaugliche
-          Regelungen und Bürokratierückbau. Bei der Zusammenführung diverser
-          Ansätze verfolgen wir das Ziel, Ihre Regelungsarbeit einfacher und
-          effizienter zu gestalten.<br />
-          <Link
+          <a class="text-link" href="https://jugend-check.de/">Jugendcheck</a>)
+          zielen in Teilen auf die gleiche Wirkung ab: Praxis- und
+          digitaltaugliche Regelungen und Bürokratierückbau. Bei der
+          Zusammenführung diverser Ansätze verfolgen wir das Ziel, Ihre
+          Regelungsarbeit einfacher und effizienter zu gestalten.<br />
+          <a
+            class="text-link"
             href={`${ZFL_EMAIL.url}?subject=Interesse%20am%20Thema%20%22Konsolidierung%20der%20Instrumente%22`}
-            >Mitarbeiten an diesem Thema</Link
+            >Mitarbeiten an diesem Thema</a
           > (öffnet E-Mail)
         </p>
 
@@ -88,9 +92,10 @@ export const frontmatter = {
           In den umsetzungsorientierten Schulungen des Zentrum für Legistik
           lernen Sie Methoden und Werkzeuge kennen, die Sie bei der Erarbeitung
           von praxisnahen und bürokratiearmen Regelungen unterstützen.<br />
-          <Link
+          <a
+            class="text-link"
             href={`${ZFL_EMAIL.url}?subject=Interesse%20am%20Thema%20%22Erweiterung%20der%20Schulungs-Angebote%22`}
-            >Mitarbeiten an diesem Thema</Link
+            >Mitarbeiten an diesem Thema</a
           > (öffnet E-Mail)
         </p>
 
@@ -99,9 +104,10 @@ export const frontmatter = {
           Wir unterstützen Sie dabei, Umsetzungsprozesse zu verstehen und
           Anforderungen an praxisnahe und bürokratiearme Regelungen umzusetzen.
           Wir erweitern das Angebot in Inhalt und Umfang.<br />
-          <Link
+          <a
+            class="text-link"
             href={`${ZFL_EMAIL.url}?subject=Interesse%20am%20Thema%20%22Ausbau%20der%20Regelungsbegleitung%22`}
-            >Mitarbeiten an diesem Thema</Link
+            >Mitarbeiten an diesem Thema</a
           > (öffnet E-Mail)
         </p>
       </Card>
@@ -126,7 +132,9 @@ export const frontmatter = {
         <li>
           <strong>Digitaltauglichkeit</strong>: Zugang zur Prüfung und Beratung
           via
-          <Link href="https://digitalcheck.bund.de/">Digitalcheck</Link>
+          <a class="text-link" href="https://digitalcheck.bund.de/"
+            >Digitalcheck</a
+          >
         </li>
       </ul>
     </section>
