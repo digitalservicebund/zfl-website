@@ -49,6 +49,9 @@ importers:
       astro-seo:
         specifier: ^1.1.0
         version: 1.1.0(prettier-plugin-astro@0.14.1)(prettier@3.8.1)(typescript@5.9.3)
+      rehype-add-classes:
+        specifier: ^1.0.0
+        version: 1.0.0
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -119,9 +122,6 @@ importers:
       prettier-plugin-tailwindcss:
         specifier: ^0.7.2
         version: 0.7.2(prettier-plugin-astro@0.14.1)(prettier-plugin-organize-imports@4.3.0(prettier@3.8.1)(typescript@5.9.3))(prettier@3.8.1)
-      rehype-add-classes:
-        specifier: ^1.0.0
-        version: 1.0.0
       typescript:
         specifier: ^5.9.3
         version: 5.9.3

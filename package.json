@@ -38,6 +38,7 @@
     "astro": "^5.17.1",
     "astro-icon": "^1.1.5",
     "astro-seo": "^1.1.0",
+    "rehype-add-classes": "^1.0.0",
     "sharp": "^0.34.5",
     "tailwind-merge": "^3.4.0",
     "tailwind-variants": "^3.2.2",
@@ -63,7 +64,6 @@
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-organize-imports": "^4.3.0",
     "prettier-plugin-tailwindcss": "^0.7.2",
-    "rehype-add-classes": "^1.0.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.54.0",
     "vitest": "^4.0.18"
