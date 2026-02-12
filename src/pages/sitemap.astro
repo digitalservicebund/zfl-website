@@ -1,4 +1,5 @@
 ---
+import Hero from "@components/Hero.astro";
 import Link from "@components/Link.astro";
 import Layout from "@layouts/Layout.astro";
 import { getAllRoutes } from "@utils/routesHelper";
@@ -8,7 +9,9 @@ const pages = await getAllRoutes();
 
 <Layout title="Sitemap">
   <main class="breakout-grid space-y-80 pb-40 md:pb-80">
-    <h1>Sitemap</h1>
+    <Hero variant="gray">
+      <h1>Sitemap</h1>
+    </Hero>
 
     <ul>
       {

@@ -1,5 +1,6 @@
 ---
 import Card from "@components/Card.astro";
+import Hero from "@components/Hero.astro";
 import Link from "@components/Link.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@config/constants";
 import Layout from "@layouts/Layout.astro";
@@ -11,38 +12,41 @@ export const frontmatter = {
 ---
 
 <Layout title={frontmatter.title}>
-  <main class="breakout-grid mb-80">
-    <h1 class="my-40">Daran arbeiten wir</h1>
-    <p>
-      Das Zentrum für Legistik wird gemeinsam mit Ihnen als Legistinnen und
-      Legisten weiterentwickelt. Wir passen unsere Unterstützungsangebote
-      regelmäßig an Ihre Rückmeldungen und die Erfahrungen aus der Praxis an. So
-      stellen wir sicher, dass die angebotenen Hilfen tatsächlich Ihren
-      Arbeitsalltag erleichtern.
-    </p>
-    <p>
-      Wir möchten Sie einladen, uns Rückmeldung zu unseren Angeboten zu geben
-      oder an kurzen Praxistests teilzunehmen. Ihr Erfahrungswissen hilft uns,
-      die Hilfsmittel und Werkzeuge so zu gestalten, dass sie in der täglichen
-      Arbeit tatsächlich nützlich sind. Der zeitliche Aufwand ist überschaubar
-      und wird vorab mit Ihnen abgestimmt.
-    </p>
-    <p>
-      Kontaktieren Sie uns zu diesem Zweck unter
-      <Link href={ZFL_PHONE.url}>{ZFL_PHONE.display}</Link>
-      oder
-      <Link href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</Link>.
-    </p>
-    <p>
-      Gut zu wissen: Das Zentrum für Legistik ist ein Bestandteil des
-      Handlungsfelds „Bessere Rechtsetzung“ in der Modernisierungsagenda.<br />
-      <Link
-        href="https://bmds.bund.de/themen/staatsmodernisierung/modernisierungsagenda-bund#c2065"
-        >Weitere Informationen zur Modernisierungsagenda</Link
-      >
-    </p>
+  <main class="breakout-grid">
+    <Hero variant="gray">
+      <h1>Daran arbeiten wir</h1>
+      <p>
+        Das Zentrum für Legistik wird gemeinsam mit Ihnen als Legistinnen und
+        Legisten weiterentwickelt. Wir passen unsere Unterstützungsangebote
+        regelmäßig an Ihre Rückmeldungen und die Erfahrungen aus der Praxis an.
+        So stellen wir sicher, dass die angebotenen Hilfen tatsächlich Ihren
+        Arbeitsalltag erleichtern.
+      </p>
+      <p>
+        Wir möchten Sie einladen, uns Rückmeldung zu unseren Angeboten zu geben
+        oder an kurzen Praxistests teilzunehmen. Ihr Erfahrungswissen hilft uns,
+        die Hilfsmittel und Werkzeuge so zu gestalten, dass sie in der täglichen
+        Arbeit tatsächlich nützlich sind. Der zeitliche Aufwand ist überschaubar
+        und wird vorab mit Ihnen abgestimmt.
+      </p>
+      <p>
+        Kontaktieren Sie uns zu diesem Zweck unter
+        <Link href={ZFL_PHONE.url}>{ZFL_PHONE.display}</Link>
+        oder
+        <Link href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</Link>.
+      </p>
+      <p>
+        Gut zu wissen: Das Zentrum für Legistik ist ein Bestandteil des
+        Handlungsfelds „Bessere Rechtsetzung“ in der Modernisierungsagenda.<br
+        />
+        <Link
+          href="https://bmds.bund.de/themen/staatsmodernisierung/modernisierungsagenda-bund#c2065"
+          >Weitere Informationen zur Modernisierungsagenda</Link
+        >
+      </p>
+    </Hero>
 
-    <div class="breakout breakout-grid bg-zfl-main20 my-80 py-80">
+    <section class="breakout breakout-grid bg-zfl-main20 py-80">
       <h2>Aktuelle Arbeitspakete in Konzeption und Umsetzung</h2>
       <p>
         In dieser Phase erarbeiten wir fachliche Anforderungen, prüfen
@@ -105,8 +109,9 @@ export const frontmatter = {
           > (öffnet E-Mail)
         </p>
       </Card>
-    </div>
-    <section>
+    </section>
+
+    <section class="py-80">
       <h2>Verfügbare Angebote</h2>
       <p>
         <em
