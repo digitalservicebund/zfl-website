@@ -108,24 +108,23 @@
   li > a:not([class]) {
     @apply text-link;
   }
+}
 
-  main {
-    address {
-      font-style: normal;
-    }
+main {
+  address {
+    font-style: normal;
   }
-}
+  & > h1 {
+    @apply mt-40 md:mt-80;
+  }
 
-main > h1 {
-  @apply mt-40 md:mt-80;
-}
+  & > h2 {
+    margin-top: 2.5rem;
+  }
 
-main > h2 {
-  margin-top: 2.5rem;
-}
-
-main > h3 {
-  margin-top: 1.5rem;
+  & > h3 {
+    margin-top: 1.5rem;
+  }
 }
 
 @utility container {
