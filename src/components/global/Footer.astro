@@ -45,11 +45,7 @@ const footerColumns: Record<string, FooterItem[]> = {
               {items.map((item) => (
                 <li>
                   {item.prefix}
-                  <a
-                    class="text-link"
-                    class="increase-tap-area"
-                    href={item.url}
-                  >
+                  <a class="text-link increase-tap-area" href={item.url}>
                     {item.label}
                   </a>
                 </li>
