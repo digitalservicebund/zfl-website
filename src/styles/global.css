@@ -88,6 +88,12 @@
     word-break: auto-phrase;
   }
 
+  h1,
+  h2,
+  h3 {
+    font-weight: 700;
+  }
+
   h3,
   .ds-heading-03-reg,
   .ds-heading-03-bold,
