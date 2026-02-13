@@ -59,6 +59,19 @@
   a,
   button {
     @apply cursor-pointer;
+
+    &.btn-primary {
+      display: inline-block;
+      padding: 18px 24px;
+      background-color: var(--color-cosmic-blue-base);
+      color: var(--color-white);
+      font-weight: 700;
+      letter-spacing: 0.16px;
+
+      &:active {
+        background-color: var(--color-cosmic-blue-400);
+      }
+    }
   }
 
   ul:not(.list-unstyled),
