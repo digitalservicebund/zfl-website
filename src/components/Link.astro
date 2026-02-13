@@ -8,10 +8,13 @@ interface Props {
 
 const { href, class: className = "" } = Astro.props;
 const isExternal = href.startsWith("http");
+const isInternal = href.startsWith("/");
+const base = import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL;
+const url = isInternal ? `${base}${href}` : href;
 ---
 
 <a
-  href={href}
+  href={url}
   class={`kern-link text-link ${className}`}
   {...isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {}}
   ><slot />{
