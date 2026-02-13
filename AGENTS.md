@@ -86,7 +86,7 @@ const { title, class: className } = Astro.props;
 ### Tailwind CSS Usage
 
 - Uses `tailwind-variants` (tv) for component styling
-- Custom design tokens: `zfl-main80`, `zfl-main20`, etc.
+- Custom design tokens: `cosmic-blue-base`, `lavender-base`, etc.
 - Responsive classes: `sm:`, `md:`, `lg:` prefixes
 - Utility-first approach with semantic component variants
 

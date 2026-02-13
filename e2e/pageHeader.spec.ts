@@ -14,14 +14,14 @@ test.describe("Header navigation", () => {
       name: "Begleitungen",
     });
 
-    await expect(activeLink).toHaveClass(/bg-zfl-main20/);
-    await expect(activeLink).toHaveClass(/border-zfl-main80/);
+    await expect(activeLink).toHaveClass(/bg-lavender-base/);
+    await expect(activeLink).toHaveClass(/border-cosmic-blue-base/);
 
     const inactiveLink = desktopNav.getByRole("link", {
       name: "Schulungen",
     });
 
-    await expect(inactiveLink).not.toHaveClass(/border-zfl-main80/);
+    await expect(inactiveLink).not.toHaveClass(/border-cosmic-blue-base/);
   });
 
   test("mobile menu is hidden by default", async ({ page }) => {
@@ -52,8 +52,8 @@ test.describe("Header navigation", () => {
       name: "Begleitungen",
     });
 
-    await expect(activeLink).toHaveClass(/bg-zfl-main20/);
-    await expect(activeLink).toHaveClass(/border-zfl-main80/);
+    await expect(activeLink).toHaveClass(/bg-lavender-base/);
+    await expect(activeLink).toHaveClass(/border-cosmic-blue-base/);
   });
 
   test("mobile menu highlights active route correctly", async ({ page }) => {
@@ -72,7 +72,7 @@ test.describe("Header navigation", () => {
       name: "Schulungen",
     });
 
-    await expect(activeLink).toHaveClass(/bg-zfl-main20/);
-    await expect(activeLink).toHaveClass(/border-zfl-main80/);
+    await expect(activeLink).toHaveClass(/bg-lavender-base/);
+    await expect(activeLink).toHaveClass(/border-cosmic-blue-base/);
   });
 });

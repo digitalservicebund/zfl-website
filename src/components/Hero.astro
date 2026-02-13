@@ -7,7 +7,7 @@ const { variant, class: className = "" } = Astro.props;
 const hasSubtitle = Astro.slots.has("subtitle");
 
 const bgClass =
-  variant === "gray" ? "bg-lavendel20" : "bg-zfl-main80 text-white";
+  variant === "gray" ? "bg-lavender-200" : "bg-cosmic-blue-base text-white";
 ---
 
 <div class={`breakout space-y-16 pt-56 pb-64 ${bgClass} ${className}`}>

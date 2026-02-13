@@ -16,8 +16,8 @@ const headerItems = [
 const { pathname } = Astro.url;
 const currentPath = removeTrailingSlash(pathname);
 
-const basicLinkClasses = "flex items-center hover:bg-zfl-main20";
-const activeClasses = "border-zfl-main80 bg-zfl-main20";
+const basicLinkClasses = "flex items-center hover:bg-lavender-base";
+const activeClasses = "border-cosmic-blue-base bg-lavender-base";
 ---
 
 <header
@@ -27,7 +27,7 @@ const activeClasses = "border-zfl-main80 bg-zfl-main20";
 >
   <Kopfzeile className="relative z-30" />
   <div
-    class="border-zfl-main20 relative z-30 flex h-[72px] justify-between border-b-2 bg-white pl-16 md:px-16"
+    class="border-lavender-base relative z-30 flex h-[72px] justify-between border-b-2 bg-white pl-16 md:px-16"
   >
     <!-- Logo and title -->
     <a href={{ url: "/" }.url} class="flex items-center space-x-8">
@@ -71,7 +71,7 @@ const activeClasses = "border-zfl-main80 bg-zfl-main20";
         <Icon name="ic:twotone-phone-enabled" class="size-24 -scale-x-100" />
       </a>
       <button
-        class="hover:bg-zfl-main20 aria-expanded:border-zfl-main80 aria-expanded:bg-zfl-main20 h-full border-b-4 border-transparent px-16"
+        class="hover:bg-lavender-base aria-expanded:border-cosmic-blue-base aria-expanded:bg-lavender-base h-full border-b-4 border-transparent px-16"
         @click="mobileMenuOpen = !mobileMenuOpen"
         aria-label="Menü öffnen / schließen"
         :aria-expanded="mobileMenuOpen"

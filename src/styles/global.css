@@ -9,14 +9,15 @@
 
   --color-white: white;
 
-  --color-zfl-main20: #e3e6f2;
-  --color-zfl-main60: #7978be;
-  --color-zfl-main80: #36349d;
+  --color-cosmic-blue-base: #36349d;
+  --color-cosmic-blue-400: #7978be;
+
+  --color-lavender-base: #e3e6f2;
+  --color-lavender-200: #f6f7fb;
+  --color-lavender-400: #eceef6;
 
   --color-ds-gray-600: #b8bdc3;
   --color-ds-violet: #4c2c92;
-
-  --color-lavendel20: #f6f7fb;
 
   --section-spacing-default: 80px;
   --max-content-width: 59rem;
@@ -155,7 +156,7 @@ main {
 }
 
 @utility text-link {
-  @apply visited:text-ds-violet text-zfl-main80 fill-blue-800 underline decoration-1 underline-offset-4 active:text-black;
+  @apply visited:text-ds-violet text-cosmic-blue-base fill-blue-800 underline decoration-1 underline-offset-4 active:text-black;
 
   &:focus-visible {
     @apply text-blue-800! no-underline!;
@@ -170,7 +171,7 @@ main {
   }
 
   .zfl-style & {
-    color: var(--color-zfl-main80);
+    color: var(--color-cosmic-blue-base);
   }
 }
 
@@ -211,7 +212,7 @@ main {
   .ds-link-02-bold,
   .ds-link-03-reg,
   .ds-link-03-bold {
-    color: var(--color-zfl-main80);
+    color: var(--color-cosmic-blue-base);
   }
 }
 

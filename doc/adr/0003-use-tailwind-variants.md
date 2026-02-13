@@ -44,8 +44,8 @@ const styles = tv({
   base: "ds-label-02-reg inline-flex flex-row items-center gap-4 self-start rounded-md bg-transparent p-4",
   variants: {
     look: {
-      hint: "text-zfl-main80",
-      gray: "bg-zfl-main20",
+      hint: "text-cosmic-blue-base",
+      gray: "bg-lavender-base",
       white: "bg-white",
     },
   },
