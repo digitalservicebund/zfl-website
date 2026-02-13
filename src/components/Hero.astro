@@ -1,16 +1,28 @@
 ---
-interface Props {
-  class?: string;
-  variant?: "gray";
-}
-const { variant, class: className = "" } = Astro.props;
-const hasSubtitle = Astro.slots.has("subtitle");
+import { tv, type VariantProps } from "tailwind-variants";
 
-const bgClass =
-  variant === "gray" ? "bg-lavender-200" : "bg-cosmic-blue-base text-white";
+interface Props extends VariantProps<typeof styles> {
+  class?: string;
+}
+
+const styles = tv({
+  base: "breakout space-y-16 pt-56 pb-64",
+  variants: {
+    look: {
+      blue: "bg-cosmic-blue-base text-white",
+      gray: "bg-lavender-200",
+    },
+  },
+  defaultVariants: {
+    look: "gray",
+  },
+});
+
+const { class: className, look } = Astro.props;
+const hasSubtitle = Astro.slots.has("subtitle");
 ---
 
-<div class={`breakout space-y-16 pt-56 pb-64 ${bgClass} ${className}`}>
+<div class={styles({ look, className })}>
   <slot />
   {
     hasSubtitle && (
