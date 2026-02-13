@@ -4,11 +4,7 @@
   "compilerOptions": {
     "typeRoots": ["./node_modules/@types", "./src/types"],
     "paths": {
-      "@components/*": ["./src/components/*"],
-      "@layouts/*": ["./src/layouts/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@config/*": ["./src/config/*"],
-      "@images/*": ["./src/images/*"]
+      "@/*": ["./src/*"]
     }
   }
 }

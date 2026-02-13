@@ -44,10 +44,7 @@ This is an Astro-based static site for Zentrum für Legistik, using:
 - Uses `astro/tsconfigs/strict` as base configuration
 - Strict type checking enabled
 - Path aliases configured:
-  - `@components/*` → `./src/components/*`
-  - `@layouts/*` → `./src/layouts/*`
-  - `@utils/*` → `./src/utils/*`
-  - `@config/*` → `./src/config/*`
+  - `@/*` → `./src/*`
 
 ### Import Organization
 
