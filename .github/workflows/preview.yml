@@ -1,0 +1,48 @@
+name: Deploy Preview
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061
+        name: Install pnpm
+        with:
+          version: 10
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build Astro for Preview
+        run: pnpm build
+        env:
+          IS_PREVIEW: "true"
+          PREVIEW_BRANCH: ${{ github.ref_name }}
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@d92aa235d04922e8f08b40ce78cc5442fcfbfa2f # v4.8.0
+        with:
+          folder: dist
+          branch: gh-pages
+          # This creates a folder structure like: previews/my-feature-branch/
+          target-folder: previews/${{ github.ref_name }}
+          clean: false # Prevents one branch preview from deleting others
+
+      - name: Output Preview URL
+        run: |
+          echo "🔍 Preview deployed successfully!"
+          echo "Preview URL: https://digitalservicebund.github.io/zfl-website/previews/${{ github.ref_name }}/"
