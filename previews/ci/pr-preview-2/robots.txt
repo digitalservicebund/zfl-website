@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://zfl.bund.de/sitemap-index.xml
+Sitemap: https://digitalservicebund.github.io/sitemap-index.xml
