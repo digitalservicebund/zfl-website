@@ -1,5 +1,6 @@
 /// <reference types="astro/client" />
 
+import { isPreview } from "@/config/stage";
 import { getCollection, type CollectionEntry } from "astro:content";
 
 export interface SitemapFrontmatter {
@@ -60,3 +61,15 @@ export const getAllRoutes = async (): Promise<SitemapFrontmatter[]> => {
 
 export const removeTrailingSlash = (path: string) =>
   path.replace(/\/+$/, "").replace(/^$/, "/");
+
+/**
+ * Builds a URL with the correct base path for internal links in preview builds.
+ * External links and non-preview builds are returned as-is.
+ */
+export const buildUrl = (href: string): string => {
+  if (isPreview && href.startsWith("/")) {
+    const baseUrl = removeTrailingSlash(import.meta.env.BASE_URL);
+    return `${baseUrl}${href}`;
+  }
+  return href;
+};
