@@ -2,6 +2,7 @@ name: Preview
 
 on:
   workflow_dispatch:
+  delete:
 
 permissions:
   contents: write
@@ -9,6 +10,10 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    if: github.event_name != 'delete'
+    concurrency:
+      group: preview-${{ github.ref_name }}
+      cancel-in-progress: true
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -31,9 +36,6 @@ jobs:
           IS_PREVIEW: "true"
           PREVIEW_BRANCH: ${{ github.ref_name }}
 
-      - name: Disable Jekyll # to allow assets being served from _astro directory
-        run: touch dist/.nojekyll
-
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@d92aa235d04922e8f08b40ce78cc5442fcfbfa2f # v4.8.0
         with:
@@ -47,3 +49,32 @@ jobs:
         run: |
           echo "🔍 Preview deployed successfully!"
           echo "Preview URL: https://digitalservicebund.github.io/zfl-website/previews/${{ github.ref_name }}/"
+
+  cleanup-preview:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'delete' && github.event.ref_type == 'branch'
+    concurrency:
+      group: preview-${{ github.event.ref }}
+      cancel-in-progress: true
+    steps:
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@v6
+        with:
+          ref: gh-pages
+
+      - name: Remove preview folder
+        run: |
+          BRANCH_NAME="${{ github.event.ref }}"
+          PREVIEW_PATH="previews/$BRANCH_NAME"
+
+          if [ -d "$PREVIEW_PATH" ]; then
+            echo "🗑️  Removing preview for branch: $BRANCH_NAME"
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git rm -rf "$PREVIEW_PATH"
+            git commit -m "Remove preview for deleted branch: $BRANCH_NAME"
+            git push
+            echo "✅ Preview removed successfully!"
+          else
+            echo "ℹ️  No preview found for branch: $BRANCH_NAME"
+          fi
