@@ -4,13 +4,12 @@ on:
   workflow_dispatch:
   delete:
 
-permissions:
-  contents: write
-
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     if: github.event_name != 'delete'
+    permissions:
+      contents: write
     concurrency:
       group: preview-${{ github.ref_name }}
       cancel-in-progress: true
@@ -53,6 +52,8 @@ jobs:
   cleanup-preview:
     runs-on: ubuntu-latest
     if: github.event_name == 'delete' && github.event.ref_type == 'branch'
+    permissions:
+      contents: write
     concurrency:
       group: preview-${{ github.event.ref }}
       cancel-in-progress: true
