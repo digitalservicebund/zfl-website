@@ -8,13 +8,13 @@ on:
 
 jobs:
   # Builds and deploys preview when PR is opened/updated or manually triggered.
-  # Only runs for org members/owners.
+  # Only runs for org contributors/members/owners.
   build-and-deploy:
     runs-on: ubuntu-latest
     if: |
       github.event_name != 'delete' && 
       github.event.action != 'closed' && 
-      (github.event_name != 'pull_request' || contains(fromJSON('["OWNER", "MEMBER"]'), github.event.pull_request.author_association))
+      (github.event_name != 'pull_request' || contains(fromJSON('["OWNER", "MEMBER", "CONTRIBUTOR"]'), github.event.pull_request.author_association))
     permissions:
       contents: write
       pull-requests: write
