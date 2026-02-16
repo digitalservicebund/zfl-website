@@ -1,8 +1,8 @@
-# ADR-0002: Astro Framework Adoption for Static Content Site
+# 2. Astro Framework Adoption for Static Content Site
 
-Status: Accepted
+## Status
 
-Date: 2026-01-23
+- 2026-01-23: Accepted
 
 ## Context
 

@@ -1,8 +1,8 @@
-# ADR-0001: Build-time Stage Configuration via Environment Variables in Astro
+# 3. Build-time Stage Configuration via Environment Variables in Astro
 
-Status: Accepted
+## Status
 
-Date: 2026-01-16
+- 2026-01-23: Accepted
 
 ## Context
 

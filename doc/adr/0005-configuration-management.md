@@ -1,8 +1,8 @@
-# ADR-0004: Configuration Management
+# 5. Configuration Management
 
-Status: Accepted
+## Status
 
-Date: 2026-02-03
+- 2026-02-03: Accepted
 
 ## Context
 
