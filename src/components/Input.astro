@@ -1,0 +1,11 @@
+---
+interface Props {
+  label: string;
+}
+const { label } = Astro.props;
+---
+
+<div class="w-full">
+  <div>{label}</div>
+  <input class="border-cosmic-blue-base w-full border-2 px-24 py-12" />
+</div>

@@ -1,0 +1,87 @@
+---
+import Hero from "@/components/Hero.astro";
+import Layout from "@/layouts/Layout.astro";
+
+const steps = [
+  {
+    number: "1",
+    title: "Informationen sammeln",
+    description:
+      "Stellen Sie die notwendigen Informationen und Unterlagen zusammen, die für Ihren Steckbrief relevant sind.",
+  },
+  {
+    number: "2",
+    title: "Steckbrief ausfüllen",
+    description:
+      "Füllen Sie den Steckbrief mit den gesammelten Informationen aus. Wir begleiten Sie durch jeden Schritt.",
+  },
+  {
+    number: "3",
+    title: "Überprüfung und Abschluss",
+    description:
+      "Überprüfen Sie Ihre Angaben und schließen Sie den Prozess ab. Bei Fragen stehen wir Ihnen zur Verfügung.",
+  },
+];
+
+export const frontmatter = {
+  title: "Steckbrief",
+  sitemap: true,
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero>
+      <h1>Steckbrief starten</h1>
+      <p>
+        Lorem Ipsum is simply dummy text of the printing and typesetting
+        industry. Lorem Ipsum has been the industry's standard dummy text ever
+        since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book.
+      </p>
+    </Hero>
+
+    <section class="py-80">
+      <h2>Wie läuft der Prozess des Steckbriefs?</h2>
+      <p>
+        Wir leiten Sie Schritt für Schritt durch den Prozess und unterstützen
+        Sie bei der Erstellung Ihres Steckbriefs.
+      </p>
+
+      <div class="mt-40 space-y-36">
+        {
+          steps.map((step) => (
+            <div class="group flex items-start gap-32">
+              <div class="flex h-40 w-40 shrink-0 items-center justify-center rounded-full border-2 border-gray-300 text-lg font-bold">
+                {step.number}
+              </div>
+
+              <div class="grow pt-1">
+                <h3 class="mb-2 text-2xl font-bold">{step.title}</h3>
+                <p class="text-base leading-relaxed opacity-80">
+                  {step.description}
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="mt-80">
+        <h2>Jetzt Steckbrief ausfüllen</h2>
+        <p>
+          Wir begleiten Sie durch jeden Schritt und stehen Ihnen bei Fragen zur
+          Seite.
+        </p>
+        <p class="my-40">
+          <strong>Wennn Sie bereits bestehende Projektskizzen haben</strong>,
+          können Sie sie in den nächsten Schritten anhängen oder ihre
+          existierenden Texte kopieren
+        </p>
+        <a href="/steckbrief2" class="btn-primary mt-10">
+          Steckbrief ausfüllen
+        </a>
+      </div>
+    </section>
+  </main>
+</Layout>

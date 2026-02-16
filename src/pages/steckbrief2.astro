@@ -1,0 +1,49 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import SidebarItem from "@/components/SidebarItem.astro";
+import Input from "@/components/Input.astro";
+
+export const frontmatter = {
+  title: "Steckbrief",
+  sitemap: true,
+};
+---
+
+<Layout title={frontmatter.title}>
+  <div class="mx-auto flex max-w-[1000px] gap-48 py-80">
+    <aside class="sticky top-0 w-248">
+      <SidebarItem label="Ihr Profil" isActive />
+      <SidebarItem label="Kontext" />
+      <SidebarItem label="Zielstellung/Probleme" />
+      <SidebarItem label="Anhang" />
+      <SidebarItem label="Zusammenfassung" />
+    </aside>
+
+    <main class="max-w-a11y flex-1">
+      <div class="bg-lavender-400 relative h-[5px] w-[630px]">
+        <div class="bg-cosmic-blue-base absolute top-0 left-0 h-full w-[173px]">
+        </div>
+      </div>
+
+      <div>
+        <p class="my-40 text-[20px]">Ihr Vorhaben und Kontakt</p>
+
+        <div class="space-y-24">
+          <Input label="Arbeitstitel" />
+          <Input label="E-Mail Adresse" />
+          <div class="flex gap-24">
+            <Input label="Ressort" />
+            <Input label="Referat aus ihrem Profil" />
+          </div>
+          <Input label="Ihr Rechtsbereich" />
+        </div>
+        <div class="mt-80 flex gap-48">
+          <button class="btn-primary">Übernehmen und weiter </button>
+          <a href="/steckbrief" class="btn-secondary">Zurück</a>
+        </div>
+      </div>
+    </main>
+  </div>
+</Layout>
+
+<style></style>
