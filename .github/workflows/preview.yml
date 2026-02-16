@@ -18,10 +18,6 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-      pages: write
-      id-token: write # required by actions/deploy-pages
-    environment:
-      name: github-pages
     concurrency:
       # Note: Can't use env.PREVIEW_BRANCH here as concurrency groups are evaluated before job env vars
       group: preview-${{ github.head_ref || github.ref_name }}
@@ -61,19 +57,10 @@ jobs:
           target-folder: previews/${{ github.head_ref || github.ref_name }} # previews/my-feature-branch/
           clean: false # Prevents one branch preview from deleting others
 
-      - name: Checkout gh-pages branch
-        uses: actions/checkout@v6
-        with:
-          ref: gh-pages
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Wait for automatic Pages deployment
+        run: |
+          echo "⏳ Waiting 40 seconds for GitHub Pages automatic deployment..."
+          sleep 40
 
       - name: Output Preview URL
         run: |
@@ -98,10 +85,6 @@ jobs:
       (github.event_name == 'pull_request' && github.event.action == 'closed')
     permissions:
       contents: write
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
     concurrency:
       group: preview-${{ github.head_ref || github.event.ref }}
       cancel-in-progress: true
@@ -112,7 +95,6 @@ jobs:
           ref: gh-pages
 
       - name: Remove preview folder
-        id: cleanup
         run: |
           PREVIEW_BRANCH="${{ github.head_ref || github.event.ref }}"
           PREVIEW_PATH="previews/$PREVIEW_BRANCH"
@@ -124,19 +106,7 @@ jobs:
             git rm -rf "$PREVIEW_PATH"
             git commit -m "Remove preview for deleted branch: $PREVIEW_BRANCH"
             git push
-            echo "✅ Preview removed successfully!"
-            echo "removed=true" >> $GITHUB_OUTPUT
+            echo "✅ Preview removed successfully! (Automatic Pages deployment will update site)"
           else
             echo "ℹ️  No preview found for branch: $PREVIEW_BRANCH"
-            echo "removed=false" >> $GITHUB_OUTPUT
           fi
-
-      - name: Upload Pages artifact
-        if: steps.cleanup.outputs.removed == 'true'
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
-
-      - name: Deploy to GitHub Pages
-        if: steps.cleanup.outputs.removed == 'true'
-        uses: actions/deploy-pages@v4
