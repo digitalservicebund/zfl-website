@@ -15,13 +15,13 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v6
 
       - uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061
         name: Install pnpm
-        with:
-          cache: true
 
       - name: Cache pnpm dependencies
         id: cache-pnpm-deps
