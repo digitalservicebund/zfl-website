@@ -2,6 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import SidebarItem from "@/components/SidebarItem.astro";
 import Input from "@/components/Input.astro";
+import { buildUrl } from "@/utils/routesHelper";
 
 export const frontmatter = {
   title: "Steckbrief",
@@ -39,7 +40,7 @@ export const frontmatter = {
         </div>
         <div class="mt-80 flex gap-48">
           <button class="btn-primary">Übernehmen und weiter </button>
-          <a href="/steckbrief" class="btn-secondary">Zurück</a>
+          <a href={buildUrl("/steckbrief")} class="btn-secondary">Zurück</a>
         </div>
       </div>
     </main>
