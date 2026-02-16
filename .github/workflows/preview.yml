@@ -46,6 +46,9 @@ jobs:
         env:
           IS_PREVIEW: "true"
 
+      - name: Disable Jekyll # to allow assets being served from _astro directory
+        run: touch dist/.nojekyll
+
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@d92aa235d04922e8f08b40ce78cc5442fcfbfa2f # v4.8.0
         with:
