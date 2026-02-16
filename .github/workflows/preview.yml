@@ -2,17 +2,30 @@ name: Preview
 
 on:
   workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
   delete:
 
 jobs:
+  # Builds and deploys preview when PR is opened/updated or manually triggered.
+  # Only runs for org contributors/members/owners.
   build-and-deploy:
     runs-on: ubuntu-latest
-    if: github.event_name != 'delete'
+    if: |
+      github.event_name != 'delete' && 
+      github.event.action != 'closed' && 
+      !contains(github.actor, '[bot]') &&
+      (github.event_name != 'pull_request' || contains(fromJSON('["OWNER", "MEMBER", "CONTRIBUTOR"]'), github.event.pull_request.author_association))
     permissions:
       contents: write
+      pull-requests: write
     concurrency:
-      group: preview-${{ github.ref_name }}
+      # Note: Can't use env.PREVIEW_BRANCH here as concurrency groups are evaluated before job env vars
+      group: preview-${{ github.head_ref || github.ref_name }}
       cancel-in-progress: true
+    env:
+      PREVIEW_BASE_URL: https://digitalservicebund.github.io/zfl-website/previews
+      PREVIEW_BRANCH: ${{ github.head_ref || github.ref_name }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -21,7 +34,7 @@ jobs:
         name: Install pnpm
 
       - name: Install Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 24
           cache: "pnpm"
@@ -33,29 +46,48 @@ jobs:
         run: pnpm build
         env:
           IS_PREVIEW: "true"
-          PREVIEW_BRANCH: ${{ github.ref_name }}
 
-      - name: Deploy to GitHub Pages
+      - name: Disable Jekyll # to allow assets being served from _astro directory
+        run: touch dist/.nojekyll
+
+      - name: Commit to gh-pages branch
         uses: JamesIves/github-pages-deploy-action@d92aa235d04922e8f08b40ce78cc5442fcfbfa2f # v4.8.0
         with:
           folder: dist
           branch: gh-pages
-          # This creates a folder structure like: previews/my-feature-branch/
-          target-folder: previews/${{ github.ref_name }}
+          target-folder: previews/${{ github.head_ref || github.ref_name }} # previews/my-feature-branch/
           clean: false # Prevents one branch preview from deleting others
+
+      - name: Wait for automatic Pages deployment
+        run: |
+          echo "⏳ Waiting 40 seconds for GitHub Pages automatic deployment..."
+          sleep 40
 
       - name: Output Preview URL
         run: |
           echo "🔍 Preview deployed successfully!"
-          echo "Preview URL: https://digitalservicebund.github.io/zfl-website/previews/${{ github.ref_name }}/"
+          echo "Preview URL: $PREVIEW_BASE_URL/$PREVIEW_BRANCH/"
 
+      - name: Comment PR with Preview URL
+        if: github.event_name == 'pull_request'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          PREVIEW_URL="$PREVIEW_BASE_URL/$PREVIEW_BRANCH/"
+          gh pr comment ${{ github.event.pull_request.number }} --body "🔍 **Preview deployed!**
+
+          Preview URL: $PREVIEW_URL"
+
+  # Removes preview when PR is closed or branch is deleted.
   cleanup-preview:
     runs-on: ubuntu-latest
-    if: github.event_name == 'delete' && github.event.ref_type == 'branch'
+    if: |
+      (github.event_name == 'delete' && github.event.ref_type == 'branch') || 
+      (github.event_name == 'pull_request' && github.event.action == 'closed')
     permissions:
       contents: write
     concurrency:
-      group: preview-${{ github.event.ref }}
+      group: preview-${{ github.head_ref || github.event.ref }}
       cancel-in-progress: true
     steps:
       - name: Checkout gh-pages branch
@@ -65,17 +97,17 @@ jobs:
 
       - name: Remove preview folder
         run: |
-          BRANCH_NAME="${{ github.event.ref }}"
-          PREVIEW_PATH="previews/$BRANCH_NAME"
+          PREVIEW_BRANCH="${{ github.head_ref || github.event.ref }}"
+          PREVIEW_PATH="previews/$PREVIEW_BRANCH"
 
           if [ -d "$PREVIEW_PATH" ]; then
-            echo "🗑️  Removing preview for branch: $BRANCH_NAME"
+            echo "🗑️  Removing preview for branch: $PREVIEW_BRANCH"
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git rm -rf "$PREVIEW_PATH"
-            git commit -m "Remove preview for deleted branch: $BRANCH_NAME"
+            git commit -m "Remove preview for deleted branch: $PREVIEW_BRANCH"
             git push
-            echo "✅ Preview removed successfully!"
+            echo "✅ Preview removed successfully! (Automatic Pages deployment will update site)"
           else
-            echo "ℹ️  No preview found for branch: $BRANCH_NAME"
+            echo "ℹ️  No preview found for branch: $PREVIEW_BRANCH"
           fi
