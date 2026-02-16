@@ -14,6 +14,7 @@ jobs:
     if: |
       github.event_name != 'delete' && 
       github.event.action != 'closed' && 
+      !contains(github.actor, '[bot]') &&
       (github.event_name != 'pull_request' || contains(fromJSON('["OWNER", "MEMBER", "CONTRIBUTOR"]'), github.event.pull_request.author_association))
     permissions:
       contents: write
