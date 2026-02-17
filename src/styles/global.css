@@ -15,6 +15,7 @@
   --color-lavender-base: #e3e6f2;
   --color-lavender-200: #f6f7fb;
   --color-lavender-400: #eceef6;
+  --color-lavender-800: #b8bbcc;
 
   --color-ds-gray-600: #b8bdc3;
   --color-ds-violet: #4c2c92;
@@ -67,6 +68,7 @@
       color: var(--color-white);
       font-weight: 700;
       letter-spacing: 0.16px;
+      text-align: center;
 
       &:active {
         background-color: var(--color-cosmic-blue-400);
@@ -80,6 +82,7 @@
       border: 2px solid var(--color-cosmic-blue-base);
       font-weight: 700;
       letter-spacing: 0.16px;
+      text-align: center;
 
       &:active {
         background-color: var(--color-cosmic-blue-400);

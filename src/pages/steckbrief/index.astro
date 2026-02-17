@@ -2,6 +2,7 @@
 import Card from "@/components/Card.astro";
 import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
 
 export const frontmatter = {
   title: "Steckbrief",
@@ -25,7 +26,7 @@ export const frontmatter = {
       <h2>Wie erstellen Sie einen Steckbrief?</h2>
       <div class="mt-40 flex gap-40">
         <Card wrapperClass="w-full px-24! py-32">
-          <div class="flex h-full flex-col justify-between gap-16">
+          <div class="flex h-full flex-col justify-between gap-40">
             <div>
               <h3 class="font-[26px]">Wir füllen den Steckbrief für Sie aus</h3>
               <p>
@@ -35,15 +36,27 @@ export const frontmatter = {
                 of type and scrambled it to make a type specimen book.
               </p>
             </div>
-            <div class="spacing-y-16">
-              <a href="/steckbrief/kontakt" class="btn-primary"
+            <div class="flex flex-col gap-8">
+              <div class="flex items-center gap-8">
+                <Icon
+                  name="ic:twotone-people"
+                  class="text-lavender-800 mr-8 h-40 w-40"
+                /> ZFL Support
+              </div>
+              <div class="flex items-center gap-8">
+                <Icon
+                  name="ic:baseline-access-time"
+                  class="text-lavender-800 mr-8 h-40 w-40"
+                /> 2 Wochen
+              </div>
+              <a href="/steckbrief/kontakt" class="btn-primary mt-8"
                 >Kontaktieren Sie uns</a
               >
             </div>
           </div>
         </Card>
         <Card wrapperClass="w-full px-24! py-32">
-          <div class="flex h-full flex-col justify-between gap-16">
+          <div class="flex h-full flex-col justify-between gap-40">
             <div>
               <h3 class="font-[26px]">Sie füllen ihn selbst aus</h3>
               <p>
@@ -53,8 +66,20 @@ export const frontmatter = {
                 of type and scrambled it to make a type specimen book.
               </p>
             </div>
-            <div class="spacing-y-16">
-              <a href="/steckbrief/prozess" class="btn-primary"
+            <div class="flex flex-col gap-8">
+              <div class="flex items-center gap-8">
+                <Icon
+                  name="ic:twotone-people"
+                  class="text-lavender-800 mr-8 h-40 w-40"
+                /> Ihr Referat
+              </div>
+              <div class="flex items-center gap-8">
+                <Icon
+                  name="ic:baseline-access-time"
+                  class="text-lavender-800 mr-8 h-40 w-40"
+                /> 1-2 Wochen
+              </div>
+              <a href="/steckbrief/prozess" class="btn-primary mt-8"
                 >Steckbrief erstellen</a
               >
             </div>

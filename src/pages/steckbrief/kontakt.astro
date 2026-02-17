@@ -28,14 +28,33 @@ export const frontmatter = {
         since the 1500s, when an unknown printer took a galley of type and
         scrambled it to make a type specimen book.
       </p>
-      <p>Ihre Kontaktdaten</p>
+      <p class="font-bold">Ihre Kontaktdaten</p>
 
-      <div class="space-y-24">
+      <div class="max-w-a11y space-y-24">
         <div class="flex gap-24">
           <Input label="Ressort" />
           <Input label="Referat aus ihrem Profil" />
         </div>
         <Input label="Ihr Rechtsbereich" />
+        <p>
+          <strong>Ihre Anfrage</strong><br />Geben Sie den Titel und Kontext des
+          Vorhabens an
+        </p>
+        <textarea
+          class="border-cosmic-blue-base w-full border-2 px-24 py-12"
+          rows="5"></textarea>
+        <Input label="Ihre E-Mail-Adresse" />
+      </div>
+      <h3 class="mt-40">Hängen Sie relevante Doukmente an die E-Mail an</h3>
+      <p>
+        Lorem Ipsum is simply dummy text of the printing and typesetting
+        industry. Lorem Ipsum has been the industry's standard dummy text ever
+        since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book.
+      </p>
+      <div class="mt-40 flex gap-16">
+        <button class="btn-primary">Kontakt aufnehmen</button>
+        <button class="btn-secondary">Als Word-Dokument herunterladen</button>
       </div>
     </section>
   </main>
