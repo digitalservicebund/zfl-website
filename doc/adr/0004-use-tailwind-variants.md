@@ -1,8 +1,8 @@
-# ADR-0003: Use tailwind-variants for component variants
+# 4. Use tailwind-variants for component variants
 
-Status: Accepted
+## Status
 
-Date: 2026-02-03
+- 2026-02-03: Accepted
 
 ## Context
 
