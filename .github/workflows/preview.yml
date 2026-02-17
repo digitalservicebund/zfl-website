@@ -45,7 +45,7 @@ jobs:
       - name: Build Astro for Preview
         run: pnpm build
         env:
-          IS_PREVIEW: "true"
+          PUBLIC_STAGE: "preview"
 
       - name: Disable Jekyll # to allow assets being served from _astro directory
         run: touch dist/.nojekyll

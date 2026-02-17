@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import { buildUrl } from "@/utils/routesHelper";
 
 interface Props {
   href: string;
@@ -8,10 +9,11 @@ interface Props {
 
 const { href, class: className = "" } = Astro.props;
 const isExternal = href.startsWith("http");
+const url = buildUrl(href);
 ---
 
 <a
-  href={href}
+  href={url}
   class={`kern-link text-link ${className}`}
   {...isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {}}
   ><slot />{
