@@ -1,0 +1,42 @@
+---
+import Hero from "@/components/Hero.astro";
+import Layout from "@/layouts/Layout.astro";
+import Input from "@/components/Input.astro";
+
+export const frontmatter = {
+  title: "Steckbrief",
+  sitemap: true,
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero>
+      <h1>Steckbrief starten</h1>
+      <p>
+        Lorem Ipsum is simply dummy text of the printing and typesetting
+        industry. Lorem Ipsum has been the industry's standard dummy text ever
+        since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book.
+      </p>
+    </Hero>
+    <section class="space-y-16 py-80">
+      <h2>Kontaktformular</h2>
+      <p>
+        Lorem Ipsum is simply dummy text of the printing and typesetting
+        industry. Lorem Ipsum has been the industry's standard dummy text ever
+        since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book.
+      </p>
+      <p>Ihre Kontaktdaten</p>
+
+      <div class="space-y-24">
+        <div class="flex gap-24">
+          <Input label="Ressort" />
+          <Input label="Referat aus ihrem Profil" />
+        </div>
+        <Input label="Ihr Rechtsbereich" />
+      </div>
+    </section>
+  </main>
+</Layout>

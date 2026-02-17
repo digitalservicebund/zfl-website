@@ -1,0 +1,66 @@
+---
+import Card from "@/components/Card.astro";
+import Hero from "@/components/Hero.astro";
+import Layout from "@/layouts/Layout.astro";
+
+export const frontmatter = {
+  title: "Steckbrief",
+  sitemap: true,
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero>
+      <h1>Steckbrief starten</h1>
+      <p>
+        Lorem Ipsum is simply dummy text of the printing and typesetting
+        industry. Lorem Ipsum has been the industry's standard dummy text ever
+        since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book.
+      </p>
+    </Hero>
+
+    <section class="breakout bg-lavender-base py-80">
+      <h2>Wie erstellen Sie einen Steckbrief?</h2>
+      <div class="mt-40 flex gap-40">
+        <Card wrapperClass="w-full px-24! py-32">
+          <div class="flex h-full flex-col justify-between gap-16">
+            <div>
+              <h3 class="font-[26px]">Wir füllen den Steckbrief für Sie aus</h3>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley
+                of type and scrambled it to make a type specimen book.
+              </p>
+            </div>
+            <div class="spacing-y-16">
+              <a href="/steckbrief/kontakt" class="btn-primary"
+                >Kontaktieren Sie uns</a
+              >
+            </div>
+          </div>
+        </Card>
+        <Card wrapperClass="w-full px-24! py-32">
+          <div class="flex h-full flex-col justify-between gap-16">
+            <div>
+              <h3 class="font-[26px]">Sie füllen ihn selbst aus</h3>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley
+                of type and scrambled it to make a type specimen book.
+              </p>
+            </div>
+            <div class="spacing-y-16">
+              <a href="/steckbrief/prozess" class="btn-primary"
+                >Steckbrief erstellen</a
+              >
+            </div>
+          </div>
+        </Card>
+      </div>
+    </section>
+  </main>
+</Layout>
