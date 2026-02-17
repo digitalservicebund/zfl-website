@@ -57,10 +57,13 @@
     @apply whitespace-nowrap;
   }
 
-  a,
   button {
     @apply cursor-pointer;
+  }
 
+  a,
+  button,
+  label {
     &.btn-primary {
       display: inline-block;
       padding: 18px 24px;

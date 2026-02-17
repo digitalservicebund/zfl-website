@@ -1,33 +1,81 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import SidebarItem from "@/components/SidebarItem.astro";
 import Input from "@/components/Input.astro";
+import { Icon } from "astro-icon/components";
 
 export const frontmatter = {
   title: "Steckbrief",
   sitemap: true,
 };
+
+const steps = [
+  {
+    id: "profil",
+    label: "Ihr Profil",
+    progress: 20,
+  },
+  {
+    id: "kontext",
+    label: "Kontext",
+    progress: 40,
+  },
+  {
+    id: "zielstellung",
+    label: "Zielstellung/Probleme",
+    progress: 60,
+  },
+  {
+    id: "anhang",
+    label: "Anhang",
+    progress: 80,
+  },
+  {
+    id: "zusammenfassung",
+    label: "Zusammenfassung",
+    progress: 100,
+  },
+];
 ---
 
 <Layout title={frontmatter.title}>
-  <div class="mx-auto flex max-w-[1000px] gap-48 py-80">
-    <aside class="sticky top-0 w-248">
-      <SidebarItem label="Ihr Profil" isActive />
-      <SidebarItem label="Kontext" />
-      <SidebarItem label="Zielstellung/Probleme" />
-      <SidebarItem label="Anhang" />
-      <SidebarItem label="Zusammenfassung" />
+  <div class="mx-auto flex max-w-[1296px] gap-48 py-80">
+    <!-- Hidden radio inputs for step navigation -->
+    {
+      steps.map((step) => (
+        <input
+          type="radio"
+          name="step"
+          id={`step-${step.id}`}
+          class="step-radio"
+          checked={step.id === "profil"}
+        />
+      ))
+    }
+
+    <aside class="sidebar-column sticky top-0 w-248">
+      {
+        steps.map((step) => (
+          <label
+            for={`step-${step.id}`}
+            class="sidebar-item relative flex w-248 cursor-pointer items-center py-16 pr-16 pl-32"
+          >
+            <div class="sidebar-indicator bg-cosmic-blue-base absolute top-0 bottom-0 left-0 h-full w-[3px]" />
+            {step.label}
+          </label>
+        ))
+      }
     </aside>
 
     <main class="max-w-a11y flex-1">
       <div class="bg-lavender-400 relative h-[5px] w-[630px]">
-        <div class="bg-cosmic-blue-base absolute top-0 left-0 h-full w-[173px]">
+        <div
+          class="progress-bar bg-cosmic-blue-base absolute top-0 left-0 h-full"
+        >
         </div>
       </div>
 
-      <div>
-        <p class="my-40 text-[20px]">Ihr Vorhaben und Kontakt</p>
-
+      <!-- Step 1: Ihr Profil -->
+      <div class="step-content py-40" data-step="profil">
         <div class="space-y-24">
           <Input label="Arbeitstitel" />
           <Input label="E-Mail Adresse" />
@@ -38,12 +86,284 @@ export const frontmatter = {
           <Input label="Ihr Rechtsbereich" />
         </div>
         <div class="mt-80 flex gap-48">
-          <button class="btn-primary">Übernehmen und weiter </button>
+          <label for="step-kontext" class="btn-primary cursor-pointer"
+            >Übernehmen und weiter</label
+          >
           <a href="/steckbrief/prozess" class="btn-secondary">Zurück</a>
         </div>
       </div>
+
+      <!-- Step 2: Kontext -->
+      <div class="step-content py-40" data-step="kontext">
+        <div class="space-y-24">
+          <p>Kontext Ihres Vorhabens</p>
+          <textarea
+            class="border-cosmic-blue-base w-full border-2 px-24 py-12"
+            rows="5"></textarea>
+        </div>
+        <div class="mt-80 flex gap-48">
+          <label for="step-zielstellung" class="btn-primary cursor-pointer"
+            >Übernehmen und weiter</label
+          >
+          <label for="step-profil" class="btn-secondary cursor-pointer"
+            >Zurück</label
+          >
+        </div>
+      </div>
+
+      <!-- Step 3: Zielstellung/Probleme -->
+      <div class="step-content py-40" data-step="zielstellung">
+        <div class="space-y-24">
+          <p>Zielstellung</p>
+          <textarea
+            class="border-cosmic-blue-base w-full border-2 px-24 py-12"
+            rows="5"></textarea>
+          <p>Probleme</p>
+          <textarea
+            class="border-cosmic-blue-base w-full border-2 px-24 py-12"
+            rows="5"></textarea>
+        </div>
+        <div class="mt-80 flex gap-48">
+          <label for="step-anhang" class="btn-primary cursor-pointer"
+            >Übernehmen und weiter</label
+          >
+          <label for="step-kontext" class="btn-secondary cursor-pointer"
+            >Zurück</label
+          >
+        </div>
+      </div>
+
+      <!-- Step 4: Anhang -->
+      <div class="step-content py-40" data-step="anhang">
+        <p class="font-bold">Hängen Sie relevante Dokumente an"</p>
+        <p>
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard dummy text ever
+          since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book.
+        </p>
+        <div class="space-y-24">
+          <p>Anhänge und Dokumente</p>
+          <Input label="Dokument hochladen" />
+        </div>
+        <div class="mt-80 flex gap-48">
+          <label for="step-zusammenfassung" class="btn-primary cursor-pointer"
+            >Übernehmen und weiter</label
+          >
+          <label for="step-zielstellung" class="btn-secondary cursor-pointer"
+            >Zurück</label
+          >
+        </div>
+      </div>
+
+      <!-- Step 5: Zusammenfassung -->
+      <div class="step-content py-40" data-step="zusammenfassung">
+        <p class="text-[20px]">Zusammenfassung</p>
+        <div class="space-y-24">
+          <p>Hier ist die Zusammenfassung Ihrer Angaben.</p>
+        </div>
+        <div class="mt-80 flex gap-48">
+          <button class="btn-primary">Absenden</button>
+          <label for="step-anhang" class="btn-secondary cursor-pointer"
+            >Zurück</label
+          >
+        </div>
+      </div>
     </main>
+
+    <aside
+      class="hints-column bg-lavender-200 border-cosmic-blue-400 sticky top-0 w-248 border-l px-32 pt-40 pb-16"
+    >
+      <div
+        class="border-cosmic-blue-400 text-cosmic-blue-base absolute top-34 left-0 -translate-x-1/2 rounded-full border bg-white p-8"
+      >
+        <Icon name="ic:twotone-arrow-forward-ios" />
+      </div>
+      <!-- Hints for Step 1: Ihr Profil -->
+      <div class="hint-content space-y-40" data-step="profil">
+        <div>
+          <p class="mb-16 font-bold">Tipp</p>
+          <p>
+            Geben Sie einen aussagekräftigen Arbeitstitel ein, der Ihr Vorhaben
+            kurz beschreibt.
+          </p>
+        </div>
+      </div>
+
+      <!-- Hints for Step 2: Kontext -->
+      <div class="hint-content space-y-40" data-step="kontext">
+        <div>
+          <p class="mb-16 font-bold">Was bedeutet Kontext in dem Fall?</p>
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book.
+          </p>
+        </div>
+        <div>
+          <p class="mb-16 font-bold">Haben Sie bereits Projektskizzen?</p>
+          <p>
+            copy+pasten Sie ihre Inhalte hier rein oder hängen Sie sie im 4.
+            Schritt an.
+          </p>
+        </div>
+      </div>
+
+      <!-- Hints for Step 3: Zielstellung/Probleme -->
+      <div class="hint-content space-y-40" data-step="zielstellung">
+        <div>
+          <p class="mb-16 font-bold">Was kommt in die Zielstellung?</p>
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book.
+          </p>
+        </div>
+        <div>
+          <p class="mb-16 font-bold">Was könnten Probleme sein?</p>
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book.
+          </p>
+        </div>
+      </div>
+
+      <!-- Hints for Step 4: Anhang -->
+      <div class="hint-content space-y-40" data-step="anhang">
+        <div>
+          <p class="mb-16 font-bold">Was können Sie anhängen?</p>
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book.
+          </p>
+        </div>
+        <div>
+          <p class="mb-16 font-bold">Bestehende Projektkizzen?</p>
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book.
+          </p>
+        </div>
+      </div>
+
+      <!-- Hints for Step 5: Zusammenfassung -->
+      <div class="hint-content space-y-40" data-step="zusammenfassung">
+        <div>
+          <p class="mb-16 font-bold">Fertig!</p>
+          <p>Überprüfen Sie Ihre Angaben und senden Sie das Formular ab.</p>
+        </div>
+      </div>
+    </aside>
   </div>
 </Layout>
 
-<style></style>
+<style>
+  /* Hide radio inputs */
+  .step-radio {
+    display: none;
+  }
+
+  /* Hide all step content by default */
+  .step-content {
+    display: none;
+  }
+
+  /* Hide all hint content by default */
+  .hint-content {
+    display: none;
+  }
+
+  /* Hide sidebar indicators by default */
+  .sidebar-indicator {
+    display: none;
+  }
+
+  /* Show step content when corresponding radio is checked */
+  #step-profil:checked ~ main .step-content[data-step="profil"],
+  #step-kontext:checked ~ main .step-content[data-step="kontext"],
+  #step-zielstellung:checked ~ main .step-content[data-step="zielstellung"],
+  #step-anhang:checked ~ main .step-content[data-step="anhang"],
+  #step-zusammenfassung:checked
+    ~ main
+    .step-content[data-step="zusammenfassung"] {
+    display: block;
+  }
+
+  /* Show hint content when corresponding radio is checked */
+  #step-profil:checked ~ .hints-column .hint-content[data-step="profil"],
+  #step-kontext:checked ~ .hints-column .hint-content[data-step="kontext"],
+  #step-zielstellung:checked
+    ~ .hints-column
+    .hint-content[data-step="zielstellung"],
+  #step-anhang:checked ~ .hints-column .hint-content[data-step="anhang"],
+  #step-zusammenfassung:checked
+    ~ .hints-column
+    .hint-content[data-step="zusammenfassung"] {
+    display: block;
+  }
+
+  /* Style active sidebar item */
+  #step-profil:checked ~ .sidebar-column label[for="step-profil"],
+  #step-kontext:checked ~ .sidebar-column label[for="step-kontext"],
+  #step-zielstellung:checked ~ .sidebar-column label[for="step-zielstellung"],
+  #step-anhang:checked ~ .sidebar-column label[for="step-anhang"],
+  #step-zusammenfassung:checked
+    ~ .sidebar-column
+    label[for="step-zusammenfassung"] {
+    background-color: var(--color-lavender-base);
+  }
+
+  /* Show indicator for active sidebar item */
+  #step-profil:checked
+    ~ .sidebar-column
+    label[for="step-profil"]
+    .sidebar-indicator,
+  #step-kontext:checked
+    ~ .sidebar-column
+    label[for="step-kontext"]
+    .sidebar-indicator,
+  #step-zielstellung:checked
+    ~ .sidebar-column
+    label[for="step-zielstellung"]
+    .sidebar-indicator,
+  #step-anhang:checked
+    ~ .sidebar-column
+    label[for="step-anhang"]
+    .sidebar-indicator,
+  #step-zusammenfassung:checked
+    ~ .sidebar-column
+    label[for="step-zusammenfassung"]
+    .sidebar-indicator {
+    display: block;
+  }
+
+  /* Update progress bar width based on active step */
+  #step-profil:checked ~ main .progress-bar {
+    width: 20%;
+  }
+  #step-kontext:checked ~ main .progress-bar {
+    width: 40%;
+  }
+  #step-zielstellung:checked ~ main .progress-bar {
+    width: 60%;
+  }
+  #step-anhang:checked ~ main .progress-bar {
+    width: 80%;
+  }
+  #step-zusammenfassung:checked ~ main .progress-bar {
+    width: 100%;
+  }
+
+  /* Smooth transition for progress bar */
+  .progress-bar {
+    transition: width 0.3s ease-in-out;
+  }
+</style>
