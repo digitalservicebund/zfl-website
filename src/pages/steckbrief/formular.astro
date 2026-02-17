@@ -2,6 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import Input from "@/components/Input.astro";
 import { Icon } from "astro-icon/components";
+import { buildUrl } from "@/utils/routesHelper";
 
 export const frontmatter = {
   title: "Steckbrief",
@@ -89,7 +90,9 @@ const steps = [
           <label for="step-kontext" class="btn-primary cursor-pointer"
             >Übernehmen und weiter</label
           >
-          <a href="/steckbrief/prozess" class="btn-secondary">Zurück</a>
+          <a href={buildUrl("/steckbrief/prozess")} class="btn-secondary"
+            >Zurück</a
+          >
         </div>
       </div>
 

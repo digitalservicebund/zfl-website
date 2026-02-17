@@ -3,6 +3,7 @@ import Card from "@/components/Card.astro";
 import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
+import { buildUrl } from "@/utils/routesHelper";
 
 export const frontmatter = {
   title: "Steckbrief",
@@ -49,7 +50,7 @@ export const frontmatter = {
                   class="text-lavender-800 mr-8 h-40 w-40"
                 /> 2 Wochen
               </div>
-              <a href="/steckbrief/kontakt" class="btn-primary mt-8"
+              <a href={buildUrl("/steckbrief/kontakt")} class="btn-primary mt-8"
                 >Kontaktieren Sie uns</a
               >
             </div>
@@ -79,7 +80,7 @@ export const frontmatter = {
                   class="text-lavender-800 mr-8 h-40 w-40"
                 /> 1-2 Wochen
               </div>
-              <a href="/steckbrief/prozess" class="btn-primary mt-8"
+              <a href={buildUrl("/steckbrief/prozess")} class="btn-primary mt-8"
                 >Steckbrief erstellen</a
               >
             </div>
