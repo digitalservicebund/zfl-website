@@ -1,4 +1,4 @@
-# 6. Use NGINX as production server for Astro
+# 6. Use a reverse proxy for PostHog analytics traffic
 
 ## Status
 
@@ -6,15 +6,15 @@
 
 ## Context
 
-Our application benefits from product analytics to understand user behavior, which drives product decisions. However, we want to minimize the amount of Personally Identifiable Information (PII) shared with third-party sub-processors. Specifically, we aim to prevent the transmission of client IP addresses to PostHog's infrastructure.
+Our application benefits from product analytics to understand user behavior, which drives product decisions. However, we want to minimize the amount of Personally Identifiable Information (PII) shared with third-party subprocessors. Specifically, we aim to prevent the transmission of client IP addresses to PostHog's infrastructure.
 
 We have already decided not to use cookies for tracking to simplify our compliance posture and respect user privacy at the browser level.
 
 ## Decision
 
-We will implement a Reverse Proxy for all PostHog traffic. Instead of the client browser communicating directly with *.posthog.com, all analytics events will be sent to a sub-path on our own domain (`/ph-relay`), which will then forward the data to PostHog.
+We will implement a Reverse Proxy for all PostHog traffic. Instead of the client browser communicating directly with `*.posthog.com`, all analytics events will be sent to a sub-path on our own domain (`/ph-relay`), which will then forward the data to PostHog.
 
-We will implement the Reverse Proxy based on the Nginx snippet provided in the PostHog documentation.
+We will implement the reverse proxy based on the Nginx snippet provided in the PostHog documentation.
 
 ### Implementation details
 
