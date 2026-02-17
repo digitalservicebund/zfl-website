@@ -125,7 +125,10 @@ export const frontmatter = {
       </div>
     </section>
 
-    <div class=`breakout mt-40 trainings-background py-80 bg-cover bg-center`>
+    <div
+      class=`breakout mt-40 py-80 bg-cover bg-center`
+      style={{ backgroundImage: trainingsImageAssetURL }}
+    >
       <Card>
         <h2>
           Praxisbeispiel: Einsatz eines interdisziplinären Kompetenzteams für
@@ -145,9 +148,3 @@ export const frontmatter = {
     </div>
   </main>
 </Layout>
-
-<style define:vars={{ trainingsImageAssetURL }}>
-  .trainings-background {
-    background-image: var(--trainingsImageAssetURL);
-  }
-</style>
