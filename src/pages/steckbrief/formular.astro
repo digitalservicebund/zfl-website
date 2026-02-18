@@ -103,7 +103,7 @@ const steps = [
       <div class="step-content py-40" data-step="kontext">
         <div class="space-y-24">
           <p>Kontext Ihres Vorhabens</p>
-          <Textarea />
+          <Textarea maxLength={1000} />
         </div>
         <div class="mt-80 flex gap-48">
           <label for="step-zielstellung" class="btn-primary cursor-pointer"
@@ -119,9 +119,9 @@ const steps = [
       <div class="step-content py-40" data-step="zielstellung">
         <div class="space-y-24">
           <p>Zielstellung</p>
-          <Textarea />
+          <Textarea maxLength={1000} />
           <p>Probleme</p>
-          <Textarea />
+          <Textarea maxLength={1000} />
         </div>
         <div class="mt-80 flex gap-48">
           <label for="step-anhang" class="btn-primary cursor-pointer"
