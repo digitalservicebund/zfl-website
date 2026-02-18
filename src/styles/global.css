@@ -1,3 +1,4 @@
+@import "@kern-ux/native/dist/kern.min.css";
 @import "@digitalservice4germany/angie/fonts.css" layer(base);
 @import "tailwindcss";
 @config "@digitalservice4germany/style-dictionary/tailwind";
@@ -5,6 +6,7 @@
 
 @theme {
   --font-sans: BundesSansWeb;
+  
   --color-*: initial;
 
   --color-white: white;
@@ -22,6 +24,11 @@
   --section-spacing-default: 80px;
   --max-content-width: 59rem;
   --container-padding-inline: clamp(1rem, 5vw, 3rem);
+}
+
+:root {
+  --kern-typography-font-family-default: BundesSansWeb;
+  --kern-component-kopfzeile-font-family: BundesSansWeb;
 }
 
 @layer base {
@@ -50,6 +57,10 @@
 
   h4 {
     @apply font-bold;
+  }
+
+  a:not([class*="link-unstyled"]) {
+    @apply text-link;
   }
 
   a[href^="tel:"] {
@@ -124,12 +135,6 @@
 
   *:focus-visible {
     @apply no-underline outline-2 outline-offset-1 outline-blue-800;
-  }
-
-  p + a:not([class]),
-  p > a:not([class]),
-  li > a:not([class]) {
-    @apply text-link;
   }
 }
 

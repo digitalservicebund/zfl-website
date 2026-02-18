@@ -1,0 +1,90 @@
+---
+import Hero from "@/components/Hero.astro";
+import { isStaging } from "@/config/stage";
+import Layout from "@/layouts/Layout.astro";
+import digitalcheckImage from "./Digitalcheck.png";
+import fimImage from "./FIM.png";
+import interoperableEuropeImage from "./InteroperableEurope.png";
+import eGesetzgebungImage from "./eGG.png";
+import rulemapBuilderImage from "./RulemapBuilder.jpg";
+import ToolCard from "./ToolCard.astro";
+
+if (!isStaging) {
+  return Astro.redirect("/404", 302);
+}
+
+export const frontmatter = {
+  title: "Anleitungen und Hilfsmittel",
+  sitemap: true,
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero>
+      <h1>{frontmatter.title}</h1>
+      <p>
+        Auf dieser Seite finden Sie hilfreiche Links zu Anleitungen und
+        Hilfsmittel, die Sie bei der Regelungsarbeit unterstützen.
+      </p>
+    </Hero>
+
+    <section class="grid grid-cols-1 gap-16 py-80 md:grid-cols-2">
+      <ToolCard
+        preline="Prozessbegleitung"
+        title="Digitalcheck"
+        href="https://digitalcheck.bund.de/"
+        subline="Digitale Regelungen erarbeiten"
+        body="Der Digitalcheck ist eine Prozessbegleitung für Ihr Regelungsvorhaben. Sie stellen damit Digitaltauglichkeit sicher."
+        image={digitalcheckImage}
+        imageAlt="Symbolbild für den Digitalcheck"
+      />
+      <ToolCard
+        preline="Arbeitshilfe"
+        title="Rulemap Builder"
+        href="https://rulemapping.org/de"
+        subline="Regelungen als Entscheidungsmodelle erstellen"
+        body="Rulemaps machen die Logik von Gesetzen sichtbar, prüfbar und anwendbar – und schaffen so die Grundlage für eine Verwaltung, die nachvollziehbar, effizient und modern arbeitet."
+        image={rulemapBuilderImage}
+        imageAlt="Symbolbild für den Rulemap Builder"
+        imageSource="Rulemapping Group"
+      />
+      <ToolCard
+        preline="Arbeitshilfe"
+        title="FIM – Föderales Informationsmanagement"
+        href="https://fimportal.de/"
+        subline="Der Standard für Verwaltungsleistungen"
+        body="Mit dem Föderalen Informationsmanagement (FIM) erfassen Bund, Länder und Kommunen Informationen über Verwaltungshandeln strukturiert und zugänglich. FIM stellt einheitliche Datenfelder, standardisierte Prozessvorgaben und leicht verständliche Bürgerinformationen bereit."
+        image={fimImage}
+        imageAlt="Symbolbild für das Föderale Informationsmanagement"
+        imageSource="FITKO"
+      />
+      <ToolCard
+        preline="Prozessbegleitung"
+        title="Interoperable Europe Assessments"
+        href="https://digitalcheck.bund.de/interoperabel"
+        subline="EU-Interoperabilität prüfen"
+        body="Hier erfahren Sie, was die Verordnung für ein interoperables Europa (EU) 2024/903 für Ihr Regelungsvorhaben bedeutet und wie sie zu einem vernetzten Europa beiträgt."
+        image={interoperableEuropeImage}
+        imageAlt="Symbolbild für ein vernetztes Europa"
+      />
+      <ToolCard
+        preline="Plattform"
+        title="E-Gesetzgebung"
+        href="https://plattform.egesetzgebung.bund.de/cockpit/"
+        subline="Das Rechtsetzungsverfahren auf Bundesebene"
+        body="Die E-Gesetzgebung ermöglicht die durchgängig digitale Zusammenarbeit im Gesetzgebungsverfahren zwischen Bundesregierung, Bundesrat und Bundestag."
+        image={eGesetzgebungImage}
+        imageAlt="Symbolbild für die E-Gesetzgebung"
+        imageSource="BMI"
+      />
+      <ToolCard
+        preline="Arbeitshilfe"
+        title="eNorm"
+        href="https://www.enorm.bund.de/"
+        subline="Elektronische Arbeitshilfen und Verkündung"
+        body="Die eNorm unterstützt bei der Einhaltung rechtsförmlicher und redaktioneller Vorgaben bei der Erstellung von Regelungsentwürfen. Sie automatisiert darüber hinaus bestimmte Routineaufgaben."
+      />
+    </section>
+  </main>
+</Layout>

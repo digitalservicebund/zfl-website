@@ -3,6 +3,7 @@ import Link from "@/components/Link.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import bmdsLogo from "@/images/logo/bmds-logo.png";
 import { Image } from "astro:assets";
+import { isStaging } from "@/config/stage";
 
 type FooterItem = { url: string; label: string; prefix?: string };
 
@@ -16,6 +17,9 @@ const footerColumns: Record<string, FooterItem[]> = {
     },
     { url: "/begleitungen", label: "Begleitungen" },
     { url: "/schulungen", label: "Schulungen" },
+    ...(isStaging
+      ? [{ url: "/anleitungen-und-hilfsmittel", label: "Anleitungen und Hilfsmittel" }]
+      : []),
   ],
   "Über das Ziel": [
     { url: "/zahlen-und-fakten", label: "Zahlen und Fakten" },
