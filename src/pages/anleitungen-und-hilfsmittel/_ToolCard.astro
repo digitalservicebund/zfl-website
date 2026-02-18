@@ -22,9 +22,9 @@ const { preline, title, href, subline, body, image, imageAlt, imageSource } =
   {
     image && imageAlt && (
       <div class="kern-card__media relative">
-        <Image src={image} alt={imageAlt} class="object-cover h-208" />
+        <Image src={image} alt={imageAlt} class="h-208 object-cover" />
         {imageSource && (
-          <p class="absolute bottom-0 right-0 bg-black/40 px-4 text-xs w-auto! text-white rounded-none!">
+          <p class="absolute right-0 bottom-0 w-auto! rounded-none! bg-black/40 px-4 text-xs text-white">
             Quelle: {imageSource}
           </p>
         )}

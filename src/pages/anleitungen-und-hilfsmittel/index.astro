@@ -3,11 +3,11 @@ import Hero from "@/components/Hero.astro";
 import { isStaging } from "@/config/stage";
 import Layout from "@/layouts/Layout.astro";
 import digitalcheckImage from "./Digitalcheck.png";
+import eGesetzgebungImage from "./eGG.png";
 import fimImage from "./FIM.png";
 import interoperableEuropeImage from "./InteroperableEurope.png";
-import eGesetzgebungImage from "./eGG.png";
 import rulemapBuilderImage from "./RulemapBuilder.jpg";
-import ToolCard from "./ToolCard.astro";
+import ToolCard from "./_ToolCard.astro";
 
 if (!isStaging) {
   return Astro.redirect("/404", 302);
