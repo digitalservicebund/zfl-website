@@ -1,5 +1,7 @@
 @import "@digitalservice4germany/angie/fonts.css" layer(base);
 @import "tailwindcss";
+@import "@kern-ux/native/dist/kern.min.css";
+@import "@kern-ux/native/dist/fonts/fira-sans.css";
 @config "@digitalservice4germany/style-dictionary/tailwind";
 @plugin "@digitalservice4germany/angie";
 
