@@ -34,6 +34,8 @@ allowed_patterns:
   - "public key"
   - "secrets.GITHUB_TOKEN"
   - "posthogKey"
+  - "keydown"
+  - "keyup"
 
 scopeconfig:
   - scope: node # ignores files such as package-lock.json

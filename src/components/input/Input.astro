@@ -1,13 +1,17 @@
 ---
-interface Props {
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"input"> {
   label: string;
 }
-const { label } = Astro.props;
+const { label, id, ...rest } = Astro.props;
 ---
 
 <div class="w-full">
-  <div>{label}</div>
+  <label for={id}>{label}</label>
   <input
+    {id}
     class="border-cosmic-blue-base w-full border-2 px-24 py-12 outline-0 transition-shadow focus:shadow-[inset_0_0_0_2px_var(--color-cosmic-blue-base)]"
+    {...rest}
   />
 </div>

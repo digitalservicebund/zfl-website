@@ -1,10 +1,11 @@
 ---
 import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
-import Input from "@/components/Input.astro";
-import Select from "@/components/Select.astro";
-import Textarea from "@/components/Textarea.astro";
+import Input from "@/components/input/Input.astro";
+import Select from "@/components/input/Select.astro";
+import Textarea from "@/components/input/Textarea.astro";
 import { fieldsOfLawOptions } from "@/config/fieldsOfLawOptions";
+import { ZFL_EMAIL } from "@/config/constants";
 
 export const frontmatter = {
   title: "Steckbrief",
@@ -35,16 +36,20 @@ export const frontmatter = {
 
       <div class="max-w-a11y space-y-24">
         <div class="flex gap-24">
-          <Input label="Ressort" />
-          <Input label="Referat aus ihrem Profil" />
+          <Input id="ressort" label="Ressort" />
+          <Input id="referat" label="Referat aus ihrem Profil" />
         </div>
-        <Select label="Ihr Rechtsbereich" options={fieldsOfLawOptions} />
+        <Select
+          id="rechtsbereich"
+          label="Ihr Rechtsbereich"
+          options={fieldsOfLawOptions}
+        />
         <p>
           <strong>Ihre Anfrage</strong><br />Geben Sie den Titel und Kontext des
           Vorhabens an
         </p>
-        <Textarea maxLength={1000} />
-        <Input label="Ihre E-Mail-Adresse" />
+        <Textarea id="context" maxlength={1000} />
+        <Input id="mail" label="Ihre E-Mail-Adresse" />
       </div>
       <h3 class="mt-40">Hängen Sie relevante Doukmente an die E-Mail an</h3>
       <p>
@@ -54,9 +59,43 @@ export const frontmatter = {
         scrambled it to make a type specimen book.
       </p>
       <div class="mt-40 flex gap-16">
-        <button class="btn-primary">Kontakt aufnehmen</button>
-        <button class="btn-secondary">Als Word-Dokument herunterladen</button>
+        <button id="kontakt-btn" type="button" class="btn-primary">
+          Kontakt aufnehmen
+        </button>
       </div>
     </section>
   </main>
 </Layout>
+
+<script define:vars={{ email: ZFL_EMAIL.display }}>
+  document.getElementById("kontakt-btn")?.addEventListener("click", () => {
+    const getValue = (/** @type {string} */ id) =>
+      /** @type {HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | null} */ (
+        document.getElementById(id)
+      )?.value ?? "";
+
+    const ressort = getValue("ressort");
+    const referat = getValue("referat");
+    const rechtsbereich = getValue("rechtsbereich");
+    const context = getValue("context");
+    const mail = getValue("mail");
+
+    const body = [
+      ressort && `Ressort: ${ressort}`,
+      referat && `Referat: ${referat}`,
+      rechtsbereich && `Rechtsbereich: ${rechtsbereich}`,
+      context && `Anfrage:\n${context}`,
+      mail && `E-Mail: ${mail}`,
+    ]
+      .filter(Boolean)
+      .join("\n\n");
+
+    const params = new URLSearchParams();
+    params.append("subject", "Anfrage Steckbrief");
+    if (mail) params.append("cc", mail);
+    if (body) params.append("body", body);
+
+    window.location.href =
+      `mailto:${email}?` + params.toString().replace(/\+/g, "%20");
+  });
+</script>

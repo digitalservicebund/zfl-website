@@ -1,0 +1,26 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"textarea"> {
+  label?: string;
+}
+const { label, id, rows = 5, maxlength, ...rest } = Astro.props;
+---
+
+<div class="w-full" x-data={maxlength ? `{ count: 0 }` : undefined}>
+  {label && <label for={id}>{label}</label>}
+  <textarea
+    {id}
+    class="border-cosmic-blue-base w-full border-2 p-16 outline-0 transition-shadow focus:shadow-[inset_0_0_0_2px_var(--color-cosmic-blue-base)]"
+    rows={rows}
+    maxlength={maxlength}
+    {...rest}
+    x-on:input={maxlength ? `count = $el.value.length` : undefined}></textarea>
+  {
+    !!maxlength && (
+      <div class="text-right text-sm">
+        <span x-text="count">0</span>/{maxlength}
+      </div>
+    )
+  }
+</div>
