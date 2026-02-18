@@ -3,12 +3,20 @@ import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"textarea"> {
   label?: string;
+  description?: string;
 }
-const { label, id, rows = 5, maxlength, ...rest } = Astro.props;
+const { label, description, id, rows = 5, maxlength, ...rest } = Astro.props;
 ---
 
 <div class="w-full" x-data={maxlength ? `{ count: 0 }` : undefined}>
-  {label && <label for={id}>{label}</label>}
+  {
+    label && (
+      <label for={id} class="text-lg">
+        {label}
+      </label>
+    )
+  }
+  {description && <p class="text-gray-900">{description}</p>}
   <textarea
     {id}
     class="border-cosmic-blue-base w-full border-2 p-16 outline-0 transition-shadow focus:shadow-[inset_0_0_0_2px_var(--color-cosmic-blue-base)]"

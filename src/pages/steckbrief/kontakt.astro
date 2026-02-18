@@ -24,17 +24,19 @@ export const frontmatter = {
         scrambled it to make a type specimen book.
       </p>
     </Hero>
-    <section class="space-y-16 py-80">
-      <h2>Kontaktformular</h2>
-      <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book.
-      </p>
-      <p class="font-bold">Ihre Kontaktdaten</p>
+    <section class="space-y-40 py-80">
+      <div>
+        <h2 class="mb-16 font-normal">Kontaktformular</h2>
+        <p>
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard dummy text ever
+          since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book.
+        </p>
+      </div>
 
       <div class="max-w-a11y space-y-24">
+        <p class="text-xl">Ihre Kontaktdaten</p>
         <div class="flex gap-24">
           <Input id="ressort" label="Ressort" />
           <Input id="referat" label="Referat aus ihrem Profil" />
@@ -44,21 +46,33 @@ export const frontmatter = {
           label="Ihr Rechtsbereich"
           options={fieldsOfLawOptions}
         />
-        <p>
-          <strong>Ihre Anfrage</strong><br />Geben Sie den Titel und Kontext des
-          Vorhabens an
-        </p>
-        <Textarea id="context" maxlength={1000} />
+      </div>
+
+      <div class="max-w-a11y space-y-24">
+        <Textarea
+          id="kontext"
+          label="Ihre Anfrage"
+          description="Geben Sie den Titel und Kontext des Vorhabens an"
+          maxlength={1000}
+        />
+      </div>
+
+      <div class="max-w-a11y space-y-24">
         <Input id="mail" label="Ihre E-Mail-Adresse" />
       </div>
-      <h3 class="mt-40">Hängen Sie relevante Doukmente an die E-Mail an</h3>
-      <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book.
-      </p>
-      <div class="mt-40 flex gap-16">
+
+      <div>
+        <p class="mb-16 text-2xl">
+          Hängen Sie relevante Doukmente an die E-Mail an
+        </p>
+        <p>
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard dummy text ever
+          since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book.
+        </p>
+      </div>
+      <div class="flex gap-16">
         <button id="kontakt-btn" type="button" class="btn-primary">
           Kontakt aufnehmen
         </button>
@@ -77,14 +91,14 @@ export const frontmatter = {
     const ressort = getValue("ressort");
     const referat = getValue("referat");
     const rechtsbereich = getValue("rechtsbereich");
-    const context = getValue("context");
+    const kontext = getValue("kontext");
     const mail = getValue("mail");
 
     const body = [
       ressort && `Ressort: ${ressort}`,
       referat && `Referat: ${referat}`,
       rechtsbereich && `Rechtsbereich: ${rechtsbereich}`,
-      context && `Anfrage:\n${context}`,
+      kontext && `Anfrage:\n${kontext}`,
       mail && `E-Mail: ${mail}`,
     ]
       .filter(Boolean)

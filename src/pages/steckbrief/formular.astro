@@ -102,8 +102,12 @@ const steps = [
       <!-- Step 2: Kontext -->
       <div class="step-content py-40" data-step="kontext">
         <div class="space-y-24">
-          <p>Kontext Ihres Vorhabens</p>
-          <Textarea maxlength={1000} />
+          <Textarea
+            id="kontext"
+            label="Kontext Ihres Vorhabens"
+            description="Einordnung ihres Handlungsbedarfs"
+            maxlength={1000}
+          />
         </div>
         <div class="mt-80 flex gap-48">
           <label for="step-zielstellung" class="btn-primary cursor-pointer"
@@ -118,10 +122,18 @@ const steps = [
       <!-- Step 3: Zielstellung/Probleme -->
       <div class="step-content py-40" data-step="zielstellung">
         <div class="space-y-24">
-          <p>Zielstellung</p>
-          <Textarea maxlength={1000} />
-          <p>Probleme</p>
-          <Textarea maxlength={1000} />
+          <Textarea
+            id="zielstellung"
+            label="Zielstellung"
+            description="Was soll durch das Gesetz verbessert werden?"
+            maxlength={1000}
+          />
+          <Textarea
+            id="probleme"
+            label="Probleme (optional)"
+            description="Was sind derzeitige Probleme in der Umsetzung?"
+            maxlength={1000}
+          />
         </div>
         <div class="mt-80 flex gap-48">
           <label for="step-anhang" class="btn-primary cursor-pointer"
@@ -135,16 +147,26 @@ const steps = [
 
       <!-- Step 4: Anhang -->
       <div class="step-content py-40" data-step="anhang">
-        <p class="font-bold">Hängen Sie relevante Dokumente an"</p>
+        <p class="font-bold">Hängen Sie relevante Dokumente an</p>
         <p>
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever
           since the 1500s, when an unknown printer took a galley of type and
           scrambled it to make a type specimen book.
         </p>
-        <div class="space-y-24">
-          <p>Anhänge und Dokumente</p>
-          <Input label="Dokument hochladen" />
+        <div class="mt-40 space-y-24">
+          <div
+            class="drop-zone border-cosmic-blue-base bg-lavender-base flex cursor-pointer flex-col items-center justify-center gap-12 px-24 py-48 text-center"
+            onclick="this.querySelector('input').click()"
+          >
+            <Icon
+              name="ic:outline-upload-file"
+              class="text-cosmic-blue-400 size-48"
+            />
+            <p class="font-bold">Dokumente hinzufügen</p>
+            <p>Klicken Sie hier, um Dateien auszuwählen</p>
+            <input type="file" class="sr-only" tabindex="-1" multiple />
+          </div>
         </div>
         <div class="mt-80 flex gap-48">
           <label for="step-zusammenfassung" class="btn-primary cursor-pointer"
@@ -158,12 +180,12 @@ const steps = [
 
       <!-- Step 5: Zusammenfassung -->
       <div class="step-content py-40" data-step="zusammenfassung">
-        <p class="text-[20px]">Zusammenfassung</p>
+        <p class="text-xl">Zusammenfassung</p>
         <div class="space-y-24">
           <p>Hier ist die Zusammenfassung Ihrer Angaben.</p>
         </div>
         <div class="mt-80 flex gap-48">
-          <button class="btn-primary">Absenden</button>
+          <button class="btn-primary">E-Mail erstellen</button>
           <label for="step-anhang" class="btn-secondary cursor-pointer"
             >Zurück</label
           >

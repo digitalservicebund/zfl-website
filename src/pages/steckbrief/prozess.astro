@@ -53,12 +53,12 @@ export const frontmatter = {
         {
           steps.map((step) => (
             <div class="group flex items-start gap-32">
-              <div class="flex h-40 w-40 shrink-0 items-center justify-center rounded-full border-2 border-gray-300 text-lg font-bold">
+              <div class="flex h-40 w-40 shrink-0 items-center justify-center rounded-full border-2 border-gray-400 text-lg">
                 {step.number}
               </div>
 
-              <div class="grow pt-1">
-                <h3 class="mb-2 text-2xl font-bold">{step.title}</h3>
+              <div class="grow">
+                <p class="mb-8 text-2xl">{step.title}</p>
                 <p class="text-base leading-relaxed opacity-80">
                   {step.description}
                 </p>
