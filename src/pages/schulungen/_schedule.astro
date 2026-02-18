@@ -1,0 +1,34 @@
+---
+type Appointment = {
+  date: string;
+  time: string;
+  location: string;
+};
+interface Props {
+  appointments: Appointment[];
+  caption: string;
+}
+const { appointments, caption } = Astro.props;
+---
+
+<table>
+  <caption class="sr-only">{caption}</caption>
+  <thead
+    ><tr
+      ><th scope="col" class="sr-only">Datum</th><th class="sr-only">Uhrzeit</th
+      ><th class="sr-only">Ort</th></tr
+    ></thead
+  ><tbody>
+    {
+      appointments.map((appointment) => (
+        <tr>
+          <>
+            <td class="pr-16">{appointment.date}</td>
+            <td class="pr-16">{appointment.time}</td>
+            <td>{appointment.location}</td>
+          </>
+        </tr>
+      ))
+    }</tbody
+  >
+</table>
