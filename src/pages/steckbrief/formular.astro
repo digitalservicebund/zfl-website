@@ -1,8 +1,11 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Input from "@/components/Input.astro";
+import Select from "@/components/Select.astro";
+import Textarea from "@/components/Textarea.astro";
 import { Icon } from "astro-icon/components";
 import { buildUrl } from "@/utils/routesHelper";
+import { fieldsOfLawOptions } from "@/config/fieldsOfLawOptions";
 
 export const frontmatter = {
   title: "Steckbrief",
@@ -84,7 +87,7 @@ const steps = [
             <Input label="Ressort" />
             <Input label="Referat aus ihrem Profil" />
           </div>
-          <Input label="Ihr Rechtsbereich" />
+          <Select label="Ihr Rechtsbereich" options={fieldsOfLawOptions} />
         </div>
         <div class="mt-80 flex gap-48">
           <label for="step-kontext" class="btn-primary cursor-pointer"
@@ -100,9 +103,7 @@ const steps = [
       <div class="step-content py-40" data-step="kontext">
         <div class="space-y-24">
           <p>Kontext Ihres Vorhabens</p>
-          <textarea
-            class="border-cosmic-blue-base w-full border-2 px-24 py-12"
-            rows="5"></textarea>
+          <Textarea />
         </div>
         <div class="mt-80 flex gap-48">
           <label for="step-zielstellung" class="btn-primary cursor-pointer"
@@ -118,13 +119,9 @@ const steps = [
       <div class="step-content py-40" data-step="zielstellung">
         <div class="space-y-24">
           <p>Zielstellung</p>
-          <textarea
-            class="border-cosmic-blue-base w-full border-2 px-24 py-12"
-            rows="5"></textarea>
+          <Textarea />
           <p>Probleme</p>
-          <textarea
-            class="border-cosmic-blue-base w-full border-2 px-24 py-12"
-            rows="5"></textarea>
+          <Textarea />
         </div>
         <div class="mt-80 flex gap-48">
           <label for="step-anhang" class="btn-primary cursor-pointer"

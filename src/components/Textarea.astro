@@ -1,13 +1,14 @@
 ---
 interface Props {
-  label: string;
+  label?: string;
+  rows?: number;
 }
-const { label } = Astro.props;
+const { label, rows = 5 } = Astro.props;
 ---
 
 <div class="w-full">
-  <div>{label}</div>
-  <input
+  {label && <div>{label}</div>}
+  <textarea
     class="border-cosmic-blue-base w-full border-2 px-24 py-12 outline-0 transition-shadow focus:shadow-[inset_0_0_0_2px_var(--color-cosmic-blue-base)]"
-  />
+    rows={rows}></textarea>
 </div>

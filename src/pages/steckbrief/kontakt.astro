@@ -2,6 +2,9 @@
 import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
 import Input from "@/components/Input.astro";
+import Select from "@/components/Select.astro";
+import Textarea from "@/components/Textarea.astro";
+import { fieldsOfLawOptions } from "@/config/fieldsOfLawOptions";
 
 export const frontmatter = {
   title: "Steckbrief",
@@ -35,14 +38,12 @@ export const frontmatter = {
           <Input label="Ressort" />
           <Input label="Referat aus ihrem Profil" />
         </div>
-        <Input label="Ihr Rechtsbereich" />
+        <Select label="Ihr Rechtsbereich" options={fieldsOfLawOptions} />
         <p>
           <strong>Ihre Anfrage</strong><br />Geben Sie den Titel und Kontext des
           Vorhabens an
         </p>
-        <textarea
-          class="border-cosmic-blue-base w-full border-2 px-24 py-12"
-          rows="5"></textarea>
+        <Textarea />
         <Input label="Ihre E-Mail-Adresse" />
       </div>
       <h3 class="mt-40">Hängen Sie relevante Doukmente an die E-Mail an</h3>
