@@ -1,0 +1,22 @@
+---
+import Hero from "@/components/Hero.astro";
+import { isStaging } from "@/config/stage";
+import Layout from "@/layouts/Layout.astro";
+
+if (isStaging) {
+  return Astro.redirect("/404", 302);
+}
+
+export const frontmatter = {
+  title: "Über das Zentrum für Legistik",
+  sitemap: true,
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero>
+      <h1>{frontmatter.title}</h1>
+    </Hero>
+  </main>
+</Layout>

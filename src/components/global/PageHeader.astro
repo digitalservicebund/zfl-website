@@ -12,6 +12,8 @@ import { twMerge } from "tailwind-merge";
 const { pathname } = Astro.url;
 const currentPath = removeTrailingSlash(pathname);
 
+const headerNavigation = navigation.filter((item) => item.showInHeader !== false);
+
 const basicLinkClasses = "flex items-center hover:bg-lavender-base";
 const activeClasses = "border-cosmic-blue-base bg-lavender-base";
 ---
@@ -38,7 +40,7 @@ const activeClasses = "border-cosmic-blue-base bg-lavender-base";
     <!-- Desktop Navigation -->
     <nav class="flex items-center max-md:hidden" data-testid="desktop-nav">
       {
-        navigation.map((item) => (
+        headerNavigation.map((item) => (
           <a
             href={item.path}
             class={twMerge(
@@ -92,7 +94,7 @@ const activeClasses = "border-cosmic-blue-base bg-lavender-base";
     :aria-hidden="!mobileMenuOpen"
   >
     {
-      navigation.map((item) => (
+      headerNavigation.map((item) => (
         <a
           href={item.path}
           class={twMerge(
