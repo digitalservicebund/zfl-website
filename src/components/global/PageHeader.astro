@@ -2,16 +2,12 @@
 import Kopfzeile from "@/components/global/Kopfzeile.astro";
 import Link from "@/components/Link.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
+import navigation from "@/config/navigation";
 import bundLogo from "@/images/logo/bund-logo.png";
 import { buildUrl, removeTrailingSlash } from "@/utils/routesHelper";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import { twMerge } from "tailwind-merge";
-
-const headerItems = [
-  { url: buildUrl("/begleitungen"), title: "Begleitungen" },
-  { url: buildUrl("/schulungen"), title: "Schulungen" },
-];
 
 const { pathname } = Astro.url;
 const currentPath = removeTrailingSlash(pathname);
@@ -30,7 +26,7 @@ const activeClasses = "border-cosmic-blue-base bg-lavender-base";
     class="border-lavender-base relative z-30 flex h-[72px] justify-between border-b-2 bg-white pl-16 md:px-16"
   >
     <!-- Logo and title -->
-    <a href={buildUrl("/")} class="flex items-center space-x-8 link-unstyled">
+    <a href={buildUrl("/")} class="link-unstyled flex items-center space-x-8">
       <Image src={bundLogo} alt="Logo des Bundes" class="w-56" />
       <p
         class="ds-label-01-bold ml-16 flex flex-col text-xl text-black max-lg:hidden"
@@ -42,13 +38,13 @@ const activeClasses = "border-cosmic-blue-base bg-lavender-base";
     <!-- Desktop Navigation -->
     <nav class="flex items-center max-md:hidden" data-testid="desktop-nav">
       {
-        headerItems.map((item) => (
+        navigation.map((item) => (
           <a
-            href={item.url}
+            href={item.path}
             class={twMerge(
               basicLinkClasses,
               "ds-label-01-reg relative h-full border-b-4 border-transparent px-16 whitespace-nowrap",
-              currentPath === item.url && activeClasses,
+              currentPath === item.path && activeClasses,
             )}
           >
             {item.title}
@@ -96,13 +92,13 @@ const activeClasses = "border-cosmic-blue-base bg-lavender-base";
     :aria-hidden="!mobileMenuOpen"
   >
     {
-      headerItems.map((item) => (
+      navigation.map((item) => (
         <a
-          href={item.url}
+          href={item.path}
           class={twMerge(
             basicLinkClasses,
             "ds-label-01-reg border-l-4 border-transparent p-16",
-            currentPath === item.url && activeClasses,
+            currentPath === item.path && activeClasses,
           )}
         >
           {item.title}
