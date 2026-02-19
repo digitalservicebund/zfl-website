@@ -1,8 +1,7 @@
-import { isStaging } from "./stage";
-
 export type NavItem = {
   path: string;
-  title: string;
+  title: string
+  isStagingOnly?: boolean;
   showInHeader?: boolean;
   children?: NavItem[];
 };
@@ -13,12 +12,12 @@ export const routes: Record<string, NavItem> = {
   anleitungenUndHilfsmittel: {
     path: "/anleitungen-und-hilfsmittel",
     title: "Anleitungen und Hilfsmittel",
-    showInHeader: isStaging,
+    isStagingOnly: true,
   },
   ueberUns: {
     path: "/ueber-uns",
     title: "Über das Zentrum für Legistik",
-    showInHeader: isStaging,
+    isStagingOnly: true,
     children: [
       { path: "/ueber-uns/zahlen-und-fakten", title: "Zahlen und Fakten" },
       { path: "/ueber-uns/daran-arbeiten-wir", title: "Daran arbeiten wir" },
