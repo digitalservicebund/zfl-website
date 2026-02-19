@@ -1,35 +1,27 @@
 ---
 import Link from "@/components/Link.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
+import { routes } from "@/config/navigation";
+import { isStaging } from "@/config/stage";
 import bmdsLogo from "@/images/logo/bmds-logo.png";
 import { Image } from "astro:assets";
-import { isStaging } from "@/config/stage";
 
-type FooterItem = { url: string; label: string; prefix?: string };
+type FooterItem = { path: string; title: string; prefix?: string };
 
 const footerColumns: Record<string, FooterItem[]> = {
   Unterstützungsangebote: [
-    { prefix: "Support: ", url: ZFL_PHONE.url, label: ZFL_PHONE.display },
-    {
-      prefix: "Per Mail: ",
-      url: ZFL_EMAIL.url,
-      label: ZFL_EMAIL.display,
-    },
-    { url: "/begleitungen", label: "Begleitungen" },
-    { url: "/schulungen", label: "Schulungen" },
-    ...(isStaging
-      ? [{ url: "/anleitungen-und-hilfsmittel", label: "Anleitungen und Hilfsmittel" }]
-      : []),
+    { prefix: "Support: ", path: ZFL_PHONE.url, title: ZFL_PHONE.display },
+    { prefix: "Per Mail: ", path: ZFL_EMAIL.url, title: ZFL_EMAIL.display },
+    routes.begleitungen,
+    routes.schulungen,
+    ...(isStaging ? [routes.anleitungenUndHilfsmittel] : []),
   ],
-  "Über das Ziel": [
-    { url: "/zahlen-und-fakten", label: "Zahlen und Fakten" },
-    { url: "/daran-arbeiten-wir", label: "Daran arbeiten wir" },
-  ],
+  "Über das Ziel": routes.ueberUns.children ?? [],
   "": [
-    { url: "/impressum", label: "Impressum" },
-    { url: "/datenschutz", label: "Datenschutzerklärung" },
-    { url: "/barrierefreiheit", label: "Barrierefreiheit" },
-    { url: "/sitemap", label: "Sitemap" },
+    { path: "/impressum", title: "Impressum" },
+    { path: "/datenschutz", title: "Datenschutzerklärung" },
+    { path: "/barrierefreiheit", title: "Barrierefreiheit" },
+    { path: "/sitemap", title: "Sitemap" },
   ],
 };
 ---
@@ -50,8 +42,8 @@ const footerColumns: Record<string, FooterItem[]> = {
               {items.map((item) => (
                 <li>
                   {item.prefix}
-                  <Link class="increase-tap-area" href={item.url}>
-                    {item.label}
+                  <Link class="increase-tap-area" href={item.path}>
+                    {item.title}
                   </Link>
                 </li>
               ))}
