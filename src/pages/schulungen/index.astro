@@ -10,6 +10,9 @@ import schulungenImage from "@/images/Schulungen.png";
 import Link from "@/components/Link.astro";
 import Hero from "@/components/Hero.astro";
 import Schedule from "./_schedule.astro";
+import { isProduction } from "@/config/stage";
+import PreviewContent from "./_preview.mdx";
+import appointments from "./_appointments.json";
 
 export const frontmatter = {
   title: "Schulungen",
@@ -38,88 +41,63 @@ export const frontmatter = {
       </div>
     </Hero>
 
-    <Card
-      look="gray"
-      contentClass="gap-40"
-      wrapperClass="my-80 sm:px-40 bg-lavender-400"
-      id="schulungen"
-    >
-      <div>
-        <Badge>
-          <Icon name="ic:outline-timer" class="opacity-50" />Nächste Termine
-        </Badge>
-        <h3>Zu diesen Schulungen können Sie sich direkt anmelden</h3>
-      </div>
-      <div>
-        <h3 class="ds-subhead">
-          Regelungen digitaltauglich gestalten – praktische Tipps für den
-          Digitalcheck <span class="whitespace-nowrap">(1,5 Stunden)</span>
-        </h3>
-        <p>
-          Inhalte: Digitalcheck erfolgreich bearbeiten, digitaltaugliche
-          Formulierungen, Anwenden der Prinzipien für Digitaltauglichkeit,
-          EU-Interoperabilität
-        </p>
-        <Schedule
-          caption="Nächste Termine"
-          appointments={[
-            {
-              date: "Mittwoch, 01.04.2026",
-              time: "10:30 - 12:00 Uhr",
-              location: "online",
-            },
-            {
-              date: "Montag, 15.04.2026",
-              time: "10:00 - 11:30 Uhr",
-              location: "online",
-            },
-            {
-              date: "Montag, 20.04.2026",
-              time: "13:00 - 14:30 Uhr",
-              location: "online",
-            },
-            {
-              date: "Mittwoch, 06.05.2026",
-              time: "10:00 - 11:30 Uhr",
-              location: "online",
-            },
-            {
-              date: "Mittwoch, 13.05.2026",
-              time: "10:00 - 11:30 Uhr",
-              location: "online",
-            },
-            {
-              date: "Montag, 18.05.2026",
-              time: "13:00 - 14:30 Uhr",
-              location: "online",
-            },
-          ]}
-        />
-      </div>
+    {
+      isProduction ? (
+        <Card
+          look="gray"
+          contentClass="gap-40"
+          wrapperClass="my-80 sm:px-40 bg-lavender-400"
+          id="schulungen"
+        >
+          <div>
+            <Badge>
+              <Icon name="ic:outline-timer" class="opacity-50" />
+              Nächste Termine
+            </Badge>
+            <h3>Zu diesen Schulungen können Sie sich direkt anmelden</h3>
+          </div>
+          <div>
+            <h3 class="ds-subhead">
+              Regelungen digitaltauglich gestalten – praktische Tipps für den
+              Digitalcheck <span class="whitespace-nowrap">(1,5 Stunden)</span>
+            </h3>
+            <p>
+              Inhalte: Digitalcheck erfolgreich bearbeiten, digitaltaugliche
+              Formulierungen, Anwenden der Prinzipien für Digitaltauglichkeit,
+              EU-Interoperabilität
+            </p>
+            <Schedule caption="Nächste Termine" appointments={appointments} />
+          </div>
 
-      <div>
-        <h3 class="ds-subhead">
-          Basisschulung für Legistinnen und Legisten
-          <span class="whitespace-nowrap">(4 Tage)</span>
-        </h3>
-        <p>
-          Inhalte: Umsetzungsperspektive verstehen, Visualisierungen erstellen,
-          Entscheidungsbäume ausarbeiten, Rechtsförmlichkeit und verständliche
-          Sprache sicherstellen
-        </p>
-        <p>Die nächsten Termine werden demnächst bekanntgegeben.</p>
-      </div>
+          <div>
+            <h3 class="ds-subhead">
+              Basisschulung für Legistinnen und Legisten
+              <span class="whitespace-nowrap">(4 Tage)</span>
+            </h3>
+            <p>
+              Inhalte: Umsetzungsperspektive verstehen, Visualisierungen
+              erstellen, Entscheidungsbäume ausarbeiten, Rechtsförmlichkeit und
+              verständliche Sprache sicherstellen
+            </p>
+            <p>Die nächsten Termine werden demnächst bekanntgegeben.</p>
+          </div>
 
-      <div>
-        <h3 class="font-bold">Anmeldung</h3>
-        <p>
-          Schicken Sie uns für eine Anmeldung den Schulungs- oder Modul-Namen
-          und Termin an die E-Mail <Link href={ZFL_EMAIL.url}
-            >{ZFL_EMAIL.display}</Link
-          > und wir bestätigen die Anmeldung.
-        </p>
-      </div>
-    </Card>
+          <div>
+            <h3 class="font-bold">Anmeldung</h3>
+            <p>
+              Schicken Sie uns für eine Anmeldung den Schulungs- oder
+              Modul-Namen und Termin an die E-Mail{" "}
+              <Link href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</Link> und wir
+              bestätigen die Anmeldung.
+            </p>
+          </div>
+        </Card>
+      ) : (
+        <section class="my-80 [&>h2]:mt-80 [&>h3]:mt-40 [&>h4]:mt-20">
+          <PreviewContent />
+        </section>
+      )
+    }
 
     <section class="bg-lavender-base breakout py-80">
       <SupportCard />
