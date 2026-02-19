@@ -81,14 +81,26 @@ const steps = [
         <!-- Step 1: Ihr Profil -->
         <div class="step-content py-40" data-step="profil">
           <div class="space-y-24">
-            <Input label="Arbeitstitel" id="arbeitstitel" x-model="arbeitstitel" />
+            <Input
+              label="Arbeitstitel"
+              id="arbeitstitel"
+              x-model="arbeitstitel"
+            />
             <Input label="E-Mail Adresse" id="email" x-model="email" />
             <div class="flex gap-24">
               <Input label="Ressort" id="ressort" x-model="ressort" />
-              <Input label="Referat aus ihrem Profil" id="referat" x-model="referat" />
+              <Input
+                label="Referat aus ihrem Profil"
+                id="referat"
+                x-model="referat"
+              />
             </div>
             <div @select-change="rechtsbereich = $event.detail">
-              <Select label="Ihr Rechtsbereich" id="rechtsbereich" options={fieldsOfLawOptions} />
+              <Select
+                label="Ihr Rechtsbereich"
+                id="rechtsbereich"
+                options={fieldsOfLawOptions}
+              />
             </div>
           </div>
           <div class="mt-80 flex gap-48">
@@ -158,35 +170,39 @@ const steps = [
               <table class="mt-24 w-full border-collapse">
                 <tbody>
                   <tr>
-                    <td class="py-8 pr-24 font-bold align-top">Arbeitstitel</td>
+                    <td class="py-8 pr-24 align-top font-bold">Arbeitstitel</td>
                     <td class="py-8" x-text="arbeitstitel"></td>
                   </tr>
                   <tr>
-                    <td class="py-8 pr-24 font-bold align-top">E-Mail Adresse</td>
+                    <td class="py-8 pr-24 align-top font-bold"
+                      >E-Mail Adresse</td
+                    >
                     <td class="py-8" x-text="email"></td>
                   </tr>
                   <tr>
-                    <td class="py-8 pr-24 font-bold align-top">Ressort</td>
+                    <td class="py-8 pr-24 align-top font-bold">Ressort</td>
                     <td class="py-8" x-text="ressort"></td>
                   </tr>
                   <tr>
-                    <td class="py-8 pr-24 font-bold align-top">Referat</td>
+                    <td class="py-8 pr-24 align-top font-bold">Referat</td>
                     <td class="py-8" x-text="referat"></td>
                   </tr>
                   <tr>
-                    <td class="py-8 pr-24 font-bold align-top">Rechtsbereich</td>
+                    <td class="py-8 pr-24 align-top font-bold">Rechtsbereich</td
+                    >
                     <td class="py-8" x-text="rechtsbereich"></td>
                   </tr>
                   <tr>
-                    <td class="py-8 pr-24 font-bold align-top">Kontext</td>
+                    <td class="py-8 pr-24 align-top font-bold">Kontext</td>
                     <td class="py-8 whitespace-pre-wrap" x-text="kontext"></td>
                   </tr>
                   <tr>
-                    <td class="py-8 pr-24 font-bold align-top">Zielstellung</td>
-                    <td class="py-8 whitespace-pre-wrap" x-text="zielstellung"></td>
+                    <td class="py-8 pr-24 align-top font-bold">Zielstellung</td>
+                    <td class="py-8 whitespace-pre-wrap" x-text="zielstellung"
+                    ></td>
                   </tr>
                   <tr>
-                    <td class="py-8 pr-24 font-bold align-top">Probleme</td>
+                    <td class="py-8 pr-24 align-top font-bold">Probleme</td>
                     <td class="py-8 whitespace-pre-wrap" x-text="probleme"></td>
                   </tr>
                 </tbody>
@@ -204,7 +220,11 @@ const steps = [
             </Card>
           </div>
           <div class="mt-80 flex gap-48">
-            <button class="btn-primary">Word-Datei erstellen</button>
+            <button
+              class="btn-primary"
+              @click="$dispatch('generate-word', { arbeitstitel, email, ressort, referat, rechtsbereich, kontext, zielstellung, probleme })"
+              >Word-Datei erstellen</button
+            >
             <label for="step-zielstellung" class="btn-secondary cursor-pointer"
               >Zurück</label
             >
@@ -417,4 +437,77 @@ const steps = [
       max-width: calc(630px + 48px + 248px);
     }
   </style>
+
+  <script>
+    import {
+      Document,
+      Packer,
+      Paragraph,
+      TextRun,
+    } from "docx";
+
+    interface FormData {
+      arbeitstitel: string;
+      email: string;
+      ressort: string;
+      referat: string;
+      rechtsbereich: string;
+      kontext: string;
+      zielstellung: string;
+      probleme: string;
+    }
+
+    async function generateWordDoc(data: FormData) {
+      const fields = [
+        { label: "Arbeitstitel", value: data.arbeitstitel },
+        { label: "E-Mail Adresse", value: data.email },
+        { label: "Ressort", value: data.ressort },
+        { label: "Referat", value: data.referat },
+        { label: "Rechtsbereich", value: data.rechtsbereich },
+        { label: "Kontext", value: data.kontext },
+        { label: "Zielstellung", value: data.zielstellung },
+        { label: "Probleme", value: data.probleme },
+      ];
+
+      const fieldParagraphs = fields.flatMap(({ label, value }) => [
+        new Paragraph({
+          children: [new TextRun({ text: `${label}:`, bold: true })],
+        }),
+        new Paragraph({
+          children: [new TextRun(value || "")],
+        }),
+        new Paragraph({ children: [] }),
+      ]);
+
+      const doc = new Document({
+        sections: [
+          {
+            children: [
+              new Paragraph({
+                children: [
+                  new TextRun({ text: "Steckbrief", bold: true, size: 32 }),
+                ],
+                spacing: { after: 400 },
+              }),
+              ...fieldParagraphs,
+            ],
+          },
+        ],
+      });
+
+      const blob = await Packer.toBlob(doc);
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `steckbrief-${data.arbeitstitel || "export"}.docx`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    document.addEventListener("generate-word", (e) => {
+      generateWordDoc((e as CustomEvent<FormData>).detail);
+    });
+  </script>
 </Layout>
