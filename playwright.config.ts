@@ -1,7 +1,10 @@
 import { defineConfig, devices } from "@playwright/test";
-import dotenv from "dotenv";
 
-dotenv.config();
+try {
+  process.loadEnvFile();
+} catch {
+  // .env file not present (e.g. in CI)
+}
 
 /**
  * See https://playwright.dev/docs/test-configuration.
