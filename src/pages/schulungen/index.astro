@@ -21,23 +21,32 @@ export const frontmatter = {
 ---
 
 <Layout title={frontmatter.title}>
-  <main class="breakout-grid">
+  <main class="breakout-grid overflow-x-hidden">
     <Hero>
-      <h1>Schulungen</h1>
-      <div class="mt-40 gap-32 space-y-40 md:flex md:flex-row">
-        <div class="space-y-16">
-          <h2>In Schulungen praktisches Wissen und Kompetenzen erlangen</h2>
+      <div class="relative mt-40 gap-40 space-y-40 md:flex md:flex-row">
+        <div class="relative z-20 space-y-32">
+          <h1 class="hyphens-manual">
+            In Schulungen praktisches Wissen und Kompetenzen erlangen
+          </h1>
           <p>
             In den umsetzungsorientierten Schulungen des Zentrum für Legistik
             lernen Sie Methoden und Werkzeuge kennen, die Sie bei der
             Erarbeitung von praxisnahen und bürokratiearmen Regelungen
             unterstützen.
           </p>
-          <p class="pt-10">
-            <a href="#schulungen" class="btn-primary link-unstyled">Jetzt anmelden</a>
-          </p>
+          {
+            isProduction && (
+              <a href="#schulungen" class="btn-primary link-unstyled">
+                Jetzt anmelden
+              </a>
+            )
+          }
         </div>
-        <Image class="size-192 md:size-288" src={schulungenImage} alt="" />
+        <Image
+          class="max-md:absolute max-md:top-0 max-md:bottom-0 max-md:left-3/4 max-md:aspect-square max-md:h-full max-md:opacity-20 md:size-288"
+          src={schulungenImage}
+          alt=""
+        />
       </div>
     </Hero>
 
