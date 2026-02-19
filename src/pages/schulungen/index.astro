@@ -21,10 +21,10 @@ export const frontmatter = {
 ---
 
 <Layout title={frontmatter.title}>
-  <main class="breakout-grid overflow-x-hidden">
+  <main class="breakout-grid max-md:overflow-x-hidden">
     <Hero>
       <div class="relative mt-40 gap-40 space-y-40 md:flex md:flex-row">
-        <div class="relative z-20 space-y-32">
+        <div class="space-y-32">
           <h1 class="hyphens-manual">
             In Schulungen praktisches Wissen und Kompetenzen erlangen
           </h1>
@@ -52,7 +52,7 @@ export const frontmatter = {
           }
         </div>
         <Image
-          class="max-md:absolute max-md:top-0 max-md:bottom-0 max-md:left-3/4 max-md:size-fit max-md:opacity-20 md:size-288"
+          class="max-md:hero-image-overlay md:size-288"
           src={schulungenImage}
           alt=""
         />

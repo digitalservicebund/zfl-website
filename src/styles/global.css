@@ -206,6 +206,10 @@ main {
   max-width: 630px;
 }
 
+@utility hero-image-overlay {
+  @apply absolute top-0 bottom-0 left-3/4 size-fit opacity-20;
+}
+
 @layer components {
   .summary-content {
     .details & {

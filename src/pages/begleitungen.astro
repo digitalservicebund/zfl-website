@@ -19,10 +19,10 @@ export const frontmatter = {
 ---
 
 <Layout title={frontmatter.title}>
-  <main class="breakout-grid">
+  <main class="breakout-grid max-md:overflow-x-hidden">
     <Hero>
       <h1>Begleitung für Vorhaben</h1>
-      <div class="mt-40 gap-32 space-y-40 md:flex md:flex-row">
+      <div class="relative mt-40 gap-32 space-y-40 md:flex md:flex-row">
         <div>
           <h2>
             Interdisziplinäre Expertise für praxisnahe und bürokratiearme
@@ -52,7 +52,11 @@ export const frontmatter = {
             <Link href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</Link>
           </p>
         </div>
-        <Image class="size-192 md:size-288" src={begleitungenImage} alt="" />
+        <Image
+          class="max-md:hero-image-overlay md:size-288"
+          src={begleitungenImage}
+          alt=""
+        />
       </div>
     </Hero>
 
