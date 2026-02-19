@@ -35,10 +35,19 @@ export const frontmatter = {
             unterstützen.
           </p>
           {
-            isProduction && (
+            isProduction ? (
               <a href="#schulungen" class="btn-primary link-unstyled">
                 Jetzt anmelden
               </a>
+            ) : (
+              <div class="space-y-8">
+                <a class="block" href="#schulungen-zfl">
+                  ↓ Schulungen des Zentrum für Legistik
+                </a>
+                <a class="block" href="#schulungen-weitere">
+                  ↓ Weitere Angebote
+                </a>
+              </div>
             )
           }
         </div>
