@@ -42,7 +42,10 @@ const steps = [
 ---
 
 <Layout title={frontmatter.title}>
-  <div class="mx-auto flex max-w-[1296px] gap-48 py-80">
+  <div
+    class="mx-auto flex max-w-[1296px] gap-48 py-80"
+    x-data="{ hintsOpen: true }"
+  >
     <!-- Hidden radio inputs for step navigation -->
     {
       steps.map((step) => (
@@ -194,93 +197,115 @@ const steps = [
     </main>
 
     <aside
-      class="hints-column bg-lavender-200 border-cosmic-blue-400 sticky top-0 w-248 border-l px-32 pt-40 pb-16"
+      class="hints-column relative sticky top-0 w-[248px] transition-all duration-300"
     >
       <div
-        class="border-cosmic-blue-400 text-cosmic-blue-base absolute top-34 left-0 -translate-x-1/2 rounded-full border bg-white p-8"
+        class="bg-lavender-200 border-cosmic-blue-400 absolute inset-0 w-248 border-l pt-40 pb-16 transition-transform duration-300"
+        :class="hintsOpen ? 'translate-x-0' : 'translate-x-full'"
       >
-        <Icon name="ic:twotone-arrow-forward-ios" />
-      </div>
-      <!-- Hints for Step 1: Ihr Profil -->
-      <div class="hint-content space-y-40" data-step="profil">
-        <div>
-          <p class="mb-16 font-bold">Tipp</p>
-          <p>
-            Geben Sie einen aussagekräftigen Arbeitstitel ein, der Ihr Vorhaben
-            kurz beschreibt.
-          </p>
+        <div
+          class="border-cosmic-blue-400 text-cosmic-blue-base absolute top-34 left-0 z-10 -translate-x-1/2 cursor-pointer rounded-full border bg-white p-8"
+          @click="hintsOpen = !hintsOpen"
+          :class="hintsOpen ? opacity-100 : opacity-0"
+        >
+          <Icon
+            name="ic:twotone-arrow-forward-ios"
+            class="transition-transform duration-300"
+            :class="hintsOpen ? '' : 'rotate-180'"
+          />
         </div>
-      </div>
+        <div
+          x-show="hintsOpen"
+          x-transition:enter="transition-opacity duration-200"
+          x-transition:enter-start="opacity-0"
+          x-transition:enter-end="opacity-100"
+          x-transition:leave="transition-opacity duration-100"
+          x-transition:leave-start="opacity-100"
+          x-transition:leave-end="opacity-0"
+          class="px-32"
+        >
+          <!-- Hints for Step 1: Ihr Profil -->
+          <div class="hint-content space-y-40" data-step="profil">
+            <div>
+              <p class="mb-16 font-bold">Tipp</p>
+              <p>
+                Geben Sie einen aussagekräftigen Arbeitstitel ein, der Ihr
+                Vorhaben kurz beschreibt.
+              </p>
+            </div>
+          </div>
 
-      <!-- Hints for Step 2: Kontext -->
-      <div class="hint-content space-y-40" data-step="kontext">
-        <div>
-          <p class="mb-16 font-bold">Was bedeutet Kontext in dem Fall?</p>
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
-          </p>
-        </div>
-        <div>
-          <p class="mb-16 font-bold">Haben Sie bereits Projektskizzen?</p>
-          <p>
-            copy+pasten Sie ihre Inhalte hier rein oder hängen Sie sie im 4.
-            Schritt an.
-          </p>
-        </div>
-      </div>
+          <!-- Hints for Step 2: Kontext -->
+          <div class="hint-content space-y-40" data-step="kontext">
+            <div>
+              <p class="mb-16 font-bold">Was bedeutet Kontext in dem Fall?</p>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley
+                of type and scrambled it to make a type specimen book.
+              </p>
+            </div>
+            <div>
+              <p class="mb-16 font-bold">Haben Sie bereits Projektskizzen?</p>
+              <p>
+                copy+pasten Sie ihre Inhalte hier rein oder hängen Sie sie im 4.
+                Schritt an.
+              </p>
+            </div>
+          </div>
 
-      <!-- Hints for Step 3: Zielstellung/Probleme -->
-      <div class="hint-content space-y-40" data-step="zielstellung">
-        <div>
-          <p class="mb-16 font-bold">Was kommt in die Zielstellung?</p>
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
-          </p>
-        </div>
-        <div>
-          <p class="mb-16 font-bold">Was könnten Probleme sein?</p>
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
-          </p>
-        </div>
-      </div>
+          <!-- Hints for Step 3: Zielstellung/Probleme -->
+          <div class="hint-content space-y-40" data-step="zielstellung">
+            <div>
+              <p class="mb-16 font-bold">Was kommt in die Zielstellung?</p>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley
+                of type and scrambled it to make a type specimen book.
+              </p>
+            </div>
+            <div>
+              <p class="mb-16 font-bold">Was könnten Probleme sein?</p>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley
+                of type and scrambled it to make a type specimen book.
+              </p>
+            </div>
+          </div>
 
-      <!-- Hints for Step 4: Anhang -->
-      <div class="hint-content space-y-40" data-step="anhang">
-        <div>
-          <p class="mb-16 font-bold">Was können Sie anhängen?</p>
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
-          </p>
-        </div>
-        <div>
-          <p class="mb-16 font-bold">Bestehende Projektkizzen?</p>
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book.
-          </p>
-        </div>
-      </div>
+          <!-- Hints for Step 4: Anhang -->
+          <div class="hint-content space-y-40" data-step="anhang">
+            <div>
+              <p class="mb-16 font-bold">Was können Sie anhängen?</p>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley
+                of type and scrambled it to make a type specimen book.
+              </p>
+            </div>
+            <div>
+              <p class="mb-16 font-bold">Bestehende Projektkizzen?</p>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley
+                of type and scrambled it to make a type specimen book.
+              </p>
+            </div>
+          </div>
 
-      <!-- Hints for Step 5: Zusammenfassung -->
-      <div class="hint-content space-y-40" data-step="zusammenfassung">
-        <div>
-          <p class="mb-16 font-bold">Fertig!</p>
-          <p>Überprüfen Sie Ihre Angaben und senden Sie das Formular ab.</p>
+          <!-- Hints for Step 5: Zusammenfassung -->
+          <div class="hint-content space-y-40" data-step="zusammenfassung">
+            <div>
+              <p class="mb-16 font-bold">Fertig!</p>
+              <p>Überprüfen Sie Ihre Angaben und senden Sie das Formular ab.</p>
+            </div>
+          </div>
         </div>
       </div>
     </aside>
