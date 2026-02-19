@@ -7,7 +7,8 @@ import Layout from "@/layouts/Layout.astro";
 import { mailto } from "@/utils/mailtoHelper";
 import ToolCard from "./_ToolCard.astro";
 import digitalcheckImage from "./Digitalcheck.png";
-import eGesetzgebungImage from "./eGG.png";
+import eGesetzgebungImage from "./eGesetzgebung.png";
+import eNormImage from "./eNorm.jpg";
 import fimImage from "./FIM.png";
 import interoperableEuropeImage from "./InteroperableEurope.png";
 import rulemapBuilderImage from "./RulemapBuilder.jpg";
@@ -90,6 +91,9 @@ export const frontmatter = {
           href="https://www.enorm.bund.de/"
           subline="Elektronische Arbeitshilfen und Verkündung"
           body="Die eNorm unterstützt bei der Einhaltung rechtsförmlicher und redaktioneller Vorgaben bei der Erstellung von Regelungsentwürfen. Sie automatisiert darüber hinaus bestimmte Routineaufgaben."
+          image={eNormImage}
+          imageAlt="Interface der eNorm"
+          imageSource="BMI"
         />
         <ToolCard
           title="FIM – Föderales Informationsmanagement"
