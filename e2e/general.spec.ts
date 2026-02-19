@@ -1,15 +1,15 @@
 import { expect, test } from "@playwright/test";
-import { routes } from "./utils/routes";
+import { flatRoutes } from "./utils/routes";
 
 const getTitle = (title?: string) =>
   title === "Zentrum für Legistik" ? title : `${title} — Zentrum für Legistik`;
 
 test.describe("page titles", () => {
-  routes.forEach((route) => {
-    test(`${route.url} has correct title`, async ({ page }) => {
-      await page.goto(route.url);
+  flatRoutes.forEach((route) => {
+    test(`${route.path} has correct title`, async ({ page }) => {
+      await page.goto(route.path);
       await expect(page).toHaveTitle(getTitle(route.title));
-      await expect(page.getByRole("heading", { level: 1 })).toBeDefined();
+      expect(page.getByRole("heading", { level: 1 })).toBeDefined();
     });
   });
 });

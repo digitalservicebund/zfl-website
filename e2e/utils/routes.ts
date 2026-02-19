@@ -1,15 +1,9 @@
-export type Route = {
-  url: string;
-  title: string;
-};
+import navItems, { type NavItem } from "@/config/navigation";
 
-export const routes: Route[] = [
-  { url: "/", title: "Zentrum für Legistik" },
-  { url: "/barrierefreiheit", title: "Barrierefreiheit" },
-  { url: "/begleitungen", title: "Begleitungen" },
-  { url: "/daran-arbeiten-wir", title: "Daran arbeiten wir" },
-  { url: "/datenschutz", title: "Datenschutzerklärung" },
-  { url: "/impressum", title: "Impressum" },
-  { url: "/schulungen", title: "Schulungen" },
-  { url: "/zahlen-und-fakten", title: "Zahlen und Fakten" },
-];
+const flatten = (items: NavItem[]): NavItem[] =>
+  items.flatMap((item) => [
+    item,
+    ...(item.children ? flatten(item.children) : []),
+  ]);
+
+export const flatRoutes = flatten(navItems);
