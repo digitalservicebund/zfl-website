@@ -1,35 +1,24 @@
-type NavItem = {
-  segment: string;
-  title: string;
-  children?: NavItem[];
-}
-
-export type ResolvedNavItem = {
+export type NavItem = {
   path: string;
   title: string;
-  children?: ResolvedNavItem[];
-}
+  children?: NavItem[];
+};
 
-const navigation: NavItem[] = [
-  { segment: "begleitungen", title: "Begleitungen" },
-  { segment: "schulungen", title: "Schulungen" },
-  // { segment: "anleitungen-und-hilfsmittel", title: "Anleitungen und Hilfsmittel" },
-  // {
-  //   segment: "ueber-uns",
+export const routes: Record<string, NavItem> = {
+  begleitungen: { path: "/begleitungen", title: "Begleitungen" },
+  schulungen: { path: "/schulungen", title: "Schulungen" },
+  // anleitungenUndHilfsmittel: {
+  //   path: "/anleitungen-und-hilfsmittel",
+  //   title: "Anleitungen und Hilfsmittel",
+  // },
+  // ueberUns: {
+  //   path: "/ueber-uns",
   //   title: "Über uns",
   //   children: [
-  //     { segment: "zahlen-und-fakten", title: "Zahlen und Fakten" },
-  //     { segment: "daran-arbeiten-wir", title: "Daran arbeiten wir" },
+  //     { path: "/ueber-uns/zahlen-und-fakten", title: "Zahlen und Fakten" },
+  //     { path: "/ueber-uns/daran-arbeiten-wir", title: "Daran arbeiten wir" },
   //   ],
   // },
-];
+};
 
-// Resolves the navigation items to full paths
-export default navigation.map((item) => ({
-  path: `/${item.segment}`,
-  title: item.title,
-  children: item.children?.map((child) => ({
-    path: `/${item.segment}/${child.segment}`,
-    title: child.title,
-  })),
-})) satisfies ResolvedNavItem[];
+export default Object.values(routes);
