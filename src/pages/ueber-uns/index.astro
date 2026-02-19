@@ -3,7 +3,7 @@ import Hero from "@/components/Hero.astro";
 import { isStaging } from "@/config/stage";
 import Layout from "@/layouts/Layout.astro";
 
-if (isStaging) {
+if (!isStaging) {
   return Astro.redirect("/404", 302);
 }
 
