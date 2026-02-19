@@ -24,6 +24,10 @@ export const routes: Record<string, NavItem> = {
       { path: "/ueber-uns/daran-arbeiten-wir", title: "Daran arbeiten wir" },
     ],
   },
+  impressum: { path: "/impressum", title: "Impressum" },
+  datenschutz: { path: "/datenschutz", title: "Datenschutzerklärung" },
+  barrierefreiheit: { path: "/barrierefreiheit", title: "Barrierefreiheit" },
+  sitemap: { path: "/sitemap", title: "Sitemap" },
 };
 
 export default Object.values(routes);

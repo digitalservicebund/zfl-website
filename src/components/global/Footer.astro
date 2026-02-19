@@ -18,10 +18,10 @@ const footerColumns: Record<string, FooterItem[]> = {
   ],
   "Über das Ziel": routes.ueberUns.children ?? [],
   "": [
-    { path: "/impressum", title: "Impressum" },
-    { path: "/datenschutz", title: "Datenschutzerklärung" },
-    { path: "/barrierefreiheit", title: "Barrierefreiheit" },
-    { path: "/sitemap", title: "Sitemap" },
+    routes.impressum,
+    routes.datenschutz,
+    routes.barrierefreiheit,
+    routes.sitemap,
   ],
 };
 ---
