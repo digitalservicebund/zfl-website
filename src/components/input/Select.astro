@@ -12,6 +12,7 @@ const placeholder = "Bitte wählen";
 <div
   class="w-full"
   x-data="{ open: false, selected: '', focusedIndex: -1 }"
+  x-init="$watch('selected', val => $dispatch('select-change', val))"
   @click.outside="open = false"
   @keyup.escape="open = false; $refs.trigger.focus()"
   @keydown.down.prevent="open = true; focusedIndex = (focusedIndex + 1) % $refs.list.children.length; $refs.list.children[focusedIndex].focus()"

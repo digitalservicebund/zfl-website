@@ -6,6 +6,7 @@ import Textarea from "@/components/input/Textarea.astro";
 import { Icon } from "astro-icon/components";
 import { buildUrl } from "@/utils/routesHelper";
 import { fieldsOfLawOptions } from "@/config/fieldsOfLawOptions";
+import Card from "@/components/Card.astro";
 
 export const frontmatter = {
   title: "Steckbrief",
@@ -16,22 +17,17 @@ const steps = [
   {
     id: "profil",
     label: "Ihr Profil",
-    progress: 20,
+    progress: 25,
   },
   {
     id: "kontext",
     label: "Kontext",
-    progress: 40,
+    progress: 50,
   },
   {
     id: "zielstellung",
     label: "Zielstellung/Probleme",
-    progress: 60,
-  },
-  {
-    id: "anhang",
-    label: "Anhang",
-    progress: 80,
+    progress: 75,
   },
   {
     id: "zusammenfassung",
@@ -42,375 +38,383 @@ const steps = [
 ---
 
 <Layout title={frontmatter.title}>
-  <div
-    class="mx-auto flex max-w-[1296px] gap-48 py-80"
-    x-data="{ hintsOpen: true }"
-  >
-    <!-- Hidden radio inputs for step navigation -->
-    {
-      steps.map((step) => (
-        <input
-          type="radio"
-          name="step"
-          id={`step-${step.id}`}
-          class="step-radio"
-          checked={step.id === "profil"}
-        />
-      ))
-    }
-
-    <aside class="sidebar-column sticky top-0 w-248">
+  <div class="form-wrapper">
+    <div
+      class="mx-auto flex max-w-[1296px] gap-48 py-80"
+      x-data="{ hintsOpen: true, arbeitstitel: '', email: '', ressort: '', referat: '', rechtsbereich: '', kontext: '', zielstellung: '', probleme: '' }"
+    >
+      <!-- Hidden radio inputs for step navigation -->
       {
         steps.map((step) => (
-          <label
-            for={`step-${step.id}`}
-            class="sidebar-item relative flex w-248 cursor-pointer items-center py-16 pr-16 pl-32"
-          >
-            <div class="sidebar-indicator bg-cosmic-blue-base absolute top-0 bottom-0 left-0 h-full w-[3px]" />
-            {step.label}
-          </label>
+          <input
+            type="radio"
+            name="step"
+            id={`step-${step.id}`}
+            class="step-radio"
+            checked={step.id === "profil"}
+          />
         ))
       }
-    </aside>
 
-    <main class="max-w-a11y flex-1">
-      <div class="bg-lavender-400 relative h-[5px] w-[630px]">
-        <div
-          class="progress-bar bg-cosmic-blue-base absolute top-0 left-0 h-full"
-        >
-        </div>
-      </div>
+      <aside class="sidebar-column sticky top-0 w-[248px]">
+        {
+          steps.map((step) => (
+            <label
+              for={`step-${step.id}`}
+              class="sidebar-item border-lavender-700 relative flex w-248 cursor-pointer items-center border-b py-16 pr-16 pl-32"
+            >
+              <div class="sidebar-indicator bg-cosmic-blue-base absolute top-0 bottom-0 left-0 h-full w-[3px]" />
+              {step.label}
+            </label>
+          ))
+        }
+      </aside>
 
-      <!-- Step 1: Ihr Profil -->
-      <div class="step-content py-40" data-step="profil">
-        <div class="space-y-24">
-          <Input label="Arbeitstitel" />
-          <Input label="E-Mail Adresse" />
-          <div class="flex gap-24">
-            <Input label="Ressort" />
-            <Input label="Referat aus ihrem Profil" />
-          </div>
-          <Select label="Ihr Rechtsbereich" options={fieldsOfLawOptions} />
-        </div>
-        <div class="mt-80 flex gap-48">
-          <label for="step-kontext" class="btn-primary cursor-pointer"
-            >Übernehmen und weiter</label
-          >
-          <a href={buildUrl("/steckbrief/prozess")} class="btn-secondary"
-            >Zurück</a
-          >
-        </div>
-      </div>
-
-      <!-- Step 2: Kontext -->
-      <div class="step-content py-40" data-step="kontext">
-        <div class="space-y-24">
-          <Textarea
-            id="kontext"
-            label="Kontext Ihres Vorhabens"
-            description="Einordnung ihres Handlungsbedarfs"
-            maxlength={1000}
-          />
-        </div>
-        <div class="mt-80 flex gap-48">
-          <label for="step-zielstellung" class="btn-primary cursor-pointer"
-            >Übernehmen und weiter</label
-          >
-          <label for="step-profil" class="btn-secondary cursor-pointer"
-            >Zurück</label
-          >
-        </div>
-      </div>
-
-      <!-- Step 3: Zielstellung/Probleme -->
-      <div class="step-content py-40" data-step="zielstellung">
-        <div class="space-y-24">
-          <Textarea
-            id="zielstellung"
-            label="Zielstellung"
-            description="Was soll durch das Gesetz verbessert werden?"
-            maxlength={1000}
-          />
-          <Textarea
-            id="probleme"
-            label="Probleme (optional)"
-            description="Was sind derzeitige Probleme in der Umsetzung?"
-            maxlength={1000}
-          />
-        </div>
-        <div class="mt-80 flex gap-48">
-          <label for="step-anhang" class="btn-primary cursor-pointer"
-            >Übernehmen und weiter</label
-          >
-          <label for="step-kontext" class="btn-secondary cursor-pointer"
-            >Zurück</label
-          >
-        </div>
-      </div>
-
-      <!-- Step 4: Anhang -->
-      <div class="step-content py-40" data-step="anhang">
-        <p class="font-bold">Hängen Sie relevante Dokumente an</p>
-        <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book.
-        </p>
-        <div class="mt-40 space-y-24">
+      <main class="max-w-a11y flex-1">
+        <div class="bg-lavender-400 relative h-[5px] w-full">
           <div
-            class="drop-zone border-cosmic-blue-base bg-lavender-base flex cursor-pointer flex-col items-center justify-center gap-12 px-24 py-48 text-center"
-            onclick="this.querySelector('input').click()"
+            class="progress-bar bg-cosmic-blue-base absolute top-0 left-0 h-full"
           >
-            <Icon
-              name="ic:outline-upload-file"
-              class="text-cosmic-blue-400 size-48"
-            />
-            <p class="font-bold">Dokumente hinzufügen</p>
-            <p>Klicken Sie hier, um Dateien auszuwählen</p>
-            <input type="file" class="sr-only" tabindex="-1" multiple />
           </div>
         </div>
-        <div class="mt-80 flex gap-48">
-          <label for="step-zusammenfassung" class="btn-primary cursor-pointer"
-            >Übernehmen und weiter</label
-          >
-          <label for="step-zielstellung" class="btn-secondary cursor-pointer"
-            >Zurück</label
-          >
-        </div>
-      </div>
 
-      <!-- Step 5: Zusammenfassung -->
-      <div class="step-content py-40" data-step="zusammenfassung">
-        <p class="text-xl">Zusammenfassung</p>
-        <div class="space-y-24">
-          <p>Hier ist die Zusammenfassung Ihrer Angaben.</p>
+        <!-- Step 1: Ihr Profil -->
+        <div class="step-content py-40" data-step="profil">
+          <div class="space-y-24">
+            <Input label="Arbeitstitel" id="arbeitstitel" x-model="arbeitstitel" />
+            <Input label="E-Mail Adresse" id="email" x-model="email" />
+            <div class="flex gap-24">
+              <Input label="Ressort" id="ressort" x-model="ressort" />
+              <Input label="Referat aus ihrem Profil" id="referat" x-model="referat" />
+            </div>
+            <div @select-change="rechtsbereich = $event.detail">
+              <Select label="Ihr Rechtsbereich" id="rechtsbereich" options={fieldsOfLawOptions} />
+            </div>
+          </div>
+          <div class="mt-80 flex gap-48">
+            <label for="step-kontext" class="btn-primary cursor-pointer"
+              >Übernehmen und weiter</label
+            >
+            <a href={buildUrl("/steckbrief/prozess")} class="btn-secondary"
+              >Zurück</a
+            >
+          </div>
         </div>
-        <div class="mt-80 flex gap-48">
-          <button class="btn-primary">E-Mail erstellen</button>
-          <label for="step-anhang" class="btn-secondary cursor-pointer"
-            >Zurück</label
-          >
-        </div>
-      </div>
-    </main>
 
-    <aside
-      class="hints-column relative sticky top-0 w-[248px] transition-all duration-300"
-    >
-      <div
-        class="bg-lavender-200 border-cosmic-blue-400 absolute inset-0 w-248 border-l pt-40 pb-16 transition-transform duration-300"
-        :class="hintsOpen ? 'translate-x-0' : 'translate-x-full'"
+        <!-- Step 2: Kontext -->
+        <div class="step-content py-40" data-step="kontext">
+          <div class="space-y-24">
+            <Textarea
+              id="kontext"
+              label="Kontext Ihres Vorhabens"
+              description="Einordnung ihres Handlungsbedarfs"
+              maxlength={1000}
+              x-model="kontext"
+            />
+          </div>
+          <div class="mt-80 flex gap-48">
+            <label for="step-zielstellung" class="btn-primary cursor-pointer"
+              >Übernehmen und weiter</label
+            >
+            <label for="step-profil" class="btn-secondary cursor-pointer"
+              >Zurück</label
+            >
+          </div>
+        </div>
+
+        <!-- Step 3: Zielstellung/Probleme -->
+        <div class="step-content py-40" data-step="zielstellung">
+          <div class="space-y-24">
+            <Textarea
+              id="zielstellung"
+              label="Zielstellung"
+              description="Was soll durch das Gesetz verbessert werden?"
+              maxlength={1000}
+              x-model="zielstellung"
+            />
+            <Textarea
+              id="probleme"
+              label="Probleme (optional)"
+              description="Was sind derzeitige Probleme in der Umsetzung?"
+              maxlength={1000}
+              x-model="probleme"
+            />
+          </div>
+          <div class="mt-80 flex gap-48">
+            <label for="step-zusammenfassung" class="btn-primary cursor-pointer"
+              >Übernehmen und weiter</label
+            >
+            <label for="step-kontext" class="btn-secondary cursor-pointer"
+              >Zurück</label
+            >
+          </div>
+        </div>
+
+        <!-- Step 4: Zusammenfassung -->
+        <div class="step-content py-40" data-step="zusammenfassung">
+          <div class="spacing-y-40">
+            <Card wrapperClass="p-40!">
+              <h2>Zusammenfassung</h2>
+              <table class="mt-24 w-full border-collapse">
+                <tbody>
+                  <tr>
+                    <td class="py-8 pr-24 font-bold align-top">Arbeitstitel</td>
+                    <td class="py-8" x-text="arbeitstitel"></td>
+                  </tr>
+                  <tr>
+                    <td class="py-8 pr-24 font-bold align-top">E-Mail Adresse</td>
+                    <td class="py-8" x-text="email"></td>
+                  </tr>
+                  <tr>
+                    <td class="py-8 pr-24 font-bold align-top">Ressort</td>
+                    <td class="py-8" x-text="ressort"></td>
+                  </tr>
+                  <tr>
+                    <td class="py-8 pr-24 font-bold align-top">Referat</td>
+                    <td class="py-8" x-text="referat"></td>
+                  </tr>
+                  <tr>
+                    <td class="py-8 pr-24 font-bold align-top">Rechtsbereich</td>
+                    <td class="py-8" x-text="rechtsbereich"></td>
+                  </tr>
+                  <tr>
+                    <td class="py-8 pr-24 font-bold align-top">Kontext</td>
+                    <td class="py-8 whitespace-pre-wrap" x-text="kontext"></td>
+                  </tr>
+                  <tr>
+                    <td class="py-8 pr-24 font-bold align-top">Zielstellung</td>
+                    <td class="py-8 whitespace-pre-wrap" x-text="zielstellung"></td>
+                  </tr>
+                  <tr>
+                    <td class="py-8 pr-24 font-bold align-top">Probleme</td>
+                    <td class="py-8 whitespace-pre-wrap" x-text="probleme"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </Card>
+            <Card wrapperClass="mt-40 p-40!">
+              <h3>Was passiert als nächstes?</h3>
+              <ul>
+                <li>
+                  Sie laden den Steckbrief als Word-Datei runter, stimmen sich
+                  ab und senden ihn später per Mail an NKR, Destatis, etc.
+                </li>
+                <li>Next steps</li>
+              </ul>
+            </Card>
+          </div>
+          <div class="mt-80 flex gap-48">
+            <button class="btn-primary">Word-Datei erstellen</button>
+            <label for="step-zielstellung" class="btn-secondary cursor-pointer"
+              >Zurück</label
+            >
+          </div>
+        </div>
+      </main>
+
+      <aside
+        class="hints-column sticky top-0 w-[248px] transition-all duration-300"
       >
         <div
-          class="border-cosmic-blue-400 text-cosmic-blue-base absolute top-34 left-0 z-10 -translate-x-1/2 cursor-pointer rounded-full border bg-white p-8"
-          @click="hintsOpen = !hintsOpen"
-          :class="hintsOpen ? opacity-100 : opacity-0"
+          class="border-cosmic-blue-400 absolute inset-0 w-248 border-l pt-40 pb-16 transition-transform duration-300"
+          :class="hintsOpen ? 'translate-x-0 bg-lavender-200' : 'translate-x-full bg-transaparent'"
         >
-          <Icon
-            name="ic:twotone-arrow-forward-ios"
-            class="transition-transform duration-300"
-            :class="hintsOpen ? '' : 'rotate-180'"
-          />
-        </div>
-        <div
-          x-show="hintsOpen"
-          x-transition:enter="transition-opacity duration-200"
-          x-transition:enter-start="opacity-0"
-          x-transition:enter-end="opacity-100"
-          x-transition:leave="transition-opacity duration-100"
-          x-transition:leave-start="opacity-100"
-          x-transition:leave-end="opacity-0"
-          class="px-32"
-        >
-          <!-- Hints for Step 1: Ihr Profil -->
-          <div class="hint-content space-y-40" data-step="profil">
-            <div>
-              <p class="mb-16 font-bold">Tipp</p>
-              <p>
-                Geben Sie einen aussagekräftigen Arbeitstitel ein, der Ihr
-                Vorhaben kurz beschreibt.
-              </p>
-            </div>
+          <div
+            class="border-cosmic-blue-400 text-cosmic-blue-base absolute top-34 left-0 z-10 -translate-x-1/2 cursor-pointer rounded-full border bg-white p-8"
+            @click="hintsOpen = !hintsOpen"
+          >
+            <Icon
+              name="ic:twotone-arrow-forward-ios"
+              class="transition-transform duration-300"
+              :class="hintsOpen ? '' : 'rotate-180'"
+            />
           </div>
+          <div
+            x-show="hintsOpen"
+            x-transition:enter="transition-opacity duration-200"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="transition-opacity duration-100"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+            class="px-32"
+          >
+            <!-- Hints for Step 1: Ihr Profil -->
+            <div class="hint-content space-y-40" data-step="profil">
+              <div>
+                <p class="mb-16 font-bold">Tipp</p>
+                <p>
+                  Geben Sie einen aussagekräftigen Arbeitstitel ein, der Ihr
+                  Vorhaben kurz beschreibt.
+                </p>
+              </div>
+            </div>
 
-          <!-- Hints for Step 2: Kontext -->
-          <div class="hint-content space-y-40" data-step="kontext">
-            <div>
-              <p class="mb-16 font-bold">Was bedeutet Kontext in dem Fall?</p>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book.
-              </p>
+            <!-- Hints for Step 2: Kontext -->
+            <div class="hint-content space-y-40" data-step="kontext">
+              <div>
+                <p class="mb-16 font-bold">Was bedeutet Kontext in dem Fall?</p>
+                <p>
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s, when an unknown
+                  printer took a galley of type and scrambled it to make a type
+                  specimen book.
+                </p>
+              </div>
+              <div>
+                <p class="mb-16 font-bold">Haben Sie bereits Projektskizzen?</p>
+                <p>
+                  copy+pasten Sie ihre Inhalte hier rein oder hängen Sie sie im
+                  4. Schritt an.
+                </p>
+              </div>
             </div>
-            <div>
-              <p class="mb-16 font-bold">Haben Sie bereits Projektskizzen?</p>
-              <p>
-                copy+pasten Sie ihre Inhalte hier rein oder hängen Sie sie im 4.
-                Schritt an.
-              </p>
-            </div>
-          </div>
 
-          <!-- Hints for Step 3: Zielstellung/Probleme -->
-          <div class="hint-content space-y-40" data-step="zielstellung">
-            <div>
-              <p class="mb-16 font-bold">Was kommt in die Zielstellung?</p>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book.
-              </p>
-            </div>
-            <div>
-              <p class="mb-16 font-bold">Was könnten Probleme sein?</p>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book.
-              </p>
-            </div>
-          </div>
-
-          <!-- Hints for Step 4: Anhang -->
-          <div class="hint-content space-y-40" data-step="anhang">
-            <div>
-              <p class="mb-16 font-bold">Was können Sie anhängen?</p>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book.
-              </p>
-            </div>
-            <div>
-              <p class="mb-16 font-bold">Bestehende Projektkizzen?</p>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book.
-              </p>
-            </div>
-          </div>
-
-          <!-- Hints for Step 5: Zusammenfassung -->
-          <div class="hint-content space-y-40" data-step="zusammenfassung">
-            <div>
-              <p class="mb-16 font-bold">Fertig!</p>
-              <p>Überprüfen Sie Ihre Angaben und senden Sie das Formular ab.</p>
+            <!-- Hints for Step 3: Zielstellung/Probleme -->
+            <div class="hint-content space-y-40" data-step="zielstellung">
+              <div>
+                <p class="mb-16 font-bold">Was kommt in die Zielstellung?</p>
+                <p>
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s, when an unknown
+                  printer took a galley of type and scrambled it to make a type
+                  specimen book.
+                </p>
+              </div>
+              <div>
+                <p class="mb-16 font-bold">Was könnten Probleme sein?</p>
+                <p>
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s, when an unknown
+                  printer took a galley of type and scrambled it to make a type
+                  specimen book.
+                </p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </aside>
+      </aside>
+    </div>
   </div>
-</Layout>
 
-<style>
-  /* Hide radio inputs */
-  .step-radio {
-    display: none;
-  }
+  <style>
+    /* Hide radio inputs */
+    .step-radio {
+      display: none;
+    }
 
-  /* Hide all step content by default */
-  .step-content {
-    display: none;
-  }
+    /* Hide all step content by default */
+    .step-content {
+      display: none;
+    }
 
-  /* Hide all hint content by default */
-  .hint-content {
-    display: none;
-  }
+    /* Hide all hint content by default */
+    .hint-content {
+      display: none;
+    }
 
-  /* Hide sidebar indicators by default */
-  .sidebar-indicator {
-    display: none;
-  }
-
-  /* Show step content when corresponding radio is checked */
-  #step-profil:checked ~ main .step-content[data-step="profil"],
-  #step-kontext:checked ~ main .step-content[data-step="kontext"],
-  #step-zielstellung:checked ~ main .step-content[data-step="zielstellung"],
-  #step-anhang:checked ~ main .step-content[data-step="anhang"],
-  #step-zusammenfassung:checked
-    ~ main
-    .step-content[data-step="zusammenfassung"] {
-    display: block;
-  }
-
-  /* Show hint content when corresponding radio is checked */
-  #step-profil:checked ~ .hints-column .hint-content[data-step="profil"],
-  #step-kontext:checked ~ .hints-column .hint-content[data-step="kontext"],
-  #step-zielstellung:checked
-    ~ .hints-column
-    .hint-content[data-step="zielstellung"],
-  #step-anhang:checked ~ .hints-column .hint-content[data-step="anhang"],
-  #step-zusammenfassung:checked
-    ~ .hints-column
-    .hint-content[data-step="zusammenfassung"] {
-    display: block;
-  }
-
-  /* Style active sidebar item */
-  #step-profil:checked ~ .sidebar-column label[for="step-profil"],
-  #step-kontext:checked ~ .sidebar-column label[for="step-kontext"],
-  #step-zielstellung:checked ~ .sidebar-column label[for="step-zielstellung"],
-  #step-anhang:checked ~ .sidebar-column label[for="step-anhang"],
-  #step-zusammenfassung:checked
-    ~ .sidebar-column
-    label[for="step-zusammenfassung"] {
-    background-color: var(--color-lavender-base);
-  }
-
-  /* Show indicator for active sidebar item */
-  #step-profil:checked
-    ~ .sidebar-column
-    label[for="step-profil"]
-    .sidebar-indicator,
-  #step-kontext:checked
-    ~ .sidebar-column
-    label[for="step-kontext"]
-    .sidebar-indicator,
-  #step-zielstellung:checked
-    ~ .sidebar-column
-    label[for="step-zielstellung"]
-    .sidebar-indicator,
-  #step-anhang:checked
-    ~ .sidebar-column
-    label[for="step-anhang"]
-    .sidebar-indicator,
-  #step-zusammenfassung:checked
-    ~ .sidebar-column
-    label[for="step-zusammenfassung"]
+    /* Hide sidebar indicators by default */
     .sidebar-indicator {
-    display: block;
-  }
+      display: none;
+    }
 
-  /* Update progress bar width based on active step */
-  #step-profil:checked ~ main .progress-bar {
-    width: 20%;
-  }
-  #step-kontext:checked ~ main .progress-bar {
-    width: 40%;
-  }
-  #step-zielstellung:checked ~ main .progress-bar {
-    width: 60%;
-  }
-  #step-anhang:checked ~ main .progress-bar {
-    width: 80%;
-  }
-  #step-zusammenfassung:checked ~ main .progress-bar {
-    width: 100%;
-  }
+    /* Show step content when corresponding radio is checked */
+    #step-profil:checked ~ main .step-content[data-step="profil"],
+    #step-kontext:checked ~ main .step-content[data-step="kontext"],
+    #step-zielstellung:checked ~ main .step-content[data-step="zielstellung"],
+    #step-anhang:checked ~ main .step-content[data-step="anhang"],
+    #step-zusammenfassung:checked
+      ~ main
+      .step-content[data-step="zusammenfassung"] {
+      display: block;
+    }
 
-  /* Smooth transition for progress bar */
-  .progress-bar {
-    transition: width 0.3s ease-in-out;
-  }
-</style>
+    /* Show hint content when corresponding radio is checked */
+    #step-profil:checked ~ .hints-column .hint-content[data-step="profil"],
+    #step-kontext:checked ~ .hints-column .hint-content[data-step="kontext"],
+    #step-zielstellung:checked
+      ~ .hints-column
+      .hint-content[data-step="zielstellung"],
+    #step-anhang:checked ~ .hints-column .hint-content[data-step="anhang"],
+    #step-zusammenfassung:checked
+      ~ .hints-column
+      .hint-content[data-step="zusammenfassung"] {
+      display: block;
+    }
+
+    /* Style active sidebar item */
+    #step-profil:checked ~ .sidebar-column label[for="step-profil"],
+    #step-kontext:checked ~ .sidebar-column label[for="step-kontext"],
+    #step-zielstellung:checked ~ .sidebar-column label[for="step-zielstellung"],
+    #step-anhang:checked ~ .sidebar-column label[for="step-anhang"],
+    #step-zusammenfassung:checked
+      ~ .sidebar-column
+      label[for="step-zusammenfassung"] {
+      background-color: var(--color-lavender-base);
+    }
+
+    /* Show indicator for active sidebar item */
+    #step-profil:checked
+      ~ .sidebar-column
+      label[for="step-profil"]
+      .sidebar-indicator,
+    #step-kontext:checked
+      ~ .sidebar-column
+      label[for="step-kontext"]
+      .sidebar-indicator,
+    #step-zielstellung:checked
+      ~ .sidebar-column
+      label[for="step-zielstellung"]
+      .sidebar-indicator,
+    #step-anhang:checked
+      ~ .sidebar-column
+      label[for="step-anhang"]
+      .sidebar-indicator,
+    #step-zusammenfassung:checked
+      ~ .sidebar-column
+      label[for="step-zusammenfassung"]
+      .sidebar-indicator {
+      display: block;
+    }
+
+    /* Update progress bar width based on active step */
+    #step-profil:checked ~ main .progress-bar {
+      width: 20%;
+    }
+    #step-kontext:checked ~ main .progress-bar {
+      width: 40%;
+    }
+    #step-zielstellung:checked ~ main .progress-bar {
+      width: 60%;
+    }
+    #step-anhang:checked ~ main .progress-bar {
+      width: 80%;
+    }
+    #step-zusammenfassung:checked ~ main .progress-bar {
+      width: 100%;
+    }
+
+    /* Smooth transition for progress bar */
+    .progress-bar {
+      transition: width 0.3s ease-in-out;
+    }
+
+    /* Lavender background when Zusammenfassung step is active */
+    .form-wrapper:has(#step-zusammenfassung:checked) {
+      background-color: var(--color-lavender-400);
+    }
+
+    /* Hide hints sidebar when Zusammenfassung step is active */
+    #step-zusammenfassung:checked ~ .hints-column {
+      display: none;
+    }
+
+    /* Expand main when hints sidebar is hidden (248px sidebar + 48px gap) */
+    #step-zusammenfassung:checked ~ main {
+      max-width: calc(630px + 48px + 248px);
+    }
+  </style>
+</Layout>
