@@ -34,7 +34,7 @@ const { preline, title, href, subline, body, image, imageAlt, imageSource } =
   <div class="kern-card__container">
     <header class="kern-card__header">
       <hgroup>
-        <p class="kern-preline">{preline}</p>
+        {preline && <p class="kern-preline">{preline}</p>}
         <h2 class="kern-title">
           <Link href={href} class="kern-link--stretched">{title}</Link>
         </h2>

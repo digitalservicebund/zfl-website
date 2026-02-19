@@ -1,7 +1,10 @@
 ---
 import Hero from "@/components/Hero.astro";
+import Link from "@/components/Link.astro";
+import { ZFL_EMAIL } from "@/config/constants";
 import { isStaging } from "@/config/stage";
 import Layout from "@/layouts/Layout.astro";
+import { mailto } from "@/utils/mailtoHelper";
 import ToolCard from "./_ToolCard.astro";
 import digitalcheckImage from "./Digitalcheck.png";
 import eGesetzgebungImage from "./eGG.png";
@@ -27,10 +30,30 @@ export const frontmatter = {
         Auf dieser Seite finden Sie hilfreiche Links zu Anleitungen und
         Hilfsmittel, die Sie bei der Regelungsarbeit unterstützen.
       </p>
+      <p>
+        Unterschiedliche Checks und Arbeitshilfen (wie z. B. der <Link
+          href="https://digitalcheck.bund.de/">Digitalcheck</Link
+        >,
+        <Link href="https://www.gleichstellungs-check.de/"
+          >Gleichstellungscheck</Link
+        > oder <Link href="https://jugend-check.de/">Jugendcheck</Link>) zielen
+        in Teilen auf die gleiche Wirkung ab: Praxis- und digitaltaugliche
+        Regelungen und Bürokratierückbau. Bei der Zusammenführung diverser
+        Ansätze verfolgen wir das Ziel, Ihre Regelungsarbeit einfacher und
+        effizienter zu gestalten.
+      </p>
+      <p>
+        <Link
+          href={mailto(
+            ZFL_EMAIL.display,
+            `Interesse am Thema "Konsolidierung der Instrumente"`,
+          )}>Mitarbeiten an diesem Thema</Link
+        > (öffnet E-Mail)
+      </p>
     </Hero>
 
     <section class="my-80">
-      <h2 class="font-bold mb-40">Regelung konzipieren</h2>
+      <h2 class="mb-40 font-bold">Regelung konzipieren</h2>
       <div class="grid grid-cols-1 gap-16 md:grid-cols-2">
         <ToolCard
           title="Digitalcheck"
@@ -51,7 +74,7 @@ export const frontmatter = {
         />
       </div>
 
-      <h2 class="font-bold mb-40 mt-80">Regelung ausarbeiten</h2>
+      <h2 class="mt-80 mb-40 font-bold">Regelung ausarbeiten</h2>
       <div class="grid grid-cols-1 gap-16 md:grid-cols-2">
         <ToolCard
           title="E-Gesetzgebung"
@@ -78,7 +101,7 @@ export const frontmatter = {
           imageSource="FITKO"
         />
         <ToolCard
-          title="Interoperable Europe Assessments"
+          title="Interoperabilitäts-Bewertungen"
           href="https://digitalcheck.bund.de/interoperabel"
           subline="EU-Interoperabilität prüfen"
           body="Hier erfahren Sie, was die Verordnung für ein interoperables Europa (EU) 2024/903 für Ihr Regelungsvorhaben bedeutet und wie sie zu einem vernetzten Europa beiträgt."
