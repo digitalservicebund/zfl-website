@@ -17,7 +17,7 @@ export const routes: Record<string, NavItem> = {
   },
   ueberUns: {
     path: "/ueber-uns",
-    title: "Über uns",
+    title: "Über das Zentrum für Legistik",
     showInHeader: isStaging,
     children: [
       { path: "/ueber-uns/zahlen-und-fakten", title: "Zahlen und Fakten" },
