@@ -2,7 +2,6 @@
 import Card from "@/components/Card.astro";
 import Hero from "@/components/Hero.astro";
 import Link from "@/components/Link.astro";
-import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import begleitungenImage from "@/images/Begleitungen.png";
 import trainingsImage from "@/images/Trainings.jpg";
 import Layout from "@/layouts/Layout.astro";
@@ -13,44 +12,98 @@ const trainingsImageAsset = await getImage({ src: trainingsImage });
 const trainingsImageAssetURL = `url("${trainingsImageAsset.src}")`;
 
 export const frontmatter = {
-  title: "Begleitungen",
+  title: "Regelungsbegleitung",
   sitemap: true,
+};
+
+const tableData = {
+  header: ["Kriterien", "Paket S", "Paket M", "Paket L"],
+  rows: [
+    {
+      label: "Fokus",
+      s: "Punktuelle Unterstützung bei Ihrer Fragestellung",
+      m: "Vertiefte Analyse Ihres Vorhabens",
+      l: "Langfristige Begleitung des Gesetzgebungsprozesses",
+    },
+    {
+      label: "Dauer",
+      s: "1 gemeinsame Arbeitssitzung",
+      m: "ca. 4 Wochen",
+      l: "Ab 5 Wochen",
+    },
+    {
+      label: "Team",
+      s: ["1–2 Expert:innen aus:", "Service Design", "Nutzerforschung"],
+      m: [
+        "3–4 Expert:innen aus:",
+        "Service Design",
+        "Nutzerforschung",
+        "Softwareentwicklung",
+        "Produktmanagement",
+        "Transformationsmanagement",
+      ],
+      l: [
+        "3–4 Expert:innen aus",
+        "Service Design",
+        "Nutzerforschung",
+        "Softwareentwicklung",
+        "Produktmanagement",
+        "Transformationsmanagement",
+      ],
+    },
+    {
+      label: "Zeitpunkt",
+      s: "Individuell nach Bedarf",
+      m: "Konzept- bis Entwurfsphase",
+      l: "Ab Start der Initiative",
+    },
+    {
+      label: "Tätigkeit (Beispiele)",
+      s: [
+        "Umsetzungsperspektive besser verstehen",
+        "gemeinsam visualisieren",
+        "technische Fragen beantworten",
+      ],
+      m: [
+        "Umsetzungsperspektive auf technischer, organisatorischer und rechtlicher Ebene durchdenken",
+        "technische Lösungsideen entwickeln",
+        "Machbarkeit validieren",
+      ],
+      l: [
+        "Gemeinsame Analyse",
+        "Unterstützung bei Workshops und Hausabstimmungen",
+        "moderierter Austausch mit Umsetzungsakteuren",
+        "Evaluation von Lösungen",
+      ],
+    },
+  ],
 };
 ---
 
 <Layout title={frontmatter.title}>
   <main class="breakout-grid max-md:overflow-x-hidden">
     <Hero>
-      <h1>Begleitung für Vorhaben</h1>
-      <div class="relative mt-40 gap-32 space-y-40 md:flex md:flex-row">
+      <h1>Regelungsbegleitung</h1>
+      <div class="relative mt-24 gap-32 md:flex md:flex-row">
         <div>
-          <h2>
-            Interdisziplinäre Expertise für praxisnahe und bürokratiearme
-            Regelungen nutzen
-          </h2>
+          <h2>Individuelle Unterstützung für Ihr Vorhaben nutzen</h2>
           <p>
-            Ein interdisziplinäres Team mit Kompetenzen in Design,
-            Nutzerforschung, IT, Produkt- und Prozessmanagement begleitet Sie
-            vertraulich und mit individuellem Fokus auf Ihr Vorhaben.
+            Ein in Gesetzgebungspraxis erfahrenes interdisziplinäres Team
+            unterstützt Sie dabei, die Regelung praxisnah, digitaltauglich und
+            bürokratiearm zu gestalten.
+            <br /><br />
+            Vertraulich und mit individuellem Fokus auf Ihr Vorhaben stehen Ihnen
+            während der Begleitung Kompetenzen in Design, Nutzerforschung, IT, Produkt-
+            und Prozessmanagement direkt zur Verfügung.
           </p>
-          <p>
-            Nehmen Sie das Angebot bereits im frühen Erarbeitungsprozess in
-            Anspruch, damit die Begleitung die größte Wirkung erzielen kann.
-          </p>
-          <p>
-            <strong
-              >Kontaktieren Sie uns, um eine Begleitung für Ihr Vorhaben
-              anzufragen:
-            </strong>
-          </p>
-          <p>
-            Telefon:
-            <Link href={ZFL_PHONE.url}>{ZFL_PHONE.display}</Link>
-          </p>
-          <p>
-            E-Mail:
-            <Link href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</Link>
-          </p>
+          <div class="mt-16">
+            <a class="btn btn-primary gap-8"
+              ><Icon
+                name="ic:baseline-arrow-downward"
+                class="inline-block h-36 w-36"
+              />Leistungspakete anzeigen</a
+            >
+          </div>
         </div>
         <Image
           class="max-md:hero-image-overlay md:size-288"
@@ -61,27 +114,24 @@ export const frontmatter = {
     </Hero>
 
     <section class="py-80">
-      <h2>Wirkung der Zusammenarbeit</h2>
+      <h2>Ergebnisse der Zusammenarbeit</h2>
 
       <p>
         Wir unterstützen Sie dabei, Umsetzungsprozesse zu verstehen und
         Anforderungen an praxisnahe und bürokratiearme Regelungen umzusetzen.
-      </p>
-      <p>
         Durch Ihre Rechtsetzungs-Expertise in Kombination mit Methoden aus der
         agilen Software-Entwicklung entstehen somit praxistaugliche und
         zukunftsfähige Gesetze, die unter anderem die Potenziale der
         Digitalisierung bestmöglich ausschöpfen.
       </p>
 
-      <h3 class="mt-40">So unterstützen wir Sie konkret:</h3>
-
-      <div class="mt-16 flex gap-32 max-md:flex-col">
-        <div class="flex gap-16 md:flex-col md:gap-32">
+      <div class="gap24 mt-40 flex max-md:flex-col">
+        <div class="flex gap-6 md:flex-col md:gap-32">
           <Icon
-            class="text-cosmic-blue-400 size-40 flex-none md:size-80"
+            class="text-cosmic-blue-400 bg-lavender-400 flex-none px-[18px] py-[22px] md:h-[100px] md:w-[110px]"
             name="ic:twotone-account-tree"
           />
+
           <div class="space-y-8">
             <h3 class="ds-heading-03-bold sm:hyphens-none md:pr-32">
               Sachverhalte visualisieren
@@ -94,7 +144,7 @@ export const frontmatter = {
         </div>
         <div class="flex gap-16 md:flex-col md:gap-32">
           <Icon
-            class="text-cosmic-blue-400 size-40 flex-none md:size-80"
+            class="text-cosmic-blue-400 bg-lavender-400 flex-none px-[18px] py-[22px] md:h-[100px] md:w-[110px]"
             name="ic:twotone-lightbulb"
           />
           <div class="space-y-8">
@@ -109,7 +159,7 @@ export const frontmatter = {
         </div>
         <div class="flex gap-16 md:flex-col md:gap-32">
           <Icon
-            class="text-cosmic-blue-400 size-40 flex-none md:size-80"
+            class="text-cosmic-blue-400 bg-lavender-400 flex-none px-[18px] py-[22px] md:h-[100px] md:w-[110px]"
             name="ic:twotone-hub"
           />
           <div class="space-y-8">
@@ -122,6 +172,62 @@ export const frontmatter = {
             </p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Passende Leistungspakete für Ihr Vorhaben</h2>
+      <p>
+        In der folgenden Tabelle finden Sie unsere verschiedenen
+        Unterstützungsangebote im Vergleich. Alle Angebote sind kostenfrei und
+        werden vom BMDS finanziert.
+      </p>
+      <div class="relative overflow-x-auto">
+        <table class="w-full">
+          <thead class="">
+            <tr>
+              {
+                tableData.header.map((header) => (
+                  <th scope="col" class="table-header-cell">
+                    <div class="flex items-center gap-2">{header}</div>
+                  </th>
+                ))
+              }
+            </tr>
+          </thead>
+          <tbody
+            >{
+              tableData.rows.map((row, index) => (
+                <tr class={index % 2 === 0 ? "bg-white" : "bg-lavender-200"}>
+                  {/* first column: label */}
+                  <td class="table-body-cell">{row.label}</td>
+
+                  {/* data of package s, m and l*/}
+                  {[row.s, row.m, row.l].map((cell) => (
+                    <td class="table-body-cell">
+                      {Array.isArray(cell) ? (
+                        <span>
+                          {cell[0]}
+                        </span>
+                        <ul>
+                          {cell.map((item, index) => (
+                              index !== 0 &&  (
+                                <li>
+                                  {item}
+                                </li>
+                              )
+                          ))}
+                        </ul>
+                      ) : (
+                        cell
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
       </div>
     </section>
 

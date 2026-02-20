@@ -6,7 +6,7 @@
 
 @theme {
   --font-sans: BundesSansWeb;
-  
+
   --color-*: initial;
 
   --color-white: white;
@@ -59,7 +59,7 @@
     @apply font-bold;
   }
 
-  a:not([class*="link-unstyled"]) {
+  a:not(.link-unstyled, .btn) {
     @apply text-link;
   }
 
@@ -70,14 +70,18 @@
   a,
   button {
     @apply cursor-pointer;
-
-    &.btn-primary {
-      display: inline-block;
-      padding: 18px 24px;
-      background-color: var(--color-cosmic-blue-base);
-      color: var(--color-white);
+    &.btn {
+      display: inline-flex;
+      padding: 14px 24px;
       font-weight: 700;
       letter-spacing: 0.16px;
+      line-height: 2;
+      border-radius: 8px;
+    }
+
+    &.btn-primary {
+      background-color: var(--color-cosmic-blue-base);
+      color: var(--color-white);
 
       &:active {
         background-color: var(--color-cosmic-blue-400);
@@ -130,6 +134,37 @@
     @apply max-w-a11y;
     &:not(:last-child) {
       @apply mb-8;
+    }
+  }
+
+  th {
+    &.table-header-cell {
+      min-width: 150px;
+      padding: 16px 32px 16px 16px;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 2px solid var(--color-lavender-400, #eceef6);
+      background: var(--color-lavender-base, #e3e6f2);
+      color: var(--semantic-color-text, #000);
+      font-feature-settings:
+        "liga" off,
+        "clig" off;
+      font-family: var(--font-sans);
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 22.5px;
+      letter-spacing: 0.16px;
+    }
+  }
+  td {
+    &.table-body-cell {
+      min-width: 150px;
+      padding: var(--m, 16px) 32px 16px 16px;
+      align-items: flex-start;
+      gap: 8px;
+      align-self: stretch;
+      border-bottom: 1px solid var(--color-lavender-400, #eceef6);
     }
   }
 

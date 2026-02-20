@@ -1,13 +1,13 @@
 export type NavItem = {
   path: string;
-  title: string
+  title: string;
   isStagingOnly?: boolean;
   showInHeader?: boolean;
   children?: NavItem[];
 };
 
 export const routes: Record<string, NavItem> = {
-  begleitungen: { path: "/begleitungen", title: "Begleitungen" },
+  begleitungen: { path: "/begleitungen", title: "Regelungsbegleitung" },
   schulungen: { path: "/schulungen", title: "Schulungen" },
   anleitungenUndHilfsmittel: {
     path: "/anleitungen-und-hilfsmittel",
@@ -24,8 +24,16 @@ export const routes: Record<string, NavItem> = {
     ],
   },
   impressum: { path: "/impressum", title: "Impressum", showInHeader: false },
-  datenschutz: { path: "/datenschutz", title: "Datenschutzerklärung", showInHeader: false },
-  barrierefreiheit: { path: "/barrierefreiheit", title: "Barrierefreiheit", showInHeader: false },
+  datenschutz: {
+    path: "/datenschutz",
+    title: "Datenschutzerklärung",
+    showInHeader: false,
+  },
+  barrierefreiheit: {
+    path: "/barrierefreiheit",
+    title: "Barrierefreiheit",
+    showInHeader: false,
+  },
   sitemap: { path: "/sitemap", title: "Sitemap", showInHeader: false },
 };
 
