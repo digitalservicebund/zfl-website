@@ -24,7 +24,7 @@ const { appointments, caption } = Astro.props;
       appointments.map((appointment) => (
         <tr>
           <>
-            <td class="pr-16">{appointment.date}</td>
+            <td class="pr-16 font-bold">{appointment.date}</td>
             <td class="pr-16">{appointment.time}</td>
             <td>{appointment.location}</td>
           </>

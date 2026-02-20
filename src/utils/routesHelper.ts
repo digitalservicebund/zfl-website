@@ -20,7 +20,7 @@ export const getAllRoutes = async (): Promise<SitemapFrontmatter[]> => {
     {
       eager: true,
     },
-  ) as Record<string, RouteModule>;
+  );
 
   const excludeList = [/sitemap\.astro/, /\/_/, /404/, /\[slug\]/];
 

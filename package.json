@@ -41,7 +41,7 @@
     "astro-seo": "^1.1.0",
     "docx": "^9.5.3",
     "sharp": "^0.34.5",
-    "tailwind-merge": "^3.4.0",
+    "tailwind-merge": "^3.4.1",
     "tailwind-variants": "^3.2.2",
     "tailwindcss": "^4.1.18"
   },
@@ -74,7 +74,7 @@
     "overrides": {
       "nth-check": "2.0.1",
       "lodash@>=4.0.0 <=4.17.22": ">=4.17.23",
-      "tar@<7.5.7": ">=7.5.7"
+      "tar@<7.5.8": ">=7.5.8"
     }
   }
 }

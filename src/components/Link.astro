@@ -14,13 +14,13 @@ const url = buildUrl(href);
 
 <a
   href={url}
-  class={`kern-link text-link ${className}`}
+  class={className}
   {...isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {}}
   ><slot />{
     isExternal && (
       <Icon
         name="ic:twotone-open-in-new"
-        class="mb-1 ml-2 inline no-underline"
+        class="mb-1 ml-2 inline link-unstyled"
       />
     )
   }</a

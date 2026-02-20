@@ -1,0 +1,32 @@
+[
+  {
+    "date": "Mittwoch, 01.04.2026",
+    "time": "10:30 - 12:00 Uhr",
+    "location": "online"
+  },
+  {
+    "date": "Montag, 15.04.2026",
+    "time": "10:00 - 11:30 Uhr",
+    "location": "online"
+  },
+  {
+    "date": "Montag, 20.04.2026",
+    "time": "13:00 - 14:30 Uhr",
+    "location": "online"
+  },
+  {
+    "date": "Mittwoch, 06.05.2026",
+    "time": "10:00 - 11:30 Uhr",
+    "location": "online"
+  },
+  {
+    "date": "Mittwoch, 13.05.2026",
+    "time": "10:00 - 11:30 Uhr",
+    "location": "online"
+  },
+  {
+    "date": "Montag, 18.05.2026",
+    "time": "13:00 - 14:30 Uhr",
+    "location": "online"
+  }
+]
