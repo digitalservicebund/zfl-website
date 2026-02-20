@@ -1,11 +1,9 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Input from "@/components/input/Input.astro";
-import Select from "@/components/input/Select.astro";
 import Textarea from "@/components/input/Textarea.astro";
 import { Icon } from "astro-icon/components";
 import { buildUrl } from "@/utils/routesHelper";
-import { fieldsOfLawOptions } from "@/config/fieldsOfLawOptions";
 import Card from "@/components/Card.astro";
 
 export const frontmatter = {
@@ -90,13 +88,11 @@ const steps = [
                 x-model="referat"
               />
             </div>
-            <div @select-change="rechtsbereich = $event.detail">
-              <Select
-                label="Ihr Rechtsbereich"
-                id="rechtsbereich"
-                options={fieldsOfLawOptions}
-              />
-            </div>
+            <Input
+              label="Ihr Rechtsbereich"
+              id="rechtsbereich"
+              x-model="rechtsbereich"
+            />
           </div>
           <div class="mt-80 flex gap-48">
             <label for="step-kontext" class="btn btn-primary cursor-pointer"

@@ -2,9 +2,7 @@
 import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
 import Input from "@/components/input/Input.astro";
-import Select from "@/components/input/Select.astro";
 import Textarea from "@/components/input/Textarea.astro";
-import { fieldsOfLawOptions } from "@/config/fieldsOfLawOptions";
 import { ZFL_EMAIL } from "@/config/constants";
 
 export const frontmatter = {
@@ -41,11 +39,7 @@ export const frontmatter = {
           <Input id="ressort" label="Ressort" />
           <Input id="referat" label="Referat aus ihrem Profil" />
         </div>
-        <Select
-          id="rechtsbereich"
-          label="Ihr Rechtsbereich"
-          options={fieldsOfLawOptions}
-        />
+        <Input id="rechtsbereich" label="Ihr Rechtsbereich" />
       </div>
 
       <div class="max-w-a11y space-y-24">
