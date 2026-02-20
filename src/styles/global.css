@@ -1,3 +1,4 @@
+@import "@kern-ux/native/dist/kern.min.css";
 @import "@digitalservice4germany/angie/fonts.css" layer(base);
 @import "tailwindcss";
 @config "@digitalservice4germany/style-dictionary/tailwind";
@@ -5,6 +6,7 @@
 
 @theme {
   --font-sans: BundesSansWeb;
+  
   --color-*: initial;
 
   --color-white: white;
@@ -24,6 +26,11 @@
   --section-spacing-default: 80px;
   --max-content-width: 59rem;
   --container-padding-inline: clamp(1rem, 5vw, 3rem);
+}
+
+:root {
+  --kern-typography-font-family-default: BundesSansWeb;
+  --kern-component-kopfzeile-font-family: BundesSansWeb;
 }
 
 @layer base {
@@ -52,6 +59,10 @@
 
   h4 {
     @apply font-bold;
+  }
+
+  a:not([class*="link-unstyled"]) {
+    @apply text-link;
   }
 
   a[href^="tel:"] {
@@ -146,12 +157,6 @@
   *:focus-visible {
     @apply no-underline outline-2 outline-offset-1 outline-blue-800;
   }
-
-  p + a:not([class]),
-  p > a:not([class]),
-  li > a:not([class]) {
-    @apply text-link;
-  }
 }
 
 main {
@@ -222,6 +227,10 @@ main {
   max-width: 630px;
 }
 
+@utility hero-image-overlay {
+  @apply absolute top-0 bottom-0 left-3/4 size-fit opacity-20;
+}
+
 @layer components {
   .summary-content {
     .details & {
@@ -266,16 +275,19 @@ main {
   - The center `content` column is fluid but capped at `--max-content-width`.
   - By default, direct children are placed in the `content` column.
   - Use the `breakout` utility on a child to make it span the full width (e.g., for banners).
+  - Use the `breakout-wide` utility to make a child wider, without expanding to the full width.
 */
 @utility breakout-grid {
   display: grid;
   grid-template-columns:
     [full-start] minmax(var(--container-padding-inline), 1fr)
+    [wide-start] minmax(0, 1fr)
     [content-start] min(
       100% - (var(--container-padding-inline) * 2),
       var(--max-content-width) - 2 * var(--container-padding-inline)
     )
     [content-end]
+    minmax(0, 1fr) [wide-end]
     minmax(var(--container-padding-inline), 1fr) [full-end];
 
   & > *:not([class*="breakout"]) {
@@ -300,4 +312,8 @@ main {
   & > * {
     grid-column: content;
   }
+}
+
+@utility breakout-wide {
+  grid-column: wide;
 }

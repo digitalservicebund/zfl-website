@@ -1,0 +1,113 @@
+---
+import Hero from "@/components/Hero.astro";
+import Link from "@/components/Link.astro";
+import { ZFL_EMAIL } from "@/config/constants";
+import { isStaging } from "@/config/stage";
+import Layout from "@/layouts/Layout.astro";
+import { mailto } from "@/utils/mailtoHelper";
+import ToolCard from "./_ToolCard.astro";
+import digitalcheckImage from "./Digitalcheck.png";
+import eGesetzgebungImage from "./eGesetzgebung.png";
+import eNormImage from "./eNorm.jpg";
+import fimImage from "./FIM.png";
+import interoperableEuropeImage from "./InteroperableEurope.png";
+import rulemapBuilderImage from "./RulemapBuilder.jpg";
+
+if (!isStaging) {
+  return Astro.redirect("/404", 302);
+}
+
+export const frontmatter = {
+  title: "Anleitungen und Hilfsmittel",
+  sitemap: true,
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero>
+      <h1>{frontmatter.title}</h1>
+      <p>
+        Auf dieser Seite finden Sie hilfreiche Links zu Anleitungen und
+        Hilfsmittel, die Sie bei der Regelungsarbeit unterstützen.
+      </p>
+      <p>
+        Unterschiedliche Checks und Arbeitshilfen (wie z. B. der <Link
+          href="https://digitalcheck.bund.de/">Digitalcheck</Link
+        >,
+        <Link href="https://www.gleichstellungs-check.de/"
+          >Gleichstellungscheck</Link
+        > oder <Link href="https://jugend-check.de/">Jugendcheck</Link>) zielen
+        in Teilen auf die gleiche Wirkung ab: Praxis- und digitaltaugliche
+        Regelungen und Bürokratierückbau. Bei der Zusammenführung diverser
+        Ansätze verfolgen wir das Ziel, Ihre Regelungsarbeit einfacher und
+        effizienter zu gestalten.
+      </p>
+      <p>
+        <Link
+          href={mailto(
+            ZFL_EMAIL.display,
+            `Interesse am Thema "Konsolidierung der Instrumente"`,
+          )}>Mitarbeiten an diesem Thema</Link
+        > (öffnet E-Mail)
+      </p>
+    </Hero>
+
+    <section
+      class="breakout-wide my-80 grid grid-cols-1 gap-40 md:grid-cols-2 lg:grid-cols-3"
+    >
+      <ToolCard
+        title="Digitalcheck"
+        href="https://digitalcheck.bund.de/"
+        subline="Digitale Regelungen erarbeiten"
+        body="Der Digitalcheck ist eine Prozessbegleitung für Ihr Regelungsvorhaben. Sie stellen damit Digitaltauglichkeit sicher."
+        image={digitalcheckImage}
+        imageAlt="Symbolbild für den Digitalcheck"
+      />
+      <ToolCard
+        title="Rulemap Builder"
+        href="https://rulemapping.org/de"
+        subline="Regelungen als Entscheidungsmodelle erstellen"
+        body="Rulemaps machen die Logik von Gesetzen sichtbar, prüfbar und anwendbar – und schaffen so die Grundlage für eine Verwaltung, die nachvollziehbar, effizient und modern arbeitet."
+        image={rulemapBuilderImage}
+        imageAlt="Symbolbild für den Rulemap Builder"
+        imageSource="Rulemapping Group"
+      />
+      <ToolCard
+        title="E-Gesetzgebung"
+        href="https://plattform.egesetzgebung.bund.de/cockpit/"
+        subline="Das Rechtsetzungsverfahren auf Bundesebene"
+        body="Die E-Gesetzgebung ermöglicht die durchgängig digitale Zusammenarbeit im Gesetzgebungsverfahren zwischen Bundesregierung, Bundesrat und Bundestag."
+        image={eGesetzgebungImage}
+        imageAlt="Symbolbild für die E-Gesetzgebung"
+        imageSource="BMI"
+      />
+      <ToolCard
+        title="eNorm"
+        href="https://www.enorm.bund.de/"
+        subline="Elektronische Arbeitshilfen und Verkündung"
+        body="Die eNorm unterstützt bei der Einhaltung rechtsförmlicher und redaktioneller Vorgaben bei der Erstellung von Regelungsentwürfen. Sie automatisiert darüber hinaus bestimmte Routineaufgaben."
+        image={eNormImage}
+        imageAlt="Interface der eNorm"
+        imageSource="BMJV"
+      />
+      <ToolCard
+        title="FIM – Föderales Informationsmanagement"
+        href="https://fimportal.de/"
+        subline="Der Standard für Verwaltungsleistungen"
+        body="Mit dem Föderalen Informationsmanagement (FIM) erfassen Bund, Länder und Kommunen Informationen über Verwaltungshandeln strukturiert und zugänglich. FIM stellt einheitliche Datenfelder, standardisierte Prozessvorgaben und leicht verständliche Bürgerinformationen bereit."
+        image={fimImage}
+        imageAlt="Symbolbild für das Föderale Informationsmanagement"
+        imageSource="FITKO"
+      />
+      <ToolCard
+        title="Interoperabilitäts-Bewertungen"
+        href="https://digitalcheck.bund.de/interoperabel"
+        subline="EU-Interoperabilität prüfen"
+        body="Hier erfahren Sie, was die Verordnung für ein interoperables Europa (EU) 2024/903 für Ihr Regelungsvorhaben bedeutet und wie sie zu einem vernetzten Europa beiträgt."
+        image={interoperableEuropeImage}
+        imageAlt="Symbolbild für ein vernetztes Europa"
+      />
+    </section>
+  </main>
+</Layout>

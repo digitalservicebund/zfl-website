@@ -1,15 +1,14 @@
-export type Route = {
-  url: string;
-  title: string;
-};
+import navItems, { type NavItem } from "@/config/navigation";
 
-export const routes: Route[] = [
-  { url: "/", title: "Zentrum für Legistik" },
-  { url: "/barrierefreiheit", title: "Barrierefreiheit" },
-  { url: "/begleitungen", title: "Begleitungen" },
-  { url: "/daran-arbeiten-wir", title: "Daran arbeiten wir" },
-  { url: "/datenschutz", title: "Datenschutzerklärung" },
-  { url: "/impressum", title: "Impressum" },
-  { url: "/schulungen", title: "Schulungen" },
-  { url: "/zahlen-und-fakten", title: "Zahlen und Fakten" },
-];
+// TODO: find a better way to handle testing of staging routes
+const isStaging = process.env.PUBLIC_STAGE === "staging";
+
+const flatten = (items: NavItem[]): NavItem[] =>
+  items
+    .filter((item) => !item.isStagingOnly || isStaging) // Only include items that are on production
+    .flatMap((item) => [
+      item,
+      ...(item.children ? flatten(item.children) : []),
+    ]);
+
+export const flatRoutes = flatten(navItems);
