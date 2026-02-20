@@ -45,7 +45,7 @@ const activeClasses = "border-cosmic-blue-base bg-lavender-base";
       {
         headerNavigation.map((item) => (
           <a
-            href={item.path}
+            href={buildUrl(item.path)}
             class={twMerge(
               basicLinkClasses,
               "ds-label-01-reg relative h-full border-b-4 border-transparent px-16 whitespace-nowrap",
