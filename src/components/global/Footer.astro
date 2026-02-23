@@ -2,7 +2,6 @@
 import Link from "@/components/Link.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import { routes } from "@/config/navigation";
-import { isStaging } from "@/config/stage";
 import bmdsLogo from "@/images/logo/bmds-logo.png";
 import { Image } from "astro:assets";
 
@@ -14,7 +13,7 @@ const footerColumns: Record<string, FooterItem[]> = {
     { prefix: "Per Mail: ", path: ZFL_EMAIL.url, title: ZFL_EMAIL.display },
     routes.begleitungen,
     routes.schulungen,
-    ...(isStaging ? [routes.anleitungenUndHilfsmittel] : []),
+    routes.anleitungenUndHilfsmittel,
   ],
   "Über das Ziel": routes.ueberUns.children ?? [],
   "": [
