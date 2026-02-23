@@ -16,69 +16,6 @@ export const frontmatter = {
   title: "Regelungsbegleitung",
   sitemap: true,
 };
-
-const tableData = {
-  header: ["Kriterien", "Paket S", "Paket M", "Paket L"],
-  rows: [
-    {
-      label: "Fokus",
-      s: "Punktuelle Unterstützung bei Ihrer Fragestellung",
-      m: "Vertiefte Analyse Ihres Vorhabens",
-      l: "Langfristige Begleitung des Gesetzgebungsprozesses",
-    },
-    {
-      label: "Dauer",
-      s: "1 gemeinsame Arbeitssitzung",
-      m: "ca. 4 Wochen",
-      l: "Ab 5 Wochen",
-    },
-    {
-      label: "Team",
-      s: ["1–2 Expert:innen aus:", "Service Design", "Nutzerforschung"],
-      m: [
-        "3–4 Expert:innen aus:",
-        "Service Design",
-        "Nutzerforschung",
-        "Softwareentwicklung",
-        "Produktmanagement",
-        "Transformationsmanagement",
-      ],
-      l: [
-        "3–4 Expert:innen aus",
-        "Service Design",
-        "Nutzerforschung",
-        "Softwareentwicklung",
-        "Produktmanagement",
-        "Transformationsmanagement",
-      ],
-    },
-    {
-      label: "Zeitpunkt",
-      s: "Individuell nach Bedarf",
-      m: "Konzept- bis Entwurfsphase",
-      l: "Ab Start der Initiative",
-    },
-    {
-      label: "Tätigkeit (Beispiele)",
-      s: [
-        "Umsetzungsperspektive besser verstehen",
-        "gemeinsam visualisieren",
-        "technische Fragen beantworten",
-      ],
-      m: [
-        "Umsetzungsperspektive auf technischer, organisatorischer und rechtlicher Ebene durchdenken",
-        "technische Lösungsideen entwickeln",
-        "Machbarkeit validieren",
-      ],
-      l: [
-        "Gemeinsame Analyse",
-        "Unterstützung bei Workshops und Hausabstimmungen",
-        "moderierter Austausch mit Umsetzungsakteuren",
-        "Evaluation von Lösungen",
-      ],
-    },
-  ],
-};
 ---
 
 <Layout title={frontmatter.title}>
@@ -114,7 +51,7 @@ const tableData = {
       </div>
     </Hero>
 
-    <section class="py-80" >
+    <section class="py-80">
       <h2>Ergebnisse der Zusammenarbeit</h2>
 
       <p>
@@ -183,51 +120,100 @@ const tableData = {
         Unterstützungsangebote im Vergleich. Alle Angebote sind kostenfrei und
         werden vom BMDS finanziert.
       </p>
-        <table class="w-full table-fixed">
-          <thead>
-            <tr>
-              {
-                tableData.header.map((header, index) => (
-                  <th scope="col" class={`table-header-cell ${index === 0 ? 'w-[150px]' : 'w-[235px]'}`}>
-                    <div class="flex items-center gap-2">{header}</div>
-                  </th>
-                ))
-              }
-            </tr>
-          </thead>
-          <tbody
-            >{
-              tableData.rows.map((row, index) => (
-                <tr class={index % 2 === 0 ? "bg-white" : "bg-lavender-200"}>
-                  {/* first column: label */}
-                  <td class="table-body-cell font-bold w-[150px]">{row.label}</td>
-
-                  {/* data of package s, m and l*/}
-                  {[row.s, row.m, row.l].map((cell) => (
-                    <td class="table-body-cell wrap-break-word w-[235px]">
-                      {Array.isArray(cell) ? (
-                        <div>
-                          {cell[0]}
-                        </div>
-                        <ul>
-                          {cell.map((item, index) => (
-                              index !== 0 &&  (
-                                <li>
-                                  {item}
-                                </li>
-                              )
-                          ))}
-                        </ul>
-                      ) : (
-                        cell
-                      )}
-                    </td>
-                  ))}
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
+      <table class="w-full table-fixed">
+        <colgroup>
+          <col class="w-[150px]" />
+          <col class="w-[235px]" />
+          <col class="w-[235px]" />
+          <col class="w-[235px]" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Kriterien</th>
+            <th scope="col">Paket S</th>
+            <th scope="col">Paket M</th>
+            <th scope="col">Paket L</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Fokus</td>
+            <td>Punktuelle Unterstützung bei Ihrer Fragestellung</td>
+            <td>Vertiefte Analyse Ihres Vorhabens</td>
+            <td>Langfristige Begleitung des Gesetzgebungsprozesses</td>
+          </tr>
+          <tr>
+            <td>Dauer</td>
+            <td>1 gemeinsame Arbeitssitzung</td>
+            <td>ca. 4 Wochen</td>
+            <td>Ab 5 Wochen</td>
+          </tr>
+          <tr>
+            <td>Team</td>
+            <td>
+              <div>1–2 Expert:innen aus:</div>
+              <ul>
+                <li>Service Design</li>
+                <li>Nutzerforschung</li>
+              </ul>
+            </td>
+            <td>
+              <div>3–4 Expert:innen aus:</div>
+              <ul>
+                <li>Service Design</li>
+                <li>Nutzerforschung</li>
+                <li>Softwareentwicklung</li>
+                <li>Produktmanagement</li>
+                <li>Transformationsmanagement</li>
+              </ul>
+            </td>
+            <td>
+              <div>3–4 Expert:innen aus</div>
+              <ul>
+                <li>Service Design</li>
+                <li>Nutzerforschung</li>
+                <li>Softwareentwicklung</li>
+                <li>Produktmanagement</li>
+                <li>Transformationsmanagement</li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td>Zeitpunkt</td>
+            <td>Individuell nach Bedarf</td>
+            <td>Konzept- bis Entwurfsphase</td>
+            <td>Ab Start der Initiative</td>
+          </tr>
+          <tr>
+            <td>Tätigkeit (Beispiele)</td>
+            <td>
+              <ul>
+                <li>Umsetzungsperspektive besser verstehen</li>
+                <li>gemeinsam visualisieren</li>
+                <li>technische Fragen beantworten</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>
+                  Umsetzungsperspektive auf technischer, organisatorischer und
+                  rechtlicher Ebene durchdenken
+                </li>
+                <li>technische Lösungsideen entwickeln</li>
+                <li>Machbarkeit validieren</li>
+              </ul>
+            </td>
+            <td>
+              <ul>
+                <li>Gemeinsame Analyse</li>
+                <li>Unterstützung bei Workshops und Hausabstimmungen</li>
+                <li>moderierter Austausch mit Umsetzungsakteuren</li>
+                <li>Evaluation von Lösungen</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </section>
     <section class="bg-lavender-base breakout py-80">
       <SupportCard />
@@ -255,3 +241,42 @@ const tableData = {
     </section>
   </main>
 </Layout>
+
+<style>
+  th {
+    min-width: 150px;
+    padding: 16px 32px 16px 16px;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 2px solid var(--color-lavender-400, #eceef6);
+    background: var(--color-lavender-base, #e3e6f2);
+    color: var(--semantic-color-text, #000);
+    font-feature-settings:
+      "liga" off,
+      "clig" off;
+    font-family: var(--font-sans);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 22.5px;
+    letter-spacing: 0.16px;
+  }
+
+  td {
+    min-width: 150px;
+    padding: var(--m, 16px) 32px 16px 16px;
+    align-items: flex-start;
+    gap: 8px;
+    align-self: stretch;
+    border-bottom: 1px solid var(--color-lavender-400, #eceef6);
+    vertical-align: top;
+  }
+
+  td:first-child {
+    font-weight: bold;
+  }
+
+  tbody tr:nth-child(even) {
+    background: var(--color-lavender-200);
+  }
+</style>
