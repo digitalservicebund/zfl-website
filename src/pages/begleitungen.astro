@@ -1,4 +1,5 @@
 ---
+import SupportCard from "@/components/blocks/SupportCard.astro";
 import Card from "@/components/Card.astro";
 import Hero from "@/components/Hero.astro";
 import Link from "@/components/Link.astro";
@@ -113,7 +114,7 @@ const tableData = {
       </div>
     </Hero>
 
-    <section class="py-80">
+    <section class="py-80" >
       <h2>Ergebnisse der Zusammenarbeit</h2>
 
       <p>
@@ -175,20 +176,19 @@ const tableData = {
       </div>
     </section>
 
-    <section>
+    <section class="w-[854px]">
       <h2>Passende Leistungspakete für Ihr Vorhaben</h2>
-      <p>
+      <p class="pb-40">
         In der folgenden Tabelle finden Sie unsere verschiedenen
         Unterstützungsangebote im Vergleich. Alle Angebote sind kostenfrei und
         werden vom BMDS finanziert.
       </p>
-      <div class="relative overflow-x-auto">
-        <table class="w-full">
-          <thead class="">
+        <table class="w-full table-fixed">
+          <thead>
             <tr>
               {
-                tableData.header.map((header) => (
-                  <th scope="col" class="table-header-cell">
+                tableData.header.map((header, index) => (
+                  <th scope="col" class={`table-header-cell ${index === 0 ? 'w-[150px]' : 'w-[235px]'}`}>
                     <div class="flex items-center gap-2">{header}</div>
                   </th>
                 ))
@@ -200,15 +200,15 @@ const tableData = {
               tableData.rows.map((row, index) => (
                 <tr class={index % 2 === 0 ? "bg-white" : "bg-lavender-200"}>
                   {/* first column: label */}
-                  <td class="table-body-cell">{row.label}</td>
+                  <td class="table-body-cell font-bold w-[150px]">{row.label}</td>
 
                   {/* data of package s, m and l*/}
                   {[row.s, row.m, row.l].map((cell) => (
-                    <td class="table-body-cell">
+                    <td class="table-body-cell wrap-break-word w-[235px]">
                       {Array.isArray(cell) ? (
-                        <span>
+                        <div>
                           {cell[0]}
-                        </span>
+                        </div>
                         <ul>
                           {cell.map((item, index) => (
                               index !== 0 &&  (
@@ -228,11 +228,12 @@ const tableData = {
             }
           </tbody>
         </table>
-      </div>
     </section>
-
-    <div
-      class=`breakout mt-40 py-80 bg-cover bg-center`
+    <section class="bg-lavender-base breakout py-80">
+      <SupportCard />
+    </section>
+    <section
+      class=`breakout py-80 bg-cover bg-center`
       style={{ backgroundImage: trainingsImageAssetURL }}
     >
       <Card>
@@ -251,6 +252,6 @@ const tableData = {
           Mehr erfahren
         </Link>
       </Card>
-    </div>
+    </section>
   </main>
 </Layout>
