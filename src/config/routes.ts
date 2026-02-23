@@ -1,12 +1,12 @@
-export type NavItem = {
+export type Route = {
   path: string;
   title: string
   isStagingOnly?: boolean;
   showInHeader?: boolean;
-  children?: NavItem[];
+  children?: Route[];
 };
 
-export const routes: Record<string, NavItem> = {
+export const routes: Record<string, Route> = {
   begleitungen: { path: "/begleitungen", title: "Begleitungen" },
   schulungen: { path: "/schulungen", title: "Schulungen" },
   anleitungenUndHilfsmittel: {

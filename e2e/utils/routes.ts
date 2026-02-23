@@ -1,4 +1,4 @@
-import navItems, { type NavItem } from "@/config/navigation";
+import navItems, { type NavItem } from "@/config/routes";
 
 // TODO: find a better way to handle testing of staging routes
 const isStaging = process.env.PUBLIC_STAGE === "staging";
