@@ -75,7 +75,7 @@
       padding: 14px 24px;
       font-weight: 700;
       letter-spacing: 0.16px;
-      line-height: 2;
+      line-height: clamp(1.25, 2, 2);
       border-radius: 8px;
     }
 

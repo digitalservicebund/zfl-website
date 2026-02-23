@@ -107,14 +107,14 @@ const tableData = {
           </div>
         </div>
         <Image
-          class="max-md:hero-image-overlay md:size-288"
+          class="md:hero-image-overlay relative mt-10 size-288 h-auto w-full"
           src={begleitungenImage}
           alt=""
         />
       </div>
     </Hero>
 
-    <section class="py-80" >
+    <section class="g-32 py-48 md:py-80">
       <h2>Ergebnisse der Zusammenarbeit</h2>
 
       <p>
@@ -126,10 +126,14 @@ const tableData = {
         Digitalisierung bestmöglich ausschöpfen.
       </p>
 
-      <div class="gap24 mt-40 flex max-md:flex-col">
-        <div class="flex gap-6 md:flex-col md:gap-32">
+      <div
+        class="mx-auto mt-40 flex w-2xs flex-col gap-16 md:w-full md:max-w-[848px] md:flex-row md:gap-8"
+      >
+        <div
+          class="flex h-auto w-full flex-col gap-4 md:h-[298px] md:flex-1 md:gap-32"
+        >
           <Icon
-            class="text-cosmic-blue-400 bg-lavender-400 flex-none px-[18px] py-[22px] md:h-[100px] md:w-[110px]"
+            class="text-cosmic-blue-400 bg-lavender-400 h-[100px] w-[110px] flex-none px-[18px] py-[22px]"
             name="ic:twotone-account-tree"
           />
 
@@ -143,9 +147,11 @@ const tableData = {
             </p>
           </div>
         </div>
-        <div class="flex gap-16 md:flex-col md:gap-32">
+        <div
+          class="flex h-auto w-full flex-col gap-4 md:h-[298px] md:flex-1 md:gap-32"
+        >
           <Icon
-            class="text-cosmic-blue-400 bg-lavender-400 flex-none px-[18px] py-[22px] md:h-[100px] md:w-[110px]"
+            class="text-cosmic-blue-400 bg-lavender-400 h-[100px] w-[110px] flex-none px-[18px] py-[22px]"
             name="ic:twotone-lightbulb"
           />
           <div class="space-y-8">
@@ -158,9 +164,11 @@ const tableData = {
             </p>
           </div>
         </div>
-        <div class="flex gap-16 md:flex-col md:gap-32">
+        <div
+          class="flex h-auto w-full flex-col gap-4 md:h-[298px] md:flex-1 md:gap-32"
+        >
           <Icon
-            class="text-cosmic-blue-400 bg-lavender-400 flex-none px-[18px] py-[22px] md:h-[100px] md:w-[110px]"
+            class="text-cosmic-blue-400 bg-lavender-400 h-[100px] w-[110px] flex-none px-[18px] py-[22px]"
             name="ic:twotone-hub"
           />
           <div class="space-y-8">
@@ -183,12 +191,15 @@ const tableData = {
         Unterstützungsangebote im Vergleich. Alle Angebote sind kostenfrei und
         werden vom BMDS finanziert.
       </p>
-        <table class="w-full table-fixed">
-          <thead>
+      <table class="block w-full table-fixed md:table">
+        <thead class="hidden md:table-header-group">
             <tr>
               {
                 tableData.header.map((header, index) => (
-                  <th scope="col" class={`table-header-cell ${index === 0 ? 'w-[150px]' : 'w-[235px]'}`}>
+                <th
+                  scope="col"
+                  class={`table-header-cell ${index === 0 ? "md:w-[150px]" : "md:w-[235px]"}`}
+                >
                     <div class="flex items-center gap-2">{header}</div>
                   </th>
                 ))
