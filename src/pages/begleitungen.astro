@@ -16,69 +16,6 @@ export const frontmatter = {
   title: "Regelungsbegleitung",
   sitemap: true,
 };
-
-const tableData = {
-  header: ["Kriterien", "Paket S", "Paket M", "Paket L"],
-  rows: [
-    {
-      label: "Fokus",
-      s: "Punktuelle Unterstützung bei Ihrer Fragestellung",
-      m: "Vertiefte Analyse Ihres Vorhabens",
-      l: "Langfristige Begleitung des Gesetzgebungsprozesses",
-    },
-    {
-      label: "Dauer",
-      s: "1 gemeinsame Arbeitssitzung",
-      m: "ca. 4 Wochen",
-      l: "Ab 5 Wochen",
-    },
-    {
-      label: "Team",
-      s: ["1–2 Expert:innen aus:", "Service Design", "Nutzerforschung"],
-      m: [
-        "3–4 Expert:innen aus:",
-        "Service Design",
-        "Nutzerforschung",
-        "Softwareentwicklung",
-        "Produktmanagement",
-        "Transformationsmanagement",
-      ],
-      l: [
-        "3–4 Expert:innen aus",
-        "Service Design",
-        "Nutzerforschung",
-        "Softwareentwicklung",
-        "Produktmanagement",
-        "Transformationsmanagement",
-      ],
-    },
-    {
-      label: "Zeitpunkt",
-      s: "Individuell nach Bedarf",
-      m: "Konzept- bis Entwurfsphase",
-      l: "Ab Start der Initiative",
-    },
-    {
-      label: "Tätigkeit (Beispiele)",
-      s: [
-        "Umsetzungsperspektive besser verstehen",
-        "gemeinsam visualisieren",
-        "technische Fragen beantworten",
-      ],
-      m: [
-        "Umsetzungsperspektive auf technischer, organisatorischer und rechtlicher Ebene durchdenken",
-        "technische Lösungsideen entwickeln",
-        "Machbarkeit validieren",
-      ],
-      l: [
-        "Gemeinsame Analyse",
-        "Unterstützung bei Workshops und Hausabstimmungen",
-        "moderierter Austausch mit Umsetzungsakteuren",
-        "Evaluation von Lösungen",
-      ],
-    },
-  ],
-};
 ---
 
 <Layout title={frontmatter.title}>
@@ -92,18 +29,20 @@ const tableData = {
             Ein in Gesetzgebungspraxis erfahrenes interdisziplinäres Team
             unterstützt Sie dabei, die Regelung praxisnah, digitaltauglich und
             bürokratiearm zu gestalten.
-            <br /><br />
+            <br />
+            <br />
             Vertraulich und mit individuellem Fokus auf Ihr Vorhaben stehen Ihnen
             während der Begleitung Kompetenzen in Design, Nutzerforschung, IT, Produkt-
             und Prozessmanagement direkt zur Verfügung.
           </p>
           <div class="mt-16">
-            <a class="btn btn-primary gap-8"
-              ><Icon
+            <a class="btn btn-primary gap-8">
+              <Icon
                 name="ic:baseline-arrow-downward"
                 class="inline-block h-36 w-36"
-              />Leistungspakete anzeigen</a
-            >
+              />
+              Leistungspakete anzeigen
+            </a>
           </div>
         </div>
         <Image
@@ -116,7 +55,6 @@ const tableData = {
 
     <section class="g-32 py-48 md:py-80">
       <h2>Ergebnisse der Zusammenarbeit</h2>
-
       <p>
         Wir unterstützen Sie dabei, Umsetzungsprozesse zu verstehen und
         Anforderungen an praxisnahe und bürokratiearme Regelungen umzusetzen.
@@ -183,68 +121,157 @@ const tableData = {
         </div>
       </div>
     </section>
-
-    <section class="w-[854px]">
+    <section class="pb-40">
       <h2>Passende Leistungspakete für Ihr Vorhaben</h2>
       <p class="pb-40">
-        In der folgenden Tabelle finden Sie unsere verschiedenen
-        Unterstützungsangebote im Vergleich. Alle Angebote sind kostenfrei und
-        werden vom BMDS finanziert.
+        Hier sehen Sie unsere verschiedenen Unterstützungsangebote im Vergleich.
+        Alle Angebote sind für Sie kostenfrei und werden vom BMDS finanziert.
       </p>
       <table class="block w-full table-fixed md:table">
         <thead class="hidden md:table-header-group">
-            <tr>
-              {
-                tableData.header.map((header, index) => (
-                <th
-                  scope="col"
-                  class={`table-header-cell ${index === 0 ? "md:w-[150px]" : "md:w-[235px]"}`}
-                >
-                    <div class="flex items-center gap-2">{header}</div>
-                  </th>
-                ))
-              }
-            </tr>
-          </thead>
-          <tbody
-            >{
-              tableData.rows.map((row, index) => (
-                <tr class={index % 2 === 0 ? "bg-white" : "bg-lavender-200"}>
-                  {/* first column: label */}
-                  <td class="table-body-cell font-bold w-[150px]">{row.label}</td>
+          <tr>
+            <th scope="col" class="table-header-cell md:w-[150px]">
+              Kriterien
+            </th>
+            <th scope="col" class="table-header-cell md:w-[235px]">
+              Paket S
+            </th>
+            <th scope="col" class="table-header-cell md:w-[235px]">
+              Paket M
+            </th>
+            <th scope="col" class="table-header-cell md:w-[235px]">
+              Paket L
+            </th>
+          </tr>
+        </thead>
 
-                  {/* data of package s, m and l*/}
-                  {[row.s, row.m, row.l].map((cell) => (
-                    <td class="table-body-cell wrap-break-word w-[235px]">
-                      {Array.isArray(cell) ? (
-                        <div>
-                          {cell[0]}
-                        </div>
-                        <ul>
-                          {cell.map((item, index) => (
-                              index !== 0 &&  (
-                                <li>
-                                  {item}
-                                </li>
-                              )
-                          ))}
-                        </ul>
-                      ) : (
-                        cell
-                      )}
-                    </td>
-                  ))}
-                </tr>
-              ))
-            }
-          </tbody>
-        </table>
+        <tbody class="block md:table-row-group">
+          <tr class="block bg-white md:table-row">
+            <td
+              class="table-body-cell block w-full font-bold md:table-cell md:w-[150px]"
+            >
+              Fokus
+            </td>
+            <td class="table-body-cell block w-full md:table-cell md:w-[235px]">
+              Punktuelle Unterstützung bei Ihrer Fragestellung
+            </td>
+            <td class="table-body-cell block w-full md:table-cell md:w-[235px]">
+              Vertiefte Analyse Ihres Vorhabens
+            </td>
+            <td class="table-body-cell block w-full md:table-cell md:w-[235px]">
+              Langfristige Begleitung des Gesetzgebungsprozesses
+            </td>
+          </tr>
+
+          <tr class="bg-lavender-200 block md:table-row">
+            <td
+              class="table-body-cell block w-full font-bold md:table-cell md:w-[150px]"
+            >
+              Dauer
+            </td>
+            <td class="table-body-cell block w-full md:table-cell md:w-[235px]">
+              1 gemeinsame Arbeitssitzung
+            </td>
+            <td class="table-body-cell block w-full md:table-cell md:w-[235px]">
+              ca. 4 Wochen
+            </td>
+            <td class="table-body-cell block w-full md:table-cell md:w-[235px]">
+              Ab 5 Wochen
+            </td>
+          </tr>
+
+          <tr class="block bg-white md:table-row">
+            <td
+              class="table-body-cell block w-full font-bold md:table-cell md:w-[150px]"
+            >
+              Team
+            </td>
+            <td class="table-body-cell block w-full md:table-cell md:w-[235px]">
+              <div class="mb-1">1–2 Expert:innen aus:</div>
+              <ul class="ml-5 list-disc space-y-1">
+                <li>Service Design</li>
+                <li>Nutzerforschung</li>
+              </ul>
+            </td>
+            <td class="table-body-cell block w-full md:table-cell md:w-[235px]">
+              <div class="mb-1">3–4 Expert:innen aus:</div>
+              <ul class="ml-5 list-disc space-y-1">
+                <li>Service Design</li>
+                <li>Nutzerforschung</li>
+                <li>Softwareentwicklung</li>
+                <li>Produktmanagement</li>
+                <li>Transformationsmanagement</li>
+              </ul>
+            </td>
+            <td class="table-body-cell block w-full md:table-cell md:w-[235px]">
+              <div class="mb-1">3–4 Expert:innen aus:</div>
+              <ul class="ml-5 list-disc space-y-1">
+                <li>Service Design</li>
+                <li>Nutzerforschung</li>
+                <li>Softwareentwicklung</li>
+                <li>Produktmanagement</li>
+                <li>Transformationsmanagement</li>
+              </ul>
+            </td>
+          </tr>
+
+          <tr class="bg-lavender-200 block md:table-row">
+            <td
+              class="table-body-cell block w-full font-bold md:table-cell md:w-[150px]"
+            >
+              Zeitpunkt
+            </td>
+            <td class="table-body-cell block w-full md:table-cell md:w-[235px]">
+              Individuell nach Bedarf
+            </td>
+            <td class="table-body-cell block w-full md:table-cell md:w-[235px]">
+              Konzept- bis Entwurfsphase
+            </td>
+            <td class="table-body-cell block w-full md:table-cell md:w-[235px]">
+              Ab Start der Initiative
+            </td>
+          </tr>
+
+          <tr class="block bg-white md:table-row">
+            <td
+              class="table-body-cell block w-full font-bold md:table-cell md:w-[150px]"
+            >
+              Tätigkeit (Beispiele)
+            </td>
+            <td class="table-body-cell block w-full md:table-cell md:w-[235px]">
+              <ul class="ml-5 list-disc space-y-1">
+                <li>Umsetzungsperspektive besser verstehen</li>
+                <li>gemeinsam visualisieren</li>
+                <li>technische Fragen beantworten</li>
+              </ul>
+            </td>
+            <td class="table-body-cell block w-full md:table-cell md:w-[235px]">
+              <ul class="ml-5 list-disc space-y-1">
+                <li>
+                  Umsetzungsperspektive auf technischer, organisatorischer und
+                  rechtlicher Ebene durchdenken
+                </li>
+                <li>technische Lösungsideen entwickeln</li>
+                <li>Machbarkeit validieren</li>
+              </ul>
+            </td>
+            <td class="table-body-cell block w-full md:table-cell md:w-[235px]">
+              <ul class="ml-5 list-disc space-y-1">
+                <li>Gemeinsame Analyse</li>
+                <li>Unterstützung bei Workshops und Hausabstimmungen</li>
+                <li>moderierter Austausch mit Umsetzungsakteuren</li>
+                <li>Evaluation von Lösungen</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </section>
     <section class="bg-lavender-base breakout py-80">
       <SupportCard />
     </section>
     <section
-      class=`breakout py-80 bg-cover bg-center`
+      class="breakout bg-cover bg-center py-80"
       style={{ backgroundImage: trainingsImageAssetURL }}
     >
       <Card>
@@ -265,4 +292,4 @@ const tableData = {
       </Card>
     </section>
   </main>
-</Layout>
+</Layout>; ---
