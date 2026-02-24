@@ -9,7 +9,7 @@ export type Route = {
 };
 
 export const removeTrailingSlash = (path: string) =>
-  path.replace(/\/+$/, "").replace(/^$/, "/");
+  path.replace(/\/$/, "").replace(/^$/, "/");
 
 /**
  * Builds a URL with the correct base path for internal links in preview builds.
