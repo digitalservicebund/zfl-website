@@ -9,12 +9,33 @@ export const frontmatter = {
   title: "Steckbrief",
   sitemap: true,
 };
+
+const steps = [
+  {
+    number: "1",
+    title: "Steckbrief schreiben",
+    description:
+      "s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+  },
+  {
+    number: "2",
+    title: "Intern abstimmen",
+    description:
+      "s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+  },
+  {
+    number: "3",
+    title: "Zur finalen Abstimmung versenden",
+    description:
+      "s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+  },
+];
 ---
 
 <Layout title={frontmatter.title}>
   <main class="breakout-grid">
     <Hero>
-      <h1>Steckbrief starten</h1>
+      <h1>Steckbrief – Was ist das?</h1>
       <p>
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry. Lorem Ipsum has been the industry's standard dummy text ever
@@ -22,74 +43,108 @@ export const frontmatter = {
         scrambled it to make a type specimen book.
       </p>
     </Hero>
+    <section class="pt-80">
+      <h2>Vorteile des Steckbriefs</h2>
 
-    <section class="breakout bg-lavender-base py-80">
-      <h2>Wie erstellen Sie einen Steckbrief?</h2>
-      <div class="mt-40 flex gap-40">
-        <Card wrapperClass="w-full px-24! py-32">
-          <div class="flex h-full flex-col justify-between gap-40">
-            <div>
-              <h3 class="font-[26px]">Wir füllen den Steckbrief für Sie aus</h3>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book.
-              </p>
-            </div>
-            <div class="flex flex-col gap-8">
-              <div class="flex items-center gap-8">
-                <Icon
-                  name="ic:twotone-people"
-                  class="text-lavender-800 mr-8 h-40 w-40"
-                /> ZFL Support
-              </div>
-              <div class="flex items-center gap-8">
-                <Icon
-                  name="ic:baseline-access-time"
-                  class="text-lavender-800 mr-8 h-40 w-40"
-                /> 2 Wochen
-              </div>
-              <a
-                href={buildUrl("/steckbrief/kontakt")}
-                class="btn btn-primary link-unstyled mt-8"
-                >Kontaktieren Sie uns</a
-              >
-            </div>
+      <div class="mt-40 flex gap-32 max-md:flex-col">
+        <div class="flex gap-16 md:flex-col md:gap-32">
+          <Icon
+            class="text-cosmic-blue-400 size-40 flex-none md:size-80"
+            name="ic:twotone-account-tree"
+          />
+          <div class="space-y-8">
+            <h3 class="ds-heading-03-bold sm:hyphens-none md:pr-32">Vorteil</h3>
+            <p>
+              standard dummy text ever since the 1500s, when an unknown printer
+              took a galley of type and scrambled it to make a type specimen
+              book.
+            </p>
           </div>
-        </Card>
-        <Card wrapperClass="w-full px-24! py-32">
-          <div class="flex h-full flex-col justify-between gap-40">
-            <div>
-              <h3 class="font-[26px]">Sie füllen ihn selbst aus</h3>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book.
-              </p>
-            </div>
-            <div class="flex flex-col gap-8">
-              <div class="flex items-center gap-8">
-                <Icon
-                  name="ic:twotone-people"
-                  class="text-lavender-800 mr-8 h-40 w-40"
-                /> Ihr Referat
-              </div>
-              <div class="flex items-center gap-8">
-                <Icon
-                  name="ic:baseline-access-time"
-                  class="text-lavender-800 mr-8 h-40 w-40"
-                /> 1-2 Wochen
-              </div>
-              <a
-                href={buildUrl("/steckbrief/prozess")}
-                class="btn-primary link-unstyled mt-8">Steckbrief erstellen</a
-              >
-            </div>
+        </div>
+        <div class="flex gap-16 md:flex-col md:gap-32">
+          <Icon
+            class="text-cosmic-blue-400 size-40 flex-none md:size-80"
+            name="ic:twotone-lightbulb"
+          />
+          <div class="space-y-8">
+            <h3 class="ds-heading-03-bold sm:hyphens-none md:pr-32">Vorteil</h3>
+            <p>
+              standard dummy text ever since the 1500s, when an unknown printer
+              took a galley of type and scrambled it to make a type specimen
+              book.
+            </p>
           </div>
-        </Card>
+        </div>
+        <div class="flex gap-16 md:flex-col md:gap-32">
+          <Icon
+            class="text-cosmic-blue-400 size-40 flex-none md:size-80"
+            name="ic:twotone-hub"
+          />
+          <div class="space-y-8">
+            <h3 class="ds-heading-03-bold sm:hyphens-none md:pr-32">Vorteil</h3>
+            <p>
+              standard dummy text ever since the 1500s, when an unknown printer
+              took a galley of type and scrambled it to make a type specimen
+              book.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
+
+    <section class="space-y-40 pt-80">
+      <h2>Wie läuft der Prozess des Steckbriefs?</h2>
+      <p>
+        Wir leiten Sie Schritt für Schritt durch den Prozess und unterstützen
+        Sie bei der Erstellung Ihres Steckbriefs.
+      </p>
+
+      <div class="mt-40 space-y-36">
+        {
+          steps.map((step) => (
+            <div class="group flex items-start gap-32">
+              <div class="bg-lavender-400 border-lavender-400 flex h-40 w-40 shrink-0 items-center justify-center rounded-full border-2 text-lg font-bold">
+                {step.number}
+              </div>
+
+              <div class="grow">
+                <p class="mb-8 text-2xl font-bold">{step.title}</p>
+                <p class="text-base leading-relaxed opacity-80">
+                  {step.description}
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="py-80">
+      <h2>Wie fügt sich das Ganze in den Vorhabenprozess ein?</h2>
+      <p>
+        Lorem Ipsum is simply dummy text of the printing and typesetting
+        industry. Lorem Ipsum has been the industry's standard dummy text ever
+        since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen
+      </p>
+      <a class="btn btn-secondary link-unstyled mt-16">Zur Frühphase</a>
+    </section>
+
+    <Card wrapperClass="mb-80 bg-lavender-400">
+      <h2>Jetzt den Steckbrief ausfüllen</h2>
+      <p>
+        Lorem Ipsum is simply dummy text of the printing and typesetting
+        industry. Lorem Ipsum has been the industry's standard dummy text ever
+        since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen
+      </p>
+      <div class="mt-16 flex gap-10">
+        <a
+          href={buildUrl("/steckbrief/optionen")}
+          class="btn btn-primary link-unstyled">Zum Steckbrief</a
+        >
+        <a class="btn btn-ghost">Beispiele ansehen</a>
+      </div>
+    </Card>
   </main>
 </Layout>

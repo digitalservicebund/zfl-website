@@ -6,7 +6,7 @@
 
 @theme {
   --font-sans: BundesSansWeb;
-  
+
   --color-*: initial;
 
   --color-white: white;
@@ -76,14 +76,20 @@
   a,
   button,
   label {
-    &.btn-primary {
+    &.btn {
       display: inline-block;
-      padding: 18px 24px;
-      background-color: var(--color-cosmic-blue-base);
-      color: var(--color-white);
+      padding: 16px 22px;
+      border: 2px solid transparent;
       font-weight: 700;
       letter-spacing: 0.16px;
       text-align: center;
+      cursor: pointer;
+    }
+
+    &.btn-primary {
+      background-color: var(--color-cosmic-blue-base);
+      border-color: var(--color-cosmic-blue-base);
+      color: var(--color-white);
 
       &:active {
         background-color: var(--color-cosmic-blue-400);
@@ -92,12 +98,8 @@
 
     &.btn-secondary {
       display: inline-block;
-      padding: 16px 22px;
       color: var(--color-cosmic-blue-base);
-      border: 2px solid var(--color-cosmic-blue-base);
-      font-weight: 700;
-      letter-spacing: 0.16px;
-      text-align: center;
+      border-color: var(--color-cosmic-blue-base);
 
       &:active {
         background-color: var(--color-cosmic-blue-400);
