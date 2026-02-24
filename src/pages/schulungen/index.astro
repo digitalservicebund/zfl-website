@@ -1,18 +1,14 @@
 ---
 import Card from "@/components/Card.astro";
-import SupportCard from "@/components/blocks/SupportCard.astro";
-import Badge from "@/components/Badge.astro";
-import { ZFL_EMAIL } from "@/config/constants";
-import Layout from "@/layouts/Layout.astro";
-import { Icon } from "astro-icon/components";
-import { Image } from "astro:assets";
-import schulungenImage from "@/images/Schulungen.png";
-import Link from "@/components/Link.astro";
 import Hero from "@/components/Hero.astro";
-import Schedule from "./_schedule.astro";
-import { isProduction } from "@/config/stage";
-import PreviewContent from "./_preview.mdx";
+import Link from "@/components/Link.astro";
+import SupportCard from "@/components/blocks/SupportCard.astro";
+import { ZFL_EMAIL } from "@/config/constants.ts";
+import schulungenImage from "@/images/Schulungen.png";
+import Layout from "@/layouts/Layout.astro";
+import { Image } from "astro:assets";
 import appointments from "./_appointments.json";
+import Schedule from "./_schedule.astro";
 
 export const frontmatter = {
   title: "Schulungen",
@@ -34,22 +30,12 @@ export const frontmatter = {
             Erarbeitung von praxisnahen und bürokratiearmen Regelungen
             unterstützen.
           </p>
-          {
-            isProduction ? (
-              <a href="#schulungen" class="btn-primary link-unstyled">
-                Jetzt anmelden
-              </a>
-            ) : (
-              <div class="space-y-8">
-                <a class="block" href="#schulungen-zfl">
-                  ↓ Schulungen des Zentrum für Legistik
-                </a>
-                <a class="block" href="#schulungen-weitere">
-                  ↓ Weitere Angebote
-                </a>
-              </div>
-            )
-          }
+          <div class="space-y-8">
+            <a class="block" href="#schulungen-zfl">
+              ↓ Schulungen des Zentrum für Legistik
+            </a>
+            <a class="block" href="#schulungen-weitere"> ↓ Weitere Angebote </a>
+          </div>
         </div>
         <Image
           class="max-md:hero-image-overlay md:size-288"
@@ -59,63 +45,87 @@ export const frontmatter = {
       </div>
     </Hero>
 
-    {
-      isProduction ? (
-        <Card
-          look="gray"
-          contentClass="gap-40"
-          wrapperClass="my-80 sm:px-40 bg-lavender-400"
-          id="schulungen"
+    <section class="my-80 [&>h2]:mt-80 [&>h3]:mt-40 [&>h4]:mt-20">
+      <Card
+        look="gray"
+        wrapperClass="sm:px-40 bg-lavender-400"
+        id="schulungen-zfl"
+      >
+        <h2>Schulungen des Zentrum für Legistik</h2>
+
+        <h3 class="ds-subhead">
+          Regelungen digitaltauglich gestalten – praktische Tipps für den
+          Digitalcheck <span class="whitespace-nowrap">(1,5 Stunden)</span>
+        </h3>
+        <p>
+          Inhalte: Digitalcheck erfolgreich bearbeiten, digitaltaugliche
+          Formulierungen, Anwenden der Prinzipien für Digitaltauglichkeit,
+          EU-Interoperabilität
+        </p>
+
+        <div>
+          <Schedule appointments={appointments} caption="Nächste Termine" />
+        </div>
+
+        <h3 class="ds-subhead mt-40">
+          Basisschulung für Legistinnen und Legisten
+          <span class="whitespace-nowrap">(4 Tage)</span>
+        </h3>
+        <p>
+          Inhalte: Umsetzungsperspektive verstehen, Visualisierungen erstellen,
+          Entscheidungsbäume ausarbeiten, Rechtsförmlichkeit und verständliche
+          Sprache sicherstellen
+        </p>
+        <p>Die nächsten Termine werden demnächst bekanntgegeben.</p>
+        <h3 class="mt-40">Anmeldung</h3>
+        <p>
+          Schicken Sie uns für eine Anmeldung den Schulungs- oder Modul-Namen
+          und Termin an die E-Mail <Link href={ZFL_EMAIL.url}
+            >{ZFL_EMAIL.display}</Link
+          > und wir bestätigen die Anmeldung.
+        </p>
+      </Card>
+
+      <h2 id="schulungen-weitere" class="scroll-m-20">Weitere Angebote</h2>
+
+      <h3>Speyerer Zentrum für Gesetzgebung</h3>
+      <p>
+        Das Zentrum für Gesetzgebung an der Deutschen Universität für
+        Verwaltungswissenschaften Speyer bietet im Bereich der
+        Gesetzgebungslehre Seminare und wissenschaftliche Vertiefung an.
+        Folgende Angebote befassen sich mit moderner Rechtsetzung:
+      </p>
+
+      <h4>Tagung „Ambivalenzen moderner Verwaltung“</h4>
+      <p>
+        Zweitätige Tagung am 26. und 27. März 2026 in Speyer<br />
+        <Link
+          href="https://weiterbildung.uni-speyer.de/suche/veranstaltungsdetails.html?action%5B26%5D=course&courseId=588-C-4388100&rowIndex=11"
+          >Mehr Informationen und Anmeldung</Link
         >
-          <div>
-            <Badge>
-              <Icon name="ic:outline-timer" class="opacity-50" />
-              Nächste Termine
-            </Badge>
-            <h2>Zu diesen Schulungen können Sie sich direkt anmelden</h2>
-          </div>
-          <div>
-            <h3 class="ds-subhead">
-              Regelungen digitaltauglich gestalten – praktische Tipps für den
-              Digitalcheck <span class="whitespace-nowrap">(1,5 Stunden)</span>
-            </h3>
-            <p>
-              Inhalte: Digitalcheck erfolgreich bearbeiten, digitaltaugliche
-              Formulierungen, Anwenden der Prinzipien für Digitaltauglichkeit,
-              EU-Interoperabilität
-            </p>
-            <Schedule caption="Nächste Termine" appointments={appointments} />
-          </div>
+      </p>
 
-          <div>
-            <h3 class="ds-subhead">
-              Basisschulung für Legistinnen und Legisten
-              <span class="whitespace-nowrap">(4 Tage)</span>
-            </h3>
-            <p>
-              Inhalte: Umsetzungsperspektive verstehen, Visualisierungen
-              erstellen, Entscheidungsbäume ausarbeiten, Rechtsförmlichkeit und
-              verständliche Sprache sicherstellen
-            </p>
-            <p>Die nächsten Termine werden demnächst bekanntgegeben.</p>
-          </div>
+      <h4>Wissen in Legistik und Rechtsetzung erweitern</h4>
+      <p>
+        Lehr- und Weiterbildungsveranstaltungen zu den Themen Legistik und
+        Rechtsetzung – öffnen Sie hierzu den Bereich "Lehre und Weiterbildung"<br
+        />
+        <Link
+          href="https://www.uni-speyer.de/lehrstuehle/level-2-1/prof-dr-ruth-weber/speyerer-zentrum-fuer-gesetzgebung"
+          >Mehr Informationen</Link
+        >
+      </p>
 
-          <div>
-            <h3 class="font-bold">Anmeldung</h3>
-            <p>
-              Schicken Sie uns für eine Anmeldung den Schulungs- oder
-              Modul-Namen und Termin an die E-Mail{" "}
-              <Link href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</Link> und wir
-              bestätigen die Anmeldung.
-            </p>
-          </div>
-        </Card>
-      ) : (
-        <section class="my-80 [&>h2]:mt-80 [&>h3]:mt-40 [&>h4]:mt-20">
-          <PreviewContent />
-        </section>
-      )
-    }
+      <h3>Statistisches Bundesamt - OnDEA</h3>
+
+      <h4>Einführung in die Grundlagen der Legistik</h4>
+      <p>
+        OnDEA bietet Video-Tutorials zu unterschiedlichen Themen an<br />
+        <Link href="https://www.ondea.de/DE/ZfL/ZfL_node.html"
+          >Videos anzeigen</Link
+        >
+      </p>
+    </section>
 
     <section class="bg-lavender-base breakout py-80">
       <SupportCard />

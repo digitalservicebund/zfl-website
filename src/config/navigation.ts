@@ -13,7 +13,6 @@ export const routes: Record<string, NavItem> = {
   anleitungenUndHilfsmittel: {
     path: "/anleitungen-und-hilfsmittel",
     title: "Anleitungen und Hilfsmittel",
-    isStagingOnly: true,
   },
   ueberUns: {
     path: "/ueber-uns",
