@@ -1,4 +1,5 @@
 ---
+import { routes } from "@/config/routes";
 import Layout from "@/layouts/Layout.astro";
 ---
 
@@ -31,7 +32,7 @@ import Layout from "@/layouts/Layout.astro";
           id="error-back-button"
           data-testid="error-back-button"
           class="link-unstyled ds-button"
-          href="/"
+          href={routes.home.path}
           data-discover="true"
         >
           <span class="ds-button-label">Zurück zur Startseite</span>

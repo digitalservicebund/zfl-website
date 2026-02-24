@@ -15,7 +15,7 @@ const footerColumns: Record<string, FooterItem[]> = {
     routes.schulungen,
     routes.anleitungenUndHilfsmittel,
   ],
-  "Über das Zentrum für Legistik": routes.ueberUns.children ?? [],
+  "Über das Zentrum für Legistik": Object.values(routes.ueberUns.children),
   "": [
     routes.impressum,
     routes.datenschutz,

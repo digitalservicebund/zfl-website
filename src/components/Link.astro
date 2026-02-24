@@ -1,6 +1,5 @@
 ---
 import { Icon } from "astro-icon/components";
-import { buildUrl } from "@/utils/routesHelper";
 
 interface Props {
   href: string;
@@ -9,18 +8,17 @@ interface Props {
 
 const { href, class: className = "" } = Astro.props;
 const isExternal = href.startsWith("http");
-const url = buildUrl(href);
 ---
 
 <a
-  href={url}
+  href={href}
   class={className}
   {...isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {}}
   ><slot />{
     isExternal && (
       <Icon
         name="ic:twotone-open-in-new"
-        class="mb-1 ml-2 inline link-unstyled"
+        class="link-unstyled mb-1 ml-2 inline"
       />
     )
   }</a
