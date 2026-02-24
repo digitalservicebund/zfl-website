@@ -8,19 +8,20 @@ const pages = await getAllRoutes();
 ---
 
 <Layout title="Sitemap">
-  <main class="breakout-grid space-y-80 pb-40 md:pb-80">
+  <main class="breakout-grid">
     <Hero>
       <h1>Sitemap</h1>
     </Hero>
-
-    <ul>
-      {
-        pages.map((page) => (
-          <li>
-            <Link href={page.url}>{page.title}</Link>
-          </li>
-        ))
-      }
-    </ul>
+    <section>
+      <ul>
+        {
+          pages.map((page) => (
+            <li>
+              <Link href={page.url}>{page.title}</Link>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
   </main>
 </Layout>

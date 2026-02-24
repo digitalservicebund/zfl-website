@@ -8,7 +8,7 @@ interface Props extends HTMLAttributes<"div">, VariantProps<typeof styles> {
 }
 
 export const styles = tv({
-  base: "flex scroll-my-40 flex-row gap-32 rounded-lg bg-white px-16 py-40 sm:px-80",
+  base: "py-md sm:px-lg scroll-my-md flex flex-row gap-32 rounded-lg bg-white px-16",
   variants: {
     look: {
       gray: "bg-lavender-base",
@@ -17,7 +17,7 @@ export const styles = tv({
 });
 
 const contentStyles = tv({
-  base: "flex flex-col gap-16",
+  base: "flex flex-col",
 });
 
 const { contentClass, wrapperClass, look, ...attrs } = Astro.props;

@@ -22,7 +22,7 @@ export const frontmatter = {
   <main class="breakout-grid max-md:overflow-x-hidden">
     <Hero>
       <h1>Begleitung für Vorhaben</h1>
-      <div class="relative mt-40 gap-32 space-y-40 md:flex md:flex-row">
+      <div class="mt-md space-y-md relative gap-32 md:flex md:flex-row">
         <div>
           <h2>
             Interdisziplinäre Expertise für praxisnahe und bürokratiearme
@@ -60,7 +60,7 @@ export const frontmatter = {
       </div>
     </Hero>
 
-    <section class="py-80">
+    <section>
       <h2>Wirkung der Zusammenarbeit</h2>
 
       <p>
@@ -74,12 +74,12 @@ export const frontmatter = {
         Digitalisierung bestmöglich ausschöpfen.
       </p>
 
-      <h3 class="mt-40">So unterstützen wir Sie konkret:</h3>
+      <h3>So unterstützen wir Sie konkret:</h3>
 
       <div class="mt-16 flex gap-32 max-md:flex-col">
         <div class="flex gap-16 md:flex-col md:gap-32">
           <Icon
-            class="text-cosmic-blue-400 size-40 flex-none md:size-80"
+            class="text-cosmic-blue-400 size-lg flex-none"
             name="ic:twotone-account-tree"
           />
           <div class="space-y-8">
@@ -94,7 +94,7 @@ export const frontmatter = {
         </div>
         <div class="flex gap-16 md:flex-col md:gap-32">
           <Icon
-            class="text-cosmic-blue-400 size-40 flex-none md:size-80"
+            class="text-cosmic-blue-400 size-lg flex-none"
             name="ic:twotone-lightbulb"
           />
           <div class="space-y-8">
@@ -109,7 +109,7 @@ export const frontmatter = {
         </div>
         <div class="flex gap-16 md:flex-col md:gap-32">
           <Icon
-            class="text-cosmic-blue-400 size-40 flex-none md:size-80"
+            class="text-cosmic-blue-400 size-lg flex-none"
             name="ic:twotone-hub"
           />
           <div class="space-y-8">
@@ -125,8 +125,8 @@ export const frontmatter = {
       </div>
     </section>
 
-    <div
-      class=`breakout mt-40 py-80 bg-cover bg-center`
+    <section
+      class=`breakout bg-cover bg-center`
       style={{ backgroundImage: trainingsImageAssetURL }}
     >
       <Card>
@@ -145,6 +145,6 @@ export const frontmatter = {
           Mehr erfahren
         </Link>
       </Card>
-    </div>
+    </section>
   </main>
 </Layout>

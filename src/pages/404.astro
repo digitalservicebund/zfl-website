@@ -4,40 +4,36 @@ import Layout from "@/layouts/Layout.astro";
 ---
 
 <Layout title="Seite nicht gefunden">
-  <main class="bg-lavender-base py-16 md:py-32">
-    <div id="error" class="container px-16">
-      <div class="py-40">
-        <main class="ds-stack ds-stack-8 mb-32">
-          <span class="ds-label-01-bold">404</span><h1
-            class="ds-heading-02-reg sm:hyphens-none"
-          >
-            Seite konnte nicht gefunden werden
-          </h1><div class="ds-subhead space-y-8">
-            <p>
-              Es tut uns leid. Diese Seite gibt es nicht mehr oder ihr Name
-              wurde geändert.
-            </p>
-            <ul>
-              <li>
-                Wenn Sie die URL direkt eingegeben haben, überprüfen Sie die
-                Schreibweise.
-              </li>
-              <li>
-                Versuchen Sie, die Seite von der Startseite aus erneut zu
-                finden.
-              </li>
-            </ul>
-          </div>
-        </main><a
-          id="error-back-button"
-          data-testid="error-back-button"
-          class="link-unstyled ds-button"
-          href={routes.home.path}
-          data-discover="true"
-        >
-          <span class="ds-button-label">Zurück zur Startseite</span>
-        </a>
+  <main class="breakout-grid bg-lavender-base py-16 md:py-32">
+    <section id="error" class="space-y-md px-16">
+      <span class="ds-label-01-bold">404</span><h1
+        class="ds-heading-02-reg sm:hyphens-none"
+      >
+        Seite konnte nicht gefunden werden
+      </h1><div class="ds-subhead space-y-8">
+        <p>
+          Es tut uns leid. Diese Seite gibt es nicht mehr oder ihr Name wurde
+          geändert.
+        </p>
+        <ul>
+          <li>
+            Wenn Sie die URL direkt eingegeben haben, überprüfen Sie die
+            Schreibweise.
+          </li>
+          <li>
+            Versuchen Sie, die Seite von der Startseite aus erneut zu finden.
+          </li>
+        </ul>
       </div>
-    </div>
+      <a
+        id="error-back-button"
+        data-testid="error-back-button"
+        class="link-unstyled ds-button"
+        href={routes.home.path}
+        data-discover="true"
+      >
+        <span class="ds-button-label">Zurück zur Startseite</span>
+      </a>
+    </section>
   </main>
 </Layout>

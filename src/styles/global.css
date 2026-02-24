@@ -6,7 +6,7 @@
 
 @theme {
   --font-sans: BundesSansWeb;
-  
+
   --color-*: initial;
 
   --color-white: white;
@@ -21,9 +21,19 @@
   --color-ds-gray-600: #b8bdc3;
   --color-ds-violet: #4c2c92;
 
-  --section-spacing-default: 80px;
+  --spacing-sm: 1.25rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 2.5rem;
+
   --max-content-width: 59rem;
   --container-padding-inline: clamp(1rem, 5vw, 3rem);
+}
+
+@media (width >= 48rem) {
+  :root {
+    --spacing-md: 2.5rem;
+    --spacing-lg: 5rem;
+  }
 }
 
 :root {
@@ -49,14 +59,35 @@
 
   h2 {
     @apply ds-heading-02-reg;
+    @apply mt-lg;
   }
 
   h3 {
     @apply ds-heading-03-reg;
+    @apply mt-md;
   }
 
   h4 {
     @apply font-bold;
+    @apply mt-sm;
+  }
+
+  h1,
+  h2,
+  h3 {
+    /* 80ch @ 18px font size = 720px */
+    max-width: 720px;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    word-break: auto-phrase;
+  }
+
+  :is(h2, h3, h4):first-child {
+    margin-top: 0px;
+  }
+
+  section {
+    @apply py-lg;
   }
 
   a:not([class*="link-unstyled"]) {
@@ -103,33 +134,12 @@
     @apply list-decimal;
   }
 
-  h1,
-  h2,
-  .ds-heading-01-reg,
-  .ds-heading-02-reg,
-  .ds-heading-01-bold,
-  .ds-heading-02-bold {
-    /* 80ch @ 18px font size = 720px */
-    max-width: 720px;
-    @apply mb-8;
-    word-break: auto-phrase;
-  }
-
-  h1,
-  h2,
-  h3 {
-    font-weight: 700;
-  }
-
-  h3,
-  .ds-heading-03-reg,
-  .ds-heading-03-bold,
   p,
   ul:not(.list-unstyled),
   ol:not(.list-unstyled) {
     @apply max-w-a11y;
     &:not(:last-child) {
-      @apply mb-8;
+      margin-bottom: 1rem;
     }
   }
 
@@ -138,21 +148,8 @@
   }
 }
 
-main {
-  address {
-    font-style: normal;
-  }
-  & > h1 {
-    @apply mt-40 md:mt-80;
-  }
-
-  & > h2 {
-    margin-top: 2.5rem;
-  }
-
-  & > h3 {
-    margin-top: 1.5rem;
-  }
+address {
+  font-style: normal;
 }
 
 @utility container {

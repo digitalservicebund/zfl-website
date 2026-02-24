@@ -19,11 +19,10 @@ export const frontmatter = {
 <Layout title={frontmatter.title}>
   <main class="breakout-grid max-md:overflow-x-hidden">
     <Hero>
-      <div class="relative mt-40 gap-40 space-y-40 md:flex md:flex-row">
-        <div class="space-y-32">
-          <h1 class="hyphens-manual">
-            In Schulungen praktisches Wissen und Kompetenzen erlangen
-          </h1>
+      <div class="items-center gap-32 md:flex md:flex-row">
+        <div>
+          <h1>In Schulungen praktisches Wissen und Kompetenzen erlangen</h1>
+
           <p>
             In den umsetzungsorientierten Schulungen des Zentrum für Legistik
             lernen Sie Methoden und Werkzeuge kennen, die Sie bei der
@@ -45,10 +44,10 @@ export const frontmatter = {
       </div>
     </Hero>
 
-    <section class="my-80 [&>h2]:mt-80 [&>h3]:mt-40 [&>h4]:mt-20">
+    <section>
       <Card
         look="gray"
-        wrapperClass="sm:px-40 bg-lavender-400"
+        wrapperClass="sm:px-md bg-lavender-400"
         id="schulungen-zfl"
       >
         <h2>Schulungen des Zentrum für Legistik</h2>
@@ -67,7 +66,7 @@ export const frontmatter = {
           <Schedule appointments={appointments} caption="Nächste Termine" />
         </div>
 
-        <h3 class="ds-subhead mt-40">
+        <h3 class="ds-subhead">
           Basisschulung für Legistinnen und Legisten
           <span class="whitespace-nowrap">(4 Tage)</span>
         </h3>
@@ -77,7 +76,7 @@ export const frontmatter = {
           Sprache sicherstellen
         </p>
         <p>Die nächsten Termine werden demnächst bekanntgegeben.</p>
-        <h3 class="mt-40">Anmeldung</h3>
+        <h3>Anmeldung</h3>
         <p>
           Schicken Sie uns für eine Anmeldung den Schulungs- oder Modul-Namen
           und Termin an die E-Mail <Link href={ZFL_EMAIL.url}
@@ -127,7 +126,7 @@ export const frontmatter = {
       </p>
     </section>
 
-    <section class="bg-lavender-base breakout py-80">
+    <section class="bg-lavender-base breakout">
       <SupportCard />
     </section>
   </main>
