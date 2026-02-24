@@ -5,6 +5,7 @@ import Textarea from "@/components/input/Textarea.astro";
 import { Icon } from "astro-icon/components";
 import { buildUrl } from "@/utils/routesHelper";
 import Card from "@/components/Card.astro";
+import Link from "@/components/Link.astro";
 
 export const frontmatter = {
   title: "Steckbrief",
@@ -217,7 +218,11 @@ const steps = [
                   Sie laden den Steckbrief als Word-Datei runter, stimmen sich
                   ab und senden ihn später per Mail an NKR, Destatis, etc.
                 </li>
-                <li>Next steps</li>
+                <li>
+                  Next steps nach dem Steckbrief <Link
+                    href="/steckbrief/einordnung">hier</Link
+                  >
+                </li>
               </ul>
             </Card>
           </div>
@@ -227,8 +232,9 @@ const steps = [
               @click="$dispatch('generate-word', { arbeitstitel, email, ressort, referat, rechtsbereich, kontext, zielstellung, probleme })"
               >Word-Datei erstellen</button
             >
-            <label for="step-zielstellung" class="btn-secondary cursor-pointer"
-              >Zurück</label
+            <label
+              for="step-zielstellung"
+              class="btn btn-secondary cursor-pointer">Zurück</label
             >
           </div>
         </div>
