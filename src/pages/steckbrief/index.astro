@@ -13,21 +13,21 @@ export const frontmatter = {
 const steps = [
   {
     number: "1",
-    title: "Steckbrief schreiben",
+    title: "Steckbrief erstellen",
     description:
-      "s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      "Sie können den Steckbrief entweder selbst verfassen oder uns die relevanten Informationen zur Verfügung stellen – wir erstellen den Steckbrief und übernehmen dann die Ausformulierung für Sie. Wenn Sie den Steckbrief selbst verfassen möchten, nutzen Sie dazu unser Online-Formular; am Ende erhalten Sie den Steckbrief als Word-Dokument zum Download.",
   },
   {
     number: "2",
-    title: "Intern abstimmen",
+    title: "Interne Vervollständigung",
     description:
-      "s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      "Das Word-Dokument ermöglicht Ihnen eine unkomplizierte interne Abstimmung in Ihrem Referat. Ergänzen Sie fehlende Informationen und stimmen Sie sich ebenfalls mit den beteiligten Ressorts ab, um den Steckbrief zu vervollständigen.",
   },
   {
     number: "3",
-    title: "Zur finalen Abstimmung versenden",
+    title: "Versand an zuständige Institutionen",
     description:
-      "s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      "Sobald Ihr Steckbrief vollständig ist, senden Sie ihn zur Information an den Normenkontrollrat und Destatis.",
   },
 ];
 ---
@@ -35,13 +35,21 @@ const steps = [
 <Layout title={frontmatter.title}>
   <main class="breakout-grid">
     <Hero>
-      <h1>Steckbrief – Was ist das?</h1>
+      <h1>Der Steckbrief</h1>
+      <p>Ihr Startpunkt für wirksame Regelungen</p>
       <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book.
+        Beginnen Sie jede Regelungsarbeit mit einem Steckbrief. Er fasst die
+        wesentlichen Informationen zusammen, hält Problem, Ziele und
+        Herausforderungen fest und informiert die betroffenen Ressorts
+        frühzeitig. Damit sichern Sie Transparenz und Nachvollziehbarkeit im
+        weiteren Prozess.
       </p>
+      <div class="mt-16 flex gap-10">
+        <a
+          href={buildUrl("/steckbrief/optionen")}
+          class="btn btn-primary link-unstyled">Steckbrief erstellen</a
+        >
+      </div>
     </Hero>
     <section class="pt-80">
       <h2>Vorteile des Steckbriefs</h2>
@@ -53,11 +61,15 @@ const steps = [
             name="ic:twotone-account-tree"
           />
           <div class="space-y-8">
-            <h3 class="ds-heading-03-bold sm:hyphens-none md:pr-32">Vorteil</h3>
+            <h3
+              class="ds-heading-03-bold min-h-[2.5em] sm:hyphens-none md:pr-32"
+            >
+              Transparenz
+            </h3>
             <p>
-              standard dummy text ever since the 1500s, when an unknown printer
-              took a galley of type and scrambled it to make a type specimen
-              book.
+              Der Steckbrief stellt sicher, dass die Problemstellung, Ziele und
+              bestehende Hürden von Anfang an nachvollziehbar dokumentiert und
+              für alle Beteiligten sichtbar sind.
             </p>
           </div>
         </div>
@@ -67,11 +79,15 @@ const steps = [
             name="ic:twotone-lightbulb"
           />
           <div class="space-y-8">
-            <h3 class="ds-heading-03-bold sm:hyphens-none md:pr-32">Vorteil</h3>
+            <h3
+              class="ds-heading-03-bold min-h-[2.5em] sm:hyphens-none md:pr-32"
+            >
+              Effizienz
+            </h3>
             <p>
-              standard dummy text ever since the 1500s, when an unknown printer
-              took a galley of type and scrambled it to make a type specimen
-              book.
+              Durch die strukturierte Aufbereitung wird die interne Abstimmung
+              beschleunigt und Missverständnisse werden frühzeitig vermieden,
+              das die Zusammenarbeit effizienter macht.
             </p>
           </div>
         </div>
@@ -81,11 +97,15 @@ const steps = [
             name="ic:twotone-hub"
           />
           <div class="space-y-8">
-            <h3 class="ds-heading-03-bold sm:hyphens-none md:pr-32">Vorteil</h3>
+            <h3
+              class="ds-heading-03-bold min-h-[2.5em] sm:hyphens-none md:pr-32"
+            >
+              frühzeitige Mitwirkung
+            </h3>
             <p>
-              standard dummy text ever since the 1500s, when an unknown printer
-              took a galley of type and scrambled it to make a type specimen
-              book.
+              Durch die frühe Einbindung aller relevanter Ressorts erkennen Sie
+              Risiken rechtzeitig und entwickeln von Beginn an praxisnahe
+              Lösungen.
             </p>
           </div>
         </div>
@@ -93,7 +113,7 @@ const steps = [
     </section>
 
     <section class="space-y-40 pt-80">
-      <h2>Wie läuft der Prozess des Steckbriefs?</h2>
+      <h2>Wie läuft der Prozess des Steckbriefs ab?</h2>
       <p>
         Wir leiten Sie Schritt für Schritt durch den Prozess und unterstützen
         Sie bei der Erstellung Ihres Steckbriefs.
@@ -119,7 +139,7 @@ const steps = [
       </div>
     </section>
 
-    <section class="py-80">
+    <!-- <section class="py-80">
       <h2>Wie fügt sich das Ganze in den Vorhabenprozess ein?</h2>
       <p>
         Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -131,15 +151,13 @@ const steps = [
         href={buildUrl("/steckbrief/einordnung")}
         class="btn btn-secondary link-unstyled mt-16">Zur Frühphase</a
       >
-    </section>
+    </section> -->
 
-    <Card wrapperClass="mb-80 bg-lavender-400">
+    <Card wrapperClass="my-80 bg-lavender-400">
       <h2>Jetzt den Steckbrief ausfüllen</h2>
       <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen
+        Schritt für Schritt zum fertigen Steckbrief: Wir führen Sie durch den
+        Prozess und helfen Ihnen, alle wichtigen Details effizient zu erfassen.
       </p>
       <div class="mt-16 flex gap-10">
         <a

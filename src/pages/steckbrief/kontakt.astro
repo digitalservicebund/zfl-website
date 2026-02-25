@@ -1,7 +1,7 @@
 ---
 import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
-import { ZFL_EMAIL } from "@/config/constants";
+import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import { mailto } from "@/utils/mailtoHelper";
 
 export const frontmatter = {
@@ -12,21 +12,18 @@ export const frontmatter = {
 const steps = [
   {
     number: "1",
-    title: "Anfrage für den Steckbrief an das ZFL-Team",
-    description:
-      "s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    title: "Sie schicken uns eine Mail mit Ihrer Anfrage",
+    description: "",
   },
   {
     number: "2",
     title: "Das ZfL Team erstellt den Steckbrief klärt Rückfragen mit Ihnen",
-    description:
-      "s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    description: "",
   },
   {
     number: "3",
-    title: "Steckbrief wird an Sie gesendet",
-    description:
-      "s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    title: "Wir senden Ihnen den Steckbrief zurück",
+    description: "",
   },
 ];
 ---
@@ -34,22 +31,17 @@ const steps = [
 <Layout title={frontmatter.title}>
   <main class="breakout-grid">
     <Hero>
-      <h1>Steckbrief starten</h1>
+      <h1>Wir füllen den Steckbrief für Sie aus</h1>
       <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book.
+        Wir übernehmen die Erstellung für Sie – Sie schicken uns nur die
+        wichtigsten Informationen und erhalten den vollständig ausgefüllten
+        Steckbrief zurück.
       </p>
     </Hero>
     <section class="space-y-40 py-80">
-      <h2>Wie läuft der Prozess des Steckbriefs?</h2>
-      <p>
-        Wir leiten Sie Schritt für Schritt durch den Prozess und unterstützen
-        Sie bei der Erstellung Ihres Steckbriefs.
-      </p>
+      <h2>Wie läuft der Prozess des Steckbriefs ab?</h2>
 
-      <div class="mt-40 space-y-36">
+      <div class="space-y-36">
         {
           steps.map((step) => (
             <div class="group flex items-start gap-32">
@@ -68,37 +60,31 @@ const steps = [
         }
       </div>
 
-      <div>
+      <div class="mt-80 space-y-16">
         <h2 class="mb-16">Anfrage senden</h2>
         <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book.
+          Damit wir den Steckbrief für Sie erstellen können, benötigen wir
+          einige Informationen zu Ihrem Vorhaben:
+        </p>
+        <ul>
+          <li>Zuständiges Ressort</li>
+          <li>Zuständiges Referat</li>
+          <li>Betroffener Rechtsbereich</li>
+          <li>Thema und kurze Beschreibung des Vorhabens (3–5 Sätze)</li>
+          <li>Relevante Dokumente, die das Vorhaben erläutern oder ergänzen</li>
+        </ul>
+        <p>
+          Im Anschluss prüfen wir Ihre Angaben sorgfältig, melden uns bei Bedarf
+          mit Rückfragen und stellen Ihnen den ausgearbeiteten Steckbrief in der
+          Regel innerhalb von zwei Wochen zur Verfügung.
         </p>
         <p>
-          Schicken Sie uns eine E-Mail zu Anfrage für den Steckbrief Termin.
-          Folgende Informationen wären wichtig:
+          Bei Fragen kontaktieren Sie uns unter:<br /><a href={ZFL_EMAIL.url}
+            >{ZFL_EMAIL.display}</a
+          > oder <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>
         </p>
-        <ul class="font-bold">
-          <li>Ressort</li>
-          <li>Referat</li>
-          <li>Rechtsbereich</li>
-          <li>Thema Ihres Vorhabens in 3-5 Sätzen</li>
-        </ul>
       </div>
 
-      <div>
-        <p class="mb-16 text-2xl font-bold">
-          Hängen Sie relevante Doukmente an die E-Mail an
-        </p>
-        <p>
-          Sobald sie auf abschicken klicken, erstellen wir Ihnen eine E-Mail
-          Vorlage. Wenn Sie bereits Dokumente, wie Projektskizzen oder
-          Vorhabenbeschreibungen etc. besitzen, hängen Sie sie einfach der
-          Anfrage an. Diese werden dann per Mail an uns geschickt.
-        </p>
-      </div>
       <div class="flex gap-16">
         <a
           href={mailto(ZFL_EMAIL.display, "Anfrage Steckbrief")}
@@ -107,6 +93,13 @@ const steps = [
           E-Mail erstellen
         </a>
       </div>
+      <h3>Was passiert mit diesem Steckbrief?</h3>
+      <p>
+        Nach Erhalt des Steckbriefes schicken Sie das Dokument an die relevante
+        Ressorts, Normenkontrallrat und Destatis. Die Ressorts können frühzeitig
+        beteiligt werden, um inhaltliches Feedback zu geben. NKR und Destatis
+        werden frühzeitig über neue Vorhaben informiert ...
+      </p>
     </section>
   </main>
 </Layout>

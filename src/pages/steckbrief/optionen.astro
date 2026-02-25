@@ -16,10 +16,7 @@ export const frontmatter = {
     <Hero>
       <h1>Steckbrief starten</h1>
       <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book.
+        Wählen Sie einer der beiden Optionen aus um den Steckbrief zu erstellen
       </p>
     </Hero>
 
@@ -29,12 +26,14 @@ export const frontmatter = {
         <Card wrapperClass="w-full px-24! py-32">
           <div class="flex h-full flex-col justify-between gap-40">
             <div>
-              <h3 class="font-[26px]">Wir füllen den Steckbrief für Sie aus</h3>
+              <h3 class="ds-heading-03-bold min-h-[2.5em]">
+                Wir füllen den Steckbrief für Sie aus
+              </h3>
               <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book.
+                Wenn Sie den Steckbrief nicht selbst ausfüllen möchten, senden
+                Sie uns einfach die von uns vorgegebenen Stichpunkte per Mail
+                zurück; bei Bedarf melden wir uns mit Rückfragen und senden
+                Ihnen anschließend den fertig ausgearbeiteten Steckbrief zu.
               </p>
             </div>
             <div class="flex flex-col gap-8">
@@ -42,7 +41,7 @@ export const frontmatter = {
                 <Icon
                   name="ic:twotone-people"
                   class="text-lavender-800 mr-8 h-40 w-40"
-                /> ZFL Support
+                /> Team des Zentrums für Legistik
               </div>
               <div class="flex items-center gap-8">
                 <Icon
@@ -52,8 +51,7 @@ export const frontmatter = {
               </div>
               <a
                 href={buildUrl("/steckbrief/kontakt")}
-                class="btn btn-primary link-unstyled mt-8"
-                >Kontaktieren Sie uns</a
+                class="btn btn-primary link-unstyled mt-8">Mehr erfahren</a
               >
             </div>
           </div>
@@ -61,12 +59,16 @@ export const frontmatter = {
         <Card wrapperClass="w-full px-24! py-32">
           <div class="flex h-full flex-col justify-between gap-40">
             <div>
-              <h3 class="font-[26px]">Sie füllen ihn selbst aus</h3>
+              <h3 class="ds-heading-03-bold min-h-[2.5em]">
+                Den Steckbrief selber erstellen
+              </h3>
               <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book.
+                Wir führen Sie Schritt für Schritt durch ein Online-Formular in
+                dem Sie den Kontext Ihres Vorhabens beschreiben.
+              </p>
+              <p>
+                Im Anschluss laden Sie den Steckbrief als Word-Dokument herunter
+                und versenden es an die relevanten Akteure.
               </p>
             </div>
             <div class="flex flex-col gap-8">
@@ -83,7 +85,7 @@ export const frontmatter = {
                 /> 1-2 Wochen
               </div>
               <a
-                href={buildUrl("/steckbrief/prozess")}
+                href={buildUrl("/steckbrief/formular")}
                 class="btn btn-primary link-unstyled mt-8"
                 >Steckbrief erstellen</a
               >

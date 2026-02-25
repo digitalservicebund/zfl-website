@@ -5,7 +5,6 @@ import Textarea from "@/components/input/Textarea.astro";
 import { Icon } from "astro-icon/components";
 import { buildUrl } from "@/utils/routesHelper";
 import Card from "@/components/Card.astro";
-import Link from "@/components/Link.astro";
 
 export const frontmatter = {
   title: "Steckbrief",
@@ -32,6 +31,28 @@ const steps = [
     id: "zusammenfassung",
     label: "Zusammenfassung",
     progress: 100,
+  },
+];
+
+const nextSteps = [
+  {
+    number: "1",
+    title: "Steckbrief erstellen",
+    completed: true,
+    description:
+      "Sie können den Steckbrief entweder selbst verfassen oder uns die relevanten Informationen zur Verfügung stellen – wir erstellen den Steckbrief und übernehmen dann die Ausformulierung für Sie. Wenn Sie den Steckbrief selbst verfassen möchten, nutzen Sie dazu unser Online-Formular; am Ende erhalten Sie den Steckbrief als Word-Dokument zum Download.",
+  },
+  {
+    number: "2",
+    title: "Interne Vervollständigung",
+    description:
+      "Das Word-Dokument ermöglicht Ihnen eine unkomplizierte interne Abstimmung in Ihrem Referat. Ergänzen Sie fehlende Informationen und stimmen Sie sich ebenfalls mit den beteiligten Ressorts ab, um den Steckbrief zu vervollständigen.",
+  },
+  {
+    number: "3",
+    title: "Versand an zuständige Institutionen",
+    description:
+      "Sobald Ihr Steckbrief vollständig ist, senden Sie ihn zur Information an den Normenkontrollrat und Destatis.",
   },
 ];
 ---
@@ -80,14 +101,11 @@ const steps = [
         <!-- Step 1: Kontaktdaten -->
         <div class="step-content py-40" data-step="kontaktdaten">
           <div class="space-y-24">
+            <p class="text-xl">Ihre Kontaktinformationen</p>
             <Input label="E-Mail Adresse" id="email" x-model="email" />
             <div class="flex gap-24">
               <Input label="Ressort" id="ressort" x-model="ressort" />
-              <Input
-                label="Referat aus ihrem Profil"
-                id="referat"
-                x-model="referat"
-              />
+              <Input label="Referat" id="referat" x-model="referat" />
             </div>
             <Input
               label="Ihr Rechtsbereich"
@@ -196,42 +214,64 @@ const steps = [
                     <td class="py-8" x-text="rechtsbereich"></td>
                   </tr>
                   <tr>
-                    <td class="py-8 pr-24 align-top font-bold">Kontext</td>
+                    <td class="py-8 pr-24 align-top font-bold"
+                      >Kontext Ihres Vorhabens</td
+                    >
                     <td class="py-8 whitespace-pre-wrap" x-text="kontext"></td>
                   </tr>
                   <tr>
-                    <td class="py-8 pr-24 align-top font-bold">Zielstellung</td>
+                    <td class="py-8 pr-24 align-top font-bold"
+                      >Warum braucht es diese neue Regelung?</td
+                    >
                     <td class="py-8 whitespace-pre-wrap" x-text="zielstellung"
                     ></td>
                   </tr>
                   <tr>
-                    <td class="py-8 pr-24 align-top font-bold">Probleme</td>
+                    <td class="py-8 pr-24 align-top font-bold"
+                      >Was sind Umsetzungshürden?</td
+                    >
                     <td class="py-8 whitespace-pre-wrap" x-text="probleme"></td>
                   </tr>
                 </tbody>
               </table>
+              <div class="mt-40">
+                <button
+                  class="btn btn-primary"
+                  @click="$dispatch('generate-word', { arbeitstitel, email, ressort, referat, rechtsbereich, kontext, zielstellung, probleme })"
+                  >Steckbrief herunterladen</button
+                >
+              </div>
             </Card>
             <Card wrapperClass="mt-40 p-40!">
               <h3>Was passiert als nächstes?</h3>
-              <ul>
-                <li>
-                  Sie laden den Steckbrief als Word-Datei runter, stimmen sich
-                  ab und senden ihn später per Mail an NKR, Destatis, etc.
-                </li>
-                <li>
-                  Next steps nach dem Steckbrief <Link
-                    href="/steckbrief/einordnung">hier</Link
-                  >
-                </li>
-              </ul>
+
+              <div class="space-y-36">
+                {
+                  nextSteps.map((step) => (
+                    <div
+                      class={`group flex items-start gap-32 ${step.completed && "opacity-50"}`}
+                    >
+                      <div class="bg-lavender-400 border-lavender-400 flex h-40 w-40 shrink-0 items-center justify-center rounded-full border-2 text-lg font-bold">
+                        {step.completed ? (
+                          <Icon name="ic:twotone-check" />
+                        ) : (
+                          step.number
+                        )}
+                      </div>
+
+                      <div class="grow">
+                        <p class="mb-8 text-2xl font-bold">{step.title}</p>
+                        <p class="text-base leading-relaxed opacity-80">
+                          {step.description}
+                        </p>
+                      </div>
+                    </div>
+                  ))
+                }
+              </div>
             </Card>
           </div>
           <div class="mt-80 flex gap-48">
-            <button
-              class="btn btn-primary"
-              @click="$dispatch('generate-word', { arbeitstitel, email, ressort, referat, rechtsbereich, kontext, zielstellung, probleme })"
-              >Word-Datei erstellen</button
-            >
             <label
               for="step-zielstellung"
               class="btn btn-secondary cursor-pointer">Zurück</label
@@ -272,11 +312,18 @@ const steps = [
               <div>
                 <p class="mb-16 font-bold">Was bedeutet Kontext in dem Fall?</p>
                 <p>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a type
-                  specimen book.
+                  Erläutern Sie den Kontext Ihres Vorhabens anhand der
+                  maßgeblichen Beschlüsse, Vereinbarungen oder politischen
+                  Impulse.
+                </p>
+              </div>
+              <div>
+                <p class="mb-16 font-bold">
+                  Gibt es bereits Inhalte zu dem Vorhaben?
+                </p>
+                <p>
+                  Sollten Sie bereits Vorarbeiten für den Kontext haben, dann
+                  ergänzen Sie sie hier.
                 </p>
               </div>
             </div>
@@ -284,23 +331,25 @@ const steps = [
             <!-- Hints for Step 3: Zielstellung/Probleme -->
             <div class="hint-content space-y-40" data-step="zielstellung">
               <div>
-                <p class="mb-16 font-bold">Was kommt in die Zielstellung?</p>
+                <p class="mb-16 font-bold">
+                  Erläutern Sie warum es die neue Regelung braucht
+                </p>
                 <p>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a type
-                  specimen book.
+                  Erläutern Sie den konkreten Handlungsbedarf. Beschreiben Sie,
+                  welches Problem gelöst werden soll, warum bestehende
+                  Regelungen nicht ausreichen und welchen Mehrwert eine neue
+                  Regelung schafft.
                 </p>
               </div>
               <div>
-                <p class="mb-16 font-bold">Was könnten Probleme sein?</p>
+                <p class="mb-16 font-bold">
+                  Erläutern Sie die möglichen Umsetzungshürden
+                </p>
                 <p>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a type
-                  specimen book.
+                  Geben Sie an, welche fachlichen, organisatorischen,
+                  technischen oder rechtlichen Hindernisse bei der Umsetzung
+                  auftreten könnten. Beschreiben Sie kurz, wo mögliche Risiken
+                  oder Schwierigkeiten liegen.
                 </p>
               </div>
             </div>
