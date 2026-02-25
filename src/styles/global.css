@@ -235,15 +235,14 @@ address {
   }
 }
 
-@layer utilities {
-  .mx-auto {
-    margin-inline: auto;
-  }
-
-  .list-unstyled {
-    @apply p-0 [&_li]:list-none [&_ul]:p-0;
-  }
+@utility mx-auto {
+  margin-inline: auto;
 }
+
+@utility list-unstyled {
+  @apply p-0 [&>li]:list-none [&>ul]:p-0;
+}
+
 /*
   Creates a 3-column grid to center main content while allowing some elements to "break out" to full width.
   The layout is: [gutter] [main content] [gutter].

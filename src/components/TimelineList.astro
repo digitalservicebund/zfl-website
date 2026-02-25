@@ -1,0 +1,28 @@
+<ol class="timeline list-unstyled">
+  <slot />
+</ol>
+
+{
+  /* use the is:global directive to ensure that direct child descendant selectors (>) can be used */
+}
+<style is:global>
+  @reference "@/styles/global.css";
+
+  .timeline {
+    @apply relative scroll-my-40 space-y-32;
+
+    &::before {
+      content: "";
+      @apply bg-lavender-base absolute inset-0 left-8 w-4;
+    }
+
+    & > li {
+      @apply relative pt-10 pb-20 pl-40;
+    }
+    & > li::before {
+      position: absolute;
+      content: "";
+      @apply size-sm bg-cosmic-blue-base top-14 left-0 rounded-full;
+    }
+  }
+</style>

@@ -5,6 +5,8 @@ import Link from "@/components/Link.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import Layout from "@/layouts/Layout.astro";
 import { mailto } from "@/utils/mailtoHelper";
+import TimelineList from "@/components/TimelineList.astro";
+import Badge from "@/components/Badge.astro";
 
 export const frontmatter = {
   title: "Daran arbeiten wir",
@@ -121,28 +123,32 @@ export const frontmatter = {
     </section>
 
     <section>
-      <h2>Verfügbare Angebote</h2>
-      <p>
-        <em
-          >Die erste Version der Website des Zentrum für Legistik wurde am
-          05.01.2026 veröffentlicht.</em
-        >
-      </p>
-      <p>Bereits für Ihre Arbeit an Regelungen nutzbar:</p>
-      <ul>
+      <h2 class="mb-40">Das ist neu</h2>
+      <TimelineList>
         <li>
-          <strong>Schulungen</strong>: In Schulungen praktisches Wissen erlangen
+          <Badge look="gray">Februar 2026</Badge>
+          <ul>
+            <li>
+              Schulungen: Hinweise zu externen Angeboten ergänzt.
+              <Link href="/schulungen#schulungen-weitere" class="block"
+                >Hier ansehen</Link
+              >
+            </li>
+            <li>
+              Neue Seite: Anleitungen und Hilfsmittel
+              <Link href="/anleitungen-und-hilfsmittel" class="block"
+                >Hier ansehen</Link
+              >
+            </li>
+          </ul>
         </li>
         <li>
-          <strong>Projektbegleitung</strong>: Unterstützung Ihres
-          Regelungsvorhabens durch interdisziplinäre Expertise
+          <Badge look="gray">Januar 2026</Badge>
+          <p class="mt-8">
+            Launch der Website "Zentrum für Legistik" am 5.&nbsp;Januar 2026.
+          </p>
         </li>
-        <li>
-          <strong>Digitaltauglichkeit</strong>: Zugang zur Prüfung und Beratung
-          via
-          <Link href="https://digitalcheck.bund.de/">Digitalcheck</Link>
-        </li>
-      </ul>
+      </TimelineList>
     </section>
   </main>
 </Layout>
