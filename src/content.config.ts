@@ -1,4 +1,12 @@
+import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
+
+const all = defineCollection({
+  loader: glob({
+    pattern: "**/*.astro",
+    base: "./src",
+  }),
+});
 
 const pages = defineCollection({
   type: "content",
@@ -9,6 +17,4 @@ const pages = defineCollection({
   }),
 });
 
-export const collections = {
-  pages,
-};
+export const collections = { all, pages };

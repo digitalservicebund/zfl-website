@@ -6,7 +6,6 @@ import Banner from "@/components/Banner.astro";
 import { Icon } from "astro-icon/components";
 import SupportCard from "@/components/blocks/SupportCard.astro";
 import Link from "@/components/Link.astro";
-import { routes } from "@/config/routes";
 
 export const frontmatter = {
   title: "Zentrum für Legistik",
@@ -30,9 +29,7 @@ export const frontmatter = {
         Das Angebot befindet sich aktuell im Aufbau und wird schrittweise mit
         Ihnen zusammen weiterentwickelt.
       </p>
-      <Link href={routes.ueberUns.children.daranArbeitenWir.path}
-        >Mehr dazu</Link
-      >
+      <Link href="/ueber-uns/daran-arbeiten-wir">Mehr dazu</Link>
     </Banner>
     <section>
       <h2>Vorteile des Angebots für Sie</h2>
@@ -67,7 +64,7 @@ export const frontmatter = {
             erhalten dadurch ein umfassendes Verständnis von Umsetzungsprozessen
             und gestalten Ihr Vorhaben praxisnah und bürokratiearm.
           </p>
-          <Link href={routes.begleitungen.path}
+          <Link href="/begleitungen"
             >Mehr Informationen zu interdisziplinären Kompetenzteams</Link
           >
         </Card>
@@ -82,9 +79,7 @@ export const frontmatter = {
             Neue Methoden und Werkzeuge für die Rechtsetzung in
             umsetzungsorientierten Schulungen kennenlernen.
           </p>
-          <Link href={routes.schulungen.path}
-            >Mehr Informationen zu Schulungen</Link
-          >
+          <Link href="/schulungen">Mehr Informationen zu Schulungen</Link>
         </Card>
       </div>
     </section>

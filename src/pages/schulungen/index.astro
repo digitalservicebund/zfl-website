@@ -13,6 +13,7 @@ import Schedule from "./_schedule.astro";
 export const frontmatter = {
   title: "Schulungen",
   sitemap: true,
+  showInHeader: 20,
 };
 ---
 
@@ -36,11 +37,7 @@ export const frontmatter = {
             <a class="block" href="#schulungen-weitere"> ↓ Weitere Angebote </a>
           </div>
         </div>
-        <Image
-          class="hidden size-288 md:block"
-          src={schulungenImage}
-          alt=""
-        />
+        <Image class="hidden size-288 md:block" src={schulungenImage} alt="" />
       </div>
     </Hero>
 
