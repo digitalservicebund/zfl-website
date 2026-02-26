@@ -2,6 +2,8 @@
 import Hero from "@/components/Hero.astro";
 import { isStaging } from "@/config/stage";
 import Layout from "@/layouts/Layout.astro";
+import Link from "@/components/Link.astro";
+import { routes } from "@/config/routes.ts";
 
 if (!isStaging) {
   return Astro.redirect("/404", 302);
@@ -18,5 +20,13 @@ export const frontmatter = {
     <Hero>
       <h1>{frontmatter.title}</h1>
     </Hero>
+    <section class="space-y-8">
+      <Link class="block" href={routes.ueberUns.children.zahlenUndFakten.path}
+        >Zahlen und Fakten</Link
+      >
+      <Link class="block" href={routes.ueberUns.children.daranArbeitenWir.path}
+        >Daran arbeiten wir</Link
+      >
+    </section>
   </main>
 </Layout>
