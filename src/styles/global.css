@@ -308,6 +308,11 @@ address {
   }
 }
 
+@utility breakout-subgrid {
+  grid-template-columns: subgrid;
+  display: grid;
+}
+
 @utility breakout-wide {
   grid-column: wide;
 }
