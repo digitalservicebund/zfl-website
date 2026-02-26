@@ -2,9 +2,11 @@
 import Hero from "@/components/Hero.astro";
 import Link from "@/components/Link.astro";
 import Layout from "@/layouts/Layout.astro";
-import { getAllRoutes } from "@/utils/routesHelper";
+import { nestedRoutes } from "@/utils/routesHelper";
 
-const pages = await getAllRoutes();
+const routes = nestedRoutes.toSorted(
+  (a, b) => (a.order ?? 0) - (b.order ?? 0) || a.title.localeCompare(b.title),
+);
 ---
 
 <Layout title="Sitemap">
@@ -15,10 +17,21 @@ const pages = await getAllRoutes();
     <section>
       <ul>
         {
-          pages.map((page) => (
-            <li>
-              <Link href={page.url}>{page.title}</Link>
-            </li>
+          routes.map((page) => (
+            <>
+              <li>
+                <Link href={page.url}>{page.title}</Link>
+              </li>
+              {page.children && (
+                <ul>
+                  {page.children.map((child) => (
+                    <li>
+                      <Link href={child.url}>{child.title}</Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </>
           ))
         }
       </ul>
