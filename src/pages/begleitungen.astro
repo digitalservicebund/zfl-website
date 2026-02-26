@@ -1,19 +1,20 @@
 ---
+import SupportCard from "@/components/blocks/SupportCard.astro";
 import Card from "@/components/Card.astro";
 import Hero from "@/components/Hero.astro";
 import Link from "@/components/Link.astro";
-import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import begleitungenImage from "@/images/Begleitungen.png";
 import trainingsImage from "@/images/Trainings.jpg";
 import Layout from "@/layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
 import { getImage, Image } from "astro:assets";
+import { routes } from "@/config/routes.ts";
 
 const trainingsImageAsset = await getImage({ src: trainingsImage });
 const trainingsImageAssetURL = `url("${trainingsImageAsset.src}")`;
 
 export const frontmatter = {
-  title: "Begleitungen",
+  title: routes.begleitungen.title,
   sitemap: true,
 };
 ---
@@ -24,33 +25,26 @@ export const frontmatter = {
       <h1>Begleitung für Vorhaben</h1>
       <div class="mt-md space-y-md relative gap-32 md:flex md:flex-row">
         <div>
-          <h2>
-            Interdisziplinäre Expertise für praxisnahe und bürokratiearme
-            Regelungen nutzen
-          </h2>
+          <h2>Individuelle Unterstützung für Ihr Vorhaben nutzen</h2>
           <p>
-            Ein interdisziplinäres Team mit Kompetenzen in Design,
-            Nutzerforschung, IT, Produkt- und Prozessmanagement begleitet Sie
-            vertraulich und mit individuellem Fokus auf Ihr Vorhaben.
+            Ein in Gesetzgebungspraxis erfahrenes interdisziplinäres Team
+            unterstützt Sie dabei, die Regelung praxisnah, digitaltauglich und
+            bürokratiearm zu gestalten.
+            <br />
+            <br />
+            Vertraulich und mit individuellem Fokus auf Ihr Vorhaben stehen Ihnen
+            während der Begleitung Kompetenzen in Design, Nutzerforschung, IT, Produkt-
+            und Prozessmanagement direkt zur Verfügung.
           </p>
-          <p>
-            Nehmen Sie das Angebot bereits im frühen Erarbeitungsprozess in
-            Anspruch, damit die Begleitung die größte Wirkung erzielen kann.
-          </p>
-          <p>
-            <strong
-              >Kontaktieren Sie uns, um eine Begleitung für Ihr Vorhaben
-              anzufragen:
-            </strong>
-          </p>
-          <p>
-            Telefon:
-            <Link href={ZFL_PHONE.url}>{ZFL_PHONE.display}</Link>
-          </p>
-          <p>
-            E-Mail:
-            <Link href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</Link>
-          </p>
+          <div class="mt-16">
+            <a class="btn btn-primary gap-8" href="#leistungspakete">
+              <Icon
+                name="ic:baseline-arrow-downward"
+                class="inline-block h-36 w-36"
+              />
+              Leistungspakete anzeigen
+            </a>
+          </div>
         </div>
         <Image
           class="hidden size-288 md:block"
@@ -60,28 +54,25 @@ export const frontmatter = {
       </div>
     </Hero>
 
-    <section>
+    <section class="g-32 py-48 md:py-80">
       <h2>Wirkung der Zusammenarbeit</h2>
-
       <p>
         Wir unterstützen Sie dabei, Umsetzungsprozesse zu verstehen und
         Anforderungen an praxisnahe und bürokratiearme Regelungen umzusetzen.
-      </p>
-      <p>
         Durch Ihre Rechtsetzungs-Expertise in Kombination mit Methoden aus der
         agilen Software-Entwicklung entstehen somit praxistaugliche und
         zukunftsfähige Gesetze, die unter anderem die Potenziale der
         Digitalisierung bestmöglich ausschöpfen.
       </p>
 
-      <h3>So unterstützen wir Sie konkret:</h3>
+      <div
+        class="mt-40 flex w-2xs flex-col gap-32 md:w-full md:max-w-[848px] md:flex-row md:gap-16"
+      >
+        <div
+          class="md:size-lg flex h-auto w-full flex-col gap-8 md:flex-1 md:gap-32"
+        >
+          <Icon class="feature-icon" name="ic:twotone-account-tree" />
 
-      <div class="mt-16 flex gap-32 max-md:flex-col">
-        <div class="flex gap-16 md:flex-col md:gap-32">
-          <Icon
-            class="text-cosmic-blue-400 size-lg flex-none"
-            name="ic:twotone-account-tree"
-          />
           <div class="space-y-8">
             <h3 class="ds-heading-03-bold sm:hyphens-none md:pr-32">
               Sachverhalte visualisieren
@@ -92,11 +83,10 @@ export const frontmatter = {
             </p>
           </div>
         </div>
-        <div class="flex gap-16 md:flex-col md:gap-32">
-          <Icon
-            class="text-cosmic-blue-400 size-lg flex-none"
-            name="ic:twotone-lightbulb"
-          />
+        <div
+          class="flex h-auto w-full flex-col gap-8 md:h-[298px] md:flex-1 md:gap-32"
+        >
+          <Icon class="feature-icon" name="ic:twotone-lightbulb" />
           <div class="space-y-8">
             <h3 class="ds-heading-03-bold sm:hyphens-none md:pr-32">
               Umsetzung mitdenken
@@ -107,11 +97,10 @@ export const frontmatter = {
             </p>
           </div>
         </div>
-        <div class="flex gap-16 md:flex-col md:gap-32">
-          <Icon
-            class="text-cosmic-blue-400 size-lg flex-none"
-            name="ic:twotone-hub"
-          />
+        <div
+          class="flex h-auto w-full flex-col gap-8 md:h-[298px] md:flex-1 md:gap-32"
+        >
+          <Icon class="feature-icon" name="ic:twotone-hub" />
           <div class="space-y-8">
             <h3 class="ds-heading-03-bold sm:hyphens-none md:pr-32">
               Prozesse strukturieren
@@ -124,9 +113,118 @@ export const frontmatter = {
         </div>
       </div>
     </section>
+    <section class="breakout-subgrid breakout-wide pb-40" id="leistungspakete">
+      <div class="col-[content]">
+        <h2>Passende Leistungspakete für Ihr Vorhaben</h2>
+        <p class="pb-40">
+          Hier sehen Sie unsere verschiedenen Unterstützungsangebote im
+          Vergleich. Alle Angebote sind für Sie kostenfrei und werden vom BMDS
+          finanziert.
+        </p>
+      </div>
+      <div class="breakout-wide w-full overflow-x-auto">
+        <table class="w-full min-w-[855px] table-fixed text-left">
+          <thead>
+            <tr class="table-header-cell">
+              <th scope="col" class="w-[150px]"> Kriterien </th>
+              <th scope="col" class="w-[235px]"> Paket S </th>
+              <th scope="col" class="w-[235px]"> Paket M </th>
+              <th scope="col" class="w-[235px]"> Paket L </th>
+            </tr>
+          </thead>
 
+          <tbody
+            class="table-body-cell [&>tr:nth-child(even)]:bg-lavender-200 [&>tr:nth-child(odd)]:bg-white"
+          >
+            <tr class="">
+              <td class="font-bold"> Fokus </td>
+              <td> Punktuelle Unterstützung bei Ihrer Fragestellung </td>
+              <td> Vertiefte Analyse Ihres Vorhabens </td>
+              <td> Langfristige Begleitung des Gesetzgebungsprozesses </td>
+            </tr>
+
+            <tr class="">
+              <td class="font-bold"> Dauer </td>
+              <td>1 gemeinsame Arbeitssitzung</td>
+              <td>ca. 4 Wochen</td>
+              <td>Ab 5 Wochen</td>
+            </tr>
+
+            <tr class="">
+              <td class="font-bold"> Team </td>
+              <td>
+                <div class="mb-1">1–2 Expert:innen aus:</div>
+                <ul class="ml-5 list-disc space-y-1">
+                  <li>Service Design</li>
+                  <li>Nutzerforschung</li>
+                </ul>
+              </td>
+              <td>
+                <div class="mb-1">3–4 Expert:innen aus:</div>
+                <ul class="ml-5 list-disc space-y-1">
+                  <li>Service Design</li>
+                  <li>Nutzerforschung</li>
+                  <li>Softwareentwicklung</li>
+                  <li>Produktmanagement</li>
+                  <li>Transformations&shy;management</li>
+                </ul>
+              </td>
+              <td>
+                <div class="mb-1">3–4 Expert:innen aus:</div>
+                <ul class="ml-5 list-disc space-y-1">
+                  <li>Service Design</li>
+                  <li>Nutzerforschung</li>
+                  <li>Softwareentwicklung</li>
+                  <li>Produktmanagement</li>
+                  <li>Transformations&shy;management</li>
+                </ul>
+              </td>
+            </tr>
+
+            <tr class="">
+              <td class="font-bold"> Zeitpunkt </td>
+              <td> Individuell nach Bedarf </td>
+              <td> Konzept- bis Entwurfsphase </td>
+              <td> Ab Start der Initiative </td>
+            </tr>
+
+            <tr class="">
+              <td class="font-bold"> Tätigkeit (Beispiele) </td>
+              <td>
+                <ul class="ml-5 list-disc space-y-1">
+                  <li>Umsetzungsperspektive besser verstehen</li>
+                  <li>gemeinsam visualisieren</li>
+                  <li>technische Fragen beantworten</li>
+                </ul>
+              </td>
+              <td>
+                <ul class="ml-5 list-disc space-y-1">
+                  <li>
+                    Umsetzungsperspektive auf technischer, organisatorischer und
+                    rechtlicher Ebene durchdenken
+                  </li>
+                  <li>technische Lösungsideen entwickeln</li>
+                  <li>Machbarkeit validieren</li>
+                </ul>
+              </td>
+              <td>
+                <ul class="ml-5 list-disc space-y-1">
+                  <li>Gemeinsame Analyse</li>
+                  <li>Unterstützung bei Workshops und Hausabstimmungen</li>
+                  <li>moderierter Austausch mit Umsetzungsakteuren</li>
+                  <li>Evaluation von Lösungen</li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section class="bg-lavender-base breakout py-80">
+      <SupportCard />
+    </section>
     <section
-      class=`breakout bg-cover bg-center`
+      class="breakout bg-cover bg-center py-80"
       style={{ backgroundImage: trainingsImageAssetURL }}
     >
       <Card>
@@ -148,3 +246,11 @@ export const frontmatter = {
     </section>
   </main>
 </Layout>
+
+<style>
+  @reference "@/styles/global.css";
+
+  .feature-icon {
+    @apply text-cosmic-blue-400 bg-lavender-400 size-[110px] flex-none rounded-sm px-[18px] py-[22px];
+  }
+</style>

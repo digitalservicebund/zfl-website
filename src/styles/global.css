@@ -90,7 +90,7 @@
     @apply py-lg;
   }
 
-  a:not([class*="link-unstyled"]) {
+  a:not(.link-unstyled, .btn) {
     @apply text-link;
   }
 
@@ -101,14 +101,18 @@
   a,
   button {
     @apply cursor-pointer;
-
-    &.btn-primary {
-      display: inline-block;
-      padding: 18px 24px;
-      background-color: var(--color-cosmic-blue-base);
-      color: var(--color-white);
+    &.btn {
+      display: inline-flex;
+      padding: 14px 24px;
       font-weight: 700;
       letter-spacing: 0.16px;
+      line-height: clamp(1.25, 2, 2);
+      border-radius: 8px;
+    }
+
+    &.btn-primary {
+      background-color: var(--color-cosmic-blue-base);
+      color: var(--color-white);
 
       &:active {
         background-color: var(--color-cosmic-blue-400);
@@ -141,6 +145,21 @@
     &:not(:last-child) {
       margin-bottom: 1rem;
     }
+  }
+
+  tr.table-header-cell th {
+    padding: 16px 32px 16px 16px;
+    border-bottom: 2px solid var(--color-lavender-400, #eceef6);
+    background: var(--color-lavender-base, #e3e6f2);
+    color: var(--semantic-color-text, #000);
+    line-height: 22.5px;
+    letter-spacing: 0.16px;
+  }
+  tbody.table-body-cell tr td {
+    padding: 16px 32px 16px 16px;
+    vertical-align: top;
+    border-bottom: 1px solid var(--color-lavender-400, #eceef6);
+    overflow-wrap: break-word;
   }
 
   *:focus-visible {
@@ -287,6 +306,11 @@ address {
   & > * {
     grid-column: content;
   }
+}
+
+@utility breakout-subgrid {
+  grid-template-columns: subgrid;
+  display: grid;
 }
 
 @utility breakout-wide {
