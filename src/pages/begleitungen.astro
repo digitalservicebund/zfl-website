@@ -65,15 +65,12 @@ export const frontmatter = {
       </p>
 
       <div
-        class="mx-auto mt-40 flex w-2xs flex-col gap-16 md:w-full md:max-w-[848px] md:flex-row md:gap-8"
+        class="mt-40 flex w-2xs flex-col gap-32 md:w-full md:max-w-[848px] md:flex-row md:gap-16"
       >
         <div
-          class="flex h-auto w-full flex-col gap-4 md:h-[298px] md:flex-1 md:gap-32"
+          class="md:size-lg flex h-auto w-full flex-col gap-8 md:flex-1 md:gap-32"
         >
-          <Icon
-            class="text-cosmic-blue-400 bg-lavender-400 h-[100px] w-[110px] flex-none px-[18px] py-[22px]"
-            name="ic:twotone-account-tree"
-          />
+          <Icon class="feature-icon" name="ic:twotone-account-tree" />
 
           <div class="space-y-8">
             <h3 class="ds-heading-03-bold sm:hyphens-none md:pr-32">
@@ -86,12 +83,9 @@ export const frontmatter = {
           </div>
         </div>
         <div
-          class="flex h-auto w-full flex-col gap-4 md:h-[298px] md:flex-1 md:gap-32"
+          class="flex h-auto w-full flex-col gap-8 md:h-[298px] md:flex-1 md:gap-32"
         >
-          <Icon
-            class="text-cosmic-blue-400 size-lg flex-none"
-            name="ic:twotone-lightbulb"
-          />
+          <Icon class="feature-icon" name="ic:twotone-lightbulb" />
           <div class="space-y-8">
             <h3 class="ds-heading-03-bold sm:hyphens-none md:pr-32">
               Umsetzung mitdenken
@@ -103,12 +97,9 @@ export const frontmatter = {
           </div>
         </div>
         <div
-          class="flex h-auto w-full flex-col gap-4 md:h-[298px] md:flex-1 md:gap-32"
+          class="flex h-auto w-full flex-col gap-8 md:h-[298px] md:flex-1 md:gap-32"
         >
-          <Icon
-            class="text-cosmic-blue-400 size-lg flex-none"
-            name="ic:twotone-hub"
-          />
+          <Icon class="feature-icon" name="ic:twotone-hub" />
           <div class="space-y-8">
             <h3 class="ds-heading-03-bold sm:hyphens-none md:pr-32">
               Prozesse strukturieren
@@ -153,9 +144,9 @@ export const frontmatter = {
 
             <tr class="">
               <td class="font-bold"> Dauer </td>
-              <td> 1 gemeinsame Arbeitssitzung </td>
-              <td> ca. 4 Wochen </td>
-              <td> Ab 5 Wochen </td>
+              <td>1 gemeinsame Arbeitssitzung</td>
+              <td>ca. 4 Wochen</td>
+              <td>Ab 5 Wochen</td>
             </tr>
 
             <tr class="">
@@ -174,7 +165,7 @@ export const frontmatter = {
                   <li>Nutzerforschung</li>
                   <li>Softwareentwicklung</li>
                   <li>Produktmanagement</li>
-                  <li>Transformationsmanagement</li>
+                  <li>Transformations&shy;management</li>
                 </ul>
               </td>
               <td>
@@ -184,7 +175,7 @@ export const frontmatter = {
                   <li>Nutzerforschung</li>
                   <li>Softwareentwicklung</li>
                   <li>Produktmanagement</li>
-                  <li>Transformationsmanagement</li>
+                  <li>Transformations&shy;management</li>
                 </ul>
               </td>
             </tr>
@@ -253,4 +244,12 @@ export const frontmatter = {
       </Card>
     </section>
   </main>
-</Layout>; ---
+</Layout>
+
+<style>
+  @reference "@/styles/global.css";
+
+  .feature-icon {
+    @apply text-cosmic-blue-400 bg-lavender-400 size-[110px] flex-none rounded-sm px-[18px] py-[22px];
+  }
+</style>
