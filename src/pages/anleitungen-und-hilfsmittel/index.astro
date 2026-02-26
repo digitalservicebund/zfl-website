@@ -2,7 +2,6 @@
 import Hero from "@/components/Hero.astro";
 import Link from "@/components/Link.astro";
 import { ZFL_EMAIL } from "@/config/constants";
-import { isStaging } from "@/config/stage";
 import Layout from "@/layouts/Layout.astro";
 import { mailto } from "@/utils/mailtoHelper";
 import ToolCard from "./_ToolCard.astro";
@@ -12,10 +11,6 @@ import eNormImage from "./eNorm.jpg";
 import fimImage from "./FIM.png";
 import interoperableEuropeImage from "./InteroperableEurope.png";
 import rulemapBuilderImage from "./RulemapBuilder.jpg";
-
-if (!isStaging) {
-  return Astro.redirect("/404", 302);
-}
 
 export const frontmatter = {
   title: "Anleitungen und Hilfsmittel",
@@ -54,7 +49,7 @@ export const frontmatter = {
     </Hero>
 
     <section
-      class="breakout-wide my-80 grid grid-cols-1 gap-40 md:grid-cols-2 lg:grid-cols-3"
+      class="breakout-wide gap-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
     >
       <ToolCard
         title="Digitalcheck"

@@ -1,8 +1,7 @@
 ---
 import Link from "@/components/Link.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
-import { routes } from "@/config/navigation";
-import { isStaging } from "@/config/stage";
+import { routes } from "@/config/routes";
 import bmdsLogo from "@/images/logo/bmds-logo.png";
 import { Image } from "astro:assets";
 
@@ -14,9 +13,9 @@ const footerColumns: Record<string, FooterItem[]> = {
     { prefix: "Per Mail: ", path: ZFL_EMAIL.url, title: ZFL_EMAIL.display },
     routes.begleitungen,
     routes.schulungen,
-    ...(isStaging ? [routes.anleitungenUndHilfsmittel] : []),
+    routes.anleitungenUndHilfsmittel,
   ],
-  "Über das Ziel": routes.ueberUns.children ?? [],
+  "Über das Zentrum für Legistik": Object.values(routes.ueberUns.children),
   "": [
     routes.impressum,
     routes.datenschutz,
@@ -29,7 +28,7 @@ const footerColumns: Record<string, FooterItem[]> = {
 <footer
   class="ds-label-03-reg border-lavender-base flex w-full flex-row justify-center border-t-2 leading-snug text-gray-900 print:hidden"
 >
-  <div class="w-full max-w-6xl space-y-32 px-16 py-40 sm:space-y-40">
+  <div class="py-md space-y-md w-full max-w-6xl px-16">
     <nav
       class="grid grid-cols-1 items-start justify-between gap-32 sm:grid-cols-[repeat(3,minmax(0,18rem))] sm:grid-rows-[auto_auto]"
       aria-label="Schnellübersicht"
@@ -53,7 +52,7 @@ const footerColumns: Record<string, FooterItem[]> = {
       }
     </nav>
     <hr class="border-lavender-base mt-16 w-full border-t-2" />
-    <nav aria-label="Externe Verlinkungen" class="space-y-40">
+    <nav aria-label="Externe Verlinkungen" class="space-y-md">
       <div
         class="space-y-16 sm:flex sm:flex-row sm:items-center sm:gap-48 sm:space-y-0"
       >

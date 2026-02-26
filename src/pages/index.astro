@@ -1,13 +1,12 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
-
-import { Content as Vorteile } from "./_index/vorteile.md";
 import Card from "@/components/Card.astro";
 import Banner from "@/components/Banner.astro";
 import { Icon } from "astro-icon/components";
 import SupportCard from "@/components/blocks/SupportCard.astro";
 import Link from "@/components/Link.astro";
+import { routes } from "@/config/routes";
 
 export const frontmatter = {
   title: "Zentrum für Legistik",
@@ -31,46 +30,65 @@ export const frontmatter = {
         Das Angebot befindet sich aktuell im Aufbau und wird schrittweise mit
         Ihnen zusammen weiterentwickelt.
       </p>
-      <Link href="/daran-arbeiten-wir">Mehr dazu</Link>
+      <Link href={routes.ueberUns.children.daranArbeitenWir.path}
+        >Mehr dazu</Link
+      >
     </Banner>
-    <div class="py-80">
-      <Vorteile />
-    </div>
-    <section class="breakout bg-lavender-base py-40 md:py-80">
-      <div class="space-y-40">
+    <section>
+      <h2>Vorteile des Angebots für Sie</h2>
+      <ul>
+        <li>Operative Hilfe beim Visualisieren</li>
+        <li>
+          Unterstützung beim Erheben der Betroffenen-Bedürfnisse und
+          Umsetzungshürden
+        </li>
+        <li>Konkrete Formulierungsbeispiele und praktische Vorlagen</li>
+        <li>Vereinheitlichung von Checks und Arbeitshilfen</li>
+        <li>Praxisnahe Schulungen</li>
+        <li>Vernetzung und Austausch untereinander</li>
+      </ul>
+      <p>
+        <strong>Gut zu wissen:</strong> Das Zentrum für Legistik ist ein Bestandteil
+        des Handlungsfelds „Bessere Rechtsetzung" in der Modernisierungsagenda.
+      </p>
+    </section>
+    <section class="breakout bg-lavender-base">
+      <div class="space-y-md">
         <h2>Bereits verfügbare Angebote</h2>
         <Card>
           <Icon
-            class="text-cosmic-blue-400 hidden size-80 sm:block"
+            class="text-cosmic-blue-400 size-lg hidden sm:block"
             name="ic:twotone-widgets"
             slot="icon"
           />
           <h3>Interdisziplinäre Expertise für Ihr Regelungsvorhaben</h3>
-          <p class="kern-body">
+          <p>
             Wir begleiten Sie mit einem interdisziplinärem Kompetenzteam. Sie
             erhalten dadurch ein umfassendes Verständnis von Umsetzungsprozessen
             und gestalten Ihr Vorhaben praxisnah und bürokratiearm.
           </p>
-          <Link href="/begleitungen"
+          <Link href={routes.begleitungen.path}
             >Mehr Informationen zu interdisziplinären Kompetenzteams</Link
           >
         </Card>
         <Card>
           <Icon
             name="ic:twotone-fact-check"
-            class="text-cosmic-blue-400 hidden size-80 sm:block"
+            class="text-cosmic-blue-400 size-lg hidden sm:block"
             slot="icon"
           />
           <h3>In Schulungen praktisches Wissen erlangen</h3>
-          <p class="kern-body">
+          <p>
             Neue Methoden und Werkzeuge für die Rechtsetzung in
             umsetzungsorientierten Schulungen kennenlernen.
           </p>
-          <Link href="/schulungen">Mehr Informationen zu Schulungen</Link>
+          <Link href={routes.schulungen.path}
+            >Mehr Informationen zu Schulungen</Link
+          >
         </Card>
       </div>
     </section>
-    <section class="py-40 md:py-80">
+    <section>
       <SupportCard look="gray" />
     </section>
   </main>

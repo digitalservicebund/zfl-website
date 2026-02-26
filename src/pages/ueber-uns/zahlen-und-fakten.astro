@@ -86,8 +86,7 @@ const dsData: DsData = [
           text: "Interoperabilität",
         },
         count: "17",
-        description:
-          "Vorhaben hatten einen Interoperabilitätsbezug.",
+        description: "Vorhaben hatten einen Interoperabilitätsbezug.",
       },
       {
         badge: {
@@ -127,7 +126,7 @@ const dsData: DsData = [
 ---
 
 <Layout title={frontmatter.title}>
-  <main class="breakout-grid mb-80">
+  <main class="breakout-grid">
     <Hero>
       <h1>Das Zentrum für Legistik in Zahlen</h1>
       <p>
@@ -146,26 +145,26 @@ const dsData: DsData = [
       </p>
     </Hero>
 
-    {
-      dsData.map(({ title, elements }) => (
-        <Fragment>
-          <h2 class="mt-80! mb-40">{title}</h2>
-          <ul class="list-unstyled grid items-stretch justify-between gap-40 sm:grid-cols-2 lg:grid-cols-3">
-            {elements.map((el) => (
-              <li class="bg-lavender-base min-w-240 space-y-16 px-32 py-40">
-                <Badge look="white">
-                  <Icon slot="icon" name={`ic:${el.badge.iconName}`} />
-                  {el.badge.text}
-                </Badge>
-                <p>
-                  <strong class="ds-heading-02-bold">{el.count}</strong>
-                </p>
-                <p>{el.description}</p>
-              </li>
-            ))}
-          </ul>
-        </Fragment>
-      ))
-    }
+    <section>
+      {
+        dsData.map(({ title, elements }) => (
+          <Fragment>
+            <h2>{title}</h2>
+            <ul class="list-unstyled mt-md gap-md grid items-stretch justify-between sm:grid-cols-2 lg:grid-cols-3">
+              {elements.map((el) => (
+                <li class="bg-lavender-base p-md min-w-240 space-y-16">
+                  <Badge look="white">
+                    <Icon slot="icon" name={`ic:${el.badge.iconName}`} />
+                    {el.badge.text}
+                  </Badge>
+                  <p class="ds-heading-02-bold">{el.count}</p>
+                  <p>{el.description}</p>
+                </li>
+              ))}
+            </ul>
+          </Fragment>
+        ))
+      }
+    </section>
   </main>
 </Layout>

@@ -2,10 +2,9 @@
 import Kopfzeile from "@/components/global/Kopfzeile.astro";
 import Link from "@/components/Link.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
-import navigation from "@/config/navigation";
+import { routes, removeTrailingSlash } from "@/config/routes";
 import { isStaging } from "@/config/stage";
 import bundLogo from "@/images/logo/bund-logo.png";
-import { buildUrl, removeTrailingSlash } from "@/utils/routesHelper";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import { twMerge } from "tailwind-merge";
@@ -13,8 +12,8 @@ import { twMerge } from "tailwind-merge";
 const { pathname } = Astro.url;
 const currentPath = removeTrailingSlash(pathname);
 
-const headerNavigation = navigation.filter(
-  (item) => item.showInHeader !== false && (!item.isStagingOnly || isStaging),
+const headerNavigation = Object.values(routes).filter(
+  (item) => item.showInHeader && (isStaging || !("isStagingOnly" in item) || !item.isStagingOnly),
 );
 
 const basicLinkClasses = "flex items-center hover:bg-lavender-base";
@@ -31,7 +30,10 @@ const activeClasses = "border-cosmic-blue-base bg-lavender-base";
     class="border-lavender-base relative z-30 flex h-[72px] justify-between border-b-2 bg-white pl-16 md:px-16"
   >
     <!-- Logo and title -->
-    <a href={buildUrl("/")} class="link-unstyled flex items-center space-x-8">
+    <a
+      href={routes.home.path}
+      class="link-unstyled flex items-center space-x-8"
+    >
       <Image src={bundLogo} alt="Logo des Bundes" class="w-56" />
       <p
         class="ds-label-01-bold ml-16 flex flex-col text-xl text-black max-lg:hidden"
