@@ -21,31 +21,33 @@ export const frontmatter = {
 <Layout title={frontmatter.title}>
   <main class="breakout-grid">
     <Hero>
-      <h1>{frontmatter.title}</h1>
-      <p>
-        Auf dieser Seite finden Sie hilfreiche Links zu Anleitungen und
-        Hilfsmittel, die Sie bei der Regelungsarbeit unterstützen.
-      </p>
-      <p>
-        Unterschiedliche Checks und Arbeitshilfen (wie z. B. der <Link
-          href="https://digitalcheck.bund.de/">Digitalcheck</Link
-        >,
-        <Link href="https://www.gleichstellungs-check.de/"
-          >Gleichstellungscheck</Link
-        > oder <Link href="https://jugend-check.de/">Jugendcheck</Link>) zielen
-        in Teilen auf die gleiche Wirkung ab: Praxis- und digitaltaugliche
-        Regelungen und Bürokratierückbau. Bei der Zusammenführung diverser
-        Ansätze verfolgen wir das Ziel, Ihre Regelungsarbeit einfacher und
-        effizienter zu gestalten.
-      </p>
-      <p>
-        <Link
-          href={mailto(
-            ZFL_EMAIL.display,
-            `Interesse am Thema "Konsolidierung der Instrumente"`,
-          )}>Mitarbeiten an diesem Thema</Link
-        > (öffnet E-Mail)
-      </p>
+      <div class="breakout-wide">
+        <h1>{frontmatter.title}</h1>
+        <p>
+          Auf dieser Seite finden Sie hilfreiche Links zu Anleitungen und
+          Hilfsmittel, die Sie bei der Regelungsarbeit unterstützen.
+        </p>
+        <p>
+          Unterschiedliche Checks und Arbeitshilfen (wie z. B. der <Link
+            href="https://digitalcheck.bund.de/">Digitalcheck</Link
+          >,
+          <Link href="https://www.gleichstellungs-check.de/"
+            >Gleichstellungscheck</Link
+          > oder <Link href="https://jugend-check.de/">Jugendcheck</Link>)
+          zielen in Teilen auf die gleiche Wirkung ab: Praxis- und
+          digitaltaugliche Regelungen und Bürokratierückbau. Bei der
+          Zusammenführung diverser Ansätze verfolgen wir das Ziel, Ihre
+          Regelungsarbeit einfacher und effizienter zu gestalten.
+        </p>
+        <p>
+          <Link
+            href={mailto(
+              ZFL_EMAIL.display,
+              `Interesse am Thema "Konsolidierung der Instrumente"`,
+            )}>Mitarbeiten an diesem Thema</Link
+          > (öffnet E-Mail)
+        </p>
+      </div>
     </Hero>
 
     <section
