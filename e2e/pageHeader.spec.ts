@@ -11,7 +11,7 @@ test.describe("Header navigation", () => {
     await expect(desktopNav).toBeVisible();
 
     const activeLink = desktopNav.getByRole("link", {
-      name: "Begleitungen",
+      name: "Regelungsbegleitung",
     });
 
     await expect(activeLink).toHaveClass(/bg-lavender-base/);
@@ -49,7 +49,7 @@ test.describe("Header navigation", () => {
 
     // Active link inside mobile menu
     const activeLink = mobileMenu.getByRole("link", {
-      name: "Begleitungen",
+      name: "Regelungsbegleitung",
     });
 
     await expect(activeLink).toHaveClass(/bg-lavender-base/);
