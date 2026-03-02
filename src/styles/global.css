@@ -106,8 +106,8 @@
       padding: 14px 24px;
       font-weight: 700;
       letter-spacing: 0.16px;
-      line-height: clamp(1.25, 2, 2);
-      border-radius: 8px;
+      line-height: 2;
+      border-radius: 4px;
     }
 
     &.btn-primary {
@@ -148,7 +148,7 @@
   }
 
   tr.table-header-cell th {
-    padding: 16px 32px 16px 16px;
+    padding: 1rem 2rem 1rem 1rem;
     border-bottom: 2px solid var(--color-lavender-400, #eceef6);
     background: var(--color-lavender-base, #e3e6f2);
     color: var(--semantic-color-text, #000);
@@ -156,7 +156,7 @@
     letter-spacing: 0.16px;
   }
   tbody.table-body-cell tr td {
-    padding: 16px 32px 16px 16px;
+    padding: 1rem 2rem 1rem 1rem;
     vertical-align: top;
     border-bottom: 1px solid var(--color-lavender-400, #eceef6);
     overflow-wrap: break-word;
