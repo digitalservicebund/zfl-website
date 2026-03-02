@@ -1,5 +1,6 @@
 ---
 import Badge from "@/components/Badge.astro";
+import Hero from "@/components/Hero.astro";
 import SideNavLayout from "@/layouts/SideNavLayout.astro";
 import { Icon } from "astro-icon/components";
 
@@ -125,7 +126,7 @@ const dsData: DsData = [
 ---
 
 <SideNavLayout title={frontmatter.title}>
-  <section>
+  <Hero look="darker">
     <h1>Das Zentrum für Legistik in Zahlen</h1>
     <p>
       Seit Januar 2023 setzt die Bundesregierung den Fokus auf digitaltaugliche
@@ -141,7 +142,9 @@ const dsData: DsData = [
       jetzt im Zentrum für Legistik schrittweise zusammengeführt und
       weiterentwickelt.
     </p>
+  </Hero>
 
+  <section>
     {
       dsData.map(({ title, elements }) => (
         <Fragment>

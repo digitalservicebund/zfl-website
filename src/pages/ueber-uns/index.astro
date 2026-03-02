@@ -1,4 +1,5 @@
 ---
+import Hero from "@/components/Hero.astro";
 import Link from "@/components/Link.astro";
 import { routes } from "@/config/routes.ts";
 import { isStaging } from "@/config/stage";
@@ -16,8 +17,10 @@ export const frontmatter = {
 ---
 
 <SideNavLayout title={frontmatter.title}>
-  <section class="space-y-8">
+  <Hero look="darker">
     <h1>{frontmatter.title}</h1>
+  </Hero>
+  <section>
     <Link class="block" href={routes.ueberUns.children.zahlenUndFakten.path}
       >Zahlen und Fakten</Link
     >

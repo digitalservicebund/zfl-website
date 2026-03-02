@@ -1,6 +1,8 @@
 ---
 import Badge from "@/components/Badge.astro";
 import Card from "@/components/Card.astro";
+import Hero from "@/components/Hero.astro";
+
 import Link from "@/components/Link.astro";
 import TimelineList from "@/components/TimelineList.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
@@ -14,7 +16,7 @@ export const frontmatter = {
 ---
 
 <SideNavLayout title={frontmatter.title}>
-  <section>
+  <Hero look="darker">
     <h1>Daran arbeiten wir</h1>
     <p>
       Das Zentrum für Legistik wird gemeinsam mit Ihnen als Legistinnen und
@@ -44,9 +46,9 @@ export const frontmatter = {
         >Weitere Informationen zur Modernisierungsagenda</Link
       >
     </p>
-  </section>
+  </Hero>
 
-  <section class="bg-lavender-base">
+  <section>
     <h2>Aktuelle Arbeitspakete in Konzeption und Umsetzung</h2>
     <p>
       In dieser Phase erarbeiten wir fachliche Anforderungen, prüfen Lösungswege
@@ -54,7 +56,7 @@ export const frontmatter = {
       dieser Stelle stellen die Praxistauglichkeit sicher.
     </p>
 
-    <Card wrapperClass="mt-md">
+    <Card wrapperClass="mt-md bg-lavender-base">
       <h3>Strukturierung der Frühphase für Regelungsvorhaben</h3>
       <p>
         Ein gutes, frühzeitiges Verständnis von Anforderungen und Umfeld ist die
@@ -117,9 +119,7 @@ export const frontmatter = {
         > (öffnet E-Mail)
       </p>
     </Card>
-  </section>
 
-  <section>
     <h2 class="mb-40">Das ist neu</h2>
     <TimelineList>
       <li>
