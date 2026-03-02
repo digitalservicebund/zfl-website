@@ -1,6 +1,6 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
-import Layout from "@/layouts/Layout.astro";
+import BreakoutLayout from "@/layouts/BreakoutLayout.astro";
 import Link from "@/components/Link.astro";
 
 export async function getStaticPaths() {
@@ -19,8 +19,6 @@ const { page } = Astro.props;
 const { Content } = await page.render();
 ---
 
-<Layout title={page.data.title}>
-  <main class="breakout-grid mb-lg">
-    <Content components={{ a: Link }} />
-  </main>
-</Layout>
+<BreakoutLayout title={page.data.title}>
+  <Content components={{ a: Link }} />
+</BreakoutLayout>

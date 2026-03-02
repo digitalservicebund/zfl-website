@@ -1,7 +1,6 @@
 ---
 import Badge from "@/components/Badge.astro";
-import Hero from "@/components/Hero.astro";
-import Layout from "@/layouts/Layout.astro";
+import SideNavLayout from "@/layouts/SideNavLayout.astro";
 import { Icon } from "astro-icon/components";
 
 export const frontmatter = {
@@ -125,46 +124,42 @@ const dsData: DsData = [
 ];
 ---
 
-<Layout title={frontmatter.title}>
-  <main class="breakout-grid">
-    <Hero>
-      <h1>Das Zentrum für Legistik in Zahlen</h1>
-      <p>
-        Seit Januar 2023 setzt die Bundesregierung den Fokus auf
-        digitaltaugliche Regelungen (Digitalcheck) und begleitet Legistinnen und
-        Legisten in den Bundesministerien auf dem Weg dorthin.
-      </p>
-      <p>2026 markiert den Beginn des Zentrum für Legistik.</p>
-      <p>
-        Die Daten auf dieser Seite zeigen, wie unsere Instrumente und
-        Unterstützungsangebote – zum Beispiel Digitalcheck, Begleitungen,
-        Schulungen und Prozessvisualisierung – die Gesetzgebung in der Praxis
-        verändern. Die verschiedenen Werkzeuge und Prozesse der Frühphase werden
-        jetzt im Zentrum für Legistik schrittweise zusammengeführt und
-        weiterentwickelt.
-      </p>
-    </Hero>
+<SideNavLayout title={frontmatter.title}>
+  <section>
+    <h1>Das Zentrum für Legistik in Zahlen</h1>
+    <p>
+      Seit Januar 2023 setzt die Bundesregierung den Fokus auf digitaltaugliche
+      Regelungen (Digitalcheck) und begleitet Legistinnen und Legisten in den
+      Bundesministerien auf dem Weg dorthin.
+    </p>
+    <p>2026 markiert den Beginn des Zentrum für Legistik.</p>
+    <p>
+      Die Daten auf dieser Seite zeigen, wie unsere Instrumente und
+      Unterstützungsangebote – zum Beispiel Digitalcheck, Begleitungen,
+      Schulungen und Prozessvisualisierung – die Gesetzgebung in der Praxis
+      verändern. Die verschiedenen Werkzeuge und Prozesse der Frühphase werden
+      jetzt im Zentrum für Legistik schrittweise zusammengeführt und
+      weiterentwickelt.
+    </p>
 
-    <section>
-      {
-        dsData.map(({ title, elements }) => (
-          <Fragment>
-            <h2>{title}</h2>
-            <ul class="list-unstyled mt-md gap-md grid items-stretch justify-between sm:grid-cols-2 lg:grid-cols-3">
-              {elements.map((el) => (
-                <li class="bg-lavender-base p-md min-w-240 space-y-16">
-                  <Badge look="white">
-                    <Icon slot="icon" name={`ic:${el.badge.iconName}`} />
-                    {el.badge.text}
-                  </Badge>
-                  <p class="ds-heading-02-bold">{el.count}</p>
-                  <p>{el.description}</p>
-                </li>
-              ))}
-            </ul>
-          </Fragment>
-        ))
-      }
-    </section>
-  </main>
-</Layout>
+    {
+      dsData.map(({ title, elements }) => (
+        <Fragment>
+          <h2>{title}</h2>
+          <ul class="list-unstyled mt-md gap-md grid items-stretch justify-between sm:grid-cols-2 lg:grid-cols-3">
+            {elements.map((el) => (
+              <li class="bg-lavender-base p-md min-w-240 space-y-16">
+                <Badge look="white">
+                  <Icon slot="icon" name={`ic:${el.badge.iconName}`} />
+                  {el.badge.text}
+                </Badge>
+                <p class="ds-heading-02-bold">{el.count}</p>
+                <p>{el.description}</p>
+              </li>
+            ))}
+          </ul>
+        </Fragment>
+      ))
+    }
+  </section>
+</SideNavLayout>
