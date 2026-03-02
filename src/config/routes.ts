@@ -30,7 +30,7 @@ export const routes = {
   },
   begleitungen: {
     path: buildUrl("/begleitungen"),
-    title: "Begleitungen",
+    title: "Regelungsbegleitung",
     showInHeader: true,
   },
   schulungen: {
