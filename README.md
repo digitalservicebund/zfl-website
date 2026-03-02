@@ -1,4 +1,4 @@
-# Zentrum für Legistik — Website
+# Zentrum für Legistik (ZfL) — Website
 
 This is the new implementation for Zentrum für Legistik, based on Astro and Tailwind.
 
