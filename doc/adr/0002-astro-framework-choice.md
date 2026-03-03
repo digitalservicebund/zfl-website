@@ -21,12 +21,6 @@ The website serves as the primary public-facing presence for Zentrum für Legist
 
 We will adopt Astro as the primary framework for this project, using its static site generation capabilities with the option to add dynamic features as needed.
 
-Key aspects of the implementation:
-
-- Use Astro's static generation for optimal performance and SEO
-- Structure the application with Astro components for maintainable, reusable UI elements
-- Utilize TypeScript for type safety and improved developer experience
-
 ## Consequences
 
 ### Positive
@@ -34,10 +28,12 @@ Key aspects of the implementation:
 - **Performance**: Static site generation provides excellent loading speeds and Core Web Vitals
 - **SEO**: Server-side rendering and static generation improve search engine optimization
 - **Developer Experience**: Modern tooling with TypeScript, hot reloading, and familiar React-like component syntax
-- **Flexibility**: Easy transition to dynamic features when needed (forms, user interactions)
+- **Flexibility**: Easy transition to dynamic features when needed (forms, user interactions) with islands architecture
 - **Scalability**: Can handle both static content and dynamic features without framework migration
 - **Ecosystem**: Rich ecosystem of integrations and community support
 - **Cost Efficiency**: Static hosting reduces server costs and improves reliability
+- **API Integration**: Easy to add API routes for dynamic content
+- **CMS Integration**: Static generation works well with headless CMS solutions
 
 ### Negative
 
@@ -65,15 +61,3 @@ Key aspects of the implementation:
 
 - **Pros**: Vue ecosystem, good static generation
 - **Cons**: Vue learning curve, smaller TypeScript integration compared to Astro
-
-## Future Considerations
-
-This architecture positions the project well for future enhancements:
-
-- **Dynamic Features**: Islands architecture allows gradual adoption of interactivity
-- **API Integration**: Easy to add API routes for dynamic content
-- **CMS Integration**: Static generation works well with headless CMS solutions
-
-## Notes
-
-Astro's "islands" architecture provides the perfect balance for a site that is primarily static but may need dynamic features in the future. The framework's focus on performance and developer experience aligns well with the project's goals.
