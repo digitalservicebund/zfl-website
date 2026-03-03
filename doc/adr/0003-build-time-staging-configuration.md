@@ -1,4 +1,4 @@
-# 3. Build-time Stage Configuration via Environment Variables in Astro
+# 3. Implement Build-time Staging Configuration via Environment Variables
 
 ## Status
 
