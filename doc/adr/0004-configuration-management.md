@@ -1,4 +1,4 @@
-# 5. Configuration Management
+# 4. Configure App through .env and Config Files
 
 ## Status
 
@@ -6,7 +6,7 @@
 
 ## Context
 
-We need a consistent and clear way to manage configuration variables across the application. This includes environment-specific variables (e.g., for staging vs. production), public tokens, and general application constants. The configuration should be type-safe and easily accessible within the Astro framework.
+We need a consistent and clear way to manage configuration variables across the application. This includes environment-specific variables (e.g. for staging vs. production), public tokens, and general application constants. The configuration should be type-safe and easily accessible within the Astro framework.
 
 ## Decision
 
