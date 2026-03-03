@@ -1,5 +1,6 @@
 ---
 import { getSectionLinks } from "@/config/routes";
+import { twMerge } from "tailwind-merge";
 
 const { pathname } = Astro.url;
 const sectionLinks = getSectionLinks(pathname);
@@ -9,14 +10,20 @@ const sectionLinks = getSectionLinks(pathname);
   sectionLinks.length > 0 && (
     <nav
       aria-label="Seitenleistennavigation"
-      class="bg-lavender-200 p-20 max-lg:hidden"
+      class="bg-lavender-200 p-16 max-lg:hidden border-r-2 border-lavender-base"
     >
-      <ul class="list-unstyled space-y-8 sticky top-20">
+      <ul class="list-unstyled space-y-8 sticky top-16">
         {sectionLinks.map((link) => (
-          <li>
+          <li class="text-sm">
             <a
               href={link.path}
               aria-current={pathname === link.path ? "page" : undefined}
+              class={twMerge(
+                "block rounded-xl px-16 py-8 no-underline",
+                pathname === link.path
+                  ? "bg-cosmic-blue-base font-semibold text-white"
+                  : "hover:bg-white",
+              )}
             >
               {link.title}
             </a>
@@ -26,18 +33,3 @@ const sectionLinks = getSectionLinks(pathname);
     </nav>
   )
 }
-
-<style>
-  @reference "@/styles/global.css";
-  a {
-    @apply block rounded-xl px-16 py-8 no-underline;
-
-    &:hover:not([aria-current="page"]) {
-      @apply bg-white;
-    }
-
-    &[aria-current="page"] {
-      @apply bg-cosmic-blue-base font-semibold text-white;
-    }
-  }
-</style>
