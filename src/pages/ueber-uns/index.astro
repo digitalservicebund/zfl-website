@@ -2,10 +2,10 @@
 import Hero from "@/components/Hero.astro";
 import Link from "@/components/Link.astro";
 import { routes } from "@/config/routes.ts";
-import { isStaging } from "@/config/stage";
+import { isPreview, isStaging } from "@/config/stage";
 import SideNavLayout from "@/layouts/SideNavLayout.astro";
 
-if (!isStaging) {
+if (!isStaging || !isPreview) {
   return Astro.redirect("/404", 302);
 }
 
