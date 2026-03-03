@@ -1,4 +1,4 @@
-# 6. Use NGINX as production server for Astro
+# 5. Use NGINX as production server for Astro
 
 ## Status
 
