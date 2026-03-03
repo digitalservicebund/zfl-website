@@ -1,0 +1,13 @@
+---
+import SidebarNavigation from "@/components/global/SidebarNavigation.astro";
+import BaseLayout from "./BaseLayout.astro";
+---
+
+<BaseLayout title={Astro.props.title}>
+  <div class="flex flex-col lg:flex-row">
+    <SidebarNavigation />
+    <main class="breakout-grid flex-1">
+      <slot />
+    </main>
+  </div>
+</BaseLayout>

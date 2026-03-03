@@ -1,12 +1,12 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import Hero from "@/components/Hero.astro";
-import Card from "@/components/Card.astro";
 import Banner from "@/components/Banner.astro";
-import { Icon } from "astro-icon/components";
 import SupportCard from "@/components/blocks/SupportCard.astro";
+import Card from "@/components/Card.astro";
+import Hero from "@/components/Hero.astro";
 import Link from "@/components/Link.astro";
 import { routes } from "@/config/routes";
+import BreakoutLayout from "@/layouts/BreakoutLayout.astro";
+import { Icon } from "astro-icon/components";
 
 export const frontmatter = {
   title: "Zentrum für Legistik",
@@ -15,81 +15,77 @@ export const frontmatter = {
 };
 ---
 
-<Layout title="">
-  <main class="breakout-grid">
-    <Hero look="blue">
-      <h1>Bessere Rechtsetzung in allen Phasen Ihres Vorhabens</h1>
-      <p slot="subtitle">
-        Das Zentrum für Legistik unterstützt Sie bei der Ausarbeitung von
-        Regelungen. Sie stellen damit sicher, dass Ihr Vorhaben
-        betroffenenzentriert, praxistauglich und digital umsetzbar ist.
-      </p>
-    </Hero>
-    <Banner>
-      <p class="mb-0 max-w-full">
-        Das Angebot befindet sich aktuell im Aufbau und wird schrittweise mit
-        Ihnen zusammen weiterentwickelt.
-      </p>
-      <Link href={routes.ueberUns.children.daranArbeitenWir.path}
-        >Mehr dazu</Link
-      >
-    </Banner>
-    <section>
-      <h2>Vorteile des Angebots für Sie</h2>
-      <ul>
-        <li>Operative Hilfe beim Visualisieren</li>
-        <li>
-          Unterstützung beim Erheben der Betroffenen-Bedürfnisse und
-          Umsetzungshürden
-        </li>
-        <li>Konkrete Formulierungsbeispiele und praktische Vorlagen</li>
-        <li>Vereinheitlichung von Checks und Arbeitshilfen</li>
-        <li>Praxisnahe Schulungen</li>
-        <li>Vernetzung und Austausch untereinander</li>
-      </ul>
-      <p>
-        <strong>Gut zu wissen:</strong> Das Zentrum für Legistik ist ein Bestandteil
-        des Handlungsfelds „Bessere Rechtsetzung" in der Modernisierungsagenda.
-      </p>
-    </section>
-    <section class="breakout bg-lavender-base">
-      <div class="space-y-md">
-        <h2>Bereits verfügbare Angebote</h2>
-        <Card>
-          <Icon
-            class="text-cosmic-blue-400 size-lg hidden sm:block"
-            name="ic:twotone-widgets"
-            slot="icon"
-          />
-          <h3>Interdisziplinäre Expertise für Ihr Regelungsvorhaben</h3>
-          <p>
-            Wir begleiten Sie mit einem interdisziplinärem Kompetenzteam. Sie
-            erhalten dadurch ein umfassendes Verständnis von Umsetzungsprozessen
-            und gestalten Ihr Vorhaben praxisnah und bürokratiearm.
-          </p>
-          <Link href={routes.begleitungen.path}
-            >Mehr Informationen zu interdisziplinären Kompetenzteams</Link
-          >
-        </Card>
-        <Card>
-          <Icon
-            name="ic:twotone-fact-check"
-            class="text-cosmic-blue-400 size-lg hidden sm:block"
-            slot="icon"
-          />
-          <h3>In Schulungen praktisches Wissen erlangen</h3>
-          <p>
-            Neue Methoden und Werkzeuge für die Rechtsetzung in
-            umsetzungsorientierten Schulungen kennenlernen.
-          </p>
-          <Link href={routes.schulungen.path}
-            >Mehr Informationen zu Schulungen</Link
-          >
-        </Card>
-      </div>
-    </section>
-    <section>
-      <SupportCard look="gray" />
-    </section>
-  </main>
-</Layout>
+<BreakoutLayout title="">
+  <Hero look="blue">
+    <h1>Bessere Rechtsetzung in allen Phasen Ihres Vorhabens</h1>
+    <p slot="subtitle">
+      Das Zentrum für Legistik unterstützt Sie bei der Ausarbeitung von
+      Regelungen. Sie stellen damit sicher, dass Ihr Vorhaben
+      betroffenenzentriert, praxistauglich und digital umsetzbar ist.
+    </p>
+  </Hero>
+  <Banner>
+    <p class="mb-0 max-w-full">
+      Das Angebot befindet sich aktuell im Aufbau und wird schrittweise mit
+      Ihnen zusammen weiterentwickelt.
+    </p>
+    <Link href={routes.ueberUns.children.daranArbeitenWir.path}>Mehr dazu</Link>
+  </Banner>
+  <section>
+    <h2>Vorteile des Angebots für Sie</h2>
+    <ul>
+      <li>Operative Hilfe beim Visualisieren</li>
+      <li>
+        Unterstützung beim Erheben der Betroffenen-Bedürfnisse und
+        Umsetzungshürden
+      </li>
+      <li>Konkrete Formulierungsbeispiele und praktische Vorlagen</li>
+      <li>Vereinheitlichung von Checks und Arbeitshilfen</li>
+      <li>Praxisnahe Schulungen</li>
+      <li>Vernetzung und Austausch untereinander</li>
+    </ul>
+    <p>
+      <strong>Gut zu wissen:</strong> Das Zentrum für Legistik ist ein Bestandteil
+      des Handlungsfelds „Bessere Rechtsetzung" in der Modernisierungsagenda.
+    </p>
+  </section>
+  <section class="breakout bg-lavender-base">
+    <div class="space-y-md">
+      <h2>Bereits verfügbare Angebote</h2>
+      <Card>
+        <Icon
+          class="text-cosmic-blue-400 size-lg hidden sm:block"
+          name="ic:twotone-widgets"
+          slot="icon"
+        />
+        <h3>Interdisziplinäre Expertise für Ihr Regelungsvorhaben</h3>
+        <p>
+          Wir begleiten Sie mit einem interdisziplinärem Kompetenzteam. Sie
+          erhalten dadurch ein umfassendes Verständnis von Umsetzungsprozessen
+          und gestalten Ihr Vorhaben praxisnah und bürokratiearm.
+        </p>
+        <Link href={routes.begleitungen.path}
+          >Mehr Informationen zu interdisziplinären Kompetenzteams</Link
+        >
+      </Card>
+      <Card>
+        <Icon
+          name="ic:twotone-fact-check"
+          class="text-cosmic-blue-400 size-lg hidden sm:block"
+          slot="icon"
+        />
+        <h3>In Schulungen praktisches Wissen erlangen</h3>
+        <p>
+          Neue Methoden und Werkzeuge für die Rechtsetzung in
+          umsetzungsorientierten Schulungen kennenlernen.
+        </p>
+        <Link href={routes.schulungen.path}
+          >Mehr Informationen zu Schulungen</Link
+        >
+      </Card>
+    </div>
+  </section>
+  <section>
+    <SupportCard look="gray" />
+  </section>
+</BreakoutLayout>

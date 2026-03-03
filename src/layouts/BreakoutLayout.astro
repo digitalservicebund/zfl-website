@@ -1,0 +1,9 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+---
+
+<BaseLayout title={Astro.props.title}>
+  <main class="breakout-grid">
+    <slot />
+  </main>
+</BaseLayout>

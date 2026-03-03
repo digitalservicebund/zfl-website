@@ -80,3 +80,21 @@ export const routes = {
     showInHeader: false,
   },
 } satisfies Record<string, Route>;
+
+export const getSectionLinks = (pathname: string): Route[] => {
+  const allSections: Route[] = Object.values(routes);
+
+  const currentSection = allSections.find((section) => {
+    if (section.path === pathname) return true;
+
+    const children = section.children ? Object.values(section.children) : [];
+
+    return children.some((child) => child.path === pathname);
+  });
+
+  const sectionChildren: Route[] = currentSection?.children
+    ? Object.values(currentSection.children)
+    : [];
+
+  return currentSection ? [currentSection, ...sectionChildren] : [];
+};

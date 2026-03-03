@@ -1,27 +1,25 @@
 ---
 import Hero from "@/components/Hero.astro";
 import Link from "@/components/Link.astro";
-import Layout from "@/layouts/Layout.astro";
+import BreakoutLayout from "@/layouts/BreakoutLayout.astro";
 import { getAllRoutes } from "@/utils/routesHelper";
 
 const pages = await getAllRoutes();
 ---
 
-<Layout title="Sitemap">
-  <main class="breakout-grid">
-    <Hero>
-      <h1>Sitemap</h1>
-    </Hero>
-    <section>
-      <ul>
-        {
-          pages.map((page) => (
-            <li>
-              <Link href={page.url}>{page.title}</Link>
-            </li>
-          ))
-        }
-      </ul>
-    </section>
-  </main>
-</Layout>
+<BreakoutLayout title="Sitemap">
+  <Hero>
+    <h1>Sitemap</h1>
+  </Hero>
+  <section>
+    <ul>
+      {
+        pages.map((page) => (
+          <li>
+            <Link href={page.url}>{page.title}</Link>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BreakoutLayout>
