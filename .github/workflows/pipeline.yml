@@ -11,9 +11,6 @@ on:
   # Allow running this workflow manually
   workflow_dispatch:
 
-permissions:
-  contents: read
-
 env:
   PACKAGE_NAME: zfl-website
   IMAGE_NAME: digitalservicebund/zfl-website
@@ -30,11 +27,15 @@ jobs:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   check-and-unit-test:
+    permissions:
+      contents: read
     uses: ./.github/workflows/check-and-unit-test.yml
     secrets:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   run-e2e-a11y-tests:
+    permissions:
+      contents: read
     uses: ./.github/workflows/playwright.yml
     secrets:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -120,6 +121,8 @@ jobs:
       - build-and-push-image
     if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/staging/')
     concurrency: deploy
+    permissions:
+      contents: read
     environment:
       name: staging
       url: https://zfl.dev.tech.digitalservice.dev
@@ -143,6 +146,8 @@ jobs:
       - build-and-push-image
     if: github.ref == 'refs/heads/main'
     concurrency: deploy
+    permissions:
+      contents: read
     environment:
       name: production
       url: https://zfl.prod.tech.digitalservice.dev

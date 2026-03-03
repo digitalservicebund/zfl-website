@@ -1,32 +1,8 @@
-# 4. Use tailwind-variants for component variants
+# Using tailwind-variants for component variants
 
-## Status
+This project uses `tailwind-variants` to manage component variants. It provides a clean API to define variants and compose them.
 
-- 2026-02-03: Accepted
-
-## Context
-
-We need a way to manage component variants in a clean and maintainable way. Components often have different styles based on their properties. For example, a badge can have different colors. We want to avoid complex and hard-to-read class strings in our components.
-
-## Decision
-
-We will use `tailwind-variants` to manage component variants. It provides a clean API to define variants and compose them. It also integrates well with Tailwind CSS and Astro.
-
-## Consequences
-
-### Positive
-
-- **Clean API**: `tailwind-variants` provides a clean and readable API to define component variants.
-- **Maintainable**: It's easy to add, remove, or change variants.
-- **Type-Safe**: It provides type safety for variants.
-- **Composition**: It allows composing variants.
-- **Integration**: It integrates well with Tailwind CSS and Astro.
-
-### Negative
-
-- **New Dependency**: It adds a new dependency to the project.
-
-## Example
+## How to use
 
 Here is an example of how to use `tailwind-variants` in an Astro component:
 

@@ -38,7 +38,7 @@ Environment-specific code will be conditionally included/excluded from the final
 - Changing stage configuration requires a rebuild and redeployment
 - Not suitable for per-user or runtime environment switching
 
-## Example
+## Implementation notes
 
 ```ts
 // src/config/stage.ts
@@ -56,9 +56,3 @@ import { isStaging } from "@/config/stage";
 {isStaging && <StagingBanner />}
 {isProduction && <ProductionAnalytics />}
 ```
-
-## Notes
-
-This implementation provides stage-based configuration rather than individual feature flags. If future requirements include feature toggling beyond stage differences, a separate feature flag system can be implemented alongside this stage configuration.
-
-If future requirements include runtime toggling, experimentation, or user-specific flags, this approach can be extended or replaced with a server-side or third-party feature flag service without changing configuration call sites.
