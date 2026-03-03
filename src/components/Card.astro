@@ -2,16 +2,17 @@
 import type { HTMLAttributes } from "astro/types";
 import { tv, type VariantProps } from "tailwind-variants";
 
-interface Props extends HTMLAttributes<"div">, VariantProps<typeof styles> {
+interface Props extends HTMLAttributes<"div">, VariantProps<typeof cardStyles> {
   contentClass?: string;
-  wrapperClass?: string;
+  class?: string;
 }
 
-export const styles = tv({
+export const cardStyles = tv({
   base: "py-md sm:px-lg scroll-my-md flex flex-row gap-32 rounded-lg bg-white px-16",
   variants: {
     look: {
       gray: "bg-lavender-base",
+      lavender: "bg-lavender-400",
     },
   },
 });
@@ -20,13 +21,17 @@ const contentStyles = tv({
   base: "flex flex-col",
 });
 
-const { contentClass, wrapperClass, look, ...attrs } = Astro.props;
+const iconStyle = tv({
+  base: "[&_svg]:text-cosmic-blue-400 [&_svg]:size-lg shrink-0 max-sm:hidden [&_svg]:hidden [&_svg]:sm:block",
+});
+
+const { class: className, contentClass, look, ...attrs } = Astro.props;
 ---
 
-<div class={styles({ look, class: wrapperClass })} {...attrs}>
+<div class={cardStyles({ look, className })} {...attrs}>
   {
     Astro.slots.icon && (
-      <div class="shrink-0 max-sm:hidden">
+      <div class={iconStyle()}>
         <slot name="icon" />
       </div>
     )
