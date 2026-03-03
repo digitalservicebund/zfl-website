@@ -1,4 +1,4 @@
-# 2. Astro Framework Adoption for Static Content Site
+# 2. Adopt Astro for Static Content Site
 
 ## Status
 
