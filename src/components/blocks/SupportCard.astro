@@ -1,7 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
 import Card, { cardStyles } from "@/components/Card.astro";
-import Link from "@/components/Link.astro";
 import type { VariantProps } from "tailwind-variants";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 
@@ -18,10 +17,10 @@ const { look } = Astro.props;
       Wir unterstützen Sie gerne persönlich in allen Phasen der Regelungsarbeit.
     </p>
     <p>
-      Telefon: <Link href={ZFL_PHONE.url}>{ZFL_PHONE.display}</Link>
+      Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>
     </p>
     <p>
-      E-Mail: <Link href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</Link>
+      E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
     </p>
   </div>
 </Card>

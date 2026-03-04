@@ -1,7 +1,6 @@
 ---
 import Card from "@/components/Card.astro";
 import Hero from "@/components/Hero.astro";
-import Link from "@/components/Link.astro";
 import SupportCard from "@/components/blocks/SupportCard.astro";
 import { ZFL_EMAIL } from "@/config/constants.ts";
 import schulungenImage from "@/images/Schulungen.png";
@@ -75,8 +74,8 @@ export const frontmatter = {
         <h3>Anmeldung</h3>
         <p>
           Schicken Sie uns für eine Anmeldung den Schulungs- oder Modul-Namen
-          und Termin an die E-Mail <Link href={ZFL_EMAIL.url}
-            >{ZFL_EMAIL.display}</Link
+          und Termin an die E-Mail <a href={ZFL_EMAIL.url}
+            >{ZFL_EMAIL.display}</a
           > und wir bestätigen die Anmeldung.
         </p>
       </Card>
@@ -94,9 +93,9 @@ export const frontmatter = {
       <h4>Tagung „Ambivalenzen moderner Verwaltung“</h4>
       <p>
         Zweitätige Tagung am 26. und 27. März 2026 in Speyer<br />
-        <Link
+        <a
           href="https://weiterbildung.uni-speyer.de/suche/veranstaltungsdetails.html?action%5B26%5D=course&courseId=588-C-4388100&rowIndex=11"
-          >Mehr Informationen und Anmeldung</Link
+          >Mehr Informationen und Anmeldung</a
         >
       </p>
 
@@ -105,9 +104,9 @@ export const frontmatter = {
         Lehr- und Weiterbildungsveranstaltungen zu den Themen Legistik und
         Rechtsetzung – öffnen Sie hierzu den Bereich "Lehre und Weiterbildung"<br
         />
-        <Link
+        <a
           href="https://www.uni-speyer.de/lehrstuehle/level-2-1/prof-dr-ruth-weber/speyerer-zentrum-fuer-gesetzgebung"
-          >Mehr Informationen</Link
+          >Mehr Informationen</a
         >
       </p>
 
@@ -116,8 +115,8 @@ export const frontmatter = {
       <h4>Einführung in die Grundlagen der Legistik</h4>
       <p>
         OnDEA bietet Video-Tutorials zu unterschiedlichen Themen an<br />
-        <Link href="https://www.ondea.de/DE/ZfL/ZfL_node.html"
-          >Videos anzeigen</Link
+        <a href="https://www.ondea.de/DE/ZfL/ZfL_node.html"
+          >Videos anzeigen</a
         >
       </p>
     </section>

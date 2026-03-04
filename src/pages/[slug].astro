@@ -1,7 +1,6 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
-import Link from "@/components/Link.astro";
 
 export async function getStaticPaths() {
   const pages = await getCollection("pages");
@@ -21,6 +20,6 @@ const { Content } = await page.render();
 
 <Layout title={page.data.title}>
   <main class="breakout-grid mb-lg">
-    <Content components={{ a: Link }} />
+    <Content />
   </main>
 </Layout>

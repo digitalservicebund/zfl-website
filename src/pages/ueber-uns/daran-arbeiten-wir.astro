@@ -1,12 +1,12 @@
 ---
 import Card from "@/components/Card.astro";
 import Hero from "@/components/Hero.astro";
-import Link from "@/components/Link.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import Layout from "@/layouts/Layout.astro";
 import { mailto } from "@/utils/mailtoHelper";
 import TimelineList from "@/components/TimelineList.astro";
 import Badge from "@/components/Badge.astro";
+import { routes } from "@/config/routes";
 
 export const frontmatter = {
   title: "Daran arbeiten wir",
@@ -34,17 +34,17 @@ export const frontmatter = {
       </p>
       <p>
         Kontaktieren Sie uns zu diesem Zweck unter
-        <Link href={ZFL_PHONE.url}>{ZFL_PHONE.display}</Link>
+        <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>
         oder
-        <Link href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</Link>.
+        <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>.
       </p>
       <p>
         Gut zu wissen: Das Zentrum für Legistik ist ein Bestandteil des
         Handlungsfelds „Bessere Rechtsetzung“ in der Modernisierungsagenda.<br
         />
-        <Link
+        <a
           href="https://bmds.bund.de/themen/staatsmodernisierung/modernisierungsagenda-bund#c2065"
-          >Weitere Informationen zur Modernisierungsagenda</Link
+          >Weitere Informationen zur Modernisierungsagenda</a
         >
       </p>
     </Hero>
@@ -64,11 +64,11 @@ export const frontmatter = {
           die Basis dafür, Gesetze wirksam und effizient umzusetzen. Wie können
           wir diese frühe Phase in der Rechtsetzung, für Legistinnen und
           Legisten, besser strukturieren und unterstützen?<br />
-          <Link
+          <a
             href={mailto(
               ZFL_EMAIL.display,
               `Interesse am Thema "Strukturierung der Frühphase für Regelungsvorhaben"`,
-            )}>Mitarbeiten an diesem Thema</Link
+            )}>Mitarbeiten an diesem Thema</a
           >
           (öffnet E-Mail)
         </p>
@@ -76,21 +76,21 @@ export const frontmatter = {
         <h3 class="mt-32">Konsolidierung der Instrumente</h3>
         <p>
           Unterschiedliche Checks und Arbeitshilfen (wie z.&nbsp;B. der
-          <Link href="https://digitalcheck.bund.de/">Digitalcheck</Link>,
-          <Link href="https://www.gleichstellungs-check.de/"
-            >Gleichstellungscheck</Link
+          <a href="https://digitalcheck.bund.de/">Digitalcheck</a>,
+          <a href="https://www.gleichstellungs-check.de/"
+            >Gleichstellungscheck</a
           >
           oder
-          <Link href="https://jugend-check.de/">Jugendcheck</Link>) zielen in
-          Teilen auf die gleiche Wirkung ab: Praxis- und digitaltaugliche
-          Regelungen und Bürokratierückbau. Bei der Zusammenführung diverser
-          Ansätze verfolgen wir das Ziel, Ihre Regelungsarbeit einfacher und
-          effizienter zu gestalten.<br />
-          <Link
+          <a href="https://jugend-check.de/">Jugendcheck</a>) zielen in Teilen
+          auf die gleiche Wirkung ab: Praxis- und digitaltaugliche Regelungen
+          und Bürokratierückbau. Bei der Zusammenführung diverser Ansätze
+          verfolgen wir das Ziel, Ihre Regelungsarbeit einfacher und effizienter
+          zu gestalten.<br />
+          <a
             href={mailto(
               ZFL_EMAIL.display,
               `Interesse am Thema "Konsolidierung der Instrumente"`,
-            )}>Mitarbeiten an diesem Thema</Link
+            )}>Mitarbeiten an diesem Thema</a
           > (öffnet E-Mail)
         </p>
 
@@ -99,11 +99,11 @@ export const frontmatter = {
           In den umsetzungsorientierten Schulungen des Zentrum für Legistik
           lernen Sie Methoden und Werkzeuge kennen, die Sie bei der Erarbeitung
           von praxisnahen und bürokratiearmen Regelungen unterstützen.<br />
-          <Link
+          <a
             href={mailto(
               ZFL_EMAIL.display,
               `Interesse am Thema "Erweiterung der Schulungs-Angebote"`,
-            )}>Mitarbeiten an diesem Thema</Link
+            )}>Mitarbeiten an diesem Thema</a
           > (öffnet E-Mail)
         </p>
 
@@ -112,11 +112,11 @@ export const frontmatter = {
           Wir unterstützen Sie dabei, Umsetzungsprozesse zu verstehen und
           Anforderungen an praxisnahe und bürokratiearme Regelungen umzusetzen.
           Wir erweitern das Angebot in Inhalt und Umfang.<br />
-          <Link
+          <a
             href={mailto(
               ZFL_EMAIL.display,
               `Interesse am Thema "Ausbau der Regelungsbegleitung"`,
-            )}>Mitarbeiten an diesem Thema</Link
+            )}>Mitarbeiten an diesem Thema</a
           > (öffnet E-Mail)
         </p>
       </Card>
@@ -130,20 +130,22 @@ export const frontmatter = {
           <ul>
             <li>
               Regelungsbegleitungen: Tabelle mit Service-Paketen ergänzt.
-              <Link href="/begleitungen#leistungspakete" class="block"
-                >Hier ansehen</Link
+              <a
+                href={`${routes.begleitungen.path}#leistungspakete`}
+                class="block">Hier ansehen</a
               >
             </li>
             <li>
               Schulungen: Hinweise zu externen Angeboten ergänzt
-              <Link href="/schulungen#schulungen-weitere" class="block"
-                >Hier ansehen</Link
+              <a
+                href={`${routes.schulungen.path}#schulungen-weitere`}
+                class="block">Hier ansehen</a
               >
             </li>
             <li>
               Neue Seite ergänzt: Anleitungen und Hilfsmittel
-              <Link href="/anleitungen-und-hilfsmittel" class="block"
-                >Hier ansehen</Link
+              <a href={routes.anleitungenUndHilfsmittel.path} class="block"
+                >Hier ansehen</a
               >
             </li>
           </ul>

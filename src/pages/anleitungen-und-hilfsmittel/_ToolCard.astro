@@ -1,5 +1,4 @@
 ---
-import Link from "@/components/Link.astro";
 import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 
@@ -36,7 +35,7 @@ const { preline, title, href, subline, body, image, imageAlt, imageSource } =
       <hgroup>
         {preline && <p class="kern-preline">{preline}</p>}
         <h2 class="kern-title">
-          <Link href={href} class="kern-link--stretched">{title}</Link>
+          <a href={href} class="kern-link--stretched">{title}</a>
         </h2>
         <p class="kern-subline">{subline}</p>
       </hgroup>
