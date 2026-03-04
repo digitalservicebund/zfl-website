@@ -27,6 +27,8 @@ fileignoreconfig:
     allowed_patterns:
       - >-
         IP Masking: The proxy will be configured to drop unnecessary headers, including `X-Forwarded-For`, before passing the request to PostHog.
+  - filename: src/components/global/Posthog.astro
+    checksum: 10690d98fe2ee61c401a387589ffa8af309194c8f43975a9e8c217319747a8b8
 allowed_patterns:
   - \@[a-z0-9]{40} # Allow fixing action hashes
   - "secrets: inherit"
