@@ -1,7 +1,5 @@
 /// <reference types="astro/client" />
 
-import { getCollection, type CollectionEntry } from "astro:content";
-
 export interface SitemapFrontmatter {
   url: string;
   title?: string;
@@ -42,16 +40,7 @@ export const getAllRoutes = async (): Promise<SitemapFrontmatter[]> => {
       };
     });
 
-  // dynamic routes from content collections
-  const pages = await getCollection("pages");
-  const dynamicRoutes = pages.map((page: CollectionEntry<"pages">) => ({
-    url: `/${page.slug}`,
-    title: page.data.title ?? "",
-    order: page.data.order ?? 999,
-    sitemap: page.data.sitemap,
-  }));
-
-  const allRoutes = [...staticRoutes, ...dynamicRoutes]
+  const allRoutes = [...staticRoutes]
     .filter((route) => route.sitemap)
     .sort((a, b) => a.order - b.order || a.title.localeCompare(b.title));
 
