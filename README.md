@@ -43,9 +43,6 @@ The following hooks are specified in the `lefthook.yml` and run before committin
 - `typecheck`: Verifies TypeScript types to catch errors early.
 - `format`: Ensures code adheres to predefined formatting rules.
 - `talisman`: Detects and prevents accidental commits of sensitive information.
-
-Before pushing, the following checks are additionally run:
-
 - `licenses-audit`: Uses `license-checker-rseidelsohn` to verify dependency licenses.
 
 ### VS Code Setup
