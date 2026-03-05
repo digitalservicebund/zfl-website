@@ -2,6 +2,12 @@
 
 This is the new implementation for Zentrum für Legistik, based on Astro and Tailwind.
 
+## Architecture & documentation
+
+- **Architecture Decision Records (ADRs)**: See the ADRs in [`doc/adr/`](doc/adr/).
+- **Tailwind variants**: Guidelines for `tailwind-variants` usage in [`doc/tailwind-variants.md`](doc/tailwind-variants.md).
+- **Icons**: Icon usage and conventions in [`doc/icons.md`](doc/icons.md).
+
 ## Development Setup
 
 To set up the project for development, follow these steps:
