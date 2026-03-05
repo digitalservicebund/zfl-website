@@ -506,7 +506,24 @@ const nextSteps = [
   </style>
 
   <script>
-    import { Document, Packer, Paragraph, TextRun } from "docx";
+    import {
+      AlignmentType,
+      BorderStyle,
+      Document,
+      Header,
+      ImageRun,
+      Packer,
+      Paragraph,
+      ShadingType,
+      Table,
+      TableBorders,
+      TableCell,
+      TableLayoutType,
+      TableRow,
+      TextRun,
+      VerticalAlign,
+      WidthType,
+    } from "docx";
 
     interface FormData {
       arbeitstitel: string;
@@ -520,40 +537,220 @@ const nextSteps = [
       probleme: string;
     }
 
-    async function generateWordDoc(data: FormData) {
-      const fields = [
-        { label: "Arbeitstitel", value: data.arbeitstitel },
-        { label: "E-Mail Adresse", value: data.email },
-        { label: "Ressort", value: data.ressort },
-        { label: "Referat", value: data.referat },
-        { label: "Kontext", value: data.kontext },
-        { label: "Auftragsherkunft", value: data.auftragsherkunft },
-        { label: "Zielstellung", value: data.zielstellung },
-        { label: "Lösungsansätze", value: data.loesungsansaetze },
-        { label: "Probleme", value: data.probleme },
-      ];
+    const FONT = "Arial";
+    // Brand colors from global.css
+    const COLOR_SECTION_BG = "36349d"; // cosmic-blue-base
+    const COLOR_SECTION_TEXT = "FFFFFF";
+    const COLOR_LABEL_BG = "F6F7FB"; // lavender-200
+    const COLOR_DIVIDER = "CFD4E5"; // lavender-700
+    // A4 content area: 11900 twips wide − 2 × 1440 margins = 9020 twips
+    const CONTENT_WIDTH = 9020;
+    const LABEL_WIDTH = 2976; // ~33%
+    const VALUE_WIDTH = 6044; // ~67%
 
-      const fieldParagraphs = fields.flatMap(({ label, value }) => [
-        new Paragraph({
-          children: [new TextRun({ text: `${label}:`, bold: true })],
-        }),
-        new Paragraph({
-          children: [new TextRun(value || "")],
-        }),
-        new Paragraph({ children: [] }),
-      ]);
+    function sectionHeaderRow(title: string): TableRow {
+      return new TableRow({
+        children: [
+          new TableCell({
+            columnSpan: 2,
+            shading: { type: ShadingType.CLEAR, fill: COLOR_SECTION_BG },
+            children: [
+              new Paragraph({
+                children: [
+                  new TextRun({
+                    text: title,
+                    bold: true,
+                    font: FONT,
+                    size: 20,
+                    color: COLOR_SECTION_TEXT,
+                  }),
+                ],
+                spacing: { before: 100, after: 100 },
+              }),
+            ],
+            margins: { top: 80, bottom: 80, left: 160, right: 160 },
+          }),
+        ],
+      });
+    }
+
+    function fieldRow(label: string, value: string): TableRow {
+      return new TableRow({
+        children: [
+          new TableCell({
+            verticalAlign: VerticalAlign.TOP,
+            shading: { type: ShadingType.CLEAR, fill: COLOR_LABEL_BG },
+            children: [
+              new Paragraph({
+                children: [
+                  new TextRun({ text: label, bold: true, font: FONT, size: 20 }),
+                ],
+                spacing: { before: 80, after: 80 },
+              }),
+            ],
+            margins: { top: 80, bottom: 80, left: 160, right: 120 },
+          }),
+          new TableCell({
+            verticalAlign: VerticalAlign.TOP,
+            children: [
+              new Paragraph({
+                children: [
+                  new TextRun({ text: value || "", font: FONT, size: 20 }),
+                ],
+                spacing: { before: 80, after: 80 },
+              }),
+            ],
+            margins: { top: 80, bottom: 80, left: 160, right: 160 },
+          }),
+        ],
+      });
+    }
+
+    async function generateWordDoc(data: FormData) {
+      const logoResponse = await fetch("/bund-logo.png");
+      const logoBuffer = await logoResponse.arrayBuffer();
+
+      const dateStr = new Date().toLocaleDateString("de-DE", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      });
+
+      // Header: 1-row table with logo (left) + "Zentrum für Legistik" (center)
+      const LOGO_CELL_WIDTH = 720;
+      const TEXT_CELL_WIDTH = CONTENT_WIDTH - LOGO_CELL_WIDTH;
+
+      const headerTable = new Table({
+        width: { size: CONTENT_WIDTH, type: WidthType.DXA },
+        columnWidths: [LOGO_CELL_WIDTH, TEXT_CELL_WIDTH],
+        layout: TableLayoutType.FIXED,
+        borders: TableBorders.NONE,
+        rows: [
+          new TableRow({
+            children: [
+              new TableCell({
+                verticalAlign: VerticalAlign.CENTER,
+                children: [
+                  new Paragraph({
+                    children: [
+                      new ImageRun({
+                        data: logoBuffer,
+                        // bund-logo.png is 216×144px → render at 45px tall
+                        transformation: { width: 67, height: 45 },
+                        type: "png",
+                      }),
+                    ],
+                  }),
+                ],
+              }),
+              new TableCell({
+                verticalAlign: VerticalAlign.CENTER,
+                children: [
+                  new Paragraph({
+                    alignment: AlignmentType.CENTER,
+                    children: [
+                      new TextRun({
+                        text: "Zentrum für Legistik",
+                        bold: true,
+                        font: FONT,
+                        size: 22,
+                        color: "000000",
+                      }),
+                    ],
+                    spacing: { before: 0, after: 0 },
+                  }),
+                ],
+              }),
+            ],
+          }),
+        ],
+      });
+
+      const titleText = data.arbeitstitel
+        ? `Steckbrief: ${data.arbeitstitel}`
+        : "Steckbrief";
 
       const doc = new Document({
         sections: [
           {
+            properties: {
+              page: {
+                size: { width: 11900, height: 16840 },
+                margin: {
+                  top: 1440,
+                  right: 1440,
+                  bottom: 1440,
+                  left: 1440,
+                  header: 708,
+                },
+              },
+            },
+            headers: {
+              default: new Header({
+                children: [
+                  new Paragraph({
+                    alignment: AlignmentType.RIGHT,
+                    children: [
+                      new TextRun({
+                        text: `Datum: ${dateStr}`,
+                        font: FONT,
+                        size: 18,
+                        color: "888888",
+                      }),
+                    ],
+                    spacing: { before: 120, after: 80 },
+                  }),
+                  headerTable,
+                ],
+              }),
+            },
             children: [
               new Paragraph({
                 children: [
-                  new TextRun({ text: "Steckbrief", bold: true, size: 32 }),
+                  new TextRun({
+                    text: titleText,
+                    bold: true,
+                    font: FONT,
+                    size: 48,
+                    color: "000000",
+                  }),
                 ],
-                spacing: { after: 400 },
+                spacing: { before: 560, after: 0 },
               }),
-              ...fieldParagraphs,
+              new Paragraph({
+                border: {
+                  bottom: {
+                    style: BorderStyle.SINGLE,
+                    size: 6,
+                    color: COLOR_DIVIDER,
+                  },
+                },
+                spacing: { before: 320, after: 320 },
+                children: [],
+              }),
+              // columnWidths fixes the default of fill(100) which makes columns ~0.18cm wide
+              new Table({
+                width: { size: CONTENT_WIDTH, type: WidthType.DXA },
+                columnWidths: [LABEL_WIDTH, VALUE_WIDTH],
+                layout: TableLayoutType.FIXED,
+                borders: TableBorders.NONE,
+                rows: [
+                  sectionHeaderRow("Kontaktinformationen"),
+                  fieldRow("Ressort", data.ressort),
+                  fieldRow("Referat", data.referat),
+                  fieldRow("E-Mail Adresse", data.email),
+                  sectionHeaderRow("Kontext"),
+                  fieldRow("Gesetzesumfeld", data.kontext),
+                  fieldRow("Herkunft des Auftrags", data.auftragsherkunft),
+                  sectionHeaderRow("Zielstellung & Probleme"),
+                  fieldRow(
+                    "Warum braucht es diese neue Regelung?",
+                    data.zielstellung,
+                  ),
+                  fieldRow("Lösungsansätze", data.loesungsansaetze),
+                  fieldRow("Umsetzungshürden", data.probleme),
+                ],
+              }),
             ],
           },
         ],
