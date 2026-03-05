@@ -44,15 +44,15 @@ const nextSteps = [
   },
   {
     number: "2",
-    title: "Interne Vervollständigung",
+    title: "Intern abstimmen",
     description:
-      "Das Word-Dokument ermöglicht Ihnen eine unkomplizierte interne Abstimmung in Ihrem Referat. Ergänzen Sie fehlende Informationen und stimmen Sie sich ebenfalls mit den beteiligten Ressorts ab, um den Steckbrief zu vervollständigen.",
+      "Das Word-Dokument ermöglicht Ihnen eine unkomplizierte interne Abstimmung in Ihrem Referat.",
   },
   {
     number: "3",
-    title: "Versand an zuständige Institutionen",
+    title: "Zur finalen Abstimmung versenden",
     description:
-      "Sobald Ihr Steckbrief vollständig ist, senden Sie ihn zur Information an den Normenkontrollrat und Destatis.",
+      "Sobald Ihr Steckbrief intern abgestimmt wurde, senden Sie ihn zur Information und weiteren Abstimmung an die beteiligten Ressorts, den Nationalen Normenkontrollrat (NKR) und an das Statistische Bundesamt (Destatis).",
   },
 ];
 ---
@@ -169,18 +169,18 @@ const nextSteps = [
               x-model="zielstellung"
             />
             <Textarea
-              id="loesungsansaetze"
-              label="Lösungsansätze"
-              description="Geben Sie mögliche Ideen für Lösungsansätze an."
-              maxlength={1000}
-              x-model="loesungsansaetze"
-            />
-            <Textarea
               id="probleme"
               label="Welche Umsetzungshürden gibt es?"
               description="Was sind derzeitige Probleme in der Umsetzung?"
               maxlength={1000}
               x-model="probleme"
+            />
+            <Textarea
+              id="loesungsansaetze"
+              label="Lösungsansätze"
+              description="Geben Sie mögliche Ideen für Lösungsansätze an."
+              maxlength={1000}
+              x-model="loesungsansaetze"
             />
           </div>
           <div class="mt-80 flex gap-48">
@@ -245,17 +245,17 @@ const nextSteps = [
                   </tr>
                   <tr>
                     <td class="py-8 pr-24 align-top font-bold"
+                      >Was sind Umsetzungshürden?</td
+                    >
+                    <td class="py-8 whitespace-pre-wrap" x-text="probleme"></td>
+                  </tr>
+                  <tr>
+                    <td class="py-8 pr-24 align-top font-bold"
                       >Lösungsansätze</td
                     >
                     <td
                       class="py-8 whitespace-pre-wrap"
                       x-text="loesungsansaetze"></td>
-                  </tr>
-                  <tr>
-                    <td class="py-8 pr-24 align-top font-bold"
-                      >Was sind Umsetzungshürden?</td
-                    >
-                    <td class="py-8 whitespace-pre-wrap" x-text="probleme"></td>
                   </tr>
                 </tbody>
               </table>
@@ -583,7 +583,12 @@ const nextSteps = [
             children: [
               new Paragraph({
                 children: [
-                  new TextRun({ text: label, bold: true, font: FONT, size: 20 }),
+                  new TextRun({
+                    text: label,
+                    bold: true,
+                    font: FONT,
+                    size: 20,
+                  }),
                 ],
                 spacing: { before: 80, after: 80 },
               }),
@@ -747,8 +752,8 @@ const nextSteps = [
                     "Warum braucht es diese neue Regelung?",
                     data.zielstellung,
                   ),
-                  fieldRow("Lösungsansätze", data.loesungsansaetze),
                   fieldRow("Umsetzungshürden", data.probleme),
+                  fieldRow("Lösungsansätze", data.loesungsansaetze),
                 ],
               }),
             ],
