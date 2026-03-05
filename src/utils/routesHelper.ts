@@ -40,7 +40,7 @@ export const getAllRoutes = async (): Promise<SitemapFrontmatter[]> => {
       };
     });
 
-  const allRoutes = [...staticRoutes]
+  const allRoutes = staticRoutes
     .filter((route) => route.sitemap)
     .sort((a, b) => a.order - b.order || a.title.localeCompare(b.title));
 
