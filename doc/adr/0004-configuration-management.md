@@ -57,7 +57,7 @@ export const isStaging = stage === "staging";
 **`src/config/posthog.ts`**:
 
 ```typescript
-export const posthogKey = "phd_BqKtG4bqKnrrhuUrplewJAgKOWxcm9EE2W95RPYzb3e"; // gitleaks:allow
+export const posthogKey = "phd_BqKtG4bqKnrrhuUrplewJAgKOWxcm9EE2W95RPYzb3e";
 export const apiHost = "/ph-relay";
 export const uiHost = "https://eu.posthog.com";
 ```

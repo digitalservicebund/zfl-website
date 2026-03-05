@@ -154,12 +154,12 @@ Automatically run via lefthook:
 - ESLint fixes applied to staged files
 - TypeScript type checking
 - Prettier formatting
-- Security scans (talisman, gitleaks)
+- Security scans (talisman)
 - License auditing on push
 
 ### Security Considerations
 
-- No secrets or credentials committed (talisman + gitleaks checks)
+- No secrets or credentials committed (talisman checks)
 - License compliance verified for dependencies
 - Environment variables loaded securely
 - No inline scripts or dangerous eval usage

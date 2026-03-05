@@ -29,10 +29,10 @@ pnpm install
 
 #### Git Hooks
 
-For the provided Git hooks, you will need to install [lefthook](https://github.com/evilmartians/lefthook/), [talisman](https://github.com/thoughtworks/talisman), and [gitleaks](https://github.com/gitleaks/gitleaks):
+For the provided Git hooks, you will need to install [lefthook](https://github.com/evilmartians/lefthook/) and [talisman](https://github.com/thoughtworks/talisman):
 
 ```bash
-brew install lefthook talisman gitleaks
+brew install lefthook talisman
 lefthook install
 ```
 
@@ -43,7 +43,6 @@ The following hooks are specified in the `lefthook.yml` and run before committin
 - `typecheck`: Verifies TypeScript types to catch errors early.
 - `format`: Ensures code adheres to predefined formatting rules.
 - `talisman`: Detects and prevents accidental commits of sensitive information.
-- `gitleaks`: Scans for secrets and credentials in the codebase.
 
 Before pushing, the following checks are additionally run:
 
