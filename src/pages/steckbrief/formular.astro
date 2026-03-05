@@ -61,7 +61,7 @@ const nextSteps = [
   <div class="form-wrapper">
     <div
       class="mx-auto flex max-w-[1296px] gap-48 py-80"
-      x-data="{ hintsOpen: true, arbeitstitel: '', email: '', ressort: '', referat: '', rechtsbereich: '', kontext: '', zielstellung: '', probleme: '' }"
+      x-data="{ hintsOpen: true, arbeitstitel: '', email: '', ressort: '', referat: '', kontext: '', auftragsherkunft:'', zielstellung: '', loesungsansaetze: '', probleme: '' }"
     >
       <!-- Hidden radio inputs for step navigation -->
       {
@@ -107,11 +107,6 @@ const nextSteps = [
               <Input label="Ressort" id="ressort" x-model="ressort" />
               <Input label="Referat" id="referat" x-model="referat" />
             </div>
-            <Input
-              label="Ihr Rechtsbereich"
-              id="rechtsbereich"
-              x-model="rechtsbereich"
-            />
           </div>
           <div class="mt-80 flex gap-48">
             <label for="step-kontext" class="btn btn-primary cursor-pointer"
@@ -133,12 +128,22 @@ const nextSteps = [
               x-model="arbeitstitel"
             />
             <Textarea
-              id="kontext"
-              label="Kontext Ihres Vorhabens"
+              id="Gesetzesumfeld"
+              label="Gesetzesumfeld Ihres Vorhabens"
               description="Einordnung Ihres Handlungsbedarfs"
               maxlength={1000}
               x-model="kontext"
             />
+
+            <!-- Achtung hier text anpassen -->
+            <Textarea
+              id="Auftragsherkunft"
+              label="Woher kommt der Auftrag"
+              description="Einordnung Ihres Auftrags"
+              maxlength={1000}
+              x-model="auftragsherkunft"
+            />
+            <!-- Achtung hier text anpassen -->
           </div>
           <div class="mt-80 flex gap-48">
             <label
@@ -162,6 +167,13 @@ const nextSteps = [
               description="Was soll durch das Gesetz verbessert werden?"
               maxlength={1000}
               x-model="zielstellung"
+            />
+            <Textarea
+              id="loesungsansaetze"
+              label="Lösungsansätze"
+              description="Geben Sie mögliche Ideen für Lösungsansätze an."
+              maxlength={1000}
+              x-model="loesungsansaetze"
             />
             <Textarea
               id="probleme"
@@ -209,22 +221,35 @@ const nextSteps = [
                     <td class="py-8" x-text="referat"></td>
                   </tr>
                   <tr>
-                    <td class="py-8 pr-24 align-top font-bold">Rechtsbereich</td
-                    >
-                    <td class="py-8" x-text="rechtsbereich"></td>
-                  </tr>
-                  <tr>
                     <td class="py-8 pr-24 align-top font-bold"
                       >Kontext Ihres Vorhabens</td
                     >
                     <td class="py-8 whitespace-pre-wrap" x-text="kontext"></td>
                   </tr>
+                  <!-- Hier Text Anpassen -->
+                  <tr>
+                    <td class="py-8 pr-24 align-top font-bold"
+                      >Herkunft ihres Auftrages</td
+                    >
+                    <td
+                      class="py-8 whitespace-pre-wrap"
+                      x-text="auftragsherkunft"></td>
+                  </tr>
+                  <!-- Hier Text Anpassen -->
                   <tr>
                     <td class="py-8 pr-24 align-top font-bold"
                       >Warum braucht es diese neue Regelung?</td
                     >
                     <td class="py-8 whitespace-pre-wrap" x-text="zielstellung"
                     ></td>
+                  </tr>
+                  <tr>
+                    <td class="py-8 pr-24 align-top font-bold"
+                      >Lösungsansätze</td
+                    >
+                    <td
+                      class="py-8 whitespace-pre-wrap"
+                      x-text="loesungsansaetze"></td>
                   </tr>
                   <tr>
                     <td class="py-8 pr-24 align-top font-bold"
@@ -237,7 +262,7 @@ const nextSteps = [
               <div class="mt-40">
                 <button
                   class="btn btn-primary"
-                  @click="$dispatch('generate-word', { arbeitstitel, email, ressort, referat, rechtsbereich, kontext, zielstellung, probleme })"
+                  @click="$dispatch('generate-word', { arbeitstitel, email, ressort, referat, kontext, auftragsherkunft, zielstellung, loesungsansaetze, probleme })"
                   >Steckbrief herunterladen</button
                 >
               </div>
@@ -488,9 +513,10 @@ const nextSteps = [
       email: string;
       ressort: string;
       referat: string;
-      rechtsbereich: string;
       kontext: string;
+      auftragsherkunft: string;
       zielstellung: string;
+      loesungsansaetze: string;
       probleme: string;
     }
 
@@ -500,9 +526,10 @@ const nextSteps = [
         { label: "E-Mail Adresse", value: data.email },
         { label: "Ressort", value: data.ressort },
         { label: "Referat", value: data.referat },
-        { label: "Rechtsbereich", value: data.rechtsbereich },
         { label: "Kontext", value: data.kontext },
+        { label: "Auftragsherkunft", value: data.auftragsherkunft },
         { label: "Zielstellung", value: data.zielstellung },
+        { label: "Lösungsansätze", value: data.loesungsansaetze },
         { label: "Probleme", value: data.probleme },
       ];
 
