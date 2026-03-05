@@ -26,4 +26,4 @@ cookieless_mode: "always"` to ensure no cookies are used by Posthog.
 
 ## Consequences
 
-- We will configure and maintain NGINX reverse proxy functionality to forward analytics traffic, thereby preventing the disclosure of client IP addresses to Posthog.
+We will configure and maintain NGINX reverse proxy functionality to forward analytics traffic, thereby preventing the disclosure of client IP addresses to Posthog.
