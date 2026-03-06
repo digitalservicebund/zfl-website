@@ -330,3 +330,15 @@ address {
 @utility breakout-wide {
   grid-column: wide;
 }
+
+/*
+ * Windows High Contrast mode
+ */
+@media (forced-colors: active) {
+  :is(button, a) svg {
+    forced-color-adjust: auto;
+  }
+  input {
+    @apply outline;
+  }
+}
