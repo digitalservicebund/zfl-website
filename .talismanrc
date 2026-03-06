@@ -7,7 +7,7 @@ fileignoreconfig:
       - GITOPS_DIGITALCHECK_APP_PRIVATE_KEY
       - secrets
       - "github_app_private_key:"
-      - "password: ${{ secrets.GITHUB_TOKEN }}"
+      - "password: \\${{ secrets.GITHUB_TOKEN }}"
   - filename: .github/workflows/check-and-unit-test.yml
     allowed_patterns:
       - "key:"
@@ -35,7 +35,7 @@ fileignoreconfig:
 allowed_patterns:
   - \@[a-z0-9]{40} # Allow fixing action hashes
   - "secrets: inherit"
-  - "key: ${{ runner.os }}"
+  - "key: \\${{ runner.os }}"
   - "public key"
   - "secrets.GITHUB_TOKEN"
   - "posthogKey"
