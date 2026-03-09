@@ -7,7 +7,7 @@ fileignoreconfig:
       - GITOPS_DIGITALCHECK_APP_PRIVATE_KEY
       - secrets
       - "github_app_private_key:"
-      - "password: \\${{ secrets.GITHUB_TOKEN }}"
+      - "password: \\${{  }}"
   - filename: .github/workflows/check-and-unit-test.yml
     allowed_patterns:
       - "key:"
