@@ -11,6 +11,8 @@ if (!isStaging) {
 export const frontmatter = {
   title: "Über das Zentrum für Legistik",
   sitemap: true,
+  showInHeader: true,
+  isStagingOnly: true,
 };
 ---
 
@@ -20,11 +22,8 @@ export const frontmatter = {
       <h1>{frontmatter.title}</h1>
     </Hero>
     <section class="space-y-8">
-      <a class="block" href={routes.ueberUns.children.zahlenUndFakten.path}
-        >Zahlen und Fakten</a
-      >
-      <a class="block" href={routes.ueberUns.children.daranArbeitenWir.path}
-        >Daran arbeiten wir</a
+      <a class="block" href={routes.zahlenUndFakten.path}>Zahlen und Fakten</a>
+      <a class="block" href={routes.daranArbeitenWir.path}>Daran arbeiten wir</a
       >
     </section>
   </main>

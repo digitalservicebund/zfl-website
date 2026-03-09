@@ -6,6 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 import icon from "astro-icon";
 import { defineConfig } from "astro/config";
 import process from "node:process";
+import { generateRoutes } from "./integrations/routeGenerator";
 
 const isPreview = process.env.PUBLIC_STAGE === "preview";
 const PREVIEW_BRANCH = process.env.PREVIEW_BRANCH;
@@ -17,7 +18,16 @@ const PREVIEW_SITE = "https://digitalservicebund.github.io";
 export default defineConfig({
   site: isPreview ? PREVIEW_SITE : PRODUCTION_SITE,
   base: isPreview ? `/zfl-website/previews/${PREVIEW_BRANCH}` : undefined,
-  integrations: [icon(), alpinejs(), sitemap(), mdx()],
+  integrations: [
+    icon(),
+    alpinejs(),
+    sitemap(),
+    mdx(),
+    generateRoutes({
+      pagesDirs: ["src/pages"],
+      output: "src/config/routes.ts",
+    }),
+  ],
   build: {
     assets: "_astro",
   },
