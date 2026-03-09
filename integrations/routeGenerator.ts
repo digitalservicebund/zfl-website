@@ -108,6 +108,10 @@ function toRouteKey(input: string): string {
   return /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(camel) ? camel : `"${camel}"`;
 }
 
+function escapeStringLiteral(input: string): string {
+  return input.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+}
+
 function buildOutput(routes: Record<string, Route>) {
   const entries = Object.entries(routes)
     .sort(([, a], [, b]) => a.order - b.order || a.title.localeCompare(b.title))
@@ -115,7 +119,7 @@ function buildOutput(routes: Record<string, Route>) {
       ([key, { path, title, sitemap, order, showInHeader, isStagingOnly }]) => `
   ${toRouteKey(key)}: {
     path: buildUrl("${path}"),
-    title: "${title.replace(/"/g, '\\"')}",
+    title: "${escapeStringLiteral(title)}",
     sitemap: ${sitemap},
     order: ${order},
     showInHeader: ${showInHeader},
