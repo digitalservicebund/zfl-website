@@ -29,7 +29,7 @@ fileignoreconfig:
   - filename: doc/routes.md
     checksum: ecbc85072882abbf526589be79d9d5680001e618e42f16ec9c2fb323458fe1a6
   - filename: integrations/routeGenerator.ts
-    checksum: 018e86b89d3203c5393470aafbdf87706fce5df6962238814bba47eda2e94540
+    checksum: 49f57b7242e8dff0e6030ac80faff610f4e45eda11675ba3b490c590c6d9cf0f
   - filename: nginx/nginx.template.conf
     allowed_patterns:
       - proxy_pass
