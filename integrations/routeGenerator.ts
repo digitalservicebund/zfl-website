@@ -111,7 +111,7 @@ function toRouteKey(input: string): string {
 }
 
 function escapeStringLiteral(input: string): string {
-  return input.replaceAll(/\\/g, "\\\\").replaceAll(/"/g, '\\"');
+  return input.replaceAll("\\", "\\\\").replaceAll('"', '\\"');
 }
 
 function buildOutput(routes: Record<string, Route>) {
