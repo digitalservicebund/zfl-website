@@ -1,7 +1,7 @@
 import type { AstroIntegration } from "astro";
-import fs from "fs";
 import matter from "gray-matter";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 
 type Options = {
   pagesDirs: string[];
@@ -51,7 +51,7 @@ function generate(pagesDirs: string[], outputFile: string) {
       const key =
         relativePath === "/"
           ? "home"
-          : relativePath.split("/").filter(Boolean).pop();
+          : relativePath.split("/").findLast(Boolean);
 
       if (key) routes[key] = { path: relativePath, ...meta };
     }
@@ -74,10 +74,12 @@ function extractMeta(file: string, raw: string): RouteMeta | null {
   if (file.endsWith(".astro")) {
     // Extract the `frontmatter = { ... }` object body from the TS frontmatter block
     // and parse it as YAML (valid after stripping trailing commas)
-    const frontmatterBlock = raw.match(/^---([\s\S]*?)---/)?.[1] ?? "";
+    const frontmatterBlock =
+      new RegExp(/^---([\s\S]*?)---/).exec(raw)?.[1] ?? "";
     const objBlock =
-      frontmatterBlock.match(/frontmatter\s*=\s*\{([^}]*)\}/)?.[1] ?? "";
-    ({ data } = matter(`---\n${objBlock.replace(/,\s*$/gm, "")}\n---`));
+      new RegExp(/frontmatter\s*=\s*\{([^}]*)\}/).exec(frontmatterBlock)?.[1] ??
+      "";
+    ({ data } = matter(`---\n${objBlock.replaceAll(/,\s*$/gm, "")}\n---`));
   } else {
     ({ data } = matter(raw));
   }
@@ -96,7 +98,7 @@ function extractMeta(file: string, raw: string): RouteMeta | null {
 
 function toRouteKey(input: string): string {
   const camel = input
-    .replace(/[^a-zA-Z0-9-_]/g, "")
+    .replaceAll(/[^a-zA-Z0-9-_]/g, "")
     .split(/[-_]/)
     .filter(Boolean)
     .map((part, i) =>
@@ -109,7 +111,7 @@ function toRouteKey(input: string): string {
 }
 
 function escapeStringLiteral(input: string): string {
-  return input.replace(/\\/g, "\\\\").replace(/"/g, '\\"');
+  return input.replaceAll(/\\/g, "\\\\").replaceAll(/"/g, '\\"');
 }
 
 function buildOutput(routes: Record<string, Route>) {
