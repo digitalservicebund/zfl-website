@@ -39,6 +39,7 @@
     "astro": "^5.18.0",
     "astro-icon": "^1.1.5",
     "astro-seo": "^1.1.0",
+    "gray-matter": "^4.0.3",
     "sharp": "^0.34.5",
     "tailwind-merge": "^3.5.0",
     "tailwind-variants": "^3.2.2",

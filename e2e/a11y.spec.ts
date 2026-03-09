@@ -1,9 +1,9 @@
+import { routes } from "@/config/routes";
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
-import { flatRoutes } from "./utils/routes";
 
 test.describe("a11y", () => {
-  flatRoutes.forEach((route) => {
+  Object.entries(routes).forEach(([, route]) => {
     test(`${route.path} should not have any automatically detectable accessibility issues`, async ({
       page,
     }) => {
