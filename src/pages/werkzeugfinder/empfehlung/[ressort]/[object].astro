@@ -3,6 +3,7 @@ import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
 import Card from "@/components/Card.astro";
 import { routes } from "@/config/routes";
+import { Image } from "astro:assets";
 import {
   findResultByObjectAndRessort,
   getAllObjectIds,
@@ -40,8 +41,8 @@ const quizPath = routes.werkzeugfinder.path;
         <>
           <section>
             <div class="border-lavender-400 overflow-hidden rounded-sm border-4">
-              <img
-                src={`/werkzeugfinder/${result.cluster.img.src}`}
+              <Image
+                src={result.cluster.img.src}
                 alt={result.cluster.img.alt}
                 class="max-h-64 w-full object-cover"
               />
@@ -83,12 +84,12 @@ const quizPath = routes.werkzeugfinder.path;
                             </p>
                           )}
                         </div>
-                        {(rec.primaryTool.img.src ||
+                        {(rec.primaryTool.img ||
                           rec.alternativeTools.length > 0) && (
                           <div class="space-y-md flex-1">
-                            {rec.primaryTool.img.src && (
-                              <img
-                                src={`/werkzeugfinder/${rec.primaryTool.img.src}`}
+                            {rec.primaryTool.img && (
+                              <Image
+                                src={rec.primaryTool.img.src}
                                 alt={rec.primaryTool.img.alt}
                                 class="border-lavender-400 w-full rounded-sm border"
                               />

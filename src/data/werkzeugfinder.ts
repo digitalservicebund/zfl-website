@@ -1,10 +1,25 @@
+import type { ImageMetadata } from "astro";
+
+import schaubildClusterImg from "@/images/werkzeugfinder/clusters/schaubild.jpg";
+import entscheidungsbaumClusterImg from "@/images/werkzeugfinder/clusters/entscheidungsbaum.jpg";
+import flussdiagrammClusterImg from "@/images/werkzeugfinder/clusters/flussdiagramm.jpg";
+import papierImg from "@/images/werkzeugfinder/tools/papier.png";
+import drawioImg from "@/images/werkzeugfinder/tools/bundescloud_drawio_flussdiagramm.png";
+import drawioEntscheidungsbaumImg from "@/images/werkzeugfinder/tools/bundescloud_drawio_entscheidungsbaum.png";
+import logosImg from "@/images/werkzeugfinder/tools/logos_rulemap.png";
+import adonisImg from "@/images/werkzeugfinder/tools/adonis_flussdiagramm.png";
+import conceptboardImg from "@/images/werkzeugfinder/tools/tool_Conceptboard.png";
+import msvisioImg from "@/images/werkzeugfinder/tools/msvisio_flussdiagramm.png";
+import moduloImg from "@/images/werkzeugfinder/tools/tool_Modulo_Flussdiagramm-1.png";
+import arisImg from "@/images/werkzeugfinder/tools/tool_Aris_Flussdiagramm.png";
+
 export interface Entity {
   id: string;
   name: string;
 }
 
 export interface Image {
-  src: string;
+  src: ImageMetadata;
   alt: string;
 }
 
@@ -40,7 +55,7 @@ export interface Tool extends Entity {
   description: string;
   link: string;
   access?: string;
-  img: Image;
+  img?: Image;
 }
 
 export interface Cluster extends Entity {
@@ -146,7 +161,7 @@ const data = {
       description:
         "Ein Schaubild zeigt eine Darstellung des Gesamtsystems, nicht unbedingt einen zeitlichen Ablauf. Visualisierungen von Daten- und Informationsflüssen decken Lücken in Systemen auf und helfen beim Austausch mit IT-Experten. Ein Schaubild muss nicht vollständig oder detailliert sein, und kann auch einen Ausschnitt eines Systems zeigen.",
       img: {
-        src: "clusters/schaubild.jpg",
+        src: schaubildClusterImg,
         alt: "Drei Beispiele für einfache, freie Schaubilder",
       },
       fidelityToolMaps: [
@@ -219,7 +234,7 @@ const data = {
       description:
         "Ein Entscheidungsbaum ordnet Entscheidungen und deren Auswirkungen in ein logisches Verhältnis. Somit fächert sich ein Baum ausgehend von einem Anfangspunkt immer weiter auf. Zusätzlich können logische Verknüpfungen wie ›Und‹, ›Oder‹, ›Exklusiv-Oder‹ dabei helfen, Entscheidungsmöglichkeiten in einen Kontext zu setzen. So können Logikfehler identifiziert und eine Grundlage für Automatisierung geschaffen werden. Der strukturierte Inhalt eines Entscheidungsbaums kann als Basis für einen Regelungstext genutzt werden.",
       img: {
-        src: "clusters/entscheidungsbaum.jpg",
+        src: entscheidungsbaumClusterImg,
         alt: "Ein beispielhafter Entscheidungsbaum ohne Text mit logischen Verknüpfungen",
       },
       fidelityToolMaps: [
@@ -319,7 +334,7 @@ const data = {
       description:
         "Ein Flussdiagramm stellt die gesamte Umsetzung eines Regelungsvorhabens oder einen spezifischen Arbeitsablauf visuell dar. Mit Hilfe standardisierter Symbole wird der Prozess in einzelnen, chronologischen Schritten abgebildet. Flussdiagramme helfen dabei, fehlende Zwischenschritte, Medienbrüche und Möglichkeiten zum Vereinfachen von Prozessen zu erkennen.",
       img: {
-        src: "clusters/flussdiagramm.jpg",
+        src: flussdiagrammClusterImg,
         alt: "Ein beispielhaftes Flussdiagramms ohne Text",
       },
       fidelityToolMaps: [
@@ -431,7 +446,7 @@ const data = {
         "Die erste Version eines Schaubilds sollte mit Stift und Papier angefertigt werden. Dieses Vorgehen ist häufig schneller, um erste Gedanken zu skizzieren, als bereits initial mit einem digitalen Werkzeug zu arbeiten. Zudem ist die Hemmschwelle geringer, den ersten Ansatz zu verwerfen und noch einmal neu anzufangen. Dies ist aber bei den ersten Vorarbeiten völlig normal und oft hilfreich.",
       link: "",
       img: {
-        src: "tools/papier.png",
+        src: papierImg,
         alt: "Eine Person, die mit einem Stift eine Abbildung auf ein Papier zeichnet",
       },
     },
@@ -442,7 +457,7 @@ const data = {
         "Die erste Version eines Entscheidungsbaums sollte mit Stift und Papier angefertigt werden. Dieses Vorgehen ist häufig schneller, um erste Gedanken zu skizzieren, als bereits initial mit einem digitalen Werkzeug zu arbeiten. Zudem ist die Hemmschwelle geringer, den ersten Ansatz zu verwerfen und noch einmal neu anzufangen. Dies ist aber bei den ersten Vorarbeiten völlig normal und oft hilfreich.",
       link: "",
       img: {
-        src: "tools/papier.png",
+        src: papierImg,
         alt: "Eine Person, die mit einem Stift eine Abbildung auf ein Papier zeichnet",
       },
     },
@@ -453,7 +468,7 @@ const data = {
         "Die erste Version eines Flussdiagramms sollte mit Stift und Papier angefertigt werden. Dieses Vorgehen ist häufig schneller, um erste Gedanken zu skizzieren, als bereits initial mit einem digitalen Werkzeug zu arbeiten. Zudem ist die Hemmschwelle geringer, den ersten Ansatz zu verwerfen und noch einmal neu anzufangen. Dies ist aber bei den ersten Vorarbeiten völlig normal und oft hilfreich.",
       link: "",
       img: {
-        src: "tools/papier.png",
+        src: papierImg,
         alt: "Eine Person, die mit einem Stift eine Abbildung auf ein Papier zeichnet",
       },
     },
@@ -466,7 +481,7 @@ const data = {
         "Draw.io finden Sie in der Werkzeugkiste des Social Intranet des Bundes (SIB-Box), diese Version ist für die Verwendung in der Verwaltung vorgesehen. Falls Sie Probleme beim Zugang haben, wenden Sie sich gern an die Ansprechperson in Ihrem Ressort - meist finden Sie diese in der Z Abteilung.",
       link: "",
       img: {
-        src: "tools/bundescloud_drawio_flussdiagramm.png",
+        src: drawioImg,
         alt: "Die Benutzeroberfläche von Draw.io, die ein einfaches Schaubild darstellt",
       },
     },
@@ -479,7 +494,7 @@ const data = {
         "Draw.io finden Sie in der Werkzeugkiste des Social Intranet des Bundes (SIB-Box), diese Version ist für die Verwendung in der Verwaltung vorgesehen. Falls Sie Probleme beim Zugang haben, wenden Sie sich gern an die Ansprechperson in Ihrem Ressort - meist finden Sie diese in der Z Abteilung.",
       link: "",
       img: {
-        src: "tools/bundescloud_drawio_entscheidungsbaum.png",
+        src: drawioEntscheidungsbaumImg,
         alt: "Die Benutzeroberfläche von Draw.io, die einen einfachen Entscheidungsbaum darstellt",
       },
     },
@@ -492,7 +507,7 @@ const data = {
         "Draw.io finden Sie in der Werkzeugkiste des Social Intranet des Bundes (SIB-Box), diese Version ist für die Verwendung in der Verwaltung vorgesehen. Falls Sie Probleme beim Zugang haben, wenden Sie sich gern an die Ansprechperson in Ihrem Ressort - meist finden Sie diese in der Z Abteilung.",
       link: "",
       img: {
-        src: "tools/bundescloud_drawio_flussdiagramm.png",
+        src: drawioImg,
         alt: "Die Benutzeroberfläche von Draw.io, die ein einfaches Flussdiagramm darstellt",
       },
     },
@@ -505,7 +520,7 @@ const data = {
         "Falls es in Ihrem Ressort eine Lizenz gibt, reicht meist eine formlose E-Mail an die Ansprechperson für einen Zugang. Außerdem können Sie zum Testen von Logos, sich direkt bei Knowledgetools einen kostenfreien Account anlegen.",
       link: "Mehr Informationen: https://www.knowledgetools.de\n\nLogin: https://rulemapping.knowledgetools.de/rulemapping",
       img: {
-        src: "tools/logos_rulemap.png",
+        src: logosImg,
         alt: "Eine Rulemap in Logos, die einen Gesetzesparagrafen zeigt.",
       },
     },
@@ -518,7 +533,7 @@ const data = {
         "Kontaktieren Sie uns gerne, so dass wir Sie auf Ihren hausinternen Ansprechpartner verweisen können.",
       link: "https://www.boc-group.com/de/adonis/",
       img: {
-        src: "tools/adonis_flussdiagramm.png",
+        src: adonisImg,
         alt: "Die Benutzeroberfläche von Adonis, die den Ausschnitt einer Prozessmodellierung zeigt.",
       },
     },
@@ -530,7 +545,6 @@ const data = {
       access:
         "Kontaktieren Sie uns gerne, so dass wir Sie auf Ihren hausinternen Ansprechpartner verweisen können.",
       link: "",
-      img: { src: "", alt: "" },
     },
     {
       id: "conceptboard-schaubild",
@@ -541,7 +555,7 @@ const data = {
         "Für einen Zugang schreiben Sie einfach eine formlose E-Mail an die Ansprechperson in Ihrem Ressort. In der Regel ist das Referat für die Informations- und Kommunikationstechnik im Ressort in Abteilung Z zuständig.",
       link: "",
       img: {
-        src: "tools/tool_Conceptboard.png",
+        src: conceptboardImg,
         alt: "Die Benutzeroberfläche von Conceptboard, die mehrere Diagramme und mit Ihnen interagierende Personen zeigt.",
       },
     },
@@ -554,7 +568,7 @@ const data = {
         "Für einen Zugang schreiben Sie einfach eine formlose E-Mail an die Ansprechperson in Ihrem Ressort. In der Regel ist das Referat für die Informations- und Kommunikationstechnik im Ressort in Abteilung Z zuständig.",
       link: "",
       img: {
-        src: "tools/tool_Conceptboard.png",
+        src: conceptboardImg,
         alt: "Die Benutzeroberfläche von Conceptboard, die mehrere Diagramme und mit Ihnen interagierende Personen zeigt.",
       },
     },
@@ -567,7 +581,7 @@ const data = {
         "Für einen Zugang schreiben Sie einfach eine formlose E-Mail an die Ansprechperson in Ihrem Ressort. In der Regel ist das Referat für die Informations- und Kommunikationstechnik im Ressort in Abteilung Z zuständig.",
       link: "",
       img: {
-        src: "tools/tool_Conceptboard.png",
+        src: conceptboardImg,
         alt: "Die Benutzeroberfläche von Conceptboard, die mehrere Diagramme und mit Ihnen interagierende Personen zeigt.",
       },
     },
@@ -580,7 +594,7 @@ const data = {
         "Kontaktieren Sie uns gerne, so dass wir Sie auf Ihren hausinternen Ansprechpartner verweisen können.",
       link: "https://www.microsoft.com/de-de/microsoft-365/visio/flowchart-software",
       img: {
-        src: "tools/msvisio_flussdiagramm.png",
+        src: msvisioImg,
         alt: "Die Benutzeroberfläche von MS Visio, die einen Ablauf zeigt.",
       },
     },
@@ -593,7 +607,7 @@ const data = {
         "Den Koffer mit den Magnetkarten finden Sie bei Ihrem hausinternen Ansprechpartner, kontaktieren Sie uns hierzu gerne direkt.",
       link: "https://shi-institut.de/produkte/modulo/",
       img: {
-        src: "tools/tool_Modulo_Flussdiagramm-1.png",
+        src: moduloImg,
         alt: "Ein mit den Modulo-Karten gelegter Prozess wird per iPad eingelesen.",
       },
     },
@@ -606,7 +620,7 @@ const data = {
         "Kontaktieren Sie uns gerne, so dass wir Sie auf Ihren hausinternen Ansprechpartner verweisen können.",
       link: "",
       img: {
-        src: "tools/tool_Aris_Flussdiagramm.png",
+        src: arisImg,
         alt: "Die Benutzeroberfläche von Aris, die den Ausschnitt einer Prozessmodellierung zeigt.",
       },
     },
@@ -619,7 +633,7 @@ const data = {
         "Kontaktieren Sie uns gerne, so dass wir Sie auf Ihren hausinternen Ansprechpartner verweisen können.",
       link: "",
       img: {
-        src: "tools/tool_Aris_Flussdiagramm.png",
+        src: arisImg,
         alt: "Die Benutzeroberfläche von Aris, die den Ausschnitt einer Prozessmodellierung zeigt.",
       },
     },
@@ -629,7 +643,6 @@ const data = {
       description:
         "Microsoft PowerPoint ist ein Programm, um Präsentationen zu erstellen. Sie können Inhalte auf begrenztem Platz darstellen.",
       link: "",
-      img: { src: "", alt: "" },
     },
   ],
   ressorts: [

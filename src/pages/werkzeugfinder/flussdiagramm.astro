@@ -2,6 +2,8 @@
 import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
 import { routes } from "@/config/routes";
+import { Image } from "astro:assets";
+import flowchartElementsImg from "@/images/werkzeugfinder/flowchart-elements.png";
 
 export const frontmatter = {
   title: "Flussdiagramm Anleitung",
@@ -43,8 +45,8 @@ export const frontmatter = {
         Der Start mag Ihnen leichter fallen, wenn Sie als Basis eine zeitliche
         Abfolge wählen. Hier sind einige Elemente, die Sie nutzen können:
       </p>
-      <img
-        src="/werkzeugfinder/flowchart-elements.png"
+      <Image
+        src={flowchartElementsImg}
         alt="Beispielhafte Darstellung von Elementen eines Flussdiagramms"
         class="mt-md border-lavender-400 w-full rounded-sm border"
       />
