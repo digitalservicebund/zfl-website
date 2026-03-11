@@ -1,0 +1,98 @@
+---
+import Hero from "@/components/Hero.astro";
+import Layout from "@/layouts/Layout.astro";
+import { routes } from "@/config/routes";
+
+export const frontmatter = {
+  title: "Flussdiagramm Anleitung",
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero look="blue">
+      <h1>Flussdiagramm Anleitung</h1>
+    </Hero>
+
+    <section>
+      <h2>So fangen Sie an</h2>
+      <p>
+        Es gibt unterschiedliche Arten der Visualisierung. Je nach Zielsetzung
+        eignen sich beispielsweise Nutzerreisen, Entscheidungsbäume,
+        Datenflüsse oder Prozessmodellierungen (z. B. nach BPMN oder
+        FIM-Methodik). Um die Umsetzung eines Regelungsvorhabens zu
+        visualisieren, empfehlen wir die Arbeit mit einem Flussdiagramm.
+      </p>
+      <p>
+        Notieren Sie die an der Umsetzung Beteiligten und deren Aktionen. Fragen
+        Sie sich:
+      </p>
+      <ul>
+        <li>
+          Welche Akteure sind beteiligt? (z. B. Bürger oder Bürgerin, eine
+          Behörde, ein System, eine Applikation)
+        </li>
+        <li>
+          Welche Aktionen passieren? (z. B. prüft Angaben, sendet Daten)
+        </li>
+        <li>
+          Wann passiert etwas? (z. B. zeitliche oder prozessuale Abhängigkeit)
+        </li>
+        <li>
+          Wo passiert etwas? (z. B. Medium, Format, Ort, Datenbank)
+        </li>
+        <li>Warum passiert etwas? (Hinweis auf den Paragrafen)</li>
+      </ul>
+      <p>
+        Der Start mag Ihnen leichter fallen, wenn Sie als Basis eine zeitliche
+        Abfolge wählen. Hier sind einige Elemente, die Sie nutzen können:
+      </p>
+      <img
+        src="/werkzeugfinder/flowchart-elements.png"
+        alt="Beispielhafte Darstellung von Elementen eines Flussdiagramms"
+        class="mt-md w-full rounded-sm border border-lavender-400"
+      />
+    </section>
+
+    <section>
+      <h2>
+        Wenn die erste Skizze steht: wenden Sie die fünf Prinzipien für
+        digitaltaugliche Gesetzgebung darauf an
+      </h2>
+      <p>
+        Markieren Sie in Ihrer Visualisierung, in welchen Schritten der
+        Umsetzung die fünf Prinzipien für digitaltaugliche Gesetzgebung relevant
+        sein könnten. Gehen Sie dabei Prinzip für Prinzip vor. Lassen Sie die
+        dadurch gewonnenen Erkenntnisse in die digitaltaugliche Gestaltung des
+        Regelungsvorhabens einfließen.
+      </p>
+    </section>
+
+    <section>
+      <h2>Arbeiten Sie von grob zu fein</h2>
+      <p>
+        Starten Sie mit reduzierten Informationen und ergänzen Sie nach und nach
+        Details in Ihrem Diagramm. Starten Sie mit Stift auf Papier. Im
+        Mittelpunkt steht der Nutzen der Visualisierung, nicht deren visuelle
+        Qualität.
+      </p>
+    </section>
+
+    <section>
+      <h2>Hier bekommen Sie Hilfe</h2>
+      <p>
+        In Ihrem Referat, in Ihrem Ministerium oder in nachgelagerten Behörden
+        kann es Kolleginnen und Kollegen geben, die bereits mit Visualisierungen
+        arbeiten oder an einem der Digitalcheck-Workshops teilgenommen haben.
+        Bitten Sie sie um Unterstützung oder wenden Sie sich an den
+        Digitalcheck-Support (<a href="mailto:digitalcheck@digitalservice.bund.de"
+          >digitalcheck@digitalservice.bund.de</a
+        >, 0151 4076 7839). Mehr zur Visualisierung mit Flussdiagrammen finden
+        Sie hier: <a href="https://www.ondea.de/DE/ZfL/ZfL_node.html"
+          >ondea.de/DE/ZfL/ZfL_node.html</a
+        >, Modul 10 im Video „Visualisierung".
+      </p>
+      <a href={routes.werkzeugfinder.path}>Zurück zum Werkzeugfinder</a>
+    </section>
+  </main>
+</Layout>

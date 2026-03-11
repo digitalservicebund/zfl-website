@@ -32,6 +32,10 @@ fileignoreconfig:
     checksum: 2c449a89d7fa9be57170bc960a30f51381f9a5d8d046605a6e30c083886163dd
   - filename: doc/adr/0004-configuration-management.md
     checksum: 367a262dfe679ea3254c86879a09d98b0e03863b4c514f58ccd3609afb58bdae
+  - filename: src/pages/werkzeugfinder/flussdiagramm.astro # False positive: German text "sendet Daten", "Datenbank"
+    checksum: 9eeac595dba1c814fda277b0119e338b2c51071e109247db1f40b102c93b736b
+  - filename: src/pages/werkzeugfinder/quiz.astro # False positive: JS object check "Object.keys(...)"
+    checksum: e8c7c2e8a87dc5d4000d1daf24ab216cac72af43fa5c1e15b5aa4475f8a09dbe
 allowed_patterns:
   - \@[a-z0-9]{40} # Allow fixing action hashes
   - "secrets: inherit"

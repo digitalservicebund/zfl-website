@@ -1,0 +1,26 @@
+---
+import Hero from "@/components/Hero.astro";
+import Layout from "@/layouts/Layout.astro";
+import { routes } from "@/config/routes";
+
+export const frontmatter = {
+  title: "Schaubild Anleitung",
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero look="blue">
+      <h1>Schaubild Anleitung</h1>
+    </Hero>
+
+    <section>
+      <h2>Diese Seite befindet sich im Aufbau</h2>
+      <p>
+        Diese Seite befindet sich momentan noch im Aufbau und Inhalte folgen in
+        Kürze.
+      </p>
+      <a href={routes.werkzeugfinder.path}>Zurück zum Werkzeugfinder</a>
+    </section>
+  </main>
+</Layout>

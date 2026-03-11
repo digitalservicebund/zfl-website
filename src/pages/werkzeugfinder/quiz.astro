@@ -1,0 +1,168 @@
+---
+import Hero from "@/components/Hero.astro";
+import Layout from "@/layouts/Layout.astro";
+import { routes } from "@/config/routes";
+import { getAllObjects, getAllReasons, getAllRessorts } from "@/data/werkzeugfinder";
+
+export const frontmatter = {
+  title: "Werkzeugfinder für Visualisierungen",
+};
+
+const ressorts = getAllRessorts();
+const objects = getAllObjects();
+const reasons = getAllReasons();
+
+const empfehlungBase = routes.werkzeugfinder.children.empfehlung.path;
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero look="blue">
+      <h1>Werkzeugfinder für Visualisierungen</h1>
+      <p slot="subtitle">
+        Beantworten Sie uns drei Fragen und wir schlagen Ihnen das für Ihren
+        Anlass passende Werkzeug vor.
+      </p>
+    </Hero>
+
+    <section
+      x-data={`{
+        ressort: '',
+        object: '',
+        reason: '',
+        errors: {},
+        submit() {
+          this.errors = {};
+          if (!this.ressort) this.errors.ressort = 'Bitte wählen Sie ein Ressort aus.';
+          if (!this.object) this.errors.object = 'Bitte wählen Sie eine Option aus.';
+          if (!this.reason) this.errors.reason = 'Bitte wählen Sie einen Grund aus.';
+          if (Object.keys(this.errors).length > 0) return;
+          window.location.href = '${empfehlungBase}/' + this.ressort + '/' + this.object + '?reason=' + this.reason;
+        }
+      }`}
+    >
+      <div class="quiz-question border-b border-lavender-400 pb-md mb-md">
+        <p class="ds-label-section text-cosmic-blue-base mb-2">1 von 3</p>
+        <h2 class="mt-0">In welchem Ressort arbeiten Sie?</h2>
+        <p>
+          Diese Information benötigen wir, um in Ihrem Haus verfügbare Werkzeuge
+          zu finden.
+        </p>
+        <div class="mt-sm">
+          <label for="ressort-select" class="ds-label-01-bold block mb-4">
+            Ressort
+          </label>
+          <select
+            id="ressort-select"
+            name="ressort"
+            x-model="ressort"
+            class="border border-ds-gray-600 rounded-sm px-16 py-10 w-full max-w-sm bg-white focus:outline-2 focus:outline-cosmic-blue-base"
+            :class="{ 'border-red-600': errors.ressort }"
+            aria-describedby="ressort-error"
+          >
+            <option value="">Bitte auswählen</option>
+            {
+              ressorts.map((r) => (
+                <option value={r.id}>{r.name}</option>
+              ))
+            }
+          </select>
+          <p
+            id="ressort-error"
+            x-show="errors.ressort"
+            x-text="errors.ressort"
+            class="text-red-600 mt-4 text-sm"
+            role="alert"
+          >
+          </p>
+        </div>
+      </div>
+
+      <div class="quiz-question border-b border-lavender-400 pb-md mb-md">
+        <p class="ds-label-section text-cosmic-blue-base mb-2">2 von 3</p>
+        <h2 class="mt-0">Was möchten Sie darstellen?</h2>
+        <p>Die Art der Darstellung gibt vor, welches Werkzeug am besten passt.</p>
+        <fieldset class="mt-sm border-0 p-0 m-0" aria-describedby="object-error">
+          <legend class="sr-only">Was möchten Sie darstellen?</legend>
+          <div class="space-y-12">
+            {
+              objects.map((obj) => (
+                <label class="flex gap-12 cursor-pointer group">
+                  <input
+                    type="radio"
+                    name="object"
+                    value={obj.id}
+                    x-model="object"
+                    class="mt-4 h-20 w-20 flex-none accent-cosmic-blue-base cursor-pointer"
+                  />
+                  <span>
+                    <span class="ds-label-01-bold block">{obj.name}</span>
+                    {obj.description && (
+                      <span class="text-sm text-gray-700">{obj.description}</span>
+                    )}
+                  </span>
+                </label>
+              ))
+            }
+          </div>
+          <p
+            id="object-error"
+            x-show="errors.object"
+            x-text="errors.object"
+            class="text-red-600 mt-8 text-sm"
+            role="alert"
+          >
+          </p>
+        </fieldset>
+      </div>
+
+      <div class="quiz-question pb-md mb-md">
+        <p class="ds-label-section text-cosmic-blue-base mb-2">3 von 3</p>
+        <h2 class="mt-0">Wofür möchten Sie die Visualisierung erstellen?</h2>
+        <p>Bei mehreren Gründen nennen Sie uns den wichtigsten.</p>
+        <fieldset class="mt-sm border-0 p-0 m-0" aria-describedby="reason-error">
+          <legend class="sr-only">Wofür möchten Sie die Visualisierung erstellen?</legend>
+          <div class="space-y-12">
+            {
+              reasons.map((r) => (
+                <label class="flex gap-12 cursor-pointer group">
+                  <input
+                    type="radio"
+                    name="reason"
+                    value={r.id}
+                    x-model="reason"
+                    class="mt-4 h-20 w-20 flex-none accent-cosmic-blue-base cursor-pointer"
+                  />
+                  <span>
+                    <span class="ds-label-01-bold block">{r.name}</span>
+                    {r.description && (
+                      <span class="text-sm text-gray-700">{r.description}</span>
+                    )}
+                  </span>
+                </label>
+              ))
+            }
+          </div>
+          <p
+            id="reason-error"
+            x-show="errors.reason"
+            x-text="errors.reason"
+            class="text-red-600 mt-8 text-sm"
+            role="alert"
+          >
+          </p>
+        </fieldset>
+      </div>
+
+      <div>
+        <button
+          type="button"
+          @click="submit()"
+          class="btn btn-primary"
+        >
+          Werkzeug suchen
+        </button>
+      </div>
+    </section>
+  </main>
+</Layout>

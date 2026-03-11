@@ -59,6 +59,33 @@ export const routes = {
       },
     },
   },
+  werkzeugfinder: {
+    path: buildUrl("/werkzeugfinder"),
+    title: "Werkzeugfinder",
+    showInHeader: false,
+    children: {
+      quiz: {
+        path: buildUrl("/werkzeugfinder/quiz"),
+        title: "Werkzeugfinder – Quiz",
+      },
+      empfehlung: {
+        path: buildUrl("/werkzeugfinder/empfehlung"),
+        title: "Werkzeugfinder – Empfehlung",
+      },
+      flussdiagramm: {
+        path: buildUrl("/werkzeugfinder/flussdiagramm"),
+        title: "Flussdiagramm Anleitung",
+      },
+      schaubild: {
+        path: buildUrl("/werkzeugfinder/schaubild"),
+        title: "Schaubild Anleitung",
+      },
+      entscheidungsbaum: {
+        path: buildUrl("/werkzeugfinder/entscheidungsbaum"),
+        title: "Entscheidungsbaum Anleitung",
+      },
+    },
+  },
   impressum: {
     path: buildUrl("/impressum"),
     title: "Impressum",

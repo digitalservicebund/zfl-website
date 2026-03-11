@@ -1,0 +1,170 @@
+---
+import Hero from "@/components/Hero.astro";
+import Layout from "@/layouts/Layout.astro";
+import { routes } from "@/config/routes";
+import {
+  findResultByObjectAndRessort,
+  getAllObjectIds,
+  getAllRessortIds,
+  getObjectById,
+  getReasonById,
+  getRessortById,
+} from "@/data/werkzeugfinder";
+
+export function getStaticPaths() {
+  const ressortIds = getAllRessortIds();
+  const objectIds = getAllObjectIds();
+  return ressortIds.flatMap((ressort) =>
+    objectIds.map((object) => ({ params: { ressort, object } })),
+  );
+}
+
+const { ressort: ressortId, object: objectId } = Astro.params;
+
+const ressort = getRessortById(ressortId);
+const object = getObjectById(objectId);
+const result = findResultByObjectAndRessort(objectId, ressortId);
+
+const quizPath = routes.werkzeugfinder.children.quiz.path;
+---
+
+<Layout title="Empfohlenes Werkzeug – Werkzeugfinder">
+  <main class="breakout-grid">
+    <Hero look="blue">
+      <h1>Empfohlenes Werkzeug</h1>
+    </Hero>
+
+    {
+      result ? (
+        <>
+          <section>
+            <div class="border-4 border-lavender-400 rounded-sm overflow-hidden">
+              <img
+                src={`/werkzeugfinder/${result.cluster.img.src}`}
+                alt={result.cluster.img.alt}
+                class="w-full object-cover max-h-64"
+              />
+              <div class="p-md">
+                <p class="ds-label-section text-gray-900 mb-4">
+                  Wir empfehlen Ihnen eine Visualisierung als:
+                </p>
+                <h2 class="mt-0">{result.cluster.name}</h2>
+                <p>{result.cluster.description}</p>
+                <a
+                  href={`${routes.werkzeugfinder.path}/${result.cluster.id}`}
+                  class="btn btn-primary"
+                >
+                  {result.cluster.name} Anleitung
+                </a>
+
+                <div class="mt-lg divide-y divide-lavender-400 border border-lavender-400 rounded-sm">
+                  {result.recommendations.map((rec) => (
+                    <div class="p-md">
+                      <p class="ds-label-section text-gray-900 mb-4">
+                        {rec.fidelity.name}
+                      </p>
+                      <h3 class="mt-0">{rec.primaryTool.name}</h3>
+                      <div class="flex flex-col gap-md sm:flex-row">
+                        <div class="flex-1">
+                          <p>{rec.primaryTool.description}</p>
+                          {rec.primaryTool.link && (
+                            <p class="whitespace-pre-line">
+                              {rec.primaryTool.link}
+                            </p>
+                          )}
+                          {rec.primaryTool.access && (
+                            <p class="text-sm bg-lavender-200 p-sm rounded-sm">
+                              <strong>Zugang: </strong>
+                              {rec.primaryTool.access}
+                            </p>
+                          )}
+                        </div>
+                        {(rec.primaryTool.img.src ||
+                          rec.alternativeTools.length > 0) && (
+                          <div class="flex-1 space-y-md">
+                            {rec.primaryTool.img.src && (
+                              <img
+                                src={`/werkzeugfinder/${rec.primaryTool.img.src}`}
+                                alt={rec.primaryTool.img.alt}
+                                class="w-full rounded-sm border border-lavender-400"
+                              />
+                            )}
+                            {rec.alternativeTools.length > 0 && (
+                              <div class="bg-lavender-200 p-sm rounded-sm">
+                                <h4 class="mt-0">Alternativen</h4>
+                                <p>
+                                  Wenn Sie {rec.primaryTool.name} nicht nutzen
+                                  können oder möchten, können Sie ein{" "}
+                                  {result.cluster.name} auch in folgenden
+                                  Anwendungen erstellen:
+                                </p>
+                                <ul>
+                                  {rec.alternativeTools.map((alt) => (
+                                    <li>{alt.name}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section
+            x-data="{ reasonName: '' }"
+            x-init={`
+              const params = new URLSearchParams(window.location.search);
+              const reasonId = params.get('reason');
+              const reasonMap = ${JSON.stringify(
+                Object.fromEntries(
+                  [
+                    "austausch",
+                    "selbst",
+                    "dokumentation",
+                    "unbekannt",
+                    "anderes",
+                  ].map((id) => [id, getReasonById(id)?.name ?? id]),
+                ),
+              )};
+              reasonName = reasonId ? (reasonMap[reasonId] || reasonId) : '';
+            `}
+          >
+            <div class="bg-lavender-200 border border-lavender-400 rounded-sm p-md">
+              <h3 class="mt-0">Ihre Auswahl</h3>
+              <ul>
+                <li>
+                  Ressort: <strong>{ressort?.name ?? ressortId}</strong>
+                </li>
+                <li>
+                  Objekt der Darstellung:{" "}
+                  <strong>{object?.name ?? objectId}</strong>
+                </li>
+                <li x-show="reasonName">
+                  Grund der Visualisierung:{" "}
+                  <strong x-text="reasonName" />
+                </li>
+              </ul>
+              <a href={quizPath}>Eingaben ändern</a>
+            </div>
+          </section>
+        </>
+      ) : (
+        <section>
+          <h2>Es ist ein Fehler aufgetreten.</h2>
+          <p>
+            Es tut uns Leid! Aus unbekannten Gründen ist ein Fehler aufgetreten.
+            Bitte versuchen Sie es erneut.
+          </p>
+          <a href={quizPath} class="btn btn-primary">
+            Zurück
+          </a>
+        </section>
+      )
+    }
+  </main>
+</Layout>
