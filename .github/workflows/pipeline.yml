@@ -138,7 +138,7 @@ jobs:
       url: https://zfl.dev.tech.digitalservice.dev
     steps:
       - name: Deploy latest container image
-        uses: digitalservicebund/argocd-deploy@d14e68e4c78222189d8a20c1552639f33f93fe91
+        uses: digitalservicebund/argocd-deploy@050e50ee533ead763aa61d2e511ae5ae9e769593
         with:
           environment: staging
           version: ${{ github.sha }}
@@ -164,7 +164,7 @@ jobs:
 
     steps:
       - name: Deploy latest container image
-        uses: digitalservicebund/argocd-deploy@d14e68e4c78222189d8a20c1552639f33f93fe91
+        uses: digitalservicebund/argocd-deploy@050e50ee533ead763aa61d2e511ae5ae9e769593
         with:
           environment: production
           version: ${{ github.sha }}
