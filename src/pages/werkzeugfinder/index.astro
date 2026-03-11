@@ -2,107 +2,177 @@
 import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
 import { routes } from "@/config/routes";
+import {
+  getAllObjects,
+  getAllReasons,
+  getAllRessorts,
+} from "@/data/werkzeugfinder";
 
 export const frontmatter = {
   title: "Werkzeugfinder für Visualisierungen",
-  sitemap: true,
 };
+
+const ressorts = getAllRessorts();
+const objects = getAllObjects();
+const reasons = getAllReasons();
+
+const empfehlungBase = routes.werkzeugfinder.children.empfehlung.path;
 ---
 
 <Layout title={frontmatter.title}>
   <main class="breakout-grid">
-    <Hero look="blue">
-      <h1>Visualisieren im Digitalcheck</h1>
+    <Hero>
+      <h1>Werkzeugfinder für Visualisierungen</h1>
       <p slot="subtitle">
-        Die Visualisierung hilft Ihnen, komplexe Sachverhalte zu strukturieren
-        und dadurch schneller und intuitiver erfassbar zu machen – Zusammenhänge
-        werden sichtbar und Sie können Möglichkeiten der Digitalisierung in der
-        Umsetzung identifizieren. Beginnen Sie die Arbeit mit der Visualisierung
-        vor der ersten Textarbeit, um Aspekte der Digitaltauglichkeit frühzeitig
-        zu erkennen und bei der Verschriftlichung Ihres Regelungsvorhabens
-        berücksichtigen zu können.
+        Beantworten Sie uns drei Fragen und wir schlagen Ihnen das für Ihren
+        Anlass passende Werkzeug vor.
       </p>
     </Hero>
 
-    <section>
-      <h2>Mit welchem Werkzeug visualisieren?</h2>
-      <p>
-        Es existieren eine Vielzahl von Werkzeuge und Programme, in denen
-        Visualisierungen angefertigt werden können. Zudem ist der Katalog an
-        verfügbaren Werkzeugen von Ressort zu Ressort unterschiedlich. Hier
-        können Sie das Werkzeug finden, welches für Ihren Anlass das richtige
-        ist.
-      </p>
-      <a
-        class="btn btn-primary"
-        href={routes.werkzeugfinder.children.quiz.path}
-      >
-        Werkzeug finden
-      </a>
-    </section>
-
-    <section>
-      <h2>Wobei helfen Ihnen Visualisierungen?</h2>
-      <p>
-        Die Visualisierung hilft Ihnen, komplexe Sachverhalte zu strukturieren
-        und dadurch schneller und intuitiver erfassbar zu machen.
-      </p>
-      <ul>
-        <li>
-          Beim Erstellen der Visualisierung setzen Sie sich bereits mit
-          digitalen Möglichkeiten und neu entstehenden Lösungsräumen auseinander.
-        </li>
-        <li>
-          Digitale Möglichkeiten schaffen und erfordern andere Prozesse und
-          Wirklogiken, die sich gut visuell abbilden lassen (z. B.
-          Zusammenfassung von Schritten durch Automatisierung, Datenabgleich,
-          Entscheidungslogiken).
-        </li>
-        <li>
-          Eine Visualisierung hilft Ihnen Logikbrüche, Medienbrüche,
-          Inkonsistenzen, offene Verfahrensenden, Schleifen, uneinheitliche
-          Rechtsbegriffe und mögliche zu vermeidende Schriftformerfordernisse zu
-          erkennen.
-        </li>
-      </ul>
-    </section>
-
-    <section class="breakout grid gap-md bg-lavender-base py-lg md:grid-cols-2">
-      <div>
-        <h3>Die Darstellungen helfen auch bei der Umsetzung</h3>
+    <section
+      x-data={`{
+        ressort: '',
+        object: '',
+        reason: '',
+        errors: {},
+        submit() {
+          this.errors = {};
+          if (!this.ressort) this.errors.ressort = 'Bitte wählen Sie ein Ressort aus.';
+          if (!this.object) this.errors.object = 'Bitte wählen Sie eine Option aus.';
+          if (!this.reason) this.errors.reason = 'Bitte wählen Sie einen Grund aus.';
+          if (Object.keys(this.errors).length > 0) return;
+          window.location.href = '${empfehlungBase}/' + this.ressort + '/' + this.object + '?reason=' + this.reason;
+        }
+      }`}
+    >
+      <div class="quiz-question border-lavender-400 pb-md mb-md border-b">
+        <p class="ds-label-section text-cosmic-blue-base mb-2">1 von 3</p>
+        <h2 class="mt-0">In welchem Ressort arbeiten Sie?</h2>
         <p>
-          Personen, die Ihr Regelungsvorhaben digital umsetzen (z. B.
-          Programmiererinnen und Programmierer), denken in Prozessen,
-          Strukturen, Systemen und Zusammenhängen. Mit einer Visualisierung
-          können Sie diesen beim Verstehen und Übersetzen Ihres
-          Regelungsvorhabens helfen und so eine bessere Umsetzung ermöglichen.
-          Darüber hinaus kann Ihre Visualisierung Ihren Kolleginnen und Kollegen
-          sowie dem NKR das Verständnis erleichtern. Schon einfache Scans oder
-          Fotos Ihrer Skizzen reichen dafür häufig.
+          Diese Information benötigen wir, um in Ihrem Haus verfügbare Werkzeuge
+          zu finden.
         </p>
+        <div class="mt-sm">
+          <label for="ressort-select" class="ds-label-01-bold mb-4 block">
+            Ressort
+          </label>
+          <select
+            id="ressort-select"
+            name="ressort"
+            x-model="ressort"
+            class="border-ds-gray-600 focus:outline-cosmic-blue-base w-full rounded-sm border bg-white px-16 py-10 focus:outline-2"
+            :class="{ 'border-red-700': errors.ressort }"
+            aria-describedby="ressort-error"
+          >
+            <option value="">Bitte auswählen</option>
+            {ressorts.map((r) => <option value={r.id}>{r.name}</option>)}
+          </select>
+          <p
+            id="ressort-error"
+            x-show="errors.ressort"
+            x-text="errors.ressort"
+            class="mt-4 text-base text-red-700"
+            role="alert"
+          >
+          </p>
+        </div>
       </div>
-      <div class="bg-cosmic-blue-base p-md text-white rounded-sm">
-        <h3 class="mt-0 text-white">Tipp: Schaffen Sie ein gemeinsames Verständnis</h3>
-        <p class="mb-0">
-          Visualisieren Sie gemeinsam mit Kolleginnen und Kollegen aus Ihrem
-          Referat, anderen Abteilungen, anderen Expertinnen und Experten oder an
-          der Umsetzung beteiligten Akteuren, um schnell ein gemeinsames
-          Verständnis des Regelungsvorhabens und seiner
-          Umsetzungsmöglichkeiten zu schaffen. Die Diskussion auf gleicher
-          Grundlage ist häufig ebenso wertvoll wie die entstandene
-          Visualisierung selbst.
-        </p>
-      </div>
-    </section>
 
-    <section>
-      <p>
-        Mehr dazu lesen Sie in diesem Blogbeitrag: <a
-          href="https://digitalservice.bund.de/blog/mit-visualisierungen-zu-einer-digitaltauglichen-gesetzgebung"
+      <div class="quiz-question border-lavender-400 pb-md mb-md border-b">
+        <p class="ds-label-section text-cosmic-blue-base mb-2">2 von 3</p>
+        <h2 class="mt-0">Was möchten Sie darstellen?</h2>
+        <p>
+          Die Art der Darstellung gibt vor, welches Werkzeug am besten passt.
+        </p>
+        <fieldset
+          class="mt-sm m-0 border-0 p-0"
+          aria-describedby="object-error"
         >
-          Mit Visualisierungen zu einer digitaltauglichen Gesetzgebung
-        </a>.
-      </p>
+          <legend class="sr-only">Was möchten Sie darstellen?</legend>
+          <div class="space-y-12">
+            {
+              objects.map((obj) => (
+                <label class="group flex cursor-pointer gap-24">
+                  <input
+                    type="radio"
+                    name="object"
+                    value={obj.id}
+                    x-model="object"
+                    class="accent-cosmic-blue-base h-40 w-40 flex-none cursor-pointer"
+                  />
+                  <span>
+                    <span class="ds-label-01-bold block">{obj.name}</span>
+                    {obj.description && (
+                      <span class="text-base text-gray-900">
+                        {obj.description}
+                      </span>
+                    )}
+                  </span>
+                </label>
+              ))
+            }
+          </div>
+          <p
+            id="object-error"
+            x-show="errors.object"
+            x-text="errors.object"
+            class="mt-8 text-base text-red-700"
+            role="alert"
+          >
+          </p>
+        </fieldset>
+      </div>
+
+      <div class="quiz-question pb-md mb-md">
+        <p class="ds-label-section text-cosmic-blue-base mb-2">3 von 3</p>
+        <h2 class="mt-0">Wofür möchten Sie die Visualisierung erstellen?</h2>
+        <p>Bei mehreren Gründen nennen Sie uns den wichtigsten.</p>
+        <fieldset
+          class="mt-sm m-0 border-0 p-0"
+          aria-describedby="reason-error"
+        >
+          <legend class="sr-only"
+            >Wofür möchten Sie die Visualisierung erstellen?</legend
+          >
+          <div class="space-y-12">
+            {
+              reasons.map((r) => (
+                <label class="group flex cursor-pointer gap-24">
+                  <input
+                    type="radio"
+                    name="reason"
+                    value={r.id}
+                    x-model="reason"
+                    class="accent-cosmic-blue-base h-40 w-40 flex-none cursor-pointer"
+                  />
+                  <span>
+                    <span class="ds-label-01-bold block">{r.name}</span>
+                    {r.description && (
+                      <span class="text-base text-gray-900">
+                        {r.description}
+                      </span>
+                    )}
+                  </span>
+                </label>
+              ))
+            }
+          </div>
+          <p
+            id="reason-error"
+            x-show="errors.reason"
+            x-text="errors.reason"
+            class="mt-8 text-base text-red-700"
+            role="alert"
+          >
+          </p>
+        </fieldset>
+      </div>
+
+      <div>
+        <button type="button" @click="submit()" class="btn btn-primary">
+          Werkzeug suchen
+        </button>
+      </div>
     </section>
   </main>
 </Layout>

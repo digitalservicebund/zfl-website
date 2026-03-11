@@ -64,10 +64,6 @@ export const routes = {
     title: "Werkzeugfinder",
     showInHeader: false,
     children: {
-      quiz: {
-        path: buildUrl("/werkzeugfinder/quiz"),
-        title: "Werkzeugfinder – Quiz",
-      },
       empfehlung: {
         path: buildUrl("/werkzeugfinder/empfehlung"),
         title: "Werkzeugfinder – Empfehlung",

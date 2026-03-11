@@ -660,9 +660,7 @@ export const getAllObjects = (): VisualisationObject[] =>
   ) as unknown as VisualisationObject[];
 
 export const getAllReasons = (): Reason[] =>
-  [...data.reasons].sort(
-    (a, b) => a.order - b.order,
-  ) as unknown as Reason[];
+  [...data.reasons].sort((a, b) => a.order - b.order) as unknown as Reason[];
 
 export const getAllRessortIds = (): string[] => data.ressorts.map((r) => r.id);
 

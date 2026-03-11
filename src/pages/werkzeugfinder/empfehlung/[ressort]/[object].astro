@@ -1,6 +1,7 @@
 ---
 import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
+import Card from "@/components/Card.astro";
 import { routes } from "@/config/routes";
 import {
   findResultByObjectAndRessort,
@@ -25,12 +26,12 @@ const ressort = getRessortById(ressortId);
 const object = getObjectById(objectId);
 const result = findResultByObjectAndRessort(objectId, ressortId);
 
-const quizPath = routes.werkzeugfinder.children.quiz.path;
+const quizPath = routes.werkzeugfinder.path;
 ---
 
 <Layout title="Empfohlenes Werkzeug – Werkzeugfinder">
   <main class="breakout-grid">
-    <Hero look="blue">
+    <Hero>
       <h1>Empfohlenes Werkzeug</h1>
     </Hero>
 
@@ -38,14 +39,14 @@ const quizPath = routes.werkzeugfinder.children.quiz.path;
       result ? (
         <>
           <section>
-            <div class="border-4 border-lavender-400 rounded-sm overflow-hidden">
+            <div class="border-lavender-400 overflow-hidden rounded-sm border-4">
               <img
                 src={`/werkzeugfinder/${result.cluster.img.src}`}
                 alt={result.cluster.img.alt}
-                class="w-full object-cover max-h-64"
+                class="max-h-64 w-full object-cover"
               />
               <div class="p-md">
-                <p class="ds-label-section text-gray-900 mb-4">
+                <p class="ds-label-section mb-4 text-gray-900">
                   Wir empfehlen Ihnen eine Visualisierung als:
                 </p>
                 <h2 class="mt-0">{result.cluster.name}</h2>
@@ -57,23 +58,26 @@ const quizPath = routes.werkzeugfinder.children.quiz.path;
                   {result.cluster.name} Anleitung
                 </a>
 
-                <div class="mt-lg divide-y divide-lavender-400 border border-lavender-400 rounded-sm">
+                <div class="mt-lg divide-lavender-400 border-lavender-400 divide-y rounded-sm border">
                   {result.recommendations.map((rec) => (
                     <div class="p-md">
-                      <p class="ds-label-section text-gray-900 mb-4">
+                      <p class="ds-label-section mb-4 text-gray-900">
                         {rec.fidelity.name}
                       </p>
                       <h3 class="mt-0">{rec.primaryTool.name}</h3>
-                      <div class="flex flex-col gap-md sm:flex-row">
+                      <div class="gap-md flex flex-col sm:flex-row">
                         <div class="flex-1">
                           <p>{rec.primaryTool.description}</p>
                           {rec.primaryTool.link && (
-                            <p class="whitespace-pre-line">
+                            <a
+                              href={rec.primaryTool.link}
+                              class="whitespace-pre-line"
+                            >
                               {rec.primaryTool.link}
-                            </p>
+                            </a>
                           )}
                           {rec.primaryTool.access && (
-                            <p class="text-sm bg-lavender-200 p-sm rounded-sm">
+                            <p class="bg-lavender-200 p-sm rounded-sm text-sm">
                               <strong>Zugang: </strong>
                               {rec.primaryTool.access}
                             </p>
@@ -81,12 +85,12 @@ const quizPath = routes.werkzeugfinder.children.quiz.path;
                         </div>
                         {(rec.primaryTool.img.src ||
                           rec.alternativeTools.length > 0) && (
-                          <div class="flex-1 space-y-md">
+                          <div class="space-y-md flex-1">
                             {rec.primaryTool.img.src && (
                               <img
                                 src={`/werkzeugfinder/${rec.primaryTool.img.src}`}
                                 alt={rec.primaryTool.img.alt}
-                                class="w-full rounded-sm border border-lavender-400"
+                                class="border-lavender-400 w-full rounded-sm border"
                               />
                             )}
                             {rec.alternativeTools.length > 0 && (
@@ -134,7 +138,7 @@ const quizPath = routes.werkzeugfinder.children.quiz.path;
               reasonName = reasonId ? (reasonMap[reasonId] || reasonId) : '';
             `}
           >
-            <div class="bg-lavender-200 border border-lavender-400 rounded-sm p-md">
+            <Card look="lavender">
               <h3 class="mt-0">Ihre Auswahl</h3>
               <ul>
                 <li>
@@ -145,12 +149,15 @@ const quizPath = routes.werkzeugfinder.children.quiz.path;
                   <strong>{object?.name ?? objectId}</strong>
                 </li>
                 <li x-show="reasonName">
-                  Grund der Visualisierung:{" "}
-                  <strong x-text="reasonName" />
+                  Grund der Visualisierung: <strong x-text="reasonName" />
                 </li>
               </ul>
-              <a href={quizPath}>Eingaben ändern</a>
-            </div>
+              <p>
+                <a class="btn btn-primary" href={quizPath}>
+                  Eingaben ändern
+                </a>
+              </p>
+            </Card>
           </section>
         </>
       ) : (
