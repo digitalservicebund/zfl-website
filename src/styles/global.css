@@ -1,12 +1,10 @@
 @import "@kern-ux/native/dist/kern.min.css";
-@import "@digitalservice4germany/angie/fonts.css" layer(base);
+@import "@kern-ux/native/dist/fonts/fira-sans.css";
 @import "tailwindcss";
 @config "@digitalservice4germany/style-dictionary/tailwind";
 @plugin "@digitalservice4germany/angie";
 
 @theme {
-  --font-sans: BundesSansWeb;
-
   --color-*: initial;
 
   --color-white: white;
@@ -25,20 +23,15 @@
   --spacing-md: 2rem;
   --spacing-lg: 2.5rem;
 
-  --max-content-width: 59rem;
+  --max-content-width: 80rem; /* 1280px */
   --container-padding-inline: clamp(1rem, 5vw, 3rem);
 }
 
 @media (width >= 48rem) {
   :root {
-    --spacing-md: 2.5rem;
-    --spacing-lg: 5rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
   }
-}
-
-:root {
-  --kern-typography-font-family-default: BundesSansWeb;
-  --kern-component-kopfzeile-font-family: BundesSansWeb;
 }
 
 @layer base {
@@ -101,16 +94,8 @@
   a,
   button {
     @apply cursor-pointer;
-    &.btn {
-      display: inline-flex;
-      padding: 14px 24px;
-      font-weight: 700;
-      letter-spacing: 0.16px;
-      line-height: 2;
-      border-radius: 4px;
-    }
 
-    &.btn-primary {
+    &.kern-btn--primary {
       background-color: var(--color-cosmic-blue-base);
       color: var(--color-white);
 
