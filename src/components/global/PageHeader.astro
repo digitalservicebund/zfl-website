@@ -23,13 +23,13 @@ const activeClasses = "border-cosmic-blue-base bg-lavender-base";
 ---
 
 <header
-  class="relative"
+  class="relative border-lavender-base border-b-2"
   x-data="{ mobileMenuOpen: false }"
   @resize.window="mobileMenuOpen = false"
 >
   <Kopfzeile className="relative z-30" />
   <div
-    class="kern-container border-lavender-base relative z-30 flex h-[72px] justify-between border-b-2 md:px-16"
+    class="kern-container relative z-30 flex h-[72px] justify-between md:px-16"
   >
     <!-- Logo and title -->
     <a
@@ -54,7 +54,7 @@ const activeClasses = "border-cosmic-blue-base bg-lavender-base";
     </a>
 
     <!-- Desktop Navigation -->
-    <nav class="flex items-center max-xl:hidden" data-testid="desktop-nav">
+    <nav class="flex items-center max-lg:hidden" data-testid="desktop-nav">
       {
         headerNavigation.map((item) => (
           <a
@@ -76,7 +76,7 @@ const activeClasses = "border-cosmic-blue-base bg-lavender-base";
     </nav>
 
     <!-- Mobile View Controls -->
-    <div class="flex items-center space-x-16 xl:hidden">
+    <div class="flex items-center space-x-16 lg:hidden">
       <a
         href={ZFL_PHONE.url}
         class="border-b-4 border-transparent"
