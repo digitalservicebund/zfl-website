@@ -23,7 +23,7 @@
   --spacing-md: 2rem;
   --spacing-lg: 2.5rem;
 
-  --max-content-width: 62rem;
+  --max-content-width: 62rem; /* 992px */
   --container-padding-inline: clamp(1rem, 5vw, 3rem);
 }
 
