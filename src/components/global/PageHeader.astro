@@ -4,6 +4,7 @@ import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import { routes, removeTrailingSlash } from "@/config/routes";
 import { isStaging } from "@/config/stage";
 import bundLogo from "@/images/logo/bund-logo.png";
+import bundLogoWhite from "@/images/logo/bund-logo-white.svg";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import { twMerge } from "tailwind-merge";
@@ -35,11 +36,8 @@ const activeClasses = "border-cosmic-blue-base bg-lavender-base";
       href={routes.home.path}
       class="link-unstyled flex items-center space-x-8"
     >
-      <Image
-        src={bundLogo}
-        alt="Logo des Bundes"
-        class="w-56 forced-colors:dark:invert"
-      />
+      <Image src={bundLogo} alt="Logo des Bundes" class="w-56 forced-colors:dark:hidden" />
+      <Image src={bundLogoWhite} alt="Logo des Bundes" class="w-56 hidden forced-colors:dark:block" />
       <p
         class="ds-label-01-bold ml-16 flex flex-col text-xl text-black max-lg:hidden"
       >
