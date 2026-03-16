@@ -45,21 +45,21 @@ const activeClasses = "border-cosmic-blue-base bg-lavender-base";
         class="w-56 hidden forced-colors:dark:block"
       />
       <p
-        class="ds-label-01-bold ml-16 flex flex-col text-xl text-black max-xl:hidden"
+        class="ds-label-01-bold ml-16 flex flex-col text-xl text-black md:max-[1050px]:hidden"
       >
         Zentrum für Legistik
       </p>
     </a>
 
     <!-- Desktop Navigation -->
-    <nav class="flex items-center max-lg:hidden" data-testid="desktop-nav">
+    <nav class="flex items-center max-md:hidden" data-testid="desktop-nav">
       {
         headerNavigation.map((item) => (
           <a
             href={item.path}
             class={twMerge(
               basicLinkClasses,
-              "ds-label-01-reg relative h-full border-b-4 border-transparent px-16 whitespace-nowrap",
+              "relative h-full border-b-4 border-transparent px-16 whitespace-nowrap",
               currentPath === item.path && activeClasses,
             )}
           >
@@ -67,14 +67,39 @@ const activeClasses = "border-cosmic-blue-base bg-lavender-base";
           </a>
         ))
       }
-      <div class="ds-label-01-reg px-16 text-nowrap text-gray-800">
-        Kontakt:{" "}
-        <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
+      <div
+        class="relative flex h-full items-center"
+        x-data="{ kontaktOpen: false }"
+        @click.outside="kontaktOpen = false"
+      >
+        <button
+          class="flex h-full cursor-pointer items-center border-b-4 border-transparent px-16 text-nowrap hover:bg-lavender-base"
+          @click="kontaktOpen = !kontaktOpen"
+          :aria-expanded="kontaktOpen"
+          aria-haspopup="true"
+        >
+          Kontakt
+          <span
+            class="kern-icon kern-icon--arrow-down ml-4 transition-transform"
+            :class="{ 'rotate-180': kontaktOpen }"
+            aria-hidden="true"></span>
+        </button>
+        <div
+          x-show="kontaktOpen"
+          style="display: none;"
+          class="absolute top-full right-0 z-50 border border-lavender-base bg-white px-16 py-12 text-nowrap shadow-sm flex flex-col gap-8"
+        >
+          <div>Support: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a></div>
+          <div>
+            Per Mail:
+            <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
+          </div>
+        </div>
       </div>
     </nav>
 
     <!-- Mobile View Controls -->
-    <div class="flex items-center space-x-16 lg:hidden">
+    <div class="flex items-center space-x-16 md:hidden">
       <a
         href={ZFL_PHONE.url}
         class="border-b-4 border-transparent"
