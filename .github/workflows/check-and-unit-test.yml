@@ -25,7 +25,7 @@ jobs:
         with:
           node-version-file: .node-version
 
-      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b5532a # v4.4.0
+      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
         name: Install pnpm
 
       - name: Cache pnpm dependencies
