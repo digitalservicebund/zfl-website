@@ -40,14 +40,13 @@ export const routes = {
   },
   anleitungenUndHilfsmittel: {
     path: buildUrl("/anleitungen-und-hilfsmittel"),
-    title: "Anleitungen und Hilfsmittel",
+    title: "Hilfsmittel",
     showInHeader: true,
   },
   ueberUns: {
     path: buildUrl("/ueber-uns"),
-    title: "Über das Zentrum für Legistik",
+    title: "Über uns",
     showInHeader: true,
-    isStagingOnly: true,
     children: {
       zahlenUndFakten: {
         path: buildUrl("/ueber-uns/zahlen-und-fakten"),

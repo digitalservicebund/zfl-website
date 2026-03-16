@@ -23,7 +23,7 @@
   --spacing-md: 2rem;
   --spacing-lg: 2.5rem;
 
-  --max-content-width: 80rem; /* 1280px */
+  --max-content-width: 82rem;
   --container-padding-inline: clamp(1rem, 5vw, 3rem);
 }
 
@@ -217,8 +217,8 @@ address {
 }
 
 @utility max-w-a11y {
-  /* 70ch @ 18px font size = 630px */
-  max-width: 630px;
+  /* 80ch @ 18px font size = 720px */
+  max-width: 720px;
 }
 
 @utility hero-image-overlay {
