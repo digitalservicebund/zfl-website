@@ -17,6 +17,7 @@ fileignoreconfig:
   - filename: .github/workflows/scan.yml
     allowed_patterns:
       - "key:"
+      - "TRIVY_PASSWORD: \\${{ }}"
   - filename: sonar-project.properties
     allowed_patterns:
       - projectKey
