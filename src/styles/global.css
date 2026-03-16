@@ -1,5 +1,6 @@
 @import "@kern-ux/native/dist/kern.min.css";
 @import "@kern-ux/native/dist/fonts/fira-sans.css";
+@import "./kern-utils.css";
 @import "tailwindcss";
 @config "@digitalservice4germany/style-dictionary/tailwind";
 @plugin "@digitalservice4germany/angie";
@@ -47,21 +48,21 @@
   }
 
   h1 {
-    @apply ds-heading-01-reg;
+    @apply kern-heading-display;
   }
 
   h2 {
-    @apply ds-heading-02-reg;
+    @apply kern-heading-x-large;
     @apply mt-lg;
   }
 
   h3 {
-    @apply ds-heading-03-reg;
+    @apply kern-heading-large;
     @apply mt-md;
   }
 
   h4 {
-    @apply font-bold;
+    @apply kern-heading-medium;
     @apply mt-sm;
   }
 
@@ -71,7 +72,6 @@
     /* 80ch @ 18px font size = 720px */
     max-width: 720px;
     margin-bottom: 1rem;
-    font-weight: 700;
     word-break: auto-phrase;
   }
 
