@@ -1,7 +1,8 @@
 ---
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import { routes } from "@/config/routes";
-import bmdsLogo from "@/images/logo/bmds-logo.png";
+import bmdsLogo from "@/images/logo/bmds-logo.svg";
+import bmdsLogoWhite from "@/images/logo/bmds-logo-white.svg";
 import { Image } from "astro:assets";
 
 type FooterItem = { path: string; title: string; prefix?: string };
@@ -58,7 +59,12 @@ const footerColumns: Record<string, FooterItem[]> = {
         <Image
           src={bmdsLogo}
           alt="Logo des Bundesministerium für Digitales und Staatsmodernisierung"
-          class="w-128 forced-colors:dark:invert forced-colors:dark:grayscale"
+          class="w-128 forced-colors:dark:hidden"
+        />
+        <Image
+          src={bmdsLogoWhite}
+          alt="Logo des Bundesministerium für Digitales und Staatsmodernisierung"
+          class="w-128 hidden forced-colors:dark:block"
         />
         <div class="max-w-2xl space-y-8">
           <h3 class="ds-label-03-bold">Federführung</h3><div
