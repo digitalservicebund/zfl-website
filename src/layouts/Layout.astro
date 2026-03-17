@@ -1,4 +1,5 @@
 ---
+import DebugGrid from "@/components/global/DebugGrid.astro";
 import Footer from "@/components/global/Footer.astro";
 import PageHeader from "@/components/global/PageHeader.astro";
 import Posthog from "@/components/global/Posthog.astro";
@@ -12,7 +13,6 @@ const { title: pageTitle } = Astro.props;
 const siteName = "Zentrum für Legistik";
 const title = pageTitle ? `${pageTitle} — ${siteName}` : siteName;
 const SEOImage = `${Astro.url.origin}/SEO_ZfL.png`;
-const debugGridColumns = Array.from({ length: 12 }, (_, index) => index + 1);
 ---
 
 <!doctype html>
@@ -47,73 +47,11 @@ const debugGridColumns = Array.from({ length: 12 }, (_, index) => index + 1);
     }}
   />
 
-  <body
-    class="relative"
-    x-data="{ showDebugGrid: new URLSearchParams(window.location.search).has('debug-grid') }"
-  >
-    <div class="debug-grid-overlay" aria-hidden="true" style="display: none" x-show="showDebugGrid">
-      <div class="debug-grid-overlay__container kern-container">
-        {
-          debugGridColumns.map((column) => (
-            <div class="debug-grid-overlay__column" data-column={column} />
-          ))
-        }
-      </div>
-    </div>
+  <body class="relative">
+    <DebugGrid />
     <PageHeader />
     <slot />
     <Footer />
     {isProduction && <Posthog />}
   </body>
 </html>
-
-<style>
-  .debug-grid-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 50;
-    pointer-events: none;
-  }
-
-  .debug-grid-overlay__container {
-    display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    column-gap: 2rem;
-    min-height: 100%;
-  }
-
-  .debug-grid-overlay__column {
-    position: relative;
-    min-height: 100%;
-    border-inline: 1px solid rgb(0 64 255 / 22%);
-    background-color: rgb(0 64 255 / 8%);
-  }
-
-  .debug-grid-overlay__column::before {
-    content: attr(data-column);
-    position: sticky;
-    top: 1rem;
-    left: 50%;
-    display: inline-flex;
-    justify-content: center;
-    min-width: 1.75rem;
-    padding: 0.125rem 0.375rem;
-    border-radius: 9999px;
-    background-color: rgb(0 64 255 / 90%);
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 700;
-    line-height: 1;
-    transform: translateX(-50%);
-  }
-
-  @media (max-width: 48rem) {
-    .debug-grid-overlay__container {
-      column-gap: 1rem;
-    }
-
-    .debug-grid-overlay__column::before {
-      display: none;
-    }
-  }
-</style>
