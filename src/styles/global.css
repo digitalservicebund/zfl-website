@@ -48,21 +48,21 @@
   }
 
   h1 {
-    @apply kern-heading-display;
+    @apply kern-heading-x-large;
   }
 
   h2 {
-    @apply kern-heading-x-large;
+    @apply kern-heading-large;
     @apply mt-lg;
   }
 
   h3 {
-    @apply kern-heading-large;
+    @apply kern-heading-medium;
     @apply mt-md;
   }
 
   h4 {
-    @apply kern-heading-medium;
+    @apply kern-heading-small;
     @apply mt-sm;
   }
 
