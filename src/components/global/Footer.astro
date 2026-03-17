@@ -36,7 +36,11 @@ const footerColumns: Record<string, FooterItem[]> = {
       {
         Object.entries(footerColumns).map(([heading, items]) => (
           <div class="row-span-2 grid grid-rows-subgrid gap-8">
-            {heading ? <h2 class="ds-label-section">{heading}</h2> : <div />}
+            {heading?.trim() ? (
+              <h2 class="ds-label-section">{heading}</h2>
+            ) : (
+              <div />
+            )}
             <ul class="list-unstyled flex flex-col gap-8">
               {items.map((item) => (
                 <li>
