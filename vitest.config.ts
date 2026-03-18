@@ -3,7 +3,6 @@ import { getViteConfig } from "astro/config";
 
 export default getViteConfig(
   {
-    // @ts-expect-error ignore for now
     test: {
       chaiConfig: {
         truncateThreshold: 200,
