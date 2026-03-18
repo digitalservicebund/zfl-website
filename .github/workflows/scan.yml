@@ -35,7 +35,7 @@ jobs:
           severity: "CRITICAL,HIGH"
           limit-severities-for-sarif: true
           exit-code: 2 # Fail the build!
-          version: "v0.68.2"
+          version: "v0.69.3"
       - name: Check trivy results
         if: always() # Bypass non-zero exit code
         run: |
@@ -49,13 +49,13 @@ jobs:
           fi
       # Upload SARIF results to GitHub Security tab
       - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@0d579ffd059c29b07949a3cce3983f0780820c98 # v4.32.6
+        uses: github/codeql-action/upload-sarif@b1bff81932f5cdfc8695c7752dcee935dcd061c8 # v4.33.0
         if: always() # Bypass non-zero exit code
         with:
           sarif_file: "trivy-results.sarif"
 
       - name: Send status to Slack
-        uses: digitalservicebund/notify-on-failure-gha@814d0c4b2ad6a3443e89c991f8657b10126510bf # v1.5.0
+        uses: digitalservicebund/notify-on-failure-gha@30386cb269b2406ec23f67ff77a20ce28ab0057c # v1.6.0
         if: ${{ failure() }}
         with:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

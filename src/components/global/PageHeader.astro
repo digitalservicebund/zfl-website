@@ -4,6 +4,7 @@ import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import { routes, removeTrailingSlash } from "@/config/routes";
 import { isStaging } from "@/config/stage";
 import bundLogo from "@/images/logo/bund-logo.png";
+import bundLogoWhite from "@/images/logo/bund-logo-white.svg";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import { twMerge } from "tailwind-merge";
@@ -22,14 +23,12 @@ const activeClasses = "border-cosmic-blue-base bg-lavender-base";
 ---
 
 <header
-  class="relative"
+  class="relative border-lavender-base border-b-2"
   x-data="{ mobileMenuOpen: false }"
   @resize.window="mobileMenuOpen = false"
 >
   <Kopfzeile className="relative z-30" />
-  <div
-    class="border-lavender-base relative z-30 flex h-[72px] justify-between border-b-2 bg-white pl-16 md:px-16"
-  >
+  <div class="container relative z-30 flex h-[72px] justify-between">
     <!-- Logo and title -->
     <a
       href={routes.home.path}
@@ -38,10 +37,15 @@ const activeClasses = "border-cosmic-blue-base bg-lavender-base";
       <Image
         src={bundLogo}
         alt="Logo des Bundes"
-        class="w-56 forced-colors:dark:invert"
+        class="w-56 forced-colors:dark:hidden"
+      />
+      <Image
+        src={bundLogoWhite}
+        alt="Logo des Bundes"
+        class="w-56 hidden forced-colors:dark:block"
       />
       <p
-        class="ds-label-01-bold ml-16 flex flex-col text-xl text-black max-lg:hidden"
+        class="font-bold ml-16 flex flex-col text-xl text-black md:max-[1050px]:hidden"
       >
         Zentrum für Legistik
       </p>
@@ -55,7 +59,7 @@ const activeClasses = "border-cosmic-blue-base bg-lavender-base";
             href={item.path}
             class={twMerge(
               basicLinkClasses,
-              "ds-label-01-reg relative h-full border-b-4 border-transparent px-16 whitespace-nowrap",
+              "relative h-full border-b-4 border-transparent px-16 whitespace-nowrap",
               currentPath === item.path && activeClasses,
             )}
           >
@@ -63,9 +67,34 @@ const activeClasses = "border-cosmic-blue-base bg-lavender-base";
           </a>
         ))
       }
-      <div class="ds-label-01-reg px-16 text-nowrap text-gray-800">
-        Kontakt:{" "}
-        <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
+      <div
+        class="relative flex h-full items-center"
+        x-data="{ kontaktOpen: false }"
+        @click.outside="kontaktOpen = false"
+      >
+        <button
+          class="flex h-full cursor-pointer items-center border-b-4 border-transparent px-16 text-nowrap hover:bg-lavender-base"
+          @click="kontaktOpen = !kontaktOpen"
+          :aria-expanded="kontaktOpen"
+          aria-haspopup="true"
+        >
+          Kontakt
+          <span
+            class="kern-icon kern-icon--arrow-down ml-4 transition-transform"
+            :class="{ 'rotate-180': kontaktOpen }"
+            aria-hidden="true"></span>
+        </button>
+        <div
+          x-show="kontaktOpen"
+          style="display: none;"
+          class="absolute top-full right-0 z-50 border border-lavender-base bg-white px-16 py-12 text-nowrap shadow-sm flex flex-col gap-8"
+        >
+          <div>Support: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a></div>
+          <div>
+            Per Mail:
+            <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
+          </div>
+        </div>
       </div>
     </nav>
 
@@ -109,7 +138,7 @@ const activeClasses = "border-cosmic-blue-base bg-lavender-base";
           href={item.path}
           class={twMerge(
             basicLinkClasses,
-            "ds-label-01-reg border-l-4 border-transparent p-16",
+            "border-l-4 border-transparent p-16",
             currentPath === item.path && activeClasses,
           )}
         >
@@ -117,7 +146,7 @@ const activeClasses = "border-cosmic-blue-base bg-lavender-base";
         </a>
       ))
     }
-    <div class="ds-label-01-reg ml-4 p-16 text-gray-800">
+    <div class="ml-4 p-16 text-gray-800">
       Kontakt:{" "}
       <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
     </div>

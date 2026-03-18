@@ -1,13 +1,10 @@
 @import "@kern-ux/native/dist/kern.min.css";
-@import "@digitalservice4germany/angie/fonts.css" layer(base);
+@import "@kern-ux/native/dist/fonts/fira-sans.css";
+@import "./kern-utils.css";
 @import "tailwindcss";
-@config "@digitalservice4germany/style-dictionary/tailwind";
-@plugin "@digitalservice4germany/angie";
 
 @theme {
-  --font-sans: BundesSansWeb;
-
-  --color-*: initial;
+  --spacing: 1px;
 
   --color-white: white;
 
@@ -18,27 +15,21 @@
   --color-lavender-200: #f6f7fb;
   --color-lavender-400: #eceef6;
 
-  --color-ds-gray-600: #b8bdc3;
   --color-ds-violet: #4c2c92;
 
   --spacing-sm: 1.25rem;
   --spacing-md: 2rem;
   --spacing-lg: 2.5rem;
 
-  --max-content-width: 59rem;
+  --max-content-width: 82rem;
   --container-padding-inline: clamp(1rem, 5vw, 3rem);
 }
 
 @media (width >= 48rem) {
   :root {
-    --spacing-md: 2.5rem;
-    --spacing-lg: 5rem;
+    --spacing-md: 2rem;
+    --spacing-lg: 4rem;
   }
-}
-
-:root {
-  --kern-typography-font-family-default: BundesSansWeb;
-  --kern-component-kopfzeile-font-family: BundesSansWeb;
 }
 
 @layer base {
@@ -54,21 +45,21 @@
   }
 
   h1 {
-    @apply ds-heading-01-reg;
+    @apply kern-heading-x-large;
   }
 
   h2 {
-    @apply ds-heading-02-reg;
+    @apply kern-heading-large;
     @apply mt-lg;
   }
 
   h3 {
-    @apply ds-heading-03-reg;
+    @apply kern-heading-medium;
     @apply mt-md;
   }
 
   h4 {
-    @apply font-bold;
+    @apply kern-heading-small;
     @apply mt-sm;
   }
 
@@ -78,7 +69,6 @@
     /* 80ch @ 18px font size = 720px */
     max-width: 720px;
     margin-bottom: 1rem;
-    font-weight: 700;
     word-break: auto-phrase;
   }
 
@@ -90,7 +80,7 @@
     @apply py-lg;
   }
 
-  a:not(.link-unstyled, .btn) {
+  a:not(.link-unstyled, .kern-btn) {
     @apply text-link;
   }
 
@@ -101,16 +91,8 @@
   a,
   button {
     @apply cursor-pointer;
-    &.btn {
-      display: inline-flex;
-      padding: 14px 24px;
-      font-weight: 700;
-      letter-spacing: 0.16px;
-      line-height: 2;
-      border-radius: 4px;
-    }
 
-    &.btn-primary {
+    &.kern-btn--primary {
       background-color: var(--color-cosmic-blue-base);
       color: var(--color-white);
 
@@ -185,10 +167,6 @@ address {
   margin-inline: var(--container-padding-inline);
 }
 
-@utility ds-button {
-  @apply max-sm:ds-button-full-width sm:ds-button-large;
-}
-
 @utility text-link {
   @apply visited:text-ds-violet text-cosmic-blue-base fill-blue-800 underline decoration-1 underline-offset-4 active:text-black;
 
@@ -202,10 +180,6 @@ address {
 
   .text-white & {
     @apply text-gray-100 visited:text-gray-300;
-  }
-
-  .zfl-style & {
-    color: var(--color-cosmic-blue-base);
   }
 
   &[href^="http"]::after {
@@ -232,8 +206,8 @@ address {
 }
 
 @utility max-w-a11y {
-  /* 70ch @ 18px font size = 630px */
-  max-width: 630px;
+  /* 80ch @ 18px font size = 720px */
+  max-width: 720px;
 }
 
 @utility hero-image-overlay {
@@ -254,17 +228,6 @@ address {
     &:hover {
       @apply underline! decoration-2 underline-offset-2;
     }
-  }
-}
-
-@layer utilities {
-  .ds-link-01-reg,
-  .ds-link-01-bold,
-  .ds-link-02-reg,
-  .ds-link-02-bold,
-  .ds-link-03-reg,
-  .ds-link-03-bold {
-    color: var(--color-cosmic-blue-base);
   }
 }
 

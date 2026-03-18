@@ -17,6 +17,7 @@ fileignoreconfig:
   - filename: .github/workflows/scan.yml
     allowed_patterns:
       - "key:"
+      - "TRIVY_PASSWORD: \\${{ }}"
   - filename: sonar-project.properties
     allowed_patterns:
       - projectKey
@@ -36,6 +37,13 @@ fileignoreconfig:
     checksum: 46a9cf04a8a38d8fb8334d21376998d972ba82b22b37f54891f1cdc7f470df8a
   - filename: src/pages/werkzeugfinder/index.astro # False positive: JS object check "Object.keys(...)"
     checksum: e8e39b9491b7c5c1d312af05f4537d7c44c92e48bbadae43ae2056f266a1309d
+  - filename: src/pages/ueber-uns/Ansatz.jpg
+    checksum: cf2bcceb403ca3838e988111c1da328a2af9956966f16359ed55c8ece29dac96
+  - filename: src/pages/ueber-uns/Zusammenarbeit.png
+    checksum: 833102602ab7800701350413f143ac30c20e9c016c5a68eb6c0841d1e5f3561d  
+  - filename: src/components/global/DebugGrid.astro
+    allowed_patterns:
+      - \@keydown
 allowed_patterns:
   - \@[a-z0-9]{40} # Allow fixing action hashes
   - "secrets: inherit"
