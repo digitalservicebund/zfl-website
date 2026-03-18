@@ -28,7 +28,7 @@ export default defineConfig({
   prefetch: {
     prefetchAll: true,
   },
-  experimental: {
+  security: {
     csp: false,
   },
   trailingSlash: "never",
