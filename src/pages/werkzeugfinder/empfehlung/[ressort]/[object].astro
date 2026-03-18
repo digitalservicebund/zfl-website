@@ -44,17 +44,17 @@ const quizPath = routes.werkzeugfinder.path;
               <Image
                 src={result.cluster.img.src}
                 alt={result.cluster.img.alt}
-                class="max-h-64 w-full object-cover"
+                class="w-full"
               />
               <div class="p-md">
-                <p class="ds-label-section mb-4 text-gray-900">
+                <p class="kern-preline mb-4">
                   Wir empfehlen Ihnen eine Visualisierung als:
                 </p>
-                <h2 class="mt-0">{result.cluster.name}</h2>
+                <h2 class="mt-0 kern-title kern-title--large">{result.cluster.name}</h2>
                 <p>{result.cluster.description}</p>
                 <a
                   href={`${routes.werkzeugfinder.path}/${result.cluster.id}`}
-                  class="btn btn-primary"
+                  class="kern-btn kern-btn--primary"
                 >
                   {result.cluster.name} Anleitung
                 </a>
@@ -62,10 +62,10 @@ const quizPath = routes.werkzeugfinder.path;
                 <div class="mt-lg divide-lavender-400 border-lavender-400 divide-y rounded-sm border">
                   {result.recommendations.map((rec) => (
                     <div class="p-md">
-                      <p class="ds-label-section mb-4 text-gray-900">
+                      <p class="kern-preline kern-preline--small mb-4 text-gray-900">
                         {rec.fidelity.name}
                       </p>
-                      <h3 class="mt-0">{rec.primaryTool.name}</h3>
+                      <h3 class="mt-0 kern-title">{rec.primaryTool.name}</h3>
                       <div class="gap-md flex flex-col sm:flex-row">
                         <div class="flex-1">
                           <p>{rec.primaryTool.description}</p>
@@ -78,7 +78,7 @@ const quizPath = routes.werkzeugfinder.path;
                             </a>
                           )}
                           {rec.primaryTool.access && (
-                            <p class="bg-lavender-200 p-sm rounded-sm text-sm">
+                            <p class="bg-lavender-200 p-sm! rounded-sm kern-body kern-body--small">
                               <strong>Zugang: </strong>
                               {rec.primaryTool.access}
                             </p>
@@ -154,7 +154,7 @@ const quizPath = routes.werkzeugfinder.path;
                 </li>
               </ul>
               <p>
-                <a class="btn btn-primary" href={quizPath}>
+                <a class="kern-btn kern-btn--primary" href={quizPath}>
                   Eingaben ändern
                 </a>
               </p>
@@ -168,7 +168,7 @@ const quizPath = routes.werkzeugfinder.path;
             Es tut uns Leid! Aus unbekannten Gründen ist ein Fehler aufgetreten.
             Bitte versuchen Sie es erneut.
           </p>
-          <a href={quizPath} class="btn btn-primary">
+          <a href={quizPath} class="kern-btn kern-btn--primary">
             Zurück
           </a>
         </section>

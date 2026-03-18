@@ -46,130 +46,142 @@ const empfehlungBase = routes.werkzeugfinder.children.empfehlung.path;
       }`}
     >
       <div class="quiz-question border-lavender-400 pb-md mb-md border-b">
-        <p class="ds-label-section text-cosmic-blue-base mb-2">1 von 3</p>
+        <p class="kern-preline">1 von 3</p>
         <h2 class="mt-0">In welchem Ressort arbeiten Sie?</h2>
         <p>
           Diese Information benötigen wir, um in Ihrem Haus verfügbare Werkzeuge
           zu finden.
         </p>
-        <div class="mt-sm">
-          <label for="ressort-select" class="ds-label-01-bold mb-4 block">
-            Ressort
-          </label>
-          <select
-            id="ressort-select"
-            name="ressort"
-            x-model="ressort"
-            class="border-ds-gray-600 focus:outline-cosmic-blue-base w-full rounded-sm border bg-white px-16 py-10 focus:outline-2"
-            :class="{ 'border-red-700': errors.ressort }"
-            aria-describedby="ressort-error"
-          >
-            <option value="">Bitte auswählen</option>
-            {ressorts.map((r) => <option value={r.id}>{r.name}</option>)}
-          </select>
+        <div
+          class="kern-form-input mt-sm"
+          :class="{ 'kern-form-input--error': errors.ressort }"
+        >
+          <label class="kern-label" for="ressort-select">Ressort</label>
+          <div class="kern-form-input__select-wrapper max-w-a11y">
+            <select
+              id="ressort-select"
+              name="ressort"
+              x-model="ressort"
+              class="kern-form-input__select"
+              :class="{ 'kern-form-input__select--error': errors.ressort }"
+              aria-describedby="ressort-error"
+            >
+              <option value="">Bitte auswählen</option>
+              {ressorts.map((r) => <option value={r.id}>{r.name}</option>)}
+            </select>
+          </div>
           <p
             id="ressort-error"
+            class="kern-error"
             x-show="errors.ressort"
-            x-text="errors.ressort"
-            class="mt-4 text-base text-red-700"
             role="alert"
           >
+            <span
+              class="kern-icon kern-icon--danger kern-icon--md"
+              aria-hidden="true"></span>
+            <span class="kern-body" x-text="errors.ressort"></span>
           </p>
         </div>
       </div>
 
       <div class="quiz-question border-lavender-400 pb-md mb-md border-b">
-        <p class="ds-label-section text-cosmic-blue-base mb-2">2 von 3</p>
+        <p class="kern-preline">2 von 3</p>
         <h2 class="mt-0">Was möchten Sie darstellen?</h2>
         <p>
           Die Art der Darstellung gibt vor, welches Werkzeug am besten passt.
         </p>
-        <fieldset
-          class="mt-sm m-0 border-0 p-0"
-          aria-describedby="object-error"
-        >
+        <fieldset class="kern-fieldset mt-sm" aria-describedby="object-error">
           <legend class="sr-only">Was möchten Sie darstellen?</legend>
-          <div class="space-y-12">
+          <div class="kern-fieldset__body">
             {
               objects.map((obj) => (
-                <label class="group flex cursor-pointer gap-24">
+                <div class="kern-form-check">
                   <input
+                    class="kern-form-check__radio"
+                    id={obj.id}
                     type="radio"
                     name="object"
                     value={obj.id}
                     x-model="object"
-                    class="accent-cosmic-blue-base h-40 w-40 flex-none cursor-pointer"
                   />
-                  <span>
-                    <span class="ds-label-01-bold block">{obj.name}</span>
+                  <label class="kern-label" for={obj.id}>
+                    {obj.name}
                     {obj.description && (
-                      <span class="text-base text-gray-900">
+                      <span class="block max-w-a11y text-gray-500!">
                         {obj.description}
                       </span>
                     )}
-                  </span>
-                </label>
+                  </label>
+                </div>
               ))
             }
           </div>
           <p
             id="object-error"
+            class="kern-error"
             x-show="errors.object"
-            x-text="errors.object"
-            class="mt-8 text-base text-red-700"
             role="alert"
           >
+            <span
+              class="kern-icon kern-icon--danger kern-icon--md"
+              aria-hidden="true"></span>
+            <span class="kern-body" x-text="errors.object"></span>
           </p>
         </fieldset>
       </div>
 
       <div class="quiz-question pb-md mb-md">
-        <p class="ds-label-section text-cosmic-blue-base mb-2">3 von 3</p>
+        <p class="kern-preline">3 von 3</p>
         <h2 class="mt-0">Wofür möchten Sie die Visualisierung erstellen?</h2>
         <p>Bei mehreren Gründen nennen Sie uns den wichtigsten.</p>
-        <fieldset
-          class="mt-sm m-0 border-0 p-0"
-          aria-describedby="reason-error"
-        >
+        <fieldset class="kern-fieldset mt-sm" aria-describedby="reason-error">
           <legend class="sr-only"
             >Wofür möchten Sie die Visualisierung erstellen?</legend
           >
-          <div class="space-y-12">
+          <div class="kern-fieldset__body">
             {
               reasons.map((r) => (
-                <label class="group flex cursor-pointer gap-24">
+                <div class="kern-form-check">
                   <input
+                    class="kern-form-check__radio"
+                    id={r.id}
                     type="radio"
                     name="reason"
                     value={r.id}
                     x-model="reason"
-                    class="accent-cosmic-blue-base h-40 w-40 flex-none cursor-pointer"
                   />
-                  <span>
-                    <span class="ds-label-01-bold block">{r.name}</span>
+                  <label class="kern-label" for={r.id}>
+                    {r.name}
                     {r.description && (
-                      <span class="text-base text-gray-900">
+                      <span class="block max-w-a11y text-gray-500!">
                         {r.description}
                       </span>
                     )}
-                  </span>
-                </label>
+                  </label>
+                </div>
               ))
             }
           </div>
           <p
             id="reason-error"
+            class="kern-error"
             x-show="errors.reason"
-            x-text="errors.reason"
-            class="mt-8 text-base text-red-700"
             role="alert"
           >
+            <span
+              class="kern-icon kern-icon--danger kern-icon--md"
+              aria-hidden="true"></span>
+            <span class="kern-body" x-text="errors.reason"></span>
           </p>
         </fieldset>
       </div>
 
       <div>
-        <button type="button" @click="submit()" class="btn btn-primary">
+        <button
+          type="button"
+          @click="submit()"
+          class="kern-btn kern-btn--primary"
+        >
           Werkzeug suchen
         </button>
       </div>
