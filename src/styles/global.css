@@ -83,7 +83,7 @@
     @apply py-lg;
   }
 
-  a:not(.link-unstyled, .btn) {
+  a:not(.link-unstyled, .kern-btn) {
     @apply text-link;
   }
 
