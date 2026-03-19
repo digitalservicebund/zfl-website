@@ -15,7 +15,7 @@ export const frontmatter = {
       <h1>Steckbrief</h1>
     </Hero>
     <section>
-      <SteckbriefForm client:load />
+      <SteckbriefForm client:only="preact" />
     </section>
   </main>
 </Layout>
