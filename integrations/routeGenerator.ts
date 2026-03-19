@@ -32,6 +32,9 @@ export function generateRoutes(options: Options): AstroIntegration {
   };
 }
 
+const SUPPORTED_EXTENSIONS = ["astro", "md", "mdx", "html"];
+const SUPPORTED_EXTENSIONS_REGEXP = new RegExp(`\\.(${SUPPORTED_EXTENSIONS.join("|")})$`);
+
 function generate(pagesDirs: string[], outputFile: string) {
   const routes: Record<string, Route> = {};
 
@@ -45,7 +48,7 @@ function generate(pagesDirs: string[], outputFile: string) {
       const relativePath =
         file
           .replace(dir, "")
-          .replace(/\.(astro|md|mdx)$/, "")
+          .replace(SUPPORTED_EXTENSIONS_REGEXP, "")
           .replace(/\/index$/, "") || "/";
 
       const key =
@@ -64,7 +67,7 @@ function getFiles(dir: string): string[] {
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) return getFiles(full);
-    return /\.(astro|md|mdx)$/.test(entry.name) ? [full] : [];
+    return SUPPORTED_EXTENSIONS_REGEXP.test(entry.name) ? [full] : [];
   });
 }
 
