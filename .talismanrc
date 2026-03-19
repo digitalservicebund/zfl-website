@@ -1,6 +1,10 @@
 fileignoreconfig:
   - filename: .env.example
-    ignore_detectors: [filename]
+    ignore_detectors:
+      - filename
+  - filename: .github/workflows/check-and-unit-test.yml
+    allowed_patterns:
+      - "key:"
   - filename: .github/workflows/pipeline.yml
     allowed_patterns:
       - GITOPS_DIGITALCHECK_APP_ID
@@ -18,19 +22,32 @@ fileignoreconfig:
     allowed_patterns:
       - "key:"
       - "TRIVY_PASSWORD: \\${{ }}"
-  - filename: sonar-project.properties
+  - filename: AGENTS.md
+    checksum: bf389e297a28c9a4a0e9e3077281ab903bfe7aa1554fe978b84e985d040f926d
+  - filename: doc/adr/0004-configuration-management.md
+    checksum: 367a262dfe679ea3254c86879a09d98b0e03863b4c514f58ccd3609afb58bdae
+  - filename: doc/adr/0007-use-posthog-reverse-proxy.md
     allowed_patterns:
-      - projectKey
+      - "IP Masking: The proxy will be configured to drop unnecessary headers, including
+        `X-Forwarded-For`, before passing the request to PostHog."
+  - filename: doc/routes.md
+    checksum: ecbc85072882abbf526589be79d9d5680001e618e42f16ec9c2fb323458fe1a6
+  - filename: integrations/routeGenerator.ts
+    checksum: 49f57b7242e8dff0e6030ac80faff610f4e45eda11675ba3b490c590c6d9cf0f
   - filename: nginx/nginx.template.conf
     allowed_patterns:
       - proxy_pass
       - sha256-[^\s]+
-  - filename: doc/adr/0007-use-posthog-reverse-proxy.md
+  - filename: sonar-project.properties
     allowed_patterns:
-      - >-
-        IP Masking: The proxy will be configured to drop unnecessary headers, including `X-Forwarded-For`, before passing the request to PostHog.
+      - projectKey
   - filename: src/config/posthog.ts
     checksum: 2c449a89d7fa9be57170bc960a30f51381f9a5d8d046605a6e30c083886163dd
+  - filename: src/env.d.ts
+    checksum: 8acdc07029e3aed3f44556780790d7a2191e8877c5b114a3147423507385fbec
+  - filename: integrations/routeGenerator.ts
+    allowed_patterns:
+      - key
   - filename: doc/adr/0004-configuration-management.md
     checksum: 367a262dfe679ea3254c86879a09d98b0e03863b4c514f58ccd3609afb58bdae
   - filename: src/pages/ueber-uns/Ansatz.jpg
@@ -40,14 +57,18 @@ fileignoreconfig:
   - filename: src/components/global/DebugGrid.astro
     allowed_patterns:
       - \@keydown
+scopeconfig:
+  - scope: node
 allowed_patterns:
   - \@[a-z0-9]{40} # Allow fixing action hashes
   - "secrets: inherit"
-  - "key: \\${{ runner.os }}"
-  - "public key"
-  - "secrets.GITHUB_TOKEN"
-  - "posthogKey"
-  - "secret-scan"
-
-scopeconfig:
-  - scope: node # ignores files such as package-lock.json
+  - 'key: \${{ runner.os }}'
+  - public key
+  - secrets.GITHUB_TOKEN
+  - posthogKey
+  - secret-scan
+  - routeKey
+  - toRouteKey
+  - "route key"
+  - RouteMetaKey
+version: "1.0"
