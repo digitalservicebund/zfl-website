@@ -169,9 +169,7 @@ function FormPage1() {
     <>
       <div class="flex flex-col gap-32">
         <div class="flex flex-col gap-16">
-          <p class="kern-label">Kontaktinformationen</p>
           <h2 class="mt-0">Allgemeine Angaben</h2>
-          <p>Bitte geben Sie die allgemeinen Angaben zu Ihrem Vorhaben ein.</p>
         </div>
 
         <div class="kern-form-input">
@@ -233,10 +231,7 @@ function FormPage1() {
         <div class="flex flex-col gap-16">
           <p class="kern-label">Kontaktinformationen</p>
           <h2 class="mt-0">Kontaktdaten</h2>
-          <p>
-            Bitte geben Sie Ihre Kontaktdaten für Rückfragen zu diesem Vorhaben
-            ein.
-          </p>
+          <p>Bitte geben Sie Ihre Kontaktdaten ein.</p>
         </div>
 
         <div class="kern-form-input">
@@ -708,9 +703,6 @@ function FormPage10() {
             { key: "Telefonnummer", value: values.telefonnummer },
           ]}
         />
-      </div>
-
-      <div class="flex flex-col">
         <SummaryCard
           title="Kontext und Genese"
           pageNumber={2}
@@ -747,17 +739,11 @@ function FormPage10() {
             { key: "Wichtige Maßnahmen", value: values.massnahmen },
           ]}
         />
-      </div>
-
-      <div class="flex flex-col">
         <SummaryCard
           title="Visualisierungen"
           pageNumber={7}
           items={[{ key: "Hochgeladene Dateien", value: fileNames }]}
         />
-      </div>
-
-      <div class="flex flex-col">
         <SummaryCard
           title="Projektplanung I"
           pageNumber={8}
