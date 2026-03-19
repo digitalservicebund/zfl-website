@@ -2,6 +2,7 @@ import type { AstroIntegration } from "astro";
 import matter from "gray-matter";
 import fs from "node:fs";
 import path from "node:path";
+import ts from "typescript";
 import { buildRoutePath } from "../src/utils/path";
 
 type Options = {
@@ -21,6 +22,10 @@ type Route = RouteMeta & {
   path: string;
 };
 
+type RouteMetaKey = keyof RouteMeta;
+type RouteMetaValue = string | number | boolean;
+type RouteMetaInput = Partial<Record<RouteMetaKey, RouteMetaValue>>;
+
 export function generateRoutes({
   pagesDirs,
   output = "src/config/routes.ts",
@@ -39,10 +44,18 @@ export function generateRoutes({
   };
 }
 
+const DEFAULT_ROUTE_ORDER = 999;
 const SUPPORTED_EXTENSIONS = ["astro", "md", "mdx", "html"];
 const SUPPORTED_EXTENSIONS_REGEXP = new RegExp(
   `\\.(${SUPPORTED_EXTENSIONS.join("|")})$`,
 );
+const ROUTE_META_KEYS = [
+  "title",
+  "order",
+  "sitemap",
+  "showInHeader",
+  "isStagingOnly",
+] as const satisfies RouteMetaKey[];
 
 function generate(pagesDirs: string[], outputFile: string, baseUrl: string) {
   const routes: Record<string, Route> = {};
@@ -61,13 +74,10 @@ function generate(pagesDirs: string[], outputFile: string, baseUrl: string) {
           .replace(/\/index$/, "") || "/";
 
       const routeKey = relativePath === "/" ? "home" : toRouteKey(relativePath);
-
-      if (routeKey) {
-        routes[routeKey] = {
-          path: buildRoutePath(relativePath, baseUrl),
-          ...meta,
-        };
-      }
+      routes[routeKey] = {
+        path: buildRoutePath(relativePath, baseUrl),
+        ...meta,
+      };
     }
   }
 
@@ -82,32 +92,101 @@ function getFiles(dir: string): string[] {
   });
 }
 
-function extractMeta(file: string, raw: string): RouteMeta | null {
-  let data: Record<string, unknown>;
+export function extractMeta(file: string, raw: string): RouteMeta | null {
+  const data = file.endsWith(".astro")
+    ? extractAstroRouteMeta(file, raw)
+    : (matter(raw).data as RouteMetaInput);
 
-  if (file.endsWith(".astro")) {
-    // Extract the `frontmatter = { ... }` object body from the TS frontmatter block
-    // and parse it as YAML (valid after stripping trailing commas)
-    const frontmatterBlock =
-      new RegExp(/^---([\s\S]*?)---/).exec(raw)?.[1] ?? "";
-    const objBlock =
-      new RegExp(/frontmatter\s*=\s*\{([^}]*)\}/).exec(frontmatterBlock)?.[1] ??
-      "";
-    ({ data } = matter(`---\n${objBlock.replaceAll(/,\s*$/gm, "")}\n---`));
-  } else {
-    ({ data } = matter(raw));
-  }
-
-  const title = data.title as string | undefined;
+  const title = typeof data.title === "string" ? data.title : undefined;
   if (!title) return null;
 
   return {
     title,
     sitemap: data.sitemap !== false,
-    order: (data.order as number | undefined) ?? 999,
+    order: typeof data.order === "number" ? data.order : DEFAULT_ROUTE_ORDER,
     showInHeader: !!data.showInHeader,
     isStagingOnly: !!data.isStagingOnly,
   };
+}
+
+// Parse an Astro page's frontmatter block and return the literal route metadata fields.
+function extractAstroRouteMeta(file: string, raw: string): RouteMetaInput {
+  const frontmatterBlock = extractAstroFrontmatterBlock(raw);
+  if (!frontmatterBlock) return {};
+
+  const sourceFile = ts.createSourceFile(
+    file,
+    frontmatterBlock,
+    ts.ScriptTarget.Latest,
+  );
+
+  for (const statement of sourceFile.statements) {
+    if (!ts.isVariableStatement(statement)) continue;
+
+    for (const declaration of statement.declarationList.declarations) {
+      if (
+        !ts.isIdentifier(declaration.name) ||
+        declaration.name.text !== "frontmatter"
+      ) {
+        continue;
+      }
+
+      if (
+        !declaration.initializer ||
+        !ts.isObjectLiteralExpression(declaration.initializer)
+      ) {
+        throw new Error(
+          `${file}: \`frontmatter\` must be declared as a plain object literal.`,
+        );
+      }
+
+      return readAstroRouteMetaObject(declaration.initializer);
+    }
+  }
+
+  return {};
+}
+
+function extractAstroFrontmatterBlock(raw: string): string | null {
+  const match = /^---\r?\n([\s\S]*?)\r?\n---/.exec(raw);
+  return match?.[1] ?? null;
+}
+
+function readAstroRouteMetaObject(
+  objectLiteral: ts.ObjectLiteralExpression,
+): RouteMetaInput {
+  const meta: RouteMetaInput = {};
+
+  for (const property of objectLiteral.properties) {
+    if (!ts.isPropertyAssignment(property)) continue;
+
+    const key =
+      ts.isIdentifier(property.name) || ts.isStringLiteral(property.name)
+        ? property.name.text
+        : null;
+    if (!key || !isRouteMetaKey(key)) continue;
+
+    const value = readLiteralValue(property.initializer);
+    if (value === null) continue;
+
+    meta[key] = value;
+  }
+
+  return meta;
+}
+
+function isRouteMetaKey(key: string): key is RouteMetaKey {
+  return ROUTE_META_KEYS.includes(key as RouteMetaKey);
+}
+
+function readLiteralValue(value: ts.Expression): RouteMetaValue | null {
+  if (ts.isStringLiteralLike(value)) return value.text;
+  if (ts.isNumericLiteral(value)) return Number(value.text);
+
+  if (value.kind === ts.SyntaxKind.TrueKeyword) return true;
+  if (value.kind === ts.SyntaxKind.FalseKeyword) return false;
+
+  return null;
 }
 
 // Convert page/file identifiers into stable camelCase object keys for the route registry.

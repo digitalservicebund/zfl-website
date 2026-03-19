@@ -20,6 +20,8 @@ export const frontmatter = {
 ---
 ```
 
+For `.astro` pages, the route generator reads `frontmatter` as a TypeScript object literal. Keep it simple: use a plain `export const frontmatter = { ... }` object with literal string, number, and boolean values only.
+
 **`.mdx` pages**
 
 ```md
