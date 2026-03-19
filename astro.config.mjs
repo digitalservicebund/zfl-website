@@ -32,13 +32,12 @@ export default defineConfig({
     assets: "_astro",
   },
   vite: {
-    // @ts-expect-error https://github.com/withastro/astro/issues/14030#issuecomment-3027129338
     plugins: [tailwindcss()],
   },
   prefetch: {
     prefetchAll: true,
   },
-  experimental: {
+  security: {
     csp: false,
   },
   trailingSlash: "never",
