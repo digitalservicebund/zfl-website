@@ -51,6 +51,9 @@ jobs:
       - name: Lint
         run: pnpm run lint:fix
 
+      - name: Sync Astro types
+        run: pnpm astro sync
+
       - name: Check types
         run: pnpm run typecheck
 

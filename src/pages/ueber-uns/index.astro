@@ -1,16 +1,13 @@
 ---
 import Hero from "@/components/Hero.astro";
-import { isStaging } from "@/config/stage";
 import Layout from "@/layouts/Layout.astro";
 import { routes } from "@/config/routes.ts";
-
-if (!isStaging) {
-  return Astro.redirect("/404", 302);
-}
 
 export const frontmatter = {
   title: "Über das Zentrum für Legistik",
   sitemap: true,
+  showInHeader: true,
+  isStagingOnly: true,
 };
 ---
 
@@ -20,11 +17,8 @@ export const frontmatter = {
       <h1>{frontmatter.title}</h1>
     </Hero>
     <section class="space-y-8">
-      <a class="block" href={routes.ueberUns.children.zahlenUndFakten.path}
-        >Zahlen und Fakten</a
-      >
-      <a class="block" href={routes.ueberUns.children.daranArbeitenWir.path}
-        >Daran arbeiten wir</a
+      <a class="block" href={routes.ueberUns_zahlenUndFakten.path}>Zahlen und Fakten</a>
+      <a class="block" href={routes.ueberUns_daranArbeitenWir.path}>Daran arbeiten wir</a
       >
     </section>
   </main>
