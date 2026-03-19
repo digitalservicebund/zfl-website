@@ -3,7 +3,7 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
 test.describe("a11y", () => {
-  Object.entries(routes).forEach(([, route]) => {
+  Object.values(routes).forEach((route) => {
     test(`${route.path} should not have any automatically detectable accessibility issues`, async ({
       page,
     }) => {

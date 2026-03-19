@@ -47,7 +47,7 @@ fileignoreconfig:
 scopeconfig:
   - scope: node
 allowed_patterns:
-  - \@[a-z0-9]{40}
+  - \@[a-z0-9]{40} # Allow fixing action hashes
   - "secrets: inherit"
   - 'key: \${{ runner.os }}'
   - public key

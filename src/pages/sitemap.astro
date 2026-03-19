@@ -1,7 +1,7 @@
 ---
 import Hero from "@/components/Hero.astro";
-import Layout from "@/layouts/Layout.astro";
 import { routes } from "@/config/routes";
+import Layout from "@/layouts/Layout.astro";
 
 export const frontmatter = {
   title: "Sitemap",
@@ -17,9 +17,9 @@ export const frontmatter = {
     <section>
       <ul>
         {
-          Object.entries(routes)
-            .filter(([, route]) => route.sitemap && !route.isStagingOnly)
-            .map(([, route]) => (
+          Object.values(routes)
+            .filter((route) => route.sitemap && !route.isStagingOnly)
+            .map((route) => (
               <li>
                 <a href={route.path}>{route.title}</a>
               </li>

@@ -21,8 +21,7 @@ type Route = RouteMeta & {
   path: string;
 };
 
-export function generateRoutes(options: Options): AstroIntegration {
-  const { pagesDirs, output = "src/config/routes.ts" } = options;
+export function generateRoutes({ pagesDirs, output = "src/config/routes.ts" }: Options): AstroIntegration {
   let baseUrl = "";
 
   return {
