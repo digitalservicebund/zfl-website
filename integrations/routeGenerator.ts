@@ -1,4 +1,4 @@
-import { buildRoutePath } from "@/utils/path";
+import { buildRoutePath } from "../src/utils/path";
 import type { AstroIntegration } from "astro";
 import matter from "gray-matter";
 import fs from "node:fs";
