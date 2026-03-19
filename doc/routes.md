@@ -51,7 +51,7 @@ The route key is derived from the page filename in camelCase (e.g. `schulungen`,
 
 ## Staging-only pages
 
-Set `isStagingOnly: true` in the frontmatter to hide a page on production. Use `isStaging` from `@/config/stage` to conditionally render links to it:
+Set `isStagingOnly: true` in the frontmatter to hide a page on production, this is handled by the `onRequest` middleware in `src/middleware.ts`. Use `isStaging` from `@/config/stage` to conditionally render links to it:
 
 ```astro
 ---
