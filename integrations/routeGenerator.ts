@@ -1,8 +1,8 @@
-import { buildRoutePath } from "../src/utils/path";
 import type { AstroIntegration } from "astro";
 import matter from "gray-matter";
 import fs from "node:fs";
 import path from "node:path";
+import { buildRoutePath } from "../src/utils/path";
 
 type Options = {
   pagesDirs: string[];
@@ -21,7 +21,10 @@ type Route = RouteMeta & {
   path: string;
 };
 
-export function generateRoutes({ pagesDirs, output = "src/config/routes.ts" }: Options): AstroIntegration {
+export function generateRoutes({
+  pagesDirs,
+  output = "src/config/routes.ts",
+}: Options): AstroIntegration {
   let baseUrl = "";
 
   return {
@@ -118,7 +121,6 @@ export function toRouteKey(input: string): string {
         .replaceAll(/[^a-zA-Z0-9-_]/g, "")
         // Normalize each path segment independently before joining nested segments with `_`.
         .split(/[-_]/)
-        .filter(Boolean)
         .map((part, i) =>
           i === 0
             ? part[0].toLowerCase() + part.slice(1)
@@ -126,7 +128,6 @@ export function toRouteKey(input: string): string {
         )
         .join(""),
     )
-    .filter(Boolean)
     .join("_");
   // Quote anything that is not a valid JS identifier so generated code stays syntactically valid.
   return /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(routeKey)
@@ -135,6 +136,7 @@ export function toRouteKey(input: string): string {
 }
 
 function escapeStringLiteral(input: string): string {
+  // Escape characters (backslashes and double quotes) that would break the generated double-quoted string literal.
   return input.replaceAll("\\", "\\\\").replaceAll('"', '\\"');
 }
 
