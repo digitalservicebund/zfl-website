@@ -1,5 +1,4 @@
 ---
-import Hero from "@/components/Hero.astro";
 import SteckbriefForm from "@/components/Steckbrief";
 import Layout from "@/layouts/Layout.astro";
 
@@ -11,9 +10,6 @@ export const frontmatter = {
 
 <Layout title={frontmatter.title}>
   <main class="breakout-grid">
-    <Hero>
-      <h1>Steckbrief</h1>
-    </Hero>
     <section>
       <SteckbriefForm client:only="preact" />
     </section>

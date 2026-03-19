@@ -40,6 +40,9 @@ fileignoreconfig:
   - filename: src/components/global/DebugGrid.astro
     allowed_patterns:
       - \@keydown
+  - filename: src/components/Steckbrief.tsx
+    allowed_patterns:
+      - key
 allowed_patterns:
   - \@[a-z0-9]{40} # Allow fixing action hashes
   - "secrets: inherit"
