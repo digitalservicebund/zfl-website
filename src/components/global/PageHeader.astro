@@ -9,6 +9,11 @@ import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import { twMerge } from "tailwind-merge";
 
+interface Props {
+  fullWidth?: boolean;
+}
+const { fullWidth } = Astro.props;
+
 const { pathname } = Astro.url;
 const currentPath = removeTrailingSlash(pathname);
 
@@ -27,8 +32,10 @@ const activeClasses = "border-cosmic-blue-base bg-lavender-base";
   x-data="{ mobileMenuOpen: false }"
   @resize.window="mobileMenuOpen = false"
 >
-  <Kopfzeile className="relative z-30" />
-  <div class="container relative z-30 flex h-[72px] justify-between">
+  <Kopfzeile fullWidth={fullWidth} />
+  <div
+    class={`${fullWidth ? "mx-16" : "container"} relative z-30 flex h-[72px] justify-between`}
+  >
     <!-- Logo and title -->
     <a
       href={routes.home.path}

@@ -1,9 +1,14 @@
 ---
 import { isStaging, isPreview } from "@/config/stage";
+
+interface Props {
+  fullWidth?: boolean;
+}
+const { fullWidth } = Astro.props;
 ---
 
 <div class="kern-kopfzeile">
-  <div class="container">
+  <div class={fullWidth ? "mx-16" : "container"}>
     <div class="kern-kopfzeile__content">
       <span class="kern-kopfzeile__flagge" aria-hidden="true">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 16">

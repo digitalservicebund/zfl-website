@@ -8,10 +8,8 @@ export const frontmatter = {
 };
 ---
 
-<Layout title={frontmatter.title}>
-  <main class="breakout-grid">
-    <section>
-      <SteckbriefForm client:only="preact" />
-    </section>
+<Layout title={frontmatter.title} fullWidth>
+  <main>
+    <SteckbriefForm client:only="preact" />
   </main>
 </Layout>

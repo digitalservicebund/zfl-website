@@ -81,56 +81,84 @@ export default function SteckbriefForm() {
   const isLastPage = page === pages.length;
 
   return (
-    <div class="max-w-a11y mx-auto">
-      <div class="kern-progress mb-lg">
-        <label class="kern-label" for="progress1">
-          Schritt {page} von {pages.length}
-        </label>
-        <progress id="progress1" value={page} max={pages.length}></progress>
+    <div className="flex min-h-screen">
+      <div className="relative h-[stretch] w-[296px] shrink-0 self-start bg-[#F7F7F9]">
+        <nav
+          aria-label="Formular-Navigation"
+          class="sticky top-0 flex w-full flex-col gap-8 px-16 py-24"
+        >
+          {pages.map((p, i) => {
+            const isActive = page === i + 1;
+            return (
+              <button
+                key={i}
+                type="button"
+                onClick={() => setPage(i + 1)}
+                class={`flex w-full items-center gap-2 rounded p-8 text-left transition-colors ${
+                  isActive
+                    ? "bg-cosmic-blue-base font-semibold text-white"
+                    : "bg-transparent text-[#0b0c0c] hover:bg-[#e8e8ee]"
+                }`}
+              >
+                {p.title}
+              </button>
+            );
+          })}
+        </nav>
       </div>
-      <NavigationContext.Provider value={setPage}>
-        <FormProvider {...formMethods}>
-          <form
-            class="flex flex-col gap-32"
-            novalidate
-            onSubmit={(e) => e.preventDefault()}
-          >
-            {pages[page - 1].component}
-            <div class="flex gap-16">
-              {page > 1 && (
-                <button
-                  type="button"
-                  class="kern-btn kern-btn--secondary"
-                  onClick={() => setPage(page - 1)}
-                >
-                  <span class="kern-label">Zurück</span>
-                </button>
-              )}
-              {isLastPage ? (
-                <button type="submit" class="kern-btn kern-btn--primary">
-                  <span class="kern-label">Absenden</span>
-                  <span
-                    class="kern-icon kern-icon--arrow-forward"
-                    aria-hidden="true"
-                  ></span>
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  class="kern-btn kern-btn--primary"
-                  onClick={() => setPage(page + 1)}
-                >
-                  <span class="kern-label">Weiter</span>
-                  <span
-                    class="kern-icon kern-icon--arrow-forward"
-                    aria-hidden="true"
-                  ></span>
-                </button>
-              )}
-            </div>
-          </form>
-        </FormProvider>
-      </NavigationContext.Provider>
+      <div className="py-lg w-full">
+        <div class="max-w-a11y mx-auto">
+          <div class="kern-progress mb-lg">
+            <label class="kern-label" for="progress1">
+              Schritt {page} von {pages.length}
+            </label>
+            <progress id="progress1" value={page} max={pages.length}></progress>
+          </div>
+          <NavigationContext.Provider value={setPage}>
+            <FormProvider {...formMethods}>
+              <form
+                class="flex flex-col gap-32"
+                novalidate
+                onSubmit={(e) => e.preventDefault()}
+              >
+                {pages[page - 1].component}
+                <div class="flex gap-16">
+                  {page > 1 && (
+                    <button
+                      type="button"
+                      class="kern-btn kern-btn--secondary"
+                      onClick={() => setPage(page - 1)}
+                    >
+                      <span class="kern-label">Zurück</span>
+                    </button>
+                  )}
+                  {isLastPage ? (
+                    <button type="submit" class="kern-btn kern-btn--primary">
+                      <span class="kern-label">Absenden</span>
+                      <span
+                        class="kern-icon kern-icon--arrow-forward"
+                        aria-hidden="true"
+                      ></span>
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      class="kern-btn kern-btn--primary"
+                      onClick={() => setPage(page + 1)}
+                    >
+                      <span class="kern-label">Weiter</span>
+                      <span
+                        class="kern-icon kern-icon--arrow-forward"
+                        aria-hidden="true"
+                      ></span>
+                    </button>
+                  )}
+                </div>
+              </form>
+            </FormProvider>
+          </NavigationContext.Provider>
+        </div>
+      </div>
     </div>
   );
 }
