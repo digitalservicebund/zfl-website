@@ -28,6 +28,7 @@
   "dependencies": {
     "@astrojs/alpinejs": "^0.5.0",
     "@astrojs/mdx": "^5.0.1",
+    "@astrojs/preact": "^5.0.2",
     "@astrojs/sitemap": "^3.7.1",
     "@iconify-json/ic": "^1.2.4",
     "@kern-ux/native": "^2.4.0",
@@ -37,6 +38,8 @@
     "astro": "^6.0.5",
     "astro-icon": "^1.1.5",
     "astro-seo": "^1.1.0",
+    "preact": "^10.29.0",
+    "react-hook-form": "^7.71.2",
     "sharp": "^0.34.5",
     "tailwind-merge": "^3.5.0",
     "tailwind-variants": "^3.2.2",
@@ -71,7 +74,9 @@
     "overrides": {
       "nth-check": "2.0.1",
       "lodash@>=4.0.0 <=4.17.22": ">=4.17.23",
-      "tar@<7.5.8": ">=7.5.8"
+      "tar@<7.5.8": ">=7.5.8",
+      "react": "npm:@preact/compat@latest",
+      "react-dom": "npm:@preact/compat@latest"
     }
   }
 }
