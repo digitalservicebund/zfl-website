@@ -39,7 +39,7 @@ Pages without a `title` are ignored by the generator.
 
 ## Using routes
 
-Import `routes` from `@/config/routes` and use `routes.<key>.path` for links:
+Import `routes` from `@/config/routes` and use `routes.<routeKey>.path` for links:
 
 ```astro
 ---
