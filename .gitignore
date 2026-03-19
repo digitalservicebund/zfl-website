@@ -1,6 +1,9 @@
 # build output
 dist/
 
+# generated files
+src/config/routes.ts
+
 # generated types
 .astro/
 
