@@ -1,0 +1,18 @@
+---
+import { routes } from "@/config/routes";
+import Layout from "@/layouts/Layout.astro";
+
+export const frontmatter = {
+  title: "Steckbrief Form",
+  sitemap: true,
+};
+---
+
+<Layout title={routes.steckbrief.title}>
+  <h1>{routes.steckbrief.title}</h1>
+  <p>Starte deinen Steckbrief</p>
+  <button
+    ><a href={routes.steckbrief.children.form1.path}>Steckbrief starten</a
+    ></button
+  >
+</Layout>

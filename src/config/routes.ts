@@ -59,6 +59,26 @@ export const routes = {
       },
     },
   },
+  steckbrief: {
+    path: buildUrl("/steckbrief"),
+    title: "Steckbrief",
+    showInHeader: true,
+    children: {
+      form1: {
+        path: buildUrl("/steckbrief/form1"),
+        title: "Form 1",
+      },
+      form2: {
+        path: buildUrl("/steckbrief/form2"),
+        title: "Form 2",
+      },
+    },
+  },
+  steckbrief2: {
+    path: buildUrl("/steckbrief2"),
+    title: "Steckbrief mit React",
+    showInHeader: true,
+  },
   impressum: {
     path: buildUrl("/impressum"),
     title: "Impressum",

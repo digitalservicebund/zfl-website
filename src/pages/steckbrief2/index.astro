@@ -1,0 +1,11 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import MultiStepForm from "@/components/MultiStepForm";
+---
+
+<Layout title="Steckbrief - Multi Step Form">
+  <main class="container mx-auto py-8 px-4">
+    <h1 class="text-3xl font-bold mb-6">Steckbrief Formular</h1>
+    <MultiStepForm client:load />
+  </main>
+</Layout>

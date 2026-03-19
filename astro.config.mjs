@@ -1,6 +1,7 @@
 // @ts-check
 import alpinejs from "@astrojs/alpinejs";
 import mdx from "@astrojs/mdx";
+import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import icon from "astro-icon";
@@ -17,7 +18,7 @@ const PREVIEW_SITE = "https://digitalservicebund.github.io";
 export default defineConfig({
   site: isPreview ? PREVIEW_SITE : PRODUCTION_SITE,
   base: isPreview ? `/zfl-website/previews/${PREVIEW_BRANCH}` : undefined,
-  integrations: [icon(), alpinejs(), sitemap(), mdx()],
+  integrations: [icon(), alpinejs(), sitemap(), mdx(), react()],
   build: {
     assets: "_astro",
   },

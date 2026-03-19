@@ -1,0 +1,30 @@
+---
+import { routes } from "@/config/routes";
+import Layout from "@/layouts/Layout.astro";
+
+export const frontmatter = {
+  title: "Steckbrief Form",
+  sitemap: true,
+};
+---
+
+<Layout title={routes.steckbrief.children.form2.title}>
+  <h1>{routes.steckbrief.children.form1.title}</h1>
+  <form>
+    <label>
+      Username:
+      <input type="text" name="username" />
+    </label>
+    <label>
+      Email:
+      <input type="email" name="email" />
+    </label>
+    <label>
+      Random Input
+      <input type="text" name="input" />
+    </label>
+    <button
+      ><a href={routes.steckbrief.children.form2.path}>Next page</a></button
+    >
+  </form>
+</Layout>
