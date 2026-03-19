@@ -35,7 +35,7 @@ export const routes = {
     showInHeader: false,
     isStagingOnly: false,
   },
-  daranArbeitenWir: {
+  ueberUns_daranArbeitenWir: {
     path: buildUrl("/ueber-uns/daran-arbeiten-wir"),
     title: "Daran arbeiten wir",
     sitemap: true,
@@ -91,7 +91,7 @@ export const routes = {
     showInHeader: true,
     isStagingOnly: true,
   },
-  zahlenUndFakten: {
+  ueberUns_zahlenUndFakten: {
     path: buildUrl("/ueber-uns/zahlen-und-fakten"),
     title: "Zahlen und Fakten",
     sitemap: true,

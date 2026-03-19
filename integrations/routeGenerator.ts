@@ -33,7 +33,9 @@ export function generateRoutes(options: Options): AstroIntegration {
 }
 
 const SUPPORTED_EXTENSIONS = ["astro", "md", "mdx", "html"];
-const SUPPORTED_EXTENSIONS_REGEXP = new RegExp(`\\.(${SUPPORTED_EXTENSIONS.join("|")})$`);
+const SUPPORTED_EXTENSIONS_REGEXP = new RegExp(
+  `\\.(${SUPPORTED_EXTENSIONS.join("|")})$`,
+);
 
 function generate(pagesDirs: string[], outputFile: string) {
   const routes: Record<string, Route> = {};
@@ -51,12 +53,9 @@ function generate(pagesDirs: string[], outputFile: string) {
           .replace(SUPPORTED_EXTENSIONS_REGEXP, "")
           .replace(/\/index$/, "") || "/";
 
-      const key =
-        relativePath === "/"
-          ? "home"
-          : relativePath.split("/").findLast(Boolean);
+      const routeKey = relativePath === "/" ? "home" : toRouteKey(relativePath);
 
-      if (key) routes[key] = { path: relativePath, ...meta };
+      if (routeKey) routes[routeKey] = { path: relativePath, ...meta };
     }
   }
 
@@ -99,18 +98,31 @@ function extractMeta(file: string, raw: string): RouteMeta | null {
   };
 }
 
-function toRouteKey(input: string): string {
-  const camel = input
-    .replaceAll(/[^a-zA-Z0-9-_]/g, "")
-    .split(/[-_]/)
+// Convert page/file identifiers into stable camelCase object keys for the route registry.
+export function toRouteKey(input: string): string {
+  const routeKey = input
+    // Keep nested route boundaries visible in the generated key.
+    .split("/")
     .filter(Boolean)
-    .map((part, i) =>
-      i === 0
-        ? part[0].toLowerCase() + part.slice(1)
-        : part[0].toUpperCase() + part.slice(1),
+    .map((segment) =>
+      segment
+        .replaceAll(/[^a-zA-Z0-9-_]/g, "")
+        // Normalize each path segment independently before joining nested segments with `_`.
+        .split(/[-_]/)
+        .filter(Boolean)
+        .map((part, i) =>
+          i === 0
+            ? part[0].toLowerCase() + part.slice(1)
+            : part[0].toUpperCase() + part.slice(1),
+        )
+        .join(""),
     )
-    .join("");
-  return /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(camel) ? camel : `"${camel}"`;
+    .filter(Boolean)
+    .join("_");
+  // Quote anything that is not a valid JS identifier so generated code stays syntactically valid.
+  return /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(routeKey)
+    ? routeKey
+    : `"${routeKey}"`;
 }
 
 function escapeStringLiteral(input: string): string {
@@ -122,7 +134,7 @@ function buildOutput(routes: Record<string, Route>) {
     .sort(([, a], [, b]) => a.order - b.order || a.title.localeCompare(b.title))
     .map(
       ([key, { path, title, sitemap, order, showInHeader, isStagingOnly }]) => `
-  ${toRouteKey(key)}: {
+  ${key}: {
     path: buildUrl("${path}"),
     title: "${escapeStringLiteral(title)}",
     sitemap: ${sitemap},

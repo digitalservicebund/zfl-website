@@ -54,4 +54,7 @@ allowed_patterns:
   - secrets.GITHUB_TOKEN
   - posthogKey
   - secret-scan
+  - routeKey
+  - toRouteKey
+  - "route key"
 version: "1.0"

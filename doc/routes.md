@@ -47,7 +47,7 @@ import { routes } from "@/config/routes";
 <a href={routes.schulungen.path}>{routes.schulungen.title}</a>
 ```
 
-The route key is derived from the page filename in camelCase (e.g. `schulungen`, `anleitungenUndHilfsmittel`). The home page (`index.astro`) maps to `routes.home`.
+The route key is derived from the page filename in camelCase (e.g. `schulungen`, `anleitungenUndHilfsmittel`). The home page (`index.astro`) maps to `routes.home`. Child routes prefix the route key with the parent route key (e.g. `ueberUns_zahlenUndFakten`).
 
 ## Staging-only pages
 
