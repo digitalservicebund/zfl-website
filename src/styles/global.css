@@ -1,4 +1,4 @@
-@import "@kern-ux/native/dist/kern.min.css";
+@import "@kern-ux/native/dist/kern.min.css" layer(base);
 @import "@kern-ux/native/dist/fonts/fira-sans.css";
 @import "./kern-utils.css";
 @import "tailwindcss";
@@ -34,7 +34,7 @@
 
 @layer base {
   html {
-    /* Keep 16px, don't change! (e.g. angie library depends on it) */
+    /* Keep 16px, don't change! */
     font-size: 16px;
   }
 
@@ -168,14 +168,14 @@ address {
 }
 
 @utility text-link {
-  @apply visited:text-ds-violet text-cosmic-blue-base fill-blue-800 underline decoration-1 underline-offset-4 active:text-black;
+  @apply visited:text-ds-violet text-cosmic-blue-base fill-cosmic-blue-base underline decoration-1 underline-offset-4 active:text-black;
 
   &:focus-visible {
-    @apply text-blue-800! no-underline!;
+    @apply text-cosmic-blue-base! no-underline!;
   }
 
   &:hover {
-    @apply decoration-[3px];
+    @apply decoration-3;
   }
 
   .text-white & {
@@ -212,27 +212,6 @@ address {
 
 @utility hero-image-overlay {
   @apply absolute top-0 bottom-0 left-3/4 size-fit opacity-20;
-}
-
-@layer components {
-  .summary-content {
-    .details & {
-      background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M9.5 17L14.5 12L9.5 7V17Z' fill='%23004B76'/%3E%3C/svg%3E%0A");
-      background-position: 0 calc(50% - 1px);
-    }
-
-    .details[open] & {
-      background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M7 9.5L12 14.5L17 9.5H7Z' fill='%23005576'/%3E%3C/svg%3E%0A");
-      background-position: 0 calc(50% - 1px);
-    }
-    &:hover {
-      @apply underline! decoration-2 underline-offset-2;
-    }
-  }
-}
-
-@utility mx-auto {
-  margin-inline: auto;
 }
 
 @utility list-unstyled {
