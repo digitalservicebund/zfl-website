@@ -7,14 +7,15 @@ import trainingsImage from "@/images/Trainings.jpg";
 import Layout from "@/layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
 import { getImage, Image } from "astro:assets";
-import { routes } from "@/config/routes.ts";
 
 const trainingsImageAsset = await getImage({ src: trainingsImage });
 const trainingsImageAssetURL = `url("${trainingsImageAsset.src}")`;
 
 export const frontmatter = {
-  title: routes.begleitungen.title,
+  title: "Regelungsbegleitung",
   sitemap: true,
+  showInHeader: true,
+  order: 1,
 };
 ---
 

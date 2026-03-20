@@ -1,16 +1,19 @@
 ---
-import Hero from "@/components/Hero.astro";
-import Layout from "@/layouts/Layout.astro";
-import { Image } from "astro:assets";
-import { Icon } from "astro-icon/components";
 import Card from "@/components/Card.astro";
-import zusammenarbeitImg from "./Zusammenarbeit.png";
-import ansatzImg from "./Ansatz.jpg";
+import Hero from "@/components/Hero.astro";
 import { routes } from "@/config/routes.ts";
+import Layout from "@/layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import ansatzImg from "./Ansatz.jpg";
+import zusammenarbeitImg from "./Zusammenarbeit.png";
 
 export const frontmatter = {
   title: "Über uns",
   sitemap: true,
+  showInHeader: true,
+  isStagingOnly: true,
+  order: 4,
 };
 ---
 
@@ -29,7 +32,7 @@ export const frontmatter = {
     </Hero>
 
     <section>
-      <div class="flex flex-col md:flex-row gap-32">
+      <div class="flex flex-col gap-32 md:flex-row">
         <div class="md:w-5/12">
           <Image
             src={zusammenarbeitImg}
@@ -51,7 +54,7 @@ export const frontmatter = {
     </section>
 
     <section class="breakout bg-lavender-400">
-      <div class="flex flex-col-reverse md:flex-row-reverse gap-32">
+      <div class="flex flex-col-reverse gap-32 md:flex-row-reverse">
         <div class="md:w-5/12">
           <Image
             src={ansatzImg}
@@ -127,13 +130,12 @@ export const frontmatter = {
     <section>
       <Card
         look="blue"
-        class="flex justify-center py-48 md:py-56 max-md:rounded-none"
+        class="flex justify-center py-48 max-md:rounded-none md:py-56"
       >
         <h2 class="text-inherit">Wie wir arbeiten</h2>
         <p>
           Themen an denen wir aktuell arbeiten finden Sie auf dieser Seite: <a
-            href={routes.ueberUns.children.daranArbeitenWir.path}
-            >Daran arbeiten wir</a
+            href={routes.ueberUns_daranArbeitenWir.path}>Daran arbeiten wir</a
           >.
         </p>
       </Card>

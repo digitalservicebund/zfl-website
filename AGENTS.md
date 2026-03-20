@@ -1,258 +1,89 @@
-# AGENTS.md - Agentic Coding Guidelines
+# AGENTS.md
 
-This document provides guidelines for agentic coding assistants working on the Zentrum für Legistik website project.
+This file provides guidance to agentic coding assistants when working with code in this repository.
 
-## Project Overview
+## Commands
 
-This is an Astro-based static site for Zentrum für Legistik, using:
+```sh
+pnpm dev              # Start dev server at localhost:4321
+pnpm build            # Production build to ./dist/
+pnpm lint             # ESLint
+pnpm lint:fix         # ESLint with auto-fix
+pnpm typecheck        # TypeScript type check
+pnpm format:check     # Check formatting
+pnpm format:fix       # Auto-format with Prettier
+pnpm test             # Unit tests (Vitest)
+pnpm test <filename>  # Run specific test (e.g. pnpm test src/components/global/PageHeader.test.ts)
+pnpm test:e2e         # E2E tests with Playwright (builds first)
+pnpm test:e2e e2e/a11y.spec.ts           # Run specific e2e test file
+pnpm test:e2e -- --grep "<test name>"    # Run e2e tests by name
+```
 
-- Astro framework with TypeScript
-- Tailwind CSS with custom design tokens
-- Alpine.js for client-side interactivity
-- KERN UX design system integration
+## Architecture
 
-## Build/Lint/Test Commands
+**Static site** built with Astro 5, Tailwind CSS 4, Alpine.js, and MDX. Deployed as Docker/nginx.
 
-### Development
+### Content model
 
-- `pnpm dev` - Start development server on localhost:4321
-- `pnpm build` - Build production site to ./dist/
-- `pnpm preview` - Preview production build locally
+All content lives as files in `src/pages/` — no CMS, no Content Collections (see ADR 0007):
 
-### Code Quality
+- `.astro` for pages with complex component structure
+- `.mdx` for text-heavy pages; must specify `layout: "@/layouts/MdxLayout.astro"` in frontmatter
 
-- `pnpm lint` - Run ESLint on all files
-- `pnpm lint:fix-selected <files>` - Fix linting issues for specific files
-- `pnpm typecheck` - Run TypeScript type checking
-- `pnpm format:check` - Check Prettier formatting
-- `pnpm format:fix-selected <files>` - Format specific files with Prettier
+### Route management
+
+`src/config/routes.ts` is **auto-generated** by the `integrations/routeGenerator.ts` Astro integration at build/dev start. It reads frontmatter metadata from all page files. Never edit `routes.ts` manually — edit the frontmatter in the page files instead.
+
+Every page that should appear in the route registry needs frontmatter with:
+
+```ts
+export const frontmatter = {
+  title: "Page Title",
+  sitemap: true,
+  order: 1, // lower = earlier in nav; default 999
+  showInHeader: true, // include in nav
+  isStagingOnly: false,
+};
+```
+
+Always import routes from `@/config/routes` and use `routes.somePage.path` for internal links.
+
+### Stage/environment configuration
+
+Environment-specific behavior is determined at **build time** via `PUBLIC_STAGE` env var. Import from `src/config/stage.ts`:
+
+```ts
+import { isProduction, isStaging, isPreview } from "@/config/stage";
+```
+
+- `production` (default): Posthog analytics enabled
+- `staging`: staging-only pages/features visible
+- `preview`: GitHub Pages preview deployments with a `base` path
+
+### Component patterns
+
+**Styling with `tailwind-variants`**: Use `tv()` from `tailwind-variants` to define component variants. Accept `class?: string` for overrides. See `doc/tailwind-variants.md`.
+
+**Icons**: Use `<Icon name="ic:..." />` from `astro-icon/components`. Icon set is Google Material Icons (`@iconify-json/ic`). Find icons at `icon-sets.iconify.design/ic/`. Prefix names with `ic:`.
+
+**Layout**: All pages use `<Layout title="...">` from `src/layouts/Layout.astro`, which includes the `PageHeader`, `Footer`, and conditional Posthog analytics.
 
 ### Testing
 
-- `pnpm test` - Run unit tests with Vitest
-- `pnpm test:e2e` - Run end-to-end tests with Playwright (requires build first)
+- **Unit tests** (`*.test.ts` alongside source): Use `AstroContainer` to render Astro components — see `src/components/global/PageHeader.test.ts` for the pattern.
+- **E2E tests** (`e2e/*.spec.ts`): Playwright with Chromium. Accessibility tests in `e2e/a11y.spec.ts` use `@axe-core/playwright` and run axe on all routes automatically.
 
-### Running a Single Test
+### Path alias
 
-- Unit test: `pnpm test <filename>` (e.g., `pnpm test src/layouts/PageHeader.test.ts`)
-- E2E test: `pnpm test:e2e -- --grep "<test name>"` or `pnpm test:e2e e2e/pageHeader.spec.ts`
+`@/` maps to `src/` — use this for all imports within the project.
 
-## Code Style Guidelines
+### Git hooks (lefthook)
 
-### TypeScript Configuration
+Pre-commit/push hooks run: `commitlint` (conventional commits required), `lint`, `typecheck`, `format`, `talisman` (secret scanning), `licenses-audit`. Install with `brew install lefthook talisman && lefthook install`.
 
-- Uses `astro/tsconfigs/strict` as base configuration
-- Strict type checking enabled
-- Path aliases configured:
-  - `@/*` → `./src/*`
+## Key docs
 
-### Import Organization
-
-- Imports organized automatically by `prettier-plugin-organize-imports`
-- Group imports: external packages, then internal aliases, then relative imports
-- Type-only imports use `import type` syntax
-
-### Component Structure (Astro)
-
-```astro
----
-// Frontmatter: imports, types, props
-interface Props {
-  title: string;
-  class?: string;
-}
-
-const { title, class: className } = Astro.props;
----
-
-<!-- Template: semantic HTML with Tailwind classes -->
-<div class={className}>
-  <h1>{title}</h1>
-  <slot />
-</div>
-```
-
-### Naming Conventions
-
-- **Components**: PascalCase (e.g., `PageHeader.astro`, `Card.tsx`)
-- **Files**: kebab-case for pages/routes (e.g., `begleitungen.astro`)
-- **Variables/Functions**: camelCase
-- **Types/Interfaces**: PascalCase with descriptive names
-- **CSS Classes**: kebab-case, prefixed with component name when needed
-
-### Tailwind CSS Usage
-
-- Uses `tailwind-variants` (tv) for component styling
-- Custom design tokens: `cosmic-blue-base`, `lavender-base`, etc.
-- Responsive classes: `sm:`, `md:`, `lg:` prefixes
-- Utility-first approach with semantic component variants
-
-### Error Handling
-
-- TypeScript strict mode catches most type errors
-- ESLint catches code quality issues
-- Pre-commit hooks prevent commits with issues
-- Use try/catch for async operations
-- Log errors appropriately (console.error for development)
-
-### Testing Patterns
-
-#### Unit Tests (Vitest)
-
-```typescript
-import { experimental_AstroContainer as AstroContainer } from "astro/container";
-import { expect, test } from "vitest";
-
-test("ComponentName", async () => {
-  const container = await AstroContainer.create();
-  const result = await container.renderToString(Component);
-  expect(result).toContain("expected content");
-});
-```
-
-#### E2E Tests (Playwright)
-
-```typescript
-import { expect, test } from "@playwright/test";
-
-test("feature description", async ({ page }) => {
-  await page.goto("/route");
-  await expect(page.getByRole("heading")).toContainText("Expected");
-});
-```
-
-### Commit Message Conventions
-
-- Follow conventional commits with sentence case
-- Max header length: 50 characters
-- No trailing period in header
-- Body starts with capital letter and blank line after header
-
-Examples:
-
-- `Add responsive navigation menu`
-- `Fix mobile menu toggle accessibility`
-- `Update dependencies for security patches`
-
-### File Organization
-
-```
-src/
-├── components/     # Reusable UI components
-├── layouts/        # Page layout components
-├── pages/          # Route-based pages
-├── utils/          # Utility functions
-├── config/         # Configuration files
-├── styles/         # Global styles
-└── types/          # TypeScript type definitions
-```
-
-### Pre-commit Hooks
-
-Automatically run via lefthook:
-
-- ESLint fixes applied to staged files
-- TypeScript type checking
-- Prettier formatting
-- Security scans (talisman)
-- License auditing on push
-
-### Security Considerations
-
-- No secrets or credentials committed (talisman checks)
-- License compliance verified for dependencies
-- Environment variables loaded securely
-- No inline scripts or dangerous eval usage
-
-### Accessibility
-
-- Semantic HTML structure
-- ARIA attributes where needed
-- Keyboard navigation support
-- Screen reader compatibility
-- Color contrast compliance
-
-### Performance
-
-- Static generation with Astro
-- Optimized images and assets
-- Minimal client-side JavaScript
-- Efficient Tailwind CSS purging
-
-## Development Workflow
-
-1. Create feature branch from main
-2. Make changes with proper TypeScript types
-3. Run `pnpm lint` and `pnpm typecheck` locally
-4. Write/update tests as needed
-5. Format code with `pnpm format:fix`
-6. Commit with conventional message
-7. Push and create pull request
-8. CI/CD runs full test suite and builds
-
-## Tooling Versions
-
-- Node.js: Current LTS (see .node-version)
-- pnpm: 10.28.1
-- Astro: 5.16.13
-- TypeScript: 5.9.3
-- ESLint: 9.39.2
-- Prettier: 3.8.1
-- Vitest: 4.0.17
-- Playwright: 1.57.0
-
-## Common Patterns
-
-### Component Props with Variants
-
-```typescript
-import { tv, type VariantProps } from "tailwind-variants";
-
-interface Props extends VariantProps<typeof styles> {
-  children: string;
-}
-
-export const styles = tv({
-  base: "component-base-classes",
-  variants: {
-    size: { sm: "small-styles", lg: "large-styles" },
-    variant: { primary: "primary-styles", secondary: "secondary-styles" },
-  },
-});
-```
-
-### Route-based Data Loading
-
-```astro
----
-// Use Astro.glob for static data
-const posts = await Astro.glob("../content/*.md");
----
-
-<!-- Render content -->{
-  posts.map((post) => (
-    <article>
-      <h2>{post.frontmatter.title}</h2>
-    </article>
-  ))
-}
-```
-
-### Alpine.js Integration
-
-````astro
----
-// Server-side logic
-const initialState = { count: 0 };
----
-
-<!-- Client-side interactivity -->
-<div x-data={JSON.stringify(initialState)}>
-  <button @click="count++">Increment</button>
-  <span x-text="count"></span>
-</div>
-```
-<parameter name="filePath"
-  >/Users/basti/Projects/zentrum-fuer-legistik-webseite/AGENTS.md</parameter
->
-````
+- `doc/adr/` — Architecture Decision Records
+- `doc/routes.md` — Route management guide
+- `doc/tailwind-variants.md` — `tailwind-variants` usage guide
+- `doc/icons.md` — Icon usage guide

@@ -6,6 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 import icon from "astro-icon";
 import { defineConfig } from "astro/config";
 import process from "node:process";
+import { generateRoutes } from "./integrations/routeGenerator";
 
 import preact from "@astrojs/preact";
 
@@ -25,6 +26,10 @@ export default defineConfig({
     sitemap(),
     mdx(),
     preact({ compat: true }),
+    generateRoutes({
+      pagesDirs: ["src/pages"],
+      output: "src/config/routes.ts",
+    }),
   ],
   build: {
     assets: "_astro",
