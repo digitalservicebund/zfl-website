@@ -22,12 +22,6 @@ importers:
       '@astrojs/sitemap':
         specifier: ^3.7.1
         version: 3.7.1
-      '@digitalservice4germany/angie':
-        specifier: ^2.4.0
-        version: 2.4.0
-      '@digitalservice4germany/style-dictionary':
-        specifier: ^2.0.0
-        version: 2.0.0
       '@iconify-json/ic':
         specifier: ^1.2.4
         version: 1.2.4
@@ -67,6 +61,9 @@ importers:
       tailwindcss:
         specifier: ^4.2.2
         version: 4.2.2
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
     devDependencies:
       '@axe-core/playwright':
         specifier: ^4.11.1
@@ -125,9 +122,6 @@ importers:
       prettier-plugin-tailwindcss:
         specifier: ^0.7.2
         version: 0.7.2(prettier-plugin-astro@0.14.1)(prettier-plugin-organize-imports@4.3.0(prettier@3.8.1)(typescript@5.9.3))(prettier@3.8.1)
-      typescript:
-        specifier: ^5.9.3
-        version: 5.9.3
       typescript-eslint:
         specifier: ^8.57.1
         version: 8.57.1(eslint@10.0.3(jiti@2.6.1))(typescript@5.9.3)
@@ -241,14 +235,6 @@ packages:
   '@commitlint/types@20.5.0':
     resolution: {integrity: sha512-ZJoS8oSq2CAZEpc/YI9SulLrdiIyXeHb/OGqGrkUP6Q7YV+0ouNAa7GjqRdXeQPncHQIDz/jbCTlHScvYvO/gA==}
     engines: {node: '>=v18'}
-
-  '@digitalservice4germany/angie@2.4.0':
-    resolution: {integrity: sha512-2JTj2IQYHQieXca6qocC1n8gqDQrcfmlPfrm8DukcpH96CrFYhW7WlaVQJFMKSYGZK/Q3Cj2DEyYhqQR0KSb5w==}
-    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
-
-  '@digitalservice4germany/style-dictionary@2.0.0':
-    resolution: {integrity: sha512-P4qRe2OyIZsxtOsX4GY0JP5k0YyDimoeY/eQP5S2Ibr0T1uFoH3/7yOsXeNeAS15H1A4h81apfNakK019F835Q==}
-    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   '@emmetio/abbreviation@2.3.3':
     resolution: {integrity: sha512-mgv58UrU3rh4YgbE/TzgLQwJ3pFsHHhCLqY20aJq+9comytTXUDNGG/SMtSeMJdkpxgXSXunBGLD8Boka3JyVA==}
@@ -3617,10 +3603,6 @@ snapshots:
     dependencies:
       conventional-commits-parser: 6.3.0
       picocolors: 1.1.1
-
-  '@digitalservice4germany/angie@2.4.0': {}
-
-  '@digitalservice4germany/style-dictionary@2.0.0': {}
 
   '@emmetio/abbreviation@2.3.3':
     dependencies:

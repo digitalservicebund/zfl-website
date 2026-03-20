@@ -12,17 +12,18 @@ import interoperableEuropeImage from "./InteroperableEurope.png";
 import rulemapBuilderImage from "./RulemapBuilder.jpg";
 
 export const frontmatter = {
-  title: "Anleitungen und Hilfsmittel",
+  title: "Hilfsmittel",
   sitemap: true,
   showInHeader: true,
+  order: 3,
 };
 ---
 
 <Layout title={frontmatter.title}>
   <main class="breakout-grid">
     <Hero>
-      <div class="breakout-wide">
-        <h1>{frontmatter.title}</h1>
+      <h1>Anleitungen und Hilfsmittel</h1>
+      <div slot="subtitle">
         <p>
           Auf dieser Seite finden Sie hilfreiche Links zu Anleitungen und
           Hilfsmittel, die Sie bei der Regelungsarbeit unterstützen.
@@ -33,11 +34,11 @@ export const frontmatter = {
           >,
           <a href="https://www.gleichstellungs-check.de/"
             >Gleichstellungscheck</a
-          > oder <a href="https://jugend-check.de/">Jugendcheck</a>)
-          zielen in Teilen auf die gleiche Wirkung ab: Praxis- und
-          digitaltaugliche Regelungen und Bürokratierückbau. Bei der
-          Zusammenführung diverser Ansätze verfolgen wir das Ziel, Ihre
-          Regelungsarbeit einfacher und effizienter zu gestalten.
+          > oder <a href="https://jugend-check.de/">Jugendcheck</a>) zielen in
+          Teilen auf die gleiche Wirkung ab: Praxis- und digitaltaugliche
+          Regelungen und Bürokratierückbau. Bei der Zusammenführung diverser
+          Ansätze verfolgen wir das Ziel, Ihre Regelungsarbeit einfacher und
+          effizienter zu gestalten.
         </p>
         <p>
           <a
@@ -50,9 +51,7 @@ export const frontmatter = {
       </div>
     </Hero>
 
-    <section
-      class="breakout-wide gap-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-    >
+    <section class="gap-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
       <ToolCard
         title="Digitalcheck"
         href="https://digitalcheck.bund.de/"

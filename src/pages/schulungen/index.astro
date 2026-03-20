@@ -13,6 +13,7 @@ export const frontmatter = {
   title: "Schulungen",
   sitemap: true,
   showInHeader: true,
+  order: 2,
 };
 ---
 
@@ -23,17 +24,21 @@ export const frontmatter = {
         <div>
           <h1>In Schulungen praktisches Wissen und Kompetenzen erlangen</h1>
 
-          <p>
-            In den umsetzungsorientierten Schulungen des Zentrum für Legistik
-            lernen Sie Methoden und Werkzeuge kennen, die Sie bei der
-            Erarbeitung von praxisnahen und bürokratiearmen Regelungen
-            unterstützen.
-          </p>
-          <div class="space-y-8">
-            <a class="block" href="#schulungen-zfl">
-              ↓ Schulungen des Zentrum für Legistik
-            </a>
-            <a class="block" href="#schulungen-weitere"> ↓ Weitere Angebote </a>
+          <div class="kern-subline">
+            <p>
+              In den umsetzungsorientierten Schulungen des Zentrum für Legistik
+              lernen Sie Methoden und Werkzeuge kennen, die Sie bei der
+              Erarbeitung von praxisnahen und bürokratiearmen Regelungen
+              unterstützen.
+            </p>
+            <div class="space-y-8">
+              <a class="block" href="#schulungen-zfl">
+                ↓ Schulungen des Zentrum für Legistik
+              </a>
+              <a class="block" href="#schulungen-weitere">
+                ↓ Weitere Angebote
+              </a>
+            </div>
           </div>
         </div>
         <Image class="hidden size-288 md:block" src={schulungenImage} alt="" />
@@ -44,7 +49,7 @@ export const frontmatter = {
       <Card look="lavender" id="schulungen-zfl">
         <h2>Schulungen des Zentrum für Legistik</h2>
 
-        <h3 class="ds-subhead">
+        <h3>
           Regelungen digitaltauglich gestalten – praktische Tipps für den
           Digitalcheck <span class="whitespace-nowrap">(1,5 Stunden)</span>
         </h3>
@@ -58,7 +63,7 @@ export const frontmatter = {
           <Schedule appointments={appointments} caption="Nächste Termine" />
         </div>
 
-        <h3 class="ds-subhead">
+        <h3>
           Basisschulung für Legistinnen und Legisten
           <span class="whitespace-nowrap">(4 Tage)</span>
         </h3>
@@ -79,16 +84,24 @@ export const frontmatter = {
 
       <h2 id="schulungen-weitere" class="scroll-m-20">Weitere Angebote</h2>
 
- <h3>Bundesstiftung Gleichstellung (Gleichstellungs-Check)</h3>
+      <h3>Bundesstiftung Gleichstellung (Gleichstellungs-Check)</h3>
       <p>
-        Die für ein Gesetzesvorhaben fachlich Zuständigen lernen in der Schulung, wie Gesetzentwürfe systematisch auf ihre Auswirkungen auf die Gleichstellung der Geschlechter geprüft werden können.
+        Die für ein Gesetzesvorhaben fachlich Zuständigen lernen in der
+        Schulung, wie Gesetzentwürfe systematisch auf ihre Auswirkungen auf die
+        Gleichstellung der Geschlechter geprüft werden können.
       </p>
 
-      <h4>Schulung zur gleichstellungsorientierten Gesetzesfolgenabschätzung nach § 2 GGO</h4>
+      <h4>
+        Schulung zur gleichstellungsorientierten Gesetzesfolgenabschätzung nach
+        § 2 GGO
+      </h4>
       <p>
-Schulung an unterschiedlichen Tagen im Juni 2026 - digital und in Präsenz<br />        
-<a href="https://www.gleichstellungs-check.de/de/topic/6.schulungen.html"
-          >Mehr Informationen und Anmeldung</a>
+        Schulung an unterschiedlichen Tagen im Juni 2026 - digital und in
+        Präsenz<br />
+        <a
+          href="https://www.gleichstellungs-check.de/de/topic/6.schulungen.html"
+          >Mehr Informationen und Anmeldung</a
+        >
       </p>
 
       <h3>Speyerer Zentrum für Gesetzgebung</h3>
@@ -124,9 +137,7 @@ Schulung an unterschiedlichen Tagen im Juni 2026 - digital und in Präsenz<br />
       <h4>Einführung in die Grundlagen der Legistik</h4>
       <p>
         OnDEA bietet Video-Tutorials zu unterschiedlichen Themen an<br />
-        <a href="https://www.ondea.de/DE/ZfL/ZfL_node.html"
-          >Videos anzeigen</a
-        >
+        <a href="https://www.ondea.de/DE/ZfL/ZfL_node.html">Videos anzeigen</a>
       </p>
     </section>
 

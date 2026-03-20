@@ -1,0 +1,68 @@
+---
+const columns = Array.from({ length: 12 }, (_, index) => index + 1);
+---
+
+<div
+  class="debug-grid-overlay"
+  aria-hidden="true"
+  style="display: none"
+  x-data="{ show: false }"
+  x-show="show"
+  @keydown.ctrl.g.window.prevent="show = !show"
+>
+  <div class="debug-grid-overlay__container kern-container">
+    <div class="debug-grid-overlay__row kern-row">
+      {columns.map((column) => (
+        <div class="debug-grid-overlay__column kern-col-1" data-column={column} />
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .debug-grid-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+  }
+
+  .debug-grid-overlay__container {
+    height: 100%;
+  }
+
+  .debug-grid-overlay__row {
+    height: 100%;
+  }
+
+  .debug-grid-overlay__column {
+    position: relative;
+    height: 100%;
+    background-clip: content-box;
+    background-color: rgb(0 64 255 / 8%);
+  }
+
+  .debug-grid-overlay__column::before {
+    content: attr(data-column);
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    display: inline-flex;
+    justify-content: center;
+    min-width: 1.75rem;
+    padding: 0.125rem 0.375rem;
+    border-radius: 9999px;
+    background-color: rgb(0 64 255 / 90%);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1;
+    transform: translateX(-50%);
+  }
+
+  @media (max-width: 48rem) {
+    .debug-grid-overlay__column::before {
+      display: none;
+    }
+  }
+</style>

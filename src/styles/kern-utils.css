@@ -1,0 +1,43 @@
+
+/* KERN typography styles as Tailwind utilities */
+
+/* Override kern's muted color for sublines to use the inherited text color */
+.kern-subline {
+	color: inherit;
+}
+
+@utility kern-heading-display {
+	/* padding: var(--kern-metric-baseline-heading-display-padding-top, 12px) var(--kern-metric-space-none, 0px) var(--kern-metric-baseline-heading-display-padding-bottom, 12px) var(--kern-metric-space-none, 0px); */
+	font-size: var(--kern-typography-font-size-adaptive-2x-large, 48px);
+	font-weight: var(--kern-typography-font-weight-medium, 500);
+	line-height: var(--kern-typography-line-height-adaptive-2x-large, 56px);
+}
+
+@utility kern-heading-x-large {
+	/* padding: var(--kern-metric-baseline-heading-x-large-padding-top, 9px) var(--kern-metric-space-none, 0px) var(--kern-metric-baseline-heading-x-large-padding-bottom, 7px) var(--kern-metric-space-none, 0px); */
+	font-size: var(--kern-typography-font-size-adaptive-x-large, 32px);
+	font-weight: var(--kern-typography-font-weight-medium, 500);
+	line-height: var(--kern-typography-line-height-adaptive-x-large, 40px);
+}
+
+@utility kern-heading-large {
+	/* padding: var(--kern-metric-baseline-heading-large-padding-top, 7px) var(--kern-metric-space-none, 0px) var(--kern-metric-baseline-heading-large-padding-bottom, 9px) var(--kern-metric-space-none, 0px); */
+	font-size: var(--kern-typography-font-size-adaptive-large, 26px);
+	font-weight: var(--kern-typography-font-weight-semi-bold, 600);
+	line-height: var(--kern-typography-line-height-adaptive-large, 32px);
+}
+
+@utility kern-heading-medium {
+	/* padding: var(--kern-metric-baseline-heading-medium-padding-top, 5px) var(--kern-metric-space-none, 0px) var(--kern-metric-baseline-heading-medium-padding-bottom, 3px) var(--kern-metric-space-none, 0px); */
+	font-size: var(--kern-typography-font-size-adaptive-medium, 21px);
+	font-weight: var(--kern-typography-font-weight-semi-bold, 600);
+	line-height: var(--kern-typography-line-height-adaptive-medium, 24px);
+}
+
+@utility kern-heading-small {
+	/* padding: var(--kern-metric-baseline-heading-small-padding-top, 6px) var(--kern-metric-space-none, 0px) var(--kern-metric-baseline-heading-small-padding-bottom, 2px) var(--kern-metric-space-none, 0px); */
+	font-size: var(--kern-typography-font-size-static-medium, 18px);
+	font-weight: var(--kern-typography-font-weight-semi-bold, 600);
+	line-height: var(--kern-typography-line-height-static-medium, 24px);
+}
+
