@@ -57,6 +57,10 @@ fileignoreconfig:
   - filename: src/components/global/DebugGrid.astro
     allowed_patterns:
       - \@keydown
+  - filename: src/pages/kern.astro
+    allowed_patterns:
+      - key
+      - password
 scopeconfig:
   - scope: node
 allowed_patterns:

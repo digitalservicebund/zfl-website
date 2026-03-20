@@ -73,6 +73,14 @@ export const routes = {
     showInHeader: false,
     isStagingOnly: false,
   },
+  kern: {
+    path: "/kern",
+    title: "KERN UX Komponenten",
+    sitemap: false,
+    order: 999,
+    showInHeader: false,
+    isStagingOnly: false,
+  },
   sitemap: {
     path: "/sitemap",
     title: "Sitemap",
