@@ -1,12 +1,13 @@
 ---
 import Kopfzeile from "@/components/global/Kopfzeile.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
-import { routes, removeTrailingSlash } from "@/config/routes";
+import { routes } from "@/config/routes";
 import { isStaging } from "@/config/stage";
 import bundLogo from "@/images/logo/bund-logo.png";
 import bundLogoWhite from "@/images/logo/bund-logo-white.svg";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
+import { removeTrailingSlash } from "@/utils/path";
 import { twMerge } from "tailwind-merge";
 
 const { pathname } = Astro.url;
@@ -27,7 +28,7 @@ const activeClasses = "border-cosmic-blue-base bg-lavender-base";
   x-data="{ mobileMenuOpen: false }"
   @resize.window="mobileMenuOpen = false"
 >
-  <Kopfzeile className="relative z-30" />
+  <Kopfzeile />
   <div class="container relative z-30 flex h-[72px] justify-between">
     <!-- Logo and title -->
     <a

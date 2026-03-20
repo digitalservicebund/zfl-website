@@ -16,6 +16,7 @@ const { title: pageTitle } = Astro.props;
 const siteName = "Zentrum für Legistik";
 const title = pageTitle ? `${pageTitle} — ${siteName}` : siteName;
 const SEOImage = `${Astro.url.origin}/SEO_ZfL.png`;
+const showDebugGrid = !isProduction || process.env.NODE_ENV === "development";
 ---
 
 <!doctype html>
@@ -65,7 +66,7 @@ const SEOImage = `${Astro.url.origin}/SEO_ZfL.png`;
   />
 
   <body class="relative">
-    <DebugGrid />
+    {showDebugGrid && <DebugGrid />}
     <PageHeader />
     <slot />
     <Footer />

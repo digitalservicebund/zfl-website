@@ -1,14 +1,19 @@
+import { routes } from "@/config/routes";
+import { isStaging } from "@/config/stage";
 import { expect, test } from "@playwright/test";
-import { flatRoutes } from "./utils/routes";
+
+const TITLE_404 = "Seite nicht gefunden — Zentrum für Legistik";
 
 const getTitle = (title?: string) =>
   title === "Zentrum für Legistik" ? title : `${title} — Zentrum für Legistik`;
 
 test.describe("page titles", () => {
-  flatRoutes.forEach((route) => {
+  Object.values(routes).forEach((route) => {
     test(`${route.path} has correct title`, async ({ page }) => {
       await page.goto(route.path);
-      await expect(page).toHaveTitle(getTitle(route.title));
+      const expectedTitle =
+        route.isStagingOnly && !isStaging ? TITLE_404 : getTitle(route.title);
+      await expect(page).toHaveTitle(expectedTitle);
       expect(page.getByRole("heading", { level: 1 })).toBeDefined();
     });
   });

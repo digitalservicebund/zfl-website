@@ -1,9 +1,12 @@
 ---
 import Hero from "@/components/Hero.astro";
+import { routes } from "@/config/routes";
 import Layout from "@/layouts/Layout.astro";
-import { getAllRoutes } from "@/utils/routesHelper";
 
-const pages = await getAllRoutes();
+export const frontmatter = {
+  title: "Sitemap",
+  sitemap: false,
+};
 ---
 
 <Layout title="Sitemap">
@@ -14,11 +17,13 @@ const pages = await getAllRoutes();
     <section>
       <ul>
         {
-          pages.map((page) => (
-            <li>
-              <a href={page.url}>{page.title}</a>
-            </li>
-          ))
+          Object.values(routes)
+            .filter((route) => route.sitemap && !route.isStagingOnly)
+            .map((route) => (
+              <li>
+                <a href={route.path}>{route.title}</a>
+              </li>
+            ))
         }
       </ul>
     </section>
