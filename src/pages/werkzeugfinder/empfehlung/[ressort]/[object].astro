@@ -4,6 +4,7 @@ import Layout from "@/layouts/Layout.astro";
 import Card from "@/components/Card.astro";
 import { routes } from "@/config/routes";
 import { Image } from "astro:assets";
+import { render } from "astro:content";
 import {
   findResultByObjectAndRessort,
   getAllObjectIds,
@@ -25,7 +26,19 @@ const { ressort: ressortId, object: objectId } = Astro.params;
 
 const ressort = getRessortById(ressortId);
 const object = getObjectById(objectId);
-const result = findResultByObjectAndRessort(objectId, ressortId);
+const result = await findResultByObjectAndRessort(objectId, ressortId);
+
+const renderedTools = result
+  ? await Promise.all(
+      result.recommendations.map(async (rec) => {
+        const { Content: PrimaryContent } = await render(rec.primaryTool);
+        const altContents = await Promise.all(
+          rec.alternativeTools.map((t) => render(t)),
+        );
+        return { rec, PrimaryContent, altContents };
+      }),
+    )
+  : [];
 
 const quizPath = routes.werkzeugfinder.path;
 ---
@@ -60,37 +73,31 @@ const quizPath = routes.werkzeugfinder.path;
                 </a>
 
                 <div class="mt-lg divide-lavender-400 border-lavender-400 divide-y rounded-sm border">
-                  {result.recommendations.map((rec) => (
+                  {renderedTools.map(({ rec, PrimaryContent }) => (
                     <div class="p-md">
                       <p class="kern-preline kern-preline--small mb-4 text-gray-900">
                         {rec.fidelity.name}
                       </p>
-                      <h3 class="mt-0 kern-title">{rec.primaryTool.name}</h3>
+                      <h3 class="mt-0 kern-title">{rec.primaryTool.data.name}</h3>
                       <div class="gap-md flex flex-col sm:flex-row">
-                        <div class="flex-1">
-                          <p>{rec.primaryTool.description}</p>
-                          {rec.primaryTool.link && (
+                        <div class="flex-1 prose">
+                          <PrimaryContent />
+                          {rec.primaryTool.data.link && (
                             <a
-                              href={rec.primaryTool.link}
+                              href={rec.primaryTool.data.link}
                               class="whitespace-pre-line"
                             >
-                              {rec.primaryTool.link}
+                              {rec.primaryTool.data.link}
                             </a>
                           )}
-                          {rec.primaryTool.access && (
-                            <p class="bg-lavender-200 p-sm! rounded-sm kern-body kern-body--small">
-                              <strong>Zugang: </strong>
-                              {rec.primaryTool.access}
-                            </p>
-                          )}
                         </div>
-                        {(rec.primaryTool.img ||
+                        {(rec.primaryTool.data.img ||
                           rec.alternativeTools.length > 0) && (
                           <div class="space-y-md flex-1">
-                            {rec.primaryTool.img && (
+                            {rec.primaryTool.data.img && (
                               <Image
-                                src={rec.primaryTool.img.src}
-                                alt={rec.primaryTool.img.alt}
+                                src={rec.primaryTool.data.img.src}
+                                alt={rec.primaryTool.data.img.alt}
                                 class="border-lavender-400 w-full rounded-sm border"
                               />
                             )}
@@ -98,14 +105,14 @@ const quizPath = routes.werkzeugfinder.path;
                               <div class="bg-lavender-200 p-sm rounded-sm">
                                 <h4 class="mt-0">Alternativen</h4>
                                 <p>
-                                  Wenn Sie {rec.primaryTool.name} nicht nutzen
+                                  Wenn Sie {rec.primaryTool.data.name} nicht nutzen
                                   können oder möchten, können Sie ein{" "}
-                                  {result.cluster.name} auch in folgenden
+                                  {result!.cluster.name} auch in folgenden
                                   Anwendungen erstellen:
                                 </p>
                                 <ul>
                                   {rec.alternativeTools.map((alt) => (
-                                    <li>{alt.name}</li>
+                                    <li>{alt.data.name}</li>
                                   ))}
                                 </ul>
                               </div>
