@@ -2,16 +2,16 @@
 name: Conceptboard
 fidelity: digital
 link: ""
+visualizations:
+  - entscheidungsbaum
 ressorts:
   - bmas
-  - bmi
-  - bmj
 img:
   src: "@/images/werkzeugfinder/tools/tool_Conceptboard.png"
   alt: "Die Benutzeroberfläche von Conceptboard, die mehrere Diagramme und mit Ihnen interagierende Personen zeigt."
 ---
 
-Als einfaches, digitales Werkzeug hilft Conceptboard Ihnen dabei, Ihr Flussdiagramm gut zu strukturieren und zu formatieren. Die große Arbeitsfläche ermöglicht die Darstellung komplexer Inhalte und Abhängigkeiten. Das Programm verhält sich wie eine Magnetwand, so können schnell Elemente ersetzt oder verschoben werden.
+Als einfaches, digitales Werkzeug hilft Conceptboard Ihnen dabei, Ihren Entscheidungsbaum gut zu strukturieren und zu formatieren. Die große Arbeitsfläche ermöglicht die Darstellung komplexer Inhalte und Abhängigkeiten. Das Programm verhält sich wie eine Magnetwand, so können schnell Elemente ersetzt oder verschoben werden.
 
 #### Zugang
 

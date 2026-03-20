@@ -2,6 +2,8 @@
 name: Papier
 fidelity: einfach
 link: ""
+visualizations:
+  - schaubild
 img:
   src: "@/images/werkzeugfinder/tools/papier.png"
   alt: "Eine Person, die mit einem Stift eine Abbildung auf ein Papier zeichnet"

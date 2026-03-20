@@ -113,6 +113,14 @@ export const routes = {
     showInHeader: false,
     isStagingOnly: false,
   },
+  werkzeugfinder_uebersicht: {
+    path: "/werkzeugfinder/uebersicht",
+    title: "Werkzeugübersicht",
+    sitemap: true,
+    order: 999,
+    showInHeader: false,
+    isStagingOnly: false,
+  },
   ueberUns_zahlenUndFakten: {
     path: "/ueber-uns/zahlen-und-fakten",
     title: "Zahlen und Fakten",

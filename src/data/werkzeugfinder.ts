@@ -41,7 +41,7 @@ export interface Fidelity extends Entity {
   order: number;
 }
 
-export type Tool = CollectionEntry<"werkzeuge">;
+export type Tool = CollectionEntry<"werkzeuge-alt">;
 
 export interface Cluster extends Entity {
   id: string;
@@ -70,7 +70,7 @@ export interface Result {
 }
 
 async function loadTools(): Promise<Map<string, Tool>> {
-  const entries = await getCollection("werkzeuge");
+  const entries = await getCollection("werkzeuge-alt");
   return new Map(entries.map((e: Tool) => [e.id, e]));
 }
 

@@ -2,6 +2,10 @@
 name: Bundescloud draw.io
 fidelity: digital
 link: ""
+visualizations:
+  - schaubild
+  - entscheidungsbaum
+  - flussdiagramm
 img:
   src: "@/images/werkzeugfinder/tools/bundescloud_drawio_flussdiagramm.png"
   alt: "Die Benutzeroberfläche von Draw.io, die ein einfaches Schaubild darstellt"

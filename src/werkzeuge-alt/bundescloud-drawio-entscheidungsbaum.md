@@ -2,6 +2,8 @@
 name: Bundescloud draw.io
 fidelity: digital
 link: ""
+visualizations:
+  - entscheidungsbaum
 img:
   src: "@/images/werkzeugfinder/tools/bundescloud_drawio_entscheidungsbaum.png"
   alt: "Die Benutzeroberfläche von Draw.io, die einen einfachen Entscheidungsbaum darstellt"

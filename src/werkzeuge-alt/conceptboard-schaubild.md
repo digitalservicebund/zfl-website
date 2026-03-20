@@ -2,6 +2,8 @@
 name: Conceptboard
 fidelity: digital
 link: ""
+visualizations:
+  - schaubild
 ressorts:
   - bmas
 img:

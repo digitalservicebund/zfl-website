@@ -2,12 +2,14 @@
 name: Bundescloud draw.io
 fidelity: digital
 link: ""
+visualizations:
+  - schaubild
 img:
   src: "@/images/werkzeugfinder/tools/bundescloud_drawio_flussdiagramm.png"
-  alt: "Die Benutzeroberfläche von Draw.io, die ein einfaches Flussdiagramm darstellt"
+  alt: "Die Benutzeroberfläche von Draw.io, die ein einfaches Schaubild darstellt"
 ---
 
-Als einfaches, digitales Werkzeug hilft Draw.io Ihnen dabei, Ihr Flussdiagramm gut zu strukturieren und zu formatieren. Die große Arbeitsfläche ermöglicht die Darstellung komplexer Inhalte und Abhängigkeiten. Das Programm verhält sich wie eine Magnetwand, so können schnell Elemente ersetzt oder verschoben werden.
+Als einfaches, digitales Werkzeug hilft Draw.io Ihnen dabei, Ihr Schaubild gut zu strukturieren und zu formatieren. Die große Arbeitsfläche ermöglicht die Darstellung einfacher und komplexer Inhalte und Abhängigkeiten. Das Programm verhält sich wie eine Magnetwand, so können schnell Elemente ersetzt oder verschoben werden.
 
 #### Zugang
 
