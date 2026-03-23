@@ -293,15 +293,10 @@ function FormPage2() {
         <label class="kern-label" for="kontext">
           Kontext Ihres Vorhabens
         </label>
-        <div class="kern-hint" id="kontext-hint">
-          Beschreiben Sie die Ausgangssituation und den Hintergrund des
-          Vorhabens.
-        </div>
         <textarea
           class="kern-form-input__input"
           id="kontext"
           aria-required="true"
-          aria-describedby="kontext-hint"
           {...register("kontext")}
         />
       </div>
@@ -336,8 +331,9 @@ function FormPage3() {
       <div class="flex flex-col gap-16">
         <h2 class="mt-0">Problembeschreibung</h2>
         <p>
-          Erläutern Sie den aktuellen Ist-Zustand sowie die spezifische
-          Herausforderung und den daraus resultierenden Handlungsbedarf.
+          Beschreiben Sie die aktuelle Sach- und Rechtslage sowie die
+          spezifischen Probleme. Begründen Sie hieraus den konkreten
+          Handlungsbedarf für das geplante Regelungsvorhaben.
         </p>
       </div>
 
@@ -460,7 +456,7 @@ function FormPage6() {
       </div>
 
       <div class="flex flex-col gap-16">
-        <h2 class="mt-0">Wichtige Maßnahmen</h2>
+        <h2 class="mt-0">Maßnahmen der Zielsetzung</h2>
         <p>
           Skizzieren Sie die geplanten Maßnahmen und den methodischen Weg, mit
           dem die gesetzten Ziele realisiert werden sollen.
@@ -526,12 +522,55 @@ function FormPage8() {
   return (
     <>
       <div class="flex flex-col gap-16">
-        <h2 class="mt-0">Zeithorizont</h2>
+        <h2 class="mt-0">Risikoeinschätzung</h2>
         <p>
-          Identifizieren Sie potenzielle Gefahren für die Zielsetzung des
-          Vorhabens und bewerten Sie deren Eintrittswahrscheinlichkeit sowie die
-          möglichen Auswirkungen.
+          Benennen Sie potenzielle Hindernisse für Ihr Vorhaben. Nennen Sie auch
+          deren Eintrittswahrscheinlichkeit.
         </p>
+      </div>
+
+      <div class="kern-form-input">
+        <label class="kern-label" for="risikoeinschaetzung">
+          Risikobetrachtung
+        </label>
+        <textarea
+          class="kern-form-input__input"
+          id="risikoeinschaetzung"
+          aria-required="true"
+          {...register("risikoeinschaetzung")}
+        />
+      </div>
+
+      <div class="flex flex-col gap-16">
+        <h2 class="mt-0">Komplexitätsgrad des Vorhabens</h2>
+        <p>
+          Beurteilen Sie den Schwierigkeitsgrad des Vorhabens anhand der Anzahl
+          der beteiligten Schnittstellen, der technischen Anforderungen und der
+          Verflechtung einzelner Arbeitsschritte.
+        </p>
+      </div>
+
+      <div class="kern-form-input">
+        <label class="kern-label" for="komplexitaetsgrad">
+          Komplexität des Vorhabens
+        </label>
+        <textarea
+          class="kern-form-input__input"
+          id="komplexitaetsgrad"
+          aria-required="true"
+          {...register("komplexitaetsgrad")}
+        />
+      </div>
+    </>
+  );
+}
+function FormPage9() {
+  const { register } = useFormContext<Inputs>();
+  return (
+    <>
+      <div class="flex flex-col gap-16">
+        <h2 class="mt-0">Zeithorizont</h2>
+        <p>Beschreiben Sie hier den zeitlichen Ablauf Ihres Vorhabens.</p>
       </div>
 
       <div class="kern-form-input">
@@ -549,77 +588,24 @@ function FormPage8() {
       <div class="flex flex-col gap-16">
         <h2 class="mt-0">Ressourcenschätzung</h2>
         <p>
-          Beurteilen Sie den Schwierigkeitsgrad des Vorhabens anhand der Anzahl
-          der beteiligten Schnittstellen, der technischen Anforderungen und der
-          Verflechtung einzelner Arbeitsschritte. Geben Sie zudem eine
-          Einschätzung zum Zeithorizont und der Ressourcenschätzung an.
+          Schätzen Sie hier ein, welche Unterstützung Sie benötigen.
+          Berücksichtigen Sie dabei die Komplexität der Arbeitsschritte,
+          technische Anforderungen und die Anzahl der beteiligten
+          Schnittstellen. Notieren Sie auch, ob Sie zusätzliche Kapazitäten –
+          etwa durch ein interdisziplinäres Team oder externe Expertise –
+          einplanen müssen.
         </p>
       </div>
 
       <div class="kern-form-input">
         <label class="kern-label" for="ressourcenschaetzung">
-          Ressourcenschätzung des Vorhabens
+          Ressourcenbedarf und -verfügbarkeit
         </label>
-        <div class="kern-hint" id="ressourcenschaetzung-hint">
-          Erstellung von Gutachten, internationaler Vergleich/Best Practices
-          analysieren, Formate der Beteiligung relevanter Akteure
-        </div>
         <textarea
           class="kern-form-input__input"
           id="ressourcenschaetzung"
           aria-required="true"
-          aria-describedby="ressourcenschaetzung-hint"
           {...register("ressourcenschaetzung")}
-        />
-      </div>
-    </>
-  );
-}
-
-function FormPage9() {
-  const { register } = useFormContext<Inputs>();
-  return (
-    <>
-      <div class="flex flex-col gap-16">
-        <h2 class="mt-0">Risikoeinschätzung</h2>
-        <p>
-          Identifizieren Sie potenzielle Gefahren für die Zielsetzung des
-          Vorhabens und bewerten Sie deren Eintrittswahrscheinlichkeit sowie die
-          möglichen Auswirkungen.
-        </p>
-      </div>
-
-      <div class="kern-form-input">
-        <label class="kern-label" for="risikoeinschaetzung">
-          Risikoeinschätzung des Vorhabens
-        </label>
-        <textarea
-          class="kern-form-input__input"
-          id="risikoeinschaetzung"
-          aria-required="true"
-          {...register("risikoeinschaetzung")}
-        />
-      </div>
-
-      <div class="flex flex-col gap-16">
-        <h2 class="mt-0">Komplexitätsgrad</h2>
-        <p>
-          Beurteilen Sie den Schwierigkeitsgrad des Vorhabens anhand der Anzahl
-          der beteiligten Schnittstellen, der technischen Anforderungen und der
-          Verflechtung einzelner Arbeitsschritte. Geben Sie zudem eine
-          Einschätzung zum Zeithorizont und der Ressourcenschätzung an.
-        </p>
-      </div>
-
-      <div class="kern-form-input">
-        <label class="kern-label" for="komplexitaetsgrad">
-          Komplexitätsgrad des Vorhabens
-        </label>
-        <textarea
-          class="kern-form-input__input"
-          id="komplexitaetsgrad"
-          aria-required="true"
-          {...register("komplexitaetsgrad")}
         />
       </div>
     </>
