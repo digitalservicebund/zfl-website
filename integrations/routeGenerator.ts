@@ -37,7 +37,21 @@ export function generateRoutes({
       "astro:config:done": ({ config }) => {
         baseUrl = config.base;
       },
-      "astro:server:setup": () => generate(pagesDirs, output, baseUrl),
+      "astro:server:setup": ({ server }) => {
+        generate(pagesDirs, output, baseUrl); // Initial generation
+
+        // Watch for changes, additions, or deletions in your page directories
+        server.watcher.on("all", (event, file) => {
+          const isPageFile = pagesDirs.some((dir) =>
+            file.startsWith(path.resolve(dir)),
+          );
+          const isRelevantEvent = ["add", "unlink", "change"].includes(event);
+          if (isPageFile && isRelevantEvent && /\.(astro|md|mdx)$/.test(file)) {
+            console.log(`Route generation triggered for ${file}`);
+            generate(pagesDirs, output, baseUrl);
+          }
+        });
+      },
       "astro:build:start": () => generate(pagesDirs, output, baseUrl),
     },
   };
