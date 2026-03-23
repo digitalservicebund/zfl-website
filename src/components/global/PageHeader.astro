@@ -13,11 +13,11 @@ import { twMerge } from "tailwind-merge";
 const { pathname } = Astro.url;
 const currentPath = removeTrailingSlash(pathname);
 
-const headerNavigation = Object.values(routes).filter(
-  (item) =>
-    item.showInHeader &&
-    (isStaging || !("isStagingOnly" in item) || !item.isStagingOnly),
-);
+const headerNavigation = [
+  routes.begleitungen,
+  routes.schulungen,
+  routes.ueberUns,
+].filter((item) => isStaging || !item.isStagingOnly);
 
 const basicLinkClasses = "flex items-center hover:bg-lavender-base";
 const activeClasses = "border-cosmic-blue-base bg-lavender-base";
