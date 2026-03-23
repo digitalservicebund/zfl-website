@@ -27,6 +27,8 @@ jobs:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   
   secret-scan:
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
 
     steps:
