@@ -12,17 +12,16 @@ import interoperableEuropeImage from "./InteroperableEurope.png";
 import rulemapBuilderImage from "./RulemapBuilder.jpg";
 
 export const frontmatter = {
-  title: "Hilfsmittel",
+  title: "Werkzeuge",
   sitemap: true,
   showInHeader: true,
-  order: 3,
 };
 ---
 
 <Layout title={frontmatter.title}>
   <main class="breakout-grid">
     <Hero>
-      <h1>Anleitungen und Hilfsmittel</h1>
+      <h1>{frontmatter.title}</h1>
       <div slot="subtitle">
         <p>
           Auf dieser Seite finden Sie hilfreiche Links zu Anleitungen und

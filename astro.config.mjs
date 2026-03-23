@@ -18,6 +18,9 @@ const PREVIEW_SITE = "https://digitalservicebund.github.io";
 export default defineConfig({
   site: isPreview ? PREVIEW_SITE : PRODUCTION_SITE,
   base: isPreview ? `/zfl-website/previews/${PREVIEW_BRANCH}` : undefined,
+  redirects: {
+    "/anleitungen-und-hilfsmittel": "/werkzeuge",
+  },
   integrations: [
     icon(),
     alpinejs(),
