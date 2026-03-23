@@ -50,22 +50,22 @@ export const routes = {
     showInHeader: false,
     isStagingOnly: false,
   },
-  ueberUns: {
-    path: "/ueber-uns",
-    title: "Über uns",
+  ueberDasZfl: {
+    path: "/ueber-das-zfl",
+    title: "Über das ZfL",
     sitemap: true,
     showInHeader: true,
     isStagingOnly: true,
   },
-  ueberUns_daranArbeitenWir: {
-    path: "/ueber-uns/daran-arbeiten-wir",
+  ueberDasZfl_daranArbeitenWir: {
+    path: "/ueber-das-zfl/daran-arbeiten-wir",
     title: "Daran arbeiten wir",
     sitemap: true,
     showInHeader: false,
     isStagingOnly: false,
   },
-  ueberUns_zahlenUndFakten: {
-    path: "/ueber-uns/zahlen-und-fakten",
+  ueberDasZfl_zahlenUndFakten: {
+    path: "/ueber-das-zfl/zahlen-und-fakten",
     title: "Zahlen und Fakten",
     sitemap: true,
     showInHeader: false,
