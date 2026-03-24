@@ -1,4 +1,3 @@
-import Step11HerunterladeUndAbsenden from "@/pages/steckbrief/_formSteps/Step11HerunterladeUndAbsenden";
 import Step01AllgemeineAngaben from "@/pages/steckbrief/_formSteps/Step01AllgemeineAngaben";
 import Step02KontextGenese from "@/pages/steckbrief/_formSteps/Step02KontextGenese";
 import Step03Problembeschreibung from "@/pages/steckbrief/_formSteps/Step03Problembeschreibung";
@@ -8,6 +7,7 @@ import Step06Vorhabensbeschreibung from "@/pages/steckbrief/_formSteps/Step06Vor
 import Step08ProjektplanungI from "@/pages/steckbrief/_formSteps/Step08ProjektplanungI";
 import Step09ProjektplanungII from "@/pages/steckbrief/_formSteps/Step09ProjektplanungII";
 import Step10Zusammenfassung from "@/pages/steckbrief/_formSteps/Step10Zusammenfassung";
+import Step11HerunterladeUndAbsenden from "@/pages/steckbrief/_formSteps/Step11HerunterladeUndAbsenden";
 import type { Inputs } from "@/pages/steckbrief/_formSteps/types";
 import type { ComponentChildren } from "preact";
 import { useState } from "preact/hooks";
@@ -57,7 +57,7 @@ export default function SteckbriefForm() {
 
   return (
     <div className="flex">
-      <div className="relative h-[stretch] w-[296px] shrink-0 self-start bg-[#F7F7F9]">
+      <div className="bg-lavender-base relative h-[stretch] w-[296px] shrink-0 self-start">
         <nav
           aria-label="Formular-Navigation"
           class="sticky top-0 flex w-full flex-col gap-8 px-16 py-24"

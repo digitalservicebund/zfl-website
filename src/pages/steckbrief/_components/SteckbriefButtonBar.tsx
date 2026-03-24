@@ -45,7 +45,7 @@ export default function SteckbriefButtonBar({
             form="steckbrief-form"
             class="kern-btn kern-btn--primary"
           >
-            <span class="kern-label">Absenden</span>
+            <span class="kern-label">Steckbrief herunterladen</span>
             <span
               class="kern-icon kern-icon--arrow-forward"
               aria-hidden="true"
