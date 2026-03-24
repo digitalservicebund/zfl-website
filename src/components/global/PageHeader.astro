@@ -67,9 +67,11 @@ function navItemStyle(variant: "main" | "sub" = "main", path?: string) {
         popovertarget={kontaktPopoverId}
       >
         Kontakt
-        <span
-          class="contact-toggle-icon kern-icon kern-icon--arrow-down ml-4 transition-transform"
-          aria-hidden="true"></span>
+        <Icon
+          name="ic:outline-keyboard-arrow-down"
+          class="contact-toggle-icon ml-4 size-24 transition-transform"
+          aria-hidden="true"
+        />
       </button>
       <div
         id={kontaktPopoverId}
@@ -101,10 +103,7 @@ function navItemStyle(variant: "main" | "sub" = "main", path?: string) {
         aria-controls={mobileMenuId}
       >
         <Icon name="ic:twotone-menu" class="mobile-menu-closed-icon size-24" />
-        <Icon
-          name="ic:twotone-menu-open"
-          class="mobile-menu-open-icon size-24"
-        />
+        <Icon name="ic:outline-close" class="mobile-menu-open-icon size-24" />
       </button>
     </div>
   </div>
@@ -161,11 +160,6 @@ function navItemStyle(variant: "main" | "sub" = "main", path?: string) {
 
   .page-header:has(.contact-popover:popover-open) .contact-toggle-icon {
     transform: rotate(180deg);
-  }
-
-  .page-header:has(.mobile-menu-popover:popover-open) .mobile-menu-toggle {
-    border-color: var(--color-cosmic-blue-base);
-    background-color: var(--color-lavender-base);
   }
 
   .page-header:has(.mobile-menu-popover:popover-open) .mobile-menu-closed-icon,
