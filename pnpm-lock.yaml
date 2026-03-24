@@ -49,9 +49,6 @@ importers:
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
-      jsdom:
-        specifier: ^29.0.1
-        version: 29.0.1
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -113,6 +110,9 @@ importers:
       globals:
         specifier: ^17.4.0
         version: 17.4.0
+      jsdom:
+        specifier: ^29.0.1
+        version: 29.0.1
       license-checker-rseidelsohn:
         specifier: ^4.4.2
         version: 4.4.2
