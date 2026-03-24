@@ -97,7 +97,7 @@ function navItemStyle(variant: "main" | "sub" = "main", path?: string) {
       </a>
       <button
         type="button"
-        class={twMerge(navItemStyle("main"), "mobile-menu-toggle")}
+        class:list={[navItemStyle("main"), "mobile-menu-toggle"]}
         popovertarget={mobileMenuId}
         aria-label="Menü öffnen / schließen"
         aria-controls={mobileMenuId}
@@ -144,6 +144,7 @@ function navItemStyle(variant: "main" | "sub" = "main", path?: string) {
     );
   }
 
+  /* This fallback positions the popovers absolutely when anchor positioning is not supported */
   @supports not (top: anchor(bottom)) {
     .contact-popover,
     .mobile-menu-popover {
