@@ -40,7 +40,7 @@ jobs:
           cache: "pnpm"
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --ignore-scripts
 
       - name: Build Astro for Preview
         run: pnpm build
@@ -65,15 +65,15 @@ jobs:
           START_TIME=$(date +%s)
       
           while true; do
-            RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
+            RESPONSE_CODE=$(curl -s --head -o /dev/null -w "%{http_code}" "$URL")
             CURRENT_TIME=$(date +%s)
             ELAPSED_TIME=$((CURRENT_TIME - START_TIME))
             
-            if [ "$RESPONSE_CODE" -eq 200 ]; then
+            if [ "$RESPONSE_CODE" -lt 400 ]; then
               exit 0
             elif [ "$ELAPSED_TIME" -ge "$MAX_TIME" ]; then
               echo "Timeout reached. Skipping."
-              exit 78  # GitHub Actions skip code
+              exit 1
             else
               echo "Waiting for 200... ($ELAPSED_TIME/$MAX_TIME seconds)"
               sleep 5
