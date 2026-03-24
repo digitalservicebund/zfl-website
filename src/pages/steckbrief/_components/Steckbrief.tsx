@@ -4,7 +4,6 @@ import Step03Problembeschreibung from "@/pages/steckbrief/_formSteps/Step03Probl
 import Step04EinflussfaktorenAkteure from "@/pages/steckbrief/_formSteps/Step04EinflussfaktorenAkteure";
 import Step05VorlaeufigeZielsetzung from "@/pages/steckbrief/_formSteps/Step05VorlaeufigeZielsetzung";
 import Step06Vorhabensbeschreibung from "@/pages/steckbrief/_formSteps/Step06Vorhabensbeschreibung";
-import Step07Visualisierungen from "@/pages/steckbrief/_formSteps/Step07Visualisierungen";
 import Step08ProjektplanungI from "@/pages/steckbrief/_formSteps/Step08ProjektplanungI";
 import Step09ProjektplanungII from "@/pages/steckbrief/_formSteps/Step09ProjektplanungII";
 import Step10Zusammenfassung from "@/pages/steckbrief/_formSteps/Step10Zusammenfassung";
@@ -16,16 +15,15 @@ import HintSidebar from "./HintSidebar";
 import { SidebarContext } from "./SidebarTriggerButton";
 
 const pageTitles = [
-  "Allgemeine Angaben",
-  "Kontext & Genese",
-  "Problembeschreibung",
-  "Einflussfaktoren & relevante Akteure",
-  "Vorläufige Zielsetzung",
-  "Vorhabensbeschreibung",
-  "Visualisierungen",
-  "Projektplanung I",
-  "Projektplanung II",
-  "Zusammenfassung",
+  "1. Allgemeine Angaben",
+  "2. Kontext & Genese",
+  "3. Problembeschreibung",
+  "4. Einflussfaktoren & relevante Akteure",
+  "5. Vorläufige Zielsetzung",
+  "6. Vorhabensbeschreibung",
+  "7. Projektplanung I",
+  "8. Projektplanung II",
+  "9. Zusammenfassung",
 ];
 
 export default function SteckbriefForm() {
@@ -47,7 +45,7 @@ export default function SteckbriefForm() {
     <Step04EinflussfaktorenAkteure />,
     <Step05VorlaeufigeZielsetzung />,
     <Step06Vorhabensbeschreibung />,
-    <Step07Visualisierungen />,
+    // <Step07Visualisierungen />,
     <Step08ProjektplanungI />,
     <Step09ProjektplanungII />,
     <Step10Zusammenfassung goToPage={goToPage} />,

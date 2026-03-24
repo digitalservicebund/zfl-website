@@ -1,23 +1,26 @@
 import type { ComponentChildren } from "preact";
 import { createContext } from "preact";
+import type { Dispatch, StateUpdater } from "preact/hooks";
 import { useContext } from "preact/hooks";
 
 export const SidebarContext = createContext<
-  (content: ComponentChildren) => void
+  Dispatch<StateUpdater<ComponentChildren>>
 >(() => {});
 
 export default function SidebarTriggerButton({
-  children,
+  content,
 }: {
-  children: ComponentChildren;
+  content: ComponentChildren;
 }) {
   const setSidebarContent = useContext(SidebarContext);
   return (
     <button
       type="button"
       aria-label="Hilfe anzeigen"
-      class="text-cosmic-blue-base hover:text-cosmic-blue-400 shrink-0 transition-colors"
-      onClick={() => setSidebarContent(children)}
+      class="text-cosmic-blue-base hover:text-cosmic-blue-400 ml-8 shrink-0 transition-colors"
+      onClick={() =>
+        setSidebarContent((current) => (current === content ? null : content))
+      }
     >
       <svg
         aria-hidden="true"
