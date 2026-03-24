@@ -59,7 +59,7 @@ export const routes = {
   },
   ueber_dasIstNeu: {
     path: "/ueber/das-ist-neu",
-    title: "Daran arbeiten wir",
+    title: "Das ist neu",
     sitemap: true,
     showInHeader: false,
     isStagingOnly: false,
