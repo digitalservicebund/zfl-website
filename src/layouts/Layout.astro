@@ -12,8 +12,9 @@ import firaSansMediumUrl from "@kern-ux/native/dist/fonts/fira-sans/FiraSans-Med
 interface Props {
   title: string;
   fullWidth?: boolean;
+  noFooter?: boolean;
 }
-const { title: pageTitle, fullWidth } = Astro.props;
+const { title: pageTitle, fullWidth, noFooter } = Astro.props;
 const siteName = "Zentrum für Legistik";
 const title = pageTitle ? `${pageTitle} — ${siteName}` : siteName;
 const SEOImage = `${Astro.url.origin}/SEO_ZfL.png`;
@@ -70,7 +71,7 @@ const showDebugGrid = !isProduction || process.env.NODE_ENV === "development";
     {showDebugGrid && <DebugGrid />}
     <PageHeader fullWidth={fullWidth} />
     <slot />
-    <Footer />
+    {!noFooter && <Footer />}
     {isProduction && <Posthog />}
   </body>
 </html>

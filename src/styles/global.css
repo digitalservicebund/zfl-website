@@ -23,6 +23,8 @@
 
   --max-content-width: 82rem;
   --container-padding-inline: clamp(1rem, 5vw, 3rem);
+
+  --header-height: 104px;
 }
 
 @media (width >= 48rem) {

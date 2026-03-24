@@ -53,7 +53,7 @@ export default function SteckbriefForm() {
   ];
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex">
       <div className="relative h-[stretch] w-[296px] shrink-0 self-start bg-[#F7F7F9]">
         <nav
           aria-label="Formular-Navigation"
@@ -78,8 +78,8 @@ export default function SteckbriefForm() {
           })}
         </nav>
       </div>
-      <div className="w-full">
-        <div class="flex min-h-screen flex-col gap-32 lg:flex-row lg:items-stretch">
+      <div className="flex min-h-[calc(100dvh-var(--header-height))] w-full flex-col">
+        <div class="flex flex-1 flex-col gap-32 lg:flex-row lg:items-stretch">
           <div class="min-w-0 flex-1">
             <div class="py-lg mx-auto max-w-[780px] px-16">
               <div class="kern-progress mb-lg">
@@ -107,7 +107,7 @@ export default function SteckbriefForm() {
           </div>
 
           <div
-            class={`shrink-0 overflow-hidden transition-all duration-300 ease-in-out lg:sticky lg:top-0 lg:self-stretch ${
+            class={`shrink-0 overflow-hidden transition-all duration-300 ease-in-out lg:sticky lg:top-0 lg:h-[calc(100dvh-var(--header-height))] ${
               hintSidebarContent != null
                 ? "max-w-full opacity-100 lg:max-w-[360px]"
                 : "max-w-0 opacity-0"
@@ -115,7 +115,7 @@ export default function SteckbriefForm() {
           >
             <div class="h-full w-full lg:w-[360px]">
               <HintSidebar
-                class="h-full"
+                class="h-full overflow-y-auto"
                 onClose={() => setHintSidebarContent(null)}
               >
                 {hintSidebarContent}

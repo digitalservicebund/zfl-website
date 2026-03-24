@@ -4,7 +4,9 @@ import type { Inputs } from "./types";
 
 const vorhabenHint = (
   <>
-    <h2 class="m-0 text-[21px] font-bold">Leitfragen als Hilfestellung</h2>
+    <h2 class="m-0 text-[21px] font-bold">
+      Leitfragen zur Vorhabensbeschreibung
+    </h2>
     <ul class="m-0 list-disc pl-27 [&>li]:mb-8 [&>li:last-child]:mb-0">
       <li>
         Welche Arbeitsschritte sind vorgesehen (z. B. Auswertung vorhandener
@@ -36,7 +38,7 @@ const vorhabenHint = (
 
 const massnahmenHint = (
   <>
-    <h2 class="m-0 text-[21px] font-bold">Leitfragen als Hilfestellung</h2>
+    <h2 class="m-0 text-[21px] font-bold">Leitfragen zu den Maßnahmen</h2>
     <ul class="m-0 list-disc pl-27 [&>li]:mb-8 [&>li:last-child]:mb-0">
       <li>
         Welche Maßnahmen müssen zuerst abgeschlossen sein, damit weitere
