@@ -1,0 +1,21 @@
+export type Inputs = {
+  arbeitstitel: string;
+  aktenzeichen: string;
+  ressort: string;
+  referat: string;
+  name: string;
+  email: string;
+  telefonnummer: string;
+  kontext: string;
+  problembeschreibung: string;
+  einflussfaktoren: string;
+  relevanteAkteure: string;
+  zielsetzung: string;
+  vorhabensbeschreibung: string;
+  massnahmen: string;
+  visualisierungen: FileList;
+  zeithorizont: string;
+  ressourcenschaetzung: string;
+  risikoeinschaetzung: string;
+  komplexitaetsgrad: string;
+};

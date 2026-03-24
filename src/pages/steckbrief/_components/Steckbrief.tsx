@@ -1,0 +1,156 @@
+import Step01AllgemeineAngaben from "@/pages/steckbrief/_formSteps/Step01AllgemeineAngaben";
+import Step02KontextGenese from "@/pages/steckbrief/_formSteps/Step02KontextGenese";
+import Step03Problembeschreibung from "@/pages/steckbrief/_formSteps/Step03Problembeschreibung";
+import Step04EinflussfaktorenAkteure from "@/pages/steckbrief/_formSteps/Step04EinflussfaktorenAkteure";
+import Step05VorlaeufigeZielsetzung from "@/pages/steckbrief/_formSteps/Step05VorlaeufigeZielsetzung";
+import Step06Vorhabensbeschreibung from "@/pages/steckbrief/_formSteps/Step06Vorhabensbeschreibung";
+import Step07Visualisierungen from "@/pages/steckbrief/_formSteps/Step07Visualisierungen";
+import Step08ProjektplanungI from "@/pages/steckbrief/_formSteps/Step08ProjektplanungI";
+import Step09ProjektplanungII from "@/pages/steckbrief/_formSteps/Step09ProjektplanungII";
+import Step10Zusammenfassung from "@/pages/steckbrief/_formSteps/Step10Zusammenfassung";
+import type { Inputs } from "@/pages/steckbrief/_formSteps/types";
+import type { ComponentChildren } from "preact";
+import { useState } from "preact/hooks";
+import { FormProvider, useForm } from "react-hook-form";
+import HintSidebar from "./HintSidebar";
+import { SidebarContext } from "./SidebarTriggerButton";
+
+const pageTitles = [
+  "Allgemeine Angaben",
+  "Kontext & Genese",
+  "Problembeschreibung",
+  "Einflussfaktoren & relevante Akteure",
+  "Vorläufige Zielsetzung",
+  "Vorhabensbeschreibung",
+  "Visualisierungen",
+  "Projektplanung I",
+  "Projektplanung II",
+  "Zusammenfassung",
+];
+
+export default function SteckbriefForm() {
+  const formMethods = useForm<Inputs>();
+  const [page, setPage] = useState(1);
+  const [hintSidebarContent, setHintSidebarContent] =
+    useState<ComponentChildren>(null);
+  const isLastPage = page === pageTitles.length;
+
+  const goToPage = (nextPage: number) => {
+    setPage(nextPage);
+    setHintSidebarContent(null);
+  };
+
+  const steps: ComponentChildren[] = [
+    <Step01AllgemeineAngaben />,
+    <Step02KontextGenese />,
+    <Step03Problembeschreibung />,
+    <Step04EinflussfaktorenAkteure />,
+    <Step05VorlaeufigeZielsetzung />,
+    <Step06Vorhabensbeschreibung />,
+    <Step07Visualisierungen />,
+    <Step08ProjektplanungI />,
+    <Step09ProjektplanungII />,
+    <Step10Zusammenfassung goToPage={goToPage} />,
+  ];
+
+  return (
+    <div className="flex min-h-screen">
+      <div className="relative h-[stretch] w-[296px] shrink-0 self-start bg-[#F7F7F9]">
+        <nav
+          aria-label="Formular-Navigation"
+          class="sticky top-0 flex w-full flex-col gap-8 px-16 py-24"
+        >
+          {pageTitles.map((title, i) => {
+            const isActive = page === i + 1;
+            return (
+              <button
+                key={i}
+                type="button"
+                onClick={() => goToPage(i + 1)}
+                class={`flex w-full items-center gap-2 rounded p-8 text-left transition-colors ${
+                  isActive
+                    ? "bg-cosmic-blue-base font-semibold text-white"
+                    : "bg-transparent text-[#0b0c0c] hover:bg-[#e8e8ee]"
+                }`}
+              >
+                {title}
+              </button>
+            );
+          })}
+        </nav>
+      </div>
+      <div className="py-lg w-full">
+        <div class="mx-auto flex max-w-[1248px] flex-col gap-32 px-16 lg:flex-row lg:items-start">
+          <div class="min-w-0 flex-1">
+            <div class="max-w-a11y">
+              <div class="kern-progress mb-lg">
+                <label class="kern-label" for="progress1">
+                  Schritt {page} von {pageTitles.length}
+                </label>
+                <progress
+                  id="progress1"
+                  value={page}
+                  max={pageTitles.length}
+                ></progress>
+              </div>
+              <SidebarContext.Provider value={setHintSidebarContent}>
+                <FormProvider {...formMethods}>
+                  <form
+                    class="flex flex-col gap-32"
+                    novalidate
+                    onSubmit={(e) => e.preventDefault()}
+                  >
+                    {steps[page - 1]}
+                    <div class="flex gap-16">
+                      {page > 1 && (
+                        <button
+                          type="button"
+                          class="kern-btn kern-btn--secondary"
+                          onClick={() => goToPage(page - 1)}
+                        >
+                          <span class="kern-label">Zurück</span>
+                        </button>
+                      )}
+                      {isLastPage ? (
+                        <button
+                          type="submit"
+                          class="kern-btn kern-btn--primary"
+                        >
+                          <span class="kern-label">Absenden</span>
+                          <span
+                            class="kern-icon kern-icon--arrow-forward"
+                            aria-hidden="true"
+                          ></span>
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          class="kern-btn kern-btn--primary"
+                          onClick={() => goToPage(page + 1)}
+                        >
+                          <span class="kern-label">Weiter</span>
+                          <span
+                            class="kern-icon kern-icon--arrow-forward"
+                            aria-hidden="true"
+                          ></span>
+                        </button>
+                      )}
+                    </div>
+                  </form>
+                </FormProvider>
+              </SidebarContext.Provider>
+            </div>
+          </div>
+
+          {hintSidebarContent != null && (
+            <div class="w-full shrink-0 lg:sticky lg:top-24 lg:w-[360px]">
+              <HintSidebar onClose={() => setHintSidebarContent(null)}>
+                {hintSidebarContent}
+              </HintSidebar>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
