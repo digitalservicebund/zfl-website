@@ -111,7 +111,7 @@ function navItemStyle(variant: "main" | "sub" = "main", path?: string) {
   <nav
     id={mobileMenuId}
     popover="auto"
-    class="mobile-menu-popover m-0 w-auto max-w-none bg-white min-[900px]:hidden"
+    class="mobile-menu-popover border-lavender-base m-0 w-auto max-w-none border-t-2 bg-white min-[900px]:hidden"
   >
     {
       headerNavigation.map((item) => (
@@ -128,12 +128,27 @@ function navItemStyle(variant: "main" | "sub" = "main", path?: string) {
 </header>
 
 <style>
+  :root {
+    /* 32px is the height of the Kopfzeile, 72px is the height of the header */
+    --page-header-offset: 104px;
+  }
+
+  /* This is the dark backdrop for the mobile menu, a gradient is used to avoid the header being darkened */
+  .mobile-menu-popover::backdrop {
+    background: linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent var(--page-header-offset),
+      rgb(0 0 0 / 0.4) var(--page-header-offset),
+      rgb(0 0 0 / 0.4) 100%
+    );
+  }
+
   @supports not (top: anchor(bottom)) {
     .contact-popover,
     .mobile-menu-popover {
       position: absolute;
-      /* 32px is the height of the Kopfzeile, 72px is the height of the header */
-      top: calc(32px + 72px);
+      top: var(--page-header-offset);
     }
 
     .contact-popover {
