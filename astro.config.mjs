@@ -20,6 +20,8 @@ export default defineConfig({
   base: isPreview ? `/zfl-website/previews/${PREVIEW_BRANCH}` : undefined,
   redirects: {
     "/anleitungen-und-hilfsmittel": "/werkzeuge",
+    "/ueber-uns": "/ueber",
+    "/ueber-uns/daran-arbeiten-wir": "/ueber/das-ist-neu",
   },
   integrations: [
     icon(),
