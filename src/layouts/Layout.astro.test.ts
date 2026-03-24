@@ -1,20 +1,8 @@
 import * as stage from "@/config/stage.ts";
-import {
-  type ContainerRenderOptions,
-  experimental_AstroContainer as AstroContainer,
-} from "astro/container";
-import { JSDOM } from "jsdom";
+import { renderToDOM } from "@/utils/testUtils.ts";
 import { describe, expect, it, test, vi } from "vitest";
 import { baseUrl } from "../../vitest.config.ts";
 import Layout from "./Layout.astro";
-
-async function renderComponent(options?: ContainerRenderOptions) {
-  const container = await AstroContainer.create();
-  const html = await container.renderToString(Layout, options);
-  const window = new JSDOM(html).window;
-  const dom = window.document;
-  return { dom, window, html };
-}
 
 vi.mock("@/components/global/Posthog.astro", () => ({
   default: Object.assign(() => "mocked-posthog", {
@@ -29,16 +17,14 @@ vi.mock("@/config/stage", () => ({
 }));
 
 describe("Layout", async () => {
-  const options = {
+  const { dom, window } = await renderToDOM(Layout, {
     props: {
       title: "Test Page",
     },
     slots: {
       default: "<main><h1>Main Content</h1></main>",
     },
-  };
-
-  const { dom, window } = await renderComponent(options);
+  });
   const { Node } = window;
 
   it("renders correct title and conditional components", () => {
@@ -76,7 +62,7 @@ describe("Layout", async () => {
 });
 
 test("Layout renders default title when no prop is provided", async () => {
-  const { dom } = await renderComponent({
+  const { dom } = await renderToDOM(Layout, {
     props: { title: undefined },
   });
 
@@ -85,13 +71,13 @@ test("Layout renders default title when no prop is provided", async () => {
 
 describe("Posthog script", async () => {
   it("is included in production", async () => {
-    const { html } = await renderComponent();
+    const { html } = await renderToDOM(Layout);
     expect(html).toContain("mocked-posthog");
   });
   it("is excluded in staging", async () => {
     vi.mocked(stage).isProduction = false;
     vi.mocked(stage).isStaging = true;
-    const { html } = await renderComponent();
+    const { html } = await renderToDOM(Layout);
     expect(html).not.toContain("mocked-posthog");
   });
 });
