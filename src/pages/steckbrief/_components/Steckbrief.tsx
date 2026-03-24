@@ -1,3 +1,4 @@
+import Step11HerunterladeUndAbsenden from "@/pages/steckbrief/_formSteps/Step11HerunterladeUndAbsenden";
 import Step01AllgemeineAngaben from "@/pages/steckbrief/_formSteps/Step01AllgemeineAngaben";
 import Step02KontextGenese from "@/pages/steckbrief/_formSteps/Step02KontextGenese";
 import Step03Problembeschreibung from "@/pages/steckbrief/_formSteps/Step03Problembeschreibung";
@@ -25,6 +26,7 @@ const pageTitles = [
   "7. Projektplanung I",
   "8. Projektplanung II",
   "9. Zusammenfassung",
+  "10. Herunterladen & Absenden",
 ];
 
 export default function SteckbriefForm() {
@@ -50,6 +52,7 @@ export default function SteckbriefForm() {
     <Step08ProjektplanungI />,
     <Step09ProjektplanungII />,
     <Step10Zusammenfassung goToPage={goToPage} />,
+    <Step11HerunterladeUndAbsenden />,
   ];
 
   return (
