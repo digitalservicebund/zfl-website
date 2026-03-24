@@ -72,6 +72,7 @@ function getNavLinkClasses(itemPath: string, variant: "desktop" | "mobile") {
         @click.outside="kontaktOpen = false"
       >
         <button
+          type="button"
           class="hover:bg-lavender-base flex h-full cursor-pointer items-center border-b-4 border-transparent px-16 text-nowrap"
           @click="kontaktOpen = !kontaktOpen"
           :aria-expanded="kontaktOpen"
@@ -109,6 +110,7 @@ function getNavLinkClasses(itemPath: string, variant: "desktop" | "mobile") {
       <button
         class="hover:bg-lavender-base aria-expanded:border-cosmic-blue-base aria-expanded:bg-lavender-base h-full border-b-4 border-transparent px-16"
         @click="mobileMenuOpen = !mobileMenuOpen"
+        type="button"
         aria-label="Menü öffnen / schließen"
         :aria-expanded="mobileMenuOpen"
         aria-controls="mobile-menu"
