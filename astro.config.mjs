@@ -9,7 +9,7 @@ import process from "node:process";
 import { generateRoutes } from "./integrations/routeGenerator";
 
 const isPreview = process.env.PUBLIC_STAGE === "preview";
-const PREVIEW_BRANCH = process.env.PREVIEW_BRANCH;
+const PREVIEW_BASE_URL = process.env.PREVIEW_BASE_URL;
 
 const PRODUCTION_SITE = "https://zfl.bund.de";
 const PREVIEW_SITE = "https://digitalservicebund.github.io";
@@ -17,7 +17,7 @@ const PREVIEW_SITE = "https://digitalservicebund.github.io";
 // https://astro.build/config
 export default defineConfig({
   site: isPreview ? PREVIEW_SITE : PRODUCTION_SITE,
-  base: isPreview ? `/zfl-website/previews/${PREVIEW_BRANCH}` : undefined,
+  base: isPreview ? PREVIEW_BASE_URL : undefined,
   redirects: {
     "/anleitungen-und-hilfsmittel": "/werkzeuge",
     "/ueber-uns": "/ueber",
