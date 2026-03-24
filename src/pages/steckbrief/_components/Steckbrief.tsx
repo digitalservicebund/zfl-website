@@ -13,6 +13,7 @@ import { useState } from "preact/hooks";
 import { FormProvider, useForm } from "react-hook-form";
 import HintSidebar from "./HintSidebar";
 import { SidebarContext } from "./SidebarTriggerButton";
+import SteckbriefButtonBar from "./SteckbriefButtonBar";
 
 const pageTitles = [
   "1. Allgemeine Angaben",
@@ -77,8 +78,8 @@ export default function SteckbriefForm() {
           })}
         </nav>
       </div>
-      <div className="py-lg w-full">
-        <div class="mx-auto flex max-w-[1248px] flex-col gap-32 px-16 lg:flex-row lg:items-start">
+      <div className="w-full">
+        <div class="py-lg mx-auto flex min-h-screen max-w-[1248px] flex-col gap-32 px-16 lg:flex-row lg:items-start">
           <div class="min-w-0 flex-1">
             <div class="max-w-a11y">
               <div class="kern-progress mb-lg">
@@ -99,41 +100,6 @@ export default function SteckbriefForm() {
                     onSubmit={(e) => e.preventDefault()}
                   >
                     {steps[page - 1]}
-                    <div class="flex gap-16">
-                      {page > 1 && (
-                        <button
-                          type="button"
-                          class="kern-btn kern-btn--secondary"
-                          onClick={() => goToPage(page - 1)}
-                        >
-                          <span class="kern-label">Zurück</span>
-                        </button>
-                      )}
-                      {isLastPage ? (
-                        <button
-                          type="submit"
-                          class="kern-btn kern-btn--primary"
-                        >
-                          <span class="kern-label">Absenden</span>
-                          <span
-                            class="kern-icon kern-icon--arrow-forward"
-                            aria-hidden="true"
-                          ></span>
-                        </button>
-                      ) : (
-                        <button
-                          type="button"
-                          class="kern-btn kern-btn--primary"
-                          onClick={() => goToPage(page + 1)}
-                        >
-                          <span class="kern-label">Weiter</span>
-                          <span
-                            class="kern-icon kern-icon--arrow-forward"
-                            aria-hidden="true"
-                          ></span>
-                        </button>
-                      )}
-                    </div>
                   </form>
                 </FormProvider>
               </SidebarContext.Provider>
@@ -148,6 +114,12 @@ export default function SteckbriefForm() {
             </div>
           )}
         </div>
+        <SteckbriefButtonBar
+          page={page}
+          isLastPage={isLastPage}
+          onPrev={() => setPage(page - 1)}
+          onNext={() => setPage(page + 1)}
+        />
       </div>
     </div>
   );
