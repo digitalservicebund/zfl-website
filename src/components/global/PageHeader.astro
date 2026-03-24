@@ -20,9 +20,15 @@ const headerNavigation = [
   routes.ueberDasZfl,
 ].filter((item) => isStaging || !item.isStagingOnly);
 
-const basicLinkClasses =
-  "flex items-center hover:bg-lavender-base link-unstyled";
-const activeClasses = "border-cosmic-blue-base bg-lavender-base";
+function getNavLinkClasses(itemPath: string, variant: "desktop" | "mobile") {
+  return twMerge(
+    "flex items-center hover:bg-lavender-base link-unstyled",
+    variant === "desktop"
+      ? "relative h-full border-b-4 border-transparent px-16 whitespace-nowrap"
+      : "border-l-4 border-transparent p-16",
+    currentPath === itemPath && "border-cosmic-blue-base bg-lavender-base",
+  );
+}
 ---
 
 <header
@@ -55,14 +61,7 @@ const activeClasses = "border-cosmic-blue-base bg-lavender-base";
     <nav class="hidden items-center min-[900px]:flex" data-testid="desktop-nav">
       {
         headerNavigation.map((item) => (
-          <a
-            href={item.path}
-            class={twMerge(
-              basicLinkClasses,
-              "relative h-full border-b-4 border-transparent px-16 whitespace-nowrap",
-              currentPath === item.path && activeClasses,
-            )}
-          >
+          <a href={item.path} class={getNavLinkClasses(item.path, "desktop")}>
             {item.title}
           </a>
         ))
@@ -134,14 +133,7 @@ const activeClasses = "border-cosmic-blue-base bg-lavender-base";
   >
     {
       headerNavigation.map((item) => (
-        <a
-          href={item.path}
-          class={twMerge(
-            basicLinkClasses,
-            "border-l-4 border-transparent p-16",
-            currentPath === item.path && activeClasses,
-          )}
-        >
+        <a href={item.path} class={getNavLinkClasses(item.path, "mobile")}>
           {item.title}
         </a>
       ))
