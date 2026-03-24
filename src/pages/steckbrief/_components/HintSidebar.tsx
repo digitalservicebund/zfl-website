@@ -19,7 +19,7 @@ export default function HintSidebar({
 }: HintSidebarProps) {
   return (
     <aside
-      class={`flex flex-col gap-32 bg-[#f7f7f9] pt-40 pr-24 pb-40 pl-24 ${className ?? ""}`.trim()}
+      class={`flex h-full flex-col gap-32 bg-[#f7f7f9] pt-40 pr-24 pb-40 pl-24 ${className ?? ""}`.trim()}
       {...attrs}
     >
       <div class="flex justify-end">

@@ -79,9 +79,9 @@ export default function SteckbriefForm() {
         </nav>
       </div>
       <div className="w-full">
-        <div class="py-lg mx-auto flex min-h-screen max-w-[1248px] flex-col gap-32 px-16 lg:flex-row lg:items-start">
+        <div class="flex min-h-screen flex-col gap-32 lg:flex-row lg:items-stretch">
           <div class="min-w-0 flex-1">
-            <div class="max-w-a11y">
+            <div class="py-lg mx-auto max-w-[780px] px-16">
               <div class="kern-progress mb-lg">
                 <label class="kern-label" for="progress1">
                   Schritt {page} von {pageTitles.length}
@@ -106,13 +106,22 @@ export default function SteckbriefForm() {
             </div>
           </div>
 
-          {hintSidebarContent != null && (
-            <div class="w-full shrink-0 lg:sticky lg:top-24 lg:w-[360px]">
-              <HintSidebar onClose={() => setHintSidebarContent(null)}>
+          <div
+            class={`shrink-0 overflow-hidden transition-all duration-300 ease-in-out lg:sticky lg:top-0 lg:self-stretch ${
+              hintSidebarContent != null
+                ? "max-w-full opacity-100 lg:max-w-[360px]"
+                : "max-w-0 opacity-0"
+            }`}
+          >
+            <div class="h-full w-full lg:w-[360px]">
+              <HintSidebar
+                class="h-full"
+                onClose={() => setHintSidebarContent(null)}
+              >
                 {hintSidebarContent}
               </HintSidebar>
             </div>
-          )}
+          </div>
         </div>
         <SteckbriefButtonBar
           page={page}
