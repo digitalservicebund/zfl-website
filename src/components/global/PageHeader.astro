@@ -20,26 +20,25 @@ const headerNavigation = [
   routes.ueberDasZfl,
 ].filter((item) => isStaging || !item.isStagingOnly);
 
-function getNavLinkClasses(itemPath: string, variant: "desktop" | "mobile") {
+const kontaktPopoverId = "page-header-contact-popover";
+const mobileMenuId = "page-header-mobile-menu";
+
+function navItemStyle(variant: "main" | "sub" = "main", path?: string) {
   return twMerge(
-    "flex items-center hover:bg-lavender-base link-unstyled",
-    variant === "desktop"
-      ? "relative h-full border-b-4 border-transparent px-16 whitespace-nowrap"
-      : "border-l-4 border-transparent p-16",
-    currentPath === itemPath && "border-cosmic-blue-base bg-lavender-base",
+    "link-unstyled border-transparent flex items-center hover:bg-lavender-base",
+    variant === "main" ? "h-full border-b-4 px-16" : "border-l-4 p-16",
+    currentPath === path && "border-cosmic-blue-base bg-lavender-base",
   );
 }
 ---
 
 <header
-  class="border-lavender-base relative border-b-2"
-  x-data="{ mobileMenuOpen: false }"
-  @resize.window="mobileMenuOpen = false"
+  class="page-header border-lavender-base relative border-b-2 [anchor-name:--page-header]"
 >
   <Kopfzeile />
   <div class="flex h-72 justify-between px-24">
     <!-- Logo and title -->
-    <a href={routes.home.path} class="link-unstyled flex items-center gap-8">
+    <a href={routes.home.path} class="link-unstyled flex items-center gap-24">
       <Image
         src={bundLogo}
         alt="Logo des Bundes"
@@ -50,92 +49,74 @@ function getNavLinkClasses(itemPath: string, variant: "desktop" | "mobile") {
         alt="Logo des Bundes"
         class="hidden w-56 forced-colors:dark:block"
       />
-      <p
-        class="ml-16 flex flex-col text-xl font-bold text-black md:max-[1050px]:hidden"
-      >
-        Zentrum für Legistik
-      </p>
+      <p class="text-xl font-bold max-[1050px]:hidden">Zentrum für Legistik</p>
     </a>
 
     <!-- Desktop Navigation -->
-    <nav class="hidden items-center min-[900px]:flex" data-testid="desktop-nav">
+    <nav class="hidden min-[900px]:flex" data-testid="desktop-nav">
       {
         headerNavigation.map((item) => (
-          <a href={item.path} class={getNavLinkClasses(item.path, "desktop")}>
+          <a href={item.path} class={navItemStyle("main", item.path)}>
             {item.title}
           </a>
         ))
       }
-      <div
-        class="relative flex h-full items-center"
-        x-data="{ kontaktOpen: false }"
-        @click.outside="kontaktOpen = false"
+      <button
+        type="button"
+        class={navItemStyle()}
+        popovertarget={kontaktPopoverId}
       >
-        <button
-          type="button"
-          class="hover:bg-lavender-base flex h-full cursor-pointer items-center border-b-4 border-transparent px-16 text-nowrap"
-          @click="kontaktOpen = !kontaktOpen"
-          :aria-expanded="kontaktOpen"
-          aria-haspopup="true"
-        >
-          Kontakt
-          <span
-            class="kern-icon kern-icon--arrow-down ml-4 transition-transform"
-            :class="{ 'rotate-180': kontaktOpen }"
-            aria-hidden="true"></span>
-        </button>
-        <div
-          x-show="kontaktOpen"
-          style="display: none;"
-          class="border-lavender-base absolute top-full right-0 z-50 flex flex-col gap-8 border bg-white px-16 py-12 text-nowrap shadow-sm"
-        >
-          <div>Support: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a></div>
-          <div>
-            Per Mail:
-            <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
-          </div>
-        </div>
+        Kontakt
+        <span
+          class="contact-toggle-icon kern-icon kern-icon--arrow-down ml-4 transition-transform"
+          aria-hidden="true"></span>
+      </button>
+      <div
+        id={kontaktPopoverId}
+        popover="auto"
+        class="contact-popover border-lavender-base m-0 gap-8 border-2 border-t-0 bg-white px-16 py-12"
+      >
+        <p>Support: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a></p>
+        <p>
+          Per Mail:
+          <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
+        </p>
       </div>
     </nav>
 
-    <!-- Mobile View Controls -->
-    <div class="flex items-center space-x-16 min-[900px]:hidden">
+    <!-- Mobile Menu Toggle -->
+    <div class="flex min-[900px]:hidden">
       <a
         href={ZFL_PHONE.url}
-        class="border-b-4 border-transparent link-unstyled"
+        class={navItemStyle("main")}
         aria-label={ZFL_PHONE.display}
       >
         <Icon name="ic:twotone-phone-enabled" class="size-24 -scale-x-100" />
       </a>
       <button
-        class="hover:bg-lavender-base aria-expanded:border-cosmic-blue-base aria-expanded:bg-lavender-base h-full border-b-4 border-transparent px-16"
-        @click="mobileMenuOpen = !mobileMenuOpen"
         type="button"
+        class={twMerge(navItemStyle("main"), "mobile-menu-toggle")}
+        popovertarget={mobileMenuId}
         aria-label="Menü öffnen / schließen"
-        :aria-expanded="mobileMenuOpen"
-        aria-controls="mobile-menu"
+        aria-controls={mobileMenuId}
       >
-        <Icon x-show="!mobileMenuOpen" name="ic:twotone-menu" class="size-24" />
+        <Icon name="ic:twotone-menu" class="mobile-menu-closed-icon size-24" />
         <Icon
-          x-show="mobileMenuOpen"
           name="ic:twotone-menu-open"
-          class="size-24"
-          style="display: none;"
+          class="mobile-menu-open-icon size-24"
         />
       </button>
     </div>
   </div>
   <!-- Mobile Navigation -->
   <nav
-    id="mobile-menu"
-    class="absolute right-0 left-0 z-20 bg-white drop-shadow-[4px_4px_12px_rgba(0,0,0,0.06)]"
-    x-show="mobileMenuOpen"
-    style="display: none;"
-    :aria-hidden="!mobileMenuOpen"
+    id={mobileMenuId}
+    popover="auto"
+    class="mobile-menu-popover m-0 w-auto max-w-none bg-white min-[900px]:hidden"
   >
     {
       headerNavigation.map((item) => (
-        <a href={item.path} class={getNavLinkClasses(item.path, "mobile")}>
+        <a href={item.path} class={navItemStyle("sub", item.path)}>
           {item.title}
         </a>
       ))
@@ -145,16 +126,51 @@ function getNavLinkClasses(itemPath: string, variant: "desktop" | "mobile") {
       <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
     </div>
   </nav>
-  <noscript>
-    <div class="bg-yellow-200">
-      <div class="breakout-grid py-4">
-        <p>
-          <strong>Menü funktioniert nicht?</strong> Erlauben Sie JavaScript in den
-          Browsereinstellungen oder navigieren Sie über den <a href="#footer"
-            >Footer</a
-          >.
-        </p>
-      </div>
-    </div>
-  </noscript>
 </header>
+
+<style>
+  @supports not (top: anchor(bottom)) {
+    .contact-popover,
+    .mobile-menu-popover {
+      position: absolute;
+      /* 32px is the height of the Kopfzeile, 72px is the height of the header */
+      top: calc(32px + 72px);
+    }
+
+    .contact-popover {
+      right: 24px;
+      left: auto;
+    }
+
+    .mobile-menu-popover {
+      left: 0;
+    }
+  }
+
+  @supports (top: anchor(bottom)) {
+    .contact-popover {
+      inset: auto;
+      top: anchor(bottom);
+      right: anchor(right);
+    }
+    .mobile-menu-popover {
+      position-anchor: --page-header;
+      top: calc(anchor(bottom) - 2px);
+    }
+  }
+
+  .page-header:has(.contact-popover:popover-open) .contact-toggle-icon {
+    transform: rotate(180deg);
+  }
+
+  .page-header:has(.mobile-menu-popover:popover-open) .mobile-menu-toggle {
+    border-color: var(--color-cosmic-blue-base);
+    background-color: var(--color-lavender-base);
+  }
+
+  .page-header:has(.mobile-menu-popover:popover-open) .mobile-menu-closed-icon,
+  .page-header:not(:has(.mobile-menu-popover:popover-open))
+    .mobile-menu-open-icon {
+    display: none;
+  }
+</style>
