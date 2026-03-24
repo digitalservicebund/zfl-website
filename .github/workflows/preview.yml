@@ -24,8 +24,8 @@ jobs:
       group: preview-${{ github.head_ref || github.ref_name }}
       cancel-in-progress: true
     env:
-      PREVIEW_BASE_URL: https://digitalservicebund.github.io/zfl-website/previews
       PREVIEW_BRANCH: ${{ github.head_ref || github.ref_name }}
+      PREVIEW_BASE_URL: /zfl-website/previews/${{ github.head_ref || github.ref_name }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -66,14 +66,14 @@ jobs:
       - name: Output Preview URL
         run: |
           echo "🔍 Preview deployed successfully!"
-          echo "Preview URL: $PREVIEW_BASE_URL/$PREVIEW_BRANCH/"
+          echo "Preview URL: $PREVIEW_BASE_URL"
 
       - name: Comment PR with Preview URL
         if: github.event_name == 'pull_request'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          PREVIEW_URL="$PREVIEW_BASE_URL/$PREVIEW_BRANCH/"
+          PREVIEW_URL="https://digitalservicebund.github.io$PREVIEW_BASE_URL"
           gh pr comment ${{ github.event.pull_request.number }} --body "🔍 **Preview deployed!**
 
           Preview URL: $PREVIEW_URL"
