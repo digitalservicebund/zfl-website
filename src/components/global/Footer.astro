@@ -39,7 +39,7 @@ const footerColumns: Record<string, FooterItem[]> = {
         Object.entries(footerColumns).map(([heading, items]) => (
           <div class="row-span-2 grid grid-rows-subgrid gap-8">
             {heading?.trim() ? (
-              <h2 class="kern-label kern-label--small mb-8">{heading}</h2>
+              <h2 class="kern-label mb-8">{heading}</h2>
             ) : (
               <div />
             )}
