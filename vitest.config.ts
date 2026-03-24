@@ -1,6 +1,8 @@
 /// <reference types="vitest/config" />
 import { getViteConfig } from "astro/config";
 
+export const baseUrl = "https://example.com";
+
 export default getViteConfig(
   {
     test: {
@@ -19,7 +21,7 @@ export default getViteConfig(
     },
   },
   {
-    site: "https://example.com/",
+    site: baseUrl,
     trailingSlash: "always",
   },
 );
