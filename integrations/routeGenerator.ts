@@ -25,6 +25,11 @@ type RouteMetaKey = keyof RouteMeta;
 type RouteMetaValue = string | boolean;
 type RouteMetaInput = Partial<Record<RouteMetaKey, RouteMetaValue>>;
 
+const SUPPORTED_EXTENSIONS = ["astro", "md", "mdx", "html"];
+const SUPPORTED_EXTENSIONS_REGEXP = new RegExp(
+  `\\.(${SUPPORTED_EXTENSIONS.join("|")})$`,
+);
+
 export function generateRoutes({
   pagesDirs,
   output = "src/config/routes.ts",
@@ -46,7 +51,11 @@ export function generateRoutes({
             file.startsWith(path.resolve(dir)),
           );
           const isRelevantEvent = ["add", "unlink", "change"].includes(event);
-          if (isPageFile && isRelevantEvent && /\.(astro|md|mdx)$/.test(file)) {
+          if (
+            isPageFile &&
+            isRelevantEvent &&
+            SUPPORTED_EXTENSIONS_REGEXP.test(file)
+          ) {
             console.log(`Route generation triggered for ${file}`);
             generate(pagesDirs, output, baseUrl);
           }
@@ -57,10 +66,6 @@ export function generateRoutes({
   };
 }
 
-const SUPPORTED_EXTENSIONS = ["astro", "md", "mdx", "html"];
-const SUPPORTED_EXTENSIONS_REGEXP = new RegExp(
-  `\\.(${SUPPORTED_EXTENSIONS.join("|")})$`,
-);
 const ROUTE_META_KEYS = [
   "title",
   "sitemap",
