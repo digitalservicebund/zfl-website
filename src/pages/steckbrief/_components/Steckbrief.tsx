@@ -10,6 +10,7 @@ import Step10Zusammenfassung from "@/pages/steckbrief/_formSteps/Step10Zusammenf
 import Step11HerunterladeUndAbsenden from "@/pages/steckbrief/_formSteps/Step11HerunterladeUndAbsenden";
 
 import type { Inputs } from "@/pages/steckbrief/_formSteps/types";
+import { removeTrailingSlash } from "@/utils/path";
 import type { ComponentChildren } from "preact";
 import { useEffect, useState } from "preact/hooks";
 import { FormProvider, useForm } from "react-hook-form";
@@ -73,7 +74,8 @@ export default function SteckbriefForm() {
   }, [formMethods]);
 
   useEffect(() => {
-    history.pushState({ page: page }, "", `?step=${page}`);
+    const normalizedPath = removeTrailingSlash(window.location.pathname);
+    history.pushState({ page: page }, "", `${normalizedPath}?step=${page}`);
   }, [page]);
 
   useEffect(() => {
