@@ -33,7 +33,7 @@ const lastPageText = (
         fill="currentColor"
       />
     </svg>{" "}
-    Wenn sie auf Weiter klicken gelangen Sie zur Phase II der Frühphase{" "}
+    Wenn Sie auf Weiter klicken, gelangen Sie zur Phase II der Frühphase
   </>
 );
 

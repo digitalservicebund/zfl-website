@@ -1,6 +1,36 @@
-import { Fragment } from "preact";
+import { useState } from "preact/hooks";
 import { useFormContext } from "react-hook-form";
 import type { Inputs } from "./types";
+
+const TRUNCATE_AT = 500;
+
+function TruncatedValue({ value }: { value: string }) {
+  const [expanded, setExpanded] = useState(false);
+  const isTruncatable = value.length > TRUNCATE_AT;
+
+  const displayValue =
+    isTruncatable && !expanded ? value.slice(0, TRUNCATE_AT) : value;
+
+  return (
+    <span>
+      <span style={{ whiteSpace: "pre-wrap" }}>{displayValue}</span>
+      {isTruncatable && !expanded && "..."}
+      {isTruncatable && (
+        <>
+          {" "}
+          <button
+            type="button"
+            class="kern-link"
+            style={{ display: "inline", padding: 0, fontSize: "inherit" }}
+            onClick={() => setExpanded((e) => !e)}
+          >
+            {expanded ? "[einklappen]" : "[ausklappen]"}
+          </button>
+        </>
+      )}
+    </span>
+  );
+}
 
 type SummaryCardProps = {
   title: string;
@@ -18,20 +48,12 @@ function SummaryCard({ title, pageNumber, items, goToPage }: SummaryCardProps) {
       <div class="kern-summary__body">
         <dl class="kern-description-list">
           {items.map(({ key, value }) => {
-            const parsedValue = value
-              ?.toString()
-              .split("\n")
-              .map((line, index) => (
-                <Fragment key={index}>
-                  {line}
-                  <br />
-                </Fragment>
-              ));
+            const strValue = value?.toString();
             return (
               <div class="kern-description-list-item">
                 <dt class="kern-description-list-item__key">{key}</dt>
                 <dd class="kern-description-list-item__value">
-                  {parsedValue || "–"}
+                  {strValue ? <TruncatedValue value={strValue} /> : "–"}
                 </dd>
               </div>
             );
