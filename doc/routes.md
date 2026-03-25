@@ -13,7 +13,6 @@ Every page that should appear in the route registry needs a `frontmatter` export
 export const frontmatter = {
   title: "My Page",
   sitemap: true,
-  showInHeader: true,
   isStagingOnly: false,
 };
 ---
@@ -28,7 +27,6 @@ For `.astro` pages, the route generator reads `frontmatter` as a TypeScript obje
 layout: "@/layouts/MdxLayout.astro"
 title: My Page
 sitemap: true
-showInHeader: true
 isStagingOnly: false
 ---
 ```

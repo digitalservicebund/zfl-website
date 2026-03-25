@@ -37,7 +37,6 @@ describe("extractMeta", () => {
 export const frontmatter = {
   title: "Example",
   sitemap: true,
-  showInHeader: false,
   isStagingOnly: true,
 };
 ---
@@ -47,7 +46,6 @@ export const frontmatter = {
     expect(meta).toEqual({
       title: "Example",
       sitemap: true,
-      showInHeader: false,
       isStagingOnly: true,
     });
   });
@@ -83,7 +81,6 @@ export const frontmatter = {
     expect(meta).toEqual({
       title: "Example",
       sitemap: true,
-      showInHeader: false,
       isStagingOnly: false,
     });
   });
@@ -103,7 +100,6 @@ export const frontmatter = {
     expect(meta).toEqual({
       title: "Example",
       sitemap: true,
-      showInHeader: false,
       isStagingOnly: false,
     });
   });

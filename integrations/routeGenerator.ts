@@ -3,7 +3,6 @@ import matter from "gray-matter";
 import fs, { type Dirent } from "node:fs";
 import path from "node:path";
 import ts from "typescript";
-import { buildRoutePath } from "../src/utils/path";
 
 type Options = {
   pagesDirs: string[];
@@ -13,7 +12,6 @@ type Options = {
 type RouteMeta = {
   title: string;
   sitemap: boolean;
-  showInHeader: boolean;
   isStagingOnly: boolean;
 };
 
@@ -146,7 +144,6 @@ export function extractMeta(file: string, raw: string): RouteMeta | null {
   return {
     title,
     sitemap: data.sitemap !== false,
-    showInHeader: !!data.showInHeader,
     isStagingOnly: !!data.isStagingOnly,
   };
 }
@@ -270,7 +267,6 @@ function buildOutput(routes: Record<string, Route>) {
     path: "${escapeStringLiteral(path)}",
     title: "${escapeStringLiteral(title)}",
     sitemap: ${sitemap},
-    showInHeader: ${showInHeader},
     isStagingOnly: ${isStagingOnly},
   }`,
     )
