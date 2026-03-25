@@ -64,6 +64,7 @@ function navItemStyle(variant: "main" | "sub" = "main", path?: string) {
         class={navItemStyle()}
         popovertarget={kontaktPopoverId}
       >
+        Kontakt
         <Icon
           name="ic:outline-keyboard-arrow-down"
           class="contact-toggle-icon ml-4 size-24 transition-transform"
@@ -75,6 +76,11 @@ function navItemStyle(variant: "main" | "sub" = "main", path?: string) {
         popover="auto"
         class="contact-popover border-lavender-base m-0 gap-8 border-2 bg-white px-16 py-12"
       >
+        <p>Support: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a></p>
+        <p>
+          Per Mail:
+          <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
+        </p>
       </div>
     </nav>
 
