@@ -1,0 +1,38 @@
+---
+import Step01 from "../_formSteps/Step01.astro";
+import Step02 from "../_formSteps/Step02.astro";
+
+const pageTitles = ["1. Allgemeine Angaben", "2. Kontext & Genese"];
+---
+
+<div class="flex">
+  <div class="bg-lavender-base relative h-[stretch] w-296 shrink-0 self-start">
+    <nav
+      aria-label="Formular-Navigation"
+      class="sticky top-0 flex w-full flex-col gap-8 px-16 py-24"
+    >
+      {
+        pageTitles.map((title) => {
+          return (
+            <button
+              type="button"
+              class="flex w-full items-center gap-2 rounded p-8 text-left transition-colors"
+            >
+              {title}
+            </button>
+          );
+        })
+      }
+    </nav>
+  </div>
+  <div
+    class="py-lg mx-auto flex min-h-[calc(100dvh-var(--header-height))] w-full max-w-736 flex-col px-16"
+  >
+    <form class="w-full">
+      <Step01 />
+      <Step02 />
+    </form>
+  </div>
+</div>
+
+<script></script>

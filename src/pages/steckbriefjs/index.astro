@@ -1,0 +1,15 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Steckbrief from "./_components/Steckbrief.astro";
+
+export const frontmatter = {
+  title: "SteckbriefJS",
+  sitemap: true,
+};
+---
+
+<Layout title={frontmatter.title} fullWidth noFooter>
+  <main>
+    <Steckbrief />
+  </main>
+</Layout>
