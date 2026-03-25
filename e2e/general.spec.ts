@@ -40,3 +40,10 @@ test("staging-only pages are not accessible in production", async ({
   await page.goto(routes.staging.path);
   await expect.poll(() => page.title()).toBe(TITLE_404);
 });
+
+test("the 404 page is served with the correct status code", async ({
+  page,
+}) => {
+  const status = (await page.request.get("/404")).status();
+  expect(status).toBe(404);
+});
