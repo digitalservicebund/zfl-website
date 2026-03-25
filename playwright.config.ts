@@ -1,10 +1,33 @@
-import { defineConfig, devices } from "@playwright/test";
-
+import {
+  defineConfig,
+  devices,
+  type PlaywrightTestConfig,
+} from "@playwright/test";
 try {
   process.loadEnvFile();
 } catch {
   // .env file not present (e.g. in CI)
 }
+
+const previewWebServer: PlaywrightTestConfig["webServer"] = {
+  command: "pnpm run preview", // run pnpm run build beforehand
+  url: "http://localhost:4321/",
+  timeout: 120 * 1000,
+  reuseExistingServer: !process.env.CI,
+};
+
+const dockerWebServer: PlaywrightTestConfig["webServer"] = {
+  command:
+    "docker build -t zfl-website . && docker run --rm -p 4321:8080 --name zfl-website zfl-website:latest",
+  port: 4321,
+  timeout: 120 * 1000,
+  reuseExistingServer: !process.env.CI,
+};
+
+const webServer: PlaywrightTestConfig["webServer"] = process.env
+  .PLAYWRIGHT_USE_DOCKER
+  ? dockerWebServer
+  : previewWebServer;
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -17,8 +40,6 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
-  /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: "html",
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -66,10 +87,5 @@ export default defineConfig({
     // },
   ],
 
-  webServer: {
-    command: "npm run preview",
-    url: "http://localhost:4321/",
-    timeout: 120 * 1000,
-    reuseExistingServer: !process.env.CI,
-  },
+  webServer,
 });

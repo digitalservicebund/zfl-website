@@ -64,11 +64,8 @@ jobs:
         if: steps.playwright-cache-deps.outputs.cache-hit == 'true'
         run: pnpm exec playwright install-deps
 
-      - name: Build App
-        run: pnpm run build
-
       - name: Run Playwright tests
-        run: pnpm exec playwright test
+        run: PLAYWRIGHT_USE_DOCKER=true pnpm exec playwright test
 
       - uses: actions/upload-artifact@v7
         if: ${{ !cancelled() }}
