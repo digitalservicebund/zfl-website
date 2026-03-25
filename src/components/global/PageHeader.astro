@@ -2,7 +2,7 @@
 import Kopfzeile from "@/components/global/Kopfzeile.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import { routes } from "@/config/routes";
-import { isPreview, isStaging } from "@/config/stage";
+import { isProduction } from "@/config/stage";
 import bundLogoWhite from "@/images/logo/bund-logo-white.svg";
 import bundLogo from "@/images/logo/bund-logo.png";
 import { removeTrailingSlash } from "@/utils/path";
@@ -18,7 +18,7 @@ const headerNavigation = [
   routes.begleitungen,
   routes.schulungen,
   routes.ueber,
-].filter((item) => isStaging || isPreview || !item.isStagingOnly);
+].filter((item) => !isProduction || !item.isStagingOnly);
 
 const kontaktPopoverId = "page-header-contact-popover";
 const mobileMenuId = "page-header-mobile-menu";
