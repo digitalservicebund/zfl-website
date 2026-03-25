@@ -12,6 +12,7 @@ const stagingOnlyPaths = new Set<string>(
 const notFoundPath = buildRoutePath("/404", import.meta.env.BASE_URL);
 
 export const onRequest = defineMiddleware((context, next) => {
+  // Allow staging and preview environments to access staging-only pages
   if (isStaging || isPreview) {
     return next();
   }
