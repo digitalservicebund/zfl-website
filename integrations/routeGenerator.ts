@@ -27,7 +27,7 @@ type RouteMetaInput = Partial<Record<RouteMetaKey, RouteMetaValue>>;
 
 const SUPPORTED_EXTENSIONS = ["astro", "md", "mdx", "html"];
 const SUPPORTED_EXTENSIONS_REGEXP = new RegExp(
-  `\\.(${SUPPORTED_EXTENSIONS.join("|")})$`,
+  String.raw`\.(${SUPPORTED_EXTENSIONS.join("|")})$`,
 );
 
 export function generateRoutes({
