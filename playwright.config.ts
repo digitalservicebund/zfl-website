@@ -10,16 +10,16 @@ try {
 }
 
 const previewWebServer: PlaywrightTestConfig["webServer"] = {
-  command: "pnpm run preview", // run pnpm run build beforehand
-  url: "http://localhost:4321/",
+  command: "pnpm build && pnpm preview", // run pnpm run build beforehand
   timeout: 120 * 1000,
+  port: 4321,
   reuseExistingServer: !process.env.CI,
 };
 
 const dockerWebServer: PlaywrightTestConfig["webServer"] = {
   command:
-    "docker build -t zfl-website . && docker run --rm -p 4321:8080 --name zfl-website zfl-website:latest",
-  port: 4321,
+    "docker run --env NGINX_DIR=$PUBLIC_STAGE --rm -p 8080:8080 --name zfl-website zfl-website:latest",
+  port: 8080,
   timeout: 120 * 1000,
   reuseExistingServer: !process.env.CI,
 };
@@ -44,7 +44,6 @@ export default defineConfig({
   reporter: "html",
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    baseURL: "http://localhost:4321/",
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
   },

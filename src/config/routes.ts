@@ -81,6 +81,14 @@ export const routes = {
     showInHeader: false,
     isStagingOnly: false,
   },
+  staging: {
+    path: "/staging",
+    title: "Staging-Umgebung",
+    sitemap: false,
+    order: 999,
+    showInHeader: false,
+    isStagingOnly: true,
+  },
   ueberUns_zahlenUndFakten: {
     path: "/ueber-uns/zahlen-und-fakten",
     title: "Zahlen und Fakten",
