@@ -1,6 +1,6 @@
 import type { AstroIntegration } from "astro";
 import matter from "gray-matter";
-import fs from "node:fs";
+import fs, { type Dirent } from "node:fs";
 import path from "node:path";
 import ts from "typescript";
 import { buildRoutePath } from "../src/utils/path";
@@ -27,7 +27,7 @@ type RouteMetaInput = Partial<Record<RouteMetaKey, RouteMetaValue>>;
 
 const SUPPORTED_EXTENSIONS = ["astro", "md", "mdx", "html"];
 const SUPPORTED_EXTENSIONS_REGEXP = new RegExp(
-  `\\.(${SUPPORTED_EXTENSIONS.join("|")})$`,
+  String.raw`\.(${SUPPORTED_EXTENSIONS.join("|")})$`,
 );
 
 export function generateRoutes({
@@ -74,38 +74,65 @@ const ROUTE_META_KEYS = [
 ] as const satisfies RouteMetaKey[];
 
 function generate(pagesDirs: string[], outputFile: string, baseUrl: string) {
+  const allFiles = pagesDirs.flatMap((dir) => {
+    const absoluteDir = path.resolve(dir);
+    if (!fs.existsSync(absoluteDir)) return [];
+
+    return getFiles(absoluteDir).map((file) => ({
+      file,
+      dir: absoluteDir,
+    }));
+  });
+
+  // 2. Process the list into routes
   const routes: Record<string, Route> = {};
 
-  for (const dir of pagesDirs.map((d) => path.resolve(d))) {
-    if (!fs.existsSync(dir)) continue;
+  for (const { file, dir } of allFiles) {
+    const content = fs.readFileSync(file, "utf-8");
+    const meta = extractMeta(file, content);
 
-    for (const file of getFiles(dir)) {
-      const meta = extractMeta(file, fs.readFileSync(file, "utf-8"));
-      if (!meta) continue;
+    if (!meta) continue;
 
-      const relativePath =
-        file
-          .replace(dir, "")
-          .replace(SUPPORTED_EXTENSIONS_REGEXP, "")
-          .replace(/\/index$/, "") || "/";
+    const relativePath =
+      file
+        .replace(dir, "")
+        .replace(SUPPORTED_EXTENSIONS_REGEXP, "")
+        .replace(/\/index$/, "") || "/";
 
-      const routeKey = relativePath === "/" ? "home" : toRouteKey(relativePath);
-      routes[routeKey] = {
-        path: buildRoutePath(relativePath, baseUrl),
-        ...meta,
-      };
-    }
+    const routeKey = toRouteKey(relativePath);
+
+    routes[routeKey] = {
+      path: buildRoutePath(relativePath, baseUrl),
+      ...meta,
+    };
   }
 
+  // 3. Write output
   fs.writeFileSync(path.resolve(outputFile), buildOutput(routes));
 }
 
+/**
+ * Recursively retrieves all files from a directory and its subdirectories
+ * that match the supported file extensions.
+ * @param dir - The starting directory path.
+ * @returns An array of absolute or relative strings representing the file paths.
+ */
 function getFiles(dir: string): string[] {
-  return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
-    const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) return getFiles(full);
-    return SUPPORTED_EXTENSIONS_REGEXP.test(entry.name) ? [full] : [];
-  });
+  // Read directory entries (files and folders) as Dirent objects to easily check types
+  return fs
+    .readdirSync(dir, { withFileTypes: true })
+    .flatMap((entry: Dirent<string>) => {
+      const full = path.join(dir, entry.name);
+
+      // If the entry is a directory, recurse into it and flatten the resulting array
+      if (entry.isDirectory()) {
+        return getFiles(full);
+      }
+
+      // Only return the file path if it matches our allowed extensions
+      // Otherwise, return an empty array (which flatMap will remove)
+      return SUPPORTED_EXTENSIONS_REGEXP.test(entry.name) ? [full] : [];
+    });
 }
 
 export function extractMeta(file: string, raw: string): RouteMeta | null {
@@ -205,6 +232,7 @@ function readLiteralValue(value: ts.Expression): RouteMetaValue | null {
 
 // Convert page/file identifiers into stable camelCase object keys for the route registry.
 export function toRouteKey(input: string): string {
+  if (input === "/") return "home";
   const routeKey = input
     // Keep nested route boundaries visible in the generated key.
     .split("/")
