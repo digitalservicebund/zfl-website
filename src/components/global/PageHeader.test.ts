@@ -26,7 +26,7 @@ describe("PageHeader in general", async () => {
 
 const menuLocations = [
   { name: "desktop menu bar", selector: 'nav[data-testid="desktop-nav"]' },
-  { name: "mobile menu list", selector: "nav#mobile-menu" },
+  { name: "mobile menu list", selector: "nav#page-header-mobile-menu" },
 ];
 
 describe("link highlighting", async () => {
@@ -60,7 +60,12 @@ describe("link highlighting", async () => {
   }
 });
 describe("visible menu items", async () => {
-  const expectedPaths = Object.values(routes)
+  const expectedPaths = [
+    routes.werkzeuge,
+    routes.begleitungen,
+    routes.schulungen,
+    routes.ueber,
+  ]
     .filter((route) => route.showInHeader && !route.isStagingOnly)
     .map((route) => route.path);
 
