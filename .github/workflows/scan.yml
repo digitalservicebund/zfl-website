@@ -3,7 +3,9 @@ name: Scan
 on:
   workflow_call:
     secrets:
-      SLACK_WEBHOOK_URL:
+      SLACK_BOT_TOKEN:
+        required: true
+      SLACK_CHANNEL_ID:
         required: true
   workflow_dispatch:
   schedule:
@@ -55,7 +57,8 @@ jobs:
           sarif_file: "trivy-results.sarif"
 
       - name: Send status to Slack
-        uses: digitalservicebund/notify-on-failure-gha@671832f192aee0a068fd92b2f6deb975df794a84 # v1.6.1
+        uses: digitalservicebund/notify-on-failure-gha@671832f192aee0a068fd92b2f6deb975df794a84
         if: ${{ failure() }}
         with:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}

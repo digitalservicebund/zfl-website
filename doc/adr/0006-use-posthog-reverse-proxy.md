@@ -23,7 +23,6 @@ We will implement the reverse proxy based on the Nginx snippet provided in the P
 - Cookie-less Configuration: The PostHog JavaScript SDK will be initialized with `persistence: "memory",
 cookieless_mode: "always"` to ensure no cookies are used by Posthog.
 
-
 ## Consequences
 
 We will configure and maintain NGINX reverse proxy functionality to forward analytics traffic, thereby preventing the disclosure of client IP addresses to Posthog.
