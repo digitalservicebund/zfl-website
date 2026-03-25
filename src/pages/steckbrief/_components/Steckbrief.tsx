@@ -129,8 +129,8 @@ export default function SteckbriefForm() {
         <SteckbriefButtonBar
           page={page}
           isLastPage={isLastPage}
-          onPrev={() => setPage(page - 1)}
-          onNext={() => setPage(page + 1)}
+          onPrev={() => goToPage(page - 1)}
+          onNext={() => goToPage(page + 1)}
         />
       </div>
     </div>
