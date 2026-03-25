@@ -4,7 +4,7 @@ import type { Inputs } from "./types";
 
 const sidebarContent = (
   <>
-    <h2 class="m-0 text-[21px] font-bold">Leitfragen als Hilfestellung</h2>
+    <h2 class="m-0 text-[21px] font-bold">Leitfragen zur Zielsetzung</h2>
     <ul class="m-0 list-disc pl-27 [&>li]:mb-8 [&>li:last-child]:mb-0">
       <li>
         Welche konkrete Verbesserung soll für Bürgerinnen und Bürger,

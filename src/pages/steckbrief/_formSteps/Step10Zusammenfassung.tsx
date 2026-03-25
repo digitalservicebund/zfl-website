@@ -1,3 +1,4 @@
+import { Fragment } from "preact";
 import { useFormContext } from "react-hook-form";
 import type { Inputs } from "./types";
 
@@ -16,12 +17,25 @@ function SummaryCard({ title, pageNumber, items, goToPage }: SummaryCardProps) {
       </div>
       <div class="kern-summary__body">
         <dl class="kern-description-list">
-          {items.map(({ key, value }) => (
-            <div class="kern-description-list-item">
-              <dt class="kern-description-list-item__key">{key}</dt>
-              <dd class="kern-description-list-item__value">{value || "–"}</dd>
-            </div>
-          ))}
+          {items.map(({ key, value }) => {
+            const parsedValue = value
+              ?.toString()
+              .split("\n")
+              .map((line, index) => (
+                <Fragment key={index}>
+                  {line}
+                  <br />
+                </Fragment>
+              ));
+            return (
+              <div class="kern-description-list-item">
+                <dt class="kern-description-list-item__key">{key}</dt>
+                <dd class="kern-description-list-item__value">
+                  {parsedValue || "–"}
+                </dd>
+              </div>
+            );
+          })}
         </dl>
         <div>
           <button
@@ -42,6 +56,7 @@ export default function Step10Zusammenfassung({
   goToPage,
 }: {
   goToPage: (page: number) => void;
+  isWide?: boolean;
 }) {
   const { watch } = useFormContext<Inputs>();
   const values = watch();

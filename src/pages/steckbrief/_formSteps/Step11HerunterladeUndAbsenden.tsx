@@ -10,7 +10,7 @@ export default function Step11HerunterladeUndAbsenden() {
       </p>
       <div>
         <button class="kern-btn kern-btn--primary">
-          Steckbrief herunterladen
+          <span class="kern-label">Steckbrief herunterladen</span>
         </button>
       </div>
       <hr class="kern-divider my-md" aria-hidden="true" />
@@ -52,7 +52,9 @@ export default function Step11HerunterladeUndAbsenden() {
           </div>
         </div>
         <div>
-          <button class="kern-btn kern-btn--secondary">E-Mail erstellen</button>
+          <button class="kern-btn kern-btn--secondary">
+            <span class="kern-label">E-Mail erstellen</span>
+          </button>
         </div>
       </div>
     </div>

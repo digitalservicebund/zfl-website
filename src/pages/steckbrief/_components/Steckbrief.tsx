@@ -29,6 +29,8 @@ const pageTitles = [
   "10. Herunterladen & Absenden",
 ];
 
+type StepComponent = ComponentChildren & { props?: { isWide?: boolean } };
+
 export default function SteckbriefForm() {
   const formMethods = useForm<Inputs>();
   const [page, setPage] = useState(1);
@@ -41,7 +43,7 @@ export default function SteckbriefForm() {
     setHintSidebarContent(null);
   };
 
-  const steps: ComponentChildren[] = [
+  const steps: StepComponent[] = [
     <Step01AllgemeineAngaben />,
     <Step02KontextGenese />,
     <Step03Problembeschreibung />,
@@ -51,9 +53,11 @@ export default function SteckbriefForm() {
     // <Step07Visualisierungen />,
     <Step08ProjektplanungI />,
     <Step09ProjektplanungII />,
-    <Step10Zusammenfassung goToPage={goToPage} />,
+    <Step10Zusammenfassung goToPage={goToPage} isWide />,
     <Step11HerunterladeUndAbsenden />,
   ];
+
+  const currentStep = steps[page - 1];
 
   return (
     <div className="flex">
@@ -84,7 +88,12 @@ export default function SteckbriefForm() {
       <div className="flex min-h-[calc(100dvh-var(--header-height))] w-full flex-col">
         <div class="flex flex-1 flex-col gap-32 lg:flex-row lg:items-stretch">
           <div class="min-w-0 flex-1">
-            <div class="py-lg mx-auto max-w-[780px] px-16">
+            <div
+              class="py-lg mx-auto max-w-(--max-width) px-16" // 1280px for summary
+              style={{
+                "--max-width": `${currentStep?.props.isWide ? 1280 : 736}px`,
+              }}
+            >
               <div class="kern-progress mb-lg">
                 <label class="kern-label" for="progress1">
                   Schritt {page} von {pageTitles.length}
@@ -102,7 +111,7 @@ export default function SteckbriefForm() {
                     novalidate
                     onSubmit={(e) => e.preventDefault()}
                   >
-                    {steps[page - 1]}
+                    {currentStep}
                   </form>
                 </FormProvider>
               </SidebarContext.Provider>

@@ -60,6 +60,9 @@ fileignoreconfig:
   - filename: src/components/Steckbrief.tsx
     allowed_patterns:
       - key
+  - filename: src/pages/steckbrief/_formSteps/Step10Zusammenfassung.tsx
+    allowed_patterns:
+      - key
 scopeconfig:
   - scope: node
 allowed_patterns:
