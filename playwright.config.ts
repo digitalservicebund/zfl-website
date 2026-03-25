@@ -10,7 +10,7 @@ try {
 }
 
 const previewWebServer: PlaywrightTestConfig["webServer"] = {
-  command: "pnpm build && pnpm preview", // run pnpm run build beforehand
+  command: "pnpm build && pnpm preview",
   timeout: 120 * 1000,
   port: 4321,
   reuseExistingServer: !process.env.CI,
