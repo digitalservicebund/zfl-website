@@ -18,6 +18,11 @@ const PREVIEW_SITE = "https://digitalservicebund.github.io";
 export default defineConfig({
   site: isPreview ? PREVIEW_SITE : PRODUCTION_SITE,
   base: isPreview ? PREVIEW_BASE_URL : undefined,
+  redirects: {
+    "/anleitungen-und-hilfsmittel": "/werkzeuge",
+    "/ueber-uns": "/ueber",
+    "/ueber-uns/daran-arbeiten-wir": "/ueber/das-ist-neu",
+  },
   integrations: [
     icon(),
     alpinejs(),

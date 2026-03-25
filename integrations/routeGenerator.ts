@@ -12,7 +12,6 @@ type Options = {
 
 type RouteMeta = {
   title: string;
-  order: number;
   sitemap: boolean;
   showInHeader: boolean;
   isStagingOnly: boolean;
@@ -23,8 +22,13 @@ type Route = RouteMeta & {
 };
 
 type RouteMetaKey = keyof RouteMeta;
-type RouteMetaValue = string | number | boolean;
+type RouteMetaValue = string | boolean;
 type RouteMetaInput = Partial<Record<RouteMetaKey, RouteMetaValue>>;
+
+const SUPPORTED_EXTENSIONS = ["astro", "md", "mdx", "html"];
+const SUPPORTED_EXTENSIONS_REGEXP = new RegExp(
+  String.raw`\.(${SUPPORTED_EXTENSIONS.join("|")})$`,
+);
 
 export function generateRoutes({
   pagesDirs,
@@ -38,20 +42,32 @@ export function generateRoutes({
       "astro:config:done": ({ config }) => {
         baseUrl = config.base;
       },
-      "astro:server:setup": () => generate(pagesDirs, output, baseUrl),
+      "astro:server:setup": ({ server }) => {
+        generate(pagesDirs, output, baseUrl); // Initial generation
+
+        // Watch for changes, additions, or deletions in your page directories
+        server.watcher.on("all", (event, file) => {
+          const isPageFile = pagesDirs.some((dir) =>
+            file.startsWith(path.resolve(dir)),
+          );
+          const isRelevantEvent = ["add", "unlink", "change"].includes(event);
+          if (
+            isPageFile &&
+            isRelevantEvent &&
+            SUPPORTED_EXTENSIONS_REGEXP.test(file)
+          ) {
+            console.log(`Route generation triggered for ${file}`);
+            generate(pagesDirs, output, baseUrl);
+          }
+        });
+      },
       "astro:build:start": () => generate(pagesDirs, output, baseUrl),
     },
   };
 }
 
-const DEFAULT_ROUTE_ORDER = 999;
-const SUPPORTED_EXTENSIONS = ["astro", "md", "mdx", "html"];
-const SUPPORTED_EXTENSIONS_REGEXP = new RegExp(
-  String.raw`\.(${SUPPORTED_EXTENSIONS.join("|")})$`,
-);
 const ROUTE_META_KEYS = [
   "title",
-  "order",
   "sitemap",
   "showInHeader",
   "isStagingOnly",
@@ -130,7 +146,6 @@ export function extractMeta(file: string, raw: string): RouteMeta | null {
   return {
     title,
     sitemap: data.sitemap !== false,
-    order: typeof data.order === "number" ? data.order : DEFAULT_ROUTE_ORDER,
     showInHeader: !!data.showInHeader,
     isStagingOnly: !!data.isStagingOnly,
   };
@@ -208,7 +223,6 @@ function isRouteMetaKey(key: string): key is RouteMetaKey {
 
 function readLiteralValue(value: ts.Expression): RouteMetaValue | null {
   if (ts.isStringLiteralLike(value)) return value.text;
-  if (ts.isNumericLiteral(value)) return Number(value.text);
 
   if (value.kind === ts.SyntaxKind.TrueKeyword) return true;
   if (value.kind === ts.SyntaxKind.FalseKeyword) return false;
@@ -249,14 +263,13 @@ function escapeStringLiteral(input: string): string {
 
 function buildOutput(routes: Record<string, Route>) {
   const entries = Object.entries(routes)
-    .sort(([, a], [, b]) => a.order - b.order || a.title.localeCompare(b.title))
+    .sort(([keyA], [keyB]) => keyA.localeCompare(keyB))
     .map(
-      ([key, { path, title, sitemap, order, showInHeader, isStagingOnly }]) => `
+      ([key, { path, title, sitemap, showInHeader, isStagingOnly }]) => `
   ${key}: {
     path: "${escapeStringLiteral(path)}",
     title: "${escapeStringLiteral(title)}",
     sitemap: ${sitemap},
-    order: ${order},
     showInHeader: ${showInHeader},
     isStagingOnly: ${isStagingOnly},
   }`,
