@@ -1,4 +1,21 @@
+import { useState } from "preact/hooks";
+import { useFormContext } from "react-hook-form";
+import { generateSteckbriefDocx } from "./generateSteckbriefDocx";
+import type { Inputs } from "./types";
+
 export default function Step11HerunterladeUndAbsenden() {
+  const { getValues } = useFormContext<Inputs>();
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  async function handleDownload() {
+    setIsGenerating(true);
+    try {
+      await generateSteckbriefDocx(getValues());
+    } finally {
+      setIsGenerating(false);
+    }
+  }
+
   return (
     <div class="flex flex-col gap-16">
       <h2 class="mt-0">Steckbrief erstellt. So geht es jetzt weiter</h2>
@@ -95,8 +112,15 @@ export default function Step11HerunterladeUndAbsenden() {
             Laden Sie den aktuellen Stand Ihres Steckbriefs als Word-Dokument
             herunter.
           </p>
-          <button class="kern-btn kern-btn--primary mt-14">
-            <span class="kern-label">Steckbrief herunterladen</span>
+          <button
+            type="button"
+            class="kern-btn kern-btn--primary mt-14"
+            onClick={handleDownload}
+            disabled={isGenerating}
+          >
+            <span class="kern-label">
+              {isGenerating ? "Wird erstellt…" : "Steckbrief herunterladen"}
+            </span>
           </button>
         </div>
       </div>
