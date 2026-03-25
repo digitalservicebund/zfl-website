@@ -13,14 +13,12 @@ pre-push:
   commands:
     lint:
       tags: style
-      run: pnpm lint:fix-selected {staged_files}
+      run: pnpm lint {staged_files}
       glob: "*.{js,cjs,mjs,ts,jsx,tsx,json,css,md,yml,yaml,html,astro}"
-      stage_fixed: true
     check-format:
       tags: style
-      run: pnpm format:check {staged_files}
+      run: pnpm format {staged_files}
       glob: "*.{js,cjs,mjs,ts,jsx,tsx,json,css,md,yml,yaml,html,astro}"
-      stage_fixed: true
     typecheck:
       tags: style
       run: pnpm typecheck
