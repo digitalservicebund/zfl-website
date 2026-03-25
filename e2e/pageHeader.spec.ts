@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
 
+const MOBILE_MENU_ID = "#page-header-mobile-menu";
+
 test.describe("Header navigation", () => {
   test("desktop menu shows correct active item", async ({ page }) => {
     // Desktop viewport
@@ -30,7 +32,7 @@ test.describe("Header navigation", () => {
 
     await page.goto("/begleitungen");
 
-    const mobileMenu = page.locator("#mobile-menu");
+    const mobileMenu = page.locator(MOBILE_MENU_ID);
     await expect(mobileMenu).toBeHidden();
   });
 
@@ -44,7 +46,7 @@ test.describe("Header navigation", () => {
 
     await toggleButton.click();
 
-    const mobileMenu = page.locator("#mobile-menu");
+    const mobileMenu = page.locator(MOBILE_MENU_ID);
     await expect(mobileMenu).toBeVisible();
 
     // Active link inside mobile menu
@@ -66,7 +68,7 @@ test.describe("Header navigation", () => {
 
     await toggleButton.click();
 
-    const mobileMenu = page.locator("#mobile-menu");
+    const mobileMenu = page.locator(MOBILE_MENU_ID);
 
     const activeLink = mobileMenu.getByRole("link", {
       name: "Schulungen",

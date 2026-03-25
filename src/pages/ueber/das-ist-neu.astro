@@ -1,15 +1,15 @@
 ---
+import Badge from "@/components/Badge.astro";
 import Card from "@/components/Card.astro";
 import Hero from "@/components/Hero.astro";
+import TimelineList from "@/components/TimelineList.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
+import { routes } from "@/config/routes";
 import Layout from "@/layouts/Layout.astro";
 import { mailto } from "@/utils/mailtoHelper";
-import TimelineList from "@/components/TimelineList.astro";
-import Badge from "@/components/Badge.astro";
-import { routes } from "@/config/routes";
 
 export const frontmatter = {
-  title: "Daran arbeiten wir",
+  title: "Das ist neu",
   sitemap: true,
 };
 ---
@@ -17,7 +17,7 @@ export const frontmatter = {
 <Layout title={frontmatter.title}>
   <main class="breakout-grid">
     <Hero>
-      <h1>Daran arbeiten wir</h1>
+      <h1>{frontmatter.title}</h1>
       <div slot="subtitle">
         <p>
           Das Zentrum für Legistik wird gemeinsam mit Ihnen als Legistinnen und
@@ -125,7 +125,7 @@ export const frontmatter = {
     </section>
 
     <section>
-      <h2 class="mb-40">Das ist neu</h2>
+      <h2 class="mb-40">Neuerungen</h2>
       <TimelineList>
         <li>
           <Badge look="gray">März 2026</Badge>
@@ -156,9 +156,7 @@ export const frontmatter = {
             </li>
             <li>
               Neue Seite ergänzt: Anleitungen und Hilfsmittel
-              <a href={routes.anleitungenUndHilfsmittel.path} class="block"
-                >Hier ansehen</a
-              >
+              <a href={routes.werkzeuge.path} class="block">Hier ansehen</a>
             </li>
           </ul>
         </li>
