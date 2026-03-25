@@ -1,6 +1,7 @@
 ---
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import { routes } from "@/config/routes";
+import { isProduction } from "@/config/stage";
 import bmdsLogoWhite from "@/images/logo/bmds-logo-white.svg";
 import bmdsLogo from "@/images/logo/bmds-logo.svg";
 import { Image } from "astro:assets";
@@ -16,7 +17,7 @@ const footerColumns: Record<string, FooterItem[]> = {
     routes.werkzeuge,
     routes.begleitungen,
     routes.schulungen,
-    routes.ueber,
+    ...(!isProduction ? [routes.ueber] : []),
   ],
   "Rechtliche Hinweise": [
     routes.impressum,
