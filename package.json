@@ -13,7 +13,7 @@
     "format:fix": "pnpm run format:fix-selected .",
     "format:fix-selected": "prettier --write --ignore-unknown",
     "lint": "eslint .",
-    "lint:fix": "pnpm run lint:fix-selected",
+    "lint:fix": "pnpm run lint:fix-selected .",
     "lint:fix-selected": "eslint --fix",
     "test": "vitest",
     "test:e2e": "pnpm run build && playwright test --project=chromium",
