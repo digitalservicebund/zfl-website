@@ -60,6 +60,11 @@ export default function SteckbriefForm() {
     useState<ComponentChildren>(null);
   const isLastPage = page === pageTitles.length;
 
+  const goToPage = (nextPage: number) => {
+    setPage(nextPage);
+    setHintSidebarContent(null);
+  };
+
   useEffect(() => {
     const { unsubscribe } = formMethods.watch((values) => {
       saveToStorage(values as Inputs);
@@ -67,10 +72,25 @@ export default function SteckbriefForm() {
     return unsubscribe;
   }, [formMethods]);
 
-  const goToPage = (nextPage: number) => {
-    setPage(nextPage);
-    setHintSidebarContent(null);
-  };
+  useEffect(() => {
+    history.pushState({ page: page }, "", `?step=${page}`);
+  }, [page]);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const queryParameter = new URLSearchParams(window.location.search);
+      const step = parseInt(queryParameter.get("step") || "1");
+
+      if (step >= 1 && step <= pageTitles.length) {
+        setPage(step);
+      } else {
+        setPage(1);
+      }
+    };
+    window.addEventListener("popstate", handlePopState);
+    handlePopState();
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
 
   const steps: StepComponent[] = [
     <Step01AllgemeineAngaben />,
@@ -79,7 +99,6 @@ export default function SteckbriefForm() {
     <Step04EinflussfaktorenAkteure />,
     <Step05VorlaeufigeZielsetzung />,
     <Step06Vorhabensbeschreibung />,
-    // <Step07Visualisierungen />,
     <Step08ProjektplanungI />,
     <Step09ProjektplanungII />,
     <Step10Zusammenfassung goToPage={goToPage} isWide />,
@@ -87,7 +106,6 @@ export default function SteckbriefForm() {
   ];
 
   const currentStep = steps[page - 1];
-
   return (
     <div className="flex">
       <div className="bg-lavender-base relative h-[stretch] w-[296px] shrink-0 self-start">
