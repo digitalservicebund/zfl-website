@@ -61,12 +61,6 @@ export default function Step10Zusammenfassung({
   const { watch } = useFormContext<Inputs>();
   const values = watch();
 
-  const fileNames = values.visualisierungen?.length
-    ? Array.from(values.visualisierungen)
-        .map((f) => f.name)
-        .join(", ")
-    : "Keine Dateien hochgeladen";
-
   return (
     <>
       <div class="flex flex-col gap-16">
@@ -139,12 +133,6 @@ export default function Step10Zusammenfassung({
             },
             { key: "Wichtige Maßnahmen", value: values.massnahmen },
           ]}
-        />
-        <SummaryCard
-          title="Visualisierungen"
-          pageNumber={7}
-          goToPage={goToPage}
-          items={[{ key: "Hochgeladene Dateien", value: fileNames }]}
         />
         <SummaryCard
           title="Projektplanung I"

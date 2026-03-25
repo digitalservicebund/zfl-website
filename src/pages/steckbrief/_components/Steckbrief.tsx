@@ -8,13 +8,33 @@ import Step08ProjektplanungI from "@/pages/steckbrief/_formSteps/Step08Projektpl
 import Step09ProjektplanungII from "@/pages/steckbrief/_formSteps/Step09ProjektplanungII";
 import Step10Zusammenfassung from "@/pages/steckbrief/_formSteps/Step10Zusammenfassung";
 import Step11HerunterladeUndAbsenden from "@/pages/steckbrief/_formSteps/Step11HerunterladeUndAbsenden";
+
 import type { Inputs } from "@/pages/steckbrief/_formSteps/types";
 import type { ComponentChildren } from "preact";
-import { useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import { FormProvider, useForm } from "react-hook-form";
 import HintSidebar from "./HintSidebar";
 import { SidebarContext } from "./SidebarTriggerButton";
 import SteckbriefButtonBar from "./SteckbriefButtonBar";
+
+const STORAGE_KEY = "steckbrief-prototype-v2-form-state";
+
+function loadFromStorage(): Partial<Inputs> {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? (JSON.parse(raw) as Partial<Inputs>) : {};
+  } catch {
+    return {};
+  }
+}
+
+function saveToStorage(values: Partial<Inputs>): void {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(values));
+  } catch {
+    // Quota exceeded or private browsing — silently ignore
+  }
+}
 
 const pageTitles = [
   "1. Allgemeine Angaben",
@@ -32,11 +52,20 @@ const pageTitles = [
 type StepComponent = ComponentChildren & { props?: { isWide?: boolean } };
 
 export default function SteckbriefForm() {
-  const formMethods = useForm<Inputs>();
+  const formMethods = useForm<Inputs>({
+    defaultValues: loadFromStorage(),
+  });
   const [page, setPage] = useState(1);
   const [hintSidebarContent, setHintSidebarContent] =
     useState<ComponentChildren>(null);
   const isLastPage = page === pageTitles.length;
+
+  useEffect(() => {
+    const { unsubscribe } = formMethods.watch((values) => {
+      saveToStorage(values as Inputs);
+    });
+    return unsubscribe;
+  }, [formMethods]);
 
   const goToPage = (nextPage: number) => {
     setPage(nextPage);

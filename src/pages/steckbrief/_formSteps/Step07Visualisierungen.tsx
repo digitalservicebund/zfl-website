@@ -1,8 +1,4 @@
-import { useFormContext } from "react-hook-form";
-import type { Inputs } from "./types";
-
 export default function Step07Visualisierungen() {
-  const { register } = useFormContext<Inputs>();
   return (
     <>
       <div class="flex flex-col gap-16">
@@ -28,7 +24,6 @@ export default function Step07Visualisierungen() {
           type="file"
           multiple
           aria-describedby="visualisierungen-hint"
-          {...register("visualisierungen")}
         />
       </div>
     </>

@@ -57,9 +57,10 @@ fileignoreconfig:
   - filename: src/components/global/DebugGrid.astro
     allowed_patterns:
       - \@keydown
-  - filename: src/components/Steckbrief.tsx
+  - filename: src/pages/steckbrief/_components/Steckbrief.tsx
     allowed_patterns:
       - key
+      - STORAGE_KEY
   - filename: src/pages/steckbrief/_formSteps/Step10Zusammenfassung.tsx
     allowed_patterns:
       - key

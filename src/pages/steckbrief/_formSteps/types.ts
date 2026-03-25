@@ -13,7 +13,6 @@ export type Inputs = {
   zielsetzung: string;
   vorhabensbeschreibung: string;
   massnahmen: string;
-  visualisierungen: FileList;
   zeithorizont: string;
   ressourcenschaetzung: string;
   risikoeinschaetzung: string;
