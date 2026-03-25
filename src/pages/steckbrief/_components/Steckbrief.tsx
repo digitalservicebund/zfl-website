@@ -61,9 +61,15 @@ export default function SteckbriefForm() {
     useState<ComponentChildren>(null);
   const isLastPage = page === pageTitles.length;
 
+  const modifyQueryParameter = (page: number) => {
+    const normalizedPath = removeTrailingSlash(window.location.pathname);
+    history.pushState({ page: page }, "", `${normalizedPath}?step=${page}`);
+  };
+
   const goToPage = (nextPage: number) => {
     setPage(nextPage);
     setHintSidebarContent(null);
+    modifyQueryParameter(nextPage);
   };
 
   useEffect(() => {
@@ -74,11 +80,6 @@ export default function SteckbriefForm() {
   }, [formMethods]);
 
   useEffect(() => {
-    const normalizedPath = removeTrailingSlash(window.location.pathname);
-    history.pushState({ page: page }, "", `${normalizedPath}?step=${page}`);
-  }, [page]);
-
-  useEffect(() => {
     const handlePopState = () => {
       const queryParameter = new URLSearchParams(window.location.search);
       const step = parseInt(queryParameter.get("step") || "1");
@@ -87,6 +88,7 @@ export default function SteckbriefForm() {
         setPage(step);
       } else {
         setPage(1);
+        modifyQueryParameter(1);
       }
     };
     window.addEventListener("popstate", handlePopState);
