@@ -50,6 +50,13 @@ export const routes = {
     showInHeader: false,
     isStagingOnly: false,
   },
+  staging: {
+    path: "/staging",
+    title: "Staging-Umgebung",
+    sitemap: false,
+    showInHeader: false,
+    isStagingOnly: true,
+  },
   ueber: {
     path: "/ueber",
     title: "Über das ZfL",
