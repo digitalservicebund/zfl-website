@@ -17,8 +17,8 @@ describe("buildRoutePath", () => {
   });
 
   test("prefixes the href with the configured base path", () => {
-    expect(buildRoutePath("/ueber-uns", "/zfl-website/previews/test-branch")).toBe(
-      "/zfl-website/previews/test-branch/ueber-uns",
-    );
+    expect(
+      buildRoutePath("/ueber-uns", "/zfl-website/previews/test-branch"),
+    ).toBe("/zfl-website/previews/test-branch/ueber-uns");
   });
 });

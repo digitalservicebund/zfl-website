@@ -1,27 +1,20 @@
 ---
-import { isStaging, isPreview } from "@/config/stage";
-
-interface Props {
-  fullWidth?: boolean;
-}
-const { fullWidth } = Astro.props;
+import { isPreview, isStaging } from "@/config/stage";
 ---
 
-<div class="kern-kopfzeile">
-  <div class={fullWidth ? "mx-16" : "container"}>
-    <div class="kern-kopfzeile__content">
-      <span class="kern-kopfzeile__flagge" aria-hidden="true">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 16">
-          <path fill="#000" d="M0 .5h24v5.333H0z"></path>
-          <path fill="red" d="M0 5.833h24v5.333H0z"></path>
-          <path fill="#FACA2C" d="M0 11.167h24V16.5H0z"></path>
-        </svg>
-      </span>
-      <span class="kern-kopfzeile__label">
-        Offizielle Website – Bundesrepublik Deutschland{
-          isStaging ? " (STAGING)" : isPreview ? " (PREVIEW)" : ""
-        }</span
-      >
-    </div>
+<div class="kern-kopfzeile px-24">
+  <div class="kern-kopfzeile__content">
+    <span class="kern-kopfzeile__flagge" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 16">
+        <path fill="#000" d="M0 .5h24v5.333H0z"></path>
+        <path fill="red" d="M0 5.833h24v5.333H0z"></path>
+        <path fill="#FACA2C" d="M0 11.167h24V16.5H0z"></path>
+      </svg>
+    </span>
+    <span class="kern-kopfzeile__label">
+      Offizielle Website – Bundesrepublik Deutschland{
+        isStaging ? " (STAGING)" : isPreview ? " (PREVIEW)" : ""
+      }</span
+    >
   </div>
 </div>
