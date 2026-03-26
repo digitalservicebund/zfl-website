@@ -1,37 +1,37 @@
 import type { AstroIntegration } from "astro";
-import matter from "gray-matter";
 import fs, { type Dirent } from "node:fs";
 import path from "node:path";
-import ts from "typescript";
 import { buildRoutePath } from "../src/utils/path";
+import { extractMeta } from "./routeGeneration/extractRouteMeta";
 
 type Options = {
-  pagesDirs: string[];
+  pagesDir: string;
   output?: string;
 };
 
-type RouteMeta = {
+export type RouteMeta = {
   title: string;
   sitemap: boolean;
-  showInHeader: boolean;
   isStagingOnly: boolean;
+  navOrder: number | null;
+  navLabel: string | null;
 };
 
 type Route = RouteMeta & {
   path: string;
+  key: string;
+  parentKey: string | null;
+  childKeys: string[];
 };
-
-type RouteMetaKey = keyof RouteMeta;
-type RouteMetaValue = string | boolean;
-type RouteMetaInput = Partial<Record<RouteMetaKey, RouteMetaValue>>;
 
 const SUPPORTED_EXTENSIONS = ["astro", "md", "mdx", "html"];
 const SUPPORTED_EXTENSIONS_REGEXP = new RegExp(
   String.raw`\.(${SUPPORTED_EXTENSIONS.join("|")})$`,
 );
 
+// Registers the route generation hook with Astro.
 export function generateRoutes({
-  pagesDirs,
+  pagesDir,
   output = "src/config/routes.ts",
 }: Options): AstroIntegration {
   let baseUrl = "";
@@ -43,13 +43,11 @@ export function generateRoutes({
         baseUrl = config.base;
       },
       "astro:server:setup": ({ server }) => {
-        generate(pagesDirs, output, baseUrl); // Initial generation
+        generate(pagesDir, output, baseUrl); // Initial generation
 
-        // Watch for changes, additions, or deletions in your page directories
+        // Watch for changes, additions, or deletions in the pages directory.
         server.watcher.on("all", (event, file) => {
-          const isPageFile = pagesDirs.some((dir) =>
-            file.startsWith(path.resolve(dir)),
-          );
+          const isPageFile = file.startsWith(path.resolve(pagesDir));
           const isRelevantEvent = ["add", "unlink", "change"].includes(event);
           if (
             isPageFile &&
@@ -57,66 +55,61 @@ export function generateRoutes({
             SUPPORTED_EXTENSIONS_REGEXP.test(file)
           ) {
             console.log(`Route generation triggered for ${file}`);
-            generate(pagesDirs, output, baseUrl);
+            generate(pagesDir, output, baseUrl);
           }
         });
       },
-      "astro:build:start": () => generate(pagesDirs, output, baseUrl),
+      "astro:build:start": () => generate(pagesDir, output, baseUrl),
     },
   };
 }
 
-const ROUTE_META_KEYS = [
-  "title",
-  "sitemap",
-  "showInHeader",
-  "isStagingOnly",
-] as const satisfies RouteMetaKey[];
+// Generates the routes module from the page files.
+function generate(pagesDir: string, outputFile: string, baseUrl: string) {
+  const absoluteDir = path.resolve(pagesDir);
+  if (!fs.existsSync(absoluteDir)) return;
 
-function generate(pagesDirs: string[], outputFile: string, baseUrl: string) {
-  const allFiles = pagesDirs.flatMap((dir) => {
-    const absoluteDir = path.resolve(dir);
-    if (!fs.existsSync(absoluteDir)) return [];
+  // 1. Get all files from the pages directory
+  const allFiles = getFiles(absoluteDir);
 
-    return getFiles(absoluteDir).map((file) => ({
-      file,
-      dir: absoluteDir,
-    }));
-  });
-
-  // 2. Process the list into routes
-  const routes: Record<string, Route> = {};
-
-  for (const { file, dir } of allFiles) {
+  // 2. Process the list into routes with parent keys
+  const routes: Route[] = [];
+  for (const file of allFiles) {
     const content = fs.readFileSync(file, "utf-8");
     const meta = extractMeta(file, content);
-
     if (!meta) continue;
 
     const relativePath =
       file
-        .replace(dir, "")
+        .replace(absoluteDir, "")
         .replace(SUPPORTED_EXTENSIONS_REGEXP, "")
         .replace(/\/index$/, "") || "/";
 
-    const routeKey = toRouteKey(relativePath);
-
-    routes[routeKey] = {
-      path: buildRoutePath(relativePath, baseUrl),
+    routes.push({
+      key: toRouteKey(relativePath),
+      path: relativePath,
+      parentKey: getParentRouteKey(relativePath),
+      childKeys: [],
       ...meta,
-    };
+    });
   }
 
-  // 3. Write output
-  fs.writeFileSync(path.resolve(outputFile), buildOutput(routes));
+  // 3. Attach child keys to parent routes
+  for (const route of routes) {
+    if (!route.parentKey) continue;
+    routes
+      .find(({ key }) => key === route.parentKey)!
+      .childKeys.push(route.key);
+  }
+
+  // 4. Serialize the routes module
+  fs.writeFileSync(
+    path.resolve(outputFile),
+    serializeRoutesModule(routes, baseUrl),
+  );
 }
 
-/**
- * Recursively retrieves all files from a directory and its subdirectories
- * that match the supported file extensions.
- * @param dir - The starting directory path.
- * @returns An array of absolute or relative strings representing the file paths.
- */
+// Recursively retrieves all files from a directory and its subdirectories that match the supported file extensions.
 function getFiles(dir: string): string[] {
   // Read directory entries (files and folders) as Dirent objects to easily check types
   return fs
@@ -135,143 +128,64 @@ function getFiles(dir: string): string[] {
     });
 }
 
-export function extractMeta(file: string, raw: string): RouteMeta | null {
-  const data = file.endsWith(".astro")
-    ? extractAstroRouteMeta(file, raw)
-    : (matter(raw).data as RouteMetaInput);
-
-  const title = typeof data.title === "string" ? data.title : undefined;
-  if (!title) return null;
-
-  return {
-    title,
-    sitemap: data.sitemap !== false,
-    showInHeader: !!data.showInHeader,
-    isStagingOnly: !!data.isStagingOnly,
-  };
-}
-
-// Parse an Astro page's frontmatter block and return the literal route metadata fields.
-function extractAstroRouteMeta(file: string, raw: string): RouteMetaInput {
-  const frontmatterBlock = extractAstroFrontmatterBlock(raw);
-  if (!frontmatterBlock) return {};
-
-  const sourceFile = ts.createSourceFile(
-    file,
-    frontmatterBlock,
-    ts.ScriptTarget.Latest,
-  );
-
-  for (const statement of sourceFile.statements) {
-    if (!ts.isVariableStatement(statement)) continue;
-
-    for (const declaration of statement.declarationList.declarations) {
-      if (
-        !ts.isIdentifier(declaration.name) ||
-        declaration.name.text !== "frontmatter"
-      ) {
-        continue;
-      }
-
-      if (
-        !declaration.initializer ||
-        !ts.isObjectLiteralExpression(declaration.initializer)
-      ) {
-        throw new Error(
-          `${file}: \`frontmatter\` must be declared as a plain object literal.`,
-        );
-      }
-
-      return readAstroRouteMetaObject(declaration.initializer);
-    }
-  }
-
-  return {};
-}
-
-function extractAstroFrontmatterBlock(raw: string): string | null {
-  const match = /^---\r?\n([\s\S]*?)\r?\n---/.exec(raw);
-  return match?.[1] ?? null;
-}
-
-function readAstroRouteMetaObject(
-  objectLiteral: ts.ObjectLiteralExpression,
-): RouteMetaInput {
-  const meta: RouteMetaInput = {};
-
-  for (const property of objectLiteral.properties) {
-    if (!ts.isPropertyAssignment(property)) continue;
-
-    const key =
-      ts.isIdentifier(property.name) || ts.isStringLiteral(property.name)
-        ? property.name.text
-        : null;
-    if (!key || !isRouteMetaKey(key)) continue;
-
-    const value = readLiteralValue(property.initializer);
-    if (value === null) continue;
-
-    meta[key] = value;
-  }
-
-  return meta;
-}
-
-function isRouteMetaKey(key: string): key is RouteMetaKey {
-  return ROUTE_META_KEYS.includes(key as RouteMetaKey);
-}
-
-function readLiteralValue(value: ts.Expression): RouteMetaValue | null {
-  if (ts.isStringLiteralLike(value)) return value.text;
-
-  if (value.kind === ts.SyntaxKind.TrueKeyword) return true;
-  if (value.kind === ts.SyntaxKind.FalseKeyword) return false;
-
-  return null;
-}
-
-// Convert page/file identifiers into stable camelCase object keys for the route registry.
 export function toRouteKey(input: string): string {
   if (input === "/") return "home";
-  const routeKey = input
-    // Keep nested route boundaries visible in the generated key.
-    .split("/")
-    .filter(Boolean)
-    .map((segment) =>
-      segment
-        .replaceAll(/[^a-zA-Z0-9-_]/g, "")
-        // Normalize each path segment independently before joining nested segments with `_`.
-        .split(/[-_]/)
-        .map((part, i) =>
-          i === 0
-            ? part[0].toLowerCase() + part.slice(1)
-            : part[0].toUpperCase() + part.slice(1),
-        )
-        .join(""),
-    )
-    .join("_");
-  // Quote anything that is not a valid JS identifier so generated code stays syntactically valid.
-  return /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(routeKey)
-    ? routeKey
-    : `"${routeKey}"`;
+
+  return (
+    input
+      // Keep nested route boundaries visible in the generated key.
+      .split("/")
+      .filter(Boolean)
+      .map((segment) =>
+        segment
+          .replaceAll(/[^a-zA-Z0-9-_]/g, "")
+          // Normalize each path segment independently before joining nested segments with `_`.
+          .split(/[-_]/)
+          .filter(Boolean)
+          .map((part, i) =>
+            i === 0
+              ? part[0].toLowerCase() + part.slice(1)
+              : part[0].toUpperCase() + part.slice(1),
+          )
+          .join(""),
+      )
+      .join("_")
+  );
 }
 
-function escapeStringLiteral(input: string): string {
-  // Escape characters (backslashes and double quotes) that would break the generated double-quoted string literal.
-  return input.replaceAll("\\", "\\\\").replaceAll('"', '\\"');
+export function getParentRouteKey(routePath: string): string | null {
+  const segments = routePath.split("/").filter(Boolean);
+  return segments.length <= 1
+    ? null
+    : toRouteKey(segments.slice(0, -1).join("/"));
 }
 
-function buildOutput(routes: Record<string, Route>) {
-  const entries = Object.entries(routes)
-    .sort(([keyA], [keyB]) => keyA.localeCompare(keyB))
+export function serializeRoutesModule(routes: Route[], baseUrl: string) {
+  const entries = routes
+    .toSorted(({ key: keyA }, { key: keyB }) => keyA.localeCompare(keyB))
     .map(
-      ([key, { path, title, sitemap, showInHeader, isStagingOnly }]) => `
-  ${key}: {
-    path: "${escapeStringLiteral(path)}",
-    title: "${escapeStringLiteral(title)}",
+      ({
+        key,
+        path,
+        title,
+        parentKey,
+        childKeys,
+        sitemap,
+        isStagingOnly,
+        navOrder,
+        navLabel,
+      }) => `
+  ${formatRouteKeyForObjectLiteral(key)}: {
+    path: ${escapeStringLiteral(buildRoutePath(path, baseUrl))},
+    title: ${escapeStringLiteral(title)},
+    parentKey: ${escapeStringLiteral(parentKey)},
+    childKeys: [${childKeys
+      .map((childKey) => escapeStringLiteral(childKey))
+      .join(", ")}],
     sitemap: ${sitemap},
-    showInHeader: ${showInHeader},
     isStagingOnly: ${isStagingOnly},
+    navOrder: ${navOrder ?? "null"},
+    navLabel: ${escapeStringLiteral(navLabel)},
   }`,
     )
     .join(",");
@@ -281,4 +195,18 @@ function buildOutput(routes: Record<string, Route>) {
 export const routes = {${entries},
 } as const;
 `;
+}
+
+// Quote anything that is not a valid JS identifier so generated code stays syntactically valid.
+export function formatRouteKeyForObjectLiteral(routeKey: string): string {
+  return /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(routeKey)
+    ? routeKey
+    : `"${routeKey}"`;
+}
+
+// Serialize nullable values as JS string literals or the literal null.
+export function escapeStringLiteral(input: string | null): string {
+  return input === null
+    ? "null"
+    : `"${input.replaceAll("\\", "\\\\").replaceAll('"', '\\"')}"`;
 }

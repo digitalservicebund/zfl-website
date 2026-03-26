@@ -40,7 +40,6 @@ Every page that should appear in the route registry needs frontmatter with:
 export const frontmatter = {
   title: "Page Title",
   sitemap: true,
-  showInHeader: true, // include in nav
   isStagingOnly: false,
 };
 ```
