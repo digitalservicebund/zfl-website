@@ -9,10 +9,10 @@ export function getRouteByKey(routeKey: RouteKey) {
   return routes[routeKey];
 }
 
-export function getRouteByPath(pathname: string) {
+export function getRouteByPath(path: string) {
   return (
     Object.values(routes).find(
-      (route) => route.path === removeTrailingSlash(pathname),
+      (route) => route.path === removeTrailingSlash(path),
     ) ?? null
   );
 }
