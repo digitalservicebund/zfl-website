@@ -97,23 +97,17 @@ export default function SteckbriefForm() {
       const hash = window.location.hash.slice(1); // strip leading '#'
       if (hash) {
         try {
-          const { step, data } = await decompressState<{
-            step: number;
-            data: Partial<Inputs>;
-          }>(hash);
+          const data = await decompressState<Partial<Inputs>>(hash);
           formMethods.reset(data);
-          const validStep = step >= 1 && step <= pageTitles.length ? step : 1;
-          setPage(validStep);
-          // Replace URL: keep ?step but strip the hash so reloads stay clean
+          // Strip hash from URL; step is handled by handlePopState via ?step=
           const normalizedPath = removeTrailingSlash(window.location.pathname);
           history.replaceState(
-            { page: validStep },
+            {},
             "",
-            `${normalizedPath}?step=${validStep}`,
+            `${normalizedPath}${window.location.search}`,
           );
-          return; // skip popstate-based init
         } catch {
-          // Malformed hash — fall through to normal ?step= handling
+          // Malformed hash — ignore, proceed to normal ?step= handling
         }
       }
       handlePopState();

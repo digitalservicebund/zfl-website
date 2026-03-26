@@ -64,7 +64,7 @@ export default function SteckbriefButtonBar({
     setShareState("copying");
     try {
       const state = getValues();
-      const hash = await compressState({ step: page, data: state });
+      const hash = await compressState(state);
 
       const url = new URL(window.location.href);
       url.search = `?step=${page}`;
