@@ -33,7 +33,14 @@ fileignoreconfig:
   - filename: doc/routes.md
     checksum: ecbc85072882abbf526589be79d9d5680001e618e42f16ec9c2fb323458fe1a6
   - filename: integrations/routeGenerator.ts
-    checksum: 49f57b7242e8dff0e6030ac80faff610f4e45eda11675ba3b490c590c6d9cf0f
+    allowed_patterns:
+      - key
+  - filename: integrations/routeGenerator.test.ts
+    allowed_patterns:
+      - key
+  - filename: integrations/routeGeneration/extractRouteMeta.ts
+    allowed_patterns:
+      - key
   - filename: nginx/nginx.template.conf
     allowed_patterns:
       - proxy_pass
@@ -68,7 +75,10 @@ allowed_patterns:
   - posthogKey
   - secret-scan
   - routeKey
+  - RouteKey
   - toRouteKey
   - "route key"
   - RouteMetaKey
+  - childKey
+  - parentKey
 version: "1.0"

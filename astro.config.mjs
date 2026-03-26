@@ -30,7 +30,7 @@ export default defineConfig({
     sitemap(),
     mdx(),
     generateRoutes({
-      pagesDirs: ["src/pages"],
+      pagesDir: "src/pages",
       output: "src/config/routes.ts",
     }),
   ],
