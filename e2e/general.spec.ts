@@ -41,6 +41,12 @@ test("staging-only pages are not accessible in production", async ({
   await expect.poll(() => page.title()).toBe(TITLE_404);
 });
 
+test("staging-only pages are accessible in staging", async ({ page }) => {
+  test.skip(!isStaging, "this test only targets staging");
+  await page.goto(routes.staging.path);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Staging");
+});
+
 test("the 404 page is served with the correct status code", async ({
   page,
 }) => {
