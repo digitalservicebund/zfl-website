@@ -10,11 +10,6 @@ import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import { twMerge } from "tailwind-merge";
 
-interface Props {
-  fullWidth?: boolean;
-}
-const { fullWidth } = Astro.props;
-
 const { pathname } = Astro.url;
 const currentPath = removeTrailingSlash(pathname);
 
