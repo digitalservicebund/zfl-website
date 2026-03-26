@@ -17,7 +17,7 @@ export type RouteMeta = {
   navLabel: string | null;
 };
 
-type Route = RouteMeta & {
+export type Route = RouteMeta & {
   path: string;
   key: string;
   parentKey: string | null;
@@ -176,6 +176,7 @@ export function serializeRoutesModule(routes: Route[], baseUrl: string) {
         navLabel,
       }) => `
   ${formatRouteKeyForObjectLiteral(key)}: {
+    key: ${escapeStringLiteral(key)},
     path: ${escapeStringLiteral(buildRoutePath(path, baseUrl))},
     title: ${escapeStringLiteral(title)},
     parentKey: ${escapeStringLiteral(parentKey)},

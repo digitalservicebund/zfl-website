@@ -2,6 +2,7 @@
 
 export const routes = {
   barrierefreiheit: {
+    key: "barrierefreiheit",
     path: "/barrierefreiheit",
     title: "Barrierefreiheit",
     parentKey: null,
@@ -12,6 +13,7 @@ export const routes = {
     navLabel: null,
   },
   begleitungen: {
+    key: "begleitungen",
     path: "/begleitungen",
     title: "Regelungsbegleitung",
     parentKey: null,
@@ -22,6 +24,7 @@ export const routes = {
     navLabel: null,
   },
   datenschutz: {
+    key: "datenschutz",
     path: "/datenschutz",
     title: "Datenschutzerklärung",
     parentKey: null,
@@ -32,6 +35,7 @@ export const routes = {
     navLabel: null,
   },
   home: {
+    key: "home",
     path: "/",
     title: "Zentrum für Legistik",
     parentKey: null,
@@ -42,6 +46,7 @@ export const routes = {
     navLabel: null,
   },
   impressum: {
+    key: "impressum",
     path: "/impressum",
     title: "Impressum",
     parentKey: null,
@@ -52,6 +57,7 @@ export const routes = {
     navLabel: null,
   },
   schulungen: {
+    key: "schulungen",
     path: "/schulungen",
     title: "Schulungen",
     parentKey: null,
@@ -62,6 +68,7 @@ export const routes = {
     navLabel: null,
   },
   sitemap: {
+    key: "sitemap",
     path: "/sitemap",
     title: "Sitemap",
     parentKey: null,
@@ -72,13 +79,18 @@ export const routes = {
     navLabel: null,
   },
   staging: {
+    key: "staging",
     path: "/staging",
     title: "Staging-Umgebung",
+    parentKey: null,
+    childKeys: [],
     sitemap: false,
-    showInHeader: false,
     isStagingOnly: true,
+    navOrder: null,
+    navLabel: null,
   },
   ueber: {
+    key: "ueber",
     path: "/ueber",
     title: "Über das ZfL",
     parentKey: null,
@@ -89,6 +101,7 @@ export const routes = {
     navLabel: null,
   },
   ueber_dasIstNeu: {
+    key: "ueber_dasIstNeu",
     path: "/ueber/das-ist-neu",
     title: "Das ist neu",
     parentKey: "ueber",
@@ -99,6 +112,7 @@ export const routes = {
     navLabel: null,
   },
   ueber_zahlenUndFakten: {
+    key: "ueber_zahlenUndFakten",
     path: "/ueber/zahlen-und-fakten",
     title: "Zahlen und Fakten",
     parentKey: "ueber",
@@ -109,6 +123,7 @@ export const routes = {
     navLabel: null,
   },
   werkzeuge: {
+    key: "werkzeuge",
     path: "/werkzeuge",
     title: "Werkzeuge",
     parentKey: null,
