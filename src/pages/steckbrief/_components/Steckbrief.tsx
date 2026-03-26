@@ -136,27 +136,27 @@ export default function SteckbriefForm() {
           })}
         </nav>
       </div>
-      <div className="flex min-h-[calc(100dvh-var(--header-height))] w-full flex-col">
-        <div class="flex flex-1 flex-col gap-32 lg:flex-row lg:items-stretch">
-          <div class="min-w-0 flex-1">
-            <div
-              class="py-lg mx-auto max-w-(--max-width) px-16" // 1280px for summary
-              style={{
-                "--max-width": `${currentStep?.props.isWide ? 1280 : 736}px`,
-              }}
-            >
-              <div class="kern-progress mb-lg">
-                <label class="kern-label" for="progress1">
-                  Schritt {page} von {pageTitles.length}
-                </label>
-                <progress
-                  id="progress1"
-                  value={page}
-                  max={pageTitles.length}
-                ></progress>
-              </div>
-              <SidebarContext.Provider value={setHintSidebarContent}>
-                <FormProvider {...formMethods}>
+      <FormProvider {...formMethods}>
+        <div className="flex min-h-[calc(100dvh-var(--header-height))] w-full flex-col">
+          <div class="flex flex-1 flex-col gap-32 lg:flex-row lg:items-stretch">
+            <div class="min-w-0 flex-1">
+              <div
+                class="py-lg mx-auto max-w-(--max-width) px-16" // 1280px for summary
+                style={{
+                  "--max-width": `${currentStep?.props.isWide ? 1280 : 736}px`,
+                }}
+              >
+                <div class="kern-progress mb-lg">
+                  <label class="kern-label" for="progress1">
+                    Schritt {page} von {pageTitles.length}
+                  </label>
+                  <progress
+                    id="progress1"
+                    value={page}
+                    max={pageTitles.length}
+                  ></progress>
+                </div>
+                <SidebarContext.Provider value={setHintSidebarContent}>
                   <form
                     class="flex flex-col gap-32"
                     novalidate
@@ -164,35 +164,35 @@ export default function SteckbriefForm() {
                   >
                     {currentStep}
                   </form>
-                </FormProvider>
-              </SidebarContext.Provider>
+                </SidebarContext.Provider>
+              </div>
             </div>
-          </div>
 
-          <div
-            class={`shrink-0 overflow-hidden transition-all duration-300 ease-in-out lg:sticky lg:top-0 lg:h-[calc(100dvh-var(--header-height))] ${
-              hintSidebarContent != null
-                ? "max-w-full opacity-100 lg:max-w-[360px]"
-                : "max-w-0 opacity-0"
-            }`}
-          >
-            <div class="h-full w-full lg:w-[360px]">
-              <HintSidebar
-                class="h-full overflow-y-auto"
-                onClose={() => setHintSidebarContent(null)}
-              >
-                {hintSidebarContent}
-              </HintSidebar>
+            <div
+              class={`shrink-0 overflow-hidden transition-all duration-300 ease-in-out lg:sticky lg:top-0 lg:h-[calc(100dvh-var(--header-height))] ${
+                hintSidebarContent != null
+                  ? "max-w-full opacity-100 lg:max-w-[360px]"
+                  : "max-w-0 opacity-0"
+              }`}
+            >
+              <div class="h-full w-full lg:w-[360px]">
+                <HintSidebar
+                  class="h-full overflow-y-auto"
+                  onClose={() => setHintSidebarContent(null)}
+                >
+                  {hintSidebarContent}
+                </HintSidebar>
+              </div>
             </div>
           </div>
+          <SteckbriefButtonBar
+            page={page}
+            isLastPage={isLastPage}
+            onPrev={() => goToPage(page - 1)}
+            onNext={() => goToPage(page + 1)}
+          />
         </div>
-        <SteckbriefButtonBar
-          page={page}
-          isLastPage={isLastPage}
-          onPrev={() => goToPage(page - 1)}
-          onNext={() => goToPage(page + 1)}
-        />
-      </div>
+      </FormProvider>
     </div>
   );
 }

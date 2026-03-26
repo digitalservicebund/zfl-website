@@ -1,3 +1,8 @@
+import { useState } from "preact/hooks";
+import { useFormContext } from "react-hook-form";
+import { generateSteckbriefDocx } from "../_formSteps/generateSteckbriefDocx";
+import type { Inputs } from "../_formSteps/types";
+
 const defaultText = (
   <>
     <svg
@@ -50,6 +55,18 @@ export default function SteckbriefButtonBar({
   onPrev,
   onNext,
 }: Props) {
+  const { getValues } = useFormContext<Inputs>();
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  async function handleDownload() {
+    setIsGenerating(true);
+    try {
+      await generateSteckbriefDocx(getValues());
+    } finally {
+      setIsGenerating(false);
+    }
+  }
+
   return (
     <div class="sticky bottom-0 z-10 border-t border-[#A5AAC3] bg-white py-16">
       <div class="flex w-full items-center justify-between gap-16 px-64">
@@ -57,6 +74,20 @@ export default function SteckbriefButtonBar({
           {isLastPage ? lastPageText : defaultText}
         </div>
         <div class="flex gap-16">
+          <button
+            type="button"
+            class="kern-btn kern-btn--tertiary"
+            onClick={handleDownload}
+            disabled={isGenerating}
+          >
+            <span
+              class="kern-icon kern-icon--download kern-icon--default"
+              aria-hidden="true"
+            ></span>
+            <span class="kern-label">
+              {isGenerating ? "Wird erstellt…" : "Zwischenstand herunterladen"}
+            </span>
+          </button>
           {page > 1 && (
             <button
               type="button"
@@ -72,7 +103,7 @@ export default function SteckbriefButtonBar({
               form="steckbrief-form"
               class="kern-btn kern-btn--primary"
             >
-              <span class="kern-label">Weiter zur Phase II</span>
+              <span class="kern-label">Weiter</span>
             </button>
           ) : (
             <button
