@@ -1,22 +1,26 @@
 ---
 import Step01 from "../_formSteps/Step01.astro";
 import Step02 from "../_formSteps/Step02.astro";
+import NavigationBar from "./NavigationBar.astro";
 
 const pageTitles = ["1. Allgemeine Angaben", "2. Kontext & Genese"];
 ---
 
-<div class="flex">
+<div class="flex" x-data="{currentPage: 1}">
   <div class="bg-lavender-base relative h-[stretch] w-296 shrink-0 self-start">
     <nav
       aria-label="Formular-Navigation"
       class="sticky top-0 flex w-full flex-col gap-8 px-16 py-24"
     >
       {
-        pageTitles.map((title) => {
+        pageTitles.map((title, index) => {
+          const pageNumber = index + 1;
           return (
             <button
               type="button"
               class="flex w-full items-center gap-2 rounded p-8 text-left transition-colors"
+              x-on:click={`currentPage = ${pageNumber}`}
+              x-bind:class={`currentPage === ${pageNumber} ? 'bg-cosmic-blue-base font-semibold text-white' : 'bg-lavender-base'`}
             >
               {title}
             </button>
@@ -26,13 +30,27 @@ const pageTitles = ["1. Allgemeine Angaben", "2. Kontext & Genese"];
     </nav>
   </div>
   <div
-    class="py-lg mx-auto flex min-h-[calc(100dvh-var(--header-height))] w-full max-w-736 flex-col px-16"
+    class="relative flex min-h-[calc(100dvh-var(--header-height))] w-full flex-col"
   >
-    <form class="w-full">
-      <Step01 />
-      <Step02 />
-    </form>
+    <div class="py-lg mx-auto w-full max-w-736 flex-1 px-16">
+      <div class="kern-progress mb-lg">
+        <label class="kern-label" for="progress1">
+          Schritt <span x-text="currentPage"></span> von {pageTitles.length}
+        </label>
+        <progress id="progress1" :value="currentPage" :max={pageTitles.length}
+        ></progress>
+      </div>
+      <form class="w-full">
+        <div x-show="currentPage === 1">
+          <Step01 />
+        </div>
+        <div x-show="currentPage === 2">
+          <Step02 />
+        </div>
+      </form>
+    </div>
+    <div class="sticky bottom-0 w-full">
+      <NavigationBar />
+    </div>
   </div>
 </div>
-
-<script></script>
