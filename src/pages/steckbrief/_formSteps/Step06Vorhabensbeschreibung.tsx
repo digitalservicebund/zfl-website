@@ -1,5 +1,5 @@
 import SidebarTriggerButton from "@/pages/steckbrief/_components/SidebarTriggerButton";
-import { useFormContext } from "react-hook-form";
+import Textarea from "@/pages/steckbrief/_components/Textarea";
 import type { Inputs } from "./types";
 
 const vorhabenHint = (
@@ -57,7 +57,6 @@ const massnahmenHint = (
 );
 
 export default function Step06Vorhabensbeschreibung() {
-  const { register } = useFormContext<Inputs>();
   return (
     <>
       <div class="flex flex-col gap-16">
@@ -71,17 +70,10 @@ export default function Step06Vorhabensbeschreibung() {
         </p>
       </div>
 
-      <div class="kern-form-input">
-        <label class="kern-label" for="vorhabensbeschreibung">
-          Vorhabensbeschreibung
-        </label>
-        <textarea
-          class="kern-form-input__input"
-          id="vorhabensbeschreibung"
-          aria-required="true"
-          {...register("vorhabensbeschreibung")}
-        />
-      </div>
+      <Textarea<Inputs>
+        id="vorhabensbeschreibung"
+        label="Vorhabensbeschreibung"
+      />
 
       <div class="flex flex-col gap-16">
         <h2 class="mt-0">
@@ -94,22 +86,11 @@ export default function Step06Vorhabensbeschreibung() {
         </p>
       </div>
 
-      <div class="kern-form-input">
-        <label class="kern-label" for="massnahmen">
-          Ihre geplanten Maßnahmen
-        </label>
-        <div class="kern-hint" id="massnahmen-hint">
-          Erstellung von Gutachten, internationaler Vergleich/Best Practices
-          analysieren, Formate der Beteiligung relevanter Akteure
-        </div>
-        <textarea
-          class="kern-form-input__input"
-          id="massnahmen"
-          aria-required="true"
-          aria-describedby="massnahmen-hint"
-          {...register("massnahmen")}
-        />
-      </div>
+      <Textarea<Inputs>
+        id="massnahmen"
+        label="Ihre geplanten Maßnahmen"
+        hint="Erstellung von Gutachten, internationaler Vergleich/Best Practices analysieren, Formate der Beteiligung relevanter Akteure"
+      />
     </>
   );
 }

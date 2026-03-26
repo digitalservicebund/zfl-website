@@ -1,5 +1,5 @@
 import SidebarTriggerButton from "@/pages/steckbrief/_components/SidebarTriggerButton";
-import { useFormContext } from "react-hook-form";
+import Textarea from "@/pages/steckbrief/_components/Textarea";
 import type { Inputs } from "./types";
 
 const sidebarContent = (
@@ -28,7 +28,6 @@ const sidebarContent = (
 );
 
 export default function Step02KontextGenese() {
-  const { register } = useFormContext<Inputs>();
   return (
     <>
       <div class="flex flex-col gap-16">
@@ -42,19 +41,7 @@ export default function Step02KontextGenese() {
         </p>
       </div>
 
-      <div class="kern-form-input">
-        <div class="flex items-center gap-8">
-          <label class="kern-label" for="kontext">
-            Kontext Ihres Vorhabens
-          </label>
-        </div>
-        <textarea
-          class="kern-form-input__input"
-          id="kontext"
-          aria-required="true"
-          {...register("kontext")}
-        />
-      </div>
+      <Textarea<Inputs> id="kontext" label="Kontext Ihres Vorhabens" />
     </>
   );
 }

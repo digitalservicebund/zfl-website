@@ -1,5 +1,5 @@
 import SidebarTriggerButton from "@/pages/steckbrief/_components/SidebarTriggerButton";
-import { useFormContext } from "react-hook-form";
+import Textarea from "@/pages/steckbrief/_components/Textarea";
 import type { Inputs } from "./types";
 
 const sidebarContent = (
@@ -27,7 +27,6 @@ const sidebarContent = (
 );
 
 export default function Step05VorlaeufigeZielsetzung() {
-  const { register } = useFormContext<Inputs>();
   return (
     <>
       <div class="flex flex-col gap-16">
@@ -41,17 +40,7 @@ export default function Step05VorlaeufigeZielsetzung() {
         </p>
       </div>
 
-      <div class="kern-form-input">
-        <label class="kern-label" for="zielsetzung">
-          Zielsetzung des Vorhabens
-        </label>
-        <textarea
-          class="kern-form-input__input"
-          id="zielsetzung"
-          aria-required="true"
-          {...register("zielsetzung")}
-        />
-      </div>
+      <Textarea<Inputs> id="zielsetzung" label="Zielsetzung des Vorhabens" />
     </>
   );
 }

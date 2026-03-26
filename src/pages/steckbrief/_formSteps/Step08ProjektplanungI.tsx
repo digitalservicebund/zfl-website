@@ -1,5 +1,5 @@
 import SidebarTriggerButton from "@/pages/steckbrief/_components/SidebarTriggerButton";
-import { useFormContext } from "react-hook-form";
+import Textarea from "@/pages/steckbrief/_components/Textarea";
 import type { Inputs } from "./types";
 
 const risikoHint = (
@@ -43,7 +43,6 @@ const komplexitaetHint = (
 );
 
 export default function Step08ProjektplanungI() {
-  const { register } = useFormContext<Inputs>();
   return (
     <>
       <div class="flex flex-col gap-16">
@@ -57,17 +56,7 @@ export default function Step08ProjektplanungI() {
         </p>
       </div>
 
-      <div class="kern-form-input">
-        <label class="kern-label" for="risikoeinschaetzung">
-          Risikobetrachtung
-        </label>
-        <textarea
-          class="kern-form-input__input"
-          id="risikoeinschaetzung"
-          aria-required="true"
-          {...register("risikoeinschaetzung")}
-        />
-      </div>
+      <Textarea<Inputs> id="risikoeinschaetzung" label="Risikobetrachtung" />
 
       <div class="flex flex-col gap-16">
         <h2 class="mt-0">
@@ -81,17 +70,10 @@ export default function Step08ProjektplanungI() {
         </p>
       </div>
 
-      <div class="kern-form-input">
-        <label class="kern-label" for="komplexitaetsgrad">
-          Komplexität des Vorhabens
-        </label>
-        <textarea
-          class="kern-form-input__input"
-          id="komplexitaetsgrad"
-          aria-required="true"
-          {...register("komplexitaetsgrad")}
-        />
-      </div>
+      <Textarea<Inputs>
+        id="komplexitaetsgrad"
+        label="Komplexität des Vorhabens"
+      />
     </>
   );
 }

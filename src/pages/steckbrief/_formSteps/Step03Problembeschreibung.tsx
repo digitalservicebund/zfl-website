@@ -1,5 +1,5 @@
 import SidebarTriggerButton from "@/pages/steckbrief/_components/SidebarTriggerButton";
-import { useFormContext } from "react-hook-form";
+import Textarea from "@/pages/steckbrief/_components/Textarea";
 import type { Inputs } from "./types";
 
 const sidebarContent = (
@@ -28,7 +28,6 @@ const sidebarContent = (
 );
 
 export default function Step03Problembeschreibung() {
-  const { register } = useFormContext<Inputs>();
   return (
     <>
       <div class="flex flex-col gap-16">
@@ -43,17 +42,10 @@ export default function Step03Problembeschreibung() {
         </p>
       </div>
 
-      <div class="kern-form-input">
-        <label class="kern-label" for="problembeschreibung">
-          Beschreibung des Problems
-        </label>
-        <textarea
-          class="kern-form-input__input"
-          id="problembeschreibung"
-          aria-required="true"
-          {...register("problembeschreibung")}
-        />
-      </div>
+      <Textarea<Inputs>
+        id="problembeschreibung"
+        label="Beschreibung des Problems"
+      />
     </>
   );
 }

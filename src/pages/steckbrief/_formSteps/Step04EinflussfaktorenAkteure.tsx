@@ -1,5 +1,5 @@
 import SidebarTriggerButton from "@/pages/steckbrief/_components/SidebarTriggerButton";
-import { useFormContext } from "react-hook-form";
+import Textarea from "@/pages/steckbrief/_components/Textarea";
 import type { Inputs } from "./types";
 
 const einflussfaktorenHint = (
@@ -64,7 +64,6 @@ const akteureHint = (
 );
 
 export default function Step04EinflussfaktorenAkteure() {
-  const { register } = useFormContext<Inputs>();
   return (
     <>
       <div class="flex flex-col gap-16">
@@ -78,22 +77,11 @@ export default function Step04EinflussfaktorenAkteure() {
         </p>
       </div>
 
-      <div class="kern-form-input">
-        <label class="kern-label" for="einflussfaktoren">
-          Einflussfaktoren Ihres Vorhabens
-        </label>
-        <div class="kern-hint" id="einflussfaktoren-hint">
-          Nennen Sie relevante externe Faktoren, rechtliche Rahmenbedingungen
-          oder politische Abhängigkeiten.
-        </div>
-        <textarea
-          class="kern-form-input__input"
-          id="einflussfaktoren"
-          aria-required="true"
-          aria-describedby="einflussfaktoren-hint"
-          {...register("einflussfaktoren")}
-        />
-      </div>
+      <Textarea<Inputs>
+        id="einflussfaktoren"
+        label="Einflussfaktoren Ihres Vorhabens"
+        hint="Nennen Sie relevante externe Faktoren, rechtliche Rahmenbedingungen oder politische Abhängigkeiten."
+      />
 
       <div class="flex flex-col gap-16">
         <h2 class="mt-0">
@@ -107,17 +95,10 @@ export default function Step04EinflussfaktorenAkteure() {
         </p>
       </div>
 
-      <div class="kern-form-input">
-        <label class="kern-label" for="relevanteAkteure">
-          Relevante Akteure Ihres Vorhabens
-        </label>
-        <textarea
-          class="kern-form-input__input"
-          id="relevanteAkteure"
-          aria-required="true"
-          {...register("relevanteAkteure")}
-        />
-      </div>
+      <Textarea<Inputs>
+        id="relevanteAkteure"
+        label="Relevante Akteure Ihres Vorhabens"
+      />
     </>
   );
 }

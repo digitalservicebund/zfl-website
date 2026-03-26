@@ -1,5 +1,5 @@
 import SidebarTriggerButton from "@/pages/steckbrief/_components/SidebarTriggerButton";
-import { useFormContext } from "react-hook-form";
+import Textarea from "@/pages/steckbrief/_components/Textarea";
 import type { Inputs } from "./types";
 
 const zeitHint = (
@@ -44,7 +44,6 @@ const ressourcenHint = (
 );
 
 export default function Step09ProjektplanungII() {
-  const { register } = useFormContext<Inputs>();
   return (
     <>
       <div class="flex flex-col gap-16">
@@ -55,17 +54,7 @@ export default function Step09ProjektplanungII() {
         <p>Beschreiben Sie hier den zeitlichen Ablauf Ihres Vorhabens.</p>
       </div>
 
-      <div class="kern-form-input">
-        <label class="kern-label" for="zeithorizont">
-          Zeithorizont des Vorhabens
-        </label>
-        <textarea
-          class="kern-form-input__input"
-          id="zeithorizont"
-          aria-required="true"
-          {...register("zeithorizont")}
-        />
-      </div>
+      <Textarea<Inputs> id="zeithorizont" label="Zeithorizont des Vorhabens" />
 
       <div class="flex flex-col gap-16">
         <h2 class="mt-0">
@@ -82,17 +71,10 @@ export default function Step09ProjektplanungII() {
         </p>
       </div>
 
-      <div class="kern-form-input">
-        <label class="kern-label" for="ressourcenschaetzung">
-          Ressourcenbedarf und -verfügbarkeit
-        </label>
-        <textarea
-          class="kern-form-input__input"
-          id="ressourcenschaetzung"
-          aria-required="true"
-          {...register("ressourcenschaetzung")}
-        />
-      </div>
+      <Textarea<Inputs>
+        id="ressourcenschaetzung"
+        label="Ressourcenbedarf und -verfügbarkeit"
+      />
     </>
   );
 }
