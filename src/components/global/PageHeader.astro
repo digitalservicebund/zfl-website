@@ -2,9 +2,9 @@
 import Kopfzeile from "@/components/global/Kopfzeile.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import { routes } from "@/config/routes";
-import { isProduction } from "@/config/stage";
 import bundLogoWhite from "@/images/logo/bund-logo-white.svg";
 import bundLogo from "@/images/logo/bund-logo.png";
+import { getHeaderNavigation } from "@/utils/navigation/header";
 import { removeTrailingSlash } from "@/utils/path";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
@@ -13,21 +13,16 @@ import { twMerge } from "tailwind-merge";
 const { pathname } = Astro.url;
 const currentPath = removeTrailingSlash(pathname);
 
-const headerNavigation = [
-  routes.werkzeuge,
-  routes.begleitungen,
-  routes.schulungen,
-  routes.ueber,
-].filter((item) => !isProduction || !item.isStagingOnly);
+const headerNavigation = getHeaderNavigation();
 
 const kontaktPopoverId = "page-header-contact-popover";
 const mobileMenuId = "page-header-mobile-menu";
 
-function navItemStyle(variant: "main" | "sub" = "main", path?: string) {
+function navItemStyle(variant: "main" | "sub" = "main", active = false) {
   return twMerge(
     "link-unstyled border-transparent flex items-center hover:bg-lavender-base",
     variant === "main" ? "h-full border-b-4 px-16" : "border-l-4 p-16",
-    currentPath === path && "border-cosmic-blue-base bg-lavender-base",
+    active && "border-cosmic-blue-base bg-lavender-base",
   );
 }
 ---
@@ -54,8 +49,12 @@ function navItemStyle(variant: "main" | "sub" = "main", path?: string) {
     <nav class="hidden min-[900px]:flex" data-testid="desktop-nav">
       {
         headerNavigation.map((item) => (
-          <a href={item.path} class={navItemStyle("main", item.path)}>
-            {item.title}
+          <a
+            href={item.path}
+            class={navItemStyle("main", currentPath === item.path)}
+            aria-current={currentPath === item.path ? "page" : undefined}
+          >
+            {item.label}
           </a>
         ))
       }

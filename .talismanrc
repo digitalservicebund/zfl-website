@@ -85,4 +85,5 @@ allowed_patterns:
   - RouteMetaKey
   - childKey
   - parentKey
+  - getRouteByKey
 version: "1.0"
