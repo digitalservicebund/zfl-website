@@ -10,6 +10,7 @@ import Step10Zusammenfassung from "@/pages/steckbrief/_formSteps/Step10Zusammenf
 import Step11HerunterladeUndAbsenden from "@/pages/steckbrief/_formSteps/Step11HerunterladeUndAbsenden";
 
 import type { Inputs } from "@/pages/steckbrief/_formSteps/types";
+import { decompressState } from "@/pages/steckbrief/_utils/stateHash";
 import { removeTrailingSlash } from "@/utils/path";
 import type { ComponentChildren } from "preact";
 import { useEffect, useState } from "preact/hooks";
@@ -91,8 +92,35 @@ export default function SteckbriefForm() {
         modifyQueryParameter(1);
       }
     };
+
+    async function initFromHash() {
+      const hash = window.location.hash.slice(1); // strip leading '#'
+      if (hash) {
+        try {
+          const { step, data } = await decompressState<{
+            step: number;
+            data: Partial<Inputs>;
+          }>(hash);
+          formMethods.reset(data);
+          const validStep = step >= 1 && step <= pageTitles.length ? step : 1;
+          setPage(validStep);
+          // Replace URL: keep ?step but strip the hash so reloads stay clean
+          const normalizedPath = removeTrailingSlash(window.location.pathname);
+          history.replaceState(
+            { page: validStep },
+            "",
+            `${normalizedPath}?step=${validStep}`,
+          );
+          return; // skip popstate-based init
+        } catch {
+          // Malformed hash — fall through to normal ?step= handling
+        }
+      }
+      handlePopState();
+    }
+
     window.addEventListener("popstate", handlePopState);
-    handlePopState();
+    initFromHash();
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
 

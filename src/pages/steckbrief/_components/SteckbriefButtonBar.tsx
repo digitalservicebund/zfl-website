@@ -1,7 +1,7 @@
 import { useState } from "preact/hooks";
 import { useFormContext } from "react-hook-form";
-import { generateSteckbriefDocx } from "../_formSteps/generateSteckbriefDocx";
 import type { Inputs } from "../_formSteps/types";
+import { compressState } from "../_utils/stateHash";
 
 const defaultText = (
   <>
@@ -49,6 +49,8 @@ interface Props {
   onNext: () => void;
 }
 
+type ShareState = "idle" | "copying" | "copied" | "error";
+
 export default function SteckbriefButtonBar({
   page,
   isLastPage,
@@ -56,16 +58,35 @@ export default function SteckbriefButtonBar({
   onNext,
 }: Props) {
   const { getValues } = useFormContext<Inputs>();
-  const [isGenerating, setIsGenerating] = useState(false);
+  const [shareState, setShareState] = useState<ShareState>("idle");
 
-  async function handleDownload() {
-    setIsGenerating(true);
+  async function handleShare() {
+    setShareState("copying");
     try {
-      await generateSteckbriefDocx(getValues());
-    } finally {
-      setIsGenerating(false);
+      const state = getValues();
+      const hash = await compressState({ step: page, data: state });
+
+      const url = new URL(window.location.href);
+      url.search = `?step=${page}`;
+      url.hash = hash;
+
+      await navigator.clipboard.writeText(url.toString());
+      setShareState("copied");
+      setTimeout(() => setShareState("idle"), 2500);
+    } catch {
+      setShareState("error");
+      setTimeout(() => setShareState("idle"), 2500);
     }
   }
+
+  const shareLabel =
+    shareState === "copying"
+      ? "Wird erstellt…"
+      : shareState === "copied"
+        ? "Link kopiert!"
+        : shareState === "error"
+          ? "Fehler – bitte erneut versuchen"
+          : "Zwischenstand teilen";
 
   return (
     <div class="sticky bottom-0 z-10 border-t border-[#A5AAC3] bg-white py-16">
@@ -77,16 +98,14 @@ export default function SteckbriefButtonBar({
           <button
             type="button"
             class="kern-btn kern-btn--tertiary"
-            onClick={handleDownload}
-            disabled={isGenerating}
+            onClick={handleShare}
+            disabled={shareState === "copying"}
           >
             <span
-              class="kern-icon kern-icon--download kern-icon--default"
+              class={`kern-icon kern-icon--default ${shareState === "copied" ? "kern-icon--check" : "kern-icon--content-copy"}`}
               aria-hidden="true"
             ></span>
-            <span class="kern-label">
-              {isGenerating ? "Wird erstellt…" : "Zwischenstand herunterladen"}
-            </span>
+            <span class="kern-label">{shareLabel}</span>
           </button>
           {page > 1 && (
             <button
