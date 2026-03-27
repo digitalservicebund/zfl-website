@@ -86,4 +86,5 @@ allowed_patterns:
   - childKey
   - parentKey
   - getRouteByKey
+  - keydown
 version: "1.0"
