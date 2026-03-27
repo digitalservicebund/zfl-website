@@ -23,7 +23,7 @@ fileignoreconfig:
       - "key:"
       - "TRIVY_PASSWORD: \\${{ }}"
   - filename: AGENTS.md
-    checksum: 264c2dece51b97b20cd20838ce27fc9ef1ae1f1b477c631b7bdd8e5b9b993669
+    checksum: 694512cff23f0a042a85c5e9e215703d7b921f3b15a51796d75a7385d1b389e2
   - filename: doc/adr/0004-configuration-management.md
     checksum: 367a262dfe679ea3254c86879a09d98b0e03863b4c514f58ccd3609afb58bdae
   - filename: doc/adr/0007-use-posthog-reverse-proxy.md
@@ -33,7 +33,14 @@ fileignoreconfig:
   - filename: doc/routes.md
     checksum: ecbc85072882abbf526589be79d9d5680001e618e42f16ec9c2fb323458fe1a6
   - filename: integrations/routeGenerator.ts
-    checksum: 49f57b7242e8dff0e6030ac80faff610f4e45eda11675ba3b490c590c6d9cf0f
+    allowed_patterns:
+      - key
+  - filename: integrations/routeGenerator.test.ts
+    allowed_patterns:
+      - key
+  - filename: integrations/routeGeneration/extractRouteMeta.ts
+    allowed_patterns:
+      - key
   - filename: nginx/nginx.template.conf
     allowed_patterns:
       - proxy_pass
@@ -75,7 +82,10 @@ allowed_patterns:
   - posthogKey
   - secret-scan
   - routeKey
+  - RouteKey
   - toRouteKey
   - "route key"
   - RouteMetaKey
+  - childKey
+  - parentKey
 version: "1.0"

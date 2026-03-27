@@ -13,8 +13,9 @@ Every page that should appear in the route registry needs a `frontmatter` export
 export const frontmatter = {
   title: "My Page",
   sitemap: true,
-  showInHeader: true,
   isStagingOnly: false,
+  navOrder: 20,
+  navLabel: "Menu label",
 };
 ---
 ```
@@ -28,12 +29,18 @@ For `.astro` pages, the route generator reads `frontmatter` as a TypeScript obje
 layout: "@/layouts/MdxLayout.astro"
 title: My Page
 sitemap: true
-showInHeader: true
 isStagingOnly: false
+navOrder: 20
+navLabel: Menu label
 ---
 ```
 
 Pages without a `title` are ignored by the generator.
+
+Optional navigation metadata:
+
+- `navOrder`: orders sibling routes within generated section navigation. Lower numbers come first.
+- `navLabel`: overrides the label shown in navigation while keeping the page `title` unchanged.
 
 ## Using routes
 

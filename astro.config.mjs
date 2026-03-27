@@ -33,7 +33,7 @@ export default defineConfig({
     mdx(),
     preact({ compat: true }),
     generateRoutes({
-      pagesDirs: ["src/pages"],
+      pagesDir: "src/pages",
       output: "src/config/routes.ts",
     }),
   ],

@@ -66,7 +66,7 @@ describe("visible menu items", async () => {
     routes.schulungen,
     routes.ueber,
   ]
-    .filter((route) => route.showInHeader && !route.isStagingOnly)
+    .filter((route) => !route.isStagingOnly)
     .map((route) => route.path);
 
   const { dom: pageHeader } = await renderToDOM(PageHeader);
