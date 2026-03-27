@@ -64,18 +64,20 @@ export default function SteckbriefButtonBar({
           {isLastPage ? lastPageText : defaultText}
         </div>
         <div class="flex gap-16">
-          <button
-            type="button"
-            class="kern-btn kern-btn--tertiary"
-            onClick={handleDownload}
-            disabled={isGenerating}
-          >
-            <span
-              class={`kern-icon kern-icon--default ${isGenerating ? "kern-icon--autorenew" : "kern-icon--download"}`}
-              aria-hidden="true"
-            ></span>
-            <span class="kern-label">{downloadLabel}</span>
-          </button>
+          {!isLastPage && (
+            <button
+              type="button"
+              class="kern-btn kern-btn--tertiary"
+              onClick={handleDownload}
+              disabled={isGenerating}
+            >
+              <span
+                class={`kern-icon kern-icon--default ${isGenerating ? "kern-icon--autorenew" : "kern-icon--download"}`}
+                aria-hidden="true"
+              ></span>
+              <span class="kern-label">{downloadLabel}</span>
+            </button>
+          )}
           {page > 1 && (
             <button
               type="button"
