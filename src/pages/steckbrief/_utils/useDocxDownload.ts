@@ -383,7 +383,17 @@ export async function generateSteckbriefDocx(data: Inputs): Promise<void> {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `Steckbrief_${data.arbeitstitel || "export"}.docx`;
+  const sanitizedTitle = (data.arbeitstitel || "export")
+    .replaceAll("ä", "ae")
+    .replaceAll("ö", "oe")
+    .replaceAll("ü", "ue")
+    .replaceAll("Ä", "Ae")
+    .replaceAll("Ö", "Oe")
+    .replaceAll("Ü", "Ue")
+    .replaceAll("ß", "ss")
+    .replaceAll(/\s/g, "_")
+    .replaceAll(/[^a-zA-Z0-9_-]/g, "");
+  a.download = `Steckbrief_${sanitizedTitle}.docx`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
