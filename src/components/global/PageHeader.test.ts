@@ -1,10 +1,8 @@
-import { routes } from "@/config/routes.ts";
-import { renderToDOM } from "@/utils/testUtils.ts";
 import { describe, expect, it, vi } from "vitest";
 import { baseUrl } from "../../../vitest.config.ts";
+import { routes } from "../../config/routes";
+import { renderToDOM } from "../../utils/testUtils";
 import PageHeader from "./PageHeader.astro";
-
-vi.mock("@/config/routes.ts");
 
 vi.mock("@/config/stage", () => ({
   isProduction: true,
@@ -74,9 +72,9 @@ describe("visible menu items", async () => {
     it(`shows them in the ${name}`, () => {
       const nav = pageHeader?.querySelector(selector);
       expect(nav).toBeTruthy();
-      const anchorElements = nav?.querySelectorAll("a");
+      const anchorElements = nav?.querySelectorAll<HTMLAnchorElement>("a");
       expect(anchorElements!.length).toBeGreaterThan(0);
-      const actualLinks = Array.from(anchorElements!.values())
+      const actualLinks = Array.from(anchorElements ?? [])
         .map((link) => link.getAttribute("href"))
         .filter(
           (href) => !href?.startsWith("tel:") && !href?.startsWith("mailto:"),

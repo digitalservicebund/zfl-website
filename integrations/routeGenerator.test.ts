@@ -132,6 +132,10 @@ describe("generateRoutes() Integration Hook", () => {
         path.resolve(OUTPUT_FILE),
         expect.stringContaining('path: "/"'),
       );
+      expect(fs.writeFileSync).toHaveBeenCalledWith(
+        path.resolve(OUTPUT_FILE),
+        expect.stringContaining('key: "home"'),
+      );
     });
   });
 
@@ -271,6 +275,10 @@ describe("generateRoutes() Integration Hook", () => {
       );
       expect(fs.writeFileSync).toHaveBeenCalledWith(
         path.resolve(OUTPUT_FILE),
+        expect.stringContaining('key: "home"'),
+      );
+      expect(fs.writeFileSync).toHaveBeenCalledWith(
+        path.resolve(OUTPUT_FILE),
         expect.stringContaining("navLabel: null"),
       );
     });
@@ -382,6 +390,7 @@ describe("serializeRoutesModule", () => {
     );
 
     expect(output).toContain('"2026News": {');
+    expect(output).toContain('key: "2026News"');
     expect(output).toContain('title: "A \\"quoted\\" title"');
     expect(output).toContain('childKeys: ["childRoute"]');
     expect(output).toContain('navLabel: "Label \\"Q\\""');
