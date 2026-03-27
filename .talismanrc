@@ -60,7 +60,7 @@ fileignoreconfig:
   - filename: src/pages/ueber-uns/Ansatz.jpg
     checksum: cf2bcceb403ca3838e988111c1da328a2af9956966f16359ed55c8ece29dac96
   - filename: src/pages/ueber-uns/Zusammenarbeit.png
-    checksum: 833102602ab7800701350413f143ac30c20e9c016c5a68eb6c0841d1e5f3561d  
+    checksum: 833102602ab7800701350413f143ac30c20e9c016c5a68eb6c0841d1e5f3561d
   - filename: src/components/global/DebugGrid.astro
     allowed_patterns:
       - \@keydown
@@ -71,6 +71,10 @@ fileignoreconfig:
   - filename: src/pages/steckbrief/_formSteps/Step10Zusammenfassung.tsx
     allowed_patterns:
       - key
+  - filename: src/pages/steckbriefjs/_components/Steckbrief.astro
+    allowed_patterns:
+      - key
+      - STORAGE_KEY
 scopeconfig:
   - scope: node
 allowed_patterns:
