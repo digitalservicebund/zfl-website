@@ -10,7 +10,7 @@
 
   --color-cosmic-blue-base: #36349d;
   --color-cosmic-blue-400: #7978be;
-  --color-cosmic-blue-100: #D7D6EB;
+  --color-cosmic-blue-100: #d7d6eb;
 
   --color-lavender-base: #e3e6f2;
   --color-lavender-200: #f6f7fb;
@@ -36,6 +36,11 @@
 }
 
 @layer base {
+  /* Hide elements with x-cloak until Alpine.js initializes */
+  [x-cloak] {
+    display: none !important;
+  }
+
   html {
     /* Keep 16px, don't change! */
     font-size: 16px;

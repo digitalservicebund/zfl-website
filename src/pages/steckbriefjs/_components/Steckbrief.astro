@@ -4,9 +4,20 @@ import Step02 from "../_formSteps/Step02.astro";
 import NavigationBar from "./NavigationBar.astro";
 
 const pageTitles = ["1. Allgemeine Angaben", "2. Kontext & Genese"];
+const STORAGE_KEY = "steckbrief-JS-prototyp-form-state";
 ---
 
-<div class="flex" x-data="{currentPage: 1}">
+<div
+  class="flex"
+  x-data=`{
+    currentPage: parseInt(localStorage.getItem('${STORAGE_KEY}-currentPage')) || 1,
+    form: JSON.parse(localStorage.getItem('${STORAGE_KEY}') || '{}')
+  }`
+  x-init=`() => {
+  $watch('form', (val) => localStorage.setItem('${STORAGE_KEY}', JSON.stringify(val)));
+  $watch('currentPage', (newPage) => localStorage.setItem('${STORAGE_KEY}-currentPage', newPage));
+  }`
+>
   <div class="bg-lavender-base relative h-[stretch] w-296 shrink-0 self-start">
     <nav
       aria-label="Formular-Navigation"
@@ -41,10 +52,10 @@ const pageTitles = ["1. Allgemeine Angaben", "2. Kontext & Genese"];
         ></progress>
       </div>
       <form class="w-full">
-        <div x-show="currentPage === 1">
+        <div x-show="currentPage === 1" x-cloak>
           <Step01 />
         </div>
-        <div x-show="currentPage === 2">
+        <div x-show="currentPage === 2" x-cloak>
           <Step02 />
         </div>
       </form>
