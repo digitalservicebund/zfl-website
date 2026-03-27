@@ -36,7 +36,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 24
+          node-version-file: .node-version
           cache: "pnpm"
 
       - name: Install dependencies
@@ -63,7 +63,7 @@ jobs:
           MAX_TIME=40
           URL="https://digitalservicebund.github.io$PREVIEW_BASE_URL"
           START_TIME=$(date +%s)
-      
+
           while true; do
             RESPONSE_CODE=$(curl -s --head -o /dev/null -w "%{http_code}" "$URL")
             CURRENT_TIME=$(date +%s)
