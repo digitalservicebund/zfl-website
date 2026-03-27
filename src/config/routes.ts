@@ -74,9 +74,12 @@ export const routes = {
   staging: {
     path: "/staging",
     title: "Staging-Umgebung",
+    parentKey: null,
+    childKeys: [],
     sitemap: false,
-    showInHeader: false,
     isStagingOnly: true,
+    navOrder: null,
+    navLabel: null,
   },
   ueber: {
     path: "/ueber",

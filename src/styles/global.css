@@ -32,6 +32,11 @@
   }
 }
 
+:root {
+  --kern-color-action-default: var(--color-cosmic-blue-base);
+  --kern-color-layout-border: var(--color-lavender-base);
+}
+
 @layer base {
   html {
     /* Keep 16px, don't change! */
@@ -91,15 +96,6 @@
   a,
   button {
     @apply cursor-pointer;
-
-    &.kern-btn--primary {
-      background-color: var(--color-cosmic-blue-base);
-      color: var(--color-white);
-
-      &:active {
-        background-color: var(--color-cosmic-blue-400);
-      }
-    }
   }
 
   ul:not(.list-unstyled),
