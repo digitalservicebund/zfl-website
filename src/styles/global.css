@@ -1,6 +1,7 @@
 @import "@kern-ux/native/dist/kern.min.css" layer(base);
 @import "@kern-ux/native/dist/fonts/fira-sans.css";
 @import "./kern-utils.css";
+@import "./kern-tabs.css";
 @import "tailwindcss";
 
 @theme {

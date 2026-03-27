@@ -125,12 +125,7 @@ export const routes = {
     path: "/werkzeugfinder",
     title: "Werkzeugfinder für Visualisierungen",
     parentKey: null,
-    childKeys: [
-      "werkzeugfinder_entscheidungsbaum",
-      "werkzeugfinder_flussdiagramm",
-      "werkzeugfinder_schaubild",
-      "werkzeugfinder_uebersicht",
-    ],
+    childKeys: ["werkzeugfinder_entscheidungsbaum", "werkzeugfinder_flussdiagramm", "werkzeugfinder_schaubild", "werkzeugfinder_uebersicht"],
     sitemap: true,
     isStagingOnly: false,
     navOrder: null,

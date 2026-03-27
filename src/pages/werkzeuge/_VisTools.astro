@@ -1,0 +1,200 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import { marked } from "marked";
+import { getAllRessorts } from "@/data/werkzeugfinder";
+
+const fidelityLabels: Record<string, string> = {
+  einfach: "Für den schnellen Start",
+  digital: "Eine schnelle digitale Version",
+  pro: "Eine Profi-Version",
+};
+
+const visualizationLabels: Record<string, string> = {
+  schaubild: "Interaktionen oder Datenflüsse",
+  entscheidungsbaum: "Entscheidungslogiken",
+  flussdiagramm: "einen ganzen Prozess",
+};
+
+const fidelityOrder = ["einfach", "digital", "pro"];
+
+const tools = (await getCollection("werkzeuge")).sort((a, b) => {
+  const fi =
+    fidelityOrder.indexOf(a.data.fidelity) -
+    fidelityOrder.indexOf(b.data.fidelity);
+  if (fi !== 0) return fi;
+  return a.data.name.localeCompare(b.data.name, "de");
+});
+
+const ressorts = getAllRessorts();
+
+function extractDescription(body: string): string {
+  return body.split("#### Zugang")[0].trim();
+}
+
+function extractZugang(body: string): string | null {
+  const parts = body.split("#### Zugang");
+  return parts.length > 1 ? parts[1].trim() : null;
+}
+---
+
+<div
+  x-data="{
+      stuck: false,
+      typ: '',
+      komplexitaet: '',
+      ressort: '',
+      show(el) {
+        const viz = JSON.parse(el.dataset.visualizations);
+        const fidelity = el.dataset.fidelity;
+        const ressorts = el.dataset.ressorts !== 'null' ? JSON.parse(el.dataset.ressorts) : null;
+        if (this.typ && !viz.includes(this.typ)) return false;
+        if (this.komplexitaet && this.komplexitaet !== fidelity) return false;
+        if (this.ressort && ressorts !== null && !ressorts.includes(this.ressort)) return false;
+        return true;
+      }
+    }"
+>
+  <div aria-hidden="true" x-ref="sentinel" class="h-px -translate-y-px"></div>
+
+  <div
+    class="py-md sticky top-0 z-1 bg-white transition-shadow"
+    style="margin-inline: calc(-50dvw + 50%); padding-inline: calc(50dvw - 50%);"
+    x-bind:class="stuck ? 'shadow-md' : ''"
+    x-init="
+        new IntersectionObserver(([e]) => { stuck = !e.isIntersecting }, { threshold: [1] })
+          .observe($refs.sentinel);
+        stuck = false;
+      "
+  >
+    <div class="gap-md flex flex-row flex-wrap">
+      <div class="kern-form-input">
+        <label class="kern-label" for="typ-filter"
+          >Was möchten Sie darstellen?</label
+        >
+        <div class="kern-form-input__select-wrapper">
+          <select class="kern-form-input__select" id="typ-filter" x-model="typ">
+            <option value="">alle</option>
+            {
+              Object.entries(visualizationLabels).map(([value, label]) => (
+                <option value={value}>{label}</option>
+              ))
+            }
+          </select>
+        </div>
+      </div>
+
+      <div class="kern-form-input">
+        <label class="kern-label" for="komplexitaet-filter">Komplexität</label>
+        <div class="kern-form-input__select-wrapper">
+          <select
+            class="kern-form-input__select"
+            id="komplexitaet-filter"
+            x-model="komplexitaet"
+          >
+            <option value="">alle</option>
+            {
+              Object.entries(fidelityLabels).map(([value, label]) => (
+                <option value={value}>{label}</option>
+              ))
+            }
+          </select>
+        </div>
+      </div>
+
+      <div class="kern-form-input">
+        <label class="kern-label" for="ressort-filter">Ihr Ressort</label>
+        <div class="kern-form-input__select-wrapper">
+          <select
+            class="kern-form-input__select"
+            id="ressort-filter"
+            x-model="ressort"
+          >
+            <option value="">alle</option>
+            {ressorts.map((r) => <option value={r.id}>{r.name}</option>)}
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="gap-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+    {
+      tools.map((tool) => (
+        <article
+          class="kern-card"
+          x-show={`show($el)`}
+          data-visualizations={JSON.stringify(tool.data.visualizations)}
+          data-fidelity={tool.data.fidelity}
+          data-ressorts={JSON.stringify(tool.data.ressorts ?? null)}
+        >
+          {tool.data.img && (
+            <div class="kern-card__media">
+              <Image
+                src={tool.data.img.src}
+                alt={tool.data.img.alt}
+                class="h-208 object-cover"
+              />
+            </div>
+          )}
+          <div class="kern-card__container">
+            <header class="kern-card__header">
+              <hgroup>
+                <p class="kern-preline">{fidelityLabels[tool.data.fidelity]}</p>
+                <h3 class="kern-title">
+                  {tool.data.link ? (
+                    <a href={tool.data.link} class="kern-link--stretched">
+                      {tool.data.name}
+                    </a>
+                  ) : (
+                    tool.data.name
+                  )}
+                </h3>
+                {tool.data.ressorts && (
+                  <p class="kern-subline">
+                    Nur für: {tool.data.ressorts.join(", ").toUpperCase()}
+                  </p>
+                )}
+              </hgroup>
+            </header>
+            <section class="kern-card__body">
+              <p class="kern-body">{extractDescription(tool.body ?? "")}</p>
+            </section>
+            {extractZugang(tool.body ?? "") &&
+              (() => {
+                const popoverId = `zugang-${tool.id}`;
+                return (
+                  <footer class="kern-card__footer">
+                    <button
+                      class="kern-btn kern-btn--tertiary"
+                      popovertarget={popoverId}
+                    >
+                      <span class="kern-label">Zugang</span>
+                    </button>
+                    <div
+                      id={popoverId}
+                      popover
+                      class="p-md kern-body rounded-sm bg-white shadow-lg"
+                      style="position: fixed; inset: 0; margin: auto; width: 36rem; height: fit-content;"
+                    >
+                      <div
+                        set:html={marked.parse(
+                          extractZugang(tool.body ?? "") ?? "",
+                        )}
+                      />
+                    </div>
+                  </footer>
+                );
+              })()}
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  [popover]::backdrop {
+    background: rgba(0, 0, 0, 0.4);
+  }
+</style>
