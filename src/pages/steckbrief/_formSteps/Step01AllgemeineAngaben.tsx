@@ -1,8 +1,10 @@
 import { useFormContext } from "react-hook-form";
 import type { Inputs } from "./types";
+import { validationRules } from "./validationRules";
 
 export default function Step01AllgemeineAngaben() {
   const { register } = useFormContext<Inputs>();
+
   return (
     <>
       <div class="flex flex-col gap-32">
@@ -19,7 +21,7 @@ export default function Step01AllgemeineAngaben() {
             id="arbeitstitel"
             type="text"
             aria-required="true"
-            {...register("arbeitstitel")}
+            {...register("arbeitstitel", validationRules.requiredShortText)}
           />
         </div>
 
@@ -34,8 +36,9 @@ export default function Step01AllgemeineAngaben() {
             class="kern-form-input__input"
             id="aktenzeichen"
             type="text"
+            aria-required="true"
             aria-describedby="aktenzeichen-hint"
-            {...register("aktenzeichen")}
+            {...register("aktenzeichen", validationRules.required)}
           />
         </div>
 
@@ -48,7 +51,8 @@ export default function Step01AllgemeineAngaben() {
               class="kern-form-input__input"
               id="ressort"
               type="text"
-              {...register("ressort")}
+              aria-required="true"
+              {...register("ressort", validationRules.required)}
             />
           </div>
           <div class="kern-form-input flex-1">
@@ -59,7 +63,8 @@ export default function Step01AllgemeineAngaben() {
               class="kern-form-input__input"
               id="referat"
               type="text"
-              {...register("referat")}
+              aria-required="true"
+              {...register("referat", validationRules.required)}
             />
           </div>
         </div>
@@ -67,7 +72,6 @@ export default function Step01AllgemeineAngaben() {
 
       <div class="flex flex-col gap-32">
         <div class="flex flex-col gap-16">
-          <p class="kern-label">Kontaktinformationen</p>
           <h2 class="mt-0">Kontaktdaten</h2>
           <p>Bitte geben Sie Ihre Kontaktdaten ein.</p>
         </div>
@@ -81,7 +85,7 @@ export default function Step01AllgemeineAngaben() {
             id="name"
             type="text"
             aria-required="true"
-            {...register("name")}
+            {...register("name", validationRules.required)}
           />
         </div>
 
@@ -95,7 +99,7 @@ export default function Step01AllgemeineAngaben() {
               id="email"
               type="email"
               aria-required="true"
-              {...register("email")}
+              {...register("email", validationRules.requiredEmail)}
             />
           </div>
           <div class="kern-form-input flex-1">
@@ -106,7 +110,8 @@ export default function Step01AllgemeineAngaben() {
               class="kern-form-input__input"
               id="telefon"
               type="tel"
-              {...register("telefonnummer")}
+              aria-required="true"
+              {...register("telefonnummer", validationRules.required)}
             />
           </div>
         </div>
