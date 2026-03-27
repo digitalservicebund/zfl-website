@@ -5,6 +5,7 @@ import { routes } from "@/config/routes";
 import bundLogoWhite from "@/images/logo/bund-logo-white.svg";
 import bundLogo from "@/images/logo/bund-logo.png";
 import { getHeaderNavigation } from "@/utils/navigation/header";
+import { getRouteLabel } from "@/utils/navigation/navigationItems";
 import { removeTrailingSlash } from "@/utils/path";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
@@ -55,13 +56,13 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
     <!-- Desktop Navigation -->
     <nav class="hidden min-[900px]:flex" data-testid="desktop-nav">
       {
-        headerNavigation.map((item) => (
+        headerNavigation.map((route) => (
           <a
-            href={item.path}
-            class={navItemStyle("main", currentPath === item.path)}
-            aria-current={currentPath === item.path ? "page" : undefined}
+            href={route.path}
+            class={navItemStyle("main", currentPath === route.path)}
+            aria-current={currentPath === route.path ? "page" : undefined}
           >
-            {item.label}
+            {getRouteLabel(route)}
           </a>
         ))
       }

@@ -1,19 +1,6 @@
 import { isProduction } from "@/config/stage";
 import { getRouteByKey, type Route } from "./routeModel";
 
-export type NavigationItem = Route & {
-  label: string;
-  hasVisibleChildren: boolean;
-};
-
-export function toNavigationItem(route: Route): NavigationItem {
-  return {
-    ...route,
-    label: getRouteLabel(route),
-    hasVisibleChildren: hasVisibleChildren(route),
-  };
-}
-
 export function getRouteLabel(route: Route) {
   return route.navLabel ?? route.title;
 }
