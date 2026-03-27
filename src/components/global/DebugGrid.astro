@@ -12,9 +12,14 @@ const columns = Array.from({ length: 12 }, (_, index) => index + 1);
 >
   <div class="debug-grid-overlay__container kern-container">
     <div class="debug-grid-overlay__row kern-row">
-      {columns.map((column) => (
-        <div class="debug-grid-overlay__column kern-col-1" data-column={column} />
-      ))}
+      {
+        columns.map((column) => (
+          <div
+            class="debug-grid-overlay__column kern-col-1"
+            data-column={column}
+          />
+        ))
+      }
     </div>
   </div>
 </div>

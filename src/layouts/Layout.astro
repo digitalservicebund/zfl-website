@@ -2,7 +2,6 @@
 import DebugGrid from "@/components/global/DebugGrid.astro";
 import Footer from "@/components/global/Footer.astro";
 import PageHeader from "@/components/global/PageHeader.astro";
-import Posthog from "@/components/global/Posthog.astro";
 import { isProduction } from "@/config/stage";
 import { SEO } from "astro-seo";
 import "../styles/global.css";
@@ -70,6 +69,5 @@ const showDebugGrid = !isProduction || process.env.NODE_ENV === "development";
     <PageHeader />
     <slot />
     <Footer />
-    {isProduction && <Posthog />}
   </body>
 </html>

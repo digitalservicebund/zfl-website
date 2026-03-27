@@ -24,8 +24,8 @@ jobs:
       group: preview-${{ github.head_ref || github.ref_name }}
       cancel-in-progress: true
     env:
-      PREVIEW_BASE_URL: https://digitalservicebund.github.io/zfl-website/previews
       PREVIEW_BRANCH: ${{ github.head_ref || github.ref_name }}
+      PREVIEW_BASE_URL: /zfl-website/previews/${{ github.head_ref || github.ref_name }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -36,11 +36,11 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 24
+          node-version-file: .node-version
           cache: "pnpm"
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --ignore-scripts
 
       - name: Build Astro for Preview
         run: pnpm build
@@ -60,20 +60,37 @@ jobs:
 
       - name: Wait for automatic Pages deployment
         run: |
-          echo "⏳ Waiting 40 seconds for GitHub Pages automatic deployment..."
-          sleep 40
+          MAX_TIME=40
+          URL="https://digitalservicebund.github.io$PREVIEW_BASE_URL"
+          START_TIME=$(date +%s)
+
+          while true; do
+            RESPONSE_CODE=$(curl -s --head -o /dev/null -w "%{http_code}" "$URL")
+            CURRENT_TIME=$(date +%s)
+            ELAPSED_TIME=$((CURRENT_TIME - START_TIME))
+            
+            if [ "$RESPONSE_CODE" -lt 400 ]; then
+              exit 0
+            elif [ "$ELAPSED_TIME" -ge "$MAX_TIME" ]; then
+              echo "Timeout reached. Skipping."
+              exit 1
+            else
+              echo "Waiting for 200... ($ELAPSED_TIME/$MAX_TIME seconds)"
+              sleep 5
+            fi
+          done
 
       - name: Output Preview URL
         run: |
           echo "🔍 Preview deployed successfully!"
-          echo "Preview URL: $PREVIEW_BASE_URL/$PREVIEW_BRANCH/"
+          echo "Preview URL: https://digitalservicebund.github.io$PREVIEW_BASE_URL"
 
       - name: Comment PR with Preview URL
         if: github.event_name == 'pull_request'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          PREVIEW_URL="$PREVIEW_BASE_URL/$PREVIEW_BRANCH/"
+          PREVIEW_URL="https://digitalservicebund.github.io$PREVIEW_BASE_URL"
           gh pr comment ${{ github.event.pull_request.number }} --body "🔍 **Preview deployed!**
 
           Preview URL: $PREVIEW_URL"

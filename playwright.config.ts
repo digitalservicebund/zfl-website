@@ -1,10 +1,33 @@
-import { defineConfig, devices } from "@playwright/test";
-
+import {
+  defineConfig,
+  devices,
+  type PlaywrightTestConfig,
+} from "@playwright/test";
 try {
   process.loadEnvFile();
 } catch {
   // .env file not present (e.g. in CI)
 }
+
+const previewWebServer: PlaywrightTestConfig["webServer"] = {
+  command: "pnpm build && pnpm preview",
+  timeout: 120 * 1000,
+  port: 4321,
+  reuseExistingServer: !process.env.CI,
+};
+
+const dockerWebServer: PlaywrightTestConfig["webServer"] = {
+  command:
+    "docker run --env NGINX_DIR=$PUBLIC_STAGE --rm -p 8080:8080 --name zfl-website zfl-website:latest",
+  port: 8080,
+  timeout: 120 * 1000,
+  reuseExistingServer: !process.env.CI,
+};
+
+const webServer: PlaywrightTestConfig["webServer"] = process.env
+  .PLAYWRIGHT_USE_DOCKER
+  ? dockerWebServer
+  : previewWebServer;
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -17,13 +40,10 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
-  /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: "html",
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    baseURL: "http://localhost:4321/",
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
   },
@@ -66,10 +86,5 @@ export default defineConfig({
     // },
   ],
 
-  webServer: {
-    command: "npm run preview",
-    url: "http://localhost:4321/",
-    timeout: 120 * 1000,
-    reuseExistingServer: !process.env.CI,
-  },
+  webServer,
 });
