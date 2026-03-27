@@ -1,7 +1,4 @@
-import { useState } from "preact/hooks";
-import { useFormContext } from "react-hook-form";
-import type { Inputs } from "../_formSteps/types";
-import { compressState } from "../_utils/stateHash";
+import { useDocxDownload } from "../_utils/useDocxDownload";
 
 const defaultText = (
   <>
@@ -49,44 +46,16 @@ interface Props {
   onNext: () => void;
 }
 
-type ShareState = "idle" | "copying" | "copied" | "error";
-
 export default function SteckbriefButtonBar({
   page,
   isLastPage,
   onPrev,
   onNext,
 }: Props) {
-  const { getValues } = useFormContext<Inputs>();
-  const [shareState, setShareState] = useState<ShareState>("idle");
-
-  async function handleShare() {
-    setShareState("copying");
-    try {
-      const state = getValues();
-      const hash = await compressState(state);
-
-      const url = new URL(window.location.href);
-      url.search = `?step=${page}`;
-      url.hash = hash;
-
-      await navigator.clipboard.writeText(url.toString());
-      setShareState("copied");
-      setTimeout(() => setShareState("idle"), 2500);
-    } catch {
-      setShareState("error");
-      setTimeout(() => setShareState("idle"), 2500);
-    }
-  }
-
-  const shareLabel =
-    shareState === "copying"
-      ? "Wird erstellt…"
-      : shareState === "copied"
-        ? "Link kopiert!"
-        : shareState === "error"
-          ? "Fehler – bitte erneut versuchen"
-          : "Zwischenstand teilen";
+  const [handleDownload, isGenerating] = useDocxDownload();
+  const downloadLabel = isGenerating
+    ? "Wird erstellt …"
+    : "Zwischenstand herunterladen";
 
   return (
     <div class="sticky bottom-0 z-10 border-t border-[#A5AAC3] bg-white py-16">
@@ -98,14 +67,14 @@ export default function SteckbriefButtonBar({
           <button
             type="button"
             class="kern-btn kern-btn--tertiary"
-            onClick={handleShare}
-            disabled={shareState === "copying"}
+            onClick={handleDownload}
+            disabled={isGenerating}
           >
             <span
-              class={`kern-icon kern-icon--default ${shareState === "copied" ? "kern-icon--check" : "kern-icon--content-copy"}`}
+              class={`kern-icon kern-icon--default ${isGenerating ? "kern-icon--autorenew" : "kern-icon--download"}`}
               aria-hidden="true"
             ></span>
-            <span class="kern-label">{shareLabel}</span>
+            <span class="kern-label">{downloadLabel}</span>
           </button>
           {page > 1 && (
             <button

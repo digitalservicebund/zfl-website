@@ -1,20 +1,7 @@
-import { useState } from "preact/hooks";
-import { useFormContext } from "react-hook-form";
-import { generateSteckbriefDocx } from "./generateSteckbriefDocx";
-import type { Inputs } from "./types";
+import { useDocxDownload } from "../_utils/useDocxDownload.ts";
 
 export default function Step11HerunterladeUndAbsenden() {
-  const { getValues } = useFormContext<Inputs>();
-  const [isGenerating, setIsGenerating] = useState(false);
-
-  async function handleDownload() {
-    setIsGenerating(true);
-    try {
-      await generateSteckbriefDocx(getValues());
-    } finally {
-      setIsGenerating(false);
-    }
-  }
+  const [handleDownload, isGenerating] = useDocxDownload();
 
   return (
     <div class="flex flex-col gap-16">
@@ -119,7 +106,7 @@ export default function Step11HerunterladeUndAbsenden() {
             disabled={isGenerating}
           >
             <span class="kern-label">
-              {isGenerating ? "Wird erstellt…" : "Steckbrief herunterladen"}
+              {isGenerating ? "Wird erstellt …" : "Steckbrief herunterladen"}
             </span>
           </button>
         </div>

@@ -20,7 +20,25 @@ import {
   VerticalAlign,
   WidthType,
 } from "docx";
-import type { Inputs } from "./types";
+import { useState } from "preact/hooks";
+import { useFormContext } from "react-hook-form";
+import type { Inputs } from "../_formSteps/types";
+
+export function useDocxDownload() {
+  const { getValues } = useFormContext<Inputs>();
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  async function handleDownload() {
+    setIsGenerating(true);
+    try {
+      await generateSteckbriefDocx(getValues());
+    } finally {
+      setIsGenerating(false);
+    }
+  }
+
+  return [handleDownload, isGenerating] as const;
+}
 
 const FONT = "Arial";
 // Brand colors from global.css
@@ -365,7 +383,7 @@ export async function generateSteckbriefDocx(data: Inputs): Promise<void> {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `steckbrief-${data.arbeitstitel || "export"}.docx`;
+  a.download = `Steckbrief_${data.arbeitstitel || "export"}.docx`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
