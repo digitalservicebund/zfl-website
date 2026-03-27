@@ -7,17 +7,25 @@ const pageTitles = ["1. Allgemeine Angaben", "2. Kontext & Genese"];
 const STORAGE_KEY = "steckbrief-JS-prototyp-form-state";
 ---
 
-<div
-  class="flex"
-  x-data=`{
-    currentPage: parseInt(localStorage.getItem('${STORAGE_KEY}-currentPage')) || 1,
-    form: JSON.parse(localStorage.getItem('${STORAGE_KEY}') || '{}')
-  }`
-  x-init=`() => {
-  $watch('form', (val) => localStorage.setItem('${STORAGE_KEY}', JSON.stringify(val)));
-  $watch('currentPage', (newPage) => localStorage.setItem('${STORAGE_KEY}-currentPage', newPage));
-  }`
->
+<script define:vars={{ STORAGE_KEY }}>
+  window.initSteckbrief = function () {
+    return {
+      currentPage:
+        parseInt(localStorage.getItem(`${STORAGE_KEY}-currentPage`)) || 1,
+      form: JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"),
+      init() {
+        this.$watch("form", (val) =>
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(val)),
+        );
+        this.$watch("currentPage", (newPage) =>
+          localStorage.setItem(`${STORAGE_KEY}-currentPage`, newPage),
+        );
+      },
+    };
+  };
+</script>
+
+<div class="flex" x-data="initSteckbrief()">
   <div class="bg-lavender-base relative h-[stretch] w-296 shrink-0 self-start">
     <nav
       aria-label="Formular-Navigation"
