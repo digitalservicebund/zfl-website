@@ -1,7 +1,17 @@
 ---
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
-import { routes } from "@/config/routes";
-import { isProduction } from "@/config/stage";
+import {
+  barrierefreiheit,
+  begleitungen,
+  datenschutz,
+  impressum,
+  schulungen,
+  sitemap,
+  ueber,
+  werkzeuge,
+  type Route,
+} from "@/config/routes";
+import { isRouteVisible } from "@/utils/navigation/routeUtils";
 import bmdsLogoWhite from "@/images/logo/bmds-logo-white.svg";
 import bmdsLogo from "@/images/logo/bmds-logo.svg";
 import { Image } from "astro:assets";
@@ -13,18 +23,10 @@ const footerColumns: Record<string, FooterItem[]> = {
     { prefix: "Telefon: ", path: ZFL_PHONE.url, title: ZFL_PHONE.display },
     { prefix: "E-Mail: ", path: ZFL_EMAIL.url, title: ZFL_EMAIL.display },
   ],
-  Inhalte: [
-    routes.werkzeuge,
-    routes.begleitungen,
-    routes.schulungen,
-    ...(!isProduction ? [routes.ueber] : []),
-  ],
-  "Rechtliche Hinweise": [
-    routes.impressum,
-    routes.datenschutz,
-    routes.barrierefreiheit,
-    routes.sitemap,
-  ],
+  Inhalte: ([werkzeuge, begleitungen, schulungen, ueber] as Route[]).filter(
+    isRouteVisible,
+  ),
+  "Rechtliche Hinweise": [impressum, datenschutz, barrierefreiheit, sitemap],
 };
 ---
 

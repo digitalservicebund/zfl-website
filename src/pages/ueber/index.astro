@@ -1,7 +1,12 @@
 ---
 import Card from "@/components/Card.astro";
 import Hero from "@/components/Hero.astro";
-import { routes } from "@/config/routes.ts";
+import {
+  begleitungen,
+  schulungen,
+  ueber_dasIstNeu,
+  werkzeuge,
+} from "@/config/routes";
 import Layout from "@/layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
@@ -88,7 +93,7 @@ export const frontmatter = {
           <div class="space-y-8">
             <h3>Website</h3>
             <p>
-              Bereitstellung von <a href={routes.werkzeuge.path}
+              Bereitstellung von <a href={werkzeuge.path}
                 >Anleitungen, Vorlagen, Werkzeugen und Methoden</a
               >
               für wirksame Rechtssetzung.
@@ -102,8 +107,8 @@ export const frontmatter = {
           <div class="space-y-8">
             <h3>Interdisziplinäre Begleitung</h3>
             <p>
-              <a href={routes.begleitungen.path}>Unterstützung von Vorhaben</a> durch
-              Teams aus Design, Nutzerforschung, Softwareentwicklung und Produktmanagement.
+              <a href={begleitungen.path}>Unterstützung von Vorhaben</a> durch Teams
+              aus Design, Nutzerforschung, Softwareentwicklung und Produktmanagement.
             </p>
           </div>
         </div>
@@ -114,9 +119,7 @@ export const frontmatter = {
           <div class="space-y-8">
             <h3>Schulungen</h3>
             <p>
-              <a href={routes.schulungen.path}>
-                Vermittlung von Methodenwissen
-              </a>
+              <a href={schulungen.path}> Vermittlung von Methodenwissen </a>
               in virtuellen Formaten und Workshops.
             </p>
           </div>
@@ -132,7 +135,7 @@ export const frontmatter = {
         <h2 class="text-inherit">Wie wir arbeiten</h2>
         <p>
           Themen an denen wir aktuell arbeiten finden Sie auf dieser Seite: <a
-            href={routes.ueber_dasIstNeu.path}>Daran arbeiten wir</a
+            href={ueber_dasIstNeu.path}>Daran arbeiten wir</a
           >.
         </p>
       </Card>

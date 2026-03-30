@@ -1,10 +1,8 @@
-import { routes } from "@/config/routes.ts";
+import { begleitungen, schulungen, ueber, werkzeuge } from "@/config/routes.ts";
 import { renderToDOM } from "@/utils/testUtils.ts";
 import { describe, expect, it, vi } from "vitest";
 import { baseUrl } from "../../../vitest.config.ts";
 import PageHeader from "./PageHeader.astro";
-
-vi.mock("@/config/routes.ts");
 
 vi.mock("@/config/stage", () => ({
   isProduction: true,
@@ -30,7 +28,7 @@ const menuLocations = [
 ];
 
 describe("link highlighting", async () => {
-  const activeRoute = routes.begleitungen;
+  const activeRoute = begleitungen;
   const { dom: pageHeader } = await renderToDOM(PageHeader, {
     request: new Request(baseUrl + activeRoute.path),
   });
@@ -54,18 +52,15 @@ describe("link highlighting", async () => {
       expect(links!.length).toBeGreaterThan(0);
 
       for (const link of links ?? []) {
-        expect(link.classList).not.toContain("bg-lavender-base");
+        expect(link.classList.contains("bg-lavender-base")).toBe(false);
+        expect(link.getAttribute("aria-current")).toBeFalsy();
       }
     });
   }
 });
+
 describe("visible menu items", async () => {
-  const expectedPaths = [
-    routes.werkzeuge,
-    routes.begleitungen,
-    routes.schulungen,
-    routes.ueber,
-  ]
+  const expectedPaths = [werkzeuge, begleitungen, schulungen, ueber]
     .filter((route) => !route.isStagingOnly)
     .map((route) => route.path);
 
@@ -74,9 +69,9 @@ describe("visible menu items", async () => {
     it(`shows them in the ${name}`, () => {
       const nav = pageHeader?.querySelector(selector);
       expect(nav).toBeTruthy();
-      const anchorElements = nav?.querySelectorAll("a");
+      const anchorElements = nav?.querySelectorAll<HTMLAnchorElement>("a");
       expect(anchorElements!.length).toBeGreaterThan(0);
-      const actualLinks = Array.from(anchorElements!.values())
+      const actualLinks = Array.from(anchorElements ?? [])
         .map((link) => link.getAttribute("href"))
         .filter(
           (href) => !href?.startsWith("tel:") && !href?.startsWith("mailto:"),
