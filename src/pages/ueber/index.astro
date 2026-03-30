@@ -67,26 +67,13 @@ const contactId = "kontaktieren-sie-uns";
 
     <section class="breakout bg-lavender-400">
       <h2 class="kern-heading-large">Unsere Angebote</h2>
-      <div class="mt-16 flex flex-col gap-x-120 gap-y-64 md:flex-row">
-        <div class="md:w-6/12">
-          <p>
-            Das Zentrum für Legistik stellt mehrere Unterstützungsangebote zur
-            Verfügung. Die Angebote werden kontinuierlich und in engem Austausch
-            mit der Praxis weiterentwickelt.
-          </p>
-          <p>
-            Sie möchten uns Rückmeldung geben oder in den Pool der
-            Service-Testenden aufgenommen werden?
-          </p>
-          <a href={"#" + contactId}
-            ><Icon
-              name="ic:round-arrow-downward"
-              class="mr-4 inline size-24"
-              aria-hidden="true"
-            />Unterstützen Sie uns bei der Entwicklung des Angebots</a
-          >
-        </div>
-        <div class="md:w-6/12">
+      <div class="grid grid-cols-1 gap-x-120 gap-y-16 md:grid-cols-2">
+        <p class="mb-0">
+          Das Zentrum für Legistik stellt mehrere Unterstützungsangebote zur
+          Verfügung. Die Angebote werden kontinuierlich und in engem Austausch
+          mit der Praxis weiterentwickelt.
+        </p>
+        <div class="md:col-start-2 md:row-span-2 md:row-start-1">
           <ul class="list-unstyled">
             <li>
               <a href={routes.home.path} class="kern-link text-2xl font-bold"
@@ -120,6 +107,19 @@ const contactId = "kontaktieren-sie-uns";
               >
             </li>
           </ul>
+        </div>
+        <div class="md:col-start-1 md:row-start-2">
+          <p>
+            Sie möchten uns Rückmeldung geben oder in den Pool der
+            Service-Testenden aufgenommen werden?
+          </p>
+          <a href={"#" + contactId}
+            ><Icon
+              name="ic:round-arrow-downward"
+              class="mr-4 inline size-24"
+              aria-hidden="true"
+            />Unterstützen Sie uns bei der Entwicklung des Angebots</a
+          >
         </div>
       </div>
     </section>
@@ -193,7 +193,7 @@ const contactId = "kontaktieren-sie-uns";
         look="blue"
         class="flex justify-center py-48 max-md:rounded-none md:py-56"
       >
-        <h2 class="text-inherit">Kontaktieren Sie uns</h2>
+        <h2 class="text-inherit">Kontakt</h2>
         <p>
           Sie haben Fragen zum Zentrum für Legistik oder den einzelnen
           Angeboten? Kontaktieren Sie uns.
