@@ -1,11 +1,17 @@
 ---
 import Kopfzeile from "@/components/global/Kopfzeile.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
-import { routes } from "@/config/routes";
+import {
+  begleitungen,
+  home,
+  schulungen,
+  ueber,
+  werkzeuge,
+  type Route,
+} from "@/config/routes";
 import bundLogoWhite from "@/images/logo/bund-logo-white.svg";
 import bundLogo from "@/images/logo/bund-logo.png";
-import { getHeaderNavigation } from "@/utils/navigation/header";
-import { getRouteLabel } from "@/utils/navigation/navigationItems";
+import { getRouteLabel, isRouteVisible } from "@/utils/navigation/routeUtils";
 import { removeTrailingSlash } from "@/utils/path";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
@@ -14,7 +20,8 @@ import { twMerge } from "tailwind-merge";
 const { pathname } = Astro.url;
 const currentPath = removeTrailingSlash(pathname);
 
-const headerNavigation = getHeaderNavigation();
+const HEADER_ROUTES: Route[] = [werkzeuge, begleitungen, schulungen, ueber];
+const headerNavigation = HEADER_ROUTES.filter(isRouteVisible);
 
 const mobileMenuId = "page-header-mobile-menu";
 
@@ -39,7 +46,7 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
   <Kopfzeile />
   <div class="flex h-72 justify-between px-24">
     <!-- Logo and title -->
-    <a href={routes.home.path} class="link-unstyled flex items-center gap-24">
+    <a href={home.path} class="link-unstyled flex items-center gap-24">
       <Image
         src={bundLogo}
         alt="Logo des Bundes"
@@ -138,9 +145,13 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
     :aria-hidden="!mobileMenuOpen"
   >
     {
-      headerNavigation.map((item) => (
-        <a href={item.path} class={navItemStyle("sub", item.path)}>
-          {item.title}
+      headerNavigation.map((route) => (
+        <a
+          href={route.path}
+          class={navItemStyle("sub", currentPath === route.path)}
+          aria-current={currentPath === route.path ? "page" : undefined}
+        >
+          {getRouteLabel(route)}
         </a>
       ))
     }

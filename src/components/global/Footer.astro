@@ -1,6 +1,15 @@
 ---
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
-import { routes } from "@/config/routes";
+import {
+  barrierefreiheit,
+  begleitungen,
+  datenschutz,
+  impressum,
+  schulungen,
+  sitemap,
+  ueber,
+  werkzeuge,
+} from "@/config/routes";
 import { isProduction } from "@/config/stage";
 import bmdsLogoWhite from "@/images/logo/bmds-logo-white.svg";
 import bmdsLogo from "@/images/logo/bmds-logo.svg";
@@ -14,17 +23,12 @@ const footerColumns: Record<string, FooterItem[]> = {
     { prefix: "E-Mail: ", path: ZFL_EMAIL.url, title: ZFL_EMAIL.display },
   ],
   Inhalte: [
-    routes.werkzeuge,
-    routes.begleitungen,
-    routes.schulungen,
-    ...(!isProduction ? [routes.ueber] : []),
+    werkzeuge,
+    begleitungen,
+    schulungen,
+    ...(!isProduction ? [ueber] : []),
   ],
-  "Rechtliche Hinweise": [
-    routes.impressum,
-    routes.datenschutz,
-    routes.barrierefreiheit,
-    routes.sitemap,
-  ],
+  "Rechtliche Hinweise": [impressum, datenschutz, barrierefreiheit, sitemap],
 };
 ---
 

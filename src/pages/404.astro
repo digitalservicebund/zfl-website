@@ -1,5 +1,5 @@
 ---
-import { routes } from "@/config/routes";
+import { home } from "@/config/routes";
 import Layout from "@/layouts/Layout.astro";
 ---
 
@@ -27,7 +27,7 @@ import Layout from "@/layouts/Layout.astro";
         id="error-back-button"
         data-testid="error-back-button"
         class="kern-btn kern-btn--primary"
-        href={routes.home.path}
+        href={home.path}
         data-discover="true"
       >
         <span class="kern-label">Zurück zur Startseite</span>

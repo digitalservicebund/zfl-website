@@ -1,6 +1,11 @@
 import { describe, expect, it, vi } from "vitest";
 import { baseUrl } from "../../../vitest.config.ts";
-import { routes } from "../../config/routes";
+import {
+  begleitungen,
+  schulungen,
+  ueber,
+  werkzeuge,
+} from "../../config/routes";
 import { renderToDOM } from "../../utils/testUtils";
 import PageHeader from "./PageHeader.astro";
 
@@ -28,7 +33,7 @@ const menuLocations = [
 ];
 
 describe("link highlighting", async () => {
-  const activeRoute = routes.begleitungen;
+  const activeRoute = begleitungen;
   const { dom: pageHeader } = await renderToDOM(PageHeader, {
     request: new Request(baseUrl + activeRoute.path),
   });
@@ -57,13 +62,9 @@ describe("link highlighting", async () => {
     });
   }
 });
+
 describe("visible menu items", async () => {
-  const expectedPaths = [
-    routes.werkzeuge,
-    routes.begleitungen,
-    routes.schulungen,
-    routes.ueber,
-  ]
+  const expectedPaths = [werkzeuge, begleitungen, schulungen, ueber]
     .filter((route) => !route.isStagingOnly)
     .map((route) => route.path);
 
