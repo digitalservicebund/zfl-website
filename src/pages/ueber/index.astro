@@ -7,157 +7,212 @@ import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import ansatzImg from "./Ansatz.jpg";
 import zusammenarbeitImg from "./Zusammenarbeit.png";
+import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants.ts";
 
 export const frontmatter = {
   title: "Über das ZfL",
   sitemap: true,
   isStagingOnly: true,
 };
+
+const contactId = "kontaktieren-sie-uns";
 ---
 
 <Layout title={frontmatter.title}>
   <main class="breakout-grid">
     <Hero>
-      <h1>Zentrale Anlaufstelle für Rechtsetzung</h1>
-      <p slot="subtitle">
-        Das Zentrum für Legistik unterstützt bei der Gestaltung von Regelungen,
-        die adressatenorientiert, praxistauglich und digital umsetzbar sind.<br
-        />
-        Derzeit wird das Zentrum vom Bundesministerium für Digitales und Staatsmodernisierung
-        gemeinsam mit dem DigitalService aufgebaut. Alle Angebote werden dabei im
-        engen Austausch mit der Praxis weiterentwickelt.
-      </p>
-    </Hero>
-    <section>
-      <div class="flex flex-col gap-32 md:flex-row">
-        <div class="md:w-5/12">
-          <Image
-            src={zusammenarbeitImg}
-            alt="Mehrere Personen vor einem großen Whiteboard, an dem sie Klebepunkte an bereits vorhandenen Papieren und Post-its anbringen."
-          />
-        </div>
-        <div class="md:w-7/12">
-          <h2 class="kern-heading-large">Wirkung der Zusammenarbeit</h2>
-          <p>
-            Wir unterstützen Sie dabei, Umsetzungsprozesse zu verstehen und
-            Anforderungen an praxisnahe und bürokratiearme Regelungen
-            umzusetzen. Durch Ihre Rechtsetzungs-Expertise in Kombination mit
-            Methoden aus der agilen Software-Entwicklung entstehen somit
-            praxistaugliche und zukunftsfähige Gesetze, die unter anderem die
-            Potenziale der Digitalisierung bestmöglich ausschöpfen.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="breakout bg-lavender-400">
-      <div class="flex flex-col-reverse gap-32 md:flex-row-reverse">
-        <div class="md:w-5/12">
-          <Image
-            src={ansatzImg}
-            alt="Eine großflächigen Grafik einer Glaswand. Sie zeigt verschiedenfarbige Kreisen mit Textinhalten."
-          />
-        </div>
-        <div class="md:w-7/12">
-          <h2 class="kern-heading-large">Wo wir ansetzen</h2>
-          <p>
-            Rechtsetzung kann noch wirksamer werden, wenn sie von Anfang an die
-            technischen Realitäten und die Bedarfe der Betroffenen
-            berücksichtigt. Über die Jahre ist eine Vielzahl von Checklisten und
-            Arbeitshilfen entstanden. Diese bestehenden Angebote lassen sich
-            bündeln und durch neue Arbeitsweisen sinnvoll ergänzen. So entsteht
-            ein verlässliches Serviceangebot, das den gesamten
-            Gesetzgebungsprozess unterstützt.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2 class="kern-heading-large">Unsere Angebote</h2>
-      <p>
-        Das Serviceangebot wird laufend mit den Nutzerinnen und Nutzern
-        weiterentwickelt und umfasst derzeit drei Schwerpunkte:
-      </p>
-
-      <div class="mt-40 flex flex-col gap-32 md:w-full md:flex-row md:gap-64">
-        <div
-          class="md:size-lg flex h-auto w-full flex-col gap-8 md:flex-1 md:gap-32"
-        >
-          <Icon class="feature-icon" name="ic:twotone-computer" />
-          <div class="space-y-8">
-            <h3>Website</h3>
-            <p>
-              Bereitstellung von <a href={routes.werkzeuge.path}
-                >Anleitungen, Vorlagen, Werkzeugen und Methoden</a
-              >
-              für wirksame Rechtssetzung.
-            </p>
-          </div>
-        </div>
-        <div
-          class="flex h-auto w-full flex-col gap-8 md:h-[298px] md:flex-1 md:gap-32"
-        >
-          <Icon class="feature-icon" name="ic:twotone-groups" />
-          <div class="space-y-8">
-            <h3>Interdisziplinäre Begleitung</h3>
-            <p>
-              <a href={routes.begleitungen.path}>Unterstützung von Vorhaben</a> durch
-              Teams aus Design, Nutzerforschung, Softwareentwicklung und Produktmanagement.
-            </p>
-          </div>
-        </div>
-        <div
-          class="flex h-auto w-full flex-col gap-8 md:h-[298px] md:flex-1 md:gap-32"
-        >
-          <Icon class="feature-icon" name="ic:twotone-school" />
-          <div class="space-y-8">
-            <h3>Schulungen</h3>
-            <p>
-              <a href={routes.schulungen.path}>
-                Vermittlung von Methodenwissen
-              </a>
-              in virtuellen Formaten und Workshops.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <Card
-        look="blue"
-        class="flex justify-center py-48 max-md:rounded-none md:py-56"
-      >
-        <h2 class="text-inherit">Wie wir arbeiten</h2>
-        <p>
-          Themen an denen wir aktuell arbeiten finden Sie auf dieser Seite: <a
-            href={routes.ueber_dasIstNeu.path}>Daran arbeiten wir</a
-          >.
+      <h1>Über das Zentrum für Legistik</h1>
+      <p class="kern-subline kern-subline--large" slot="subtitle">
+        <p class="kern-subline kern-subline--large" slot="subtitle">
+          Die zentrale Anlaufstelle für bessere Rechtsetzung
         </p>
-      </Card>
-    </section>
-
-    <section class="breakout bg-lavender-400">
-      <h2>Politischer Auftrag</h2>
-      <p>
-        Der Auftrag ist in der <a
-          href="https://bmds.bund.de/fileadmin/BMDS/Dokumente/Modernisierungsagenda_barrierefrei.pdf"
-          >Modernisierungsagenda des Bundes</a
-        > (Abschnitt II "Bessere Rechtsetzung") und der föderalen Modernisierungsagenda
-        (Fünftes Kapitel) verankert. Als zentrale Plattform unterstützen wir dabei,
-        praxisnahes, adressatenorientiertes, digital gut umsetzbares und bürokratiearmes
-        Recht zu erarbeiten. Wir bauen auf den Erfahrungen des Digitalcheck auf, den
-        der DigitalService seit 2023 anbietet.
+        <p slot="subtitle">
+          Das Zentrum für Legistik (ZfL) unterstützt Legistinnen und Legisten
+          bei der Ausarbeitung von Regelungen, die adressatenorientiert,
+          bürokratiearm, praxis- und digitaltauglich sind. Bewährte
+          Hilfsangebote und Methoden der besseren Rechtsetzung werden
+          schrittweise zusammengeführt, weiterentwickelt und auf der
+          ZfL-Plattform zur Verfügung gestellt. Dadurch soll die Rechtsetzung
+          vereinfacht und von bürokratischem Aufwand entlastet werden.
+        </p>
       </p>
-    </section>
+
+      <section>
+        <div class="flex flex-col gap-32 md:flex-row">
+          <div class="md:w-5/12">
+            <Image
+              src={ansatzImg}
+              alt="Eine großflächige Grafik an einer Glaswand. Sie zeigt verschiedenfarbige Kreise mit Textinhalten."
+            />
+          </div>
+          <div class="md:w-7/12">
+            <h2 class="kern-heading-large">Auftrag</h2>
+            <p>
+              Die <a
+                href="https://bmds.bund.de/fileadmin/BMDS/Dokumente/Modernisierungsagenda_barrierefrei.pdf"
+                >Modernisierungsagenda des Bundes für Staat und Verwaltung</a
+              > gibt vor, neue Regelungen von Anfang an so zu gestalten, dass sie
+              bei den Bürgerinnen und Bürgern sowie Unternehmen zielgerichtet wirken.
+              Mit dem Zentrum für Legistik wird ein zentraler Baustein aus dem Handlungsfeld
+              II „Bessere Rechtsetzung” bereitgestellt. Legistinnen und Legisten der
+              Bundesverwaltung werden durch den Zugang zu Unterstützungsangeboten
+              und Schulungen die erforderlichen Methoden für eine zeitgemäße Rechtsetzung
+              vermittelt. Die Angebote sollen perspektivisch auch für Länder, Kommunen
+              und andere öffentliche Körperschaften nutzbar sein. Damit schafft das
+              Zentrum für Legistik die Grundlage für Regelungen, die in der Praxis
+              wirksam sind.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="breakout bg-lavender-400">
+        <h2 class="kern-heading-large">Unsere Angebote</h2>
+        <div class="mt-16 flex flex-col gap-x-120 gap-y-64 md:flex-row">
+          <div class="md:w-6/12">
+            <p>
+              Das Zentrum für Legistik stellt mehrere Unterstützungsangebote zur
+              Verfügung. Die Angebote werden kontinuierlich und in engem
+              Austausch mit der Praxis weiterentwickelt.
+            </p>
+            <p>
+              Sie möchten uns Rückmeldung geben oder in den Pool der
+              Service-Testenden aufgenommen werden?
+            </p>
+            <a href={"#" + contactId}
+              ><Icon
+                name="ic:round-arrow-downward"
+                class="mr-4 inline size-24"
+                aria-hidden="true"
+              />Unterstützen Sie uns bei der Entwicklung des Angebots</a
+            >
+          </div>
+          <div class="md:w-6/12">
+            <ul class="list-unstyled">
+              <li>
+                <a href={routes.home.path} class="kern-link text-2xl font-bold"
+                  ><Icon
+                    name="ic:round-arrow-forward"
+                    class="mr-4 inline size-32"
+                    aria-hidden="true"
+                  />Webseite</a
+                >
+              </li>
+              <li>
+                <a
+                  href={routes.begleitungen.path}
+                  class="kern-link text-2xl font-bold"
+                  ><Icon
+                    name="ic:round-arrow-forward"
+                    class="mr-4 inline size-32"
+                    aria-hidden="true"
+                  />Regelungsbegleitung</a
+                >
+              </li>
+              <li>
+                <a
+                  href={routes.schulungen.path}
+                  class="kern-link text-2xl font-bold"
+                  ><Icon
+                    name="ic:round-arrow-forward"
+                    class="mr-4 inline size-32"
+                    aria-hidden="true"
+                  />Schulungen</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="flex flex-col gap-32 md:flex-row">
+          <div class="md:w-7/12">
+            <h2 class="kern-heading-large">Herangehensweise</h2>
+            <p>
+              Das Zentrum für Legistik nimmt den gesamten Gesetzgebungsprozess
+              vom ersten Entwurf bis zur praktischen Umsetzung in den Blick. Der
+              Fokus liegt dabei auf der inhaltlichen Erarbeitung von Regelungen
+              – also dem Zeitraum, bevor der eigentliche Regelungstext
+              geschrieben wird. Perspektiven von Bürgerinnen und Bürgern,
+              Unternehmen und Verwaltung sollen hier frühzeitig einbezogen und
+              bei der weiteren Ausgestaltung der Regelungen berücksichtigt
+              werden. Dieses Vorgehen empfiehlt auch der Nationale
+              Normenkontrollrat (NKR): <a
+                href="https://www.normenkontrollrat.bund.de/Webs/NKR/DE/veroeffentlichungen/gutachten/_documents/2019-10-erst-der-inhalt-dann-die-paragraphen.html"
+                >Erst der Inhalt, dann die Paragrafen</a
+              >.
+            </p><p>
+              Bei der Entwicklung der Angebote gehen Theorie und Praxis Hand in
+              Hand: Durch die methodische Begleitung konkreter Regelungsvorhaben
+              fließen Erkenntnisse aus der Umsetzung unmittelbar zurück in die
+              Weiterentwicklung der einzelnen Services. Dieses iterative
+              Vorgehen ermöglicht es, laufend aus der Praxis zu lernen und die
+              Rechtsetzung nachhaltig zu modernisieren.
+            </p>
+            <a
+              href="https://digitalservice.bund.de/blog/wie-wir-am-zentrum-fuer-legistik-arbeiten"
+              >Mehr zum Arbeitsmodus erfahren</a
+            >
+          </div>
+          <div class="md:w-5/12">
+            <Image
+              src={zusammenarbeitImg}
+              alt="Mehrere Personen vor einem großen Whiteboard, an dem sie Klebepunkte an bereits vorhandenen Papieren und Post-its anbringen."
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="flex flex-col gap-x-80 gap-y-16 md:flex-row">
+        <Card look="bordered">
+          {/* preliminary content while we wait for the new page */}
+          <h2 class="kern-title">
+            <a href={routes.ueber_dasIstNeu.path} class="kern-link--stretched"
+              >Das ist neu</a
+            >
+          </h2>
+          <p class="kern-subline">
+            Aktuelle Arbeitspakete in Konzeption und Umsetzung
+          </p>
+        </Card>
+        <Card look="bordered">
+          <h2 class="kern-title">
+            <a
+              href={routes.ueber_zahlenUndFakten.path}
+              class="kern-link--stretched">Zahlen und Fakten</a
+            >
+          </h2>
+          <p class="kern-subline">
+            Das Zentrum für Legistik leistet einen messbaren Beitrag zur
+            Modernisierung der Rechtsetzung.
+          </p>
+        </Card>
+      </section>
+
+      <section id={contactId}>
+        <Card
+          look="blue"
+          class="flex justify-center py-48 max-md:rounded-none md:py-56"
+        >
+          <h2 class="text-inherit">Kontaktieren Sie uns</h2>
+          <p>
+            Sie haben Fragen zum Zentrum für Legistik oder den einzelnen
+            Angeboten? Kontaktieren Sie uns.
+          </p>
+          <ul class="list-unstyled flex flex-col gap-16">
+            <li>
+              Telefon: <a href={ZFL_PHONE.url}>
+                {ZFL_PHONE.display}
+              </a>
+            </li><li>
+              E-Mail: <a href={ZFL_EMAIL.url}>
+                {ZFL_EMAIL.display}
+              </a>
+            </li>
+          </ul>
+        </Card>
+      </section>
+    </Hero>
   </main>
 </Layout>
-
-<style>
-  @reference "@/styles/global.css";
-
-  .feature-icon {
-    @apply text-cosmic-blue-400 bg-lavender-400 size-[110px] flex-none rounded-sm px-[18px] py-[22px];
-  }
-</style>
