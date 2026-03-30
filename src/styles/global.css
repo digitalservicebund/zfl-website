@@ -124,7 +124,7 @@
     @apply list-decimal;
   }
 
-  p,
+  p:not(.kern-task-list__title > *),
   ul:not(.list-unstyled),
   ol:not(.list-unstyled) {
     @apply max-w-a11y;

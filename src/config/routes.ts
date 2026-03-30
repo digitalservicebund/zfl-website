@@ -131,6 +131,16 @@ export const routes = {
     navOrder: null,
     navLabel: null,
   },
+  vorhaben: {
+    path: "/vorhaben",
+    title: "Vorhaben erarbeiten",
+    parentKey: null,
+    childKeys: [],
+    sitemap: true,
+    isStagingOnly: false,
+    navOrder: null,
+    navLabel: null,
+  },
   werkzeuge: {
     path: "/werkzeuge",
     title: "Werkzeuge",
