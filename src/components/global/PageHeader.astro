@@ -10,6 +10,12 @@ import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import { twMerge } from "tailwind-merge";
 
+interface Props {
+  isHome?: boolean;
+}
+
+const { isHome = false } = Astro.props;
+
 const { pathname } = Astro.url;
 const currentPath = removeTrailingSlash(pathname);
 
@@ -30,8 +36,6 @@ function navItemStyle(variant: "main" | "sub" = "main", path?: string) {
     currentPath === path && "border-cosmic-blue-base bg-lavender-base",
   );
 }
-
-const isHome = currentPath === routes.home.path;
 ---
 
 <header class="page-header border-lavender-base relative border-b-2">
