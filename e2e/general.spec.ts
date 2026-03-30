@@ -1,4 +1,4 @@
-import { routes } from "@/config/routes";
+import { allRoutes, home, staging } from "@/config/routes";
 import { isProduction, isStaging } from "@/config/stage";
 import { expect, test } from "@playwright/test";
 
@@ -8,9 +8,7 @@ const getTitle = (title?: string) =>
   title === "Zentrum für Legistik" ? title : `${title} — Zentrum für Legistik`;
 
 test.describe("page titles", () => {
-  const relevantRoutes = Object.values(routes).filter(
-    (route) => route !== routes.staging,
-  );
+  const relevantRoutes = allRoutes.filter((route) => route !== staging);
   relevantRoutes.forEach((route) => {
     test(`${route.path} has correct title`, async ({ page }) => {
       await page.goto(route.path);
@@ -25,7 +23,7 @@ test.describe("page titles", () => {
 test("the staging environment page should have a special marker", async ({
   page,
 }) => {
-  await page.goto(routes.home.path);
+  await page.goto(home.path);
   const bannerText = "Offizielle Website – Bundesrepublik Deutschland";
   const banner = page.getByText(bannerText);
   const expectedText = isProduction ? bannerText : bannerText + " (STAGING)";
@@ -37,13 +35,13 @@ test("staging-only pages are not accessible in production", async ({
   page,
 }) => {
   test.skip(!isProduction, "this test only targets production");
-  await page.goto(routes.staging.path);
+  await page.goto(staging.path);
   await expect.poll(() => page.title()).toBe(TITLE_404);
 });
 
 test("staging-only pages are accessible in staging", async ({ page }) => {
   test.skip(!isStaging, "this test only targets staging");
-  await page.goto(routes.staging.path);
+  await page.goto(staging.path);
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Staging");
 });
 

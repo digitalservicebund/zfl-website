@@ -1,8 +1,8 @@
-import { routes } from "@/config/routes";
+import { allRoutes } from "@/config/routes";
 import { expect, test } from "@playwright/test";
 
 test.describe("anchor links", () => {
-  Object.values(routes).forEach((route) => {
+  allRoutes.forEach((route) => {
     test(`${route.path} has valid anchor links`, async ({ page }) => {
       await page.goto(route.path);
 

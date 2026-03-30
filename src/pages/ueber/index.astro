@@ -1,7 +1,6 @@
 ---
 import Card from "@/components/Card.astro";
 import Hero from "@/components/Hero.astro";
-import { routes } from "@/config/routes.ts";
 import Layout from "@/layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
@@ -9,6 +8,13 @@ import ansatzImg from "./Ansatz.jpg";
 import zusammenarbeitImg from "./Zusammenarbeit.png";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants.ts";
 import InteractiveCard from "@/components/InteractiveCard.astro";
+import {
+  begleitungen,
+  home,
+  schulungen,
+  ueber_dasIstNeu,
+  ueber_zahlenUndFakten,
+} from "@/config/routes.ts";
 
 export const frontmatter = {
   title: "Über das ZfL",
@@ -77,7 +83,7 @@ const contactId = "kontaktieren-sie-uns";
         <div class="md:col-start-2 md:row-span-2 md:row-start-1">
           <ul class="list-unstyled">
             <li>
-              <a href={routes.home.path} class="kern-link text-2xl font-bold"
+              <a href={home.path} class="kern-link text-2xl font-bold"
                 ><Icon
                   name="ic:round-arrow-forward"
                   class="mr-4 inline size-32"
@@ -86,9 +92,7 @@ const contactId = "kontaktieren-sie-uns";
               >
             </li>
             <li>
-              <a
-                href={routes.begleitungen.path}
-                class="kern-link text-2xl font-bold"
+              <a href={begleitungen.path} class="kern-link text-2xl font-bold"
                 ><Icon
                   name="ic:round-arrow-forward"
                   class="mr-4 inline size-32"
@@ -97,9 +101,7 @@ const contactId = "kontaktieren-sie-uns";
               >
             </li>
             <li>
-              <a
-                href={routes.schulungen.path}
-                class="kern-link text-2xl font-bold"
+              <a href={schulungen.path} class="kern-link text-2xl font-bold"
                 ><Icon
                   name="ic:round-arrow-forward"
                   class="mr-4 inline size-32"
@@ -165,14 +167,14 @@ const contactId = "kontaktieren-sie-uns";
 
     <section class="gap-md grid grid-cols-1 md:grid-cols-2">
       <InteractiveCard
-        href={routes.ueber_dasIstNeu.path}
+        href={ueber_dasIstNeu.path}
         title="Das ist neu"
         subline="Aktuelle Arbeitspakete in Konzeption und Umsetzung"
       >
         {/* preliminary content while we wait for the new page */}
       </InteractiveCard>
       <InteractiveCard
-        href={routes.ueber_zahlenUndFakten.path}
+        href={ueber_zahlenUndFakten.path}
         title="Zahlen und Fakten"
         subline="Das Zentrum für Legistik leistet einen messbaren Beitrag zur
           Modernisierung der Rechtsetzung."
