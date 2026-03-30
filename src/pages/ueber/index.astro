@@ -8,6 +8,7 @@ import { Image } from "astro:assets";
 import ansatzImg from "./Ansatz.jpg";
 import zusammenarbeitImg from "./Zusammenarbeit.png";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants.ts";
+import InteractiveCard from "@/components/InteractiveCard.astro";
 
 export const frontmatter = {
   title: "Über das ZfL",
@@ -162,30 +163,20 @@ const contactId = "kontaktieren-sie-uns";
       </div>
     </section>
 
-    <section class="flex flex-col gap-x-80 gap-y-16 md:flex-row">
-      <Card look="bordered">
+    <section class="gap-md grid grid-cols-1 md:grid-cols-2">
+      <InteractiveCard
+        href={routes.ueber_dasIstNeu.path}
+        title="Das ist neu"
+        subline="Aktuelle Arbeitspakete in Konzeption und Umsetzung"
+      >
         {/* preliminary content while we wait for the new page */}
-        <h2 class="kern-title">
-          <a href={routes.ueber_dasIstNeu.path} class="kern-link--stretched"
-            >Das ist neu</a
-          >
-        </h2>
-        <p class="kern-subline">
-          Aktuelle Arbeitspakete in Konzeption und Umsetzung
-        </p>
-      </Card>
-      <Card look="bordered">
-        <h2 class="kern-title">
-          <a
-            href={routes.ueber_zahlenUndFakten.path}
-            class="kern-link--stretched">Zahlen und Fakten</a
-          >
-        </h2>
-        <p class="kern-subline">
-          Das Zentrum für Legistik leistet einen messbaren Beitrag zur
-          Modernisierung der Rechtsetzung.
-        </p>
-      </Card>
+      </InteractiveCard>
+      <InteractiveCard
+        href={routes.ueber_zahlenUndFakten.path}
+        title="Zahlen und Fakten"
+        subline="Das Zentrum für Legistik leistet einen messbaren Beitrag zur
+          Modernisierung der Rechtsetzung."
+      />
     </section>
 
     <section id={contactId}>
