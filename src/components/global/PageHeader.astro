@@ -138,7 +138,10 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
   >
     {
       headerNavigation.map((item) => (
-        <a href={item.path} class={navItemStyle("sub", item.path)}>
+        <a
+          href={item.path}
+          class={navItemStyle("sub", item.path === currentPath)}
+        >
           {item.title}
         </a>
       ))
