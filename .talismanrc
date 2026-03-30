@@ -23,7 +23,7 @@ fileignoreconfig:
       - "key:"
       - "TRIVY_PASSWORD: \\${{  }}"
   - filename: AGENTS.md
-    checksum: 694512cff23f0a042a85c5e9e215703d7b921f3b15a51796d75a7385d1b389e2
+    checksum: 62a655d53df765c2111c2953222b1242075a14631d8e2a796c4a900924cef1aa
   - filename: doc/adr/0004-configuration-management.md
     checksum: 367a262dfe679ea3254c86879a09d98b0e03863b4c514f58ccd3609afb58bdae
   - filename: doc/adr/0007-use-posthog-reverse-proxy.md
