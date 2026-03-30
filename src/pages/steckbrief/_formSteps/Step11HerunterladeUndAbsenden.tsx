@@ -126,17 +126,7 @@ export default function Step11HerunterladeUndAbsenden() {
         Wenn Sie bereits <strong>Visualisierungen</strong> erstellt haben,
         können Sie diese als Anhang mitschicken.
       </p>
-      <div class="kern-form-input max-w-[422px]">
-        <label class="kern-label" for="select">
-          Empfänger auswählen
-        </label>
-        <div class="kern-form-input__select-wrapper">
-          <select class="kern-form-input__select" id="select">
-            <option>Bitte auswählen</option>
-          </select>
-        </div>
-      </div>
-      <div class="mt-32">
+      <div>
         <button class="kern-btn kern-btn--secondary">
           <span class="kern-label">E-Mail erstellen</span>
         </button>
