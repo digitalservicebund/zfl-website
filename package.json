@@ -17,7 +17,7 @@
     "lint:fix-selected": "eslint --fix",
     "test": "vitest",
     "test:e2e": "pnpm run build && playwright test --project=chromium",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "astro check",
     "docker:build": "docker build -t zfl-website .",
     "docker:run": "docker run -d -p 8080:8080 --name zfl-website zfl-website:latest",
     "docker:stop": "docker stop zfl-website || true && docker rm zfl-website",
