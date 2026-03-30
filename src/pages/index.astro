@@ -15,6 +15,33 @@ export const frontmatter = {
 
 <Layout title="">
   <main class="breakout-grid">
+    <div
+      id="vorhaben-banner"
+      class="breakout bg-[#D5F6FF] py-24"
+      x-data="{ showBanner: true }"
+      x-show="showBanner"
+    >
+      <div class="mb-8 flex w-full max-w-[850px] items-center justify-between">
+        <div class="flex items-center gap-16">
+          <Icon name="ic:twotone-flag" class="text-2xl text-[#006685]" />
+          <p class="kern-title m-0 p-0">
+            Starten Sie Ihr erstes Vorhaben mit der neuen Frühphase
+          </p>
+        </div>
+        <button
+          class="increase-tap-area text-2xl text-[#006685] hover:opacity-75"
+          @click="showBanner = false"
+        >
+          <Icon name="ic:baseline-clear" />
+        </button>
+      </div>
+      <p class="kern-body">
+        Lernen Sie jetzt über die neue Frühphase für Handlungsvorhaben und
+        starten Sie ihr erstes Vorhaben – Schritt für Schritt angeleitet. <a
+          href={routes.vorhaben.path}>Zur Frühphase</a
+        >
+      </p>
+    </div>
     <Hero look="blue">
       <h1>Bessere Rechtsetzung in allen Phasen Ihres Vorhabens</h1>
       <p slot="subtitle">

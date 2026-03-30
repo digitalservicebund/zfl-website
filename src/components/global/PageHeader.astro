@@ -82,6 +82,18 @@ function navItemStyle(variant: "main" | "sub" = "main", path?: string) {
           <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
         </p>
       </div>
+      {
+        currentPath === "/" && (
+          <div class="flex items-center">
+            <a
+              href={routes.vorhaben.path}
+              class="kern-btn kern-btn--primary text-white"
+            >
+              Vorhaben starten
+            </a>
+          </div>
+        )
+      }
     </nav>
 
     <!-- Mobile Menu Toggle -->
@@ -111,6 +123,16 @@ function navItemStyle(variant: "main" | "sub" = "main", path?: string) {
     popover="auto"
     class="mobile-menu-popover border-lavender-base m-0 w-auto max-w-none border-t-2 bg-white min-[900px]:hidden"
   >
+    {
+      currentPath === "/" && (
+        <a
+          href={routes.vorhaben.path}
+          class="kern-btn kern-btn--block kern-btn--primary text-white"
+        >
+          Vorhaben starten
+        </a>
+      )
+    }
     {
       headerNavigation.map((item) => (
         <a href={item.path} class={navItemStyle("sub", item.path)}>
