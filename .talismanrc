@@ -21,7 +21,7 @@ fileignoreconfig:
   - filename: .github/workflows/scan.yml
     allowed_patterns:
       - "key:"
-      - "TRIVY_PASSWORD: \\${{ }}"
+      - "TRIVY_PASSWORD: \\${{  }}"
   - filename: AGENTS.md
     checksum: 694512cff23f0a042a85c5e9e215703d7b921f3b15a51796d75a7385d1b389e2
   - filename: doc/adr/0004-configuration-management.md
