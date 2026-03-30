@@ -1,12 +1,7 @@
+import { begleitungen, schulungen, ueber, werkzeuge } from "@/config/routes.ts";
+import { renderToDOM } from "@/utils/testUtils.ts";
 import { describe, expect, it, vi } from "vitest";
 import { baseUrl } from "../../../vitest.config.ts";
-import {
-  begleitungen,
-  schulungen,
-  ueber,
-  werkzeuge,
-} from "../../config/routes";
-import { renderToDOM } from "../../utils/testUtils";
 import PageHeader from "./PageHeader.astro";
 
 vi.mock("@/config/stage", () => ({
@@ -57,7 +52,8 @@ describe("link highlighting", async () => {
       expect(links!.length).toBeGreaterThan(0);
 
       for (const link of links ?? []) {
-        expect(link.classList).not.toContain("bg-lavender-base");
+        expect(link.classList.contains("bg-lavender-base")).toBe(false);
+        expect(link.getAttribute("aria-current")).toBeFalsy();
       }
     });
   }
