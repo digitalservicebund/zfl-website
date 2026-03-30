@@ -30,6 +30,8 @@ function navItemStyle(variant: "main" | "sub" = "main", path?: string) {
     currentPath === path && "border-cosmic-blue-base bg-lavender-base",
   );
 }
+
+const isHome = currentPath === routes.home.path;
 ---
 
 <header class="page-header border-lavender-base relative border-b-2">
@@ -83,7 +85,7 @@ function navItemStyle(variant: "main" | "sub" = "main", path?: string) {
         </p>
       </div>
       {
-        currentPath === "/" && (
+        isHome && (
           <div class="flex items-center">
             <a
               href={routes.vorhaben.path}
@@ -124,7 +126,7 @@ function navItemStyle(variant: "main" | "sub" = "main", path?: string) {
     class="mobile-menu-popover border-lavender-base m-0 w-auto max-w-none border-t-2 bg-white min-[900px]:hidden"
   >
     {
-      currentPath === "/" && (
+      isHome && (
         <a
           href={routes.vorhaben.path}
           class="kern-btn kern-btn--block kern-btn--primary text-white"
