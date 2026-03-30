@@ -9,7 +9,7 @@ interface Props {
   body?: string;
   subline?: string;
   image?: ImageMetadata;
-  imageAlt: string | null;
+  imageAlt?: string | null;
   imageSource?: string;
 }
 
@@ -19,7 +19,7 @@ const { preline, title, href, subline, body, image, imageAlt, imageSource } =
 
 <article class="kern-card kern-card--interactive">
   {
-    image && (
+    image && imageAlt !== undefined && (
       <div class="kern-card__media relative">
         <Image src={image} alt={imageAlt} class="h-208 object-cover" />
         {imageSource && (
