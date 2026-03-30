@@ -78,7 +78,7 @@
   }
 
   :is(h2, h3, h4):first-child {
-    margin-top: 0px;
+    margin-top: 0;
   }
 
   section {
@@ -129,8 +129,8 @@
     padding: 1rem 2rem 1rem 1rem;
     border-bottom: 2px solid var(--color-lavender-400, #eceef6);
     background: var(--color-lavender-base, #e3e6f2);
-    color: var(--semantic-color-text, #000);
-    line-height: 22.5px;
+    color: black;
+    line-height: 22px;
     letter-spacing: 0.16px;
   }
   tbody.table-body-cell tr td {
@@ -178,12 +178,13 @@ address {
     @apply text-gray-100 visited:text-gray-300;
   }
 
-  &[href^="http"]::after {
+  /* mark external links according to the guidelines at https://www.kern-ux.de/komponenten/link#verwendungsregeln */
+  &[href^="http"]::before {
     content: "";
     display: inline-block;
     width: 0.875em;
     height: 0.875em;
-    margin-left: 0.125em;
+    margin-inline-end: 0.125em;
     margin-bottom: -0.125em;
     background-color: currentColor;
     mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z'/%3E%3C/svg%3E");
