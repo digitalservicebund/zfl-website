@@ -78,7 +78,7 @@
   }
 
   :is(h2, h3, h4):first-child {
-    margin-top: 0px;
+    margin-top: 0;
   }
 
   section {
@@ -129,8 +129,8 @@
     padding: 1rem 2rem 1rem 1rem;
     border-bottom: 2px solid var(--color-lavender-400, #eceef6);
     background: var(--color-lavender-base, #e3e6f2);
-    color: var(--semantic-color-text, #000);
-    line-height: 22.5px;
+    color: black;
+    line-height: 22px;
     letter-spacing: 0.16px;
   }
   tbody.table-body-cell tr td {
