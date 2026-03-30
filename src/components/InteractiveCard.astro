@@ -3,13 +3,13 @@ import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 
 interface Props {
-  preline?: string;
   title: string;
   href: string;
-  subline: string;
-  body: string;
+  preline?: string;
+  body?: string;
+  subline?: string;
   image?: ImageMetadata;
-  imageAlt?: string;
+  imageAlt?: string | null;
   imageSource?: string;
 }
 
@@ -19,7 +19,7 @@ const { preline, title, href, subline, body, image, imageAlt, imageSource } =
 
 <article class="kern-card kern-card--interactive">
   {
-    image && imageAlt && (
+    image && imageAlt !== undefined && (
       <div class="kern-card__media relative">
         <Image src={image} alt={imageAlt} class="h-208 object-cover" />
         {imageSource && (
@@ -37,11 +37,15 @@ const { preline, title, href, subline, body, image, imageAlt, imageSource } =
         <h2 class="kern-title">
           <a href={href} class="link-unstyled kern-link--stretched">{title}</a>
         </h2>
-        <p class="kern-subline">{subline}</p>
+        {subline && <p class="kern-subline">{subline}</p>}
       </hgroup>
     </header>
-    <section class="kern-card__body">
-      <p class="kern-body">{body}</p>
-    </section>
+    {
+      body && (
+        <section class="kern-card__body">
+          <p class="kern-body">{body}</p>
+        </section>
+      )
+    }
   </div>
 </article>

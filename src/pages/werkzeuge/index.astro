@@ -3,7 +3,7 @@ import Hero from "@/components/Hero.astro";
 import { ZFL_EMAIL } from "@/config/constants";
 import Layout from "@/layouts/Layout.astro";
 import { mailto } from "@/utils/mailtoHelper";
-import ToolCard from "./_ToolCard.astro";
+import InteractiveCard from "@/components/InteractiveCard.astro";
 import digitalcheckImage from "./Digitalcheck.png";
 import eGesetzgebungImage from "./eGesetzgebung.png";
 import eNormImage from "./eNorm.jpg";
@@ -50,7 +50,7 @@ export const frontmatter = {
     </Hero>
 
     <section class="gap-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-      <ToolCard
+      <InteractiveCard
         title="Digitalcheck"
         href="https://digitalcheck.bund.de/"
         subline="Digitale Regelungen erarbeiten"
@@ -58,7 +58,7 @@ export const frontmatter = {
         image={digitalcheckImage}
         imageAlt="Symbolbild für den Digitalcheck"
       />
-      <ToolCard
+      <InteractiveCard
         title="Rulemap Builder"
         href="https://rulemapping.org/de"
         subline="Regelungen als Entscheidungsmodelle erstellen"
@@ -67,7 +67,7 @@ export const frontmatter = {
         imageAlt="Symbolbild für den Rulemap Builder"
         imageSource="Rulemapping Group"
       />
-      <ToolCard
+      <InteractiveCard
         title="E-Gesetzgebung"
         href="https://plattform.egesetzgebung.bund.de/cockpit/"
         subline="Das Rechtsetzungsverfahren auf Bundesebene"
@@ -76,7 +76,7 @@ export const frontmatter = {
         imageAlt="Symbolbild für die E-Gesetzgebung"
         imageSource="BMI"
       />
-      <ToolCard
+      <InteractiveCard
         title="eNorm"
         href="https://www.enorm.bund.de/"
         subline="Elektronische Arbeitshilfen und Verkündung"
@@ -85,7 +85,7 @@ export const frontmatter = {
         imageAlt="Interface der eNorm"
         imageSource="BMJV"
       />
-      <ToolCard
+      <InteractiveCard
         title="FIM – Föderales Informations­management"
         href="https://fimportal.de/"
         subline="Der Standard für Verwaltungsleistungen"
@@ -94,7 +94,7 @@ export const frontmatter = {
         imageAlt="Symbolbild für das Föderale Informationsmanagement"
         imageSource="FITKO"
       />
-      <ToolCard
+      <InteractiveCard
         title="Interoperabilitäts-Bewertungen"
         href="https://digitalcheck.bund.de/interoperabel"
         subline="EU-Interoperabilität prüfen"
