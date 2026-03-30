@@ -37,7 +37,9 @@ export const orderRoutesForNavigation = (routeA: Route, routeB: Route) => {
   const orderA = routeA.navOrder ?? Number.POSITIVE_INFINITY;
   const orderB = routeB.navOrder ?? Number.POSITIVE_INFINITY;
 
-  return orderA !== orderB
-    ? orderA - orderB
-    : routeA.path.localeCompare(routeB.path);
+  if (orderA !== orderB) {
+    return orderA - orderB;
+  }
+
+  return routeA.path.localeCompare(routeB.path);
 };
