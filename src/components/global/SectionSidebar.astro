@@ -1,0 +1,32 @@
+---
+import DrilldownNavigation from "@/components/global/DrilldownNavigation.astro";
+import { getSectionNavigation } from "@/utils/navigation/drilldown";
+
+const navigation = getSectionNavigation(Astro.url.pathname);
+const initialDepth = navigation?.activePanel.depth;
+const sidebarState = navigation
+  ? `{ currentPanel: "${navigation.activePanel.id}", currentDepth: ${initialDepth} }`
+  : null;
+const sidebarClassBinding =
+  "{ 'bg-lavender-200': currentDepth === 1, 'bg-lavender-base': currentDepth >= 2 }";
+---
+
+{
+  navigation && (
+    <aside
+      class:list={[
+        initialDepth === 1 ? "bg-lavender-200" : "bg-lavender-base",
+        "hidden min-[900px]:block",
+      ]}
+      x-data={sidebarState}
+      x-bind:class={sidebarClassBinding}
+    >
+      <nav aria-label="Abschnittsnavigation" class="sticky top-0">
+        <DrilldownNavigation
+          navigation={navigation}
+          panelIdPrefix="section-sidebar"
+        />
+      </nav>
+    </aside>
+  )
+}

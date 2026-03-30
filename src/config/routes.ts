@@ -105,7 +105,7 @@ export const ueber = {
   title: "Über das ZfL",
   parent: null,
   sitemap: true,
-  isStagingOnly: true,
+  isStagingOnly: false,
   navOrder: null,
   navLabel: null,
 } as const;

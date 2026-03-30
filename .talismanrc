@@ -42,6 +42,12 @@ fileignoreconfig:
   - filename: src/config/routes.ts
     allowed_patterns:
       - key
+  - filename: src/utils/navigation/drilldown.ts
+    allowed_patterns:
+      - key
+  - filename: src/utils/navigation/navigation.test.ts
+    allowed_patterns:
+      - key
   - filename: integrations/routeGeneration/extractRouteMeta.ts
     allowed_patterns:
       - key

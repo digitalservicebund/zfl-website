@@ -1,4 +1,5 @@
 ---
+import DrilldownNavigation from "@/components/global/DrilldownNavigation.astro";
 import Kopfzeile from "@/components/global/Kopfzeile.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import {
@@ -11,6 +12,7 @@ import {
 } from "@/config/routes";
 import bundLogoWhite from "@/images/logo/bund-logo-white.svg";
 import bundLogo from "@/images/logo/bund-logo.png";
+import { getMobileMenuNavigation } from "@/utils/navigation/drilldown";
 import { getRouteLabel, isRouteVisible } from "@/utils/navigation/routeUtils";
 import { removeTrailingSlash } from "@/utils/path";
 import { Icon } from "astro-icon/components";
@@ -22,6 +24,9 @@ const currentPath = removeTrailingSlash(pathname);
 
 const HEADER_ROUTES: Route[] = [werkzeuge, begleitungen, schulungen, ueber];
 const headerNavigation = HEADER_ROUTES.filter(isRouteVisible);
+const mobileMenu = getMobileMenuNavigation(currentPath, headerNavigation);
+
+const mobileMenuInitialDepth = mobileMenu.activePanel.depth;
 
 const mobileMenuId = "page-header-mobile-menu";
 
@@ -61,7 +66,7 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
     </a>
 
     <!-- Desktop Navigation -->
-    <nav class="hidden min-[900px]:flex" data-testid="desktop-nav">
+    <nav class="hidden min-[900px]:flex" aria-label="Hauptnavigation">
       {
         headerNavigation.map((route) => (
           <a
@@ -139,26 +144,30 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
   <!-- Mobile Navigation -->
   <nav
     id={mobileMenuId}
-    class="mobile-menu-popover border-lavender-base m-0 w-auto max-w-none border-t-2 bg-white min-[900px]:hidden"
+    class:list={[
+      "mobile-menu-popover border-lavender-base m-0 w-auto max-w-none border-t-2 min-[900px]:hidden",
+      {
+        "bg-white": mobileMenuInitialDepth === 0,
+        "bg-lavender-200": mobileMenuInitialDepth === 1,
+        "bg-lavender-base": mobileMenuInitialDepth >= 2,
+      },
+    ]}
+    x-data={`{ currentPanel: "${mobileMenu.activePanel.id}", initialPanel: "${mobileMenu.activePanel.id}", currentDepth: ${mobileMenuInitialDepth}, initialDepth: ${mobileMenuInitialDepth} }`}
     x-cloak
     x-show="mobileMenuOpen"
     :aria-hidden="!mobileMenuOpen"
+    @page-header-mobile-menu-opened.window="currentPanel = initialPanel; currentDepth = initialDepth"
+    :class={`{ 'bg-white': currentDepth === 0, 'bg-lavender-200': currentDepth === 1, 'bg-lavender-base': currentDepth >= 2 }`}
   >
-    {
-      headerNavigation.map((route) => (
-        <a
-          href={route.path}
-          class={navItemStyle("sub", currentPath === route.path)}
-          aria-current={currentPath === route.path ? "page" : undefined}
-        >
-          {getRouteLabel(route)}
-        </a>
-      ))
-    }
-    <div class="ml-4 p-16 text-gray-800">
-      Kontakt:{" "}
-      <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
-    </div>
+    <DrilldownNavigation
+      navigation={mobileMenu}
+      panelIdPrefix="mobile-menu"
+      rootPanelId="root"
+    >
+      <div slot="root-footer" class="px-12 text-gray-800">
+        Kontakt: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
+      </div>
+    </DrilldownNavigation>
   </nav>
 </header>
 
