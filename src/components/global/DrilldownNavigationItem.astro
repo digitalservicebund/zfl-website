@@ -14,12 +14,14 @@ interface Props {
 const { item, currentPath, panelElementId } = Astro.props;
 const isCurrent = currentPath === item.path;
 
-function itemStyle(active = false) {
+function itemStyle(active = false, hasChildren = false) {
   return twMerge(
     "w-full link-unstyled flex items-center gap-4 rounded-sm py-8 px-16 hover:bg-cosmic-blue-base hover:text-white",
     "justify-between",
+    active && "bg-(--active-item-bg-color,white) font-bold",
     active &&
-      "bg-cosmic-blue-400 hover:bg-cosmic-blue-400 text-white font-bold",
+      !hasChildren &&
+      "hover:text-initial hover:bg-surface-highlight cursor-default", // disable active styles for leaf nodes
   );
 }
 ---
@@ -29,7 +31,7 @@ function itemStyle(active = false) {
     item.panelId ? (
       <button
         type="button"
-        class={itemStyle(isCurrent)}
+        class={itemStyle(isCurrent, true)}
         @click={`currentPanel = "${item.panelId}"; currentDepth++`}
         aria-label={`${item.label} Untermenü öffnen`}
         aria-controls={panelElementId}
@@ -45,7 +47,7 @@ function itemStyle(active = false) {
     ) : (
       <a
         href={item.path}
-        class={itemStyle(isCurrent)}
+        class={itemStyle(isCurrent, false)}
         aria-current={isCurrent ? "page" : undefined}
       >
         <span>{item.label}</span>
