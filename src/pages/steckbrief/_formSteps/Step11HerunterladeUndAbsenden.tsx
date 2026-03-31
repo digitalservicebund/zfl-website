@@ -33,7 +33,7 @@ export default function Step11HerunterladeUndAbsenden() {
             <span class="kern-number">2</span>
             <div class="kern-task-list__title" id="task2-title">
               <a
-                href="#"
+                href="#mit-leitungsebene-abklaeren"
                 class="kern-link kern-link--stretched"
                 aria-describedby="task2-status"
               >
@@ -42,22 +42,22 @@ export default function Step11HerunterladeUndAbsenden() {
             </div>
           </li>
           <li class="kern-task-list__item">
-            <span class="kern-number">2</span>
-            <div class="kern-task-list__title" id="task2-title">
+            <span class="kern-number">3</span>
+            <div class="kern-task-list__title" id="task3-title">
               <a
-                href="#"
+                href="#steckbrief-versenden"
                 class="kern-link kern-link--stretched"
-                aria-describedby="task2-status"
+                aria-describedby="task3-status"
               >
                 Steckbrief versenden an andere Ressorts, ZfL, NKR-S und StaBA
               </a>
             </div>
           </li>
           <li class="kern-task-list__item">
-            <span class="kern-number">3</span>
-            <div class="kern-task-list__title" id="task3-title">
+            <span class="kern-number">4</span>
+            <div class="kern-task-list__title" id="task4-title">
               <p class="kern-body mb-0">Rückmeldungen sammeln</p>
-              <div class="kern-task-list__status" id="task3-status">
+              <div class="kern-task-list__status" id="task4-status">
                 <span class="kern-badge kern-badge--info">
                   <span class="kern-label kern-label--small">
                     Noch nicht zu bearbeiten
@@ -111,16 +111,16 @@ export default function Step11HerunterladeUndAbsenden() {
           </button>
         </div>
       </div>
-      <h3>Mit der Leitungsebene abklären</h3>
+      <h3 id="mit-leitungsebene-abklaeren">Mit der Leitungsebene abklären</h3>
       <p>
         Stimmen Sie den Steckbrief mit Ihrem Referat und der Referatsleitung ab.
       </p>
-      <h3>Steckbrief versenden</h3>
+      <h3 id="steckbrief-versenden">Steckbrief versenden</h3>
       <p>
         Vervollständigen Sie fehlende Angaben. Sobald das Dokument bereit ist,
-        können Sie es direkt an die beteiligten Ressorts, Statistisches
-        Bundesamt (Destatis) und den Nationaler Normenkontrollrat (NKR) per
-        E-Mail übermitteln.
+        können Sie es direkt an alle anderen Ressorts, das Statistische
+        Bundesamt (StBA) und den Nationalen Normenkontrollrat (NKR) per E-Mail
+        übermitteln.
       </p>
       <p>
         Wenn Sie bereits <strong>Visualisierungen</strong> erstellt haben,
