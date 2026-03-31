@@ -47,9 +47,16 @@ describe("link highlighting", async () => {
 
       const currentLink = nav?.querySelector(`a[href="${activeRoute.path}"]`);
       expect(currentLink).toBeTruthy();
-      expect(currentLink?.classList).toContain(
-        name === "mobile menu list" ? "bg-cosmic-blue-400" : "bg-lavender-base",
-      );
+      /*
+       note: classList.contains checks for the token to be in the class list,
+       whereas expect().toContain does substring matching. That might break
+       with Tailwind variants like `hover:`.
+      */
+      expect(
+        currentLink?.classList.contains(
+          name === "mobile menu list" ? "font-bold" : "bg-lavender-base",
+        ),
+      ).toBe(true);
     });
 
     it(`doesn't highlight other items in ${name}`, () => {
@@ -153,7 +160,7 @@ describe("nested navigation", () => {
 
     const parentLink = desktopNav?.querySelector(`a[href="${ueber.path}"]`);
     expect(parentLink).toBeTruthy();
-    expect(parentLink?.classList).not.toContain("bg-lavender-base");
+    expect(parentLink?.classList.contains("bg-lavender-base")).toBe(false);
     expect(parentLink?.getAttribute("aria-current")).toBeNull();
   });
 
