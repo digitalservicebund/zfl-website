@@ -144,20 +144,13 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
   <!-- Mobile Navigation -->
   <nav
     id={mobileMenuId}
-    class:list={[
-      "mobile-menu-popover border-lavender-base m-0 w-auto max-w-none border-t-2 min-[900px]:hidden",
-      {
-        "bg-white": mobileMenuInitialDepth === 0,
-        "bg-lavender-200": mobileMenuInitialDepth === 1,
-        "bg-lavender-base": mobileMenuInitialDepth >= 2,
-      },
-    ]}
+    class="mobile-menu-popover border-lavender-base m-0 w-auto max-w-none border-t-2 min-[900px]:hidden"
     x-data={`{ currentPanel: "${mobileMenu.activePanel.id}", initialPanel: "${mobileMenu.activePanel.id}", currentDepth: ${mobileMenuInitialDepth}, initialDepth: ${mobileMenuInitialDepth} }`}
     x-cloak
     x-show="mobileMenuOpen"
     :aria-hidden="!mobileMenuOpen"
     @page-header-mobile-menu-opened.window="currentPanel = initialPanel; currentDepth = initialDepth"
-    :class={`{ 'bg-white': currentDepth === 0, 'bg-lavender-200': currentDepth === 1, 'bg-lavender-base': currentDepth >= 2 }`}
+    x-bind:data-depth="currentDepth"
   >
     <DrilldownNavigation
       navigation={mobileMenu}
@@ -172,6 +165,7 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
 </header>
 
 <style>
+  @reference "@/styles/global.css";
   .page-header {
     /* 32px is the height of the Kopfzeile, 72px is the height of the header */
     --page-header-offset: 104px;
@@ -189,11 +183,21 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
   }
 
   .mobile-menu-popover {
+    @apply bg-lavender-base;
     position: absolute;
     top: calc(var(--page-header-offset) - 2px);
     right: 0;
     left: 0;
     z-index: 20;
+  }
+
+  .mobile-menu-popover[data-depth="0"] {
+    @apply bg-white;
+    --active-item-bg-color: var(--color-lavender-surface-highlight);
+  }
+  .mobile-menu-popover[data-depth="1"] {
+    @apply bg-lavender-200;
+    --active-item-bg-color: var(--color-lavender-surface-highlight);
   }
 
   [x-cloak] {
