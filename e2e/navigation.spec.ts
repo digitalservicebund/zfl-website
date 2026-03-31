@@ -65,7 +65,7 @@ test.describe("Header navigation", () => {
       name: "Regelungsbegleitung",
     });
 
-    await expect(activeLink).toHaveClass(/bg-cosmic-blue-400/);
+    await expect(activeLink).toContainClass("font-bold");
     await expect(activeLink).toHaveAttribute("aria-current", "page");
   });
 
@@ -85,7 +85,7 @@ test.describe("Header navigation", () => {
       name: "Schulungen",
     });
 
-    await expect(activeLink).toHaveClass(/bg-cosmic-blue-400/);
+    await expect(activeLink).toContainClass("font-bold");
     await expect(activeLink).toHaveAttribute("aria-current", "page");
   });
 
