@@ -16,7 +16,7 @@ const isCurrent = currentPath === item.path;
 
 function itemStyle(active = false, hasChildren = false) {
   return twMerge(
-    "w-full link-unstyled flex items-center gap-4 rounded-sm py-8 px-16 hover:bg-cosmic-blue-base hover:text-white",
+    "w-full link-unstyled flex items-center gap-4 rounded-sm p-8 hover:bg-cosmic-blue-base hover:text-white",
     "justify-between",
     active && "bg-(--active-item-bg-color,white) font-bold",
     active &&
