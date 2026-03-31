@@ -16,7 +16,7 @@ const sidebarClassBinding =
     <aside
       class:list={[
         initialDepth === 1 ? "bg-lavender-200" : "bg-lavender-base",
-        "hidden min-[900px]:block",
+        "hidden border-r border-neutral-300 min-[900px]:block",
       ]}
       x-data={sidebarState}
       x-bind:class={sidebarClassBinding}
