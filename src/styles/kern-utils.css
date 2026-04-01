@@ -5,6 +5,11 @@
   color: inherit;
 }
 
+@theme {
+  /* re-declare semantic colors to make them available in Tailwind */
+  --color-form-input-background: var(--kern-color-form-input-background);
+}
+
 @utility kern-heading-display {
   /* padding: var(--kern-metric-baseline-heading-display-padding-top, 12px) var(--kern-metric-space-none, 0px) var(--kern-metric-baseline-heading-display-padding-bottom, 12px) var(--kern-metric-space-none, 0px); */
   font-size: var(--kern-typography-font-size-adaptive-2x-large, 48px);

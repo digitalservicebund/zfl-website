@@ -102,10 +102,10 @@ export const staging = {
 export const ueber = {
   key: "ueber",
   path: "/ueber",
-  title: "Über das ZfL",
+  title: "Über uns",
   parent: null,
   sitemap: true,
-  isStagingOnly: true,
+  isStagingOnly: false,
   navOrder: null,
   navLabel: null,
 } as const;

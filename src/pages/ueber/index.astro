@@ -17,9 +17,9 @@ import {
 } from "@/config/routes.ts";
 
 export const frontmatter = {
-  title: "Über das ZfL",
+  title: "Über uns",
   sitemap: true,
-  isStagingOnly: true,
+  isStagingOnly: false,
 };
 
 const contactId = "kontaktieren-sie-uns";
@@ -27,7 +27,7 @@ const contactId = "kontaktieren-sie-uns";
 
 <Layout title={frontmatter.title}>
   <main class="breakout-grid">
-    <Hero>
+    <Hero class="bg-lavender-400">
       <h1>Über das Zentrum für Legistik</h1>
       <p class="kern-subline kern-subline--large" slot="subtitle">
         Die zentrale Anlaufstelle für bessere Rechtsetzung
@@ -52,7 +52,7 @@ const contactId = "kontaktieren-sie-uns";
           />
         </div>
         <div class="md:w-7/12">
-          <h2 class="kern-heading-large">Auftrag</h2>
+          <h2 class="kern-heading-large pt-0">Auftrag</h2>
           <p>
             Die <a
               href="https://bmds.bund.de/fileadmin/BMDS/Dokumente/Modernisierungsagenda_barrierefrei.pdf"
@@ -130,7 +130,7 @@ const contactId = "kontaktieren-sie-uns";
     <section>
       <div class="flex flex-col gap-32 md:flex-row">
         <div class="md:w-7/12">
-          <h2 class="kern-heading-large mb-16">Herangehensweise</h2>
+          <h2 class="kern-heading-large mb-16 pt-0">Herangehensweise</h2>
           <p>
             Das Zentrum für Legistik nimmt den gesamten Gesetzgebungsprozess vom
             ersten Entwurf bis zur praktischen Umsetzung in den Blick. Der Fokus
@@ -165,24 +165,24 @@ const contactId = "kontaktieren-sie-uns";
       </div>
     </section>
 
-    <section class="gap-md grid grid-cols-1 md:grid-cols-2">
-      <KernCard
-        href={ueber_dasIstNeu.path}
-        title="Das ist neu"
-        subline="Aktuelle Arbeitspakete in Konzeption und Umsetzung"
-      >
-        {/* preliminary content while we wait for the new page */}
-      </KernCard>
-      <KernCard
-        href={ueber_zahlenUndFakten.path}
-        title="Zahlen und Fakten"
-        subline="Das Zentrum für Legistik leistet einen messbaren Beitrag zur
+    <section>
+      <div class="gap-md mb-md grid grid-cols-1 md:grid-cols-2">
+        <KernCard
+          href={ueber_dasIstNeu.path}
+          title="Das ist neu"
+          subline="Aktuelle Arbeitspakete in Konzeption und Umsetzung"
+        >
+          {/* preliminary content while we wait for the new page */}
+        </KernCard>
+        <KernCard
+          href={ueber_zahlenUndFakten.path}
+          title="Zahlen und Fakten"
+          subline="Das Zentrum für Legistik leistet einen messbaren Beitrag zur
           Modernisierung der Rechtsetzung."
-      />
-    </section>
-
-    <section id={contactId}>
+        />
+      </div>
       <Card
+        id={contactId}
         look="blue"
         class="flex justify-center py-48 max-md:rounded-none md:py-56"
       >
