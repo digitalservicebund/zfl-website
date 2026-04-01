@@ -7,7 +7,7 @@ import { Image } from "astro:assets";
 import ansatzImg from "./Ansatz.jpg";
 import zusammenarbeitImg from "./Zusammenarbeit.png";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants.ts";
-import InteractiveCard from "@/components/InteractiveCard.astro";
+import KernCard from "@/components/KernCard.astro";
 import {
   begleitungen,
   home,
@@ -167,14 +167,14 @@ const contactId = "kontaktieren-sie-uns";
 
     <section>
       <div class="gap-md mb-md grid grid-cols-1 md:grid-cols-2">
-        <InteractiveCard
+        <KernCard
           href={ueber_dasIstNeu.path}
           title="Das ist neu"
           subline="Aktuelle Arbeitspakete in Konzeption und Umsetzung"
         >
           {/* preliminary content while we wait for the new page */}
-        </InteractiveCard>
-        <InteractiveCard
+        </KernCard>
+        <KernCard
           href={ueber_zahlenUndFakten.path}
           title="Zahlen und Fakten"
           subline="Das Zentrum für Legistik leistet einen messbaren Beitrag zur
