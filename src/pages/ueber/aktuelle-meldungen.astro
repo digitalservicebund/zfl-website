@@ -1,0 +1,89 @@
+---
+import Hero from "@/components/Hero.astro";
+import PostTeaser from "@/components/PostTeaser.astro";
+import Layout from "@/layouts/Layout.astro";
+
+export const frontmatter = {
+  title: "Aktuelle Meldungen",
+  sitemap: true,
+  navOrder: 3,
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero>
+      <h1>Aktuelle Meldungen</h1><div>
+        <p slot="subtitle">
+          Hier finden Sie aktuelle Meldungen und Veröffentlichungen rund um das
+          Zentrum für Legistik.
+        </p>
+      </div>
+    </Hero>
+    <section class="max-w-a11y">
+      <PostTeaser
+        title="Wie wir am Zentrum für Legistik arbeiten"
+        date="11.03.2026"
+        source="DigitalService Blog"
+        href="https://digitalservice.bund.de/blog/wie-wir-am-zentrum-fuer-legistik-arbeiten"
+        body="Das Zentrum für Legistik entwickelt Lösungen für eine bessere Rechtsetzung. Wir zeigen, wie wir dabei methodisch vorgehen."
+      />
+      <hr class="kern-divider" aria-hidden="true" />
+      <PostTeaser
+        title="Gute Digitalisierung beginnt im Gesetzestext"
+        date="10.02.2026"
+        source="BehördenSpiegel"
+        href="https://digitalservice.bund.de/media/pages/presse/pressespiegel/51bd299c07-1770644385/behoerden_spiegel_februrary-2026.pdf"
+        body="Wenn heute über einen leistungsfähigen Staat gesprochen wird, geht es oft um technische Lösungen. Ihre Wirksamkeit hängt jedoch entscheidend von der Qualität der rechtlichen Grundlage ab."
+      />
+      <hr class="kern-divider" aria-hidden="true" />
+      <PostTeaser
+        title="Leitfaden Erfüllungsaufwand: Aktuelle Version verfügbar"
+        date="01.02.2026"
+        source="E-Gesetzgebung"
+        href="https://plattform.egesetzgebung.bund.de/cockpit/#/hilfen:~:text=Leitfaden%20Erf%C3%BCllungsaufwand%20(PDF)"
+        body="Der aktualisierte Leitfaden zur Ermittlung und Darstellung des Erfüllungsaufwands in Regelungsvorhaben der Bundesregierung steht online zur Verfügung."
+      />
+      <hr class="kern-divider" aria-hidden="true" />
+      <PostTeaser
+        title="Digitalministerium gründet Zentrum für Legistik für fünf Millionen Euro im ersten Jahr"
+        date="14.01.2026"
+        source="Tagesspiegel Background"
+        href="https://background.tagesspiegel.de/smart-city-und-stadtentwicklung/briefing/digitalministerium-gruendet-zentrum-fuer-legistik-fuer-fuenf-millionen-euro-im-ersten-jahr"
+        body="„Mit dem Zentrum für Legistik gestalten wir neue Regeln und Gesetze von Anfang an bürokratiearm sowie praxis- und digitaltauglich“, versprach Digitalminister Karsten Wildberger (CDU)."
+      />
+      <hr class="kern-divider" aria-hidden="true" />
+      <PostTeaser
+        title="Rulemapping soll Lehrinhalt im Zentrum für Legistik werden"
+        date="14.01.2026"
+        source="Tagesspiegel Background"
+        href="https://background.tagesspiegel.de/digitalisierung-und-ki/briefing/rulemapping-soll-lehrinhalt-im-zentrum-fuer-legistik-werden"
+        body="Dazu will das BMDS „bewährte Erkenntnisse und Methoden der besseren Rechtssetzung“ an einem Ort zusammenführen, heißt es aus dem Ministerium."
+      />
+      <hr class="kern-divider" aria-hidden="true" />
+      <PostTeaser
+        title="Neue Plattform soll Rechtsetzung verbessern"
+        date="09.01.2026"
+        source="SZ Dossier"
+        href="https://www.sz-dossier.de/meldungen/neue-plattform-soll-rechtsetzung-verbessern-bed41360"
+        body="Das Bundesministerium für Digitales und Staatsmodernisierung hat das Zentrum für Legistik an den Start gebracht. Bei der neuen zentralen Anlaufstelle für Legistinnen und Legisten der Bundesverwaltung handelt es sich um einen Baustein der Modernisierungsagenda."
+      />
+      <hr class="kern-divider" aria-hidden="true" />
+      <PostTeaser
+        title="Neue Plattform für bessere Rechtsetzung gestartet"
+        date="08.01.2026"
+        source="Tagesspiegel Background"
+        href="https://background.tagesspiegel.de/digitalisierung-und-ki/monitoring/neue-plattform-fuer-bessere-rechtsetzung-gestartet"
+        body="Das Zentrum für Legistik ist mit einer neuen Website an den Start gegangen."
+      />
+      <hr class="kern-divider" aria-hidden="true" />
+      <PostTeaser
+        title="Neue Plattform für bessere Rechtsetzung gestartet"
+        date="08.01.2026"
+        source="Bundesministerium für Digitales und Staatsmodernisierung"
+        href="https://background.tagesspiegel.de/digitalisierung-und-ki/monitoring/neue-plattform-fuer-bessere-rechtsetzung-gestartet"
+        body="Das Bundesministerium für Digitales und Staatsmodernisierung setzt mit dem Zentrum für Legistik ein weiteres Vorhaben aus der Modernisierungsagenda der Bundesregierung um."
+      />
+    </section>
+  </main>
+</Layout>

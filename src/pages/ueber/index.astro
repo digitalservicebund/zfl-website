@@ -12,7 +12,7 @@ import {
   begleitungen,
   home,
   schulungen,
-  ueber_dasIstNeu,
+  ueber_aktuelleMeldungen,
   ueber_zahlenUndFakten,
 } from "@/config/routes.ts";
 
@@ -168,12 +168,10 @@ const contactId = "kontaktieren-sie-uns";
     <section>
       <div class="gap-md mb-md grid grid-cols-1 md:grid-cols-2">
         <KernCard
-          href={ueber_dasIstNeu.path}
-          title="Das ist neu"
-          subline="Aktuelle Arbeitspakete in Konzeption und Umsetzung"
-        >
-          {/* preliminary content while we wait for the new page */}
-        </KernCard>
+          href={ueber_aktuelleMeldungen.path}
+          title="Aktuelles"
+          subline="Aktuelle Meldungen und Veröffentlichungen rund um das Zentrum für Legistik."
+        />
         <KernCard
           href={ueber_zahlenUndFakten.path}
           title="Zahlen und Fakten"
