@@ -4,7 +4,7 @@ import { Image } from "astro:assets";
 
 interface Props {
   title: string;
-  href: string;
+  href?: string;
   preline?: string;
   body?: string;
   subline?: string;
@@ -15,9 +15,10 @@ interface Props {
 
 const { preline, title, href, subline, body, image, imageAlt, imageSource } =
   Astro.props;
+const hasFooter = Astro.slots.has("footer");
 ---
 
-<article class="kern-card kern-card--interactive">
+<article class={`kern-card ${href ? "kern-card--interactive" : ""}`}>
   {
     image && imageAlt !== undefined && (
       <div class="kern-card__media relative">
@@ -35,16 +36,28 @@ const { preline, title, href, subline, body, image, imageAlt, imageSource } =
       <hgroup>
         {preline && <p class="kern-preline">{preline}</p>}
         <h2 class="kern-title">
-          <a href={href} class="link-unstyled kern-link--stretched">{title}</a>
+          {
+            href ? (
+              <a href={href} class="link-unstyled kern-link--stretched">
+                {title}
+              </a>
+            ) : (
+              title
+            )
+          }
         </h2>
         {subline && <p class="kern-subline">{subline}</p>}
       </hgroup>
     </header>
+    <section class="kern-card__body space-y-0">
+      {body && <p class="kern-body">{body}</p>}
+      <slot />
+    </section>
     {
-      body && (
-        <section class="kern-card__body">
-          <p class="kern-body">{body}</p>
-        </section>
+      hasFooter && (
+        <footer class="kern-card__footer">
+          <slot name="footer" />
+        </footer>
       )
     }
   </div>
