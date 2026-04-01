@@ -10,10 +10,10 @@ import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants.ts";
 import KernCard from "@/components/KernCard.astro";
 import {
   begleitungen,
-  home,
   schulungen,
   ueber_dasIstNeu,
   ueber_zahlenUndFakten,
+  werkzeuge,
 } from "@/config/routes.ts";
 
 export const frontmatter = {
@@ -83,7 +83,7 @@ const contactId = "kontaktieren-sie-uns";
         <div class="md:col-start-2 md:row-span-2 md:row-start-1">
           <ul class="list-unstyled">
             <li>
-              <a href={home.path} class="kern-link text-2xl font-bold"
+              <a href={werkzeuge.path} class="kern-link text-2xl font-bold"
                 ><Icon
                   name="ic:round-arrow-forward"
                   class="mr-4 inline size-32"
@@ -184,7 +184,7 @@ const contactId = "kontaktieren-sie-uns";
       <Card
         id={contactId}
         look="blue"
-        class="flex justify-center py-48 max-md:rounded-none md:py-56"
+        class="flex justify-center py-48 md:py-56"
       >
         <h2 class="text-inherit">Kontakt</h2>
         <p>
