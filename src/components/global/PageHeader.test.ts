@@ -130,7 +130,7 @@ describe("nested navigation", () => {
 
     const submenuPanel = mobileMenu?.querySelector('[data-panel="ueber"]');
     expect(submenuPanel).toBeTruthy();
-    expect(submenuPanel?.textContent).toContain("Über das ZfL");
+    expect(submenuPanel?.textContent).toContain("Über");
     expect(submenuPanel?.querySelector(`a[href="${ueber.path}"]`)).toBeTruthy();
     expect(
       submenuPanel

@@ -103,7 +103,7 @@ test.describe("Header navigation", () => {
     const rootPanel = sectionSidebar.locator('[data-panel="ueber"]');
     await expect(rootPanel).toBeVisible();
     await expect(
-      rootPanel.getByRole("link", { name: "Über das ZfL", exact: true }),
+      rootPanel.getByRole("link", { name: "Über uns", exact: true }),
     ).toBeVisible();
     await expect(
       rootPanel.getByRole("link", { name: "Das ist neu", exact: true }),
@@ -134,7 +134,7 @@ test.describe("Header navigation", () => {
     const ueberPanel = mobileMenu.locator('[data-panel="ueber"]');
     await expect(ueberPanel).toBeVisible();
     await expect(
-      ueberPanel.getByRole("link", { name: "Über das ZfL", exact: true }),
+      ueberPanel.getByRole("link", { name: "Über uns", exact: true }),
     ).toBeVisible();
     await expect(
       ueberPanel.getByRole("link", { name: "Das ist neu", exact: true }),
