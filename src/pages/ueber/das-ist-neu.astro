@@ -4,7 +4,7 @@ import Card from "@/components/Card.astro";
 import Hero from "@/components/Hero.astro";
 import TimelineList from "@/components/TimelineList.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
-import { begleitungen, schulungen, werkzeuge } from "@/config/routes";
+import { begleitungen, schulungen, werkzeuge, ueber } from "@/config/routes";
 import Layout from "@/layouts/Layout.astro";
 import { mailto } from "@/utils/mailtoHelper";
 
@@ -127,6 +127,19 @@ export const frontmatter = {
     <section>
       <h2 class="mb-40">Neuerungen</h2>
       <TimelineList>
+        <li>
+          <Badge look="gray">April 2026</Badge>
+          <ul>
+            <li>
+              Über Uns: Unter-Navigation ergänzt
+              <a href={ueber.path} class="block">Hier ansehen</a>
+            </li>
+            <li>
+              Neuer Bereich ergänzt: Über Uns
+              <a href={ueber.path} class="block">Hier ansehen</a>
+            </li>
+          </ul>
+        </li>
         <li>
           <Badge look="gray">März 2026</Badge>
           <ul>
