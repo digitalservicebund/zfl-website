@@ -29,23 +29,28 @@ Routing: Each step resides at its own URL (e.g., /steckbrief/schritt-1, /steckbr
 
 Data Persistency: Form input will be either saved to localStorage or hydrate form fields with existing data from localStorage.
 
-> ❓ **To be defined:** Should we store data before going to a next step or after input?
+> [!IMPORTANT]
+> **To be defined:** Should we store data before going to a next step or after input?
 
 Validation: We will use client side validation with native HTML5 validation to provide instant user feedback.
 
-> ⚠️ **Notice:** The user flow needs to be decided from design perspective
+> [!WARNING]
+> The user flow needs to be decided from design perspective
 
 Guard logic:
 
-> ❓ **To be defined:** How do we redirect the user if the form is not opened from step 1?
+> [!IMPORTANT]
+> **To be defined:** How do we redirect the user if the form is not opened from step 1?
 
 ### File Structure
 
+```
 src/pages/steckbrief/
 ├── schritt-1.astro
 ├── schritt-2.astro
 └── schritt-3.astro
 └── form-persistence.js <-- Shared logic for localStorage hydration
+```
 
 ## Consequences
 
@@ -60,3 +65,7 @@ UX: The "Back" button works as expected, but transitions feel instantaneous beca
 ### Drawbacks & Mitigations
 
 Direct Access Risk: A user could manually type steckbrief/form3 in the URL.
+
+```
+
+```
