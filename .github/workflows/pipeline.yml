@@ -37,7 +37,7 @@ jobs:
         with:
           fetch-depth: 0 # Ensure Talisman can operate on a valid revision range
       - name: Detect secrets with Talisman in incoming commits
-        uses: digitalservicebund/talisman-secrets-scan-action@1789b188ee3a1361fffd2edd4bc12ac0df0a23c1
+        uses: digitalservicebund/talisman-secrets-scan-action@dd7513defb21028835988b40e89f7d10b3f66ed5
 
   check-and-unit-test:
     permissions:
@@ -142,7 +142,7 @@ jobs:
       url: https://zfl.dev.tech.digitalservice.dev
     steps:
       - name: Deploy latest container image
-        uses: digitalservicebund/argocd-deploy@050e50ee533ead763aa61d2e511ae5ae9e769593
+        uses: digitalservicebund/argocd-deploy@6033da861398e0d7fcffe1b195f8d58f10b62c4e
         with:
           environment: staging
           version: ${{ github.sha }}
@@ -168,7 +168,7 @@ jobs:
 
     steps:
       - name: Deploy latest container image
-        uses: digitalservicebund/argocd-deploy@050e50ee533ead763aa61d2e511ae5ae9e769593
+        uses: digitalservicebund/argocd-deploy@6033da861398e0d7fcffe1b195f8d58f10b62c4e
         with:
           environment: production
           version: ${{ github.sha }}

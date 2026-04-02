@@ -1,0 +1,28 @@
+---
+interface Props {
+  date: string;
+  source: string;
+  title: string;
+  href: string;
+  body?: string;
+}
+
+const { date, source, title, href, body } = Astro.props;
+---
+
+<div class="py-32">
+  <header class="kern-card__header">
+    <hgroup>
+      <p class="kern-preline">{date} · {source}</p>
+      <h2 class="kern-title">
+        <a href={href} class="kern-link--stretched leading-32" target="_blank"
+          >{title}
+        </a>
+      </h2>
+    </hgroup>
+  </header>
+  <section class="kern-card__body">
+    {body && <p class="kern-body">{body}</p>}
+    <slot />
+  </section>
+</div>

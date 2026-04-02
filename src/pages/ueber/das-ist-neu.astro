@@ -11,6 +11,7 @@ import { mailto } from "@/utils/mailtoHelper";
 export const frontmatter = {
   title: "Das ist neu",
   sitemap: true,
+  navOrder: 1,
 };
 ---
 
@@ -45,7 +46,7 @@ export const frontmatter = {
           />
           <a
             href="https://bmds.bund.de/themen/staatsmodernisierung/modernisierungsagenda-bund#c2065"
-            >Weitere Informationen zur Modernisierungsagenda</a
+            target="_blank">Weitere Informationen zur Modernisierungsagenda</a
           >
         </p>
       </div>
@@ -78,16 +79,18 @@ export const frontmatter = {
         <h3 class="mt-32">Konsolidierung der Instrumente</h3>
         <p>
           Unterschiedliche Checks und Arbeitshilfen (wie z.&nbsp;B. der
-          <a href="https://digitalcheck.bund.de/">Digitalcheck</a>,
-          <a href="https://www.gleichstellungs-check.de/"
+          <a href="https://digitalcheck.bund.de/" target="_blank"
+            >Digitalcheck</a
+          >,
+          <a href="https://www.gleichstellungs-check.de/" target="_blank"
             >Gleichstellungscheck</a
           >
           oder
-          <a href="https://jugend-check.de/">Jugendcheck</a>) zielen in Teilen
-          auf die gleiche Wirkung ab: Praxis- und digitaltaugliche Regelungen
-          und Bürokratierückbau. Bei der Zusammenführung diverser Ansätze
-          verfolgen wir das Ziel, Ihre Regelungsarbeit einfacher und effizienter
-          zu gestalten.<br />
+          <a href="https://jugend-check.de/" target="_blank">Jugendcheck</a>)
+          zielen in Teilen auf die gleiche Wirkung ab: Praxis- und
+          digitaltaugliche Regelungen und Bürokratierückbau. Bei der
+          Zusammenführung diverser Ansätze verfolgen wir das Ziel, Ihre
+          Regelungsarbeit einfacher und effizienter zu gestalten.<br />
           <a
             href={mailto(
               ZFL_EMAIL.display,
@@ -144,8 +147,9 @@ export const frontmatter = {
           <Badge look="gray">März 2026</Badge>
           <ul>
             <li>
-              Seitendesign: Umstellung auf den <a href="https://www.kern-ux.de/"
-                >KERN-UX-Standard</a
+              Seitendesign: Umstellung auf den <a
+                href="https://www.kern-ux.de/"
+                target="_blank">KERN-UX-Standard</a
               >
             </li>
           </ul>

@@ -121,6 +121,17 @@ export const ueber = {
   navLabel: null,
 } as const;
 
+export const ueber_aktuelleMeldungen = {
+  key: "ueber_aktuelleMeldungen",
+  path: "/ueber/aktuelle-meldungen",
+  title: "Aktuelle Meldungen",
+  parent: ueber,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: 3,
+  navLabel: null,
+} as const;
+
 export const ueber_dasIstNeu = {
   key: "ueber_dasIstNeu",
   path: "/ueber/das-ist-neu",
@@ -128,7 +139,7 @@ export const ueber_dasIstNeu = {
   parent: ueber,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
+  navOrder: 1,
   navLabel: null,
 } as const;
 
@@ -139,7 +150,7 @@ export const ueber_zahlenUndFakten = {
   parent: ueber,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
+  navOrder: 2,
   navLabel: null,
 } as const;
 
@@ -165,6 +176,7 @@ export const allRoutes = [
   sitemap,
   staging,
   ueber,
+  ueber_aktuelleMeldungen,
   ueber_dasIstNeu,
   ueber_zahlenUndFakten,
   werkzeuge,
