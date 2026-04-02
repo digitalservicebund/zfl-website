@@ -1,0 +1,30 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  icon: string;
+  title: string;
+  body?: string;
+}
+
+const { icon, title, body } = Astro.props;
+---
+
+<div class="flex flex-col gap-16 md:flex-1 md:gap-32 md:pr-32">
+  <Icon class="feature-icon" name={icon} />
+  <h3 class="m-0">{title}</h3>
+  {body && <p class="kern-body">{body}</p>}
+  <slot />
+</div>
+
+<style>
+  @reference "@/styles/global.css";
+
+  .feature-icon {
+    @apply text-cosmic-blue-400 bg-lavender-400 size-[110px] flex-none rounded-sm px-[18px] py-[22px];
+  }
+
+  .list-items {
+    @apply space-y-1;
+  }
+</style>
