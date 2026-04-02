@@ -66,6 +66,17 @@ export const impressum = {
   navLabel: null,
 } as const;
 
+export const kontakt = {
+  key: "kontakt",
+  path: "/kontakt",
+  title: "Kontakt",
+  parent: null,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
 export const schulungen = {
   key: "schulungen",
   path: "/schulungen",
@@ -160,6 +171,7 @@ export const allRoutes = [
   datenschutz,
   home,
   impressum,
+  kontakt,
   schulungen,
   sitemap,
   staging,

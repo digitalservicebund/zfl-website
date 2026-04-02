@@ -1,10 +1,11 @@
 ---
 import DrilldownNavigation from "@/components/global/DrilldownNavigation.astro";
 import Kopfzeile from "@/components/global/Kopfzeile.astro";
-import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
+import { ZFL_PHONE } from "@/config/constants";
 import {
   begleitungen,
   home,
+  kontakt,
   schulungen,
   ueber,
   werkzeuge,
@@ -22,7 +23,13 @@ import { twMerge } from "tailwind-merge";
 const { pathname } = Astro.url;
 const currentPath = removeTrailingSlash(pathname);
 
-const HEADER_ROUTES: Route[] = [werkzeuge, begleitungen, schulungen, ueber];
+const HEADER_ROUTES: Route[] = [
+  werkzeuge,
+  begleitungen,
+  schulungen,
+  ueber,
+  kontakt,
+];
 const headerNavigation = HEADER_ROUTES.filter(isRouteVisible);
 const mobileMenu = getMobileMenuNavigation(currentPath, headerNavigation);
 
@@ -78,37 +85,6 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
           </a>
         ))
       }
-      <div
-        class="relative flex h-full items-center"
-        @click.outside="kontaktOpen = false"
-      >
-        <button
-          type="button"
-          class={navItemStyle()}
-          @click="kontaktOpen = !kontaktOpen; mobileMenuOpen = false"
-          :aria-expanded="kontaktOpen"
-          aria-haspopup="true"
-        >
-          Kontakt
-          <Icon
-            name="ic:outline-keyboard-arrow-down"
-            class="ml-4 size-24 transition-transform"
-            :class="{ 'rotate-180': kontaktOpen }"
-            aria-hidden="true"
-          />
-        </button>
-        <div
-          x-cloak
-          x-show="kontaktOpen"
-          class="contact-popover border-lavender-base m-0 gap-8 border-2 bg-white px-16 py-12 text-nowrap"
-        >
-          <p>Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a></p>
-          <p>
-            E-Mail:
-            <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
-          </p>
-        </div>
-      </div>
     </nav>
 
     <!-- Mobile Menu Toggle -->
@@ -156,11 +132,7 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
       navigation={mobileMenu}
       panelIdPrefix="mobile-menu"
       rootPanelId="root"
-    >
-      <div slot="root-footer" class="px-8 text-gray-800">
-        Kontakt: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
-      </div>
-    </DrilldownNavigation>
+    />
   </nav>
 </header>
 

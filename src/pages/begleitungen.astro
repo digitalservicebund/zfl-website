@@ -7,6 +7,7 @@ import trainingsImage from "@/images/Trainings.jpg";
 import Layout from "@/layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
 import { getImage, Image } from "astro:assets";
+import { ZFL_EMAIL_REGBEG, ZFL_PHONE_REGBEG } from "@/config/constants";
 
 const trainingsImageAsset = await getImage({ src: trainingsImage });
 const trainingsImageAssetURL = `url("${trainingsImageAsset.src}")`;
@@ -205,7 +206,18 @@ export const frontmatter = {
       </div>
     </section>
     <section class="bg-lavender-base breakout py-80">
-      <SupportCard />
+      <SupportCard>
+        <p>
+          Wir unterstützen Sie gerne persönlich in allen Phasen der
+          Regelungsarbeit.
+        </p>
+        <p>
+          Telefon: <a href={ZFL_PHONE_REGBEG.url}>{ZFL_PHONE_REGBEG.display}</a>
+        </p>
+        <p>
+          E-Mail: <a href={ZFL_EMAIL_REGBEG.url}>{ZFL_EMAIL_REGBEG.display}</a>
+        </p>
+      </SupportCard>
     </section>
     <section
       class="breakout bg-cover bg-center"

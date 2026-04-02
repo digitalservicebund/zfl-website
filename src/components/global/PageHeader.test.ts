@@ -1,5 +1,6 @@
 import {
   begleitungen,
+  kontakt,
   schulungen,
   ueber,
   ueber_dasIstNeu,
@@ -76,7 +77,7 @@ describe("link highlighting", async () => {
 });
 
 describe("visible menu items", async () => {
-  const expectedPaths = [werkzeuge, begleitungen, schulungen, ueber]
+  const expectedPaths = [werkzeuge, begleitungen, schulungen, ueber, kontakt]
     .filter((route) => !route.isStagingOnly)
     .map((route) => route.path);
 

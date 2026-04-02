@@ -7,20 +7,30 @@ import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 type Props = VariantProps<typeof cardStyles>;
 
 const { look } = Astro.props;
+const hasSlot = Astro.slots.has("default");
 ---
 
 <Card look={look}
   ><Icon name="ic:twotone-phone-enabled" class="-scale-x-100" slot="icon" />
   <h2>Kontaktieren Sie uns</h2>
   <div class="space-y-8">
-    <p>
-      Wir unterstützen Sie gerne persönlich in allen Phasen der Regelungsarbeit.
-    </p>
-    <p>
-      Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>
-    </p>
-    <p>
-      E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
-    </p>
+    {
+      hasSlot ? (
+        <slot />
+      ) : (
+        <>
+          <p>
+            Wir unterstützen Sie gerne persönlich in allen Phasen der
+            Regelungsarbeit.
+          </p>
+          <p>
+            Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>
+          </p>
+          <p>
+            E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
+          </p>
+        </>
+      )
+    }
   </div>
 </Card>
