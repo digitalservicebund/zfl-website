@@ -2,7 +2,9 @@
 import SupportCard from "@/components/blocks/SupportCard.astro";
 import Card from "@/components/Card.astro";
 import Hero from "@/components/Hero.astro";
-import begleitungenImage from "@/images/Begleitungen.png";
+import FeatureSet from "@/components/FeatureSet.astro";
+import FeatureItem from "@/components/FeatureItem.astro";
+import illustration from "./illustration.svg";
 import trainingsImage from "@/images/Trainings.jpg";
 import Layout from "@/layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
@@ -21,84 +23,56 @@ export const frontmatter = {
 <Layout title={frontmatter.title}>
   <main class="breakout-grid max-md:overflow-x-hidden">
     <Hero>
-      <h1>Regelungsbegleitung</h1>
-      <div class="mt-md space-y-md relative gap-32 md:flex md:flex-row">
+      <div class="items-center gap-32 md:flex md:flex-row">
         <div>
-          <h2>Individuelle Unterstützung für Ihr Vorhaben nutzen</h2>
+          <h1>Regelungsbegleitung</h1>
+          <h2 class="kern-heading-medium mb-24">
+            Individuelle Unterstützung für Ihr Vorhaben nutzen
+          </h2>
           <p>
             Ein in Gesetzgebungspraxis erfahrenes interdisziplinäres Team
             unterstützt Sie dabei, die Regelung praxisnah, digitaltauglich und
-            bürokratiearm zu gestalten.
+            bürokratiearm zu gestalten.<br />
+            Vertraulich und mit individuellem Fokus auf Ihr Vorhaben stehen Ihnen
+            während der Begleitung Kompetenzen in Design, Nutzerforschung, IT, Produkt-
+            und Prozessmanagement direkt zur Verfügung.
           </p>
-          <p>
-            Vertraulich und mit individuellem Fokus auf Ihr Vorhaben stehen
-            Ihnen während der Begleitung Kompetenzen in Design, Nutzerforschung,
-            IT, Produkt- und Prozessmanagement direkt zur Verfügung.
-          </p>
-          <a class="kern-btn kern-btn--primary" href="#leistungspakete">
+          <a class="kern-btn kern-btn--primary mt-32" href="#leistungspakete">
             <span class="kern-icon kern-icon--arrow-down" aria-hidden="true"
             ></span>
             <span class="kern-label">Leistungspakete anzeigen</span>
           </a>
         </div>
-        <Image
-          class="hidden size-288 md:block"
-          src={begleitungenImage}
-          alt=""
-        />
+        <Image class="hidden size-420 md:block" src={illustration} alt="" />
       </div>
     </Hero>
     <section>
-      <h2>Wirkung der Zusammenarbeit</h2>
-      <p>
+      <h2>Ergebnisse der Zusammenarbeit</h2>
+      <p class="kern-body">
         Wir unterstützen Sie dabei, Umsetzungsprozesse zu verstehen und
-        Anforderungen an praxisnahe und bürokratiearme Regelungen umzusetzen.
-        Durch Ihre Rechtsetzungs-Expertise in Kombination mit Methoden aus der
-        agilen Software-Entwicklung entstehen somit praxistaugliche und
-        zukunftsfähige Gesetze, die unter anderem die Potenziale der
-        Digitalisierung bestmöglich ausschöpfen.
+        umzusetzen. Durch Ihre Rechtsetzungs-Expertise in Kombination mit
+        Methoden aus der agilen Software-Entwicklung entstehen somit praxisnahe
+        und bürokratiearme Gesetze, die Potentiale der Digitalisierung
+        bestmöglich ausschöpfen.
       </p>
 
-      <div
-        class="mt-40 flex w-2xs flex-col gap-32 md:w-full md:flex-row md:gap-16"
-      >
-        <div
-          class="md:size-lg flex h-auto w-full flex-col gap-8 md:flex-1 md:gap-32"
-        >
-          <Icon class="feature-icon" name="ic:twotone-account-tree" />
-          <div class="space-y-8">
-            <h3 class="sm:hyphens-none md:pr-32">Sachverhalte visualisieren</h3>
-            <p>
-              Komplexe Sachverhalte durch Prozess-Visualisierungen
-              strukturieren, interne und externe Abstimmung vereinfachen
-            </p>
-          </div>
-        </div>
-        <div
-          class="flex h-auto w-full flex-col gap-8 md:h-[298px] md:flex-1 md:gap-32"
-        >
-          <Icon class="feature-icon" name="ic:twotone-lightbulb" />
-          <div class="space-y-8">
-            <h3 class="sm:hyphens-none md:pr-32">Umsetzung mitdenken</h3>
-            <p>
-              Betroffenen-Perspektive frühzeitig identifizieren, bestehende
-              Umsetzungshürden beheben
-            </p>
-          </div>
-        </div>
-        <div
-          class="flex h-auto w-full flex-col gap-8 md:h-[298px] md:flex-1 md:gap-32"
-        >
-          <Icon class="feature-icon" name="ic:twotone-hub" />
-          <div class="space-y-8">
-            <h3 class="sm:hyphens-none md:pr-32">Prozesse strukturieren</h3>
-            <p>
-              Methodische Unterstützung nutzen, Anleitungen für Praxis- und
-              Digitaltauglichkeit erhalten
-            </p>
-          </div>
-        </div>
-      </div>
+      <FeatureSet>
+        <FeatureItem
+          icon="ic:twotone-account-tree"
+          title="Sachverhalte visualisieren"
+          body="Komplexe Sachverhalte durch Prozess-Visualisierungen strukturieren, interne und externe Abstimmung vereinfachen"
+        />
+        <FeatureItem
+          icon="ic:twotone-lightbulb"
+          title="Umsetzung mitdenken"
+          body="Methodische Unterstützung nutzen, Anleitungen für Praxis- und Digitaltauglichkeit erhalten"
+        />
+        <FeatureItem
+          icon="ic:twotone-hub"
+          title="Prozesse strukturieren"
+          body="Methodische Unterstützung nutzen, Anleitungen für Praxis- und Digitaltauglichkeit erhalten"
+        />
+      </FeatureSet>
       <div id="leistungspakete">
         <h2 class="mt-lg">Passende Leistungspakete für Ihr Vorhaben</h2>
         <p class="pb-40">
