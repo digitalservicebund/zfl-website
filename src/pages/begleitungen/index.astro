@@ -17,9 +17,9 @@ export const frontmatter = {
 ---
 
 <Layout title={frontmatter.title}>
-  <main class="breakout-grid max-md:overflow-x-hidden">
-    <Hero>
-      <div class="items-center gap-32 md:flex md:flex-row">
+  <main class="breakout-grid">
+    <Hero class="overflow-clip">
+      <div class="items-center gap-32 md:flex">
         <div>
           <h1>Regelungsbegleitung</h1>
           <h2 class="kern-heading-medium mb-24">
@@ -40,7 +40,7 @@ export const frontmatter = {
           </a>
         </div>
         <Image
-          class="hidden size-420 md:block"
+          class="hidden size-280 md:block lg:size-420"
           src={illustration}
           alt=""
           aria-hidden
