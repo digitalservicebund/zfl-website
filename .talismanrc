@@ -78,6 +78,8 @@ fileignoreconfig:
   - filename: src/components/global/DebugGrid.astro
     allowed_patterns:
       - \@keydown
+  - filename: doc/adr/0008-multipage-forms.md
+    checksum: 54b3ad48ab908eb572dc96046baede3a6bbf6474c68ce7c46e3f35a3e8846ca3
 scopeconfig:
   - scope: node
 allowed_patterns:
