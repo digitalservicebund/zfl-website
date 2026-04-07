@@ -73,6 +73,8 @@ fileignoreconfig:
     checksum: 833102602ab7800701350413f143ac30c20e9c016c5a68eb6c0841d1e5f3561d
   - filename: src/pages/kontakt/computer.jpg
     checksum: 585af9a443434b8caf56dae715544745714fff5e0c4b5d2cc202275950e3a684
+  - filename: src/pages/begleitungen/gesetzentwurf.png
+    checksum: c847df945cbe36bd5627e2e91b07b08c331974ba78fc2e64d99e37ae5de3495a
   - filename: src/components/global/DebugGrid.astro
     allowed_patterns:
       - \@keydown
