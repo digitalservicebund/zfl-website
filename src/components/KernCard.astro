@@ -48,12 +48,7 @@ const hasFooter = Astro.slots.has("footer");
         <h2 class="kern-title">
           {
             href ? (
-              <a
-                href={href}
-                class="kern-link--stretched"
-                target={target_option}
-              >
-                {title}
+              /* prettier-ignore */ <a href={href} class="kern-link--stretched" target={target_option}>{title}
               </a>
             ) : (
               title
