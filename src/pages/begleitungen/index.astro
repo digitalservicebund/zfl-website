@@ -8,6 +8,7 @@ import illustration from "./illustration.svg";
 import gesetzentwurfImg from "./gesetzentwurf.png";
 import Layout from "@/layouts/Layout.astro";
 import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
 import { ZFL_EMAIL_REGBEG, ZFL_PHONE_REGBEG } from "@/config/constants";
 
 export const frontmatter = {
@@ -34,8 +35,11 @@ export const frontmatter = {
             und Prozessmanagement direkt zur Verfügung.
           </p>
           <a class="kern-btn kern-btn--primary mt-32" href="#leistungspakete">
-            <span class="kern-icon kern-icon--arrow-down" aria-hidden="true"
-            ></span>
+            <Icon
+              name="ic:baseline-arrow-downward"
+              class="kern-label"
+              aria-hidden
+            />
             <span class="kern-label">Leistungspakete anzeigen</span>
           </a>
         </div>
