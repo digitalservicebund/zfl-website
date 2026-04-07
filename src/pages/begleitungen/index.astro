@@ -1,17 +1,14 @@
 ---
 import SupportCard from "@/components/blocks/SupportCard.astro";
-import Card from "@/components/Card.astro";
+import MediaText from "@/components/MediaText.astro";
 import Hero from "@/components/Hero.astro";
 import FeatureSet from "@/components/FeatureSet.astro";
 import FeatureItem from "@/components/FeatureItem.astro";
 import illustration from "./illustration.svg";
-import trainingsImage from "@/images/Trainings.jpg";
+import gesetzentwurfImg from "./gesetzentwurf.png";
 import Layout from "@/layouts/Layout.astro";
-import { getImage, Image } from "astro:assets";
+import { Image } from "astro:assets";
 import { ZFL_EMAIL_REGBEG, ZFL_PHONE_REGBEG } from "@/config/constants";
-
-const trainingsImageAsset = await getImage({ src: trainingsImage });
-const trainingsImageAssetURL = `url("${trainingsImageAsset.src}")`;
 
 export const frontmatter = {
   title: "Regelungsbegleitung",
@@ -42,7 +39,12 @@ export const frontmatter = {
             <span class="kern-label">Leistungspakete anzeigen</span>
           </a>
         </div>
-        <Image class="hidden size-420 md:block" src={illustration} alt="" />
+        <Image
+          class="hidden size-420 md:block"
+          src={illustration}
+          alt=""
+          aria-hidden
+        />
       </div>
     </Hero>
     <section>
@@ -64,7 +66,7 @@ export const frontmatter = {
         <FeatureItem
           icon="ic:twotone-lightbulb"
           title="Umsetzung mitdenken"
-          body="Methodische Unterstützung nutzen, Anleitungen für Praxis- und Digitaltauglichkeit erhalten"
+          body="Betroffenen-Perspektive frühzeitig identifizieren, bestehende Umsetzungshürden beheben"
         />
         <FeatureItem
           icon="ic:twotone-hub"
@@ -75,49 +77,49 @@ export const frontmatter = {
       <div id="leistungspakete">
         <h2 class="mt-lg">Passende Leistungspakete für Ihr Vorhaben</h2>
         <p class="pb-40">
-          Hier sehen Sie unsere verschiedenen Unterstützungsangebote im
-          Vergleich. Alle Angebote sind für Sie kostenfrei und werden vom BMDS
-          finanziert.
+          In der folgenden Tabelle finden Sie unsere verschiedenen
+          Unterstützungsangebote im Vergleich. Alle Angebote sind kostenfrei und
+          werden vom BMDS finanziert.
         </p>
         <div class="overflow-x-auto" tabindex="0">
           <table class="w-full table-fixed text-left">
             <thead>
               <tr class="table-header-cell">
-                <th scope="col" class="w-[150px]"> Kriterien </th>
-                <th scope="col" class="w-[235px]"> Paket S </th>
-                <th scope="col" class="w-[235px]"> Paket M </th>
-                <th scope="col" class="w-[235px]"> Paket L </th>
+                <th scope="col" class="w-150">Kriterien</th>
+                <th scope="col" class="w-235">Paket S</th>
+                <th scope="col" class="w-235">Paket M</th>
+                <th scope="col" class="w-350">Paket L</th>
               </tr>
             </thead>
 
             <tbody
-              class="table-body-cell [&>tr:nth-child(even)]:bg-lavender-200 [&>tr:nth-child(odd)]:bg-white"
+              class="table-body-cell [&>tr:nth-child(even)]:bg-lavender-200"
             >
               <tr>
-                <td class="font-bold"> Fokus </td>
+                <td class="font-bold">Fokus</td>
                 <td> Punktuelle Unterstützung bei Ihrer Fragestellung </td>
                 <td> Vertiefte Analyse Ihres Vorhabens </td>
                 <td> Langfristige Begleitung des Gesetzgebungsprozesses </td>
               </tr>
 
               <tr>
-                <td class="font-bold"> Dauer </td>
+                <td class="font-bold">Dauer</td>
                 <td>1 gemeinsame Arbeitssitzung</td>
                 <td>ca. 4 Wochen</td>
                 <td>Ab 5 Wochen</td>
               </tr>
 
               <tr>
-                <td class="font-bold"> Team </td>
+                <td class="font-bold">Team</td>
                 <td>
-                  <div class="mb-1">1–2 Personen aus:</div>
+                  <p>1–2 Personen aus:</p>
                   <ul class="list-items">
                     <li>Service Design</li>
                     <li>Nutzerforschung</li>
                   </ul>
                 </td>
                 <td>
-                  <div class="mb-1">3–4 Personen aus:</div>
+                  <p>3–4 Personen aus:</p>
                   <ul class="list-items">
                     <li>Service Design</li>
                     <li>Nutzerforschung</li>
@@ -127,7 +129,7 @@ export const frontmatter = {
                   </ul>
                 </td>
                 <td>
-                  <div class="mb-1">3–4 Personen aus:</div>
+                  <p>3–4 Personen aus:</p>
                   <ul class="list-items">
                     <li>Service Design</li>
                     <li>Nutzerforschung</li>
@@ -139,10 +141,10 @@ export const frontmatter = {
               </tr>
 
               <tr>
-                <td class="font-bold"> Zeitpunkt </td>
-                <td> Individuell nach Bedarf </td>
-                <td> Konzept- bis Entwurfsphase </td>
-                <td> Ab Start der Initiative </td>
+                <td class="font-bold">Zeitpunkt</td>
+                <td>Individuell nach Bedarf</td>
+                <td>Konzept- bis Entwurfsphase</td>
+                <td>Ab Start der Initiative</td>
               </tr>
 
               <tr>
@@ -178,11 +180,40 @@ export const frontmatter = {
         </div>
       </div>
     </section>
-    <section class="bg-lavender-base breakout py-80">
+    <section class="breakout bg-cosmic-blue-base text-white">
+      <h2>Regelungsbegleitung anfragen</h2>
+      <p>
+        Sie planen ein konkretes Regelungsvorhaben und wünschen sich eine
+        methodische Begleitung? Schreiben Sie uns eine E-Mail unter <a
+          href={ZFL_EMAIL_REGBEG.url}>{ZFL_EMAIL_REGBEG.display}</a
+        >.
+      </p>
+    </section>
+    <section>
+      <MediaText>
+        <p class="kern-preline">Praxisbeispiel</p>
+        <h2 class="mt-0">
+          Einsatz einer Regelungsbegleitung für das Stromsteuerrecht
+        </h2>
+        <p class="kern-body italic">
+          „Die gründliche Analyse von Vollzugsprozessen hat uns geholfen, das
+          Zusammen­spiel zwischen den Regelungen und der Administration besser
+          zu verstehen und so den digitalen Vollzug zu gestalten.“
+        </p>
+        <a
+          href="https://digitalcheck.bund.de/beispiele/regelungen/gesetz-zur-modernisierung-und-zum-buerokratieabbau-im-strom-und-energiesteuerrecht"
+          target="_blank"
+        >
+          Mehr erfahren
+        </a>
+        <Image slot="media" src={gesetzentwurfImg} alt="" />
+      </MediaText>
+    </section>
+    <section class="bg-lavender-400 breakout py-80">
       <SupportCard>
         <p>
           Wir unterstützen Sie gerne persönlich in allen Phasen der
-          Regelungsarbeit.
+          Regelungsarbeit. Bei Fragen melden Sie sich unter:
         </p>
         <p>
           Telefon: <a href={ZFL_PHONE_REGBEG.url}>{ZFL_PHONE_REGBEG.display}</a>
@@ -192,39 +223,5 @@ export const frontmatter = {
         </p>
       </SupportCard>
     </section>
-    <section
-      class="breakout bg-cover bg-center"
-      style={{ backgroundImage: trainingsImageAssetURL }}
-    >
-      <Card>
-        <h2>
-          Praxisbeispiel: Einsatz eines interdisziplinären Kompetenzteams für
-          das Stromsteuerrecht
-        </h2>
-        <p>
-          „Die gründliche Analyse von Vollzugsprozessen hat uns geholfen, das
-          Zusammenspiel zwischen den Regelungen und der Administration besser zu
-          verstehen und so den digitalen Vollzug zu gestalten.“
-        </p>
-        <a
-          href="https://digitalcheck.bund.de/beispiele/regelungen/gesetz-zur-modernisierung-und-zum-buerokratieabbau-im-strom-und-energiesteuerrecht"
-          target="_blank"
-        >
-          Mehr erfahren
-        </a>
-      </Card>
-    </section>
   </main>
 </Layout>
-
-<style>
-  @reference "@/styles/global.css";
-
-  .feature-icon {
-    @apply text-cosmic-blue-400 bg-lavender-400 size-[110px] flex-none rounded-sm px-[18px] py-[22px];
-  }
-
-  .list-items {
-    @apply space-y-1;
-  }
-</style>

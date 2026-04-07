@@ -10,10 +10,10 @@ interface Props {
 const { icon, title, body } = Astro.props;
 ---
 
-<div class="flex flex-col gap-16 md:flex-1 md:gap-32 md:pr-32">
+<div class="flex flex-col gap-16 md:flex-1 md:pr-32">
   <Icon class="feature-icon" name={icon} />
-  <h3 class="m-0">{title}</h3>
-  {body && <p class="kern-body">{body}</p>}
+  <h3 class="m-0 max-w-200">{title}</h3>
+  {body && <p>{body}</p>}
   <slot />
 </div>
 
@@ -21,10 +21,6 @@ const { icon, title, body } = Astro.props;
   @reference "@/styles/global.css";
 
   .feature-icon {
-    @apply text-cosmic-blue-400 bg-lavender-400 size-[110px] flex-none rounded-sm px-[18px] py-[22px];
-  }
-
-  .list-items {
-    @apply space-y-1;
+    @apply text-cosmic-blue-400 bg-lavender-400 size-110 flex-none rounded-sm px-18 py-22;
   }
 </style>

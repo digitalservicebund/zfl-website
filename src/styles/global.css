@@ -130,9 +130,6 @@
     padding: 1rem 2rem 1rem 1rem;
     border-bottom: 2px solid var(--color-lavender-400, #eceef6);
     background: var(--color-lavender-base, #e3e6f2);
-    color: black;
-    line-height: 22px;
-    letter-spacing: 0.16px;
   }
   tbody.table-body-cell tr td {
     padding: 1rem 2rem 1rem 1rem;
