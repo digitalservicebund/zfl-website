@@ -2,6 +2,7 @@
 import Card from "@/components/Card.astro";
 import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
+import MediaText from "@/components/MediaText.astro";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import ansatzImg from "./Ansatz.jpg";
@@ -44,33 +45,29 @@ const contactId = "kontaktieren-sie-uns";
     </Hero>
 
     <section>
-      <div class="flex flex-col gap-32 md:flex-row">
-        <div class="md:w-5/12">
-          <Image
-            src={ansatzImg}
-            alt="Eine großflächige Grafik an einer Glaswand. Sie zeigt verschiedenfarbige Kreise mit Textinhalten."
-          />
-        </div>
-        <div class="md:w-7/12">
-          <h2 class="kern-heading-large pt-0">Auftrag</h2>
-          <p>
-            Die <a
-              href="https://bmds.bund.de/fileadmin/BMDS/Dokumente/Modernisierungsagenda_barrierefrei.pdf"
-              target="_blank"
-              >Modernisierungsagenda des Bundes für Staat und Verwaltung</a
-            > gibt vor, neue Regelungen von Anfang an so zu gestalten, dass sie bei
-            den Bürgerinnen und Bürgern sowie Unternehmen zielgerichtet wirken. Mit
-            dem Zentrum für Legistik wird ein zentraler Baustein aus dem Handlungsfeld
-            II „Bessere Rechtsetzung” bereitgestellt. Legistinnen und Legisten der
-            Bundesverwaltung werden durch den Zugang zu Unterstützungsangeboten und
-            Schulungen die erforderlichen Methoden für eine zeitgemäße Rechtsetzung
-            vermittelt. Die Angebote sollen perspektivisch auch für Länder, Kommunen
-            und andere öffentliche Körperschaften nutzbar sein. Damit schafft das
-            Zentrum für Legistik die Grundlage für Regelungen, die in der Praxis wirksam
-            sind.
-          </p>
-        </div>
-      </div>
+      <MediaText reversed>
+        <Image
+          slot="media"
+          src={ansatzImg}
+          alt="Eine großflächige Grafik an einer Glaswand. Sie zeigt verschiedenfarbige Kreise mit Textinhalten."
+        />
+        <h2 class="kern-heading-large pt-0">Auftrag</h2>
+        <p>
+          Die <a
+            href="https://bmds.bund.de/fileadmin/BMDS/Dokumente/Modernisierungsagenda_barrierefrei.pdf"
+            target="_blank"
+            >Modernisierungsagenda des Bundes für Staat und Verwaltung</a
+          > gibt vor, neue Regelungen von Anfang an so zu gestalten, dass sie bei
+          den Bürgerinnen und Bürgern sowie Unternehmen zielgerichtet wirken. Mit
+          dem Zentrum für Legistik wird ein zentraler Baustein aus dem Handlungsfeld
+          II „Bessere Rechtsetzung” bereitgestellt. Legistinnen und Legisten der Bundesverwaltung
+          werden durch den Zugang zu Unterstützungsangeboten und Schulungen die erforderlichen
+          Methoden für eine zeitgemäße Rechtsetzung vermittelt. Die Angebote sollen
+          perspektivisch auch für Länder, Kommunen und andere öffentliche Körperschaften
+          nutzbar sein. Damit schafft das Zentrum für Legistik die Grundlage für Regelungen,
+          die in der Praxis wirksam sind.
+        </p>
+      </MediaText>
     </section>
 
     <section class="breakout bg-lavender-400">
@@ -129,41 +126,38 @@ const contactId = "kontaktieren-sie-uns";
     </section>
 
     <section>
-      <div class="flex flex-col gap-32 md:flex-row">
-        <div class="md:w-7/12">
-          <h2 class="kern-heading-large mb-16 pt-0">Herangehensweise</h2>
-          <p>
-            Das Zentrum für Legistik nimmt den gesamten Gesetzgebungsprozess vom
-            ersten Entwurf bis zur praktischen Umsetzung in den Blick. Der Fokus
-            liegt dabei auf der inhaltlichen Erarbeitung von Regelungen – also
-            dem Zeitraum, bevor der eigentliche Regelungstext geschrieben wird.
-            Perspektiven von Bürgerinnen und Bürgern, Unternehmen und Verwaltung
-            sollen hier frühzeitig einbezogen und bei der weiteren Ausgestaltung
-            der Regelungen berücksichtigt werden. Dieses Vorgehen empfiehlt auch
-            der Nationale Normenkontrollrat (NKR): <a
-              href="https://www.normenkontrollrat.bund.de/Webs/NKR/DE/veroeffentlichungen/gutachten/_documents/2019-10-erst-der-inhalt-dann-die-paragraphen.html"
-              target="_blank">Erst der Inhalt, dann die Paragrafen</a
-            >.
-          </p><p>
-            Bei der Entwicklung der Angebote gehen Theorie und Praxis Hand in
-            Hand: Durch die methodische Begleitung konkreter Regelungsvorhaben
-            fließen Erkenntnisse aus der Umsetzung unmittelbar zurück in die
-            Weiterentwicklung der einzelnen Services. Dieses iterative Vorgehen
-            ermöglicht es, laufend aus der Praxis zu lernen und die Rechtsetzung
-            nachhaltig zu modernisieren.
-          </p>
-          <a
-            href="https://digitalservice.bund.de/blog/wie-wir-am-zentrum-fuer-legistik-arbeiten"
-            target="_blank">Mehr zum Arbeitsmodus erfahren</a
-          >
-        </div>
-        <div class="md:w-5/12">
-          <Image
-            src={zusammenarbeitImg}
-            alt="Mehrere Personen vor einem großen Whiteboard, an dem sie Klebepunkte an bereits vorhandenen Papieren und Post-its anbringen."
-          />
-        </div>
-      </div>
+      <MediaText>
+        <h2 class="kern-heading-large mb-16 pt-0">Herangehensweise</h2>
+        <p>
+          Das Zentrum für Legistik nimmt den gesamten Gesetzgebungsprozess vom
+          ersten Entwurf bis zur praktischen Umsetzung in den Blick. Der Fokus
+          liegt dabei auf der inhaltlichen Erarbeitung von Regelungen – also dem
+          Zeitraum, bevor der eigentliche Regelungstext geschrieben wird.
+          Perspektiven von Bürgerinnen und Bürgern, Unternehmen und Verwaltung
+          sollen hier frühzeitig einbezogen und bei der weiteren Ausgestaltung
+          der Regelungen berücksichtigt werden. Dieses Vorgehen empfiehlt auch
+          der Nationale Normenkontrollrat (NKR): <a
+            href="https://www.normenkontrollrat.bund.de/Webs/NKR/DE/veroeffentlichungen/gutachten/_documents/2019-10-erst-der-inhalt-dann-die-paragraphen.html"
+            target="_blank">Erst der Inhalt, dann die Paragrafen</a
+          >.
+        </p><p>
+          Bei der Entwicklung der Angebote gehen Theorie und Praxis Hand in
+          Hand: Durch die methodische Begleitung konkreter Regelungsvorhaben
+          fließen Erkenntnisse aus der Umsetzung unmittelbar zurück in die
+          Weiterentwicklung der einzelnen Services. Dieses iterative Vorgehen
+          ermöglicht es, laufend aus der Praxis zu lernen und die Rechtsetzung
+          nachhaltig zu modernisieren.
+        </p>
+        <a
+          href="https://digitalservice.bund.de/blog/wie-wir-am-zentrum-fuer-legistik-arbeiten"
+          target="_blank">Mehr zum Arbeitsmodus erfahren</a
+        >
+        <Image
+          slot="media"
+          src={zusammenarbeitImg}
+          alt="Mehrere Personen vor einem großen Whiteboard, an dem sie Klebepunkte an bereits vorhandenen Papieren und Post-its anbringen."
+        />
+      </MediaText>
     </section>
 
     <section>

@@ -1,0 +1,30 @@
+---
+import { tv, type VariantProps } from "tailwind-variants";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props
+  extends HTMLAttributes<"div">, VariantProps<typeof wrapperStyle> {
+  class?: string;
+  reversed?: boolean;
+}
+
+const wrapperStyle = tv({
+  base: "flex flex-col gap-32 md:flex-row",
+  variants: {
+    reversed: {
+      true: "flex-col-reverse md:flex-row-reverse",
+    },
+  },
+});
+
+const { class: className, reversed } = Astro.props;
+---
+
+<div class={wrapperStyle({ reversed, className })}>
+  <div class="md:w-7/12">
+    <slot />
+  </div>
+  <div class="md:w-5/12">
+    <slot name="media" />
+  </div>
+</div>
