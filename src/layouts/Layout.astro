@@ -13,11 +13,10 @@ import "../styles/global.css";
 
 interface Props {
   title: string;
-  fullWidth?: boolean;
   noFooter?: boolean;
   isHome?: boolean;
 }
-const { title: pageTitle, fullWidth, noFooter, isHome } = Astro.props;
+const { title: pageTitle, noFooter, isHome } = Astro.props;
 const siteName = "Zentrum für Legistik";
 const title = pageTitle ? `${pageTitle} — ${siteName}` : siteName;
 const SEOImage = `${Astro.url.origin}/SEO_ZfL.png`;
@@ -73,7 +72,7 @@ const showSectionSidebar = getSectionNavigation(Astro.url.pathname) !== null;
 
   <body class="relative">
     {showDebugGrid && <DebugGrid />}
-    <PageHeader fullWidth={fullWidth} isHome={isHome} />
+    <PageHeader isHome={isHome} />
     {
       showSectionSidebar ? (
         <div class="h-full min-[900px]:grid min-[900px]:grid-cols-[240px_minmax(0,1fr)]">

@@ -1,0 +1,11 @@
+---
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+---
+
+<div data-hint-id={id}>
+  <slot />
+</div>
