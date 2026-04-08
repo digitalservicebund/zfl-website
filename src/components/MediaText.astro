@@ -2,50 +2,38 @@
 import { tv, type VariantProps } from "tailwind-variants";
 import type { HTMLAttributes } from "astro/types";
 
-const layoutStyle = tv({
-  slots: {
-    wrapper: "flex flex-col gap-32 md:flex-row",
-    mainCol: "",
-    mediaCol: "",
-  },
+interface Props
+  extends HTMLAttributes<"div">, VariantProps<typeof wrapperStyle> {
+  class?: string;
+  reversed?: boolean;
+  split?: `${number}-${number}`; // e.g. 7-5 for 7:5 split in 12 column layout
+}
+
+const wrapperStyle = tv({
+  base: "flex flex-col gap-32 md:flex-row",
   variants: {
     reversed: {
-      true: {
-        wrapper: "flex-col-reverse md:flex-row-reverse",
-      },
+      true: "flex-col-reverse md:flex-row-reverse",
     },
-    split: {
-      "7-5": {
-        mainCol: "md:w-7/12",
-        mediaCol: "md:w-5/12",
-      },
-      "8-4": {
-        mainCol: "md:w-8/12",
-        mediaCol: "md:w-4/12",
-      },
-    },
-  },
-  defaultVariants: {
-    split: "7-5",
   },
 });
 
-interface Props
-  extends HTMLAttributes<"div">, VariantProps<typeof layoutStyle> {
-  class?: string;
-  split?: "7-5" | "8-4";
-}
-
 const { class: className, reversed, split = "7-5" } = Astro.props;
-
-const { wrapper, mainCol, mediaCol } = layoutStyle({ reversed, split });
+const [mainCols = 1, mediaCols = 1] = split.split("-").map(Number);
+const totalCols = mainCols + mediaCols; // should be 12
 ---
 
-<div class={wrapper({ className })}>
-  <div class={mainCol()}>
+<div
+  class={wrapperStyle({ reversed, className })}
+  style={{
+    "--main-width": `calc(${mainCols} / ${totalCols} * 100%)`,
+    "--media-width": `calc(${mediaCols} / ${totalCols} * 100%)`,
+  }}
+>
+  <div class="md:w-(--main-width)">
     <slot />
   </div>
-  <div class={mediaCol()}>
+  <div class="md:w-(--media-width)">
     <slot name="media" />
   </div>
 </div>
