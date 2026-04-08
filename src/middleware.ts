@@ -1,12 +1,10 @@
-import { routes } from "@/config/routes";
+import { allRoutes } from "@/config/routes";
 import { isPreview, isStaging } from "@/config/stage";
 import { buildRoutePath, removeTrailingSlash } from "@/utils/path";
 import { defineMiddleware } from "astro:middleware";
 
 const stagingOnlyPaths = new Set<string>(
-  Object.values(routes)
-    .filter((route) => route.isStagingOnly)
-    .map((route) => route.path),
+  allRoutes.filter((route) => route.isStagingOnly).map((route) => route.path),
 );
 
 const notFoundPath = buildRoutePath("/404", import.meta.env.BASE_URL);

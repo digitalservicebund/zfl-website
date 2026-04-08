@@ -2,7 +2,7 @@
 import Card from "@/components/Card.astro";
 import Hero from "@/components/Hero.astro";
 import SupportCard from "@/components/blocks/SupportCard.astro";
-import { ZFL_EMAIL } from "@/config/constants.ts";
+import { ZFL_PHONE, ZFL_EMAIL_SCHULUNG } from "@/config/constants.ts";
 import schulungenImage from "@/images/Schulungen.png";
 import Layout from "@/layouts/Layout.astro";
 import { Image } from "astro:assets";
@@ -17,11 +17,10 @@ export const frontmatter = {
 
 <Layout title={frontmatter.title}>
   <main class="breakout-grid max-md:overflow-x-hidden">
-    <Hero>
+    <Hero level="main">
       <div class="items-center gap-32 md:flex md:flex-row">
         <div>
           <h1>In Schulungen praktisches Wissen und Kompetenzen erlangen</h1>
-
           <div>
             <p>
               In den umsetzungsorientierten Schulungen des Zentrum für Legistik
@@ -39,7 +38,12 @@ export const frontmatter = {
             </div>
           </div>
         </div>
-        <Image class="hidden size-288 md:block" src={schulungenImage} alt="" />
+        <Image
+          class="hidden size-288 md:block"
+          src={schulungenImage}
+          alt=""
+          aria-hidden
+        />
       </div>
     </Hero>
 
@@ -61,6 +65,20 @@ export const frontmatter = {
           <Schedule appointments={appointments} caption="Nächste Termine" />
         </div>
 
+        <h3>Methodenblitz: Umgang mit Risiken</h3>
+        <p>
+          Im Rahmen dieser neuen Veranstaltungsreihe werden einzelne Methoden
+          der innovativen Rechtsetzung vorgestellt und praktische
+          Anwendungsübungen mitgegeben. Die Ergebnisse dieser Übungen werden in
+          einem zweiten Folgetermin besprochen. Das Format fokussiert sich auf
+          die Erstellung von Regelungsvorhaben.
+        </p>
+        <p>Mittwoch, 22.04.2026: 09:10 – 10:00 Uhr (online)</p>
+        <p>
+          Mittwoch, 06.05.2026: 09:15 – 09:45 Uhr (online)<br />Folgetermin zur
+          Besprechung der Übung und Rückfragen
+        </p>
+
         <h3>
           Basisschulung für Legistinnen und Legisten
           <span class="whitespace-nowrap">(4 Tage)</span>
@@ -74,8 +92,8 @@ export const frontmatter = {
         <h3>Anmeldung</h3>
         <p>
           Schicken Sie uns für eine Anmeldung den Schulungs- oder Modul-Namen
-          und Termin an die E-Mail <a href={ZFL_EMAIL.url}
-            >{ZFL_EMAIL.display}</a
+          und Termin an die E-Mail <a href={ZFL_EMAIL_SCHULUNG.url}
+            >{ZFL_EMAIL_SCHULUNG.display}</a
           > und wir bestätigen die Anmeldung.
         </p>
       </Card>
@@ -98,7 +116,7 @@ export const frontmatter = {
         Präsenz<br />
         <a
           href="https://www.gleichstellungs-check.de/de/topic/6.schulungen.html"
-          >Mehr Informationen und Anmeldung</a
+          target="_blank">Mehr Informationen und Anmeldung</a
         >
       </p>
 
@@ -115,7 +133,7 @@ export const frontmatter = {
         Zweitätige Tagung am 26. und 27. März 2026 in Speyer<br />
         <a
           href="https://weiterbildung.uni-speyer.de/suche/veranstaltungsdetails.html?action%5B26%5D=course&courseId=588-C-4388100&rowIndex=11"
-          >Mehr Informationen und Anmeldung</a
+          target="_blank">Mehr Informationen und Anmeldung</a
         >
       </p>
 
@@ -126,7 +144,7 @@ export const frontmatter = {
         />
         <a
           href="https://www.uni-speyer.de/lehrstuehle/level-2-1/prof-dr-ruth-weber/speyerer-zentrum-fuer-gesetzgebung"
-          >Mehr Informationen</a
+          target="_blank">Mehr Informationen</a
         >
       </p>
 
@@ -135,12 +153,28 @@ export const frontmatter = {
       <h4>Einführung in die Grundlagen der Legistik</h4>
       <p>
         OnDEA bietet Video-Tutorials zu unterschiedlichen Themen an<br />
-        <a href="https://www.ondea.de/DE/ZfL/ZfL_node.html">Videos anzeigen</a>
+        <a href="https://www.ondea.de/DE/ZfL/ZfL_node.html" target="_blank"
+          >Videos anzeigen</a
+        >
       </p>
     </section>
 
     <section class="bg-lavender-base breakout">
-      <SupportCard />
+      <SupportCard>
+        <p>
+          Mit unseren Schulungsangeboten unterstützen wir Sie dabei, moderne und
+          wirksame Methoden der Rechtsetzung gezielt in Ihrer Arbeit
+          einzusetzen.
+        </p>
+        <p>
+          Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>
+        </p>
+        <p>
+          E-Mail: <a href={ZFL_EMAIL_SCHULUNG.url}
+            >{ZFL_EMAIL_SCHULUNG.display}</a
+          >
+        </p>
+      </SupportCard>
     </section>
   </main>
 </Layout>

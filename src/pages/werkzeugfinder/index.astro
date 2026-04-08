@@ -1,7 +1,7 @@
 ---
 import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
-import { routes } from "@/config/routes";
+import { werkzeugfinder } from "@/config/routes";
 import {
   getAllObjects,
   getAllReasons,
@@ -16,7 +16,7 @@ const ressorts = getAllRessorts();
 const objects = getAllObjects();
 const reasons = getAllReasons();
 
-const empfehlungBase = `${routes.werkzeugfinder.path}/empfehlung`;
+const empfehlungBase = `${werkzeugfinder.path}/empfehlung`;
 ---
 
 <Layout title={frontmatter.title}>
@@ -107,7 +107,7 @@ const empfehlungBase = `${routes.werkzeugfinder.path}/empfehlung`;
                   <label class="kern-label" for={obj.id}>
                     {obj.name}
                     {obj.description && (
-                      <span class="block max-w-a11y text-gray-500!">
+                      <span class="max-w-a11y block text-gray-500!">
                         {obj.description}
                       </span>
                     )}
@@ -153,7 +153,7 @@ const empfehlungBase = `${routes.werkzeugfinder.path}/empfehlung`;
                   <label class="kern-label" for={r.id}>
                     {r.name}
                     {r.description && (
-                      <span class="block max-w-a11y text-gray-500!">
+                      <span class="max-w-a11y block text-gray-500!">
                         {r.description}
                       </span>
                     )}

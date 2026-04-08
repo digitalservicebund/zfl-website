@@ -1,7 +1,7 @@
 ---
 import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
-import { routes } from "@/config/routes";
+import { werkzeugfinder } from "@/config/routes";
 
 export const frontmatter = {
   title: "Entscheidungsbaum Anleitung",
@@ -20,7 +20,7 @@ export const frontmatter = {
         Diese Seite befindet sich momentan noch im Aufbau und Inhalte folgen in
         Kürze.
       </p>
-      <a href={routes.werkzeugfinder.path}>Zurück zum Werkzeugfinder</a>
+      <a href={werkzeugfinder.path}>Zurück zum Werkzeugfinder</a>
     </section>
   </main>
 </Layout>

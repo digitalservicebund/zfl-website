@@ -2,7 +2,7 @@
 import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
 import Card from "@/components/Card.astro";
-import { routes } from "@/config/routes";
+import { werkzeugfinder } from "@/config/routes";
 import { Image } from "astro:assets";
 import { render } from "astro:content";
 import {
@@ -40,7 +40,7 @@ const renderedTools = result
     )
   : [];
 
-const quizPath = routes.werkzeugfinder.path;
+const quizPath = werkzeugfinder.path;
 ---
 
 <Layout title="Empfohlenes Werkzeug – Werkzeugfinder">
@@ -63,10 +63,12 @@ const quizPath = routes.werkzeugfinder.path;
                 <p class="kern-preline mb-4">
                   Wir empfehlen Ihnen eine Visualisierung als:
                 </p>
-                <h2 class="mt-0 kern-title kern-title--large">{result.cluster.name}</h2>
+                <h2 class="kern-title kern-title--large mt-0">
+                  {result.cluster.name}
+                </h2>
                 <p>{result.cluster.description}</p>
                 <a
-                  href={`${routes.werkzeugfinder.path}/${result.cluster.id}`}
+                  href={`${werkzeugfinder.path}/${result.cluster.id}`}
                   class="kern-btn kern-btn--primary"
                 >
                   {result.cluster.name} Anleitung
@@ -78,9 +80,11 @@ const quizPath = routes.werkzeugfinder.path;
                       <p class="kern-preline kern-preline--small mb-4 text-gray-900">
                         {rec.fidelity.name}
                       </p>
-                      <h3 class="mt-0 kern-title">{rec.primaryTool.data.name}</h3>
+                      <h3 class="kern-title mt-0">
+                        {rec.primaryTool.data.name}
+                      </h3>
                       <div class="gap-md flex flex-col sm:flex-row">
-                        <div class="flex-1 prose">
+                        <div class="prose flex-1">
                           <PrimaryContent />
                           {rec.primaryTool.data.link && (
                             <a
@@ -105,8 +109,8 @@ const quizPath = routes.werkzeugfinder.path;
                               <div class="bg-lavender-200 p-sm rounded-sm">
                                 <h4 class="mt-0">Alternativen</h4>
                                 <p>
-                                  Wenn Sie {rec.primaryTool.data.name} nicht nutzen
-                                  können oder möchten, können Sie ein{" "}
+                                  Wenn Sie {rec.primaryTool.data.name} nicht
+                                  nutzen können oder möchten, können Sie ein{" "}
                                   {result!.cluster.name} auch in folgenden
                                   Anwendungen erstellen:
                                 </p>

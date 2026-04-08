@@ -1,6 +1,6 @@
 ---
-import type { HTMLAttributes } from "astro/types";
 import { tv, type VariantProps } from "tailwind-variants";
+import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"div">, VariantProps<typeof cardStyles> {
   contentClass?: string;
@@ -8,7 +8,7 @@ interface Props extends HTMLAttributes<"div">, VariantProps<typeof cardStyles> {
 }
 
 export const cardStyles = tv({
-  base: "py-md sm:px-lg scroll-my-md flex flex-row gap-32 rounded-lg bg-white px-16",
+  base: "scroll-my-md flex flex-row gap-32 bg-white p-16 md:p-32 lg:gap-64",
   variants: {
     look: {
       gray: "bg-lavender-base",
@@ -23,7 +23,7 @@ const contentStyles = tv({
 });
 
 const iconStyle = tv({
-  base: "[&_svg]:text-cosmic-blue-400 [&_svg]:size-lg shrink-0 max-sm:hidden [&_svg]:hidden [&_svg]:sm:block",
+  base: "bg-lavender-400 [&_svg]:text-cosmic-blue-400 flex shrink-0 items-center rounded-sm px-18 py-22 max-sm:hidden [&_svg]:mx-50 [&_svg]:hidden [&_svg]:size-75 [&_svg]:sm:block [&_svg]:lg:mx-75 [&_svg]:lg:size-100",
 });
 
 const { class: className, contentClass, look, ...attrs } = Astro.props;
@@ -37,5 +37,7 @@ const { class: className, contentClass, look, ...attrs } = Astro.props;
       </div>
     )
   }
-  <div class={contentStyles({ class: contentClass })}><slot /></div>
+  <div class={contentStyles({ class: contentClass })}>
+    <slot />
+  </div>
 </div>

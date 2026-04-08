@@ -44,17 +44,23 @@ Optional navigation metadata:
 
 ## Using routes
 
-Import `routes` from `@/config/routes` and use `routes.<routeKey>.path` for links:
+Import individual routes from `@/config/routes` and use their `.path` for links:
 
 ```astro
 ---
-import { routes } from "@/config/routes";
+import { schulungen } from "@/config/routes";
 ---
 
-<a href={routes.schulungen.path}>{routes.schulungen.title}</a>
+<a href={schulungen.path}>{schulungen.title}</a>
 ```
 
-The route key is derived from the page filename in camelCase (e.g. `schulungen`, `anleitungenUndHilfsmittel`). The home page (`index.astro`) maps to `routes.home`. Child routes prefix the route key with the parent route key (e.g. `ueberUns_zahlenUndFakten`).
+The route key is derived from the page filename in camelCase (e.g. `schulungen`, `anleitungenUndHilfsmittel`). The home page (`index.astro`) maps to `home`. Child routes prefix the route key with the parent route key (e.g. `ueberUns_zahlenUndFakten`).
+
+For iterating over all routes, use `allRoutes`:
+
+```ts
+import { allRoutes } from "@/config/routes";
+```
 
 ## Staging-only pages
 
@@ -63,8 +69,8 @@ Set `isStagingOnly: true` in the frontmatter to hide a page on production, this 
 ```astro
 ---
 import { isStaging } from "@/config/stage";
-import { routes } from "@/config/routes";
+import { ueberUns } from "@/config/routes";
 ---
 
-{isStaging && <a href={routes.ueberUns.path}>Über uns</a>}
+{isStaging && <a href={ueberUns.path}>Über uns</a>}
 ```

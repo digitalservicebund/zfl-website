@@ -1,0 +1,236 @@
+---
+import SupportCard from "@/components/blocks/SupportCard.astro";
+import MediaText from "@/components/MediaText.astro";
+import Hero from "@/components/Hero.astro";
+import FeatureSet from "@/components/FeatureSet.astro";
+import FeatureItem from "@/components/FeatureItem.astro";
+import illustration from "./illustration.svg";
+import gesetzentwurfImg from "./gesetzentwurf.png";
+import Layout from "@/layouts/Layout.astro";
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import { ZFL_EMAIL_REGBEG, ZFL_PHONE_REGBEG } from "@/config/constants";
+
+export const frontmatter = {
+  title: "Regelungsbegleitung",
+  sitemap: true,
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero level="main" class="overflow-clip">
+      <div class="items-center gap-32 md:flex">
+        <div>
+          <h1>Regelungsbegleitung</h1>
+          <h2 class="kern-heading-medium mb-24">
+            Individuelle Unterstützung für Ihr Vorhaben nutzen
+          </h2>
+          <p>
+            Ein in Gesetzgebungspraxis erfahrenes interdisziplinäres Team
+            unterstützt Sie dabei, die Regelung praxisnah, digitaltauglich und
+            bürokratiearm zu gestalten.<br />
+            Vertraulich und mit individuellem Fokus auf Ihr Vorhaben stehen Ihnen
+            während der Begleitung Kompetenzen in Design, Nutzerforschung, IT, Produkt-
+            und Prozessmanagement direkt zur Verfügung.
+          </p>
+          <a class="kern-btn kern-btn--primary mt-32" href="#leistungspakete">
+            <Icon
+              name="ic:baseline-arrow-downward"
+              class="kern-label"
+              aria-hidden
+            />
+            <span class="kern-label">Leistungspakete anzeigen</span>
+          </a>
+        </div>
+        <Image
+          class="hidden size-280 md:block lg:size-420"
+          src={illustration}
+          alt=""
+          aria-hidden
+        />
+      </div>
+    </Hero>
+    <section>
+      <h2>Ergebnisse der Zusammenarbeit</h2>
+      <p class="kern-body">
+        Wir unterstützen Sie dabei, Umsetzungsprozesse zu verstehen und
+        umzusetzen. Durch Ihre Rechtsetzungs-Expertise in Kombination mit
+        Methoden aus der agilen Software-Entwicklung entstehen somit praxisnahe
+        und bürokratiearme Gesetze, die Potentiale der Digitalisierung
+        bestmöglich ausschöpfen.
+      </p>
+
+      <FeatureSet>
+        <FeatureItem
+          icon="ic:twotone-account-tree"
+          title="Sachverhalte visualisieren"
+          body="Komplexe Sachverhalte durch Prozess-Visualisierungen strukturieren, interne und externe Abstimmung vereinfachen"
+        />
+        <FeatureItem
+          icon="ic:twotone-lightbulb"
+          title="Umsetzung mitdenken"
+          body="Betroffenen-Perspektive frühzeitig identifizieren, bestehende Umsetzungshürden beheben"
+        />
+        <FeatureItem
+          icon="ic:twotone-hub"
+          title="Prozesse strukturieren"
+          body="Methodische Unterstützung nutzen, Anleitungen für Praxis- und Digitaltauglichkeit erhalten"
+        />
+      </FeatureSet>
+
+      <div id="leistungspakete">
+        <h2 class="mt-lg">Passende Leistungspakete für Ihr Vorhaben</h2>
+        <p class="pb-40">
+          In der folgenden Tabelle finden Sie unsere verschiedenen
+          Unterstützungsangebote im Vergleich. Alle Angebote sind kostenfrei und
+          werden vom BMDS finanziert.
+        </p>
+        <div class="overflow-x-auto" tabindex="0">
+          <table class="w-full table-fixed text-left">
+            <thead>
+              <tr class="table-header-cell">
+                <th scope="col" class="w-150">Kriterien</th>
+                <th scope="col" class="w-235">Paket S</th>
+                <th scope="col" class="w-235">Paket M</th>
+                <th scope="col" class="w-235">Paket L</th>
+              </tr>
+            </thead>
+
+            <tbody
+              class="table-body-cell [&>tr:nth-child(even)]:bg-lavender-200"
+            >
+              <tr>
+                <td class="font-bold">Fokus</td>
+                <td> Punktuelle Unterstützung bei Ihrer Fragestellung </td>
+                <td> Vertiefte Analyse Ihres Vorhabens </td>
+                <td> Langfristige Begleitung des Gesetzgebungsprozesses </td>
+              </tr>
+
+              <tr>
+                <td class="font-bold">Dauer</td>
+                <td>1 gemeinsame Arbeitssitzung</td>
+                <td>ca. 4 Wochen</td>
+                <td>Ab 5 Wochen</td>
+              </tr>
+
+              <tr>
+                <td class="font-bold">Team</td>
+                <td>
+                  <p>1–2 Personen aus:</p>
+                  <ul class="list-items">
+                    <li>Service Design</li>
+                    <li>Nutzerforschung</li>
+                  </ul>
+                </td>
+                <td>
+                  <p>3–4 Personen aus:</p>
+                  <ul class="list-items">
+                    <li>Service Design</li>
+                    <li>Nutzerforschung</li>
+                    <li>Softwareentwicklung</li>
+                    <li>Produktmanagement</li>
+                    <li>Transformations&shy;management</li>
+                  </ul>
+                </td>
+                <td>
+                  <p>3–4 Personen aus:</p>
+                  <ul class="list-items">
+                    <li>Service Design</li>
+                    <li>Nutzerforschung</li>
+                    <li>Softwareentwicklung</li>
+                    <li>Produktmanagement</li>
+                    <li>Transformations&shy;management</li>
+                  </ul>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="font-bold">Zeitpunkt</td>
+                <td>Individuell nach Bedarf</td>
+                <td>Konzept- bis Entwurfsphase</td>
+                <td>Ab Start der Initiative</td>
+              </tr>
+
+              <tr>
+                <td class="font-bold"> Tätigkeit (Beispiele) </td>
+                <td>
+                  <ul class="list-items">
+                    <li>Umsetzungsperspektive besser verstehen</li>
+                    <li>gemeinsam visualisieren</li>
+                    <li>technische Fragen beantworten</li>
+                  </ul>
+                </td>
+                <td>
+                  <ul class="list-items">
+                    <li>
+                      Umsetzungsperspektive auf technischer, organisatorischer
+                      und rechtlicher Ebene durchdenken
+                    </li>
+                    <li>technische Lösungsideen entwickeln</li>
+                    <li>Machbarkeit validieren</li>
+                  </ul>
+                </td>
+                <td>
+                  <ul class="list-items">
+                    <li>Gemeinsame Analyse</li>
+                    <li>Unterstützung bei Workshops und Hausabstimmungen</li>
+                    <li>moderierter Austausch mit Umsetzungsakteuren</li>
+                    <li>Evaluation von Lösungen</li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <section class="breakout bg-cosmic-blue-base text-white">
+      <h2>Regelungsbegleitung anfragen</h2>
+      <p>
+        Sie planen ein konkretes Regelungsvorhaben und wünschen sich eine
+        methodische Begleitung? Schreiben Sie uns eine E-Mail unter <a
+          href={ZFL_EMAIL_REGBEG.url}>{ZFL_EMAIL_REGBEG.display}</a
+        >.
+      </p>
+    </section>
+    <section>
+      <MediaText class="items-center" split="8-4">
+        <p class="kern-preline">Praxisbeispiel</p>
+        <h2 class="mt-0">
+          Einsatz einer Regelungsbegleitung für das Stromsteuerrecht
+        </h2>
+        <p class="kern-body italic">
+          „Die gründliche Analyse von Vollzugsprozessen hat uns geholfen, das
+          Zusammen­spiel zwischen den Regelungen und der Administration besser
+          zu verstehen und so den digitalen Vollzug zu gestalten.“
+        </p>
+        <a
+          href="https://digitalcheck.bund.de/beispiele/regelungen/gesetz-zur-modernisierung-und-zum-buerokratieabbau-im-strom-und-energiesteuerrecht"
+          target="_blank"
+        >
+          Mehr erfahren
+        </a>
+        <Image
+          slot="media"
+          src={gesetzentwurfImg}
+          alt="Symbolbild: ausgedruckter Gesetzentwurf"
+        />
+      </MediaText>
+    </section>
+    <section class="bg-lavender-400 breakout py-80">
+      <SupportCard>
+        <p>
+          Wir unterstützen Sie gerne persönlich in allen Phasen der
+          Regelungsarbeit. Bei Fragen melden Sie sich unter:
+        </p>
+        <p>
+          Telefon: <a href={ZFL_PHONE_REGBEG.url}>{ZFL_PHONE_REGBEG.display}</a>
+        </p>
+        <p>
+          E-Mail: <a href={ZFL_EMAIL_REGBEG.url}>{ZFL_EMAIL_REGBEG.display}</a>
+        </p>
+      </SupportCard>
+    </section>
+  </main>
+</Layout>

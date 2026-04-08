@@ -1,7 +1,7 @@
 ---
 import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
-import { routes } from "@/config/routes";
+import { werkzeugfinder } from "@/config/routes";
 import { Image } from "astro:assets";
 import flowchartElementsImg from "@/images/werkzeugfinder/flowchart-elements.png";
 
@@ -85,7 +85,7 @@ export const frontmatter = {
           >ondea.de/DE/ZfL/ZfL_node.html</a
         >, Modul 10 im Video „Visualisierung".
       </p>
-      <a href={routes.werkzeugfinder.path}>Zurück zum Werkzeugfinder</a>
+      <a href={werkzeugfinder.path}>Zurück zum Werkzeugfinder</a>
     </section>
   </main>
 </Layout>

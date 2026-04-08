@@ -3,10 +3,10 @@ import path from "node:path";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
   escapeStringLiteral,
-  formatRouteKeyForObjectLiteral,
   generateRoutes,
   getParentRouteKey,
   serializeRoutesModule,
+  toExportName,
   toRouteKey,
 } from "./routeGenerator";
 
@@ -132,17 +132,19 @@ describe("generateRoutes() Integration Hook", () => {
         path.resolve(OUTPUT_FILE),
         expect.stringContaining('path: "/"'),
       );
+      expect(fs.writeFileSync).toHaveBeenCalledWith(
+        path.resolve(OUTPUT_FILE),
+        expect.stringContaining('key: "home"'),
+      );
     });
   });
 
   // ---------------------------------------------------------------------------
   // Route graph construction
   // ---------------------------------------------------------------------------
-  // These cases verify how discovered pages are turned into keys, parent links,
-  // and child relationships before serialization.
 
   describe("route graph construction", () => {
-    it("derives parent keys from normalized route paths before building the hierarchy", () => {
+    it("serializes parent references as variable names for nested routes", () => {
       mockPages([
         {
           path: "ueber/index.astro",
@@ -157,32 +159,7 @@ describe("generateRoutes() Integration Hook", () => {
 
       expect(fs.writeFileSync).toHaveBeenCalledWith(
         path.resolve(OUTPUT_FILE),
-        expect.stringContaining('parentKey: "ueber"'),
-      );
-    });
-
-    it("serializes child keys for nested routes", () => {
-      mockPages([
-        {
-          path: "ueber/index.astro",
-          frontmatter: 'const frontmatter = { title: "Über das ZfL" };',
-        },
-        {
-          path: "ueber/das-ist-neu.astro",
-          frontmatter: 'const frontmatter = { title: "Das ist neu" };',
-        },
-        {
-          path: "ueber/zahlen-und-fakten.astro",
-          frontmatter: 'const frontmatter = { title: "Zahlen und Fakten" };',
-        },
-      ]);
-      runBuild();
-
-      expect(fs.writeFileSync).toHaveBeenCalledWith(
-        path.resolve(OUTPUT_FILE),
-        expect.stringContaining(
-          'childKeys: ["ueber_dasIstNeu", "ueber_zahlenUndFakten"]',
-        ),
+        expect.stringContaining("parent: ueber,"),
       );
     });
 
@@ -197,7 +174,6 @@ describe("generateRoutes() Integration Hook", () => {
         },
       ]);
 
-      // A child route currently requires its parent route to exist in the registry.
       expect(() => runBuild()).toThrow();
     });
   });
@@ -205,8 +181,6 @@ describe("generateRoutes() Integration Hook", () => {
   // ---------------------------------------------------------------------------
   // File discovery and metadata filtering
   // ---------------------------------------------------------------------------
-  // The generator should only consider supported page files and should skip pages
-  // that do not produce valid route metadata.
 
   describe("file discovery and metadata filtering", () => {
     it("ignores unsupported file extensions", () => {
@@ -224,7 +198,6 @@ describe("generateRoutes() Integration Hook", () => {
       ]);
       runBuild();
 
-      // Only supported file types should be read and serialized.
       expect(fs.readFileSync).toHaveBeenCalledTimes(2);
       expect(getWrittenOutput()).toContain('title: "Notes"');
       expect(getWrittenOutput()).not.toContain("draft");
@@ -252,10 +225,26 @@ describe("generateRoutes() Integration Hook", () => {
   // ---------------------------------------------------------------------------
   // Output serialization
   // ---------------------------------------------------------------------------
-  // These tests assert the most important pieces of the generated module without
-  // snapshotting the entire file.
 
   describe("serialized routes module output", () => {
+    it("emits a Route type, top-level exports with as const, and an allRoutes array", () => {
+      mockPages([
+        {
+          path: "index.astro",
+          frontmatter: 'const frontmatter = { title: "Home" };',
+        },
+      ]);
+      runBuild();
+
+      const output = getWrittenOutput();
+      expect(output).toContain("export type Route = {");
+      expect(output).toContain("export const home = {");
+      expect(output).toContain("} as const;");
+      expect(output).toContain("export const allRoutes = [");
+      expect(output).toContain("home,");
+      expect(output).toContain("] as const;");
+    });
+
     it("serializes nullable route metadata as null literals", () => {
       mockPages([
         {
@@ -267,11 +256,15 @@ describe("generateRoutes() Integration Hook", () => {
 
       expect(fs.writeFileSync).toHaveBeenCalledWith(
         path.resolve(OUTPUT_FILE),
-        expect.stringContaining("parentKey: null"),
+        expect.stringContaining("parent: null,"),
       );
       expect(fs.writeFileSync).toHaveBeenCalledWith(
         path.resolve(OUTPUT_FILE),
-        expect.stringContaining("navLabel: null"),
+        expect.stringContaining('key: "home"'),
+      );
+      expect(fs.writeFileSync).toHaveBeenCalledWith(
+        path.resolve(OUTPUT_FILE),
+        expect.stringContaining("navLabel: null,"),
       );
     });
 
@@ -310,7 +303,7 @@ describe("generateRoutes() Integration Hook", () => {
       );
     });
 
-    it("quotes generated route keys that are not valid JS identifiers", () => {
+    it("prefixes generated export names that are not valid JS identifiers", () => {
       mockPages([
         {
           path: "2026-news.astro",
@@ -319,7 +312,8 @@ describe("generateRoutes() Integration Hook", () => {
       ]);
       runBuild();
 
-      expect(getWrittenOutput()).toContain('"2026News": {');
+      expect(getWrittenOutput()).toContain("export const _2026News = {");
+      expect(getWrittenOutput()).toContain('key: "2026News"');
     });
   });
 });
@@ -327,8 +321,6 @@ describe("generateRoutes() Integration Hook", () => {
 // =============================================================================
 // Unit Tests: Routes Module Serialization
 // =============================================================================
-// `serializeRoutesModule()` turns normalized route objects into the final TS file.
-// The assertions here stay focused on the highest-value formatting guarantees.
 
 describe("serializeRoutesModule", () => {
   it("sorts routes by key before serializing", () => {
@@ -339,7 +331,6 @@ describe("serializeRoutesModule", () => {
           path: "/zwei",
           title: "Zwei",
           parentKey: null,
-          childKeys: [],
           sitemap: true,
           isStagingOnly: false,
           navOrder: null,
@@ -350,7 +341,6 @@ describe("serializeRoutesModule", () => {
           path: "/eins",
           title: "Eins",
           parentKey: null,
-          childKeys: [],
           sitemap: true,
           isStagingOnly: false,
           navOrder: null,
@@ -360,10 +350,12 @@ describe("serializeRoutesModule", () => {
       "/",
     );
 
-    expect(output.indexOf("eins: {")).toBeLessThan(output.indexOf("zwei: {"));
+    expect(output.indexOf("export const eins")).toBeLessThan(
+      output.indexOf("export const zwei"),
+    );
   });
 
-  it("quotes invalid keys and preserves escaped string content", () => {
+  it("prefixes invalid identifiers and preserves escaped string content", () => {
     const output = serializeRoutesModule(
       [
         {
@@ -371,7 +363,6 @@ describe("serializeRoutesModule", () => {
           path: "/2026-news",
           title: 'A "quoted" title',
           parentKey: null,
-          childKeys: ["childRoute"],
           sitemap: true,
           isStagingOnly: false,
           navOrder: null,
@@ -381,18 +372,50 @@ describe("serializeRoutesModule", () => {
       "/",
     );
 
-    expect(output).toContain('"2026News": {');
+    expect(output).toContain("export const _2026News = {");
+    expect(output).toContain('key: "2026News"');
     expect(output).toContain('title: "A \\"quoted\\" title"');
-    expect(output).toContain('childKeys: ["childRoute"]');
     expect(output).toContain('navLabel: "Label \\"Q\\""');
+  });
+
+  it("emits parent as a variable reference for nested routes", () => {
+    const output = serializeRoutesModule(
+      [
+        {
+          key: "ueber",
+          path: "/ueber",
+          title: "Über",
+          parentKey: null,
+          sitemap: true,
+          isStagingOnly: false,
+          navOrder: null,
+          navLabel: null,
+        },
+        {
+          key: "ueber_dasIstNeu",
+          path: "/ueber/das-ist-neu",
+          title: "Das ist neu",
+          parentKey: "ueber",
+          sitemap: true,
+          isStagingOnly: false,
+          navOrder: null,
+          navLabel: null,
+        },
+      ],
+      "/",
+    );
+
+    expect(output).toContain("parent: ueber,");
+    expect(output).toContain("export const allRoutes = [");
+    expect(output).toContain("ueber,");
+    expect(output).toContain("ueber_dasIstNeu,");
+    expect(output).toContain("] as const;");
   });
 });
 
 // =============================================================================
 // Unit Tests: Route Key Derivation
 // =============================================================================
-// These tests cover the helpers that turn route paths into stable keys
-// and parent relationships before any file generation happens.
 
 describe("toRouteKey", () => {
   it("converts a single route segment to camelCase", () => {
@@ -437,15 +460,14 @@ describe("getParentRouteKey", () => {
 // =============================================================================
 // Unit Tests: Serialization Helpers
 // =============================================================================
-// These helpers are responsible for keeping the generated TypeScript valid.
 
-describe("formatRouteKeyForObjectLiteral", () => {
-  it("leaves valid JavaScript identifiers unquoted", () => {
-    expect(formatRouteKeyForObjectLiteral("ueberUns")).toBe("ueberUns");
+describe("toExportName", () => {
+  it("leaves valid JavaScript identifiers unchanged", () => {
+    expect(toExportName("ueberUns")).toBe("ueberUns");
   });
 
-  it("quotes invalid JavaScript identifiers", () => {
-    expect(formatRouteKeyForObjectLiteral("2026News")).toBe('"2026News"');
+  it("prefixes identifiers that start with a digit", () => {
+    expect(toExportName("2026News")).toBe("_2026News");
   });
 });
 

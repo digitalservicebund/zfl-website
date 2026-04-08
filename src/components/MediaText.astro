@@ -1,0 +1,39 @@
+---
+import { tv, type VariantProps } from "tailwind-variants";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props
+  extends HTMLAttributes<"div">, VariantProps<typeof wrapperStyle> {
+  class?: string;
+  reversed?: boolean;
+  split?: `${number}-${number}`; // e.g. 7-5 for 7:5 split in 12 column layout
+}
+
+const wrapperStyle = tv({
+  base: "flex flex-col gap-32 md:flex-row",
+  variants: {
+    reversed: {
+      true: "flex-col-reverse md:flex-row-reverse",
+    },
+  },
+});
+
+const { class: className, reversed, split = "7-5" } = Astro.props;
+const [mainCols = 1, mediaCols = 1] = split.split("-").map(Number);
+const totalCols = mainCols + mediaCols; // should be 12
+---
+
+<div
+  class={wrapperStyle({ reversed, className })}
+  style={{
+    "--main-width": `calc(${mainCols} / ${totalCols} * 100%)`,
+    "--media-width": `calc(${mediaCols} / ${totalCols} * 100%)`,
+  }}
+>
+  <div class="md:w-(--main-width)">
+    <slot />
+  </div>
+  <div class="md:w-(--media-width)">
+    <slot name="media" />
+  </div>
+</div>
