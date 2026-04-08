@@ -1,0 +1,26 @@
+---
+import SteckbriefWrapper from "./_components/SteckbriefWrapper.astro";
+import SidebarTriggerButton from "./_components/SidebarTriggerButton.astro";
+import Textarea from "./_components/Textarea.astro";
+
+export const frontmatter = {
+  title: "3. Problembeschreibung",
+  sitemap: false,
+  navOrder: 3,
+};
+---
+
+<SteckbriefWrapper title={frontmatter.title}>
+  <div class="flex flex-col gap-16">
+    <h2 class="mt-0">
+      Problembeschreibung
+      <SidebarTriggerButton />
+    </h2>
+    <p>
+      Beschreiben Sie die aktuelle Sach- und Rechtslage sowie die spezifischen
+      Probleme. Begründen Sie hieraus den konkreten Handlungsbedarf für das
+      geplante Regelungsvorhaben.
+    </p>
+  </div>
+  <Textarea id="problembeschreibung" label="Beschreibung des Problems" />
+</SteckbriefWrapper>

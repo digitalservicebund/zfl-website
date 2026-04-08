@@ -1,0 +1,15 @@
+---
+import SteckbriefForm from "@/pages/steckbrief/_components/Steckbrief";
+import Layout from "@/layouts/Layout.astro";
+
+export const frontmatter = {
+  title: "Steckbrief",
+  sitemap: true,
+};
+---
+
+<Layout title={frontmatter.title} noFooter>
+  <main>
+    <SteckbriefForm client:only="preact" />
+  </main>
+</Layout>

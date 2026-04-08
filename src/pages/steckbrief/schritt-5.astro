@@ -1,0 +1,25 @@
+---
+import SteckbriefWrapper from "./_components/SteckbriefWrapper.astro";
+import SidebarTriggerButton from "./_components/SidebarTriggerButton.astro";
+import Textarea from "./_components/Textarea.astro";
+
+export const frontmatter = {
+  title: "5. Vorläufige Zielsetzung",
+  sitemap: false,
+  navOrder: 5,
+};
+---
+
+<SteckbriefWrapper title={frontmatter.title}>
+  <div class="flex flex-col gap-16">
+    <h2 class="mt-0">
+      Vorläufige Zielsetzung
+      <SidebarTriggerButton />
+    </h2>
+    <p>
+      Definieren Sie den angestrebten Endzustand sowie den messbaren Nutzen, der
+      durch dieses Vorhaben erreicht werden soll.
+    </p>
+  </div>
+  <Textarea id="zielsetzung" label="Zielsetzung des Vorhabens" />
+</SteckbriefWrapper>

@@ -1,0 +1,40 @@
+---
+import SteckbriefWrapper from "./_components/SteckbriefWrapper.astro";
+import SidebarTriggerButton from "./_components/SidebarTriggerButton.astro";
+import Textarea from "./_components/Textarea.astro";
+
+export const frontmatter = {
+  title: "7. Projektplanung I",
+  sitemap: false,
+  navOrder: 7,
+};
+---
+
+<SteckbriefWrapper title={frontmatter.title}>
+  <div class="flex flex-col gap-16">
+    <h2 class="mt-0">
+      Risikoeinschätzung
+      <SidebarTriggerButton />
+    </h2>
+    <p>
+      Benennen Sie potenzielle Hindernisse für Ihr Vorhaben. Nennen Sie auch
+      deren Eintrittswahrscheinlichkeit.
+    </p>
+  </div>
+
+  <Textarea id="risikoeinschaetzung" label="Risikobetrachtung" />
+
+  <div class="flex flex-col gap-16">
+    <h2 class="mt-0">
+      Komplexitätsgrad des Vorhabens
+      <SidebarTriggerButton />
+    </h2>
+    <p>
+      Beurteilen Sie den Schwierigkeitsgrad des Vorhabens anhand der Anzahl der
+      beteiligten Schnittstellen, der technischen Anforderungen und der
+      Verflechtung einzelner Arbeitsschritte.
+    </p>
+  </div>
+
+  <Textarea id="komplexitaetsgrad" label="Komplexität des Vorhabens" />
+</SteckbriefWrapper>

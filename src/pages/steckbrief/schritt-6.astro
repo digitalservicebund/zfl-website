@@ -1,0 +1,43 @@
+---
+import SteckbriefWrapper from "./_components/SteckbriefWrapper.astro";
+import SidebarTriggerButton from "./_components/SidebarTriggerButton.astro";
+import Textarea from "./_components/Textarea.astro";
+
+export const frontmatter = {
+  title: "6. Vorhabensbeschreibung",
+  sitemap: false,
+  navOrder: 6,
+};
+---
+
+<SteckbriefWrapper title={frontmatter.title}>
+  <div class="flex flex-col gap-16">
+    <h2 class="mt-0">
+      Vorhabensbeschreibung
+      <SidebarTriggerButton />
+    </h2>
+    <p>
+      Skizzieren Sie die geplanten Maßnahmen und den methodischen Weg, mit dem
+      die gesetzten Ziele realisiert werden sollen.
+    </p>
+  </div>
+
+  <Textarea id="vorhabensbeschreibung" label="Vorhabensbeschreibung" />
+
+  <div class="flex flex-col gap-16">
+    <h2 class="mt-0">
+      Maßnahmen der Zielsetzung
+      <SidebarTriggerButton />
+    </h2>
+    <p>
+      Skizzieren Sie die geplanten Maßnahmen und den methodischen Weg, mit dem
+      die gesetzten Ziele realisiert werden sollen.
+    </p>
+  </div>
+
+  <Textarea
+    id="massnahmen"
+    label="Ihre geplanten Maßnahmen"
+    hint="Erstellung von Gutachten, internationaler Vergleich/Best Practices analysieren, Formate der Beteiligung relevanter Akteure"
+  />
+</SteckbriefWrapper>

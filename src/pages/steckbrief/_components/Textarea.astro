@@ -1,0 +1,36 @@
+---
+interface Props {
+  id: string;
+  label: string;
+  hint?: string;
+  required?: boolean;
+}
+
+const MAX_LENGTH = 2500;
+
+const { id, label, hint, required } = Astro.props;
+const hintId = `hint_${id}`;
+---
+
+<div class="kern-form-input">
+  <label class="kern-label" for={id}>
+    {label}
+  </label>
+  {
+    hint && (
+      <div class="kern-hint" id={hintId}>
+        {hint}
+      </div>
+    )
+  }
+  <textarea
+    class="kern-form-input__input"
+    id={id}
+    name={id}
+    aria-required={required}
+    aria-describedby={hintId}
+    max-length={MAX_LENGTH}></textarea>
+  <p class="mt-4 text-right text-sm text-gray-500">
+    {0} / {MAX_LENGTH}
+  </p>
+</div>

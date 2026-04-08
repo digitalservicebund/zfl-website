@@ -1,0 +1,42 @@
+---
+import SteckbriefWrapper from "./_components/SteckbriefWrapper.astro";
+import SidebarTriggerButton from "./_components/SidebarTriggerButton.astro";
+import Textarea from "./_components/Textarea.astro";
+
+export const frontmatter = {
+  title: "8. Projektplanung II",
+  sitemap: false,
+  navOrder: 8,
+};
+---
+
+<SteckbriefWrapper title={frontmatter.title}
+  ><div class="flex flex-col gap-16">
+    <h2 class="mt-0">
+      Zeithorizont
+      <SidebarTriggerButton />
+    </h2>
+    <p>Beschreiben Sie hier den zeitlichen Ablauf Ihres Vorhabens.</p>
+  </div>
+
+  <Textarea id="zeithorizont" label="Zeithorizont des Vorhabens" />
+
+  <div class="flex flex-col gap-16">
+    <h2 class="mt-0">
+      Ressourcenschätzung
+      <SidebarTriggerButton />
+    </h2>
+    <p>
+      Schätzen Sie hier ein, welche Unterstützung Sie benötigen. Berücksichtigen
+      Sie dabei die Komplexität der Arbeitsschritte, technische Anforderungen
+      und die Anzahl der beteiligten Schnittstellen. Notieren Sie auch, ob Sie
+      zusätzliche Kapazitäten – etwa durch ein interdisziplinäres Team oder
+      externe Expertise – einplanen müssen.
+    </p>
+  </div>
+
+  <Textarea
+    id="ressourcenschaetzung"
+    label="Ressourcenbedarf und -verfügbarkeit"
+  />
+</SteckbriefWrapper>

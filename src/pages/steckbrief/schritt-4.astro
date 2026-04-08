@@ -1,0 +1,44 @@
+---
+import SteckbriefWrapper from "./_components/SteckbriefWrapper.astro";
+import SidebarTriggerButton from "./_components/SidebarTriggerButton.astro";
+import Textarea from "./_components/Textarea.astro";
+
+export const frontmatter = {
+  title: "4. Einflussfaktoren & relevante Akteure",
+  sitemap: false,
+  navOrder: 4,
+};
+---
+
+<SteckbriefWrapper title={frontmatter.title}>
+  <div class="flex flex-col gap-16">
+    <h2 class="mt-0">
+      Einflussfaktoren
+      <SidebarTriggerButton />
+    </h2>
+    <p>
+      Benennen Sie alle maßgeblichen Rahmenbedingungen und Abhängigkeiten, die
+      den Erfolg des Vorhabens beeinflussen können.
+    </p>
+  </div>
+
+  <Textarea
+    id="einflussfaktoren"
+    label="Einflussfaktoren Ihres Vorhabens"
+    hint="Nennen Sie relevante externe Faktoren, rechtliche Rahmenbedingungen oder politische Abhängigkeiten."
+  />
+
+  <div class="flex flex-col gap-16">
+    <h2 class="mt-0">
+      Relevante Akteure
+      <SidebarTriggerButton />
+    </h2>
+
+    <p>
+      Führen Sie alle außenstehenden Personen oder Interessengruppen auf, die
+      vom Vorhaben betroffen sind oder Einfluss darauf nehmen.
+    </p>
+  </div>
+
+  <Textarea id="relevanteAkteure" label="Relevante Akteure Ihres Vorhabens" />
+</SteckbriefWrapper>

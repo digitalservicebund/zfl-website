@@ -1,0 +1,25 @@
+---
+import SteckbriefWrapper from "./_components/SteckbriefWrapper.astro";
+import SidebarTriggerButton from "./_components/SidebarTriggerButton.astro";
+import Textarea from "./_components/Textarea.astro";
+
+export const frontmatter = {
+  title: "2. Kontext & Genese",
+  sitemap: false,
+  navOrder: 2,
+};
+---
+
+<SteckbriefWrapper title={frontmatter.title}>
+  <div class="flex flex-col gap-16">
+    <h2 class="mt-0">
+      Kontext und Genese des Vorhabens
+      <SidebarTriggerButton />
+    </h2>
+    <p>
+      Erläutern Sie den Kontext Ihres Vorhabens anhand der maßgeblichen
+      Beschlüsse, Vereinbarungen oder politischen Impulse.
+    </p>
+  </div>
+  <Textarea id="kontext" label="Kontext Ihres Vorhabens" />
+</SteckbriefWrapper>

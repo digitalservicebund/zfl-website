@@ -113,11 +113,110 @@ export const staging = {
 export const steckbrief = {
   key: "steckbrief",
   path: "/steckbrief",
-  title: "Steckbrief",
+  title: "1. Allgemeine Angaben",
   parent: null,
-  sitemap: true,
+  sitemap: false,
   isStagingOnly: false,
-  navOrder: null,
+  navOrder: 1,
+  navLabel: null,
+} as const;
+
+export const steckbrief_schritt10 = {
+  key: "steckbrief_schritt10",
+  path: "/steckbrief/schritt-10",
+  title: "10. Herunterladen & Absenden",
+  parent: steckbrief,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 10,
+  navLabel: null,
+} as const;
+
+export const steckbrief_schritt2 = {
+  key: "steckbrief_schritt2",
+  path: "/steckbrief/schritt-2",
+  title: "2. Kontext & Genese",
+  parent: steckbrief,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 2,
+  navLabel: null,
+} as const;
+
+export const steckbrief_schritt3 = {
+  key: "steckbrief_schritt3",
+  path: "/steckbrief/schritt-3",
+  title: "3. Problembeschreibung",
+  parent: steckbrief,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 3,
+  navLabel: null,
+} as const;
+
+export const steckbrief_schritt4 = {
+  key: "steckbrief_schritt4",
+  path: "/steckbrief/schritt-4",
+  title: "4. Einflussfaktoren & relevante Akteure",
+  parent: steckbrief,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 4,
+  navLabel: null,
+} as const;
+
+export const steckbrief_schritt5 = {
+  key: "steckbrief_schritt5",
+  path: "/steckbrief/schritt-5",
+  title: "5. Vorläufige Zielsetzung",
+  parent: steckbrief,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 5,
+  navLabel: null,
+} as const;
+
+export const steckbrief_schritt6 = {
+  key: "steckbrief_schritt6",
+  path: "/steckbrief/schritt-6",
+  title: "6. Vorhabensbeschreibung",
+  parent: steckbrief,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 6,
+  navLabel: null,
+} as const;
+
+export const steckbrief_schritt7 = {
+  key: "steckbrief_schritt7",
+  path: "/steckbrief/schritt-7",
+  title: "7. Projektplanung I",
+  parent: steckbrief,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 7,
+  navLabel: null,
+} as const;
+
+export const steckbrief_schritt8 = {
+  key: "steckbrief_schritt8",
+  path: "/steckbrief/schritt-8",
+  title: "8. Projektplanung II",
+  parent: steckbrief,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 8,
+  navLabel: null,
+} as const;
+
+export const steckbrief_schritt9 = {
+  key: "steckbrief_schritt9",
+  path: "/steckbrief/schritt-9",
+  title: "9. Zusammenfassung",
+  parent: steckbrief,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 9,
   navLabel: null,
 } as const;
 
@@ -125,6 +224,17 @@ export const steckbriefjs = {
   key: "steckbriefjs",
   path: "/steckbriefjs",
   title: "SteckbriefJS",
+  parent: null,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const steckbriefReact = {
+  key: "steckbriefReact",
+  path: "/steckbrief-react",
+  title: "Steckbrief",
   parent: null,
   sitemap: true,
   isStagingOnly: false,
@@ -209,7 +319,17 @@ export const allRoutes = [
   sitemap,
   staging,
   steckbrief,
+  steckbrief_schritt10,
+  steckbrief_schritt2,
+  steckbrief_schritt3,
+  steckbrief_schritt4,
+  steckbrief_schritt5,
+  steckbrief_schritt6,
+  steckbrief_schritt7,
+  steckbrief_schritt8,
+  steckbrief_schritt9,
   steckbriefjs,
+  steckbriefReact,
   ueber,
   ueber_aktuelleMeldungen,
   ueber_dasIstNeu,

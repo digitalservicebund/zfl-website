@@ -1,0 +1,86 @@
+---
+import SteckbriefWrapper from "./_components/SteckbriefWrapper.astro";
+import SummaryCard from "./_components/SummaryCard.astro";
+
+export const frontmatter = {
+  title: "9. Zusammenfassung",
+  sitemap: false,
+  navOrder: 9,
+};
+
+const values: Record<string, string | undefined> = {};
+---
+
+<SteckbriefWrapper title={frontmatter.title}>
+  <div class="flex flex-col gap-16">
+    <h2 class="mt-0">Zusammenfassung</h2>
+    <p>
+      Überprüfen Sie Ihre Angaben und korrigieren Sie diese, falls notwendig.
+    </p>
+  </div>
+
+  <div class="flex flex-col">
+    <SummaryCard
+      title="Allgemeine Angaben"
+      items={[
+        { key: "Arbeitstitel des Vorhabens", value: values.arbeitstitel },
+        { key: "Aktenzeichen", value: values.aktenzeichen },
+        { key: "Federführendes Ressort", value: values.ressort },
+        { key: "Referat", value: values.referat },
+      ]}
+    />
+    <SummaryCard
+      title="Kontaktdaten"
+      items={[
+        { key: "Name", value: values.name },
+        { key: "E-Mail Adresse", value: values.email },
+        { key: "Telefonnummer", value: values.telefonnummer },
+      ]}
+    />
+    <SummaryCard
+      title="Kontext und Genese"
+      items={[{ key: "Kontext", value: values.kontext }]}
+    />
+    <SummaryCard
+      title="Problembeschreibung"
+      items={[
+        { key: "Problembeschreibung", value: values.problembeschreibung },
+      ]}
+    />
+    <SummaryCard
+      title="Einflussfaktoren & Akteure"
+      items={[
+        { key: "Einflussfaktoren", value: values.einflussfaktoren },
+        { key: "Relevante Akteure", value: values.relevanteAkteure },
+      ]}
+    />
+    <SummaryCard
+      title="Vorläufige Zielsetzung"
+      items={[{ key: "Zielsetzung", value: values.zielsetzung }]}
+    />
+    <SummaryCard
+      title="Vorhabensbeschreibung"
+      items={[
+        {
+          key: "Vorhabensbeschreibung",
+          value: values.vorhabensbeschreibung,
+        },
+        { key: "Wichtige Maßnahmen", value: values.massnahmen },
+      ]}
+    />
+    <SummaryCard
+      title="Projektplanung I"
+      items={[
+        { key: "Zeithorizont", value: values.zeithorizont },
+        { key: "Ressourcenschätzung", value: values.ressourcenschaetzung },
+      ]}
+    />
+    <SummaryCard
+      title="Projektplanung II"
+      items={[
+        { key: "Risikoeinschätzung", value: values.risikoeinschaetzung },
+        { key: "Komplexitätsgrad", value: values.komplexitaetsgrad },
+      ]}
+    />
+  </div>
+</SteckbriefWrapper>
