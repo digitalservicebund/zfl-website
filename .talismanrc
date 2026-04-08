@@ -85,6 +85,16 @@ fileignoreconfig:
     allowed_patterns:
       - key
       - STORAGE_KEY
+  - filename: src/pages/steckbrief/schritt-9.astro
+    allowed_patterns:
+      - key
+  - filename: src/pages/steckbrief/_components/SummaryCard.astro
+    allowed_patterns:
+      - key
+  - filename: src/pages/steckbrief/_components/SteckbriefWrapper.astro
+    allowed_patterns:
+      - key
+      - STORAGE_KEY
   - filename: src/pages/kontakt/computer.jpg
     checksum: 585af9a443434b8caf56dae715544745714fff5e0c4b5d2cc202275950e3a684
   - filename: src/pages/begleitungen/gesetzentwurf.png
