@@ -71,7 +71,9 @@ const quizPath = werkzeugfinder.path;
                   href={`${werkzeugfinder.path}/${result.cluster.id}`}
                   class="kern-btn kern-btn--primary"
                 >
-                  {result.cluster.name} Anleitung
+                  <span class="kern-label">
+                    {result.cluster.name} Anleitung
+                  </span>
                 </a>
 
                 <div class="mt-lg divide-lavender-400 border-lavender-400 divide-y rounded-sm border">
@@ -137,7 +139,7 @@ const quizPath = werkzeugfinder.path;
               const params = new URLSearchParams(window.location.search);
               const reasonId = params.get('reason');
               const reasonMap = ${JSON.stringify(
-                Object.fromEntries(
+                globalThis.Object.fromEntries(
                   [
                     "austausch",
                     "selbst",
@@ -166,7 +168,7 @@ const quizPath = werkzeugfinder.path;
               </ul>
               <p>
                 <a class="kern-btn kern-btn--primary" href={quizPath}>
-                  Eingaben ändern
+                  <span class="kern-label">Eingaben ändern</span>
                 </a>
               </p>
             </Card>
@@ -180,7 +182,7 @@ const quizPath = werkzeugfinder.path;
             Bitte versuchen Sie es erneut.
           </p>
           <a href={quizPath} class="kern-btn kern-btn--primary">
-            Zurück
+            <span class="kern-label">Zurück</span>
           </a>
         </section>
       )
