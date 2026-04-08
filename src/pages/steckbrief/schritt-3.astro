@@ -7,10 +7,11 @@ export const frontmatter = {
   title: "3. Problembeschreibung",
   sitemap: false,
   navOrder: 3,
+  navLabel: "3. Problem",
 };
 ---
 
-<SteckbriefWrapper title={frontmatter.title}>
+<SteckbriefWrapper title={frontmatter.title} pageNumber={frontmatter.navOrder}>
   <div class="flex flex-col gap-16">
     <h2 class="mt-0">
       Problembeschreibung

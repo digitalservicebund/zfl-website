@@ -7,10 +7,11 @@ export const frontmatter = {
   title: "4. Einflussfaktoren & relevante Akteure",
   sitemap: false,
   navOrder: 4,
+  navLabel: "4. Einflussfaktoren",
 };
 ---
 
-<SteckbriefWrapper title={frontmatter.title}>
+<SteckbriefWrapper title={frontmatter.title} pageNumber={frontmatter.navOrder}>
   <div class="flex flex-col gap-16">
     <h2 class="mt-0">
       Einflussfaktoren

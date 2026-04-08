@@ -3,15 +3,29 @@ import Layout from "@/layouts/Layout.astro";
 
 type Props = {
   title: string;
+  pageNumber: number;
+  isWide?: boolean;
 };
-const { title } = Astro.props;
+const { title, pageNumber, isWide } = Astro.props;
+const totalPages = 10;
 
 const STORAGE_KEY = "steckbrief-v2b";
 ---
 
 <Layout title={title}>
   <main class="breakout-grid">
-    <section class="max-w-a11y">
+    <section
+      class="py-lg mx-auto w-full max-w-(--max-width) px-16"
+      style={{
+        "--max-width": `${isWide ? 1280 : 736}px`,
+      }}
+    >
+      <div class="kern-progress mb-lg">
+        <label class="kern-label" for="progress1">
+          Schritt {pageNumber} von {totalPages}
+        </label>
+        <progress id="progress1" value={pageNumber} max={totalPages}></progress>
+      </div>
       <form class="flex flex-col gap-32" novalidate>
         <slot />
       </form>

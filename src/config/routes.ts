@@ -129,7 +129,7 @@ export const steckbrief_schritt10 = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 10,
-  navLabel: null,
+  navLabel: "10. Abschluss",
 } as const;
 
 export const steckbrief_schritt2 = {
@@ -151,7 +151,7 @@ export const steckbrief_schritt3 = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 3,
-  navLabel: null,
+  navLabel: "3. Problem",
 } as const;
 
 export const steckbrief_schritt4 = {
@@ -162,7 +162,7 @@ export const steckbrief_schritt4 = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 4,
-  navLabel: null,
+  navLabel: "4. Einflussfaktoren",
 } as const;
 
 export const steckbrief_schritt5 = {
@@ -173,7 +173,7 @@ export const steckbrief_schritt5 = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 5,
-  navLabel: null,
+  navLabel: "5. Zielsetzung",
 } as const;
 
 export const steckbrief_schritt6 = {
@@ -184,7 +184,7 @@ export const steckbrief_schritt6 = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 6,
-  navLabel: null,
+  navLabel: "6. Vorhaben",
 } as const;
 
 export const steckbrief_schritt7 = {

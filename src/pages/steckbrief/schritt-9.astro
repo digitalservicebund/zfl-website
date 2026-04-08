@@ -11,7 +11,11 @@ export const frontmatter = {
 const values: Record<string, string | undefined> = {};
 ---
 
-<SteckbriefWrapper title={frontmatter.title}>
+<SteckbriefWrapper
+  title={frontmatter.title}
+  pageNumber={frontmatter.navOrder}
+  isWide
+>
   <div class="flex flex-col gap-16">
     <h2 class="mt-0">Zusammenfassung</h2>
     <p>
