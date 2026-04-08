@@ -11,16 +11,11 @@ const { icon, title, body } = Astro.props;
 ---
 
 <div class="flex flex-col gap-16 md:flex-1 md:pr-32">
-  <Icon class="feature-icon" name={icon} />
+  <Icon
+    class="text-cosmic-blue-400 bg-lavender-400 size-110 flex-none rounded-sm px-18 py-22"
+    name={icon}
+  />
   <h3 class="m-0 max-w-200">{title}</h3>
   {body && <p>{body}</p>}
   <slot />
 </div>
-
-<style>
-  @reference "@/styles/global.css";
-
-  .feature-icon {
-    @apply text-cosmic-blue-400 bg-lavender-400 size-110 flex-none rounded-sm px-18 py-22;
-  }
-</style>
