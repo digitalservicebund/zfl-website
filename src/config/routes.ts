@@ -113,8 +113,19 @@ export const staging = {
 export const steckbrief = {
   key: "steckbrief",
   path: "/steckbrief",
-  title: "1. Allgemeine Angaben",
+  title: "Steckbrief",
   parent: null,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 3,
+  navLabel: null,
+} as const;
+
+export const steckbrief_schritt1 = {
+  key: "steckbrief_schritt1",
+  path: "/steckbrief/schritt-1",
+  title: "1. Allgemeine Angaben",
+  parent: steckbrief,
   sitemap: false,
   isStagingOnly: false,
   navOrder: 1,
@@ -319,6 +330,7 @@ export const allRoutes = [
   sitemap,
   staging,
   steckbrief,
+  steckbrief_schritt1,
   steckbrief_schritt10,
   steckbrief_schritt2,
   steckbrief_schritt3,

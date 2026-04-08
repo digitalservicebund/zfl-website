@@ -1,0 +1,63 @@
+---
+interface Props {
+  prevPath?: string;
+  nextPath?: string;
+}
+
+const { prevPath, nextPath } = Astro.props;
+const isLast = !nextPath;
+---
+
+<div class="sticky bottom-0 z-10 border-t border-[#A5AAC3] bg-white py-16">
+  <div class="flex w-full items-center justify-between gap-16 px-64">
+    <div class="kern-body kern-body--muted">
+      {
+        isLast
+          ? "Wenn Sie auf Weiter klicken, gelangen Sie zur Phase II der Frühphase"
+          : "Ihre Daten werden automatisch im Browser gespeichert"
+      }
+    </div>
+    <div class="flex gap-16">
+      {
+        !isLast && (
+          <button
+            type="button"
+            class="docx-download-btn kern-btn kern-btn--tertiary"
+          >
+            <span
+              class={"kern-icon kern-icon--default kern-icon--download"}
+              aria-hidden="true"
+            />
+            <span class="kern-label">Zwischenstand herunterladen</span>
+          </button>
+        )
+      }
+      {
+        prevPath && (
+          <a href={prevPath} class="kern-btn kern-btn--secondary">
+            <span class="kern-label">Zurück</span>
+          </a>
+        )
+      }
+      {
+        isLast ? (
+          <button
+            type="submit"
+            form="steckbrief-form"
+            class="kern-btn kern-btn--primary"
+          >
+            <span class="kern-label">Weiter</span>
+          </button>
+        ) : (
+          <a href={nextPath} class="kern-btn kern-btn--primary">
+            <span class="kern-label">Weiter</span>
+            <span
+              class="kern-icon kern-icon--arrow-forward"
+              aria-hidden="true"
+            />
+          </a>
+        )
+      }
+    </div>
+  </div>
+</div>

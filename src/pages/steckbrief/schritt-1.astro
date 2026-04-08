@@ -1,0 +1,109 @@
+---
+import SteckbriefWrapper from "./_components/SteckbriefWrapper.astro";
+
+export const frontmatter = {
+  title: "1. Allgemeine Angaben",
+  sitemap: false,
+  navOrder: 1,
+};
+---
+
+<SteckbriefWrapper title={frontmatter.title} pageNumber={frontmatter.navOrder}>
+  <div class="flex flex-col gap-32">
+    <div class="flex flex-col gap-16">
+      <h2 class="mt-0">Allgemeine Angaben</h2>
+    </div>
+
+    <div class="kern-form-input">
+      <label class="kern-label" for="arbeitstitel">
+        Arbeitstitel des Vorhabens
+      </label>
+      <input
+        class="kern-form-input__input"
+        id="arbeitstitel"
+        name="arbeitstitel"
+        type="text"
+        aria-required="true"
+      />
+    </div>
+
+    <div class="kern-form-input">
+      <label class="kern-label" for="aktenzeichen">Aktenzeichen</label>
+      <div class="kern-hint" id="aktenzeichen-hint">
+        Falls unklar, vorläufige Kennung eintragen
+      </div>
+      <input
+        class="kern-form-input__input"
+        id="aktenzeichen"
+        name="aktenzeichen"
+        type="text"
+        aria-required="true"
+        aria-describedby="aktenzeichen-hint"
+      />
+    </div>
+
+    <div class="flex gap-32">
+      <div class="kern-form-input flex-1">
+        <label class="kern-label" for="ressort">Federführendes Ressort</label>
+        <input
+          class="kern-form-input__input"
+          id="ressort"
+          name="ressort"
+          type="text"
+          aria-required="true"
+        />
+      </div>
+      <div class="kern-form-input flex-1">
+        <label class="kern-label" for="referat">Referat</label>
+        <input
+          class="kern-form-input__input"
+          id="referat"
+          name="referat"
+          type="text"
+          aria-required="true"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-32">
+    <div class="flex flex-col gap-16">
+      <h2 class="mt-0">Kontaktdaten</h2>
+      <p>Bitte geben Sie Ihre Kontaktdaten ein.</p>
+    </div>
+
+    <div class="kern-form-input">
+      <label class="kern-label" for="name"> Ihr Name </label>
+      <input
+        class="kern-form-input__input"
+        id="name"
+        name="name"
+        type="text"
+        aria-required="true"
+      />
+    </div>
+
+    <div class="flex gap-32">
+      <div class="kern-form-input flex-1">
+        <label class="kern-label" for="email">Ihre E-Mail Adresse</label>
+        <input
+          class="kern-form-input__input"
+          id="email"
+          name="email"
+          type="email"
+          aria-required="true"
+        />
+      </div>
+      <div class="kern-form-input flex-1">
+        <label class="kern-label" for="telefon">Ihre Telefonnummer</label>
+        <input
+          class="kern-form-input__input"
+          id="telefon"
+          name="telefon"
+          type="tel"
+          aria-required="true"
+        />
+      </div>
+    </div>
+  </div>
+</SteckbriefWrapper>
