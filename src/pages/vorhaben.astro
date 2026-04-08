@@ -1,7 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
-import { routes } from "@/config/routes";
+import { steckbrief } from "@/config/routes";
 
 export const frontmatter = {
   title: "Vorhaben erarbeiten",
@@ -29,7 +29,7 @@ export const frontmatter = {
             <span class="kern-number">1</span>
             <div class="kern-task-list__title" id="task1-title">
               <a
-                href={routes.steckbrief.path}
+                href={steckbrief.path}
                 class="kern-link kern-link--stretched"
                 aria-describedby="task1-status"
               >

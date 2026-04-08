@@ -70,6 +70,7 @@ import { isProduction, isStaging, isPreview } from "@/config/stage";
 
 - **Unit tests** (`*.test.ts` alongside source): Use `AstroContainer` to render Astro components — see `src/components/global/PageHeader.test.ts` for the pattern.
 - **E2E tests** (`e2e/*.spec.ts`): Playwright with Chromium. Accessibility tests in `e2e/a11y.spec.ts` use `@axe-core/playwright` and run axe on all routes automatically.
+- Prefer semantic selectors in tests (`getByRole`, `aria-label`, visible text, stable attributes already needed by the UI). Avoid adding `data-testid` unless there is no reasonable semantic selector.
 
 ### Path alias
 

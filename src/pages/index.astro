@@ -5,7 +5,12 @@ import Card from "@/components/Card.astro";
 import Banner from "@/components/Banner.astro";
 import { Icon } from "astro-icon/components";
 import SupportCard from "@/components/blocks/SupportCard.astro";
-import { routes } from "@/config/routes";
+import {
+  begleitungen,
+  schulungen,
+  ueber_dasIstNeu,
+  vorhaben,
+} from "@/config/routes";
 
 export const frontmatter = {
   title: "Zentrum für Legistik",
@@ -38,11 +43,11 @@ export const frontmatter = {
       <p class="kern-body">
         Lernen Sie jetzt über die neue Frühphase für Handlungsvorhaben und
         starten Sie ihr erstes Vorhaben – Schritt für Schritt angeleitet. <a
-          href={routes.vorhaben.path}>Zur Frühphase</a
+          href={vorhaben.path}>Zur Frühphase</a
         >
       </p>
     </div>
-    <Hero look="blue">
+    <Hero level="root">
       <h1>Bessere Rechtsetzung in allen Phasen Ihres Vorhabens</h1>
       <p slot="subtitle">
         Das Zentrum für Legistik unterstützt Sie bei der Ausarbeitung von
@@ -55,7 +60,7 @@ export const frontmatter = {
         Das Angebot befindet sich aktuell im Aufbau und wird schrittweise mit
         Ihnen zusammen weiterentwickelt.
       </p>
-      <a href={routes.ueber_dasIstNeu.path}>Mehr dazu</a>
+      <a href={ueber_dasIstNeu.path}>Mehr dazu</a>
     </Banner>
     <section>
       <h2>Vorteile des Angebots für Sie</h2>
@@ -86,7 +91,7 @@ export const frontmatter = {
             erhalten dadurch ein umfassendes Verständnis von Umsetzungsprozessen
             und gestalten Ihr Vorhaben praxisnah und bürokratiearm.
           </p>
-          <a href={routes.begleitungen.path}
+          <a href={begleitungen.path}
             >Mehr Informationen zu interdisziplinären Kompetenzteams</a
           >
         </Card>
@@ -97,12 +102,12 @@ export const frontmatter = {
             Neue Methoden und Werkzeuge für die Rechtsetzung in
             umsetzungsorientierten Schulungen kennenlernen.
           </p>
-          <a href={routes.schulungen.path}>Mehr Informationen zu Schulungen</a>
+          <a href={schulungen.path}>Mehr Informationen zu Schulungen</a>
         </Card>
       </div>
     </section>
     <section>
-      <SupportCard look="gray" />
+      <SupportCard look="lavender" />
     </section>
   </main>
 </Layout>

@@ -1,0 +1,122 @@
+---
+import { Image } from "astro:assets";
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import KernCard from "@/components/KernCard.astro";
+import {
+  ZFL_EMAIL,
+  ZFL_EMAIL_REGBEG,
+  ZFL_EMAIL_SCHULUNG,
+  ZFL_PHONE,
+  ZFL_PHONE_REGBEG,
+} from "@/config/constants.ts";
+import { begleitungen, schulungen } from "@/config/routes";
+import allgemeinImage from "@/images/Trainings.jpg";
+import begleitungImage from "./sticky-notes.jpg";
+import schulungImage from "./computer.jpg";
+import illustration from "./illustration.svg";
+
+export const frontmatter = {
+  title: "Kontakt",
+  sitemap: true,
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero level="main">
+      <div class="items-center gap-32 md:flex">
+        <div>
+          <h1 class="mb-24">Unterstützung für Ihr Vorhaben</h1>
+          <p>
+            Das Zentrum für Legistik begleitet Sie bei der Ausarbeitung Ihrer
+            Regelungen. Wir unterstützen Sie dabei, Ihr Vorhaben von Anfang an
+            praxistauglich und digital reibungslos zu gestalten.
+          </p>
+        </div>
+        <Image
+          class="hidden size-280 md:block lg:size-420"
+          src={illustration}
+          alt=""
+          aria-hidden
+        />
+      </div>
+    </Hero>
+    <section>
+      <h2>Angebote des Zentrum für Legistik</h2>
+      <p>Finden Sie den passenden Bereich für Ihr aktuelles Anliegen.</p>
+      <div class="mt-md gap-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <KernCard
+          title="Allgemeine Anfragen"
+          image={allgemeinImage}
+          imageAlt="Symbolbild: Erstellung eines Flussdiagrams"
+        >
+          <p class="kern-body">
+            Sie haben übergreifende Fragen zu methodischen Ansätzen, möchten
+            mehr über die Arbeit des Zentrum für Legistik erfahren oder sich für
+            unseren Newsletter eintragen? Das Support-Team hilft Ihnen gerne
+            weiter.
+          </p>
+          <p class="kern-body">
+            <strong>E-Mail:</strong>
+            <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
+          </p>
+          <p class="kern-body">
+            <strong>Tel.:</strong>
+            <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>
+          </p>
+        </KernCard>
+        <KernCard
+          title="Regelungsbegleitung"
+          image={begleitungImage}
+          imageAlt="Symbolbild: Brainstorming"
+        >
+          <p class="kern-body">
+            Sie planen ein konkretes Regelungsvorhaben und wünschen sich eine
+            methodische Begleitung? Klären Sie hier offene Fragen und fragen Sie
+            die Verfügbarkeit für eine Regelungsbegleitung an.
+          </p>
+          <p class="kern-body">
+            <strong>E-Mail:</strong>
+            <a href={ZFL_EMAIL_REGBEG.url}>{ZFL_EMAIL_REGBEG.display}</a>
+          </p>
+          <p class="kern-body">
+            <strong>Tel.:</strong>
+            <a href={ZFL_PHONE_REGBEG.url}>{ZFL_PHONE_REGBEG.display}</a>
+          </p>
+          <a
+            slot="footer"
+            href={begleitungen.path}
+            class="kern-btn kern-btn--primary kern-btn--block"
+            ><span class="kern-label">Zur Regelungsbegleitung</span></a
+          >
+        </KernCard>
+        <KernCard
+          title="Schulungen"
+          image={schulungImage}
+          imageAlt="Symboldbild: Ein Laptop zeigt die fünf Prinzipien des Digitalchecks"
+        >
+          <p class="kern-body">
+            Erweitern Sie Ihre Methodenkompetenz für das Schreiben Ihrer
+            Regelung. Hier können Sie sich für anstehende Schulungen anmelden,
+            Termine anfragen oder Rückfragen zu unseren Formaten stellen.
+          </p>
+          <p class="kern-body">
+            <strong>E-Mail:</strong>
+            <a href={ZFL_EMAIL_SCHULUNG.url}>{ZFL_EMAIL_SCHULUNG.display}</a>
+          </p>
+          <p class="kern-body">
+            <strong>Tel.:</strong>
+            <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>
+          </p>
+          <a
+            slot="footer"
+            href={schulungen.path}
+            class="kern-btn kern-btn--primary kern-btn--block"
+            ><span class="kern-label">Zu den Schulungen</span></a
+          >
+        </KernCard>
+      </div>
+    </section>
+  </main>
+</Layout>

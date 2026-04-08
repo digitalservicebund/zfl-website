@@ -1,7 +1,17 @@
 ---
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
-import { routes } from "@/config/routes";
-import { isProduction } from "@/config/stage";
+import {
+  barrierefreiheit,
+  begleitungen,
+  datenschutz,
+  impressum,
+  schulungen,
+  sitemap,
+  ueber,
+  werkzeuge,
+  type Route,
+} from "@/config/routes";
+import { isRouteVisible } from "@/utils/navigation/routeUtils";
 import bmdsLogoWhite from "@/images/logo/bmds-logo-white.svg";
 import bmdsLogo from "@/images/logo/bmds-logo.svg";
 import { Image } from "astro:assets";
@@ -13,34 +23,26 @@ const footerColumns: Record<string, FooterItem[]> = {
     { prefix: "Telefon: ", path: ZFL_PHONE.url, title: ZFL_PHONE.display },
     { prefix: "E-Mail: ", path: ZFL_EMAIL.url, title: ZFL_EMAIL.display },
   ],
-  Inhalte: [
-    routes.werkzeuge,
-    routes.begleitungen,
-    routes.schulungen,
-    ...(!isProduction ? [routes.ueber] : []),
-  ],
-  "Rechtliche Hinweise": [
-    routes.impressum,
-    routes.datenschutz,
-    routes.barrierefreiheit,
-    routes.sitemap,
-  ],
+  Inhalte: ([werkzeuge, begleitungen, schulungen, ueber] as Route[]).filter(
+    isRouteVisible,
+  ),
+  "Rechtliche Hinweise": [impressum, datenschutz, barrierefreiheit, sitemap],
 };
 ---
 
 <footer
   class="border-lavender-base kern-body kern-body--small border-t-2 p-0 print:hidden"
 >
-  <div class="py-md space-y-md container">
+  <div class="pb-lg space-y-lg container pt-74">
     <nav
       class="grid grid-cols-1 items-start justify-between gap-32 sm:grid-cols-[repeat(3,minmax(0,18rem))] sm:grid-rows-[auto_auto]"
       aria-label="Schnellübersicht"
     >
       {
         Object.entries(footerColumns).map(([heading, items]) => (
-          <div class="row-span-2 grid grid-rows-subgrid gap-8">
+          <div class="row-span-2 grid grid-rows-subgrid gap-32">
             {heading?.trim() ? (
-              <h2 class="kern-label mb-8">{heading}</h2>
+              <h2 class="kern-heading-medium">{heading}</h2>
             ) : (
               <div />
             )}
@@ -58,7 +60,7 @@ const footerColumns: Record<string, FooterItem[]> = {
         ))
       }
     </nav>
-    <hr class="border-lavender-base mt-16 w-full border-t-2" />
+    <hr class="border-lavender-base w-full border-t" aria-hidden="true" />
     <nav aria-label="Externe Verlinkungen" class="space-y-md">
       <div
         class="space-y-16 sm:flex sm:flex-row sm:items-center sm:gap-48 sm:space-y-0"
@@ -77,7 +79,7 @@ const footerColumns: Record<string, FooterItem[]> = {
           <h3 class="kern-label kern-label--small mb-8">Federführung</h3>
           <p>
             Das Zentrum für Legistik entsteht im Auftrag des
-            <a href="https://bmds.bund.de/">
+            <a href="https://bmds.bund.de/" target="_blank">
               Bundesministerium für Digitales und Staatsmodernisierung
             </a>
           </p>

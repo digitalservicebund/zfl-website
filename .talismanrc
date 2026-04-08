@@ -23,7 +23,7 @@ fileignoreconfig:
       - "key:"
       - "TRIVY_PASSWORD: \\${{  }}"
   - filename: AGENTS.md
-    checksum: 694512cff23f0a042a85c5e9e215703d7b921f3b15a51796d75a7385d1b389e2
+    checksum: 62a655d53df765c2111c2953222b1242075a14631d8e2a796c4a900924cef1aa
   - filename: doc/adr/0004-configuration-management.md
     checksum: 367a262dfe679ea3254c86879a09d98b0e03863b4c514f58ccd3609afb58bdae
   - filename: doc/adr/0007-use-posthog-reverse-proxy.md
@@ -31,11 +31,21 @@ fileignoreconfig:
       - "IP Masking: The proxy will be configured to drop unnecessary headers, including
         `X-Forwarded-For`, before passing the request to PostHog."
   - filename: doc/routes.md
-    checksum: ecbc85072882abbf526589be79d9d5680001e618e42f16ec9c2fb323458fe1a6
+    allowed_patterns:
+      - key
   - filename: integrations/routeGenerator.ts
     allowed_patterns:
       - key
   - filename: integrations/routeGenerator.test.ts
+    allowed_patterns:
+      - key
+  - filename: src/config/routes.ts
+    allowed_patterns:
+      - key
+  - filename: src/utils/navigation/drilldown.ts
+    allowed_patterns:
+      - key
+  - filename: src/utils/navigation/navigation.test.ts
     allowed_patterns:
       - key
   - filename: integrations/routeGeneration/extractRouteMeta.ts
@@ -75,6 +85,15 @@ fileignoreconfig:
     allowed_patterns:
       - key
       - STORAGE_KEY
+  - filename: src/pages/kontakt/computer.jpg
+    checksum: 585af9a443434b8caf56dae715544745714fff5e0c4b5d2cc202275950e3a684
+  - filename: src/pages/begleitungen/gesetzentwurf.png
+    checksum: c847df945cbe36bd5627e2e91b07b08c331974ba78fc2e64d99e37ae5de3495a
+  - filename: src/components/global/DebugGrid.astro
+    allowed_patterns:
+      - \@keydown
+  - filename: doc/adr/0008-multipage-forms.md
+    checksum: 54b3ad48ab908eb572dc96046baede3a6bbf6474c68ce7c46e3f35a3e8846ca3
 scopeconfig:
   - scope: node
 allowed_patterns:
@@ -92,4 +111,6 @@ allowed_patterns:
   - RouteMetaKey
   - childKey
   - parentKey
+  - getRouteByKey
+  - keydown
 version: "1.0"

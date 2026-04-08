@@ -1,6 +1,6 @@
 ---
 import Hero from "@/components/Hero.astro";
-import { routes } from "@/config/routes";
+import { allRoutes } from "@/config/routes";
 import Layout from "@/layouts/Layout.astro";
 
 export const frontmatter = {
@@ -17,7 +17,7 @@ export const frontmatter = {
     <section>
       <ul>
         {
-          Object.values(routes)
+          allRoutes
             .filter((route) => route.sitemap && !route.isStagingOnly)
             .map((route) => (
               <li>

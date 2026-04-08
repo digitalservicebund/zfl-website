@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.base.json",
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["**/*.test.ts", "**/*.test.tsx", "tests/**"],
+  "exclude": ["**/*.test.ts", "**/*.test.tsx", "tests/**", "dist"],
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "preact"

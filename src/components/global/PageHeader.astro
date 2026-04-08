@@ -1,10 +1,21 @@
 ---
+import DrilldownNavigation from "@/components/global/DrilldownNavigation.astro";
 import Kopfzeile from "@/components/global/Kopfzeile.astro";
-import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
-import { routes } from "@/config/routes";
-import { isProduction } from "@/config/stage";
+import { ZFL_PHONE } from "@/config/constants";
+import {
+  begleitungen,
+  home,
+  kontakt,
+  schulungen,
+  ueber,
+  werkzeuge,
+  vorhaben,
+  type Route,
+} from "@/config/routes";
 import bundLogoWhite from "@/images/logo/bund-logo-white.svg";
 import bundLogo from "@/images/logo/bund-logo.png";
+import { getMobileMenuNavigation } from "@/utils/navigation/drilldown";
+import { getRouteLabel, isRouteVisible } from "@/utils/navigation/routeUtils";
 import { removeTrailingSlash } from "@/utils/path";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
@@ -19,30 +30,42 @@ const { isHome = false } = Astro.props;
 const { pathname } = Astro.url;
 const currentPath = removeTrailingSlash(pathname);
 
-const headerNavigation = [
-  routes.werkzeuge,
-  routes.begleitungen,
-  routes.schulungen,
-  routes.ueber,
-].filter((item) => !isProduction || !item.isStagingOnly);
+const HEADER_ROUTES: Route[] = [
+  werkzeuge,
+  begleitungen,
+  schulungen,
+  ueber,
+  kontakt,
+];
+const headerNavigation = HEADER_ROUTES.filter(isRouteVisible);
+const mobileMenu = getMobileMenuNavigation(currentPath, headerNavigation);
 
-const kontaktPopoverId = "page-header-contact-popover";
+const mobileMenuInitialDepth = mobileMenu.activePanel.depth;
+
 const mobileMenuId = "page-header-mobile-menu";
 
-function navItemStyle(variant: "main" | "sub" = "main", path?: string) {
+function navItemStyle(variant: "main" | "sub" = "main", active = false) {
   return twMerge(
     "link-unstyled border-transparent flex items-center hover:bg-lavender-base",
     variant === "main" ? "h-full border-b-4 px-16" : "border-l-4 p-16",
-    currentPath === path && "border-cosmic-blue-base bg-lavender-base",
+    active && "border-cosmic-blue-base bg-lavender-base",
   );
 }
 ---
 
-<header class="page-header border-lavender-base relative border-b-2">
+<header
+  class="page-header border-lavender-base relative border-b-2"
+  x-data={`{
+    mobileMenuOpen: false,
+    kontaktOpen: false
+  }`}
+  @resize.window="mobileMenuOpen = false; kontaktOpen = false"
+  @keydown.escape.window="mobileMenuOpen = false; kontaktOpen = false"
+>
   <Kopfzeile />
   <div class="flex h-72 justify-between px-24">
     <!-- Logo and title -->
-    <a href={routes.home.path} class="link-unstyled flex items-center gap-24">
+    <a href={home.path} class="link-unstyled flex items-center gap-24">
       <Image
         src={bundLogo}
         alt="Logo des Bundes"
@@ -57,42 +80,23 @@ function navItemStyle(variant: "main" | "sub" = "main", path?: string) {
     </a>
 
     <!-- Desktop Navigation -->
-    <nav class="hidden min-[900px]:flex" data-testid="desktop-nav">
+    <nav class="hidden min-[900px]:flex" aria-label="Hauptnavigation">
       {
-        headerNavigation.map((item) => (
-          <a href={item.path} class={navItemStyle("main", item.path)}>
-            {item.title}
+        headerNavigation.map((route) => (
+          <a
+            href={route.path}
+            class={navItemStyle("main", currentPath === route.path)}
+            aria-current={currentPath === route.path ? "page" : undefined}
+          >
+            {getRouteLabel(route)}
           </a>
         ))
       }
-      <button
-        type="button"
-        class={navItemStyle()}
-        popovertarget={kontaktPopoverId}
-      >
-        Kontakt
-        <Icon
-          name="ic:outline-keyboard-arrow-down"
-          class="contact-toggle-icon ml-4 size-24 transition-transform"
-          aria-hidden="true"
-        />
-      </button>
-      <div
-        id={kontaktPopoverId}
-        popover="auto"
-        class="contact-popover border-lavender-base m-0 gap-8 border-2 bg-white px-16 py-12"
-      >
-        <p>Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a></p>
-        <p>
-          E-Mail:
-          <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
-        </p>
-      </div>
       {
         isHome && (
           <div class="flex items-center">
             <a
-              href={routes.vorhaben.path}
+              href={vorhaben.path}
               class="kern-btn kern-btn--primary text-white"
             >
               Vorhaben starten
@@ -114,102 +118,90 @@ function navItemStyle(variant: "main" | "sub" = "main", path?: string) {
       <button
         type="button"
         class:list={[navItemStyle("main"), "mobile-menu-toggle"]}
-        popovertarget={mobileMenuId}
         aria-label="Menü öffnen / schließen"
         aria-controls={mobileMenuId}
+        :aria-expanded="mobileMenuOpen"
+        @click="mobileMenuOpen = !mobileMenuOpen; kontaktOpen = false; if (mobileMenuOpen) $dispatch('page-header-mobile-menu-opened')"
       >
-        <Icon name="ic:twotone-menu" class="mobile-menu-closed-icon size-24" />
-        <Icon name="ic:outline-close" class="mobile-menu-open-icon size-24" />
+        <Icon x-show="!mobileMenuOpen" name="ic:twotone-menu" class="size-24" />
+        <Icon x-show="mobileMenuOpen" name="ic:outline-close" class="size-24" />
       </button>
     </div>
+  </div>
+  <div
+    x-cloak
+    x-show="mobileMenuOpen"
+    class="mobile-menu-backdrop fixed inset-x-0 bottom-0 z-10 bg-black/40 min-[900px]:hidden"
+    @click="mobileMenuOpen = false"
+    aria-hidden="true"
+  >
   </div>
   <!-- Mobile Navigation -->
   <nav
     id={mobileMenuId}
-    popover="auto"
-    class="mobile-menu-popover border-lavender-base m-0 w-auto max-w-none border-t-2 bg-white min-[900px]:hidden"
+    class="mobile-menu-popover border-lavender-base m-0 w-auto max-w-none border-t-2 min-[900px]:hidden"
+    x-data={`{ currentPanel: "${mobileMenu.activePanel.id}", initialPanel: "${mobileMenu.activePanel.id}", currentDepth: ${mobileMenuInitialDepth}, initialDepth: ${mobileMenuInitialDepth} }`}
+    x-cloak
+    x-show="mobileMenuOpen"
+    :aria-hidden="!mobileMenuOpen"
+    @page-header-mobile-menu-opened.window="currentPanel = initialPanel; currentDepth = initialDepth"
+    x-bind:data-depth="currentDepth"
   >
     {
       isHome && (
         <a
-          href={routes.vorhaben.path}
+          href={vorhaben.path}
           class="kern-btn kern-btn--block kern-btn--primary text-white"
         >
           Vorhaben starten
         </a>
       )
     }
-    {
-      headerNavigation.map((item) => (
-        <a href={item.path} class={navItemStyle("sub", item.path)}>
-          {item.title}
-        </a>
-      ))
-    }
-    <div class="ml-4 p-16 text-gray-800">
-      Kontakt:{" "}
-      <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
-    </div>
+    <DrilldownNavigation
+      navigation={mobileMenu}
+      panelIdPrefix="mobile-menu"
+      rootPanelId="root"
+    />
   </nav>
 </header>
 
 <style>
-  :root {
+  @reference "@/styles/global.css";
+  .page-header {
     /* 32px is the height of the Kopfzeile, 72px is the height of the header */
     --page-header-offset: 104px;
   }
 
-  /* This is the dark backdrop for the mobile menu, a gradient is used to avoid the header being darkened */
-  .mobile-menu-popover::backdrop {
-    background: linear-gradient(
-      to bottom,
-      transparent 0,
-      transparent var(--page-header-offset),
-      rgb(0 0 0 / 0.4) var(--page-header-offset),
-      rgb(0 0 0 / 0.4) 100%
-    );
+  .mobile-menu-backdrop {
+    top: var(--page-header-offset);
   }
 
-  /* This fallback positions the popovers absolutely when anchor positioning is not supported */
-  @supports not (top: anchor(bottom)) {
-    .contact-popover,
-    .mobile-menu-popover {
-      position: absolute;
-      top: var(--page-header-offset);
-    }
-
-    .contact-popover {
-      right: 24px;
-      left: auto;
-    }
-
-    .mobile-menu-popover {
-      left: 0;
-    }
+  .contact-popover {
+    position: absolute;
+    top: calc(100% - 2px);
+    right: 0;
+    z-index: 50;
   }
 
-  @supports (top: anchor(bottom)) {
-    .page-header {
-      anchor-name: --page-header;
-    }
-    .contact-popover {
-      inset: auto;
-      top: anchor(bottom);
-      right: anchor(right);
-    }
-    .mobile-menu-popover {
-      position-anchor: --page-header;
-      top: calc(anchor(bottom) - 2px);
-    }
+  .mobile-menu-popover {
+    @apply bg-lavender-base;
+    position: absolute;
+    top: calc(var(--page-header-offset) - 2px);
+    right: 0;
+    left: 0;
+    z-index: 20;
   }
 
-  .page-header:has(.contact-popover:popover-open) .contact-toggle-icon {
-    transform: rotate(180deg);
+  .mobile-menu-popover[data-depth="0"] {
+    @apply bg-white;
+    --active-item-bg-color: var(--color-lavender-surface-highlight);
+  }
+  .mobile-menu-popover[data-depth="1"] {
+    @apply bg-lavender-200;
+    --active-item-bg-color: var(--color-lavender-surface-highlight);
   }
 
-  .page-header:has(.mobile-menu-popover:popover-open) .mobile-menu-closed-icon,
-  .page-header:not(:has(.mobile-menu-popover:popover-open))
-    .mobile-menu-open-icon {
-    display: none;
+  [x-cloak] {
+    display: none !important;
   }
 </style>

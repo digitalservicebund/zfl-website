@@ -3,7 +3,7 @@ import Hero from "@/components/Hero.astro";
 import { ZFL_EMAIL } from "@/config/constants";
 import Layout from "@/layouts/Layout.astro";
 import { mailto } from "@/utils/mailtoHelper";
-import ToolCard from "./_ToolCard.astro";
+import KernCard from "@/components/KernCard.astro";
 import digitalcheckImage from "./Digitalcheck.png";
 import eGesetzgebungImage from "./eGesetzgebung.png";
 import eNormImage from "./eNorm.jpg";
@@ -19,7 +19,7 @@ export const frontmatter = {
 
 <Layout title={frontmatter.title}>
   <main class="breakout-grid">
-    <Hero>
+    <Hero level="main">
       <h1>{frontmatter.title}</h1>
       <div slot="subtitle">
         <p>
@@ -28,15 +28,17 @@ export const frontmatter = {
         </p>
         <p>
           Unterschiedliche Checks und Arbeitshilfen (wie z. B. der <a
-            href="https://digitalcheck.bund.de/">Digitalcheck</a
+            href="https://digitalcheck.bund.de/"
+            target="_blank">Digitalcheck</a
           >,
-          <a href="https://www.gleichstellungs-check.de/"
+          <a href="https://www.gleichstellungs-check.de/" target="_blank"
             >Gleichstellungscheck</a
-          > oder <a href="https://jugend-check.de/">Jugendcheck</a>) zielen in
-          Teilen auf die gleiche Wirkung ab: Praxis- und digitaltaugliche
-          Regelungen und Bürokratierückbau. Bei der Zusammenführung diverser
-          Ansätze verfolgen wir das Ziel, Ihre Regelungsarbeit einfacher und
-          effizienter zu gestalten.
+          > oder <a href="https://jugend-check.de/" target="_blank"
+            >Jugendcheck</a
+          >) zielen in Teilen auf die gleiche Wirkung ab: Praxis- und
+          digitaltaugliche Regelungen und Bürokratierückbau. Bei der
+          Zusammenführung diverser Ansätze verfolgen wir das Ziel, Ihre
+          Regelungsarbeit einfacher und effizienter zu gestalten.
         </p>
         <p>
           <a
@@ -50,53 +52,59 @@ export const frontmatter = {
     </Hero>
 
     <section class="gap-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-      <ToolCard
+      <KernCard
         title="Digitalcheck"
         href="https://digitalcheck.bund.de/"
+        target_option="_blank"
         subline="Digitale Regelungen erarbeiten"
         body="Der Digitalcheck ist eine Prozessbegleitung für Ihr Regelungsvorhaben. Sie stellen damit Digitaltauglichkeit sicher."
         image={digitalcheckImage}
         imageAlt="Symbolbild für den Digitalcheck"
       />
-      <ToolCard
+      <KernCard
         title="Rulemap Builder"
         href="https://rulemapping.org/de"
+        target_option="_blank"
         subline="Regelungen als Entscheidungsmodelle erstellen"
         body="Rulemaps machen die Logik von Gesetzen sichtbar, prüfbar und anwendbar – und schaffen so die Grundlage für eine Verwaltung, die nachvollziehbar, effizient und modern arbeitet."
         image={rulemapBuilderImage}
         imageAlt="Symbolbild für den Rulemap Builder"
         imageSource="Rulemapping Group"
       />
-      <ToolCard
+      <KernCard
         title="E-Gesetzgebung"
         href="https://plattform.egesetzgebung.bund.de/cockpit/"
+        target_option="_blank"
         subline="Das Rechtsetzungsverfahren auf Bundesebene"
         body="Die E-Gesetzgebung ermöglicht die durchgängig digitale Zusammenarbeit im Gesetzgebungsverfahren zwischen Bundesregierung, Bundesrat und Bundestag."
         image={eGesetzgebungImage}
         imageAlt="Symbolbild für die E-Gesetzgebung"
         imageSource="BMI"
       />
-      <ToolCard
+      <KernCard
         title="eNorm"
         href="https://www.enorm.bund.de/"
+        target_option="_blank"
         subline="Elektronische Arbeitshilfen und Verkündung"
         body="Die eNorm unterstützt bei der Einhaltung rechtsförmlicher und redaktioneller Vorgaben bei der Erstellung von Regelungsentwürfen. Sie automatisiert darüber hinaus bestimmte Routineaufgaben."
         image={eNormImage}
         imageAlt="Interface der eNorm"
         imageSource="BMJV"
       />
-      <ToolCard
+      <KernCard
         title="FIM – Föderales Informations­management"
         href="https://fimportal.de/"
+        target_option="_blank"
         subline="Der Standard für Verwaltungsleistungen"
         body="Mit dem Föderalen Informationsmanagement (FIM) erfassen Bund, Länder und Kommunen Informationen über Verwaltungshandeln strukturiert und zugänglich. FIM stellt einheitliche Datenfelder, standardisierte Prozessvorgaben und leicht verständliche Bürgerinformationen bereit."
         image={fimImage}
         imageAlt="Symbolbild für das Föderale Informationsmanagement"
         imageSource="FITKO"
       />
-      <ToolCard
+      <KernCard
         title="Interoperabilitäts-Bewertungen"
         href="https://digitalcheck.bund.de/interoperabel"
+        target_option="_blank"
         subline="EU-Interoperabilität prüfen"
         body="Hier erfahren Sie, was die Verordnung für ein interoperables Europa (EU) 2024/903 für Ihr Regelungsvorhaben bedeutet und wie sie zu einem vernetzten Europa beiträgt."
         image={interoperableEuropeImage}
