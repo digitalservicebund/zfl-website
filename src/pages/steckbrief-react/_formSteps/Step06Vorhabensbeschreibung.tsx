@@ -1,5 +1,5 @@
-import SidebarTriggerButton from "@/pages/steckbrief/_components/SidebarTriggerButton";
-import Textarea from "@/pages/steckbrief/_components/Textarea";
+import SidebarTriggerButton from "../_components/SidebarTriggerButton";
+import Textarea from "../_components/Textarea";
 import type { Inputs } from "./types";
 
 const vorhabenHint = (
