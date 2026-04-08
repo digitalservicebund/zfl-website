@@ -2,19 +2,22 @@
 import SteckbriefWrapper from "./_components/SteckbriefWrapper.astro";
 import SidebarTriggerButton from "./_components/SidebarTriggerButton.astro";
 import Textarea from "./_components/Textarea.astro";
+import Hint from "./_components/Hint.astro";
 
 export const frontmatter = {
   title: "2. Kontext & Genese",
   sitemap: false,
   navOrder: 2,
 };
+
+const kontextHintId = "kontext-hint";
 ---
 
 <SteckbriefWrapper title={frontmatter.title} pageNumber={frontmatter.navOrder}>
   <div class="flex flex-col gap-16">
     <h2 class="mt-0">
       Kontext und Genese des Vorhabens
-      <SidebarTriggerButton />
+      <SidebarTriggerButton hintId={kontextHintId} />
     </h2>
     <p>
       Erläutern Sie den Kontext Ihres Vorhabens anhand der maßgeblichen
@@ -22,4 +25,26 @@ export const frontmatter = {
     </p>
   </div>
   <Textarea id="kontext" label="Kontext Ihres Vorhabens" />
+  <Hint slot="hint" id={kontextHintId}>
+    <h2 class="m-0 text-[21px] font-bold">Leitfragen zum Kontext</h2>
+    <ul class="m-0 list-disc pl-27 [&>li]:mb-8 [&>li:last-child]:mb-0">
+      <li>
+        Welche Ausgangssituation hat den Bedarf für eine Regelung sichtbar
+        gemacht?
+      </li>
+      <li>
+        Gab es politische Initiativen, Vereinbarungen, Koalitionsbeschlüsse oder
+        externe Impulse?
+      </li>
+      <li>
+        Welche früheren Maßnahmen, Gutachten oder Praxisprobleme haben das Thema
+        geprägt?
+      </li>
+      <li>
+        Ist der Handlungsbedarf neu entstanden, oder knüpft das Vorhaben an
+        bestehende Prozesse oder Reformen an?
+      </li>
+      <li>Warum ist gerade jetzt eine Regelung erforderlich?</li>
+    </ul>
+  </Hint>
 </SteckbriefWrapper>

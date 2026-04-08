@@ -2,6 +2,7 @@
 import SteckbriefWrapper from "./_components/SteckbriefWrapper.astro";
 import SidebarTriggerButton from "./_components/SidebarTriggerButton.astro";
 import Textarea from "./_components/Textarea.astro";
+import Hint from "./_components/Hint.astro";
 
 export const frontmatter = {
   title: "6. Vorhabensbeschreibung",
@@ -9,13 +10,15 @@ export const frontmatter = {
   navOrder: 6,
   navLabel: "6. Vorhaben",
 };
+const vorhabenHintId = "vorhaben-hint";
+const massnahmenHintId = "massnahmen-hint";
 ---
 
 <SteckbriefWrapper title={frontmatter.title} pageNumber={frontmatter.navOrder}>
   <div class="flex flex-col gap-16">
     <h2 class="mt-0">
       Vorhabensbeschreibung
-      <SidebarTriggerButton />
+      <SidebarTriggerButton hintId={vorhabenHintId} />
     </h2>
     <p>
       Skizzieren Sie die geplanten Maßnahmen und den methodischen Weg, mit dem
@@ -28,7 +31,7 @@ export const frontmatter = {
   <div class="flex flex-col gap-16">
     <h2 class="mt-0">
       Maßnahmen der Zielsetzung
-      <SidebarTriggerButton />
+      <SidebarTriggerButton hintId={massnahmenHintId} />
     </h2>
     <p>
       Skizzieren Sie die geplanten Maßnahmen und den methodischen Weg, mit dem
@@ -41,4 +44,54 @@ export const frontmatter = {
     label="Ihre geplanten Maßnahmen"
     hint="Erstellung von Gutachten, internationaler Vergleich/Best Practices analysieren, Formate der Beteiligung relevanter Akteure"
   />
+
+  <Hint slot="hint" id={vorhabenHintId}>
+    <h2 class="m-0 text-[21px] font-bold">
+      Leitfragen zur Vorhabensbeschreibung
+    </h2>
+    <ul class="m-0 list-disc pl-27 [&>li]:mb-8 [&>li:last-child]:mb-0">
+      <li>
+        Welche Arbeitsschritte sind vorgesehen (z. B. Auswertung vorhandener
+        Erkenntnisse, Erarbeitung erster Lösungsansätze)?
+      </li>
+      <li>
+        Welche Untersuchungen oder Fachgutachten sollen erstellt oder
+        herangezogen werden?
+      </li>
+      <li>
+        Ist ein Vergleich mit anderen Staaten geplant, um bewährte Ansätze oder
+        Alternativen zu prüfen?
+      </li>
+      <li>
+        Welche Beteiligungsformate sind vorgesehen (z. B. Einbindung von
+        Fachkreisen, Verbänden, Verwaltungspraxis)?
+      </li>
+      <li>
+        Wie sollen betroffene Akteure oder die Öffentlichkeit informiert oder
+        einbezogen werden?
+      </li>
+      <li>
+        Gibt es geplante Erprobungen, Rückkopplungsschleifen oder Abstimmungen
+        zwischen Ressorts?
+      </li>
+    </ul>
+  </Hint>
+
+  <Hint slot="hint" id={massnahmenHintId}>
+    <h2 class="m-0 text-[21px] font-bold">Leitfragen zu den Maßnahmen</h2>
+    <ul class="m-0 list-disc pl-27 [&>li]:mb-8 [&>li:last-child]:mb-0">
+      <li>
+        Welche Maßnahmen müssen zuerst abgeschlossen sein, damit weitere
+        Schritte beginnen können?
+      </li>
+      <li>
+        Welche Maßnahmen benötigen eine enge Abstimmung mit anderen Ressorts
+        oder Akteuren?
+      </li>
+      <li>
+        Gibt es Maßnahmen, die bereits fest terminiert sind oder aus politischen
+        Vorgaben resultieren?
+      </li>
+    </ul>
+  </Hint>
 </SteckbriefWrapper>

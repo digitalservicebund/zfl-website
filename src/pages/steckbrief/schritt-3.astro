@@ -2,6 +2,7 @@
 import SteckbriefWrapper from "./_components/SteckbriefWrapper.astro";
 import SidebarTriggerButton from "./_components/SidebarTriggerButton.astro";
 import Textarea from "./_components/Textarea.astro";
+import Hint from "./_components/Hint.astro";
 
 export const frontmatter = {
   title: "3. Problembeschreibung",
@@ -9,13 +10,15 @@ export const frontmatter = {
   navOrder: 3,
   navLabel: "3. Problem",
 };
+
+const problemHintId = "problem-hint";
 ---
 
 <SteckbriefWrapper title={frontmatter.title} pageNumber={frontmatter.navOrder}>
   <div class="flex flex-col gap-16">
     <h2 class="mt-0">
       Problembeschreibung
-      <SidebarTriggerButton />
+      <SidebarTriggerButton hintId={problemHintId} />
     </h2>
     <p>
       Beschreiben Sie die aktuelle Sach- und Rechtslage sowie die spezifischen
@@ -24,4 +27,26 @@ export const frontmatter = {
     </p>
   </div>
   <Textarea id="problembeschreibung" label="Beschreibung des Problems" />
+  <Hint slot="hint" id={problemHintId}>
+    <h2 class="m-0 text-[21px] font-bold">
+      Leitfragen zur Problembeschreibung
+    </h2>
+    <ul class="m-0 list-disc pl-27 [&>li]:mb-8 [&>li:last-child]:mb-0">
+      <li>
+        Woraus ergibt sich das Problem: aus bestehenden Regelungen, fehlenden
+        Regelungen oder ihrer Anwendung?
+      </li>
+      <li>
+        Warum kann das Problem nicht mit vorhandenen Regelungen gelöst werden?
+      </li>
+      <li>
+        Welche Folgen treten ein, wenn das Problem nicht adressiert wird (z.B.
+        Aufwand, Risiken, Ineffizienzen)?
+      </li>
+      <li>
+        Wie zeigt sich das Problem in der Praxis – und was davon ist Symptom,
+        was Ursache?
+      </li>
+    </ul>
+  </Hint>
 </SteckbriefWrapper>

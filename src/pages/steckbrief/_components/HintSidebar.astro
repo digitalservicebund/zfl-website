@@ -1,0 +1,27 @@
+<aside
+  class={"flex h-full flex-col gap-32 bg-[#f7f7f9] pt-40 pr-24 pb-40 pl-24"}
+>
+  <div class="flex justify-end">
+    <button
+      type="button"
+      class="border-cosmic-blue-base text-cosmic-blue-base focus-visible:outline-cosmic-blue-base flex size-48 items-center justify-center rounded border transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2"
+      @click="hintId = null"
+    >
+      <svg
+        aria-hidden="true"
+        class="size-24"
+        fill="none"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M6 6L18 18M18 6L6 18"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"></path>
+      </svg>
+    </button>
+  </div>
+  <div class="flex flex-col gap-16 text-[#0b0c0c]"><slot /></div>
+</aside>

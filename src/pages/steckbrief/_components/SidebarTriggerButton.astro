@@ -1,7 +1,16 @@
+---
+interface Props {
+  hintId: string;
+}
+
+const { hintId } = Astro.props;
+---
+
 <button
   type="button"
   aria-label="Hilfe anzeigen"
   class="text-cosmic-blue-base hover:text-cosmic-blue-400 ml-8 shrink-0 transition-colors"
+  @click={`hintId = hintId === '${hintId}' ? null : '${hintId}'`}
 >
   <svg
     aria-hidden="true"

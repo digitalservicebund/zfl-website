@@ -1,5 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import HintSidebar from "./HintSidebar.astro";
 
 type Props = {
   title: string;
@@ -9,27 +10,47 @@ type Props = {
 const { title, pageNumber, isWide } = Astro.props;
 const totalPages = 10;
 
+const showSidebar = true;
+
 const STORAGE_KEY = "steckbrief-v2b";
 ---
 
 <Layout title={title}>
-  <main class="breakout-grid">
-    <section
-      class="py-lg mx-auto w-full max-w-(--max-width) px-16"
-      style={{
-        "--max-width": `${isWide ? 1280 : 736}px`,
-      }}
+  <main>
+    <div
+      class="flex flex-1 flex-col gap-32 lg:flex-row lg:items-stretch"
+      x-data="{ hintId: '' }"
     >
-      <div class="kern-progress mb-lg">
-        <label class="kern-label" for="progress1">
-          Schritt {pageNumber} von {totalPages}
-        </label>
-        <progress id="progress1" value={pageNumber} max={totalPages}></progress>
+      <div class="min-w-0 flex-1">
+        <div
+          class="py-lg mx-auto w-full max-w-(--max-width) px-16"
+          style={{
+            "--max-width": `${isWide ? 1280 : 736}px`,
+          }}
+        >
+          <div class="kern-progress mb-lg">
+            <label class="kern-label" for="progress1">
+              Schritt {pageNumber} von {totalPages}
+            </label>
+            <progress id="progress1" value={pageNumber} max={totalPages}
+            ></progress>
+          </div>
+          <form class="flex flex-col gap-32" novalidate>
+            <slot />
+          </form>
+        </div>
       </div>
-      <form class="flex flex-col gap-32" novalidate>
-        <slot />
-      </form>
-    </section>
+      <div
+        class="shrink-0 overflow-hidden transition-all duration-300 ease-in-out lg:sticky lg:top-0 lg:h-[calc(100dvh-var(--header-height))]"
+        :class="hintId ? 'max-w-full opacity-100 lg:max-w-[360px]' : 'max-w-0 opacity-0'"
+      >
+        <div class="h-full w-full lg:w-[360px]">
+          <HintSidebar class="h-full overflow-y-auto">
+            <slot name="hint" />
+          </HintSidebar>
+        </div>
+      </div>
+    </div>
   </main>
 </Layout>
 

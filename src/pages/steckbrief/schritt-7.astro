@@ -2,19 +2,23 @@
 import SteckbriefWrapper from "./_components/SteckbriefWrapper.astro";
 import SidebarTriggerButton from "./_components/SidebarTriggerButton.astro";
 import Textarea from "./_components/Textarea.astro";
+import Hint from "./_components/Hint.astro";
 
 export const frontmatter = {
   title: "7. Projektplanung I",
   sitemap: false,
   navOrder: 7,
 };
+
+const risikoHintId = "risiko-hint";
+const komplexitaetHintId = "komplexitaet-hint";
 ---
 
 <SteckbriefWrapper title={frontmatter.title} pageNumber={frontmatter.navOrder}>
   <div class="flex flex-col gap-16">
     <h2 class="mt-0">
       Risikoeinschätzung
-      <SidebarTriggerButton />
+      <SidebarTriggerButton hintId={risikoHintId} />
     </h2>
     <p>
       Benennen Sie potenzielle Hindernisse für Ihr Vorhaben. Nennen Sie auch
@@ -27,7 +31,7 @@ export const frontmatter = {
   <div class="flex flex-col gap-16">
     <h2 class="mt-0">
       Komplexitätsgrad des Vorhabens
-      <SidebarTriggerButton />
+      <SidebarTriggerButton hintId={komplexitaetHintId} />
     </h2>
     <p>
       Beurteilen Sie den Schwierigkeitsgrad des Vorhabens anhand der Anzahl der
@@ -37,4 +41,39 @@ export const frontmatter = {
   </div>
 
   <Textarea id="komplexitaetsgrad" label="Komplexität des Vorhabens" />
+
+  <Hint slot="hint" id={risikoHintId}>
+    <h2 class="m-0 text-[21px] font-bold">Leitfragen zur Risikoeinschätzung</h2>
+    <ul class="m-0 list-disc pl-27 [&>li]:mb-8 [&>li:last-child]:mb-0">
+      <li>
+        Welche unbeabsichtigten Nebenfolgen (z. B. hohe Bürokratiekosten)
+        könnten entstehen?
+      </li>
+      <li>
+        Gibt es politische Risiken oder Akteure, die das Vorhaben blockieren
+        könnten?
+      </li>
+      <li>
+        Wie wahrscheinlich sind diese Hindernisse und wie stark würden sie den
+        Zeitplan verzögern?
+      </li>
+    </ul>
+  </Hint>
+  <Hint slot="hint" id={komplexitaetHintId}>
+    <h2 class="m-0 text-[21px] font-bold">Leitfragen zum Komplexitätsgrad</h2>
+    <ul class="m-0 list-disc pl-27 [&>li]:mb-8 [&>li:last-child]:mb-0">
+      <li>
+        Welche Maßnahmen müssen zuerst abgeschlossen sein, damit weitere
+        Schritte beginnen können?
+      </li>
+      <li>
+        Welche Maßnahmen benötigen eine enge Abstimmung mit anderen Ressorts
+        oder Akteuren?
+      </li>
+      <li>
+        Gibt es Maßnahmen, die bereits fest terminiert sind oder aus politischen
+        Vorgaben resultieren?
+      </li>
+    </ul>
+  </Hint>
 </SteckbriefWrapper>

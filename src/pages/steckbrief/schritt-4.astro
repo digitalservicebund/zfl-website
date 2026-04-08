@@ -2,6 +2,7 @@
 import SteckbriefWrapper from "./_components/SteckbriefWrapper.astro";
 import SidebarTriggerButton from "./_components/SidebarTriggerButton.astro";
 import Textarea from "./_components/Textarea.astro";
+import Hint from "./_components/Hint.astro";
 
 export const frontmatter = {
   title: "4. Einflussfaktoren & relevante Akteure",
@@ -9,13 +10,16 @@ export const frontmatter = {
   navOrder: 4,
   navLabel: "4. Einflussfaktoren",
 };
+
+const einflussfaktorenHintId = "einflussfaktoren-hint";
+const akteureHintId = "akteure-hint";
 ---
 
 <SteckbriefWrapper title={frontmatter.title} pageNumber={frontmatter.navOrder}>
   <div class="flex flex-col gap-16">
     <h2 class="mt-0">
       Einflussfaktoren
-      <SidebarTriggerButton />
+      <SidebarTriggerButton hintId={einflussfaktorenHintId} />
     </h2>
     <p>
       Benennen Sie alle maßgeblichen Rahmenbedingungen und Abhängigkeiten, die
@@ -32,7 +36,7 @@ export const frontmatter = {
   <div class="flex flex-col gap-16">
     <h2 class="mt-0">
       Relevante Akteure
-      <SidebarTriggerButton />
+      <SidebarTriggerButton hintId={akteureHintId} />
     </h2>
 
     <p>
@@ -42,4 +46,60 @@ export const frontmatter = {
   </div>
 
   <Textarea id="relevanteAkteure" label="Relevante Akteure Ihres Vorhabens" />
+
+  <Hint slot="hint" id={einflussfaktorenHintId}>
+    <h2 class="m-0 text-[21px] font-bold">
+      Leitfragen zu den Einflussfaktoren
+    </h2>
+    <ul class="m-0 list-disc pl-27 [&>li]:mb-8 [&>li:last-child]:mb-0">
+      <li>
+        Welche politischen Entwicklungen oder Positionen bestimmen den
+        Handlungsspielraum?
+      </li>
+      <li>
+        Welche rechtlichen Vorgaben, Pflichten oder Begrenzungen (national/EU)
+        sind zu berücksichtigen?
+      </li>
+      <li>
+        Welche technischen Voraussetzungen oder Beschränkungen wirken auf das
+        Vorhaben ein?
+      </li>
+      <li>
+        Welche wirtschaftlichen Auswirkungen oder Anreize spielen eine Rolle?
+      </li>
+      <li>
+        Welche sozialen Aspekte oder Betroffenheiten beeinflussen die
+        Zielrichtung?
+      </li>
+      <li>
+        Welche ökologischen bzw. nachhaltigkeitsrelevanten Faktoren sind
+        betroffen oder müssen eingeplant werden?
+      </li>
+    </ul>
+  </Hint>
+  <Hint slot="hint" id={akteureHintId}>
+    <h2 class="m-0 text-[21px] font-bold">Leitfragen zu den Akteuren</h2>
+    <ul class="m-0 list-disc pl-27 [&>li]:mb-8 [&>li:last-child]:mb-0">
+      <li>
+        Wer ist direkt betroffen (Bürgerinnen und Bürger, Unternehmen,
+        Verwaltungseinheiten)?
+      </li>
+      <li>
+        Wer ist mittelbar betroffen (Verbände, Interessenvertretungen,
+        Fachgremien)?
+      </li>
+      <li>
+        Welche Ressorts, Behörden oder Ebenen (Bund, Länder, Kommunen) sind
+        einzubeziehen?
+      </li>
+      <li>Wer hat entscheidungsrelevante Kompetenzen oder Vetopositionen?</li>
+      <li>
+        Wer kann durch Expertise oder Daten einen wesentlichen Beitrag leisten?
+      </li>
+      <li>
+        Bei Priorisierung: Welche Akteure sind für das Gelingen des Vorhabens am
+        wichtigsten?
+      </li>
+    </ul>
+  </Hint>
 </SteckbriefWrapper>

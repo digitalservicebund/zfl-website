@@ -2,19 +2,23 @@
 import SteckbriefWrapper from "./_components/SteckbriefWrapper.astro";
 import SidebarTriggerButton from "./_components/SidebarTriggerButton.astro";
 import Textarea from "./_components/Textarea.astro";
+import Hint from "./_components/Hint.astro";
 
 export const frontmatter = {
   title: "8. Projektplanung II",
   sitemap: false,
   navOrder: 8,
 };
+
+const zeitHintId = "zeit-hint";
+const ressourcenHintId = "ressourcen-hint";
 ---
 
 <SteckbriefWrapper title={frontmatter.title} pageNumber={frontmatter.navOrder}>
   <div class="flex flex-col gap-16">
     <h2 class="mt-0">
       Zeithorizont
-      <SidebarTriggerButton />
+      <SidebarTriggerButton hintId={zeitHintId} />
     </h2>
     <p>Beschreiben Sie hier den zeitlichen Ablauf Ihres Vorhabens.</p>
   </div>
@@ -24,7 +28,7 @@ export const frontmatter = {
   <div class="flex flex-col gap-16">
     <h2 class="mt-0">
       Ressourcenschätzung
-      <SidebarTriggerButton />
+      <SidebarTriggerButton hintId={ressourcenHintId} />
     </h2>
     <p>
       Schätzen Sie hier ein, welche Unterstützung Sie benötigen. Berücksichtigen
@@ -39,4 +43,41 @@ export const frontmatter = {
     id="ressourcenschaetzung"
     label="Ressourcenbedarf und -verfügbarkeit"
   />
+
+  <Hint slot="hint" id={zeitHintId}>
+    <h2 class="m-0 text-[21px] font-bold">Leitfragen zum Zeithorizont</h2>
+    <ul class="m-0 list-disc pl-27 [&>li]:mb-8 [&>li:last-child]:mb-0">
+      <li>
+        Welche Meilensteine müssen bis zum Inkrafttreten erreicht werden?{" "}
+      </li>
+      <li>
+        Welche externen Faktoren (z. B. Wahlen, Fristen im Bundesrat) könnten
+        den Zeitplan verzögern?{" "}
+      </li>
+    </ul>
+  </Hint>
+
+  <Hint slot="hint" id={ressourcenHintId}>
+    <h2 class="m-0 text-[21px] font-bold">
+      Leitfragen zur Ressourcenschätzung
+    </h2>
+    <ul class="m-0 list-disc pl-27 [&>li]:mb-8 [&>li:last-child]:mb-0">
+      <li>
+        Reicht die Kapazität im eigenen Referat aus oder benötigen Sie ein
+        interdisziplinäres Team?
+      </li>
+      <li>
+        Brauchen Sie externe Unterstützung (z. B. durch die Task Force ZfL oder
+        Gutachten)?
+      </li>
+      <li>
+        Wie hoch ist der Koordinationsaufwand mit anderen Ressorts oder
+        beteiligten Stellen?
+      </li>
+      <li>
+        Liegen bereits vorhandene Haushaltsmittel vor, oder müssen zusätzliche
+        Mittel eingeplant werden?
+      </li>
+    </ul>
+  </Hint>
 </SteckbriefWrapper>
