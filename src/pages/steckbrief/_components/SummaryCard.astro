@@ -18,10 +18,26 @@ const { title, editPath, items } = Astro.props;
           <div class="kern-description-list-item">
             <dt class="kern-description-list-item__key">{label}</dt>
             <dd
-              id={`summary-${id}`}
-              class="kern-description-list-item__value whitespace-pre-wrap"
+              class="kern-description-list-item__value"
+              x-data="{ expanded: false, overflows: false }"
+              x-init="overflows = $refs.content.textContent.trim().length > 500"
             >
-              –
+              <span
+                id={`summary-${id}`}
+                x-ref="content"
+                class="whitespace-pre-wrap"
+                x-bind:class="expanded ? '' : 'line-clamp-6'"
+              >
+                –
+              </span>
+              <button
+                x-show="overflows"
+                x-cloak
+                x-on:click="expanded = !expanded"
+                type="button"
+                class="kern-link mt-1 inline-block text-sm"
+                x-text="expanded ? '[einklappen]' : '[ausklappen]'"
+              />
             </dd>
           </div>
         ))
