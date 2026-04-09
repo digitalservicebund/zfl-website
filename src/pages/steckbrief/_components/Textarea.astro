@@ -12,7 +12,11 @@ const { id, label, hint, required } = Astro.props;
 const hintId = `hint_${id}`;
 ---
 
-<div class="kern-form-input">
+<div
+  class="kern-form-input"
+  x-data="{ count: 0 }"
+  x-init="count = $refs.ta.value.length"
+>
   <label class="kern-label" for={id}>
     {label}
   </label>
@@ -29,8 +33,10 @@ const hintId = `hint_${id}`;
     name={id}
     aria-required={required}
     aria-describedby={hintId}
-    max-length={MAX_LENGTH}></textarea>
+    maxlength={MAX_LENGTH}
+    x-ref="ta"
+    x-on:input="count = $el.value.length"></textarea>
   <p class="mt-4 text-right text-sm text-gray-500">
-    {0} / {MAX_LENGTH}
+    <span x-text="count">0</span> / {MAX_LENGTH}
   </p>
 </div>
