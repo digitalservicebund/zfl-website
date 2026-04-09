@@ -1,11 +1,10 @@
 ---
-import TruncatedValue from "./TruncatedValue.astro";
-
 interface Props {
   title: string;
-  items: { key: string; value?: string }[];
+  editPath: string;
+  items: { id: string; label: string }[];
 }
-const { title, items } = Astro.props;
+const { title, editPath, items } = Astro.props;
 ---
 
 <div class="kern-summary">
@@ -15,24 +14,24 @@ const { title, items } = Astro.props;
   <div class="kern-summary__body">
     <dl class="kern-description-list">
       {
-        items.map(({ key, value }) => {
-          const strValue = value?.toString();
-          return (
-            <div class="kern-description-list-item">
-              <dt class="kern-description-list-item__key">{key}</dt>
-              <dd class="kern-description-list-item__value">
-                {strValue ? <TruncatedValue value={strValue} /> : "–"}
-              </dd>
-            </div>
-          );
-        })
+        items.map(({ id, label }) => (
+          <div class="kern-description-list-item">
+            <dt class="kern-description-list-item__key">{label}</dt>
+            <dd
+              id={`summary-${id}`}
+              class="kern-description-list-item__value whitespace-pre-wrap"
+            >
+              –
+            </dd>
+          </div>
+        ))
       }
     </dl>
     <div>
-      <button type="button" class="kern-link">
+      <a href={editPath} class="kern-link">
         <span class="kern-icon kern-icon--edit" aria-hidden="true"></span>
         Bearbeiten
-      </button>
+      </a>
     </div>
   </div>
 </div>

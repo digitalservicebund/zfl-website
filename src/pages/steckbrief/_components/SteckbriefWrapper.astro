@@ -61,7 +61,7 @@ const nextPath = stepRoutes.find((r) => r.navOrder === pageNumber + 1)?.path;
   import { generateSteckbriefDocx } from "../_utils/docxDownload.ts";
   import type { Inputs } from "../_utils/types.ts";
 
-  const STORAGE_KEY = "steckbrief-v2b";
+  const STORAGE_KEY = "steckbrief-prototype-v2-form-state";
 
   const form = document.querySelector("form");
   const getState = () =>
@@ -76,8 +76,12 @@ const nextPath = stepRoutes.find((r) => r.navOrder === pageNumber + 1)?.path;
 
   // Fill form with localStorage data
   for (const [key, value] of Object.entries(getState())) {
+    if (!value) continue;
     const el = form?.querySelector(`#${key}`) as HTMLInputElement;
-    if (el && typeof value === "string") el.value = value;
+    if (el) el.value = value;
+
+    const summaryEl = form?.querySelector(`#summary-${key}`);
+    if (summaryEl) summaryEl.innerHTML = value;
   }
 
   const downloadDocx = () => {

@@ -1,14 +1,22 @@
 ---
 import SteckbriefWrapper from "./_components/SteckbriefWrapper.astro";
 import SummaryCard from "./_components/SummaryCard.astro";
+import {
+  steckbrief_schritt1,
+  steckbrief_schritt2,
+  steckbrief_schritt3,
+  steckbrief_schritt4,
+  steckbrief_schritt5,
+  steckbrief_schritt6,
+  steckbrief_schritt7,
+  steckbrief_schritt8,
+} from "@/config/routes";
 
 export const frontmatter = {
   title: "9. Zusammenfassung",
   sitemap: false,
   navOrder: 9,
 };
-
-const values: Record<string, string | undefined> = {};
 ---
 
 <SteckbriefWrapper
@@ -26,64 +34,71 @@ const values: Record<string, string | undefined> = {};
   <div class="flex flex-col">
     <SummaryCard
       title="Allgemeine Angaben"
+      editPath={steckbrief_schritt1.path}
       items={[
-        { key: "Arbeitstitel des Vorhabens", value: values.arbeitstitel },
-        { key: "Aktenzeichen", value: values.aktenzeichen },
-        { key: "Federführendes Ressort", value: values.ressort },
-        { key: "Referat", value: values.referat },
+        { label: "Arbeitstitel des Vorhabens", id: "arbeitstitel" },
+        { label: "Aktenzeichen", id: "aktenzeichen" },
+        { label: "Federführendes Ressort", id: "ressort" },
+        { label: "Referat", id: "referat" },
       ]}
     />
     <SummaryCard
+      editPath={steckbrief_schritt1.path}
       title="Kontaktdaten"
       items={[
-        { key: "Name", value: values.name },
-        { key: "E-Mail Adresse", value: values.email },
-        { key: "Telefonnummer", value: values.telefonnummer },
+        { label: "Name", id: "name" },
+        { label: "E-Mail Adresse", id: "email" },
+        { label: "Telefonnummer", id: "telefonnummer" },
       ]}
     />
     <SummaryCard
+      editPath={steckbrief_schritt2.path}
       title="Kontext und Genese"
-      items={[{ key: "Kontext", value: values.kontext }]}
+      items={[{ label: "Kontext", id: "kontext" }]}
     />
     <SummaryCard
+      editPath={steckbrief_schritt3.path}
       title="Problembeschreibung"
-      items={[
-        { key: "Problembeschreibung", value: values.problembeschreibung },
-      ]}
+      items={[{ label: "Problembeschreibung", id: "problembeschreibung" }]}
     />
     <SummaryCard
+      editPath={steckbrief_schritt4.path}
       title="Einflussfaktoren & Akteure"
       items={[
-        { key: "Einflussfaktoren", value: values.einflussfaktoren },
-        { key: "Relevante Akteure", value: values.relevanteAkteure },
+        { label: "Einflussfaktoren", id: "einflussfaktoren" },
+        { label: "Relevante Akteure", id: "relevanteAkteure" },
       ]}
     />
     <SummaryCard
+      editPath={steckbrief_schritt5.path}
       title="Vorläufige Zielsetzung"
-      items={[{ key: "Zielsetzung", value: values.zielsetzung }]}
+      items={[{ label: "Zielsetzung", id: "zielsetzung" }]}
     />
     <SummaryCard
+      editPath={steckbrief_schritt6.path}
       title="Vorhabensbeschreibung"
       items={[
         {
-          key: "Vorhabensbeschreibung",
-          value: values.vorhabensbeschreibung,
+          label: "Vorhabensbeschreibung",
+          id: "vorhabensbeschreibung",
         },
-        { key: "Wichtige Maßnahmen", value: values.massnahmen },
+        { label: "Wichtige Maßnahmen", id: "massnahmen" },
       ]}
     />
     <SummaryCard
+      editPath={steckbrief_schritt7.path}
       title="Projektplanung I"
       items={[
-        { key: "Zeithorizont", value: values.zeithorizont },
-        { key: "Ressourcenschätzung", value: values.ressourcenschaetzung },
+        { label: "Zeithorizont", id: "zeithorizont" },
+        { label: "Ressourcenschätzung", id: "ressourcenschaetzung" },
       ]}
     />
     <SummaryCard
+      editPath={steckbrief_schritt8.path}
       title="Projektplanung II"
       items={[
-        { key: "Risikoeinschätzung", value: values.risikoeinschaetzung },
-        { key: "Komplexitätsgrad", value: values.komplexitaetsgrad },
+        { label: "Risikoeinschätzung", id: "risikoeinschaetzung" },
+        { label: "Komplexitätsgrad", id: "komplexitaetsgrad" },
       ]}
     />
   </div>
