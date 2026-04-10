@@ -20,7 +20,7 @@ const nextPath = stepRoutes.find((r) => r.navOrder === pageNumber + 1)?.path;
 <Layout title={title} noFooter>
   <main>
     <div
-      class="flex flex-1 flex-col gap-32 lg:flex-row lg:items-stretch"
+      class="_gap-32 flex flex-1 flex-col lg:flex-row lg:items-stretch"
       x-data="{ hintId: '' }"
     >
       <div class="min-w-0 flex-1">
@@ -44,7 +44,8 @@ const nextPath = stepRoutes.find((r) => r.navOrder === pageNumber + 1)?.path;
       </div>
       <div
         class="max-w-0 shrink-0 overflow-hidden transition-all duration-300 ease-in-out lg:sticky lg:top-0 lg:h-[calc(100dvh-var(--header-height))]"
-        :class="hintId ? 'max-w-full opacity-100 lg:max-w-[360px]' : 'opacity-0'"
+        x-cloak
+        :class="hintId ? 'max-w-full opacity-100 lg:max-w-[360px]' : 'max-w-0 opacity-0'"
       >
         <div class="h-full w-full lg:w-[360px]">
           <HintSidebar class="h-full overflow-y-auto">

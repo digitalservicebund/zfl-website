@@ -310,6 +310,16 @@ export async function generateSteckbriefDocx(data: Inputs): Promise<void> {
           ...fieldParagraphs("Problembeschreibung", data.problembeschreibung),
         ],
       },
+      // Section: Vorläufige Zielsetzung
+      {
+        properties: nextPageProperties,
+        headers: { default: makeHeader() },
+        footers: { default: makeFooter() },
+        children: [
+          sectionHeading("Vorläufige Zielsetzung"),
+          ...fieldParagraphs("Zielsetzung", data.zielsetzung),
+        ],
+      },
       // Section: Einflussfaktoren & Akteure
       {
         properties: nextPageProperties,
@@ -321,37 +331,17 @@ export async function generateSteckbriefDocx(data: Inputs): Promise<void> {
           ...fieldParagraphs("Relevante Akteure", data.relevanteAkteure),
         ],
       },
-      // Section: Vorläufige Zielsetzung
-      {
-        properties: nextPageProperties,
-        headers: { default: makeHeader() },
-        footers: { default: makeFooter() },
-        children: [
-          sectionHeading("Vorläufige Zielsetzung"),
-          ...fieldParagraphs("Zielsetzung", data.zielsetzung),
-        ],
-      },
       // Section: Vorhabensbeschreibung
       {
         properties: nextPageProperties,
         headers: { default: makeHeader() },
         footers: { default: makeFooter() },
         children: [
-          sectionHeading("Vorhabensbeschreibung"),
+          sectionHeading("Vorhabensplanung"),
           ...fieldParagraphs(
             "Vorhabensbeschreibung",
             data.vorhabensbeschreibung,
           ),
-          ...fieldParagraphs("Maßnahmen", data.massnahmen),
-        ],
-      },
-      // Section: Projektplanung
-      {
-        properties: nextPageProperties,
-        headers: { default: makeHeader() },
-        footers: { default: makeFooter() },
-        children: [
-          sectionHeading("Projektplanung"),
           ...fieldParagraphs("Risikoeinschätzung", data.risikoeinschaetzung),
           ...fieldParagraphs("Komplexitätsgrad", data.komplexitaetsgrad),
           ...fieldParagraphs("Zeithorizont", data.zeithorizont),

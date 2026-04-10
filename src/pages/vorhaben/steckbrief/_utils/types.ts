@@ -8,11 +8,10 @@ export type Inputs = {
   telefonnummer: string;
   kontext: string;
   problembeschreibung: string;
+  zielsetzung: string;
   einflussfaktoren: string;
   relevanteAkteure: string;
-  zielsetzung: string;
   vorhabensbeschreibung: string;
-  massnahmen: string;
   zeithorizont: string;
   ressourcenschaetzung: string;
   risikoeinschaetzung: string;

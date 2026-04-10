@@ -1,79 +1,99 @@
 ---
 import SteckbriefWrapper from "./_components/SteckbriefWrapper.astro";
-import SidebarTriggerButton from "./_components/SidebarTriggerButton.astro";
-import Textarea from "./_components/Textarea.astro";
-import Hint from "./_components/Hint.astro";
+import SummaryCard from "./_components/SummaryCard.astro";
+import ButtonBar from "./_components/ButtonBar.astro";
+import {
+  vorhaben_steckbrief_schritt1,
+  vorhaben_steckbrief_schritt2,
+  vorhaben_steckbrief_schritt3,
+  vorhaben_steckbrief_schritt4,
+  vorhaben_steckbrief_schritt5,
+  vorhaben_steckbrief_schritt6,
+  vorhaben_steckbrief_schritt8,
+} from "@/config/routes";
 
 export const frontmatter = {
-  title: "7. Projektplanung I",
+  title: "7. Zusammenfassung",
   sitemap: false,
   navOrder: 7,
 };
-
-const risikoHintId = "risiko-hint";
-const komplexitaetHintId = "komplexitaet-hint";
 ---
 
-<SteckbriefWrapper title={frontmatter.title} pageNumber={frontmatter.navOrder}>
+<SteckbriefWrapper
+  title={frontmatter.title}
+  pageNumber={frontmatter.navOrder}
+  isWide
+>
   <div class="flex flex-col gap-16">
-    <h2 class="mt-0">
-      Risikoeinschätzung
-      <SidebarTriggerButton hintId={risikoHintId} />
-    </h2>
+    <h2 class="mt-0">Zusammenfassung</h2>
     <p>
-      Benennen Sie potenzielle Hindernisse für Ihr Vorhaben. Nennen Sie auch
-      deren Eintrittswahrscheinlichkeit.
+      Überprüfen Sie Ihre Angaben und korrigieren Sie diese, falls notwendig.
     </p>
   </div>
 
-  <Textarea id="risikoeinschaetzung" label="Risikobetrachtung" />
-
-  <div class="flex flex-col gap-16">
-    <h2 class="mt-0">
-      Komplexitätsgrad des Vorhabens
-      <SidebarTriggerButton hintId={komplexitaetHintId} />
-    </h2>
-    <p>
-      Beurteilen Sie den Schwierigkeitsgrad des Vorhabens anhand der Anzahl der
-      beteiligten Schnittstellen, der technischen Anforderungen und der
-      Verflechtung einzelner Arbeitsschritte.
-    </p>
+  <div class="flex flex-col">
+    <SummaryCard
+      title="Allgemeine Angaben"
+      editPath={vorhaben_steckbrief_schritt1.path}
+      items={[
+        { label: "Arbeitstitel des Vorhabens", id: "arbeitstitel" },
+        { label: "Aktenzeichen", id: "aktenzeichen" },
+        { label: "Federführendes Ressort", id: "ressort" },
+        { label: "Referat", id: "referat" },
+      ]}
+    />
+    <SummaryCard
+      editPath={vorhaben_steckbrief_schritt1.path}
+      title="Kontaktdaten"
+      items={[
+        { label: "Name", id: "name" },
+        { label: "E-Mail Adresse", id: "email" },
+        { label: "Telefonnummer", id: "telefonnummer" },
+      ]}
+    />
+    <SummaryCard
+      editPath={vorhaben_steckbrief_schritt2.path}
+      title="Kontext und Genese"
+      items={[{ label: "Kontext", id: "kontext" }]}
+    />
+    <SummaryCard
+      editPath={vorhaben_steckbrief_schritt3.path}
+      title="Problembeschreibung"
+      items={[{ label: "Problembeschreibung", id: "problembeschreibung" }]}
+    />
+    <SummaryCard
+      editPath={vorhaben_steckbrief_schritt5.path}
+      title="Vorläufige Zielsetzung"
+      items={[{ label: "Zielsetzung", id: "zielsetzung" }]}
+    />
+    <SummaryCard
+      editPath={vorhaben_steckbrief_schritt4.path}
+      title="Einflussfaktoren & Akteure"
+      items={[
+        { label: "Einflussfaktoren", id: "einflussfaktoren" },
+        { label: "Relevante Akteure", id: "relevanteAkteure" },
+      ]}
+    />
+    <SummaryCard
+      editPath={vorhaben_steckbrief_schritt6.path}
+      title="Vorhabensbeschreibung"
+      items={[
+        {
+          label: "Vorhabensbeschreibung",
+          id: "vorhabensbeschreibung",
+        },
+        { label: "Wichtige Maßnahmen", id: "massnahmen" },
+        { label: "Zeithorizont", id: "zeithorizont" },
+        { label: "Ressourcenschätzung", id: "ressourcenschaetzung" },
+        { label: "Risikoeinschätzung", id: "risikoeinschaetzung" },
+        { label: "Komplexitätsgrad", id: "komplexitaetsgrad" },
+      ]}
+    />
   </div>
-
-  <Textarea id="komplexitaetsgrad" label="Komplexität des Vorhabens" />
-
-  <Hint slot="hint" id={risikoHintId}>
-    <h2 class="m-0 text-[21px] font-bold">Leitfragen zur Risikoeinschätzung</h2>
-    <ul class="m-0 list-disc pl-27 [&>li]:mb-8 [&>li:last-child]:mb-0">
-      <li>
-        Welche unbeabsichtigten Nebenfolgen (z. B. hohe Bürokratiekosten)
-        könnten entstehen?
-      </li>
-      <li>
-        Gibt es politische Risiken oder Akteure, die das Vorhaben blockieren
-        könnten?
-      </li>
-      <li>
-        Wie wahrscheinlich sind diese Hindernisse und wie stark würden sie den
-        Zeitplan verzögern?
-      </li>
-    </ul>
-  </Hint>
-  <Hint slot="hint" id={komplexitaetHintId}>
-    <h2 class="m-0 text-[21px] font-bold">Leitfragen zum Komplexitätsgrad</h2>
-    <ul class="m-0 list-disc pl-27 [&>li]:mb-8 [&>li:last-child]:mb-0">
-      <li>
-        Welche Maßnahmen müssen zuerst abgeschlossen sein, damit weitere
-        Schritte beginnen können?
-      </li>
-      <li>
-        Welche Maßnahmen benötigen eine enge Abstimmung mit anderen Ressorts
-        oder Akteuren?
-      </li>
-      <li>
-        Gibt es Maßnahmen, die bereits fest terminiert sind oder aus politischen
-        Vorgaben resultieren?
-      </li>
-    </ul>
-  </Hint>
+  <ButtonBar
+    slot="button-bar"
+    prevPath={vorhaben_steckbrief_schritt6.path}
+    nextPath={vorhaben_steckbrief_schritt8.path}
+    nextBtnText="Abschließen"
+  />
 </SteckbriefWrapper>

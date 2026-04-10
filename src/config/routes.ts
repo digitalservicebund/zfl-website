@@ -228,18 +228,6 @@ export const vorhaben_steckbrief_schritt1 = {
   isHiddenParent: false,
 } as const;
 
-export const vorhaben_steckbrief_schritt10 = {
-  key: "vorhaben_steckbrief_schritt10",
-  path: "/vorhaben/steckbrief/schritt-10",
-  title: "10. Herunterladen & Absenden",
-  parent: vorhaben_steckbrief,
-  sitemap: false,
-  isStagingOnly: false,
-  navOrder: 10,
-  navLabel: "10. Abschluss",
-  isHiddenParent: false,
-} as const;
-
 export const vorhaben_steckbrief_schritt2 = {
   key: "vorhaben_steckbrief_schritt2",
   path: "/vorhaben/steckbrief/schritt-2",
@@ -267,24 +255,24 @@ export const vorhaben_steckbrief_schritt3 = {
 export const vorhaben_steckbrief_schritt4 = {
   key: "vorhaben_steckbrief_schritt4",
   path: "/vorhaben/steckbrief/schritt-4",
-  title: "4. Einflussfaktoren & relevante Akteure",
+  title: "4. Vorläufige Zielsetzung",
   parent: vorhaben_steckbrief,
   sitemap: false,
   isStagingOnly: false,
   navOrder: 4,
-  navLabel: "4. Einflussfaktoren",
+  navLabel: "4. Zielsetzung",
   isHiddenParent: false,
 } as const;
 
 export const vorhaben_steckbrief_schritt5 = {
   key: "vorhaben_steckbrief_schritt5",
   path: "/vorhaben/steckbrief/schritt-5",
-  title: "5. Vorläufige Zielsetzung",
+  title: "5. Einflussfaktoren & relevante Akteure",
   parent: vorhaben_steckbrief,
   sitemap: false,
   isStagingOnly: false,
   navOrder: 5,
-  navLabel: "5. Zielsetzung",
+  navLabel: "5. Einflussfaktoren",
   isHiddenParent: false,
 } as const;
 
@@ -303,7 +291,7 @@ export const vorhaben_steckbrief_schritt6 = {
 export const vorhaben_steckbrief_schritt7 = {
   key: "vorhaben_steckbrief_schritt7",
   path: "/vorhaben/steckbrief/schritt-7",
-  title: "7. Projektplanung I",
+  title: "7. Zusammenfassung",
   parent: vorhaben_steckbrief,
   sitemap: false,
   isStagingOnly: false,
@@ -315,24 +303,12 @@ export const vorhaben_steckbrief_schritt7 = {
 export const vorhaben_steckbrief_schritt8 = {
   key: "vorhaben_steckbrief_schritt8",
   path: "/vorhaben/steckbrief/schritt-8",
-  title: "8. Projektplanung II",
+  title: "8. Herunterladen & Absenden",
   parent: vorhaben_steckbrief,
   sitemap: false,
   isStagingOnly: false,
   navOrder: 8,
-  navLabel: null,
-  isHiddenParent: false,
-} as const;
-
-export const vorhaben_steckbrief_schritt9 = {
-  key: "vorhaben_steckbrief_schritt9",
-  path: "/vorhaben/steckbrief/schritt-9",
-  title: "9. Zusammenfassung",
-  parent: vorhaben_steckbrief,
-  sitemap: false,
-  isStagingOnly: false,
-  navOrder: 9,
-  navLabel: null,
+  navLabel: "8. Abschluss",
   isHiddenParent: false,
 } as const;
 
@@ -367,7 +343,6 @@ export const allRoutes = [
   vorhaben,
   vorhaben_steckbrief,
   vorhaben_steckbrief_schritt1,
-  vorhaben_steckbrief_schritt10,
   vorhaben_steckbrief_schritt2,
   vorhaben_steckbrief_schritt3,
   vorhaben_steckbrief_schritt4,
@@ -375,6 +350,5 @@ export const allRoutes = [
   vorhaben_steckbrief_schritt6,
   vorhaben_steckbrief_schritt7,
   vorhaben_steckbrief_schritt8,
-  vorhaben_steckbrief_schritt9,
   werkzeuge,
 ] as const;

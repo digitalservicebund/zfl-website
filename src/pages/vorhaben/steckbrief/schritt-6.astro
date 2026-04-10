@@ -11,7 +11,10 @@ export const frontmatter = {
   navLabel: "6. Vorhaben",
 };
 const vorhabenHintId = "vorhaben-hint";
-const massnahmenHintId = "massnahmen-hint";
+const risikoHintId = "risiko-hint";
+const komplexitaetHintId = "komplexitaet-hint";
+const zeitHintId = "zeit-hint";
+const ressourcenHintId = "ressourcen-hint";
 ---
 
 <SteckbriefWrapper title={frontmatter.title} pageNumber={frontmatter.navOrder}>
@@ -30,19 +33,58 @@ const massnahmenHintId = "massnahmen-hint";
 
   <div class="flex flex-col gap-16">
     <h2 class="mt-0">
-      Maßnahmen der Zielsetzung
-      <SidebarTriggerButton hintId={massnahmenHintId} />
+      Risikoeinschätzung
+      <SidebarTriggerButton hintId={risikoHintId} />
     </h2>
     <p>
-      Skizzieren Sie die geplanten Maßnahmen und den methodischen Weg, mit dem
-      die gesetzten Ziele realisiert werden sollen.
+      Benennen Sie potenzielle Hindernisse für Ihr Vorhaben. Nennen Sie auch
+      deren Eintrittswahrscheinlichkeit.
+    </p>
+  </div>
+
+  <Textarea id="risikoeinschaetzung" label="Risikobetrachtung" />
+
+  <div class="flex flex-col gap-16">
+    <h2 class="mt-0">
+      Komplexitätsgrad des Vorhabens
+      <SidebarTriggerButton hintId={komplexitaetHintId} />
+    </h2>
+    <p>
+      Beurteilen Sie den Schwierigkeitsgrad des Vorhabens anhand der Anzahl der
+      beteiligten Schnittstellen, der technischen Anforderungen und der
+      Verflechtung einzelner Arbeitsschritte.
+    </p>
+  </div>
+
+  <Textarea id="komplexitaetsgrad" label="Komplexität des Vorhabens" />
+
+  <div class="flex flex-col gap-16">
+    <h2 class="mt-0">
+      Zeithorizont
+      <SidebarTriggerButton hintId={zeitHintId} />
+    </h2>
+    <p>Beschreiben Sie hier den zeitlichen Ablauf Ihres Vorhabens.</p>
+  </div>
+
+  <Textarea id="zeithorizont" label="Zeithorizont des Vorhabens" />
+
+  <div class="flex flex-col gap-16">
+    <h2 class="mt-0">
+      Ressourcenschätzung
+      <SidebarTriggerButton hintId={ressourcenHintId} />
+    </h2>
+    <p>
+      Schätzen Sie hier ein, welche Unterstützung Sie benötigen. Berücksichtigen
+      Sie dabei die Komplexität der Arbeitsschritte, technische Anforderungen
+      und die Anzahl der beteiligten Schnittstellen. Notieren Sie auch, ob Sie
+      zusätzliche Kapazitäten – etwa durch ein interdisziplinäres Team oder
+      externe Expertise – einplanen müssen.
     </p>
   </div>
 
   <Textarea
-    id="massnahmen"
-    label="Ihre geplanten Maßnahmen"
-    hint="Erstellung von Gutachten, internationaler Vergleich/Best Practices analysieren, Formate der Beteiligung relevanter Akteure"
+    id="ressourcenschaetzung"
+    label="Ressourcenbedarf und -verfügbarkeit"
   />
 
   <Hint slot="hint" id={vorhabenHintId}>
@@ -77,8 +119,26 @@ const massnahmenHintId = "massnahmen-hint";
     </ul>
   </Hint>
 
-  <Hint slot="hint" id={massnahmenHintId}>
-    <h2 class="m-0 text-[21px] font-bold">Leitfragen zu den Maßnahmen</h2>
+  <Hint slot="hint" id={risikoHintId}>
+    <h2 class="m-0 text-[21px] font-bold">Leitfragen zur Risikoeinschätzung</h2>
+    <ul class="m-0 list-disc pl-27 [&>li]:mb-8 [&>li:last-child]:mb-0">
+      <li>
+        Welche unbeabsichtigten Nebenfolgen (z. B. hohe Bürokratiekosten)
+        könnten entstehen?
+      </li>
+      <li>
+        Gibt es politische Risiken oder Akteure, die das Vorhaben blockieren
+        könnten?
+      </li>
+      <li>
+        Wie wahrscheinlich sind diese Hindernisse und wie stark würden sie den
+        Zeitplan verzögern?
+      </li>
+    </ul>
+  </Hint>
+
+  <Hint slot="hint" id={komplexitaetHintId}>
+    <h2 class="m-0 text-[21px] font-bold">Leitfragen zum Komplexitätsgrad</h2>
     <ul class="m-0 list-disc pl-27 [&>li]:mb-8 [&>li:last-child]:mb-0">
       <li>
         Welche Maßnahmen müssen zuerst abgeschlossen sein, damit weitere
@@ -91,6 +151,43 @@ const massnahmenHintId = "massnahmen-hint";
       <li>
         Gibt es Maßnahmen, die bereits fest terminiert sind oder aus politischen
         Vorgaben resultieren?
+      </li>
+    </ul>
+  </Hint>
+
+  <Hint slot="hint" id={zeitHintId}>
+    <h2 class="m-0 text-[21px] font-bold">Leitfragen zum Zeithorizont</h2>
+    <ul class="m-0 list-disc pl-27 [&>li]:mb-8 [&>li:last-child]:mb-0">
+      <li>
+        Welche Meilensteine müssen bis zum Inkrafttreten erreicht werden?{" "}
+      </li>
+      <li>
+        Welche externen Faktoren (z. B. Wahlen, Fristen im Bundesrat) könnten
+        den Zeitplan verzögern?{" "}
+      </li>
+    </ul>
+  </Hint>
+
+  <Hint slot="hint" id={ressourcenHintId}>
+    <h2 class="m-0 text-[21px] font-bold">
+      Leitfragen zur Ressourcenschätzung
+    </h2>
+    <ul class="m-0 list-disc pl-27 [&>li]:mb-8 [&>li:last-child]:mb-0">
+      <li>
+        Reicht die Kapazität im eigenen Referat aus oder benötigen Sie ein
+        interdisziplinäres Team?
+      </li>
+      <li>
+        Brauchen Sie externe Unterstützung (z. B. durch die Task Force ZfL oder
+        Gutachten)?
+      </li>
+      <li>
+        Wie hoch ist der Koordinationsaufwand mit anderen Ressorts oder
+        beteiligten Stellen?
+      </li>
+      <li>
+        Liegen bereits vorhandene Haushaltsmittel vor, oder müssen zusätzliche
+        Mittel eingeplant werden?
       </li>
     </ul>
   </Hint>
