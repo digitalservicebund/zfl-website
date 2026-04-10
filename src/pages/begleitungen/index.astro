@@ -8,8 +8,8 @@ import illustration from "./illustration.svg";
 import gesetzentwurfImg from "./gesetzentwurf.png";
 import Layout from "@/layouts/Layout.astro";
 import { Image } from "astro:assets";
-import { Icon } from "astro-icon/components";
 import { ZFL_EMAIL_REGBEG, ZFL_PHONE_REGBEG } from "@/config/constants";
+import { Icon } from "astro-icon/components";
 
 export const frontmatter = {
   title: "Regelungsbegleitung",
@@ -87,9 +87,11 @@ export const frontmatter = {
           werden vom BMDS finanziert.
         </p>
         <div class="overflow-x-auto" tabindex="0">
-          <table class="w-full table-fixed text-left">
-            <thead>
-              <tr class="table-header-cell">
+          <table
+            class="zfl-table zfl-table--striped w-full table-fixed text-left"
+          >
+            <thead class="zfl-table__head">
+              <tr>
                 <th scope="col" class="w-150">Kriterien</th>
                 <th scope="col" class="w-235">Paket S</th>
                 <th scope="col" class="w-235">Paket M</th>
@@ -97,9 +99,7 @@ export const frontmatter = {
               </tr>
             </thead>
 
-            <tbody
-              class="table-body-cell [&>tr:nth-child(even)]:bg-lavender-200"
-            >
+            <tbody class="zfl-table__body">
               <tr>
                 <td class="font-bold">Fokus</td>
                 <td> Punktuelle Unterstützung bei Ihrer Fragestellung </td>
