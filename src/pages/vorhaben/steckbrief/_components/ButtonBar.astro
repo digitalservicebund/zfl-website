@@ -4,33 +4,33 @@ import { Icon } from "astro-icon/components";
 interface Props {
   prevPath?: string;
   nextPath?: string;
+  customText?: string;
   nextBtnText?: string;
 }
 
-const { prevPath, nextPath, nextBtnText = "Weiter" } = Astro.props;
-const isLast = !nextPath;
+const { prevPath, nextPath, customText, nextBtnText = "Weiter" } = Astro.props;
+const defaultText = "Ihre Daten werden automatisch im Browser gespeichert";
 ---
 
 <div class="sticky bottom-0 z-10 border-t border-[#A5AAC3] bg-white py-16">
   <div class="flex w-full items-center justify-between gap-16 px-64">
     <div class="kern-body kern-body--muted flex items-center gap-12">
       {
-        isLast ? (
+        customText ? (
           <>
             <Icon name="ic:outline-info" />
-            Wenn Sie auf Weiter klicken, gelangen Sie zur Phase II der Frühphase
+            {customText}
           </>
         ) : (
           <>
-            <Icon name="ic:outline-published-with-changes" /> Ihre Daten werden
-            automatisch im Browser gespeichert
+            <Icon name="ic:outline-published-with-changes" /> {defaultText}
           </>
         )
       }
     </div>
     <div class="flex gap-16">
       {
-        !isLast && (
+        !customText && (
           <button
             type="button"
             class="docx-download-btn kern-btn kern-btn--tertiary"
@@ -51,15 +51,7 @@ const isLast = !nextPath;
         )
       }
       {
-        isLast ? (
-          <button
-            type="submit"
-            form="steckbrief-form"
-            class="kern-btn kern-btn--primary"
-          >
-            <span class="kern-label">Weiter</span>
-          </button>
-        ) : (
+        nextPath && (
           <a href={nextPath} class="kern-btn kern-btn--primary">
             <span class="kern-label">{nextBtnText}</span>
             <span
