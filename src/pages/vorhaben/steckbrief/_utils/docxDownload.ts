@@ -29,6 +29,15 @@ const CONTENT_WIDTH = 9026;
 const LABEL_WIDTH = 2976; // ~33%
 const VALUE_WIDTH = CONTENT_WIDTH - LABEL_WIDTH; // ~67%
 
+const TABLE_BORDERS = {
+  top: { style: BorderStyle.SINGLE, size: 4, color: "D1D5DB" },
+  bottom: { style: BorderStyle.SINGLE, size: 4, color: "D1D5DB" },
+  left: { style: BorderStyle.SINGLE, size: 4, color: "D1D5DB" },
+  right: { style: BorderStyle.SINGLE, size: 4, color: "D1D5DB" },
+  insideHorizontal: { style: BorderStyle.SINGLE, size: 4, color: "D1D5DB" },
+  insideVertical: { style: BorderStyle.SINGLE, size: 4, color: "D1D5DB" },
+};
+
 // ---------------------------------------------------------------------------
 // Section 1 helpers — two-column table layout
 // ---------------------------------------------------------------------------
@@ -76,7 +85,7 @@ function makeContactTable(data: Inputs): Table {
     width: { size: CONTENT_WIDTH, type: WidthType.DXA },
     columnWidths: [LABEL_WIDTH, VALUE_WIDTH],
     layout: TableLayoutType.FIXED,
-    borders: TableBorders.NONE,
+    borders: TABLE_BORDERS,
     rows: [
       tableFieldRow("Arbeitstitel", data.arbeitstitel),
       tableFieldRow("Aktenzeichen", data.aktenzeichen),
@@ -129,6 +138,97 @@ function fieldParagraphs(label: string, value: string): Paragraph[] {
           children: [new TextRun({ text: line, font: FONT, size: 24 })],
         }),
     ),
+  ];
+}
+
+// ---------------------------------------------------------------------------
+// Rückmeldeformular helpers — numbered Q&A layout
+// ---------------------------------------------------------------------------
+
+function feedbackQuestion(
+  num: number,
+  question: string,
+  hint: string | null,
+  answerHint: string = "",
+): Paragraph[] {
+  const result: Paragraph[] = [
+    new Paragraph({
+      spacing: { before: 320, after: 80 },
+      children: [
+        new TextRun({
+          text: `${num}. ${question}`,
+          bold: true,
+          font: FONT,
+          size: 24,
+        }),
+      ],
+    }),
+  ];
+  if (hint) {
+    result.push(
+      new Paragraph({
+        spacing: { before: 0, after: 80 },
+        children: [
+          new TextRun({ text: hint, font: FONT, size: 24, italics: true }),
+        ],
+      }),
+    );
+  }
+  result.push(
+    new Paragraph({
+      spacing: { before: 80, after: 40 },
+      children: [
+        new TextRun({ text: "Antwort:", bold: true, font: FONT, size: 24 }),
+        ...(answerHint
+          ? [new TextRun({ text: ` ${answerHint}`, font: FONT, size: 24 })]
+          : []),
+      ],
+    }),
+    new Paragraph({
+      spacing: { before: 0, after: 200 },
+      children: [new TextRun({ text: "", font: FONT, size: 24 })],
+    }),
+    new Paragraph({
+      spacing: { before: 0, after: 200 },
+      children: [new TextRun({ text: "", font: FONT, size: 24 })],
+    }),
+    new Paragraph({
+      spacing: { before: 0, after: 200 },
+      children: [new TextRun({ text: "", font: FONT, size: 24 })],
+    }),
+  );
+  return result;
+}
+
+function feedbackQuestionWithOptions(
+  num: number,
+  question: string,
+  options: string[],
+): Paragraph[] {
+  return [
+    new Paragraph({
+      spacing: { before: 320, after: 80 },
+      children: [
+        new TextRun({
+          text: `${num}. ${question}`,
+          bold: true,
+          font: FONT,
+          size: 24,
+        }),
+      ],
+    }),
+    ...options.map(
+      (option) =>
+        new Paragraph({
+          spacing: { before: 80, after: 80 },
+          indent: { left: 360 },
+          children: [
+            new TextRun({ text: "☐  ", font: FONT, size: 24 }),
+            new TextRun({ text: option, font: FONT, size: 24 }),
+          ],
+        }),
+    ),
+    new Paragraph({ spacing: { before: 80, after: 0 }, children: [] }),
   ];
 }
 
@@ -297,6 +397,141 @@ export async function generateSteckbriefDocx(data: Inputs): Promise<void> {
           ...fieldParagraphs("Komplexitätsgrad", data.komplexitaetsgrad),
           ...fieldParagraphs("Zeithorizont", data.zeithorizont),
           ...fieldParagraphs("Ressourcenschätzung", data.ressourcenschaetzung),
+          new Paragraph({
+            pageBreakBefore: true,
+            spacing: { before: 480, after: 0 },
+            children: [
+              new TextRun({
+                text: "Rückmeldeformular",
+                bold: false,
+                font: FONT,
+                size: 56,
+              }),
+            ],
+          }),
+          sectionHeading("Allgemeine Angaben"),
+          new Table({
+            width: { size: CONTENT_WIDTH, type: WidthType.DXA },
+            columnWidths: [LABEL_WIDTH, VALUE_WIDTH],
+            layout: TableLayoutType.FIXED,
+            borders: TABLE_BORDERS,
+            rows: [
+              tableFieldRow("Arbeitstitel des Vorhabens", data.arbeitstitel),
+              tableFieldRow("Ressort / Organisation", ""),
+              tableFieldRow(
+                "Ansprechperson für das Vorhaben in der Organisation des/der Rückmeldenden (Name, E-Mail-Adresse, Telefonnummer)",
+                "",
+              ),
+            ],
+          }),
+          sectionHeading("In Bezug auf den Steckbrief"),
+          ...feedbackQuestion(
+            1,
+            "Das Vorhaben wurde geprüft und hat Relevanz für den Akteur.",
+            "Bitte unzutreffendes rauslöschen.",
+            "ja/nein",
+          ),
+          ...feedbackQuestion(
+            2,
+            "Gibt es Ergänzungen zum Abschnitt Einflussfaktoren und externe Stakeholder?",
+            null,
+          ),
+          ...feedbackQuestion(
+            3,
+            "Sind spezifische Fachbelange zu berücksichtigen?",
+            "(Wenn ja, welche?)",
+          ),
+          ...feedbackQuestion(
+            4,
+            "Gibt es Schnittstellen / Synergien, z.B. hilfreiche Vorarbeiten oder ähnliche Vorhaben?",
+            "(Wenn ja, welche?)",
+          ),
+          ...feedbackQuestion(
+            5,
+            "Kann ein Beratungsangebot bereitgestellt werden?",
+            "(Wenn ja, wozu konkret?)",
+          ),
+          ...feedbackQuestionWithOptions(
+            6,
+            "Inwieweit soll eine Involvierung in das Vorhaben erfolgen?",
+            [
+              "als Mitwirkende an der Durchführung (z.B. mitprüfendes Referat)",
+              "als Konsultierte in Phase II (z.B. punktuelles Feedback geben, Expertise einbringen)",
+              "als Informierte zum Abschluss von Phase I, II und III",
+            ],
+          ),
+          ...feedbackQuestion(
+            7,
+            "Welche Ressourcen können für eine Involvierung bereitgestellt werden?",
+            "(z.B. Materialien, Infrastruktur)",
+          ),
+          ...feedbackQuestion(
+            8,
+            "Wie viel personelle Kapazitäten (in Personentagen) können bereitgestellt werden?",
+            null,
+          ),
+          ...feedbackQuestion(
+            9,
+            "Es wird um Rücksprache gebeten",
+            "Wenn über den Steckbrief hinaus Austauschbedarf gesehen wird. Bitte unzutreffendes rauslöschen.",
+            "ja/nein",
+          ),
+          new Paragraph({
+            border: {
+              bottom: { style: BorderStyle.SINGLE, size: 4, color: "D1D5DB" },
+            },
+            spacing: { before: 480, after: 240 },
+            children: [],
+          }),
+          new Paragraph({
+            spacing: { before: 0, after: 160 },
+            children: [
+              new TextRun({
+                text: "So geht es jetzt weiter",
+                bold: true,
+                font: FONT,
+                size: 32,
+              }),
+            ],
+          }),
+          new Paragraph({
+            spacing: { before: 0, after: 200 },
+            children: [
+              new TextRun({
+                text: "Schicken Sie das ausgefüllte Rückmeldeformular an folgende Akteure:",
+                font: FONT,
+                size: 24,
+              }),
+            ],
+          }),
+          new Paragraph({
+            spacing: { before: 0, after: 120 },
+            indent: { left: 360 },
+            children: [
+              new TextRun({
+                text: "–  Zurück an das federführende Referat",
+                font: FONT,
+                size: 24,
+              }),
+            ],
+          }),
+          new Paragraph({
+            spacing: { before: 0, after: 120 },
+            indent: { left: 360 },
+            children: [
+              new TextRun({
+                text: "–  Das Zentrum für Legistik (",
+                font: FONT,
+                size: 24,
+              }),
+              new TextRun({
+                text: "kontakt@zfl.bund.de",
+                font: FONT,
+                size: 24,
+              }),
+              new TextRun({ text: ")", font: FONT, size: 24 }),
+            ],
+          }),
         ],
       },
     ],
