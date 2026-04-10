@@ -1,4 +1,6 @@
 ---
+import { Icon } from "astro-icon/components";
+
 interface Props {
   prevPath?: string;
   nextPath?: string;
@@ -12,9 +14,20 @@ const isLast = !nextPath;
   <div class="flex w-full items-center justify-between gap-16 px-64">
     <div class="kern-body kern-body--muted">
       {
-        isLast
-          ? "Wenn Sie auf Weiter klicken, gelangen Sie zur Phase II der Frühphase"
-          : "Ihre Daten werden automatisch im Browser gespeichert"
+        isLast ? (
+          <>
+            <Icon name="ic:outline-info" class="mr-8 inline-block" />
+            Wenn Sie auf Weiter klicken, gelangen Sie zur Phase II der Frühphase
+          </>
+        ) : (
+          <>
+            <Icon
+              name="ic:outline-published-with-changes"
+              class="mr-8 inline-block"
+            />{" "}
+            Ihre Daten werden automatisch im Browser gespeichert
+          </>
+        )
       }
     </div>
     <div class="flex gap-16">
