@@ -8,7 +8,6 @@ import {
   ImageRun,
   Packer,
   Paragraph,
-  SectionType,
   ShadingType,
   SimpleField,
   Table,
@@ -25,7 +24,6 @@ import type { Inputs } from "./types";
 const FONT = "Arial";
 // Brand colors from global.css
 const COLOR_LABEL_BG = "F6F7FB"; // lavender-200
-const COLOR_DIVIDER = "CFD4E5"; // lavender-700
 // A4 content area: 11906 twips − 2 × 1440 margins = 9026 twips
 const CONTENT_WIDTH = 9026;
 const LABEL_WIDTH = 2976; // ~33%
@@ -97,13 +95,13 @@ function makeContactTable(data: Inputs): Table {
 
 function sectionHeading(title: string): Paragraph {
   return new Paragraph({
-    spacing: { before: 0, after: 320 },
+    spacing: { before: 640, after: 320 },
     children: [
       new TextRun({
         text: title,
         bold: true,
         font: FONT,
-        size: 28,
+        size: 32,
         color: "000000",
       }),
     ],
@@ -112,13 +110,18 @@ function sectionHeading(title: string): Paragraph {
 
 function fieldParagraphs(label: string, value: string): Paragraph[] {
   const lines = (value || "").split("\n");
+  const labelParagraph = label
+    ? [
+        new Paragraph({
+          spacing: { before: 200, after: 40 },
+          children: [
+            new TextRun({ text: label, bold: true, font: FONT, size: 24 }),
+          ],
+        }),
+      ]
+    : [];
   return [
-    new Paragraph({
-      spacing: { before: 200, after: 40 },
-      children: [
-        new TextRun({ text: label, bold: true, font: FONT, size: 24 }),
-      ],
-    }),
+    ...labelParagraph,
     ...lines.map(
       (line, i) =>
         new Paragraph({
@@ -190,7 +193,7 @@ export async function generateSteckbriefDocx(data: Inputs): Promise<void> {
                       spacing: { before: 40, after: 60 },
                       children: [
                         new TextRun({
-                          text: `Datum: ${dateStr}`,
+                          text: `Export: ${dateStr}`,
                           font: FONT,
                           size: 18,
                           color: "6B7280",
@@ -256,19 +259,8 @@ export async function generateSteckbriefDocx(data: Inputs): Promise<void> {
     },
   };
 
-  const nextPageProperties = { ...pageProperties, type: SectionType.NEXT_PAGE };
-
-  const divider = new Paragraph({
-    border: {
-      bottom: { style: BorderStyle.SINGLE, size: 6, color: COLOR_DIVIDER },
-    },
-    spacing: { before: 240, after: 400 },
-    children: [],
-  });
-
   const doc = new Document({
     sections: [
-      // Page 1: title + divider + Allgemeine Angaben (table layout)
       {
         properties: pageProperties,
         headers: { default: makeHeader() },
@@ -279,64 +271,23 @@ export async function generateSteckbriefDocx(data: Inputs): Promise<void> {
             children: [
               new TextRun({
                 text: titleText,
-                bold: true,
+                bold: false,
                 font: FONT,
-                size: 48,
+                size: 56,
               }),
             ],
           }),
-          divider,
           sectionHeading("Allgemeine Angaben"),
           makeContactTable(data),
-        ],
-      },
-      // Section: Kontext & Genese
-      {
-        properties: nextPageProperties,
-        headers: { default: makeHeader() },
-        footers: { default: makeFooter() },
-        children: [
-          sectionHeading("Kontext & Genese"),
-          ...fieldParagraphs("Gesetzesumfeld / Kontext", data.kontext),
-        ],
-      },
-      // Section: Problembeschreibung
-      {
-        properties: nextPageProperties,
-        headers: { default: makeHeader() },
-        footers: { default: makeFooter() },
-        children: [
+          sectionHeading("Kontext"),
+          ...fieldParagraphs("", data.kontext),
           sectionHeading("Problembeschreibung"),
-          ...fieldParagraphs("Problembeschreibung", data.problembeschreibung),
-        ],
-      },
-      // Section: Vorläufige Zielsetzung
-      {
-        properties: nextPageProperties,
-        headers: { default: makeHeader() },
-        footers: { default: makeFooter() },
-        children: [
+          ...fieldParagraphs("", data.problembeschreibung),
           sectionHeading("Vorläufige Zielsetzung"),
-          ...fieldParagraphs("Zielsetzung", data.zielsetzung),
-        ],
-      },
-      // Section: Einflussfaktoren & Akteure
-      {
-        properties: nextPageProperties,
-        headers: { default: makeHeader() },
-        footers: { default: makeFooter() },
-        children: [
-          sectionHeading("Einflussfaktoren & Akteure"),
+          ...fieldParagraphs("", data.zielsetzung),
+          sectionHeading("Einflussfaktoren und Akteure"),
           ...fieldParagraphs("Einflussfaktoren", data.einflussfaktoren),
           ...fieldParagraphs("Relevante Akteure", data.relevanteAkteure),
-        ],
-      },
-      // Section: Vorhabensbeschreibung
-      {
-        properties: nextPageProperties,
-        headers: { default: makeHeader() },
-        footers: { default: makeFooter() },
-        children: [
           sectionHeading("Vorhabensplanung"),
           ...fieldParagraphs(
             "Vorhabensbeschreibung",
