@@ -8,8 +8,6 @@ import { defineConfig } from "astro/config";
 import process from "node:process";
 import { generateRoutes } from "./integrations/routeGenerator";
 
-import preact from "@astrojs/preact";
-
 const isPreview = process.env.PUBLIC_STAGE === "preview";
 const PREVIEW_BASE_URL = process.env.PREVIEW_BASE_URL;
 
@@ -31,7 +29,6 @@ export default defineConfig({
     alpinejs(),
     sitemap(),
     mdx(),
-    preact({ compat: true }),
     generateRoutes({
       pagesDir: "src/pages",
       output: "src/config/routes.ts",

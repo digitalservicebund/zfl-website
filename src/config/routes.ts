@@ -120,30 +120,6 @@ export const staging = {
   isHiddenParent: false,
 } as const;
 
-export const steckbriefjs = {
-  key: "steckbriefjs",
-  path: "/steckbriefjs",
-  title: "SteckbriefJS",
-  parent: null,
-  sitemap: true,
-  isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
-  isHiddenParent: false,
-} as const;
-
-export const steckbriefReact = {
-  key: "steckbriefReact",
-  path: "/steckbrief-react",
-  title: "Steckbrief",
-  parent: null,
-  sitemap: true,
-  isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
-  isHiddenParent: false,
-} as const;
-
 export const ueber = {
   key: "ueber",
   path: "/ueber",
@@ -334,8 +310,6 @@ export const allRoutes = [
   schulungen,
   sitemap,
   staging,
-  steckbriefjs,
-  steckbriefReact,
   ueber,
   ueber_aktuelleMeldungen,
   ueber_dasIstNeu,

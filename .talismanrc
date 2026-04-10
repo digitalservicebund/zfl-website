@@ -74,24 +74,13 @@ fileignoreconfig:
   - filename: src/components/global/DebugGrid.astro
     allowed_patterns:
       - \@keydown
-  - filename: src/pages/steckbrief/_components/Steckbrief.tsx
+  - filename: src/pages/vorhaben/steckbrief/schritt-7.astro
     allowed_patterns:
       - key
-      - STORAGE_KEY
-  - filename: src/pages/steckbrief/_formSteps/Step10Zusammenfassung.tsx
+  - filename: src/pages/vorhaben/steckbrief/_components/SummaryCard.astro
     allowed_patterns:
       - key
-  - filename: src/pages/steckbriefjs/_components/Steckbrief.astro
-    allowed_patterns:
-      - key
-      - STORAGE_KEY
-  - filename: src/pages/steckbrief/schritt-9.astro
-    allowed_patterns:
-      - key
-  - filename: src/pages/steckbrief/_components/SummaryCard.astro
-    allowed_patterns:
-      - key
-  - filename: src/pages/steckbrief/_components/SteckbriefWrapper.astro
+  - filename: src/pages/vorhaben/steckbrief/_components/SteckbriefWrapper.astro
     allowed_patterns:
       - key
       - STORAGE_KEY
