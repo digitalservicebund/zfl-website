@@ -4,28 +4,26 @@ import { Icon } from "astro-icon/components";
 interface Props {
   prevPath?: string;
   nextPath?: string;
+  nextBtnText?: string;
 }
 
-const { prevPath, nextPath } = Astro.props;
+const { prevPath, nextPath, nextBtnText = "Weiter" } = Astro.props;
 const isLast = !nextPath;
 ---
 
 <div class="sticky bottom-0 z-10 border-t border-[#A5AAC3] bg-white py-16">
   <div class="flex w-full items-center justify-between gap-16 px-64">
-    <div class="kern-body kern-body--muted">
+    <div class="kern-body kern-body--muted flex items-center gap-12">
       {
         isLast ? (
           <>
-            <Icon name="ic:outline-info" class="mr-8 inline-block" />
+            <Icon name="ic:outline-info" />
             Wenn Sie auf Weiter klicken, gelangen Sie zur Phase II der Frühphase
           </>
         ) : (
           <>
-            <Icon
-              name="ic:outline-published-with-changes"
-              class="mr-8 inline-block"
-            />{" "}
-            Ihre Daten werden automatisch im Browser gespeichert
+            <Icon name="ic:outline-published-with-changes" /> Ihre Daten werden
+            automatisch im Browser gespeichert
           </>
         )
       }
@@ -63,7 +61,7 @@ const isLast = !nextPath;
           </button>
         ) : (
           <a href={nextPath} class="kern-btn kern-btn--primary">
-            <span class="kern-label">Weiter</span>
+            <span class="kern-label">{nextBtnText}</span>
             <span
               class="kern-icon kern-icon--arrow-forward"
               aria-hidden="true"

@@ -53,7 +53,13 @@ const nextPath = stepRoutes.find((r) => r.navOrder === pageNumber + 1)?.path;
         </div>
       </div>
     </div>
-    <ButtonBar prevPath={prevPath} nextPath={nextPath} />
+    {
+      Astro.slots.has("button-bar") ? (
+        <slot name="button-bar" />
+      ) : (
+        <ButtonBar prevPath={prevPath} nextPath={nextPath} />
+      )
+    }
   </main>
 </Layout>
 

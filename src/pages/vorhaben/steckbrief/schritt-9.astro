@@ -1,6 +1,7 @@
 ---
 import SteckbriefWrapper from "./_components/SteckbriefWrapper.astro";
 import SummaryCard from "./_components/SummaryCard.astro";
+import ButtonBar from "./_components/ButtonBar.astro";
 import {
   vorhaben_steckbrief_schritt1,
   vorhaben_steckbrief_schritt2,
@@ -10,6 +11,7 @@ import {
   vorhaben_steckbrief_schritt6,
   vorhaben_steckbrief_schritt7,
   vorhaben_steckbrief_schritt8,
+  vorhaben_steckbrief_schritt10,
 } from "@/config/routes";
 
 export const frontmatter = {
@@ -102,4 +104,10 @@ export const frontmatter = {
       ]}
     />
   </div>
+  <ButtonBar
+    slot="button-bar"
+    prevPath={vorhaben_steckbrief_schritt8.path}
+    nextPath={vorhaben_steckbrief_schritt10.path}
+    nextBtnText="Abschließen"
+  />
 </SteckbriefWrapper>
