@@ -35,7 +35,8 @@ const hintId = `hint_${id}`;
     aria-describedby={hintId}
     maxlength={MAX_LENGTH}
     x-ref="ta"
-    x-on:input="count = $el.value.length"></textarea>
+    x-on:input="count = $el.value.length"
+    data-charcount></textarea>
   <p class="mt-4 text-right text-sm text-gray-500">
     <span x-text="count">0</span> / {MAX_LENGTH}
   </p>

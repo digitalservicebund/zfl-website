@@ -70,32 +70,42 @@ const nextPath = stepRoutes.find((r) => r.navOrder === pageNumber + 1)?.path;
 
   const STORAGE_KEY = "steckbrief-prototype-v2-form-state";
 
-  const form = document.querySelector("form");
   const getState = () =>
     JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}") as Inputs;
-  const handleFormChange = function () {
-    if (!form) return;
-    const formData = Object.fromEntries(new FormData(form).entries());
-    const newState = { ...getState(), ...formData };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(newState));
-  };
-  form?.addEventListener("change", handleFormChange);
 
-  // Fill form with localStorage data
-  for (const [key, value] of Object.entries(getState())) {
-    if (!value) continue;
-    const el = form?.querySelector(`#${key}`) as HTMLInputElement;
-    if (el) el.value = value;
+  function init() {
+    const form = document.querySelector("form");
 
-    const summaryEl = form?.querySelector(`#summary-${key}`);
-    if (summaryEl) summaryEl.innerHTML = value;
+    const handleFormChange = function () {
+      if (!form) return;
+      const formData = Object.fromEntries(new FormData(form).entries());
+      const newState = { ...getState(), ...formData };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(newState));
+    };
+    form?.addEventListener("change", handleFormChange);
+
+    // Fill form with localStorage data
+    for (const [key, value] of Object.entries(getState())) {
+      if (!value) continue;
+      const el = form?.querySelector(`#${key}`) as HTMLInputElement;
+      if (el) {
+        el.value = value;
+        el.dispatchEvent(new Event("input", { bubbles: true })); // trigger char-count in Textarea
+      }
+
+      const summaryEl = form?.querySelector(`#summary-${key}`);
+      if (summaryEl) summaryEl.innerHTML = value;
+    }
+
+    const downloadDocx = () => {
+      const data = getState();
+      generateSteckbriefDocx(data);
+    };
+
+    const downloadBtns = document.querySelectorAll(".docx-download-btn");
+    downloadBtns.forEach((btn) => btn.addEventListener("click", downloadDocx));
   }
 
-  const downloadDocx = () => {
-    const data = getState();
-    generateSteckbriefDocx(data);
-  };
-
-  const downloadBtns = document.querySelectorAll(".docx-download-btn");
-  downloadBtns.forEach((btn) => btn.addEventListener("click", downloadDocx));
+  // astro:page-load fires on initial load and after every ClientRouter navigation
+  document.addEventListener("astro:page-load", init);
 </script>
