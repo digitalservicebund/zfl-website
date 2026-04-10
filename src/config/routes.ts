@@ -9,6 +9,7 @@ export type Route = {
   readonly isStagingOnly: boolean;
   readonly navOrder: number | null;
   readonly navLabel: string | null;
+  readonly isHiddenParent: boolean;
 };
 
 export const barrierefreiheit = {
@@ -20,6 +21,7 @@ export const barrierefreiheit = {
   isStagingOnly: false,
   navOrder: null,
   navLabel: null,
+  isHiddenParent: false,
 } as const;
 
 export const begleitungen = {
@@ -31,6 +33,7 @@ export const begleitungen = {
   isStagingOnly: false,
   navOrder: null,
   navLabel: null,
+  isHiddenParent: false,
 } as const;
 
 export const datenschutz = {
@@ -42,6 +45,7 @@ export const datenschutz = {
   isStagingOnly: false,
   navOrder: null,
   navLabel: null,
+  isHiddenParent: false,
 } as const;
 
 export const home = {
@@ -53,6 +57,7 @@ export const home = {
   isStagingOnly: false,
   navOrder: null,
   navLabel: null,
+  isHiddenParent: false,
 } as const;
 
 export const impressum = {
@@ -64,6 +69,7 @@ export const impressum = {
   isStagingOnly: false,
   navOrder: null,
   navLabel: null,
+  isHiddenParent: false,
 } as const;
 
 export const kontakt = {
@@ -75,6 +81,7 @@ export const kontakt = {
   isStagingOnly: false,
   navOrder: null,
   navLabel: null,
+  isHiddenParent: false,
 } as const;
 
 export const schulungen = {
@@ -86,6 +93,7 @@ export const schulungen = {
   isStagingOnly: false,
   navOrder: null,
   navLabel: null,
+  isHiddenParent: false,
 } as const;
 
 export const sitemap = {
@@ -97,6 +105,7 @@ export const sitemap = {
   isStagingOnly: false,
   navOrder: null,
   navLabel: null,
+  isHiddenParent: false,
 } as const;
 
 export const staging = {
@@ -108,127 +117,7 @@ export const staging = {
   isStagingOnly: true,
   navOrder: null,
   navLabel: null,
-} as const;
-
-export const steckbrief = {
-  key: "steckbrief",
-  path: "/steckbrief",
-  title: "Steckbrief",
-  parent: null,
-  sitemap: false,
-  isStagingOnly: false,
-  navOrder: 3,
-  navLabel: null,
-} as const;
-
-export const steckbrief_schritt1 = {
-  key: "steckbrief_schritt1",
-  path: "/steckbrief/schritt-1",
-  title: "1. Allgemeine Angaben",
-  parent: steckbrief,
-  sitemap: false,
-  isStagingOnly: false,
-  navOrder: 1,
-  navLabel: null,
-} as const;
-
-export const steckbrief_schritt10 = {
-  key: "steckbrief_schritt10",
-  path: "/steckbrief/schritt-10",
-  title: "10. Herunterladen & Absenden",
-  parent: steckbrief,
-  sitemap: false,
-  isStagingOnly: false,
-  navOrder: 10,
-  navLabel: "10. Abschluss",
-} as const;
-
-export const steckbrief_schritt2 = {
-  key: "steckbrief_schritt2",
-  path: "/steckbrief/schritt-2",
-  title: "2. Kontext & Genese",
-  parent: steckbrief,
-  sitemap: false,
-  isStagingOnly: false,
-  navOrder: 2,
-  navLabel: null,
-} as const;
-
-export const steckbrief_schritt3 = {
-  key: "steckbrief_schritt3",
-  path: "/steckbrief/schritt-3",
-  title: "3. Problembeschreibung",
-  parent: steckbrief,
-  sitemap: false,
-  isStagingOnly: false,
-  navOrder: 3,
-  navLabel: "3. Problem",
-} as const;
-
-export const steckbrief_schritt4 = {
-  key: "steckbrief_schritt4",
-  path: "/steckbrief/schritt-4",
-  title: "4. Einflussfaktoren & relevante Akteure",
-  parent: steckbrief,
-  sitemap: false,
-  isStagingOnly: false,
-  navOrder: 4,
-  navLabel: "4. Einflussfaktoren",
-} as const;
-
-export const steckbrief_schritt5 = {
-  key: "steckbrief_schritt5",
-  path: "/steckbrief/schritt-5",
-  title: "5. Vorläufige Zielsetzung",
-  parent: steckbrief,
-  sitemap: false,
-  isStagingOnly: false,
-  navOrder: 5,
-  navLabel: "5. Zielsetzung",
-} as const;
-
-export const steckbrief_schritt6 = {
-  key: "steckbrief_schritt6",
-  path: "/steckbrief/schritt-6",
-  title: "6. Vorhabensbeschreibung",
-  parent: steckbrief,
-  sitemap: false,
-  isStagingOnly: false,
-  navOrder: 6,
-  navLabel: "6. Vorhaben",
-} as const;
-
-export const steckbrief_schritt7 = {
-  key: "steckbrief_schritt7",
-  path: "/steckbrief/schritt-7",
-  title: "7. Projektplanung I",
-  parent: steckbrief,
-  sitemap: false,
-  isStagingOnly: false,
-  navOrder: 7,
-  navLabel: null,
-} as const;
-
-export const steckbrief_schritt8 = {
-  key: "steckbrief_schritt8",
-  path: "/steckbrief/schritt-8",
-  title: "8. Projektplanung II",
-  parent: steckbrief,
-  sitemap: false,
-  isStagingOnly: false,
-  navOrder: 8,
-  navLabel: null,
-} as const;
-
-export const steckbrief_schritt9 = {
-  key: "steckbrief_schritt9",
-  path: "/steckbrief/schritt-9",
-  title: "9. Zusammenfassung",
-  parent: steckbrief,
-  sitemap: false,
-  isStagingOnly: false,
-  navOrder: 9,
-  navLabel: null,
+  isHiddenParent: false,
 } as const;
 
 export const steckbriefjs = {
@@ -240,6 +129,7 @@ export const steckbriefjs = {
   isStagingOnly: false,
   navOrder: null,
   navLabel: null,
+  isHiddenParent: false,
 } as const;
 
 export const steckbriefReact = {
@@ -251,6 +141,7 @@ export const steckbriefReact = {
   isStagingOnly: false,
   navOrder: null,
   navLabel: null,
+  isHiddenParent: false,
 } as const;
 
 export const ueber = {
@@ -262,6 +153,7 @@ export const ueber = {
   isStagingOnly: false,
   navOrder: null,
   navLabel: null,
+  isHiddenParent: false,
 } as const;
 
 export const ueber_aktuelleMeldungen = {
@@ -273,6 +165,7 @@ export const ueber_aktuelleMeldungen = {
   isStagingOnly: false,
   navOrder: 3,
   navLabel: null,
+  isHiddenParent: false,
 } as const;
 
 export const ueber_dasIstNeu = {
@@ -284,6 +177,7 @@ export const ueber_dasIstNeu = {
   isStagingOnly: false,
   navOrder: 1,
   navLabel: null,
+  isHiddenParent: false,
 } as const;
 
 export const ueber_zahlenUndFakten = {
@@ -295,6 +189,7 @@ export const ueber_zahlenUndFakten = {
   isStagingOnly: false,
   navOrder: 2,
   navLabel: null,
+  isHiddenParent: false,
 } as const;
 
 export const vorhaben = {
@@ -305,7 +200,140 @@ export const vorhaben = {
   sitemap: true,
   isStagingOnly: false,
   navOrder: null,
+  navLabel: "Ihr Vorhaben",
+  isHiddenParent: false,
+} as const;
+
+export const vorhaben_steckbrief = {
+  key: "vorhaben_steckbrief",
+  path: "/vorhaben/steckbrief",
+  title: "Steckbrief",
+  parent: vorhaben,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: null,
   navLabel: null,
+  isHiddenParent: true,
+} as const;
+
+export const vorhaben_steckbrief_schritt1 = {
+  key: "vorhaben_steckbrief_schritt1",
+  path: "/vorhaben/steckbrief/schritt-1",
+  title: "1. Allgemeine Angaben",
+  parent: vorhaben_steckbrief,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 1,
+  navLabel: null,
+  isHiddenParent: false,
+} as const;
+
+export const vorhaben_steckbrief_schritt10 = {
+  key: "vorhaben_steckbrief_schritt10",
+  path: "/vorhaben/steckbrief/schritt-10",
+  title: "10. Herunterladen & Absenden",
+  parent: vorhaben_steckbrief,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 10,
+  navLabel: "10. Abschluss",
+  isHiddenParent: false,
+} as const;
+
+export const vorhaben_steckbrief_schritt2 = {
+  key: "vorhaben_steckbrief_schritt2",
+  path: "/vorhaben/steckbrief/schritt-2",
+  title: "2. Kontext & Genese",
+  parent: vorhaben_steckbrief,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 2,
+  navLabel: null,
+  isHiddenParent: false,
+} as const;
+
+export const vorhaben_steckbrief_schritt3 = {
+  key: "vorhaben_steckbrief_schritt3",
+  path: "/vorhaben/steckbrief/schritt-3",
+  title: "3. Problembeschreibung",
+  parent: vorhaben_steckbrief,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 3,
+  navLabel: "3. Problem",
+  isHiddenParent: false,
+} as const;
+
+export const vorhaben_steckbrief_schritt4 = {
+  key: "vorhaben_steckbrief_schritt4",
+  path: "/vorhaben/steckbrief/schritt-4",
+  title: "4. Einflussfaktoren & relevante Akteure",
+  parent: vorhaben_steckbrief,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 4,
+  navLabel: "4. Einflussfaktoren",
+  isHiddenParent: false,
+} as const;
+
+export const vorhaben_steckbrief_schritt5 = {
+  key: "vorhaben_steckbrief_schritt5",
+  path: "/vorhaben/steckbrief/schritt-5",
+  title: "5. Vorläufige Zielsetzung",
+  parent: vorhaben_steckbrief,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 5,
+  navLabel: "5. Zielsetzung",
+  isHiddenParent: false,
+} as const;
+
+export const vorhaben_steckbrief_schritt6 = {
+  key: "vorhaben_steckbrief_schritt6",
+  path: "/vorhaben/steckbrief/schritt-6",
+  title: "6. Vorhabensbeschreibung",
+  parent: vorhaben_steckbrief,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 6,
+  navLabel: "6. Vorhaben",
+  isHiddenParent: false,
+} as const;
+
+export const vorhaben_steckbrief_schritt7 = {
+  key: "vorhaben_steckbrief_schritt7",
+  path: "/vorhaben/steckbrief/schritt-7",
+  title: "7. Projektplanung I",
+  parent: vorhaben_steckbrief,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 7,
+  navLabel: null,
+  isHiddenParent: false,
+} as const;
+
+export const vorhaben_steckbrief_schritt8 = {
+  key: "vorhaben_steckbrief_schritt8",
+  path: "/vorhaben/steckbrief/schritt-8",
+  title: "8. Projektplanung II",
+  parent: vorhaben_steckbrief,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 8,
+  navLabel: null,
+  isHiddenParent: false,
+} as const;
+
+export const vorhaben_steckbrief_schritt9 = {
+  key: "vorhaben_steckbrief_schritt9",
+  path: "/vorhaben/steckbrief/schritt-9",
+  title: "9. Zusammenfassung",
+  parent: vorhaben_steckbrief,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 9,
+  navLabel: null,
+  isHiddenParent: false,
 } as const;
 
 export const werkzeuge = {
@@ -317,6 +345,7 @@ export const werkzeuge = {
   isStagingOnly: false,
   navOrder: null,
   navLabel: null,
+  isHiddenParent: false,
 } as const;
 
 export const allRoutes = [
@@ -329,17 +358,6 @@ export const allRoutes = [
   schulungen,
   sitemap,
   staging,
-  steckbrief,
-  steckbrief_schritt1,
-  steckbrief_schritt10,
-  steckbrief_schritt2,
-  steckbrief_schritt3,
-  steckbrief_schritt4,
-  steckbrief_schritt5,
-  steckbrief_schritt6,
-  steckbrief_schritt7,
-  steckbrief_schritt8,
-  steckbrief_schritt9,
   steckbriefjs,
   steckbriefReact,
   ueber,
@@ -347,5 +365,16 @@ export const allRoutes = [
   ueber_dasIstNeu,
   ueber_zahlenUndFakten,
   vorhaben,
+  vorhaben_steckbrief,
+  vorhaben_steckbrief_schritt1,
+  vorhaben_steckbrief_schritt10,
+  vorhaben_steckbrief_schritt2,
+  vorhaben_steckbrief_schritt3,
+  vorhaben_steckbrief_schritt4,
+  vorhaben_steckbrief_schritt5,
+  vorhaben_steckbrief_schritt6,
+  vorhaben_steckbrief_schritt7,
+  vorhaben_steckbrief_schritt8,
+  vorhaben_steckbrief_schritt9,
   werkzeuge,
 ] as const;

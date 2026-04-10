@@ -2,7 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import HintSidebar from "./HintSidebar.astro";
 import ButtonBar from "./ButtonBar.astro";
-import { steckbrief, allRoutes } from "@/config/routes";
+import { vorhaben_steckbrief, allRoutes } from "@/config/routes";
 
 type Props = {
   title: string;
@@ -11,7 +11,7 @@ type Props = {
 };
 const { title, pageNumber, isWide } = Astro.props;
 
-const stepRoutes = allRoutes.filter((r) => r.parent === steckbrief);
+const stepRoutes = allRoutes.filter((r) => r.parent === vorhaben_steckbrief);
 const totalPages = stepRoutes.length;
 const prevPath = stepRoutes.find((r) => r.navOrder === pageNumber - 1)?.path;
 const nextPath = stepRoutes.find((r) => r.navOrder === pageNumber + 1)?.path;

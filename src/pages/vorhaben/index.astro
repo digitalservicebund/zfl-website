@@ -1,11 +1,12 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
-import { steckbrief } from "@/config/routes";
+import { vorhaben_steckbrief_schritt1 } from "@/config/routes";
 
 export const frontmatter = {
   title: "Vorhaben erarbeiten",
   sitemap: true,
+  navLabel: "Ihr Vorhaben",
 };
 ---
 
@@ -29,7 +30,7 @@ export const frontmatter = {
             <span class="kern-number">1</span>
             <div class="kern-task-list__title" id="task1-title">
               <a
-                href={steckbrief.path}
+                href={vorhaben_steckbrief_schritt1.path}
                 class="kern-link kern-link--stretched"
                 aria-describedby="task1-status"
               >

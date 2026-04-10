@@ -2,14 +2,14 @@
 import SteckbriefWrapper from "./_components/SteckbriefWrapper.astro";
 import SummaryCard from "./_components/SummaryCard.astro";
 import {
-  steckbrief_schritt1,
-  steckbrief_schritt2,
-  steckbrief_schritt3,
-  steckbrief_schritt4,
-  steckbrief_schritt5,
-  steckbrief_schritt6,
-  steckbrief_schritt7,
-  steckbrief_schritt8,
+  vorhaben_steckbrief_schritt1,
+  vorhaben_steckbrief_schritt2,
+  vorhaben_steckbrief_schritt3,
+  vorhaben_steckbrief_schritt4,
+  vorhaben_steckbrief_schritt5,
+  vorhaben_steckbrief_schritt6,
+  vorhaben_steckbrief_schritt7,
+  vorhaben_steckbrief_schritt8,
 } from "@/config/routes";
 
 export const frontmatter = {
@@ -34,7 +34,7 @@ export const frontmatter = {
   <div class="flex flex-col">
     <SummaryCard
       title="Allgemeine Angaben"
-      editPath={steckbrief_schritt1.path}
+      editPath={vorhaben_steckbrief_schritt1.path}
       items={[
         { label: "Arbeitstitel des Vorhabens", id: "arbeitstitel" },
         { label: "Aktenzeichen", id: "aktenzeichen" },
@@ -43,7 +43,7 @@ export const frontmatter = {
       ]}
     />
     <SummaryCard
-      editPath={steckbrief_schritt1.path}
+      editPath={vorhaben_steckbrief_schritt1.path}
       title="Kontaktdaten"
       items={[
         { label: "Name", id: "name" },
@@ -52,17 +52,17 @@ export const frontmatter = {
       ]}
     />
     <SummaryCard
-      editPath={steckbrief_schritt2.path}
+      editPath={vorhaben_steckbrief_schritt2.path}
       title="Kontext und Genese"
       items={[{ label: "Kontext", id: "kontext" }]}
     />
     <SummaryCard
-      editPath={steckbrief_schritt3.path}
+      editPath={vorhaben_steckbrief_schritt3.path}
       title="Problembeschreibung"
       items={[{ label: "Problembeschreibung", id: "problembeschreibung" }]}
     />
     <SummaryCard
-      editPath={steckbrief_schritt4.path}
+      editPath={vorhaben_steckbrief_schritt4.path}
       title="Einflussfaktoren & Akteure"
       items={[
         { label: "Einflussfaktoren", id: "einflussfaktoren" },
@@ -70,12 +70,12 @@ export const frontmatter = {
       ]}
     />
     <SummaryCard
-      editPath={steckbrief_schritt5.path}
+      editPath={vorhaben_steckbrief_schritt5.path}
       title="Vorläufige Zielsetzung"
       items={[{ label: "Zielsetzung", id: "zielsetzung" }]}
     />
     <SummaryCard
-      editPath={steckbrief_schritt6.path}
+      editPath={vorhaben_steckbrief_schritt6.path}
       title="Vorhabensbeschreibung"
       items={[
         {
@@ -86,7 +86,7 @@ export const frontmatter = {
       ]}
     />
     <SummaryCard
-      editPath={steckbrief_schritt7.path}
+      editPath={vorhaben_steckbrief_schritt7.path}
       title="Projektplanung I"
       items={[
         { label: "Zeithorizont", id: "zeithorizont" },
@@ -94,7 +94,7 @@ export const frontmatter = {
       ]}
     />
     <SummaryCard
-      editPath={steckbrief_schritt8.path}
+      editPath={vorhaben_steckbrief_schritt8.path}
       title="Projektplanung II"
       items={[
         { label: "Risikoeinschätzung", id: "risikoeinschaetzung" },

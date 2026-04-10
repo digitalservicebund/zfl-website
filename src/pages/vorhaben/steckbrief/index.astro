@@ -1,0 +1,11 @@
+---
+import { vorhaben_steckbrief_schritt1 } from "@/config/routes";
+
+export const frontmatter = {
+  title: "Steckbrief",
+  sitemap: false,
+  isHiddenParent: true,
+};
+
+return Astro.redirect(vorhaben_steckbrief_schritt1.path);
+---
