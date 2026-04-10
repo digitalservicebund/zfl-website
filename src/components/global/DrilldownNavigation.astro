@@ -47,7 +47,7 @@ function getPanelElementId(panelId: string) {
       )}
       <ul class="list-unstyled max-w-none space-y-4 p-0">
         {/* Parent section entry */}
-        {panel.sectionRoute && (
+        {panel.sectionRoute && !panel.sectionRoute.isHiddenParent && (
           <DrilldownNavigationItem
             item={panel.sectionRoute}
             currentPath={currentPath}
