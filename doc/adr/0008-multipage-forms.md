@@ -29,9 +29,6 @@ We have decided to stay frameworkless (Vanilla JS or Alpine JS) to avoid the ove
 We will implement the wizard as a Multi-Page Application (MPA), where every form is a dedicated .astro route.
 Each step resides at its own URL (e.g., /steckbrief/schritt-1, /steckbrief/schritt-2).
 
-> [!IMPORTANT]
-> **To be defined:** How do we redirect the user if the form is not opened from step 1?
-
 ### State Persistence
 
 Form input will be either saved to localStorage or hydrate form fields with existing data from localStorage.
@@ -60,18 +57,14 @@ src/pages/steckbrief/
 
 ### Benefits
 
-Performance: No framework runtime (React/Vue) is loaded, keeping the site light.
+**Proportional Architecture (Avoiding Over-engineering):** Our requirements for the forms itself are simple: linear progression of mostly static text inputs without any complex branching logic, dynamic field arrays, or any cross-component state synchronization. Adopting a heavy UI framework (like React or Vue) to handle this would introduce unnecessary architectural complexity to solve problems native web standards can solve for us.
 
-Persistence: Because data is in localStorage, a user can close the tab and return later to find their progress saved.
-
-UX: The "Back" button works as expected without any extra implementation
+**Persistence && UX**: Because data is stored in `localStorage`, a user can safely close the tab or accidentally navigate away and return later to find their progress saved. Additionally, utilizing a MPA architecture ensures the browser's native "Back" button works without requiring a custom implementation.
 
 ### Drawbacks & Mitigations
 
-**Direct Access Risk**
-
-Because we are implementing a multi-page architecture where each form step has its own distinct URL (e.g., /steckbrief/step-3), users can manually type these URLs or use bookmarks to jump directly into the middle of the flow.
-
-Technically, this does not cause a data persistence issue, as the individual form steps do not rely on each other's content to render. However, it introduces a severe UX flaw. A user could bypass initial steps, reach the final summary page, and download the generated .docx document with missing or incomplete information without ever realizing they skipped required sections.
-
+**Direct Access Risk**: Because we are implementing a multi-page architecture where each form step has its own distinct URL (e.g., /steckbrief/step-3), users can manually type these URLs or use bookmarks to jump directly into the middle of the flow.
+Technically, this does not cause a data persistence issue, as the individual form steps do not rely on each other's content to render. However, a user could bypass initial steps, reach the final summary page, and download the generated .docx document with missing or incomplete information without realizing they skipped required sections.
 Because our Nginx server is serving static HTML and has no access to the browser's localStorage, we cannot perform state-aware redirects on the server side. To prevent users from silently generating incomplete documents, we must implement route guarding strictly on the client side via Javascript.
+
+**Frameworkless Overhead**: By relying on VanillaJS and HTML, we don't have access to form libraries like React Hook Form that handles complex validation schemas out of the box. Therefore, We will rely strictly on native HTML5 validation constraints (`required`, `pattern`, `min`, `max`) to handle validation without external libraries which covers for now all our usecases for input validation.

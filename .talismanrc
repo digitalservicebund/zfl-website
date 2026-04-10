@@ -103,7 +103,7 @@ fileignoreconfig:
     allowed_patterns:
       - \@keydown
   - filename: doc/adr/0008-multipage-forms.md
-    checksum: 54b3ad48ab908eb572dc96046baede3a6bbf6474c68ce7c46e3f35a3e8846ca3
+    checksum: 372068602b2b48dccf8c66eb8d82b7621108af3d660156cd66b4b2ed49359b96
 scopeconfig:
   - scope: node
 allowed_patterns:
