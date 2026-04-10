@@ -1,5 +1,4 @@
 ---
-import Card from "@/components/Card.astro";
 import Hero from "@/components/Hero.astro";
 import SupportCard from "@/components/blocks/SupportCard.astro";
 import { ZFL_PHONE, ZFL_EMAIL_SCHULUNG } from "@/config/constants.ts";
@@ -20,7 +19,7 @@ export const frontmatter = {
     <Hero level="main">
       <div class="items-center gap-32 md:flex md:flex-row">
         <div>
-          <h1>In Schulungen praktisches Wissen und Kompetenzen erlangen</h1>
+          <h1>Schulungen</h1>
           <div>
             <p>
               In den umsetzungsorientierten Schulungen des Zentrum für Legistik
@@ -28,143 +27,167 @@ export const frontmatter = {
               Erarbeitung von praxisnahen und bürokratiearmen Regelungen
               unterstützen.
             </p>
-            <div class="space-y-8">
-              <a class="block" href="#schulungen-zfl">
-                ↓ Schulungen des Zentrum für Legistik
-              </a>
-              <a class="block" href="#schulungen-weitere">
-                ↓ Weitere Angebote
-              </a>
-            </div>
+            <button type="button" class="kern-btn kern-btn--primary">
+              <span class="kern-label">Jetzt anmelden</span>
+            </button>
+            <button class="kern-btn kern-btn--secondary">
+              <!-- <Icon
+                name="ic:baseline-arrow-downward"
+                class="kern-label"
+                aria-hidden
+              /> -->
+              <span class="kern-label">Weitere Angebote</span>
+              <span
+                class="kern-icon kern-icon--arrow-forward"
+                aria-hidden="true"
+              >
+              </span>
+            </button>
           </div>
         </div>
         <Image
-          class="hidden size-288 md:block"
+          class="pb-34.8 pr-73.3 hidden h-270 w-442 pt-37 pl-39 md:block"
           src={schulungenImage}
           alt=""
           aria-hidden
         />
       </div>
     </Hero>
-
     <section>
-      <Card look="lavender" id="schulungen-zfl">
-        <h2>Schulungen des Zentrum für Legistik</h2>
+      <h2>Schulungen des Zentrum für Legistik</h2>
 
-        <h3>
-          Regelungen digitaltauglich gestalten – praktische Tipps für den
-          Digitalcheck <span class="whitespace-nowrap">(1,5 Stunden)</span>
-        </h3>
-        <p>
-          Inhalte: Digitalcheck erfolgreich bearbeiten, digitaltaugliche
-          Formulierungen, Anwenden der Prinzipien für Digitaltauglichkeit,
-          EU-Interoperabilität
-        </p>
-
-        <div>
-          <Schedule appointments={appointments} caption="Nächste Termine" />
-        </div>
-
-        <h3>Methodenblitz: Umgang mit Risiken</h3>
-        <p>
-          Im Rahmen dieser neuen Veranstaltungsreihe werden einzelne Methoden
-          der innovativen Rechtsetzung vorgestellt und praktische
-          Anwendungsübungen mitgegeben. Die Ergebnisse dieser Übungen werden in
-          einem zweiten Folgetermin besprochen. Das Format fokussiert sich auf
-          die Erstellung von Regelungsvorhaben.
-        </p>
-        <p>Mittwoch, 22.04.2026: 09:10 – 10:00 Uhr (online)</p>
-        <p>
-          Mittwoch, 06.05.2026: 09:15 – 09:45 Uhr (online)<br />Folgetermin zur
-          Besprechung der Übung und Rückfragen
-        </p>
-
-        <h3>
-          Basisschulung für Legistinnen und Legisten
-          <span class="whitespace-nowrap">(4 Tage)</span>
-        </h3>
-        <p>
-          Inhalte: Umsetzungsperspektive verstehen, Visualisierungen erstellen,
-          Entscheidungsbäume ausarbeiten, Rechtsförmlichkeit und verständliche
-          Sprache sicherstellen
-        </p>
-        <p>Die nächsten Termine werden demnächst bekanntgegeben.</p>
-        <h3>Anmeldung</h3>
-        <p>
-          Schicken Sie uns für eine Anmeldung den Schulungs- oder Modul-Namen
-          und Termin an die E-Mail <a href={ZFL_EMAIL_SCHULUNG.url}
-            >{ZFL_EMAIL_SCHULUNG.display}</a
-          > und wir bestätigen die Anmeldung.
-        </p>
-      </Card>
-
-      <h2 id="schulungen-weitere" class="scroll-m-20">Weitere Angebote</h2>
-
-      <h3>Bundesstiftung Gleichstellung (Gleichstellungs-Check)</h3>
+      <h3>
+        Regelungen digitaltauglich gestalten – praktische Tipps für den
+        Digitalcheck <span class="whitespace-nowrap">(1,5 Stunden)</span>
+      </h3>
       <p>
-        Die für ein Gesetzesvorhaben fachlich Zuständigen lernen in der
-        Schulung, wie Gesetzentwürfe systematisch auf ihre Auswirkungen auf die
-        Gleichstellung der Geschlechter geprüft werden können.
+        Inhalte: Digitalcheck erfolgreich bearbeiten, digitaltaugliche
+        Formulierungen, Anwenden der Prinzipien für Digitaltauglichkeit,
+        EU-Interoperabilität
       </p>
 
-      <h4>
-        Schulung zur gleichstellungsorientierten Gesetzesfolgenabschätzung nach
-        § 2 GGO
-      </h4>
+      <div>
+        <Schedule appointments={appointments} caption="Nächste Termine" />
+      </div>
+
+      <h3>Methodenblitz: Umgang mit Risiken</h3>
       <p>
-        Schulung an unterschiedlichen Tagen im Juni 2026 - digital und in
-        Präsenz<br />
-        <a
-          href="https://www.gleichstellungs-check.de/de/topic/6.schulungen.html"
-          target="_blank">Mehr Informationen und Anmeldung</a
-        >
+        Im Rahmen dieser neuen Veranstaltungsreihe werden einzelne Methoden der
+        innovativen Rechtsetzung vorgestellt und praktische Anwendungsübungen
+        mitgegeben. Die Ergebnisse dieser Übungen werden in einem zweiten
+        Folgetermin besprochen. Das Format fokussiert sich auf die Erstellung
+        von Regelungsvorhaben.
       </p>
+      <table class="zfl-table zfl-table--striped">
+        <caption class="sr-only"></caption>
+        <thead class="zfl-table__head">
+          <tr>
+            <th>Wochentag, Datum [TT. Monat]</th>
+            <th>Uhrzeit</th>
+            <th>Ort</th>
+          </tr>
+        </thead>
+        <tbody class="zfl-table__body">
+          <tr class="[&_td]:pr-16 [&_td]:pb-8">
+            <td>Mittwoch, 22.04.2026</td>
+            <td>09:10 – 10:00 Uhr</td>
+            <td> Online </td>
+          </tr>
+          <tr>
+            <td>Mittwoch, 06.06.2026</td>
+            <td>09:15 – 09:45 Uhr</td>
+            <td>
+              Online (Folgetermin zur Besprechung der Übung und Rückfragen)
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-      <h3>Speyerer Zentrum für Gesetzgebung</h3>
+      <h3>
+        Basisschulung für Legistinnen und Legisten
+        <span class="whitespace-nowrap">(4 Tage)</span>
+      </h3>
       <p>
-        Das Zentrum für Gesetzgebung an der Deutschen Universität für
-        Verwaltungswissenschaften Speyer bietet im Bereich der
-        Gesetzgebungslehre Seminare und wissenschaftliche Vertiefung an.
-        Folgende Angebote befassen sich mit moderner Rechtsetzung:
+        Umsetzungsperspektive verstehen, Visualisierungen erstellen,
+        Entscheidungsbäume ausarbeiten, Rechtsförmlichkeit und verständliche
+        Sprache sicherstellen
       </p>
-
-      <h4>Tagung „Ambivalenzen moderner Verwaltung“</h4>
+      <p>Die nächsten Termine werden demnächst bekanntgegeben.</p>
+    </section>
+    <section class="bg-lavender-base breakout">
+      <h3>Anmeldung</h3>
       <p>
-        Zweitätige Tagung am 26. und 27. März 2026 in Speyer<br />
-        <a
-          href="https://weiterbildung.uni-speyer.de/suche/veranstaltungsdetails.html?action%5B26%5D=course&courseId=588-C-4388100&rowIndex=11"
-          target="_blank">Mehr Informationen und Anmeldung</a
-        >
-      </p>
-
-      <h4>Wissen in Legistik und Rechtsetzung erweitern</h4>
-      <p>
-        Lehr- und Weiterbildungsveranstaltungen zu den Themen Legistik und
-        Rechtsetzung – öffnen Sie hierzu den Bereich "Lehre und Weiterbildung"<br
-        />
-        <a
-          href="https://www.uni-speyer.de/lehrstuehle/level-2-1/prof-dr-ruth-weber/speyerer-zentrum-fuer-gesetzgebung"
-          target="_blank">Mehr Informationen</a
-        >
-      </p>
-
-      <h3>Statistisches Bundesamt - OnDEA</h3>
-
-      <h4>Einführung in die Grundlagen der Legistik</h4>
-      <p>
-        OnDEA bietet Video-Tutorials zu unterschiedlichen Themen an<br />
-        <a href="https://www.ondea.de/DE/ZfL/ZfL_node.html" target="_blank"
-          >Videos anzeigen</a
-        >
+        Schicken Sie uns für eine Anmeldung den Schulungs- oder Modul-Namen und
+        Termin an die E-Mail <a href={ZFL_EMAIL_SCHULUNG.url}
+          >{ZFL_EMAIL_SCHULUNG.display}</a
+        > und wir bestätigen die Anmeldung.
       </p>
     </section>
-
+    <section class="space-y-56">
+      <h2 id="schulungen-weitere" class="scroll-m-20">Weitere Angebote</h2>
+      <div class="bg-lavender-200 px-64 py-56">
+        <h3>Bundesstiftung Gleichstellung (Gleichstellungs-Check)</h3>
+        <p>
+          Die für ein Gesetzesvorhaben fachlich Zuständigen lernen in der
+          Schulung, wie Gesetzentwürfe systematisch auf ihre Auswirkungen auf
+          die Gleichstellung der Geschlechter geprüft werden können.
+        </p>
+        <ul>
+          <li>
+            <p class="font-bold">
+              Schulung zur gleichstellungsorientierten Gesetzesfolgenabschätzung
+              nach § 2 GGO
+            </p>
+            <p>
+              Schulung an unterschiedlichen Tagen im Juni 2026 - digital und in
+              Präsenz
+              <a
+                href="https://www.gleichstellungs-check.de/de/topic/6.schulungen.html"
+                target="_blank">Mehr Informationen und Anmeldung</a
+              >
+            </p>
+          </li>
+        </ul>
+        <h4></h4>
+        <p></p>
+      </div>
+      <div class="bg-lavender-200 px-64 py-56">
+        <h3>Speyerer Zentrum für Gesetzgebung</h3>
+        <p>
+          Das Zentrum für Gesetzgebung an der Deutschen Universität für
+          Verwaltungswissenschaften Speyer bietet im Bereich der
+          Gesetzgebungslehre Seminare und wissenschaftliche Vertiefung an.
+          Folgende Angebote befassen sich mit moderner Rechtsetzung:
+        </p>
+        <ul>
+          <li>
+            <p class="font-bold">Tagung „Ambivalenzen moderner Verwaltung“</p>
+            Zweitätige Tagung am 26. und 27. März 2026 in Speyer<br />
+            <a
+              href="https://weiterbildung.uni-speyer.de/suche/veranstaltungsdetails.html?action%5B26%5D=course&courseId=588-C-4388100&rowIndex=11"
+              target="_blank">Mehr Informationen und Anmeldung</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="bg-lavender-200 px-64 py-56">
+        <h3>Statistisches Bundesamt - OnDEA</h3>
+        <ul>
+          <li>
+            <p class="font-bold">Einführung in die Grundlagen der Legistik</p>
+            OnDEA bietet Video-Tutorials zu unterschiedlichen Themen an<br />
+            <a href="https://www.ondea.de/DE/ZfL/ZfL_node.html" target="_blank"
+              >Videos anzeigen</a
+            >
+          </li>
+        </ul>
+      </div>
+    </section>
     <section class="bg-lavender-base breakout">
       <SupportCard>
         <p>
-          Mit unseren Schulungsangeboten unterstützen wir Sie dabei, moderne und
-          wirksame Methoden der Rechtsetzung gezielt in Ihrer Arbeit
-          einzusetzen.
+          Wir unterstützen Sie gerne persönlich in allen Phasen der
+          Regelungsarbeit. Bei Fragen melden Sie sich unter:
         </p>
         <p>
           Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>
