@@ -92,7 +92,16 @@ export const frontmatter = {
           name="email"
           type="email"
           aria-required="true"
+          aria-describedby="email-error"
         />
+        <p class="kern-error" id="email-error" role="alert">
+          <span
+            class="kern-icon kern-icon--danger kern-icon--md"
+            aria-hidden="true"></span>
+          <span class="kern-body"
+            >Bitte geben Sie eine gültige E-Mail-Adresse ein.</span
+          >
+        </p>
       </div>
       <div class="kern-form-input flex-1">
         <label class="kern-label" for="telefonnummer">Ihre Telefonnummer</label>

@@ -44,3 +44,21 @@
   font-weight: var(--kern-typography-font-weight-semi-bold, 600);
   line-height: var(--kern-typography-line-height-static-medium, 24px);
 }
+
+@utility kern-form-input--error {
+  border-left: var(--kern-metric-border-width-bold, 4px) solid
+    var(--kern-color-feedback-danger, #bd0f09);
+  padding-left: var(--kern-metric-space-default, 16px);
+}
+
+@utility kern-form-input__input--error {
+  border-bottom: var(--kern-metric-border-width-default, 2px) solid
+    var(--kern-color-feedback-danger, #bd0f09);
+  background: var(--kern-color-feedback-danger-background, #feece8);
+}
+
+@utility kern-form-input__input--error-focus {
+  outline-color: var(--kern-color-feedback-danger, #bd0f09);
+  background: var(--kern-color-feedback-danger-background, #feece8);
+  border: none;
+}

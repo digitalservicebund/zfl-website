@@ -65,6 +65,30 @@ const nextPath = stepRoutes.find((r) => r.navOrder === pageNumber + 1)?.path;
   </main>
 </Layout>
 
+<style is:global>
+  @reference "@/styles/global.css";
+
+  .kern-form-input .kern-error {
+    display: none;
+  }
+
+  .kern-form-input__input:invalid {
+    @apply kern-form-input__input--error;
+  }
+
+  .kern-form-input__input:invalid:focus {
+    @apply kern-form-input__input--error-focus;
+  }
+
+  .kern-form-input__input:invalid ~ .kern-error {
+    display: flex;
+  }
+
+  .kern-form-input:has(.kern-form-input__input:invalid) {
+    @apply kern-form-input--error;
+  }
+</style>
+
 <script>
   import { generateSteckbriefDocx } from "../_utils/docxDownload.ts";
   import type { Inputs } from "../_utils/types.ts";
