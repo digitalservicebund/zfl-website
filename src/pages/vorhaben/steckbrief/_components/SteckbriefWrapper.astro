@@ -37,6 +37,7 @@ const nextPath = stepRoutes.find((r) => r.navOrder === pageNumber + 1)?.path;
             <progress id="progress1" value={pageNumber} max={totalPages}
             ></progress>
           </div>
+          <h1 class="sr-only">Steckbrief: {title}</h1>
           <form class="flex flex-col gap-32" novalidate>
             <slot />
           </form>
