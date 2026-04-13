@@ -6,6 +6,7 @@ import { expect, test } from "@playwright/test";
 test.describe("a11y", () => {
   const relevantRoutes = allRoutes
     .filter((route) => !route.isStagingOnly || isStaging)
+    .filter((route) => !route.isHiddenParent)
     .filter((route) => route !== staging);
   relevantRoutes.forEach((route) => {
     test(`${route.path} should not have any automatically detectable accessibility issues`, async ({
