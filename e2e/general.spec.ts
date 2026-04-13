@@ -8,7 +8,9 @@ const getTitle = (title?: string) =>
   title === "Zentrum für Legistik" ? title : `${title} — Zentrum für Legistik`;
 
 test.describe("page titles", () => {
-  const relevantRoutes = allRoutes.filter((route) => route !== staging);
+  const relevantRoutes = allRoutes.filter(
+    (route) => route !== staging && !route.isHiddenParent,
+  );
   relevantRoutes.forEach((route) => {
     test(`${route.path} has correct title`, async ({ page }) => {
       await page.goto(route.path);
