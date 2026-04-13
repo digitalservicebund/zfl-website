@@ -23,6 +23,7 @@ export const frontmatter = {
       isStagingOnly: true,
       navOrder: 20,
       navLabel: "Navigation label",
+      isHiddenParent: false,
     });
   });
 
@@ -60,6 +61,7 @@ export const frontmatter = {
       isStagingOnly: false,
       navOrder: null,
       navLabel: null,
+      isHiddenParent: false,
     });
   });
 
@@ -81,6 +83,7 @@ export const frontmatter = {
       isStagingOnly: false,
       navOrder: null,
       navLabel: null,
+      isHiddenParent: false,
     });
   });
 
