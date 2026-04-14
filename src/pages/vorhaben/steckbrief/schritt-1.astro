@@ -73,7 +73,7 @@ export const frontmatter = {
     </div>
 
     <div class="kern-form-input">
-      <label class="kern-label" for="name"> Ihr Name </label>
+      <label class="kern-label" for="name">Ihr Name</label>
       <input
         class="kern-form-input__input"
         id="name"
@@ -91,8 +91,10 @@ export const frontmatter = {
           id="email"
           name="email"
           type="email"
+          autocomplete="email"
           aria-required="true"
           aria-describedby="email-error"
+          pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
         />
         <p class="kern-error" id="email-error" role="alert">
           <span
@@ -110,6 +112,7 @@ export const frontmatter = {
           id="telefonnummer"
           name="telefonnummer"
           type="tel"
+          autocomplete="tel"
           aria-required="true"
         />
       </div>
