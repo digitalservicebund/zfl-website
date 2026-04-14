@@ -47,12 +47,16 @@ function getPanelElementId(panelId: string) {
       )}
       <ul class="list-unstyled max-w-none space-y-4 p-0">
         {/* Parent section entry */}
-        {panel.sectionRoute && !panel.sectionRoute.isHiddenParent && (
-          <DrilldownNavigationItem
-            item={panel.sectionRoute}
-            currentPath={currentPath}
-          />
-        )}
+        {panel.sectionRoute &&
+          !panel.sectionRoute
+            .isHiddenParent /* We have certain routes that are visible on the parent level,
+          but redirect to another page when selected. On that level,
+          the redirect target becomes the first visible item. */ && (
+            <DrilldownNavigationItem
+              item={panel.sectionRoute}
+              currentPath={currentPath}
+            />
+          )}
         {panel.items
           .filter((item) => item.isVisible)
           .map((item) => (
