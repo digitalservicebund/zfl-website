@@ -1,4 +1,5 @@
 ---
+import { ClientRouter } from "astro:transitions";
 import Layout from "@/layouts/Layout.astro";
 import HintSidebar from "./HintSidebar.astro";
 import ButtonBar from "./ButtonBar.astro";
@@ -18,6 +19,9 @@ const nextPath = stepRoutes.find((r) => r.navOrder === pageNumber + 1)?.path;
 ---
 
 <Layout title={title} noFooter>
+  <head>
+    <ClientRouter />
+  </head>
   <main>
     <div
       class="_gap-32 flex flex-1 flex-col lg:flex-row lg:items-stretch"

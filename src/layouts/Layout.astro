@@ -1,5 +1,4 @@
 ---
-import { ClientRouter } from "astro:transitions";
 import DebugGrid from "@/components/global/DebugGrid.astro";
 import Footer from "@/components/global/Footer.astro";
 import PageHeader from "@/components/global/PageHeader.astro";
@@ -70,8 +69,6 @@ const showSectionSidebar = getSectionNavigation(Astro.url.pathname) !== null;
       ],
     }}
   />
-
-  <ClientRouter />
 
   <body class="relative">
     {showDebugGrid && <DebugGrid />}
