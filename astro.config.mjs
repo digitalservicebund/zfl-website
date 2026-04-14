@@ -4,6 +4,7 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import icon from "astro-icon";
+import pagefind from "astro-pagefind";
 import { defineConfig } from "astro/config";
 import process from "node:process";
 import { generateRoutes } from "./integrations/routeGenerator";
@@ -33,6 +34,7 @@ export default defineConfig({
       pagesDir: "src/pages",
       output: "src/config/routes.ts",
     }),
+    pagefind(),
   ],
   build: {
     assets: "_astro",

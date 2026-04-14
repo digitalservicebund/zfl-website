@@ -33,7 +33,10 @@ fileignoreconfig:
   - filename: doc/routes.md
     allowed_patterns:
       - key
-  - filename: integrations/routeGenerator.ts
+  - filename: src/components/global/Search.astro
+    allowed_patterns:
+      - keyboard_ 
+  - filename: integrationsu/routeGenerator.ts
     allowed_patterns:
       - key
   - filename: integrations/routeGenerator.test.ts

@@ -1,0 +1,105 @@
+---
+import PagefindSearch from "astro-pagefind/components/Search";
+---
+
+<div class="flex items-center">
+  <PagefindSearch
+    id="search"
+    uiOptions={{
+      showImages: false,
+      translations: {
+        placeholder: "Suche",
+        clear_search: "Löschen",
+        load_more: "Mehr Ergebnisse laden",
+        search_label: "Suche diese Seite",
+        filters_label: "Filter",
+        zero_results: "Keine Ergebnisse für [SEARCH_TERM]",
+        many_results: "[COUNT] Ergebnisse für [SEARCH_TERM]",
+        one_result: "[COUNT] Ergebnis für [SEARCH_TERM]",
+        total_zero_results: "Keine Ergebnisse",
+        total_one_result: "[COUNT] Ergebnis",
+        total_many_results: "[COUNT] Ergebnisse",
+        alt_search:
+          "Keine Ergebnisse für [SEARCH_TERM]. Stattdessen werden Ergebnisse für [DIFFERENT_TERM] angezeigt",
+        search_suggestion:
+          "Keine Ergebnisse für [SEARCH_TERM]. Versuchen Sie eine der folgenden Suchen:",
+        searching: "Suche nach [SEARCH_TERM] …",
+        results_label: "Suchergebnisse",
+        keyboard_navigate: "navigieren",
+        keyboard_select: "auswählen",
+        keyboard_clear: "löschen",
+        keyboard_close: "schließen",
+        keyboard_search: "suchen",
+        error_search: "Suche fehlgeschlagen",
+        filter_selected_one: "[COUNT] ausgewählt",
+        filter_selected_many: "[COUNT] ausgewählt",
+        input_hint: "Ergebnisse werden während der Eingabe angezeigt",
+        loading: "Wird geladen",
+      },
+    }}
+  />
+</div>
+
+<style is:global>
+  /* Establish positioning context for the absolutely-placed drawer */
+  #search {
+    position: relative;
+  }
+
+  /* Override Pagefind search UI to match kern-form-input styling */
+  #search .pagefind-ui__form::before {
+    /* Center icon vertically regardless of input height */
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  #search .pagefind-ui__search-input {
+    height: var(--kern-metric-dimension-x-large, 48px);
+    background: var(--kern-color-form-input-background, #f7f7f9);
+    border: none;
+    border-bottom: var(--kern-metric-border-width-default, 2px) solid
+      var(--kern-color-form-input-border, #171a2b);
+    border-radius: var(--kern-metric-border-radius-small, 2px);
+    font-family: var(--kern-typography-font-family-default, "Fira Sans");
+    font-size: var(--kern-typography-font-size-static-medium, 18px);
+    font-weight: var(--kern-typography-font-weight-regular, 400);
+    line-height: var(--kern-typography-line-height-static-medium, 24px);
+    color: var(--kern-color-layout-text-default, #171a2b);
+  }
+
+  #search .pagefind-ui__search-input:hover {
+    border-bottom-width: var(--kern-metric-border-width-bold, 4px);
+  }
+
+  #search .pagefind-ui__search-input:focus {
+    outline: var(--kern-metric-border-width-bold, 4px) solid
+      var(--kern-color-form-input-border, #171a2b);
+    border: none;
+    background: var(--kern-color-form-input-background, #f7f7f9);
+  }
+
+  /* Adjust clear button to match 48px input (pagefind default is sized for 64px) */
+  #search .pagefind-ui__search-clear {
+    top: 50%;
+    transform: translateY(-50%);
+    height: calc(42px * var(--pagefind-ui-scale));
+    background: var(--kern-color-form-input-background, #f7f7f9);
+    color: var(--kern-color-layout-text-default, #171a2b);
+    border-radius: var(--kern-metric-border-radius-small, 2px);
+  }
+
+  /* Results drawer: absolutely positioned below the input, out of flow */
+  #search .pagefind-ui__drawer {
+    position: absolute;
+    top: 100%;
+    right: unset;
+    left: 0;
+    z-index: 50;
+    width: 100vw;
+    max-width: 600px;
+    background: white;
+    padding: 0 var(--kern-metric-space-default, 16px)
+      var(--kern-metric-space-default, 16px);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+  }
+</style>

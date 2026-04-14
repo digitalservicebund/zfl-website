@@ -1,4 +1,5 @@
 ---
+import Search from "@/components/global/Search.astro";
 import DrilldownNavigation from "@/components/global/DrilldownNavigation.astro";
 import Kopfzeile from "@/components/global/Kopfzeile.astro";
 import { ZFL_PHONE } from "@/config/constants";
@@ -72,41 +73,53 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
       <p class="text-xl font-bold max-[1050px]:hidden">Zentrum für Legistik</p>
     </a>
 
-    <!-- Desktop Navigation -->
-    <nav class="hidden min-[900px]:flex" aria-label="Hauptnavigation">
-      {
-        headerNavigation.map((route) => (
-          <a
-            href={route.path}
-            class={navItemStyle("main", currentPath === route.path)}
-            aria-current={currentPath === route.path ? "page" : undefined}
-          >
-            {getRouteLabel(route)}
-          </a>
-        ))
-      }
-    </nav>
+    <div class="flex items-stretch gap-32">
+      <Search />
 
-    <!-- Mobile Menu Toggle -->
-    <div class="flex min-[900px]:hidden">
-      <a
-        href={ZFL_PHONE.url}
-        class={navItemStyle("main")}
-        aria-label={ZFL_PHONE.display}
-      >
-        <Icon name="ic:twotone-phone-enabled" class="size-24 -scale-x-100" />
-      </a>
-      <button
-        type="button"
-        class:list={[navItemStyle("main"), "mobile-menu-toggle"]}
-        aria-label="Menü öffnen / schließen"
-        aria-controls={mobileMenuId}
-        :aria-expanded="mobileMenuOpen"
-        @click="mobileMenuOpen = !mobileMenuOpen; kontaktOpen = false; if (mobileMenuOpen) $dispatch('page-header-mobile-menu-opened')"
-      >
-        <Icon x-show="!mobileMenuOpen" name="ic:twotone-menu" class="size-24" />
-        <Icon x-show="mobileMenuOpen" name="ic:outline-close" class="size-24" />
-      </button>
+      <!-- Desktop Navigation -->
+      <nav class="hidden h-full min-[900px]:flex" aria-label="Hauptnavigation">
+        {
+          headerNavigation.map((route) => (
+            <a
+              href={route.path}
+              class={navItemStyle("main", currentPath === route.path)}
+              aria-current={currentPath === route.path ? "page" : undefined}
+            >
+              {getRouteLabel(route)}
+            </a>
+          ))
+        }
+      </nav>
+
+      <!-- Mobile Menu Toggle -->
+      <div class="flex h-full min-[900px]:hidden">
+        <a
+          href={ZFL_PHONE.url}
+          class={navItemStyle("main")}
+          aria-label={ZFL_PHONE.display}
+        >
+          <Icon name="ic:twotone-phone-enabled" class="size-24 -scale-x-100" />
+        </a>
+        <button
+          type="button"
+          class:list={[navItemStyle("main"), "mobile-menu-toggle"]}
+          aria-label="Menü öffnen / schließen"
+          aria-controls={mobileMenuId}
+          :aria-expanded="mobileMenuOpen"
+          @click="mobileMenuOpen = !mobileMenuOpen; kontaktOpen = false; if (mobileMenuOpen) $dispatch('page-header-mobile-menu-opened')"
+        >
+          <Icon
+            x-show="!mobileMenuOpen"
+            name="ic:twotone-menu"
+            class="size-24"
+          />
+          <Icon
+            x-show="mobileMenuOpen"
+            name="ic:outline-close"
+            class="size-24"
+          />
+        </button>
+      </div>
     </div>
   </div>
   <div
