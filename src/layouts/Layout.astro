@@ -1,4 +1,5 @@
 ---
+import { ClientRouter } from "astro:transitions";
 import DebugGrid from "@/components/global/DebugGrid.astro";
 import Footer from "@/components/global/Footer.astro";
 import PageHeader from "@/components/global/PageHeader.astro";
@@ -25,7 +26,12 @@ const showSectionSidebar = getSectionNavigation(Astro.url.pathname) !== null;
 ---
 
 <!doctype html>
-<html lang="de" data-kern-theme="light">
+<html
+  lang="de"
+  data-kern-theme="light"
+  transition:name="root"
+  transition:animate="none"
+>
   {/* disable dark mode for now*/}
 
   <meta charset="UTF-8" />
@@ -69,6 +75,8 @@ const showSectionSidebar = getSectionNavigation(Astro.url.pathname) !== null;
       ],
     }}
   />
+
+  <ClientRouter />
 
   <body class="relative">
     {showDebugGrid && <DebugGrid />}
