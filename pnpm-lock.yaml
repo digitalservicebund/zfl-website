@@ -87,6 +87,9 @@ importers:
       '@types/node':
         specifier: ^25.6.0
         version: 25.6.0
+      '@typescript-eslint/parser':
+        specifier: ^8.58.2
+        version: 8.58.2(eslint@10.2.0(jiti@2.6.1))(typescript@6.0.2)
       '@vitest/browser-playwright':
         specifier: ^4.1.4
         version: 4.1.4(playwright@1.59.1)(vite@8.0.8(@types/node@25.6.0)(esbuild@0.27.7)(jiti@2.6.1)(yaml@2.8.3))(vitest@4.1.4)
