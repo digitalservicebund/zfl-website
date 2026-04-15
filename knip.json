@@ -26,5 +26,6 @@
   "prettier": true,
   "lefthook": true,
   "commitlint": true,
-  "ignoreFiles": ["src/config/routes.ts", "dist/**", ".astro/**"]
+  "ignoreFiles": ["src/config/routes.ts", "dist/**", ".astro/**"],
+  "ignoreDependencies": ["@iconify-json/ic"]
 }
