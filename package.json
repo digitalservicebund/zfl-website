@@ -26,10 +26,12 @@
     "docker:stop": "docker stop zfl-website || true && docker rm zfl-website",
     "docker:dev": "pnpm run docker:build && npm run docker:run",
     "docker:logs": "docker logs -f zfl-website",
-    "preinstall": "echo 'Please disable script execution for security reasons: npm config set ignore-scripts true' && exit 1"
+    "preinstall": "echo 'Please disable script execution for security reasons: npm config set ignore-scripts true' && exit 1",
+    "clean:deps": "pnpm knip"
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.5.0",
+    "@astrojs/check": "^0.9.8",
     "@astrojs/mdx": "^5.0.3",
     "@astrojs/sitemap": "^3.7.2",
     "@iconify-json/ic": "^1.2.4",
@@ -64,6 +66,7 @@
     "eslint-plugin-astro": "^1.7.0",
     "globals": "^17.5.0",
     "jsdom": "^29.0.2",
+    "knip": "^6.4.1",
     "license-checker-rseidelsohn": "^4.4.2",
     "prettier": "^3.8.3",
     "prettier-plugin-astro": "0.14.1",
