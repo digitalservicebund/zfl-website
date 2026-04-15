@@ -4,6 +4,9 @@
   "include": ["dependencies", "devDependencies", "unlisted", "duplicates"],
   "entry": [
     "src/pages/**/*.{astro,mdx,html,ts,js}",
+    "src/styles/**/*.css",
+    "src/layouts/**/*.astro",
+    "src/components/**/*.astro",
     "integrations/**/*.{ts,js}",
     "e2e/**/*.ts",
     "**/*.{test,spec}.{ts,tsx,js,jsx}"
@@ -22,5 +25,6 @@
   "eslint": true,
   "prettier": true,
   "lefthook": true,
+  "commitlint": true,
   "ignoreFiles": ["src/config/routes.ts", "dist/**", ".astro/**"]
 }
