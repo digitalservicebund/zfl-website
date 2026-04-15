@@ -1,0 +1,26 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "tags": ["-lintignore"],
+  "include": ["dependencies", "devDependencies", "unlisted", "duplicates"],
+  "entry": [
+    "src/pages/**/*.{astro,mdx,html,ts,js}",
+    "integrations/**/*.{ts,js}",
+    "e2e/**/*.ts",
+    "**/*.{test,spec}.{ts,tsx,js,jsx}"
+  ],
+  "project": [
+    "src/**/*.{ts,tsx,js,jsx}",
+    "integrations/**/*.{ts,tsx,js,mjs}",
+    "e2e/**/*.{ts,tsx,js,jsx}",
+    "*.{js,mjs,cjs,ts}",
+    "*.config.{js,mjs,cjs,ts}"
+  ],
+  "astro": true,
+  "typescript": true,
+  "vitest": true,
+  "playwright": true,
+  "eslint": true,
+  "prettier": true,
+  "lefthook": true,
+  "ignoreFiles": ["src/config/routes.ts", "dist/**", ".astro/**"]
+}
