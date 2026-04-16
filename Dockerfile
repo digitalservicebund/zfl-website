@@ -7,7 +7,7 @@ RUN npm install -g pnpm
 FROM base AS build
 COPY package.json pnpm-lock.yaml /app/
 WORKDIR /app
-RUN pnpm install --prod --ignore-scripts
+RUN pnpm install --ignore-scripts
 
 COPY . /app
 RUN PUBLIC_STAGE=production pnpm run build --outDir dist_production
