@@ -238,6 +238,7 @@ address {
 */
 @utility breakout-grid {
   display: grid;
+  align-content: start;
   grid-template-columns:
     [full-start] minmax(var(--container-padding-inline), 1fr)
     [wide-start] minmax(0, 1fr)
