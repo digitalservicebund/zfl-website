@@ -1,0 +1,39 @@
+---
+import { getCollection, render } from "astro:content";
+import Hero from "@/components/Hero.astro";
+import Layout from "@/layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+
+export async function getStaticPaths() {
+  const allWerkzeuge = await getCollection("werkzeuge");
+  return allWerkzeuge.map((entry) => ({
+    params: { tool: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { title, type, description } = entry.data;
+
+const backPath = `/werkzeuge`;
+---
+
+<Layout title={title}>
+  <main class="breakout-grid">
+    <Hero level="main">
+      <p class="kern-preline">{type}</p>
+      <h1>{title}</h1>
+      <div slot="subtitle">
+        <p>{description}</p>
+      </div>
+    </Hero>
+    <section>
+      <a href={backPath} class="mb-32 flex items-center gap-2">
+        <Icon name="ic:baseline-arrow-upward" class="kern-label" aria-hidden />
+        Zurück zu Werkzeuge
+      </a>
+      <Content />
+    </section>
+  </main>
+</Layout>
