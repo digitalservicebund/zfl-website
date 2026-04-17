@@ -165,6 +165,732 @@ export const werkzeuge = {
   navLabel: null,
 } as const;
 
+export const werkzeuge_5PrinzipienDigitaltauglichkeit = {
+  key: "werkzeuge_5PrinzipienDigitaltauglichkeit",
+  path: "/werkzeuge/5-prinzipien-digitaltauglichkeit",
+  title: "5 Prinzipien für Digitaltauglichkeit",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_5Whys = {
+  key: "werkzeuge_5Whys",
+  path: "/werkzeuge/5-whys",
+  title: "5 Whys",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_amtlicheStatistikDestatis = {
+  key: "werkzeuge_amtlicheStatistikDestatis",
+  path: "/werkzeuge/amtliche-statistik-destatis",
+  title: "Amtliche Statistik (Destatis)",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_arbeitshilfeEvaluationsklauseln = {
+  key: "werkzeuge_arbeitshilfeEvaluationsklauseln",
+  path: "/werkzeuge/arbeitshilfe-evaluationsklauseln",
+  title: "Arbeitshilfe Evaluationsklauseln",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_arbeitshilfeEvaluierung = {
+  key: "werkzeuge_arbeitshilfeEvaluierung",
+  path: "/werkzeuge/arbeitshilfe-evaluierung",
+  title: "Arbeitshilfe zur Evaluierung von Regelungen",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_arbeitshilfeGfa = {
+  key: "werkzeuge_arbeitshilfeGfa",
+  path: "/werkzeuge/arbeitshilfe-gfa",
+  title: "Arbeitshilfe zur GFA (BMI)",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_befristungen = {
+  key: "werkzeuge_befristungen",
+  path: "/werkzeuge/befristungen",
+  title: "Befristungen",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_buergercheck = {
+  key: "werkzeuge_buergercheck",
+  path: "/werkzeuge/buergercheck",
+  title: "Bürgercheck",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_buergerreiseJourneyMap = {
+  key: "werkzeuge_buergerreiseJourneyMap",
+  path: "/werkzeuge/buergerreise-journey-map",
+  title: "Bürgerreise / Journey Map",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_checklisteVerfassungsrecht = {
+  key: "werkzeuge_checklisteVerfassungsrecht",
+  path: "/werkzeuge/checkliste-verfassungsrecht",
+  title: "Checkliste Verfassungsrecht",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_conceptMap = {
+  key: "werkzeuge_conceptMap",
+  path: "/werkzeuge/concept-map",
+  title: "Concept Map",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_datenanalyse = {
+  key: "werkzeuge_datenanalyse",
+  path: "/werkzeuge/datenanalyse",
+  title: "Datenanalyse",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_datenlabore = {
+  key: "werkzeuge_datenlabore",
+  path: "/werkzeuge/datenlabore",
+  title: "Datenlabore",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_deskResearch = {
+  key: "werkzeuge_deskResearch",
+  path: "/werkzeuge/desk-research",
+  title: "Desk Research (DIP, Gesetze Portal)",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_digitalcheck = {
+  key: "werkzeuge_digitalcheck",
+  path: "/werkzeuge/digitalcheck",
+  title: "Digitalcheck",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_egesetzgebung = {
+  key: "werkzeuge_egesetzgebung",
+  path: "/werkzeuge/egesetzgebung",
+  title: "E-Gesetzgebung",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_enorm = {
+  key: "werkzeuge_enorm",
+  path: "/werkzeuge/enorm",
+  title: "eNorm",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_experimentierklausel = {
+  key: "werkzeuge_experimentierklausel",
+  path: "/werkzeuge/experimentierklausel",
+  title: "Experimentierklausel",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_fishgraetenDiagramm = {
+  key: "werkzeuge_fishgraetenDiagramm",
+  path: "/werkzeuge/fishgraeten-diagramm",
+  title: "Fishgräten Diagramm",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_foederalesInformationsmanagement = {
+  key: "werkzeuge_foederalesInformationsmanagement",
+  path: "/werkzeuge/foederales-informationsmanagement",
+  title: "Föderales Informationsmanagement (FIM)",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_fokusgruppen = {
+  key: "werkzeuge_fokusgruppen",
+  path: "/werkzeuge/fokusgruppen",
+  title: "Fokusgruppen",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_formelleBeteiligungsformate = {
+  key: "werkzeuge_formelleBeteiligungsformate",
+  path: "/werkzeuge/formelle-beteiligungsformate",
+  title: "Formelle Beteiligungsformate",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_ggo = {
+  key: "werkzeuge_ggo",
+  path: "/werkzeuge/ggo",
+  title: "GGO (Abstimmungs- und Beteiligungsverfahren)",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_gleichstellungscheck = {
+  key: "werkzeuge_gleichstellungscheck",
+  path: "/werkzeuge/gleichstellungscheck",
+  title: "Gleichstellungscheck",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_gleichstellungsorientierteGfa = {
+  key: "werkzeuge_gleichstellungsorientierteGfa",
+  path: "/werkzeuge/gleichstellungsorientierte-gfa",
+  title: "Gleichstellungsorientierte GFA",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_handbuchDerRechtsfoermlichkeit = {
+  key: "werkzeuge_handbuchDerRechtsfoermlichkeit",
+  path: "/werkzeuge/handbuch-der-rechtsfoermlichkeit",
+  title: "Handbuch der Rechtsförmlichkeit",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_handbuchRechtsVerwaltungsvorschriften = {
+  key: "werkzeuge_handbuchRechtsVerwaltungsvorschriften",
+  path: "/werkzeuge/handbuch-rechts-verwaltungsvorschriften",
+  title: "Handbuch zur Vorbereitung von Rechts- und Verwaltungsvorschriften",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_hypothesenbildung = {
+  key: "werkzeuge_hypothesenbildung",
+  path: "/werkzeuge/hypothesenbildung",
+  title: "Hypothesenbildung",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_interoperabilitaetsBewertungen = {
+  key: "werkzeuge_interoperabilitaetsBewertungen",
+  path: "/werkzeuge/interoperabilitaets-bewertungen",
+  title: "Interoperabilitäts-Bewertungen",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_jobsToBeDone = {
+  key: "werkzeuge_jobsToBeDone",
+  path: "/werkzeuge/jobs-to-be-done",
+  title: "Jobs to be done",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_jugendcheck = {
+  key: "werkzeuge_jugendcheck",
+  path: "/werkzeuge/jugendcheck",
+  title: "Jugendcheck",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_kmuTest = {
+  key: "werkzeuge_kmuTest",
+  path: "/werkzeuge/kmu-test",
+  title: "KMU-Test (NKR)",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_konsultationsverfahren = {
+  key: "werkzeuge_konsultationsverfahren",
+  path: "/werkzeuge/konsultationsverfahren",
+  title: "Konsultationsverfahren",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_kpisKennzahlen = {
+  key: "werkzeuge_kpisKennzahlen",
+  path: "/werkzeuge/kpis-kennzahlen",
+  title: "KPIs / Kennzahlen",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_leitfadenErfuellungsaufwand = {
+  key: "werkzeuge_leitfadenErfuellungsaufwand",
+  path: "/werkzeuge/leitfaden-erfuellungsaufwand",
+  title: "Leitfaden Erfüllungsaufwand (StBA)",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_leitfadenGeschlechtersensibleSprache = {
+  key: "werkzeuge_leitfadenGeschlechtersensibleSprache",
+  path: "/werkzeuge/leitfaden-geschlechtersensible-sprache",
+  title: "Leitfaden geschlechtersensible Sprache",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_mindMap = {
+  key: "werkzeuge_mindMap",
+  path: "/werkzeuge/mind-map",
+  title: "Mind Map",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_nutzenKostenAbschaetzung = {
+  key: "werkzeuge_nutzenKostenAbschaetzung",
+  path: "/werkzeuge/nutzen-kosten-abschaetzung",
+  title: "Nutzen-Kosten-Abschätzung umweltrelevanter Effekte",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_oeffentlichesGestalten = {
+  key: "werkzeuge_oeffentlichesGestalten",
+  path: "/werkzeuge/oeffentliches-gestalten",
+  title: "Öffentliches Gestalten (Handbuch)",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_oneInOneOutRegel = {
+  key: "werkzeuge_oneInOneOutRegel",
+  path: "/werkzeuge/one-in-one-out-regel",
+  title: "One-in-one-out-Regel",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_pestelMethode = {
+  key: "werkzeuge_pestelMethode",
+  path: "/werkzeuge/pestel-methode",
+  title: "PESTEL Methode",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_praxischecks = {
+  key: "werkzeuge_praxischecks",
+  path: "/werkzeuge/praxischecks",
+  title: "Praxischecks",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_problemStatements = {
+  key: "werkzeuge_problemStatements",
+  path: "/werkzeuge/problem-statements",
+  title: "Problem Statements",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_prozessmodellierungsmethoden = {
+  key: "werkzeuge_prozessmodellierungsmethoden",
+  path: "/werkzeuge/prozessmodellierungsmethoden",
+  title: "Prozessmodellierungsmethoden",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_reallabore = {
+  key: "werkzeuge_reallabore",
+  path: "/werkzeuge/reallabore",
+  title: "Reallabore",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_ressortforschung = {
+  key: "werkzeuge_ressortforschung",
+  path: "/werkzeuge/ressortforschung",
+  title: "Ressortforschung",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_ressortinterneEinarbeitung = {
+  key: "werkzeuge_ressortinterneEinarbeitung",
+  path: "/werkzeuge/ressortinterne-einarbeitung",
+  title: "Ressortinterne Einarbeitung",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_roadmapping = {
+  key: "werkzeuge_roadmapping",
+  path: "/werkzeuge/roadmapping",
+  title: "Roadmapping",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_rulemapBuilder = {
+  key: "werkzeuge_rulemapBuilder",
+  path: "/werkzeuge/rulemap-builder",
+  title: "Rulemap Builder",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_smartGoal = {
+  key: "werkzeuge_smartGoal",
+  path: "/werkzeuge/smart-goal",
+  title: "SMART Goal",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_sosMethodeBva = {
+  key: "werkzeuge_sosMethodeBva",
+  path: "/werkzeuge/sos-methode-bva",
+  title: "SOS-Methode der BVA",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_stakeholderMap = {
+  key: "werkzeuge_stakeholderMap",
+  path: "/werkzeuge/stakeholder-map",
+  title: "Stakeholder Map",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_swotAnalyse = {
+  key: "werkzeuge_swotAnalyse",
+  path: "/werkzeuge/swot-analyse",
+  title: "SWOT Analyse",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_synopsenpflicht = {
+  key: "werkzeuge_synopsenpflicht",
+  path: "/werkzeuge/synopsenpflicht",
+  title: "Synopsenpflicht",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_szenariotechnik = {
+  key: "werkzeuge_szenariotechnik",
+  path: "/werkzeuge/szenariotechnik",
+  title: "Szenariotechnik",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_tiefenInterviews = {
+  key: "werkzeuge_tiefenInterviews",
+  path: "/werkzeuge/tiefen-interviews",
+  title: "Tiefen-Interviews",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_tShirtSizes = {
+  key: "werkzeuge_tShirtSizes",
+  path: "/werkzeuge/t-shirt-sizes",
+  title: "T-Shirt Sizes (Aufwandsschätzung)",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_umfragen = {
+  key: "werkzeuge_umfragen",
+  path: "/werkzeuge/umfragen",
+  title: "Umfragen",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_userStory = {
+  key: "werkzeuge_userStory",
+  path: "/werkzeuge/user-story",
+  title: "User Story",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_valueEffortMatrix = {
+  key: "werkzeuge_valueEffortMatrix",
+  path: "/werkzeuge/value-effort-matrix",
+  title: "Value / Effort Matrix",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_verwaltungsvorschriftenAnnexen = {
+  key: "werkzeuge_verwaltungsvorschriftenAnnexen",
+  path: "/werkzeuge/verwaltungsvorschriften-annexen",
+  title: "Verwaltungsvorschriften Annexen",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_visualisierungenInfografiken = {
+  key: "werkzeuge_visualisierungenInfografiken",
+  path: "/werkzeuge/visualisierungen-infografiken",
+  title: "Visualisierungen / Infografiken",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_wieKoenntenWirFrage = {
+  key: "werkzeuge_wieKoenntenWirFrage",
+  path: "/werkzeuge/wie-koennten-wir-frage",
+  title: "Ziel als Wie-könnten-wir-Frage (WKW)",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_wirkungsmodelleWirkungsketten = {
+  key: "werkzeuge_wirkungsmodelleWirkungsketten",
+  path: "/werkzeuge/wirkungsmodelle-wirkungsketten",
+  title: "Wirkungsmodelle & Wirkungsketten",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_zflRegelungsbegleitungen = {
+  key: "werkzeuge_zflRegelungsbegleitungen",
+  path: "/werkzeuge/zfl-regelungsbegleitungen",
+  title: "ZfL Regelungsbegleitungen",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_zflVorgehensmodellFruehphase = {
+  key: "werkzeuge_zflVorgehensmodellFruehphase",
+  path: "/werkzeuge/zfl-vorgehensmodell-fruehphase",
+  title: "ZfL-Vorgehensmodell Frühphase",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
 export const allRoutes = [
   barrierefreiheit,
   begleitungen,
@@ -180,4 +906,70 @@ export const allRoutes = [
   ueber_dasIstNeu,
   ueber_zahlenUndFakten,
   werkzeuge,
+  werkzeuge_5PrinzipienDigitaltauglichkeit,
+  werkzeuge_5Whys,
+  werkzeuge_amtlicheStatistikDestatis,
+  werkzeuge_arbeitshilfeEvaluationsklauseln,
+  werkzeuge_arbeitshilfeEvaluierung,
+  werkzeuge_arbeitshilfeGfa,
+  werkzeuge_befristungen,
+  werkzeuge_buergercheck,
+  werkzeuge_buergerreiseJourneyMap,
+  werkzeuge_checklisteVerfassungsrecht,
+  werkzeuge_conceptMap,
+  werkzeuge_datenanalyse,
+  werkzeuge_datenlabore,
+  werkzeuge_deskResearch,
+  werkzeuge_digitalcheck,
+  werkzeuge_egesetzgebung,
+  werkzeuge_enorm,
+  werkzeuge_experimentierklausel,
+  werkzeuge_fishgraetenDiagramm,
+  werkzeuge_foederalesInformationsmanagement,
+  werkzeuge_fokusgruppen,
+  werkzeuge_formelleBeteiligungsformate,
+  werkzeuge_ggo,
+  werkzeuge_gleichstellungscheck,
+  werkzeuge_gleichstellungsorientierteGfa,
+  werkzeuge_handbuchDerRechtsfoermlichkeit,
+  werkzeuge_handbuchRechtsVerwaltungsvorschriften,
+  werkzeuge_hypothesenbildung,
+  werkzeuge_interoperabilitaetsBewertungen,
+  werkzeuge_jobsToBeDone,
+  werkzeuge_jugendcheck,
+  werkzeuge_kmuTest,
+  werkzeuge_konsultationsverfahren,
+  werkzeuge_kpisKennzahlen,
+  werkzeuge_leitfadenErfuellungsaufwand,
+  werkzeuge_leitfadenGeschlechtersensibleSprache,
+  werkzeuge_mindMap,
+  werkzeuge_nutzenKostenAbschaetzung,
+  werkzeuge_oeffentlichesGestalten,
+  werkzeuge_oneInOneOutRegel,
+  werkzeuge_pestelMethode,
+  werkzeuge_praxischecks,
+  werkzeuge_problemStatements,
+  werkzeuge_prozessmodellierungsmethoden,
+  werkzeuge_reallabore,
+  werkzeuge_ressortforschung,
+  werkzeuge_ressortinterneEinarbeitung,
+  werkzeuge_roadmapping,
+  werkzeuge_rulemapBuilder,
+  werkzeuge_smartGoal,
+  werkzeuge_sosMethodeBva,
+  werkzeuge_stakeholderMap,
+  werkzeuge_swotAnalyse,
+  werkzeuge_synopsenpflicht,
+  werkzeuge_szenariotechnik,
+  werkzeuge_tiefenInterviews,
+  werkzeuge_tShirtSizes,
+  werkzeuge_umfragen,
+  werkzeuge_userStory,
+  werkzeuge_valueEffortMatrix,
+  werkzeuge_verwaltungsvorschriftenAnnexen,
+  werkzeuge_visualisierungenInfografiken,
+  werkzeuge_wieKoenntenWirFrage,
+  werkzeuge_wirkungsmodelleWirkungsketten,
+  werkzeuge_zflRegelungsbegleitungen,
+  werkzeuge_zflVorgehensmodellFruehphase,
 ] as const;

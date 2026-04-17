@@ -2,8 +2,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
+  type ContentCollectionConfig,
   escapeStringLiteral,
   generateRoutes,
+  getContentCollectionRoutes,
   getParentRouteKey,
   serializeRoutesModule,
   toExportName,
@@ -16,12 +18,12 @@ vi.mock("node:fs");
 // Test Harness
 // =============================================================================
 // These helpers keep the integration tests compact:
-// - `mockPages()` simulates a small pages directory tree in memory.
+// - `mockFiles()` simulates file trees across multiple roots in memory.
+// - `mockPages()` is a convenience wrapper for a single pages directory.
 // - `runBuild()` drives the Astro hooks the integration registers.
 
 const PAGES_DIR = "src/pages";
 const OUTPUT_FILE = "src/routes.ts";
-const PAGES_ROOT = path.resolve(PAGES_DIR);
 
 type MockFile = {
   path: string;
@@ -30,6 +32,11 @@ type MockFile = {
 
 type MockPageFile = MockFile & {
   frontmatter: string;
+};
+
+type MockRoot = {
+  root: string;
+  files: MockFile[];
 };
 
 function createDirent(name: string, isDirectory: boolean) {
@@ -49,30 +56,39 @@ function hasFrontmatter(file: MockFile): file is MockPageFile {
   return file.frontmatter !== undefined;
 }
 
-function mockPages(files: MockFile[]) {
-  const contents = new Map(
-    files
-      .filter(hasFrontmatter)
-      .map((file) => [
-        path.join(PAGES_ROOT, file.path),
+function mockFiles(roots: MockRoot[]) {
+  const contents = new Map<string, string>();
+
+  for (const { root, files } of roots) {
+    const absoluteRoot = path.resolve(root);
+    for (const file of files.filter(hasFrontmatter)) {
+      contents.set(
+        path.join(absoluteRoot, file.path),
         createPageWithFrontmatter(file.frontmatter),
-      ]),
-  );
+      );
+    }
+  }
 
   vi.mocked(fs.existsSync).mockReturnValue(true);
   vi.mocked(fs.readdirSync).mockImplementation((dir) => {
-    const normalizedDir = path
-      .relative(PAGES_ROOT, String(dir))
-      .replaceAll("\\", "/");
-    const prefix = normalizedDir ? `${normalizedDir}/` : "";
+    const dirStr = String(dir);
     const children = new Map<string, boolean>();
 
-    for (const file of files) {
-      if (!file.path.startsWith(prefix)) continue;
+    for (const { root, files } of roots) {
+      const absoluteRoot = path.resolve(root);
+      if (!dirStr.startsWith(absoluteRoot)) continue;
 
-      const remainder = file.path.slice(prefix.length);
-      const [segment, ...rest] = remainder.split("/");
-      children.set(segment, rest.length > 0);
+      const normalizedDir = path
+        .relative(absoluteRoot, dirStr)
+        .replaceAll("\\", "/");
+      const prefix = normalizedDir ? `${normalizedDir}/` : "";
+
+      for (const file of files) {
+        if (!file.path.startsWith(prefix)) continue;
+        const remainder = file.path.slice(prefix.length);
+        const [segment, ...rest] = remainder.split("/");
+        children.set(segment, rest.length > 0);
+      }
     }
 
     return [...children.entries()].map(([name, isDirectory]) =>
@@ -89,12 +105,23 @@ function mockPages(files: MockFile[]) {
   });
 }
 
-function createIntegration() {
-  return generateRoutes({ pagesDir: PAGES_DIR, output: OUTPUT_FILE });
+function mockPages(files: MockFile[]) {
+  mockFiles([{ root: PAGES_DIR, files }]);
 }
 
-function runBuild(base = "/") {
-  const integration = createIntegration();
+function createIntegration(contentCollections: ContentCollectionConfig[] = []) {
+  return generateRoutes({
+    pagesDir: PAGES_DIR,
+    output: OUTPUT_FILE,
+    contentCollections,
+  });
+}
+
+function runBuild(
+  base = "/",
+  contentCollections: ContentCollectionConfig[] = [],
+) {
+  const integration = createIntegration(contentCollections);
   integration.hooks["astro:config:done"]?.({ config: { base } } as never);
   integration.hooks["astro:build:start"]?.({ config: { base } } as never);
 }
@@ -315,6 +342,84 @@ describe("generateRoutes() Integration Hook", () => {
       expect(getWrittenOutput()).toContain("export const _2026News = {");
       expect(getWrittenOutput()).toContain('key: "2026News"');
     });
+  });
+});
+
+// =============================================================================
+// Integration Tests: Content Collections
+// =============================================================================
+
+describe("generateRoutes() with contentCollections", () => {
+  const COLLECTION_DIR = "src/werkzeuge";
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("includes content collection entries as routes in the output", () => {
+    mockFiles([
+      {
+        root: PAGES_DIR,
+        files: [
+          {
+            path: "werkzeuge/index.astro",
+            frontmatter: 'const frontmatter = { title: "Werkzeuge" };',
+          },
+        ],
+      },
+      {
+        root: COLLECTION_DIR,
+        files: [
+          {
+            path: "pestel-methode.md",
+            frontmatter: "title: PESTEL Methode",
+          },
+        ],
+      },
+    ]);
+
+    runBuild("/", [{ dir: COLLECTION_DIR, pathPrefix: "/werkzeuge" }]);
+
+    expect(getWrittenOutput()).toContain('title: "PESTEL Methode"');
+    expect(getWrittenOutput()).toContain('path: "/werkzeuge/pestel-methode"');
+    expect(getWrittenOutput()).toContain("parent: werkzeuge,");
+  });
+
+  it("omits collection entries without a title", () => {
+    mockFiles([
+      {
+        root: PAGES_DIR,
+        files: [
+          {
+            path: "werkzeuge/index.astro",
+            frontmatter: 'const frontmatter = { title: "Werkzeuge" };',
+          },
+        ],
+      },
+      {
+        root: COLLECTION_DIR,
+        files: [
+          { path: "no-title.md", frontmatter: "description: No title here" },
+          { path: "with-title.md", frontmatter: "title: With Title" },
+        ],
+      },
+    ]);
+
+    runBuild("/", [{ dir: COLLECTION_DIR, pathPrefix: "/werkzeuge" }]);
+
+    expect(getWrittenOutput()).not.toContain("no-title");
+    expect(getWrittenOutput()).toContain("with-title");
+  });
+
+  it("returns an empty array from getContentCollectionRoutes when dir does not exist", () => {
+    vi.mocked(fs.existsSync).mockReturnValue(false);
+
+    const routes = getContentCollectionRoutes({
+      dir: "src/nonexistent",
+      pathPrefix: "/nonexistent",
+    });
+
+    expect(routes).toEqual([]);
   });
 });
 

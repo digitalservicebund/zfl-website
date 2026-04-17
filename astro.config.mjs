@@ -32,6 +32,7 @@ export default defineConfig({
     generateRoutes({
       pagesDir: "src/pages",
       output: "src/config/routes.ts",
+      contentCollections: [{ dir: "src/werkzeuge", pathPrefix: "/werkzeuge" }],
     }),
   ],
   build: {

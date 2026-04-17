@@ -4,9 +4,17 @@ import path from "node:path";
 import { buildRoutePath } from "../src/utils/path";
 import { extractMeta } from "./routeGeneration/extractRouteMeta";
 
+export type ContentCollectionConfig = {
+  /** Directory containing the collection's .md files, e.g. "src/werkzeuge". */
+  dir: string;
+  /** URL prefix for generated routes, e.g. "/werkzeuge". */
+  pathPrefix: string;
+};
+
 type Options = {
   pagesDir: string;
   output?: string;
+  contentCollections?: ContentCollectionConfig[];
 };
 
 export type RouteMeta = {
@@ -32,6 +40,7 @@ const SUPPORTED_EXTENSIONS_REGEXP = new RegExp(
 export function generateRoutes({
   pagesDir,
   output = "src/config/routes.ts",
+  contentCollections = [],
 }: Options): AstroIntegration {
   let baseUrl = "";
 
@@ -42,29 +51,38 @@ export function generateRoutes({
         baseUrl = config.base;
       },
       "astro:server:setup": ({ server }) => {
-        generate(pagesDir, output, baseUrl); // Initial generation
+        generate(pagesDir, contentCollections, output, baseUrl); // Initial generation
 
-        // Watch for changes, additions, or deletions in the pages directory.
+        // Watch for changes, additions, or deletions in the pages and collection directories.
         server.watcher.on("all", (event, file) => {
           const isPageFile = file.startsWith(path.resolve(pagesDir));
+          const isCollectionFile = contentCollections.some((c) =>
+            file.startsWith(path.resolve(c.dir)),
+          );
           const isRelevantEvent = ["add", "unlink", "change"].includes(event);
           if (
-            isPageFile &&
+            (isPageFile || isCollectionFile) &&
             isRelevantEvent &&
             SUPPORTED_EXTENSIONS_REGEXP.test(file)
           ) {
             console.log(`Route generation triggered for ${file}`);
-            generate(pagesDir, output, baseUrl);
+            generate(pagesDir, contentCollections, output, baseUrl);
           }
         });
       },
-      "astro:build:start": () => generate(pagesDir, output, baseUrl),
+      "astro:build:start": () =>
+        generate(pagesDir, contentCollections, output, baseUrl),
     },
   };
 }
 
-// Generates the routes module from the page files.
-function generate(pagesDir: string, outputFile: string, baseUrl: string) {
+// Generates the routes module from the page files and content collections.
+function generate(
+  pagesDir: string,
+  contentCollections: ContentCollectionConfig[],
+  outputFile: string,
+  baseUrl: string,
+) {
   const absoluteDir = path.resolve(pagesDir);
   if (!fs.existsSync(absoluteDir)) return;
 
@@ -92,7 +110,12 @@ function generate(pagesDir: string, outputFile: string, baseUrl: string) {
     });
   }
 
-  // 3. Validate that every parent reference resolves
+  // 3. Add routes from content collections
+  for (const collection of contentCollections) {
+    routes.push(...getContentCollectionRoutes(collection));
+  }
+
+  // 4. Validate that every parent reference resolves
   for (const route of routes) {
     if (!route.parentKey) continue;
     if (!routes.some((r) => r.key === route.parentKey)) {
@@ -102,7 +125,7 @@ function generate(pagesDir: string, outputFile: string, baseUrl: string) {
     }
   }
 
-  // 4. Serialize the routes module
+  // 5. Serialize the routes module
   fs.writeFileSync(
     path.resolve(outputFile),
     serializeRoutesModule(routes, baseUrl),
@@ -126,6 +149,40 @@ function getFiles(dir: string): string[] {
       // Otherwise, return an empty array (which flatMap will remove)
       return SUPPORTED_EXTENSIONS_REGEXP.test(entry.name) ? [full] : [];
     });
+}
+
+// Reads .md files from a content collection directory and returns routes for each entry.
+export function getContentCollectionRoutes(
+  config: ContentCollectionConfig,
+): Route[] {
+  const absoluteDir = path.resolve(config.dir);
+  if (!fs.existsSync(absoluteDir)) return [];
+
+  const routes: Route[] = [];
+  const entries = fs.readdirSync(absoluteDir, {
+    withFileTypes: true,
+  }) as Dirent<string>[];
+
+  for (const entry of entries) {
+    if (entry.isDirectory() || !entry.name.endsWith(".md")) continue;
+
+    const filePath = path.join(absoluteDir, entry.name);
+    const content = fs.readFileSync(filePath, "utf-8");
+    const meta = extractMeta(filePath, content);
+    if (!meta) continue;
+
+    const slug = entry.name.replace(/\.md$/, "");
+    const routePath = `${config.pathPrefix}/${slug}`;
+
+    routes.push({
+      key: toRouteKey(routePath),
+      path: routePath,
+      parentKey: getParentRouteKey(routePath),
+      ...meta,
+    });
+  }
+
+  return routes;
 }
 
 export function toRouteKey(input: string): string {
