@@ -46,7 +46,7 @@
     "typescript": "^6.0.2"
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.11.1",
+    "@axe-core/playwright": "^4.11.2",
     "@commitlint/config-conventional": "^20.5.0",
     "@commitlint/types": "^20.5.0",
     "@eslint/js": "^10.0.1",
