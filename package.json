@@ -5,8 +5,9 @@
   "license": "MIT",
   "scripts": {
     "audit:licences": "license-checker-rseidelsohn --production --excludePrivatePackages --onlyAllow 'MIT;BSD-3-Clause;BSD-2-Clause;0BSD;ISC;Apache-2.0;MPL-2.0;BlueOak-1.0.0;Custom: LICENSE;Unlicense;EUPL-1.2' --summary",
-    "dev": "astro dev",
+    "dev": "pnpm build:search && astro dev",
     "build": "astro build",
+    "build:search": "pagefind --site dist",
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier --check",
