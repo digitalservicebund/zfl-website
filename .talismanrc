@@ -80,6 +80,9 @@ fileignoreconfig:
       - \@keydown
   - filename: doc/adr/0008-multipage-forms.md
     checksum: 372068602b2b48dccf8c66eb8d82b7621108af3d660156cd66b4b2ed49359b96
+  - filename: src/pages/dev/kern-komponenten.astro
+    allowed_patterns:
+      - key
 scopeconfig:
   - scope: node
 allowed_patterns:

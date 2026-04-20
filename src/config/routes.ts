@@ -44,6 +44,39 @@ export const datenschutz = {
   navLabel: null,
 } as const;
 
+export const dev = {
+  key: "dev",
+  path: "/dev",
+  title: "Dev Seiten",
+  parent: null,
+  sitemap: false,
+  isStagingOnly: true,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const dev_astroKomponenten = {
+  key: "dev_astroKomponenten",
+  path: "/dev/astro-komponenten",
+  title: "Astro Komponenten",
+  parent: dev,
+  sitemap: false,
+  isStagingOnly: true,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const dev_kernKomponenten = {
+  key: "dev_kernKomponenten",
+  path: "/dev/kern-komponenten",
+  title: "KERN Komponenten",
+  parent: dev,
+  sitemap: false,
+  isStagingOnly: true,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
 export const home = {
   key: "home",
   path: "/",
@@ -169,6 +202,9 @@ export const allRoutes = [
   barrierefreiheit,
   begleitungen,
   datenschutz,
+  dev,
+  dev_astroKomponenten,
+  dev_kernKomponenten,
   home,
   impressum,
   kontakt,

@@ -1,0 +1,352 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Badge from "@/components/Badge.astro";
+import Banner from "@/components/Banner.astro";
+import Card from "@/components/Card.astro";
+import FeatureItem from "@/components/FeatureItem.astro";
+import FeatureSet from "@/components/FeatureSet.astro";
+import Hero from "@/components/Hero.astro";
+import KernCard from "@/components/KernCard.astro";
+import MediaText from "@/components/MediaText.astro";
+import PostTeaser from "@/components/PostTeaser.astro";
+import TimelineList from "@/components/TimelineList.astro";
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import trainingImage from "@/images/Trainings.jpg";
+
+export const frontmatter = {
+  title: "Astro Komponenten",
+  sitemap: false,
+  isStagingOnly: true,
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero>
+      <h1>Astro Komponenten</h1>
+    </Hero>
+
+    <!-- ─── Badge ─────────────────────────────────────────────────────── -->
+    <section class="space-y-32">
+      <h2>Badge</h2>
+
+      <div class="space-y-16">
+        <p class="kern-preline">look: hint (default)</p>
+        <Badge look="hint">Hinweistext</Badge>
+      </div>
+
+      <div class="space-y-16">
+        <p class="kern-preline">look: gray</p>
+        <Badge look="gray">Grauer Badge</Badge>
+      </div>
+
+      <div class="space-y-16">
+        <p class="kern-preline">look: white</p>
+        <div class="bg-lavender-400 p-16">
+          <Badge look="white">Weißer Badge</Badge>
+        </div>
+      </div>
+
+      <div class="space-y-16">
+        <p class="kern-preline">mit Icon-Slot</p>
+        <Badge look="hint">
+          <Icon slot="icon" name="ic:outline-info" class="size-16" />
+          Mit Icon
+        </Badge>
+      </div>
+    </section>
+
+    <!-- ─── Banner ────────────────────────────────────────────────────── -->
+    <section class="breakout-grid contents">
+      <h2 class="mt-32">Banner</h2>
+      <Banner>
+        <p class="mb-0">
+          Dies ist ein Banner-Hinweis. Das Angebot befindet sich aktuell im
+          Aufbau.
+        </p>
+        <a href="#">Mehr dazu</a>
+      </Banner>
+    </section>
+
+    <!-- ─── Card ──────────────────────────────────────────────────────── -->
+    <section class="space-y-32">
+      <h2>Card</h2>
+
+      <div class="space-y-16">
+        <p class="kern-preline">look: default (weiß)</p>
+        <Card>
+          <h3>Weiße Karte</h3>
+          <p>Standardvariante ohne explizites look-Prop.</p>
+        </Card>
+      </div>
+
+      <div class="space-y-16">
+        <p class="kern-preline">look: gray</p>
+        <Card look="gray">
+          <h3>Graue Karte</h3>
+          <p>Hintergrund: <code>bg-lavender-base</code>.</p>
+        </Card>
+      </div>
+
+      <div class="space-y-16">
+        <p class="kern-preline">look: lavender</p>
+        <Card look="lavender">
+          <h3>Lavendel-Karte</h3>
+          <p>Hintergrund: <code>bg-lavender-400</code>.</p>
+        </Card>
+      </div>
+
+      <div class="space-y-16">
+        <p class="kern-preline">look: lightLavender</p>
+        <Card look="lightLavender">
+          <h3>Helles Lavendel</h3>
+          <p>Hintergrund: <code>bg-lavender-200</code>.</p>
+        </Card>
+      </div>
+
+      <div class="space-y-16">
+        <p class="kern-preline">look: blue</p>
+        <Card look="blue">
+          <h3>Blaue Karte</h3>
+          <p>Hintergrund: <code>bg-cosmic-blue-base</code>, weiße Schrift.</p>
+        </Card>
+      </div>
+
+      <div class="space-y-16">
+        <p class="kern-preline">padding: wide</p>
+        <Card padding="wide">
+          <h3>Breites Padding</h3>
+          <p>Variante mit mehr horizontalem Innenabstand.</p>
+        </Card>
+      </div>
+
+      <div class="space-y-16">
+        <p class="kern-preline">mit Icon-Slot</p>
+        <Card>
+          <Icon name="ic:twotone-widgets" slot="icon" />
+          <h3>Karte mit Icon</h3>
+          <p>
+            Beim Übergeben des Icon-Slots wird links ein farbiger Ikonbereich
+            angezeigt.
+          </p>
+        </Card>
+      </div>
+    </section>
+
+    <!-- ─── FeatureItem + FeatureSet ──────────────────────────────────── -->
+    <section class="space-y-32">
+      <h2>FeatureItem + FeatureSet</h2>
+
+      <div class="space-y-16">
+        <p class="kern-preline">FeatureSet mit drei FeatureItems</p>
+        <FeatureSet>
+          <FeatureItem
+            icon="ic:outline-check-circle"
+            title="Betroffenenzentriert"
+            body="Vorhaben konsequent aus der Perspektive Betroffener entwickeln."
+          />
+          <FeatureItem
+            icon="ic:outline-build"
+            title="Praxistauglich"
+            body="Praktische Umsetzbarkeit von Anfang an mitdenken."
+          />
+          <FeatureItem
+            icon="ic:outline-devices"
+            title="Digital umsetzbar"
+            body="Regelungen so gestalten, dass sie digital vollziehbar sind."
+          >
+            <a href="#">Mehr erfahren</a>
+          </FeatureItem>
+        </FeatureSet>
+      </div>
+    </section>
+
+    <!-- ─── Hero ──────────────────────────────────────────────────────── -->
+    <section class="breakout-grid contents">
+      <h2 class="mt-32">Hero</h2>
+      <p class="kern-preline">level: root</p>
+      <Hero level="root">
+        <h2 class="kern-heading-x-large py-0 text-white">
+          Bessere Rechtsetzung
+        </h2>
+        <p slot="subtitle">
+          Root-Level-Hero mit weißem Text auf dunkelblauem Hintergrund.
+        </p>
+      </Hero>
+      <p class="kern-preline mt-32">level: main</p>
+      <Hero level="main">
+        <h2 class="kern-heading-x-large py-0">Hauptseite</h2>
+        <p slot="subtitle">Main-Level-Hero, Lavendel-Hintergrund.</p>
+      </Hero>
+      <p class="kern-preline mt-32">level: sub (default)</p>
+      <Hero>
+        <h2 class="kern-heading-x-large py-0">Unterseite</h2>
+      </Hero>
+    </section>
+
+    <!-- ─── KernCard ──────────────────────────────────────────────────── -->
+    <section class="space-y-32">
+      <h2>KernCard</h2>
+
+      <div class="space-y-16">
+        <p class="kern-preline">einfach (nur title)</p>
+        <KernCard title="Einfache Karte" />
+      </div>
+
+      <div class="space-y-16">
+        <p class="kern-preline">mit preline, subline und body</p>
+        <KernCard
+          title="Mit Preline und Subline"
+          preline="Kategorie"
+          subline="Ergänzender Untertitel"
+          body="Detailbeschreibung der Karte. Hier kann längerer Erklärungstext stehen."
+        />
+      </div>
+
+      <div class="space-y-16">
+        <p class="kern-preline">interaktiv (mit href)</p>
+        <KernCard
+          title="Anklickbare Karte"
+          preline="Interaktiv"
+          href="https://example.com"
+          body="Diese Karte ist vollständig klickbar durch den stretched-Link-Mechanismus."
+        />
+      </div>
+
+      <div class="space-y-16">
+        <p class="kern-preline">mit Bild</p>
+        <KernCard
+          title="Karte mit Bild"
+          preline="Bild-Variante"
+          image={trainingImage}
+          imageAlt="Schulungssituation"
+          imageSource="ZfL"
+          body="Oben ein Bild, darunter Titel und Text."
+        />
+      </div>
+
+      <div class="space-y-16">
+        <p class="kern-preline">mit Footer-Slot</p>
+        <KernCard
+          title="Karte mit Footer"
+          body="Der Footer-Bereich eignet sich für Links oder Metadaten."
+        >
+          <a href="#" slot="footer">Mehr erfahren →</a>
+        </KernCard>
+      </div>
+    </section>
+
+    <!-- ─── MediaText ─────────────────────────────────────────────────── -->
+    <section class="space-y-32">
+      <h2>MediaText</h2>
+
+      <div class="space-y-16">
+        <p class="kern-preline">default (split: 7-5)</p>
+        <MediaText>
+          <div>
+            <h3>Hauptinhalt (7/12)</h3>
+            <p>
+              Der größere linke Bereich enthält üblicherweise Fließtext oder
+              Überschriften.
+            </p>
+          </div>
+          <Image
+            slot="media"
+            src={trainingImage}
+            alt="Schulungssituation"
+            class="h-full w-full rounded-sm object-cover"
+          />
+        </MediaText>
+      </div>
+
+      <div class="space-y-16">
+        <p class="kern-preline">reversed</p>
+        <MediaText reversed>
+          <div>
+            <h3>Text rechts</h3>
+            <p>
+              Durch <code>reversed</code> wechseln Text und Medium die Seite.
+            </p>
+          </div>
+          <Image
+            slot="media"
+            src={trainingImage}
+            alt="Schulungssituation"
+            class="h-full w-full rounded-sm object-cover"
+          />
+        </MediaText>
+      </div>
+
+      <div class="space-y-16">
+        <p class="kern-preline">split: 8-4</p>
+        <MediaText split="8-4">
+          <div>
+            <h3>Breiter Text (8/12)</h3>
+            <p>
+              Hier ist der Textbereich breiter und das Medium schmaler (4/12).
+            </p>
+          </div>
+          <Image
+            slot="media"
+            src={trainingImage}
+            alt="Schulungssituation"
+            class="h-full w-full rounded-sm object-cover"
+          />
+        </MediaText>
+      </div>
+    </section>
+
+    <!-- ─── PostTeaser ────────────────────────────────────────────────── -->
+    <section class="space-y-32">
+      <h2>PostTeaser</h2>
+
+      <div class="space-y-16">
+        <p class="kern-preline">mit body</p>
+        <PostTeaser
+          date="15. April 2025"
+          source="Bundesministerium der Justiz"
+          title="Neue Leitlinien für bessere Rechtsetzung veröffentlicht"
+          href="https://example.com"
+          body="Das Ministerium hat heute überarbeitete Leitlinien veröffentlicht, die klare Vorgaben für verständliche und praxistaugliche Gesetze schaffen."
+        />
+      </div>
+
+      <div class="space-y-16">
+        <p class="kern-preline">ohne body (nur Titel)</p>
+        <PostTeaser
+          date="2. März 2025"
+          source="ZfL"
+          title="Zentrum für Legistik nimmt Arbeit auf"
+          href="https://example.com"
+        />
+      </div>
+    </section>
+
+    <!-- ─── TimelineList ──────────────────────────────────────────────── -->
+    <section class="space-y-32">
+      <h2>TimelineList</h2>
+
+      <div class="space-y-16">
+        <p class="kern-preline">drei Einträge</p>
+        <TimelineList>
+          <li>
+            <h3>Phase 1: Analyse</h3>
+            <p>Bestandsaufnahme der bestehenden Regelungen und Prozesse.</p>
+          </li>
+          <li>
+            <h3>Phase 2: Entwurf</h3>
+            <p>
+              Erarbeitung eines Regelungsentwurfs unter Einbeziehung der
+              Betroffenen.
+            </p>
+          </li>
+          <li>
+            <h3>Phase 3: Umsetzung</h3>
+            <p>Inkraftsetzung und Begleitung der praktischen Umsetzung.</p>
+          </li>
+        </TimelineList>
+      </div>
+    </section>
+  </main>
+</Layout>
