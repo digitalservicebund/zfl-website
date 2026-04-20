@@ -11,23 +11,24 @@ interface Props {
 const { appointments, caption } = Astro.props;
 ---
 
-<table>
+<table class="zfl-table zfl-table--striped">
   <caption class="sr-only">{caption}</caption>
-  <thead
-    ><tr
-      ><th class="sr-only">Datum</th><th class="sr-only">Uhrzeit</th><th
-        class="sr-only">Ort</th
-      ></tr
-    ></thead
-  ><tbody>
+  <thead class="zfl-table__head">
+    <tr>
+      <th>Datum</th>
+      <th>Uhrzeit</th>
+      <th>Ort</th>
+    </tr>
+  </thead>
+  <tbody class="zfl-table__body">
     {
       appointments.map((appointment) => (
         <tr class="[&_td]:pr-16 [&_td]:pb-8">
-          <td class="font-bold">{appointment.date}</td>
+          <td>{appointment.date}</td>
           <td>{appointment.time}</td>
           <td>{appointment.location}</td>
         </tr>
       ))
-    }</tbody
-  >
+    }
+  </tbody>
 </table>
