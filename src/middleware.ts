@@ -1,5 +1,5 @@
 import { allRoutes } from "@/config/routes";
-import { isPreview, isStaging } from "@/config/stage";
+import { isProduction } from "@/config/stage";
 import { buildRoutePath, removeTrailingSlash } from "@/utils/path";
 import { defineMiddleware } from "astro:middleware";
 
@@ -10,8 +10,8 @@ const stagingOnlyPaths = new Set<string>(
 const notFoundPath = buildRoutePath("/404", import.meta.env.BASE_URL);
 
 export const onRequest = defineMiddleware((context, next) => {
-  // Allow staging and preview environments to access staging-only pages
-  if (isStaging || isPreview) {
+  // Allow staging, preview, and development environments to access staging-only pages
+  if (!isProduction) {
     return next();
   }
 
