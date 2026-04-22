@@ -11,7 +11,7 @@ The application requires a simple, linear wizard consisting of sequence of forms
 ### Considerations
 
 - **Framework use:** Astro offers front-end framework integrations and supports a variety of popular frameworks including _React_, _Preact_, _Svelte_, _Vue_, _SolidJS_, and _AlpineJS_ with official integrations.
-- **State Persistence:** If we go frameworkless, we don't have access to a built-in global state (like Redux Store) and we need to decide how to store the state of the forms itself and the form flow.
+- **State Persistence:** If we go frameworkless, we don't have access to a built-in global state (like _Redux Store_) and we need to decide how to store the state of the forms itself and the form flow.
 - **Validation:** When to validate inputs - before proceeding to the next step or in the end?
 - **Routing:** We'd like to use the native browser behavior, where each form step has its own unique URL.
 
@@ -53,7 +53,7 @@ We implement the wizard as a Multi-Page Application (MPA), where every form has 
 Technically, this does not cause a data persistence issue, as the individual form steps do not rely on each other's content to render. However, a user could bypass initial steps, reach the final summary page, and download the generated .docx document with missing or incomplete information without realizing they skipped required sections.
 Because our Nginx server is serving static HTML and has no access to the browser's localStorage, we cannot perform state-aware redirects on the server side. To prevent users from silently generating incomplete documents, we must implement route guarding strictly on the client side via Javascript.
 
-**Frameworkless Overhead**: By relying on vanilla JS and HTML, we don't have access to form libraries like _React Hook Form_ that handles complex validation schemas out of the box. Therefore, We will rely strictly on native HTML5 validation constraints (`required`, `pattern`, `min`, `max`) to handle validation without external libraries which covers all our usecases for input validation for now.
+**Frameworkless Overhead**: By relying on vanilla JS and HTML, we don't have access to form libraries like _React Hook Form_ that handles complex validation schemas out of the box. Therefore, we will rely strictly on native HTML5 validation constraints (`required`, `pattern`, `min`, `max`) to handle validation without external libraries which covers all our usecases for input validation for now.
 
 ## Implementation
 
