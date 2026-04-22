@@ -5,12 +5,13 @@ interface Props {
   title: string;
   href: string;
   body?: string;
+  class?: string;
 }
 
-const { date, source, title, href, body } = Astro.props;
+const { date, source, title, href, body, class: className } = Astro.props;
 ---
 
-<div class="py-32">
+<div class={className}>
   <header class="kern-card__header">
     <hgroup>
       <p class="kern-preline">{date} · {source}</p>
