@@ -24,8 +24,6 @@ fileignoreconfig:
       - "TRIVY_PASSWORD: \\${{  }}"
   - filename: AGENTS.md
     checksum: 10062bc4ca6a68e151dc351cf1a06719bb5fef19dd6e98710a2c9a15fc2f1a8f
-  - filename: doc/adr/0004-configuration-management.md
-    checksum: 367a262dfe679ea3254c86879a09d98b0e03863b4c514f58ccd3609afb58bdae
   - filename: doc/adr/0007-use-posthog-reverse-proxy.md
     allowed_patterns:
       - "IP Masking: The proxy will be configured to drop unnecessary headers, including
