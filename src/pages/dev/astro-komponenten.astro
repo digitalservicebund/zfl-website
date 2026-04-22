@@ -28,28 +28,28 @@ export const frontmatter = {
     </Hero>
 
     <!-- ─── Badge ─────────────────────────────────────────────────────── -->
-    <section class="space-y-32">
+    <section class="space-y-48">
       <h2>Badge</h2>
 
-      <div class="space-y-16">
-        <p class="kern-preline">look: hint (default)</p>
+      <div class="space-y-32">
+        <p class="variant-label kern-label">look: hint (default)</p>
         <Badge look="hint">Hinweistext</Badge>
       </div>
 
-      <div class="space-y-16">
-        <p class="kern-preline">look: gray</p>
+      <div class="space-y-32">
+        <p class="variant-label kern-label">look: gray</p>
         <Badge look="gray">Grauer Badge</Badge>
       </div>
 
-      <div class="space-y-16">
-        <p class="kern-preline">look: white</p>
+      <div class="space-y-32">
+        <p class="variant-label kern-label">look: white</p>
         <div class="bg-lavender-400 p-16">
           <Badge look="white">Weißer Badge</Badge>
         </div>
       </div>
 
-      <div class="space-y-16">
-        <p class="kern-preline">mit Icon-Slot</p>
+      <div class="space-y-32">
+        <p class="variant-label kern-label">mit Icon-Slot</p>
         <Badge look="hint">
           <Icon slot="icon" name="ic:outline-info" class="size-16" />
           Mit Icon
@@ -70,59 +70,59 @@ export const frontmatter = {
     </section>
 
     <!-- ─── Card ──────────────────────────────────────────────────────── -->
-    <section class="space-y-32">
+    <section class="space-y-48">
       <h2>Card</h2>
 
-      <div class="space-y-16">
-        <p class="kern-preline">look: default (weiß)</p>
+      <div class="space-y-32">
+        <p class="variant-label kern-label">look: default (weiß)</p>
         <Card>
           <h3>Weiße Karte</h3>
           <p>Standardvariante ohne explizites look-Prop.</p>
         </Card>
       </div>
 
-      <div class="space-y-16">
-        <p class="kern-preline">look: gray</p>
+      <div class="space-y-32">
+        <p class="variant-label kern-label">look: gray</p>
         <Card look="gray">
           <h3>Graue Karte</h3>
           <p>Hintergrund: <code>bg-lavender-base</code>.</p>
         </Card>
       </div>
 
-      <div class="space-y-16">
-        <p class="kern-preline">look: lavender</p>
+      <div class="space-y-32">
+        <p class="variant-label kern-label">look: lavender</p>
         <Card look="lavender">
           <h3>Lavendel-Karte</h3>
           <p>Hintergrund: <code>bg-lavender-400</code>.</p>
         </Card>
       </div>
 
-      <div class="space-y-16">
-        <p class="kern-preline">look: lightLavender</p>
+      <div class="space-y-32">
+        <p class="variant-label kern-label">look: lightLavender</p>
         <Card look="lightLavender">
           <h3>Helles Lavendel</h3>
           <p>Hintergrund: <code>bg-lavender-200</code>.</p>
         </Card>
       </div>
 
-      <div class="space-y-16">
-        <p class="kern-preline">look: blue</p>
+      <div class="space-y-32">
+        <p class="variant-label kern-label">look: blue</p>
         <Card look="blue">
           <h3>Blaue Karte</h3>
           <p>Hintergrund: <code>bg-cosmic-blue-base</code>, weiße Schrift.</p>
         </Card>
       </div>
 
-      <div class="space-y-16">
-        <p class="kern-preline">padding: wide</p>
+      <div class="space-y-32">
+        <p class="variant-label kern-label">padding: wide</p>
         <Card padding="wide">
           <h3>Breites Padding</h3>
           <p>Variante mit mehr horizontalem Innenabstand.</p>
         </Card>
       </div>
 
-      <div class="space-y-16">
-        <p class="kern-preline">mit Icon-Slot</p>
+      <div class="space-y-32">
+        <p class="variant-label kern-label">mit Icon-Slot</p>
         <Card>
           <Icon name="ic:twotone-widgets" slot="icon" />
           <h3>Karte mit Icon</h3>
@@ -135,11 +135,11 @@ export const frontmatter = {
     </section>
 
     <!-- ─── FeatureItem + FeatureSet ──────────────────────────────────── -->
-    <section class="space-y-32">
+    <section class="space-y-48">
       <h2>FeatureItem + FeatureSet</h2>
 
-      <div class="space-y-16">
-        <p class="kern-preline">FeatureSet mit drei FeatureItems</p>
+      <div class="space-y-32">
+        <p class="variant-label kern-label">FeatureSet mit drei FeatureItems</p>
         <FeatureSet>
           <FeatureItem
             icon="ic:outline-check-circle"
@@ -165,7 +165,7 @@ export const frontmatter = {
     <!-- ─── Hero ──────────────────────────────────────────────────────── -->
     <section class="breakout-grid contents">
       <h2 class="mt-32">Hero</h2>
-      <p class="kern-preline">level: root</p>
+      <p class="variant-label kern-label mt-32 mb-32">level: root</p>
       <Hero level="root">
         <h2 class="kern-heading-x-large py-0 text-white">
           Bessere Rechtsetzung
@@ -174,28 +174,23 @@ export const frontmatter = {
           Root-Level-Hero mit weißem Text auf dunkelblauem Hintergrund.
         </p>
       </Hero>
-      <p class="kern-preline mt-32">level: main</p>
+      <p class="variant-label kern-label mt-48 mb-32">level: main</p>
       <Hero level="main">
         <h2 class="kern-heading-x-large py-0">Hauptseite</h2>
         <p slot="subtitle">Main-Level-Hero, Lavendel-Hintergrund.</p>
       </Hero>
-      <p class="kern-preline mt-32">level: sub (default)</p>
+      <p class="variant-label kern-label mt-48 mb-32">level: sub (default)</p>
       <Hero>
         <h2 class="kern-heading-x-large py-0">Unterseite</h2>
       </Hero>
     </section>
 
     <!-- ─── KernCard ──────────────────────────────────────────────────── -->
-    <section class="space-y-32">
+    <section class="space-y-48">
       <h2>KernCard</h2>
 
-      <div class="space-y-16">
-        <p class="kern-preline">einfach (nur title)</p>
-        <KernCard title="Einfache Karte" />
-      </div>
-
-      <div class="space-y-16">
-        <p class="kern-preline">mit preline, subline und body</p>
+      <div class="space-y-32">
+        <p class="variant-label kern-label">mit preline, subline und body</p>
         <KernCard
           title="Mit Preline und Subline"
           preline="Kategorie"
@@ -204,8 +199,8 @@ export const frontmatter = {
         />
       </div>
 
-      <div class="space-y-16">
-        <p class="kern-preline">interaktiv (mit href)</p>
+      <div class="space-y-32">
+        <p class="variant-label kern-label">interaktiv (mit href)</p>
         <KernCard
           title="Anklickbare Karte"
           preline="Interaktiv"
@@ -214,8 +209,8 @@ export const frontmatter = {
         />
       </div>
 
-      <div class="space-y-16">
-        <p class="kern-preline">mit Bild</p>
+      <div class="space-y-32">
+        <p class="variant-label kern-label">mit Bild</p>
         <KernCard
           title="Karte mit Bild"
           preline="Bild-Variante"
@@ -226,8 +221,8 @@ export const frontmatter = {
         />
       </div>
 
-      <div class="space-y-16">
-        <p class="kern-preline">mit Footer-Slot</p>
+      <div class="space-y-32">
+        <p class="variant-label kern-label">mit Footer-Slot</p>
         <KernCard
           title="Karte mit Footer"
           body="Der Footer-Bereich eignet sich für Links oder Metadaten."
@@ -238,11 +233,11 @@ export const frontmatter = {
     </section>
 
     <!-- ─── MediaText ─────────────────────────────────────────────────── -->
-    <section class="space-y-32">
+    <section class="space-y-48">
       <h2>MediaText</h2>
 
-      <div class="space-y-16">
-        <p class="kern-preline">default (split: 7-5)</p>
+      <div class="space-y-32">
+        <p class="variant-label kern-label">default (split: 7-5)</p>
         <MediaText>
           <div>
             <h3>Hauptinhalt (7/12)</h3>
@@ -260,8 +255,8 @@ export const frontmatter = {
         </MediaText>
       </div>
 
-      <div class="space-y-16">
-        <p class="kern-preline">reversed</p>
+      <div class="space-y-32">
+        <p class="variant-label kern-label">reversed</p>
         <MediaText reversed>
           <div>
             <h3>Text rechts</h3>
@@ -278,8 +273,8 @@ export const frontmatter = {
         </MediaText>
       </div>
 
-      <div class="space-y-16">
-        <p class="kern-preline">split: 8-4</p>
+      <div class="space-y-32">
+        <p class="variant-label kern-label">split: 8-4</p>
         <MediaText split="8-4">
           <div>
             <h3>Breiter Text (8/12)</h3>
@@ -298,11 +293,11 @@ export const frontmatter = {
     </section>
 
     <!-- ─── PostTeaser ────────────────────────────────────────────────── -->
-    <section class="space-y-32">
+    <section class="space-y-48">
       <h2>PostTeaser</h2>
 
-      <div class="space-y-16">
-        <p class="kern-preline">mit body</p>
+      <div class="space-y-32">
+        <p class="variant-label kern-label">mit body</p>
         <PostTeaser
           date="15. April 2025"
           source="Bundesministerium der Justiz"
@@ -312,8 +307,8 @@ export const frontmatter = {
         />
       </div>
 
-      <div class="space-y-16">
-        <p class="kern-preline">ohne body (nur Titel)</p>
+      <div class="space-y-32">
+        <p class="variant-label kern-label">ohne body (nur Titel)</p>
         <PostTeaser
           date="2. März 2025"
           source="ZfL"
@@ -324,11 +319,11 @@ export const frontmatter = {
     </section>
 
     <!-- ─── TimelineList ──────────────────────────────────────────────── -->
-    <section class="space-y-32">
+    <section class="space-y-48">
       <h2>TimelineList</h2>
 
-      <div class="space-y-16">
-        <p class="kern-preline">drei Einträge</p>
+      <div class="space-y-32">
+        <p class="variant-label kern-label">drei Einträge</p>
         <TimelineList>
           <li>
             <h3>Phase 1: Analyse</h3>
@@ -350,3 +345,14 @@ export const frontmatter = {
     </section>
   </main>
 </Layout>
+
+<style>
+  .variant-label {
+    &::before {
+      content: "❯";
+      color: var(--color-cosmic-blue-400);
+      display: inline-block;
+      margin-right: 0.5em;
+    }
+  }
+</style>
