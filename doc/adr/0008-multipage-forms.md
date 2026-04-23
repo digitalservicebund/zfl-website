@@ -43,17 +43,19 @@ We implement the wizard as a Multi-Page Application (MPA), where every form has 
 
 ### Benefits
 
-**Proportional Architecture (Avoiding Over-engineering):** Our requirements for the forms itself are simple: linear progression of mostly static text inputs without any complex branching logic, dynamic field arrays, or any cross-component state synchronization. Adopting a heavy UI framework (like React or Vue) to handle this would introduce unnecessary architectural complexity to solve problems native web standards can solve for us.
+**Right-sized architecture**: A frameworkless MPA fits the current scope (linear flow, mostly static text inputs) and avoids unnecessary complexity which would have been introduced by UI frameworks.
 
-**Persistence && UX**: Because data is stored in `localStorage`, a user can safely close the tab or accidentally navigate away and return later to find their progress saved. Additionally, utilizing a MPA architecture ensures the browser's native "Back" button works without requiring a custom implementation.
+**Better resilience and UX**: Persisting data in localStorage lets users continue after closing the tab, and native page routing keeps browser back/forward behavior intuitive.
 
 ### Drawbacks & Mitigations
 
-**Direct Access Risk**: Because we are implementing a multi-page architecture where each form step has its own distinct URL (e.g., /steckbrief/step-3), users can manually type these URLs or use bookmarks to jump directly into the middle of the flow.
-Technically, this does not cause a data persistence issue, as the individual form steps do not rely on each other's content to render. However, a user could bypass initial steps, reach the final summary page, and download the generated .docx document with missing or incomplete information without realizing they skipped required sections.
-Because our Nginx server is serving static HTML and has no access to the browser's localStorage, we cannot perform state-aware redirects on the server side. To prevent users from silently generating incomplete documents, we must implement route guarding strictly on the client side via Javascript.
+**Users can skip steps by URL**: Because each step has its own route, users may jump ahead and generate an incomplete document.
 
-**Frameworkless Overhead**: By relying on vanilla JS and HTML, we don't have access to form libraries like _React Hook Form_ that handles complex validation schemas out of the box. Therefore, we will rely strictly on native HTML5 validation constraints (`required`, `pattern`, `min`, `max`) to handle validation without external libraries which covers all our usecases for input validation for now.
+- **Mitigation**: Add client-side route guards that verify required data before allowing access to later steps or the final summary.
+
+**No form library conveniences:**: Without React/Vue form libraries, advanced schema tooling is unavailable.
+
+- **Mitigation**: Use native HTML5 validation (required, pattern, min, max), which is sufficient for current input requirements.
 
 ## Implementation
 
