@@ -81,6 +81,10 @@ fileignoreconfig:
   - filename: src/pages/dev/kern-komponenten.astro
     allowed_patterns:
       - key
+  - filename: src/pages/rulevis.astro
+    allowed_patterns:
+      - key
+      - classKey
 scopeconfig:
   - scope: node
 allowed_patterns:

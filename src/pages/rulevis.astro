@@ -1,0 +1,288 @@
+---
+import Hero from "@/components/Hero.astro";
+import Layout from "@/layouts/Layout.astro";
+import Card from "@/components/Card.astro";
+
+export const frontmatter = {
+  title: "Regelungen besser verstehen",
+  sitemap: true,
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero>
+      <h1>Regelungen besser verstehen</h1>
+      <p>
+        Wer macht wann was? Analysieren Sie Gesetzespassagen mit unserem
+        Online-Tool.
+      </p>
+    </Hero>
+    <section class="space-y-md">
+      <div class="kern-form-input">
+        <label class="kern-label" for="textarea">Textausschnitt</label>
+        <textarea class="kern-form-input__input" id="textarea" name="textarea"
+        ></textarea>
+      </div>
+      <div>
+        <button
+          id="analyze-btn"
+          type="button"
+          class="kern-btn kern-btn--primary"
+        >
+          <span class="kern-label">Analysieren</span>
+        </button>
+      </div>
+    </section>
+    <section class="breakout bg-lavender-400">
+      <Card>
+        <div id="result" class="max-w-a11y" hidden>
+          <div class="legend" id="legend"></div>
+          <div class="highlighted-text" id="highlighted-text"></div>
+        </div></Card
+      >
+    </section>
+  </main>
+</Layout>
+
+<style is:global>
+  .highlighted-text {
+    line-height: 2;
+    white-space: pre-wrap;
+  }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background: none;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+
+  .legend-item[aria-pressed="false"] {
+    opacity: 0.4;
+  }
+
+  .legend-swatch {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  mark {
+    border-radius: 3px;
+    padding: 0.1em 0.2em;
+    color: inherit;
+    transition: opacity 0.15s;
+  }
+
+  mark.dim {
+    opacity: 0.15;
+  }
+
+  mark.akteur {
+    background-color: #a8d8ea;
+  }
+  mark.aktion {
+    background-color: #a8e6cf;
+  }
+  mark.bedingung {
+    background-color: #ffd3b6;
+  }
+  mark.verweis {
+    background-color: #d4a5f5;
+  }
+  mark.objekt {
+    background-color: #ffeaa7;
+  }
+  mark.rechtsfolge {
+    background-color: #fab1a0;
+  }
+  mark.unknown {
+    background-color: #dfe6e9;
+  }
+</style>
+
+<script>
+  const COLORS: Record<string, string> = {
+    akteur: "#a8d8ea",
+    aktion: "#a8e6cf",
+    bedingung: "#ffd3b6",
+    verweis: "#d4a5f5",
+    objekt: "#ffeaa7",
+    rechtsfolge: "#fab1a0",
+    unknown: "#dfe6e9",
+  };
+
+  const API_URL = "http://localhost:8000/extract"; // /extract-mock
+
+  function classKey(name: string): string {
+    return name.toLowerCase().replace(/\s+/g, "-");
+  }
+
+  function titleCase(s: string): string {
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  }
+
+  function colorFor(key: string): string {
+    return COLORS[key] ?? COLORS.unknown;
+  }
+
+  function escapeHtml(s: string): string {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  function buildHighlightedText(
+    text: string,
+    extractions: { extraction_class: string; extraction_text: string }[],
+  ): string {
+    type Span = { start: number; end: number; cls: string };
+    const spans: Span[] = [];
+
+    for (const { extraction_class, extraction_text } of extractions) {
+      if (!extraction_text) continue;
+      let from = 0;
+      while (from < text.length) {
+        const idx = text.indexOf(extraction_text, from);
+        if (idx === -1) break;
+        spans.push({
+          start: idx,
+          end: idx + extraction_text.length,
+          cls: classKey(extraction_class),
+        });
+        from = idx + 1;
+      }
+    }
+
+    // Split at every span boundary so overlapping spans can each be rendered
+    const boundaries = new Set<number>([0, text.length]);
+    for (const { start, end } of spans) {
+      boundaries.add(start);
+      boundaries.add(end);
+    }
+    const sorted = [...boundaries].sort((a, b) => a - b);
+
+    let html = "";
+    for (let i = 0; i < sorted.length - 1; i++) {
+      const segStart = sorted[i];
+      const segEnd = sorted[i + 1];
+      const activeClasses = [
+        ...new Set(
+          spans
+            .filter((s) => s.start <= segStart && s.end >= segEnd)
+            .map((s) => s.cls),
+        ),
+      ];
+      const segment = escapeHtml(text.slice(segStart, segEnd));
+
+      if (activeClasses.length === 0) {
+        html += segment;
+      } else if (activeClasses.length === 1) {
+        html += `<mark class="${activeClasses[0]}">${segment}</mark>`;
+      } else {
+        const colors = activeClasses.map((c) => colorFor(c));
+        const stops = colors.flatMap((c, i) => [
+          `${c} ${(i / colors.length) * 100}%`,
+          `${c} ${((i + 1) / colors.length) * 100}%`,
+        ]);
+        html += `<mark class="${activeClasses.join(" ")}" style="background:linear-gradient(135deg,${stops.join(",")})">${segment}</mark>`;
+      }
+    }
+    return html;
+  }
+
+  function applyDimming(activeClasses: Set<string>) {
+    document
+      .querySelectorAll<HTMLElement>("#highlighted-text mark")
+      .forEach((mark) => {
+        const markClasses = [...mark.classList].filter((c) => c !== "dim");
+        const isActive = markClasses.some((c) => activeClasses.has(c));
+        mark.classList.toggle("dim", !isActive);
+      });
+  }
+
+  document
+    .getElementById("analyze-btn")!
+    .addEventListener("click", async () => {
+      const textarea = document.getElementById(
+        "textarea",
+      ) as HTMLTextAreaElement;
+      const text = textarea.value.trim();
+      if (!text) return;
+
+      const btn = document.getElementById("analyze-btn") as HTMLButtonElement;
+      btn.disabled = true;
+      btn.querySelector("span")!.textContent = "Analysiere…";
+
+      try {
+        const response = await fetch(`${API_URL}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text }),
+        });
+
+        if (!response.ok) throw new Error(`Server error: ${response.status}`);
+
+        const extractions: {
+          extraction_class: string;
+          extraction_text: string;
+        }[] = await response.json();
+
+        document.getElementById("highlighted-text")!.innerHTML =
+          buildHighlightedText(text, extractions);
+
+        const classes = [
+          ...new Set(extractions.map((e) => classKey(e.extraction_class))),
+        ];
+        const activeClasses = new Set(classes);
+
+        const legend = document.getElementById("legend")!;
+        legend.innerHTML = classes
+          .map(
+            (cls) =>
+              `<button type="button" class="legend-item" data-cls="${cls}" aria-pressed="true">
+               <span class="legend-swatch" style="background:${colorFor(cls)}"></span>
+               ${titleCase(cls)}
+             </button>`,
+          )
+          .join("");
+
+        legend
+          .querySelectorAll<HTMLButtonElement>(".legend-item")
+          .forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const cls = btn.dataset.cls!;
+              if (activeClasses.has(cls)) {
+                activeClasses.delete(cls);
+                btn.setAttribute("aria-pressed", "false");
+              } else {
+                activeClasses.add(cls);
+                btn.setAttribute("aria-pressed", "true");
+              }
+              applyDimming(activeClasses);
+            });
+          });
+
+        document.getElementById("result")!.hidden = false;
+      } catch (err) {
+        alert(`Fehler: ${err instanceof Error ? err.message : err}`);
+      } finally {
+        btn.disabled = false;
+        btn.querySelector("span")!.textContent = "Analysieren";
+      }
+    });
+</script>

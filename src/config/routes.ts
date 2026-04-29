@@ -110,6 +110,17 @@ export const kontakt = {
   navLabel: null,
 } as const;
 
+export const rulevis = {
+  key: "rulevis",
+  path: "/rulevis",
+  title: "Regelungen besser verstehen",
+  parent: null,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
 export const schulungen = {
   key: "schulungen",
   path: "/schulungen",
@@ -208,6 +219,7 @@ export const allRoutes = [
   home,
   impressum,
   kontakt,
+  rulevis,
   schulungen,
   sitemap,
   staging,
