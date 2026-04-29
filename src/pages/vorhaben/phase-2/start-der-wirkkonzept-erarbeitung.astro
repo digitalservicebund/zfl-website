@@ -1,0 +1,117 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { vorhaben_phase2_ergebnisArbeitshilfenCheck } from "@/config/routes";
+
+export const frontmatter = {
+  title: "Start der Wirkkonzept-Erarbeitung",
+  sitemap: false,
+  navOrder: 1,
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <section class="mx-auto max-w-730">
+      <h1>{frontmatter.title}</h1>
+      <p class="kern-body">
+        Damit bei der Erarbeitung des Wirkkonzepts sämtliche Formalitäten von
+        Grund auf mitgedacht werden, unterstützen wir Sie bei der
+        Berücksichtigung von Checks und Arbeitshilfen.
+      </p>
+
+      <div class="mt-md">
+        <label class="kern-label" for="phase2-freitext"
+          >Kopieren Sie dafür Ihren finalen Steckbrief in dieses Textfeld.</label
+        >
+        <textarea
+          id="phase2-freitext"
+          name="phase2-freitext"
+          class="kern-form-input__input min-h-180 w-full"
+          placeholder="Hier Text einfügen..."
+        >
+        </textarea>
+      </div>
+      <div class="mt-md">
+        <button
+          id="feedback-erstellen-btn"
+          type="button"
+          class="kern-btn kern-btn--primary"
+          data-target-path={vorhaben_phase2_ergebnisArbeitshilfenCheck.path}
+        >
+          <span class="kern-label">Feedback erstellen</span>
+          <span class="phase2-loader-backdrop" aria-hidden="true">
+            <span class="phase2-loader"></span>
+          </span>
+        </button>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  #feedback-erstellen-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  #feedback-erstellen-btn .phase2-loader-backdrop {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 9999px;
+    background: rgb(255 255 255 / 0.28);
+  }
+
+  #feedback-erstellen-btn[data-loading="true"] {
+    opacity: 0.95;
+    pointer-events: none;
+  }
+
+  #feedback-erstellen-btn[data-loading="true"] .phase2-loader-backdrop {
+    display: inline-flex;
+  }
+
+  .phase2-loader {
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgb(255 255 255 / 0.45);
+    border-top-color: #fff;
+    border-radius: 9999px;
+    animation: phase2-spin 0.8s linear infinite;
+  }
+
+  @keyframes phase2-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+
+<script>
+  function initFeedbackButtonLoader() {
+    const button = document.querySelector("#feedback-erstellen-btn");
+    if (!(button instanceof HTMLButtonElement)) return;
+
+    button.addEventListener("click", () => {
+      if (button.dataset.loading === "true") return;
+
+      button.dataset.loading = "true";
+      button.disabled = true;
+
+      window.setTimeout(() => {
+        button.dataset.loading = "false";
+        button.disabled = false;
+
+        const targetPath = button.dataset.targetPath;
+        if (targetPath) {
+          window.location.href = targetPath;
+        }
+      }, 5000);
+    });
+  }
+
+  document.addEventListener("astro:page-load", initFeedbackButtonLoader);
+</script>

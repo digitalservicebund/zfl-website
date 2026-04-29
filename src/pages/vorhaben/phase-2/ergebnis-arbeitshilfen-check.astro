@@ -1,0 +1,344 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import HintSidebar from "@/pages/vorhaben/steckbrief/_components/HintSidebar.astro";
+
+export const frontmatter = {
+  title: "Ergebnis Arbeitshilfen Check",
+  sitemap: false,
+  navOrder: 2,
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main>
+    <div
+      class="_gap-32 flex flex-1 flex-col lg:flex-row lg:items-stretch"
+      x-data="{ hintId: '' }"
+    >
+      <div class="min-w-0 flex-1">
+        <div class="breakout-grid">
+          <section class="mx-auto max-w-730">
+            <h1>{frontmatter.title}</h1>
+            <p class="kern-body">
+              Auf Basis Ihres Steckbriefs wurden Empfehlungen und Hinweise für
+              die weitere Ausarbeitung des Wirkkonzepts erstellt.
+            </p>
+            <div class="kern-form-check space-y-8">
+              <input
+                class="kern-form-check__checkbox"
+                id="digitalbezug"
+                name="digitalbezug"
+                type="checkbox"
+                checked
+              />
+              <label class="kern-label" for="digitalbezug"
+                >Digitalbezug vorhanden</label
+              >
+            </div>
+            <hr class="kern-divider" aria-hidden="true" />
+            <section id="austauschen" class="space-y-16 md:space-y-24">
+              <div
+                class="flex flex-col gap-16 md:grid md:grid-cols-[5fr_3fr] md:gap-32"
+              >
+                <div class="max-w-730 space-y-16">
+                  <h2 class="kern-heading-medium">
+                    Steckbrief: Gesetz zur staatlichen Förderung der
+                    Massenproduktion von KI-generierten Katzenvideos (KatVidFG)
+                  </h2>
+
+                  <section class="space-y-8">
+                    <h2 class="kern-heading-medium">Kontext &amp; Genese</h2>
+                    <h3 class="kern-heading-small">Gesetzesumfeld / Kontext</h3>
+                    <p class="kern-body">
+                      Der Fokus liegt auf der technologischen Souveränität
+                      Deutschlands im Bereich der generativen KI. Um die
+                      Abhängigkeit von außereuropäischen Cloud-Anbietern zu
+                      verringern, soll eine nationale Video-KI-Infrastruktur
+                      gefördert werden. Die Steigerung der Arbeitsproduktivität
+                      durch Stressreduktion (ZDW-Studie 2025) dient als
+                      ökonomische Rechtfertigung für den Aufbau dieser digitalen
+                      Plattformökonomie.
+                    </p>
+                  </section>
+                  <section class="space-y-8">
+                    <h2 class="kern-heading-medium">Problembeschreibung</h2>
+                    <h3 class="kern-heading-small">Problembeschreibung</h3>
+                    <p class="kern-body">
+                      Es mangelt an einer interoperablen Schnittstelle zwischen
+                      staatlicher Kulturförderung und agilen KI-Start-ups.
+                      Bisherige Antragswege sind nicht auf die
+                      Hochfrequenz-Produktion digitaler Assets ausgelegt.
+                    </p>
+                  </section>
+
+                  <section class="space-y-8">
+                    <h2 class="kern-heading-medium">
+                      Einflussfaktoren &amp; Akteure
+                    </h2>
+                    <h3 class="kern-heading-small">
+                      Technische Einflussfaktoren
+                    </h3>
+                    <ul class="kern-body list-disc space-y-8 pl-24">
+                      <li>
+                        Rechenleistung: Bedarf an staatlich subventionierten
+                        GPU-Clustern.
+                      </li>
+                      <li>
+                        Datenschutz: Training der Modelle darf nur mit
+                        DSGVO-konformen Datensätzen erfolgen (verifizierte
+                        "Consent-Cats").
+                      </li>
+                      <li>
+                        Schnittstellen: Integration der BDW-Plattform in den
+                        Portalverbund (OZG 3.0).
+                      </li>
+                    </ul>
+                    <h3 class="kern-heading-small">Relevante Akteure</h3>
+                    <ul class="kern-body list-disc space-y-8 pl-24">
+                      <li>
+                        Zentralstelle für IT-Beschaffung: Für den Aufbau der
+                        Cloud-Infrastruktur.
+                      </li>
+                      <li>
+                        Software-Entwickler-Verbände: Als Berater für
+                        API-Standards.
+                      </li>
+                    </ul>
+                  </section>
+
+                  <section class="space-y-8">
+                    <h2 class="kern-heading-medium">Vorläufige Zielsetzung</h2>
+                    <h3 class="kern-heading-small">Zielsetzung</h3>
+                    <ul class="kern-body list-disc space-y-8 pl-24">
+                      <li>
+                        Etablierung eines vollautomatisierten digitalen
+                        Ökosystems für KI-Content.
+                      </li>
+                      <li>
+                        KPI 1: 100% digitale Antragstellung (theoretisch, siehe
+                        Problembeschreibung).
+                      </li>
+                      <li>
+                        KPI 2: Latenzzeit zwischen KI-Generierung und
+                        staatlicher Qualitätsprüfung &lt; 500ms durch
+                        Edge-Computing.
+                      </li>
+                    </ul>
+                  </section>
+
+                  <section class="space-y-8">
+                    <h2 class="kern-heading-medium">Vorhabensbeschreibung</h2>
+                    <h3 class="kern-heading-small">Maßnahmen (Digitalfokus)</h3>
+                  </section>
+                </div>
+                <div></div>
+              </div>
+
+              <div
+                class="flex flex-col gap-16 md:grid md:grid-cols-[5fr_3fr] md:gap-32"
+              >
+                <div class="kern-body max-w-730">
+                  <mark
+                    >Entwicklung eines KI-Prüf-Algorithmus: Automatische
+                    Erkennung von "High-Welfare-Content"</mark
+                  > (Glücksfaktor-Analyse).
+                </div>
+                <div class="space-y-8">
+                  <p><mark>Prinzip 1</mark></p>
+                  <p class="kern-body">
+                    Schwerpunkt: Automatisierung basiert auf eindeutigen
+                    Regelungen
+                  </p>
+                  <button
+                    id="Hinweis-high-welfare-content"
+                    type="button"
+                    class="kern-btn kern-btn--primary"
+                    @click="hintId = 'hinweis-high-welfare-content'"
+                  >
+                    <span class="kern-label">Hinweis ansehen</span>
+                  </button>
+                </div>
+              </div>
+
+              <div
+                class="flex flex-col gap-16 md:grid md:grid-cols-[5fr_3fr] md:gap-32"
+              >
+                <div class="kern-body max-w-730">
+                  <mark
+                    >Blockchain-basierte Rechtekontrolle: Sicherstellung, dass
+                    Urheberrechte an den Trainingsdaten gewahrt bleiben.</mark
+                  >
+                </div>
+                <div class="space-y-8">
+                  <p><mark>Prinzip 100</mark></p>
+                  <p class="kern-body">
+                    Schwerpunkt: Datenschutz und Informationssicherheit schaffen
+                    Vertrauen
+                  </p>
+                  <button
+                    id="Hinweis-blockchain-rechtekontrolle"
+                    type="button"
+                    class="kern-btn kern-btn--primary"
+                    @click="hintId = 'hinweis-blockchain-rechtekontrolle'"
+                  >
+                    <span class="kern-label">Hinweis ansehen</span>
+                  </button>
+                </div>
+              </div>
+
+              <div
+                class="flex flex-col gap-16 md:grid md:grid-cols-[5fr_3fr] md:gap-32"
+              >
+                <div class="max-w-730 space-y-16">
+                  <ul class="kern-body list-disc space-y-8 pl-24">
+                    <li>
+                      Manueller Verifikationsschritt (Fehler-Maßnahme): Aufbau
+                      einer "Druck- und Scan-Abteilung" in der BDW, um die
+                      postalisch eingereichten Quellcodes händisch mit den
+                      digitalen Uploads abzugleichen.
+                    </li>
+                  </ul>
+
+                  <section class="space-y-8">
+                    <h3 class="kern-heading-small">Projektplanung</h3>
+                    <h3 class="kern-heading-small">Risikoeinschätzung</h3>
+                  </section>
+                </div>
+                <div></div>
+              </div>
+
+              <div
+                class="flex flex-col gap-16 md:grid md:grid-cols-[5fr_3fr] md:gap-32"
+              >
+                <div class="kern-body max-w-730">
+                  Risiko IT-Interoperabilität: Die <mark
+                    >Unvereinbarkeit des geforderten Postversands (Papierform)
+                    mit der angestrebten Echtzeit-Förderung</mark
+                  > führt zu einem massiven Backlog in der Bearbeitung.
+                </div>
+                <div class="space-y-8">
+                  <p><mark>Prinzip 4</mark></p>
+                  <p class="kern-body">
+                    Schwerpunkt: Etablierte Technologien ermöglichen effiziente
+                    Umsetzung
+                  </p>
+                  <button
+                    id="Hinweis-postversand-echtzeitfoerderung"
+                    type="button"
+                    class="kern-btn kern-btn--primary"
+                    @click="hintId = 'hinweis-postversand-echtzeitfoerderung'"
+                  >
+                    <span class="kern-label">Hinweis ansehen</span>
+                  </button>
+                </div>
+              </div>
+
+              <div
+                class="flex flex-col gap-16 md:grid md:grid-cols-[5fr_3fr] md:gap-32"
+              >
+                <div class="max-w-730 space-y-16">
+                  <ul class="kern-body list-disc space-y-8 pl-24">
+                    <li>
+                      Skalierbarkeit: Das System bricht unter der Last von
+                      Millionen KI-generierter Frames zusammen, da die
+                      gesetzlich vorgeschriebene händische Unterschrift pro
+                      Prompt den Prozess künstlich drosselt.
+                    </li>
+                  </ul>
+
+                  <section class="space-y-8">
+                    <h3 class="kern-heading-small">Komplexitätsgrad: Hoch</h3>
+                    <p class="kern-body">
+                      Die Komplexität ergibt sich nicht aus der Technik, sondern
+                      aus der systemischen Inkompatibilität: Das Gesetz verlangt
+                      eine digitale Hochtechnologie-Lösung, zwingt diese aber in
+                      einen analogen Verwaltungsrahmen (Verstoß gegen den
+                      Digitalcheck).
+                    </p>
+                    <h3 class="kern-heading-small">Ressourcenschätzung</h3>
+                    <ul class="kern-body list-disc space-y-8 pl-24">
+                      <li>
+                        IT-Infrastruktur: 45 Mio. Euro für Serverkapazitäten.
+                      </li>
+                      <li>
+                        Personal: 150 zusätzliche Stellen für den "Post- und
+                        Scanservice", um die gesetzlich fixierten Medienbrüche
+                        abzuarbeiten.
+                      </li>
+                    </ul>
+                  </section>
+
+                  <section class="space-y-8">
+                    <p class="kern-body">
+                      Hinweis: Durch die Forderung nach papiergebundenen
+                      Quellcode-Ausdrucken bei einer KI-Förderung ist das
+                      Prinzip der „Digitalen Tauglichkeit“ (Regelungen so zu
+                      fassen, dass sie digital vollziehbar sind) konterkariert
+                      worden.
+                    </p>
+                    <p class="kern-body">
+                      Möchtest du, dass ich die Fehler noch subtiler in die
+                      Verwaltungsprozesse einbaue oder soll ich ein weiteres
+                      Prinzip des Digitalchecks (z.B. Prinzip 2:
+                      Interoperabilität) ebenfalls verletzen?
+                    </p>
+                  </section>
+                </div>
+                <div></div>
+              </div>
+            </section>
+          </section>
+        </div>
+      </div>
+      <div
+        class="max-w-0 shrink-0 overflow-hidden transition-all duration-300 ease-in-out lg:sticky lg:top-0 lg:h-[calc(100dvh-var(--header-height))]"
+        x-cloak
+        :class="hintId ? 'max-w-full opacity-100 lg:max-w-[360px]' : 'max-w-0 opacity-0'"
+      >
+        <div class="h-full w-full lg:w-[360px]">
+          <HintSidebar class="h-full overflow-y-auto">
+            <div x-show="hintId === 'hinweis-high-welfare-content'" x-cloak>
+              <h2 class="kern-heading-small">Hinweis</h2>
+              <p class="kern-body mt-8">
+                Teilweise erfüllt. Das Ziel ist Automatisierung, aber
+                „Glücksfaktor-Analyse“ ist ein unbestimmter Rechtsbegriff. Ohne
+                klare Kriterien ist der Algorithmus rechtlich nicht haltbar.
+              </p>
+            </div>
+            <div
+              x-show="hintId === 'hinweis-blockchain-rechtekontrolle'"
+              x-cloak
+            >
+              <h2 class="kern-heading-small">Hinweis</h2>
+              <p class="kern-body mt-8">
+                2. Datenschutz und Informationssicherheit schaffen Vertrauen
+              </p>
+            </div>
+            <div
+              x-show="hintId === 'hinweis-postversand-echtzeitfoerderung'"
+              x-cloak
+            >
+              <h2 class="kern-heading-small">Hinweis</h2>
+              <p class="kern-body mt-8">
+                Verletzt. Papierhafter Postversand für Quellcode ist ein
+                massiver Medienbruch. Dies konterkariert den Einsatz effizienter
+                digitaler Standards.
+              </p>
+            </div>
+          </HintSidebar>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  #austauschen,
+  #austauschen section {
+    padding-block: 0;
+  }
+
+  #austauschen mark {
+    background-color: #f5e05d;
+  }
+</style>

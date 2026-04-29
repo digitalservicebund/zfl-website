@@ -175,8 +175,44 @@ export const vorhaben = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
+  navOrder: 1,
   navLabel: "Ihr Vorhaben",
+  isHiddenParent: false,
+} as const;
+
+export const vorhaben_phase2 = {
+  key: "vorhaben_phase2",
+  path: "/vorhaben/phase-2",
+  title: "Phase 2",
+  parent: vorhaben,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 3,
+  navLabel: null,
+  isHiddenParent: true,
+} as const;
+
+export const vorhaben_phase2_ergebnisArbeitshilfenCheck = {
+  key: "vorhaben_phase2_ergebnisArbeitshilfenCheck",
+  path: "/vorhaben/phase-2/ergebnis-arbeitshilfen-check",
+  title: "Ergebnis Arbeitshilfen Check",
+  parent: vorhaben_phase2,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 2,
+  navLabel: null,
+  isHiddenParent: false,
+} as const;
+
+export const vorhaben_phase2_startDerWirkkonzeptErarbeitung = {
+  key: "vorhaben_phase2_startDerWirkkonzeptErarbeitung",
+  path: "/vorhaben/phase-2/start-der-wirkkonzept-erarbeitung",
+  title: "Start der Wirkkonzept-Erarbeitung",
+  parent: vorhaben_phase2,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 1,
+  navLabel: null,
   isHiddenParent: false,
 } as const;
 
@@ -187,7 +223,7 @@ export const vorhaben_steckbrief = {
   parent: vorhaben,
   sitemap: false,
   isStagingOnly: false,
-  navOrder: null,
+  navOrder: 2,
   navLabel: null,
   isHiddenParent: true,
 } as const;
@@ -315,6 +351,9 @@ export const allRoutes = [
   ueber_dasIstNeu,
   ueber_zahlenUndFakten,
   vorhaben,
+  vorhaben_phase2,
+  vorhaben_phase2_ergebnisArbeitshilfenCheck,
+  vorhaben_phase2_startDerWirkkonzeptErarbeitung,
   vorhaben_steckbrief,
   vorhaben_steckbrief_schritt1,
   vorhaben_steckbrief_schritt2,

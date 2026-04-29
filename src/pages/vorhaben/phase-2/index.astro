@@ -1,0 +1,12 @@
+---
+import { vorhaben_phase2_startDerWirkkonzeptErarbeitung } from "@/config/routes";
+
+export const frontmatter = {
+  title: "Phase 2",
+  sitemap: false,
+  isHiddenParent: true,
+  navOrder: 3,
+};
+
+return Astro.redirect(vorhaben_phase2_startDerWirkkonzeptErarbeitung.path);
+---
