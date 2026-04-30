@@ -20,7 +20,7 @@
   ],
   "astro": true,
   "typescript": true,
-  "vitest": true,
+  "vitest": false,
   "playwright": true,
   "eslint": true,
   "prettier": true,
