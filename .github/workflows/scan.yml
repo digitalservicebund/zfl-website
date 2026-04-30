@@ -9,10 +9,6 @@ on:
         required: true
   workflow_dispatch:
     inputs:
-      run_vulnerability_scan:
-        type: boolean
-        description: "Run vulnerability scan"
-        default: true
       run_knip_scan:
         type: boolean
         description: "Run knip scan"
@@ -22,9 +18,6 @@ on:
 
 jobs:
   vulnerability-scan:
-    if:
-      github.event_name == 'schedule' || github.event_name == 'workflow_call' ||
-      inputs.run_vulnerability_scan
     runs-on: ubuntu-latest
     permissions:
       contents: read
