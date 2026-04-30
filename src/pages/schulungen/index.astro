@@ -1,6 +1,5 @@
 ---
 import Hero from "@/components/Hero.astro";
-import SupportCard from "@/components/blocks/SupportCard.astro";
 import { ZFL_PHONE, ZFL_EMAIL_SCHULUNG } from "@/config/constants.ts";
 import schulungenImage from "@/images/Schulungen.png";
 import Layout from "@/layouts/Layout.astro";
@@ -101,18 +100,15 @@ export const frontmatter = {
         </div>
       </div>
     </section>
-    <section
-      class="bg-cosmic-blue-base breakout mb-32 text-white"
-      id="anmeldung"
-    >
-      <h2>Anmeldung</h2>
+    <Hero level="root">
+      <h2 id="anmeldung">Anmeldung</h2>
       <p>
         Schicken Sie uns für eine Anmeldung den Schulungs- oder Modul-Namen und
         Termin an die E-Mail <a href={ZFL_EMAIL_SCHULUNG.url}
           >{ZFL_EMAIL_SCHULUNG.display}</a
         > und wir bestätigen die Anmeldung.
       </p>
-    </section>
+    </Hero>
     <section class="space-y-56">
       <h2 id="schulungen-weitere" class="scroll-m-20">Weitere Angebote</h2>
       <Card padding="wide" look="lightLavender">
@@ -174,21 +170,19 @@ export const frontmatter = {
         </ul>
       </Card>
     </section>
-    <section class="bg-lavender-base breakout">
-      <SupportCard>
-        <p>
-          Wir unterstützen Sie gerne persönlich in allen Phasen der
-          Regelungsarbeit. Bei Fragen melden Sie sich unter:
-        </p>
-        <p>
-          Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>
-        </p>
-        <p>
-          E-Mail: <a href={ZFL_EMAIL_SCHULUNG.url}
-            >{ZFL_EMAIL_SCHULUNG.display}</a
-          >
-        </p>
-      </SupportCard>
-    </section>
+    <Hero level="root">
+      <h2>Kontakt</h2>
+      <p>
+        Wir unterstützen Sie gerne persönlich in allen Phasen der
+        Regelungsarbeit. Bei Fragen melden Sie sich unter:
+      </p>
+      <p>
+        Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>
+      </p>
+      <p>
+        E-Mail: <a href={ZFL_EMAIL_SCHULUNG.url}>{ZFL_EMAIL_SCHULUNG.display}</a
+        >
+      </p>
+    </Hero>
   </main>
 </Layout>
