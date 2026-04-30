@@ -24,8 +24,9 @@ jobs:
       group: preview-${{ github.head_ref || github.ref_name }}
       cancel-in-progress: true
     env:
-      PREVIEW_BRANCH: ${{ github.head_ref || github.ref_name }}
-      PREVIEW_BASE_URL: /zfl-website/previews/${{ github.head_ref || github.ref_name }}
+      GH_PAGES_BASE_URL: https://${{ github.event.repository.owner.login }}.github.io # https://digitalservicebund.github.io
+      PREVIEW_BRANCH: ${{ github.head_ref || github.ref_name }} # e.g. my-feature-branch
+      PREVIEW_BASE_PATH: /${{ github.event.repository.name }}/previews/${{ github.head_ref || github.ref_name }} # e.g. /zfl-website/previews/my-feature-branch
     steps:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
@@ -61,7 +62,7 @@ jobs:
       - name: Wait for automatic Pages deployment
         run: |
           MAX_TIME=40
-          URL="https://digitalservicebund.github.io$PREVIEW_BASE_URL"
+          URL="$GH_PAGES_BASE_URL$PREVIEW_BASE_PATH"
           START_TIME=$(date +%s)
 
           while true; do
@@ -83,14 +84,14 @@ jobs:
       - name: Output Preview URL
         run: |
           echo "🔍 Preview deployed successfully!"
-          echo "Preview URL: https://digitalservicebund.github.io$PREVIEW_BASE_URL"
+          echo "Preview URL: $GH_PAGES_BASE_URL$PREVIEW_BASE_PATH"
 
       - name: Comment PR with Preview URL
         if: github.event_name == 'pull_request'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          PREVIEW_URL="https://digitalservicebund.github.io$PREVIEW_BASE_URL"
+          PREVIEW_URL="$GH_PAGES_BASE_URL$PREVIEW_BASE_PATH"
           gh pr comment ${{ github.event.pull_request.number }} --body "🔍 **Preview deployed!**
 
           Preview URL: $PREVIEW_URL"
