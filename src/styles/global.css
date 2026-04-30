@@ -18,9 +18,9 @@
 
   --color-ds-violet: #4c2c92;
 
-  --spacing-sm: 1.25rem;
-  --spacing-md: 2rem;
-  --spacing-lg: 2.5rem;
+  --spacing-sm: 1.25rem; /* 20px */
+  --spacing-md: 2rem; /* 32px */
+  --spacing-lg: 2.5rem; /* 48px */
 
   --max-content-width: 82rem;
   --container-padding-inline: clamp(1rem, 5vw, 3rem);
@@ -28,8 +28,7 @@
 
 @media (width >= 48rem) {
   :root {
-    --spacing-md: 2rem;
-    --spacing-lg: 4rem;
+    --spacing-lg: 4rem; /* 64px */
   }
 }
 

@@ -3,8 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
 import Card from "@/components/Card.astro";
 import Banner from "@/components/Banner.astro";
-import { Icon } from "astro-icon/components";
-import SupportCard from "@/components/blocks/SupportCard.astro";
+import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import { begleitungen, schulungen, ueber_dasIstNeu } from "@/config/routes";
 
 export const frontmatter = {
@@ -47,12 +46,9 @@ export const frontmatter = {
         <strong>Gut zu wissen:</strong> Das Zentrum für Legistik ist ein Bestandteil
         des Handlungsfelds „Bessere Rechtsetzung“ in der Modernisierungsagenda.
       </p>
-    </section>
-    <section class="breakout bg-lavender-base">
-      <div class="space-y-md">
+      <div class="space-y-md mt-lg">
         <h2>Bereits verfügbare Angebote</h2>
-        <Card>
-          <Icon name="ic:twotone-widgets" slot="icon" />
+        <Card look="lavender" padding="wide">
           <h3>Interdisziplinäre Expertise für Ihr Regelungsvorhaben</h3>
           <p>
             Wir begleiten Sie mit einem interdisziplinärem Kompetenzteam. Sie
@@ -63,8 +59,7 @@ export const frontmatter = {
             >Mehr Informationen zu interdisziplinären Kompetenzteams</a
           >
         </Card>
-        <Card>
-          <Icon name="ic:twotone-fact-check" slot="icon" />
+        <Card look="lavender" padding="wide">
           <h3>In Schulungen praktisches Wissen erlangen</h3>
           <p>
             Neue Methoden und Werkzeuge für die Rechtsetzung in
@@ -74,8 +69,14 @@ export const frontmatter = {
         </Card>
       </div>
     </section>
-    <section>
-      <SupportCard look="lavender" />
-    </section>
+    <Hero level="root">
+      <h2>Kontakt</h2>
+      <p>
+        Sie haben Fragen zum Zentrum für Legistik oder den einzelnen Angeboten?
+        Kontaktieren Sie uns.
+      </p>
+      <p>Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a></p>
+      <p>E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a></p>
+    </Hero>
   </main>
 </Layout>
