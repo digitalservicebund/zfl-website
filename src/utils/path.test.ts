@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { buildRoutePath, removeTrailingSlash } from "./path";
+import { buildRoutePath, hasTrailingSlash, removeTrailingSlash } from "./path";
 
 describe("removeTrailingSlash", () => {
   test("keeps the root path stable", () => {
@@ -20,5 +20,17 @@ describe("buildRoutePath", () => {
     expect(
       buildRoutePath("/ueber-uns", "/zfl-website/previews/test-branch"),
     ).toBe("/zfl-website/previews/test-branch/ueber-uns");
+  });
+});
+
+describe("check for trailing slashes", () => {
+  test("return false if index route", () => {
+    expect(hasTrailingSlash("/")).toBe(false);
+  });
+  test("return false if route has trailing slash", () => {
+    expect(hasTrailingSlash("/ueber-uns/")).toBe(false);
+  });
+  test("return true if route has no trailing slash", () => {
+    expect(hasTrailingSlash("/ueber-uns")).toBe(true);
   });
 });
