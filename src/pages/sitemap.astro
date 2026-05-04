@@ -6,10 +6,11 @@ import Layout from "@/layouts/Layout.astro";
 export const frontmatter = {
   title: "Sitemap",
   sitemap: false,
+  addToPagefind: false,
 };
 ---
 
-<Layout title="Sitemap">
+<Layout title="Sitemap" addToPagefind={frontmatter.addToPagefind}>
   <main class="breakout-grid">
     <Hero>
       <h1>Sitemap</h1>

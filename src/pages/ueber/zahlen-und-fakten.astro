@@ -8,6 +8,7 @@ export const frontmatter = {
   title: "Zahlen und Fakten",
   sitemap: true,
   navOrder: 2,
+  addToPagefind: true,
 };
 
 type DsData = {
@@ -126,7 +127,7 @@ const dsData: DsData = [
 ];
 ---
 
-<Layout title={frontmatter.title}>
+<Layout title={frontmatter.title} addToPagefind={frontmatter.addToPagefind}>
   <main class="breakout-grid">
     <Hero level="sub">
       <h1>Das Zentrum für Legistik in Zahlen</h1>

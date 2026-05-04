@@ -19,10 +19,11 @@ export const frontmatter = {
   title: "Das ist neu",
   sitemap: true,
   navOrder: 1,
+  addToPagefind: true,
 };
 ---
 
-<Layout title={frontmatter.title}>
+<Layout title={frontmatter.title} addToPagefind={frontmatter.addToPagefind}>
   <main class="breakout-grid">
     <Hero level="sub">
       <h1>{frontmatter.title}</h1>

@@ -10,10 +10,11 @@ import { begleitungen, schulungen, ueber_dasIstNeu } from "@/config/routes";
 export const frontmatter = {
   title: "Zentrum für Legistik",
   sitemap: true,
+  addToPagefind: true,
 };
 ---
 
-<Layout title="">
+<Layout title="" addToPagefind={frontmatter.addToPagefind}>
   <main class="breakout-grid">
     <Hero level="root">
       <h1>Bessere Rechtsetzung in allen Phasen Ihres Vorhabens</h1>
