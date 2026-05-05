@@ -216,12 +216,24 @@ export const frontmatter = {
       <h2>KernCard</h2>
 
       <div class="space-y-32">
-        <p class="variant-label kern-label">mit preline, subline und body</p>
+        <p class="variant-label kern-label">
+          mit preline, subline und body (default: lavender-200)
+        </p>
         <KernCard
           title="Mit Preline und Subline"
           preline="Kategorie"
           subline="Ergänzender Untertitel"
           body="Detailbeschreibung der Karte. Hier kann längerer Erklärungstext stehen."
+        />
+      </div>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">mit weißem Hintergrund</p>
+        <KernCard
+          title="Weiße Karte"
+          preline="Variante"
+          background="white"
+          body="Diese Variante überschreibt den Standardhintergrund mit Weiß."
         />
       </div>
 
