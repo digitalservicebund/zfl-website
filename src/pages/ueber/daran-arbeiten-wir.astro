@@ -2,18 +2,19 @@
 import Badge from "@/components/Badge.astro";
 import Card from "@/components/Card.astro";
 import Hero from "@/components/Hero.astro";
+import KernBadge from "@/components/KernBadge.astro";
+import KernCard from "@/components/KernCard.astro";
 import TimelineList from "@/components/TimelineList.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import {
   begleitungen,
-  schulungen,
-  werkzeuge,
-  ueber,
   kontakt,
+  schulungen,
+  ueber,
   ueber_aktuelleMeldungen,
+  werkzeuge,
 } from "@/config/routes";
 import Layout from "@/layouts/Layout.astro";
-import { mailto } from "@/utils/mailtoHelper";
 
 export const frontmatter = {
   title: "Daran arbeiten wir",
@@ -27,110 +28,99 @@ export const frontmatter = {
     <Hero level="sub">
       <h1>{frontmatter.title}</h1>
       <div slot="subtitle">
-        <p>
-          Das Zentrum für Legistik wird gemeinsam mit Ihnen als Legistinnen und
-          Legisten weiterentwickelt. Wir passen unsere Unterstützungsangebote
-          regelmäßig an Ihre Rückmeldungen und die Erfahrungen aus der Praxis
-          an. So stellen wir sicher, dass die angebotenen Hilfen tatsächlich
-          Ihren Arbeitsalltag erleichtern.
-        </p>
-        <p>
-          Wir möchten Sie einladen, uns Rückmeldung zu unseren Angeboten zu
-          geben oder an kurzen Praxistests teilzunehmen. Ihr Erfahrungswissen
-          hilft uns, die Hilfsmittel und Werkzeuge so zu gestalten, dass sie in
-          der täglichen Arbeit tatsächlich nützlich sind. Der zeitliche Aufwand
-          ist überschaubar und wird vorab mit Ihnen abgestimmt.
-        </p>
-        <p>
-          Kontaktieren Sie uns zu diesem Zweck unter
-          <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>
-          oder
-          <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>.
-        </p>
-        <p>
-          Gut zu wissen: Das Zentrum für Legistik ist ein Bestandteil des
-          Handlungsfelds „Bessere Rechtsetzung“ in der Modernisierungsagenda.<br
-          />
-          <a
-            href="https://bmds.bund.de/themen/staatsmodernisierung/modernisierungsagenda-bund#c2065"
-            target="_blank">Weitere Informationen zur Modernisierungsagenda</a
-          >
-        </p>
+        Auf dieser Seite finden Sie aktuelle Arbeitspakete sowie Neuerungen auf
+        der Webseite.
       </div>
     </Hero>
 
-    <section class="breakout breakout-grid bg-lavender-base">
-      <h2>Aktuelle Arbeitspakete in Konzeption und Umsetzung</h2>
+    <section class="breakout breakout-grid">
+      <h2>Aktuelle Arbeitspakete</h2>
       <p>
-        In dieser Phase erarbeiten wir fachliche Anforderungen, prüfen
-        Lösungswege und stellen die Inhalte dann zur Nutzung bereit. Ihre
-        Rückmeldungen an dieser Stelle stellen die Praxistauglichkeit sicher.
+        Das Angebot des Zentrum für Legistik entwickelt sich stets weiter.
+        Aktuell erarbeiten wir fachliche Anforderungen, prüfen Lösungswege und
+        stellen die Inhalte dann zur Nutzung bereit. Ihr Feedback hilft uns, die
+        Services weiter zu verbessern.
       </p>
 
-      <Card class="mt-md">
-        <h3>Strukturierung der Frühphase für Regelungsvorhaben</h3>
-        <p>
-          Ein gutes, frühzeitiges Verständnis von Anforderungen und Umfeld ist
-          die Basis dafür, Gesetze wirksam und effizient umzusetzen. Wie können
-          wir diese frühe Phase in der Rechtsetzung, für Legistinnen und
-          Legisten, besser strukturieren und unterstützen?<br />
-          <a
-            href={mailto(
-              ZFL_EMAIL.display,
-              `Interesse am Thema "Strukturierung der Frühphase für Regelungsvorhaben"`,
-            )}>Mitarbeiten an diesem Thema</a
+      <div class="mt-md gap-lg grid grid-cols-1 md:grid-cols-2">
+        <KernCard title="Strukturierung der Frühphase für Regelungsvorhaben">
+          <p>
+            Ein gutes, frühzeitiges Verständnis von Anforderungen und Umfeld ist
+            die Basis dafür, Gesetze wirksam und effizient umzusetzen. Wie
+            können wir diese frühe Phase in der Rechtsetzung, für Legistinnen
+            und Legisten, besser strukturieren und unterstützen?
+          </p>
+          <KernBadge slot="footer" variant="info">In Konzeption</KernBadge>
+        </KernCard>
+
+        <KernCard title="Konsolidierung der Instrumente">
+          <p>
+            Unterschiedliche Checks und Arbeitshilfen (wie z.&nbsp;B. der
+            <a href="https://digitalcheck.bund.de/" target="_blank"
+              >Digitalcheck</a
+            >,
+            <a href="https://www.gleichstellungs-check.de/" target="_blank"
+              >Gleichstellungscheck</a
+            >
+            oder
+            <a href="https://jugend-check.de/" target="_blank">Jugendcheck</a>)
+            zielen in Teilen auf die gleiche Wirkung ab: Praxis- und
+            digitaltaugliche Regelungen und Bürokratierückbau. Bei der
+            Zusammenführung diverser Ansätze verfolgen wir das Ziel, Ihre
+            Regelungsarbeit einfacher und effizienter zu gestalten.
+          </p>
+          <KernBadge slot="footer" variant="info">In Konzeption</KernBadge>
+        </KernCard>
+
+        <KernCard
+          title="Erweiterung der Schulungs-Angebote"
+          href={schulungen.path}
+        >
+          <p>
+            In den umsetzungsorientierten Schulungen des Zentrum für Legistik
+            lernen Sie Methoden und Werkzeuge kennen, die Sie bei der
+            Erarbeitung von praxisnahen und bürokratiearmen Regelungen
+            unterstützen.
+          </p>
+          <KernBadge slot="footer" variant="success"
+            >Bereits verfügbar</KernBadge
           >
-          (öffnet E-Mail)
-        </p>
-
-        <h3 class="mt-32">Konsolidierung der Instrumente</h3>
-        <p>
-          Unterschiedliche Checks und Arbeitshilfen (wie z.&nbsp;B. der
-          <a href="https://digitalcheck.bund.de/" target="_blank"
-            >Digitalcheck</a
-          >,
-          <a href="https://www.gleichstellungs-check.de/" target="_blank"
-            >Gleichstellungscheck</a
+        </KernCard>
+        <KernCard
+          title="Ausbau der Regelungsbegleitung"
+          href={begleitungen.path}
+        >
+          <p>
+            Wir unterstützen Sie dabei, Umsetzungsprozesse zu verstehen und
+            Anforderungen an praxisnahe und bürokratiearme Regelungen
+            umzusetzen. Wir erweitern das Angebot in Inhalt und Umfang.
+          </p>
+          <KernBadge slot="footer" variant="success"
+            >Bereits verfügbar</KernBadge
           >
-          oder
-          <a href="https://jugend-check.de/" target="_blank">Jugendcheck</a>)
-          zielen in Teilen auf die gleiche Wirkung ab: Praxis- und
-          digitaltaugliche Regelungen und Bürokratierückbau. Bei der
-          Zusammenführung diverser Ansätze verfolgen wir das Ziel, Ihre
-          Regelungsarbeit einfacher und effizienter zu gestalten.<br />
-          <a
-            href={mailto(
-              ZFL_EMAIL.display,
-              `Interesse am Thema "Konsolidierung der Instrumente"`,
-            )}>Mitarbeiten an diesem Thema</a
-          > (öffnet E-Mail)
-        </p>
+        </KernCard>
+      </div>
+    </section>
 
-        <h3 class="mt-32">Erweiterung der Schulungs-Angebote</h3>
+    <section>
+      <Card look="blue" padding="wide">
+        <h2>Wirken Sie mit!</h2>
         <p>
-          In den umsetzungsorientierten Schulungen des Zentrum für Legistik
-          lernen Sie Methoden und Werkzeuge kennen, die Sie bei der Erarbeitung
-          von praxisnahen und bürokratiearmen Regelungen unterstützen.<br />
-          <a
-            href={mailto(
-              ZFL_EMAIL.display,
-              `Interesse am Thema "Erweiterung der Schulungs-Angebote"`,
-            )}>Mitarbeiten an diesem Thema</a
-          > (öffnet E-Mail)
+          Das Zentrum für Legistik wird gemeinsam mit Ihnen als Legistinnen und
+          Legisten weiterentwickelt. Ihr Erfahrungswissen hilft uns, die
+          Hilfsmittel und Werkzeuge so zu gestalten, dass sie in der täglichen
+          Arbeit tatsächlich nützlich sind.
         </p>
-
-        <h3 class="mt-32">Ausbau der Regelungsbegleitung</h3>
         <p>
-          Wir unterstützen Sie dabei, Umsetzungsprozesse zu verstehen und
-          Anforderungen an praxisnahe und bürokratiearme Regelungen umzusetzen.
-          Wir erweitern das Angebot in Inhalt und Umfang.<br />
-          <a
-            href={mailto(
-              ZFL_EMAIL.display,
-              `Interesse am Thema "Ausbau der Regelungsbegleitung"`,
-            )}>Mitarbeiten an diesem Thema</a
-          > (öffnet E-Mail)
+          Wir möchten Sie einladen, uns Rückmeldung zu unseren Arbeitspaketen zu
+          geben oder an kurzen Praxistests teilzunehmen. Der zeitliche Aufwand
+          ist überschaubar und wird vorab mit Ihnen abgestimmt.
         </p>
+        <strong>
+          Kontaktieren Sie uns zu diesem Zweck unter <a href={ZFL_PHONE.url}
+            >{ZFL_PHONE.display}</a
+          > oder <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>.
+        </strong>
       </Card>
     </section>
 
@@ -196,8 +186,7 @@ export const frontmatter = {
           <Badge look="gray">Januar 2026</Badge>
           <ul>
             <li>
-              Launch der Website des Zentrums für Legistik am 5.&nbsp;Januar
-              2026
+              Launch der Website des Zentrum für Legistik am 5.&nbsp;Januar 2026
             </li>
           </ul>
         </li>

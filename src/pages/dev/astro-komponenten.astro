@@ -1,18 +1,19 @@
 ---
-import Layout from "@/layouts/Layout.astro";
 import Badge from "@/components/Badge.astro";
 import Banner from "@/components/Banner.astro";
 import Card from "@/components/Card.astro";
 import FeatureItem from "@/components/FeatureItem.astro";
 import FeatureSet from "@/components/FeatureSet.astro";
 import Hero from "@/components/Hero.astro";
+import KernBadge from "@/components/KernBadge.astro";
 import KernCard from "@/components/KernCard.astro";
 import MediaText from "@/components/MediaText.astro";
 import PostTeaser from "@/components/PostTeaser.astro";
 import TimelineList from "@/components/TimelineList.astro";
+import trainingImage from "@/images/Trainings.jpg";
+import Layout from "@/layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
-import trainingImage from "@/images/Trainings.jpg";
 
 export const frontmatter = {
   title: "Astro Komponenten",
@@ -54,6 +55,39 @@ export const frontmatter = {
           <Icon slot="icon" name="ic:outline-info" class="size-16" />
           Mit Icon
         </Badge>
+      </div>
+    </section>
+
+    <!-- ─── KernBadge ─────────────────────────────────────────────────── -->
+    <section class="space-y-48">
+      <h2>KernBadge</h2>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">vier Varianten</p>
+        <div class="flex flex-wrap gap-12">
+          <KernBadge variant="info">Information</KernBadge>
+          <KernBadge variant="success">Erfolg</KernBadge>
+          <KernBadge variant="warning">Warnung</KernBadge>
+          <KernBadge variant="danger">Fehler</KernBadge>
+        </div>
+      </div>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">showIcon: false</p>
+        <div class="flex flex-wrap gap-12">
+          <KernBadge variant="info" showIcon={false}>Information</KernBadge>
+          <KernBadge variant="success" showIcon={false}>Erfolg</KernBadge>
+        </div>
+      </div>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">small: true</p>
+        <div class="flex flex-wrap gap-12">
+          <KernBadge variant="warning" small={true}>Warnung</KernBadge>
+          <KernBadge variant="danger" showIcon={false} small={true}
+            >Fehler</KernBadge
+          >
+        </div>
       </div>
     </section>
 
