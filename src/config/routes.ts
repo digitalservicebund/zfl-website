@@ -165,10 +165,10 @@ export const ueber_aktuelleMeldungen = {
   navLabel: null,
 } as const;
 
-export const ueber_dasIstNeu = {
-  key: "ueber_dasIstNeu",
-  path: "/ueber/das-ist-neu",
-  title: "Das ist neu",
+export const ueber_daranArbeitenWir = {
+  key: "ueber_daranArbeitenWir",
+  path: "/ueber/daran-arbeiten-wir",
+  title: "Daran arbeiten wir",
   parent: ueber,
   sitemap: true,
   isStagingOnly: false,
@@ -213,7 +213,7 @@ export const allRoutes = [
   staging,
   ueber,
   ueber_aktuelleMeldungen,
-  ueber_dasIstNeu,
+  ueber_daranArbeitenWir,
   ueber_zahlenUndFakten,
   werkzeuge,
 ] as const;

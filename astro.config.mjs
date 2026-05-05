@@ -21,7 +21,8 @@ export default defineConfig({
   redirects: {
     "/anleitungen-und-hilfsmittel": "/werkzeuge",
     "/ueber-uns": "/ueber",
-    "/ueber-uns/daran-arbeiten-wir": "/ueber/das-ist-neu",
+    "/ueber-uns/daran-arbeiten-wir": "/ueber/daran-arbeiten-wir",
+    "/ueber/das-ist-neu": "/ueber/daran-arbeiten-wir",
     "/ueber-uns/zahlen-und-fakten": "/ueber/zahlen-und-fakten",
   },
   integrations: [

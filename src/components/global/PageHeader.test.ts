@@ -3,7 +3,7 @@ import {
   kontakt,
   schulungen,
   ueber,
-  ueber_dasIstNeu,
+  ueber_daranArbeitenWir,
   ueber_zahlenUndFakten,
   werkzeuge,
 } from "@/config/routes.ts";
@@ -117,7 +117,7 @@ describe("visible menu items", async () => {
 describe("nested navigation", () => {
   it("renders the mobile drilldown menu for a nested page", async () => {
     const { dom: pageHeader } = await renderToDOM(PageHeader, {
-      request: new Request(baseUrl + ueber_dasIstNeu.path),
+      request: new Request(baseUrl + ueber_daranArbeitenWir.path),
     });
 
     const mobileMenu = pageHeader.querySelector("nav#page-header-mobile-menu");
@@ -140,7 +140,7 @@ describe("nested navigation", () => {
         ?.getAttribute("aria-current"),
     ).toBeNull();
     expect(
-      submenuPanel?.querySelector(`a[href="${ueber_dasIstNeu.path}"]`),
+      submenuPanel?.querySelector(`a[href="${ueber_daranArbeitenWir.path}"]`),
     ).toBeTruthy();
     expect(
       submenuPanel?.querySelector(`a[href="${ueber_zahlenUndFakten.path}"]`),
@@ -152,7 +152,7 @@ describe("nested navigation", () => {
 
   it("keeps desktop navigation links exact-match only", async () => {
     const { dom: pageHeader } = await renderToDOM(PageHeader, {
-      request: new Request(baseUrl + ueber_dasIstNeu.path),
+      request: new Request(baseUrl + ueber_daranArbeitenWir.path),
     });
 
     const desktopNav = pageHeader.querySelector(

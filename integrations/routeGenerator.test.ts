@@ -151,8 +151,8 @@ describe("generateRoutes() Integration Hook", () => {
           frontmatter: 'const frontmatter = { title: "Über das ZfL" };',
         },
         {
-          path: "ueber/das-ist-neu.astro",
-          frontmatter: 'const frontmatter = { title: "Das ist neu" };',
+          path: "ueber/daran-arbeiten-wir.astro",
+          frontmatter: 'const frontmatter = { title: "Daran arbeiten wir" };',
         },
       ]);
       runBuild();
@@ -169,8 +169,8 @@ describe("generateRoutes() Integration Hook", () => {
           path: "ueber/index.astro",
         },
         {
-          path: "ueber/das-ist-neu.astro",
-          frontmatter: 'const frontmatter = { title: "Das ist neu" };',
+          path: "ueber/daran-arbeiten-wir.astro",
+          frontmatter: 'const frontmatter = { title: "Daran arbeiten wir" };',
         },
       ]);
 
@@ -392,9 +392,9 @@ describe("serializeRoutesModule", () => {
           navLabel: null,
         },
         {
-          key: "ueber_dasIstNeu",
-          path: "/ueber/das-ist-neu",
-          title: "Das ist neu",
+          key: "ueber_daranArbeitenWir",
+          path: "/ueber/daran-arbeiten-wir",
+          title: "Daran arbeiten wir",
           parentKey: "ueber",
           sitemap: true,
           isStagingOnly: false,
@@ -408,7 +408,7 @@ describe("serializeRoutesModule", () => {
     expect(output).toContain("parent: ueber,");
     expect(output).toContain("export const allRoutes = [");
     expect(output).toContain("ueber,");
-    expect(output).toContain("ueber_dasIstNeu,");
+    expect(output).toContain("ueber_daranArbeitenWir,");
     expect(output).toContain("] as const;");
   });
 });

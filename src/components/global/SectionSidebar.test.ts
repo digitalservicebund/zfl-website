@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { baseUrl } from "../../../vitest.config";
-import { ueber, ueber_dasIstNeu } from "../../config/routes";
+import { ueber, ueber_daranArbeitenWir } from "../../config/routes";
 import { renderToDOM } from "../../utils/testUtils";
 import SectionSidebar from "./SectionSidebar.astro";
 
@@ -19,7 +19,7 @@ describe("SectionSidebar", () => {
     const sidebar = dom.querySelector('nav[aria-label="Abschnittsnavigation"]');
     expect(sidebar).toBeTruthy();
     expect(
-      sidebar?.querySelector(`a[href="${ueber_dasIstNeu.path}"]`),
+      sidebar?.querySelector(`a[href="${ueber_daranArbeitenWir.path}"]`),
     ).toBeTruthy();
   });
 
