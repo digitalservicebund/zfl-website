@@ -1,6 +1,5 @@
 ---
 import Badge from "@/components/Badge.astro";
-import Card from "@/components/Card.astro";
 import Hero from "@/components/Hero.astro";
 import KernBadge from "@/components/KernBadge.astro";
 import KernCard from "@/components/KernCard.astro";
@@ -73,7 +72,7 @@ export const frontmatter = {
         </KernCard>
 
         <KernCard
-          title="Erweiterung der Schulungs-Angebote"
+          title="Erweiterung der Schulungsangebote"
           href={schulungen.path}
         >
           <p>
@@ -102,30 +101,28 @@ export const frontmatter = {
       </div>
     </section>
 
-    <section>
-      <Card look="blue" padding="wide">
-        <h2>Wirken Sie mit!</h2>
-        <p>
-          Das Zentrum für Legistik wird gemeinsam mit Ihnen als Legistinnen und
-          Legisten weiterentwickelt. Ihr Erfahrungswissen hilft uns, die
-          Hilfsmittel und Werkzeuge so zu gestalten, dass sie in der täglichen
-          Arbeit tatsächlich nützlich sind.
-        </p>
-        <p>
-          Wir möchten Sie einladen, uns Rückmeldung zu unseren Arbeitspaketen zu
-          geben oder an kurzen Praxistests teilzunehmen. Der zeitliche Aufwand
-          ist überschaubar und wird vorab mit Ihnen abgestimmt.
-        </p>
-        <strong>
-          Kontaktieren Sie uns zu diesem Zweck unter <a href={ZFL_PHONE.url}
-            >{ZFL_PHONE.display}</a
-          > oder <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>.
-        </strong>
-      </Card>
+    <section class="bg-cosmic-blue-base breakout text-white">
+      <h2>Wirken Sie mit!</h2>
+      <p>
+        Das Zentrum für Legistik wird gemeinsam mit Ihnen als Legistinnen und
+        Legisten weiterentwickelt. Ihr Erfahrungswissen hilft uns, die
+        Hilfsmittel und Werkzeuge so zu gestalten, dass sie in der täglichen
+        Arbeit tatsächlich nützlich sind.
+      </p>
+      <p>
+        Wir möchten Sie einladen, uns Rückmeldung zu unseren Arbeitspaketen zu
+        geben oder an kurzen Praxistests teilzunehmen. Der zeitliche Aufwand ist
+        überschaubar und wird vorab mit Ihnen abgestimmt.
+      </p>
+      <strong>
+        Kontaktieren Sie uns zu diesem Zweck unter <a href={ZFL_PHONE.url}
+          >{ZFL_PHONE.display}</a
+        > oder <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>.
+      </strong>
     </section>
 
     <section>
-      <h2 class="mb-40">Neuerungen</h2>
+      <h2 class="mb-40">Neuerungen auf der Webseite</h2>
       <TimelineList>
         <li>
           <Badge look="gray">April 2026</Badge>
