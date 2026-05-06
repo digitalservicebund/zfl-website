@@ -4,7 +4,11 @@ import Hero from "@/components/Hero.astro";
 import Card from "@/components/Card.astro";
 import Banner from "@/components/Banner.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
-import { begleitungen, schulungen, ueber_dasIstNeu } from "@/config/routes";
+import {
+  begleitungen,
+  schulungen,
+  ueber_daranArbeitenWir,
+} from "@/config/routes";
 
 export const frontmatter = {
   title: "Zentrum für Legistik",
@@ -27,7 +31,7 @@ export const frontmatter = {
         Das Angebot befindet sich aktuell im Aufbau und wird schrittweise mit
         Ihnen zusammen weiterentwickelt.
       </p>
-      <a href={ueber_dasIstNeu.path}>Mehr dazu</a>
+      <a href={ueber_daranArbeitenWir.path}>Mehr dazu</a>
     </Banner>
     <section>
       <h2>Vorteile des Angebots für Sie</h2>

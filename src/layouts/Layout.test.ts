@@ -1,4 +1,4 @@
-import { ueber_dasIstNeu } from "@/config/routes";
+import { ueber_daranArbeitenWir } from "@/config/routes";
 import { renderToDOM } from "@/utils/testUtils";
 import { describe, expect, it } from "vitest";
 import { baseUrl } from "../../vitest.config";
@@ -8,7 +8,7 @@ describe("Layout section sidebar", () => {
   it("renders the section sidebar with section navigation for nested section routes", async () => {
     const { dom } = await renderToDOM(Layout, {
       props: { title: "Nested page" },
-      request: new Request(`${baseUrl}/ueber/das-ist-neu`),
+      request: new Request(`${baseUrl}${ueber_daranArbeitenWir.path}`),
       slots: {
         default: "<main>Inhalt</main>",
       },
@@ -19,7 +19,9 @@ describe("Layout section sidebar", () => {
     );
     expect(sectionNavigation).toBeTruthy();
     expect(
-      sectionNavigation?.querySelector(`a[href="${ueber_dasIstNeu.path}"]`),
+      sectionNavigation?.querySelector(
+        `a[href="${ueber_daranArbeitenWir.path}"]`,
+      ),
     ).toBeTruthy();
     expect(dom.querySelector("main")?.textContent).toContain("Inhalt");
   });
