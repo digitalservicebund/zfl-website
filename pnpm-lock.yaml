@@ -44,6 +44,9 @@ importers:
       astro-icon:
         specifier: ^1.1.5
         version: 1.1.5
+      astro-route-generator:
+        specifier: github:digitalservicebund/astro-route-generator#40024e7e81c9fda804b952b6e17f30ac17ab4607
+        version: https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/40024e7e81c9fda804b952b6e17f30ac17ab4607(astro@6.2.2(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(yaml@2.8.4))
       astro-seo:
         specifier: ^1.1.0
         version: 1.1.0(prettier-plugin-astro@0.14.1)(prettier@3.8.3)(typescript@6.0.3)
@@ -1702,6 +1705,12 @@ packages:
 
   astro-icon@1.1.5:
     resolution: {integrity: sha512-CJYS5nWOw9jz4RpGWmzNQY7D0y2ZZacH7atL2K9DeJXJVaz7/5WrxeyIxO8KASk1jCM96Q4LjRx/F3R+InjJrw==}
+
+  astro-route-generator@https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/40024e7e81c9fda804b952b6e17f30ac17ab4607:
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/40024e7e81c9fda804b952b6e17f30ac17ab4607}
+    version: 0.1.1
+    peerDependencies:
+      astro: '>=4.0.0'
 
   astro-seo@1.1.0:
     resolution: {integrity: sha512-G6LDNDyga30o+52v58jU7C35n3cORUzk7RSuY+xf/ZRbW6JiNplyaOO1VoYVKO+xzYNaBcxqNln2RFRR/wgJNQ==}
@@ -5567,6 +5576,12 @@ snapshots:
       '@iconify/utils': 2.3.0
     transitivePeerDependencies:
       - supports-color
+
+  astro-route-generator@https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/40024e7e81c9fda804b952b6e17f30ac17ab4607(astro@6.2.2(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(yaml@2.8.4)):
+    dependencies:
+      astro: 6.2.2(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(yaml@2.8.4)
+      gray-matter: 4.0.3
+      typescript: 6.0.3
 
   astro-seo@1.1.0(prettier-plugin-astro@0.14.1)(prettier@3.8.3)(typescript@6.0.3):
     dependencies:

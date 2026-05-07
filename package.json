@@ -40,6 +40,7 @@
     "alpinejs": "^3.15.12",
     "astro": "^6.2.2",
     "astro-icon": "^1.1.5",
+    "astro-route-generator": "github:digitalservicebund/astro-route-generator#40024e7e81c9fda804b952b6e17f30ac17ab4607",
     "astro-seo": "^1.1.0",
     "gray-matter": "^4.0.3",
     "sharp": "^0.34.5",
