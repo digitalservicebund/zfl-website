@@ -61,7 +61,7 @@ fileignoreconfig:
   - filename: src/config/posthog.ts
     checksum: 2c449a89d7fa9be57170bc960a30f51381f9a5d8d046605a6e30c083886163dd
   - filename: src/env.d.ts
-    checksum: 8acdc07029e3aed3f44556780790d7a2191e8877c5b114a3147423507385fbec
+    checksum: 249c8c9a847241e6eecaadd2d3885e602fded70ac3a744444353ae1d2e31bb42
   - filename: integrations/routeGenerator.ts
     allowed_patterns:
       - key
