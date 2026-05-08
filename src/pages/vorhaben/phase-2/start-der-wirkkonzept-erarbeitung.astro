@@ -91,6 +91,8 @@ export const frontmatter = {
 </style>
 
 <script>
+  import { runAIPrompt } from "@/utils/promptAPIClient";
+
   function initFeedbackButtonLoader() {
     const button = document.querySelector("#feedback-erstellen-btn");
     if (!(button instanceof HTMLButtonElement)) return;
@@ -100,15 +102,16 @@ export const frontmatter = {
 
       button.dataset.loading = "true";
       button.disabled = true;
-
+      const prompt = "Was sind die 5 Punkte des Digitalchecks?";
+      const response = runAIPrompt(prompt);
       window.setTimeout(() => {
         button.dataset.loading = "false";
         button.disabled = false;
 
-        const targetPath = button.dataset.targetPath;
-        if (targetPath) {
-          window.location.href = targetPath;
-        }
+        // const targetPath = button.dataset.targetPath;
+        // if (targetPath) {
+        //   window.location.href = targetPath;
+        // }
       }, 5000);
     });
   }

@@ -37,6 +37,9 @@ importers:
       '@types/alpinejs':
         specifier: ^3.13.11
         version: 3.13.11
+      '@types/dom-chromium-ai':
+        specifier: ^0.0.16
+        version: 0.0.16
       alpinejs:
         specifier: ^3.15.11
         version: 3.15.11
@@ -1187,6 +1190,9 @@ packages:
 
   '@types/deep-eql@4.0.2':
     resolution: {integrity: sha512-c9h9dVVMigMPc4bwTvC5dxqtqJZwQPePsWjPlpSOnojbor6pGqdk541lfA7AqFQr5pB1BRdq0juY9db81BwyFw==}
+
+  '@types/dom-chromium-ai@0.0.16':
+    resolution: {integrity: sha512-Z0vOBWckovkc85zctYKGEUUBHaqt9Oz8AUhAVyoNLAsMGlBhMNl/8w1n8JG1y0g7TW03EzWt5RsdcDD70ra58g==}
 
   '@types/esrecurse@4.3.1':
     resolution: {integrity: sha512-xJBAbDifo5hpffDBuHl0Y8ywswbiAp/Wi7Y/GtAgSlZyIABppyurxVueOPE8LUQOxdlgi6Zqce7uoEpqNTeiUw==}
@@ -4696,6 +4702,8 @@ snapshots:
       '@types/ms': 2.1.0
 
   '@types/deep-eql@4.0.2': {}
+
+  '@types/dom-chromium-ai@0.0.16': {}
 
   '@types/esrecurse@4.3.1': {}
 

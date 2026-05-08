@@ -33,6 +33,7 @@
     "@kern-ux/native": "^2.5.0",
     "@tailwindcss/vite": "^4.2.2",
     "@types/alpinejs": "^3.13.11",
+    "@types/dom-chromium-ai": "^0.0.16",
     "alpinejs": "^3.15.11",
     "astro": "^6.1.6",
     "astro-icon": "^1.1.5",
