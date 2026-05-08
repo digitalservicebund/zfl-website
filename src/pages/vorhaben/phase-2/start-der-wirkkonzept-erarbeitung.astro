@@ -27,9 +27,7 @@ export const frontmatter = {
           id="phase2-freitext"
           name="phase2-freitext"
           class="kern-form-input__input min-h-180 w-full"
-          placeholder="Hier Text einfügen..."
-        >
-        </textarea>
+          placeholder="Hier Text einfügen..."></textarea>
       </div>
       <div class="mt-md">
         <button
@@ -43,6 +41,12 @@ export const frontmatter = {
             <span class="phase2-loader"></span>
           </span>
         </button>
+      </div>
+      <div id="feedback-response" class="mt-md hidden">
+        <div class="kern-body p-md rounded border border-gray-300 bg-gray-50">
+          <p class="font-semibold">Feedback:</p>
+          <p id="feedback-response-text"></p>
+        </div>
       </div>
     </section>
   </main>
@@ -95,24 +99,46 @@ export const frontmatter = {
 
   function initFeedbackButtonLoader() {
     const button = document.querySelector("#feedback-erstellen-btn");
+    const textarea = document.querySelector("#phase2-freitext");
     if (!(button instanceof HTMLButtonElement)) return;
+    if (!(textarea instanceof HTMLTextAreaElement)) return;
 
-    button.addEventListener("click", () => {
+    button.addEventListener("click", async () => {
       if (button.dataset.loading === "true") return;
 
       button.dataset.loading = "true";
       button.disabled = true;
-      const prompt = "Was sind die 5 Punkte des Digitalchecks?";
-      const response = runAIPrompt(prompt);
-      window.setTimeout(() => {
+      const prompt = textarea.value.trim();
+
+      try {
+        const feedbackDiv = document.querySelector("#feedback-response");
+        const feedbackText = document.querySelector("#feedback-response-text");
+
+        if (!prompt) {
+          if (feedbackDiv && feedbackText) {
+            feedbackText.textContent =
+              "Bitte fugen Sie zuerst den Text aus dem Steckbrief ein.";
+            feedbackDiv.classList.remove("hidden");
+          }
+          return;
+        }
+
+        const response = await runAIPrompt(prompt);
+
+        if (feedbackDiv && feedbackText) {
+          feedbackText.textContent = response || "Keine Antwort erhalten.";
+          feedbackDiv.classList.remove("hidden");
+        }
+      } catch (error) {
+        console.error("Fehler beim Abrufen des Feedbacks:", error);
+      } finally {
         button.dataset.loading = "false";
         button.disabled = false;
-
         // const targetPath = button.dataset.targetPath;
         // if (targetPath) {
         //   window.location.href = targetPath;
         // }
-      }, 5000);
+      }
     });
   }
 

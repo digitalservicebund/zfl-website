@@ -1,3 +1,5 @@
+/// <reference types="dom-chromium-ai" />
+
 interface ImportMetaEnv {
   readonly PUBLIC_STAGE: string;
   readonly BASE_URL?: string;
