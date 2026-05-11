@@ -2,6 +2,7 @@
 import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
 import KernCard from "@/components/KernCard.astro";
+import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 
@@ -40,6 +41,8 @@ const categories = [
     tools: getFilteredTools("Beteiligung"),
   },
 ];
+
+const types = ["Methode", "Tool", "Leitfaden"] as const; // "Ressource"
 ---
 
 <Layout title={frontmatter.title}>
@@ -57,27 +60,86 @@ const categories = [
       {
         categories.map(({ id, title }) => (
           <p>
-            <a href={`#${id}`} class="kern-link">
-              <span
-                class="kern-icon kern-icon--arrow-forward"
-                aria-hidden="true"
+            <a href={`#${id}`} class="kern-heading-medium">
+              <Icon
+                name="ic:round-arrow-downward"
+                class="text-cosmic-blue-base inline-block h-32 w-32 pr-4"
               />
               {title}
             </a>
           </p>
         ))
       }
+      <hr class="kern-divider mt-lg mb-32" aria-hidden="true" />
+      <div>
+        <p class="kern-label">Filtern nach:</p>
+        <div class="flex gap-16">
+          <button>
+            <span class={`kern-badge kern-badge--bookmarks`}>
+              <Icon name="ic:round-bookmark-add" class="text-icon-muted" />
+              <span class="kern-label">Gemerkte Werkzeuge</span>
+            </span>
+          </button>
+          {
+            types.map((type) => (
+              <button>
+                <span class={`kern-badge kern-badge--${type.toLowerCase()}`}>
+                  <span class="kern-label">{type}</span>
+                </span>
+              </button>
+            ))
+          }
+        </div>
+      </div>
       {
         categories.map(({ id, title, tools }) => (
           <>
-            <h2 id={id}>{title.charAt(0).toUpperCase() + title.slice(1)}</h2>
+            <h2 id={id} class="scroll-mt-md mt-80 mb-56">
+              {title.charAt(0).toUpperCase() + title.slice(1)}
+            </h2>
             <div class="gap-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
               {tools.map((t) => (
                 <KernCard
                   title={t.data.title}
                   href={t.data.externalUrl}
                   body={t.data.description}
-                />
+                  background="white"
+                  interactive={false}
+                >
+                  <div
+                    slot="pre-header"
+                    class="mb-16 flex w-full justify-between"
+                  >
+                    <div class="flex gap-8">
+                      {t.data.type.map((type) => (
+                        <span
+                          class={`kern-badge kern-badge--${type.toLowerCase()}`}
+                        >
+                          <span class="kern-label">{type}</span>
+                        </span>
+                      ))}
+                    </div>
+                    <button
+                      class="text-icon-muted"
+                      aria-label={"Lesezeichen hinzufügen"}
+                    >
+                      <Icon
+                        name={"ic:outline-bookmark-add"}
+                        class="h-32 w-32"
+                      />
+                    </button>
+                  </div>
+                  <div
+                    slot="footer"
+                    class="text-icon-muted! flex items-center gap-8"
+                  >
+                    <Icon
+                      name="ic:baseline-auto-stories"
+                      class="h-32 w-32 shrink-0"
+                    />
+                    <p class="kern-subline py-0">Quelle: {t.data.source}</p>
+                  </div>
+                </KernCard>
               ))}
             </div>
           </>
@@ -95,3 +157,40 @@ const categories = [
     </Hero>
   </main>
 </Layout>
+
+<style is:global>
+  .kern-badge--bookmarks {
+    border: 1px solid var(--color-icon-muted);
+    .kern-label {
+      color: var(--color-icon-muted);
+    }
+  }
+  .kern-badge--methode {
+    background-color: #e6fba2;
+    border: 1px solid #5d7200;
+    .kern-label {
+      color: #3d4d00;
+    }
+  }
+  .kern-badge--tool {
+    background-color: #d5f6ff;
+    border: 1px solid #051d91;
+    .kern-label {
+      color: #051d91;
+    }
+  }
+  .kern-badge--leitfaden {
+    background-color: #fffdb2;
+    border: 1px solid #8f7400;
+    .kern-label {
+      color: #645000;
+    }
+  }
+  .kern-badge--ressource {
+    background-color: #e5cbf4;
+    border: 1px solid #8412af;
+    .kern-label {
+      color: #8412af;
+    }
+  }
+</style>
