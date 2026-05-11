@@ -27,6 +27,7 @@ interface Props extends VariantProps<typeof cardStyles> {
   image?: ImageMetadata;
   imageAlt?: string | null;
   imageSource?: string;
+  interactive?: boolean;
 }
 
 const {
@@ -40,14 +41,16 @@ const {
   image,
   imageAlt,
   imageSource,
+  interactive = !!href,
 } = Astro.props;
+
 const hasFooter = Astro.slots.has("footer");
 ---
 
 <article
   class={cardStyles({
     background,
-    class: href ? "kern-card--interactive" : undefined,
+    class: interactive ? "kern-card--interactive" : undefined,
   })}
 >
   {
@@ -64,6 +67,7 @@ const hasFooter = Astro.slots.has("footer");
   }
   <div class="kern-card__container">
     <header class="kern-card__header">
+      <slot name="pre-header" />
       <hgroup>
         {preline && <p class="kern-preline">{preline}</p>}
         <h2 class="kern-title">
