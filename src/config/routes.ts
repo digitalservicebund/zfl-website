@@ -198,6 +198,17 @@ export const werkzeuge = {
   navLabel: null,
 } as const;
 
+export const werkzeuge2 = {
+  key: "werkzeuge2",
+  path: "/werkzeuge2",
+  title: "Werkzeuge",
+  parent: null,
+  sitemap: false,
+  isStagingOnly: true,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
 export const allRoutes = [
   barrierefreiheit,
   begleitungen,
@@ -216,4 +227,5 @@ export const allRoutes = [
   ueber_daranArbeitenWir,
   ueber_zahlenUndFakten,
   werkzeuge,
+  werkzeuge2,
 ] as const;

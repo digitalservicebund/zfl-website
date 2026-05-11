@@ -1,0 +1,97 @@
+---
+import Hero from "@/components/Hero.astro";
+import Layout from "@/layouts/Layout.astro";
+import KernCard from "@/components/KernCard.astro";
+import { getCollection } from "astro:content";
+import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
+
+export const frontmatter = {
+  title: "Werkzeuge",
+  sitemap: false,
+  isStagingOnly: true,
+};
+
+const allTools = await getCollection("werkzeuge");
+
+type Category = (typeof allTools)[number]["data"]["category"][number];
+
+const getFilteredTools = (category: Category) =>
+  allTools.filter((tool) => tool.data.category.includes(category));
+
+const categories = [
+  {
+    id: "problemanalyse",
+    title: "ein Problem besser verstehen und analysieren",
+    tools: getFilteredTools("Problemanalyse"),
+  },
+  {
+    id: "digital-und-praxistauglichkeit",
+    title: "Digital- und Praxistauglichkeit sicherstellen",
+    tools: getFilteredTools("Praxistauglichkeit"),
+  },
+  {
+    id: "rechtsfoermlichkeit",
+    title: "die Rechtsförmlichkeit des Vorhabens gewährleisten",
+    tools: getFilteredTools("Rechtsförmlichkeit"),
+  },
+  {
+    id: "beteiligung",
+    title: "näher mit Beteiligten arbeiten",
+    tools: getFilteredTools("Beteiligung"),
+  },
+];
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero level="main">
+      <h1>{frontmatter.title}</h1>
+      <p slot="subtitle">
+        Auf dieser Seite finden Sie Werkzeuge, die Sie bei der Regelungsarbeit
+        unterstützen: hilfreiche Links zu Anleitungen, Hilfsmittel und Tools.
+        Diese Sammlung wird stetig ausgebaut.
+      </p>
+    </Hero>
+    <section>
+      <h2>Ich möchte ...</h2>
+      {
+        categories.map(({ id, title }) => (
+          <p>
+            <a href={`#${id}`} class="kern-link">
+              <span
+                class="kern-icon kern-icon--arrow-forward"
+                aria-hidden="true"
+              />
+              {title}
+            </a>
+          </p>
+        ))
+      }
+      {
+        categories.map(({ id, title, tools }) => (
+          <>
+            <h2 id={id}>{title.charAt(0).toUpperCase() + title.slice(1)}</h2>
+            <div class="gap-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+              {tools.map((t) => (
+                <KernCard
+                  title={t.data.title}
+                  href={t.data.externalUrl}
+                  body={t.data.description}
+                />
+              ))}
+            </div>
+          </>
+        ))
+      }
+    </section>
+    <Hero level="root">
+      <h2>Fehlt etwas?</h2>
+      <p>
+        Kennen Sie weitere hilfreiche Werkzeuge, die auf dieser Seite fehlen?
+        Kontaktieren Sie uns gerne.
+      </p>
+      <p>Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a></p>
+      <p>E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a></p>
+    </Hero>
+  </main>
+</Layout>
