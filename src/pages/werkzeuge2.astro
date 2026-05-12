@@ -50,6 +50,13 @@ const types = ["Methode", "Tool", "Leitfaden"] as const; // "Ressource"
     class="breakout-grid"
     x-data={`{
       hintSidebarOpen: false,
+      filterType: null,
+      toggleType(type) {
+        this.filterType = this.filterType === type ? null : type;
+      },
+      isCardVisible(types) {
+        return this.filterType === null || types.includes(this.filterType);
+      }
     }`}
   >
     <Hero level="main">
@@ -114,7 +121,7 @@ const types = ["Methode", "Tool", "Leitfaden"] as const; // "Ressource"
       <hr class="kern-divider mt-lg mb-32" aria-hidden="true" />
       <div>
         <p class="kern-label">Filtern nach:</p>
-        <div class="flex gap-16">
+        <div class="mb-16 flex gap-16">
           <button>
             <span class={`kern-badge kern-badge--bookmarks`}>
               <Icon name="ic:round-bookmark-add" class="text-icon-muted" />
@@ -123,8 +130,16 @@ const types = ["Methode", "Tool", "Leitfaden"] as const; // "Ressource"
           </button>
           {
             types.map((type) => (
-              <button>
-                <span class={`kern-badge kern-badge--${type.toLowerCase()}`}>
+              <button @click={`toggleType('${type}')`}>
+                <span
+                  class={`kern-badge kern-badge--${type.toLowerCase()} interactive`}
+                  x-bind:data-inactive={`filterType && filterType !== '${type}'`}
+                >
+                  <span
+                    class="kern-icon kern-icon--check kern-icon--default"
+                    aria-hidden="true"
+                    x-show={`!filterType || filterType === '${type}'`}
+                  />
                   <span class="kern-label">{type}</span>
                 </span>
               </button>
@@ -137,60 +152,77 @@ const types = ["Methode", "Tool", "Leitfaden"] as const; // "Ressource"
             <Icon name="ic:outline-help-outline" class="h-32 w-32" />
           </button>
         </div>
+        <p>
+          <button class="kern-link">
+            <span
+              class="kern-icon kern-icon--search kern-icon--default"
+              aria-hidden="true"></span>
+            Suchen
+          </button>
+        </p>
       </div>
       {
-        categories.map(({ id, title, tools }) => (
-          <>
-            <h2 id={id} class="scroll-mt-md mt-80 mb-56">
-              {title.charAt(0).toUpperCase() + title.slice(1)}
-            </h2>
-            <div class="gap-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-              {tools.map((t) => (
-                <KernCard
-                  title={t.data.title}
-                  href={t.data.externalUrl}
-                  body={t.data.description}
-                  background="white"
-                  interactive={false}
-                >
-                  <div
-                    slot="pre-header"
-                    class="mb-16 flex w-full justify-between"
-                  >
-                    <div class="flex gap-8">
-                      {t.data.type.map((type) => (
-                        <span
-                          class={`kern-badge kern-badge--${type.toLowerCase()}`}
-                        >
-                          <span class="kern-label">{type}</span>
-                        </span>
-                      ))}
-                    </div>
-                    <button
-                      class="text-icon-muted"
-                      aria-label={"Lesezeichen hinzufügen"}
+        categories.map(({ id, title, tools }) => {
+          const catTypes = new Set(tools.map((t) => t.data.type));
+          return (
+            <>
+              <h2
+                id={id}
+                class="scroll-mt-md mt-80 mb-56"
+                x-show={`${JSON.stringify([...catTypes])}.some((t) => isCardVisible(t))`}
+              >
+                {title.charAt(0).toUpperCase() + title.slice(1)}
+              </h2>
+              <div class="gap-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                {tools.map((t) => (
+                  <div x-show={`isCardVisible(${JSON.stringify(t.data.type)})`}>
+                    <KernCard
+                      title={t.data.title}
+                      href={t.data.externalUrl}
+                      body={t.data.description}
+                      background="white"
+                      interactive={false}
                     >
-                      <Icon
-                        name={"ic:outline-bookmark-add"}
-                        class="h-32 w-32"
-                      />
-                    </button>
+                      <div
+                        slot="pre-header"
+                        class="mb-16 flex w-full justify-between"
+                      >
+                        <div class="flex gap-8">
+                          {t.data.type.map((type) => (
+                            <span
+                              class={`kern-badge kern-badge--${type.toLowerCase()}`}
+                            >
+                              <span class="kern-label">{type}</span>
+                            </span>
+                          ))}
+                        </div>
+                        <button
+                          class="text-icon-muted"
+                          aria-label={"Lesezeichen hinzufügen"}
+                        >
+                          <Icon
+                            name={"ic:outline-bookmark-add"}
+                            class="h-32 w-32"
+                          />
+                        </button>
+                      </div>
+                      <div
+                        slot="footer"
+                        class="text-icon-muted! flex items-center gap-8"
+                      >
+                        <Icon
+                          name="ic:baseline-auto-stories"
+                          class="h-32 w-32 shrink-0"
+                        />
+                        <p class="kern-subline py-0">Quelle: {t.data.source}</p>
+                      </div>
+                    </KernCard>
                   </div>
-                  <div
-                    slot="footer"
-                    class="text-icon-muted! flex items-center gap-8"
-                  >
-                    <Icon
-                      name="ic:baseline-auto-stories"
-                      class="h-32 w-32 shrink-0"
-                    />
-                    <p class="kern-subline py-0">Quelle: {t.data.source}</p>
-                  </div>
-                </KernCard>
-              ))}
-            </div>
-          </>
-        ))
+                ))}
+              </div>
+            </>
+          );
+        })
       }
     </section>
     <Hero level="root">
@@ -206,38 +238,33 @@ const types = ["Methode", "Tool", "Leitfaden"] as const; // "Ressource"
 </Layout>
 
 <style is:global>
+  .kern-badge {
+    &.interactive[data-inactive="true"] {
+      opacity: 0.4;
+    }
+  }
   .kern-badge--bookmarks {
     border: 1px solid var(--color-icon-muted);
-    .kern-label {
-      color: var(--color-icon-muted);
-    }
+    color: var(--color-icon-muted);
   }
   .kern-badge--methode {
     background-color: #e6fba2;
     border: 1px solid #5d7200;
-    .kern-label {
-      color: #3d4d00;
-    }
+    --kern-color-layout-text-default: #3d4d00;
   }
   .kern-badge--tool {
     background-color: #d5f6ff;
     border: 1px solid #051d91;
-    .kern-label {
-      color: #051d91;
-    }
+    --kern-color-layout-text-default: #051d91;
   }
   .kern-badge--leitfaden {
     background-color: #fffdb2;
     border: 1px solid #8f7400;
-    .kern-label {
-      color: #645000;
-    }
+    --kern-color-layout-text-default: #645000;
   }
   .kern-badge--ressource {
     background-color: #e5cbf4;
     border: 1px solid #8412af;
-    .kern-label {
-      color: #8412af;
-    }
+    --kern-color-layout-text-default: #8412af;
   }
 </style>
