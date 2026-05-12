@@ -64,7 +64,7 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
       id="hint-sidebar"
       x-cloak
       x-show="hintSidebarOpen"
-      class="fixed top-0 right-0 z-10 min-h-screen w-384 bg-[#F7F7F9] px-24 py-40 [&_h3]:text-lg"
+      class="fixed top-0 right-0 z-20 min-h-screen w-384 bg-[#F7F7F9] px-24 py-40 [&_h3]:text-lg"
     >
       <div class="mb-32 flex w-full justify-end">
         <button
@@ -118,7 +118,7 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
           <p class="kern-label my-0 py-0">Filtern nach:</p>
           {
             [BOOKMARKED_TYPE, ...types].map((type) => (
-              <button @click={`toggleFilterType('${type}')`}>
+              <button class="h-32" @click={`toggleFilterType('${type}')`}>
                 <span
                   class={`kern-badge kern-badge--${type.replaceAll(" ", "_").toLowerCase()} interactive`}
                   x-bind:data-inactive={`filterType && filterType !== '${type}'`}
@@ -147,13 +147,20 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
             <Icon name="ic:outline-help-outline" class="h-32 w-32" />
           </button>
         </div>
-        <div>
-          <button class="kern-link">
+        <div class="flex items-center gap-8">
+          <div class="relative">
+            <input
+              class="kern-form-input__input pl-40"
+              id="tool-search"
+              name="text"
+              type="text"
+              placeholder="Suchen ..."
+              x-model="searchQuery"
+            />
             <span
-              class="kern-icon kern-icon--search kern-icon--default"
+              class="kern-icon kern-icon--search kern-icon--default absolute top-1/2 left-8 -translate-y-1/2 transform"
               aria-hidden="true"></span>
-            Suchen
-          </button>
+          </div>
         </div>
       </div>
       {
@@ -167,7 +174,7 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
                 {tools.map((t) => (
                   <div
                     class="tool-wrapper"
-                    x-bind:data-visible={`isCardVisible(${JSON.stringify(t.id)}, ${JSON.stringify(t.data.type)})`}
+                    x-bind:data-visible={`isCardVisible(${JSON.stringify(t.id)}, ${JSON.stringify(t.data.type)}, ${JSON.stringify(t.data.title)})`}
                   >
                     <KernCard
                       title={t.data.title}
@@ -250,6 +257,7 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
       hintSidebarOpen: false as boolean,
       filterType: null as string | null,
       bookmarkedTools: [] as string[],
+      searchQuery: "",
 
       init() {
         const stored = localStorage.getItem("bookmarkedTools");
@@ -266,13 +274,55 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
         this.$watch("bookmarkedTools", (value: string[]) => {
           localStorage.setItem("bookmarkedTools", JSON.stringify(value));
         });
+        this.$watch("searchQuery", (query: string) => {
+          CSS.highlights.clear();
+          if (!query.trim()) return;
+          const wrappers = (
+            this.$el as HTMLElement
+          ).querySelectorAll<HTMLElement>(".tool-wrapper");
+          const ranges: Range[] = [];
+          const q = query.toLowerCase();
+          for (const wrapper of wrappers) {
+            const walker = document.createTreeWalker(
+              wrapper,
+              NodeFilter.SHOW_TEXT,
+            );
+            let node: Node | null;
+            while ((node = walker.nextNode())) {
+              const text = node.textContent!.toLowerCase();
+              let idx = text.indexOf(q);
+              while (idx !== -1) {
+                const range = new Range();
+                range.setStart(node, idx);
+                range.setEnd(node, idx + q.length);
+                ranges.push(range);
+                idx = text.indexOf(q, idx + 1);
+              }
+            }
+          }
+          if (ranges.length) {
+            CSS.highlights.set("search-results", new Highlight(...ranges));
+          }
+        });
       },
 
       toggleFilterType(type: string) {
         this.filterType = this.filterType === type ? null : type;
       },
 
-      isCardVisible(toolId: string, types: string[]) {
+      isCardVisible(
+        toolId: string,
+        types: string[],
+        titleAndDescription: string,
+      ) {
+        if (this.searchQuery) {
+          if (
+            !titleAndDescription
+              .toLowerCase()
+              .includes(this.searchQuery.toLowerCase())
+          )
+            return false;
+        }
         return (
           this.filterType === null ||
           types.includes(this.filterType) ||
@@ -323,6 +373,10 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
     background-color: #e5cbf4;
     border: 1px solid #8412af;
     --kern-color-layout-text-default: #8412af;
+  }
+  ::highlight(search-results) {
+    background-color: #fde68a;
+    color: inherit;
   }
   .tool-wrapper:not([data-visible="true"]) {
     display: none;
