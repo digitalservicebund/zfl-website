@@ -1,6 +1,6 @@
 ---
 title: Föderales Informationsmanagement (FIM)
-type: [Tool]
+type: [Ressource]
 category: [Praxistauglichkeit]
 description: Informationen über Verwaltungshandeln werden strukturiert und zugänglich erfasst. FIM stellt einheitliche Datenfelder, standardisierte Prozessvorgaben und leicht verständliche Bürgerinformationen bereit.
 source: FITKO

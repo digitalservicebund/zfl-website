@@ -36,13 +36,18 @@ const categories = [
     tools: getFilteredTools("Rechtsförmlichkeit"),
   },
   {
+    id: "folgenabschaetzung",
+    title: "die Folgen eines Vorhabens abschätzen",
+    tools: getFilteredTools("Folgenabschätzung"),
+  },
+  {
     id: "beteiligung",
     title: "näher mit Beteiligten arbeiten",
     tools: getFilteredTools("Beteiligung"),
   },
 ];
 
-const types = ["Methode", "Tool", "Leitfaden"] as const; // "Ressource"
+const types = ["Methode", "Tool", "Leitfaden", "Ressource"] as const;
 const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
 ---
 
@@ -167,7 +172,7 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
         categories.map(({ id, title, tools }) => {
           return (
             <>
-              <h2 id={id} class="scroll-mt-md mt-80 mb-56">
+              <h2 id={id} class="mt-80 mb-56 scroll-mt-104">
                 {title.charAt(0).toUpperCase() + title.slice(1)}
               </h2>
               <div class="tool-grid gap-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
