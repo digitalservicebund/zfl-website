@@ -96,7 +96,7 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
       <h3>Leitfaden</h3>
       <p>Strukturierte Anleitungen, die Orientierung bieten.</p>
     </div>
-    <section>
+    <section class="relative">
       <h2>Ich möchte ...</h2>
       {
         categories.map(({ id, title }) => (
@@ -111,10 +111,11 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
           </p>
         ))
       }
-      <hr class="kern-divider mt-lg mb-32" aria-hidden="true" />
-      <div>
-        <p class="kern-label">Filtern nach:</p>
-        <div class="mb-16 flex gap-16">
+      <hr class="kern-divider mt-lg mb-16" aria-hidden="true" />
+
+      <div class="sticky top-0 z-10 flex justify-between bg-white py-16">
+        <div class="flex items-center gap-16">
+          <p class="kern-label my-0 py-0">Filtern nach:</p>
           {
             [BOOKMARKED_TYPE, ...types].map((type) => (
               <button @click={`toggleFilterType('${type}')`}>
@@ -131,7 +132,7 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
                     <span
                       class="kern-icon kern-icon--check kern-icon--default"
                       aria-hidden="true"
-                      x-show={`!filterType || filterType === '${type}'`}
+                      x-show={`filterType === '${type}'`}
                     />
                   )}
                   <span class="kern-label">{type}</span>
@@ -146,14 +147,14 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
             <Icon name="ic:outline-help-outline" class="h-32 w-32" />
           </button>
         </div>
-        <p>
+        <div>
           <button class="kern-link">
             <span
               class="kern-icon kern-icon--search kern-icon--default"
               aria-hidden="true"></span>
             Suchen
           </button>
-        </p>
+        </div>
       </div>
       {
         categories.map(({ id, title, tools }) => {
