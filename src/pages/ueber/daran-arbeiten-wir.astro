@@ -11,6 +11,7 @@ import {
   schulungen,
   ueber,
   ueber_aktuelleMeldungen,
+  ueber_daranArbeitenWir,
   werkzeuge,
 } from "@/config/routes";
 import Layout from "@/layouts/Layout.astro";
@@ -124,79 +125,82 @@ export const frontmatter = {
     <section>
       <h2 class="mb-40">Neuerungen auf der Webseite</h2>
       <TimelineList>
-  <li>
+        <li>
           <Badge look="gray">Mai 2026</Badge>
           <ul>
             <li>
-              Daran arbeiten wir: Umsetzungsstand bei aktuellen Arbeitspaketen ergänzt
-<a href={ueber_daranArbeitenWir.path} class="block"
-                >Hier ansehen</a
-            </li>
-          </ul>
-        </li>
-      
-        <li>
-          <Badge look="gray">April 2026</Badge>
-          <ul>
-            <li>
-              Neue Seite ergänzt: Kontakt
-              <a href={kontakt.path} class="block">Hier ansehen</a>
-            </li>
-            <li>
-              Neue Seite ergänzt: Aktuelle Meldungen
-              <a href={ueber_aktuelleMeldungen.path} class="block"
+              Daran arbeiten wir: Umsetzungsstand bei aktuellen Arbeitspaketen
+              ergänzt
+              <a href={ueber_daranArbeitenWir.path} class="block"
                 >Hier ansehen</a
               >
             </li>
-            <li>
-              Über Uns: Unter-Navigation ergänzt
-              <a href={ueber.path} class="block">Hier ansehen</a>
-            </li>
-            <li>
-              Neuer Bereich ergänzt: Über Uns
-              <a href={ueber.path} class="block">Hier ansehen</a>
-            </li>
           </ul>
-        </li>
-        <li>
-          <Badge look="gray">März 2026</Badge>
-          <ul>
-            <li>
-              Seitendesign: Umstellung auf den <a
-                href="https://www.kern-ux.de/"
-                target="_blank">KERN-UX-Standard</a
-              >
-            </li>
-          </ul>
-        </li>
-        <li>
-          <Badge look="gray">Februar 2026</Badge>
-          <ul>
-            <li>
-              Regelungsbegleitungen: Tabelle mit Service-Paketen ergänzt
-              <a href={`${begleitungen.path}#leistungspakete`} class="block"
-                >Hier ansehen</a
-              >
-            </li>
-            <li>
-              Schulungen: Hinweise zu externen Angeboten ergänzt
-              <a href={`${schulungen.path}#schulungen-weitere`} class="block"
-                >Hier ansehen</a
-              >
-            </li>
-            <li>
-              Neue Seite ergänzt: Anleitungen und Hilfsmittel
-              <a href={werkzeuge.path} class="block">Hier ansehen</a>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <Badge look="gray">Januar 2026</Badge>
-          <ul>
-            <li>
-              Launch der Website des Zentrum für Legistik am 5.&nbsp;Januar 2026
-            </li>
-          </ul>
+
+          <li>
+            <Badge look="gray">April 2026</Badge>
+            <ul>
+              <li>
+                Neue Seite ergänzt: Kontakt
+                <a href={kontakt.path} class="block">Hier ansehen</a>
+              </li>
+              <li>
+                Neue Seite ergänzt: Aktuelle Meldungen
+                <a href={ueber_aktuelleMeldungen.path} class="block"
+                  >Hier ansehen</a
+                >
+              </li>
+              <li>
+                Über Uns: Unter-Navigation ergänzt
+                <a href={ueber.path} class="block">Hier ansehen</a>
+              </li>
+              <li>
+                Neuer Bereich ergänzt: Über Uns
+                <a href={ueber.path} class="block">Hier ansehen</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <Badge look="gray">März 2026</Badge>
+            <ul>
+              <li>
+                Seitendesign: Umstellung auf den <a
+                  href="https://www.kern-ux.de/"
+                  target="_blank">KERN-UX-Standard</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li>
+            <Badge look="gray">Februar 2026</Badge>
+            <ul>
+              <li>
+                Regelungsbegleitungen: Tabelle mit Service-Paketen ergänzt
+                <a href={`${begleitungen.path}#leistungspakete`} class="block"
+                  >Hier ansehen</a
+                >
+              </li>
+              <li>
+                Schulungen: Hinweise zu externen Angeboten ergänzt
+                <a href={`${schulungen.path}#schulungen-weitere`} class="block"
+                  >Hier ansehen</a
+                >
+              </li>
+              <li>
+                Neue Seite ergänzt: Anleitungen und Hilfsmittel
+                <a href={werkzeuge.path} class="block">Hier ansehen</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <Badge look="gray">Januar 2026</Badge>
+            <ul>
+              <li>
+                Launch der Website des Zentrum für Legistik am 5.&nbsp;Januar
+                2026
+              </li>
+            </ul>
+          </li>
         </li>
       </TimelineList>
     </section>
