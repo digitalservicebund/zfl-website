@@ -46,7 +46,12 @@ const types = ["Methode", "Tool", "Leitfaden"] as const; // "Ressource"
 ---
 
 <Layout title={frontmatter.title}>
-  <main class="breakout-grid">
+  <main
+    class="breakout-grid"
+    x-data={`{
+      hintSidebarOpen: false,
+    }`}
+  >
     <Hero level="main">
       <h1>{frontmatter.title}</h1>
       <p slot="subtitle">
@@ -55,6 +60,42 @@ const types = ["Methode", "Tool", "Leitfaden"] as const; // "Ressource"
         Diese Sammlung wird stetig ausgebaut.
       </p>
     </Hero>
+    <div
+      id="hint-sidebar"
+      x-cloak
+      x-show="hintSidebarOpen"
+      class="fixed top-0 right-0 z-10 min-h-screen w-384 bg-[#F7F7F9] px-24 py-40 [&_h3]:text-lg"
+    >
+      <div class="mb-32 flex w-full justify-end">
+        <button
+          class="border-cosmic-blue-base text-cosmic-blue-base rounded-sm border p-8"
+          @click="hintSidebarOpen = false"
+        >
+          <Icon name="ic:round-close" class="h-24 w-24" />
+        </button>
+      </div>
+      <h2 class="mt-0 text-xl">Filterfunktionen</h2>
+      <h3>Gemerkte Werkzeuge</h3>
+      <p>
+        Jedes Werkzeug kann per Klick auf das Lesezeichen-Symbol gemerkt werden.
+        Diese werden im Browser gespeichert.
+      </p>
+      <p>
+        Achtung: Die gemerkten Werkzeuge verschwinden, sobald Sie den Browser
+        zurücksetzen.
+      </p>
+      <h3>Methode</h3>
+      <p>
+        Systematische Vorgehensweisen, die Ihnen zu Erkenntnissen verhelfen.
+      </p>
+      <h3>Tool</h3>
+      <p>
+        Wissensquellen oder interaktive Werkzeuge, wie beispielsweise Editoren,
+        Plug-ins und Klickstrecken.
+      </p>
+      <h3>Leitfaden</h3>
+      <p>Strukturierte Anleitungen, die Orientierung bieten.</p>
+    </div>
     <section>
       <h2>Ich möchte ...</h2>
       {
@@ -89,6 +130,12 @@ const types = ["Methode", "Tool", "Leitfaden"] as const; // "Ressource"
               </button>
             ))
           }
+          <button
+            class="text-cosmic-blue-base"
+            @click="hintSidebarOpen = !hintSidebarOpen"
+          >
+            <Icon name="ic:outline-help-outline" class="h-32 w-32" />
+          </button>
         </div>
       </div>
       {
