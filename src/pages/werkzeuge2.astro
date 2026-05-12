@@ -43,21 +43,14 @@ const categories = [
 ];
 
 const types = ["Methode", "Tool", "Leitfaden"] as const; // "Ressource"
+const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
 ---
 
 <Layout title={frontmatter.title}>
   <main
     class="breakout-grid"
-    x-data={`{
-      hintSidebarOpen: false,
-      filterType: null,
-      toggleType(type) {
-        this.filterType = this.filterType === type ? null : type;
-      },
-      isCardVisible(types) {
-        return this.filterType === null || types.includes(this.filterType);
-      }
-    }`}
+    x-data="werkzeuge"
+    data-bookmarkedtype={BOOKMARKED_TYPE}
   >
     <Hero level="main">
       <h1>{frontmatter.title}</h1>
@@ -122,24 +115,25 @@ const types = ["Methode", "Tool", "Leitfaden"] as const; // "Ressource"
       <div>
         <p class="kern-label">Filtern nach:</p>
         <div class="mb-16 flex gap-16">
-          <button>
-            <span class={`kern-badge kern-badge--bookmarks`}>
-              <Icon name="ic:round-bookmark-add" class="text-icon-muted" />
-              <span class="kern-label">Gemerkte Werkzeuge</span>
-            </span>
-          </button>
           {
-            types.map((type) => (
-              <button @click={`toggleType('${type}')`}>
+            [BOOKMARKED_TYPE, ...types].map((type) => (
+              <button @click={`toggleFilterType('${type}')`}>
                 <span
-                  class={`kern-badge kern-badge--${type.toLowerCase()} interactive`}
+                  class={`kern-badge kern-badge--${type.replaceAll(" ", "_").toLowerCase()} interactive`}
                   x-bind:data-inactive={`filterType && filterType !== '${type}'`}
                 >
-                  <span
-                    class="kern-icon kern-icon--check kern-icon--default"
-                    aria-hidden="true"
-                    x-show={`!filterType || filterType === '${type}'`}
-                  />
+                  {type === BOOKMARKED_TYPE ? (
+                    <Icon
+                      name="ic:round-bookmark-added"
+                      class="text-icon-muted h-24 w-24"
+                    />
+                  ) : (
+                    <span
+                      class="kern-icon kern-icon--check kern-icon--default"
+                      aria-hidden="true"
+                      x-show={`!filterType || filterType === '${type}'`}
+                    />
+                  )}
                   <span class="kern-label">{type}</span>
                 </span>
               </button>
@@ -163,19 +157,17 @@ const types = ["Methode", "Tool", "Leitfaden"] as const; // "Ressource"
       </div>
       {
         categories.map(({ id, title, tools }) => {
-          const catTypes = new Set(tools.map((t) => t.data.type));
           return (
             <>
-              <h2
-                id={id}
-                class="scroll-mt-md mt-80 mb-56"
-                x-show={`${JSON.stringify([...catTypes])}.some((t) => isCardVisible(t))`}
-              >
+              <h2 id={id} class="scroll-mt-md mt-80 mb-56">
                 {title.charAt(0).toUpperCase() + title.slice(1)}
               </h2>
-              <div class="gap-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+              <div class="tool-grid gap-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 {tools.map((t) => (
-                  <div x-show={`isCardVisible(${JSON.stringify(t.data.type)})`}>
+                  <div
+                    class="tool-wrapper"
+                    x-bind:data-visible={`isCardVisible(${JSON.stringify(t.id)}, ${JSON.stringify(t.data.type)})`}
+                  >
                     <KernCard
                       title={t.data.title}
                       href={t.data.externalUrl}
@@ -199,9 +191,17 @@ const types = ["Methode", "Tool", "Leitfaden"] as const; // "Ressource"
                         <button
                           class="text-icon-muted"
                           aria-label={"Lesezeichen hinzufügen"}
+                          @click={`toggleBookmark(${JSON.stringify(t.id)})`}
                         >
                           <Icon
                             name={"ic:outline-bookmark-add"}
+                            x-show={`!bookmarkedTools.includes(${JSON.stringify(t.id)})`}
+                            class="h-32 w-32"
+                          />
+                          <Icon
+                            name="ic:round-bookmark-added"
+                            x-cloak
+                            x-show={`bookmarkedTools.includes(${JSON.stringify(t.id)})`}
                             class="h-32 w-32"
                           />
                         </button>
@@ -219,6 +219,9 @@ const types = ["Methode", "Tool", "Leitfaden"] as const; // "Ressource"
                     </KernCard>
                   </div>
                 ))}
+                <p class="no-results">
+                  <em>Keine Treffer</em>
+                </p>
               </div>
             </>
           );
@@ -237,15 +240,68 @@ const types = ["Methode", "Tool", "Leitfaden"] as const; // "Ressource"
   </main>
 </Layout>
 
+<script>
+  import Alpine from "alpinejs";
+  const BOOKMARKED_TYPE = "Gemerkte Werkzeuge"; // TODO: DRY with frontmatter
+
+  document.addEventListener("alpine:init", () => {
+    Alpine.data("werkzeuge", () => ({
+      hintSidebarOpen: false as boolean,
+      filterType: null as string | null,
+      bookmarkedTools: [] as string[],
+
+      init() {
+        const stored = localStorage.getItem("bookmarkedTools");
+        if (stored) {
+          try {
+            this.bookmarkedTools = JSON.parse(stored) as string[];
+          } catch (e) {
+            console.error(
+              "Failed to parse bookmarked tools from localStorage",
+              e,
+            );
+          }
+        }
+        this.$watch("bookmarkedTools", (value: string[]) => {
+          localStorage.setItem("bookmarkedTools", JSON.stringify(value));
+        });
+      },
+
+      toggleFilterType(type: string) {
+        this.filterType = this.filterType === type ? null : type;
+      },
+
+      isCardVisible(toolId: string, types: string[]) {
+        return (
+          this.filterType === null ||
+          types.includes(this.filterType) ||
+          (this.filterType === BOOKMARKED_TYPE &&
+            this.bookmarkedTools.includes(toolId))
+        );
+      },
+
+      toggleBookmark(toolId: string) {
+        if (this.bookmarkedTools.includes(toolId)) {
+          this.bookmarkedTools = this.bookmarkedTools.filter(
+            (id) => id !== toolId,
+          );
+        } else {
+          this.bookmarkedTools.push(toolId);
+        }
+      },
+    }));
+  });
+</script>
+
 <style is:global>
   .kern-badge {
     &.interactive[data-inactive="true"] {
       opacity: 0.4;
     }
   }
-  .kern-badge--bookmarks {
-    border: 1px solid var(--color-icon-muted);
-    color: var(--color-icon-muted);
+  .kern-badge--gemerkte_werkzeuge {
+    border: 1px solid #000000;
+    color: #000000;
   }
   .kern-badge--methode {
     background-color: #e6fba2;
@@ -266,5 +322,14 @@ const types = ["Methode", "Tool", "Leitfaden"] as const; // "Ressource"
     background-color: #e5cbf4;
     border: 1px solid #8412af;
     --kern-color-layout-text-default: #8412af;
+  }
+  .tool-wrapper:not([data-visible="true"]) {
+    display: none;
+  }
+  .no-results {
+    display: none;
+  }
+  .tool-grid:not(:has(.tool-wrapper[data-visible="true"])) .no-results {
+    display: block;
   }
 </style>
