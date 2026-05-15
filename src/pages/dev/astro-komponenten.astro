@@ -1,7 +1,7 @@
 ---
 import Badge from "@/components/Badge.astro";
 import Banner from "@/components/Banner.astro";
-import Card from "@/components/Card.astro";
+import InfoPanel from "@/components/InfoPanel.astro";
 import FeatureItem from "@/components/FeatureItem.astro";
 import FeatureSet from "@/components/FeatureSet.astro";
 import Hero from "@/components/Hero.astro";
@@ -103,60 +103,60 @@ export const frontmatter = {
       </Banner>
     </section>
 
-    <!-- ─── Card ──────────────────────────────────────────────────────── -->
+    <!-- ─── InfoPanel ────────────────────────────────────────────────── -->
     <section class="space-y-48">
-      <h2>Card</h2>
+      <h2>InfoPanel</h2>
 
       <div class="space-y-32">
         <p class="variant-label kern-label">look: default (weiß)</p>
-        <Card>
+        <InfoPanel>
           <h3>Weiße Karte</h3>
           <p>Standardvariante ohne explizites look-Prop.</p>
-        </Card>
+        </InfoPanel>
       </div>
 
       <div class="space-y-32">
         <p class="variant-label kern-label">look: lavender</p>
-        <Card look="lavender">
+        <InfoPanel look="lavender">
           <h3>Lavendel-Karte</h3>
           <p>Hintergrund: <code>bg-lavender-400</code>.</p>
-        </Card>
+        </InfoPanel>
       </div>
 
       <div class="space-y-32">
         <p class="variant-label kern-label">look: lightLavender</p>
-        <Card look="lightLavender">
+        <InfoPanel look="lightLavender">
           <h3>Helles Lavendel</h3>
           <p>Hintergrund: <code>bg-lavender-200</code>.</p>
-        </Card>
+        </InfoPanel>
       </div>
 
       <div class="space-y-32">
         <p class="variant-label kern-label">look: blue</p>
-        <Card look="blue">
+        <InfoPanel look="blue">
           <h3>Blaue Karte</h3>
           <p>Hintergrund: <code>bg-cosmic-blue-base</code>, weiße Schrift.</p>
-        </Card>
+        </InfoPanel>
       </div>
 
       <div class="space-y-32">
         <p class="variant-label kern-label">padding: wide</p>
-        <Card padding="wide">
+        <InfoPanel padding="wide">
           <h3>Breites Padding</h3>
           <p>Variante mit mehr horizontalem Innenabstand.</p>
-        </Card>
+        </InfoPanel>
       </div>
 
       <div class="space-y-32">
         <p class="variant-label kern-label">mit Icon-Slot</p>
-        <Card>
+        <InfoPanel>
           <Icon name="ic:twotone-widgets" slot="icon" />
           <h3>Karte mit Icon</h3>
           <p>
             Beim Übergeben des Icon-Slots wird links ein farbiger Ikonbereich
             angezeigt.
           </p>
-        </Card>
+        </InfoPanel>
       </div>
     </section>
 

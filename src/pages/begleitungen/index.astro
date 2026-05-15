@@ -1,5 +1,4 @@
 ---
-import SupportCard from "@/components/blocks/SupportCard.astro";
 import MediaText from "@/components/MediaText.astro";
 import Hero from "@/components/Hero.astro";
 import FeatureSet from "@/components/FeatureSet.astro";
@@ -218,19 +217,16 @@ export const frontmatter = {
         />
       </MediaText>
     </section>
-    <section class="bg-lavender-400 breakout py-80">
-      <SupportCard>
-        <p>
-          Wir unterstützen Sie gerne persönlich in allen Phasen der
-          Regelungsarbeit. Bei Fragen melden Sie sich unter:
-        </p>
-        <p>
-          Telefon: <a href={ZFL_PHONE_REGBEG.url}>{ZFL_PHONE_REGBEG.display}</a>
-        </p>
-        <p>
-          E-Mail: <a href={ZFL_EMAIL_REGBEG.url}>{ZFL_EMAIL_REGBEG.display}</a>
-        </p>
-      </SupportCard>
-    </section>
+    <Hero level="root">
+      <h2>Kontakt</h2>
+      <p>
+        Wir unterstützen Sie gerne persönlich in allen Phasen der
+        Regelungsarbeit. Bei Fragen melden Sie sich unter:
+      </p>
+      <p>Telefon: <a href={ZFL_PHONE_REGBEG.url}>{ZFL_PHONE_REGBEG.url}</a></p>
+      <p>
+        E-Mail: <a href={ZFL_EMAIL_REGBEG.url}>{ZFL_EMAIL_REGBEG.display}</a>
+      </p>
+    </Hero>
   </main>
 </Layout>

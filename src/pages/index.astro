@@ -1,7 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
-import Card from "@/components/Card.astro";
+import InfoPanel from "@/components/InfoPanel.astro";
 import Banner from "@/components/Banner.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import {
@@ -52,7 +52,7 @@ export const frontmatter = {
       </p>
       <div class="space-y-md mt-lg">
         <h2>Bereits verfügbare Angebote</h2>
-        <Card look="lavender" padding="wide">
+        <InfoPanel look="lavender" padding="wide">
           <h3>Interdisziplinäre Expertise für Ihr Regelungsvorhaben</h3>
           <p>
             Wir begleiten Sie mit einem interdisziplinärem Kompetenzteam. Sie
@@ -62,15 +62,15 @@ export const frontmatter = {
           <a href={begleitungen.path}
             >Mehr Informationen zu interdisziplinären Kompetenzteams</a
           >
-        </Card>
-        <Card look="lavender" padding="wide">
+        </InfoPanel>
+        <InfoPanel look="lavender" padding="wide">
           <h3>In Schulungen praktisches Wissen erlangen</h3>
           <p>
             Neue Methoden und Werkzeuge für die Rechtsetzung in
             umsetzungsorientierten Schulungen kennenlernen.
           </p>
           <a href={schulungen.path}>Mehr Informationen zu Schulungen</a>
-        </Card>
+        </InfoPanel>
       </div>
     </section>
     <Hero level="root">

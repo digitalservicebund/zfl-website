@@ -6,7 +6,7 @@ import Layout from "@/layouts/Layout.astro";
 import { Image } from "astro:assets";
 import appointments from "./_appointments.json";
 import Schedule from "./_schedule.astro";
-import Card from "@/components/Card.astro";
+import InfoPanel from "@/components/InfoPanel.astro";
 
 export const frontmatter = {
   title: "Schulungen",
@@ -111,7 +111,7 @@ export const frontmatter = {
     </Hero>
     <section class="space-y-56">
       <h2 id="schulungen-weitere" class="scroll-m-20">Weitere Angebote</h2>
-      <Card padding="wide" look="lightLavender">
+      <InfoPanel padding="wide" look="lightLavender">
         <h3>Bundesstiftung Gleichstellung (Gleichstellungs-Check)</h3>
         <p>
           Die für ein Gesetzesvorhaben fachlich Zuständigen lernen in der
@@ -134,8 +134,8 @@ export const frontmatter = {
             </p>
           </li>
         </ul>
-      </Card>
-      <Card padding="wide" look="lightLavender">
+      </InfoPanel>
+      <InfoPanel padding="wide" look="lightLavender">
         <h3>Speyerer Zentrum für Gesetzgebung</h3>
         <p>
           Das Zentrum für Gesetzgebung an der Deutschen Universität für
@@ -155,8 +155,8 @@ export const frontmatter = {
             >
           </li>
         </ul>
-      </Card>
-      <Card padding="wide" look="lightLavender">
+      </InfoPanel>
+      <InfoPanel padding="wide" look="lightLavender">
         <h3>Statistisches Bundesamt - OnDEA</h3>
         <ul>
           <li>
@@ -168,7 +168,7 @@ export const frontmatter = {
             >
           </li>
         </ul>
-      </Card>
+      </InfoPanel>
     </section>
     <Hero level="root">
       <h2>Kontakt</h2>

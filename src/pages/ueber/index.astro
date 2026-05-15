@@ -1,5 +1,5 @@
 ---
-import Card from "@/components/Card.astro";
+import InfoPanel from "@/components/InfoPanel.astro";
 import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
 import MediaText from "@/components/MediaText.astro";
@@ -173,7 +173,7 @@ const contactId = "kontaktieren-sie-uns";
           Modernisierung der Rechtsetzung."
         />
       </div>
-      <Card
+      <InfoPanel
         id={contactId}
         look="blue"
         class="flex justify-center py-48 md:py-56"
@@ -194,7 +194,7 @@ const contactId = "kontaktieren-sie-uns";
             </a>
           </li>
         </ul>
-      </Card>
+      </InfoPanel>
     </section>
   </main>
 </Layout>
