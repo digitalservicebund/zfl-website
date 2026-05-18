@@ -20,13 +20,12 @@ import {
 export const frontmatter = {
   title: "Über uns",
   sitemap: true,
-  addToPagefind: true,
 };
 
 const contactId = "kontaktieren-sie-uns";
 ---
 
-<Layout title={frontmatter.title} addToPagefind={frontmatter.addToPagefind}>
+<Layout title={frontmatter.title}>
   <main class="breakout-grid">
     <Hero level="main">
       <h1>Über das Zentrum für Legistik</h1>

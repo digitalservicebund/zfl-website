@@ -14,11 +14,10 @@ import rulemapBuilderImage from "./RulemapBuilder.jpg";
 export const frontmatter = {
   title: "Werkzeuge",
   sitemap: true,
-  addToPagefind: true,
 };
 ---
 
-<Layout title={frontmatter.title} addToPagefind={frontmatter.addToPagefind}>
+<Layout title={frontmatter.title}>
   <main class="breakout-grid">
     <Hero level="main">
       <h1>{frontmatter.title}</h1>

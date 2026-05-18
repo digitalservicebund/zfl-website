@@ -11,11 +11,10 @@ import InfoPanel from "@/components/InfoPanel.astro";
 export const frontmatter = {
   title: "Schulungen",
   sitemap: true,
-  addToPagefind: true,
 };
 ---
 
-<Layout title={frontmatter.title} addToPagefind={frontmatter.addToPagefind}>
+<Layout title={frontmatter.title}>
   <main class="breakout-grid max-md:overflow-x-hidden">
     <Hero level="main">
       <div class="items-center gap-32 md:flex md:flex-row">

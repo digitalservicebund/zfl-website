@@ -13,11 +13,10 @@ import { Icon } from "astro-icon/components";
 export const frontmatter = {
   title: "Regelungsbegleitung",
   sitemap: true,
-  addToPagefind: true,
 };
 ---
 
-<Layout title={frontmatter.title} addToPagefind={frontmatter.addToPagefind}>
+<Layout title={frontmatter.title}>
   <main class="breakout-grid">
     <Hero level="main" class="overflow-clip">
       <div class="items-center gap-32 md:flex">
