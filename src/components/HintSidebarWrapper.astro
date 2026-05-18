@@ -1,0 +1,54 @@
+---
+import { Icon } from "astro-icon/components";
+
+/*
+  Usage example:
+
+  <HintSidebarWrapper>
+    <p>Main content goes here (default slot).</p>
+    <button @click="hintSidebarOpen = true">Open sidebar</button>
+
+    <div slot="hintSidebarContent">
+      <h3>Hint</h3>
+      <p>Sidebar content goes here.</p>
+    </div>
+  </HintSidebarWrapper>
+
+  Open/close is controlled via the `hintSidebarOpen` Alpine.js state variable.
+*/
+
+const { class: className = "" } = Astro.props;
+---
+
+<div class="hint-sidebar-wrapper" x-data="{ hintSidebarOpen: false }">
+  <div class={`breakout-grid ${className}`}>
+    <slot />
+  </div>
+
+  <aside class="z-20 overflow-visible">
+    <div
+      class="sticky top-0 h-screen w-screen overflow-auto bg-[#F7F7F9] px-24 py-40 transition-transform duration-300 sm:w-384 [&_h3]:text-lg"
+      x-bind:class="hintSidebarOpen ? '-translate-x-full' : 'translate-x-0'"
+    >
+      <div class="mb-32 flex w-full justify-end">
+        <button
+          class="border-cosmic-blue-base text-cosmic-blue-base rounded-sm border p-8"
+          @click="hintSidebarOpen = false"
+        >
+          <Icon name="ic:round-close" class="h-24 w-24" />
+        </button>
+      </div>
+      <slot name="hintSidebarContent" />
+    </div>
+  </aside>
+</div>
+
+<style>
+  .hint-sidebar-wrapper {
+    grid-column: full;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 0px;
+    overflow: clip;
+  }
+</style>

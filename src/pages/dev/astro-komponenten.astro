@@ -5,6 +5,7 @@ import InfoPanel from "@/components/InfoPanel.astro";
 import FeatureItem from "@/components/FeatureItem.astro";
 import FeatureSet from "@/components/FeatureSet.astro";
 import Hero from "@/components/Hero.astro";
+import HintSidebarWrapper from "@/components/HintSidebarWrapper.astro";
 import KernBadge from "@/components/KernBadge.astro";
 import KernCard from "@/components/KernCard.astro";
 import MediaText from "@/components/MediaText.astro";
@@ -210,6 +211,67 @@ export const frontmatter = {
         <h2 class="kern-heading-x-large py-0">Unterseite</h2>
       </Hero>
     </section>
+
+    <!-- ─── HintSidebarWrapper ───────────────────────────────────────── -->
+    <HintSidebarWrapper>
+      <section class="space-y-48">
+        <h2>HintSidebarWrapper</h2>
+        <p>
+          Hauptinhalt neben der ausklappbaren Sidebar. Die Sidebar wird über die
+          Alpine.js-Variable <code>hintSidebarOpen</code> gesteuert.
+        </p>
+        <button
+          class="border-cosmic-blue-base text-cosmic-blue-base rounded-sm border px-16 py-8"
+          @click="hintSidebarOpen = !hintSidebarOpen"
+        >
+          Sidebar öffnen/schließen
+        </button>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+      </section>
+
+      <div slot="hintSidebarContent">
+        <h3>Hinweis</h3>
+        <p>
+          Hier steht ein erklärender Hinweistext, der in der Sidebar angezeigt
+          wird.
+        </p>
+      </div>
+    </HintSidebarWrapper>
 
     <!-- ─── KernCard ──────────────────────────────────────────────────── -->
     <section class="space-y-48">
