@@ -1,0 +1,400 @@
+---
+import Hero from "@/components/Hero.astro";
+import Layout from "@/layouts/Layout.astro";
+import HintSidebarWrapper from "@/components/HintSidebarWrapper.astro";
+import KernCard from "@/components/KernCard.astro";
+import { Icon } from "astro-icon/components";
+import { getCollection } from "astro:content";
+import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
+
+export const frontmatter = {
+  title: "Werkzeuge",
+  sitemap: false,
+  isStagingOnly: true,
+};
+
+const allTools = await getCollection("werkzeuge");
+
+type Category = (typeof allTools)[number]["data"]["category"][number];
+
+const getFilteredTools = (category: Category) =>
+  allTools.filter((tool) => tool.data.category.includes(category));
+
+const categories = [
+  {
+    id: "problemanalyse",
+    title: "ein Problem besser verstehen und analysieren",
+    tools: getFilteredTools("Problemanalyse"),
+  },
+  {
+    id: "digital-und-praxistauglichkeit",
+    title: "Digital- und Praxistauglichkeit sicherstellen",
+    tools: getFilteredTools("Praxistauglichkeit"),
+  },
+  {
+    id: "rechtsfoermlichkeit",
+    title: "die Rechtsförmlichkeit des Vorhabens gewährleisten",
+    tools: getFilteredTools("Rechtsförmlichkeit"),
+  },
+  {
+    id: "folgenabschaetzung",
+    title: "die Folgen eines Vorhabens abschätzen",
+    tools: getFilteredTools("Folgenabschätzung"),
+  },
+  {
+    id: "beteiligung",
+    title: "näher mit Beteiligten arbeiten",
+    tools: getFilteredTools("Beteiligung"),
+  },
+];
+
+const types = ["Methode", "Tool", "Leitfaden", "Ressource"] as const;
+const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
+---
+
+<Layout title={frontmatter.title}>
+  <main x-data="werkzeuge" class="breakout-grid">
+    <Hero level="main">
+      <h1>{frontmatter.title}</h1>
+      <p slot="subtitle">
+        Auf dieser Seite finden Sie Werkzeuge, die Sie bei der Regelungsarbeit
+        unterstützen: hilfreiche Links zu Anleitungen, Hilfsmittel und Tools.
+        Diese Sammlung wird stetig ausgebaut.
+      </p>
+    </Hero>
+
+    <HintSidebarWrapper class="py-lg">
+      <h2>Ich möchte ...</h2>
+      {
+        categories.map(({ id, title }) => (
+          <p>
+            <a href={`#${id}`} class="kern-heading-medium">
+              <Icon
+                name="ic:round-arrow-downward"
+                class="text-cosmic-blue-base inline-block h-32 w-32 pr-4"
+              />
+              {title}
+            </a>
+          </p>
+        ))
+      }
+      <hr class="kern-divider mt-lg mb-16" aria-hidden="true" />
+
+      <div aria-hidden="true" x-ref="sentinel" class="h-px -translate-y-px">
+      </div>
+
+      <div
+        class="breakout sticky top-0 z-10 bg-white py-16 transition-shadow"
+        x-data="{ stuck: false }"
+        x-bind:class="stuck ? 'shadow-md' : ''"
+        x-init="
+        new IntersectionObserver(([e]) => { stuck = !e.isIntersecting }, { threshold: [1] })
+          .observe($refs.sentinel);
+        stuck = false;
+      "
+      >
+        <div class="flex flex-col flex-wrap justify-between gap-16 lg:flex-row">
+          <div class="flex flex-wrap items-center gap-8 lg:gap-16">
+            <p class="kern-label my-0 py-0">Filtern nach:</p>
+            {
+              [BOOKMARKED_TYPE, ...types].map((type) => (
+                <button class="h-32" @click={`toggleFilterType('${type}')`}>
+                  <span
+                    class={`kern-badge kern-badge--${type.replaceAll(" ", "_").toLowerCase()} interactive`}
+                    x-bind:data-inactive={`filterType && filterType !== '${type}'`}
+                  >
+                    {type === BOOKMARKED_TYPE ? (
+                      <Icon
+                        name="ic:round-bookmark-added"
+                        class="text-icon-muted h-24 w-24"
+                      />
+                    ) : (
+                      <span
+                        class="kern-icon kern-icon--check kern-icon--default"
+                        aria-hidden="true"
+                        x-show={`filterType === '${type}'`}
+                      />
+                    )}
+                    <span class="kern-label">{type}</span>
+                  </span>
+                </button>
+              ))
+            }
+            <button
+              class="text-cosmic-blue-base"
+              @click="hintSidebarOpen = !hintSidebarOpen"
+            >
+              <Icon name="ic:outline-help-outline" class="h-32 w-32" />
+            </button>
+          </div>
+          <div class="relative w-full md:w-auto">
+            <input
+              class="focus:outline-cosmic-blue-base rounded-sm py-8 pl-40 transition-[width] [--expanded:100%] focus:w-(--expanded) focus:outline-2 lg:[--expanded:280px]"
+              x-bind:class="searchQuery ? 'pr-68 w-(--expanded) outline-1 outline-cosmic-blue-400' : 'pr-8 w-128'"
+              id="tool-search"
+              name="text"
+              type="text"
+              placeholder="Suchen ..."
+              x-model="searchQuery"
+            />
+            <span
+              class="kern-icon kern-icon--search kern-icon--default absolute top-1/2 left-8 -translate-y-1/2"
+              aria-hidden="true"></span>
+            <button
+              class="text-icon-muted absolute top-1/2 right-8 -translate-y-1/2 text-sm"
+              @click="searchQuery = ''"
+              x-cloak
+              x-show="!!searchQuery">Löschen</button
+            >
+          </div>
+        </div>
+      </div>
+      {
+        categories.map(({ id, title, tools }) => {
+          return (
+            <>
+              <h2 id={id} class="mt-80 mb-56 scroll-mt-104">
+                {title.charAt(0).toUpperCase() + title.slice(1)}
+              </h2>
+              <div class="tool-grid gap-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                {tools.map((t) => (
+                  <div
+                    class="tool-wrapper"
+                    x-bind:data-visible={`isCardVisible(${JSON.stringify(t.id)}, ${JSON.stringify(t.data.type)}, ${JSON.stringify(t.data.title)})`}
+                  >
+                    <KernCard
+                      title={t.data.title}
+                      href={t.data.externalUrl}
+                      body={t.data.description}
+                      background="white"
+                      interactive={false}
+                    >
+                      <div
+                        slot="pre-header"
+                        class="mb-16 flex w-full justify-between"
+                      >
+                        <div class="flex gap-8">
+                          {t.data.type.map((type) => (
+                            <span
+                              class={`kern-badge kern-badge--${type.toLowerCase()}`}
+                            >
+                              <span class="kern-label">{type}</span>
+                            </span>
+                          ))}
+                        </div>
+                        <button
+                          class="text-icon-muted"
+                          aria-label={"Lesezeichen hinzufügen"}
+                          @click={`toggleBookmark(${JSON.stringify(t.id)})`}
+                        >
+                          <Icon
+                            name={"ic:outline-bookmark-add"}
+                            x-show={`!bookmarkedTools.includes(${JSON.stringify(t.id)})`}
+                            class="h-32 w-32"
+                          />
+                          <Icon
+                            name="ic:round-bookmark-added"
+                            x-cloak
+                            x-show={`bookmarkedTools.includes(${JSON.stringify(t.id)})`}
+                            class="h-32 w-32"
+                          />
+                        </button>
+                      </div>
+                      <div
+                        slot="footer"
+                        class="text-icon-muted! flex items-center gap-8"
+                      >
+                        <Icon
+                          name="ic:baseline-auto-stories"
+                          class="h-32 w-32 shrink-0"
+                        />
+                        <p class="kern-subline py-0">Quelle: {t.data.source}</p>
+                      </div>
+                    </KernCard>
+                  </div>
+                ))}
+                <p class="no-results">
+                  <em>Keine Treffer</em>
+                </p>
+              </div>
+            </>
+          );
+        })
+      }
+
+      <div slot="hintSidebarContent">
+        <h2 class="mt-0 text-xl">Filterfunktionen</h2>
+        <h3>Gemerkte Werkzeuge</h3>
+        <p>
+          Jedes Werkzeug kann per Klick auf das Lesezeichen-Symbol gemerkt
+          werden. Diese werden im Browser gespeichert.
+        </p>
+        <p>
+          Achtung: Die gemerkten Werkzeuge verschwinden, sobald Sie den Browser
+          zurücksetzen.
+        </p>
+        <h3>Methode</h3>
+        <p>
+          Systematische Vorgehensweisen, die Ihnen zu Erkenntnissen verhelfen.
+        </p>
+        <h3>Tool</h3>
+        <p>
+          Wissensquellen oder interaktive Werkzeuge, wie beispielsweise
+          Editoren, Plug-ins und Klickstrecken.
+        </p>
+        <h3>Leitfaden</h3>
+        <p>Strukturierte Anleitungen, die Orientierung bieten.</p>
+      </div>
+    </HintSidebarWrapper>
+
+    <Hero level="root">
+      <h2>Fehlt etwas?</h2>
+      <p>
+        Kennen Sie weitere hilfreiche Werkzeuge, die auf dieser Seite fehlen?
+        Kontaktieren Sie uns gerne.
+      </p>
+      <p>Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a></p>
+      <p>E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a></p>
+    </Hero>
+  </main>
+</Layout>
+
+<script>
+  import Alpine from "alpinejs";
+  const BOOKMARKED_TYPE = "Gemerkte Werkzeuge"; // TODO: DRY with frontmatter
+
+  document.addEventListener("alpine:init", () => {
+    Alpine.data("werkzeuge", () => ({
+      filterType: null as string | null,
+      bookmarkedTools: [] as string[],
+      searchQuery: "",
+
+      init() {
+        const stored = localStorage.getItem("bookmarkedTools");
+        if (stored) {
+          try {
+            this.bookmarkedTools = JSON.parse(stored) as string[];
+          } catch (e) {
+            console.error(
+              "Failed to parse bookmarked tools from localStorage",
+              e,
+            );
+          }
+        }
+        this.$watch("bookmarkedTools", (value: string[]) => {
+          localStorage.setItem("bookmarkedTools", JSON.stringify(value));
+        });
+        this.$watch("searchQuery", (query: string) => {
+          CSS.highlights.clear();
+          if (!query.trim()) return;
+          const wrappers = (
+            this.$el as HTMLElement
+          ).querySelectorAll<HTMLElement>(".tool-wrapper");
+          const ranges: Range[] = [];
+          const q = query.toLowerCase();
+          for (const wrapper of wrappers) {
+            const walker = document.createTreeWalker(
+              wrapper,
+              NodeFilter.SHOW_TEXT,
+            );
+            let node: Node | null;
+            while ((node = walker.nextNode())) {
+              const text = node.textContent!.toLowerCase();
+              let idx = text.indexOf(q);
+              while (idx !== -1) {
+                const range = new Range();
+                range.setStart(node, idx);
+                range.setEnd(node, idx + q.length);
+                ranges.push(range);
+                idx = text.indexOf(q, idx + 1);
+              }
+            }
+          }
+          if (ranges.length) {
+            CSS.highlights.set("search-results", new Highlight(...ranges));
+          }
+        });
+      },
+
+      toggleFilterType(type: string) {
+        this.filterType = this.filterType === type ? null : type;
+      },
+
+      isCardVisible(
+        toolId: string,
+        types: string[],
+        titleAndDescription: string,
+      ) {
+        if (this.searchQuery) {
+          if (
+            !titleAndDescription
+              .toLowerCase()
+              .includes(this.searchQuery.toLowerCase())
+          )
+            return false;
+        }
+        return (
+          this.filterType === null ||
+          types.includes(this.filterType) ||
+          (this.filterType === BOOKMARKED_TYPE &&
+            this.bookmarkedTools.includes(toolId))
+        );
+      },
+
+      toggleBookmark(toolId: string) {
+        if (this.bookmarkedTools.includes(toolId)) {
+          this.bookmarkedTools = this.bookmarkedTools.filter(
+            (id) => id !== toolId,
+          );
+        } else {
+          this.bookmarkedTools.push(toolId);
+        }
+      },
+    }));
+  });
+</script>
+
+<style>
+  .kern-badge {
+    &.interactive[data-inactive="true"] {
+      opacity: 0.4;
+    }
+  }
+  .kern-badge--gemerkte_werkzeuge {
+    border: 1px solid #000000;
+    color: #000000;
+  }
+  .kern-badge--methode {
+    background-color: #e6fba2;
+    border: 1px solid #5d7200;
+    --kern-color-layout-text-default: #3d4d00;
+  }
+  .kern-badge--tool {
+    background-color: #d5f6ff;
+    border: 1px solid #051d91;
+    --kern-color-layout-text-default: #051d91;
+  }
+  .kern-badge--leitfaden {
+    background-color: #fffdb2;
+    border: 1px solid #8f7400;
+    --kern-color-layout-text-default: #645000;
+  }
+  .kern-badge--ressource {
+    background-color: #e5cbf4;
+    border: 1px solid #8412af;
+    --kern-color-layout-text-default: #8412af;
+  }
+  ::highlight(search-results) {
+    background-color: #fde68a;
+    color: inherit;
+  }
+  .tool-wrapper:not([data-visible="true"]) {
+    display: none;
+  }
+  .no-results {
+    display: none;
+  }
+  .tool-grid:not(:has(.tool-wrapper[data-visible="true"])) .no-results {
+    display: block;
+  }
+</style>

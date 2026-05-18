@@ -14,6 +14,7 @@ vi.mock("@/config/stage", () => ({
   isProduction: true,
   isStaging: false,
   isPreview: false,
+  isDevelopment: false,
 }));
 
 describe("Layout", async () => {

@@ -1,5 +1,5 @@
 ---
-import { isPreview, isStaging } from "@/config/stage";
+import { isPreview, isStaging, isDevelopment } from "@/config/stage";
 ---
 
 <div class="kern-kopfzeile px-24">
@@ -12,9 +12,10 @@ import { isPreview, isStaging } from "@/config/stage";
       </svg>
     </span>
     <span class="kern-kopfzeile__label">
-      Offizielle Website – Bundesrepublik Deutschland{
-        isStaging ? " (STAGING)" : isPreview ? " (PREVIEW)" : ""
-      }</span
-    >
+      Offizielle Website – Bundesrepublik Deutschland
+      {isPreview && " (PREVIEW)"}
+      {isStaging && " (STAGING)"}
+      {isDevelopment && " (DEVELOPMENT)"}
+    </span>
   </div>
 </div>

@@ -38,7 +38,7 @@ Environment-specific code will be conditionally included/excluded from the final
 - Changing stage configuration requires a rebuild and redeployment
 - Not suitable for per-user or runtime environment switching
 
-## Implementation notes
+## Implementation
 
 ```ts
 // src/config/stage.ts

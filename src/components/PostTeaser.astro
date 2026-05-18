@@ -4,16 +4,36 @@ interface Props {
   source: string;
   title: string;
   href: string;
+  paywalled?: boolean;
   body?: string;
+  class?: string;
 }
 
-const { date, source, title, href, body } = Astro.props;
+const {
+  date,
+  source,
+  title,
+  href,
+  paywalled = false,
+  body,
+  class: className,
+} = Astro.props;
 ---
 
-<div class="py-32">
+<div class={className}>
   <header class="kern-card__header">
     <hgroup>
-      <p class="kern-preline">{date} · {source}</p>
+      <p class="kern-preline">
+        {date} · {source}
+        {
+          paywalled && (
+            <>
+              <span aria-hidden="true"> (€)</span>
+              <span class="kern-sr-only"> Bezahlinhalt</span>
+            </>
+          )
+        }
+      </p>
       <h2 class="kern-title">
         <a href={href} class="kern-link--stretched leading-32" target="_blank"
           >{title}

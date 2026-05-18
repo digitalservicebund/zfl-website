@@ -1,0 +1,25 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import { dev_astroKomponenten, dev_kernKomponenten } from "@/config/routes";
+
+export const frontmatter = {
+  title: "Dev Seiten",
+  sitemap: false,
+  isStagingOnly: true,
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero>
+      <h1>Dev Seiten</h1>
+    </Hero>
+    <section>
+      <ul>
+        <li><a href={dev_astroKomponenten.path}>Astro Komponenten</a></li>
+        <li><a href={dev_kernKomponenten.path}>KERN Komponenten</a></li>
+      </ul>
+    </section>
+  </main>
+</Layout>

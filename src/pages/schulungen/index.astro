@@ -1,13 +1,12 @@
 ---
 import Hero from "@/components/Hero.astro";
-import SupportCard from "@/components/blocks/SupportCard.astro";
 import { ZFL_PHONE, ZFL_EMAIL_SCHULUNG } from "@/config/constants.ts";
 import schulungenImage from "@/images/Schulungen.png";
 import Layout from "@/layouts/Layout.astro";
 import { Image } from "astro:assets";
 import appointments from "./_appointments.json";
 import Schedule from "./_schedule.astro";
-import Card from "@/components/Card.astro";
+import InfoPanel from "@/components/InfoPanel.astro";
 
 export const frontmatter = {
   title: "Schulungen",
@@ -102,21 +101,18 @@ export const frontmatter = {
         </div>
       </div>
     </section>
-    <section
-      class="bg-cosmic-blue-base breakout mb-32 text-white"
-      id="anmeldung"
-    >
-      <h2>Anmeldung</h2>
+    <Hero level="root">
+      <h2 id="anmeldung">Anmeldung</h2>
       <p>
         Schicken Sie uns für eine Anmeldung den Schulungs- oder Modul-Namen und
         Termin an die E-Mail <a href={ZFL_EMAIL_SCHULUNG.url}
           >{ZFL_EMAIL_SCHULUNG.display}</a
         > und wir bestätigen die Anmeldung.
       </p>
-    </section>
+    </Hero>
     <section class="space-y-56">
       <h2 id="schulungen-weitere" class="scroll-m-20">Weitere Angebote</h2>
-      <Card padding="wide" look="lightLavender">
+      <InfoPanel padding="wide" look="lightLavender">
         <h3>Bundesstiftung Gleichstellung (Gleichstellungs-Check)</h3>
         <p>
           Die für ein Gesetzesvorhaben fachlich Zuständigen lernen in der
@@ -139,38 +135,29 @@ export const frontmatter = {
             </p>
           </li>
         </ul>
-      </Card>
-      <Card padding="wide" look="lightLavender">
+      </InfoPanel>
+      <InfoPanel padding="wide" look="lightLavender">
         <h3>Speyerer Zentrum für Gesetzgebung</h3>
         <p>
           Das Zentrum für Gesetzgebung an der Deutschen Universität für
           Verwaltungswissenschaften Speyer bietet im Bereich der
           Gesetzgebungslehre Seminare und wissenschaftliche Vertiefung an.
-          Folgende Angebote befassen sich mit moderner Rechtsetzung:
         </p>
         <ul>
-          <li>
-            <p class="font-bold">Tagung „Ambivalenzen moderner Verwaltung“</p>
-            Zweitätige Tagung am 26. und 27. März 2026 in Speyer<br />
-            <a
-              href="https://weiterbildung.uni-speyer.de/suche/veranstaltungsdetails.html?action%5B26%5D=course&courseId=588-C-4388100&rowIndex=11"
-              target="_blank">Mehr Informationen und Anmeldung</a
-            >
-          </li>
           <li>
             <p class="font-bold">
               Wissen in Legistik und Rechtsetzung erweitern
             </p>
-            Lehr- und Weiterbildungsveranstaltungen zu den Themen Legistik und Rechtsetzung<br
-            />
+            Sommersemester 2026: Lehre und Weiterbildung zu den Themen Legistik und
+            Rechtsetzung<br />
             <a
               href="https://www.uni-speyer.de/lehrstuehle/level-2-1/prof-dr-ruth-weber/speyerer-zentrum-fuer-gesetzgebung"
               target="_blank">Mehr Informationen und Anmeldung</a
             >
           </li>
         </ul>
-      </Card>
-      <Card padding="wide" look="lightLavender">
+      </InfoPanel>
+      <InfoPanel padding="wide" look="lightLavender">
         <h3>Statistisches Bundesamt - OnDEA</h3>
         <ul>
           <li>
@@ -182,23 +169,21 @@ export const frontmatter = {
             >
           </li>
         </ul>
-      </Card>
+      </InfoPanel>
     </section>
-    <section class="bg-lavender-base breakout">
-      <SupportCard>
-        <p>
-          Wir unterstützen Sie gerne persönlich in allen Phasen der
-          Regelungsarbeit. Bei Fragen melden Sie sich unter:
-        </p>
-        <p>
-          Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>
-        </p>
-        <p>
-          E-Mail: <a href={ZFL_EMAIL_SCHULUNG.url}
-            >{ZFL_EMAIL_SCHULUNG.display}</a
-          >
-        </p>
-      </SupportCard>
-    </section>
+    <Hero level="root">
+      <h2>Kontakt</h2>
+      <p>
+        Wir unterstützen Sie gerne persönlich in allen Phasen der
+        Regelungsarbeit. Bei Fragen melden Sie sich unter:
+      </p>
+      <p>
+        Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>
+      </p>
+      <p>
+        E-Mail: <a href={ZFL_EMAIL_SCHULUNG.url}>{ZFL_EMAIL_SCHULUNG.display}</a
+        >
+      </p>
+    </Hero>
   </main>
 </Layout>

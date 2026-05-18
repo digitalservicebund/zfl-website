@@ -1,11 +1,14 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
-import Card from "@/components/Card.astro";
+import InfoPanel from "@/components/InfoPanel.astro";
 import Banner from "@/components/Banner.astro";
-import { Icon } from "astro-icon/components";
-import SupportCard from "@/components/blocks/SupportCard.astro";
-import { begleitungen, schulungen, ueber_dasIstNeu } from "@/config/routes";
+import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
+import {
+  begleitungen,
+  schulungen,
+  ueber_daranArbeitenWir,
+} from "@/config/routes";
 
 export const frontmatter = {
   title: "Zentrum für Legistik",
@@ -29,7 +32,7 @@ export const frontmatter = {
         Das Angebot befindet sich aktuell im Aufbau und wird schrittweise mit
         Ihnen zusammen weiterentwickelt.
       </p>
-      <a href={ueber_dasIstNeu.path}>Mehr dazu</a>
+      <a href={ueber_daranArbeitenWir.path}>Mehr dazu</a>
     </Banner>
     <section>
       <h2>Vorteile des Angebots für Sie</h2>
@@ -48,12 +51,9 @@ export const frontmatter = {
         <strong>Gut zu wissen:</strong> Das Zentrum für Legistik ist ein Bestandteil
         des Handlungsfelds „Bessere Rechtsetzung“ in der Modernisierungsagenda.
       </p>
-    </section>
-    <section class="breakout bg-lavender-base">
-      <div class="space-y-md">
+      <div class="space-y-md mt-lg">
         <h2>Bereits verfügbare Angebote</h2>
-        <Card>
-          <Icon name="ic:twotone-widgets" slot="icon" />
+        <InfoPanel look="lavender" padding="wide">
           <h3>Interdisziplinäre Expertise für Ihr Regelungsvorhaben</h3>
           <p>
             Wir begleiten Sie mit einem interdisziplinärem Kompetenzteam. Sie
@@ -63,20 +63,25 @@ export const frontmatter = {
           <a href={begleitungen.path}
             >Mehr Informationen zu interdisziplinären Kompetenzteams</a
           >
-        </Card>
-        <Card>
-          <Icon name="ic:twotone-fact-check" slot="icon" />
+        </InfoPanel>
+        <InfoPanel look="lavender" padding="wide">
           <h3>In Schulungen praktisches Wissen erlangen</h3>
           <p>
             Neue Methoden und Werkzeuge für die Rechtsetzung in
             umsetzungsorientierten Schulungen kennenlernen.
           </p>
           <a href={schulungen.path}>Mehr Informationen zu Schulungen</a>
-        </Card>
+        </InfoPanel>
       </div>
     </section>
-    <section>
-      <SupportCard look="lavender" />
-    </section>
+    <Hero level="root">
+      <h2>Kontakt</h2>
+      <p>
+        Sie haben Fragen zum Zentrum für Legistik oder den einzelnen Angeboten?
+        Kontaktieren Sie uns.
+      </p>
+      <p>Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a></p>
+      <p>E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a></p>
+    </Hero>
   </main>
 </Layout>

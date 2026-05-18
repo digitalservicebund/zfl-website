@@ -1,5 +1,5 @@
 import { allRoutes } from "@/config/routes";
-import { isDevelopment, isPreview, isStaging } from "@/config/stage";
+import { isDevelopment, isProduction } from "@/config/stage";
 import {
   buildRoutePath,
   hasTrailingSlash,
@@ -20,8 +20,8 @@ export const onRequest = defineMiddleware((context, next) => {
     return context.redirect(noTrailingSlashUrl, 301);
   }
 
-  // Allow staging and preview environments to access staging-only pages
-  if (isStaging || isPreview) {
+  // Allow staging, preview, and development environments to access staging-only pages
+  if (!isProduction) {
     return next();
   }
 

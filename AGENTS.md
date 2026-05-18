@@ -66,6 +66,8 @@ import { isProduction, isStaging, isPreview } from "@/config/stage";
 
 **Layout**: All pages use `<Layout title="...">` from `src/layouts/Layout.astro`, which includes the `PageHeader`, `Footer`, and conditional Posthog analytics.
 
+**Kitchen sink**: `src/pages/dev/astro-komponenten.astro` is a staging-only showcase page for all UI components in `src/components/` (excluding `blocks/` and `global/`). When adding or changing a UI component, update this page to reflect the new or changed variants.
+
 ### Testing
 
 - **Unit tests** (`*.test.ts` alongside source): Use `AstroContainer` to render Astro components — see `src/components/global/PageHeader.test.ts` for the pattern.

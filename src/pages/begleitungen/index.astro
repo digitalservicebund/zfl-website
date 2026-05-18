@@ -1,5 +1,4 @@
 ---
-import SupportCard from "@/components/blocks/SupportCard.astro";
 import MediaText from "@/components/MediaText.astro";
 import Hero from "@/components/Hero.astro";
 import FeatureSet from "@/components/FeatureSet.astro";
@@ -190,9 +189,13 @@ export const frontmatter = {
       <h2>Regelungsbegleitung anfragen</h2>
       <p>
         Sie planen ein konkretes Regelungsvorhaben und wünschen sich eine
-        methodische Begleitung? Schreiben Sie uns eine E-Mail unter <a
-          href={ZFL_EMAIL_REGBEG.url}>{ZFL_EMAIL_REGBEG.display}</a
-        >.
+        methodische Begleitung? Bei Fragen melden Sie sich unter:
+        <p>
+          Telefon: <a href={ZFL_PHONE_REGBEG.url}>{ZFL_PHONE_REGBEG.url}</a>
+        </p>
+        <p>
+          E-Mail: <a href={ZFL_EMAIL_REGBEG.url}>{ZFL_EMAIL_REGBEG.display}</a>
+        </p>
       </p>
     </section>
     <section>
@@ -218,20 +221,6 @@ export const frontmatter = {
           alt="Symbolbild: ausgedruckter Gesetzentwurf"
         />
       </MediaText>
-    </section>
-    <section class="bg-lavender-400 breakout py-80">
-      <SupportCard>
-        <p>
-          Wir unterstützen Sie gerne persönlich in allen Phasen der
-          Regelungsarbeit. Bei Fragen melden Sie sich unter:
-        </p>
-        <p>
-          Telefon: <a href={ZFL_PHONE_REGBEG.url}>{ZFL_PHONE_REGBEG.display}</a>
-        </p>
-        <p>
-          E-Mail: <a href={ZFL_EMAIL_REGBEG.url}>{ZFL_EMAIL_REGBEG.display}</a>
-        </p>
-      </SupportCard>
     </section>
   </main>
 </Layout>
