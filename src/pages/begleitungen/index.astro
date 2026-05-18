@@ -188,9 +188,13 @@ export const frontmatter = {
       <h2>Regelungsbegleitung anfragen</h2>
       <p>
         Sie planen ein konkretes Regelungsvorhaben und wünschen sich eine
-        methodische Begleitung? Schreiben Sie uns eine E-Mail unter <a
-          href={ZFL_EMAIL_REGBEG.url}>{ZFL_EMAIL_REGBEG.display}</a
-        >.
+        methodische Begleitung? Bei Fragen melden Sie sich unter:
+        <p>
+          Telefon: <a href={ZFL_PHONE_REGBEG.url}>{ZFL_PHONE_REGBEG.url}</a>
+        </p>
+        <p>
+          E-Mail: <a href={ZFL_EMAIL_REGBEG.url}>{ZFL_EMAIL_REGBEG.display}</a>
+        </p>
       </p>
     </section>
     <section>
@@ -217,16 +221,5 @@ export const frontmatter = {
         />
       </MediaText>
     </section>
-    <Hero level="root">
-      <h2>Kontakt</h2>
-      <p>
-        Wir unterstützen Sie gerne persönlich in allen Phasen der
-        Regelungsarbeit. Bei Fragen melden Sie sich unter:
-      </p>
-      <p>Telefon: <a href={ZFL_PHONE_REGBEG.url}>{ZFL_PHONE_REGBEG.url}</a></p>
-      <p>
-        E-Mail: <a href={ZFL_EMAIL_REGBEG.url}>{ZFL_EMAIL_REGBEG.display}</a>
-      </p>
-    </Hero>
   </main>
 </Layout>
