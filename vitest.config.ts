@@ -20,7 +20,7 @@ export default getViteConfig(
       },
       server: {
         deps: {
-          inline: [/@pagefind\/default-ui.*/], // prevents 'Unknown file extension ".css"' TypeError
+          inline: [/@pagefind\/component-ui.*/], // prevents 'Unknown file extension ".css"' TypeError
         },
       },
     },
