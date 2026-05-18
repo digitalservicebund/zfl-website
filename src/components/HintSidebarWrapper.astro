@@ -6,7 +6,7 @@ import { Icon } from "astro-icon/components";
 
   <HintSidebarWrapper>
     <p>Main content goes here (default slot).</p>
-    <button @click="showHintSidebar = true">Open sidebar</button>
+    <button @click="hintSidebarOpen = true">Open sidebar</button>
 
     <div slot="hintSidebarContent">
       <h3>Hint</h3>
@@ -14,12 +14,14 @@ import { Icon } from "astro-icon/components";
     </div>
   </HintSidebarWrapper>
 
-  Open/close is controlled via the `showHintSidebar` Alpine.js state variable.
+  Open/close is controlled via the `hintSidebarOpen` Alpine.js state variable.
 */
+
+const { class: className = "" } = Astro.props;
 ---
 
 <div class="hint-sidebar-wrapper" x-data="{ hintSidebarOpen: false }">
-  <div class="breakout-grid">
+  <div class={`breakout-grid ${className}`}>
     <slot />
   </div>
 

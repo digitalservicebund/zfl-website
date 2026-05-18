@@ -63,27 +63,37 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
       </p>
     </Hero>
 
-    <HintSidebarWrapper>
-      <section>
-        <h2>Ich möchte ...</h2>
-        {
-          categories.map(({ id, title }) => (
-            <p>
-              <a href={`#${id}`} class="kern-heading-medium">
-                <Icon
-                  name="ic:round-arrow-downward"
-                  class="text-cosmic-blue-base inline-block h-32 w-32 pr-4"
-                />
-                {title}
-              </a>
-            </p>
-          ))
-        }
-        <hr class="kern-divider mt-lg mb-16" aria-hidden="true" />
+    <HintSidebarWrapper class="py-lg">
+      <h2>Ich möchte ...</h2>
+      {
+        categories.map(({ id, title }) => (
+          <p>
+            <a href={`#${id}`} class="kern-heading-medium">
+              <Icon
+                name="ic:round-arrow-downward"
+                class="text-cosmic-blue-base inline-block h-32 w-32 pr-4"
+              />
+              {title}
+            </a>
+          </p>
+        ))
+      }
+      <hr class="kern-divider mt-lg mb-16" aria-hidden="true" />
 
-        <div
-          class="sticky top-0 z-10 flex flex-wrap justify-between gap-16 bg-white py-16"
-        >
+      <div aria-hidden="true" x-ref="sentinel" class="h-px -translate-y-px">
+      </div>
+
+      <div
+        class="breakout sticky top-0 z-10 bg-white py-16 transition-shadow"
+        x-data="{ stuck: false }"
+        x-bind:class="stuck ? 'shadow-md' : ''"
+        x-init="
+        new IntersectionObserver(([e]) => { stuck = !e.isIntersecting }, { threshold: [1] })
+          .observe($refs.sentinel);
+        stuck = false;
+      "
+      >
+        <div class="flex flex-wrap justify-between gap-16">
           <div class="flex flex-wrap items-center gap-8 lg:gap-16">
             <p class="kern-label my-0 py-0">Filtern nach:</p>
             {
@@ -133,81 +143,79 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
             </div>
           </div>
         </div>
-        {
-          categories.map(({ id, title, tools }) => {
-            return (
-              <>
-                <h2 id={id} class="mt-80 mb-56 scroll-mt-104">
-                  {title.charAt(0).toUpperCase() + title.slice(1)}
-                </h2>
-                <div class="tool-grid gap-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                  {tools.map((t) => (
-                    <div
-                      class="tool-wrapper"
-                      x-bind:data-visible={`isCardVisible(${JSON.stringify(t.id)}, ${JSON.stringify(t.data.type)}, ${JSON.stringify(t.data.title)})`}
+      </div>
+      {
+        categories.map(({ id, title, tools }) => {
+          return (
+            <>
+              <h2 id={id} class="mt-80 mb-56 scroll-mt-104">
+                {title.charAt(0).toUpperCase() + title.slice(1)}
+              </h2>
+              <div class="tool-grid gap-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                {tools.map((t) => (
+                  <div
+                    class="tool-wrapper"
+                    x-bind:data-visible={`isCardVisible(${JSON.stringify(t.id)}, ${JSON.stringify(t.data.type)}, ${JSON.stringify(t.data.title)})`}
+                  >
+                    <KernCard
+                      title={t.data.title}
+                      href={t.data.externalUrl}
+                      body={t.data.description}
+                      background="white"
+                      interactive={false}
                     >
-                      <KernCard
-                        title={t.data.title}
-                        href={t.data.externalUrl}
-                        body={t.data.description}
-                        background="white"
-                        interactive={false}
+                      <div
+                        slot="pre-header"
+                        class="mb-16 flex w-full justify-between"
                       >
-                        <div
-                          slot="pre-header"
-                          class="mb-16 flex w-full justify-between"
-                        >
-                          <div class="flex gap-8">
-                            {t.data.type.map((type) => (
-                              <span
-                                class={`kern-badge kern-badge--${type.toLowerCase()}`}
-                              >
-                                <span class="kern-label">{type}</span>
-                              </span>
-                            ))}
-                          </div>
-                          <button
-                            class="text-icon-muted"
-                            aria-label={"Lesezeichen hinzufügen"}
-                            @click={`toggleBookmark(${JSON.stringify(t.id)})`}
-                          >
-                            <Icon
-                              name={"ic:outline-bookmark-add"}
-                              x-show={`!bookmarkedTools.includes(${JSON.stringify(t.id)})`}
-                              class="h-32 w-32"
-                            />
-                            <Icon
-                              name="ic:round-bookmark-added"
-                              x-cloak
-                              x-show={`bookmarkedTools.includes(${JSON.stringify(t.id)})`}
-                              class="h-32 w-32"
-                            />
-                          </button>
+                        <div class="flex gap-8">
+                          {t.data.type.map((type) => (
+                            <span
+                              class={`kern-badge kern-badge--${type.toLowerCase()}`}
+                            >
+                              <span class="kern-label">{type}</span>
+                            </span>
+                          ))}
                         </div>
-                        <div
-                          slot="footer"
-                          class="text-icon-muted! flex items-center gap-8"
+                        <button
+                          class="text-icon-muted"
+                          aria-label={"Lesezeichen hinzufügen"}
+                          @click={`toggleBookmark(${JSON.stringify(t.id)})`}
                         >
                           <Icon
-                            name="ic:baseline-auto-stories"
-                            class="h-32 w-32 shrink-0"
+                            name={"ic:outline-bookmark-add"}
+                            x-show={`!bookmarkedTools.includes(${JSON.stringify(t.id)})`}
+                            class="h-32 w-32"
                           />
-                          <p class="kern-subline py-0">
-                            Quelle: {t.data.source}
-                          </p>
-                        </div>
-                      </KernCard>
-                    </div>
-                  ))}
-                  <p class="no-results">
-                    <em>Keine Treffer</em>
-                  </p>
-                </div>
-              </>
-            );
-          })
-        }
-      </section>
+                          <Icon
+                            name="ic:round-bookmark-added"
+                            x-cloak
+                            x-show={`bookmarkedTools.includes(${JSON.stringify(t.id)})`}
+                            class="h-32 w-32"
+                          />
+                        </button>
+                      </div>
+                      <div
+                        slot="footer"
+                        class="text-icon-muted! flex items-center gap-8"
+                      >
+                        <Icon
+                          name="ic:baseline-auto-stories"
+                          class="h-32 w-32 shrink-0"
+                        />
+                        <p class="kern-subline py-0">Quelle: {t.data.source}</p>
+                      </div>
+                    </KernCard>
+                  </div>
+                ))}
+                <p class="no-results">
+                  <em>Keine Treffer</em>
+                </p>
+              </div>
+            </>
+          );
+        })
+      }
 
       <div slot="hintSidebarContent">
         <h2 class="mt-0 text-xl">Filterfunktionen</h2>
