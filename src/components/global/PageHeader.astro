@@ -12,6 +12,7 @@ import {
   werkzeuge,
   type Route,
 } from "@/config/routes";
+import { isProduction } from "@/config/stage";
 import bundLogoWhite from "@/images/logo/bund-logo-white.svg";
 import bundLogo from "@/images/logo/bund-logo.png";
 import { getMobileMenuNavigation } from "@/utils/navigation/drilldown";
@@ -74,7 +75,7 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
     </a>
 
     <div class="flex items-stretch gap-32">
-      <Search />
+      {!isProduction && <Search />}
 
       <!-- Desktop Navigation -->
       <nav class="hidden h-full min-[900px]:flex" aria-label="Hauptnavigation">
