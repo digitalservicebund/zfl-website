@@ -93,7 +93,7 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
         stuck = false;
       "
       >
-        <div class="flex flex-wrap justify-between gap-16">
+        <div class="flex flex-col flex-wrap justify-between gap-16 lg:flex-row">
           <div class="flex flex-wrap items-center gap-8 lg:gap-16">
             <p class="kern-label my-0 py-0">Filtern nach:</p>
             {
@@ -127,20 +127,25 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
               <Icon name="ic:outline-help-outline" class="h-32 w-32" />
             </button>
           </div>
-          <div class="hidden items-center gap-8 xl:flex">
-            <div class="relative">
-              <input
-                class="kern-form-input__input pl-40"
-                id="tool-search"
-                name="text"
-                type="text"
-                placeholder="Suchen ..."
-                x-model="searchQuery"
-              />
-              <span
-                class="kern-icon kern-icon--search kern-icon--default absolute top-1/2 left-8 -translate-y-1/2 transform"
-                aria-hidden="true"></span>
-            </div>
+          <div class="relative w-full md:w-auto">
+            <input
+              class="focus:outline-cosmic-blue-base rounded-sm py-8 pl-40 transition-[width] [--expanded:100%] focus:w-(--expanded) focus:outline-2 lg:[--expanded:280px]"
+              x-bind:class="searchQuery ? 'pr-68 w-(--expanded) outline-1 outline-cosmic-blue-400' : 'pr-8 w-128'"
+              id="tool-search"
+              name="text"
+              type="text"
+              placeholder="Suchen ..."
+              x-model="searchQuery"
+            />
+            <span
+              class="kern-icon kern-icon--search kern-icon--default absolute top-1/2 left-8 -translate-y-1/2"
+              aria-hidden="true"></span>
+            <button
+              class="text-icon-muted absolute top-1/2 right-8 -translate-y-1/2 text-sm"
+              @click="searchQuery = ''"
+              x-cloak
+              x-show="!!searchQuery">Löschen</button
+            >
           </div>
         </div>
       </div>
