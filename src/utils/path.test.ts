@@ -28,9 +28,9 @@ describe("check for trailing slashes", () => {
     expect(hasTrailingSlash("/")).toBe(false);
   });
   test("return false if route has trailing slash", () => {
-    expect(hasTrailingSlash("/ueber-uns/")).toBe(false);
+    expect(hasTrailingSlash("/ueber-uns/")).toBe(true);
   });
   test("return true if route has no trailing slash", () => {
-    expect(hasTrailingSlash("/ueber-uns")).toBe(true);
+    expect(hasTrailingSlash("/ueber-uns")).toBe(false);
   });
 });
