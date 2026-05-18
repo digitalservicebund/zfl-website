@@ -10,6 +10,7 @@ import { defineConfig } from "astro/config";
 import process from "node:process";
 
 const isPreview = process.env.PUBLIC_STAGE === "preview";
+const isDevelopment = process.env.PUBLIC_STAGE === "development";
 const PREVIEW_BASE_PATH = process.env.PREVIEW_BASE_PATH;
 
 const PRODUCTION_SITE = "https://zfl.bund.de";
@@ -49,5 +50,5 @@ export default defineConfig({
   security: {
     csp: false,
   },
-  trailingSlash: "never",
+  trailingSlash: isDevelopment ? "ignore" : "never",
 });
