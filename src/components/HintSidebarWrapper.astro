@@ -34,6 +34,7 @@ const { class: className = "" } = Astro.props;
         <button
           class="border-cosmic-blue-base text-cosmic-blue-base rounded-sm border p-8"
           @click="hintSidebarOpen = false"
+          aria-label="Seitenleiste schließen"
         >
           <Icon name="ic:round-close" class="h-24 w-24" />
         </button>
