@@ -11,24 +11,23 @@ const sidebarState = navigation
 
 {
   navigation && (
-    <aside
-      class="data-[depth=1]:bg-form-input-background bg-lavender-base hidden border-r border-neutral-300 min-[900px]:block"
+    <nav
+      aria-label="Abschnittsnavigation"
+      class="data-[depth=1]:bg-form-input-background bg-lavender-base hidden border-r border-neutral-300 *:sticky *:top-0 min-[900px]:block"
       x-data={sidebarState}
       data-depth={initialDepth}
       x-bind:data-depth="currentDepth"
     >
-      <nav aria-label="Abschnittsnavigation" class="sticky top-0">
-        <DrilldownNavigation
-          navigation={navigation}
-          panelIdPrefix="section-sidebar"
-        />
-      </nav>
-    </aside>
+      <DrilldownNavigation
+        navigation={navigation}
+        panelIdPrefix="section-sidebar"
+      />
+    </nav>
   )
 }
 
 <style>
-  aside[data-depth="1"] {
+  nav[data-depth="1"] {
     --active-item-bg-color: var(--color-lavender-surface-highlight);
   }
 </style>
