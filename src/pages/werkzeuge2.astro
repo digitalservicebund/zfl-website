@@ -121,8 +121,7 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
           <button
             class="text-cosmic-blue-base"
             popovertarget="hintSidebarContent"
-            @click="hintSidebarOpen = !hintSidebarOpen"
-            aria-label="Seitenleiste ein- oder ausblenden"
+            aria-label="Hinweise ein- oder ausblenden"
           >
             <Icon name="ic:outline-help-outline" class="h-32 w-32" />
           </button>
@@ -227,30 +226,29 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
 
     <Modal id="hintSidebarContent">
       <h2 class="mt-0 text-xl">Filterfunktionen</h2>
-      <h3 class="text-lg">Gemerkte Werkzeuge</h3>
-      <p>
-        Jedes Werkzeug kann per Klick auf das Lesezeichen-Symbol gemerkt werden.
-        Diese werden im Browser gespeichert.
-      </p>
-      <p>
-        Achtung: Die gemerkten Werkzeuge verschwinden, sobald Sie den Browser
-        zurücksetzen.
-      </p>
-      <h3 class="text-lg">Methode</h3>
-      <p>
-        Systematische Vorgehensweisen, die Ihnen zu Erkenntnissen verhelfen.
-      </p>
-      <h3 class="text-lg">Tool</h3>
-      <p>
-        Interaktive Werkzeuge, wie beispielsweise Editoren, Plugins und
-        Klickstrecken.
-      </p>
-      <h3 class="text-lg">Leitfaden</h3>
-      <p>Strukturierte Anleitungen, die Orientierung bieten.</p>
-      <h3 class="text-lg">Ressource</h3>
-      <p>
-        Informative Angebote, Services, Datenbanken und weitere Wissensquellen.
-      </p>
+      <ul>
+        <li>
+          <strong>Gemerkte Werkzeuge:</strong> Jedes Werkzeug kann per Klick auf das
+          Lesezeichen-Symbol gemerkt werden. Diese werden im Browser gespeichert.
+          Achtung: Die gemerkten Werkzeuge verschwinden, sobald Sie den Browser zurücksetzen.
+        </li>
+        <li>
+          <strong>Methode:</strong> Systematische Vorgehensweisen, die Ihnen zu Erkenntnissen
+          verhelfen.
+        </li>
+        <li>
+          <strong>Tool:</strong> Interaktive Werkzeuge, wie beispielsweise Editoren,
+          Plugins und Klickstrecken.
+        </li>
+        <li>
+          <strong>Leitfaden:</strong> Strukturierte Anleitungen, die Orientierung
+          bieten.
+        </li>
+        <li>
+          <strong>Ressource: </strong> Informative Angebote, Services, Datenbanken
+          und weitere Wissensquellen.
+        </li>
+      </ul>
     </Modal>
 
     <Hero level="root">
