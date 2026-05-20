@@ -82,9 +82,9 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
     <div aria-hidden="true" x-ref="sentinel" class="h-px -translate-y-px"></div>
 
     <div
-      class="breakout sticky top-0 z-10 bg-white py-16 transition-shadow"
+      class="breakout top-0 z-10 bg-white py-16 transition-shadow lg:sticky"
       x-data="{ stuck: false }"
-      x-bind:class="stuck ? 'shadow-md' : ''"
+      x-bind:class="stuck ? 'lg:shadow-md' : ''"
       x-init="
         new IntersectionObserver(([e]) => { stuck = !e.isIntersecting }, { threshold: [1] })
           .observe($refs.sentinel);
