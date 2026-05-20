@@ -1,21 +1,23 @@
 ---
 import { Icon } from "astro-icon/components";
 
-/*
-  Usage example:
+// Usage example:
+//
+// <HintSidebarWrapper>
+//   <p>Main content goes here (default slot).</p>
+//   <button @click="hintSidebarOpen = true">Open sidebar</button>
+//
+//   <div slot="hintSidebarContent">
+//     <h3>Hint</h3>
+//     <p>Sidebar content goes here.</p>
+//   </div>
+// </HintSidebarWrapper>
+//
+// Open/close is controlled via the `hintSidebarOpen` Alpine.js state variable.
 
-  <HintSidebarWrapper>
-    <p>Main content goes here (default slot).</p>
-    <button @click="hintSidebarOpen = true">Open sidebar</button>
-
-    <div slot="hintSidebarContent">
-      <h3>Hint</h3>
-      <p>Sidebar content goes here.</p>
-    </div>
-  </HintSidebarWrapper>
-
-  Open/close is controlled via the `hintSidebarOpen` Alpine.js state variable.
-*/
+interface Props {
+  class?: string;
+}
 
 const { class: className = "" } = Astro.props;
 ---
@@ -27,7 +29,7 @@ const { class: className = "" } = Astro.props;
 
   <aside class="z-20 overflow-visible">
     <div
-      class="sticky top-0 h-screen w-screen overflow-auto bg-[#F7F7F9] px-24 py-40 transition-transform duration-300 sm:w-384 [&_h3]:text-lg"
+      class="sticky top-0 h-screen w-screen overflow-auto bg-[#F7F7F9] px-24 py-40 transition-transform duration-300 sm:w-384"
       x-bind:class="hintSidebarOpen ? '-translate-x-full' : 'translate-x-0'"
     >
       <div class="mb-32 flex w-full justify-end">
