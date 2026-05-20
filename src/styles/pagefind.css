@@ -1,0 +1,27 @@
+/* https://pagefind.app/docs/css-variables/ */
+
+:root {
+  --pf-font: var(--kern-typography-font-family-default);
+  --pf-border-radius: var(--kern-metric-border-radius-default, 4px);
+
+  --pf-outline-focus: var(--color-cosmic-blue-base);
+
+  --pf-input-font-size: 18px;
+  --pf-input-height: 43px;
+
+  :is(*, #\#):is(*, #\#):is(*, #\#) dialog.pf-modal {
+    border-radius: var(--kern-metric-border-radius-default, 4px);
+  }
+
+  :is(*, #\#):is(*, #\#):is(*, #\#) .pf-trigger-text {
+    font-size: 18px;
+    -webkit-font-smoothing: antialiased;
+    font-family: var(--kern-typography-font-family-default);
+  }
+  :is(*, #\#):is(*, #\#):is(*, #\#) .pf-result-excerpt {
+    white-space: normal;
+    mark {
+      background-color: var(--color-lavender-base);
+    }
+  }
+}

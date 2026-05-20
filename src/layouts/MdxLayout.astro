@@ -5,11 +5,15 @@ import type { MarkdownLayoutProps } from "astro";
 type Props = MarkdownLayoutProps<{
   // Define frontmatter props here
   title: string;
+  excludeFromSearch: boolean;
 }>;
 const { frontmatter } = Astro.props;
 ---
 
-<Layout title={frontmatter.title}>
+<Layout
+  title={frontmatter.title}
+  excludeFromSearch={frontmatter.excludeFromSearch ?? false}
+>
   <main class="breakout-grid mb-lg">
     <slot />
   </main>

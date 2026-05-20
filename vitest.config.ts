@@ -18,6 +18,11 @@ export default getViteConfig(
       typecheck: {
         tsconfig: "./tsconfig.test.json",
       },
+      server: {
+        deps: {
+          inline: [/@pagefind\/component-ui.*/], // prevents 'Unknown file extension ".css"' TypeError
+        },
+      },
     },
   },
   {

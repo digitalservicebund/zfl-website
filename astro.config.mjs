@@ -4,12 +4,14 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import icon from "astro-icon";
+import pagefind from "astro-pagefind";
 import { generateRoutes } from "astro-route-generator";
 import { defineConfig } from "astro/config";
 import process from "node:process";
 import { allRoutes } from "./src/config/routes.ts";
 
 const isPreview = process.env.PUBLIC_STAGE === "preview";
+const isDevelopment = process.env.PUBLIC_STAGE === "development";
 const PREVIEW_BASE_PATH = process.env.PREVIEW_BASE_PATH;
 
 const PRODUCTION_SITE = "https://zfl.bund.de";
@@ -40,6 +42,7 @@ export default defineConfig({
       pagesDir: "src/pages",
       output: "src/config/routes.ts",
     }),
+    pagefind(),
   ],
   build: {
     assets: "_astro",
@@ -53,5 +56,5 @@ export default defineConfig({
   security: {
     csp: false,
   },
-  trailingSlash: "never",
+  trailingSlash: isDevelopment ? "ignore" : "never",
 });

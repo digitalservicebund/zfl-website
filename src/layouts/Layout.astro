@@ -13,8 +13,9 @@ import "../styles/global.css";
 
 interface Props {
   title: string;
+  excludeFromSearch?: boolean;
 }
-const { title: pageTitle } = Astro.props;
+const { title: pageTitle, excludeFromSearch = false } = Astro.props;
 const siteName = "Zentrum für Legistik";
 const title = pageTitle ? `${pageTitle} — ${siteName}` : siteName;
 const SEOImage = `${Astro.url.origin}/SEO_ZfL.png`;
@@ -71,16 +72,18 @@ const showSectionSidebar = getSectionNavigation(Astro.url.pathname) !== null;
   <body class="relative">
     {showDebugGrid && <DebugGrid />}
     <PageHeader />
-    {
-      showSectionSidebar ? (
-        <div class="h-full min-[900px]:grid min-[900px]:grid-cols-[240px_minmax(0,1fr)]">
-          <SectionSidebar />
+    <div {...!excludeFromSearch && { "data-pagefind-body": "" }}>
+      {
+        showSectionSidebar ? (
+          <div class="h-full min-[900px]:grid min-[900px]:grid-cols-[240px_minmax(0,1fr)]">
+            <SectionSidebar />
+            <slot />
+          </div>
+        ) : (
           <slot />
-        </div>
-      ) : (
-        <slot />
-      )
-    }
+        )
+      }
+    </div>
     <Footer />
     {isProduction && <Posthog />}
   </body>

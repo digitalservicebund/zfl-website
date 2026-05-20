@@ -33,6 +33,9 @@ fileignoreconfig:
   - filename: doc/routes.md
     allowed_patterns:
       - key
+  - filename: src/components/global/Search.astro
+    allowed_patterns:
+      - keyboard_ 
   - filename: src/config/routes.ts
     allowed_patterns:
       - key
