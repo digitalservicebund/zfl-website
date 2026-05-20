@@ -73,8 +73,6 @@
   h1,
   h2,
   h3 {
-    /* 80ch @ 18px font size = 720px */
-    max-width: 720px;
     margin-bottom: 1rem;
     word-break: auto-phrase;
   }
