@@ -169,6 +169,8 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
                       body={t.data.description}
                       background="white"
                       interactive={false}
+                      image={t.data.image}
+                      imageAlt={t.data.image ? t.data.title : undefined}
                     >
                       <div
                         slot="pre-header"
