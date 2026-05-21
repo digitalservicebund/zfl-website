@@ -18,8 +18,12 @@ import PagefindConfig from "astro-pagefind/components/PagefindConfig.astro";
   </pagefind-modal>
 </>
 
-<script is:inline type="module">
-  await import("/pagefind/pagefind-highlight.js");
+<script
+  is:inline
+  type="module"
+  define:vars={{ baseUrl: import.meta.env.BASE_URL }}
+>
+  await import(`${baseUrl}pagefind/pagefind-highlight.js`);
   new PagefindHighlight({ highlightParam: "highlight" });
   const firstMatch = document.querySelector("mark.pagefind-highlight");
   firstMatch?.scrollIntoView({ behavior: "smooth", block: "center" });
