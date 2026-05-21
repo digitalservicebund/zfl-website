@@ -37,7 +37,7 @@
     "@tailwindcss/vite": "^4.3.0",
     "@types/alpinejs": "^3.13.11",
     "alpinejs": "^3.15.12",
-    "astro": "^6.3.3",
+    "astro": "^6.3.4",
     "astro-icon": "^1.1.5",
     "astro-pagefind": "^2.0.0",
     "astro-route-generator": "github:digitalservicebund/astro-route-generator#40024e7e81c9fda804b952b6e17f30ac17ab4607",
