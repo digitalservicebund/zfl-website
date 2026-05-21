@@ -37,7 +37,6 @@
 
 :root {
   --kern-color-action-default: var(--color-cosmic-blue-base);
-  --kern-color-layout-border: var(--color-lavender-base);
 }
 
 @layer base {

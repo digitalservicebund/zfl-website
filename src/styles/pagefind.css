@@ -1,23 +1,40 @@
 /* https://pagefind.app/docs/css-variables/ */
 
 :root {
-  --pf-font: var(--kern-typography-font-family-default);
-  --pf-border-radius: var(--kern-metric-border-radius-default, 4px);
-
+  /* Colors */
+  --pf-text: var(--kern-color-layout-text-default);
+  --pf-text-secondary: var(--kern-color-layout-text-muted);
+  --pf-text-muted: var(--kern-color-layout-text-muted);
+  --pf-border: var(--kern-color-layout-border);
   --pf-outline-focus: var(--color-cosmic-blue-base);
+  --pf-mark: var(--kern-color-layout-text-default);
+  --pf-skeleton: var(--color-lavender-200);
 
+  /* Typography */
+  --pf-font: var(--kern-typography-font-family-default);
+
+  /* Sizing */
   --pf-input-font-size: 18px;
   --pf-input-height: 43px;
+  --pf-result-title-font-size: var(--kern-typography-font-size-static-medium);
+  --pf-result-excerpt-font-size: var(--kern-typography-font-size-static-small);
+
+  /* Results layout */
+  --pf-border-radius: var(--kern-metric-border-radius-default, 4px);
+
+  /* Modal */
+  --pf-modal-max-width: 720px;
 
   :is(*, #\#):is(*, #\#):is(*, #\#) dialog.pf-modal {
     border-radius: var(--kern-metric-border-radius-default, 4px);
   }
 
   :is(*, #\#):is(*, #\#):is(*, #\#) .pf-trigger-text {
-    font-size: 18px;
+    font-size: var(--kern-typography-font-size-static-medium);
     -webkit-font-smoothing: antialiased;
     font-family: var(--kern-typography-font-family-default);
   }
+
   :is(*, #\#):is(*, #\#):is(*, #\#) .pf-result-excerpt {
     white-space: normal;
     mark {
