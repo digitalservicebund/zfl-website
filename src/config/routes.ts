@@ -192,8 +192,8 @@ export const werkzeuge = {
   path: "/werkzeuge",
   title: "Werkzeuge",
   parent: null,
-  sitemap: false,
-  isStagingOnly: true,
+  sitemap: true,
+  isStagingOnly: false,
   navOrder: null,
   navLabel: null,
 } as const;
