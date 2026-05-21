@@ -1,0 +1,1 @@
+import{t as e}from"./component-ui.Byzot5xB.js";var t=class extends HTMLElement{instance=null;handleButtonClick(){(this.instance?.getUtilities(`modal`)||[])[0]?.open()}connectedCallback(){this.instance=e().getInstance(`default`),this.addEventListener(`click`,this.handleButtonClick)}};customElements.define(`custom-modal-trigger`,t);
