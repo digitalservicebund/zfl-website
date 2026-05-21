@@ -192,17 +192,6 @@ export const werkzeuge = {
   path: "/werkzeuge",
   title: "Werkzeuge",
   parent: null,
-  sitemap: true,
-  isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
-} as const;
-
-export const werkzeuge2 = {
-  key: "werkzeuge2",
-  path: "/werkzeuge2",
-  title: "Werkzeuge",
-  parent: null,
   sitemap: false,
   isStagingOnly: true,
   navOrder: null,
@@ -227,5 +216,4 @@ export const allRoutes = [
   ueber_daranArbeitenWir,
   ueber_zahlenUndFakten,
   werkzeuge,
-  werkzeuge2,
 ] as const;
