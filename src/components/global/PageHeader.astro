@@ -1,5 +1,5 @@
 ---
-import Search from "@/components/global/Search.astro";
+import SearchButton from "@/components/global/SearchButton.astro";
 import DrilldownNavigation from "@/components/global/DrilldownNavigation.astro";
 import Kopfzeile from "@/components/global/Kopfzeile.astro";
 import { ZFL_PHONE } from "@/config/constants";
@@ -74,9 +74,7 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
       <p class="text-xl font-bold max-[1050px]:hidden">Zentrum für Legistik</p>
     </a>
 
-    <div class="flex items-stretch gap-32">
-      {!isProduction && <Search />}
-
+    <div class="flex">
       <!-- Desktop Navigation -->
       <nav class="hidden h-full min-[900px]:flex" aria-label="Hauptnavigation">
         {
@@ -91,6 +89,7 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
           ))
         }
       </nav>
+      {!isProduction && <SearchButton class={navItemStyle("main")} />}
 
       <!-- Mobile Menu Toggle -->
       <div class="flex h-full min-[900px]:hidden">

@@ -29,6 +29,9 @@ importers:
       '@kern-ux/native':
         specifier: ^2.5.0
         version: 2.5.0
+      '@pagefind/component-ui':
+        specifier: ^1.5.2
+        version: 1.5.2
       '@tailwindcss/vite':
         specifier: ^4.3.0
         version: 4.3.0(vite@8.0.13(@types/node@25.8.0)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.9.0))

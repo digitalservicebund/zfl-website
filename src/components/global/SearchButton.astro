@@ -1,0 +1,35 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<custom-modal-trigger class:list={["cursor-pointer", "gap-8", className]}>
+  <span
+    class="kern-icon kern-icon--search kern-icon--default"
+    aria-hidden="true"></span>
+  <span class="hidden sm:block">Suche</span>
+</custom-modal-trigger>
+
+<script>
+  import { getInstanceManager } from "@pagefind/component-ui";
+  import type { PagefindModal, Instance } from "@pagefind/component-ui";
+
+  // reference: https://github.com/Pagefind/pagefind/blob/main/pagefind_ui/component/components/pagefind-modal-trigger.ts
+  class CustomModalTrigger extends HTMLElement {
+    instance: Instance | null = null;
+    handleButtonClick() {
+      const modals = (this.instance?.getUtilities("modal") ||
+        []) as PagefindModal[];
+      const modal = modals[0];
+      modal?.open();
+    }
+    connectedCallback() {
+      this.instance = getInstanceManager().getInstance("default");
+      this.addEventListener("click", this.handleButtonClick);
+    }
+  }
+  customElements.define("custom-modal-trigger", CustomModalTrigger);
+</script>

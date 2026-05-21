@@ -14,10 +14,12 @@
   --pf-font: var(--kern-typography-font-family-default);
 
   /* Sizing */
-  --pf-input-font-size: 18px;
+  --pf-input-font-size: var(--kern-typography-font-size-static-medium);
   --pf-input-height: 43px;
   --pf-result-title-font-size: var(--kern-typography-font-size-static-medium);
   --pf-result-excerpt-font-size: var(--kern-typography-font-size-static-small);
+  --pf-results-gap: var(--kern-metric-space-default);
+  --pf-summary-font-size: var(--kern-typography-font-size-static-small);
 
   /* Results layout */
   --pf-border-radius: var(--kern-metric-border-radius-default, 4px);
@@ -41,7 +43,21 @@
   :is(*, #\#):is(*, #\#):is(*, #\#) .pf-result-excerpt {
     white-space: normal;
     mark {
-      background-color: var(--color-lavender-base);
+      background-color: var(--kern-color-feedback-success-background);
     }
+  }
+  :is(*, #\#):is(*, #\#):is(*, #\#) .pf-keyboard-hint,
+  :is(*, #\#):is(*, #\#):is(*, #\#) .pf-input-clear,
+  :is(*, #\#):is(*, #\#):is(*, #\#) .pf-keyboard-key {
+    font-size: var(--kern-typography-font-size-static-small);
+  }
+  :is(*, #\#):is(*, #\#):is(*, #\#) .pf-keyboard-key {
+    height: 24px;
+  }
+  :is(*, #\#):is(*, #\#):is(*, #\#) .pf-modal-footer {
+    padding: var(--kern-metric-space-default);
+  }
+  :is(*, #\#):is(*, #\#):is(*, #\#) .pf-modal-body .pf-summary {
+    margin: var(--kern-metric-space-small) 0;
   }
 }

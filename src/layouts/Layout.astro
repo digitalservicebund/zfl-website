@@ -1,5 +1,6 @@
 ---
 import DebugGrid from "@/components/global/DebugGrid.astro";
+import SearchModal from "@/components/global/SearchModal.astro";
 import Footer from "@/components/global/Footer.astro";
 import PageHeader from "@/components/global/PageHeader.astro";
 import SectionSidebar from "@/components/global/SectionSidebar.astro";
@@ -85,6 +86,7 @@ const showSectionSidebar = getSectionNavigation(Astro.url.pathname) !== null;
       }
     </div>
     <Footer />
+    <SearchModal />
     {isProduction && <Posthog />}
   </body>
 </html>
