@@ -25,13 +25,16 @@
   /* Modal */
   --pf-modal-max-width: 720px;
 
+  :is(*, #\#):is(*, #\#) :is([class^="pf-"]) {
+    -webkit-font-smoothing: antialiased;
+  }
+
   :is(*, #\#):is(*, #\#):is(*, #\#) dialog.pf-modal {
     border-radius: var(--kern-metric-border-radius-default, 4px);
   }
 
   :is(*, #\#):is(*, #\#):is(*, #\#) .pf-trigger-text {
     font-size: var(--kern-typography-font-size-static-medium);
-    -webkit-font-smoothing: antialiased;
     font-family: var(--kern-typography-font-family-default);
   }
 
