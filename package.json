@@ -59,7 +59,7 @@
     "@eslint/markdown": "^8.0.1",
     "@playwright/test": "^1.60.0",
     "@types/jsdom": "^28.0.3",
-    "@types/node": "^25.8.0",
+    "@types/node": "^25.9.0",
     "@typescript-eslint/parser": "^8.59.3",
     "@vitest/browser-playwright": "^4.1.6",
     "astro-eslint-parser": "^1.4.0",
