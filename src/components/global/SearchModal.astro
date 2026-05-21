@@ -3,7 +3,7 @@ import PagefindConfig from "astro-pagefind/components/PagefindConfig.astro";
 ---
 
 <>
-  <PagefindConfig />
+  <PagefindConfig highlight-param="highlight" />
   <pagefind-modal>
     <pagefind-modal-header>
       <pagefind-input></pagefind-input>
@@ -17,3 +17,16 @@ import PagefindConfig from "astro-pagefind/components/PagefindConfig.astro";
     </pagefind-modal-footer>
   </pagefind-modal>
 </>
+
+<script is:inline type="module">
+  await import("/pagefind/pagefind-highlight.js");
+  new PagefindHighlight({ highlightParam: "highlight" });
+  const firstMatch = document.querySelector("mark.pagefind-highlight");
+  firstMatch?.scrollIntoView({ behavior: "smooth", block: "center" });
+</script>
+
+<style is:global>
+  mark.pagefind-highlight {
+    background-color: var(--kern-color-feedback-success-background);
+  }
+</style>
