@@ -17,7 +17,8 @@ Das Zentrum für Legistik entsteht im Auftrag des
 Bundesministerium für Digitales und Staatsmodernisierung
 </a> </p> </div> </div> </nav> </div> </footer> <pagefind-config highlight-param="highlight" bundle-path="/zfl-website/previews/main/pagefind/"></pagefind-config> <script type="module" src="/zfl-website/previews/main/_astro/PagefindConfig.astro_astro_type_script_index_0_lang.5Bro5zhS.js"></script><pagefind-modal><pagefind-modal-header><pagefind-input></pagefind-input></pagefind-modal-header><pagefind-modal-body><pagefind-summary></pagefind-summary><pagefind-results hide-sub-results="true"></pagefind-results></pagefind-modal-body><pagefind-modal-footer><pagefind-keyboard-hints></pagefind-keyboard-hints></pagefind-modal-footer></pagefind-modal><script type="module">const baseUrl = "/zfl-website/previews/main";
 
-  await import(`${baseUrl}pagefind/pagefind-highlight.js`);
+  const base = baseUrl === "/" ? "" : baseUrl;
+  await import(`${base}/pagefind/pagefind-highlight.js`);
   new PagefindHighlight({ highlightParam: "highlight" });
   const firstMatch = document.querySelector("mark.pagefind-highlight");
   firstMatch?.scrollIntoView({ behavior: "smooth", block: "center" });
