@@ -7,6 +7,7 @@ import { Image } from "astro:assets";
 import appointments from "./_appointments.json";
 import Schedule from "./_schedule.astro";
 import InfoPanel from "@/components/InfoPanel.astro";
+import SchulungsForm from "@/components/global/SchulungsForm.astro";
 
 export const frontmatter = {
   title: "Schulungen",
@@ -169,6 +170,18 @@ export const frontmatter = {
           </li>
         </ul>
       </InfoPanel>
+    </section>
+    <section>
+      <h3>Schulungs Anmeldungen Kern Style</h3>
+      <SchulungsForm />
+    </section>
+    <section>
+      <h3>Schulungs Anmeldungen Rapidmail Style Iframe</h3>
+      <iframe
+        src="https://t8c114466.emailsys1a.net/233/2523/3878de5d3c/subscribe/form.html?_g=1779353768"
+        title="Schulungsanmeldung Rapidmail"
+        class="w-full border-0"
+        height="760"></iframe>
     </section>
     <Hero level="root">
       <h2>Kontakt</h2>
