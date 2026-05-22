@@ -56,7 +56,15 @@ const hasFooter = Astro.slots.has("footer");
   {
     image && imageAlt !== undefined && (
       <div class="kern-card__media relative">
-        <Image src={image} alt={imageAlt} class="h-208 object-cover" />
+        <Image
+          src={image}
+          alt={imageAlt}
+          class="h-208 object-cover"
+          densities={[1, 2]}
+          width="382"
+          height="208"
+          quality={100}
+        />
         {imageSource && (
           <p class="absolute right-0 bottom-0 w-auto! rounded-none! bg-black/40 px-4 text-xs text-white">
             Quelle: {imageSource}
