@@ -13,7 +13,7 @@ export type Route = {
 
 export const barrierefreiheit = {
   key: "barrierefreiheit",
-  path: "/preview/barrierefreiheit",
+  path: "/barrierefreiheit",
   title: "Barrierefreiheit",
   parent: null,
   sitemap: true,
@@ -24,7 +24,7 @@ export const barrierefreiheit = {
 
 export const begleitungen = {
   key: "begleitungen",
-  path: "/preview/begleitungen",
+  path: "/begleitungen",
   title: "Regelungsbegleitung",
   parent: null,
   sitemap: true,
@@ -35,7 +35,7 @@ export const begleitungen = {
 
 export const datenschutz = {
   key: "datenschutz",
-  path: "/preview/datenschutz",
+  path: "/datenschutz",
   title: "Datenschutzerklärung",
   parent: null,
   sitemap: true,
@@ -46,7 +46,7 @@ export const datenschutz = {
 
 export const dev = {
   key: "dev",
-  path: "/preview/dev",
+  path: "/dev",
   title: "Dev Seiten",
   parent: null,
   sitemap: false,
@@ -57,7 +57,7 @@ export const dev = {
 
 export const dev_astroKomponenten = {
   key: "dev_astroKomponenten",
-  path: "/preview/dev/astro-komponenten",
+  path: "/dev/astro-komponenten",
   title: "Astro Komponenten",
   parent: dev,
   sitemap: false,
@@ -68,7 +68,7 @@ export const dev_astroKomponenten = {
 
 export const dev_kernKomponenten = {
   key: "dev_kernKomponenten",
-  path: "/preview/dev/kern-komponenten",
+  path: "/dev/kern-komponenten",
   title: "KERN Komponenten",
   parent: dev,
   sitemap: false,
@@ -79,7 +79,7 @@ export const dev_kernKomponenten = {
 
 export const home = {
   key: "home",
-  path: "/preview/",
+  path: "/",
   title: "Zentrum für Legistik",
   parent: null,
   sitemap: true,
@@ -90,7 +90,7 @@ export const home = {
 
 export const impressum = {
   key: "impressum",
-  path: "/preview/impressum",
+  path: "/impressum",
   title: "Impressum",
   parent: null,
   sitemap: true,
@@ -101,7 +101,7 @@ export const impressum = {
 
 export const kontakt = {
   key: "kontakt",
-  path: "/preview/kontakt",
+  path: "/kontakt",
   title: "Kontakt",
   parent: null,
   sitemap: true,
@@ -112,7 +112,7 @@ export const kontakt = {
 
 export const schulungen = {
   key: "schulungen",
-  path: "/preview/schulungen",
+  path: "/schulungen",
   title: "Schulungen",
   parent: null,
   sitemap: true,
@@ -123,7 +123,7 @@ export const schulungen = {
 
 export const sitemap = {
   key: "sitemap",
-  path: "/preview/sitemap",
+  path: "/sitemap",
   title: "Sitemap",
   parent: null,
   sitemap: false,
@@ -134,7 +134,7 @@ export const sitemap = {
 
 export const staging = {
   key: "staging",
-  path: "/preview/staging",
+  path: "/staging",
   title: "Staging-Umgebung",
   parent: null,
   sitemap: false,
@@ -145,7 +145,7 @@ export const staging = {
 
 export const ueber = {
   key: "ueber",
-  path: "/preview/ueber",
+  path: "/ueber",
   title: "Über uns",
   parent: null,
   sitemap: true,
@@ -156,7 +156,7 @@ export const ueber = {
 
 export const ueber_aktuelleMeldungen = {
   key: "ueber_aktuelleMeldungen",
-  path: "/preview/ueber/aktuelle-meldungen",
+  path: "/ueber/aktuelle-meldungen",
   title: "Aktuelle Meldungen",
   parent: ueber,
   sitemap: true,
@@ -167,7 +167,7 @@ export const ueber_aktuelleMeldungen = {
 
 export const ueber_daranArbeitenWir = {
   key: "ueber_daranArbeitenWir",
-  path: "/preview/ueber/daran-arbeiten-wir",
+  path: "/ueber/daran-arbeiten-wir",
   title: "Daran arbeiten wir",
   parent: ueber,
   sitemap: true,
@@ -178,7 +178,7 @@ export const ueber_daranArbeitenWir = {
 
 export const ueber_zahlenUndFakten = {
   key: "ueber_zahlenUndFakten",
-  path: "/preview/ueber/zahlen-und-fakten",
+  path: "/ueber/zahlen-und-fakten",
   title: "Zahlen und Fakten",
   parent: ueber,
   sitemap: true,
@@ -189,7 +189,7 @@ export const ueber_zahlenUndFakten = {
 
 export const werkzeuge = {
   key: "werkzeuge",
-  path: "/preview/werkzeuge",
+  path: "/werkzeuge",
   title: "Werkzeuge",
   parent: null,
   sitemap: true,
