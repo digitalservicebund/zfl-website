@@ -19,7 +19,7 @@ importers:
         version: 0.5.0(@types/alpinejs@3.13.11)(alpinejs@3.15.12)
       '@astrojs/mdx':
         specifier: ^5.0.6
-        version: 5.0.6(astro@6.3.4(@types/node@25.9.0)(jiti@2.7.0)(yaml@2.9.0))
+        version: 5.0.6(astro@6.3.5(@types/node@25.9.0)(jiti@2.7.0)(yaml@2.9.0))
       '@astrojs/sitemap':
         specifier: ^3.7.2
         version: 3.7.2
@@ -42,17 +42,17 @@ importers:
         specifier: ^3.15.12
         version: 3.15.12
       astro:
-        specifier: ^6.3.4
-        version: 6.3.4(@types/node@25.9.0)(jiti@2.7.0)(yaml@2.9.0)
+        specifier: ^6.3.5
+        version: 6.3.5(@types/node@25.9.0)(jiti@2.7.0)(yaml@2.9.0)
       astro-icon:
         specifier: ^1.1.5
         version: 1.1.5
       astro-pagefind:
         specifier: ^2.0.0
-        version: 2.0.0(astro@6.3.4(@types/node@25.9.0)(jiti@2.7.0)(yaml@2.9.0))
+        version: 2.0.0(astro@6.3.5(@types/node@25.9.0)(jiti@2.7.0)(yaml@2.9.0))
       astro-route-generator:
         specifier: github:digitalservicebund/astro-route-generator#40024e7e81c9fda804b952b6e17f30ac17ab4607
-        version: https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/40024e7e81c9fda804b952b6e17f30ac17ab4607(astro@6.3.4(@types/node@25.9.0)(jiti@2.7.0)(yaml@2.9.0))
+        version: https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/40024e7e81c9fda804b952b6e17f30ac17ab4607(astro@6.3.5(@types/node@25.9.0)(jiti@2.7.0)(yaml@2.9.0))
       astro-seo:
         specifier: ^1.1.0
         version: 1.1.0(prettier-plugin-astro@0.14.1)(prettier@3.8.3)(typescript@6.0.3)
@@ -1740,8 +1740,8 @@ packages:
   astro-seo@1.1.0:
     resolution: {integrity: sha512-G6LDNDyga30o+52v58jU7C35n3cORUzk7RSuY+xf/ZRbW6JiNplyaOO1VoYVKO+xzYNaBcxqNln2RFRR/wgJNQ==}
 
-  astro@6.3.4:
-    resolution: {integrity: sha512-TXUu9Z6HE/M9MkUEbwIQBnBY2jhcuCalz0ACDb+dUeV27iXf3/aZ3uYjLXgn92W/JxImPA1oG+nZx+N9o0+B+Q==}
+  astro@6.3.5:
+    resolution: {integrity: sha512-gU+4KedkbTuVgz7YoVAN+9Ftnq0GaYwejxK2NbqDzB0M9dWd0f3kXZBuaM9hzbchRFoRAJfJjFtdX9LK6Ir7ZA==}
     engines: {node: '>=22.12.0', npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
 
@@ -4272,12 +4272,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/mdx@5.0.6(astro@6.3.4(@types/node@25.9.0)(jiti@2.7.0)(yaml@2.9.0))':
+  '@astrojs/mdx@5.0.6(astro@6.3.5(@types/node@25.9.0)(jiti@2.7.0)(yaml@2.9.0))':
     dependencies:
       '@astrojs/markdown-remark': 7.1.2
       '@mdx-js/mdx': 3.1.1
       acorn: 8.16.0
-      astro: 6.3.4(@types/node@25.9.0)(jiti@2.7.0)(yaml@2.9.0)
+      astro: 6.3.5(@types/node@25.9.0)(jiti@2.7.0)(yaml@2.9.0)
       es-module-lexer: 2.1.0
       estree-util-visit: 2.0.0
       hast-util-to-html: 9.0.5
@@ -5648,16 +5648,16 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  astro-pagefind@2.0.0(astro@6.3.4(@types/node@25.9.0)(jiti@2.7.0)(yaml@2.9.0)):
+  astro-pagefind@2.0.0(astro@6.3.5(@types/node@25.9.0)(jiti@2.7.0)(yaml@2.9.0)):
     dependencies:
       '@pagefind/component-ui': 1.5.2
-      astro: 6.3.4(@types/node@25.9.0)(jiti@2.7.0)(yaml@2.9.0)
+      astro: 6.3.5(@types/node@25.9.0)(jiti@2.7.0)(yaml@2.9.0)
       pagefind: 1.5.2
       sirv: 3.0.2
 
-  astro-route-generator@https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/40024e7e81c9fda804b952b6e17f30ac17ab4607(astro@6.3.4(@types/node@25.9.0)(jiti@2.7.0)(yaml@2.9.0)):
+  astro-route-generator@https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/40024e7e81c9fda804b952b6e17f30ac17ab4607(astro@6.3.5(@types/node@25.9.0)(jiti@2.7.0)(yaml@2.9.0)):
     dependencies:
-      astro: 6.3.4(@types/node@25.9.0)(jiti@2.7.0)(yaml@2.9.0)
+      astro: 6.3.5(@types/node@25.9.0)(jiti@2.7.0)(yaml@2.9.0)
       gray-matter: 4.0.3
       typescript: 6.0.3
 
@@ -5669,7 +5669,7 @@ snapshots:
       - prettier-plugin-astro
       - typescript
 
-  astro@6.3.4(@types/node@25.9.0)(jiti@2.7.0)(yaml@2.9.0):
+  astro@6.3.5(@types/node@25.9.0)(jiti@2.7.0)(yaml@2.9.0):
     dependencies:
       '@astrojs/compiler': 4.0.0
       '@astrojs/internal-helpers': 0.9.1
