@@ -12,9 +12,12 @@ export const frontmatter = {
   title: "Schulungen",
   sitemap: true,
 };
+
+const description =
+  "In den umsetzungsorientierten Schulungen des Zentrum für Legistik lernen Sie Methoden und Werkzeuge kennen, die Sie bei der Erarbeitung von praxisnahen und bürokratiearmen Regelungen unterstützen.";
 ---
 
-<Layout title={frontmatter.title}>
+<Layout title={frontmatter.title} description={description}>
   <main class="breakout-grid max-md:overflow-x-hidden">
     <Hero level="main">
       <div class="items-center gap-32 md:flex md:flex-row">

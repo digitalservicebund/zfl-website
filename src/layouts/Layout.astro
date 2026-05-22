@@ -14,14 +14,22 @@ import "../styles/global.css";
 
 interface Props {
   title: string;
+  description?: string;
   excludeFromSearch?: boolean;
 }
-const { title: pageTitle, excludeFromSearch = false } = Astro.props;
+const {
+  title: pageTitle,
+  description,
+  excludeFromSearch = false,
+} = Astro.props;
 const siteName = "Zentrum für Legistik";
 const title = pageTitle ? `${pageTitle} — ${siteName}` : siteName;
 const SEOImage = `${Astro.url.origin}/SEO_ZfL.png`;
 const showDebugGrid = !isProduction || process.env.NODE_ENV === "development";
 const showSectionSidebar = getSectionNavigation(Astro.url.pathname) !== null;
+
+const defaultDescription =
+  "Das Zentrum für Legistik unterstützt Sie bei der Ausarbeitung von Regelungen. Sie stellen damit sicher, dass Ihr Vorhaben betroffenenzentriert, praxistauglich und digital umsetzbar ist.";
 ---
 
 <!doctype html>
@@ -48,6 +56,7 @@ const showSectionSidebar = getSectionNavigation(Astro.url.pathname) !== null;
 
   <SEO
     title={title}
+    description={description ?? defaultDescription}
     openGraph={{
       basic: {
         title,

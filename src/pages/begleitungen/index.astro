@@ -14,9 +14,12 @@ export const frontmatter = {
   title: "Regelungsbegleitung",
   sitemap: true,
 };
+
+const description =
+  "Ein in Gesetzgebungspraxis erfahrenes interdisziplinäres Team unterstützt Sie dabei, die Regelung praxisnah, digitaltauglich und bürokratiearm zu gestalten. Vertraulich und mit individuellem Fokus auf Ihr Vorhaben stehen Ihnen während der Begleitung Kompetenzen in Design, Nutzerforschung, IT, Produkt- und Prozessmanagement direkt zur Verfügung.";
 ---
 
-<Layout title={frontmatter.title}>
+<Layout title={frontmatter.title} description={description}>
   <main class="breakout-grid">
     <Hero level="main" class="overflow-clip">
       <div class="items-center gap-32 md:flex">

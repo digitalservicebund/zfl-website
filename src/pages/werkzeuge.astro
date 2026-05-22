@@ -11,6 +11,9 @@ export const frontmatter = {
   title: "Werkzeuge",
 };
 
+const description =
+  "Auf dieser Seite finden Sie Werkzeuge, die Sie bei der Regelungsarbeit unterstützen: hilfreiche Links zu Anleitungen, Hilfsmittel und Tools.";
+
 const allTools = await getCollection("werkzeuge");
 
 type Category = (typeof allTools)[number]["data"]["category"][number];
@@ -50,7 +53,7 @@ const types = ["Methode", "Tool", "Leitfaden", "Ressource"] as const;
 const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
 ---
 
-<Layout title={frontmatter.title}>
+<Layout title={frontmatter.title} description={description}>
   <main x-data="werkzeuge" class="breakout-grid">
     <Hero level="main">
       <h1>{frontmatter.title}</h1>
