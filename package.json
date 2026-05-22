@@ -60,7 +60,7 @@
     "@playwright/test": "^1.60.0",
     "@types/jsdom": "^28.0.3",
     "@types/node": "^25.9.0",
-    "@typescript-eslint/parser": "^8.59.3",
+    "@typescript-eslint/parser": "^8.59.4",
     "@vitest/browser-playwright": "^4.1.6",
     "astro-eslint-parser": "^1.4.0",
     "eslint": "^10.4.0",
@@ -74,7 +74,7 @@
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-organize-imports": "^4.3.0",
     "prettier-plugin-tailwindcss": "^0.8.0",
-    "typescript-eslint": "^8.59.3",
+    "typescript-eslint": "^8.59.4",
     "vite": "^8.0.13",
     "vitest": "^4.1.6"
   },
