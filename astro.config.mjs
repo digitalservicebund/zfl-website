@@ -42,7 +42,11 @@ export default defineConfig({
       pagesDir: "src/pages",
       output: "src/config/routes.ts",
     }),
-    pagefind(),
+    pagefind({
+      indexConfig: {
+        excludeSelectors: ["[href^='mailto:']"],
+      },
+    }),
   ],
   build: {
     assets: "_astro",
