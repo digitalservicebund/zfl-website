@@ -15,19 +15,17 @@ const { class: className } = Astro.props;
 
 <script>
   import { getInstanceManager } from "@pagefind/component-ui";
-  import type { PagefindModal, Instance } from "@pagefind/component-ui";
+  import type { PagefindModal } from "@pagefind/component-ui";
 
   // reference: https://github.com/Pagefind/pagefind/blob/main/pagefind_ui/component/components/pagefind-modal-trigger.ts
   class CustomModalTrigger extends HTMLElement {
-    instance: Instance | null = null;
     handleButtonClick() {
-      const modals = (this.instance?.getUtilities("modal") ||
-        []) as PagefindModal[];
-      const modal = modals[0];
+      const instance = getInstanceManager().getInstance("default");
+      const modals = (instance?.getUtilities("modal") || []) as PagefindModal[];
+      const modal = modals.find((m) => (m as HTMLElement).isConnected);
       modal?.open();
     }
     connectedCallback() {
-      this.instance = getInstanceManager().getInstance("default");
       this.addEventListener("click", this.handleButtonClick);
     }
   }

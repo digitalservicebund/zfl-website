@@ -23,11 +23,14 @@ import PagefindConfig from "astro-pagefind/components/PagefindConfig.astro";
   type="module"
   define:vars={{ baseUrl: import.meta.env.BASE_URL }}
 >
-  const base = baseUrl === "/" ? "" : baseUrl;
-  await import(`${base}/pagefind/pagefind-highlight.js`);
-  new PagefindHighlight({ highlightParam: "highlight" });
-  const firstMatch = document.querySelector("mark.pagefind-highlight");
-  firstMatch?.scrollIntoView({ behavior: "smooth", block: "center" });
+  // change event to "astro:page-load" if using Astro's ClientRouter
+  document.addEventListener("DOMContentLoaded", async () => {
+    const base = baseUrl === "/" ? "" : baseUrl;
+    await import(`${base}/pagefind/pagefind-highlight.js`);
+    new PagefindHighlight({ highlightParam: "highlight" });
+    const firstMatch = document.querySelector("mark.pagefind-highlight");
+    firstMatch?.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
 </script>
 
 <style is:global>
