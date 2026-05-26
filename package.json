@@ -32,7 +32,7 @@
     "@astrojs/mdx": "^5.0.6",
     "@astrojs/sitemap": "^3.7.2",
     "@iconify-json/ic": "^1.2.4",
-    "@kern-ux/native": "^2.5.0",
+    "@kern-ux/native": "^2.6.1",
     "@pagefind/component-ui": "^1.5.2",
     "@tailwindcss/vite": "^4.3.0",
     "@types/alpinejs": "^3.13.11",
@@ -61,7 +61,7 @@
     "@types/jsdom": "^28.0.3",
     "@types/node": "^25.9.1",
     "@typescript-eslint/parser": "^8.59.4",
-    "@vitest/browser-playwright": "^4.1.6",
+    "@vitest/browser-playwright": "^4.1.7",
     "astro-eslint-parser": "^1.4.0",
     "eslint": "^10.4.0",
     "eslint-config-prettier": "^10.1.8",
@@ -75,8 +75,8 @@
     "prettier-plugin-organize-imports": "^4.3.0",
     "prettier-plugin-tailwindcss": "^0.8.0",
     "typescript-eslint": "^8.59.4",
-    "vite": "^8.0.13",
+    "vite": "^8.0.14",
     "vitest": "^4.1.7"
   },
-  "packageManager": "pnpm@11.1.2"
+  "packageManager": "pnpm@11.3.0"
 }
