@@ -6,7 +6,9 @@ interface Props {
 const { class: className } = Astro.props;
 ---
 
-<custom-modal-trigger class:list={["cursor-pointer", "gap-8", className]}>
+<custom-modal-trigger
+  class:list={["cursor-pointer", "select-none", "gap-8", className]}
+>
   <span
     class="kern-icon kern-icon--search kern-icon--default"
     aria-hidden="true"></span>

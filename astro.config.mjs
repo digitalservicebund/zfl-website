@@ -45,6 +45,7 @@ export default defineConfig({
     pagefind({
       indexConfig: {
         excludeSelectors: ["[href^='mailto:']"],
+        includeCharacters: ".",
       },
     }),
   ],

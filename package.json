@@ -20,6 +20,7 @@
     "format:fix-selected": "prettier --write --ignore-unknown",
     "lint": "eslint",
     "lint:fix": "eslint --fix .",
+    "pagefind:debug": "pagefind --site dist --verbose --serve --include-characters \".\" --exclude-selectors \"[href^='mailto:']\"",
     "preinstall": "echo 'Please disable script execution for security reasons: npm config set ignore-scripts true' && exit 1",
     "preview": "astro preview",
     "test": "vitest run",
