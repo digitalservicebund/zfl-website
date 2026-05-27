@@ -1,0 +1,1 @@
+import"./component-ui.CPIQeVfQ.js";
