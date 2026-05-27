@@ -72,10 +72,10 @@ class SearchModalSummary extends HTMLElement {
     instance.on("error", () => {
       if (!this.containerEl) return;
       this.containerEl.innerHTML = `
-        <div class="kern-alert kern-alert--danger" role="alert">
+        <div class="kern-alert kern-alert--info" role="alert">
           <div class="kern-alert__header">
-            <span class="kern-icon kern-icon--danger" aria-hidden="true"></span>
-            <span class="kern-title">Fehler</span>
+            <span class="kern-icon kern-icon--info" aria-hidden="true"></span>
+            <span class="kern-title">Hinweis</span>
           </div>
           <div class="kern-alert__body">
             <p class="kern-body">Suche nicht verfügbar. Bitte laden Sie die Seite neu oder versuchen Sie es später noch einmal.</p>
