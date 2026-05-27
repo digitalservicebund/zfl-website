@@ -7,6 +7,7 @@
     "audit:licences": "license-checker-rseidelsohn --production --excludePrivatePackages --onlyAllow 'MIT;BSD-3-Clause;BSD-2-Clause;0BSD;ISC;Apache-2.0;MPL-2.0;BlueOak-1.0.0;Custom: LICENSE;Unlicense;EUPL-1.2' --summary",
     "build": "astro build",
     "build:search-index": "[ ! -d \"dist\" ] && pnpm build || true",
+    "clean": "rm -rf dist",
     "clean:deps": "pnpm knip",
     "dev": "pnpm build:search-index && PUBLIC_STAGE=development astro dev",
     "dev:preview": "PUBLIC_STAGE=preview PREVIEW_BASE_PATH=/preview astro dev",

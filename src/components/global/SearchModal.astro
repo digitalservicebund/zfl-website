@@ -9,7 +9,7 @@ import PagefindConfig from "astro-pagefind/components/PagefindConfig.astro";
       <pagefind-input></pagefind-input>
     </pagefind-modal-header>
     <pagefind-modal-body>
-      <pagefind-summary></pagefind-summary>
+      <search-modal-summary></search-modal-summary>
       <pagefind-results hide-sub-results></pagefind-results>
     </pagefind-modal-body>
     <pagefind-modal-footer>
@@ -17,6 +17,8 @@ import PagefindConfig from "astro-pagefind/components/PagefindConfig.astro";
     </pagefind-modal-footer>
   </pagefind-modal>
 </>
+
+<script src="./SearchModalSummary.ts"></script>
 
 <script
   is:inline
@@ -102,6 +104,10 @@ import PagefindConfig from "astro-pagefind/components/PagefindConfig.astro";
 
   :is(*, #\#):is(*, #\#):is(*, #\#) .pf-modal-body .pf-summary {
     margin: var(--kern-metric-space-small) 0;
+  }
+
+  :is(*, #\#):is(*, #\#):is(*, #\#) .pf-error {
+    display: none; /* using custom error messages in SearchModalSummary.ts */
   }
 
   mark.pagefind-highlight {
