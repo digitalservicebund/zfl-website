@@ -41,7 +41,7 @@ import PagefindConfig from "astro-pagefind/components/PagefindConfig.astro";
     --pf-text: var(--kern-color-layout-text-default);
     --pf-text-secondary: var(--kern-color-layout-text-muted);
     --pf-text-muted: var(--kern-color-layout-text-muted);
-    --pf-border: var(--kern-color-layout-border);
+    --pf-border: var(--kern-color-decorative-border-contextual, #c0c3d5);
     --pf-outline-focus: var(--color-cosmic-blue-base);
     --pf-mark: var(--kern-color-layout-text-default);
     --pf-skeleton: var(--color-lavender-200);
@@ -71,7 +71,7 @@ import PagefindConfig from "astro-pagefind/components/PagefindConfig.astro";
   }
 
   :is(*, #\#):is(*, #\#):is(*, #\#) dialog.pf-modal {
-    border-radius: var(--kern-metric-border-radius-default, 4px);
+    border-radius: var(--kern-metric-border-radius-large, 8px);
   }
 
   :is(*, #\#):is(*, #\#):is(*, #\#) .pf-trigger-text {
