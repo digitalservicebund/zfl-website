@@ -11,35 +11,30 @@
 }
 
 @utility kern-heading-display {
-  /* padding: var(--kern-metric-baseline-heading-display-padding-top, 12px) var(--kern-metric-space-none, 0px) var(--kern-metric-baseline-heading-display-padding-bottom, 12px) var(--kern-metric-space-none, 0px); */
   font-size: var(--kern-typography-font-size-2x-large-adaptive, 48px);
   font-weight: var(--kern-typography-font-weight-medium, 500);
   line-height: var(--kern-typography-line-height-2x-large-adaptive, 56px);
 }
 
 @utility kern-heading-x-large {
-  /* padding: var(--kern-metric-baseline-heading-x-large-padding-top, 9px) var(--kern-metric-space-none, 0px) var(--kern-metric-baseline-heading-x-large-padding-bottom, 7px) var(--kern-metric-space-none, 0px); */
   font-size: var(--kern-typography-font-size-x-large-adaptive, 32px);
   font-weight: var(--kern-typography-font-weight-medium, 500);
   line-height: var(--kern-typography-line-height-x-large-adaptive, 40px);
 }
 
 @utility kern-heading-large {
-  /* padding: var(--kern-metric-baseline-heading-large-padding-top, 7px) var(--kern-metric-space-none, 0px) var(--kern-metric-baseline-heading-large-padding-bottom, 9px) var(--kern-metric-space-none, 0px); */
   font-size: var(--kern-typography-font-size-large-adaptive, 26px);
   font-weight: var(--kern-typography-font-weight-semi-bold, 600);
   line-height: var(--kern-typography-line-height-large-adaptive, 32px);
 }
 
 @utility kern-heading-medium {
-  /* padding: var(--kern-metric-baseline-heading-medium-padding-top, 5px) var(--kern-metric-space-none, 0px) var(--kern-metric-baseline-heading-medium-padding-bottom, 3px) var(--kern-metric-space-none, 0px); */
   font-size: var(--kern-typography-font-size-medium-adaptive, 21px);
   font-weight: var(--kern-typography-font-weight-semi-bold, 600);
   line-height: var(--kern-typography-line-height-medium-adaptive, 24px);
 }
 
 @utility kern-heading-small {
-  /* padding: var(--kern-metric-baseline-heading-small-padding-top, 6px) var(--kern-metric-space-none, 0px) var(--kern-metric-baseline-heading-small-padding-bottom, 2px) var(--kern-metric-space-none, 0px); */
   font-size: var(--kern-typography-font-size-medium-static, 18px);
   font-weight: var(--kern-typography-font-weight-semi-bold, 600);
   line-height: var(--kern-typography-line-height-medium-static, 24px);

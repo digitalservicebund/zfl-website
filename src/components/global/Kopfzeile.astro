@@ -1,5 +1,5 @@
 ---
-import { isPreview, isStaging, isDevelopment } from "@/config/stage";
+import { isProduction, stage } from "@/config/stage";
 ---
 
 <div class="kern-kopfzeile px-24">
@@ -13,9 +13,7 @@ import { isPreview, isStaging, isDevelopment } from "@/config/stage";
     </span>
     <span class="kern-kopfzeile__label">
       Offizielle Website – Bundesrepublik Deutschland
-      {isPreview && " (PREVIEW)"}
-      {isStaging && " (STAGING)"}
-      {isDevelopment && " (DEVELOPMENT)"}
+      {!isProduction && ` (${stage.toUpperCase()})`}
     </span>
   </div>
 </div>

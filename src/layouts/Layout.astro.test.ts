@@ -52,11 +52,11 @@ describe("Layout", async () => {
     const footer = dom.querySelector("footer")!;
 
     expect(
-      header?.compareDocumentPosition(slotContent!) &
+      header?.compareDocumentPosition(slotContent) &
         Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy();
     expect(
-      slotContent?.compareDocumentPosition(footer!) &
+      slotContent?.compareDocumentPosition(footer) &
         Node.DOCUMENT_POSITION_FOLLOWING,
     ).toBeTruthy();
   });
