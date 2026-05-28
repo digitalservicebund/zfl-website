@@ -1,4 +1,4 @@
-import * as stage from "@/config/stage.ts";
+import * as stageExport from "@/config/stage.ts";
 import { renderToDOM } from "@/utils/testUtils.ts";
 import { describe, expect, it, test, vi } from "vitest";
 import { baseUrl } from "../../vitest.config.ts";
@@ -15,6 +15,7 @@ vi.mock("@/config/stage", () => ({
   isStaging: false,
   isPreview: false,
   isDevelopment: false,
+  stage: "production",
 }));
 
 describe("Layout", async () => {
@@ -76,8 +77,8 @@ describe("Posthog script", async () => {
     expect(html).toContain("mocked-posthog");
   });
   it("is excluded in staging", async () => {
-    vi.mocked(stage).isProduction = false;
-    vi.mocked(stage).isStaging = true;
+    vi.mocked(stageExport).isProduction = false;
+    vi.mocked(stageExport).isStaging = true;
     const { html } = await renderToDOM(Layout);
     expect(html).not.toContain("mocked-posthog");
   });
