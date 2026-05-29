@@ -4,5 +4,6 @@ export function mailto(email: string, subject?: string, body?: string): string {
   if (body) params.append("body", body);
   const query = params.toString().replaceAll("+", "%20");
   const queryStr = query ? `?${query}` : "";
-  return `mailto:${email}${queryStr}`;
+  const mailto = email.startsWith("mailto:") ? email : `mailto:${email}`;
+  return `${mailto}${queryStr}`;
 }
