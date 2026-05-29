@@ -1,5 +1,6 @@
 import type { Instance, PagefindSearchResult } from "@pagefind/component-ui";
 import { getInstanceManager } from "@pagefind/component-ui";
+import { getBestMatch } from "./keywords";
 
 // customized version of https://github.com/Pagefind/pagefind/blob/main/pagefind_ui/component/components/pagefind-summary.ts
 
@@ -24,6 +25,15 @@ class SearchModalSummary extends HTMLElement {
       .replaceAll("<", "&lt;")
       .replaceAll(">", "&gt;")
       .replaceAll('"', "&quot;");
+  }
+
+  private applySuggestedTerm(suggestion: string) {
+    const inputEl = document.querySelector<HTMLInputElement>("input.pf-input");
+    if (!inputEl) return;
+
+    inputEl.value = suggestion;
+    inputEl.focus();
+    inputEl.dispatchEvent(new Event("input", { bubbles: true }));
   }
 
   register(instance: Instance) {
@@ -51,20 +61,36 @@ class SearchModalSummary extends HTMLElement {
 
         const results = rawResults as PagefindSearchResult;
         const count = results.results?.length ?? 0;
+        const bestProposal = getBestMatch(this.term, 3);
 
-        if (count > 0) {
-          const resultsStr = count === 1 ? "Ergebnis" : "Ergebnisse";
-          this.containerEl.innerHTML = `<p>${count} ${resultsStr} für <strong>${this.escapeHtml(this.term)}</strong></p>`;
+        const resultsStr = count === 1 ? "Ergebnis" : "Ergebnisse";
+        this.containerEl.innerHTML = `<p>${count || "Keine"} ${resultsStr} für <strong>${this.escapeHtml(this.term)}</strong></p>`;
+
+        if (bestProposal) {
+          this.containerEl.innerHTML += `
+            <p>
+              Meinten Sie vielleicht
+              <button type="button" id="alternativeTerm" class="text-link">${this.escapeHtml(bestProposal)}</button>?
+            </p>
+          `;
+
+          const suggestionButton =
+            this.containerEl.querySelector<HTMLButtonElement>(
+              "#alternativeTerm",
+            );
+          suggestionButton?.addEventListener("click", () => {
+            this.applySuggestedTerm(bestProposal);
+          });
+
           return;
-        }
-
-        this.containerEl.innerHTML = `
-          <p>Keine Ergebnisse für <strong>${this.escapeHtml(this.term)}</strong></p>
+        } else if (count == 0) {
+          this.containerEl.innerHTML += `
           <ul>
             <li>Überprüfen Sie, ob alle Wörter richtig geschrieben sind</li>
             <li>Probieren Sie einen allgemeineren Suchbegriff</li>
           </ul>
         `;
+        }
       },
       this,
     );
