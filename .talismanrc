@@ -79,10 +79,13 @@ fileignoreconfig:
   - filename: src/components/search/keywords.ts
     allowed_patterns:
       - keyword
-      - bestKeyword
   - filename: src/components/search/SearchModalSummary.test.ts
     allowed_patterns:
       - keywords
+  - filename: src/components/search/getFuzzyMatch.ts
+    allowed_patterns:
+      - keyword
+      - bestKeyword
 scopeconfig:
   - scope: node
 allowed_patterns:

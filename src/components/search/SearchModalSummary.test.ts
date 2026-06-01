@@ -15,12 +15,12 @@ vi.mock("@pagefind/component-ui", () => ({
   }),
 }));
 
-vi.mock("./keywords", () => ({ getBestMatch: vi.fn() }));
+vi.mock("./getFuzzyMatch", () => ({ getFuzzyMatch: vi.fn() }));
 
-import { getBestMatch } from "./keywords";
+import { getFuzzyMatch } from "./getFuzzyMatch";
 import "./SearchModalSummary";
 
-const getBestMatchMock = vi.mocked(getBestMatch);
+const getFuzzyMatchMock = vi.mocked(getFuzzyMatch);
 
 function search(term: string, results: object[]) {
   handlers["search"]?.(term);
@@ -31,7 +31,7 @@ describe("SearchModalSummary", () => {
   let el: Element;
 
   beforeEach(() => {
-    getBestMatchMock.mockReturnValue(null);
+    getFuzzyMatchMock.mockReturnValue(undefined);
     el = document.createElement("search-modal-summary");
     document.body.appendChild(el);
   });
@@ -81,7 +81,7 @@ describe("SearchModalSummary", () => {
 
   describe("suggestion", () => {
     it("renders a suggestion button instead of tips when a proposal exists", () => {
-      getBestMatchMock.mockReturnValue("Kontakt");
+      getFuzzyMatchMock.mockReturnValue("Kontakt");
       search("kntakt", []);
       expect(el.querySelector("button#alternativeTerm")?.textContent).toBe(
         "Kontakt",
@@ -90,7 +90,7 @@ describe("SearchModalSummary", () => {
     });
 
     it("escapes HTML characters in the suggestion", () => {
-      getBestMatchMock.mockReturnValue("<Kontakt>");
+      getFuzzyMatchMock.mockReturnValue("<Kontakt>");
       search("kntakt", []);
       expect(el.innerHTML).toContain("&lt;Kontakt&gt;");
       expect(el.querySelector("button#alternativeTerm")?.textContent).toBe(
@@ -99,7 +99,7 @@ describe("SearchModalSummary", () => {
     });
 
     it("clicking the suggestion updates the search input", () => {
-      getBestMatchMock.mockReturnValue("Kontakt");
+      getFuzzyMatchMock.mockReturnValue("Kontakt");
       const input = document.createElement("input");
       input.className = "pf-input";
       document.body.appendChild(input);

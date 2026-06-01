@@ -5,7 +5,7 @@ import type {
   PagefindSearchResult,
 } from "@pagefind/component-ui";
 import { getInstanceManager } from "@pagefind/component-ui";
-import { getBestMatch } from "./keywords";
+import { getFuzzyMatch } from "./getFuzzyMatch";
 
 // customized version of https://github.com/Pagefind/pagefind/blob/main/pagefind_ui/component/components/pagefind-summary.ts
 
@@ -33,7 +33,7 @@ class SearchModalSummary extends HTMLElement {
   private renderResults(result?: PagefindSearchResult) {
     if (!result || !this.term) return;
     const count = result.results?.length ?? 0;
-    const bestProposal = getBestMatch(this.term, 3);
+    const bestProposal = getFuzzyMatch(this.term, 3);
 
     this.renderResultCount(count, this.term);
 
