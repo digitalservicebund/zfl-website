@@ -80,6 +80,9 @@ fileignoreconfig:
     allowed_patterns:
       - keyword
       - bestKeyword
+  - filename: src/components/search/SearchModalSummary.test.ts
+    allowed_patterns:
+      - keywords
 scopeconfig:
   - scope: node
 allowed_patterns:
