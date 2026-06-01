@@ -81,33 +81,33 @@ describe("SearchModalSummary", () => {
 
   describe("suggestion", () => {
     it("renders a suggestion button instead of tips when a proposal exists", () => {
-      getBestMatchMock.mockReturnValue("Coaching");
-      search("coachig", []);
+      getBestMatchMock.mockReturnValue("Kontakt");
+      search("kntakt", []);
       expect(el.querySelector("button#alternativeTerm")?.textContent).toBe(
-        "Coaching",
+        "Kontakt",
       );
       expect(el.querySelector("li")).toBeNull();
     });
 
     it("escapes HTML characters in the suggestion", () => {
-      getBestMatchMock.mockReturnValue("<Coaching>");
-      search("coachig", []);
-      expect(el.innerHTML).toContain("&lt;Coaching&gt;");
+      getBestMatchMock.mockReturnValue("<Kontakt>");
+      search("kntakt", []);
+      expect(el.innerHTML).toContain("&lt;Kontakt&gt;");
       expect(el.querySelector("button#alternativeTerm")?.textContent).toBe(
-        "<Coaching>",
+        "<Kontakt>",
       );
     });
 
     it("clicking the suggestion updates the search input", () => {
-      getBestMatchMock.mockReturnValue("Coaching");
+      getBestMatchMock.mockReturnValue("Kontakt");
       const input = document.createElement("input");
       input.className = "pf-input";
       document.body.appendChild(input);
 
-      search("coachig", []);
+      search("kntakt", []);
       el.querySelector<HTMLButtonElement>("button#alternativeTerm")?.click();
 
-      expect(input.value).toBe("Coaching");
+      expect(input.value).toBe("Kontakt");
       input.remove();
     });
   });
