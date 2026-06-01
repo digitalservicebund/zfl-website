@@ -1,14 +1,10 @@
 import { allRoutes } from "@/config/routes";
 
 export const keywords = allRoutes
-  .filter((route) => {
-    return !route.isStagingOnly;
-  })
-  .map((route) => {
-    return route.title;
-  });
+  .filter((route) => !route.isStagingOnly)
+  .map((route) => route.title);
 
-function levenshteinDistanz(word: string, keyword: string) {
+function levenshteinDistance(word: string, keyword: string) {
   const a = word.trim().toLowerCase();
   const b = keyword.trim().toLowerCase();
 
@@ -47,7 +43,7 @@ export function getBestMatch(term: string, maxDistance: number): string | null {
   let bestDistance: number = 10; //maybe equal to the longest word?
 
   keywords.forEach((element) => {
-    const distance = levenshteinDistanz(normalizedTerm, element);
+    const distance = levenshteinDistance(normalizedTerm, element);
 
     if (distance < bestDistance && distance <= maxDistance && distance != 0) {
       bestDistance = distance;
