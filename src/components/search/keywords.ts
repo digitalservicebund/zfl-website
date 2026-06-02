@@ -5,7 +5,7 @@ import { getCollection } from "astro:content";
 // Use in Astro frontmatter only
 
 const WORD_SPLIT_REGEX = /[ .–()]+/;
-const MIN_LENGTH = 3; // to exclude "der", "und", "die", etc.
+const MIN_LENGTH = 4; // to exclude "der", "und", "die", etc.
 
 const pageTitleWords = allRoutes
   .filter((route) => !route.isStagingOnly)
