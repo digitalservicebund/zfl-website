@@ -1,1 +1,0 @@
-import{t as e}from"./component-ui.BLwSl0_X.js";var t=class extends HTMLElement{handleButtonClick(){(e().getInstance(`default`)?.getUtilities(`modal`)||[]).find(e=>e.isConnected)?.open()}connectedCallback(){this.addEventListener(`click`,this.handleButtonClick)}};customElements.define(`custom-modal-trigger`,t);
