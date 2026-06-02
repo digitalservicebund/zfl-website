@@ -33,6 +33,7 @@ describe("SearchModalSummary", () => {
   beforeEach(() => {
     getFuzzyMatchMock.mockReturnValue(undefined);
     el = document.createElement("search-modal-summary");
+    el.setAttribute("data-fuzzy-keywords", "Schulungen.Werkzeuge.Kontakt");
     document.body.appendChild(el);
   });
 
@@ -76,6 +77,17 @@ describe("SearchModalSummary", () => {
     it("does not show tips when results exist", () => {
       search("Beratung", [{}]);
       expect(el.querySelector("li")).toBeNull();
+    });
+  });
+
+  describe("data-fuzzy-keywords attribute", () => {
+    it("takes keywords from data-fuzzy-keywords attribute", () => {
+      search("Schluungen", []);
+      expect(getFuzzyMatchMock).toHaveBeenCalledWith("Schluungen", [
+        "Schulungen",
+        "Werkzeuge",
+        "Kontakt",
+      ]);
     });
   });
 

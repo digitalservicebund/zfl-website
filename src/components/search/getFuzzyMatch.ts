@@ -1,20 +1,21 @@
-import { keywords } from "./keywords";
-
-export function getFuzzyMatch(term: string, maxDistance: number) {
+export function getFuzzyMatch(term: string, keywords: string[]) {
   const normalizedTerm = term.trim();
   if (!normalizedTerm) return;
 
+  const maxDistance =
+    normalizedTerm.length <= 3 ? 0 : Math.floor(normalizedTerm.length * 0.3);
+
   let bestKeyword: string | undefined;
-  let bestDistance: number = 10; //maybe equal to the longest word?
+  let bestDistance = maxDistance + 1;
 
-  keywords.forEach((keyword) => {
+  for (const keyword of keywords) {
     const distance = levenshteinDistance(normalizedTerm, keyword);
-
-    if (distance && distance < bestDistance && distance <= maxDistance) {
+    if (distance === 0) return; // full match: don't suggest anything
+    if (distance < bestDistance) {
       bestDistance = distance;
       bestKeyword = keyword;
     }
-  });
+  }
 
   return bestKeyword;
 }

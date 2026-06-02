@@ -14,11 +14,13 @@ type TypedHookCallback<T = unknown> = (arg: T) => void;
 class SearchModalSummary extends HTMLElement {
   private instance: Instance | null = null;
   private term = "";
+  private fuzzyKeywords: string[] = [];
 
   connectedCallback() {
     this.className = "pf-summary";
     const instanceName = this.getAttribute("instance") || "default";
     this.instance = getInstanceManager().getInstance(instanceName);
+    this.fuzzyKeywords = this.dataset.fuzzyKeywords?.split(".") ?? []; // data-fuzzy-keywords="keyword1.keyword2.keyword3"
 
     this.on("search", (term: string) => (this.term = term));
     this.on("loading", () => (this.textContent = ""));
@@ -33,7 +35,7 @@ class SearchModalSummary extends HTMLElement {
   private renderResults(result?: PagefindSearchResult) {
     if (!result || !this.term) return;
     const count = result.results?.length ?? 0;
-    const bestProposal = getFuzzyMatch(this.term, 3);
+    const bestProposal = getFuzzyMatch(this.term, this.fuzzyKeywords);
 
     this.renderResultCount(count, this.term);
 

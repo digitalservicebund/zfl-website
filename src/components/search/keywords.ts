@@ -1,41 +1,53 @@
 import { allRoutes } from "@/config/routes";
+import { getCollection } from "astro:content";
 
-const pageTitles = allRoutes
+// Generates keywords from page titles and content collections for fuzzy search suggestions.
+// Use in Astro frontmatter only
+
+const WORD_SPLIT_REGEX = /[ .–()]+/;
+const MIN_LENGTH = 3; // to exclude "der", "und", "die", etc.
+
+const pageTitleWords = allRoutes
   .filter((route) => !route.isStagingOnly)
-  .map((route) => route.title);
+  .flatMap((route) => route.title.split(WORD_SPLIT_REGEX));
 
-export const keywords = [
-  ...pageTitles,
-  "Regelung",
-  "Vorhaben",
-  "Gesetz",
-  "Gesetzgebung",
-  "Legistik",
-  "Rechtsetzung",
-  "Frühphase",
-  "digital",
-  "digitaltauglich",
-  "Digitalcheck",
-  "Normenkontrollrat",
-  "Europa",
-  "Interoperabilität",
-  "Hilfsmittel",
-  "Anleitung",
-  "Leitfaden",
-  "Methode",
-  "Prozess",
-  "Problem",
-  "Analyse",
-  "Visualisierung",
-  "Rulemap",
-  "Rechtsförmlichkeit",
-  "Folgen",
-  "Gesetzesfolgen",
-  "Bürokratie",
-  "Bürokratieabbau",
-  "Termine",
-  "Übungen",
-  "Modernisierungsagenda",
-  "Staatsmodernisierung",
-  "Angebot",
-];
+const werkzeuge = await getCollection("werkzeuge");
+const werkzeugTitleWords = werkzeuge.flatMap((werkzeug) =>
+  werkzeug.data.title.split(WORD_SPLIT_REGEX),
+);
+
+export const keywords = new Set(
+  [
+    ...pageTitleWords,
+    ...werkzeugTitleWords,
+    "Regelung",
+    "Vorhaben",
+    "Gesetz",
+    "Rechtsetzung",
+    "Frühphase",
+    "digital",
+    "digitaltauglich",
+    "Normenkontrollrat",
+    "Europa",
+    "Interoperabilität",
+    "Hilfsmittel",
+    "Anleitung",
+    "Leitfaden",
+    "Methode",
+    "Prozess",
+    "Problem",
+    "Analyse",
+    "Visualisierung",
+    "Rechtsförmlichkeit",
+    "Folgen",
+    "Gesetzesfolgen",
+    "Bürokratie",
+    "Bürokratieabbau",
+    "Termine",
+    "Übungen",
+    "Modernisierungsagenda",
+    "Staatsmodernisierung",
+    "Angebot",
+    "Schulung",
+  ].filter((keyword) => keyword.length >= MIN_LENGTH),
+);

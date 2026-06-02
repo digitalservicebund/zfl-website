@@ -33,9 +33,6 @@ fileignoreconfig:
   - filename: doc/routes.md
     allowed_patterns:
       - key
-  - filename: src/components/global/SearchModal.astro
-    allowed_patterns:
-      - keyboard
   - filename: src/config/routes.ts
     allowed_patterns:
       - key
@@ -76,16 +73,6 @@ fileignoreconfig:
       - key
   - filename: public/downloads/2026-02-Anleitung-Fokusgruppe.pdf
     checksum: 80bdb51a9b0cc47cf426516f333c0c59ccab9a1a68b2d1a412c560906e96f15a
-  - filename: src/components/search/keywords.ts
-    allowed_patterns:
-      - keyword
-  - filename: src/components/search/SearchModalSummary.test.ts
-    allowed_patterns:
-      - keywords
-  - filename: src/components/search/getFuzzyMatch.ts
-    allowed_patterns:
-      - keyword
-      - bestKeyword
 scopeconfig:
   - scope: node
 allowed_patterns:
@@ -105,4 +92,8 @@ allowed_patterns:
   - parentKey
   - getRouteByKey
   - keydown
+  - keyboard
+  - keyword
+  - Keyword
+  - fuzzyKeyword
 version: "1.0"

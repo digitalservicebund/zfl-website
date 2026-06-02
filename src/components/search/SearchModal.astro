@@ -2,6 +2,8 @@
 import PagefindConfig from "astro-pagefind/components/PagefindConfig.astro";
 import SearchTracking from "./SearchTracking.astro";
 import { isProduction } from "@/config/stage";
+import { keywords } from "./keywords";
+const keywordsDotSeparated = [...keywords].join(".");
 ---
 
 <>
@@ -11,7 +13,8 @@ import { isProduction } from "@/config/stage";
       <pagefind-input></pagefind-input>
     </pagefind-modal-header>
     <pagefind-modal-body>
-      <search-modal-summary></search-modal-summary>
+      <search-modal-summary data-fuzzy-keywords={keywordsDotSeparated}
+      ></search-modal-summary>
       <pagefind-results hide-sub-results></pagefind-results>
     </pagefind-modal-body>
     <pagefind-modal-footer>
