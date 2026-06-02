@@ -263,144 +263,115 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
       <p>E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a></p>
     </Hero>
   </main>
+</Layout>
 
-  <script>
-    import Alpine from "alpinejs";
-    const BOOKMARKED_TYPE = "Gemerkte Werkzeuge"; // TODO: DRY with frontmatter
+<script>
+  import Alpine from "alpinejs";
+  const BOOKMARKED_TYPE = "Gemerkte Werkzeuge"; // TODO: DRY with frontmatter
 
-    document.addEventListener("alpine:init", () => {
-      Alpine.data("werkzeuge", () => ({
-        filterType: null as string | null,
-        bookmarkedTools: [] as string[],
-        searchQuery: "",
+  document.addEventListener("alpine:init", () => {
+    Alpine.data("werkzeuge", () => ({
+      filterType: null as string | null,
+      bookmarkedTools: [] as string[],
+      searchQuery: "",
 
-        init() {
-          const stored = localStorage.getItem("bookmarkedTools");
-          if (stored) {
-            try {
-              this.bookmarkedTools = JSON.parse(stored) as string[];
-            } catch (e) {
-              console.error(
-                "Failed to parse bookmarked tools from localStorage",
-                e,
-              );
-            }
+      init() {
+        const stored = localStorage.getItem("bookmarkedTools");
+        if (stored) {
+          try {
+            this.bookmarkedTools = JSON.parse(stored) as string[];
+          } catch (e) {
+            console.error(
+              "Failed to parse bookmarked tools from localStorage",
+              e,
+            );
           }
-          this.$watch("bookmarkedTools", (value: string[]) => {
-            localStorage.setItem("bookmarkedTools", JSON.stringify(value));
-          });
-          this.$watch("searchQuery", (query: string) => {
-            CSS.highlights.clear();
-            if (!query.trim()) return;
-            const wrappers = (
-              this.$el as HTMLElement
-            ).querySelectorAll<HTMLElement>(".tool-wrapper");
-            const ranges: Range[] = [];
-            const q = query.toLowerCase();
-            for (const wrapper of wrappers) {
-              const walker = document.createTreeWalker(
-                wrapper,
-                NodeFilter.SHOW_TEXT,
-              );
-              let node: Node | null;
-              while ((node = walker.nextNode())) {
-                const text = node.textContent!.toLowerCase();
-                let idx = text.indexOf(q);
-                while (idx !== -1) {
-                  const range = new Range();
-                  range.setStart(node, idx);
-                  range.setEnd(node, idx + q.length);
-                  ranges.push(range);
-                  idx = text.indexOf(q, idx + 1);
-                }
+        }
+        this.$watch("bookmarkedTools", (value: string[]) => {
+          localStorage.setItem("bookmarkedTools", JSON.stringify(value));
+        });
+        this.$watch("searchQuery", (query: string) => {
+          CSS.highlights.clear();
+          if (!query.trim()) return;
+          const wrappers = (
+            this.$el as HTMLElement
+          ).querySelectorAll<HTMLElement>(".tool-wrapper");
+          const ranges: Range[] = [];
+          const q = query.toLowerCase();
+          for (const wrapper of wrappers) {
+            const walker = document.createTreeWalker(
+              wrapper,
+              NodeFilter.SHOW_TEXT,
+            );
+            let node: Node | null;
+            while ((node = walker.nextNode())) {
+              const text = node.textContent!.toLowerCase();
+              let idx = text.indexOf(q);
+              while (idx !== -1) {
+                const range = new Range();
+                range.setStart(node, idx);
+                range.setEnd(node, idx + q.length);
+                ranges.push(range);
+                idx = text.indexOf(q, idx + 1);
               }
             }
-            if (ranges.length) {
-              CSS.highlights.set("search-results", new Highlight(...ranges));
-            }
-          });
-        },
-
-        toggleFilterType(type: string) {
-          this.filterType = this.filterType === type ? null : type;
-        },
-
-        isCardVisible(
-          toolId: string,
-          types: string[],
-          titleAndDescription: string,
-        ) {
-          if (this.searchQuery) {
-            if (
-              !titleAndDescription
-                .toLowerCase()
-                .includes(this.searchQuery.toLowerCase())
-            )
-              return false;
           }
-          return (
-            this.filterType === null ||
-            types.includes(this.filterType) ||
-            (this.filterType === BOOKMARKED_TYPE &&
-              this.bookmarkedTools.includes(toolId))
+          if (ranges.length) {
+            CSS.highlights.set("search-results", new Highlight(...ranges));
+          }
+        });
+      },
+
+      toggleFilterType(type: string) {
+        this.filterType = this.filterType === type ? null : type;
+      },
+
+      isCardVisible(
+        toolId: string,
+        types: string[],
+        titleAndDescription: string,
+      ) {
+        if (this.searchQuery) {
+          if (
+            !titleAndDescription
+              .toLowerCase()
+              .includes(this.searchQuery.toLowerCase())
+          )
+            return false;
+        }
+        return (
+          this.filterType === null ||
+          types.includes(this.filterType) ||
+          (this.filterType === BOOKMARKED_TYPE &&
+            this.bookmarkedTools.includes(toolId))
+        );
+      },
+
+      toggleBookmark(toolId: string) {
+        if (this.bookmarkedTools.includes(toolId)) {
+          this.bookmarkedTools = this.bookmarkedTools.filter(
+            (id) => id !== toolId,
           );
-        },
+        } else {
+          this.bookmarkedTools.push(toolId);
+        }
+      },
+    }));
+  });
+</script>
 
-        toggleBookmark(toolId: string) {
-          if (this.bookmarkedTools.includes(toolId)) {
-            this.bookmarkedTools = this.bookmarkedTools.filter(
-              (id) => id !== toolId,
-            );
-          } else {
-            this.bookmarkedTools.push(toolId);
-          }
-        },
-      }));
-    });
-  </script>
-
-  <style>
-    .kern-badge {
-      &.interactive[data-inactive="true"] {
-        opacity: 0.4;
-      }
-    }
-    .kern-badge--gemerkte_werkzeuge {
-      border: 1px solid #000000;
-      color: #000000;
-    }
-    .kern-badge--methode {
-      background-color: #e6fba2;
-      border: 1px solid #5d7200;
-      --kern-color-layout-text-default: #3d4d00;
-    }
-    .kern-badge--tool {
-      background-color: #d5f6ff;
-      border: 1px solid #051d91;
-      --kern-color-layout-text-default: #051d91;
-    }
-    .kern-badge--leitfaden {
-      background-color: #fffdb2;
-      border: 1px solid #8f7400;
-      --kern-color-layout-text-default: #645000;
-    }
-    .kern-badge--ressource {
-      background-color: #e5cbf4;
-      border: 1px solid #8412af;
-      --kern-color-layout-text-default: #8412af;
-    }
-    ::highlight(search-results) {
-      background-color: #fde68a;
-      color: inherit;
-    }
-    .tool-wrapper:not([data-visible="true"]) {
-      display: none;
-    }
-    .no-results {
-      display: none;
-    }
-    .tool-grid:not(:has(.tool-wrapper[data-visible="true"])) .no-results {
-      display: block;
-    }
-  </style>
-</Layout>
+<style>
+  ::highlight(search-results) {
+    background-color: #fde68a;
+    color: inherit;
+  }
+  .tool-wrapper:not([data-visible="true"]) {
+    display: none;
+  }
+  .no-results {
+    display: none;
+  }
+  .tool-grid:not(:has(.tool-wrapper[data-visible="true"])) .no-results {
+    display: block;
+  }
+</style>

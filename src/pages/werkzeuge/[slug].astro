@@ -1,0 +1,74 @@
+---
+import { getCollection } from "astro:content";
+import { render } from "astro:content";
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import type { GetStaticPaths } from "astro";
+import Layout from "@/layouts/Layout.astro";
+import MediaText from "@/components/MediaText.astro";
+import { werkzeuge as werkzeugeRoute } from "@/config/routes";
+
+export const getStaticPaths = (async () => {
+  const werkzeuge = await getCollection("werkzeuge");
+  return werkzeuge.map((werkzeug) => ({
+    params: { slug: werkzeug.id },
+    props: { werkzeug },
+  }));
+}) satisfies GetStaticPaths;
+
+const { werkzeug } = Astro.props;
+const { title, description, image } = werkzeug.data;
+const { Content } = await render(werkzeug);
+---
+
+<Layout title={title}>
+  <main class="breakout-grid">
+    <section>
+      <MediaText>
+        <div class="mb-16 flex gap-8">
+          {
+            werkzeug.data.type.map((type) => (
+              <span class={`kern-badge kern-badge--${type.toLowerCase()}`}>
+                <span class="kern-label" data-pagefind-filter="toolType">
+                  {type}
+                </span>
+              </span>
+            ))
+          }
+        </div>
+        <h1>{title}</h1>
+        <p>{description}</p>
+        <div class="text-icon-muted flex items-center gap-8 py-16">
+          <Icon name="ic:baseline-auto-stories" class="h-32 w-32 shrink-0" />
+          <p class="kern-subline py-0">Quelle: {werkzeug.data.source}</p>
+        </div>
+        <div class="py-md gap-8">
+          <a
+            class="kern-btn kern-btn--primary"
+            href={werkzeug.data.externalUrl}
+          >
+            <span
+              class="kern-icon kern-icon--open-in-new kern-icon--default"
+              aria-hidden="true"></span>
+            <span class="kern-label">Werkzeug öffnen</span>
+          </a>
+          <a href={werkzeugeRoute.path} class="kern-btn kern-btn--secondary">
+            <span class="kern-label">alle Werkzeuge</span>
+          </a>
+        </div>
+        <Content />
+        {
+          image && (
+            <Image
+              slot="media"
+              data-pagefind-meta="image[src]"
+              src={image}
+              alt={title}
+              class="my-md"
+            />
+          )
+        }
+      </MediaText>
+    </section>
+  </main>
+</Layout>
