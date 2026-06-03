@@ -1,9 +1,11 @@
 ---
 import PagefindConfig from "astro-pagefind/components/PagefindConfig.astro";
 import SearchTracking from "./SearchTracking.astro";
-import { isProduction } from "@/config/stage";
+import { isProduction, isDevelopment } from "@/config/stage";
 import { keywords } from "./keywords";
+
 const keywordsDotSeparated = [...keywords].join(".");
+const imgPrefix = isDevelopment ? "/dist" : "";
 ---
 
 <>
@@ -15,7 +17,36 @@ const keywordsDotSeparated = [...keywords].join(".");
     <pagefind-modal-body>
       <search-modal-summary data-fuzzy-keywords={keywordsDotSeparated}
       ></search-modal-summary>
-      <pagefind-results hide-sub-results show-images></pagefind-results>
+      <pagefind-results hide-sub-results show-images>
+        <script
+          is:inline
+          type="text/pagefind-template"
+          set:html={`
+            <li class="pf-result">
+              <div class="pf-result-card">
+                {{#if and(options.show_images, meta.image)}}
+                <img class="pf-result-image" src="${imgPrefix}{{ meta.image | resolveUrl(meta.url | default(url)) }}" alt="{{ meta.image_alt | default(meta.title) }}">
+                {{/if}}
+                <div class="pf-result-content">
+                  {{#if meta.toolType}}
+                  <div class="mb-8">
+                    <span class="kern-badge kern-badge--small kern-badge--{{ meta.toolType | lowercase }}">
+                      <span class="kern-label">{{ meta.toolType }}</span>
+                    </span>
+                  </div>
+                  {{/if}}
+                  <p class="pf-result-title">
+                    <a class="pf-result-link" href="{{ meta.url | default(url) | safeUrl }}"{{#if options.link_target}} target="{{ options.link_target }}"{{/if}}{{#if eq(options.link_target, "_blank")}} rel="noopener"{{/if}}>{{ meta.title }}</a>
+                  </p>
+                  {{#if excerpt}}
+                  <p class="pf-result-excerpt">{{+ excerpt +}}</p>
+                  {{/if}}
+                </div>
+              </div>
+            </li>
+        `}
+        />
+      </pagefind-results>
     </pagefind-modal-body>
     <pagefind-modal-footer>
       <pagefind-keyboard-hints></pagefind-keyboard-hints>
