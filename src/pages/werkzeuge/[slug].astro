@@ -5,6 +5,7 @@ import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
 import type { GetStaticPaths } from "astro";
 import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
 import MediaText from "@/components/MediaText.astro";
 import { werkzeuge as werkzeugeRoute } from "@/config/routes";
 
@@ -23,7 +24,7 @@ const { Content } = await render(werkzeug);
 
 <Layout title={title}>
   <main class="breakout-grid">
-    <section>
+    <Hero level="sub" class="bg-transparent">
       <MediaText>
         <div class="mb-16 flex gap-8">
           {
@@ -46,7 +47,7 @@ const { Content } = await render(werkzeug);
           <Icon name="ic:baseline-auto-stories" class="h-32 w-32 shrink-0" />
           <p class="kern-subline py-0">Quelle: {werkzeug.data.source}</p>
         </div>
-        <div class="py-md flex gap-8">
+        <div class="py-md flex gap-8" data-pagefind-ignore>
           <a
             class="kern-btn kern-btn--primary"
             href={werkzeug.data.externalUrl}
@@ -60,19 +61,15 @@ const { Content } = await render(werkzeug);
             <span class="kern-label">alle Werkzeuge</span>
           </a>
         </div>
-        <Content />
-        {
-          image && (
-            <Image
-              slot="media"
-              data-pagefind-meta="image[src]"
-              src={image}
-              alt={title}
-              class="my-md"
-            />
-          )
-        }
+        {image && <Image slot="media" src={image} alt={title} class="my-md" />}
       </MediaText>
-    </section>
+    </Hero>
+    {
+      werkzeug.body && (
+        <section>
+          <Content />
+        </section>
+      )
+    }
   </main>
 </Layout>
