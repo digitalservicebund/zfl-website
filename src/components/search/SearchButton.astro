@@ -1,13 +1,24 @@
 ---
+import { WERKZEUGE_TYPES } from "@/content.config";
+
 interface Props {
   class?: string;
+  onlyWerkzeuge?: boolean;
 }
 
-const { class: className } = Astro.props;
+const { class: className, onlyWerkzeuge } = Astro.props;
 ---
 
 <custom-modal-trigger
-  class:list={["cursor-pointer", "select-none", "gap-8", className]}
+  class:list={[
+    "flex",
+    "items-center",
+    "cursor-pointer",
+    "select-none",
+    "gap-8",
+    className,
+  ]}
+  data-filter-types={onlyWerkzeuge && WERKZEUGE_TYPES.join(".")}
 >
   <span
     class="kern-icon kern-icon--search kern-icon--default"
@@ -23,7 +34,15 @@ const { class: className } = Astro.props;
   class CustomModalTrigger extends HTMLElement {
     handleButtonClick() {
       const instance = getInstanceManager().getInstance("default");
-      const modals = (instance?.getUtilities("modal") || []) as PagefindModal[];
+      instance.searchFilters = this.dataset.filterTypes
+        ? {
+            pageType: {
+              // @ts-expect-error : instance.searchFilters type doesn't know "any" operator
+              any: this.dataset.filterTypes.split("."),
+            },
+          }
+        : {};
+      const modals = (instance.getUtilities("modal") || []) as PagefindModal[];
       const modal = modals.find((m) => (m as HTMLElement).isConnected);
       modal?.open();
     }

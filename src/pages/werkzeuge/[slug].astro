@@ -30,10 +30,14 @@ const { Content } = await render(werkzeug);
           {
             werkzeug.data.type.map((type, i) => {
               /* pagefind: take only first, as metadata can be only a single string */
-              const pfTypeMeta = i == 0 && "toolType";
+              const pfTypeMeta = i == 0 && "pageType";
               return (
                 <span class={`kern-badge kern-badge--${type.toLowerCase()}`}>
-                  <span class="kern-label" data-pagefind-meta={pfTypeMeta}>
+                  <span
+                    class="kern-label"
+                    data-pagefind-meta={pfTypeMeta}
+                    data-pagefind-filter="pageType"
+                  >
                     {type}
                   </span>
                 </span>
