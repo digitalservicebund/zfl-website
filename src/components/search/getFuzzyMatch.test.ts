@@ -32,7 +32,7 @@ describe("getFuzzyMatch", () => {
     });
   });
 
-  describe("zero tolerance for short terms (≤ 3 chars)", () => {
+  describe("early return for short terms (≤ 3 chars)", () => {
     it("returns undefined for a 3-char term with 1 edit", () => {
       expect(getFuzzyMatch("FOM", keywords)).toBeUndefined(); // FIM, distance 1
     });

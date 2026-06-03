@@ -1,9 +1,9 @@
 export function getFuzzyMatch(term: string, keywords: string[]) {
   const normalizedTerm = term.trim();
-  if (!normalizedTerm) return;
+  const isShortTerm = normalizedTerm.length <= 3;
+  if (!normalizedTerm || isShortTerm) return;
 
-  const maxDistance =
-    normalizedTerm.length <= 3 ? 0 : Math.floor(normalizedTerm.length * 0.3);
+  const maxDistance = Math.floor(normalizedTerm.length * 0.3);
 
   let bestKeyword: string | undefined;
   let bestDistance = maxDistance + 1;
