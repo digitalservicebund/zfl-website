@@ -1,26 +1,34 @@
 <script>
   import posthog from "posthog-js";
+  import { getInstanceManager } from "@pagefind/component-ui";
+  import type { PagefindSearchResult } from "@pagefind/component-ui";
 
-  const inputElement =
-    document.querySelector<HTMLInputElement>("input.pf-input");
-
-  function debounce(func: (v: string) => void, delay: number) {
-    let timeoutId: NodeJS.Timeout;
-    return (v: string) => {
+  function debounce<TArgs extends unknown[]>(
+    func: (...args: TArgs) => void,
+    delay: number,
+  ) {
+    let timeoutId: ReturnType<typeof setTimeout>;
+    return (...args: TArgs) => {
       clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => func(v), delay);
+      timeoutId = setTimeout(() => func(...args), delay);
     };
   }
 
-  const trackSearch = debounce((value: string) => {
+  let term = "";
+
+  const trackSearch = debounce((value: string, results: number) => {
     const query = value.trim();
     if (query.length > 3) {
-      posthog.capture("search_input", { query });
+      posthog.capture("search_input", { query, results });
     }
-  }, 500);
+  }, 1000);
 
-  inputElement?.addEventListener("input", (e) => {
-    if (!(e.target instanceof HTMLInputElement)) return;
-    trackSearch(e.target.value);
+  const instance = getInstanceManager().getInstance("default");
+  instance.on("search", (query) => {
+    term = query as string;
+  });
+  instance.on("results", (result) => {
+    const results = (result as PagefindSearchResult).results;
+    trackSearch(term, results.length);
   });
 </script>
