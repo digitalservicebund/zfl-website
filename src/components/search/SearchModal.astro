@@ -6,10 +6,11 @@ import { keywords } from "./keywords";
 
 const keywordsDotSeparated = [...keywords].join(".");
 const imgPrefix = isDevelopment ? "/dist" : "";
+const highlightParam = "search";
 ---
 
 <>
-  <PagefindConfig highlight-param="highlight" />
+  <PagefindConfig highlight-param={highlightParam} />
   <pagefind-modal>
     <pagefind-modal-header>
       <pagefind-input></pagefind-input>
@@ -64,13 +65,26 @@ const imgPrefix = isDevelopment ? "/dist" : "";
 <script
   is:inline
   type="module"
-  define:vars={{ baseUrl: import.meta.env.BASE_URL }}
+  define:vars={{
+    baseUrl: import.meta.env.BASE_URL,
+    highlightParam,
+  }}
 >
   // change event to "astro:page-load" if using Astro's ClientRouter
   document.addEventListener("DOMContentLoaded", async () => {
     const base = baseUrl === "/" ? "" : baseUrl;
     await import(`${base}/pagefind/pagefind-highlight.js`);
-    new PagefindHighlight({ highlightParam: "highlight" });
+    new PagefindHighlight({
+      highlightParam,
+      markOptions: {
+        className: "pagefind-highlight",
+        exclude: [
+          "[data-pagefind-ignore]",
+          "[data-pagefind-ignore] *",
+          ".no-highlight *",
+        ],
+      },
+    });
     const firstMatch = document.querySelector("mark.pagefind-highlight");
     firstMatch?.scrollIntoView({ behavior: "smooth", block: "center" });
   });
