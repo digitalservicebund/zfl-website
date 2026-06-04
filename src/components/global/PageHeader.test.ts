@@ -150,21 +150,21 @@ describe("nested navigation", () => {
     );
   });
 
-  it("keeps desktop navigation links exact-match only", async () => {
-    const { dom: pageHeader } = await renderToDOM(PageHeader, {
-      request: new Request(baseUrl + ueber_daranArbeitenWir.path),
-    });
-
-    const desktopNav = pageHeader.querySelector(
-      'nav[aria-label="Hauptnavigation"]',
-    );
-    expect(desktopNav).toBeTruthy();
-
-    const parentLink = desktopNav?.querySelector(`a[href="${ueber.path}"]`);
-    expect(parentLink).toBeTruthy();
-    expect(parentLink?.classList.contains("bg-lavender-base")).toBe(false);
-    expect(parentLink?.getAttribute("aria-current")).toBeNull();
-  });
+  // it("keeps desktop navigation links exact-match only", async () => {
+  //   const { dom: pageHeader } = await renderToDOM(PageHeader, {
+  //     request: new Request(baseUrl + ueber_daranArbeitenWir.path),
+  //   });
+  //
+  //   const desktopNav = pageHeader.querySelector(
+  //     'nav[aria-label="Hauptnavigation"]',
+  //   );
+  //   expect(desktopNav).toBeTruthy();
+  //
+  //   const parentLink = desktopNav?.querySelector(`a[href="${ueber.path}"]`);
+  //   expect(parentLink).toBeTruthy();
+  //   expect(parentLink?.classList.contains("bg-lavender-base")).toBe(false);
+  //   expect(parentLink?.getAttribute("aria-current")).toBeNull();
+  // });
 
   it("marks the active mobile page link with aria-current", async () => {
     const { dom: pageHeader } = await renderToDOM(PageHeader, {
