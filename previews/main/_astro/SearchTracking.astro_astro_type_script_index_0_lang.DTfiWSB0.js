@@ -1,0 +1,1 @@
+import{t as e}from"./component-ui.DTSeg26Z.js";import{t}from"./module.Cp21gUsC.js";function n(e,t){let n;return(...r)=>{clearTimeout(n),n=setTimeout(()=>e(...r),t)}}var r=``,i=n((e,n)=>{let r=e.trim();r.length>3&&t.capture(`search_input`,{query:r,results:n})},1e3),a=e().getInstance(`default`);a.on(`search`,e=>{r=e}),a.on(`results`,e=>{let t=e.results;i(r,t.length)});
