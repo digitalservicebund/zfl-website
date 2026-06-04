@@ -1,1 +1,0 @@
-import{t as e}from"./module.Cp21gUsC.js";e.init(`phc_BqKtG4bqKnrrhuUrplewJAgKOWxcm9ZE2W95HPYzbee`,{api_host:`/ph-relay`,ui_host:`https://eu.posthog.com`,defaults:`2025-05-24`,persistence:`memory`,cookieless_mode:`always`,enable_heatmaps:!0,capture_dead_clicks:!0});
