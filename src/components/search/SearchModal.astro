@@ -17,32 +17,36 @@ const imgPrefix = isDevelopment ? "/dist" : "";
     <pagefind-modal-body>
       <search-modal-summary data-fuzzy-keywords={keywordsDotSeparated}
       ></search-modal-summary>
-      <pagefind-results hide-sub-results show-images>
+      <pagefind-results hide-sub-results>
         <script
           is:inline
           type="text/pagefind-template"
           set:html={`
             <li class="pf-result">
-              <div class="pf-result-card">
+              <article class="kern-card kern-card--interactive kern-card--small"> 
                 {{#if and(options.show_images, meta.image)}}
-                <img class="pf-result-image" src="${imgPrefix}{{ meta.image | resolveUrl(meta.url | default(url)) }}" alt="{{ meta.image_alt | default(meta.title) }}">
+                <div class="kern-card__media">
+                  <img src="${imgPrefix}{{ meta.image | resolveUrl(meta.url | default(url)) }}" alt="{{ meta.image_alt | default(meta.title) }}">
+                </div>
                 {{/if}}
-                <div class="pf-result-content">
-                  <p class="pf-result-title">
-                    <a class="pf-result-link" href="{{ meta.url | default(url) | safeUrl }}"{{#if options.link_target}} target="{{ options.link_target }}"{{/if}}{{#if eq(options.link_target, "_blank")}} rel="noopener"{{/if}}>{{ meta.title }}</a>
-                  </p>
+                <div class="kern-card__container">
+                  <header class="kern-card__header">
+                    <hgroup>
+                      <p class="kern-preline mb-12">
+                        <span class="kern-badge kern-badge--small kern-badge--{{ meta.pageType | lowercase }}">
+                          <span class="kern-label">{{ meta.pageType }}</span>
+                        </span>
+                      </p>
+                      <h2 class="kern-title"><a href="{{ meta.url | default(url) | safeUrl }}" class="kern-link--stretched">{{ meta.title }}</a></h2>
+                    </hgroup>
+                  </header>
                   {{#if excerpt}}
-                  <p class="pf-result-excerpt">{{+ excerpt +}}</p>
-                  {{/if}}
-                  {{#if meta.pageType}}
-                  <div class="mt-8">
-                    <span class="kern-badge kern-badge--small kern-badge--{{ meta.pageType | lowercase }}">
-                      <span class="kern-label">{{ meta.pageType }}</span>
-                    </span>
-                  </div>
+                  <section class="kern-card__body result-excerpt">
+                    <p class="kern-body">{{+ excerpt +}}</p>
+                  </section>
                   {{/if}}
                 </div>
-              </div>
+              </article>
             </li>
         `}
         />
@@ -104,7 +108,7 @@ const imgPrefix = isDevelopment ? "/dist" : "";
     --pf-border-radius: 0.25rem; /* kern-metric-border-radius-default / kern-4 */
 
     /* Modal */
-    --pf-modal-max-width: 720px;
+    /* --pf-modal-max-width: 600px; */
   }
 
   :is(*, #\#):is(*, #\#) :is([class^="pf-"]) {
@@ -121,12 +125,16 @@ const imgPrefix = isDevelopment ? "/dist" : "";
       "Fira Sans", sans-serif; /* kern-typography-font-family-fira-sans */
   }
 
-  :is(*, #\#):is(*, #\#):is(*, #\#) .pf-result-excerpt {
+  .result-excerpt {
     white-space: normal;
     mark {
       background-color: oklch(93.09% 0.0428 170.49)
         /* kern-color-turquois-050 */;
     }
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   :is(*, #\#):is(*, #\#):is(*, #\#) .pf-keyboard-hint,
