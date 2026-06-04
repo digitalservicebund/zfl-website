@@ -78,15 +78,20 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
       <!-- Desktop Navigation -->
       <nav class="hidden h-full min-[900px]:flex" aria-label="Hauptnavigation">
         {
-          headerNavigation.map((route) => (
-            <a
-              href={route.path}
-              class={navItemStyle("main", currentPath === route.path)}
-              aria-current={currentPath === route.path ? "page" : undefined}
-            >
-              {getRouteLabel(route)}
-            </a>
-          ))
+          headerNavigation.map((route) => {
+            const isActive =
+              currentPath === route.path ||
+              currentPath.startsWith(route.path + "/");
+            return (
+              <a
+                href={route.path}
+                class={navItemStyle("main", isActive)}
+                aria-current={isActive ? "page" : undefined}
+              >
+                {getRouteLabel(route)}
+              </a>
+            );
+          })
         }
       </nav>
       {!isProduction && <SearchButton class={navItemStyle("main")} />}
