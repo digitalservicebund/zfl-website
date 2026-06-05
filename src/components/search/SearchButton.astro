@@ -4,9 +4,10 @@ import { twMerge } from "tailwind-merge";
 interface Props {
   class?: string;
   instance?: string;
+  keyboardToggle?: boolean;
 }
 
-const { class: className, instance } = Astro.props;
+const { class: className, instance, keyboardToggle } = Astro.props;
 ---
 
 <custom-modal-trigger
@@ -15,6 +16,7 @@ const { class: className, instance } = Astro.props;
     className,
   )}
   instance={instance}
+  {...keyboardToggle ? { "keyboard-toggle": "true" } : {}}
 >
   <span
     class="kern-icon kern-icon--search kern-icon--default"
@@ -27,16 +29,25 @@ const { class: className, instance } = Astro.props;
   import type { PagefindModal } from "@pagefind/component-ui";
 
   class CustomModalTrigger extends HTMLElement {
-    handleButtonClick() {
+    toggleModal() {
       const instanceName = this.getAttribute("instance") || "default";
       const instance = getInstanceManager().getInstance(instanceName);
       const modals = (instance.getUtilities("modal") || []) as PagefindModal[];
       const modal = modals.find((m) => (m as HTMLElement).isConnected);
-      modal?.open();
+      if (modal?.isOpen) modal?.close();
+      else modal?.open();
+    }
+
+    handleKeyDown(event: KeyboardEvent) {
+      const isCmdOrCtrl = event.metaKey || event.ctrlKey;
+      const isKPressed = event.key.toLowerCase() === "k";
+      if (isCmdOrCtrl && isKPressed) this.toggleModal();
     }
 
     connectedCallback() {
-      this.addEventListener("click", this.handleButtonClick);
+      this.addEventListener("click", this.toggleModal.bind(this));
+      if (this.getAttribute("keyboard-toggle") === "true")
+        document.addEventListener("keydown", this.handleKeyDown.bind(this));
     }
   }
 

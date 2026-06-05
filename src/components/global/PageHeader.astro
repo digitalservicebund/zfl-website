@@ -94,7 +94,11 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
           })
         }
       </nav>
-      {!isProduction && <SearchButton class={navItemStyle("main")} />}
+      {
+        !isProduction && (
+          <SearchButton class={navItemStyle("main")} keyboardToggle />
+        )
+      }
 
       <!-- Mobile Menu Toggle -->
       <div class="flex h-full min-[900px]:hidden">
