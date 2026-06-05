@@ -28,6 +28,7 @@ export const allKeywords = new Set(
     "Frühphase",
     "digital",
     "digitaltauglich",
+    "Digitalisierung",
     "Normenkontrollrat",
     "Europa",
     "Interoperabilität",
