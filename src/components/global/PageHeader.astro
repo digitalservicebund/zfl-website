@@ -42,7 +42,7 @@ const mobileMenuId = "page-header-mobile-menu";
 function navItemStyle(variant: "main" | "sub" = "main", active = false) {
   return twMerge(
     "link-unstyled border-transparent flex items-center hover:bg-lavender-base",
-    variant === "main" ? "h-full border-b-4 px-16" : "border-l-4 p-16",
+    variant === "main" ? "h-full border-b-4 pt-4 px-16" : "border-l-4 p-16",
     active && "border-cosmic-blue-base bg-lavender-base",
   );
 }
@@ -71,7 +71,7 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
         alt="Logo des Bundes"
         class="hidden w-56 forced-colors:dark:block"
       />
-      <p class="text-xl font-bold max-[1050px]:hidden">Zentrum für Legistik</p>
+      <p class="text-xl font-bold max-[1090px]:hidden">Zentrum für Legistik</p>
     </a>
 
     <div class="flex">
