@@ -16,12 +16,16 @@ interface Props {
   title: string;
   description?: string;
   excludeFromSearch?: boolean;
+  pagefindWeight?: number;
 }
+
 const {
   title: pageTitle,
   description,
-  excludeFromSearch = false,
+  excludeFromSearch,
+  pagefindWeight,
 } = Astro.props;
+
 const siteName = "Zentrum für Legistik";
 const title = pageTitle ? `${pageTitle} — ${siteName}` : siteName;
 const SEOImage = `${Astro.url.origin}/SEO_ZfL.png`;
@@ -79,10 +83,14 @@ const defaultDescription =
     }}
   />
 
-  <body class="relative" data-pagefind-default-meta="pageType:Seite">
+  <body class="relative">
     {showDebugGrid && <DebugGrid />}
     <PageHeader />
-    <div {...!excludeFromSearch && { "data-pagefind-body": "" }}>
+    <div
+      data-pagefind-default-meta="pageType:Seite"
+      {...!excludeFromSearch && { "data-pagefind-body": "" }}
+      {...pagefindWeight && { "data-pagefind-weight": pagefindWeight }}
+    >
       {
         showSectionSidebar ? (
           <div class="h-full min-[900px]:grid min-[900px]:grid-cols-[240px_minmax(0,1fr)]">
