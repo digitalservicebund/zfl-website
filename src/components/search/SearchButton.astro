@@ -34,6 +34,8 @@ const { class: className, onlyWerkzeuge } = Astro.props;
   class CustomModalTrigger extends HTMLElement {
     handleButtonClick() {
       const instance = getInstanceManager().getInstance("default");
+      // @ts-expect-error : instance._userTranslations is private, but the offical API intance.setTranslations is broken
+      instance._userTranslations = { keyboard_clear: "schließen" }; // Esc always closes the modal
       instance.searchFilters = this.dataset.filterTypes
         ? {
             pageType: {
