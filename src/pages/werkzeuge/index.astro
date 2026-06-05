@@ -4,10 +4,13 @@ import Layout from "@/layouts/Layout.astro";
 import Modal from "@/components/Modal.astro";
 import KernCard from "@/components/KernCard.astro";
 import SearchButton from "@/components/search/SearchButton.astro";
+import SearchModal from "@/components/search/SearchModal.astro";
+import { werkzeugKeywords } from "@/components/search/keywords";
 import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
 import { isProduction } from "@/config/stage";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
+import { WERKZEUGE_TYPES } from "@/content.config";
 
 export const frontmatter = {
   title: "Werkzeuge",
@@ -51,8 +54,8 @@ const categories = [
   },
 ];
 
-const types = ["Methode", "Tool", "Leitfaden", "Ressource"] as const;
 const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
+const PAGEFIND_INSTANCE = "werkzeuge";
 ---
 
 <Layout title={frontmatter.title} description={description}>
@@ -97,7 +100,7 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
         <div class="flex flex-wrap items-center gap-8 lg:gap-16">
           <p class="kern-label my-0 py-0">Filtern nach:</p>
           {
-            [BOOKMARKED_TYPE, ...types].map((type) => (
+            [BOOKMARKED_TYPE, ...WERKZEUGE_TYPES].map((type) => (
               <button class="h-32" @click={`toggleFilterType('${type}')`}>
                 <span
                   class={`kern-badge kern-badge--${type.replaceAll(" ", "_").toLowerCase()} interactive`}
@@ -128,7 +131,7 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
             <Icon name="ic:outline-help-outline" class="h-32 w-32" />
           </button>
         </div>
-        {!isProduction && <SearchButton onlyWerkzeuge />}
+        {!isProduction && <SearchButton instance={PAGEFIND_INSTANCE} />}
       </div>
     </div>
 
@@ -245,6 +248,13 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
       <p>Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a></p>
       <p>E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a></p>
     </Hero>
+
+    <SearchModal
+      instance={PAGEFIND_INSTANCE}
+      placeholder="Suche Werkzeuge"
+      fuzzyKeywords={werkzeugKeywords}
+      filterTypes={[...WERKZEUGE_TYPES]}
+    />
   </main>
 </Layout>
 

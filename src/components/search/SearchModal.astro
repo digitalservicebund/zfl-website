@@ -1,181 +1,77 @@
 ---
-import PagefindConfig from "astro-pagefind/components/PagefindConfig.astro";
-import SearchTracking from "./SearchTracking.astro";
+import PagefindConfig from "./PagefindConfig.astro";
 import { isProduction, isDevelopment } from "@/config/stage";
-import { keywords } from "./keywords";
+import { allKeywords } from "./keywords";
+import "./styles.css";
 
+interface Props {
+  instance?: string;
+  placeholder?: string;
+  fuzzyKeywords?: string[];
+  filterTypes?: string[];
+}
+
+const { instance, placeholder, filterTypes, fuzzyKeywords } = Astro.props;
+const keywords = fuzzyKeywords || allKeywords;
 const keywordsDotSeparated = [...keywords].join(".");
 const imgPrefix = isDevelopment ? "/dist" : "";
-const highlightParam = "search";
 ---
 
-<>
-  <PagefindConfig highlight-param={highlightParam} excerpt-length="20" />
-  <pagefind-modal>
-    <pagefind-modal-header>
-      <pagefind-input></pagefind-input>
-    </pagefind-modal-header>
-    <pagefind-modal-body>
-      <search-modal-summary data-fuzzy-keywords={keywordsDotSeparated}
-      ></search-modal-summary>
-      <pagefind-results hide-sub-results>
-        <script
-          is:inline
-          type="text/pagefind-template"
-          set:html={`
-            <li class="pf-result">
-              <article class="kern-card kern-card--interactive kern-card--small"> 
-                {{#if and(options.show_images, meta.image)}}
-                <div class="kern-card__media">
-                  <img src="${imgPrefix}{{ meta.image | resolveUrl(meta.url | default(url)) }}" alt="{{ meta.image_alt | default(meta.title) }}">
-                </div>
+<PagefindConfig
+  instance={instance}
+  filterTypes={filterTypes}
+  excerpt-length="20"
+/>
+<pagefind-modal instance={instance}>
+  <pagefind-modal-header>
+    <pagefind-input placeholder={placeholder} instance={instance}
+    ></pagefind-input>
+  </pagefind-modal-header>
+  <pagefind-modal-body>
+    <search-modal-summary
+      data-fuzzy-keywords={keywordsDotSeparated}
+      instance={instance}></search-modal-summary>
+    <pagefind-results hide-sub-results instance={instance}>
+      <script
+        is:inline
+        type="text/pagefind-template"
+        set:html={`
+          <li class="pf-result">
+            <article class="kern-card kern-card--interactive kern-card--small">
+              {{#if and(options.show_images, meta.image)}}
+              <div class="kern-card__media">
+                <img src="${imgPrefix}{{ meta.image | resolveUrl(meta.url | default(url)) }}" alt="{{ meta.image_alt | default(meta.title) }}">
+              </div>
+              {{/if}}
+              <div class="kern-card__container">
+                <header class="kern-card__header">
+                  <hgroup>
+                    <p class="pb-10">
+                      <span class="kern-badge kern-badge--small kern-badge--{{ meta.pageType | lowercase }}">
+                        <span class="kern-label">{{ meta.pageType }}</span>
+                      </span>
+                    </p>
+                    <h2 class="kern-title"><a href="{{ meta.url | default(url) | safeUrl }}" class="kern-link--stretched">{{ meta.title }}</a></h2>
+                  </hgroup>
+                </header>
+                {{#if excerpt}}
+                <section class="kern-card__body result-excerpt">
+                  <p class="kern-body">{{+ excerpt +}}</p>
+                </section>
                 {{/if}}
-                <div class="kern-card__container">
-                  <header class="kern-card__header">
-                    <hgroup>
-                      <p class="pb-10">
-                        <span class="kern-badge kern-badge--small kern-badge--{{ meta.pageType | lowercase }}">
-                          <span class="kern-label">{{ meta.pageType }}</span>
-                        </span>
-                      </p>
-                      <h2 class="kern-title"><a href="{{ meta.url | default(url) | safeUrl }}" class="kern-link--stretched">{{ meta.title }}</a></h2>
-                    </hgroup>
-                  </header>
-                  {{#if excerpt}}
-                  <section class="kern-card__body result-excerpt">
-                    <p class="kern-body">{{+ excerpt +}}</p>
-                  </section>
-                  {{/if}}
-                </div>
-              </article>
-            </li>
+              </div>
+            </article>
+          </li>
         `}
-        />
-      </pagefind-results>
-    </pagefind-modal-body>
-    <pagefind-modal-footer>
-      <pagefind-keyboard-hints></pagefind-keyboard-hints>
-    </pagefind-modal-footer>
-  </pagefind-modal>
-  {isProduction && <SearchTracking />}
-</>
+      />
+    </pagefind-results>
+  </pagefind-modal-body>
+  <pagefind-modal-footer>
+    <pagefind-keyboard-hints instance={instance}></pagefind-keyboard-hints>
+  </pagefind-modal-footer>
+</pagefind-modal>
+{isProduction && <search-tracking instance={instance} />}
 
 <script src="./SearchModalSummary.ts"></script>
-
-<script
-  is:inline
-  type="module"
-  define:vars={{
-    baseUrl: import.meta.env.BASE_URL,
-    highlightParam,
-  }}
->
-  // change event to "astro:page-load" if using Astro's ClientRouter
-  document.addEventListener("DOMContentLoaded", async () => {
-    const base = baseUrl === "/" ? "" : baseUrl;
-    await import(`${base}/pagefind/pagefind-highlight.js`);
-    new PagefindHighlight({
-      highlightParam,
-      markOptions: {
-        className: "pagefind-highlight",
-        exclude: [
-          "[data-pagefind-ignore]",
-          "[data-pagefind-ignore] *",
-          ".no-highlight *",
-        ],
-      },
-    });
-    const firstMatch = document.querySelector("mark.pagefind-highlight");
-    firstMatch?.scrollIntoView({ behavior: "smooth", block: "center" });
-  });
-</script>
-
-<style is:global>
-  /* https://pagefind.app/docs/css-variables/ */
-
-  :root {
-    /* Colors — kern semantic tokens are compiled away by Lightning CSS,
-       so we use the resolved primitive values directly */
-    --pf-text: oklch(20.23% 0.0321 277.67); /* kern-color-neutral-950 */
-    --pf-text-secondary: oklch(
-      46.61% 0.0574 276.44
-    ); /* kern-color-neutral-650 */
-    --pf-text-muted: oklch(46.61% 0.0574 276.44); /* kern-color-neutral-650 */
-    --pf-border: var(--kern-color-decorative-border-contextual, #c0c3d5);
-    --pf-outline-focus: var(--color-cosmic-blue-base);
-    --pf-mark: oklch(20.23% 0.0321 277.67); /* kern-color-neutral-950 */
-    --pf-skeleton: var(--color-lavender-200);
-
-    /* Typography */
-    --pf-font:
-      "Fira Sans", sans-serif; /* kern-typography-font-family-fira-sans */
-
-    /* Sizing */
-    --pf-input-font-size: 1.125rem; /* kern-typography-font-size-medium-static */
-    --pf-input-height: 43px;
-    --pf-result-title-font-size: 1.125rem; /* kern-typography-font-size-medium-static */
-    --pf-result-excerpt-font-size: 1rem; /* kern-typography-font-size-small-static */
-    --pf-results-gap: 1rem; /* kern-metric-space-default / kern-16 */
-    --pf-summary-font-size: 1rem; /* kern-typography-font-size-small-static */
-
-    /* Results layout */
-    --pf-border-radius: 0.25rem; /* kern-metric-border-radius-default / kern-4 */
-
-    /* Modal */
-    /* --pf-modal-max-width: 600px; */
-    :is(*, #\#):is(*, #\#) :is([class^="pf-"]) {
-      -webkit-font-smoothing: antialiased;
-    }
-
-    :is(*, #\#):is(*, #\#):is(*, #\#) dialog.pf-modal {
-      border-radius: 0.5rem; /* kern-metric-border-radius-large / kern-8 */
-    }
-
-    :is(*, #\#):is(*, #\#):is(*, #\#) .pf-trigger-text {
-      font-size: 1.125rem; /* kern-typography-font-size-medium-static */
-      font-family:
-        "Fira Sans", sans-serif; /* kern-typography-font-family-fira-sans */
-    }
-
-    .result-excerpt {
-      white-space: normal;
-      mark {
-        background-color: oklch(93.09% 0.0428 170.49)
-          /* kern-color-turquois-050 */;
-      }
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    :is(*, #\#):is(*, #\#):is(*, #\#) .pf-keyboard-hint,
-    :is(*, #\#):is(*, #\#):is(*, #\#) .pf-input-clear,
-    :is(*, #\#):is(*, #\#):is(*, #\#) .pf-keyboard-key {
-      font-size: 1rem; /* kern-typography-font-size-small-static */
-    }
-
-    :is(*, #\#):is(*, #\#):is(*, #\#) .pf-keyboard-key {
-      height: 24px;
-      font-weight: normal;
-    }
-
-    :is(*, #\#):is(*, #\#):is(*, #\#) .pf-modal-footer {
-      padding: 1rem; /* kern-metric-space-default */
-    }
-
-    :is(*, #\#):is(*, #\#):is(*, #\#) .pf-modal-body .pf-summary {
-      display: block;
-      margin: 0.5rem 0; /* kern-metric-space-small */
-    }
-
-    :is(*, #\#):is(*, #\#):is(*, #\#) .pf-error {
-      display: none; /* using custom error messages in SearchModalSummary.ts */
-    }
-
-    mark.pagefind-highlight {
-      background-color: oklch(93.09% 0.0428 170.49)
-        /* kern-color-turquois-050 */;
-    }
-  }
-</style>
+<script src="./SearchTracking.ts"></script>
+<script src="./SearchHighlight.ts"></script>

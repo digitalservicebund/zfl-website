@@ -7,19 +7,20 @@ import { getCollection } from "astro:content";
 const WORD_SPLIT_REGEX = /[ .–()]+/;
 const MIN_LENGTH = 4; // to exclude "der", "und", "die", etc.
 
-const pageTitleWords = allRoutes
+const pageKeywords = allRoutes
   .filter((route) => !route.isStagingOnly)
   .flatMap((route) => route.title.split(WORD_SPLIT_REGEX));
 
 const werkzeuge = await getCollection("werkzeuge");
-const werkzeugTitleWords = werkzeuge.flatMap((werkzeug) =>
+
+export const werkzeugKeywords = werkzeuge.flatMap((werkzeug) =>
   werkzeug.data.title.split(WORD_SPLIT_REGEX),
 );
 
-export const keywords = new Set(
+export const allKeywords = new Set(
   [
-    ...pageTitleWords,
-    ...werkzeugTitleWords,
+    ...pageKeywords,
+    ...werkzeugKeywords,
     "Regelung",
     "Vorhaben",
     "Gesetz",
