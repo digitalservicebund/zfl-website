@@ -25,9 +25,16 @@ describe("getFuzzyMatch", () => {
       expect(getFuzzyMatch("kontakt", keywords)).toBeUndefined();
     });
 
-    it("returns undefined on full match (early return)", () => {
+    it("returns undefined when keyword starts with term (prefix match)", () => {
       expect(
-        getFuzzyMatch("Schulung", ["Schulung", "Schulungen"]),
+        getFuzzyMatch("Schulung", ["Schulungen", "Werkzeuge"]),
+      ).toBeUndefined();
+    });
+
+    it("returns undefined when term starts with keyword", () => {
+      // "Schulungg" starts with "Schulung" → early return, no suggestion
+      expect(
+        getFuzzyMatch("Schulungg", ["Schulung", "Schulungen"]),
       ).toBeUndefined();
     });
   });
@@ -61,11 +68,11 @@ describe("getFuzzyMatch", () => {
 
   describe("best match selection", () => {
     it("returns the closer of two keywords both within tolerance", () => {
-      // "Schulungg" (9 chars) → maxDistance 2
-      // distance to "Schulung"   = 1 (delete extra 'g')
-      // distance to "Schulungen" = 2 (delete 'g', insert 'en')
-      expect(getFuzzyMatch("Schulungg", ["Schulung", "Schulungen"])).toBe(
-        "Schulung",
+      // "Analysse" (8 chars) → maxDistance floor(8*0.3)=2
+      // distance to "Analyse"  = 1 (delete extra 's')
+      // distance to "Analysen" = 2 (substitute s→e, e→n)
+      expect(getFuzzyMatch("Analysse", ["Analysen", "Analyse"])).toBe(
+        "Analyse",
       );
     });
   });
