@@ -11,17 +11,23 @@ const { class: className, instance, keyboardToggle } = Astro.props;
 ---
 
 <custom-modal-trigger
-  class={twMerge(
-    "flex items-center cursor-pointer select-none gap-8",
-    className,
-  )}
   instance={instance}
   {...keyboardToggle ? { "keyboard-toggle": "true" } : {}}
 >
-  <span
-    class="kern-icon kern-icon--search kern-icon--default"
-    aria-hidden="true"></span>
-  <span class="hidden sm:block">Suche</span>
+  <button
+    class={twMerge(
+      "flex items-center cursor-pointer select-none gap-8",
+      className,
+    )}
+    aria-label="Suche öffnen"
+    {...keyboardToggle ? { "aria-keyshortcuts": "Control+k Meta+k" } : {}}
+    type="button"
+  >
+    <span
+      class="kern-icon kern-icon--search kern-icon--default"
+      aria-hidden="true"></span>
+    <span class="hidden sm:block" aria-hidden="true">Suche</span>
+  </button>
 </custom-modal-trigger>
 
 <script>
@@ -45,7 +51,8 @@ const { class: className, instance, keyboardToggle } = Astro.props;
     }
 
     connectedCallback() {
-      this.addEventListener("click", this.toggleModal.bind(this));
+      const button = this.querySelector("button");
+      button?.addEventListener("click", this.toggleModal.bind(this));
       if (this.getAttribute("keyboard-toggle") === "true")
         document.addEventListener("keydown", this.handleKeyDown.bind(this));
     }
