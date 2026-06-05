@@ -17,11 +17,7 @@ const keywordsDotSeparated = [...keywords].join(".");
 const imgPrefix = isDevelopment ? "/dist" : "";
 ---
 
-<PagefindConfig
-  instance={instance}
-  filterTypes={filterTypes}
-  excerpt-length="20"
-/>
+<PagefindConfig instance={instance} filterTypes={filterTypes} />
 <pagefind-modal instance={instance}>
   <pagefind-modal-header>
     <pagefind-input placeholder={placeholder} instance={instance}
