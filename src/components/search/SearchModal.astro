@@ -10,7 +10,7 @@ const highlightParam = "search";
 ---
 
 <>
-  <PagefindConfig highlight-param={highlightParam} />
+  <PagefindConfig highlight-param={highlightParam} excerpt-length="20" />
   <pagefind-modal>
     <pagefind-modal-header>
       <pagefind-input></pagefind-input>
@@ -123,58 +123,59 @@ const highlightParam = "search";
 
     /* Modal */
     /* --pf-modal-max-width: 600px; */
-  }
+    :is(*, #\#):is(*, #\#) :is([class^="pf-"]) {
+      -webkit-font-smoothing: antialiased;
+    }
 
-  :is(*, #\#):is(*, #\#) :is([class^="pf-"]) {
-    -webkit-font-smoothing: antialiased;
-  }
+    :is(*, #\#):is(*, #\#):is(*, #\#) dialog.pf-modal {
+      border-radius: 0.5rem; /* kern-metric-border-radius-large / kern-8 */
+    }
 
-  :is(*, #\#):is(*, #\#):is(*, #\#) dialog.pf-modal {
-    border-radius: 0.5rem; /* kern-metric-border-radius-large / kern-8 */
-  }
+    :is(*, #\#):is(*, #\#):is(*, #\#) .pf-trigger-text {
+      font-size: 1.125rem; /* kern-typography-font-size-medium-static */
+      font-family:
+        "Fira Sans", sans-serif; /* kern-typography-font-family-fira-sans */
+    }
 
-  :is(*, #\#):is(*, #\#):is(*, #\#) .pf-trigger-text {
-    font-size: 1.125rem; /* kern-typography-font-size-medium-static */
-    font-family:
-      "Fira Sans", sans-serif; /* kern-typography-font-family-fira-sans */
-  }
+    .result-excerpt {
+      white-space: normal;
+      mark {
+        background-color: oklch(93.09% 0.0428 170.49)
+          /* kern-color-turquois-050 */;
+      }
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
 
-  .result-excerpt {
-    white-space: normal;
-    mark {
+    :is(*, #\#):is(*, #\#):is(*, #\#) .pf-keyboard-hint,
+    :is(*, #\#):is(*, #\#):is(*, #\#) .pf-input-clear,
+    :is(*, #\#):is(*, #\#):is(*, #\#) .pf-keyboard-key {
+      font-size: 1rem; /* kern-typography-font-size-small-static */
+    }
+
+    :is(*, #\#):is(*, #\#):is(*, #\#) .pf-keyboard-key {
+      height: 24px;
+      font-weight: normal;
+    }
+
+    :is(*, #\#):is(*, #\#):is(*, #\#) .pf-modal-footer {
+      padding: 1rem; /* kern-metric-space-default */
+    }
+
+    :is(*, #\#):is(*, #\#):is(*, #\#) .pf-modal-body .pf-summary {
+      display: block;
+      margin: 0.5rem 0; /* kern-metric-space-small */
+    }
+
+    :is(*, #\#):is(*, #\#):is(*, #\#) .pf-error {
+      display: none; /* using custom error messages in SearchModalSummary.ts */
+    }
+
+    mark.pagefind-highlight {
       background-color: oklch(93.09% 0.0428 170.49)
         /* kern-color-turquois-050 */;
     }
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  :is(*, #\#):is(*, #\#):is(*, #\#) .pf-keyboard-hint,
-  :is(*, #\#):is(*, #\#):is(*, #\#) .pf-input-clear,
-  :is(*, #\#):is(*, #\#):is(*, #\#) .pf-keyboard-key {
-    font-size: 1rem; /* kern-typography-font-size-small-static */
-  }
-
-  :is(*, #\#):is(*, #\#):is(*, #\#) .pf-keyboard-key {
-    height: 24px;
-  }
-
-  :is(*, #\#):is(*, #\#):is(*, #\#) .pf-modal-footer {
-    padding: 1rem; /* kern-metric-space-default */
-  }
-
-  :is(*, #\#):is(*, #\#):is(*, #\#) .pf-modal-body .pf-summary {
-    display: block;
-    margin: 0.5rem 0; /* kern-metric-space-small */
-  }
-
-  :is(*, #\#):is(*, #\#):is(*, #\#) .pf-error {
-    display: none; /* using custom error messages in SearchModalSummary.ts */
-  }
-
-  mark.pagefind-highlight {
-    background-color: oklch(93.09% 0.0428 170.49) /* kern-color-turquois-050 */;
   }
 </style>
