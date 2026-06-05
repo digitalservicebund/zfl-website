@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const base = import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL;
   await import(`${base}/pagefind/pagefind-highlight.js`);
   new PagefindHighlight({
+    // NOSONAR
     highlightParam,
     markOptions: {
       className: "pagefind-highlight",

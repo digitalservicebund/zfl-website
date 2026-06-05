@@ -18,11 +18,14 @@ class SearchTracking extends HTMLElement {
     });
   }
 
-  private trackSearch = debounce((results: number, instanceName: string) => {
-    const query = this.term.trim();
-    if (query.length <= 3) return;
-    posthog.capture("search_input", { query, results, instance: instanceName });
-  }, 1000);
+  private readonly trackSearch = debounce(
+    (results: number, instance: string) => {
+      const query = this.term.trim();
+      if (query.length <= 3) return;
+      posthog.capture("search_input", { query, results, instance });
+    },
+    1000,
+  );
 }
 
 if (!customElements.get("search-tracking")) {

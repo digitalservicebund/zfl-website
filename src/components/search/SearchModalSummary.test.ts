@@ -28,12 +28,12 @@ function search(term: string, results: object[]) {
 }
 
 describe("SearchModalSummary", () => {
-  let el: Element;
+  let el: HTMLElement;
 
   beforeEach(() => {
     getFuzzyMatchMock.mockReturnValue(undefined);
     el = document.createElement("search-modal-summary");
-    el.setAttribute("data-fuzzy-keywords", "Schulungen.Werkzeuge.Kontakt");
+    el.dataset.fuzzyKeywords = "Schulungen.Werkzeuge.Kontakt";
     document.body.appendChild(el);
   });
 

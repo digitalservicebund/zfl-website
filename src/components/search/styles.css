@@ -26,8 +26,6 @@
   /* Results layout */
   --pf-border-radius: 0.25rem; /* kern-metric-border-radius-default / kern-4 */
 
-  /* Modal */
-  /* --pf-modal-max-width: 600px; */
   :is(*, #\#):is(*, #\#) :is([class^="pf-"]) {
     -webkit-font-smoothing: antialiased;
   }
