@@ -47,3 +47,4 @@ pnpm-debug.log*
 /content/norms-xml/
 /content/norms-eurlex/
 /scripts/__pycache__
+/data/laws/cache

@@ -7,7 +7,6 @@ import argparse
 import asyncio
 import csv
 import json
-import os
 import shutil
 import subprocess
 from collections import defaultdict
@@ -70,28 +69,35 @@ def parse_args() -> argparse.Namespace:
 
 
 def get_langdock_token() -> str:
-    token = os.environ.get("LANGDOCK_API_KEY", "").strip()
-    if token:
-        print("Using Langdock API key from LANGDOCK_API_KEY.")
-        return token
-
     op_path = shutil.which("op")
-    if op_path:
-        print("LANGDOCK_API_KEY not set. Trying 1Password CLI lookup...")
+    if not op_path:
+        raise SystemExit(
+            "1Password CLI ('op') is required for Langdock access but was not found on PATH."
+        )
+
+    print("Retrieving Langdock API key from 1Password...")
+    try:
         result = subprocess.run(
             [op_path, "read", "op://Employee/Langdock token/password"],
             capture_output=True,
             text=True,
             check=True,
         )
-        token = result.stdout.strip()
-        if token:
-            print("Using Langdock API key from 1Password.")
-            return token
+    except subprocess.CalledProcessError as exc:
+        error_text = (exc.stderr or "").strip() or "Unknown 1Password CLI error"
+        raise SystemExit(
+            "Could not read Langdock token from 1Password. "
+            "Run 'op signin' and ensure item 'Langdock token' exists in vault 'Employee' "
+            "with field 'password'. "
+            f"op error: {error_text}"
+        ) from exc
 
-    raise SystemExit(
-        "No Langdock API key found. Set LANGDOCK_API_KEY or configure 1Password CLI (op)."
-    )
+    token = result.stdout.strip()
+    if token:
+        print("Using Langdock API key from 1Password.")
+        return token
+
+    raise SystemExit("Received empty Langdock token from 1Password item.")
 
 
 def load_prompt(prompt_file: Path) -> str:
@@ -226,7 +232,7 @@ async def extract_paragraph_obligations(
         except (RateLimitError, APIConnectionError, APITimeoutError, InternalServerError) as exc:
             if attempt >= max_retries - 1:
                 raise
-            wait_seconds = min(30.0, 1.5 * (2**attempt))
+            wait_seconds = min(30.0, 5 * (2**attempt))
             print(
                 f"Retrying paragraph_id={paragraph.paragraph_id} after {type(exc).__name__} "
                 f"(attempt {attempt + 1}/{max_retries}, wait {wait_seconds:.1f}s)."
