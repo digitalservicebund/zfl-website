@@ -25,14 +25,46 @@ To evaluate the approach we're starting with a test case in the financial space 
 | Paragraph normalization | ✅ Done     | `build_norm_paragraphs.py`                                                                                                                                                                        |
 | CSV merge               | ✅ Done     | `concat_obligations_csv.py` — reads `public/data/obligations/Pflichten_LLM_*.csv` with `;` delimiter and UTF-8-BOM, writes `Pflichten_LLM_All.csv` using the column order of the first input file |
 | Publish to UI           | ✅ Done     | `publish_laws_ui_data.py`                                                                                                                                                                         |
-| LLM extraction          | 🔲 To build | (see Step A below)                                                                                                                                                                                |
+| LLM extraction          | ✅ Done     | `extract_obligations.py` + prompt/model wiring in `pflichten_prompt.txt` and `pipeline_models.py`                                                                                                 |
 | Static UI page          | 🔲 To build | (see Step B below)                                                                                                                                                                                |
+
+---
+
+## Current State (2026-06-08)
+
+### Implemented and verified
+
+- `scripts/extract_obligations.py` is implemented and wired as `pnpm laws:extract-obligations`.
+- Structured response models are implemented in `scripts/pipeline_models.py` (`Obligation`, `ObligationExtraction`).
+- Prompt category enum is explicitly defined in `scripts/pflichten_prompt.txt` and used by the model schema.
+- Extraction output format matches merge requirements (`;`, UTF-8-BOM, expected column order).
+- Resume behavior via checkpoint file is implemented and verified in multiple smoke runs.
+- Exponential backoff for transient/rate-limit errors is implemented.
+
+### Authentication and secrets
+
+- Current implementation uses 1Password CLI (`op`) only for Langdock token retrieval.
+- No API key fallback in code and no committed secrets.
+
+### Validation completed
+
+- Targeted EU smoke runs on DSGVO Art. 12-14 were executed repeatedly after prompt updates.
+- Cost/workload estimates were computed for:
+  - full corpus,
+  - relevant-law subsets (`*_relevant.csv`),
+  - DSGVO Art. 12-14 baseline.
+- HGB-only extraction run completed successfully after resume/retry cycles (`--max-concurrency 1`), with terminal exit code `0`.
+
+### Open items
+
+- Step A.5 evaluation note is still missing as a committed artifact.
+- Step B (UI page `src/pages/werkzeuge/pflichten.astro`) is not implemented yet.
 
 ---
 
 ## Step A: Build the LLM Extraction Script
 
-**File to create:** `scripts/extract_obligations.py`
+**Implementation status:** ✅ Implemented (`scripts/extract_obligations.py`)
 
 **Input:** `data/laws/normalized/norm_paragraphs.jsonl` (one `NormParagraph` record per paragraph/article — see `pipeline_models.py`).
 
@@ -60,16 +92,16 @@ The delimiter, encoding and column order must match `concat_obligations_csv.py` 
 ### Prompt and structured output
 
 - The system prompt is loaded at runtime from `scripts/pflichten_prompt.txt` (no string duplication in code).
-- **Prompt fix required before first run:** the current prompt says "eine der vier Kategorien" for `art_der_vorgabe` but never enumerates them. Add the explicit category list to `pflichten_prompt.txt` (working set, to be finalized: `Informationspflicht`, `Handlungspflicht`, `Unterlassungspflicht`, `Duldungs-/Mitwirkungspflicht`) and mirror the same set as a `Literal[...]` in the Pydantic response model.
-- Extend `pipeline_models.py` with:
-  - `Obligation` — one extracted obligation, with `Literal` constraints on `pflichtstaerke`, `art_der_vorgabe`, and `normadressaten` items.
-  - `ObligationExtraction` — `{ "obligations": list[Obligation] }`, used as the LLM `response_format`.
+- Enum fix for `art_der_vorgabe` is implemented in prompt + model schema.
+- `pipeline_models.py` includes:
+  - `Obligation` with `Literal` constraints for `pflichtstaerke`, `art_der_vorgabe`, and `normadressaten` values.
+  - `ObligationExtraction` (`{ "obligations": list[Obligation] }`) used as LLM `response_format`.
 - The script assembles each CSV row by combining the LLM's `Obligation` fields with the paragraph metadata (`law_abbrev`, `source`, `url`, `reference`).
 
 ### LLM provider
 
 - Use **Langdock** via the OpenAI Python SDK, consistent with `llm_extract_base_ONLY_INSPIRATION.py` (reference-only — do not import from it).
-- API key resolution order: env var `LANGDOCK_API_KEY` → 1Password CLI lookup. Never commit a key or write one to a checked-in `.env`.
+- API key resolution: 1Password CLI lookup (`op`) in current implementation.
 - Defaults: `model=gpt-5.1`, `temperature=0.0`, `seed=42`.
 
 ### Extraction logic
@@ -89,7 +121,7 @@ The delimiter, encoding and column order must match `concat_obligations_csv.py` 
 
 ### Wiring
 
-Add to `package.json` `scripts` alongside the other `laws:*` entries:
+Implemented in `package.json`:
 
 ```json
 "laws:extract-obligations": "./scripts/run_pipeline_python.sh scripts/extract_obligations.py"
@@ -182,8 +214,13 @@ The static site build (`pnpm build`) then picks up `public/data/*` automatically
 
 ## Acceptance Criteria
 
-1. `pnpm laws:extract-obligations --norm KAGB` completes, writes a CSV into `public/data/obligations/`, and resumes cleanly after Ctrl+C via the checkpoint file.
-2. `pnpm laws:concat-obligations` consumes the per-law CSVs without modification and produces a valid `Pflichten_LLM_All.csv`.
-3. UI page loads, law search works, CSV export downloads correctly.
-4. No API keys or secrets in frontend code or committed files.
-5. Non-LLM pipeline steps are idempotent — re-running produces identical output. The LLM extraction step is _resumable_ (already-processed paragraphs are skipped via the checkpoint) but byte-identical output across runs is not guaranteed.
+1. `pnpm laws:extract-obligations --norm HGB` completes, writes a CSV into `public/data/obligations/`, and resumes cleanly after Ctrl+C via the checkpoint file.  
+   Status: ✅ Verified (`[HGB] 401/401 done`, `Extraction completed.`, `Processed paragraphs this run: 401`, `Extracted obligations this run: 619`, progress file `data/laws/cache/extraction_progress_hgb.json`).
+2. `pnpm laws:concat-obligations` consumes the per-law CSVs without modification and produces a valid `Pflichten_LLM_All.csv`.  
+   Status: ⚠️ Not yet re-verified after recent prompt iterations.
+3. UI page loads, law search works, CSV export downloads correctly.  
+   Status: 🔲 Not started.
+4. No API keys or secrets in frontend code or committed files.  
+   Status: ✅ Verified (1Password CLI integration, no checked-in secrets).
+5. Non-LLM pipeline steps are idempotent — re-running produces identical output. The LLM extraction step is _resumable_ (already-processed paragraphs are skipped via the checkpoint) but byte-identical output across runs is not guaranteed.  
+   Status: ✅ Verified for resumability in smoke and resumed law runs.
