@@ -255,16 +255,20 @@ async def process_law(
     seed: int,
     max_concurrency: int,
     max_retries: int,
-) -> tuple[int, int]:
+) -> tuple[int, int, int]:
     out_file = out_dir / f"Pflichten_LLM_{law_abbrev}.csv"
     ensure_csv_file(out_file)
 
     pending = [p for p in paragraphs if not progress.get(p.paragraph_id, False)]
+    already_done = len(paragraphs) - len(pending)
     if not pending:
         print(f"[{law_abbrev}] Nothing to do. All {len(paragraphs)} paragraphs already processed.")
-        return 0, 0
+        return 0, len(paragraphs), 0
 
-    print(f"[{law_abbrev}] Processing {len(pending)} of {len(paragraphs)} paragraphs...")
+    print(
+        f"[{law_abbrev}] Processing {len(pending)} of {len(paragraphs)} paragraphs "
+        f"({already_done} already done from checkpoint)."
+    )
 
     semaphore = asyncio.Semaphore(max_concurrency)
 
@@ -295,7 +299,7 @@ async def process_law(
             f"-> {len(rows)} obligations"
         )
 
-    return len(pending), extracted_rows
+    return len(pending), len(paragraphs), extracted_rows
 
 
 async def async_main(args: argparse.Namespace) -> None:
@@ -316,11 +320,12 @@ async def async_main(args: argparse.Namespace) -> None:
     token = get_langdock_token()
     client = AsyncOpenAI(api_key=token, base_url=LANGDOCK_BASE_URL)
 
-    total_paragraphs = 0
+    total_new_paragraphs = 0
+    total_target_paragraphs = 0
     total_rows = 0
 
     for law_abbrev, paragraphs in grouped_paragraphs.items():
-        done_count, row_count = await process_law(
+        new_count, target_count, row_count = await process_law(
             client=client,
             law_abbrev=law_abbrev,
             paragraphs=paragraphs,
@@ -334,11 +339,16 @@ async def async_main(args: argparse.Namespace) -> None:
             max_concurrency=args.max_concurrency,
             max_retries=args.max_retries,
         )
-        total_paragraphs += done_count
+        total_new_paragraphs += new_count
+        total_target_paragraphs += target_count
         total_rows += row_count
 
     print("Extraction completed.")
-    print(f"Processed paragraphs this run: {total_paragraphs}")
+    print(f"Processed paragraphs this run (new): {total_new_paragraphs}")
+    print(
+        "Processed paragraphs total (incl. cached): "
+        f"{total_target_paragraphs}/{total_target_paragraphs}"
+    )
     print(f"Extracted obligations this run: {total_rows}")
     print(f"Progress file: {progress_file}")
 
