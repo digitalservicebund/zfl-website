@@ -12,7 +12,6 @@ import {
   werkzeuge,
   type Route,
 } from "@/config/routes";
-import { isProduction } from "@/config/stage";
 import bundLogoWhite from "@/images/logo/bund-logo-white.svg";
 import bundLogo from "@/images/logo/bund-logo.png";
 import { getMobileMenuNavigation } from "@/utils/navigation/drilldown";
@@ -94,11 +93,8 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
           })
         }
       </nav>
-      {
-        !isProduction && (
-          <SearchButton class={navItemStyle("main")} keyboardToggle />
-        )
-      }
+
+      <SearchButton class={navItemStyle("main")} keyboardToggle />
 
       <!-- Mobile Menu Toggle -->
       <div class="flex h-full min-[900px]:hidden">

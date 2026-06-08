@@ -8,7 +8,6 @@ import SearchModal from "@/components/search/SearchModal.astro";
 import { werkzeugKeywords } from "@/components/search/keywords";
 import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
-import { isProduction } from "@/config/stage";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import { WERKZEUGE_TYPES } from "@/content.config";
 
@@ -131,7 +130,7 @@ const PAGEFIND_INSTANCE = "werkzeuge";
             <Icon name="ic:outline-help-outline" class="h-32 w-32" />
           </button>
         </div>
-        {!isProduction && <SearchButton instance={PAGEFIND_INSTANCE} />}
+        <SearchButton instance={PAGEFIND_INSTANCE} />
       </div>
     </div>
 
