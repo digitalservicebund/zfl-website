@@ -1,0 +1,140 @@
+---
+import Hero from "@/components/Hero.astro";
+import KernCard from "@/components/KernCard.astro";
+import Layout from "@/layouts/Layout.astro";
+import { begleitungen } from "@/config/routes";
+import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
+import { mailto } from "@/utils/mailtoHelper";
+import AblaufFruephase from "@/images/AblaufFruephase.png";
+import { Image } from "astro:assets";
+
+export const frontmatter = {
+  title: "Die neue Frühphase",
+  sitemap: true,
+  navOrder: 4,
+  isStagingOnly: true,
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero level="sub">
+      <h1>Hier entsteht die neue Frühphase für Gesetzgebung</h1>
+      <p slot="subtitle">
+        In Zukunft finden Sie hier ein Vorgehensmodell, das Sie als Legistin
+        oder Legist dabei unterstützt, frühzeitig verschiedene Perspektiven
+        einzubeziehen und Regelungsinhalte anders darzustellen. Die Frühphase
+        beschreibt die Phase bevor ein Referentenentwurf entsteht; diese wird
+        vom Bundesministerium für Digitales und Staatsmodernisierung neu
+        gedacht.
+      </p>
+    </Hero>
+    <section>
+      <h2>Warum braucht es eine neue Frühphase?</h2>
+      <p>
+        Die Frühphase schafft Raum, um Regelungsbedarfe zuerst inhaltlich zu
+        durchdenken – bevor der erste Paragraf entsteht.
+      </p>
+      <p>Fragen Sie sich:</p>
+      <ul>
+        <li>
+          Kann das Regelungsziel durch nichtregulatorische Maßnahmen besser
+          erreicht werden?
+        </li>
+        <li>Ist eine digitale Umsetzung möglich?</li>
+        <li>Ist die Praxis in der Lage die Änderungen umzusetzen?</li>
+        <li>Können Sachverhalte vereinfacht werden?</li>
+      </ul>
+      <p>
+        So stellen Sie sicher, dass neue Regelungen wirksam, praxistauglich,
+        digitaltauglich und adressatengerecht sind. Erst, wenn der Inhalt
+        stimmt, beginnt die Arbeit am Rechtstext.
+      </p>
+      <p>
+        Das Update für die frühe Phase der Rechtsetzung ist ein zentrales
+        Element der Modernisierungs-Agenda Bund (HF2) und bettet sich im
+        Fachbereich bessere Rechtsetzung ein.
+      </p>
+      <figure>
+        <Image
+          src={AblaufFruephase}
+          alt="Infografik 'Die neue Frühphase – einfach verständlich'. Ein vierstufiger Prozess dargestellt von links nach rechts: 1. Start. 2. Inhalte erarbeiten. Als 'NEU' markiert, wird abgebildet durch Symbole für Visualisierung und Methoden, integrierte Arbeitshilfen und leichten informellen Austausch. 3. Schreiben. 4. Bundestag/Bundesrat."
+        />
+        <figcaption class="text-base leading-tight font-normal text-gray-500">
+          Schritt für Schritt unterstützt die neue Frühphase Sie durch
+          integrierte Arbeitshilfen, strukturierten Austausch mit externen
+          Akteuren sowie Anleitungen für hilfreiche Methoden wie
+          Visualisierungen.
+        </figcaption>
+      </figure>
+    </section>
+    <section>
+      <h2>So können Sie jetzt schon aktiv werden</h2>
+      <div class="grid grid-cols-1 gap-32 lg:grid-cols-3 lg:gap-32">
+        <KernCard title="Visualisieren Sie den Status Quo" background="white">
+          <div slot="pre-header" class="mb-16">
+            <span class="kern-badge kern-badge--methode">
+              <span class="kern-label">Methode</span>
+            </span>
+          </div>
+          <div class="kern-body">
+            <p>
+              Ein Flussdiagramm des Status Quo erleichtert Ihnen das Verständnis
+              und die Kommunikation mit Anderen.
+            </p>
+            <a
+              href="https://digitalcheck.bund.de/methoden/visualisieren/flussdiagramm"
+              target="_blank">Zur Methode "Flussdiagramm"</a
+            >
+          </div>
+        </KernCard>
+        <KernCard
+          title="Nehmen Sie eine Regelungs-begleitung in Anspruch"
+          href={begleitungen.path}
+          interactive
+          background="white"
+        >
+          <div class="kern-body">
+            <p>
+              Ein interdisziplinäres Team – erfahren in Gesetzgebungspraxis –
+              unterstützt Sie dabei, Ihre Regelung praxisnah, digitaltauglich
+              und bürokratiearm zu gestalten.
+            </p>
+            <p>
+              Regelungsbegleitungen sind gelebte Frühphase und nutzen jetzt
+              bereits viele Methoden, die Sie später hier finden werden.
+            </p>
+          </div>
+        </KernCard>
+        <KernCard title="Werden Sie Tester!" background="white">
+          <div class="kern-body">
+            <p>
+              Wir überprüfen die Konzepte laufend mit der Praxis. Sie sind
+              Legistin oder Legist und möchten uns dabei helfen? Melden Sie sich
+              an und wir laden Sie zu einem 45–90 Min Nutzertest ein. Sie müssen
+              dafür nichts vorbereiten.
+            </p>
+            <a
+              class="kern-btn kern-btn--primary"
+              href={mailto(ZFL_EMAIL.url, "Teilnahme an Nutzendentests")}
+              ><span class="kern-label">Anmelden</span></a
+            >
+          </div>
+        </KernCard>
+      </div>
+    </section>
+    <section class="bg-cosmic-blue-base breakout text-white">
+      <h2>Hilfe</h2>
+      <p>
+        Sie haben konkrete Fragen, wünschen mehr Informationen oder wollen über
+        die Arbeit mehr erfahren. Kontaktieren Sie uns hier:
+      </p>
+      <p>
+        Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>
+      </p>
+      <p>
+        E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
+      </p>
+    </section>
+  </main>
+</Layout>
