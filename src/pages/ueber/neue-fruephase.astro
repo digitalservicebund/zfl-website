@@ -19,7 +19,9 @@ export const frontmatter = {
 <Layout title={frontmatter.title}>
   <main class="breakout-grid">
     <Hero level="sub">
-      <h1>Hier entsteht die neue Frühphase für Gesetzgebung</h1>
+      <h1 class="max-w-a11y">
+        Hier entsteht die neue Frühphase für Gesetzgebung
+      </h1>
       <p slot="subtitle">
         In Zukunft finden Sie hier ein Vorgehensmodell, das Sie als Legistin
         oder Legist dabei unterstützt, frühzeitig verschiedene Perspektiven
@@ -71,7 +73,12 @@ export const frontmatter = {
     <section>
       <h2>So können Sie jetzt schon aktiv werden</h2>
       <div class="grid grid-cols-1 gap-32 lg:grid-cols-3 lg:gap-32">
-        <KernCard title="Visualisieren Sie den Status Quo" background="white">
+        <KernCard
+          title="Visualisieren Sie den Status Quo"
+          background="white"
+          interactive
+          href="https://digitalcheck.bund.de/methoden/visualisieren/flussdiagramm"
+        >
           <div slot="pre-header" class="mb-16">
             <span class="kern-badge kern-badge--methode">
               <span class="kern-label">Methode</span>
@@ -82,10 +89,6 @@ export const frontmatter = {
               Ein Flussdiagramm des Status Quo erleichtert Ihnen das Verständnis
               und die Kommunikation mit Anderen.
             </p>
-            <a
-              href="https://digitalcheck.bund.de/methoden/visualisieren/flussdiagramm"
-              target="_blank">Zur Methode "Flussdiagramm"</a
-            >
           </div>
         </KernCard>
         <KernCard
@@ -114,12 +117,14 @@ export const frontmatter = {
               an und wir laden Sie zu einem 45–90 Min Nutzertest ein. Sie müssen
               dafür nichts vorbereiten.
             </p>
-            <a
-              class="kern-btn kern-btn--primary"
-              href={mailto(ZFL_EMAIL.url, "Teilnahme an Nutzendentests")}
-              ><span class="kern-label">Anmelden</span></a
-            >
           </div>
+          <a
+            slot="footer"
+            class="kern-btn kern-btn--primary kern-btn--block"
+            href={mailto(ZFL_EMAIL.url, "Teilnahme an Nutzendentests")}
+          >
+            <span class="kern-label">Anmelden</span>
+          </a>
         </KernCard>
       </div>
     </section>
