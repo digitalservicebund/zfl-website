@@ -10,6 +10,7 @@ export function getFuzzyMatch(term: string, keywords: string[]) {
 
   for (const keyword of keywords) {
     const normalizedKeyword = keyword.trim().toLowerCase();
+    if (!normalizedKeyword) continue;
     if (normalizedKeyword.startsWith(normalizedTerm)) return; // full match: don't suggest anything
     if (normalizedTerm.startsWith(normalizedKeyword)) return;
     const distance = levenshteinDistance(normalizedTerm, normalizedKeyword);

@@ -17,6 +17,10 @@ describe("getFuzzyMatch", () => {
       expect(getFuzzyMatch("Kontakt", [])).toBeUndefined();
     });
 
+    it("ignores empty and whitespace keywords during matching", () => {
+      expect(getFuzzyMatch("kntakt", ["", "   ", "Kontakt"])).toBe("Kontakt");
+    });
+
     it("returns undefined for exact match (no suggestion needed)", () => {
       expect(getFuzzyMatch("Kontakt", keywords)).toBeUndefined();
     });
