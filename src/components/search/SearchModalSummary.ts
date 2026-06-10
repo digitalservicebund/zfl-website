@@ -36,6 +36,8 @@ class SearchModalSummary extends HTMLElement {
     if (!result || !this.term) return;
     const count = result.results?.length ?? 0;
     const bestProposal = getFuzzyMatch(this.term, this.fuzzyKeywords);
+    console.log(this.fuzzyKeywords);
+    console.log(bestProposal);
 
     this.renderResultCount(count, this.term);
 
@@ -88,7 +90,8 @@ class SearchModalSummary extends HTMLElement {
     `;
   }
   private searchTerm(suggestion: string) {
-    const inputEl = document.querySelector<HTMLInputElement>("input.pf-input");
+    const modalEl = this.closest("pagefind-modal");
+    const inputEl = modalEl?.querySelector<HTMLInputElement>("input.pf-input");
     if (!inputEl) return;
     inputEl.value = suggestion;
     inputEl.focus();

@@ -29,15 +29,18 @@ function search(term: string, results: object[]) {
 
 describe("SearchModalSummary", () => {
   let el: HTMLElement;
+  let modalEl: HTMLElement;
 
   beforeEach(() => {
     getFuzzyMatchMock.mockReturnValue(undefined);
+    modalEl = document.createElement("pagefind-modal");
     el = document.createElement("search-modal-summary");
     el.dataset.fuzzyKeywords = "Schulungen.Werkzeuge.Kontakt";
-    document.body.appendChild(el);
+    modalEl.appendChild(el);
+    document.body.appendChild(modalEl);
   });
 
-  afterEach(() => el.remove());
+  afterEach(() => modalEl.remove());
 
   describe("result count", () => {
     it("renders 'Keine Ergebnisse' for empty results", () => {
@@ -114,13 +117,12 @@ describe("SearchModalSummary", () => {
       getFuzzyMatchMock.mockReturnValue("Kontakt");
       const input = document.createElement("input");
       input.className = "pf-input";
-      document.body.appendChild(input);
+      modalEl.appendChild(input);
 
       search("kntakt", []);
       el.querySelector<HTMLButtonElement>("button#alternativeTerm")?.click();
 
       expect(input.value).toBe("Kontakt");
-      input.remove();
     });
   });
 
