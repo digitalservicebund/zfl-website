@@ -2,7 +2,7 @@
 import Hero from "@/components/Hero.astro";
 import KernCard from "@/components/KernCard.astro";
 import Layout from "@/layouts/Layout.astro";
-import { begleitungen } from "@/config/routes";
+import { begleitungen, werkzeuge } from "@/config/routes";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import { mailto } from "@/utils/mailtoHelper";
 import AblaufFruephase from "@/images/AblaufFruephase.png";
@@ -25,37 +25,36 @@ export const frontmatter = {
       <p slot="subtitle">
         In Zukunft finden Sie hier ein Vorgehensmodell, das Sie als Legistin
         oder Legist dabei unterstützt, frühzeitig verschiedene Perspektiven
-        einzubeziehen und Regelungsinhalte anders darzustellen. Die Frühphase
-        beschreibt die Phase bevor ein Referentenentwurf entsteht; diese wird
-        vom Bundesministerium für Digitales und Staatsmodernisierung neu
-        gedacht.
+        einzubeziehen und Regelungsinhalte darzustellen.
       </p>
     </Hero>
     <section>
       <h2>Warum braucht es eine neue Frühphase?</h2>
       <p>
         Die Frühphase schafft Raum, um Regelungsbedarfe zuerst inhaltlich zu
-        durchdenken – bevor der erste Paragraf entsteht.
+        durchdenken – bevor der erste Paragraf entsteht. Das Update für die
+        frühe Phase der Rechtsetzung ist ein zentrales Element der
+        Modernisierungs-Agenda Bund (HF2) und bettet sich im Fachbereich bessere
+        Rechtsetzung ein. Sie wird vom Bundesministerium für Digitales und
+        Staatsmodernisierung neu gedacht.
       </p>
+      <h2>So können Sie jetzt schon aktiv werden</h2>
+      <p></p>
       <p>Fragen Sie sich:</p>
       <ul>
+        <li>Wer ist der Adressatenkreis, wen braucht es für die Umsetzung?</li>
+        <li>Ist die Praxis in der Lage, die Änderungen umzusetzen?</li>
+        <li>Ist eine digitale Umsetzung möglich?</li>
+        <li>Können Sachverhalte vereinfacht werden?</li>
         <li>
           Kann das Regelungsziel durch nichtregulatorische Maßnahmen besser
           erreicht werden?
         </li>
-        <li>Ist eine digitale Umsetzung möglich?</li>
-        <li>Ist die Praxis in der Lage die Änderungen umzusetzen?</li>
-        <li>Können Sachverhalte vereinfacht werden?</li>
       </ul>
       <p>
         So stellen Sie sicher, dass neue Regelungen wirksam, praxistauglich,
         digitaltauglich und adressatengerecht sind. Erst, wenn der Inhalt
         stimmt, beginnt die Arbeit am Rechtstext.
-      </p>
-      <p>
-        Das Update für die frühe Phase der Rechtsetzung ist ein zentrales
-        Element der Modernisierungs-Agenda Bund (HF2) und bettet sich im
-        Fachbereich bessere Rechtsetzung ein.
       </p>
       <figure>
         <Image
@@ -72,7 +71,9 @@ export const frontmatter = {
     </section>
     <section>
       <h2>So können Sie jetzt schon aktiv werden</h2>
-      <div class="grid grid-cols-1 gap-32 lg:grid-cols-3 lg:gap-32">
+      <div
+        class="grid grid-cols-1 gap-32 md:grid-cols-2 xl:grid-cols-4 xl:gap-32"
+      >
         <KernCard
           title="Visualisieren Sie den Status Quo"
           background="white"
@@ -88,6 +89,18 @@ export const frontmatter = {
             <p>
               Ein Flussdiagramm des Status Quo erleichtert Ihnen das Verständnis
               und die Kommunikation mit Anderen.
+            </p>
+          </div>
+        </KernCard>
+        <KernCard
+          title="Unsere Methodensammlung"
+          background="white"
+          interactive
+          href={werkzeuge.path}
+        >
+          <div class="kern-body">
+            <p>
+              Wir helfen Ihnen mit einer ganzen Sammlung von Methoden und Tools.
             </p>
           </div>
         </KernCard>
@@ -121,7 +134,11 @@ export const frontmatter = {
           <a
             slot="footer"
             class="kern-btn kern-btn--primary kern-btn--block"
-            href={mailto(ZFL_EMAIL.url, "Teilnahme an Nutzendentests")}
+            href={mailto(
+              ZFL_EMAIL.url,
+              "Teilnahme an Nutzendentests",
+              "Guten Tag,\n ich bin interessiert daran, an einem Nutzertest für das Zentrum für Legistik teilzunehmen. Bitte setzen Sie mich auf die Testerliste und kontaktieren mich für eine der nächsten Testrunden.\n \n Mit freundlichen Grüßen",
+            )}
           >
             <span class="kern-label">Anmelden</span>
           </a>
@@ -132,7 +149,7 @@ export const frontmatter = {
       <h2>Hilfe</h2>
       <p>
         Sie haben konkrete Fragen, wünschen mehr Informationen oder wollen über
-        die Arbeit mehr erfahren. Kontaktieren Sie uns hier:
+        die Arbeit mehr erfahren? Kontaktieren Sie uns hier:
       </p>
       <p>
         Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>
