@@ -63,6 +63,10 @@ fileignoreconfig:
     checksum: 585af9a443434b8caf56dae715544745714fff5e0c4b5d2cc202275950e3a684
   - filename: src/pages/begleitungen/gesetzentwurf.png
     checksum: c847df945cbe36bd5627e2e91b07b08c331974ba78fc2e64d99e37ae5de3495a
+  - filename: scripts/reference_sort.py
+    checksum: 3e7e189ff2cf8f7ea2c7f7f3fe2803fdf421b94ef2e1e26423fa2099c248bd36
+  - filename: src/pages/werkzeuge/pflichten.astro
+    checksum: c788e4a670255028338045bdeb062ab4f574d39153a49038d12043f8c121cff9
   - filename: src/components/global/DebugGrid.astro
     allowed_patterns:
       - \@keydown
