@@ -11,7 +11,9 @@ import shutil
 import subprocess
 from collections import defaultdict
 from pathlib import Path
+from typing import Union
 
+import httpx
 from openai import (
     APIConnectionError,
     APITimeoutError,
@@ -21,32 +23,103 @@ from openai import (
 )
 
 from laws_paths import LAW_PATHS
-from pipeline_models import NormParagraph, ObligationExtraction
+from pipeline_models import (
+    OBLIGATION_CSV_COLUMNS,
+    NormParagraph,
+    ObligationExtraction,
+)
 from reference_sort import reference_sort_key
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 DEFAULT_PROGRESS_FILE = ROOT_DIR / "data" / "laws" / "cache" / "extraction_progress.json"
 DEFAULT_PROMPT_FILE = Path(__file__).with_name("pflichten_prompt.txt")
 
-LANGDOCK_BASE_URL = "https://api.langdock.com/openai/eu/v1"
-DEFAULT_MODEL = "gpt-5.1"
+LANGDOCK_OPENAI_BASE_URL = "https://api.langdock.com/openai/eu/v1"
+LANGDOCK_GOOGLE_BASE_URL = "https://api.langdock.com/google/eu/v1beta"
+DEFAULT_MODEL = "gpt-5.4-mini"
+# "low" keeps worst-case paragraphs at ~10-15s with recall on par with much
+# slower settings; "none" is faster but misses obligations.
+DEFAULT_REASONING_EFFORT = "low"
 DEFAULT_TEMPERATURE = 0.0
 DEFAULT_SEED = 42
 DEFAULT_MAX_CONCURRENCY = 5
 DEFAULT_MAX_RETRIES = 5
+# Amendment regulations can embed entire other laws as a single "paragraph" (80k+ chars).
+# These are not processable in a single LLM call; truncate with a warning.
+MAX_PARAGRAPH_CHARS = 8000
 
-CSV_COLUMNS = [
-    "norm",
-    "quelle",
-    "referenz",
-    "art_der_vorgabe",
-    "pflichtstaerke",
-    "sprachlicher_indikator",
-    "normadressat_kategorie",
-    "normadressat_text",
-    "zitat",
-    "handlung",
-]
+CSV_COLUMNS = OBLIGATION_CSV_COLUMNS
+
+AnyClient = Union[AsyncOpenAI, httpx.AsyncClient]
+
+
+def is_gemini_model(model: str) -> bool:
+    return model.startswith("gemini-")
+
+
+def _build_gemini_response_schema() -> dict:
+    """Return an inlined JSON Schema for ObligationExtraction (no $defs/$ref).
+
+    Gemini's responseSchema implementation does not reliably resolve $ref
+    pointers, so we inline all sub-schemas manually.
+    """
+    norm_adressat_enum = [
+        "Bürgerinnen und Bürger",
+        "Wirtschaft",
+        "Öffentliche Verwaltung",
+    ]
+    art_der_vorgabe_enum = [
+        "Informationspflicht",
+        "Handlungspflicht",
+        "Unterlassungspflicht",
+        "Duldungs-/Mitwirkungspflicht",
+    ]
+    return {
+        "type": "object",
+        "properties": {
+            "obligations": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "referenz": {"type": "string"},
+                        "art_der_vorgabe": {
+                            "type": "string",
+                            "enum": art_der_vorgabe_enum,
+                        },
+                        "pflichtstaerke": {
+                            "type": "string",
+                            "enum": ["muss", "soll"],
+                        },
+                        "normadressat_kategorie": {
+                            "type": "array",
+                            "items": {
+                                "type": "string",
+                                "enum": norm_adressat_enum,
+                            },
+                        },
+                        "normadressat_text": {"type": "string"},
+                        "zitat": {"type": "string"},
+                        "vorgabe_zusammenfassung": {"type": "string"},
+                        "sprachlicher_indikator": {"type": "string"},
+                        "konfidenz": {"type": "number"},
+                    },
+                    "required": [
+                        "referenz",
+                        "art_der_vorgabe",
+                        "pflichtstaerke",
+                        "normadressat_kategorie",
+                        "normadressat_text",
+                        "zitat",
+                        "vorgabe_zusammenfassung",
+                        "sprachlicher_indikator",
+                        "konfidenz",
+                    ],
+                },
+            }
+        },
+        "required": ["obligations"],
+    }
 
 
 def parse_args() -> argparse.Namespace:
@@ -58,7 +131,20 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--progress-file", default=str(DEFAULT_PROGRESS_FILE))
     parser.add_argument("--prompt-file", default=str(DEFAULT_PROMPT_FILE))
     parser.add_argument("--norm", help="Only process one law abbreviation, e.g. KAGB")
+    parser.add_argument(
+        "--rerun",
+        action="store_true",
+        help="Discard existing checkpoint entries and output CSV rows for the targeted "
+        "law(s) before extracting again. Requires --norm when no --progress-file is given "
+        "to avoid accidentally wiping all progress.",
+    )
     parser.add_argument("--model", default=DEFAULT_MODEL)
+    parser.add_argument(
+        "--reasoning-effort",
+        default=DEFAULT_REASONING_EFFORT,
+        help="Reasoning effort for GPT-5 models (e.g. none, low, medium). "
+        "Pass an empty string to omit the parameter. Ignored for Gemini models.",
+    )
     parser.add_argument("--temperature", type=float, default=DEFAULT_TEMPERATURE)
     parser.add_argument("--seed", type=int, default=DEFAULT_SEED)
     parser.add_argument("--max-concurrency", type=int, default=DEFAULT_MAX_CONCURRENCY)
@@ -191,7 +277,19 @@ def obligation_to_row(paragraph: NormParagraph, obligation) -> dict[str, str]:
     }
 
 
-async def extract_paragraph_obligations(
+def _truncate_text(paragraph: NormParagraph) -> str:
+    text = paragraph.text
+    if len(text) > MAX_PARAGRAPH_CHARS:
+        print(
+            f"  WARNING: {paragraph.paragraph_id} text truncated "
+            f"({len(text)} -> {MAX_PARAGRAPH_CHARS} chars). "
+            "Likely an amendment article embedding a full law — obligations near the end will be missed."
+        )
+        return text[:MAX_PARAGRAPH_CHARS] + "\n[… Text gekürzt]"
+    return text
+
+
+async def _extract_openai(
     client: AsyncOpenAI,
     prompt: str,
     paragraph: NormParagraph,
@@ -199,14 +297,19 @@ async def extract_paragraph_obligations(
     temperature: float,
     seed: int,
     max_retries: int,
+    reasoning_effort: str,
 ) -> ObligationExtraction:
     user_input = (
         f"Rechtsakt: {paragraph.law_abbrev}\n"
         f"Quelle: {paragraph.source}\n"
         f"Referenz: {paragraph.reference}\n"
         f"URL: {paragraph.url}\n\n"
-        f"Text:\n{paragraph.text}"
+        f"Text:\n{_truncate_text(paragraph)}"
     )
+
+    extra_kwargs = {}
+    if reasoning_effort:
+        extra_kwargs["reasoning_effort"] = reasoning_effort
 
     for attempt in range(max_retries):
         try:
@@ -219,6 +322,7 @@ async def extract_paragraph_obligations(
                     {"role": "user", "content": user_input},
                 ],
                 response_format=ObligationExtraction,
+                **extra_kwargs,
             )
             parsed = completion.choices[0].message.parsed
             if parsed is None:
@@ -239,8 +343,143 @@ async def extract_paragraph_obligations(
     raise RuntimeError("Unexpected retry loop exit")
 
 
+async def _extract_gemini(
+    client: httpx.AsyncClient,
+    prompt: str,
+    paragraph: NormParagraph,
+    model: str,
+    temperature: float,
+    max_retries: int,
+) -> ObligationExtraction:
+    user_input = (
+        f"Rechtsakt: {paragraph.law_abbrev}\n"
+        f"Quelle: {paragraph.source}\n"
+        f"Referenz: {paragraph.reference}\n"
+        f"URL: {paragraph.url}\n\n"
+        f"Text:\n{_truncate_text(paragraph)}"
+    )
+
+    generation_config: dict = {
+        "temperature": temperature,
+        "responseMimeType": "application/json",
+        "responseSchema": _build_gemini_response_schema(),
+    }
+    if model.startswith("gemini-2"):
+        # Disable thinking for speed. NOTE: As of 2026-06 Langdock strips
+        # thinkingConfig from generationConfig before forwarding to Vertex,
+        # so this has no effect yet — kept so it applies once Langdock
+        # passes it through. (Gemini 3.x models reject thinkingBudget.)
+        generation_config["thinkingConfig"] = {"thinkingBudget": 0}
+
+    payload = {
+        "model": model,
+        "systemInstruction": {
+            "role": "system",
+            "parts": [{"text": prompt}],
+        },
+        "contents": [
+            {
+                "role": "user",
+                "parts": [{"text": user_input}],
+            }
+        ],
+        "generationConfig": generation_config,
+    }
+
+    url = f"{LANGDOCK_GOOGLE_BASE_URL}/models/{model}:generateContent"
+
+    for attempt in range(max_retries):
+        try:
+            response = await client.post(url, json=payload)
+
+            if response.status_code == 429:
+                if attempt >= max_retries - 1:
+                    response.raise_for_status()
+                wait_seconds = min(30.0, 5 * (2**attempt))
+                print(
+                    f"Retrying paragraph_id={paragraph.paragraph_id} after HTTP 429 "
+                    f"(attempt {attempt + 1}/{max_retries}, wait {wait_seconds:.1f}s)."
+                )
+                await asyncio.sleep(wait_seconds)
+                continue
+
+            if response.status_code >= 500:
+                if attempt >= max_retries - 1:
+                    print(f"HTTP {response.status_code} response body: {response.text}")
+                    response.raise_for_status()
+                wait_seconds = min(30.0, 5 * (2**attempt))
+                print(
+                    f"Retrying paragraph_id={paragraph.paragraph_id} after HTTP {response.status_code} "
+                    f"(attempt {attempt + 1}/{max_retries}, wait {wait_seconds:.1f}s)."
+                )
+                await asyncio.sleep(wait_seconds)
+                continue
+
+            if response.status_code >= 400:
+                print(f"HTTP {response.status_code} response body: {response.text}")
+                response.raise_for_status()
+
+            data = response.json()
+            text = data["candidates"][0]["content"]["parts"][0]["text"]
+            return ObligationExtraction.model_validate_json(text)
+
+        except httpx.TimeoutException:
+            if attempt >= max_retries - 1:
+                raise
+            wait_seconds = min(30.0, 5 * (2**attempt))
+            print(
+                f"Retrying paragraph_id={paragraph.paragraph_id} after timeout "
+                f"(attempt {attempt + 1}/{max_retries}, wait {wait_seconds:.1f}s)."
+            )
+            await asyncio.sleep(wait_seconds)
+        except httpx.ConnectError as exc:
+            if attempt >= max_retries - 1:
+                raise
+            wait_seconds = min(30.0, 5 * (2**attempt))
+            print(
+                f"Retrying paragraph_id={paragraph.paragraph_id} after connect error "
+                f"(attempt {attempt + 1}/{max_retries}, wait {wait_seconds:.1f}s)."
+            )
+            await asyncio.sleep(wait_seconds)
+
+    raise RuntimeError("Unexpected retry loop exit")
+
+
+async def extract_paragraph_obligations(
+    client: AnyClient,
+    prompt: str,
+    paragraph: NormParagraph,
+    model: str,
+    temperature: float,
+    seed: int,
+    max_retries: int,
+    reasoning_effort: str,
+) -> ObligationExtraction:
+    if is_gemini_model(model):
+        assert isinstance(client, httpx.AsyncClient)
+        return await _extract_gemini(
+            client=client,
+            prompt=prompt,
+            paragraph=paragraph,
+            model=model,
+            temperature=temperature,
+            max_retries=max_retries,
+        )
+    assert isinstance(client, AsyncOpenAI)
+    return await _extract_openai(
+        client=client,
+        prompt=prompt,
+        paragraph=paragraph,
+        model=model,
+        temperature=temperature,
+        seed=seed,
+        max_retries=max_retries,
+        reasoning_effort=reasoning_effort,
+    )
+
+
 async def process_law(
-    client: AsyncOpenAI,
+    client: AnyClient,
     law_abbrev: str,
     paragraphs: list[NormParagraph],
     out_dir: Path,
@@ -252,6 +491,7 @@ async def process_law(
     seed: int,
     max_concurrency: int,
     max_retries: int,
+    reasoning_effort: str,
 ) -> tuple[int, int, int]:
     out_file = out_dir / f"Pflichten_LLM_{law_abbrev}.csv"
     ensure_csv_file(out_file)
@@ -279,6 +519,7 @@ async def process_law(
                 temperature=temperature,
                 seed=seed,
                 max_retries=max_retries,
+                reasoning_effort=reasoning_effort,
             )
         return [obligation_to_row(paragraph, item) for item in extraction.obligations]
 
@@ -309,36 +550,78 @@ async def async_main(args: argparse.Namespace) -> None:
     grouped_paragraphs = load_paragraphs(in_file, args.norm)
     progress = load_progress(progress_file)
 
+    if args.rerun:
+        if not args.norm and progress_file == DEFAULT_PROGRESS_FILE:
+            raise SystemExit(
+                "--rerun without --norm would wipe all progress. "
+                "Pass --norm <ABBREV> to target a specific law, "
+                "or --progress-file to use a dedicated file."
+            )
+        laws_to_rerun = list(grouped_paragraphs.keys())
+        cleared = 0
+        for paragraph_id in list(progress.keys()):
+            parts = paragraph_id.split(":")
+            law = parts[1] if len(parts) >= 3 else parts[0]
+            if law in laws_to_rerun:
+                del progress[paragraph_id]
+                cleared += 1
+        if cleared:
+            save_progress(progress_file, progress)
+            print(f"[rerun] Cleared {cleared} checkpoint entries for: {', '.join(laws_to_rerun)}")
+        for law_abbrev in laws_to_rerun:
+            csv_file = out_dir / f"Pflichten_LLM_{law_abbrev}.csv"
+            if csv_file.exists():
+                with csv_file.open("w", encoding="utf-8-sig", newline="") as f:
+                    writer = csv.DictWriter(f, fieldnames=CSV_COLUMNS, delimiter=";")
+                    writer.writeheader()
+                print(f"[rerun] Reset CSV for {law_abbrev}: {csv_file.name}")
+
     if not grouped_paragraphs:
         norm_text = f" for norm {args.norm}" if args.norm else ""
         print(f"No paragraphs found{norm_text} in {in_file}.")
         return
 
     token = get_langdock_token()
-    client = AsyncOpenAI(api_key=token, base_url=LANGDOCK_BASE_URL)
 
-    total_new_paragraphs = 0
-    total_target_paragraphs = 0
-    total_rows = 0
-
-    for law_abbrev, paragraphs in grouped_paragraphs.items():
-        new_count, target_count, row_count = await process_law(
-            client=client,
-            law_abbrev=law_abbrev,
-            paragraphs=paragraphs,
-            out_dir=out_dir,
-            progress=progress,
-            progress_file=progress_file,
-            prompt=prompt,
-            model=args.model,
-            temperature=args.temperature,
-            seed=args.seed,
-            max_concurrency=args.max_concurrency,
-            max_retries=args.max_retries,
+    if is_gemini_model(args.model):
+        # Langdock forces Gemini "thinking" on (thinkingConfig is stripped),
+        # so large paragraphs can take 30-60s+; a generous timeout avoids
+        # wasteful retries of requests that would have succeeded.
+        client: AnyClient = httpx.AsyncClient(
+            headers={"Authorization": f"Bearer {token}"},
+            timeout=httpx.Timeout(300.0, connect=10.0),
         )
-        total_new_paragraphs += new_count
-        total_target_paragraphs += target_count
-        total_rows += row_count
+    else:
+        client = AsyncOpenAI(api_key=token, base_url=LANGDOCK_OPENAI_BASE_URL)
+
+    try:
+        total_new_paragraphs = 0
+        total_target_paragraphs = 0
+        total_rows = 0
+
+        for law_abbrev, paragraphs in grouped_paragraphs.items():
+            new_count, target_count, row_count = await process_law(
+                client=client,
+                law_abbrev=law_abbrev,
+                paragraphs=paragraphs,
+                out_dir=out_dir,
+                progress=progress,
+                progress_file=progress_file,
+                prompt=prompt,
+                model=args.model,
+                temperature=args.temperature,
+                seed=args.seed,
+                max_concurrency=args.max_concurrency,
+                max_retries=args.max_retries,
+                reasoning_effort=args.reasoning_effort,
+            )
+            total_new_paragraphs += new_count
+            total_target_paragraphs += target_count
+            total_rows += row_count
+
+    finally:
+        if isinstance(client, httpx.AsyncClient):
+            await client.aclose()
 
     print("Extraction completed.")
     print(f"Processed paragraphs this run (new): {total_new_paragraphs}")

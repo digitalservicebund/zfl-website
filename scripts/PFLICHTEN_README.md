@@ -33,7 +33,7 @@ Run all commands from the project root.
   - Results are cached in `data/laws/cache/gii_metadata.json` and read automatically by `build_law_registry.py`.
   - Supports `--force`, `--limit N`, `--workers N`, `--delay S`.
 
-- `pnpm laws:extract-obligations [--norm <ABBREV>] [--model gpt-5.1]`
+- `pnpm laws:extract-obligations [--norm <ABBREV>] [--model gpt-5.4-mini] [--reasoning-effort low] [--rerun]`
   - Runs `./scripts/run_pipeline_python.sh scripts/extract_obligations.py`
   - Extracts obligations with structured LLM output and writes per-law CSV files.
   - Resumes safely via `data/laws/cache/extraction_progress.json`.
@@ -45,6 +45,32 @@ Run all commands from the project root.
 - `pnpm laws:publish-ui-data`
   - Runs `./scripts/run_pipeline_python.sh scripts/publish_laws_ui_data.py`
   - Copies registry into static UI data location.
+
+## LLM model choice
+
+### Why `gpt-5.4-mini` with `reasoning_effort: low`
+
+We benchmarked all models available on the Langdock API (June 2026) against a real worst-case paragraph from the ELTIF Regulation (Art. 1, 8 000 chars after truncation) using our actual prompt and response schema. Results:
+
+| Model             | Config                      | Wall time         | Obligations found |
+| ----------------- | --------------------------- | ----------------- | ----------------- |
+| gpt-5.1           | default                     | timeout (>20 min) | —                 |
+| gpt-5.4           | `reasoning_effort: none`    | 14 s              | 6                 |
+| gpt-5.4           | `reasoning_effort: low`     | 28 s              | 6                 |
+| **gpt-5.4-mini**  | **`reasoning_effort: low`** | **12 s**          | **7**             |
+| gpt-5.4-mini      | `reasoning_effort: none`    | 11 s              | 5                 |
+| gpt-5.4-mini      | default (no reasoning)      | 5 s               | 4                 |
+| gpt-5-chat-latest | default                     | 2 s               | 1                 |
+| gpt-5-mini        | default                     | 2 s               | 0                 |
+| gemini-2.5-flash  | —                           | 30–38 s           | 7                 |
+
+`gpt-5.4-mini` with `low` was the only model that matched Gemini's recall at a third of the latency. Faster configs visibly dropped obligations — unacceptable for a legal extraction task. `gpt-5.1` hung on large paragraphs because its unbounded default reasoning accumulates too many thinking tokens.
+
+### Why Gemini does not work reliably
+
+The Langdock API proxies Gemini through Google Vertex AI. We verified empirically (June 2026) that **Langdock strips `thinkingConfig` from `generationConfig` before forwarding to Vertex** — passing `thinkingBudget: 0` has no effect (identical `thoughtsTokenCount` with and without the field). This means thinking cannot be disabled via the Langdock route. As a result, large paragraphs trigger 30–60 s+ thinking steps that push against the HTTP client timeout, making the extraction slow and fragile. Additionally, the previous model name `gemini-3-flash-preview` does not exist on Langdock — the valid identifiers are `gemini-2.5-flash`, `gemini-2.5-pro`, and `gemini-3.5-flash`.
+
+Gemini support remains in the codebase via `--model gemini-*` for comparison purposes if Langdock ever exposes `thinkingConfig`.
 
 ## Python dependencies
 

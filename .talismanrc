@@ -71,8 +71,10 @@ fileignoreconfig:
     checksum: 4b4529c26f6b4cd3a5d4a1d0706d8a83dcdd523631ba5f55efc23517b0a3a558
   - filename: scripts/concat_obligations_csv.py
     checksum: 6163e7dca5499a1bc0dfa691ceda7e9581a4e2151bd247ffa7ca6070dd3388d0
+  - filename: scripts/PFLICHTEN_README.md
+    checksum: b1a354c4160a1fa92ab661e9c04cae5ea5e1a370f93f2bc5bd506509a9c47756
   - filename: scripts/extract_obligations.py
-    checksum: 2b1dc6e100cc25bda7c08a30c2222f2dc4ecd5fb878771df3ef945e67c688d41
+    checksum: 548b63b1594e9607ec95b0a2ac4bf9a749f801c9ea494adb7f4d30989b07394e
   - filename: scripts/fetch_gii_metadata.py
     checksum: f049703ea6e293f51046799b74824019dc1aed9949c7ea6410b57dd0068fc3a3
   - filename: scripts/reference_sort.py

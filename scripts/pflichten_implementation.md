@@ -105,7 +105,8 @@ Note: `konfidenz` is part of the `Obligation` Pydantic model (validated 0.0–1.
 
 - Use **Langdock** via the OpenAI Python SDK, consistent with `llm_extract_base_ONLY_INSPIRATION.py` (reference-only — do not import from it).
 - API key resolution: 1Password CLI lookup (`op`) in current implementation.
-- Defaults: `model=gpt-5.1`, `temperature=0.0`, `seed=42`.
+- Defaults: `model=gpt-5.4-mini`, `reasoning_effort=low`, `temperature=0.0`, `seed=42`.
+- Gemini models (`--model gemini-*`) go through Langdock's Google endpoint instead. Caveat: Langdock strips `thinkingConfig`, so Gemini thinking cannot be disabled — requests take 30-60s+ per large paragraph.
 
 ### Extraction logic
 
