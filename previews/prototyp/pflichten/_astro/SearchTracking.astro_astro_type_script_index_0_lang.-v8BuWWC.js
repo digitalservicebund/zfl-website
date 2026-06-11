@@ -1,0 +1,1 @@
+import{t as e}from"./module.37qQFHX1.js";var t=document.querySelector(`input.pf-input`);function n(e,t){let n;return r=>{clearTimeout(n),n=setTimeout(()=>e(r),t)}}var r=n(t=>{let n=t.trim();n.length>3&&e.capture(`search_input`,{query:n})},500);t?.addEventListener(`input`,e=>{e.target instanceof HTMLInputElement&&r(e.target.value)});
