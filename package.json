@@ -21,6 +21,7 @@
     "laws:validate-registry": "./scripts/run_pipeline_python.sh scripts/validate_law_registry.py",
     "laws:build-paragraphs": "./scripts/run_pipeline_python.sh scripts/build_norm_paragraphs.py",
     "laws:download": "./scripts/run_pipeline_python.sh scripts/download_laws.py",
+    "laws:fetch-metadata": "./scripts/run_pipeline_python.sh scripts/fetch_gii_metadata.py",
     "laws:extract-obligations": "./scripts/run_pipeline_python.sh scripts/extract_obligations.py",
     "laws:concat-obligations": "./scripts/run_pipeline_python.sh scripts/concat_obligations_csv.py",
     "laws:publish-ui-data": "./scripts/run_pipeline_python.sh scripts/publish_laws_ui_data.py",

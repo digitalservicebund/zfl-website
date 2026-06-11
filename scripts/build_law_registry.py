@@ -79,8 +79,100 @@ def read_gii_index_xml(local_file: str) -> str:
     return fetch_text(GII_INDEX_URL, "application/xml,text/xml;q=0.9,*/*;q=0.1")
 
 
+def read_gii_xml_metadata(slug: str, xml_dir: Path, metadata_cache: dict | None = None) -> dict:
+    """Extract metadata fields for a GII law.
+
+    Priority order:
+    1. Pre-downloaded XML file in xml_dir (full corpus download)
+    2. Lightweight metadata cache from fetch_gii_metadata.py
+    3. All None (law not yet fetched)
+
+    Returns a dict with keys: jurabk, kurzue, ausfertigung_datum, norm_count.
+    """
+    xml_file = xml_dir / f"{slug}.xml"
+    if xml_file.exists():
+        try:
+            xml = xml_file.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            xml = ""
+
+        def _tag(name: str) -> str | None:
+            m = re.search(rf"<{name}[^>]*>([^<]+)</{name}>", xml)
+            return decode_xml_entities(m.group(1).strip()) if m else None
+
+        return {
+            "jurabk": _tag("jurabk"),
+            "kurzue": _tag("kurzue"),
+            "ausfertigung_datum": _tag("ausfertigung-datum"),
+            "norm_count": len(re.findall(r"<norm\b", xml)),
+        }
+
+    if metadata_cache and slug in metadata_cache:
+        cached = metadata_cache[slug]
+        return {
+            "jurabk": cached.get("jurabk"),
+            "kurzue": cached.get("kurzue"),
+            "ausfertigung_datum": cached.get("ausfertigung_datum"),
+            "norm_count": None,
+        }
+
+    return {"jurabk": None, "kurzue": None, "ausfertigung_datum": None, "norm_count": None}
+
+
+def _clean_eu_title_html(fragment: str) -> str:
+    text = re.sub(r"<[^>]+>", " ", fragment)
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def read_eu_xhtml_metadata(celex: str, html_dir: Path) -> dict:
+    """Extract title and article count from a downloaded EUR-Lex XHTML file.
+
+    Returns a dict with keys: name, kurzue, norm_count.  Values are None when absent.
+    """
+    xhtml_file = html_dir / f"{celex}.DEU.xhtml"
+    if not xhtml_file.exists():
+        return {"name": None, "kurzue": None, "norm_count": None}
+    try:
+        html = xhtml_file.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return {"name": None, "kurzue": None, "norm_count": None}
+
+    title_parts: list[str] = []
+    title_block = re.search(r'<div class="eli-main-title"[^>]*>([\s\S]*?)</div>', html)
+    if title_block:
+        for fragment in re.findall(r'<p\s+class="oj-doc-ti"[^>]*>([\s\S]*?)</p>', title_block.group(1)):
+            cleaned = _clean_eu_title_html(fragment)
+            if cleaned:
+                title_parts.append(cleaned)
+
+    if not title_parts:
+        m = re.search(r'<p\s+class="oj-doc-ti"[^>]*>([\s\S]*?)</p>', html)
+        if m:
+            cleaned = _clean_eu_title_html(m.group(1))
+            if cleaned:
+                title_parts.append(cleaned)
+
+    name = title_parts[0] if title_parts else None
+    kurzue = " ".join(title_parts) if title_parts else None
+    norm_count = len(re.findall(r'class="oj-sti-art"', html)) or None
+
+    return {"name": name, "kurzue": kurzue, "norm_count": norm_count}
+
+
+def load_gii_metadata_cache() -> dict:
+    cache_file = LAW_PATHS["registry_file"].parent.parent / "cache" / "gii_metadata.json"
+    if cache_file.exists():
+        try:
+            return json.loads(cache_file.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            pass
+    return {}
+
+
 def build_german_registry_entries(gii_index_file: str) -> list[dict]:
     xml = read_gii_index_xml(gii_index_file)
+    xml_dir = LAW_PATHS["de_norm_xml_dir"]
+    metadata_cache = load_gii_metadata_cache()
     entries: list[dict] = []
     for block in re.findall(r"<item>([\s\S]*?)</item>", xml):
         title = decode_xml_entities(extract_tag_value(block, "title"))
@@ -88,10 +180,15 @@ def build_german_registry_entries(gii_index_file: str) -> list[dict]:
         slug = slug_from_gii_link(link)
         if not title or not slug:
             continue
+        meta = read_gii_xml_metadata(slug, xml_dir, metadata_cache)
         row = RegistryEntry(
             abbrev=slug,
             source="gesetze-im-internet",
             name=title,
+            jurabk=meta["jurabk"],
+            kurzue=meta["kurzue"],
+            ausfertigung_datum=meta["ausfertigung_datum"],
+            norm_count=meta["norm_count"],
             gii_slug=slug,
             gii_xml_zip_url=link,
             url=f"https://www.gesetze-im-internet.de/{slug}/index.html",
@@ -303,16 +400,20 @@ def main() -> None:
     de_entries = build_german_registry_entries(args.gii_index_file)
     eu_celex = build_eu_celex_set(args)
 
-    eu_entries = [
-        RegistryEntry(
+    eu_entries = []
+    html_dir = LAW_PATHS["eu_norm_html_dir"]
+    for celex in eu_celex:
+        eu_meta = read_eu_xhtml_metadata(celex, html_dir)
+        row = RegistryEntry(
             abbrev=celex,
             source="eurlex",
-            name=f"CELEX {celex}",
+            name=eu_meta["name"] or f"CELEX {celex}",
+            kurzue=eu_meta["kurzue"],
+            norm_count=eu_meta["norm_count"],
             celex=celex,
             url=f"https://eur-lex.europa.eu/legal-content/DE/TXT/HTML/?uri=CELEX:{celex}",
-        ).model_dump()
-        for celex in eu_celex
-    ]
+        )
+        eu_entries.append(row.model_dump())
 
     registry = sort_registry(dedupe_registry([*de_entries, *eu_entries]))
 

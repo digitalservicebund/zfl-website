@@ -63,10 +63,18 @@ fileignoreconfig:
     checksum: 585af9a443434b8caf56dae715544745714fff5e0c4b5d2cc202275950e3a684
   - filename: src/pages/begleitungen/gesetzentwurf.png
     checksum: c847df945cbe36bd5627e2e91b07b08c331974ba78fc2e64d99e37ae5de3495a
+  - filename: data/laws/registry/laws.json
+    checksum: d91b8729505983b35914335a9f72da8a0786969daebc7dc4a62c976b80d14d13
+  - filename: public/data/laws.json
+    checksum: fb64e37561e3d4303bdd3792ef045df59e29ddd137f88d2b90490ba2b284a7e6
+  - filename: scripts/build_law_registry.py
+    checksum: 4b4529c26f6b4cd3a5d4a1d0706d8a83dcdd523631ba5f55efc23517b0a3a558
   - filename: scripts/concat_obligations_csv.py
     checksum: 6163e7dca5499a1bc0dfa691ceda7e9581a4e2151bd247ffa7ca6070dd3388d0
   - filename: scripts/extract_obligations.py
     checksum: 2b1dc6e100cc25bda7c08a30c2222f2dc4ecd5fb878771df3ef945e67c688d41
+  - filename: scripts/fetch_gii_metadata.py
+    checksum: f049703ea6e293f51046799b74824019dc1aed9949c7ea6410b57dd0068fc3a3
   - filename: scripts/reference_sort.py
     checksum: 3e7e189ff2cf8f7ea2c7f7f3fe2803fdf421b94ef2e1e26423fa2099c248bd36
   - filename: src/pages/werkzeuge/pflichten.astro
