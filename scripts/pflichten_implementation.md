@@ -77,19 +77,18 @@ To evaluate the approach we're starting with a test case in the financial space 
 
 The delimiter, encoding and column order must match `concat_obligations_csv.py` so the merge step works without changes.
 
-| Column                   | Source                                 | Notes                                                                                                                          |
-| ------------------------ | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | -------------- |
-| `norm`                   | `NormParagraph.law_abbrev`             | from input metadata, not LLM                                                                                                   |
-| `quelle`                 | `NormParagraph.url`                    | full URL to the paragraph (gesetze-im-internet down to § level; EUR-Lex to the whole act)                                      |
-| `referenz`               | paragraph `reference` + LLM `referenz` | Script prepends the paragraph's §/Article number to the sub-position string returned by the LLM (e.g. `§ 12 Absatz 2 Satz 1`). |
-| `art_der_vorgabe`        | LLM                                    | `Informationspflicht` \| `Handlungspflicht` \| `Unterlassungspflicht` \| `Duldungs-/Mitwirkungspflicht`                        |
-| `pflichtstaerke`         | LLM                                    | `muss` \| `soll`                                                                                                               |
-| `sprachlicher_indikator` | LLM                                    | the modal phrase triggering the obligation                                                                                     |
-| `normadressat_kategorie` | LLM                                    | comma-joined list of: `Bürgerinnen und Bürger`, `Wirtschaft`, `Öffentliche Verwaltung`                                         |
-| `normadressat_text`      | LLM                                    | verbatim addressee text from statute                                                                                           |
-| `zitat`                  | LLM                                    | exact quote containing the obligation                                                                                          |
-| `handlung`               | LLM                                    | one-sentence description of required action                                                                                    |
-| `bestandteile`           | LLM                                    | list of obligation components, pipe-joined (`"                                                                                 | "`) in the CSV |
+| Column                    | Source                                 | Notes                                                                                                                          |
+| ------------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `norm`                    | `NormParagraph.law_abbrev`             | from input metadata, not LLM                                                                                                   |
+| `referenz`                | paragraph `reference` + LLM `referenz` | Script prepends the paragraph's §/Article number to the sub-position string returned by the LLM (e.g. `§ 12 Absatz 2 Satz 1`). |
+| `vorgabe_zusammenfassung` | LLM                                    | one-sentence summary of the required action                                                                                    |
+| `zitat`                   | LLM                                    | exact quote containing the obligation                                                                                          |
+| `art_der_vorgabe`         | LLM                                    | `Informationspflicht` \| `Handlungspflicht` \| `Unterlassungspflicht` \| `Duldungs-/Mitwirkungspflicht`                        |
+| `pflichtstaerke`          | LLM                                    | `muss` \| `soll`                                                                                                               |
+| `sprachlicher_indikator`  | LLM                                    | the modal phrase triggering the obligation                                                                                     |
+| `normadressat_kategorie`  | LLM                                    | comma-joined list of: `Bürgerinnen und Bürger`, `Wirtschaft`, `Öffentliche Verwaltung`                                         |
+| `normadressat_text`       | LLM                                    | verbatim addressee text from statute                                                                                           |
+| `quelle`                  | `NormParagraph.url`                    | full URL to the paragraph (gesetze-im-internet down to § level; EUR-Lex to the whole act)                                      |
 
 Note: `konfidenz` is part of the `Obligation` Pydantic model (validated 0.0–1.0) but is **not** written to the CSV.
 
@@ -98,7 +97,6 @@ Note: `konfidenz` is part of the `Obligation` Pydantic model (validated 0.0–1.
 - The system prompt is loaded at runtime from `scripts/pflichten_prompt.txt` (no string duplication in code).
 - `pipeline_models.py` includes:
   - `Obligation` with `Literal` constraints for `art_der_vorgabe` (`Informationspflicht` | `Handlungspflicht` | `Unterlassungspflicht` | `Duldungs-/Mitwirkungspflicht`), `pflichtstaerke` (`muss` | `soll`), and `normadressat_kategorie` values.
-  - `bestandteile: list[str]` field on `Obligation` for decomposed obligation components.
   - `konfidenz: float` field (0.0–1.0) on `Obligation` — written to model, not to CSV.
   - `ObligationExtraction` (`{ "obligations": list[Obligation] }`) used as LLM `response_format`.
 - The script assembles each CSV row by combining the LLM's `Obligation` fields with the paragraph metadata (`law_abbrev`, `url`, `reference`).
@@ -164,7 +162,7 @@ Because this is an evaluation of the approach, add a light-weight quality check 
 ### UI components
 
 1. **Law selector** — searchable multi-select list of laws filtered by title, abbreviation, and `jurabk`. Laws with extraction data show an analysis badge (`N Pflichten in M Paragraphen/Artikeln`); unanalysed laws show a muted "Noch nicht analysiert" label. Bulk-select ("Treffer auswählen") and clear-selection buttons. Selected laws shown as removable chips.
-2. **Obligation preview table** — shows first 50 rows of the current filtered view (norm, referenz, normadressat_kategorie, handlung).
+2. **Obligation preview table** — shows a few example rows of the current filtered view with all export columns.
 3. **CSV export** — downloads the full filtered obligation set as semicolon-delimited, UTF-8-BOM CSV; filename: `Pflichten_Export_<YYYY-MM-DD>.csv`.
 
 ### Key implementation notes
@@ -218,7 +216,7 @@ The static site build (`pnpm build`) then picks up `public/data/*` automatically
 1. `pnpm laws:extract-obligations --norm HGB` completes, writes a CSV into `public/data/obligations/`, and resumes cleanly after Ctrl+C via the checkpoint file.  
    Status: ✅ Verified (`[HGB] 401/401 done`, `Extraction completed.`, `Processed paragraphs this run: 401`, `Extracted obligations this run: 619`, progress file `data/laws/cache/extraction_progress_hgb.json`).
 2. `pnpm laws:concat-obligations` consumes the per-law CSVs without modification and produces a valid `Pflichten_LLM_All.csv`.  
-   Status: ⚠️ Not yet re-verified after the column schema change (`normadressaten` → `normadressat_kategorie`, `bestandteile` added, `konfidenz`/`url` removed from CSV).
+   Status: ⚠️ Not yet re-verified after the column schema change (`normadressaten` → `normadressat_kategorie`, `konfidenz`/`url` removed from CSV).
 3. UI page loads, law search works, obligation preview shows, CSV export downloads correctly.  
    Status: ✅ Implemented. Not yet verified against a full pipeline run.
 4. No API keys or secrets in frontend code or committed files.  

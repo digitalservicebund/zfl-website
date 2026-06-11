@@ -8,6 +8,7 @@ import csv
 from pathlib import Path
 
 from laws_paths import LAW_PATHS
+from pipeline_models import OBLIGATION_CSV_COLUMNS
 from reference_sort import reference_sort_key
 
 
@@ -40,16 +41,22 @@ def main() -> None:
         )
 
     merged_rows: list[dict[str, str]] = []
-    columns: list[str] | None = None
 
     for file_path in input_files:
-        rows = read_csv(file_path)
-        if columns is None and rows:
-            columns = list(rows[0].keys())
-        merged_rows.extend(rows)
+        merged_rows.extend(read_csv(file_path))
 
-    if not columns:
-        raise SystemExit("Input files are empty or have no columns.")
+    if not merged_rows:
+        raise SystemExit("Input files are empty or have no rows.")
+
+    extra_columns = sorted(
+        {
+            key
+            for row in merged_rows
+            for key in row
+            if key not in OBLIGATION_CSV_COLUMNS
+        }
+    )
+    columns = [*OBLIGATION_CSV_COLUMNS, *extra_columns]
 
     merged_rows.sort(
         key=lambda row: (

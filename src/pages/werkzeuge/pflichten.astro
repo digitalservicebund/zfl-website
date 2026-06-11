@@ -244,21 +244,16 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
 
       {/* Preview */}
       <div x-show="filteredObligations.length > 0" x-cloak>
-        <div class="mb-12 flex flex-wrap items-baseline justify-between gap-8">
-          <h3 class="mt-0 mb-0">Vorschau</h3>
-          <p class="kern-subline py-0">
-            Zeige <span x-text="previewRows.length"></span> von
-            <span x-text="filteredObligations.length"></span> Pflichten
-          </p>
-        </div>
-        <div class="border-lavender-400 overflow-x-auto rounded-sm border">
+        <h3 class="mt-0 mb-12">Vorschau</h3>
+        <div
+          class="preview-fade border-lavender-400 overflow-x-auto rounded-sm border"
+        >
           <table class="w-full border-collapse">
             <thead>
               <tr>
-                <th class={th()}>Norm</th>
-                <th class={th()}>Referenz</th>
-                <th class={th()}>Normadressat-Kategorie</th>
-                <th class={th()}>Handlung</th>
+                <template x-for="header in exportHeaders" :key="header">
+                  <th class={th()} x-text="columnLabel(header)"></th>
+                </template>
               </tr>
             </thead>
             <tbody>
@@ -267,18 +262,11 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
                 :key="`${row.norm}-${row.referenz}-${index}`"
               >
                 <tr class="even:bg-lavender-200">
-                  <td class={`${td()} font-semibold whitespace-nowrap`}
-                    ><span x-text="row.norm"></span></td
-                  >
-                  <td class={`${td()} whitespace-nowrap`}
-                    ><span x-text="row.referenz"></span></td
-                  >
-                  <td class={td()}
-                    ><span x-text="row.normadressat_kategorie"></span></td
-                  >
-                  <td class={`${td()} min-w-280`}
-                    ><span x-text="row.handlung"></span></td
-                  >
+                  <template x-for="header in exportHeaders" :key="header">
+                    <td class={td()} x-bind:class="previewCellClass(header)"
+                      ><span x-text="row[header]"></span></td
+                    >
+                  </template>
                 </tr>
               </template>
             </tbody>
@@ -292,6 +280,16 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
 <style>
   [x-cloak] {
     display: none !important;
+  }
+
+  .preview-fade {
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 55%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%);
   }
 </style>
 
@@ -313,6 +311,43 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
   const CSV_URL = "/data/obligations/Pflichten_LLM_All.csv";
   const CSV_FALLBACK_URL = "/data/obligations/Pflichten_LLM_HGB.csv";
   const LAWS_URL = "/data/laws.json";
+  const PREVIEW_ROW_LIMIT = 5;
+
+  const EXPORT_HEADERS_FALLBACK = [
+    "norm",
+    "referenz",
+    "vorgabe_zusammenfassung",
+    "zitat",
+    "art_der_vorgabe",
+    "pflichtstaerke",
+    "sprachlicher_indikator",
+    "normadressat_kategorie",
+    "normadressat_text",
+    "quelle",
+  ];
+
+  const orderExportHeaders = (headers: string[]) => {
+    const known = EXPORT_HEADERS_FALLBACK.filter((header) =>
+      headers.includes(header),
+    );
+    const extra = headers.filter(
+      (header) => !EXPORT_HEADERS_FALLBACK.includes(header),
+    );
+    return [...known, ...extra];
+  };
+
+  const COLUMN_LABELS: Record<string, string> = {
+    norm: "Norm",
+    quelle: "Quelle",
+    referenz: "Referenz",
+    art_der_vorgabe: "Art der Vorgabe",
+    pflichtstaerke: "Pflichtstärke",
+    sprachlicher_indikator: "Sprachlicher Indikator",
+    normadressat_kategorie: "Normadressat-Kategorie",
+    normadressat_text: "Normadressat",
+    zitat: "Zitat",
+    vorgabe_zusammenfassung: "Vorgabe-Zusammenfassung",
+  };
 
   type AnalysisStats = {
     obligations: number;
@@ -662,8 +697,35 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
           .sort(compareObligations);
       },
 
+      get exportHeaders() {
+        const headers =
+          this.csvHeaders.length > 0
+            ? this.csvHeaders
+            : EXPORT_HEADERS_FALLBACK;
+        return orderExportHeaders(headers);
+      },
+
       get previewRows() {
-        return this.filteredObligations.slice(0, 50);
+        return this.filteredObligations.slice(0, PREVIEW_ROW_LIMIT);
+      },
+
+      columnLabel(header: string) {
+        return COLUMN_LABELS[header] ?? header;
+      },
+
+      previewCellClass(header: string) {
+        if (header === "norm") return "font-semibold whitespace-nowrap";
+        if (header === "referenz" || header === "quelle") {
+          return "whitespace-nowrap";
+        }
+        if (header === "zitat") return "min-w-560";
+        if (
+          header === "vorgabe_zusammenfassung" ||
+          header === "normadressat_text"
+        ) {
+          return "min-w-280";
+        }
+        return "";
       },
 
       get canExport() {
@@ -723,21 +785,7 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
       downloadCsv() {
         if (!this.canExport) return;
 
-        const headers =
-          this.csvHeaders.length > 0
-            ? this.csvHeaders
-            : [
-                "norm",
-                "quelle",
-                "referenz",
-                "art_der_vorgabe",
-                "pflichtstaerke",
-                "sprachlicher_indikator",
-                "normadressat_kategorie",
-                "normadressat_text",
-                "zitat",
-                "handlung",
-              ];
+        const headers = this.exportHeaders;
 
         const lines = [
           headers.join(";"),

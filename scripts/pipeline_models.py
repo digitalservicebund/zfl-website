@@ -43,6 +43,19 @@ ArtDerVorgabe = Literal[
 
 Pflichtstaerke = Literal["muss", "soll"]
 
+OBLIGATION_CSV_COLUMNS = [
+    "norm",
+    "referenz",
+    "vorgabe_zusammenfassung",
+    "zitat",
+    "art_der_vorgabe",
+    "pflichtstaerke",
+    "sprachlicher_indikator",
+    "normadressat_kategorie",
+    "normadressat_text",
+    "quelle",
+]
+
 
 class Obligation(BaseModel):
     referenz: str
@@ -51,7 +64,7 @@ class Obligation(BaseModel):
     normadressat_kategorie: list[NormAdressat]
     normadressat_text: str
     zitat: str
-    handlung: str
+    vorgabe_zusammenfassung: str
     sprachlicher_indikator: str
     konfidenz: float = Field(ge=0.0, le=1.0)
 

@@ -187,7 +187,7 @@ def obligation_to_row(paragraph: NormParagraph, obligation) -> dict[str, str]:
         "normadressat_kategorie": ", ".join(obligation.normadressat_kategorie),
         "normadressat_text": obligation.normadressat_text,
         "zitat": obligation.zitat,
-        "handlung": obligation.handlung,
+        "vorgabe_zusammenfassung": obligation.vorgabe_zusammenfassung,
     }
 
 

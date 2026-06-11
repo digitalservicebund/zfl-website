@@ -166,8 +166,8 @@ Pro Vorgabe:
   der Pflicht unerheblich sind (Auslassungen mit "…" kennzeichnen). Das
   Zitat ist die maßgebliche Detailquelle der Vorgabe; es darf aber nicht
   ausschweifen — keine Nachbarsätze oder Regelungen ohne Bezug zur Pflicht.
-- handlung: EIN kurzer, stark zusammenfassender Satz: Wer muss was tun?
-  Die Handlung dient als Überblick und Einstieg in die Vorgabe — sie soll
+- vorgabe_zusammenfassung: EIN kurzer, stark zusammenfassender Satz: Wer muss was tun?
+  Die Zusammenfassung dient als Überblick und Einstieg in die Vorgabe — sie soll
   auf einen Blick erfassbar machen, worum es geht. Keine Aufzählung von
   Einzelheiten, keine Wiederholung von Bedingungen, Fristen oder
   Aufzählungspunkten — diese Details stehen im Zitat.
