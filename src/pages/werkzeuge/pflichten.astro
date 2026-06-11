@@ -20,6 +20,8 @@ const styles = tv({
     countBadge:
       "bg-cosmic-blue-base inline-flex items-center gap-6 rounded-full px-12 py-4 text-sm font-semibold text-white",
     chip: "bg-lavender-base text-cosmic-blue-base inline-flex items-center gap-6 rounded-full py-4 pr-6 pl-12 text-sm",
+    analysisBadge:
+      "bg-lavender-base text-cosmic-blue-base mt-8 inline-flex rounded-full px-10 py-4 text-xs font-semibold",
     lawCard:
       "group flex cursor-pointer items-start gap-12 rounded-sm border p-16 text-left transition",
     th: "kern-label border-lavender-400 bg-lavender-base border-b-2 px-16 py-12 text-left align-top whitespace-nowrap",
@@ -27,7 +29,8 @@ const styles = tv({
   },
 });
 
-const { searchInput, countBadge, chip, lawCard, th, td } = styles();
+const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
+  styles();
 ---
 
 <Layout title={frontmatter.title} description={description}>
@@ -86,7 +89,7 @@ const { searchInput, countBadge, chip, lawCard, th, td } = styles();
             type="search"
             placeholder="Titel oder Kürzel suchen …"
             aria-label="Gesetze durchsuchen"
-            x-model.debounce.300ms="lawQuery"
+            x-model.debounce.500ms="lawQuery"
           />
           <button
             type="button"
@@ -168,9 +171,15 @@ const { searchInput, countBadge, chip, lawCard, th, td } = styles();
                 class="text-icon-muted mt-4 block text-xs leading-snug"
                 x-text="lawDescription(law)"></span>
               <span
-                x-show="law.norm_count"
-                class="text-icon-muted mt-4 block text-xs"
-                x-text="`${law.norm_count} Normen`"></span>
+                x-show="isLawAnalysed(law)"
+                x-cloak
+                class={analysisBadge()}
+                x-text="lawAnalysisLabel(law)"></span>
+              <span
+                x-show="!isLawAnalysed(law)"
+                x-cloak
+                class="text-icon-muted mt-8 block text-xs italic"
+                x-text="lawUnanalysedLabel(law)"></span>
             </span>
           </label>
         </template>
@@ -248,7 +257,7 @@ const { searchInput, countBadge, chip, lawCard, th, td } = styles();
               <tr>
                 <th class={th()}>Norm</th>
                 <th class={th()}>Referenz</th>
-                <th class={th()}>Normadressaten</th>
+                <th class={th()}>Normadressat-Kategorie</th>
                 <th class={th()}>Handlung</th>
               </tr>
             </thead>
@@ -264,7 +273,8 @@ const { searchInput, countBadge, chip, lawCard, th, td } = styles();
                   <td class={`${td()} whitespace-nowrap`}
                     ><span x-text="row.referenz"></span></td
                   >
-                  <td class={td()}><span x-text="row.normadressaten"></span></td
+                  <td class={td()}
+                    ><span x-text="row.normadressat_kategorie"></span></td
                   >
                   <td class={`${td()} min-w-280`}
                     ><span x-text="row.handlung"></span></td
@@ -304,7 +314,12 @@ const { searchInput, countBadge, chip, lawCard, th, td } = styles();
   const CSV_FALLBACK_URL = "/data/obligations/Pflichten_LLM_HGB.csv";
   const LAWS_URL = "/data/laws.json";
 
-  /** Decode a EUR-Lex CELEX number (format 3YYYYTnnnn) into a readable DE reference. */
+  type AnalysisStats = {
+    obligations: number;
+    uniqueReferences: number;
+  };
+
+  /** Decode a EUR-Lex CELEX number (format 3YYYYTnnnn) into a short DE reference. */
   const decodeCelex = (celex: string): string => {
     const m = celex.match(/^3(\d{4})([LR])(\d{4})$/);
     if (!m) return celex;
@@ -314,7 +329,29 @@ const { searchInput, countBadge, chip, lawCard, th, td } = styles();
     const treaty = year >= 2010 ? "EU" : "EG";
     return type === "L"
       ? `Richtlinie ${year}/${num}/${treaty}`
-      : `Verordnung (${treaty}) Nr.\u00a0${num}/${year}`;
+      : `Verordnung (${treaty}) Nr.\u00a0${year}/${num}`;
+  };
+
+  const formatEuLongTitle = (title: string) => {
+    const trimmed = title.trim();
+    if (!trimmed) return "";
+
+    const splitMatch = trimmed.match(/^(.+?)(\s+(?:vom|über)\s+[\s\S]*)$/i);
+    if (!splitMatch) return trimmed;
+
+    const header = splitMatch[1].trim();
+    const tail = splitMatch[2];
+    if (header === header.toUpperCase()) {
+      const formatted = header
+        .toLowerCase()
+        .replace(
+          /\((eu|eg|ewr)\)/g,
+          (_, token: string) => `(${token.toUpperCase()})`,
+        );
+      return formatted.charAt(0).toUpperCase() + formatted.slice(1) + tail;
+    }
+
+    return trimmed;
   };
 
   const stripBom = (value: string) => value.replace(/^\uFEFF/, "");
@@ -329,6 +366,81 @@ const { searchInput, countBadge, chip, lawCard, th, td } = styles();
       return `"${normalized.replaceAll('"', '""')}"`;
     }
     return normalized;
+  };
+
+  const referenceSortKey = (reference: string): Array<string | number> => {
+    const ref = reference.trim();
+
+    const sectionMatch = ref.match(/^§\s*(\d+)\s*([a-zA-Z])?\b/i);
+    if (sectionMatch) {
+      const key: Array<string | number> = [
+        0,
+        Number.parseInt(sectionMatch[1], 10),
+        sectionMatch[2] ?? "",
+      ];
+      const rest = ref.slice(sectionMatch[0].length);
+      for (const [pattern, numeric] of [
+        [/(?:Absatz|Abs\.)\s*(\d+)/gi, true],
+        [/(?:Satz|Sat\.)\s*(\d+)/gi, true],
+        [/(?:Nummer|Nr\.)\s*(\d+)/gi, true],
+        [/(?:Buchstabe|Buchst\.|lit\.)\s*([a-zA-Z])/gi, false],
+      ] as const) {
+        for (const match of rest.matchAll(pattern)) {
+          const value = match[1];
+          key.push(numeric ? Number.parseInt(value, 10) : value.toLowerCase());
+        }
+      }
+      return key;
+    }
+
+    const articleMatch = ref.match(/^Art\.?\s*(\d+)\b/i);
+    if (articleMatch) {
+      const key: Array<string | number> = [
+        1,
+        Number.parseInt(articleMatch[1], 10),
+      ];
+      const rest = ref.slice(articleMatch[0].length);
+      for (const [pattern, numeric] of [
+        [/(?:Absatz|Abs\.)\s*(\d+)/gi, true],
+        [/(?:Satz|Sat\.)\s*(\d+)/gi, true],
+        [/(?:Nummer|Nr\.)\s*(\d+)/gi, true],
+        [/(?:Buchstabe|Buchst\.|lit\.)\s*([a-zA-Z])/gi, false],
+      ] as const) {
+        for (const match of rest.matchAll(pattern)) {
+          const value = match[1];
+          key.push(numeric ? Number.parseInt(value, 10) : value.toLowerCase());
+        }
+      }
+      return key;
+    }
+
+    return [2, ref.toLowerCase()];
+  };
+
+  const compareReferences = (left: string, right: string) => {
+    const leftKey = referenceSortKey(left);
+    const rightKey = referenceSortKey(right);
+    const length = Math.max(leftKey.length, rightKey.length);
+
+    for (let index = 0; index < length; index += 1) {
+      const leftPart = leftKey[index] ?? "";
+      const rightPart = rightKey[index] ?? "";
+      if (leftPart === rightPart) continue;
+
+      if (typeof leftPart === "number" && typeof rightPart === "number") {
+        return leftPart - rightPart;
+      }
+
+      return String(leftPart).localeCompare(String(rightPart));
+    }
+
+    return 0;
+  };
+
+  const compareObligations = (left: ObligationRow, right: ObligationRow) => {
+    const normCompare = (left.norm ?? "").localeCompare(right.norm ?? "", "de");
+    if (normCompare !== 0) return normCompare;
+    return compareReferences(left.referenz ?? "", right.referenz ?? "");
   };
 
   const parseDelimitedCsv = (raw: string, delimiter = ";") => {
@@ -414,13 +526,95 @@ const { searchInput, countBadge, chip, lawCard, th, td } = styles();
       loading: true,
       error: "",
 
-      /** Main label shown prominently on the card (Abk for DE, title for EU). */
+      analysisByLaw: {} as Record<string, AnalysisStats>,
+      buildAnalysisIndex() {
+        const refsByLaw = new Map<string, Set<string>>();
+        const byLaw: Record<string, AnalysisStats> = {};
+
+        for (const row of this.obligations) {
+          const normKey = (row.norm ?? "").trim().toLowerCase();
+          if (!normKey) continue;
+
+          const law = this.laws.find(
+            (entry) =>
+              entry.abbrev.toLowerCase() === normKey ||
+              (entry.jurabk ?? "").toLowerCase() === normKey,
+          );
+          if (!law) continue;
+
+          const stats = byLaw[law.abbrev] ?? {
+            obligations: 0,
+            uniqueReferences: 0,
+          };
+          stats.obligations += 1;
+
+          const reference = (row.referenz ?? "").trim();
+          if (reference) {
+            const refs = refsByLaw.get(law.abbrev) ?? new Set<string>();
+            refs.add(reference);
+            refsByLaw.set(law.abbrev, refs);
+          }
+
+          byLaw[law.abbrev] = stats;
+        }
+
+        for (const [abbrev, stats] of Object.entries(byLaw)) {
+          stats.uniqueReferences = refsByLaw.get(abbrev)?.size ?? 0;
+        }
+
+        this.analysisByLaw = byLaw;
+      },
+
+      isLawAnalysed(law: LawRecord) {
+        return (this.analysisByLaw[law.abbrev]?.obligations ?? 0) > 0;
+      },
+
+      normUnitLabel(
+        law: LawRecord,
+        count: number,
+        context: "in" | "count" = "in",
+      ) {
+        if (law.source === "eurlex") {
+          if (count === 1) return "Artikel";
+          return context === "in" ? "Artikeln" : "Artikel";
+        }
+        return count === 1 ? "Paragraph" : "Paragraphen";
+      },
+
+      pflichtLabel(count: number) {
+        return count === 1 ? "Pflicht" : "Pflichten";
+      },
+
+      lawAnalysisLabel(law: LawRecord) {
+        const stats = this.analysisByLaw[law.abbrev];
+        if (!stats) return "";
+
+        const obligations = stats.obligations.toLocaleString("de-DE");
+        const obligationPart = `${obligations} ${this.pflichtLabel(stats.obligations)}`;
+        const normCount = law.norm_count ?? stats.uniqueReferences;
+        if (!normCount) return obligationPart;
+
+        const norms = normCount.toLocaleString("de-DE");
+        const unit = this.normUnitLabel(law, normCount);
+        return `${obligationPart} in ${norms} ${unit}`;
+      },
+
+      lawUnanalysedLabel(law: LawRecord) {
+        const base = "Noch nicht analysiert";
+        if (!law.norm_count) return base;
+
+        const count = law.norm_count.toLocaleString("de-DE");
+        const unit = this.normUnitLabel(law, law.norm_count, "count");
+        return `${base} · ${count} ${unit}`;
+      },
+
+      /** Main label shown prominently on the card (Abk for DE, short ref for EU). */
       lawLabel(law: LawRecord): string {
-        if (law.source === "eurlex") return law.name;
+        if (law.source === "eurlex") return decodeCelex(law.abbrev);
         return law.jurabk ?? law.abbrev.replace(/^_+/, "");
       },
 
-      /** Full title shown beneath the label (DE only; CELEX ref for EU). */
+      /** Full title shown beneath the label (DE: Kurztitel; EU: long official title). */
       lawDescription(law: LawRecord): string {
         if (law.source === "eurlex") return decodeCelex(law.abbrev);
         return law.kurzue ?? law.name;
@@ -430,7 +624,9 @@ const { searchInput, countBadge, chip, lawCard, th, td } = styles();
       lawChipLabel(abbrev: string): string {
         const law = this.laws.find((l: LawRecord) => l.abbrev === abbrev);
         if (!law) return abbrev;
-        if (law.source === "eurlex") return decodeCelex(law.abbrev);
+        if (law.source === "eurlex") {
+          return formatEuLongTitle(law.kurzue ?? law.name);
+        }
         return law.jurabk ?? law.abbrev.replace(/^_+/, "");
       },
 
@@ -459,9 +655,11 @@ const { searchInput, countBadge, chip, lawCard, th, td } = styles();
               .map((key) => key.toLowerCase());
           }),
         );
-        return this.obligations.filter((obligation) =>
-          normKeys.has((obligation.norm ?? "").toLowerCase()),
-        );
+        return this.obligations
+          .filter((obligation) =>
+            normKeys.has((obligation.norm ?? "").toLowerCase()),
+          )
+          .sort(compareObligations);
       },
 
       get previewRows() {
@@ -534,13 +732,12 @@ const { searchInput, countBadge, chip, lawCard, th, td } = styles();
                 "referenz",
                 "art_der_vorgabe",
                 "pflichtstaerke",
-                "normadressaten",
+                "sprachlicher_indikator",
+                "normadressat_kategorie",
                 "normadressat_text",
                 "zitat",
                 "handlung",
-                "sprachlicher_indikator",
-                "konfidenz",
-                "url",
+                "bestandteile",
               ];
 
         const lines = [
@@ -569,6 +766,7 @@ const { searchInput, countBadge, chip, lawCard, th, td } = styles();
 
         try {
           await Promise.all([this.fetchLaws(), this.fetchObligations()]);
+          this.buildAnalysisIndex();
         } catch (error) {
           this.error =
             error instanceof Error

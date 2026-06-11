@@ -78,7 +78,7 @@ fileignoreconfig:
   - filename: scripts/reference_sort.py
     checksum: 3e7e189ff2cf8f7ea2c7f7f3fe2803fdf421b94ef2e1e26423fa2099c248bd36
   - filename: src/pages/werkzeuge/pflichten.astro
-    checksum: c788e4a670255028338045bdeb062ab4f574d39153a49038d12043f8c121cff9
+    checksum: c3667f2ca4017894d09ec120082c5e72dbba75661b56b1beeb2ccd97375e44c4
   - filename: src/components/global/DebugGrid.astro
     allowed_patterns:
       - \@keydown

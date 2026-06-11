@@ -198,6 +198,17 @@ export const werkzeuge = {
   navLabel: null,
 } as const;
 
+export const werkzeuge_pflichten = {
+  key: "werkzeuge_pflichten",
+  path: "/werkzeuge/pflichten",
+  title: "Pflichten-Export",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
 export const allRoutes = [
   barrierefreiheit,
   begleitungen,
@@ -216,4 +227,5 @@ export const allRoutes = [
   ueber_daranArbeitenWir,
   ueber_zahlenUndFakten,
   werkzeuge,
+  werkzeuge_pflichten,
 ] as const;
