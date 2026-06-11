@@ -107,3 +107,10 @@ The project includes comprehensive testing with both unit and end-to-end tests:
 
 - Integrated with Playwright using `@axe-core/playwright`
 - Accessibility checks included in e2e test suite
+
+## Pagefind
+
+The site uses [Pagefind](https://pagefind.app/) for search. The index is generated at build time.
+
+- **Regenerate index (development)**: `pnpm clean && pnpm dev`
+- **Debug**: `pnpm pagefind:debug` (starts the Pagefind Playground)

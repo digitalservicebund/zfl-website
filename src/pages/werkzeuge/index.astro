@@ -1,115 +1,323 @@
 ---
 import Hero from "@/components/Hero.astro";
-import { ZFL_EMAIL } from "@/config/constants";
 import Layout from "@/layouts/Layout.astro";
-import { mailto } from "@/utils/mailtoHelper";
+import Modal from "@/components/Modal.astro";
 import KernCard from "@/components/KernCard.astro";
-import digitalcheckImage from "./Digitalcheck.png";
-import eGesetzgebungImage from "./eGesetzgebung.png";
-import eNormImage from "./eNorm.jpg";
-import fimImage from "./FIM.png";
-import interoperableEuropeImage from "./InteroperableEurope.png";
-import rulemapBuilderImage from "./RulemapBuilder.jpg";
+import SearchButton from "@/components/search/SearchButton.astro";
+import SearchModal from "@/components/search/SearchModal.astro";
+import { werkzeugKeywords } from "@/components/search/keywords";
+import { Icon } from "astro-icon/components";
+import { getCollection } from "astro:content";
+import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
+import { WERKZEUGE_TYPES } from "@/content.config";
 
 export const frontmatter = {
   title: "Werkzeuge",
-  sitemap: true,
 };
+
+const description =
+  "Auf dieser Seite finden Sie Werkzeuge, die Sie bei der Regelungsarbeit unterstützen: hilfreiche Links zu Anleitungen, Hilfsmittel und Tools.";
+
+const allTools = await getCollection("werkzeuge");
+
+type Category = (typeof allTools)[number]["data"]["category"][number];
+
+const getFilteredTools = (category: Category) =>
+  allTools.filter((tool) => tool.data.category.includes(category));
+
+const categories = [
+  {
+    id: "problemanalyse",
+    title: "ein Problem besser verstehen und analysieren",
+    tools: getFilteredTools("Problemanalyse"),
+  },
+  {
+    id: "digital-und-praxistauglichkeit",
+    title: "Digital- und Praxistauglichkeit sicherstellen",
+    tools: getFilteredTools("Praxistauglichkeit"),
+  },
+  {
+    id: "rechtsfoermlichkeit",
+    title: "die Rechtsförmlichkeit des Vorhabens gewährleisten",
+    tools: getFilteredTools("Rechtsförmlichkeit"),
+  },
+  {
+    id: "folgenabschaetzung",
+    title: "die Folgen eines Vorhabens abschätzen",
+    tools: getFilteredTools("Folgenabschätzung"),
+  },
+  {
+    id: "beteiligung",
+    title: "näher mit Beteiligten arbeiten",
+    tools: getFilteredTools("Beteiligung"),
+  },
+];
+
+const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
+const PAGEFIND_INSTANCE = "werkzeuge";
 ---
 
-<Layout title={frontmatter.title}>
-  <main class="breakout-grid">
+<Layout title={frontmatter.title} description={description}>
+  <main x-data="werkzeuge" class="breakout-grid">
     <Hero level="main">
       <h1>{frontmatter.title}</h1>
-      <div slot="subtitle">
-        <p>
-          Auf dieser Seite finden Sie hilfreiche Links zu Anleitungen und
-          Hilfsmittel, die Sie bei der Regelungsarbeit unterstützen.
-        </p>
-        <p>
-          Unterschiedliche Checks und Arbeitshilfen (wie z. B. der <a
-            href="https://digitalcheck.bund.de/"
-            target="_blank">Digitalcheck</a
-          >,
-          <a href="https://www.gleichstellungs-check.de/" target="_blank"
-            >Gleichstellungscheck</a
-          > oder <a href="https://jugend-check.de/" target="_blank"
-            >Jugendcheck</a
-          >) zielen in Teilen auf die gleiche Wirkung ab: Praxis- und
-          digitaltaugliche Regelungen und Bürokratierückbau. Bei der
-          Zusammenführung diverser Ansätze verfolgen wir das Ziel, Ihre
-          Regelungsarbeit einfacher und effizienter zu gestalten.
-        </p>
-        <p>
-          <a
-            href={mailto(
-              ZFL_EMAIL.display,
-              `Interesse am Thema "Konsolidierung der Instrumente"`,
-            )}>Mitarbeiten an diesem Thema</a
-          > (öffnet E-Mail)
-        </p>
+      <p slot="subtitle">
+        Auf dieser Seite finden Sie Werkzeuge, die Sie bei der Regelungsarbeit
+        unterstützen. Diese Sammlung wird stetig ausgebaut.
+      </p>
+    </Hero>
+    <section>
+      <h2>Ich möchte ...</h2>
+      {
+        categories.map(({ id, title }) => (
+          <p>
+            <a href={`#${id}`} class="kern-heading-medium">
+              <Icon
+                name="ic:round-arrow-downward"
+                class="text-cosmic-blue-base inline-block h-32 w-32 pr-4"
+              />
+              {title}
+            </a>
+          </p>
+        ))
+      }
+      <hr class="kern-divider mt-lg -mb-16" aria-hidden="true" />
+    </section>
+    <div aria-hidden="true" x-ref="sentinel" class="h-px -translate-y-px"></div>
+
+    <div
+      class="breakout top-0 z-10 bg-white py-16 transition-shadow lg:sticky"
+      x-data="{ stuck: false }"
+      x-bind:class="stuck ? 'lg:shadow-md' : ''"
+      x-init="
+        new IntersectionObserver(([e]) => { stuck = !e.isIntersecting }, { threshold: [1] })
+          .observe($refs.sentinel);
+        stuck = false;
+      "
+    >
+      <div class="flex flex-col flex-wrap justify-between gap-16 lg:flex-row">
+        <div class="flex flex-wrap items-center gap-8 lg:gap-16">
+          <p class="kern-label my-0 py-0">Filtern nach:</p>
+          {
+            [BOOKMARKED_TYPE, ...WERKZEUGE_TYPES].map((type) => (
+              <button class="h-32" @click={`toggleFilterType('${type}')`}>
+                <span
+                  class={`kern-badge kern-badge--${type.replaceAll(" ", "_").toLowerCase()} interactive`}
+                  x-bind:data-inactive={`filterType && filterType !== '${type}'`}
+                >
+                  {type === BOOKMARKED_TYPE ? (
+                    <Icon
+                      name="ic:round-bookmark-added"
+                      class="text-icon-muted h-24 w-24"
+                    />
+                  ) : (
+                    <span
+                      class="kern-icon kern-icon--check kern-icon--default"
+                      aria-hidden="true"
+                      x-show={`filterType === '${type}'`}
+                    />
+                  )}
+                  <span class="kern-label">{type}</span>
+                </span>
+              </button>
+            ))
+          }
+          <button
+            class="text-cosmic-blue-base"
+            popovertarget="hintSidebarContent"
+            aria-label="Hinweise ein- oder ausblenden"
+          >
+            <Icon name="ic:outline-help-outline" class="h-32 w-32" />
+          </button>
+        </div>
+        <SearchButton instance={PAGEFIND_INSTANCE} />
       </div>
+    </div>
+
+    <section>
+      {
+        categories.map(({ id, title, tools }) => {
+          return (
+            <>
+              <h2 id={id} class="mb-56 scroll-mt-104">
+                {title.charAt(0).toUpperCase() + title.slice(1)}
+              </h2>
+              <div class="tool-grid gap-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                {tools.map((t) => (
+                  <div
+                    class="tool-wrapper"
+                    x-bind:data-visible={`isCardVisible(${JSON.stringify(t.id)}, ${JSON.stringify(t.data.type)})`}
+                  >
+                    <KernCard
+                      title={t.data.title}
+                      href={t.data.externalUrl}
+                      body={t.data.description}
+                      background="white"
+                      interactive={false}
+                      image={t.data.image}
+                      imageAlt={t.data.image ? t.data.title : undefined}
+                    >
+                      <div
+                        slot="pre-header"
+                        class="mb-16 flex w-full justify-between"
+                      >
+                        <div class="flex gap-8">
+                          {t.data.type.map((type) => (
+                            <span
+                              class={`kern-badge kern-badge--${type.toLowerCase()}`}
+                            >
+                              <span class="kern-label">{type}</span>
+                            </span>
+                          ))}
+                        </div>
+                        <button
+                          class="text-icon-muted"
+                          aria-label={"Lesezeichen hinzufügen"}
+                          @click={`toggleBookmark(${JSON.stringify(t.id)})`}
+                        >
+                          <Icon
+                            name={"ic:outline-bookmark-add"}
+                            x-show={`!bookmarkedTools.includes(${JSON.stringify(t.id)})`}
+                            class="h-32 w-32"
+                          />
+                          <Icon
+                            name="ic:round-bookmark-added"
+                            x-cloak
+                            x-show={`bookmarkedTools.includes(${JSON.stringify(t.id)})`}
+                            class="h-32 w-32"
+                          />
+                        </button>
+                      </div>
+                      <div
+                        slot="footer"
+                        class="text-icon-muted! flex items-center gap-8"
+                      >
+                        <Icon
+                          name="ic:baseline-auto-stories"
+                          class="h-32 w-32 shrink-0"
+                        />
+                        <p class="kern-subline py-0">Quelle: {t.data.source}</p>
+                      </div>
+                    </KernCard>
+                  </div>
+                ))}
+                <p class="no-results" data-pagefind-ignore>
+                  <em>Keine Treffer</em>
+                </p>
+              </div>
+            </>
+          );
+        })
+      }
+    </section>
+
+    <Modal id="hintSidebarContent">
+      <h2 class="mt-0 text-xl">Filterfunktionen</h2>
+      <ul>
+        <li>
+          <strong>Gemerkte Werkzeuge:</strong> Jedes Werkzeug kann per Klick auf das
+          Lesezeichen-Symbol gemerkt werden. Diese werden im Browser gespeichert.
+          Achtung: Die gemerkten Werkzeuge verschwinden, sobald Sie den Browser zurücksetzen.
+        </li>
+        <li>
+          <strong>Methode:</strong> Systematische Vorgehensweisen, die Ihnen zu Erkenntnissen
+          verhelfen.
+        </li>
+        <li>
+          <strong>Tool:</strong> Interaktive Werkzeuge, wie beispielsweise Editoren,
+          Plugins und Klickstrecken.
+        </li>
+        <li>
+          <strong>Leitfaden:</strong> Strukturierte Anleitungen, die Orientierung
+          bieten.
+        </li>
+        <li>
+          <strong>Ressource: </strong> Informative Angebote, Services, Datenbanken
+          und weitere Wissensquellen.
+        </li>
+      </ul>
+    </Modal>
+
+    <Hero level="root">
+      <h2>Werkzeug melden</h2>
+      <p>
+        Kennen Sie weitere hilfreiche Werkzeuge, die auf dieser Seite fehlen?
+        Kontaktieren Sie uns gerne.
+      </p>
+      <p>Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a></p>
+      <p>E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a></p>
     </Hero>
 
-    <section class="gap-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-      <KernCard
-        title="Digitalcheck"
-        href="https://digitalcheck.bund.de/"
-        target_option="_blank"
-        subline="Digitale Regelungen erarbeiten"
-        body="Der Digitalcheck ist eine Prozessbegleitung für Ihr Regelungsvorhaben. Sie stellen damit Digitaltauglichkeit sicher."
-        image={digitalcheckImage}
-        imageAlt="Symbolbild für den Digitalcheck"
-      />
-      <KernCard
-        title="Rulemap Builder"
-        href="https://rulemapping.org/de"
-        target_option="_blank"
-        subline="Regelungen als Entscheidungsmodelle erstellen"
-        body="Rulemaps machen die Logik von Gesetzen sichtbar, prüfbar und anwendbar – und schaffen so die Grundlage für eine Verwaltung, die nachvollziehbar, effizient und modern arbeitet."
-        image={rulemapBuilderImage}
-        imageAlt="Symbolbild für den Rulemap Builder"
-        imageSource="Rulemapping Group"
-      />
-      <KernCard
-        title="E-Gesetzgebung"
-        href="https://plattform.egesetzgebung.bund.de/cockpit/"
-        target_option="_blank"
-        subline="Das Rechtsetzungsverfahren auf Bundesebene"
-        body="Die E-Gesetzgebung ermöglicht die durchgängig digitale Zusammenarbeit im Gesetzgebungsverfahren zwischen Bundesregierung, Bundesrat und Bundestag."
-        image={eGesetzgebungImage}
-        imageAlt="Symbolbild für die E-Gesetzgebung"
-        imageSource="BMI"
-      />
-      <KernCard
-        title="eNorm"
-        href="https://www.enorm.bund.de/"
-        target_option="_blank"
-        subline="Elektronische Arbeitshilfen und Verkündung"
-        body="Die eNorm unterstützt bei der Einhaltung rechtsförmlicher und redaktioneller Vorgaben bei der Erstellung von Regelungsentwürfen. Sie automatisiert darüber hinaus bestimmte Routineaufgaben."
-        image={eNormImage}
-        imageAlt="Interface der eNorm"
-        imageSource="BMJV"
-      />
-      <KernCard
-        title="FIM – Föderales Informations­management"
-        href="https://fimportal.de/"
-        target_option="_blank"
-        subline="Der Standard für Verwaltungsleistungen"
-        body="Mit dem Föderalen Informationsmanagement (FIM) erfassen Bund, Länder und Kommunen Informationen über Verwaltungshandeln strukturiert und zugänglich. FIM stellt einheitliche Datenfelder, standardisierte Prozessvorgaben und leicht verständliche Bürgerinformationen bereit."
-        image={fimImage}
-        imageAlt="Symbolbild für das Föderale Informationsmanagement"
-        imageSource="FITKO"
-      />
-      <KernCard
-        title="Interoperabilitäts-Bewertungen"
-        href="https://digitalcheck.bund.de/interoperabel"
-        target_option="_blank"
-        subline="EU-Interoperabilität prüfen"
-        body="Hier erfahren Sie, was die Verordnung für ein interoperables Europa (EU) 2024/903 für Ihr Regelungsvorhaben bedeutet und wie sie zu einem vernetzten Europa beiträgt."
-        image={interoperableEuropeImage}
-        imageAlt="Symbolbild für ein vernetztes Europa"
-      />
-    </section>
+    <SearchModal
+      instance={PAGEFIND_INSTANCE}
+      placeholder="Suche Werkzeuge"
+      fuzzyKeywords={werkzeugKeywords}
+      filterTypes={[...WERKZEUGE_TYPES]}
+    />
   </main>
 </Layout>
+
+<script>
+  import Alpine from "alpinejs";
+  const BOOKMARKED_TYPE = "Gemerkte Werkzeuge"; // TODO: DRY with frontmatter
+
+  document.addEventListener("alpine:init", () => {
+    Alpine.data("werkzeuge", () => ({
+      filterType: null as string | null,
+      bookmarkedTools: [] as string[],
+      searchQuery: "",
+
+      init() {
+        const stored = localStorage.getItem("bookmarkedTools");
+        if (stored) {
+          try {
+            this.bookmarkedTools = JSON.parse(stored) as string[];
+          } catch (e) {
+            console.error(
+              "Failed to parse bookmarked tools from localStorage",
+              e,
+            );
+          }
+        }
+        this.$watch("bookmarkedTools", (value: string[]) => {
+          localStorage.setItem("bookmarkedTools", JSON.stringify(value));
+        });
+      },
+
+      toggleFilterType(type: string) {
+        this.filterType = this.filterType === type ? null : type;
+      },
+
+      isCardVisible(toolId: string, types: string[]) {
+        return (
+          this.filterType === null ||
+          types.includes(this.filterType) ||
+          (this.filterType === BOOKMARKED_TYPE &&
+            this.bookmarkedTools.includes(toolId))
+        );
+      },
+
+      toggleBookmark(toolId: string) {
+        if (this.bookmarkedTools.includes(toolId)) {
+          this.bookmarkedTools = this.bookmarkedTools.filter(
+            (id) => id !== toolId,
+          );
+        } else {
+          this.bookmarkedTools.push(toolId);
+        }
+      },
+    }));
+  });
+</script>
+
+<style>
+  .tool-wrapper:not([data-visible="true"]) {
+    display: none;
+  }
+  .no-results {
+    display: none;
+  }
+  .tool-grid:not(:has(.tool-wrapper[data-visible="true"])) .no-results {
+    display: block;
+  }
+</style>

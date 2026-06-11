@@ -1,0 +1,59 @@
+---
+import { Icon } from "astro-icon/components";
+
+// Usage example:
+// <button popovertarget="my-modal">Open Modal</button>
+// <Modal id="my-modal">
+//   <p>Main content goes here (default slot).</p>
+// </Modal>
+
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+---
+
+<dialog id={id} popover class="pointer-events-none bg-transparent">
+  <div
+    class="backdrop flex h-screen w-screen items-center justify-center bg-black/20"
+  >
+    <div
+      class="max-w-a11y p-md pb-lg pointer-events-auto max-h-screen overflow-auto rounded-sm bg-white"
+    >
+      <div class="mb-32 flex w-full justify-end">
+        <button
+          class="border-cosmic-blue-base text-cosmic-blue-base rounded-sm border p-8"
+          popovertarget={id}
+          aria-label="Hinweisfenster schließen"
+        >
+          <Icon name="ic:round-close" class="h-24 w-24" />
+        </button>
+      </div>
+      <slot />
+    </div>
+  </div>
+</dialog>
+
+<style>
+  dialog[popover] {
+    transition:
+      display 0.2s allow-discrete,
+      overlay 0.2s allow-discrete;
+  }
+
+  dialog[popover] .backdrop {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  dialog[popover]:popover-open .backdrop {
+    opacity: 1;
+  }
+
+  @starting-style {
+    dialog[popover]:popover-open .backdrop {
+      opacity: 0;
+    }
+  }
+</style>

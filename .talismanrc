@@ -23,20 +23,14 @@ fileignoreconfig:
       - "key:"
       - "TRIVY_PASSWORD: \\${{  }}"
   - filename: AGENTS.md
-    checksum: 62a655d53df765c2111c2953222b1242075a14631d8e2a796c4a900924cef1aa
-  - filename: doc/adr/0004-configuration-management.md
-    checksum: 367a262dfe679ea3254c86879a09d98b0e03863b4c514f58ccd3609afb58bdae
+    checksum: 10062bc4ca6a68e151dc351cf1a06719bb5fef19dd6e98710a2c9a15fc2f1a8f
+  - filename: package.json # astro-route-generator commit sha misinterpreted as potential secret
+    ignore_detectors: [filecontent]
   - filename: doc/adr/0007-use-posthog-reverse-proxy.md
     allowed_patterns:
       - "IP Masking: The proxy will be configured to drop unnecessary headers, including
         `X-Forwarded-For`, before passing the request to PostHog."
   - filename: doc/routes.md
-    allowed_patterns:
-      - key
-  - filename: integrations/routeGenerator.ts
-    allowed_patterns:
-      - key
-  - filename: integrations/routeGenerator.test.ts
     allowed_patterns:
       - key
   - filename: src/config/routes.ts
@@ -46,9 +40,6 @@ fileignoreconfig:
     allowed_patterns:
       - key
   - filename: src/utils/navigation/navigation.test.ts
-    allowed_patterns:
-      - key
-  - filename: integrations/routeGeneration/extractRouteMeta.ts
     allowed_patterns:
       - key
   - filename: nginx/nginx.template.conf
@@ -62,9 +53,6 @@ fileignoreconfig:
     checksum: 2c449a89d7fa9be57170bc960a30f51381f9a5d8d046605a6e30c083886163dd
   - filename: src/env.d.ts
     checksum: 8acdc07029e3aed3f44556780790d7a2191e8877c5b114a3147423507385fbec
-  - filename: integrations/routeGenerator.ts
-    allowed_patterns:
-      - key
   - filename: doc/adr/0004-configuration-management.md
     checksum: 367a262dfe679ea3254c86879a09d98b0e03863b4c514f58ccd3609afb58bdae
   - filename: src/pages/ueber-uns/Ansatz.jpg
@@ -93,6 +81,11 @@ fileignoreconfig:
       - \@keydown
   - filename: doc/adr/0008-multipage-forms.md
     checksum: 372068602b2b48dccf8c66eb8d82b7621108af3d660156cd66b4b2ed49359b96
+  - filename: src/pages/dev/kern-komponenten.astro
+    allowed_patterns:
+      - key
+  - filename: public/downloads/2026-02-Anleitung-Fokusgruppe.pdf
+    checksum: 80bdb51a9b0cc47cf426516f333c0c59ccab9a1a68b2d1a412c560906e96f15a
 scopeconfig:
   - scope: node
 allowed_patterns:
@@ -112,4 +105,11 @@ allowed_patterns:
   - parentKey
   - getRouteByKey
   - keydown
+  - KeyDown
+  - keyboard
+  - Keyboard
+  - keyword
+  - Keyword
+  - fuzzyKeyword
+  - aria-keyshortcuts
 version: "1.0"

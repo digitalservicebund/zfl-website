@@ -19,24 +19,6 @@ We will organize all our content as code files in the `pages` folder:
 - `.mdx` for pages with mainly text content (e.g., [`impressum.mdx`](/src/pages/impressum.mdx))
 - `.astro` for pages with a more complex HTML/component structure
 
-### Implementation details
-
-- `.mdx` files must specify a `layout` in their frontmatter
-- Custom components can be imported and [used inline](https://docs.astro.build/en/guides/integrations-guide/mdx/#using-components-in-mdx) in `.mdx`
-
-```mdx
----
-layout: "@/layouts/MdxLayout.astro"
-title: Impressum
----
-
-import Hero from "@/components/Hero.astro";
-
-<Hero>
-  <h1>Impressum</h1>
-</Hero>
-```
-
 ## Consequences
 
 ### Positive
@@ -59,3 +41,21 @@ import Hero from "@/components/Hero.astro";
 
 - **Pros**: centralized component mapping and layouts for `.mdx`
 - **Cons**: content in separate folders, routing boilerplate, separate frontmatter
+
+## Implementation
+
+- `.mdx` files must specify a `layout` in their frontmatter
+- Custom components can be imported and [used inline](https://docs.astro.build/en/guides/integrations-guide/mdx/#using-components-in-mdx) in `.mdx`
+
+```mdx
+---
+layout: "@/layouts/MdxLayout.astro"
+title: Impressum
+---
+
+import Hero from "@/components/Hero.astro";
+
+<Hero>
+  <h1>Impressum</h1>
+</Hero>
+```

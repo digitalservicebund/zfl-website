@@ -1,5 +1,4 @@
 ---
-import SupportCard from "@/components/blocks/SupportCard.astro";
 import MediaText from "@/components/MediaText.astro";
 import Hero from "@/components/Hero.astro";
 import FeatureSet from "@/components/FeatureSet.astro";
@@ -8,16 +7,19 @@ import illustration from "./illustration.svg";
 import gesetzentwurfImg from "./gesetzentwurf.png";
 import Layout from "@/layouts/Layout.astro";
 import { Image } from "astro:assets";
-import { Icon } from "astro-icon/components";
 import { ZFL_EMAIL_REGBEG, ZFL_PHONE_REGBEG } from "@/config/constants";
+import { Icon } from "astro-icon/components";
 
 export const frontmatter = {
   title: "Regelungsbegleitung",
   sitemap: true,
 };
+
+const description =
+  "Ein in Gesetzgebungspraxis erfahrenes interdisziplinäres Team unterstützt Sie dabei, die Regelung praxisnah, digitaltauglich und bürokratiearm zu gestalten. Vertraulich und mit individuellem Fokus auf Ihr Vorhaben stehen Ihnen während der Begleitung Kompetenzen in Design, Nutzerforschung, IT, Produkt- und Prozessmanagement direkt zur Verfügung.";
 ---
 
-<Layout title={frontmatter.title}>
+<Layout title={frontmatter.title} description={description}>
   <main class="breakout-grid">
     <Hero level="main" class="overflow-clip">
       <div class="items-center gap-32 md:flex">
@@ -87,9 +89,11 @@ export const frontmatter = {
           werden vom BMDS finanziert.
         </p>
         <div class="overflow-x-auto" tabindex="0">
-          <table class="w-full table-fixed text-left">
-            <thead>
-              <tr class="table-header-cell">
+          <table
+            class="zfl-table zfl-table--striped w-full table-fixed text-left"
+          >
+            <thead class="zfl-table__head">
+              <tr>
                 <th scope="col" class="w-150">Kriterien</th>
                 <th scope="col" class="w-235">Paket S</th>
                 <th scope="col" class="w-235">Paket M</th>
@@ -97,9 +101,7 @@ export const frontmatter = {
               </tr>
             </thead>
 
-            <tbody
-              class="table-body-cell [&>tr:nth-child(even)]:bg-lavender-200"
-            >
+            <tbody class="zfl-table__body">
               <tr>
                 <td class="font-bold">Fokus</td>
                 <td> Punktuelle Unterstützung bei Ihrer Fragestellung </td>
@@ -189,9 +191,13 @@ export const frontmatter = {
       <h2>Regelungsbegleitung anfragen</h2>
       <p>
         Sie planen ein konkretes Regelungsvorhaben und wünschen sich eine
-        methodische Begleitung? Schreiben Sie uns eine E-Mail unter <a
-          href={ZFL_EMAIL_REGBEG.url}>{ZFL_EMAIL_REGBEG.display}</a
-        >.
+        methodische Begleitung? Bei Fragen melden Sie sich unter:
+        <p>
+          Telefon: <a href={ZFL_PHONE_REGBEG.url}>{ZFL_PHONE_REGBEG.url}</a>
+        </p>
+        <p>
+          E-Mail: <a href={ZFL_EMAIL_REGBEG.url}>{ZFL_EMAIL_REGBEG.display}</a>
+        </p>
       </p>
     </section>
     <section>
@@ -217,20 +223,6 @@ export const frontmatter = {
           alt="Symbolbild: ausgedruckter Gesetzentwurf"
         />
       </MediaText>
-    </section>
-    <section class="bg-lavender-400 breakout py-80">
-      <SupportCard>
-        <p>
-          Wir unterstützen Sie gerne persönlich in allen Phasen der
-          Regelungsarbeit. Bei Fragen melden Sie sich unter:
-        </p>
-        <p>
-          Telefon: <a href={ZFL_PHONE_REGBEG.url}>{ZFL_PHONE_REGBEG.display}</a>
-        </p>
-        <p>
-          E-Mail: <a href={ZFL_EMAIL_REGBEG.url}>{ZFL_EMAIL_REGBEG.display}</a>
-        </p>
-      </SupportCard>
     </section>
   </main>
 </Layout>

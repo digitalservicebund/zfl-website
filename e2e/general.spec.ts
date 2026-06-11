@@ -1,5 +1,5 @@
 import { allRoutes, home, staging } from "@/config/routes";
-import { isProduction, isStaging } from "@/config/stage";
+import { isProduction, isStaging, stage } from "@/config/stage";
 import { expect, test } from "@playwright/test";
 
 const TITLE_404 = "Seite nicht gefunden — Zentrum für Legistik";
@@ -28,7 +28,9 @@ test("the staging environment page should have a special marker", async ({
   await page.goto(home.path);
   const bannerText = "Offizielle Website – Bundesrepublik Deutschland";
   const banner = page.getByText(bannerText);
-  const expectedText = isProduction ? bannerText : bannerText + " (STAGING)";
+  const expectedText = isProduction
+    ? bannerText
+    : `${bannerText} (${stage.toUpperCase()})`;
 
   await expect(banner).toHaveText(expectedText);
 });

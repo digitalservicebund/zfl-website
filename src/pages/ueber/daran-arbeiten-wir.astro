@@ -1,0 +1,232 @@
+---
+import Badge from "@/components/Badge.astro";
+import Hero from "@/components/Hero.astro";
+import KernBadge from "@/components/KernBadge.astro";
+import KernCard from "@/components/KernCard.astro";
+import TimelineList from "@/components/TimelineList.astro";
+import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
+import { ueber_neueFruephase } from "@/config/routes";
+import {
+  begleitungen,
+  home,
+  kontakt,
+  schulungen,
+  ueber,
+  ueber_aktuelleMeldungen,
+  ueber_daranArbeitenWir,
+  werkzeuge,
+} from "@/config/routes";
+import Layout from "@/layouts/Layout.astro";
+
+export const frontmatter = {
+  title: "Daran arbeiten wir",
+  sitemap: true,
+  navOrder: 1,
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero level="sub">
+      <h1>{frontmatter.title}</h1>
+      <div slot="subtitle">
+        Auf dieser Seite finden Sie aktuelle Arbeitspakete sowie Neuerungen auf
+        der Webseite.
+      </div>
+    </Hero>
+
+    <section class="breakout breakout-grid">
+      <h2>Aktuelle Arbeitspakete</h2>
+      <p>
+        Das Angebot des Zentrum für Legistik entwickelt sich stets weiter.
+        Aktuell erarbeiten wir fachliche Anforderungen, prüfen Lösungswege und
+        stellen die Inhalte dann zur Nutzung bereit. Ihr Feedback hilft uns, die
+        Services weiter zu verbessern.
+      </p>
+
+      <div class="mt-md gap-lg grid grid-cols-1 md:grid-cols-2">
+        <KernCard title="Strukturierung der Frühphase für Regelungsvorhaben">
+          <p>
+            Die Phase vor dem eigentlichen Gesetzestext ist die, in der die
+            Weichenstellungen für künftige Regeln entschieden werden. Daher
+            testen wir, wie es gelingen kann, die Perspektiven von Bürgerinnen
+            und Bürgern, Unternehmen und der Verwaltung frühzeitig in den Fokus
+            der Erarbeitung zu rücken.
+          </p>
+          <KernBadge slot="footer" variant="info">In Konzeption</KernBadge>
+        </KernCard>
+
+        <KernCard title="Konsolidierung der Instrumente">
+          <p>
+            Unterschiedliche Checks und Arbeitshilfen (wie z.&nbsp;B. der
+            <a href="https://digitalcheck.bund.de/" target="_blank"
+              >Digitalcheck</a
+            >,
+            <a href="https://www.gleichstellungs-check.de/" target="_blank"
+              >Gleichstellungscheck</a
+            >
+            oder
+            <a href="https://jugend-check.de/" target="_blank">Jugendcheck</a>)
+            zielen in Teilen auf die gleiche Wirkung ab: Praxis- und
+            digitaltaugliche Regelungen und Bürokratierückbau. Bei der
+            Zusammenführung diverser Ansätze verfolgen wir das Ziel, Ihre
+            Regelungsarbeit einfacher und effizienter zu gestalten.
+          </p>
+          <KernBadge slot="footer" variant="info">In Konzeption</KernBadge>
+        </KernCard>
+
+        <KernCard
+          title="Erweiterung der Schulungsangebote"
+          href={schulungen.path}
+        >
+          <p>
+            In den umsetzungsorientierten Schulungen des Zentrum für Legistik
+            lernen Sie Methoden und Werkzeuge kennen, die Sie bei der
+            Erarbeitung von praxisnahen und bürokratiearmen Regelungen
+            unterstützen.
+          </p>
+          <KernBadge slot="footer" variant="success"
+            >Bereits verfügbar</KernBadge
+          >
+        </KernCard>
+        <KernCard
+          title="Ausbau der Regelungsbegleitung"
+          href={begleitungen.path}
+        >
+          <p>
+            Wir unterstützen Sie dabei, Umsetzungsprozesse zu verstehen und
+            Anforderungen an praxisnahe und bürokratiearme Regelungen
+            umzusetzen. Wir erweitern das Angebot in Inhalt und Umfang.
+          </p>
+          <KernBadge slot="footer" variant="success"
+            >Bereits verfügbar</KernBadge
+          >
+        </KernCard>
+      </div>
+    </section>
+
+    <section class="bg-cosmic-blue-base breakout text-white">
+      <h2>Wirken Sie mit!</h2>
+      <p>
+        Das Zentrum für Legistik wird gemeinsam mit Ihnen als Legistinnen und
+        Legisten weiterentwickelt. Ihr Erfahrungswissen hilft uns, die
+        Hilfsmittel und Werkzeuge so zu gestalten, dass sie in der täglichen
+        Arbeit tatsächlich nützlich sind.
+      </p>
+      <p>
+        Wir möchten Sie einladen, uns Rückmeldung zu unseren Arbeitspaketen zu
+        geben oder an kurzen Praxistests teilzunehmen. Der zeitliche Aufwand ist
+        überschaubar und wird vorab mit Ihnen abgestimmt.
+      </p>
+      <strong>
+        Kontaktieren Sie uns zu diesem Zweck unter <a href={ZFL_PHONE.url}
+          >{ZFL_PHONE.display}</a
+        > oder <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>.
+      </strong>
+    </section>
+
+    <section>
+      <h2 class="mb-40">Neuerungen auf der Webseite</h2>
+      <TimelineList>
+        <li>
+          <Badge look="gray">Juni 2026</Badge>
+          <ul>
+            <li>Neue Funktion: Volltextsuche</li>
+            <li>
+              Neue Seite ergänzt: Die neue Frühphase
+              <a href={ueber_neueFruephase.path} class="block">Hier ansehen</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <Badge look="gray">Mai 2026</Badge>
+          <ul>
+            <li>
+              Startseite: Aktuelles und Newsletter ergänzt, Einstieg in
+              Website-Bereiche vereinfacht
+              <a href={home.path} class="block">Hier ansehen</a>
+            </li>
+            <li>
+              Werkzeuge Seite: Inhalte erweitert, Sortierung und Filter ergänzt
+              <a href={werkzeuge.path} class="block">Hier ansehen</a>
+            </li>
+            <li>
+              Daran arbeiten wir: Umsetzungsstand bei aktuellen Arbeitspaketen
+              ergänzt
+              <a href={ueber_daranArbeitenWir.path} class="block"
+                >Hier ansehen</a
+              >
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <Badge look="gray">April 2026</Badge>
+          <ul>
+            <li>
+              Neue Seite ergänzt: Kontakt
+              <a href={kontakt.path} class="block">Hier ansehen</a>
+            </li>
+            <li>
+              Neue Seite ergänzt: Aktuelle Meldungen
+              <a href={ueber_aktuelleMeldungen.path} class="block"
+                >Hier ansehen</a
+              >
+            </li>
+            <li>
+              Über Uns: Unter-Navigation ergänzt
+              <a href={ueber.path} class="block">Hier ansehen</a>
+            </li>
+            <li>
+              Neuer Bereich ergänzt: Über Uns
+              <a href={ueber.path} class="block">Hier ansehen</a>
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <Badge look="gray">März 2026</Badge>
+          <ul>
+            <li>
+              Seitendesign: Umstellung auf den <a
+                href="https://www.kern-ux.de/"
+                target="_blank">KERN-UX-Standard</a
+              >
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <Badge look="gray">Februar 2026</Badge>
+          <ul>
+            <li>
+              Regelungsbegleitungen: Tabelle mit Service-Paketen ergänzt
+              <a href={`${begleitungen.path}#leistungspakete`} class="block"
+                >Hier ansehen</a
+              >
+            </li>
+            <li>
+              Schulungen: Hinweise zu externen Angeboten ergänzt
+              <a href={`${schulungen.path}#schulungen-weitere`} class="block"
+                >Hier ansehen</a
+              >
+            </li>
+            <li>
+              Neue Seite ergänzt: Anleitungen und Hilfsmittel
+              <a href={werkzeuge.path} class="block">Hier ansehen</a>
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <Badge look="gray">Januar 2026</Badge>
+          <ul>
+            <li>
+              Launch der Website des Zentrum für Legistik am 5.&nbsp;Januar 2026
+            </li>
+          </ul>
+        </li>
+      </TimelineList>
+    </section>
+  </main>
+</Layout>

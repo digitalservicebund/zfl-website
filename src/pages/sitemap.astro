@@ -6,10 +6,11 @@ import Layout from "@/layouts/Layout.astro";
 export const frontmatter = {
   title: "Sitemap",
   sitemap: false,
+  excludeFromSearch: true,
 };
 ---
 
-<Layout title="Sitemap">
+<Layout title="Sitemap" excludeFromSearch={frontmatter.excludeFromSearch}>
   <main class="breakout-grid">
     <Hero>
       <h1>Sitemap</h1>

@@ -1,6 +1,7 @@
 @import "@kern-ux/native/dist/kern.min.css" layer(base);
 @import "@kern-ux/native/dist/fonts/fira-sans.css";
 @import "./kern-utils.css";
+@import "./badges.css";
 @import "tailwindcss";
 
 @theme {
@@ -17,11 +18,13 @@
   --color-lavender-400: #eceef6;
   --color-lavender-surface-highlight: #e3e6f2;
 
+  --color-icon-muted: #757575;
+
   --color-ds-violet: #4c2c92;
 
-  --spacing-sm: 1.25rem;
-  --spacing-md: 2rem;
-  --spacing-lg: 2.5rem;
+  --spacing-sm: 1.25rem; /* 20px */
+  --spacing-md: 2rem; /* 32px */
+  --spacing-lg: 2.5rem; /* 48px */
 
   --max-content-width: 82rem;
   --container-padding-inline: clamp(1rem, 5vw, 3rem);
@@ -31,14 +34,12 @@
 
 @media (width >= 48rem) {
   :root {
-    --spacing-md: 2rem;
-    --spacing-lg: 4rem;
+    --spacing-lg: 4rem; /* 64px */
   }
 }
 
 :root {
   --kern-color-action-default: var(--color-cosmic-blue-base);
-  --kern-color-layout-border: var(--color-lavender-base);
 }
 
 @layer base {
@@ -80,8 +81,6 @@
   h1,
   h2,
   h3 {
-    /* 80ch @ 18px font size = 720px */
-    max-width: 720px;
     margin-bottom: 1rem;
     word-break: auto-phrase;
   }
@@ -125,7 +124,7 @@
     @apply list-decimal;
   }
 
-  p:not(.kern-card__header *, .kern-task-list__title > *),
+  p:not(.kern-card__header *, .kern-task-list__title > *):not(li p),
   ul:not(.list-unstyled),
   ol:not(.list-unstyled) {
     @apply max-w-a11y;
@@ -134,16 +133,30 @@
     }
   }
 
-  tr.table-header-cell th {
+  /**
+  * ZFL Table classes
+  */
+  table.zfl-table {
+    width: 100%;
+    text-align: left;
+    table-layout: fixed;
+  }
+  thead.zfl-table__head th {
     padding: 1rem 2rem 1rem 1rem;
     border-bottom: 2px solid var(--color-lavender-400, #eceef6);
     background: var(--color-lavender-base, #e3e6f2);
+    width: calc(100% / 3);
   }
-  tbody.table-body-cell tr td {
+  tbody.zfl-table__body td {
     padding: 1rem 2rem 1rem 1rem;
     vertical-align: top;
     border-bottom: 1px solid var(--color-lavender-400, #eceef6);
     overflow-wrap: break-word;
+    width: calc(100% / 3);
+  }
+
+  table.zfl-table--striped tbody.zfl-table__body > tr:nth-child(even) {
+    background-color: var(--color-lavender-200, #f6f7fb);
   }
 
   *:focus-visible {

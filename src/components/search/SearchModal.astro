@@ -1,0 +1,73 @@
+---
+import PagefindConfig from "./PagefindConfig.astro";
+import { isProduction, isDevelopment } from "@/config/stage";
+import { allKeywords } from "./keywords";
+import "./styles.css";
+
+interface Props {
+  instance?: string;
+  placeholder?: string;
+  fuzzyKeywords?: string[];
+  filterTypes?: string[];
+}
+
+const { instance, placeholder, filterTypes, fuzzyKeywords } = Astro.props;
+const keywords = fuzzyKeywords || allKeywords;
+const keywordsDotSeparated = [...keywords].join(".");
+const imgPrefix = isDevelopment ? "/dist" : "";
+---
+
+<PagefindConfig instance={instance} filterTypes={filterTypes} />
+<pagefind-modal instance={instance}>
+  <pagefind-modal-header>
+    <pagefind-input placeholder={placeholder} instance={instance}
+    ></pagefind-input>
+  </pagefind-modal-header>
+  <pagefind-modal-body>
+    <search-modal-summary
+      data-fuzzy-keywords={keywordsDotSeparated}
+      instance={instance}></search-modal-summary>
+    <pagefind-results hide-sub-results instance={instance}>
+      <script
+        is:inline
+        type="text/pagefind-template"
+        set:html={`
+          <li class="pf-result">
+            <article class="kern-card kern-card--interactive kern-card--small">
+              {{#if and(options.show_images, meta.image)}}
+              <div class="kern-card__media">
+                <img src="${imgPrefix}{{ meta.image | resolveUrl(meta.url | default(url)) }}" alt="{{ meta.image_alt | default(meta.title) }}">
+              </div>
+              {{/if}}
+              <div class="kern-card__container">
+                <header class="kern-card__header">
+                  <hgroup>
+                    <p class="pb-10">
+                      <span class="kern-badge kern-badge--small kern-badge--{{ meta.pageType | lowercase }}">
+                        <span class="kern-label">{{ meta.pageType }}</span>
+                      </span>
+                    </p>
+                    <h2 class="kern-title"><a href="{{ meta.url | default(url) | safeUrl }}" class="kern-link--stretched">{{ meta.title }}</a></h2>
+                  </hgroup>
+                </header>
+                {{#if excerpt}}
+                <section class="kern-card__body result-excerpt">
+                  <p class="kern-body">{{+ excerpt +}}</p>
+                </section>
+                {{/if}}
+              </div>
+            </article>
+          </li>
+        `}
+      />
+    </pagefind-results>
+  </pagefind-modal-body>
+  <pagefind-modal-footer>
+    <pagefind-keyboard-hints instance={instance}></pagefind-keyboard-hints>
+  </pagefind-modal-footer>
+</pagefind-modal>
+{isProduction && <search-tracking instance={instance} />}
+
+<script src="./SearchModalSummary.ts"></script>
+<script src="./SearchTracking.ts"></script>
+<script src="./SearchHighlight.ts"></script>

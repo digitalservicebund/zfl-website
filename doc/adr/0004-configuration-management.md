@@ -33,7 +33,7 @@ We will adopt a hybrid approach for configuration management:
 
 - **Boilerplate**: Requires creating multiple files for different configuration aspects.
 
-## Implementation notice
+## Implementation
 
 ### Stage Configuration
 

@@ -26,6 +26,7 @@ function getPanelElementId(panelId: string) {
       style={panel.id === activePanel.id ? undefined : "display: none;"}
       class="flex flex-col gap-8 px-16 py-24"
       data-panel={panel.id}
+      data-pagefind-ignore
     >
       {/* Child-panel back button */}
       {panel.parent && (

@@ -93,7 +93,7 @@ test.describe("Header navigation", () => {
     page,
   }) => {
     await page.setViewportSize({ width: 1280, height: 800 });
-    await page.goto("/ueber/das-ist-neu");
+    await page.goto("/ueber/daran-arbeiten-wir");
 
     const sectionSidebar = page.getByRole("navigation", {
       name: "Abschnittsnavigation",
@@ -106,7 +106,7 @@ test.describe("Header navigation", () => {
       rootPanel.getByRole("link", { name: "Über uns", exact: true }),
     ).toBeVisible();
     await expect(
-      rootPanel.getByRole("link", { name: "Das ist neu", exact: true }),
+      rootPanel.getByRole("link", { name: "Daran arbeiten wir", exact: true }),
     ).toBeVisible();
     const zahlenUndFaktenLink = rootPanel.getByRole("link", {
       name: "Zahlen und Fakten",
@@ -124,7 +124,7 @@ test.describe("Header navigation", () => {
     page,
   }) => {
     await page.setViewportSize({ width: 375, height: 812 });
-    await page.goto("/ueber/das-ist-neu");
+    await page.goto("/ueber/daran-arbeiten-wir");
 
     await page.getByRole("button", { name: "Menü öffnen / schließen" }).click();
 
@@ -137,7 +137,7 @@ test.describe("Header navigation", () => {
       ueberPanel.getByRole("link", { name: "Über uns", exact: true }),
     ).toBeVisible();
     await expect(
-      ueberPanel.getByRole("link", { name: "Das ist neu", exact: true }),
+      ueberPanel.getByRole("link", { name: "Daran arbeiten wir", exact: true }),
     ).toHaveAttribute("aria-current", "page");
 
     await ueberPanel.getByRole("button", { name: /Hauptmenü/ }).click();

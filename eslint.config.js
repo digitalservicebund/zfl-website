@@ -18,5 +18,13 @@ export default defineConfig(
     },
     extends: ["markdown/processor"],
   },
-  globalIgnores([".astro/", "dist/", "doc/", "README.md", "AGENTS.md"]),
+  globalIgnores([
+    ".astro/",
+    "dist/",
+    "doc/",
+    "playwright-report/",
+    "test-results/",
+    "README.md",
+    "AGENTS.md",
+  ]),
 );

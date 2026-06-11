@@ -1,6 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions";
-import DebugGrid from "@/components/global/DebugGrid.astro";
+import SearchModal from "@/components/search/SearchModal.astro";
 import Footer from "@/components/global/Footer.astro";
 import PageHeader from "@/components/global/PageHeader.astro";
 import SectionSidebar from "@/components/global/SectionSidebar.astro";
@@ -16,13 +16,27 @@ interface Props {
   title: string;
   noFooter?: boolean;
   isHome?: boolean;
+  description?: string;
+  excludeFromSearch?: boolean;
+  pagefindWeight?: number;
 }
-const { title: pageTitle, noFooter, isHome } = Astro.props;
+
+const {
+  title: pageTitle,
+  description,
+  excludeFromSearch,
+  pagefindWeight,
+  noFooter,
+  isHome,
+} = Astro.props;
+
 const siteName = "Zentrum für Legistik";
 const title = pageTitle ? `${pageTitle} — ${siteName}` : siteName;
 const SEOImage = `${Astro.url.origin}/SEO_ZfL.png`;
-const showDebugGrid = !isProduction || process.env.NODE_ENV === "development";
 const showSectionSidebar = getSectionNavigation(Astro.url.pathname) !== null;
+
+const defaultDescription =
+  "Das Zentrum für Legistik unterstützt Sie bei der Ausarbeitung von Regelungen. Sie stellen damit sicher, dass Ihr Vorhaben betroffenenzentriert, praxistauglich und digital umsetzbar ist.";
 ---
 
 <!doctype html>
@@ -54,6 +68,7 @@ const showSectionSidebar = getSectionNavigation(Astro.url.pathname) !== null;
 
   <SEO
     title={title}
+    description={description ?? defaultDescription}
     openGraph={{
       basic: {
         title,
@@ -79,19 +94,25 @@ const showSectionSidebar = getSectionNavigation(Astro.url.pathname) !== null;
   <ClientRouter />
 
   <body class="relative">
-    {showDebugGrid && <DebugGrid />}
     <PageHeader isHome={isHome} />
-    {
-      showSectionSidebar ? (
-        <div class="h-full min-[900px]:grid min-[900px]:grid-cols-[240px_minmax(0,1fr)]">
-          <SectionSidebar />
+    <div
+      data-pagefind-default-meta="pageType:Seite"
+      {...!excludeFromSearch && { "data-pagefind-body": "" }}
+      {...pagefindWeight && { "data-pagefind-weight": pagefindWeight }}
+    >
+      {
+        showSectionSidebar ? (
+          <div class="h-full min-[900px]:grid min-[900px]:grid-cols-[240px_minmax(0,1fr)]">
+            <SectionSidebar />
+            <slot />
+          </div>
+        ) : (
           <slot />
-        </div>
-      ) : (
-        <slot />
-      )
-    }
+        )
+      }
+    </div>
     {!noFooter && <Footer />}
+    <SearchModal />
     {isProduction && <Posthog />}
   </body>
 </html>

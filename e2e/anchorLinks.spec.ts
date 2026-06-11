@@ -15,7 +15,7 @@ test.describe("anchor links", () => {
         const anchor = anchors.nth(i);
         const href = await anchor.getAttribute("href");
 
-        if (!href || !href.startsWith("#")) continue;
+        if (!href?.startsWith("#")) continue;
         const hash = href.slice(1);
         if (hash) {
           const target = page.locator(`#${hash}`);

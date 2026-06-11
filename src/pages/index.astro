@@ -1,10 +1,21 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
-import Card from "@/components/Card.astro";
-import Banner from "@/components/Banner.astro";
+import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
+import allgemeinImage from "@/images/Trainings.jpg";
+import zusammenarbeitImg from "@/images/Zusammenarbeit.png";
+import schulungImage from "@/images/computer.jpg";
+import ansatzImg from "@/images/Ansatz.jpg";
+import KernCard from "@/components/KernCard.astro";
+import { schulungen } from "@/config/routes";
+import { begleitungen } from "@/config/routes";
+import { werkzeuge } from "@/config/routes";
+import InfoPanel from "@/components/InfoPanel.astro";
+import { Image } from "astro:assets";
+import { ueber } from "@/config/routes";
+import { mailto } from "@/utils/mailtoHelper";
+import { ueber_neueFruephase } from "@/config/routes";
 import { Icon } from "astro-icon/components";
-import SupportCard from "@/components/blocks/SupportCard.astro";
 import {
   begleitungen,
   schulungen,
@@ -21,94 +32,184 @@ export const frontmatter = {
 <Layout title="" isHome>
   <main class="breakout-grid">
     <div
-      id="vorhaben-banner"
-      class="breakout bg-[#D5F6FF] py-24"
-      x-data="{ showBanner: true }"
+      id="fruehphase-info-banner"
+      class="breakout bg-[#D5F6FF]"
       x-show="showBanner"
+      x-data="{ showBanner: true }"
     >
-      <div class="mb-8 flex w-full max-w-[850px] items-center justify-between">
-        <div class="flex items-center gap-16">
-          <Icon name="ic:twotone-flag" class="text-2xl text-[#006685]" />
-          <p class="kern-title m-0 p-0">
-            Starten Sie Ihr erstes Vorhaben mit der neuen Frühphase
-          </p>
-        </div>
+      <div
+        class="flex w-full max-w-7xl items-center justify-between gap-12 py-12"
+      >
+        <p class="kern-title mb-0">
+          Die Infoseite zur neuen
+          <a class="text-link" href={ueber_neueFruephase.path}> Frühphase</a> ist
+          live - jetzt informieren!
+        </p>
         <button
           aria-label="Banner ausblenden"
-          class="increase-tap-area text-2xl text-[#006685] hover:opacity-75"
-          @click="showBanner = false"
+          class="increase-tap-area py-8 text-2xl text-[#006685] hover:opacity-75"
+          x-on:click="showBanner = false"
         >
           <Icon name="ic:baseline-clear" />
         </button>
       </div>
-      <p class="kern-body">
-        Lernen Sie jetzt über die neue Frühphase für Handlungsvorhaben und
-        starten Sie ihr erstes Vorhaben – Schritt für Schritt angeleitet. <a
-          href={vorhaben.path}>Zur Frühphase</a
-        >
-      </p>
     </div>
     <Hero level="root">
-      <h1>Bessere Rechtsetzung in allen Phasen Ihres Vorhabens</h1>
+      <h1 class="max-w-a11y">
+        Die zentrale Anlaufstelle für bessere Rechtsetzung
+      </h1>
       <p slot="subtitle">
-        Das Zentrum für Legistik unterstützt Sie bei der Ausarbeitung von
-        Regelungen. Sie stellen damit sicher, dass Ihr Vorhaben
-        betroffenenzentriert, praxistauglich und digital umsetzbar ist.
+        Das Zentrum für Legistik unterstützt Legistinnen und Legisten bei der
+        Ausarbeitung von Regelungen, die betroffenenzentriert, praxistauglich
+        und digital umsetzbar sind.
       </p>
     </Hero>
-    <Banner>
-      <p class="mb-0 max-w-full">
-        Das Angebot befindet sich aktuell im Aufbau und wird schrittweise mit
-        Ihnen zusammen weiterentwickelt.
-      </p>
-      <a href={ueber_dasIstNeu.path}>Mehr dazu</a>
-    </Banner>
-    <section>
-      <h2>Vorteile des Angebots für Sie</h2>
-      <ul>
-        <li>Operative Hilfe beim Visualisieren</li>
-        <li>
-          Unterstützung beim Erheben der Betroffenen-Bedürfnisse und
-          Umsetzungshürden
-        </li>
-        <li>Konkrete Formulierungsbeispiele und praktische Vorlagen</li>
-        <li>Vereinheitlichung von Checks und Arbeitshilfen</li>
-        <li>Praxisnahe Schulungen</li>
-        <li>Vernetzung und Austausch untereinander</li>
-      </ul>
-      <p>
-        <strong>Gut zu wissen:</strong> Das Zentrum für Legistik ist ein Bestandteil
-        des Handlungsfelds „Bessere Rechtsetzung“ in der Modernisierungsagenda.
-      </p>
-    </section>
-    <section class="breakout bg-lavender-base">
-      <div class="space-y-md">
-        <h2>Bereits verfügbare Angebote</h2>
-        <Card>
-          <Icon name="ic:twotone-widgets" slot="icon" />
-          <h3>Interdisziplinäre Expertise für Ihr Regelungsvorhaben</h3>
+    <section class="space-y-48 lg:space-y-80">
+      <div>
+        <h2>Unsere Angebote</h2>
+        <p>
+          Das Zentrum für Legistik stellt mehrere Unterstützungsangebote zur
+          Verfügung, die laufend weiterentwickelt werden.
+        </p>
+        <div class="grid grid-cols-1 gap-32 md:grid-cols-3">
+          <KernCard
+            background="white"
+            title="Werkzeuge"
+            target_option="_self"
+            href={werkzeuge.path}
+            body="Nutzen Sie Anleitungen und Hilfsmittel wie den Digitalcheck und den Rulemap Builder."
+            image={allgemeinImage}
+            imageAlt="Symbolbild: Erstellung eines Flussdiagrams"
+            interactive
+          />
+          <KernCard
+            background="white"
+            title="Regelungsbegleitung"
+            target_option="_self"
+            href={begleitungen.path}
+            body="Erhalten Sie individuelle Unterstützung für Ihr Vorhaben durch interdisziplinäre Teams – vertraulich und kostenfrei."
+            image={zusammenarbeitImg}
+            imageAlt="Mehrere Personen vor einem großen Whiteboard, an dem sie Klebepunkte an bereits vorhandenen Papieren und Post-its anbringen."
+            interactive
+          />
+          <KernCard
+            background="white"
+            title="Schulungen"
+            target_option="_self"
+            href={schulungen.path}
+            image={schulungImage}
+            imageAlt="Symboldbild: Ein Laptop zeigt die fünf Prinzipien des Digitalchecks"
+            body="Lernen Sie moderne Methoden und Werkzeuge der legistischen Arbeit kennen."
+            interactive
+          />
+        </div>
+      </div>
+      <div
+        class="relative space-y-24 lg:grid lg:h-482 lg:grid-cols-6 lg:items-center lg:overflow-hidden"
+      >
+        <InfoPanel
+          look="gray"
+          class="z-1 self-start lg:col-span-3 lg:w-600 lg:self-center"
+        >
+          <h2>Über uns</h2>
           <p>
-            Wir begleiten Sie mit einem interdisziplinärem Kompetenzteam. Sie
-            erhalten dadurch ein umfassendes Verständnis von Umsetzungsprozessen
-            und gestalten Ihr Vorhaben praxisnah und bürokratiearm.
+            Erfahren Sie mehr über den Auftrag und die Herangehensweise des
+            Zentrum für Legistik, aktuelle Arbeitspakete und Statistiken.
           </p>
-          <a href={begleitungen.path}
-            >Mehr Informationen zu interdisziplinären Kompetenzteams</a
+          <a class="inline-flex items-center gap-8" href={ueber.path}
+            ><span
+              class="kern-icon kern-icon--arrow-forward kern-icon--default"
+              aria-hidden="true"
+              style="background-color: currentColor"></span><p>
+              Mehr erfahren
+            </p></a
           >
-        </Card>
-        <Card>
-          <Icon name="ic:twotone-fact-check" slot="icon" />
-          <h3>In Schulungen praktisches Wissen erlangen</h3>
-          <p>
-            Neue Methoden und Werkzeuge für die Rechtsetzung in
-            umsetzungsorientierten Schulungen kennenlernen.
-          </p>
-          <a href={schulungen.path}>Mehr Informationen zu Schulungen</a>
-        </Card>
+        </InfoPanel>
+        <Image
+          src={ansatzImg}
+          alt="Eine großflächige Grafik an einer Glaswand. Sie zeigt verschiedenfarbige Kreise mit Textinhalten."
+          class="lg:absolute lg:right-1 lg:h-482 lg:w-727"
+        />
       </div>
     </section>
-    <section>
-      <SupportCard look="lavender" />
+    <section class="bg-lavender-base breakout">
+      <div class="grid grid-cols-1 gap-24 md:grid-cols-3 md:gap-32">
+        <InfoPanel>
+          <h2>Im Fokus</h2>
+          <p>
+            <a
+              class="text-link"
+              href="https://bmds.bund.de/1-jahr-bmds"
+              target="_blank"
+            >
+              1 Jahr Bundesministerium für Digitales und Staatsmodernisierung:</a
+            > Das Zentrum für Legistik ist eine von vielen Initiativen, um den Staat
+            schneller, digitaler und bürgernäher zu machen.
+          </p>
+          <p>
+            <a class="text-link" href={werkzeuge.path} target="_self"
+              >Methodensammlung überarbeitet</a
+            >: Tools und Leitfäden sind jetzt nach unterschiedlichen
+            Schwerpunkten gegliedert.
+          </p>
+        </InfoPanel>
+        <InfoPanel class="md:col-span-2">
+          <h2 class="">Auf dem Laufenden bleiben</h2>
+          <p>
+            Der Newsletter des Zentrum für Legistik erscheint mehrmals im Jahr
+            und informiert Sie über:
+          </p>
+          <ul>
+            <li>
+              Aktuelle Entwicklungen und Angebote im Bereich bessere
+              Rechtsetzung
+            </li>
+            <li>
+              Neue Funktionen von Werkzeugen und Arbeitshilfen (bspw.
+              Digitalcheck)
+            </li>
+            <li>Neue Schulungstermine</li>
+            <li>Aktuelle Anwendungsbeispiele</li>
+            <li>Veranstaltungen</li>
+          </ul>
+          <p>
+            Um sich anzumelden, schicken Sie uns eine kurze E-Mail an
+            <a class="text-link">{ZFL_EMAIL.display}</a>.
+          </p>
+          <a
+            class="kern-btn kern-btn--secondary self-start"
+            href={mailto(
+              ZFL_EMAIL.url,
+              "Anmeldung Zentrum für Legistik Newsletter",
+              "Hiermit melde ich mich für den Zentrum für Legistik Newsletter an.",
+            )}
+          >
+            <span class="kern-icon kern-icon--open-in-new" aria-hidden="true"
+            ></span>
+            <span class="kern-label">E-Mail Programm öffnen</span>
+          </a>
+        </InfoPanel>
+      </div>
     </section>
+    <Hero level="root">
+      <h2>Kontakt</h2>
+      <p>
+        Sie haben Fragen zum Zentrum für Legistik oder den einzelnen Angeboten?
+        Kontaktieren Sie uns.
+      </p>
+      <p>Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a></p>
+      <p>E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a></p>
+    </Hero>
   </main>
 </Layout>
+
+<script>
+  const infoBanner = document.getElementById("fruehphase-info-banner");
+  const closeInfoBannerButton = document.getElementById(
+    "fruehphase-info-banner-close",
+  );
+
+  closeInfoBannerButton?.addEventListener("click", () => {
+    infoBanner?.setAttribute("hidden", "");
+  });
+</script>
