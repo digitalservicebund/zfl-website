@@ -12,7 +12,6 @@ export const frontmatter = {
   title: "Die neue Frühphase",
   sitemap: true,
   navOrder: 4,
-  isStagingOnly: true,
 };
 ---
 
@@ -37,9 +36,8 @@ export const frontmatter = {
         />
         <figcaption class="text-base leading-tight font-normal text-gray-500">
           Schritt für Schritt unterstützt die neue Frühphase Sie durch
-          integrierte Arbeitshilfen, erleichtert den Austausch mit externen
-          Akteuren sowie Anleitungen für hilfreiche Methoden wie
-          Visualisierungen.
+          integrierte Arbeitshilfen, Anleitungen für hilfreiche Methoden wie
+          Visualisierungen und erleichtert den Austausch mit externen Akteuren.
         </figcaption>
       </figure>
       <h2>Warum braucht es eine neue Frühphase?</h2>
@@ -72,13 +70,14 @@ export const frontmatter = {
         können Sie diese bestehenden Angebote bereits jetzt schon nutzen.
       </p>
       <div
-        class="grid grid-cols-1 gap-32 md:grid-cols-2 xl:grid-cols-4 xl:gap-32"
+        class="grid grid-cols-1 gap-32 md:grid-cols-2 xl:grid-cols-4 xl:gap-16"
       >
         <KernCard
           title="Visualisieren Sie den Status Quo"
           background="white"
           interactive
           href="https://digitalcheck.bund.de/methoden/visualisieren/flussdiagramm"
+          target_option="_blank"
         >
           <div slot="pre-header" class="mb-16">
             <span class="kern-badge kern-badge--methode">
@@ -118,7 +117,7 @@ export const frontmatter = {
               und bürokratiearm zu gestalten.
             </p>
             <p>
-              Regelungsbegleitungen sind gelebte Frühphase in denen wir schon
+              Regelungsbegleitungen sind gelebte Frühphase, in denen wir schon
               heute neue Methoden der besseren Rechtsetzung nutzen.
             </p>
           </div>
@@ -149,8 +148,8 @@ export const frontmatter = {
     <section class="bg-cosmic-blue-base breakout text-white">
       <h2>Hilfe</h2>
       <p>
-        Sie haben konkrete Fragen, wünschen mehr Informationen oder wollen über
-        die Arbeit mehr erfahren? Kontaktieren Sie uns hier:
+        Sie haben konkrete Fragen, wünschen sich mehr Informationen oder wollen
+        mehr über unsere Arbeit erfahren? Kontaktieren Sie uns hier:
       </p>
       <p>
         Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>

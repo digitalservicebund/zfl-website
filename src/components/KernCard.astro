@@ -78,7 +78,7 @@ const hasFooter = Astro.slots.has("footer");
       <slot name="pre-header" />
       <hgroup>
         {preline && <p class="kern-preline">{preline}</p>}
-        <h2 class="kern-title">
+        <h2 class="kern-title text-wrap">
           {
             href ? (
               /* prettier-ignore */ <a href={href} class="kern-link--stretched" target={target_option}>{title}

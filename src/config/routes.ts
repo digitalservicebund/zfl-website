@@ -182,7 +182,7 @@ export const ueber_neueFruephase = {
   title: "Die neue Frühphase",
   parent: ueber,
   sitemap: true,
-  isStagingOnly: true,
+  isStagingOnly: false,
   navOrder: 4,
   navLabel: null,
 } as const;
