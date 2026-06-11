@@ -8,6 +8,7 @@ import csv
 from pathlib import Path
 
 from laws_paths import LAW_PATHS
+from reference_sort import reference_sort_key
 
 
 def parse_args() -> argparse.Namespace:
@@ -49,6 +50,13 @@ def main() -> None:
 
     if not columns:
         raise SystemExit("Input files are empty or have no columns.")
+
+    merged_rows.sort(
+        key=lambda row: (
+            row.get("norm", "").lower(),
+            reference_sort_key(row.get("referenz", "")),
+        )
+    )
 
     out_file.parent.mkdir(parents=True, exist_ok=True)
     with out_file.open("w", encoding="utf-8-sig", newline="") as f:

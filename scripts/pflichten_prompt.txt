@@ -79,7 +79,7 @@ NORMADRESSATEN (genau diese drei Kategorien)
   einschließlich Beliehener im Rahmen hoheitlicher Aufgaben.
 
 Eine Vorgabe kann mehrere Adressaten gleichzeitig betreffen — in diesem Fall
-alle zutreffenden in "normadressaten" aufnehmen.
+alle zutreffenden in "normadressat_kategorie" aufnehmen.
 
 Zusätzlich gibst du im Feld "normadressat_text" den exakten gesetzlichen
 Wortlaut des Adressaten an (z. B. "Anbieter von Hochrisiko-KI-Systemen",
@@ -145,7 +145,7 @@ Pro Vorgabe:
   "Duldungs-/Mitwirkungspflicht".
 - pflichtstaerke: "muss" oder "soll". (Es gibt keinen Wert "kann" —
   Befugnisnormen sind keine Vorgaben und werden nicht ausgegeben.)
-- normadressaten: Liste mit ein oder mehreren der drei Kategorien.
+- normadressat_kategorie: Liste mit ein oder mehreren der drei Kategorien.
 - normadressat_text: wörtliche Bezeichnung des Adressaten aus dem Gesetz.
 - zitat: wörtlicher Auszug, der die Vorgabe enthält (so kurz wie möglich,
   so lang wie nötig).

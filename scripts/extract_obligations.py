@@ -22,6 +22,7 @@ from openai import (
 
 from laws_paths import LAW_PATHS
 from pipeline_models import NormParagraph, ObligationExtraction
+from reference_sort import reference_sort_key
 
 ROOT_DIR = Path(__file__).resolve().parents[1]
 DEFAULT_PROGRESS_FILE = ROOT_DIR / "data" / "laws" / "cache" / "extraction_progress.json"
@@ -40,14 +41,12 @@ CSV_COLUMNS = [
     "referenz",
     "art_der_vorgabe",
     "pflichtstaerke",
-    "normadressaten",
+    "sprachlicher_indikator",
+    "normadressat_kategorie",
     "normadressat_text",
     "zitat",
     "handlung",
     "bestandteile",
-    "sprachlicher_indikator",
-    "konfidenz",
-    "url",
 ]
 
 
@@ -122,7 +121,9 @@ def load_paragraphs(in_file: Path, norm_filter: str | None) -> dict[str, list[No
             grouped[paragraph.law_abbrev].append(paragraph)
 
     for law_abbrev in grouped:
-        grouped[law_abbrev].sort(key=lambda item: item.paragraph_id)
+        grouped[law_abbrev].sort(
+            key=lambda item: (reference_sort_key(item.reference), item.paragraph_id)
+        )
 
     return dict(sorted(grouped.items(), key=lambda item: item[0]))
 
@@ -179,18 +180,16 @@ def build_reference(paragraph_reference: str, obligation_reference: str) -> str:
 def obligation_to_row(paragraph: NormParagraph, obligation) -> dict[str, str]:
     return {
         "norm": paragraph.law_abbrev,
-        "quelle": paragraph.source,
+        "quelle": paragraph.url,
         "referenz": build_reference(paragraph.reference, obligation.referenz),
         "art_der_vorgabe": obligation.art_der_vorgabe,
         "pflichtstaerke": obligation.pflichtstaerke,
-        "normadressaten": ", ".join(obligation.normadressaten),
+        "sprachlicher_indikator": obligation.sprachlicher_indikator,
+        "normadressat_kategorie": ", ".join(obligation.normadressat_kategorie),
         "normadressat_text": obligation.normadressat_text,
         "zitat": obligation.zitat,
         "handlung": obligation.handlung,
         "bestandteile": " | ".join(obligation.bestandteile),
-        "sprachlicher_indikator": obligation.sprachlicher_indikator,
-        "konfidenz": str(obligation.konfidenz),
-        "url": paragraph.url,
     }
 
 

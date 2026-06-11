@@ -18,6 +18,10 @@ class RegistryEntry(BaseModel):
     abbrev: str
     source: str = Field(pattern="^(gesetze-im-internet|eurlex)$")
     name: str
+    jurabk: str | None = None
+    kurzue: str | None = None
+    ausfertigung_datum: str | None = None
+    norm_count: int | None = None
     celex: str | None = None
     gii_slug: str | None = None
     gii_xml_zip_url: str | None = None
@@ -44,7 +48,7 @@ class Obligation(BaseModel):
     referenz: str
     art_der_vorgabe: ArtDerVorgabe
     pflichtstaerke: Pflichtstaerke
-    normadressaten: list[NormAdressat]
+    normadressat_kategorie: list[NormAdressat]
     normadressat_text: str
     zitat: str
     handlung: str
