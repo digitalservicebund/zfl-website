@@ -110,8 +110,10 @@ FALL A — EINE Sammelpflicht (Aufzählung = Inhalt EINER Pflicht):
        a) den Namen …  b) die Kontaktdaten …  c) die Zwecke …"
   → Das ist EINE Vorgabe (eine Mitteilungspflicht), NICHT eine pro Buchstabe.
   → Erfasse die Pflicht einmal anhand des Einleitungssatzes.
-  → Trage die einzelnen Aufzählungspunkte in das Feld "bestandteile" ein
-    (je ein knapper Stichpunkt pro Buchstabe/Nummer).
+  → Die einzelnen Aufzählungspunkte gehören mit in das "zitat" — zitiere den
+    Einleitungssatz UND die Buchstaben/Nummern wörtlich. Kürzen ist nur
+    durch Weglassen ganzer Passagen erlaubt (mit "…" gekennzeichnet),
+    niemals durch Umformulieren.
   → "referenz" bezeichnet den Einleitungssatz (z. B. "Absatz 1"), nicht die
     einzelnen Buchstaben.
 
@@ -121,7 +123,7 @@ FALL B — MEHRERE eigenständige Pflichten (Aufzählung = getrennte Handlungen)
   erfüllt oder verletzt werden kann. Beispiel:
     "Der Betreiber hat a) den Vorfall zu melden, b) ihn zu dokumentieren und
      c) die Unterlagen fünf Jahre aufzubewahren."
-  → Das sind DREI Vorgaben (je Buchstabe eine), "bestandteile" bleibt leer.
+  → Das sind DREI Vorgaben (je Buchstabe eine).
 
 Faustregel zur Abgrenzung: Beschreiben die Aufzählungspunkte verschiedene
 DINGE, die im Rahmen DERSELBEN Handlung (z. B. "mitteilen",
@@ -137,9 +139,17 @@ Gib eine Liste aller im übergebenen Paragraphen/Artikel enthaltenen Vorgaben
 zurück. Wenn keine Vorgabe enthalten ist, gib eine leere Liste zurück.
 
 Pro Vorgabe:
-- referenz: Position innerhalb des Paragraphen, z. B. "Absatz 2 Satz 1" oder
-  "Absatz 3 Nummer 4". Die übergeordnete §-/Artikel-Nummer NICHT wiederholen
-  — sie ist aus dem Kontext bekannt.
+- referenz: Position innerhalb des Paragraphen als juristisch übliche
+  Zitierangabe, z. B. "Absatz 2 Satz 1" oder "Absatz 3 Nummer 4". Die
+  übergeordnete §-/Artikel-Nummer NICHT wiederholen — sie ist aus dem
+  Kontext bekannt.
+  → Verwende AUSSCHLIESSLICH die üblichen Gliederungseinheiten: Absatz,
+    Unterabsatz, Satz, Nummer, Buchstabe.
+  → KEINE Angaben wie "Halbsatz 2", "erster Halbsatz", "Teilsatz ab
+    „wobei insbesondere“", keine Klammerzusätze und keine sonstigen
+    Umschreibungen. Betrifft die Vorgabe nur einen Teil eines Satzes,
+    zitiere trotzdem den ganzen Satz (z. B. "Absatz 2 Satz 3") und grenze
+    die Pflicht über das Zitat ab.
 - art_der_vorgabe: genau eine der vier Kategorien
   "Informationspflicht", "Handlungspflicht", "Unterlassungspflicht",
   "Duldungs-/Mitwirkungspflicht".
@@ -147,13 +157,20 @@ Pro Vorgabe:
   Befugnisnormen sind keine Vorgaben und werden nicht ausgegeben.)
 - normadressat_kategorie: Liste mit ein oder mehreren der drei Kategorien.
 - normadressat_text: wörtliche Bezeichnung des Adressaten aus dem Gesetz.
-- zitat: wörtlicher Auszug, der die Vorgabe enthält (so kurz wie möglich,
-  so lang wie nötig).
-- handlung: ein Satz, der die zu erbringende Handlung präzise beschreibt.
-- bestandteile: Liste der Aufzählungspunkte, wenn es sich um eine
-  Sammelpflicht handelt (FALL A oben) — je ein knapper Stichpunkt pro
-  Buchstabe/Nummer. Bei Pflichten ohne Aufzählung oder bei eigenständigen
-  Einzelpflichten (FALL B) eine leere Liste angeben.
+- zitat: wörtlicher Auszug, der die Vorgabe mit ALLEN inhaltlich relevanten
+  Details wiedergibt — Adressat, geforderte Handlung, Bedingungen, Fristen,
+  Form- und Verfahrensanforderungen sowie bei Sammelpflichten (FALL A) die
+  einzelnen Aufzählungspunkte. Der zitierte Text muss zu 100 % dem
+  Gesetzeswortlaut entsprechen — niemals paraphrasieren oder umstellen.
+  Kürzen ist nur durch Weglassen von Passagen erlaubt, die für den Inhalt
+  der Pflicht unerheblich sind (Auslassungen mit "…" kennzeichnen). Das
+  Zitat ist die maßgebliche Detailquelle der Vorgabe; es darf aber nicht
+  ausschweifen — keine Nachbarsätze oder Regelungen ohne Bezug zur Pflicht.
+- handlung: EIN kurzer, stark zusammenfassender Satz: Wer muss was tun?
+  Die Handlung dient als Überblick und Einstieg in die Vorgabe — sie soll
+  auf einen Blick erfassbar machen, worum es geht. Keine Aufzählung von
+  Einzelheiten, keine Wiederholung von Bedingungen, Fristen oder
+  Aufzählungspunkten — diese Details stehen im Zitat.
 - sprachlicher_indikator: die Wortgruppe, die die Pflicht ausdrückt
   (z. B. "ist unverzüglich zu melden", "haben … sicherzustellen").
 - konfidenz: 0.0–1.0. Werte < 0.6 nur, wenn die Einordnung als Vorgabe

@@ -46,7 +46,6 @@ CSV_COLUMNS = [
     "normadressat_text",
     "zitat",
     "handlung",
-    "bestandteile",
 ]
 
 
@@ -189,7 +188,6 @@ def obligation_to_row(paragraph: NormParagraph, obligation) -> dict[str, str]:
         "normadressat_text": obligation.normadressat_text,
         "zitat": obligation.zitat,
         "handlung": obligation.handlung,
-        "bestandteile": " | ".join(obligation.bestandteile),
     }
 
 
