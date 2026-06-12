@@ -1,0 +1,6 @@
+# Evaluation corpus — processed sequentially (smaller laws first)
+32016R0679
+BDSG
+OZG
+GVG
+ZPO

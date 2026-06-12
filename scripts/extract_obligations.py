@@ -130,13 +130,25 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--out-dir", default=str(LAW_PATHS["obligations_dir"]))
     parser.add_argument("--progress-file", default=str(DEFAULT_PROGRESS_FILE))
     parser.add_argument("--prompt-file", default=str(DEFAULT_PROMPT_FILE))
-    parser.add_argument("--norm", help="Only process one law abbreviation, e.g. KAGB")
+    parser.add_argument(
+        "--norm",
+        action="append",
+        metavar="ABBREV",
+        help="Process only these law abbreviations. Repeat and/or use comma-separated "
+        "values, e.g. --norm BDSG --norm OZG or --norm BDSG,OZG,32016R0679",
+    )
+    parser.add_argument(
+        "--norms-file",
+        metavar="PATH",
+        help="Text file with one law abbreviation per line (# starts a comment). "
+        "Laws are processed sequentially in file order.",
+    )
     parser.add_argument(
         "--rerun",
         action="store_true",
         help="Discard existing checkpoint entries and output CSV rows for the targeted "
-        "law(s) before extracting again. Requires --norm when no --progress-file is given "
-        "to avoid accidentally wiping all progress.",
+        "law(s) before extracting again. Requires --norm or --norms-file when no "
+        "--progress-file is given to avoid accidentally wiping all progress.",
     )
     parser.add_argument("--model", default=DEFAULT_MODEL)
     parser.add_argument(
@@ -190,7 +202,35 @@ def load_prompt(prompt_file: Path) -> str:
     return prompt_file.read_text(encoding="utf-8")
 
 
-def load_paragraphs(in_file: Path, norm_filter: str | None) -> dict[str, list[NormParagraph]]:
+def collect_norm_filters(norm_args: list[str] | None, norms_file: str | None) -> list[str] | None:
+    """Return ordered unique law abbreviations from CLI flags and/or a norms file."""
+    result: list[str] = []
+    seen: set[str] = set()
+
+    def add(value: str) -> None:
+        value = value.strip()
+        if value and value not in seen:
+            seen.add(value)
+            result.append(value)
+
+    if norm_args:
+        for arg in norm_args:
+            for part in arg.split(","):
+                add(part)
+
+    if norms_file:
+        path = Path(norms_file)
+        if not path.exists():
+            raise SystemExit(f"Norms file not found: {path}")
+        for line in path.read_text(encoding="utf-8").splitlines():
+            add(line.split("#", 1)[0])
+
+    return result if result else None
+
+
+def load_paragraphs(
+    in_file: Path, norm_filters: set[str] | None
+) -> dict[str, list[NormParagraph]]:
     if not in_file.exists():
         raise SystemExit(f"Input file not found: {in_file}")
 
@@ -201,7 +241,7 @@ def load_paragraphs(in_file: Path, norm_filter: str | None) -> dict[str, list[No
             if not line:
                 continue
             paragraph = NormParagraph.model_validate_json(line)
-            if norm_filter and paragraph.law_abbrev != norm_filter:
+            if norm_filters and paragraph.law_abbrev not in norm_filters:
                 continue
             grouped[paragraph.law_abbrev].append(paragraph)
 
@@ -547,14 +587,17 @@ async def async_main(args: argparse.Namespace) -> None:
     prompt_file = Path(args.prompt_file)
 
     prompt = load_prompt(prompt_file)
-    grouped_paragraphs = load_paragraphs(in_file, args.norm)
+    norm_filters = collect_norm_filters(args.norm, args.norms_file)
+    grouped_paragraphs = load_paragraphs(
+        in_file, set(norm_filters) if norm_filters else None
+    )
     progress = load_progress(progress_file)
 
     if args.rerun:
-        if not args.norm and progress_file == DEFAULT_PROGRESS_FILE:
+        if not norm_filters and progress_file == DEFAULT_PROGRESS_FILE:
             raise SystemExit(
-                "--rerun without --norm would wipe all progress. "
-                "Pass --norm <ABBREV> to target a specific law, "
+                "--rerun without --norm/--norms-file would wipe all progress. "
+                "Pass law abbreviations to target specific laws, "
                 "or --progress-file to use a dedicated file."
             )
         laws_to_rerun = list(grouped_paragraphs.keys())
@@ -577,9 +620,48 @@ async def async_main(args: argparse.Namespace) -> None:
                 print(f"[rerun] Reset CSV for {law_abbrev}: {csv_file.name}")
 
     if not grouped_paragraphs:
-        norm_text = f" for norm {args.norm}" if args.norm else ""
-        print(f"No paragraphs found{norm_text} in {in_file}.")
+        if norm_filters:
+            missing = ", ".join(norm_filters)
+            print(f"No paragraphs found for requested norm(s): {missing} in {in_file}.")
+        else:
+            print(f"No paragraphs found in {in_file}.")
         return
+
+    if norm_filters:
+        law_order = norm_filters
+        missing = [abbrev for abbrev in norm_filters if abbrev not in grouped_paragraphs]
+        if missing:
+            print(f"Warning: no paragraphs found for norm(s): {', '.join(missing)}")
+    else:
+        law_order = sorted(grouped_paragraphs.keys())
+
+    total_paragraphs = sum(len(grouped_paragraphs[a]) for a in law_order if a in grouped_paragraphs)
+    already_done_total = sum(
+        sum(1 for p in grouped_paragraphs[a] if progress.get(p.paragraph_id, False))
+        for a in law_order
+        if a in grouped_paragraphs
+    )
+    pending_total = total_paragraphs - already_done_total
+
+    print("=" * 60)
+    print("Obligations extraction run")
+    print("=" * 60)
+    print(f"  Model:          {args.model}")
+    print(f"  Reasoning:      {args.reasoning_effort or '(none)'}")
+    print(f"  Concurrency:    {args.max_concurrency} parallel paragraphs")
+    print(f"  Input:          {in_file}")
+    print(f"  Output dir:     {out_dir}")
+    print(f"  Progress file:  {progress_file}")
+    print(f"  Laws ({len(law_order)}):       {', '.join(law_order)}")
+    for abbrev in law_order:
+        paragraphs_for_law = grouped_paragraphs.get(abbrev, [])
+        done = sum(1 for p in paragraphs_for_law if progress.get(p.paragraph_id, False))
+        pending = len(paragraphs_for_law) - done
+        print(f"    {abbrev}: {len(paragraphs_for_law)} paragraphs ({done} cached, {pending} pending)")
+    print(f"  Total pending:  {pending_total} / {total_paragraphs} paragraphs")
+    if args.rerun:
+        print("  Mode:           --rerun (checkpoint cleared)")
+    print("=" * 60)
 
     token = get_langdock_token()
 
@@ -599,7 +681,10 @@ async def async_main(args: argparse.Namespace) -> None:
         total_target_paragraphs = 0
         total_rows = 0
 
-        for law_abbrev, paragraphs in grouped_paragraphs.items():
+        for law_abbrev in law_order:
+            paragraphs = grouped_paragraphs.get(law_abbrev)
+            if not paragraphs:
+                continue
             new_count, target_count, row_count = await process_law(
                 client=client,
                 law_abbrev=law_abbrev,

@@ -22,9 +22,26 @@ GII_TOC_URL = "https://www.gesetze-im-internet.de/gii-toc.xml"
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Download EU and German source law files.")
-    parser.add_argument("--eu-csv", default=str(LAW_PATHS["eu_input_csv"]))
-    parser.add_argument("--de-csv", default=str(LAW_PATHS["de_input_csv"]))
+    parser = argparse.ArgumentParser(
+        description="Download EU and German source law files.",
+        epilog=(
+            "Example (evaluation subset): "
+            "download_laws.py --de-csv data/laws/import/test_obligations_de.csv "
+            "--eu-csv data/laws/import/test_obligations_eu.csv"
+        ),
+    )
+    parser.add_argument(
+        "--de-csv",
+        default=str(LAW_PATHS["de_input_csv"]),
+        metavar="PATH",
+        help="Semicolon-delimited DE import list (default: %(default)s)",
+    )
+    parser.add_argument(
+        "--eu-csv",
+        default=str(LAW_PATHS["eu_input_csv"]),
+        metavar="PATH",
+        help="Semicolon-delimited EU import list (default: %(default)s)",
+    )
     parser.add_argument("--out-dir", default=str(LAW_PATHS["download_dir"]))
     parser.add_argument("--dry-run", action="store_true")
     return parser.parse_args()

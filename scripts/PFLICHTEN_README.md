@@ -63,8 +63,10 @@ The static site build (`pnpm build`) then picks up `public/data/*` automatically
 
 ## Commands
 
-- `pnpm laws:download`
+- `pnpm laws:download [-- --de-csv <path>] [-- --eu-csv <path>]`
   - Runs `scripts/download_laws.py`. Downloads DE/EU source files into local cache.
+  - Defaults: `data/laws/import/gesetze_und_verordnungen.csv` (DE) and `data/laws/import/eu_regelungen_zu_finanzgesetzen.csv` (EU).
+  - Pass custom import lists via `--de-csv` and/or `--eu-csv` (see evaluation test corpus below).
 
 - `pnpm laws:prepare-corpus`
   - Runs `scripts/prepare_law_corpus.py`. Converts raw downloads into parser-ready source folders.
@@ -84,9 +86,10 @@ The static site build (`pnpm build`) then picks up `public/data/*` automatically
 - `pnpm laws:build-paragraphs`
   - Runs `scripts/build_norm_paragraphs.py`. Builds normalized paragraph-level JSONL dataset.
 
-- `pnpm laws:extract-obligations [--norm <ABBREV>] [--model gpt-5.4-mini] [--reasoning-effort low] [--rerun]`
+- `pnpm laws:extract-obligations [--norm <ABBREV>] [--norms-file <path>] [--model gpt-5.4-mini] [--reasoning-effort low] [--rerun]`
   - Runs `scripts/extract_obligations.py`. Extracts obligations with structured LLM output and writes per-law CSV files.
   - Resumes safely via `data/laws/cache/extraction_progress.json`.
+  - Filter laws with `--norm` (repeatable or comma-separated) and/or `--norms-file` (one abbreviation per line). Multiple laws run **sequentially** in list order; within each law, up to 5 paragraphs are processed concurrently.
   - `--norm` value casing must match the registry (`KWG`, `KAGB`, `32013R0575`, …).
 
 - `pnpm laws:concat-obligations`
@@ -102,6 +105,11 @@ Canonical pipeline and UI folders:
 ```text
 data/laws/
   import/                          # Curated input CSV lists
+    gesetze_und_verordnungen.csv   # Full DE download list (financial-law corpus)
+    eu_regelungen_zu_finanzgesetzen.csv
+    test_obligations_de.csv        # Evaluation subset: BDSG, OZG, ZPO, GVG
+    test_obligations_eu.csv        # Evaluation subset: DSGVO (32016R0679)
+    test_obligations_norms.txt     # Evaluation extraction list (for --norms-file)
   cache/downloads/                 # Raw downloaded DE/EU files + reports
   cache/gii_metadata.json          # Cached GII metadata (jurabk/kurzue/ausfertigung_datum)
   cache/extraction_progress.json   # Resume checkpoint for LLM extraction
@@ -155,7 +163,7 @@ Note: `konfidenz` is part of the `Obligation` Pydantic model (validated 0.0–1.
 
 #### Extraction logic
 
-1. Load JSONL paragraphs, optionally filter by `--norm <abbrev>`, group by `law_abbrev`. Within each law, paragraphs are sorted by `reference_sort_key` (from `reference_sort.py`) then `paragraph_id`.
+1. Load JSONL paragraphs, optionally filter by `--norm` / `--norms-file`, group by `law_abbrev`. Laws are processed sequentially in list order; within each law, paragraphs are sorted by `reference_sort_key` (from `reference_sort.py`) then `paragraph_id`.
 2. For each paragraph, call the LLM with the system prompt and the paragraph text, requesting `ObligationExtraction` as structured output.
 3. Validate the response via Pydantic. All extracted obligations are kept regardless of `konfidenz` — the score is in the model for consumers but is not written to the CSV.
 4. Assemble CSV rows (LLM fields + paragraph metadata) and write incrementally to the per-law CSV.
@@ -228,6 +236,52 @@ Because this is an evaluation of the approach, a light-weight quality check acco
 - Pick one German law and one EU regulation as a gold sample.
 - Manually review LLM output for ~20 paragraphs each and record obvious false positives / missed obligations.
 - Capture findings in a short note (no formal precision/recall required for the first pass) and feed adjustments back into `pflichten_prompt.txt`.
+
+#### Test corpus
+
+Curated evaluation laws live in `data/laws/import/test_obligations_*.csv` and are also listed in the main import CSVs so they appear in the registry:
+
+| Law        | `--norm` for extraction | Paragraphs (approx.) | Purpose                  |
+| ---------- | ----------------------- | -------------------- | ------------------------ |
+| DSGVO (EU) | `32016R0679`            | 99                   | General legislation (EU) |
+| BDSG (DE)  | `BDSG`                  | 86                   | General legislation (DE) |
+| OZG (DE)   | `OZG`                   | 16                   | General legislation (DE) |
+| ZPO (DE)   | `ZPO`                   | 1 077                | BMJV / Scholz demo       |
+| GVG (DE)   | `GVG`                   | 200                  | BMJV / Scholz demo       |
+
+`--norm` values come from `jurabk` in the parsed XML (DE) or CELEX (EU), not from the GII slug (`bdsg_2018` → `BDSG`).
+
+Prepare the test corpus (steps 1–6, no LLM):
+
+```sh
+pnpm laws:download -- \
+  --de-csv data/laws/import/test_obligations_de.csv \
+  --eu-csv data/laws/import/test_obligations_eu.csv
+pnpm laws:prepare-corpus
+pnpm laws:build-registry
+pnpm laws:build-paragraphs
+```
+
+Then run LLM extraction (long-running; requires Langdock API key via 1Password CLI). Process all evaluation laws in one sequential run:
+
+```sh
+pnpm laws:extract-obligations -- --norms-file data/laws/import/test_obligations_norms.txt
+```
+
+Or pass abbreviations directly (same order):
+
+```sh
+pnpm laws:extract-obligations -- --norm 32016R0679,BDSG,OZG,GVG,ZPO
+```
+
+Single-law runs still work, e.g. `pnpm laws:extract-obligations -- --norm BDSG`.
+
+Each run writes `public/data/obligations/Pflichten_LLM_<norm>.csv` and resumes via `data/laws/cache/extraction_progress.json` after interruption. When all runs finish:
+
+```sh
+pnpm laws:concat-obligations
+pnpm laws:publish-ui-data
+```
 
 ## Script inventory
 
