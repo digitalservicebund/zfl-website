@@ -13,7 +13,6 @@ export type DrilldownEntry = {
   label: string;
   isVisible: boolean;
   panelId: string | null;
-  isHiddenParent: boolean;
 };
 
 export type DrilldownPanel = {
@@ -123,5 +122,4 @@ const toDrilldownEntry = (route: Route): DrilldownEntry => ({
   label: getRouteLabel(route),
   isVisible: isRouteVisible(route),
   panelId: hasVisibleChildren(route) ? route.key : null,
-  isHiddenParent: route.isHiddenParent,
 });
