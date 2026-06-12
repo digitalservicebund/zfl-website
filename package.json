@@ -85,7 +85,7 @@
     "jsdom": "^29.1.1",
     "knip": "^6.16.1",
     "license-checker-rseidelsohn": "^4.4.2",
-    "prettier": "^3.8.3",
+    "prettier": "^3.8.4",
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-organize-imports": "^4.3.0",
     "prettier-plugin-tailwindcss": "^0.8.0",
