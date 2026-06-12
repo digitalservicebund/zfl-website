@@ -198,6 +198,116 @@ export const ueber_zahlenUndFakten = {
   navLabel: null,
 } as const;
 
+export const vorhaben = {
+  key: "vorhaben",
+  path: "/vorhaben",
+  title: "Vorhaben erarbeiten",
+  parent: null,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: "Ihr Vorhaben",
+} as const;
+
+export const vorhaben_steckbrief = {
+  key: "vorhaben_steckbrief",
+  path: "/vorhaben/steckbrief",
+  title: "Steckbrief",
+  parent: vorhaben,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const vorhaben_steckbrief_schritt1 = {
+  key: "vorhaben_steckbrief_schritt1",
+  path: "/vorhaben/steckbrief/schritt-1",
+  title: "1. Allgemeine Angaben",
+  parent: vorhaben_steckbrief,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 1,
+  navLabel: null,
+} as const;
+
+export const vorhaben_steckbrief_schritt2 = {
+  key: "vorhaben_steckbrief_schritt2",
+  path: "/vorhaben/steckbrief/schritt-2",
+  title: "2. Kontext & Genese",
+  parent: vorhaben_steckbrief,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 2,
+  navLabel: null,
+} as const;
+
+export const vorhaben_steckbrief_schritt3 = {
+  key: "vorhaben_steckbrief_schritt3",
+  path: "/vorhaben/steckbrief/schritt-3",
+  title: "3. Problembeschreibung",
+  parent: vorhaben_steckbrief,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 3,
+  navLabel: "3. Problem",
+} as const;
+
+export const vorhaben_steckbrief_schritt4 = {
+  key: "vorhaben_steckbrief_schritt4",
+  path: "/vorhaben/steckbrief/schritt-4",
+  title: "4. Vorläufige Zielsetzung",
+  parent: vorhaben_steckbrief,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 4,
+  navLabel: "4. Zielsetzung",
+} as const;
+
+export const vorhaben_steckbrief_schritt5 = {
+  key: "vorhaben_steckbrief_schritt5",
+  path: "/vorhaben/steckbrief/schritt-5",
+  title: "5. Einflussfaktoren & relevante Akteure",
+  parent: vorhaben_steckbrief,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 5,
+  navLabel: "5. Einflussfaktoren",
+} as const;
+
+export const vorhaben_steckbrief_schritt6 = {
+  key: "vorhaben_steckbrief_schritt6",
+  path: "/vorhaben/steckbrief/schritt-6",
+  title: "6. Vorhabensbeschreibung",
+  parent: vorhaben_steckbrief,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 6,
+  navLabel: "6. Vorhaben",
+} as const;
+
+export const vorhaben_steckbrief_schritt7 = {
+  key: "vorhaben_steckbrief_schritt7",
+  path: "/vorhaben/steckbrief/schritt-7",
+  title: "7. Zusammenfassung",
+  parent: vorhaben_steckbrief,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 7,
+  navLabel: null,
+} as const;
+
+export const vorhaben_steckbrief_schritt8 = {
+  key: "vorhaben_steckbrief_schritt8",
+  path: "/vorhaben/steckbrief/schritt-8",
+  title: "8. Herunterladen & Absenden",
+  parent: vorhaben_steckbrief,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 8,
+  navLabel: "8. Abschluss",
+} as const;
+
 export const werkzeuge = {
   key: "werkzeuge",
   path: "/werkzeuge",
@@ -227,5 +337,15 @@ export const allRoutes = [
   ueber_daranArbeitenWir,
   ueber_neueFruephase,
   ueber_zahlenUndFakten,
+  vorhaben,
+  vorhaben_steckbrief,
+  vorhaben_steckbrief_schritt1,
+  vorhaben_steckbrief_schritt2,
+  vorhaben_steckbrief_schritt3,
+  vorhaben_steckbrief_schritt4,
+  vorhaben_steckbrief_schritt5,
+  vorhaben_steckbrief_schritt6,
+  vorhaben_steckbrief_schritt7,
+  vorhaben_steckbrief_schritt8,
   werkzeuge,
 ] as const;

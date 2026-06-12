@@ -1,4 +1,12 @@
-import { allRoutes, home, staging } from "@/config/routes";
+import {
+  allRoutes,
+  dev,
+  dev_astroKomponenten,
+  dev_kernKomponenten,
+  home,
+  staging,
+  vorhaben_steckbrief,
+} from "@/config/routes";
 import { isProduction, isStaging, stage } from "@/config/stage";
 import { expect, test } from "@playwright/test";
 
@@ -8,7 +16,16 @@ const getTitle = (title?: string) =>
   title === "Zentrum für Legistik" ? title : `${title} — Zentrum für Legistik`;
 
 test.describe("page titles", () => {
-  const relevantRoutes = allRoutes.filter((route) => route !== staging);
+  const excludedRouteKeys: string[] = [
+    staging.key,
+    dev.key,
+    dev_astroKomponenten.key,
+    dev_kernKomponenten.key,
+    vorhaben_steckbrief.key,
+  ];
+  const relevantRoutes = allRoutes.filter(
+    (route) => !excludedRouteKeys.includes(route.key),
+  );
   relevantRoutes.forEach((route) => {
     test(`${route.path} has correct title`, async ({ page }) => {
       await page.goto(route.path);

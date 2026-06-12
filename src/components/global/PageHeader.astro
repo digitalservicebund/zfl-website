@@ -10,6 +10,7 @@ import {
   schulungen,
   ueber,
   werkzeuge,
+  vorhaben,
   type Route,
 } from "@/config/routes";
 import bundLogoWhite from "@/images/logo/bund-logo-white.svg";
@@ -20,6 +21,13 @@ import { removeTrailingSlash } from "@/utils/path";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import { twMerge } from "tailwind-merge";
+import { isProduction } from "@/config/stage";
+
+interface Props {
+  isHome?: boolean;
+}
+
+const { isHome = false } = Astro.props;
 
 const { pathname } = Astro.url;
 const currentPath = removeTrailingSlash(pathname);
@@ -95,6 +103,18 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
       </nav>
 
       <SearchButton class={navItemStyle("main")} keyboardToggle />
+      {
+        isHome && !isProduction && (
+          <div class="flex items-center">
+            <a
+              href={vorhaben.path}
+              class="kern-btn kern-btn--primary text-white"
+            >
+              Vorhaben starten
+            </a>
+          </div>
+        )
+      }
 
       <!-- Mobile Menu Toggle -->
       <div class="flex h-full min-[900px]:hidden">
@@ -146,6 +166,16 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
     @page-header-mobile-menu-opened.window="currentPanel = initialPanel; currentDepth = initialDepth"
     x-bind:data-depth="currentDepth"
   >
+    {
+      isHome && !isProduction && (
+        <a
+          href={vorhaben.path}
+          class="kern-btn kern-btn--block kern-btn--primary text-white"
+        >
+          Vorhaben starten
+        </a>
+      )
+    }
     <DrilldownNavigation
       navigation={mobileMenu}
       panelIdPrefix="mobile-menu"

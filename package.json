@@ -44,6 +44,8 @@
     "astro-pagefind": "^2.0.0",
     "astro-route-generator": "github:digitalservicebund/astro-route-generator#40024e7e81c9fda804b952b6e17f30ac17ab4607",
     "astro-seo": "^1.1.0",
+    "docx": "^9.6.1",
+    "gray-matter": "^4.0.3",
     "pagefind": "^1.5.2",
     "posthog-js": "^1.382.0",
     "sharp": "^0.34.5",

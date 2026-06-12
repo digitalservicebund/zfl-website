@@ -11,6 +11,7 @@
 
   --color-cosmic-blue-base: #36349d;
   --color-cosmic-blue-400: #7978be;
+  --color-cosmic-blue-100: #d7d6eb;
 
   --color-lavender-base: #e3e6f2;
   --color-lavender-200: #f6f7fb;
@@ -27,6 +28,8 @@
 
   --max-content-width: 82rem;
   --container-padding-inline: clamp(1rem, 5vw, 3rem);
+
+  --header-height: 104px;
 }
 
 @media (width >= 48rem) {
@@ -40,6 +43,11 @@
 }
 
 @layer base {
+  /* Hide elements with x-cloak until Alpine.js initializes */
+  [x-cloak] {
+    display: none !important;
+  }
+
   html {
     /* Keep 16px, don't change! */
     font-size: 16px;
@@ -116,7 +124,7 @@
     @apply list-decimal;
   }
 
-  p:not(.kern-card__header *):not(li p),
+  p:not(.kern-card__header *, .kern-task-list__title > *):not(li p),
   ul:not(.list-unstyled),
   ol:not(.list-unstyled) {
     @apply max-w-a11y;
