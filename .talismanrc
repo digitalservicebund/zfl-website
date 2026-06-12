@@ -69,7 +69,17 @@ fileignoreconfig:
     checksum: fb64e37561e3d4303bdd3792ef045df59e29ddd137f88d2b90490ba2b284a7e6
   - filename: public/data/obligations/Pflichten_LLM_All.csv
     ignore_detectors: [filecontent]
+  - filename: public/data/obligations/Pflichten_LLM_32016R0679.csv
+    ignore_detectors: [filecontent]
+  - filename: public/data/obligations/Pflichten_LLM_BDSG.csv
+    ignore_detectors: [filecontent]
+  - filename: public/data/obligations/Pflichten_LLM_GVG.csv
+    ignore_detectors: [filecontent]
   - filename: public/data/obligations/Pflichten_LLM_HGB.csv
+    ignore_detectors: [filecontent]
+  - filename: public/data/obligations/Pflichten_LLM_OZG.csv
+    ignore_detectors: [filecontent]
+  - filename: public/data/obligations/Pflichten_LLM_ZPO.csv
     ignore_detectors: [filecontent]
   - filename: public/data/obligations/Pflichten_LLM_32023R0606.csv
     ignore_detectors: [filecontent]
