@@ -1,0 +1,66 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  prevPath?: string;
+  nextPath?: string;
+  customText?: string;
+  nextBtnText?: string;
+}
+
+const { prevPath, nextPath, customText, nextBtnText = "Weiter" } = Astro.props;
+const defaultText = "Ihre Daten werden automatisch im Browser gespeichert";
+---
+
+<div class="sticky bottom-0 z-10 border-t border-[#A5AAC3] bg-white py-16">
+  <div class="flex w-full items-center justify-between gap-16 px-64">
+    <div class="kern-body kern-body--muted flex items-center gap-12">
+      {
+        customText ? (
+          <>
+            <Icon name="ic:outline-info" />
+            {customText}
+          </>
+        ) : (
+          <>
+            <Icon name="ic:outline-published-with-changes" /> {defaultText}
+          </>
+        )
+      }
+    </div>
+    <div class="flex gap-16">
+      {
+        !customText && (
+          <button
+            type="button"
+            class="docx-download-btn kern-btn kern-btn--tertiary"
+          >
+            <span
+              class={"kern-icon kern-icon--default kern-icon--download"}
+              aria-hidden="true"
+            />
+            <span class="kern-label">Zwischenstand herunterladen</span>
+          </button>
+        )
+      }
+      {
+        prevPath && (
+          <a href={prevPath} class="kern-btn kern-btn--secondary">
+            <span class="kern-label">Zurück</span>
+          </a>
+        )
+      }
+      {
+        nextPath && (
+          <a href={nextPath} class="kern-btn kern-btn--primary">
+            <span class="kern-label">{nextBtnText}</span>
+            <span
+              class="kern-icon kern-icon--arrow-forward"
+              aria-hidden="true"
+            />
+          </a>
+        )
+      }
+    </div>
+  </div>
+</div>
