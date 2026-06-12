@@ -64,15 +64,15 @@ const { title, pageNumber, isWide, totalPages, showProgressBar } = Astro.props;
     display: none;
   }
 
-  .kern-form-input__input:invalid:not(:focus) {
+  /* .kern-form-input__input:invalid:not(:focus) {
     @apply kern-form-input__input--error;
-  }
+  } */
 
   .kern-form-input__input:invalid:not(:focus) ~ .kern-error {
     display: flex;
   }
-
+  /* 
   .kern-form-input:has(.kern-form-input__input:invalid):not(:has(:focus)) {
     @apply kern-form-input--error;
-  }
+  } */
 </style>

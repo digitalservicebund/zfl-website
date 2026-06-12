@@ -209,6 +209,28 @@ export const vorhaben = {
   navLabel: "Ihr Vorhaben",
 } as const;
 
+export const vorhaben_fruephase2 = {
+  key: "vorhaben_fruephase2",
+  path: "/vorhaben/fruephase-2",
+  title: "Frühphase II",
+  parent: vorhaben,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const vorhaben_fruephase2_schritt2 = {
+  key: "vorhaben_fruephase2_schritt2",
+  path: "/vorhaben/fruephase-2/schritt-2",
+  title: "Einbeziehung Perspektiven externer Stakeholder",
+  parent: vorhaben_fruephase2,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 1,
+  navLabel: null,
+} as const;
+
 export const werkzeuge = {
   key: "werkzeuge",
   path: "/werkzeuge",
@@ -239,5 +261,7 @@ export const allRoutes = [
   ueber_neueFruephase,
   ueber_zahlenUndFakten,
   vorhaben,
+  vorhaben_fruephase2,
+  vorhaben_fruephase2_schritt2,
   werkzeuge,
 ] as const;
