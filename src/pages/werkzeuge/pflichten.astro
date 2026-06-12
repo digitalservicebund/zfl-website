@@ -308,9 +308,10 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
 
   type ObligationRow = Record<string, string>;
 
-  const CSV_URL = "/data/obligations/Pflichten_LLM_All.csv";
-  const CSV_FALLBACK_URL = "/data/obligations/Pflichten_LLM_HGB.csv";
-  const LAWS_URL = "/data/laws.json";
+  const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
+  const CSV_URL = `${BASE}/data/obligations/Pflichten_LLM_All.csv`;
+  const CSV_FALLBACK_URL = `${BASE}/data/obligations/Pflichten_LLM_HGB.csv`;
+  const LAWS_URL = `${BASE}/data/laws.json`;
   const PREVIEW_ROW_LIMIT = 5;
 
   const EXPORT_HEADERS_FALLBACK = [
