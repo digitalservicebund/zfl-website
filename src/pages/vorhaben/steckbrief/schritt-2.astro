@@ -1,8 +1,8 @@
 ---
-import SteckbriefWrapper from "./_components/SteckbriefWrapper.astro";
-import SidebarTriggerButton from "./_components/SidebarTriggerButton.astro";
-import Textarea from "./_components/Textarea.astro";
-import Hint from "./_components/Hint.astro";
+import SidebarTriggerButton from "../_components/SidebarTriggerButton.astro";
+import SteckbriefLayout from "./_SteckbriefLayout.astro";
+import Textarea from "../_components/Textarea.astro";
+import Hint from "../_components/Hint.astro";
 
 export const frontmatter = {
   title: "2. Kontext & Genese",
@@ -13,7 +13,7 @@ export const frontmatter = {
 const kontextHintId = "kontext-hint";
 ---
 
-<SteckbriefWrapper title={frontmatter.title} pageNumber={frontmatter.navOrder}>
+<SteckbriefLayout title={frontmatter.title} pageNumber={frontmatter.navOrder}>
   <div class="flex flex-col gap-16">
     <h2 class="mt-0">
       Kontext und Genese des Vorhabens
@@ -47,4 +47,4 @@ const kontextHintId = "kontext-hint";
       <li>Warum ist gerade jetzt eine Regelung erforderlich?</li>
     </ul>
   </Hint>
-</SteckbriefWrapper>
+</SteckbriefLayout>

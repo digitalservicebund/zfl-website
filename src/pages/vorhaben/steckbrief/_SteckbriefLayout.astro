@@ -1,0 +1,82 @@
+---
+import { allRoutes, vorhaben_steckbrief } from "@/config/routes";
+import FormStepLayout from "../_components/FormStepLayout.astro";
+import ButtonBar from "../_components/ButtonBar.astro";
+
+type Props = {
+  title: string;
+  pageNumber: number;
+  isWide?: boolean;
+};
+
+const { title, pageNumber, isWide } = Astro.props;
+
+const stepRoutes = allRoutes.filter((r) => r.parent === vorhaben_steckbrief);
+const prevPath = stepRoutes.find((r) => r.navOrder === pageNumber - 1)?.path;
+const nextPath = stepRoutes.find((r) => r.navOrder === pageNumber + 1)?.path;
+---
+
+<FormStepLayout
+  title={title}
+  pageNumber={pageNumber}
+  totalPages={stepRoutes.length}
+  isWide={isWide}
+  showProgressBar
+>
+  <slot />
+  {Astro.slots.has("hint") && <slot name="hint" slot="hint" />}
+  {
+    Astro.slots.has("button-bar") && (
+      <slot name="button-bar" slot="button-bar" />
+    )
+  }
+  {
+    !Astro.slots.has("button-bar") && (
+      <ButtonBar slot="button-bar" prevPath={prevPath} nextPath={nextPath} />
+    )
+  }
+</FormStepLayout>
+
+<script>
+  import { generateSteckbriefDocx } from "./_utils/docxDownload.ts";
+  import type { Inputs } from "./_utils/types.ts";
+
+  const STORAGE_KEY = "steckbrief-prototype-v2-form-state";
+
+  const getState = () =>
+    JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}") as Inputs;
+
+  function init() {
+    const form = document.querySelector("form");
+
+    const handleFormChange = function () {
+      if (!form) return;
+      const formData = Object.fromEntries(new FormData(form).entries());
+      const newState = { ...getState(), ...formData };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(newState));
+    };
+    form?.addEventListener("change", handleFormChange);
+
+    for (const [key, value] of Object.entries(getState())) {
+      if (!value) continue;
+      const el = form?.querySelector(`#${key}`) as HTMLInputElement;
+      if (el) {
+        el.value = value;
+        el.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+
+      const summaryEl = form?.querySelector(`#summary-${key}`);
+      if (summaryEl) summaryEl.innerHTML = value;
+    }
+
+    const downloadDocx = () => {
+      const data = getState();
+      generateSteckbriefDocx(data);
+    };
+
+    const downloadBtns = document.querySelectorAll(".docx-download-btn");
+    downloadBtns.forEach((btn) => btn.addEventListener("click", downloadDocx));
+  }
+
+  document.addEventListener("astro:page-load", init);
+</script>

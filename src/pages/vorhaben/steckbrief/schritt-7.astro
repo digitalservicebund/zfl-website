@@ -1,7 +1,7 @@
 ---
-import SteckbriefWrapper from "./_components/SteckbriefWrapper.astro";
-import SummaryCard from "./_components/SummaryCard.astro";
-import ButtonBar from "./_components/ButtonBar.astro";
+import SteckbriefLayout from "./_SteckbriefLayout.astro";
+import SummaryCard from "../_components/SummaryCard.astro";
+import ButtonBar from "../_components/ButtonBar.astro";
 import {
   vorhaben_steckbrief_schritt1,
   vorhaben_steckbrief_schritt2,
@@ -19,7 +19,7 @@ export const frontmatter = {
 };
 ---
 
-<SteckbriefWrapper
+<SteckbriefLayout
   title={frontmatter.title}
   pageNumber={frontmatter.navOrder}
   isWide
@@ -96,4 +96,4 @@ export const frontmatter = {
     nextPath={vorhaben_steckbrief_schritt8.path}
     nextBtnText="Abschließen"
   />
-</SteckbriefWrapper>
+</SteckbriefLayout>

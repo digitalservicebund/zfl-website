@@ -1,8 +1,8 @@
 ---
-import SteckbriefWrapper from "./_components/SteckbriefWrapper.astro";
-import SidebarTriggerButton from "./_components/SidebarTriggerButton.astro";
-import Textarea from "./_components/Textarea.astro";
-import Hint from "./_components/Hint.astro";
+import SteckbriefLayout from "./_SteckbriefLayout.astro";
+import SidebarTriggerButton from "../_components/SidebarTriggerButton.astro";
+import Textarea from "../_components/Textarea.astro";
+import Hint from "../_components/Hint.astro";
 
 export const frontmatter = {
   title: "6. Vorhabensbeschreibung",
@@ -17,7 +17,7 @@ const zeitHintId = "zeit-hint";
 const ressourcenHintId = "ressourcen-hint";
 ---
 
-<SteckbriefWrapper title={frontmatter.title} pageNumber={frontmatter.navOrder}>
+<SteckbriefLayout title={frontmatter.title} pageNumber={frontmatter.navOrder}>
   <div class="flex flex-col gap-16">
     <h2 class="mt-0">
       Vorhabensbeschreibung
@@ -191,4 +191,4 @@ const ressourcenHintId = "ressourcen-hint";
       </li>
     </ul>
   </Hint>
-</SteckbriefWrapper>
+</SteckbriefLayout>

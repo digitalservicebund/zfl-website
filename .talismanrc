@@ -65,10 +65,10 @@ fileignoreconfig:
   - filename: src/pages/vorhaben/steckbrief/schritt-7.astro
     allowed_patterns:
       - key
-  - filename: src/pages/vorhaben/steckbrief/_components/SummaryCard.astro
+  - filename: src/pages/vorhaben/_components/SummaryCard.astro
     allowed_patterns:
       - key
-  - filename: src/pages/vorhaben/steckbrief/_components/SteckbriefWrapper.astro
+  - filename: src/pages/vorhaben/steckbrief/_SteckbriefLayout.astro
     allowed_patterns:
       - key
       - STORAGE_KEY
