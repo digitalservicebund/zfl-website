@@ -176,6 +176,17 @@ export const ueber_daranArbeitenWir = {
   navLabel: null,
 } as const;
 
+export const ueber_neueFruephase = {
+  key: "ueber_neueFruephase",
+  path: "/ueber/neue-fruephase",
+  title: "Die neue Frühphase",
+  parent: ueber,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: 4,
+  navLabel: null,
+} as const;
+
 export const ueber_zahlenUndFakten = {
   key: "ueber_zahlenUndFakten",
   path: "/ueber/zahlen-und-fakten",
@@ -225,6 +236,7 @@ export const allRoutes = [
   ueber,
   ueber_aktuelleMeldungen,
   ueber_daranArbeitenWir,
+  ueber_neueFruephase,
   ueber_zahlenUndFakten,
   werkzeuge,
   werkzeuge_pflichten,

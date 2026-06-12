@@ -3,7 +3,8 @@
     opacity: 0.4;
   }
 }
-.kern-badge--gemerkte_werkzeuge {
+.kern-badge--gemerkte_werkzeuge,
+.kern-badge--seite {
   border: 1px solid #000000;
   color: #000000;
 }

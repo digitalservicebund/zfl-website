@@ -1,3 +1,4 @@
+import { buildRoutePath } from "@/utils/path";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 import { defineCollection } from "astro:content";
@@ -10,6 +11,13 @@ export const WERKZEUGE_CATEGORIES = [
   "Beteiligung",
 ] as const;
 
+export const WERKZEUGE_TYPES = [
+  "Methode",
+  "Leitfaden",
+  "Tool",
+  "Ressource",
+] as const;
+
 export type WerkzeugCategory = (typeof WERKZEUGE_CATEGORIES)[number];
 
 const werkzeuge = defineCollection({
@@ -17,11 +25,18 @@ const werkzeuge = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
-      type: z.array(z.enum(["Methode", "Leitfaden", "Tool", "Ressource"])),
+      type: z.array(z.enum(WERKZEUGE_TYPES)),
       category: z.array(z.enum(WERKZEUGE_CATEGORIES)),
       description: z.string(),
       source: z.string().optional(),
-      externalUrl: z.string().optional(),
+      externalUrl: z
+        .string()
+        .optional()
+        .transform((val) =>
+          val?.startsWith("/") // prefix local assets with base URL, e.g. /zfl-website/previews/test-branch
+            ? buildRoutePath(val, import.meta.env.BASE_URL)
+            : val,
+        ),
       image: image().optional(),
     }),
 });

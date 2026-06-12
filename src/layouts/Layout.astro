@@ -1,5 +1,4 @@
 ---
-import DebugGrid from "@/components/global/DebugGrid.astro";
 import SearchModal from "@/components/search/SearchModal.astro";
 import Footer from "@/components/global/Footer.astro";
 import PageHeader from "@/components/global/PageHeader.astro";
@@ -16,16 +15,19 @@ interface Props {
   title: string;
   description?: string;
   excludeFromSearch?: boolean;
+  pagefindWeight?: number;
 }
+
 const {
   title: pageTitle,
   description,
-  excludeFromSearch = false,
+  excludeFromSearch,
+  pagefindWeight,
 } = Astro.props;
+
 const siteName = "Zentrum für Legistik";
 const title = pageTitle ? `${pageTitle} — ${siteName}` : siteName;
 const SEOImage = `${Astro.url.origin}/SEO_ZfL.png`;
-const showDebugGrid = !isProduction || process.env.NODE_ENV === "development";
 const showSectionSidebar = getSectionNavigation(Astro.url.pathname) !== null;
 
 const defaultDescription =
@@ -80,9 +82,12 @@ const defaultDescription =
   />
 
   <body class="relative">
-    {showDebugGrid && <DebugGrid />}
     <PageHeader />
-    <div {...!excludeFromSearch && { "data-pagefind-body": "" }}>
+    <div
+      data-pagefind-default-meta="pageType:Seite"
+      {...!excludeFromSearch && { "data-pagefind-body": "" }}
+      {...pagefindWeight && { "data-pagefind-weight": pagefindWeight }}
+    >
       {
         showSectionSidebar ? (
           <div class="h-full min-[900px]:grid min-[900px]:grid-cols-[240px_minmax(0,1fr)]">

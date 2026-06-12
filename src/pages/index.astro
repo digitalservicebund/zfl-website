@@ -14,6 +14,8 @@ import InfoPanel from "@/components/InfoPanel.astro";
 import { Image } from "astro:assets";
 import { ueber } from "@/config/routes";
 import { mailto } from "@/utils/mailtoHelper";
+import { ueber_neueFruephase } from "@/config/routes";
+import { Icon } from "astro-icon/components";
 
 export const frontmatter = {
   title: "Zentrum für Legistik",
@@ -23,6 +25,29 @@ export const frontmatter = {
 
 <Layout title="">
   <main class="breakout-grid">
+    <div
+      id="fruehphase-info-banner"
+      class="breakout bg-[#D5F6FF]"
+      x-show="showBanner"
+      x-data="{ showBanner: true }"
+    >
+      <div
+        class="flex w-full max-w-7xl items-center justify-between gap-12 py-12"
+      >
+        <p class="kern-title mb-0">
+          Die Infoseite zur neuen
+          <a class="text-link" href={ueber_neueFruephase.path}> Frühphase</a> ist
+          live - jetzt informieren!
+        </p>
+        <button
+          aria-label="Banner ausblenden"
+          class="increase-tap-area py-8 text-2xl text-[#006685] hover:opacity-75"
+          x-on:click="showBanner = false"
+        >
+          <Icon name="ic:baseline-clear" />
+        </button>
+      </div>
+    </div>
     <Hero level="root">
       <h1 class="max-w-a11y">
         Die zentrale Anlaufstelle für bessere Rechtsetzung
@@ -171,3 +196,14 @@ export const frontmatter = {
     </Hero>
   </main>
 </Layout>
+
+<script>
+  const infoBanner = document.getElementById("fruehphase-info-banner");
+  const closeInfoBannerButton = document.getElementById(
+    "fruehphase-info-banner-close",
+  );
+
+  closeInfoBannerButton?.addEventListener("click", () => {
+    infoBanner?.setAttribute("hidden", "");
+  });
+</script>

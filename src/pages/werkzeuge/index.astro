@@ -3,9 +3,13 @@ import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
 import Modal from "@/components/Modal.astro";
 import KernCard from "@/components/KernCard.astro";
+import SearchButton from "@/components/search/SearchButton.astro";
+import SearchModal from "@/components/search/SearchModal.astro";
+import { werkzeugKeywords } from "@/components/search/keywords";
 import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
+import { WERKZEUGE_TYPES } from "@/content.config";
 
 export const frontmatter = {
   title: "Werkzeuge",
@@ -49,8 +53,8 @@ const categories = [
   },
 ];
 
-const types = ["Methode", "Tool", "Leitfaden", "Ressource"] as const;
 const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
+const PAGEFIND_INSTANCE = "werkzeuge";
 ---
 
 <Layout title={frontmatter.title} description={description}>
@@ -95,7 +99,7 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
         <div class="flex flex-wrap items-center gap-8 lg:gap-16">
           <p class="kern-label my-0 py-0">Filtern nach:</p>
           {
-            [BOOKMARKED_TYPE, ...types].map((type) => (
+            [BOOKMARKED_TYPE, ...WERKZEUGE_TYPES].map((type) => (
               <button class="h-32" @click={`toggleFilterType('${type}')`}>
                 <span
                   class={`kern-badge kern-badge--${type.replaceAll(" ", "_").toLowerCase()} interactive`}
@@ -126,26 +130,7 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
             <Icon name="ic:outline-help-outline" class="h-32 w-32" />
           </button>
         </div>
-        <div class="relative hidden w-full md:w-auto">
-          <input
-            class="focus:outline-cosmic-blue-base rounded-sm py-8 pl-40 transition-[width] [--expanded:100%] focus:w-(--expanded) focus:outline-2 lg:[--expanded:280px]"
-            x-bind:class="searchQuery ? 'pr-68 w-(--expanded) outline-1 outline-cosmic-blue-400' : 'pr-8 w-128'"
-            id="tool-search"
-            name="text"
-            type="text"
-            placeholder="Suchen ..."
-            x-model="searchQuery"
-          />
-          <span
-            class="kern-icon kern-icon--search kern-icon--default absolute top-1/2 left-8 -translate-y-1/2"
-            aria-hidden="true"></span>
-          <button
-            class="text-icon-muted absolute top-1/2 right-8 -translate-y-1/2 text-sm"
-            @click="searchQuery = ''"
-            x-cloak
-            x-show="!!searchQuery">Löschen</button
-          >
-        </div>
+        <SearchButton instance={PAGEFIND_INSTANCE} />
       </div>
     </div>
 
@@ -161,7 +146,7 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
                 {tools.map((t) => (
                   <div
                     class="tool-wrapper"
-                    x-bind:data-visible={`isCardVisible(${JSON.stringify(t.id)}, ${JSON.stringify(t.data.type)}, ${JSON.stringify(t.data.title)})`}
+                    x-bind:data-visible={`isCardVisible(${JSON.stringify(t.id)}, ${JSON.stringify(t.data.type)})`}
                   >
                     <KernCard
                       title={t.data.title}
@@ -216,7 +201,7 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
                     </KernCard>
                   </div>
                 ))}
-                <p class="no-results">
+                <p class="no-results" data-pagefind-ignore>
                   <em>Keine Treffer</em>
                 </p>
               </div>
@@ -262,6 +247,13 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
       <p>Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a></p>
       <p>E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a></p>
     </Hero>
+
+    <SearchModal
+      instance={PAGEFIND_INSTANCE}
+      placeholder="Suche Werkzeuge"
+      fuzzyKeywords={werkzeugKeywords}
+      filterTypes={[...WERKZEUGE_TYPES]}
+    />
   </main>
 </Layout>
 
@@ -290,55 +282,13 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
         this.$watch("bookmarkedTools", (value: string[]) => {
           localStorage.setItem("bookmarkedTools", JSON.stringify(value));
         });
-        this.$watch("searchQuery", (query: string) => {
-          CSS.highlights.clear();
-          if (!query.trim()) return;
-          const wrappers = (
-            this.$el as HTMLElement
-          ).querySelectorAll<HTMLElement>(".tool-wrapper");
-          const ranges: Range[] = [];
-          const q = query.toLowerCase();
-          for (const wrapper of wrappers) {
-            const walker = document.createTreeWalker(
-              wrapper,
-              NodeFilter.SHOW_TEXT,
-            );
-            let node: Node | null;
-            while ((node = walker.nextNode())) {
-              const text = node.textContent!.toLowerCase();
-              let idx = text.indexOf(q);
-              while (idx !== -1) {
-                const range = new Range();
-                range.setStart(node, idx);
-                range.setEnd(node, idx + q.length);
-                ranges.push(range);
-                idx = text.indexOf(q, idx + 1);
-              }
-            }
-          }
-          if (ranges.length) {
-            CSS.highlights.set("search-results", new Highlight(...ranges));
-          }
-        });
       },
 
       toggleFilterType(type: string) {
         this.filterType = this.filterType === type ? null : type;
       },
 
-      isCardVisible(
-        toolId: string,
-        types: string[],
-        titleAndDescription: string,
-      ) {
-        if (this.searchQuery) {
-          if (
-            !titleAndDescription
-              .toLowerCase()
-              .includes(this.searchQuery.toLowerCase())
-          )
-            return false;
-        }
+      isCardVisible(toolId: string, types: string[]) {
         return (
           this.filterType === null ||
           types.includes(this.filterType) ||
@@ -361,10 +311,6 @@ const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
 </script>
 
 <style>
-  ::highlight(search-results) {
-    background-color: #fde68a;
-    color: inherit;
-  }
   .tool-wrapper:not([data-visible="true"]) {
     display: none;
   }

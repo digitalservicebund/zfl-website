@@ -113,9 +113,12 @@ allowed_patterns:
   - parentKey
   - getRouteByKey
   - keydown
+  - KeyDown
   - keyboard
+  - Keyboard
   - keyword
   - Keyword
   - fuzzyKeyword
   - :key=
+  - aria-keyshortcuts
 version: "1.0"

@@ -5,6 +5,7 @@ import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
 import type { GetStaticPaths } from "astro";
 import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
 import MediaText from "@/components/MediaText.astro";
 import { werkzeuge as werkzeugeRoute } from "@/config/routes";
 
@@ -23,17 +24,25 @@ const { Content } = await render(werkzeug);
 
 <Layout title={title}>
   <main class="breakout-grid">
-    <section>
+    <Hero level="sub" class="no-highlight bg-transparent">
       <MediaText>
         <div class="mb-16 flex gap-8">
           {
-            werkzeug.data.type.map((type) => (
-              <span class={`kern-badge kern-badge--${type.toLowerCase()}`}>
-                <span class="kern-label" data-pagefind-filter="toolType">
-                  {type}
+            werkzeug.data.type.map((type, i) => {
+              /* pagefind: take only first, as metadata can be only a single string */
+              const pfTypeMeta = i == 0 && "pageType";
+              return (
+                <span class={`kern-badge kern-badge--${type.toLowerCase()}`}>
+                  <span
+                    class="kern-label"
+                    data-pagefind-meta={pfTypeMeta}
+                    data-pagefind-filter="pageType"
+                  >
+                    {type}
+                  </span>
                 </span>
-              </span>
-            ))
+              );
+            })
           }
         </div>
         <h1>{title}</h1>
@@ -42,7 +51,7 @@ const { Content } = await render(werkzeug);
           <Icon name="ic:baseline-auto-stories" class="h-32 w-32 shrink-0" />
           <p class="kern-subline py-0">Quelle: {werkzeug.data.source}</p>
         </div>
-        <div class="py-md gap-8">
+        <div class="py-md flex gap-8" data-pagefind-ignore>
           <a
             class="kern-btn kern-btn--primary"
             href={werkzeug.data.externalUrl}
@@ -56,19 +65,15 @@ const { Content } = await render(werkzeug);
             <span class="kern-label">alle Werkzeuge</span>
           </a>
         </div>
-        <Content />
-        {
-          image && (
-            <Image
-              slot="media"
-              data-pagefind-meta="image[src]"
-              src={image}
-              alt={title}
-              class="my-md"
-            />
-          )
-        }
+        {image && <Image slot="media" src={image} alt={title} class="my-md" />}
       </MediaText>
-    </section>
+    </Hero>
+    {
+      werkzeug.body && (
+        <section>
+          <Content />
+        </section>
+      )
+    }
   </main>
 </Layout>
