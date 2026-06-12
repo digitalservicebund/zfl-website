@@ -306,6 +306,29 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
     norm_count?: number | null;
   };
 
+  /** Match obligation CSV `norm` to a registry law (handles e.g. BDSG vs BDSG 2018 / bdsg_2018). */
+  const obligationNormMatchesLaw = (
+    obligationNorm: string,
+    law: LawRecord,
+  ): boolean => {
+    const norm = obligationNorm.trim().toLowerCase();
+    if (!norm) return false;
+
+    const abbrev = law.abbrev.toLowerCase();
+    const jurabk = (law.jurabk ?? "").trim().toLowerCase();
+
+    if (abbrev === norm || jurabk === norm) return true;
+
+    // Registry jurabk often includes a year: "BDSG 2018" vs extracted "BDSG".
+    if (jurabk.startsWith(`${norm} `)) return true;
+
+    // GII slug with year suffix: bdsg_2018 vs extracted "BDSG".
+    const slugStem = abbrev.replace(/_\d{4}$/, "").replaceAll("_", "");
+    if (slugStem === norm.replaceAll(/\s+/g, "")) return true;
+
+    return false;
+  };
+
   type ObligationRow = Record<string, string>;
 
   const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
@@ -571,10 +594,8 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
           const normKey = (row.norm ?? "").trim().toLowerCase();
           if (!normKey) continue;
 
-          const law = this.laws.find(
-            (entry) =>
-              entry.abbrev.toLowerCase() === normKey ||
-              (entry.jurabk ?? "").toLowerCase() === normKey,
+          const law = this.laws.find((entry) =>
+            obligationNormMatchesLaw(normKey, entry),
           );
           if (!law) continue;
 
@@ -652,7 +673,8 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
 
       /** Full title shown beneath the label (DE: Kurztitel; EU: long official title). */
       lawDescription(law: LawRecord): string {
-        if (law.source === "eurlex") return decodeCelex(law.abbrev);
+        if (law.source === "eurlex")
+          return formatEuLongTitle(law.kurzue ?? law.name);
         return law.kurzue ?? law.name;
       },
 
@@ -660,9 +682,7 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
       lawChipLabel(abbrev: string): string {
         const law = this.laws.find((l: LawRecord) => l.abbrev === abbrev);
         if (!law) return abbrev;
-        if (law.source === "eurlex") {
-          return formatEuLongTitle(law.kurzue ?? law.name);
-        }
+        if (law.source === "eurlex") return decodeCelex(law.abbrev);
         return law.jurabk ?? law.abbrev.replace(/^_+/, "");
       },
 
@@ -683,17 +703,14 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
 
       get filteredObligations() {
         if (this.selectedLaws.length === 0) return [];
-        const normKeys = new Set(
-          this.selectedLaws.flatMap((abbrev) => {
-            const law = this.laws.find((l: LawRecord) => l.abbrev === abbrev);
-            return [abbrev, law?.jurabk]
-              .filter((key): key is string => Boolean(key))
-              .map((key) => key.toLowerCase());
-          }),
+        const selected = this.laws.filter((law) =>
+          this.selectedLaws.includes(law.abbrev),
         );
         return this.obligations
           .filter((obligation) =>
-            normKeys.has((obligation.norm ?? "").toLowerCase()),
+            selected.some((law) =>
+              obligationNormMatchesLaw(obligation.norm ?? "", law),
+            ),
           )
           .sort(compareObligations);
       },
