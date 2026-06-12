@@ -16,7 +16,8 @@ def _append_sub_positions(key: list, rest: str) -> None:
     for pattern, numeric in _SUB_POSITION_PATTERNS:
         for match in re.finditer(pattern, rest, re.IGNORECASE):
             value = match.group(1)
-            key.append(int(value) if numeric else value.lower())
+            # Tag numeric vs letter sub-positions so tuple comparison never mixes int/str.
+            key.append((0, int(value)) if numeric else (1, value.lower()))
 
 
 def reference_sort_key(reference: str) -> tuple:

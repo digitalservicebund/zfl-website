@@ -84,7 +84,7 @@ fileignoreconfig:
   - filename: scripts/fetch_gii_metadata.py
     checksum: f049703ea6e293f51046799b74824019dc1aed9949c7ea6410b57dd0068fc3a3
   - filename: scripts/reference_sort.py
-    checksum: 3e7e189ff2cf8f7ea2c7f7f3fe2803fdf421b94ef2e1e26423fa2099c248bd36
+    checksum: cb51790a33aafab5f4326d9cfd8049d0a9f6ec8ffc1977491f32df5c79403669
   - filename: src/pages/werkzeuge/pflichten.astro
     allowed_patterns:
       - exportHeaders
