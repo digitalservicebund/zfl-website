@@ -67,6 +67,12 @@ fileignoreconfig:
     checksum: d91b8729505983b35914335a9f72da8a0786969daebc7dc4a62c976b80d14d13
   - filename: public/data/laws.json
     checksum: fb64e37561e3d4303bdd3792ef045df59e29ddd137f88d2b90490ba2b284a7e6
+  - filename: public/data/obligations/Pflichten_LLM_All.csv
+    ignore_detectors: [filecontent]
+  - filename: public/data/obligations/Pflichten_LLM_HGB.csv
+    ignore_detectors: [filecontent]
+  - filename: public/data/obligations/Pflichten_LLM_32023R0606.csv
+    ignore_detectors: [filecontent]
   - filename: scripts/build_law_registry.py
     checksum: 4b4529c26f6b4cd3a5d4a1d0706d8a83dcdd523631ba5f55efc23517b0a3a558
   - filename: scripts/concat_obligations_csv.py
