@@ -198,6 +198,17 @@ export const ueber_zahlenUndFakten = {
   navLabel: null,
 } as const;
 
+export const vorhaben = {
+  key: "vorhaben",
+  path: "/vorhaben",
+  title: "Vorhaben erarbeiten",
+  parent: null,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: "Ihr Vorhaben",
+} as const;
+
 export const werkzeuge = {
   key: "werkzeuge",
   path: "/werkzeuge",
@@ -227,5 +238,6 @@ export const allRoutes = [
   ueber_daranArbeitenWir,
   ueber_neueFruephase,
   ueber_zahlenUndFakten,
+  vorhaben,
   werkzeuge,
 ] as const;
