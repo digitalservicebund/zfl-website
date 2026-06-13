@@ -214,10 +214,10 @@ export const vorhaben_fruephase2 = {
   path: "/vorhaben/fruephase-2",
   title: "Frühphase II",
   parent: vorhaben,
-  sitemap: false,
+  sitemap: true,
   isStagingOnly: false,
   navOrder: null,
-  navLabel: null,
+  navLabel: "Frühphase II",
 } as const;
 
 export const vorhaben_fruephase2_schritt2 = {
@@ -228,7 +228,29 @@ export const vorhaben_fruephase2_schritt2 = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 1,
-  navLabel: null,
+  navLabel: "2. Einbeziehung Perspektiven externer Stakeholder",
+} as const;
+
+export const vorhaben_fruephase2_schritt4 = {
+  key: "vorhaben_fruephase2_schritt4",
+  path: "/vorhaben/fruephase-2/schritt-4",
+  title: "Wirkziele definieren",
+  parent: vorhaben_fruephase2,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 4,
+  navLabel: "4. Wirkziele",
+} as const;
+
+export const vorhaben_fruephase2_schritt5 = {
+  key: "vorhaben_fruephase2_schritt5",
+  path: "/vorhaben/fruephase-2/schritt-5",
+  title: "Entwicklung von Handlungsalternativen",
+  parent: vorhaben_fruephase2,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 5,
+  navLabel: "5. Entwicklung von Handlungsalternativen",
 } as const;
 
 export const werkzeuge = {
@@ -263,5 +285,7 @@ export const allRoutes = [
   vorhaben,
   vorhaben_fruephase2,
   vorhaben_fruephase2_schritt2,
+  vorhaben_fruephase2_schritt4,
+  vorhaben_fruephase2_schritt5,
   werkzeuge,
 ] as const;

@@ -21,7 +21,6 @@ const nextPath = stepRoutes.find((r) => r.navOrder === pageNumber + 1)?.path;
   pageNumber={pageNumber}
   totalPages={stepRoutes.length}
   isWide={isWide}
-  showProgressBar
 >
   <slot />
   {Astro.slots.has("hint") && <slot name="hint" slot="hint" />}
