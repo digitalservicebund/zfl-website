@@ -11,4 +11,60 @@ export const frontmatter = {
 
 <FruephaseLayout title={frontmatter.title} pageNumber={frontmatter.navOrder}>
   <h2>4. Wirkziele definieren</h2>
+
+  <!-- --- // InteractiveTable.astro --- -->
+  <kern-dynamic-table>
+    <table class="kern-table">
+      <thead class="kern-table__head">
+        <tr class="kern-table__row">
+          <th class="kern-table__header"></th>
+          <th class="kern-table__header">Wirkziele</th>
+          <th class="kern-table__header">Indikatoren</th>
+          <th class="kern-table__header">Erfolgsschwelle</th>
+          <th class="kern-table__header">Datengrundlage</th>
+        </tr>
+      </thead>
+      <tbody class="kern-table__body" id="table-body">
+        <tr class="kern-table__row">
+          <td class="kern-table__cell">
+            <button>
+              <span
+                class="kern-icon kern-icon--delete kern-icon--default"
+                aria-hidden="true"></span>
+            </button>
+          </td>
+          <td class="kern-table__cell">
+            <b>Beispiel Vollautomatisiertes Fahren:</b>
+            Fahrzeugautomatisierungstechnologie kann (rechts-)sicher im deutschen
+            Verkehr eingesetzt werden. Ganzes Beispiel anschauen
+          </td>
+          <td class="kern-table__cell"
+            >Versicherer bieten KfZ-Pflichtversicherungen für h/v Fahrzeuge ohne
+            (Risiko-)Aufschläge an.</td
+          >
+          <td class="kern-table__cell">Ja (binär)</td>
+          <td class="kern-table__cell"
+            >Markterkundung/Befragung Versicherungswirtschaft</td
+          >
+        </tr>
+      </tbody>
+      <tfoot class="kern-table__footer">
+        <tr class="kern-table__row">
+          <th scope="col" class="kern-table__header p-0" colspan="5">
+            <button class="flex w-full items-center gap-4 px-16 py-8 text-left">
+              <span
+                class="kern-icon kern-icon--add kern-icon--default"
+                aria-hidden="true"></span>Wirkziel hinzufügen
+            </button>
+          </th>
+        </tr>
+      </tfoot>
+      <template id="new-row-template">
+        <tr class="kern-table__row">
+          <td class="kern-table__cell" data-cell="description"></td>
+          <td class="kern-table__cell" data-cell="status"></td>
+        </tr>
+      </template>
+    </table>
+  </kern-dynamic-table>
 </FruephaseLayout>
