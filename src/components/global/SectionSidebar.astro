@@ -13,19 +13,19 @@ const sidebarState = navigation
   navigation && (
     <nav
       aria-label="Abschnittsnavigation"
-      class="data-[depth=1]:bg-form-input-background bg-lavender-base hidden border-r border-neutral-300 min-[900px]:flex min-[900px]:flex-col"
+      class="data-[depth=1]:bg-form-input-background bg-lavender-base hidden border-r border-neutral-300 min-[900px]:sticky min-[900px]:top-0 min-[900px]:flex min-[900px]:h-screen min-[900px]:flex-col"
       x-data={sidebarState}
       data-depth={initialDepth}
       x-bind:data-depth="currentDepth"
     >
-      <div class="sticky top-0">
+      <div class="min-h-0 min-[900px]:flex-1 min-[900px]:overflow-y-auto">
         <DrilldownNavigation
           navigation={navigation}
           panelIdPrefix="section-sidebar"
         />
       </div>
       {Astro.slots.has("extra") && (
-        <div class="sticky bottom-0 mt-auto">
+        <div class="mt-auto min-[900px]:sticky min-[900px]:bottom-0">
           <slot name="extra" />
         </div>
       )}
