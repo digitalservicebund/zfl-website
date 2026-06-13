@@ -2,6 +2,7 @@
 import { allRoutes, vorhaben_fruephase2 } from "@/config/routes";
 import FormStepLayout from "../_components/FormStepLayout.astro";
 import ButtonBar from "../_components/ButtonBar.astro";
+import MenuExtension from "./_components/MenuExtension.astro";
 
 type Props = {
   title: string;
@@ -22,6 +23,7 @@ const nextPath = stepRoutes.find((r) => r.navOrder === pageNumber + 1)?.path;
   totalPages={stepRoutes.length}
   isWide={isWide}
 >
+  <MenuExtension slot="section-sidebar-extra" />
   <slot />
   {Astro.slots.has("hint") && <slot name="hint" slot="hint" />}
   {

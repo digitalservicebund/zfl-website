@@ -91,7 +91,9 @@ const defaultDescription =
       {
         showSectionSidebar ? (
           <div class="h-full min-[900px]:grid min-[900px]:grid-cols-[240px_minmax(0,1fr)]">
-            <SectionSidebar />
+            <SectionSidebar>
+              <slot name="section-sidebar-extra" slot="extra" />
+            </SectionSidebar>
             <slot />
           </div>
         ) : (
