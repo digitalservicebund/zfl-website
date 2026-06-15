@@ -12,9 +12,14 @@ type Props = {
 
 const { title, pageNumber, isWide } = Astro.props;
 
-const stepRoutes = allRoutes.filter((r) => r.parent === vorhaben_fruephase2);
-const prevPath = stepRoutes.find((r) => r.navOrder === pageNumber - 1)?.path;
-const nextPath = stepRoutes.find((r) => r.navOrder === pageNumber + 1)?.path;
+const stepRoutes = allRoutes
+  .filter(
+    (r): r is (typeof allRoutes)[number] & { navOrder: number } =>
+      r.parent === vorhaben_fruephase2 && r.navOrder !== null,
+  )
+  .sort((a, b) => a.navOrder - b.navOrder);
+const prevPath = stepRoutes.findLast((r) => r.navOrder < pageNumber)?.path;
+const nextPath = stepRoutes.find((r) => r.navOrder > pageNumber)?.path;
 ---
 
 <FormStepLayout
@@ -25,7 +30,6 @@ const nextPath = stepRoutes.find((r) => r.navOrder === pageNumber + 1)?.path;
 >
   <MenuExtension slot="section-sidebar-extra" />
   <slot />
-  {Astro.slots.has("hint") && <slot name="hint" slot="hint" />}
   {
     Astro.slots.has("button-bar") && (
       <slot name="button-bar" slot="button-bar" />
