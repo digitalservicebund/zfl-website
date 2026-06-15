@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "audit:licences": "license-checker-rseidelsohn --production --excludePrivatePackages --onlyAllow 'MIT;BSD-3-Clause;BSD-2-Clause;0BSD;ISC;Apache-2.0;MPL-2.0;BlueOak-1.0.0;Custom: LICENSE;Unlicense;EUPL-1.2' --summary",
+    "audit:licences": "license-checker-rseidelsohn --production --excludePrivatePackages --onlyAllow 'MIT;BSD-3-Clause;BSD-2-Clause;0BSD;ISC;Apache-2.0;MPL-2.0;BlueOak-1.0.0;Custom: LICENSE;Unlicense;EUPL-1.2;Python-2.0;CC0-1.0' --summary",
     "build": "astro build",
     "build:search-index": "[ ! -d \"dist\" ] && pnpm build || true",
     "clean": "rm -rf dist",
@@ -84,7 +84,7 @@
     "globals": "^17.6.0",
     "jsdom": "^29.1.1",
     "knip": "^6.16.1",
-    "license-checker-rseidelsohn": "^4.4.2",
+    "license-checker-rseidelsohn": "^5.0.1",
     "prettier": "^3.8.4",
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-organize-imports": "^4.3.0",
