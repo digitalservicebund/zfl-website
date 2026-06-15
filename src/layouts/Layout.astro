@@ -14,6 +14,7 @@ import "../styles/global.css";
 interface Props {
   title: string;
   description?: string;
+  noFooter?: boolean;
   excludeFromSearch?: boolean;
   pagefindWeight?: number;
 }
@@ -21,6 +22,7 @@ interface Props {
 const {
   title: pageTitle,
   description,
+  noFooter,
   excludeFromSearch,
   pagefindWeight,
 } = Astro.props;
@@ -101,7 +103,7 @@ const defaultDescription =
         )
       }
     </div>
-    <Footer />
+    {!noFooter && <Footer />}
     <SearchModal />
     {isProduction && <Posthog />}
   </body>
