@@ -185,12 +185,23 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
         </template>
       </div>
 
+      <p
+        x-show="lawQuery.trim() && hasMoreFilteredLaws"
+        x-cloak
+        class="text-icon-muted py-0 italic"
+      >
+        Es werden die ersten
+        <span x-text="LAW_SEARCH_RESULT_LIMIT"></span> von
+        <span x-text="matchingLaws.length"></span> Treffern angezeigt. Bitte verfeinern
+        Sie die Suche, um weitere Ergebnisse zu finden.
+      </p>
+
       <p x-show="!lawQuery.trim()" x-cloak class="text-icon-muted py-0 italic">
         Geben Sie einen Suchbegriff ein, um Gesetze anzuzeigen.
       </p>
 
       <p
-        x-show="lawQuery.trim() && filteredLaws.length === 0"
+        x-show="lawQuery.trim() && matchingLaws.length === 0"
         x-cloak
         class="text-icon-muted py-0 italic"
       >
@@ -336,6 +347,7 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
   const CSV_FALLBACK_URL = `${BASE}/data/obligations/Pflichten_LLM_HGB.csv`;
   const LAWS_URL = `${BASE}/data/laws.json`;
   const PREVIEW_ROW_LIMIT = 5;
+  const LAW_SEARCH_RESULT_LIMIT = 30;
 
   const EXPORT_HEADERS_FALLBACK = [
     "norm",
@@ -584,6 +596,7 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
       lawQuery: "",
       loading: true,
       error: "",
+      LAW_SEARCH_RESULT_LIMIT,
 
       analysisByLaw: {} as Record<string, AnalysisStats>,
       buildAnalysisIndex() {
@@ -686,7 +699,7 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
         return law.jurabk ?? law.abbrev.replace(/^_+/, "");
       },
 
-      get filteredLaws() {
+      get matchingLaws() {
         const query = this.lawQuery.trim().toLowerCase();
         if (!query) return [];
         return this.laws.filter((law) => {
@@ -699,6 +712,14 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
             (law.name ?? "").toLowerCase().includes(query)
           );
         });
+      },
+
+      get filteredLaws() {
+        return this.matchingLaws.slice(0, LAW_SEARCH_RESULT_LIMIT);
+      },
+
+      get hasMoreFilteredLaws() {
+        return this.matchingLaws.length > LAW_SEARCH_RESULT_LIMIT;
       },
 
       get filteredObligations() {
