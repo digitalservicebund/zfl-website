@@ -76,6 +76,9 @@ fileignoreconfig:
   - filename: src/pages/vorhaben/_components/SummaryCard.astro
     allowed_patterns:
       - kern-description-list-item__key
+  - filename: src/pages/vorhaben/fruephase-2/schritt-4.astro
+    allowed_patterns:
+      - :key
 scopeconfig:
   - scope: node
 allowed_patterns:

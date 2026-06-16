@@ -3,17 +3,71 @@ import FruephaseLayout from "./_FruephaseLayout.astro";
 
 export const frontmatter = {
   title: "Wirkziele definieren",
-  navLabel: "4. Wirkziele",
+  navLabel: "8. Wirkziele",
   sitemap: false,
   navOrder: 4,
 };
 ---
 
 <FruephaseLayout title={frontmatter.title} pageNumber={frontmatter.navOrder}>
-  <h2>4. Wirkziele definieren</h2>
+  <h2>{frontmatter.navLabel}</h2>
+  <div>
+    <div class="columns-2">
+      <p></p>
+      <div class="flex items-center gap-8 pb-8">
+        <span
+          class="kern-icon kern-icon--edit kern-icon--default"
+          aria-hidden="true"
+        >
+        </span>
+        <p><b>Aus Ihrer bisherigen Erarbeitung</b></p>
+      </div>
+    </div>
+    <div class="columns-2">
+      <div class="p-20">
+        <p>
+          Definieren Sie, welche Wirkung Sie erzielen möchten, um das Problem zu
+          lösen. Wirkziele sollen genutzt werden um zu klären,
+          <ul>
+            <li>bei wem</li>
+            <li>welche konkreten Verhaltens- oder Lebenslagenveränderungen</li>
+            <li>bis wann erreicht werden sollen.</li>
+          </ul>
+        </p>
+      </div>
+      <div class="break-inside-avoid">
+        <div class="rounded-xl bg-amber-200 p-20">
+          <p><b>Einbeziehungsplan externe Stakeholder</b></p>
+          <ul>
+            <li>Automobilindustrie</li>
+            <li>Technikhersteller</li>
+            <li>Zulassungsbehörden</li>
+            <li>Versicherer</li>
+            <li>Fahrzeugführer und -halter</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <h3>So geht es</h3>
+    <ol>
+      <li>
+        Legen Sie ein oder mehrere vorhabenspezifische <b>Wirkziele</b> fest. Wirkziele
+        sind keine Lösungen, sondern ein angestrebter Zielzustand. Nutzen Sie dafür
+        alle Teilaspekte der Problembeschreibung.
+      </li>
+      <li>
+        Messbare <b>Indikatoren</b> festlegen → <i
+          >Was zeigt uns, dass es wirkt?</i
+        >
+      </li>
+      <li>
+        <b>Erfolgsschwelle</b> definieren → <i>Ab wann ist es ein Erfolg?</i>
+      </li>
+      <li><b>Datengrundlage</b> festlegen → <i>Wie messen wir das?</i></li>
+    </ol>
+  </div>
 
-  <!-- --- // InteractiveTable.astro --- -->
-  <kern-dynamic-table>
+  <div x-data="dynamicTable">
     <table class="kern-table">
       <thead class="kern-table__head">
         <tr class="kern-table__row">
@@ -26,13 +80,7 @@ export const frontmatter = {
       </thead>
       <tbody class="kern-table__body" id="table-body">
         <tr class="kern-table__row">
-          <td class="kern-table__cell">
-            <button>
-              <span
-                class="kern-icon kern-icon--delete kern-icon--default"
-                aria-hidden="true"></span>
-            </button>
-          </td>
+          <td class="kern-table__cell">-</td>
           <td class="kern-table__cell">
             <b>Beispiel Vollautomatisiertes Fahren:</b>
             Fahrzeugautomatisierungstechnologie kann (rechts-)sicher im deutschen
@@ -47,24 +95,64 @@ export const frontmatter = {
             >Markterkundung/Befragung Versicherungswirtschaft</td
           >
         </tr>
+        <template x-for="(row, index) in rows" :key="index">
+          <tr class="kern-table__row">
+            <td class="kern-table__cell">
+              <button type="button" @click="deleteRow(index)">
+                <span
+                  class="kern-icon kern-icon--delete kern-icon--default"
+                  aria-hidden="true"></span>
+              </button>
+            </td>
+            <td class="kern-table__cell" x-html="row.wirkziel"></td>
+            <td class="kern-table__cell" x-text="row.indikatoren"></td>
+            <td class="kern-table__cell" x-text="row.erfolgsschwelle"></td>
+            <td class="kern-table__cell" x-text="row.datengrundlage"></td>
+          </tr>
+        </template>
       </tbody>
       <tfoot class="kern-table__footer">
         <tr class="kern-table__row">
           <th scope="col" class="kern-table__header p-0" colspan="5">
-            <button class="flex w-full items-center gap-4 px-16 py-8 text-left">
+            <button
+              class="flex w-full items-center gap-4 px-16 py-8 text-left"
+              x-on:click="addNewRow"
+            >
               <span
                 class="kern-icon kern-icon--add kern-icon--default"
-                aria-hidden="true"></span>Wirkziel hinzufügen
+                aria-hidden="true"></span>
+              Wirkziel hinzufügen
             </button>
           </th>
         </tr>
       </tfoot>
-      <template id="new-row-template">
-        <tr class="kern-table__row">
-          <td class="kern-table__cell" data-cell="description"></td>
-          <td class="kern-table__cell" data-cell="status"></td>
-        </tr>
-      </template>
     </table>
-  </kern-dynamic-table>
+  </div>
 </FruephaseLayout>
+
+<script>
+  import Alpine from "alpinejs";
+
+  // 5. Register the component state when Alpine initializes
+  document.addEventListener("alpine:init", () => {
+    Alpine.data("dynamicTable", () => ({
+      rows: [] as Array<{
+        wirkziel: string;
+        indikatoren: string;
+        erfolgsschwelle: string;
+        datengrundlage: string;
+      }>,
+      addNewRow() {
+        this.rows.push({
+          wirkziel: "Neues Wirkziel",
+          indikatoren: "neue Indikatoren",
+          erfolgsschwelle: "neue Erfolgsschwelle",
+          datengrundlage: "neue Datengrundlage",
+        });
+      },
+      deleteRow(index: number) {
+        this.rows.splice(index, 1);
+      },
+    }));
+  });
+</script>

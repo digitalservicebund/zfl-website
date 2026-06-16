@@ -1,0 +1,12 @@
+---
+import FruephaseLayout from "./_FruephaseLayout.astro";
+
+export const frontmatter = {
+  title: "Problem- und Lebenslagenanalyse",
+  navLabel: "5. Problem- und Lebenslagenanalyse",
+  navOrder: 1,
+  sitemap: false,
+};
+---
+
+<FruephaseLayout title={frontmatter.title} pageNumber={frontmatter.navOrder} />

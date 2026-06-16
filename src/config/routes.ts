@@ -220,6 +220,17 @@ export const vorhaben_fruephase2 = {
   navLabel: "Frühphase II",
 } as const;
 
+export const vorhaben_fruephase2_schritt1 = {
+  key: "vorhaben_fruephase2_schritt1",
+  path: "/vorhaben/fruephase-2/schritt-1",
+  title: "Problem- und Lebenslagenanalyse",
+  parent: vorhaben_fruephase2,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 1,
+  navLabel: "5. Problem- und Lebenslagenanalyse",
+} as const;
+
 export const vorhaben_fruephase2_schritt2 = {
   key: "vorhaben_fruephase2_schritt2",
   path: "/vorhaben/fruephase-2/schritt-2",
@@ -227,8 +238,19 @@ export const vorhaben_fruephase2_schritt2 = {
   parent: vorhaben_fruephase2,
   sitemap: false,
   isStagingOnly: false,
-  navOrder: 1,
-  navLabel: "2. Einbeziehung Perspektiven externer Stakeholder",
+  navOrder: 2,
+  navLabel: "6. Einbeziehung Perspektiven externer Stakeholder",
+} as const;
+
+export const vorhaben_fruephase2_schritt3 = {
+  key: "vorhaben_fruephase2_schritt3",
+  path: "/vorhaben/fruephase-2/schritt-3",
+  title: "Problembeschreibung",
+  parent: vorhaben_fruephase2,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 3,
+  navLabel: "7. Problembeschreibung",
 } as const;
 
 export const vorhaben_fruephase2_schritt4 = {
@@ -239,7 +261,7 @@ export const vorhaben_fruephase2_schritt4 = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 4,
-  navLabel: "4. Wirkziele",
+  navLabel: "8. Wirkziele",
 } as const;
 
 export const vorhaben_fruephase2_schritt5 = {
@@ -250,7 +272,29 @@ export const vorhaben_fruephase2_schritt5 = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 5,
-  navLabel: "5. Entwicklung von Handlungsalternativen",
+  navLabel: "9. Entwicklung von Handlungsalternativen",
+} as const;
+
+export const vorhaben_fruephase2_schritt6 = {
+  key: "vorhaben_fruephase2_schritt6",
+  path: "/vorhaben/fruephase-2/schritt-6",
+  title: "Vertestung und Auswahl einer Handlungsalternative",
+  parent: vorhaben_fruephase2,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 6,
+  navLabel: "10. Vertestung und Auswahl einer Handlungsalternative",
+} as const;
+
+export const vorhaben_fruephase2_schritt7 = {
+  key: "vorhaben_fruephase2_schritt7",
+  path: "/vorhaben/fruephase-2/schritt-7",
+  title: "Fertigstellung des Wirkkonzepts",
+  parent: vorhaben_fruephase2,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 7,
+  navLabel: "11. Fertigstellung des Wirkkonzepts",
 } as const;
 
 export const werkzeuge = {
@@ -284,8 +328,12 @@ export const allRoutes = [
   ueber_zahlenUndFakten,
   vorhaben,
   vorhaben_fruephase2,
+  vorhaben_fruephase2_schritt1,
   vorhaben_fruephase2_schritt2,
+  vorhaben_fruephase2_schritt3,
   vorhaben_fruephase2_schritt4,
   vorhaben_fruephase2_schritt5,
+  vorhaben_fruephase2_schritt6,
+  vorhaben_fruephase2_schritt7,
   werkzeuge,
 ] as const;

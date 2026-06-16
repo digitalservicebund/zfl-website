@@ -1,0 +1,12 @@
+---
+import FruephaseLayout from "./_FruephaseLayout.astro";
+
+export const frontmatter = {
+  title: "Problembeschreibung",
+  navLabel: "7. Problembeschreibung",
+  navOrder: 3,
+  sitemap: false,
+};
+---
+
+<FruephaseLayout title={frontmatter.title} pageNumber={frontmatter.navOrder} />
