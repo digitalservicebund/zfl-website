@@ -74,7 +74,7 @@ The static site build (`pnpm build`) then picks up `public/data/*` automatically
 - `pnpm laws:fetch-metadata`
   - Runs `scripts/fetch_gii_metadata.py`. Streams the first ~8 KB of each GII law ZIP to extract `jurabk`, `kurzue`, and `ausfertigung_datum`.
   - Results are cached in `data/laws/cache/gii_metadata.json` and read automatically by `build_law_registry.py`.
-  - Supports `--force`, `--limit N`, `--workers N`, `--delay S`.
+  - Supports `--force`, `--limit N`, `--workers N`, `--delay S`, `--retries N`, `--retry-delay S`.
 
 - `pnpm laws:build-registry`
   - Runs `scripts/build_law_registry.py`. Builds canonical law registry JSON.

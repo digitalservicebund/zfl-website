@@ -11,6 +11,7 @@ Usage:
     pnpm laws:fetch-metadata --force          # re-fetch even already-cached slugs
     pnpm laws:fetch-metadata --limit 200      # process at most N laws per run
     pnpm laws:fetch-metadata --workers 20     # concurrent connections (default: 10)
+    pnpm laws:fetch-metadata --retries 5      # retry transient network errors (default: 5)
 """
 
 from __future__ import annotations
@@ -19,6 +20,9 @@ import argparse
 import io
 import json
 import re
+import socket
+import ssl
+import sys
 import threading
 import time
 import zipfile
@@ -63,7 +67,19 @@ def parse_args() -> argparse.Namespace:
         "--delay",
         type=float,
         default=0.0,
-        help="Seconds to wait between dispatching requests per worker (default: 0, fine for parallel mode)",
+        help="Seconds to wait between dispatching requests per worker (default: 0)",
+    )
+    parser.add_argument(
+        "--retries",
+        type=int,
+        default=5,
+        help="Retry count for transient network errors (default: 5)",
+    )
+    parser.add_argument(
+        "--retry-delay",
+        type=float,
+        default=1.0,
+        help="Base seconds for exponential backoff between retries (default: 1.0)",
     )
     return parser.parse_args()
 
@@ -78,11 +94,44 @@ def decode_xml_entities(value: str) -> str:
     )
 
 
-def stream_zip_bytes(url: str, max_bytes: int) -> bytes:
+def is_transient_fetch_error(exc: BaseException) -> bool:
+    """Return True for rate limits and other errors worth retrying."""
+    if isinstance(exc, (ConnectionResetError, BrokenPipeError, TimeoutError, socket.timeout)):
+        return True
+    if isinstance(exc, URLError):
+        reason = exc.reason
+        if isinstance(
+            reason,
+            (ConnectionResetError, BrokenPipeError, TimeoutError, socket.timeout, ssl.SSLError),
+        ):
+            return True
+        if isinstance(reason, OSError) and reason.errno in (54, 60, 61):
+            return True
+    if isinstance(exc, HTTPError) and exc.code in (429, 502, 503, 504):
+        return True
+    return False
+
+
+def stream_zip_bytes(
+    url: str,
+    max_bytes: int,
+    *,
+    max_retries: int = 5,
+    retry_delay: float = 1.0,
+) -> bytes:
     """Stream up to max_bytes from a remote ZIP, enough to find <metadaten>."""
-    req = Request(url, headers={"User-Agent": USER_AGENT, "Accept": "*/*"})
-    with urlopen(req, timeout=30) as resp:
-        return resp.read(max_bytes)
+    last_exc: BaseException | None = None
+    for attempt in range(max_retries + 1):
+        try:
+            req = Request(url, headers={"User-Agent": USER_AGENT, "Accept": "*/*"})
+            with urlopen(req, timeout=30) as resp:
+                return resp.read(max_bytes)
+        except Exception as exc:  # noqa: BLE001
+            last_exc = exc
+            if attempt == max_retries or not is_transient_fetch_error(exc):
+                raise
+            time.sleep(retry_delay * (2**attempt))
+    raise last_exc  # pragma: no cover
 
 
 def extract_xml_from_zip_bytes(raw: bytes) -> str | None:
@@ -107,9 +156,20 @@ def tag_value(xml: str, tag: str) -> str | None:
     return decode_xml_entities(m.group(1).strip()) if m else None
 
 
-def fetch_metadata_for_slug(url: str, max_bytes: int) -> dict:
+def fetch_metadata_for_slug(
+    url: str,
+    max_bytes: int,
+    *,
+    max_retries: int = 5,
+    retry_delay: float = 1.0,
+) -> dict:
     """Return {jurabk, kurzue, ausfertigung_datum} extracted from a GII zip URL."""
-    raw = stream_zip_bytes(url, max_bytes)
+    raw = stream_zip_bytes(
+        url,
+        max_bytes,
+        max_retries=max_retries,
+        retry_delay=retry_delay,
+    )
     xml = extract_xml_from_zip_bytes(raw) or ""
     return {
         "jurabk": tag_value(xml, "jurabk"),
@@ -152,7 +212,12 @@ def main() -> None:
         if args.delay:
             time.sleep(args.delay)
         try:
-            meta = fetch_metadata_for_slug(law["gii_xml_zip_url"], STREAM_CHUNK)
+            meta = fetch_metadata_for_slug(
+                law["gii_xml_zip_url"],
+                STREAM_CHUNK,
+                max_retries=args.retries,
+                retry_delay=args.retry_delay,
+            )
             return law["abbrev"], meta, None
         except Exception as exc:  # noqa: BLE001
             return law["abbrev"], None, exc
@@ -184,6 +249,8 @@ def main() -> None:
         save_cache(METADATA_CACHE_FILE, cache)
     print(f"\nDone. fetched={counter['fetched']}, errors={counter['errors']}")
     print(f"Cache: {METADATA_CACHE_FILE}  ({len(cache)} total entries)")
+    if counter["errors"]:
+        sys.exit(1)
 
 
 if __name__ == "__main__":
