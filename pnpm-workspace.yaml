@@ -4,4 +4,5 @@ overrides:
   tar@<7.5.8: ">=7.5.8"
   vite: ">=7.3.2"
   yaml@<2.8.3: ">=2.8.3"
+  esbuild@<0.28.1: "^0.28.1"
 ignoreScripts: true
