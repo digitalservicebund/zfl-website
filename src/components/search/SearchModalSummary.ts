@@ -36,8 +36,6 @@ class SearchModalSummary extends HTMLElement {
     if (!result || !this.term) return;
     const count = result.results?.length ?? 0;
     const bestProposal = getFuzzyMatch(this.term, this.fuzzyKeywords);
-    console.log(this.fuzzyKeywords);
-    console.log(bestProposal);
 
     this.renderResultCount(count, this.term);
 
