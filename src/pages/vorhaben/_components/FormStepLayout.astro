@@ -41,9 +41,9 @@ const { title, pageNumber, isWide, totalPages, showProgressBar } = Astro.props;
             )
           }
           <h1 class="sr-only">Titel: {title}</h1>
-          <form class="flex flex-col gap-32" novalidate>
+          <div class="flex flex-col gap-32">
             <slot />
-          </form>
+          </div>
         </div>
       </div>
       <div
@@ -69,15 +69,7 @@ const { title, pageNumber, isWide, totalPages, showProgressBar } = Astro.props;
     display: none;
   }
 
-  /* .kern-form-input__input:invalid:not(:focus) {
-    @apply kern-form-input__input--error;
-  } */
-
   .kern-form-input__input:invalid:not(:focus) ~ .kern-error {
     display: flex;
   }
-  /* 
-  .kern-form-input:has(.kern-form-input__input:invalid):not(:has(:focus)) {
-    @apply kern-form-input--error;
-  } */
 </style>
