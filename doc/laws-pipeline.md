@@ -65,16 +65,18 @@ The static site build (`pnpm build`) then picks up `public/data/*` automatically
 
 - `pnpm laws:download [-- --de-csv <path>] [-- --eu-csv <path>]`
   - Runs `scripts/download_laws.py`. Downloads DE/EU source files into local cache.
-  - Defaults: `data/laws/import/gesetze_und_verordnungen.csv` (DE) and `data/laws/import/eu_regelungen_zu_finanzgesetzen.csv` (EU).
+  - Defaults: `data/laws/import/gesetze_und_verordnungen.csv` (DE) and `data/laws/import/test_obligations_eu.csv` (EU).
   - Pass custom import lists via `--de-csv` and/or `--eu-csv` (see test corpus below).
 
 - `pnpm laws:prepare-corpus`
   - Runs `scripts/prepare_law_corpus.py`. Converts raw downloads into parser-ready source folders.
 
 - `pnpm laws:fetch-metadata`
-  - Runs `scripts/fetch_gii_metadata.py`. Streams the first ~8 KB of each GII law ZIP to extract `jurabk`, `kurzue`, and `ausfertigung_datum`.
+  - Runs `scripts/fetch_gii_metadata.py`. By default fetches only GII laws **without a cached `jurabk`**, streaming the first ~8 KB of each ZIP to extract `jurabk`, `kurzue`, and `ausfertigung_datum`.
+  - Laws that still lack `jurabk` after that pass (the 8 KB slice may not reach the XML inside the ZIP) can be retried with `--full-zip`, which downloads the complete ZIP.
   - Results are cached in `data/laws/cache/gii_metadata.json` and read automatically by `build_law_registry.py`.
-  - Supports `--force`, `--limit N`, `--workers N`, `--delay S`, `--retries N`, `--retry-delay S`.
+  - Supports `--full-zip`, `--force`, `--limit N`, `--workers N`, `--delay S`, `--retries N`, `--retry-delay S`.
+  - Typical workflow: `pnpm laws:fetch-metadata` then `pnpm laws:fetch-metadata -- --full-zip` then `pnpm laws:build-registry`.
 
 - `pnpm laws:build-registry`
   - Runs `scripts/build_law_registry.py`. Builds canonical law registry JSON.
@@ -106,9 +108,8 @@ Canonical pipeline and UI folders:
 data/laws/
   import/                          # Curated input CSV lists
     gesetze_und_verordnungen.csv   # Full DE download list (financial-law corpus)
-    eu_regelungen_zu_finanzgesetzen.csv  # Full EU download list (financial-law corpus)
     test_obligations_de.csv        # Test corpus (DE): former *_relevant subset + GDNG, SGB V/XI
-    test_obligations_eu.csv        # Test corpus (EU): former *_relevant subset + EHDS
+    test_obligations_eu.csv        # Default EU download list (test corpus)
     test_obligations_norms.txt     # Laws to extract (for --norms-file)
     test_obligations_norms_health.txt  # Health-corpus subset only (GDNG, EHDS, SGB V/XI)
   cache/

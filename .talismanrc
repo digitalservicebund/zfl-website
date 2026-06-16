@@ -85,7 +85,7 @@ fileignoreconfig:
   - filename: scripts/concat_obligations_csv.py
     checksum: 6163e7dca5499a1bc0dfa691ceda7e9581a4e2151bd247ffa7ca6070dd3388d0
   - filename: doc/laws-pipeline.md
-    checksum: 36978582289f7353902ef2544764891fb6c139f5d2c3be886c00249b094e2ad3
+    checksum: fc355c65e829ff4b1f2d71945790249ded6aa76d63dcb7bf1996b46e1183e809
   - filename: public/data/obligations/Pflichten_LLM_SGB 11.csv
     ignore_detectors: [filecontent]
   - filename: public/data/obligations/Pflichten_LLM_SGB 5.csv
@@ -97,7 +97,7 @@ fileignoreconfig:
   - filename: scripts/extract_obligations.py
     checksum: 548b63b1594e9607ec95b0a2ac4bf9a749f801c9ea494adb7f4d30989b07394e
   - filename: scripts/fetch_gii_metadata.py
-    checksum: f049703ea6e293f51046799b74824019dc1aed9949c7ea6410b57dd0068fc3a3
+    checksum: 99f8f6891762a7c68ca9d4f1551f5110ea9a0d7cd5cbf9b4c08194cfa22b090f
   - filename: scripts/reference_sort.py
     checksum: cb51790a33aafab5f4326d9cfd8049d0a9f6ec8ffc1977491f32df5c79403669
   - filename: src/pages/werkzeuge/pflichten.astro

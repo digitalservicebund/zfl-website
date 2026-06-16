@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
 """Fetch jurabk / kurzue / ausfertigung_datum for every GII law in the registry.
 
-Only the first ~8 KB of each ZIP is streamed (enough to reach the <metadaten>
-block for virtually all laws), so this is much lighter than a full corpus
-download.  Results are written to a JSON cache that build_law_registry.py reads
-automatically.
+By default only laws without a cached ``jurabk`` are fetched, using a lightweight
+~8 KB ZIP stream (enough for most laws). Laws that still lack ``jurabk`` after
+that pass can be retried with ``--full-zip``, which downloads the complete ZIP.
+
+Results are written to a JSON cache that build_law_registry.py reads automatically.
 
 Usage:
-    pnpm laws:fetch-metadata                  # all GII laws without cached data
-    pnpm laws:fetch-metadata --force          # re-fetch even already-cached slugs
-    pnpm laws:fetch-metadata --limit 200      # process at most N laws per run
-    pnpm laws:fetch-metadata --workers 20     # concurrent connections (default: 10)
-    pnpm laws:fetch-metadata --retries 5      # retry transient network errors (default: 5)
+    pnpm laws:fetch-metadata                       # new laws missing jurabk (8 KB stream)
+    pnpm laws:fetch-metadata -- --full-zip         # retry incomplete laws (full ZIP)
+    pnpm laws:fetch-metadata -- --force            # re-fetch all slugs (respects --full-zip)
+    pnpm laws:fetch-metadata -- --limit 200        # process at most N laws per run
+    pnpm laws:fetch-metadata -- --workers 20      # concurrent connections (default: 10)
+    pnpm laws:fetch-metadata -- --retries 5         # retry transient network errors (default: 5)
 """
 
 from __future__ import annotations
@@ -31,6 +33,7 @@ from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
+from gii_metadata_utils import enrich_gii_metadata
 from laws_paths import LAW_PATHS
 
 USER_AGENT = "zfl-law-downloader/1.0 (+https://github.com/digitalservicebund/zfl-website)"
@@ -49,7 +52,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--force",
         action="store_true",
-        help="Re-fetch slugs that are already in the cache",
+        help="Re-fetch slugs even when jurabk is already cached",
+    )
+    parser.add_argument(
+        "--full-zip",
+        action="store_true",
+        help=(
+            "Download the complete ZIP instead of streaming the first 8 KB. "
+            "Use to retry laws that still lack jurabk after the default pass."
+        ),
     )
     parser.add_argument(
         "--limit",
@@ -114,17 +125,20 @@ def is_transient_fetch_error(exc: BaseException) -> bool:
 
 def stream_zip_bytes(
     url: str,
-    max_bytes: int,
+    max_bytes: int | None,
     *,
     max_retries: int = 5,
     retry_delay: float = 1.0,
+    timeout: float = 30,
 ) -> bytes:
-    """Stream up to max_bytes from a remote ZIP, enough to find <metadaten>."""
+    """Stream bytes from a remote ZIP (all bytes when max_bytes is None)."""
     last_exc: BaseException | None = None
     for attempt in range(max_retries + 1):
         try:
             req = Request(url, headers={"User-Agent": USER_AGENT, "Accept": "*/*"})
-            with urlopen(req, timeout=30) as resp:
+            with urlopen(req, timeout=timeout) as resp:
+                if max_bytes is None:
+                    return resp.read()
                 return resp.read(max_bytes)
         except Exception as exc:  # noqa: BLE001
             last_exc = exc
@@ -156,9 +170,29 @@ def tag_value(xml: str, tag: str) -> str | None:
     return decode_xml_entities(m.group(1).strip()) if m else None
 
 
+def parse_metadata_from_xml(xml: str) -> dict:
+    """Return {jurabk, kurzue, ausfertigung_datum} from GII law XML."""
+    jurabk = tag_value(xml, "jurabk")
+    kurzue = tag_value(xml, "kurzue")
+    amtabk = tag_value(xml, "amtabk")
+    langue = tag_value(xml, "langue")
+    ausfertigung_datum = tag_value(xml, "ausfertigung-datum")
+    jurabk, kurzue = enrich_gii_metadata(
+        jurabk=jurabk,
+        amtabk=amtabk,
+        kurzue=kurzue,
+        langue=langue,
+    )
+    return {
+        "jurabk": jurabk,
+        "kurzue": kurzue,
+        "ausfertigung_datum": ausfertigung_datum,
+    }
+
+
 def fetch_metadata_for_slug(
     url: str,
-    max_bytes: int,
+    max_bytes: int | None,
     *,
     max_retries: int = 5,
     retry_delay: float = 1.0,
@@ -169,13 +203,38 @@ def fetch_metadata_for_slug(
         max_bytes,
         max_retries=max_retries,
         retry_delay=retry_delay,
+        timeout=120 if max_bytes is None else 30,
     )
     xml = extract_xml_from_zip_bytes(raw) or ""
-    return {
-        "jurabk": tag_value(xml, "jurabk"),
-        "kurzue": tag_value(xml, "kurzue"),
-        "ausfertigung_datum": tag_value(xml, "ausfertigung-datum"),
-    }
+    return parse_metadata_from_xml(xml)
+
+
+def has_jurabk(meta: dict | None) -> bool:
+    jurabk = (meta or {}).get("jurabk")
+    return bool(jurabk and str(jurabk).strip())
+
+
+def should_fetch_slug(slug: str, cache: dict, *, force: bool, full_zip: bool) -> bool:
+    """Select laws that still need metadata."""
+    if force:
+        return True
+
+    cached = cache.get(slug)
+    if has_jurabk(cached):
+        return False
+    if not cached:
+        return True
+    # Cached but still missing jurabk — retry only with a full ZIP download.
+    return full_zip
+
+
+def merge_metadata(existing: dict | None, new: dict) -> dict:
+    """Keep previously resolved fields when a retry does not improve them."""
+    merged = dict(existing or {})
+    for key in ("jurabk", "kurzue", "ausfertigung_datum"):
+        if new.get(key):
+            merged[key] = new[key]
+    return merged
 
 
 def load_cache(path: Path) -> dict:
@@ -198,15 +257,25 @@ def main() -> None:
     cache = load_cache(METADATA_CACHE_FILE)
     cache_lock = threading.Lock()
 
-    to_fetch = [l for l in gii_laws if args.force or l["abbrev"] not in cache]
+    to_fetch = [
+        law
+        for law in gii_laws
+        if should_fetch_slug(law["abbrev"], cache, force=args.force, full_zip=args.full_zip)
+    ]
 
     if args.limit:
         to_fetch = to_fetch[: args.limit]
 
     total = len(to_fetch)
-    print(f"Laws to fetch: {total}  (cache already has {len(cache)} entries, workers={args.workers})")
+    mode = "full ZIP" if args.full_zip else f"{STREAM_CHUNK // 1024} KB stream"
+    complete = sum(1 for meta in cache.values() if has_jurabk(meta))
+    print(
+        f"Laws to fetch: {total}  "
+        f"(cache: {len(cache)} entries, {complete} with jurabk, mode={mode}, workers={args.workers})"
+    )
 
-    counter = {"fetched": 0, "errors": 0, "done": 0}
+    counter = {"fetched": 0, "errors": 0, "done": 0, "still_incomplete": 0}
+    max_bytes = None if args.full_zip else STREAM_CHUNK
 
     def fetch_one(law: dict) -> tuple[str, dict | None, Exception | None]:
         if args.delay:
@@ -214,7 +283,7 @@ def main() -> None:
         try:
             meta = fetch_metadata_for_slug(
                 law["gii_xml_zip_url"],
-                STREAM_CHUNK,
+                max_bytes,
                 max_retries=args.retries,
                 retry_delay=args.retry_delay,
             )
@@ -235,7 +304,9 @@ def main() -> None:
             else:
                 counter["fetched"] += 1
                 with cache_lock:
-                    cache[slug] = meta
+                    cache[slug] = merge_metadata(cache.get(slug), meta or {})
+                if not has_jurabk(meta):
+                    counter["still_incomplete"] += 1
                 jurabk = (meta or {}).get("jurabk") or "-"
                 print(f"[{n}/{total}] {slug:30s} jurabk={jurabk}")
 
@@ -247,7 +318,10 @@ def main() -> None:
 
     with cache_lock:
         save_cache(METADATA_CACHE_FILE, cache)
-    print(f"\nDone. fetched={counter['fetched']}, errors={counter['errors']}")
+    print(
+        f"\nDone. fetched={counter['fetched']}, errors={counter['errors']}, "
+        f"still_incomplete={counter['still_incomplete']}"
+    )
     print(f"Cache: {METADATA_CACHE_FILE}  ({len(cache)} total entries)")
     if counter["errors"]:
         sys.exit(1)

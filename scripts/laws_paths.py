@@ -6,7 +6,7 @@ ROOT_DIR = Path(__file__).resolve().parents[1]
 
 LAW_PATHS = {
     "registry_file": ROOT_DIR / "data" / "laws" / "registry" / "laws.json",
-    "eu_input_csv": ROOT_DIR / "data" / "laws" / "import" / "eu_regelungen_zu_finanzgesetzen.csv",
+    "eu_input_csv": ROOT_DIR / "data" / "laws" / "import" / "test_obligations_eu.csv",
     "de_input_csv": ROOT_DIR / "data" / "laws" / "import" / "gesetze_und_verordnungen.csv",
     "download_dir": ROOT_DIR / "data" / "laws" / "cache" / "downloads",
     "de_norm_xml_dir": ROOT_DIR / "data" / "laws" / "sources" / "de" / "xml",
