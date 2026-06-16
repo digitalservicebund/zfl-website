@@ -162,7 +162,7 @@ importers:
         specifier: ^8.61.0
         version: 8.61.0(eslint@10.5.0(jiti@2.7.0))(typescript@6.0.3)
       vite:
-        specifier: ^8.0.16
+        specifier: '>=7.3.2'
         version: 8.0.16(@types/node@25.9.3)(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.9.0)
       vitest:
         specifier: ^4.1.9
@@ -1989,7 +1989,7 @@ packages:
       astro: ^2.0.4 || ^3 || ^4 || ^5 || ^6
 
   astro-route-generator@https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/40024e7e81c9fda804b952b6e17f30ac17ab4607:
-    resolution: {gitHosted: true, integrity: sha512-kkANFBRlPLVG3MqlfBzlX+hnQ0farXEb5UBcY70MYYuKk/oBVTows1T91IhkIc5LlsiP7TwyOGM3FB2r4hXZTg==, tarball: https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/40024e7e81c9fda804b952b6e17f30ac17ab4607}
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/40024e7e81c9fda804b952b6e17f30ac17ab4607}
     version: 0.1.1
     peerDependencies:
       astro: '>=4.0.0'
