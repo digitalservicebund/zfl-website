@@ -88,6 +88,8 @@ fileignoreconfig:
     checksum: 36978582289f7353902ef2544764891fb6c139f5d2c3be886c00249b094e2ad3
   - filename: public/data/obligations/Pflichten_LLM_SGB 11.csv
     ignore_detectors: [filecontent]
+  - filename: public/data/obligations/Pflichten_LLM_SGB 5.csv
+    ignore_detectors: [filecontent]
   - filename: public/data/obligations/Pflichten_LLM_GDNG.csv
     ignore_detectors: [filecontent]
   - filename: public/data/obligations/Pflichten_LLM_32025R0327.csv
