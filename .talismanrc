@@ -46,9 +46,6 @@ fileignoreconfig:
     allowed_patterns:
       - proxy_pass
       - sha256-[^\s]+
-  - filename: sonar-project.properties
-    allowed_patterns:
-      - projectKey
   - filename: src/config/posthog.ts
     checksum: 2c449a89d7fa9be57170bc960a30f51381f9a5d8d046605a6e30c083886163dd
   - filename: src/env.d.ts
