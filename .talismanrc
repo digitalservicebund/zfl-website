@@ -84,8 +84,14 @@ fileignoreconfig:
     checksum: 4b4529c26f6b4cd3a5d4a1d0706d8a83dcdd523631ba5f55efc23517b0a3a558
   - filename: scripts/concat_obligations_csv.py
     checksum: 6163e7dca5499a1bc0dfa691ceda7e9581a4e2151bd247ffa7ca6070dd3388d0
-  - filename: scripts/PFLICHTEN_README.md
-    checksum: 5ebe50571a2b33090cc263c435bbedcf164cc7980a3d12989a03711f0791c500
+  - filename: doc/laws-pipeline.md
+    checksum: 6640eb123bd75ca988fb83ccf774f3a336d606de3183493d973f0874b6ce3aae
+  - filename: public/data/obligations/Pflichten_LLM_SGB 11.csv
+    ignore_detectors: [filecontent]
+  - filename: public/data/obligations/Pflichten_LLM_GDNG.csv
+    ignore_detectors: [filecontent]
+  - filename: public/data/obligations/Pflichten_LLM_32025R0327.csv
+    ignore_detectors: [filecontent]
   - filename: scripts/extract_obligations.py
     checksum: 548b63b1594e9607ec95b0a2ac4bf9a749f801c9ea494adb7f4d30989b07394e
   - filename: scripts/fetch_gii_metadata.py
