@@ -85,7 +85,7 @@ fileignoreconfig:
   - filename: scripts/concat_obligations_csv.py
     checksum: 6163e7dca5499a1bc0dfa691ceda7e9581a4e2151bd247ffa7ca6070dd3388d0
   - filename: doc/laws-pipeline.md
-    checksum: 6640eb123bd75ca988fb83ccf774f3a336d606de3183493d973f0874b6ce3aae
+    checksum: 36978582289f7353902ef2544764891fb6c139f5d2c3be886c00249b094e2ad3
   - filename: public/data/obligations/Pflichten_LLM_SGB 11.csv
     ignore_detectors: [filecontent]
   - filename: public/data/obligations/Pflichten_LLM_GDNG.csv
