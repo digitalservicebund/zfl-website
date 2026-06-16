@@ -7,11 +7,96 @@ export const frontmatter = {
   sitemap: true,
   navLabel: "Ihr Vorhaben",
 };
+
+const phases = [
+  {
+    title: "Phase I: Synergien heben",
+    tasks: [
+      {
+        number: 1,
+        title: "Steckbrief erstellen",
+        status: {
+          variant: "success",
+          label: "Erledigt",
+          showIcon: true,
+          smallLabel: false,
+        },
+      },
+      {
+        number: 2,
+        title: "Mit der Leitungsebene abklären",
+        status: {
+          variant: "success",
+          label: "Erledigt",
+          showIcon: true,
+          smallLabel: false,
+        },
+      },
+      {
+        number: 3,
+        title: "Steckbrief versenden an andere Ressorts, ZfL, NKR-S und StaBA",
+        status: {
+          variant: "success",
+          label: "Erledigt",
+          showIcon: true,
+          smallLabel: false,
+        },
+      },
+      {
+        number: 4,
+        title: "Rückmeldungen sammeln",
+        status: {
+          variant: "success",
+          label: "Erledigt",
+          showIcon: true,
+          smallLabel: false,
+        },
+      },
+    ],
+  },
+  {
+    id: "phase-2",
+    title: "Phase II: Inhalte erarbeiten",
+    tasks: [
+      {
+        number: 5,
+        title: "Problem- und Lebenslagen analysieren",
+        status: {
+          variant: "success",
+          label: "Erledigt",
+          showIcon: true,
+          smallLabel: false,
+        },
+      },
+      { number: 6, title: "Betroffene einbeziehen" },
+      { number: 7, title: "Problem definieren" },
+      { number: 8, title: "Ziel definieren" },
+      { number: 9, title: "Handlungsalternativen entwickeln" },
+      { number: 10, title: "Handlungsalternative auswählen und testen" },
+      { number: 11, title: "Wirkkonzept fertigstellen" },
+    ],
+  },
+  {
+    title: "Phase III: Regulierung umsetzen",
+    tasks: [
+      {
+        number: 12,
+        title: "Ggf. Referentenentwurf schreiben",
+        status: {
+          variant: "info",
+          label: "Noch nicht zu bearbeiten",
+          showIcon: false,
+          smallLabel: true,
+        },
+      },
+    ],
+  },
+];
 ---
 
 <Layout title={frontmatter.title}>
   <main class="breakout-grid">
-    <section class="mx-auto max-w-[730px]">
+    <section class="mx-auto max-w-730">
       <h1>Vorhaben erarbeiten</h1>
       <p class="kern-body">
         Die neue Frühphase ersetzt den bisherigen Ablauf der Erarbeitung eines
@@ -20,202 +105,73 @@ export const frontmatter = {
         Regulierungsform entscheiden.
       </p>
       <div class="kern-task-list">
-        <div class="kern-task-list__header">
-          <h2 class="kern-heading-medium">Phase I: Synergien heben</h2>
+        {
+          phases.map((phase) => (
+            <>
+              <div class="kern-task-list__header">
+                <h2 id={phase.id} class="kern-heading-medium">
+                  {phase.title}
+                </h2>
+              </div>
+
+              <ul class="kern-task-list__list">
+                {phase.tasks.map((task) => (
+                  <li class="kern-task-list__item">
+                    <span class="kern-number">{task.number}</span>
+                    <div class="kern-task-list__title">
+                      <p class="kern-body">{task.title}</p>
+                      {task.status && (
+                        <div class="kern-task-list__status">
+                          <span
+                            class={`kern-badge ${task.status.variant === "success" ? "kern-badge--success" : "kern-badge--info"}`}
+                          >
+                            {task.status.showIcon && (
+                              <span
+                                class="kern-icon kern-icon--success"
+                                aria-hidden="true"
+                              />
+                            )}
+                            <span
+                              class={
+                                task.status.smallLabel
+                                  ? "kern-label kern-label--small"
+                                  : "kern-label"
+                              }
+                            >
+                              {task.status.label}
+                            </span>
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ))
+        }
+      </div>
+
+      <div
+        class="kern-alert kern-alert--info mt-md border-cosmic-blue-base"
+        role="alert"
+      >
+        <div class="kern-alert__header bg-cosmic-blue-100">
+          <Icon
+            name="ic:baseline-real-estate-agent"
+            class="text-cosmic-blue-base h-24 w-24"
+          />
+          <span class="kern-title"
+            >Integrierte Arbeitshilfen und Checks: 54</span
+          >
         </div>
-
-        <ul class="kern-task-list__list">
-          <li class="kern-task-list__item">
-            <span class="kern-number">1</span>
-            <div class="kern-task-list__title" id="task1-title">
-              Steckbrief erstellen
-            </div>
-          </li>
-        </ul>
-
-        <ul class="kern-task-list__list">
-          <li class="kern-task-list__item">
-            <span class="kern-number">2</span>
-            <div class="kern-task-list__title" id="task2-title">
-              <p class="kern-body">Mit der Leitungsebene abklären</p>
-              <div class="kern-task-list__status" id="task2-status">
-                <span class="kern-badge kern-badge--info">
-                  <span class="kern-label kern-label--small"
-                    >Noch nicht zu bearbeiten</span
-                  >
-                </span>
-              </div>
-            </div>
-          </li>
-          <li class="kern-task-list__item">
-            <span class="kern-number">3</span>
-            <div class="kern-task-list__title" id="task3-title">
-              <p class="kern-body">
-                Steckbrief versenden an andere Ressorts, ZfL, NKR-S und StaBA
-              </p>
-              <div class="kern-task-list__status" id="task3-status">
-                <span class="kern-badge kern-badge--info">
-                  <span class="kern-label kern-label--small"
-                    >Noch nicht zu bearbeiten</span
-                  >
-                </span>
-              </div>
-            </div>
-          </li>
-          <li class="kern-task-list__item">
-            <span class="kern-number">4</span>
-            <div class="kern-task-list__title" id="task4-title">
-              <p class="kern-body">Rückmeldungen sammeln</p>
-              <div class="kern-task-list__status" id="task4-status">
-                <span class="kern-badge kern-badge--info">
-                  <span class="kern-label kern-label--small"
-                    >Noch nicht zu bearbeiten</span
-                  >
-                </span>
-              </div>
-            </div>
-          </li>
-        </ul>
+        <div class="kern-alert__body">
+          <p class="kern-body">
+            Nach und nach werden alle Arbeitshilfen und Checks in den 3 Phasen
+            der Neuen Frühphase integriert.
+          </p>
+        </div>
       </div>
-
-      <div class="kern-task-list__header">
-        <h2 id="phase-2" class="kern-heading-medium">
-          Phase II: Inhalte erarbeiten
-        </h2>
-      </div>
-
-      <ul class="kern-task-list__list">
-        <li class="kern-task-list__item">
-          <span class="kern-number">5</span>
-          <div class="kern-task-list__title">
-            <p class="kern-body">Problem- und Lebenslagen analysieren</p>
-            <div class="kern-task-list__status">
-              <span class="kern-badge kern-badge--info">
-                <span class="kern-label kern-label--small"
-                  >Noch nicht zu bearbeiten</span
-                >
-              </span>
-            </div>
-          </div>
-        </li>
-        <li class="kern-task-list__item">
-          <span class="kern-number">6</span>
-          <div class="kern-task-list__title">
-            <p class="kern-body">Betroffene einbeziehen</p>
-            <div class="kern-task-list__status">
-              <span class="kern-badge kern-badge--info">
-                <span class="kern-label kern-label--small"
-                  >Noch nicht zu bearbeiten</span
-                >
-              </span>
-            </div>
-          </div>
-        </li>
-        <li class="kern-task-list__item">
-          <span class="kern-number">7</span>
-          <div class="kern-task-list__title">
-            <p class="kern-body">Problem definieren</p>
-            <div class="kern-task-list__status">
-              <span class="kern-badge kern-badge--info">
-                <span class="kern-label kern-label--small"
-                  >Noch nicht zu bearbeiten</span
-                >
-              </span>
-            </div>
-          </div>
-        </li>
-        <li class="kern-task-list__item">
-          <span class="kern-number">8</span>
-          <div class="kern-task-list__title">
-            <p class="kern-body">Ziel definieren</p>
-            <div class="kern-task-list__status">
-              <span class="kern-badge kern-badge--info">
-                <span class="kern-label kern-label--small"
-                  >Noch nicht zu bearbeiten</span
-                >
-              </span>
-            </div>
-          </div>
-        </li>
-        <li class="kern-task-list__item">
-          <span class="kern-number">9</span>
-          <div class="kern-task-list__title">
-            <p class="kern-body">Handlungsalternativen entwickeln</p>
-            <div class="kern-task-list__status">
-              <span class="kern-badge kern-badge--info">
-                <span class="kern-label kern-label--small"
-                  >Noch nicht zu bearbeiten</span
-                >
-              </span>
-            </div>
-          </div>
-        </li>
-        <li class="kern-task-list__item">
-          <span class="kern-number">10</span>
-          <div class="kern-task-list__title">
-            <p class="kern-body">Handlungsalternative auswählen und testen</p>
-            <div class="kern-task-list__status">
-              <span class="kern-badge kern-badge--info">
-                <span class="kern-label kern-label--small"
-                  >Noch nicht zu bearbeiten</span
-                >
-              </span>
-            </div>
-          </div>
-        </li>
-        <li class="kern-task-list__item">
-          <span class="kern-number">11</span>
-          <div class="kern-task-list__title">
-            <p class="kern-body">Wirkkonzept fertigstellen</p>
-            <div class="kern-task-list__status">
-              <span class="kern-badge kern-badge--info">
-                <span class="kern-label kern-label--small"
-                  >Noch nicht zu bearbeiten</span
-                >
-              </span>
-            </div>
-          </div>
-        </li>
-      </ul>
-
-      <div class="kern-task-list__header">
-        <h2 class="kern-heading-medium">Phase III: Regulierung umsetzen</h2>
-      </div>
-
-      <ul class="kern-task-list__list">
-        <li class="kern-task-list__item">
-          <span class="kern-number">12</span>
-          <div class="kern-task-list__title">
-            <p class="kern-body">Ggf. Referentenentwurf schreiben</p>
-            <div class="kern-task-list__status">
-              <span class="kern-badge kern-badge--info">
-                <span class="kern-label kern-label--small"
-                  >Noch nicht zu bearbeiten</span
-                >
-              </span>
-            </div>
-          </div>
-        </li>
-      </ul>
     </section>
-
-    <div
-      class="kern-alert kern-alert--info mt-md border-cosmic-blue-base"
-      role="alert"
-    >
-      <div class="kern-alert__header bg-cosmic-blue-100">
-        <Icon
-          name="ic:baseline-real-estate-agent"
-          class="text-cosmic-blue-base h-24 w-24"
-        />
-        <span class="kern-title">Integrierte Arbeitshilfen und Checks: 54</span>
-      </div>
-      <div class="kern-alert__body">
-        <p class="kern-body">
-          Nach und nach werden alle Arbeitshilfen und Checks in den 3 Phasen der
-          Neuen Frühphase integriert.
-        </p>
-      </div>
-    </div>
   </main>
 </Layout>
