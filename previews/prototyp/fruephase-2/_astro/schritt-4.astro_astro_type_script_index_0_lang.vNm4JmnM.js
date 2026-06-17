@@ -1,0 +1,1 @@
+import{t as e}from"./kernTableState.D5J2L2Jt.js";e(`wirkzielTable`,()=>({wirkziel:`Neues Wirkziel`,indikatoren:`neue Indikatoren`,erfolgsschwelle:`neue Erfolgsschwelle`,datengrundlage:`neue Datengrundlage`}));

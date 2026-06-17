@@ -1,0 +1,1 @@
+import{t as e}from"./module.esm.CWk4R-Yb.js";function t(t,n,r=[]){document.addEventListener(`alpine:init`,()=>{e.data(t,()=>({rows:[...r],addNewRow(){this.rows.push(n())},deleteRow(e){this.rows.splice(e,1)}}))})}export{t};

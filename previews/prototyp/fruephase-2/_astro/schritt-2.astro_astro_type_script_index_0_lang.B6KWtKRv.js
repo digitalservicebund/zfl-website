@@ -1,0 +1,1 @@
+import{t as e}from"./kernTableState.D5J2L2Jt.js";e(`hypothesenTable`,()=>({hypothesen:``,quellen:``,fragen:``,validierung:``}));
