@@ -154,13 +154,14 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
         <template x-for="law in filteredLaws" :key="law.abbrev">
           <label
             class={lawCard()}
-            x-bind:class="isSelected(law.abbrev) ? 'border-cosmic-blue-base bg-lavender-200 ring-1 ring-cosmic-blue-base' : 'border-lavender-400 bg-white hover:border-cosmic-blue-400'"
+            x-bind:class="isSelected(law.abbrev) ? 'border-cosmic-blue-base bg-lavender-200 ring-1 ring-cosmic-blue-base' : isLawAnalysed(law) ? 'border-lavender-400 bg-white hover:border-cosmic-blue-400' : 'border-lavender-400 bg-lavender-100 cursor-not-allowed opacity-80'"
           >
             <input
               class="kern-form-check__checkbox mt-2 shrink-0"
               type="checkbox"
               :value="law.abbrev"
               :checked="isSelected(law.abbrev)"
+              :disabled="!isLawAnalysed(law)"
               @change="toggleLaw(law.abbrev)"
             />
             <span class="min-w-0">
@@ -702,16 +703,23 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
       get matchingLaws() {
         const query = this.lawQuery.trim().toLowerCase();
         if (!query) return [];
-        return this.laws.filter((law) => {
-          const label = this.lawLabel(law).toLowerCase();
-          const description = this.lawDescription(law).toLowerCase();
-          return (
-            law.abbrev.toLowerCase().includes(query) ||
-            label.includes(query) ||
-            description.includes(query) ||
-            (law.name ?? "").toLowerCase().includes(query)
-          );
-        });
+        return this.laws
+          .filter((law) => {
+            const label = this.lawLabel(law).toLowerCase();
+            const description = this.lawDescription(law).toLowerCase();
+            return (
+              law.abbrev.toLowerCase().includes(query) ||
+              label.includes(query) ||
+              description.includes(query) ||
+              (law.name ?? "").toLowerCase().includes(query)
+            );
+          })
+          .sort((a, b) => {
+            const aAnalysed = this.isLawAnalysed(a);
+            const bAnalysed = this.isLawAnalysed(b);
+            if (aAnalysed !== bAnalysed) return aAnalysed ? -1 : 1;
+            return this.lawLabel(a).localeCompare(this.lawLabel(b), "de");
+          });
       },
 
       get filteredLaws() {
@@ -776,6 +784,15 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
       },
 
       toggleLaw(abbrev: string) {
+        const law = this.laws.find((entry) => entry.abbrev === abbrev);
+        if (
+          law &&
+          !this.isLawAnalysed(law) &&
+          !this.selectedLaws.includes(abbrev)
+        ) {
+          return;
+        }
+
         if (this.selectedLaws.includes(abbrev)) {
           this.selectedLaws = this.selectedLaws.filter(
             (item) => item !== abbrev,
@@ -791,7 +808,9 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
 
       selectAllFiltered() {
         const next = new Set(this.selectedLaws);
-        this.filteredLaws.forEach((law) => next.add(law.abbrev));
+        this.filteredLaws
+          .filter((law) => this.isLawAnalysed(law))
+          .forEach((law) => next.add(law.abbrev));
         this.selectedLaws = [...next];
       },
 
