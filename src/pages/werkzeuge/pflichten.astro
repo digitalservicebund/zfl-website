@@ -3,6 +3,8 @@ import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
 import { Icon } from "astro-icon/components";
 import { tv } from "tailwind-variants";
+import fs from "node:fs";
+import path from "node:path";
 
 export const frontmatter = {
   title: "Pflichten-Export",
@@ -12,6 +14,29 @@ export const frontmatter = {
 
 const description =
   "Wählen Sie Gesetze aus, prüfen Sie die daraus extrahierten Pflichten und laden Sie das Ergebnis als CSV-Datei herunter.";
+
+const OBLIGATIONS_DIR = path.join(process.cwd(), "public/data/obligations");
+const EXTRACTION_FILE_PREFIX = "Pflichten_LLM_";
+
+const loadExtractionDates = (): Record<string, string> => {
+  const dates: Record<string, string> = {};
+  if (!fs.existsSync(OBLIGATIONS_DIR)) return dates;
+
+  for (const file of fs.readdirSync(OBLIGATIONS_DIR)) {
+    if (!file.startsWith(EXTRACTION_FILE_PREFIX) || !file.endsWith(".csv")) {
+      continue;
+    }
+    if (file === `${EXTRACTION_FILE_PREFIX}All.csv`) continue;
+
+    const stem = file.slice(EXTRACTION_FILE_PREFIX.length, -4);
+    const mtime = fs.statSync(path.join(OBLIGATIONS_DIR, file)).mtime;
+    dates[stem] = mtime.toISOString().slice(0, 10);
+  }
+
+  return dates;
+};
+
+const extractionDates = loadExtractionDates();
 
 const styles = tv({
   slots: {
@@ -177,6 +202,11 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
                 class={analysisBadge()}
                 x-text="lawAnalysisLabel(law)"></span>
               <span
+                x-show="isLawAnalysed(law) && lawExtractionDateLabel(law)"
+                x-cloak
+                class="text-icon-muted mt-4 block text-xs"
+                x-text="lawExtractionDateLabel(law)"></span>
+              <span
                 x-show="!isLawAnalysed(law)"
                 x-cloak
                 class="text-icon-muted mt-8 block text-xs italic"
@@ -305,8 +335,20 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
   }
 </style>
 
+<script is:inline define:vars={{ extractionDates }}>
+  window.__PFICHTEN_EXTRACTION_DATES__ = extractionDates;
+</script>
+
 <script>
   import Alpine from "alpinejs";
+
+  declare global {
+    interface Window {
+      __PFICHTEN_EXTRACTION_DATES__?: Record<string, string>;
+    }
+  }
+
+  const extractionDates = window.__PFICHTEN_EXTRACTION_DATES__ ?? {};
 
   type LawRecord = {
     abbrev: string;
@@ -668,6 +710,32 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
         const norms = normCount.toLocaleString("de-DE");
         const unit = this.normUnitLabel(law, normCount);
         return `${obligationPart} in ${norms} ${unit}`;
+      },
+
+      lawExtractionDate(law: LawRecord): string | undefined {
+        const direct = extractionDates[law.abbrev];
+        if (direct) return direct;
+
+        for (const [stem, date] of Object.entries(extractionDates)) {
+          if (obligationNormMatchesLaw(stem, law)) return date;
+        }
+
+        return undefined;
+      },
+
+      lawExtractionDateLabel(law: LawRecord) {
+        const iso = this.lawExtractionDate(law);
+        if (!iso) return "";
+
+        const formatted = new Date(`${iso}T12:00:00`).toLocaleDateString(
+          "de-DE",
+          {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+          },
+        );
+        return `Extrahiert am ${formatted}`;
       },
 
       lawUnanalysedLabel(law: LawRecord) {
