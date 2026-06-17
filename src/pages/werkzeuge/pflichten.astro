@@ -240,13 +240,94 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
       </p>
     </section>
 
-    {/* Step 2: export + preview */}
+    {/* Step 2: related laws */}
+    <section x-show="!loading && !error" x-cloak class="space-y-md">
+      <div class="flex flex-wrap items-end justify-between gap-16">
+        <div>
+          <h2 class="mb-4">2. Angrenzende Gesetze prüfen</h2>
+          <p class="kern-subline py-0">
+            Diese Gesetze stehen in engem Bezug zu Ihrer Auswahl und könnten
+            ebenfalls relevant sein.
+          </p>
+        </div>
+      </div>
+
+      {/* Placeholder before any law is selected */}
+      <p
+        x-show="selectedLaws.length === 0"
+        x-cloak
+        class="text-icon-muted py-0 italic"
+      >
+        Wählen Sie zunächst Gesetze in Schritt 1 aus.
+      </p>
+
+      {/* Related law cards */}
+      <div
+        x-show="relatedLawSuggestions.length > 0"
+        x-cloak
+        class="grid gap-12 sm:grid-cols-2 lg:grid-cols-3"
+        role="group"
+        aria-label="Angrenzende Gesetze"
+      >
+        <template
+          x-for="suggestion in relatedLawSuggestions"
+          :key="suggestion.abbrev"
+        >
+          <label
+            class={lawCard()}
+            x-bind:class="isSelected(suggestion.abbrev) ? 'border-cosmic-blue-base bg-lavender-200 ring-1 ring-cosmic-blue-base' : 'border-lavender-400 bg-white hover:border-cosmic-blue-400'"
+          >
+            <input
+              class="kern-form-check__checkbox mt-2 shrink-0"
+              type="checkbox"
+              :checked="isSelected(suggestion.abbrev)"
+              @change="toggleRelatedLaw(suggestion.abbrev)"
+            />
+            <span class="min-w-0">
+              <span
+                class="block text-base leading-snug font-semibold"
+                x-text="relatedLawLabel(suggestion)"></span>
+              <span
+                class="text-icon-muted mt-4 block text-xs leading-snug"
+                x-text="relatedLawDescription(suggestion)"></span>
+              <span class={analysisBadge()} x-text="suggestion.relationLabel"
+              ></span>
+              <span
+                x-show="relatedIsLawAnalysed(suggestion)"
+                x-cloak
+                class={analysisBadge()}
+                x-text="relatedLawAnalysisLabel(suggestion)"></span>
+              <span
+                x-show="relatedIsLawAnalysed(suggestion) && relatedLawExtractionDateLabel(suggestion)"
+                x-cloak
+                class="text-icon-muted mt-4 block text-xs"
+                x-text="relatedLawExtractionDateLabel(suggestion)"></span>
+              <span
+                x-show="!relatedIsLawAnalysed(suggestion)"
+                x-cloak
+                class="text-icon-muted mt-8 block text-xs italic"
+                x-text="relatedLawUnanalysedLabel(suggestion)"></span>
+            </span>
+          </label>
+        </template>
+      </div>
+
+      <p
+        x-show="selectedLaws.length > 0 && relatedLawSuggestions.length === 0"
+        x-cloak
+        class="text-icon-muted py-0 italic"
+      >
+        Alle angrenzenden Gesetze wurden bereits zur Auswahl hinzugefügt.
+      </p>
+    </section>
+
+    {/* Step 3: export + preview */}
     <section x-show="!loading && !error" x-cloak class="space-y-md">
       <div
         class="bg-lavender-base flex flex-col gap-16 rounded-sm p-20 md:flex-row md:items-center md:justify-between md:p-24"
       >
         <div>
-          <h2 class="mt-0 mb-4">2. Pflichten exportieren</h2>
+          <h2 class="mt-0 mb-4">3. Pflichten exportieren</h2>
           <p class="py-0" x-show="selectedLaws.length === 0">
             Wählen Sie oben mindestens ein Gesetz aus, um Pflichten zu sehen und
             zu exportieren.
@@ -385,12 +466,42 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
 
   type ObligationRow = Record<string, string>;
 
+  type RelatedLawSuggestion = {
+    abbrev: string;
+    displayName: string;
+    relationLabel: string;
+  };
+
+  /** Prototype-only: fixed set of related ("angrenzende") laws always shown once a law is selected. */
+  const FIXED_RELATED_LAWS: RelatedLawSuggestion[] = [
+    {
+      abbrev: "SGB V",
+      displayName: "SGB V",
+      relationLabel: "Gesetzliche Krankenversicherung",
+    },
+    {
+      abbrev: "SGB XI",
+      displayName: "SGB XI",
+      relationLabel: "Soziale Pflegeversicherung",
+    },
+    {
+      abbrev: "GDNG",
+      displayName: "GDNG",
+      relationLabel: "Gesundheitsdatennutzungsgesetz",
+    },
+    {
+      abbrev: "EHDS",
+      displayName: "EHDS",
+      relationLabel: "European Health Data Space (EU)",
+    },
+  ];
+
   const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
   const CSV_URL = `${BASE}/data/obligations/Pflichten_LLM_All.csv`;
   const CSV_FALLBACK_URL = `${BASE}/data/obligations/Pflichten_LLM_HGB.csv`;
   const LAWS_URL = `${BASE}/data/laws.json`;
   const PREVIEW_ROW_LIMIT = 5;
-  const LAW_SEARCH_RESULT_LIMIT = 30;
+  const LAW_SEARCH_RESULT_LIMIT = 15;
 
   const EXPORT_HEADERS_FALLBACK = [
     "norm",
@@ -796,6 +907,59 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
 
       get hasMoreFilteredLaws() {
         return this.matchingLaws.length > LAW_SEARCH_RESULT_LIMIT;
+      },
+
+      get relatedLawSuggestions(): RelatedLawSuggestion[] {
+        if (this.selectedLaws.length === 0) return [];
+        return FIXED_RELATED_LAWS.filter(
+          (s) => !this.selectedLaws.includes(s.abbrev),
+        );
+      },
+
+      relatedLawRecord(
+        suggestion: RelatedLawSuggestion,
+      ): LawRecord | undefined {
+        return this.laws.find((l: LawRecord) => l.abbrev === suggestion.abbrev);
+      },
+
+      relatedLawLabel(suggestion: RelatedLawSuggestion): string {
+        const law = this.relatedLawRecord(suggestion);
+        return law ? this.lawLabel(law) : suggestion.displayName;
+      },
+
+      relatedLawDescription(suggestion: RelatedLawSuggestion): string {
+        const law = this.relatedLawRecord(suggestion);
+        return law ? this.lawDescription(law) : "";
+      },
+
+      relatedIsLawAnalysed(suggestion: RelatedLawSuggestion): boolean {
+        const law = this.relatedLawRecord(suggestion);
+        return law ? this.isLawAnalysed(law) : false;
+      },
+
+      relatedLawAnalysisLabel(suggestion: RelatedLawSuggestion): string {
+        const law = this.relatedLawRecord(suggestion);
+        return law ? this.lawAnalysisLabel(law) : "";
+      },
+
+      relatedLawExtractionDateLabel(suggestion: RelatedLawSuggestion): string {
+        const law = this.relatedLawRecord(suggestion);
+        return law ? this.lawExtractionDateLabel(law) : "";
+      },
+
+      relatedLawUnanalysedLabel(suggestion: RelatedLawSuggestion): string {
+        const law = this.relatedLawRecord(suggestion);
+        return law ? this.lawUnanalysedLabel(law) : suggestion.displayName;
+      },
+
+      toggleRelatedLaw(abbrev: string) {
+        if (this.selectedLaws.includes(abbrev)) {
+          this.selectedLaws = this.selectedLaws.filter(
+            (item: string) => item !== abbrev,
+          );
+        } else {
+          this.selectedLaws = [...this.selectedLaws, abbrev];
+        }
       },
 
       get filteredObligations() {
