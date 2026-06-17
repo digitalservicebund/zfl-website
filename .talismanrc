@@ -105,4 +105,5 @@ allowed_patterns:
   - Keyword
   - fuzzyKeyword
   - aria-keyshortcuts
+  - :key
 version: "1.0"

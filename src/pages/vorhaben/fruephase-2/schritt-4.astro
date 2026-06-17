@@ -1,5 +1,9 @@
 ---
 import FruephaseLayout from "./_FruephaseLayout.astro";
+import KernTable from "../_components/KernTable.astro";
+import KernTableCell from "../_components/KernTableCell.astro";
+import KernTableHeaderCell from "../_components/KernTableHeaderCell.astro";
+import KernTableRow from "../_components/KernTableRow.astro";
 
 export const frontmatter = {
   title: "Wirkziele definieren",
@@ -67,92 +71,64 @@ export const frontmatter = {
     </ol>
   </div>
 
-  <div x-data="dynamicTable">
-    <table class="kern-table">
-      <thead class="kern-table__head">
-        <tr class="kern-table__row">
-          <th class="kern-table__header"></th>
-          <th class="kern-table__header">Wirkziele</th>
-          <th class="kern-table__header">Indikatoren</th>
-          <th class="kern-table__header">Erfolgsschwelle</th>
-          <th class="kern-table__header">Datengrundlage</th>
-        </tr>
-      </thead>
-      <tbody class="kern-table__body" id="table-body">
-        <tr class="kern-table__row">
-          <td class="kern-table__cell">-</td>
-          <td class="kern-table__cell">
+  <div x-data="wirkzielTable">
+    <KernTable
+      addButtonLabel="Wirkziel hinzufügen"
+      columnCount={5}
+      bodyId="table-body"
+    >
+      <Fragment slot="header">
+        <KernTableHeaderCell />
+        <KernTableHeaderCell>Wirkziele</KernTableHeaderCell>
+        <KernTableHeaderCell>Indikatoren</KernTableHeaderCell>
+        <KernTableHeaderCell>Erfolgsschwelle</KernTableHeaderCell>
+        <KernTableHeaderCell>Datengrundlage</KernTableHeaderCell>
+      </Fragment>
+      <Fragment slot="body">
+        <KernTableRow>
+          <KernTableCell>-</KernTableCell>
+          <KernTableCell>
             <b>Beispiel Vollautomatisiertes Fahren:</b>
             Fahrzeugautomatisierungstechnologie kann (rechts-)sicher im deutschen
             Verkehr eingesetzt werden. Ganzes Beispiel anschauen
-          </td>
-          <td class="kern-table__cell"
-            >Versicherer bieten KfZ-Pflichtversicherungen für h/v Fahrzeuge ohne
-            (Risiko-)Aufschläge an.</td
+          </KernTableCell>
+          <KernTableCell>
+            Versicherer bieten KfZ-Pflichtversicherungen für h/v Fahrzeuge ohne
+            (Risiko-)Aufschläge an.
+          </KernTableCell>
+          <KernTableCell>Ja (binär)</KernTableCell>
+          <KernTableCell
+            >Markterkundung/Befragung Versicherungswirtschaft</KernTableCell
           >
-          <td class="kern-table__cell">Ja (binär)</td>
-          <td class="kern-table__cell"
-            >Markterkundung/Befragung Versicherungswirtschaft</td
-          >
-        </tr>
+        </KernTableRow>
+
         <template x-for="(row, index) in rows" :key="index">
-          <tr class="kern-table__row">
-            <td class="kern-table__cell">
+          <KernTableRow>
+            <KernTableCell>
               <button type="button" @click="deleteRow(index)">
                 <span
                   class="kern-icon kern-icon--delete kern-icon--default"
                   aria-hidden="true"></span>
               </button>
-            </td>
-            <td class="kern-table__cell" x-html="row.wirkziel"></td>
-            <td class="kern-table__cell" x-text="row.indikatoren"></td>
-            <td class="kern-table__cell" x-text="row.erfolgsschwelle"></td>
-            <td class="kern-table__cell" x-text="row.datengrundlage"></td>
-          </tr>
+            </KernTableCell>
+            <KernTableCell x-text="row.wirkziel" />
+            <KernTableCell x-text="row.indikatoren" />
+            <KernTableCell x-text="row.erfolgsschwelle" />
+            <KernTableCell x-text="row.datengrundlage" />
+          </KernTableRow>
         </template>
-      </tbody>
-      <tfoot class="kern-table__footer">
-        <tr class="kern-table__row">
-          <th scope="col" class="kern-table__header p-0" colspan="5">
-            <button
-              class="flex w-full items-center gap-4 px-16 py-8 text-left"
-              x-on:click="addNewRow"
-            >
-              <span
-                class="kern-icon kern-icon--add kern-icon--default"
-                aria-hidden="true"></span>
-              Wirkziel hinzufügen
-            </button>
-          </th>
-        </tr>
-      </tfoot>
-    </table>
+      </Fragment>
+    </KernTable>
   </div>
 </FruephaseLayout>
 
 <script>
-  import Alpine from "alpinejs";
+  import { registerDynamicTable } from "../_components/kernTableState";
 
-  // 5. Register the component state when Alpine initializes
-  document.addEventListener("alpine:init", () => {
-    Alpine.data("dynamicTable", () => ({
-      rows: [] as Array<{
-        wirkziel: string;
-        indikatoren: string;
-        erfolgsschwelle: string;
-        datengrundlage: string;
-      }>,
-      addNewRow() {
-        this.rows.push({
-          wirkziel: "Neues Wirkziel",
-          indikatoren: "neue Indikatoren",
-          erfolgsschwelle: "neue Erfolgsschwelle",
-          datengrundlage: "neue Datengrundlage",
-        });
-      },
-      deleteRow(index: number) {
-        this.rows.splice(index, 1);
-      },
-    }));
-  });
+  registerDynamicTable("wirkzielTable", () => ({
+    wirkziel: "Neues Wirkziel",
+    indikatoren: "neue Indikatoren",
+    erfolgsschwelle: "neue Erfolgsschwelle",
+    datengrundlage: "neue Datengrundlage",
+  }));
 </script>

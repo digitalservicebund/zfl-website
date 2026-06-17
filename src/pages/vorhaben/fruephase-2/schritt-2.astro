@@ -1,5 +1,9 @@
 ---
 import FruephaseLayout from "./_FruephaseLayout.astro";
+import KernTable from "../_components/KernTable.astro";
+import KernTableHeaderCell from "../_components/KernTableHeaderCell.astro";
+import KernTableRow from "../_components/KernTableRow.astro";
+import KernTableCell from "../_components/KernTableCell.astro";
 
 export const frontmatter = {
   title: "Einbeziehung Perspektiven externer Stakeholder",
@@ -70,5 +74,68 @@ export const frontmatter = {
       <li>Beantworten Sie Ihre Hypothesen.</li>
     </ol>
   </div>
-  <table></table>
+  <div x-data="hypothesenTable">
+    <KernTable addButtonLabel="Hypothese hinzufügen" columnCount={5}>
+      <Fragment slot="caption">Hypothesen Tabelle</Fragment>
+      <Fragment slot="header">
+        <KernTableHeaderCell />
+        <KernTableHeaderCell>Hypothesen</KernTableHeaderCell>
+        <KernTableHeaderCell>Recherchetool + Quelle</KernTableHeaderCell>
+        <KernTableHeaderCell>Frage</KernTableHeaderCell>
+        <KernTableHeaderCell>Validiert/Falsifiziert</KernTableHeaderCell>
+      </Fragment>
+      <Fragment slot="body">
+        <template x-for="(row, index) in rows" :key="index">
+          <KernTableRow>
+            <KernTableCell>
+              <button type="button" @click="deleteRow(index)">
+                <span
+                  class="kern-icon kern-icon--delete kern-icon--default"
+                  aria-hidden="true"></span>
+              </button>
+            </KernTableCell>
+            <KernTableCell>
+              <textarea
+                class="kern-form-input__input w-full"
+                rows="2"
+                aria-label="Hypothese"
+                x-model="row.hypothesen"></textarea>
+            </KernTableCell>
+            <KernTableCell>
+              <textarea
+                class="kern-form-input__input w-full"
+                rows="2"
+                aria-label="Recherchetool und Quelle"
+                x-model="row.quellen"></textarea>
+            </KernTableCell>
+            <KernTableCell>
+              <textarea
+                class="kern-form-input__input w-full"
+                rows="2"
+                aria-label="Frage"
+                x-model="row.fragen"></textarea>
+            </KernTableCell>
+            <KernTableCell>
+              <input
+                class="kern-form-input__input w-full"
+                type="text"
+                aria-label="Validiert oder falsifiziert"
+                x-model="row.validierung"
+              />
+            </KernTableCell>
+          </KernTableRow>
+        </template>
+      </Fragment>
+    </KernTable>
+  </div>
 </FruephaseLayout>
+<script>
+  import { registerDynamicTable } from "../_components/kernTableState";
+
+  registerDynamicTable("hypothesenTable", () => ({
+    hypothesen: "",
+    quellen: "",
+    fragen: "",
+    validierung: "",
+  }));
+</script>
