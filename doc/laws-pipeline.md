@@ -93,6 +93,12 @@ The static site build (`pnpm build`) then picks up `public/data/*` automatically
   - Resumes safely via `data/laws/cache/extraction_progress.json`.
   - Filter laws with `--norm` (repeatable or comma-separated) and/or `--norms-file` (one abbreviation per line). Multiple laws run **sequentially** in list order; within each law, up to 5 paragraphs are processed concurrently.
   - `--norm` value casing must match the registry (`KWG`, `KAGB`, `32013R0575`, …).
+  - Examples:
+    ```sh
+    pnpm laws:extract-obligations -- --norm BDSG
+    pnpm laws:extract-obligations -- --norm 'SGB 5' --norm 'SGB 11'   # quote values with spaces
+    pnpm laws:extract-obligations -- --norms-file data/laws/import/test_obligations_norms.txt
+    ```
 
 - `pnpm laws:concat-obligations`
   - Runs `scripts/concat_obligations_csv.py`. Merges per-law obligations CSV files into one aggregate, sorted by `(norm, referenz)` via `reference_sort_key`.
@@ -247,27 +253,11 @@ Because this is an evaluation of the approach, a light-weight quality check acco
 
 #### Test corpus
 
-The test corpus (`test_obligations_de.csv`, 26 laws; `test_obligations_eu.csv`, 12 laws) replaces the former `*_relevant` import lists and adds GDNG, SGB V/XI, EHDS, ArbSchG, BioStoffV, and the EU occupational-health directives 89/391/EEC and 2000/54/EC. It is a subset of the full financial corpus, not a copy of it.
+The test corpus (`test_obligations_de.csv`, `test_obligations_eu.csv`) is a subset of the full financial corpus covering a range of DE and EU laws. It is not a copy of the full financial corpus. The authoritative list of which laws to extract is in the norms files under `data/laws/import/` — each file has a comment at the top explaining its purpose and lists one abbreviation per line.
 
-| Law                | `--norm` for extraction | Paragraphs (approx.) | Purpose                                         |
-| ------------------ | ----------------------- | -------------------- | ----------------------------------------------- |
-| GDNG (DE)          | `GDNG`                  | 9                    | Health data legislation (DE)                    |
-| OZG (DE)           | `OZG`                   | 16                   | General legislation (DE)                        |
-| BDSG (DE)          | `BDSG`                  | 86                   | General legislation (DE)                        |
-| DSGVO (EU)         | `32016R0679`            | 99                   | General legislation (EU)                        |
-| EHDS (EU)          | `32025R0327`            | 105                  | Health data legislation (EU)                    |
-| GVG (DE)           | `GVG`                   | 200                  | BMJV / Scholz demo                              |
-| SGB XI (DE)        | `SGB 11`                | 237                  | Health / social insurance (DE)                  |
-| SGB V (DE)         | `SGB 5`                 | 669                  | Health / social insurance (DE)                  |
-| ZPO (DE)           | `ZPO`                   | 1 077                | BMJV / Scholz demo                              |
-| BioStoffV (DE)     | `BioStoffV`             | 25                   | Occupational health / biosafety (DE)            |
-| ArbSchG (DE)       | `ArbSchG`               | 29                   | Occupational health / workplace safety (DE)     |
-| RL 89/391/EEC (EU) | `31989L0391`            | 19                   | Framework Directive on occupational safety (EU) |
-| RL 2000/54/EC (EU) | `32000L0054`            | 23                   | Biological agents at work (EU)                  |
+`--norm` values come from `jurabk` in the parsed XML (DE) or CELEX (EU), not from the GII slug (`bdsg_2018` → `BDSG`, `sgb_5` → `SGB 5`). SGB books use spaced numerals in `jurabk` (`SGB 5`, `SGB 11`), not Roman numerals. Where both `amtabk` and `jurabk` exist, the parser prefers `amtabk` (`biostoffv_2013` → `BioStoffV`). Older EU directives may only be available as legacy EUR-Lex HTML (not ELI XHTML); set `eu_manifestations` to prefer `html` and ensure `prepare_law_corpus` / `build_norm_paragraphs` handle `.html` sources.
 
-`--norm` values come from `jurabk` in the parsed XML (DE) or CELEX (EU), not from the GII slug (`bdsg_2018` → `BDSG`, `sgb_5` → `SGB 5`). SGB books use spaced numerals in `jurabk` (`SGB 5`, `SGB 11`), not Roman numerals. Where both `amtabk` and `jurabk` exist, the parser prefers `amtabk` (`biostoffv_2013` → `BioStoffV`, not `BioStoffV 2013`). Older EU directives may only be available as legacy EUR-Lex HTML (not ELI XHTML); set `eu_manifestations` to prefer `html` and ensure `prepare_law_corpus` / `build_norm_paragraphs` handle `.html` sources.
-
-Prepare the test corpus (steps 1–6, no LLM):
+Prepare the corpus (steps 1–6, no LLM):
 
 ```sh
 pnpm laws:download -- \
@@ -278,60 +268,16 @@ pnpm laws:build-registry -- --eu-index-csv data/laws/import/test_obligations_eu.
 pnpm laws:build-paragraphs
 ```
 
-Pass `--eu-index-csv` so EU test laws (including EHDS) are seeded into the registry.
+Pass `--eu-index-csv` so EU test laws are seeded into the registry.
 
-Then run LLM extraction (long-running; requires Langdock API key via 1Password CLI). Process all evaluation laws in one sequential run:
+Then run LLM extraction (long-running; requires Langdock API key via 1Password CLI):
 
 ```sh
 pnpm laws:extract-obligations -- --norms-file data/laws/import/test_obligations_norms.txt
-```
-
-To extract only the health-corpus additions (skip laws already in `extraction_progress.json`):
-
-```sh
-pnpm laws:extract-obligations -- --norms-file data/laws/import/test_obligations_norms_health.txt
-```
-
-To extract only the Arbeitsschutz additions (EU directives 89/391/EEC and 2000/54/EC; Biostoffverordnung; Arbeitsschutzgesetz):
-
-```sh
 pnpm laws:extract-obligations -- --norms-file data/laws/import/test_obligations_norms_arbeitsschutz.txt
 ```
 
-Prepare the Arbeitsschutz corpus (steps 1–6, no LLM) — run once before the extraction above if these laws are not yet in `norm_paragraphs.jsonl`:
-
-```sh
-pnpm laws:download -- \
-  --de-csv data/laws/import/test_obligations_de.csv \
-  --eu-csv data/laws/import/test_obligations_eu.csv
-pnpm laws:prepare-corpus
-pnpm laws:build-registry -- --eu-index-csv data/laws/import/test_obligations_eu.csv
-pnpm laws:build-paragraphs
-```
-
-Or pass abbreviations directly — **quote values that contain spaces**:
-
-```sh
-pnpm laws:extract-obligations -- --norm 'GDNG,32025R0327,SGB 11,SGB 5'
-```
-
-Or repeat `--norm` per law:
-
-```sh
-pnpm laws:extract-obligations -- --norm GDNG --norm 32025R0327 --norm 'SGB 11' --norm 'SGB 5'
-pnpm laws:extract-obligations -- --norm BioStoffV --norm ArbSchG
-pnpm laws:extract-obligations -- --norm 31989L0391 --norm 32000L0054 --norm BioStoffV --norm ArbSchG
-```
-
-Full evaluation corpus (all laws, quoted where needed):
-
-```sh
-pnpm laws:extract-obligations -- --norm '32016R0679,GDNG,OZG,BDSG,32025R0327,GVG,SGB 11,SGB 5,ZPO'
-```
-
-Single-law runs still work, e.g. `pnpm laws:extract-obligations -- --norm BDSG`.
-
-Each run writes `public/data/obligations/Pflichten_LLM_<norm>.csv` and resumes via `data/laws/cache/extraction_progress.json` after interruption. When all runs finish:
+Each run resumes safely — already-processed paragraphs are skipped via `data/laws/cache/extraction_progress.json`. When all norms files are done:
 
 ```sh
 pnpm laws:concat-obligations
@@ -352,6 +298,7 @@ pnpm laws:publish-ui-data
 - `laws_paths.py`: centralized default paths
 - `pipeline_models.py`: shared Pydantic models (`NormParagraph`, `Obligation`, `ObligationExtraction`, `RegistryEntry`)
 - `reference_sort.py`: natural sort keys for German §/EU Art. legal references (shared by extraction and merge steps)
+- `gii_metadata_utils.py`: shared helpers for jurabk/kurzue extraction from GII law XML (imported by `fetch_gii_metadata.py` and `build_law_registry.py`)
 - `llm_extract_base_ONLY_INSPIRATION.py`: reference scaffolding for custom LLM extraction implementations (do not import)
 - `pflichten_prompt.txt`: system prompt for obligations extraction
 
@@ -372,9 +319,9 @@ pnpm laws:publish-ui-data
 ## Acceptance criteria
 
 1. `pnpm laws:extract-obligations --norm HGB` completes, writes a CSV into `public/data/obligations/`, and resumes cleanly after Ctrl+C via the checkpoint file.
-   Status: ✅ Verified (`[HGB] 401/401 done`, `Extraction completed.`, `Processed paragraphs this run: 401`, `Extracted obligations this run: 619`, progress file `data/laws/cache/extraction_progress_hgb.json`).
+   Status: ✅ Verified (`[HGB] 401/401 done`, `Extraction completed.`, `Processed paragraphs this run: 401`, `Extracted obligations this run: 619`, checkpoint at `data/laws/cache/extraction_progress.json`).
 2. `pnpm laws:concat-obligations` consumes the per-law CSVs without modification and produces a valid `Pflichten_LLM_All.csv`.
-   Status: ⚠️ Not yet re-verified after the column schema change (`normadressaten` → `normadressat_kategorie`, `konfidenz`/`url` removed from CSV).
+   Status: ✅ Verified (merge runs end-to-end; current `Pflichten_LLM_All.csv` is the merged output of all per-law CSVs with the current column schema).
 3. UI page loads, law search works, obligation preview shows, CSV export downloads correctly.
    Status: ✅ Implemented. Not yet verified against a full pipeline run.
 4. No API keys or secrets in frontend code or committed files.
