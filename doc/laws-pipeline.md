@@ -112,6 +112,7 @@ data/laws/
     test_obligations_eu.csv        # Default EU download list (test corpus)
     test_obligations_norms.txt     # Laws to extract (for --norms-file)
     test_obligations_norms_health.txt  # Health-corpus subset only (GDNG, EHDS, SGB V/XI)
+    test_obligations_norms_arbeitsschutz.txt  # Arbeitsschutz corpus (BioStoffV, ArbSchG)
   cache/
     downloads/                     # Raw downloaded DE/EU files + reports
       de/*.zip
@@ -246,21 +247,25 @@ Because this is an evaluation of the approach, a light-weight quality check acco
 
 #### Test corpus
 
-The test corpus (`test_obligations_de.csv`, 24 laws; `test_obligations_eu.csv`, 10 laws) replaces the former `*_relevant` import lists and adds GDNG, SGB V/XI, and EHDS. It is a subset of the full financial corpus, not a copy of it.
+The test corpus (`test_obligations_de.csv`, 26 laws; `test_obligations_eu.csv`, 12 laws) replaces the former `*_relevant` import lists and adds GDNG, SGB V/XI, EHDS, ArbSchG, BioStoffV, and the EU occupational-health directives 89/391/EEC and 2000/54/EC. It is a subset of the full financial corpus, not a copy of it.
 
-| Law         | `--norm` for extraction | Paragraphs (approx.) | Purpose                        |
-| ----------- | ----------------------- | -------------------- | ------------------------------ |
-| GDNG (DE)   | `GDNG`                  | 9                    | Health data legislation (DE)   |
-| OZG (DE)    | `OZG`                   | 16                   | General legislation (DE)       |
-| BDSG (DE)   | `BDSG`                  | 86                   | General legislation (DE)       |
-| DSGVO (EU)  | `32016R0679`            | 99                   | General legislation (EU)       |
-| EHDS (EU)   | `32025R0327`            | 105                  | Health data legislation (EU)   |
-| GVG (DE)    | `GVG`                   | 200                  | BMJV / Scholz demo             |
-| SGB XI (DE) | `SGB 11`                | 237                  | Health / social insurance (DE) |
-| SGB V (DE)  | `SGB 5`                 | 669                  | Health / social insurance (DE) |
-| ZPO (DE)    | `ZPO`                   | 1 077                | BMJV / Scholz demo             |
+| Law                | `--norm` for extraction | Paragraphs (approx.) | Purpose                                         |
+| ------------------ | ----------------------- | -------------------- | ----------------------------------------------- |
+| GDNG (DE)          | `GDNG`                  | 9                    | Health data legislation (DE)                    |
+| OZG (DE)           | `OZG`                   | 16                   | General legislation (DE)                        |
+| BDSG (DE)          | `BDSG`                  | 86                   | General legislation (DE)                        |
+| DSGVO (EU)         | `32016R0679`            | 99                   | General legislation (EU)                        |
+| EHDS (EU)          | `32025R0327`            | 105                  | Health data legislation (EU)                    |
+| GVG (DE)           | `GVG`                   | 200                  | BMJV / Scholz demo                              |
+| SGB XI (DE)        | `SGB 11`                | 237                  | Health / social insurance (DE)                  |
+| SGB V (DE)         | `SGB 5`                 | 669                  | Health / social insurance (DE)                  |
+| ZPO (DE)           | `ZPO`                   | 1 077                | BMJV / Scholz demo                              |
+| BioStoffV (DE)     | `BioStoffV`             | 25                   | Occupational health / biosafety (DE)            |
+| ArbSchG (DE)       | `ArbSchG`               | 29                   | Occupational health / workplace safety (DE)     |
+| RL 89/391/EEC (EU) | `31989L0391`            | 19                   | Framework Directive on occupational safety (EU) |
+| RL 2000/54/EC (EU) | `32000L0054`            | 23                   | Biological agents at work (EU)                  |
 
-`--norm` values come from `jurabk` in the parsed XML (DE) or CELEX (EU), not from the GII slug (`bdsg_2018` → `BDSG`, `sgb_5` → `SGB 5`). SGB books use spaced numerals in `jurabk` (`SGB 5`, `SGB 11`), not Roman numerals.
+`--norm` values come from `jurabk` in the parsed XML (DE) or CELEX (EU), not from the GII slug (`bdsg_2018` → `BDSG`, `sgb_5` → `SGB 5`). SGB books use spaced numerals in `jurabk` (`SGB 5`, `SGB 11`), not Roman numerals. Where both `amtabk` and `jurabk` exist, the parser prefers `amtabk` (`biostoffv_2013` → `BioStoffV`, not `BioStoffV 2013`). Older EU directives may only be available as legacy EUR-Lex HTML (not ELI XHTML); set `eu_manifestations` to prefer `html` and ensure `prepare_law_corpus` / `build_norm_paragraphs` handle `.html` sources.
 
 Prepare the test corpus (steps 1–6, no LLM):
 
@@ -287,6 +292,23 @@ To extract only the health-corpus additions (skip laws already in `extraction_pr
 pnpm laws:extract-obligations -- --norms-file data/laws/import/test_obligations_norms_health.txt
 ```
 
+To extract only the Arbeitsschutz additions (EU directives 89/391/EEC and 2000/54/EC; Biostoffverordnung; Arbeitsschutzgesetz):
+
+```sh
+pnpm laws:extract-obligations -- --norms-file data/laws/import/test_obligations_norms_arbeitsschutz.txt
+```
+
+Prepare the Arbeitsschutz corpus (steps 1–6, no LLM) — run once before the extraction above if these laws are not yet in `norm_paragraphs.jsonl`:
+
+```sh
+pnpm laws:download -- \
+  --de-csv data/laws/import/test_obligations_de.csv \
+  --eu-csv data/laws/import/test_obligations_eu.csv
+pnpm laws:prepare-corpus
+pnpm laws:build-registry -- --eu-index-csv data/laws/import/test_obligations_eu.csv
+pnpm laws:build-paragraphs
+```
+
 Or pass abbreviations directly — **quote values that contain spaces**:
 
 ```sh
@@ -297,6 +319,8 @@ Or repeat `--norm` per law:
 
 ```sh
 pnpm laws:extract-obligations -- --norm GDNG --norm 32025R0327 --norm 'SGB 11' --norm 'SGB 5'
+pnpm laws:extract-obligations -- --norm BioStoffV --norm ArbSchG
+pnpm laws:extract-obligations -- --norm 31989L0391 --norm 32000L0054 --norm BioStoffV --norm ArbSchG
 ```
 
 Full evaluation corpus (all laws, quoted where needed):

@@ -1,0 +1,5 @@
+# Arbeitsschutz corpus — processed sequentially (EU first, then DE)
+31989L0391
+32000L0054
+BioStoffV
+ArbSchG
