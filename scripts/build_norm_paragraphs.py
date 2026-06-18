@@ -97,11 +97,7 @@ def parse_german_file(file_path: Path) -> list[NormParagraph]:
     return rows
 
 
-def parse_eu_file(file_path: Path) -> list[NormParagraph]:
-    html = file_path.read_text(encoding="utf-8", errors="replace")
-    soup = BeautifulSoup(html, "xml")
-    celex = file_path.stem.split(".")[0]
-
+def parse_eu_eli_file(soup: BeautifulSoup, celex: str) -> list[NormParagraph]:
     rows: list[NormParagraph] = []
     for div in soup.find_all("div", class_="eli-subdivision"):
         div_id = div.get("id", "")
@@ -126,6 +122,83 @@ def parse_eu_file(file_path: Path) -> list[NormParagraph]:
     return rows
 
 
+EU_ARTICLE_HEADING_RE = re.compile(r"^Artikel\s+(\d+[a-z]?)\s*$", re.I)
+
+
+EU_OPERATIVE_START_RE = re.compile(
+    r"HA(?:T|BEN) FOLGENDE (?:RICHTLINIE|VERORDNUNG) ERLASSEN",
+    re.I,
+)
+
+
+def parse_eu_legacy_html_file(soup: BeautifulSoup, celex: str) -> list[NormParagraph]:
+    content_root = soup.find("txt_te") or soup.find(id="TexteOnly")
+    if content_root is None:
+        return []
+
+    rows: list[NormParagraph] = []
+    current_art: str | None = None
+    current_parts: list[str] = []
+    operative_started = False
+
+    def flush_article() -> None:
+        nonlocal current_art, current_parts
+        if current_art is None or not current_parts:
+            current_art = None
+            current_parts = []
+            return
+
+        text = strip_text(" ".join(current_parts))
+        if text:
+            div_id = f"art_{current_art}"
+            rows.append(
+                NormParagraph(
+                    law_abbrev=celex,
+                    source="eurlex",
+                    reference=f"Art. {current_art}",
+                    text=text,
+                    url=f"https://eur-lex.europa.eu/legal-content/DE/TXT/HTML/?uri=CELEX:{celex}#{div_id}",
+                    paragraph_id=f"eu:{celex}:{div_id}",
+                )
+            )
+        current_art = None
+        current_parts = []
+
+    for paragraph in content_root.find_all("p"):
+        text = strip_text(paragraph.get_text(" ", strip=True))
+        if not text:
+            continue
+
+        if EU_OPERATIVE_START_RE.search(text):
+            operative_started = True
+            continue
+
+        match = EU_ARTICLE_HEADING_RE.match(text)
+        if match and operative_started:
+            flush_article()
+            current_art = match.group(1)
+            continue
+
+        if current_art is not None:
+            current_parts.append(text)
+
+    flush_article()
+    return rows
+
+
+def parse_eu_file(file_path: Path) -> list[NormParagraph]:
+    html = file_path.read_text(encoding="utf-8", errors="replace")
+    celex = file_path.stem.split(".")[0]
+    parser = "xml" if file_path.suffix.lower() == ".xhtml" else "html.parser"
+    soup = BeautifulSoup(html, parser)
+
+    rows = parse_eu_eli_file(soup, celex)
+    if rows:
+        return rows
+
+    return parse_eu_legacy_html_file(soup, celex)
+
+
 def main() -> None:
     args = parse_args()
     de_dir = Path(args.de_dir)
@@ -137,8 +210,8 @@ def main() -> None:
     for xml_file in sorted(de_dir.glob("*.xml")):
         rows.extend(parse_german_file(xml_file))
 
-    for xhtml_file in sorted(eu_dir.glob("*.xhtml")):
-        rows.extend(parse_eu_file(xhtml_file))
+    for eu_file in sorted(set(eu_dir.glob("*.xhtml")) | set(eu_dir.glob("*.html"))):
+        rows.extend(parse_eu_file(eu_file))
 
     out_file.parent.mkdir(parents=True, exist_ok=True)
     with out_file.open("w", encoding="utf-8") as f:

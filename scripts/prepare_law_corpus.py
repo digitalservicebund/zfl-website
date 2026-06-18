@@ -47,13 +47,14 @@ def main() -> None:
         de_count += 1
 
     eu_count = 0
-    for xhtml_file in sorted(eu_source_dir.glob("*.xhtml")):
-        shutil.copy2(xhtml_file, eu_out_dir / xhtml_file.name)
-        eu_count += 1
+    for pattern in ("*.xhtml", "*.html"):
+        for source_file in sorted(eu_source_dir.glob(pattern)):
+            shutil.copy2(source_file, eu_out_dir / source_file.name)
+            eu_count += 1
 
     print("Prepared corpus folders.")
     print(f"DE XML files: {de_count} -> {de_out_dir}")
-    print(f"EU XHTML files: {eu_count} -> {eu_out_dir}")
+    print(f"EU HTML/XHTML files: {eu_count} -> {eu_out_dir}")
 
 
 if __name__ == "__main__":
