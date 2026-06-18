@@ -94,6 +94,14 @@ fileignoreconfig:
     ignore_detectors: [filecontent]
   - filename: public/data/obligations/Pflichten_LLM_32025R0327.csv
     ignore_detectors: [filecontent]
+  - filename: public/data/obligations/Pflichten_LLM_31989L0391.csv
+    ignore_detectors: [filecontent]
+  - filename: public/data/obligations/Pflichten_LLM_32000L0054.csv
+    ignore_detectors: [filecontent]
+  - filename: public/data/obligations/Pflichten_LLM_ArbSchG.csv
+    ignore_detectors: [filecontent]
+  - filename: public/data/obligations/Pflichten_LLM_BioStoffV.csv
+    ignore_detectors: [filecontent]
   - filename: scripts/extract_obligations.py
     checksum: 548b63b1594e9607ec95b0a2ac4bf9a749f801c9ea494adb7f4d30989b07394e
   - filename: scripts/fetch_gii_metadata.py
