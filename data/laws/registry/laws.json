@@ -1,5 +1,31 @@
 [
   {
+    "abbrev": "31989L0391",
+    "source": "eurlex",
+    "name": "CELEX 31989L0391",
+    "jurabk": null,
+    "kurzue": null,
+    "ausfertigung_datum": null,
+    "norm_count": null,
+    "celex": "31989L0391",
+    "gii_slug": null,
+    "gii_xml_zip_url": null,
+    "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/HTML/?uri=CELEX:31989L0391"
+  },
+  {
+    "abbrev": "32000L0054",
+    "source": "eurlex",
+    "name": "CELEX 32000L0054",
+    "jurabk": null,
+    "kurzue": null,
+    "ausfertigung_datum": null,
+    "norm_count": null,
+    "celex": "32000L0054",
+    "gii_slug": null,
+    "gii_xml_zip_url": null,
+    "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/HTML/?uri=CELEX:32000L0054"
+  },
+  {
     "abbrev": "32009L0065",
     "source": "eurlex",
     "name": "RICHTLINIE 2009/65/EG DES EUROPÄISCHEN PARLAMENTS UND DES RATES",
@@ -3347,7 +3373,7 @@
     "jurabk": "ArbSchG",
     "kurzue": "Arbeitsschutzgesetz",
     "ausfertigung_datum": "1996-08-07",
-    "norm_count": null,
+    "norm_count": 36,
     "celex": null,
     "gii_slug": "arbschg",
     "gii_xml_zip_url": "https://www.gesetze-im-internet.de/arbschg/xml.zip",
@@ -12070,7 +12096,7 @@
     "jurabk": "BioStoffV 2013",
     "kurzue": "Biostoffverordnung",
     "ausfertigung_datum": "2013-07-15",
-    "norm_count": null,
+    "norm_count": 33,
     "celex": null,
     "gii_slug": "biostoffv_2013",
     "gii_xml_zip_url": "https://www.gesetze-im-internet.de/biostoffv_2013/xml.zip",
@@ -32849,19 +32875,6 @@
     "gii_slug": "hafenschausbv",
     "gii_xml_zip_url": "https://www.gesetze-im-internet.de/hafenschausbv/xml.zip",
     "url": "https://www.gesetze-im-internet.de/hafenschausbv/index.html"
-  },
-  {
-    "abbrev": "haftentschbefstoffesee_bk",
-    "source": "gesetze-im-internet",
-    "name": "Internationales Übereinkommen von 2010 über die Haftung und Entschädigung für Schäden bei der Beförderung schädlicher und gefährlicher Stoffe auf See",
-    "jurabk": "HaftEntschBefStoffeSeeÜbk",
-    "kurzue": "HNS-Übereinkommen von 2010",
-    "ausfertigung_datum": "1996-05-03",
-    "norm_count": null,
-    "celex": null,
-    "gii_slug": "haftentschbefstoffesee_bk",
-    "gii_xml_zip_url": "https://www.gesetze-im-internet.de/haftentschbefstoffesee_bk/xml.zip",
-    "url": "https://www.gesetze-im-internet.de/haftentschbefstoffesee_bk/index.html"
   },
   {
     "abbrev": "haftpflg",
@@ -53742,19 +53755,6 @@
     "url": "https://www.gesetze-im-internet.de/pcbabfallv/index.html"
   },
   {
-    "abbrev": "pctao",
-    "source": "gesetze-im-internet",
-    "name": "Ausführungsordnung zum Vertrag über die internationale Zusammenarbeit auf dem Gebiet des Patentwesens",
-    "jurabk": "PCTAO",
-    "kurzue": null,
-    "ausfertigung_datum": "1970-06-19",
-    "norm_count": null,
-    "celex": null,
-    "gii_slug": "pctao",
-    "gii_xml_zip_url": "https://www.gesetze-im-internet.de/pctao/xml.zip",
-    "url": "https://www.gesetze-im-internet.de/pctao/index.html"
-  },
-  {
     "abbrev": "pehrlinstzustv",
     "source": "gesetze-im-internet",
     "name": "Verordnung zur Änderung der Zuständigkeit des Paul-Ehrlich-Instituts",
@@ -61553,19 +61553,6 @@
     "gii_slug": "seefischgbu_g_bertrv",
     "gii_xml_zip_url": "https://www.gesetze-im-internet.de/seefischgbu_g_bertrv/xml.zip",
     "url": "https://www.gesetze-im-internet.de/seefischgbu_g_bertrv/index.html"
-  },
-  {
-    "abbrev": "seefischvtrg_1976",
-    "source": "gesetze-im-internet",
-    "name": "Gesetz zu dem Übereinkommen vom 23. Oktober 1969 zur Erhaltung der lebenden Schätze des Südostatlantiks, zu dem Protokoll vom 21. Januar 1972 zur Änderung des Übereinkommens vom 20. Dezember 1962 über den Schutz des Lachsbestandes in der Ostsee, zur Konvention vom 13. September 1973 über die Fischerei und den Schutz der lebenden Ressourcen in der Ostsee und den Belten sowie zur Änderung des Seefischerei-Vertragsgesetzes 1971",
-    "jurabk": "SeeFischVtrG 1976",
-    "kurzue": "Seefischerei-Vertragsgesetz 1976",
-    "ausfertigung_datum": "1976-09-10",
-    "norm_count": null,
-    "celex": null,
-    "gii_slug": "seefischvtrg_1976",
-    "gii_xml_zip_url": "https://www.gesetze-im-internet.de/seefischvtrg_1976/xml.zip",
-    "url": "https://www.gesetze-im-internet.de/seefischvtrg_1976/index.html"
   },
   {
     "abbrev": "seefiv",
