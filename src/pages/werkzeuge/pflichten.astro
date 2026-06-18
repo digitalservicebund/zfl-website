@@ -472,30 +472,6 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
     relationLabel: string;
   };
 
-  /** Prototype-only: fixed set of related ("angrenzende") laws always shown once a law is selected. */
-  const FIXED_RELATED_LAWS: RelatedLawSuggestion[] = [
-    {
-      abbrev: "SGB V",
-      displayName: "SGB V",
-      relationLabel: "Gesetzliche Krankenversicherung",
-    },
-    {
-      abbrev: "SGB XI",
-      displayName: "SGB XI",
-      relationLabel: "Soziale Pflegeversicherung",
-    },
-    {
-      abbrev: "GDNG",
-      displayName: "GDNG",
-      relationLabel: "Gesundheitsdatennutzungsgesetz",
-    },
-    {
-      abbrev: "EHDS",
-      displayName: "EHDS",
-      relationLabel: "European Health Data Space (EU)",
-    },
-  ];
-
   const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
   const CSV_URL = `${BASE}/data/obligations/Pflichten_LLM_All.csv`;
   const CSV_FALLBACK_URL = `${BASE}/data/obligations/Pflichten_LLM_HGB.csv`;
@@ -556,6 +532,38 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
       ? `Richtlinie ${year}/${num}/${treaty}`
       : `Verordnung (${treaty}) Nr.\u00a0${year}/${num}`;
   };
+
+  /** Arbeitsschutz test corpus: each member suggests the other three as angrenzende Gesetze. */
+  const ARBEITSSCHUTZ_RELATED_LAW_ABBREVS = [
+    "31989L0391",
+    "32000L0054",
+    "biostoffv_2013",
+    "arbschg",
+  ] as const;
+
+  const ARBEITSSCHUTZ_RELATED_LAW_LABELS: Record<
+    (typeof ARBEITSSCHUTZ_RELATED_LAW_ABBREVS)[number],
+    string
+  > = {
+    "31989L0391": decodeCelex("31989L0391"),
+    "32000L0054": decodeCelex("32000L0054"),
+    biostoffv_2013: "BioStoffV",
+    arbschg: "ArbSchG",
+  };
+
+  const isArbeitsschutzRelatedLaw = (abbrev: string) =>
+    (ARBEITSSCHUTZ_RELATED_LAW_ABBREVS as readonly string[]).includes(abbrev);
+
+  const arbeitsschutzRelatedLawSuggestions = (
+    selectedLaws: string[],
+  ): RelatedLawSuggestion[] =>
+    ARBEITSSCHUTZ_RELATED_LAW_ABBREVS.filter(
+      (abbrev) => !selectedLaws.includes(abbrev),
+    ).map((abbrev) => ({
+      abbrev,
+      displayName: ARBEITSSCHUTZ_RELATED_LAW_LABELS[abbrev],
+      relationLabel: "Arbeitsschutz-Korpus",
+    }));
 
   const formatEuLongTitle = (title: string) => {
     const trimmed = title.trim();
@@ -911,9 +919,8 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
 
       get relatedLawSuggestions(): RelatedLawSuggestion[] {
         if (this.selectedLaws.length === 0) return [];
-        return FIXED_RELATED_LAWS.filter(
-          (s) => !this.selectedLaws.includes(s.abbrev),
-        );
+        if (!this.selectedLaws.some(isArbeitsschutzRelatedLaw)) return [];
+        return arbeitsschutzRelatedLawSuggestions(this.selectedLaws);
       },
 
       relatedLawRecord(
