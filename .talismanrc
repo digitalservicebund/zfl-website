@@ -106,4 +106,5 @@ allowed_patterns:
   - fuzzyKeyword
   - aria-keyshortcuts
   - :key
+  - storageKey
 version: "1.0"

@@ -1,5 +1,9 @@
 ---
 import FruephaseLayout from "./_FruephaseLayout.astro";
+import KernTable from "../_components/KernTable.astro";
+import KernTableCell from "../_components/KernTableCell.astro";
+import KernTableHeaderCell from "../_components/KernTableHeaderCell.astro";
+import KernTableRow from "../_components/KernTableRow.astro";
 
 export const frontmatter = {
   title: "Entwicklung von Handlungsalternativen",
@@ -55,4 +59,129 @@ export const frontmatter = {
       </li>
     </ol>
   </div>
+
+  <div
+    x-data="handlungsAlternativenTable"
+    class="relative left-1/2 w-[calc(100vw-32px)] max-w-7xl -translate-x-1/2"
+  >
+    <KernTable columnCount={4}>
+      <Fragment slot="caption">Handlungsalternativen Tabelle</Fragment>
+      <Fragment slot="header">
+        <KernTableHeaderCell />
+        <KernTableHeaderCell>Wirkziele</KernTableHeaderCell>
+        <KernTableHeaderCell>Indikatoren</KernTableHeaderCell>
+        <KernTableHeaderCell>Status Quo</KernTableHeaderCell>
+      </Fragment>
+      <Fragment slot="body">
+        <KernTableRow>
+          <KernTableCell>-</KernTableCell>
+          <KernTableCell>
+            <b>Beispiel Vollautomatisiertes Fahren:</b>
+            Fahrzeugautomatisierungstechnologie kann (rechts-)sicher im deutschen
+            Verkehr eingesetzt werden.
+          </KernTableCell>
+          <KernTableCell>
+            Versicherer bieten KfZ-Pflichtversicherungen für h/v Fahrzeuge ohne
+            (Risiko-)Aufschläge an.
+          </KernTableCell>
+          <KernTableCell />
+        </KernTableRow>
+
+        <template x-for="(row, index) in rows" :key="index">
+          <KernTableRow>
+            <KernTableCell>
+              <!-- <button type="button" @click="deleteRow(index)">
+                <span
+                  class="kern-icon kern-icon--delete kern-icon--default"
+                  aria-hidden="true"></span>
+              </button> -->
+            </KernTableCell>
+            <KernTableCell>
+              <p x-text="row.wirkziel"></p>
+            </KernTableCell>
+            <KernTableCell>
+              <p x-text="row.indikatoren"></p>
+            </KernTableCell>
+            <KernTableCell>
+              <div class="kern-form-input">
+                <input
+                  class="kern-form-input__input w-full"
+                  :id="`status-quo-${index}`"
+                  :name="`status-quo-${index}`"
+                  type="text"
+                  aria-label="Status Quo"
+                  x-model="row.statusQuo"
+                />
+              </div>
+            </KernTableCell>
+          </KernTableRow>
+        </template>
+      </Fragment>
+    </KernTable>
+  </div>
 </FruephaseLayout>
+
+<script>
+  import Alpine from "alpinejs";
+  import { registerDynamicTable } from "../_components/kernTableState";
+
+  type HandlungsAlternativenRow = {
+    wirkziel: string;
+    indikatoren: string;
+    statusQuo: string;
+  };
+
+  type Wirkziele = {
+    wirkziel: string;
+    indikatoren: string;
+    erfolgsschwelle: string;
+    datengrundlage: string;
+  };
+
+  const getInitialRowsFromWirkzielStorage = (): HandlungsAlternativenRow[] => {
+    try {
+      const raw = localStorage.getItem("Wirkziele");
+      if (!raw) {
+        return [{ wirkziel: "", indikatoren: "", statusQuo: "" }];
+      }
+
+      const parsed: Wirkziele[] = JSON.parse(raw);
+      const mappedRows = parsed.map((row) => ({
+        wirkziel: row.wirkziel,
+        indikatoren: row.indikatoren,
+        statusQuo: "",
+      }));
+      return mappedRows;
+    } catch {
+      return [{ wirkziel: "", indikatoren: "", statusQuo: "" }];
+    }
+  };
+
+  registerDynamicTable(
+    "handlungsAlternativenTable",
+    () => ({
+      wirkziel: "",
+      indikatoren: "",
+      statusQuo: "",
+    }),
+    getInitialRowsFromWirkzielStorage(),
+    "handlungsAlternativen",
+  );
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document
+      .querySelectorAll<HTMLAnchorElement>("#Weiter, #Zurück")
+      .forEach((link) => {
+        link.addEventListener("click", () => {
+          const el = document.querySelector<HTMLElement>(
+            "[x-data='handlungsAlternativenTable']",
+          );
+          if (el) {
+            (
+              Alpine.$data(el) as { saveToStorage?: () => void }
+            ).saveToStorage?.();
+          }
+        });
+      });
+  });
+</script>
