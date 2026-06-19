@@ -71,7 +71,10 @@ export const frontmatter = {
     </ol>
   </div>
 
-  <div x-data="wirkzielTable">
+  <div
+    x-data="wirkzielTable"
+    class="relative left-1/2 w-[calc(100vw-32px)] max-w-7xl -translate-x-1/2"
+  >
     <KernTable
       addButtonLabel="Wirkziel hinzufügen"
       columnCount={5}
@@ -111,10 +114,54 @@ export const frontmatter = {
                   aria-hidden="true"></span>
               </button>
             </KernTableCell>
-            <KernTableCell x-text="row.wirkziel" />
-            <KernTableCell x-text="row.indikatoren" />
-            <KernTableCell x-text="row.erfolgsschwelle" />
-            <KernTableCell x-text="row.datengrundlage" />
+            <KernTableCell>
+              <div class="kern-form-input">
+                <input
+                  class="kern-form-input__input w-full"
+                  :id="`wirkziel-${index}`"
+                  :name="`wirkziel-${index}`"
+                  type="text"
+                  aria-label="Wirkziel"
+                  x-model="row.wirkziel"
+                />
+              </div>
+            </KernTableCell>
+            <KernTableCell>
+              <div class="kern-form-input">
+                <input
+                  class="kern-form-input__input w-full"
+                  :id="`indikatoren-${index}`"
+                  :name="`indikatoren-${index}`"
+                  type="text"
+                  aria-label="Indikatoren"
+                  x-model="row.indikatoren"
+                />
+              </div>
+            </KernTableCell>
+            <KernTableCell>
+              <div class="kern-form-input">
+                <input
+                  class="kern-form-input__input w-full"
+                  :id="`erfolgsschwelle-${index}`"
+                  :name="`erfolgsschwelle-${index}`"
+                  type="text"
+                  aria-label="Erfolgsschwelle"
+                  x-model="row.erfolgsschwelle"
+                />
+              </div>
+            </KernTableCell>
+            <KernTableCell>
+              <div class="kern-form-input">
+                <input
+                  class="kern-form-input__input w-full"
+                  :id="`datengrundlage-${index}`"
+                  :name="`datengrundlage-${index}`"
+                  type="text"
+                  aria-label="Datengrundlage"
+                  x-model="row.datengrundlage"
+                />
+              </div>
+            </KernTableCell>
           </KernTableRow>
         </template>
       </Fragment>
@@ -126,9 +173,9 @@ export const frontmatter = {
   import { registerDynamicTable } from "../_components/kernTableState";
 
   registerDynamicTable("wirkzielTable", () => ({
-    wirkziel: "Neues Wirkziel",
-    indikatoren: "neue Indikatoren",
-    erfolgsschwelle: "neue Erfolgsschwelle",
-    datengrundlage: "neue Datengrundlage",
+    wirkziel: "",
+    indikatoren: "",
+    erfolgsschwelle: "",
+    datengrundlage: "",
   }));
 </script>
