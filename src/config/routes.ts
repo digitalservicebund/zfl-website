@@ -289,12 +289,12 @@ export const vorhaben_fruephase2_schritt6 = {
 export const vorhaben_fruephase2_schritt7 = {
   key: "vorhaben_fruephase2_schritt7",
   path: "/vorhaben/fruephase-2/schritt-7",
-  title: "Fertigstellung des Wirkkonzepts",
+  title: "Fertigstellung des Wirkkonzepts (Teil der Ministervorlage)",
   parent: vorhaben_fruephase2,
   sitemap: false,
   isStagingOnly: false,
   navOrder: 7,
-  navLabel: "11. Fertigstellung des Wirkkonzepts",
+  navLabel: "11. Fertigstellung des Wirkkonzepts (Teil der Ministervorlage)",
 } as const;
 
 export const werkzeuge = {
