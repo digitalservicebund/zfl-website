@@ -18,17 +18,18 @@ const sidebarState = navigation
       data-depth={initialDepth}
       x-bind:data-depth="currentDepth"
     >
-      <div class="">
+      <div class="overflow-auto">
         <DrilldownNavigation
           navigation={navigation}
           panelIdPrefix="section-sidebar"
         />
-        {Astro.slots.has("extra") && (
-          <div>
-            <slot name="extra" />
-          </div>
-        )}
       </div>
+
+      {Astro.slots.has("extra") && (
+        <div class="sticky">
+          <slot name="extra" />
+        </div>
+      )}
     </nav>
   )
 }
