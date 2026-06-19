@@ -45,14 +45,14 @@ const defaultText = "Ihre Daten werden automatisch im Browser gespeichert";
       }
       {
         prevPath && (
-          <a href={prevPath} class="kern-btn kern-btn--secondary">
+          <a href={prevPath} class="kern-btn kern-btn--secondary" id="Zurück">
             <span class="kern-label">Zurück</span>
           </a>
         )
       }
       {
         nextPath && (
-          <a href={nextPath} class="kern-btn kern-btn--primary">
+          <a href={nextPath} class="kern-btn kern-btn--primary" id="Weiter">
             <span class="kern-label">{nextBtnText}</span>
             <span
               class="kern-icon kern-icon--arrow-forward"

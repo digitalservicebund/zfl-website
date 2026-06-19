@@ -170,12 +170,35 @@ export const frontmatter = {
 </FruephaseLayout>
 
 <script>
+  import Alpine from "alpinejs";
   import { registerDynamicTable } from "../_components/kernTableState";
 
-  registerDynamicTable("wirkzielTable", () => ({
-    wirkziel: "",
-    indikatoren: "",
-    erfolgsschwelle: "",
-    datengrundlage: "",
-  }));
+  registerDynamicTable(
+    "wirkzielTable",
+    () => ({
+      wirkziel: "",
+      indikatoren: "",
+      erfolgsschwelle: "",
+      datengrundlage: "",
+    }),
+    [],
+    "Wirkziele",
+  );
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document
+      .querySelectorAll<HTMLAnchorElement>("#Weiter, #Zurück")
+      .forEach((link) => {
+        link.addEventListener("click", () => {
+          const el = document.querySelector<HTMLElement>(
+            "[x-data='wirkzielTable']",
+          );
+          if (el) {
+            (
+              Alpine.$data(el) as { saveToStorage?: () => void }
+            ).saveToStorage?.();
+          }
+        });
+      });
+  });
 </script>
