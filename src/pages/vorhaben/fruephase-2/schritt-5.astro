@@ -64,13 +64,14 @@ export const frontmatter = {
     x-data="handlungsAlternativenTable"
     class="relative left-1/2 w-[calc(100vw-32px)] max-w-7xl -translate-x-1/2"
   >
-    <KernTable columnCount={4}>
+    <KernTable columnCount={5}>
       <Fragment slot="caption">Handlungsalternativen Tabelle</Fragment>
       <Fragment slot="header">
         <KernTableHeaderCell />
         <KernTableHeaderCell>Wirkziele</KernTableHeaderCell>
         <KernTableHeaderCell>Indikatoren</KernTableHeaderCell>
         <KernTableHeaderCell>Status Quo</KernTableHeaderCell>
+        <KernTableHeaderCell>Handlungsalternativen</KernTableHeaderCell>
       </Fragment>
       <Fragment slot="body">
         <KernTableRow>
@@ -95,6 +96,7 @@ export const frontmatter = {
                   class="kern-icon kern-icon--delete kern-icon--default"
                   aria-hidden="true"></span>
               </button> -->
+              <p>index</p>
             </KernTableCell>
             <KernTableCell>
               <p x-text="row.wirkziel"></p>
@@ -114,6 +116,18 @@ export const frontmatter = {
                 />
               </div>
             </KernTableCell>
+            <KernTableCell>
+              <div class="kern-form-input">
+                <input
+                  class="kern-form-input__input w-full"
+                  :id="`handlungsalternativen-${index}`"
+                  :name="`handlungsalternativen-${index}`"
+                  type="text"
+                  aria-label="Handlungsalternativen"
+                  x-model="row.handlungsalternativen"
+                />
+              </div>
+            </KernTableCell>
           </KernTableRow>
         </template>
       </Fragment>
@@ -125,35 +139,55 @@ export const frontmatter = {
   import Alpine from "alpinejs";
   import { registerDynamicTable } from "../_components/kernTableState";
 
-  type HandlungsAlternativenRow = {
-    wirkziel: string;
-    indikatoren: string;
-    statusQuo: string;
-  };
-
-  type Wirkziele = {
+  type WirkkonzeptRow = {
     wirkziel: string;
     indikatoren: string;
     erfolgsschwelle: string;
     datengrundlage: string;
+    statusQuo: string;
+    handlungsalternativen: string[];
   };
 
-  const getInitialRowsFromWirkzielStorage = (): HandlungsAlternativenRow[] => {
+  const getInitialRowsFromWirkkonzept = (): WirkkonzeptRow[] => {
     try {
-      const raw = localStorage.getItem("Wirkziele");
+      const raw = localStorage.getItem("wirkkonzept");
       if (!raw) {
-        return [{ wirkziel: "", indikatoren: "", statusQuo: "" }];
+        return [
+          {
+            wirkziel: "",
+            indikatoren: "",
+            erfolgsschwelle: "",
+            datengrundlage: "",
+            statusQuo: "",
+            handlungsalternativen: [],
+          },
+        ];
       }
 
-      const parsed: Wirkziele[] = JSON.parse(raw);
-      const mappedRows = parsed.map((row) => ({
-        wirkziel: row.wirkziel,
-        indikatoren: row.indikatoren,
-        statusQuo: "",
-      }));
-      return mappedRows;
+      const parsed: WirkkonzeptRow[] = JSON.parse(raw);
+      return parsed.length > 0
+        ? parsed
+        : [
+            {
+              wirkziel: "",
+              indikatoren: "",
+              erfolgsschwelle: "",
+              datengrundlage: "",
+              statusQuo: "",
+              handlungsalternativen: [],
+            },
+          ];
     } catch {
-      return [{ wirkziel: "", indikatoren: "", statusQuo: "" }];
+      return [
+        {
+          wirkziel: "",
+          indikatoren: "",
+          erfolgsschwelle: "",
+          datengrundlage: "",
+          statusQuo: "",
+          handlungsalternativen: [],
+        },
+      ];
     }
   };
 
@@ -162,10 +196,13 @@ export const frontmatter = {
     () => ({
       wirkziel: "",
       indikatoren: "",
+      erfolgsschwelle: "",
+      datengrundlage: "",
       statusQuo: "",
+      handlungsalternativen: [] as string[],
     }),
-    getInitialRowsFromWirkzielStorage(),
-    "handlungsAlternativen",
+    getInitialRowsFromWirkkonzept(),
+    "wirkkonzept",
   );
 
   document.addEventListener("DOMContentLoaded", () => {
