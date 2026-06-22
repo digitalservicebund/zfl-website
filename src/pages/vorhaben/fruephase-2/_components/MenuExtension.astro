@@ -60,3 +60,17 @@ const progressValue = ((Math.max(pageNumber, 1) - 1) / progressSteps) * 100;
     progress.value = finalProgressValue;
   }
 </script>
+
+<style is:global>
+  #wirkkonzept-progress {
+    accent-color: var(--color-amber-300);
+  }
+
+  #wirkkonzept-progress::-webkit-progress-value {
+    background-color: var(--color-amber-300);
+  }
+
+  #wirkkonzept-progress::-moz-progress-bar {
+    background-color: var(--color-amber-300);
+  }
+</style>
