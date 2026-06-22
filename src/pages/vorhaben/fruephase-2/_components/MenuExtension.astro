@@ -44,7 +44,7 @@ const progressValue = ((Math.max(pageNumber, 1) - 1) / progressSteps) * 100;
   </div>
 </div>
 
-<script define:vars={{ progressValue }}>
+<script is:inline define:vars={{ progressValue }}>
   const progress = document.querySelector("#wirkkonzept-progress");
   if (progress) {
     const storageKey = "wirkkonzept:progress-value";

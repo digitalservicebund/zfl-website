@@ -86,17 +86,13 @@ export const frontmatter = {
             (Risiko-)Aufschläge an.
           </KernTableCell>
           <KernTableCell />
+          <KernTableCell />
         </KernTableRow>
 
         <template x-for="(row, index) in rows" :key="index">
           <KernTableRow>
             <KernTableCell>
-              <!-- <button type="button" @click="deleteRow(index)">
-                <span
-                  class="kern-icon kern-icon--delete kern-icon--default"
-                  aria-hidden="true"></span>
-              </button> -->
-              <p>index</p>
+              <p x-text="index + 1"></p>
             </KernTableCell>
             <KernTableCell>
               <p x-text="row.wirkziel"></p>
@@ -148,46 +144,40 @@ export const frontmatter = {
     handlungsalternativen: string[];
   };
 
+  const REQUIRED_WIRKZIELE = [
+    "Digitaltauglichkeit",
+    "Vollzugstauglichkeit",
+    "Praxistauglichkeit",
+    "Bürgerfreundlichkeit",
+  ];
+
+  const createDefaultRow = (wirkziel: string): WirkkonzeptRow => ({
+    wirkziel,
+    indikatoren: "",
+    erfolgsschwelle: "",
+    datengrundlage: "",
+    statusQuo: "",
+    handlungsalternativen: [],
+  });
+
   const getInitialRowsFromWirkkonzept = (): WirkkonzeptRow[] => {
+    const defaultRows = REQUIRED_WIRKZIELE.map((wirkziel) =>
+      createDefaultRow(wirkziel),
+    );
+
     try {
       const raw = localStorage.getItem("wirkkonzept");
       if (!raw) {
-        return [
-          {
-            wirkziel: "",
-            indikatoren: "",
-            erfolgsschwelle: "",
-            datengrundlage: "",
-            statusQuo: "",
-            handlungsalternativen: [],
-          },
-        ];
+        return defaultRows;
       }
 
       const parsed: WirkkonzeptRow[] = JSON.parse(raw);
-      return parsed.length > 0
-        ? parsed
-        : [
-            {
-              wirkziel: "",
-              indikatoren: "",
-              erfolgsschwelle: "",
-              datengrundlage: "",
-              statusQuo: "",
-              handlungsalternativen: [],
-            },
-          ];
+      const wirkzielRows = parsed.filter(
+        (row) => row.wirkziel.trim().length > 0,
+      );
+      return [...wirkzielRows, ...defaultRows];
     } catch {
-      return [
-        {
-          wirkziel: "",
-          indikatoren: "",
-          erfolgsschwelle: "",
-          datengrundlage: "",
-          statusQuo: "",
-          handlungsalternativen: [],
-        },
-      ];
+      return defaultRows;
     }
   };
 
@@ -202,7 +192,6 @@ export const frontmatter = {
       handlungsalternativen: [] as string[],
     }),
     getInitialRowsFromWirkkonzept(),
-    "wirkkonzept",
   );
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -214,9 +203,10 @@ export const frontmatter = {
             "[x-data='handlungsAlternativenTable']",
           );
           if (el) {
-            (
-              Alpine.$data(el) as { saveToStorage?: () => void }
-            ).saveToStorage?.();
+            const state = Alpine.$data(el) as { rows?: WirkkonzeptRow[] };
+            if (Array.isArray(state.rows)) {
+              localStorage.setItem("wirkkonzept", JSON.stringify(state.rows));
+            }
           }
         });
       });
