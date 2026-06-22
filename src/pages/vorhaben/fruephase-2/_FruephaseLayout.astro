@@ -28,7 +28,11 @@ const nextPath = stepRoutes.find((r) => r.navOrder > pageNumber)?.path;
   totalPages={stepRoutes.length}
   isWide={isWide}
 >
-  <MenuExtension slot="section-sidebar-extra" />
+  <MenuExtension
+    slot="section-sidebar-extra"
+    pageNumber={pageNumber}
+    totalPages={stepRoutes.length}
+  />
   <slot />
   {
     Astro.slots.has("button-bar") && (

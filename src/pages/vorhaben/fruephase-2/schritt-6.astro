@@ -2,11 +2,13 @@
 import FruephaseLayout from "./_FruephaseLayout.astro";
 
 export const frontmatter = {
-  title: "Vertestung und Auswahl einer Handlungsalternative",
-  navLabel: "10. Vertestung und Auswahl einer Handlungsalternative",
+  title: "10. Handlungsalternative testen",
+  navLabel: "10. Handlungsalternative testen",
   navOrder: 6,
   sitemap: false,
 };
 ---
 
-<FruephaseLayout title={frontmatter.title} pageNumber={frontmatter.navOrder} />
+<FruephaseLayout title={frontmatter.title} pageNumber={frontmatter.navOrder}>
+  <h2>{frontmatter.title}</h2>
+</FruephaseLayout>

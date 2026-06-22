@@ -223,78 +223,78 @@ export const vorhaben_fruephase2 = {
 export const vorhaben_fruephase2_schritt1 = {
   key: "vorhaben_fruephase2_schritt1",
   path: "/vorhaben/fruephase-2/schritt-1",
-  title: "Problem- und Lebenslagenanalyse",
+  title: "5. Problem- und Lebenslagen analysieren",
   parent: vorhaben_fruephase2,
   sitemap: false,
   isStagingOnly: false,
   navOrder: 1,
-  navLabel: "5. Problem- und Lebenslagenanalyse",
+  navLabel: "5. Problem analysieren",
 } as const;
 
 export const vorhaben_fruephase2_schritt2 = {
   key: "vorhaben_fruephase2_schritt2",
   path: "/vorhaben/fruephase-2/schritt-2",
-  title: "Einbeziehung Perspektiven externer Stakeholder",
+  title: "6. Externe Stakeholderperspektiven einbeziehen",
   parent: vorhaben_fruephase2,
   sitemap: false,
   isStagingOnly: false,
   navOrder: 2,
-  navLabel: "6. Einbeziehung Perspektiven externer Stakeholder",
+  navLabel: "6. Externe Stakeholder einbeziehen",
 } as const;
 
 export const vorhaben_fruephase2_schritt3 = {
   key: "vorhaben_fruephase2_schritt3",
   path: "/vorhaben/fruephase-2/schritt-3",
-  title: "Problembeschreibung",
+  title: "7. Problem beschreiben",
   parent: vorhaben_fruephase2,
   sitemap: false,
   isStagingOnly: false,
   navOrder: 3,
-  navLabel: "7. Problembeschreibung",
+  navLabel: "7. Problem beschreiben",
 } as const;
 
 export const vorhaben_fruephase2_schritt4 = {
   key: "vorhaben_fruephase2_schritt4",
   path: "/vorhaben/fruephase-2/schritt-4",
-  title: "Wirkziele definieren",
+  title: "8. Wirkziele definieren",
   parent: vorhaben_fruephase2,
   sitemap: false,
   isStagingOnly: false,
   navOrder: 4,
-  navLabel: "8. Wirkziele",
+  navLabel: "8. Wirkziele definieren",
 } as const;
 
 export const vorhaben_fruephase2_schritt5 = {
   key: "vorhaben_fruephase2_schritt5",
   path: "/vorhaben/fruephase-2/schritt-5",
-  title: "Entwicklung von Handlungsalternativen",
+  title: "9. Handlungsalternativen entwickeln",
   parent: vorhaben_fruephase2,
   sitemap: false,
   isStagingOnly: false,
   navOrder: 5,
-  navLabel: "9. Entwicklung von Handlungsalternativen",
+  navLabel: "9. Handlungsalternativen entwickeln",
 } as const;
 
 export const vorhaben_fruephase2_schritt6 = {
   key: "vorhaben_fruephase2_schritt6",
   path: "/vorhaben/fruephase-2/schritt-6",
-  title: "Vertestung und Auswahl einer Handlungsalternative",
+  title: "10. Handlungsalternative testen",
   parent: vorhaben_fruephase2,
   sitemap: false,
   isStagingOnly: false,
   navOrder: 6,
-  navLabel: "10. Vertestung und Auswahl einer Handlungsalternative",
+  navLabel: "10. Handlungsalternative testen",
 } as const;
 
 export const vorhaben_fruephase2_schritt7 = {
   key: "vorhaben_fruephase2_schritt7",
   path: "/vorhaben/fruephase-2/schritt-7",
-  title: "Fertigstellung des Wirkkonzepts (Teil der Ministervorlage)",
+  title: "11. Wirkkonzept fertigstellen (Teil der Ministervorlage)",
   parent: vorhaben_fruephase2,
   sitemap: false,
   isStagingOnly: false,
   navOrder: 7,
-  navLabel: "11. Fertigstellung des Wirkkonzepts (Teil der Ministervorlage)",
+  navLabel: "11. Wirkkonzept fertigstellen",
 } as const;
 
 export const werkzeuge = {
