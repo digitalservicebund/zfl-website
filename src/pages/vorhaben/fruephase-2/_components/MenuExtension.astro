@@ -1,3 +1,19 @@
+---
+type Props = {
+  pageNumber: number;
+  totalPages: number;
+};
+
+const { pageNumber, totalPages } = Astro.props;
+const progressSteps = Math.max(totalPages - 1, 1);
+const progressValue = ((Math.max(pageNumber, 1) - 1) / progressSteps) * 100;
+---
+
+<div class="kern-progress p-24">
+  <p class="mb-0 text-sm">Wirkkonzept (Teil der Leitungsvorlage)</p>
+  <progress id="wirkkonzept-progress" value={progressValue} max="100"
+  ></progress>
+</div>
 <hr class="kern-divider" aria-hidden="true" />
 <div class="mx-16 mb-24 rounded-sm px-12 py-12" data-pagefind-ignore>
   <p><b>Bisherige Ergebnisse</b></p>
@@ -27,3 +43,20 @@
     </a>
   </div>
 </div>
+
+<script define:vars={{ progressValue }}>
+  const progress = document.querySelector("#wirkkonzept-progress");
+  if (progress) {
+    const storageKey = "wirkkonzept:progress-value";
+    const storedProgressValue = Number.parseFloat(
+      sessionStorage.getItem(storageKey) ?? "0",
+    );
+    const safeStoredProgressValue = Number.isFinite(storedProgressValue)
+      ? storedProgressValue
+      : 0;
+    const finalProgressValue = Math.max(safeStoredProgressValue, progressValue);
+
+    sessionStorage.setItem(storageKey, String(finalProgressValue));
+    progress.value = finalProgressValue;
+  }
+</script>
