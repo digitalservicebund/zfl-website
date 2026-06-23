@@ -79,6 +79,10 @@ fileignoreconfig:
   - filename: src/pages/vorhaben/fruephase-2/schritt-4.astro
     allowed_patterns:
       - :key
+  - filename: src/pages/vorhaben/fruephase-2/schritt-5.astro
+    allowed_patterns:
+      - normalizeWirkzielKey
+      - key
 scopeconfig:
   - scope: node
 allowed_patterns:
