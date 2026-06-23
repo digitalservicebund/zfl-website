@@ -168,21 +168,24 @@ def celex_from_row(row: dict[str, str]) -> str:
     regulation_likely = "verordnung" in kind or re.search(r"\bvo\b", source, re.I)
     directive_likely = "richtlinie" in kind or re.search(r"\brl\b", source, re.I)
 
-    nr_pattern = re.search(r"(\d{1,4})\s*/\s*(\d{4})", source)
-    if nr_pattern and regulation_likely:
-        number = nr_pattern.group(1).zfill(4)
-        year = nr_pattern.group(2)
+    match = re.search(r"(\d{1,4})\s*/\s*(\d{1,4})", source)
+    if not match or not (regulation_likely or directive_likely):
+        return ""
+
+    left_raw, right_raw = match.group(1), match.group(2)
+    left, right = int(left_raw), int(right_raw)
+
+    if 1900 <= left <= 2100:
+        year, number = left_raw, right_raw.zfill(4)
+    elif 1900 <= right <= 2100:
+        number, year = left_raw.zfill(4), right_raw
+    else:
+        return ""
+
+    if regulation_likely:
         return f"3{year}R{number}"
-
-    year_first = re.search(r"(\d{4})\s*/\s*(\d{1,4})", source)
-    if year_first:
-        year = year_first.group(1)
-        number = year_first.group(2).zfill(4)
-        if regulation_likely:
-            return f"3{year}R{number}"
-        if directive_likely:
-            return f"3{year}L{number}"
-
+    if directive_likely:
+        return f"3{year}L{number}"
     return ""
 
 
