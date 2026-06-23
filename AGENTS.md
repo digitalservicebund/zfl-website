@@ -23,6 +23,7 @@ pnpm laws:build-registry                   # Python pipeline: build laws registr
 pnpm laws:validate-registry                # Python pipeline: validate registry
 pnpm laws:build-paragraphs                 # Python pipeline: build normalized paragraph JSONL
 pnpm laws:concat-obligations               # Python pipeline: merge per-law obligations CSVs
+pnpm laws:build-relations                  # Python pipeline: build related-law mappings for Pflichten UI
 pnpm laws:publish-ui-data                  # Python pipeline: publish laws.json to static UI path
 ```
 

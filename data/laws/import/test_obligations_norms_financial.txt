@@ -1,0 +1,44 @@
+# Complete financial test corpus (test_obligations_de.csv + test_obligations_eu.csv)
+# Processed sequentially, smaller laws first. Values are law_abbrev from norm_paragraphs.jsonl.
+# Lines marked "already extracted" are skipped on re-run via extraction_progress.json.
+#
+# EU laws (CELEX)
+32023R0606  # already extracted — ELTIF-VO
+32024L0927  # already extracted — AIFMD II
+31989L0391  # already extracted — Rahmenrichtlinie Arbeitsschutz
+32000L0054  # already extracted — Biologische Arbeitsstoffe
+32014R0596  # already extracted — MAR
+32017R1129
+32014R0600
+32014L0065
+32016R0679  # already extracted — DSGVO
+32025R0327  # already extracted — EHDS
+32009L0065
+32009L0138
+# DE laws
+GDNG  # already extracted — Gesundheitsdatennutzungsgesetz
+OZG  # already extracted — Onlinezugangsgesetz
+5. VermBG
+SpruchG
+BörsZulV
+BioStoffV  # already extracted — Biostoffverordnung
+WpPG
+ArbSchG  # already extracted — Arbeitsschutzgesetz
+eWpG
+KStG
+InvStG
+BörsG
+BDSG  # already extracted — Bundesdatenschutzgesetz
+UStG
+WpIG
+WpHG
+GVG  # already extracted — Gerichtsverfassungsgesetz
+KWG
+EStG
+SGB 11  # already extracted — SGB XI
+AktG
+VAG
+KAGB
+HGB  # already extracted — Handelsgesetzbuch
+SGB 5  # already extracted — SGB V
+ZPO  # already extracted — Zivilprozessordnung

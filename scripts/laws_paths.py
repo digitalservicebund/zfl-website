@@ -5,9 +5,12 @@ from pathlib import Path
 ROOT_DIR = Path(__file__).resolve().parents[1]
 
 LAW_PATHS = {
+    "root_dir": ROOT_DIR,
     "registry_file": ROOT_DIR / "data" / "laws" / "registry" / "laws.json",
     "eu_input_csv": ROOT_DIR / "data" / "laws" / "import" / "test_obligations_eu.csv",
     "de_input_csv": ROOT_DIR / "data" / "laws" / "import" / "gesetze_und_verordnungen.csv",
+    "eu_finanz_mapping_csv": ROOT_DIR / "data" / "laws" / "import" / "eu_regelungen_zu_finanzgesetzen.csv",
+    "law_relations_file": ROOT_DIR / "public" / "data" / "law_relations.json",
     "download_dir": ROOT_DIR / "data" / "laws" / "cache" / "downloads",
     "de_norm_xml_dir": ROOT_DIR / "data" / "laws" / "sources" / "de" / "xml",
     "eu_norm_html_dir": ROOT_DIR / "data" / "laws" / "sources" / "eu" / "html",
