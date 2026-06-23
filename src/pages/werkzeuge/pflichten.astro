@@ -472,10 +472,28 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
     relationLabel: string;
   };
 
+  type LawRelationGroup = {
+    id: string;
+    label: string;
+    abbrevs: string[];
+  };
+
+  type EuDeLawLink = {
+    eu_abbrev: string;
+    de_abbrevs: string[];
+    relation_label: string;
+  };
+
+  type LawRelations = {
+    groups: LawRelationGroup[];
+    eu_de_links: EuDeLawLink[];
+  };
+
   const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
   const CSV_URL = `${BASE}/data/obligations/Pflichten_LLM_All.csv`;
   const CSV_FALLBACK_URL = `${BASE}/data/obligations/Pflichten_LLM_HGB.csv`;
   const LAWS_URL = `${BASE}/data/laws.json`;
+  const RELATIONS_URL = `${BASE}/data/law_relations.json`;
   const PREVIEW_ROW_LIMIT = 5;
   const LAW_SEARCH_RESULT_LIMIT = 15;
 
@@ -564,6 +582,73 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
       displayName: ARBEITSSCHUTZ_RELATED_LAW_LABELS[abbrev],
       relationLabel: "Arbeitsschutz-Korpus",
     }));
+
+  const buildRelatedLawSuggestions = (
+    selectedLaws: string[],
+    lawRelations: LawRelations | null,
+    analysisByLaw: Record<string, AnalysisStats>,
+  ): RelatedLawSuggestion[] => {
+    if (selectedLaws.length === 0) return [];
+
+    const suggestions = new Map<string, RelatedLawSuggestion>();
+
+    const addSuggestion = (
+      abbrev: string,
+      displayName: string,
+      relationLabel: string,
+    ) => {
+      if (selectedLaws.includes(abbrev)) return;
+      if (!suggestions.has(abbrev)) {
+        suggestions.set(abbrev, { abbrev, displayName, relationLabel });
+      }
+    };
+
+    if (selectedLaws.some(isArbeitsschutzRelatedLaw)) {
+      for (const suggestion of arbeitsschutzRelatedLawSuggestions(
+        selectedLaws,
+      )) {
+        addSuggestion(
+          suggestion.abbrev,
+          suggestion.displayName,
+          suggestion.relationLabel,
+        );
+      }
+    }
+
+    for (const group of lawRelations?.groups ?? []) {
+      const selectedInGroup = selectedLaws.filter((abbrev) =>
+        group.abbrevs.includes(abbrev),
+      );
+      if (selectedInGroup.length === 0) continue;
+
+      const hasAnalysedSelection = selectedInGroup.some(
+        (abbrev) => (analysisByLaw[abbrev]?.obligations ?? 0) > 0,
+      );
+      if (!hasAnalysedSelection) continue;
+
+      for (const abbrev of group.abbrevs) {
+        addSuggestion(abbrev, "", group.label);
+      }
+    }
+
+    for (const link of lawRelations?.eu_de_links ?? []) {
+      if (selectedLaws.includes(link.eu_abbrev)) {
+        for (const deAbbrev of link.de_abbrevs) {
+          addSuggestion(deAbbrev, "", link.relation_label);
+        }
+      }
+
+      if (link.de_abbrevs.some((abbrev) => selectedLaws.includes(abbrev))) {
+        addSuggestion(
+          link.eu_abbrev,
+          decodeCelex(link.eu_abbrev),
+          link.relation_label,
+        );
+      }
+    }
+
+    return [...suggestions.values()];
+  };
 
   const formatEuLongTitle = (title: string) => {
     const trimmed = title.trim();
@@ -753,6 +838,7 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
     Alpine.data("pflichtenExport", () => ({
       laws: [] as LawRecord[],
       obligations: [] as ObligationRow[],
+      lawRelations: null as LawRelations | null,
       csvHeaders: [] as string[],
       selectedLaws: [] as string[],
       lawQuery: "",
@@ -918,9 +1004,30 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
       },
 
       get relatedLawSuggestions(): RelatedLawSuggestion[] {
-        if (this.selectedLaws.length === 0) return [];
-        if (!this.selectedLaws.some(isArbeitsschutzRelatedLaw)) return [];
-        return arbeitsschutzRelatedLawSuggestions(this.selectedLaws);
+        const knownAbbrevs = new Set(
+          this.laws.map((entry: LawRecord) => entry.abbrev),
+        );
+        const suggestions = buildRelatedLawSuggestions(
+          this.selectedLaws,
+          this.lawRelations,
+          this.analysisByLaw,
+        ).filter((suggestion) => knownAbbrevs.has(suggestion.abbrev));
+
+        return suggestions.sort((left, right) => {
+          const leftLaw = this.laws.find(
+            (entry: LawRecord) => entry.abbrev === left.abbrev,
+          );
+          const rightLaw = this.laws.find(
+            (entry: LawRecord) => entry.abbrev === right.abbrev,
+          );
+          const leftLabel = leftLaw
+            ? this.lawLabel(leftLaw)
+            : left.displayName || left.abbrev;
+          const rightLabel = rightLaw
+            ? this.lawLabel(rightLaw)
+            : right.displayName || right.abbrev;
+          return leftLabel.localeCompare(rightLabel, "de");
+        });
       },
 
       relatedLawRecord(
@@ -1053,6 +1160,15 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
         this.selectedLaws = [...next];
       },
 
+      async fetchLawRelations() {
+        const response = await fetch(RELATIONS_URL);
+        if (!response.ok) {
+          throw new Error(`Konnte ${RELATIONS_URL} nicht laden.`);
+        }
+
+        this.lawRelations = (await response.json()) as LawRelations;
+      },
+
       async fetchLaws() {
         const response = await fetch(LAWS_URL);
         if (!response.ok) {
@@ -1109,7 +1225,11 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
         this.error = "";
 
         try {
-          await Promise.all([this.fetchLaws(), this.fetchObligations()]);
+          await Promise.all([
+            this.fetchLaws(),
+            this.fetchObligations(),
+            this.fetchLawRelations(),
+          ]);
           this.buildAnalysisIndex();
         } catch (error) {
           this.error =
