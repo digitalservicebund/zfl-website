@@ -16,7 +16,27 @@ export const frontmatter = {
   navLabel: "Ihr Vorhaben",
 };
 
-const phases = [
+type TaskStatus = {
+  variant: "success" | "info";
+  label: string;
+  showIcon: boolean;
+  smallLabel: boolean;
+};
+
+type Task = {
+  number: number;
+  title: string;
+  href?: string;
+  status?: TaskStatus;
+};
+
+type Phase = {
+  id?: string;
+  title: string;
+  tasks: Task[];
+};
+
+const phases: Phase[] = [
   {
     title: "Phase I: Synergien heben",
     tasks: [
