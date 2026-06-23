@@ -38,7 +38,7 @@ test("staging-only pages are not accessible in production", async ({
 }) => {
   test.skip(!isProduction, "this test only targets production");
   await page.goto(staging.path);
-  await expect.poll(() => page.title()).toBe(TITLE_404);
+  await expect(page).toHaveTitle(TITLE_404);
 });
 
 test("staging-only pages are accessible in staging", async ({ page }) => {
