@@ -1,6 +1,14 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import { Icon } from "astro-icon/components";
+import {
+  vorhaben_fruephase2_schritt2,
+  vorhaben_fruephase2_schritt3,
+  vorhaben_fruephase2_schritt4,
+  vorhaben_fruephase2_schritt5,
+  vorhaben_fruephase2_schritt6,
+  vorhaben_fruephase2_schritt7,
+} from "@/config/routes";
 
 export const frontmatter = {
   title: "Vorhaben erarbeiten",
@@ -68,12 +76,36 @@ const phases = [
           smallLabel: false,
         },
       },
-      { number: 6, title: "Betroffene einbeziehen" },
-      { number: 7, title: "Problem definieren" },
-      { number: 8, title: "Ziel definieren" },
-      { number: 9, title: "Handlungsalternativen entwickeln" },
-      { number: 10, title: "Handlungsalternative auswählen und testen" },
-      { number: 11, title: "Wirkkonzept fertigstellen" },
+      {
+        number: 6,
+        title: "Betroffene einbeziehen",
+        href: vorhaben_fruephase2_schritt2.path,
+      },
+      {
+        number: 7,
+        title: "Problem definieren",
+        href: vorhaben_fruephase2_schritt3.path,
+      },
+      {
+        number: 8,
+        title: "Ziel definieren",
+        href: vorhaben_fruephase2_schritt4.path,
+      },
+      {
+        number: 9,
+        title: "Handlungsalternativen entwickeln",
+        href: vorhaben_fruephase2_schritt5.path,
+      },
+      {
+        number: 10,
+        title: "Handlungsalternative auswählen und testen",
+        href: vorhaben_fruephase2_schritt6.path,
+      },
+      {
+        number: 11,
+        title: "Wirkkonzept fertigstellen",
+        href: vorhaben_fruephase2_schritt7.path,
+      },
     ],
   },
   {
@@ -119,7 +151,13 @@ const phases = [
                   <li class="kern-task-list__item">
                     <span class="kern-number">{task.number}</span>
                     <div class="kern-task-list__title">
-                      <p class="kern-body">{task.title}</p>
+                      <p class="kern-body">
+                        {task.href ? (
+                          <a href={task.href}>{task.title}</a>
+                        ) : (
+                          task.title
+                        )}
+                      </p>
                       {task.status && (
                         <div class="kern-task-list__status">
                           <span
