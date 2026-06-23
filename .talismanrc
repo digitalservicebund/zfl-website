@@ -64,21 +64,8 @@ fileignoreconfig:
     checksum: d91b8729505983b35914335a9f72da8a0786969daebc7dc4a62c976b80d14d13
   - filename: public/data/laws.json
     checksum: fb64e37561e3d4303bdd3792ef045df59e29ddd137f88d2b90490ba2b284a7e6
-  - filename: public/data/obligations/Pflichten_LLM_All.csv
-    ignore_detectors: [filecontent]
-  - filename: public/data/obligations/Pflichten_LLM_32016R0679.csv
-    ignore_detectors: [filecontent]
-  - filename: public/data/obligations/Pflichten_LLM_BDSG.csv
-    ignore_detectors: [filecontent]
-  - filename: public/data/obligations/Pflichten_LLM_GVG.csv
-    ignore_detectors: [filecontent]
-  - filename: public/data/obligations/Pflichten_LLM_HGB.csv
-    ignore_detectors: [filecontent]
-  - filename: public/data/obligations/Pflichten_LLM_OZG.csv
-    ignore_detectors: [filecontent]
-  - filename: public/data/obligations/Pflichten_LLM_ZPO.csv
-    ignore_detectors: [filecontent]
-  - filename: public/data/obligations/Pflichten_LLM_32023R0606.csv
+  - filename: public/data/obligations/Pflichten_LLM_*.csv
+    checksum: 68eaf48f320b080fcc318e1048b21a94cdd8d8d29e3885e23b1a6223027ff0c4
     ignore_detectors: [filecontent]
   - filename: scripts/build_law_registry.py
     checksum: 4b4529c26f6b4cd3a5d4a1d0706d8a83dcdd523631ba5f55efc23517b0a3a558
@@ -86,22 +73,6 @@ fileignoreconfig:
     checksum: 6163e7dca5499a1bc0dfa691ceda7e9581a4e2151bd247ffa7ca6070dd3388d0
   - filename: doc/laws-pipeline.md
     checksum: fc355c65e829ff4b1f2d71945790249ded6aa76d63dcb7bf1996b46e1183e809
-  - filename: public/data/obligations/Pflichten_LLM_SGB 11.csv
-    ignore_detectors: [filecontent]
-  - filename: public/data/obligations/Pflichten_LLM_SGB 5.csv
-    ignore_detectors: [filecontent]
-  - filename: public/data/obligations/Pflichten_LLM_GDNG.csv
-    ignore_detectors: [filecontent]
-  - filename: public/data/obligations/Pflichten_LLM_32025R0327.csv
-    ignore_detectors: [filecontent]
-  - filename: public/data/obligations/Pflichten_LLM_31989L0391.csv
-    ignore_detectors: [filecontent]
-  - filename: public/data/obligations/Pflichten_LLM_32000L0054.csv
-    ignore_detectors: [filecontent]
-  - filename: public/data/obligations/Pflichten_LLM_ArbSchG.csv
-    ignore_detectors: [filecontent]
-  - filename: public/data/obligations/Pflichten_LLM_BioStoffV.csv
-    ignore_detectors: [filecontent]
   - filename: scripts/extract_obligations.py
     checksum: 548b63b1594e9607ec95b0a2ac4bf9a749f801c9ea494adb7f4d30989b07394e
   - filename: scripts/fetch_gii_metadata.py
