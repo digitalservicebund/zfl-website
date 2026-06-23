@@ -18,9 +18,46 @@ const description =
 const OBLIGATIONS_DIR = path.join(process.cwd(), "public/data/obligations");
 const EXTRACTION_FILE_PREFIX = "Pflichten_LLM_";
 
-const loadExtractionDates = (): Record<string, string> => {
-  const dates: Record<string, string> = {};
-  if (!fs.existsSync(OBLIGATIONS_DIR)) return dates;
+type ObligationStemMeta = {
+  extractionDate: string;
+  obligations: number;
+  uniqueReferences: number;
+};
+
+const stripBom = (value: string) => value.replace(/^\uFEFF/, "");
+
+const readObligationCsvStats = (filePath: string) => {
+  const text = stripBom(fs.readFileSync(filePath, "utf-8"));
+  const lines = text.split(/\r?\n/);
+  const nonEmpty = lines.filter((line) => line.trim().length > 0);
+  if (nonEmpty.length <= 1) {
+    return { obligations: 0, uniqueReferences: 0 };
+  }
+
+  const headers = nonEmpty[0]
+    .split(";")
+    .map((header) => stripBom(header.trim()));
+  const referenzIndex = headers.indexOf("referenz");
+  const references = new Set<string>();
+  let obligations = 0;
+
+  for (const line of nonEmpty.slice(1)) {
+    const cells = line.split(";");
+    if (!cells.some((cell) => cell.trim().length > 0)) continue;
+    obligations += 1;
+    if (referenzIndex >= 0) {
+      const reference = (cells[referenzIndex] ?? "").trim();
+      if (reference) references.add(reference);
+    }
+  }
+
+  return { obligations, uniqueReferences: references.size };
+};
+
+/** Per-law CSV metadata for badges and lazy-load URLs (computed at build time). */
+const loadObligationStemMeta = (): Record<string, ObligationStemMeta> => {
+  const meta: Record<string, ObligationStemMeta> = {};
+  if (!fs.existsSync(OBLIGATIONS_DIR)) return meta;
 
   for (const file of fs.readdirSync(OBLIGATIONS_DIR)) {
     if (!file.startsWith(EXTRACTION_FILE_PREFIX) || !file.endsWith(".csv")) {
@@ -29,14 +66,33 @@ const loadExtractionDates = (): Record<string, string> => {
     if (file === `${EXTRACTION_FILE_PREFIX}All.csv`) continue;
 
     const stem = file.slice(EXTRACTION_FILE_PREFIX.length, -4);
-    const mtime = fs.statSync(path.join(OBLIGATIONS_DIR, file)).mtime;
-    dates[stem] = mtime.toISOString().slice(0, 10);
+    const filePath = path.join(OBLIGATIONS_DIR, file);
+    const stats = readObligationCsvStats(filePath);
+    meta[stem] = {
+      extractionDate: fs.statSync(filePath).mtime.toISOString().slice(0, 10),
+      ...stats,
+    };
   }
 
-  return dates;
+  return meta;
 };
 
-const extractionDates = loadExtractionDates();
+const obligationStemMeta = loadObligationStemMeta();
+const extractionDates = Object.fromEntries(
+  Object.entries(obligationStemMeta).map(([stem, entry]) => [
+    stem,
+    entry.extractionDate,
+  ]),
+);
+const obligationsIndex = Object.fromEntries(
+  Object.entries(obligationStemMeta).map(([stem, entry]) => [
+    stem,
+    {
+      obligations: entry.obligations,
+      uniqueReferences: entry.uniqueReferences,
+    },
+  ]),
+);
 
 const styles = tv({
   slots: {
@@ -334,7 +390,14 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
           </p>
           <p
             class="py-0"
-            x-show="selectedLaws.length > 0 && filteredObligations.length > 0"
+            x-show="selectedLaws.length > 0 && loadingObligations"
+            x-cloak
+          >
+            Pflichten werden geladen …
+          </p>
+          <p
+            class="py-0"
+            x-show="selectedLaws.length > 0 && !loadingObligations && filteredObligations.length > 0"
             x-cloak
           >
             <span class="font-semibold" x-text="filteredObligations.length"
@@ -346,10 +409,17 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
           </p>
           <p
             class="py-0"
-            x-show="selectedLaws.length > 0 && filteredObligations.length === 0"
+            x-show="selectedLaws.length > 0 && !loadingObligations && filteredObligations.length === 0"
             x-cloak
           >
             Für die aktuelle Auswahl wurden keine Pflichten gefunden.
+          </p>
+          <p
+            class="py-0 text-red-700"
+            x-show="obligationsError"
+            x-cloak
+            x-text="obligationsError"
+          >
           </p>
         </div>
         <button
@@ -366,7 +436,10 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
       </div>
 
       {/* Preview */}
-      <div x-show="filteredObligations.length > 0" x-cloak>
+      <div
+        x-show="!loadingObligations && filteredObligations.length > 0"
+        x-cloak
+      >
         <h3 class="mt-0 mb-12">Vorschau</h3>
         <div
           class="preview-fade border-lavender-400 overflow-x-auto rounded-sm border"
@@ -416,8 +489,9 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
   }
 </style>
 
-<script is:inline define:vars={{ extractionDates }}>
+<script is:inline define:vars={{ extractionDates, obligationsIndex }}>
   window.__PFICHTEN_EXTRACTION_DATES__ = extractionDates;
+  window.__PFICHTEN_OBLIGATIONS_INDEX__ = obligationsIndex;
 </script>
 
 <script>
@@ -426,10 +500,15 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
   declare global {
     interface Window {
       __PFICHTEN_EXTRACTION_DATES__?: Record<string, string>;
+      __PFICHTEN_OBLIGATIONS_INDEX__?: Record<
+        string,
+        { obligations: number; uniqueReferences: number }
+      >;
     }
   }
 
   const extractionDates = window.__PFICHTEN_EXTRACTION_DATES__ ?? {};
+  const obligationsIndex = window.__PFICHTEN_OBLIGATIONS_INDEX__ ?? {};
 
   type LawRecord = {
     abbrev: string;
@@ -490,8 +569,7 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
   };
 
   const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
-  const CSV_URL = `${BASE}/data/obligations/Pflichten_LLM_All.csv`;
-  const CSV_FALLBACK_URL = `${BASE}/data/obligations/Pflichten_LLM_HGB.csv`;
+  const OBLIGATIONS_PREFIX = `${BASE}/data/obligations/Pflichten_LLM_`;
   const LAWS_URL = `${BASE}/data/laws.json`;
   const RELATIONS_URL = `${BASE}/data/law_relations.json`;
   const PREVIEW_ROW_LIMIT = 5;
@@ -837,50 +915,42 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
   document.addEventListener("alpine:init", () => {
     Alpine.data("pflichtenExport", () => ({
       laws: [] as LawRecord[],
-      obligations: [] as ObligationRow[],
+      obligationsByLaw: {} as Record<string, ObligationRow[]>,
       lawRelations: null as LawRelations | null,
       csvHeaders: [] as string[],
       selectedLaws: [] as string[],
       lawQuery: "",
       loading: true,
+      loadingObligations: false,
       error: "",
+      obligationsError: "",
       LAW_SEARCH_RESULT_LIMIT,
 
       analysisByLaw: {} as Record<string, AnalysisStats>,
-      buildAnalysisIndex() {
-        const refsByLaw = new Map<string, Set<string>>();
+      buildAnalysisIndexFromEmbedded() {
         const byLaw: Record<string, AnalysisStats> = {};
 
-        for (const row of this.obligations) {
-          const normKey = (row.norm ?? "").trim().toLowerCase();
-          if (!normKey) continue;
-
-          const law = this.laws.find((entry) =>
-            obligationNormMatchesLaw(normKey, entry),
-          );
-          if (!law) continue;
-
-          const stats = byLaw[law.abbrev] ?? {
-            obligations: 0,
-            uniqueReferences: 0,
-          };
-          stats.obligations += 1;
-
-          const reference = (row.referenz ?? "").trim();
-          if (reference) {
-            const refs = refsByLaw.get(law.abbrev) ?? new Set<string>();
-            refs.add(reference);
-            refsByLaw.set(law.abbrev, refs);
+        for (const law of this.laws) {
+          for (const [stem, stats] of Object.entries(obligationsIndex)) {
+            if (obligationNormMatchesLaw(stem, law)) {
+              byLaw[law.abbrev] = { ...stats };
+              break;
+            }
           }
-
-          byLaw[law.abbrev] = stats;
-        }
-
-        for (const [abbrev, stats] of Object.entries(byLaw)) {
-          stats.uniqueReferences = refsByLaw.get(abbrev)?.size ?? 0;
         }
 
         this.analysisByLaw = byLaw;
+      },
+
+      obligationCsvStemForLaw(law: LawRecord): string | undefined {
+        for (const stem of Object.keys(obligationsIndex)) {
+          if (obligationNormMatchesLaw(stem, law)) return stem;
+        }
+        return undefined;
+      },
+
+      obligationCsvUrl(stem: string) {
+        return `${OBLIGATIONS_PREFIX}${encodeURIComponent(stem)}.csv`;
       },
 
       isLawAnalysed(law: LawRecord) {
@@ -1078,16 +1148,14 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
 
       get filteredObligations() {
         if (this.selectedLaws.length === 0) return [];
-        const selected = this.laws.filter((law) =>
-          this.selectedLaws.includes(law.abbrev),
-        );
-        return this.obligations
-          .filter((obligation) =>
-            selected.some((law) =>
-              obligationNormMatchesLaw(obligation.norm ?? "", law),
-            ),
-          )
-          .sort(compareObligations);
+
+        const rows: ObligationRow[] = [];
+        for (const abbrev of this.selectedLaws) {
+          const cached = this.obligationsByLaw[abbrev];
+          if (cached) rows.push(...cached);
+        }
+
+        return rows.sort(compareObligations);
       },
 
       get exportHeaders() {
@@ -1122,7 +1190,14 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
       },
 
       get canExport() {
-        return this.filteredObligations.length > 0;
+        return (
+          !this.loadingObligations &&
+          this.selectedLaws.length > 0 &&
+          this.selectedLaws.every(
+            (abbrev: string) => abbrev in this.obligationsByLaw,
+          ) &&
+          this.filteredObligations.length > 0
+        );
       },
 
       isSelected(abbrev: string) {
@@ -1179,20 +1254,62 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
         this.laws = [...json].sort((a, b) => a.abbrev.localeCompare(b.abbrev));
       },
 
-      async fetchObligations() {
-        const primary = await fetch(CSV_URL);
-        const response = primary.ok ? primary : await fetch(CSV_FALLBACK_URL);
+      async fetchObligationsForLaw(abbrev: string) {
+        const law = this.laws.find((entry) => entry.abbrev === abbrev);
+        if (!law) {
+          this.obligationsByLaw[abbrev] = [];
+          return;
+        }
 
+        const stem = this.obligationCsvStemForLaw(law);
+        if (!stem) {
+          this.obligationsByLaw[abbrev] = [];
+          return;
+        }
+
+        const response = await fetch(this.obligationCsvUrl(stem));
         if (!response.ok) {
           throw new Error(
-            "Konnte keine Pflichten-CSV laden. Bitte zuerst die Pipeline bis concat-obligations ausfuehren.",
+            `Konnte Pflichten für ${this.lawChipLabel(abbrev)} nicht laden.`,
           );
         }
 
         const csvText = await response.text();
         const parsed = toObjects(parseDelimitedCsv(csvText, ";"));
-        this.csvHeaders = parsed.headers;
-        this.obligations = parsed.data;
+        if (this.csvHeaders.length === 0 && parsed.headers.length > 0) {
+          this.csvHeaders = parsed.headers;
+        }
+        this.obligationsByLaw[abbrev] = parsed.data;
+      },
+
+      async ensureSelectedObligationsLoaded() {
+        if (this.selectedLaws.length === 0) {
+          this.obligationsError = "";
+          return;
+        }
+
+        const missing = this.selectedLaws.filter(
+          (abbrev: string) => !(abbrev in this.obligationsByLaw),
+        );
+        if (missing.length === 0) return;
+
+        this.loadingObligations = true;
+        this.obligationsError = "";
+
+        try {
+          await Promise.all(
+            missing.map((abbrev: string) =>
+              this.fetchObligationsForLaw(abbrev),
+            ),
+          );
+        } catch (error) {
+          this.obligationsError =
+            error instanceof Error
+              ? error.message
+              : "Beim Laden der Pflichten ist ein Fehler aufgetreten.";
+        } finally {
+          this.loadingObligations = false;
+        }
       },
 
       downloadCsv() {
@@ -1224,13 +1341,13 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
         this.loading = true;
         this.error = "";
 
+        this.$watch("selectedLaws", () => {
+          void this.ensureSelectedObligationsLoaded();
+        });
+
         try {
-          await Promise.all([
-            this.fetchLaws(),
-            this.fetchObligations(),
-            this.fetchLawRelations(),
-          ]);
-          this.buildAnalysisIndex();
+          await Promise.all([this.fetchLaws(), this.fetchLawRelations()]);
+          this.buildAnalysisIndexFromEmbedded();
         } catch (error) {
           this.error =
             error instanceof Error
