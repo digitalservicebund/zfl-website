@@ -1,0 +1,5 @@
+# New health-corpus laws only (existing evaluation laws already extracted)
+GDNG
+32025R0327
+SGB 11
+SGB 5

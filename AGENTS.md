@@ -17,6 +17,14 @@ pnpm test <filename>  # Run specific test (e.g. pnpm test src/components/global/
 pnpm test:e2e         # E2E tests with Playwright (builds first)
 pnpm test:e2e e2e/a11y.spec.ts           # Run specific e2e test file
 pnpm test:e2e -- --grep "<test name>"    # Run e2e tests by name
+pnpm laws:download                         # Python pipeline: download DE/EU sources
+pnpm laws:prepare-corpus                   # Python pipeline: unpack/prepare parsable corpus
+pnpm laws:build-registry                   # Python pipeline: build laws registry
+pnpm laws:validate-registry                # Python pipeline: validate registry
+pnpm laws:build-paragraphs                 # Python pipeline: build normalized paragraph JSONL
+pnpm laws:concat-obligations               # Python pipeline: merge per-law obligations CSVs
+pnpm laws:build-relations                  # Python pipeline: build related-law mappings for Pflichten UI
+pnpm laws:publish-ui-data                  # Python pipeline: publish laws.json to static UI path
 ```
 
 ## Architecture

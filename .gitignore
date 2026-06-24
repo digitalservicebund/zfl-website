@@ -6,6 +6,10 @@ dist/
 
 # dependencies
 node_modules/
+/.pnpm-store
+
+# python virtualenv (legal pipeline)
+.venv/
 
 # logs
 npm-debug.log*
@@ -32,3 +36,18 @@ pnpm-debug.log*
 
 # Lefthook
 /lefthook-local.yml
+
+# Generated legal-pipeline artifacts (new layout)
+/data/laws/cache/downloads/
+/data/laws/sources/de/xml/
+/data/laws/sources/eu/html/
+/data/laws/normalized/norm_paragraphs.jsonl
+!/public/data/obligations/.gitkeep
+
+# Generated legal-pipeline artifacts (legacy layout)
+/content/laws.json
+/content/norm-paragraphs/norm_paragraphs.jsonl
+/content/norms-xml/
+/content/norms-eurlex/
+/scripts/__pycache__
+/data/laws/cache

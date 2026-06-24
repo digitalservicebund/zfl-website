@@ -7,6 +7,7 @@ This is the new implementation for Zentrum für Legistik, based on Astro and Tai
 - **Architecture Decision Records (ADRs)**: See the ADRs in [`doc/adr/`](doc/adr/).
 - **Tailwind variants**: Guidelines for `tailwind-variants` usage in [`doc/tailwind-variants.md`](doc/tailwind-variants.md).
 - **Icons**: Icon usage and conventions in [`doc/icons.md`](doc/icons.md).
+- **Laws pipeline**: Obligations extraction pipeline, data model, and UI in [`doc/laws-pipeline.md`](doc/laws-pipeline.md).
 
 ## Development Setup
 

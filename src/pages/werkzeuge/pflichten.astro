@@ -1,0 +1,1362 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import { Icon } from "astro-icon/components";
+import { tv } from "tailwind-variants";
+import fs from "node:fs";
+import path from "node:path";
+
+export const frontmatter = {
+  title: "Pflichten-Export",
+  sitemap: true,
+  isStagingOnly: false,
+};
+
+const description =
+  "Wählen Sie Gesetze aus, prüfen Sie die daraus extrahierten Pflichten und laden Sie das Ergebnis als CSV-Datei herunter.";
+
+const OBLIGATIONS_DIR = path.join(process.cwd(), "public/data/obligations");
+const EXTRACTION_FILE_PREFIX = "Pflichten_LLM_";
+
+type ObligationStemMeta = {
+  extractionDate: string;
+  obligations: number;
+  uniqueReferences: number;
+};
+
+const stripBom = (value: string) => value.replace(/^\uFEFF/, "");
+
+const readObligationCsvStats = (filePath: string) => {
+  const text = stripBom(fs.readFileSync(filePath, "utf-8"));
+  const lines = text.split(/\r?\n/);
+  const nonEmpty = lines.filter((line) => line.trim().length > 0);
+  if (nonEmpty.length <= 1) {
+    return { obligations: 0, uniqueReferences: 0 };
+  }
+
+  const headers = nonEmpty[0]
+    .split(";")
+    .map((header) => stripBom(header.trim()));
+  const referenzIndex = headers.indexOf("referenz");
+  const references = new Set<string>();
+  let obligations = 0;
+
+  for (const line of nonEmpty.slice(1)) {
+    const cells = line.split(";");
+    if (!cells.some((cell) => cell.trim().length > 0)) continue;
+    obligations += 1;
+    if (referenzIndex >= 0) {
+      const reference = (cells[referenzIndex] ?? "").trim();
+      if (reference) references.add(reference);
+    }
+  }
+
+  return { obligations, uniqueReferences: references.size };
+};
+
+/** Per-law CSV metadata for badges and lazy-load URLs (computed at build time). */
+const loadObligationStemMeta = (): Record<string, ObligationStemMeta> => {
+  const meta: Record<string, ObligationStemMeta> = {};
+  if (!fs.existsSync(OBLIGATIONS_DIR)) return meta;
+
+  for (const file of fs.readdirSync(OBLIGATIONS_DIR)) {
+    if (!file.startsWith(EXTRACTION_FILE_PREFIX) || !file.endsWith(".csv")) {
+      continue;
+    }
+    if (file === `${EXTRACTION_FILE_PREFIX}All.csv`) continue;
+
+    const stem = file.slice(EXTRACTION_FILE_PREFIX.length, -4);
+    const filePath = path.join(OBLIGATIONS_DIR, file);
+    const stats = readObligationCsvStats(filePath);
+    meta[stem] = {
+      extractionDate: fs.statSync(filePath).mtime.toISOString().slice(0, 10),
+      ...stats,
+    };
+  }
+
+  return meta;
+};
+
+const obligationStemMeta = loadObligationStemMeta();
+const extractionDates = Object.fromEntries(
+  Object.entries(obligationStemMeta).map(([stem, entry]) => [
+    stem,
+    entry.extractionDate,
+  ]),
+);
+const obligationsIndex = Object.fromEntries(
+  Object.entries(obligationStemMeta).map(([stem, entry]) => [
+    stem,
+    {
+      obligations: entry.obligations,
+      uniqueReferences: entry.uniqueReferences,
+    },
+  ]),
+);
+
+const styles = tv({
+  slots: {
+    searchInput:
+      "focus:outline-cosmic-blue-base border-lavender-400 w-full rounded-sm border bg-white py-10 pr-40 pl-40 transition focus:outline-2",
+    countBadge:
+      "bg-cosmic-blue-base inline-flex items-center gap-6 rounded-full px-12 py-4 text-sm font-semibold text-white",
+    chip: "bg-lavender-base text-cosmic-blue-base inline-flex items-center gap-6 rounded-full py-4 pr-6 pl-12 text-sm",
+    analysisBadge:
+      "bg-lavender-base text-cosmic-blue-base mt-8 inline-flex rounded-full px-10 py-4 text-xs font-semibold",
+    lawCard:
+      "group flex cursor-pointer items-start gap-12 rounded-sm border p-16 text-left transition",
+    th: "kern-label border-lavender-400 bg-lavender-base border-b-2 px-16 py-12 text-left align-top whitespace-nowrap",
+    td: "border-lavender-400 border-b px-16 py-12 align-top text-base",
+  },
+});
+
+const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
+  styles();
+---
+
+<Layout title={frontmatter.title} description={description}>
+  <main x-data="pflichtenExport" class="breakout-grid pb-lg">
+    <Hero level="main">
+      <h1>{frontmatter.title}</h1>
+      <p slot="subtitle">{description}</p>
+    </Hero>
+
+    {/* Loading state */}
+    <section x-show="loading" x-cloak class="py-lg">
+      <p class="kern-subline flex items-center gap-8">
+        <Icon name="ic:round-hourglass-empty" class="h-24 w-24" />
+        Daten werden geladen …
+      </p>
+    </section>
+
+    {/* Error state */}
+    <section x-show="!loading && error" x-cloak>
+      <div
+        class="border-lavender-400 bg-lavender-200 flex items-start gap-12 rounded-sm border p-20"
+      >
+        <Icon
+          name="ic:round-error-outline"
+          class="text-cosmic-blue-base mt-2 h-24 w-24 shrink-0"
+        />
+        <p class="py-0" x-text="error"></p>
+      </div>
+    </section>
+
+    {/* Step 1: law selection */}
+    <section x-show="!loading && !error" x-cloak class="space-y-md">
+      <div class="flex flex-wrap items-end justify-between gap-16">
+        <div>
+          <h2 class="mb-4">1. Gesetze auswählen</h2>
+          <p class="kern-subline py-0">
+            Filtern Sie nach Titel oder Kürzel und wählen Sie ein oder mehrere
+            Gesetze aus.
+          </p>
+        </div>
+        <span class={countBadge()} x-text="`${selectedLaws.length} ausgewählt`"
+        ></span>
+      </div>
+
+      {/* Search + bulk actions */}
+      <div
+        class="flex flex-col gap-12 md:flex-row md:items-center md:justify-between"
+      >
+        <div class="relative w-full md:max-w-400">
+          <Icon
+            name="ic:round-search"
+            class="text-icon-muted pointer-events-none absolute top-1/2 left-12 h-24 w-24 -translate-y-1/2"
+          />
+          <input
+            class={searchInput()}
+            type="search"
+            placeholder="Titel oder Kürzel suchen …"
+            aria-label="Gesetze durchsuchen"
+            x-model.debounce.500ms="lawQuery"
+          />
+          <button
+            type="button"
+            class="text-icon-muted absolute top-1/2 right-12 -translate-y-1/2"
+            x-show="lawQuery"
+            x-cloak
+            aria-label="Suche löschen"
+            @click="lawQuery = ''"
+          >
+            <Icon name="ic:round-close" class="h-24 w-24" />
+          </button>
+        </div>
+        <div class="flex gap-8">
+          <button
+            class="kern-btn kern-btn--secondary"
+            type="button"
+            :disabled="!lawQuery.trim()"
+            @click="selectAllFiltered()"
+          >
+            <span class="kern-label">Treffer auswählen</span>
+          </button>
+          <button
+            class="kern-btn kern-btn--tertiary"
+            type="button"
+            :disabled="selectedLaws.length === 0"
+            @click="clearSelection()"
+          >
+            <span class="kern-label">Auswahl leeren</span>
+          </button>
+        </div>
+      </div>
+
+      {/* Selected laws as removable chips */}
+      <div
+        x-show="selectedLaws.length > 0"
+        x-cloak
+        class="flex flex-wrap gap-8"
+      >
+        <template x-for="abbrev in selectedLaws" :key="abbrev">
+          <span class={chip()}>
+            <span x-text="lawChipLabel(abbrev)"></span>
+            <button
+              type="button"
+              class="hover:bg-cosmic-blue-base flex h-20 w-20 items-center justify-center rounded-full transition hover:text-white"
+              :aria-label="`${abbrev} aus Auswahl entfernen`"
+              @click="toggleLaw(abbrev)"
+            >
+              <Icon name="ic:round-close" class="h-16 w-16" />
+            </button>
+          </span>
+        </template>
+      </div>
+
+      {/* Law grid – only shown when the user has entered a search query */}
+      <div
+        x-show="lawQuery.trim().length > 0 && filteredLaws.length > 0"
+        x-cloak
+        class="grid gap-12 sm:grid-cols-2 lg:grid-cols-3"
+        role="group"
+        aria-label="Gesetzesliste"
+      >
+        <template x-for="law in filteredLaws" :key="law.abbrev">
+          <label
+            class={lawCard()}
+            x-bind:class="isSelected(law.abbrev) ? 'border-cosmic-blue-base bg-lavender-200 ring-1 ring-cosmic-blue-base' : isLawAnalysed(law) ? 'border-lavender-400 bg-white hover:border-cosmic-blue-400' : 'border-lavender-400 bg-lavender-100 cursor-not-allowed opacity-80'"
+          >
+            <input
+              class="kern-form-check__checkbox mt-2 shrink-0"
+              type="checkbox"
+              :value="law.abbrev"
+              :checked="isSelected(law.abbrev)"
+              :disabled="!isLawAnalysed(law)"
+              @change="toggleLaw(law.abbrev)"
+            />
+            <span class="min-w-0">
+              <span
+                class="block text-base leading-snug font-semibold"
+                x-text="lawLabel(law)"></span>
+              <span
+                class="text-icon-muted mt-4 block text-xs leading-snug"
+                x-text="lawDescription(law)"></span>
+              <span
+                x-show="isLawAnalysed(law)"
+                x-cloak
+                class={analysisBadge()}
+                x-text="lawAnalysisLabel(law)"></span>
+              <span
+                x-show="isLawAnalysed(law) && lawExtractionDateLabel(law)"
+                x-cloak
+                class="text-icon-muted mt-4 block text-xs"
+                x-text="lawExtractionDateLabel(law)"></span>
+              <span
+                x-show="!isLawAnalysed(law)"
+                x-cloak
+                class="text-icon-muted mt-8 block text-xs italic"
+                x-text="lawUnanalysedLabel(law)"></span>
+            </span>
+          </label>
+        </template>
+      </div>
+
+      <p
+        x-show="lawQuery.trim() && hasMoreFilteredLaws"
+        x-cloak
+        class="text-icon-muted py-0 italic"
+      >
+        Es werden die ersten
+        <span x-text="LAW_SEARCH_RESULT_LIMIT"></span> von
+        <span x-text="matchingLaws.length"></span> Treffern angezeigt. Bitte verfeinern
+        Sie die Suche, um weitere Ergebnisse zu finden.
+      </p>
+
+      <p x-show="!lawQuery.trim()" x-cloak class="text-icon-muted py-0 italic">
+        Geben Sie einen Suchbegriff ein, um Gesetze anzuzeigen.
+      </p>
+
+      <p
+        x-show="lawQuery.trim() && matchingLaws.length === 0"
+        x-cloak
+        class="text-icon-muted py-0 italic"
+      >
+        Keine Gesetze für die aktuelle Suche gefunden.
+      </p>
+    </section>
+
+    {/* Step 2: related laws */}
+    <section x-show="!loading && !error" x-cloak class="space-y-md">
+      <div class="flex flex-wrap items-end justify-between gap-16">
+        <div>
+          <h2 class="mb-4">2. Angrenzende Gesetze prüfen</h2>
+          <p class="kern-subline py-0">
+            Diese Gesetze stehen in engem Bezug zu Ihrer Auswahl und könnten
+            ebenfalls relevant sein.
+          </p>
+        </div>
+      </div>
+
+      {/* Placeholder before any law is selected */}
+      <p
+        x-show="selectedLaws.length === 0"
+        x-cloak
+        class="text-icon-muted py-0 italic"
+      >
+        Wählen Sie zunächst Gesetze in Schritt 1 aus.
+      </p>
+
+      {/* Related law cards */}
+      <div
+        x-show="relatedLawSuggestions.length > 0"
+        x-cloak
+        class="grid gap-12 sm:grid-cols-2 lg:grid-cols-3"
+        role="group"
+        aria-label="Angrenzende Gesetze"
+      >
+        <template
+          x-for="suggestion in relatedLawSuggestions"
+          :key="suggestion.abbrev"
+        >
+          <label
+            class={lawCard()}
+            x-bind:class="isSelected(suggestion.abbrev) ? 'border-cosmic-blue-base bg-lavender-200 ring-1 ring-cosmic-blue-base' : 'border-lavender-400 bg-white hover:border-cosmic-blue-400'"
+          >
+            <input
+              class="kern-form-check__checkbox mt-2 shrink-0"
+              type="checkbox"
+              :checked="isSelected(suggestion.abbrev)"
+              @change="toggleRelatedLaw(suggestion.abbrev)"
+            />
+            <span class="min-w-0">
+              <span
+                class="block text-base leading-snug font-semibold"
+                x-text="relatedLawLabel(suggestion)"></span>
+              <span
+                class="text-icon-muted mt-4 block text-xs leading-snug"
+                x-text="relatedLawDescription(suggestion)"></span>
+              <span class={analysisBadge()} x-text="suggestion.relationLabel"
+              ></span>
+              <span
+                x-show="relatedIsLawAnalysed(suggestion)"
+                x-cloak
+                class={analysisBadge()}
+                x-text="relatedLawAnalysisLabel(suggestion)"></span>
+              <span
+                x-show="relatedIsLawAnalysed(suggestion) && relatedLawExtractionDateLabel(suggestion)"
+                x-cloak
+                class="text-icon-muted mt-4 block text-xs"
+                x-text="relatedLawExtractionDateLabel(suggestion)"></span>
+              <span
+                x-show="!relatedIsLawAnalysed(suggestion)"
+                x-cloak
+                class="text-icon-muted mt-8 block text-xs italic"
+                x-text="relatedLawUnanalysedLabel(suggestion)"></span>
+            </span>
+          </label>
+        </template>
+      </div>
+
+      <p
+        x-show="selectedLaws.length > 0 && relatedLawSuggestions.length === 0"
+        x-cloak
+        class="text-icon-muted py-0 italic"
+      >
+        Alle angrenzenden Gesetze wurden bereits zur Auswahl hinzugefügt.
+      </p>
+    </section>
+
+    {/* Step 3: export + preview */}
+    <section x-show="!loading && !error" x-cloak class="space-y-md">
+      <div
+        class="bg-lavender-base flex flex-col gap-16 rounded-sm p-20 md:flex-row md:items-center md:justify-between md:p-24"
+      >
+        <div>
+          <h2 class="mt-0 mb-4">3. Pflichten exportieren</h2>
+          <p class="py-0" x-show="selectedLaws.length === 0">
+            Wählen Sie oben mindestens ein Gesetz aus, um Pflichten zu sehen und
+            zu exportieren.
+          </p>
+          <p
+            class="py-0"
+            x-show="selectedLaws.length > 0 && loadingObligations"
+            x-cloak
+          >
+            Pflichten werden geladen …
+          </p>
+          <p
+            class="py-0"
+            x-show="selectedLaws.length > 0 && !loadingObligations && filteredObligations.length > 0"
+            x-cloak
+          >
+            <span class="font-semibold" x-text="filteredObligations.length"
+            ></span>
+            Pflichten aus
+            <span class="font-semibold" x-text="selectedLaws.length"></span>
+            <span x-text="selectedLaws.length === 1 ? 'Gesetz' : 'Gesetzen'"
+            ></span> ausgewählt.
+          </p>
+          <p
+            class="py-0"
+            x-show="selectedLaws.length > 0 && !loadingObligations && filteredObligations.length === 0"
+            x-cloak
+          >
+            Für die aktuelle Auswahl wurden keine Pflichten gefunden.
+          </p>
+          <p
+            class="py-0 text-red-700"
+            x-show="obligationsError"
+            x-cloak
+            x-text="obligationsError"
+          >
+          </p>
+        </div>
+        <button
+          class="kern-btn kern-btn--primary shrink-0"
+          type="button"
+          :disabled="!canExport"
+          @click="downloadCsv()"
+        >
+          <span
+            class="kern-icon kern-icon--download kern-icon--default"
+            aria-hidden="true"></span>
+          <span class="kern-label">CSV herunterladen</span>
+        </button>
+      </div>
+
+      {/* Preview */}
+      <div
+        x-show="!loadingObligations && filteredObligations.length > 0"
+        x-cloak
+      >
+        <h3 class="mt-0 mb-12">Vorschau</h3>
+        <div
+          class="preview-fade border-lavender-400 overflow-x-auto rounded-sm border"
+        >
+          <table class="w-full border-collapse">
+            <thead>
+              <tr>
+                <template x-for="header in exportHeaders" :key="header">
+                  <th class={th()} x-text="columnLabel(header)"></th>
+                </template>
+              </tr>
+            </thead>
+            <tbody>
+              <template
+                x-for="(row, index) in previewRows"
+                :key="`${row.norm}-${row.referenz}-${index}`"
+              >
+                <tr class="even:bg-lavender-200">
+                  <template x-for="header in exportHeaders" :key="header">
+                    <td class={td()} x-bind:class="previewCellClass(header)"
+                      ><span x-text="row[header]"></span></td
+                    >
+                  </template>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  [x-cloak] {
+    display: none !important;
+  }
+
+  .preview-fade {
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 55%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%);
+  }
+</style>
+
+<script is:inline define:vars={{ extractionDates, obligationsIndex }}>
+  window.__PFICHTEN_EXTRACTION_DATES__ = extractionDates;
+  window.__PFICHTEN_OBLIGATIONS_INDEX__ = obligationsIndex;
+</script>
+
+<script>
+  import Alpine from "alpinejs";
+
+  declare global {
+    interface Window {
+      __PFICHTEN_EXTRACTION_DATES__?: Record<string, string>;
+      __PFICHTEN_OBLIGATIONS_INDEX__?: Record<
+        string,
+        { obligations: number; uniqueReferences: number }
+      >;
+    }
+  }
+
+  const extractionDates = window.__PFICHTEN_EXTRACTION_DATES__ ?? {};
+  const obligationsIndex = window.__PFICHTEN_OBLIGATIONS_INDEX__ ?? {};
+
+  type LawRecord = {
+    abbrev: string;
+    name: string;
+    source: string;
+    jurabk?: string | null;
+    kurzue?: string | null;
+    ausfertigung_datum?: string | null;
+    norm_count?: number | null;
+  };
+
+  /** Match obligation CSV `norm` to a registry law (handles e.g. BDSG vs BDSG 2018 / bdsg_2018). */
+  const obligationNormMatchesLaw = (
+    obligationNorm: string,
+    law: LawRecord,
+  ): boolean => {
+    const norm = obligationNorm.trim().toLowerCase();
+    if (!norm) return false;
+
+    const abbrev = law.abbrev.toLowerCase();
+    const jurabk = (law.jurabk ?? "").trim().toLowerCase();
+
+    if (abbrev === norm || jurabk === norm) return true;
+
+    // Registry jurabk often includes a year: "BDSG 2018" vs extracted "BDSG".
+    if (jurabk.startsWith(`${norm} `)) return true;
+
+    // GII slug with year suffix: bdsg_2018 vs extracted "BDSG".
+    const slugStem = abbrev.replace(/_\d{4}$/, "").replaceAll("_", "");
+    if (slugStem === norm.replaceAll(/\s+/g, "")) return true;
+
+    return false;
+  };
+
+  type ObligationRow = Record<string, string>;
+
+  type RelatedLawSuggestion = {
+    abbrev: string;
+    displayName: string;
+    relationLabel: string;
+  };
+
+  type LawRelationGroup = {
+    id: string;
+    label: string;
+    abbrevs: string[];
+  };
+
+  type EuDeLawLink = {
+    eu_abbrev: string;
+    de_abbrevs: string[];
+    relation_label: string;
+  };
+
+  type LawRelations = {
+    groups: LawRelationGroup[];
+    eu_de_links: EuDeLawLink[];
+  };
+
+  const BASE = import.meta.env.BASE_URL.replace(/\/$/, "");
+  const OBLIGATIONS_PREFIX = `${BASE}/data/obligations/Pflichten_LLM_`;
+  const LAWS_URL = `${BASE}/data/laws.json`;
+  const RELATIONS_URL = `${BASE}/data/law_relations.json`;
+  const PREVIEW_ROW_LIMIT = 5;
+  const LAW_SEARCH_RESULT_LIMIT = 15;
+
+  const EXPORT_HEADERS_FALLBACK = [
+    "norm",
+    "referenz",
+    "vorgabe_zusammenfassung",
+    "zitat",
+    "art_der_vorgabe",
+    "pflichtstaerke",
+    "sprachlicher_indikator",
+    "normadressat_kategorie",
+    "normadressat_text",
+    "quelle",
+  ];
+
+  const orderExportHeaders = (headers: string[]) => {
+    const known = EXPORT_HEADERS_FALLBACK.filter((header) =>
+      headers.includes(header),
+    );
+    const extra = headers.filter(
+      (header) => !EXPORT_HEADERS_FALLBACK.includes(header),
+    );
+    return [...known, ...extra];
+  };
+
+  const COLUMN_LABELS: Record<string, string> = {
+    norm: "Norm",
+    quelle: "Quelle",
+    referenz: "Referenz",
+    art_der_vorgabe: "Art der Vorgabe",
+    pflichtstaerke: "Pflichtstärke",
+    sprachlicher_indikator: "Sprachlicher Indikator",
+    normadressat_kategorie: "Normadressat-Kategorie",
+    normadressat_text: "Normadressat",
+    zitat: "Zitat",
+    vorgabe_zusammenfassung: "Vorgabe-Zusammenfassung",
+  };
+
+  type AnalysisStats = {
+    obligations: number;
+    uniqueReferences: number;
+  };
+
+  /** Decode a EUR-Lex CELEX number (format 3YYYYTnnnn) into a short DE reference. */
+  const decodeCelex = (celex: string): string => {
+    const m = celex.match(/^3(\d{4})([LR])(\d{4})$/);
+    if (!m) return celex;
+    const year = parseInt(m[1], 10);
+    const type = m[2];
+    const num = parseInt(m[3], 10);
+    const treaty = year >= 2010 ? "EU" : "EG";
+    return type === "L"
+      ? `Richtlinie ${year}/${num}/${treaty}`
+      : `Verordnung (${treaty}) Nr.\u00a0${year}/${num}`;
+  };
+
+  /** Arbeitsschutz test corpus: each member suggests the other three as angrenzende Gesetze. */
+  const ARBEITSSCHUTZ_RELATED_LAW_ABBREVS = [
+    "31989L0391",
+    "32000L0054",
+    "biostoffv_2013",
+    "arbschg",
+  ] as const;
+
+  const ARBEITSSCHUTZ_RELATED_LAW_LABELS: Record<
+    (typeof ARBEITSSCHUTZ_RELATED_LAW_ABBREVS)[number],
+    string
+  > = {
+    "31989L0391": decodeCelex("31989L0391"),
+    "32000L0054": decodeCelex("32000L0054"),
+    biostoffv_2013: "BioStoffV",
+    arbschg: "ArbSchG",
+  };
+
+  const isArbeitsschutzRelatedLaw = (abbrev: string) =>
+    (ARBEITSSCHUTZ_RELATED_LAW_ABBREVS as readonly string[]).includes(abbrev);
+
+  const arbeitsschutzRelatedLawSuggestions = (
+    selectedLaws: string[],
+  ): RelatedLawSuggestion[] =>
+    ARBEITSSCHUTZ_RELATED_LAW_ABBREVS.filter(
+      (abbrev) => !selectedLaws.includes(abbrev),
+    ).map((abbrev) => ({
+      abbrev,
+      displayName: ARBEITSSCHUTZ_RELATED_LAW_LABELS[abbrev],
+      relationLabel: "Arbeitsschutz-Korpus",
+    }));
+
+  const buildRelatedLawSuggestions = (
+    selectedLaws: string[],
+    lawRelations: LawRelations | null,
+    analysisByLaw: Record<string, AnalysisStats>,
+  ): RelatedLawSuggestion[] => {
+    if (selectedLaws.length === 0) return [];
+
+    const suggestions = new Map<string, RelatedLawSuggestion>();
+
+    const addSuggestion = (
+      abbrev: string,
+      displayName: string,
+      relationLabel: string,
+    ) => {
+      if (selectedLaws.includes(abbrev)) return;
+      if (!suggestions.has(abbrev)) {
+        suggestions.set(abbrev, { abbrev, displayName, relationLabel });
+      }
+    };
+
+    if (selectedLaws.some(isArbeitsschutzRelatedLaw)) {
+      for (const suggestion of arbeitsschutzRelatedLawSuggestions(
+        selectedLaws,
+      )) {
+        addSuggestion(
+          suggestion.abbrev,
+          suggestion.displayName,
+          suggestion.relationLabel,
+        );
+      }
+    }
+
+    for (const group of lawRelations?.groups ?? []) {
+      const selectedInGroup = selectedLaws.filter((abbrev) =>
+        group.abbrevs.includes(abbrev),
+      );
+      if (selectedInGroup.length === 0) continue;
+
+      const hasAnalysedSelection = selectedInGroup.some(
+        (abbrev) => (analysisByLaw[abbrev]?.obligations ?? 0) > 0,
+      );
+      if (!hasAnalysedSelection) continue;
+
+      for (const abbrev of group.abbrevs) {
+        addSuggestion(abbrev, "", group.label);
+      }
+    }
+
+    for (const link of lawRelations?.eu_de_links ?? []) {
+      if (selectedLaws.includes(link.eu_abbrev)) {
+        for (const deAbbrev of link.de_abbrevs) {
+          addSuggestion(deAbbrev, "", link.relation_label);
+        }
+      }
+
+      if (link.de_abbrevs.some((abbrev) => selectedLaws.includes(abbrev))) {
+        addSuggestion(
+          link.eu_abbrev,
+          decodeCelex(link.eu_abbrev),
+          link.relation_label,
+        );
+      }
+    }
+
+    return [...suggestions.values()];
+  };
+
+  const formatEuLongTitle = (title: string) => {
+    const trimmed = title.trim();
+    if (!trimmed) return "";
+
+    const splitMatch = trimmed.match(/^(.+?)(\s+(?:vom|über)\s+[\s\S]*)$/i);
+    if (!splitMatch) return trimmed;
+
+    const header = splitMatch[1].trim();
+    const tail = splitMatch[2];
+    if (header === header.toUpperCase()) {
+      const formatted = header
+        .toLowerCase()
+        .replace(
+          /\((eu|eg|ewr)\)/g,
+          (_, token: string) => `(${token.toUpperCase()})`,
+        );
+      return formatted.charAt(0).toUpperCase() + formatted.slice(1) + tail;
+    }
+
+    return trimmed;
+  };
+
+  const stripBom = (value: string) => value.replace(/^\uFEFF/, "");
+
+  const csvEscape = (value: string) => {
+    const normalized = (value ?? "").replace(/\r\n/g, "\n");
+    if (
+      normalized.includes(";") ||
+      normalized.includes("\n") ||
+      normalized.includes('"')
+    ) {
+      return `"${normalized.replaceAll('"', '""')}"`;
+    }
+    return normalized;
+  };
+
+  const referenceSortKey = (reference: string): Array<string | number> => {
+    const ref = reference.trim();
+
+    const sectionMatch = ref.match(/^§\s*(\d+)\s*([a-zA-Z])?\b/i);
+    if (sectionMatch) {
+      const key: Array<string | number> = [
+        0,
+        Number.parseInt(sectionMatch[1], 10),
+        sectionMatch[2] ?? "",
+      ];
+      const rest = ref.slice(sectionMatch[0].length);
+      for (const [pattern, numeric] of [
+        [/(?:Absatz|Abs\.)\s*(\d+)/gi, true],
+        [/(?:Satz|Sat\.)\s*(\d+)/gi, true],
+        [/(?:Nummer|Nr\.)\s*(\d+)/gi, true],
+        [/(?:Buchstabe|Buchst\.|lit\.)\s*([a-zA-Z])/gi, false],
+      ] as const) {
+        for (const match of rest.matchAll(pattern)) {
+          const value = match[1];
+          key.push(numeric ? Number.parseInt(value, 10) : value.toLowerCase());
+        }
+      }
+      return key;
+    }
+
+    const articleMatch = ref.match(/^Art\.?\s*(\d+)\b/i);
+    if (articleMatch) {
+      const key: Array<string | number> = [
+        1,
+        Number.parseInt(articleMatch[1], 10),
+      ];
+      const rest = ref.slice(articleMatch[0].length);
+      for (const [pattern, numeric] of [
+        [/(?:Absatz|Abs\.)\s*(\d+)/gi, true],
+        [/(?:Satz|Sat\.)\s*(\d+)/gi, true],
+        [/(?:Nummer|Nr\.)\s*(\d+)/gi, true],
+        [/(?:Buchstabe|Buchst\.|lit\.)\s*([a-zA-Z])/gi, false],
+      ] as const) {
+        for (const match of rest.matchAll(pattern)) {
+          const value = match[1];
+          key.push(numeric ? Number.parseInt(value, 10) : value.toLowerCase());
+        }
+      }
+      return key;
+    }
+
+    return [2, ref.toLowerCase()];
+  };
+
+  const compareReferences = (left: string, right: string) => {
+    const leftKey = referenceSortKey(left);
+    const rightKey = referenceSortKey(right);
+    const length = Math.max(leftKey.length, rightKey.length);
+
+    for (let index = 0; index < length; index += 1) {
+      const leftPart = leftKey[index] ?? "";
+      const rightPart = rightKey[index] ?? "";
+      if (leftPart === rightPart) continue;
+
+      if (typeof leftPart === "number" && typeof rightPart === "number") {
+        return leftPart - rightPart;
+      }
+
+      return String(leftPart).localeCompare(String(rightPart));
+    }
+
+    return 0;
+  };
+
+  const compareObligations = (left: ObligationRow, right: ObligationRow) => {
+    const normCompare = (left.norm ?? "").localeCompare(right.norm ?? "", "de");
+    if (normCompare !== 0) return normCompare;
+    return compareReferences(left.referenz ?? "", right.referenz ?? "");
+  };
+
+  const parseDelimitedCsv = (raw: string, delimiter = ";") => {
+    const text = stripBom(raw);
+    const rows: string[][] = [];
+    let row: string[] = [];
+    let field = "";
+    let inQuotes = false;
+
+    for (let i = 0; i < text.length; i += 1) {
+      const char = text[i];
+      const next = text[i + 1];
+
+      if (char === '"') {
+        if (inQuotes && next === '"') {
+          field += '"';
+          i += 1;
+        } else {
+          inQuotes = !inQuotes;
+        }
+        continue;
+      }
+
+      if (!inQuotes && char === delimiter) {
+        row.push(field);
+        field = "";
+        continue;
+      }
+
+      if (!inQuotes && (char === "\n" || char === "\r")) {
+        if (char === "\r" && next === "\n") {
+          i += 1;
+        }
+        row.push(field);
+        field = "";
+        if (row.some((cell) => cell.length > 0)) {
+          rows.push(row);
+        }
+        row = [];
+        continue;
+      }
+
+      field += char;
+    }
+
+    if (field.length > 0 || row.length > 0) {
+      row.push(field);
+      if (row.some((cell) => cell.length > 0)) {
+        rows.push(row);
+      }
+    }
+
+    return rows;
+  };
+
+  const toObjects = (
+    rows: string[][],
+  ): { headers: string[]; data: ObligationRow[] } => {
+    if (rows.length === 0) return { headers: [], data: [] };
+
+    const headers = rows[0].map((header) => stripBom(header.trim()));
+    const data = rows
+      .slice(1)
+      .filter((row) => row.some((cell) => (cell ?? "").trim().length > 0))
+      .map((row) => {
+        const entry: ObligationRow = {};
+        headers.forEach((header, index) => {
+          entry[header] = row[index] ?? "";
+        });
+        return entry;
+      });
+
+    return { headers, data };
+  };
+
+  document.addEventListener("alpine:init", () => {
+    Alpine.data("pflichtenExport", () => ({
+      laws: [] as LawRecord[],
+      obligationsByLaw: {} as Record<string, ObligationRow[]>,
+      lawRelations: null as LawRelations | null,
+      csvHeaders: [] as string[],
+      selectedLaws: [] as string[],
+      lawQuery: "",
+      loading: true,
+      loadingObligations: false,
+      error: "",
+      obligationsError: "",
+      LAW_SEARCH_RESULT_LIMIT,
+
+      analysisByLaw: {} as Record<string, AnalysisStats>,
+      buildAnalysisIndexFromEmbedded() {
+        const byLaw: Record<string, AnalysisStats> = {};
+
+        for (const law of this.laws) {
+          for (const [stem, stats] of Object.entries(obligationsIndex)) {
+            if (obligationNormMatchesLaw(stem, law)) {
+              byLaw[law.abbrev] = { ...stats };
+              break;
+            }
+          }
+        }
+
+        this.analysisByLaw = byLaw;
+      },
+
+      obligationCsvStemForLaw(law: LawRecord): string | undefined {
+        for (const stem of Object.keys(obligationsIndex)) {
+          if (obligationNormMatchesLaw(stem, law)) return stem;
+        }
+        return undefined;
+      },
+
+      obligationCsvUrl(stem: string) {
+        return `${OBLIGATIONS_PREFIX}${encodeURIComponent(stem)}.csv`;
+      },
+
+      isLawAnalysed(law: LawRecord) {
+        return (this.analysisByLaw[law.abbrev]?.obligations ?? 0) > 0;
+      },
+
+      normUnitLabel(
+        law: LawRecord,
+        count: number,
+        context: "in" | "count" = "in",
+      ) {
+        if (law.source === "eurlex") {
+          if (count === 1) return "Artikel";
+          return context === "in" ? "Artikeln" : "Artikel";
+        }
+        return count === 1 ? "Paragraph" : "Paragraphen";
+      },
+
+      pflichtLabel(count: number) {
+        return count === 1 ? "Pflicht" : "Pflichten";
+      },
+
+      lawAnalysisLabel(law: LawRecord) {
+        const stats = this.analysisByLaw[law.abbrev];
+        if (!stats) return "";
+
+        const obligations = stats.obligations.toLocaleString("de-DE");
+        const obligationPart = `${obligations} ${this.pflichtLabel(stats.obligations)}`;
+        const normCount = law.norm_count ?? stats.uniqueReferences;
+        if (!normCount) return obligationPart;
+
+        const norms = normCount.toLocaleString("de-DE");
+        const unit = this.normUnitLabel(law, normCount);
+        return `${obligationPart} in ${norms} ${unit}`;
+      },
+
+      lawExtractionDate(law: LawRecord): string | undefined {
+        const direct = extractionDates[law.abbrev];
+        if (direct) return direct;
+
+        for (const [stem, date] of Object.entries(extractionDates)) {
+          if (obligationNormMatchesLaw(stem, law)) return date;
+        }
+
+        return undefined;
+      },
+
+      lawExtractionDateLabel(law: LawRecord) {
+        const iso = this.lawExtractionDate(law);
+        if (!iso) return "";
+
+        const formatted = new Date(`${iso}T12:00:00`).toLocaleDateString(
+          "de-DE",
+          {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+          },
+        );
+        return `Extrahiert am ${formatted}`;
+      },
+
+      lawUnanalysedLabel(law: LawRecord) {
+        const base = "Noch nicht analysiert";
+        if (!law.norm_count) return base;
+
+        const count = law.norm_count.toLocaleString("de-DE");
+        const unit = this.normUnitLabel(law, law.norm_count, "count");
+        return `${base} · ${count} ${unit}`;
+      },
+
+      /** Main label shown prominently on the card (Abk for DE, short ref for EU). */
+      lawLabel(law: LawRecord): string {
+        if (law.source === "eurlex") return decodeCelex(law.abbrev);
+        return law.jurabk ?? law.abbrev.replace(/^_+/, "");
+      },
+
+      /** Full title shown beneath the label (DE: Kurztitel; EU: long official title). */
+      lawDescription(law: LawRecord): string {
+        if (law.source === "eurlex")
+          return formatEuLongTitle(law.kurzue ?? law.name);
+        return law.kurzue ?? law.name;
+      },
+
+      /** Label used on selected-law chips (short form). */
+      lawChipLabel(abbrev: string): string {
+        const law = this.laws.find((l: LawRecord) => l.abbrev === abbrev);
+        if (!law) return abbrev;
+        if (law.source === "eurlex") return decodeCelex(law.abbrev);
+        return law.jurabk ?? law.abbrev.replace(/^_+/, "");
+      },
+
+      get matchingLaws() {
+        const query = this.lawQuery.trim().toLowerCase();
+        if (!query) return [];
+        return this.laws
+          .filter((law) => {
+            const label = this.lawLabel(law).toLowerCase();
+            const description = this.lawDescription(law).toLowerCase();
+            return (
+              law.abbrev.toLowerCase().includes(query) ||
+              label.includes(query) ||
+              description.includes(query) ||
+              (law.name ?? "").toLowerCase().includes(query)
+            );
+          })
+          .sort((a, b) => {
+            const aAnalysed = this.isLawAnalysed(a);
+            const bAnalysed = this.isLawAnalysed(b);
+            if (aAnalysed !== bAnalysed) return aAnalysed ? -1 : 1;
+            return this.lawLabel(a).localeCompare(this.lawLabel(b), "de");
+          });
+      },
+
+      get filteredLaws() {
+        return this.matchingLaws.slice(0, LAW_SEARCH_RESULT_LIMIT);
+      },
+
+      get hasMoreFilteredLaws() {
+        return this.matchingLaws.length > LAW_SEARCH_RESULT_LIMIT;
+      },
+
+      get relatedLawSuggestions(): RelatedLawSuggestion[] {
+        const knownAbbrevs = new Set(
+          this.laws.map((entry: LawRecord) => entry.abbrev),
+        );
+        const suggestions = buildRelatedLawSuggestions(
+          this.selectedLaws,
+          this.lawRelations,
+          this.analysisByLaw,
+        ).filter((suggestion) => knownAbbrevs.has(suggestion.abbrev));
+
+        return suggestions.sort((left, right) => {
+          const leftLaw = this.laws.find(
+            (entry: LawRecord) => entry.abbrev === left.abbrev,
+          );
+          const rightLaw = this.laws.find(
+            (entry: LawRecord) => entry.abbrev === right.abbrev,
+          );
+          const leftLabel = leftLaw
+            ? this.lawLabel(leftLaw)
+            : left.displayName || left.abbrev;
+          const rightLabel = rightLaw
+            ? this.lawLabel(rightLaw)
+            : right.displayName || right.abbrev;
+          return leftLabel.localeCompare(rightLabel, "de");
+        });
+      },
+
+      relatedLawRecord(
+        suggestion: RelatedLawSuggestion,
+      ): LawRecord | undefined {
+        return this.laws.find((l: LawRecord) => l.abbrev === suggestion.abbrev);
+      },
+
+      relatedLawLabel(suggestion: RelatedLawSuggestion): string {
+        const law = this.relatedLawRecord(suggestion);
+        return law ? this.lawLabel(law) : suggestion.displayName;
+      },
+
+      relatedLawDescription(suggestion: RelatedLawSuggestion): string {
+        const law = this.relatedLawRecord(suggestion);
+        return law ? this.lawDescription(law) : "";
+      },
+
+      relatedIsLawAnalysed(suggestion: RelatedLawSuggestion): boolean {
+        const law = this.relatedLawRecord(suggestion);
+        return law ? this.isLawAnalysed(law) : false;
+      },
+
+      relatedLawAnalysisLabel(suggestion: RelatedLawSuggestion): string {
+        const law = this.relatedLawRecord(suggestion);
+        return law ? this.lawAnalysisLabel(law) : "";
+      },
+
+      relatedLawExtractionDateLabel(suggestion: RelatedLawSuggestion): string {
+        const law = this.relatedLawRecord(suggestion);
+        return law ? this.lawExtractionDateLabel(law) : "";
+      },
+
+      relatedLawUnanalysedLabel(suggestion: RelatedLawSuggestion): string {
+        const law = this.relatedLawRecord(suggestion);
+        return law ? this.lawUnanalysedLabel(law) : suggestion.displayName;
+      },
+
+      toggleRelatedLaw(abbrev: string) {
+        if (this.selectedLaws.includes(abbrev)) {
+          this.selectedLaws = this.selectedLaws.filter(
+            (item: string) => item !== abbrev,
+          );
+        } else {
+          this.selectedLaws = [...this.selectedLaws, abbrev];
+        }
+      },
+
+      get filteredObligations() {
+        if (this.selectedLaws.length === 0) return [];
+
+        const rows: ObligationRow[] = [];
+        for (const abbrev of this.selectedLaws) {
+          const cached = this.obligationsByLaw[abbrev];
+          if (cached) rows.push(...cached);
+        }
+
+        return rows.sort(compareObligations);
+      },
+
+      get exportHeaders() {
+        const headers =
+          this.csvHeaders.length > 0
+            ? this.csvHeaders
+            : EXPORT_HEADERS_FALLBACK;
+        return orderExportHeaders(headers);
+      },
+
+      get previewRows() {
+        return this.filteredObligations.slice(0, PREVIEW_ROW_LIMIT);
+      },
+
+      columnLabel(header: string) {
+        return COLUMN_LABELS[header] ?? header;
+      },
+
+      previewCellClass(header: string) {
+        if (header === "norm") return "font-semibold whitespace-nowrap";
+        if (header === "referenz" || header === "quelle") {
+          return "whitespace-nowrap";
+        }
+        if (header === "zitat") return "min-w-560";
+        if (
+          header === "vorgabe_zusammenfassung" ||
+          header === "normadressat_text"
+        ) {
+          return "min-w-280";
+        }
+        return "";
+      },
+
+      get canExport() {
+        return (
+          !this.loadingObligations &&
+          this.selectedLaws.length > 0 &&
+          this.selectedLaws.every(
+            (abbrev: string) => abbrev in this.obligationsByLaw,
+          ) &&
+          this.filteredObligations.length > 0
+        );
+      },
+
+      isSelected(abbrev: string) {
+        return this.selectedLaws.includes(abbrev);
+      },
+
+      toggleLaw(abbrev: string) {
+        const law = this.laws.find((entry) => entry.abbrev === abbrev);
+        if (
+          law &&
+          !this.isLawAnalysed(law) &&
+          !this.selectedLaws.includes(abbrev)
+        ) {
+          return;
+        }
+
+        if (this.selectedLaws.includes(abbrev)) {
+          this.selectedLaws = this.selectedLaws.filter(
+            (item) => item !== abbrev,
+          );
+        } else {
+          this.selectedLaws = [...this.selectedLaws, abbrev];
+        }
+      },
+
+      clearSelection() {
+        this.selectedLaws = [];
+      },
+
+      selectAllFiltered() {
+        const next = new Set(this.selectedLaws);
+        this.filteredLaws
+          .filter((law) => this.isLawAnalysed(law))
+          .forEach((law) => next.add(law.abbrev));
+        this.selectedLaws = [...next];
+      },
+
+      async fetchLawRelations() {
+        const response = await fetch(RELATIONS_URL);
+        if (!response.ok) {
+          throw new Error(`Konnte ${RELATIONS_URL} nicht laden.`);
+        }
+
+        this.lawRelations = (await response.json()) as LawRelations;
+      },
+
+      async fetchLaws() {
+        const response = await fetch(LAWS_URL);
+        if (!response.ok) {
+          throw new Error(`Konnte ${LAWS_URL} nicht laden.`);
+        }
+
+        const json = (await response.json()) as LawRecord[];
+        this.laws = [...json].sort((a, b) => a.abbrev.localeCompare(b.abbrev));
+      },
+
+      async fetchObligationsForLaw(abbrev: string) {
+        const law = this.laws.find((entry) => entry.abbrev === abbrev);
+        if (!law) {
+          this.obligationsByLaw[abbrev] = [];
+          return;
+        }
+
+        const stem = this.obligationCsvStemForLaw(law);
+        if (!stem) {
+          this.obligationsByLaw[abbrev] = [];
+          return;
+        }
+
+        const response = await fetch(this.obligationCsvUrl(stem));
+        if (!response.ok) {
+          throw new Error(
+            `Konnte Pflichten für ${this.lawChipLabel(abbrev)} nicht laden.`,
+          );
+        }
+
+        const csvText = await response.text();
+        const parsed = toObjects(parseDelimitedCsv(csvText, ";"));
+        if (this.csvHeaders.length === 0 && parsed.headers.length > 0) {
+          this.csvHeaders = parsed.headers;
+        }
+        this.obligationsByLaw[abbrev] = parsed.data;
+      },
+
+      async ensureSelectedObligationsLoaded() {
+        if (this.selectedLaws.length === 0) {
+          this.obligationsError = "";
+          return;
+        }
+
+        const missing = this.selectedLaws.filter(
+          (abbrev: string) => !(abbrev in this.obligationsByLaw),
+        );
+        if (missing.length === 0) return;
+
+        this.loadingObligations = true;
+        this.obligationsError = "";
+
+        try {
+          await Promise.all(
+            missing.map((abbrev: string) =>
+              this.fetchObligationsForLaw(abbrev),
+            ),
+          );
+        } catch (error) {
+          this.obligationsError =
+            error instanceof Error
+              ? error.message
+              : "Beim Laden der Pflichten ist ein Fehler aufgetreten.";
+        } finally {
+          this.loadingObligations = false;
+        }
+      },
+
+      downloadCsv() {
+        if (!this.canExport) return;
+
+        const headers = this.exportHeaders;
+
+        const lines = [
+          headers.join(";"),
+          ...this.filteredObligations.map((row) =>
+            headers.map((header) => csvEscape(row[header] ?? "")).join(";"),
+          ),
+        ];
+
+        const content = `\uFEFF${lines.join("\n")}`;
+        const blob = new Blob([content], { type: "text/csv;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const anchor = document.createElement("a");
+        const date = new Date().toISOString().slice(0, 10);
+
+        anchor.href = url;
+        anchor.download = `Pflichten_Export_${date}.csv`;
+        anchor.click();
+
+        URL.revokeObjectURL(url);
+      },
+
+      async init() {
+        this.loading = true;
+        this.error = "";
+
+        this.$watch("selectedLaws", () => {
+          void this.ensureSelectedObligationsLoaded();
+        });
+
+        try {
+          await Promise.all([this.fetchLaws(), this.fetchLawRelations()]);
+          this.buildAnalysisIndexFromEmbedded();
+        } catch (error) {
+          this.error =
+            error instanceof Error
+              ? error.message
+              : "Beim Laden der Daten ist ein Fehler aufgetreten.";
+        } finally {
+          this.loading = false;
+        }
+      },
+    }));
+  });
+</script>
