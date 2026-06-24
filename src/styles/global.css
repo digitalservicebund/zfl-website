@@ -283,8 +283,7 @@ address {
 
 /* TEMPORARLY FIX FOR TEST MVP */
 /* Hide Frühphase II navigation link */
-a[href="/vorhaben/fruephase-2/"],
-a[href="/vorhaben/fruephase-2"] {
+a[href$="/vorhaben/fruephase-2"] {
   display: none;
 }
 
