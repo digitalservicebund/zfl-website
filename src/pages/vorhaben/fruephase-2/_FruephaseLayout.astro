@@ -8,9 +8,10 @@ type Props = {
   title: string;
   pageNumber: number;
   isWide?: boolean;
+  openModal?: boolean;
 };
 
-const { title, pageNumber, isWide } = Astro.props;
+const { title, pageNumber, isWide, openModal } = Astro.props;
 
 const stepRoutes = allRoutes
   .filter(
@@ -41,7 +42,12 @@ const nextPath = stepRoutes.find((r) => r.navOrder > pageNumber)?.path;
   }
   {
     !Astro.slots.has("button-bar") && (
-      <ButtonBar slot="button-bar" prevPath={prevPath} nextPath={nextPath} />
+      <ButtonBar
+        slot="button-bar"
+        prevPath={prevPath}
+        nextPath={nextPath}
+        openModal={openModal}
+      />
     )
   }
 </FormStepLayout>

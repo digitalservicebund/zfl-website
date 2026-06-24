@@ -13,7 +13,11 @@ export const frontmatter = {
 };
 ---
 
-<FruephaseLayout title={frontmatter.title} pageNumber={frontmatter.navOrder}>
+<FruephaseLayout
+  title={frontmatter.title}
+  pageNumber={frontmatter.navOrder}
+  openModal
+>
   <h2>{frontmatter.title}</h2>
   <div>
     <div class="columns-2">

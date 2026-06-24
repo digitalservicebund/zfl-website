@@ -1,4 +1,5 @@
 ---
+import Modal from "@/components/Modal.astro";
 import { Icon } from "astro-icon/components";
 
 interface Props {
@@ -6,9 +7,17 @@ interface Props {
   nextPath?: string;
   customText?: string;
   nextBtnText?: string;
+  openModal?: boolean;
 }
 
-const { prevPath, nextPath, customText, nextBtnText = "Weiter" } = Astro.props;
+const {
+  prevPath,
+  nextPath,
+  customText,
+  nextBtnText = "Weiter",
+  openModal,
+} = Astro.props;
+
 const defaultText = "Ihre Daten werden automatisch im Browser gespeichert";
 ---
 
@@ -51,7 +60,7 @@ const defaultText = "Ihre Daten werden automatisch im Browser gespeichert";
         )
       }
       {
-        nextPath && (
+        nextPath && !openModal && (
           <a href={nextPath} class="kern-btn kern-btn--primary" id="Weiter">
             <span class="kern-label">{nextBtnText}</span>
             <span
@@ -59,6 +68,43 @@ const defaultText = "Ihre Daten werden automatisch im Browser gespeichert";
               aria-hidden="true"
             />
           </a>
+        )
+      }
+      {
+        openModal && (
+          <fragment>
+            {" "}
+            <button
+              type="button"
+              class="kern-btn kern-btn--primary"
+              popovertarget="confirm-modal"
+            >
+              <span class="kern-label">Weiter</span>
+            </button>
+            <Modal id="confirm-modal">
+              {" "}
+              <h2>Zeit für einen Zwischenstand</h2>
+              <p>
+                Es ist jederzeit möglich zurückzugehen und nochmals zu
+                evaluieren. Sind Sie sicher, die besten Lösungen gefunden zu
+                haben? Jetzt ist ein guter Zeitpunkt um nochmal zu
+                kontrollieren, ob Wirkziele, Indikatoren, die
+                Problembeschreibung und Hypothesen etc. noch passen. Gehen Sie
+                gerne zurück, um Ihre Eingaben zu ändern. Ansonsten können Sie
+                auch fortfahren.
+              </p>
+              <button type="button" class="kern-btn kern-btn--secondary">
+                <span class="kern-label">Beliebiger Text</span>
+              </button>
+              <a href={nextPath} class="kern-btn kern-btn--primary" id="Weiter">
+                <span class="kern-label">Zum nächsten Schritt</span>
+                <span
+                  class="kern-icon kern-icon--arrow-forward"
+                  aria-hidden="true"
+                />
+              </a>
+            </Modal>
+          </fragment>
         )
       }
     </div>
