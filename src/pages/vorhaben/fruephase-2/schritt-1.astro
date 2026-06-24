@@ -1,4 +1,8 @@
 ---
+import KernTable from "../_components/KernTable.astro";
+import KernTableCell from "../_components/KernTableCell.astro";
+import KernTableHeaderCell from "../_components/KernTableHeaderCell.astro";
+import KernTableRow from "../_components/KernTableRow.astro";
 import FruephaseLayout from "./_FruephaseLayout.astro";
 
 export const frontmatter = {
@@ -9,6 +13,47 @@ export const frontmatter = {
 };
 ---
 
-<FruephaseLayout title={frontmatter.title} pageNumber={frontmatter.navOrder}
-  ><h2>{frontmatter.title}</h2></FruephaseLayout
->
+<FruephaseLayout title={frontmatter.title} pageNumber={frontmatter.navOrder}>
+  <h2>{frontmatter.title}</h2>
+  <h3>Problem-Statement mit semantischer Analyse</h3>
+  <p>
+    Wie¹ können wir² hoch- und vollautomatieriste Fahrfunktionen³ rechssicher⁴
+    und wettbewerbsfördernd⁵ ermöglichen⁶?
+  </p>
+  <p class="border p-8">
+    ¹ regulatorische Lösungen / nicht-regulatorische<br />
+    ² Gesetzgeber, Vollzug &amp; Wirtschaftsakteure<br />
+    ³ Techn. Zusammenhänge abbilden (entspr. Def. SAE-Klassifizierung)<br />
+    ⁴ impliziert verkehrssicher auch: Vertrauen der Bürgerinnen &amp; Bürger in die
+    Nutzung stärken, "Haftung"<br />
+    ⁵ mehr Autos auf dt. Straßen, die das können<br />
+    ⁶ rechtlich möglich machen
+  </p>
+
+  <h3>Hypothesen</h3>
+  <KernTable columnCount={2} addButtonLabel="Hpothese hinzufügen">
+    <Fragment slot="header">
+      <KernTableHeaderCell />
+      <KernTableHeaderCell> Hypothesen </KernTableHeaderCell>
+    </Fragment>
+    <Fragment slot="body">
+      <KernTableRow>
+        <KernTableCell>1</KernTableCell>
+        <KernTableCell
+          >Automobilhersteller investieren nicht in die
+          Automatisierungs-Technik.</KernTableCell
+        >
+      </KernTableRow>
+      <KernTableRow>
+        <KernTableCell>2</KernTableCell>
+        <KernTableCell>
+          Deutsche Automobilhersteller haben einen Wettbewerbsnachteil.
+        </KernTableCell>
+      </KernTableRow>
+      <KernTableRow>
+        <KernTableCell>3</KernTableCell>
+        <KernTableCell>Versicherer bieten keine Produkte an.</KernTableCell>
+      </KernTableRow>
+    </Fragment>
+  </KernTable>
+</FruephaseLayout>
