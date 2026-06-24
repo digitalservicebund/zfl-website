@@ -71,7 +71,15 @@ export const frontmatter = {
         <KernTableHeaderCell>Wirkziele</KernTableHeaderCell>
         <KernTableHeaderCell>Indikatoren</KernTableHeaderCell>
         <KernTableHeaderCell>Status Quo</KernTableHeaderCell>
-        <KernTableHeaderCell>Handlungsalternativen</KernTableHeaderCell>
+        <template
+          x-for="(spalte, spaltenIndex) in Math.max(1, ...rows.map((row) => row.handlungsalternativen.length))"
+          :key="`ha-header-${spaltenIndex}`"
+        >
+          <KernTableHeaderCell>
+            Handlungsalternative
+            <span x-text="spalte"></span>
+          </KernTableHeaderCell>
+        </template>
       </Fragment>
       <Fragment slot="body">
         <KernTableRow>
@@ -86,13 +94,18 @@ export const frontmatter = {
             (Risiko-)Aufschläge an.
           </KernTableCell>
           <KernTableCell />
-          <KernTableCell />
+          <template
+            x-for="(spalte, spaltenIndex) in Math.max(1, ...rows.map((row) => row.handlungsalternativen.length))"
+            :key="`example-ha-${spaltenIndex}`"
+          >
+            <KernTableCell />
+          </template>
 
           <KernTableCell :rowspan="rows.length + 2" class="p-0 align-middle">
             <button
               type="button"
               class="flex h-full w-full items-center justify-center gap-4 px-16 py-8 text-center"
-              @click="rows.forEach((currentRow) => currentRow.handlungsalternativen.push(''))"
+              @click="nextSpaltenAnzahl = Math.max(1, ...rows.map((row) => row.handlungsalternativen.length)) + 1; rows.forEach((currentRow) => { while (currentRow.handlungsalternativen.length < nextSpaltenAnzahl) { currentRow.handlungsalternativen.push(''); } });"
             >
               <span
                 class="kern-icon kern-icon--add kern-icon--default"
@@ -127,22 +140,28 @@ export const frontmatter = {
                 />
               </div>
             </KernTableCell>
-            <KernTableCell>
-              <div class="kern-form-input">
-                <input
-                  class="kern-form-input__input w-full"
-                  :id="`handlungsalternativen-${index}`"
-                  :name="`handlungsalternativen-${index}`"
-                  type="text"
-                  aria-label="Handlungsalternativen"
-                  x-model="row.handlungsalternativen"
-                />
-              </div>
-            </KernTableCell>
+            <template
+              x-for="(spalte, spaltenIndex) in Math.max(1, ...rows.map((currentRow) => currentRow.handlungsalternativen.length))"
+              :key="`custom-ha-cell-${index}-${spaltenIndex}`"
+            >
+              <KernTableCell>
+                <div class="kern-form-input">
+                  <input
+                    class="kern-form-input__input w-full"
+                    :id="`handlungsalternativen-${index}-${spaltenIndex}`"
+                    :name="`handlungsalternativen-${index}-${spaltenIndex}`"
+                    type="text"
+                    :aria-label="`Handlungsalternative ${spaltenIndex + 1}`"
+                    x-model="row.handlungsalternativen[spaltenIndex]"
+                  />
+                </div>
+              </KernTableCell>
+            </template>
           </KernTableRow>
         </template>
         <KernTableRow>
-          <KernTableCell colspan={5}
+          <KernTableCell
+            x-bind:colspan="4 + Math.max(1, ...rows.map((row) => row.handlungsalternativen.length))"
             ><b
               >Folgende Wirkziele sind abgeleitet aus kombinierten Checks und
               Arbeitshilfen:</b
@@ -161,7 +180,17 @@ export const frontmatter = {
               <p x-text="row.wirkziel"></p>
             </KernTableCell>
             <KernTableCell>
-              <p x-text="row.indikatoren"></p>
+              <div class="kern-form-input">
+                <input
+                  x-text="row.indikatoren"
+                  class="kern-form-input__input w-full"
+                  :id="`handlungsalternativen-${index}`"
+                  :name="`handlungsalternativen-${index}`"
+                  type="text"
+                  aria-label="Indikatoren"
+                  x-model="row.indikatoren"
+                />
+              </div>
             </KernTableCell>
             <KernTableCell>
               <div class="kern-form-input">
@@ -175,18 +204,23 @@ export const frontmatter = {
                 />
               </div>
             </KernTableCell>
-            <KernTableCell>
-              <div class="kern-form-input">
-                <input
-                  class="kern-form-input__input w-full"
-                  :id="`default-handlungsalternativen-${index}`"
-                  :name="`default-handlungsalternativen-${index}`"
-                  type="text"
-                  aria-label="Handlungsalternativen"
-                  x-model="row.handlungsalternativen"
-                />
-              </div>
-            </KernTableCell>
+            <template
+              x-for="(spalte, spaltenIndex) in Math.max(1, ...rows.map((currentRow) => currentRow.handlungsalternativen.length))"
+              :key="`default-ha-cell-${index}-${spaltenIndex}`"
+            >
+              <KernTableCell>
+                <div class="kern-form-input">
+                  <input
+                    class="kern-form-input__input w-full"
+                    :id="`default-handlungsalternativen-${index}-${spaltenIndex}`"
+                    :name="`default-handlungsalternativen-${index}-${spaltenIndex}`"
+                    type="text"
+                    :aria-label="`Handlungsalternative ${spaltenIndex + 1}`"
+                    x-model="row.handlungsalternativen[spaltenIndex]"
+                  />
+                </div>
+              </KernTableCell>
+            </template>
           </KernTableRow>
         </template>
       </Fragment>
@@ -225,21 +259,43 @@ export const frontmatter = {
     isDefaultWirkziel: true,
   });
 
+  //ensures equal column count across rows
+  const normalizeRows = (rows: WirkkonzeptRow[]): WirkkonzeptRow[] => {
+    const spaltenAnzahl = Math.max(
+      1,
+      ...rows.map((row) => row.handlungsalternativen.length),
+    );
+
+    return rows.map((row) => ({
+      ...row,
+      handlungsalternativen: [
+        ...row.handlungsalternativen,
+        ...new Array<string>(
+          Math.max(0, spaltenAnzahl - row.handlungsalternativen.length),
+        ).fill(""),
+      ],
+    }));
+  };
+
   const getInitialRowsFromWirkkonzept = (): WirkkonzeptRow[] => {
     const defaultRows = DEFAULT_WIRKZIELE.map((wirkziel) =>
       createDefaultRow(wirkziel),
     );
 
     try {
-      // get user created rows from localStorage - try handlungsalternativen first, fallback to wirkkonzept
-      const customWirkzieleObj =
-        localStorage.getItem("handlungsalternativen") ||
-        localStorage.getItem("wirkkonzept");
+      const customWirkzieleObj = localStorage.getItem("wirkkonzept");
       if (!customWirkzieleObj) {
-        return defaultRows;
+        const normalizedDefaultRows = normalizeRows(defaultRows);
+        localStorage.setItem(
+          "wirkkonzept",
+          JSON.stringify(normalizedDefaultRows),
+        );
+        return normalizedDefaultRows;
       }
 
-      const parsed: WirkkonzeptRow[] = JSON.parse(customWirkzieleObj);
+      const parsed: WirkkonzeptRow[] = normalizeRows(
+        JSON.parse(customWirkzieleObj),
+      );
       const customWirkziele = parsed.filter(
         (row) =>
           row.wirkziel.trim().length > 0 &&
@@ -268,9 +324,14 @@ export const frontmatter = {
         };
       });
 
-      return [...customWirkziele, ...mergedDefaultRows];
+      const mergedRows = normalizeRows([
+        ...customWirkziele,
+        ...mergedDefaultRows,
+      ]);
+      localStorage.setItem("wirkkonzept", JSON.stringify(mergedRows));
+      return mergedRows;
     } catch {
-      return defaultRows;
+      return normalizeRows(defaultRows);
     }
   };
 
@@ -286,7 +347,6 @@ export const frontmatter = {
       isDefaultWirkziel: false as boolean,
     }),
     getInitialRowsFromWirkkonzept(),
-    "handlungsalternativen",
   );
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -300,10 +360,7 @@ export const frontmatter = {
           if (el) {
             const state = Alpine.$data(el) as { rows?: WirkkonzeptRow[] };
             if (Array.isArray(state.rows)) {
-              localStorage.setItem(
-                "handlungsalternativen",
-                JSON.stringify(state.rows),
-              );
+              localStorage.setItem("wirkkonzept", JSON.stringify(state.rows));
             }
           }
         });

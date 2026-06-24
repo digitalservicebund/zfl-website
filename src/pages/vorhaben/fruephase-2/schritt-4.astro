@@ -183,6 +183,8 @@ export const frontmatter = {
     isDefaultWirkziel?: boolean;
   };
 
+  const STORAGE_KEY = "wirkkonzept";
+
   registerDynamicTable(
     "wirkzielTable",
     () => ({
@@ -195,7 +197,7 @@ export const frontmatter = {
       isDefaultWirkziel: false as boolean,
     }),
     [],
-    "wirkkonzept",
+    STORAGE_KEY,
   );
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -215,9 +217,25 @@ export const frontmatter = {
             "[x-data='wirkzielTable']",
           );
           if (el) {
-            (
-              Alpine.$data(el) as { saveToStorage?: () => void }
-            ).saveToStorage?.();
+            const state = Alpine.$data(el) as { rows?: WirkkonzeptRow[] };
+            if (Array.isArray(state.rows)) {
+              let defaultRows: WirkkonzeptRow[] = [];
+
+              try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) {
+                  const parsed: WirkkonzeptRow[] = JSON.parse(raw);
+                  defaultRows = parsed.filter((row) => row.isDefaultWirkziel);
+                }
+              } catch {
+                defaultRows = [];
+              }
+
+              localStorage.setItem(
+                STORAGE_KEY,
+                JSON.stringify([...state.rows, ...defaultRows]),
+              );
+            }
           }
         });
       });

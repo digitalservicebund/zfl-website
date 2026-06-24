@@ -79,10 +79,12 @@ fileignoreconfig:
   - filename: src/pages/vorhaben/fruephase-2/schritt-4.astro
     allowed_patterns:
       - :key
+      - STORAGE_KEY
   - filename: src/pages/vorhaben/fruephase-2/schritt-5.astro
     allowed_patterns:
       - normalizeWirkzielKey
       - key
+      - STORAGE_KEY
 scopeconfig:
   - scope: node
 allowed_patterns:
