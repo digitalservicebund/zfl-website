@@ -71,15 +71,7 @@ export const frontmatter = {
         <KernTableHeaderCell>Wirkziele</KernTableHeaderCell>
         <KernTableHeaderCell>Indikatoren</KernTableHeaderCell>
         <KernTableHeaderCell>Status Quo</KernTableHeaderCell>
-        <template
-          x-for="(_, altIndex) in (rows[0]?.handlungsalternativen ?? [])"
-          :key="`handlungsalternativen-header-${altIndex}`"
-        >
-          <KernTableHeaderCell>
-            <p x-text="`Handlungsalternative ${altIndex + 1}`"></p>
-          </KernTableHeaderCell>
-        </template>
-        <KernTableHeaderCell />
+        <KernTableHeaderCell>Handlungsalternativen</KernTableHeaderCell>
       </Fragment>
       <Fragment slot="body">
         <KernTableRow>
@@ -94,13 +86,9 @@ export const frontmatter = {
             (Risiko-)Aufschläge an.
           </KernTableCell>
           <KernTableCell />
-          <template
-            x-for="(_, altIndex) in (rows[0]?.handlungsalternativen ?? [])"
-            :key="`beispiel-handlungsalternativen-${altIndex}`"
-          >
-            <KernTableCell />
-          </template>
-          <KernTableCell :rowspan="rows.length + 1" class="p-0 align-middle">
+          <KernTableCell />
+
+          <KernTableCell :rowspan="rows.length + 2" class="p-0 align-middle">
             <button
               type="button"
               class="flex h-full w-full items-center justify-center gap-4 px-16 py-8 text-center"
@@ -113,232 +101,212 @@ export const frontmatter = {
             </button>
           </KernTableCell>
         </KernTableRow>
-
-        <template x-for="(row, index) in rows" :key="index">
-          <template x-if="!row.isHeaderRow">
-            <KernTableRow>
-              <KernTableCell>
-                <p
-                  x-text="index + 1 - (rows.slice(0, index).filter(r => r.isHeaderRow).length)"
-                >
-                </p>
-              </KernTableCell>
-              <KernTableCell>
-                <p x-text="row.wirkziel"></p>
-              </KernTableCell>
-              <KernTableCell>
-                <p x-text="row.indikatoren"></p>
-              </KernTableCell>
-              <KernTableCell>
-                <div class="kern-form-input">
-                  <input
-                    class="kern-form-input__input w-full"
-                    :id="`status-quo-${index}`"
-                    :name="`status-quo-${index}`"
-                    type="text"
-                    aria-label="Status Quo"
-                    x-model="row.statusQuo"
-                  />
-                </div>
-              </KernTableCell>
-              <template
-                x-for="(_, alternativeIndex) in row.handlungsalternativen"
-                :key="`handlungsalternativen-${index}-${alternativeIndex}`"
-              >
-                <KernTableCell>
-                  <div class="kern-form-input">
-                    <input
-                      class="kern-form-input__input w-full"
-                      :id="`handlungsalternativen-${index}-${alternativeIndex}`"
-                      :name="`handlungsalternativen-${index}-${alternativeIndex}`"
-                      type="text"
-                      :aria-label="`Handlungsalternative ${alternativeIndex + 1}`"
-                      x-model="row.handlungsalternativen[alternativeIndex]"
-                    />
-                  </div>
-                </KernTableCell>
-              </template>
-            </KernTableRow>
-          </template>
+        <template
+          x-for="(row, index) in rows.filter((item) => !item.isDefaultWirkziel)"
+          :key="`custom-${index}`"
+        >
+          <KernTableRow>
+            <KernTableCell>
+              <p x-text="index + 1"></p>
+            </KernTableCell>
+            <KernTableCell>
+              <p x-text="row.wirkziel"></p>
+            </KernTableCell>
+            <KernTableCell>
+              <p x-text="row.indikatoren"></p>
+            </KernTableCell>
+            <KernTableCell>
+              <div class="kern-form-input">
+                <input
+                  class="kern-form-input__input w-full"
+                  :id="`status-quo-${index}`"
+                  :name="`status-quo-${index}`"
+                  type="text"
+                  aria-label="Status Quo"
+                  x-model="row.statusQuo"
+                />
+              </div>
+            </KernTableCell>
+            <KernTableCell>
+              <div class="kern-form-input">
+                <input
+                  class="kern-form-input__input w-full"
+                  :id="`handlungsalternativen-${index}`"
+                  :name="`handlungsalternativen-${index}`"
+                  type="text"
+                  aria-label="Handlungsalternativen"
+                  x-model="row.handlungsalternativen"
+                />
+              </div>
+            </KernTableCell>
+          </KernTableRow>
+        </template>
+        <KernTableRow>
+          <KernTableCell colspan={5}
+            ><b
+              >Folgende Wirkziele sind abgeleitet aus kombinierten Checks und
+              Arbeitshilfen:</b
+            ></KernTableCell
+          >
+        </KernTableRow>
+        <template
+          x-for="(row, index) in rows.filter((item) => item.isDefaultWirkziel)"
+          :key="`default-${index}`"
+        >
+          <KernTableRow>
+            <KernTableCell>
+              <p x-text="index + 1"></p>
+            </KernTableCell>
+            <KernTableCell>
+              <p x-text="row.wirkziel"></p>
+            </KernTableCell>
+            <KernTableCell>
+              <p x-text="row.indikatoren"></p>
+            </KernTableCell>
+            <KernTableCell>
+              <div class="kern-form-input">
+                <input
+                  class="kern-form-input__input w-full"
+                  :id="`default-status-quo-${index}`"
+                  :name="`default-status-quo-${index}`"
+                  type="text"
+                  aria-label="Status Quo"
+                  x-model="row.statusQuo"
+                />
+              </div>
+            </KernTableCell>
+            <KernTableCell>
+              <div class="kern-form-input">
+                <input
+                  class="kern-form-input__input w-full"
+                  :id="`default-handlungsalternativen-${index}`"
+                  :name="`default-handlungsalternativen-${index}`"
+                  type="text"
+                  aria-label="Handlungsalternativen"
+                  x-model="row.handlungsalternativen"
+                />
+              </div>
+            </KernTableCell>
+          </KernTableRow>
         </template>
       </Fragment>
     </KernTable>
   </div>
+</FruephaseLayout>
 
-  <script>
-    import Alpine from "alpinejs";
-    import { registerDynamicTable } from "../_components/kernTableState";
+<script>
+  import Alpine from "alpinejs";
+  import { registerDynamicTable } from "../_components/kernTableState";
 
-    type WirkkonzeptRow = {
-      wirkziel: string;
-      indikatoren: string;
-      erfolgsschwelle: string;
-      datengrundlage: string;
-      statusQuo: string;
-      handlungsalternativen: string[];
-      isHeaderRow?: boolean;
-    };
+  type WirkkonzeptRow = {
+    wirkziel: string;
+    indikatoren: string;
+    erfolgsschwelle: string;
+    datengrundlage: string;
+    statusQuo: string;
+    handlungsalternativen: string[];
+    isDefaultWirkziel?: boolean;
+  };
 
-    const REQUIRED_WIRKZIELE = [
-      "Digitaltauglichkeit",
-      "Vollzugstauglichkeit",
-      "Praxistauglichkeit",
-      "Bürgerfreundlichkeit",
-    ];
-    const REQUIRED_WIRKZIELE_SET = new Set(
-      REQUIRED_WIRKZIELE.map((wirkziel) => wirkziel.toLocaleLowerCase()),
+  const DEFAULT_WIRKZIELE = [
+    "Digitaltauglichkeit",
+    "Vollzugstauglichkeit",
+    "Praxistauglichkeit",
+    "Bürgerfreundlichkeit",
+  ];
+
+  const createDefaultRow = (wirkziel: string): WirkkonzeptRow => ({
+    wirkziel,
+    indikatoren: "",
+    erfolgsschwelle: "",
+    datengrundlage: "",
+    statusQuo: "",
+    handlungsalternativen: [],
+    isDefaultWirkziel: true,
+  });
+
+  const getInitialRowsFromWirkkonzept = (): WirkkonzeptRow[] => {
+    const defaultRows = DEFAULT_WIRKZIELE.map((wirkziel) =>
+      createDefaultRow(wirkziel),
     );
 
-    const createDefaultRow = (wirkziel: string): WirkkonzeptRow => ({
-      wirkziel,
+    try {
+      // get user created rows from localStorage - try handlungsalternativen first, fallback to wirkkonzept
+      const customWirkzieleObj =
+        localStorage.getItem("handlungsalternativen") ||
+        localStorage.getItem("wirkkonzept");
+      if (!customWirkzieleObj) {
+        return defaultRows;
+      }
+
+      const parsed: WirkkonzeptRow[] = JSON.parse(customWirkzieleObj);
+      const customWirkziele = parsed.filter(
+        (row) =>
+          row.wirkziel.trim().length > 0 &&
+          !DEFAULT_WIRKZIELE.includes(row.wirkziel),
+      );
+
+      const defaultWirkziele = new Map(
+        parsed
+          .filter((row) => DEFAULT_WIRKZIELE.includes(row.wirkziel))
+          .map((row) => [
+            row.wirkziel,
+            { ...row, isDefaultWirkziel: true as boolean },
+          ]),
+      );
+
+      const mergedDefaultRows = DEFAULT_WIRKZIELE.map((wirkziel) => {
+        const persistedDefaultRow = defaultWirkziele.get(wirkziel);
+        if (!persistedDefaultRow) {
+          return createDefaultRow(wirkziel);
+        }
+
+        return {
+          ...createDefaultRow(wirkziel),
+          ...persistedDefaultRow,
+          isDefaultWirkziel: true as boolean,
+        };
+      });
+
+      return [...customWirkziele, ...mergedDefaultRows];
+    } catch {
+      return defaultRows;
+    }
+  };
+
+  registerDynamicTable(
+    "handlungsAlternativenTable",
+    () => ({
+      wirkziel: "",
       indikatoren: "",
       erfolgsschwelle: "",
       datengrundlage: "",
       statusQuo: "",
-      handlungsalternativen: [""],
-    });
+      handlungsalternativen: [] as string[],
+      isDefaultWirkziel: false as boolean,
+    }),
+    getInitialRowsFromWirkkonzept(),
+    "handlungsalternativen",
+  );
 
-    const normalizeRow = (row: WirkkonzeptRow): WirkkonzeptRow => {
-      if (Array.isArray(row.handlungsalternativen)) {
-        return {
-          ...row,
-          handlungsalternativen:
-            row.handlungsalternativen.length > 0
-              ? row.handlungsalternativen
-              : [""],
-        };
-      }
-
-      if (typeof row.handlungsalternativen === "string") {
-        return {
-          ...row,
-          handlungsalternativen: [row.handlungsalternativen],
-        };
-      }
-
-      return {
-        ...row,
-        handlungsalternativen: [""],
-      };
-    };
-
-    const normalizeWirkzielKey = (wirkziel: string): string =>
-      wirkziel.trim().toLocaleLowerCase();
-
-    const getCustomWirkzieleRows = (): WirkkonzeptRow[] => {
-      try {
-        const raw = localStorage.getItem("wirkkonzept");
-        if (!raw) {
-          return [];
-        }
-
-        const parsed: WirkkonzeptRow[] = JSON.parse(raw);
-        return parsed.filter((row) => {
-          const wirkziel = row.wirkziel.trim();
-          return (
-            wirkziel.length > 0 &&
-            !REQUIRED_WIRKZIELE_SET.has(wirkziel.toLocaleLowerCase())
+  document.addEventListener("DOMContentLoaded", () => {
+    document
+      .querySelectorAll<HTMLAnchorElement>("#Weiter, #Zurück")
+      .forEach((link) => {
+        link.addEventListener("click", () => {
+          const el = document.querySelector<HTMLElement>(
+            "[x-data='handlungsAlternativenTable']",
           );
-        });
-      } catch {
-        return [];
-      }
-    };
-
-    const mergeRowsWithLatestWirkziele = (
-      existingRows: WirkkonzeptRow[],
-    ): WirkkonzeptRow[] => {
-      const normalizedExistingRows = existingRows.map(normalizeRow);
-      const findExistingRow = (
-        wirkziel: string,
-      ): WirkkonzeptRow | undefined => {
-        const key = normalizeWirkzielKey(wirkziel);
-        return normalizedExistingRows.find(
-          (row) => normalizeWirkzielKey(row.wirkziel) === key,
-        );
-      };
-
-      const customRows = getCustomWirkzieleRows().map((sourceRow) => {
-        const existingRow = findExistingRow(sourceRow.wirkziel);
-
-        return normalizeRow({
-          wirkziel: sourceRow.wirkziel,
-          indikatoren: sourceRow.indikatoren,
-          erfolgsschwelle: sourceRow.erfolgsschwelle,
-          datengrundlage: sourceRow.datengrundlage,
-          statusQuo: existingRow?.statusQuo ?? "",
-          handlungsalternativen: existingRow?.handlungsalternativen ?? [""],
-        });
-      });
-
-      const defaultRows = REQUIRED_WIRKZIELE.map((wirkziel) => {
-        const existingRow = findExistingRow(wirkziel);
-        return existingRow
-          ? normalizeRow({ ...existingRow, wirkziel })
-          : createDefaultRow(wirkziel);
-      });
-
-      const headerRow: WirkkonzeptRow = {
-        wirkziel: "",
-        indikatoren: "",
-        erfolgsschwelle: "",
-        datengrundlage: "",
-        statusQuo: "",
-        handlungsalternativen: [],
-        isHeaderRow: true,
-      };
-
-      return [...customRows, headerRow, ...defaultRows];
-    };
-
-    const getInitialRowsFromWirkkonzept = (): WirkkonzeptRow[] => {
-      return mergeRowsWithLatestWirkziele([]);
-    };
-
-    registerDynamicTable(
-      "handlungsAlternativenTable",
-      () => ({
-        wirkziel: "",
-        indikatoren: "",
-        erfolgsschwelle: "",
-        datengrundlage: "",
-        statusQuo: "",
-        handlungsalternativen: [""] as string[],
-      }),
-      getInitialRowsFromWirkkonzept(),
-      "handlungsalternativen",
-    );
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const tableElement = document.querySelector<HTMLElement>(
-        "[x-data='handlungsAlternativenTable']",
-      );
-      if (tableElement) {
-        const tableState = Alpine.$data(tableElement) as {
-          rows?: WirkkonzeptRow[];
-          saveToStorage?: () => void;
-        };
-
-        tableState.rows = mergeRowsWithLatestWirkziele(
-          Array.isArray(tableState.rows) ? tableState.rows : [],
-        );
-        tableState.saveToStorage?.();
-      }
-
-      document
-        .querySelectorAll<HTMLAnchorElement>("#Weiter, #Zurück")
-        .forEach((link) => {
-          link.addEventListener("click", () => {
-            const el = document.querySelector<HTMLElement>(
-              "[x-data='handlungsAlternativenTable']",
-            );
-            if (el) {
-              (
-                Alpine.$data(el) as { saveToStorage?: () => void }
-              ).saveToStorage?.();
+          if (el) {
+            const state = Alpine.$data(el) as { rows?: WirkkonzeptRow[] };
+            if (Array.isArray(state.rows)) {
+              localStorage.setItem(
+                "handlungsalternativen",
+                JSON.stringify(state.rows),
+              );
             }
-          });
+          }
         });
-    });
-  </script>
-</FruephaseLayout>
+      });
+  });
+</script>
