@@ -1,21 +1,22 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
+import KernCard from "@/components/KernCard.astro";
+import InfoPanel from "@/components/InfoPanel.astro";
+import { Image } from "astro:assets";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import allgemeinImage from "@/images/Trainings.jpg";
 import zusammenarbeitImg from "@/images/Zusammenarbeit.png";
 import schulungImage from "@/images/computer.jpg";
 import ansatzImg from "@/images/Ansatz.jpg";
-import KernCard from "@/components/KernCard.astro";
-import { schulungen } from "@/config/routes";
-import { begleitungen } from "@/config/routes";
-import { werkzeuge } from "@/config/routes";
-import InfoPanel from "@/components/InfoPanel.astro";
-import { Image } from "astro:assets";
-import { ueber } from "@/config/routes";
+import {
+  schulungen,
+  ueber_neueFruephase,
+  begleitungen,
+  werkzeuge,
+  ueber,
+} from "@/config/routes";
 import { mailto } from "@/utils/mailtoHelper";
-import { ueber_neueFruephase } from "@/config/routes";
-import { Icon } from "astro-icon/components";
 
 export const frontmatter = {
   title: "Zentrum für Legistik",
@@ -25,29 +26,6 @@ export const frontmatter = {
 
 <Layout title="">
   <main class="breakout-grid">
-    <div
-      id="fruehphase-info-banner"
-      class="breakout bg-[#D5F6FF]"
-      x-show="showBanner"
-      x-data="{ showBanner: true }"
-    >
-      <div
-        class="flex w-full max-w-7xl items-center justify-between gap-12 py-12"
-      >
-        <p class="kern-title mb-0">
-          Die Infoseite zur neuen
-          <a class="text-link" href={ueber_neueFruephase.path}> Frühphase</a> ist
-          live – jetzt informieren!
-        </p>
-        <button
-          aria-label="Banner ausblenden"
-          class="increase-tap-area py-8 text-2xl text-[#006685] hover:opacity-75"
-          x-on:click="showBanner = false"
-        >
-          <Icon name="ic:baseline-clear" />
-        </button>
-      </div>
-    </div>
     <Hero level="root">
       <h1 class="max-w-a11y">
         Die zentrale Anlaufstelle für bessere Rechtsetzung
@@ -131,6 +109,11 @@ export const frontmatter = {
         <InfoPanel>
           <h2>Im Fokus</h2>
           <p>
+            <a href={ueber_neueFruephase.path}>Neue Infoseite Frühphase</a>:
+            Hier finden Sie alle Informationen zum Update für die frühe Phase
+            der Rechtsetzung.
+          </p>
+          <p>
             <a
               class="text-link"
               href="https://bmds.bund.de/1-jahr-bmds"
@@ -171,15 +154,15 @@ export const frontmatter = {
             <a class="text-link">{ZFL_EMAIL.display}</a>.
           </p>
           <a
-            class="kern-btn kern-btn--secondary self-start"
+            class="kern-btn kern-btn--secondary mt-16 self-start"
             href={mailto(
               ZFL_EMAIL.url,
               "Anmeldung Zentrum für Legistik Newsletter",
               "Hiermit melde ich mich für den Zentrum für Legistik Newsletter an.",
             )}
           >
-            <span class="kern-icon kern-icon--open-in-new" aria-hidden="true"
-            ></span>
+            <span class="kern-icon kern-icon--open-in-new" aria-hidden="true">
+            </span>
             <span class="kern-label">E-Mail Programm öffnen</span>
           </a>
         </InfoPanel>
