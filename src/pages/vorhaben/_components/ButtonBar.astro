@@ -1,6 +1,7 @@
 ---
 import Modal from "@/components/Modal.astro";
 import { Icon } from "astro-icon/components";
+import { vorhaben_fruephase2_schritt5 } from "@/config/routes";
 
 interface Props {
   prevPath?: string;
@@ -86,17 +87,30 @@ const defaultText = "Ihre Daten werden automatisch im Browser gespeichert";
               <h2>Zeit für einen Zwischenstand</h2>
               <p>
                 Es ist jederzeit möglich zurückzugehen und nochmals zu
-                evaluieren. Sind Sie sicher, die besten Lösungen gefunden zu
-                haben? Jetzt ist ein guter Zeitpunkt um nochmal zu
-                kontrollieren, ob Wirkziele, Indikatoren, die
-                Problembeschreibung und Hypothesen etc. noch passen. Gehen Sie
-                gerne zurück, um Ihre Eingaben zu ändern. Ansonsten können Sie
-                auch fortfahren.
+                evaluieren.{" "}
               </p>
-              <button type="button" class="kern-btn kern-btn--secondary">
-                <span class="kern-label">Beliebiger Text</span>
-              </button>
-              <a href={nextPath} class="kern-btn kern-btn--primary" id="Weiter">
+              <p>
+                Sind Sie sicher, die besten Lösungen gefunden zu haben? Jetzt
+                ist ein guter Zeitpunkt um nochmal zu kontrollieren, ob
+                Wirkziele, Indikatoren, die Problembeschreibung und Hypothesen
+                etc. noch passen.
+              </p>{" "}
+              <p>
+                Gehen Sie gerne zurück, um Ihre Eingaben zu ändern. Ansonsten
+                können Sie auch fortfahren.
+              </p>
+              <a
+                type="button"
+                class="kern-btn kern-btn--primary"
+                href={vorhaben_fruephase2_schritt5.path}
+              >
+                <span class="kern-label">Eingabe pürfen</span>
+              </a>
+              <a
+                href={nextPath}
+                class="kern-btn kern-btn--secondary"
+                id="Weiter"
+              >
                 <span class="kern-label">Zum nächsten Schritt</span>
                 <span
                   class="kern-icon kern-icon--arrow-forward"

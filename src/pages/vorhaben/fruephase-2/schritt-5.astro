@@ -4,6 +4,7 @@ import KernTable from "../_components/KernTable.astro";
 import KernTableCell from "../_components/KernTableCell.astro";
 import KernTableHeaderCell from "../_components/KernTableHeaderCell.astro";
 import KernTableRow from "../_components/KernTableRow.astro";
+import Modal from "@/components/Modal.astro";
 
 export const frontmatter = {
   title: "9. Handlungsalternativen entwickeln",
@@ -86,7 +87,7 @@ export const frontmatter = {
         </template>
       </Fragment>
       <Fragment slot="body">
-        <KernTableRow>
+        <!-- <KernTableRow>
           <KernTableCell>-</KernTableCell>
           <KernTableCell>
             <b>Beispiel Vollautomatisiertes Fahren:</b>
@@ -117,7 +118,7 @@ export const frontmatter = {
               Handlungsalternative hinzufügen
             </button>
           </KernTableCell>
-        </KernTableRow>
+        </KernTableRow> -->
         <template
           x-for="(row, index) in rows.filter((item) => !item.isDefaultWirkziel)"
           :key="`custom-${index}`"
@@ -230,6 +231,181 @@ export const frontmatter = {
       </Fragment>
     </KernTable>
   </div>
+  <button
+    type="button"
+    popovertarget="example-table"
+    class="text-cosmic-blue-base inline-flex items-center gap-4"
+  >
+    <span>Ausgefülltes Beispiel ansehen</span>
+    <span
+      class="kern-icon kern-icon--open-in-new kern-icon--default"
+      aria-hidden="true"
+      style="background-color: currentColor"></span>
+  </button>
+  <!-- <button popovertarget="example-table">Ausgefülltes Beispiel ansehen</button> -->
+  <Modal id="example-table" wide>
+    <KernTable
+      addButtonLabel="Wirkziel hinzufügen"
+      columnCount={5}
+      bodyId="table-body"
+    >
+      <Fragment slot="header">
+        <KernTableHeaderCell />
+        <KernTableHeaderCell>Wirkziele</KernTableHeaderCell>
+        <KernTableHeaderCell>Indikatoren</KernTableHeaderCell>
+        <KernTableHeaderCell>Status Quo</KernTableHeaderCell>
+        <KernTableHeaderCell>Handlungsalternative 1</KernTableHeaderCell>
+        <KernTableHeaderCell>Handlungsalternative 2</KernTableHeaderCell>
+      </Fragment>
+      <Fragment slot="body">
+        <!-- <KernTableRow>
+          <KernTableCell>-</KernTableCell>
+          <KernTableCell>
+            <b>Beispiel Vollautomatisiertes Fahren:</b>
+            Fahrzeugautomatisierungstechnologie kann (rechts-)sicher im deutschen
+            Verkehr eingesetzt werden. Ganzes Beispiel anschauen
+          </KernTableCell>
+          <KernTableCell>
+            <b>Beispiel Vollautomatisiertes Fahren:</b> Versicherer bieten KfZ-Pflichtversicherungen
+            für h/v Fahrzeuge ohne (Risiko-)Aufschläge an.
+          </KernTableCell>
+          <KernTableCell>Status Quo: Aktuelle Lage</KernTableCell>
+          <KernTableCell> Handlungsalternative Abwarten</KernTableCell>
+          <KernTableCell> Handlungsalternative Zulassung</KernTableCell>
+        </KernTableRow> -->
+        <KernTableRow>
+          <KernTableCell rowspan="5">1</KernTableCell>
+          <KernTableCell rowspan="5">
+            Fahrzeugautomatisierungstechnologie kann (rechts-)sicher im
+            deutschen Verkehr eingesetzt werden.
+          </KernTableCell>
+          <KernTableCell
+            >Zulassungsbehörden sind rechtlich und tatsächlich in die Lage
+            versetzt h/v Fahrzeuge zuzulassen</KernTableCell
+          >
+          <KernTableCell> Nein </KernTableCell>
+          <KernTableCell>Nein, aber bisher auch kein Bedarf</KernTableCell>
+          <KernTableCell>Ja, da Voraussetzungen geschaffen</KernTableCell>
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell>Das Vorhaben ist datenschutzkonform</KernTableCell>
+          <KernTableCell>Ja</KernTableCell>
+          <KernTableCell>/</KernTableCell>
+          <KernTableCell>Unklar</KernTableCell>
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell
+            >Versicherer bieten Kfz-Pflichtversicherungen für h/v Fahrzeuge ohne
+            (Risiko-)Aufschläge an</KernTableCell
+          >
+          <KernTableCell>Nein</KernTableCell>
+          <KernTableCell>Nein</KernTableCell>
+          <KernTableCell>Wahrscheinlich Ja</KernTableCell>
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell
+            >Haftungsfragen sind für Rechtsanwender eindeutig lösbar</KernTableCell
+          >
+          <KernTableCell
+            >Ja, aber ausschließlich bezogen auf datenschutzrechtliche
+            Fragestellungen
+          </KernTableCell>
+          <KernTableCell>Nein, weiterhin unklar</KernTableCell>
+          <KernTableCell>Nein, ist zusätzlich zu regeln</KernTableCell>
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell
+            >Fahrzeugführerinnen und Fahrzeugführer sind in der Lage
+            Fahrzeugautomatisierungstechnologie sicher anzuwenden</KernTableCell
+          >
+          <KernTableCell> Nein </KernTableCell>
+          <KernTableCell>
+            Nein, sichere Anwendung bedarf vorheriger Übung
+          </KernTableCell>
+          <KernTableCell>
+            Unklar, aber möglich, wenn Anwender mit zugelassenen Fahrzeugen üben
+          </KernTableCell>
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell>2</KernTableCell>
+          <KernTableCell>
+            Deutschland ist Innovationsführer im Bereich der
+            Fahrzeugautomatisierung.
+          </KernTableCell>
+          <KernTableCell>
+            (Herstellerhaftungs-)Regelungen sind keine Beeinträchtigung für
+            Innovation (Entwicklung und Herstellung)
+          </KernTableCell>
+          <KernTableCell
+            >Nein, mehr datenschutzrechtliche Regelungen erschwert die
+            Entwicklung, da höhere Anforderungen
+          </KernTableCell>
+          <KernTableCell>
+            Ja, da nicht über das Normalmaß hinaus; weiterhin Haftung nur nach §
+            1 Abs.1 ProdHaftG + § 823 Abs. 1 BGB
+          </KernTableCell>
+          <KernTableCell>
+            Ja, fördern Innovation sogar aktiv, durch klare technische und
+            rechtliche Anforderungen
+          </KernTableCell>
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell colspan="6">
+            Unterstützende Wirkziele, abgeleitet aus kombinierten Checks und
+            Arbeitshilfen</KernTableCell
+          >
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell />
+          <KernTableCell> Digitaltauglichkeit </KernTableCell>
+          <KernTableCell>
+            Zusammenfassende Einschätzung: Ist die Handlungsalternative
+            digitaltauglich?
+          </KernTableCell>
+          <KernTableCell>Zu prüfen </KernTableCell>
+          <KernTableCell> / </KernTableCell>
+          <KernTableCell> Zu prüfen </KernTableCell>
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell />
+          <KernTableCell> Vollzugstauglichkeit </KernTableCell>
+          <KernTableCell>
+            Zusammenfassend: Überwiegen Belastungen (etwa Kosten und
+            Erfüllungsaufwände) oder Nutzen für Vollzugsakteure?
+          </KernTableCell>
+          <KernTableCell>Zu prüfen </KernTableCell>
+          <KernTableCell> / </KernTableCell>
+          <KernTableCell> Zu prüfen </KernTableCell>
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell />
+          <KernTableCell> Praxistauglichkeit </KernTableCell>
+          <KernTableCell>
+            Zusammenfassend: Überwiegen Belastungen (etwa Kosten und
+            Erfüllungsaufwände) oder Nutzen für die Wirtschaft?
+          </KernTableCell>
+          <KernTableCell>Zu prüfen </KernTableCell>
+          <KernTableCell>
+            h/v Fahrzeuge können nicht verkauft werden
+          </KernTableCell>
+          <KernTableCell> Zu prüfen </KernTableCell>
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell />
+          <KernTableCell> Bürgerfreundlichkeit </KernTableCell>
+          <KernTableCell>
+            Zusammenfassend: Überwiegen Belastungen (etwa Kosten und
+            Erfüllungsaufwände) oder Nutzen für Bürgerinnen und Bürger?
+          </KernTableCell>
+          <KernTableCell>Zu prüfen </KernTableCell>
+          <KernTableCell>
+            h/v Fahrzeuge können nicht verkauft werden
+          </KernTableCell>
+          <KernTableCell> Zu prüfen </KernTableCell>
+        </KernTableRow>
+      </Fragment>
+    </KernTable>
+  </Modal>
 </FruephaseLayout>
 
 <script>

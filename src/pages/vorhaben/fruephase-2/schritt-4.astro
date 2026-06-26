@@ -4,6 +4,7 @@ import KernTable from "../_components/KernTable.astro";
 import KernTableCell from "../_components/KernTableCell.astro";
 import KernTableHeaderCell from "../_components/KernTableHeaderCell.astro";
 import KernTableRow from "../_components/KernTableRow.astro";
+import Modal from "@/components/Modal.astro";
 
 export const frontmatter = {
   title: "8. Wirkziele definieren",
@@ -167,6 +168,122 @@ export const frontmatter = {
       </Fragment>
     </KernTable>
   </div>
+  <button
+    type="button"
+    popovertarget="example-table"
+    class="text-cosmic-blue-base inline-flex items-center gap-4"
+  >
+    <a>Ausgefülltes Beispiel ansehen</a>
+    <span
+      class="kern-icon kern-icon--open-in-new kern-icon--default text-cosmic-blue-base"
+      aria-hidden="true"></span>
+  </button>
+  <Modal id="example-table" wide>
+    <KernTable
+      addButtonLabel="Wirkziel hinzufügen"
+      columnCount={5}
+      bodyId="table-body"
+    >
+      <Fragment slot="header">
+        <KernTableHeaderCell />
+        <KernTableHeaderCell>Wirkziele</KernTableHeaderCell>
+        <KernTableHeaderCell>Indikatoren</KernTableHeaderCell>
+        <KernTableHeaderCell>Erfolgsschwelle</KernTableHeaderCell>
+        <KernTableHeaderCell>Datengrundlage</KernTableHeaderCell>
+      </Fragment>
+      <Fragment slot="body">
+        <KernTableRow>
+          <KernTableCell>-</KernTableCell>
+          <KernTableCell>
+            <b>Beispiel Vollautomatisiertes Fahren:</b>
+            Fahrzeugautomatisierungstechnologie kann (rechts-)sicher im deutschen
+            Verkehr eingesetzt werden. Ganzes Beispiel anschauen
+          </KernTableCell>
+          <KernTableCell>
+            <b>Beispiel Vollautomatisiertes Fahren:</b> Versicherer bieten KfZ-Pflichtversicherungen
+            für h/v Fahrzeuge ohne (Risiko-)Aufschläge an.
+          </KernTableCell>
+          <KernTableCell>Ja (binär)</KernTableCell>
+          <KernTableCell
+            >Markterkundung/Befragung Versicherungswirtschaft</KernTableCell
+          >
+        </KernTableRow>
+
+        <KernTableRow>
+          <KernTableCell rowspan="5">1</KernTableCell>
+          <KernTableCell rowspan="5"
+            >Fahrzeugautomatisierungstechnologie kann (rechts-)sicher im
+            deutschen Verkehr eingesetzt werden.</KernTableCell
+          >
+          <KernTableCell
+            >Zulassungsbehörden sind rechtlich und tatsächlich in die Lage
+            versetzt h/v Fahrzeuge zuzulassen</KernTableCell
+          >
+          <KernTableCell>Ja</KernTableCell>
+          <KernTableCell>Befragung/Ex-Post-Praxischeck</KernTableCell>
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell>Das Vorhaben ist datenschutzkonform</KernTableCell>
+          <KernTableCell>Ja</KernTableCell>
+          <KernTableCell>Gutachten/Stellungnahme BfDI</KernTableCell>
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell
+            >Versicherer bieten Kfz-Pflichtversicherungen für h/v Fahrzeuge ohne
+            (Risiko-)Aufschläge an</KernTableCell
+          >
+          <KernTableCell>Ja</KernTableCell>
+          <KernTableCell
+            >Markterkundung/Befragung Versicherungswirtschaft</KernTableCell
+          >
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell
+            >Haftungsfragen sind für Rechtsanwender eindeutig lösbar</KernTableCell
+          >
+          <KernTableCell
+            >XX % der Rechtsanwender geben an, dass Haftungsfragen in Bezug auf
+            Fahrzeugautomatisierung eindeutig lösbar sind
+          </KernTableCell>
+          <KernTableCell
+            >Quantitative Befragung, Alternativ: qualitative Tiefeninterviews
+          </KernTableCell>
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell
+            >Fahrzeugführerinnen und Fahrzeugführer sind in der Lage
+            Fahrzeugautomatisierungstechnologie sicher anzuwenden</KernTableCell
+          >
+          <KernTableCell
+            >XX% der Fahrzeugführerinnen und Fahrzeugführer
+          </KernTableCell>
+          <KernTableCell>Befragungsdaten, Testdaten </KernTableCell>
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell>2</KernTableCell>
+          <KernTableCell>
+            Deutschland ist Innovationsführer im Bereich der
+            Fahrzeugautomatisierung.
+          </KernTableCell>
+          <KernTableCell>
+            (Herstellerhaftungs-)Regelungen sind keine Beeinträchtigung für
+            Innovation (Entwicklung und Herstellung)
+          </KernTableCell>
+          <KernTableCell
+            ><p>
+              XX % der deutschen Automobilhersteller geben an, dass
+              Haftungsfragen in Bezug auf Fahrzeugautomatisierung nicht
+              Entwicklung und Vertrieb hemmen
+            </p>
+            <p>Alternativ: Ja (Qualitative Einschätzung)</p>
+          </KernTableCell>
+          <KernTableCell>
+            Quantitative Befragung Alternativ: qualitative Tiefeninterviews
+          </KernTableCell>
+        </KernTableRow>
+      </Fragment>
+    </KernTable>
+  </Modal>
 </FruephaseLayout>
 
 <script>
