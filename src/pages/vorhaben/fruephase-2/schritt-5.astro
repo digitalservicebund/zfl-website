@@ -87,17 +87,10 @@ export const frontmatter = {
         </template>
       </Fragment>
       <Fragment slot="body">
-        <!-- <KernTableRow>
-          <KernTableCell>-</KernTableCell>
-          <KernTableCell>
-            <b>Beispiel Vollautomatisiertes Fahren:</b>
-            Fahrzeugautomatisierungstechnologie kann (rechts-)sicher im deutschen
-            Verkehr eingesetzt werden.
-          </KernTableCell>
-          <KernTableCell>
-            Versicherer bieten KfZ-Pflichtversicherungen für h/v Fahrzeuge ohne
-            (Risiko-)Aufschläge an.
-          </KernTableCell>
+        <KernTableRow>
+          <KernTableCell />
+          <KernTableCell />
+          <KernTableCell />
           <KernTableCell />
           <template
             x-for="(spalte, spaltenIndex) in Math.max(1, ...rows.map((row) => row.handlungsalternativen.length))"
@@ -105,7 +98,6 @@ export const frontmatter = {
           >
             <KernTableCell />
           </template>
-
           <KernTableCell :rowspan="rows.length + 2" class="p-0 align-middle">
             <button
               type="button"
@@ -118,7 +110,7 @@ export const frontmatter = {
               Handlungsalternative hinzufügen
             </button>
           </KernTableCell>
-        </KernTableRow> -->
+        </KernTableRow>
         <template
           x-for="(row, index) in rows.filter((item) => !item.isDefaultWirkziel)"
           :key="`custom-${index}`"
