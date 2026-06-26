@@ -1,0 +1,541 @@
+---
+import FruephaseLayout from "./_FruephaseLayout.astro";
+import KernTable from "../_components/KernTable.astro";
+import KernTableCell from "../_components/KernTableCell.astro";
+import KernTableHeaderCell from "../_components/KernTableHeaderCell.astro";
+import KernTableRow from "../_components/KernTableRow.astro";
+import Modal from "@/components/Modal.astro";
+
+export const frontmatter = {
+  title: "9. Handlungsalternativen entwickeln",
+  navLabel: "9. Handlungsalternativen entwickeln",
+  sitemap: false,
+  navOrder: 5,
+};
+---
+
+<FruephaseLayout
+  title={frontmatter.title}
+  pageNumber={frontmatter.navOrder}
+  openModal
+>
+  <h2>{frontmatter.title}</h2>
+  <div>
+    <div class="columns-2">
+      <p class="p-20">
+        Entwerfen Sie Ideen für Handlungsalternativen, nutzen Sie hierfür die
+        Ursachen- und Wirkungsketten aus der <a
+          href="https://google.de"
+          target="_blank">Problemanalyse</a
+        > und/oder ziehen Sie ggf. Expertinnen und Experten hinzu.
+      </p>
+      <div class="break-inside-avoid">
+        <div class="rounded-xl bg-blue-100 p-20">
+          <p>
+            <b>Tipp</b>
+          </p>
+          Denken Sie weit! Entwickeln Sie dabei zum Beispiel Lösungsoptionen für Anreize
+          und Förderungen sowie für Verbote und Sanktionen. Berücksichtigen Sie dabei
+          auch die Möglichkeiten aus dem Regulatorischen Instrumentenkasten.
+        </div>
+      </div>
+    </div>
+    <h3>So geht es</h3>
+    <ol>
+      <li>
+        Sammeln Sie so viele Handlungsalternativen, wie möglich. Vorschlag:
+        Nutzen Sie dazu die <a href="https://google.de" target="_blank"
+          >Brainwriting-Methode</a
+        >. Masse statt klasse. Streben Sie auch nicht-regulatorische
+        Alternativen an.
+      </li>
+      <li>Erstellen Sie eine Liste.</li>
+      <li>
+        Suchen Sie 2–3 Handlungsalternativen aus, die einen besonderen Nutzen im
+        Verhältnis zum Aufwand erwarten lassen.
+      </li>
+      <li>
+        Beantworten Sie zunächst den Status Quo und inwiefern dieser die
+        Indikatoren jeweils erfüllt.
+      </li>
+      <li>
+        Beantworten Sie dann pro Handlungsalternative, inwiefern der Indikator
+        erfüllt wird: Ja, nein, unklar. Sie können Texte dazuschreiben
+      </li>
+    </ol>
+  </div>
+
+  <div
+    x-data="handlungsAlternativenTable"
+    class="relative left-1/2 w-[calc(100vw-32px)] max-w-7xl -translate-x-1/2 min-[900px]:w-[calc(100vw-300px-32px)]"
+  >
+    <KernTable columnCount={5}>
+      <Fragment slot="caption">Handlungsalternativen Tabelle</Fragment>
+      <Fragment slot="header">
+        <KernTableHeaderCell />
+        <KernTableHeaderCell>Wirkziele</KernTableHeaderCell>
+        <KernTableHeaderCell>Indikatoren</KernTableHeaderCell>
+        <KernTableHeaderCell>Status Quo</KernTableHeaderCell>
+        <template
+          x-for="(spalte, spaltenIndex) in Math.max(1, ...rows.map((row) => row.handlungsalternativen.length))"
+          :key="`ha-header-${spaltenIndex}`"
+        >
+          <KernTableHeaderCell>
+            Handlungsalternative
+            <span x-text="spalte"></span>
+          </KernTableHeaderCell>
+        </template>
+      </Fragment>
+      <Fragment slot="body">
+        <KernTableRow>
+          <KernTableCell />
+          <KernTableCell />
+          <KernTableCell />
+          <KernTableCell />
+          <template
+            x-for="(spalte, spaltenIndex) in Math.max(1, ...rows.map((row) => row.handlungsalternativen.length))"
+            :key="`example-ha-${spaltenIndex}`"
+          >
+            <KernTableCell />
+          </template>
+          <KernTableCell :rowspan="rows.length + 2" class="p-0 align-middle">
+            <button
+              type="button"
+              class="flex h-full w-full items-center justify-center gap-4 px-16 py-8 text-center"
+              @click="nextSpaltenAnzahl = Math.max(1, ...rows.map((row) => row.handlungsalternativen.length)) + 1; rows.forEach((currentRow) => { while (currentRow.handlungsalternativen.length < nextSpaltenAnzahl) { currentRow.handlungsalternativen.push(''); } });"
+            >
+              <span
+                class="kern-icon kern-icon--add kern-icon--default"
+                aria-hidden="true"></span>
+              Handlungsalternative hinzufügen
+            </button>
+          </KernTableCell>
+        </KernTableRow>
+        <template
+          x-for="(row, index) in rows.filter((item) => !item.isDefaultWirkziel)"
+          :key="`custom-${index}`"
+        >
+          <KernTableRow>
+            <KernTableCell>
+              <p x-text="index + 1"></p>
+            </KernTableCell>
+            <KernTableCell>
+              <p x-text="row.wirkziel"></p>
+            </KernTableCell>
+            <KernTableCell>
+              <p x-text="row.indikatoren"></p>
+            </KernTableCell>
+            <KernTableCell>
+              <div class="kern-form-input">
+                <input
+                  class="kern-form-input__input w-full"
+                  :id="`status-quo-${index}`"
+                  :name="`status-quo-${index}`"
+                  type="text"
+                  aria-label="Status Quo"
+                  x-model="row.statusQuo"
+                />
+              </div>
+            </KernTableCell>
+            <template
+              x-for="(spalte, spaltenIndex) in Math.max(1, ...rows.map((currentRow) => currentRow.handlungsalternativen.length))"
+              :key="`custom-ha-cell-${index}-${spaltenIndex}`"
+            >
+              <KernTableCell>
+                <div class="kern-form-input">
+                  <input
+                    class="kern-form-input__input w-full"
+                    :id="`handlungsalternativen-${index}-${spaltenIndex}`"
+                    :name="`handlungsalternativen-${index}-${spaltenIndex}`"
+                    type="text"
+                    :aria-label="`Handlungsalternative ${spaltenIndex + 1}`"
+                    x-model="row.handlungsalternativen[spaltenIndex]"
+                  />
+                </div>
+              </KernTableCell>
+            </template>
+          </KernTableRow>
+        </template>
+        <KernTableRow>
+          <KernTableCell
+            x-bind:colspan="4 + Math.max(1, ...rows.map((row) => row.handlungsalternativen.length))"
+            ><b
+              >Unterstützende Wirkziele, abgeleitet aus kombinierten Checks und
+              Arbeitshilfen</b
+            ></KernTableCell
+          >
+        </KernTableRow>
+        <template
+          x-for="(row, index) in rows.filter((item) => item.isDefaultWirkziel)"
+          :key="`default-${index}`"
+        >
+          <KernTableRow>
+            <KernTableCell>
+              <p x-text="index + 1"></p>
+            </KernTableCell>
+            <KernTableCell>
+              <p x-text="row.wirkziel"></p>
+            </KernTableCell>
+            <KernTableCell>
+              <div class="kern-form-input">
+                <input
+                  x-text="row.indikatoren"
+                  class="kern-form-input__input w-full"
+                  :id="`handlungsalternativen-${index}`"
+                  :name="`handlungsalternativen-${index}`"
+                  type="text"
+                  aria-label="Indikatoren"
+                  x-model="row.indikatoren"
+                />
+              </div>
+            </KernTableCell>
+            <KernTableCell>
+              <div class="kern-form-input">
+                <input
+                  class="kern-form-input__input w-full"
+                  :id="`default-status-quo-${index}`"
+                  :name="`default-status-quo-${index}`"
+                  type="text"
+                  aria-label="Status Quo"
+                  x-model="row.statusQuo"
+                />
+              </div>
+            </KernTableCell>
+            <template
+              x-for="(spalte, spaltenIndex) in Math.max(1, ...rows.map((currentRow) => currentRow.handlungsalternativen.length))"
+              :key="`default-ha-cell-${index}-${spaltenIndex}`"
+            >
+              <KernTableCell>
+                <div class="kern-form-input">
+                  <input
+                    class="kern-form-input__input w-full"
+                    :id="`default-handlungsalternativen-${index}-${spaltenIndex}`"
+                    :name="`default-handlungsalternativen-${index}-${spaltenIndex}`"
+                    type="text"
+                    :aria-label="`Handlungsalternative ${spaltenIndex + 1}`"
+                    x-model="row.handlungsalternativen[spaltenIndex]"
+                  />
+                </div>
+              </KernTableCell>
+            </template>
+          </KernTableRow>
+        </template>
+      </Fragment>
+    </KernTable>
+  </div>
+  <button
+    type="button"
+    popovertarget="example-table"
+    class="text-cosmic-blue-base inline-flex items-center gap-4"
+  >
+    <span>Ausgefülltes Beispiel ansehen</span>
+    <span
+      class="kern-icon kern-icon--open-in-new kern-icon--default"
+      aria-hidden="true"
+      style="background-color: currentColor"></span>
+  </button>
+  <!-- <button popovertarget="example-table">Ausgefülltes Beispiel ansehen</button> -->
+  <Modal id="example-table" wide>
+    <KernTable
+      addButtonLabel="Wirkziel hinzufügen"
+      columnCount={5}
+      bodyId="table-body"
+    >
+      <Fragment slot="header">
+        <KernTableHeaderCell />
+        <KernTableHeaderCell>Wirkziele</KernTableHeaderCell>
+        <KernTableHeaderCell>Indikatoren</KernTableHeaderCell>
+        <KernTableHeaderCell>Status Quo</KernTableHeaderCell>
+        <KernTableHeaderCell>Handlungsalternative 1</KernTableHeaderCell>
+        <KernTableHeaderCell>Handlungsalternative 2</KernTableHeaderCell>
+      </Fragment>
+      <Fragment slot="body">
+        <!-- <KernTableRow>
+          <KernTableCell>-</KernTableCell>
+          <KernTableCell>
+            <b>Beispiel Vollautomatisiertes Fahren:</b>
+            Fahrzeugautomatisierungstechnologie kann (rechts-)sicher im deutschen
+            Verkehr eingesetzt werden. Ganzes Beispiel anschauen
+          </KernTableCell>
+          <KernTableCell>
+            <b>Beispiel Vollautomatisiertes Fahren:</b> Versicherer bieten KfZ-Pflichtversicherungen
+            für h/v Fahrzeuge ohne (Risiko-)Aufschläge an.
+          </KernTableCell>
+          <KernTableCell>Status Quo: Aktuelle Lage</KernTableCell>
+          <KernTableCell> Handlungsalternative Abwarten</KernTableCell>
+          <KernTableCell> Handlungsalternative Zulassung</KernTableCell>
+        </KernTableRow> -->
+        <KernTableRow>
+          <KernTableCell rowspan="5">1</KernTableCell>
+          <KernTableCell rowspan="5">
+            Fahrzeugautomatisierungstechnologie kann (rechts-)sicher im
+            deutschen Verkehr eingesetzt werden.
+          </KernTableCell>
+          <KernTableCell
+            >Zulassungsbehörden sind rechtlich und tatsächlich in die Lage
+            versetzt h/v Fahrzeuge zuzulassen</KernTableCell
+          >
+          <KernTableCell> Nein </KernTableCell>
+          <KernTableCell>Nein, aber bisher auch kein Bedarf</KernTableCell>
+          <KernTableCell>Ja, da Voraussetzungen geschaffen</KernTableCell>
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell>Das Vorhaben ist datenschutzkonform</KernTableCell>
+          <KernTableCell>Ja</KernTableCell>
+          <KernTableCell>/</KernTableCell>
+          <KernTableCell>Unklar</KernTableCell>
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell
+            >Versicherer bieten Kfz-Pflichtversicherungen für h/v Fahrzeuge ohne
+            (Risiko-)Aufschläge an</KernTableCell
+          >
+          <KernTableCell>Nein</KernTableCell>
+          <KernTableCell>Nein</KernTableCell>
+          <KernTableCell>Wahrscheinlich Ja</KernTableCell>
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell
+            >Haftungsfragen sind für Rechtsanwender eindeutig lösbar</KernTableCell
+          >
+          <KernTableCell
+            >Ja, aber ausschließlich bezogen auf datenschutzrechtliche
+            Fragestellungen
+          </KernTableCell>
+          <KernTableCell>Nein, weiterhin unklar</KernTableCell>
+          <KernTableCell>Nein, ist zusätzlich zu regeln</KernTableCell>
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell
+            >Fahrzeugführerinnen und Fahrzeugführer sind in der Lage
+            Fahrzeugautomatisierungstechnologie sicher anzuwenden</KernTableCell
+          >
+          <KernTableCell> Nein </KernTableCell>
+          <KernTableCell>
+            Nein, sichere Anwendung bedarf vorheriger Übung
+          </KernTableCell>
+          <KernTableCell>
+            Unklar, aber möglich, wenn Anwender mit zugelassenen Fahrzeugen üben
+          </KernTableCell>
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell>2</KernTableCell>
+          <KernTableCell>
+            Deutschland ist Innovationsführer im Bereich der
+            Fahrzeugautomatisierung.
+          </KernTableCell>
+          <KernTableCell>
+            (Herstellerhaftungs-)Regelungen sind keine Beeinträchtigung für
+            Innovation (Entwicklung und Herstellung)
+          </KernTableCell>
+          <KernTableCell
+            >Nein, mehr datenschutzrechtliche Regelungen erschwert die
+            Entwicklung, da höhere Anforderungen
+          </KernTableCell>
+          <KernTableCell>
+            Ja, da nicht über das Normalmaß hinaus; weiterhin Haftung nur nach §
+            1 Abs.1 ProdHaftG + § 823 Abs. 1 BGB
+          </KernTableCell>
+          <KernTableCell>
+            Ja, fördern Innovation sogar aktiv, durch klare technische und
+            rechtliche Anforderungen
+          </KernTableCell>
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell colspan="6">
+            Unterstützende Wirkziele, abgeleitet aus kombinierten Checks und
+            Arbeitshilfen</KernTableCell
+          >
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell />
+          <KernTableCell> Digitaltauglichkeit </KernTableCell>
+          <KernTableCell>
+            Zusammenfassende Einschätzung: Ist die Handlungsalternative
+            digitaltauglich?
+          </KernTableCell>
+          <KernTableCell>Zu prüfen </KernTableCell>
+          <KernTableCell> / </KernTableCell>
+          <KernTableCell> Zu prüfen </KernTableCell>
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell />
+          <KernTableCell> Vollzugstauglichkeit </KernTableCell>
+          <KernTableCell>
+            Zusammenfassend: Überwiegen Belastungen (etwa Kosten und
+            Erfüllungsaufwände) oder Nutzen für Vollzugsakteure?
+          </KernTableCell>
+          <KernTableCell>Zu prüfen </KernTableCell>
+          <KernTableCell> / </KernTableCell>
+          <KernTableCell> Zu prüfen </KernTableCell>
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell />
+          <KernTableCell> Praxistauglichkeit </KernTableCell>
+          <KernTableCell>
+            Zusammenfassend: Überwiegen Belastungen (etwa Kosten und
+            Erfüllungsaufwände) oder Nutzen für die Wirtschaft?
+          </KernTableCell>
+          <KernTableCell>Zu prüfen </KernTableCell>
+          <KernTableCell>
+            h/v Fahrzeuge können nicht verkauft werden
+          </KernTableCell>
+          <KernTableCell> Zu prüfen </KernTableCell>
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell />
+          <KernTableCell> Bürgerfreundlichkeit </KernTableCell>
+          <KernTableCell>
+            Zusammenfassend: Überwiegen Belastungen (etwa Kosten und
+            Erfüllungsaufwände) oder Nutzen für Bürgerinnen und Bürger?
+          </KernTableCell>
+          <KernTableCell>Zu prüfen </KernTableCell>
+          <KernTableCell>
+            h/v Fahrzeuge können nicht verkauft werden
+          </KernTableCell>
+          <KernTableCell> Zu prüfen </KernTableCell>
+        </KernTableRow>
+      </Fragment>
+    </KernTable>
+  </Modal>
+</FruephaseLayout>
+
+<script>
+  import Alpine from "alpinejs";
+  import { registerDynamicTable } from "../_components/kernTableState";
+
+  type WirkkonzeptRow = {
+    wirkziel: string;
+    indikatoren: string;
+    erfolgsschwelle: string;
+    datengrundlage: string;
+    statusQuo: string;
+    handlungsalternativen: string[];
+    isDefaultWirkziel?: boolean;
+  };
+
+  const DEFAULT_WIRKZIELE = [
+    "Digitaltauglichkeit",
+    "Vollzugstauglichkeit",
+    "Praxistauglichkeit",
+    "Bürgerfreundlichkeit",
+  ];
+
+  const createDefaultRow = (wirkziel: string): WirkkonzeptRow => ({
+    wirkziel,
+    indikatoren: "",
+    erfolgsschwelle: "",
+    datengrundlage: "",
+    statusQuo: "",
+    handlungsalternativen: [],
+    isDefaultWirkziel: true,
+  });
+
+  //ensures equal column count across rows
+  const normalizeRows = (rows: WirkkonzeptRow[]): WirkkonzeptRow[] => {
+    const spaltenAnzahl = Math.max(
+      1,
+      ...rows.map((row) => row.handlungsalternativen.length),
+    );
+
+    return rows.map((row) => ({
+      ...row,
+      handlungsalternativen: [
+        ...row.handlungsalternativen,
+        ...new Array<string>(
+          Math.max(0, spaltenAnzahl - row.handlungsalternativen.length),
+        ).fill(""),
+      ],
+    }));
+  };
+
+  const getInitialRowsFromWirkkonzept = (): WirkkonzeptRow[] => {
+    const defaultRows = DEFAULT_WIRKZIELE.map((wirkziel) =>
+      createDefaultRow(wirkziel),
+    );
+
+    try {
+      const customWirkzieleObj = localStorage.getItem("wirkkonzept");
+      if (!customWirkzieleObj) {
+        const normalizedDefaultRows = normalizeRows(defaultRows);
+        localStorage.setItem(
+          "wirkkonzept",
+          JSON.stringify(normalizedDefaultRows),
+        );
+        return normalizedDefaultRows;
+      }
+
+      const parsed: WirkkonzeptRow[] = normalizeRows(
+        JSON.parse(customWirkzieleObj),
+      );
+      const customWirkziele = parsed.filter(
+        (row) =>
+          row.wirkziel.trim().length > 0 &&
+          !DEFAULT_WIRKZIELE.includes(row.wirkziel),
+      );
+
+      const defaultWirkziele = new Map(
+        parsed
+          .filter((row) => DEFAULT_WIRKZIELE.includes(row.wirkziel))
+          .map((row) => [
+            row.wirkziel,
+            { ...row, isDefaultWirkziel: true as boolean },
+          ]),
+      );
+
+      const mergedDefaultRows = DEFAULT_WIRKZIELE.map((wirkziel) => {
+        const persistedDefaultRow = defaultWirkziele.get(wirkziel);
+        if (!persistedDefaultRow) {
+          return createDefaultRow(wirkziel);
+        }
+
+        return {
+          ...createDefaultRow(wirkziel),
+          ...persistedDefaultRow,
+          isDefaultWirkziel: true as boolean,
+        };
+      });
+
+      const mergedRows = normalizeRows([
+        ...customWirkziele,
+        ...mergedDefaultRows,
+      ]);
+      localStorage.setItem("wirkkonzept", JSON.stringify(mergedRows));
+      return mergedRows;
+    } catch {
+      return normalizeRows(defaultRows);
+    }
+  };
+
+  registerDynamicTable(
+    "handlungsAlternativenTable",
+    () => ({
+      wirkziel: "",
+      indikatoren: "",
+      erfolgsschwelle: "",
+      datengrundlage: "",
+      statusQuo: "",
+      handlungsalternativen: [] as string[],
+      isDefaultWirkziel: false as boolean,
+    }),
+    getInitialRowsFromWirkkonzept(),
+  );
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document
+      .querySelectorAll<HTMLAnchorElement>("#Weiter, #Zurück")
+      .forEach((link) => {
+        link.addEventListener("click", () => {
+          const el = document.querySelector<HTMLElement>(
+            "[x-data='handlungsAlternativenTable']",
+          );
+          if (el) {
+            const state = Alpine.$data(el) as { rows?: WirkkonzeptRow[] };
+            if (Array.isArray(state.rows)) {
+              localStorage.setItem("wirkkonzept", JSON.stringify(state.rows));
+            }
+          }
+        });
+      });
+  });
+</script>

@@ -1,0 +1,379 @@
+---
+import FruephaseLayout from "./_FruephaseLayout.astro";
+import KernTable from "../_components/KernTable.astro";
+import KernTableCell from "../_components/KernTableCell.astro";
+import KernTableHeaderCell from "../_components/KernTableHeaderCell.astro";
+import KernTableRow from "../_components/KernTableRow.astro";
+import Modal from "@/components/Modal.astro";
+
+export const frontmatter = {
+  title: "8. Wirkziele definieren",
+  navLabel: "8. Wirkziele definieren",
+  sitemap: false,
+  navOrder: 4,
+};
+---
+
+<FruephaseLayout title={frontmatter.title} pageNumber={frontmatter.navOrder}>
+  <h2>{frontmatter.title}</h2>
+  <div>
+    <div class="columns-2">
+      <p></p>
+      <div class="flex items-center gap-8 pb-8">
+        <span
+          class="kern-icon kern-icon--edit kern-icon--default"
+          aria-hidden="true"
+        >
+        </span>
+        <p><b>Aus Ihrer bisherigen Erarbeitung</b></p>
+      </div>
+    </div>
+    <div class="columns-2">
+      <div class="p-20">
+        <p>
+          Definieren Sie, welche Wirkung Sie erzielen möchten, um das Problem zu
+          lösen. Wirkziele sollen genutzt werden um zu klären,
+          <ul>
+            <li>bei wem</li>
+            <li>welche konkreten Verhaltens- oder Lebenslagenveränderungen</li>
+            <li>bis wann erreicht werden sollen.</li>
+          </ul>
+        </p>
+      </div>
+      <div class="break-inside-avoid">
+        <div class="rounded-xl bg-amber-200 p-20">
+          <p><b>Einbeziehungsplan externe Stakeholder</b></p>
+          <ul>
+            <li>Automobilindustrie</li>
+            <li>Technikhersteller</li>
+            <li>Zulassungsbehörden</li>
+            <li>Versicherer</li>
+            <li>Fahrzeugführer und -halter</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <h3>So geht es</h3>
+    <ol>
+      <li>
+        Legen Sie ein oder mehrere vorhabenspezifische <b>Wirkziele</b> fest. Wirkziele
+        sind keine Lösungen, sondern ein angestrebter Zielzustand. Nutzen Sie dafür
+        alle Teilaspekte der Problembeschreibung.
+      </li>
+      <li>
+        Messbare <b>Indikatoren</b> festlegen → <i
+          >Was zeigt uns, dass es wirkt?</i
+        >
+      </li>
+      <li>
+        <b>Erfolgsschwelle</b> definieren → <i>Ab wann ist es ein Erfolg?</i>
+      </li>
+      <li><b>Datengrundlage</b> festlegen → <i>Wie messen wir das?</i></li>
+    </ol>
+  </div>
+
+  <div
+    x-data="wirkzielTable"
+    class="relative left-1/2 w-[calc(100vw-32px)] max-w-7xl -translate-x-1/2 min-[900px]:w-[calc(100vw-300px-32px)]"
+  >
+    <KernTable
+      addButtonLabel="Wirkziel hinzufügen"
+      columnCount={5}
+      bodyId="table-body"
+    >
+      <Fragment slot="header">
+        <KernTableHeaderCell />
+        <KernTableHeaderCell>Wirkziele</KernTableHeaderCell>
+        <KernTableHeaderCell>Indikatoren</KernTableHeaderCell>
+        <KernTableHeaderCell>Erfolgsschwelle</KernTableHeaderCell>
+        <KernTableHeaderCell>Datengrundlage</KernTableHeaderCell>
+      </Fragment>
+      <Fragment slot="body">
+        <!-- <KernTableRow>
+          <KernTableCell>-</KernTableCell>
+          <KernTableCell>
+            <b>Beispiel Vollautomatisiertes Fahren:</b>
+            Fahrzeugautomatisierungstechnologie kann (rechts-)sicher im deutschen
+            Verkehr eingesetzt werden. Ganzes Beispiel anschauen
+          </KernTableCell>
+          <KernTableCell>
+            Versicherer bieten KfZ-Pflichtversicherungen für h/v Fahrzeuge ohne
+            (Risiko-)Aufschläge an.
+          </KernTableCell>
+          <KernTableCell>Ja (binär)</KernTableCell>
+          <KernTableCell
+            >Markterkundung/Befragung Versicherungswirtschaft</KernTableCell
+          >
+        </KernTableRow> -->
+        <template x-for="(row, index) in rows" :key="index">
+          <KernTableRow>
+            <KernTableCell>
+              <button type="button" @click="deleteRow(index)">
+                <span
+                  class="kern-icon kern-icon--delete kern-icon--default"
+                  aria-hidden="true"></span>
+              </button>
+            </KernTableCell>
+            <KernTableCell>
+              <div class="kern-form-input">
+                <input
+                  class="kern-form-input__input w-full"
+                  :id="`wirkziel-${index}`"
+                  :name="`wirkziel-${index}`"
+                  type="text"
+                  aria-label="Wirkziel"
+                  x-model="row.wirkziel"
+                />
+              </div>
+            </KernTableCell>
+            <KernTableCell>
+              <div class="kern-form-input">
+                <input
+                  class="kern-form-input__input w-full"
+                  :id="`indikatoren-${index}`"
+                  :name="`indikatoren-${index}`"
+                  type="text"
+                  aria-label="Indikatoren"
+                  x-model="row.indikatoren"
+                />
+              </div>
+            </KernTableCell>
+            <KernTableCell>
+              <div class="kern-form-input">
+                <input
+                  class="kern-form-input__input w-full"
+                  :id="`erfolgsschwelle-${index}`"
+                  :name="`erfolgsschwelle-${index}`"
+                  type="text"
+                  aria-label="Erfolgsschwelle"
+                  x-model="row.erfolgsschwelle"
+                />
+              </div>
+            </KernTableCell>
+            <KernTableCell>
+              <div class="kern-form-input">
+                <input
+                  class="kern-form-input__input w-full"
+                  :id="`datengrundlage-${index}`"
+                  :name="`datengrundlage-${index}`"
+                  type="text"
+                  aria-label="Datengrundlage"
+                  x-model="row.datengrundlage"
+                />
+              </div>
+            </KernTableCell>
+          </KernTableRow>
+        </template>
+      </Fragment>
+    </KernTable>
+  </div>
+  <div class="kern-alert kern-alert--info" role="alert">
+    <div class="kern-alert__header">
+      <span class="kern-icon kern-icon--info" aria-hidden="true"></span>
+      <h2 class="kern-title">Beispiel Vollautomatisiertes Fahren</h2>
+    </div>
+    <div class="kern-alert__body">
+      <div class="kern-body">
+        <p>
+          Wirkziel: Fahrzeugautomatisierungstechnologie kann (rechts-)sicher im
+          deutschen Verkehr eingesetzt werden.
+        </p>
+        <p>
+          Indikator: Versicherer bieten KfZ-Pflichtversicherungen für h/v
+          Fahrzeuge ohne (Risiko-)Aufschläge an.
+        </p>
+        <p>Erfolgsschwelle: Ja (binär).</p>
+        <p>Datengrundlage: Markterkundung/Befragung Versicherungswirtschaft.</p>
+      </div>
+    </div>
+  </div>
+  <button
+    type="button"
+    popovertarget="example-table"
+    class="text-cosmic-blue-base inline-flex items-center gap-4"
+  >
+    <a>Ausgefülltes Beispiel ansehen</a>
+    <span
+      class="kern-icon kern-icon--open-in-new kern-icon--default text-cosmic-blue-base"
+      aria-hidden="true"></span>
+  </button>
+  <Modal id="example-table" wide>
+    <KernTable
+      addButtonLabel="Wirkziel hinzufügen"
+      columnCount={5}
+      bodyId="table-body"
+    >
+      <Fragment slot="header">
+        <KernTableHeaderCell />
+        <KernTableHeaderCell>Wirkziele</KernTableHeaderCell>
+        <KernTableHeaderCell>Indikatoren</KernTableHeaderCell>
+        <KernTableHeaderCell>Erfolgsschwelle</KernTableHeaderCell>
+        <KernTableHeaderCell>Datengrundlage</KernTableHeaderCell>
+      </Fragment>
+      <Fragment slot="body">
+        <KernTableRow>
+          <KernTableCell>-</KernTableCell>
+          <KernTableCell>
+            <b>Beispiel Vollautomatisiertes Fahren:</b>
+            Fahrzeugautomatisierungstechnologie kann (rechts-)sicher im deutschen
+            Verkehr eingesetzt werden. Ganzes Beispiel anschauen
+          </KernTableCell>
+          <KernTableCell>
+            <b>Beispiel Vollautomatisiertes Fahren:</b> Versicherer bieten KfZ-Pflichtversicherungen
+            für h/v Fahrzeuge ohne (Risiko-)Aufschläge an.
+          </KernTableCell>
+          <KernTableCell>Ja (binär)</KernTableCell>
+          <KernTableCell
+            >Markterkundung/Befragung Versicherungswirtschaft</KernTableCell
+          >
+        </KernTableRow>
+
+        <KernTableRow>
+          <KernTableCell rowspan="5">1</KernTableCell>
+          <KernTableCell rowspan="5"
+            >Fahrzeugautomatisierungstechnologie kann (rechts-)sicher im
+            deutschen Verkehr eingesetzt werden.</KernTableCell
+          >
+          <KernTableCell
+            >Zulassungsbehörden sind rechtlich und tatsächlich in die Lage
+            versetzt h/v Fahrzeuge zuzulassen</KernTableCell
+          >
+          <KernTableCell>Ja</KernTableCell>
+          <KernTableCell>Befragung/Ex-Post-Praxischeck</KernTableCell>
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell>Das Vorhaben ist datenschutzkonform</KernTableCell>
+          <KernTableCell>Ja</KernTableCell>
+          <KernTableCell>Gutachten/Stellungnahme BfDI</KernTableCell>
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell
+            >Versicherer bieten Kfz-Pflichtversicherungen für h/v Fahrzeuge ohne
+            (Risiko-)Aufschläge an</KernTableCell
+          >
+          <KernTableCell>Ja</KernTableCell>
+          <KernTableCell
+            >Markterkundung/Befragung Versicherungswirtschaft</KernTableCell
+          >
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell
+            >Haftungsfragen sind für Rechtsanwender eindeutig lösbar</KernTableCell
+          >
+          <KernTableCell
+            >XX % der Rechtsanwender geben an, dass Haftungsfragen in Bezug auf
+            Fahrzeugautomatisierung eindeutig lösbar sind
+          </KernTableCell>
+          <KernTableCell
+            >Quantitative Befragung, Alternativ: qualitative Tiefeninterviews
+          </KernTableCell>
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell
+            >Fahrzeugführerinnen und Fahrzeugführer sind in der Lage
+            Fahrzeugautomatisierungstechnologie sicher anzuwenden</KernTableCell
+          >
+          <KernTableCell
+            >XX% der Fahrzeugführerinnen und Fahrzeugführer
+          </KernTableCell>
+          <KernTableCell>Befragungsdaten, Testdaten </KernTableCell>
+        </KernTableRow>
+        <KernTableRow>
+          <KernTableCell>2</KernTableCell>
+          <KernTableCell>
+            Deutschland ist Innovationsführer im Bereich der
+            Fahrzeugautomatisierung.
+          </KernTableCell>
+          <KernTableCell>
+            (Herstellerhaftungs-)Regelungen sind keine Beeinträchtigung für
+            Innovation (Entwicklung und Herstellung)
+          </KernTableCell>
+          <KernTableCell
+            ><p>
+              XX % der deutschen Automobilhersteller geben an, dass
+              Haftungsfragen in Bezug auf Fahrzeugautomatisierung nicht
+              Entwicklung und Vertrieb hemmen
+            </p>
+            <p>Alternativ: Ja (Qualitative Einschätzung)</p>
+          </KernTableCell>
+          <KernTableCell>
+            Quantitative Befragung Alternativ: qualitative Tiefeninterviews
+          </KernTableCell>
+        </KernTableRow>
+      </Fragment>
+    </KernTable>
+  </Modal>
+</FruephaseLayout>
+
+<script>
+  import Alpine from "alpinejs";
+  import { registerDynamicTable } from "../_components/kernTableState";
+
+  type WirkkonzeptRow = {
+    wirkziel: string;
+    indikatoren: string;
+    erfolgsschwelle: string;
+    datengrundlage: string;
+    statusQuo: string;
+    handlungsalternativen: string[];
+    isDefaultWirkziel?: boolean;
+  };
+
+  const STORAGE_KEY = "wirkkonzept";
+
+  registerDynamicTable(
+    "wirkzielTable",
+    () => ({
+      wirkziel: "",
+      indikatoren: "",
+      erfolgsschwelle: "",
+      datengrundlage: "",
+      statusQuo: "",
+      handlungsalternativen: [] as string[],
+      isDefaultWirkziel: false as boolean,
+    }),
+    [],
+    STORAGE_KEY,
+  );
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const el = document.querySelector<HTMLElement>("[x-data='wirkzielTable']");
+    if (el) {
+      const state = Alpine.$data(el) as { rows?: WirkkonzeptRow[] };
+      if (Array.isArray(state.rows)) {
+        state.rows = state.rows.filter((row) => !row.isDefaultWirkziel);
+      }
+    }
+
+    document
+      .querySelectorAll<HTMLAnchorElement>("#Weiter, #Zurück")
+      .forEach((link) => {
+        link.addEventListener("click", () => {
+          const el = document.querySelector<HTMLElement>(
+            "[x-data='wirkzielTable']",
+          );
+          if (el) {
+            const state = Alpine.$data(el) as { rows?: WirkkonzeptRow[] };
+            if (Array.isArray(state.rows)) {
+              let defaultRows: WirkkonzeptRow[] = [];
+
+              try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) {
+                  const parsed: WirkkonzeptRow[] = JSON.parse(raw);
+                  defaultRows = parsed.filter((row) => row.isDefaultWirkziel);
+                }
+              } catch {
+                defaultRows = [];
+              }
+
+              localStorage.setItem(
+                STORAGE_KEY,
+                JSON.stringify([...state.rows, ...defaultRows]),
+              );
+            }
+          }
+        });
+      });
+  });
+</script>

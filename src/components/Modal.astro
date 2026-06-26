@@ -9,9 +9,10 @@ import { Icon } from "astro-icon/components";
 
 interface Props {
   id: string;
+  wide?: boolean;
 }
 
-const { id } = Astro.props;
+const { id, wide = false } = Astro.props;
 ---
 
 <dialog id={id} popover class="pointer-events-none bg-transparent">
@@ -19,7 +20,10 @@ const { id } = Astro.props;
     class="backdrop flex h-screen w-screen items-center justify-center bg-black/20"
   >
     <div
-      class="max-w-a11y p-md pb-lg pointer-events-auto max-h-screen overflow-auto rounded-sm bg-white"
+      class:list={[
+        "p-md pb-lg pointer-events-auto max-h-screen overflow-auto rounded-sm bg-white",
+        wide ? "max-w-[calc(100vw-2rem)]" : "max-w-a11y",
+      ]}
     >
       <div class="mb-32 flex w-full justify-end">
         <button

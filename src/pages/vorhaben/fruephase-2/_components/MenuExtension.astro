@@ -1,0 +1,84 @@
+---
+type Props = {
+  pageNumber: number;
+  totalPages: number;
+};
+
+const { pageNumber, totalPages } = Astro.props;
+const progressSteps = Math.max(totalPages - 1, 1);
+const progressValue = ((Math.max(pageNumber, 1) - 1) / progressSteps) * 100;
+---
+
+<div class="kern-progress p-24">
+  <p class="mb-0 text-sm">Wirkkonzept (Teil der Leitungsvorlage)</p>
+  <progress id="wirkkonzept-progress" value={progressValue} max="100"
+  ></progress>
+</div>
+<hr class="kern-divider" aria-hidden="true" />
+<div class="mx-16 mb-24 rounded-sm px-12 py-12" data-pagefind-ignore>
+  <p><b>Bisherige Ergebnisse</b></p>
+  <div class="space-y-6 underline">
+    <a
+      href=""
+      target="_blank"
+      class="link-unstyled flex items-end gap-4 underline"
+      >Steckbrief <span
+        class="kern-icon kern-icon--open-in-new kern-icon--default"
+        aria-hidden="true"></span>
+    </a>
+    <a
+      href=""
+      target="_blank"
+      class="link-unstyled flex items-end gap-4 underline"
+      >Problemstatement <span
+        class="kern-icon kern-icon--open-in-new kern-icon--default"
+        aria-hidden="true"></span>
+    </a>
+    <a href="" target="_blank" class="link-unstyled flex items-end gap-4"
+      >Ursache-Wirkungsketten <span
+        class="kern-icon kern-icon--open-in-new kern-icon--default"
+        aria-hidden="true"></span>
+    </a>
+    <a href="" target="_blank" class="link-unstyled flex items-end gap-4"
+      >Einbeziehungsplan externe Stakeholder <span
+        class="kern-icon kern-icon--open-in-new kern-icon--default"
+        aria-hidden="true"></span>
+    </a>
+    <a href="" target="_blank" class="link-unstyled flex items-end gap-4"
+      >Hypothesen <span
+        class="kern-icon kern-icon--open-in-new kern-icon--default"
+        aria-hidden="true"></span>
+    </a>
+  </div>
+</div>
+
+<script is:inline define:vars={{ progressValue }}>
+  const progress = document.querySelector("#wirkkonzept-progress");
+  if (progress) {
+    const storageKey = "wirkkonzept:progress-value";
+    const storedProgressValue = Number.parseFloat(
+      sessionStorage.getItem(storageKey) ?? "0",
+    );
+    const safeStoredProgressValue = Number.isFinite(storedProgressValue)
+      ? storedProgressValue
+      : 0;
+    const finalProgressValue = Math.max(safeStoredProgressValue, progressValue);
+
+    sessionStorage.setItem(storageKey, String(finalProgressValue));
+    progress.value = finalProgressValue;
+  }
+</script>
+
+<style is:global>
+  #wirkkonzept-progress {
+    accent-color: var(--color-amber-300);
+  }
+
+  #wirkkonzept-progress::-webkit-progress-value {
+    background-color: var(--color-amber-300);
+  }
+
+  #wirkkonzept-progress::-moz-progress-bar {
+    background-color: var(--color-amber-300);
+  }
+</style>

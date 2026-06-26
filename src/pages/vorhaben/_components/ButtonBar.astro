@@ -1,0 +1,126 @@
+---
+import Modal from "@/components/Modal.astro";
+import { Icon } from "astro-icon/components";
+import { vorhaben_fruephase2_schritt5 } from "@/config/routes";
+
+interface Props {
+  prevPath?: string;
+  nextPath?: string;
+  customText?: string;
+  nextBtnText?: string;
+  openModal?: boolean;
+}
+
+const {
+  prevPath,
+  nextPath,
+  customText,
+  nextBtnText = "Weiter",
+  openModal,
+} = Astro.props;
+
+const defaultText = "Ihre Daten werden automatisch im Browser gespeichert";
+---
+
+<div class="sticky bottom-0 z-10 border-t border-[#A5AAC3] bg-white py-16">
+  <div class="flex w-full items-center justify-between gap-16 px-64">
+    <div class="kern-body kern-body--muted flex items-center gap-12">
+      {
+        customText ? (
+          <>
+            <Icon name="ic:outline-info" />
+            {customText}
+          </>
+        ) : (
+          <>
+            <Icon name="ic:outline-published-with-changes" /> {defaultText}
+          </>
+        )
+      }
+    </div>
+    <div class="flex gap-16">
+      {
+        !customText && (
+          <button
+            type="button"
+            class="docx-download-btn kern-btn kern-btn--tertiary"
+          >
+            <span
+              class={"kern-icon kern-icon--default kern-icon--download"}
+              aria-hidden="true"
+            />
+            <span class="kern-label">Zwischenstand herunterladen</span>
+          </button>
+        )
+      }
+      {
+        prevPath && (
+          <a href={prevPath} class="kern-btn kern-btn--secondary" id="Zurück">
+            <span class="kern-label">Zurück</span>
+          </a>
+        )
+      }
+      {
+        nextPath && !openModal && (
+          <a href={nextPath} class="kern-btn kern-btn--primary" id="Weiter">
+            <span class="kern-label">{nextBtnText}</span>
+            <span
+              class="kern-icon kern-icon--arrow-forward"
+              aria-hidden="true"
+            />
+          </a>
+        )
+      }
+      {
+        openModal && (
+          <fragment>
+            {" "}
+            <button
+              type="button"
+              class="kern-btn kern-btn--primary"
+              popovertarget="confirm-modal"
+            >
+              <span class="kern-label">Weiter</span>
+            </button>
+            <Modal id="confirm-modal">
+              {" "}
+              <h2>Zeit für einen Zwischenstand</h2>
+              <p>
+                Es ist jederzeit möglich zurückzugehen und nochmals zu
+                evaluieren.{" "}
+              </p>
+              <p>
+                Sind Sie sicher, die besten Lösungen gefunden zu haben? Jetzt
+                ist ein guter Zeitpunkt um nochmal zu kontrollieren, ob
+                Wirkziele, Indikatoren, die Problembeschreibung und Hypothesen
+                etc. noch passen.
+              </p>{" "}
+              <p>
+                Gehen Sie gerne zurück, um Ihre Eingaben zu ändern. Ansonsten
+                können Sie auch fortfahren.
+              </p>
+              <a
+                type="button"
+                class="kern-btn kern-btn--primary"
+                href={vorhaben_fruephase2_schritt5.path}
+              >
+                <span class="kern-label">Eingabe prüfen</span>
+              </a>
+              <a
+                href={nextPath}
+                class="kern-btn kern-btn--secondary"
+                id="Weiter"
+              >
+                <span class="kern-label">Zum nächsten Schritt</span>
+                <span
+                  class="kern-icon kern-icon--arrow-forward"
+                  aria-hidden="true"
+                />
+              </a>
+            </Modal>
+          </fragment>
+        )
+      }
+    </div>
+  </div>
+</div>

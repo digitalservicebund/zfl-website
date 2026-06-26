@@ -1,0 +1,43 @@
+---
+interface Props {
+  id: string;
+  label: string;
+  hint?: string;
+  required?: boolean;
+}
+
+const MAX_LENGTH = 2500;
+
+const { id, label, hint, required } = Astro.props;
+const hintId = `hint_${id}`;
+---
+
+<div
+  class="kern-form-input"
+  x-data="{ count: 0 }"
+  x-init="count = $refs.ta.value.length"
+>
+  <label class="kern-label" for={id}>
+    {label}
+  </label>
+  {
+    hint && (
+      <div class="kern-hint" id={hintId}>
+        {hint}
+      </div>
+    )
+  }
+  <textarea
+    class="kern-form-input__input"
+    id={id}
+    name={id}
+    aria-required={required}
+    aria-describedby={hintId}
+    maxlength={MAX_LENGTH}
+    x-ref="ta"
+    x-on:input="count = $el.value.length"
+    data-charcount></textarea>
+  <p class="mt-4 text-right text-sm text-gray-500">
+    <span x-text="count">0</span> / {MAX_LENGTH}
+  </p>
+</div>

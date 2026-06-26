@@ -1,0 +1,193 @@
+---
+import FruephaseLayout from "./_FruephaseLayout.astro";
+import KernTable from "../_components/KernTable.astro";
+import KernTableHeaderCell from "../_components/KernTableHeaderCell.astro";
+import KernTableRow from "../_components/KernTableRow.astro";
+import KernTableCell from "../_components/KernTableCell.astro";
+
+export const frontmatter = {
+  title: "6. Externe Stakeholderperspektiven einbeziehen",
+  navLabel: "6. Externe Stakeholder einbeziehen",
+  sitemap: false,
+  navOrder: 2,
+};
+---
+
+<FruephaseLayout title={frontmatter.title} pageNumber={frontmatter.navOrder}>
+  <h2>{frontmatter.title}</h2>
+  <div>
+    <div class="columns-2">
+      <p></p>
+      <div class="flex items-center gap-8 pb-8">
+        <span
+          class="kern-icon kern-icon--edit kern-icon--default"
+          aria-hidden="true"
+        >
+        </span>
+        <p><b>Aus Ihrer bisherigen Erarbeitung</b></p>
+      </div>
+    </div>
+    <div class="columns-2">
+      <p class="p-20">
+        Beziehen Sie die identifizierten relevanten externen Stakeholder gemäß
+        der Einbeziehungsplanung in geeigneten Formaten ein, um bisherige
+        Erkenntnisse zu vertiefen und die gebildeten Hypothesen zu überprüfen.
+      </p>
+      <div class="break-inside-avoid">
+        <div class="rounded-xl bg-amber-200 p-20">
+          <p><b>Einbeziehungsplan externe Stakeholder</b></p>
+          <ul>
+            <li>Automobilindustrie</li>
+            <li>Technikhersteller</li>
+            <li>Zulassungsbehörden</li>
+            <li>Versicherer</li>
+            <li>Fahrzeugführer und -halter</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="my-20 rounded-xl bg-red-200 p-20">
+      <p>
+        Aufgrund der <b>großen Bedeutung für die vollständige Problemanalyse</b> kann
+        auf die Einbeziehung nur in begründeten Ausnahmefällen verzichtet werden (z.
+        B. „Gefahr im Verzug“ oder bei Vorliegen von aktuellen empirischen quantitativen
+        und qualitativen Daten, z. B. Insightstudien oder Gesetzesevaluationen).
+      </p>
+    </div>
+    <h3><b>So geht es</b></h3>
+    <ol>
+      <li>
+        Kontaktieren Sie externe Stakeholder aus Ihrem Einbeziehungsplan.
+        <a
+          href="https://servicestandard.gov.de/handbuch/anleitungen/teilnehmende-fuer-nutzerforschung-finden/"
+          target="_blank"
+          >Diese Tipps zum Rekrutieren von externen Stakeholdern</a
+        > können Ihnen helfen.
+      </li>
+      <li>
+        Bereiten Sie Fragen vor, mit denen Sie Ihre <a
+          href="https://google.de"
+          target="_blank">Hypothesen</a
+        > beantworten können.
+      </li>
+      <li>Führen Sie 5–7 Gespräche durch.</li>
+      <li>Beantworten Sie Ihre Hypothesen.</li>
+    </ol>
+  </div>
+  <div
+    class="relative left-1/2 w-[calc(100vw-32px)] max-w-7xl -translate-x-1/2 min-[900px]:w-[calc(100vw-300px-32px)]"
+    x-data="hypothesisTable"
+  >
+    <KernTable columnCount={4}>
+      <Fragment slot="caption">Hypothesen Tabelle</Fragment>
+      <Fragment slot="header">
+        <KernTableHeaderCell class="w-260 min-w-220">
+          Hypothesen
+        </KernTableHeaderCell>
+        <KernTableHeaderCell>Recherchetool + Quelle</KernTableHeaderCell>
+        <KernTableHeaderCell>Frage</KernTableHeaderCell>
+        <KernTableHeaderCell>Validiert/Falsifiziert</KernTableHeaderCell>
+      </Fragment>
+      <Fragment slot="body">
+        <template x-for="(row, index) in rows" :key="index">
+          <KernTableRow>
+            <KernTableCell class="w-260 min-w-220 align-top">
+              <p x-text="row.hypothesis"></p>
+            </KernTableCell>
+            <KernTableCell>
+              <div class="kern-form-input">
+                <input
+                  class="kern-form-input__input w-full"
+                  :id="`quellen-${index}`"
+                  :name="`quellen-${index}`"
+                  type="text"
+                  aria-label="Recherchetool und Quelle"
+                  x-model="row.quellen"
+                />
+              </div>
+            </KernTableCell>
+            <KernTableCell>
+              <div class="kern-form-input">
+                <input
+                  class="kern-form-input__input w-full"
+                  :id="`frage-${index}`"
+                  :name="`frage-${index}`"
+                  type="text"
+                  aria-label="Frage"
+                  x-model="row.frage"
+                />
+              </div>
+            </KernTableCell>
+            <KernTableCell>
+              <div class="kern-form-input">
+                <input
+                  class="kern-form-input__input w-full"
+                  :id="`validierung-${index}`"
+                  :name="`validierung-${index}`"
+                  type="text"
+                  aria-label="Validiert oder falsifiziert"
+                  x-model="row.validierung"
+                />
+              </div>
+            </KernTableCell>
+          </KernTableRow>
+        </template>
+      </Fragment>
+    </KernTable>
+  </div>
+</FruephaseLayout>
+
+<script>
+  import Alpine from "alpinejs";
+  import { registerDynamicTable } from "../_components/kernTableState";
+
+  registerDynamicTable(
+    "hypothesisTable",
+    () => ({
+      hypothesis: "",
+      quellen: "",
+      frage: "",
+      validierung: "",
+    }),
+    [
+      {
+        hypothesis:
+          "Automobilhersteller investieren nicht in die Automatisierungs-Technik.",
+        quellen: "",
+        frage: "",
+        validierung: "",
+      },
+      {
+        hypothesis:
+          "Deutsche Automobilhersteller haben einen Wettbewerbsnachteil.",
+        quellen: "",
+        frage: "",
+        validierung: "",
+      },
+      {
+        hypothesis: "Versicherer bieten keine Produkte an.",
+        quellen: "",
+        frage: "",
+        validierung: "",
+      },
+    ],
+    "hypothesisTable",
+  );
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document
+      .querySelectorAll<HTMLAnchorElement>("#Weiter, #Zurück")
+      .forEach((link) => {
+        link.addEventListener("click", () => {
+          const el = document.querySelector<HTMLElement>(
+            "[x-data='hypothesisTable']",
+          );
+          if (el) {
+            (
+              Alpine.$data(el) as { saveToStorage?: () => void }
+            ).saveToStorage?.();
+          }
+        });
+      });
+  });
+</script>

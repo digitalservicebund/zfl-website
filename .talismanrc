@@ -73,6 +73,18 @@ fileignoreconfig:
       - key
   - filename: public/downloads/2026-02-Anleitung-Fokusgruppe.pdf
     checksum: 80bdb51a9b0cc47cf426516f333c0c59ccab9a1a68b2d1a412c560906e96f15a
+  - filename: src/pages/vorhaben/_components/SummaryCard.astro
+    allowed_patterns:
+      - kern-description-list-item__key
+  - filename: src/pages/vorhaben/fruephase-2/schritt-4.astro
+    allowed_patterns:
+      - :key
+      - STORAGE_KEY
+  - filename: src/pages/vorhaben/fruephase-2/schritt-5.astro
+    allowed_patterns:
+      - normalizeWirkzielKey
+      - key
+      - STORAGE_KEY
 scopeconfig:
   - scope: node
 allowed_patterns:
@@ -99,4 +111,6 @@ allowed_patterns:
   - Keyword
   - fuzzyKeyword
   - aria-keyshortcuts
+  - :key
+  - storageKey
 version: "1.0"

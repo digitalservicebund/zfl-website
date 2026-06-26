@@ -1,0 +1,56 @@
+---
+interface Props {
+  addButtonLabel?: string;
+  columnCount: number;
+  addButtonAction?: string;
+  bodyId?: string;
+}
+
+const {
+  addButtonLabel,
+  columnCount,
+  addButtonAction = "addNewRow",
+  bodyId,
+} = Astro.props;
+---
+
+<table class="kern-table">
+  {
+    Astro.slots.has("caption") && (
+      <caption class="kern-title">
+        <slot name="caption" />
+      </caption>
+    )
+  }
+
+  <thead class="kern-table__head">
+    <tr class="kern-table__row">
+      <slot name="header" />
+    </tr>
+  </thead>
+
+  <tbody class="kern-table__body" id={bodyId}>
+    <slot name="body" />
+  </tbody>
+
+  {
+    addButtonLabel && (
+      <tfoot class="kern-table__footer">
+        <tr class="kern-table__row">
+          <th scope="col" class="kern-table__header p-0" colspan={columnCount}>
+            <button
+              class="flex w-full items-center gap-4 px-16 py-8 text-left"
+              x-on:click={addButtonAction}
+            >
+              <span
+                class="kern-icon kern-icon--add kern-icon--default"
+                aria-hidden="true"
+              />
+              {addButtonLabel}
+            </button>
+          </th>
+        </tr>
+      </tfoot>
+    )
+  }
+</table>

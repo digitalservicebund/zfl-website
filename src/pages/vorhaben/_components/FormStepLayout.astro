@@ -1,0 +1,75 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import HintSidebar from "./HintSidebar.astro";
+
+type Props = {
+  title: string;
+  pageNumber: number;
+  isWide?: boolean;
+  showProgressBar?: boolean;
+  totalPages: number;
+};
+const { title, pageNumber, isWide, totalPages, showProgressBar } = Astro.props;
+---
+
+<Layout title={title} noFooter>
+  {
+    Astro.slots.has("section-sidebar-extra") && (
+      <slot name="section-sidebar-extra" slot="section-sidebar-extra" />
+    )
+  }
+  <main>
+    <div
+      class="_gap-32 flex flex-1 flex-col lg:flex-row lg:items-stretch"
+      x-data="{ hintId: '' }"
+    >
+      <div class="min-w-0 flex-1">
+        <div
+          class="py-lg mx-auto w-full max-w-(--max-width) px-16"
+          style={{
+            "--max-width": `${isWide ? 1280 : 736}px`,
+          }}
+        >
+          {
+            showProgressBar && (
+              <div class="kern-progress mb-lg">
+                <label class="kern-label" for="progress1">
+                  Schritt {pageNumber} von {totalPages}
+                </label>
+                <progress id="progress1" value={pageNumber} max={totalPages} />
+              </div>
+            )
+          }
+          <h1 class="sr-only">Titel: {title}</h1>
+          <div class="flex flex-col gap-32">
+            <slot />
+          </div>
+        </div>
+      </div>
+      <div
+        class="max-w-0 shrink-0 overflow-hidden transition-all duration-300 ease-in-out lg:sticky lg:top-0 lg:h-[calc(100dvh-var(--header-height))]"
+        x-cloak
+        :class="hintId ? 'max-w-full opacity-100 lg:max-w-[360px]' : 'max-w-0 opacity-0'"
+      >
+        <div class="h-full w-full lg:w-[360px]">
+          <HintSidebar class="h-full overflow-y-auto">
+            <slot name="hint" />
+          </HintSidebar>
+        </div>
+      </div>
+    </div>
+    <slot name="button-bar" />
+  </main>
+</Layout>
+
+<style is:global>
+  @reference "@/styles/global.css";
+
+  .kern-form-input .kern-error {
+    display: none;
+  }
+
+  .kern-form-input__input:invalid:not(:focus) ~ .kern-error {
+    display: flex;
+  }
+</style>
