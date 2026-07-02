@@ -6,7 +6,7 @@ import KernTableRow from "../_components/KernTableRow.astro";
 import KernTableCell from "../_components/KernTableCell.astro";
 
 export const frontmatter = {
-  title: "6. Externe Stakeholderperspektiven einbeziehen",
+  title: "6. Perspektiven externer Stakeholder einbeziehen",
   navLabel: "6. Externe Stakeholder einbeziehen",
   sitemap: false,
   navOrder: 2,
@@ -31,7 +31,7 @@ export const frontmatter = {
       <p class="p-20">
         Beziehen Sie die identifizierten relevanten externen Stakeholder gemäß
         der Einbeziehungsplanung in geeigneten Formaten ein, um bisherige
-        Erkenntnisse zu vertiefen und die gebildeten Hypothesen zu überprüfen.
+        Erkenntnisse zu vertiefen und die gebildeten Annahmen zu überprüfen.
       </p>
       <div class="break-inside-avoid">
         <div class="rounded-xl bg-amber-200 p-20">
@@ -59,7 +59,7 @@ export const frontmatter = {
       <li>
         Kontaktieren Sie externe Stakeholder aus Ihrem Einbeziehungsplan.
         <a
-          href="https://servicestandard.gov.de/handbuch/anleitungen/teilnehmende-fuer-nutzerforschung-finden/"
+          href="https://digitalcheck.bund.de/methoden/interview-leitfaden"
           target="_blank"
           >Diese Tipps zum Rekrutieren von externen Stakeholdern</a
         > können Ihnen helfen.
@@ -67,25 +67,26 @@ export const frontmatter = {
       <li>
         Bereiten Sie Fragen vor, mit denen Sie Ihre <a
           href="https://google.de"
-          target="_blank">Hypothesen</a
+          target="_blank">Annahmen</a
         > beantworten können.
       </li>
       <li>Führen Sie 5–7 Gespräche durch.</li>
-      <li>Beantworten Sie Ihre Hypothesen.</li>
+      <li>Liste Sie Ihre Erkenntnisse auf.</li>
     </ol>
   </div>
   <div
     class="relative left-1/2 w-[calc(100vw-32px)] max-w-7xl -translate-x-1/2 min-[900px]:w-[calc(100vw-300px-32px)]"
-    x-data="hypothesisTable"
+    x-data="annahmenTable"
   >
     <KernTable columnCount={4}>
-      <Fragment slot="caption">Hypothesen Tabelle</Fragment>
+      <Fragment slot="caption">Annahmen Tabelle</Fragment>
       <Fragment slot="header">
+        <KernTableHeaderCell>Annahmen</KernTableHeaderCell>
         <KernTableHeaderCell class="w-260 min-w-220">
-          Hypothesen
+          Quelle
         </KernTableHeaderCell>
-        <KernTableHeaderCell>Recherchetool + Quelle</KernTableHeaderCell>
-        <KernTableHeaderCell>Frage</KernTableHeaderCell>
+        <KernTableHeaderCell>Fragen</KernTableHeaderCell>
+        <KernTableHeaderCell>Erkenntnisse</KernTableHeaderCell>
         <KernTableHeaderCell>Validiert/Falsifiziert</KernTableHeaderCell>
       </Fragment>
       <Fragment slot="body">
@@ -122,9 +123,21 @@ export const frontmatter = {
               <div class="kern-form-input">
                 <input
                   class="kern-form-input__input w-full"
-                  :id="`validierung-${index}`"
-                  :name="`validierung-${index}`"
+                  :id="`erkenntnis-${index}`"
+                  :name="`erkenntnis-${index}`"
                   type="text"
+                  aria-label="Erkenntnis"
+                  x-model="row.erkenntnis"
+                />
+              </div>
+            </KernTableCell>
+            <KernTableCell>
+              <div class="kern-form-check flex justify-center">
+                <input
+                  class="kern-form-check__checkbox"
+                  id="`validierung-${index}`"
+                  :name="`validierung-${index}`"
+                  type="checkbox"
                   aria-label="Validiert oder falsifiziert"
                   x-model="row.validierung"
                 />
@@ -142,12 +155,13 @@ export const frontmatter = {
   import { registerDynamicTable } from "../_components/kernTableState";
 
   registerDynamicTable(
-    "hypothesisTable",
+    "annahmenTable",
     () => ({
       hypothesis: "",
       quellen: "",
       frage: "",
-      validierung: "",
+      erkenntnis: "",
+      validierung: false,
     }),
     [
       {
@@ -155,23 +169,26 @@ export const frontmatter = {
           "Automobilhersteller investieren nicht in die Automatisierungs-Technik.",
         quellen: "",
         frage: "",
-        validierung: "",
+        erkenntnis: "",
+        validierung: false,
       },
       {
         hypothesis:
           "Deutsche Automobilhersteller haben einen Wettbewerbsnachteil.",
         quellen: "",
         frage: "",
-        validierung: "",
+        erkenntnis: "",
+        validierung: false,
       },
       {
         hypothesis: "Versicherer bieten keine Produkte an.",
         quellen: "",
         frage: "",
-        validierung: "",
+        erkenntnis: "",
+        validierung: false,
       },
     ],
-    "hypothesisTable",
+    "annahmenTable",
   );
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -180,7 +197,7 @@ export const frontmatter = {
       .forEach((link) => {
         link.addEventListener("click", () => {
           const el = document.querySelector<HTMLElement>(
-            "[x-data='hypothesisTable']",
+            "[x-data='annahmenTable']",
           );
           if (el) {
             (

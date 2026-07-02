@@ -234,7 +234,7 @@ export const vorhaben_fruephase2_schritt1 = {
 export const vorhaben_fruephase2_schritt2 = {
   key: "vorhaben_fruephase2_schritt2",
   path: "/vorhaben/fruephase-2/schritt-2",
-  title: "6. Externe Stakeholderperspektiven einbeziehen",
+  title: "6. Perspektiven externer Stakeholder einbeziehen",
   parent: vorhaben_fruephase2,
   sitemap: false,
   isStagingOnly: false,

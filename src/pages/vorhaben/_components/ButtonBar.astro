@@ -22,7 +22,9 @@ const {
 const defaultText = "Ihre Daten werden automatisch im Browser gespeichert";
 ---
 
-<div class="sticky bottom-0 z-10 border-t border-[#A5AAC3] bg-white py-16">
+<div
+  class="fixed right-0 bottom-0 left-0 z-10 border-t border-[#A5AAC3] bg-white py-16 min-[900px]:left-300"
+>
   <div class="flex w-full items-center justify-between gap-16 px-64">
     <div class="kern-body kern-body--muted flex items-center gap-12">
       {
@@ -92,12 +94,8 @@ const defaultText = "Ihre Daten werden automatisch im Browser gespeichert";
               <p>
                 Sind Sie sicher, die besten Lösungen gefunden zu haben? Jetzt
                 ist ein guter Zeitpunkt um nochmal zu kontrollieren, ob
-                Wirkziele, Indikatoren, die Problembeschreibung und Hypothesen
+                Wirkziele, Indikatoren, die Problembeschreibung und Annahmen
                 etc. noch passen.
-              </p>{" "}
-              <p>
-                Gehen Sie gerne zurück, um Ihre Eingaben zu ändern. Ansonsten
-                können Sie auch fortfahren.
               </p>
               <a
                 type="button"
