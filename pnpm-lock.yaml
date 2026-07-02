@@ -17,8 +17,8 @@ importers:
   .:
     dependencies:
       '@astrojs/alpinejs':
-        specifier: ^0.5.0
-        version: 0.5.0(@types/alpinejs@3.13.11)(alpinejs@3.15.12)
+        specifier: ^1.0.0
+        version: 1.0.0(@types/alpinejs@3.13.11)(alpinejs@3.15.12)
       '@astrojs/mdx':
         specifier: ^6.0.3
         version: 6.0.3(astro@6.4.8(@types/node@26.0.1)(jiti@2.7.0)(yaml@2.9.0))
@@ -185,8 +185,8 @@ packages:
   '@asamuzakjp/nwsapi@2.3.9':
     resolution: {integrity: sha512-n8GuYSrI9bF7FFZ/SjhwevlHc8xaVlb/7HmHelnc/PZXBD2ZR49NnN9sMMuDdEGPeeRQ5d0hqlSlEpgCX3Wl0Q==}
 
-  '@astrojs/alpinejs@0.5.0':
-    resolution: {integrity: sha512-mORFY/ljzz6LPqkBPBd4v2i6yMhTkySgopIpVyKODEoJegp1PuX2Hri589P1oJzICGHSY8Q28OIyF/50Cf/lMQ==}
+  '@astrojs/alpinejs@1.0.0':
+    resolution: {integrity: sha512-xmLFD8MBunXCG39nS3dmINQfdhqlDNbHAYyw8n6jfLGL/AFeyYOtz6p1EtXX8NEbGLHk7mUOHoaC3j1WudUYoQ==}
     peerDependencies:
       '@types/alpinejs': ^3.0.0
       alpinejs: ^3.0.0
@@ -4617,7 +4617,7 @@ snapshots:
 
   '@asamuzakjp/nwsapi@2.3.9': {}
 
-  '@astrojs/alpinejs@0.5.0(@types/alpinejs@3.13.11)(alpinejs@3.15.12)':
+  '@astrojs/alpinejs@1.0.0(@types/alpinejs@3.13.11)(alpinejs@3.15.12)':
     dependencies:
       '@types/alpinejs': 3.13.11
       alpinejs: 3.15.12
