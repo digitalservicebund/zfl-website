@@ -15,7 +15,7 @@ test.describe("page titles", () => {
       const expectedTitle =
         route.isStagingOnly && !isStaging ? TITLE_404 : getTitle(route.title);
       await expect(page).toHaveTitle(expectedTitle);
-      expect(page.getByRole("heading", { level: 1 })).toBeDefined();
+      await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     });
   });
 });
