@@ -70,7 +70,7 @@ export const frontmatter = {
             target_option="_self"
             href={schulungen.path}
             image={schulungImage}
-            imageAlt="Symboldbild: Ein Laptop zeigt die fünf Prinzipien des Digitalchecks"
+            imageAlt="Symbolbild: Ein Laptop zeigt die fünf Prinzipien des Digitalchecks"
             body="Lernen Sie moderne Methoden und Werkzeuge der legistischen Arbeit kennen."
             interactive
           />
@@ -179,14 +179,3 @@ export const frontmatter = {
     </Hero>
   </main>
 </Layout>
-
-<script>
-  const infoBanner = document.getElementById("fruehphase-info-banner");
-  const closeInfoBannerButton = document.getElementById(
-    "fruehphase-info-banner-close",
-  );
-
-  closeInfoBannerButton?.addEventListener("click", () => {
-    infoBanner?.setAttribute("hidden", "");
-  });
-</script>
