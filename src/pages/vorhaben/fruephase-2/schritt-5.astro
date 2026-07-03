@@ -71,7 +71,9 @@ export const frontmatter = {
     <KernTable columnCount={5}>
       <Fragment slot="caption">Handlungsalternativen Tabelle</Fragment>
       <Fragment slot="header">
-        <KernTableHeaderCell />
+        <KernTableHeaderCell>
+          <span class="kern-sr-only">Nummer</span>
+        </KernTableHeaderCell>
         <KernTableHeaderCell>Wirkziele</KernTableHeaderCell>
         <KernTableHeaderCell>Indikatoren</KernTableHeaderCell>
         <KernTableHeaderCell>Status Quo</KernTableHeaderCell>

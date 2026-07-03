@@ -33,7 +33,9 @@ export const frontmatter = {
   <h3>Annahmen</h3>
   <KernTable columnCount={2} addButtonLabel="Annahme hinzufügen">
     <Fragment slot="header">
-      <KernTableHeaderCell />
+      <KernTableHeaderCell>
+        <span class="kern-sr-only">Nummer</span>
+      </KernTableHeaderCell>
       <KernTableHeaderCell> Annahmen </KernTableHeaderCell>
     </Fragment>
     <Fragment slot="body">

@@ -82,29 +82,15 @@ export const frontmatter = {
       bodyId="table-body"
     >
       <Fragment slot="header">
-        <KernTableHeaderCell />
+        <KernTableHeaderCell>
+          <span class="kern-sr-only">Löschen</span>
+        </KernTableHeaderCell>
         <KernTableHeaderCell>Wirkziele</KernTableHeaderCell>
         <KernTableHeaderCell>Indikatoren</KernTableHeaderCell>
         <KernTableHeaderCell>Erfolgsschwelle</KernTableHeaderCell>
         <KernTableHeaderCell>Datengrundlage</KernTableHeaderCell>
       </Fragment>
       <Fragment slot="body">
-        <!-- <KernTableRow>
-          <KernTableCell>-</KernTableCell>
-          <KernTableCell>
-            <b>Beispiel Vollautomatisiertes Fahren:</b>
-            Fahrzeugautomatisierungstechnologie kann (rechts-)sicher im deutschen
-            Verkehr eingesetzt werden. Ganzes Beispiel anschauen
-          </KernTableCell>
-          <KernTableCell>
-            Versicherer bieten KfZ-Pflichtversicherungen für h/v Fahrzeuge ohne
-            (Risiko-)Aufschläge an.
-          </KernTableCell>
-          <KernTableCell>Ja (binär)</KernTableCell>
-          <KernTableCell
-            >Markterkundung/Befragung Versicherungswirtschaft</KernTableCell
-          >
-        </KernTableRow> -->
         <template x-for="(row, index) in rows" :key="index">
           <KernTableRow>
             <KernTableCell>

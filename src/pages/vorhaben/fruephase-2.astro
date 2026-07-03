@@ -1,7 +1,15 @@
 ---
+import Layout from "@/layouts/Layout.astro";
+
 export const frontmatter = {
   title: "Frühphase II",
   sitemap: true,
   navLabel: "Frühphase II",
 };
 ---
+
+<Layout title={frontmatter.title}>
+  <main>
+    <h1>{frontmatter.title}</h1>
+  </main>
+</Layout>
