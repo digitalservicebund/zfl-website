@@ -281,6 +281,12 @@ address {
   grid-column: wide;
 }
 
+/* TEMPORARLY FIX FOR TEST MVP */
+/* Hide Frühphase II navigation link */
+a[href$="/vorhaben/fruephase-2"] {
+  display: none;
+}
+
 /*
  * Windows High Contrast mode
  */

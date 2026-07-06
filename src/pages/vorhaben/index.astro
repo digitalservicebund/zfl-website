@@ -1,0 +1,336 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+import {
+  vorhaben_fruephase2_schritt1,
+  vorhaben_fruephase2_schritt2,
+  vorhaben_fruephase2_schritt3,
+  vorhaben_fruephase2_schritt4,
+  vorhaben_fruephase2_schritt5,
+  vorhaben_fruephase2_schritt6,
+  vorhaben_fruephase2_schritt7,
+} from "@/config/routes";
+
+export const frontmatter = {
+  title: "Vorhaben erarbeiten",
+  sitemap: true,
+  navLabel: "Ihr Vorhaben",
+};
+
+type TaskStatus = {
+  variant: "success" | "info";
+  label: string;
+  showIcon: boolean;
+  smallLabel: boolean;
+};
+
+type Task = {
+  number: number;
+  title: string;
+  href?: string;
+  status?: TaskStatus;
+};
+
+type Phase = {
+  id?: string;
+  title: string;
+  tasks: Task[];
+};
+
+const phase1: Phase = {
+  title: "Phase I: Synergien heben",
+  tasks: [
+    {
+      number: 1,
+      title: "Steckbrief erstellen",
+      status: {
+        variant: "success",
+        label: "Erledigt",
+        showIcon: true,
+        smallLabel: false,
+      },
+    },
+    {
+      number: 2,
+      title: "Mit der Leitungsebene abklären",
+      status: {
+        variant: "success",
+        label: "Erledigt",
+        showIcon: true,
+        smallLabel: false,
+      },
+    },
+    {
+      number: 3,
+      title: "Steckbrief versenden an andere Ressorts, ZfL, NKR-S und StaBA",
+      status: {
+        variant: "success",
+        label: "Erledigt",
+        showIcon: true,
+        smallLabel: false,
+      },
+    },
+    {
+      number: 4,
+      title: "Rückmeldungen sammeln",
+      status: {
+        variant: "success",
+        label: "Erledigt",
+        showIcon: true,
+        smallLabel: false,
+      },
+    },
+  ],
+};
+
+const phase2: Phase = {
+  id: "phase-2",
+  title: "Phase II: Inhalte erarbeiten",
+  tasks: [
+    {
+      number: 5,
+      title: vorhaben_fruephase2_schritt1.navLabel,
+      href: vorhaben_fruephase2_schritt1.path,
+      status: {
+        variant: "success",
+        label: "Erledigt",
+        showIcon: true,
+        smallLabel: false,
+      },
+    },
+    {
+      number: 6,
+      title: vorhaben_fruephase2_schritt2.navLabel,
+      href: vorhaben_fruephase2_schritt2.path,
+    },
+    {
+      number: 7,
+      title: vorhaben_fruephase2_schritt3.navLabel,
+      href: vorhaben_fruephase2_schritt3.path,
+    },
+    {
+      number: 8,
+      title: vorhaben_fruephase2_schritt4.navLabel,
+      href: vorhaben_fruephase2_schritt4.path,
+    },
+    {
+      number: 9,
+      title: vorhaben_fruephase2_schritt5.navLabel,
+      href: vorhaben_fruephase2_schritt5.path,
+    },
+    {
+      number: 10,
+      title: vorhaben_fruephase2_schritt6.navLabel,
+      href: vorhaben_fruephase2_schritt6.path,
+    },
+    {
+      number: 11,
+      title: vorhaben_fruephase2_schritt7.navLabel,
+      href: vorhaben_fruephase2_schritt7.path,
+    },
+  ],
+};
+
+const phase3: Phase = {
+  title: "Phase III: Regulierung umsetzen",
+  tasks: [
+    {
+      number: 12,
+      title: "Ggf. Referentenentwurf schreiben",
+      status: {
+        variant: "info",
+        label: "Noch nicht zu bearbeiten",
+        showIcon: false,
+        smallLabel: true,
+      },
+    },
+  ],
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <section class="mx-auto max-w-730">
+      <h1>Vorhaben erarbeiten</h1>
+      <p class="kern-body">
+        Die neue Frühphase ersetzt den bisherigen Ablauf der Erarbeitung eines
+        Referentenentwurfes. Sie besteht aus drei Phasen, in denen Sie Ihr
+        Vorhaben inhaltlich definieren, Feedback einholen und die
+        Regulierungsform entscheiden.
+      </p>
+      <div class="kern-task-list">
+        <div class="kern-task-list__header">
+          <h2 id={phase1.id} class="kern-heading-medium">
+            {phase1.title}
+          </h2>
+        </div>
+
+        <ul class="kern-task-list__list">
+          {
+            phase1.tasks.map((task) => (
+              <li class="kern-task-list__item">
+                <span class="kern-number">{task.number}</span>
+                <div class="kern-task-list__title">
+                  <p class="kern-body">
+                    {task.href ? (
+                      <a href={task.href}>{task.title}</a>
+                    ) : (
+                      task.title
+                    )}
+                  </p>
+                  {task.status && (
+                    <div class="kern-task-list__status">
+                      <span
+                        class={`kern-badge ${task.status.variant === "success" ? "kern-badge--success" : "kern-badge--info"}`}
+                      >
+                        {task.status.showIcon && (
+                          <span
+                            class="kern-icon kern-icon--success"
+                            aria-hidden="true"
+                          />
+                        )}
+                        <span
+                          class={
+                            task.status.smallLabel
+                              ? "kern-label kern-label--small"
+                              : "kern-label"
+                          }
+                        >
+                          {task.status.label}
+                        </span>
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+
+        <div class="kern-task-list__header">
+          <h2 id={phase2.id} class="kern-heading-medium">
+            {phase2.title}
+          </h2>
+        </div>
+        <div
+          class="kern-alert kern-alert--info border-cosmic-blue-bases mb-md"
+          role="alert"
+        >
+          <div class="kern-alert__header bg-cosmic-blue-100">
+            <Icon
+              name="ic:baseline-real-estate-agent"
+              class="text-cosmic-blue-base h-24 w-24"
+            />
+            <span class="kern-title"
+              >Integrierte Arbeitshilfen und Checks: 4
+            </span>
+          </div>
+          <div class="kern-alert__body">
+            <p class="kern-body">
+              Nach und nach werden mehr Arbeitshilfen und Checks in die
+              Frühphase integriert.
+            </p>
+          </div>
+        </div>
+        <ul class="kern-task-list__list">
+          {
+            phase2.tasks.map((task) => (
+              <li class="kern-task-list__item">
+                <span class="kern-number">{task.number}</span>
+                <div class="kern-task-list__title">
+                  <p class="kern-body">
+                    {task.href ? (
+                      <a href={task.href}>{task.title}</a>
+                    ) : (
+                      task.title
+                    )}
+                  </p>
+                  {task.status && (
+                    <div class="kern-task-list__status">
+                      <span
+                        class={`kern-badge ${task.status.variant === "success" ? "kern-badge--success" : "kern-badge--info"}`}
+                      >
+                        {task.status.showIcon && (
+                          <span
+                            class="kern-icon kern-icon--success"
+                            aria-hidden="true"
+                          />
+                        )}
+                        <span
+                          class={
+                            task.status.smallLabel
+                              ? "kern-label kern-label--small"
+                              : "kern-label"
+                          }
+                        >
+                          {task.status.label}
+                        </span>
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+
+        <div class="kern-task-list__header">
+          <h2 id={phase3.id} class="kern-heading-medium">
+            {phase3.title}
+          </h2>
+        </div>
+        <div class="mb-32">
+          <div class="kern-alert kern-alert--info" role="alert">
+            <div class="kern-alert__header">
+              <span class="kern-icon kern-icon--info" aria-hidden="true"></span>
+              <h2 class="kern-title">
+                Entscheidung für oder gegen Regulierung
+              </h2>
+            </div>
+          </div>
+        </div>
+        <ul class="kern-task-list__list">
+          {
+            phase3.tasks.map((task) => (
+              <li class="kern-task-list__item">
+                <span class="kern-number">{task.number}</span>
+                <div class="kern-task-list__title">
+                  <p class="kern-body">
+                    {task.href ? (
+                      <a href={task.href}>{task.title}</a>
+                    ) : (
+                      task.title
+                    )}
+                  </p>
+                  {task.status && (
+                    <div class="kern-task-list__status">
+                      <span
+                        class={`kern-badge ${task.status.variant === "success" ? "kern-badge--success" : "kern-badge--info"}`}
+                      >
+                        {task.status.showIcon && (
+                          <span
+                            class="kern-icon kern-icon--success"
+                            aria-hidden="true"
+                          />
+                        )}
+                        <span
+                          class={
+                            task.status.smallLabel
+                              ? "kern-label kern-label--small"
+                              : "kern-label"
+                          }
+                        >
+                          {task.status.label}
+                        </span>
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+  </main>
+</Layout>

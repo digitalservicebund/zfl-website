@@ -1,0 +1,12 @@
+---
+interface Props {
+  scope?: "col" | "row";
+  class?: string;
+}
+
+const { scope = "col", class: className, ...rest } = Astro.props;
+---
+
+<th scope={scope} class:list={["kern-table__header", className]} {...rest}>
+  <slot />
+</th>
