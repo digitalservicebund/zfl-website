@@ -121,6 +121,16 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
       <p slot="subtitle">{description}</p>
     </Hero>
 
+    <div class="breakout breakout-grid bg-yellow-100 py-8">
+      <p class="mb-0">
+        <strong>Hinweis:</strong> Die hier angezeigten Pflichten wurden automatisiert
+        mittels KI/LLM aus den Gesetzestexten extrahiert und wurden nicht rechtlich
+        geprüft. Dieses Werkzeug ist ein Prototyp, mit dem wir erproben, ob dieser
+        Ansatz für die Praxis einen Mehrwert bietet – die Ergebnisse können unvollständig
+        oder fehlerhaft sein und ersetzen keine juristische Prüfung.
+      </p>
+    </div>
+
     {/* Loading state */}
     <section x-show="loading" x-cloak class="py-lg">
       <p class="kern-subline flex items-center gap-8">
