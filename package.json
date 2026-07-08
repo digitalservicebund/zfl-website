@@ -5,11 +5,11 @@
   "license": "MIT",
   "scripts": {
     "audit:licences": "license-checker-rseidelsohn --production --excludePrivatePackages --onlyAllow 'MIT;BSD-3-Clause;BSD-2-Clause;0BSD;ISC;Apache-2.0;MPL-2.0;BlueOak-1.0.0;Custom: LICENSE;Unlicense;EUPL-1.2;Python-2.0;CC0-1.0' --summary",
-    "build": "astro build",
+    "build": "pnpm sync && astro build",
     "build:search-index": "[ ! -d \"dist\" ] && pnpm build || true",
     "clean": "rm -rf dist",
     "clean:deps": "pnpm knip",
-    "dev": "pnpm build:search-index && PUBLIC_STAGE=development astro dev",
+    "dev": "pnpm sync && pnpm build:search-index && PUBLIC_STAGE=development astro dev",
     "dev:preview": "PUBLIC_STAGE=preview PREVIEW_BASE_PATH=/preview astro dev",
     "docker:build": "docker build --load -t zfl-website .",
     "docker:run": "docker run -d -p 8080:8080 --name zfl-website zfl-website:latest",
@@ -27,7 +27,8 @@
     "test": "vitest run",
     "test:a11y": "pnpm run build && playwright test --project=chromium e2e/a11y.spec.ts",
     "test:e2e": "pnpm run build && playwright test --project=chromium",
-    "typecheck": "astro check"
+    "typecheck": "pnpm sync && astro check",
+    "sync": "astro sync"
   },
   "dependencies": {
     "@astrojs/alpinejs": "^1.0.0",
