@@ -1,7 +1,7 @@
 /* KERN typography styles as Tailwind utilities */
 
 /* Override kern's muted color for sublines to use the inherited text color */
-.kern-subline {
+.kern-subline-dark {
   color: inherit;
 }
 

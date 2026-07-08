@@ -33,7 +33,7 @@ const praxistauglichkeitTools = allTools.filter(
       <p>
         Die <a
           href="https://bmds.bund.de/fileadmin/BMDS/Dokumente/Modernisierungsagenda_barrierefrei.pdf"
-          >Modernisierungsagenda des Bundes</a
+          target="_blank">Modernisierungsagenda des Bundes</a
         > gibt vor, neue Regelungen von Anfang an praxistauglich und bürokratiearm
         zu gestalten. Das Zentrum für Legistik unterstützt Sie dabei.
       </p>
@@ -48,12 +48,17 @@ const praxistauglichkeitTools = allTools.filter(
         >
           <h2>Was ist Praxistauglichkeit?</h2>
           <p>
-            Erfahren Sie mehr über den Auftrag und die Herangehensweise des
-            Zentrum für Legistik, aktuelle Arbeitspakete und Statistiken.
+            Praxistauglichkeit lebt vom <b
+              >direkten Austausch mit der Umsetzung.</b
+            >
+            Gemeinsam werden mit ihnen Hürden und Lösungen identifiziert. So kann
+            eine Regelung von Beginn an effizient gestaltet und aufwandsarm umgesetzt
+            werden. Im Ergebnis wird damit <b>unnötige Bürokratie verhindert</b
+            >.
           </p>
           <p>
-            Praxistauglichkeit fokussiert die frühe Phase der Gesetzgebung, d.h.
-            den Erarbeitungszeitraum vor Erstellung des Regelungstextes.
+            Praxistauglichkeit fokussiert die <b>frühe Phase</b> der Gesetzgebung,
+            d.h. den Erarbeitungszeitraum vor Erstellung des Regelungstextes.
           </p>
         </InfoPanel>
         <Image
@@ -62,8 +67,6 @@ const praxistauglichkeitTools = allTools.filter(
           class="lg:absolute lg:right-1 lg:h-482 lg:w-727"
         />
       </div>
-    </section>
-    <section>
       <h2>Wie setzen Sie Praxistauglichkeit um?</h2>
       <p>
         Praxistauglichkeit kann auf verschiedene Weise sichergestellt werden.
@@ -72,7 +75,7 @@ const praxistauglichkeitTools = allTools.filter(
       <ul class="list-unstyled mt-16 space-y-12">
         <li class="max-w-a11y flex items-start gap-8">
           <span
-            class="kern-icon kern-icon--check kern-icon--default"
+            class="kern-icon kern-icon--check kern-icon--default checklist-icon"
             aria-hidden="true"></span>
           <div class="space-y-4">
             <p>
@@ -88,7 +91,7 @@ const praxistauglichkeitTools = allTools.filter(
         </li>
         <li class="max-w-a11y flex items-start gap-8">
           <span
-            class="kern-icon kern-icon--check kern-icon--default"
+            class="kern-icon kern-icon--check kern-icon--default checklist-icon"
             aria-hidden="true"></span>
           <div class="space-y-4">
             <p>
@@ -103,7 +106,7 @@ const praxistauglichkeitTools = allTools.filter(
         </li>
         <li class="max-w-a11y flex items-start gap-8">
           <span
-            class="kern-icon kern-icon--check kern-icon--default"
+            class="kern-icon kern-icon--check kern-icon--default checklist-icon"
             aria-hidden="true"></span>
           <div class="space-y-4">
             <p>
@@ -131,8 +134,10 @@ const praxistauglichkeitTools = allTools.filter(
           layout="constrained"
         />
         <figcaption>
-          Praxistauglichkeit lebt vom direkten Austausch von Akteuren im
-          Präsenzformat
+          <p class="kern-subline kern-subline--small">
+            Praxistauglichkeit lebt vom direkten Austausch von Akteuren im
+            Präsenzformat
+          </p>
         </figcaption>
       </figure>
     </section>
@@ -178,7 +183,7 @@ const praxistauglichkeitTools = allTools.filter(
         </h2>
         <div class="pt-6 pb-2 lg:ml-auto lg:w-736">
           <p>
-            Ex-post-Praxischecks <b>untersuchen</b> nachträglich die Praxistauglichkeit
+            Ex-post-Praxischecks untersuchen <b>nachträglich</b> die Praxistauglichkeit
             bestehender Regelungen und deren Vollzug. Genau wie bei der Praxistauglichkeit
             steht auch hier der direkte Dialog mit Beschäftigten aus Unternehmen und
             Behörden im Zentrum.
@@ -197,7 +202,7 @@ const praxistauglichkeitTools = allTools.filter(
         {
           (
             <>
-              <div class="tool-grid gap-md grid grid-cols-1 md:grid-cols-2">
+              <div class="tool-grid gap-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 {praxistauglichkeitTools.map((werkzeug) => (
                   <div class="tool-wrapper">
                     <KernCard
@@ -211,10 +216,7 @@ const praxistauglichkeitTools = allTools.filter(
                         werkzeug.data.image ? werkzeug.data.title : undefined
                       }
                     >
-                      <div
-                        slot="pre-header"
-                        class="mb-16 flex w-full justify-between"
-                      >
+                      <div slot="pre-header" class="mb-16 w-full">
                         <div class="flex gap-8">
                           {werkzeug.data.type.map((type) => (
                             <span
@@ -224,22 +226,6 @@ const praxistauglichkeitTools = allTools.filter(
                             </span>
                           ))}
                         </div>
-                        <button
-                          class="text-icon-muted"
-                          aria-label={"Lesezeichen hinzufügen"}
-                        >
-                          <Icon
-                            name={"ic:outline-bookmark-add"}
-                            x-show={`!bookmarkedTools.includes(${JSON.stringify(werkzeug.id)})`}
-                            class="h-32 w-32"
-                          />
-                          {/* <Icon
-                            name="ic:round-bookmark-added"
-                            x-cloak
-                            x-show={`bookmarkedTools.includes(${JSON.stringify(werkzeug.id)})`}
-                            class="h-32 w-32"
-                          /> */}
-                        </button>
                       </div>
                       <div
                         slot="footer"
@@ -249,7 +235,7 @@ const praxistauglichkeitTools = allTools.filter(
                           name="ic:baseline-auto-stories"
                           class="h-32 w-32 shrink-0"
                         />
-                        <p class="kern-subline py-0">
+                        <p class="kern-subline kern-subline-dark py-0">
                           Quelle: {werkzeug.data.source}
                         </p>
                       </div>
@@ -269,7 +255,7 @@ const praxistauglichkeitTools = allTools.filter(
       </p>
       <KernAccordion>
         <span slot="header">Fokusgruppe: eLogistikdokumente (BMJV)</span>
-        <span slot="body" class="space-y-8">
+        <span slot="body" class="accordion-body-full-width space-y-8">
           <div>
             <b>Thema:</b>
             <ul>
@@ -319,7 +305,7 @@ const praxistauglichkeitTools = allTools.filter(
       </KernAccordion>
       <KernAccordion>
         <span slot="header">Workshop: Familienpflegezeit (BMBFSFJ)</span>
-        <span slot="body" class="space-y-8">
+        <span slot="body" class="accordion-body-full-width space-y-8">
           <div>
             <b>Thema:</b>
             <ul>
@@ -370,7 +356,7 @@ const praxistauglichkeitTools = allTools.filter(
         <span slot="header"
           >Interviews: Dokumentations- und Meldepflichten (BMLEH)</span
         >
-        <span slot="body" class="space-y-8">
+        <span slot="body" class="accordion-body-full-width space-y-8">
           <div>
             <b>Thema:</b>
             <ul>
@@ -427,3 +413,13 @@ const praxistauglichkeitTools = allTools.filter(
     </Hero>
   </main>
 </Layout>
+
+<style>
+  .checklist-icon {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    color: var(--color-cosmic-blue-base);
+    background-color: currentColor;
+  }
+</style>
