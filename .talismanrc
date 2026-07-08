@@ -94,6 +94,8 @@ fileignoreconfig:
     checksum: 80bdb51a9b0cc47cf426516f333c0c59ccab9a1a68b2d1a412c560906e96f15a
   - filename: scripts/pflichten_prompt.txt
     checksum: 557d30dab6c475d2a074b09b59f37a648eed0227fbafb23b6a4faec72b30a7d1
+  - filename: src/pages/werkzeuge/recht-erkunden.astro
+    checksum: c923b2b52cbddfb15ca1d7d574bdb291f499a8eb9b95df5cbbc801c7bb2e6a84
 scopeconfig:
   - scope: node
 allowed_patterns:

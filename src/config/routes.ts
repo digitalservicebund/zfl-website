@@ -220,6 +220,17 @@ export const werkzeuge_pflichten = {
   navLabel: null,
 } as const;
 
+export const werkzeuge_rechtErkunden = {
+  key: "werkzeuge_rechtErkunden",
+  path: "/werkzeuge/recht-erkunden",
+  title: "Recht erkunden",
+  parent: werkzeuge,
+  sitemap: false,
+  isStagingOnly: true,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
 export const allRoutes = [
   barrierefreiheit,
   begleitungen,
@@ -240,4 +251,5 @@ export const allRoutes = [
   ueber_zahlenUndFakten,
   werkzeuge,
   werkzeuge_pflichten,
+  werkzeuge_rechtErkunden,
 ] as const;
