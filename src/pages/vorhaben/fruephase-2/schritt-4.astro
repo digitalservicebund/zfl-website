@@ -70,6 +70,17 @@ export const frontmatter = {
       </li>
       <li><b>Datengrundlage</b> festlegen → <i>Wie messen wir das?</i></li>
     </ol>
+
+    <button
+      type="button"
+      popovertarget="example-table"
+      class="text-cosmic-blue-base inline-flex items-center gap-4"
+    >
+      <a>Ausgefülltes Beispiel ansehen</a>
+      <span
+        class="kern-icon kern-icon--open-in-new kern-icon--default text-cosmic-blue-base"
+        aria-hidden="true"></span>
+    </button>
   </div>
 
   <div
@@ -161,28 +172,20 @@ export const frontmatter = {
     <div class="kern-alert__body">
       <div class="kern-body">
         <p>
-          Wirkziel: Fahrzeugautomatisierungstechnologie kann (rechts-)sicher im
-          deutschen Verkehr eingesetzt werden.
+          <b>Wirkziel:</b> Fahrzeugautomatisierungstechnologie kann (rechts-)sicher
+          im deutschen Verkehr eingesetzt werden.
         </p>
         <p>
-          Indikator: Versicherer bieten KfZ-Pflichtversicherungen für hoch- und
-          vollautomatieriste Fahrzeuge ohne (Risiko-)Aufschläge an.
+          <b>Indikator:</b> Versicherer bieten KfZ-Pflichtversicherungen für hoch-
+          und vollautomatieriste Fahrzeuge ohne (Risiko-)Aufschläge an.
         </p>
-        <p>Erfolgsschwelle: Ja (binär).</p>
-        <p>Datengrundlage: Markterkundung/Befragung Versicherungswirtschaft.</p>
+        <p><b>Erfolgsschwelle:</b> Ja (binär).</p>
+        <p>
+          <b>Datengrundlage:</b> Markterkundung/Befragung Versicherungswirtschaft.
+        </p>
       </div>
     </div>
   </div>
-  <button
-    type="button"
-    popovertarget="example-table"
-    class="text-cosmic-blue-base inline-flex items-center gap-4"
-  >
-    <a>Ausgefülltes Beispiel ansehen</a>
-    <span
-      class="kern-icon kern-icon--open-in-new kern-icon--default text-cosmic-blue-base"
-      aria-hidden="true"></span>
-  </button>
   <Modal id="example-table" wide>
     <KernTable
       addButtonLabel="Wirkziel hinzufügen"
