@@ -209,6 +209,17 @@ export const werkzeuge = {
   navLabel: null,
 } as const;
 
+export const werkzeuge_praxistauglichkeit = {
+  key: "werkzeuge_praxistauglichkeit",
+  path: "/werkzeuge/praxistauglichkeit",
+  title: "Praxistauglichkeit",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: null,
+  navLabel: "Praxistauglichkeit",
+} as const;
+
 export const allRoutes = [
   barrierefreiheit,
   begleitungen,
@@ -228,4 +239,5 @@ export const allRoutes = [
   ueber_neueFruephase,
   ueber_zahlenUndFakten,
   werkzeuge,
+  werkzeuge_praxistauglichkeit,
 ] as const;
