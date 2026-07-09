@@ -93,8 +93,16 @@ export const frontmatter = {
           :key="`ha-header-${spaltenIndex}`"
         >
           <KernTableHeaderCell>
-            Handlungsalternative
-            <span x-text="spalte"></span>
+            <!-- Handlungsalternative
+            <span x-text="spalte"></span> -->
+            <div class="kern-form-input">
+              <input
+                class="kern-form-input__input w-full"
+                :id="`handlungsalternative-${index}`"
+                :name="`handlungsalternative-${index}`"
+                type="text"
+              />
+            </div>
           </KernTableHeaderCell>
         </template>
       </Fragment>

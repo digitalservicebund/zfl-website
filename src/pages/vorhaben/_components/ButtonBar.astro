@@ -1,7 +1,6 @@
 ---
 import Modal from "@/components/Modal.astro";
 import { Icon } from "astro-icon/components";
-import { vorhaben_fruephase2_schritt5 } from "@/config/routes";
 
 interface Props {
   prevPath?: string;
@@ -97,13 +96,13 @@ const defaultText = "Ihre Daten werden automatisch im Browser gespeichert";
                 Wirkziele, Indikatoren, die Problembeschreibung und Annahmen
                 etc. noch passen.
               </p>
-              <a
-                type="button"
+              <button
                 class="kern-btn kern-btn--primary"
-                href={vorhaben_fruephase2_schritt5.path}
+                popovertarget="confirm-modal"
+                aria-label="Hinweisfenster schließen"
               >
                 <span class="kern-label">Eingabe prüfen</span>
-              </a>
+              </button>
               <a
                 href={nextPath}
                 class="kern-btn kern-btn--secondary"
