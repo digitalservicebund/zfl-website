@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@astrojs/alpinejs": "^1.0.0",
-    "@astrojs/mdx": "^6.0.3",
+    "@astrojs/mdx": "^7.0.2",
     "@astrojs/sitemap": "^3.7.3",
     "@iconify-json/ic": "^1.2.4",
     "@kern-ux/native": "^2.6.4",
