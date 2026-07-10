@@ -12,6 +12,12 @@ export default defineConfig(
   eslintPluginAstro.configs.recommended,
   eslintConfigPrettier,
   {
+    files: ["src/pages/**/*.astro"],
+    rules: {
+      "astro/no-exports-from-components": "off", // to use `export const frontmatter` w/ astro-route-generator
+    },
+  },
+  {
     files: ["**/*.md"],
     plugins: {
       markdown,
