@@ -14,7 +14,6 @@ import { ZFL_PHONE, ZFL_EMAIL } from "@/config/constants";
 const frontmatter = {
   title: "Praxistauglichkeit",
   navLabel: "Praxistauglichkeit",
-  isStagingOnly: true,
 };
 
 const allTools = await getCollection("werkzeuge");
@@ -64,7 +63,7 @@ const praxistauglichkeitTools = allTools.filter(
         <Image
           src={praxistauglichkeit}
           alt="Drei Personen stehen an einem Poster einer Nutzendenreise und besprechen sich"
-          class="lg:absolute lg:right-1 lg:h-482 lg:w-727"
+          class="lg:absolute lg:right-1 lg:h-545 lg:w-727"
         />
       </div>
       <h2>Wie setzen Sie Praxistauglichkeit um?</h2>
@@ -249,7 +248,7 @@ const praxistauglichkeitTools = allTools.filter(
         }
       </div>
     </section>
-    <section class="breakout bg-neutral-25">
+    <section class="breakout bg-layout-background-hued">
       <h2>Beispiele für Praxistauglichkeit</h2>
       <p class="mb-32">
         So wurde Praxistauglichkeit von verschiedenen Ressorts sichergestellt.

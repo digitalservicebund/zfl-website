@@ -8,6 +8,7 @@
 @theme {
   /* re-declare semantic colors to make them available in Tailwind */
   --color-form-input-background: var(--kern-color-form-input-background);
+  --color-layout-background-hued: var(--kern-color-layout-background-hued);
 }
 
 @utility kern-heading-display {

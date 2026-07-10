@@ -215,7 +215,7 @@ export const werkzeuge_praxistauglichkeit = {
   title: "Praxistauglichkeit",
   parent: werkzeuge,
   sitemap: true,
-  isStagingOnly: true,
+  isStagingOnly: false,
   navOrder: null,
   navLabel: "Praxistauglichkeit",
 } as const;
