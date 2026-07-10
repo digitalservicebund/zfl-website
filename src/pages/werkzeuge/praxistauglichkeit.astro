@@ -143,12 +143,14 @@ const praxistauglichkeitTools = allTools.filter(
     <section class="breakout bg-lavender-400">
       <div class="space-y-16 pt-6 pb-2 lg:flex">
         <h2 class="lg:w-336">Hilfreiche Tipps</h2>
-        <ul class="lg:ml-auto lg:w-736">
-          <li>
-            <b>Unterstützung organisieren:</b> Hilfreich sind Kooperationen mit Verbänden,
-            Kammern oder Bundesländern. Diese können z. B.
-          </li>
-          <ul>
+        <div>
+          <ul class="lg:ml-auto lg:w-736">
+            <li>
+              <b>Unterstützung organisieren:</b> Hilfreich sind Kooperationen mit
+              Verbänden, Kammern oder Bundesländern. Diese können z. B.
+            </li>
+          </ul>
+          <ul class="ml-20">
             <li>Input und Feedback zur inhaltlichen Vorbereitung liefern,</li>
             <li>
               Praktikerinnen und Praktiker aus ihren Mitgliedsunternehmen und
@@ -159,20 +161,22 @@ const praxistauglichkeitTools = allTools.filter(
               Räumlichkeiten und Verpflegung).
             </li>
           </ul>
-          <li>
-            <b>Verbände mit Bedacht einbeziehen:</b> Verbände sind wichtige Vermittler
-            von Expertise, können den Austausch mit der Praxis aber nicht ersetzen
-          </li>
-          <li>
-            <b>Direkten Austausch sicherstellen:</b> Wenn möglich, sollte vorrangig
-            die Arbeitsebene eingeladen werden, damit die Teilnehmenden offen sprechen
-            können.
-          </li>
-          <li>
-            <b>Teilnehmendenanzahl eingrenzen:</b> Laden Sie zwischen 20 bis max.
-            25 Teilnehmende ein.
-          </li>
-        </ul>
+          <ul>
+            <li>
+              <b>Verbände mit Bedacht einbeziehen:</b> Verbände sind wichtige Vermittler
+              von Expertise, können den Austausch mit der Praxis aber nicht ersetzen
+            </li>
+            <li>
+              <b>Direkten Austausch sicherstellen:</b> Wenn möglich, sollte vorrangig
+              die Arbeitsebene eingeladen werden, damit die Teilnehmenden offen sprechen
+              können.
+            </li>
+            <li>
+              <b>Teilnehmendenanzahl eingrenzen:</b> Laden Sie zwischen 20 bis max.
+              25 Teilnehmende ein.
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
     <section class="breakout">
@@ -412,14 +416,14 @@ const praxistauglichkeitTools = allTools.filter(
       <p>E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a></p>
     </Hero>
   </main>
-</Layout>
 
-<style>
-  .checklist-icon {
-    width: 32px;
-    height: 32px;
-    flex-shrink: 0;
-    color: var(--color-cosmic-blue-base);
-    background-color: currentColor;
-  }
-</style>
+  <style>
+    .checklist-icon {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      color: var(--color-cosmic-blue-base);
+      background-color: currentColor;
+    }
+  </style>
+</Layout>
