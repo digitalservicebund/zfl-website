@@ -15,6 +15,7 @@ import {
   ueber_aktuelleMeldungen,
   ueber_daranArbeitenWir,
   werkzeuge,
+  werkzeuge_praxistauglichkeit,
 } from "@/config/routes";
 import Layout from "@/layouts/Layout.astro";
 
@@ -128,11 +129,14 @@ export const frontmatter = {
     <section>
       <h2 class="mb-40">Neuerungen auf der Webseite</h2>
       <TimelineList>
-<li>
+        <li>
           <Badge look="gray">Juli 2026</Badge>
           <ul>
+            <li>
               Neue Seite ergänzt: Vorhaben praxistauglich gestalten
-              <a href={werkzeuge_praxistauglichkeit.path} class="block">Hier ansehen</a>
+              <a href={werkzeuge_praxistauglichkeit.path} class="block"
+                >Hier ansehen</a
+              >
             </li>
           </ul>
         </li>
