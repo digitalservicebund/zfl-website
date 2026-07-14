@@ -11,6 +11,8 @@ import { defineConfig } from "astro/config";
 import process from "node:process";
 import { allRoutes } from "./src/config/routes.ts";
 
+import svelte from "@astrojs/svelte";
+
 const isPreview = process.env.PUBLIC_STAGE === "preview";
 const isDevelopment = process.env.PUBLIC_STAGE === "development";
 const PREVIEW_BASE_PATH = process.env.PREVIEW_BASE_PATH;
@@ -52,6 +54,7 @@ export default defineConfig({
       },
     }),
     react(),
+    svelte(),
   ],
   build: {
     assets: "_astro",
