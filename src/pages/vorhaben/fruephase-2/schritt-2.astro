@@ -98,38 +98,32 @@ export const frontmatter = {
             </KernTableCell>
             <KernTableCell>
               <div class="kern-form-input">
-                <input
+                <textarea
                   class="kern-form-input__input w-full"
                   :id="`quellen-${index}`"
                   :name="`quellen-${index}`"
-                  type="text"
                   aria-label="Recherchetool und Quelle"
-                  x-model="row.quellen"
-                />
+                  x-model="row.quellen"></textarea>
               </div>
             </KernTableCell>
             <KernTableCell>
               <div class="kern-form-input">
-                <input
+                <textarea
                   class="kern-form-input__input w-full"
                   :id="`frage-${index}`"
                   :name="`frage-${index}`"
-                  type="text"
                   aria-label="Frage"
-                  x-model="row.frage"
-                />
+                  x-model="row.frage"></textarea>
               </div>
             </KernTableCell>
             <KernTableCell>
               <div class="kern-form-input">
-                <input
+                <textarea
                   class="kern-form-input__input w-full"
                   :id="`erkenntnis-${index}`"
                   :name="`erkenntnis-${index}`"
-                  type="text"
                   aria-label="Erkenntnis"
-                  x-model="row.erkenntnis"
-                />
+                  x-model="row.erkenntnis"></textarea>
               </div>
             </KernTableCell>
             <KernTableCell>

@@ -96,10 +96,21 @@ export const frontmatter = {
         <KernTableHeaderCell>
           <span class="kern-sr-only">Löschen</span>
         </KernTableHeaderCell>
-        <KernTableHeaderCell>Wirkziele</KernTableHeaderCell>
-        <KernTableHeaderCell>Indikatoren</KernTableHeaderCell>
-        <KernTableHeaderCell>Erfolgsschwelle</KernTableHeaderCell>
-        <KernTableHeaderCell>Datengrundlage</KernTableHeaderCell>
+        <KernTableHeaderCell> Wirkziele </KernTableHeaderCell>
+        <KernTableHeaderCell>
+          Indikatoren
+          <div class="mt-8 font-normal italic">
+            Was zeigt uns, dass es wirkt?
+          </div>
+        </KernTableHeaderCell>
+        <KernTableHeaderCell>
+          Erfolgsschwelle
+          <div class="mt-8 font-normal italic">Ab wann ist es ein Erfolg?</div>
+        </KernTableHeaderCell>
+        <KernTableHeaderCell>
+          Datengrundlage
+          <div class="mt-8 font-normal italic">Wie messen wir das?</div>
+        </KernTableHeaderCell>
       </Fragment>
       <Fragment slot="body">
         <template x-for="(row, index) in rows" :key="index">
@@ -113,50 +124,42 @@ export const frontmatter = {
             </KernTableCell>
             <KernTableCell>
               <div class="kern-form-input">
-                <input
+                <textarea
                   class="kern-form-input__input w-full"
                   :id="`wirkziel-${index}`"
                   :name="`wirkziel-${index}`"
-                  type="text"
                   aria-label="Wirkziel"
-                  x-model="row.wirkziel"
-                />
+                  x-model="row.wirkziel"></textarea>
               </div>
             </KernTableCell>
             <KernTableCell>
               <div class="kern-form-input">
-                <input
+                <textarea
                   class="kern-form-input__input w-full"
                   :id="`indikatoren-${index}`"
                   :name="`indikatoren-${index}`"
-                  type="text"
                   aria-label="Indikatoren"
-                  x-model="row.indikatoren"
-                />
+                  x-model="row.indikatoren"></textarea>
               </div>
             </KernTableCell>
             <KernTableCell>
               <div class="kern-form-input">
-                <input
+                <textarea
                   class="kern-form-input__input w-full"
                   :id="`erfolgsschwelle-${index}`"
                   :name="`erfolgsschwelle-${index}`"
-                  type="text"
                   aria-label="Erfolgsschwelle"
-                  x-model="row.erfolgsschwelle"
-                />
+                  x-model="row.erfolgsschwelle"></textarea>
               </div>
             </KernTableCell>
             <KernTableCell>
               <div class="kern-form-input">
-                <input
+                <textarea
                   class="kern-form-input__input w-full"
                   :id="`datengrundlage-${index}`"
                   :name="`datengrundlage-${index}`"
-                  type="text"
                   aria-label="Datengrundlage"
-                  x-model="row.datengrundlage"
-                />
+                  x-model="row.datengrundlage"></textarea>
               </div>
             </KernTableCell>
           </KernTableRow>
