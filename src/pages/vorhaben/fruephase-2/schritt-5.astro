@@ -82,11 +82,20 @@ export const frontmatter = {
     <KernTable columnCount={5} class="w-full table-fixed">
       <Fragment slot="caption">Handlungsalternativen Tabelle</Fragment>
       <Fragment slot="header">
-        <KernTableHeaderCell class="w-24">
+        <KernTableHeaderCell rowspan="2" class="w-24">
           <span class="kern-sr-only">Nummer</span>
         </KernTableHeaderCell>
-        <KernTableHeaderCell class="w-180">Wirkziele</KernTableHeaderCell>
-        <KernTableHeaderCell>Indikatoren</KernTableHeaderCell>
+        <KernTableHeaderCell rowspan="2" class="w-180"
+          >Wirkziele</KernTableHeaderCell
+        >
+        <KernTableHeaderCell rowspan="2">Indikatoren</KernTableHeaderCell>
+        <KernTableHeaderCell
+          x-bind:colspan="1 + Math.max(0, ...rows.map((row) => row.handlungsalternativen.length), 0)"
+        >
+          Wird der Indikator erfüllt?
+        </KernTableHeaderCell>
+      </Fragment>
+      <Fragment slot="header-row-2">
         <KernTableHeaderCell>Status Quo</KernTableHeaderCell>
         <template
           x-for="(spalte, spaltenIndex) in Math.max(0, ...rows.map((row) => row.handlungsalternativen.length), 0)"
@@ -101,6 +110,8 @@ export const frontmatter = {
                 :id="`handlungsalternative-${index}`"
                 :name="`handlungsalternative-${index}`"
                 type="text"
+                :placeholder="`Handlungsalternative ${spaltenIndex + 1}`"
+                :aria-label="`Handlungsalternative ${spaltenIndex + 1}`"
               />
             </div>
           </KernTableHeaderCell>
@@ -143,10 +154,10 @@ export const frontmatter = {
               <p x-text="index + 1"></p>
             </KernTableCell>
             <KernTableCell>
-              <p x-text="row.wirkziel"></p>
+              <p class="wrap-break-word" x-text="row.wirkziel"></p>
             </KernTableCell>
             <KernTableCell>
-              <p x-text="row.indikatoren"></p>
+              <p class="wrap-break-word" x-text="row.indikatoren"></p>
             </KernTableCell>
             <KernTableCell>
               <div class="kern-form-input">
@@ -245,9 +256,14 @@ export const frontmatter = {
       bodyId="table-body"
     >
       <Fragment slot="header">
-        <KernTableHeaderCell />
-        <KernTableHeaderCell>Wirkziele</KernTableHeaderCell>
-        <KernTableHeaderCell>Indikatoren</KernTableHeaderCell>
+        <KernTableHeaderCell rowspan="2" />
+        <KernTableHeaderCell rowspan="2">Wirkziele</KernTableHeaderCell>
+        <KernTableHeaderCell rowspan="2">Indikatoren</KernTableHeaderCell>
+        <KernTableHeaderCell colspan="3">
+          Wird der Indikator erfüllt?
+        </KernTableHeaderCell>
+      </Fragment>
+      <Fragment slot="header-row-2">
         <KernTableHeaderCell>Status Quo</KernTableHeaderCell>
         <KernTableHeaderCell>Handlungsalternative 1</KernTableHeaderCell>
         <KernTableHeaderCell>Handlungsalternative 2</KernTableHeaderCell>

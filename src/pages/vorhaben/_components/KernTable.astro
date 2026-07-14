@@ -29,6 +29,13 @@ const {
     <tr class="kern-table__row">
       <slot name="header" />
     </tr>
+    {
+      Astro.slots.has("header-row-2") && (
+        <tr class="kern-table__row">
+          <slot name="header-row-2" />
+        </tr>
+      )
+    }
   </thead>
 
   <tbody class="kern-table__body" id={bodyId}>

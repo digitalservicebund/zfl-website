@@ -2,6 +2,8 @@
 interface Props {
   scope?: "col" | "row";
   class?: string;
+  colspan?: number | string;
+  rowspan?: number | string;
 }
 
 const { scope = "col", class: className, ...rest } = Astro.props;
