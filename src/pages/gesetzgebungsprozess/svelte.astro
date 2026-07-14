@@ -1,11 +1,10 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
-import SVGWithMinimap from "./_SVGWithMinimap";
-import gesetzgebungsprozessSvg from "./regelungen-description.svg?url";
+import RegelungsprozessFlowWithMinimap from "./_RegelungsprozessFlowWithMinimap.svelte";
 
 export const frontmatter = {
-  title: "SVG",
+  title: "Svelte",
   isStagingOnly: true,
 };
 ---
@@ -16,10 +15,8 @@ export const frontmatter = {
       <h1>{frontmatter.title}</h1>
     </Hero>
 
-    <SVGWithMinimap
-      className="breakout my-lg"
-      svgSrc={gesetzgebungsprozessSvg}
-      client:load
-    />
+    <div class="my-lg">
+      <RegelungsprozessFlowWithMinimap client:load />
+    </div>
   </main>
 </Layout>
