@@ -23,8 +23,6 @@ const styles = tv({
     searchInput:
       "focus:outline-cosmic-blue-base border-lavender-400 w-full rounded-sm border bg-white py-10 pr-40 pl-40 transition focus:outline-2",
     chip: "bg-lavender-base text-cosmic-blue-base inline-flex items-center gap-6 rounded-full px-10 py-4 text-left text-sm transition",
-    removableChip:
-      "bg-lavender-base text-cosmic-blue-base inline-flex items-center gap-6 rounded-full py-4 pr-6 pl-12 text-sm",
     termChip:
       "border-cosmic-blue-base text-cosmic-blue-base inline-flex items-center gap-8 rounded-full border bg-white px-12 py-6 text-left text-sm transition",
     lawCard:
@@ -34,31 +32,46 @@ const styles = tv({
     normRow: "flex items-start gap-12 rounded-sm border p-12 transition",
     countBadge:
       "bg-lavender-base text-cosmic-blue-base inline-flex w-fit items-center gap-6 rounded-full px-10 py-4 text-xs font-semibold",
-    scoreBadge:
-      "bg-cosmic-blue-base inline-flex items-center rounded-full px-8 py-2 text-xs font-semibold text-white",
     matrixHeaderCell:
-      "kern-label border-lavender-400 bg-lavender-base border-b-2 p-12 text-left align-top",
+      "border-lavender-400 bg-lavender-base border-b-2 p-12 text-left align-top",
     matrixRowLabel:
-      "kern-label border-lavender-400 bg-lavender-100 border-b p-12 align-top whitespace-nowrap",
+      "border-lavender-400 bg-lavender-100 border-b p-12 align-top whitespace-nowrap",
     matrixCell: "border-lavender-400 border-b p-12 align-top",
     sourceCard: "border-lavender-400 rounded-sm border bg-white p-12",
+    selectedLawCard:
+      "border-cosmic-blue-base bg-lavender-100 flex flex-wrap items-center justify-between gap-12 rounded-sm border p-16",
+    infoTrigger:
+      "text-cosmic-blue-base hover:bg-lavender-100 inline-flex h-22 w-22 items-center justify-center rounded-full transition",
+    infoPopoverPanel:
+      "border-lavender-400 text-icon-muted absolute top-full left-0 z-20 mt-4 w-260 rounded-sm border bg-white p-12 text-xs leading-snug font-normal shadow-lg",
+    stepBadge:
+      "bg-cosmic-blue-base flex h-32 w-32 shrink-0 items-center justify-center rounded-full text-base leading-none font-semibold text-white",
+    subStepBadge:
+      "border-cosmic-blue-base text-cosmic-blue-base flex h-22 shrink-0 items-center justify-center gap-2 rounded-full border bg-white px-8 text-xs leading-none font-semibold whitespace-nowrap",
+    subStepGroup: "border-lavender-400 space-y-lg ml-16 border-l-2 pl-24",
+    subStepHeading: "mb-4 flex items-center gap-10",
   },
 });
 
 const {
   searchInput,
   chip,
-  removableChip,
   termChip,
   lawCard,
   areaCard,
   normRow,
   countBadge,
-  scoreBadge,
   matrixHeaderCell,
   matrixRowLabel,
   matrixCell,
   sourceCard,
+  stepBadge,
+  subStepBadge,
+  subStepGroup,
+  subStepHeading,
+  selectedLawCard,
+  infoTrigger,
+  infoPopoverPanel,
 } = styles();
 ---
 
@@ -79,242 +92,336 @@ const {
       </p>
     </div>
 
-    {/* Step 1: search for a law */}
-    <section class="space-y-md py-lg">
-      <div>
-        <h2 class="mb-4">1. Gesetz suchen</h2>
-        <p class="kern-subline py-0">
-          Suchen Sie das Gesetz, das Sie im Rahmen Ihres Vorhabens ändern
-          möchten.
-        </p>
-      </div>
-
-      <div class="relative w-full md:max-w-400">
-        <Icon
-          name="ic:round-search"
-          class="text-icon-muted pointer-events-none absolute top-1/2 left-12 h-24 w-24 -translate-y-1/2"
-        />
-        <input
-          class={searchInput()}
-          type="search"
-          placeholder="z. B. SGB II …"
-          aria-label="Gesetz suchen"
-          x-model.debounce.300ms="lawQuery"
-        />
-        <button
-          type="button"
-          class="text-icon-muted absolute top-1/2 right-12 -translate-y-1/2"
-          x-show="lawQuery"
-          x-cloak
-          aria-label="Suche löschen"
-          @click="lawQuery = ''"
-        >
-          <Icon name="ic:round-close" class="h-24 w-24" />
-        </button>
-      </div>
-
-      <div
-        x-show="!selectedLaw && lawQuery.trim().length > 0 && matchingLaws.length > 0"
-        x-cloak
-        class="grid gap-12 sm:grid-cols-2 lg:grid-cols-3"
-        role="group"
-        aria-label="Gesetzesliste"
-      >
-        <template x-for="law in matchingLaws" :key="law.id">
-          <button type="button" class={lawCard()} @click="selectLaw(law.id)">
-            <span class="text-base font-semibold" x-text="law.label"></span>
-            <span class="text-icon-muted text-xs leading-snug" x-text="law.name"
-            ></span>
-          </button>
-        </template>
-      </div>
-
-      <p
-        x-show="!selectedLaw && lawQuery.trim() && matchingLaws.length === 0"
-        x-cloak
-        class="text-icon-muted py-0 italic"
-      >
-        Keine Gesetze für die aktuelle Suche gefunden.
-      </p>
-
-      <p
-        x-show="!selectedLaw && !lawQuery.trim()"
-        x-cloak
-        class="text-icon-muted py-0 italic"
-      >
-        Geben Sie einen Suchbegriff ein, um Gesetze anzuzeigen.
-      </p>
-
-      {/* Selected law chip */}
-      <div x-show="selectedLaw" x-cloak class="flex flex-wrap gap-8">
-        <span class={removableChip()}>
-          <span x-text="selectedLaw ? selectedLaw.label : ''"></span>
-          <button
-            type="button"
-            class="hover:bg-cosmic-blue-base flex h-20 w-20 items-center justify-center rounded-full transition hover:text-white"
-            aria-label="Auswahl zurücksetzen"
-            @click="clearLaw()"
-          >
-            <Icon name="ic:round-close" class="h-16 w-16" />
-          </button>
-        </span>
-      </div>
-
-      {/* Fallback: no mock data for the selected law */}
-      <div
-        x-show="selectedLaw && !selectedLaw.hasData"
-        x-cloak
-        class="border-lavender-400 bg-lavender-200 flex items-start gap-12 rounded-sm border p-20"
-      >
-        <Icon
-          name="ic:round-info"
-          class="text-cosmic-blue-base mt-2 h-24 w-24 shrink-0"
-        />
-        <div>
-          <p class="mt-0 mb-4">
-            Für dieses Gesetz liegen noch keine Analysedaten vor.
-          </p>
-          <p class="py-0">
-            Prototyp-Daten stehen bislang nur für das SGB II zur Verfügung.
-          </p>
-          <button
-            type="button"
-            class="kern-btn kern-btn--secondary mt-8"
-            @click="selectLaw('sgb2')"
-          >
-            <span class="kern-label">Beispieldaten zum SGB II anzeigen</span>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    {/* Step 2: pick a Rechtsgebiet */}
-    <section
-      x-show="selectedLaw && selectedLaw.hasData"
-      x-cloak
-      class="space-y-md py-lg"
-    >
-      <div>
-        <h2 class="mb-4">2. Rechtsgebiet wählen</h2>
-        <p class="kern-subline py-0">
-          Diese Rechtsgebiete werden im ausgewählten Gesetz behandelt. Im
-          vorgesehenen Verfahren würden sie automatisiert über Textanalyse (z.
-          B. Keyword-Extraktion, Clustering ähnlicher Normen) ermittelt.
-        </p>
-      </div>
-
-      <div
-        class="grid gap-12 sm:grid-cols-2 lg:grid-cols-3"
-        role="group"
-        aria-label="Rechtsgebiete"
-      >
-        {
-          LAW_AREAS.map((area) => (
-            <button
-              type="button"
-              class={areaCard()}
-              x-bind:class={`selectedAreaId === '${area.id}' ? 'border-cosmic-blue-base bg-lavender-200 ring-1 ring-cosmic-blue-base' : 'border-lavender-400 bg-white hover:border-cosmic-blue-400'`}
-              x-on:click={`selectArea('${area.id}')`}
-            >
-              <span class="text-base font-semibold">{area.label}</span>
-              <span class="text-icon-muted text-xs leading-snug">
-                {area.description}
-              </span>
-              <span class={countBadge()}>{area.normIds.length} Normen</span>
-            </button>
-          ))
-        }
-      </div>
-    </section>
-
-    {/* Steps 3 + 4, two-column with shared detail sidebar */}
-    <section
-      x-show="selectedArea"
-      x-cloak
-      class="py-lg grid gap-24 lg:grid-cols-[1fr_360px] lg:items-start"
-    >
+    {/* Step 1: Zu änderndes Recht bestimmen (Teilschritte 1.1-1.3) */}
+    <section class="py-lg space-y-lg">
       <div class="space-y-lg min-w-0">
-        {/* Step 3: Zu änderndes Recht */}
-        <div class="space-y-md">
+        <div class="flex items-start gap-16">
+          <span class={stepBadge()}>1</span>
           <div>
-            <h2 class="mb-4">3. Zu änderndes Recht</h2>
+            <h2 class="mb-4">Zu änderndes Recht bestimmen</h2>
             <p class="kern-subline py-0">
-              Diese Normen des ausgewählten Rechtsgebiets stehen zur Änderung
-              an. Deaktivieren Sie einzelne Normen, um das angrenzende Recht in
-              Schritt 4 entsprechend einzugrenzen.
+              Bestimmen Sie in drei Teilschritten, welches Gesetz, welches
+              Rechtsgebiet und welche konkreten Normen im Rahmen Ihres Vorhabens
+              geändert werden sollen.
             </p>
           </div>
-
-          <ul class="space-y-8" role="list">
-            <template x-for="norm in areaNorms" :key="norm.id">
-              <li
-                class={normRow()}
-                x-bind:class="isNormActive(norm.id) ? 'border-cosmic-blue-base bg-white' : 'border-lavender-400 bg-lavender-100 opacity-70'"
-              >
-                <input
-                  type="checkbox"
-                  class="kern-form-check__checkbox mt-2 shrink-0"
-                  :checked="isNormActive(norm.id)"
-                  @change="toggleNorm(norm.id)"
-                  :aria-label="`${norm.ref} berücksichtigen`"
-                />
-                <div class="min-w-0 flex-1">
-                  <p
-                    class="mt-0 mb-0 text-base leading-snug font-semibold"
-                    x-text="`${norm.ref} – ${norm.title}`"
-                  >
-                  </p>
-                  <p
-                    class="text-icon-muted mt-2 mb-0 text-xs leading-snug"
-                    x-text="norm.summary"
-                  >
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  class="kern-btn kern-btn--tertiary shrink-0"
-                  @click="openNorm(norm.id)"
-                >
-                  <span class="kern-label">Volltext</span>
-                </button>
-              </li>
-            </template>
-          </ul>
         </div>
 
-        {/* Begriffe im Fokus strip */}
-        <div x-show="activeTerms.length > 0" x-cloak class="space-y-8">
-          <h3 class="mb-0">Begriffe im Fokus</h3>
-          <p class="kern-subline py-0">
-            Diese Begriffe verbinden die ausgewählten Normen mit anderen
-            Gesetzen - unabhängig davon, welches Gesetz sie definiert.
-          </p>
-          <div class="flex flex-wrap gap-8">
-            <template x-for="term in activeTerms" :key="term.id">
+        <div class={subStepGroup()}>
+          {/* 1.1 Gesetz suchen */}
+          <div class="space-y-md">
+            <div>
+              <div class={subStepHeading()}>
+                <span class={subStepBadge()}>1.1</span>
+                <h3 class="mt-0 mb-0">Gesetz suchen</h3>
+              </div>
+              <p class="kern-subline py-0">
+                Suchen Sie das Gesetz, das Sie im Rahmen Ihres Vorhabens ändern
+                möchten.
+              </p>
+            </div>
+
+            <div class="relative w-full md:max-w-400">
+              <Icon
+                name="ic:round-search"
+                class="text-icon-muted pointer-events-none absolute top-1/2 left-12 h-24 w-24 -translate-y-1/2"
+              />
+              <input
+                class={searchInput()}
+                type="search"
+                placeholder="z. B. SGB II …"
+                aria-label="Gesetz suchen"
+                x-model.debounce.300ms="lawQuery"
+              />
               <button
                 type="button"
-                class={termChip()}
-                :class="sidebarMode === 'term' && sidebarTermId === term.id ? 'ring-2 ring-cosmic-blue-base' : ''"
-                @click="openTerm(term.id)"
+                class="text-icon-muted absolute top-1/2 right-12 -translate-y-1/2"
+                x-show="lawQuery"
+                x-cloak
+                aria-label="Suche löschen"
+                @click="lawQuery = ''"
               >
-                <span x-text="term.term"></span>
-                <span
-                  class="text-icon-muted text-xs"
-                  x-text="`${termLawCount(term)} ${termLawCount(term) === 1 ? 'Gesetz' : 'Gesetze'}`"
-                ></span>
+                <Icon name="ic:round-close" class="h-24 w-24" />
               </button>
-            </template>
+            </div>
+
+            <div
+              x-show="!selectedLaw && lawQuery.trim().length > 0 && matchingLaws.length > 0"
+              x-cloak
+              class="grid gap-12 sm:grid-cols-2 lg:grid-cols-3"
+              role="group"
+              aria-label="Gesetzesliste"
+            >
+              <template x-for="law in matchingLaws" :key="law.id">
+                <button
+                  type="button"
+                  class={lawCard()}
+                  @click="selectLaw(law.id)"
+                >
+                  <span class="text-base font-semibold" x-text="law.label"
+                  ></span>
+                  <span
+                    class="text-icon-muted text-xs leading-snug"
+                    x-text="law.name"></span>
+                </button>
+              </template>
+            </div>
+
+            <p
+              x-show="!selectedLaw && lawQuery.trim() && matchingLaws.length === 0"
+              x-cloak
+              class="text-icon-muted py-0 italic"
+            >
+              Keine Gesetze für die aktuelle Suche gefunden.
+            </p>
+
+            <p
+              x-show="!selectedLaw && !lawQuery.trim()"
+              x-cloak
+              class="text-icon-muted py-0 italic"
+            >
+              Geben Sie einen Suchbegriff ein, um Gesetze anzuzeigen.
+            </p>
+
+            {/* Selected law */}
+            <div x-show="selectedLaw" x-cloak class={selectedLawCard()}>
+              <div>
+                <p class="kern-label text-icon-muted mb-2">
+                  Ausgewähltes Gesetz
+                </p>
+                <p
+                  class="mb-0 text-base font-semibold"
+                  x-text="selectedLaw ? selectedLaw.label : ''"
+                >
+                </p>
+                <p
+                  class="text-icon-muted py-0 text-xs"
+                  x-text="selectedLaw ? selectedLaw.name : ''"
+                >
+                </p>
+              </div>
+              <button
+                type="button"
+                class="kern-btn kern-btn--tertiary shrink-0"
+                @click="clearLaw()"
+              >
+                <span class="kern-label">Anderes Gesetz wählen</span>
+              </button>
+            </div>
+
+            {/* Fallback: no mock data for the selected law */}
+            <div
+              x-show="selectedLaw && !selectedLaw.hasData"
+              x-cloak
+              class="border-lavender-400 bg-lavender-200 flex items-start gap-12 rounded-sm border p-20"
+            >
+              <Icon
+                name="ic:round-info"
+                class="text-cosmic-blue-base mt-2 h-24 w-24 shrink-0"
+              />
+              <div>
+                <p class="mt-0 mb-4">
+                  Für dieses Gesetz liegen noch keine Analysedaten vor.
+                </p>
+                <p class="py-0">
+                  Prototyp-Daten stehen bislang nur für das SGB II zur
+                  Verfügung.
+                </p>
+                <button
+                  type="button"
+                  class="kern-btn kern-btn--secondary mt-8"
+                  @click="selectLaw('sgb2')"
+                >
+                  <span class="kern-label"
+                    >Beispieldaten zum SGB II anzeigen</span
+                  >
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* 1.2 Rechtsgebiet wählen */}
+          <div
+            x-show="selectedLaw && selectedLaw.hasData"
+            x-cloak
+            class="space-y-md"
+          >
+            <div>
+              <div class={subStepHeading()}>
+                <span class={subStepBadge()}>1.2</span>
+                <h3 class="mt-0 mb-0">Rechtsgebiet wählen</h3>
+              </div>
+              <p class="kern-subline flex flex-wrap items-center gap-4 py-0">
+                <span>
+                  Diese Rechtsgebiete werden im ausgewählten Gesetz behandelt.
+                </span>
+                <span
+                  class="relative inline-flex"
+                  x-data="{ open: false }"
+                  x-on:click.outside="open = false"
+                >
+                  <button
+                    type="button"
+                    class={infoTrigger()}
+                    x-on:click="open = !open"
+                    x-bind:aria-expanded="open"
+                    aria-label="Hinweis zur Ermittlung der Rechtsgebiete anzeigen"
+                  >
+                    <Icon name="ic:outline-info" class="h-16 w-16" />
+                  </button>
+                  <span
+                    x-show="open"
+                    x-cloak
+                    x-transition
+                    class={infoPopoverPanel()}
+                  >
+                    Im vorgesehenen Verfahren würden die Rechtsgebiete
+                    automatisiert über Textanalyse ermittelt (z. B.
+                    Keyword-Extraktion, Clustering ähnlicher Normen). Hier sind
+                    sie als Beispieldaten hinterlegt.
+                  </span>
+                </span>
+              </p>
+            </div>
+
+            <div
+              class="grid gap-12 sm:grid-cols-2 lg:grid-cols-3"
+              role="group"
+              aria-label="Rechtsgebiete"
+            >
+              {
+                LAW_AREAS.map((area) => (
+                  <button
+                    type="button"
+                    class={areaCard()}
+                    x-bind:class={`selectedAreaId === '${area.id}' ? 'border-cosmic-blue-base bg-lavender-200 ring-1 ring-cosmic-blue-base' : 'border-lavender-400 bg-white hover:border-cosmic-blue-400'`}
+                    x-on:click={`selectArea('${area.id}')`}
+                  >
+                    <span class="text-base font-semibold">{area.label}</span>
+                    <span class="text-icon-muted text-xs leading-snug">
+                      {area.description}
+                    </span>
+                    <span class={countBadge()}>
+                      {area.normIds.length} Normen
+                    </span>
+                  </button>
+                ))
+              }
+            </div>
+          </div>
+
+          {/* 1.3 Normen auswählen */}
+          <div x-show="selectedArea" x-cloak class="space-y-md">
+            <div>
+              <div class={subStepHeading()}>
+                <span class={subStepBadge()}>1.3</span>
+                <h3 class="mt-0 mb-0">Normen auswählen</h3>
+              </div>
+              <p class="kern-subline py-0">
+                Diese Normen des ausgewählten Rechtsgebiets stehen zur Änderung
+                an. Deaktivieren Sie einzelne Normen, um das angrenzende Recht
+                unten entsprechend einzugrenzen.
+              </p>
+            </div>
+
+            <ul class="space-y-8" role="list">
+              <template x-for="norm in areaNorms" :key="norm.id">
+                <li
+                  x-data="{ fulltextOpen: false }"
+                  class={normRow()}
+                  x-bind:class="isNormActive(norm.id) ? 'border-cosmic-blue-base bg-white' : 'border-lavender-400 bg-lavender-100 opacity-70'"
+                >
+                  <input
+                    type="checkbox"
+                    class="kern-form-check__checkbox mt-2 shrink-0"
+                    :checked="isNormActive(norm.id)"
+                    @change="toggleNorm(norm.id)"
+                    :aria-label="`${norm.ref} berücksichtigen`"
+                  />
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-start justify-between gap-12">
+                      <div class="min-w-0 flex-1">
+                        <p
+                          class="mt-0 mb-0 text-base leading-snug font-semibold"
+                          x-text="`${norm.ref} – ${norm.title}`"
+                        >
+                        </p>
+                        <p
+                          class="text-icon-muted mt-2 mb-0 text-xs leading-snug"
+                          x-text="norm.summary"
+                        >
+                        </p>
+                      </div>
+                      <button
+                        type="button"
+                        class="text-cosmic-blue-base inline-flex shrink-0 items-center gap-4 text-sm font-semibold"
+                        @click="fulltextOpen = !fulltextOpen"
+                        :aria-expanded="fulltextOpen"
+                      >
+                        <span>Volltext</span>
+                        <Icon
+                          name="ic:round-expand-more"
+                          class="h-18 w-18 transition-transform"
+                          x-bind:class="fulltextOpen ? 'rotate-180' : ''"
+                        />
+                      </button>
+                    </div>
+                    <p
+                      x-show="fulltextOpen"
+                      x-cloak
+                      class="text-icon-muted border-lavender-400 mt-8 border-t py-0 pt-8 text-sm whitespace-pre-line"
+                      x-text="norm.fullText"
+                    >
+                    </p>
+                  </div>
+                </li>
+              </template>
+            </ul>
           </div>
         </div>
+      </div>
 
-        {/* Step 4: Angrenzendes Recht */}
-        <div class="space-y-md">
-          <div>
-            <h2 class="mb-4">4. Angrenzendes Recht</h2>
+      {/* Step 2: Angrenzendes Recht erkunden, with shared detail sidebar */}
+      <div
+        class="grid gap-24 lg:items-start"
+        x-bind:class="sidebarMode ? 'lg:grid-cols-[1fr_360px]' : 'lg:grid-cols-1'"
+      >
+        <div x-show="selectedArea" x-cloak class="space-y-md">
+          <div class="flex items-start gap-16">
+            <span class={stepBadge()}>2</span>
+            <div>
+              <h2 class="mb-4">Angrenzendes Recht erkunden</h2>
+              <p class="kern-subline py-0">
+                Strukturiert nach Normenhierarchie (Zeilen) und Relevanzgrund
+                (Spalten), auf Basis der in Schritt 1 ausgewählten Normen.
+                Klicken Sie auf ein Gesetz, um die Begründung zu sehen.
+              </p>
+            </div>
+          </div>
+
+          {/* Begriffe im Fokus strip */}
+          <div x-show="activeTerms.length > 0" x-cloak class="space-y-8">
+            <h3 class="mb-0">Begriffe im Fokus</h3>
             <p class="kern-subline py-0">
-              Strukturiert nach Normenhierarchie (Zeilen) und Relevanzgrund
-              (Spalten). Klicken Sie auf ein Gesetz, um die Begründung zu sehen.
+              Diese Begriffe verbinden die ausgewählten Normen mit anderen
+              Gesetzen - unabhängig davon, welches Gesetz sie definiert.
             </p>
+            <div class="flex flex-wrap gap-8">
+              <template x-for="term in activeTerms" :key="term.id">
+                <button
+                  type="button"
+                  class={termChip()}
+                  :class="sidebarMode === 'term' && sidebarTermId === term.id ? 'ring-2 ring-cosmic-blue-base' : ''"
+                  @click="openTerm(term.id)"
+                >
+                  <span x-text="term.term"></span>
+                  <span
+                    class="text-icon-muted text-xs"
+                    x-text="`${termLawCount(term)} ${termLawCount(term) === 1 ? 'Gesetz' : 'Gesetze'}`"
+                  ></span>
+                </button>
+              </template>
+            </div>
           </div>
 
           <p
@@ -340,21 +447,42 @@ const {
               <div x-show="visibleRelations.length > 0" x-cloak>
                 {/* Desktop matrix */}
                 <div
-                  class="hidden overflow-hidden rounded-sm lg:grid"
+                  class="hidden overflow-visible rounded-sm lg:grid"
                   style={`grid-template-columns: 200px repeat(${RELEVANCE_REASONS.length}, 1fr);`}
                 >
                   <div class={matrixHeaderCell()}></div>
                   {
-                    RELEVANCE_REASONS.map((reason) => (
+                    RELEVANCE_REASONS.map((reason, index) => (
                       <div class={matrixHeaderCell()}>
-                        <span class="inline-flex items-center gap-4">
+                        <span class="inline-flex items-center gap-4 text-base font-semibold">
                           {reason.label}
                           {reason.hint && (
-                            <span title={reason.hint}>
-                              <Icon
-                                name="ic:round-info"
-                                class="text-icon-muted h-16 w-16"
-                              />
+                            <span
+                              class="relative inline-flex"
+                              x-data="{ open: false }"
+                              x-on:click.outside="open = false"
+                            >
+                              <button
+                                type="button"
+                                class={infoTrigger()}
+                                x-on:click="open = !open"
+                                x-bind:aria-expanded="open"
+                                aria-label={`Hinweis zu ${reason.label} anzeigen`}
+                              >
+                                <Icon
+                                  name="ic:outline-info"
+                                  class="h-16 w-16"
+                                />
+                              </button>
+                              <span
+                                x-show="open"
+                                x-cloak
+                                x-transition
+                                role="tooltip"
+                                class={`${infoPopoverPanel()} ${index === RELEVANCE_REASONS.length - 1 ? "right-0 left-auto" : ""}`}
+                              >
+                                {reason.hint}
+                              </span>
                             </span>
                           )}
                         </span>
@@ -370,7 +498,9 @@ const {
                     HIERARCHY_LEVELS.map((level) => (
                       <Fragment>
                         <div class={matrixRowLabel()}>
-                          <div>{level.label}</div>
+                          <div class="text-base font-semibold">
+                            {level.label}
+                          </div>
                           <span
                             class="text-icon-muted mt-2 block text-xs font-normal"
                             x-text={`levelCount('${level.id}') + ' Gesetze'`}
@@ -393,12 +523,6 @@ const {
                                   x-on:click="openRelation(relation)"
                                 >
                                   <span x-text="relation.lawLabel" />
-                                  <span
-                                    x-show="relation.nlp"
-                                    x-cloak
-                                    class={scoreBadge()}
-                                    x-text="relation.nlp ? relation.nlp.similarity.toFixed(2).replace('.', ',') : ''"
-                                  />
                                 </button>
                               </template>
                             </div>
@@ -465,301 +589,304 @@ const {
             </div>
           </template>
         </div>
-      </div>
 
-      {/* Shared detail sidebar: norm / term / evidence mode */}
-      <div>
-        <div
-          class="fixed inset-0 z-40 bg-black/40 lg:hidden"
-          x-show="sidebarMode"
-          x-cloak
-          aria-hidden="true"
-          @click="closeSidebar()"
-        >
-        </div>
-
-        <aside
-          x-show="sidebarMode"
-          x-cloak
-          class="border-lavender-400 fixed inset-x-0 bottom-0 z-50 max-h-[85vh] overflow-y-auto rounded-t-sm border-t bg-white p-20 shadow-lg lg:sticky lg:top-24 lg:z-auto lg:max-h-[calc(100vh-96px)] lg:rounded-sm lg:border lg:shadow-none"
-          aria-label="Details"
-        >
-          <div class="mb-12 flex items-start justify-between gap-12">
-            <h3 class="mt-0 mb-0">
-              <span
-                x-text="sidebarMode === 'norm' ? 'Normtext' : sidebarMode === 'term' ? 'Begriff' : 'Warum relevant?'"
-              ></span>
-            </h3>
-            <button
-              type="button"
-              class="text-icon-muted shrink-0"
-              aria-label="Schließen"
-              @click="closeSidebar()"
-            >
-              <Icon name="ic:round-close" class="h-24 w-24" />
-            </button>
+        {/* Shared detail sidebar: norm / term / evidence mode */}
+        <div>
+          <div
+            class="fixed inset-0 z-40 bg-black/40 lg:hidden"
+            x-show="sidebarMode"
+            x-cloak
+            aria-hidden="true"
+            @click="closeSidebar()"
+          >
           </div>
 
-          {/* Norm mode */}
-          <template x-if="sidebarMode === 'norm' && sidebarNorm">
-            <div class="space-y-8">
-              <p
-                class="mt-0 mb-0 text-base font-semibold"
-                x-text="`${sidebarNorm.ref} – ${sidebarNorm.title}`"
+          <aside
+            x-show="sidebarMode"
+            x-cloak
+            class="border-lavender-400 fixed inset-x-0 bottom-0 z-50 max-h-[85vh] overflow-y-auto rounded-t-sm border-t bg-white p-20 shadow-lg lg:sticky lg:top-24 lg:z-auto lg:max-h-[calc(100vh-96px)] lg:rounded-sm lg:border lg:shadow-none"
+            aria-label="Details"
+          >
+            <div class="mb-12 flex items-start justify-between gap-12">
+              <h3 class="mt-0 mb-0">
+                <span
+                  x-text="sidebarMode === 'norm' ? 'Normtext' : sidebarMode === 'term' ? 'Begriff' : 'Warum relevant?'"
+                ></span>
+              </h3>
+              <button
+                type="button"
+                class="text-icon-muted shrink-0"
+                aria-label="Schließen"
+                @click="closeSidebar()"
               >
-              </p>
-              <p
-                class="text-icon-muted py-0 text-sm whitespace-pre-line"
-                x-text="sidebarNorm.fullText"
-              >
-              </p>
+                <Icon name="ic:round-close" class="h-24 w-24" />
+              </button>
             </div>
-          </template>
 
-          {/* Term mode */}
-          <template x-if="sidebarMode === 'term' && sidebarTerm">
-            <div class="space-y-12">
-              <div>
+            {/* Norm mode */}
+            <template x-if="sidebarMode === 'norm' && sidebarNorm">
+              <div class="space-y-8">
                 <p
-                  class="mt-0 mb-4 text-base font-semibold"
-                  x-text="sidebarTerm.term"
-                >
-                </p>
-                <p class="py-0 text-sm" x-text="sidebarTerm.definition"></p>
-              </div>
-
-              <div class={sourceCard()}>
-                <div class="mb-4 flex items-center justify-between gap-8">
-                  <p class="kern-label text-icon-muted mb-0">Definiert in</p>
-                  <a
-                    x-show="sidebarTerm.definedIn.url"
-                    x-cloak
-                    :href="sidebarTerm.definedIn.url"
-                    target="_blank"
-                    rel="noopener"
-                    class="text-icon-muted hover:text-cosmic-blue-base"
-                    aria-label="Quelle öffnen"
-                  >
-                    <Icon name="ic:round-open-in-new" class="h-18 w-18" />
-                  </a>
-                </div>
-                <p
-                  class="mb-4 text-sm font-semibold"
-                  x-text="sidebarTerm.definedIn.label"
+                  class="mt-0 mb-0 text-base font-semibold"
+                  x-text="`${sidebarNorm.ref} – ${sidebarNorm.title}`"
                 >
                 </p>
                 <p
                   class="text-icon-muted py-0 text-sm whitespace-pre-line"
-                  x-text="sidebarTerm.definedIn.fullText"
+                  x-text="sidebarNorm.fullText"
                 >
                 </p>
               </div>
+            </template>
 
-              <div>
-                <p class="kern-label text-icon-muted mb-8">Verwendet in</p>
-                <ul class="space-y-8" role="list">
-                  <template
-                    x-for="(entry, index) in sidebarTerm.usedIn.adjacentNorms"
-                    :key="index"
+            {/* Term mode */}
+            <template x-if="sidebarMode === 'term' && sidebarTerm">
+              <div class="space-y-12">
+                <div>
+                  <p
+                    class="mt-0 mb-4 text-base font-semibold"
+                    x-text="sidebarTerm.term"
                   >
-                    <li class={sourceCard()}>
-                      <span
-                        class="mb-4 inline-block rounded-full px-10 py-2 text-xs font-semibold"
-                        x-bind:class="levelBadgeClass(entry.level)"
-                        x-text="levelLabel(entry.level)"></span>
-                      <p
-                        class="mb-4 text-sm font-semibold"
-                        x-text="entry.lawLabel"
-                      >
-                      </p>
-                      <p
-                        class="text-icon-muted py-0 text-xs"
-                        x-text="entry.ref.label"
-                      >
-                      </p>
-                    </li>
-                  </template>
-                </ul>
-              </div>
-            </div>
-          </template>
+                  </p>
+                  <p class="py-0 text-sm" x-text="sidebarTerm.definition"></p>
+                </div>
 
-          {/* Evidence mode */}
-          <template x-if="sidebarMode === 'evidence' && sidebarRelation">
-            <div class="space-y-12">
-              <div>
-                <p
-                  class="mt-0 mb-4 text-base font-semibold"
-                  x-text="sidebarRelation.lawName"
-                >
-                </p>
-                <div class="flex flex-wrap items-center gap-6">
-                  <span
-                    class="inline-flex items-center rounded-full px-10 py-2 text-xs font-semibold"
-                    x-bind:class="levelBadgeClass(sidebarRelation.level)"
-                    x-text="levelLabel(sidebarRelation.level)"></span>
-                  <span
-                    class="text-icon-muted text-xs"
-                    x-text="reasonFullLabel(sidebarRelation.reason)"></span>
+                <div class={sourceCard()}>
+                  <div class="mb-4 flex items-center justify-between gap-8">
+                    <p class="kern-label text-icon-muted mb-0">Definiert in</p>
+                    <a
+                      x-show="sidebarTerm.definedIn.url"
+                      x-cloak
+                      :href="sidebarTerm.definedIn.url"
+                      target="_blank"
+                      rel="noopener"
+                      class="text-icon-muted hover:text-cosmic-blue-base"
+                      aria-label="Quelle öffnen"
+                    >
+                      <Icon name="ic:round-open-in-new" class="h-18 w-18" />
+                    </a>
+                  </div>
+                  <p
+                    class="mb-4 text-sm font-semibold"
+                    x-text="sidebarTerm.definedIn.label"
+                  >
+                  </p>
+                  <p
+                    class="text-icon-muted py-0 text-sm whitespace-pre-line"
+                    x-text="sidebarTerm.definedIn.fullText"
+                  >
+                  </p>
+                </div>
+
+                <div>
+                  <p class="kern-label text-icon-muted mb-8">Verwendet in</p>
+                  <ul class="space-y-8" role="list">
+                    <template
+                      x-for="(entry, index) in sidebarTerm.usedIn.adjacentNorms"
+                      :key="index"
+                    >
+                      <li class={sourceCard()}>
+                        <span
+                          class="mb-4 inline-block rounded-full px-10 py-2 text-xs font-semibold"
+                          x-bind:class="levelBadgeClass(entry.level)"
+                          x-text="levelLabel(entry.level)"></span>
+                        <p
+                          class="mb-4 text-sm font-semibold"
+                          x-text="entry.lawLabel"
+                        >
+                        </p>
+                        <p
+                          class="text-icon-muted py-0 text-xs"
+                          x-text="entry.ref.label"
+                        >
+                        </p>
+                      </li>
+                    </template>
+                  </ul>
                 </div>
               </div>
+            </template>
 
-              <div x-show="sidebarRelation.nlp" x-cloak class={sourceCard()}>
-                <p class="kern-label text-icon-muted mb-4">
-                  Ähnlichkeitssignal (NLP, Prototyp-Daten)
-                </p>
-                <p class="mb-4 py-0 text-sm">
-                  Themenähnlichkeit: <span
-                    class="font-semibold"
-                    x-text="sidebarRelation.nlp ? sidebarRelation.nlp.similarity.toFixed(2).replace('.', ',') : ''"
-                  ></span>
-                </p>
-                <div class="flex flex-wrap gap-6">
-                  <template
-                    x-for="keyword in sidebarRelation.nlp ? sidebarRelation.nlp.keywords : []"
-                    :key="keyword"
+            {/* Evidence mode */}
+            <template x-if="sidebarMode === 'evidence' && sidebarRelation">
+              <div class="space-y-12">
+                <div>
+                  <p
+                    class="mt-0 mb-4 text-base font-semibold"
+                    x-text="sidebarRelation.lawName"
                   >
+                  </p>
+                  <div class="flex flex-wrap items-center gap-6">
                     <span
-                      class="bg-lavender-100 text-cosmic-blue-base rounded-full px-8 py-2 text-xs"
-                      x-text="keyword"></span>
-                  </template>
+                      class="inline-flex items-center rounded-full px-10 py-2 text-xs font-semibold"
+                      x-bind:class="levelBadgeClass(sidebarRelation.level)"
+                      x-text="levelLabel(sidebarRelation.level)"></span>
+                    <span
+                      class="text-icon-muted text-xs"
+                      x-text="reasonFullLabel(sidebarRelation.reason)"></span>
+                  </div>
                 </div>
-              </div>
 
-              <div>
-                <p class="kern-label text-icon-muted mb-8">
-                  Betroffene SGB-II-Normen
-                </p>
-                <div class="flex flex-wrap gap-6">
-                  <template
-                    x-for="normId in sidebarRelation.normIds"
-                    :key="normId"
-                  >
-                    <button
-                      type="button"
-                      class={chip()}
-                      @click="openNorm(normId)"
+                <div x-show="sidebarRelation.nlp" x-cloak class={sourceCard()}>
+                  <p class="kern-label text-icon-muted mb-4">
+                    Ähnlichkeitssignal (NLP, Prototyp-Daten)
+                  </p>
+                  <p class="mb-4 py-0 text-sm">
+                    Themenähnlichkeit: <span
+                      class="font-semibold"
+                      x-text="sidebarRelation.nlp ? sidebarRelation.nlp.similarity.toFixed(2).replace('.', ',') : ''"
+                    ></span>
+                  </p>
+                  <div class="flex flex-wrap gap-6">
+                    <template
+                      x-for="keyword in sidebarRelation.nlp ? sidebarRelation.nlp.keywords : []"
+                      :key="keyword"
                     >
                       <span
-                        x-text="normById(normId) ? normById(normId).ref : normId"
-                      ></span>
-                    </button>
-                  </template>
+                        class="bg-lavender-100 text-cosmic-blue-base rounded-full px-8 py-2 text-xs"
+                        x-text="keyword"></span>
+                    </template>
+                  </div>
+                </div>
+
+                <div>
+                  <p class="kern-label text-icon-muted mb-8">
+                    Betroffene SGB-II-Normen
+                  </p>
+                  <div class="flex flex-wrap gap-6">
+                    <template
+                      x-for="normId in sidebarRelation.normIds"
+                      :key="normId"
+                    >
+                      <button
+                        type="button"
+                        class={chip()}
+                        @click="openNorm(normId)"
+                      >
+                        <span
+                          x-text="normById(normId) ? normById(normId).ref : normId"
+                        ></span>
+                      </button>
+                    </template>
+                  </div>
+                </div>
+
+                <div>
+                  <p class="kern-label text-icon-muted mb-8">Begründung</p>
+                  <ul class="space-y-12" role="list">
+                    <template
+                      x-for="(item, index) in sidebarRelation.evidence"
+                      :key="index"
+                    >
+                      <li class={sourceCard()}>
+                        <p class="mt-0 mb-8 py-0 text-sm" x-text="item.quote">
+                        </p>
+
+                        {/* adjacent norm - always present */}
+                        <div
+                          x-data="{ open: false }"
+                          class="border-lavender-400 border-t pt-8"
+                        >
+                          <div class="flex items-center justify-between gap-8">
+                            <p
+                              class="mb-0 text-sm font-semibold"
+                              x-text="item.adjacentNorm.label"
+                            >
+                            </p>
+                            <div class="flex shrink-0 items-center gap-8">
+                              <a
+                                x-show="item.adjacentNorm.url && item.adjacentNorm.url !== '#'"
+                                x-cloak
+                                :href="item.adjacentNorm.url"
+                                target="_blank"
+                                rel="noopener"
+                                class="text-icon-muted hover:text-cosmic-blue-base"
+                                aria-label="Quelle öffnen"
+                              >
+                                <Icon
+                                  name="ic:round-open-in-new"
+                                  class="h-18 w-18"
+                                />
+                              </a>
+                              <button
+                                type="button"
+                                class="text-cosmic-blue-base text-xs font-semibold whitespace-nowrap"
+                                @click="open = !open"
+                              >
+                                <span
+                                  x-text="open ? 'Volltext ausblenden' : 'Volltext anzeigen'"
+                                ></span>
+                              </button>
+                            </div>
+                          </div>
+                          <p
+                            x-show="open"
+                            x-cloak
+                            class="text-icon-muted mt-4 py-0 text-sm whitespace-pre-line"
+                            x-text="item.adjacentNorm.fullText"
+                          >
+                          </p>
+                        </div>
+
+                        {
+                          /* cited in - only for "gemeinsame_nennung" evidence */
+                        }
+                        <div
+                          x-show="item.citedIn"
+                          x-cloak
+                          x-data="{ open: false }"
+                          class="border-lavender-400 mt-8 border-t pt-8"
+                        >
+                          <p
+                            class="kern-label text-icon-muted mb-4"
+                            x-text="item.citedIn && item.citedIn.kind === 'literatur' ? 'Fundstelle (Literatur)' : 'Fundstelle (Rechtsprechung)'"
+                          >
+                          </p>
+                          <div class="flex items-center justify-between gap-8">
+                            <p
+                              class="mb-0 text-sm font-semibold"
+                              x-text="item.citedIn ? item.citedIn.label : ''"
+                            >
+                            </p>
+                            <div class="flex shrink-0 items-center gap-8">
+                              <a
+                                x-show="item.citedIn && item.citedIn.url && item.citedIn.url !== '#'"
+                                x-cloak
+                                :href="item.citedIn ? item.citedIn.url : '#'"
+                                target="_blank"
+                                rel="noopener"
+                                class="text-icon-muted hover:text-cosmic-blue-base"
+                                aria-label="Quelle öffnen"
+                              >
+                                <Icon name="ic:round-gavel" class="h-18 w-18" />
+                              </a>
+                              <button
+                                type="button"
+                                class="text-cosmic-blue-base text-xs font-semibold whitespace-nowrap"
+                                @click="open = !open"
+                              >
+                                <span
+                                  x-text="open ? 'Volltext ausblenden' : 'Volltext anzeigen'"
+                                ></span>
+                              </button>
+                            </div>
+                          </div>
+                          <p
+                            x-show="open"
+                            x-cloak
+                            class="text-icon-muted mt-4 py-0 text-sm whitespace-pre-line"
+                            x-text="item.citedIn ? item.citedIn.fullText : ''"
+                          >
+                          </p>
+                        </div>
+                      </li>
+                    </template>
+                  </ul>
                 </div>
               </div>
-
-              <div>
-                <p class="kern-label text-icon-muted mb-8">Begründung</p>
-                <ul class="space-y-12" role="list">
-                  <template
-                    x-for="(item, index) in sidebarRelation.evidence"
-                    :key="index"
-                  >
-                    <li class={sourceCard()}>
-                      <p class="mt-0 mb-8 py-0 text-sm" x-text="item.quote"></p>
-
-                      {/* adjacent norm - always present */}
-                      <div
-                        x-data="{ open: false }"
-                        class="border-lavender-400 border-t pt-8"
-                      >
-                        <div class="flex items-center justify-between gap-8">
-                          <p
-                            class="mb-0 text-sm font-semibold"
-                            x-text="item.adjacentNorm.label"
-                          >
-                          </p>
-                          <div class="flex shrink-0 items-center gap-8">
-                            <a
-                              x-show="item.adjacentNorm.url && item.adjacentNorm.url !== '#'"
-                              x-cloak
-                              :href="item.adjacentNorm.url"
-                              target="_blank"
-                              rel="noopener"
-                              class="text-icon-muted hover:text-cosmic-blue-base"
-                              aria-label="Quelle öffnen"
-                            >
-                              <Icon
-                                name="ic:round-open-in-new"
-                                class="h-18 w-18"
-                              />
-                            </a>
-                            <button
-                              type="button"
-                              class="text-cosmic-blue-base text-xs font-semibold whitespace-nowrap"
-                              @click="open = !open"
-                            >
-                              <span
-                                x-text="open ? 'Volltext ausblenden' : 'Volltext anzeigen'"
-                              ></span>
-                            </button>
-                          </div>
-                        </div>
-                        <p
-                          x-show="open"
-                          x-cloak
-                          class="text-icon-muted mt-4 py-0 text-sm whitespace-pre-line"
-                          x-text="item.adjacentNorm.fullText"
-                        >
-                        </p>
-                      </div>
-
-                      {/* cited in - only for "gemeinsame_nennung" evidence */}
-                      <div
-                        x-show="item.citedIn"
-                        x-cloak
-                        x-data="{ open: false }"
-                        class="border-lavender-400 mt-8 border-t pt-8"
-                      >
-                        <p
-                          class="kern-label text-icon-muted mb-4"
-                          x-text="item.citedIn && item.citedIn.kind === 'literatur' ? 'Fundstelle (Literatur)' : 'Fundstelle (Rechtsprechung)'"
-                        >
-                        </p>
-                        <div class="flex items-center justify-between gap-8">
-                          <p
-                            class="mb-0 text-sm font-semibold"
-                            x-text="item.citedIn ? item.citedIn.label : ''"
-                          >
-                          </p>
-                          <div class="flex shrink-0 items-center gap-8">
-                            <a
-                              x-show="item.citedIn && item.citedIn.url && item.citedIn.url !== '#'"
-                              x-cloak
-                              :href="item.citedIn ? item.citedIn.url : '#'"
-                              target="_blank"
-                              rel="noopener"
-                              class="text-icon-muted hover:text-cosmic-blue-base"
-                              aria-label="Quelle öffnen"
-                            >
-                              <Icon name="ic:round-gavel" class="h-18 w-18" />
-                            </a>
-                            <button
-                              type="button"
-                              class="text-cosmic-blue-base text-xs font-semibold whitespace-nowrap"
-                              @click="open = !open"
-                            >
-                              <span
-                                x-text="open ? 'Volltext ausblenden' : 'Volltext anzeigen'"
-                              ></span>
-                            </button>
-                          </div>
-                        </div>
-                        <p
-                          x-show="open"
-                          x-cloak
-                          class="text-icon-muted mt-4 py-0 text-sm whitespace-pre-line"
-                          x-text="item.citedIn ? item.citedIn.fullText : ''"
-                        >
-                        </p>
-                      </div>
-                    </li>
-                  </template>
-                </ul>
-              </div>
-            </div>
-          </template>
-        </aside>
+            </template>
+          </aside>
+        </div>
       </div>
     </section>
   </main>
