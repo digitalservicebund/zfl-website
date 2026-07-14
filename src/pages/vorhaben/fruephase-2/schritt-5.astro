@@ -79,13 +79,13 @@ export const frontmatter = {
     x-data="handlungsAlternativenTable"
     class="relative left-1/2 w-[calc(100vw-32px)] max-w-7xl -translate-x-1/2 min-[900px]:w-[calc(100vw-300px-32px)]"
   >
-    <KernTable columnCount={5}>
+    <KernTable columnCount={5} class="w-full table-fixed">
       <Fragment slot="caption">Handlungsalternativen Tabelle</Fragment>
       <Fragment slot="header">
-        <KernTableHeaderCell>
+        <KernTableHeaderCell class="w-24">
           <span class="kern-sr-only">Nummer</span>
         </KernTableHeaderCell>
-        <KernTableHeaderCell>Wirkziele</KernTableHeaderCell>
+        <KernTableHeaderCell class="w-180">Wirkziele</KernTableHeaderCell>
         <KernTableHeaderCell>Indikatoren</KernTableHeaderCell>
         <KernTableHeaderCell>Status Quo</KernTableHeaderCell>
         <template
@@ -118,7 +118,10 @@ export const frontmatter = {
           >
             <KernTableCell />
           </template>
-          <KernTableCell :rowspan="rows.length + 2" class="p-0 align-middle">
+          <KernTableCell
+            :rowspan="rows.length + 2"
+            class="w-150 p-0 align-middle"
+          >
             <button
               type="button"
               class="flex h-full w-full items-center justify-center gap-4 px-16 py-8 text-center"
@@ -127,7 +130,7 @@ export const frontmatter = {
               <span
                 class="kern-icon kern-icon--add kern-icon--default"
                 aria-hidden="true"></span>
-              Handlungsalternative hinzufügen
+              Handlungs&shy;alternative hinzufügen
             </button>
           </KernTableCell>
         </KernTableRow>
@@ -147,14 +150,12 @@ export const frontmatter = {
             </KernTableCell>
             <KernTableCell>
               <div class="kern-form-input">
-                <input
+                <textarea
                   class="kern-form-input__input w-full"
                   :id="`status-quo-${index}`"
                   :name="`status-quo-${index}`"
-                  type="text"
                   aria-label="Status Quo"
-                  x-model="row.statusQuo"
-                />
+                  x-model="row.statusQuo"></textarea>
               </div>
             </KernTableCell>
             <template
@@ -163,14 +164,13 @@ export const frontmatter = {
             >
               <KernTableCell>
                 <div class="kern-form-input">
-                  <input
+                  <textarea
                     class="kern-form-input__input w-full"
                     :id="`handlungsalternativen-${index}-${spaltenIndex}`"
                     :name="`handlungsalternativen-${index}-${spaltenIndex}`"
-                    type="text"
                     :aria-label="`Handlungsalternative ${spaltenIndex + 1}`"
                     x-model="row.handlungsalternativen[spaltenIndex]"
-                  />
+                  ></textarea>
                 </div>
               </KernTableCell>
             </template>
@@ -198,27 +198,23 @@ export const frontmatter = {
             </KernTableCell>
             <KernTableCell>
               <div class="kern-form-input">
-                <input
+                <textarea
                   x-text="row.indikatoren"
                   class="kern-form-input__input w-full"
                   :id="`handlungsalternativen-${index}`"
                   :name="`handlungsalternativen-${index}`"
-                  type="text"
                   aria-label="Indikatoren"
-                  x-model="row.indikatoren"
-                />
+                  x-model="row.indikatoren"></textarea>
               </div>
             </KernTableCell>
             <KernTableCell>
               <div class="kern-form-input">
-                <input
+                <textarea
                   class="kern-form-input__input w-full"
                   :id="`default-status-quo-${index}`"
                   :name="`default-status-quo-${index}`"
-                  type="text"
                   aria-label="Status Quo"
-                  x-model="row.statusQuo"
-                />
+                  x-model="row.statusQuo"></textarea>
               </div>
             </KernTableCell>
             <template
@@ -227,14 +223,13 @@ export const frontmatter = {
             >
               <KernTableCell>
                 <div class="kern-form-input">
-                  <input
+                  <textarea
                     class="kern-form-input__input w-full"
                     :id="`default-handlungsalternativen-${index}-${spaltenIndex}`"
                     :name="`default-handlungsalternativen-${index}-${spaltenIndex}`"
-                    type="text"
                     :aria-label="`Handlungsalternative ${spaltenIndex + 1}`"
                     x-model="row.handlungsalternativen[spaltenIndex]"
-                  />
+                  ></textarea>
                 </div>
               </KernTableCell>
             </template>

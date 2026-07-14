@@ -4,6 +4,7 @@ interface Props {
   columnCount: number;
   addButtonAction?: string;
   bodyId?: string;
+  class?: string;
 }
 
 const {
@@ -11,10 +12,11 @@ const {
   columnCount,
   addButtonAction = "addNewRow",
   bodyId,
+  class: className,
 } = Astro.props;
 ---
 
-<table class="kern-table">
+<table class:list={["kern-table", className]}>
   {
     Astro.slots.has("caption") && (
       <caption class="kern-title">
