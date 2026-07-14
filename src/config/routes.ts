@@ -77,6 +77,17 @@ export const dev_kernKomponenten = {
   navLabel: null,
 } as const;
 
+export const gesetzgebungsprozess = {
+  key: "gesetzgebungsprozess",
+  path: "/gesetzgebungsprozess",
+  title: "Der Gesetzgebungsprozess",
+  parent: null,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
 export const home = {
   key: "home",
   path: "/",
@@ -227,6 +238,7 @@ export const allRoutes = [
   dev,
   dev_astroKomponenten,
   dev_kernKomponenten,
+  gesetzgebungsprozess,
   home,
   impressum,
   kontakt,

@@ -1,0 +1,25 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import SVGWithMinimap from "./_SVGWithMinimap";
+import gesetzgebungsprozessSvg from "./regelungen-description.svg?url";
+
+export const frontmatter = {
+  title: "Der Gesetzgebungsprozess",
+  isStagingOnly: true,
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero>
+      <h1>{frontmatter.title}</h1>
+    </Hero>
+
+    <SVGWithMinimap
+      className="breakout my-lg"
+      svgSrc={gesetzgebungsprozessSvg}
+      client:load
+    />
+  </main>
+</Layout>
