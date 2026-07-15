@@ -10,9 +10,10 @@ export const styles = tv({
     subStepHeading: "mb-4 flex items-center gap-10",
     countBadge:
       "bg-lavender-base text-cosmic-blue-base inline-flex w-fit items-center gap-6 rounded-full px-10 py-4 text-xs font-semibold",
-    chip: "bg-lavender-base text-cosmic-blue-base inline-flex items-center gap-6 rounded-full px-10 py-4 text-left text-sm transition",
+    chip: "border-lavender-400 bg-lavender-base text-cosmic-blue-base inline-flex items-center gap-6 rounded-full border px-10 py-4 text-left text-sm transition",
     termChip:
-      "border-cosmic-blue-base text-cosmic-blue-base inline-flex items-center gap-8 rounded-full border bg-white px-12 py-6 text-left text-sm transition",
+      "border-lavender-400 text-cosmic-blue-base inline-flex items-center gap-8 rounded-full border bg-white px-12 py-6 text-left text-sm transition",
+    selectedItem: "border-cosmic-blue-base bg-lavender-100",
     matrixHeaderCell:
       "border-lavender-400 bg-lavender-base border-b-2 p-12 text-left align-top",
     matrixRowLabel:

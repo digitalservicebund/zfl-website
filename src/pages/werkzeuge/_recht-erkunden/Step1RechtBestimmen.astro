@@ -13,6 +13,7 @@ const {
   normRow,
   countBadge,
   selectedLawCard,
+  selectedItem,
   stepBadge,
   subStepGroup,
   subStepHeading,
@@ -179,7 +180,7 @@ const {
             <button
               type="button"
               class={areaCard()}
-              x-bind:class={`selectedAreaId === '${area.id}' ? 'border-cosmic-blue-base bg-lavender-200 ring-1 ring-cosmic-blue-base' : 'border-lavender-400 bg-white hover:border-cosmic-blue-400'`}
+              x-bind:class={`selectedAreaId === '${area.id}' ? '${selectedItem()}' : 'border-lavender-400 bg-white hover:border-cosmic-blue-400'`}
               x-on:click={`selectArea('${area.id}')`}
             >
               <span class="text-base font-semibold">{area.label}</span>
@@ -209,7 +210,7 @@ const {
         <template x-for="norm in areaNorms" :key="norm.id">
           <li
             class={normRow()}
-            x-bind:class="isNormActive(norm.id) ? 'border-cosmic-blue-base bg-white' : 'border-lavender-400 bg-lavender-100 opacity-70'"
+            x-bind:class={`isNormActive(norm.id) ? '${selectedItem()}' : 'border-lavender-400 bg-white opacity-70'`}
           >
             <input
               type="checkbox"

@@ -11,6 +11,7 @@ const {
   matrixHeaderCell,
   matrixRowLabel,
   matrixCell,
+  selectedItem,
   stepBadge,
   subStepGroup,
   subStepHeading,
@@ -48,7 +49,7 @@ const {
             <button
               type="button"
               class={termChip()}
-              :class="sidebarMode === 'term' && sidebarTermId === term.id ? 'ring-2 ring-cosmic-blue-base' : ''"
+              :class={`sidebarMode === 'term' && sidebarTermId === term.id ? '${selectedItem()}' : ''`}
               @click="openTerm(term.id)"
             >
               <span x-text="term.term"></span>
@@ -155,7 +156,7 @@ const {
                             <button
                               type="button"
                               class={chip()}
-                              x-bind:class="sidebarMode === 'evidence' && sidebarRelationId === relation.id ? 'ring-2 ring-cosmic-blue-base' : ''"
+                              x-bind:class={`sidebarMode === 'evidence' && sidebarRelationId === relation.id ? '${selectedItem()}' : ''`}
                               x-on:click="openRelation(relation)"
                             >
                               <span x-text="relation.lawLabel" />
@@ -207,7 +208,7 @@ const {
                             <button
                               type="button"
                               class={chip()}
-                              x-bind:class="sidebarMode === 'evidence' && sidebarRelationId === relation.id ? 'ring-2 ring-cosmic-blue-base' : ''"
+                              x-bind:class={`sidebarMode === 'evidence' && sidebarRelationId === relation.id ? '${selectedItem()}' : ''`}
                               x-on:click="openRelation(relation)"
                             >
                               <span x-text="relation.lawLabel" />
