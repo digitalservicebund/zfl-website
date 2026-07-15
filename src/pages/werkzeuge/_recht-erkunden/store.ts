@@ -13,7 +13,7 @@ import {
   type RelevanceReason,
   type SearchableLaw,
   type Term,
-} from "./_recht-erkunden-data";
+} from "./data";
 
 type SidebarMode = "norm" | "evidence" | "term" | null;
 

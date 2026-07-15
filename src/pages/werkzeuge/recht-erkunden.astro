@@ -1,9 +1,10 @@
 ---
+// Flow, intent, and known divergences: see ./_recht-erkunden/README.md
 import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
-import DetailSidebar from "./_DetailSidebar.astro";
-import Step1RechtBestimmen from "./_Step1RechtBestimmen.astro";
-import Step2RechtErkunden from "./_Step2RechtErkunden.astro";
+import DetailSidebar from "./_recht-erkunden/DetailSidebar.astro";
+import Step1RechtBestimmen from "./_recht-erkunden/Step1RechtBestimmen.astro";
+import Step2RechtErkunden from "./_recht-erkunden/Step2RechtErkunden.astro";
 
 export const frontmatter = {
   title: "Recht erkunden",
@@ -48,7 +49,7 @@ const description =
 
 <script>
   import Alpine from "alpinejs";
-  import { rechtErkunden } from "./_recht-erkunden-store";
+  import { rechtErkunden } from "./_recht-erkunden/store";
 
   document.addEventListener("alpine:init", () => {
     Alpine.data("rechtErkunden", rechtErkunden);

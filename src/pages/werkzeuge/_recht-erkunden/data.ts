@@ -1,6 +1,8 @@
 /**
  * Mock dataset for the "Recht erkunden" prototype (staging-only).
  *
+ * Flow, intent, and known divergences: see ./README.md
+ *
  * Everything here is illustrative sample data for a single fully worked
  * example (SGB II). Real law names and citations are used for realism, but
  * the connections between them (evidence, quotes, scores, keywords) are

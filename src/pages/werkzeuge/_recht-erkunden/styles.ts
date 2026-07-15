@@ -1,7 +1,7 @@
 import { tv } from "tailwind-variants";
 
 // Shared tv() slots for the Recht erkunden partials (see
-// _Step1RechtBestimmen.astro, _Step2RechtErkunden.astro, _DetailSidebar.astro).
+// Step1RechtBestimmen.astro, Step2RechtErkunden.astro, DetailSidebar.astro).
 export const styles = tv({
   slots: {
     stepBadge:

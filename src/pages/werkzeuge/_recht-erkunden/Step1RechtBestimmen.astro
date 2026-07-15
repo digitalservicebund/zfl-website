@@ -1,10 +1,10 @@
 ---
-// Renders inside the rechtErkunden Alpine scope (see _recht-erkunden-store.ts).
-import InfoPopover from "@/components/InfoPopover.astro";
-import NormDisplay from "@/components/NormDisplay.astro";
+// Renders inside the rechtErkunden Alpine scope (see ./store.ts).
 import { Icon } from "astro-icon/components";
-import { LAW_AREAS } from "./_recht-erkunden-data";
-import { styles } from "./_recht-erkunden-styles";
+import { LAW_AREAS } from "./data";
+import InfoPopover from "./InfoPopover.astro";
+import NormDisplay from "./NormDisplay.astro";
+import { styles } from "./styles";
 
 const {
   searchInput,

@@ -76,6 +76,8 @@ import { isProduction, isStaging, isPreview } from "@/config/stage";
 
 **Kitchen sink**: `src/pages/dev/astro-komponenten.astro` is a staging-only showcase page for all UI components in `src/components/` (excluding `blocks/` and `global/`). When adding or changing a UI component, update this page to reflect the new or changed variants.
 
+**Recht erkunden prototype**: `src/pages/werkzeuge/recht-erkunden.astro` (route) plus its feature folder `src/pages/werkzeuge/_recht-erkunden/` (partials, store, data, styles, and feature-scoped `NormDisplay`/`InfoPopover` components) implement a staging-only, mock-data prototype whose intended flow is documented in `src/pages/werkzeuge/_recht-erkunden/README.md`. When changing this feature's flow, data model, or file layout, update that doc in the same change so it stays the living source of truth for the envisioned flow.
+
 ### Testing
 
 - **Unit tests** (`*.test.ts` alongside source): Use `AstroContainer` to render Astro components — see `src/components/global/PageHeader.test.ts` for the pattern.
