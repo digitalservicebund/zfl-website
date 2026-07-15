@@ -96,6 +96,8 @@ fileignoreconfig:
     checksum: 557d30dab6c475d2a074b09b59f37a648eed0227fbafb23b6a4faec72b30a7d1
   - filename: src/pages/werkzeuge/recht-erkunden.astro
     checksum: c923b2b52cbddfb15ca1d7d574bdb291f499a8eb9b95df5cbbc801c7bb2e6a84
+  - filename: src/pages/werkzeuge/_recht-erkunden-bindings.test.ts
+    checksum: 0483692032b00f47bceb0bb74bba9bfcdc0734125eff4129be8eda3da6cd3039
 scopeconfig:
   - scope: node
 allowed_patterns:
