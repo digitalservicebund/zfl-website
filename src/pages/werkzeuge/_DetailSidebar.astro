@@ -1,0 +1,231 @@
+---
+// Renders inside the rechtErkunden Alpine scope (see _recht-erkunden-store.ts).
+import NormDisplay from "@/components/NormDisplay.astro";
+import { Icon } from "astro-icon/components";
+---
+
+<div>
+  <div
+    class="fixed inset-0 z-40 bg-black/40 lg:hidden"
+    x-show="sidebarMode"
+    x-cloak
+    aria-hidden="true"
+    @click="closeSidebar()"
+  >
+  </div>
+
+  <aside
+    x-show="sidebarMode"
+    x-cloak
+    class="border-lavender-400 fixed inset-x-0 bottom-0 z-50 max-h-[85vh] overflow-y-auto rounded-t-sm border-t bg-white p-20 shadow-lg lg:sticky lg:top-24 lg:z-auto lg:max-h-[calc(100vh-96px)] lg:rounded-sm lg:border lg:shadow-none"
+    aria-label="Details"
+  >
+    <div class="mb-12 flex items-start justify-between gap-12">
+      <h3 class="mt-0 mb-0">
+        <span
+          x-text="sidebarMode === 'norm' ? 'Normtext' : sidebarMode === 'term' ? 'Begriff' : 'Warum relevant?'"
+        ></span>
+      </h3>
+      <button
+        type="button"
+        class="text-icon-muted shrink-0"
+        aria-label="Schließen"
+        @click="closeSidebar()"
+      >
+        <Icon name="ic:round-close" class="h-24 w-24" />
+      </button>
+    </div>
+
+    <template x-if="sidebarMode === 'norm' && sidebarNorm">
+      <NormDisplay
+        label="sidebarNorm.ref"
+        title="sidebarNorm.title"
+        summary="sidebarNorm.summary"
+        fullText="sidebarNorm.fullText"
+        url="sidebarNorm.url"
+        bordered
+      />
+    </template>
+
+    <template x-if="sidebarMode === 'term' && sidebarTerm">
+      <div class="space-y-12">
+        <div>
+          <p
+            class="mt-0 mb-4 text-base font-semibold"
+            x-text="sidebarTerm.term"
+          >
+          </p>
+          <p class="py-0 text-sm" x-text="sidebarTerm.definition"></p>
+        </div>
+
+        <div>
+          <p class="kern-label text-icon-muted mb-8">Definiert in</p>
+          <NormDisplay
+            label="sidebarTerm.definedIn.label"
+            fullText="sidebarTerm.definedIn.fullText"
+            url="sidebarTerm.definedIn.url"
+            bordered
+          />
+        </div>
+
+        <div>
+          <p class="kern-label text-icon-muted mb-8">Verwendet in</p>
+          <ul class="list-none space-y-8 p-0" role="list">
+            <template
+              x-for="(entry, index) in sidebarTerm.usedIn.adjacentNorms"
+              :key="index"
+            >
+              <li>
+                <span
+                  class="mb-4 inline-block rounded-full px-10 py-2 text-xs font-semibold"
+                  x-bind:class="levelBadgeClass(entry.level)"
+                  x-text="levelLabel(entry.level)"></span>
+                <NormDisplay
+                  label="entry.ref.label"
+                  fullText="entry.ref.fullText"
+                  url="entry.ref.url"
+                  bordered
+                />
+              </li>
+            </template>
+          </ul>
+        </div>
+      </div>
+    </template>
+
+    <template x-if="sidebarMode === 'evidence' && sidebarRelation">
+      <div class="space-y-12">
+        <div>
+          <p
+            class="mt-0 mb-4 text-base font-semibold"
+            x-text="sidebarRelation.lawName"
+          >
+          </p>
+          <div class="flex flex-wrap items-center gap-6">
+            <span
+              class="inline-flex items-center rounded-full px-10 py-2 text-xs font-semibold"
+              x-bind:class="levelBadgeClass(sidebarRelation.level)"
+              x-text="levelLabel(sidebarRelation.level)"></span>
+            <span
+              class="text-icon-muted text-xs"
+              x-text="reasonFullLabel(sidebarRelation.reason)"></span>
+          </div>
+        </div>
+
+        <div
+          x-show="sidebarRelation.nlp"
+          x-cloak
+          class="border-lavender-400 rounded-sm border bg-white p-12"
+        >
+          <p class="kern-label text-icon-muted mb-4">
+            Ähnlichkeitssignal (NLP, Prototyp-Daten)
+          </p>
+          <p class="mb-4 py-0 text-sm">
+            Themenähnlichkeit: <span
+              class="font-semibold"
+              x-text="sidebarRelation.nlp ? sidebarRelation.nlp.similarity.toFixed(2).replace('.', ',') : ''"
+            ></span>
+          </p>
+          <div class="flex flex-wrap gap-6">
+            <template
+              x-for="keyword in sidebarRelation.nlp ? sidebarRelation.nlp.keywords : []"
+              :key="keyword"
+            >
+              <span
+                class="bg-lavender-100 text-cosmic-blue-base rounded-full px-8 py-2 text-xs"
+                x-text="keyword"></span>
+            </template>
+          </div>
+        </div>
+
+        <div>
+          <p class="kern-label text-icon-muted mb-8">
+            Betroffene SGB-II-Normen
+          </p>
+          <div class="space-y-8">
+            <template x-for="normId in sidebarRelation.normIds" :key="normId">
+              <NormDisplay
+                label="normById(normId).ref"
+                title="normById(normId).title"
+                summary="normById(normId).summary"
+                fullText="normById(normId).fullText"
+                url="normById(normId)?.url"
+                onTitleClick="openNorm(normId)"
+                bordered
+              />
+            </template>
+          </div>
+        </div>
+
+        <div>
+          <p class="kern-label text-icon-muted mb-8">Begründung</p>
+          <ul class="list-none space-y-12 p-0" role="list">
+            <template
+              x-for="(item, index) in sidebarRelation.evidence"
+              :key="index"
+            >
+              <li class="space-y-8">
+                <p class="py-0 text-sm" x-text="item.quote"></p>
+                <NormDisplay
+                  label="item.adjacentNorm.label"
+                  fullText="item.adjacentNorm.fullText"
+                  url="item.adjacentNorm.url"
+                  bordered
+                />
+
+                <div
+                  x-show="item.citedIn"
+                  x-cloak
+                  x-data="{ open: false }"
+                  class="border-lavender-400 mt-8 border-t pt-8"
+                >
+                  <p
+                    class="kern-label text-icon-muted mb-4"
+                    x-text="item.citedIn && item.citedIn.kind === 'literatur' ? 'Fundstelle (Literatur)' : 'Fundstelle (Rechtsprechung)'"
+                  >
+                  </p>
+                  <div class="flex items-center justify-between gap-8">
+                    <p
+                      class="mb-0 text-sm font-semibold"
+                      x-text="item.citedIn ? item.citedIn.label : ''"
+                    >
+                    </p>
+                    <div class="flex shrink-0 items-center gap-8">
+                      <a
+                        x-show="item.citedIn && item.citedIn.url && item.citedIn.url !== '#'"
+                        x-cloak
+                        :href="item.citedIn ? item.citedIn.url : '#'"
+                        target="_blank"
+                        rel="noopener"
+                        class="text-icon-muted hover:text-cosmic-blue-base"
+                        aria-label="Quelle öffnen"
+                      >
+                        <Icon name="ic:round-gavel" class="h-18 w-18" />
+                      </a>
+                      <button
+                        type="button"
+                        class="text-cosmic-blue-base text-xs font-semibold whitespace-nowrap"
+                        @click="open = !open"
+                      >
+                        <span
+                          x-text="open ? 'Volltext ausblenden' : 'Volltext anzeigen'"
+                        ></span>
+                      </button>
+                    </div>
+                  </div>
+                  <p
+                    x-show="open"
+                    x-cloak
+                    class="text-icon-muted mt-4 py-0 text-sm whitespace-pre-line"
+                    x-text="item.citedIn ? item.citedIn.fullText : ''"
+                  >
+                  </p>
+                </div>
+              </li>
+            </template>
+          </ul>
+        </div>
+      </div>
+    </template>
+  </aside>
+</div>
