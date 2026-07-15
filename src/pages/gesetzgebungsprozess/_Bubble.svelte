@@ -18,8 +18,11 @@
     size = "md",
     children,
   }: {
-    /** Fill color of the bubble, e.g. a hex code. */
-    color: string;
+    /**
+     * Fill color of the bubble, e.g. a hex code. Defaults to the
+     * `--bubble-color` custom property set by the enclosing Cluster.
+     */
+    color?: string;
     title: string;
     badge?: string;
     size?: Size;
@@ -38,7 +41,7 @@
   <button
     type="button"
     class="flex items-center justify-center rounded-full transition-transform duration-200 ease-out hover:scale-105 focus-visible:scale-105 focus-visible:outline-2 focus-visible:outline-cosmic-blue-base"
-    style={`background-color: ${color}; width: ${sizeMap[size]}; height: ${sizeMap[size]};`}
+    style={`background-color: ${color ?? "var(--bubble-color)"}; width: ${sizeMap[size]}; height: ${sizeMap[size]};`}
     aria-expanded={expanded}
     onclick={toggle}
   >

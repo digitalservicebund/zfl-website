@@ -7,6 +7,7 @@
     title,
     orientation = "vertical",
     anchorName,
+    color,
     children,
   }: {
     title?: string;
@@ -16,6 +17,11 @@
      * title dot, so it can be targeted from outside via `anchor()`.
      */
     anchorName?: string;
+    /**
+     * Fill color shared by this cluster's bubbles, exposed to children via
+     * the `--bubble-color` CSS custom property.
+     */
+    color?: string;
     children?: Snippet;
   } = $props();
 
@@ -87,7 +93,10 @@
   const offset = Math.round((Math.random() * 2 - 1) * OFFSET_RANGE);
 </script>
 
-<div class="relative flex flex-col items-center justify-center h-full w-full">
+<div
+  class="relative flex flex-col items-center justify-center h-full w-full"
+  style={color ? `--bubble-color: ${color};` : undefined}
+>
   {#if title}
     <div class={titleWrapper({ orientation })}>
       <div
