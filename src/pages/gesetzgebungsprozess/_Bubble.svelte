@@ -1,11 +1,14 @@
 <script lang="ts">
   import { getContext } from "svelte";
   import type { Snippet } from "svelte";
-  import { slide } from "svelte/transition";
   import {
     BUBBLE_HIGHLIGHT_CONTEXT_NAME,
     type BubbleHighlightContext,
   } from "./_bubbleHighlight";
+  import {
+    BUBBLE_SIDEBAR_CONTEXT_NAME,
+    type BubbleSidebarContext,
+  } from "./_bubbleSidebar";
 
   type Size = "sm" | "md" | "lg" | "xl";
 
@@ -31,7 +34,7 @@
     title: string;
     badge?: string;
     size?: Size;
-    /** Body content shown when the bubble is expanded. */
+    /** Body content shown in the global sidebar when the bubble is opened. */
     children?: Snippet;
   } = $props();
 
@@ -47,10 +50,28 @@
       !highlightContext?.highlighted.includes(title),
   );
 
-  let expanded = $state(false);
+  // Every bubble shares a single, global sidebar (mounted once via
+  // `_BubbleSidebar.svelte`) instead of rendering its own popup, so clicking
+  // a bubble toggles that sidebar's content rather than a local popup.
+  const sidebarContext = getContext<BubbleSidebarContext | undefined>(
+    BUBBLE_SIDEBAR_CONTEXT_NAME,
+  );
+
+  // Registers this bubble's content with the sidebar as soon as it mounts
+  // (independent of clicks), so it can also be opened straight from a
+  // shared `?step=` link or via the browser back/forward buttons.
+  $effect(() => {
+    if (!children) return;
+
+    sidebarContext?.register({ id: title, title, children });
+    return () => sidebarContext?.unregister(title);
+  });
+
+  const expanded = $derived(sidebarContext?.activeId === title);
 
   function toggle() {
-    expanded = !expanded;
+    if (!children) return;
+    sidebarContext?.toggle({ id: title, title, children });
   }
 </script>
 
@@ -72,15 +93,4 @@
       <div class="kern-label font-bold text-black">{title}</div>
     </div>
   </button>
-
-  {#if expanded && children}
-    <div
-      class="absolute top-full z-10 mt-8 w-xs rounded-lg border border-lavender-400 bg-white p-16 text-left shadow-lg"
-      transition:slide={{ duration: 150 }}
-    >
-      <p class="kern-body--small">
-        {@render children()}
-      </p>
-    </div>
-  {/if}
 </div>
