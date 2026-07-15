@@ -114,13 +114,11 @@
   {/if}
 
   <div
-    class="relative flex items-center justify-center transition-[width,height] duration-300"
+    class="relative flex items-center justify-center"
     style={`width: ${outerSize}px; height: ${outerSize}px; margin-${orientation === "vertical" ? "left" : "top"}: ${offset}px;`}
   >
     <!-- Isolated so the halo/dashed-circle negative z-indices only stack
-         against each other, never against sibling clusters or bubble
-         popups (which must be able to rise above later, overlapping
-         clusters). -->
+         against each other, never against sibling (overlapping) clusters. -->
     <div class="isolate absolute inset-0">
       <!-- Soft gray halo ring, matching the original SVG -->
       <div
@@ -129,7 +127,7 @@
       {#if !isSingleBubble}
         <!-- Dashed cluster circle -->
         <div
-          class="pointer-events-none absolute -z-10 rounded-full border border-dashed border-black bg-white transition-[width,height] duration-300"
+          class="pointer-events-none absolute -z-10 rounded-full border border-dashed border-black bg-white"
           style={`width: ${diameter}px; height: ${diameter}px; top: ${HALO_THICKNESS}px; left: ${HALO_THICKNESS}px;`}
         ></div>
       {/if}

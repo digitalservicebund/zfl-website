@@ -37,10 +37,7 @@
     const id = (event.currentTarget as HTMLSelectElement).value;
     if (!id) return;
 
-    // Use the native hash navigation (rather than scrollIntoView) so the
-    // jump is recorded in browser history and the back button returns to
-    // the previous scroll position.
-    location.hash = id;
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   }
 
   // Bubbles considered part of the early phase of the process (the

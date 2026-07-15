@@ -69,16 +69,30 @@
 
   const expanded = $derived(sidebarContext?.activeId === title);
 
+  let buttonEl: HTMLButtonElement | undefined = $state();
+
+  // Scrolls the bubble into view whenever it becomes the active step - most
+  // notably when the page is opened directly via a shared `?step=` link,
+  // where the bubble might otherwise be rendered off-screen.
+  $effect(() => {
+    if (!expanded || !buttonEl) return;
+
+    buttonEl.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+
   function toggle() {
     if (!children) return;
     sidebarContext?.toggle({ id: title, title, children });
   }
 </script>
 
-<div class="relative inline-flex flex-col items-center">
+<div
+  class={`relative inline-flex flex-col items-center ${expanded ? "z-20" : ""}`}
+>
   <button
+    bind:this={buttonEl}
     type="button"
-    class="flex items-center justify-center rounded-full transition-[transform,filter] duration-200 ease-out hover:scale-105 focus-visible:scale-105 focus-visible:outline-2 focus-visible:outline-cosmic-blue-base"
+    class={`flex items-center justify-center rounded-full transition-[transform,filter,box-shadow] duration-200 ease-out hover:scale-105 focus-visible:scale-105 focus-visible:outline-2 focus-visible:outline-cosmic-blue-base ${expanded ? "scale-105 ring-4 ring-cosmic-blue-base ring-offset-2" : ""}`}
     style={`background-color: ${color ?? "var(--bubble-color)"}; width: ${sizeMap[size]}; height: ${sizeMap[size]}; filter: ${dimmed ? "grayscale(1)" : "none"};`}
     aria-expanded={expanded}
     onclick={toggle}
