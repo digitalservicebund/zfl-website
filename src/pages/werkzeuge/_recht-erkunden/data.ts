@@ -227,9 +227,9 @@ export const NORMS: Norm[] = [
     ref: "§ 19 SGB II",
     title: "Bürgergeld und Sozialgeld",
     summary:
-      "Beschreibt die Zusammensetzung des Bürgergelds aus Regelbedarf, Mehrbedarfen sowie Bedarfen für Unterkunft und Heizung.",
+      "Beschreibt die Zusammensetzung des Bürgergelds aus Regelbedarf, Mehrbedarfen sowie Bedarfen für Unterkunft und Heizung und die Anrechnung von Einkommen und Vermögen.",
     fullText:
-      "Das Bürgergeld umfasst den maßgebenden Regelbedarf, Mehrbedarfe sowie Bedarfe für Unterkunft und Heizung. Bei nicht erwerbsfähigen Angehörigen der Bedarfsgemeinschaft wird Sozialgeld in entsprechender Höhe erbracht.",
+      "Das Bürgergeld umfasst den maßgebenden Regelbedarf, Mehrbedarfe sowie Bedarfe für Unterkunft und Heizung. Bei nicht erwerbsfähigen Angehörigen der Bedarfsgemeinschaft wird Sozialgeld in entsprechender Höhe erbracht. Der Bedarf mindert sich um das zu berücksichtigende Einkommen und Vermögen der Bedarfsgemeinschaft in einer festgelegten Reihenfolge.",
     url: "https://www.gesetze-im-internet.de/sgb_2/__19.html",
   },
   {
@@ -359,7 +359,7 @@ export const LAW_AREAS: LawArea[] = [
     id: "area-lebensunterhalt",
     label: "Leistungen zur Sicherung des Lebensunterhalts (Bürgergeld)",
     description:
-      "Wer ist leistungsberechtigt, was gehört zum Bürgergeld, und wie wird der Regelbedarf bemessen?",
+      "Wer ist leistungsberechtigt, was gehört zum Bürgergeld, wie wird der Regelbedarf bemessen und wie werden Einkommen und Vermögen berücksichtigt?",
     normIds: ["n-sgb2-7", "n-sgb2-8", "n-sgb2-9", "n-sgb2-19", "n-sgb2-20"],
   },
   {
@@ -405,7 +405,7 @@ export const TERMS: Term[] = [
         "Zur Bedarfsgemeinschaft gehören die erwerbsfähige leistungsberechtigte Person, die im Haushalt lebenden Eltern eines unverheirateten erwerbsfähigen Kindes, das das 25. Lebensjahr noch nicht vollendet hat, als Partnerin oder Partner der erwerbsfähigen leistungsberechtigten Person die Person, die mit dieser in einem gemeinsamen Haushalt zusammenlebt, sowie die dem Haushalt angehörenden unverheirateten Kinder.",
     },
     usedIn: {
-      normIds: ["n-sgb2-7", "n-sgb2-9", "n-sgb2-19", "n-sgb2-20", "n-sgb2-22"],
+      normIds: ["n-sgb2-7", "n-sgb2-9", "n-sgb2-19", "n-sgb2-22"],
       adjacentNorms: [
         {
           lawLabel: "SGB XII",
@@ -462,7 +462,7 @@ export const TERMS: Term[] = [
         "Erwerbsfähig ist, wer nicht wegen Krankheit oder Behinderung auf absehbare Zeit außerstande ist, unter den üblichen Bedingungen des allgemeinen Arbeitsmarkts mindestens drei Stunden täglich erwerbstätig zu sein.",
     },
     usedIn: {
-      normIds: ["n-sgb2-7", "n-sgb2-8", "n-sgb2-9"],
+      normIds: ["n-sgb2-7", "n-sgb2-8"],
       adjacentNorms: [
         {
           lawLabel: "SGB VI",
@@ -529,6 +529,90 @@ export const TERMS: Term[] = [
             url: "https://www.gesetze-im-internet.de/rbeg/__2.html",
             fullText:
               "Die Höhe der Regelbedarfsstufen wird auf der Grundlage der Sonderauswertung der Einkommens- und Verbrauchsstichprobe fortgeschrieben.",
+          },
+        },
+      ],
+    },
+  },
+  {
+    id: "term-einkommen",
+    term: "Einkommen",
+    definition:
+      "Als Einkommen sind grundsätzlich alle Einnahmen in Geld zu berücksichtigen, vermindert um Absetzbeträge (§ 11b) und um nicht anrechenbare Einnahmen (§ 11a). Der Begriff bestimmt, in welchem Umfang eigene Mittel den Bürgergeld-Anspruch mindern.",
+    definedIn: {
+      label: "§ 11 SGB II",
+      url: "https://www.gesetze-im-internet.de/sgb_2/__11.html",
+      fullText:
+        "Als Einkommen zu berücksichtigen sind Einnahmen in Geld abzüglich der nach § 11b abzusetzenden Beträge mit Ausnahme der in § 11a genannten Einnahmen. Nicht als Einkommen gelten insbesondere Leistungen nach diesem Buch sowie bestimmte zweckbestimmte Einnahmen.",
+    },
+    usedIn: {
+      normIds: ["n-sgb2-9", "n-sgb2-19"],
+      adjacentNorms: [
+        {
+          lawLabel: "Bürgergeld-V",
+          level: "bundesverordnung",
+          ref: {
+            label: "§ 1 Bürgergeld-V",
+            url: "https://www.gesetze-im-internet.de/alg_ii-v_2008/__1.html",
+            fullText:
+              "Die Verordnung konkretisiert, welche Einnahmen als Einkommen im Sinne des § 11 des Zweiten Buches Sozialgesetzbuch zu berücksichtigen sind und wie sie zu berechnen sind.",
+          },
+        },
+        {
+          lawLabel: "SGB XII",
+          level: "bundesgesetz",
+          ref: {
+            label: "§ 82 SGB XII",
+            url: "https://www.gesetze-im-internet.de/sgb_12/__82.html",
+            fullText:
+              "Zum Einkommen gehören alle Einkünfte in Geld oder Geldeswert mit Ausnahme der Leistungen nach diesem Buch, der Grundrente nach dem Bundesversorgungsgesetz und bestimmter zweckbestimmter Leistungen.",
+          },
+        },
+        {
+          lawLabel: "EStG",
+          level: "bundesgesetz",
+          ref: {
+            label: "§ 2 EStG",
+            url: "https://www.gesetze-im-internet.de/estg/__2.html",
+            fullText:
+              "Der Einkommensteuer unterliegen die dort abschließend aufgezählten Einkunftsarten; das Einkommen ist der Gesamtbetrag der Einkünfte nach Abzug der gesetzlich vorgesehenen Beträge. Der steuerrechtliche Einkommensbegriff weicht vom sozialrechtlichen ab.",
+          },
+        },
+      ],
+    },
+  },
+  {
+    id: "term-vermoegen",
+    term: "Vermögen",
+    definition:
+      "Als Vermögen sind alle verwertbaren Vermögensgegenstände zu berücksichtigen. Nicht berücksichtigt werden Schonvermögen und - in der Karenzzeit - Vermögen unterhalb erheblicher Grenzen.",
+    definedIn: {
+      label: "§ 12 SGB II",
+      url: "https://www.gesetze-im-internet.de/sgb_2/__12.html",
+      fullText:
+        "Als Vermögen sind alle verwertbaren Vermögensgegenstände zu berücksichtigen. In der Karenzzeit von einem Jahr wird Vermögen nur berücksichtigt, wenn es erheblich ist; daneben bleiben bestimmte Vermögensgegenstände als Schonvermögen unberücksichtigt.",
+    },
+    usedIn: {
+      normIds: ["n-sgb2-9", "n-sgb2-19"],
+      adjacentNorms: [
+        {
+          lawLabel: "SGB XII",
+          level: "bundesgesetz",
+          ref: {
+            label: "§ 90 SGB XII",
+            url: "https://www.gesetze-im-internet.de/sgb_12/__90.html",
+            fullText:
+              "Einzusetzen ist das gesamte verwertbare Vermögen. Die Sozialhilfe darf nicht abhängig gemacht werden vom Einsatz oder von der Verwertung eines angemessenen Hausgrundstücks sowie weiterer geschützter Vermögensgegenstände.",
+          },
+        },
+        {
+          lawLabel: "Bürgergeld-V",
+          level: "bundesverordnung",
+          ref: {
+            label: "§ 12 Bürgergeld-V",
+            url: "https://www.gesetze-im-internet.de/alg_ii-v_2008/",
+            fullText:
+              "Die Verordnung enthält ergänzende Regelungen zur Berücksichtigung und Bewertung von Vermögen im Sinne des § 12 des Zweiten Buches Sozialgesetzbuch.",
           },
         },
       ],
@@ -612,23 +696,17 @@ export const TERMS: Term[] = [
 
 export const RELATIONS: Relation[] = [
   {
-    id: "rel-gg",
+    id: "rel-gg-existenzminimum",
     lawId: "gg",
     lawLabel: "GG",
     lawName: "Grundgesetz für die Bundesrepublik Deutschland",
     level: "grundgesetz",
     reason: "gemeinsame_nennung",
-    normIds: [
-      "n-sgb2-19",
-      "n-sgb2-20",
-      "n-sgb2-31",
-      "n-sgb2-31a",
-      "n-sgb2-31b",
-    ],
+    normIds: ["n-sgb2-9", "n-sgb2-19", "n-sgb2-20"],
     evidence: [
       {
         quote:
-          "Das BVerfG leitet aus Art. 1 Abs. 1 i. V. m. Art. 20 Abs. 1 GG einen Anspruch auf ein menschenwürdiges Existenzminimum ab, der die Regelbedarfsbemessung nach § 20 SGB II verfassungsrechtlich einhegt.",
+          "Das BVerfG leitet aus Art. 1 Abs. 1 i. V. m. Art. 20 Abs. 1 GG einen Anspruch auf ein menschenwürdiges Existenzminimum ab, der die Regelbedarfsbemessung nach § 20 SGB II und die Bestimmung der Hilfebedürftigkeit verfassungsrechtlich einhegt.",
         adjacentNorm: {
           label: "Art. 1 Abs. 1, Art. 20 Abs. 1 GG",
           url: "https://www.gesetze-im-internet.de/gg/art_1.html",
@@ -644,6 +722,17 @@ export const RELATIONS: Relation[] = [
             "Der Gesetzgeber muss die Regelbedarfe nachvollziehbar auf Grundlage tragfähiger empirischer Daten und schlüssiger Berechnungsverfahren ermitteln, um dem Grundrecht auf Gewährleistung eines menschenwürdigen Existenzminimums zu genügen.",
         },
       },
+    ],
+  },
+  {
+    id: "rel-gg-sanktionen",
+    lawId: "gg",
+    lawLabel: "GG",
+    lawName: "Grundgesetz für die Bundesrepublik Deutschland",
+    level: "grundgesetz",
+    reason: "gemeinsame_nennung",
+    normIds: ["n-sgb2-31", "n-sgb2-31a", "n-sgb2-31b"],
+    evidence: [
       {
         quote:
           "Im Sanktionenurteil verknüpft das BVerfG die Regelungen zu Leistungsminderungen (§§ 31 ff. SGB II) unmittelbar mit dem grundrechtlich geschützten Existenzminimum.",
@@ -711,6 +800,52 @@ export const RELATIONS: Relation[] = [
           url: "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32004L0038",
           fullText:
             "Art. 6: Unionsbürgern steht das Recht auf Aufenthalt im Hoheitsgebiet eines anderen Mitgliedstaats für bis zu drei Monate zu. Art. 14: Das Aufenthaltsrecht bleibt bestehen, solange die Unionsbürger die Voraussetzungen erfüllen und die Sozialhilfe des Aufnahmemitgliedstaats nicht unangemessen in Anspruch nehmen.",
+        },
+      },
+    ],
+  },
+  {
+    id: "rel-eu-eugh",
+    lawId: "vo-883-2004",
+    lawLabel: "VO (EG) 883/2004",
+    lawName:
+      "Verordnung (EG) Nr. 883/2004 zur Koordinierung der Systeme der sozialen Sicherheit",
+    level: "eu",
+    reason: "gemeinsame_nennung",
+    normIds: ["n-sgb2-7", "n-sgb2-9"],
+    evidence: [
+      {
+        quote:
+          "Der EuGH prüft den Leistungsausschluss nicht erwerbstätiger Unionsbürgerinnen und Unionsbürger nach § 7 Abs. 1 SGB II gemeinsam mit Art. 4 VO (EG) 883/2004 und der Freizügigkeitsrichtlinie und hält ihn für unionsrechtskonform.",
+        adjacentNorm: {
+          label: "Art. 4, Art. 70 VO (EG) 883/2004",
+          url: "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32004R0883",
+          fullText:
+            "Art. 4: Gleichbehandlungsgrundsatz. Art. 70: besondere beitragsunabhängige Geldleistungen, die zugleich Merkmale der Sozialhilfe tragen und daher im Wohnmitgliedstaat beschränkt werden dürfen.",
+        },
+        citedIn: {
+          kind: "rechtsprechung",
+          label: "EuGH, Urteil v. 11.11.2014 – C-333/13 (Dano)",
+          url: "https://curia.europa.eu/juris/liste.jsf?num=C-333/13",
+          fullText:
+            "Ein Mitgliedstaat darf nicht erwerbstätige Unionsbürger, die allein zur Erlangung von Sozialhilfe von der Freizügigkeit Gebrauch machen und kein Aufenthaltsrecht nach der Richtlinie 2004/38/EG besitzen, von beitragsunabhängigen Geldleistungen ausschließen.",
+        },
+      },
+      {
+        quote:
+          "In der Rechtssache Alimanovic hat der EuGH auf Vorlage des BSG bestätigt, dass der Ausschluss arbeitsuchender Unionsbürger von SGB-II-Leistungen ohne Einzelfall-Verhältnismäßigkeitsprüfung zulässig ist.",
+        adjacentNorm: {
+          label: "Art. 4 VO (EG) 883/2004 i. V. m. Art. 24 RL 2004/38/EG",
+          url: "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32004R0883",
+          fullText:
+            "Art. 24 Abs. 2 RL 2004/38/EG erlaubt es, Personen in der Phase der Arbeitsuche einen Anspruch auf Sozialhilfe zu versagen; das abgestufte System der Richtlinie berücksichtigt die individuellen Umstände bereits typisierend.",
+        },
+        citedIn: {
+          kind: "rechtsprechung",
+          label: "EuGH, Urteil v. 15.09.2015 – C-67/14 (Alimanovic)",
+          url: "https://curia.europa.eu/juris/liste.jsf?num=C-67/14",
+          fullText:
+            "Das Unionsrecht steht einer Regelung nicht entgegen, nach der Staatsangehörige anderer Mitgliedstaaten in der Situation der Arbeitsuche von bestimmten besonderen beitragsunabhängigen Geldleistungen ausgeschlossen werden, während eigene Staatsangehörige in gleicher Lage diese Leistungen erhalten.",
         },
       },
     ],
@@ -943,11 +1078,11 @@ export const RELATIONS: Relation[] = [
       "Verordnung zur Berechnung von Einkommen sowie zur Nichtberücksichtigung von Einkommen und Vermögen beim Bürgergeld (Bürgergeld-Verordnung)",
     level: "bundesverordnung",
     reason: "verweisung",
-    normIds: ["n-sgb2-19", "n-sgb2-20"],
+    normIds: ["n-sgb2-9", "n-sgb2-19", "n-sgb2-20"],
     evidence: [
       {
         quote:
-          "§ 13 SGB II ermächtigt zum Erlass der Bürgergeld-Verordnung, die die Einkommensberechnung für §§ 19, 20 SGB II konkretisiert.",
+          "§ 13 SGB II ermächtigt zum Erlass der Bürgergeld-Verordnung, die die Berechnung des zu berücksichtigenden Einkommens für die Bedarfsdeckung nach §§ 9, 19, 20 SGB II konkretisiert.",
         adjacentNorm: {
           label: "§ 1, § 6 Bürgergeld-V",
           url: "https://www.gesetze-im-internet.de/alg_ii-v_2008/",
@@ -975,6 +1110,173 @@ export const RELATIONS: Relation[] = [
           url: "https://www.gesetze-im-internet.de/sgb_2/__22a.html",
           fullText:
             "Die Länder können die Träger der Grundsicherung für Arbeitsuchende durch Gesetz ermächtigen, durch Satzung zu bestimmen, in welcher Höhe Bedarfe nach § 22 Absatz 1 angemessen sind.",
+        },
+      },
+    ],
+  },
+  {
+    id: "rel-rbeg",
+    lawId: "rbeg",
+    lawLabel: "RBEG",
+    lawName: "Regelbedarfs-Ermittlungsgesetz",
+    level: "bundesgesetz",
+    reason: "verweisung",
+    normIds: ["n-sgb2-20"],
+    evidence: [
+      {
+        quote:
+          "§ 20 Abs. 1a SGB II verweist für die Höhe der Regelbedarfsstufen ausdrücklich auf § 28 SGB XII in Verbindung mit dem Regelbedarfs-Ermittlungsgesetz.",
+        adjacentNorm: {
+          label: "§ 8 RBEG",
+          url: "https://www.gesetze-im-internet.de/rbeg_2021/__8.html",
+          fullText:
+            "Die Regelbedarfsstufen werden auf Grundlage der Sonderauswertung der Einkommens- und Verbrauchsstichprobe ermittelt und der Höhe nach für die einzelnen Stufen festgesetzt.",
+        },
+      },
+    ],
+  },
+  {
+    id: "rel-aufenthg",
+    lawId: "aufenthg",
+    lawLabel: "AufenthG",
+    lawName: "Aufenthaltsgesetz",
+    level: "bundesgesetz",
+    reason: "verweisung",
+    normIds: ["n-sgb2-7"],
+    evidence: [
+      {
+        quote:
+          "§ 7 Abs. 1 SGB II knüpft die Leistungsberechtigung an ein Aufenthaltsrecht und nimmt damit auf die aufenthaltsrechtlichen Titel des Aufenthaltsgesetzes Bezug.",
+        adjacentNorm: {
+          label: "§ 4, § 7 AufenthG",
+          url: "https://www.gesetze-im-internet.de/aufenthg_2004/__4.html",
+          fullText:
+            "§ 4: Ausländer bedürfen für die Einreise und den Aufenthalt eines Aufenthaltstitels, soweit nicht anders bestimmt. § 7: Die Aufenthaltserlaubnis ist ein befristeter Aufenthaltstitel, der zu einem bestimmten Aufenthaltszweck erteilt wird.",
+        },
+      },
+    ],
+  },
+  {
+    id: "rel-bafoeg",
+    lawId: "bafoeg",
+    lawLabel: "BAföG",
+    lawName: "Bundesausbildungsförderungsgesetz",
+    level: "bundesgesetz",
+    reason: "verweisung",
+    normIds: ["n-sgb2-7"],
+    evidence: [
+      {
+        quote:
+          "§ 7 Abs. 5 SGB II schließt Auszubildende, deren Ausbildung dem Grunde nach nach dem BAföG förderfähig ist, grundsätzlich von Leistungen zur Sicherung des Lebensunterhalts aus.",
+        adjacentNorm: {
+          label: "§ 2 BAföG",
+          url: "https://www.gesetze-im-internet.de/baf_g/__2.html",
+          fullText:
+            "Ausbildungsförderung wird für den Besuch der dort genannten Ausbildungsstätten geleistet; die Förderfähigkeit dem Grunde nach richtet sich nach der Art der Ausbildungsstätte.",
+        },
+      },
+    ],
+  },
+  {
+    id: "rel-sgb6-erwerbsminderung",
+    lawId: "sgb6",
+    lawLabel: "SGB VI",
+    lawName: "Sozialgesetzbuch Sechstes Buch – Gesetzliche Rentenversicherung",
+    level: "bundesgesetz",
+    reason: "thematische_naehe",
+    normIds: ["n-sgb2-8"],
+    nlp: {
+      similarity: 0.79,
+      keywords: ["Erwerbsfähigkeit", "Erwerbsminderung", "drei Stunden"],
+    },
+    evidence: [
+      {
+        quote:
+          "Die Erwerbsfähigkeit nach § 8 SGB II grenzt sich anhand derselben Zeitschwelle von der Erwerbsminderung nach dem Rentenrecht ab; wer voll erwerbsgemindert ist, fällt aus dem SGB II heraus.",
+        adjacentNorm: {
+          label: "§ 43 SGB VI",
+          url: "https://www.gesetze-im-internet.de/sgb_6/__43.html",
+          fullText:
+            "Voll erwerbsgemindert sind Versicherte, die außerstande sind, unter den üblichen Bedingungen des allgemeinen Arbeitsmarkts mindestens drei Stunden täglich erwerbstätig zu sein.",
+        },
+      },
+    ],
+  },
+  {
+    id: "rel-sgb12-lebensunterhalt-lit",
+    lawId: "sgb12",
+    lawLabel: "SGB XII",
+    lawName: "Sozialgesetzbuch Zwölftes Buch – Sozialhilfe",
+    level: "bundesgesetz",
+    reason: "gemeinsame_nennung",
+    normIds: ["n-sgb2-9", "n-sgb2-20"],
+    evidence: [
+      {
+        quote:
+          "Rechtsprechung und Kommentarliteratur ziehen für die Auslegung von Hilfebedürftigkeit und Regelbedarf regelmäßig die parallelen Vorschriften der Sozialhilfe heran, da beide Systeme dasselbe Existenzminimum konkretisieren.",
+        adjacentNorm: {
+          label: "§ 27a SGB XII",
+          url: "https://www.gesetze-im-internet.de/sgb_12/__27a.html",
+          fullText:
+            "Der notwendige Lebensunterhalt umfasst den dort beschriebenen Bedarf; die Regelsätze werden auf Grundlage der Einkommens- und Verbrauchsstichprobe ermittelt und decken sich methodisch mit dem Regelbedarf des SGB II.",
+        },
+        citedIn: {
+          kind: "rechtsprechung",
+          label: "BSG, Urteil v. 17.02.2016 – B 4 AS 24/14 R",
+          url: "https://www.juraforum.de/urteile/bsg/bsg-urteil-vom-17-02-2016-az-b-4-as-24-14-r",
+          fullText:
+            "Das BSG stellt klar, dass Unionsbürger ohne materielles Aufenthaltsrecht zwar von SGB-II-Leistungen ausgeschlossen sein können, unter Umständen aber existenzsichernde Leistungen der Sozialhilfe nach dem SGB XII in Betracht kommen.",
+        },
+      },
+    ],
+  },
+  {
+    id: "rel-rbsfv",
+    lawId: "rbsfv",
+    lawLabel: "RBSFV",
+    lawName: "Regelbedarfsstufen-Fortschreibungsverordnung",
+    level: "bundesverordnung",
+    reason: "verweisung",
+    normIds: ["n-sgb2-20"],
+    evidence: [
+      {
+        quote:
+          "In Jahren ohne Neuermittlung stellt § 20 Abs. 1a SGB II für die Höhe des Regelbedarfs auf die jeweils geltende Regelbedarfsstufen-Fortschreibungsverordnung ab.",
+        adjacentNorm: {
+          label: "§ 1 RBSFV",
+          url: "https://www.gesetze-im-internet.de/rbsfv_2024/__1.html",
+          fullText:
+            "Die Regelbedarfsstufen nach der Anlage zu § 28 SGB XII werden zum 1. Januar des Folgejahres mit dem maßgeblichen Fortschreibungssatz angepasst; ein Besitzschutz verhindert ein Absinken unter den Vorjahreswert.",
+        },
+      },
+    ],
+  },
+  {
+    id: "rel-landesblindengeld",
+    lawId: "landesblindengeld",
+    lawLabel: "Landesblindengeld (Beispiel)",
+    lawName:
+      "Landesblindengeldgesetz (Beispiel eines Landesrechts mit Nachteilsausgleich)",
+    level: "landesrecht",
+    reason: "thematische_naehe",
+    normIds: ["n-sgb2-19"],
+    nlp: {
+      similarity: 0.63,
+      keywords: [
+        "Nachteilsausgleich",
+        "Einkommensanrechnung",
+        "existenzsichernde Leistung",
+      ],
+    },
+    evidence: [
+      {
+        quote:
+          "Landesrechtliche Nachteilsausgleiche wie das Blindengeld überschneiden sich thematisch mit dem Bürgergeld, weil sie als zweckbestimmte Leistungen bei der Einkommensanrechnung nach § 19 SGB II gesondert zu bewerten sind.",
+        adjacentNorm: {
+          label: "§ 2 Landesblindengeldgesetz (Beispiel)",
+          url: "#",
+          fullText:
+            "Blinde Menschen erhalten zum Ausgleich der blindheitsbedingten Mehraufwendungen ein monatliches Blindengeld; die Leistung ist einkommens- und vermögensunabhängig ausgestaltet.",
         },
       },
     ],

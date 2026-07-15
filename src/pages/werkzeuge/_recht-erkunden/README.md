@@ -127,10 +127,22 @@ vs. zitationsabgeleitete Relevanz auftauchen würde.
 - **1** vollständiges Gesetz (SGB II); 5 weitere nur als Suchtreffer ohne Daten.
 - **5** Rechtsgebiete (Lebensunterhalt, Eingliederung, KdU, Sanktionen,
   Verfahren/Datenschutz).
-- **~14** Verbindungen zu angrenzenden Gesetzen über die drei Matrix-Relevanzgründe.
-- **5** geteilte Begriffe (Bedarfsgemeinschaft, Erwerbsfähigkeit, Regelbedarf,
-  Angemessenheit der Unterkunft, Mitwirkungspflicht) mit Definition,
-  definierender Norm und Nutzung über SGB-II- und angrenzende Normen.
+- **Vorführbeispiel:** Das Rechtsgebiet **„Leistungen zur Sicherung des
+  Lebensunterhalts (Bürgergeld)"** (§§ 7, 8, 9, 19, 20 SGB II) ist als
+  durchgehend belastbarer Demonstrationsfall ausgearbeitet: Die Matrix ist über
+  alle fünf Hierarchieebenen (GG → EuGH/VO 883/2004 & RL 2004/38 → mehrere
+  Bundesgesetze → Bürgergeld-V/RBSFV → Landesrecht) und alle drei Relevanzgründe
+  gefüllt. Alle Verknüpfungen bleiben Beispieldaten, orientieren sich aber an
+  real existierenden Bezügen (z. B. Existenzminimum-Rechtsprechung des BVerfG,
+  Dano/Alimanovic beim EuGH, Verweis des § 20 Abs. 1a SGB II auf RBEG/RBSFV).
+- **~23** Verbindungen zu angrenzenden Gesetzen über die drei Matrix-Relevanzgründe.
+- **7** geteilte Begriffe: drei im Gesetz selbst definierte (Bedarfsgemeinschaft,
+  Erwerbsfähigkeit, Regelbedarf) sowie **anderswo definierte** Begriffe, die in
+  den betrachteten Normen genutzt werden (Einkommen → § 11 SGB II, Vermögen →
+  § 12 SGB II, Angemessenheit der Unterkunft, Mitwirkungspflicht → § 60 SGB I).
+  Jeder Begriff trägt Definition, definierende Norm und Nutzung über SGB-II- und
+  angrenzende Normen; die Begriffe sind kongruent zu den Normtexten gewählt
+  (z. B. „Einkommen"/„Vermögen" in §§ 9, 19 SGB II).
 
 ## Implementierung (Überblick)
 
