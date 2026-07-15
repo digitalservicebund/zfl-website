@@ -10,6 +10,7 @@ import KernBadge from "@/components/KernBadge.astro";
 import KernCard from "@/components/KernCard.astro";
 import MediaText from "@/components/MediaText.astro";
 import Modal from "@/components/Modal.astro";
+import NormDisplay from "@/components/NormDisplay.astro";
 import PostTeaser from "@/components/PostTeaser.astro";
 import TimelineList from "@/components/TimelineList.astro";
 import trainingImage from "@/images/Trainings.jpg";
@@ -331,6 +332,36 @@ export const frontmatter = {
         >
           <a href="#" slot="footer">Mehr erfahren →</a>
         </KernCard>
+      </div>
+    </section>
+
+    <!-- ─── NormDisplay ───────────────────────────────────────────────── -->
+    <section class="space-y-48">
+      <h2>NormDisplay</h2>
+
+      <div
+        class="space-y-32"
+        x-data={`{
+          norm: {
+            ref: '§ 31 SGB II',
+            title: 'Pflichtverletzungen',
+            summary: 'Regelt die Voraussetzungen für Leistungsminderungen.',
+            fullText: 'Erwerbsfähige Leistungsberechtigte verletzen ihre Pflichten, wenn sie trotz schriftlicher Belehrung eine zumutbare Arbeit nicht aufnehmen.',
+            url: 'https://www.gesetze-im-internet.de/sgb_2/__31.html'
+          }
+        }`}
+      >
+        <p class="variant-label kern-label">
+          mit Titel, Zusammenfassung, Volltext und externer Quelle
+        </p>
+        <NormDisplay
+          label="norm.ref"
+          title="norm.title"
+          summary="norm.summary"
+          fullText="norm.fullText"
+          url="norm.url"
+          class="border-lavender-400 flex items-start gap-12 rounded-sm border p-12"
+        />
       </div>
     </section>
 

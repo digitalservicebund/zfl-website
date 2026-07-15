@@ -378,10 +378,20 @@ export const TERMS: Term[] = [
           lawLabel: "SGB XII",
           level: "bundesgesetz",
           ref: {
-            label: "§ 19, § 20 SGB XII",
+            label: "§ 19 SGB XII",
+            url: "https://www.gesetze-im-internet.de/sgb_12/__19.html",
+            fullText:
+              "Hilfe zum Lebensunterhalt ist Personen zu leisten, die ihren notwendigen Lebensunterhalt nicht oder nicht ausreichend aus eigenen Kräften und Mitteln bestreiten können.",
+          },
+        },
+        {
+          lawLabel: "SGB XII",
+          level: "bundesgesetz",
+          ref: {
+            label: "§ 20 SGB XII",
             url: "https://www.gesetze-im-internet.de/sgb_12/__20.html",
             fullText:
-              "§ 20: Leben Ehegatten oder Lebenspartner nicht getrennt, ist bei der Ermittlung des Bedarfs eines Ehegatten oder Lebenspartners auch das Einkommen und Vermögen des anderen Ehegatten oder Lebenspartners zu berücksichtigen.",
+              "Leben Ehegatten oder Lebenspartner nicht getrennt, ist bei der Ermittlung des Bedarfs eines Ehegatten oder Lebenspartners auch das Einkommen und Vermögen des anderen Ehegatten oder Lebenspartners zu berücksichtigen.",
           },
         },
         {
@@ -435,10 +445,20 @@ export const TERMS: Term[] = [
           lawLabel: "SGB XII",
           level: "bundesgesetz",
           ref: {
-            label: "§ 41, § 43 SGB XII",
+            label: "§ 41 SGB XII",
             url: "https://www.gesetze-im-internet.de/sgb_12/__41.html",
             fullText:
               "Grundsicherung im Alter und bei Erwerbsminderung erhalten Personen, die dauerhaft voll erwerbsgemindert sind und damit nicht dem Personenkreis des SGB II unterfallen.",
+          },
+        },
+        {
+          lawLabel: "SGB XII",
+          level: "bundesgesetz",
+          ref: {
+            label: "§ 43 SGB XII",
+            url: "https://www.gesetze-im-internet.de/sgb_12/__43.html",
+            fullText:
+              "Einkommen und Vermögen der leistungsberechtigten Person und ihres nicht getrennt lebenden Ehegatten oder Lebenspartners sind bei der Grundsicherung im Alter und bei Erwerbsminderung zu berücksichtigen.",
           },
         },
       ],
@@ -536,7 +556,17 @@ export const TERMS: Term[] = [
           lawLabel: "SGB I",
           level: "bundesgesetz",
           ref: {
-            label: "§ 60, § 66 SGB I",
+            label: "§ 60 SGB I",
+            url: "https://www.gesetze-im-internet.de/sgb_1/__60.html",
+            fullText:
+              "Wer Sozialleistungen beantragt oder erhält, hat alle Tatsachen anzugeben, die für die Leistung erheblich sind, und auf Verlangen der Erteilung der erforderlichen Auskünfte durch Dritte zuzustimmen.",
+          },
+        },
+        {
+          lawLabel: "SGB I",
+          level: "bundesgesetz",
+          ref: {
+            label: "§ 66 SGB I",
             url: "https://www.gesetze-im-internet.de/sgb_1/__66.html",
             fullText:
               "Kommt derjenige, der eine Sozialleistung beantragt oder erhält, seinen Mitwirkungspflichten nach den §§ 60 bis 62, 65 nicht nach, kann der Leistungsträger die Leistung ohne weitere Ermittlungen bis zur Nachholung der Mitwirkung versagen oder entziehen.",
