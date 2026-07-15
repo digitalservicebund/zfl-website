@@ -80,7 +80,7 @@ export const dev_kernKomponenten = {
 export const gesetzgebungsprozess = {
   key: "gesetzgebungsprozess",
   path: "/gesetzgebungsprozess",
-  title: "SVG",
+  title: "Der Gesetzgebungsprozess",
   parent: null,
   sitemap: true,
   isStagingOnly: true,
@@ -88,11 +88,11 @@ export const gesetzgebungsprozess = {
   navLabel: null,
 } as const;
 
-export const gesetzgebungsprozess_svelte = {
-  key: "gesetzgebungsprozess_svelte",
-  path: "/gesetzgebungsprozess/svelte",
-  title: "Svelte",
-  parent: gesetzgebungsprozess,
+export const gesetzgebungsprozessSvg = {
+  key: "gesetzgebungsprozessSvg",
+  path: "/gesetzgebungsprozess-svg",
+  title: "SVG",
+  parent: null,
   sitemap: true,
   isStagingOnly: true,
   navOrder: null,
@@ -250,7 +250,7 @@ export const allRoutes = [
   dev_astroKomponenten,
   dev_kernKomponenten,
   gesetzgebungsprozess,
-  gesetzgebungsprozess_svelte,
+  gesetzgebungsprozessSvg,
   home,
   impressum,
   kontakt,

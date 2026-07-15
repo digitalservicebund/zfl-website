@@ -1,10 +1,49 @@
 <script lang="ts">
+  import { tv } from "tailwind-variants";
   import Bubble from "./_Bubble.svelte";
   import Cluster from "./_Cluster.svelte";
+
+  let {
+    orientation = "vertical",
+  }: {
+    orientation?: "vertical" | "horizontal";
+  } = $props();
+
+  const container = tv({
+    base: "relative flex",
+    variants: {
+      orientation: {
+        horizontal: "h-900 flex-row items-stretch -space-x-48 px-32",
+        vertical: "mx-auto w-1000 flex-col -space-y-48",
+      },
+    },
+  });
+
+  // Anchor names connecting the title dot of the first and last cluster, so
+  // a single line can be drawn between them regardless of how many clusters
+  // (and how much packed bubble content) sit in between.
+  const CLUSTER_FIRST_ANCHOR = "--cluster-first";
+  const CLUSTER_LAST_ANCHOR = "--cluster-last";
+
+  const connectorStyle = $derived(
+    orientation === "vertical"
+      ? `left: calc(anchor(${CLUSTER_FIRST_ANCHOR} center) - 0.5px); top: anchor(${CLUSTER_FIRST_ANCHOR} center); bottom: anchor(${CLUSTER_LAST_ANCHOR} center); width: 1px;`
+      : `top: calc(anchor(${CLUSTER_FIRST_ANCHOR} center) - 0.5px); left: anchor(${CLUSTER_FIRST_ANCHOR} center); right: anchor(${CLUSTER_LAST_ANCHOR} center); height: 1px;`,
+  );
 </script>
 
-<div class={`mx-auto flex max-w-5xl flex-col items-center -space-y-48`}>
-  <Cluster title="Interessensermittlung">
+<div class={container({ orientation })}>
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute bg-black m-0"
+    style={connectorStyle}
+  ></div>
+
+  <Cluster
+    {orientation}
+    anchorName={CLUSTER_FIRST_ANCHOR}
+    title="Interessensermittlung"
+  >
     <Bubble
       color="#BCA6DC"
       title="Arbeitsgruppenbildung"
@@ -19,14 +58,14 @@
     ></Bubble>
   </Cluster>
 
-  <Cluster>
+  <Cluster {orientation}>
     <Bubble color="#BCA6DC" title="Federführung" size="lg"
       >Ein Fachreferat übernimmt die Verantwortung für die Weiterentwicklung der
       Regelung. Legist:in wird zugewiesen.</Bubble
     >
   </Cluster>
 
-  <Cluster title="Recherche">
+  <Cluster {orientation} title="Recherche">
     <Bubble color="#B3B7E0" title="Gesetzesumfeld" size="md">
       <p>Wovon wird die Regelung beeinflusst?</p>
       <ul>
@@ -72,7 +111,7 @@
     </Bubble>
   </Cluster>
 
-  <Cluster title="Referentenentwurf">
+  <Cluster {orientation} title="Referentenentwurf">
     <Bubble color="#ABD7F9" title="Frühzeitige Beteiligung" badge="Optional">
       Von Betroffenen und Vollzug und anderen Wissensträgern (z.B. Verbänden,
       Ländern, Kommunen, Wissenschaft)
@@ -102,7 +141,7 @@
     ></Bubble>
   </Cluster>
 
-  <Cluster title="Hausentwurf">
+  <Cluster {orientation} title="Hausentwurf">
     <Bubble color="#A0EBEE" title="Beteiligung der Referate" size="md">
       Bittet hausinterne Referate um Feedback.
     </Bubble>
@@ -116,7 +155,7 @@
     ></Bubble>
   </Cluster>
 
-  <Cluster title="Ressortentwurf">
+  <Cluster {orientation} title="Ressortentwurf">
     <Bubble color="#9EDCD0" title="Gesetzesfolgenabschätzung" size="md">
       Beabsichtigte Wirkungen und unbeabsichtigte Nebenwirkungen
       (Haushaltsausgaben, Demographische Auswirkungen, Nachhaltigkeitsaspekte,
@@ -162,13 +201,13 @@
     </Bubble>
   </Cluster>
 
-  <Cluster>
+  <Cluster {orientation}>
     <Bubble color="#9EDCD0" title="Verbände informieren" size="md">
       Die betroffenen Verbände werden über den Ressortentwurf informiert.
     </Bubble>
   </Cluster>
 
-  <Cluster title="Kabinettvorlage">
+  <Cluster {orientation} title="Kabinettvorlage">
     <Bubble color="#D2EDB9" title="Kabinettvorlage erstellen" size="lg">
       Die Kabinettvorlage beinhaltet neben dem Ressortentwurf weitere Dokumente,
       die benötigt werden um das Gesetz im Kabinett zu behandeln (Sprechzettel,
@@ -190,7 +229,7 @@
     </Bubble>
   </Cluster>
 
-  <Cluster title="Stellungnahme Bundesrat">
+  <Cluster {orientation} title="Stellungnahme Bundesrat">
     <Bubble color="#D2EDB9" title="Weiterleitung an den Bundesrat" size="lg">
       Chef:in des Bundeskanzleramts setzt die Kabinettvorlage auf die Agenda der
       Kabinettsitzung. Leitet die Kabinettvorlage an den Bundesrat.
@@ -205,7 +244,7 @@
     </Bubble>
   </Cluster>
 
-  <Cluster title="Abstimmung im Bundestag">
+  <Cluster {orientation} title="Abstimmung im Bundestag">
     <Bubble color="#EBF5B3" title="Erste Lesung" size="md"></Bubble>
     <Bubble color="#EBF5B3" title="Ausschuss" size="lg">
       Regelung wird an den zuständigen Ausschuss geleitet, dort geprüft und
@@ -214,25 +253,25 @@
     </Bubble>
   </Cluster>
 
-  <Cluster>
+  <Cluster {orientation}>
     <Bubble color="#EBF5B3" title="Zweite Lesung">
       Der Gesetzesentwurf wird mit dem Ausschussbericht und den
       Änderungsvorschlägen besprochen. Abstimmung und Einbringung von
       Änderungsanträgen.
     </Bubble>
   </Cluster>
-  <Cluster>
+  <Cluster {orientation}>
     <Bubble color="#EBF5B3" title="Dritte Lesung">
       Der Gesetzentwurf wird der <strong>Schlussabstimmung</strong> unterzogen.
     </Bubble>
   </Cluster>
-  <Cluster>
+  <Cluster {orientation}>
     <Bubble color="#EBF5B3" title="Abstimmung im Bundesrat" badge="Optional">
       Der Gesetzentwurf wird der Schlussabstimmung unterzogen.
     </Bubble>
   </Cluster>
 
-  <Cluster title="Verkündung">
+  <Cluster {orientation} title="Verkündung">
     <Bubble color="#FFFBB5" title="Verkündung" size="md">
       Der Gesetzestext wird im Bundesgesetzblatt veröffentlicht. Die
       Kommentarspalte wird im Bundesanzeiger veröffentlicht.
@@ -254,7 +293,7 @@
     ></Bubble>
   </Cluster>
 
-  <Cluster title="Dokumentation">
+  <Cluster {orientation} title="Dokumentation">
     <Bubble
       color="#FDE99F"
       title="Übergabe der Regelung an die Dokumentationsstelle"
@@ -270,7 +309,7 @@
     </Bubble>
   </Cluster>
 
-  <Cluster>
+  <Cluster {orientation}>
     <Bubble color="#FDE99F" title="Inkrafttreten" size="lg">
       <p>Die Regelung tritt in Kraft und wird veröffentlicht.</p>
       <ul>
@@ -280,7 +319,7 @@
     </Bubble>
   </Cluster>
 
-  <Cluster title="Vollzug">
+  <Cluster {orientation} anchorName={CLUSTER_LAST_ANCHOR} title="Vollzug">
     <Bubble color="#FAB5A8" title="Bildung von Arbeitsgruppen" size="md"
     ></Bubble>
     <Bubble color="#FAB5A8" title="Evaluation Änderungsbedarfe" size="md"

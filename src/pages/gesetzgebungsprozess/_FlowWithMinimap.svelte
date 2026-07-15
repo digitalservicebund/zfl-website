@@ -2,72 +2,125 @@
   import type { Snippet } from "svelte";
 
   let {
-    minimapWidth = 100,
+    orientation = "vertical",
+    minimapSize = 100,
     contentId = "flow-with-minimap-content",
     children,
   }: {
-    minimapWidth?: number;
+    /** Direction the content scrolls/grows in. */
+    orientation?: "vertical" | "horizontal";
+    /** Fixed cross-axis size of the minimap in px (width when vertical, height when horizontal). */
+    minimapSize?: number;
     contentId?: string;
     children: Snippet;
   } = $props();
 
+  const isVertical = $derived(orientation === "vertical");
+
   let mainEl: HTMLDivElement | undefined = $state();
+  // The content is rendered a second time inside a non-clipping wrapper
+  // purely so we can measure its natural, unscrolled size (bind:clientWidth/
+  // clientHeight on the scroll container itself would only report the
+  // clipped viewport size once it becomes scrollable).
   let contentWidth = $state(0);
   let contentHeight = $state(0);
 
   let scrollRatio = $state(0);
   let viewportRatio = $state(0);
 
-  // Mirrors the scroll-indicator math from the previous React
-  // implementation (see _deviceHooks.ts / _SVGWithMinimap.tsx): the
-  // indicator's position/size are expressed as a ratio of the tracked
-  // element's own height, adjusted for how that height relates to the
-  // full page height.
+  // Vertical mode relies on the whole page scrolling: the content simply
+  // flows to its natural height and we track window scroll relative to
+  // the page. Horizontal mode instead needs an internally scrollable
+  // container (mainEl itself) so that page chrome like header/footer stays
+  // put while only the flow content scrolls sideways - so we track the
+  // element's own scroll position directly instead.
   function updateScrollIndicator() {
     if (!mainEl) return;
 
-    const scrollTop = window.scrollY - mainEl.offsetTop;
-    const scrollHeight = document.body.scrollHeight;
-    const clientHeight = window.innerHeight;
+    if (isVertical) {
+      const scrollTop = window.scrollY - mainEl.offsetTop;
+      const scrollHeight = document.body.scrollHeight;
+      const clientHeight = window.innerHeight;
 
-    const elPageRatio = scrollHeight / mainEl.offsetHeight;
-    const ratio = (scrollTop / scrollHeight) * elPageRatio;
+      const elPageRatio = scrollHeight / mainEl.offsetHeight;
+      scrollRatio = (scrollTop / scrollHeight) * elPageRatio;
+      viewportRatio = (clientHeight / scrollHeight) * elPageRatio;
+    } else {
+      const { scrollLeft, scrollWidth, clientWidth } = mainEl;
 
-    scrollRatio = ratio;
-    viewportRatio = (clientHeight / scrollHeight) * elPageRatio;
+      scrollRatio = scrollWidth ? scrollLeft / scrollWidth : 0;
+      viewportRatio = scrollWidth ? clientWidth / scrollWidth : 0;
+    }
   }
 
   $effect(() => {
     updateScrollIndicator();
 
+    const el = mainEl;
+    if (isVertical) {
+      window.addEventListener("resize", updateScrollIndicator);
+      window.addEventListener("scroll", updateScrollIndicator);
+
+      return () => {
+        window.removeEventListener("resize", updateScrollIndicator);
+        window.removeEventListener("scroll", updateScrollIndicator);
+      };
+    }
+
     window.addEventListener("resize", updateScrollIndicator);
-    window.addEventListener("scroll", updateScrollIndicator);
+    el?.addEventListener("scroll", updateScrollIndicator);
 
     return () => {
       window.removeEventListener("resize", updateScrollIndicator);
-      window.removeEventListener("scroll", updateScrollIndicator);
+      el?.removeEventListener("scroll", updateScrollIndicator);
     };
   });
 
-  const scale = $derived(contentWidth ? minimapWidth / contentWidth : 0);
-  const minimapHeight = $derived(contentHeight * scale);
+  // The content's intrinsic size can change after mount (fonts, images,
+  // dynamic content) independently of any scroll/resize event - refresh
+  // the indicator whenever our measured size changes too.
+  $effect(() => {
+    contentWidth;
+    contentHeight;
+    updateScrollIndicator();
+  });
+
+  // Along the scroll axis, the minimap replica spans the full (scaled)
+  // content size; along the cross axis, it's pinned to minimapSize.
+  const scale = $derived(
+    isVertical
+      ? contentWidth
+        ? minimapSize / contentWidth
+        : 0
+      : contentHeight
+        ? minimapSize / contentHeight
+        : 0,
+  );
+  const minimapWidth = $derived(
+    isVertical ? minimapSize : contentWidth * scale,
+  );
+  const minimapHeight = $derived(
+    isVertical ? contentHeight * scale : minimapSize,
+  );
 
   // Scrolls so that the given position within the minimap (in minimap
-  // pixels, relative to its own top) ends up centered in the viewport.
-  function scrollToMinimapY(
-    minimapY: number,
+  // pixels, relative to its own top/left) ends up centered in the viewport.
+  function scrollToMinimapOffset(
+    minimapOffset: number,
     behavior: ScrollBehavior = "smooth",
   ) {
     if (!mainEl || !scale) return;
 
-    const targetMainElOffset = minimapY / scale;
-    const targetScrollY =
-      mainEl.offsetTop + targetMainElOffset - window.innerHeight / 2;
+    const targetMainElOffset = minimapOffset / scale;
 
-    window.scrollTo({
-      top: Math.max(0, targetScrollY),
-      behavior,
-    });
+    if (isVertical) {
+      const targetScrollY =
+        mainEl.offsetTop + targetMainElOffset - window.innerHeight / 2;
+      window.scrollTo({ top: Math.max(0, targetScrollY), behavior });
+    } else {
+      const targetScrollX = targetMainElOffset - mainEl.clientWidth / 2;
+      mainEl.scrollTo({ left: Math.max(0, targetScrollX), behavior });
+    }
   }
 
   function onMinimapClick(event: MouseEvent) {
@@ -75,7 +128,9 @@
     if (isDragging) return;
 
     const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
-    scrollToMinimapY(event.clientY - rect.top);
+    scrollToMinimapOffset(
+      isVertical ? event.clientY - rect.top : event.clientX - rect.left,
+    );
   }
 
   let isDragging = false;
@@ -91,7 +146,10 @@
     const onPointerMove = (moveEvent: PointerEvent) => {
       // "smooth" scrolling queues up and lags behind fast pointer moves;
       // jump instantly while actively dragging for a responsive feel.
-      scrollToMinimapY(moveEvent.clientY - minimapRect.top, "instant");
+      const offset = isVertical
+        ? moveEvent.clientY - minimapRect.top
+        : moveEvent.clientX - minimapRect.left;
+      scrollToMinimapOffset(offset, "instant");
     };
 
     const onPointerUp = () => {
@@ -109,8 +167,14 @@
   }
 </script>
 
-<div class="flex flex-row items-start gap-96">
-  <div class="sticky top-40 shrink-0">
+<div
+  class={`flex ${isVertical ? "flex-row gap-96 items-start" : "flex-col gap-40 items-center"}`}
+>
+  <div
+    class={`sticky shrink-0 z-20 bg-white ${
+      isVertical ? "left-0 top-24 bottom-40 pl-40" : "top-0"
+    }`}
+  >
     <div
       class="relative cursor-pointer overflow-hidden rounded-md border border-lavender-400"
       style={`width: ${minimapWidth}px; height: ${minimapHeight}px;`}
@@ -123,7 +187,9 @@
            non-interactive and hidden from assistive tech. -->
       <div
         class="pointer-events-none absolute top-0 left-0 origin-top-left"
-        style={`width: ${contentWidth}px; transform: scale(${scale});`}
+        style={isVertical
+          ? `width: ${contentWidth}px; transform: scale(${scale});`
+          : `height: ${contentHeight}px; transform: scale(${scale});`}
         aria-hidden="true"
         inert
       >
@@ -132,12 +198,14 @@
 
       <!-- Scroll/viewport indicator (draggable) -->
       <div
-        class="absolute inset-x-0 cursor-grab touch-none border border-cosmic-blue-base bg-cosmic-blue-base/20 active:cursor-grabbing"
-        style={`top: ${scrollRatio * 100}%; height: ${viewportRatio * 100}%;`}
+        class={`cursor-grab touch-none border border-cosmic-blue-base bg-cosmic-blue-base/20 active:cursor-grabbing ${isVertical ? "absolute inset-x-0" : "absolute inset-y-0"}`}
+        style={isVertical
+          ? `top: ${scrollRatio * 100}%; height: ${viewportRatio * 100}%;`
+          : `left: ${scrollRatio * 100}%; width: ${viewportRatio * 100}%;`}
         onpointerdown={onThumbPointerDown}
         role="scrollbar"
         aria-controls={contentId}
-        aria-orientation="vertical"
+        aria-orientation={orientation}
         aria-valuenow={Math.round(scrollRatio * 100)}
         tabindex="-1"
       ></div>
@@ -147,10 +215,16 @@
   <div
     id={contentId}
     bind:this={mainEl}
-    bind:clientWidth={contentWidth}
-    bind:clientHeight={contentHeight}
-    class="min-w-0 flex-1"
+    class={`min-w-0 max-w-screen flex-1 ${isVertical ? "order-1" : "order-2 overflow-x-auto"}`}
   >
-    {@render children()}
+    <!-- Shrink-wrapping measurement wrapper: reports the content's natural,
+         unclipped size even once the parent becomes a scroll container. -->
+    <div
+      class="inline-block align-top"
+      bind:clientWidth={contentWidth}
+      bind:clientHeight={contentHeight}
+    >
+      {@render children()}
+    </div>
   </div>
 </div>

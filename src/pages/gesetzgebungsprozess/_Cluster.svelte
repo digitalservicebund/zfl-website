@@ -1,14 +1,33 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
   import { packEnclose, packSiblings } from "d3-hierarchy";
+  import { tv } from "tailwind-variants";
 
   let {
     title,
+    orientation = "vertical",
+    anchorName,
     children,
   }: {
     title?: string;
+    orientation?: "vertical" | "horizontal";
+    /**
+     * CSS anchor name (e.g. "--cluster-first") assigned to this cluster's
+     * title dot, so it can be targeted from outside via `anchor()`.
+     */
+    anchorName?: string;
     children?: Snippet;
   } = $props();
+
+  const titleWrapper = tv({
+    base: "absolute flex gap-24",
+    variants: {
+      orientation: {
+        horizontal: "top-0 left-0 flex-col items-start",
+        vertical: "top-0 left-0 flex-row items-center",
+      },
+    },
+  });
 
   const HALO_THICKNESS = 48; // px, thickness of the soft gray ring
   const BUBBLE_PADDING = 8; // px, gap enforced between packed bubbles
@@ -65,15 +84,17 @@
   // A small, random horizontal jitter per cluster instance (fixed for the
   // lifetime of the component) for a more organic, hand-drawn feel.
   const OFFSET_RANGE = 64; // px, max offset in either direction
-  const offsetX = Math.round((Math.random() * 2 - 1) * OFFSET_RANGE);
+  const offset = Math.round((Math.random() * 2 - 1) * OFFSET_RANGE);
 </script>
 
-<div class="relative flex flex-col items-center border-l border-black w-full">
+<div class="relative flex flex-col items-center justify-center h-full w-full">
   {#if title}
-    <div
-      class="absolute top-0 left-0 flex -translate-x-1/2 flex-col items-center gap-24"
-    >
-      <div class="size-24 rounded-full bg-black" aria-hidden="true"></div>
+    <div class={titleWrapper({ orientation })}>
+      <div
+        class="size-24 rounded-full bg-black"
+        style={anchorName ? `anchor-name: ${anchorName};` : undefined}
+        aria-hidden="true"
+      ></div>
       <h2 class="kern-heading-small bg-black text-white px-4">
         {title}
       </h2>
@@ -82,7 +103,7 @@
 
   <div
     class="relative flex items-center justify-center transition-[width,height] duration-300"
-    style={`width: ${outerSize}px; height: ${outerSize}px; margin-left: ${offsetX}px;`}
+    style={`width: ${outerSize}px; height: ${outerSize}px; margin-${orientation === "vertical" ? "left" : "top"}: ${offset}px;`}
   >
     <!-- Isolated so the halo/dashed-circle negative z-indices only stack
          against each other, never against sibling clusters or bubble
