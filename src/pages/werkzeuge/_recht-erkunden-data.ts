@@ -41,6 +41,7 @@ export type Norm = {
   title: string;
   summary: string;
   fullText: string;
+  url: string;
 };
 
 export type LawArea = {
@@ -63,8 +64,6 @@ export type Evidence = {
   adjacentNorm: SourceRef;
   /** Only for "gemeinsame_nennung": the verdict/literature passage that explicitly cites both norms. */
   citedIn?: SourceRef & { kind: "rechtsprechung" | "literatur" };
-  /** For "begriff" evidence: links to the shared Term entry powering "Begriffe im Fokus". */
-  termId?: string;
 };
 
 /** Mock NLP signal - only ever present on "thematische_naehe" relations. */
@@ -100,12 +99,32 @@ export type Term = {
   };
 };
 
-export const HIERARCHY_LEVELS: { id: HierarchyLevel; label: string }[] = [
-  { id: "grundgesetz", label: "Grundgesetz" },
-  { id: "eu", label: "EU-Recht" },
-  { id: "bundesgesetz", label: "Bundesgesetze" },
-  { id: "bundesverordnung", label: "Bundesverordnungen" },
-  { id: "landesrecht", label: "Landesrecht" },
+export const HIERARCHY_LEVELS: {
+  id: HierarchyLevel;
+  label: string;
+  badgeClass: string;
+}[] = [
+  {
+    id: "grundgesetz",
+    label: "Grundgesetz",
+    badgeClass: "bg-cosmic-blue-base text-white",
+  },
+  { id: "eu", label: "EU-Recht", badgeClass: "bg-indigo-600 text-white" },
+  {
+    id: "bundesgesetz",
+    label: "Bundesgesetze",
+    badgeClass: "bg-lavender-base text-cosmic-blue-base",
+  },
+  {
+    id: "bundesverordnung",
+    label: "Bundesverordnungen",
+    badgeClass: "bg-lavender-200 text-cosmic-blue-base",
+  },
+  {
+    id: "landesrecht",
+    label: "Landesrecht",
+    badgeClass: "bg-yellow-200 text-yellow-900",
+  },
 ];
 
 export const RELEVANCE_REASONS: {
@@ -183,6 +202,7 @@ export const NORMS: Norm[] = [
       "Legt fest, wer erwerbsfähig, hilfebedürftig und leistungsberechtigt ist - und wer ausgeschlossen ist.",
     fullText:
       "Leistungen nach diesem Buch erhalten Personen, die das 15. Lebensjahr vollendet und die Altersgrenze nach § 7a noch nicht erreicht haben, erwerbsfähig und hilfebedürftig sind und ihren gewöhnlichen Aufenthalt in der Bundesrepublik Deutschland haben. Ausgenommen sind unter anderem Ausländerinnen und Ausländer, die kein Aufenthaltsrecht haben oder sich allein zur Arbeitsuche in Deutschland aufhalten.",
+    url: "https://www.gesetze-im-internet.de/sgb_2/__7.html",
   },
   {
     id: "n-sgb2-8",
@@ -192,6 +212,7 @@ export const NORMS: Norm[] = [
       "Definiert Erwerbsfähigkeit als Fähigkeit, unter den üblichen Bedingungen des Arbeitsmarkts mindestens drei Stunden täglich erwerbstätig zu sein.",
     fullText:
       "Erwerbsfähig ist, wer nicht wegen Krankheit oder Behinderung auf absehbare Zeit außerstande ist, unter den üblichen Bedingungen des allgemeinen Arbeitsmarkts mindestens drei Stunden täglich erwerbstätig zu sein.",
+    url: "https://www.gesetze-im-internet.de/sgb_2/__8.html",
   },
   {
     id: "n-sgb2-9",
@@ -201,6 +222,7 @@ export const NORMS: Norm[] = [
       "Regelt, wann jemand hilfebedürftig ist, und den Nachrang gegenüber Einkommen, Vermögen und vorrangigen Ansprüchen Dritter.",
     fullText:
       "Hilfebedürftig ist, wer seinen Lebensunterhalt nicht oder nicht ausreichend aus dem zu berücksichtigenden Einkommen oder Vermögen sichern kann und die erforderliche Hilfe nicht von anderen, insbesondere von Angehörigen oder von Trägern anderer Sozialleistungen, erhält.",
+    url: "https://www.gesetze-im-internet.de/sgb_2/__9.html",
   },
   {
     id: "n-sgb2-19",
@@ -210,6 +232,7 @@ export const NORMS: Norm[] = [
       "Beschreibt die Zusammensetzung des Bürgergelds aus Regelbedarf, Mehrbedarfen sowie Bedarfen für Unterkunft und Heizung.",
     fullText:
       "Das Bürgergeld umfasst den maßgebenden Regelbedarf, Mehrbedarfe sowie Bedarfe für Unterkunft und Heizung. Bei nicht erwerbsfähigen Angehörigen der Bedarfsgemeinschaft wird Sozialgeld in entsprechender Höhe erbracht.",
+    url: "https://www.gesetze-im-internet.de/sgb_2/__19.html",
   },
   {
     id: "n-sgb2-20",
@@ -219,6 +242,7 @@ export const NORMS: Norm[] = [
       "Bestimmt die Höhe des Regelbedarfs und verweist auf die Regelbedarfsstufen und deren Fortschreibung.",
     fullText:
       "Der Regelbedarf zur Sicherung des Lebensunterhalts umfasst insbesondere Ernährung, Kleidung, Körperpflege, Hausrat, Haushaltsenergie sowie persönliche Bedürfnisse des täglichen Lebens. Die Höhe richtet sich nach den Regelbedarfsstufen der Anlage zu § 28.",
+    url: "https://www.gesetze-im-internet.de/sgb_2/__20.html",
   },
   {
     id: "n-sgb2-14",
@@ -228,6 +252,7 @@ export const NORMS: Norm[] = [
       "Beschreibt das Zusammenspiel aus Eingliederungsleistungen und Mitwirkungspflichten der Leistungsberechtigten.",
     fullText:
       "Die Grundsicherung für Arbeitsuchende soll den Leistungsberechtigten ermöglichen, ein Leben unabhängig von der Grundsicherung zu führen. Die Träger unterstützen Leistungsberechtigte umfassend mit dem Ziel der Eingliederung in Arbeit; im Gegenzug wirken Leistungsberechtigte aktiv an der Eingliederung mit.",
+    url: "https://www.gesetze-im-internet.de/sgb_2/__14.html",
   },
   {
     id: "n-sgb2-16",
@@ -237,6 +262,7 @@ export const NORMS: Norm[] = [
       "Verweist für Eingliederungsleistungen weitgehend auf die entsprechenden Instrumente des SGB III.",
     fullText:
       "Zur Eingliederung in Arbeit können die Träger die Leistungen nach § 16a bis 16j sowie entsprechend die Leistungen der aktiven Arbeitsförderung nach dem Dritten Buch erbringen, soweit dieses Buch nichts Abweichendes regelt.",
+    url: "https://www.gesetze-im-internet.de/sgb_2/__16.html",
   },
   {
     id: "n-sgb2-16i",
@@ -246,6 +272,7 @@ export const NORMS: Norm[] = [
       "Regelt den Lohnkostenzuschuss für besonders arbeitsmarktferne Leistungsberechtigte.",
     fullText:
       "Arbeitgeber können für die Beschäftigung besonders arbeitsmarktferner, langzeitarbeitsloser Leistungsberechtigter einen Zuschuss zum Arbeitsentgelt erhalten, der im ersten und zweiten Jahr 100 Prozent und danach schrittweise sinkend gewährt wird.",
+    url: "https://www.gesetze-im-internet.de/sgb_2/__16i.html",
   },
   {
     id: "n-sgb2-22",
@@ -255,6 +282,7 @@ export const NORMS: Norm[] = [
       "Regelt die Übernahme angemessener Kosten der Unterkunft und Heizung sowie Kostensenkungsverfahren.",
     fullText:
       "Bedarfe für Unterkunft und Heizung werden in Höhe der tatsächlichen Aufwendungen anerkannt, soweit diese angemessen sind. Übersteigen die Aufwendungen die Angemessenheitsgrenze, sind sie in der Regel nur so lange zu berücksichtigen, wie es der leistungsberechtigten Person nicht möglich oder nicht zumutbar ist, die Aufwendungen zu senken.",
+    url: "https://www.gesetze-im-internet.de/sgb_2/__22.html",
   },
   {
     id: "n-sgb2-31",
@@ -264,6 +292,7 @@ export const NORMS: Norm[] = [
       "Definiert die Pflichtverletzungen, die zu einer Minderung des Bürgergelds führen können.",
     fullText:
       "Leistungsberechtigte verletzen ihre Pflichten, wenn sie sich trotz Belehrung über die Rechtsfolgen weigern, den Pflichten aus einem Kooperationsplan nachzukommen, insbesondere zumutbare Arbeit, Ausbildung oder Maßnahmen zur Eingliederung in Arbeit aufzunehmen oder fortzuführen.",
+    url: "https://www.gesetze-im-internet.de/sgb_2/__31.html",
   },
   {
     id: "n-sgb2-31a",
@@ -273,6 +302,7 @@ export const NORMS: Norm[] = [
       "Legt die gestaffelte Minderung des Bürgergelds bei wiederholten Pflichtverletzungen fest.",
     fullText:
       "Bei einer Pflichtverletzung nach § 31 mindert sich das Bürgergeld in einer ersten Stufe um 10 Prozent des maßgebenden Regelbedarfs, bei wiederholter Pflichtverletzung innerhalb eines Jahres um weitere 20 Prozent; die Minderung darf zusammen mit einer Minderung wegen Meldeversäumnissen 30 Prozent des maßgebenden Regelbedarfs nicht übersteigen.",
+    url: "https://www.gesetze-im-internet.de/sgb_2/__31a.html",
   },
   {
     id: "n-sgb2-31b",
@@ -282,6 +312,7 @@ export const NORMS: Norm[] = [
       "Regelt, ab wann eine Minderung wirksam wird und wie lange sie andauert.",
     fullText:
       "Die Minderung des Bürgergelds tritt mit Wirkung des Kalendermonats ein, der auf das Wirksamwerden des Verwaltungsakts folgt, der die Pflichtverletzung feststellt, und dauert einen Zeitraum von einem Monat.",
+    url: "https://www.gesetze-im-internet.de/sgb_2/__31b.html",
   },
   {
     id: "n-sgb2-32",
@@ -291,6 +322,7 @@ export const NORMS: Norm[] = [
       "Regelt die Minderung des Bürgergelds bei unentschuldigtem Nichterscheinen zu Terminen.",
     fullText:
       "Kommt eine leistungsberechtigte Person trotz Belehrung über die Rechtsfolgen einer Aufforderung des Trägers, sich zu melden oder bei einem Arzt oder Psychologen zu einer Untersuchung zu erscheinen, nicht nach, mindert sich das Bürgergeld um 10 Prozent des maßgebenden Regelbedarfs.",
+    url: "https://www.gesetze-im-internet.de/sgb_2/__32.html",
   },
   {
     id: "n-sgb2-50",
@@ -300,6 +332,7 @@ export const NORMS: Norm[] = [
       "Regelt die Grundlagen der Sozialdatenverarbeitung durch die Träger der Grundsicherung.",
     fullText:
       "Die Träger der Leistungen nach diesem Buch dürfen Sozialdaten erheben, verarbeiten und nutzen, soweit dies zur Erfüllung ihrer Aufgaben nach diesem Buch erforderlich ist; im Übrigen gelten die Vorschriften des Zehnten Buches über den Sozialdatenschutz.",
+    url: "https://www.gesetze-im-internet.de/sgb_2/__50.html",
   },
   {
     id: "n-sgb2-51b",
@@ -309,6 +342,7 @@ export const NORMS: Norm[] = [
       "Ermächtigt zum automatisierten Abgleich von Daten mit anderen Trägern zur Aufdeckung von Leistungsmissbrauch.",
     fullText:
       "Die Träger sind berechtigt, personenbezogene Daten mit den Datenbeständen anderer Träger und Stellen automatisiert abzugleichen, soweit dies zur Feststellung von Voraussetzungen für den Leistungsanspruch erforderlich ist.",
+    url: "https://www.gesetze-im-internet.de/sgb_2/__51b.html",
   },
   {
     id: "n-sgb2-52",
@@ -318,6 +352,7 @@ export const NORMS: Norm[] = [
       "Regelt ergänzende Mitteilungspflichten anderer Stellen gegenüber den Trägern der Grundsicherung.",
     fullText:
       "Träger der Rentenversicherung, Familienkassen und weitere Stellen übermitteln den Trägern der Grundsicherung für Arbeitsuchende auf Anforderung die für die Feststellung der Leistungsvoraussetzungen erforderlichen Daten.",
+    url: "https://www.gesetze-im-internet.de/sgb_2/__52.html",
   },
 ];
 
@@ -700,7 +735,6 @@ export const RELATIONS: Relation[] = [
           fullText:
             "Wer Sozialleistungen beantragt oder erhält, hat alle Tatsachen anzugeben, die für die Leistung erheblich sind, und auf Verlangen des zuständigen Leistungsträgers der Erteilung der erforderlichen Auskünfte durch Dritte zuzustimmen.",
         },
-        termId: "term-mitwirkungspflicht",
       },
     ],
   },
@@ -818,7 +852,6 @@ export const RELATIONS: Relation[] = [
           fullText:
             "Leben Ehegatten oder Lebenspartner nicht getrennt, ist bei der Ermittlung des Bedarfs eines Ehegatten oder Lebenspartners auch das Einkommen und Vermögen des anderen Ehegatten oder Lebenspartners zu berücksichtigen.",
         },
-        termId: "term-bedarfsgemeinschaft",
       },
     ],
   },
@@ -868,7 +901,6 @@ export const RELATIONS: Relation[] = [
           fullText:
             "Anspruch auf Rente wegen teilweiser Erwerbsminderung haben Versicherte, die teilweise erwerbsgemindert sind, in den letzten fünf Jahren vor Eintritt der Erwerbsminderung drei Jahre Pflichtbeiträge haben und die Wartezeit erfüllt haben.",
         },
-        termId: "term-erwerbsfaehigkeit",
       },
     ],
   },

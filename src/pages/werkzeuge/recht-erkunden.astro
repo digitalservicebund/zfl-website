@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
+import InfoPopover from "@/components/InfoPopover.astro";
 import NormDisplay from "@/components/NormDisplay.astro";
 import { Icon } from "astro-icon/components";
 import { tv } from "tailwind-variants";
@@ -41,10 +42,6 @@ const styles = tv({
     sourceCard: "border-lavender-400 rounded-sm border bg-white p-12",
     selectedLawCard:
       "border-cosmic-blue-base bg-lavender-100 flex flex-wrap items-center justify-between gap-12 rounded-sm border p-16",
-    infoTrigger:
-      "text-cosmic-blue-base hover:bg-lavender-100 inline-flex h-22 w-22 items-center justify-center rounded-full transition",
-    infoPopoverPanel:
-      "border-lavender-400 text-icon-muted absolute top-full left-0 z-20 mt-4 w-260 rounded-sm border bg-white p-12 text-xs leading-snug font-normal shadow-lg",
     stepBadge:
       "bg-cosmic-blue-base flex h-32 w-32 shrink-0 items-center justify-center rounded-full text-base leading-none font-semibold text-white",
     subStepGroup: "border-lavender-400 space-y-lg ml-16 border-l-2 pl-24",
@@ -68,8 +65,6 @@ const {
   subStepGroup,
   subStepHeading,
   selectedLawCard,
-  infoTrigger,
-  infoPopoverPanel,
 } = styles();
 ---
 
@@ -251,32 +246,14 @@ const {
                 <span>
                   Diese Rechtsgebiete werden im ausgewählten Gesetz behandelt.
                 </span>
-                <span
-                  class="relative inline-flex"
-                  x-data="{ open: false }"
-                  x-on:click.outside="open = false"
+                <InfoPopover
+                  label="Hinweis zur Ermittlung der Rechtsgebiete anzeigen"
                 >
-                  <button
-                    type="button"
-                    class={infoTrigger()}
-                    x-on:click="open = !open"
-                    x-bind:aria-expanded="open"
-                    aria-label="Hinweis zur Ermittlung der Rechtsgebiete anzeigen"
-                  >
-                    <Icon name="ic:outline-info" class="h-16 w-16" />
-                  </button>
-                  <span
-                    x-show="open"
-                    x-cloak
-                    x-transition
-                    class={infoPopoverPanel()}
-                  >
-                    Im vorgesehenen Verfahren würden die Rechtsgebiete
-                    automatisiert über Textanalyse ermittelt (z. B.
-                    Keyword-Extraktion, Clustering ähnlicher Normen). Hier sind
-                    sie als Beispieldaten hinterlegt.
-                  </span>
-                </span>
+                  Im vorgesehenen Verfahren würden die Rechtsgebiete
+                  automatisiert über Textanalyse ermittelt (z. B.
+                  Keyword-Extraktion, Clustering ähnlicher Normen). Hier sind
+                  sie als Beispieldaten hinterlegt.
+                </InfoPopover>
               </p>
             </div>
 
@@ -337,7 +314,7 @@ const {
                     title="norm.title"
                     summary="norm.summary"
                     fullText="norm.fullText"
-                    url="normUrl(norm)"
+                    url="norm.url"
                   />
                 </li>
               </template>
@@ -438,33 +415,16 @@ const {
                             <span class="inline-flex items-center gap-4 text-base font-semibold">
                               {reason.label}
                               {reason.hint && (
-                                <span
-                                  class="relative inline-flex"
-                                  x-data="{ open: false }"
-                                  x-on:click.outside="open = false"
+                                <InfoPopover
+                                  label={`Hinweis zu ${reason.label} anzeigen`}
+                                  panelClass={
+                                    index === RELEVANCE_REASONS.length - 1
+                                      ? "right-0 left-auto"
+                                      : undefined
+                                  }
                                 >
-                                  <button
-                                    type="button"
-                                    class={infoTrigger()}
-                                    x-on:click="open = !open"
-                                    x-bind:aria-expanded="open"
-                                    aria-label={`Hinweis zu ${reason.label} anzeigen`}
-                                  >
-                                    <Icon
-                                      name="ic:outline-info"
-                                      class="h-16 w-16"
-                                    />
-                                  </button>
-                                  <span
-                                    x-show="open"
-                                    x-cloak
-                                    x-transition
-                                    role="tooltip"
-                                    class={`${infoPopoverPanel()} ${index === RELEVANCE_REASONS.length - 1 ? "right-0 left-auto" : ""}`}
-                                  >
-                                    {reason.hint}
-                                  </span>
-                                </span>
+                                  {reason.hint}
+                                </InfoPopover>
                               )}
                             </span>
                             <span
@@ -613,7 +573,7 @@ const {
                 title="sidebarNorm.title"
                 summary="sidebarNorm.summary"
                 fullText="sidebarNorm.fullText"
-                url="normUrl(sidebarNorm)"
+                url="sidebarNorm.url"
                 bordered
               />
             </template>
@@ -721,7 +681,7 @@ const {
                         title="normById(normId).title"
                         summary="normById(normId).summary"
                         fullText="normById(normId).fullText"
-                        url="normUrl(normById(normId))"
+                        url="normById(normId)?.url"
                         onTitleClick="openNorm(normId)"
                         bordered
                       />
@@ -837,13 +797,6 @@ const {
   type SidebarMode = "norm" | "evidence" | "term" | null;
 
   const LEVEL_BADGE_BASE = "inline-flex items-center";
-  const LEVEL_BADGE_COLORS: Record<HierarchyLevel, string> = {
-    grundgesetz: "bg-cosmic-blue-base text-white",
-    eu: "bg-indigo-600 text-white",
-    bundesgesetz: "bg-lavender-base text-cosmic-blue-base",
-    bundesverordnung: "bg-lavender-200 text-cosmic-blue-base",
-    landesrecht: "bg-yellow-200 text-yellow-900",
-  };
 
   document.addEventListener("alpine:init", () => {
     Alpine.data("rechtErkunden", () => ({
@@ -1007,12 +960,6 @@ const {
         return NORMS.find((norm) => norm.id === id) ?? null;
       },
 
-      normUrl(norm: Norm | null) {
-        if (!norm) return "";
-        const section = norm.id.replace("n-sgb2-", "");
-        return `https://www.gesetze-im-internet.de/sgb_2/__${section}.html`;
-      },
-
       levelLabel(level: HierarchyLevel) {
         return (
           HIERARCHY_LEVELS.find((entry) => entry.id === level)?.label ?? level
@@ -1020,14 +967,10 @@ const {
       },
 
       levelBadgeClass(level: HierarchyLevel) {
-        return `${LEVEL_BADGE_BASE} ${LEVEL_BADGE_COLORS[level] ?? ""}`;
-      },
-
-      reasonLabel(reason: RelevanceReason) {
-        return (
-          RELEVANCE_REASONS.find((entry) => entry.id === reason)?.label ??
-          reason
-        );
+        const badgeClass =
+          HIERARCHY_LEVELS.find((entry) => entry.id === level)?.badgeClass ??
+          "";
+        return `${LEVEL_BADGE_BASE} ${badgeClass}`;
       },
 
       reasonFullLabel(reason: RelevanceReason) {

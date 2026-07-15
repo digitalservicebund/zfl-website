@@ -6,6 +6,7 @@ import FeatureItem from "@/components/FeatureItem.astro";
 import FeatureSet from "@/components/FeatureSet.astro";
 import Hero from "@/components/Hero.astro";
 import HintSidebarWrapper from "@/components/HintSidebarWrapper.astro";
+import InfoPopover from "@/components/InfoPopover.astro";
 import KernBadge from "@/components/KernBadge.astro";
 import KernCard from "@/components/KernCard.astro";
 import MediaText from "@/components/MediaText.astro";
@@ -160,6 +161,21 @@ export const frontmatter = {
             angezeigt.
           </p>
         </InfoPanel>
+      </div>
+    </section>
+
+    <!-- ─── InfoPopover ──────────────────────────────────────────────── -->
+    <section class="space-y-48">
+      <h2>InfoPopover</h2>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">Standard</p>
+        <p class="flex items-center gap-4">
+          Erläuterungsbedürftiger Inhalt
+          <InfoPopover label="Erläuterung anzeigen">
+            Ein kurzer ergänzender Hinweis zum vorangehenden Inhalt.
+          </InfoPopover>
+        </p>
       </div>
     </section>
 
