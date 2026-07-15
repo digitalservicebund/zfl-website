@@ -1,13 +1,31 @@
 <script lang="ts">
+  import { setContext } from "svelte";
   import { tv } from "tailwind-variants";
   import Bubble from "./_Bubble.svelte";
   import Cluster from "./_Cluster.svelte";
+  import { BUBBLE_HIGHLIGHT_CONTEXT_NAME } from "./_bubbleHighlight";
 
   let {
     orientation = "vertical",
+    highlighted = $bindable([]),
   }: {
     orientation?: "vertical" | "horizontal";
+    /**
+     * Titles of the bubbles to highlight. When empty, all bubbles show
+     * their normal color; otherwise, every bubble not listed here is
+     * grayscale-filtered. Bindable so callers can control it externally.
+     */
+    highlighted?: string[];
   } = $props();
+
+  // Exposed via context (rather than threaded through every `<Bubble>`
+  // usage) so any descendant Bubble can reactively read the current
+  // highlight list without every call site needing a `highlighted` prop.
+  setContext(BUBBLE_HIGHLIGHT_CONTEXT_NAME, {
+    get highlighted() {
+      return highlighted;
+    },
+  });
 
   const container = tv({
     base: "relative flex",

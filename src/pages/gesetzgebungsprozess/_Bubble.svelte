@@ -1,6 +1,11 @@
 <script lang="ts">
+  import { getContext } from "svelte";
   import type { Snippet } from "svelte";
   import { slide } from "svelte/transition";
+  import {
+    BUBBLE_HIGHLIGHT_CONTEXT_NAME,
+    type BubbleHighlightContext,
+  } from "./_bubbleHighlight";
 
   type Size = "sm" | "md" | "lg" | "xl";
 
@@ -30,6 +35,18 @@
     children?: Snippet;
   } = $props();
 
+  // Falls back to an always-empty list when no ancestor provides the
+  // context (e.g. when a Bubble is rendered standalone, such as in the
+  // kitchen sink page), so bubbles are never unexpectedly grayed out.
+  const highlightContext = getContext<BubbleHighlightContext | undefined>(
+    BUBBLE_HIGHLIGHT_CONTEXT_NAME,
+  );
+
+  const dimmed = $derived(
+    (highlightContext?.highlighted.length ?? 0) > 0 &&
+      !highlightContext?.highlighted.includes(title),
+  );
+
   let expanded = $state(false);
 
   function toggle() {
@@ -40,8 +57,8 @@
 <div class="relative inline-flex flex-col items-center">
   <button
     type="button"
-    class="flex items-center justify-center rounded-full transition-transform duration-200 ease-out hover:scale-105 focus-visible:scale-105 focus-visible:outline-2 focus-visible:outline-cosmic-blue-base"
-    style={`background-color: ${color ?? "var(--bubble-color)"}; width: ${sizeMap[size]}; height: ${sizeMap[size]};`}
+    class="flex items-center justify-center rounded-full transition-[transform,filter] duration-200 ease-out hover:scale-105 focus-visible:scale-105 focus-visible:outline-2 focus-visible:outline-cosmic-blue-base"
+    style={`background-color: ${color ?? "var(--bubble-color)"}; width: ${sizeMap[size]}; height: ${sizeMap[size]}; filter: ${dimmed ? "grayscale(1)" : "none"};`}
     aria-expanded={expanded}
     onclick={toggle}
   >

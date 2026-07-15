@@ -6,6 +6,7 @@
 
   let orientation = $state<"vertical" | "horizontal">("vertical");
   let clusterOptions = $state<{ id: string; label: string }[]>([]);
+  let highlighted = $state<string[]>([]);
 
   function toggleOrientation() {
     orientation = orientation === "vertical" ? "horizontal" : "vertical";
@@ -40,6 +41,44 @@
     // the previous scroll position.
     location.hash = id;
   }
+
+  // Bubbles considered part of the early phase of the process (the
+  // "Recherche" and "Referentenentwurf" clusters), used to drive the
+  // highlighted state.
+  const fruehphaseBubbles = [
+    "Arbeitsgruppenbildung",
+    "Workshops mit Ländern und Kommunen",
+    "Federführung",
+    "Gesetzesumfeld",
+    "Vorschläge von Verbänden",
+    "Erarbeiten von Eckpunkten",
+    "Gutachten und Sachverständigenkommissionen",
+    "Materialrecherche",
+    "Ziel- und Wirkungsdefinition",
+    "Vorarbeit",
+    "Frühzeitige Beteiligung",
+    "Austausch",
+    "Vorblatt",
+    "Rohentwurf",
+    "Gesetzesfolgen werden besprochen",
+  ];
+  const dasIstNeuBubbles = [
+    "Frühzeitige Beteiligung",
+    "Ziel- und Wirkungsdefinition",
+    "Austausch",
+  ];
+
+  function onFilterChange(event: Event) {
+    const value = (event.currentTarget as HTMLSelectElement).value;
+
+    if (value === "fruehphase") {
+      highlighted = fruehphaseBubbles;
+    } else if (value === "das-ist-neu") {
+      highlighted = dasIstNeuBubbles;
+    } else {
+      highlighted = [];
+    }
+  }
 </script>
 
 <div class="flex flex-col gap-80">
@@ -54,6 +93,17 @@
         {#each clusterOptions as option (option.id)}
           <option value={option.id}>{option.label}</option>
         {/each}
+      </select>
+    </label>
+    <label class="flex w-fit items-center gap-8">
+      <span>Filter</span>
+      <select
+        class="rounded-md border border-lavender-400 bg-white px-8 py-4"
+        onchange={onFilterChange}
+      >
+        <option value="alle">Alle</option>
+        <option value="fruehphase">Frühphase</option>
+        <option value="das-ist-neu">Das ist neu</option>
       </select>
     </label>
     <label class="flex w-fit cursor-pointer items-center gap-8">
@@ -77,7 +127,7 @@
   </div>
   <FlowWithMinimap {orientation} minimapSize={100} {contentId}>
     {#snippet children()}
-      <RegelungsprozessFlow {orientation} />
+      <RegelungsprozessFlow {orientation} bind:highlighted />
     {/snippet}
   </FlowWithMinimap>
 </div>
