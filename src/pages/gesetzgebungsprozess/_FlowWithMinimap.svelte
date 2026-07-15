@@ -17,6 +17,13 @@
 
   const isVertical = $derived(orientation === "vertical");
 
+  // Removes `id` attributes from the minimap clone so it never collides
+  // with (and steals native `#hash` navigation from) the real, matching
+  // IDs rendered in the actual content further below.
+  function stripIds(node: HTMLElement) {
+    node.querySelectorAll("[id]").forEach((el) => el.removeAttribute("id"));
+  }
+
   let mainEl: HTMLDivElement | undefined = $state();
   // The content is rendered a second time inside a non-clipping wrapper
   // purely so we can measure its natural, unscrolled size (bind:clientWidth/
@@ -193,7 +200,17 @@
         aria-hidden="true"
         inert
       >
-        {@render children()}
+        <!--
+          This is a visual-only clone of the content used to render the
+          minimap. Rendering the snippet twice would duplicate any element
+          IDs used for in-page anchors (e.g. cluster heading IDs), which
+          breaks native `#hash` navigation since the browser targets the
+          first (this hidden, inert) match in DOM order. Strip all IDs from
+          the clone so only the real content below remains addressable.
+        -->
+        <div use:stripIds>
+          {@render children()}
+        </div>
       </div>
 
       <!-- Scroll/viewport indicator (draggable) -->

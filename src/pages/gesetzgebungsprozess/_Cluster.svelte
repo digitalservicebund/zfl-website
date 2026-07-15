@@ -95,7 +95,10 @@
         style={anchorName ? `anchor-name: ${anchorName};` : undefined}
         aria-hidden="true"
       ></div>
-      <h2 class="kern-heading-small bg-black text-white px-4">
+      <h2
+        id={title}
+        class="scroll-mt-40 kern-heading-small bg-black text-white px-4"
+      >
         {title}
       </h2>
     </div>
