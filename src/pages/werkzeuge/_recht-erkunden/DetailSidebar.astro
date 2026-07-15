@@ -76,10 +76,6 @@ import NormDisplay from "./NormDisplay.astro";
               :key="index"
             >
               <li>
-                <span
-                  class="mb-4 inline-block rounded-full px-10 py-2 text-xs font-semibold"
-                  x-bind:class="levelBadgeClass(entry.level)"
-                  x-text="levelLabel(entry.level)"></span>
                 <NormDisplay
                   label="entry.ref.label"
                   fullText="entry.ref.fullText"

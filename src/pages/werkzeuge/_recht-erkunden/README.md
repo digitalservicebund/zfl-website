@@ -56,11 +56,14 @@ Zustand zurück und schließt die Detail-Sidebar.
 
 ### Schritt 2 — Angrenzendes Recht erkunden
 
-1. **Begriffe im Fokus (Strip).** Eine Reihe von Begriffs-Karten für die
+1. **Begriffe im Fokus (Strip).** Ein gleichmäßiges Karten-Raster für die
    gemeinsamen Begriffe, die aus den aktiven Normen abgeleitet sind (Abwählen
-   einer Norm entfernt ihre Begriffe). Jede Karte trägt einen Begriffs-Chip
-   (öffnet die Sidebar im Begriff-Modus) sowie darunter die verbundenen
-   Gesetze als Chips mit Hierarchie-Badge.
+   einer Norm entfernt ihre Begriffe). Jede Karte ist vollständig anklickbar
+   (öffnet die Sidebar im Begriff-Modus) und fasst den Begriff als
+   Kurzüberblick zusammen: Begriffsname, gekürzte Definition, definierende
+   Norm („Definiert in …") sowie die Anzahl und die verbundenen Gesetze als
+   Chips mit Hierarchie-Badge. Die Sidebar liefert dann die vollständige
+   Definition, die definierende Norm im Volltext und alle nutzenden Normen.
 2. **Relevantes Recht explorieren (Matrix).**
    - **Zeilen = Normenhierarchie** (fünf Ebenen, siehe unten)
    - **Spalten = Relevanzgrund** (siehe unten)
@@ -76,7 +79,7 @@ nach Auslöser:
 
 - **Norm-Modus** (aus Schritt 1): Referenz, Titel, Volltext der SGB-II-Norm.
 - **Begriff-Modus** (aus dem Strip): Begriff, Definition, definierende Norm und
-  alle nutzenden Normen/Gesetze mit Hierarchie-Badge.
+  alle nutzenden Normen/Gesetze.
 - **Evidenz-Modus** (aus einer Matrix-Zelle): Gesetzestitel + Hierarchie-Badge,
   Relevanzgrund, betroffene SGB-II-Normen (je anklickbar → Norm-Modus) und die
   Begründung pro Verbindung. Bei _Gemeinsame Nennung_ zusätzlich die
@@ -152,7 +155,7 @@ Die Daten werden typisiert über den Store importiert (kein `define:vars`-/
 ## Bekannte Abweichungen & Vereinfachungen
 
 - **Begriff-Modus** gruppiert die Nutzungen aktuell nicht nach Hierarchie
-  (flache Liste mit Badge je Eintrag).
+  (flache Liste).
 - Keine Unit-/E2E-Tests für den Prototyp; Prüfung über `pnpm typecheck`,
   `pnpm lint` und manuelle Sichtung im Dev-Server.
 

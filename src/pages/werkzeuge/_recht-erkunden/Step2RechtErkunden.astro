@@ -1,12 +1,14 @@
 ---
 // Renders inside the rechtErkunden Alpine scope (see ./store.ts).
+import { Icon } from "astro-icon/components";
 import { HIERARCHY_LEVELS, RELEVANCE_REASONS } from "./data";
 import InfoPopover from "./InfoPopover.astro";
 import { styles } from "./styles";
 
 const {
   chip,
-  termChip,
+  termCard,
+  levelBadge,
   countBadge,
   matrixHeaderCell,
   matrixRowLabel,
@@ -41,31 +43,50 @@ const {
           - unabhängig davon, welches Gesetz sie definiert.
         </p>
       </div>
-      <div class="flex flex-wrap gap-12">
+      <div class="grid gap-12 sm:grid-cols-2 xl:grid-cols-3">
         <template x-for="term in activeTerms" :key="term.id">
-          <div
-            class="border-lavender-400 flex flex-col gap-8 rounded-sm border bg-white p-12"
+          <button
+            type="button"
+            class={termCard()}
+            :class={`sidebarMode === 'term' && sidebarTermId === term.id ? '${selectedItem()}' : 'border-lavender-400 bg-white hover:border-cosmic-blue-400'`}
+            @click="openTerm(term.id)"
           >
-            <button
-              type="button"
-              class={termChip()}
-              :class={`sidebarMode === 'term' && sidebarTermId === term.id ? '${selectedItem()}' : ''`}
-              @click="openTerm(term.id)"
-            >
-              <span x-text="term.term"></span>
-            </button>
-            <div class="flex flex-wrap gap-6">
-              <template
-                x-for="law in termAdjacentLaws(term)"
-                :key="`${term.id}-${law.lawLabel}-${law.level}`"
-              >
-                <span
-                  class="inline-flex items-center rounded-full px-8 py-2 text-xs font-semibold"
-                  x-bind:class="levelBadgeClass(law.level)"
-                  x-text="law.lawLabel"></span>
-              </template>
+            <div class="flex w-full items-start justify-between gap-8">
+              <span class="text-base font-semibold" x-text="term.term"></span>
+              <Icon
+                name="ic:round-chevron-right"
+                class="text-icon-muted group-hover:text-cosmic-blue-base h-20 w-20 shrink-0 transition"
+              />
             </div>
-          </div>
+            <p
+              class="text-icon-muted line-clamp-2 py-0 text-xs leading-snug"
+              x-text="term.definition"
+            >
+            </p>
+            <p class="text-icon-muted py-0 text-xs">
+              Definiert in <span
+                class="text-cosmic-blue-base font-semibold"
+                x-text="term.definedIn.label"></span>
+            </p>
+            <div class="mt-auto w-full">
+              <p class="kern-label text-icon-muted mb-4">
+                <span
+                  x-text="termLawCount(term) + (termLawCount(term) === 1 ? ' verbundenes Gesetz' : ' verbundene Gesetze')"
+                ></span>
+              </p>
+              <div class="flex flex-wrap gap-6">
+                <template
+                  x-for="law in termAdjacentLaws(term)"
+                  :key="`${term.id}-${law.lawLabel}-${law.level}`"
+                >
+                  <span
+                    class={levelBadge()}
+                    x-bind:class="levelBadgeClass(law.level)"
+                    x-text="law.lawLabel"></span>
+                </template>
+              </div>
+            </div>
+          </button>
         </template>
       </div>
     </div>

@@ -11,8 +11,10 @@ export const styles = tv({
     countBadge:
       "bg-lavender-base text-cosmic-blue-base inline-flex w-fit items-center gap-6 rounded-full px-10 py-4 text-xs font-semibold",
     chip: "border-lavender-400 bg-lavender-base text-cosmic-blue-base inline-flex items-center gap-6 rounded-full border px-10 py-4 text-left text-sm transition",
-    termChip:
-      "border-lavender-400 text-cosmic-blue-base inline-flex items-center gap-8 rounded-full border bg-white px-12 py-6 text-left text-sm transition",
+    termCard:
+      "group flex h-full w-full cursor-pointer flex-col items-start gap-8 rounded-sm border p-16 text-left transition",
+    levelBadge:
+      "inline-flex items-center rounded-full px-8 py-2 text-xs font-semibold",
     selectedItem: "border-cosmic-blue-base bg-lavender-100",
     matrixHeaderCell:
       "border-lavender-400 bg-lavender-base border-b-2 p-12 text-left align-top",
