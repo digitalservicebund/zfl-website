@@ -56,9 +56,11 @@ Zustand zurück und schließt die Detail-Sidebar.
 
 ### Schritt 2 — Angrenzendes Recht erkunden
 
-1. **Begriffe im Fokus (Strip).** Eine Chip-Reihe der gemeinsamen Begriffe, die
-   aus den aktiven Normen abgeleitet sind (Abwählen einer Norm entfernt ihre
-   Begriffe).
+1. **Begriffe im Fokus (Strip).** Eine Reihe von Begriffs-Karten für die
+   gemeinsamen Begriffe, die aus den aktiven Normen abgeleitet sind (Abwählen
+   einer Norm entfernt ihre Begriffe). Jede Karte trägt einen Begriffs-Chip
+   (öffnet die Sidebar im Begriff-Modus) sowie darunter die verbundenen
+   Gesetze als Chips mit Hierarchie-Badge.
 2. **Relevantes Recht explorieren (Matrix).**
    - **Zeilen = Normenhierarchie** (fünf Ebenen, siehe unten)
    - **Spalten = Relevanzgrund** (siehe unten)
@@ -96,9 +98,12 @@ nach Auslöser:
 | Grund                          | Woher                             | Basis                     |
 | ------------------------------ | --------------------------------- | ------------------------- |
 | **Verweisung**                 | Norm zitiert / wird zitiert       | explizite Zitate          |
-| **Begriffe**                   | geteilter definierter Begriff     | explizite Zitate          |
-| **Thematische Nähe**           | überlappendes Themenfeld          | **NLP** (Textähnlichkeit) |
 | **Rechtsprechung & Literatur** | Ko-Zitation in Urteilen/Literatur | explizite Zitate          |
+| **Thematische Nähe**           | überlappendes Themenfeld          | **NLP** (Textähnlichkeit) |
+
+Geteilte definierte Begriffe sind kein eigener Relevanzgrund in der Matrix,
+sondern werden ausschließlich im Begriffe-Strip (Schritt 2.1) samt ihrer
+verbundenen Gesetze dargestellt.
 
 Nur **Thematische Nähe** beruht auf NLP-Ähnlichkeit und trägt ein
 Ähnlichkeitssignal (Score + Keywords). Alle anderen Gründe beruhen auf
@@ -119,7 +124,7 @@ vs. zitationsabgeleitete Relevanz auftauchen würde.
 - **1** vollständiges Gesetz (SGB II); 5 weitere nur als Suchtreffer ohne Daten.
 - **5** Rechtsgebiete (Lebensunterhalt, Eingliederung, KdU, Sanktionen,
   Verfahren/Datenschutz).
-- **~17** Verbindungen zu angrenzenden Gesetzen über die vier Relevanzgründe.
+- **~14** Verbindungen zu angrenzenden Gesetzen über die drei Matrix-Relevanzgründe.
 - **5** geteilte Begriffe (Bedarfsgemeinschaft, Erwerbsfähigkeit, Regelbedarf,
   Angemessenheit der Unterkunft, Mitwirkungspflicht) mit Definition,
   definierender Norm und Nutzung über SGB-II- und angrenzende Normen.
@@ -146,11 +151,6 @@ Die Daten werden typisiert über den Store importiert (kein `define:vars`-/
 
 ## Bekannte Abweichungen & Vereinfachungen
 
-- **Begriffe-Spalte in der Matrix.** Begriffsbasierte Verbindungen existieren
-  aktuell doppelt: als `reason: "begriff"`-Relationen (Matrix-Spalte) und als
-  `TERMS`-Einträge (Strip) — mit Drift-Risiko, da `TERMS` bereits mehr Details
-  enthalten. Zielbild: Spalte entfernen, Begriffe-Strip stattdessen um die
-  verbundenen Gesetzes-Chips (mit Hierarchie-Badge) erweitern.
 - **Begriff-Modus** gruppiert die Nutzungen aktuell nicht nach Hierarchie
   (flache Liste mit Badge je Eintrag).
 - Keine Unit-/E2E-Tests für den Prototyp; Prüfung über `pnpm typecheck`,

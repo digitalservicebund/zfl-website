@@ -8,8 +8,9 @@
  * the connections between them (evidence, quotes, scores, keywords) are
  * invented for demonstration purposes and are NOT legally verified.
  *
- * In a real pipeline, "verweisung", "begriff" and the citation-based parts of
- * "gemeinsame_nennung" would be derived via citation/reference extraction,
+ * In a real pipeline, "verweisung" and the citation-based parts of
+ * "gemeinsame_nennung" (plus the term-to-law links backing the "Begriffe im
+ * Fokus" strip) would be derived via citation/reference extraction,
  * while "thematische_naehe" (and the Rechtsgebiete/norm clustering in step 2)
  * would be derived via NLP similarity methods (e.g. word2vec/embedding
  * similarity, TF-IDF, keyword extraction). Designing that pipeline is out of
@@ -26,7 +27,6 @@ export type HierarchyLevel =
 
 export type RelevanceReason =
   | "verweisung"
-  | "begriff"
   | "thematische_naehe"
   | "gemeinsame_nennung"; // in Rechtsprechung und Literatur
 
@@ -140,19 +140,15 @@ export const RELEVANCE_REASONS: {
     label: "Verweisung",
   },
   {
-    id: "begriff",
-    label: "Begriffe",
+    id: "gemeinsame_nennung",
+    label: "Rechtsprechung & Literatur",
+    fullLabel: "Gemeinsame Nennung in Rechtsprechung und Literatur",
+    hint: "Basiert auf expliziten Normzitaten in Urteilen und Fachliteratur.",
   },
   {
     id: "thematische_naehe",
     label: "Thematische Nähe",
     hint: "Ermittelt über Textähnlichkeit (z. B. Wortvektoren, TF-IDF), nicht über explizite Verweise.",
-  },
-  {
-    id: "gemeinsame_nennung",
-    label: "Rechtsprechung & Literatur",
-    fullLabel: "Gemeinsame Nennung in Rechtsprechung und Literatur",
-    hint: "Basiert auf expliziten Normzitaten in Urteilen und Fachliteratur.",
   },
 ];
 
@@ -720,27 +716,6 @@ export const RELATIONS: Relation[] = [
     ],
   },
   {
-    id: "rel-sgb1",
-    lawId: "sgb1",
-    lawLabel: "SGB I",
-    lawName: "Sozialgesetzbuch Erstes Buch – Allgemeiner Teil",
-    level: "bundesgesetz",
-    reason: "begriff",
-    normIds: ["n-sgb2-31"],
-    evidence: [
-      {
-        quote:
-          "Die in § 31 SGB II sanktionierte Pflichtverletzung setzt eine Mitwirkungspflicht voraus, die in §§ 60 ff. SGB I allgemein definiert wird.",
-        adjacentNorm: {
-          label: "§ 60 SGB I",
-          url: "https://www.gesetze-im-internet.de/sgb_1/__60.html",
-          fullText:
-            "Wer Sozialleistungen beantragt oder erhält, hat alle Tatsachen anzugeben, die für die Leistung erheblich sind, und auf Verlangen des zuständigen Leistungsträgers der Erteilung der erforderlichen Auskünfte durch Dritte zuzustimmen.",
-        },
-      },
-    ],
-  },
-  {
     id: "rel-sgb3-verweis",
     lawId: "sgb3",
     lawLabel: "SGB III",
@@ -837,27 +812,6 @@ export const RELATIONS: Relation[] = [
     ],
   },
   {
-    id: "rel-sgb12-begriff",
-    lawId: "sgb12",
-    lawLabel: "SGB XII",
-    lawName: "Sozialgesetzbuch Zwölftes Buch – Sozialhilfe",
-    level: "bundesgesetz",
-    reason: "begriff",
-    normIds: ["n-sgb2-7", "n-sgb2-9"],
-    evidence: [
-      {
-        quote:
-          "Der Begriff der Bedarfsgemeinschaft aus § 7 Abs. 3 SGB II hat im SGB XII eine strukturell vergleichbare Entsprechung in der Einstandsgemeinschaft von Ehegatten und Lebenspartnern.",
-        adjacentNorm: {
-          label: "§ 19, § 20 SGB XII",
-          url: "https://www.gesetze-im-internet.de/sgb_12/__20.html",
-          fullText:
-            "Leben Ehegatten oder Lebenspartner nicht getrennt, ist bei der Ermittlung des Bedarfs eines Ehegatten oder Lebenspartners auch das Einkommen und Vermögen des anderen Ehegatten oder Lebenspartners zu berücksichtigen.",
-        },
-      },
-    ],
-  },
-  {
     id: "rel-sgb12-literatur",
     lawId: "sgb12",
     lawLabel: "SGB XII",
@@ -881,27 +835,6 @@ export const RELATIONS: Relation[] = [
           url: "#",
           fullText:
             "Die Kommentierung stellt die Voraussetzungen und Grenzen der Leistungsminderung nach § 31a SGB II den vergleichbaren Kürzungsregelungen des SGB XII gegenüber und verweist auf die einschränkende Wirkung der Rechtsprechung des Bundesverfassungsgerichts.",
-        },
-      },
-    ],
-  },
-  {
-    id: "rel-sgb6",
-    lawId: "sgb6",
-    lawLabel: "SGB VI",
-    lawName: "Sozialgesetzbuch Sechstes Buch – Gesetzliche Rentenversicherung",
-    level: "bundesgesetz",
-    reason: "begriff",
-    normIds: ["n-sgb2-7", "n-sgb2-8"],
-    evidence: [
-      {
-        quote:
-          "Die Erwerbsfähigkeit nach § 8 SGB II grenzt sich von der Erwerbsminderung nach § 43 SGB VI ab und ist maßgeblich für die Zuständigkeitsabgrenzung zwischen Jobcenter und Rentenversicherung.",
-        adjacentNorm: {
-          label: "§ 43 SGB VI",
-          url: "https://www.gesetze-im-internet.de/sgb_6/__43.html",
-          fullText:
-            "Anspruch auf Rente wegen teilweiser Erwerbsminderung haben Versicherte, die teilweise erwerbsgemindert sind, in den letzten fünf Jahren vor Eintritt der Erwerbsminderung drei Jahre Pflichtbeiträge haben und die Wartezeit erfüllt haben.",
         },
       },
     ],

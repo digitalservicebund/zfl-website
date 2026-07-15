@@ -121,8 +121,19 @@ export const rechtErkunden = () => ({
   },
 
   termLawCount(term: Term) {
-    return new Set(term.usedIn.adjacentNorms.map((entry) => entry.lawLabel))
-      .size;
+    return this.termAdjacentLaws(term).length;
+  },
+
+  /** Adjacent laws for a term's chips, deduplicated by law + hierarchy level. */
+  termAdjacentLaws(term: Term): { lawLabel: string; level: HierarchyLevel }[] {
+    const seen = new Map<string, { lawLabel: string; level: HierarchyLevel }>();
+    for (const entry of term.usedIn.adjacentNorms) {
+      seen.set(`${entry.lawLabel}__${entry.level}`, {
+        lawLabel: entry.lawLabel,
+        level: entry.level,
+      });
+    }
+    return [...seen.values()];
   },
 
   openNorm(id: string) {

@@ -40,20 +40,31 @@ const {
           - unabhängig davon, welches Gesetz sie definiert.
         </p>
       </div>
-      <div class="flex flex-wrap gap-8">
+      <div class="flex flex-wrap gap-12">
         <template x-for="term in activeTerms" :key="term.id">
-          <button
-            type="button"
-            class={termChip()}
-            :class="sidebarMode === 'term' && sidebarTermId === term.id ? 'ring-2 ring-cosmic-blue-base' : ''"
-            @click="openTerm(term.id)"
+          <div
+            class="border-lavender-400 flex flex-col gap-8 rounded-sm border bg-white p-12"
           >
-            <span x-text="term.term"></span>
-            <span
-              class="text-icon-muted text-xs"
-              x-text="`${termLawCount(term)} ${termLawCount(term) === 1 ? 'Gesetz' : 'Gesetze'}`"
-            ></span>
-          </button>
+            <button
+              type="button"
+              class={termChip()}
+              :class="sidebarMode === 'term' && sidebarTermId === term.id ? 'ring-2 ring-cosmic-blue-base' : ''"
+              @click="openTerm(term.id)"
+            >
+              <span x-text="term.term"></span>
+            </button>
+            <div class="flex flex-wrap gap-6">
+              <template
+                x-for="law in termAdjacentLaws(term)"
+                :key="`${term.id}-${law.lawLabel}-${law.level}`"
+              >
+                <span
+                  class="inline-flex items-center rounded-full px-8 py-2 text-xs font-semibold"
+                  x-bind:class="levelBadgeClass(law.level)"
+                  x-text="law.lawLabel"></span>
+              </template>
+            </div>
+          </div>
         </template>
       </div>
     </div>
