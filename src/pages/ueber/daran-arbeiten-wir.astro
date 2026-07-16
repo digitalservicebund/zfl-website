@@ -1,11 +1,9 @@
 ---
 import Badge from "@/components/Badge.astro";
 import Hero from "@/components/Hero.astro";
-import KernBadge from "@/components/KernBadge.astro";
 import KernCard from "@/components/KernCard.astro";
 import TimelineList from "@/components/TimelineList.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
-import { ueber_neueFruephase } from "@/config/routes";
 import {
   begleitungen,
   home,
@@ -14,7 +12,9 @@ import {
   ueber,
   ueber_aktuelleMeldungen,
   ueber_daranArbeitenWir,
+  ueber_neueFruephase,
   werkzeuge,
+  werkzeuge_praxistauglichkeit,
 } from "@/config/routes";
 import Layout from "@/layouts/Layout.astro";
 
@@ -30,79 +30,88 @@ export const frontmatter = {
     <Hero level="sub">
       <h1>{frontmatter.title}</h1>
       <div slot="subtitle">
-        Auf dieser Seite finden Sie aktuelle Arbeitspakete sowie Neuerungen auf
-        der Webseite.
+        Hier halten wir Sie über aktuelle Arbeitspakete und neue Inhalte auf dem
+        Laufenden.
       </div>
     </Hero>
 
     <section class="breakout breakout-grid">
-      <h2>Aktuelle Arbeitspakete</h2>
+      <h2>Aktuelle Arbeitspakete im dritten Quartal 2026</h2>
       <p>
-        Das Angebot des Zentrum für Legistik entwickelt sich stets weiter.
-        Aktuell erarbeiten wir fachliche Anforderungen, prüfen Lösungswege und
-        stellen die Inhalte dann zur Nutzung bereit. Ihr Feedback hilft uns, die
-        Services weiter zu verbessern.
+        Das Angebot des Zentrum für Legistik, zu dem auch der Digitalcheck
+        gehört, entwickelt sich kontinuierlich weiter. Wir fokussieren uns
+        gerade auf diese Schwerpunktthemen:
       </p>
 
       <div class="mt-md gap-lg grid grid-cols-1 md:grid-cols-2">
-        <KernCard title="Strukturierung der Frühphase für Regelungsvorhaben">
-          <p>
-            Die Phase vor dem eigentlichen Gesetzestext ist die, in der die
-            Weichenstellungen für künftige Regeln entschieden werden. Daher
-            testen wir, wie es gelingen kann, die Perspektiven von Bürgerinnen
-            und Bürgern, Unternehmen und der Verwaltung frühzeitig in den Fokus
-            der Erarbeitung zu rücken.
+        <KernCard title="Frühphase erfahrbar machen">
+          <p class="kern-body--muted">
+            Die Frühphase eines gesetzlichen Vorhabens entscheidet oft darüber,
+            wie gut eine Regelung später funktioniert.
           </p>
-          <KernBadge slot="footer" variant="info">In Konzeption</KernBadge>
+          <p class="kern-body--muted">
+            Gemeinsam mit Legistinnen und Legisten entwickeln wir ein neues
+            {" "}<a href={ueber_neueFruephase.path} class="font-bold"
+              >Konzept der Frühphase</a
+            >. Dabei starten wir mit einer prozessualen Übersicht, die dabei
+            hilft, eine Regelung anhand einer klaren Struktur inhaltlich zu
+            durchdenken.
+          </p>
         </KernCard>
 
-        <KernCard title="Konsolidierung der Instrumente">
-          <p>
-            Unterschiedliche Checks und Arbeitshilfen (wie z.&nbsp;B. der
-            <a href="https://digitalcheck.bund.de/" target="_blank"
+        <KernCard title="Digitalcheck weiterentwickeln">
+          <p class="kern-body--muted">
+            Der <a href="https://digitalcheck.bund.de/" class="font-bold"
               >Digitalcheck</a
-            >,
-            <a href="https://www.gleichstellungs-check.de/" target="_blank"
-              >Gleichstellungscheck</a
-            >
-            oder
-            <a href="https://jugend-check.de/" target="_blank">Jugendcheck</a>)
-            zielen in Teilen auf die gleiche Wirkung ab: Praxis- und
-            digitaltaugliche Regelungen und Bürokratierückbau. Bei der
-            Zusammenführung diverser Ansätze verfolgen wir das Ziel, Ihre
-            Regelungsarbeit einfacher und effizienter zu gestalten.
+            > wird gemäß der föderalen Modernisierungsagenda auch für die Länder ein
+            verlässliches, gut auffindbares Angebot. <strong
+              >Kooperationen zwischen Bund und Ländern</strong
+            > werden gestärkt.
           </p>
-          <KernBadge slot="footer" variant="info">In Konzeption</KernBadge>
+          <p class="kern-body--muted">
+            Methoden und Beispiele ziehen Schritt für Schritt auf das Zentrum
+            für Legistik um, Inhalte werden in Bezug auf Nutzen und Einfachheit
+            verbessert. Landes-Legistinnen und -Legisten können die Inhalte
+            nutzen. Dabei setzen wir auch die <a
+              href="https://dachmarke.gov.de/"
+              class="font-bold">Dachmarke</a
+            > um, für die bessere Erkennbarkeit staatlicher Angebote für Bund, Ländern
+            und Kommunen.
+          </p>
         </KernCard>
 
         <KernCard
-          title="Erweiterung der Schulungsangebote"
-          href={schulungen.path}
+          title="Kompetenzrahmen für Legistinnen und Legisten entwickeln"
         >
-          <p>
-            In den umsetzungsorientierten Schulungen des Zentrum für Legistik
-            lernen Sie Methoden und Werkzeuge kennen, die Sie bei der
-            Erarbeitung von praxisnahen und bürokratiearmen Regelungen
-            unterstützen.
+          <p class="kern-body--muted">
+            Was ist Legistik, was macht wirkungsorientierte Gesetzgebungsarbeit
+            aus – und welche <strong>Kompetenzen</strong> braucht es dafür?
           </p>
-          <KernBadge slot="footer" variant="success"
-            >Bereits verfügbar</KernBadge
-          >
-        </KernCard>
-        <KernCard
-          title="Ausbau der Regelungsbegleitung"
-          href={begleitungen.path}
-        >
-          <p>
-            Wir unterstützen Sie dabei, Umsetzungsprozesse zu verstehen und
-            Anforderungen an praxisnahe und bürokratiearme Regelungen
-            umzusetzen. Wir erweitern das Angebot in Inhalt und Umfang.
+          <p class="kern-body--muted">
+            Gemeinsam mit Expertinnen und Experten erarbeiten wir einen
+            Kompetenzrahmen, der zeigt, welches Wissen und welche Fähigkeiten in
+            der Praxis zählen. Der Rahmen versteht sich als <strong
+              >Orientierung, nicht als starre Vorgabe</strong
+            >. Er wächst als lebendes Modell mit– auch als fachliche und
+            strukturelle Grundlage für das zukünftige Schulungscurriculum.
           </p>
-          <KernBadge slot="footer" variant="success"
-            >Bereits verfügbar</KernBadge
-          >
         </KernCard>
       </div>
+      <h2>Ergänzende Themen</h2>
+      <ul>
+        <li>
+          <strong>Konsolidierung von Instrumenten (Konzeption):</strong> Durch Zusammenführung
+          verschiedener Checks wird die Regelungsarbeit vereinfacht.
+        </li>
+        <li>
+          <a href={schulungen.path} class="font-bold">Schulungen:</a> Kontinuierliche
+          Erweiterung des Schulungsangebot – online und in Präsenzformaten
+        </li>
+        <li>
+          <a href={begleitungen.path} class="font-bold">Regelungsbegleitung:</a> Laufende
+          Unterstützung von Referaten bei ausgewählten Vorhaben
+        </li>
+      </ul>
     </section>
 
     <section class="bg-cosmic-blue-base breakout text-white">
@@ -128,6 +137,17 @@ export const frontmatter = {
     <section>
       <h2 class="mb-40">Neuerungen auf der Webseite</h2>
       <TimelineList>
+        <li>
+          <Badge look="gray">Juli 2026</Badge>
+          <ul>
+            <li>
+              Neue Seite ergänzt: Vorhaben praxistauglich gestalten
+              <a href={werkzeuge_praxistauglichkeit.path} class="block"
+                >Hier ansehen</a
+              >
+            </li>
+          </ul>
+        </li>
         <li>
           <Badge look="gray">Juni 2026</Badge>
           <ul>

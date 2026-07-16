@@ -1,0 +1,18 @@
+<details class="kern-accordion">
+  <summary class="kern-accordion__header">
+    <span class="kern-title">
+      <slot name="header" />
+    </span>
+  </summary>
+  <section class="kern-accordion__body accordion-body-full-width">
+    <slot name="body" />
+  </section>
+</details>
+
+<style>
+  :global(.accordion-body-full-width p),
+  :global(.accordion-body-full-width ul),
+  :global(.accordion-body-full-width ol) {
+    max-width: none;
+  }
+</style>

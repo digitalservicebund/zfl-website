@@ -1,0 +1,429 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import InfoPanel from "@/components/InfoPanel.astro";
+import KernCard from "@/components/KernCard.astro";
+import KernAccordion from "@/components/KernAccordion.astro";
+import { Image } from "astro:assets";
+import praxistauglichkeit from "@/images/praxistauglichkeit.png";
+import praxistauglichkeit_vortrag from "@/images/praxistauglichkeit_vortrag.jpg";
+import { getCollection } from "astro:content";
+import { Icon } from "astro-icon/components";
+import { ZFL_PHONE, ZFL_EMAIL } from "@/config/constants";
+
+const frontmatter = {
+  title: "Praxistauglichkeit",
+  navLabel: "Praxistauglichkeit",
+};
+
+const allTools = await getCollection("werkzeuge");
+
+const praxistauglichkeitTools = allTools.filter(
+  (tool) =>
+    tool.data.title === "Fokusgruppen" ||
+    tool.data.title === "Interviewleitfaden mit Akteuren",
+);
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero>
+      <h1>Vorhaben praxistauglich gestalten</h1>
+      <p>
+        Die <a
+          href="https://bmds.bund.de/fileadmin/BMDS/Dokumente/Modernisierungsagenda_barrierefrei.pdf"
+          target="_blank">Modernisierungsagenda des Bundes</a
+        > gibt vor, neue Regelungen von Anfang an praxistauglich und bürokratiearm
+        zu gestalten. Das Zentrum für Legistik unterstützt Sie dabei.
+      </p>
+    </Hero>
+    <section>
+      <div
+        class="relative space-y-24 lg:grid lg:h-482 lg:grid-cols-6 lg:items-center lg:overflow-hidden"
+      >
+        <InfoPanel
+          look="gray"
+          class="z-1 self-start lg:col-span-3 lg:w-600 lg:self-center"
+        >
+          <h2>Was ist Praxistauglichkeit?</h2>
+          <p>
+            Praxistauglichkeit lebt vom <b
+              >direkten Austausch mit der Umsetzung.</b
+            >
+            Gemeinsam werden mit ihnen Hürden und Lösungen identifiziert. So kann
+            eine Regelung von Beginn an effizient gestaltet und aufwandsarm umgesetzt
+            werden. Im Ergebnis wird damit <b>unnötige Bürokratie verhindert</b
+            >.
+          </p>
+          <p>
+            Praxistauglichkeit fokussiert die <b>frühe Phase</b> der Gesetzgebung,
+            d.h. den Erarbeitungszeitraum vor Erstellung des Regelungstextes.
+          </p>
+        </InfoPanel>
+        <Image
+          src={praxistauglichkeit}
+          alt="Drei Personen stehen an einem Poster einer Nutzendenreise und besprechen sich"
+          class="lg:absolute lg:right-1 lg:h-545 lg:w-727"
+        />
+      </div>
+      <h2>Wie setzen Sie Praxistauglichkeit um?</h2>
+      <p>
+        Praxistauglichkeit kann auf verschiedene Weise sichergestellt werden.
+        Diese Eigenschaften liegen Praxistauglichkeit zugrunde:
+      </p>
+      <ul class="list-unstyled mt-16 space-y-12">
+        <li class="max-w-a11y flex items-start gap-8">
+          <span
+            class="kern-icon kern-icon--check kern-icon--default checklist-icon"
+            aria-hidden="true"></span>
+          <div class="space-y-4">
+            <p>
+              <b>Beteiligungsrunde im Präsenzformat organisieren:</b>
+            </p>
+            <p>
+              Ermöglichen Sie direkten Austausch zwischen Akteuren, denn das ist
+              die Grundlage für Praxistauglichkeit. Anders als bei Befragungen
+              sprechen alle Beteiligten unmittelbar miteinander.
+              Wechselwirkungen werden somit sofort offensichtlich.
+            </p>
+          </div>
+        </li>
+        <li class="max-w-a11y flex items-start gap-8">
+          <span
+            class="kern-icon kern-icon--check kern-icon--default checklist-icon"
+            aria-hidden="true"></span>
+          <div class="space-y-4">
+            <p>
+              <b>Unternehmens- und Behördenmitarbeitende einladen:</b>
+            </p>
+            <p>
+              Laden Sie betroffene Akteure aus Unternehmen und aus dem Vollzug
+              zu Ihrem Format ein. Durch Berücksichtigung verschiedener
+              Perspektiven vermeiden Sie Silo-Denken.
+            </p>
+          </div>
+        </li>
+        <li class="max-w-a11y flex items-start gap-8">
+          <span
+            class="kern-icon kern-icon--check kern-icon--default checklist-icon"
+            aria-hidden="true"></span>
+          <div class="space-y-4">
+            <p>
+              <b
+                >Gemeinsam Probleme, Hürden, oder Verbesserungspotentiale
+                identifizieren:</b
+              >
+            </p>
+            <p>
+              Gehen Sie Schritt für Schritt durch die Visualisierung eines
+              Prozesses oder einer Regelung. Dadurch identifizieren Sie Hürden
+              und Potenziale. Die Erkenntnisse aus der Praxis und dem Alltag
+              unterstützen den Erkenntnisgewinn und fließen direkt in die
+              Regelung ein.
+            </p>
+          </div>
+        </li>
+      </ul>
+      <figure class="mt-80 space-y-24">
+        <Image
+          src={praxistauglichkeit_vortrag}
+          alt="Mehrere Teilnehmende sitzen in einem Raum und hören einem Vortragenden zu"
+          width={1216}
+          height={636}
+          layout="constrained"
+        />
+        <figcaption>
+          <p class="kern-subline kern-subline--small">
+            Praxistauglichkeit lebt vom direkten Austausch von Akteuren im
+            Präsenzformat
+          </p>
+        </figcaption>
+      </figure>
+    </section>
+    <section class="breakout bg-lavender-400">
+      <div class="space-y-16 pt-6 pb-2 lg:flex">
+        <h2 class="lg:w-336">Hilfreiche Tipps</h2>
+        <div>
+          <ul>
+            <li>
+              <b>Unterstützung organisieren:</b> Hilfreich sind Kooperationen mit
+              Verbänden, Kammern oder Bundesländern. Diese können z. B.
+            </li>
+          </ul>
+          <ul class="ml-20">
+            <li>Input und Feedback zur inhaltlichen Vorbereitung liefern,</li>
+            <li>
+              Praktikerinnen und Praktiker aus ihren Mitgliedsunternehmen und
+              Vollzugsbehörden für die Workshops akquirieren und
+            </li>
+            <li>
+              bei der Organisation unterstützen (z. B. Einladungen,
+              Räumlichkeiten und Verpflegung).
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <b>Verbände mit Bedacht einbeziehen:</b> Verbände sind wichtige Vermittler
+              von Expertise, können den Austausch mit der Praxis aber nicht ersetzen
+            </li>
+            <li>
+              <b>Direkten Austausch sicherstellen:</b> Wenn möglich, sollte vorrangig
+              die Arbeitsebene eingeladen werden, damit die Teilnehmenden offen sprechen
+              können.
+            </li>
+            <li>
+              <b>Teilnehmendenanzahl eingrenzen:</b> Laden Sie zwischen 20 bis max.
+              25 Teilnehmende ein.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="breakout">
+      <div class="space-y-16 lg:flex lg:gap-16">
+        <h2 class="lg:w-336">
+          Was ist der Unterschied zum Ex-post-Praxischeck?
+        </h2>
+        <div class="pt-6 pb-2 lg:ml-auto lg:w-736">
+          <p>
+            Ex-post-Praxischecks untersuchen <b>nachträglich</b> die Praxistauglichkeit
+            bestehender Regelungen und deren Vollzug. Genau wie bei der Praxistauglichkeit
+            steht auch hier der direkte Dialog mit Beschäftigten aus Unternehmen und
+            Behörden im Zentrum.
+          </p>
+          <p>
+            Bei Ex-post-Praxischecks werden <b>
+              ganze Prozesse aus Sicht der Betroffenen analysiert</b
+            >, wodurch Probleme im Zusammenspiel verschiedener Gesetze sichtbar
+            werden. Dabei werden alle Akteure von der EU über Bund und Länder
+            bis hin zu Kammern einbezogen.
+          </p>
+        </div>
+      </div>
+      <div class="pt-80">
+        <h2 class="pb-32">Weitere passende Methoden</h2>
+        {
+          (
+            <>
+              <div class="tool-grid gap-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                {praxistauglichkeitTools.map((werkzeug) => (
+                  <div class="tool-wrapper">
+                    <KernCard
+                      title={werkzeug.data.title}
+                      href={werkzeug.data.externalUrl}
+                      body={werkzeug.data.description}
+                      background="white"
+                      interactive={false}
+                      image={werkzeug.data.image}
+                      imageAlt={
+                        werkzeug.data.image ? werkzeug.data.title : undefined
+                      }
+                      target_option="_blank"
+                    >
+                      <div slot="pre-header" class="mb-16 w-full">
+                        <div class="flex gap-8">
+                          {werkzeug.data.type.map((type) => (
+                            <span
+                              class={`kern-badge kern-badge--${type.toLowerCase()}`}
+                            >
+                              <span class="kern-label">{type}</span>
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                      <div
+                        slot="footer"
+                        class="text-icon-muted! flex items-center gap-8"
+                      >
+                        <Icon
+                          name="ic:baseline-auto-stories"
+                          class="h-32 w-32 shrink-0"
+                        />
+                        <p class="kern-subline kern-subline-dark py-0">
+                          Quelle: {werkzeug.data.source}
+                        </p>
+                      </div>
+                    </KernCard>
+                  </div>
+                ))}
+              </div>
+            </>
+          )
+        }
+      </div>
+    </section>
+    <section class="breakout bg-layout-background-hued">
+      <h2>Beispiele für Praxistauglichkeit</h2>
+      <p class="mb-32">
+        So wurde Praxistauglichkeit von verschiedenen Ressorts sichergestellt.
+      </p>
+      <KernAccordion>
+        <span slot="header">Fokusgruppe: eLogistikdokumente (BMJV)</span>
+        <span slot="body" class="accordion-body-full-width space-y-8">
+          <div>
+            <b>Thema:</b>
+            <ul>
+              <li>
+                Ermittlung von Möglichkeiten zur technischen Umsetzung und
+                rechtssicheren Operationalisierung elektronischer
+                Logistikdokumente.
+              </li>
+            </ul>
+          </div>
+          <div>
+            <b>Vorgehen:</b>
+            <ul>
+              <li>
+                In einer Online-Gruppendiskussion erprobten fünf Fachkräfte aus
+                Entwicklung, Recht, Logistik und Forschung ein neues Konzept.
+                Die Basis bildete ein strukturierter Leitfaden mit klaren
+                Fragestellungen zu verschiedenen Textvarianten. Ein digitales
+                Whiteboard hielt die Ergebnisse in Echtzeit fest.
+              </li>
+            </ul>
+          </div>
+          <div>
+            <b>Ergebnisse:</b>
+            <ul>
+              <li>
+                Die Fokusgruppe validierte die Konzeptannahmen effizienter als
+                Einzelgespräche. Durch den direkten Austausch rückten Recht und
+                Alltagspraxis näher zusammen, woraus konkrete
+                Handlungsempfehlungen abgeleitet wurden. Das Format stieß bei
+                den Teilnehmenden auf sehr positive Resonanz. digitales
+                Whiteboard hielt die Ergebnisse in Echtzeit fest.
+              </li>
+            </ul>
+          </div>
+          <div>
+            <b>Teilnehmende:</b>
+            <ul>
+              <li>
+                Open-Source-Entwickler (Logistik), juristischer Product Owner,
+                eCMR-Implementierer (zwei Frachtunternehmen), angewandte
+                Forschung (Fraunhofer IML).
+              </li>
+            </ul>
+          </div>
+        </span>
+      </KernAccordion>
+      <KernAccordion>
+        <span slot="header">Workshop: Familienpflegezeit (BMBFSFJ)</span>
+        <span slot="body" class="accordion-body-full-width space-y-8">
+          <div>
+            <b>Thema:</b>
+            <ul>
+              <li>
+                Zusammenführung von Pflegezeit- und Familienpflegezeitgesetz zur
+                besseren Vereinbarkeit von Pflege und Beruf.
+              </li>
+            </ul>
+          </div>
+          <div>
+            <b>Vorgehen:</b>
+            <ul>
+              <li>
+                In einem interaktiven Workshop wurden zuvor identifizierte
+                Problemfelder (z. B. geringe Inanspruchnahme) adressiert.
+                Mittels eines dreistufigen, stillen Brainstormings (Post-Its)
+                generierten die Teilnehmenden Ideen zur proaktiven
+                Zielgruppenansprache und flexibleren Gestaltung. Um alle
+                Interessen zu beleuchten, wurden die Fragestellungen aus vier
+                Perspektiven (Arbeitgebende, Pflege, Gesetzgeber,
+                Arbeitnehmende) betrachtet.
+              </li>
+            </ul>
+          </div>
+          <div>
+            <b>Ergebnisse:</b>
+            <ul>
+              <li>
+                Es entstanden ein gemeinsames Problemverständnis sowie erste
+                Gelingensbedingungen für künftige Regelungsoptionen. Zudem
+                wurden konkrete Ideen für die Ansprache der Zielgruppen und
+                Potenziale zur Flexibilisierung der Rechtsgrundlage ermittelt.
+              </li>
+            </ul>
+          </div>
+          <div>
+            <b>Teilnehmende:</b>
+            <ul>
+              <li>
+                Interessenvertreterinnen und -vertreter von Arbeitnehmenden und
+                Pflegenden.
+              </li>
+            </ul>
+          </div>
+        </span>
+      </KernAccordion>
+      <KernAccordion>
+        <span slot="header"
+          >Interviews: Dokumentations- und Meldepflichten (BMLEH)</span
+        >
+        <span slot="body" class="accordion-body-full-width space-y-8">
+          <div>
+            <b>Thema:</b>
+            <ul>
+              <li>
+                Vereinfachung und Reduktion der Melde- und
+                Dokumentationspflichten in der Tierhaltung.
+              </li>
+            </ul>
+          </div>
+          <div>
+            <b>Vorgehen:</b>
+            <ul>
+              <li>
+                Zur Überprüfung bestehender Arbeitsthesen wurden
+                zielgruppenspezifische Leitfäden für verschiedene Betriebs- und
+                Tierarten entwickelt. Die Kontaktaufnahme zu den Betrieben
+                erfolgte direkt über das Fachreferat. Innerhalb von zwei Wochen
+                wurden die Interviews durchgeführt und direkt ausgewertet.
+              </li>
+            </ul>
+          </div>
+          <div>
+            <b>Ergebnisse:</b>
+            <ul>
+              <li>
+                Die Befragungen lieferten sieben konkrete Handlungsfelder für
+                die weitere Regelungsarbeit. Durch die direkte Einbindung der
+                Betroffenen konnten besonders praxisnahe und
+                bedürfnisorientierte Lösungswege eröffnet werden.
+              </li>
+            </ul>
+          </div>
+          <div>
+            <b>Teilnehmende:</b>
+            <ul>
+              <li>
+                Drei landwirtschaftliche Betriebe (je einer für Rind, Schwein
+                und Geflügel).
+              </li>
+            </ul>
+          </div>
+          <a
+            href="https://digitalservice.bund.de/blog/interdisziplinaer-zu-besseren-gesetzen"
+            target="_blank">Mehr zum Beispiel erfahren</a
+          >
+        </span>
+      </KernAccordion>
+    </section>
+    <Hero level="root">
+      <h2>Fragen zu Praxistauglichkeit?</h2>
+      <p>Wir können Sie gerne beraten. Kontaktieren Sie uns!</p>
+      <p>Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a></p>
+      <p>E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a></p>
+    </Hero>
+  </main>
+
+  <style>
+    .checklist-icon {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      color: var(--color-cosmic-blue-base);
+      background-color: currentColor;
+    }
+  </style>
+</Layout>

@@ -7,7 +7,7 @@ interface Props extends HTMLAttributes<"div">, VariantProps<typeof cardStyles> {
   class?: string;
 }
 
-export const cardStyles = tv({
+const cardStyles = tv({
   base: "scroll-my-md flex flex-row gap-32 rounded-sm bg-white lg:gap-64",
   variants: {
     padding: {
