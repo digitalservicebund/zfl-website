@@ -23,7 +23,9 @@
     title,
     badge,
     size = "md",
+    className = "",
     children,
+    body,
   }: {
     /**
      * Fill color of the bubble, e.g. a hex code. Defaults to the
@@ -33,8 +35,11 @@
     title: string;
     badge?: string;
     size?: Size;
-    /** Body content shown in the global sidebar when the bubble is opened. */
+    className?: string;
+    /** Sidebar content shown in the global sidebar when the bubble is opened. */
     children?: Snippet;
+    /** Optional body content shown within the bubble */
+    body?: Snippet;
   } = $props();
 
   // Falls back to an always-empty list when no ancestor provides the
@@ -86,7 +91,7 @@
 </script>
 
 <div
-  class={`relative inline-flex flex-col items-center ${expanded ? "z-20" : ""}`}
+  class={`relative inline-flex flex-col items-center ${expanded ? "z-20" : ""} ${className}`}
 >
   <button
     bind:this={buttonEl}
@@ -104,6 +109,9 @@
         </div>
       {/if}
       <div class="kern-label font-bold text-black">{title}</div>
+      {#if body}
+        {@render body()}
+      {/if}
     </div>
   </button>
 </div>

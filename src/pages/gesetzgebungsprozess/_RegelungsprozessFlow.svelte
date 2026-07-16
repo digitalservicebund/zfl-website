@@ -18,6 +18,8 @@
     highlighted?: string[];
   } = $props();
 
+  const isVertical = $derived(orientation === "vertical");
+
   // Exposed via context (rather than threaded through every `<Bubble>`
   // usage) so any descendant Bubble can reactively read the current
   // highlight list without every call site needing a `highlighted` prop.
@@ -31,7 +33,7 @@
     base: "relative flex",
     variants: {
       orientation: {
-        horizontal: "h-800 flex-row items-stretch -space-x-48 px-32",
+        horizontal: "h-900 flex-row items-stretch -space-x-48 px-32",
         vertical: "mx-auto w-1000 flex-col -space-y-48",
       },
     },
@@ -56,6 +58,36 @@
     class="pointer-events-none absolute bg-black m-0"
     style={connectorStyle}
   ></div>
+
+  <div
+    class={`flex items-center justify-center ${isVertical ? "mb-100" : "flex-col mr-100"}`}
+  >
+    <Bubble
+      color="#E6E6E6"
+      title="Initiative des Bundestages"
+      className="w-full h-full m-48"
+    >
+      {#snippet body()}
+        <p class="text-4xl font-bold">24&nbsp;%</p>
+      {/snippet}
+    </Bubble>
+    <Cluster color="#D59FDE" offset={0}>
+      <Bubble title="Aus der Mitte der Regierung">
+        {#snippet body()}
+          <p class="text-4xl font-bold">60&nbsp;%</p>
+        {/snippet}
+      </Bubble>
+    </Cluster>
+    <Bubble
+      color="#E6E6E6"
+      title="Initiative des Bundesrates"
+      className="w-full h-full m-48"
+    >
+      {#snippet body()}
+        <p class="text-4xl font-bold">16&nbsp;%</p>
+      {/snippet}
+    </Bubble>
+  </div>
 
   <Cluster
     color="#BCA6DC"

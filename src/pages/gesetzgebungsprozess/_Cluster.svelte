@@ -8,6 +8,7 @@
     orientation = "vertical",
     anchorName,
     color,
+    offset,
     children,
   }: {
     title?: string;
@@ -22,6 +23,7 @@
      * the `--bubble-color` CSS custom property.
      */
     color?: string;
+    offset?: number;
     children?: Snippet;
   } = $props();
 
@@ -90,7 +92,9 @@
   // A small, random horizontal jitter per cluster instance (fixed for the
   // lifetime of the component) for a more organic, hand-drawn feel.
   const OFFSET_RANGE = 64; // px, max offset in either direction
-  const offset = Math.round((Math.random() * 2 - 1) * OFFSET_RANGE);
+  const clusterOffset = $derived(
+    offset ?? Math.round((Math.random() * 2 - 1) * OFFSET_RANGE),
+  );
 </script>
 
 <div
@@ -115,7 +119,7 @@
 
   <div
     class="relative flex items-center justify-center"
-    style={`width: ${outerSize}px; height: ${outerSize}px; margin-${orientation === "vertical" ? "left" : "top"}: ${offset}px;`}
+    style={`width: ${outerSize}px; height: ${outerSize}px; margin-${orientation === "vertical" ? "left" : "top"}: ${offset ?? clusterOffset}px;`}
   >
     <!-- Isolated so the halo/dashed-circle negative z-indices only stack
          against each other, never against sibling (overlapping) clusters. -->
