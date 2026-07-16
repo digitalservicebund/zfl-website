@@ -98,7 +98,8 @@
 </script>
 
 <div
-  class="relative flex flex-col items-center justify-center h-full w-full"
+  class="cluster-root relative flex flex-col items-center justify-center h-full w-full"
+  data-orientation={orientation}
   style={color ? `--bubble-color: ${color};` : undefined}
 >
   {#if title}
@@ -146,3 +147,24 @@
     </div>
   </div>
 </div>
+
+<style>
+  /* Overlap the soft halo rings of two adjacent clusters (pulling them
+     HALO_THICKNESS closer) without affecting spacing to non-Cluster
+     siblings like Arrow. Scoped sibling selector: Svelte appends the same
+     component hash class to both instances, so this only ever matches
+     Cluster-next-to-Cluster, never Cluster-next-to-Arrow. */
+  :global(
+      .cluster-root[data-orientation="vertical"]
+        + .cluster-root[data-orientation="vertical"]
+    ) {
+    margin-top: -48px;
+  }
+
+  :global(
+      .cluster-root[data-orientation="horizontal"]
+        + .cluster-root[data-orientation="horizontal"]
+    ) {
+    margin-left: -48px;
+  }
+</style>

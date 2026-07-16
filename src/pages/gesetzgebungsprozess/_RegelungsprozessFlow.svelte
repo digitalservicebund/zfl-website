@@ -3,6 +3,7 @@
   import { tv } from "tailwind-variants";
   import Bubble from "./_Bubble.svelte";
   import Cluster from "./_Cluster.svelte";
+  import Arrow from "./_Arrow.svelte";
   import { BUBBLE_HIGHLIGHT_CONTEXT_NAME } from "./_bubbleHighlight";
 
   let {
@@ -33,8 +34,8 @@
     base: "relative flex",
     variants: {
       orientation: {
-        horizontal: "h-900 flex-row items-stretch -space-x-48 px-32",
-        vertical: "mx-auto w-1000 flex-col -space-y-48",
+        horizontal: "h-900 flex-row items-stretch px-32",
+        vertical: "mx-auto w-1000 flex-col",
       },
     },
   });
@@ -60,7 +61,7 @@
   ></div>
 
   <div
-    class={`flex items-center justify-center ${isVertical ? "mb-100" : "flex-col mr-100"}`}
+    class={`flex items-center justify-center ${isVertical ? "" : "flex-col"}`}
   >
     <Bubble
       color="#E6E6E6"
@@ -89,9 +90,12 @@
     </Bubble>
   </div>
 
+  <Arrow {orientation} size={80} />
+
   <Cluster
     color="#BCA6DC"
     {orientation}
+    offset={0}
     anchorName={CLUSTER_FIRST_ANCHOR}
     title="Interessensermittlung"
   >
@@ -103,6 +107,8 @@
       size="md"
     ></Bubble>
   </Cluster>
+
+  <Arrow {orientation}>Übergabe an das Fachreferat</Arrow>
 
   <Cluster color="#BCA6DC" {orientation}>
     <Bubble title="Federführung" size="md"
@@ -246,7 +252,7 @@
     </Bubble>
   </Cluster>
 
-  <Cluster color="#D2EDB9" {orientation}>
+  <Cluster color="#D2EDB9" {orientation} offset={0}>
     <Bubble title="Weiterleitung an das Bundes&shy;kanzleramt" size="md">
       Fachreferat leitet die Kabinettvorlage an Bundeskanzleramts-Chef:in weiter
       (mind. 8 Tage vor der Kabinettsitzung). Einbindung Spiegel- &
@@ -254,7 +260,14 @@
     </Bubble>
   </Cluster>
 
-  <Cluster color="#D2EDB9" {orientation} title="Verabschiedung des Gesetzes">
+  <Arrow {orientation}>Übergabe an die politische Ebene</Arrow>
+
+  <Cluster
+    color="#D2EDB9"
+    {orientation}
+    offset={0}
+    title="Verabschiedung des Gesetzes"
+  >
     <Bubble title="Stellungnahme Bundesrat">
       <h3>Weiterleitung an den Bundesrat</h3>
       <p>
