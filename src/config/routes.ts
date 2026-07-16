@@ -209,6 +209,17 @@ export const werkzeuge = {
   navLabel: null,
 } as const;
 
+export const werkzeuge_pflichten = {
+  key: "werkzeuge_pflichten",
+  path: "/werkzeuge/pflichten",
+  title: "Pflichten-Export",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
 export const werkzeuge_praxistauglichkeit = {
   key: "werkzeuge_praxistauglichkeit",
   path: "/werkzeuge/praxistauglichkeit",
@@ -218,6 +229,17 @@ export const werkzeuge_praxistauglichkeit = {
   isStagingOnly: false,
   navOrder: null,
   navLabel: "Praxistauglichkeit",
+} as const;
+
+export const werkzeuge_rechtErkunden = {
+  key: "werkzeuge_rechtErkunden",
+  path: "/werkzeuge/recht-erkunden",
+  title: "Recht erkunden",
+  parent: werkzeuge,
+  sitemap: false,
+  isStagingOnly: true,
+  navOrder: null,
+  navLabel: null,
 } as const;
 
 export const allRoutes = [
@@ -239,5 +261,7 @@ export const allRoutes = [
   ueber_neueFruephase,
   ueber_zahlenUndFakten,
   werkzeuge,
+  werkzeuge_pflichten,
   werkzeuge_praxistauglichkeit,
+  werkzeuge_rechtErkunden,
 ] as const;

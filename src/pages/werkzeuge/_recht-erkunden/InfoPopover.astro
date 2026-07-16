@@ -1,0 +1,50 @@
+---
+import { Icon } from "astro-icon/components";
+import { tv } from "tailwind-variants";
+
+interface Props {
+  label: string;
+  panelClass?: string;
+  class?: string;
+}
+
+const { label, panelClass, class: className } = Astro.props;
+
+const styles = tv({
+  slots: {
+    wrapper: "relative inline-flex",
+    trigger:
+      "text-cosmic-blue-base hover:bg-lavender-100 inline-flex h-22 w-22 items-center justify-center rounded-full transition",
+    panel:
+      "border-lavender-400 text-icon-muted absolute top-full left-0 z-20 mt-4 w-260 rounded-sm border bg-white p-12 text-xs leading-snug font-normal shadow-lg",
+  },
+});
+
+const { wrapper, trigger, panel } = styles();
+---
+
+<span
+  class={wrapper({ class: className })}
+  x-data="{ open: false }"
+  x-on:click.outside="open = false"
+  x-on:keydown.escape.window="open = false"
+>
+  <button
+    type="button"
+    class={trigger()}
+    x-on:click="open = !open"
+    x-bind:aria-expanded="open"
+    aria-label={label}
+  >
+    <Icon name="ic:outline-info" class="h-16 w-16" />
+  </button>
+  <span
+    x-show="open"
+    x-cloak
+    x-transition
+    role="tooltip"
+    class={panel({ class: panelClass })}
+  >
+    <slot />
+  </span>
+</span>

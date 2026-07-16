@@ -46,9 +46,6 @@ fileignoreconfig:
     allowed_patterns:
       - proxy_pass
       - sha256-[^\s]+
-  - filename: sonar-project.properties
-    allowed_patterns:
-      - projectKey
   - filename: src/config/posthog.ts
     checksum: 2c449a89d7fa9be57170bc960a30f51381f9a5d8d046605a6e30c083886163dd
   - filename: src/env.d.ts
@@ -63,6 +60,28 @@ fileignoreconfig:
     checksum: 585af9a443434b8caf56dae715544745714fff5e0c4b5d2cc202275950e3a684
   - filename: src/pages/begleitungen/gesetzentwurf.png
     checksum: c847df945cbe36bd5627e2e91b07b08c331974ba78fc2e64d99e37ae5de3495a
+  - filename: data/laws/registry/laws.json
+    checksum: d91b8729505983b35914335a9f72da8a0786969daebc7dc4a62c976b80d14d13
+  - filename: public/data/laws.json
+    checksum: fb64e37561e3d4303bdd3792ef045df59e29ddd137f88d2b90490ba2b284a7e6
+  - filename: public/data/obligations/Pflichten_LLM_*.csv
+    checksum: 68eaf48f320b080fcc318e1048b21a94cdd8d8d29e3885e23b1a6223027ff0c4
+    ignore_detectors: [filecontent]
+  - filename: scripts/build_law_registry.py
+    checksum: 4b4529c26f6b4cd3a5d4a1d0706d8a83dcdd523631ba5f55efc23517b0a3a558
+  - filename: scripts/concat_obligations_csv.py
+    checksum: 6163e7dca5499a1bc0dfa691ceda7e9581a4e2151bd247ffa7ca6070dd3388d0
+  - filename: doc/laws-pipeline.md
+    checksum: fc355c65e829ff4b1f2d71945790249ded6aa76d63dcb7bf1996b46e1183e809
+  - filename: scripts/extract_obligations.py
+    checksum: 548b63b1594e9607ec95b0a2ac4bf9a749f801c9ea494adb7f4d30989b07394e
+  - filename: scripts/fetch_gii_metadata.py
+    checksum: 99f8f6891762a7c68ca9d4f1551f5110ea9a0d7cd5cbf9b4c08194cfa22b090f
+  - filename: scripts/reference_sort.py
+    checksum: cb51790a33aafab5f4326d9cfd8049d0a9f6ec8ffc1977491f32df5c79403669
+  - filename: src/pages/werkzeuge/pflichten.astro
+    allowed_patterns:
+      - exportHeaders
   - filename: src/components/global/DebugGrid.astro
     allowed_patterns:
       - \@keydown
@@ -77,6 +96,12 @@ fileignoreconfig:
     checksum: be575fbd00cc04575751289146248f1e64acd5144c5d5ac2e66ec4b48717d50e
   - filename: "*.png"
     checksum: 3ccb9ca2266cb266a3071392a5d3fb1a2207b998aec5a34b8933806b7c0a7488
+  - filename: scripts/pflichten_prompt.txt
+    checksum: 557d30dab6c475d2a074b09b59f37a648eed0227fbafb23b6a4faec72b30a7d1
+  - filename: src/pages/werkzeuge/recht-erkunden.astro
+    checksum: c923b2b52cbddfb15ca1d7d574bdb291f499a8eb9b95df5cbbc801c7bb2e6a84
+  - filename: src/pages/werkzeuge/_recht-erkunden-bindings.test.ts
+    checksum: 0483692032b00f47bceb0bb74bba9bfcdc0734125eff4129be8eda3da6cd3039
 scopeconfig:
   - scope: node
 allowed_patterns:
@@ -102,5 +127,6 @@ allowed_patterns:
   - keyword
   - Keyword
   - fuzzyKeyword
+  - :key=
   - aria-keyshortcuts
 version: "1.0"

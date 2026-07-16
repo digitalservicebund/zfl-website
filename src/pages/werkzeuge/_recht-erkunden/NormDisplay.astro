@@ -1,0 +1,108 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  label: string;
+  title?: string;
+  summary?: string;
+  fullText: string;
+  url?: string;
+  onTitleClick?: string;
+  /** Renders as a standalone bordered/padded card instead of a bare flex item. */
+  bordered?: boolean;
+  class?: string;
+}
+
+const {
+  label,
+  title,
+  summary,
+  fullText,
+  url,
+  onTitleClick,
+  bordered = false,
+  class: className,
+} = Astro.props;
+
+// Both label and title are Alpine expression strings (e.g. "norm.ref"), so
+// they must be re-wrapped in `${}` to be interpolated rather than emitted as
+// literal text.
+const titleText = title
+  ? `\`\${${label}} – \${${title}}\``
+  : `\`\${${label}}\``;
+---
+
+<div
+  x-data="{ fulltextOpen: false }"
+  class:list={[
+    "min-w-0 flex-1",
+    bordered && "border-lavender-400 rounded-sm border bg-white p-12",
+    className,
+  ]}
+>
+  <div class="flex items-start justify-between gap-12">
+    <div class="min-w-0 flex-1">
+      {
+        onTitleClick ? (
+          <button
+            type="button"
+            class="mt-0 mb-0 text-left text-base leading-snug font-semibold"
+            x-text={titleText}
+            @click={onTitleClick}
+          />
+        ) : (
+          <p
+            class="mt-0 mb-0 text-base leading-snug font-semibold"
+            x-text={titleText}
+          />
+        )
+      }
+      {
+        summary && (
+          <p
+            class="text-icon-muted mt-2 mb-0 text-xs leading-snug"
+            x-text={summary}
+          />
+        )
+      }
+    </div>
+    <div class="flex shrink-0 items-center gap-8">
+      <button
+        type="button"
+        class="text-cosmic-blue-base inline-flex items-center gap-4 text-sm font-semibold"
+        @click="fulltextOpen = !fulltextOpen"
+        :aria-expanded="fulltextOpen"
+      >
+        <span>Volltext</span>
+        <Icon
+          name="ic:round-expand-more"
+          class="h-18 w-18 transition-transform"
+          x-bind:class="fulltextOpen ? 'rotate-180' : ''"
+        />
+      </button>
+      {
+        url && (
+          <a
+            x-show={`${url} && ${url} !== '#'`}
+            x-cloak
+            href="#"
+            x-bind:href={url}
+            target="_blank"
+            rel="noopener"
+            class="text-icon-muted hover:text-cosmic-blue-base before:hidden"
+            aria-label="Quelle öffnen"
+          >
+            <Icon name="ic:round-open-in-new" class="h-18 w-18" />
+          </a>
+        )
+      }
+    </div>
+  </div>
+  <p
+    x-show="fulltextOpen"
+    x-cloak
+    class="text-icon-muted border-lavender-400 mt-8 border-t py-0 pt-8 text-sm whitespace-pre-line"
+    x-text={fullText}
+  >
+  </p>
+</div>

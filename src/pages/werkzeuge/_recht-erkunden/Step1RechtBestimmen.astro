@@ -1,0 +1,233 @@
+---
+// Renders inside the rechtErkunden Alpine scope (see ./store.ts).
+import { Icon } from "astro-icon/components";
+import { LAW_AREAS } from "./data";
+import InfoPopover from "./InfoPopover.astro";
+import NormDisplay from "./NormDisplay.astro";
+import { styles } from "./styles";
+
+const {
+  searchInput,
+  lawCard,
+  areaCard,
+  normRow,
+  countBadge,
+  selectedLawCard,
+  selectedItem,
+  stepBadge,
+  subStepGroup,
+  subStepHeading,
+} = styles();
+---
+
+<div class="space-y-lg min-w-0">
+  <div class="flex items-start gap-16">
+    <span class={stepBadge()}>1</span>
+    <div>
+      <h2 class="mb-4">Zu änderndes Recht bestimmen</h2>
+      <p class="kern-subline py-0">
+        Bestimmen Sie in drei Teilschritten, welches Gesetz, welches
+        Rechtsgebiet und welche konkreten Normen im Rahmen Ihres Vorhabens
+        geändert werden sollen.
+      </p>
+    </div>
+  </div>
+
+  <div class={subStepGroup()}>
+    <div class="space-y-md">
+      <div>
+        <div class={subStepHeading()}>
+          <h3 class="mt-0 mb-0">Gesetz suchen</h3>
+        </div>
+        <p class="kern-subline py-0">
+          Suchen Sie das Gesetz, das Sie im Rahmen Ihres Vorhabens ändern
+          möchten.
+        </p>
+      </div>
+
+      <div class="relative w-full md:max-w-400">
+        <Icon
+          name="ic:round-search"
+          class="text-icon-muted pointer-events-none absolute top-1/2 left-12 h-24 w-24 -translate-y-1/2"
+        />
+        <input
+          class={searchInput()}
+          type="search"
+          placeholder="z. B. SGB II …"
+          aria-label="Gesetz suchen"
+          x-model.debounce.300ms="lawQuery"
+        />
+        <button
+          type="button"
+          class="text-icon-muted absolute top-1/2 right-12 -translate-y-1/2"
+          x-show="lawQuery"
+          x-cloak
+          aria-label="Suche löschen"
+          @click="lawQuery = ''"
+        >
+          <Icon name="ic:round-close" class="h-24 w-24" />
+        </button>
+      </div>
+
+      <div
+        x-show="!selectedLaw && lawQuery.trim().length > 0 && matchingLaws.length > 0"
+        x-cloak
+        class="grid gap-12 sm:grid-cols-2 lg:grid-cols-3"
+        role="group"
+        aria-label="Gesetzesliste"
+      >
+        <template x-for="law in matchingLaws" :key="law.id">
+          <button type="button" class={lawCard()} @click="selectLaw(law.id)">
+            <span class="text-base font-semibold" x-text="law.label"></span>
+            <span class="text-icon-muted text-xs leading-snug" x-text="law.name"
+            ></span>
+          </button>
+        </template>
+      </div>
+
+      <p
+        x-show="!selectedLaw && lawQuery.trim() && matchingLaws.length === 0"
+        x-cloak
+        class="text-icon-muted py-0 italic"
+      >
+        Keine Gesetze für die aktuelle Suche gefunden.
+      </p>
+
+      <p
+        x-show="!selectedLaw && !lawQuery.trim()"
+        x-cloak
+        class="text-icon-muted py-0 italic"
+      >
+        Geben Sie einen Suchbegriff ein, um Gesetze anzuzeigen.
+      </p>
+
+      <div x-show="selectedLaw" x-cloak class={selectedLawCard()}>
+        <div>
+          <p
+            class="mb-0 text-base font-semibold"
+            x-text="selectedLaw ? selectedLaw.label : ''"
+          >
+          </p>
+          <p
+            class="text-icon-muted py-0 text-xs"
+            x-text="selectedLaw ? selectedLaw.name : ''"
+          >
+          </p>
+        </div>
+        <button
+          type="button"
+          class="kern-btn kern-btn--tertiary shrink-0"
+          @click="clearLaw()"
+        >
+          <span class="kern-label">Anderes Gesetz wählen</span>
+        </button>
+      </div>
+
+      <div
+        x-show="selectedLaw && !selectedLaw.hasData"
+        x-cloak
+        class="border-lavender-400 bg-lavender-200 flex items-start gap-12 rounded-sm border p-20"
+      >
+        <Icon
+          name="ic:round-info"
+          class="text-cosmic-blue-base mt-2 h-24 w-24 shrink-0"
+        />
+        <div>
+          <p class="mt-0 mb-4">
+            Für dieses Gesetz liegen noch keine Analysedaten vor.
+          </p>
+          <p class="py-0">
+            Prototyp-Daten stehen bislang nur für das SGB II zur Verfügung.
+          </p>
+          <button
+            type="button"
+            class="kern-btn kern-btn--secondary mt-8"
+            @click="selectLaw('sgb2')"
+          >
+            <span class="kern-label">Beispieldaten zum SGB II anzeigen</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div x-show="selectedLaw && selectedLaw.hasData" x-cloak class="space-y-md">
+      <div>
+        <div class={subStepHeading()}>
+          <h3 class="mt-0 mb-0">Rechtsgebiet wählen</h3>
+        </div>
+        <p class="kern-subline flex flex-wrap items-center gap-4 py-0">
+          <span>
+            Diese Rechtsgebiete werden im ausgewählten Gesetz behandelt.
+          </span>
+          <InfoPopover
+            label="Hinweis zur Ermittlung der Rechtsgebiete anzeigen"
+          >
+            Im vorgesehenen Verfahren würden die Rechtsgebiete automatisiert
+            über Textanalyse ermittelt (z. B. Keyword-Extraktion, Clustering
+            ähnlicher Normen). Hier sind sie als Beispieldaten hinterlegt.
+          </InfoPopover>
+        </p>
+      </div>
+
+      <div
+        class="grid gap-12 sm:grid-cols-2 lg:grid-cols-3"
+        role="group"
+        aria-label="Rechtsgebiete"
+      >
+        {
+          LAW_AREAS.map((area) => (
+            <button
+              type="button"
+              class={areaCard()}
+              x-bind:class={`selectedAreaId === '${area.id}' ? '${selectedItem()}' : 'border-lavender-400 bg-white hover:border-cosmic-blue-400'`}
+              x-on:click={`selectArea('${area.id}')`}
+            >
+              <span class="text-base font-semibold">{area.label}</span>
+              <span class="text-icon-muted text-xs leading-snug">
+                {area.description}
+              </span>
+              <span class={countBadge()}>{area.normIds.length} Normen</span>
+            </button>
+          ))
+        }
+      </div>
+    </div>
+
+    <div x-show="selectedArea" x-cloak class="space-y-md">
+      <div>
+        <div class={subStepHeading()}>
+          <h3 class="mt-0 mb-0">Normen auswählen</h3>
+        </div>
+        <p class="kern-subline py-0">
+          Diese Normen des ausgewählten Rechtsgebiets stehen zur Änderung an.
+          Deaktivieren Sie einzelne Normen, um das angrenzende Recht unten
+          entsprechend einzugrenzen.
+        </p>
+      </div>
+
+      <ul class="space-y-8" role="list">
+        <template x-for="norm in areaNorms" :key="norm.id">
+          <li
+            class={normRow()}
+            x-bind:class={`isNormActive(norm.id) ? '${selectedItem()}' : 'border-lavender-400 bg-white opacity-70'`}
+          >
+            <input
+              type="checkbox"
+              class="kern-form-check__checkbox mt-2 shrink-0"
+              :checked="isNormActive(norm.id)"
+              @change="toggleNorm(norm.id)"
+              :aria-label="`${norm.ref} berücksichtigen`"
+            />
+            <NormDisplay
+              label="norm.ref"
+              title="norm.title"
+              summary="norm.summary"
+              fullText="norm.fullText"
+              url="norm.url"
+            />
+          </li>
+        </template>
+      </ul>
+    </div>
+  </div>
+</div>

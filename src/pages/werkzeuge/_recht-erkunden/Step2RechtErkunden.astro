@@ -1,0 +1,250 @@
+---
+// Renders inside the rechtErkunden Alpine scope (see ./store.ts).
+import { Icon } from "astro-icon/components";
+import { HIERARCHY_LEVELS, RELEVANCE_REASONS } from "./data";
+import InfoPopover from "./InfoPopover.astro";
+import { styles } from "./styles";
+
+const {
+  chip,
+  termCard,
+  levelBadge,
+  countBadge,
+  matrixHeaderCell,
+  matrixRowLabel,
+  matrixCell,
+  selectedItem,
+  stepBadge,
+  subStepGroup,
+  subStepHeading,
+} = styles();
+---
+
+<div x-show="selectedArea" x-cloak class="space-y-md">
+  <div class="flex items-start gap-16">
+    <span class={stepBadge()}>2</span>
+    <div>
+      <h2 class="mb-4">Angrenzendes Recht erkunden</h2>
+      <p class="kern-subline py-0">
+        Erkunden Sie die Verbindungen der in Schritt 1 ausgewählten Normen über
+        gemeinsame Begriffe und Relevanzgründe.
+      </p>
+    </div>
+  </div>
+
+  <div class={subStepGroup()}>
+    <div x-show="activeTerms.length > 0" x-cloak class="space-y-md">
+      <div>
+        <div class={subStepHeading()}>
+          <h3 class="mt-0 mb-0">Begriffe im Fokus</h3>
+        </div>
+        <p class="kern-subline py-0">
+          Diese Begriffe verbinden die ausgewählten Normen mit anderen Gesetzen
+          - unabhängig davon, welches Gesetz sie definiert.
+        </p>
+      </div>
+      <div class="grid gap-12 sm:grid-cols-2 xl:grid-cols-3">
+        <template x-for="term in activeTerms" :key="term.id">
+          <button
+            type="button"
+            class={termCard()}
+            :class={`sidebarMode === 'term' && sidebarTermId === term.id ? '${selectedItem()}' : 'border-lavender-400 bg-white hover:border-cosmic-blue-400'`}
+            @click="openTerm(term.id)"
+          >
+            <div class="flex w-full items-start justify-between gap-8">
+              <span class="text-base font-semibold" x-text="term.term"></span>
+              <Icon
+                name="ic:round-chevron-right"
+                class="text-icon-muted group-hover:text-cosmic-blue-base h-20 w-20 shrink-0 transition"
+              />
+            </div>
+            <p
+              class="text-icon-muted line-clamp-2 py-0 text-xs leading-snug"
+              x-text="term.definition"
+            >
+            </p>
+            <p class="text-icon-muted py-0 text-xs">
+              Definiert in <span
+                class="text-cosmic-blue-base font-semibold"
+                x-text="term.definedIn.label"></span>
+            </p>
+            <div class="mt-auto w-full">
+              <p class="kern-label text-icon-muted mb-4">
+                <span
+                  x-text="termLawCount(term) + (termLawCount(term) === 1 ? ' verbundenes Gesetz' : ' verbundene Gesetze')"
+                ></span>
+              </p>
+              <div class="flex flex-wrap gap-6">
+                <template
+                  x-for="law in termAdjacentLaws(term)"
+                  :key="`${term.id}-${law.lawLabel}-${law.level}`"
+                >
+                  <span
+                    class={levelBadge()}
+                    x-bind:class="levelBadgeClass(law.level)"
+                    x-text="law.lawLabel"></span>
+                </template>
+              </div>
+            </div>
+          </button>
+        </template>
+      </div>
+    </div>
+
+    <div class="space-y-md">
+      <div>
+        <div class={subStepHeading()}>
+          <h3 class="mt-0 mb-0">Relevantes Recht explorieren</h3>
+        </div>
+        <p class="kern-subline py-0">
+          Die Übersicht ordnet angrenzende Gesetze nach Normenhierarchie und
+          Relevanzgrund. Klicken Sie auf ein Gesetz, um die Begründung zu sehen.
+        </p>
+      </div>
+
+      <p
+        x-show="activeNormIds.length === 0"
+        x-cloak
+        class="text-icon-muted py-0 italic"
+      >
+        Wählen Sie oben mindestens eine Norm aus, um angrenzendes Recht
+        anzuzeigen.
+      </p>
+
+      <template x-if="activeNormIds.length > 0">
+        <div>
+          <p
+            x-show="visibleRelations.length === 0"
+            x-cloak
+            class="text-icon-muted py-0 italic"
+          >
+            Für die aktuelle Normauswahl wurden keine angrenzenden Gesetze
+            gefunden.
+          </p>
+
+          <div x-show="visibleRelations.length > 0" x-cloak>
+            <div
+              class="hidden overflow-visible rounded-sm lg:grid"
+              style={`grid-template-columns: 200px repeat(${RELEVANCE_REASONS.length}, 1fr);`}
+            >
+              <div class={matrixHeaderCell()}></div>
+              {
+                RELEVANCE_REASONS.map((reason, index) => (
+                  <div class={matrixHeaderCell()}>
+                    <span class="inline-flex items-center gap-4 text-base font-semibold">
+                      {reason.label}
+                      {reason.hint && (
+                        <InfoPopover
+                          label={`Hinweis zu ${reason.label} anzeigen`}
+                          panelClass={
+                            index === RELEVANCE_REASONS.length - 1
+                              ? "right-0 left-auto"
+                              : undefined
+                          }
+                        >
+                          {reason.hint}
+                        </InfoPopover>
+                      )}
+                    </span>
+                    <span
+                      class="text-icon-muted mt-2 block text-xs font-normal"
+                      x-text={`reasonCount('${reason.id}') + ' Gesetze'`}
+                    />
+                  </div>
+                ))
+              }
+
+              {
+                HIERARCHY_LEVELS.map((level) => (
+                  <Fragment>
+                    <div class={matrixRowLabel()}>
+                      <div class="text-base font-semibold">{level.label}</div>
+                      <span
+                        class="text-icon-muted mt-2 block text-xs font-normal"
+                        x-text={`levelCount('${level.id}') + ' Gesetze'`}
+                      />
+                    </div>
+                    {RELEVANCE_REASONS.map((reason) => (
+                      <div class={matrixCell()}>
+                        <div
+                          class="flex flex-wrap gap-6"
+                          x-show={`matrixCell('${level.id}', '${reason.id}').length > 0`}
+                        >
+                          <template
+                            x-for={`relation in matrixCell('${level.id}', '${reason.id}')`}
+                            x-bind:key="relation.id"
+                          >
+                            <button
+                              type="button"
+                              class={chip()}
+                              x-bind:class={`sidebarMode === 'evidence' && sidebarRelationId === relation.id ? '${selectedItem()}' : ''`}
+                              x-on:click="openRelation(relation)"
+                            >
+                              <span x-text="relation.lawLabel" />
+                            </button>
+                          </template>
+                        </div>
+                        <span
+                          class="text-icon-muted"
+                          x-show={`matrixCell('${level.id}', '${reason.id}').length === 0`}
+                        >
+                          –
+                        </span>
+                      </div>
+                    ))}
+                  </Fragment>
+                ))
+              }
+            </div>
+
+            <div class="space-y-16 lg:hidden">
+              {
+                HIERARCHY_LEVELS.map((level) => (
+                  <div
+                    x-show={`levelCount('${level.id}') > 0`}
+                    x-cloak
+                    class="border-lavender-400 rounded-sm border p-12"
+                  >
+                    <div class="mb-8 flex items-center justify-between gap-8">
+                      <h4 class="mt-0 mb-0">{level.label}</h4>
+                      <span
+                        class={countBadge()}
+                        x-text={`levelCount('${level.id}') + ' Gesetze'`}
+                      />
+                    </div>
+                    {RELEVANCE_REASONS.map((reason) => (
+                      <div
+                        x-show={`matrixCell('${level.id}', '${reason.id}').length > 0`}
+                        x-cloak
+                        class="mb-12 last:mb-0"
+                      >
+                        <p class="kern-label text-icon-muted mb-4">
+                          {reason.label}
+                        </p>
+                        <div class="flex flex-wrap gap-6">
+                          <template
+                            x-for={`relation in matrixCell('${level.id}', '${reason.id}')`}
+                            x-bind:key="relation.id"
+                          >
+                            <button
+                              type="button"
+                              class={chip()}
+                              x-bind:class={`sidebarMode === 'evidence' && sidebarRelationId === relation.id ? '${selectedItem()}' : ''`}
+                              x-on:click="openRelation(relation)"
+                            >
+                              <span x-text="relation.lawLabel" />
+                            </button>
+                          </template>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+# Evaluation corpus — processed sequentially (smaller laws first)
+GDNG
+OZG
+BDSG
+32016R0679
+32025R0327
+GVG
+SGB 11
+SGB 5
+ZPO

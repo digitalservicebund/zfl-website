@@ -17,6 +17,14 @@ pnpm test <filename>  # Run specific test (e.g. pnpm test src/components/global/
 pnpm test:e2e         # E2E tests with Playwright (builds first)
 pnpm test:e2e e2e/a11y.spec.ts           # Run specific e2e test file
 pnpm test:e2e -- --grep "<test name>"    # Run e2e tests by name
+pnpm laws:download                         # Python pipeline: download DE/EU sources
+pnpm laws:prepare-corpus                   # Python pipeline: unpack/prepare parsable corpus
+pnpm laws:build-registry                   # Python pipeline: build laws registry
+pnpm laws:validate-registry                # Python pipeline: validate registry
+pnpm laws:build-paragraphs                 # Python pipeline: build normalized paragraph JSONL
+pnpm laws:concat-obligations               # Python pipeline: merge per-law obligations CSVs
+pnpm laws:build-relations                  # Python pipeline: build related-law mappings for Pflichten UI
+pnpm laws:publish-ui-data                  # Python pipeline: publish laws.json to static UI path
 ```
 
 ## Architecture
@@ -67,6 +75,8 @@ import { isProduction, isStaging, isPreview } from "@/config/stage";
 **Layout**: All pages use `<Layout title="...">` from `src/layouts/Layout.astro`, which includes the `PageHeader`, `Footer`, and conditional Posthog analytics.
 
 **Kitchen sink**: `src/pages/dev/astro-komponenten.astro` is a staging-only showcase page for all UI components in `src/components/` (excluding `blocks/` and `global/`). When adding or changing a UI component, update this page to reflect the new or changed variants.
+
+**Recht erkunden prototype**: `src/pages/werkzeuge/recht-erkunden.astro` (route) plus its feature folder `src/pages/werkzeuge/_recht-erkunden/` (partials, store, data, styles, and feature-scoped `NormDisplay`/`InfoPopover` components) implement a staging-only, mock-data prototype whose intended flow is documented in `src/pages/werkzeuge/_recht-erkunden/README.md`. When changing this feature's flow, data model, or file layout, update that doc in the same change so it stays the living source of truth for the envisioned flow.
 
 ### Testing
 

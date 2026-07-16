@@ -160,6 +160,10 @@ address {
   font-style: normal;
 }
 
+[x-cloak] {
+  display: none !important;
+}
+
 @utility container {
   @apply mx-auto;
   max-width: var(--max-content-width);

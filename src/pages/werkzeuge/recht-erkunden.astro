@@ -1,0 +1,57 @@
+---
+// Flow, intent, and known divergences: see ./_recht-erkunden/README.md
+import Hero from "@/components/Hero.astro";
+import Layout from "@/layouts/Layout.astro";
+import DetailSidebar from "./_recht-erkunden/DetailSidebar.astro";
+import Step1RechtBestimmen from "./_recht-erkunden/Step1RechtBestimmen.astro";
+import Step2RechtErkunden from "./_recht-erkunden/Step2RechtErkunden.astro";
+
+export const frontmatter = {
+  title: "Recht erkunden",
+  sitemap: false,
+  isStagingOnly: true,
+};
+
+const description =
+  "Prototyp: Ausgehend von einem Gesetz die passenden Rechtsgebiete, die zu ändernden Normen und das angrenzende Recht erkunden - strukturiert nach Normenhierarchie und Relevanzgrund.";
+---
+
+<Layout title={frontmatter.title} description={description} excludeFromSearch>
+  <main x-data="rechtErkunden" class="breakout-grid pb-lg">
+    <Hero level="main">
+      <h1>{frontmatter.title}</h1>
+      <p slot="subtitle">{description}</p>
+    </Hero>
+
+    <div class="breakout breakout-grid bg-yellow-100 py-8">
+      <p class="mb-0">
+        <strong>Hinweis:</strong> Dieses Werkzeug ist ein illustrativer Prototyp mit
+        erfundenen Beispieldaten. Gesetzesnamen sind real, die dargestellten Verbindungen,
+        Zitate, Volltexte und Ähnlichkeits-Werte sind jedoch frei erfunden und nicht
+        rechtlich geprüft. Es zeigt, wie eine explorative Rechtsrecherche für Gesetzesvorhaben
+        aussehen könnte.
+      </p>
+    </div>
+
+    <section class="py-lg space-y-lg">
+      <Step1RechtBestimmen />
+
+      <div
+        class="grid gap-24 lg:items-start"
+        x-bind:class="sidebarMode ? 'lg:grid-cols-[1fr_360px]' : 'lg:grid-cols-1'"
+      >
+        <Step2RechtErkunden />
+        <DetailSidebar />
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script>
+  import Alpine from "alpinejs";
+  import { rechtErkunden } from "./_recht-erkunden/store";
+
+  document.addEventListener("alpine:init", () => {
+    Alpine.data("rechtErkunden", rechtErkunden);
+  });
+</script>

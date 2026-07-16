@@ -26,6 +26,7 @@ export default defineConfig(
   },
   globalIgnores([
     ".astro/",
+    ".venv/",
     "dist/",
     "doc/",
     "playwright-report/",
