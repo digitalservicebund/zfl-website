@@ -4,10 +4,12 @@
   let {
     size = 120,
     orientation = "vertical",
+    className = "",
     children,
   }: {
     size?: number;
     orientation?: "vertical" | "horizontal";
+    className?: string;
     children?: Snippet;
   } = $props();
 
@@ -36,7 +38,7 @@
   const { wrapper, shaft, tip } = $derived(styles({ orientation }));
 </script>
 
-<div class={wrapper()}>
+<div class={wrapper({ class: className })}>
   <div class={shaft()} style={`--arrow-size: ${size}px`}>
     {#if children}
       <p class="font-bold text-sm text-center">{@render children()}</p>

@@ -2,13 +2,16 @@
   import type { Snippet } from "svelte";
   import { packEnclose, packSiblings } from "d3-hierarchy";
   import { tv } from "tailwind-variants";
+  import { twMerge } from "tailwind-merge";
 
   let {
     title,
     orientation = "vertical",
     anchorName,
     color,
+    className = "",
     offset,
+    fitContent = false,
     children,
   }: {
     title?: string;
@@ -23,16 +26,37 @@
      * the `--bubble-color` CSS custom property.
      */
     color?: string;
+    className?: string;
     offset?: number;
+    /**
+     * When true, the content wrapper shrinks to fit its bubbles instead of
+     * taking the default fixed vertical width (`w-1000`). Use this when the
+     * cluster sits alongside other elements in a row (e.g. between two
+     * Bubbles) so it doesn't force them apart.
+     */
+    fitContent?: boolean;
     children?: Snippet;
   } = $props();
+
+  const contentWrapper = tv({
+    base: "relative flex flex-col items-center justify-center",
+    variants: {
+      orientation: {
+        vertical: "mx-auto w-1000",
+        horizontal: "my-auto h-800",
+      },
+      fitContent: {
+        true: "h-fit w-fit",
+      },
+    },
+  });
 
   const titleWrapper = tv({
     base: "absolute flex gap-16",
     variants: {
       orientation: {
-        horizontal: "top-0 left-0 flex-row items-center",
         vertical: "top-0 left-0 flex-row items-center",
+        horizontal: "top-24 left-0 flex-row items-center",
       },
     },
   });
@@ -91,59 +115,61 @@
 
   // A small, random horizontal jitter per cluster instance (fixed for the
   // lifetime of the component) for a more organic, hand-drawn feel.
-  const OFFSET_RANGE = 64; // px, max offset in either direction
+  const OFFSET_RANGE = 128; // px, max offset in either direction
   const clusterOffset = $derived(
     offset ?? Math.round((Math.random() * 2 - 1) * OFFSET_RANGE),
   );
 </script>
 
 <div
-  class="cluster-root relative flex flex-col items-center justify-center h-full w-full"
+  class={twMerge("cluster-root", className)}
   data-orientation={orientation}
-  style={color ? `--bubble-color: ${color};` : undefined}
+  style={color ? `--bubble-color: ${color}` : undefined}
 >
-  {#if title}
-    <div class={titleWrapper({ orientation })}>
-      <div
-        class="size-24 rounded-full bg-black"
-        style={anchorName ? `anchor-name: ${anchorName};` : undefined}
-        aria-hidden="true"
-      ></div>
-      <h2
-        id={title}
-        class="scroll-mt-40 kern-heading-small bg-black text-white px-4"
-      >
-        {title}
-      </h2>
-    </div>
-  {/if}
-
-  <div
-    class="relative flex items-center justify-center"
-    style={`width: ${outerSize}px; height: ${outerSize}px; margin-${orientation === "vertical" ? "left" : "top"}: ${offset ?? clusterOffset}px;`}
-  >
-    <!-- Isolated so the halo/dashed-circle negative z-indices only stack
-         against each other, never against sibling (overlapping) clusters. -->
-    <div class="isolate absolute inset-0">
-      <!-- Soft gray halo ring, matching the original SVG -->
-      <div
-        class="pointer-events-none absolute inset-0 -z-20 rounded-full bg-[#F7F7F7]"
-      ></div>
-      {#if !isSingleBubble}
-        <!-- Dashed cluster circle -->
+  <div class={contentWrapper({ orientation, fitContent })}>
+    {#if title}
+      <div class={titleWrapper({ orientation })}>
         <div
-          class="pointer-events-none absolute -z-10 rounded-full border border-dashed border-black bg-white"
-          style={`width: ${diameter}px; height: ${diameter}px; top: ${HALO_THICKNESS}px; left: ${HALO_THICKNESS}px;`}
+          class="size-24 rounded-full bg-black"
+          style={anchorName ? `anchor-name: ${anchorName};` : undefined}
+          aria-hidden="true"
         ></div>
-      {/if}
-    </div>
+        <h2
+          id={title}
+          class="scroll-mt-40 kern-heading-small bg-black text-white px-4"
+        >
+          {title}
+        </h2>
+      </div>
+    {/if}
 
     <div
-      class={`relative transition-opacity duration-300 ${ready ? "opacity-100" : "opacity-0"}`}
-      style={`width: ${diameter}px; height: ${diameter}px;`}
-      bind:this={containerEl}
+      class="relative flex items-center justify-center"
+      style={`width: ${outerSize}px; height: ${outerSize}px; margin-${orientation === "vertical" ? "left" : "top"}: ${offset ?? clusterOffset}px;`}
     >
-      {@render children?.()}
+      <!-- Isolated so the halo/dashed-circle negative z-indices only stack
+         against each other, never against sibling (overlapping) clusters. -->
+      <div class="isolate absolute inset-0">
+        <!-- Soft gray halo ring, matching the original SVG -->
+        <div
+          class="pointer-events-none absolute inset-0 -z-20 rounded-full bg-[#F7F7F7]"
+        ></div>
+        {#if !isSingleBubble}
+          <!-- Dashed cluster circle -->
+          <div
+            class="pointer-events-none absolute -z-10 rounded-full border border-dashed border-black bg-white"
+            style={`width: ${diameter}px; height: ${diameter}px; top: ${HALO_THICKNESS}px; left: ${HALO_THICKNESS}px;`}
+          ></div>
+        {/if}
+      </div>
+
+      <div
+        class={`relative transition-opacity duration-300 ${ready ? "opacity-100" : "opacity-0"}`}
+        style={`width: ${diameter}px; height: ${diameter}px;`}
+        bind:this={containerEl}
+      >
+        {@render children?.()}
+      </div>
     </div>
   </div>
 </div>
@@ -155,16 +181,16 @@
      component hash class to both instances, so this only ever matches
      Cluster-next-to-Cluster, never Cluster-next-to-Arrow. */
   :global(
-      .cluster-root[data-orientation="vertical"]
-        + .cluster-root[data-orientation="vertical"]
-    ) {
+    .cluster-root[data-orientation="vertical"]
+      + .cluster-root[data-orientation="vertical"]
+  ) {
     margin-top: -48px;
   }
 
   :global(
-      .cluster-root[data-orientation="horizontal"]
-        + .cluster-root[data-orientation="horizontal"]
-    ) {
+    .cluster-root[data-orientation="horizontal"]
+      + .cluster-root[data-orientation="horizontal"]
+  ) {
     margin-left: -48px;
   }
 </style>

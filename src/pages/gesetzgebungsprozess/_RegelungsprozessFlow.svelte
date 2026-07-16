@@ -31,11 +31,11 @@
   });
 
   const container = tv({
-    base: "relative flex",
+    base: "relative flex bg-white [--dark-bg:#F0F0F0]",
     variants: {
       orientation: {
-        horizontal: "h-900 flex-row items-stretch px-32",
-        vertical: "mx-auto w-1000 flex-col",
+        horizontal: "h-screen flex-row items-stretch",
+        vertical: "mx-auto w-screen flex-col",
       },
     },
   });
@@ -61,36 +61,28 @@
   ></div>
 
   <div
-    class={`flex items-center justify-center ${isVertical ? "" : "flex-col"}`}
+    class={`flex items-center justify-center ${isVertical ? "" : "flex-col pl-40"}`}
   >
-    <Bubble
-      color="#E6E6E6"
-      title="Initiative des Bundestages"
-      className="w-full h-full m-48"
-    >
+    <Bubble color="#E6E6E6" title="Initiative des Bundestages" className="m-48">
       {#snippet body()}
         <p class="text-4xl font-bold">24&nbsp;%</p>
       {/snippet}
     </Bubble>
-    <Cluster color="#D59FDE" offset={0}>
-      <Bubble title="Aus der Mitte der Regierung">
+    <Cluster color="#D59FDE" {orientation} offset={0} fitContent>
+      <Bubble color="#D59FDE" title="Aus der Mitte der Regierung">
         {#snippet body()}
           <p class="text-4xl font-bold">60&nbsp;%</p>
         {/snippet}
       </Bubble>
     </Cluster>
-    <Bubble
-      color="#E6E6E6"
-      title="Initiative des Bundesrates"
-      className="w-full h-full m-48"
-    >
+    <Bubble color="#E6E6E6" title="Initiative des Bundesrates" className="m-48">
       {#snippet body()}
         <p class="text-4xl font-bold">16&nbsp;%</p>
       {/snippet}
     </Bubble>
   </div>
 
-  <Arrow {orientation} size={80} />
+  <Arrow {orientation} size={40} />
 
   <Cluster
     color="#BCA6DC"
@@ -110,7 +102,7 @@
 
   <Arrow {orientation}>Übergabe an das Fachreferat</Arrow>
 
-  <Cluster color="#BCA6DC" {orientation}>
+  <Cluster color="#BCA6DC" {orientation} offset={0}>
     <Bubble title="Federführung" size="md"
       >Ein Fachreferat übernimmt die Verantwortung für die Weiterentwicklung der
       Regelung. Legist:in wird zugewiesen.</Bubble
@@ -260,13 +252,16 @@
     </Bubble>
   </Cluster>
 
-  <Arrow {orientation}>Übergabe an die politische Ebene</Arrow>
+  <Arrow {orientation} className="bg-(--dark-bg)"
+    >Übergabe an die politische Ebene</Arrow
+  >
 
   <Cluster
     color="#D2EDB9"
     {orientation}
     offset={0}
-    title="Verabschiedung des Gesetzes"
+    title="Verabschiedung"
+    className="bg-(--dark-bg)"
   >
     <Bubble title="Stellungnahme Bundesrat">
       <h3>Weiterleitung an den Bundesrat</h3>
@@ -285,7 +280,7 @@
     </Bubble>
   </Cluster>
 
-  <Cluster color="#EBF5B3" {orientation}>
+  <Cluster color="#EBF5B3" {orientation} className="bg-(--dark-bg)">
     <Bubble title="Abstimmung im Bundestag">
       <h3>Ausschuss</h3>
       <p>
@@ -308,7 +303,7 @@
     </Bubble>
   </Cluster>
 
-  <Cluster color="#FFFBB5" {orientation}>
+  <Cluster color="#FFFBB5" {orientation} className="bg-(--dark-bg)">
     <Bubble title="Verkündung">
       <h3>Verkündung</h3>
       <p>
@@ -330,6 +325,7 @@
     {orientation}
     title="Nach der Verkündung"
     anchorName={CLUSTER_LAST_ANCHOR}
+    className="bg-(--dark-bg)"
   >
     <Bubble title="Dokumentation & Inkrafttreten">
       <h3>Übergabe der Regelung an die Dokumentations&shy;stelle</h3>
@@ -352,7 +348,11 @@
     </Bubble>
   </Cluster>
 
-  <Cluster color="#FAB5A8" {orientation}>
+  <Cluster
+    color="#FAB5A8"
+    {orientation}
+    className={`bg-(--dark-bg) ${isVertical ? "pb-80" : "pr-40"}`}
+  >
     <Bubble title="Vollzug">
       <ul>
         <li>Bildung von Arbeitsgruppen</li>

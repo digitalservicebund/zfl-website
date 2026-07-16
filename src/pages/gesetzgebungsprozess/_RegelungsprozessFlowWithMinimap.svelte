@@ -77,6 +77,8 @@
       highlighted = [];
     }
   }
+
+  const minimapSize = $derived(orientation === "vertical" ? 165 : 120);
 </script>
 
 <BubbleSidebar>
@@ -125,7 +127,7 @@
           <span>Horizontal</span>
         </label>
       </div>
-      <FlowWithMinimap {orientation} minimapSize={145} {contentId}>
+      <FlowWithMinimap {orientation} {minimapSize} {contentId}>
         {#snippet children()}
           <RegelungsprozessFlow {orientation} bind:highlighted />
         {/snippet}

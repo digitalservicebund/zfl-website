@@ -174,12 +174,12 @@
   }
 </script>
 
-<div
-  class={`flex ${isVertical ? "flex-row gap-96 items-start" : "flex-col-reverse items-center"}`}
->
+<div class="grid">
   <div
-    class={`sticky shrink-0 z-20 backdrop-blur-md ${
-      isVertical ? "left-0 top-40 bottom-40 pl-40" : "bottom-0"
+    class={`sticky z-20 col-start-1 row-start-1 h-fit w-fit rounded-md shadow-md ${
+      isVertical
+        ? "top-40 mb-40 left-40 self-start justify-self-start"
+        : "bottom-20 self-end justify-self-center"
     }`}
   >
     <div
@@ -232,7 +232,7 @@
   <div
     id={contentId}
     bind:this={mainEl}
-    class={`min-w-0 max-w-screen flex-1 ${isVertical ? "order-1" : "order-2 overflow-x-auto scrollbar-none"}`}
+    class={`col-start-1 row-start-1 min-w-0 max-w-screen ${isVertical ? "" : "overflow-x-auto scrollbar-none"}`}
   >
     <!-- Shrink-wrapping measurement wrapper: reports the content's natural,
          unclipped size even once the parent becomes a scroll container. -->
