@@ -35,7 +35,7 @@
     "@astrojs/mdx": "^7.0.2",
     "@astrojs/sitemap": "^3.7.3",
     "@iconify-json/ic": "^1.2.4",
-    "@kern-ux/native": "^2.6.4",
+    "@kern-ux/native": "^2.7.0",
     "@pagefind/component-ui": "^1.5.2",
     "@tailwindcss/vite": "^4.3.2",
     "@types/alpinejs": "^3.13.11",
