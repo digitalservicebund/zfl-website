@@ -61,7 +61,7 @@
   ></div>
 
   <div
-    class={`flex items-center justify-center ${isVertical ? "" : "flex-col pl-40"}`}
+    class={`flex items-center justify-center ${isVertical ? "pt-40" : "flex-col pl-40"}`}
   >
     <Bubble color="#E6E6E6" title="Initiative des Bundestages" className="m-48">
       {#snippet body()}
