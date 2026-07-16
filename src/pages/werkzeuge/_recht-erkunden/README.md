@@ -81,10 +81,16 @@ nach Auslöser:
 - **Begriff-Modus** (aus dem Strip): Begriff, Definition, definierende Norm und
   alle nutzenden Normen/Gesetze.
 - **Evidenz-Modus** (aus einer Matrix-Zelle): Gesetzestitel + Hierarchie-Badge,
-  Relevanzgrund, betroffene SGB-II-Normen (je anklickbar → Norm-Modus) und die
-  Begründung pro Verbindung. Bei _Gemeinsame Nennung_ zusätzlich die
-  Fundstelle (Urteil/Literatur) mit Link und ausklappbarem Volltext. Bei
-  _Thematische Nähe_ zusätzlich das NLP-Signal (Ähnlichkeitswert + Keywords).
+  Relevanzgrund, betroffene SGB-II-Normen (je anklickbar → Norm-Modus) und – je
+  Verbindung – ein zusammenhängender Nachweis-Block. Dessen Überschrift richtet
+  sich nach dem Relevanzgrund (_Verweisung(en)_, _Fundstelle(n)_ bzw.
+  _Thematische Überschneidung(en)_). Jeder Block ist eine Karte, die Quelle,
+  Begründung und referenzierte Normen visuell zusammenfasst: Bei _Gemeinsame
+  Nennung_ steht oben die Fundstelle (Urteil/Literatur) mit einem Tag
+  (Rechtsprechung/Literatur) und Link, darunter die Begründung, darunter die
+  referenzierten Normen mit eigenem Link und ausklappbarem Volltext. Bei
+  _Thematische Nähe_ zeigt die Sidebar zusätzlich die ermittelten Themen als
+  Schlagwörter.
 
 ## Schlüsselkonzepte
 

@@ -15,6 +15,10 @@ export const styles = tv({
       "group flex h-full w-full cursor-pointer flex-col items-start gap-8 rounded-sm border p-16 text-left transition",
     levelBadge:
       "inline-flex items-center rounded-full px-8 py-2 text-xs font-semibold",
+    sourceTag:
+      "inline-flex items-center gap-4 rounded-full px-8 py-2 text-xs font-semibold",
+    evidenceCard:
+      "border-lavender-400 bg-lavender-100 space-y-8 rounded-sm border p-12",
     selectedItem: "border-cosmic-blue-base bg-lavender-100",
     matrixHeaderCell:
       "border-lavender-400 bg-lavender-base border-b-2 p-12 text-left align-top",

@@ -5,7 +5,9 @@ import {
   RELATIONS,
   RELEVANCE_REASONS,
   SEARCHABLE_LAWS,
+  SOURCE_KINDS,
   TERMS,
+  type Evidence,
   type HierarchyLevel,
   type LawArea,
   type Norm,
@@ -14,6 +16,10 @@ import {
   type SearchableLaw,
   type Term,
 } from "./data";
+
+type SourceKind = (typeof SOURCE_KINDS)[number]["id"];
+
+const SOURCE_TAG_BASE = "inline-flex items-center gap-4";
 
 type SidebarMode = "norm" | "evidence" | "term" | null;
 
@@ -113,6 +119,12 @@ export const rechtErkunden = () => ({
     ).length;
   },
 
+  evidenceNorms(evidence: Evidence) {
+    return Array.isArray(evidence.adjacentNorm)
+      ? evidence.adjacentNorm
+      : [evidence.adjacentNorm];
+  },
+
   get activeTerms(): Term[] {
     if (this.activeNormIds.length === 0) return [];
     return TERMS.filter((term) =>
@@ -193,9 +205,25 @@ export const rechtErkunden = () => ({
     return `${LEVEL_BADGE_BASE} ${badgeClass}`;
   },
 
-  reasonFullLabel(reason: RelevanceReason) {
+  reasonLabel(reason: RelevanceReason) {
     const entry = RELEVANCE_REASONS.find((item) => item.id === reason);
-    return entry?.fullLabel ?? entry?.label ?? reason;
+    return entry?.label ?? reason;
+  },
+
+  /** Heading for the evidence list, tailored to the relevance reason. */
+  evidenceSectionLabel(reason: RelevanceReason) {
+    const entry = RELEVANCE_REASONS.find((item) => item.id === reason);
+    return entry?.evidenceSectionLabel ?? "Begründung";
+  },
+
+  sourceKindLabel(kind: SourceKind | undefined) {
+    return SOURCE_KINDS.find((entry) => entry.id === kind)?.label ?? "";
+  },
+
+  sourceKindBadgeClass(kind: SourceKind | undefined) {
+    const badgeClass =
+      SOURCE_KINDS.find((entry) => entry.id === kind)?.badgeClass ?? "";
+    return `${SOURCE_TAG_BASE} ${badgeClass}`;
   },
 });
 

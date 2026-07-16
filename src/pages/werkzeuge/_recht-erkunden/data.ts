@@ -62,8 +62,8 @@ export type SourceRef = {
 
 export type Evidence = {
   quote: string;
-  /** Always present: the concrete provision in the adjacent law. */
-  adjacentNorm: SourceRef;
+  /** Always present: one concrete provision or a list of separately displayed provisions. */
+  adjacentNorm: SourceRef | SourceRef[];
   /** Only for "gemeinsame_nennung": the verdict/literature passage that explicitly cites both norms. */
   citedIn?: SourceRef & { kind: "rechtsprechung" | "literatur" };
 };
@@ -134,21 +134,47 @@ export const RELEVANCE_REASONS: {
   label: string;
   fullLabel?: string;
   hint?: string;
+  /** Heading for the evidence list in the sidebar (Evidenz-Modus). */
+  evidenceSectionLabel: string;
 }[] = [
   {
     id: "verweisung",
     label: "Verweisung",
+    hint: "Eine Norm nimmt ausdrücklich auf eine andere Norm Bezug oder wird von ihr in Bezug genommen.",
+    evidenceSectionLabel: "Verweisung(en)",
   },
   {
     id: "gemeinsame_nennung",
     label: "Rechtsprechung & Literatur",
     fullLabel: "Gemeinsame Nennung in Rechtsprechung und Literatur",
     hint: "Basiert auf expliziten Normzitaten in Urteilen und Fachliteratur.",
+    evidenceSectionLabel: "Fundstelle(n)",
   },
   {
     id: "thematische_naehe",
     label: "Thematische Nähe",
     hint: "Ermittelt über Textähnlichkeit (z. B. Wortvektoren, TF-IDF), nicht über explizite Verweise.",
+    evidenceSectionLabel: "Thematische Überschneidung(en)",
+  },
+];
+
+export const SOURCE_KINDS: {
+  id: "rechtsprechung" | "literatur";
+  label: string;
+  badgeClass: string;
+  icon: string;
+}[] = [
+  {
+    id: "rechtsprechung",
+    label: "Rechtsprechung",
+    badgeClass: "bg-indigo-100 text-indigo-900",
+    icon: "ic:round-gavel",
+  },
+  {
+    id: "literatur",
+    label: "Literatur",
+    badgeClass: "bg-amber-100 text-amber-900",
+    icon: "ic:round-menu-book",
   },
 ];
 
@@ -707,12 +733,20 @@ export const RELATIONS: Relation[] = [
       {
         quote:
           "Das BVerfG leitet aus Art. 1 Abs. 1 i. V. m. Art. 20 Abs. 1 GG einen Anspruch auf ein menschenwürdiges Existenzminimum ab, der die Regelbedarfsbemessung nach § 20 SGB II und die Bestimmung der Hilfebedürftigkeit verfassungsrechtlich einhegt.",
-        adjacentNorm: {
-          label: "Art. 1 Abs. 1, Art. 20 Abs. 1 GG",
-          url: "https://www.gesetze-im-internet.de/gg/art_1.html",
-          fullText:
-            "Art. 1 Abs. 1: Die Würde des Menschen ist unantastbar. Sie zu achten und zu schützen ist Verpflichtung aller staatlichen Gewalt. Art. 20 Abs. 1: Die Bundesrepublik Deutschland ist ein demokratischer und sozialer Bundesstaat.",
-        },
+        adjacentNorm: [
+          {
+            label: "Art. 1 Abs. 1 GG",
+            url: "https://www.gesetze-im-internet.de/gg/art_1.html",
+            fullText:
+              "Die Würde des Menschen ist unantastbar. Sie zu achten und zu schützen ist Verpflichtung aller staatlichen Gewalt.",
+          },
+          {
+            label: "Art. 20 Abs. 1 GG",
+            url: "https://www.gesetze-im-internet.de/gg/art_20.html",
+            fullText:
+              "Die Bundesrepublik Deutschland ist ein demokratischer und sozialer Bundesstaat.",
+          },
+        ],
         citedIn: {
           kind: "rechtsprechung",
           label:
@@ -736,12 +770,19 @@ export const RELATIONS: Relation[] = [
       {
         quote:
           "Im Sanktionenurteil verknüpft das BVerfG die Regelungen zu Leistungsminderungen (§§ 31 ff. SGB II) unmittelbar mit dem grundrechtlich geschützten Existenzminimum.",
-        adjacentNorm: {
-          label: "Art. 1 Abs. 1, Art. 20 Abs. 1 GG",
-          url: "https://www.gesetze-im-internet.de/gg/art_1.html",
-          fullText:
-            "Art. 1 Abs. 1: Die Würde des Menschen ist unantastbar. Art. 20 Abs. 1: Die Bundesrepublik Deutschland ist ein demokratischer und sozialer Bundesstaat.",
-        },
+        adjacentNorm: [
+          {
+            label: "Art. 1 Abs. 1 GG",
+            url: "https://www.gesetze-im-internet.de/gg/art_1.html",
+            fullText: "Die Würde des Menschen ist unantastbar.",
+          },
+          {
+            label: "Art. 20 Abs. 1 GG",
+            url: "https://www.gesetze-im-internet.de/gg/art_20.html",
+            fullText:
+              "Die Bundesrepublik Deutschland ist ein demokratischer und sozialer Bundesstaat.",
+          },
+        ],
         citedIn: {
           kind: "rechtsprechung",
           label: "BVerfG, Urteil v. 05.11.2019 – 1 BvL 7/16",
@@ -773,12 +814,19 @@ export const RELATIONS: Relation[] = [
       {
         quote:
           "Die Verordnung regelt grenzüberschreitende Ansprüche auf Sozialleistungen und überschneidet sich thematisch mit den Leistungsvoraussetzungen des § 7 SGB II für Unionsbürgerinnen und Unionsbürger.",
-        adjacentNorm: {
-          label: "Art. 4, Art. 70 VO (EG) 883/2004",
-          url: "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32004R0883",
-          fullText:
-            "Art. 4: Personen, für die diese Verordnung gilt, haben die gleichen Rechte und Pflichten aufgrund der Rechtsvorschriften eines Mitgliedstaats wie die Staatsangehörigen dieses Staats. Art. 70: Sonderregelung für beitragsunabhängige Geldleistungen.",
-        },
+        adjacentNorm: [
+          {
+            label: "Art. 4 VO (EG) 883/2004",
+            url: "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32004R0883",
+            fullText:
+              "Personen, für die diese Verordnung gilt, haben die gleichen Rechte und Pflichten aufgrund der Rechtsvorschriften eines Mitgliedstaats wie die Staatsangehörigen dieses Staats.",
+          },
+          {
+            label: "Art. 70 VO (EG) 883/2004",
+            url: "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32004R0883",
+            fullText: "Sonderregelung für beitragsunabhängige Geldleistungen.",
+          },
+        ],
       },
     ],
   },
@@ -795,12 +843,20 @@ export const RELATIONS: Relation[] = [
       {
         quote:
           "§ 7 Abs. 1 SGB II nimmt für den Leistungsausschluss bestimmter Unionsbürgerinnen und Unionsbürger auf das unionsrechtliche Aufenthaltsrecht Bezug.",
-        adjacentNorm: {
-          label: "Art. 6, Art. 14 RL 2004/38/EG",
-          url: "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32004L0038",
-          fullText:
-            "Art. 6: Unionsbürgern steht das Recht auf Aufenthalt im Hoheitsgebiet eines anderen Mitgliedstaats für bis zu drei Monate zu. Art. 14: Das Aufenthaltsrecht bleibt bestehen, solange die Unionsbürger die Voraussetzungen erfüllen und die Sozialhilfe des Aufnahmemitgliedstaats nicht unangemessen in Anspruch nehmen.",
-        },
+        adjacentNorm: [
+          {
+            label: "Art. 6 RL 2004/38/EG",
+            url: "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32004L0038",
+            fullText:
+              "Unionsbürgern steht das Recht auf Aufenthalt im Hoheitsgebiet eines anderen Mitgliedstaats für bis zu drei Monate zu.",
+          },
+          {
+            label: "Art. 14 RL 2004/38/EG",
+            url: "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32004L0038",
+            fullText:
+              "Das Aufenthaltsrecht bleibt bestehen, solange die Unionsbürger die Voraussetzungen erfüllen und die Sozialhilfe des Aufnahmemitgliedstaats nicht unangemessen in Anspruch nehmen.",
+          },
+        ],
       },
     ],
   },
@@ -817,12 +873,19 @@ export const RELATIONS: Relation[] = [
       {
         quote:
           "Der EuGH prüft den Leistungsausschluss nicht erwerbstätiger Unionsbürgerinnen und Unionsbürger nach § 7 Abs. 1 SGB II gemeinsam mit Art. 4 VO (EG) 883/2004 und der Freizügigkeitsrichtlinie und hält ihn für unionsrechtskonform.",
-        adjacentNorm: {
-          label: "Art. 4, Art. 70 VO (EG) 883/2004",
-          url: "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32004R0883",
-          fullText:
-            "Art. 4: Gleichbehandlungsgrundsatz. Art. 70: besondere beitragsunabhängige Geldleistungen, die zugleich Merkmale der Sozialhilfe tragen und daher im Wohnmitgliedstaat beschränkt werden dürfen.",
-        },
+        adjacentNorm: [
+          {
+            label: "Art. 4 VO (EG) 883/2004",
+            url: "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32004R0883",
+            fullText: "Gleichbehandlungsgrundsatz.",
+          },
+          {
+            label: "Art. 70 VO (EG) 883/2004",
+            url: "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32004R0883",
+            fullText:
+              "Besondere beitragsunabhängige Geldleistungen, die zugleich Merkmale der Sozialhilfe tragen und daher im Wohnmitgliedstaat beschränkt werden dürfen.",
+          },
+        ],
         citedIn: {
           kind: "rechtsprechung",
           label: "EuGH, Urteil v. 11.11.2014 – C-333/13 (Dano)",
@@ -834,12 +897,19 @@ export const RELATIONS: Relation[] = [
       {
         quote:
           "In der Rechtssache Alimanovic hat der EuGH auf Vorlage des BSG bestätigt, dass der Ausschluss arbeitsuchender Unionsbürger von SGB-II-Leistungen ohne Einzelfall-Verhältnismäßigkeitsprüfung zulässig ist.",
-        adjacentNorm: {
-          label: "Art. 4 VO (EG) 883/2004 i. V. m. Art. 24 RL 2004/38/EG",
-          url: "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32004R0883",
-          fullText:
-            "Art. 24 Abs. 2 RL 2004/38/EG erlaubt es, Personen in der Phase der Arbeitsuche einen Anspruch auf Sozialhilfe zu versagen; das abgestufte System der Richtlinie berücksichtigt die individuellen Umstände bereits typisierend.",
-        },
+        adjacentNorm: [
+          {
+            label: "Art. 4 VO (EG) 883/2004",
+            url: "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32004R0883",
+            fullText: "Gleichbehandlungsgrundsatz.",
+          },
+          {
+            label: "Art. 24 RL 2004/38/EG",
+            url: "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32004L0038",
+            fullText:
+              "Art. 24 Abs. 2 erlaubt es, Personen in der Phase der Arbeitsuche einen Anspruch auf Sozialhilfe zu versagen; das abgestufte System der Richtlinie berücksichtigt die individuellen Umstände bereits typisierend.",
+          },
+        ],
         citedIn: {
           kind: "rechtsprechung",
           label: "EuGH, Urteil v. 15.09.2015 – C-67/14 (Alimanovic)",
@@ -862,12 +932,20 @@ export const RELATIONS: Relation[] = [
       {
         quote:
           "§ 16 SGB II verweist für zahlreiche Eingliederungsleistungen auf die entsprechenden Vorschriften des SGB III.",
-        adjacentNorm: {
-          label: "§ 35, § 45 SGB III",
-          url: "https://www.gesetze-im-internet.de/sgb_3/__35.html",
-          fullText:
-            "§ 35: Die Agentur für Arbeit unterstützt Ausbildungsuchende, Arbeitsuchende und Arbeitgeber bei der Anbahnung von Ausbildungs- und Arbeitsverhältnissen. § 45: Förderung von Maßnahmen bei einem Träger zur Aktivierung und beruflichen Eingliederung.",
-        },
+        adjacentNorm: [
+          {
+            label: "§ 35 SGB III",
+            url: "https://www.gesetze-im-internet.de/sgb_3/__35.html",
+            fullText:
+              "Die Agentur für Arbeit unterstützt Ausbildungsuchende, Arbeitsuchende und Arbeitgeber bei der Anbahnung von Ausbildungs- und Arbeitsverhältnissen.",
+          },
+          {
+            label: "§ 45 SGB III",
+            url: "https://www.gesetze-im-internet.de/sgb_3/__45.html",
+            fullText:
+              "Förderung von Maßnahmen bei einem Träger zur Aktivierung und beruflichen Eingliederung.",
+          },
+        ],
       },
     ],
   },
@@ -937,12 +1015,20 @@ export const RELATIONS: Relation[] = [
       {
         quote:
           "Die Regelbedarfsstufen und die Bemessung der Kosten der Unterkunft folgen im SGB XII derselben Methodik wie im SGB II.",
-        adjacentNorm: {
-          label: "§ 27a, § 35 SGB XII",
-          url: "https://www.gesetze-im-internet.de/sgb_12/__27a.html",
-          fullText:
-            "§ 27a: Die Regelsätze werden auf der Grundlage der Ergebnisse der Einkommens- und Verbrauchsstichprobe ermittelt. § 35: Bedarfe für Unterkunft und Heizung werden in Höhe der tatsächlichen Aufwendungen anerkannt, soweit diese angemessen sind.",
-        },
+        adjacentNorm: [
+          {
+            label: "§ 27a SGB XII",
+            url: "https://www.gesetze-im-internet.de/sgb_12/__27a.html",
+            fullText:
+              "Die Regelsätze werden auf der Grundlage der Ergebnisse der Einkommens- und Verbrauchsstichprobe ermittelt.",
+          },
+          {
+            label: "§ 35 SGB XII",
+            url: "https://www.gesetze-im-internet.de/sgb_12/__35.html",
+            fullText:
+              "Bedarfe für Unterkunft und Heizung werden in Höhe der tatsächlichen Aufwendungen anerkannt, soweit diese angemessen sind.",
+          },
+        ],
       },
     ],
   },
@@ -1040,12 +1126,20 @@ export const RELATIONS: Relation[] = [
       {
         quote:
           "Für Personen ohne Leistungsanspruch nach § 7 SGB II regelt das AsylbLG ein eigenständiges, ähnlich strukturiertes Existenzsicherungssystem.",
-        adjacentNorm: {
-          label: "§ 1, § 3 AsylbLG",
-          url: "https://www.gesetze-im-internet.de/asylblg/__1.html",
-          fullText:
-            "§ 1: Leistungsberechtigt nach diesem Gesetz sind Ausländerinnen und Ausländer, die sich tatsächlich im Bundesgebiet aufhalten und über keinen gesicherten Aufenthaltsstatus verfügen. § 3: Grundleistungen zur Deckung des Bedarfs an Ernährung, Unterkunft, Heizung, Kleidung, Gesundheitspflege und Gebrauchsgütern des Haushalts.",
-        },
+        adjacentNorm: [
+          {
+            label: "§ 1 AsylbLG",
+            url: "https://www.gesetze-im-internet.de/asylblg/__1.html",
+            fullText:
+              "Leistungsberechtigt nach diesem Gesetz sind Ausländerinnen und Ausländer, die sich tatsächlich im Bundesgebiet aufhalten und über keinen gesicherten Aufenthaltsstatus verfügen.",
+          },
+          {
+            label: "§ 3 AsylbLG",
+            url: "https://www.gesetze-im-internet.de/asylblg/__3.html",
+            fullText:
+              "Grundleistungen zur Deckung des Bedarfs an Ernährung, Unterkunft, Heizung, Kleidung, Gesundheitspflege und Gebrauchsgütern des Haushalts.",
+          },
+        ],
       },
     ],
   },
@@ -1083,12 +1177,20 @@ export const RELATIONS: Relation[] = [
       {
         quote:
           "§ 13 SGB II ermächtigt zum Erlass der Bürgergeld-Verordnung, die die Berechnung des zu berücksichtigenden Einkommens für die Bedarfsdeckung nach §§ 9, 19, 20 SGB II konkretisiert.",
-        adjacentNorm: {
-          label: "§ 1, § 6 Bürgergeld-V",
-          url: "https://www.gesetze-im-internet.de/alg_ii-v_2008/",
-          fullText:
-            "§ 1: Zu berücksichtigendes Einkommen im Sinne des § 11 des Zweiten Buches Sozialgesetzbuch. § 6: Vom Einkommen sind Steuern, Sozialversicherungsbeiträge sowie geförderte Altersvorsorgebeiträge abzusetzen.",
-        },
+        adjacentNorm: [
+          {
+            label: "§ 1 Bürgergeld-V",
+            url: "https://www.gesetze-im-internet.de/alg_ii-v_2008/__1.html",
+            fullText:
+              "Zu berücksichtigendes Einkommen im Sinne des § 11 des Zweiten Buches Sozialgesetzbuch.",
+          },
+          {
+            label: "§ 6 Bürgergeld-V",
+            url: "https://www.gesetze-im-internet.de/alg_ii-v_2008/__6.html",
+            fullText:
+              "Vom Einkommen sind Steuern, Sozialversicherungsbeiträge sowie geförderte Altersvorsorgebeiträge abzusetzen.",
+          },
+        ],
       },
     ],
   },
@@ -1105,12 +1207,20 @@ export const RELATIONS: Relation[] = [
       {
         quote:
           "§ 22a SGB II ermächtigt die Länder, die Träger der Grundsicherung zu ermächtigen, die Angemessenheit der Unterkunftskosten per Satzung zu konkretisieren.",
-        adjacentNorm: {
-          label: "§ 22a, § 22b SGB II i. V. m. kommunaler Satzung",
-          url: "https://www.gesetze-im-internet.de/sgb_2/__22a.html",
-          fullText:
-            "Die Länder können die Träger der Grundsicherung für Arbeitsuchende durch Gesetz ermächtigen, durch Satzung zu bestimmen, in welcher Höhe Bedarfe nach § 22 Absatz 1 angemessen sind.",
-        },
+        adjacentNorm: [
+          {
+            label: "§ 22a SGB II",
+            url: "https://www.gesetze-im-internet.de/sgb_2/__22a.html",
+            fullText:
+              "Die Länder können die Träger der Grundsicherung für Arbeitsuchende durch Gesetz ermächtigen, durch Satzung zu bestimmen, in welcher Höhe Bedarfe nach § 22 Absatz 1 angemessen sind.",
+          },
+          {
+            label: "§ 22b SGB II",
+            url: "https://www.gesetze-im-internet.de/sgb_2/__22b.html",
+            fullText:
+              "In der Satzung ist zu bestimmen, welche Wohnfläche entsprechend der Struktur des örtlichen Wohnungsmarktes als angemessen anerkannt wird und in welcher Höhe Aufwendungen für die Unterkunft als angemessen anerkannt werden.",
+          },
+        ],
       },
     ],
   },
@@ -1147,12 +1257,20 @@ export const RELATIONS: Relation[] = [
       {
         quote:
           "§ 7 Abs. 1 SGB II knüpft die Leistungsberechtigung an ein Aufenthaltsrecht und nimmt damit auf die aufenthaltsrechtlichen Titel des Aufenthaltsgesetzes Bezug.",
-        adjacentNorm: {
-          label: "§ 4, § 7 AufenthG",
-          url: "https://www.gesetze-im-internet.de/aufenthg_2004/__4.html",
-          fullText:
-            "§ 4: Ausländer bedürfen für die Einreise und den Aufenthalt eines Aufenthaltstitels, soweit nicht anders bestimmt. § 7: Die Aufenthaltserlaubnis ist ein befristeter Aufenthaltstitel, der zu einem bestimmten Aufenthaltszweck erteilt wird.",
-        },
+        adjacentNorm: [
+          {
+            label: "§ 4 AufenthG",
+            url: "https://www.gesetze-im-internet.de/aufenthg_2004/__4.html",
+            fullText:
+              "Ausländer bedürfen für die Einreise und den Aufenthalt eines Aufenthaltstitels, soweit nicht anders bestimmt.",
+          },
+          {
+            label: "§ 7 AufenthG",
+            url: "https://www.gesetze-im-internet.de/aufenthg_2004/__7.html",
+            fullText:
+              "Die Aufenthaltserlaubnis ist ein befristeter Aufenthaltstitel, der zu einem bestimmten Aufenthaltszweck erteilt wird.",
+          },
+        ],
       },
     ],
   },
@@ -1247,36 +1365,6 @@ export const RELATIONS: Relation[] = [
           url: "https://www.gesetze-im-internet.de/rbsfv_2024/__1.html",
           fullText:
             "Die Regelbedarfsstufen nach der Anlage zu § 28 SGB XII werden zum 1. Januar des Folgejahres mit dem maßgeblichen Fortschreibungssatz angepasst; ein Besitzschutz verhindert ein Absinken unter den Vorjahreswert.",
-        },
-      },
-    ],
-  },
-  {
-    id: "rel-landesblindengeld",
-    lawId: "landesblindengeld",
-    lawLabel: "Landesblindengeld (Beispiel)",
-    lawName:
-      "Landesblindengeldgesetz (Beispiel eines Landesrechts mit Nachteilsausgleich)",
-    level: "landesrecht",
-    reason: "thematische_naehe",
-    normIds: ["n-sgb2-19"],
-    nlp: {
-      similarity: 0.63,
-      keywords: [
-        "Nachteilsausgleich",
-        "Einkommensanrechnung",
-        "existenzsichernde Leistung",
-      ],
-    },
-    evidence: [
-      {
-        quote:
-          "Landesrechtliche Nachteilsausgleiche wie das Blindengeld überschneiden sich thematisch mit dem Bürgergeld, weil sie als zweckbestimmte Leistungen bei der Einkommensanrechnung nach § 19 SGB II gesondert zu bewerten sind.",
-        adjacentNorm: {
-          label: "§ 2 Landesblindengeldgesetz (Beispiel)",
-          url: "#",
-          fullText:
-            "Blinde Menschen erhalten zum Ausgleich der blindheitsbedingten Mehraufwendungen ein monatliches Blindengeld; die Leistung ist einkommens- und vermögensunabhängig ausgestaltet.",
         },
       },
     ],

@@ -1,7 +1,11 @@
 ---
 // Renders inside the rechtErkunden Alpine scope (see ./store.ts).
 import { Icon } from "astro-icon/components";
+import { SOURCE_KINDS } from "./data";
 import NormDisplay from "./NormDisplay.astro";
+import { styles } from "./styles";
+
+const { levelBadge, sourceTag, evidenceCard } = styles();
 ---
 
 <div class="lg:sticky lg:top-24">
@@ -23,7 +27,7 @@ import NormDisplay from "./NormDisplay.astro";
     <div class="mb-12 flex items-start justify-between gap-12">
       <h3 class="mt-0 mb-0">
         <span
-          x-text="sidebarMode === 'norm' ? 'Normtext' : sidebarMode === 'term' ? 'Begriff' : 'Warum relevant?'"
+          x-text="sidebarMode === 'norm' ? 'Normtext' : sidebarMode === 'term' ? 'Begriff' : sidebarRelation ? reasonLabel(sidebarRelation.reason) : ''"
         ></span>
       </h3>
       <button
@@ -92,20 +96,15 @@ import NormDisplay from "./NormDisplay.astro";
     <template x-if="sidebarMode === 'evidence' && sidebarRelation">
       <div class="space-y-12">
         <div>
+          <span
+            class={levelBadge()}
+            x-bind:class="levelBadgeClass(sidebarRelation.level)"
+            x-text="levelLabel(sidebarRelation.level)"></span>
           <p
-            class="mt-0 mb-4 text-base font-semibold"
+            class="mt-4 py-0 text-base font-semibold"
             x-text="sidebarRelation.lawName"
           >
           </p>
-          <div class="flex flex-wrap items-center gap-6">
-            <span
-              class="inline-flex items-center rounded-full px-10 py-2 text-xs font-semibold"
-              x-bind:class="levelBadgeClass(sidebarRelation.level)"
-              x-text="levelLabel(sidebarRelation.level)"></span>
-            <span
-              class="text-icon-muted text-xs"
-              x-text="reasonFullLabel(sidebarRelation.reason)"></span>
-          </div>
         </div>
 
         <div
@@ -113,15 +112,6 @@ import NormDisplay from "./NormDisplay.astro";
           x-cloak
           class="border-lavender-400 rounded-sm border bg-white p-12"
         >
-          <p class="kern-label text-icon-muted mb-4">
-            Ähnlichkeitssignal (NLP, Prototyp-Daten)
-          </p>
-          <p class="mb-4 py-0 text-sm">
-            Themenähnlichkeit: <span
-              class="font-semibold"
-              x-text="sidebarRelation.nlp ? sidebarRelation.nlp.similarity.toFixed(2).replace('.', ',') : ''"
-            ></span>
-          </p>
           <div class="flex flex-wrap gap-6">
             <template
               x-for="keyword in sidebarRelation.nlp ? sidebarRelation.nlp.keywords : []"
@@ -154,68 +144,68 @@ import NormDisplay from "./NormDisplay.astro";
         </div>
 
         <div>
-          <p class="kern-label text-icon-muted mb-8">Begründung</p>
+          <p
+            class="kern-label text-icon-muted mb-8"
+            x-text="evidenceSectionLabel(sidebarRelation.reason)"
+          >
+          </p>
           <ul class="list-none space-y-12 p-0" role="list">
             <template
               x-for="(item, index) in sidebarRelation.evidence"
               :key="index"
             >
-              <li class="space-y-8">
-                <p class="py-0 text-sm" x-text="item.quote"></p>
-                <NormDisplay
-                  label="item.adjacentNorm.label"
-                  fullText="item.adjacentNorm.fullText"
-                  url="item.adjacentNorm.url"
-                  bordered
-                />
-
-                <div
-                  x-show="item.citedIn"
-                  x-cloak
-                  x-data="{ open: false }"
-                  class="border-lavender-400 mt-8 border-t pt-8"
-                >
-                  <p
-                    class="kern-label text-icon-muted mb-4"
-                    x-text="item.citedIn && item.citedIn.kind === 'literatur' ? 'Fundstelle (Literatur)' : 'Fundstelle (Rechtsprechung)'"
-                  >
-                  </p>
+              <li class={evidenceCard()}>
+                <div x-show="item.citedIn" x-cloak class="space-y-4">
                   <div class="flex items-center justify-between gap-8">
-                    <p
-                      class="mb-0 text-sm font-semibold"
-                      x-text="item.citedIn ? item.citedIn.label : ''"
+                    <span
+                      class={sourceTag()}
+                      x-bind:class="sourceKindBadgeClass(item.citedIn?.kind)"
                     >
-                    </p>
-                    <div class="flex shrink-0 items-center gap-8">
-                      <a
-                        x-show="item.citedIn && item.citedIn.url && item.citedIn.url !== '#'"
-                        x-cloak
-                        :href="item.citedIn ? item.citedIn.url : '#'"
-                        target="_blank"
-                        rel="noopener"
-                        class="text-icon-muted hover:text-cosmic-blue-base"
-                        aria-label="Quelle öffnen"
-                      >
-                        <Icon name="ic:round-gavel" class="h-18 w-18" />
-                      </a>
-                      <button
-                        type="button"
-                        class="text-cosmic-blue-base text-xs font-semibold whitespace-nowrap"
-                        @click="open = !open"
-                      >
-                        <span
-                          x-text="open ? 'Volltext ausblenden' : 'Volltext anzeigen'"
-                        ></span>
-                      </button>
-                    </div>
+                      {
+                        SOURCE_KINDS.map((kind) => (
+                          <Icon
+                            name={kind.icon}
+                            class="h-14 w-14"
+                            x-show={`item.citedIn?.kind === '${kind.id}'`}
+                            x-cloak
+                          />
+                        ))
+                      }
+                      <span x-text="sourceKindLabel(item.citedIn?.kind)"></span>
+                    </span>
+                    <a
+                      x-show="item.citedIn?.url && item.citedIn.url !== '#'"
+                      x-cloak
+                      :href="item.citedIn?.url"
+                      target="_blank"
+                      rel="noopener"
+                      class="text-icon-muted hover:text-cosmic-blue-base shrink-0 before:hidden"
+                      aria-label="Quelle öffnen"
+                    >
+                      <Icon name="ic:round-open-in-new" class="h-18 w-18" />
+                    </a>
                   </div>
                   <p
-                    x-show="open"
-                    x-cloak
-                    class="text-icon-muted mt-4 py-0 text-sm whitespace-pre-line"
-                    x-text="item.citedIn ? item.citedIn.fullText : ''"
+                    class="mb-0 text-sm font-semibold"
+                    x-text="item.citedIn?.label"
                   >
                   </p>
+                </div>
+
+                <p class="py-0 text-sm" x-text="item.quote"></p>
+
+                <div class="space-y-8">
+                  <template
+                    x-for="(norm, normIndex) in evidenceNorms(item)"
+                    :key="normIndex"
+                  >
+                    <NormDisplay
+                      label="norm.label"
+                      fullText="norm.fullText"
+                      url="norm.url"
+                      bordered
+                    />
+                  </template>
                 </div>
               </li>
             </template>
