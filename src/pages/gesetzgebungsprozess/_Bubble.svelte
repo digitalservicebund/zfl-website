@@ -10,13 +10,12 @@
     type BubbleSidebarContext,
   } from "./_bubbleSidebar";
 
-  type Size = "sm" | "md" | "lg" | "xl";
+  type Size = "sm" | "md" | "lg";
 
   const sizeMap: Record<Size, string> = {
     sm: "8rem",
-    md: "12rem",
-    lg: "15rem",
-    xl: "18rem",
+    md: "11rem",
+    lg: "14rem",
   };
 
   let {

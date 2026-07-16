@@ -125,7 +125,7 @@
           <span>Horizontal</span>
         </label>
       </div>
-      <FlowWithMinimap {orientation} minimapSize={100} {contentId}>
+      <FlowWithMinimap {orientation} minimapSize={115} {contentId}>
         {#snippet children()}
           <RegelungsprozessFlow {orientation} bind:highlighted />
         {/snippet}

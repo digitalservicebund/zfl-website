@@ -26,10 +26,10 @@
   } = $props();
 
   const titleWrapper = tv({
-    base: "absolute flex gap-24",
+    base: "absolute flex gap-16",
     variants: {
       orientation: {
-        horizontal: "top-0 left-0 flex-col items-start",
+        horizontal: "top-0 left-0 flex-row items-center",
         vertical: "top-0 left-0 flex-row items-center",
       },
     },

@@ -175,11 +175,11 @@
 </script>
 
 <div
-  class={`flex ${isVertical ? "flex-row gap-96 items-start" : "flex-col gap-40 items-center"}`}
+  class={`flex ${isVertical ? "flex-row gap-96 items-start" : "flex-col-reverse items-center"}`}
 >
   <div
-    class={`sticky shrink-0 z-20 bg-white ${
-      isVertical ? "left-0 top-24 bottom-40 pl-40" : "top-0"
+    class={`sticky shrink-0 z-20 backdrop-blur-md ${
+      isVertical ? "left-0 top-40 bottom-40 pl-40" : "bottom-0"
     }`}
   >
     <div
@@ -232,7 +232,7 @@
   <div
     id={contentId}
     bind:this={mainEl}
-    class={`min-w-0 max-w-screen flex-1 ${isVertical ? "order-1" : "order-2 overflow-x-auto"}`}
+    class={`min-w-0 max-w-screen flex-1 ${isVertical ? "order-1" : "order-2 overflow-x-auto scrollbar-none"}`}
   >
     <!-- Shrink-wrapping measurement wrapper: reports the content's natural,
          unclipped size even once the parent becomes a scroll container. -->
