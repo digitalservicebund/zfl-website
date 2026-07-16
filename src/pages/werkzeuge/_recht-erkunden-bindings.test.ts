@@ -1,9 +1,9 @@
 import { renderToDOM } from "@/utils/testUtils.ts";
 import { describe, expect, it } from "vitest";
-import DetailSidebar from "./_DetailSidebar.astro";
-import Step1RechtBestimmen from "./_Step1RechtBestimmen.astro";
-import Step2RechtErkunden from "./_Step2RechtErkunden.astro";
-import { rechtErkunden } from "./_recht-erkunden-store.ts";
+import DetailSidebar from "./_recht-erkunden/DetailSidebar.astro";
+import Step1RechtBestimmen from "./_recht-erkunden/Step1RechtBestimmen.astro";
+import Step2RechtErkunden from "./_recht-erkunden/Step2RechtErkunden.astro";
+import { rechtErkunden } from "./_recht-erkunden/store.ts";
 
 /*
  * Guardrail for the (necessarily) stringly-typed coupling between the Alpine
