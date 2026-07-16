@@ -244,6 +244,9 @@
       Die Kabinettvorlage wird unterzeichnet von Unterabteilungsleitung,
       Abteilungsleitung und Hausleitung (bzw. Staatssekretär:in in Vertretung)
     </Bubble>
+  </Cluster>
+
+  <Cluster color="#D2EDB9" {orientation}>
     <Bubble title="Weiterleitung an das Bundes&shy;kanzleramt" size="md">
       Fachreferat leitet die Kabinettvorlage an Bundeskanzleramts-Chef:in weiter
       (mind. 8 Tage vor der Kabinettsitzung). Einbindung Spiegel- &
@@ -251,86 +254,83 @@
     </Bubble>
   </Cluster>
 
-  <Cluster color="#D2EDB9" {orientation} title="Stellungnahme Bundesrat">
-    <Bubble title="Weiterleitung an den Bundesrat" size="md">
-      Chef:in des Bundeskanzleramts setzt die Kabinettvorlage auf die Agenda der
-      Kabinettsitzung. Leitet die Kabinettvorlage an den Bundesrat.
-    </Bubble>
-    <Bubble title="Stellungnahme" size="sm">
-      Der Bundesrat nimmt sich der Vorlage an und bezieht innerhalb von 6 Wochen
-      Stellung dazu.
-    </Bubble>
-    <Bubble title="Weiterleitung an den Bundestag" size="md">
-      Leitet Vorlage mit Stellungnahme und Gegenäußerung an den/die Präsident:in
-      des Bundestages.
-    </Bubble>
-  </Cluster>
-
-  <Cluster color="#EBF5B3" {orientation} title="Abstimmung im Bundestag">
-    <Bubble title="Erste Lesung" size="sm"></Bubble>
-    <Bubble title="Ausschuss" size="sm">
-      Regelung wird an den zuständigen Ausschuss geleitet, dort geprüft und
-      bearbeitet. Im Ausschuss wird ein Bericht verfasst mit einer
-      Beschlussempfehlung und dem Plenum vorgelegt.
+  <Cluster color="#D2EDB9" {orientation} title="Verabschiedung des Gesetzes">
+    <Bubble title="Stellungnahme Bundesrat">
+      <h3>Weiterleitung an den Bundesrat</h3>
+      <p>
+        Chef:in des Bundeskanzleramts setzt die Kabinettvorlage auf die Agenda
+        der Kabinettsitzung. Leitet die Kabinettvorlage an den Bundesrat.
+      </p>
+      <h3>Stellungnahme</h3>
+      <p>
+        Der Bundesrat nimmt sich der Vorlage an und bezieht innerhalb von 6
+        Wochen Stellung dazu.
+      </p>
+      <h3>Weiterleitung an den Bundestag</h3>
+      Leitet Vorlage mit Stellungnahme und Gegenäußerung an den/die Präsident:in des
+      Bundestages.
     </Bubble>
   </Cluster>
 
   <Cluster color="#EBF5B3" {orientation}>
-    <Bubble title="Zweite Lesung" size="sm">
-      Der Gesetzesentwurf wird mit dem Ausschussbericht und den
-      Änderungsvorschlägen besprochen. Abstimmung und Einbringung von
-      Änderungsanträgen.
-    </Bubble>
-  </Cluster>
-  <Cluster color="#EBF5B3" {orientation}>
-    <Bubble title="Dritte Lesung" size="sm">
-      Der Gesetzentwurf wird der <strong>Schlussabstimmung</strong> unterzogen.
-    </Bubble>
-  </Cluster>
-  <Cluster color="#EBF5B3" {orientation}>
-    <Bubble title="Abstimmung im Bundesrat" badge="Optional">
-      Der Gesetzentwurf wird der Schlussabstimmung unterzogen.
-    </Bubble>
-  </Cluster>
-
-  <Cluster color="#FFFBB5" {orientation} title="Verkündung">
-    <Bubble title="Verkündung" size="sm">
-      Der Gesetzestext wird im Bundesgesetzblatt veröffentlicht. Die
-      Kommentarspalte wird im Bundesanzeiger veröffentlicht.
-    </Bubble>
-    <Bubble title="Ausfertigung" size="sm">
-      Bundespräsident:in prüft und unterzeichnet das Gesetz.
-    </Bubble>
-    <Bubble title="Freigabe" size="sm">
-      Freigegeben vom Ministerium zur Veröffentlichung
-    </Bubble>
-    <Bubble title="Gegenzeichnung" size="sm">
-      Bundeskanzler:in zeichnet das Gesetz gegen.
-    </Bubble>
-    <Bubble
-      title="Veröffentlichung Stellungnahme des NKR"
-      badge="Optional"
-      size="md"
-    ></Bubble>
-  </Cluster>
-
-  <Cluster color="#FDE99F" {orientation} title="Dokumentation">
-    <Bubble
-      title="Übergabe der Regelung an die Dokumentations&shy;stelle"
-      size="md"
-    ></Bubble>
-    <Bubble title="Dokumentation Gesetze" size="md">
-      Metadaten werden hinzugefügt (z. B. Ministerium, amtliche Fundstelle,
-      basiert auf EU-Verordnung, ...)
-    </Bubble>
-    <Bubble title="Dokumentation Änderungs&shy;gesetze" size="md">
-      Änderungen werden einge-arbeitet. Metadaten werden hinzugefügt. (z. B.
-      Ministerium, amtliche Fundstelle, basiert auf EU-Verordnung, ...)
+    <Bubble title="Abstimmung im Bundestag">
+      <h3>Ausschuss</h3>
+      <p>
+        Regelung wird an den zuständigen Ausschuss geleitet, dort geprüft und
+        bearbeitet. Im Ausschuss wird ein Bericht verfasst mit einer
+        Beschlussempfehlung und dem Plenum vorgelegt.
+      </p>
+      <h3>Erste Lesung</h3>
+      <h3>Zweite Lesung</h3>
+      <p>
+        Der Gesetzesentwurf wird mit dem Ausschussbericht und den
+        Änderungsvorschlägen besprochen. Abstimmung und Einbringung von
+        Änderungsanträgen.
+      </p>
+      <h3>Dritte Lesung</h3>
+      <p>
+        Der Gesetzentwurf wird der <strong>Schlussabstimmung</strong> unterzogen.
+      </p>
+      <h3>Abstimmung im Bundesrat (optional)</h3>
     </Bubble>
   </Cluster>
 
-  <Cluster color="#FDE99F" {orientation}>
-    <Bubble title="Inkrafttreten" size="md">
+  <Cluster color="#FFFBB5" {orientation}>
+    <Bubble title="Verkündung">
+      <h3>Verkündung</h3>
+      <p>
+        Der Gesetzestext wird im Bundesgesetzblatt veröffentlicht. Die
+        Kommentarspalte wird im Bundesanzeiger veröffentlicht.
+      </p>
+      <h3>Ausfertigung</h3>
+      <p>Bundespräsident:in prüft und unterzeichnet das Gesetz.</p>
+      <h3>Freigabe</h3>
+      <p>Freigegeben vom Ministerium zur Veröffentlichung</p>
+      <h3>Gegenzeichnung</h3>
+      <p>Bundeskanzler:in zeichnet das Gesetz gegen.</p>
+      <h3>Veröffentlichung Stellungnahme des NKR (optional)</h3>
+    </Bubble>
+  </Cluster>
+
+  <Cluster
+    color="#FDE99F"
+    {orientation}
+    title="Nach der Verkündung"
+    anchorName={CLUSTER_LAST_ANCHOR}
+  >
+    <Bubble title="Dokumentation & Inkrafttreten">
+      <h3>Übergabe der Regelung an die Dokumentations&shy;stelle</h3>
+      <h3>Dokumentation Gesetze</h3>
+      <p>
+        Metadaten werden hinzugefügt (z. B. Ministerium, amtliche Fundstelle,
+        basiert auf EU-Verordnung, ...)
+      </p>
+      <h3>Dokumentation Änderungsgesetze</h3>
+      <p>
+        Änderungen werden eingearbeitet. Metadaten werden hinzugefügt (z. B.
+        Ministerium, amtliche Fundstelle, basiert auf EU-Verordnung, ...)
+      </p>
+      <h3>Inkrafttreten</h3>
       <p>Die Regelung tritt in Kraft und wird veröffentlicht.</p>
       <ul>
         <li>Veröffentlichung auf gesetze-im-internet.de</li>
@@ -339,14 +339,13 @@
     </Bubble>
   </Cluster>
 
-  <Cluster
-    color="#FAB5A8"
-    {orientation}
-    anchorName={CLUSTER_LAST_ANCHOR}
-    title="Vollzug"
-  >
-    <Bubble title="Bildung von Arbeits&shy;gruppen" size="md"></Bubble>
-    <Bubble title="Evaluation Änderungs&shy;bedarfe" size="md"></Bubble>
-    <Bubble title="..." size="sm"></Bubble>
+  <Cluster color="#FAB5A8" {orientation}>
+    <Bubble title="Vollzug">
+      <ul>
+        <li>Bildung von Arbeitsgruppen</li>
+        <li>Evaluation Änderungsdbedarfe</li>
+        <li>...</li>
+      </ul>
+    </Bubble>
   </Cluster>
 </div>
