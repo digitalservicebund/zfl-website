@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZfL – Weiterentwicklung des Gesetzgebungsvorblatts</title>
+    <style>
+        :root {
+            --zfl-blue: #003063;
+            --zfl-blue-light: #006599;
+            --zfl-blue-dark: #001f40;
+            --zfl-accent: #0088cc;
+            --bg-light: #f4f6f8;
+            --text-dark: #222222;
+            --text-muted: #555555;
+            --white: #ffffff;
+            --border-color: #d1d8e0;
+            --postit-bg: #fff68f;
+            --postit-border: #f2e205;
+            --postit-text: #1a1a1a;
+            --radius: 6px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            background-color: var(--zfl-blue);
+            color: var(--white);
+            border-bottom: 4px solid var(--zfl-accent);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        .header-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 700;
+            font-size: 1.3rem;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-badge {
+            background-color: var(--white);
+            color: var(--zfl-blue);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: opacity 0.2s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(135deg, var(--zfl-blue) 0%, var(--zfl-blue-dark) 100%);
+            color: var(--white);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 750px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* --- MAIN LAYOUT & SECTIONS --- */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        section {
+            margin-bottom: 5rem;
+        }
+
+        .section-header {
+            margin-bottom: 2.5rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            color: var(--zfl-blue);
+            font-weight: 700;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-top: 0.3rem;
+        }
+
+        /* --- STATUS QUO BOX --- */
+        .status-box {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            border-left: 6px solid var(--zfl-blue-light);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+        }
+
+        @media(max-width: 900px) {
+            .status-box { grid-template-columns: 1fr; }
+        }
+
+        .status-text h3 {
+            color: var(--zfl-blue);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .status-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .status-list li {
+            position: relative;
+            padding-left: 1.8rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .status-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--zfl-accent);
+            font-weight: bold;
+        }
+
+        .ggo-structure {
+            background: var(--bg-light);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            font-family: monospace;
+            font-size: 0.95rem;
+        }
+
+        .ggo-structure strong {
+            color: var(--zfl-blue);
+        }
+
+        /* --- INTERNATIONAL GRID --- */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--zfl-blue);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-country {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--zfl-blue);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-focus {
+            display: inline-block;
+            background: rgba(0, 101, 153, 0.1);
+            color: var(--zfl-blue-light);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            align-self: flex-start;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+
+        .card-highlight {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            background: #fafbfc;
+            padding: 0.8rem;
+            border-radius: 4px;
+        }
+
+        /* --- PROTOTYP SCREENSHOT RECREATION --- */
+        .prototype-wrapper {
+            background: #ebf0f5;
+            padding: 3rem 2rem;
+            border-radius: var(--radius);
+            border: 1px solid #c8d4e0;
+        }
+
+        .pages-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media(max-width: 1100px) {
+            .pages-grid { grid-template-columns: 1fr; }
+        }
+
+        .page-mock {
+            background: var(--white);
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 2rem 1.5rem;
+            min-height: 650px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+            border: 1px solid #dcdcdc;
+        }
+
+        .page-title {
+            font-size: 0.85rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .mock-h1 {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--zfl-blue);
+        }
+
+        .mock-h2 {
+            font-size: 0.95rem;
+            font-weight: bold;
+            color: #333;
+            margin-top: 0.5rem;
+        }
+
+        .mock-text {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .mock-bullet {
+            background: #fcfcfc;
+            border: 1px dashed #ccc;
+            padding: 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #555;
+            font-family: monospace;
+        }
+
+        .mock-visual {
+            background: #718096;
+            color: white;
+            padding: 1.5rem 1rem;
+            border-radius: 4px;
+            text-align: center;
+            font-size: 0.85rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            justify-content: center;
+            min-height: 180px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .mock-visual strong {
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .mock-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .mock-table th, .mock-table td {
+            border: 1px solid #e2e8f0;
+            padding: 0.4rem;
+            text-align: left;
+        }
+
+        .mock-table th {
+            background: #edf2f7;
+            color: #4a5568;
+        }
+
+        /* POST-IT STYLES */
+        .post-it {
+            background: var(--postit-bg);
+            border: 1px solid var(--postit-border);
+            color: var(--postit-text);
+            padding: 0.6rem 0.8rem;
+            border-radius: 2px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            box-shadow: 2px 4px 8px rgba(0,0,0,0.15);
+            position: absolute;
+            z-index: 10;
+            max-width: 150px;
+            line-height: 1.3;
+            transform: rotate(-1.5deg);
+            transition: transform 0.2s, z-index 0.2s;
+        }
+
+        .post-it:hover {
+            transform: scale(1.1) rotate(0deg);
+            z-index: 20;
+        }
+
+        .post-it::after {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 1px;
+        }
+
+        /* Specific Post-it positions */
+        .pi-p1-1 { top: 180px; right: -15px; transform: rotate(2deg); }
+        .pi-p1-2 { bottom: 30px; right: -15px; transform: rotate(-3deg); }
+
+        .pi-p2-1 { top: 120px; right: -10px; transform: rotate(3deg); }
+        .pi-p2-2 { top: 160px; right: -25px; transform: rotate(-1deg); background: #ffe066; }
+        .pi-p2-3 { top: 280px; right: -10px; transform: rotate(-2deg); }
+        .pi-p2-4 { top: 330px; right: -25px; transform: rotate(2deg); background: #ffe066; }
+        .pi-p2-5 { bottom: 80px; right: -15px; transform: rotate(1deg); }
+        .pi-p2-6 { bottom: 20px; right: -20px; transform: rotate(-2deg); background: #ffe066; }
+
+        .pi-p3-1 { top: 30px; right: -15px; transform: rotate(2deg); background: #ffdfba; }
+        .pi-p3-2 { top: 90px; right: -20px; transform: rotate(-1deg); }
+        .pi-p3-3 { top: 220px; right: -25px; transform: rotate(3deg); background: #ffe066; }
+
+        /* BOTTOM ANNOTATIONS (Lightbulbs) */
+        .bottom-hints {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            align-items: center;
+            justify-content: center;
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .bulb-icon {
+            font-size: 2.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .hint-tag {
+            background: #fff8c5;
+            border: 1px solid #f6e05e;
+            color: #744210;
+            padding: 0.8rem 1.2rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hint-tag::before {
+            content: "✓";
+            font-weight: bold;
+            color: #d69e2e;
+        }
+
+        /* --- ABLEITUNG GGO SECTION --- */
+        .ggo-table-wrapper {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-bottom: 3rem;
+        }
+
+        .ggo-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .ggo-table th {
+            background: var(--zfl-blue);
+            color: var(--white);
+            padding: 1.2rem 1.5rem;
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+
+        .ggo-table td {
+            padding: 1.2rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: top;
+        }
+
+        .ggo-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .ggo-table tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        .badge-new {
+            background: #e6fffa;
+            color: #234e52;
+            border: 1px solid #81e6d9;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .recommendation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .rec-box {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--zfl-accent);
+        }
+
+        .rec-box h4 {
+            color: var(--zfl-blue);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .rec-box ul {
+            padding-left: 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .rec-box ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--zfl-blue-dark);
+            color: #a0aec0;
+            padding: 3rem 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            border-top: 4px solid var(--zfl-accent);
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        footer strong {
+            color: var(--white);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <div class="logo-area">
+                <span class="logo-badge">ZfL</span>
+                <span>Zentrum für Legistik</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#status-quo">Status Quo DE</a></li>
+                    <li><a href="#vergleich">Int. Best Practices</a></li>
+                    <li><a href="#prototyp">Prototyp (Anlage 3/4)</a></li>
+                    <li><a href="#ggo-ableitung">GGO-Ableitung</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Das Gesetzgebungsvorblatt der Zukunft</h1>
+            <p>Impulspapier zur strukturellen Weiterentwicklung des Vorblatts und der Begründung (Anlage 3 & 4 der GGO) für eine nutzerzentrierte, digitale und wirkungsorientierte Gesetzgebung.</p>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- 1. STATUS QUO DEUTSCHLAND -->
+        <section id="status-quo">
+            <div class="section-header">
+                <h2>1. Status Quo: Das Vorblatt in Deutschland</h2>
+                <p>Analyse der bestehenden rechtlichen Vorgaben und administrative Praxis nach § 43 GGO</p>
+            </div>
+
+            <div class="status-box">
+                <div class="status-text">
+                    <h3>Der aktuelle Rahmen (§ 43 GGO)</h3>
+                    <p>Das Vorblatt soll laut Gemeinsamer Geschäftsordnung (GGO) der Bundesregierung den Entwurf eines Gesetzes zusammenfassen und schnell über die wesentlichen Inhalte informieren. Die Realität zeigt jedoch ein anderes Bild: Das Vorblatt hat sich von einer schnellen Entscheidungshilfe zu einem stark formalisierten, textlastigen Rechtsdokument entwickelt.</p>
+                    
+                    <ul class="status-list">
+                        <li><strong>Reine Textwüsten:</strong> Keine visuellen Einstiegshilfen, Prozessdiagramme oder strukturierte Tabellen erlaubt bzw. üblich.</li>
+                        <li><strong>Dominanz des Erfüllungsaufwands:</strong> Überproportionaler Fokus auf detailliert berechnete Bürokratiekosten (NKR-Aufsicht), während die eigentliche Wirkungslogik zu kurz kommt.</li>
+                        <li><strong>Juristische Fachsprache:</strong> Schwer verständlich für Bürger:innen und parlamentarische Generalist:innen ("Legistendeutsch").</li>
+                        <li><strong>Fehlende Verlinkung:</strong> Starres PDF-Denken ohne klickbare Sprungmarken zu zugrundeliegenden Studien, Datenbanken oder Alternativmodellen.</li>
+                    </ul>
+                </div>
+
+                <div class="ggo-structure">
+                    <strong>Bestehende Gliederung (Anlage 3 GGO):</strong><br><br>
+                    <strong>A. Problem und Ziel</strong><br>
+                    [Oft abstrakte Problembeschreibung ohne empirische Baseline]<br><br>
+                    <strong>B. Lösung</strong><br>
+                    [Textliche Aufzählung der Maßnahmen]<br><br>
+                    <strong>C. Alternativen</strong><br>
+                    [Standard-Floskel: "Keine." oder "Ausschließlich freiwillige Vereinbarungen, die erfolglos blieben."]<br><br>
+                    <strong>D. Haushaltsausgaben o. Erfüllungsaufwand</strong><br>
+                    [Fiskalische Auswirkungen auf Bund/Länder]<br><br>
+                    <strong>E. Erfüllungsaufwand</strong><br>
+                    &nbsp;&nbsp;E.1 Für Bürgerinnen und Bürger<br>
+                    &nbsp;&nbsp;E.2 Für die Wirtschaft (One-in/One-out)<br>
+                    &nbsp;&nbsp;E.3 Für die Verwaltung<br><br>
+                    <strong>F. Weitere Kosten</strong><br>
+                    [Auswirkungen auf Preisniveau/Verbraucher]
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 2. INTERNATIONALER VERGLEICH -->
+        <section id="vergleich">
+            <div class="section-header">
+                <h2>2. Blick über den Tellerrand: Internationale Best Practices</h2>
+                <p>Was Deutschland von den Vorblättern und Folgenabschätzungen anderer Länder lernen kann</p>
+            </div>
+
+            <div class="grid-3">
+                <!-- Österreich -->
+                <div class="card">
+                    <div class="card-country">🇦🇹 Österreich</div>
+                    <span class="card-focus">Ziele & Wirkungsorientierung</span>
+                    <p>In Österreich steht die <strong>Wirkungsorientierte Folgenabschätzung (WFA)</strong> im Zentrum. Statt nur rechtliche Lösungen zu beschreiben, verlangt das System die exakte Definition von messbaren Zielen. Insbesondere das verfassungsrechtlich verankerte <strong>Gender-Budgeting</strong> (Gleichstellungs-Check) sowie verbindliche Jugend- und Umweltchecks zwingen Legist:innen, die realen Effekte auf spezifische Zielgruppen darzustellen.</p>
+                    <div class="card-highlight">
+                        <strong>Lernpunkt für DE:</strong> Vorblatt muss verbindlich festlegen, <em>welcher gesellschaftliche Zustand</em> bis wann erreicht werden soll (Baseline vs. Zielwert).
+                    </div>
+                </div>
+
+                <!-- Schweiz -->
+                <div class="card">
+                    <div class="card-country">🇨🇭 Schweiz</div>
+                    <span class="card-focus">Auswirkungen auf die Umsetzung</span>
+                    <p>Die Schweizer „Botschaft“ des Bundesrates legt den Fokus radikal auf den administrativen Vollzug. Aufgrund des Föderalismus wird detailliert aufgeschlüsselt, welche konkreten personellen, organisatorischen und finanziellen Auswirkungen auf die Umsetzungsebene – also die <strong>Kantone und Gemeinden</strong> – zukommen. Gesetze werden vom Ende her (dem Vollzug am Schalter) gedacht.</p>
+                    <div class="card-highlight">
+                        <strong>Lernpunkt für DE:</strong> Strikte Trennung von einmaligem Umstellungsaufwand und dauerhaften Betriebskosten der Vollzugsstellen auf Kommunalebene.
+                    </div>
+                </div>
+
+                <!-- Estland -->
+                <div class="card">
+                    <div class="card-country">🇪🇪 Estland</div>
+                    <span class="card-focus">IT-Systeme & digitale Architektur</span>
+                    <p>Das estnische Vorblatt (<em>Seletuskiri</em>) besticht durch einen kompromisslosen „Digital-First“-Ansatz. Jedes Vorblatt muss zwingend eine <strong>IT-Architektur-Analyse</strong> enthalten: Welche bestehenden staatlichen Datenbanken über das X-Road-Netzwerk verknüpft werden müssen, welche Algorithmen angepasst werden und welche Software-Entwicklungskosten (in Euro und Personentagen) entstehen.</p>
+                    <div class="card-highlight">
+                        <strong>Lernpunkt für DE:</strong> Integration des „Digitalchecks“ direkt ins Vorblatt – Nachweis der digitalen Ausführbarkeit vor Verabschiedung.
+                    </div>
+                </div>
+
+                <!-- Schweden -->
+                <div class="card">
+                    <div class="card-country">🇸🇪 Schweden</div>
+                    <span class="card-focus">Transparente Konsultation</span>
+                    <p>Das schwedische Vorblatt spiegelt die Konsenskultur wider. Nach dem obligatorischen <em>Remiss-Verfahren</em> wird im Vorblatt lückenlos und prominent dokumentiert, <strong>welche Behörden, NGOs oder Verbände Kritik geäußert haben</strong>, worin die Einwände bestanden und mit welcher genauen Begründung die Regierung diese Kritik integriert oder entkräftet hat.</p>
+                    <div class="card-highlight">
+                        <strong>Lernpunkt für DE:</strong> Ehrliche Transparenz über kontroverse Punkte und Stellungnahmen der Verbände im Vorblatt statt reiner Harmonie-Darstellung.
+                    </div>
+                </div>
+
+                <!-- Frankreich -->
+                <div class="card">
+                    <div class="card-country">🇫🇷 Frankreich</div>
+                    <span class="card-focus">Echte Alternativen-Darstellung</span>
+                    <p>Die französische <em>Étude d'impact</em> besitzt verfassungsrechtliche Ranghöhe und blockiert den Parlamentszugang bei ungenügender Qualität. Kern ist die pflichtmäßige Darlegung echter Alternativen: Es muss zwingend das <strong>„Status-Quo-Szenario“ (Nichtstun / Do-Nothing)</strong> modelliert und durchgerechnet werden, gefolgt vom Vergleich zwischen rein steuerlichen/finanziellen Anreizen und dem gewählten ordnungsrechtlichen Eingriff.</p>
+                    <div class="card-highlight">
+                        <strong>Lernpunkt für DE:</strong> Abschaffung der Floskel „Alternativen: Keine.“ – Pflicht zur ökonomischen Bewertung des Nichtstuns.
+                    </div>
+                </div>
+
+                <!-- Vereinigtes Königreich -->
+                <div class="card">
+                    <div class="card-country">🇬🇧 Großbritannien</div>
+                    <span class="card-focus">NPV (10 Jahre) & Einfache Sprache</span>
+                    <p>Das UK-System trennt strikt in zwei Säulen: Das mathematisch-ökonomische <em>Impact Assessment</em> berechnet standardmäßig den volkswirtschaftlichen <strong>Nettogegenwartswert (Net Present Value - NPV over 10 Years)</strong>, um langfristige Nutzen monetär sichtbar zu machen. Parallel dazu übersetzen die <em>Explanatory Notes</em> das Gesetz Klausel für Klausel unpolitisch in absolut einfache Alltagssprache (<strong>Plain English</strong>).</p>
+                    <div class="card-highlight">
+                        <strong>Lernpunkt für DE:</strong> Pflicht zu einer verständlichen „Plain German“-Zusammenfassung und 10-Jahres-Horizont für gesamtgesellschaftliche Nutzen.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 3. PROTOTYP NEUES VORBLATT -->
+        <section id="prototyp">
+            <div class="section-header">
+                <h2>3. Prototyp: Das neue deutsche Vorblatt (Anlage 3 & 4)</h2>
+                <p>Visualisierung des ZfL-Entwurfs inklusive Kennzeichnung der methodischen Input-Quellen und Länder-Referenzen</p>
+            </div>
+
+            <div class="prototype-wrapper">
+                <!-- 3 PAGES GRID -->
+                <div class="pages-grid">
+                    
+                    <!-- PAGE 1 -->
+                    <div class="page-mock">
+                        <!-- Post-Its Page 1 -->
+                        <div class="post-it pi-p1-1">Quelle: Politischer Auftrag und Problemanalyse [Frühphase]</div>
+                        <div class="post-it pi-p1-2">Quelle: Frühphase</div>
+
+                        <div class="page-title">Anlage 3 – Seite 1</div>
+                        <div class="mock-h1">Gesetzentwurf der Bundesregierung</div>
+                        <div style="font-size: 1.1rem; font-weight: 800; color: #1a202c; margin-bottom: 0.5rem;">Titel des Vorhabens</div>
+
+                        <div class="mock-h2">A. Problem und Ziel</div>
+                        <div class="mock-text">Beschreibender Text in verständlicher Sprache (Kurzzusammenfassung der Ausgangslage).</div>
+                        <div class="mock-bullet">
+                            • Stichpunkt 1: Empirische Baseline des Problems<br>
+                            • Stichpunkt 2: Konkretes, messbares Ziel der Maßnahme<br>
+                            • Stichpunkt 3: Zeitlicher Horizont der Zielerreichung
+                        </div>
+
+                        <div class="mock-h2" style="margin-top: 1rem;">B. Lösung</div>
+                        <div class="mock-visual">
+                            <strong>Visualisierung der geplanten Umsetzung</strong>
+                            <span>Ziel für Leser:innen: Schneller Einstieg</span>
+                            <span>Ziel für Legist:innen: sich mit der Umsetzung beschäftigen</span>
+                            <span style="font-size:0.75rem; background:rgba(0,0,0,0.2); padding:4px; border-radius:2px;">ZfL erstellt gemeinsam Visualisierungen<br>(4 Wochen Vorlauf)</span>
+                        </div>
+                    </div>
+
+                    <!-- PAGE 2 -->
+                    <div class="page-mock">
+                        <!-- Post-Its Page 2 -->
+                        <div class="post-it pi-p2-1">Quelle: Digitalcheck</div>
+                        <div class="post-it pi-p2-2">EU: Estland</div>
+                        <div class="post-it pi-p2-3">Quelle: Wirkungsorientierte Folgenabschätzung</div>
+                        <div class="post-it pi-p2-4">EU: Österreich</div>
+                        <div class="post-it pi-p2-5">Quelle: Frühphase</div>
+                        <div class="post-it pi-p2-6">EU: Frankreich</div>
+
+                        <div class="page-title">Anlage 3 – Seite 2</div>
+                        <div class="mock-text">Beschreibender Text (Lösung Fortsetzung):</div>
+                        <div class="mock-bullet">
+                            • Stichpunkte zur operativen Ausgestaltung<br>
+                            • Verzicht auf Detailjuristerei im Vorblatt
+                        </div>
+
+                        <div class="mock-h2" style="font-size:0.85rem; color:var(--zfl-blue-light);">Diese Maßnahmen stellen eine digitale Umsetzung sicher:</div>
+                        <div class="mock-bullet" style="background:#f0f7ff; border-color:#90cdf4;">
+                            • Stichpunkt: Betroffene IT-Systeme (Bund/Länder)<br>
+                            • Stichpunkt: Benötigte Schnittstellen (X-Road/API)<br>
+                            • Stichpunkt: Datenstand- & Register-Check
+                        </div>
+                        <div style="font-size: 0.7rem; color: #666; font-style: italic;">* Braucht in Vorlage Vorschläge / Beispiele wie es geht.</div>
+
+                        <div class="mock-h2" style="font-size:0.85rem; color:var(--zfl-blue-light); margin-top:0.5rem;">Diese Maßnahmen stellen sicher, dass das Gesetz in der Praxis den gewünschten Effekt erzielt:</div>
+                        <div class="mock-bullet" style="background:#f0fdf4; border-color:#9ae6b4;">
+                            • Stichpunkt: Geplante Evaluationsindikatoren<br>
+                            • Stichpunkt: Nebenwirkungen auf Jugend / Klima / Gender<br>
+                            • Stichpunkt: Vollzugstauglichkeit in Kommunen
+                        </div>
+
+                        <div class="mock-h2" style="margin-top: 0.5rem;">C. Alternativen</div>
+                        <table class="mock-table">
+                            <thead>
+                                <tr>
+                                    <th>Option</th>
+                                    <th>Positiv</th>
+                                    <th>Negativ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>1. Nichtstun</strong> (Status Quo)</td>
+                                    <td>Keine Umstellungskosten</td>
+                                    <td>Verfehlung EU-Ziel, Verfall IT</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2. Steuer / Anreiz</strong></td>
+                                    <td>Hohe Flexibilität</td>
+                                    <td>Zu langsame Wirkung</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3. Vorlage</strong> (Gewählt)</td>
+                                    <td>Zielerreichung in 3 J.</td>
+                                    <td>Einmaliger IT-Aufwand</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- PAGE 3 -->
+                    <div class="page-mock">
+                        <!-- Post-Its Page 3 -->
+                        <div class="post-it pi-p3-1">Darstellung TBD</div>
+                        <div class="post-it pi-p3-2">Quelle: Statistisches Bundesamt und BMF</div>
+                        <div class="post-it pi-p3-3">EU: Schweiz</div>
+
+                        <div class="page-title">Anlage 3 – Seite 3</div>
+                        <div class="mock-h2">D. Gesamtkosten (Summe aller Ziffern unter D)</div>
+                        
+                        <table class="mock-table" style="margin-top: 1rem;">
+                            <thead>
+                                <tr>
+                                    <th>Kostenart / Träger</th>
+                                    <th>Jährliche Kosten</th>
+                                    <th>Einmaliger Umstellungsaufwand</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Bund</strong> (Infrastruktur)</td>
+                                    <td>+ 12 Millionen Euro</td>
+                                    <td>+ 45 Millionen Euro (IT)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Länder</strong> (Vollzug)</td>
+                                    <td>+ 3,5 Millionen Euro</td>
+                                    <td>+ 8 Millionen Euro</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Kommunen</strong> (Schalter)</td>
+                                    <td>+ 1,2 Millionen Euro</td>
+                                    <td>+ 15 Millionen Euro (Schulung)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Wirtschaft</strong> (Bürokratie)</td>
+                                    <td style="color:green;">- 18 Millionen Euro</td>
+                                    <td>+ 5 Millionen Euro</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Bürger:innen</strong> (Zeit/Geld)</td>
+                                    <td style="color:green;">- 4,5 Mio. Stunden</td>
+                                    <td>Keine</td>
+                                </tr>
+                                <tr style="background:#edf2f7; font-weight:bold;">
+                                    <td>GESAMT-SALDO (NPV 10J)</td>
+                                    <td colspan="2">+ 142 Millionen Euro (Netto-Entlastung / Nutzen)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div style="margin-top: 2rem; font-size: 0.8rem; color: #718096; border-top: 1px dashed #cbd5e0; padding-top: 1rem;">
+                            <strong>Methodischer Hinweis:</strong> Die Berechnung der Vollzugskosten für Kantone/Länder orientiert sich an der Schweizer Vollzugsdatenbank. Der Net Present Value (NPV) basiert auf der UK Green Book Methodik des Treasury über einen 10-Jahres-Horizont.
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- BOTTOM HINTS & GUIDELINES -->
+                <div class="bottom-hints">
+                    <div class="bulb-icon">💡</div>
+                    <div class="hint-tag">Klickbar, damit bei Referenzen direkt gesprungen werden kann</div>
+                    <div class="hint-tag">Vorblatt in einfacher Sprache verfasst</div>
+                    <div class="hint-tag">Stichpunkte sind im Vorblatt ausdrücklich okay</div>
+                    <div class="hint-tag">GOV.UK Content Richtlinie ist fine (als Standard für Verständlichkeit)</div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- 4. ABLEITUNG GGO -->
+        <section id="ggo-ableitung">
+            <div class="section-header">
+                <h2>4. Ableitung: Was muss in der GGO angepasst werden?</h2>
+                <p>Konkreter normativer Änderungsbedarf in den Anlagen 3 & 4 sowie im Haupttext der GGO</p>
+            </div>
+
+            <!-- TABLE ANLAGE 3 & 4 -->
+            <h3 style="color:var(--zfl-blue); margin-bottom: 1rem; font-size:1.4rem;">A. Anpassungen in Anlage 3 (Muster für Vorblatt) und Anlage 4 (Begründung)</h3>
+            <div class="ggo-table-wrapper">
+                <table class="ggo-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">GGO-Ziffer / Abschnitt</th>
+                            <th style="width: 35%;">Bestehende Fassung / Praxis</th>
+                            <th style="width: 40%;">Neufassung (ZfL-Empfehlung)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong>Allgemeine Form</strong><br>
+                                <span class="badge-new">Format-Revolution</span>
+                            </td>
+                            <td>Ausschließlich Fließtext im juristischen Formalstil. Keine optischen Hilfsmittel, starre Seitenstruktur im Papier-PDF-Format.</td>
+                            <td>
+                                <strong>Zulässigkeit von Stichpunkten & Visualisierungen:</strong> Ausdrückliche Verankerung, dass die Ziffern A und B in Bullet-Points verfasst werden dürfen. Unter Ziffer B wird ein Pflichtfeld für eine <em>„Visualisierung der geplanten Umsetzung“</em> (Prozess- oder Architekturbild) eingeführt.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Ziffer B. Lösung</strong><br>
+                                <span class="badge-new">Digital & Vollzug</span>
+                            </td>
+                            <td>Zusammenfassung der rechtlichen Paragrafenänderungen.</td>
+                            <td>
+                                Aufspaltung in drei obligatorische Unterkategorien:<br>
+                                1. <em>Rechtlicher Kern</em> (Stichpunkte)<br>
+                                2. <em>Digitale Umsetzung</em> (Estland-Modell: IT-Systeme, X-Road/Schnittstellen, Register)<br>
+                                3. <em>Wirkungs- und Vollzugscheck</em> (Österreich/Schweiz-Modell: Konkreter Effekt auf Zielgruppen und administrativer Aufwand der Kommunen).
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Ziffer C. Alternativen</strong><br>
+                                <span class="badge-new">Alternativen-Pflicht</span>
+                            </td>
+                            <td>Häufig nur formalistische Negativmeldung („Keine“ oder „Nichtstun ist keine Alternative“).</td>
+                            <td>
+                                <strong>Strukturierte Tabellenform (Frankreich-Modell):</strong> Verpflichtende Gegenüberstellung von mindestens drei Optionen: <br>
+                                Option 1: Status Quo (Monetarisierung des Nichtstuns)<br>
+                                Option 2: Alternative Steuerung (z.B. finanzielle Anreize / Aufklärung)<br>
+                                Option 3: Eingebrachte Vorlage.<br>
+                                Floskel „Keine“ wird unzulässig.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Ziffer D. & E. Kosten</strong><br>
+                                <span class="badge-new">Consolidated NPV</span>
+                            </td>
+                            <td>Getrennte Ausweisung von Haushaltsausgaben (D) und Erfüllungsaufwand (E). Keine Gesamtsicht über die Laufzeit.</td>
+                            <td>
+                                <strong>Zusammenführung zu „Gesamtkosten & Nutzen“:</strong> Übersichtliche Tabellendarstellung aller Träger (Bund, Länder, Kommunen, Wirtschaft, Bürger). Trennung von Einmal- und Betriebskosten. Ergänzung um den <em>Nettogegenwartswert (NPV) auf 10 Jahre</em> (UK-Modell), um Investitionen in Digitalisierung ökonomisch gegenüberzustellen.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- RECOMMENDATIONS FOR GGO PARAGRAPHS -->
+            <h3 style="color:var(--zfl-blue); margin-bottom: 1.5rem; font-size:1.4rem;">B. Systemische Anpassungen im Haupttext der GGO (§§ 43 ff.)</h3>
+            
+            <div class="recommendation-grid">
+                
+                <!-- § 43 GGO -->
+                <div class="rec-box">
+                    <h4>
+                        <span>§ 43 GGO</span>
+                        <span style="font-size:0.8rem; background:var(--zfl-blue); color:white; padding:2px 6px; border-radius:4px;">Inhalt des Entwurfs</span>
+                    </h4>
+                    <ul>
+                        <li><strong>Verankerung „Einfache Sprache“:</strong> In § 43 Abs. 1 GGO wird ergänzt, dass das Vorblatt für Nicht-Jurist:innen verständlich sein muss. Als redaktioneller Standard wird auf Leitlinien orientiert an der <em>GOV.UK Content Directive</em> verwiesen.</li>
+                        <li><strong>Verbot von Textwüsten:</strong> § 43 Abs. 2 legt fest, dass im Vorblatt zur Darstellung von Problemen, Lösungen und Alternativen tabellarische Übersichten und Stichpunkte verbindlich zu nutzen sind.</li>
+                        <li><strong>Digitale Verlinkungs-Pflicht:</strong> Verweise auf Datensätze des Statistischen Bundesamtes, des BMF oder wissenschaftliche Studien müssen als klickbare Hyperlinks im digitalen Dokument hinterlegt sein.</li>
+                    </ul>
+                </div>
+
+                <!-- § 44 GGO & Frühphase -->
+                <div class="rec-box">
+                    <h4>
+                        <span>§ 44 GGO & Frühphase</span>
+                        <span style="font-size:0.8rem; background:var(--zfl-blue); color:white; padding:2px 6px; border-radius:4px;">Legistik & ZfL</span>
+                    </h4>
+                    <ul>
+                        <li><strong>Institutionalisierung des ZfL:</strong> Das Zentrum für Legistik wird als beratende und unterstützende Stelle für visuelle und digitale Gesetzgebung in der GGO verankert.</li>
+                        <li><strong>4 Wochen Vorlauf für Visualisierungen:</strong> Für Vorhaben von besonderer politischer oder finanzieller Tragweite wird verankert, dass die Federführung das ZfL <em>mindestens 4 Wochen vor Einleitung der Ressortabstimmung (§ 45 GGO)</em> einbindet, um gemeinsam die Umsetzungsvisualisierung für Ziffer B zu erstellen.</li>
+                        <li><strong>Obligatorischer Digitalcheck:</strong> Die Verknüpfung der Problem- und Problemanalyse (Frühphase) mit den Anforderungen des Digitalchecks und der X-Road-Architektur wird zur Voraussetzung für die Behandlung im Kabinett (§ 54 GGO).</li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p><strong>Zentrum für Legistik (ZfL)</strong> &bull; Impulspapier zur Reform der Gesetzgebungsvorblätter</p>
+        <p>Gemeinsame Initiative für eine verständliche, digitale und wirkungsorientierte Bundesgesetzgebung</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.7;">Stand: 2026 &bull; Gestaltung orientiert an den Richtlinien des ZfL (zfl.bund.de) &bull; Content Richtlinie orientiert an GOV.UK</p>
+    </footer>
+
+</body>
+</html>
