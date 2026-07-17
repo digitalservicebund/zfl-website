@@ -1,8 +1,1 @@
-overrides:
-  nth-check: 2.0.1
-  lodash@>=4.0.0 <=4.17.22: ">=4.17.23"
-  tar@<7.5.8: ">=7.5.8"
-  vite: ">=7.3.2"
-  yaml@<2.8.3: ">=2.8.3"
-  esbuild@<0.28.1: "^0.28.1"
 ignoreScripts: true
