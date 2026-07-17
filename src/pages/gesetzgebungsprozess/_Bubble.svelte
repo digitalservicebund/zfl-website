@@ -93,25 +93,37 @@
 <div
   class={`relative inline-flex flex-col items-center ${expanded ? "z-20" : ""} ${className}`}
 >
-  <button
-    bind:this={buttonEl}
-    type="button"
-    class={`flex items-center justify-center rounded-full transition-[transform,filter,box-shadow] duration-200 ease-out hover:scale-105 focus-visible:scale-105 focus-visible:outline-2 focus-visible:outline-cosmic-blue-base ${expanded ? "scale-105 ring-4 ring-cosmic-blue-base ring-offset-2" : ""}`}
-    style={`background-color: ${color ?? "var(--bubble-color)"}; width: ${sizeMap[size]}; height: ${sizeMap[size]}; filter: ${dimmed ? "grayscale(1)" : "none"};`}
-    aria-expanded={expanded}
-    onclick={toggle}
-  >
-    <div class="text-center space-y-8 px-16">
-      {#if badge}
-        <div>
-          <span class="text-sm bg-black text-white rounded-sm p-3">{badge}</span
-          >
-        </div>
-      {/if}
-      <div class="kern-label font-bold text-black">{title}</div>
-      {#if body}
-        {@render body()}
-      {/if}
+  {#snippet bubble()}
+    <div
+      class={`flex items-center justify-center rounded-full transition-[transform,filter,box-shadow] duration-200 ease-out ${children ? "hover:scale-105 group-focus-visible:scale-105 group-focus-visible:outline-2 group-focus-visible:outline-cosmic-blue-base" : ""} ${expanded ? "scale-105 ring-4 ring-cosmic-blue-base ring-offset-2" : ""}`}
+      style={`background-color: ${color ?? "var(--bubble-color)"}; width: ${sizeMap[size]}; height: ${sizeMap[size]}; filter: ${dimmed ? "grayscale(1)" : "none"};`}
+    >
+      <div class="text-center space-y-8 px-16">
+        {#if badge}
+          <div>
+            <span class="text-sm bg-black text-white rounded-sm p-3">{badge}</span
+            >
+          </div>
+        {/if}
+        <div class="kern-label font-bold text-black">{title}</div>
+        {#if body}
+          {@render body()}
+        {/if}
+      </div>
     </div>
-  </button>
+  {/snippet}
+
+  {#if children}
+    <button
+      bind:this={buttonEl}
+      type="button"
+      class="group"
+      aria-expanded={expanded}
+      onclick={toggle}
+    >
+      {@render bubble()}
+    </button>
+  {:else}
+    {@render bubble()}
+  {/if}
 </div>
