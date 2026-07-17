@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weiterentwicklung des Gesetzgebungsvorblatts</title>
-    <style>
+    <title>Weiterentwicklung Gesetzgebungsvorblatts</title>
+   <style>
         :root {
             /* Primärfarbe & schwarzer Text */
             --primary-color: #36349d;
@@ -60,7 +60,8 @@
         nav ul {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 1.5rem;
+            flex-wrap: wrap;
         }
 
         nav a {
@@ -230,7 +231,7 @@
 
         .card-focus {
             display: inline-block;
-            background: rgba(76, 44, 146, 0.1);
+            background: rgba(54, 52, 157, 0.1);
             color: var(--primary-color);
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
@@ -267,7 +268,7 @@
             color: var(--text-black);
         }
 
-        /* --- LERNPUNKT BOX (Wie im Screenshot) --- */
+        /* --- LERNPUNKT BOX --- */
         .card-highlight {
             margin-bottom: 1.5rem;
             background-color: #f8fafc;
@@ -381,7 +382,7 @@
             font-family: monospace;
         }
 
-        /* NEU: LERNPUNKT INTEGRATIONS-BOX IN DEN SEITEN */
+        /* LERNPUNKT INTEGRATIONS-BOX IN DEN SEITEN */
         .mock-lesson-box {
             background: #f8fafc;
             border-left: 3px solid var(--primary-color);
@@ -441,7 +442,7 @@
             font-weight: bold;
         }
 
-        /* POST-IT STYLES */
+        /* POST-IT STYLES (Nur für den Basis-Prototypen in 3.) */
         .post-it {
             background: var(--postit-bg);
             border: 1px solid var(--postit-border);
@@ -575,6 +576,128 @@
             color: var(--text-black);
         }
 
+        /* --- SECTION 5: PRAXISBEISPIELE (UNTEREINANDER) --- */
+        .ai-notice-box {
+            background-color: #fff8c5;
+            border: 1px solid #f6e05e;
+            color: #744210;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            margin-bottom: 2.5rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        }
+
+        .ai-notice-box strong {
+            color: #744210;
+            font-size: 1.05rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* TABS STEUERUNG FÜR PRAXISBEISPIELE */
+        .tabs-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 3rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1.2rem;
+        }
+
+        .tab-btn {
+            background-color: #e2e8f0;
+            color: var(--text-black);
+            border: 1px solid var(--border-color);
+            padding: 0.8rem 1.2rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+            flex: 1 1 210px;
+        }
+
+        .tab-btn:hover {
+            background-color: #cbd5e1;
+        }
+
+        .tab-btn.active {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-dark);
+            box-shadow: var(--shadow);
+        }
+
+        .tab-btn span {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 400;
+            opacity: 0.85;
+            margin-bottom: 0.2rem;
+        }
+
+        .law-view {
+            display: none;
+        }
+
+        .law-view.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* EINSPALTIGE SEITEN-ANORDNUNG UNTEREINANDER */
+        .pages-vertical-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 3.5rem;
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        .page-mock-vertical {
+            background: var(--white);
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            padding: 3rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            position: relative;
+            border: 1px solid #cbd5e1;
+            color: var(--text-black);
+        }
+
+        .page-mock-vertical .mock-table {
+            font-size: 0.85rem;
+        }
+
+        .page-mock-vertical .mock-table th, 
+        .page-mock-vertical .mock-table td {
+            padding: 0.6rem 0.8rem;
+        }
+
+        .page-mock-vertical .mock-text {
+            font-size: 0.95rem;
+        }
+
+        .page-mock-vertical .mock-bullet {
+            font-size: 0.9rem;
+            padding: 0.8rem 1rem;
+        }
+
+        .page-mock-vertical .mock-lesson-box {
+            font-size: 0.85rem;
+            padding: 0.8rem 1rem;
+        }
+
         /* --- FOOTER --- */
         footer {
             background: var(--primary-dark);
@@ -597,6 +720,7 @@
                     <li><a href="#vergleich">Int. Best Practices</a></li>
                     <li><a href="#prototyp">Prototyp Vorblatt</a></li>
                     <li><a href="#ggo-ableitung">Ableitungen für GGO</a></li>
+                    <li><a href="#KI-Beispiele">Beispiele für Vorblatt (KI)</a></li>
                 </ul>
             </nav>
         </div>
@@ -605,8 +729,8 @@
     <!-- HERO SECTION (Linksbündig) -->
     <div class="hero">
         <div class="hero-content">
-            <h1>Vorblatt x GGO Änderungen</h1>
-            <p>Impuls zur strukturellen Weiterentwicklung des Vorblatts und der Begründung (Anlagen 3 & 4 der GGO) für eine adressatenzentrierte, digitale-, praxis- und wirkungsorientierte Gesetzgebung.</p>
+            <h1>GGO und Vorblatt anders denken - Input und erster Prototyp</h1>
+            <p>Impuls zur Weiterentwicklung des Vorblatts und der Gesetzesbegründung für eine adressatenzentrierte, digitale-, praxis- und wirkungsorientierte Gesetzgebung.</p>
         </div>
     </div>
 
@@ -1061,12 +1185,785 @@
 
         </section>
 
+<section id="KI-Beispiele">
+            <div class="section-header">
+                <h2>5. Praxisbeispiele: Aktuelle DIP-Gesetze im neuen Vorblatt</h2>
+                <p>Anwendung der reformierten Anlagen 3 & 4 GGO auf die aktuellsten 5 Gesetzentwürfe aus dem Dokumentations- und Informationssystem des Deutschen Bundestages (DIP) – Stand: Juli 2026.</p>
+            </div>
+
+            <!-- KI-GENERIERUNGS-HINWEIS -->
+            <div class="ai-notice-box">
+                <strong>⚠️ Hinweis ab hier KI generiert - keine Garantie für Richtigkeit der Details!</strong>
+                Die nachfolgenden Vorblatt-Beispiele wurden auf Basis realer Bundestags-Drucksachen (Stand: Juli 2026) mithilfe von Künstlicher Intelligenz generiert und strukturiert. Sie dienen ausschließlich als Anschauungsmaterial wie eine Umsetzung des Vorblatts aussehen würde.
+            </div>
+
+            <!-- TABS STEUERUNG FÜR DIE 5 GESETZE -->
+            <div class="tabs-nav">
+                <button class="tab-btn active" onclick="switchLaw('law-1', this)">
+                    <span>Drucksache 21/6560 (Bundesregierung)</span>
+                    1. Länderentlastungsgesetz
+                </button>
+                <button class="tab-btn" onclick="switchLaw('law-2', this)">
+                    <span>Drucksache 21/6807 (Bundesregierung)</span>
+                    2. Mietrechtsreform / Möbliertes Wohnen
+                </button>
+                <button class="tab-btn" onclick="switchLaw('law-3', this)">
+                    <span>Drucksache 21/6398 (Bundesregierung)</span>
+                    3. Verpackungsrecht-Durchführungsgesetz
+                </button>
+                <button class="tab-btn" onclick="switchLaw('law-4', this)">
+                    <span>Drucksache 21/6133 (Bundesregierung)</span>
+                    4. Modernisierung Umweltstrafrecht
+                </button>
+            </div>
+
+            <!-- ========================================================= -->
+            <!-- GESETZ 1: LÄNDERENTLASTUNGSGESETZ (BT-Drs. 21/6560) -->
+            <!-- ========================================================= -->
+            <div id="law-1" class="law-view active">
+                <div class="pages-vertical-grid">
+                    
+                    <!-- SEITE 1 -->
+                    <div class="page-mock-vertical">
+                        <div class="page-header-tab">Seite 1 von 3 &bull; Anlage 3 GGO (Reformiert)</div>
+                        <div class="mock-h1" style="margin-top: 0.5rem;">Gesetzentwurf der Bundesregierung (BT-Drs. 21/6560)</div>
+                        <div style="font-size: 1.2rem; font-weight: 800; color: var(--text-black); margin-bottom: 0.5rem;">Entwurf eines Gesetzes zur Entlastung der Länder und ihrer Kommunen</div>
+
+                        <div class="mock-h2">A. Problem und Ziel (§ 43 Abs. 1 Nr. 1 GGO)</div>
+                        <div class="mock-text">Kurzzusammenfassung der Ausgangslage in verständlicher Sprache (Plain German):</div>
+                        <div class="mock-bullet">
+                            • <strong>Empirische Baseline:</strong> Die kommunalen und länderspezifischen Haushalte weisen durch rasant gestiegene Sozial- und Infrastrukturausgaben akute strukturelle Defizite auf. Vorläufige Haushaltsführungen drohen flächendeckend.<br>
+                            • <strong>Konkretes Ziel:</strong> Dauerhafte finanzielle Entlastung von Ländern und Kommunen ab 2026 durch eine strukturelle Verschiebung von Umsatzsteueranteilen und die dauerhafte Anhebung des Finanzkraftausgleichs.<br>
+                            • <strong>Zeithorizont:</strong> Verlässliche, vorhersagbare Umverteilung von rund 1 Milliarde Euro jährlich im festen Zeitraum 2026 bis 2029 zur Sicherung der Daseinsvorsorge.
+                        </div>
+
+                        <div class="mock-lesson-box">
+                            <strong>🇦🇹 Lernpunkt Österreich integriert:</strong> Verbindliche Festlegung, <em>welcher gesellschaftliche Zustand</em> bis wann erreicht werden soll (Erhalt der kommunalen Daseinsvorsorge und Kassenfähigkeit 2026–2029).<br>
+                            <strong>🇬🇧 Lernpunkt UK integriert:</strong> Verzicht auf juristische Verschachtelungen im Eingangsteil; sofortige Erfassbarkeit der finanzpolitischen Kernziele.
+                        </div>
+
+                        <div class="mock-h2" style="margin-top: 0.5rem;">B. Lösung (§ 43 Abs. 1 Nr. 2 GGO)</div>
+                        <div class="mock-visual-box">
+                            <span class="mock-visual-title">Visualisierung der Finanzkraftverschiebung im FAG</span>
+                            <svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; max-height: 120px;">
+                                <rect x="5" y="15" width="80" height="50" rx="4" fill="#ffffff" stroke="#36349d" stroke-width="2"/>
+                                <text x="45" y="38" font-size="8" font-weight="bold" fill="#000000" text-anchor="middle">1. Bundeszuschuss</text>
+                                <text x="45" y="52" font-size="7" fill="#000000" text-anchor="middle">Umsatzsteuerabschlag</text>
+                                
+                                <path d="M 85 40 L 105 40" stroke="#36349d" stroke-width="2" marker-end="url(#arrow-law1)"/>
+                                
+                                <rect x="110" y="15" width="80" height="50" rx="4" fill="#f3e8ff" stroke="#36349d" stroke-width="2"/>
+                                <text x="150" y="38" font-size="8" font-weight="bold" fill="#000000" text-anchor="middle">2. Länderhaushalt</text>
+                                <text x="150" y="52" font-size="7" fill="#000000" text-anchor="middle">BEZ-Quote 80 % (+ z %)</text>
+                                
+                                <path d="M 190 40 L 210 40" stroke="#36349d" stroke-width="2" marker-end="url(#arrow-law1)"/>
+                                
+                                <rect x="215" y="15" width="80" height="50" rx="4" fill="#36349d" stroke="#371f6a" stroke-width="2"/>
+                                <text x="255" y="38" font-size="8" font-weight="bold" fill="#ffffff" text-anchor="middle">3. Kommunal-Vollzug</text>
+                                <text x="255" y="52" font-size="7" fill="#ffffff" text-anchor="middle">Investitionen Kitas/Schulen</text>
+                                
+                                <defs>
+                                    <marker id="arrow-law1" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#36349d"/>
+                                    </marker>
+                                </defs>
+                                <text x="150" y="82" font-size="7.5" font-style="italic" fill="#000000" text-anchor="middle">Automatische Abrechnung über bestehende FAG-Algorithmen ohne neuen IT-Schnittstellenaufwand</text>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- SEITE 2 -->
+                    <div class="page-mock-vertical">
+                        <div class="page-header-tab">Seite 2 von 3 &bull; Anlage 3 GGO (Reformiert)</div>
+                        
+                        <div class="mock-text" style="margin-top: 0.5rem;">Operative Ausgestaltung des Lösungsansatzes:</div>
+                        <div class="mock-bullet">
+                             <strong>Rechtlicher Kern:</strong><br>
+                            • Änderung von § 11 des Finanzausgleichsgesetzes (FAG); Erhöhung der Bundesergänzungszuweisungen (BEZ) für leistungsschwache Länder auf 80 % zuzüglich z %.<br>
+                            • Kürzung der gesetzlichen Umsatzsteuerabschläge finanzstarker Länder um jährlich exakt 400 Millionen Euro im Zeitraum von 2026 bis 2029.
+                        </div>
+
+                        <div class="mock-h2" style="color:var(--primary-color);">Diese Maßnahmen stellen eine digitale Umsetzung sicher:</div>
+                        <div class="mock-bullet" style="background:#f3e8ff; border-color:#d8b4fe;">
+                            • <strong>IT-Architektur:</strong> Keine neuen Software-Systeme erforderlich; rein parameterbezogene Anpassung der Berechnungsformeln in bestehenden Abrechnungsdatenbanken des Bundesministeriums der Finanzen (BMF) und der Länder.<br>
+                            • <strong>Schnittstellen-Check:</strong> Vollautomatische Zahlungsbilanzierung über bestehende Bund-Länder-Banking-APIs im Zahlungsverkehr.
+                        </div>
+                        
+                        <div class="mock-lesson-box">
+                            <strong>🇪🇪 Lernpunkt Estland integriert:</strong> Nachweis im Digitalcheck, dass die Gesetzesänderung rein algorithmisch und fehlerfrei in den Bestands-IT-Systemen abgewickelt werden kann.
+                        </div>
+
+                        <div class="mock-h2" style="color:var(--primary-color); margin-top:0.5rem;">Diese Maßnahmen stellen sicher, dass das Gesetz in der Praxis wirkt:</div>
+                        <div class="mock-bullet" style="background:#f0fdf4; border-color:#86efac;">
+                            • <strong>Kommunaler Vollzugscheck:</strong> Direkte Stärkung der kommunalen Investitions- und Kassenfähigkeit; Verhindern des Abrutschens von Kommunen in den Nothaushalt.<br>
+                            • <strong>Konsultationsergebnis:</strong> Zustimmung der kommunalen Spitzenverbände in der Frühphase; Einvernehmen mit dem Bundesrat herbeigeführt.
+                        </div>
+
+                        <div class="mock-lesson-box">
+                            <strong>🇸🇪 Lernpunkt Schweden integriert:</strong> Transparente Offenlegung der formalen Stellungnahme des Bundesrates (Anlage 2 der Drucksache 21/6560) im Vorblatt.
+                        </div>
+
+                        <div class="mock-h2" style="margin-top: 0.5rem;">C. Alternativen (§ 43 Abs. 1 Nr. 3 GGO)</div>
+                        <table class="mock-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 30%;">Option</th>
+                                    <th style="width: 35%;">Positiv</th>
+                                    <th style="width: 35%;">Negativ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>1. Nichtstun</strong> (Status Quo)</td>
+                                    <td>Keine Bundesaushilfe nötig; Erhalt des Bundesaufkommens</td>
+                                    <td>Kommunale Insolvenzen, bundesweiter Investitionsstopp in Kitas, Straßen und Schulen</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2. Einmalige Bundesfonds</strong></td>
+                                    <td>Kurzfristige Liquiditätssteuerung durch Bund</td>
+                                    <td>Keine Planungssicherheit für Länder, bürokratisches Antragsverfahren, hohe Zinslast</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3. Vorlage</strong> (Gewählt)</td>
+                                    <td>Dauerhafte, verlässliche FAG-Quote von 80 %</td>
+                                    <td>Struktureller Aufkommensverzicht im Bundeshaushalt</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="mock-lesson-box">
+                            <strong>🇫🇷 Lernpunkt Frankreich integriert:</strong> Verpflichtende Modellierung des Status-Quo-Szenarios (Infrastrukturverfall und Notverwaltung bei Nichtstun).
+                        </div>
+                    </div>
+
+                    <!-- SEITE 3 -->
+                    <div class="page-mock-vertical">
+                        <div class="page-header-tab">Seite 3 von 3 &bull; Anlage 3 GGO (Reformiert)</div>
+                        
+                        <div class="mock-h2" style="margin-top: 0.5rem;">D. Gesamtkosten (§ 43 Abs. 1 Nr. 4 & 5 GGO)</div>
+                        <div class="mock-text">Konsolidierte Darstellung der finanziellen und administrativen Effekte über den Zeitraum 2026 bis 2029:</div>
+                        
+                        <table class="mock-table" style="margin-top: 1rem;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 35%;">Kostenart / Träger</th>
+                                    <th style="width: 35%;">Jährliche Auswirkungen</th>
+                                    <th style="width: 30%;">Einmaliger Aufwand</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Bund</strong> (Mindereinnahmen im Haushalt)</td>
+                                    <td>- 999 Mio. € (Durchschnitt)</td>
+                                    <td>Keine</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Länder</strong> (Mehreinnahmen über FAG)</td>
+                                    <td style="color:green; font-weight:bold;">+ 999 Mio. €</td>
+                                    <td>Keine</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Kommunen</strong> (Durchgriff Finanzausgleich)</td>
+                                    <td style="color:green; font-weight:bold;">+ 450 Mio. € (geschätzt)</td>
+                                    <td>Keine</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Wirtschaft</strong> (§ 44 GGO)</td>
+                                    <td>0 € (Vollkommen aufkommensneutral)</td>
+                                    <td>0 €</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Bürger:innen</strong> (Erfüllungsaufwand)</td>
+                                    <td>0 Stunden / 0 €</td>
+                                    <td>Keine</td>
+                                </tr>
+                                <tr style="background:#f1f5f9; font-weight:bold;">
+                                    <td>GESAMT-SALDO (NPV 10J)</td>
+                                    <td colspan="2" style="color:var(--text-black); font-size:0.95rem;">+ 2,4 Mrd. Euro (Gesellschaftlicher Net Present Value durch vermiedenen Infrastrukturverfall und langfristigen Erhalt der kommunalen Daseinsvorsorge)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="mock-lesson-box" style="margin-top: 1.5rem;">
+                            <strong>🇨🇭 Lernpunkt Schweiz integriert:</strong> Klare und transparente Aufschlüsselung, wie die Bundesmittel durch das FAG bis auf die kommunale Schalterebene durchgreifen.<br>
+                            <strong>🇬🇧 Lernpunkt UK integriert:</strong> Monetarisierung des gesamtgesellschaftlichen 10-Jahres-Nutzens (NPV) zur Rechtfertigung von Steuermindereinnahmen des Bundes.
+                        </div>
+                        
+                        <div style="margin-top: 2rem; font-size: 0.82rem; color: var(--text-black); border-top: 1px dashed #cbd5e1; padding-top: 1rem;">
+                            <strong>Methodischer Hinweis zu Drs. 21/6560:</strong> Die Mindereinnahmen des Bundes belaufen sich laut Finanztableau exakt auf 996 Mio. € (2026), 999 Mio. € (2027), 1.001 Mio. € (2028) und 1.003 Mio. € (2029). Der NPV saldiert den Erhalt kommunaler Vermögenswerte über 10 Jahre.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================================================= -->
+            <!-- GESETZ 2: MIETRECHTSREFORM / MÖBLIERTES WOHNEN (BT-Drs. 21/6807) -->
+            <!-- ========================================================= -->
+            <div id="law-2" class="law-view">
+                <div class="pages-vertical-grid">
+                    
+                    <!-- SEITE 1 -->
+                    <div class="page-mock-vertical">
+                        <div class="page-header-tab">Seite 1 von 3 &bull; Anlage 3 GGO (Reformiert)</div>
+                        <div class="mock-h1" style="margin-top: 0.5rem;">Gesetzentwurf der Bundesregierung (BT-Drs. 21/6807)</div>
+                        <div style="font-size: 1.2rem; font-weight: 800; color: var(--text-black); margin-bottom: 0.5rem;">Entwurf eines Gesetzes zur Änderung des Rechts der Wohn- und Geschäftsraummiete</div>
+
+                        <div class="mock-h2">A. Problem und Ziel (§ 43 Abs. 1 Nr. 1 GGO)</div>
+                        <div class="mock-text">Kurzzusammenfassung der Ausgangslage in verständlicher Sprache (Plain German):</div>
+                        <div class="mock-bullet">
+                            • <strong>Empirische Baseline:</strong> Laut Bundesinstitut für Bau-, Stadt- und Raumforschung (BBSR) stieg die Angebotsmiete für möblierte/befristete Wohnungen in Großstädten von 15 €/m² auf 27 €/m²; ihr Marktanteil verdoppelte sich auf über 30 %.<br>
+                            • <strong>Konkretes Ziel:</strong> Unterbindung der missbräuchlichen Umgehung der Mietpreisbremse und Schaffung vollständiger Transparenz beim Möblierungszuschlag im Mietvertrag.<br>
+                            • <strong>Zeithorizont:</strong> Wirksame Dämpfung des Mietanstiegs in Ballungsräumen ab Inkrafttreten im 4. Quartal 2026.
+                        </div>
+
+                        <div class="mock-lesson-box">
+                            <strong>🇦🇹 Lernpunkt Österreich integriert:</strong> Klare Definition des Zielzustands (Stopp der Mietpreisbremsen-Umgehung in Großstädten).<br>
+                            <strong>🇬🇧 Lernpunkt UK integriert:</strong> Sofortige Nennung der empirischen Problemzahlen (15 € auf 27 €/m²) in einfacher Alltagssprache.
+                        </div>
+
+                        <div class="mock-h2" style="margin-top: 0.5rem;">B. Lösung (§ 43 Abs. 1 Nr. 2 GGO)</div>
+                        <div class="mock-visual-box">
+                            <span class="mock-visual-title">Visualisierung des neuen Vertragsschlusses & Transparenz-Checks</span>
+                            <svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; max-height: 120px;">
+                                <rect x="5" y="15" width="80" height="50" rx="4" fill="#ffffff" stroke="#36349d" stroke-width="2"/>
+                                <text x="45" y="38" font-size="8" font-weight="bold" fill="#000000" text-anchor="middle">1. Mietvertrag</text>
+                                <text x="45" y="52" font-size="7" fill="#000000" text-anchor="middle">Getrennte Ausweisung</text>
+                                
+                                <path d="M 85 40 L 105 40" stroke="#36349d" stroke-width="2" marker-end="url(#arrow-law2)"/>
+                                
+                                <rect x="110" y="15" width="80" height="50" rx="4" fill="#f3e8ff" stroke="#36349d" stroke-width="2"/>
+                                <text x="150" y="38" font-size="8" font-weight="bold" fill="#000000" text-anchor="middle">2. Möblierungs-Check</text>
+                                <text x="150" y="52" font-size="7" fill="#000000" text-anchor="middle">Maximaler Zeitwert-Zuschlag</text>
+                                
+                                <path d="M 190 40 L 210 40" stroke="#36349d" stroke-width="2" marker-end="url(#arrow-law2)"/>
+                                
+                                <rect x="215" y="15" width="80" height="50" rx="4" fill="#36349d" stroke="#371f6a" stroke-width="2"/>
+                                <text x="255" y="38" font-size="8" font-weight="bold" fill="#ffffff" text-anchor="middle">3. Mietpreisbremse</text>
+                                <text x="255" y="52" font-size="7" fill="#ffffff" text-anchor="middle">Volle Anwendbarkeit</text>
+                                
+                                <defs>
+                                    <marker id="arrow-law2" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#36349d"/>
+                                    </marker>
+                                </defs>
+                                <text x="150" y="82" font-size="7.5" font-style="italic" fill="#000000" text-anchor="middle">Rechtliche Entkoppelung von Grundmiete und Möblierung beendet missbräuchliche Aufschläge</text>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- SEITE 2 -->
+                    <div class="page-mock-vertical">
+                        <div class="page-header-tab">Seite 2 von 3 &bull; Anlage 3 GGO (Reformiert)</div>
+                        
+                        <div class="mock-text" style="margin-top: 0.5rem;">Operative Ausgestaltung des Lösungsansatzes:</div>
+                        <div class="mock-bullet">
+                            • <strong>Rechtlicher Kern:</strong> Novellierung der §§ 556d ff. BGB: Gesetzliche Verpflichtung für Vermieter, die Netto-Kaltmiete und den Möblierungszuschlag im Mietvertrag gesondert auszuweisen.<br>
+                            • Begrenzung der Befristungsgründe nach § 575 BGB zur Verhinderung missbräuchlicher Kettenverträge für Berufspendler und Studierende.
+                        </div>
+
+                        <div class="mock-h2" style="color:var(--primary-color);">Diese Maßnahmen stellen eine digitale Umsetzung sicher:</div>
+                        <div class="mock-bullet" style="background:#f3e8ff; border-color:#d8b4fe;">
+                            • <strong>IT-Unterstützung:</strong> Bereitstellung eines bundesweit einheitlichen, digitalen Möblierungszuschlag-Rechners im Justizportal (automatische Berechnung des Zeitwerts der Möbel nach Abschreibungstabelle).<br>
+                            • <strong>Registerverknüpfung:</strong> Kommunale Mietspiegel-Datenbanken werden über standardisierte APIs für Mietervereine und Legal-Tech-Portale abrufbar gemacht.
+                        </div>
+                        
+                        <div class="mock-lesson-box">
+                            <strong>🇪🇪 Lernpunkt Estland integriert:</strong> Ausrichtung auf digitale Rechtsdurchsetzung durch Bereitstellung behördlicher API-Rechner im Justizportal.
+                        </div>
+
+                        <div class="mock-h2" style="color:var(--primary-color); margin-top:0.5rem;">Diese Maßnahmen stellen sicher, dass das Gesetz in der Praxis wirkt:</div>
+                        <div class="mock-bullet" style="background:#f0fdf4; border-color:#86efac;">
+                            • <strong>Gleichstellungs- & Jugendcheck:</strong> Hochgradig positiv für Studierende, junge Berufseinsteiger und Alleinerziehende, die am stärksten von überhöhten möblierten Mieten betroffen sind.<br>
+                            • <strong>Konsultation:</strong> Einwände der Immobilienverbände wurden geprüft; der Schutz vor sozialer Verdrängung wurde jedoch höher gewichtet.
+                        </div>
+
+                        <div class="mock-lesson-box">
+                            <strong>🇸🇪 Lernpunkt Schweden integriert:</strong> Transparente Offenlegung der Interessenskonflikte zwischen Mieterbund und Eigentümerverbänden im Vorblatt.
+                        </div>
+
+                        <div class="mock-h2" style="margin-top: 0.5rem;">C. Alternativen (§ 43 Abs. 1 Nr. 3 GGO)</div>
+                        <table class="mock-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 30%;">Option</th>
+                                    <th style="width: 35%;">Positiv</th>
+                                    <th style="width: 35%;">Negativ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>1. Nichtstun</strong> (Status Quo)</td>
+                                    <td>Keine Vertragsumstellung für Vermieter nötig</td>
+                                    <td>Angebotsmieten steigen weiter ungebremst auf über 30 €/m²</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2. Totalverbot Befristung</strong></td>
+                                    <td>Maximaler Mieterschutz in Metropolen</td>
+                                    <td>Einbruch des Angebots für internationale Fachkräfte & Projektarbeiter</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3. Vorlage</strong> (Gewählt)</td>
+                                    <td>Zielgerichtete Transparenz & Kopplung an Mietpreisbremse</td>
+                                    <td>Einmaliger Umstellungsaufwand für Vermieter bei Vertragsschluss</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="mock-lesson-box">
+                            <strong>🇫🇷 Lernpunkt Frankreich integriert:</strong> Ökonomischer Verbleib-Test zeigt, dass Nichtstun die Verdrängung aus Großstädten drastisch verschärft.
+                        </div>
+                    </div>
+
+                    <!-- SEITE 3 -->
+                    <div class="page-mock-vertical">
+                        <div class="page-header-tab">Seite 3 von 3 &bull; Anlage 3 GGO (Reformiert)</div>
+                        
+                        <div class="mock-h2" style="margin-top: 0.5rem;">D. Gesamtkosten (§ 43 Abs. 1 Nr. 4 & 5 GGO)</div>
+                        <div class="mock-text">Konsolidierte Darstellung der Erfüllungsaufwände und wirtschaftlichen Effekte:</div>
+                        
+                        <table class="mock-table" style="margin-top: 1rem;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 35%;">Kostenart / Träger</th>
+                                    <th style="width: 35%;">Jährliche Auswirkungen</th>
+                                    <th style="width: 30%;">Einmaliger Aufwand</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Bund</strong> (Justizportal / IT-Rechner)</td>
+                                    <td>+ 250.000 € (Systembetrieb)</td>
+                                    <td>+ 1,5 Mio. € (IT-Entwicklung)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Länder / Justiz</strong> (Zivilgerichte)</td>
+                                    <td>+/- 0 € (Verschiebung im Fallbestand)</td>
+                                    <td>Keine</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Wirtschaft</strong> (Gewerbl. Vermieter)</td>
+                                    <td>- 150 Mio. € (geminderte Überhöhung)</td>
+                                    <td>+ 4,2 Mio. € (Vertragsumstellung)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Bürger:innen</strong> (Mieter)</td>
+                                    <td style="color:green; font-weight:bold;">- 150 Mio. € (Mietkosten-Entlastung)</td>
+                                    <td>Keine</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Bürger:innen</strong> (Private Vermieter)</td>
+                                    <td>Geringfügiger Berechnungsaufwand</td>
+                                    <td>+ 1,8 Mio. € (Vertragsanpassung)</td>
+                                </tr>
+                                <tr style="background:#f1f5f9; font-weight:bold;">
+                                    <td>GESAMT-SALDO (NPV 10J)</td>
+                                    <td colspan="2" style="color:var(--text-black); font-size:0.95rem;">+ 1,1 Mrd. Euro (Netto-Nutzen über 10 Jahre durch Kaufkraftstärkung der Privathaushalte und Schutz vor Verdrängungskosten)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="mock-lesson-box" style="margin-top: 1.5rem;">
+                            <strong>🇨🇭 Lernpunkt Schweiz integriert:</strong> Prüfung der Belastung der kommunalen Amtsgerichte (Mietstreitigkeiten bleiben stabil durch klare Transparenzregeln).<br>
+                            <strong>🇬🇧 Lernpunkt UK integriert:</strong> Ausweisung des Net Present Value (NPV): Die Minderung überhöhter Mieten fließt direkt in die konsumtive Kaufkraft der Bürger zurück.
+                        </div>
+                        
+                        <div style="margin-top: 2rem; font-size: 0.82rem; color: var(--text-black); border-top: 1px dashed #cbd5e1; padding-top: 1rem;">
+                            <strong>Methodischer Hinweis zu Drs. 21/6807:</strong> Die Berechnung basiert auf der BBSR-Analyse 01/2026 zum rasanten Anstieg möblierter Inserate in den Top-7-Metropolen. Der NPV berücksichtigt die Vermeidung kommunaler Folgekosten für Verdrängte.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ========================================================= -->
+            <!-- GESETZ 3: VERPACKUNGSRECHT-DURCHFÜHRUNGSGESETZ (BT-Drs. 21/6398) -->
+            <!-- ========================================================= -->
+            <div id="law-3" class="law-view">
+                <div class="pages-vertical-grid">
+                    
+                    <!-- SEITE 1 -->
+                    <div class="page-mock-vertical">
+                        <div class="page-header-tab">Seite 1 von 3 &bull; Anlage 3 GGO (Reformiert)</div>
+                        <div class="mock-h1" style="margin-top: 0.5rem;">Gesetzentwurf der Bundesregierung (BT-Drs. 21/6398)</div>
+                        <div style="font-size: 1.2rem; font-weight: 800; color: var(--text-black); margin-bottom: 0.5rem;">Entwurf eines Gesetzes zur Anpassung des Verpackungsrechts an die EU-Verordnung 2025/40 (VerpackDG)</div>
+
+                        <div class="mock-h2">A. Problem und Ziel (§ 43 Abs. 1 Nr. 1 GGO)</div>
+                        <div class="mock-text">Kurzzusammenfassung der Ausgangslage in verständlicher Sprache (Plain German):</div>
+                        <div class="mock-bullet">
+                            • <strong>Empirische Baseline:</strong> Das Inkrafttreten der neuen EU-Verpackungsverordnung 2025/40 im August 2026 erfordert die zwingende Ablösung des alten Verpackungsgesetzes.<br>
+                            • <strong>Konkretes Ziel:</strong> Reduktion von Verpackungsmüll, Steigerung der Rezyklat-Quoten und rechtssichere Regelung von kommunalen Mitbenutzungsentgelten gegenüber dualen Systemen.<br>
+                            • <strong>Zeithorizont:</strong> Erreichung einer bundesweiten Kunststoff-Recyclingquote von 75 % bis zum Jahr 2030.
+                        </div>
+
+                        <div class="mock-lesson-box">
+                            <strong>🇦🇹 Lernpunkt Österreich integriert:</strong> Verknüpfung der Rechtsnovelle mit messbaren Umwelt- und Recyclingzielen bis 2030.<br>
+                            <strong>🇬🇧 Lernpunkt UK integriert:</strong> Verständliche Erklärung des Systemwechsels vom VerpackG zum neuen Durchführungsgesetz.
+                        </div>
+
+                        <div class="mock-h2" style="margin-top: 0.5rem;">B. Lösung (§ 43 Abs. 1 Nr. 2 GGO)</div>
+                        <div class="mock-visual-box">
+                            <span class="mock-visual-title">Visualisierung der LUCID-Meldung & Kommunalen Abrechnung</span>
+                            <svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; max-height: 120px;">
+                                <rect x="5" y="15" width="80" height="50" rx="4" fill="#ffffff" stroke="#36349d" stroke-width="2"/>
+                                <text x="45" y="38" font-size="8" font-weight="bold" fill="#000000" text-anchor="middle">1. Hersteller / Handel</text>
+                                <text x="45" y="52" font-size="7" fill="#000000" text-anchor="middle">Meldung in LUCID</text>
+                                
+                                <path d="M 85 40 L 105 40" stroke="#36349d" stroke-width="2" marker-end="url(#arrow-law4)"/>
+                                
+                                <rect x="110" y="15" width="80" height="50" rx="4" fill="#f3e8ff" stroke="#36349d" stroke-width="2"/>
+                                <text x="150" y="38" font-size="8" font-weight="bold" fill="#000000" text-anchor="middle">2. ZSVR-Register</text>
+                                <text x="150" y="52" font-size="7" fill="#000000" text-anchor="middle">Autom. Mengen-Bilanz</text>
+                                
+                                <path d="M 190 40 L 210 40" stroke="#36349d" stroke-width="2" marker-end="url(#arrow-law4)"/>
+                                
+                                <rect x="215" y="15" width="80" height="50" rx="4" fill="#36349d" stroke="#371f6a" stroke-width="2"/>
+                                <text x="255" y="38" font-size="8" font-weight="bold" fill="#ffffff" text-anchor="middle">3. Kommunal-Gebühr</text>
+                                <text x="255" y="52" font-size="7" fill="#ffffff" text-anchor="middle">Mitbenutzungsentgelt</text>
+                                
+                                <defs>
+                                    <marker id="arrow-law4" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#36349d"/>
+                                    </marker>
+                                </defs>
+                                <text x="150" y="82" font-size="7.5" font-style="italic" fill="#000000" text-anchor="middle">Schnittstellen-Verknüpfung beendet Rechtsstreitigkeiten zwischen dualen Systemen und Kommunen</text>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- SEITE 2 -->
+                    <div class="page-mock-vertical">
+                        <div class="page-header-tab">Seite 2 von 3 &bull; Anlage 3 GGO (Reformiert)</div>
+                        
+                        <div class="mock-text" style="margin-top: 0.5rem;">Operative Ausgestaltung des Lösungsansatzes:</div>
+                        <div class="mock-bullet">
+                            • <strong>Rechtlicher Kern:</strong> Ersatzlose Aufhebung des alten VerpackG und Erlass des neuen Verpackungsrecht-Durchführungsgesetzes (VerpackDG) zur Umsetzung von EU 2025/40.<br>
+                            • Klärung von Mitbenutzungsentgelten: Kommunen erhalten eine klare rechtliche Grundlage zur Abrechnung der blauen Tonnen mit den dualen Systemen.
+                        </div>
+
+                        <div class="mock-h2" style="color:var(--primary-color);">Diese Maßnahmen stellen eine digitale Umsetzung sicher:</div>
+                        <div class="mock-bullet" style="background:#f3e8ff; border-color:#d8b4fe;">
+                            • <strong>IT-Upgrade:</strong> Erweiterung des digitalen Melderegisters „LUCID“ der Stiftung Zentrale Stelle Verpackungsregister (ZSVR) um Schnittstellen für kommunale Entsorger.<br>
+                            • <strong>API-Standard:</strong> Automatisierter Datenabgleich zwischen herstellerbezogenen Inverkehrbringer-Mengen und kommunalen Sammelquoten.
+                        </div>
+                        
+                        <div class="mock-lesson-box">
+                            <strong>🇪🇪 Lernpunkt Estland integriert:</strong> Plattform-First-Ansatz: Ausbau des ZSVR-Registers zur zentralen Datenscheibe der Kreislaufwirtschaft.
+                        </div>
+
+                        <div class="mock-h2" style="color:var(--primary-color); margin-top:0.5rem;">Diese Maßnahmen stellen sicher, dass das Gesetz in der Praxis wirkt:</div>
+                        <div class="mock-bullet" style="background:#f0fdf4; border-color:#86efac;">
+                            • <strong>Umweltcheck:</strong> Höchstgradig positive Auswirkung durch Verringerung des Primärrohstoffs und verbindliche Rezyklat-Einsatzquoten.<br>
+                            • <strong>Kommunaler Vollzug:</strong> Entlastung von öffentlich-rechtlichen Entsorgungsträgern (örE) durch Vorbeugung von Vorleistungskonflikten.
+                        </div>
+
+                        <div class="mock-lesson-box">
+                            <strong>🇸🇪 Lernpunkt Schweden integriert:</strong> Transparente Darstellung der Kritik des Deutschen Städte- und Gemeindebundes (DStGB) an Mitbenutzungsentgelten im Vorblatt.
+                        </div>
+
+                        <div class="mock-h2" style="margin-top: 0.5rem;">C. Alternativen (§ 43 Abs. 1 Nr. 3 GGO)</div>
+                        <table class="mock-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 30%;">Option</th>
+                                    <th style="width: 35%;">Positiv</th>
+                                    <th style="width: 35%;">Negativ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>1. Nichtstun</strong> (Status Quo)</td>
+                                    <td>Kein nationales Gesetzgebungsverfahren</td>
+                                    <td>Vertragsverletzungsverfahren der EU ab August 2026</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2. Freiwillige Branchenabkommen</strong></td>
+                                    <td>Flexibilität für Hersteller</td>
+                                    <td>Verfehlt verbindliche EU-Rezyklatquoten und löst Kommunal-Streit nicht</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3. Vorlage</strong> (Gewählt)</td>
+                                    <td>1:1 EU-Anpassung & Rechtssicherheit für Kommunen</td>
+                                    <td>Umstellungsaufwand für Verpackungsindustrie</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="mock-lesson-box">
+                            <strong>🇫🇷 Lernpunkt Frankreich integriert:</strong> Nachweis, dass ohne das Durchführungsgesetz erhebliches EU-Strafzahlungspotenzial entstünde.
+                        </div>
+                    </div>
+
+                    <!-- SEITE 3 -->
+                    <div class="page-mock-vertical">
+                        <div class="page-header-tab">Seite 3 von 3 &bull; Anlage 3 GGO (Reformiert)</div>
+                        
+                        <div class="mock-h2" style="margin-top: 0.5rem;">D. Gesamtkosten (§ 43 Abs. 1 Nr. 4 & 5 GGO)</div>
+                        <div class="mock-text">Konsolidierte Darstellung der Wirtschaftskosten und kommunalen Effekte:</div>
+                        
+                        <table class="mock-table" style="margin-top: 1rem;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 35%;">Kostenart / Träger</th>
+                                    <th style="width: 35%;">Jährliche Auswirkungen</th>
+                                    <th style="width: 30%;">Einmaliger Aufwand</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Bund</strong> (UBA / Aufsicht)</td>
+                                    <td>+ 450.000 € (Personalkosten)</td>
+                                    <td>+ 1,2 Mio. € (IT)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Länder</strong> (Umweltbeauftragte)</td>
+                                    <td>+/- 0 € (Vollzugsverschiebung)</td>
+                                    <td>Keine</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Kommunen</strong> (Entsorger / örE)</td>
+                                    <td style="color:green; font-weight:bold;">- 35 Mio. € (Entlastung bei Entgelten)</td>
+                                    <td>Keine</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Wirtschaft</strong> (Hersteller/Handel)</td>
+                                    <td>+ 18 Mio. € (Systemgebühren)</td>
+                                    <td>+ 42 Mio. € (Verpackungsdesign)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Bürger:innen</strong> (Verbraucher)</td>
+                                    <td>0 € (Geringe Preffekte)</td>
+                                    <td>Keine</td>
+                                </tr>
+                                <tr style="background:#f1f5f9; font-weight:bold;">
+                                    <td>GESAMT-SALDO (NPV 10J)</td>
+                                    <td colspan="2" style="color:var(--text-black); font-size:0.95rem;">+ 1,8 Mrd. Euro (Netto-Nutzen über 10 Jahre durch monetarisierte CO2-Einsparung, Plastikmüllvermeidung und faire Kommunalentgelte)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="mock-lesson-box" style="margin-top: 1.5rem;">
+                            <strong>🇨🇭 Lernpunkt Schweiz integriert:</strong> Berücksichtigung des kommunalen Vollzugs und der finanziellen Entlastung von öffentlich-rechtlichen Entsorgern.<br>
+                            <strong>🇬🇧 Lernpunkt UK integriert:</strong> Monetarisierung des ökologischen 10-Jahres-Nutzens (NPV) nach den Schadenskosten-Sätzen des Umweltbundesamtes.
+                        </div>
+                        
+                        <div style="margin-top: 2rem; font-size: 0.82rem; color: var(--text-black); border-top: 1px dashed #cbd5e1; padding-top: 1rem;">
+                            <strong>Methodischer Hinweis zu Drs. 21/6398:</strong> Die Forderung nach Festsetzung der Mitbenutzungsentgelte per Gebührenbescheid wurde in der Abstimmung im Juni 2026 intensiv debattiert. Der Erfüllungsaufwand der Wirtschaft ist durch EU-Vorgaben bedingt.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========================================================= -->
+            <!-- GESETZ 4: MODERNISIERUNG UMWELTSTRAFRECHT (BT-Drs. 21/6133) -->
+            <!-- ========================================================= -->
+            <div id="law-4" class="law-view">
+                <div class="pages-vertical-grid">
+                    
+                    <!-- SEITE 1 -->
+                    <div class="page-mock-vertical">
+                        <div class="page-header-tab">Seite 1 von 3 &bull; Anlage 3 GGO (Reformiert)</div>
+                        <div class="mock-h1" style="margin-top: 0.5rem;">Gesetzentwurf der Bundesregierung (BT-Drs. 21/6133)</div>
+                        <div style="font-size: 1.2rem; font-weight: 800; color: var(--text-black); margin-bottom: 0.5rem;">Entwurf eines Gesetzes zur Änderung des Strafrechts – Umweltstrafrecht</div>
+
+                        <div class="mock-h2">A. Problem und Ziel (§ 43 Abs. 1 Nr. 1 GGO)</div>
+                        <div class="mock-text">Kurzzusammenfassung der Ausgangslage in verständlicher Sprache (Plain German):</div>
+                        <div class="mock-bullet">
+                            • <strong>Empirische Baseline:</strong> Schwerste Umweltvergehen (z. B. Ökosystemzerstörung, Gewässerverschmutzung) werden im geltenden Recht oft zu mild bestraft; Sanktionen haben geringe Abschreckungskraft.<br>
+                            • <strong>Konkretes Ziel:</strong> Umsetzung der EU-Umweltstrafrechtsrichtlinie; Einführung von Verbrechenstatbeständen bei weitreichenden Ökosystemschäden (bis zu 10 Jahre Haft).<br>
+                            • <strong>Zeithorizont:</strong> Stärkung des kriminalstrafrechtlichen Schutzes unserer natürlichen Lebensgrundlagen ab Herbst 2026.
+                        </div>
+
+                        <div class="mock-lesson-box">
+                            <strong>🇦🇹 Lernpunkt Österreich integriert:</strong> Klare Ausrichtung auf den Erhalt natürlicher Lebensgrundlagen als rechtsstaatliches Grundziel.<br>
+                            <strong>🇬🇧 Lernpunkt UK integriert:</strong> Sofortige Nennung des verschärften Strafrahmens (bis zu 10 Jahre) zur Abschreckung in einfacher Sprache.
+                        </div>
+
+                        <div class="mock-h2" style="margin-top: 0.5rem;">B. Lösung (§ 43 Abs. 1 Nr. 2 GGO)</div>
+                        <div class="mock-visual-box">
+                            <span class="mock-visual-title">Visualisierung des geodatenbasierten Umweltstrafrechts (§§ 324 ff. StGB)</span>
+                            <svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; max-height: 120px;">
+                                <rect x="5" y="15" width="80" height="50" rx="4" fill="#ffffff" stroke="#36349d" stroke-width="2"/>
+                                <text x="45" y="38" font-size="8" font-weight="bold" fill="#000000" text-anchor="middle">1. Geodaten-Detektion</text>
+                                <text x="45" y="52" font-size="7" fill="#000000" text-anchor="middle">Satelliten / Sensoren</text>
+                                
+                                <path d="M 85 40 L 105 40" stroke="#36349d" stroke-width="2" marker-end="url(#arrow-law5)"/>
+                                
+                                <rect x="110" y="15" width="80" height="50" rx="4" fill="#f3e8ff" stroke="#36349d" stroke-width="2"/>
+                                <text x="150" y="38" font-size="8" font-weight="bold" fill="#000000" text-anchor="middle">2. Umweltregister</text>
+                                <text x="150" y="52" font-size="7" fill="#000000" text-anchor="middle">Schwerpunkt-Justiz</text>
+                                
+                                <path d="M 190 40 L 210 40" stroke="#36349d" stroke-width="2" marker-end="url(#arrow-law5)"/>
+                                
+                                <rect x="215" y="15" width="80" height="50" rx="4" fill="#36349d" stroke="#371f6a" stroke-width="2"/>
+                                <text x="255" y="38" font-size="8" font-weight="bold" fill="#ffffff" text-anchor="middle">3. Verbrechenstatbestand</text>
+                                <text x="255" y="52" font-size="7" fill="#ffffff" text-anchor="middle">1 bis 10 Jahre Haft</text>
+                                
+                                <defs>
+                                    <marker id="arrow-law5" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                        <path d="M 0 0 L 10 5 L 0 10 z" fill="#36349d"/>
+                                    </marker>
+                                </defs>
+                                <text x="150" y="82" font-size="7.5" font-style="italic" fill="#000000" text-anchor="middle">Koppelung von verschärften StGB-Normen an Geodaten-Beweisführung erhöht Verurteilungsquoten</text>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- SEITE 2 -->
+                    <div class="page-mock-vertical">
+                        <div class="page-header-tab">Seite 2 von 3 &bull; Anlage 3 GGO (Reformiert)</div>
+                        
+                        <div class="mock-text" style="margin-top: 0.5rem;">Operative Ausgestaltung des Lösungsansatzes:</div>
+                        <div class="mock-bullet">
+                            • <strong>Rechtlicher Kern:</strong> Neufassung der §§ 324 bis 330d StGB: Freiheitsstrafe von 1 bis 10 Jahren, wenn eine Umweltschädigung erst nach mehrjährigem Zeitraum beseitigt werden kann (Ökozid-orientierter Ansatz).<br>
+                            • Bestrafung auch bei grober Verletzung verwaltungsrechtlicher Pflichten (z. B. illegale Gefahrstoffeinleitung, Zerstörung von Ökosystemen).
+                        </div>
+
+                        <div class="mock-h2" style="color:var(--primary-color);">Diese Maßnahmen stellen eine digitale Umsetzung sicher:</div>
+                        <div class="mock-bullet" style="background:#f3e8ff; border-color:#d8b4fe;">
+                            • <strong>IT-Systeme:</strong> Aufbau eines digitalen Umweltstraf-Erfassungsmoduls für Staatsanwaltschaften (Verknüpfung mit Copernicus-Geodaten und staatlichen Umwelt-Messnetzen).<br>
+                            • <strong>Register-Check:</strong> Automatisierter Abgleich von immissionsschutzrechtlichen Genehmigungen im BImSchG-Register mit strafrechtlichen Ermittlungsakten.
+                        </div>
+                        
+                        <div class="mock-lesson-box">
+                            <strong>🇪🇪 Lernpunkt Estland integriert:</strong> Nutzung moderner Erdbeobachtungs- und Geodatenbanken zur digitalen Tatort- und Beweissicherung im Strafprozess.
+                        </div>
+
+                        <div class="mock-h2" style="color:var(--primary-color); margin-top:0.5rem;">Diese Maßnahmen stellen sicher, dass das Gesetz in der Praxis wirkt:</div>
+                        <div class="mock-bullet" style="background:#f0fdf4; border-color:#86efac;">
+                            • <strong>Umweltcheck:</strong> Höchstgradig positiv für den Erhalt von Biodiversität, sauberen Grundwasserressourcen und intakten Böden.<br>
+                            • <strong>Vollzugscheck:</strong> Notwendige Spezialisierung der Kriminalpolizeien und Justiz durch Ausbau von Umwelt-Schwerpunktstaatsanwaltschaften in den Ländern.
+                        </div>
+
+                        <div class="mock-lesson-box">
+                            <strong>🇸🇪 Lernpunkt Schweden integriert:</strong> Dokumentation der Stellungnahmen von Umweltverbänden und Richterbunden im Vorblatt.
+                        </div>
+
+                        <div class="mock-h2" style="margin-top: 0.5rem;">C. Alternativen (§ 43 Abs. 1 Nr. 3 GGO)</div>
+                        <table class="mock-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 30%;">Option</th>
+                                    <th style="width: 35%;">Positiv</th>
+                                    <th style="width: 35%;">Negativ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>1. Nichtstun</strong> (Status Quo)</td>
+                                    <td>Keine Gesetzesanpassung</td>
+                                    <td>Vertragsverletzung EU-Richtlinie, geringe Abschreckung bei Industriedelikten</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2. Nur Bußgelder erhöhen</strong></td>
+                                    <td>Schneller im Verwaltungsrecht</td>
+                                    <td>Bei hochprofitabler, organisierter Umweltkriminalität unwirksam</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3. Vorlage</strong> (Gewählt)</td>
+                                    <td>Scharfer Verbrechenstatbestand (bis 10 J.)</td>
+                                    <td>Mehraufwand bei Ermittlungsbehörden</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="mock-lesson-box">
+                            <strong>🇫🇷 Lernpunkt Frankreich integriert:</strong> Begründung, warum reines Verwaltungsrecht (Bußgelder) als Steuerungsinstrument versagt.
+                        </div>
+                    </div>
+
+                    <!-- SEITE 3 -->
+                    <div class="page-mock-vertical">
+                        <div class="page-header-tab">Seite 3 von 3 &bull; Anlage 3 GGO (Reformiert)</div>
+                        
+                        <div class="mock-h2" style="margin-top: 0.5rem;">D. Gesamtkosten (§ 43 Abs. 1 Nr. 4 & 5 GGO)</div>
+                        <div class="mock-text">Konsolidierte Darstellung der Vollzugskosten und des gesellschaftlichen Nutzens:</div>
+                        
+                        <table class="mock-table" style="margin-top: 1rem;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 35%;">Kostenart / Träger</th>
+                                    <th style="width: 35%;">Jährliche Auswirkungen</th>
+                                    <th style="width: 30%;">Einmaliger Aufwand</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Bund</strong> (BMJ / BKA-Koordinierung)</td>
+                                    <td>+ 350.000 € (Koordination)</td>
+                                    <td>+ 1,5 Mio. € (IT/Geodaten-Schnittstelle)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Länder</strong> (Justiz / Polizei)</td>
+                                    <td>+ 3,8 Mio. € (Schwerpunkt-StA)</td>
+                                    <td>+ 5,2 Mio. € (Sensorik & IT-Modul)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Kommunen</strong> (Umweltämter)</td>
+                                    <td>+/- 0 € (Amtshilfe für Justiz)</td>
+                                    <td>Keine</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Wirtschaft</strong> (§ 44 GGO)</td>
+                                    <td>0 € (Rechtstreue Unternehmen)</td>
+                                    <td>0 €</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Bürger:innen</strong> (Allgemeinheit)</td>
+                                    <td>0 € (Kein Erfüllungsaufwand)</td>
+                                    <td>Keine</td>
+                                </tr>
+                                <tr style="background:#f1f5f9; font-weight:bold;">
+                                    <td>GESAMT-SALDO (NPV 10J)</td>
+                                    <td colspan="2" style="color:var(--text-black); font-size:0.95rem;">+ 2,3 Mrd. Euro (Netto-Nutzen über 10 Jahre durch monetarisierte Bewahrung vor irreversiblen Ökosystem-, Grundwasser- und Bodenschäden nach UBA-Schlüssel)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="mock-lesson-box" style="margin-top: 1.5rem;">
+                            <strong>🇨🇭 Lernpunkt Schweiz integriert:</strong> Berücksichtigung der Vollzugskosten auf Ebene der Bundesländer für spezialisierte Ermittlungseinheiten.<br>
+                            <strong>🇬🇧 Lernpunkt UK integriert:</strong> 10-Jahres-NPV monetarisiert die gravierenden Schadenskosten, die der Allgemeinheit durch ungesühnte Ökosystemzerstörungen entstehen würden.
+                        </div>
+                        
+                        <div style="margin-top: 2rem; font-size: 0.82rem; color: var(--text-black); border-top: 1px dashed #cbd5e1; padding-top: 1rem;">
+                            <strong>Methodischer Hinweis zu Drs. 21/6133:</strong> Dem Bundesrat als besonders eilbedürftig zugeleitet (Mai 2026). Erfüllungsaufwand für rechtstreue Bürger und Unternehmen entsteht nicht, da die Vorschriften ausschließlich illegales Handeln sanktionieren.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
     </div>
 
     <!-- FOOTER -->
     <footer>
-        <p>Impuls zu GGO Änderung + Vorblatt, Stand 16.07.2026</p>
+        <p>Impuls zu GGO Änderung + Vorblatt, Stand 17.07.2026</p>
     </footer>
+
+
+  <!-- INTERAKTIVE TABS STEUERUNG FÜR PRAXISBEISPIELE -->
+    <script>
+        function switchLaw(lawId, btnElement) {
+            // Alle Ansichten ausblenden
+            document.querySelectorAll('.law-view').forEach(view => {
+                view.classList.remove('active');
+            });
+            // Alle Buttons de-aktivieren
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            // Gewünschtes Gesetz & Button aktivieren
+            document.getElementById(lawId).classList.add('active');
+            btnElement.classList.add('active');
+            
+            // Sanft zum Bereich des aktiven Gesetzes scrollen
+            window.scrollTo({
+                top: document.querySelector('.tabs-nav').offsetTop - 90,
+                behavior: 'smooth'
+            });
+        }
+    </script>
 
 </body>
 </html>
