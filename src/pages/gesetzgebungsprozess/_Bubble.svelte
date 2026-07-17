@@ -21,7 +21,7 @@
   let {
     color,
     title,
-    badge,
+    optional,
     size = "md",
     className = "",
     children,
@@ -33,7 +33,7 @@
      */
     color?: string;
     title: string;
-    badge?: string;
+    optional?: boolean;
     size?: Size;
     className?: string;
     /** Sidebar content shown in the global sidebar when the bubble is opened. */
@@ -99,13 +99,12 @@
       style={`background-color: ${color ?? "var(--bubble-color)"}; width: ${sizeMap[size]}; height: ${sizeMap[size]}; filter: ${dimmed ? "grayscale(1)" : "none"};`}
     >
       <div class="text-center space-y-8 px-16">
-        {#if badge}
-          <div>
-            <span class="text-sm bg-black text-white rounded-sm p-3">{badge}</span
-            >
-          </div>
-        {/if}
-        <div class="kern-label font-bold text-black">{title}</div>
+        <div class="kern-label text-black">
+          {title}
+          {#if optional}
+            <span class="font-normal"> (optional)</span>
+          {/if}
+        </div>
         {#if body}
           {@render body()}
         {/if}

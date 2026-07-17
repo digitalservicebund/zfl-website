@@ -91,12 +91,8 @@
     anchorName={CLUSTER_FIRST_ANCHOR}
     title="Interessensermittlung"
   >
-    <Bubble title="Arbeits&shy;gruppen&shy;bildung" badge="Optional" size="md"
-    ></Bubble>
-    <Bubble
-      title="Workshops mit Ländern und Kommunen"
-      badge="Optional"
-      size="md"
+    <Bubble title="Arbeits&shy;gruppen&shy;bildung" optional size="md"></Bubble>
+    <Bubble title="Workshops mit Ländern und Kommunen" optional size="md"
     ></Bubble>
   </Cluster>
 
@@ -122,9 +118,8 @@
         <li>Feststellung der aktuellen Rechtslage</li>
       </ul>
     </Bubble>
-    <Bubble title="Vorschläge von Verbänden" badge="Optional" size="md"
-    ></Bubble>
-    <Bubble title="Erarbeiten von Eckpunkten" badge="Optional" size="md">
+    <Bubble title="Vorschläge von Verbänden" optional size="md"></Bubble>
+    <Bubble title="Erarbeiten von Eckpunkten" optional size="md">
       Je nach Komplexität wird ein Eckpunktepapier verfasst oder nicht.
     </Bubble>
     <Bubble title="Gutachten und Sach&shy;verständigen&shy;kommissionen"
@@ -133,10 +128,7 @@
       Recherchiert Daten, die relevant für das Gesetz sind sowie das
       Gesetzesumfeld.
     </Bubble>
-    <Bubble
-      title="Workshops mit Ländern und Kommunen"
-      badge="Optional"
-      size="md"
+    <Bubble title="Workshops mit Ländern und Kommunen" optional size="md"
     ></Bubble>
     <Bubble title="Ziel- und Wirkungs&shy;definition" size="sm"></Bubble>
     <Bubble title="Vorarbeit" size="sm">
@@ -145,7 +137,7 @@
   </Cluster>
 
   <Cluster color="#ABD7F9" {orientation} title="Referentenentwurf">
-    <Bubble title="Frühzeitige Beteiligung" badge="Optional">
+    <Bubble title="Frühzeitige Beteiligung" optional>
       Von Betroffenen und Vollzug und anderen Wissensträgern (z.B. Verbänden,
       Ländern, Kommunen, Wissenschaft)
     </Bubble>
@@ -167,7 +159,7 @@
       Schreibt ersten Entwurf mit Kommentarspalte. Allein oder mit ein oder
       mehreren weiteren Legist:innen zusammen.
     </Bubble>
-    <Bubble title="Gesetzesfolgen werden besprochen" badge="Optional"></Bubble>
+    <Bubble title="Gesetzesfolgen werden besprochen" optional></Bubble>
   </Cluster>
 
   <Cluster color="#A0EBEE" {orientation} title="Hausentwurf">
