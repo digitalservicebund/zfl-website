@@ -40,39 +40,13 @@
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   }
 
-  // Bubbles considered part of the early phase of the process (the
-  // "Recherche" and "Referentenentwurf" clusters), used to drive the
-  // highlighted state.
-  const fruehphaseBubbles = [
-    "Arbeitsgruppenbildung",
-    "Workshops mit Ländern und Kommunen",
-    "Federführung",
-    "Gesetzesumfeld",
-    "Vorschläge von Verbänden",
-    "Erarbeiten von Eckpunkten",
-    "Gutachten und Sachverständigenkommissionen",
-    "Materialrecherche",
-    "Ziel- und Wirkungsdefinition",
-    "Vorarbeit",
-    "Frühzeitige Beteiligung",
-    "Austausch",
-    "Vorblatt",
-    "Rohentwurf",
-    "Gesetzesfolgen werden besprochen",
-  ];
-  const dasIstNeuBubbles = [
-    "Frühzeitige Beteiligung",
-    "Ziel- und Wirkungsdefinition",
-    "Austausch",
-  ];
+  const filterOptions = ["Frühphase"];
 
   function onFilterChange(event: Event) {
     const value = (event.currentTarget as HTMLSelectElement).value;
 
-    if (value === "fruehphase") {
-      highlighted = fruehphaseBubbles;
-    } else if (value === "das-ist-neu") {
-      highlighted = dasIstNeuBubbles;
+    if (value) {
+      highlighted = [value];
     } else {
       highlighted = [];
     }
@@ -103,9 +77,10 @@
             class="rounded-md border border-lavender-400 bg-white px-8 py-4"
             onchange={onFilterChange}
           >
-            <option value="alle">Alle</option>
-            <option value="fruehphase">Frühphase</option>
-            <option value="das-ist-neu">Das ist neu</option>
+            <option value="">Alle</option>
+            {#each filterOptions as option (option)}
+              <option value={option}>{option}</option>
+            {/each}
           </select>
         </label>
         <label class="flex w-fit cursor-pointer items-center gap-8">

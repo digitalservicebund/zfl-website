@@ -24,6 +24,7 @@
     optional,
     size = "md",
     className = "",
+    tags,
     children,
     body,
   }: {
@@ -36,6 +37,7 @@
     optional?: boolean;
     size?: Size;
     className?: string;
+    tags?: string[];
     /** Sidebar content shown in the global sidebar when the bubble is opened. */
     children?: Snippet;
     /** Optional body content shown within the bubble */
@@ -51,7 +53,7 @@
 
   const dimmed = $derived(
     (highlightContext?.highlighted.length ?? 0) > 0 &&
-      !highlightContext?.highlighted.includes(title),
+      !(tags ?? []).some((tag) => highlightContext?.highlighted.includes(tag)),
   );
 
   // Every bubble shares a single, global sidebar (mounted once via

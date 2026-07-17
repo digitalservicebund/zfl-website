@@ -12,8 +12,9 @@
   }: {
     orientation?: "vertical" | "horizontal";
     /**
-     * Titles of the bubbles to highlight. When empty, all bubbles show
-     * their normal color; otherwise, every bubble not listed here is
+     * Tags of the bubbles to highlight (matched against each Bubble's
+     * `tags` prop). When empty, all bubbles show their normal color;
+     * otherwise, every bubble whose tags don't intersect this list is
      * grayscale-filtered. Bindable so callers can control it externally.
      */
     highlighted?: string[];
@@ -91,22 +92,29 @@
     anchorName={CLUSTER_FIRST_ANCHOR}
     title="Interessensermittlung"
   >
-    <Bubble title="Arbeits&shy;gruppen&shy;bildung" optional size="md"></Bubble>
-    <Bubble title="Workshops mit Ländern und Kommunen" optional size="md"
+    <Bubble
+      title="Arbeits&shy;gruppen&shy;bildung"
+      optional
+      tags={["Frühphase"]}
+    ></Bubble>
+    <Bubble
+      title="Workshops mit Ländern und Kommunen"
+      optional
+      tags={["Frühphase"]}
     ></Bubble>
   </Cluster>
 
   <Arrow {orientation}>Übergabe an das Fachreferat</Arrow>
 
   <Cluster color="#BCA6DC" {orientation} offset={0}>
-    <Bubble title="Federführung" size="md"
-      >Ein Fachreferat übernimmt die Verantwortung für die Weiterentwicklung der
-      Regelung. Legist:in wird zugewiesen.</Bubble
-    >
+    <Bubble title="Federführung" tags={["Frühphase"]}>
+      Ein Fachreferat übernimmt die Verantwortung für die Weiterentwicklung der
+      Regelung. Legist:in wird zugewiesen.
+    </Bubble>
   </Cluster>
 
   <Cluster color="#B3B7E0" {orientation} title="Recherche">
-    <Bubble title="Gesetzes&shy;umfeld" size="sm">
+    <Bubble title="Gesetzes&shy;umfeld" size="sm" tags={["Frühphase"]}>
       <p>Wovon wird die Regelung beeinflusst?</p>
       <ul>
         <li>
@@ -118,34 +126,44 @@
         <li>Feststellung der aktuellen Rechtslage</li>
       </ul>
     </Bubble>
-    <Bubble title="Vorschläge von Verbänden" optional size="md"></Bubble>
-    <Bubble title="Erarbeiten von Eckpunkten" optional size="md">
+    <Bubble title="Vorschläge von Verbänden" optional tags={["Frühphase"]}
+    ></Bubble>
+    <Bubble title="Erarbeiten von Eckpunkten" optional tags={["Frühphase"]}>
       Je nach Komplexität wird ein Eckpunktepapier verfasst oder nicht.
     </Bubble>
-    <Bubble title="Gutachten und Sach&shy;verständigen&shy;kommissionen"
+    <Bubble
+      title="Gutachten und Sach&shy;verständigen&shy;kommissionen"
+      tags={["Frühphase"]}
     ></Bubble>
-    <Bubble title="Material&shy;recherche" size="sm">
+    <Bubble title="Material&shy;recherche" size="sm" tags={["Frühphase"]}>
       Recherchiert Daten, die relevant für das Gesetz sind sowie das
       Gesetzesumfeld.
     </Bubble>
-    <Bubble title="Workshops mit Ländern und Kommunen" optional size="md"
+    <Bubble
+      title="Workshops mit Ländern und Kommunen"
+      optional
+      tags={["Frühphase"]}
     ></Bubble>
-    <Bubble title="Ziel- und Wirkungs&shy;definition" size="sm"></Bubble>
-    <Bubble title="Vorarbeit" size="sm">
+    <Bubble
+      title="Ziel- und Wirkungs&shy;definition"
+      size="sm"
+      tags={["Frühphase"]}
+    ></Bubble>
+    <Bubble title="Vorarbeit" size="sm" tags={["Frühphase"]}>
       Zieht Arbeit aus anderen Fach-Referaten über das Gesetzesthema zusammen.
     </Bubble>
   </Cluster>
 
   <Cluster color="#ABD7F9" {orientation} title="Referentenentwurf">
-    <Bubble title="Frühzeitige Beteiligung" optional>
+    <Bubble title="Frühzeitige Beteiligung" optional tags={["Frühphase"]}>
       Von Betroffenen und Vollzug und anderen Wissensträgern (z.B. Verbänden,
       Ländern, Kommunen, Wissenschaft)
     </Bubble>
-    <Bubble title="Austausch" size="sm">
+    <Bubble title="Austausch" size="sm" tags={["Frühphase"]}>
       Austausch mit Netzwerk, Expert:innen, anderen Ministerien, ggf.
       Spiegelreferat
     </Bubble>
-    <Bubble title="Vorblatt" size="sm">
+    <Bubble title="Vorblatt" size="sm" tags={["Frühphase"]}>
       <ul>
         <li>Problem und Ziel</li>
         <li>Lösung</li>
@@ -155,11 +173,15 @@
         <li>Weitere Kosten</li>
       </ul>
     </Bubble>
-    <Bubble title="Rohentwurf" size="sm">
+    <Bubble title="Rohentwurf" size="sm" tags={["Frühphase"]}>
       Schreibt ersten Entwurf mit Kommentarspalte. Allein oder mit ein oder
       mehreren weiteren Legist:innen zusammen.
     </Bubble>
-    <Bubble title="Gesetzesfolgen werden besprochen" optional></Bubble>
+    <Bubble
+      title="Gesetzesfolgen werden besprochen"
+      optional
+      tags={["Frühphase"]}
+    ></Bubble>
   </Cluster>
 
   <Cluster color="#A0EBEE" {orientation} title="Hausentwurf">
