@@ -116,8 +116,8 @@
 
 {#if content}
   <div
-    class="fixed inset-y-0 right-0 z-50 flex h-full w-450 max-w-full flex-col border-l border-lavender-400 bg-[#E9EEF3] shadow-lg"
-    transition:fly={{ x: 450, duration: 250 }}
+    class="fixed inset-y-0 right-0 z-50 flex h-full w-420 max-w-full flex-col border-l border-lavender-400 bg-[#E9EEF3] shadow-lg"
+    transition:fly={{ x: 420, duration: 250 }}
   >
     <div
       class="flex items-center justify-between gap-16 border-b border-lavender-400 p-24"

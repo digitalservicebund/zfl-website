@@ -178,7 +178,7 @@
   <div
     class={`sticky z-20 col-start-1 row-start-1 h-fit w-fit rounded-md shadow-md ${
       isVertical
-        ? "top-40 mb-40 left-40 self-start justify-self-start"
+        ? "top-40 mb-40 left-16 xl:left-40 self-start justify-self-start"
         : "bottom-20 self-end justify-self-center"
     }`}
   >
@@ -215,7 +215,7 @@
 
       <!-- Scroll/viewport indicator (draggable) -->
       <div
-        class={`cursor-grab touch-none border border-cosmic-blue-base bg-cosmic-blue-base/20 active:cursor-grabbing ${isVertical ? "absolute inset-x-0" : "absolute inset-y-0"}`}
+        class={`cursor-grab touch-none border border-cosmic-blue-base bg-cosmic-blue-base/20 ${isVertical ? "absolute inset-x-0" : "absolute inset-y-0"}`}
         style={isVertical
           ? `top: ${scrollRatio * 100}%; height: ${viewportRatio * 100}%;`
           : `left: ${scrollRatio * 100}%; width: ${viewportRatio * 100}%;`}

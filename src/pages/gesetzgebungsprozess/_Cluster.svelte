@@ -100,7 +100,7 @@
     base: "relative flex flex-col items-center justify-center",
     variants: {
       orientation: {
-        vertical: "mx-auto w-1000",
+        vertical: "mx-auto w-800 xl:w-950",
         horizontal: "my-auto h-800",
       },
       fitContent: {
