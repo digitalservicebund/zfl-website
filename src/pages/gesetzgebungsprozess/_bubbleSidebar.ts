@@ -17,6 +17,12 @@ export interface BubbleSidebarContent {
   id: string;
   title: string;
   children: Snippet;
+  /**
+   * Distinguishes a `_Bubble.svelte` entry from a `_Cluster.svelte` entry, so
+   * the sidebar can offer "Zurück"/"Weiter" navigation across cluster steps
+   * only (bubbles don't participate in that sequence).
+   */
+  kind: "bubble" | "cluster";
 }
 
 export interface BubbleSidebarContext {

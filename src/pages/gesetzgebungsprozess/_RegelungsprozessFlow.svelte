@@ -115,6 +115,29 @@
   </Cluster>
 
   <Cluster color="#B3B7E0" {orientation} title="Recherche">
+    {#snippet sidebar()}
+      <h2>Wie sieht die Frühphase in der Recherchephase aus?</h2>
+      <p>
+        Grobe Beschreibung was in der <strong>Phase</strong> erwartet wird: Problemanalyse,
+        Wirkziele beschreiben+ Ressorts benachrichtigen, Stakeholder
+      </p>
+      <h3>Was ist neu?</h3>
+      <ul>
+        <li>Vorprüfung fällt weg</li>
+        <li>
+          Standardisierter Steckbrief legt die Basis für einen einfachen
+          Arbeitsablauf
+        </li>
+        <li>
+          Ein einfacher, geführter Ablauf im Tool. Kein Suchen in Dokumenten
+          mehr
+        </li>
+        <li>KI-unterstützte Materialrecherche</li>
+      </ul>
+      <h3>Welche Vorhaben sind geeignet?</h3>
+      <h3>Wo sparen Sie Zeit?</h3>
+    {/snippet}
+
     <Bubble title="Gesetzes&shy;umfeld" size="sm" tags={["Frühphase"]}>
       <p>Wovon wird die Regelung beeinflusst?</p>
       <ul>
@@ -189,6 +212,19 @@
   </Cluster>
 
   <Cluster color="#ABD7F9" {orientation} title="Referentenentwurf">
+    {#snippet sidebar()}
+      <h2>Was kommt hier?</h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+    {/snippet}
+
     <Bubble title="Frühzeitige Beteiligung" optional tags={["Frühphase"]}>
       Von Betroffenen und Vollzug und anderen Wissensträgern (z.B. Verbänden,
       Ländern, Kommunen, Wissenschaft)
@@ -219,6 +255,19 @@
   </Cluster>
 
   <Cluster color="#A0EBEE" {orientation} title="Hausentwurf">
+    {#snippet sidebar()}
+      <h2>Kommt hier noch was?</h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+    {/snippet}
+
     <Bubble title="Beteiligung der Referate" size="md">
       Bittet hausinterne Referate um Feedback.
     </Bubble>

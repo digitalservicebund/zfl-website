@@ -1,8 +1,13 @@
 <script lang="ts">
+  import { getContext } from "svelte";
   import type { Snippet } from "svelte";
   import { packEnclose, packSiblings } from "d3-hierarchy";
   import { tv } from "tailwind-variants";
   import { twMerge } from "tailwind-merge";
+  import {
+    BUBBLE_SIDEBAR_CONTEXT_NAME,
+    type BubbleSidebarContext,
+  } from "./_bubbleSidebar";
 
   let {
     title,
@@ -13,6 +18,7 @@
     offset,
     fitContent = false,
     children,
+    sidebar,
   }: {
     title?: string;
     orientation?: "vertical" | "horizontal";
@@ -36,7 +42,59 @@
      */
     fitContent?: boolean;
     children?: Snippet;
+    /**
+     * Sidebar content shown in the global sidebar when the cluster's title is
+     * clicked. When provided (and `title` is set), the title becomes a
+     * clickable button that toggles this content in the shared sidebar, the
+     * same way `_Bubble.svelte` does.
+     */
+    sidebar?: Snippet;
   } = $props();
+
+  // Every bubble/cluster shares a single, global sidebar (mounted once via
+  // `_BubbleSidebar.svelte`) instead of rendering its own popup, so clicking
+  // the title toggles that sidebar's content rather than a local popup.
+  const sidebarContext = getContext<BubbleSidebarContext | undefined>(
+    BUBBLE_SIDEBAR_CONTEXT_NAME,
+  );
+
+  // Registers this cluster's sidebar content as soon as it mounts
+  // (independent of clicks), so it can also be opened straight from a
+  // shared `?step=` link or via the browser back/forward buttons.
+  $effect(() => {
+    if (!sidebar || !title) return;
+
+    sidebarContext?.register({
+      id: title,
+      title,
+      children: sidebar,
+      kind: "cluster",
+    });
+    return () => sidebarContext?.unregister(title);
+  });
+
+  const expanded = $derived(!!title && sidebarContext?.activeId === title);
+
+  let rootEl: HTMLDivElement | undefined = $state();
+
+  // Scrolls the whole cluster into view whenever it becomes the active step -
+  // most notably when the page is opened directly via a shared `?step=`
+  // link, where it might otherwise be rendered off-screen.
+  $effect(() => {
+    if (!expanded || !rootEl) return;
+
+    rootEl.scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+
+  function toggleSidebar() {
+    if (!sidebar || !title) return;
+    sidebarContext?.toggle({
+      id: title,
+      title,
+      children: sidebar,
+      kind: "cluster",
+    });
+  }
 
   const contentWrapper = tv({
     base: "relative flex flex-col items-center justify-center",
@@ -122,6 +180,7 @@
 </script>
 
 <div
+  bind:this={rootEl}
   class={twMerge("cluster-root", className)}
   data-orientation={orientation}
   style={color ? `--bubble-color: ${color}` : undefined}
@@ -134,11 +193,21 @@
           style={anchorName ? `anchor-name: ${anchorName};` : undefined}
           aria-hidden="true"
         ></div>
-        <h2
-          id={title}
-          class="scroll-mt-40 kern-heading-small bg-black text-white px-4"
-        >
-          {title}
+        <h2 id={title} class="scroll-mt-40 my-0">
+          {#if sidebar}
+            <button
+              type="button"
+              class="kern-heading-small bg-black text-white px-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cosmic-blue-base"
+              aria-expanded={expanded}
+              onclick={toggleSidebar}
+            >
+              {title}
+            </button>
+          {:else}
+            <span class="kern-heading-small bg-black text-white px-4">
+              {title}
+            </span>
+          {/if}
         </h2>
       </div>
     {/if}

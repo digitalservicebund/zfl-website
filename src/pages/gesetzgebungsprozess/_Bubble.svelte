@@ -70,7 +70,7 @@
   $effect(() => {
     if (!children) return;
 
-    sidebarContext?.register({ id: title, title, children });
+    sidebarContext?.register({ id: title, title, children, kind: "bubble" });
     return () => sidebarContext?.unregister(title);
   });
 
@@ -89,7 +89,7 @@
 
   function toggle() {
     if (!children) return;
-    sidebarContext?.toggle({ id: title, title, children });
+    sidebarContext?.toggle({ id: title, title, children, kind: "bubble" });
   }
 </script>
 

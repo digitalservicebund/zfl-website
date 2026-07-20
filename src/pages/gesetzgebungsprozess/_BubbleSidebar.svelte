@@ -58,6 +58,33 @@
     syncUrl();
   }
 
+  // Ids of all currently registered Cluster steps, in registration order
+  // (which follows page/DOM order), used to cycle "Zurück"/"Weiter" through
+  // cluster steps only - Bubbles don't participate in this sequence.
+  const clusterIds = $derived(
+    Object.values(registry)
+      .filter((entry) => entry.kind === "cluster")
+      .map((entry) => entry.id),
+  );
+
+  function navigateCluster(step: -1 | 1) {
+    if (!content || content.kind !== "cluster" || clusterIds.length === 0) {
+      return;
+    }
+
+    const currentIndex = clusterIds.indexOf(content.id);
+    if (currentIndex === -1) return;
+
+    const nextIndex =
+      (currentIndex + step + clusterIds.length) % clusterIds.length;
+    const nextId = clusterIds[nextIndex];
+    const nextContent = registry[nextId];
+    if (!nextContent) return;
+
+    activeId = nextContent.id;
+    syncUrl();
+  }
+
   $effect(() => {
     // Open straight from a shared link on first render. Bubbles register
     // themselves synchronously during their own setup, so by the time this
@@ -89,8 +116,8 @@
 
 {#if content}
   <div
-    class="fixed inset-y-0 right-0 z-50 flex h-full w-400 max-w-full flex-col border-l border-lavender-400 bg-white shadow-lg"
-    transition:fly={{ x: 400, duration: 250 }}
+    class="fixed inset-y-0 right-0 z-50 flex h-full w-450 max-w-full flex-col border-l border-lavender-400 bg-[#E9EEF3] shadow-lg"
+    transition:fly={{ x: 450, duration: 250 }}
   >
     <div
       class="flex items-center justify-between gap-16 border-b border-lavender-400 p-24"
@@ -108,5 +135,23 @@
     <div class="kern-body--small flex-1 overflow-y-auto p-24">
       {@render content.children()}
     </div>
+    {#if content.kind === "cluster"}
+      <div class="p-24 flex justify-end gap-8">
+        <button
+          type="button"
+          class="kern-btn kern-btn--secondary"
+          onclick={() => navigateCluster(-1)}
+        >
+          <span class="kern-label">Zurück</span>
+        </button>
+        <button
+          type="button"
+          class="kern-btn kern-btn--primary"
+          onclick={() => navigateCluster(1)}
+        >
+          <span class="kern-label">Weiter</span>
+        </button>
+      </div>
+    {/if}
   </div>
 {/if}
