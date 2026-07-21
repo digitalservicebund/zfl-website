@@ -7,7 +7,7 @@ RUN npm install -g pnpm
 FROM base AS build
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml /app/
 WORKDIR /app
-RUN pnpm install --prod --ignore-scripts
+RUN pnpm install --prod --ignore-scripts --frozen-lockfile
 
 COPY tsconfig.json tsconfig.base.json astro.config.mjs /app/
 COPY src/ /app/src/
