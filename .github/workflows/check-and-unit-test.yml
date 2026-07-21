@@ -42,7 +42,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.cache-pnpm-deps.outputs.cache-hit != 'true'
-        run: pnpm install
+        run: pnpm install --ignore-scripts
 
       - name: Audit used licences
         run: pnpm run audit:licences
