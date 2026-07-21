@@ -2,11 +2,13 @@ FROM node:26.5.0-alpine3.23 AS base
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN npm install -g pnpm
+RUN npm install -g corepack@0.35.0
 
 FROM base AS build
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml /app/
 WORKDIR /app
+# Installs the exact pnpm version pinned in package.json's "packageManager" field
+RUN corepack enable && corepack install
 RUN pnpm install --prod --ignore-scripts --frozen-lockfile
 
 COPY tsconfig.json tsconfig.base.json astro.config.mjs /app/
