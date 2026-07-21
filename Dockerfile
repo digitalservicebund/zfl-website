@@ -2,7 +2,7 @@ FROM node:26.5.0-alpine3.23 AS base
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN npm install -g corepack@0.35.0
+RUN npm install --ignore-scripts -g corepack@0.35.0
 
 FROM base AS build
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml /app/
