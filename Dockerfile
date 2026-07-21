@@ -25,7 +25,6 @@ COPY --from=build /app/dist_staging /usr/share/nginx/staging
 RUN mkdir /etc/nginx/sites-enabled && \
 		touch /run/nginx.pid && \
     chown -R nginx /etc/nginx/sites-enabled /var/cache/nginx /run/nginx.pid && \
-		chmod -R o+w /etc/nginx/sites-enabled /var/cache/nginx /run/nginx.pid && \
  		echo 'include /etc/nginx/sites-enabled/*;' > /etc/nginx/nginx.conf
 
 # replace variables in the NGINX configuration
