@@ -1,7 +1,7 @@
 <script lang="ts">
   import FlowWithMinimap from "./_FlowWithMinimap.svelte";
   import RegelungsprozessFlow from "./_RegelungsprozessFlow.svelte";
-  import BubbleSidebar from "./_BubbleSidebar.svelte";
+  import FlowSidebar from "./_FlowSidebar.svelte";
 
   const contentId = "regelungsprozess-flow-content";
 
@@ -55,7 +55,7 @@
   const minimapSize = $derived(orientation === "vertical" ? 165 : 120);
 </script>
 
-<BubbleSidebar>
+<FlowSidebar>
   {#snippet children()}
     <div class="flex flex-col gap-80">
       <div class="ml-40 space-y-24">
@@ -109,4 +109,4 @@
       </FlowWithMinimap>
     </div>
   {/snippet}
-</BubbleSidebar>
+</FlowSidebar>

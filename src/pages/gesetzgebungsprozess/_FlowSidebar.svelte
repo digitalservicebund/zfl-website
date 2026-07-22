@@ -5,8 +5,8 @@
   import {
     BUBBLE_SIDEBAR_CONTEXT_NAME,
     BUBBLE_SIDEBAR_STEP_PARAM,
-    type BubbleSidebarContent,
-  } from "./_bubbleSidebar";
+    type FlowSidebarContent,
+  } from "./_flowSidebar";
 
   // Wraps `children` (rather than being placed as a plain sibling) so that
   // the context set below - which Svelte only propagates to a component's
@@ -17,12 +17,12 @@
   // Every bubble registers its content here as soon as it mounts (regardless
   // of whether it's ever clicked), so a bubble can be shown straight from a
   // shared `?step=` link or via the browser back/forward buttons.
-  let registry = $state<Record<string, BubbleSidebarContent>>({});
+  let registry = $state<Record<string, FlowSidebarContent>>({});
   let activeId = $state<string | null>(null);
 
   const content = $derived(activeId ? (registry[activeId] ?? null) : null);
 
-  function register(entry: BubbleSidebarContent) {
+  function register(entry: FlowSidebarContent) {
     registry[entry.id] = entry;
   }
 
@@ -47,7 +47,7 @@
     history.pushState(history.state, "", url);
   }
 
-  function toggle(next: BubbleSidebarContent) {
+  function toggle(next: FlowSidebarContent) {
     register(next);
     activeId = activeId === next.id ? null : next.id;
     syncUrl();

@@ -6,8 +6,8 @@
   import { twMerge } from "tailwind-merge";
   import {
     BUBBLE_SIDEBAR_CONTEXT_NAME,
-    type BubbleSidebarContext,
-  } from "./_bubbleSidebar";
+    type FlowSidebarContext,
+  } from "./_flowSidebar";
 
   let {
     title,
@@ -52,9 +52,9 @@
   } = $props();
 
   // Every bubble/cluster shares a single, global sidebar (mounted once via
-  // `_BubbleSidebar.svelte`) instead of rendering its own popup, so clicking
+  // `_FlowSidebar.svelte`) instead of rendering its own popup, so clicking
   // the title toggles that sidebar's content rather than a local popup.
-  const sidebarContext = getContext<BubbleSidebarContext | undefined>(
+  const sidebarContext = getContext<FlowSidebarContext | undefined>(
     BUBBLE_SIDEBAR_CONTEXT_NAME,
   );
 
