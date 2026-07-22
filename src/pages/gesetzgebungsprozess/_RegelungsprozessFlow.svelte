@@ -136,7 +136,10 @@
         </li>
       </ol>
       <h3>Welche Vorhaben sind geeignet?</h3>
-      <p>Dieser Ablauf eignet sich für alle Vorhaben.</p>
+      <p>
+        Die neue Frühphase ist für alle Vorhaben geeignet, bei denen Legistinnen
+        und Legisten einen tatsächlichen Handlungsspielraum haben.
+      </p>
       <h3>Wo sparen Sie Zeit?</h3>
       <p>
         Die digitale Unterstützung nimmt Ihnen bei der Recherche Arbeit ab.
@@ -275,10 +278,10 @@
       </p>
     {/snippet}
 
-    <Bubble title="Beteiligung der Referate" size="md">
+    <Bubble title="Beteiligung der Referate" size="sm">
       Bittet hausinterne Referate um Feedback.
     </Bubble>
-    <Bubble title="Hausentwurf" size="sm">
+    <Bubble title="Hausentwurf erstellen" size="sm">
       Ein mit den hausinternen Referaten abgeklärter Entwurf.
     </Bubble>
     <Bubble
@@ -288,6 +291,19 @@
   </Cluster>
 
   <Cluster color="#9EDCD0" {orientation} title="Ressortentwurf">
+    {#snippet sidebar()}
+      <h2>Und hier?</h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+    {/snippet}
+
     <Bubble title="Gesetzes&shy;folgen&shy;abschätzung" size="md">
       Beabsichtigte Wirkungen und unbeabsichtigte Nebenwirkungen
       (Haushaltsausgaben, Demographische Auswirkungen, Nachhaltigkeitsaspekte,

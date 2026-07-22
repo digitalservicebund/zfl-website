@@ -200,6 +200,7 @@
               class="kern-heading-small bg-black text-white px-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cosmic-blue-base"
               aria-expanded={expanded}
               onclick={toggleSidebar}
+              tabIndex={-1}
             >
               {title}
             </button>
@@ -219,10 +220,24 @@
       <!-- Isolated so the halo/dashed-circle negative z-indices only stack
          against each other, never against sibling (overlapping) clusters. -->
       <div class="isolate absolute inset-0">
-        <!-- Soft gray halo ring, matching the original SVG -->
-        <div
-          class={`pointer-events-none absolute inset-0 -z-20 rounded-full bg-[#F7F7F7] ${expanded ? "ring-4 ring-cosmic-blue-base ring-offset-2" : ""}`}
-        ></div>
+        <!-- Soft gray halo ring, matching the original SVG. Rendered as a
+           <button> (not nested inside the title's <button>, so this is
+           valid HTML) so clicking anywhere on the ring also toggles the
+           sidebar. It's `aria-hidden` and untabbable since the title button
+           already exposes the same action to keyboard/screen-reader users;
+           this is purely a larger pointer/touch target. -->
+        {#if sidebar && title}
+          <button
+            type="button"
+            aria-hidden="true"
+            class={`absolute inset-0 -z-20 rounded-full bg-[#F7F7F7] cursor-pointer ${expanded ? "bg-lavender-base" : ""}`}
+            onclick={toggleSidebar}
+          ></button>
+        {:else}
+          <div
+            class="pointer-events-none absolute inset-0 -z-20 rounded-full bg-[#F7F7F7]"
+          ></div>
+        {/if}
         {#if !isSingleBubble}
           <!-- Dashed cluster circle -->
           <div
@@ -233,7 +248,7 @@
       </div>
 
       <div
-        class={`relative transition-opacity duration-300 ${ready ? "opacity-100" : "opacity-0"}`}
+        class={`relative rounded-full transition-opacity duration-300 ${ready ? "opacity-100" : "opacity-0"}`}
         style={`width: ${diameter}px; height: ${diameter}px;`}
         bind:this={containerEl}
       >

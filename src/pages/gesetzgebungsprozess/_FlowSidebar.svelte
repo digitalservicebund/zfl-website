@@ -34,7 +34,7 @@
           ✕
         </button>
       </div>
-      <div class="kern-body--small flex-1 overflow-y-auto p-24">
+      <div class="kern-body--small flex-1 overflow-y-auto p-24 [&>h3]:text-lg">
         {@render content.children()}
 
         {#if content.kind === "cluster"}
