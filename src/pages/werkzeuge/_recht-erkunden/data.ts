@@ -19,16 +19,10 @@
  */
 
 export type HierarchyLevel =
-  | "grundgesetz"
-  | "eu"
-  | "bundesgesetz"
-  | "bundesverordnung"
-  | "landesrecht";
+  "grundgesetz" | "eu" | "bundesgesetz" | "bundesverordnung" | "landesrecht";
 
 export type RelevanceReason =
-  | "verweisung"
-  | "thematische_naehe"
-  | "gemeinsame_nennung"; // in Rechtsprechung und Literatur
+  "verweisung" | "thematische_naehe" | "gemeinsame_nennung"; // in Rechtsprechung und Literatur
 
 export type SearchableLaw = {
   id: string;
@@ -69,7 +63,7 @@ export type Evidence = {
 };
 
 /** Mock NLP signal - only ever present on "thematische_naehe" relations. */
-export type NlpSignal = { similarity: number; keywords: string[] };
+export type NlpSignal = { keywords: string[] };
 
 export type Relation = {
   id: string;
@@ -803,7 +797,6 @@ export const RELATIONS: Relation[] = [
     reason: "thematische_naehe",
     normIds: ["n-sgb2-7", "n-sgb2-9"],
     nlp: {
-      similarity: 0.81,
       keywords: [
         "soziale Sicherheit",
         "Leistungsansprüche",
@@ -1008,7 +1001,6 @@ export const RELATIONS: Relation[] = [
     reason: "thematische_naehe",
     normIds: ["n-sgb2-20", "n-sgb2-22"],
     nlp: {
-      similarity: 0.88,
       keywords: ["Regelbedarf", "Existenzsicherung", "Unterkunft und Heizung"],
     },
     evidence: [
@@ -1069,7 +1061,6 @@ export const RELATIONS: Relation[] = [
     reason: "thematische_naehe",
     normIds: ["n-sgb2-22"],
     nlp: {
-      similarity: 0.74,
       keywords: ["Unterkunftskosten", "Angemessenheit", "Mietstufe"],
     },
     evidence: [
@@ -1115,7 +1106,6 @@ export const RELATIONS: Relation[] = [
     reason: "thematische_naehe",
     normIds: ["n-sgb2-7"],
     nlp: {
-      similarity: 0.69,
       keywords: [
         "Existenzsicherung",
         "Leistungsausschluss",
@@ -1304,7 +1294,6 @@ export const RELATIONS: Relation[] = [
     reason: "thematische_naehe",
     normIds: ["n-sgb2-8"],
     nlp: {
-      similarity: 0.79,
       keywords: ["Erwerbsfähigkeit", "Erwerbsminderung", "drei Stunden"],
     },
     evidence: [

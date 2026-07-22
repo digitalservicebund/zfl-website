@@ -21,7 +21,7 @@ type SourceKind = (typeof SOURCE_KINDS)[number]["id"];
 
 const SOURCE_TAG_BASE = "inline-flex items-center gap-4";
 
-type SidebarMode = "norm" | "evidence" | "term" | null;
+type SidebarMode = "evidence" | "term" | null;
 
 const LEVEL_BADGE_BASE = "inline-flex items-center";
 
@@ -31,7 +31,6 @@ export const rechtErkunden = () => ({
   selectedAreaId: null as string | null,
   activeNormIds: [] as string[],
   sidebarMode: null as SidebarMode,
-  sidebarNormId: null as string | null,
   sidebarRelationId: null as string | null,
   sidebarTermId: null as string | null,
 
@@ -132,6 +131,13 @@ export const rechtErkunden = () => ({
     );
   },
 
+  activeTermNorms(term: Term): Norm[] {
+    return term.usedIn.normIds
+      .filter((id) => this.activeNormIds.includes(id))
+      .map((id) => this.normById(id))
+      .filter((norm): norm is Norm => Boolean(norm));
+  },
+
   termLawCount(term: Term) {
     return this.termAdjacentLaws(term).length;
   },
@@ -148,36 +154,22 @@ export const rechtErkunden = () => ({
     return [...seen.values()];
   },
 
-  openNorm(id: string) {
-    this.sidebarMode = "norm";
-    this.sidebarNormId = id;
-    this.sidebarRelationId = null;
-    this.sidebarTermId = null;
-  },
-
   openRelation(relation: Relation) {
     this.sidebarMode = "evidence";
     this.sidebarRelationId = relation.id;
-    this.sidebarNormId = null;
     this.sidebarTermId = null;
   },
 
   openTerm(id: string) {
     this.sidebarMode = "term";
     this.sidebarTermId = id;
-    this.sidebarNormId = null;
     this.sidebarRelationId = null;
   },
 
   closeSidebar() {
     this.sidebarMode = null;
-    this.sidebarNormId = null;
     this.sidebarRelationId = null;
     this.sidebarTermId = null;
-  },
-
-  get sidebarNorm(): Norm | null {
-    return NORMS.find((norm) => norm.id === this.sidebarNormId) ?? null;
   },
 
   get sidebarRelation(): Relation | null {

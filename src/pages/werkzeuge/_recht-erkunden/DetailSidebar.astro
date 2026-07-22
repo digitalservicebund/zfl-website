@@ -27,7 +27,7 @@ const { levelBadge, sourceTag, evidenceCard } = styles();
     <div class="mb-12 flex items-start justify-between gap-12">
       <h3 class="mt-0 mb-0">
         <span
-          x-text="sidebarMode === 'norm' ? 'Normtext' : sidebarMode === 'term' ? 'Begriff' : sidebarRelation ? reasonLabel(sidebarRelation.reason) : ''"
+          x-text="sidebarMode === 'term' ? 'Begriff' : sidebarRelation ? reasonLabel(sidebarRelation.reason) : ''"
         ></span>
       </h3>
       <button
@@ -39,17 +39,6 @@ const { levelBadge, sourceTag, evidenceCard } = styles();
         <Icon name="ic:round-close" class="h-24 w-24" />
       </button>
     </div>
-
-    <template x-if="sidebarMode === 'norm' && sidebarNorm">
-      <NormDisplay
-        label="sidebarNorm.ref"
-        title="sidebarNorm.title"
-        summary="sidebarNorm.summary"
-        fullText="sidebarNorm.fullText"
-        url="sidebarNorm.url"
-        bordered
-      />
-    </template>
 
     <template x-if="sidebarMode === 'term' && sidebarTerm">
       <div class="space-y-12">
@@ -73,7 +62,32 @@ const { levelBadge, sourceTag, evidenceCard } = styles();
         </div>
 
         <div>
-          <p class="kern-label text-icon-muted mb-8">Verwendet in</p>
+          <p class="kern-label text-icon-muted mb-8">
+            Verwendet in ausgewählten SGB-II-Normen
+          </p>
+          <ul class="list-none space-y-8 p-0" role="list">
+            <template
+              x-for="norm in activeTermNorms(sidebarTerm)"
+              :key="norm.id"
+            >
+              <li>
+                <NormDisplay
+                  label="norm.ref"
+                  title="norm.title"
+                  summary="norm.summary"
+                  fullText="norm.fullText"
+                  url="norm.url"
+                  bordered
+                />
+              </li>
+            </template>
+          </ul>
+        </div>
+
+        <div>
+          <p class="kern-label text-icon-muted mb-8">
+            Verbindet mit angrenzendem Recht
+          </p>
           <ul class="list-none space-y-8 p-0" role="list">
             <template
               x-for="(entry, index) in sidebarTerm.usedIn.adjacentNorms"
@@ -136,7 +150,6 @@ const { levelBadge, sourceTag, evidenceCard } = styles();
                 summary="normById(normId).summary"
                 fullText="normById(normId).fullText"
                 url="normById(normId)?.url"
-                onTitleClick="openNorm(normId)"
                 bordered
               />
             </template>

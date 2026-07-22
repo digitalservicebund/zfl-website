@@ -1,10 +1,12 @@
 # Recht erkunden — Prototyp
 
 > [!WARNING]
-> Staging-only-Prototyp. Alle Verbindungen, Zitate, Volltexte und
-> Ähnlichkeits-Werte sind **erfundene Beispieldaten** und **nicht rechtlich
-> geprüft**. Gesetzesnamen und Normbezeichnungen sind real, die Verknüpfungen
-> zwischen ihnen sind es nicht. Vollständig ausgearbeitet ist nur **SGB II**.
+> Staging-only-Prototyp. Gesetzesnamen, Normbezeichnungen und viele verlinkte
+> Quellen sind real. Die dargestellten Verbindungen, Nachweistexte,
+> Textauszüge („Volltexte") und Themen-Keywords sind jedoch **illustrative
+> Beispieldaten** und **nicht rechtlich geprüft**. Analysedaten sind
+> ausschließlich für **SGB II** hinterlegt; auch dort ist die Abdeckung je
+> Rechtsgebiet unterschiedlich.
 
 ## Zweck
 
@@ -40,7 +42,7 @@ werden:
   Gesetz, das geändert werden soll. Die schrittweise Eingrenzung über Gesetz,
   Rechtsgebiet und konkrete Normen ist verständlicher als der direkte Einstieg
   in ein vollständiges Netz rechtlicher Beziehungen.
-- In der frühen Phase eines Gesetzesvorhaben ist es besonders wichtig, den
+- In der frühen Phase eines Gesetzesvorhabens ist es besonders wichtig, den
   nötigen Kontext des angrenzenden Rechts übersichtlich erkundbar zu machen.
 - Für die Bewertung angrenzenden Rechts sind zwei Fragen entscheidend:
   _Warum ist etwas relevant?_ und _auf welcher Hierarchieebene liegt es?_
@@ -63,7 +65,7 @@ Zustand zurück und schließt die Detail-Sidebar.
 
 1. **Gesetz suchen.** Suchfeld über einer kleinen, fest hinterlegten Liste
    echter Gesetze (SGB II, SGB III, ArbSchG, BDSG, SGB XII, GG). Nur **SGB II**
-   trägt vollständige Daten; bei jedem anderen Gesetz erscheint ein
+   trägt Analysedaten; bei jedem anderen Gesetz erscheint ein
    freundlicher Hinweis („Für dieses Gesetz liegen noch keine Analysedaten
    vor …") mit einem Shortcut zu SGB II.
 2. **Rechtsgebiet wählen.** Nach Auswahl von SGB II erscheinen fünf
@@ -78,14 +80,16 @@ Zustand zurück und schließt die Detail-Sidebar.
 
 ### Schritt 2 — Angrenzendes Recht erkunden
 
-1. **Begriffe im Fokus (Strip).** Ein gleichmäßiges Karten-Raster für die
-   gemeinsamen Begriffe, die in den aktiven Normen auffindbar sind (Abwählen
-   einer Norm entfernt ihre Begriffe). Jede Karte ist vollständig anklickbar
-   (öffnet die Sidebar im Begriff-Modus) und fasst den Begriff als
-   Kurzüberblick zusammen: Begriffsname, gekürzte Definition, definierende
-   Norm („Definiert in …") sowie die Anzahl und die verbundenen Gesetze als
-   Chips mit Hierarchie-Badge. Die Sidebar liefert dann die vollständige
-   Definition, die definierende Norm im Volltext und alle nutzenden Normen.
+1. **Begriffe im Fokus (Strip).** Ein gleichmäßiges Karten-Raster für
+   Begriffe, die mindestens einer aktiven Norm zugeordnet sind
+   (Abwählen einer Norm entfernt Begriffe, sobald keine aktive Norm mehr
+   zugeordnet ist). Jede Karte ist vollständig anklickbar (öffnet die Sidebar
+   im Begriff-Modus) und fasst den Begriff als Kurzüberblick zusammen:
+   Begriffsname, gekürzte Definition, definierende Norm („Definiert in …")
+   sowie die Anzahl und die verbundenen Gesetze als Chips mit
+   Hierarchie-Badge. Die Sidebar liefert dann die Definition, einen Auszug aus
+   der definierenden Norm, die ausgewählten SGB-II-Normen und die zugehörigen
+   Normen des angrenzenden Rechts.
 2. **Relevantes Recht explorieren (Matrix).**
    - **Zeilen = Normenhierarchie** (fünf Ebenen, siehe unten)
    - **Spalten = Relevanzgrund** (siehe unten)
@@ -94,24 +98,26 @@ Zustand zurück und schließt die Detail-Sidebar.
      Zeilen-/Spaltenköpfe tragen Zähler. Auf Desktop ein CSS-Grid, auf schmalen
      Bildschirmen gestapelte Hierarchie-Abschnitte mit Relevanzgrund-Untergruppen.
 
-### Detail-Sidebar (drei Modi)
+3. **Detail-Sidebar (aktueller Prototyp).** Ein einziges Panel (Desktop:
+   sticky; Mobile: Slide-over) zeigt je nach Auslöser zwei Inhalte:
 
-Ein einziges Panel (Desktop: sticky; Mobile: Slide-over) mit zwei Inhalten je
-nach Auslöser:
-
-- **Begriff-Modus** (aus dem Strip): Begriff, Definition, definierende Norm und
-  alle nutzenden Normen/Gesetze.
-- **Evidenz-Modus** (aus einer Matrix-Zelle): Gesetzestitel + Hierarchie-Badge,
-  Relevanzgrund, betroffene Normen und – je Verbindung – ein zusammenhängender
-  Nachweis-Block. Dessen Überschrift richtet
-  sich nach dem Relevanzgrund (_Verweisung(en)_, _Fundstelle(n)_ bzw.
-  _Thematische Überschneidung(en)_). Jeder Block ist eine Karte, die Quelle,
-  Begründung und referenzierte Normen visuell zusammenfasst: Bei _Gemeinsame
-  Nennung_ steht oben die Fundstelle (Urteil/Literatur) mit einem Tag
-  (Rechtsprechung/Literatur) und Link, darunter die Begründung, darunter die
-  referenzierten Normen mit eigenem Link und ausklappbarem Volltext. Bei
-  _Thematische Nähe_ zeigt die Sidebar zusätzlich die ermittelten Themen als
-  Schlagwörter.
+   - **Begriff-Modus** (aus dem Strip): Begriff, Definition, definierende Norm
+     und alle nutzenden Normen/Gesetze.
+   - **Evidenz-Modus** (aus einer Matrix-Zelle): Gesetzestitel +
+     Hierarchie-Badge, Relevanzgrund, betroffene Normen und ein
+     zusammenhängender Nachweis-Block. Im aktuellen Prototyp ist dieser
+     norm-/gesetzeszentriert: Seine Überschrift richtet sich nach dem
+     Relevanzgrund (_Verweisung(en)_, _Fundstelle(n)_ bzw. _Thematische
+     Überschneidung(en)_). Jeder Block ist eine Karte, die Quelle, Begründung
+     und referenzierte Normen visuell zusammenfasst: Bei _Gemeinsame Nennung_
+     steht oben die Fundstelle (Urteil/Literatur) mit einem Tag
+     (Rechtsprechung/Literatur) und Link, darunter die Begründung, darunter die
+     referenzierten Normen mit eigenem Link und ausklappbarem Volltext. Bei
+     _Thematische Nähe_ zeigt die Sidebar zusätzlich die ermittelten Themen als
+     Schlagwörter. Ob Fundstellen und Themen künftig selbst die primäre
+     Perspektive der Darstellung sein sollten, ist unter
+     [Offene Gestaltungsfragen für Schritt 2](#offene-gestaltungsfragen-für-schritt-2)
+     festgehalten.
 
 ## Schlüsselkonzepte
 
@@ -131,13 +137,10 @@ nach Auslöser:
 | **Rechtsprechung & Literatur** | Ko-Zitation in Urteilen/Literatur | explizite Zitate          |
 | **Thematische Nähe**           | überlappendes Themenfeld          | **NLP** (Textähnlichkeit) |
 
-Geteilte definierte Begriffe sind kein eigener Relevanzgrund in der Matrix,
-sondern werden ausschließlich im Begriffe-Strip (Schritt 2.1) samt ihrer
-verbundenen Gesetze dargestellt.
-
-Nur **Thematische Nähe** beruht auf NLP-Ähnlichkeit und trägt ein
-Ähnlichkeitssignal (Score + Keywords). Alle anderen Gründe beruhen auf
-expliziten Normverweisen und tragen keinen Score.
+Nur **Thematische Nähe** beruht auf NLP-Ähnlichkeit und trägt automatisch
+ermittelte Themen-Keywords. **Verweisungen** beruhen auf direkten
+Norm-zu-Norm-Bezügen; **Rechtsprechung & Literatur** auf der Ko-Zitation von
+Normen in einer Fundstelle.
 
 ### Offene Gestaltungsfragen für Schritt 2
 
@@ -166,41 +169,47 @@ und sollte noch einmal grundsätzlich geprüft werden:
 
 ## Pipeline-Kontext (out of scope)
 
-Im echten System würde eine Pipeline die Signale mischen: **Zitationsextraktion**
-für explizite Verbindungen (Norm-zu-Norm-Verweise, Normzitate in Urteilen und
-Literatur) und **NLP** für die unscharfen (Embedding-/word2vec-Ähnlichkeit,
-TF-IDF, Keyword-Extraktion — auch für das Clustern der Rechtsgebiete in
-Schritt 1). Der Prototyp bildet nur die _Ausgabe_ nach; die Pipeline zu
-entwerfen ist explizit nicht Teil davon. Die UI macht sichtbar, wo NLP-abgeleitete
-vs. zitationsabgeleitete Relevanz auftauchen würde.
+Im echten System würde eine Pipeline mehrere Signale mischen:
+**Zitationsextraktion** für Norm-zu-Norm-Verweise und Normzitate in Urteilen
+oder Literatur, **Terminologie- und Definitionserkennung** samt Entity
+Resolution für Begriffe sowie **NLP** für unscharfe Ähnlichkeit
+(Embeddings/word2vec, TF-IDF, Keyword-Extraktion und Clustering). Der Prototyp
+bildet nur die _Ausgabe_ nach; die Pipeline zu entwerfen ist ausdrücklich nicht
+Teil davon. Die UI macht sichtbar, aus welcher Art von Signal eine dargestellte
+Relevanz stammen würde.
 
 **Thematische Nähe** in Schritt 2 und die **Rechtsgebiete** in Schritt 1 würden
-dabei mit ähnlichen Verfahren aus den Normtexten extrahiert beziehungsweise
-gebildet. Der wesentliche Unterschied liegt derzeit in ihrer Verwendung:
-Rechtsgebiete gruppieren Normen innerhalb des Ausgangsgesetzes, während
-Thematische Nähe Beziehungen zum angrenzenden Recht beschreibt.
+dabei mit ähnlichen Verfahren aus den Normtexten abgeleitet. Der wesentliche
+Unterschied liegt derzeit in ihrer Verwendung: Rechtsgebiete gruppieren Normen
+innerhalb des Ausgangsgesetzes, während Thematische Nähe Beziehungen zum
+angrenzenden Recht beschreibt. Die Begriffe und alle Zuordnungen sind im
+Prototyp manuell kuratiert.
 
 ## Umfang der Beispieldaten
 
-- **1** vollständiges Gesetz (SGB II); 5 weitere nur als Suchtreffer ohne Daten.
+- **1** Gesetz mit Analysedaten (SGB II); 5 weitere nur als Suchtreffer ohne
+  Daten. Die Abdeckung innerhalb des SGB II ist bewusst ungleichmäßig.
 - **5** Rechtsgebiete (Lebensunterhalt, Eingliederung, KdU, Sanktionen,
   Verfahren/Datenschutz).
 - **Vorführbeispiel:** Das Rechtsgebiet **„Leistungen zur Sicherung des
   Lebensunterhalts (Bürgergeld)"** (§§ 7, 8, 9, 19, 20 SGB II) ist als
-  durchgehend belastbarer Demonstrationsfall ausgearbeitet: Die Matrix ist über
-  alle fünf Hierarchieebenen (GG → EuGH/VO 883/2004 & RL 2004/38 → mehrere
-  Bundesgesetze → Bürgergeld-V/RBSFV → Landesrecht) und alle drei Relevanzgründe
-  gefüllt. Alle Verknüpfungen bleiben Beispieldaten, orientieren sich aber an
-  real existierenden Bezügen (z. B. Existenzminimum-Rechtsprechung des BVerfG,
-  Dano/Alimanovic beim EuGH, Verweis des § 20 Abs. 1a SGB II auf RBEG/RBSFV).
-- **~23** Verbindungen zu angrenzenden Gesetzen über die drei Matrix-Relevanzgründe.
-- **7** geteilte Begriffe: drei im Gesetz selbst definierte (Bedarfsgemeinschaft,
-  Erwerbsfähigkeit, Regelbedarf) sowie **anderswo definierte** Begriffe, die in
-  den betrachteten Normen genutzt werden (Einkommen → § 11 SGB II, Vermögen →
-  § 12 SGB II, Angemessenheit der Unterkunft, Mitwirkungspflicht → § 60 SGB I).
-  Jeder Begriff trägt Definition, definierende Norm und Nutzung über SGB-II- und
-  angrenzende Normen; die Begriffe sind kongruent zu den Normtexten gewählt
-  (z. B. „Einkommen"/„Vermögen" in §§ 9, 19 SGB II).
+  dichtester Demonstrationsfall ausgearbeitet: Die Matrix enthält Verbindungen
+  über vier Hierarchieebenen (GG, EU-Recht, Bundesgesetze und
+  Bundesverordnungen) und alle drei Relevanzgründe. Der Landesrechts-Fall gehört
+  zum Rechtsgebiet KdU. Alle Verknüpfungen bleiben Beispieldaten, orientieren
+  sich aber an real existierenden Bezügen (z. B.
+  Existenzminimum-Rechtsprechung des BVerfG, Dano/Alimanovic beim EuGH, Verweis
+  des § 20 Abs. 1a SGB II auf RBEG/RBSFV).
+- **22** Verbindungsdatensätze zu angrenzenden Gesetzen über die drei
+  Matrix-Relevanzgründe. Ein Gesetz kann in mehreren Datensätzen vorkommen;
+  Zähler in der Matrix zählen derzeit Datensätze, nicht zwingend eindeutige
+  Gesetze.
+- **7** kuratierte Begriffe: drei sind in Normen des Vorführbeispiels definiert
+  (Bedarfsgemeinschaft, Erwerbsfähigkeit, Regelbedarf), drei in anderen
+  SGB-II-Normen (Einkommen → § 11, Vermögen → § 12, Angemessenheit der
+  Unterkunft → § 22) und einer außerhalb des SGB II (Mitwirkungspflicht → § 60
+  SGB I). Jeder Begriff trägt eine Definition, eine definierende Norm und
+  manuell zugeordnete Nutzungen in SGB-II- und angrenzenden Normen.
 
 ## Implementierung (Überblick)
 
@@ -214,13 +223,17 @@ src/pages/werkzeuge/
     styles.ts                   # geteilte tv()-Slots
     Step1RechtBestimmen.astro   # Schritt 1: Suche → Gebiet → Normen
     Step2RechtErkunden.astro    # Schritt 2: Begriffe-Strip + Matrix
-    DetailSidebar.astro         # Sidebar (Norm-/Begriff-/Evidenz-Modus)
+    DetailSidebar.astro         # Sidebar (Begriff-/Evidenz-Modus)
     NormDisplay.astro           # feature-scoped Norm-Darstellung
     InfoPopover.astro           # feature-scoped Info-Popover
+  _recht-erkunden-bindings.test.ts
+                               # Guardrail für Alpine-Template/Store-Bindings
 ```
 
-Die Daten werden typisiert über den Store importiert (kein `define:vars`-/
-`window.__`-Muster, kein Fetch).
+Die UI verwendet den lokalen typisierten Datensatz ohne Backend oder Fetch.
+Der Binding-Test prüft, ob Alpine-Ausdrücke auf vorhandene Store-Member
+verweisen. Er testet weder den vollständigen Nutzerfluss noch die fachliche
+Qualität oder Konsistenz der Beispieldaten.
 
 > [!IMPORTANT]
 > Bei Änderungen an Flow, Datenmodell oder Dateilayout dieses Dokument im selben
