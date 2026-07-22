@@ -199,39 +199,6 @@
     <Bubble title="Vorarbeit" size="sm" tags={["Frühphase"]}>
       Zieht Arbeit aus anderen Fach-Referaten über das Gesetzesthema zusammen.
     </Bubble>
-
-    <Bubble title="Digitalcheck" color="#0000FF" size="xs" tags={["Frühphase"]}>
-      Hier steht dann was zum <a href="https://digitalcheck.bund.de"
-        >Digitalcheck</a
-      >
-    </Bubble>
-    <Bubble
-      title="Visualisierungen"
-      color="#0000FF"
-      size="xs"
-      tags={["Frühphase"]}
-    >
-      Hier steht dann was zu <a
-        href="https://digitalcheck.bund.de/methoden/visualisieren"
-        >Visualisierungen</a
-      >
-    </Bubble>
-    <Bubble title="Steckbrief" color="#FF823C" size="xs" tags={["Frühphase"]}>
-      Hier steht dann was zum <a
-        href="https://digitalservicebund.github.io/zfl-website/previews/feature/steckbrief-prototype-2b/vorhaben/"
-        >Steckbrief</a
-      >
-    </Bubble>
-    <Bubble
-      title="Regelungs&shy;begleitung"
-      color="#FF823C"
-      size="xs"
-      tags={["Frühphase"]}
-    >
-      Hier steht dann was zu <a href={begleitungen.path}
-        >Regelungsbegeleitungen</a
-      >
-    </Bubble>
   </Cluster>
 
   <Cluster color="#ABD7F9" {orientation} title="Referentenentwurf">
