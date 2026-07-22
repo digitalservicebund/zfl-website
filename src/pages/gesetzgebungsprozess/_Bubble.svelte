@@ -6,7 +6,7 @@
     type BubbleHighlightContext,
   } from "./_bubbleHighlight";
   import {
-    BUBBLE_SIDEBAR_CONTEXT_NAME,
+    FLOW_SIDEBAR_CONTEXT_NAME,
     type FlowSidebarContext,
   } from "./_flowSidebar";
 
@@ -61,7 +61,7 @@
   // `_FlowSidebar.svelte`) instead of rendering its own popup, so clicking
   // a bubble toggles that sidebar's content rather than a local popup.
   const sidebarContext = getContext<FlowSidebarContext | undefined>(
-    BUBBLE_SIDEBAR_CONTEXT_NAME,
+    FLOW_SIDEBAR_CONTEXT_NAME,
   );
 
   // Registers this bubble's content with the sidebar as soon as it mounts

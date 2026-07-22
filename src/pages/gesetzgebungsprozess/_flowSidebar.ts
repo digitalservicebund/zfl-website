@@ -5,12 +5,12 @@ import type { Snippet } from "svelte";
 // instance beneath it, so clicking any bubble can open/toggle the same
 // sidebar with that bubble's content instead of each bubble rendering its
 // own popup.
-export const BUBBLE_SIDEBAR_CONTEXT_NAME = Symbol("bubble-sidebar");
+export const FLOW_SIDEBAR_CONTEXT_NAME = Symbol("flow-sidebar");
 
 // Search param used to make the currently open bubble shareable/bookmarkable
 // (e.g. `?step=Materialrecherche`) and to support the browser back/forward
 // buttons.
-export const BUBBLE_SIDEBAR_STEP_PARAM = "step";
+export const FLOW_SIDEBAR_STEP_PARAM = "step";
 
 export interface FlowSidebarContent {
   /** Unique identifier of the bubble whose content is shown, e.g. its title. */
