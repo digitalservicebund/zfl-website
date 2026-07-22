@@ -93,6 +93,19 @@
     anchorName={CLUSTER_FIRST_ANCHOR}
     title="Interessensermittlung"
   >
+    {#snippet sidebar()}
+      <h2>Was tun?</h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+    {/snippet}
+
     <Bubble
       title="Arbeits&shy;gruppen&shy;bildung"
       optional
@@ -352,6 +365,19 @@
   </Cluster>
 
   <Cluster color="#D2EDB9" {orientation} title="Kabinettvorlage">
+    {#snippet sidebar()}
+      <h2>Fast geschafft!</h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+    {/snippet}
+
     <Bubble title="Kabinett&shy;vorlage erstellen" size="sm">
       Die Kabinettvorlage beinhaltet neben dem Ressortentwurf weitere Dokumente,
       die benötigt werden um das Gesetz im Kabinett zu behandeln (Sprechzettel,
@@ -383,6 +409,19 @@
     title="Verabschiedung"
     className="bg-(--dark-bg)"
   >
+    {#snippet sidebar()}
+      <h2>Nur noch flott durchs Parlament ...</h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+    {/snippet}
+
     <Bubble title="Stellungnahme Bundesrat">
       <h3>Weiterleitung an den Bundesrat</h3>
       <p>
@@ -447,6 +486,19 @@
     anchorName={CLUSTER_LAST_ANCHOR}
     className="bg-(--dark-bg)"
   >
+    {#snippet sidebar()}
+      <h2>Tadaa!!</h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum.
+      </p>
+    {/snippet}
+
     <Bubble title="Dokumentation & Inkrafttreten">
       <h3>Übergabe der Regelung an die Dokumentations&shy;stelle</h3>
       <h3>Dokumentation Gesetze</h3>
