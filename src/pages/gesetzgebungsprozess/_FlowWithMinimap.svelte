@@ -310,15 +310,15 @@
 >
   <div class={`grid min-w-0 ${isVertical ? "" : ""}`}>
     <div
-      class={`sticky flex justify-center items-center z-50 col-start-1 row-start-1 ${
+      class={`sticky flex items-center z-50 col-start-1 row-start-1 pointer-events-none ${
         isVertical
-          ? "w-fit _lg:w-[20vw] top-0 h-screen"
-          : "w-[70vw] bottom-20 self-end justify-self-start"
+          ? "w-screen md:w-fit top-0 h-screen justify-end md:justify-end"
+          : "w-[50vw] bottom-20 self-end justify-self-start justidfy-center"
       }`}
       bind:clientWidth={stickyWidth}
       bind:clientHeight={stickyHeight}
     >
-      <div class={`h-fit w-fit rounded-md shadow-md`}>
+      <div class={`h-fit w-fit rounded-md shadow-md pointer-events-auto`}>
         <div
           class="relative cursor-pointer overflow-hidden rounded-md border border-lavender-400"
           style={`width: ${minimapWidth}px; height: ${minimapHeight}px;`}

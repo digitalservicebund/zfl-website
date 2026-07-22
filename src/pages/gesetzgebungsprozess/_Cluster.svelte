@@ -113,7 +113,7 @@
     base: "relative flex flex-col items-center justify-center",
     variants: {
       orientation: {
-        vertical: "_mx-auto w-(--cluster-inner-width)",
+        vertical: "w-(--cluster-inner-width) overflow-x-clip",
         horizontal: "h-screen",
       },
       fitContent: {
@@ -132,7 +132,6 @@
     },
   });
 
-  const HALO_THICKNESS = 48; // px, thickness of the soft gray ring
   const BUBBLE_PADDING = 8; // px, gap enforced between packed bubbles
   const EDGE_PADDING = 8; // px, gap between bubbles and the dashed border
 
@@ -180,9 +179,21 @@
 
   $effect(() => {
     layout();
-  });
 
-  const outerSize = $derived(diameter + HALO_THICKNESS * 2);
+    // Bubble sizes are defined in `em` (see `_Bubble.svelte`'s `sizeMap`),
+    // so their rendered pixel size can change independently of any prop
+    // here - e.g. `max-md:text-xs` shrinking the bubble's font-size (and
+    // thus its `em`-based width/height) once the viewport crosses the `md`
+    // breakpoint. `layout()` only reads pixel sizes once, so without this
+    // observer the pack/diameter would go stale after such a resize.
+    if (!containerEl) return;
+    const items = Array.from(containerEl.children) as HTMLElement[];
+    if (items.length === 0) return;
+
+    const resizeObserver = new ResizeObserver(() => layout());
+    for (const item of items) resizeObserver.observe(item);
+    return () => resizeObserver.disconnect();
+  });
 
   // A small, random horizontal jitter per cluster instance (fixed for the
   // lifetime of the component) for a more organic, hand-drawn feel.
@@ -194,7 +205,10 @@
 
 <div
   bind:this={rootEl}
-  class={twMerge("cluster-root", className)}
+  class={twMerge(
+    "cluster-root [--halo-thickness:32px] md:[--halo-thickness:48px]",
+    className,
+  )}
   data-orientation={orientation}
   style={color ? `--bubble-color: ${color}` : undefined}
 >
@@ -228,7 +242,7 @@
 
     <div
       class={`relative flex items-center justify-center ${expanded ? "z-10" : ""}`}
-      style={`width: ${outerSize}px; height: ${outerSize}px; margin-${orientation === "vertical" ? "left" : "top"}: ${offset ?? clusterOffset}px; --halo-color: color-mix(in srgb, ${color} 20%, white)`}
+      style={`width: calc(${diameter}px + 2 * var(--halo-thickness)); height: calc(${diameter}px + 2 * var(--halo-thickness)); margin-${orientation === "vertical" ? "left" : "top"}: ${offset ?? clusterOffset}px; --halo-color: color-mix(in srgb, ${color} 20%, white)`}
     >
       <!-- Isolated so the halo/dashed-circle negative z-indices only stack
          against each other, never against sibling (overlapping) clusters. -->
@@ -255,7 +269,7 @@
           <!-- Dashed cluster circle -->
           <div
             class="pointer-events-none absolute -z-10 rounded-full border border-dashed border-black bg-white"
-            style={`width: ${diameter}px; height: ${diameter}px; top: ${HALO_THICKNESS}px; left: ${HALO_THICKNESS}px;`}
+            style={`width: ${diameter}px; height: ${diameter}px; top: var(--halo-thickness); left: var(--halo-thickness);`}
           ></div>
         {/if}
       </div>
@@ -281,13 +295,13 @@
     .cluster-root[data-orientation="vertical"]
       + .cluster-root[data-orientation="vertical"]
   ) {
-    margin-top: -48px;
+    margin-top: calc(-1 * var(--halo-thickness));
   }
 
   :global(
     .cluster-root[data-orientation="horizontal"]
       + .cluster-root[data-orientation="horizontal"]
   ) {
-    margin-left: -48px;
+    margin-left: calc(-1 * var(--halo-thickness));
   }
 </style>

@@ -17,10 +17,10 @@
   type Size = "xs" | "sm" | "md" | "lg";
 
   const sizeMap: Record<Size, string> = {
-    xs: "3rem",
-    sm: "8rem",
-    md: "11rem",
-    lg: "14rem",
+    xs: "3em",
+    sm: "8em",
+    md: "11em",
+    lg: "13em",
   };
 
   let {
@@ -122,7 +122,7 @@
 >
   {#snippet bubble()}
     <div
-      class={`group/circle flex items-center justify-center rounded-full transition-[transform,filter,box-shadow] duration-200 ease-out ${children ? "hover:scale-105 group-focus-visible:scale-105 group-focus-visible:outline-2 group-focus-visible:outline-cosmic-blue-base" : ""} ${expanded ? "scale-105 ring-4 ring-cosmic-blue-base ring-offset-2" : ""}`}
+      class={`group/circle flex max-md:text-xs items-center justify-center rounded-full transition-[transform,filter,box-shadow] duration-200 ease-out ${children ? "hover:scale-105 group-focus-visible:scale-105 group-focus-visible:outline-2 group-focus-visible:outline-cosmic-blue-base" : ""} ${expanded ? "scale-105 ring-4 ring-cosmic-blue-base ring-offset-2" : ""}`}
       style={`background-color: ${color ?? "var(--bubble-color)"}; width: ${sizeMap[size]}; height: ${sizeMap[size]}; filter: ${dimmed ? "grayscale(1)" : "none"};`}
     >
       <div class="text-center space-y-8 px-16">
@@ -133,7 +133,7 @@
           >
         {/if}
         <div
-          class={`kern-label text-black ${size === "xs" ? "hidden group-hover/circle:block group-active/circle:block group-focus-visible:block" : ""}`}
+          class={`kern-label max-md:text-sm text-black ${size === "xs" ? "hidden group-hover/circle:block group-active/circle:block group-focus-visible:block" : ""}`}
         >
           {title}
           {#if optional}
