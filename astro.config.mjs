@@ -26,6 +26,7 @@ export default defineConfig({
   base: isPreview ? PREVIEW_BASE_PATH : undefined,
   redirects: {
     "/anleitungen-und-hilfsmittel": "/werkzeuge",
+    "/ueber/neue-fruephase": "/ueber/neue-fruehphase",
     "/ueber-uns": "/ueber",
     "/ueber-uns/daran-arbeiten-wir": "/ueber/daran-arbeiten-wir",
     "/ueber/das-ist-neu": "/ueber/daran-arbeiten-wir",
