@@ -114,28 +114,35 @@
     </Bubble>
   </Cluster>
 
-  <Cluster color="#B3B7E0" {orientation} title="Recherche">
+  <Cluster color="#B3B7E0" {orientation} offset={0} title="Recherche">
     {#snippet sidebar()}
       <h2>Wie sieht die Frühphase in der Recherchephase aus?</h2>
       <p>
-        Grobe Beschreibung was in der <strong>Phase</strong> erwartet wird: Problemanalyse,
-        Wirkziele beschreiben+ Ressorts benachrichtigen, Stakeholder
+        In dieser Phase bereiten Sie neue Regelungen vor. Sie prüfen genau,
+        welches Problem gelöst werden muss und legen fest, was die Regelung
+        bewirken soll. Außerdem binden Sie frühzeitig alle Beteiligten ein.
+        Dadurch schaffen Sie eine gute Grundlage für die weitere Arbeit.
       </p>
       <h3>Was ist neu?</h3>
-      <ul>
-        <li>Vorprüfung fällt weg</li>
+      <ol>
         <li>
-          Standardisierter Steckbrief legt die Basis für einen einfachen
-          Arbeitsablauf
+          <strong>Geführter Prozess:</strong> Ein digitales Werkzeug führt Sie Schritt
+          für Schritt durch den Prozess. Sie müssen Informationen nicht mehr in vielen
+          verschiedenen Dokumenten ausfüllen.
         </li>
         <li>
-          Ein einfacher, geführter Ablauf im Tool. Kein Suchen in Dokumenten
-          mehr
+          <strong>Tools:</strong> Künstliche Intelligenz unterstützt Sie bei der Recherche.
+          So finden und ordnen Sie wichtige Informationen deutlich schneller.
         </li>
-        <li>KI-unterstützte Materialrecherche</li>
-      </ul>
+      </ol>
       <h3>Welche Vorhaben sind geeignet?</h3>
+      <p>Dieser Ablauf eignet sich für alle Vorhaben.</p>
       <h3>Wo sparen Sie Zeit?</h3>
+      <p>
+        Die digitale Unterstützung nimmt Ihnen bei der Recherche Arbeit ab.
+        Zudem erstellt das System aus Ihren gesammelten Eingaben automatisch
+        wichtige Dokumente für die weitere Planung Ihres Vorhabens.
+      </p>
     {/snippet}
 
     <Bubble title="Gesetzes&shy;umfeld" size="sm" tags={["Frühphase"]}>
