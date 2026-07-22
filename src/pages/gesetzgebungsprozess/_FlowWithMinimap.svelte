@@ -288,33 +288,34 @@
 <div
   class="grid grid-cols-1 items-start lg:grid-cols-[1fr_auto] [--cluster-inner-width:60vw]"
 >
-  <div class={`grid min-w-0 ${isVertical ? "w-[20vw]" : ""}`}>
+  <div class={`grid min-w-0 ${isVertical ? "" : ""}`}>
     <div
-      class={`sticky z-50 col-start-1 row-start-1 h-fit w-fit rounded-md shadow-md ${
+      class={`sticky flex justify-center items-center z-50 col-start-1 row-start-1 ${
         isVertical
-          ? "top-40 mb-40 self-start justify-self-center"
-          : "bottom-20 self-end justify-self-center"
+          ? "w-[20vw] top-0 h-screen"
+          : "w-[70vw] bottom-20 self-end justify-self-start"
       }`}
     >
-      <div
-        class="relative cursor-pointer overflow-hidden rounded-md border border-lavender-400"
-        style={`width: ${minimapWidth}px; height: ${minimapHeight}px;`}
-        onclick={onMinimapClick}
-        role="presentation"
-      >
-        <!-- Live, scaled-down clone of the main content. Since our bubbles
+      <div class={`h-fit w-fit rounded-md shadow-md`}>
+        <div
+          class="relative cursor-pointer overflow-hidden rounded-md border border-lavender-400"
+          style={`width: ${minimapWidth}px; height: ${minimapHeight}px;`}
+          onclick={onMinimapClick}
+          role="presentation"
+        >
+          <!-- Live, scaled-down clone of the main content. Since our bubbles
            are real DOM (not a static image), we render the same content
            a second time and shrink it with a CSS transform; it's
            non-interactive and hidden from assistive tech. -->
-        <div
-          class="pointer-events-none absolute top-0 left-0 origin-top-left"
-          style={isVertical
-            ? `width: ${contentWidth}px; transform: scale(${scale});`
-            : `height: ${contentHeight}px; transform: scale(${scale});`}
-          aria-hidden="true"
-          inert
-        >
-          <!--
+          <div
+            class="pointer-events-none absolute top-0 left-0 origin-top-left"
+            style={isVertical
+              ? `width: ${contentWidth}px; transform: scale(${scale});`
+              : `height: ${contentHeight}px; transform: scale(${scale});`}
+            aria-hidden="true"
+            inert
+          >
+            <!--
           This is a visual-only clone of the content used to render the
           minimap. Rendering the snippet twice would duplicate any element
           IDs used for in-page anchors (e.g. cluster heading IDs), which
@@ -322,31 +323,31 @@
           first (this hidden, inert) match in DOM order. Strip all IDs from
           the clone so only the real content below remains addressable.
         -->
-          <div use:stripIds>
-            {@render children()}
+            <div use:stripIds>
+              {@render children()}
+            </div>
           </div>
-        </div>
 
-        <!-- Scroll/viewport indicator (draggable) -->
-        <div
-          class={`cursor-grab touch-none border border-cosmic-blue-base bg-cosmic-blue-base/20 ${isVertical ? "absolute inset-x-0" : "absolute inset-y-0"}`}
-          style={isVertical
-            ? `top: ${scrollRatio * 100}%; height: ${viewportRatio * 100}%;`
-            : `left: ${scrollRatio * 100}%; width: ${viewportRatio * 100}%;`}
-          onpointerdown={onThumbPointerDown}
-          role="scrollbar"
-          aria-controls={contentId}
-          aria-orientation={orientation}
-          aria-valuenow={Math.round(scrollRatio * 100)}
-          tabindex="-1"
-        ></div>
+          <!-- Scroll/viewport indicator (draggable) -->
+          <div
+            class={`cursor-grab touch-none border border-cosmic-blue-base bg-cosmic-blue-base/20 ${isVertical ? "absolute inset-x-0" : "absolute inset-y-0"}`}
+            style={isVertical
+              ? `top: ${scrollRatio * 100}%; height: ${viewportRatio * 100}%;`
+              : `left: ${scrollRatio * 100}%; width: ${viewportRatio * 100}%;`}
+            onpointerdown={onThumbPointerDown}
+            role="scrollbar"
+            aria-controls={contentId}
+            aria-orientation={orientation}
+            aria-valuenow={Math.round(scrollRatio * 100)}
+            tabindex="-1"
+          ></div>
+        </div>
       </div>
     </div>
-
     <div
       id={contentId}
       bind:this={mainEl}
-      class={`col-start-1 row-start-1 min-w-0 max-w-screen ${isVertical ? "" : "overflow-x-auto scrollbar-none"}`}
+      class={`col-start-1 row-start-1 min-w-0 max-w-screen ${isVertical ? "" : "w-screen overflow-x-auto scrollbar-none"}`}
     >
       <!-- Shrink-wrapping measurement wrapper: reports the content's natural,
          unclipped size even once the parent becomes a scroll container. -->

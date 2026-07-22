@@ -101,7 +101,7 @@
     variants: {
       orientation: {
         vertical: "mx-auto w-(--cluster-inner-width)",
-        horizontal: "my-auto h-800",
+        horizontal: "h-screen",
       },
       fitContent: {
         true: "h-fit w-fit",
