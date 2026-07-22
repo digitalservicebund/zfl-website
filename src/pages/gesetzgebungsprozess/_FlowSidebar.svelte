@@ -18,12 +18,13 @@
      cluster is clicked. -->
 <div class="sticky top-0 z-50 h-screen flex items-center pointer-events-none">
   <div
-    class="flex h-fit max-h-screen w-[30vw] max-w-full flex-col rounded-md border border-lavender-400 bg-[#E9EEF3] shadow-lg pointer-events-auto"
+    class="flex h-fit max-h-screen w-[30vw] max-w-full flex-col rounded-md border border-lavender-400 shadow-lg pointer-events-auto"
+    style={content?.color
+      ? `background-color: color-mix(in srgb, ${content.color} 20%, white);`
+      : "background-color: #E9EEF3;"}
   >
     {#if content}
-      <div
-        class="flex items-center justify-between gap-16 border-b border-lavender-400 p-24"
-      >
+      <div class="flex items-center justify-between gap-16 p-24">
         <h2 class="kern-heading-small">{content.title}</h2>
         <button
           type="button"

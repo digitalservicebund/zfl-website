@@ -18,6 +18,12 @@ export interface FlowSidebarContent {
   title: string;
   children: Snippet;
   /**
+   * Fill color of the bubble/cluster that opened this content, e.g. a hex
+   * code. Used by `_FlowSidebar.svelte` to tint its background in a softer
+   * version of that color.
+   */
+  color?: string;
+  /**
    * Distinguishes a `_Bubble.svelte` entry from a `_Cluster.svelte` entry, so
    * the sidebar can offer "Zurück"/"Weiter" navigation across cluster steps
    * only (bubbles don't participate in that sequence).

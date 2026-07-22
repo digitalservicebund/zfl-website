@@ -9,6 +9,10 @@
     FLOW_SIDEBAR_CONTEXT_NAME,
     type FlowSidebarContext,
   } from "./_flowSidebar";
+  import {
+    BUBBLE_COLOR_CONTEXT_NAME,
+    type BubbleColorContext,
+  } from "./_bubbleColor";
 
   type Size = "xs" | "sm" | "md" | "lg";
 
@@ -64,13 +68,27 @@
     FLOW_SIDEBAR_CONTEXT_NAME,
   );
 
+  // Falls back to an enclosing `_Cluster.svelte`'s color (the same one
+  // exposed via `--bubble-color` for the fill) when this bubble doesn't set
+  // its own `color` prop, so the sidebar can still be tinted accordingly.
+  const clusterColorContext = getContext<BubbleColorContext | undefined>(
+    BUBBLE_COLOR_CONTEXT_NAME,
+  );
+  const effectiveColor = $derived(color ?? clusterColorContext?.color);
+
   // Registers this bubble's content with the sidebar as soon as it mounts
   // (independent of clicks), so it can also be opened straight from a
   // shared `?step=` link or via the browser back/forward buttons.
   $effect(() => {
     if (!children) return;
 
-    sidebarContext?.register({ id: title, title, children, kind: "bubble" });
+    sidebarContext?.register({
+      id: title,
+      title,
+      children,
+      kind: "bubble",
+      color: effectiveColor,
+    });
     return () => sidebarContext?.unregister(title);
   });
 
@@ -89,7 +107,13 @@
 
   function toggle() {
     if (!children) return;
-    sidebarContext?.toggle({ id: title, title, children, kind: "bubble" });
+    sidebarContext?.toggle({
+      id: title,
+      title,
+      children,
+      kind: "bubble",
+      color: effectiveColor,
+    });
   }
 </script>
 

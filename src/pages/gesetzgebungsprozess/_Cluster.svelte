@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getContext } from "svelte";
+  import { getContext, setContext } from "svelte";
   import type { Snippet } from "svelte";
   import { packEnclose, packSiblings } from "d3-hierarchy";
   import { tv } from "tailwind-variants";
@@ -8,6 +8,7 @@
     FLOW_SIDEBAR_CONTEXT_NAME,
     type FlowSidebarContext,
   } from "./_flowSidebar";
+  import { BUBBLE_COLOR_CONTEXT_NAME } from "./_bubbleColor";
 
   let {
     title,
@@ -58,6 +59,16 @@
     FLOW_SIDEBAR_CONTEXT_NAME,
   );
 
+  // Exposes this cluster's color to descendant `_Bubble.svelte` instances as
+  // a plain value (not just the `--bubble-color` CSS custom property), so a
+  // bubble without its own `color` prop can still pass the inherited color
+  // along to the sidebar. Uses a getter so it stays live if `color` changes.
+  setContext(BUBBLE_COLOR_CONTEXT_NAME, {
+    get color() {
+      return color;
+    },
+  });
+
   // Registers this cluster's sidebar content as soon as it mounts
   // (independent of clicks), so it can also be opened straight from a
   // shared `?step=` link or via the browser back/forward buttons.
@@ -69,6 +80,7 @@
       title,
       children: sidebar,
       kind: "cluster",
+      color,
     });
     return () => sidebarContext?.unregister(title);
   });
@@ -93,6 +105,7 @@
       title,
       children: sidebar,
       kind: "cluster",
+      color,
     });
   }
 
@@ -215,7 +228,7 @@
 
     <div
       class={`relative flex items-center justify-center ${expanded ? "z-10" : ""}`}
-      style={`width: ${outerSize}px; height: ${outerSize}px; margin-${orientation === "vertical" ? "left" : "top"}: ${offset ?? clusterOffset}px;`}
+      style={`width: ${outerSize}px; height: ${outerSize}px; margin-${orientation === "vertical" ? "left" : "top"}: ${offset ?? clusterOffset}px; --halo-color: color-mix(in srgb, ${color} 20%, white)`}
     >
       <!-- Isolated so the halo/dashed-circle negative z-indices only stack
          against each other, never against sibling (overlapping) clusters. -->
@@ -230,7 +243,7 @@
           <button
             type="button"
             aria-hidden="true"
-            class={`absolute inset-0 -z-20 rounded-full bg-[#F7F7F7] cursor-pointer ${expanded ? "bg-lavender-base" : ""}`}
+            class={`absolute inset-0 -z-20 rounded-full  cursor-pointer ${expanded ? "bg-(--halo-color)" : "bg-[#F7F7F7]"}`}
             onclick={toggleSidebar}
           ></button>
         {:else}
