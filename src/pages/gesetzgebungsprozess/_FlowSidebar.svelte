@@ -17,7 +17,7 @@
      grid column. Always rendered - shows a placeholder until a bubble or
      cluster is clicked. -->
 <div
-  class="sticky top-0 z-50 flex h-fit max-h-screen w-450 max-w-full flex-col rounded-md border border-lavender-400 bg-[#E9EEF3] shadow-lg"
+  class="sticky top-0 z-50 flex h-fit max-h-screen w-[30vw] max-w-full flex-col rounded-md border border-lavender-400 bg-[#E9EEF3] shadow-lg"
 >
   {#if content}
     <div

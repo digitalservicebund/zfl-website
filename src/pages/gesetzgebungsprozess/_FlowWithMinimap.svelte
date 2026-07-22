@@ -285,12 +285,14 @@
   }
 </script>
 
-<div class="grid grid-cols-1 items-start gap-24 lg:grid-cols-[1fr_auto]">
-  <div class="grid min-w-0">
+<div
+  class="grid grid-cols-1 items-start lg:grid-cols-[1fr_auto] [--cluster-inner-width:60vw]"
+>
+  <div class={`grid min-w-0 ${isVertical ? "w-[20vw]" : ""}`}>
     <div
-      class={`sticky z-20 col-start-1 row-start-1 h-fit w-fit rounded-md shadow-md ${
+      class={`sticky z-50 col-start-1 row-start-1 h-fit w-fit rounded-md shadow-md ${
         isVertical
-          ? "top-40 mb-40 left-16 xl:left-40 self-start justify-self-start"
+          ? "top-40 mb-40 self-start justify-self-center"
           : "bottom-20 self-end justify-self-center"
       }`}
     >
