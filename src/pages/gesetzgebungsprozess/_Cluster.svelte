@@ -113,7 +113,7 @@
     base: "relative flex flex-col items-center justify-center",
     variants: {
       orientation: {
-        vertical: "mx-auto w-(--cluster-inner-width)",
+        vertical: "_mx-auto w-(--cluster-inner-width)",
         horizontal: "h-screen",
       },
       fitContent: {
@@ -126,7 +126,7 @@
     base: "absolute z-20 flex gap-16",
     variants: {
       orientation: {
-        vertical: "top-0 left-0 flex-row items-center",
+        vertical: "top-0 left-[10vw] flex-row items-center",
         horizontal: "top-24 left-0 flex-row items-center",
       },
     },

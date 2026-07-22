@@ -19,13 +19,13 @@
      grid column. Always rendered - shows a placeholder until a bubble or
      cluster is clicked. -->
 <div
-  class="sticky top-0 z-50 h-screen flex items-center pointer-events-none"
+  class="sticky top-0 z-50 h-screen w-screen lg:w-[calc(100vw-var(--cluster-inner-width))] flex items-end lg:items-center pointer-events-none"
   style={content?.color
     ? `--content-color: ${content.color}; --content-color-bg: color-mix(in srgb, ${content.color} 20%, white)`
     : undefined}
 >
   <div
-    class={`flex max-h-screen w-[30vw] max-w-full flex-col rounded-md shadow-lg pointer-events-auto overflow-y-auto ${content?.kind === "cluster" ? "h-full" : "h-fit"} ${useBgColor && content?.color ? "bg-(--content-color)" : "bg-lavender-200"}`}
+    class={`flex max-h-[50vh] lg:max-h-screen w-full max-w-full flex-col _rounded-md _shadow-lg pointer-events-auto overflow-y-auto ${content?.kind === "cluster" ? "lg:h-full" : "lg:h-full"} ${useBgColor && content?.color ? "bg-(--content-color)" : "bg-lavender-200"}`}
   >
     {#if content}
       <div

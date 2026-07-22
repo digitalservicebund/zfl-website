@@ -306,13 +306,13 @@
 </script>
 
 <div
-  class="grid grid-cols-1 items-start lg:grid-cols-[1fr_auto] [--cluster-inner-width:60vw]"
+  class="grid items-start grid-cols-[1fr_auto] [--cluster-inner-width:100vw] lg:[--cluster-inner-width:66vw]"
 >
   <div class={`grid min-w-0 ${isVertical ? "" : ""}`}>
     <div
       class={`sticky flex justify-center items-center z-50 col-start-1 row-start-1 ${
         isVertical
-          ? "w-[20vw] top-0 h-screen"
+          ? "w-fit _lg:w-[20vw] top-0 h-screen"
           : "w-[70vw] bottom-20 self-end justify-self-start"
       }`}
       bind:clientWidth={stickyWidth}

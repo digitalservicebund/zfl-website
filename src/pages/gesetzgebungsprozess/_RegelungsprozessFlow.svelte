@@ -36,7 +36,7 @@
     variants: {
       orientation: {
         horizontal: "h-screen flex-row items-stretch",
-        vertical: "mx-auto w-screen flex-col",
+        vertical: "mx-auto w-(--cluster-inner-width) flex-col",
       },
     },
   });
@@ -62,9 +62,13 @@
   ></div>
 
   <div
-    class={`flex items-center justify-center ${isVertical ? "pt-40" : "flex-col pl-40"}`}
+    class={`flex items-center xl:gap-24 justify-center ${isVertical ? "pt-40" : "flex-col pl-40"}`}
   >
-    <Bubble color="#E6E6E6" title="Initiative des Bundestages" className="m-48">
+    <Bubble
+      color="#E6E6E6"
+      title="Initiative des Bundestages"
+      className="max-lg:hidden"
+    >
       {#snippet body()}
         <p class="text-4xl font-bold">24&nbsp;%</p>
       {/snippet}
@@ -76,7 +80,11 @@
         {/snippet}
       </Bubble>
     </Cluster>
-    <Bubble color="#E6E6E6" title="Initiative des Bundesrates" className="m-48">
+    <Bubble
+      color="#E6E6E6"
+      title="Initiative des Bundesrates"
+      className="max-lg:hidden"
+    >
       {#snippet body()}
         <p class="text-4xl font-bold">16&nbsp;%</p>
       {/snippet}
@@ -126,7 +134,7 @@
     </Bubble>
   </Cluster>
 
-  <Cluster color="#B3B7E0" {orientation} offset={0} title="Recherche">
+  <Cluster color="#B3B7E0" {orientation} title="Recherche">
     {#snippet sidebar()}
       <h2>Wie sieht die Frühphase in der Recherchephase aus?</h2>
       <p>
@@ -147,11 +155,11 @@
           So finden und ordnen Sie wichtige Informationen deutlich schneller.
         </li>
       </ol>
-      <h3>Welche Vorhaben sind geeignet?</h3>
-      <p>
-        Die neue Frühphase ist für alle Vorhaben geeignet, bei denen Legistinnen
-        und Legisten einen tatsächlichen Handlungsspielraum haben.
-      </p>
+      <!-- <h3>Welche Vorhaben sind geeignet?</h3> -->
+      <!-- <p> -->
+      <!--   Die neue Frühphase ist für alle Vorhaben geeignet, bei denen Legistinnen -->
+      <!--   und Legisten einen tatsächlichen Handlungsspielraum haben. -->
+      <!-- </p> -->
       <h3>Wo sparen Sie Zeit?</h3>
       <p>
         Die digitale Unterstützung nimmt Ihnen bei der Recherche Arbeit ab.
