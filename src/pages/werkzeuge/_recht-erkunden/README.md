@@ -166,6 +166,9 @@ und sollte noch einmal grundsätzlich geprüft werden:
   verwendete oder definierte Begriffe indirekte Abhängigkeiten erzeugen können.
   Es ist offen, ob diese Fälle klar trennbar sind oder als unterschiedliche
   Ausprägungen eines gemeinsamen Beziehungsspektrums modelliert werden sollten.
+- Gibts es weitere Relevanzgründe, die im Prototyp noch berücksichtigt werden sollten?
+- Um welche Funktionalitäten könnte das System noch erweitert werden, um
+  die Nutzer:innen noch besser unterstützen zu können?
 
 ## Pipeline-Kontext (out of scope)
 
