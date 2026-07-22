@@ -100,7 +100,7 @@
     base: "relative flex flex-col items-center justify-center",
     variants: {
       orientation: {
-        vertical: "mx-auto w-950",
+        vertical: "mx-auto w-900",
         horizontal: "my-auto h-800",
       },
       fitContent: {
@@ -110,7 +110,7 @@
   });
 
   const titleWrapper = tv({
-    base: "absolute flex gap-16",
+    base: "absolute z-10 flex gap-16",
     variants: {
       orientation: {
         vertical: "top-0 left-0 flex-row items-center",
