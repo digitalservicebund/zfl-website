@@ -50,8 +50,6 @@
       highlighted = [];
     }
   }
-
-  const minimapSize = $derived(orientation === "vertical" ? 165 : 120);
 </script>
 
 <div class="flex flex-col gap-80">
@@ -99,7 +97,7 @@
       <span>Horizontal</span>
     </label>
   </div>
-  <FlowWithMinimap {orientation} {minimapSize} {contentId}>
+  <FlowWithMinimap {orientation} {contentId}>
     {#snippet children()}
       <RegelungsprozessFlow {orientation} bind:highlighted />
     {/snippet}

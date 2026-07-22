@@ -10,14 +10,18 @@
 
   let {
     orientation = "vertical",
-    minimapSize = 100,
+    minimapFillRatio = 0.7,
     contentId = "flow-with-minimap-content",
     children,
   }: {
     /** Direction the content scrolls/grows in. */
     orientation?: "vertical" | "horizontal";
-    /** Fixed cross-axis size of the minimap in px (width when vertical, height when horizontal). */
-    minimapSize?: number;
+    /**
+     * Fraction of the sticky container's own scroll-axis size (height when
+     * vertical, width when horizontal) the minimap should target, so it
+     * auto-scales to the available space instead of a hardcoded pixel size.
+     */
+    minimapFillRatio?: number;
     contentId?: string;
     children: Snippet;
   } = $props();
@@ -203,22 +207,31 @@
     updateScrollIndicator();
   });
 
-  // Along the scroll axis, the minimap replica spans the full (scaled)
-  // content size; along the cross axis, it's pinned to minimapSize.
+  // Size of the sticky container itself along its own explicit axis (full
+  // viewport height when vertical via `h-screen`, the `w-[..vw]` track when
+  // horizontal) - stable and independent of the minimap's own size, so it's
+  // safe to derive the minimap's target size from it without circularity.
+  let stickyWidth = $state(0);
+  let stickyHeight = $state(0);
+
+  // Along the scroll axis, the minimap targets a fraction of the sticky
+  // container's own size in that axis; the cross axis is then derived from
+  // the content's aspect ratio.
+  const targetSize = $derived(
+    (isVertical ? stickyHeight : stickyWidth) * minimapFillRatio,
+  );
   const scale = $derived(
     isVertical
-      ? contentWidth
-        ? minimapSize / contentWidth
+      ? contentHeight
+        ? targetSize / contentHeight
         : 0
-      : contentHeight
-        ? minimapSize / contentHeight
+      : contentWidth
+        ? targetSize / contentWidth
         : 0,
   );
-  const minimapWidth = $derived(
-    isVertical ? minimapSize : contentWidth * scale,
-  );
+  const minimapWidth = $derived(isVertical ? contentWidth * scale : targetSize);
   const minimapHeight = $derived(
-    isVertical ? contentHeight * scale : minimapSize,
+    isVertical ? targetSize : contentHeight * scale,
   );
 
   // Scrolls so that the given position within the minimap (in minimap
@@ -295,6 +308,8 @@
           ? "w-[20vw] top-0 h-screen"
           : "w-[70vw] bottom-20 self-end justify-self-start"
       }`}
+      bind:clientWidth={stickyWidth}
+      bind:clientHeight={stickyHeight}
     >
       <div class={`h-fit w-fit rounded-md shadow-md`}>
         <div
