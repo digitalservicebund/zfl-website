@@ -14,7 +14,7 @@ im Änderungsumfang vor (**„Zu änderndes Recht"**) und entdeckt anschließend
 umliegende Rechtsumfeld (**„Angrenzendes Recht"**) — strukturiert danach,
 _warum_ ein Gesetz relevant ist und _wo_ es in der Normenhierarchie sitzt.
 
-> [!INFO]
+> [!NOTE]
 > Der Prototyp _imitiert_ die Ausgabe einer NLP-/Zitations-Pipeline über
 Beispieldaten; die Pipeline selbst ist ausdrücklich nicht Teil des Prototyps
 (siehe [Pipeline-Kontext](#pipeline-kontext-out-of-scope)).
