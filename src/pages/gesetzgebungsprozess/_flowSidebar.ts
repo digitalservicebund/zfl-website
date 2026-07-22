@@ -25,8 +25,9 @@ export interface FlowSidebarContent {
   color?: string;
   /**
    * Distinguishes a `_Bubble.svelte` entry from a `_Cluster.svelte` entry, so
-   * the sidebar can offer "Zurück"/"Weiter" navigation across cluster steps
-   * only (bubbles don't participate in that sequence).
+   * the sidebar's "Zurück"/"Weiter" navigation cycles through steps of the
+   * same kind as the currently open one, without mixing bubbles and
+   * clusters into a single sequence.
    */
   kind: "bubble" | "cluster";
 }

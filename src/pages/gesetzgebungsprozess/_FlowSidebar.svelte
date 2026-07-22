@@ -4,11 +4,11 @@
   let {
     content,
     onClose,
-    onNavigateCluster,
+    onNavigate,
   }: {
     content: FlowSidebarContent | null;
     onClose: () => void;
-    onNavigateCluster: (step: -1 | 1) => void;
+    onNavigate: (step: -1 | 1) => void;
   } = $props();
 </script>
 
@@ -38,19 +38,19 @@
       <div class="kern-body--small flex-1 overflow-y-auto p-24 [&>h3]:text-lg">
         {@render content.children()}
 
-        {#if content.kind === "cluster"}
+        {#if content.kind === "cluster" || content.kind === "bubble"}
           <div class="flex justify-end gap-8 mt-24">
             <button
               type="button"
               class="kern-btn kern-btn--secondary"
-              onclick={() => onNavigateCluster(-1)}
+              onclick={() => onNavigate(-1)}
             >
               <span class="kern-label">Zurück</span>
             </button>
             <button
               type="button"
               class="kern-btn kern-btn--primary"
-              onclick={() => onNavigateCluster(1)}
+              onclick={() => onNavigate(1)}
             >
               <span class="kern-label">Weiter</span>
             </button>

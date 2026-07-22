@@ -75,30 +75,37 @@
     syncUrl();
   }
 
-  // Ids of all currently registered Cluster steps, in registration order
-  // (which follows page/DOM order), used to cycle "Zurück"/"Weiter" through
-  // cluster steps only - Bubbles don't participate in this sequence.
+  // Ids of all currently registered Cluster/Bubble steps, in registration
+  // order (which follows page/DOM order), used to cycle "Zurück"/"Weiter"
+  // through steps of the same kind as the currently open one - Clusters and
+  // Bubbles each cycle through their own sequence, never mixed together.
   const clusterIds = $derived(
     Object.values(registry)
       .filter((entry) => entry.kind === "cluster")
       .map((entry) => entry.id),
   );
+  const bubbleIds = $derived(
+    Object.values(registry)
+      .filter((entry) => entry.kind === "bubble")
+      .map((entry) => entry.id),
+  );
 
-  function navigateCluster(step: -1 | 1) {
-    if (
-      !sidebarContent ||
-      sidebarContent.kind !== "cluster" ||
-      clusterIds.length === 0
-    ) {
-      return;
-    }
+  function navigateStep(step: -1 | 1) {
+    if (!sidebarContent) return;
 
-    const currentIndex = clusterIds.indexOf(sidebarContent.id);
+    const ids =
+      sidebarContent.kind === "cluster"
+        ? clusterIds
+        : sidebarContent.kind === "bubble"
+          ? bubbleIds
+          : [];
+    if (ids.length === 0) return;
+
+    const currentIndex = ids.indexOf(sidebarContent.id);
     if (currentIndex === -1) return;
 
-    const nextIndex =
-      (currentIndex + step + clusterIds.length) % clusterIds.length;
-    const nextId = clusterIds[nextIndex];
+    const nextIndex = (currentIndex + step + ids.length) % ids.length;
+    const nextId = ids[nextIndex];
     const nextContent = registry[nextId];
     if (!nextContent) return;
 
@@ -379,6 +386,6 @@
   <FlowSidebar
     content={sidebarContent}
     onClose={closeSidebar}
-    onNavigateCluster={navigateCluster}
+    onNavigate={navigateStep}
   />
 </div>
