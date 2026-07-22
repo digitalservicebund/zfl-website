@@ -1,11 +1,10 @@
 # Recht erkunden — Prototyp
 
-> **Status:** Staging-only-Prototyp. Alle Verbindungen, Zitate, Volltexte und
+> [!WARNING]
+> Staging-only-Prototyp. Alle Verbindungen, Zitate, Volltexte und
 > Ähnlichkeits-Werte sind **erfundene Beispieldaten** und **nicht rechtlich
 > geprüft**. Gesetzesnamen und Normbezeichnungen sind real, die Verknüpfungen
 > zwischen ihnen sind es nicht. Vollständig ausgearbeitet ist nur **SGB II**.
-
-Team-Doku und laufende Referenz für den angestrebten Flow dieses Prototyps.
 
 ## Zweck
 
@@ -15,7 +14,8 @@ im Änderungsumfang vor (**„Zu änderndes Recht"**) und entdeckt anschließend
 umliegende Rechtsumfeld (**„Angrenzendes Recht"**) — strukturiert danach,
 _warum_ ein Gesetz relevant ist und _wo_ es in der Normenhierarchie sitzt.
 
-Der Prototyp _imitiert_ die Ausgabe einer NLP-/Zitations-Pipeline über
+> [!INFO]
+> Der Prototyp _imitiert_ die Ausgabe einer NLP-/Zitations-Pipeline über
 Beispieldaten; die Pipeline selbst ist ausdrücklich nicht Teil des Prototyps
 (siehe [Pipeline-Kontext](#pipeline-kontext-out-of-scope)).
 
