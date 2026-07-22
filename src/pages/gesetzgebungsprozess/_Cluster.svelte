@@ -110,7 +110,7 @@
   });
 
   const titleWrapper = tv({
-    base: "absolute z-10 flex gap-16",
+    base: "absolute z-20 flex gap-16",
     variants: {
       orientation: {
         vertical: "top-0 left-0 flex-row items-center",
@@ -213,7 +213,7 @@
     {/if}
 
     <div
-      class="relative flex items-center justify-center"
+      class={`relative flex items-center justify-center ${expanded ? "z-10" : ""}`}
       style={`width: ${outerSize}px; height: ${outerSize}px; margin-${orientation === "vertical" ? "left" : "top"}: ${offset ?? clusterOffset}px;`}
     >
       <!-- Isolated so the halo/dashed-circle negative z-indices only stack
@@ -221,7 +221,7 @@
       <div class="isolate absolute inset-0">
         <!-- Soft gray halo ring, matching the original SVG -->
         <div
-          class="pointer-events-none absolute inset-0 -z-20 rounded-full bg-[#F7F7F7]"
+          class={`pointer-events-none absolute inset-0 -z-20 rounded-full bg-[#F7F7F7] ${expanded ? "ring-4 ring-cosmic-blue-base ring-offset-2" : ""}`}
         ></div>
         {#if !isSingleBubble}
           <!-- Dashed cluster circle -->
