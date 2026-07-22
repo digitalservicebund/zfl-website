@@ -312,7 +312,7 @@
     <div
       class={`sticky flex items-center z-50 col-start-1 row-start-1 pointer-events-none ${
         isVertical
-          ? "w-screen md:w-fit top-0 h-screen justify-end md:justify-end"
+          ? "w-screen lg:w-fit top-0 h-screen justify-end lg:justify-end"
           : "w-[50vw] bottom-20 self-end justify-self-start justidfy-center"
       }`}
       bind:clientWidth={stickyWidth}
