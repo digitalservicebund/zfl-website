@@ -25,10 +25,7 @@
     : undefined}
 >
   <div
-    class={`flex max-h-screen w-[30vw] max-w-full flex-col rounded-md shadow-lg pointer-events-auto overflow-y-auto ${content?.kind === "cluster" ? "h-full" : "h-fit"}`}
-    style={useBgColor && content?.color
-      ? `background-color: var(--content-color);`
-      : "background-color: #E9EEF3;"}
+    class={`flex max-h-screen w-[30vw] max-w-full flex-col rounded-md shadow-lg pointer-events-auto overflow-y-auto ${content?.kind === "cluster" ? "h-full" : "h-fit"} ${useBgColor && content?.color ? "bg-(--content-color)" : "bg-lavender-200"}`}
   >
     {#if content}
       <div

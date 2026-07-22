@@ -5,7 +5,6 @@
   import Cluster from "./_Cluster.svelte";
   import Arrow from "./_Arrow.svelte";
   import { BUBBLE_HIGHLIGHT_CONTEXT_NAME } from "./_bubbleHighlight";
-  import { begleitungen } from "@/config/routes";
 
   let {
     orientation = "vertical",
