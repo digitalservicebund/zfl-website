@@ -16,8 +16,8 @@ _warum_ ein Gesetz relevant ist und _wo_ es in der Normenhierarchie sitzt.
 
 > [!NOTE]
 > Der Prototyp _imitiert_ die Ausgabe einer NLP-/Zitations-Pipeline über
-Beispieldaten; die Pipeline selbst ist ausdrücklich nicht Teil des Prototyps
-(siehe [Pipeline-Kontext](#pipeline-kontext-out-of-scope)).
+> Beispieldaten; die Pipeline selbst ist ausdrücklich nicht Teil des Prototyps
+> (siehe [Pipeline-Kontext](#pipeline-kontext-out-of-scope)).
 
 ## Ansehen
 
@@ -30,7 +30,29 @@ Dann `/werkzeuge/recht-erkunden` öffnen. Die Seite ist `isStagingOnly` und
 Dev-Server ist sie sichtbar. Ein gelber Hinweis-Banner kennzeichnet sie als
 illustrativen Prototyp mit Beispieldaten.
 
-## Angestrebter Ablauf
+## Annahmen und zu prüfende Hypothesen
+
+Der Prototyp basiert auf folgenden Annahmen. Sie sind keine bereits
+validierten Erkenntnisse, sondern sollen durch weitere Tests und Rückmeldungen geprüft
+werden:
+
+- Nutzer:innen eines Gesetzesvorhabens kennen in der Regel mindestens das
+  Gesetz, das geändert werden soll. Die schrittweise Eingrenzung über Gesetz,
+  Rechtsgebiet und konkrete Normen ist verständlicher als der direkte Einstieg
+  in ein vollständiges Netz rechtlicher Beziehungen.
+- In der frühen Phase eines Gesetzesvorhaben ist es besonders wichtig, den
+  nötigen Kontext des angrenzenden Rechts übersichtlich erkundbar zu machen.
+- Für die Bewertung angrenzenden Rechts sind zwei Fragen entscheidend:
+  _Warum ist etwas relevant?_ und _auf welcher Hierarchieebene liegt es?_
+- Nutzer:innen möchten Verbindungen unmittelbar anhand konkreter Normen und
+  Quellen nachvollziehen, ohne den aktuellen Explorationskontext zu verlassen.
+- Ein fachlich plausibler, durchgängiger Demonstrationsfall ist für die erste
+  Bewertung des Interaktionskonzepts wichtiger als eine breite Abdeckung vieler
+  Gesetze. Statt sich direkt Gedanken zu machen, wie Daten vollständig
+  aufbereitet werden, sollte zuerst Evidenz für Mehrwert der jeweiligen Funktionen
+  gesammelt werden.
+
+## Möglicher Ablauf
 
 Der Ablauf ist in **zwei Schritte** mit Teilschritten gegliedert, alles auf
 einer Seite; spätere Schritte erscheinen erst, wenn die vorherige Auswahl
@@ -51,13 +73,13 @@ Zustand zurück und schließt die Detail-Sidebar.
 3. **Normen auswählen.** Die Normen des gewählten Rechtsgebiets werden als
    ab-/anwählbare Zeilen gelistet (Titel + Einzeiler). Alle starten aktiv;
    Abwählen einer Norm grenzt Schritt 2 live ein (Verbindungen ohne aktive Norm
-   verschwinden). Jede Norm bietet eine „Volltext"-Ausklappung und öffnet auf
-   Klick die Sidebar im **Norm-Modus**.
+   verschwinden). Jede Norm bietet eine „Volltext"-Ausklappung und einen Link
+   zur Quelle.
 
 ### Schritt 2 — Angrenzendes Recht erkunden
 
 1. **Begriffe im Fokus (Strip).** Ein gleichmäßiges Karten-Raster für die
-   gemeinsamen Begriffe, die aus den aktiven Normen abgeleitet sind (Abwählen
+   gemeinsamen Begriffe, die in den aktiven Normen auffindbar sind (Abwählen
    einer Norm entfernt ihre Begriffe). Jede Karte ist vollständig anklickbar
    (öffnet die Sidebar im Begriff-Modus) und fasst den Begriff als
    Kurzüberblick zusammen: Begriffsname, gekürzte Definition, definierende
@@ -74,15 +96,14 @@ Zustand zurück und schließt die Detail-Sidebar.
 
 ### Detail-Sidebar (drei Modi)
 
-Ein einziges Panel (Desktop: sticky; Mobile: Slide-over) mit drei Inhalten je
+Ein einziges Panel (Desktop: sticky; Mobile: Slide-over) mit zwei Inhalten je
 nach Auslöser:
 
-- **Norm-Modus** (aus Schritt 1): Referenz, Titel, Volltext der SGB-II-Norm.
 - **Begriff-Modus** (aus dem Strip): Begriff, Definition, definierende Norm und
   alle nutzenden Normen/Gesetze.
 - **Evidenz-Modus** (aus einer Matrix-Zelle): Gesetzestitel + Hierarchie-Badge,
-  Relevanzgrund, betroffene SGB-II-Normen (je anklickbar → Norm-Modus) und – je
-  Verbindung – ein zusammenhängender Nachweis-Block. Dessen Überschrift richtet
+  Relevanzgrund, betroffene Normen und – je Verbindung – ein zusammenhängender
+  Nachweis-Block. Dessen Überschrift richtet
   sich nach dem Relevanzgrund (_Verweisung(en)_, _Fundstelle(n)_ bzw.
   _Thematische Überschneidung(en)_). Jeder Block ist eine Karte, die Quelle,
   Begründung und referenzierte Normen visuell zusammenfasst: Bei _Gemeinsame
@@ -118,6 +139,31 @@ Nur **Thematische Nähe** beruht auf NLP-Ähnlichkeit und trägt ein
 Ähnlichkeitssignal (Score + Keywords). Alle anderen Gründe beruhen auf
 expliziten Normverweisen und tragen keinen Score.
 
+### Offene Gestaltungsfragen für Schritt 2
+
+Die aktuelle Aufteilung der Komponenten in Schritt 2 ist eine Arbeitshypothese
+und sollte noch einmal grundsätzlich geprüft werden:
+
+- **Begriffe** werden derzeit gesondert dargestellt, weil sie keine
+  1:1-Beziehung zwischen zwei Normen beschreiben. Ein Begriff kann mehrere
+  Normen innerhalb eines Gesetzes und über Gesetzesgrenzen hinweg verbinden.
+- Diese Mehrfachbeziehung besteht jedoch auch bei **Rechtsprechung und
+  Literatur** sowie bei **Thematischer Nähe**: Eine Fundstelle oder ein Thema
+  kann für mehrere Normen relevant sein – und ist es voraussichtlich in vielen
+  Fällen. Die primäre Perspektive könnte hier daher eher die Fundstelle
+  beziehungsweise das Thema sein als die einzelne angrenzende Norm.
+  Möglicherweise benötigt jeder Relevanzgrund eine eigene, seiner Struktur
+  entsprechende Darstellungsform statt einer gemeinsamen Matrixdarstellung.
+- Zu prüfen ist außerdem, ob **Thematische Nähe** auf Normebene richtig
+  angesiedelt ist oder besser Normencluster miteinander verknüpfen sollte – etwa
+  die in Schritt 1 verwendeten Rechtsgebiete – mit anschließendem Drill-down zu
+  den einzelnen Normen.
+- Auch die Trennung von **Verweisen und Begriffen** ist zu hinterfragen.
+  Explizite Normverweise bilden direkte Abhängigkeiten ab, während gemeinsam
+  verwendete oder definierte Begriffe indirekte Abhängigkeiten erzeugen können.
+  Es ist offen, ob diese Fälle klar trennbar sind oder als unterschiedliche
+  Ausprägungen eines gemeinsamen Beziehungsspektrums modelliert werden sollten.
+
 ## Pipeline-Kontext (out of scope)
 
 Im echten System würde eine Pipeline die Signale mischen: **Zitationsextraktion**
@@ -127,6 +173,12 @@ TF-IDF, Keyword-Extraktion — auch für das Clustern der Rechtsgebiete in
 Schritt 1). Der Prototyp bildet nur die _Ausgabe_ nach; die Pipeline zu
 entwerfen ist explizit nicht Teil davon. Die UI macht sichtbar, wo NLP-abgeleitete
 vs. zitationsabgeleitete Relevanz auftauchen würde.
+
+**Thematische Nähe** in Schritt 2 und die **Rechtsgebiete** in Schritt 1 würden
+dabei mit ähnlichen Verfahren aus den Normtexten extrahiert beziehungsweise
+gebildet. Der wesentliche Unterschied liegt derzeit in ihrer Verwendung:
+Rechtsgebiete gruppieren Normen innerhalb des Ausgangsgesetzes, während
+Thematische Nähe Beziehungen zum angrenzenden Recht beschreibt.
 
 ## Umfang der Beispieldaten
 
@@ -170,12 +222,6 @@ src/pages/werkzeuge/
 Die Daten werden typisiert über den Store importiert (kein `define:vars`-/
 `window.__`-Muster, kein Fetch).
 
-## Bekannte Abweichungen & Vereinfachungen
-
-- **Begriff-Modus** gruppiert die Nutzungen aktuell nicht nach Hierarchie
-  (flache Liste).
-- Keine Unit-/E2E-Tests für den Prototyp; Prüfung über `pnpm typecheck`,
-  `pnpm lint` und manuelle Sichtung im Dev-Server.
-
-Bei Änderungen an Flow, Datenmodell oder Dateilayout dieses Dokument im selben
-Change mit-aktualisieren (siehe Regel in `AGENTS.md`).
+> [!IMPORTANT]
+> Bei Änderungen an Flow, Datenmodell oder Dateilayout dieses Dokument im selben
+> Change mit-aktualisieren (siehe Regel in `AGENTS.md`).
