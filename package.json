@@ -45,6 +45,7 @@
     "astro-pagefind": "^2.0.1",
     "astro-route-generator": "github:digitalservicebund/astro-route-generator",
     "astro-seo": "^1.1.0",
+    "decap-cms-app": "^3.14.1",
     "pagefind": "^1.5.2",
     "posthog-js": "^1.399.2",
     "sharp": "^0.35.3",
