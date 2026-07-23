@@ -64,9 +64,11 @@
     history.pushState(history.state, "", url);
   }
 
-  function toggle(next: FlowSidebarContent) {
-    register(next);
-    activeId = activeId === next.id ? null : next.id;
+  // Content for `id` is expected to already be in the registry - every
+  // Bubble/Cluster registers itself as soon as it mounts, well before it can
+  // be clicked.
+  function toggle(id: string) {
+    activeId = activeId === id ? null : id;
     syncUrl();
   }
 

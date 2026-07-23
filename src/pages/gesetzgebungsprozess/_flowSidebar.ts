@@ -42,7 +42,10 @@ export interface FlowSidebarContext {
    */
   register(content: FlowSidebarContent): void;
   unregister(id: string): void;
-  /** Opens the sidebar with `content`, or closes it if already open for that id. */
-  toggle(content: FlowSidebarContent): void;
+  /**
+   * Opens the sidebar with the already-registered content for `id`, or
+   * closes it if already open for that id.
+   */
+  toggle(id: string): void;
   close(): void;
 }

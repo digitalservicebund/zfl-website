@@ -105,15 +105,8 @@
     buttonEl.scrollIntoView({ behavior: "smooth", block: "center" });
   });
 
-  function toggle() {
-    if (!children) return;
-    sidebarContext?.toggle({
-      id: title,
-      title,
-      children,
-      kind: "bubble",
-      color: effectiveColor,
-    });
+  function toggle(id: string) {
+    sidebarContext?.toggle(id);
   }
 </script>
 
@@ -153,7 +146,7 @@
       type="button"
       class="group focus-visible:outline-none"
       aria-expanded={expanded}
-      onclick={toggle}
+      onclick={() => toggle(title)}
     >
       {@render bubble()}
     </button>

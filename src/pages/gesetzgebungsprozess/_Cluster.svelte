@@ -98,15 +98,8 @@
     rootEl.scrollIntoView({ behavior: "smooth", block: "center" });
   });
 
-  function toggleSidebar() {
-    if (!sidebar || !title) return;
-    sidebarContext?.toggle({
-      id: title,
-      title,
-      children: sidebar,
-      kind: "cluster",
-      color,
-    });
+  function toggleSidebar(id: string) {
+    sidebarContext?.toggle(id);
   }
 
   const contentWrapper = tv({
@@ -226,7 +219,7 @@
               type="button"
               class="kern-heading-small bg-black text-white px-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cosmic-blue-base"
               aria-expanded={expanded}
-              onclick={toggleSidebar}
+              onclick={() => toggleSidebar(title)}
               tabIndex={-1}
             >
               {title}
@@ -258,7 +251,7 @@
             type="button"
             aria-hidden="true"
             class={`absolute inset-0 -z-20 rounded-full  cursor-pointer ${expanded ? "bg-(--halo-color)" : "bg-[#F7F7F7]"}`}
-            onclick={toggleSidebar}
+            onclick={() => toggleSidebar(title)}
           ></button>
         {:else}
           <div
