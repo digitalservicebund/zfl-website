@@ -45,15 +45,6 @@
 
   let rootEl: HTMLDivElement | undefined = $state();
 
-  // Scrolls the arrow into view whenever it becomes the active step - most
-  // notably when the page is opened directly via a shared `?step=` link,
-  // where it might otherwise be rendered off-screen.
-  $effect(() => {
-    if (!expanded || !rootEl) return;
-
-    rootEl.scrollIntoView({ behavior: "smooth", block: "center" });
-  });
-
   function toggleSidebar(id: string) {
     sidebarContext?.toggle(id);
   }
