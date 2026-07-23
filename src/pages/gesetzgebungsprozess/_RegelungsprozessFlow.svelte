@@ -91,7 +91,7 @@
     </Bubble>
   </div>
 
-  <Arrow {orientation} size={40} />
+  <Arrow {orientation} size={40} color="#D59FDE" />
 
   <Cluster
     color="#BCA6DC"
@@ -125,9 +125,16 @@
     ></Bubble>
   </Cluster>
 
-  <Arrow {orientation}>Übergabe an das Fachreferat</Arrow>
+  <Arrow {orientation} color="#BCA6DC" highlightGroup="Interessensermittlung"
+    >Übergabe an das Fachreferat</Arrow
+  >
 
-  <Cluster color="#BCA6DC" {orientation} offset={0}>
+  <Cluster
+    color="#BCA6DC"
+    {orientation}
+    offset={0}
+    highlightGroup="Interessensermittlung"
+  >
     <Bubble title="Federführung" tags={["Frühphase"]}>
       Ein Fachreferat übernimmt die Verantwortung für die Weiterentwicklung der
       Regelung. Legist:in wird zugewiesen.
@@ -332,7 +339,7 @@
     </Bubble>
   </Cluster>
 
-  <Cluster color="#9EDCD0" {orientation}>
+  <Cluster color="#9EDCD0" {orientation} highlightGroup="Ressortentwurf">
     <Bubble title="Verbände informieren" size="md">
       Die betroffenen Verbände werden über den Ressortentwurf informiert.
     </Bubble>
@@ -364,7 +371,12 @@
     </Bubble>
   </Cluster>
 
-  <Cluster color="#D2EDB9" {orientation} offset={0}>
+  <Cluster
+    color="#D2EDB9"
+    {orientation}
+    offset={0}
+    highlightGroup="Kabinettvorlage"
+  >
     <Bubble title="Weiterleitung an das Bundes&shy;kanzleramt" size="md">
       Fachreferat leitet die Kabinettvorlage an Bundeskanzleramts-Chef:in weiter
       (mind. 8 Tage vor der Kabinettsitzung). Einbindung Spiegel- &
@@ -372,8 +384,11 @@
     </Bubble>
   </Cluster>
 
-  <Arrow {orientation} className="bg-(--dark-bg)"
-    >Übergabe an die politische Ebene</Arrow
+  <Arrow
+    {orientation}
+    color="#D2EDB9"
+    highlightGroup="Kabinettvorlage"
+    className="bg-(--dark-bg)">Übergabe an die politische Ebene</Arrow
   >
 
   <Cluster
@@ -413,7 +428,12 @@
     </Bubble>
   </Cluster>
 
-  <Cluster color="#EBF5B3" {orientation} className="bg-(--dark-bg)">
+  <Cluster
+    color="#EBF5B3"
+    {orientation}
+    className="bg-(--dark-bg)"
+    highlightGroup="Verabschiedung"
+  >
     <Bubble title="Abstimmung im Bundestag">
       <h3>Ausschuss</h3>
       <p>
@@ -436,7 +456,12 @@
     </Bubble>
   </Cluster>
 
-  <Cluster color="#FFFBB5" {orientation} className="bg-(--dark-bg)">
+  <Cluster
+    color="#FFFBB5"
+    {orientation}
+    className="bg-(--dark-bg)"
+    highlightGroup="Verabschiedung"
+  >
     <Bubble title="Verkündung">
       <h3>Verkündung</h3>
       <p>
@@ -498,6 +523,7 @@
     color="#FAB5A8"
     {orientation}
     className={`bg-(--dark-bg) ${isVertical ? "pb-80" : "pr-40"}`}
+    highlightGroup="Nach der Verkündung"
   >
     <Bubble title="Vollzug">
       <ul>

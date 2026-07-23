@@ -20,6 +20,7 @@
     fitContent = false,
     children,
     sidebar,
+    highlightGroup,
   }: {
     title?: string;
     orientation?: "vertical" | "horizontal";
@@ -50,6 +51,16 @@
      * same way `_Bubble.svelte` does.
      */
     sidebar?: Snippet;
+    /**
+     * Id of another Cluster/Bubble/Arrow to mirror instead of registering
+     * this own sidebar content, i.e. `title`/`highlightGroup` of the
+     * Cluster/Bubble whose sidebar entry should be reflected here. When set,
+     * this Cluster shares that entry's active/expanded state (highlighting
+     * its halo the same way) and clicking it toggles that same sidebar
+     * content, even if this Cluster has no `title`/`sidebar` of its own.
+     * Falls back to this Cluster's own `title` when omitted.
+     */
+    highlightGroup?: string;
   } = $props();
 
   // Every bubble/cluster shares a single, global sidebar (mounted once via
@@ -85,7 +96,11 @@
     return () => sidebarContext?.unregister(title);
   });
 
-  const expanded = $derived(!!title && sidebarContext?.activeId === title);
+  const highlightId = $derived(highlightGroup ?? title);
+
+  const expanded = $derived(
+    !!highlightId && sidebarContext?.activeId === highlightId,
+  );
 
   let rootEl: HTMLDivElement | undefined = $state();
 
@@ -93,7 +108,7 @@
   // most notably when the page is opened directly via a shared `?step=`
   // link, where it might otherwise be rendered off-screen.
   $effect(() => {
-    if (!expanded || !rootEl) return;
+    if (!title || !expanded || !rootEl) return;
 
     rootEl.scrollIntoView({ behavior: "smooth", block: "center" });
   });
@@ -246,12 +261,12 @@
            sidebar. It's `aria-hidden` and untabbable since the title button
            already exposes the same action to keyboard/screen-reader users;
            this is purely a larger pointer/touch target. -->
-        {#if sidebar && title}
+        {#if highlightId}
           <button
             type="button"
             aria-hidden="true"
             class={`absolute inset-0 -z-20 rounded-full  cursor-pointer ${expanded ? "bg-(--halo-color)" : "bg-[#F7F7F7]"}`}
-            onclick={() => toggleSidebar(title)}
+            onclick={() => toggleSidebar(highlightId)}
           ></button>
         {:else}
           <div
