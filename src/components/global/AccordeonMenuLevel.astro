@@ -1,0 +1,102 @@
+---
+import Self from "@/components/global/AccordeonMenuLevel.astro";
+import { twMerge } from "tailwind-merge";
+
+export type AccordeonNavigationEntry = {
+  path: string;
+  label: string;
+  children: AccordeonNavigationEntry[];
+  isCurrent: boolean;
+  isInCurrentBranch: boolean;
+};
+
+interface Props {
+  entries: AccordeonNavigationEntry[];
+  currentPath: string;
+  level?: number;
+}
+
+const { entries, currentPath, level = 0 } = Astro.props;
+
+function isFirstLevelChildWithChildren(
+  entry: AccordeonNavigationEntry,
+  currentLevel: number,
+) {
+  return currentLevel === 1 && entry.children.length > 0;
+}
+
+function linkStyle(isCurrent = false) {
+  return twMerge(
+    "link-unstyled kern-body block rounded-sm px-8 py-4 hover:bg-lavender-surface-highlight",
+    isCurrent && "bg-lavender-surface-highlight font-bold",
+  );
+}
+---
+
+<div class:list={["space-y-8", level > 1 && "mt-8"]}>
+  {
+    entries.map((entry) =>
+      isFirstLevelChildWithChildren(entry, level) ? (
+        <details open={entry.isInCurrentBranch}>
+          <summary class="kern-accordion__header">
+            <span class={linkStyle(entry.isCurrent)}>{entry.label}</span>
+            <span
+              class="kern-icon kern-icon--arrow-down kern-icon--default accordion-icon-open"
+              aria-hidden="true"
+            />
+            <span
+              class="kern-icon kern-icon--chevron-right kern-icon--default accordion-icon-closed"
+              aria-hidden="true"
+            />
+          </summary>
+          <section class="kern-accordion__body">
+            <div class:list={["mt-8", level >= 1 && "pl-12"]}>
+              <Self
+                entries={entry.children}
+                currentPath={currentPath}
+                level={level + 1}
+              />
+            </div>
+          </section>
+        </details>
+      ) : (
+        <>
+          <a
+            href={entry.path}
+            class={linkStyle(currentPath === entry.path)}
+            aria-current={currentPath === entry.path ? "page" : undefined}
+          >
+            {entry.label}
+          </a>
+          {entry.children.length > 0 && (
+            <div class:list={["mt-8", level >= 1 && "pl-12"]}>
+              <Self
+                entries={entry.children}
+                currentPath={currentPath}
+                level={level + 1}
+              />
+            </div>
+          )}
+        </>
+      ),
+    )
+  }
+</div>
+
+<style>
+  .kern-accordion__header::after {
+    display: none;
+  }
+
+  details > summary .accordion-icon-open {
+    display: none;
+  }
+
+  details[open] > summary .accordion-icon-open {
+    display: inline-flex;
+  }
+
+  details[open] > summary .accordion-icon-closed {
+    display: none;
+  }
+</style>

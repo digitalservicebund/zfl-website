@@ -1,5 +1,7 @@
 ---
 import DrilldownNavigation from "@/components/global/DrilldownNavigation.astro";
+import AccordeonMenu from "@/components/global/AccordeonMenu.astro";
+import { isProduction } from "@/config/stage";
 import { getSectionNavigation } from "@/utils/navigation/drilldown";
 
 const navigation = getSectionNavigation(Astro.url.pathname);
@@ -18,10 +20,20 @@ const sidebarState = navigation
       data-depth={initialDepth}
       x-bind:data-depth="currentDepth"
     >
-      <DrilldownNavigation
-        navigation={navigation}
-        panelIdPrefix="section-sidebar"
-      />
+      {isProduction && (
+        <div class="overflow-auto">
+          <DrilldownNavigation
+            navigation={navigation}
+            panelIdPrefix="section-sidebar"
+          />
+        </div>
+      )}
+      {!isProduction && <AccordeonMenu navigation={navigation} />}
+      {Astro.slots.has("extra") && (
+        <div class="sticky">
+          <slot name="extra" />
+        </div>
+      )}
     </nav>
   )
 }
