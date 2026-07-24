@@ -1,0 +1,67 @@
+---
+import AccordeonMenuLevel, {
+  type AccordeonNavigationEntry,
+} from "@/components/global/AccordeonMenuLevel.astro";
+import type {
+  DrilldownNavigationData,
+  DrilldownPanel,
+} from "@/utils/navigation/drilldown";
+
+interface Props {
+  navigation: DrilldownNavigationData;
+}
+
+const { navigation } = Astro.props;
+const { panels, currentPath } = navigation;
+
+const panelsById = new Map(panels.map((panel) => [panel.id, panel]));
+const rootPanel =
+  panels.find((panel) => panel.parent === null) ?? panels[0] ?? null;
+
+function isPathMatchOrDescendant(path: string, activePath: string) {
+  return activePath === path || activePath.startsWith(`${path}/`);
+}
+
+function toAccordeonEntries(panel: DrilldownPanel): AccordeonNavigationEntry[] {
+  return panel.items
+    .filter((item) => item.isVisible)
+    .map((item) => {
+      const childPanel = item.panelId
+        ? panelsById.get(item.panelId)
+        : undefined;
+      const children = childPanel ? toAccordeonEntries(childPanel) : [];
+      const isCurrent = currentPath === item.path;
+      const isInCurrentBranch =
+        isPathMatchOrDescendant(item.path, currentPath) ||
+        children.some((child) => child.isInCurrentBranch);
+
+      return {
+        path: item.path,
+        label: item.label,
+        children,
+        isCurrent,
+        isInCurrentBranch,
+      };
+    });
+}
+
+const childEntries = rootPanel ? toAccordeonEntries(rootPanel) : [];
+
+const entries = rootPanel?.sectionRoute
+  ? [
+      {
+        path: rootPanel.sectionRoute.path,
+        label: rootPanel.sectionRoute.label,
+        children: childEntries,
+        isCurrent: currentPath === rootPanel.sectionRoute.path,
+        isInCurrentBranch:
+          isPathMatchOrDescendant(rootPanel.sectionRoute.path, currentPath) ||
+          childEntries.some((child) => child.isInCurrentBranch),
+      },
+    ]
+  : childEntries;
+---
+
+<div class="overflow-auto px-16 py-24" data-pagefind-ignore>
+  <AccordeonMenuLevel entries={entries} currentPath={currentPath} />
+</div>
