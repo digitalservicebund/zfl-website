@@ -51,7 +51,7 @@
     "astro-seo": "^1.1.0",
     "d3-hierarchy": "^3.1.2",
     "pagefind": "^1.5.2",
-    "posthog-js": "^1.405.2",
+    "posthog-js": "^1.407.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "sharp": "^0.35.3",
@@ -81,7 +81,7 @@
     "eslint-plugin-astro": "^3.0.1",
     "globals": "^17.7.0",
     "jsdom": "^29.1.1",
-    "knip": "^6.27.0",
+    "knip": "^6.29.0",
     "license-checker-rseidelsohn": "^5.0.1",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "0.14.1",
@@ -91,5 +91,5 @@
     "vite": "^8.1.5",
     "vitest": "^4.1.10"
   },
-  "packageManager": "pnpm@11.15.1"
+  "packageManager": "pnpm@11.16.0"
 }
