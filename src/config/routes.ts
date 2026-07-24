@@ -80,7 +80,7 @@ export const dev_kernKomponenten = {
 export const gesetzgebungsprozess = {
   key: "gesetzgebungsprozess",
   path: "/gesetzgebungsprozess",
-  title: "Der Gesetzgebungsprozess",
+  title: "Wie entstehen gute Regelungen?",
   parent: null,
   sitemap: true,
   isStagingOnly: true,

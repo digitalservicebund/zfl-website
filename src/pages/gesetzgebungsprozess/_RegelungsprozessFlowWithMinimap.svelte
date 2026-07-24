@@ -58,7 +58,7 @@
   {/snippet}
 </FlowWithMinimap>
 
-<section class="breakout-grid">
+<section class="breakout-grid hidden">
   <h2>Test-Funktionen</h2>
   <label class="flex w-fit items-center gap-8">
     <span>Gehe zu</span>

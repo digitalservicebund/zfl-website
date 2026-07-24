@@ -62,7 +62,7 @@
   ></div>
 
   <div
-    class={`flex items-center xl:gap-24 justify-center ${isVertical ? "pt-40" : "flex-col pl-40"}`}
+    class={`hidden _flex items-center xl:gap-24 justify-center ${isVertical ? "pt-40" : "flex-col pl-40"}`}
   >
     <Bubble
       color="#E6E6E6"
@@ -91,7 +91,7 @@
     </Bubble>
   </div>
 
-  <Arrow {orientation} size={40} color="#D59FDE" />
+  <Arrow {orientation} size={40} color="#D59FDE" className="hidden" />
 
   <Cluster
     color="#BCA6DC"
@@ -99,6 +99,7 @@
     offset={0}
     anchorName={CLUSTER_FIRST_ANCHOR}
     title="Interessensermittlung"
+    className="pt-lg"
   >
     {#snippet sidebar()}
       <h2>Was tun?</h2>

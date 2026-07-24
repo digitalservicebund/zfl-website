@@ -4,7 +4,7 @@ import Hero from "@/components/Hero.astro";
 import RegelungsprozessFlowWithMinimap from "./_RegelungsprozessFlowWithMinimap.svelte";
 
 export const frontmatter = {
-  title: "Der Gesetzgebungsprozess",
+  title: "Wie entstehen gute Regelungen?",
   isStagingOnly: true,
 };
 ---
@@ -14,22 +14,12 @@ export const frontmatter = {
     <Hero class="breakout-grid">
       <h1>{frontmatter.title}</h1>
       <p slot="subtitle">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
+        Eine neue Regelung, die praktikabel und bürokratiearm ist: Wie kommen
+        wir dahin?<br />Hier zeigen wir ein Vorgehen zur Erarbeitung von
+        Gesetzen, bei dem die Interessen aller Beteiligten und Betroffenen früh
+        mitgedacht werden.
       </p>
     </Hero>
-
-    <section class="breakout-grid">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </p>
-    </section>
 
     <RegelungsprozessFlowWithMinimap client:load />
   </main>
