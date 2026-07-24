@@ -115,14 +115,31 @@
     syncUrl();
   }
 
-  $effect(() => {
-    // Open straight from a shared link on first render. Bubbles register
-    // themselves synchronously during their own setup, so by the time this
-    // effect runs, the registry already reflects everything currently
-    // rendered - but `sidebarContent` above re-derives from `registry` on
-    // every change anyway, so this is safe even if ordering ever changed.
-    activeId = readStepFromUrl();
+  let initialActiveIdSet = false;
 
+  // Opens straight from a shared link on first render, falling back to the
+  // first registered cluster step when there's no `?step=` param, so the
+  // sidebar always shows some content on load instead of the "Wähle einen
+  // Schritt aus" placeholder. Re-runs (tracking `clusterIds`) until at least
+  // one cluster has registered, then never touches `activeId` again on its
+  // own - subsequent changes only come from `toggle`/`popstate`.
+  $effect(() => {
+    if (initialActiveIdSet) return;
+
+    const stepFromUrl = readStepFromUrl();
+    if (stepFromUrl) {
+      activeId = stepFromUrl;
+      initialActiveIdSet = true;
+      return;
+    }
+
+    if (clusterIds.length > 0) {
+      activeId = clusterIds[0];
+      initialActiveIdSet = true;
+    }
+  });
+
+  $effect(() => {
     function onPopState() {
       activeId = readStepFromUrl();
     }

@@ -34,7 +34,7 @@
         <h2 class="kern-heading-small">{content.title}</h2>
         <button
           type="button"
-          class="shrink-0 rounded-sm border border-cosmic-blue-base p-8 text-cosmic-blue-base"
+          class="lg:hidden shrink-0 rounded-sm border border-cosmic-blue-base p-8 text-cosmic-blue-base"
           onclick={onClose}
           aria-label="Seitenleiste schließen"
         >
