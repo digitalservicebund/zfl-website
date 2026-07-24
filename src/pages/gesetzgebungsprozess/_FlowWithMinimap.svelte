@@ -143,7 +143,10 @@
 
   // Removes `id` attributes from the minimap clone so it never collides
   // with (and steals native `#hash` navigation from) the real, matching
-  // IDs rendered in the actual content further below.
+  // IDs rendered in the actual content further below. (Bubble tooltips are
+  // hidden within this clone via a plain CSS rule in `_Tooltip.svelte`
+  // instead, since it's anchor-positioned via `position: fixed` and would
+  // otherwise escape the clone's scale transform.)
   function stripIds(node: HTMLElement) {
     node.querySelectorAll("[id]").forEach((el) => el.removeAttribute("id"));
   }

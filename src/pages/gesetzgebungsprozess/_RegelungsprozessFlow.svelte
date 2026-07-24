@@ -142,7 +142,7 @@
     </Bubble>
   </Cluster>
 
-  <Cluster color="#B3B7E0" {orientation} title="Recherche">
+  <Cluster color="#B3B7E0" {orientation} title="Recherche" offset={0}>
     {#snippet sidebar()}
       <h2>Wie sieht die Frühphase in der Recherchephase aus?</h2>
       <p>
