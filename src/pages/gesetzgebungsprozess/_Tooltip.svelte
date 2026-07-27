@@ -20,19 +20,19 @@
   // `fixed` (rather than `absolute`) is required so the browser can place
   // the tooltip anywhere in the viewport regardless of its containing
   // block, matching how anchor positioning is meant to be used.
-  const style = $derived(
-    `position: fixed; position-anchor: ${anchorName}; position-area: top center;`,
-  );
+  const style = $derived(`position-anchor: ${anchorName};`);
 </script>
 
 <div
   data-bubble-tooltip
   {id}
   role="tooltip"
-  class="pointer-events-none z-90 mb-8 min-w-200 max-w-300 bg-white px-8 pt-4 text-left text-sm"
+  class="pointer-events-none z-90 py-8"
   {style}
 >
-  {@render children()}
+  <div class="bg-white w-300 text-left text-sm px-8">
+    {@render children()}
+  </div>
 </div>
 
 <style>
@@ -53,21 +53,29 @@
      support it yet, which just clips the box without adding a real
      stroke around the tail). Adapted from
      https://www.joshwcomeau.com/css/anchor-positioning/ */
-  div {
+  div[data-bubble-tooltip] {
     box-sizing: border-box;
     --r: 6px;
     --ap: 50%;
     --ah: 8px;
     --aw: 8px;
 
+    container-type: anchored;
+    position: fixed;
+    position-area: top center;
+    position-try-fallbacks: bottom;
+  }
+
+  div[data-bubble-tooltip] > div {
     border-width: 1px;
     border-style: solid;
     border-color: black;
 
     /* Compensates for the tail's height, so it doesn't overlap the text. */
     padding-bottom: calc(var(--ah) + 0.25rem);
+    padding-top: 0.25rem;
 
-    border-shape: shape(
+    --downwards-caret: shape(
       from var(--r) 0,
       hline to calc(100% - var(--r)),
       curve to right var(--r) with right top,
@@ -83,21 +91,35 @@
       vline to var(--r),
       curve to var(--r) top with left top
     );
-    clip-path: shape(
-      from var(--r) 0,
+    --upwards-caret: shape(
+      from var(--r) var(--ah),
+      hline to calc(var(--ap) - var(--aw)),
+      line by var(--aw) calc(var(--ah) * -1),
+      line by var(--aw) var(--ah),
       hline to calc(100% - var(--r)),
-      curve to right var(--r) with right top,
-      vline to calc(100% - (var(--r) + var(--ah))),
-      curve to calc(100% - var(--r)) calc(100% - var(--ah)) with right
-        calc(100% - var(--ah)),
-      hline to calc(var(--ap) + var(--aw)),
-      line by calc(var(--aw) * -1) var(--ah),
-      line by calc(var(--aw) * -1) calc(var(--ah) * -1),
+      curve to right calc(var(--ah) + var(--r)) with right calc(var(--ah)),
+      vline to calc(100% - var(--r)),
+      curve to calc(100% - var(--r)) bottom with right bottom,
       hline to var(--r),
-      curve to left calc(100% - (var(--r) + var(--ah))) with left
-        calc(100% - var(--ah)),
-      vline to var(--r),
-      curve to var(--r) top with left top
+      curve to left calc(100% - var(--r)) with left bottom,
+      vline to calc(var(--ah) + var(--r)),
+      curve to var(--r) var(--ah) with left var(--ah)
     );
+
+    border-shape: var(--downwards-caret);
+
+    @container anchored(fallback: bottom) {
+      padding-bottom: 0.25rem;
+      padding-top: calc(var(--ah) + 0.25rem);
+      border-shape: var(--upwards-caret);
+    }
+
+    /* Fallback styles for browsers that don’t support "border-shape": */
+    @supports not (border-shape: shape(from 0 0, hline to 100%)) {
+      clip-path: var(--downwards-caret);
+      @container anchored(fallback: bottom) {
+        clip-path: var(--upwards-caret);
+      }
+    }
   }
 </style>
