@@ -6,12 +6,14 @@
     type BubbleHighlightContext,
   } from "./_bubbleHighlight";
   import Tooltip from "./_Tooltip.svelte";
+  import BubbleIcon from "./_BubbleIcon.svelte";
+  import { icons } from "./_icons.ts";
 
   type Size = "xs" | "sm" | "md" | "lg";
 
   const sizeMap: Record<Size, string> = {
     xs: "3em",
-    sm: "8em",
+    sm: "9em",
     md: "11em",
     lg: "13em",
   };
@@ -25,6 +27,7 @@
     tags,
     children,
     body,
+    icon,
   }: {
     /**
      * Fill color of the bubble, e.g. a hex code. Defaults to the
@@ -40,6 +43,7 @@
     children?: Snippet;
     /** Optional body content shown within the bubble */
     body?: Snippet;
+    icon?: keyof typeof icons;
   } = $props();
 
   // Falls back to an always-empty list when no ancestor provides the
@@ -85,7 +89,7 @@
           >
         {/if}
         <div
-          class={`kern-label max-md:text-sm text-black ${size === "xs" ? "hidden group-hover/circle:block group-active/circle:block group-focus-visible:block" : ""}`}
+          class={`kern-label max-md:text-sm md:text-base text-black ${size === "xs" ? "hidden group-hover/circle:block group-active/circle:block group-focus-visible:block" : ""}`}
         >
           {title}
           {#if optional}
@@ -94,6 +98,11 @@
         </div>
         {#if body}
           {@render body()}
+        {/if}
+        {#if icon}
+          <div class="absolute bottom-[5%] left-[50%] -translate-x-1/2">
+            <BubbleIcon {icon} />
+          </div>
         {/if}
       </div>
     </div>

@@ -5,6 +5,7 @@
   import Cluster from "./_Cluster.svelte";
   import Arrow from "./_Arrow.svelte";
   import { BUBBLE_HIGHLIGHT_CONTEXT_NAME } from "./_bubbleHighlight";
+  import BubbleIcon from "./_BubbleIcon.svelte";
 
   let {
     orientation = "vertical",
@@ -152,17 +153,19 @@
         Dadurch schaffen Sie eine gute Grundlage für die weitere Arbeit.
       </p>
       <h3>Was ist neu?</h3>
-      <ol>
-        <li>
+      <div class="grid grid-cols-[3rem_1fr] gap-16">
+        <BubbleIcon icon="category" color="#B3B7E0" />
+        <p>
           <strong>Geführter Prozess:</strong> Ein digitales Werkzeug führt Sie Schritt
           für Schritt durch den Prozess. Sie müssen Informationen nicht mehr in vielen
           verschiedenen Dokumenten ausfüllen.
-        </li>
-        <li>
+        </p>
+        <BubbleIcon icon="auto" color="#B3B7E0" />
+        <p>
           <strong>Tools:</strong> Künstliche Intelligenz unterstützt Sie bei der Recherche.
           So finden und ordnen Sie wichtige Informationen deutlich schneller.
-        </li>
-      </ol>
+        </p>
+      </div>
       <!-- <h3>Welche Vorhaben sind geeignet?</h3> -->
       <!-- <p> -->
       <!--   Die neue Frühphase ist für alle Vorhaben geeignet, bei denen Legistinnen -->
@@ -176,7 +179,12 @@
       </p>
     {/snippet}
 
-    <Bubble title="Gesetzes&shy;umfeld" size="sm" tags={["Frühphase"]}>
+    <Bubble
+      title="Gesetzes&shy;umfeld"
+      size="sm"
+      tags={["Frühphase"]}
+      icon="category"
+    >
       <p>Wovon wird die Regelung beeinflusst?</p>
       <ul>
         <li>
@@ -188,16 +196,31 @@
         <li>Feststellung der aktuellen Rechtslage</li>
       </ul>
     </Bubble>
-    <Bubble title="Vorschläge von Verbänden" optional tags={["Frühphase"]}
+    <Bubble
+      title="Vorschläge von Verbänden"
+      optional
+      size="sm"
+      tags={["Frühphase"]}
     ></Bubble>
-    <Bubble title="Erarbeiten von Eckpunkten" optional tags={["Frühphase"]}>
+    <Bubble
+      title="Erarbeiten von Eckpunkten"
+      optional
+      size="md"
+      tags={["Frühphase"]}
+      icon="auto"
+    >
       Je nach Komplexität wird ein Eckpunktepapier verfasst oder nicht.
     </Bubble>
     <Bubble
       title="Gutachten und Sach&shy;verständigen&shy;kommissionen"
       tags={["Frühphase"]}
     ></Bubble>
-    <Bubble title="Material&shy;recherche" size="sm" tags={["Frühphase"]}>
+    <Bubble
+      title="Material&shy;recherche"
+      size="sm"
+      tags={["Frühphase"]}
+      icon="category"
+    >
       Recherchiert Daten, die relevant für das Gesetz sind sowie das
       Gesetzesumfeld.
     </Bubble>
@@ -208,10 +231,11 @@
     ></Bubble>
     <Bubble
       title="Ziel- und Wirkungs&shy;definition"
-      size="sm"
+      size="md"
       tags={["Frühphase"]}
+      icon="auto"
     ></Bubble>
-    <Bubble title="Vorarbeit" size="sm" tags={["Frühphase"]}>
+    <Bubble title="Vorarbeit" size="sm" tags={["Frühphase"]} icon="auto">
       Zieht Arbeit aus anderen Fach-Referaten über das Gesetzesthema zusammen.
     </Bubble>
   </Cluster>

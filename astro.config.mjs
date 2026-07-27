@@ -9,6 +9,7 @@ import pagefind from "astro-pagefind";
 import { generateRoutes } from "astro-route-generator";
 import { defineConfig } from "astro/config";
 import process from "node:process";
+import Icons from "unplugin-icons/vite";
 import { allRoutes } from "./src/config/routes.ts";
 
 import svelte from "@astrojs/svelte";
@@ -61,7 +62,14 @@ export default defineConfig({
     assets: "_astro",
   },
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),
+      // Renders Iconify icons (e.g. from @iconify-json/ic, also used by
+      // astro-icon) as tree-shaken Svelte components for use inside
+      // framework islands, where astro-icon's <Icon> can't be used since
+      // it's an Astro-only component.
+      Icons({ compiler: "svelte" }),
+    ],
     build: {
       // lightningcss (Vite's default CSS minifier) doesn't yet parse the
       // CSS anchor positioning "anchored" container query syntax used in
