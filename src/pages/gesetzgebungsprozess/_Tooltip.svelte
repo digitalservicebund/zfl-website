@@ -108,18 +108,18 @@
 
     border-shape: var(--downwards-caret);
 
-    /* @container anchored(fallback: bottom) { */
-    /*   padding-bottom: 0.25rem; */
-    /*   padding-top: calc(var(--ah) + 0.25rem); */
-    /*   border-shape: var(--upwards-caret); */
-    /* } */
+    @container anchored(fallback: bottom) {
+      padding-bottom: 0.25rem;
+      padding-top: calc(var(--ah) + 0.25rem);
+      border-shape: var(--upwards-caret);
+    }
 
     /* Fallback styles for browsers that don’t support "border-shape": */
     @supports not (border-shape: shape(from 0 0, hline to 100%)) {
       clip-path: var(--downwards-caret);
-      /* @container anchored(fallback: bottom) { */
-      /*   clip-path: var(--upwards-caret); */
-      /* } */
+      @container anchored(fallback: bottom) {
+        clip-path: var(--upwards-caret);
+      }
     }
   }
 </style>
