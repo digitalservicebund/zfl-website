@@ -3,6 +3,7 @@
 
   let {
     anchorName,
+    id,
     children,
   }: {
     /** CSS anchor name (e.g. "--bubble-anchor-c0") of the bubble circle
@@ -10,6 +11,7 @@
      * position the tooltip above that circle via CSS anchor positioning,
      * see https://www.joshwcomeau.com/css/anchor-positioning/ */
     anchorName: string;
+    id: string;
     children: Snippet;
   } = $props();
 
@@ -19,13 +21,15 @@
   // the tooltip anywhere in the viewport regardless of its containing
   // block, matching how anchor positioning is meant to be used.
   const style = $derived(
-    `position: fixed; position-anchor: ${anchorName}; left: anchor(${anchorName} center); bottom: anchor(${anchorName} top);`,
+    `position: fixed; position-anchor: ${anchorName}; position-area: top center;`,
   );
 </script>
 
 <div
   data-bubble-tooltip
-  class="pointer-events-none z-80 -translate-x-1/2 mb-8 max-w-300 bg-white px-8 pt-4 text-left text-sm"
+  {id}
+  role="tooltip"
+  class="pointer-events-none z-90 mb-8 min-w-200 max-w-300 bg-white px-8 pt-4 text-left text-sm"
   {style}
 >
   {@render children()}

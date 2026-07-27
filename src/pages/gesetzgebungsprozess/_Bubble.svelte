@@ -60,10 +60,6 @@
   // being displayed in a global sidebar panel.
   let open = $state(false);
 
-  function toggle() {
-    open = !open;
-  }
-
   const isInteractive = $derived(!!children);
 
   // Unique per-instance CSS anchor name so the tooltip can be positioned
@@ -102,7 +98,7 @@
       </div>
     </div>
     {#if children && open}
-      <Tooltip {anchorName}>
+      <Tooltip {anchorName} id={uid}>
         {@render children()}
       </Tooltip>
     {/if}
@@ -110,10 +106,10 @@
 
   {#if isInteractive}
     <button
-      type="button"
+      aria-describedby={uid}
       class="group focus-visible:outline-none"
-      aria-expanded={open}
-      onclick={toggle}
+      onmouseenter={() => (open = true)}
+      onmouseleave={() => (open = false)}
     >
       {@render bubble()}
     </button>
