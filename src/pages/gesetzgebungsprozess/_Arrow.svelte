@@ -45,10 +45,6 @@
 
   let rootEl: HTMLDivElement | undefined = $state();
 
-  function toggleSidebar(id: string) {
-    sidebarContext?.toggle(id);
-  }
-
   const styles = tv({
     slots: {
       wrapper: "flex justify-center",
@@ -79,25 +75,10 @@
   class={wrapper({ class: className })}
   style={`--arrow-color: color-mix(in srgb, ${color} 20%, white); --arrow-bg: ${expanded ? "var(--arrow-color)" : "#F7F7F7"}`}
 >
-  {#snippet arrow()}
-    <div class={shaft()} style={`--arrow-size: ${size}px`}>
-      {#if children}
-        <p class="font-bold text-sm text-center">{@render children()}</p>
-      {/if}
-    </div>
-    <div class={tip()}></div>
-  {/snippet}
-
-  {#if highlightGroup}
-    <button
-      type="button"
-      class="contents cursor-pointer"
-      aria-expanded={expanded}
-      onclick={() => toggleSidebar(highlightGroup)}
-    >
-      {@render arrow()}
-    </button>
-  {:else}
-    {@render arrow()}
-  {/if}
+  <div class={shaft()} style={`--arrow-size: ${size}px`}>
+    {#if children}
+      <p class="font-bold text-sm text-center">{@render children()}</p>
+    {/if}
+  </div>
+  <div class={tip()}></div>
 </div>

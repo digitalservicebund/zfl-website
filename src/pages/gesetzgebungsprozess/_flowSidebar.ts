@@ -36,6 +36,13 @@ export interface FlowSidebarContext {
   /** Id of the bubble currently shown in the sidebar, if any. */
   readonly activeId: string | null;
   /**
+   * Whether the flow is currently auto-scrolling (e.g. via `navigateStep`'s
+   * `scrollIntoView`). While true, scroll-driven activation (e.g. a
+   * `Cluster`'s `IntersectionObserver`) should be suppressed so it doesn't
+   * fight with/override the explicitly requested step.
+   */
+  readonly isJumping: boolean;
+  /**
    * Registers a bubble's content so it can be shown - including when the
    * sidebar is opened straight from a `?step=` URL or via the browser
    * back/forward buttons, before the bubble has ever been clicked.
@@ -47,5 +54,6 @@ export interface FlowSidebarContext {
    * closes it if already open for that id.
    */
   toggle(id: string): void;
+  setActive(id: string): void;
   close(): void;
 }

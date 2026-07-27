@@ -55,13 +55,14 @@
   // sidebar state is shareable via URL and the back/forward buttons step
   // through opened/closed bubbles.
   function syncUrl() {
-    const url = new URL(location.href);
-    if (activeId) {
-      url.searchParams.set(FLOW_SIDEBAR_STEP_PARAM, activeId);
-    } else {
-      url.searchParams.delete(FLOW_SIDEBAR_STEP_PARAM);
-    }
-    history.pushState(history.state, "", url);
+    return; // disabled for now
+    // const url = new URL(location.href);
+    // if (activeId) {
+    //   url.searchParams.set(FLOW_SIDEBAR_STEP_PARAM, activeId);
+    // } else {
+    //   url.searchParams.delete(FLOW_SIDEBAR_STEP_PARAM);
+    // }
+    // history.pushState(history.state, "", url);
   }
 
   // Content for `id` is expected to already be in the registry - every
@@ -70,6 +71,34 @@
   function toggle(id: string) {
     activeId = activeId === id ? null : id;
     syncUrl();
+  }
+
+  function setActive(id: string) {
+    activeId = id;
+    syncUrl();
+  }
+
+  // Marks the flow as "auto-scrolling" while `navigateStep`'s
+  // `scrollIntoView` animation is in flight, so `_Cluster.svelte`'s
+  // IntersectionObserver-driven `setActive` (triggered as clusters pass the
+  // viewport's midline during the smooth scroll) doesn't fight with the
+  // step explicitly requested here.
+  let jumping = $state(false);
+  let jumpingTimeout: ReturnType<typeof setTimeout> | undefined;
+
+  function startJump() {
+    jumping = true;
+    clearTimeout(jumpingTimeout);
+    // Safety net in case `scrollend` never fires (e.g. unsupported browser,
+    // or no actual scroll movement needed).
+    jumpingTimeout = setTimeout(() => {
+      jumping = false;
+    }, 1000);
+  }
+
+  function endJump() {
+    jumping = false;
+    clearTimeout(jumpingTimeout);
   }
 
   function closeSidebar() {
@@ -112,6 +141,11 @@
     if (!nextContent) return;
 
     activeId = nextContent.id;
+    const activeEl = document.getElementById(nextContent.id);
+    if (activeEl) {
+      startJump();
+      activeEl.scrollIntoView({ behavior: "smooth" });
+    }
     syncUrl();
   }
 
@@ -148,13 +182,31 @@
     return () => window.removeEventListener("popstate", onPopState);
   });
 
+  // Clears the `jumping` flag once the auto-scroll triggered by
+  // `navigateStep` actually finishes, listening on whichever target scrolls
+  // for the current orientation (the window when vertical, `mainEl` itself
+  // when horizontal).
+  $effect(() => {
+    window.addEventListener("scrollend", endJump);
+    mainEl?.addEventListener("scrollend", endJump);
+
+    return () => {
+      window.removeEventListener("scrollend", endJump);
+      mainEl?.removeEventListener("scrollend", endJump);
+    };
+  });
+
   setContext(FLOW_SIDEBAR_CONTEXT_NAME, {
     get activeId() {
       return activeId;
     },
+    get isJumping() {
+      return jumping;
+    },
     register,
     unregister,
     toggle,
+    setActive,
     close: closeSidebar,
   });
 

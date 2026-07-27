@@ -107,15 +107,49 @@
   // Scrolls the whole cluster into view whenever it becomes the active step -
   // most notably when the page is opened directly via a shared `?step=`
   // link, where it might otherwise be rendered off-screen.
-  $effect(() => {
-    if (!title || !expanded || !rootEl) return;
+  // $effect(() => {
+  //   if (!title || !expanded || !rootEl) return;
+  //
+  //   rootEl.scrollIntoView({ behavior: "smooth", block: "center" });
+  // });
 
-    rootEl.scrollIntoView({ behavior: "smooth", block: "center" });
-  });
-
-  function toggleSidebar(id: string) {
-    sidebarContext?.toggle(id);
+  function setActive(id: string) {
+    sidebarContext?.setActive(id);
   }
+
+  // Activates this cluster as soon as it crosses the viewport's midline
+  // while scrolling, using the standard "scrollspy" IntersectionObserver
+  // trick: a negative rootMargin shrinks the observed root down to a 1px
+  // line through the middle of the viewport (a horizontal line for
+  // vertical scrolling, a vertical line for horizontal scrolling), so
+  // `isIntersecting` flips exactly when the cluster crosses that line.
+  // Suppressed while `navigateStep`'s `scrollIntoView` is auto-scrolling
+  // (`sidebarContext.isJumping`), so it doesn't override the explicitly
+  // requested step with whatever cluster happens to pass the midline
+  // during that animation.
+  $effect(() => {
+    if (!title || !rootEl) return;
+    // Skip inside `_FlowWithMinimap.svelte`'s scaled-down minimap clone -
+    // it's marked `inert` (and non-interactive/hidden from assistive tech),
+    // so this doubles as a cheap "is this the real content?" check without
+    // needing a dedicated context just for that.
+    if (rootEl.closest("[inert]")) return;
+
+    const rootMargin =
+      orientation === "vertical" ? "-50% 0px -50% 0px" : "0px -50% 0px -50%";
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !sidebarContext?.isJumping) {
+          setActive(title);
+        }
+      },
+      { rootMargin },
+    );
+
+    observer.observe(rootEl);
+    return () => observer.disconnect();
+  });
 
   const contentWrapper = tv({
     base: "relative flex flex-col items-center justify-center",
@@ -209,6 +243,8 @@
   const clusterOffset = $derived(
     offset ?? Math.round((Math.random() * 2 - 1) * OFFSET_RANGE),
   );
+
+  const interactive = false; // !!sidebar;
 </script>
 
 <div
@@ -229,12 +265,12 @@
           aria-hidden="true"
         ></div>
         <h2 id={title} class="scroll-mt-40 my-0">
-          {#if sidebar}
+          {#if interactive}
             <button
               type="button"
               class="kern-heading-small bg-black text-white px-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cosmic-blue-base"
               aria-expanded={expanded}
-              onclick={() => toggleSidebar(title)}
+              onclick={() => setActive(title)}
               tabIndex={-1}
             >
               {title}
@@ -261,16 +297,16 @@
            sidebar. It's `aria-hidden` and untabbable since the title button
            already exposes the same action to keyboard/screen-reader users;
            this is purely a larger pointer/touch target. -->
-        {#if highlightId}
+        {#if highlightId && interactive}
           <button
             type="button"
             aria-hidden="true"
-            class={`absolute inset-0 -z-20 rounded-full  cursor-pointer ${expanded ? "bg-(--halo-color)" : "bg-[#F7F7F7]"}`}
-            onclick={() => toggleSidebar(highlightId)}
+            class={`absolute inset-0 -z-20 rounded-full ${expanded ? "bg-(--halo-color)" : "bg-[#F7F7F7]"}`}
+            onclick={() => setActive(highlightId)}
           ></button>
         {:else}
           <div
-            class="pointer-events-none absolute inset-0 -z-20 rounded-full bg-[#F7F7F7]"
+            class={`pointer-events-none absolute inset-0 -z-20 rounded-full ${expanded ? "bg-(--halo-color)" : "bg-[#F7F7F7]"}`}
           ></div>
         {/if}
         {#if !isSingleBubble}
