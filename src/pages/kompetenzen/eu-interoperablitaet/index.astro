@@ -1,0 +1,15 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+
+const frontmatter = {
+  title: "EU Interoperabilität",
+  navLabel: "EU-Interoperabilität",
+  isStagingOnly: true,
+  navOrder: 2,
+};
+---
+
+<Layout title={frontmatter.title}
+  ><Hero><h1>{frontmatter.title}</h1></Hero>
+</Layout>

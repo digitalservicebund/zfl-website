@@ -6,6 +6,7 @@ import { ZFL_PHONE } from "@/config/constants";
 import {
   begleitungen,
   home,
+  kompetenzen,
   kontakt,
   schulungen,
   ueber,
@@ -30,6 +31,7 @@ const HEADER_ROUTES: Route[] = [
   schulungen,
   ueber,
   kontakt,
+  kompetenzen,
 ];
 const headerNavigation = HEADER_ROUTES.filter(isRouteVisible);
 const mobileMenu = getMobileMenuNavigation(currentPath, headerNavigation);

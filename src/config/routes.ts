@@ -99,6 +99,105 @@ export const impressum = {
   navLabel: null,
 } as const;
 
+export const kompetenzen = {
+  key: "kompetenzen",
+  path: "/kompetenzen",
+  title: "Kompetenzen",
+  parent: null,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: 5,
+  navLabel: "Kompetenzen",
+} as const;
+
+export const kompetenzen_buergerzentriertheit = {
+  key: "kompetenzen_buergerzentriertheit",
+  path: "/kompetenzen/buergerzentriertheit",
+  title: "Bürgerzentriertheit",
+  parent: kompetenzen,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: 5,
+  navLabel: "Bürgerzentriertheit",
+} as const;
+
+export const kompetenzen_digitaltauglichkeit = {
+  key: "kompetenzen_digitaltauglichkeit",
+  path: "/kompetenzen/digitaltauglichkeit",
+  title: "Was ist Digitaltauglichkeit",
+  parent: kompetenzen,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: 3,
+  navLabel: "Digitaltauglichkeit",
+} as const;
+
+export const kompetenzen_digitaltauglichkeit_beispiele = {
+  key: "kompetenzen_digitaltauglichkeit_beispiele",
+  path: "/kompetenzen/digitaltauglichkeit/beispiele",
+  title: "Beispiele am Gesetzestext",
+  parent: kompetenzen_digitaltauglichkeit,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: 1,
+  navLabel: "Beispiele am Gesetzestext",
+} as const;
+
+export const kompetenzen_euInteroperablitaet = {
+  key: "kompetenzen_euInteroperablitaet",
+  path: "/kompetenzen/eu-interoperablitaet",
+  title: "EU Interoperabilität",
+  parent: kompetenzen,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: 2,
+  navLabel: "EU-Interoperabilität",
+} as const;
+
+export const kompetenzen_euInteroperablitaet_dCATAP = {
+  key: "kompetenzen_euInteroperablitaet_dCATAP",
+  path: "/kompetenzen/eu-interoperablitaet/DCAT-AP",
+  title: "SCAT-AP",
+  parent: kompetenzen_euInteroperablitaet,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: 2,
+  navLabel: "DCAT-AP",
+} as const;
+
+export const kompetenzen_euInteroperablitaet_sematicVocab = {
+  key: "kompetenzen_euInteroperablitaet_sematicVocab",
+  path: "/kompetenzen/eu-interoperablitaet/sematic-vocab",
+  title: "Sematic Vocabularies",
+  parent: kompetenzen_euInteroperablitaet,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: 1,
+  navLabel: "Sematic Vocab",
+} as const;
+
+export const kompetenzen_praxistauglichkeit = {
+  key: "kompetenzen_praxistauglichkeit",
+  path: "/kompetenzen/praxistauglichkeit",
+  title: "Praxistauglichkeit",
+  parent: kompetenzen,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: "Praxistauglichkeit",
+} as const;
+
+export const kompetenzen_werkzeuge = {
+  key: "kompetenzen_werkzeuge",
+  path: "/kompetenzen/werkzeuge",
+  title: "Werkzeuge",
+  parent: kompetenzen,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
 export const kontakt = {
   key: "kontakt",
   path: "/kontakt",
@@ -209,39 +308,6 @@ export const werkzeuge = {
   navLabel: null,
 } as const;
 
-export const werkzeuge_digitaltauglichkeit = {
-  key: "werkzeuge_digitaltauglichkeit",
-  path: "/werkzeuge/digitaltauglichkeit",
-  title: "Was ist Digitaltauglichkeit",
-  parent: werkzeuge,
-  sitemap: true,
-  isStagingOnly: true,
-  navOrder: 3,
-  navLabel: "Digitaltauglichkeit",
-} as const;
-
-export const werkzeuge_digitaltauglichkeit_beispiele = {
-  key: "werkzeuge_digitaltauglichkeit_beispiele",
-  path: "/werkzeuge/digitaltauglichkeit/beispiele",
-  title: "Beispiele am Gesetzestext",
-  parent: werkzeuge_digitaltauglichkeit,
-  sitemap: true,
-  isStagingOnly: true,
-  navOrder: 1,
-  navLabel: "Beispiele am Gesetzestext",
-} as const;
-
-export const werkzeuge_praxistauglichkeit = {
-  key: "werkzeuge_praxistauglichkeit",
-  path: "/werkzeuge/praxistauglichkeit",
-  title: "Praxistauglichkeit",
-  parent: werkzeuge,
-  sitemap: true,
-  isStagingOnly: false,
-  navOrder: null,
-  navLabel: "Praxistauglichkeit",
-} as const;
-
 export const allRoutes = [
   barrierefreiheit,
   begleitungen,
@@ -251,6 +317,15 @@ export const allRoutes = [
   dev_kernKomponenten,
   home,
   impressum,
+  kompetenzen,
+  kompetenzen_buergerzentriertheit,
+  kompetenzen_digitaltauglichkeit,
+  kompetenzen_digitaltauglichkeit_beispiele,
+  kompetenzen_euInteroperablitaet,
+  kompetenzen_euInteroperablitaet_dCATAP,
+  kompetenzen_euInteroperablitaet_sematicVocab,
+  kompetenzen_praxistauglichkeit,
+  kompetenzen_werkzeuge,
   kontakt,
   schulungen,
   sitemap,
@@ -261,7 +336,4 @@ export const allRoutes = [
   ueber_neueFruehphase,
   ueber_zahlenUndFakten,
   werkzeuge,
-  werkzeuge_digitaltauglichkeit,
-  werkzeuge_digitaltauglichkeit_beispiele,
-  werkzeuge_praxistauglichkeit,
 ] as const;

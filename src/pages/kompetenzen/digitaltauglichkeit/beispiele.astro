@@ -1,5 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
 export const frontmatter = {
   title: "Beispiele am Gesetzestext",
   sitemap: true,
@@ -9,4 +10,6 @@ export const frontmatter = {
 };
 ---
 
-<Layout title={frontmatter.title} />
+<Layout title={frontmatter.title}
+  ><Hero><h1>{frontmatter.title}</h1></Hero></Layout
+>
