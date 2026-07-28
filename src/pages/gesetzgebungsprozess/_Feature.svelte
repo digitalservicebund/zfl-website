@@ -9,6 +9,7 @@
   } from "./_bubbleHighlight";
 
   let {
+    title,
     children,
     icon,
     tag,
@@ -21,6 +22,7 @@
     // a descendant of the Cluster that defines it).
     color = "var(--content-color)",
   }: {
+    title?: string;
     children: Snippet;
     icon: keyof typeof icons;
     tag: string;
@@ -45,6 +47,9 @@
   >
   <div class="space-y-16">
     <p>
+      {#if title}
+        <strong>{title}: </strong>
+      {/if}
       {@render children()}
     </p>
     <button

@@ -135,13 +135,13 @@
       </p>
       <h3>Was könnte sich in Ihrem Arbeitsablauf ändern?</h3>
       <div class="space-y-24">
-        <Feature icon="category" tag="geführter Prozess">
-          <strong>Geführter Prozess:</strong> Ein digitales Werkzeug führt Sie
+        <Feature icon="category" tag="geführter Prozess" title="Geführter Prozess">
+          Ein digitales Werkzeug führt Sie
           Schritt für Schritt durch den Prozess. Sie müssen Informationen nicht
           mehr in vielen verschiedenen Dokumenten ausfüllen.
         </Feature>
-        <Feature icon="auto" tag="Tools">
-          <strong>Tools:</strong> Künstliche Intelligenz unterstützt Sie bei der
+        <Feature icon="auto" tag="Tools" title="Tools">
+          Künstliche Intelligenz unterstützt Sie bei der
           Recherche. So finden und ordnen Sie wichtige Informationen deutlich
           schneller.
         </Feature>
@@ -237,17 +237,17 @@
       </p>
       <h3>Was könnte sich in Ihrem Arbeitsablauf ändern?</h3>
       <div class="space-y-24">
-        <Feature icon="category" tag="geführter Prozess">
-          <strong>Integrierte Checks:</strong> Wichtige Checks und Arbeitshilfen
+        <Feature icon="category" tag="geführter Prozess" title="Integrierte Checks">
+          Wichtige Checks und Arbeitshilfen
           sind direkt in Ihren Arbeitsablauf früher eingebunden. Sie müssen Checklisten
           und Arbeitshilfen (z.B. Digitalcheck) nicht mehr manuell abgleichen.
         </Feature>
-        <Feature icon="auto" tag="Tools">
-          <strong>Formulierungshilfen:</strong> Formulierungshilfen sind gebündelt
+        <Feature icon="auto" tag="Tools" title="Formulierungshilfen">
+          Formulierungshilfen sind gebündelt
           und eingebunden, sodass Sie diese direkt nutzen können.
         </Feature>
-        <Feature icon="category" tag="geführter Prozess">
-          <strong>Einfachere Beteiligung:</strong> Der Austausch mit der Praxis
+        <Feature icon="category" tag="geführter Prozess" title="Einfachere Beteiligung">
+          Der Austausch mit der Praxis
           wird gezielt gefördert. Mit digitaler Unterstützung können Sie Feedback
           von externen Beteiligten unkompliziert einholen und einarbeiten.
         </Feature>
@@ -307,13 +307,13 @@
       </p>
       <h3>Was könnte sich in Ihrem Arbeitsablauf ändern?</h3>
       <div class="space-y-24">
-        <Feature icon="category" tag="geführter Prozess">
-          <strong>Keine separate Dokumentation:</strong> Da das System Ihre Ergebnisse
+        <Feature icon="category" tag="geführter Prozess" title="Keine separate Dokumentation">
+          Da das System Ihre Ergebnisse
           aus den vorherigen Phasen bereits gebündelt hat, müssen Sie keine zusätzlichen
           Prüfberichte mehr erstellen.
         </Feature>
-        <Feature icon="auto" tag="Tools">
-          <strong>Einfache Absprache:</strong> Der Austausch mit externen Prüfstellen
+        <Feature icon="auto" tag="Tools" title="Einfache Absprache">
+          Der Austausch mit externen Prüfstellen
           wird gezielt erleichtert. Über ein standardisiertes Übergabeformat leiten
           Sie alle relevanten Nachweise aus der Recherche- und Entwurfsphase unkompliziert
           an den Nationalen Normenkontrollrat (NKR) weiter.
