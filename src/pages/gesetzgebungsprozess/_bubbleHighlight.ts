@@ -9,4 +9,5 @@ export interface BubbleHighlightContext {
   readonly highlighted: string[];
   /** Highlights `tag` exclusively, or clears the highlight if it's already active. */
   toggleHighlighted(tag: string): void;
+  setHighlighted(tag: string | null): void;
 }

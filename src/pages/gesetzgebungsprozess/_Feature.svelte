@@ -34,13 +34,21 @@
   );
 
   // const isHighlighted = $derived(highlightContext.highlighted.includes(tag));
+  const enable = () => highlightContext.setHighlighted(tag);
+  const disable = () => highlightContext.setHighlighted(null);
 </script>
 
 <button
   type="button"
+  data-feature-button
   class={`flex items-start gap-24 kern-btn kern-btn--secondary p-16`}
   title="Schritte hervorheben"
-  onclick={() => highlightContext.toggleHighlighted(tag)}
+  onmouseenter={() =>
+    !document.activeElement?.hasAttribute("data-feature-button") && enable()}
+  onmouseleave={() =>
+    !document.activeElement?.hasAttribute("data-feature-button") && disable()}
+  onfocus={enable}
+  onblur={disable}
 >
   <div class="flex items-start rounded-full">
     <BubbleIcon {icon} {color} />

@@ -46,10 +46,14 @@
       return highlighted;
     },
     toggleHighlighted,
+    setHighlighted,
   });
 
   function toggleHighlighted(tag: string) {
     highlighted = highlighted.includes(tag) ? [] : [tag];
+  }
+  function setHighlighted(tag: string | null) {
+    highlighted = tag ? [tag] : [];
   }
 
   const isVertical = $derived(orientation === "vertical");
