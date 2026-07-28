@@ -12,6 +12,13 @@
   } = $props();
 
   const useBgColor = false;
+
+  let scrollContainer: HTMLDivElement | undefined = $state();
+
+  $effect(() => {
+    content;
+    if (scrollContainer) scrollContainer.scrollTop = 0;
+  });
 </script>
 
 <!-- Sticky (not fixed) so it stays visible while scrolling the flow, but
@@ -42,6 +49,7 @@
         </button>
       </div>
       <div
+        bind:this={scrollContainer}
         class="scroll-shadow kern-body--small min-h-0 flex-1 overflow-y-auto p-24 [&>h3]:text-lg"
       >
         {@render content.children()}
