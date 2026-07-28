@@ -54,7 +54,7 @@
       </div>
       {#if content.kind === "cluster" || content.kind === "bubble"}
         <div
-          class="flex shrink-0 justify-end gap-8 px-40 py-24 bg-lavender-200"
+          class="flex shrink-0 justify-end gap-8 px-40 pt-24 pb-40 bg-lavender-200"
         >
           <button
             type="button"
