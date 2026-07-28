@@ -109,15 +109,13 @@
     className="pt-lg"
   >
     {#snippet sidebar()}
-      <h2>Was tun?</h2>
+      <h2>Was passiert in der Phase der Interessenvermittlung?</h2>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
+        Sobald die Zuständigkeit nach der Geschäftsverteilung der
+        Bundesregierung feststeht, erarbeitet das federführende Ressort den
+        eigentlichen Gesetzentwurf. Unterstützend bilden sich erste
+        Arbeitsgruppen und es beginnt der wichtige Austausch mit den Ländern und
+        Kommunen.
       </p>
     {/snippet}
 
@@ -151,14 +149,16 @@
 
   <Cluster color="#B3B7E0" {orientation} title="Recherche" offset={0}>
     {#snippet sidebar()}
-      <h2>Wie sieht die Frühphase in der Recherchephase aus?</h2>
+      <h2>Wie lässt sich die Recherchephase optimieren?</h2>
       <p>
-        In dieser Phase bereiten Sie neue Regelungen vor. Sie prüfen genau,
-        welches Problem gelöst werden muss und legen fest, was die Regelung
-        bewirken soll. Außerdem binden Sie frühzeitig alle Beteiligten ein.
-        Dadurch schaffen Sie eine gute Grundlage für die weitere Arbeit.
+        In der frühen Phase der Gesetzesvorbereitung werden Sie dabei
+        unterstützt, Ihre neuen Regelungen optimal vorzubereiten. Ziel ist es,
+        frühzeitig zu prüfen, welches Problem gelöst werden muss, und
+        festzulegen, was die Regelung bewirken soll. Zudem wird es erleichtert,
+        alle wichtigen Beteiligten frühzeitig einzubinden. So schaffen Sie von
+        Anfang an eine fundierte Grundlage für Ihre weitere Arbeit.
       </p>
-      <h3>Was ist neu?</h3>
+      <h3>Was könnte sich in Ihrem Arbeitsablauf ändern?</h3>
       <div class="space-y-24">
         <div class="flex items-start gap-24">
           <button
@@ -223,11 +223,11 @@
           </div>
         </div>
       </div>
-      <!-- <h3>Welche Vorhaben sind geeignet?</h3> -->
-      <!-- <p> -->
-      <!--   Die neue Frühphase ist für alle Vorhaben geeignet, bei denen Legistinnen -->
-      <!--   und Legisten einen tatsächlichen Handlungsspielraum haben. -->
-      <!-- </p> -->
+      <h3>Für welche Vorhaben ist es geeignet?</h3>
+      <p>
+        Dieser Ablauf eignet sich für alle Vorhaben, in denen
+        Gestaltungsspielraum besteht.
+      </p>
       <h3>Wo sparen Sie Zeit?</h3>
       <p>
         Die digitale Unterstützung nimmt Ihnen bei der Recherche Arbeit ab.
@@ -304,15 +304,117 @@
 
   <Cluster color="#ABD7F9" {orientation} title="Referentenentwurf">
     {#snippet sidebar()}
-      <h2>Was kommt hier?</h2>
+      <h2>Wie lässt sich der Entwurfsprozess vereinfachen?</h2>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
+        Nachdem Sie die Recherchephase abgeschlossen haben, werden Sie bei der
+        Ausarbeitung Ihres ersten konkreten Entwurfs unterstützt. Ziel ist es,
+        rechtliche Vorgaben im Blick zu behalten und sich früh mit der Praxis
+        auszutauschen. So vermeiden Sie Umsetzungsrisiken und schaffen von
+        Anfang an praxistaugliche Regelungen.
+      </p>
+      <h3>Was könnte sich in Ihrem Arbeitsablauf ändern?</h3>
+      <div class="space-y-24">
+        <div class="flex items-start gap-24">
+          <button
+            type="button"
+            class="flex items-start"
+            title="Schritte hervorheben"
+            onclick={() => toggleHighlighted("geführter Prozess")}
+          >
+            <BubbleIcon icon="category" color="#B3B7E0" /></button
+          >
+          <div class="space-y-16">
+            <p>
+              <strong>Integrierte Checks:</strong> Wichtige Checks und Arbeitshilfen
+              sind direkt in Ihren Arbeitsablauf früher eingebunden. Sie müssen Checklisten
+              und Arbeitshilfen (z.B. Digitalcheck) nicht mehr manuell abgleichen.
+            </p>
+            <button
+              type="button"
+              class="kern-btn kern-btn--secondary"
+              onclick={() => toggleHighlighted("geführter Prozess")}
+            >
+              <span
+                class="kern-icon kern-icon--arrow-forward"
+                aria-hidden="true"
+              ></span>
+              <span class="kern-label">
+                {isHighlighted("geführter Prozess")
+                  ? "alle zeigen"
+                  : "jetzt ansehen"}
+              </span>
+            </button>
+          </div>
+        </div>
+        <div class="flex items-start gap-24">
+          <button
+            type="button"
+            class="flex items-start"
+            title="Schritte hervorheben"
+            onclick={() => toggleHighlighted("Tools")}
+          >
+            <BubbleIcon icon="auto" color="#B3B7E0" />
+          </button>
+          <div class="space-y-16">
+            <p>
+              <strong>Formulierungshilfen:</strong> Formulierungshilfen sind gebündelt
+              und eingebunden, sodass Sie diese direkt nutzen können.
+            </p>
+            <button
+              type="button"
+              class="kern-btn kern-btn--secondary"
+              onclick={() => toggleHighlighted("Tools")}
+            >
+              <span
+                class="kern-icon kern-icon--arrow-forward"
+                aria-hidden="true"
+              ></span>
+              <span class="kern-label">
+                {isHighlighted("Tools") ? "alle zeigen" : "jetzt ansehen"}
+              </span>
+            </button>
+          </div>
+        </div>
+        <div class="flex items-start gap-24">
+          <button
+            type="button"
+            class="flex items-start"
+            title="Schritte hervorheben"
+            onclick={() => toggleHighlighted("geführter Prozess")}
+          >
+            <BubbleIcon icon="category" color="#B3B7E0" /></button
+          >
+          <div class="space-y-16">
+            <p>
+              <strong>Einfachere Beteiligung:</strong> Der Austausch mit der Praxis
+              wird gezielt gefördert. Mit digitaler Unterstützung können Sie Feedback
+              von externen Beteiligten unkompliziert einholen und einarbeiten.
+            </p>
+            <button
+              type="button"
+              class="kern-btn kern-btn--secondary"
+              onclick={() => toggleHighlighted("geführter Prozess")}
+            >
+              <span
+                class="kern-icon kern-icon--arrow-forward"
+                aria-hidden="true"
+              ></span>
+              <span class="kern-label">
+                {isHighlighted("geführter Prozess")
+                  ? "alle zeigen"
+                  : "jetzt ansehen"}
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <h3>Wo sparen Sie Zeit?</h3>
+      <p>
+        Sie sparen Zeit, weil Sie Doppelarbeit und späte Schleifen vermeiden.
+        Das System erzeugt wichtige Dokumente automatisch für Sie. Weil Sie
+        wichtige Vorgaben direkt zu Beginn prüfen, verhindern Sie zudem
+        aufwändige Änderungen, die sonst oft spät und unter großem Zeitdruck
+        nötig wären.
       </p>
     {/snippet}
 
@@ -345,17 +447,93 @@
     ></Bubble>
   </Cluster>
 
-  <Cluster color="#A0EBEE" {orientation} title="Hausentwurf">
+  <Cluster color="#A0EBEE" {orientation} title="Hausentwurf & Ressortentwurf">
     {#snippet sidebar()}
-      <h2>Kommt hier noch was?</h2>
+      <h2>
+        Wie lässt sich der Abstimmungsprozess im Haus und mit anderen Ressorts
+        gestalten?
+      </h2>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
+        Nachdem Sie Ihren Referentenentwurf erstellt haben, beginnt die formale
+        Abstimmung im eigenen Haus, mit den anderen Ressorts und externen
+        Beteiligten. In dieser Phase werden Sie dabei unterstützt, den
+        bürokratischen Aufwand so gering wie möglich zu halten. Ziel ist es,
+        bestehende Daten nahtlos weiterzunutzen und sich voll auf die
+        inhaltlichen Absprachen zu konzentrieren.
+      </p>
+      <h3>Was könnte sich in Ihrem Arbeitsablauf ändern?</h3>
+      <div class="space-y-24">
+        <div class="flex items-start gap-24">
+          <button
+            type="button"
+            class="flex items-start"
+            title="Schritte hervorheben"
+            onclick={() => toggleHighlighted("geführter Prozess")}
+          >
+            <BubbleIcon icon="category" color="#B3B7E0" /></button
+          >
+          <div class="space-y-16">
+            <p>
+              <strong>Keine separate Dokumentation:</strong> Da das System Ihre Ergebnisse
+              aus den vorherigen Phasen bereits gebündelt hat, müssen Sie keine zusätzlichen
+              Prüfberichte mehr erstellen.
+            </p>
+            <button
+              type="button"
+              class="kern-btn kern-btn--secondary"
+              onclick={() => toggleHighlighted("geführter Prozess")}
+            >
+              <span
+                class="kern-icon kern-icon--arrow-forward"
+                aria-hidden="true"
+              ></span>
+              <span class="kern-label">
+                {isHighlighted("geführter Prozess")
+                  ? "alle zeigen"
+                  : "jetzt ansehen"}
+              </span>
+            </button>
+          </div>
+        </div>
+        <div class="flex items-start gap-24">
+          <button
+            type="button"
+            class="flex items-start"
+            title="Schritte hervorheben"
+            onclick={() => toggleHighlighted("Tools")}
+          >
+            <BubbleIcon icon="auto" color="#B3B7E0" />
+          </button>
+          <div class="space-y-16">
+            <p>
+              <strong>Einfache Absprache:</strong> Der Austausch mit externen Prüfstellen
+              wird gezielt erleichtert. Über ein standardisiertes Übergabeformat leiten
+              Sie alle relevanten Nachweise aus der Recherche- und Entwurfsphase unkompliziert
+              an den Nationalen Normenkontrollrat (NKR) weiter.
+            </p>
+            <button
+              type="button"
+              class="kern-btn kern-btn--secondary"
+              onclick={() => toggleHighlighted("Tools")}
+            >
+              <span
+                class="kern-icon kern-icon--arrow-forward"
+                aria-hidden="true"
+              ></span>
+              <span class="kern-label">
+                {isHighlighted("Tools") ? "alle zeigen" : "jetzt ansehen"}
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <h3>Wo sparen Sie Zeit?</h3>
+      <p>
+        Sie sparen sich den gesamten Aufwand für doppelte Dokumentationen. Da
+        die nötigen Nachweise durch Ihre Vorarbeit im System schon vorliegen,
+        sparen Sie sich das erneute Zusammentragen von Daten. Zudem sorgt das
+        standardisierte Format für den NKR für weniger Abstimmungsaufwand und
+        erspart Ihnen Rückfragen.
       </p>
     {/snippet}
 
@@ -371,20 +549,11 @@
     ></Bubble>
   </Cluster>
 
-  <Cluster color="#9EDCD0" {orientation} title="Ressortentwurf">
-    {#snippet sidebar()}
-      <h2>Und hier?</h2>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </p>
-    {/snippet}
-
+  <Cluster
+    color="#9EDCD0"
+    {orientation}
+    highlightGroup="Hausentwurf & Ressortentwurf"
+  >
     <Bubble title="Gesetzes&shy;folgen&shy;abschätzung" size="md">
       Beabsichtigte Wirkungen und unbeabsichtigte Nebenwirkungen
       (Haushaltsausgaben, Demographische Auswirkungen, Nachhaltigkeitsaspekte,
@@ -426,7 +595,11 @@
     </Bubble>
   </Cluster>
 
-  <Cluster color="#9EDCD0" {orientation} highlightGroup="Ressortentwurf">
+  <Cluster
+    color="#9EDCD0"
+    {orientation}
+    highlightGroup="Hausentwurf & Ressortentwurf"
+  >
     <Bubble title="Verbände informieren" size="md">
       Die betroffenen Verbände werden über den Ressortentwurf informiert.
     </Bubble>
@@ -434,15 +607,13 @@
 
   <Cluster color="#D2EDB9" {orientation} title="Kabinettvorlage">
     {#snippet sidebar()}
-      <h2>Fast geschafft!</h2>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
+        Sobald die Abstimmungen zum Ressortentwurf abgeschlossen sind, wird die
+        offizielle Kabinettvorlage erstellt und durch die Leitung des Hauses
+        unterzeichnet. Anschließend erfolgt die Weiterleitung an das
+        Bundeskanzleramt, womit der Gesetzentwurf formell an die politische
+        Ebene übergeben wird und aus ihm durch Beschluss der Bundesregierung ein
+        Regierungsentwurf entsteht.
       </p>
     {/snippet}
 
@@ -486,15 +657,13 @@
     className="bg-(--dark-bg)"
   >
     {#snippet sidebar()}
-      <h2>Nur noch flott durchs Parlament ...</h2>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
+        Nachdem die Bundesregierung den Entwurf an die gesetzgebenden Organe
+        übergeben hat, durchläuft das Vorhaben das eigentliche parlamentarische
+        Verfahren. Es beginnt in der Regel mit der Stellungnahme des
+        Bundesrates, führt über die intensive Beratung und finale Abstimmung im
+        Bundestag und endet schließlich mit der formellen Verkündung des
+        Gesetzes im Bundesgesetzblatt.
       </p>
     {/snippet}
 
@@ -573,15 +742,13 @@
     className="bg-(--dark-bg)"
   >
     {#snippet sidebar()}
-      <h2>Tadaa!!</h2>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
+        Sobald das Gesetz im Bundesgesetzblatt verkündet wurde, schließen sich
+        die abschließende Dokumentation und das offizielle Inkrafttreten der
+        neuen Regelungen an. Damit verlässt das Gesetz den eigentlichen
+        Gesetzgebungsprozess und geht in den Vollzug über, wo die Regelungen von
+        den zuständigen Behörden der Länder und des Bundes in der Praxis
+        angewendet und umgesetzt werden.
       </p>
     {/snippet}
 
