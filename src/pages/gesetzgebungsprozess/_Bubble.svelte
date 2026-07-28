@@ -64,7 +64,7 @@
   // being displayed in a global sidebar panel.
   let open = $state(false);
 
-  const isInteractive = $derived(!!children);
+  const isInteractive = false; // $derived(!!children);
 
   // Unique per-instance CSS anchor name so the tooltip can be positioned
   // relative to this bubble's circle via CSS anchor positioning, even
