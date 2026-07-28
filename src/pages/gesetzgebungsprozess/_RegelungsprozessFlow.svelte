@@ -1,42 +1,17 @@
 <script lang="ts">
-  import { setContext } from "svelte";
   import { tv } from "tailwind-variants";
   import Bubble from "./_Bubble.svelte";
   import Cluster from "./_Cluster.svelte";
   import Arrow from "./_Arrow.svelte";
-  import { BUBBLE_HIGHLIGHT_CONTEXT_NAME } from "./_bubbleHighlight";
-  import BubbleIcon from "./_BubbleIcon.svelte";
+  import Feature from "./_Feature.svelte";
 
   let {
     orientation = "vertical",
-    highlighted = $bindable([]),
   }: {
     orientation?: "vertical" | "horizontal";
-    /**
-     * Tags of the bubbles to highlight (matched against each Bubble's
-     * `tags` prop). When empty, all bubbles show their normal color;
-     * otherwise, every bubble whose tags don't intersect this list is
-     * grayscale-filtered. Bindable so callers can control it externally.
-     */
-    highlighted?: string[];
   } = $props();
 
   const isVertical = $derived(orientation === "vertical");
-
-  // Exposed via context (rather than threaded through every `<Bubble>`
-  // usage) so any descendant Bubble can reactively read the current
-  // highlight list without every call site needing a `highlighted` prop.
-  setContext(BUBBLE_HIGHLIGHT_CONTEXT_NAME, {
-    get highlighted() {
-      return highlighted;
-    },
-  });
-
-  const isHighlighted = (tag: string) => highlighted.includes(tag);
-
-  function toggleHighlighted(tag: string) {
-    highlighted = isHighlighted(tag) ? [] : [tag];
-  }
 
   const container = tv({
     base: "relative flex bg-white [--dark-bg:#F0F0F0]",
@@ -160,68 +135,16 @@
       </p>
       <h3>Was könnte sich in Ihrem Arbeitsablauf ändern?</h3>
       <div class="space-y-24">
-        <div class="flex items-start gap-24">
-          <button
-            type="button"
-            class="flex items-start"
-            title="Schritte hervorheben"
-            onclick={() => toggleHighlighted("geführter Prozess")}
-          >
-            <BubbleIcon icon="category" color="#B3B7E0" /></button
-          >
-          <div class="space-y-16">
-            <p>
-              <strong>Geführter Prozess:</strong> Ein digitales Werkzeug führt Sie
-              Schritt für Schritt durch den Prozess. Sie müssen Informationen nicht
-              mehr in vielen verschiedenen Dokumenten ausfüllen.
-            </p>
-            <button
-              type="button"
-              class="kern-btn kern-btn--secondary"
-              onclick={() => toggleHighlighted("geführter Prozess")}
-            >
-              <span
-                class="kern-icon kern-icon--arrow-forward"
-                aria-hidden="true"
-              ></span>
-              <span class="kern-label">
-                {isHighlighted("geführter Prozess")
-                  ? "alle zeigen"
-                  : "jetzt ansehen"}
-              </span>
-            </button>
-          </div>
-        </div>
-        <div class="flex items-start gap-24">
-          <button
-            type="button"
-            class="flex items-start"
-            title="Schritte hervorheben"
-            onclick={() => toggleHighlighted("Tools")}
-          >
-            <BubbleIcon icon="auto" color="#B3B7E0" />
-          </button>
-          <div class="space-y-16">
-            <p>
-              <strong>Tools:</strong> Künstliche Intelligenz unterstützt Sie bei der
-              Recherche. So finden und ordnen Sie wichtige Informationen deutlich
-              schneller.
-            </p>
-            <button
-              type="button"
-              class="kern-btn kern-btn--secondary"
-              onclick={() => toggleHighlighted("Tools")}
-            >
-              <span
-                class="kern-icon kern-icon--arrow-forward"
-                aria-hidden="true"
-              ></span>
-              <span class="kern-label">
-                {isHighlighted("Tools") ? "alle zeigen" : "jetzt ansehen"}
-              </span>
-            </button>
-          </div>
-        </div>
+        <Feature icon="category" tag="geführter Prozess">
+          <strong>Geführter Prozess:</strong> Ein digitales Werkzeug führt Sie
+          Schritt für Schritt durch den Prozess. Sie müssen Informationen nicht
+          mehr in vielen verschiedenen Dokumenten ausfüllen.
+        </Feature>
+        <Feature icon="auto" tag="Tools">
+          <strong>Tools:</strong> Künstliche Intelligenz unterstützt Sie bei der
+          Recherche. So finden und ordnen Sie wichtige Informationen deutlich
+          schneller.
+        </Feature>
       </div>
       <h3>Für welche Vorhaben ist es geeignet?</h3>
       <p>
@@ -314,99 +237,20 @@
       </p>
       <h3>Was könnte sich in Ihrem Arbeitsablauf ändern?</h3>
       <div class="space-y-24">
-        <div class="flex items-start gap-24">
-          <button
-            type="button"
-            class="flex items-start"
-            title="Schritte hervorheben"
-            onclick={() => toggleHighlighted("geführter Prozess")}
-          >
-            <BubbleIcon icon="category" color="#B3B7E0" /></button
-          >
-          <div class="space-y-16">
-            <p>
-              <strong>Integrierte Checks:</strong> Wichtige Checks und Arbeitshilfen
-              sind direkt in Ihren Arbeitsablauf früher eingebunden. Sie müssen Checklisten
-              und Arbeitshilfen (z.B. Digitalcheck) nicht mehr manuell abgleichen.
-            </p>
-            <button
-              type="button"
-              class="kern-btn kern-btn--secondary"
-              onclick={() => toggleHighlighted("geführter Prozess")}
-            >
-              <span
-                class="kern-icon kern-icon--arrow-forward"
-                aria-hidden="true"
-              ></span>
-              <span class="kern-label">
-                {isHighlighted("geführter Prozess")
-                  ? "alle zeigen"
-                  : "jetzt ansehen"}
-              </span>
-            </button>
-          </div>
-        </div>
-        <div class="flex items-start gap-24">
-          <button
-            type="button"
-            class="flex items-start"
-            title="Schritte hervorheben"
-            onclick={() => toggleHighlighted("Tools")}
-          >
-            <BubbleIcon icon="auto" color="#B3B7E0" />
-          </button>
-          <div class="space-y-16">
-            <p>
-              <strong>Formulierungshilfen:</strong> Formulierungshilfen sind gebündelt
-              und eingebunden, sodass Sie diese direkt nutzen können.
-            </p>
-            <button
-              type="button"
-              class="kern-btn kern-btn--secondary"
-              onclick={() => toggleHighlighted("Tools")}
-            >
-              <span
-                class="kern-icon kern-icon--arrow-forward"
-                aria-hidden="true"
-              ></span>
-              <span class="kern-label">
-                {isHighlighted("Tools") ? "alle zeigen" : "jetzt ansehen"}
-              </span>
-            </button>
-          </div>
-        </div>
-        <div class="flex items-start gap-24">
-          <button
-            type="button"
-            class="flex items-start"
-            title="Schritte hervorheben"
-            onclick={() => toggleHighlighted("geführter Prozess")}
-          >
-            <BubbleIcon icon="category" color="#B3B7E0" /></button
-          >
-          <div class="space-y-16">
-            <p>
-              <strong>Einfachere Beteiligung:</strong> Der Austausch mit der Praxis
-              wird gezielt gefördert. Mit digitaler Unterstützung können Sie Feedback
-              von externen Beteiligten unkompliziert einholen und einarbeiten.
-            </p>
-            <button
-              type="button"
-              class="kern-btn kern-btn--secondary"
-              onclick={() => toggleHighlighted("geführter Prozess")}
-            >
-              <span
-                class="kern-icon kern-icon--arrow-forward"
-                aria-hidden="true"
-              ></span>
-              <span class="kern-label">
-                {isHighlighted("geführter Prozess")
-                  ? "alle zeigen"
-                  : "jetzt ansehen"}
-              </span>
-            </button>
-          </div>
-        </div>
+        <Feature icon="category" tag="geführter Prozess">
+          <strong>Integrierte Checks:</strong> Wichtige Checks und Arbeitshilfen
+          sind direkt in Ihren Arbeitsablauf früher eingebunden. Sie müssen Checklisten
+          und Arbeitshilfen (z.B. Digitalcheck) nicht mehr manuell abgleichen.
+        </Feature>
+        <Feature icon="auto" tag="Tools">
+          <strong>Formulierungshilfen:</strong> Formulierungshilfen sind gebündelt
+          und eingebunden, sodass Sie diese direkt nutzen können.
+        </Feature>
+        <Feature icon="category" tag="geführter Prozess">
+          <strong>Einfachere Beteiligung:</strong> Der Austausch mit der Praxis
+          wird gezielt gefördert. Mit digitaler Unterstützung können Sie Feedback
+          von externen Beteiligten unkompliziert einholen und einarbeiten.
+        </Feature>
       </div>
       <h3>Wo sparen Sie Zeit?</h3>
       <p>
@@ -463,69 +307,17 @@
       </p>
       <h3>Was könnte sich in Ihrem Arbeitsablauf ändern?</h3>
       <div class="space-y-24">
-        <div class="flex items-start gap-24">
-          <button
-            type="button"
-            class="flex items-start"
-            title="Schritte hervorheben"
-            onclick={() => toggleHighlighted("geführter Prozess")}
-          >
-            <BubbleIcon icon="category" color="#B3B7E0" /></button
-          >
-          <div class="space-y-16">
-            <p>
-              <strong>Keine separate Dokumentation:</strong> Da das System Ihre Ergebnisse
-              aus den vorherigen Phasen bereits gebündelt hat, müssen Sie keine zusätzlichen
-              Prüfberichte mehr erstellen.
-            </p>
-            <button
-              type="button"
-              class="kern-btn kern-btn--secondary"
-              onclick={() => toggleHighlighted("geführter Prozess")}
-            >
-              <span
-                class="kern-icon kern-icon--arrow-forward"
-                aria-hidden="true"
-              ></span>
-              <span class="kern-label">
-                {isHighlighted("geführter Prozess")
-                  ? "alle zeigen"
-                  : "jetzt ansehen"}
-              </span>
-            </button>
-          </div>
-        </div>
-        <div class="flex items-start gap-24">
-          <button
-            type="button"
-            class="flex items-start"
-            title="Schritte hervorheben"
-            onclick={() => toggleHighlighted("Tools")}
-          >
-            <BubbleIcon icon="auto" color="#B3B7E0" />
-          </button>
-          <div class="space-y-16">
-            <p>
-              <strong>Einfache Absprache:</strong> Der Austausch mit externen Prüfstellen
-              wird gezielt erleichtert. Über ein standardisiertes Übergabeformat leiten
-              Sie alle relevanten Nachweise aus der Recherche- und Entwurfsphase unkompliziert
-              an den Nationalen Normenkontrollrat (NKR) weiter.
-            </p>
-            <button
-              type="button"
-              class="kern-btn kern-btn--secondary"
-              onclick={() => toggleHighlighted("Tools")}
-            >
-              <span
-                class="kern-icon kern-icon--arrow-forward"
-                aria-hidden="true"
-              ></span>
-              <span class="kern-label">
-                {isHighlighted("Tools") ? "alle zeigen" : "jetzt ansehen"}
-              </span>
-            </button>
-          </div>
-        </div>
+        <Feature icon="category" tag="geführter Prozess">
+          <strong>Keine separate Dokumentation:</strong> Da das System Ihre Ergebnisse
+          aus den vorherigen Phasen bereits gebündelt hat, müssen Sie keine zusätzlichen
+          Prüfberichte mehr erstellen.
+        </Feature>
+        <Feature icon="auto" tag="Tools">
+          <strong>Einfache Absprache:</strong> Der Austausch mit externen Prüfstellen
+          wird gezielt erleichtert. Über ein standardisiertes Übergabeformat leiten
+          Sie alle relevanten Nachweise aus der Recherche- und Entwurfsphase unkompliziert
+          an den Nationalen Normenkontrollrat (NKR) weiter.
+        </Feature>
       </div>
       <h3>Wo sparen Sie Zeit?</h3>
       <p>

@@ -7,4 +7,6 @@ export const BUBBLE_HIGHLIGHT_CONTEXT_NAME = Symbol("bubble-highlight");
 export interface BubbleHighlightContext {
   /** Tags that should currently be highlighted (matched against each Bubble's `tags` prop). */
   readonly highlighted: string[];
+  /** Highlights `tag` exclusively, or clears the highlight if it's already active. */
+  toggleHighlighted(tag: string): void;
 }

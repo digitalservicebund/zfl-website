@@ -7,11 +7,13 @@
     FLOW_SIDEBAR_STEP_PARAM,
     type FlowSidebarContent,
   } from "./_flowSidebar";
+  import { BUBBLE_HIGHLIGHT_CONTEXT_NAME } from "./_bubbleHighlight";
 
   let {
     orientation = "vertical",
     minimapFillRatio = 0.7,
     contentId = "flow-with-minimap-content",
+    highlighted = $bindable([]),
     children,
   }: {
     /** Direction the content scrolls/grows in. */
@@ -23,8 +25,32 @@
      */
     minimapFillRatio?: number;
     contentId?: string;
+    /**
+     * Tags of the bubbles to highlight (matched against each Bubble's
+     * `tags` prop). Owned here (rather than by the flow content itself) so
+     * the same highlight state is visible both to the flow content and to
+     * `_FlowSidebar.svelte`, which is rendered as a sibling of `children`
+     * and wouldn't otherwise share its component tree. Bindable so callers
+     * can control it externally.
+     */
+    highlighted?: string[];
     children: Snippet;
   } = $props();
+
+  // Exposed via context (rather than threaded through every `<Bubble>`/
+  // `<Feature>` usage) so any descendant - including sidebar content
+  // rendered through `_FlowSidebar.svelte` - can reactively read and toggle
+  // the current highlight list.
+  setContext(BUBBLE_HIGHLIGHT_CONTEXT_NAME, {
+    get highlighted() {
+      return highlighted;
+    },
+    toggleHighlighted,
+  });
+
+  function toggleHighlighted(tag: string) {
+    highlighted = highlighted.includes(tag) ? [] : [tag];
+  }
 
   const isVertical = $derived(orientation === "vertical");
 

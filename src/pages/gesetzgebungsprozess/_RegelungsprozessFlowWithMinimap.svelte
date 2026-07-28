@@ -52,9 +52,9 @@
   }
 </script>
 
-<FlowWithMinimap {orientation} {contentId}>
+<FlowWithMinimap {orientation} {contentId} bind:highlighted>
   {#snippet children()}
-    <RegelungsprozessFlow {orientation} bind:highlighted />
+    <RegelungsprozessFlow {orientation} />
   {/snippet}
 </FlowWithMinimap>
 
