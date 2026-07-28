@@ -121,7 +121,7 @@
         Anfang an eine fundierte Grundlage für Ihre weitere Arbeit.
       </p>
       <h3>Was könnte sich in Ihrem Arbeitsablauf ändern?</h3>
-      <div class="space-y-24">
+      <div class="mt-24 space-y-24">
         <Feature
           icon="category"
           tag="geführter Prozess"
@@ -226,7 +226,7 @@
         Anfang an praxistaugliche Regelungen.
       </p>
       <h3>Was könnte sich in Ihrem Arbeitsablauf ändern?</h3>
-      <div class="space-y-24">
+      <div class="mt-24 space-y-24">
         <Feature
           icon="category"
           tag="geführter Prozess"
@@ -304,7 +304,7 @@
         inhaltlichen Absprachen zu konzentrieren.
       </p>
       <h3>Was könnte sich in Ihrem Arbeitsablauf ändern?</h3>
-      <div class="space-y-24">
+      <div class="mt-24 space-y-24">
         <Feature
           icon="category"
           tag="geführter Prozess"

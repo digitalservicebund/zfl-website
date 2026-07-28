@@ -37,7 +37,7 @@
     {#if content}
       <div
         bind:this={scrollContainer}
-        class="scroll-shadow kern-body--small min-h-0 flex-1 overflow-y-auto px-40 pt-56 pb-24 [&>h2]:text-2xl [&>h2]:mt-32 [&>h3]:text-lg"
+        class="scroll-shadow kern-body--small min-h-0 flex-1 overflow-y-auto px-40 pt-56 pb-24 [&>h2]:kern-heading-medium [&>h2]:mt-32 [&_h3]:text-lg"
       >
         <div class="flex items-center justify-between gap-16 shrink-0">
           <p class="kern-label kern-label--small">{content.title}</p>
