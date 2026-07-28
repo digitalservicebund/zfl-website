@@ -33,35 +33,24 @@
     BUBBLE_HIGHLIGHT_CONTEXT_NAME,
   );
 
-  const isHighlighted = $derived(highlightContext.highlighted.includes(tag));
+  // const isHighlighted = $derived(highlightContext.highlighted.includes(tag));
 </script>
 
-<div class="flex items-start gap-24">
-  <button
-    type="button"
-    class="flex items-start rounded-full"
-    title="Schritte hervorheben"
-    onclick={() => highlightContext.toggleHighlighted(tag)}
-  >
-    <BubbleIcon {icon} {color} /></button
-  >
+<button
+  type="button"
+  class={`flex items-start gap-24 kern-btn kern-btn--secondary p-16`}
+  title="Schritte hervorheben"
+  onclick={() => highlightContext.toggleHighlighted(tag)}
+>
+  <div class="flex items-start rounded-full">
+    <BubbleIcon {icon} {color} />
+  </div>
   <div class="space-y-16">
-    <p>
+    <p class="text-left">
       {#if title}
         <strong>{title}: </strong>
       {/if}
       {@render children()}
     </p>
-    <button
-      type="button"
-      class="kern-btn kern-btn--secondary"
-      onclick={() => highlightContext.toggleHighlighted(tag)}
-    >
-      <span class="kern-icon kern-icon--arrow-forward" aria-hidden="true"
-      ></span>
-      <span class="kern-label">
-        {isHighlighted ? "alle zeigen" : "jetzt ansehen"}
-      </span>
-    </button>
   </div>
-</div>
+</button>
