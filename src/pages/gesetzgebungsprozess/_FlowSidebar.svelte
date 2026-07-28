@@ -25,11 +25,11 @@
     : undefined}
 >
   <div
-    class={`flex max-h-[50vh] lg:max-h-screen w-full max-w-full flex-col _rounded-md _shadow-lg pointer-events-auto overflow-y-auto ${content?.kind === "cluster" ? "lg:h-full" : "lg:h-full"} ${useBgColor && content?.color ? "bg-(--content-color)" : "bg-lavender-200"}`}
+    class={`flex max-h-[50vh] lg:max-h-screen w-full max-w-full flex-col _rounded-md _shadow-lg pointer-events-auto ${content?.kind === "cluster" ? "lg:h-full" : "lg:h-full"} ${useBgColor && content?.color ? "bg-(--content-color)" : "bg-lavender-200"}`}
   >
     {#if content}
       <div
-        class="flex items-center justify-between gap-16 p-24 border-l-5 border-(--content-color)"
+        class="flex items-center justify-between gap-16 p-24 border-l-5 border-(--content-color) shrink-0"
       >
         <h2 class="kern-heading-small">{content.title}</h2>
         <button
@@ -41,11 +41,13 @@
           ✕
         </button>
       </div>
-      <div class="kern-body--small flex-1 p-24 [&>h3]:text-lg">
+      <div
+        class="scroll-shadow kern-body--small min-h-0 flex-1 overflow-y-auto p-24 [&>h3]:text-lg"
+      >
         {@render content.children()}
       </div>
       {#if content.kind === "cluster" || content.kind === "bubble"}
-        <div class="flex justify-end gap-8 p-24">
+        <div class="flex shrink-0 justify-end gap-8 p-24 bg-lavender-200">
           <button
             type="button"
             class="kern-btn kern-btn--secondary"
@@ -69,3 +71,46 @@
     {/if}
   </div>
 </div>
+
+<style>
+  /* Pure-CSS "scroll shadow": shows a gradient at the top and/or bottom
+     edge, fading into the background color, only when there is more
+     content to scroll to in that direction. For each edge, a cover
+     gradient scrolls with the content (background-attachment: local) and
+     hides a shadow gradient pinned to the visible viewport
+     (background-attachment: scroll) once that edge is scrolled to.
+     No JS/scroll listeners needed.
+     Reference: https://css-tricks.com/books/greatest-css-tricks/scroll-shadows/
+  */
+  .scroll-shadow {
+    background:
+    /* Shadow Cover TOP */
+      linear-gradient(var(--color-lavender-200) 30%, rgba(255, 255, 255, 0))
+        center top,
+      /* Shadow Cover BOTTOM */
+      linear-gradient(rgba(255, 255, 255, 0), var(--color-lavender-200) 70%)
+        center bottom,
+      /* Shadow TOP */
+      radial-gradient(
+          farthest-side at 50% 0,
+          rgba(0, 0, 0, 0.2),
+          rgba(0, 0, 0, 0)
+        )
+        center top,
+      /* Shadow BOTTOM */
+      radial-gradient(
+          farthest-side at 50% 100%,
+          rgba(0, 0, 0, 0.2),
+          rgba(0, 0, 0, 0)
+        )
+        center bottom;
+
+    background-repeat: no-repeat;
+    background-size:
+      100% 40px,
+      100% 40px,
+      100% 14px,
+      100% 14px;
+    background-attachment: local, local, scroll, scroll;
+  }
+</style>
