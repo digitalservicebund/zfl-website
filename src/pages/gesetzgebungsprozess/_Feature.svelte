@@ -41,7 +41,7 @@
 <button
   type="button"
   data-feature-button
-  class={`flex items-start gap-24 kern-btn kern-btn--secondary p-16`}
+  class={`flex items-start gap-24 p-24 rounded-sm border border-(--content-color) hover:bg-(--content-color)/20 focus:bg-(--content-color)/20 focus:outline-2 focus:outline-(--content-color)`}
   title="Schritte hervorheben"
   onmouseenter={() =>
     !document.activeElement?.hasAttribute("data-feature-button") && enable()}
