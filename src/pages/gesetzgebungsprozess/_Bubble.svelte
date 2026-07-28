@@ -78,7 +78,7 @@
 >
   {#snippet bubble()}
     <div
-      class={`group/circle flex text-xs md:text-sm xl:text-base items-center justify-center rounded-full transition-[transform,filter,box-shadow,opacity] duration-200 ease-out ${children ? "hover:scale-105 group-focus-visible:scale-105 group-focus-visible:outline-2 group-focus-visible:outline-cosmic-blue-base" : ""} ${open ? "scale-105 ring-4 ring-cosmic-blue-base ring-offset-2" : ""} ${dimmed ? "grayscale-100 opacity-50" : ""}`}
+      class={`group/circle flex text-xs md:text-sm xl:text-base items-center justify-center rounded-full transition-[transform,filter,box-shadow,opacity] duration-200 ease-out ${children ? "hover:scale-105 group-focus-visible:scale-105 group-focus-visible:outline-2 group-focus-visible:outline-cosmic-blue-base" : ""} ${open ? "scale-105 ring-4 ring-cosmic-blue-base ring-offset-2" : ""} ${dimmed ? "opacity-50" : ""}`}
       style={`background-color: ${color ?? "var(--bubble-color)"}; width: ${sizeMap[size]}; height: ${sizeMap[size]}; anchor-name: ${anchorName};`}
     >
       <div class="text-center space-y-8 px-16">
