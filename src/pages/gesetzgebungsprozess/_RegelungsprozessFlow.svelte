@@ -32,6 +32,12 @@
     },
   });
 
+  const isHighlighted = (tag: string) => highlighted.includes(tag);
+
+  function toggleHighlighted(tag: string) {
+    highlighted = isHighlighted(tag) ? [] : [tag];
+  }
+
   const container = tv({
     base: "relative flex bg-white [--dark-bg:#F0F0F0]",
     variants: {
@@ -127,9 +133,9 @@
     ></Bubble>
   </Cluster>
 
-  <Arrow {orientation} color="#BCA6DC" highlightGroup="Interessensermittlung"
-    >Übergabe an das Fachreferat</Arrow
-  >
+  <Arrow {orientation} color="#BCA6DC" highlightGroup="Interessensermittlung">
+    Übergabe an das Fachreferat
+  </Arrow>
 
   <Cluster
     color="#BCA6DC"
@@ -153,18 +159,69 @@
         Dadurch schaffen Sie eine gute Grundlage für die weitere Arbeit.
       </p>
       <h3>Was ist neu?</h3>
-      <div class="grid grid-cols-[3rem_1fr] gap-16">
-        <BubbleIcon icon="category" color="#B3B7E0" />
-        <p>
-          <strong>Geführter Prozess:</strong> Ein digitales Werkzeug führt Sie Schritt
-          für Schritt durch den Prozess. Sie müssen Informationen nicht mehr in vielen
-          verschiedenen Dokumenten ausfüllen.
-        </p>
-        <BubbleIcon icon="auto" color="#B3B7E0" />
-        <p>
-          <strong>Tools:</strong> Künstliche Intelligenz unterstützt Sie bei der Recherche.
-          So finden und ordnen Sie wichtige Informationen deutlich schneller.
-        </p>
+      <div class="space-y-24">
+        <div class="flex items-start gap-24">
+          <button
+            type="button"
+            class="flex items-start"
+            title="Schritte hervorheben"
+            onclick={() => toggleHighlighted("geführter Prozess")}
+          >
+            <BubbleIcon icon="category" color="#B3B7E0" /></button
+          >
+          <div class="space-y-16">
+            <p>
+              <strong>Geführter Prozess:</strong> Ein digitales Werkzeug führt Sie
+              Schritt für Schritt durch den Prozess. Sie müssen Informationen nicht
+              mehr in vielen verschiedenen Dokumenten ausfüllen.
+            </p>
+            <button
+              type="button"
+              class="kern-btn kern-btn--secondary"
+              onclick={() => toggleHighlighted("geführter Prozess")}
+            >
+              <span
+                class="kern-icon kern-icon--arrow-forward"
+                aria-hidden="true"
+              ></span>
+              <span class="kern-label">
+                {isHighlighted("geführter Prozess")
+                  ? "alle zeigen"
+                  : "jetzt ansehen"}
+              </span>
+            </button>
+          </div>
+        </div>
+        <div class="flex items-start gap-24">
+          <button
+            type="button"
+            class="flex items-start"
+            title="Schritte hervorheben"
+            onclick={() => toggleHighlighted("Tools")}
+          >
+            <BubbleIcon icon="auto" color="#B3B7E0" />
+          </button>
+          <div class="space-y-16">
+            <p>
+              <strong>Tools:</strong> Künstliche Intelligenz unterstützt Sie bei der
+              Recherche. So finden und ordnen Sie wichtige Informationen deutlich
+              schneller.
+            </p>
+            <button
+              type="button"
+              class="kern-btn kern-btn--secondary"
+              onclick={() => toggleHighlighted("Tools")}
+            >
+              <span
+                class="kern-icon kern-icon--arrow-forward"
+                aria-hidden="true"
+              ></span>
+              <span class="kern-label">
+                {isHighlighted("Tools") ? "alle zeigen" : "jetzt ansehen"}
+              </span>
+            </button>
+          </div>
+        </div>
       </div>
       <!-- <h3>Welche Vorhaben sind geeignet?</h3> -->
       <!-- <p> -->
@@ -182,7 +239,7 @@
     <Bubble
       title="Gesetzes&shy;umfeld"
       size="sm"
-      tags={["Frühphase"]}
+      tags={["Frühphase", "geführter Prozess"]}
       icon="category"
     >
       <p>Wovon wird die Regelung beeinflusst?</p>
@@ -206,7 +263,7 @@
       title="Erarbeiten von Eckpunkten"
       optional
       size="md"
-      tags={["Frühphase"]}
+      tags={["Frühphase", "Tools"]}
       icon="auto"
     >
       Je nach Komplexität wird ein Eckpunktepapier verfasst oder nicht.
@@ -218,7 +275,7 @@
     <Bubble
       title="Material&shy;recherche"
       size="sm"
-      tags={["Frühphase"]}
+      tags={["Frühphase", "geführter Prozess"]}
       icon="category"
     >
       Recherchiert Daten, die relevant für das Gesetz sind sowie das
@@ -232,10 +289,15 @@
     <Bubble
       title="Ziel- und Wirkungs&shy;definition"
       size="md"
-      tags={["Frühphase"]}
+      tags={["Frühphase", "Tools"]}
       icon="auto"
     ></Bubble>
-    <Bubble title="Vorarbeit" size="sm" tags={["Frühphase"]} icon="auto">
+    <Bubble
+      title="Vorarbeit"
+      size="sm"
+      tags={["Frühphase", "Tools"]}
+      icon="auto"
+    >
       Zieht Arbeit aus anderen Fach-Referaten über das Gesetzesthema zusammen.
     </Bubble>
   </Cluster>
