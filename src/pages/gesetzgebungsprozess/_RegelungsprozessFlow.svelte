@@ -44,36 +44,24 @@
   ></div>
 
   <div
-    class={`hidden _flex items-center xl:gap-24 justify-center ${isVertical ? "pt-40" : "flex-col pl-40"}`}
+    class={`flex items-center xl:gap-24 justify-center ${isVertical ? "pt-lg" : "flex-col pl-40"}`}
   >
     <Bubble
       color="#E6E6E6"
       title="Initiative des Bundestages"
       className="max-lg:hidden"
-    >
-      {#snippet body()}
-        <p class="text-4xl font-bold">24&nbsp;%</p>
-      {/snippet}
-    </Bubble>
+    ></Bubble>
     <Cluster color="#D59FDE" {orientation} offset={0} fitContent>
-      <Bubble color="#D59FDE" title="Aus der Mitte der Regierung">
-        {#snippet body()}
-          <p class="text-4xl font-bold">60&nbsp;%</p>
-        {/snippet}
-      </Bubble>
+      <Bubble color="#D59FDE" title="Aus der Mitte der Regierung"></Bubble>
     </Cluster>
     <Bubble
       color="#E6E6E6"
       title="Initiative des Bundesrates"
       className="max-lg:hidden"
-    >
-      {#snippet body()}
-        <p class="text-4xl font-bold">16&nbsp;%</p>
-      {/snippet}
-    </Bubble>
+    ></Bubble>
   </div>
 
-  <Arrow {orientation} size={40} color="#D59FDE" className="hidden" />
+  <Arrow {orientation} size={40} color="#D59FDE" />
 
   <Cluster
     color="#BCA6DC"
@@ -81,7 +69,6 @@
     offset={0}
     anchorName={CLUSTER_FIRST_ANCHOR}
     title="Interessensermittlung"
-    className="pt-lg"
   >
     {#snippet sidebar()}
       <h2>Was passiert in der Phase der Interessenvermittlung?</h2>
@@ -135,15 +122,18 @@
       </p>
       <h3>Was könnte sich in Ihrem Arbeitsablauf ändern?</h3>
       <div class="space-y-24">
-        <Feature icon="category" tag="geführter Prozess" title="Geführter Prozess">
-          Ein digitales Werkzeug führt Sie
-          Schritt für Schritt durch den Prozess. Sie müssen Informationen nicht
-          mehr in vielen verschiedenen Dokumenten ausfüllen.
+        <Feature
+          icon="category"
+          tag="geführter Prozess"
+          title="Geführter Prozess"
+        >
+          Ein digitales Werkzeug führt Sie Schritt für Schritt durch den
+          Prozess. Sie müssen Informationen nicht mehr in vielen verschiedenen
+          Dokumenten ausfüllen.
         </Feature>
         <Feature icon="auto" tag="Tools" title="Tools">
-          Künstliche Intelligenz unterstützt Sie bei der
-          Recherche. So finden und ordnen Sie wichtige Informationen deutlich
-          schneller.
+          Künstliche Intelligenz unterstützt Sie bei der Recherche. So finden
+          und ordnen Sie wichtige Informationen deutlich schneller.
         </Feature>
       </div>
       <h3>Für welche Vorhaben ist es geeignet?</h3>
@@ -237,19 +227,27 @@
       </p>
       <h3>Was könnte sich in Ihrem Arbeitsablauf ändern?</h3>
       <div class="space-y-24">
-        <Feature icon="category" tag="geführter Prozess" title="Integrierte Checks">
-          Wichtige Checks und Arbeitshilfen
-          sind direkt in Ihren Arbeitsablauf früher eingebunden. Sie müssen Checklisten
-          und Arbeitshilfen (z.B. Digitalcheck) nicht mehr manuell abgleichen.
+        <Feature
+          icon="category"
+          tag="geführter Prozess"
+          title="Integrierte Checks"
+        >
+          Wichtige Checks und Arbeitshilfen sind direkt in Ihren Arbeitsablauf
+          früher eingebunden. Sie müssen Checklisten und Arbeitshilfen (z.B.
+          Digitalcheck) nicht mehr manuell abgleichen.
         </Feature>
         <Feature icon="auto" tag="Tools" title="Formulierungshilfen">
-          Formulierungshilfen sind gebündelt
-          und eingebunden, sodass Sie diese direkt nutzen können.
+          Formulierungshilfen sind gebündelt und eingebunden, sodass Sie diese
+          direkt nutzen können.
         </Feature>
-        <Feature icon="category" tag="geführter Prozess" title="Einfachere Beteiligung">
-          Der Austausch mit der Praxis
-          wird gezielt gefördert. Mit digitaler Unterstützung können Sie Feedback
-          von externen Beteiligten unkompliziert einholen und einarbeiten.
+        <Feature
+          icon="category"
+          tag="geführter Prozess"
+          title="Einfachere Beteiligung"
+        >
+          Der Austausch mit der Praxis wird gezielt gefördert. Mit digitaler
+          Unterstützung können Sie Feedback von externen Beteiligten
+          unkompliziert einholen und einarbeiten.
         </Feature>
       </div>
       <h3>Wo sparen Sie Zeit?</h3>
@@ -307,16 +305,20 @@
       </p>
       <h3>Was könnte sich in Ihrem Arbeitsablauf ändern?</h3>
       <div class="space-y-24">
-        <Feature icon="category" tag="geführter Prozess" title="Keine separate Dokumentation">
-          Da das System Ihre Ergebnisse
-          aus den vorherigen Phasen bereits gebündelt hat, müssen Sie keine zusätzlichen
-          Prüfberichte mehr erstellen.
+        <Feature
+          icon="category"
+          tag="geführter Prozess"
+          title="Keine separate Dokumentation"
+        >
+          Da das System Ihre Ergebnisse aus den vorherigen Phasen bereits
+          gebündelt hat, müssen Sie keine zusätzlichen Prüfberichte mehr
+          erstellen.
         </Feature>
         <Feature icon="auto" tag="Tools" title="Einfache Absprache">
-          Der Austausch mit externen Prüfstellen
-          wird gezielt erleichtert. Über ein standardisiertes Übergabeformat leiten
-          Sie alle relevanten Nachweise aus der Recherche- und Entwurfsphase unkompliziert
-          an den Nationalen Normenkontrollrat (NKR) weiter.
+          Der Austausch mit externen Prüfstellen wird gezielt erleichtert. Über
+          ein standardisiertes Übergabeformat leiten Sie alle relevanten
+          Nachweise aus der Recherche- und Entwurfsphase unkompliziert an den
+          Nationalen Normenkontrollrat (NKR) weiter.
         </Feature>
       </div>
       <h3>Wo sparen Sie Zeit?</h3>
