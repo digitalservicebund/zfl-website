@@ -36,26 +36,26 @@
   >
     {#if content}
       <div
-        class="flex items-center justify-between gap-16 p-24 border-l-5 border-(--content-color) shrink-0"
-      >
-        <h2 class="kern-heading-small">{content.title}</h2>
-        <button
-          type="button"
-          class="lg:hidden shrink-0 rounded-sm border border-cosmic-blue-base p-8 text-cosmic-blue-base"
-          onclick={onClose}
-          aria-label="Seitenleiste schließen"
-        >
-          ✕
-        </button>
-      </div>
-      <div
         bind:this={scrollContainer}
-        class="scroll-shadow kern-body--small min-h-0 flex-1 overflow-y-auto p-24 [&>h3]:text-lg"
+        class="scroll-shadow kern-body--small min-h-0 flex-1 overflow-y-auto px-40 pt-56 pb-24 [&>h2]:text-2xl [&>h2]:mt-32 [&>h3]:text-lg"
       >
+        <div class="flex items-center justify-between gap-16 shrink-0">
+          <p class="kern-label kern-label--small">{content.title}</p>
+          <button
+            type="button"
+            class="lg:hidden shrink-0 rounded-sm border border-cosmic-blue-base p-8 text-cosmic-blue-base"
+            onclick={onClose}
+            aria-label="Seitenleiste schließen"
+          >
+            ✕
+          </button>
+        </div>
         {@render content.children()}
       </div>
       {#if content.kind === "cluster" || content.kind === "bubble"}
-        <div class="flex shrink-0 justify-end gap-8 p-24 bg-lavender-200">
+        <div
+          class="flex shrink-0 justify-end gap-8 px-40 py-24 bg-lavender-200"
+        >
           <button
             type="button"
             class="kern-btn kern-btn--secondary"
@@ -72,10 +72,6 @@
           </button>
         </div>
       {/if}
-    {:else}
-      <div class="kern-body--small p-24 text-cosmic-blue-base/60">
-        Wähle einen Schritt aus, um Details anzuzeigen.
-      </div>
     {/if}
   </div>
 </div>
