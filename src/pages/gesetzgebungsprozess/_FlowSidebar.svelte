@@ -3,13 +3,30 @@
 
   let {
     content,
+    isFirst = false,
+    isLast = false,
     onClose,
     onNavigate,
   }: {
     content: FlowSidebarContent | null;
+    /** Whether `content` is the first cluster - hides the "Zurück" button. */
+    isFirst?: boolean;
+    /**
+     * Whether `content` is the last cluster - "Weiter" then scrolls to the
+     * page's outro section instead of cycling back to the first cluster.
+     */
+    isLast?: boolean;
     onClose: () => void;
     onNavigate: (step: -1 | 1) => void;
   } = $props();
+
+  function handleWeiterClick() {
+    if (isLast) {
+      document.getElementById("outro")?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      onNavigate(1);
+    }
+  }
 
   let scrollContainer: HTMLDivElement | undefined = $state();
 
@@ -73,17 +90,19 @@
           <div
             class="flex shrink-0 justify-end gap-8 px-40 pt-24 pb-40 bg-lavender-200"
           >
-            <button
-              type="button"
-              class="kern-btn kern-btn--secondary"
-              onclick={() => onNavigate(-1)}
-            >
-              <span class="kern-label">Zurück</span>
-            </button>
+            {#if !isFirst}
+              <button
+                type="button"
+                class="kern-btn kern-btn--secondary"
+                onclick={() => onNavigate(-1)}
+              >
+                <span class="kern-label">Zurück</span>
+              </button>
+            {/if}
             <button
               type="button"
               class="kern-btn kern-btn--primary"
-              onclick={() => onNavigate(1)}
+              onclick={handleWeiterClick}
             >
               <span class="kern-label">Weiter</span>
             </button>

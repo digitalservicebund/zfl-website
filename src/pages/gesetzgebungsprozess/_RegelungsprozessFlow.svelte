@@ -4,7 +4,8 @@
   import Cluster from "./_Cluster.svelte";
   import Arrow from "./_Arrow.svelte";
   import Feature from "./_Feature.svelte";
-  import ScrollHint from "./_ScrollHint.svelte";
+  import OutTrigger from "./_OutTrigger.svelte";
+  import IconArrowDown from "~icons/ic/round-keyboard-double-arrow-down";
 
   let {
     orientation = "vertical",
@@ -38,7 +39,14 @@
 </script>
 
 <div class={container({ orientation })}>
-  <ScrollHint />
+  <OutTrigger>
+    <div
+      class={`py-lg mx-auto max-w-200 flex flex-col items-center gap-8 text-icon-muted`}
+    >
+      Scrollen Sie zum Starten
+      <IconArrowDown class="block" />
+    </div>
+  </OutTrigger>
 
   <div
     aria-hidden="true"
@@ -573,7 +581,7 @@
   <Cluster
     color="#FAB5A8"
     {orientation}
-    className={`bg-(--contrast-bg) ${isVertical ? "pb-80" : "pr-40"}`}
+    className={`bg-(--contrast-bg) ${isVertical ? "pb-[30vh]" : "pr-40"}`}
     highlightGroup="Nach der Verkündung"
   >
     <Bubble title="Vollzug">
@@ -584,4 +592,6 @@
       </ul>
     </Bubble>
   </Cluster>
+
+  <OutTrigger />
 </div>

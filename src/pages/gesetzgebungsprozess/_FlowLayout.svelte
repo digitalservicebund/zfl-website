@@ -151,6 +151,17 @@
     clusterIds.map((id) => ({ id, color: registry[id]?.color })),
   );
 
+  // Only clusters (not bubbles) get first/last treatment in
+  // `_FlowSidebar.svelte`'s "Zurück"/"Weiter" nav - bubbles keep cycling.
+  const isFirstCluster = $derived(
+    sidebarContent?.kind === "cluster" &&
+      sidebarContent.id === clusterIds[0],
+  );
+  const isLastCluster = $derived(
+    sidebarContent?.kind === "cluster" &&
+      sidebarContent.id === clusterIds[clusterIds.length - 1],
+  );
+
   function onDotSelect(id: string) {
     setActive(id);
     const el = document.getElementById(id);
@@ -286,6 +297,8 @@
 
   <FlowSidebar
     content={sidebarContent}
+    isFirst={isFirstCluster}
+    isLast={isLastCluster}
     onClose={closeSidebar}
     onNavigate={navigateStep}
   />

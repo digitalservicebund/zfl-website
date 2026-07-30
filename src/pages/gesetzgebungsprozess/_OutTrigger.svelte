@@ -1,10 +1,11 @@
 <script lang="ts">
-  import { getContext } from "svelte";
-  import IconArrowDown from "~icons/ic/round-keyboard-double-arrow-down";
+  import { getContext, type Snippet } from "svelte";
   import {
     FLOW_SIDEBAR_CONTEXT_NAME,
     type FlowSidebarContext,
   } from "./_flowSidebar";
+
+  let { children }: { children?: Snippet } = $props();
 
   const sidebarContext = getContext<FlowSidebarContext | undefined>(
     FLOW_SIDEBAR_CONTEXT_NAME,
@@ -21,7 +22,7 @@
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !sidebarContext?.isJumping) {
+        if (entry.isIntersecting) {
           sidebarContext?.close();
         }
       },
@@ -32,14 +33,12 @@
     return () => observer.disconnect();
   });
 
-  const isActive = $derived(!!sidebarContext?.activeId);
+  const hasActive = $derived(!!sidebarContext?.activeId);
 </script>
 
-<div bind:this={rootEl}>
-  <div
-    class={`py-lg mx-auto max-w-200 flex flex-col items-center gap-8 text-icon-muted transition-opacity duration-500 ${isActive ? "opacity-0" : "opacity-100"}`}
-  >
-    Scrollen Sie zum Starten
-    <IconArrowDown class="block" />
-  </div>
+<div
+  bind:this={rootEl}
+  class={`transition-opacity duration-500 ${hasActive ? "opacity-0" : "opacity-100"} w-full min-h-10`}
+>
+  {@render children?.()}
 </div>

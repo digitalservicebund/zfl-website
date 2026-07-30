@@ -1,7 +1,10 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
+import InfoPanel from "@/components/InfoPanel.astro";
 import RegelungsprozessFlowWithLayout from "./_RegelungsprozessFlowWithLayout.svelte";
+import { ZFL_EMAIL } from "@/config/constants";
+import { kontakt } from "@/config/routes";
 
 export const frontmatter = {
   title: "Wie gelingt eine praxistaugliche und bürgerfreundliche Gesetzgebung?",
@@ -31,5 +34,30 @@ export const frontmatter = {
     </Hero>
 
     <RegelungsprozessFlowWithLayout client:load />
+
+    <section class="breakout-grid" id="outro">
+      <InfoPanel look="lightLavender" padding="wide">
+        <h2>Machen Sie mit!</h2>
+        <p>
+          Wenn Sie Interesse haben, die Frühphase mitzugestalten, dann melden
+          Sie sich gerne zu Tests und Gesprächen an. Schicken Sie uns eine
+          E-Mail an <a class="font-bold" href={ZFL_EMAIL.url}
+            >{ZFL_EMAIL.display}</a
+          >.
+        </p>
+        <p>
+          Wenn Sie an einem Vorhaben arbeiten, können Sie auch unsere Angebote
+          nutzen.
+        </p>
+        <div class="mt-24 flex gap-8">
+          <a href={kontakt.path} class="kern-btn kern-btn--primary"
+            ><span class="kern-label">Zu den ZFL-Angeboten</span></a
+          >
+          <a href="#" class="kern-btn kern-btn--secondary"
+            ><span class="kern-label">Zurück</span></a
+          >
+        </div>
+      </InfoPanel>
+    </section>
   </main>
 </Layout>
