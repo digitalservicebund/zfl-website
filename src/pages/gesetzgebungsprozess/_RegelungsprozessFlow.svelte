@@ -205,13 +205,6 @@
       Recherchiert Daten, die relevant für das Gesetz sind sowie das
       Gesetzesumfeld.
     </Bubble>
-    <Bubble size="xs" color="#000000" shape="rhomb">
-      {#snippet body()}
-        <div class="flex items-center text-white">
-          <IconOffering class="w-32 h-32" />
-        </div>
-      {/snippet}
-    </Bubble>
     <Bubble
       title="Workshops mit Ländern und Kommunen"
       optional
@@ -230,13 +223,6 @@
       icon="auto"
     >
       Zieht Arbeit aus anderen Fach-Referaten über das Gesetzesthema zusammen.
-    </Bubble>
-    <Bubble size="xs" color="#000000" shape="rhomb">
-      {#snippet body()}
-        <div class="flex items-center text-white">
-          <IconOffering class="w-32 h-32" />
-        </div>
-      {/snippet}
     </Bubble>
   </Cluster>
 
