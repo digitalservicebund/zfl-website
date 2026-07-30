@@ -12,10 +12,10 @@
 </script>
 
 <nav
-  class="pointer-events-auto flex w-100 flex-col items-center gap-24 rounded-md"
+  class="pointer-events-auto flex px-24 flex-col items-center gap-24 rounded-md"
   aria-label="Phasen-Navigation"
 >
-  <p class="text-sm text-icon-muted my-0" aria-hidden="true">Phasen</p>
+  <p class="hidden text-sm text-icon-muted my-0" aria-hidden="true">Phasen</p>
   {#each clusters as cluster (cluster.id)}
     <button
       type="button"
