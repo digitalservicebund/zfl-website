@@ -267,7 +267,7 @@
     {#if title}
       <div class={titleWrapper({ orientation })}>
         <div
-          class={`size-28 border-2 border-white rounded-full ${isActive ? "bg-(--bubble-color) outline-2 outline-black" : "bg-black"}`}
+          class={`size-28 border-2 border-white rounded-full transition-colors duration-300 outline-2 ${isActive ? "bg-(--bubble-color) outline-black" : "bg-black outline-transparent"}`}
           aria-hidden="true"
           style={anchorName ? `anchor-name: ${anchorName};` : undefined}
         ></div>

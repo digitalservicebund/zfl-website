@@ -12,7 +12,7 @@
 </script>
 
 <nav
-  class="pointer-events-auto flex px-24 flex-col items-center gap-24 rounded-md"
+  class={`flex px-24 flex-col items-center gap-24 rounded-md transition-opacity duration-500 ${activeId ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
   aria-label="Phasen-Navigation"
 >
   <p class="hidden text-sm text-icon-muted my-0" aria-hidden="true">Phasen</p>

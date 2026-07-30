@@ -99,7 +99,7 @@
           >
             {title}
             {#if optional}
-              <span class="font-normal text-sm"> (optional)</span>
+              <span class="block font-normal text-sm"> (optional)</span>
             {/if}
           </div>
         {/if}

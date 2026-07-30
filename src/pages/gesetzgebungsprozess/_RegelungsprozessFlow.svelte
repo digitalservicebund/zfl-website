@@ -4,7 +4,7 @@
   import Cluster from "./_Cluster.svelte";
   import Arrow from "./_Arrow.svelte";
   import Feature from "./_Feature.svelte";
-  import IconArrowDown from "~icons/ic/round-keyboard-double-arrow-down";
+  import ScrollHint from "./_ScrollHint.svelte";
 
   let {
     orientation = "vertical",
@@ -38,14 +38,7 @@
 </script>
 
 <div class={container({ orientation })}>
-  <div>
-    <div
-      class="py-lg mx-auto max-w-200 flex flex-col items-center gap-8 text-icon-muted"
-    >
-      Scrollen Sie zum Starten
-      <IconArrowDown class="block" />
-    </div>
-  </div>
+  <ScrollHint />
 
   <div
     aria-hidden="true"
@@ -421,7 +414,7 @@
       </p>
     {/snippet}
 
-    <Bubble title="Kabinett&shy;vorlage erstellen" size="sm">
+    <Bubble title="Kabinett&shy;vorlage erstellen" size="md">
       Die Kabinettvorlage beinhaltet neben dem Ressortentwurf weitere Dokumente,
       die benötigt werden um das Gesetz im Kabinett zu behandeln (Sprechzettel,
       Anschreiben, NKR Stellungnahme, Beteiligungen ...); geregelt durch GGO* §

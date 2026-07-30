@@ -36,18 +36,18 @@
      (tall) height, the panel's containing block collapses to the wrapper's
      own shrink-to-fit `h-screen` height, leaving it no room to stick. -->
 <div
-  class="self-stretch overflow-x-clip w-screen lg:w-[calc(100vw-var(--cluster-inner-width))]"
+  class={`self-stretch overflow-x-clip transition-[width] duration-500 ${isOpen || true ? "w-screen lg:w-[calc(100vw-var(--cluster-inner-width))]" : "w-0"}`}
 >
   <!-- Sticky (not fixed) so it stays visible while scrolling the flow, but
        never escapes the bounds of its containing `_FlowLayout.svelte`
        grid column. Always rendered - shows a placeholder until a bubble or
        cluster is clicked. -->
   <div
-    class={`sticky top-0 z-50 h-screen w-screen lg:w-[calc(100vw-var(--cluster-inner-width))] flex items-end lg:items-center pointer-events-none transition-transform duration-300 ease-out ${isOpen ? "" : "translate-x-full"}`}
+    class={`sticky top-0 z-50 h-screen w-screen lg:w-[calc(100vw-var(--cluster-inner-width))] flex items-end lg:items-center pointer-events-none transition-transform duration-500 ease-out ${isOpen ? "" : "translate-x-full"}`}
     style={content?.color ? `--content-color: ${content.color}` : undefined}
   >
     <div
-      class="flex max-h-[50vh] lg:max-h-screen w-full max-w-full flex-col _rounded-md _shadow-lg pointer-events-auto lg:h-full bg-lavender-200"
+      class="flex max-h-[50vh] lg:max-h-screen w-full max-w-full flex-col pointer-events-auto lg:h-full bg-lavender-200"
     >
       {#if content}
         <div
@@ -55,7 +55,9 @@
           class="scroll-shadow kern-body--small min-h-0 flex-1 overflow-y-auto px-40 pt-56 pb-24 [&>h2]:kern-heading-medium [&>h2]:mt-32 [&_h3]:text-lg"
         >
           <div class="flex items-center justify-between gap-16 shrink-0">
-            <p class="kern-label kern-label--small">{content.title}</p>
+            <p class="kern-label kern-label--small">
+              {content.title}
+            </p>
             <button
               type="button"
               class="lg:hidden shrink-0 rounded-sm border border-cosmic-blue-base p-8 text-cosmic-blue-base"
