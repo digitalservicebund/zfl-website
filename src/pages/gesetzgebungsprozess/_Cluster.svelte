@@ -264,22 +264,11 @@
           aria-hidden="true"
           style={anchorName ? `anchor-name: ${anchorName};` : undefined}
         ></div>
-        <h2 id={title} class="scroll-mt-40 my-0!">
-          {#if interactive}
-            <button
-              type="button"
-              class="kern-heading-small bg-black text-white px-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cosmic-blue-base"
-              aria-expanded={isActive}
-              onclick={() => setActive(title)}
-              tabIndex={-1}
-            >
-              {title}
-            </button>
-          {:else}
-            <span class="kern-heading-small bg-black text-white px-4">
-              {title}
-            </span>
-          {/if}
+        <h2
+          id={title}
+          class="kern-heading-small scroll-mt-40 my-0! bg-black text-white px-4"
+        >
+          {title}
         </h2>
       </div>
     {/if}
