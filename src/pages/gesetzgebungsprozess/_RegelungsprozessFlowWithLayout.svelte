@@ -1,5 +1,5 @@
 <script lang="ts">
-  import FlowWithMinimap from "./_FlowWithMinimap.svelte";
+  import FlowLayout from "./_FlowLayout.svelte";
   import RegelungsprozessFlow from "./_RegelungsprozessFlow.svelte";
 
   const contentId = "regelungsprozess-flow-content";
@@ -52,9 +52,9 @@
   }
 </script>
 
-<FlowWithMinimap {orientation} {contentId} bind:highlighted>
+<FlowLayout {orientation} {contentId} bind:highlighted>
   <RegelungsprozessFlow {orientation} />
-</FlowWithMinimap>
+</FlowLayout>
 
 <section class="breakout-grid hidden">
   <h2>Test-Funktionen</h2>

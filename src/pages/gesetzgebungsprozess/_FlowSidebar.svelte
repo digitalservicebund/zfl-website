@@ -39,7 +39,7 @@
   class="self-stretch overflow-x-clip w-screen lg:w-[calc(100vw-var(--cluster-inner-width))]"
 >
   <!-- Sticky (not fixed) so it stays visible while scrolling the flow, but
-       never escapes the bounds of its containing `_FlowWithMinimap.svelte`
+       never escapes the bounds of its containing `_FlowLayout.svelte`
        grid column. Always rendered - shows a placeholder until a bubble or
        cluster is clicked. -->
   <div

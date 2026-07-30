@@ -36,7 +36,7 @@
 </div>
 
 <style>
-  /* The minimap in `_FlowWithMinimap.svelte` renders a second, `inert`
+  /* The minimap in `_FlowLayout.svelte` renders a second, `inert`
      clone of the whole flow purely to visualize it at a smaller scale.
      That clone's tooltips are anchor-positioned via `position: fixed`,
      which escapes the clone's scale transform and would otherwise render

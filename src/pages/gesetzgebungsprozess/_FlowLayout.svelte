@@ -1,0 +1,292 @@
+<script lang="ts">
+  import { setContext } from "svelte";
+  import type { Snippet } from "svelte";
+  import FlowSidebar from "./_FlowSidebar.svelte";
+  import DotNav from "./_DotNav.svelte";
+  import {
+    FLOW_SIDEBAR_CONTEXT_NAME,
+    FLOW_SIDEBAR_STEP_PARAM,
+    type FlowSidebarContent,
+  } from "./_flowSidebar";
+  import { BUBBLE_HIGHLIGHT_CONTEXT_NAME } from "./_bubbleHighlight";
+
+  let {
+    orientation = "vertical",
+    contentId = "flow-with-minimap-content",
+    highlighted = $bindable([]),
+    children,
+  }: {
+    /** Direction the content scrolls/grows in. */
+    orientation?: "vertical" | "horizontal";
+    contentId?: string;
+    /**
+     * Tags of the bubbles to highlight (matched against each Bubble's
+     * `tags` prop). Owned here (rather than by the flow content itself) so
+     * the same highlight state is visible both to the flow content and to
+     * `_FlowSidebar.svelte`, which is rendered as a sibling of `children`
+     * and wouldn't otherwise share its component tree. Bindable so callers
+     * can control it externally.
+     */
+    highlighted?: string[];
+    children: Snippet;
+  } = $props();
+
+  // Exposed via context (rather than threaded through every `<Bubble>`/
+  // `<Feature>` usage) so any descendant - including sidebar content
+  // rendered through `_FlowSidebar.svelte` - can reactively read and toggle
+  // the current highlight list.
+  setContext(BUBBLE_HIGHLIGHT_CONTEXT_NAME, {
+    get highlighted() {
+      return highlighted;
+    },
+    toggleHighlighted,
+    setHighlighted,
+  });
+
+  function toggleHighlighted(tag: string) {
+    highlighted = highlighted.includes(tag) ? [] : [tag];
+  }
+  function setHighlighted(tag: string | null) {
+    highlighted = tag ? [tag] : [];
+  }
+
+  const isVertical = $derived(orientation === "vertical");
+
+  // Every bubble/cluster registers its content here as soon as it mounts
+  // (regardless of whether it's ever clicked), so the sidebar can show a
+  // step straight from a shared `?step=` link or via the browser
+  // back/forward buttons.
+  let registry = $state<Record<string, FlowSidebarContent>>({});
+  let activeId = $state<string | null>(null);
+
+  const sidebarContent = $derived(
+    activeId ? (registry[activeId] ?? null) : null,
+  );
+
+  function register(entry: FlowSidebarContent) {
+    registry[entry.id] = entry;
+  }
+
+  function unregister(id: string) {
+    delete registry[id];
+  }
+
+  function readStepFromUrl(): string | null {
+    return new URLSearchParams(location.search).get(FLOW_SIDEBAR_STEP_PARAM);
+  }
+
+  // Pushes a new history entry reflecting the current `activeId`, so the
+  // sidebar state is shareable via URL and the back/forward buttons step
+  // through opened/closed bubbles.
+  function syncUrl() {
+    return; // disabled for now
+    // const url = new URL(location.href);
+    // if (activeId) {
+    //   url.searchParams.set(FLOW_SIDEBAR_STEP_PARAM, activeId);
+    // } else {
+    //   url.searchParams.delete(FLOW_SIDEBAR_STEP_PARAM);
+    // }
+    // history.pushState(history.state, "", url);
+  }
+
+  // Content for `id` is expected to already be in the registry - every
+  // Bubble/Cluster registers itself as soon as it mounts, well before it can
+  // be clicked.
+  function toggle(id: string) {
+    activeId = activeId === id ? null : id;
+    syncUrl();
+  }
+
+  function setActive(id: string) {
+    activeId = id;
+    syncUrl();
+  }
+
+  // Marks the flow as "auto-scrolling" while `navigateStep`'s
+  // `scrollIntoView` animation is in flight, so `_Cluster.svelte`'s
+  // IntersectionObserver-driven `setActive` (triggered as clusters pass the
+  // viewport's midline during the smooth scroll) doesn't fight with the
+  // step explicitly requested here.
+  let jumping = $state(false);
+  let jumpingTimeout: ReturnType<typeof setTimeout> | undefined;
+
+  function startJump() {
+    jumping = true;
+    clearTimeout(jumpingTimeout);
+    // Safety net in case `scrollend` never fires (e.g. unsupported browser,
+    // or no actual scroll movement needed).
+    jumpingTimeout = setTimeout(() => {
+      jumping = false;
+    }, 1000);
+  }
+
+  function endJump() {
+    jumping = false;
+    clearTimeout(jumpingTimeout);
+  }
+
+  function closeSidebar() {
+    activeId = null;
+    syncUrl();
+  }
+
+  // Ids of all currently registered Cluster/Bubble steps, in registration
+  // order (which follows page/DOM order), used to cycle "Zurück"/"Weiter"
+  // through steps of the same kind as the currently open one - Clusters and
+  // Bubbles each cycle through their own sequence, never mixed together.
+  const clusterIds = $derived(
+    Object.values(registry)
+      .filter((entry) => entry.kind === "cluster")
+      .map((entry) => entry.id),
+  );
+  const bubbleIds = $derived(
+    Object.values(registry)
+      .filter((entry) => entry.kind === "bubble")
+      .map((entry) => entry.id),
+  );
+
+  // Cluster dots shown in `_DotNav.svelte`, in the same registration order
+  // as `clusterIds`.
+  const clusterDots = $derived(
+    clusterIds.map((id) => ({ id, color: registry[id]?.color })),
+  );
+
+  function onDotSelect(id: string) {
+    setActive(id);
+    const el = document.getElementById(id);
+    if (el) {
+      startJump();
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+    syncUrl();
+  }
+
+  function navigateStep(step: -1 | 1) {
+    if (!sidebarContent) return;
+
+    const ids =
+      sidebarContent.kind === "cluster"
+        ? clusterIds
+        : sidebarContent.kind === "bubble"
+          ? bubbleIds
+          : [];
+    if (ids.length === 0) return;
+
+    const currentIndex = ids.indexOf(sidebarContent.id);
+    if (currentIndex === -1) return;
+
+    const nextIndex = (currentIndex + step + ids.length) % ids.length;
+    const nextId = ids[nextIndex];
+    const nextContent = registry[nextId];
+    if (!nextContent) return;
+
+    activeId = nextContent.id;
+    const activeEl = document.getElementById(nextContent.id);
+    if (activeEl) {
+      startJump();
+      activeEl.scrollIntoView({ behavior: "smooth" });
+    }
+    syncUrl();
+  }
+
+  // let initialActiveIdSet = false;
+
+  // Opens straight from a shared link on first render, falling back to the
+  // first registered cluster step when there's no `?step=` param, so the
+  // sidebar always shows some content on load instead of the "Wähle einen
+  // Schritt aus" placeholder. Re-runs (tracking `clusterIds`) until at least
+  // one cluster has registered, then never touches `activeId` again on its
+  // own - subsequent changes only come from `toggle`/`popstate`.
+  // $effect(() => {
+  //   if (initialActiveIdSet) return;
+  //
+  //   const stepFromUrl = readStepFromUrl();
+  //   if (stepFromUrl) {
+  //     activeId = stepFromUrl;
+  //     initialActiveIdSet = true;
+  //     return;
+  //   }
+  //
+  //   if (clusterIds.length > 0) {
+  //     activeId = clusterIds[0];
+  //     initialActiveIdSet = true;
+  //   }
+  // });
+
+  $effect(() => {
+    function onPopState() {
+      activeId = readStepFromUrl();
+    }
+
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  });
+
+  // Clears the `jumping` flag once the auto-scroll triggered by
+  // `navigateStep` actually finishes, listening on whichever target scrolls
+  // for the current orientation (the window when vertical, `mainEl` itself
+  // when horizontal).
+  $effect(() => {
+    window.addEventListener("scrollend", endJump);
+    mainEl?.addEventListener("scrollend", endJump);
+
+    return () => {
+      window.removeEventListener("scrollend", endJump);
+      mainEl?.removeEventListener("scrollend", endJump);
+    };
+  });
+
+  setContext(FLOW_SIDEBAR_CONTEXT_NAME, {
+    get activeId() {
+      return activeId;
+    },
+    get isJumping() {
+      return jumping;
+    },
+    register,
+    unregister,
+    toggle,
+    setActive,
+    close: closeSidebar,
+  });
+
+  let mainEl: HTMLDivElement | undefined = $state();
+</script>
+
+<div
+  class="grid items-start grid-cols-[1fr_auto] [--cluster-inner-width:100vw] lg:[--cluster-inner-width:66vw]"
+>
+  <div
+    class={`grid min-w-0 ${isVertical ? "mx-auto w-(--cluster-inner-width)" : ""}`}
+  >
+    <div
+      class={`sticky flex items-center z-50 col-start-1 row-start-1 pointer-events-none ${
+        isVertical
+          ? "w-screen lg:w-fit top-0 h-screen justify-end lg:justify-end"
+          : "w-[50vw] bottom-20 self-end justify-self-start justidfy-center"
+      }`}
+    >
+      <DotNav clusters={clusterDots} {activeId} onSelect={onDotSelect} />
+    </div>
+    <div
+      id={contentId}
+      bind:this={mainEl}
+      class={`col-start-1 row-start-1 min-w-0 max-w-screen ${isVertical ? "" : "w-screen overflow-x-auto scrollbar-none"}`}
+    >
+      <!-- `inline-block` (rather than the default block box, which would
+         just stretch to 100% of `mainEl`) shrink-wraps to the content's own
+         natural width, which in horizontal mode is wider than the viewport -
+         without this, `mainEl`'s `overflow-x-auto` would have nothing wider
+         than itself to actually scroll. -->
+      <div class="inline-block align-top">
+        {@render children()}
+      </div>
+    </div>
+  </div>
+
+  <FlowSidebar
+    content={sidebarContent}
+    onClose={closeSidebar}
+    onNavigate={navigateStep}
+  />
+</div>

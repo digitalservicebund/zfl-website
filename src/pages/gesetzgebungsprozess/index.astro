@@ -1,7 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
-import RegelungsprozessFlowWithMinimap from "./_RegelungsprozessFlowWithMinimap.svelte";
+import RegelungsprozessFlowWithLayout from "./_RegelungsprozessFlowWithLayout.svelte";
 
 export const frontmatter = {
   title: "Wie gelingt eine praxistaugliche und bürgerfreundliche Gesetzgebung?",
@@ -30,6 +30,6 @@ export const frontmatter = {
       </div>
     </Hero>
 
-    <RegelungsprozessFlowWithMinimap client:load />
+    <RegelungsprozessFlowWithLayout client:load />
   </main>
 </Layout>

@@ -129,7 +129,7 @@
   // during that animation.
   $effect(() => {
     if (!title || !rootEl) return;
-    // Skip inside `_FlowWithMinimap.svelte`'s scaled-down minimap clone -
+    // Skip inside `_FlowLayout.svelte`'s scaled-down minimap clone -
     // it's marked `inert` (and non-interactive/hidden from assistive tech),
     // so this doubles as a cheap "is this the real content?" check without
     // needing a dedicated context just for that.
