@@ -4,7 +4,7 @@ import Hero from "@/components/Hero.astro";
 import RegelungsprozessFlowWithMinimap from "./_RegelungsprozessFlowWithMinimap.svelte";
 
 export const frontmatter = {
-  title: "Wie entstehen gute Regelungen?",
+  title: "Wie gelingt eine praxistaugliche und bürgerfreundliche Gesetzgebung?",
   isStagingOnly: true,
 };
 ---
@@ -12,13 +12,22 @@ export const frontmatter = {
 <Layout title={frontmatter.title}>
   <main>
     <Hero class="breakout-grid">
-      <h1>{frontmatter.title}</h1>
-      <p slot="subtitle">
-        Eine neue Regelung, die praktikabel und bürokratiearm ist: Wie kommen
-        wir dahin?<br />Hier zeigen wir ein Vorgehen zur Erarbeitung von
-        Gesetzen, bei dem die Interessen aller Beteiligten und Betroffenen früh
-        mitgedacht werden.
-      </p>
+      <h1 class="max-w-a11y">{frontmatter.title}</h1>
+      <div slot="subtitle">
+        <p>
+          Komplexe Vorgaben und hoher Zeitdruck prägen den Alltag in der
+          Gesetzgebung. Um verständliche und digital funktionierende Regelungen
+          zu schaffen, braucht es keine neuen Vorschriften, sondern gezielte
+          Unterstützung an den richtigen Stellen im etablierten Ablauf.
+        </p>
+        <p>
+          Entdecken Sie Schritt für Schritt, wie Sie <strong
+            >neue Potenziale</strong
+          > nutzen und Ihre Arbeit im Gesetzgebungsverfahren spürbar <strong
+            >vereinfachen</strong
+          > können.
+        </p>
+      </div>
     </Hero>
 
     <RegelungsprozessFlowWithMinimap client:load />
