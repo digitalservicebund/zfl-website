@@ -5,6 +5,7 @@
   import Arrow from "./_Arrow.svelte";
   import Feature from "./_Feature.svelte";
   import IconOffering from "~icons/ic/round-real-estate-agent";
+  import IconArrowDown from "~icons/ic/round-keyboard-double-arrow-down";
 
   let {
     orientation = "vertical",
@@ -38,6 +39,15 @@
 </script>
 
 <div class={container({ orientation })}>
+  <div>
+    <div
+      class="py-lg mx-auto max-w-200 flex flex-col items-center gap-8 text-icon-muted"
+    >
+      Scrollen Sie zum Starten
+      <IconArrowDown class="block" />
+    </div>
+  </div>
+
   <div
     aria-hidden="true"
     class="pointer-events-none absolute bg-black m-0"
@@ -45,7 +55,7 @@
   ></div>
 
   <div
-    class={`flex items-center xl:gap-24 justify-center ${isVertical ? "pt-lg" : "flex-col pl-40"}`}
+    class={`flex items-center xl:gap-24 justify-center ${isVertical ? "" : "flex-col pl-40"}`}
   >
     <Bubble
       color="#E6E6E6"

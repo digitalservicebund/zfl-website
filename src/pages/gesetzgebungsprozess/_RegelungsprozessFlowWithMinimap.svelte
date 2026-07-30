@@ -53,9 +53,7 @@
 </script>
 
 <FlowWithMinimap {orientation} {contentId} bind:highlighted>
-  {#snippet children()}
-    <RegelungsprozessFlow {orientation} />
-  {/snippet}
+  <RegelungsprozessFlow {orientation} />
 </FlowWithMinimap>
 
 <section class="breakout-grid hidden">
