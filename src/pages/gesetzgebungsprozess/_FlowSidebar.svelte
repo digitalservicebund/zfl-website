@@ -44,12 +44,10 @@
        cluster is clicked. -->
   <div
     class={`sticky top-0 z-50 h-screen w-screen lg:w-[calc(100vw-var(--cluster-inner-width))] flex items-end lg:items-center pointer-events-none transition-transform duration-300 ease-out ${isOpen ? "" : "translate-x-full"}`}
-    style={content?.color
-      ? `--content-color: ${content.color}; --content-color-bg: color-mix(in srgb, ${content.color} 20%, white)`
-      : undefined}
+    style={content?.color ? `--content-color: ${content.color}` : undefined}
   >
     <div
-      class={`flex max-h-[50vh] lg:max-h-screen w-full max-w-full flex-col _rounded-md _shadow-lg pointer-events-auto ${content?.kind === "cluster" ? "lg:h-full" : "lg:h-full"} ${content ? "bg-lavender-200" : ""}`}
+      class="flex max-h-[50vh] lg:max-h-screen w-full max-w-full flex-col _rounded-md _shadow-lg pointer-events-auto lg:h-full bg-lavender-200"
     >
       {#if content}
         <div
