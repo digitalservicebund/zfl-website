@@ -88,17 +88,6 @@ export const gesetzgebungsprozess = {
   navLabel: null,
 } as const;
 
-export const gesetzgebungsprozessSvg = {
-  key: "gesetzgebungsprozessSvg",
-  path: "/gesetzgebungsprozess-svg",
-  title: "SVG",
-  parent: null,
-  sitemap: true,
-  isStagingOnly: true,
-  navOrder: null,
-  navLabel: null,
-} as const;
-
 export const home = {
   key: "home",
   path: "/",
@@ -250,7 +239,6 @@ export const allRoutes = [
   dev_astroKomponenten,
   dev_kernKomponenten,
   gesetzgebungsprozess,
-  gesetzgebungsprozessSvg,
   home,
   impressum,
   kontakt,
