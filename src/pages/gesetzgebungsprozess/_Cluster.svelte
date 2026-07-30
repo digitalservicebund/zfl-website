@@ -194,13 +194,20 @@
     isSingleBubble = items.length === 1;
     const edgePadding = isSingleBubble ? 0 : EDGE_PADDING;
 
-    const circles = items.map((el) => ({
-      el,
-      trueRadius: el.offsetWidth / 2,
-      r: el.offsetWidth / 2 + BUBBLE_PADDING / 2,
-      x: 0,
-      y: 0,
-    }));
+    // Packed largest-first: `packSiblings` is a greedy front-chain
+    // algorithm whose tightness depends on insertion order, and it packs
+    // noticeably closer (less wasted space inside the enclosing circle)
+    // when bigger circles are placed before smaller ones - the same
+    // ordering d3's own `pack()` layout applies by default.
+    const circles = items
+      .map((el) => ({
+        el,
+        trueRadius: el.offsetWidth / 2,
+        r: el.offsetWidth / 2 + BUBBLE_PADDING / 2,
+        x: 0,
+        y: 0,
+      }))
+      .sort((a, b) => b.r - a.r);
 
     packSiblings(circles);
     const enclosing = packEnclose(circles);
