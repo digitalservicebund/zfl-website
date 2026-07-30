@@ -39,7 +39,7 @@
     FLOW_SIDEBAR_CONTEXT_NAME,
   );
 
-  const expanded = $derived(
+  const isActive = $derived(
     !!highlightGroup && sidebarContext?.activeId === highlightGroup,
   );
 
@@ -73,7 +73,7 @@
 <div
   bind:this={rootEl}
   class={wrapper({ class: className })}
-  style={`--arrow-color: color-mix(in srgb, ${color} 20%, white); --arrow-bg: ${expanded ? "var(--arrow-color)" : "#F7F7F7"}`}
+  style={`--arrow-color: color-mix(in srgb, ${color} 20%, white); --arrow-bg: ${isActive && false ? "var(--arrow-color)" : "#F7F7F7"}`}
 >
   <div class={shaft()} style={`--arrow-size: ${size}px`}>
     {#if children}

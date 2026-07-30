@@ -128,7 +128,7 @@
   // requested step with whatever cluster happens to pass the midline
   // during that animation.
   $effect(() => {
-    if (!title || !rootEl) return;
+    if (!highlightId || !rootEl) return;
     // Skip inside `_FlowLayout.svelte`'s scaled-down minimap clone -
     // it's marked `inert` (and non-interactive/hidden from assistive tech),
     // so this doubles as a cheap "is this the real content?" check without
@@ -141,7 +141,7 @@
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !sidebarContext?.isJumping) {
-          setActive(title);
+          setActive(highlightId);
         }
       },
       { rootMargin },
@@ -168,14 +168,14 @@
     base: "absolute z-20 flex gap-16",
     variants: {
       orientation: {
-        vertical: "top-0 left-[10vw] flex-row items-center",
+        vertical: "top-0 left-[4vw] flex-row items-center",
         horizontal: "top-24 left-0 flex-row items-center",
       },
     },
   });
 
-  const BUBBLE_PADDING = 8; // px, gap enforced between packed bubbles
-  const EDGE_PADDING = 8; // px, gap between bubbles and the dashed border
+  const BUBBLE_PADDING = 16; // px, gap enforced between packed bubbles
+  const EDGE_PADDING = 16; // px, gap between bubbles and the dashed border
 
   let containerEl: HTMLDivElement | undefined = $state();
   let diameter = $state(0);
@@ -295,7 +295,7 @@
           ></button>
         {:else}
           <div
-            class={`pointer-events-none absolute inset-0 -z-20 rounded-full ${isActive ? "bg-(--halo-color)" : "bg-[#F7F7F7]"}`}
+            class={`pointer-events-none absolute inset-0 -z-20 rounded-full ${isActive && false ? "bg-(--halo-color)" : "bg-[#F7F7F7]"}`}
           ></div>
         {/if}
         {#if !isSingleBubble}
