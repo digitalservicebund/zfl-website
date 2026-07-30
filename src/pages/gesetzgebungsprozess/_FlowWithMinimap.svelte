@@ -179,7 +179,7 @@
     syncUrl();
   }
 
-  let initialActiveIdSet = false;
+  // let initialActiveIdSet = false;
 
   // Opens straight from a shared link on first render, falling back to the
   // first registered cluster step when there's no `?step=` param, so the
@@ -187,21 +187,21 @@
   // Schritt aus" placeholder. Re-runs (tracking `clusterIds`) until at least
   // one cluster has registered, then never touches `activeId` again on its
   // own - subsequent changes only come from `toggle`/`popstate`.
-  $effect(() => {
-    if (initialActiveIdSet) return;
-
-    const stepFromUrl = readStepFromUrl();
-    if (stepFromUrl) {
-      activeId = stepFromUrl;
-      initialActiveIdSet = true;
-      return;
-    }
-
-    if (clusterIds.length > 0) {
-      activeId = clusterIds[0];
-      initialActiveIdSet = true;
-    }
-  });
+  // $effect(() => {
+  //   if (initialActiveIdSet) return;
+  //
+  //   const stepFromUrl = readStepFromUrl();
+  //   if (stepFromUrl) {
+  //     activeId = stepFromUrl;
+  //     initialActiveIdSet = true;
+  //     return;
+  //   }
+  //
+  //   if (clusterIds.length > 0) {
+  //     activeId = clusterIds[0];
+  //     initialActiveIdSet = true;
+  //   }
+  // });
 
   $effect(() => {
     function onPopState() {
@@ -412,7 +412,9 @@
 <div
   class="grid items-start grid-cols-[1fr_auto] [--cluster-inner-width:100vw] lg:[--cluster-inner-width:66vw]"
 >
-  <div class={`grid min-w-0 ${isVertical ? "" : ""}`}>
+  <div
+    class={`grid min-w-0 ${isVertical ? "mx-auto w-(--cluster-inner-width)" : ""}`}
+  >
     <div
       class={`sticky flex items-center z-50 col-start-1 row-start-1 pointer-events-none ${
         isVertical
