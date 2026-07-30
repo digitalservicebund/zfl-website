@@ -103,6 +103,7 @@
   );
 
   let rootEl: HTMLDivElement | undefined = $state();
+  let titleEl: HTMLHeadingElement | undefined = $state();
 
   // Scrolls the whole cluster into view whenever it becomes the active step -
   // most notably when the page is opened directly via a shared `?step=`
@@ -251,7 +252,10 @@
     offset ?? Math.round((Math.random() * 2 - 1) * OFFSET_RANGE),
   );
 
-  const interactive = false; // !!sidebar;
+  const activate = () => {
+    setActive(title!);
+    titleEl?.scrollIntoView({ behavior: "smooth" });
+  };
 </script>
 
 <div
@@ -265,7 +269,12 @@
 >
   <div class={contentWrapper({ orientation, fitContent })}>
     {#if title}
-      <div class={titleWrapper({ orientation })}>
+      <button
+        type="button"
+        tabindex="-1"
+        class={titleWrapper({ orientation })}
+        onclick={activate}
+      >
         <div
           class={`size-28 border-2 border-white rounded-full transition-colors duration-300 outline-2 ${isActive ? "bg-(--bubble-color) outline-black" : "bg-black outline-transparent"}`}
           aria-hidden="true"
@@ -273,11 +282,12 @@
         ></div>
         <h2
           id={title}
+          bind:this={titleEl}
           class="kern-heading-small scroll-mt-40 my-0! bg-black text-white px-4"
         >
           {title}
         </h2>
-      </div>
+      </button>
     {/if}
 
     <div
@@ -293,18 +303,9 @@
            sidebar. It's `aria-hidden` and untabbable since the title button
            already exposes the same action to keyboard/screen-reader users;
            this is purely a larger pointer/touch target. -->
-        {#if highlightId && interactive}
-          <button
-            type="button"
-            aria-hidden="true"
-            class={`absolute inset-0 -z-20 rounded-full ${isActive ? "bg-(--halo-color)" : "bg-[#F7F7F7]"}`}
-            onclick={() => setActive(highlightId)}
-          ></button>
-        {:else}
-          <div
-            class={`pointer-events-none absolute inset-0 -z-20 rounded-full ${isActive && false ? "bg-(--halo-color)" : "bg-[#F7F7F7]"}`}
-          ></div>
-        {/if}
+        <div
+          class={`pointer-events-none absolute inset-0 -z-20 rounded-full ${isActive && false ? "bg-(--halo-color)" : "bg-[#F7F7F7]"}`}
+        ></div>
         {#if !isSingleBubble}
           <!-- Dashed cluster circle -->
           <div
