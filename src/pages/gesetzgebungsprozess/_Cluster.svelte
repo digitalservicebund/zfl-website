@@ -55,7 +55,7 @@
      * Id of another Cluster/Bubble/Arrow to mirror instead of registering
      * this own sidebar content, i.e. `title`/`highlightGroup` of the
      * Cluster/Bubble whose sidebar entry should be reflected here. When set,
-     * this Cluster shares that entry's active/expanded state (highlighting
+     * this Cluster shares that entry's active state (highlighting
      * its halo the same way) and clicking it toggles that same sidebar
      * content, even if this Cluster has no `title`/`sidebar` of its own.
      * Falls back to this Cluster's own `title` when omitted.
@@ -98,7 +98,7 @@
 
   const highlightId = $derived(highlightGroup ?? title);
 
-  const expanded = $derived(
+  const isActive = $derived(
     !!highlightId && sidebarContext?.activeId === highlightId,
   );
 
@@ -108,7 +108,7 @@
   // most notably when the page is opened directly via a shared `?step=`
   // link, where it might otherwise be rendered off-screen.
   // $effect(() => {
-  //   if (!title || !expanded || !rootEl) return;
+  //   if (!title || !isActive || !rootEl) return;
   //
   //   rootEl.scrollIntoView({ behavior: "smooth", block: "center" });
   // });
@@ -260,16 +260,16 @@
     {#if title}
       <div class={titleWrapper({ orientation })}>
         <div
-          class="size-24 rounded-full bg-black"
-          style={anchorName ? `anchor-name: ${anchorName};` : undefined}
+          class={`size-28 border-2 border-white rounded-full ${isActive ? "bg-(--bubble-color) outline-2 outline-black" : "bg-black"}`}
           aria-hidden="true"
+          style={anchorName ? `anchor-name: ${anchorName};` : undefined}
         ></div>
-        <h2 id={title} class="scroll-mt-40 my-0">
+        <h2 id={title} class="scroll-mt-40 my-0!">
           {#if interactive}
             <button
               type="button"
               class="kern-heading-small bg-black text-white px-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cosmic-blue-base"
-              aria-expanded={expanded}
+              aria-expanded={isActive}
               onclick={() => setActive(title)}
               tabIndex={-1}
             >
@@ -285,7 +285,7 @@
     {/if}
 
     <div
-      class={`relative flex items-center justify-center ${expanded ? "z-10" : ""}`}
+      class={`relative flex items-center justify-center ${isActive ? "z-10" : ""}`}
       style={`width: calc(${diameter}px + 2 * var(--halo-thickness)); height: calc(${diameter}px + 2 * var(--halo-thickness)); margin-${orientation === "vertical" ? "left" : "top"}: ${offset ?? clusterOffset}px; --halo-color: color-mix(in srgb, ${color} 20%, white)`}
     >
       <!-- Isolated so the halo/dashed-circle negative z-indices only stack
@@ -301,12 +301,12 @@
           <button
             type="button"
             aria-hidden="true"
-            class={`absolute inset-0 -z-20 rounded-full ${expanded ? "bg-(--halo-color)" : "bg-[#F7F7F7]"}`}
+            class={`absolute inset-0 -z-20 rounded-full ${isActive ? "bg-(--halo-color)" : "bg-[#F7F7F7]"}`}
             onclick={() => setActive(highlightId)}
           ></button>
         {:else}
           <div
-            class={`pointer-events-none absolute inset-0 -z-20 rounded-full ${expanded ? "bg-(--halo-color)" : "bg-[#F7F7F7]"}`}
+            class={`pointer-events-none absolute inset-0 -z-20 rounded-full ${isActive ? "bg-(--halo-color)" : "bg-[#F7F7F7]"}`}
           ></div>
         {/if}
         {#if !isSingleBubble}

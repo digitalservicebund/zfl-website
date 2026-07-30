@@ -4,7 +4,6 @@
   import Cluster from "./_Cluster.svelte";
   import Arrow from "./_Arrow.svelte";
   import Feature from "./_Feature.svelte";
-  import IconOffering from "~icons/ic/round-real-estate-agent";
   import IconArrowDown from "~icons/ic/round-keyboard-double-arrow-down";
 
   let {

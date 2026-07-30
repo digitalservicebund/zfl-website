@@ -19,10 +19,10 @@
   {#each clusters as cluster (cluster.id)}
     <button
       type="button"
-      class={`size-24 shrink-0 rounded-full outline-offset-2 ${
-        activeId === cluster.id ? "outline-2 outline-cosmic-blue-base" : ""
+      class={`size-24 bg-(--dot-color) shrink-0 rounded-full outline-offset-2 ${
+        activeId === cluster.id ? "outline-2 outline-black" : ""
       }`}
-      style={`background-color: ${cluster.color ?? "black"}`}
+      style={`--dot-color: ${cluster.color ?? "black"}`}
       title={cluster.id}
       aria-label={cluster.id}
       aria-current={activeId === cluster.id ? "true" : undefined}
