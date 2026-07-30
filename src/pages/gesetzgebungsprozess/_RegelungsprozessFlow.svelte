@@ -15,7 +15,7 @@
   const isVertical = $derived(orientation === "vertical");
 
   const container = tv({
-    base: "relative flex bg-white [--dark-bg:#F0F0F0]",
+    base: "relative flex bg-white [--contrast-bg:transparent]",
     variants: {
       orientation: {
         horizontal: "h-screen flex-row items-stretch",
@@ -450,7 +450,7 @@
     {orientation}
     color="#D2EDB9"
     highlightGroup="Kabinettvorlage"
-    className="bg-(--dark-bg)">Übergabe an die politische Ebene</Arrow
+    className="bg-(--contrast-bg)">Übergabe an die politische Ebene</Arrow
   >
 
   <Cluster
@@ -458,7 +458,7 @@
     {orientation}
     offset={0}
     title="Verabschiedung"
-    className="bg-(--dark-bg)"
+    className="bg-(--contrast-bg)"
   >
     {#snippet sidebar()}
       <p>
@@ -491,7 +491,7 @@
   <Cluster
     color="#EBF5B3"
     {orientation}
-    className="bg-(--dark-bg)"
+    className="bg-(--contrast-bg)"
     highlightGroup="Verabschiedung"
   >
     <Bubble title="Abstimmung im Bundestag">
@@ -519,7 +519,7 @@
   <Cluster
     color="#FFFBB5"
     {orientation}
-    className="bg-(--dark-bg)"
+    className="bg-(--contrast-bg)"
     highlightGroup="Verabschiedung"
   >
     <Bubble title="Verkündung">
@@ -543,7 +543,7 @@
     {orientation}
     title="Nach der Verkündung"
     anchorName={CLUSTER_LAST_ANCHOR}
-    className="bg-(--dark-bg)"
+    className="bg-(--contrast-bg)"
   >
     {#snippet sidebar()}
       <p>
@@ -580,7 +580,7 @@
   <Cluster
     color="#FAB5A8"
     {orientation}
-    className={`bg-(--dark-bg) ${isVertical ? "pb-80" : "pr-40"}`}
+    className={`bg-(--contrast-bg) ${isVertical ? "pb-80" : "pr-40"}`}
     highlightGroup="Nach der Verkündung"
   >
     <Bubble title="Vollzug">
