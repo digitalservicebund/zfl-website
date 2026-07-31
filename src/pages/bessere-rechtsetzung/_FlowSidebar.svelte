@@ -49,6 +49,13 @@
 
   const isOpen = $derived(content !== null);
   const pageCount = $derived(content?.children.length ?? 0);
+  // "Weiter" advances to a new cluster (rather than just the next page
+  // within the current cluster, or - for bubbles - the next bubble) only
+  // when the current cluster's last page is shown and there's a following
+  // cluster to move on to (i.e. not `isLast`).
+  const nextIsNewCluster = $derived(
+    content?.kind === "cluster" && !isLast && page === pageCount - 1,
+  );
   // Clamped so a stale `page` (e.g. briefly out of range while switching
   // between steps with a different number of pages) never renders `undefined`.
   const currentPageSnippet = $derived(
@@ -127,7 +134,9 @@
               class="kern-btn kern-btn--primary"
               onclick={handleWeiterClick}
             >
-              <span class="kern-label">Weiter</span>
+              <span class="kern-label"
+                >{nextIsNewCluster ? "Zur nächsten Phase" : "Weiter"}</span
+              >
             </button>
           </div>
         {/if}
