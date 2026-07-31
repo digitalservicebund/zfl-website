@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getContext } from "svelte";
+  import { getContext, onDestroy } from "svelte";
   import type { Snippet } from "svelte";
   import BubbleIcon from "./_BubbleIcon.svelte";
   import ArrowUp from "~icons/ic/round-keyboard-arrow-up";
@@ -41,6 +41,8 @@
   // const isHighlighted = $derived(highlightContext.highlighted.includes(tag));
   const enable = () => highlightContext.setHighlighted(tag);
   const disable = () => highlightContext.setHighlighted(null);
+
+  onDestroy(disable);
 </script>
 
 <button
