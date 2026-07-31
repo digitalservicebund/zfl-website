@@ -54,10 +54,6 @@
       e.currentTarget.blur();
     }
   }}
-  onmouseenter={() =>
-    !document.activeElement?.hasAttribute("data-feature-button") && enable()}
-  onmouseleave={() =>
-    !document.activeElement?.hasAttribute("data-feature-button") && disable()}
   onfocus={enable}
   onblur={disable}
 >
