@@ -80,13 +80,12 @@
     title="Interessensermittlung"
   >
     {#snippet sidebar()}
-      <h2>Was passiert in der Phase der Interessenvermittlung?</h2>
+      <h2>Was passiert hier?</h2>
       <p>
         Sobald die Zuständigkeit nach der Geschäftsverteilung der
-        Bundesregierung feststeht, erarbeitet das federführende Ressort den
-        eigentlichen Gesetzentwurf. Unterstützend bilden sich erste
-        Arbeitsgruppen und es beginnt der wichtige Austausch mit den Ländern und
-        Kommunen.
+        Bundesregierung feststeht, beginnt das federführende Ressort mit der
+        Koordination und der inhaltlichen Arbeitden. Parallel bilden sich erste
+        Arbeitsgruppen und der Austausch mit den Ländern und Kommunen beginnt.
       </p>
     {/snippet}
 
@@ -119,7 +118,7 @@
   </Cluster>
 
   {#snippet sidebar1()}
-    <h2>Wie lässt sich die Recherchephase optimieren?</h2>
+    <h2>Was passiert hier?</h2>
     <p>
       In der frühen Phase der Gesetzesvorbereitung werden Sie dabei unterstützt,
       Ihre neuen Regelungen optimal vorzubereiten. Ziel ist es, frühzeitig zu
@@ -167,17 +166,6 @@
         {/snippet}
       </Feature>
     </div>
-    <h3>Für welche Vorhaben ist es geeignet?</h3>
-    <p>
-      Dieser Ablauf eignet sich für alle Vorhaben, in denen Gestaltungsspielraum
-      besteht.
-    </p>
-    <h3>Wo sparen Sie Zeit?</h3>
-    <p>
-      Die digitale Unterstützung nimmt Ihnen bei der Recherche Arbeit ab. Zudem
-      erstellt das System aus Ihren gesammelten Eingaben automatisch wichtige
-      Dokumente für die weitere Planung Ihres Vorhabens.
-    </p>
   {/snippet}
 
   {#snippet sidebar2()}
@@ -280,46 +268,13 @@
 
   <Cluster color="#ABD7F9" {orientation} title="Referentenentwurf">
     {#snippet sidebar()}
-      <h2>Wie lässt sich der Entwurfsprozess vereinfachen?</h2>
+      <h2>Was passiert hier?</h2>
       <p>
         Nachdem Sie die Recherchephase abgeschlossen haben, werden Sie bei der
         Ausarbeitung Ihres ersten konkreten Entwurfs unterstützt. Ziel ist es,
         rechtliche Vorgaben im Blick zu behalten und sich früh mit der Praxis
         auszutauschen. So vermeiden Sie Umsetzungsrisiken und schaffen von
         Anfang an praxistaugliche Regelungen.
-      </p>
-      <h3>Was könnte sich in Ihrem Arbeitsablauf ändern?</h3>
-      <div class="mt-24 space-y-24">
-        <Feature
-          icon="category"
-          tag="geführter Prozess"
-          title="Integrierte Checks"
-        >
-          Wichtige Checks und Arbeitshilfen sind direkt in Ihren Arbeitsablauf
-          früher eingebunden. Sie müssen Checklisten und Arbeitshilfen (z.B.
-          Digitalcheck) nicht mehr manuell abgleichen.
-        </Feature>
-        <Feature icon="auto" tag="Tools" title="Formulierungshilfen">
-          Formulierungshilfen sind gebündelt und eingebunden, sodass Sie diese
-          direkt nutzen können.
-        </Feature>
-        <Feature
-          icon="category"
-          tag="geführter Prozess"
-          title="Einfachere Beteiligung"
-        >
-          Der Austausch mit der Praxis wird gezielt gefördert. Mit digitaler
-          Unterstützung können Sie Feedback von externen Beteiligten
-          unkompliziert einholen und einarbeiten.
-        </Feature>
-      </div>
-      <h3>Wo sparen Sie Zeit?</h3>
-      <p>
-        Sie sparen Zeit, weil Sie Doppelarbeit und späte Schleifen vermeiden.
-        Das System erzeugt wichtige Dokumente automatisch für Sie. Weil Sie
-        wichtige Vorgaben direkt zu Beginn prüfen, verhindern Sie zudem
-        aufwändige Änderungen, die sonst oft spät und unter großem Zeitdruck
-        nötig wären.
       </p>
     {/snippet}
 
@@ -354,10 +309,7 @@
 
   <Cluster color="#A0EBEE" {orientation} title="Hausentwurf & Ressortentwurf">
     {#snippet sidebar()}
-      <h2>
-        Wie lässt sich der Abstimmungsprozess im Haus und mit anderen Ressorts
-        gestalten?
-      </h2>
+      <h2>Was passiert hier?</h2>
       <p>
         Nachdem Sie Ihren Referentenentwurf erstellt haben, beginnt die formale
         Abstimmung im eigenen Haus, mit den anderen Ressorts und externen
@@ -365,32 +317,6 @@
         bürokratischen Aufwand so gering wie möglich zu halten. Ziel ist es,
         bestehende Daten nahtlos weiterzunutzen und sich voll auf die
         inhaltlichen Absprachen zu konzentrieren.
-      </p>
-      <h3>Was könnte sich in Ihrem Arbeitsablauf ändern?</h3>
-      <div class="mt-24 space-y-24">
-        <Feature
-          icon="category"
-          tag="geführter Prozess"
-          title="Keine separate Dokumentation"
-        >
-          Da das System Ihre Ergebnisse aus den vorherigen Phasen bereits
-          gebündelt hat, müssen Sie keine zusätzlichen Prüfberichte mehr
-          erstellen.
-        </Feature>
-        <Feature icon="auto" tag="Tools" title="Einfache Absprache">
-          Der Austausch mit externen Prüfstellen wird gezielt erleichtert. Über
-          ein standardisiertes Übergabeformat leiten Sie alle relevanten
-          Nachweise aus der Recherche- und Entwurfsphase unkompliziert an den
-          Nationalen Normenkontrollrat (NKR) weiter.
-        </Feature>
-      </div>
-      <h3>Wo sparen Sie Zeit?</h3>
-      <p>
-        Sie sparen sich den gesamten Aufwand für doppelte Dokumentationen. Da
-        die nötigen Nachweise durch Ihre Vorarbeit im System schon vorliegen,
-        sparen Sie sich das erneute Zusammentragen von Daten. Zudem sorgt das
-        standardisierte Format für den NKR für weniger Abstimmungsaufwand und
-        erspart Ihnen Rückfragen.
       </p>
     {/snippet}
 
@@ -464,6 +390,7 @@
 
   <Cluster color="#D2EDB9" {orientation} title="Kabinettvorlage">
     {#snippet sidebar()}
+      <h2>Was passiert hier?</h2>
       <p>
         Sobald die Abstimmungen zum Ressortentwurf abgeschlossen sind, wird die
         offizielle Kabinettvorlage erstellt und durch die Leitung des Hauses
@@ -514,6 +441,7 @@
     className="bg-(--contrast-bg)"
   >
     {#snippet sidebar()}
+      <h2>Was passiert hier?</h2>
       <p>
         Nachdem die Bundesregierung den Entwurf an die gesetzgebenden Organe
         übergeben hat, durchläuft das Vorhaben das eigentliche parlamentarische
@@ -599,6 +527,7 @@
     className="bg-(--contrast-bg)"
   >
     {#snippet sidebar()}
+      <h2>Was passiert hier?</h2>
       <p>
         Sobald das Gesetz im Bundesgesetzblatt verkündet wurde, schließen sich
         die abschließende Dokumentation und das offizielle Inkrafttreten der
