@@ -2,7 +2,7 @@
 import Hero from "@/components/Hero.astro";
 import KernCard from "@/components/KernCard.astro";
 import Layout from "@/layouts/Layout.astro";
-import { begleitungen, gesetzgebungsprozess, werkzeuge } from "@/config/routes";
+import { begleitungen, bessereRechtsetzung, werkzeuge } from "@/config/routes";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import { mailto } from "@/utils/mailtoHelper";
 import AblaufFruephase from "@/images/AblaufFruephase.png";
@@ -63,7 +63,7 @@ export const frontmatter = {
         > und bettet sich im Fachbereich bessere Rechtsetzung ein.
       </p>
       <div class="mt-24">
-        <a href={gesetzgebungsprozess.path} class="kern-btn kern-btn--primary">
+        <a href={bessereRechtsetzung.path} class="kern-btn kern-btn--primary">
           <span class="kern-icon kern-icon--arrow-forward" aria-hidden="true"
           ></span>
           <span class="kern-label">Frühphase erkunden</span>

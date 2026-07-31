@@ -33,6 +33,17 @@ export const begleitungen = {
   navLabel: null,
 } as const;
 
+export const bessereRechtsetzung = {
+  key: "bessereRechtsetzung",
+  path: "/bessere-rechtsetzung",
+  title: "Wie gelingt eine praxistaugliche und bürgerfreundliche Gesetzgebung?",
+  parent: null,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
 export const datenschutz = {
   key: "datenschutz",
   path: "/datenschutz",
@@ -72,17 +83,6 @@ export const dev_kernKomponenten = {
   title: "KERN Komponenten",
   parent: dev,
   sitemap: false,
-  isStagingOnly: true,
-  navOrder: null,
-  navLabel: null,
-} as const;
-
-export const gesetzgebungsprozess = {
-  key: "gesetzgebungsprozess",
-  path: "/gesetzgebungsprozess",
-  title: "Wie gelingt eine praxistaugliche und bürgerfreundliche Gesetzgebung?",
-  parent: null,
-  sitemap: true,
   isStagingOnly: true,
   navOrder: null,
   navLabel: null,
@@ -234,11 +234,11 @@ export const werkzeuge_praxistauglichkeit = {
 export const allRoutes = [
   barrierefreiheit,
   begleitungen,
+  bessereRechtsetzung,
   datenschutz,
   dev,
   dev_astroKomponenten,
   dev_kernKomponenten,
-  gesetzgebungsprozess,
   home,
   impressum,
   kontakt,
