@@ -3,7 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
 import InfoPanel from "@/components/InfoPanel.astro";
 import RegelungsprozessFlowWithLayout from "./_RegelungsprozessFlowWithLayout.svelte";
-import { ZFL_EMAIL } from "@/config/constants";
+import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import { kontakt } from "@/config/routes";
 
 export const frontmatter = {
@@ -35,29 +35,38 @@ export const frontmatter = {
 
     <RegelungsprozessFlowWithLayout client:load />
 
-    <section class="breakout-grid" id="outro">
-      <InfoPanel look="lightLavender" padding="wide">
-        <h2>Machen Sie mit!</h2>
+    <section
+      class="bg-lavender-400 flex min-h-screen items-center justify-center"
+      id="outro"
+    >
+      <div class="p-lg max-w-800 space-y-24">
+        <div class="relative h-[30vh] w-full">
+          <div
+            class="absolute top-[58%] left-[28%] size-[14vw] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white"
+          >
+          </div>
+          <div
+            class="bg-cosmic-blue-400 absolute top-[25%] left-[64%] size-[10vw] -translate-x-1/2 -translate-y-1/2 rounded-full"
+          >
+          </div>
+          <div
+            class="bg-cosmic-blue-base absolute top-[80%] left-[60%] size-[6vw] -translate-x-1/2 -translate-y-1/2 rounded-full"
+          >
+          </div>
+        </div>
+        <h2>
+          Sie möchten gemeinsam mit uns eine moderne und praxistaugliche
+          Rechtsetzung gestalten?
+        </h2>
         <p>
-          Wenn Sie Interesse haben, die Frühphase mitzugestalten, dann melden
-          Sie sich gerne zu Tests und Gesprächen an. Schicken Sie uns eine
-          E-Mail an <a class="font-bold" href={ZFL_EMAIL.url}
+          Kontaktieren Sie uns zu diesem Zweck unter <a
+            class="font-bold"
+            href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a
+          > oder <a class="font-bold" href={ZFL_EMAIL.url}
             >{ZFL_EMAIL.display}</a
           >.
         </p>
-        <p>
-          Wenn Sie an einem Vorhaben arbeiten, können Sie auch unsere Angebote
-          nutzen.
-        </p>
-        <div class="mt-24 flex gap-8">
-          <a href={kontakt.path} class="kern-btn kern-btn--primary"
-            ><span class="kern-label">Zu den ZFL-Angeboten</span></a
-          >
-          <a href="#" class="kern-btn kern-btn--secondary"
-            ><span class="kern-label">Zurück</span></a
-          >
-        </div>
-      </InfoPanel>
+      </div>
     </section>
   </main>
 </Layout>

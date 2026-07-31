@@ -38,7 +38,7 @@
 
 <div
   bind:this={rootEl}
-  class={`transition-opacity duration-500 ${hasActive ? "opacity-0" : "opacity-100"} w-full min-h-10`}
+  class={`transition-opacity duration-500 ${hasActive ? "opacity-0" : "opacity-100"} w-full min-h-100`}
 >
   {@render children?.()}
 </div>
