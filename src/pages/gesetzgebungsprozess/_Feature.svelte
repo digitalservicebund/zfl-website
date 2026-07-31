@@ -46,7 +46,7 @@
 <button
   type="button"
   data-feature-button
-  class={`group flex items-start gap-24 p-24 rounded-sm border border-(--content-color) hover:bg-(--content-color)/20 focus:bg-(--content-color)/20 focus:outline-2 focus:outline-(--content-color)`}
+  class={`group flex items-start gap-16 p-16 rounded-sm border border-(--content-color) hover:bg-(--content-color)/20 focus:bg-(--content-color)/20 focus:outline-2 focus:outline-(--content-color)`}
   title="Schritte hervorheben"
   onmousedown={(e) => {
     if (document.activeElement === e.currentTarget) {
@@ -65,12 +65,6 @@
     class="flex flex-col items-center justify-between self-stretch rounded-full"
   >
     <BubbleIcon {icon} {color} />
-    <div class="text-icon-muted" aria-hidden="true">
-      {#if details}
-        <ArrowDown class="group-focus:hidden" />
-        <ArrowUp class="hidden group-focus:block" />
-      {/if}
-    </div>
   </div>
   <div class="text-left">
     <div>
@@ -91,4 +85,10 @@
       </div>
     {/if}
   </div>
+  {#if details}
+    <div class="text-icon-muted shrink-0" aria-hidden="true">
+      <ArrowDown class="group-focus:hidden" />
+      <ArrowUp class="hidden group-focus:block" />
+    </div>
+  {/if}
 </button>
