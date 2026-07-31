@@ -3,6 +3,9 @@
   import type { Snippet } from "svelte";
   import { icons } from "./_icons.ts";
   import BubbleIcon from "./_BubbleIcon.svelte";
+  import ArrowUp from "~icons/ic/round-keyboard-arrow-up";
+  import ArrowDown from "~icons/ic/round-keyboard-arrow-down";
+
   import {
     BUBBLE_HIGHLIGHT_CONTEXT_NAME,
     type BubbleHighlightContext,
@@ -11,6 +14,7 @@
   let {
     title,
     children,
+    details,
     icon,
     tag,
     // Defaults to the wrapping Cluster's own color: `_FlowSidebar.svelte`
@@ -24,6 +28,7 @@
   }: {
     title?: string;
     children: Snippet;
+    details?: Snippet;
     icon: keyof typeof icons;
     tag: string;
     color?: string;
@@ -41,8 +46,14 @@
 <button
   type="button"
   data-feature-button
-  class={`flex items-start gap-24 p-24 rounded-sm border border-(--content-color) hover:bg-(--content-color)/20 focus:bg-(--content-color)/20 focus:outline-2 focus:outline-(--content-color)`}
+  class={`group flex items-start gap-24 p-24 rounded-sm border border-(--content-color) hover:bg-(--content-color)/20 focus:bg-(--content-color)/20 focus:outline-2 focus:outline-(--content-color)`}
   title="Schritte hervorheben"
+  onmousedown={(e) => {
+    if (document.activeElement === e.currentTarget) {
+      e.preventDefault();
+      e.currentTarget.blur();
+    }
+  }}
   onmouseenter={() =>
     !document.activeElement?.hasAttribute("data-feature-button") && enable()}
   onmouseleave={() =>
@@ -50,15 +61,34 @@
   onfocus={enable}
   onblur={disable}
 >
-  <div class="flex items-start rounded-full">
+  <div
+    class="flex flex-col items-center justify-between self-stretch rounded-full"
+  >
     <BubbleIcon {icon} {color} />
+    <div class="text-icon-muted" aria-hidden="true">
+      {#if details}
+        <ArrowDown class="group-focus:hidden" />
+        <ArrowUp class="hidden group-focus:block" />
+      {/if}
+    </div>
   </div>
-  <div class="space-y-16">
-    <p class="text-left">
+  <div class="text-left">
+    <div>
       {#if title}
         <strong>{title}: </strong>
       {/if}
       {@render children()}
-    </p>
+    </div>
+    {#if details}
+      <div
+        class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-100 ease-in-out group-focus:grid-rows-[1fr]"
+      >
+        <div class="overflow-hidden">
+          <div class="mt-16">
+            {@render details?.()}
+          </div>
+        </div>
+      </div>
+    {/if}
   </div>
 </button>
