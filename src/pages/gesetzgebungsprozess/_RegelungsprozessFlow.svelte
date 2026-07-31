@@ -40,9 +40,7 @@
 
 <div class={container({ orientation })}>
   <OutTrigger>
-    <div
-      class={`py-lg mx-auto max-w-200 flex flex-col items-center gap-8 text-icon-muted`}
-    >
+    <div class={`py-lg mx-auto max-w-200 flex flex-col items-center gap-8`}>
       Scrollen Sie zum Starten
       <IconArrowDown class="block" />
     </div>

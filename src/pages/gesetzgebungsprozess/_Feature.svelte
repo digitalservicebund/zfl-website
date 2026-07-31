@@ -82,7 +82,7 @@
     {/if}
   </div>
   {#if details}
-    <div class="text-icon-muted shrink-0" aria-hidden="true">
+    <div class="text-icon-muted shrink-0 -ml-8" aria-hidden="true">
       <ArrowDown class="group-focus:hidden" />
       <ArrowUp class="hidden group-focus:block" />
     </div>
