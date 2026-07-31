@@ -58,6 +58,11 @@
   // back/forward buttons.
   let registry = $state<Record<string, FlowSidebarContent>>({});
   let activeId = $state<string | null>(null);
+  // Index into the active step's `children` pages array. A cluster can
+  // define multiple sidebar "pages" (see `_Cluster.svelte`'s `sidebar`
+  // prop); this tracks which one is currently shown, so "Zurück"/"Weiter"
+  // can cycle through them before moving on to the previous/next step.
+  let activePage = $state(0);
 
   const sidebarContent = $derived(
     activeId ? (registry[activeId] ?? null) : null,
@@ -94,11 +99,13 @@
   // be clicked.
   function toggle(id: string) {
     activeId = activeId === id ? null : id;
+    activePage = 0;
     syncUrl();
   }
 
   function setActive(id: string) {
     activeId = id;
+    activePage = 0;
     syncUrl();
   }
 
@@ -127,6 +134,7 @@
 
   function closeSidebar() {
     activeId = null;
+    activePage = 0;
     syncUrl();
   }
 
@@ -153,13 +161,18 @@
 
   // Only clusters (not bubbles) get first/last treatment in
   // `_FlowSidebar.svelte`'s "Zurück"/"Weiter" nav - bubbles keep cycling.
+  // Also requires being on the first/last *page* of that cluster, so a
+  // multi-page cluster's later/earlier pages don't hide "Zurück"/"Weiter"
+  // prematurely.
   const isFirstCluster = $derived(
     sidebarContent?.kind === "cluster" &&
-      sidebarContent.id === clusterIds[0],
+      sidebarContent.id === clusterIds[0] &&
+      activePage === 0,
   );
   const isLastCluster = $derived(
     sidebarContent?.kind === "cluster" &&
-      sidebarContent.id === clusterIds[clusterIds.length - 1],
+      sidebarContent.id === clusterIds[clusterIds.length - 1] &&
+      activePage === sidebarContent.children.length - 1,
   );
 
   function onDotSelect(id: string) {
@@ -174,6 +187,15 @@
 
   function navigateStep(step: -1 | 1) {
     if (!sidebarContent) return;
+
+    // Cycle through this step's own sidebar pages first (see
+    // `_Cluster.svelte`'s `sidebar` prop), only advancing to the
+    // previous/next cluster/bubble once the first/last page is reached.
+    const nextPage = activePage + step;
+    if (nextPage >= 0 && nextPage < sidebarContent.children.length) {
+      activePage = nextPage;
+      return;
+    }
 
     const ids =
       sidebarContent.kind === "cluster"
@@ -192,12 +214,27 @@
     if (!nextContent) return;
 
     activeId = nextContent.id;
+    // Land on the new step's first page when moving forward ("Weiter"), or
+    // its last page when moving backward ("Zurück"), so the "Zurück"/
+    // "Weiter" buttons always move exactly one page at a time through a
+    // continuous sequence instead of jumping to the same page index in the
+    // next step.
+    activePage = step === 1 ? 0 : nextContent.children.length - 1;
     const activeEl = document.getElementById(nextContent.id);
     if (activeEl) {
       startJump();
       activeEl.scrollIntoView({ behavior: "smooth" });
     }
     syncUrl();
+  }
+
+  // Jumps directly to a given page within the active step, e.g. when a
+  // `_Stepper.svelte` bubble is clicked, rather than only stepping by ±1.
+  function selectPage(index: number) {
+    if (!sidebarContent) return;
+    if (index < 0 || index >= sidebarContent.children.length) return;
+
+    activePage = index;
   }
 
   // let initialActiveIdSet = false;
@@ -227,6 +264,7 @@
   $effect(() => {
     function onPopState() {
       activeId = readStepFromUrl();
+      activePage = 0;
     }
 
     window.addEventListener("popstate", onPopState);
@@ -297,9 +335,11 @@
 
   <FlowSidebar
     content={sidebarContent}
+    page={activePage}
     isFirst={isFirstCluster}
     isLast={isLastCluster}
     onClose={closeSidebar}
     onNavigate={navigateStep}
+    onSelectPage={selectPage}
   />
 </div>

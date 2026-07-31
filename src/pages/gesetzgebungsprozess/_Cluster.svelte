@@ -49,8 +49,14 @@
      * clicked. When provided (and `title` is set), the title becomes a
      * clickable button that toggles this content in the shared sidebar, the
      * same way `_Bubble.svelte` does.
+     *
+     * Accepts either a single `Snippet` or an array of `Snippet`s. When an
+     * array with more than one entry is given, the sidebar treats them as
+     * separate "pages" for this cluster: its "Zurück"/"Weiter" navigation
+     * steps through these pages first, only moving on to the
+     * previous/next cluster once the first/last page is reached.
      */
-    sidebar?: Snippet;
+    sidebar?: Snippet | Snippet[];
     /**
      * Id of another Cluster/Bubble/Arrow to mirror instead of registering
      * this own sidebar content, i.e. `title`/`highlightGroup` of the
@@ -80,16 +86,25 @@
     },
   });
 
+  // Normalizes `sidebar` to an array of pagesi
+  const sidebarPages = $derived(
+    sidebar === undefined
+      ? undefined
+      : Array.isArray(sidebar)
+        ? sidebar
+        : [sidebar],
+  );
+
   // Registers this cluster's sidebar content as soon as it mounts
   // (independent of clicks), so it can also be opened straight from a
   // shared `?step=` link or via the browser back/forward buttons.
   $effect(() => {
-    if (!sidebar || !title) return;
+    if (!sidebarPages || sidebarPages.length === 0 || !title) return;
 
     sidebarContext?.register({
       id: title,
       title,
-      children: sidebar,
+      children: sidebarPages,
       kind: "cluster",
       color,
     });

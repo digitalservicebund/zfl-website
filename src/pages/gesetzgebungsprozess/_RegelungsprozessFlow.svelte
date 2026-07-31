@@ -120,70 +120,100 @@
     </Bubble>
   </Cluster>
 
-  <Cluster color="#B3B7E0" {orientation} title="Recherche" offset={0}>
-    {#snippet sidebar()}
-      <h2>Wie lässt sich die Recherchephase optimieren?</h2>
-      <p>
-        In der frühen Phase der Gesetzesvorbereitung werden Sie dabei
-        unterstützt, Ihre neuen Regelungen optimal vorzubereiten. Ziel ist es,
-        frühzeitig zu prüfen, welches Problem gelöst werden muss, und
-        festzulegen, was die Regelung bewirken soll. Zudem wird es erleichtert,
-        alle wichtigen Beteiligten frühzeitig einzubinden. So schaffen Sie von
-        Anfang an eine fundierte Grundlage für Ihre weitere Arbeit.
-      </p>
-      <h3>Wie könnte diese Phase in Zukunft aussehen?</h3>
-      <div class="mt-24 space-y-24">
-        <Feature icon="category" tag="geführter Prozess">
-          <strong>Ein geführter Prozess</strong> unterstützt Sie Schritt für
-          Schritt dabei, Ihr Regelungsvorhaben von Anfang an strukturiert
-          aufzusetzen. So können Sie das eigentliche Problem präzise
-          durchdenken, Wirkungsziele festlegen und alle relevanten Akteure
-          frühzeitig einbinden. Informationen dokumentieren Sie an einer
-          zentralen Stelle.
-          {#snippet details()}
-            <strong>So arbeiten wir daran:</strong> Wir entwickeln gemeinsam mit Ihnen
-            ein praxistaugliches Rahmenwerk. Es soll die frühe Erarbeitungsphase strukturieren
-            und Sie dabei unterstützen, Notwendigkeit und Alternativen einer Regelung
-            fundiert abzuwägen.
-          {/snippet}
-        </Feature>
-        <Feature icon="category" tag="geführter Prozess">
-          <strong>Verschiedene Checks und Arbeitshilfen</strong> sind
-          konsolidiert und direkt in Ihren Arbeitsablauf eingebunden. So
-          berücksichtigen Sie automatisch notwendige Anforderungen wie den
-          <a href="https://digitalcheck.bund.de/">Digitalcheck</a>.
-          {#snippet details()}
-            <strong>So arbeiten wir daran:</strong> Wir reduzieren die Vielzahl bestehender
-            Leitfäden und bündeln diese Schritt für Schritt an einem zentralen Ort.
-          {/snippet}
-        </Feature>
-        <Feature icon="auto" tag="Tools">
-          Künstliche Intelligenz nimmt Ihnen zeitintensive Arbeit bei der
-          Recherche, Strukturierung und Zusammenstellung von Informationen ab.
-          So finden und ordnen Sie relevante Inhalte deutlich schneller.
-          {#snippet details()}
-            So arbeiten wir daran: Wir testen einen Prototypen, mit dem Sie
-            Pflichten im Bestandsrecht schnell identifizieren und strukturiert
-            analysieren können. Einen ersten Einblick erhalten Sie <a
-              href="https://digitalservicebund.github.io/zfl-website/previews/prototyp/pflichten/werkzeuge/pflichten/"
-              >hier</a
-            >.
-          {/snippet}
-        </Feature>
-      </div>
-      <h3>Für welche Vorhaben ist es geeignet?</h3>
-      <p>
-        Dieser Ablauf eignet sich für alle Vorhaben, in denen
-        Gestaltungsspielraum besteht.
-      </p>
-      <h3>Wo sparen Sie Zeit?</h3>
-      <p>
-        Die digitale Unterstützung nimmt Ihnen bei der Recherche Arbeit ab.
-        Zudem erstellt das System aus Ihren gesammelten Eingaben automatisch
-        wichtige Dokumente für die weitere Planung Ihres Vorhabens.
-      </p>
-    {/snippet}
+  {#snippet sidebar1()}
+    <h2>Wie lässt sich die Recherchephase optimieren?</h2>
+    <p>
+      In der frühen Phase der Gesetzesvorbereitung werden Sie dabei unterstützt,
+      Ihre neuen Regelungen optimal vorzubereiten. Ziel ist es, frühzeitig zu
+      prüfen, welches Problem gelöst werden muss, und festzulegen, was die
+      Regelung bewirken soll. Zudem wird es erleichtert, alle wichtigen
+      Beteiligten frühzeitig einzubinden. So schaffen Sie von Anfang an eine
+      fundierte Grundlage für Ihre weitere Arbeit.
+    </p>
+    <h3>Wie könnte diese Phase in Zukunft aussehen?</h3>
+    <div class="mt-24 space-y-24">
+      <Feature icon="category" tag="geführter Prozess">
+        <strong>Ein geführter Prozess</strong> unterstützt Sie Schritt für
+        Schritt dabei, Ihr Regelungsvorhaben von Anfang an strukturiert
+        aufzusetzen. So können Sie das eigentliche Problem präzise durchdenken,
+        Wirkungsziele festlegen und alle relevanten Akteure frühzeitig
+        einbinden. Informationen dokumentieren Sie an einer zentralen Stelle.
+        {#snippet details()}
+          <strong>So arbeiten wir daran:</strong> Wir entwickeln gemeinsam mit Ihnen
+          ein praxistaugliches Rahmenwerk. Es soll die frühe Erarbeitungsphase strukturieren
+          und Sie dabei unterstützen, Notwendigkeit und Alternativen einer Regelung
+          fundiert abzuwägen.
+        {/snippet}
+      </Feature>
+      <Feature icon="category" tag="geführter Prozess">
+        <strong>Verschiedene Checks und Arbeitshilfen</strong> sind konsolidiert
+        und direkt in Ihren Arbeitsablauf eingebunden. So berücksichtigen Sie
+        automatisch notwendige Anforderungen wie den
+        <a href="https://digitalcheck.bund.de/">Digitalcheck</a>.
+        {#snippet details()}
+          <strong>So arbeiten wir daran:</strong> Wir reduzieren die Vielzahl bestehender
+          Leitfäden und bündeln diese Schritt für Schritt an einem zentralen Ort.
+        {/snippet}
+      </Feature>
+      <Feature icon="auto" tag="Tools">
+        Künstliche Intelligenz nimmt Ihnen zeitintensive Arbeit bei der
+        Recherche, Strukturierung und Zusammenstellung von Informationen ab. So
+        finden und ordnen Sie relevante Inhalte deutlich schneller.
+        {#snippet details()}
+          So arbeiten wir daran: Wir testen einen Prototypen, mit dem Sie
+          Pflichten im Bestandsrecht schnell identifizieren und strukturiert
+          analysieren können. Einen ersten Einblick erhalten Sie <a
+            href="https://digitalservicebund.github.io/zfl-website/previews/prototyp/pflichten/werkzeuge/pflichten/"
+            >hier</a
+          >.
+        {/snippet}
+      </Feature>
+    </div>
+    <h3>Für welche Vorhaben ist es geeignet?</h3>
+    <p>
+      Dieser Ablauf eignet sich für alle Vorhaben, in denen Gestaltungsspielraum
+      besteht.
+    </p>
+    <h3>Wo sparen Sie Zeit?</h3>
+    <p>
+      Die digitale Unterstützung nimmt Ihnen bei der Recherche Arbeit ab. Zudem
+      erstellt das System aus Ihren gesammelten Eingaben automatisch wichtige
+      Dokumente für die weitere Planung Ihres Vorhabens.
+    </p>
+  {/snippet}
 
+  {#snippet sidebar2()}
+    <h2>Daran arbeiten wir</h2>
+    <div class="mt-24 space-y-24">
+      <Feature icon="category" tag="geführter Prozess">
+        <strong>Aktuelles Arbeitspaket Neues Vorgehensmodell:</strong> Als Legistinnen
+        und Legisten erhalten Sie Orientierung, um frühzeitig verschiedene Perspektiven
+        einzubeziehen. Eine klare Struktur hilft Ihnen zu prüfen, ob eine Regelung
+        tatsächlich erforderlich ist.
+      </Feature>
+      <Feature icon="category" tag="geführter Prozess">
+        <strong>Konsolidierte Arbeitshilfen:</strong> Wir reduzieren die Vielzahl
+        bestehender Leitfäden und bündeln diese für Sie an einem zentralen Ort.
+      </Feature>
+      <Feature icon="auto" tag="Tools">
+        <strong>Das Zentrum für Legistik</strong> testet einen Prototypen, mit
+        dem Sie Pflichten im Bestandsrecht schnell identifizieren und
+        strukturiert analysieren können. Einen ersten Einblick erhalten Sie
+        <a
+          href="https://digitalservicebund.github.io/zfl-website/previews/prototyp/pflichten/werkzeuge/pflichten/"
+          >hier</a
+        >.
+      </Feature>
+    </div>
+  {/snippet}
+
+  <Cluster
+    color="#B3B7E0"
+    {orientation}
+    title="Recherche"
+    offset={0}
+    sidebar={[sidebar1, sidebar2]}
+  >
     <Bubble
       title="Gesetzes&shy;umfeld"
       size="sm"

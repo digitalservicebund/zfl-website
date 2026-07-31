@@ -1,14 +1,23 @@
 <script lang="ts">
   import type { FlowSidebarContent } from "./_flowSidebar";
+  import Stepper from "./_Stepper.svelte";
 
   let {
     content,
+    page = 0,
     isFirst = false,
     isLast = false,
     onClose,
     onNavigate,
+    onSelectPage,
   }: {
     content: FlowSidebarContent | null;
+    /**
+     * Index of the currently shown page within `content.children`, for
+     * clusters with more than one sidebar "page" (see `_Cluster.svelte`'s
+     * `sidebar` prop).
+     */
+    page?: number;
     /** Whether `content` is the first cluster - hides the "Zurück" button. */
     isFirst?: boolean;
     /**
@@ -18,6 +27,8 @@
     isLast?: boolean;
     onClose: () => void;
     onNavigate: (step: -1 | 1) => void;
+    /** Jumps directly to a given page index within the active step. */
+    onSelectPage: (page: number) => void;
   } = $props();
 
   function handleWeiterClick() {
@@ -32,10 +43,19 @@
 
   $effect(() => {
     content;
+    page;
     if (scrollContainer) scrollContainer.scrollTop = 0;
   });
 
   const isOpen = $derived(content !== null);
+  const pageCount = $derived(content?.children.length ?? 0);
+  // Clamped so a stale `page` (e.g. briefly out of range while switching
+  // between steps with a different number of pages) never renders `undefined`.
+  const currentPageSnippet = $derived(
+    content
+      ? content.children[Math.min(page, content.children.length - 1)]
+      : undefined,
+  );
 </script>
 
 <!-- Outer wrapper is the actual grid column, and always stays at its full
@@ -66,10 +86,13 @@
     <div
       class="flex max-h-[50vh] lg:max-h-screen w-full max-w-full flex-col pointer-events-auto lg:h-full bg-lavender-200"
     >
+      <div class="px-40 py-24">
+        <Stepper count={pageCount} current={page} onSelect={onSelectPage} />
+      </div>
       {#if content}
         <div
           bind:this={scrollContainer}
-          class="scroll-shadow kern-body--small min-h-0 flex-1 overflow-y-auto px-40 pt-56 pb-24 [&>h2]:kern-heading-medium [&>h2]:mt-32 [&_h3]:text-lg"
+          class="scroll-shadow kern-body--small min-h-0 flex-1 overflow-y-auto px-40 pt-0 pb-24 [&>h2]:kern-heading-medium [&>h2]:mt-32 [&_h3]:text-lg"
         >
           <div class="flex items-center justify-between gap-16 shrink-0">
             <p class="kern-label kern-label--small">
@@ -84,7 +107,7 @@
               ✕
             </button>
           </div>
-          {@render content.children()}
+          {@render currentPageSnippet?.()}
         </div>
         {#if content.kind === "cluster" || content.kind === "bubble"}
           <div
