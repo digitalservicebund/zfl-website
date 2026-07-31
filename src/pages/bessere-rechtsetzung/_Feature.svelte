@@ -46,8 +46,9 @@
 <button
   type="button"
   data-feature-button
-  class={`group flex items-start gap-16 p-16 rounded-sm border border-(--content-color) hover:bg-(--content-color)/20 focus:bg-(--content-color)/20 focus:outline-2 focus:outline-(--content-color)`}
+  class={`group flex items-start gap-16 p-16 rounded-sm border border-(--border-color) hover:bg-(--border-color)/20 focus:bg-(--border-color)/20 focus:outline-2 focus:outline-(--border-color)`}
   title="Schritte hervorheben"
+  style="--border-color: var(--kern-color-decorative-border-default);"
   onmousedown={(e) => {
     if (document.activeElement === e.currentTarget) {
       e.preventDefault();
