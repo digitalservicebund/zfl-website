@@ -1,7 +1,6 @@
 <script lang="ts">
   import { getContext } from "svelte";
   import type { Snippet } from "svelte";
-  import { icons } from "./_icons.ts";
   import BubbleIcon from "./_BubbleIcon.svelte";
   import ArrowUp from "~icons/ic/round-keyboard-arrow-up";
   import ArrowDown from "~icons/ic/round-keyboard-arrow-down";
@@ -10,12 +9,12 @@
     BUBBLE_HIGHLIGHT_CONTEXT_NAME,
     type BubbleHighlightContext,
   } from "./_bubbleHighlight";
+  import { iconMap, type TagName } from "./_icons";
 
   let {
     title,
     children,
     details,
-    icon,
     tag,
     // Defaults to the wrapping Cluster's own color: `_FlowSidebar.svelte`
     // sets `--content-color` on its wrapper from the active Cluster/Bubble's
@@ -29,10 +28,11 @@
     title?: string;
     children: Snippet;
     details?: Snippet;
-    icon: keyof typeof icons;
-    tag: string;
+    tag: TagName;
     color?: string;
   } = $props();
+
+  const icon = $derived(iconMap[tag]);
 
   const highlightContext = getContext<BubbleHighlightContext>(
     BUBBLE_HIGHLIGHT_CONTEXT_NAME,

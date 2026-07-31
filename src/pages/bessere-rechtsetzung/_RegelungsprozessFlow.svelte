@@ -89,16 +89,8 @@
       </p>
     {/snippet}
 
-    <Bubble
-      title="Arbeits&shy;gruppen&shy;bildung"
-      optional
-      tags={["Frühphase"]}
-    ></Bubble>
-    <Bubble
-      title="Workshops mit Ländern und Kommunen"
-      optional
-      tags={["Frühphase"]}
-    ></Bubble>
+    <Bubble title="Arbeits&shy;gruppen&shy;bildung" optional></Bubble>
+    <Bubble title="Workshops mit Ländern und Kommunen" optional></Bubble>
   </Cluster>
 
   <Arrow {orientation} color="#BCA6DC" highlightGroup="Interessensermittlung">
@@ -111,7 +103,7 @@
     offset={0}
     highlightGroup="Interessensermittlung"
   >
-    <Bubble title="Federführung" tags={["Frühphase"]}>
+    <Bubble title="Federführung">
       Ein Fachreferat übernimmt die Verantwortung für die Weiterentwicklung der
       Regelung. Legist:in wird zugewiesen.
     </Bubble>
@@ -129,7 +121,7 @@
     </p>
     <h3>Wie könnte diese Phase in Zukunft aussehen?</h3>
     <div class="mt-24 space-y-24">
-      <Feature icon="category" tag="geführter Prozess">
+      <Feature tag="Prozess">
         <strong>Ein geführter Prozess</strong> unterstützt Sie Schritt für
         Schritt dabei, Ihr Regelungsvorhaben von Anfang an strukturiert
         aufzusetzen. So können Sie das eigentliche Problem präzise durchdenken,
@@ -142,7 +134,7 @@
           fundiert abzuwägen.
         {/snippet}
       </Feature>
-      <Feature icon="category" tag="geführter Prozess">
+      <Feature tag="Checks">
         <strong>Verschiedene Checks und Arbeitshilfen</strong> sind konsolidiert
         und direkt in Ihren Arbeitsablauf eingebunden. So berücksichtigen Sie
         automatisch notwendige Anforderungen wie den
@@ -152,10 +144,10 @@
           Leitfäden und bündeln diese Schritt für Schritt an einem zentralen Ort.
         {/snippet}
       </Feature>
-      <Feature icon="auto" tag="Tools">
-        Künstliche Intelligenz nimmt Ihnen zeitintensive Arbeit bei der
-        Recherche, Strukturierung und Zusammenstellung von Informationen ab. So
-        finden und ordnen Sie relevante Inhalte deutlich schneller.
+      <Feature tag="KI">
+        <strong>Künstliche Intelligenz</strong> nimmt Ihnen zeitintensive Arbeit
+        bei der Recherche, Strukturierung und Zusammenstellung von Informationen
+        ab. So finden und ordnen Sie relevante Inhalte deutlich schneller.
         {#snippet details()}
           So arbeiten wir daran: Wir testen einen Prototypen, mit dem Sie
           Pflichten im Bestandsrecht schnell identifizieren und strukturiert
@@ -171,17 +163,17 @@
   {#snippet sidebar2()}
     <h2>Daran arbeiten wir</h2>
     <div class="mt-24 space-y-24">
-      <Feature icon="category" tag="geführter Prozess">
+      <Feature tag="Prozess">
         <strong>Aktuelles Arbeitspaket Neues Vorgehensmodell:</strong> Als Legistinnen
         und Legisten erhalten Sie Orientierung, um frühzeitig verschiedene Perspektiven
         einzubeziehen. Eine klare Struktur hilft Ihnen zu prüfen, ob eine Regelung
         tatsächlich erforderlich ist.
       </Feature>
-      <Feature icon="category" tag="geführter Prozess">
+      <Feature tag="Checks">
         <strong>Konsolidierte Arbeitshilfen:</strong> Wir reduzieren die Vielzahl
         bestehender Leitfäden und bündeln diese für Sie an einem zentralen Ort.
       </Feature>
-      <Feature icon="auto" tag="Tools">
+      <Feature tag="KI">
         <strong>Das Zentrum für Legistik</strong> testet einen Prototypen, mit
         dem Sie Pflichten im Bestandsrecht schnell identifizieren und
         strukturiert analysieren können. Einen ersten Einblick erhalten Sie
@@ -200,12 +192,7 @@
     offset={0}
     sidebar={[sidebar1, sidebar2]}
   >
-    <Bubble
-      title="Gesetzes&shy;umfeld"
-      size="sm"
-      tags={["Frühphase", "geführter Prozess"]}
-      icon="category"
-    >
+    <Bubble title="Gesetzes&shy;umfeld" size="sm" tags={["KI"]}>
       <p>Wovon wird die Regelung beeinflusst?</p>
       <ul>
         <li>
@@ -217,51 +204,33 @@
         <li>Feststellung der aktuellen Rechtslage</li>
       </ul>
     </Bubble>
-    <Bubble
-      title="Vorschläge von Verbänden"
-      optional
-      size="sm"
-      tags={["Frühphase"]}
-    ></Bubble>
+    <Bubble title="Vorschläge von Verbänden" optional size="sm"></Bubble>
     <Bubble
       title="Erarbeiten von Eckpunkten"
       optional
       size="md"
-      tags={["Frühphase", "Tools"]}
-      icon="auto"
+      tags={["Prozess"]}
     >
       Je nach Komplexität wird ein Eckpunktepapier verfasst oder nicht.
     </Bubble>
-    <Bubble
-      title="Gutachten und Sach&shy;verständigen&shy;kommissionen"
-      tags={["Frühphase"]}
+    <Bubble title="Gutachten und Sach&shy;verständigen&shy;kommissionen"
     ></Bubble>
-    <Bubble
-      title="Material&shy;recherche"
-      size="sm"
-      tags={["Frühphase", "geführter Prozess"]}
-      icon="category"
-    >
+    <Bubble title="Material&shy;recherche" size="sm" tags={["Checks"]}>
       Recherchiert Daten, die relevant für das Gesetz sind sowie das
       Gesetzesumfeld.
     </Bubble>
     <Bubble
       title="Workshops mit Ländern und Kommunen"
       optional
-      tags={["Frühphase"]}
+      tags={["Checks"]}
+      size="lg"
     ></Bubble>
     <Bubble
       title="Ziel- und Wirkungs&shy;definition"
       size="md"
-      tags={["Frühphase", "Tools"]}
-      icon="auto"
+      tags={["Prozess", "Checks"]}
     ></Bubble>
-    <Bubble
-      title="Vorarbeit"
-      size="sm"
-      tags={["Frühphase", "Tools"]}
-      icon="auto"
-    >
+    <Bubble title="Vorarbeit" size="sm" tags={["Prozess"]}>
       Zieht Arbeit aus anderen Fach-Referaten über das Gesetzesthema zusammen.
     </Bubble>
   </Cluster>
@@ -278,15 +247,15 @@
       </p>
     {/snippet}
 
-    <Bubble title="Frühzeitige Beteiligung" optional tags={["Frühphase"]}>
+    <Bubble title="Frühzeitige Beteiligung" optional>
       Von Betroffenen und Vollzug und anderen Wissensträgern (z.B. Verbänden,
       Ländern, Kommunen, Wissenschaft)
     </Bubble>
-    <Bubble title="Austausch" size="sm" tags={["Frühphase"]}>
+    <Bubble title="Austausch" size="sm">
       Austausch mit Netzwerk, Expert:innen, anderen Ministerien, ggf.
       Spiegelreferat
     </Bubble>
-    <Bubble title="Vorblatt" size="sm" tags={["Frühphase"]}>
+    <Bubble title="Vorblatt" size="sm">
       <ul>
         <li>Problem und Ziel</li>
         <li>Lösung</li>
@@ -296,15 +265,11 @@
         <li>Weitere Kosten</li>
       </ul>
     </Bubble>
-    <Bubble title="Rohentwurf" size="sm" tags={["Frühphase"]}>
+    <Bubble title="Rohentwurf" size="sm">
       Schreibt ersten Entwurf mit Kommentarspalte. Allein oder mit ein oder
       mehreren weiteren Legist:innen zusammen.
     </Bubble>
-    <Bubble
-      title="Gesetzesfolgen werden besprochen"
-      optional
-      tags={["Frühphase"]}
-    ></Bubble>
+    <Bubble title="Gesetzesfolgen werden besprochen" optional></Bubble>
   </Cluster>
 
   <Cluster color="#A0EBEE" {orientation} title="Hausentwurf & Ressortentwurf">

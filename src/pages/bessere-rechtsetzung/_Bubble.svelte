@@ -7,7 +7,7 @@
   } from "./_bubbleHighlight";
   import Tooltip from "./_Tooltip.svelte";
   import BubbleIcon from "./_BubbleIcon.svelte";
-  import { icons } from "./_icons.ts";
+  import { iconMap, type TagName } from "./_icons.ts";
 
   type Size = "xs" | "sm" | "md" | "lg";
   type Shape = "circle" | "rhomb";
@@ -16,7 +16,7 @@
     xs: "3em",
     sm: "9em",
     md: "11em",
-    lg: "13em",
+    lg: "12em",
   };
 
   let {
@@ -28,7 +28,6 @@
     tags,
     children,
     body,
-    icon,
     shape = "circle",
   }: {
     /**
@@ -40,14 +39,15 @@
     optional?: boolean;
     size?: Size;
     className?: string;
-    tags?: string[];
+    tags?: TagName[];
     /** Tooltip content shown above the bubble when it's clicked open. */
     children?: Snippet;
     /** Optional body content shown within the bubble */
     body?: Snippet;
-    icon?: keyof typeof icons;
     shape?: Shape;
   } = $props();
+
+  const icons = $derived(tags?.map((t) => iconMap[t]));
 
   // Falls back to an always-empty list when no ancestor provides the
   // context (e.g. when a Bubble is rendered standalone, such as in the
@@ -106,9 +106,13 @@
         {#if body}
           {@render body()}
         {/if}
-        {#if icon}
-          <div class="absolute bottom-[5%] left-[50%] -translate-x-1/2">
-            <BubbleIcon {icon} />
+        {#if icons}
+          <div
+            class="absolute bottom-[5%] left-[50%] -translate-x-1/2 flex gap-4"
+          >
+            {#each icons as icon}
+              <BubbleIcon {icon} />
+            {/each}
           </div>
         {/if}
       </div>

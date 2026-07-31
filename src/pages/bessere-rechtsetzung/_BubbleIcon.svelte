@@ -1,15 +1,13 @@
 <script lang="ts">
-  import { icons } from "./_icons.ts";
+  import type { IconType } from "./_icons.ts";
 
   let {
-    icon,
+    icon: IconComponent,
     color,
   }: {
-    icon: keyof typeof icons;
+    icon: IconType;
     color?: string;
   } = $props();
-
-  const IconComponent = $derived(icons[icon]);
 </script>
 
 <div
