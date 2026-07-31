@@ -175,13 +175,42 @@
       activePage === sidebarContent.children.length - 1,
   );
 
+  // Scrolls `el` into view like `Element.scrollIntoView({ block: "start" })`,
+  // but (in vertical orientation) clamps the target scroll position so it
+  // never scrolls past the point where the layout wrapper's bottom edge
+  // would rise above the viewport - beyond that point, `_FlowSidebar.svelte`
+  // (whose sticky containing block is this wrapper) starts scrolling away
+  // with the content instead of staying pinned. Most relevant for the last
+  // cluster ("Nach der Verkündung"), which would otherwise scroll the
+  // sidebar out of view.
+  function scrollToStep(el: HTMLElement) {
+    startJump();
+    if (!isVertical || !wrapperEl) {
+      el.scrollIntoView({ behavior: "smooth" });
+      return;
+    }
+
+    // `scrollIntoView` honors `scroll-margin-top` (e.g. the cluster titles'
+    // `scroll-mt-40`) automatically, but reading `getBoundingClientRect()`
+    // directly doesn't - subtract it manually so the clamped scroll lands
+    // at the same offset the native call would have used.
+    const scrollMarginTop = parseFloat(
+      getComputedStyle(el).scrollMarginTop || "0",
+    );
+    const targetY =
+      window.scrollY + el.getBoundingClientRect().top - scrollMarginTop;
+    const maxScrollY =
+      window.scrollY +
+      wrapperEl.getBoundingClientRect().bottom -
+      window.innerHeight;
+    const clampedY = Math.max(0, Math.min(targetY, maxScrollY));
+    window.scrollTo({ top: clampedY, behavior: "smooth" });
+  }
+
   function onDotSelect(id: string) {
     setActive(id);
     const el = document.getElementById(id);
-    if (el) {
-      startJump();
-      el.scrollIntoView({ behavior: "smooth" });
-    }
+    if (el) scrollToStep(el);
     syncUrl();
   }
 
@@ -221,10 +250,7 @@
     // next step.
     activePage = step === 1 ? 0 : nextContent.children.length - 1;
     const activeEl = document.getElementById(nextContent.id);
-    if (activeEl) {
-      startJump();
-      activeEl.scrollIntoView({ behavior: "smooth" });
-    }
+    if (activeEl) scrollToStep(activeEl);
     syncUrl();
   }
 
@@ -300,9 +326,13 @@
   });
 
   let mainEl: HTMLDivElement | undefined = $state();
+  // The grid wrapper whose bottom edge bounds `_FlowSidebar.svelte`'s sticky
+  // positioning - see `scrollToStep`.
+  let wrapperEl: HTMLDivElement | undefined = $state();
 </script>
 
 <div
+  bind:this={wrapperEl}
   class="grid items-start grid-cols-[1fr_auto] [--cluster-inner-width:100vw] lg:[--cluster-inner-width:66vw]"
 >
   <div

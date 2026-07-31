@@ -562,7 +562,7 @@
   <Cluster
     color="#FAB5A8"
     {orientation}
-    className={`bg-(--contrast-bg) ${isVertical ? "pb-[30vh]" : "pr-40"}`}
+    className={`bg-(--contrast-bg) ${isVertical ? "" : "pr-40"}`}
     highlightGroup="Nach der Verkündung"
   >
     <Bubble title="Vollzug">
