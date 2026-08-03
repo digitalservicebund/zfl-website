@@ -269,7 +269,13 @@
     {#snippet sidebar()}
       <h2>Was passiert hier?</h2>
       <p>
-        <em>2-3 Sätze wie bei „Interessensermittlung”</em>
+        Sobald die inhaltlichen Linien des Vorhabens stehen, erarbeitet das
+        zuständige Fachreferat den ersten Entwurf eines Gesetzes- oder
+        Verordnungstextes. Fachliche Anforderungen, bestehendes Recht und
+        juristische Qualitätssicherung fließen dabei zusammen. Häufig werden
+        bereits informell andere betroffene Bereiche und nachgeordnete Behörden
+        einbezogen. In dieser Phase entscheidet sich, wie klar, verständlich und
+        vollzugstauglich die künftigen Regelungen formuliert sind.
       </p>
     {/snippet}
 
@@ -302,7 +308,14 @@
     {#snippet sidebar()}
       <h2>Was passiert hier?</h2>
       <p>
-        <em>2-3 Sätze wie bei „Interessensermittlung”</em>
+        Auf Basis des Referentenentwurfs startet die hausinterne Abstimmung:
+        Weitere Referate, die Rechtsabteilung und die Hausleitung bringen ihre
+        Perspektiven und Anforderungen ein, bis ein abgestimmter Hausentwurf
+        vorliegt. Anschließend folgt die offizielle Ressortabstimmung mit den
+        anderen Bundesministerien, die ihre Belange anmelden und
+        Änderungswünsche einbringen. Ziel ist ein tragfähiger Entwurf, der die
+        unterschiedlichen Interessen der Bundesregierung ausgleicht und die
+        Grundlage für die Kabinettvorlage bildet.
       </p>
     {/snippet}
 
