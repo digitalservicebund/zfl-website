@@ -269,13 +269,11 @@
     {#snippet sidebar()}
       <h2>Was passiert hier?</h2>
       <p>
-        Sobald die inhaltlichen Linien des Vorhabens stehen, erarbeitet das
-        zuständige Fachreferat den ersten Entwurf eines Gesetzes- oder
-        Verordnungstextes. Fachliche Anforderungen, bestehendes Recht und
-        juristische Qualitätssicherung fließen dabei zusammen. Häufig werden
-        bereits informell andere betroffene Bereiche und nachgeordnete Behörden
-        einbezogen. In dieser Phase entscheidet sich, wie klar, verständlich und
-        vollzugstauglich die künftigen Regelungen formuliert sind.
+        Sobald die Recherche abgeschlossen ist, erarbeitet das zuständige
+        Ressort den konkreten Rohentwurf und das dazugehörige Vorblatt. Parallel
+        dazu startet der fachliche Austausch, wobei optional schon jetzt eine
+        frühzeitige Beteiligung stattfinden und erste Gesetzesfolgen besprochen
+        werden können, um den Entwurf frühzeitig zu schärfen.
       </p>
     {/snippet}
 
@@ -308,14 +306,17 @@
     {#snippet sidebar()}
       <h2>Was passiert hier?</h2>
       <p>
-        Auf Basis des Referentenentwurfs startet die hausinterne Abstimmung:
-        Weitere Referate, die Rechtsabteilung und die Hausleitung bringen ihre
-        Perspektiven und Anforderungen ein, bis ein abgestimmter Hausentwurf
-        vorliegt. Anschließend folgt die offizielle Ressortabstimmung mit den
-        anderen Bundesministerien, die ihre Belange anmelden und
-        Änderungswünsche einbringen. Ziel ist ein tragfähiger Entwurf, der die
-        unterschiedlichen Interessen der Bundesregierung ausgleicht und die
-        Grundlage für die Kabinettvorlage bildet.
+        Sobald der erste Rohentwurf steht, holt das federführende Referat
+        hausinternes Feedback ein und übergibt den Hausentwurf zur
+        Frühkoordinierung an das Bundeskanzleramt. Parallel dazu starten die
+        politischen Abstimmungen, Berichterstattergespräche und die
+        Gesetzesfolgenabschätzung. So werden rechtzeitig externe Stellungnahmen
+        von weiteren Ressorts sowie Prüfstellen (wie dem NKR) eingeholt und der
+        Entwurf strukturiert zum Ressortentwurf weiterentwickelt.
+      </p>
+      <p>
+        Abschließend informiert das Ressort die betroffenen Verbände und
+        bereitet die finale Fassung als Regierungsentwurf vor.
       </p>
     {/snippet}
 
