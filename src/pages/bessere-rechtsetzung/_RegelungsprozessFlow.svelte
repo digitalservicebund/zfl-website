@@ -84,7 +84,7 @@
       <p>
         Sobald die Zuständigkeit nach der Geschäftsverteilung der
         Bundesregierung feststeht, beginnt das federführende Ressort mit der
-        Koordination und der inhaltlichen Arbeitden. Parallel bilden sich erste
+        Koordination und der inhaltlichen Arbeit. Parallel bilden sich erste
         Arbeitsgruppen und der Austausch mit den Ländern und Kommunen beginnt.
       </p>
     {/snippet}
@@ -112,12 +112,7 @@
   {#snippet sidebar1()}
     <h2>Was passiert hier?</h2>
     <p>
-      In der frühen Phase der Gesetzesvorbereitung werden Sie dabei unterstützt,
-      Ihre neuen Regelungen optimal vorzubereiten. Ziel ist es, frühzeitig zu
-      prüfen, welches Problem gelöst werden muss, und festzulegen, was die
-      Regelung bewirken soll. Zudem wird es erleichtert, alle wichtigen
-      Beteiligten frühzeitig einzubinden. So schaffen Sie von Anfang an eine
-      fundierte Grundlage für Ihre weitere Arbeit.
+      <em>2-3 Sätze wie bei „Interessenvermittlung”</em>
     </p>
     <h3>Wie könnte diese Phase in Zukunft aussehen?</h3>
     <div class="mt-24 space-y-24">
@@ -239,11 +234,7 @@
     {#snippet sidebar()}
       <h2>Was passiert hier?</h2>
       <p>
-        Nachdem Sie die Recherchephase abgeschlossen haben, werden Sie bei der
-        Ausarbeitung Ihres ersten konkreten Entwurfs unterstützt. Ziel ist es,
-        rechtliche Vorgaben im Blick zu behalten und sich früh mit der Praxis
-        auszutauschen. So vermeiden Sie Umsetzungsrisiken und schaffen von
-        Anfang an praxistaugliche Regelungen.
+        <em>2-3 Sätze wie bei „Interessenvermittlung”</em>
       </p>
     {/snippet}
 
@@ -276,12 +267,7 @@
     {#snippet sidebar()}
       <h2>Was passiert hier?</h2>
       <p>
-        Nachdem Sie Ihren Referentenentwurf erstellt haben, beginnt die formale
-        Abstimmung im eigenen Haus, mit den anderen Ressorts und externen
-        Beteiligten. In dieser Phase werden Sie dabei unterstützt, den
-        bürokratischen Aufwand so gering wie möglich zu halten. Ziel ist es,
-        bestehende Daten nahtlos weiterzunutzen und sich voll auf die
-        inhaltlichen Absprachen zu konzentrieren.
+        <em>2-3 Sätze wie bei „Interessenvermittlung”</em>
       </p>
     {/snippet}
 
