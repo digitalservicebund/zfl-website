@@ -333,7 +333,7 @@
 
 <div
   bind:this={wrapperEl}
-  class="grid items-start grid-cols-[1fr_auto] [--cluster-inner-width:100vw] lg:[--cluster-inner-width:66vw]"
+  class="grid items-start grid-cols-[1fr_auto] [--cluster-inner-width:100vw] lg:[--cluster-inner-width:61.8vw]"
 >
   <div
     class={`grid min-w-0 ${isVertical ? "mx-auto w-(--cluster-inner-width)" : ""}`}
