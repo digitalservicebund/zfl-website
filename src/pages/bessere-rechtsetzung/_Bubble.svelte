@@ -49,9 +49,6 @@
 
   const icons = $derived(tags?.map((t) => iconMap[t]));
 
-  // Falls back to an always-empty list when no ancestor provides the
-  // context (e.g. when a Bubble is rendered standalone, such as in the
-  // kitchen sink page), so bubbles are never unexpectedly grayed out.
   const highlightContext = getContext<BubbleHighlightContext | undefined>(
     BUBBLE_HIGHLIGHT_CONTEXT_NAME,
   );
@@ -65,7 +62,7 @@
   // instance (rather than routed through the shared `_FlowSidebar.svelte`),
   // since the tooltip is anchored right above its own bubble instead of
   // being displayed in a global sidebar panel.
-  let open = $state(false);
+  let active = $state(false);
 
   const isInteractive = false; // $derived(!!children);
 
@@ -77,11 +74,11 @@
 </script>
 
 <div
-  class={`relative inline-flex flex-col items-center hover:z-30 has-focus-visible:z-30 ${open ? "z-20" : ""} ${className}`}
+  class={`relative inline-flex flex-col items-center hover:z-30 has-focus-visible:z-30 ${active ? "z-20" : ""} ${className}`}
 >
   {#snippet bubble()}
     <div
-      class={`group/circle flex text-xs md:text-sm xl:text-base items-center justify-center ${shape === "circle" ? "rounded-full" : "rotate-45"} transition-[transform,filter,box-shadow,opacity] duration-200 ease-out ${children ? "hover:scale-105 group-focus-visible:scale-105 group-focus-visible:outline-2 group-focus-visible:outline-cosmic-blue-base" : ""} ${open ? "scale-105 ring-4 ring-cosmic-blue-base ring-offset-2" : ""} ${dimmed ? "opacity-50" : ""}`}
+      class={`group/circle flex text-xs md:text-sm xl:text-base items-center justify-center ${shape === "circle" ? "rounded-full" : "rotate-45"} transition-[transform,filter,box-shadow,opacity] duration-200 ease-out ${isInteractive ? "hover:scale-105 group-focus-visible:scale-105 group-focus-visible:outline-2 group-focus-visible:outline-cosmic-blue-base" : ""} ${active ? "scale-105 ring-4 ring-cosmic-blue-base ring-offset-2" : ""} ${dimmed ? "opacity-50" : ""}`}
       style={`background-color: ${color ?? "var(--bubble-color)"}; width: ${sizeMap[size]}; height: ${sizeMap[size]}; anchor-name: ${anchorName};`}
     >
       <div
@@ -117,7 +114,7 @@
         {/if}
       </div>
     </div>
-    {#if children && open}
+    {#if children && active}
       <Tooltip {anchorName} id={uid}>
         {@render children()}
       </Tooltip>
@@ -128,8 +125,8 @@
     <button
       aria-describedby={uid}
       class="group focus-visible:outline-none"
-      onmouseenter={() => (open = true)}
-      onmouseleave={() => (open = false)}
+      onmouseenter={() => (active = true)}
+      onmouseleave={() => (active = false)}
     >
       {@render bubble()}
     </button>

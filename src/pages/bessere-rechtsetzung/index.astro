@@ -1,7 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
-import RegelungsprozessFlowWithLayout from "./_RegelungsprozessFlowWithLayout.svelte";
+import Flow from "./_Flow.svelte";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 
 export const frontmatter = {
@@ -26,7 +26,7 @@ export const frontmatter = {
       </div>
     </Hero>
 
-    <RegelungsprozessFlowWithLayout client:load />
+    <Flow client:load />
 
     <section
       class="bg-lavender-400 flex min-h-screen items-center justify-center"
@@ -35,15 +35,15 @@ export const frontmatter = {
       <div class="p-lg max-w-800 space-y-24">
         <div class="relative h-[30vh] w-full">
           <div
-            class="absolute top-[58%] left-[28%] size-[14vw] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white"
+            class="absolute top-[58%] left-[28%] size-[14vmax] -translate-x-1/2 -translate-y-1/2 rounded-full bg-white"
           >
           </div>
           <div
-            class="bg-cosmic-blue-400 absolute top-[25%] left-[64%] size-[10vw] -translate-x-1/2 -translate-y-1/2 rounded-full"
+            class="bg-cosmic-blue-400 absolute top-[25%] left-[64%] size-[10vmax] -translate-x-1/2 -translate-y-1/2 rounded-full"
           >
           </div>
           <div
-            class="bg-cosmic-blue-base absolute top-[80%] left-[60%] size-[6vw] -translate-x-1/2 -translate-y-1/2 rounded-full"
+            class="bg-cosmic-blue-base absolute top-[80%] left-[60%] size-[6vmax] -translate-x-1/2 -translate-y-1/2 rounded-full"
           >
           </div>
         </div>

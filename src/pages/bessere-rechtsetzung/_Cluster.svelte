@@ -105,7 +105,6 @@
       id: title,
       title,
       children: sidebarPages,
-      kind: "cluster",
       color,
     });
     return () => sidebarContext?.unregister(title);

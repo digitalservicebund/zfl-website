@@ -7,11 +7,6 @@ import type { Snippet } from "svelte";
 // own popup.
 export const FLOW_SIDEBAR_CONTEXT_NAME = Symbol("flow-sidebar");
 
-// Search param used to make the currently open bubble shareable/bookmarkable
-// (e.g. `?step=Materialrecherche`) and to support the browser back/forward
-// buttons.
-export const FLOW_SIDEBAR_STEP_PARAM = "step";
-
 export interface FlowSidebarContent {
   /** Unique identifier of the bubble whose content is shown, e.g. its title. */
   id: string;
@@ -26,18 +21,9 @@ export interface FlowSidebarContent {
    */
   children: Snippet[];
   /**
-   * Fill color of the bubble/cluster that opened this content, e.g. a hex
-   * code. Used by `_FlowSidebar.svelte` to tint its background in a softer
-   * version of that color.
+   * Fill color of the cluster that opened this content
    */
   color?: string;
-  /**
-   * Distinguishes a `_Bubble.svelte` entry from a `_Cluster.svelte` entry, so
-   * the sidebar's "Zurück"/"Weiter" navigation cycles through steps of the
-   * same kind as the currently open one, without mixing bubbles and
-   * clusters into a single sequence.
-   */
-  kind: "bubble" | "cluster";
 }
 
 export interface FlowSidebarContext {

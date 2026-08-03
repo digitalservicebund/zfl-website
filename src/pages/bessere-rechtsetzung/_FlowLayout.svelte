@@ -5,31 +5,28 @@
   import DotNav from "./_DotNav.svelte";
   import {
     FLOW_SIDEBAR_CONTEXT_NAME,
-    FLOW_SIDEBAR_STEP_PARAM,
     type FlowSidebarContent,
   } from "./_flowSidebar";
   import { BUBBLE_HIGHLIGHT_CONTEXT_NAME } from "./_bubbleHighlight";
 
   let {
     orientation = "vertical",
-    contentId = "flow-with-minimap-content",
-    highlighted = $bindable([]),
     children,
   }: {
     /** Direction the content scrolls/grows in. */
     orientation?: "vertical" | "horizontal";
-    contentId?: string;
-    /**
-     * Tags of the bubbles to highlight (matched against each Bubble's
-     * `tags` prop). Owned here (rather than by the flow content itself) so
-     * the same highlight state is visible both to the flow content and to
-     * `_FlowSidebar.svelte`, which is rendered as a sibling of `children`
-     * and wouldn't otherwise share its component tree. Bindable so callers
-     * can control it externally.
-     */
-    highlighted?: string[];
     children: Snippet;
   } = $props();
+
+  /**
+   * Tags of the bubbles to highlight (matched against each Bubble's
+   * `tags` prop). Owned here (rather than by the flow content itself) so
+   * the same highlight state is visible both to the flow content and to
+   * `_FlowSidebar.svelte`, which is rendered as a sibling of `children`
+   * and wouldn't otherwise share its component tree. Bindable so callers
+   * can control it externally.
+   */
+  let highlighted = $state<string[]>([]);
 
   // Exposed via context (rather than threaded through every `<Bubble>`/
   // `<Feature>` usage) so any descendant - including sidebar content
@@ -76,37 +73,17 @@
     delete registry[id];
   }
 
-  function readStepFromUrl(): string | null {
-    return new URLSearchParams(location.search).get(FLOW_SIDEBAR_STEP_PARAM);
-  }
-
-  // Pushes a new history entry reflecting the current `activeId`, so the
-  // sidebar state is shareable via URL and the back/forward buttons step
-  // through opened/closed bubbles.
-  function syncUrl() {
-    return; // disabled for now
-    // const url = new URL(location.href);
-    // if (activeId) {
-    //   url.searchParams.set(FLOW_SIDEBAR_STEP_PARAM, activeId);
-    // } else {
-    //   url.searchParams.delete(FLOW_SIDEBAR_STEP_PARAM);
-    // }
-    // history.pushState(history.state, "", url);
-  }
-
   // Content for `id` is expected to already be in the registry - every
   // Bubble/Cluster registers itself as soon as it mounts, well before it can
   // be clicked.
   function toggle(id: string) {
     activeId = activeId === id ? null : id;
     activePage = 0;
-    syncUrl();
   }
 
   function setActive(id: string) {
     activeId = id;
     activePage = 0;
-    syncUrl();
   }
 
   // Marks the flow as "auto-scrolling" while `navigateStep`'s
@@ -135,23 +112,13 @@
   function closeSidebar() {
     activeId = null;
     activePage = 0;
-    syncUrl();
   }
 
-  // Ids of all currently registered Cluster/Bubble steps, in registration
+  // Ids of all currently registered Cluster steps, in registration
   // order (which follows page/DOM order), used to cycle "Zurück"/"Weiter"
   // through steps of the same kind as the currently open one - Clusters and
   // Bubbles each cycle through their own sequence, never mixed together.
-  const clusterIds = $derived(
-    Object.values(registry)
-      .filter((entry) => entry.kind === "cluster")
-      .map((entry) => entry.id),
-  );
-  const bubbleIds = $derived(
-    Object.values(registry)
-      .filter((entry) => entry.kind === "bubble")
-      .map((entry) => entry.id),
-  );
+  const clusterIds = $derived(Object.values(registry).map((entry) => entry.id));
 
   // Cluster dots shown in `_DotNav.svelte`, in the same registration order
   // as `clusterIds`.
@@ -165,12 +132,10 @@
   // multi-page cluster's later/earlier pages don't hide "Zurück"/"Weiter"
   // prematurely.
   const isFirstCluster = $derived(
-    sidebarContent?.kind === "cluster" &&
-      sidebarContent.id === clusterIds[0] &&
-      activePage === 0,
+    !!sidebarContent && sidebarContent.id === clusterIds[0] && activePage === 0,
   );
   const isLastCluster = $derived(
-    sidebarContent?.kind === "cluster" &&
+    !!sidebarContent &&
       sidebarContent.id === clusterIds[clusterIds.length - 1] &&
       activePage === sidebarContent.children.length - 1,
   );
@@ -211,7 +176,6 @@
     setActive(id);
     const el = document.getElementById(id);
     if (el) scrollToStep(el);
-    syncUrl();
   }
 
   function navigateStep(step: -1 | 1) {
@@ -226,12 +190,7 @@
       return;
     }
 
-    const ids =
-      sidebarContent.kind === "cluster"
-        ? clusterIds
-        : sidebarContent.kind === "bubble"
-          ? bubbleIds
-          : [];
+    const ids = clusterIds;
     if (ids.length === 0) return;
 
     const currentIndex = ids.indexOf(sidebarContent.id);
@@ -251,51 +210,16 @@
     activePage = step === 1 ? 0 : nextContent.children.length - 1;
     const activeEl = document.getElementById(nextContent.id);
     if (activeEl) scrollToStep(activeEl);
-    syncUrl();
   }
 
   // Jumps directly to a given page within the active step, e.g. when a
-  // `_Stepper.svelte` bubble is clicked, rather than only stepping by ±1.
+  // `_Stepper.svelte` element is clicked, rather than only stepping by ±1.
   function selectPage(index: number) {
     if (!sidebarContent) return;
     if (index < 0 || index >= sidebarContent.children.length) return;
 
     activePage = index;
   }
-
-  // let initialActiveIdSet = false;
-
-  // Opens straight from a shared link on first render, falling back to the
-  // first registered cluster step when there's no `?step=` param, so the
-  // sidebar always shows some content on load instead of the "Wähle einen
-  // Schritt aus" placeholder. Re-runs (tracking `clusterIds`) until at least
-  // one cluster has registered, then never touches `activeId` again on its
-  // own - subsequent changes only come from `toggle`/`popstate`.
-  // $effect(() => {
-  //   if (initialActiveIdSet) return;
-  //
-  //   const stepFromUrl = readStepFromUrl();
-  //   if (stepFromUrl) {
-  //     activeId = stepFromUrl;
-  //     initialActiveIdSet = true;
-  //     return;
-  //   }
-  //
-  //   if (clusterIds.length > 0) {
-  //     activeId = clusterIds[0];
-  //     initialActiveIdSet = true;
-  //   }
-  // });
-
-  $effect(() => {
-    function onPopState() {
-      activeId = readStepFromUrl();
-      activePage = 0;
-    }
-
-    window.addEventListener("popstate", onPopState);
-    return () => window.removeEventListener("popstate", onPopState);
-  });
 
   // Clears the `jumping` flag once the auto-scroll triggered by
   // `navigateStep` actually finishes, listening on whichever target scrolls
@@ -348,7 +272,6 @@
       <DotNav clusters={clusterDots} {activeId} onSelect={onDotSelect} />
     </div>
     <div
-      id={contentId}
       bind:this={mainEl}
       class={`col-start-1 row-start-1 min-w-0 max-w-screen ${isVertical ? "" : "w-screen overflow-x-auto scrollbar-none"}`}
     >

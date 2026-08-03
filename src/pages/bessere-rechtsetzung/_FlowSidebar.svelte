@@ -48,12 +48,10 @@
   const isOpen = $derived(content !== null);
   const pageCount = $derived(content?.children.length ?? 0);
   // "Weiter" advances to a new cluster (rather than just the next page
-  // within the current cluster, or - for bubbles - the next bubble) only
+  // within the current cluster) only
   // when the current cluster's last page is shown and there's a following
   // cluster to move on to (i.e. not `isLast`).
-  const nextIsNewCluster = $derived(
-    content?.kind === "cluster" && !isLast && page === pageCount - 1,
-  );
+  const nextIsNewCluster = $derived(!isLast && page === pageCount - 1);
   // Clamped so a stale `page` (e.g. briefly out of range while switching
   // between steps with a different number of pages) never renders `undefined`.
   const currentPageSnippet = $derived(
@@ -82,8 +80,7 @@
 >
   <!-- Sticky (not fixed) so it stays visible while scrolling the flow, but
        never escapes the bounds of its containing `_FlowLayout.svelte`
-       grid column. Always rendered - shows a placeholder until a bubble or
-       cluster is clicked. -->
+       grid column. -->
   <div
     class={`sticky top-0 z-50 h-screen w-screen lg:w-[calc(100vw-var(--cluster-inner-width))] flex items-end lg:items-center pointer-events-none transition-transform duration-500 ease-out ${isOpen ? "" : "translate-x-full"}`}
     style={content?.color ? `--content-color: ${content.color}` : undefined}
@@ -111,30 +108,28 @@
           </div>
           {@render currentPageSnippet?.()}
         </div>
-        {#if content.kind === "cluster" || content.kind === "bubble"}
-          <div
-            class="flex shrink-0 justify-end gap-8 px-40 pt-24 pb-40 bg-lavender-200"
-          >
-            {#if !isFirst}
-              <button
-                type="button"
-                class="kern-btn kern-btn--secondary"
-                onclick={() => onNavigate(-1)}
-              >
-                <span class="kern-label">Zurück</span>
-              </button>
-            {/if}
+        <div
+          class="flex shrink-0 justify-end gap-8 px-40 pt-24 pb-40 bg-lavender-200"
+        >
+          {#if !isFirst}
             <button
               type="button"
-              class="kern-btn kern-btn--primary"
-              onclick={handleWeiterClick}
+              class="kern-btn kern-btn--secondary"
+              onclick={() => onNavigate(-1)}
             >
-              <span class="kern-label"
-                >{nextIsNewCluster ? "Zur nächsten Phase" : "Weiter"}</span
-              >
+              <span class="kern-label">Zurück</span>
             </button>
-          </div>
-        {/if}
+          {/if}
+          <button
+            type="button"
+            class="kern-btn kern-btn--primary"
+            onclick={handleWeiterClick}
+          >
+            <span class="kern-label"
+              >{nextIsNewCluster ? "Zur nächsten Phase" : "Weiter"}</span
+            >
+          </button>
+        </div>
       {/if}
     </div>
   </div>
