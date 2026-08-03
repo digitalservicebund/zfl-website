@@ -112,7 +112,7 @@
   {#snippet sidebar1()}
     <h2>Was passiert hier?</h2>
     <p>
-      <em>2-3 Sätze wie bei „Interessenvermittlung”</em>
+      <em>2-3 Sätze wie bei „Interessensermittlung”</em>
     </p>
     <h3>Wie könnte diese Phase in Zukunft aussehen?</h3>
     {#snippet feature1()}
@@ -265,7 +265,7 @@
     {#snippet sidebar()}
       <h2>Was passiert hier?</h2>
       <p>
-        <em>2-3 Sätze wie bei „Interessenvermittlung”</em>
+        <em>2-3 Sätze wie bei „Interessensermittlung”</em>
       </p>
     {/snippet}
 
@@ -298,7 +298,7 @@
     {#snippet sidebar()}
       <h2>Was passiert hier?</h2>
       <p>
-        <em>2-3 Sätze wie bei „Interessenvermittlung”</em>
+        <em>2-3 Sätze wie bei „Interessensermittlung”</em>
       </p>
     {/snippet}
 
