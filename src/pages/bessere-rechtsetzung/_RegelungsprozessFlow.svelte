@@ -112,7 +112,11 @@
   {#snippet sidebar1()}
     <h2>Was passiert hier?</h2>
     <p>
-      <em>2-3 Sätze wie bei „Interessensermittlung”</em>
+      Sobald der Bedarf für eine neue Regelung feststeht, analysiert das
+      federführende Referat das genaue Problem und legt klare Ziele fest.
+      Parallel dazu wird das rechtliche und fachliche Umfeld recherchiert. So
+      wird frühzeitig ermittelt, welche weiteren Ressorts und externen
+      Stakeholder in die Arbeit eingebunden werden müssen.
     </p>
     <h3>Wie könnte diese Phase in Zukunft aussehen?</h3>
     {#snippet feature1()}
