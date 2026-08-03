@@ -6,6 +6,7 @@
   import Feature from "./_Feature.svelte";
   import OutTrigger from "./_OutTrigger.svelte";
   import IconArrowDown from "~icons/ic/round-keyboard-double-arrow-down";
+  import Carousel from "./_Carousel.svelte";
 
   let {
     orientation = "vertical",
@@ -115,77 +116,89 @@
       <em>2-3 Sätze wie bei „Interessenvermittlung”</em>
     </p>
     <h3>Wie könnte diese Phase in Zukunft aussehen?</h3>
-    <div class="mt-24 space-y-24">
+    {#snippet feature1()}
       <Feature tag="Prozess">
-        <strong>Ein geführter Prozess</strong> unterstützt Sie Schritt für
-        Schritt dabei, Ihr Regelungsvorhaben von Anfang an strukturiert
-        aufzusetzen. So können Sie das eigentliche Problem präzise durchdenken,
-        Wirkungsziele festlegen und alle relevanten Akteure frühzeitig
-        einbinden. Informationen dokumentieren Sie an einer zentralen Stelle.
-        {#snippet details()}
+        <p>
+          <strong>Ein geführter Prozess</strong> unterstützt Sie Schritt für Schritt
+          dabei, Ihr Regelungsvorhaben von Anfang an strukturiert aufzusetzen. So
+          können Sie das eigentliche Problem präzise durchdenken, Wirkungsziele festlegen
+          und alle relevanten Akteure frühzeitig einbinden. Informationen dokumentieren
+          Sie an einer zentralen Stelle.
+        </p>
+        <p>
           <strong>So arbeiten wir daran:</strong> Wir entwickeln gemeinsam mit Ihnen
           ein praxistaugliches Rahmenwerk. Es soll die frühe Erarbeitungsphase strukturieren
           und Sie dabei unterstützen, Notwendigkeit und Alternativen einer Regelung
           fundiert abzuwägen.
-        {/snippet}
+        </p>
       </Feature>
+    {/snippet}
+    {#snippet feature2()}
       <Feature tag="Checks">
-        <strong>Verschiedene Checks und Arbeitshilfen</strong> sind konsolidiert
-        und direkt in Ihren Arbeitsablauf eingebunden. So berücksichtigen Sie
-        automatisch notwendige Anforderungen wie den
-        <a href="https://digitalcheck.bund.de/">Digitalcheck</a>.
-        {#snippet details()}
+        <p>
+          <strong>Verschiedene Checks und Arbeitshilfen</strong> sind
+          konsolidiert und direkt in Ihren Arbeitsablauf eingebunden. So
+          berücksichtigen Sie automatisch notwendige Anforderungen wie den
+          <a href="https://digitalcheck.bund.de/">Digitalcheck</a>.
+        </p>
+        <p>
           <strong>So arbeiten wir daran:</strong> Wir reduzieren die Vielzahl bestehender
           Leitfäden und bündeln diese Schritt für Schritt an einem zentralen Ort.
-        {/snippet}
+        </p>
       </Feature>
+    {/snippet}
+    {#snippet feature3()}
       <Feature tag="KI">
-        <strong>Künstliche Intelligenz</strong> nimmt Ihnen zeitintensive Arbeit
-        bei der Recherche, Strukturierung und Zusammenstellung von Informationen
-        ab. So finden und ordnen Sie relevante Inhalte deutlich schneller.
-        {#snippet details()}
+        <p>
+          <strong>Künstliche Intelligenz</strong> nimmt Ihnen zeitintensive Arbeit
+          bei der Recherche, Strukturierung und Zusammenstellung von Informationen
+          ab. So finden und ordnen Sie relevante Inhalte deutlich schneller.
+        </p>
+        <p>
           So arbeiten wir daran: Wir testen einen Prototypen, mit dem Sie
           Pflichten im Bestandsrecht schnell identifizieren und strukturiert
           analysieren können. Einen ersten Einblick erhalten Sie <a
             href="https://digitalservicebund.github.io/zfl-website/previews/prototyp/pflichten/werkzeuge/pflichten/"
             >hier</a
           >.
-        {/snippet}
+        </p>
       </Feature>
-    </div>
+    {/snippet}
+
+    <Carousel items={[feature1, feature2, feature3]} className="mt-24" />
   {/snippet}
 
-  {#snippet sidebar2()}
-    <h2>Daran arbeiten wir</h2>
-    <div class="mt-24 space-y-24">
-      <Feature tag="Prozess">
-        <strong>Aktuelles Arbeitspaket Neues Vorgehensmodell:</strong> Als Legistinnen
-        und Legisten erhalten Sie Orientierung, um frühzeitig verschiedene Perspektiven
-        einzubeziehen. Eine klare Struktur hilft Ihnen zu prüfen, ob eine Regelung
-        tatsächlich erforderlich ist.
-      </Feature>
-      <Feature tag="Checks">
-        <strong>Konsolidierte Arbeitshilfen:</strong> Wir reduzieren die Vielzahl
-        bestehender Leitfäden und bündeln diese für Sie an einem zentralen Ort.
-      </Feature>
-      <Feature tag="KI">
-        <strong>Das Zentrum für Legistik</strong> testet einen Prototypen, mit
-        dem Sie Pflichten im Bestandsrecht schnell identifizieren und
-        strukturiert analysieren können. Einen ersten Einblick erhalten Sie
-        <a
-          href="https://digitalservicebund.github.io/zfl-website/previews/prototyp/pflichten/werkzeuge/pflichten/"
-          >hier</a
-        >.
-      </Feature>
-    </div>
-  {/snippet}
+  <!-- {#snippet sidebar2()} -->
+  <!--   <h2>Daran arbeiten wir</h2> -->
+  <!--   <div class="mt-24 space-y-24"> -->
+  <!--     <Feature tag="Prozess"> -->
+  <!--       <strong>Aktuelles Arbeitspaket Neues Vorgehensmodell:</strong> Als Legistinnen -->
+  <!--       und Legisten erhalten Sie Orientierung, um frühzeitig verschiedene Perspektiven -->
+  <!--       einzubeziehen. Eine klare Struktur hilft Ihnen zu prüfen, ob eine Regelung -->
+  <!--       tatsächlich erforderlich ist. -->
+  <!--     </Feature> -->
+  <!--     <Feature tag="Checks"> -->
+  <!--       <strong>Konsolidierte Arbeitshilfen:</strong> Wir reduzieren die Vielzahl -->
+  <!--       bestehender Leitfäden und bündeln diese für Sie an einem zentralen Ort. -->
+  <!--     </Feature> -->
+  <!--     <Feature tag="KI"> -->
+  <!--       <strong>Das Zentrum für Legistik</strong> testet einen Prototypen, mit -->
+  <!--       dem Sie Pflichten im Bestandsrecht schnell identifizieren und -->
+  <!--       strukturiert analysieren können. Einen ersten Einblick erhalten Sie -->
+  <!--       <a -->
+  <!--         href="https://digitalservicebund.github.io/zfl-website/previews/prototyp/pflichten/werkzeuge/pflichten/" -->
+  <!--         >hier</a -->
+  <!--       >. -->
+  <!--     </Feature> -->
+  <!--   </div> -->
+  <!-- {/snippet} -->
 
   <Cluster
     color="#B3B7E0"
     {orientation}
     title="Recherche"
     offset={0}
-    sidebar={[sidebar1, sidebar2]}
+    sidebar={[sidebar1]}
   >
     <Bubble title="Gesetzes&shy;umfeld" size="sm" tags={["KI"]}>
       <p>Wovon wird die Regelung beeinflusst?</p>
