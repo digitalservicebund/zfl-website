@@ -81,7 +81,7 @@
         class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-100 ease-in-out group-focus:grid-rows-[1fr]"
       >
         <div class="overflow-hidden">
-          <div class="mt-16">
+          <div class="_mt-16">
             {@render details?.()}
           </div>
         </div>
