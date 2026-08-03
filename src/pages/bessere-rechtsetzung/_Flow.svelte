@@ -503,7 +503,7 @@
     <Cluster
       color="#FAB5A8"
       {orientation}
-      className={isVertical ? "" : "pr-40"}
+      className={isVertical ? "max-lg:pb-[50vh]" : "pr-40"}
       highlightGroup="Nach der Verkündung"
     >
       <Bubble title="Vollzug">

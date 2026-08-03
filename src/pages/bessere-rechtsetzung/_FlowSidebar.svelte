@@ -61,11 +61,14 @@
   );
 </script>
 
-<!-- Outer wrapper is the actual grid column, and always stays at its full
-     target width - it never resizes based on `isOpen`, so the main content
-     column it sits next to never reflows either. Opening/closing instead
-     slides the inner panel via `transform: translateX`, which is purely
-     visual and doesn't affect layout. `overflow-x-clip` (not `-hidden`,
+<!-- Below `lg` this wrapper shares the main content's grid cell
+     (`col-start-1 row-start-1`) so the sidebar overlays as a sticky bottom
+     sheet instead of pushing a second column; at `lg` and up it becomes its
+     own column (`col-start-2`) beside the main content. Either way it always
+     stays at its full target width - it never resizes based on `isOpen`, so
+     the main content never reflows when opening/closing. Opening/closing
+     instead slides the inner panel via `transform: translateX`, which is
+     purely visual and doesn't affect layout. `overflow-x-clip` (not `-hidden`,
      which would make the browser treat overflow-y as `auto` and break the
      sticky panel's page-scroll behavior) clips the panel once it's
      translated past the wrapper's right edge while closed. `self-stretch`
@@ -76,13 +79,13 @@
      (tall) height, the panel's containing block collapses to the wrapper's
      own shrink-to-fit `h-screen` height, leaving it no room to stick. -->
 <div
-  class={`self-stretch overflow-x-clip transition-[width] duration-500 ${isOpen || true ? "w-screen lg:w-[calc(100vw-var(--cluster-inner-width))]" : "w-0"}`}
+  class={`col-start-1 row-start-1 lg:col-start-2 self-stretch overflow-x-clip transition-[width] duration-500 ${isOpen || true ? "w-full lg:w-[calc(100vw-var(--cluster-inner-width))]" : "w-0"}`}
 >
   <!-- Sticky (not fixed) so it stays visible while scrolling the flow, but
        never escapes the bounds of its containing `_FlowLayout.svelte`
        grid column. -->
   <div
-    class={`sticky top-0 z-50 h-screen w-screen lg:w-[calc(100vw-var(--cluster-inner-width))] flex items-end lg:items-center pointer-events-none transition-transform duration-500 ease-out ${isOpen ? "" : "translate-x-full"}`}
+    class={`sticky top-0 z-50 h-screen w-full lg:w-[calc(100vw-var(--cluster-inner-width))] flex items-end lg:items-center pointer-events-none transition-transform duration-500 ease-out ${isOpen ? "" : "max-lg:translate-y-full lg:translate-x-full"}`}
     style={content?.color ? `--content-color: ${content.color}` : undefined}
   >
     <div

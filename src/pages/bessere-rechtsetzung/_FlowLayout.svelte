@@ -257,20 +257,11 @@
 
 <div
   bind:this={wrapperEl}
-  class="grid items-start grid-cols-[1fr_auto] [--cluster-inner-width:100vw] lg:[--cluster-inner-width:61.8vw]"
+  class="grid items-start grid-cols-1 lg:grid-cols-[1fr_auto] [--cluster-inner-width:100vw] lg:[--cluster-inner-width:61.8vw]"
 >
   <div
-    class={`grid min-w-0 ${isVertical ? "mx-auto w-(--cluster-inner-width)" : ""}`}
+    class={`col-start-1 row-start-1 grid min-w-0 ${isVertical ? "mx-auto w-(--cluster-inner-width)" : ""}`}
   >
-    <div
-      class={`sticky flex items-center z-50 col-start-1 row-start-1 pointer-events-none ${
-        isVertical
-          ? "w-full top-0 h-screen justify-end"
-          : "w-[50vw] bottom-20 self-end justify-self-start justidfy-center"
-      }`}
-    >
-      <DotNav clusters={clusterDots} {activeId} onSelect={onDotSelect} />
-    </div>
     <div
       bind:this={mainEl}
       class={`col-start-1 row-start-1 min-w-0 max-w-screen ${isVertical ? "" : "w-screen overflow-x-auto scrollbar-none"}`}
@@ -283,6 +274,15 @@
       <div class="inline-block align-top">
         {@render children()}
       </div>
+    </div>
+    <div
+      class={`sticky flex items-center z-50 col-start-1 row-start-1 pointer-events-none ${
+        isVertical
+          ? "w-full top-0 h-screen justify-end"
+          : "w-[50vw] bottom-20 self-end justify-self-start justidfy-center"
+      }`}
+    >
+      <DotNav clusters={clusterDots} {activeId} onSelect={onDotSelect} />
     </div>
   </div>
 
