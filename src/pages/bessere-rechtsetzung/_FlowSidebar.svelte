@@ -59,6 +59,34 @@
       ? content.children[Math.min(page, content.children.length - 1)]
       : undefined,
   );
+
+  let drawerHeight = $state(300); // px
+
+  const MIN_DRAWER_HEIGHT = 140; // px, matches the `max-h` floor below
+  const MAX_DRAWER_HEIGHT_RATIO = 0.9; // fraction of viewport height
+
+  let dragStart: { pointerY: number; drawerHeight: number } | undefined;
+
+  function handleHandlePointerDown(event: PointerEvent) {
+    dragStart = { pointerY: event.clientY, drawerHeight };
+    (event.currentTarget as HTMLElement).setPointerCapture(event.pointerId);
+  }
+
+  function handleHandlePointerMove(event: PointerEvent) {
+    if (!dragStart) return;
+    // Dragging up (negative clientY delta) should grow the drawer, since the
+    // sheet is anchored to the bottom of the screen on mobile.
+    const delta = dragStart.pointerY - event.clientY;
+    const maxHeight = window.innerHeight * MAX_DRAWER_HEIGHT_RATIO;
+    drawerHeight = Math.min(
+      Math.max(dragStart.drawerHeight + delta, MIN_DRAWER_HEIGHT),
+      maxHeight,
+    );
+  }
+
+  function handleHandlePointerUp() {
+    dragStart = undefined;
+  }
 </script>
 
 <!-- Below `lg` this wrapper shares the main content's grid cell
@@ -89,17 +117,26 @@
     style={content?.color ? `--content-color: ${content.color}` : undefined}
   >
     <div
-      class="flex max-h-[50vh] lg:max-h-screen w-full max-w-full flex-col pointer-events-auto lg:h-full bg-lavender-200"
+      class="flex max-h-[max(140px,var(--drawer-h))] lg:max-h-screen w-full max-w-full flex-col pointer-events-auto lg:h-full bg-lavender-200"
+      style={`--drawer-h: ${drawerHeight}px`}
     >
       {#if content}
+        <button
+          type="button"
+          aria-label="Größe einstellen"
+          data-sidebar-mobile-handle
+          class="lg:hidden shrink-0 py-16 touch-none"
+          onpointerdown={handleHandlePointerDown}
+          onpointermove={handleHandlePointerMove}
+          onpointerup={handleHandlePointerUp}
+          onpointercancel={handleHandlePointerUp}
+        >
+          <div class="bg-[#D9D9D9] rounded-full h-10 w-55 mx-auto"></div>
+        </button>
         <div
           bind:this={scrollContainer}
-          class="scroll-shadow kern-body--small min-h-0 flex-1 overflow-y-auto px-(--sb-padding) pt-16 lg:pt-(--sb-padding) pb-24 [&>h2]:kern-heading-medium [&>h2]:mt-16 [&>h2]:md:mt-32 [&_h3]:text-lg"
+          class="scroll-shadow kern-body--small min-h-0 flex-1 overflow-y-auto px-(--sb-padding) pt-0 lg:pt-(--sb-padding) pb-24 [&>h2]:kern-heading-medium [&>h2]:mt-16 [&>h2]:md:mt-32 [&_h3]:text-lg"
         >
-          <div
-            data-sidebar-mobile-handle
-            class="lg:hidden bg-[#D9D9D9] rounded-full h-10 w-55 mx-auto"
-          ></div>
           <div class="flex items-center justify-between gap-16 shrink-0">
             <p class="kern-label kern-label--small mb-0">
               {content.title}
