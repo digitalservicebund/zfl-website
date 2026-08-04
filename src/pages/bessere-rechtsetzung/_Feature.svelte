@@ -45,14 +45,15 @@
   onDestroy(disable);
 </script>
 
-<button
-  type="button"
+<div
+  role="button"
+  tabindex={0}
   data-feature-button
-  class={`group flex items-start gap-16 p-16 rounded-sm border border-(--border-color) hover:bg-(--border-color)/20 focus:bg-(--border-color)/20 focus:outline-2 focus:outline-(--border-color)`}
+  class={`group flex items-start gap-16 p-16 rounded-sm border border-(--border-color) hover:bg-(--border-color)/20 focus:bg-(--border-color)/20 focus:outline-2 focus:outline-(--border-color) cursor-pointer`}
   title="Schritte hervorheben"
   style="--border-color: var(--kern-color-decorative-border-default);"
   onmousedown={(e) => {
-    if (e.target instanceof Element && e.target.closest("a")) return;
+    if (e.target instanceof Element && e.target.closest("a")) return; // do not close on link-click
     if (document.activeElement === e.currentTarget) {
       e.preventDefault();
       e.currentTarget.blur();
@@ -95,4 +96,4 @@
       <ArrowUp class="hidden group-focus:block" />
     </div>
   {/if}
-</button>
+</div>
