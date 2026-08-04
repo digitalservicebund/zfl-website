@@ -27,63 +27,78 @@ function isFirstLevelChildWithChildren(
 
 function linkStyle(isCurrent = false) {
   return twMerge(
-    "link-unstyled kern-body block rounded-sm px-8 py-4 hover:bg-lavender-surface-highlight",
+    "link-unstyled kern-body block rounded-sm hover:bg-lavender-surface-highlight",
     isCurrent && "bg-lavender-surface-highlight font-bold",
   );
 }
+
+function indentStyle(currentLevel: number) {
+  const paddingLeft =
+    currentLevel > 1
+      ? `calc(var(--kern-metric-space-x-large) * ${currentLevel})`
+      : "var(--kern-metric-space-small)";
+  return `padding: var(--kern-metric-space-small) var(--kern-metric-space-small) var(--kern-metric-space-small) ${paddingLeft}`;
+}
 ---
 
-<div class:list={["space-y-8", level > 1 && "mt-8"]}>
-  {
-    entries.map((entry) =>
-      isFirstLevelChildWithChildren(entry, level) ? (
-        <details open={entry.isInCurrentBranch}>
-          <summary class="kern-accordion__header">
-            <span class={linkStyle(entry.isCurrent)}>{entry.label}</span>
-            <span
-              class="kern-icon kern-icon--arrow-down kern-icon--default accordion-icon-open"
-              aria-hidden="true"
-            />
-            <span
-              class="kern-icon kern-icon--chevron-right kern-icon--default accordion-icon-closed"
-              aria-hidden="true"
-            />
-          </summary>
-          <section class="kern-accordion__body">
-            <div class:list={["mt-8", level >= 1 && "pl-12"]}>
-              <Self
-                entries={entry.children}
-                currentPath={currentPath}
-                level={level + 1}
-              />
-            </div>
-          </section>
-        </details>
-      ) : (
-        <>
-          <a
-            href={entry.path}
-            class={linkStyle(currentPath === entry.path)}
-            aria-current={currentPath === entry.path ? "page" : undefined}
-          >
+{
+  entries.map((entry) =>
+    isFirstLevelChildWithChildren(entry, level) ? (
+      <details open={entry.isInCurrentBranch}>
+        <summary class="kern-accordion__header">
+          <span class={linkStyle(entry.isCurrent)} style={indentStyle(level)}>
             {entry.label}
-          </a>
-          {entry.children.length > 0 && (
-            <div class:list={["mt-8", level >= 1 && "pl-12"]}>
-              <Self
-                entries={entry.children}
-                currentPath={currentPath}
-                level={level + 1}
-              />
-            </div>
-          )}
-        </>
-      ),
-    )
-  }
-</div>
+          </span>
+          <span
+            class="kern-icon kern-icon--arrow-down kern-icon--default accordion-icon-open"
+            aria-hidden="true"
+          />
+          <span
+            class="kern-icon kern-icon--chevron-right kern-icon--default accordion-icon-closed"
+            aria-hidden="true"
+          />
+        </summary>
+        <section class="kern-accordion__body">
+          <Self
+            entries={entry.children}
+            currentPath={currentPath}
+            level={level + 1}
+          />
+        </section>
+      </details>
+    ) : (
+      <>
+        <a
+          href={entry.path}
+          class={linkStyle(currentPath === entry.path)}
+          style={indentStyle(level)}
+          aria-current={currentPath === entry.path ? "page" : undefined}
+        >
+          {entry.label}
+        </a>
+        {entry.children.length > 0 && (
+          <Self
+            entries={entry.children}
+            currentPath={currentPath}
+            level={level + 1}
+          />
+        )}
+      </>
+    ),
+  )
+}
 
 <style>
+  .kern-accordion__header,
+  .kern-accordion__body {
+    padding: 0;
+  }
+
+  a,
+  details {
+    margin-top: 8px;
+  }
+
   .kern-accordion__header::after {
     display: none;
   }
