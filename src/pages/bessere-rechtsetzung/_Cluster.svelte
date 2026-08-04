@@ -237,7 +237,7 @@
 <div
   bind:this={rootEl}
   class={twMerge(
-    "cluster-root [--halo-thickness:32px] md:[--halo-thickness:40px]",
+    "cluster-root [--halo-thickness:24px] md:[--halo-thickness:40px]",
     className,
   )}
   data-orientation={orientation}
