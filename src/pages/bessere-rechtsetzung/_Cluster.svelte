@@ -219,7 +219,7 @@
 
   // A small, random horizontal jitter per cluster instance (fixed for the
   // lifetime of the component) for a more organic, hand-drawn feel.
-  const OFFSET_RANGE = 128; // px, max offset in either direction
+  const OFFSET_RANGE = $derived(isSmallScreen ? 64 : 128); // px, max offset in either direction
   const clusterOffset = $derived(
     offset ?? Math.round((Math.random() * 2 - 1) * OFFSET_RANGE),
   );
