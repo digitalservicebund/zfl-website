@@ -38,42 +38,71 @@
     BUBBLE_HIGHLIGHT_CONTEXT_NAME,
   );
 
-  // const isHighlighted = $derived(highlightContext.highlighted.includes(tag));
-  const enable = () => highlightContext.setHighlighted(tag);
-  const disable = () => highlightContext.setHighlighted(null);
+  // True only while a real mouse hover (not a click/tap) is previewing this
+  // Feature's highlight, so a subsequent click can pin it open instead of
+  // immediately toggling it back off, and hovering alone doesn't expand
+  // the details panel below.
+  let previewing = $state(false);
 
-  onDestroy(disable);
+  // Explicit state driven by click/tap rather than `:focus-within` — iOS
+  // Safari doesn't focus buttons on tap, so a focus-based active state
+  // never activates on touch. Deriving from the shared highlight list
+  // (rather than local state) also gives accordion behaviour for free:
+  // `toggleHighlighted` replaces the whole list, so opening one Feature
+  // always closes any other that's open.
+  const expanded = $derived(
+    highlightContext.highlighted.includes(tag) && !previewing,
+  );
 
-  // Mirrors the outer wrapper's `:focus-within` (button focused, or a link
-  // inside `details` focused) so aria-expanded stays accurate even when
-  // focus has moved on into the expanded details content.
-  let expanded = $state(false);
+  let canHover = $state(false);
+  $effect(() => {
+    const mql = window.matchMedia("(hover: hover) and (pointer: fine)");
+    canHover = mql.matches;
+    const onChange = (e: MediaQueryListEvent) => (canHover = e.matches);
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
+  });
+
+  function previewOn() {
+    // Don't steal the highlight from whichever Feature is pinned open.
+    if (!canHover || highlightContext.highlighted.length > 0) return;
+    highlightContext.setHighlighted(tag);
+    previewing = true;
+  }
+
+  function previewOff() {
+    if (!previewing) return;
+    highlightContext.setHighlighted(null);
+    previewing = false;
+  }
+
+  function toggle() {
+    if (previewing) {
+      // Already highlighted by hover - clicking pins it open rather than
+      // toggling it straight back off.
+      previewing = false;
+      return;
+    }
+    highlightContext.toggleHighlighted(tag);
+  }
+
+  onDestroy(() => {
+    if (expanded) highlightContext.setHighlighted(null);
+  });
 </script>
 
 <div
-  class="group grid grid-cols-[auto_1fr_auto] items-start gap-x-16 rounded-sm border border-(--border-color) p-16 hover:bg-(--border-color)/20 focus-within:bg-(--border-color)/20 focus-within:outline-2 focus-within:outline-(--border-color) cursor-pointer"
+  class={`group grid grid-cols-[auto_1fr_auto] items-start gap-x-16 rounded-sm border border-(--border-color) p-16 hover:bg-(--border-color)/20 cursor-pointer ${expanded ? "bg-(--border-color)/20 outline-2 outline-(--border-color)" : ""}`}
   title="Schritte hervorheben"
   style="--border-color: var(--kern-color-decorative-border-default);"
-  onfocusin={() => (expanded = true)}
-  onfocusout={() => (expanded = false)}
 >
   <button
     type="button"
-    data-feature-button
     aria-expanded={details ? expanded : undefined}
-    class="col-span-3 grid grid-cols-subgrid items-start text-left focus:outline-none"
-    onmousedown={(e) => {
-      if (document.activeElement === e.currentTarget) {
-        e.preventDefault();
-        e.currentTarget.blur();
-      }
-    }}
-    onmouseenter={() =>
-      !document.activeElement?.hasAttribute("data-feature-button") && enable()}
-    onmouseleave={() =>
-      !document.activeElement?.hasAttribute("data-feature-button") && disable()}
-    onfocus={enable}
-    onblur={disable}
+    class="col-span-3 grid grid-cols-subgrid items-start text-left focus-visible:outline-2 focus-visible:outline-(--border-color)"
+    onclick={toggle}
+    onmouseenter={previewOn}
+    onmouseleave={previewOff}
   >
     <div
       class="flex flex-col items-center justify-between self-stretch rounded-full"
@@ -88,14 +117,17 @@
     </div>
     {#if details}
       <div class="text-icon-muted shrink-0 -ml-8 text-xl" aria-hidden="true">
-        <ArrowDown class="group-focus-within:hidden" />
-        <ArrowUp class="hidden group-focus-within:block" />
+        {#if expanded}
+          <ArrowUp />
+        {:else}
+          <ArrowDown />
+        {/if}
       </div>
     {/if}
   </button>
   {#if details}
     <div
-      class="col-start-2 grid grid-rows-[0fr] transition-[grid-template-rows] duration-100 ease-in-out group-focus-within:grid-rows-[1fr]"
+      class={`col-start-2 grid transition-[grid-template-rows] duration-100 ease-in-out ${expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
     >
       <div class="overflow-hidden">
         <div class="_mt-16">
