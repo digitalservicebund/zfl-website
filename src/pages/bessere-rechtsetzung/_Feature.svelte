@@ -99,24 +99,27 @@
   <button
     type="button"
     aria-expanded={details ? expanded : undefined}
-    class="col-span-3 grid grid-cols-subgrid items-start text-left focus-visible:outline-2 focus-visible:outline-(--border-color)"
+    class="col-span-3 grid grid-cols-subgrid items-start max-md:gap-y-16 text-left focus-visible:outline-2 focus-visible:outline-(--border-color)"
     onclick={toggle}
     onmouseenter={previewOn}
     onmouseleave={previewOff}
   >
     <div
-      class="flex flex-col items-center justify-between self-stretch rounded-full"
+      class="max-md:col-start-1 max-md:row-start-1 flex flex-col items-center justify-between self-stretch rounded-full"
     >
       <BubbleIcon {icon} {color} />
     </div>
-    <div class="text-left">
+    <div class="max-md:col-span-3 max-md:col-start-1 max-md:row-start-2 text-left">
       {#if title}
         <strong>{title}: </strong>
       {/if}
       {@render children()}
     </div>
     {#if details}
-      <div class="text-icon-muted shrink-0 -ml-8 text-xl" aria-hidden="true">
+      <div
+        class="max-md:col-start-3 max-md:row-start-1 text-icon-muted shrink-0 -ml-8 text-xl"
+        aria-hidden="true"
+      >
         {#if expanded}
           <ArrowUp />
         {:else}
@@ -127,7 +130,7 @@
   </button>
   {#if details}
     <div
-      class={`col-start-2 grid transition-[grid-template-rows] duration-100 ease-in-out ${expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+      class={`md:col-start-2 max-md:col-span-3 max-md:col-start-1 grid transition-[grid-template-rows] duration-100 ease-in-out ${expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
     >
       <div class="overflow-hidden">
         <div class="_mt-16">
