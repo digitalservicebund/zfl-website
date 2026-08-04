@@ -43,57 +43,65 @@
   const disable = () => highlightContext.setHighlighted(null);
 
   onDestroy(disable);
+
+  // Mirrors the outer wrapper's `:focus-within` (button focused, or a link
+  // inside `details` focused) so aria-expanded stays accurate even when
+  // focus has moved on into the expanded details content.
+  let expanded = $state(false);
 </script>
 
 <div
-  role="button"
-  tabindex={0}
-  data-feature-button
-  class={`group flex items-start gap-16 p-16 rounded-sm border border-(--border-color) hover:bg-(--border-color)/20 focus:bg-(--border-color)/20 focus:outline-2 focus:outline-(--border-color) cursor-pointer`}
+  class="group grid grid-cols-[auto_1fr_auto] items-start gap-x-16 rounded-sm border border-(--border-color) p-16 hover:bg-(--border-color)/20 focus-within:bg-(--border-color)/20 focus-within:outline-2 focus-within:outline-(--border-color) cursor-pointer"
   title="Schritte hervorheben"
   style="--border-color: var(--kern-color-decorative-border-default);"
-  onmousedown={(e) => {
-    if (e.target instanceof Element && e.target.closest("a")) return; // do not close on link-click
-    if (document.activeElement === e.currentTarget) {
-      e.preventDefault();
-      e.currentTarget.blur();
-    }
-  }}
-  onmouseenter={() =>
-    !document.activeElement?.hasAttribute("data-feature-button") && enable()}
-  onmouseleave={() =>
-    !document.activeElement?.hasAttribute("data-feature-button") && disable()}
-  onfocus={enable}
-  onblur={disable}
+  onfocusin={() => (expanded = true)}
+  onfocusout={() => (expanded = false)}
 >
-  <div
-    class="flex flex-col items-center justify-between self-stretch rounded-full"
+  <button
+    type="button"
+    data-feature-button
+    aria-expanded={details ? expanded : undefined}
+    class="col-span-3 grid grid-cols-subgrid items-start text-left focus:outline-none"
+    onmousedown={(e) => {
+      if (document.activeElement === e.currentTarget) {
+        e.preventDefault();
+        e.currentTarget.blur();
+      }
+    }}
+    onmouseenter={() =>
+      !document.activeElement?.hasAttribute("data-feature-button") && enable()}
+    onmouseleave={() =>
+      !document.activeElement?.hasAttribute("data-feature-button") && disable()}
+    onfocus={enable}
+    onblur={disable}
   >
-    <BubbleIcon {icon} {color} />
-  </div>
-  <div class="text-left">
-    <div>
+    <div
+      class="flex flex-col items-center justify-between self-stretch rounded-full"
+    >
+      <BubbleIcon {icon} {color} />
+    </div>
+    <div class="text-left">
       {#if title}
         <strong>{title}: </strong>
       {/if}
       {@render children()}
     </div>
     {#if details}
-      <div
-        class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-100 ease-in-out group-focus:grid-rows-[1fr] group-focus-within:grid-rows-[1fr]"
-      >
-        <div class="overflow-hidden">
-          <div class="_mt-16">
-            {@render details?.()}
-          </div>
-        </div>
+      <div class="text-icon-muted shrink-0 -ml-8 text-xl" aria-hidden="true">
+        <ArrowDown class="group-focus-within:hidden" />
+        <ArrowUp class="hidden group-focus-within:block" />
       </div>
     {/if}
-  </div>
+  </button>
   {#if details}
-    <div class="text-icon-muted shrink-0 -ml-8 text-xl" aria-hidden="true">
-      <ArrowDown class="group-focus:hidden" />
-      <ArrowUp class="hidden group-focus:block" />
+    <div
+      class="col-start-2 grid grid-rows-[0fr] transition-[grid-template-rows] duration-100 ease-in-out group-focus-within:grid-rows-[1fr]"
+    >
+      <div class="overflow-hidden">
+        <div class="_mt-16">
+          {@render details?.()}
+        </div>
+      </div>
     </div>
   {/if}
 </div>
