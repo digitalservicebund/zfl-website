@@ -106,7 +106,11 @@
     if (!highlightId || !rootEl) return;
 
     const rootMargin =
-      orientation === "vertical" ? "-50% 0px -50% 0px" : "0px -50% 0px -50%";
+      orientation === "horizontal"
+        ? "0px -50% 0px -50%"
+        : isSmallScreen
+          ? "-10% 0px -90% 0px"
+          : "-50% 0px -50% 0px";
 
     const observer = new IntersectionObserver(
       ([entry]) => {
