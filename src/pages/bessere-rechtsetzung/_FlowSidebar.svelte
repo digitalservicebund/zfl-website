@@ -85,7 +85,7 @@
        never escapes the bounds of its containing `_FlowLayout.svelte`
        grid column. -->
   <div
-    class={`sticky top-0 z-50 h-screen w-full lg:w-[calc(100vw-var(--cluster-inner-width))] flex items-end lg:items-center pointer-events-none transition-transform duration-500 ease-out ${isOpen ? "" : "max-lg:translate-y-full lg:translate-x-full"} [--sb-padding:24px] md:[--sb-padding:40px]`}
+    class={`sticky top-0 z-50 h-screen w-full lg:w-[calc(100vw-var(--cluster-inner-width))] flex items-end lg:items-center pointer-events-none transition-transform duration-500 ease-out ${isOpen ? "" : "max-lg:translate-y-full lg:translate-x-full"} [--sb-padding:16px] md:[--sb-padding:40px]`}
     style={content?.color ? `--content-color: ${content.color}` : undefined}
   >
     <div
@@ -94,15 +94,19 @@
       {#if content}
         <div
           bind:this={scrollContainer}
-          class="scroll-shadow kern-body--small min-h-0 flex-1 overflow-y-auto px-(--sb-padding) pt-(--sb-padding) pb-24 [&>h2]:kern-heading-medium [&>h2]:mt-32 [&_h3]:text-lg"
+          class="scroll-shadow kern-body--small min-h-0 flex-1 overflow-y-auto px-(--sb-padding) pt-16 lg:pt-(--sb-padding) pb-24 [&>h2]:kern-heading-medium [&>h2]:mt-16 [&>h2]:md:mt-32 [&_h3]:text-lg"
         >
+          <div
+            data-sidebar-mobile-handle
+            class="lg:hidden bg-[#D9D9D9] rounded-full h-10 w-55 mx-auto"
+          ></div>
           <div class="flex items-center justify-between gap-16 shrink-0">
             <p class="kern-label kern-label--small mb-0">
               {content.title}
             </p>
             <button
               type="button"
-              class="lg:hidden shrink-0 rounded-sm border border-cosmic-blue-base p-8 text-cosmic-blue-base"
+              class="hidden shrink-0 rounded-sm border border-cosmic-blue-base p-8 text-cosmic-blue-base"
               onclick={onClose}
               aria-label="Seitenleiste schließen"
             >
@@ -112,7 +116,7 @@
           {@render currentPageSnippet?.()}
         </div>
         <div
-          class="flex shrink-0 justify-end gap-8 px-(--sb-padding) pt-24 pb-(--sb-padding) bg-lavender-200"
+          class="flex shrink-0 justify-end gap-8 px-(--sb-padding) pt-16 md:pt-24 pb-(--sb-padding) bg-lavender-200"
         >
           {#if !isFirst}
             <button
