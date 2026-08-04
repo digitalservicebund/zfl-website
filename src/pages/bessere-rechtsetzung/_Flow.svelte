@@ -107,7 +107,7 @@
       {#snippet sidebar()}
         <h2>Was passiert hier?</h2>
         <p>
-          Sobald der Bedarf für eine neue Regelung feststeht, analysiert das
+          Wenn der Bedarf für eine neue Regelung feststeht, analysiert das
           federführende Referat das genaue Problem und legt klare Ziele fest.
           Parallel dazu wird das rechtliche und fachliche Umfeld recherchiert.
           So wird frühzeitig ermittelt, welche weiteren Ressorts und externen
@@ -264,10 +264,10 @@
       {#snippet sidebar()}
         <h2>Was passiert hier?</h2>
         <p>
-          Sobald der erste Rohentwurf steht, holt das federführende Referat
-          hausinternes Feedback ein und übergibt den Hausentwurf zur
-          Frühkoordinierung an das Bundeskanzleramt. Parallel dazu starten die
-          politischen Abstimmungen, Berichterstattergespräche und die
+          Der erste Rohentwurf ist fertig. Das federführende Referat holt nun
+          hausinternes Feedback ein und übergibt anschließend den Hausentwurf
+          zur Frühkoordinierung an das Bundeskanzleramt. Parallel dazu starten
+          die politischen Abstimmungen, Berichterstattergespräche und die
           Gesetzesfolgenabschätzung. So werden rechtzeitig externe
           Stellungnahmen von weiteren Ressorts sowie Prüfstellen (wie dem NKR)
           eingeholt und der Entwurf strukturiert zum Ressortentwurf
@@ -393,7 +393,7 @@
       {#snippet sidebar()}
         <h2>Was passiert hier?</h2>
         <p>
-          Nachdem die Bundesregierung den Entwurf an die gesetzgebenden Organe
+          Wenn die Bundesregierung den Entwurf an die gesetzgebenden Organe
           übergeben hat, durchläuft das Vorhaben das eigentliche
           parlamentarische Verfahren. Es beginnt in der Regel mit der
           Stellungnahme des Bundesrates, führt über die intensive Beratung und
@@ -468,7 +468,7 @@
       {#snippet sidebar()}
         <h2>Was passiert hier?</h2>
         <p>
-          Sobald das Gesetz im Bundesgesetzblatt verkündet wurde, schließen sich
+          Das Gesetz wird im Bundesgesetzblatt verkündet. Danach schließen sich
           die abschließende Dokumentation und das offizielle Inkrafttreten der
           neuen Regelungen an. Damit verlässt das Gesetz den eigentlichen
           Gesetzgebungsprozess und geht in den Vollzug über, wo die Regelungen
