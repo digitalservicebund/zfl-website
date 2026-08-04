@@ -103,7 +103,7 @@
       </Bubble>
     </Cluster>
 
-    <Cluster color="#B3B7E0" {orientation} title="Recherche" offset={0}>
+    <Cluster color="#B3B7E0" {orientation} title="Frühphase" offset={0}>
       {#snippet sidebar()}
         <h2>Was passiert hier?</h2>
         <p>
