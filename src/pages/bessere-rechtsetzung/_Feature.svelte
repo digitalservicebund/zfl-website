@@ -52,6 +52,7 @@
   title="Schritte hervorheben"
   style="--border-color: var(--kern-color-decorative-border-default);"
   onmousedown={(e) => {
+    if (e.target instanceof Element && e.target.closest("a")) return;
     if (document.activeElement === e.currentTarget) {
       e.preventDefault();
       e.currentTarget.blur();
@@ -78,7 +79,7 @@
     </div>
     {#if details}
       <div
-        class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-100 ease-in-out group-focus:grid-rows-[1fr]"
+        class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-100 ease-in-out group-focus:grid-rows-[1fr] group-focus-within:grid-rows-[1fr]"
       >
         <div class="overflow-hidden">
           <div class="_mt-16">
