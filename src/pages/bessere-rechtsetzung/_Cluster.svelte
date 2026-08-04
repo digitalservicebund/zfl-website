@@ -144,8 +144,18 @@
     },
   });
 
-  const BUBBLE_PADDING = 16; // px, gap enforced between packed bubbles
-  const EDGE_PADDING = 16; // px, gap between bubbles and the dashed border
+  // Tracks Tailwind's `max-sm` breakpoint so padding can shrink on mobile.
+  let isSmallScreen = $state(false);
+  $effect(() => {
+    const mql = window.matchMedia("(max-width: 639px)");
+    isSmallScreen = mql.matches;
+    const onChange = (e: MediaQueryListEvent) => (isSmallScreen = e.matches);
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
+  });
+
+  const BUBBLE_PADDING = $derived(isSmallScreen ? 8 : 16); // px, gap enforced between packed bubbles
+  const EDGE_PADDING = $derived(isSmallScreen ? 8 : 16); // px, gap between bubbles and the dashed border
 
   let containerEl: HTMLDivElement | undefined = $state();
   let diameter = $state(0);
