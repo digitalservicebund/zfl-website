@@ -389,7 +389,7 @@
       Übergabe an die politische Ebene
     </Arrow>
 
-    <Cluster color="#D2EDB9" {orientation} offset={0} title="Verabschiedung">
+    <Cluster color="#EBF5B3" {orientation} offset={0} title="Verabschiedung">
       {#snippet sidebar()}
         <h2>Was passiert hier?</h2>
         <p>
@@ -402,7 +402,7 @@
         </p>
       {/snippet}
 
-      <Bubble title="Stellungnahme Bundesrat">
+      <Bubble title="Stellungnahme Bundesrat" color="#D2EDB9">
         <h3>Weiterleitung an den Bundesrat</h3>
         <p>
           Chef:in des Bundeskanzleramts setzt die Kabinettvorlage auf die Agenda
