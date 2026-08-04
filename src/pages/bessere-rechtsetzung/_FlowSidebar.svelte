@@ -79,13 +79,13 @@
      (tall) height, the panel's containing block collapses to the wrapper's
      own shrink-to-fit `h-screen` height, leaving it no room to stick. -->
 <div
-  class={`col-start-1 row-start-1 lg:col-start-2 self-stretch overflow-x-clip transition-[width] duration-500 ${isOpen || true ? "w-full lg:w-[calc(100vw-var(--cluster-inner-width))]" : "w-0"}`}
+  class="col-start-1 row-start-1 lg:col-start-2 self-stretch overflow-x-clip w-full lg:w-[calc(100vw-var(--cluster-inner-width))]"
 >
   <!-- Sticky (not fixed) so it stays visible while scrolling the flow, but
        never escapes the bounds of its containing `_FlowLayout.svelte`
        grid column. -->
   <div
-    class={`sticky top-0 z-50 h-screen w-full lg:w-[calc(100vw-var(--cluster-inner-width))] flex items-end lg:items-center pointer-events-none transition-transform duration-500 ease-out ${isOpen ? "" : "max-lg:translate-y-full lg:translate-x-full"}`}
+    class={`sticky top-0 z-50 h-screen w-full lg:w-[calc(100vw-var(--cluster-inner-width))] flex items-end lg:items-center pointer-events-none transition-transform duration-500 ease-out ${isOpen ? "" : "max-lg:translate-y-full lg:translate-x-full"} [--sb-padding:24px] md:[--sb-padding:40px]`}
     style={content?.color ? `--content-color: ${content.color}` : undefined}
   >
     <div
@@ -94,7 +94,7 @@
       {#if content}
         <div
           bind:this={scrollContainer}
-          class="scroll-shadow kern-body--small min-h-0 flex-1 overflow-y-auto px-40 pt-40 pb-24 [&>h2]:kern-heading-medium [&>h2]:mt-32 [&_h3]:text-lg"
+          class="scroll-shadow kern-body--small min-h-0 flex-1 overflow-y-auto px-(--sb-padding) pt-(--sb-padding) pb-24 [&>h2]:kern-heading-medium [&>h2]:mt-32 [&_h3]:text-lg"
         >
           <div class="flex items-center justify-between gap-16 shrink-0">
             <p class="kern-label kern-label--small mb-0">
@@ -112,7 +112,7 @@
           {@render currentPageSnippet?.()}
         </div>
         <div
-          class="flex shrink-0 justify-end gap-8 px-40 pt-24 pb-40 bg-lavender-200"
+          class="flex shrink-0 justify-end gap-8 px-(--sb-padding) pt-24 pb-(--sb-padding) bg-lavender-200"
         >
           {#if !isFirst}
             <button
