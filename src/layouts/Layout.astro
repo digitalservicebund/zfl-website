@@ -6,6 +6,7 @@ import SectionSidebar from "@/components/global/SectionSidebar.astro";
 import Posthog from "@/components/global/Posthog.astro";
 import { isProduction } from "@/config/stage";
 import { getSectionNavigation } from "@/utils/navigation/drilldown";
+import { withBase } from "@/utils/path";
 import firaSansMediumUrl from "@kern-ux/native/dist/fonts/fira-sans/FiraSans-Medium.woff2?url";
 import firaSansRegularUrl from "@kern-ux/native/dist/fonts/fira-sans/FiraSans-Regular.woff2?url";
 import { SEO } from "astro-seo";
@@ -68,8 +69,8 @@ const defaultDescription =
     }}
     extend={{
       link: [
-        { rel: "icon", href: "/favicon.svg" },
-        { rel: "sitemap", href: "/sitemap-index.xml" },
+        { rel: "icon", href: withBase("/favicon.svg") },
+        { rel: "sitemap", href: withBase("/sitemap-index.xml") },
       ],
       meta: [
         { name: "twitter:title", content: title },
