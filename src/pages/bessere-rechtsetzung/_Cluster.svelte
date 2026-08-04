@@ -38,40 +38,22 @@
     offset?: number;
     /**
      * When true, the content wrapper shrinks to fit its bubbles instead of
-     * taking the default fixed vertical width (`w-1000`). Use this when the
-     * cluster sits alongside other elements in a row (e.g. between two
-     * Bubbles) so it doesn't force them apart.
+     * taking the default fixed vertical width (`w-1000`)
      */
     fitContent?: boolean;
     children?: Snippet;
     /**
-     * Sidebar content shown in the global sidebar when the cluster's title is
-     * clicked. When provided (and `title` is set), the title becomes a
-     * clickable button that toggles this content in the shared sidebar, the
-     * same way `_Bubble.svelte` does.
-     *
-     * Accepts either a single `Snippet` or an array of `Snippet`s. When an
-     * array with more than one entry is given, the sidebar treats them as
-     * separate "pages" for this cluster: its "Zurück"/"Weiter" navigation
-     * steps through these pages first, only moving on to the
-     * previous/next cluster once the first/last page is reached.
+     * Sidebar content shown in the global sidebar.
+     * Accepts either a single `Snippet` or an array of `Snippet`s (multi-page).
      */
     sidebar?: Snippet | Snippet[];
     /**
-     * Id of another Cluster/Bubble/Arrow to mirror instead of registering
-     * this own sidebar content, i.e. `title`/`highlightGroup` of the
-     * Cluster/Bubble whose sidebar entry should be reflected here. When set,
-     * this Cluster shares that entry's active state (highlighting
-     * its halo the same way) and clicking it toggles that same sidebar
-     * content, even if this Cluster has no `title`/`sidebar` of its own.
-     * Falls back to this Cluster's own `title` when omitted.
+     * Id of another Cluster/Bubble/Arrow to mirror. When set, this Cluster
+     * shares that entry's active state.
      */
     highlightGroup?: string;
   } = $props();
 
-  // Every bubble/cluster shares a single, global sidebar (mounted once via
-  // `_FlowSidebar.svelte`) instead of rendering its own popup, so clicking
-  // the title toggles that sidebar's content rather than a local popup.
   const sidebarContext = getContext<FlowSidebarContext | undefined>(
     FLOW_SIDEBAR_CONTEXT_NAME,
   );
@@ -86,7 +68,7 @@
     },
   });
 
-  // Normalizes `sidebar` to an array of pagesi
+  // Normalizes `sidebar` to an array of pages
   const sidebarPages = $derived(
     sidebar === undefined
       ? undefined
@@ -96,8 +78,6 @@
   );
 
   // Registers this cluster's sidebar content as soon as it mounts
-  // (independent of clicks), so it can also be opened straight from a
-  // shared `?step=` link or via the browser back/forward buttons.
   $effect(() => {
     if (!sidebarPages || sidebarPages.length === 0 || !title) return;
 
@@ -119,36 +99,11 @@
   let rootEl: HTMLDivElement | undefined = $state();
   let titleEl: HTMLHeadingElement | undefined = $state();
 
-  // Scrolls the whole cluster into view whenever it becomes the active step -
-  // most notably when the page is opened directly via a shared `?step=`
-  // link, where it might otherwise be rendered off-screen.
-  // $effect(() => {
-  //   if (!title || !isActive || !rootEl) return;
-  //
-  //   rootEl.scrollIntoView({ behavior: "smooth", block: "center" });
-  // });
-
-  function setActive(id: string) {
-    sidebarContext?.setActive(id);
-  }
-
-  // Activates this cluster as soon as it crosses the viewport's midline
-  // while scrolling, using the standard "scrollspy" IntersectionObserver
-  // trick: a negative rootMargin shrinks the observed root down to a 1px
-  // line through the middle of the viewport (a horizontal line for
-  // vertical scrolling, a vertical line for horizontal scrolling), so
-  // `isIntersecting` flips exactly when the cluster crosses that line.
-  // Suppressed while `navigateStep`'s `scrollIntoView` is auto-scrolling
-  // (`sidebarContext.isJumping`), so it doesn't override the explicitly
-  // requested step with whatever cluster happens to pass the midline
-  // during that animation.
+  // IntersectionObserver: Activates this cluster as soon as it crosses the
+  // viewport's midline while scrolling. Suppressed while `navigateStep`'s
+  // `scrollIntoView` is auto-scrolling (`sidebarContext.isJumping`)
   $effect(() => {
     if (!highlightId || !rootEl) return;
-    // Skip inside `_FlowLayout.svelte`'s scaled-down minimap clone -
-    // it's marked `inert` (and non-interactive/hidden from assistive tech),
-    // so this doubles as a cheap "is this the real content?" check without
-    // needing a dedicated context just for that.
-    if (rootEl.closest("[inert]")) return;
 
     const rootMargin =
       orientation === "vertical" ? "-50% 0px -50% 0px" : "0px -50% 0px -50%";
@@ -156,7 +111,7 @@
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !sidebarContext?.isJumping) {
-          setActive(highlightId);
+          sidebarContext?.setActive(highlightId);
         }
       },
       { rootMargin },
@@ -198,8 +153,7 @@
   let isSingleBubble = $state(false);
 
   // Packs the bubble elements rendered via `children` into the smallest
-  // enclosing circle (using d3-hierarchy's circle-packing algorithms),
-  // giving a natural, non-overlapping distribution instead of a grid.
+  // enclosing circle (using d3-hierarchy's circle-packing algorithms).
   function layout() {
     if (!containerEl) return;
 
@@ -209,11 +163,7 @@
     isSingleBubble = items.length === 1;
     const edgePadding = isSingleBubble ? 0 : EDGE_PADDING;
 
-    // Packed largest-first: `packSiblings` is a greedy front-chain
-    // algorithm whose tightness depends on insertion order, and it packs
-    // noticeably closer (less wasted space inside the enclosing circle)
-    // when bigger circles are placed before smaller ones - the same
-    // ordering d3's own `pack()` layout applies by default.
+    // Packed largest-first: the same ordering d3's own `pack()` layout uses.
     const circles = items
       .map((el) => ({
         el,
@@ -246,9 +196,7 @@
 
     // Bubble sizes are defined in `em` (see `_Bubble.svelte`'s `sizeMap`),
     // so their rendered pixel size can change independently of any prop
-    // here - e.g. `max-md:text-xs` shrinking the bubble's font-size (and
-    // thus its `em`-based width/height) once the viewport crosses the `md`
-    // breakpoint. `layout()` only reads pixel sizes once, so without this
+    // here. `layout()` only reads pixel sizes once, so without this
     // observer the pack/diameter would go stale after such a resize.
     if (!containerEl) return;
     const items = Array.from(containerEl.children) as HTMLElement[];
@@ -267,7 +215,7 @@
   );
 
   const activate = () => {
-    setActive(title!);
+    sidebarContext?.setActive(title!);
     titleEl?.scrollIntoView({ behavior: "smooth" });
   };
 </script>
@@ -311,12 +259,7 @@
       <!-- Isolated so the halo/dashed-circle negative z-indices only stack
          against each other, never against sibling (overlapping) clusters. -->
       <div class="isolate absolute inset-0">
-        <!-- Soft gray halo ring, matching the original SVG. Rendered as a
-           <button> (not nested inside the title's <button>, so this is
-           valid HTML) so clicking anywhere on the ring also toggles the
-           sidebar. It's `aria-hidden` and untabbable since the title button
-           already exposes the same action to keyboard/screen-reader users;
-           this is purely a larger pointer/touch target. -->
+        <!-- Soft gray halo ring -->
         <div
           class={`pointer-events-none absolute inset-0 -z-20 rounded-full ${isActive && false ? "bg-(--halo-color)" : "bg-[#F7F7F7]"}`}
         ></div>
@@ -342,10 +285,7 @@
 
 <style>
   /* Overlap the soft halo rings of two adjacent clusters (pulling them
-     HALO_THICKNESS closer) without affecting spacing to non-Cluster
-     siblings like Arrow. Scoped sibling selector: Svelte appends the same
-     component hash class to both instances, so this only ever matches
-     Cluster-next-to-Cluster, never Cluster-next-to-Arrow. */
+     --halo-thickness closer)  */
   :global(
     .cluster-root[data-orientation="vertical"]
       + .cluster-root[data-orientation="vertical"]
