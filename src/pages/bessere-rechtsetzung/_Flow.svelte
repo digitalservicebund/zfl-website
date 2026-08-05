@@ -42,17 +42,17 @@
 
     <div
       aria-hidden="true"
-      class="pointer-events-none absolute bg-black m-0"
+      class="pointer-events-none absolute bg-black m-0 max-sm:hidden"
       style={connectorStyle}
     ></div>
 
     <div
-      class={`flex items-center xl:gap-24 justify-center ${isVertical ? "" : "flex-col pl-40"}`}
+      class={`flex items-center gap-8 xl:gap-24 justify-center ${isVertical ? "" : "flex-col pl-40"}`}
     >
       <Bubble
         color="#E6E6E6"
         title="Initiative des Bundestages"
-        className="max-lg:hidden"
+        className="max-sm:hidden"
       ></Bubble>
       <Cluster color="#D59FDE" {orientation} offset={0} fitContent>
         <Bubble color="#D59FDE" title="Aus der Mitte der Regierung"></Bubble>
@@ -60,7 +60,7 @@
       <Bubble
         color="#E6E6E6"
         title="Initiative des Bundesrates"
-        className="max-lg:hidden"
+        className="max-sm:hidden"
       ></Bubble>
     </div>
 
@@ -286,7 +286,7 @@
         Ein mit den hausinternen Referaten abgeklärter Entwurf.
       </Bubble>
       <Bubble
-        title="Frühkoordinierung / Vorhabenclearing Bundeskanzleramt"
+        title="Frühkoordinierung/ Vorhabenclearing Bundeskanzleramt"
         size="lg"
       ></Bubble>
     </Cluster>
