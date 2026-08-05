@@ -92,14 +92,14 @@
 </script>
 
 <div
-  class={`group grid grid-cols-[auto_1fr_auto] items-start gap-x-16 rounded-sm border border-(--border-color) p-16 hover:bg-(--border-color)/20 cursor-pointer ${expanded ? "bg-(--border-color)/20 outline-2 outline-(--border-color)" : ""}`}
+  class={`group grid grid-cols-[auto_1fr_auto] items-start gap-x-16 rounded-sm border border-(--border-color)`}
   title="Schritte hervorheben"
   style="--border-color: var(--kern-color-decorative-border-default);"
 >
   <button
     type="button"
     aria-expanded={details ? expanded : undefined}
-    class="col-span-3 grid grid-cols-subgrid items-start max-md:gap-y-16 text-left focus-visible:outline-2 focus-visible:outline-(--border-color)"
+    class={`col-span-3 grid grid-cols-subgrid items-start max-md:gap-y-16 text-left focus-visible:outline-2 focus-visible:outline-(--border-color) p-16 hover:bg-(--border-color)/20 cursor-pointer ${expanded ? "bg-(--border-color)/20 _outline-2 outline-(--border-color)" : ""}`}
     onclick={toggle}
     onmouseenter={previewOn}
     onmouseleave={previewOff}
@@ -109,7 +109,9 @@
     >
       <BubbleIcon {icon} {color} />
     </div>
-    <div class="max-md:col-span-3 max-md:col-start-1 max-md:row-start-2 text-left">
+    <div
+      class="max-md:col-span-3 max-md:col-start-1 max-md:row-start-2 text-left"
+    >
       {#if title}
         <strong>{title}: </strong>
       {/if}
@@ -133,7 +135,7 @@
       class={`md:col-start-2 max-md:col-span-3 max-md:col-start-1 grid transition-[grid-template-rows] duration-100 ease-in-out ${expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
     >
       <div class="overflow-hidden">
-        <div class="_mt-16">
+        <div class="py-16 max-md:px-16">
           {@render details?.()}
         </div>
       </div>
