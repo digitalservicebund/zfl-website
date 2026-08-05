@@ -2,6 +2,7 @@
   import { getContext, setContext } from "svelte";
   import type { Snippet } from "svelte";
   import { packEnclose, packSiblings } from "d3-hierarchy";
+  import { forceCollide, forceSimulation, forceX, forceY } from "d3-force";
   import { tv } from "tailwind-variants";
   import { twMerge } from "tailwind-merge";
   import {
@@ -9,6 +10,82 @@
     type FlowSidebarContext,
   } from "./_flowSidebar";
   import { BUBBLE_COLOR_CONTEXT_NAME } from "./_bubbleColor";
+
+  type PackCircle = { el: HTMLElement; trueRadius: number; r: number };
+  type PositionedCircle = PackCircle & { x: number; y: number };
+  type EnclosingCircle = { x: number; y: number; r: number };
+
+  // Deterministic PRNG (mulberry32) used to scatter trial starting
+  // positions in `packEvenly` below — avoids `Math.random()` so identical
+  // bubble sizes always produce the identical layout, even when `layout()`
+  // re-runs (e.g. via the ResizeObserver further down).
+  function mulberry32(seed: number) {
+    return () => {
+      seed = (seed + 0x6d2b79f5) | 0;
+      let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  const PACK_TRIALS = 24;
+  const PACK_TICKS = 150;
+
+  // Packs circles into their smallest enclosing circle. For 3+ circles,
+  // d3-hierarchy's `packSiblings` (a greedy front-chain algorithm) reliably
+  // produces the same elongated shape regardless of insertion order — one
+  // circle ends up stranded near the centre with a lot of unused space
+  // around it once enclosed. Running many independently-seeded
+  // force-directed relaxations (mutual collision plus a gentle pull toward
+  // the centroid) from scattered starting points and keeping the tightest
+  // result finds a rounder, more evenly filled arrangement instead.
+  function packEvenly(baseCircles: PackCircle[]): {
+    circles: PositionedCircle[];
+    enclosing: EnclosingCircle;
+  } {
+    if (baseCircles.length <= 2) {
+      const circles = baseCircles.map((c) => ({ ...c, x: 0, y: 0 }));
+      packSiblings(circles);
+      return { circles, enclosing: packEnclose(circles) };
+    }
+
+    const scatterRadius = Math.max(
+      60,
+      Math.sqrt(baseCircles.reduce((sum, c) => sum + c.r * c.r, 0)) * 1.2,
+    );
+
+    let best:
+      { circles: PositionedCircle[]; enclosing: EnclosingCircle } | undefined;
+
+    for (let trial = 0; trial < PACK_TRIALS; trial++) {
+      const random = mulberry32(trial * 7919 + 1);
+      const circles: PositionedCircle[] = baseCircles.map((c) => {
+        const angle = random() * Math.PI * 2;
+        const dist = random() * scatterRadius;
+        return { ...c, x: Math.cos(angle) * dist, y: Math.sin(angle) * dist };
+      });
+
+      forceSimulation(circles)
+        .alphaDecay(1 - Math.pow(0.001, 1 / PACK_TICKS))
+        .force("x", forceX(0).strength(0.05))
+        .force("y", forceY(0).strength(0.05))
+        .force(
+          "collide",
+          forceCollide((d: PositionedCircle) => d.r)
+            .strength(1)
+            .iterations(3),
+        )
+        .stop()
+        .tick(PACK_TICKS);
+
+      const enclosing = packEnclose(circles);
+      if (!best || enclosing.r < best.enclosing.r) {
+        best = { circles, enclosing };
+      }
+    }
+
+    return best!;
+  }
 
   let {
     title,
@@ -178,19 +255,13 @@
     isSingleBubble = items.length === 1;
     const edgePadding = isSingleBubble ? 0 : EDGE_PADDING;
 
-    // Packed largest-first: the same ordering d3's own `pack()` layout uses.
-    const circles = items
-      .map((el) => ({
-        el,
-        trueRadius: el.offsetWidth / 2,
-        r: el.offsetWidth / 2 + BUBBLE_PADDING / 2,
-        x: 0,
-        y: 0,
-      }))
-      .sort((a, b) => b.r - a.r);
+    const baseCircles = items.map((el) => ({
+      el,
+      trueRadius: el.offsetWidth / 2,
+      r: el.offsetWidth / 2 + BUBBLE_PADDING / 2,
+    }));
 
-    packSiblings(circles);
-    const enclosing = packEnclose(circles);
+    const { circles, enclosing } = packEvenly(baseCircles);
 
     const finalRadius = enclosing.r + edgePadding;
     const originX = enclosing.x - finalRadius;
