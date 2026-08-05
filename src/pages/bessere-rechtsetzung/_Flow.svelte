@@ -235,7 +235,7 @@
         </p>
       {/snippet}
 
-      <Bubble title="Frühzeitige Beteiligung" optional>
+      <Bubble title="Frühzeitige Beteiligung" optional size="sm">
         Von Betroffenen und Vollzug und anderen Wissensträgern (z.B. Verbänden,
         Ländern, Kommunen, Wissenschaft)
       </Bubble>
@@ -257,7 +257,7 @@
         Schreibt ersten Entwurf mit Kommentarspalte. Allein oder mit ein oder
         mehreren weiteren Legist:innen zusammen.
       </Bubble>
-      <Bubble title="Gesetzesfolgen werden besprochen" optional></Bubble>
+      <Bubble title="Gesetzesfolgen besprechen" optional size="sm"></Bubble>
     </Cluster>
 
     <Cluster color="#A0EBEE" {orientation} title="Hausentwurf & Ressortentwurf">
