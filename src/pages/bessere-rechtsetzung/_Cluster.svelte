@@ -109,7 +109,7 @@
       orientation === "horizontal"
         ? "0px -50% 0px -50%"
         : isSmallScreen
-          ? "-10% 0px -90% 0px"
+          ? "-15% 0px -85% 0px"
           : "-50% 0px -50% 0px";
 
     const observer = new IntersectionObserver(
@@ -139,11 +139,12 @@
   });
 
   const titleWrapper = tv({
-    base: "absolute z-20 flex gap-16",
+    base: "z-20 flex gap-16",
     variants: {
       orientation: {
-        vertical: "top-0 left-[4vw] flex-row items-center",
-        horizontal: "top-24 left-0 flex-row items-center",
+        vertical:
+          "top-0 left-16 flex-row items-center self-start max-md:my-(--halo-thickness) max-md:ml-16 md:absolute md:left-[4vw]",
+        horizontal: "absolute top-24 left-0 flex-row items-center",
       },
     },
   });
@@ -237,7 +238,7 @@
 <div
   bind:this={rootEl}
   class={twMerge(
-    "cluster-root [--halo-thickness:24px] md:[--halo-thickness:40px]",
+    "cluster-root [--halo-thickness:24px] md:[--halo-thickness:40px] [--cluster-spacing:var(--halo-thickness)] md:[--cluster-spacing:calc(-1*var(--halo-thickness))]",
     className,
   )}
   data-orientation={orientation}
@@ -304,13 +305,13 @@
     .cluster-root[data-orientation="vertical"]
       + .cluster-root[data-orientation="vertical"]
   ) {
-    margin-top: calc(-1 * var(--halo-thickness));
+    margin-top: var(--cluster-spacing);
   }
 
   :global(
     .cluster-root[data-orientation="horizontal"]
       + .cluster-root[data-orientation="horizontal"]
   ) {
-    margin-left: calc(-1 * var(--halo-thickness));
+    margin-left: var(--cluster-spacing);
   }
 </style>
