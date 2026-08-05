@@ -31,31 +31,23 @@
   const PACK_TRIALS = 24;
   const PACK_TICKS = 150;
 
-  // Packs circles into their smallest enclosing circle. For 3+ circles,
-  // d3-hierarchy's `packSiblings` (a greedy front-chain algorithm) reliably
-  // produces the same elongated shape regardless of insertion order — one
-  // circle ends up stranded near the centre with a lot of unused space
-  // around it once enclosed. Running many independently-seeded
-  // force-directed relaxations (mutual collision plus a gentle pull toward
-  // the centroid) from scattered starting points and keeping the tightest
-  // result finds a rounder, more evenly filled arrangement instead.
-  function packEvenly(baseCircles: PackCircle[]): {
+  // Runs many independently-seeded force-directed relaxations (mutual
+  // collision plus a gentle pull toward the centroid) from scattered
+  // starting points and keeps the tightest result. Good general-purpose
+  // packing, particularly once there are enough circles that some of them
+  // belong in the interior rather than in a single outer ring.
+  function forcePack(baseCircles: PackCircle[]): {
     circles: PositionedCircle[];
     enclosing: EnclosingCircle;
   } {
-    if (baseCircles.length <= 2) {
-      const circles = baseCircles.map((c) => ({ ...c, x: 0, y: 0 }));
-      packSiblings(circles);
-      return { circles, enclosing: packEnclose(circles) };
-    }
-
     const scatterRadius = Math.max(
       60,
       Math.sqrt(baseCircles.reduce((sum, c) => sum + c.r * c.r, 0)) * 1.2,
     );
 
     let best:
-      { circles: PositionedCircle[]; enclosing: EnclosingCircle } | undefined;
+      | { circles: PositionedCircle[]; enclosing: EnclosingCircle }
+      | undefined;
 
     for (let trial = 0; trial < PACK_TRIALS; trial++) {
       const random = mulberry32(trial * 7919 + 1);
@@ -85,6 +77,141 @@
     }
 
     return best!;
+  }
+
+  // The angle (at the shared centre) between two neighbouring circles in a
+  // "necklace" arrangement — both tangent to each other and to an
+  // enclosing circle of radius `R`. Returns null if that's geometrically
+  // impossible at this `R` (e.g. a circle bigger than `R` itself).
+  function necklaceAngle(R: number, rA: number, rB: number): number | null {
+    const dA = R - rA;
+    const dB = R - rB;
+    if (dA <= 0 || dB <= 0) return null;
+    const cosTheta =
+      (dA * dA + dB * dB - (rA + rB) * (rA + rB)) / (2 * dA * dB);
+    if (cosTheta > 1 || cosTheta < -1) return null;
+    return Math.acos(cosTheta);
+  }
+
+  function necklaceTotalAngle(R: number, radii: number[]): number | null {
+    let sum = 0;
+    for (let i = 0; i < radii.length; i++) {
+      const angle = necklaceAngle(R, radii[i], radii[(i + 1) % radii.length]);
+      if (angle === null) return null;
+      sum += angle;
+    }
+    return sum;
+  }
+
+  // For a given cyclic ordering of radii, finds (via binary search) the
+  // smallest enclosing radius at which every circle is simultaneously
+  // tangent to both its neighbours and the enclosing circle — i.e. a
+  // perfectly even rosette with no circle left stranded off the boundary.
+  // `necklaceTotalAngle` decreases monotonically as `R` grows, so there's
+  // exactly one `R` where the ring of tangency angles closes at 2π.
+  function solveNecklaceRadius(radii: number[]): number {
+    let lo = Math.max(...radii) + 1e-6;
+    let hi = lo * 50;
+    for (let i = 0; i < 60; i++) {
+      const sum = necklaceTotalAngle(hi, radii);
+      if (sum !== null && sum < 2 * Math.PI) break;
+      hi *= 1.5;
+    }
+    for (let i = 0; i < 60; i++) {
+      const mid = (lo + hi) / 2;
+      const sum = necklaceTotalAngle(mid, radii);
+      if (sum === null || sum > 2 * Math.PI) lo = mid;
+      else hi = mid;
+    }
+    return hi;
+  }
+
+  function necklaceLayout(order: PackCircle[]): {
+    circles: PositionedCircle[];
+    enclosing: EnclosingCircle;
+  } {
+    const R = solveNecklaceRadius(order.map((c) => c.r));
+    let angle = 0;
+    const circles = order.map((c, i) => {
+      const dist = R - c.r;
+      const positioned = {
+        ...c,
+        x: Math.cos(angle) * dist,
+        y: Math.sin(angle) * dist,
+      };
+      const next = order[(i + 1) % order.length];
+      angle += necklaceAngle(R, c.r, next.r)!;
+      return positioned;
+    });
+    return { circles, enclosing: { x: 0, y: 0, r: R } };
+  }
+
+  // Caps how many cyclic orderings `necklacePack` explores, so layout time
+  // stays bounded even if a cluster ever grows well beyond the ~8 bubbles
+  // seen today ((n-1)! orderings, fixing one circle to skip rotations).
+  const NECKLACE_PERMUTATION_BUDGET = 5000;
+
+  function* permutationsFixedFirst<T>(items: T[]): Generator<T[]> {
+    const [first, ...rest] = items;
+    yield* (function* permute(curr: T[], remaining: T[]): Generator<T[]> {
+      if (remaining.length === 0) {
+        yield [first, ...curr];
+        return;
+      }
+      for (let i = 0; i < remaining.length; i++) {
+        yield* permute(
+          [...curr, remaining[i]],
+          [...remaining.slice(0, i), ...remaining.slice(i + 1)],
+        );
+      }
+    })([], rest);
+  }
+
+  // Tries many cyclic orderings of the circles around a single ring and
+  // keeps whichever produces the smallest enclosing circle.
+  function necklacePack(baseCircles: PackCircle[]): {
+    circles: PositionedCircle[];
+    enclosing: EnclosingCircle;
+  } {
+    let best:
+      | { circles: PositionedCircle[]; enclosing: EnclosingCircle }
+      | undefined;
+
+    let count = 0;
+    for (const order of permutationsFixedFirst(baseCircles)) {
+      if (count++ >= NECKLACE_PERMUTATION_BUDGET) break;
+      const candidate = necklaceLayout(order);
+      if (!best || candidate.enclosing.r < best.enclosing.r) {
+        best = candidate;
+      }
+    }
+
+    return best!;
+  }
+
+  // Packs circles into their smallest enclosing circle. `packSiblings`
+  // (d3-hierarchy's greedy front-chain algorithm) reliably produces the
+  // same elongated shape regardless of insertion order — one circle ends
+  // up stranded near the centre with a lot of unused space around it once
+  // enclosed. Instead, two different strategies are tried — a "necklace"
+  // ring (perfectly even, but wastes interior space once there are enough
+  // circles that some belong inside the ring) and a force-directed
+  // relaxation (better once circles no longer all fit neatly around a
+  // single ring) — and whichever yields the tighter enclosing circle wins.
+  function packEvenly(baseCircles: PackCircle[]): {
+    circles: PositionedCircle[];
+    enclosing: EnclosingCircle;
+  } {
+    if (baseCircles.length <= 2) {
+      const circles = baseCircles.map((c) => ({ ...c, x: 0, y: 0 }));
+      packSiblings(circles);
+      return { circles, enclosing: packEnclose(circles) };
+    }
+
+    const candidates = [forcePack(baseCircles), necklacePack(baseCircles)];
+    return candidates.reduce((best, candidate) =>
+      candidate.enclosing.r < best.enclosing.r ? candidate : best,
+    );
   }
 
   let {
