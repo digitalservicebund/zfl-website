@@ -43,7 +43,7 @@
     "astro": "^7.1.6",
     "astro-icon": "^1.1.5",
     "astro-pagefind": "^2.0.1",
-    "astro-route-generator": "github:digitalservicebund/astro-route-generator#0.1.6",
+    "astro-route-generator": "github:digitalservicebund/astro-route-generator#0.1.8",
     "astro-seo": "^1.1.0",
     "pagefind": "^1.5.2",
     "posthog-js": "^1.410.1",
@@ -82,5 +82,5 @@
     "vite": "^8.2.0",
     "vitest": "^4.1.10"
   },
-  "packageManager": "pnpm@11.19.0"
+  "packageManager": "pnpm@11.20.0"
 }
