@@ -179,6 +179,21 @@
         </div>
       {/snippet}
 
+      <Bubble
+        title="Workshops mit Ländern und Kommunen"
+        optional
+        tags={["Checks"]}
+        size="lg"
+      ></Bubble>
+      <Bubble
+        title="Erarbeiten von Eckpunkten"
+        optional
+        size="md"
+        tags={["Prozess"]}
+      >
+        Je nach Komplexität wird ein Eckpunktepapier verfasst oder nicht.
+      </Bubble>
+      <Bubble title="Vorschläge von Verbänden" optional size="sm"></Bubble>
       <Bubble title="Gesetzes&shy;umfeld" size="sm" tags={["KI"]}>
         <p>Wovon wird die Regelung beeinflusst?</p>
         <ul>
@@ -191,27 +206,12 @@
           <li>Feststellung der aktuellen Rechtslage</li>
         </ul>
       </Bubble>
-      <Bubble title="Vorschläge von Verbänden" optional size="sm"></Bubble>
-      <Bubble
-        title="Erarbeiten von Eckpunkten"
-        optional
-        size="md"
-        tags={["Prozess"]}
-      >
-        Je nach Komplexität wird ein Eckpunktepapier verfasst oder nicht.
-      </Bubble>
       <Bubble title="Gutachten und Sach&shy;verständigen&shy;kommissionen"
       ></Bubble>
       <Bubble title="Material&shy;recherche" size="sm" tags={["Checks"]}>
         Recherchiert Daten, die relevant für das Gesetz sind sowie das
         Gesetzesumfeld.
       </Bubble>
-      <Bubble
-        title="Workshops mit Ländern und Kommunen"
-        optional
-        tags={["Checks"]}
-        size="lg"
-      ></Bubble>
       <Bubble
         title="Ziel- und Wirkungs&shy;definition"
         size="md"

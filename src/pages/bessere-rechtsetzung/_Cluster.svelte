@@ -38,7 +38,12 @@
     let sum = 0;
     for (let i = 0; i < radii.length; i++) {
       const next = (i + 1) % radii.length;
-      const angle = ringAngle(distances[i], distances[next], radii[i], radii[next]);
+      const angle = ringAngle(
+        distances[i],
+        distances[next],
+        radii[i],
+        radii[next],
+      );
       if (angle === null) return null;
       sum += angle;
     }
@@ -92,9 +97,9 @@
     return { circles, enclosing: { x: 0, y: 0, r: R } };
   }
 
-  // Caps how many cyclic orderings `necklacePack`/`wheelPack` explore, so
-  // layout time stays bounded even if a cluster ever grows well beyond the
-  // ~8 bubbles seen today ((n-1)! orderings, fixing one circle to skip
+  // Caps how many cyclic orderings `necklacePack` explores, so layout time
+  // stays bounded even if a cluster ever grows well beyond the ~5 bubbles
+  // it's used for today ((n-1)! orderings, fixing one circle to skip
   // rotations).
   const RING_PERMUTATION_BUDGET = 5000;
 
@@ -122,8 +127,7 @@
     enclosing: EnclosingCircle;
   } {
     let best:
-      | { circles: PositionedCircle[]; enclosing: EnclosingCircle }
-      | undefined;
+      { circles: PositionedCircle[]; enclosing: EnclosingCircle } | undefined;
 
     let count = 0;
     for (const order of permutationsFixedFirst(baseCircles)) {
@@ -137,101 +141,47 @@
     return best!;
   }
 
-  // Finds (via binary search) the smallest gap that must be added to every
-  // ring circle's tangent-to-centre distance (`centerRadius + gap + r`) so
-  // the ring closes without overlap. Unlike `solveNecklaceRadius`, the
-  // centre circle already pins each distance, leaving `gap` as the only
-  // free variable — and it's allowed to settle at 0 (no gap needed, ring
-  // circles simply don't touch each other) whenever the ring already has
-  // slack room at the minimum distance.
-  function solveWheelGap(centerRadius: number, ringRadii: number[]): number {
-    const distancesAt = (gap: number) =>
-      ringRadii.map((r) => centerRadius + gap + r);
-
-    const atZero = ringTotalAngle(distancesAt(0), ringRadii);
-    if (atZero !== null && atZero <= 2 * Math.PI) return 0;
-
-    let lo = 0;
-    let hi = Math.max(...ringRadii) + 1e-6;
-    for (let i = 0; i < 60; i++) {
-      const sum = ringTotalAngle(distancesAt(hi), ringRadii);
-      if (sum !== null && sum < 2 * Math.PI) break;
-      hi *= 1.5;
-    }
-    for (let i = 0; i < 60; i++) {
-      const mid = (lo + hi) / 2;
-      const sum = ringTotalAngle(distancesAt(mid), ringRadii);
-      if (sum === null || sum > 2 * Math.PI) lo = mid;
-      else hi = mid;
-    }
-    return hi;
-  }
-
-  // Places the largest circle at the centre and arranges the rest in a
-  // ring around it. Any leftover slack (the ring not needing to touch at
-  // `gap = 0`) is distributed evenly between neighbours, so the ring stays
-  // visually balanced instead of bunching up on one side.
+  // Places `center` at the centre and the rest evenly around it in a ring,
+  // all at the same distance `d` — just far enough to clear the centre
+  // against the ring's largest member (`center.r + largestRing`). This
+  // does NOT also guard against two large ring neighbours overlapping each
+  // other (the earlier `largestRing / sin(π/n)` term did, at the cost of
+  // extra clearance for every smaller bubble). Instead it trusts the
+  // caller's ordering: `_Flow.svelte` puts the largest bubble first (as
+  // the hub) and alternates ring bubble sizes so two large ones are never
+  // adjacent. Reordering a cluster's bubbles there without preserving that
+  // alternation can make ring neighbours overlap.
   function wheelLayout(
     center: PackCircle,
     ring: PackCircle[],
   ): { circles: PositionedCircle[]; enclosing: EnclosingCircle } {
-    const ringRadii = ring.map((c) => c.r);
-    const gap = solveWheelGap(center.r, ringRadii);
-    const distances = ringRadii.map((r) => center.r + gap + r);
-    const required = ringTotalAngle(distances, ringRadii) ?? 0;
-    const slack = Math.max(0, 2 * Math.PI - required) / ring.length;
+    const largestRing = Math.max(...ring.map((c) => c.r));
+    const dist = center.r + largestRing;
 
-    let angle = 0;
-    const ringCircles = ring.map((c, i) => {
-      const dist = distances[i];
-      const positioned = {
-        ...c,
-        x: Math.cos(angle) * dist,
-        y: Math.sin(angle) * dist,
-      };
-      const next = (i + 1) % ring.length;
-      const step =
-        ringAngle(distances[i], distances[next], ringRadii[i], ringRadii[next]) ??
-        0;
-      angle += step + slack;
-      return positioned;
-    });
+    const step = (2 * Math.PI) / ring.length;
+    const ringCircles = ring.map((c, i) => ({
+      ...c,
+      x: Math.cos(i * step) * dist,
+      y: Math.sin(i * step) * dist,
+    }));
 
     const centerCircle: PositionedCircle = { ...center, x: 0, y: 0 };
-    const outerRadius = Math.max(
-      center.r,
-      ...distances.map((d, i) => d + ringRadii[i]),
-    );
     return {
       circles: [centerCircle, ...ringCircles],
-      enclosing: { x: 0, y: 0, r: outerRadius },
+      enclosing: { x: 0, y: 0, r: dist + largestRing },
     };
   }
 
-  // Tries many orderings of the ring (the centre circle is fixed as
-  // whichever is largest) and keeps whichever produces the smallest
-  // enclosing circle. Good once a cluster has enough circles that some of
+  // Splits off the first circle (by DOM order — expected to be the
+  // largest) as the centre and arranges the rest around it in a ring, in
+  // the order given. Good once a cluster has enough circles that some of
   // them belong in the interior rather than on a single outer ring.
   function wheelPack(baseCircles: PackCircle[]): {
     circles: PositionedCircle[];
     enclosing: EnclosingCircle;
   } {
-    const [center, ...ring] = [...baseCircles].sort((a, b) => b.r - a.r);
-
-    let best:
-      | { circles: PositionedCircle[]; enclosing: EnclosingCircle }
-      | undefined;
-
-    let count = 0;
-    for (const order of permutationsFixedFirst(ring)) {
-      if (count++ >= RING_PERMUTATION_BUDGET) break;
-      const candidate = wheelLayout(center, order);
-      if (!best || candidate.enclosing.r < best.enclosing.r) {
-        best = candidate;
-      }
-    }
-
-    return best!;
+    const [center, ...ring] = baseCircles;
+    return wheelLayout(center, ring);
   }
 
   // Packs circles into their smallest enclosing circle. `packSiblings`
@@ -455,7 +405,7 @@
         circle.el.style.top = `${center - circle.trueRadius}px`;
       } else {
         const angle = Math.atan2(dy, dx);
-        const percent = (((angle / (2 * Math.PI)) % 1) + 1) % 1 * 100;
+        const percent = ((((angle / (2 * Math.PI)) % 1) + 1) % 1) * 100;
         circle.el.style.left = "0px";
         circle.el.style.top = "0px";
         circle.el.style.offsetPath = `circle(${dist}px at ${center}px ${center}px)`;
