@@ -46,7 +46,7 @@
       ></Bubble>
     </div>
 
-    <Arrow size={40} />
+    <Arrow />
 
     <Cluster
       color="#BCA6DC"
