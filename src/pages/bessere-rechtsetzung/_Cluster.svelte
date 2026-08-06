@@ -1,7 +1,6 @@
 <script lang="ts">
   import { getContext, setContext } from "svelte";
   import type { Snippet } from "svelte";
-  import { packEnclose, packSiblings } from "d3-hierarchy";
   import { tv } from "tailwind-variants";
   import { twMerge } from "tailwind-merge";
   import {
@@ -34,10 +33,7 @@
   // Sum of `ringAngle` around a full cyclic ordering — the total angle
   // needed for every circle to be tangent to both neighbours at these
   // per-circle distances from the centre.
-  function ringTotalAngle(
-    distances: number[],
-    radii: number[],
-  ): number | null {
+  function ringTotalAngle(distances: number[], radii: number[]): number | null {
     let sum = 0;
     for (let i = 0; i < radii.length; i++) {
       const next = (i + 1) % radii.length;
@@ -104,12 +100,7 @@
         y: Math.sin(angle) * dist,
       };
       const next = (i + 1) % baseCircles.length;
-      angle += ringAngle(
-        distances[i],
-        distances[next],
-        radii[i],
-        radii[next],
-      )!;
+      angle += ringAngle(distances[i], distances[next], radii[i], radii[next])!;
       return positioned;
     });
     return { circles, enclosing: { x: 0, y: 0, r: R } };
@@ -157,24 +148,15 @@
     return wheelLayout(center, ring);
   }
 
-  // Packs circles into their smallest enclosing circle. `packSiblings`
-  // (d3-hierarchy's greedy front-chain algorithm) reliably produces the
-  // same elongated shape regardless of insertion order — one circle ends
-  // up stranded near the centre with a lot of unused space around it once
-  // enclosed, so it's only used for the trivial 1-2 circle case. Above
-  // that, small clusters fit neatly on a single "necklace" ring; larger
-  // ones do better with the biggest circle pinned in the centre and the
-  // rest arranged in a ring around it.
+  // Packs 3+ circles into their smallest enclosing circle (1-2 circles are
+  // handled directly in `layout()` — see `isFlexPositioned` — since they
+  // need no ring math at all). Small clusters fit neatly on a single
+  // "necklace" ring; larger ones do better with the biggest circle pinned
+  // in the centre and the rest arranged in a ring around it.
   function packEvenly(baseCircles: PackCircle[]): {
     circles: PositionedCircle[];
     enclosing: EnclosingCircle;
   } {
-    if (baseCircles.length <= 2) {
-      const circles = baseCircles.map((c) => ({ ...c, x: 0, y: 0 }));
-      packSiblings(circles);
-      return { circles, enclosing: packEnclose(circles) };
-    }
-
     if (baseCircles.length <= 5) return necklacePack(baseCircles);
 
     return wheelPack(baseCircles);
@@ -336,9 +318,12 @@
   let diameter = $state(0);
   let ready = $state(false);
   let isSingleBubble = $state(false);
+  // 1-2 bubbles need no per-circle positioning: the container becomes a
+  // centred flexbox (see the template) and the browser lays them out.
+  let isFlexPositioned = $state(false);
 
   // Packs the bubble elements rendered via `children` into the smallest
-  // enclosing circle (using d3-hierarchy's circle-packing algorithms).
+  // enclosing circle.
   function layout() {
     if (!containerEl) return;
 
@@ -346,6 +331,7 @@
     if (items.length === 0) return;
 
     isSingleBubble = items.length === 1;
+    isFlexPositioned = items.length <= 2;
     const edgePadding = isSingleBubble ? 0 : EDGE_PADDING;
 
     const baseCircles = items.map((el) => ({
@@ -354,17 +340,29 @@
       r: el.offsetWidth / 2 + BUBBLE_PADDING / 2,
     }));
 
+    if (isFlexPositioned) {
+      // 1-2 bubbles need no packing at all — the browser lays them out via
+      // flexbox (see the template) — so the only thing left to compute is
+      // how much space that needs: a lone bubble's own radius, or (for
+      // two, tangent along a line through the centre) the sum of both.
+      const enclosingRadius = baseCircles.reduce((sum, c) => sum + c.r, 0);
+      diameter = (enclosingRadius + edgePadding) * 2;
+      ready = true;
+      return;
+    }
+
     const { circles, enclosing } = packEvenly(baseCircles);
 
     const finalRadius = enclosing.r + edgePadding;
-    const center = finalRadius; // px, container's own centre (it's finalRadius × 2 square)
+    diameter = finalRadius * 2;
 
     // Ring circles (necklace/wheel) are placed via `offset-path`: each gets
     // its own circular path — sized to its own distance from the cluster
     // centre — and `offset-distance` picks the point on it. That lets the
     // browser do the trig instead of computing left/top per circle here.
-    // The one circle actually AT the centre (wheelLayout's hub, or a lone
-    // bubble) has no ring to move along, so it's just positioned directly.
+    // The one circle actually AT the centre (wheelLayout's hub) has no
+    // ring to move along, so it's just positioned directly.
+    const center = finalRadius; // px, container's own centre (it's finalRadius × 2 square)
     for (const circle of circles) {
       const dx = circle.x - enclosing.x;
       const dy = circle.y - enclosing.y;
@@ -387,7 +385,6 @@
       }
     }
 
-    diameter = finalRadius * 2;
     ready = true;
   }
 
@@ -473,8 +470,8 @@
       </div>
 
       <div
-        class={`relative rounded-full transition-opacity duration-300 ${ready ? "opacity-100" : "opacity-0"}`}
-        style={`width: ${diameter}px; height: ${diameter}px;`}
+        class={`relative rounded-full transition-opacity duration-300 ${ready ? "opacity-100" : "opacity-0"} ${isFlexPositioned ? "flex items-center justify-center" : ""}`}
+        style={`width: ${diameter}px; height: ${diameter}px; ${isFlexPositioned ? `gap: ${BUBBLE_PADDING}px;` : ""}`}
         bind:this={containerEl}
       >
         {@render children?.()}
