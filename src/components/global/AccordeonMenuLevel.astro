@@ -46,9 +46,15 @@ function indentStyle(currentLevel: number) {
     isFirstLevelChildWithChildren(entry, level) ? (
       <details open={entry.isInCurrentBranch}>
         <summary class="kern-accordion__header">
-          <span class={linkStyle(entry.isCurrent)} style={indentStyle(level)}>
+          <a
+            href={entry.path}
+            class={linkStyle(entry.isCurrent)}
+            style={indentStyle(level)}
+            aria-current={entry.isCurrent ? "page" : undefined}
+            @click.stop
+          >
             {entry.label}
-          </span>
+          </a>
           <span
             class="kern-icon kern-icon--arrow-down kern-icon--default accordion-icon-open"
             aria-hidden="true"
