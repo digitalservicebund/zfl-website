@@ -10,8 +10,12 @@
   import { BUBBLE_COLOR_CONTEXT_NAME } from "./_bubbleColor";
 
   type PackCircle = { el: HTMLElement; trueRadius: number; r: number };
-  type PositionedCircle = PackCircle & { x: number; y: number };
-  type EnclosingCircle = { x: number; y: number; r: number };
+  // `dist`/`angle` (polar, from the cluster centre) rather than `x`/`y`:
+  // that's what every ring's tangency maths naturally produces, it's what
+  // `layout()` needs to build each circle's `offset-path`, and the centre
+  // is always the origin here — so there's no Cartesian step in between
+  // that would earn its keep.
+  type PositionedCircle = PackCircle & { dist: number; angle: number };
 
   // The angle (at the shared centre) between two neighbouring circles, each
   // sitting at its own distance (`dA`/`dB`) from that centre, tangent to
@@ -86,24 +90,19 @@
   // out into a hub (see `wheelPack` for that case).
   function necklacePack(baseCircles: PackCircle[]): {
     circles: PositionedCircle[];
-    enclosing: EnclosingCircle;
+    radius: number;
   } {
     const radii = baseCircles.map((c) => c.r);
     const R = solveNecklaceRadius(radii);
     const distances = radii.map((r) => R - r);
     let angle = 0;
     const circles = baseCircles.map((c, i) => {
-      const dist = distances[i];
-      const positioned = {
-        ...c,
-        x: Math.cos(angle) * dist,
-        y: Math.sin(angle) * dist,
-      };
+      const positioned = { ...c, dist: distances[i], angle };
       const next = (i + 1) % baseCircles.length;
       angle += ringAngle(distances[i], distances[next], radii[i], radii[next])!;
       return positioned;
     });
-    return { circles, enclosing: { x: 0, y: 0, r: R } };
+    return { circles, radius: R };
   }
 
   // Places `center` at the centre and the rest evenly around it in a ring,
@@ -118,21 +117,17 @@
   function wheelLayout(
     center: PackCircle,
     ring: PackCircle[],
-  ): { circles: PositionedCircle[]; enclosing: EnclosingCircle } {
+  ): { circles: PositionedCircle[]; radius: number } {
     const largestRing = Math.max(...ring.map((c) => c.r));
     const dist = center.r + largestRing;
 
     const step = (2 * Math.PI) / ring.length;
-    const ringCircles = ring.map((c, i) => ({
-      ...c,
-      x: Math.cos(i * step) * dist,
-      y: Math.sin(i * step) * dist,
-    }));
+    const ringCircles = ring.map((c, i) => ({ ...c, dist, angle: i * step }));
 
-    const centerCircle: PositionedCircle = { ...center, x: 0, y: 0 };
+    const centerCircle: PositionedCircle = { ...center, dist: 0, angle: 0 };
     return {
       circles: [centerCircle, ...ringCircles],
-      enclosing: { x: 0, y: 0, r: dist + largestRing },
+      radius: dist + largestRing,
     };
   }
 
@@ -142,7 +137,7 @@
   // them belong in the interior rather than on a single outer ring.
   function wheelPack(baseCircles: PackCircle[]): {
     circles: PositionedCircle[];
-    enclosing: EnclosingCircle;
+    radius: number;
   } {
     const [center, ...ring] = baseCircles;
     return wheelLayout(center, ring);
@@ -155,7 +150,7 @@
   // in the centre and the rest arranged in a ring around it.
   function packEvenly(baseCircles: PackCircle[]): {
     circles: PositionedCircle[];
-    enclosing: EnclosingCircle;
+    radius: number;
   } {
     if (baseCircles.length <= 5) return necklacePack(baseCircles);
 
@@ -351,35 +346,32 @@
       return;
     }
 
-    const { circles, enclosing } = packEvenly(baseCircles);
+    const { circles, radius } = packEvenly(baseCircles);
 
-    const finalRadius = enclosing.r + edgePadding;
+    const finalRadius = radius + edgePadding;
     diameter = finalRadius * 2;
 
     // Ring circles (necklace/wheel) are placed via `offset-path`: each gets
     // its own circular path — sized to its own distance from the cluster
-    // centre — and `offset-distance` picks the point on it. That lets the
+    // centre — and `offset-distance` picks the point on it, straight from
+    // the `dist`/`angle` the packing maths already produced. That lets the
     // browser do the trig instead of computing left/top per circle here.
     // The one circle actually AT the centre (wheelLayout's hub) has no
     // ring to move along, so it's just positioned directly.
     const center = finalRadius; // px, container's own centre (it's finalRadius × 2 square)
     for (const circle of circles) {
-      const dx = circle.x - enclosing.x;
-      const dy = circle.y - enclosing.y;
-      const dist = Math.hypot(dx, dy);
-
       circle.el.style.position = "absolute";
 
-      if (dist < 0.5) {
+      if (circle.dist < 0.5) {
         circle.el.style.offsetPath = "none";
         circle.el.style.left = `${center - circle.trueRadius}px`;
         circle.el.style.top = `${center - circle.trueRadius}px`;
       } else {
-        const angle = Math.atan2(dy, dx);
-        const percent = ((((angle / (2 * Math.PI)) % 1) + 1) % 1) * 100;
+        const percent =
+          ((((circle.angle / (2 * Math.PI)) % 1) + 1) % 1) * 100;
         circle.el.style.left = "0px";
         circle.el.style.top = "0px";
-        circle.el.style.offsetPath = `circle(${dist}px at ${center}px ${center}px)`;
+        circle.el.style.offsetPath = `circle(${circle.dist}px at ${center}px ${center}px)`;
         circle.el.style.offsetDistance = `${percent}%`;
         circle.el.style.offsetRotate = "0deg";
       }
