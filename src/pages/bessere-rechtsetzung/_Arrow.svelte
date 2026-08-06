@@ -5,12 +5,10 @@
     size = 120,
     className = "",
     children,
-    color,
   }: {
     size?: number;
     className?: string;
     children?: Snippet;
-    color?: string;
   } = $props();
 
   let rootEl: HTMLDivElement | undefined = $state();
@@ -22,11 +20,7 @@
     "h-0 w-0 border-transparent mx-auto border-x-[100px] border-t-[60px] border-t-(--arrow-bg)";
 </script>
 
-<div
-  bind:this={rootEl}
-  class={wrapperClass}
-  style={`--arrow-color: color-mix(in srgb, ${color} 20%, white); --arrow-bg: #F7F7F7`}
->
+<div bind:this={rootEl} class={wrapperClass}>
   <div class={shaftClass} style={`--arrow-size: ${size}px`}>
     {#if children}
       <p class="font-bold text-sm text-center">{@render children()}</p>
