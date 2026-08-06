@@ -1,12 +1,22 @@
-import { defineConfig, globalIgnores } from "eslint/config";
-
 import eslint from "@eslint/js";
 import markdown from "@eslint/markdown";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
 import eslintPluginAstro from "eslint-plugin-astro";
+import svelte from "eslint-plugin-svelte";
+import { defineConfig, globalIgnores } from "eslint/config";
+import globals from "globals";
 import tseslint from "typescript-eslint";
 
 export default defineConfig(
+  globalIgnores([
+    ".astro/",
+    "dist/",
+    "doc/",
+    "playwright-report/",
+    "test-results/",
+    "README.md",
+    "AGENTS.md",
+  ]),
   eslint.configs.recommended,
   tseslint.configs.recommended,
   eslintPluginAstro.configs.recommended,
@@ -19,18 +29,19 @@ export default defineConfig(
   },
   {
     files: ["**/*.md"],
-    plugins: {
-      markdown,
-    },
+    plugins: { markdown },
     extends: ["markdown/processor"],
   },
-  globalIgnores([
-    ".astro/",
-    "dist/",
-    "doc/",
-    "playwright-report/",
-    "test-results/",
-    "README.md",
-    "AGENTS.md",
-  ]),
+  svelte.configs.recommended,
+  {
+    files: ["**/*.svelte"],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+      },
+      parserOptions: {
+        parser: tseslint.parser,
+      },
+    },
+  },
 );

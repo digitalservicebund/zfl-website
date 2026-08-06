@@ -73,6 +73,7 @@
     "eslint": "^10.8.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-astro": "^3.1.0",
+    "eslint-plugin-svelte": "^3.19.0",
     "globals": "^17.9.0",
     "jsdom": "^30.0.1",
     "knip": "^6.31.0",
