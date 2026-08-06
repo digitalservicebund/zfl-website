@@ -9,31 +9,16 @@
   import BubbleIcon from "./_BubbleIcon.svelte";
   import { iconMap, type TagName } from "./_icons.ts";
 
-  type Size = "xs" | "sm" | "md" | "lg";
-  type Shape = "circle" | "rhomb";
+  type Size = "sm" | "md" | "lg";
 
   const sizeMap: Record<Size, string> = {
-    xs: "3em",
     sm: "9em",
     md: "11em",
     lg: "12em",
   };
 
-  let {
-    color,
-    title,
-    optional,
-    size = "md",
-    className = "",
-    tags,
-    children,
-    body,
-    shape = "circle",
-  }: {
-    /**
-     * Fill color of the bubble, e.g. a hex code. Defaults to the
-     * `--bubble-color` custom property set by the enclosing Cluster.
-     */
+  interface Props {
+    /** Fill color of the bubble, defaults `--bubble-color` set by the enclosing Cluster. */
     color?: string;
     title?: string;
     optional?: boolean;
@@ -44,8 +29,18 @@
     children?: Snippet;
     /** Optional body content shown within the bubble */
     body?: Snippet;
-    shape?: Shape;
-  } = $props();
+  }
+
+  let {
+    color,
+    title,
+    optional,
+    size = "md",
+    className = "",
+    tags,
+    children,
+    body,
+  }: Props = $props();
 
   const icons = $derived(tags?.map((t) => iconMap[t]));
 
@@ -78,22 +73,12 @@
 >
   {#snippet bubble()}
     <div
-      class={`group/circle flex text-xs md:text-sm xl:text-base items-center justify-center ${shape === "circle" ? "rounded-full" : "rotate-45"} transition-[transform,filter,box-shadow,opacity] duration-200 ease-out ${isInteractive ? "hover:scale-105 group-focus-visible:scale-105 group-focus-visible:outline-2 group-focus-visible:outline-cosmic-blue-base" : ""} ${active ? "scale-105 ring-4 ring-cosmic-blue-base ring-offset-2" : ""} ${dimmed ? "opacity-50" : ""}`}
+      class={`group/circle flex text-xs md:text-sm xl:text-base items-center justify-center rounded-full transition-[transform,filter,box-shadow,opacity] duration-200 ease-out ${isInteractive ? "hover:scale-105 group-focus-visible:scale-105 group-focus-visible:outline-2 group-focus-visible:outline-cosmic-blue-base" : ""} ${active ? "scale-105 ring-4 ring-cosmic-blue-base ring-offset-2" : ""} ${dimmed ? "opacity-50" : ""}`}
       style={`background-color: ${color ?? "var(--bubble-color)"}; width: ${sizeMap[size]}; height: ${sizeMap[size]}; anchor-name: ${anchorName};`}
     >
-      <div
-        class={`text-center space-y-8 px-16 ${shape === "rhomb" ? "-rotate-45" : ""}`}
-      >
+      <div class="text-center space-y-8 px-16">
         {#if title}
-          {#if size === "xs"}
-            <span
-              class="text-white group-hover/circle:hidden group-active/circle:hidden group-focus-visible:hidden"
-              aria-hidden="true">❯</span
-            >
-          {/if}
-          <div
-            class={`kern-label max-md:text-sm md:text-base text-black ${size === "xs" ? "hidden group-hover/circle:block group-active/circle:block group-focus-visible:block" : ""}`}
-          >
+          <div class="kern-label max-md:text-sm md:text-base text-black">
             {title}
             {#if optional}
               <span class="block font-normal text-sm"> (optional)</span>
