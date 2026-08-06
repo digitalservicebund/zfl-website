@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { tv } from "tailwind-variants";
   import FlowLayout from "./_FlowLayout.svelte";
   import Cluster from "./_Cluster.svelte";
   import Bubble from "./_Bubble.svelte";
@@ -11,15 +10,13 @@
   let orientation = $state<"vertical" | "horizontal">("vertical");
   const isVertical = $derived(orientation === "vertical");
 
-  const container = tv({
-    base: "relative flex bg-white",
-    variants: {
-      orientation: {
-        horizontal: "h-screen flex-row items-stretch",
-        vertical: "mx-auto w-(--cluster-inner-width) flex-col",
-      },
-    },
-  });
+  const containerClass = $derived(
+    `relative flex bg-white ${
+      orientation === "horizontal"
+        ? "h-screen flex-row items-stretch"
+        : "mx-auto w-(--cluster-inner-width) flex-col"
+    }`,
+  );
 
   const CLUSTER_FIRST_ANCHOR = "--cluster-first";
   const CLUSTER_LAST_ANCHOR = "--cluster-last";
@@ -32,7 +29,7 @@
 </script>
 
 <FlowLayout {orientation}>
-  <div class={container({ orientation })}>
+  <div class={containerClass}>
     <OutTrigger>
       <div class="py-lg mx-auto max-w-200 flex flex-col items-center gap-8">
         Scrollen Sie zum Starten

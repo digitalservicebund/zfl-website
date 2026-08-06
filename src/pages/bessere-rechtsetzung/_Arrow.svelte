@@ -1,7 +1,6 @@
 <script lang="ts">
   import { getContext } from "svelte";
   import type { Snippet } from "svelte";
-  import { tv } from "tailwind-variants";
   import {
     FLOW_SIDEBAR_CONTEXT_NAME,
     type FlowSidebarContext,
@@ -45,40 +44,36 @@
 
   let rootEl: HTMLDivElement | undefined = $state();
 
-  const styles = tv({
-    slots: {
-      wrapper: "flex justify-center",
-      shaft: "flex items-center justify-center bg-(--arrow-bg) p-8",
-      tip: "h-0 w-0 border-transparent",
-    },
-    variants: {
-      orientation: {
-        vertical: {
-          wrapper: "flex-col",
-          shaft: "mx-auto -mt-24 h-(--arrow-size) w-120 pt-24",
-          tip: "mx-auto border-x-[100px] border-t-[60px] border-t-(--arrow-bg)",
-        },
-        horizontal: {
-          wrapper: "flex-row",
-          shaft: "my-auto -ml-24 h-120 w-(--arrow-size) pl-24",
-          tip: "my-auto border-y-[100px] border-l-[60px] border-l-(--arrow-bg)",
-        },
-      },
-    },
-  });
+  const isVertical = $derived(orientation === "vertical");
 
-  const { wrapper, shaft, tip } = $derived(styles({ orientation }));
+  const wrapperClass = $derived(
+    `flex justify-center ${isVertical ? "flex-col" : "flex-row"} ${className}`,
+  );
+  const shaftClass = $derived(
+    `flex items-center justify-center bg-(--arrow-bg) p-8 ${
+      isVertical
+        ? "mx-auto -mt-24 h-(--arrow-size) w-120 pt-24"
+        : "my-auto -ml-24 h-120 w-(--arrow-size) pl-24"
+    }`,
+  );
+  const tipClass = $derived(
+    `h-0 w-0 border-transparent ${
+      isVertical
+        ? "mx-auto border-x-[100px] border-t-[60px] border-t-(--arrow-bg)"
+        : "my-auto border-y-[100px] border-l-[60px] border-l-(--arrow-bg)"
+    }`,
+  );
 </script>
 
 <div
   bind:this={rootEl}
-  class={wrapper({ class: className })}
+  class={wrapperClass}
   style={`--arrow-color: color-mix(in srgb, ${color} 20%, white); --arrow-bg: ${isActive && false ? "var(--arrow-color)" : "#F7F7F7"}`}
 >
-  <div class={shaft()} style={`--arrow-size: ${size}px`}>
+  <div class={shaftClass} style={`--arrow-size: ${size}px`}>
     {#if children}
       <p class="font-bold text-sm text-center">{@render children()}</p>
     {/if}
   </div>
-  <div class={tip()}></div>
+  <div class={tipClass}></div>
 </div>

@@ -1,8 +1,6 @@
 <script lang="ts">
   import { getContext, setContext } from "svelte";
   import type { Snippet } from "svelte";
-  import { tv } from "tailwind-variants";
-  import { twMerge } from "tailwind-merge";
   import {
     FLOW_SIDEBAR_CONTEXT_NAME,
     type FlowSidebarContext,
@@ -272,29 +270,21 @@
     return () => observer.disconnect();
   });
 
-  const contentWrapper = tv({
-    base: "relative flex flex-col items-center justify-center",
-    variants: {
-      orientation: {
-        vertical: "w-(--cluster-inner-width) overflow-x-clip",
-        horizontal: "h-screen",
-      },
-      fitContent: {
-        true: "h-fit w-fit",
-      },
-    },
-  });
+  const contentWrapperClass = $derived(
+    `relative flex flex-col items-center justify-center ${
+      orientation === "vertical"
+        ? "w-(--cluster-inner-width) overflow-x-clip"
+        : "h-screen"
+    } ${fitContent ? "h-fit w-fit" : ""}`,
+  );
 
-  const titleWrapper = tv({
-    base: "z-20 flex gap-16",
-    variants: {
-      orientation: {
-        vertical:
-          "top-0 left-16 flex-row items-center self-start max-md:my-(--halo-thickness) max-md:ml-16 md:absolute md:left-[4vw]",
-        horizontal: "absolute top-24 left-0 flex-row items-center",
-      },
-    },
-  });
+  const titleWrapperClass = $derived(
+    `z-20 flex gap-16 ${
+      orientation === "vertical"
+        ? "top-0 left-16 flex-row items-center self-start max-md:my-(--halo-thickness) max-md:ml-16 md:absolute md:left-[4vw]"
+        : "absolute top-24 left-0 flex-row items-center"
+    }`,
+  );
 
   // Tracks Tailwind's `max-sm` breakpoint so padding can shrink on mobile.
   let isSmallScreen = $state(false);
@@ -411,19 +401,16 @@
 
 <div
   bind:this={rootEl}
-  class={twMerge(
-    "cluster-root [--halo-thickness:24px] md:[--halo-thickness:40px] [--cluster-spacing:var(--halo-thickness)] md:[--cluster-spacing:calc(-1*var(--halo-thickness))]",
-    className,
-  )}
+  class={`cluster-root [--halo-thickness:24px] md:[--halo-thickness:40px] [--cluster-spacing:var(--halo-thickness)] md:[--cluster-spacing:calc(-1*var(--halo-thickness))] ${className}`}
   data-orientation={orientation}
   style={color ? `--bubble-color: ${color}` : undefined}
 >
-  <div class={contentWrapper({ orientation, fitContent })}>
+  <div class={contentWrapperClass}>
     {#if title}
       <button
         type="button"
         tabindex="-1"
-        class={titleWrapper({ orientation })}
+        class={titleWrapperClass}
         onclick={activate}
       >
         <div
