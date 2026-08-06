@@ -87,7 +87,7 @@
   }
 
   onDestroy(() => {
-    if (expanded) highlightContext.setHighlighted(null);
+    highlightContext.setHighlighted(null);
   });
 </script>
 
