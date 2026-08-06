@@ -34,7 +34,10 @@
   // Sum of `ringAngle` around a full cyclic ordering — the total angle
   // needed for every circle to be tangent to both neighbours at these
   // per-circle distances from the centre.
-  function ringTotalAngle(distances: number[], radii: number[]): number | null {
+  function ringTotalAngle(
+    distances: number[],
+    radii: number[],
+  ): number | null {
     let sum = 0;
     for (let i = 0; i < radii.length; i++) {
       const next = (i + 1) % radii.length;
@@ -50,13 +53,13 @@
     return sum;
   }
 
-  // For a given cyclic ordering of radii, finds (via binary search) the
-  // smallest enclosing radius `R` at which every circle — sitting at
-  // distance `R - r` from the centre — is simultaneously tangent to both
-  // its neighbours and the enclosing circle, i.e. a perfectly even rosette
-  // with no circle left stranded off the boundary. `ringTotalAngle`
-  // decreases monotonically as `R` grows, so there's exactly one `R` where
-  // the ring of tangency angles closes at 2π.
+  // Finds (via binary search) the smallest enclosing radius `R` at which
+  // every circle — sitting at distance `R - r` from the centre — is
+  // simultaneously tangent to both its neighbours and the enclosing
+  // circle, i.e. a perfectly even rosette with no circle left stranded off
+  // the boundary. `ringTotalAngle` decreases monotonically as `R` grows,
+  // so there's exactly one `R` where the ring of tangency angles closes at
+  // 2π.
   function solveNecklaceRadius(radii: number[]): number {
     const distancesAt = (R: number) => radii.map((r) => R - r);
     let lo = Math.max(...radii) + 1e-6;
@@ -75,82 +78,52 @@
     return hi;
   }
 
-  function necklaceLayout(order: PackCircle[]): {
+  // Arranges circles, in the order given, tangent to both their neighbours
+  // and a shared enclosing boundary — a perfectly even "necklace" rosette.
+  // Every circle's distance from centre depends on its own radius
+  // (`R - r`), so — unlike `wheelLayout`'s uniform ring distance — it
+  // stays exact no matter how much sizes vary. The tradeoff is that
+  // tightness does depend on adjacency order (two large circles ending up
+  // neighbours pushes `R` out further than if they didn't); this trusts
+  // the caller's DOM order rather than searching for the best one. Good
+  // for small clusters, where there's no obvious "biggest" circle to pull
+  // out into a hub (see `wheelPack` for that case).
+  function necklacePack(baseCircles: PackCircle[]): {
     circles: PositionedCircle[];
     enclosing: EnclosingCircle;
   } {
-    const radii = order.map((c) => c.r);
+    const radii = baseCircles.map((c) => c.r);
     const R = solveNecklaceRadius(radii);
     const distances = radii.map((r) => R - r);
     let angle = 0;
-    const circles = order.map((c, i) => {
+    const circles = baseCircles.map((c, i) => {
       const dist = distances[i];
       const positioned = {
         ...c,
         x: Math.cos(angle) * dist,
         y: Math.sin(angle) * dist,
       };
-      const next = (i + 1) % order.length;
-      angle += ringAngle(distances[i], distances[next], radii[i], radii[next])!;
+      const next = (i + 1) % baseCircles.length;
+      angle += ringAngle(
+        distances[i],
+        distances[next],
+        radii[i],
+        radii[next],
+      )!;
       return positioned;
     });
     return { circles, enclosing: { x: 0, y: 0, r: R } };
-  }
-
-  // Caps how many cyclic orderings `necklacePack` explores, so layout time
-  // stays bounded even if a cluster ever grows well beyond the ~5 bubbles
-  // it's used for today ((n-1)! orderings, fixing one circle to skip
-  // rotations).
-  const RING_PERMUTATION_BUDGET = 5000;
-
-  function* permutationsFixedFirst<T>(items: T[]): Generator<T[]> {
-    const [first, ...rest] = items;
-    yield* (function* permute(curr: T[], remaining: T[]): Generator<T[]> {
-      if (remaining.length === 0) {
-        yield [first, ...curr];
-        return;
-      }
-      for (let i = 0; i < remaining.length; i++) {
-        yield* permute(
-          [...curr, remaining[i]],
-          [...remaining.slice(0, i), ...remaining.slice(i + 1)],
-        );
-      }
-    })([], rest);
-  }
-
-  // Tries many cyclic orderings of the circles around a single ring and
-  // keeps whichever produces the smallest enclosing circle. Good for small
-  // clusters, where all circles comfortably fit on one boundary.
-  function necklacePack(baseCircles: PackCircle[]): {
-    circles: PositionedCircle[];
-    enclosing: EnclosingCircle;
-  } {
-    let best:
-      { circles: PositionedCircle[]; enclosing: EnclosingCircle } | undefined;
-
-    let count = 0;
-    for (const order of permutationsFixedFirst(baseCircles)) {
-      if (count++ >= RING_PERMUTATION_BUDGET) break;
-      const candidate = necklaceLayout(order);
-      if (!best || candidate.enclosing.r < best.enclosing.r) {
-        best = candidate;
-      }
-    }
-
-    return best!;
   }
 
   // Places `center` at the centre and the rest evenly around it in a ring,
   // all at the same distance `d` — just far enough to clear the centre
   // against the ring's largest member (`center.r + largestRing`). This
   // does NOT also guard against two large ring neighbours overlapping each
-  // other (the earlier `largestRing / sin(π/n)` term did, at the cost of
-  // extra clearance for every smaller bubble). Instead it trusts the
-  // caller's ordering: `_Flow.svelte` puts the largest bubble first (as
-  // the hub) and alternates ring bubble sizes so two large ones are never
-  // adjacent. Reordering a cluster's bubbles there without preserving that
-  // alternation can make ring neighbours overlap.
+  // other, unlike `necklacePack`'s exact tangency solve — it trusts the
+  // caller's ordering instead: `_Flow.svelte` puts the largest bubble
+  // first (as the hub) and alternates ring bubble sizes so two large ones
+  // are never adjacent. Reordering a cluster's bubbles there without
+  // preserving that alternation can make ring neighbours overlap.
   function wheelLayout(
     center: PackCircle,
     ring: PackCircle[],
