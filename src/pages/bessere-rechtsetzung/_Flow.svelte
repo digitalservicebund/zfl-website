@@ -68,9 +68,7 @@
       <Bubble title="Workshops mit Ländern und Kommunen" optional></Bubble>
     </Cluster>
 
-    <Arrow color="#BCA6DC">
-      Übergabe an das Fachreferat
-    </Arrow>
+    <Arrow color="#BCA6DC">Übergabe an das Fachreferat</Arrow>
 
     <Cluster color="#BCA6DC" offset={0} highlightGroup="Interessensermittlung">
       <Bubble title="Federführung">
@@ -348,9 +346,7 @@
       </Bubble>
     </Cluster>
 
-    <Arrow color="#D2EDB9">
-      Übergabe an die politische Ebene
-    </Arrow>
+    <Arrow color="#D2EDB9">Übergabe an die politische Ebene</Arrow>
 
     <Cluster color="#EBF5B3" offset={0} title="Verabschiedung">
       {#snippet sidebar()}
