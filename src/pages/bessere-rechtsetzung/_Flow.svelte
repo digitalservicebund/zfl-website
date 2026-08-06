@@ -31,7 +31,7 @@
       title="Initiative des Bundestages"
       className="max-sm:hidden"
     ></Bubble>
-    <Cluster color="#D59FDE" offset={0} fitContent>
+    <Cluster color="#D59FDE" offset={0}>
       <Bubble color="#D59FDE" title="Aus der Mitte der Regierung"></Bubble>
     </Cluster>
     <Bubble

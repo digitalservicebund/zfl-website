@@ -161,7 +161,6 @@
     color,
     className = "",
     offset,
-    fitContent = false,
     children,
     sidebar,
     highlightGroup,
@@ -179,11 +178,6 @@
     color?: string;
     className?: string;
     offset?: number;
-    /**
-     * When true, the content wrapper shrinks to fit its bubbles instead of
-     * taking the default fixed vertical width (`w-1000`)
-     */
-    fitContent?: boolean;
     children?: Snippet;
     /**
      * Sidebar content shown in the global sidebar.
@@ -266,7 +260,7 @@
   });
 
   const contentWrapperClass = $derived(
-    `relative flex flex-col items-center justify-center w-(--cluster-inner-width) overflow-x-clip ${fitContent ? "h-fit w-fit" : ""}`,
+    `relative flex flex-col items-center justify-center w-full overflow-x-clip`,
   );
 
   const titleWrapperClass =
