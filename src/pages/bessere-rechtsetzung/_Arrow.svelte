@@ -8,14 +8,12 @@
 
   let {
     size = 120,
-    orientation = "vertical",
     className = "",
     children,
     highlightGroup,
     color,
   }: {
     size?: number;
-    orientation?: "vertical" | "horizontal";
     className?: string;
     children?: Snippet;
     /**
@@ -44,25 +42,11 @@
 
   let rootEl: HTMLDivElement | undefined = $state();
 
-  const isVertical = $derived(orientation === "vertical");
-
-  const wrapperClass = $derived(
-    `flex justify-center ${isVertical ? "flex-col" : "flex-row"} ${className}`,
-  );
-  const shaftClass = $derived(
-    `flex items-center justify-center bg-(--arrow-bg) p-8 ${
-      isVertical
-        ? "mx-auto -mt-24 h-(--arrow-size) w-120 pt-24"
-        : "my-auto -ml-24 h-120 w-(--arrow-size) pl-24"
-    }`,
-  );
-  const tipClass = $derived(
-    `h-0 w-0 border-transparent ${
-      isVertical
-        ? "mx-auto border-x-[100px] border-t-[60px] border-t-(--arrow-bg)"
-        : "my-auto border-y-[100px] border-l-[60px] border-l-(--arrow-bg)"
-    }`,
-  );
+  const wrapperClass = $derived(`flex justify-center flex-col ${className}`);
+  const shaftClass =
+    "flex items-center justify-center bg-(--arrow-bg) p-8 mx-auto -mt-24 h-(--arrow-size) w-120 pt-24";
+  const tipClass =
+    "h-0 w-0 border-transparent mx-auto border-x-[100px] border-t-[60px] border-t-(--arrow-bg)";
 </script>
 
 <div

@@ -157,7 +157,6 @@
 
   let {
     title,
-    orientation = "vertical",
     anchorName,
     color,
     className = "",
@@ -168,7 +167,6 @@
     highlightGroup,
   }: {
     title?: string;
-    orientation?: "vertical" | "horizontal";
     /**
      * CSS anchor name (e.g. "--cluster-first") assigned to this cluster's
      * title dot, so it can be targeted from outside via `anchor()`.
@@ -250,12 +248,9 @@
   $effect(() => {
     if (!highlightId || !rootEl) return;
 
-    const rootMargin =
-      orientation === "horizontal"
-        ? "0px -50% 0px -50%"
-        : isSmallScreen
-          ? "-15% 0px -85% 0px"
-          : "-50% 0px -50% 0px";
+    const rootMargin = isSmallScreen
+      ? "-15% 0px -85% 0px"
+      : "-50% 0px -50% 0px";
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -271,20 +266,11 @@
   });
 
   const contentWrapperClass = $derived(
-    `relative flex flex-col items-center justify-center ${
-      orientation === "vertical"
-        ? "w-(--cluster-inner-width) overflow-x-clip"
-        : "h-screen"
-    } ${fitContent ? "h-fit w-fit" : ""}`,
+    `relative flex flex-col items-center justify-center w-(--cluster-inner-width) overflow-x-clip ${fitContent ? "h-fit w-fit" : ""}`,
   );
 
-  const titleWrapperClass = $derived(
-    `z-20 flex gap-16 ${
-      orientation === "vertical"
-        ? "top-0 left-16 flex-row items-center self-start max-md:my-(--halo-thickness) max-md:ml-16 md:absolute md:left-[4vw]"
-        : "absolute top-24 left-0 flex-row items-center"
-    }`,
-  );
+  const titleWrapperClass =
+    "z-20 flex gap-16 top-0 left-16 flex-row items-center self-start max-md:my-(--halo-thickness) max-md:ml-16 md:absolute md:left-[4vw]";
 
   // Tracks Tailwind's `max-sm` breakpoint so padding can shrink on mobile.
   let isSmallScreen = $state(false);
@@ -402,7 +388,6 @@
 <div
   bind:this={rootEl}
   class={`cluster-root [--halo-thickness:24px] md:[--halo-thickness:40px] [--cluster-spacing:var(--halo-thickness)] md:[--cluster-spacing:calc(-1*var(--halo-thickness))] ${className}`}
-  data-orientation={orientation}
   style={color ? `--bubble-color: ${color}` : undefined}
 >
   <div class={contentWrapperClass}>
@@ -430,7 +415,7 @@
 
     <div
       class={`relative flex items-center justify-center ${isActive ? "z-10" : ""}`}
-      style={`width: calc(${diameter}px + 2 * var(--halo-thickness)); height: calc(${diameter}px + 2 * var(--halo-thickness)); margin-${orientation === "vertical" ? "left" : "top"}: ${offset ?? clusterOffset}px; --halo-color: color-mix(in srgb, ${color} 20%, white)`}
+      style={`width: calc(${diameter}px + 2 * var(--halo-thickness)); height: calc(${diameter}px + 2 * var(--halo-thickness)); margin-left: ${offset ?? clusterOffset}px; --halo-color: color-mix(in srgb, ${color} 20%, white)`}
     >
       <!-- Isolated so the halo/dashed-circle negative z-indices only stack
          against each other, never against sibling (overlapping) clusters. -->
@@ -462,17 +447,7 @@
 <style>
   /* Overlap the soft halo rings of two adjacent clusters (pulling them
      --halo-thickness closer)  */
-  :global(
-    .cluster-root[data-orientation="vertical"]
-      + .cluster-root[data-orientation="vertical"]
-  ) {
+  :global(.cluster-root + .cluster-root) {
     margin-top: var(--cluster-spacing);
-  }
-
-  :global(
-    .cluster-root[data-orientation="horizontal"]
-      + .cluster-root[data-orientation="horizontal"]
-  ) {
-    margin-left: var(--cluster-spacing);
   }
 </style>

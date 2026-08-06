@@ -7,29 +7,14 @@
   import OutTrigger from "./_OutTrigger.svelte";
   import IconArrowDown from "~icons/ic/round-keyboard-double-arrow-down";
 
-  let orientation = $state<"vertical" | "horizontal">("vertical");
-  const isVertical = $derived(orientation === "vertical");
-
-  const containerClass = $derived(
-    `relative flex bg-white ${
-      orientation === "horizontal"
-        ? "h-screen flex-row items-stretch"
-        : "mx-auto w-(--cluster-inner-width) flex-col"
-    }`,
-  );
-
   const CLUSTER_FIRST_ANCHOR = "--cluster-first";
   const CLUSTER_LAST_ANCHOR = "--cluster-last";
 
-  const connectorStyle = $derived(
-    orientation === "vertical"
-      ? `left: calc(anchor(${CLUSTER_FIRST_ANCHOR} center) - 0.5px); top: anchor(${CLUSTER_FIRST_ANCHOR} center); bottom: anchor(${CLUSTER_LAST_ANCHOR} center); width: 1px;`
-      : `top: calc(anchor(${CLUSTER_FIRST_ANCHOR} center) - 0.5px); left: anchor(${CLUSTER_FIRST_ANCHOR} center); right: anchor(${CLUSTER_LAST_ANCHOR} center); height: 1px;`,
-  );
+  const connectorStyle = `left: calc(anchor(${CLUSTER_FIRST_ANCHOR} center) - 0.5px); top: anchor(${CLUSTER_FIRST_ANCHOR} center); bottom: anchor(${CLUSTER_LAST_ANCHOR} center); width: 1px;`;
 </script>
 
-<FlowLayout {orientation}>
-  <div class={containerClass}>
+<FlowLayout>
+  <div class="relative flex bg-white mx-auto w-(--cluster-inner-width) flex-col">
     <OutTrigger>
       <div class="py-lg mx-auto max-w-200 flex flex-col items-center gap-8">
         Scrollen Sie zum Starten
@@ -43,15 +28,13 @@
       style={connectorStyle}
     ></div>
 
-    <div
-      class={`flex items-center gap-8 xl:gap-24 justify-center ${isVertical ? "" : "flex-col pl-40"}`}
-    >
+    <div class="flex items-center gap-8 xl:gap-24 justify-center">
       <Bubble
         color="#E6E6E6"
         title="Initiative des Bundestages"
         className="max-sm:hidden"
       ></Bubble>
-      <Cluster color="#D59FDE" {orientation} offset={0} fitContent>
+      <Cluster color="#D59FDE" offset={0} fitContent>
         <Bubble color="#D59FDE" title="Aus der Mitte der Regierung"></Bubble>
       </Cluster>
       <Bubble
@@ -61,11 +44,10 @@
       ></Bubble>
     </div>
 
-    <Arrow {orientation} size={40} color="#D59FDE" />
+    <Arrow size={40} color="#D59FDE" />
 
     <Cluster
       color="#BCA6DC"
-      {orientation}
       offset={0}
       anchorName={CLUSTER_FIRST_ANCHOR}
       title="Interessensermittlung"
@@ -84,13 +66,12 @@
       <Bubble title="Workshops mit Ländern und Kommunen" optional></Bubble>
     </Cluster>
 
-    <Arrow {orientation} color="#BCA6DC" highlightGroup="Interessensermittlung">
+    <Arrow color="#BCA6DC" highlightGroup="Interessensermittlung">
       Übergabe an das Fachreferat
     </Arrow>
 
     <Cluster
       color="#BCA6DC"
-      {orientation}
       offset={0}
       highlightGroup="Interessensermittlung"
     >
@@ -100,7 +81,7 @@
       </Bubble>
     </Cluster>
 
-    <Cluster color="#B3B7E0" {orientation} title="Frühphase" offset={0}>
+    <Cluster color="#B3B7E0" title="Frühphase" offset={0}>
       {#snippet sidebar()}
         <h2>Was passiert hier?</h2>
         <p>
@@ -219,7 +200,7 @@
       </Bubble>
     </Cluster>
 
-    <Cluster color="#ABD7F9" {orientation} title="Referentenentwurf">
+    <Cluster color="#ABD7F9" title="Referentenentwurf">
       {#snippet sidebar()}
         <h2>Was passiert hier?</h2>
         <p>
@@ -257,7 +238,7 @@
       <Bubble title="Gesetzesfolgen besprechen" optional size="sm"></Bubble>
     </Cluster>
 
-    <Cluster color="#A0EBEE" {orientation} title="Hausentwurf & Ressortentwurf">
+    <Cluster color="#A0EBEE" title="Hausentwurf & Ressortentwurf">
       {#snippet sidebar()}
         <h2>Was passiert hier?</h2>
         <p>
@@ -290,7 +271,6 @@
 
     <Cluster
       color="#9EDCD0"
-      {orientation}
       highlightGroup="Hausentwurf & Ressortentwurf"
     >
       <Bubble title="Gesetzes&shy;folgen&shy;abschätzung" size="md">
@@ -336,7 +316,6 @@
 
     <Cluster
       color="#9EDCD0"
-      {orientation}
       highlightGroup="Hausentwurf & Ressortentwurf"
     >
       <Bubble title="Verbände informieren" size="md">
@@ -344,7 +323,7 @@
       </Bubble>
     </Cluster>
 
-    <Cluster color="#D2EDB9" {orientation} title="Kabinettvorlage">
+    <Cluster color="#D2EDB9" title="Kabinettvorlage">
       {#snippet sidebar()}
         <h2>Was passiert hier?</h2>
         <p>
@@ -371,7 +350,6 @@
 
     <Cluster
       color="#D2EDB9"
-      {orientation}
       offset={0}
       highlightGroup="Kabinettvorlage"
     >
@@ -382,11 +360,11 @@
       </Bubble>
     </Cluster>
 
-    <Arrow {orientation} color="#D2EDB9" highlightGroup="Kabinettvorlage">
+    <Arrow color="#D2EDB9" highlightGroup="Kabinettvorlage">
       Übergabe an die politische Ebene
     </Arrow>
 
-    <Cluster color="#EBF5B3" {orientation} offset={0} title="Verabschiedung">
+    <Cluster color="#EBF5B3" offset={0} title="Verabschiedung">
       {#snippet sidebar()}
         <h2>Was passiert hier?</h2>
         <p>
@@ -416,7 +394,7 @@
       </Bubble>
     </Cluster>
 
-    <Cluster color="#EBF5B3" {orientation} highlightGroup="Verabschiedung">
+    <Cluster color="#EBF5B3" highlightGroup="Verabschiedung">
       <Bubble title="Abstimmung im Bundestag">
         <h3>Ausschuss</h3>
         <p>
@@ -439,7 +417,7 @@
       </Bubble>
     </Cluster>
 
-    <Cluster color="#FFFBB5" {orientation} highlightGroup="Verabschiedung">
+    <Cluster color="#FFFBB5" highlightGroup="Verabschiedung">
       <Bubble title="Verkündung">
         <h3>Verkündung</h3>
         <p>
@@ -458,7 +436,6 @@
 
     <Cluster
       color="#FDE99F"
-      {orientation}
       title="Nach der Verkündung"
       anchorName={CLUSTER_LAST_ANCHOR}
     >
@@ -499,8 +476,7 @@
 
     <Cluster
       color="#FAB5A8"
-      {orientation}
-      className={isVertical ? "max-lg:pb-[50vh]" : "pr-40"}
+      className="max-lg:pb-[50vh]"
       highlightGroup="Nach der Verkündung"
     >
       <Bubble title="Vollzug">

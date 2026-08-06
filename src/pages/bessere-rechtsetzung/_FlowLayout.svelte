@@ -9,14 +9,7 @@
   } from "./_flowSidebar";
   import { BUBBLE_HIGHLIGHT_CONTEXT_NAME } from "./_bubbleHighlight";
 
-  let {
-    orientation = "vertical",
-    children,
-  }: {
-    /** Direction the content scrolls/grows in. */
-    orientation?: "vertical" | "horizontal";
-    children: Snippet;
-  } = $props();
+  let { children }: { children: Snippet } = $props();
 
   /**
    * Tags of the bubbles to highlight (matched against each Bubble's
@@ -46,8 +39,6 @@
   function setHighlighted(tag: string | null) {
     highlighted = tag ? [tag] : [];
   }
-
-  const isVertical = $derived(orientation === "vertical");
 
   // Every bubble/cluster registers its content here as soon as it mounts
   // (regardless of whether it's ever clicked), so the sidebar can show a
@@ -141,16 +132,16 @@
   );
 
   // Scrolls `el` into view like `Element.scrollIntoView({ block: "start" })`,
-  // but (in vertical orientation) clamps the target scroll position so it
-  // never scrolls past the point where the layout wrapper's bottom edge
-  // would rise above the viewport - beyond that point, `_FlowSidebar.svelte`
-  // (whose sticky containing block is this wrapper) starts scrolling away
-  // with the content instead of staying pinned. Most relevant for the last
-  // cluster ("Nach der Verkündung"), which would otherwise scroll the
-  // sidebar out of view.
+  // but clamps the target scroll position so it never scrolls past the
+  // point where the layout wrapper's bottom edge would rise above the
+  // viewport - beyond that point, `_FlowSidebar.svelte` (whose sticky
+  // containing block is this wrapper) starts scrolling away with the
+  // content instead of staying pinned. Most relevant for the last cluster
+  // ("Nach der Verkündung"), which would otherwise scroll the sidebar out of
+  // view.
   function scrollToStep(el: HTMLElement) {
     startJump();
-    if (!isVertical || !wrapperEl) {
+    if (!wrapperEl) {
       el.scrollIntoView({ behavior: "smooth" });
       return;
     }
@@ -222,17 +213,10 @@
   }
 
   // Clears the `jumping` flag once the auto-scroll triggered by
-  // `navigateStep` actually finishes, listening on whichever target scrolls
-  // for the current orientation (the window when vertical, `mainEl` itself
-  // when horizontal).
+  // `navigateStep` actually finishes.
   $effect(() => {
     window.addEventListener("scrollend", endJump);
-    mainEl?.addEventListener("scrollend", endJump);
-
-    return () => {
-      window.removeEventListener("scrollend", endJump);
-      mainEl?.removeEventListener("scrollend", endJump);
-    };
+    return () => window.removeEventListener("scrollend", endJump);
   });
 
   setContext(FLOW_SIDEBAR_CONTEXT_NAME, {
@@ -249,7 +233,6 @@
     close: closeSidebar,
   });
 
-  let mainEl: HTMLDivElement | undefined = $state();
   // The grid wrapper whose bottom edge bounds `_FlowSidebar.svelte`'s sticky
   // positioning - see `scrollToStep`.
   let wrapperEl: HTMLDivElement | undefined = $state();
@@ -259,28 +242,12 @@
   bind:this={wrapperEl}
   class="grid items-start grid-cols-1 lg:grid-cols-[1fr_auto] [--cluster-inner-width:100vw] lg:[--cluster-inner-width:61.8vw]"
 >
-  <div
-    class={`col-start-1 row-start-1 grid min-w-0 ${isVertical ? "mx-auto w-(--cluster-inner-width)" : ""}`}
-  >
-    <div
-      bind:this={mainEl}
-      class={`col-start-1 row-start-1 min-w-0 max-w-screen ${isVertical ? "" : "w-screen overflow-x-auto scrollbar-none"}`}
-    >
-      <!-- `inline-block` (rather than the default block box, which would
-         just stretch to 100% of `mainEl`) shrink-wraps to the content's own
-         natural width, which in horizontal mode is wider than the viewport -
-         without this, `mainEl`'s `overflow-x-auto` would have nothing wider
-         than itself to actually scroll. -->
-      <div class="inline-block align-top">
-        {@render children()}
-      </div>
+  <div class="col-start-1 row-start-1 grid min-w-0 mx-auto w-(--cluster-inner-width)">
+    <div class="col-start-1 row-start-1 min-w-0 max-w-screen">
+      {@render children()}
     </div>
     <div
-      class={`sticky flex items-center z-50 col-start-1 row-start-1 pointer-events-none ${
-        isVertical
-          ? "w-full top-0 h-screen justify-end"
-          : "w-[50vw] bottom-20 self-end justify-self-start justidfy-center"
-      }`}
+      class="sticky flex items-center z-50 col-start-1 row-start-1 pointer-events-none w-full top-0 h-screen justify-end"
     >
       <DotNav clusters={clusterDots} {activeId} onSelect={onDotSelect} />
     </div>
