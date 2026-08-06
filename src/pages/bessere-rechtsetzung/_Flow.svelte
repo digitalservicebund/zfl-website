@@ -14,7 +14,9 @@
 </script>
 
 <FlowLayout>
-  <div class="relative flex bg-white mx-auto w-(--cluster-inner-width) flex-col">
+  <div
+    class="relative flex bg-white mx-auto w-(--cluster-inner-width) flex-col"
+  >
     <OutTrigger>
       <div class="py-lg mx-auto max-w-200 flex flex-col items-center gap-8">
         Scrollen Sie zum Starten
@@ -70,11 +72,7 @@
       Übergabe an das Fachreferat
     </Arrow>
 
-    <Cluster
-      color="#BCA6DC"
-      offset={0}
-      highlightGroup="Interessensermittlung"
-    >
+    <Cluster color="#BCA6DC" offset={0} highlightGroup="Interessensermittlung">
       <Bubble title="Federführung">
         Ein Fachreferat übernimmt die Verantwortung für die Weiterentwicklung
         der Regelung. Legist:in wird zugewiesen.
@@ -269,10 +267,7 @@
       ></Bubble>
     </Cluster>
 
-    <Cluster
-      color="#9EDCD0"
-      highlightGroup="Hausentwurf & Ressortentwurf"
-    >
+    <Cluster color="#9EDCD0" highlightGroup="Hausentwurf & Ressortentwurf">
       <Bubble title="Gesetzes&shy;folgen&shy;abschätzung" size="md">
         Beabsichtigte Wirkungen und unbeabsichtigte Nebenwirkungen
         (Haushaltsausgaben, Demographische Auswirkungen, Nachhaltigkeitsaspekte,
@@ -314,10 +309,7 @@
       </Bubble>
     </Cluster>
 
-    <Cluster
-      color="#9EDCD0"
-      highlightGroup="Hausentwurf & Ressortentwurf"
-    >
+    <Cluster color="#9EDCD0" highlightGroup="Hausentwurf & Ressortentwurf">
       <Bubble title="Verbände informieren" size="md">
         Die betroffenen Verbände werden über den Ressortentwurf informiert.
       </Bubble>
@@ -348,11 +340,7 @@
       </Bubble>
     </Cluster>
 
-    <Cluster
-      color="#D2EDB9"
-      offset={0}
-      highlightGroup="Kabinettvorlage"
-    >
+    <Cluster color="#D2EDB9" offset={0} highlightGroup="Kabinettvorlage">
       <Bubble title="Weiterleitung an das Bundes&shy;kanzleramt" size="md">
         Fachreferat leitet die Kabinettvorlage an Bundeskanzleramts-Chef:in
         weiter (mind. 8 Tage vor der Kabinettsitzung). Einbindung Spiegel- &

@@ -242,7 +242,9 @@
   bind:this={wrapperEl}
   class="grid items-start grid-cols-1 lg:grid-cols-[1fr_auto] [--cluster-inner-width:100vw] lg:[--cluster-inner-width:61.8vw]"
 >
-  <div class="col-start-1 row-start-1 grid min-w-0 mx-auto w-(--cluster-inner-width)">
+  <div
+    class="col-start-1 row-start-1 grid min-w-0 mx-auto w-(--cluster-inner-width)"
+  >
     <div class="col-start-1 row-start-1 min-w-0 max-w-screen">
       {@render children()}
     </div>

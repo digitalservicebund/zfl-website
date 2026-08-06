@@ -343,8 +343,7 @@
         circle.el.style.left = `${center - circle.trueRadius}px`;
         circle.el.style.top = `${center - circle.trueRadius}px`;
       } else {
-        const percent =
-          ((((circle.angle / (2 * Math.PI)) % 1) + 1) % 1) * 100;
+        const percent = ((((circle.angle / (2 * Math.PI)) % 1) + 1) % 1) * 100;
         circle.el.style.left = "0px";
         circle.el.style.top = "0px";
         circle.el.style.offsetPath = `circle(${circle.dist}px at ${center}px ${center}px)`;
