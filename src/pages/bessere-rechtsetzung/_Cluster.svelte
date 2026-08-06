@@ -2,7 +2,6 @@
   import { getContext, setContext } from "svelte";
   import type { Snippet } from "svelte";
   import { packEnclose, packSiblings } from "d3-hierarchy";
-  import { forceCollide, forceSimulation, forceX, forceY } from "d3-force";
   import { tv } from "tailwind-variants";
   import { twMerge } from "tailwind-merge";
   import {
@@ -15,77 +14,16 @@
   type PositionedCircle = PackCircle & { x: number; y: number };
   type EnclosingCircle = { x: number; y: number; r: number };
 
-  // Deterministic PRNG (mulberry32) used to scatter trial starting
-  // positions in `packEvenly` below — avoids `Math.random()` so identical
-  // bubble sizes always produce the identical layout, even when `layout()`
-  // re-runs (e.g. via the ResizeObserver further down).
-  function mulberry32(seed: number) {
-    return () => {
-      seed = (seed + 0x6d2b79f5) | 0;
-      let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
-      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-    };
-  }
-
-  const PACK_TRIALS = 24;
-  const PACK_TICKS = 150;
-
-  // Runs many independently-seeded force-directed relaxations (mutual
-  // collision plus a gentle pull toward the centroid) from scattered
-  // starting points and keeps the tightest result. Good general-purpose
-  // packing, particularly once there are enough circles that some of them
-  // belong in the interior rather than in a single outer ring.
-  function forcePack(baseCircles: PackCircle[]): {
-    circles: PositionedCircle[];
-    enclosing: EnclosingCircle;
-  } {
-    const scatterRadius = Math.max(
-      60,
-      Math.sqrt(baseCircles.reduce((sum, c) => sum + c.r * c.r, 0)) * 1.2,
-    );
-
-    let best:
-      | { circles: PositionedCircle[]; enclosing: EnclosingCircle }
-      | undefined;
-
-    for (let trial = 0; trial < PACK_TRIALS; trial++) {
-      const random = mulberry32(trial * 7919 + 1);
-      const circles: PositionedCircle[] = baseCircles.map((c) => {
-        const angle = random() * Math.PI * 2;
-        const dist = random() * scatterRadius;
-        return { ...c, x: Math.cos(angle) * dist, y: Math.sin(angle) * dist };
-      });
-
-      forceSimulation(circles)
-        .alphaDecay(1 - Math.pow(0.001, 1 / PACK_TICKS))
-        .force("x", forceX(0).strength(0.05))
-        .force("y", forceY(0).strength(0.05))
-        .force(
-          "collide",
-          forceCollide((d: PositionedCircle) => d.r)
-            .strength(1)
-            .iterations(3),
-        )
-        .stop()
-        .tick(PACK_TICKS);
-
-      const enclosing = packEnclose(circles);
-      if (!best || enclosing.r < best.enclosing.r) {
-        best = { circles, enclosing };
-      }
-    }
-
-    return best!;
-  }
-
-  // The angle (at the shared centre) between two neighbouring circles in a
-  // "necklace" arrangement — both tangent to each other and to an
-  // enclosing circle of radius `R`. Returns null if that's geometrically
-  // impossible at this `R` (e.g. a circle bigger than `R` itself).
-  function necklaceAngle(R: number, rA: number, rB: number): number | null {
-    const dA = R - rA;
-    const dB = R - rB;
+  // The angle (at the shared centre) between two neighbouring circles, each
+  // sitting at its own distance (`dA`/`dB`) from that centre, tangent to
+  // each other. Returns null if that's geometrically impossible (e.g. the
+  // circles would have to overlap to both be at these distances).
+  function ringAngle(
+    dA: number,
+    dB: number,
+    rA: number,
+    rB: number,
+  ): number | null {
     if (dA <= 0 || dB <= 0) return null;
     const cosTheta =
       (dA * dA + dB * dB - (rA + rB) * (rA + rB)) / (2 * dA * dB);
@@ -93,10 +31,14 @@
     return Math.acos(cosTheta);
   }
 
-  function necklaceTotalAngle(R: number, radii: number[]): number | null {
+  // Sum of `ringAngle` around a full cyclic ordering — the total angle
+  // needed for every circle to be tangent to both neighbours at these
+  // per-circle distances from the centre.
+  function ringTotalAngle(distances: number[], radii: number[]): number | null {
     let sum = 0;
     for (let i = 0; i < radii.length; i++) {
-      const angle = necklaceAngle(R, radii[i], radii[(i + 1) % radii.length]);
+      const next = (i + 1) % radii.length;
+      const angle = ringAngle(distances[i], distances[next], radii[i], radii[next]);
       if (angle === null) return null;
       sum += angle;
     }
@@ -104,22 +46,24 @@
   }
 
   // For a given cyclic ordering of radii, finds (via binary search) the
-  // smallest enclosing radius at which every circle is simultaneously
-  // tangent to both its neighbours and the enclosing circle — i.e. a
-  // perfectly even rosette with no circle left stranded off the boundary.
-  // `necklaceTotalAngle` decreases monotonically as `R` grows, so there's
-  // exactly one `R` where the ring of tangency angles closes at 2π.
+  // smallest enclosing radius `R` at which every circle — sitting at
+  // distance `R - r` from the centre — is simultaneously tangent to both
+  // its neighbours and the enclosing circle, i.e. a perfectly even rosette
+  // with no circle left stranded off the boundary. `ringTotalAngle`
+  // decreases monotonically as `R` grows, so there's exactly one `R` where
+  // the ring of tangency angles closes at 2π.
   function solveNecklaceRadius(radii: number[]): number {
+    const distancesAt = (R: number) => radii.map((r) => R - r);
     let lo = Math.max(...radii) + 1e-6;
     let hi = lo * 50;
     for (let i = 0; i < 60; i++) {
-      const sum = necklaceTotalAngle(hi, radii);
+      const sum = ringTotalAngle(distancesAt(hi), radii);
       if (sum !== null && sum < 2 * Math.PI) break;
       hi *= 1.5;
     }
     for (let i = 0; i < 60; i++) {
       const mid = (lo + hi) / 2;
-      const sum = necklaceTotalAngle(mid, radii);
+      const sum = ringTotalAngle(distancesAt(mid), radii);
       if (sum === null || sum > 2 * Math.PI) lo = mid;
       else hi = mid;
     }
@@ -130,26 +74,29 @@
     circles: PositionedCircle[];
     enclosing: EnclosingCircle;
   } {
-    const R = solveNecklaceRadius(order.map((c) => c.r));
+    const radii = order.map((c) => c.r);
+    const R = solveNecklaceRadius(radii);
+    const distances = radii.map((r) => R - r);
     let angle = 0;
     const circles = order.map((c, i) => {
-      const dist = R - c.r;
+      const dist = distances[i];
       const positioned = {
         ...c,
         x: Math.cos(angle) * dist,
         y: Math.sin(angle) * dist,
       };
-      const next = order[(i + 1) % order.length];
-      angle += necklaceAngle(R, c.r, next.r)!;
+      const next = (i + 1) % order.length;
+      angle += ringAngle(distances[i], distances[next], radii[i], radii[next])!;
       return positioned;
     });
     return { circles, enclosing: { x: 0, y: 0, r: R } };
   }
 
-  // Caps how many cyclic orderings `necklacePack` explores, so layout time
-  // stays bounded even if a cluster ever grows well beyond the ~8 bubbles
-  // seen today ((n-1)! orderings, fixing one circle to skip rotations).
-  const NECKLACE_PERMUTATION_BUDGET = 5000;
+  // Caps how many cyclic orderings `necklacePack`/`wheelPack` explore, so
+  // layout time stays bounded even if a cluster ever grows well beyond the
+  // ~8 bubbles seen today ((n-1)! orderings, fixing one circle to skip
+  // rotations).
+  const RING_PERMUTATION_BUDGET = 5000;
 
   function* permutationsFixedFirst<T>(items: T[]): Generator<T[]> {
     const [first, ...rest] = items;
@@ -168,7 +115,8 @@
   }
 
   // Tries many cyclic orderings of the circles around a single ring and
-  // keeps whichever produces the smallest enclosing circle.
+  // keeps whichever produces the smallest enclosing circle. Good for small
+  // clusters, where all circles comfortably fit on one boundary.
   function necklacePack(baseCircles: PackCircle[]): {
     circles: PositionedCircle[];
     enclosing: EnclosingCircle;
@@ -179,8 +127,105 @@
 
     let count = 0;
     for (const order of permutationsFixedFirst(baseCircles)) {
-      if (count++ >= NECKLACE_PERMUTATION_BUDGET) break;
+      if (count++ >= RING_PERMUTATION_BUDGET) break;
       const candidate = necklaceLayout(order);
+      if (!best || candidate.enclosing.r < best.enclosing.r) {
+        best = candidate;
+      }
+    }
+
+    return best!;
+  }
+
+  // Finds (via binary search) the smallest gap that must be added to every
+  // ring circle's tangent-to-centre distance (`centerRadius + gap + r`) so
+  // the ring closes without overlap. Unlike `solveNecklaceRadius`, the
+  // centre circle already pins each distance, leaving `gap` as the only
+  // free variable — and it's allowed to settle at 0 (no gap needed, ring
+  // circles simply don't touch each other) whenever the ring already has
+  // slack room at the minimum distance.
+  function solveWheelGap(centerRadius: number, ringRadii: number[]): number {
+    const distancesAt = (gap: number) =>
+      ringRadii.map((r) => centerRadius + gap + r);
+
+    const atZero = ringTotalAngle(distancesAt(0), ringRadii);
+    if (atZero !== null && atZero <= 2 * Math.PI) return 0;
+
+    let lo = 0;
+    let hi = Math.max(...ringRadii) + 1e-6;
+    for (let i = 0; i < 60; i++) {
+      const sum = ringTotalAngle(distancesAt(hi), ringRadii);
+      if (sum !== null && sum < 2 * Math.PI) break;
+      hi *= 1.5;
+    }
+    for (let i = 0; i < 60; i++) {
+      const mid = (lo + hi) / 2;
+      const sum = ringTotalAngle(distancesAt(mid), ringRadii);
+      if (sum === null || sum > 2 * Math.PI) lo = mid;
+      else hi = mid;
+    }
+    return hi;
+  }
+
+  // Places the largest circle at the centre and arranges the rest in a
+  // ring around it. Any leftover slack (the ring not needing to touch at
+  // `gap = 0`) is distributed evenly between neighbours, so the ring stays
+  // visually balanced instead of bunching up on one side.
+  function wheelLayout(
+    center: PackCircle,
+    ring: PackCircle[],
+  ): { circles: PositionedCircle[]; enclosing: EnclosingCircle } {
+    const ringRadii = ring.map((c) => c.r);
+    const gap = solveWheelGap(center.r, ringRadii);
+    const distances = ringRadii.map((r) => center.r + gap + r);
+    const required = ringTotalAngle(distances, ringRadii) ?? 0;
+    const slack = Math.max(0, 2 * Math.PI - required) / ring.length;
+
+    let angle = 0;
+    const ringCircles = ring.map((c, i) => {
+      const dist = distances[i];
+      const positioned = {
+        ...c,
+        x: Math.cos(angle) * dist,
+        y: Math.sin(angle) * dist,
+      };
+      const next = (i + 1) % ring.length;
+      const step =
+        ringAngle(distances[i], distances[next], ringRadii[i], ringRadii[next]) ??
+        0;
+      angle += step + slack;
+      return positioned;
+    });
+
+    const centerCircle: PositionedCircle = { ...center, x: 0, y: 0 };
+    const outerRadius = Math.max(
+      center.r,
+      ...distances.map((d, i) => d + ringRadii[i]),
+    );
+    return {
+      circles: [centerCircle, ...ringCircles],
+      enclosing: { x: 0, y: 0, r: outerRadius },
+    };
+  }
+
+  // Tries many orderings of the ring (the centre circle is fixed as
+  // whichever is largest) and keeps whichever produces the smallest
+  // enclosing circle. Good once a cluster has enough circles that some of
+  // them belong in the interior rather than on a single outer ring.
+  function wheelPack(baseCircles: PackCircle[]): {
+    circles: PositionedCircle[];
+    enclosing: EnclosingCircle;
+  } {
+    const [center, ...ring] = [...baseCircles].sort((a, b) => b.r - a.r);
+
+    let best:
+      | { circles: PositionedCircle[]; enclosing: EnclosingCircle }
+      | undefined;
+
+    let count = 0;
+    for (const order of permutationsFixedFirst(ring)) {
+      if (count++ >= RING_PERMUTATION_BUDGET) break;
+      const candidate = wheelLayout(center, order);
       if (!best || candidate.enclosing.r < best.enclosing.r) {
         best = candidate;
       }
@@ -193,11 +238,10 @@
   // (d3-hierarchy's greedy front-chain algorithm) reliably produces the
   // same elongated shape regardless of insertion order — one circle ends
   // up stranded near the centre with a lot of unused space around it once
-  // enclosed. Instead, two different strategies are tried — a "necklace"
-  // ring (perfectly even, but wastes interior space once there are enough
-  // circles that some belong inside the ring) and a force-directed
-  // relaxation (better once circles no longer all fit neatly around a
-  // single ring) — and whichever yields the tighter enclosing circle wins.
+  // enclosed, so it's only used for the trivial 1-2 circle case. Above
+  // that, small clusters fit neatly on a single "necklace" ring; larger
+  // ones do better with the biggest circle pinned in the centre and the
+  // rest arranged in a ring around it.
   function packEvenly(baseCircles: PackCircle[]): {
     circles: PositionedCircle[];
     enclosing: EnclosingCircle;
@@ -208,10 +252,9 @@
       return { circles, enclosing: packEnclose(circles) };
     }
 
-    const candidates = [forcePack(baseCircles), necklacePack(baseCircles)];
-    return candidates.reduce((best, candidate) =>
-      candidate.enclosing.r < best.enclosing.r ? candidate : best,
-    );
+    if (baseCircles.length <= 5) return necklacePack(baseCircles);
+
+    return wheelPack(baseCircles);
   }
 
   let {
@@ -391,13 +434,34 @@
     const { circles, enclosing } = packEvenly(baseCircles);
 
     const finalRadius = enclosing.r + edgePadding;
-    const originX = enclosing.x - finalRadius;
-    const originY = enclosing.y - finalRadius;
+    const center = finalRadius; // px, container's own centre (it's finalRadius × 2 square)
 
+    // Ring circles (necklace/wheel) are placed via `offset-path`: each gets
+    // its own circular path — sized to its own distance from the cluster
+    // centre — and `offset-distance` picks the point on it. That lets the
+    // browser do the trig instead of computing left/top per circle here.
+    // The one circle actually AT the centre (wheelLayout's hub, or a lone
+    // bubble) has no ring to move along, so it's just positioned directly.
     for (const circle of circles) {
+      const dx = circle.x - enclosing.x;
+      const dy = circle.y - enclosing.y;
+      const dist = Math.hypot(dx, dy);
+
       circle.el.style.position = "absolute";
-      circle.el.style.left = `${circle.x - originX - circle.trueRadius}px`;
-      circle.el.style.top = `${circle.y - originY - circle.trueRadius}px`;
+
+      if (dist < 0.5) {
+        circle.el.style.offsetPath = "none";
+        circle.el.style.left = `${center - circle.trueRadius}px`;
+        circle.el.style.top = `${center - circle.trueRadius}px`;
+      } else {
+        const angle = Math.atan2(dy, dx);
+        const percent = (((angle / (2 * Math.PI)) % 1) + 1) % 1 * 100;
+        circle.el.style.left = "0px";
+        circle.el.style.top = "0px";
+        circle.el.style.offsetPath = `circle(${dist}px at ${center}px ${center}px)`;
+        circle.el.style.offsetDistance = `${percent}%`;
+        circle.el.style.offsetRotate = "0deg";
+      }
     }
 
     diameter = finalRadius * 2;
