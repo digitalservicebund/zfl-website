@@ -92,7 +92,7 @@
 </script>
 
 <div
-  class={`group grid grid-cols-[auto_1fr_auto] items-start gap-x-(--feature-spacing) rounded-sm border border-(--border-color) [--feature-spacing:16px]`}
+  class="group grid grid-cols-[auto_1fr_auto] items-start gap-x-(--feature-spacing) rounded-sm border border-(--border-color) [--feature-spacing:16px]"
   title="Schritte hervorheben"
   style="--border-color: var(--kern-color-decorative-border-default);"
 >

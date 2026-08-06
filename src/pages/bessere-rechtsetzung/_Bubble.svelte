@@ -107,7 +107,7 @@
           <div
             class="absolute bottom-[5%] left-[50%] -translate-x-1/2 flex gap-4"
           >
-            {#each icons as icon}
+            {#each icons as icon, i (tags?.[i])}
               <BubbleIcon {icon} />
             {/each}
           </div>

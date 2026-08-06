@@ -68,7 +68,7 @@
       <Bubble title="Workshops mit Ländern und Kommunen" optional></Bubble>
     </Cluster>
 
-    <Arrow color="#BCA6DC" highlightGroup="Interessensermittlung">
+    <Arrow color="#BCA6DC">
       Übergabe an das Fachreferat
     </Arrow>
 
@@ -348,7 +348,7 @@
       </Bubble>
     </Cluster>
 
-    <Arrow color="#D2EDB9" highlightGroup="Kabinettvorlage">
+    <Arrow color="#D2EDB9">
       Übergabe an die politische Ebene
     </Arrow>
 

@@ -421,7 +421,7 @@
       <div class="isolate absolute inset-0">
         <!-- Soft gray halo ring -->
         <div
-          class={`pointer-events-none absolute inset-0 -z-20 rounded-full ${isActive && false ? "bg-(--halo-color)" : "bg-[#F7F7F7]"}`}
+          class="pointer-events-none absolute inset-0 -z-20 rounded-full bg-[#F7F7F7]"
         ></div>
         {#if !isSingleBubble}
           <!-- Dashed cluster circle -->

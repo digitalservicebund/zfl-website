@@ -40,8 +40,8 @@
   let scrollContainer: HTMLDivElement | undefined = $state();
 
   $effect(() => {
-    content;
-    page;
+    void content;
+    void page;
     if (scrollContainer) scrollContainer.scrollTop = 0;
   });
 
