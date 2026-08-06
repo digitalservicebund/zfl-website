@@ -31,7 +31,7 @@
       title="Initiative des Bundestages"
       className="max-sm:hidden"
     ></Bubble>
-    <Cluster color="#D59FDE" offset={0}>
+    <Cluster color="#D59FDE" offset={0} sizes={["md"]}>
       <Bubble color="#D59FDE" title="Aus der Mitte der Regierung"></Bubble>
     </Cluster>
     <Bubble
@@ -48,6 +48,7 @@
     offset={0}
     anchorName={CLUSTER_FIRST_ANCHOR}
     title="Interessensermittlung"
+    sizes={["md", "md"]}
   >
     {#snippet sidebar()}
       <h2>Was passiert hier?</h2>
@@ -65,14 +66,24 @@
 
   <Arrow>Übergabe an das Fachreferat</Arrow>
 
-  <Cluster color="#BCA6DC" offset={0} highlightGroup="Interessensermittlung">
+  <Cluster
+    color="#BCA6DC"
+    offset={0}
+    highlightGroup="Interessensermittlung"
+    sizes={["md"]}
+  >
     <Bubble title="Federführung">
       Ein Fachreferat übernimmt die Verantwortung für die Weiterentwicklung der
       Regelung. Legist:in wird zugewiesen.
     </Bubble>
   </Cluster>
 
-  <Cluster color="#B3B7E0" title="Frühphase" offset={0}>
+  <Cluster
+    color="#B3B7E0"
+    title="Frühphase"
+    offset={0}
+    sizes={["lg", "md", "sm", "sm", "md", "sm", "md", "sm"]}
+  >
     {#snippet sidebar()}
       <h2>Was passiert hier?</h2>
       <p>
@@ -191,7 +202,11 @@
     </Bubble>
   </Cluster>
 
-  <Cluster color="#ABD7F9" title="Referentenentwurf">
+  <Cluster
+    color="#ABD7F9"
+    title="Referentenentwurf"
+    sizes={["sm", "sm", "sm", "sm", "sm"]}
+  >
     {#snippet sidebar()}
       <h2>Was passiert hier?</h2>
       <p>
@@ -228,7 +243,11 @@
     <Bubble title="Gesetzesfolgen besprechen" optional size="sm"></Bubble>
   </Cluster>
 
-  <Cluster color="#A0EBEE" title="Hausentwurf & Ressortentwurf">
+  <Cluster
+    color="#A0EBEE"
+    title="Hausentwurf & Ressortentwurf"
+    sizes={["sm", "sm", "lg"]}
+  >
     {#snippet sidebar()}
       <h2>Was passiert hier?</h2>
       <p>
@@ -258,7 +277,11 @@
     ></Bubble>
   </Cluster>
 
-  <Cluster color="#9EDCD0" highlightGroup="Hausentwurf & Ressortentwurf">
+  <Cluster
+    color="#9EDCD0"
+    highlightGroup="Hausentwurf & Ressortentwurf"
+    sizes={["md", "sm", "md", "sm", "sm"]}
+  >
     <Bubble title="Gesetzes&shy;folgen&shy;abschätzung" size="md">
       Beabsichtigte Wirkungen und unbeabsichtigte Nebenwirkungen
       (Haushaltsausgaben, Demographische Auswirkungen, Nachhaltigkeitsaspekte,
@@ -300,13 +323,17 @@
     </Bubble>
   </Cluster>
 
-  <Cluster color="#9EDCD0" highlightGroup="Hausentwurf & Ressortentwurf">
+  <Cluster
+    color="#9EDCD0"
+    highlightGroup="Hausentwurf & Ressortentwurf"
+    sizes={["md"]}
+  >
     <Bubble title="Verbände informieren" size="md">
       Die betroffenen Verbände werden über den Ressortentwurf informiert.
     </Bubble>
   </Cluster>
 
-  <Cluster color="#D2EDB9" title="Kabinettvorlage">
+  <Cluster color="#D2EDB9" title="Kabinettvorlage" sizes={["md", "md"]}>
     {#snippet sidebar()}
       <h2>Was passiert hier?</h2>
       <p>
@@ -331,7 +358,12 @@
     </Bubble>
   </Cluster>
 
-  <Cluster color="#D2EDB9" offset={0} highlightGroup="Kabinettvorlage">
+  <Cluster
+    color="#D2EDB9"
+    offset={0}
+    highlightGroup="Kabinettvorlage"
+    sizes={["md"]}
+  >
     <Bubble title="Weiterleitung an das Bundes&shy;kanzleramt" size="md">
       Fachreferat leitet die Kabinettvorlage an Bundeskanzleramts-Chef:in weiter
       (mind. 8 Tage vor der Kabinettsitzung). Einbindung Spiegel- &
@@ -341,7 +373,12 @@
 
   <Arrow>Übergabe an die politische Ebene</Arrow>
 
-  <Cluster color="#EBF5B3" offset={0} title="Verabschiedung">
+  <Cluster
+    color="#EBF5B3"
+    offset={0}
+    title="Verabschiedung"
+    sizes={["md"]}
+  >
     {#snippet sidebar()}
       <h2>Was passiert hier?</h2>
       <p>
@@ -371,7 +408,7 @@
     </Bubble>
   </Cluster>
 
-  <Cluster color="#EBF5B3" highlightGroup="Verabschiedung">
+  <Cluster color="#EBF5B3" highlightGroup="Verabschiedung" sizes={["md"]}>
     <Bubble title="Abstimmung im Bundestag">
       <h3>Ausschuss</h3>
       <p>
@@ -394,7 +431,7 @@
     </Bubble>
   </Cluster>
 
-  <Cluster color="#FFFBB5" highlightGroup="Verabschiedung">
+  <Cluster color="#FFFBB5" highlightGroup="Verabschiedung" sizes={["md"]}>
     <Bubble title="Verkündung">
       <h3>Verkündung</h3>
       <p>
@@ -415,6 +452,7 @@
     color="#FDE99F"
     title="Nach der Verkündung"
     anchorName={CLUSTER_LAST_ANCHOR}
+    sizes={["md"]}
   >
     {#snippet sidebar()}
       <h2>Was passiert hier?</h2>
@@ -453,6 +491,7 @@
     color="#FAB5A8"
     className="max-lg:pb-[50vh]"
     highlightGroup="Nach der Verkündung"
+    sizes={["md"]}
   >
     <Bubble title="Vollzug">
       <ul>

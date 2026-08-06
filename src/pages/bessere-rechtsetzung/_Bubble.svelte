@@ -8,21 +8,22 @@
   import Tooltip from "./_Tooltip.svelte";
   import BubbleIcon from "./_BubbleIcon.svelte";
   import { iconMap, type TagName } from "./_icons.ts";
-
-  type Size = "sm" | "md" | "lg";
-
-  const sizeMap: Record<Size, string> = {
-    sm: "9em",
-    md: "11em",
-    lg: "12em",
-  };
+  import {
+    BUBBLE_SIZE_EM,
+    RESPONSIVE_BUBBLE_FONT_CLASS,
+    type BubbleSize,
+  } from "./_bubbleSize";
+  import {
+    CLUSTER_LAYOUT_CONTEXT_NAME,
+    type ClusterLayoutContext,
+  } from "./_clusterLayout";
 
   interface Props {
     /** Fill color of the bubble, defaults `--bubble-color` set by the enclosing Cluster. */
     color?: string;
     title?: string;
     optional?: boolean;
-    size?: Size;
+    size?: BubbleSize;
     className?: string;
     tags?: TagName[];
     /** Tooltip content shown above the bubble when it's clicked open. */
@@ -43,6 +44,35 @@
   }: Props = $props();
 
   const icons = $derived(tags?.map((t) => iconMap[t]));
+
+  // Claimed once, synchronously, at init — see `_clusterLayout.ts`. `undefined`
+  // when this bubble isn't inside a `_Cluster.svelte` at all, or its cluster
+  // is flex-positioning 1-2 bubbles and needs no per-bubble position.
+  const clusterLayout = getContext<ClusterLayoutContext | undefined>(
+    CLUSTER_LAYOUT_CONTEXT_NAME,
+  );
+  const position =
+    clusterLayout && !clusterLayout.isFlexPositioned
+      ? clusterLayout.next()
+      : undefined;
+
+  // Ring circles (necklace/wheel) are placed via `offset-path`: each gets its
+  // own circular path — sized to its own distance from the cluster centre —
+  // and `offset-distance` picks the point on it, straight from the
+  // `dist`/`angle` `_Cluster.svelte`'s packing maths already produced. That
+  // lets the browser do the trig instead of computing `left`/`top` here. The
+  // one circle actually at the centre (`wheelLayout`'s hub) has no ring to
+  // move along, so it's just positioned directly.
+  const positionStyle = $derived.by(() => {
+    if (!position || !clusterLayout) return "";
+    const trueRadius = BUBBLE_SIZE_EM[size] / 2;
+    const center = clusterLayout.radius;
+    if (position.dist < 0.5) {
+      return `position: absolute; left: ${center - trueRadius}em; top: ${center - trueRadius}em;`;
+    }
+    const percent = ((((position.angle / (2 * Math.PI)) % 1) + 1) % 1) * 100;
+    return `position: absolute; left: 0; top: 0; offset-path: circle(${position.dist}em at ${center}em ${center}em); offset-distance: ${percent}%; offset-rotate: 0deg;`;
+  });
 
   const highlightContext = getContext<BubbleHighlightContext | undefined>(
     BUBBLE_HIGHLIGHT_CONTEXT_NAME,
@@ -69,12 +99,13 @@
 </script>
 
 <div
-  class={`relative inline-flex flex-col items-center hover:z-30 has-focus-visible:z-30 ${active ? "z-20" : ""} ${className}`}
+  class={`relative inline-flex flex-col items-center hover:z-30 has-focus-visible:z-30 ${RESPONSIVE_BUBBLE_FONT_CLASS} ${active ? "z-20" : ""} ${className}`}
+  style={positionStyle}
 >
   {#snippet bubble()}
     <div
-      class={`group/circle flex text-xs md:text-sm xl:text-base items-center justify-center rounded-full transition-[transform,filter,box-shadow,opacity] duration-200 ease-out ${isInteractive ? "hover:scale-105 group-focus-visible:scale-105 group-focus-visible:outline-2 group-focus-visible:outline-cosmic-blue-base" : ""} ${active ? "scale-105 ring-4 ring-cosmic-blue-base ring-offset-2" : ""} ${dimmed ? "opacity-50" : ""}`}
-      style={`background-color: ${color ?? "var(--bubble-color)"}; width: ${sizeMap[size]}; height: ${sizeMap[size]}; anchor-name: ${anchorName};`}
+      class={`group/circle flex items-center justify-center rounded-full transition-[transform,filter,box-shadow,opacity] duration-200 ease-out ${isInteractive ? "hover:scale-105 group-focus-visible:scale-105 group-focus-visible:outline-2 group-focus-visible:outline-cosmic-blue-base" : ""} ${active ? "scale-105 ring-4 ring-cosmic-blue-base ring-offset-2" : ""} ${dimmed ? "opacity-50" : ""}`}
+      style={`background-color: ${color ?? "var(--bubble-color)"}; width: ${BUBBLE_SIZE_EM[size]}em; height: ${BUBBLE_SIZE_EM[size]}em; anchor-name: ${anchorName};`}
     >
       <div class="text-center space-y-8 px-16">
         {#if title}

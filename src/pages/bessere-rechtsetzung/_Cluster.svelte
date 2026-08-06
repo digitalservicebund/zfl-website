@@ -6,13 +6,25 @@
     type FlowSidebarContext,
   } from "./_flowSidebar";
   import { BUBBLE_COLOR_CONTEXT_NAME } from "./_bubbleColor";
+  import {
+    BUBBLE_SIZE_EM,
+    RESPONSIVE_BUBBLE_FONT_CLASS,
+    type BubbleSize,
+  } from "./_bubbleSize";
+  import {
+    CLUSTER_LAYOUT_CONTEXT_NAME,
+    type ClusterLayoutContext,
+  } from "./_clusterLayout";
 
-  type PackCircle = { el: HTMLElement; trueRadius: number; r: number };
+  // em (not px): so the whole packing computation below stays in the same
+  // unit as `BUBBLE_SIZE_EM`, and scales for free with the responsive
+  // font-size that unit is relative to (see `_bubbleSize.ts`).
+  type PackCircle = { trueRadius: number; r: number };
   // `dist`/`angle` (polar, from the cluster centre) rather than `x`/`y`:
   // that's what every ring's tangency maths naturally produces, it's what
-  // `layout()` needs to build each circle's `offset-path`, and the centre
-  // is always the origin here — so there's no Cartesian step in between
-  // that would earn its keep.
+  // each bubble needs to build its own `offset-path`, and the centre is
+  // always the origin here — so there's no Cartesian step in between that
+  // would earn its keep.
   type PositionedCircle = PackCircle & { dist: number; angle: number };
 
   // The angle (at the shared centre) between two neighbouring circles, each
@@ -83,9 +95,9 @@
   // stays exact no matter how much sizes vary. The tradeoff is that
   // tightness does depend on adjacency order (two large circles ending up
   // neighbours pushes `R` out further than if they didn't); this trusts
-  // the caller's DOM order rather than searching for the best one. Good
-  // for small clusters, where there's no obvious "biggest" circle to pull
-  // out into a hub (see `wheelPack` for that case).
+  // the caller's order rather than searching for the best one. Good for
+  // small clusters, where there's no obvious "biggest" circle to pull out
+  // into a hub (see `wheelPack` for that case).
   function necklacePack(baseCircles: PackCircle[]): {
     circles: PositionedCircle[];
     radius: number;
@@ -129,10 +141,10 @@
     };
   }
 
-  // Splits off the first circle (by DOM order — expected to be the
-  // largest) as the centre and arranges the rest around it in a ring, in
-  // the order given. Good once a cluster has enough circles that some of
-  // them belong in the interior rather than on a single outer ring.
+  // Splits off the first circle (by order — expected to be the largest) as
+  // the centre and arranges the rest around it in a ring, in the order
+  // given. Good once a cluster has enough circles that some of them belong
+  // in the interior rather than on a single outer ring.
   function wheelPack(baseCircles: PackCircle[]): {
     circles: PositionedCircle[];
     radius: number;
@@ -142,10 +154,10 @@
   }
 
   // Packs 3+ circles into their smallest enclosing circle (1-2 circles are
-  // handled directly in `layout()` — see `isFlexPositioned` — since they
-  // need no ring math at all). Small clusters fit neatly on a single
-  // "necklace" ring; larger ones do better with the biggest circle pinned
-  // in the centre and the rest arranged in a ring around it.
+  // handled directly below — see `isFlexPositioned` — since they need no
+  // ring math at all). Small clusters fit neatly on a single "necklace"
+  // ring; larger ones do better with the biggest circle pinned in the
+  // centre and the rest arranged in a ring around it.
   function packEvenly(baseCircles: PackCircle[]): {
     circles: PositionedCircle[];
     radius: number;
@@ -164,6 +176,7 @@
     children,
     sidebar,
     highlightGroup,
+    sizes = [],
   }: {
     title?: string;
     /**
@@ -189,6 +202,14 @@
      * shares that entry's active state.
      */
     highlightGroup?: string;
+    /**
+     * Each bubble's size, in the same order as the `<Bubble>`s rendered via
+     * `children` (default "md" per bubble — see `_Bubble.svelte`). Needed so
+     * the packing below can be computed from props alone, without measuring
+     * the rendered bubbles, which is what lets it run statically (e.g.
+     * during Astro's static-site generation) instead of only after mount.
+     */
+    sizes?: BubbleSize[];
   } = $props();
 
   const sidebarContext = getContext<FlowSidebarContext | undefined>(
@@ -236,6 +257,17 @@
   let rootEl: HTMLDivElement | undefined = $state();
   let titleEl: HTMLHeadingElement | undefined = $state();
 
+  // Tracks Tailwind's `max-sm` breakpoint, used only for the scroll-activation
+  // margin below (unrelated to bubble packing, which is now static).
+  let isSmallScreen = $state(false);
+  $effect(() => {
+    const mql = window.matchMedia("(max-width: 639px)");
+    isSmallScreen = mql.matches;
+    const onChange = (e: MediaQueryListEvent) => (isSmallScreen = e.matches);
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
+  });
+
   // IntersectionObserver: Activates this cluster as soon as it crosses the
   // viewport's midline while scrolling. Suppressed while `navigateStep`'s
   // `scrollIntoView` is auto-scrolling (`sidebarContext.isJumping`)
@@ -266,44 +298,33 @@
   const titleWrapperClass =
     "z-20 flex gap-16 top-0 left-16 flex-row items-center self-start max-md:my-(--halo-thickness) max-md:ml-16 md:absolute md:left-[4vw]";
 
-  // Tracks Tailwind's `max-sm` breakpoint so padding can shrink on mobile.
-  let isSmallScreen = $state(false);
-  $effect(() => {
-    const mql = window.matchMedia("(max-width: 639px)");
-    isSmallScreen = mql.matches;
-    const onChange = (e: MediaQueryListEvent) => (isSmallScreen = e.matches);
-    mql.addEventListener("change", onChange);
-    return () => mql.removeEventListener("change", onChange);
-  });
+  // em, gap enforced between packed bubbles / between bubbles and the dashed
+  // border. Flat (not breakpoint-dependent) on purpose: expressed in the same
+  // font-relative unit as `BUBBLE_SIZE_EM`, so it scales in lockstep with
+  // bubble sizes wherever the responsive font-size changes, rather than
+  // needing its own breakpoint logic.
+  const BUBBLE_PADDING = 1;
+  const EDGE_PADDING = 1;
 
-  const BUBBLE_PADDING = $derived(isSmallScreen ? 8 : 16); // px, gap enforced between packed bubbles
-  const EDGE_PADDING = $derived(isSmallScreen ? 8 : 16); // px, gap between bubbles and the dashed border
-
-  let containerEl: HTMLDivElement | undefined = $state();
-  let diameter = $state(0);
-  let ready = $state(false);
-  let isSingleBubble = $state(false);
+  const isSingleBubble = $derived(sizes.length === 1);
   // 1-2 bubbles need no per-circle positioning: the container becomes a
   // centred flexbox (see the template) and the browser lays them out.
-  let isFlexPositioned = $state(false);
+  const isFlexPositioned = $derived(sizes.length <= 2);
 
-  // Packs the bubble elements rendered via `children` into the smallest
-  // enclosing circle.
-  function layout() {
-    if (!containerEl) return;
+  const baseCircles: PackCircle[] = $derived(
+    sizes.map((size) => {
+      const trueRadius = BUBBLE_SIZE_EM[size] / 2;
+      return { trueRadius, r: trueRadius + BUBBLE_PADDING / 2 };
+    }),
+  );
 
-    const items = Array.from(containerEl.children) as HTMLElement[];
-    if (items.length === 0) return;
+  // Packs the bubbles (by size alone — see `sizes`) into the smallest
+  // enclosing circle, entirely from props: no DOM measurement, so this runs
+  // the same during SSR/SSG as in the browser.
+  const packed = $derived.by(() => {
+    if (sizes.length === 0) return null;
 
-    isSingleBubble = items.length === 1;
-    isFlexPositioned = items.length <= 2;
     const edgePadding = isSingleBubble ? 0 : EDGE_PADDING;
-
-    const baseCircles = items.map((el) => ({
-      el,
-      trueRadius: el.offsetWidth / 2,
-      r: el.offsetWidth / 2 + BUBBLE_PADDING / 2,
-    }));
 
     if (isFlexPositioned) {
       // 1-2 bubbles need no packing at all — the browser lays them out via
@@ -311,59 +332,39 @@
       // how much space that needs: a lone bubble's own radius, or (for
       // two, tangent along a line through the centre) the sum of both.
       const enclosingRadius = baseCircles.reduce((sum, c) => sum + c.r, 0);
-      diameter = (enclosingRadius + edgePadding) * 2;
-      ready = true;
-      return;
+      return {
+        diameter: (enclosingRadius + edgePadding) * 2,
+        circles: null,
+        finalRadius: enclosingRadius,
+      };
     }
 
     const { circles, radius } = packEvenly(baseCircles);
-
     const finalRadius = radius + edgePadding;
-    diameter = finalRadius * 2;
-
-    // Ring circles (necklace/wheel) are placed via `offset-path`: each gets
-    // its own circular path — sized to its own distance from the cluster
-    // centre — and `offset-distance` picks the point on it, straight from
-    // the `dist`/`angle` the packing maths already produced. That lets the
-    // browser do the trig instead of computing left/top per circle here.
-    // The one circle actually AT the centre (wheelLayout's hub) has no
-    // ring to move along, so it's just positioned directly.
-    const center = finalRadius; // px, container's own centre (it's finalRadius × 2 square)
-    for (const circle of circles) {
-      circle.el.style.position = "absolute";
-
-      if (circle.dist < 0.5) {
-        circle.el.style.offsetPath = "none";
-        circle.el.style.left = `${center - circle.trueRadius}px`;
-        circle.el.style.top = `${center - circle.trueRadius}px`;
-      } else {
-        const percent = ((((circle.angle / (2 * Math.PI)) % 1) + 1) % 1) * 100;
-        circle.el.style.left = "0px";
-        circle.el.style.top = "0px";
-        circle.el.style.offsetPath = `circle(${circle.dist}px at ${center}px ${center}px)`;
-        circle.el.style.offsetDistance = `${percent}%`;
-        circle.el.style.offsetRotate = "0deg";
-      }
-    }
-
-    ready = true;
-  }
-
-  $effect(() => {
-    layout();
-
-    // Bubble sizes are defined in `em` (see `_Bubble.svelte`'s `sizeMap`),
-    // so their rendered pixel size can change independently of any prop
-    // here. `layout()` only reads pixel sizes once, so without this
-    // observer the pack/diameter would go stale after such a resize.
-    if (!containerEl) return;
-    const items = Array.from(containerEl.children) as HTMLElement[];
-    if (items.length === 0) return;
-
-    const resizeObserver = new ResizeObserver(() => layout());
-    for (const item of items) resizeObserver.observe(item);
-    return () => resizeObserver.disconnect();
+    return { diameter: finalRadius * 2, circles, finalRadius };
   });
+
+  const diameter = $derived(packed?.diameter ?? 0);
+
+  // Hands each bubble its own position, in the order they claim one (see
+  // `_clusterLayout.ts`) — the ring maths already produced `dist`/`angle`
+  // per circle; each bubble turns that into its own `offset-path` instead of
+  // `_Cluster.svelte` reaching into the DOM to set it.
+  let claimedCount = 0;
+  const layoutContext: ClusterLayoutContext = {
+    get isFlexPositioned() {
+      return isFlexPositioned;
+    },
+    get radius() {
+      return packed?.finalRadius ?? 0;
+    },
+    next() {
+      const circles = packed?.circles;
+      if (!circles) return undefined;
+      return circles[claimedCount++];
+    },
+  };
+  setContext(CLUSTER_LAYOUT_CONTEXT_NAME, layoutContext);
 
   // A small, random horizontal jitter per cluster instance (fixed for the
   // lifetime of the component) for a more organic, hand-drawn feel.
@@ -407,8 +408,8 @@
     {/if}
 
     <div
-      class={`relative flex items-center justify-center ${isActive ? "z-10" : ""}`}
-      style={`width: calc(${diameter}px + 2 * var(--halo-thickness)); height: calc(${diameter}px + 2 * var(--halo-thickness)); margin-left: ${offset ?? clusterOffset}px; --halo-color: color-mix(in srgb, ${color} 20%, white)`}
+      class={`relative flex items-center justify-center ${RESPONSIVE_BUBBLE_FONT_CLASS} ${isActive ? "z-10" : ""}`}
+      style={`width: calc(${diameter}em + 2 * var(--halo-thickness)); height: calc(${diameter}em + 2 * var(--halo-thickness)); margin-left: ${offset ?? clusterOffset}px; --halo-color: color-mix(in srgb, ${color} 20%, white)`}
     >
       <!-- Isolated so the halo/dashed-circle negative z-indices only stack
          against each other, never against sibling (overlapping) clusters. -->
@@ -421,15 +422,14 @@
           <!-- Dashed cluster circle -->
           <div
             class="pointer-events-none absolute -z-10 rounded-full border border-dashed border-black bg-white"
-            style={`width: ${diameter}px; height: ${diameter}px; top: var(--halo-thickness); left: var(--halo-thickness);`}
+            style={`width: ${diameter}em; height: ${diameter}em; top: var(--halo-thickness); left: var(--halo-thickness);`}
           ></div>
         {/if}
       </div>
 
       <div
-        class={`relative rounded-full transition-opacity duration-300 ${ready ? "opacity-100" : "opacity-0"} ${isFlexPositioned ? "flex items-center justify-center" : ""}`}
-        style={`width: ${diameter}px; height: ${diameter}px; ${isFlexPositioned ? `gap: ${BUBBLE_PADDING}px;` : ""}`}
-        bind:this={containerEl}
+        class={`relative rounded-full ${isFlexPositioned ? "flex items-center justify-center" : ""}`}
+        style={`width: ${diameter}em; height: ${diameter}em; ${isFlexPositioned ? `gap: ${BUBBLE_PADDING}em;` : ""}`}
       >
         {@render children?.()}
       </div>
