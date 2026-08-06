@@ -249,7 +249,7 @@
       {@render children()}
     </div>
     <div
-      class="sticky flex items-center z-50 col-start-1 row-start-1 pointer-events-none w-full top-0 h-screen justify-end"
+      class="sticky flex items-center z-50 col-start-1 row-start-1 pointer-events-none top-0 h-screen justify-end"
     >
       <DotNav clusters={clusterDots} {activeId} onSelect={onDotSelect} />
     </div>
@@ -260,7 +260,6 @@
     page={activePage}
     isFirst={isFirstCluster}
     isLast={isLastCluster}
-    onClose={closeSidebar}
     onNavigate={navigateStep}
     onSelectPage={selectPage}
   />

@@ -6,7 +6,6 @@
     page = 0,
     isFirst = false,
     isLast = false,
-    onClose,
     onNavigate,
   }: {
     content: FlowSidebarContent | null;
@@ -23,7 +22,6 @@
      * page's outro section instead of cycling back to the first cluster.
      */
     isLast?: boolean;
-    onClose: () => void;
     onNavigate: (step: -1 | 1) => void;
     /** Jumps directly to a given page index within the active step. */
     onSelectPage: (page: number) => void;
@@ -141,14 +139,6 @@
             <p class="kern-label kern-label--small mb-0">
               {content.title}
             </p>
-            <button
-              type="button"
-              class="hidden shrink-0 rounded-sm border border-cosmic-blue-base p-8 text-cosmic-blue-base"
-              onclick={onClose}
-              aria-label="Seitenleiste schließen"
-            >
-              ✕
-            </button>
           </div>
           {@render currentPageSnippet?.()}
         </div>
