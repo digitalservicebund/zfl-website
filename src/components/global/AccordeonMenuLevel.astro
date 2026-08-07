@@ -25,21 +25,22 @@ function isFirstLevelChildWithChildren(
   return currentLevel === 1 && entry.children.length > 0;
 }
 
-function linkStyle(isCurrent = false) {
-  return twMerge(
-    "link-unstyled kern-body block rounded-sm",
-    !isCurrent && "hover:bg-cosmic-blue-base hover:text-white",
-    isCurrent && "bg-lavender-surface-highlight font-bold",
-  );
+function arrowHoverStyle(isCurrent = false) {
+  return isCurrent
+    ? "hover:bg-(--kern-color-white)"
+    : "hover:bg-(--kern-color-action-pressed) hover:[&>.kern-icon]:bg-(--kern-color-white) peer-hover:[&>.kern-icon]:bg-(--kern-color-white)";
+}
+
+function linkHoverStyle(isCurrent = false) {
+  return isCurrent
+    ? "bg-lavender-surface-highlight font-bold"
+    : "hover:bg-cosmic-blue-base hover:text-white";
 }
 
 function headerStyle(isCurrent = false) {
-  return twMerge(
-    "kern-accordion__header rounded-sm has-[>a:hover]:bg-cosmic-blue-base has-[>a:hover]:text-white",
-    !isCurrent &&
-      "accordion-header--hoverable-by-button has-[>button:hover]:bg-cosmic-blue-base",
-    // isCurrent && "bg-lavender-surface-highlight font-bold",
-  );
+  return isCurrent
+    ? "bg-lavender-surface-highlight font-bold"
+    : "has-[>button:hover]:bg-cosmic-blue-base has-[>button:hover]:[&>a]:text-white has-[>a:hover]:bg-cosmic-blue-base has-[>a:hover]:text-white";
 }
 
 function indentStyle(currentLevel: number) {
@@ -62,18 +63,29 @@ function panelId(path: string) {
         class="accordion-item"
         x-data={`{ open: ${entry.isInCurrentBranch} }`}
       >
-        <div class={headerStyle(entry.isCurrent)}>
+        <div
+          class={twMerge(
+            headerStyle(entry.isCurrent),
+            "kern-accordion__header rounded-sm",
+          )}
+        >
           <a
             href={entry.path}
             style={indentStyle(level)}
-            class={twMerge(linkStyle(entry.isCurrent), "flex-1")}
+            class={twMerge(
+              linkHoverStyle(entry.isCurrent),
+              "peer link-unstyled kern-body block flex-1 rounded-sm",
+            )}
             aria-current={entry.isCurrent ? "page" : undefined}
           >
             {entry.label}
           </a>
           <button
             type="button"
-            class="accordion-toggle flex h-32 w-32 shrink-0 items-center justify-center rounded-sm"
+            class={twMerge(
+              arrowHoverStyle(entry.isCurrent),
+              "mr-3 flex h-32 w-32 shrink-0 items-center justify-center rounded-sm",
+            )}
             aria-label={`Untermenü ${entry.label} ein-/ausklappen`}
             aria-controls={panelId(entry.path)}
             x-bind:aria-expanded="open"
@@ -111,8 +123,8 @@ function panelId(path: string) {
         <a
           href={entry.path}
           class={twMerge(
-            linkStyle(currentPath === entry.path),
-            "accordion-item",
+            linkHoverStyle(currentPath === entry.path),
+            "accordion-item link-unstyled kern-body block rounded-sm",
           )}
           style={indentStyle(level)}
           aria-current={currentPath === entry.path ? "page" : undefined}
@@ -139,19 +151,6 @@ function panelId(path: string) {
 
   .kern-accordion__header::after {
     display: none;
-  }
-
-  .kern-accordion__header:has(> a:hover) .kern-icon,
-  .accordion-toggle:hover .kern-icon {
-    background-color: var(--kern-color-white);
-  }
-
-  .accordion-toggle:hover {
-    background-color: var(--kern-color-action-pressed);
-  }
-
-  .accordion-header--hoverable-by-button:has(> button:hover) a {
-    color: var(--kern-color-white);
   }
 
   .accordion-item {
