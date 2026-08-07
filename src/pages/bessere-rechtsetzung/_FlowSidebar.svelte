@@ -164,6 +164,15 @@
             <p class="kern-label kern-label--small mb-0" aria-hidden="true">
               {content.title}
             </p>
+            <button
+              class="opacity-0 pointer-events-none focus:opacity-100 focus:pointer-events-auto kern-btn kern-btn--tertiary"
+              onclick={() => {
+                document
+                  .getElementById(content.id)
+                  ?.querySelector("button")
+                  ?.focus();
+              }}>zur Grafik</button
+            >
           </div>
         {/if}
         {#each entries as entry (entry.id)}
