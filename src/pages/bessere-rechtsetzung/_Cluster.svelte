@@ -2,9 +2,9 @@
   import { getContext, setContext } from "svelte";
   import type { Snippet } from "svelte";
   import {
-    FLOW_SIDEBAR_CONTEXT_NAME,
-    type FlowSidebarContext,
-  } from "./_flowSidebar";
+    FLOW_SECTION_CONTEXT_NAME,
+    type FlowSectionContext,
+  } from "./_flowSection";
   import { BUBBLE_COLOR_CONTEXT_NAME } from "./_bubbleColor";
   import {
     BUBBLE_SIZE_EM,
@@ -168,23 +168,13 @@
   }
 
   let {
-    title,
-    anchorName,
     color,
     className = "",
     offset,
     children,
-    sidebar,
-    highlightGroup,
     sizes = [],
     ariaLabel,
   }: {
-    title?: string;
-    /**
-     * CSS anchor name (e.g. "--cluster-first") assigned to this cluster's
-     * title dot, so it can be targeted from outside via `anchor()`.
-     */
-    anchorName?: string;
     /**
      * Fill color shared by this cluster's bubbles, exposed to children via
      * the `--bubble-color` CSS custom property.
@@ -193,16 +183,6 @@
     className?: string;
     offset?: number;
     children?: Snippet;
-    /**
-     * Sidebar content shown in the global sidebar.
-     * Accepts either a single `Snippet` or an array of `Snippet`s (multi-page).
-     */
-    sidebar?: Snippet | Snippet[];
-    /**
-     * Id of another Cluster/Bubble/Arrow to mirror. When set, this Cluster
-     * shares that entry's active state.
-     */
-    highlightGroup?: string;
     /**
      * Each bubble's size, in the same order as the `<Bubble>`s rendered via
      * `children` (default "md" per bubble — see `_Bubble.svelte`). Needed so
@@ -218,10 +198,6 @@
     ariaLabel?: string;
   } = $props();
 
-  const sidebarContext = getContext<FlowSidebarContext | undefined>(
-    FLOW_SIDEBAR_CONTEXT_NAME,
-  );
-
   // Exposes this cluster's color to descendant `_Bubble.svelte` instances as
   // a plain value (not just the `--bubble-color` CSS custom property), so a
   // bubble without its own `color` prop can still pass the inherited color
@@ -232,39 +208,16 @@
     },
   });
 
-  // Normalizes `sidebar` to an array of pages
-  const sidebarPages = $derived(
-    sidebar === undefined
-      ? undefined
-      : Array.isArray(sidebar)
-        ? sidebar
-        : [sidebar],
+  // Reflects the enclosing `_Section.svelte`'s active state, if any - `undefined`
+  // when this cluster isn't part of a Section (e.g. a standalone Cluster with
+  // no title/highlight identity of its own).
+  const sectionContext = getContext<FlowSectionContext | undefined>(
+    FLOW_SECTION_CONTEXT_NAME,
   );
+  const isActive = $derived(sectionContext?.isActive ?? false);
 
-  // Registers this cluster's sidebar content as soon as it mounts
-  $effect(() => {
-    if (!sidebarPages || sidebarPages.length === 0 || !title) return;
-
-    sidebarContext?.register({
-      id: title,
-      title,
-      children: sidebarPages,
-      color,
-    });
-    return () => sidebarContext?.unregister(title);
-  });
-
-  const highlightId = $derived(highlightGroup ?? title);
-
-  const isActive = $derived(
-    !!highlightId && sidebarContext?.activeId === highlightId,
-  );
-
-  let rootEl: HTMLDivElement | undefined = $state();
-  let titleEl: HTMLHeadingElement | undefined = $state();
-
-  // Tracks Tailwind's `max-sm` breakpoint, used only for the scroll-activation
-  // margin below (unrelated to bubble packing, which is now static).
+  // Tracks Tailwind's `max-sm` breakpoint, used only for the horizontal
+  // jitter range below (unrelated to bubble packing, which is now static).
   let isSmallScreen = $state(false);
   $effect(() => {
     const mql = window.matchMedia("(max-width: 639px)");
@@ -274,35 +227,9 @@
     return () => mql.removeEventListener("change", onChange);
   });
 
-  // IntersectionObserver: Activates this cluster as soon as it crosses the
-  // viewport's midline while scrolling. Suppressed while `navigateStep`'s
-  // `scrollIntoView` is auto-scrolling (`sidebarContext.isJumping`)
-  $effect(() => {
-    if (!highlightId || !rootEl) return;
-
-    const rootMargin = isSmallScreen
-      ? "-15% 0px -85% 0px"
-      : "-50% 0px -50% 0px";
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !sidebarContext?.isJumping) {
-          sidebarContext?.setActive(highlightId);
-        }
-      },
-      { rootMargin },
-    );
-
-    observer.observe(rootEl);
-    return () => observer.disconnect();
-  });
-
   const contentWrapperClass = $derived(
     `relative flex flex-col items-center justify-center w-full overflow-x-clip`,
   );
-
-  const titleWrapperClass =
-    "z-20 flex gap-16 top-0 left-16 flex-row items-center self-start max-md:my-(--halo-thickness) max-md:ml-16 md:absolute md:left-[4vw]";
 
   // em, gap enforced between packed bubbles / between bubbles and the dashed
   // border. Flat (not breakpoint-dependent) on purpose: expressed in the same
@@ -379,49 +306,13 @@
     offset ?? Math.round((Math.random() * 2 - 1) * OFFSET_RANGE),
   );
 
-  const activate = () => {
-    sidebarContext?.activate(title!);
-    titleEl?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  // Static - set once, never toggled by `isActive` - so this cluster's
-  // owned sidebar content (rendered by `_FlowSidebar.svelte`, see there) is
-  // always in this cluster's place in the accessibility tree, regardless of
-  // which cluster currently happens to be active. Matches the same
-  // condition `_FlowLayout.svelte`'s registration effect uses.
-  const sidebarContentId = $derived(
-    sidebarPages && sidebarPages.length > 0 && title
-      ? `sidebar-content-${title}`
-      : undefined,
-  );
 </script>
 
 <div
-  bind:this={rootEl}
-  class={`cluster-root [--halo-thickness:24px] md:[--halo-thickness:40px] [--cluster-spacing:var(--halo-thickness)] md:[--cluster-spacing:calc(-1*var(--halo-thickness))] ${className}`}
-  aria-owns={sidebarContentId}
+  class={`flow-block [--halo-thickness:24px] md:[--halo-thickness:40px] [--cluster-spacing:var(--halo-thickness)] md:[--cluster-spacing:calc(-1*var(--halo-thickness))] ${className}`}
   style={color ? `--bubble-color: ${color}` : undefined}
 >
   <div class={contentWrapperClass}>
-    {#if title}
-      <div class={titleWrapperClass}>
-        <div
-          class={`size-28 border-2 border-white rounded-full transition-colors duration-300 outline-2 ${isActive ? "bg-(--bubble-color) outline-black" : "bg-black outline-transparent"}`}
-          aria-hidden="true"
-          style={anchorName ? `anchor-name: ${anchorName};` : undefined}
-        ></div>
-        <h2
-          id={title}
-          bind:this={titleEl}
-          class="kern-heading-small scroll-mt-40 my-0! bg-black text-white px-4 focus-within:outline-2 outline-offset-2 outline-(--kern-color-action-focus-default)"
-        >
-          <button type="button" class="focus:outline-none" onclick={activate}>
-            {title}
-          </button>
-        </h2>
-      </div>
-    {/if}
-
     <div
       role="presentation"
       class={`relative flex items-center justify-center ${RESPONSIVE_BUBBLE_FONT_CLASS} ${isActive ? "z-10" : ""}`}
@@ -456,9 +347,12 @@
 </div>
 
 <style>
-  /* Overlap the soft halo rings of two adjacent clusters (pulling them
-     --halo-thickness closer)  */
-  :global(.cluster-root + .cluster-root) {
+  /* Overlap the soft halo rings of two adjacent clusters/sections (pulling
+     them --halo-thickness closer). `.flow-block` is shared with
+     `_Section.svelte`'s root, so this still applies across a Section
+     boundary - e.g. between a bare Cluster and a Section, or between two
+     Sections - not just between two bare Clusters. */
+  :global(.flow-block + .flow-block) {
     margin-top: var(--cluster-spacing);
   }
 </style>
