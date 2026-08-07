@@ -56,6 +56,12 @@
     activeId ? (registry[activeId] ?? null) : null,
   );
 
+  // All registered clusters' sidebar content, not just the active one -
+  // `_FlowSidebar.svelte` renders every entry (most `sr-only`, see there),
+  // so each stays reachable via `_Cluster.svelte`'s static `aria-owns`
+  // regardless of which cluster is currently active.
+  const sidebarEntries = $derived(Object.values(registry));
+
   function register(entry: FlowSidebarContent) {
     registry[entry.id] = entry;
   }
@@ -287,6 +293,7 @@
   <FlowSidebar
     bind:panelEl={sidebarPanelEl}
     content={sidebarContent}
+    entries={sidebarEntries}
     page={activePage}
     isFirst={isFirstCluster}
     isLast={isLastCluster}

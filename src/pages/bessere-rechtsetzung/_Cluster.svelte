@@ -383,11 +383,23 @@
     sidebarContext?.activate(title!);
     titleEl?.scrollIntoView({ behavior: "smooth" });
   };
+
+  // Static - set once, never toggled by `isActive` - so this cluster's
+  // owned sidebar content (rendered by `_FlowSidebar.svelte`, see there) is
+  // always in this cluster's place in the accessibility tree, regardless of
+  // which cluster currently happens to be active. Matches the same
+  // condition `_FlowLayout.svelte`'s registration effect uses.
+  const sidebarContentId = $derived(
+    sidebarPages && sidebarPages.length > 0 && title
+      ? `sidebar-content-${title}`
+      : undefined,
+  );
 </script>
 
 <div
   bind:this={rootEl}
   class={`cluster-root [--halo-thickness:24px] md:[--halo-thickness:40px] [--cluster-spacing:var(--halo-thickness)] md:[--cluster-spacing:calc(-1*var(--halo-thickness))] ${className}`}
+  aria-owns={sidebarContentId}
   style={color ? `--bubble-color: ${color}` : undefined}
 >
   <div class={contentWrapperClass}>
@@ -441,13 +453,6 @@
       </div>
     </div>
   </div>
-  {#if sidebarPages}
-    <div class="sr-only" inert>
-      {#each sidebarPages as sidebarPage, i (sidebarPages[i])}
-        {@render sidebarPage()}
-      {/each}
-    </div>
-  {/if}
 </div>
 
 <style>

@@ -1,8 +1,10 @@
 <script lang="ts">
   import type { FlowSidebarContent } from "./_flowSidebar";
+  import { scopeFocusable } from "./_scopeFocusable";
 
   let {
     content,
+    entries,
     page = 0,
     isFirst = false,
     isLast = false,
@@ -10,6 +12,13 @@
     panelEl = $bindable(),
   }: {
     content: FlowSidebarContent | null;
+    /**
+     * Every registered cluster's content, not just `content` (the active
+     * one) - rendered unconditionally below so each stays reachable via
+     * `_Cluster.svelte`'s static `aria-owns` no matter which cluster is
+     * currently active.
+     */
+    entries: FlowSidebarContent[];
     /**
      * Index of the currently shown page within `content.children`, for
      * clusters with more than one sidebar "page" (see `_Cluster.svelte`'s
@@ -57,13 +66,6 @@
   // when the current cluster's last page is shown and there's a following
   // cluster to move on to (i.e. not `isLast`).
   const nextIsNewCluster = $derived(!isLast && page === pageCount - 1);
-  // Clamped so a stale `page` (e.g. briefly out of range while switching
-  // between steps with a different number of pages) never renders `undefined`.
-  const currentPageSnippet = $derived(
-    content
-      ? content.children[Math.min(page, content.children.length - 1)]
-      : undefined,
-  );
 
   let drawerHeight = $state(300); // px
 
@@ -114,7 +116,6 @@
 <aside
   aria-label="Details zum Prozessschritt"
   class="col-start-1 row-start-1 lg:col-start-2 self-stretch overflow-x-clip w-full lg:w-[calc(100vw-var(--cluster-inner-width))]"
-  aria-hidden="true"
 >
   <!-- Sticky (not fixed) so it stays visible while scrolling the flow, but
        never escapes the bounds of its containing `_FlowLayout.svelte`
@@ -145,17 +146,47 @@
         >
           <div class="bg-[#D9D9D9] rounded-full h-10 w-55 mx-auto"></div>
         </button>
-        <div
-          bind:this={scrollContainer}
-          class="scroll-shadow kern-body--small min-h-0 flex-1 overflow-y-auto px-(--sb-padding) pt-0 lg:pt-(--sb-padding) pb-24 [&>h3]:kern-heading-medium [&>h3]:mt-16 [&>h3]:md:mt-32 [&_h4]:text-lg"
-        >
+      {/if}
+
+      <!-- Rendered unconditionally (not gated behind `{#if content}`) so
+           every cluster's owned content (see `_Cluster.svelte`'s static
+           `aria-owns`) exists from the start, regardless of whether any
+           cluster has ever been activated. Only the active entry (matching
+           `content`) is visible/in-flow; the rest are `sr-only` - still
+           screen-reader reachable, right where their owning cluster placed
+           them via `aria-owns`, just not painted here. -->
+      <div
+        bind:this={scrollContainer}
+        class="scroll-shadow kern-body--small min-h-0 flex-1 overflow-y-auto px-(--sb-padding) pt-0 lg:pt-(--sb-padding) pb-24 [&_h3]:kern-heading-medium [&_h3]:mt-16 [&_h3]:md:mt-32 [&_h4]:text-lg"
+      >
+        {#if content}
           <div class="flex items-center justify-between gap-16 shrink-0">
             <p class="kern-label kern-label--small mb-0" aria-hidden="true">
               {content.title}
             </p>
           </div>
-          {@render currentPageSnippet?.()}
-        </div>
+        {/if}
+        {#each entries as entry (entry.id)}
+          {@const isEntryActive = entry.id === content?.id}
+          <div
+            id={`sidebar-content-${entry.id}`}
+            class={isEntryActive ? "" : "sr-only"}
+            use:scopeFocusable={isEntryActive}
+          >
+            {#if isEntryActive}
+              {@render entry.children[
+                Math.min(page, entry.children.length - 1)
+              ]()}
+            {:else}
+              {#each entry.children as entryPage, i (i)}
+                {@render entryPage()}
+              {/each}
+            {/if}
+          </div>
+        {/each}
+      </div>
+
+      {#if content}
         <div
           class="flex shrink-0 justify-end gap-8 px-(--sb-padding) pt-16 md:pt-24 pb-(--sb-padding) bg-lavender-200"
         >
