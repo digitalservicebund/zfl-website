@@ -5,7 +5,10 @@
     FLOW_SIDEBAR_CONTEXT_NAME,
     type FlowSidebarContext,
   } from "./_flowSidebar";
-  import { FLOW_SECTION_CONTEXT_NAME, type FlowSectionContext } from "./_flowSection";
+  import {
+    FLOW_SECTION_CONTEXT_NAME,
+    type FlowSectionContext,
+  } from "./_flowSection";
 
   let {
     title,

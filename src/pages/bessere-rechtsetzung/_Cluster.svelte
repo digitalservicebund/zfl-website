@@ -305,14 +305,14 @@
   const clusterOffset = $derived(
     offset ?? Math.round((Math.random() * 2 - 1) * OFFSET_RANGE),
   );
-
 </script>
 
 <div
   class={`flow-block [--halo-thickness:24px] md:[--halo-thickness:40px] [--cluster-spacing:var(--halo-thickness)] md:[--cluster-spacing:calc(-1*var(--halo-thickness))] ${className}`}
   style={color ? `--bubble-color: ${color}` : undefined}
+  role="presentation"
 >
-  <div class={contentWrapperClass}>
+  <div class={contentWrapperClass} role="presentation">
     <div
       role="presentation"
       class={`relative flex items-center justify-center ${RESPONSIVE_BUBBLE_FONT_CLASS} ${isActive ? "z-10" : ""}`}
@@ -320,7 +320,7 @@
     >
       <!-- Isolated so the halo/dashed-circle negative z-indices only stack
          against each other, never against sibling (overlapping) clusters. -->
-      <div class="isolate absolute inset-0">
+      <div class="isolate absolute inset-0" aria-hidden="true">
         <!-- Soft gray halo ring -->
         <div
           class="pointer-events-none absolute inset-0 -z-20 rounded-full bg-[#F7F7F7]"
@@ -335,7 +335,7 @@
       </div>
 
       <div
-        role="group"
+        role="img"
         aria-label={ariaLabel}
         class={`relative rounded-full ${isFlexPositioned ? "flex items-center justify-center" : ""}`}
         style={`width: ${diameter}em; height: ${diameter}em; ${isFlexPositioned ? `gap: ${BUBBLE_PADDING}em;` : ""}`}
