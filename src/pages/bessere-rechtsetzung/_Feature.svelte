@@ -99,7 +99,7 @@
   <button
     type="button"
     aria-expanded={details ? expanded : undefined}
-    class="col-span-3 grid grid-cols-subgrid items-start max-md:gap-y-(--feature-spacing) text-left focus-visible:outline-2 focus-visible:outline-(--border-color) p-(--feature-spacing) hover:bg-(--border-color)/20 cursor-pointer aria-expanded:bg-(--border-color)/20"
+    class="col-span-3 grid grid-cols-subgrid items-start max-md:gap-y-(--feature-spacing) text-left focus-visible:outline-4 outline-offset-2 rounded-sm focus-visible:outline-(--kern-color-action-focus-default) p-(--feature-spacing) hover:bg-(--border-color)/20 cursor-pointer aria-expanded:bg-(--border-color)/20"
     onclick={toggle}
     onmouseenter={previewOn}
     onmouseleave={previewOff}
