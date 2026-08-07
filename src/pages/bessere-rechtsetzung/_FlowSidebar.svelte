@@ -150,7 +150,7 @@
           class="scroll-shadow kern-body--small min-h-0 flex-1 overflow-y-auto px-(--sb-padding) pt-0 lg:pt-(--sb-padding) pb-24 [&>h2]:kern-heading-medium [&>h2]:mt-16 [&>h2]:md:mt-32 [&_h3]:text-lg"
         >
           <div class="flex items-center justify-between gap-16 shrink-0">
-            <p class="kern-label kern-label--small mb-0">
+            <p class="kern-label kern-label--small mb-0" aria-hidden="true">
               {content.title}
             </p>
           </div>
