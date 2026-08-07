@@ -27,7 +27,8 @@ function isFirstLevelChildWithChildren(
 
 function linkStyle(isCurrent = false) {
   return twMerge(
-    "link-unstyled kern-body block rounded-sm hover:bg-lavender-surface-highlight",
+    "link-unstyled kern-body block rounded-sm",
+    !isCurrent && "hover:bg-cosmic-blue-base hover:text-white",
     isCurrent && "bg-lavender-surface-highlight font-bold",
   );
 }
@@ -35,7 +36,7 @@ function linkStyle(isCurrent = false) {
 function indentStyle(currentLevel: number) {
   const paddingLeft =
     currentLevel > 1
-      ? `calc(var(--kern-metric-space-x-large) * ${currentLevel})`
+      ? "var(--kern-metric-space-x-large)"
       : "var(--kern-metric-space-small)";
   return `padding: var(--kern-metric-space-small) var(--kern-metric-space-small) var(--kern-metric-space-small) ${paddingLeft}`;
 }
@@ -45,11 +46,11 @@ function indentStyle(currentLevel: number) {
   entries.map((entry) =>
     isFirstLevelChildWithChildren(entry, level) ? (
       <details open={entry.isInCurrentBranch}>
-        <summary class="kern-accordion__header">
+        <summary class="kern-accordion__header hover:bg-cosmic-blue-base rounded-sm hover:text-white">
           <a
             href={entry.path}
-            class={linkStyle(entry.isCurrent)}
             style={indentStyle(level)}
+            class={linkStyle(entry.isCurrent)}
             aria-current={entry.isCurrent ? "page" : undefined}
             @click.stop
           >
@@ -98,6 +99,17 @@ function indentStyle(currentLevel: number) {
   .kern-accordion__header,
   .kern-accordion__body {
     padding: 0;
+  }
+
+  .kern-accordion__header a {
+    flex: 1;
+  }
+
+  .kern-accordion__header:hover .kern-icon {
+    background-color: var(--kern-color-white);
+  }
+  .kern-accordion__header:hover .a {
+    color: var(--kern-color-white);
   }
 
   a,
