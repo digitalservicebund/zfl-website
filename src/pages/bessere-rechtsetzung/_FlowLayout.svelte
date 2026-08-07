@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { setContext } from "svelte";
+  import { setContext, tick } from "svelte";
   import type { Snippet } from "svelte";
   import FlowSidebar from "./_FlowSidebar.svelte";
   import DotNav from "./_DotNav.svelte";
@@ -75,6 +75,34 @@
   function setActive(id: string) {
     activeId = id;
     activePage = 0;
+  }
+
+  // Sidebar panel's root element (see `_FlowSidebar.svelte`'s `panelEl`
+  // bindable prop) - a focus target (`tabindex="-1"`) for `activate` below.
+  let sidebarPanelEl: HTMLDivElement | undefined = $state();
+
+  async function focusSidebar() {
+    // Wait for the DOM update triggered by `setActive` (new `activeId` ->
+    // new `sidebarContent` -> re-rendered panel content/aria-label) to
+    // flush, so focusing the panel announces the step that was just
+    // activated rather than whatever it showed before.
+    await tick();
+    // `preventScroll`: the panel is already on-screen (sticky), and a
+    // Cluster's own click handler already smooth-scrolls its title into
+    // view - the browser's default focus-scroll would otherwise fight that
+    // animation with an instant jump.
+    sidebarPanelEl?.focus({ preventScroll: true });
+  }
+
+  // Explicit user interactions (e.g. clicking a Cluster's title button)
+  // move focus into the sidebar, so Tab continues into its content/nav
+  // instead of back into the rest of the flow diagram. Scroll-driven
+  // activation (`setActive`, called from `_Cluster.svelte`'s
+  // `IntersectionObserver`) deliberately does not do this - it would hijack
+  // focus mid-scroll.
+  function activate(id: string) {
+    setActive(id);
+    void focusSidebar();
   }
 
   // Marks the flow as "auto-scrolling" while `navigateStep`'s
@@ -230,6 +258,7 @@
     unregister,
     toggle,
     setActive,
+    activate,
     close: closeSidebar,
   });
 
@@ -256,6 +285,7 @@
   </div>
 
   <FlowSidebar
+    bind:panelEl={sidebarPanelEl}
     content={sidebarContent}
     page={activePage}
     isFirst={isFirstCluster}

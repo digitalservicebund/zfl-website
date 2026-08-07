@@ -296,7 +296,7 @@
   );
 
   const titleWrapperClass =
-    "z-20 flex gap-16 top-0 left-16 flex-row items-center self-start max-md:my-(--halo-thickness) max-md:ml-16 md:absolute md:left-[4vw]";
+    "z-20 flex gap-16 top-0 left-16 flex-row items-center self-start max-md:my-(--halo-thickness) max-md:ml-16 md:absolute md:left-[4vw] focus:outline-offset-2 pl-2 focus:outline-(--kern-color-action-focus-default)";
 
   // em, gap enforced between packed bubbles / between bubbles and the dashed
   // border. Flat (not breakpoint-dependent) on purpose: expressed in the same
@@ -374,7 +374,7 @@
   );
 
   const activate = () => {
-    sidebarContext?.setActive(title!);
+    sidebarContext?.activate(title!);
     titleEl?.scrollIntoView({ behavior: "smooth" });
   };
 </script>
@@ -386,7 +386,13 @@
 >
   <div class={contentWrapperClass}>
     {#if title}
-      <button type="button" class={titleWrapperClass} onclick={activate}>
+      <button
+        type="button"
+        class={titleWrapperClass}
+        onclick={activate}
+        aria-expanded={isActive}
+        aria-controls="flow-sidebar"
+      >
         <div
           class={`size-28 border-2 border-white rounded-full transition-colors duration-300 outline-2 ${isActive ? "bg-(--bubble-color) outline-black" : "bg-black outline-transparent"}`}
           aria-hidden="true"

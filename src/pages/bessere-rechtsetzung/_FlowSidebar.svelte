@@ -7,6 +7,7 @@
     isFirst = false,
     isLast = false,
     onNavigate,
+    panelEl = $bindable(),
   }: {
     content: FlowSidebarContent | null;
     /**
@@ -25,6 +26,12 @@
     onNavigate: (step: -1 | 1) => void;
     /** Jumps directly to a given page index within the active step. */
     onSelectPage: (page: number) => void;
+    /**
+     * The panel's root element, bound out to `_FlowLayout.svelte` so it can
+     * move keyboard focus here on an explicit Cluster activation (see
+     * `activate` in `_flowSidebar.ts`).
+     */
+    panelEl?: HTMLDivElement;
   } = $props();
 
   function handleWeiterClick() {
@@ -104,7 +111,8 @@
      panel is a direct child of - without stretching it to the row's full
      (tall) height, the panel's containing block collapses to the wrapper's
      own shrink-to-fit `h-screen` height, leaving it no room to stick. -->
-<div
+<aside
+  aria-label="Details zum Prozessschritt"
   class="col-start-1 row-start-1 lg:col-start-2 self-stretch overflow-x-clip w-full lg:w-[calc(100vw-var(--cluster-inner-width))]"
 >
   <!-- Sticky (not fixed) so it stays visible while scrolling the flow, but
@@ -115,7 +123,13 @@
     style={content?.color ? `--content-color: ${content.color}` : undefined}
   >
     <div
-      class="flex max-h-[max(140px,var(--drawer-h))] lg:max-h-screen w-full max-w-full flex-col pointer-events-auto lg:h-full bg-lavender-200"
+      bind:this={panelEl}
+      id="flow-sidebar"
+      role="region"
+      aria-label={content?.title}
+      aria-live="polite"
+      tabindex="-1"
+      class="flex max-h-[max(140px,var(--drawer-h))] lg:max-h-screen w-full max-w-full flex-col pointer-events-auto lg:h-full bg-lavender-200 focus:outline-4 focus:-outline-offset-4 focus:outline-(--kern-color-action-focus-default) rounded-xl"
       style={`--drawer-h: ${drawerHeight}px`}
     >
       {#if content}
@@ -167,7 +181,7 @@
       {/if}
     </div>
   </div>
-</div>
+</aside>
 
 <style>
   /* Pure-CSS "scroll shadow": shows a gradient at the top and/or bottom

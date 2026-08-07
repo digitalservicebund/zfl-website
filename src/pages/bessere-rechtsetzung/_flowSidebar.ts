@@ -48,6 +48,19 @@ export interface FlowSidebarContext {
    * closes it if already open for that id.
    */
   toggle(id: string): void;
+  /**
+   * Silently switches the active id, e.g. from a scroll-driven
+   * `IntersectionObserver` (see `_Cluster.svelte`) - never moves keyboard
+   * focus, since that would hijack focus mid-scroll. Use `activate` instead
+   * for anything triggered by an explicit click/keypress.
+   */
   setActive(id: string): void;
+  /**
+   * Same as `setActive`, but also moves keyboard focus into the sidebar
+   * panel - for explicit user interactions only (e.g. clicking a Cluster's
+   * title button), so Tab continues into the sidebar's content/nav instead
+   * of the rest of the flow diagram.
+   */
+  activate(id: string): void;
   close(): void;
 }
