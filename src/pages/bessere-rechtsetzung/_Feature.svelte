@@ -12,7 +12,6 @@
   import { iconMap, type TagName } from "./_icons";
 
   let {
-    title,
     children,
     details,
     tag,
@@ -25,7 +24,6 @@
     // a descendant of the Cluster that defines it).
     color = "var(--content-color)",
   }: {
-    title?: string;
     children: Snippet;
     details?: Snippet;
     tag: TagName;
@@ -112,9 +110,6 @@
     <div
       class="max-md:col-span-3 max-md:col-start-1 max-md:row-start-2 text-left"
     >
-      {#if title}
-        <strong>{title}: </strong>
-      {/if}
       {@render children()}
     </div>
     {#if details}
