@@ -386,12 +386,7 @@
 >
   <div class={contentWrapperClass}>
     {#if title}
-      <button
-        type="button"
-        tabindex="-1"
-        class={titleWrapperClass}
-        onclick={activate}
-      >
+      <button type="button" class={titleWrapperClass} onclick={activate}>
         <div
           class={`size-28 border-2 border-white rounded-full transition-colors duration-300 outline-2 ${isActive ? "bg-(--bubble-color) outline-black" : "bg-black outline-transparent"}`}
           aria-hidden="true"

@@ -134,7 +134,7 @@
     <div
       class={`md:col-start-2 max-md:col-span-3 max-md:col-start-1 grid transition-[grid-template-rows] duration-100 ease-in-out ${expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
     >
-      <div class="overflow-hidden">
+      <div class="overflow-hidden" aria-hidden={!expanded} inert={!expanded}>
         <div class="py-(--feature-spacing) max-md:px-(--feature-spacing)">
           {@render details?.()}
         </div>
