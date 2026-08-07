@@ -52,7 +52,7 @@ fileignoreconfig:
   - filename: src/config/posthog.ts
     checksum: 2c449a89d7fa9be57170bc960a30f51381f9a5d8d046605a6e30c083886163dd
   - filename: src/env.d.ts
-    checksum: 8acdc07029e3aed3f44556780790d7a2191e8877c5b114a3147423507385fbec
+    checksum: f9b79fa75c547d1f6c38a1741cc47efe37d88a323aa65504a5e980a965153f93
   - filename: doc/adr/0004-configuration-management.md
     checksum: 367a262dfe679ea3254c86879a09d98b0e03863b4c514f58ccd3609afb58bdae
   - filename: src/pages/ueber-uns/Ansatz.jpg
