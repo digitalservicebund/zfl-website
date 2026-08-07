@@ -442,7 +442,7 @@
     </div>
   </div>
   {#if sidebarPages}
-    <div class="sr-only">
+    <div class="sr-only" inert>
       {#each sidebarPages as sidebarPage, i (sidebarPages[i])}
         {@render sidebarPage()}
       {/each}
