@@ -129,7 +129,7 @@
       aria-label={content?.title}
       aria-live="polite"
       tabindex="-1"
-      class="flex max-h-[max(140px,var(--drawer-h))] lg:max-h-screen w-full max-w-full flex-col pointer-events-auto lg:h-full bg-lavender-200 focus:outline-4 focus:-outline-offset-4 focus:outline-(--kern-color-action-focus-default) rounded-xl"
+      class="flex max-h-[max(140px,var(--drawer-h))] lg:max-h-screen w-full max-w-full flex-col pointer-events-auto lg:h-full bg-lavender-200 focus:outline-2 focus:-outline-offset-2 focus:outline-(--kern-color-action-focus-default)/20"
       style={`--drawer-h: ${drawerHeight}px`}
     >
       {#if content}

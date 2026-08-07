@@ -296,7 +296,7 @@
   );
 
   const titleWrapperClass =
-    "z-20 flex gap-16 top-0 left-16 flex-row items-center self-start max-md:my-(--halo-thickness) max-md:ml-16 md:absolute md:left-[4vw] focus:outline-offset-2 pl-2 focus:outline-(--kern-color-action-focus-default)";
+    "z-20 flex gap-16 top-0 left-16 flex-row items-center self-start max-md:my-(--halo-thickness) max-md:ml-16 md:absolute md:left-[4vw]";
 
   // em, gap enforced between packed bubbles / between bubbles and the dashed
   // border. Flat (not breakpoint-dependent) on purpose: expressed in the same
@@ -386,13 +386,7 @@
 >
   <div class={contentWrapperClass}>
     {#if title}
-      <button
-        type="button"
-        class={titleWrapperClass}
-        onclick={activate}
-        aria-expanded={isActive}
-        aria-controls="flow-sidebar"
-      >
+      <div class={titleWrapperClass}>
         <div
           class={`size-28 border-2 border-white rounded-full transition-colors duration-300 outline-2 ${isActive ? "bg-(--bubble-color) outline-black" : "bg-black outline-transparent"}`}
           aria-hidden="true"
@@ -401,11 +395,19 @@
         <h2
           id={title}
           bind:this={titleEl}
-          class="kern-heading-small scroll-mt-40 my-0! bg-black text-white px-4"
+          class="kern-heading-small scroll-mt-40 my-0! bg-black text-white px-4 focus-within:outline-2 outline-offset-2 outline-(--kern-color-action-focus-default)"
         >
-          {title}
+          <button
+            type="button"
+            class="focus:outline-none"
+            onclick={activate}
+            aria-expanded={isActive}
+            aria-controls="flow-sidebar"
+          >
+            {title}
+          </button>
         </h2>
-      </button>
+      </div>
     {/if}
 
     <div
