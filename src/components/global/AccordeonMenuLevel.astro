@@ -33,6 +33,15 @@ function linkStyle(isCurrent = false) {
   );
 }
 
+function headerStyle(isCurrent = false) {
+  return twMerge(
+    "kern-accordion__header rounded-sm has-[>a:hover]:bg-cosmic-blue-base has-[>a:hover]:text-white",
+    !isCurrent &&
+      "accordion-header--hoverable-by-button has-[>button:hover]:bg-cosmic-blue-base",
+    // isCurrent && "bg-lavender-surface-highlight font-bold",
+  );
+}
+
 function indentStyle(currentLevel: number) {
   const paddingLeft =
     currentLevel > 1
@@ -40,44 +49,71 @@ function indentStyle(currentLevel: number) {
       : "var(--kern-metric-space-small)";
   return `padding: var(--kern-metric-space-small) var(--kern-metric-space-small) var(--kern-metric-space-small) ${paddingLeft}`;
 }
+
+function panelId(path: string) {
+  return `accordion-panel-${path.replace(/[^a-zA-Z0-9]+/g, "-").replace(/^-+|-+$/g, "")}`;
+}
 ---
 
 {
   entries.map((entry) =>
     isFirstLevelChildWithChildren(entry, level) ? (
-      <details open={entry.isInCurrentBranch}>
-        <summary class="kern-accordion__header hover:bg-cosmic-blue-base rounded-sm hover:text-white">
+      <div
+        class="accordion-item"
+        x-data={`{ open: ${entry.isInCurrentBranch} }`}
+      >
+        <div class={headerStyle(entry.isCurrent)}>
           <a
             href={entry.path}
             style={indentStyle(level)}
-            class={linkStyle(entry.isCurrent)}
+            class={twMerge(linkStyle(entry.isCurrent), "flex-1")}
             aria-current={entry.isCurrent ? "page" : undefined}
-            @click.stop
           >
             {entry.label}
           </a>
-          <span
-            class="kern-icon kern-icon--arrow-down kern-icon--default accordion-icon-open"
-            aria-hidden="true"
-          />
-          <span
-            class="kern-icon kern-icon--chevron-right kern-icon--default accordion-icon-closed"
-            aria-hidden="true"
-          />
-        </summary>
-        <section class="kern-accordion__body">
+          <button
+            type="button"
+            class="accordion-toggle flex h-32 w-32 shrink-0 items-center justify-center rounded-sm"
+            aria-label={`Untermenü ${entry.label} ein-/ausklappen`}
+            aria-controls={panelId(entry.path)}
+            x-bind:aria-expanded="open"
+            @click="open = !open"
+          >
+            <span
+              class="kern-icon kern-icon--arrow-down kern-icon--default"
+              style={entry.isInCurrentBranch ? undefined : "display: none;"}
+              x-show="open"
+              aria-hidden="true"
+            />
+            <span
+              class="kern-icon kern-icon--chevron-right kern-icon--default"
+              style={entry.isInCurrentBranch ? "display: none;" : undefined}
+              x-show="!open"
+              aria-hidden="true"
+            />
+          </button>
+        </div>
+        <section
+          id={panelId(entry.path)}
+          class="kern-accordion__body"
+          style={entry.isInCurrentBranch ? undefined : "display: none;"}
+          x-show="open"
+        >
           <Self
             entries={entry.children}
             currentPath={currentPath}
             level={level + 1}
           />
         </section>
-      </details>
+      </div>
     ) : (
       <>
         <a
           href={entry.path}
-          class={linkStyle(currentPath === entry.path)}
+          class={twMerge(
+            linkStyle(currentPath === entry.path),
+            "accordion-item",
+          )}
           style={indentStyle(level)}
           aria-current={currentPath === entry.path ? "page" : undefined}
         >
@@ -101,35 +137,24 @@ function indentStyle(currentLevel: number) {
     padding: 0;
   }
 
-  .kern-accordion__header a {
-    flex: 1;
-  }
-
-  .kern-accordion__header:hover .kern-icon {
-    background-color: var(--kern-color-white);
-  }
-  .kern-accordion__header:hover .a {
-    color: var(--kern-color-white);
-  }
-
-  a,
-  details {
-    margin-top: 8px;
-  }
-
   .kern-accordion__header::after {
     display: none;
   }
 
-  details > summary .accordion-icon-open {
-    display: none;
+  .kern-accordion__header:has(> a:hover) .kern-icon,
+  .accordion-toggle:hover .kern-icon {
+    background-color: var(--kern-color-white);
   }
 
-  details[open] > summary .accordion-icon-open {
-    display: inline-flex;
+  .accordion-toggle:hover {
+    background-color: var(--kern-color-action-pressed);
   }
 
-  details[open] > summary .accordion-icon-closed {
-    display: none;
+  .accordion-header--hoverable-by-button:has(> button:hover) a {
+    color: var(--kern-color-white);
+  }
+
+  .accordion-item {
+    margin-top: 8px;
   }
 </style>
