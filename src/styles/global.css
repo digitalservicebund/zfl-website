@@ -37,6 +37,7 @@
 
 :root {
   --kern-color-action-default: var(--color-cosmic-blue-base);
+  --kern-color-action-pressed: #242360;
 }
 
 @layer base {
