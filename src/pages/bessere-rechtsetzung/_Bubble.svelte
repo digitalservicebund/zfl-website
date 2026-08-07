@@ -99,6 +99,7 @@
 </script>
 
 <div
+  aria-hidden="true"
   class={`relative inline-flex flex-col items-center hover:z-30 has-focus-visible:z-30 ${RESPONSIVE_BUBBLE_FONT_CLASS} ${active ? "z-20" : ""} ${className}`}
   style={positionStyle}
 >

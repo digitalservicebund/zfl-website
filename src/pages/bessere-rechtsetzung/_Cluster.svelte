@@ -177,6 +177,7 @@
     sidebar,
     highlightGroup,
     sizes = [],
+    ariaLabel,
   }: {
     title?: string;
     /**
@@ -210,6 +211,11 @@
      * during Astro's static-site generation) instead of only after mount.
      */
     sizes?: BubbleSize[];
+    /**
+     * Accessible label for the group of (aria-hidden) bubbles rendered via
+     * `children` — e.g. "Schritte in dieser Phase: ...".
+     */
+    ariaLabel?: string;
   } = $props();
 
   const sidebarContext = getContext<FlowSidebarContext | undefined>(
@@ -397,13 +403,7 @@
           bind:this={titleEl}
           class="kern-heading-small scroll-mt-40 my-0! bg-black text-white px-4 focus-within:outline-2 outline-offset-2 outline-(--kern-color-action-focus-default)"
         >
-          <button
-            type="button"
-            class="focus:outline-none"
-            onclick={activate}
-            aria-expanded={isActive}
-            aria-controls="flow-sidebar"
-          >
+          <button type="button" class="focus:outline-none" onclick={activate}>
             {title}
           </button>
         </h2>
@@ -411,6 +411,7 @@
     {/if}
 
     <div
+      role="presentation"
       class={`relative flex items-center justify-center ${RESPONSIVE_BUBBLE_FONT_CLASS} ${isActive ? "z-10" : ""}`}
       style={`width: calc(${diameter}em + 2 * var(--halo-thickness)); height: calc(${diameter}em + 2 * var(--halo-thickness)); margin-left: ${offset ?? clusterOffset}px; --halo-color: color-mix(in srgb, ${color} 20%, white)`}
     >
@@ -431,6 +432,8 @@
       </div>
 
       <div
+        role="group"
+        aria-label={ariaLabel}
         class={`relative rounded-full ${isFlexPositioned ? "flex items-center justify-center" : ""}`}
         style={`width: ${diameter}em; height: ${diameter}em; ${isFlexPositioned ? `gap: ${BUBBLE_PADDING}em;` : ""}`}
       >
@@ -438,6 +441,13 @@
       </div>
     </div>
   </div>
+  {#if sidebarPages}
+    <div class="sr-only">
+      {#each sidebarPages as sidebarPage, i (sidebarPages[i])}
+        {@render sidebarPage()}
+      {/each}
+    </div>
+  {/if}
 </div>
 
 <style>

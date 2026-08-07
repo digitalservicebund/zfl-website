@@ -28,7 +28,11 @@
     style={`left: calc(anchor(${CLUSTER_FIRST_ANCHOR} center) - 0.5px); top: anchor(${CLUSTER_FIRST_ANCHOR} center); bottom: anchor(${CLUSTER_LAST_ANCHOR} center)`}
   ></div>
 
-  <div class="flex items-center gap-8 xl:gap-24 justify-center">
+  <div
+    role="group"
+    aria-label="Startpunkte: Initiative des Bundestages, Aus der Mitte der Regierung, Initiative des Bundesrates"
+    class="flex items-center gap-8 xl:gap-24 justify-center"
+  >
     <Bubble
       color="#E6E6E6"
       title="Initiative des Bundestages"
@@ -52,9 +56,10 @@
     anchorName={CLUSTER_FIRST_ANCHOR}
     title="Interessensermittlung"
     sizes={["md", "md"]}
+    ariaLabel="Schritte in dieser Phase: Arbeitsgruppenbildung, Workshops mit Ländern und Kommunen"
   >
     {#snippet sidebar()}
-      <h2>Was passiert hier?</h2>
+      <h3>Was passiert hier?</h3>
       <p>
         Sobald die Zuständigkeit nach der Geschäftsverteilung der
         Bundesregierung feststeht, beginnt das federführende Ressort mit der
@@ -74,6 +79,7 @@
     offset={0}
     highlightGroup="Interessensermittlung"
     sizes={["md"]}
+    ariaLabel="Schritte in dieser Phase: Federführung"
   >
     <Bubble title="Federführung">
       Ein Fachreferat übernimmt die Verantwortung für die Weiterentwicklung der
@@ -86,9 +92,10 @@
     title="Frühphase"
     offset={0}
     sizes={["lg", "md", "sm", "sm", "md", "sm", "md", "sm"]}
+    ariaLabel="Schritte in dieser Phase: Workshops mit Ländern und Kommunen, Erarbeiten von Eckpunkten, Vorschläge von Verbänden, Gesetzesumfeld, Gutachten und Sachverständigenkommissionen, Materialrecherche, Ziel- und Wirkungsdefinition, Vorarbeit"
   >
     {#snippet sidebar()}
-      <h2>Was passiert hier?</h2>
+      <h3>Was passiert hier?</h3>
       <p>
         Wenn der Bedarf für eine neue Regelung feststeht, analysiert das
         federführende Referat das genaue Problem und legt klare Ziele fest.
@@ -96,7 +103,7 @@
         wird frühzeitig ermittelt, welche weiteren Ressorts und externen
         Stakeholder in die Arbeit eingebunden werden müssen.
       </p>
-      <h3>Wie könnte diese Phase in Zukunft aussehen?</h3>
+      <h4>Wie könnte diese Phase in Zukunft aussehen?</h4>
 
       <div class="mt-24 space-y-24">
         <Feature tag="Prozess">
@@ -204,9 +211,10 @@
     color="#ABD7F9"
     title="Referentenentwurf"
     sizes={["sm", "sm", "sm", "sm", "sm"]}
+    ariaLabel="Schritte in dieser Phase: Frühzeitige Beteiligung, Austausch, Vorblatt, Rohentwurf, Gesetzesfolgen besprechen"
   >
     {#snippet sidebar()}
-      <h2>Was passiert hier?</h2>
+      <h3>Was passiert hier?</h3>
       <p>
         Sobald die Recherche abgeschlossen ist, erarbeitet das zuständige
         Ressort den konkreten Rohentwurf und das dazugehörige Vorblatt. Parallel
@@ -245,9 +253,10 @@
     color="#A0EBEE"
     title="Hausentwurf & Ressortentwurf"
     sizes={["sm", "sm", "lg"]}
+    ariaLabel="Schritte in dieser Phase: Beteiligung der Referate, Hausentwurf erstellen, Frühkoordinierung/ Vorhabenclearing Bundeskanzleramt"
   >
     {#snippet sidebar()}
-      <h2>Was passiert hier?</h2>
+      <h3>Was passiert hier?</h3>
       <p>
         Der erste Rohentwurf ist fertig. Das federführende Referat holt nun
         hausinternes Feedback ein und übergibt anschließend den Hausentwurf zur
@@ -279,6 +288,7 @@
     color="#9EDCD0"
     highlightGroup="Hausentwurf & Ressortentwurf"
     sizes={["md", "sm", "md", "sm", "sm"]}
+    ariaLabel="Schritte in dieser Phase: Gesetzesfolgenabschätzung, Beteiligung Dritter, Weitere Abstimmungen & Stellungnahmen, Ressortentwurf, Politische Abstimmung"
   >
     <Bubble title="Gesetzes&shy;folgen&shy;abschätzung" size="md">
       Beabsichtigte Wirkungen und unbeabsichtigte Nebenwirkungen
@@ -325,15 +335,21 @@
     color="#9EDCD0"
     highlightGroup="Hausentwurf & Ressortentwurf"
     sizes={["md"]}
+    ariaLabel="Schritte in dieser Phase: Verbände informieren"
   >
     <Bubble title="Verbände informieren" size="md">
       Die betroffenen Verbände werden über den Ressortentwurf informiert.
     </Bubble>
   </Cluster>
 
-  <Cluster color="#D2EDB9" title="Kabinettvorlage" sizes={["md", "md"]}>
+  <Cluster
+    color="#D2EDB9"
+    title="Kabinettvorlage"
+    sizes={["md", "md"]}
+    ariaLabel="Schritte in dieser Phase: Kabinettvorlage erstellen, Unterzeichnen der Kabinettvorlage"
+  >
     {#snippet sidebar()}
-      <h2>Was passiert hier?</h2>
+      <h3>Was passiert hier?</h3>
       <p>
         Sobald die Abstimmungen zum Ressortentwurf abgeschlossen sind, wird die
         offizielle Kabinettvorlage erstellt und durch die Leitung des Hauses
@@ -361,6 +377,7 @@
     offset={0}
     highlightGroup="Kabinettvorlage"
     sizes={["md"]}
+    ariaLabel="Schritte in dieser Phase: Weiterleitung an das Bundeskanzleramt"
   >
     <Bubble title="Weiterleitung an das Bundes&shy;kanzleramt" size="md">
       Fachreferat leitet die Kabinettvorlage an Bundeskanzleramts-Chef:in weiter
@@ -371,9 +388,15 @@
 
   <Arrow>Übergabe an die politische Ebene</Arrow>
 
-  <Cluster color="#EBF5B3" offset={0} title="Verabschiedung" sizes={["md"]}>
+  <Cluster
+    color="#EBF5B3"
+    offset={0}
+    title="Verabschiedung"
+    sizes={["md"]}
+    ariaLabel="Schritte in dieser Phase: Stellungnahme Bundesrat"
+  >
     {#snippet sidebar()}
-      <h2>Was passiert hier?</h2>
+      <h3>Was passiert hier?</h3>
       <p>
         Wenn die Bundesregierung den Entwurf an die gesetzgebenden Organe
         übergeben hat, durchläuft das Vorhaben das eigentliche parlamentarische
@@ -401,7 +424,12 @@
     </Bubble>
   </Cluster>
 
-  <Cluster color="#EBF5B3" highlightGroup="Verabschiedung" sizes={["md"]}>
+  <Cluster
+    color="#EBF5B3"
+    highlightGroup="Verabschiedung"
+    sizes={["md"]}
+    ariaLabel="Schritte in dieser Phase: Abstimmung im Bundestag"
+  >
     <Bubble title="Abstimmung im Bundestag">
       <h3>Ausschuss</h3>
       <p>
@@ -424,7 +452,12 @@
     </Bubble>
   </Cluster>
 
-  <Cluster color="#FFFBB5" highlightGroup="Verabschiedung" sizes={["md"]}>
+  <Cluster
+    color="#FFFBB5"
+    highlightGroup="Verabschiedung"
+    sizes={["md"]}
+    ariaLabel="Schritte in dieser Phase: Verkündung"
+  >
     <Bubble title="Verkündung">
       <h3>Verkündung</h3>
       <p>
@@ -446,9 +479,10 @@
     title="Nach der Verkündung"
     anchorName={CLUSTER_LAST_ANCHOR}
     sizes={["md"]}
+    ariaLabel="Schritte in dieser Phase: Dokumentation & Inkrafttreten"
   >
     {#snippet sidebar()}
-      <h2>Was passiert hier?</h2>
+      <h3>Was passiert hier?</h3>
       <p>
         Das Gesetz wird im Bundesgesetzblatt verkündet. Danach schließen sich
         die abschließende Dokumentation und das offizielle Inkrafttreten der
@@ -485,6 +519,7 @@
     className="max-lg:pb-[50vh]"
     highlightGroup="Nach der Verkündung"
     sizes={["md"]}
+    ariaLabel="Schritte in dieser Phase: Vollzug"
   >
     <Bubble title="Vollzug">
       <ul>

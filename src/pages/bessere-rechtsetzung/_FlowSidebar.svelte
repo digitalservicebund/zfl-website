@@ -114,6 +114,7 @@
 <aside
   aria-label="Details zum Prozessschritt"
   class="col-start-1 row-start-1 lg:col-start-2 self-stretch overflow-x-clip w-full lg:w-[calc(100vw-var(--cluster-inner-width))]"
+  aria-hidden="true"
 >
   <!-- Sticky (not fixed) so it stays visible while scrolling the flow, but
        never escapes the bounds of its containing `_FlowLayout.svelte`
@@ -127,7 +128,6 @@
       id="flow-sidebar"
       role="region"
       aria-label={content?.title}
-      aria-live="polite"
       tabindex="-1"
       class="flex max-h-[max(140px,var(--drawer-h))] lg:max-h-screen w-full max-w-full flex-col pointer-events-auto lg:h-full bg-lavender-200 focus:outline-2 focus:-outline-offset-2 focus:outline-(--kern-color-action-focus-default)/20"
       style={`--drawer-h: ${drawerHeight}px`}
@@ -147,7 +147,7 @@
         </button>
         <div
           bind:this={scrollContainer}
-          class="scroll-shadow kern-body--small min-h-0 flex-1 overflow-y-auto px-(--sb-padding) pt-0 lg:pt-(--sb-padding) pb-24 [&>h2]:kern-heading-medium [&>h2]:mt-16 [&>h2]:md:mt-32 [&_h3]:text-lg"
+          class="scroll-shadow kern-body--small min-h-0 flex-1 overflow-y-auto px-(--sb-padding) pt-0 lg:pt-(--sb-padding) pb-24 [&>h3]:kern-heading-medium [&>h3]:mt-16 [&>h3]:md:mt-32 [&_h4]:text-lg"
         >
           <div class="flex items-center justify-between gap-16 shrink-0">
             <p class="kern-label kern-label--small mb-0" aria-hidden="true">
