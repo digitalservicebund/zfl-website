@@ -13,7 +13,10 @@
 
 <FlowLayout>
   <OutTrigger>
-    <div class="py-lg mx-auto max-w-200 flex flex-col items-center gap-8">
+    <div
+      class="py-lg mx-auto max-w-200 flex flex-col items-center gap-8"
+      aria-hidden="true"
+    >
       Scrollen Sie zum Starten
       <IconArrowDown class="block" />
     </div>
@@ -97,10 +100,9 @@
 
       <div class="mt-24 space-y-24">
         <Feature tag="Prozess">
-          <p class="mb-0">
-            <strong>Ein geführter Prozess</strong> unterstützt Sie Schritt für Schritt
-            dabei, Ihr Regelungsvorhaben von Anfang an strukturiert aufzusetzen.
-          </p>
+          <strong>Ein geführter Prozess</strong> unterstützt Sie Schritt für
+          Schritt dabei, Ihr Regelungsvorhaben von Anfang an strukturiert
+          aufzusetzen.
           {#snippet details()}
             <p>
               So können Sie das eigentliche Problem präzise durchdenken,
@@ -117,10 +119,8 @@
           {/snippet}
         </Feature>
         <Feature tag="Checks">
-          <p class="mb-0">
-            <strong>Verschiedene Checks und Arbeitshilfen</strong> sind konsolidiert
-            und direkt in Ihren Arbeitsablauf eingebunden.
-          </p>
+          <strong>Verschiedene Checks und Arbeitshilfen</strong> sind
+          konsolidiert und direkt in Ihren Arbeitsablauf eingebunden.
           {#snippet details()}
             <p>
               So berücksichtigen Sie automatisch notwendige Anforderungen wie
@@ -135,11 +135,9 @@
           {/snippet}
         </Feature>
         <Feature tag="KI">
-          <p class="mb-0">
-            <strong>Künstliche Intelligenz</strong> nimmt Ihnen zeitintensive Arbeit
-            bei der Recherche, Strukturierung und Zusammenstellung von Informationen
-            ab.
-          </p>
+          <strong>Künstliche Intelligenz</strong> nimmt Ihnen zeitintensive
+          Arbeit bei der Recherche, Strukturierung und Zusammenstellung von
+          Informationen ab.
           {#snippet details()}
             <p>
               So finden und ordnen Sie relevante Inhalte deutlich schneller.
@@ -373,12 +371,7 @@
 
   <Arrow>Übergabe an die politische Ebene</Arrow>
 
-  <Cluster
-    color="#EBF5B3"
-    offset={0}
-    title="Verabschiedung"
-    sizes={["md"]}
-  >
+  <Cluster color="#EBF5B3" offset={0} title="Verabschiedung" sizes={["md"]}>
     {#snippet sidebar()}
       <h2>Was passiert hier?</h2>
       <p>
