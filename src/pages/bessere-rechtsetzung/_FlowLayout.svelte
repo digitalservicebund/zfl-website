@@ -139,29 +139,32 @@
     activePage = 0;
   }
 
-  // Ids of all currently registered Cluster steps, in registration
+  // Ids of all currently registered Section steps, in registration
   // order (which follows page/DOM order), used to cycle "Zurück"/"Weiter"
-  // through steps of the same kind as the currently open one - Clusters and
-  // Bubbles each cycle through their own sequence, never mixed together.
-  const clusterIds = $derived(Object.values(registry).map((entry) => entry.id));
+  // through steps of the same kind as the currently open one.
+  const sectionIds = $derived(Object.values(registry).map((entry) => entry.id));
 
-  // Cluster dots shown in `_DotNav.svelte`, in the same registration order
-  // as `clusterIds`.
-  const clusterDots = $derived(
-    clusterIds.map((id) => ({ id, color: registry[id]?.color })),
+  // Section dots shown in `_DotNav.svelte`, in the same registration order
+  // as `sectionIds`. `title` is passed alongside the (now slugified) `id`
+  // so the dots' accessible label stays human-readable.
+  const sectionDots = $derived(
+    sectionIds.map((id) => ({
+      id,
+      title: registry[id]?.title,
+      color: registry[id]?.color,
+    })),
   );
 
-  // Only clusters (not bubbles) get first/last treatment in
-  // `_FlowSidebar.svelte`'s "Zurück"/"Weiter" nav - bubbles keep cycling.
-  // Also requires being on the first/last *page* of that cluster, so a
-  // multi-page cluster's later/earlier pages don't hide "Zurück"/"Weiter"
+  // First/last treatment for `_FlowSidebar.svelte`'s "Zurück"/"Weiter" nav.
+  // Also requires being on the first/last *page* of that section, so a
+  // multi-page section's later/earlier pages don't hide "Zurück"/"Weiter"
   // prematurely.
-  const isFirstCluster = $derived(
-    !!sidebarContent && sidebarContent.id === clusterIds[0] && activePage === 0,
+  const isFirstSection = $derived(
+    !!sidebarContent && sidebarContent.id === sectionIds[0] && activePage === 0,
   );
-  const isLastCluster = $derived(
+  const isLastSection = $derived(
     !!sidebarContent &&
-      sidebarContent.id === clusterIds[clusterIds.length - 1] &&
+      sidebarContent.id === sectionIds[sectionIds.length - 1] &&
       activePage === sidebarContent.children.length - 1,
   );
 
@@ -215,7 +218,7 @@
       return;
     }
 
-    const ids = clusterIds;
+    const ids = sectionIds;
     if (ids.length === 0) return;
 
     const currentIndex = ids.indexOf(sidebarContent.id);
@@ -286,7 +289,7 @@
     <div
       class="sticky flex items-center z-50 col-start-1 row-start-1 pointer-events-none top-0 h-screen justify-end"
     >
-      <DotNav clusters={clusterDots} {activeId} onSelect={onDotSelect} />
+      <DotNav sections={sectionDots} {activeId} onSelect={onDotSelect} />
     </div>
   </div>
 
@@ -295,8 +298,8 @@
     content={sidebarContent}
     entries={sidebarEntries}
     page={activePage}
-    isFirst={isFirstCluster}
-    isLast={isLastCluster}
+    isFirst={isFirstSection}
+    isLast={isLastSection}
     onNavigate={navigateStep}
     onSelectPage={selectPage}
   />

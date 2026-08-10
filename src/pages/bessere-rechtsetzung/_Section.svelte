@@ -9,6 +9,7 @@
     FLOW_SECTION_CONTEXT_NAME,
     type FlowSectionContext,
   } from "./_flowSection";
+  import { slugify } from "@/utils/slugify";
 
   let {
     title,
@@ -22,7 +23,7 @@
      * state (see `highlightId`) and as the id every nested Cluster's
      * highlight mirrors.
      */
-    title?: string;
+    title: string;
     /**
      * CSS anchor name (e.g. "--cluster-first") assigned to this section's
      * title dot, so it can be targeted from outside via `anchor()`.
@@ -48,6 +49,9 @@
     FLOW_SIDEBAR_CONTEXT_NAME,
   );
 
+  // Slugified so it's safe to use as an HTML id
+  const id = $derived(slugify(title));
+
   // Normalizes `sidebar` to an array of pages
   const sidebarPages = $derived(
     sidebar === undefined
@@ -59,18 +63,18 @@
 
   // Registers this section's sidebar content as soon as it mounts
   $effect(() => {
-    if (!sidebarPages || sidebarPages.length === 0 || !title) return;
+    if (!sidebarPages || sidebarPages.length === 0) return;
 
     sidebarContext?.register({
-      id: title,
+      id,
       title,
       children: sidebarPages,
       color,
     });
-    return () => sidebarContext?.unregister(title);
+    return () => sidebarContext?.unregister(id);
   });
 
-  const isActive = $derived(!!title && sidebarContext?.activeId === title);
+  const isActive = $derived(sidebarContext?.activeId === id);
 
   // Exposed to nested `_Cluster.svelte` instances that have no title/highlight
   // identity of their own, so they can still reflect the group's active state.
@@ -102,7 +106,7 @@
   // while `navigateStep`'s `scrollIntoView` is auto-scrolling
   // (`sidebarContext.isJumping`).
   $effect(() => {
-    if (!title || !rootEl) return;
+    if (!rootEl) return;
 
     const rootMargin = isSmallScreen
       ? "-15% 0px -85% 0px"
@@ -111,7 +115,7 @@
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !sidebarContext?.isJumping) {
-          sidebarContext?.setActive(title);
+          sidebarContext?.setActive(id);
         }
       },
       { rootMargin },
@@ -125,7 +129,7 @@
     "z-20 flex gap-16 top-0 left-16 flex-row items-center self-start max-md:my-(--halo-thickness) max-md:ml-16 md:absolute md:left-[4vw]";
 
   const activate = () => {
-    sidebarContext?.activate(title!);
+    sidebarContext?.activate(id);
     titleEl?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -135,8 +139,8 @@
   // section currently happens to be active. Matches the same condition
   // `_FlowLayout.svelte`'s registration effect uses.
   const sidebarContentId = $derived(
-    sidebarPages && sidebarPages.length > 0 && title
-      ? `sidebar-content-${title}`
+    sidebarPages && sidebarPages.length > 0
+      ? `sidebar-content-${id}`
       : undefined,
   );
 </script>
@@ -147,24 +151,22 @@
   aria-owns={sidebarContentId}
   style={color ? `--bubble-color: ${color}` : undefined}
 >
-  {#if title}
-    <div class={titleWrapperClass}>
-      <div
-        class={`size-28 border-2 border-white rounded-full transition-colors duration-300 outline-2 ${isActive ? "bg-(--bubble-color) outline-black" : "bg-black outline-transparent"}`}
-        aria-hidden="true"
-        style={anchorName ? `anchor-name: ${anchorName};` : undefined}
-      ></div>
-      <h2
-        id={title}
-        bind:this={titleEl}
-        class="kern-heading-small scroll-mt-40 my-0! bg-black text-white px-4 focus-within:outline-2 outline-offset-2 outline-(--kern-color-action-focus-default)"
-      >
-        <button type="button" class="focus:outline-none" onclick={activate}>
-          {title}
-        </button>
-      </h2>
-    </div>
-  {/if}
+  <div class={titleWrapperClass}>
+    <div
+      class={`size-28 border-2 border-white rounded-full transition-colors duration-300 outline-2 ${isActive ? "bg-(--bubble-color) outline-black" : "bg-black outline-transparent"}`}
+      aria-hidden="true"
+      style={anchorName ? `anchor-name: ${anchorName};` : undefined}
+    ></div>
+    <h2
+      {id}
+      bind:this={titleEl}
+      class="kern-heading-small scroll-mt-40 my-0! bg-black text-white px-4 focus-within:outline-2 outline-offset-2 outline-(--kern-color-action-focus-default)"
+    >
+      <button type="button" class="focus:outline-none" onclick={activate}>
+        {title}
+      </button>
+    </h2>
+  </div>
 
   {@render children()}
 </div>

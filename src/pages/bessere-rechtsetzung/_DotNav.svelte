@@ -1,11 +1,11 @@
 <script lang="ts">
   let {
-    clusters,
+    sections,
     activeId,
     onSelect,
   }: {
-    /** Registered clusters to show a dot for, in registration order. */
-    clusters: { id: string; color?: string }[];
+    /** Registered sections to show a dot for, in registration order. */
+    sections: { id: string; title?: string; color?: string }[];
     activeId: string | null;
     onSelect: (id: string) => void;
   } = $props();
@@ -16,18 +16,18 @@
   aria-label="Phasen-Navigation"
   aria-hidden="true"
 >
-  {#each clusters as cluster (cluster.id)}
+  {#each sections as section (section.id)}
     <button
       type="button"
       class={`size-24 bg-(--dot-color) shrink-0 rounded-full outline-offset-2 ${
-        activeId === cluster.id ? "outline-2 outline-black" : ""
+        activeId === section.id ? "outline-2 outline-black" : ""
       }`}
       tabIndex={-1}
-      style={`--dot-color: ${cluster.color ?? "black"}`}
-      title={cluster.id}
-      aria-label={cluster.id}
-      aria-current={activeId === cluster.id ? "true" : undefined}
-      onclick={() => onSelect(cluster.id)}
+      style={`--dot-color: ${section.color ?? "black"}`}
+      title={section.title}
+      aria-label={section.title}
+      aria-current={activeId === section.id ? "true" : undefined}
+      onclick={() => onSelect(section.id)}
     ></button>
   {/each}
 </nav>
