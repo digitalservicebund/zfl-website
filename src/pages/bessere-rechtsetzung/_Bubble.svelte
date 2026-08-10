@@ -19,17 +19,15 @@
   } from "./_clusterLayout";
 
   interface Props {
-    /** Fill color of the bubble, defaults `--bubble-color` set by the enclosing Cluster. */
+    /** Fill color of the bubble, defaults `--bubble-color` from Cluster. */
     color?: string;
     title?: string;
     optional?: boolean;
     size?: BubbleSize;
     className?: string;
     tags?: TagName[];
-    /** Tooltip content shown above the bubble when it's clicked open. */
+    /** Tooltip content shown when it's clicked open. */
     children?: Snippet;
-    /** Optional body content shown within the bubble */
-    body?: Snippet;
   }
 
   let {
@@ -40,7 +38,6 @@
     className = "",
     tags,
     children,
-    body,
   }: Props = $props();
 
   const icons = $derived(tags?.map((t) => iconMap[t]));
@@ -116,9 +113,6 @@
               <span class="block font-normal text-sm"> (optional)</span>
             {/if}
           </div>
-        {/if}
-        {#if body}
-          {@render body()}
         {/if}
         {#if icons}
           <div

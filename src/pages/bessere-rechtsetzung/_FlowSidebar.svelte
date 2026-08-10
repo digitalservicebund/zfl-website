@@ -96,30 +96,10 @@
   }
 </script>
 
-<!-- Below `lg` this wrapper shares the main content's grid cell
-     (`col-start-1 row-start-1`) so the sidebar overlays as a sticky bottom
-     sheet instead of pushing a second column; at `lg` and up it becomes its
-     own column (`col-start-2`) beside the main content. Either way it always
-     stays at its full target width - it never resizes based on `isOpen`, so
-     the main content never reflows when opening/closing. Opening/closing
-     instead slides the inner panel via `transform: translateX`, which is
-     purely visual and doesn't affect layout. `overflow-x-clip` (not `-hidden`,
-     which would make the browser treat overflow-y as `auto` and break the
-     sticky panel's page-scroll behavior) clips the panel once it's
-     translated past the wrapper's right edge while closed. `self-stretch`
-     is required despite the parent grid's `items-start`: a grid item's
-     sticky-positioning containing block is the full grid area regardless of
-     alignment, but this wrapper is no longer the grid item that the sticky
-     panel is a direct child of - without stretching it to the row's full
-     (tall) height, the panel's containing block collapses to the wrapper's
-     own shrink-to-fit `h-screen` height, leaving it no room to stick. -->
 <aside
   aria-label="Details zum Prozessschritt"
   class="col-start-1 row-start-1 lg:col-start-2 self-stretch overflow-x-clip w-full lg:w-[calc(100vw-var(--cluster-inner-width))]"
 >
-  <!-- Sticky (not fixed) so it stays visible while scrolling the flow, but
-       never escapes the bounds of its containing `_FlowLayout.svelte`
-       grid column. -->
   <div
     class={`sticky top-0 z-50 h-screen w-full lg:w-[calc(100vw-var(--cluster-inner-width))] flex items-end lg:items-center pointer-events-none transition-transform duration-500 ease-out ${isOpen ? "" : "max-lg:translate-y-full lg:translate-x-full"} [--sb-padding:16px] md:[--sb-padding:40px]`}
     style={content?.color ? `--content-color: ${content.color}` : undefined}
@@ -148,13 +128,6 @@
         </button>
       {/if}
 
-      <!-- Rendered unconditionally (not gated behind `{#if content}`) so
-           every cluster's owned content (see `_Cluster.svelte`'s static
-           `aria-owns`) exists from the start, regardless of whether any
-           cluster has ever been activated. Only the active entry (matching
-           `content`) is visible/in-flow; the rest are `sr-only` - still
-           screen-reader reachable, right where their owning cluster placed
-           them via `aria-owns`, just not painted here. -->
       <div
         bind:this={scrollContainer}
         class="scroll-shadow kern-body--small min-h-0 flex-1 overflow-y-auto px-(--sb-padding) pt-0 lg:pt-(--sb-padding) pb-24 [&_h3]:kern-heading-medium [&_h3]:mt-16 [&_h3]:md:mt-32 [&_h4]:text-lg"
@@ -224,13 +197,7 @@
 </aside>
 
 <style>
-  /* Pure-CSS "scroll shadow": shows a gradient at the top and/or bottom
-     edge, fading into the background color, only when there is more
-     content to scroll to in that direction. For each edge, a cover
-     gradient scrolls with the content (background-attachment: local) and
-     hides a shadow gradient pinned to the visible viewport
-     (background-attachment: scroll) once that edge is scrolled to.
-     No JS/scroll listeners needed.
+  /* Pure-CSS "scroll shadow"
      Reference: https://css-tricks.com/books/greatest-css-tricks/scroll-shadows/
   */
   .scroll-shadow {

@@ -11,20 +11,9 @@
 
   let { children }: { children: Snippet } = $props();
 
-  /**
-   * Tags of the bubbles to highlight (matched against each Bubble's
-   * `tags` prop). Owned here (rather than by the flow content itself) so
-   * the same highlight state is visible both to the flow content and to
-   * `_FlowSidebar.svelte`, which is rendered as a sibling of `children`
-   * and wouldn't otherwise share its component tree. Bindable so callers
-   * can control it externally.
-   */
+  /** Tags of the bubbles to highlight */
   let highlighted = $state<string[]>([]);
 
-  // Exposed via context (rather than threaded through every `<Bubble>`/
-  // `<Feature>` usage) so any descendant - including sidebar content
-  // rendered through `_FlowSidebar.svelte` - can reactively read and toggle
-  // the current highlight list.
   setContext(BUBBLE_HIGHLIGHT_CONTEXT_NAME, {
     get highlighted() {
       return highlighted;
@@ -40,26 +29,17 @@
     highlighted = tag ? [tag] : [];
   }
 
-  // Every bubble/cluster registers its content here as soon as it mounts
-  // (regardless of whether it's ever clicked), so the sidebar can show a
-  // step straight from a shared `?step=` link or via the browser
-  // back/forward buttons.
+  // Every Section registers its content here as soon as it mounts
   let registry = $state<Record<string, FlowSidebarContent>>({});
   let activeId = $state<string | null>(null);
-  // Index into the active step's `children` pages array. A cluster can
-  // define multiple sidebar "pages" (see `_Cluster.svelte`'s `sidebar`
-  // prop); this tracks which one is currently shown, so "Zurück"/"Weiter"
-  // can cycle through them before moving on to the previous/next step.
+  // Index into the active step's `children` pages array
   let activePage = $state(0);
 
   const sidebarContent = $derived(
     activeId ? (registry[activeId] ?? null) : null,
   );
 
-  // All registered clusters' sidebar content, not just the active one -
-  // `_FlowSidebar.svelte` renders every entry (most `sr-only`, see there),
-  // so each stays reachable via `_Cluster.svelte`'s static `aria-owns`
-  // regardless of which cluster is currently active.
+  // All registered clusters' sidebar content
   const sidebarEntries = $derived(Object.values(registry));
 
   function register(entry: FlowSidebarContent) {
@@ -88,15 +68,8 @@
   let sidebarPanelEl: HTMLDivElement | undefined = $state();
 
   async function focusSidebar() {
-    // Wait for the DOM update triggered by `setActive` (new `activeId` ->
-    // new `sidebarContent` -> re-rendered panel content/aria-label) to
-    // flush, so focusing the panel announces the step that was just
-    // activated rather than whatever it showed before.
+    // Wait for the DOM update triggered by `setActive`
     await tick();
-    // `preventScroll`: the panel is already on-screen (sticky), and a
-    // Cluster's own click handler already smooth-scrolls its title into
-    // view - the browser's default focus-scroll would otherwise fight that
-    // animation with an instant jump.
     sidebarPanelEl?.focus({ preventScroll: true });
   }
 
@@ -139,8 +112,7 @@
     activePage = 0;
   }
 
-  // Ids of all currently registered Section steps, in registration
-  // order (which follows page/DOM order), used to cycle "Zurück"/"Weiter"
+  // Ids of all currently registered Section steps, used to cycle "Zurück"/"Weiter"
   // through steps of the same kind as the currently open one.
   const sectionIds = $derived(Object.values(registry).map((entry) => entry.id));
 
@@ -155,10 +127,6 @@
     })),
   );
 
-  // First/last treatment for `_FlowSidebar.svelte`'s "Zurück"/"Weiter" nav.
-  // Also requires being on the first/last *page* of that section, so a
-  // multi-page section's later/earlier pages don't hide "Zurück"/"Weiter"
-  // prematurely.
   const isFirstSection = $derived(
     !!sidebarContent && sidebarContent.id === sectionIds[0] && activePage === 0,
   );

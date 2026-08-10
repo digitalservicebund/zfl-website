@@ -1,26 +1,15 @@
 <script lang="ts">
   import type { Snippet } from "svelte";
 
-  let {
-    anchorName,
-    id,
-    children,
-  }: {
+  interface Props {
     /** CSS anchor name (e.g. "--bubble-anchor-c0") of the bubble circle
-     * this tooltip belongs to, set via the `anchor-name` property. Used to
-     * position the tooltip above that circle via CSS anchor positioning,
-     * see https://www.joshwcomeau.com/css/anchor-positioning/ */
+     * this tooltip belongs to */
     anchorName: string;
     id: string;
     children: Snippet;
-  } = $props();
+  }
 
-  // Positions the tooltip above its anchor's top edge, horizontally
-  // centered on it, using CSS anchor positioning instead of JS measuring.
-  // `fixed` (rather than `absolute`) is required so the browser can place
-  // the tooltip anywhere in the viewport regardless of its containing
-  // block, matching how anchor positioning is meant to be used.
-  const style = $derived(`position-anchor: ${anchorName};`);
+  let { anchorName, id, children }: Props = $props();
 </script>
 
 <div
@@ -28,7 +17,7 @@
   {id}
   role="tooltip"
   class="pointer-events-none z-90 py-8"
-  {style}
+  style={`position-anchor: ${anchorName};`}
 >
   <div class="bg-white w-300 text-left text-sm px-8">
     {@render children()}
@@ -36,23 +25,7 @@
 </div>
 
 <style>
-  /* The minimap in `_FlowLayout.svelte` renders a second, `inert`
-     clone of the whole flow purely to visualize it at a smaller scale.
-     That clone's tooltips are anchor-positioned via `position: fixed`,
-     which escapes the clone's scale transform and would otherwise render
-     at full size on top of the real content - so hide any tooltip found
-     within an inert ancestor via plain CSS, independent of the clone's
-     own (JS-driven) cleanup. */
-  :global([inert] [data-bubble-tooltip]) {
-    display: none;
-  }
-
-  /* Speech-bubble shape: a rounded rectangle with a small triangular tail
-     pointing down at the anchored bubble below it, drawn via `border-shape`
-     (falling back to an equivalent `clip-path` in browsers that don't
-     support it yet, which just clips the box without adding a real
-     stroke around the tail). Adapted from
-     https://www.joshwcomeau.com/css/anchor-positioning/ */
+  /* Speech-bubble shape, adapted from https://www.joshwcomeau.com/css/anchor-positioning/ */
   div[data-bubble-tooltip] {
     box-sizing: border-box;
     --r: 6px;

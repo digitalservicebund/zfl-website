@@ -15,13 +15,7 @@
     children,
     details,
     tag,
-    // Defaults to the wrapping Cluster's own color: `_FlowSidebar.svelte`
-    // sets `--content-color` on its wrapper from the active Cluster/Bubble's
-    // `color`, and Feature is only ever rendered inside a Cluster's
-    // `sidebar` snippet, so this always tracks that Cluster's color without
-    // needing it passed down explicitly (Svelte context wouldn't work here,
-    // since the sidebar snippet renders inside `_FlowSidebar.svelte`, not as
-    // a descendant of the Cluster that defines it).
+    // Defaults to the wrapping Sections's own color, set by `_FlowSidebar.svelte`
     color = "var(--content-color)",
   }: {
     children: Snippet;
@@ -37,16 +31,10 @@
   );
 
   // True only while a real mouse hover (not a click/tap) is previewing this
-  // Feature's highlight, so a subsequent click can pin it open instead of
-  // immediately toggling it back off, and hovering alone doesn't expand
-  // the details panel below.
+  // Feature's highlight
   let previewing = $state(false);
 
-  // Explicit state driven by click/tap rather than `:focus-within` — iOS
-  // Safari doesn't focus buttons on tap, so a focus-based active state
-  // never activates on touch. Deriving from the shared highlight list
-  // (rather than local state) also gives accordion behaviour for free:
-  // `toggleHighlighted` replaces the whole list, so opening one Feature
+  // Explicit state driven by click/tap, so opening one Feature
   // always closes any other that's open.
   const expanded = $derived(
     highlightContext.highlighted.includes(tag) && !previewing,
@@ -90,9 +78,8 @@
 </script>
 
 <div
-  class="group grid grid-cols-[auto_1fr_auto] items-start gap-x-(--feature-spacing) rounded-sm border border-(--border-color) [--feature-spacing:16px]"
+  class="group grid grid-cols-[auto_1fr_auto] items-start gap-x-(--feature-spacing) rounded-sm border border-(--border-color) [--feature-spacing:16px] [--border-color:var(--kern-color-decorative-border-default)]"
   title="Schritte hervorheben"
-  style="--border-color: var(--kern-color-decorative-border-default);"
 >
   <button
     type="button"
@@ -127,7 +114,8 @@
   </button>
   {#if details}
     <div
-      class={`md:col-start-2 max-md:col-span-3 max-md:col-start-1 grid transition-[grid-template-rows] duration-100 ease-in-out ${expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+      data-expanded={expanded ? "true" : undefined}
+      class="md:col-start-2 max-md:col-span-3 max-md:col-start-1 grid transition-[grid-template-rows] duration-100 ease-in-out grid-rows-[0fr] data-expanded:grid-rows-[1fr]"
     >
       <div class="overflow-hidden" aria-hidden={!expanded} inert={!expanded}>
         <div class="py-(--feature-spacing) max-md:px-(--feature-spacing)">

@@ -19,9 +19,7 @@
   {#each sections as section (section.id)}
     <button
       type="button"
-      class={`size-24 bg-(--dot-color) shrink-0 rounded-full outline-offset-2 ${
-        activeId === section.id ? "outline-2 outline-black" : ""
-      }`}
+      class="size-24 bg-(--dot-color) shrink-0 rounded-full outline-offset-2 aria-current:outline-2 aria-current:outline-black"
       tabIndex={-1}
       style={`--dot-color: ${section.color ?? "black"}`}
       title={section.title}

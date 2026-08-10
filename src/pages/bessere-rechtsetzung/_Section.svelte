@@ -18,25 +18,13 @@
     children,
     sidebar,
   }: {
-    /**
-     * Also doubles as this Section's identity in the shared sidebar/highlight
-     * state (see `highlightId`) and as the id every nested Cluster's
-     * highlight mirrors.
-     */
     title: string;
     /**
      * CSS anchor name (e.g. "--cluster-first") assigned to this section's
      * title dot, so it can be targeted from outside via `anchor()`.
      */
     anchorName?: string;
-    /**
-     * Fill color used for this section's title dot and for the sidebar's
-     * accent tint - independent of any nested Cluster's own `color`, since a
-     * group's later members (e.g. a trailing "highlightGroup" Cluster) may
-     * use a different color for their own bubbles.
-     */
     color?: string;
-    /** The Cluster(s)/Arrow(s) making up this section. */
     children: Snippet;
     /**
      * Sidebar content shown in the global sidebar.
@@ -99,12 +87,7 @@
   });
 
   // IntersectionObserver: Activates this section as soon as it crosses the
-  // viewport's midline while scrolling. One observer for the whole section
-  // (rather than one per nested Cluster) is enough - every member shares the
-  // same `title` identity, so the active window this produces is just the
-  // union of what per-Cluster observers would have produced. Suppressed
-  // while `navigateStep`'s `scrollIntoView` is auto-scrolling
-  // (`sidebarContext.isJumping`).
+  // viewport's midline while scrolling.
   $effect(() => {
     if (!rootEl) return;
 
@@ -133,11 +116,6 @@
     titleEl?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // Static - set once, never toggled by `isActive` - so this section's owned
-  // sidebar content (rendered by `_FlowSidebar.svelte`, see there) is always
-  // in this section's place in the accessibility tree, regardless of which
-  // section currently happens to be active. Matches the same condition
-  // `_FlowLayout.svelte`'s registration effect uses.
   const sidebarContentId = $derived(
     sidebarPages && sidebarPages.length > 0
       ? `sidebar-content-${id}`
@@ -153,7 +131,8 @@
 >
   <div class={titleWrapperClass}>
     <div
-      class={`size-28 border-2 border-white rounded-full transition-colors duration-300 outline-2 ${isActive ? "bg-(--bubble-color) outline-black" : "bg-black outline-transparent"}`}
+      data-active={isActive ? "true" : undefined}
+      class="size-28 border-2 border-white rounded-full transition-colors duration-300 outline-2 bg-black outline-transparent data-active:bg-(--bubble-color) data-active:outline-black"
       aria-hidden="true"
       style={anchorName ? `anchor-name: ${anchorName};` : undefined}
     ></div>

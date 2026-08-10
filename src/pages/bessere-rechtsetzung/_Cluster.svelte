@@ -5,7 +5,6 @@
     FLOW_SECTION_CONTEXT_NAME,
     type FlowSectionContext,
   } from "./_flowSection";
-  import { BUBBLE_COLOR_CONTEXT_NAME } from "./_bubbleColor";
   import {
     BUBBLE_SIZE_EM,
     RESPONSIVE_BUBBLE_FONT_CLASS,
@@ -184,29 +183,13 @@
     offset?: number;
     children?: Snippet;
     /**
-     * Each bubble's size, in the same order as the `<Bubble>`s rendered via
-     * `children` (default "md" per bubble — see `_Bubble.svelte`). Needed so
-     * the packing below can be computed from props alone, without measuring
-     * the rendered bubbles, which is what lets it run statically (e.g.
-     * during Astro's static-site generation) instead of only after mount.
+     * Each bubble's size,  so the packing below can be computed from
+     * props alone during Astro's static-site generation.
      */
     sizes?: BubbleSize[];
-    /**
-     * Accessible label for the group of (aria-hidden) bubbles rendered via
-     * `children` — e.g. "Schritte in dieser Phase: ...".
-     */
+    /** Accessible label for the group of (aria-hidden) child-bubbles  */
     ariaLabel?: string;
   } = $props();
-
-  // Exposes this cluster's color to descendant `_Bubble.svelte` instances as
-  // a plain value (not just the `--bubble-color` CSS custom property), so a
-  // bubble without its own `color` prop can still pass the inherited color
-  // along to the sidebar. Uses a getter so it stays live if `color` changes.
-  setContext(BUBBLE_COLOR_CONTEXT_NAME, {
-    get color() {
-      return color;
-    },
-  });
 
   // Reflects the enclosing `_Section.svelte`'s active state, if any - `undefined`
   // when this cluster isn't part of a Section (e.g. a standalone Cluster with
@@ -347,11 +330,7 @@
 </div>
 
 <style>
-  /* Overlap the soft halo rings of two adjacent clusters/sections (pulling
-     them --halo-thickness closer). `.flow-block` is shared with
-     `_Section.svelte`'s root, so this still applies across a Section
-     boundary - e.g. between a bare Cluster and a Section, or between two
-     Sections - not just between two bare Clusters. */
+  /* Overlap the soft halo rings of two adjacent clusters/sections */
   :global(.flow-block + .flow-block) {
     margin-top: var(--cluster-spacing);
   }

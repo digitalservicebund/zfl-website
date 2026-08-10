@@ -5,7 +5,7 @@
   import Bubble from "./_Bubble.svelte";
   import Arrow from "./_Arrow.svelte";
   import Feature from "./_Feature.svelte";
-  import OutTrigger from "./_OutTrigger.svelte";
+  import HideSidebarTrigger from "./_HideSidebarTrigger.svelte";
   import IconArrowDown from "~icons/ic/round-keyboard-double-arrow-down";
 
   const CLUSTER_FIRST_ANCHOR = "--cluster-first";
@@ -13,7 +13,7 @@
 </script>
 
 <FlowLayout>
-  <OutTrigger>
+  <HideSidebarTrigger>
     <div
       class="py-lg mx-auto max-w-200 flex flex-col items-center gap-8"
       aria-hidden="true"
@@ -21,7 +21,7 @@
       Scrollen Sie zum Starten
       <IconArrowDown class="block" />
     </div>
-  </OutTrigger>
+  </HideSidebarTrigger>
 
   <div
     aria-hidden="true"
@@ -40,7 +40,7 @@
       className="max-sm:hidden"
     ></Bubble>
     <Cluster color="#D59FDE" offset={0} sizes={["md"]}>
-      <Bubble color="#D59FDE" title="Aus der Mitte der Regierung"></Bubble>
+      <Bubble title="Aus der Mitte der Regierung"></Bubble>
     </Cluster>
     <Bubble
       color="#E6E6E6"
@@ -207,8 +207,7 @@
         tags={["Prozess", "Checks"]}
       ></Bubble>
       <Bubble title="Vorarbeit" size="sm" tags={["Prozess"]}>
-        Zieht Arbeit aus anderen Fach-Referaten über das Gesetzesthema
-        zusammen.
+        Zieht Arbeit aus anderen Fach-Referaten über das Gesetzesthema zusammen.
       </Bubble>
     </Cluster>
   </Section>
@@ -218,11 +217,10 @@
       <h3>Was passiert hier?</h3>
       <p>
         Sobald die Recherche abgeschlossen ist, erarbeitet das zuständige
-        Ressort den konkreten Rohentwurf und das dazugehörige Vorblatt.
-        Parallel dazu startet der fachliche Austausch, wobei optional schon
-        jetzt eine frühzeitige Beteiligung stattfinden und erste
-        Gesetzesfolgen besprochen werden können, um den Entwurf frühzeitig zu
-        schärfen.
+        Ressort den konkreten Rohentwurf und das dazugehörige Vorblatt. Parallel
+        dazu startet der fachliche Austausch, wobei optional schon jetzt eine
+        frühzeitige Beteiligung stattfinden und erste Gesetzesfolgen besprochen
+        werden können, um den Entwurf frühzeitig zu schärfen.
       </p>
     {/snippet}
 
@@ -232,8 +230,8 @@
       ariaLabel="Schritte in dieser Phase: Frühzeitige Beteiligung, Austausch, Vorblatt, Rohentwurf, Gesetzesfolgen besprechen"
     >
       <Bubble title="Frühzeitige Beteiligung" optional size="sm">
-        Von Betroffenen und Vollzug und anderen Wissensträgern (z.B.
-        Verbänden, Ländern, Kommunen, Wissenschaft)
+        Von Betroffenen und Vollzug und anderen Wissensträgern (z.B. Verbänden,
+        Ländern, Kommunen, Wissenschaft)
       </Bubble>
       <Bubble title="Austausch" size="sm">
         Austausch mit Netzwerk, Expert:innen, anderen Ministerien, ggf.
@@ -262,13 +260,12 @@
       <h3>Was passiert hier?</h3>
       <p>
         Der erste Rohentwurf ist fertig. Das federführende Referat holt nun
-        hausinternes Feedback ein und übergibt anschließend den Hausentwurf
-        zur Frühkoordinierung an das Bundeskanzleramt. Parallel dazu starten
-        die politischen Abstimmungen, Berichterstattergespräche und die
-        Gesetzesfolgenabschätzung. So werden rechtzeitig externe
-        Stellungnahmen von weiteren Ressorts sowie Prüfstellen (wie dem NKR)
-        eingeholt und der Entwurf strukturiert zum Ressortentwurf
-        weiterentwickelt.
+        hausinternes Feedback ein und übergibt anschließend den Hausentwurf zur
+        Frühkoordinierung an das Bundeskanzleramt. Parallel dazu starten die
+        politischen Abstimmungen, Berichterstattergespräche und die
+        Gesetzesfolgenabschätzung. So werden rechtzeitig externe Stellungnahmen
+        von weiteren Ressorts sowie Prüfstellen (wie dem NKR) eingeholt und der
+        Entwurf strukturiert zum Ressortentwurf weiterentwickelt.
       </p>
       <p>
         Abschließend informiert das Ressort die betroffenen Verbände und
@@ -317,8 +314,8 @@
       </Bubble>
       <Bubble title="Weitere Abstimmungen & Stellung&shy;nahmen" size="md">
         <p>
-          Es werden Stellungnahmen zum Hausentwurf eingeholt. Der
-          Ressortentwurf wird bei Bedarf angepasst.
+          Es werden Stellungnahmen zum Hausentwurf eingeholt. Der Ressortentwurf
+          wird bei Bedarf angepasst.
         </p>
         <ul>
           <li>Betroffene Ressorts</li>
@@ -354,12 +351,12 @@
     {#snippet sidebar()}
       <h3>Was passiert hier?</h3>
       <p>
-        Sobald die Abstimmungen zum Ressortentwurf abgeschlossen sind, wird
-        die offizielle Kabinettvorlage erstellt und durch die Leitung des
-        Hauses unterzeichnet. Anschließend erfolgt die Weiterleitung an das
+        Sobald die Abstimmungen zum Ressortentwurf abgeschlossen sind, wird die
+        offizielle Kabinettvorlage erstellt und durch die Leitung des Hauses
+        unterzeichnet. Anschließend erfolgt die Weiterleitung an das
         Bundeskanzleramt, womit der Gesetzentwurf formell an die politische
-        Ebene übergeben wird und aus ihm durch Beschluss der Bundesregierung
-        ein Regierungsentwurf entsteht.
+        Ebene übergeben wird und aus ihm durch Beschluss der Bundesregierung ein
+        Regierungsentwurf entsteht.
       </p>
     {/snippet}
 
@@ -376,8 +373,7 @@
       </Bubble>
       <Bubble title="Unterzeichnen der Kabinett&shy;vorlage" size="md">
         Die Kabinettvorlage wird unterzeichnet von Unterabteilungsleitung,
-        Abteilungsleitung und Hausleitung (bzw. Staatssekretär:in in
-        Vertretung)
+        Abteilungsleitung und Hausleitung (bzw. Staatssekretär:in in Vertretung)
       </Bubble>
     </Cluster>
 
@@ -402,11 +398,11 @@
       <h3>Was passiert hier?</h3>
       <p>
         Wenn die Bundesregierung den Entwurf an die gesetzgebenden Organe
-        übergeben hat, durchläuft das Vorhaben das eigentliche
-        parlamentarische Verfahren. Es beginnt in der Regel mit der
-        Stellungnahme des Bundesrates, führt über die intensive Beratung und
-        finale Abstimmung im Bundestag und endet schließlich mit der
-        formellen Verkündung des Gesetzes im Bundesgesetzblatt.
+        übergeben hat, durchläuft das Vorhaben das eigentliche parlamentarische
+        Verfahren. Es beginnt in der Regel mit der Stellungnahme des
+        Bundesrates, führt über die intensive Beratung und finale Abstimmung im
+        Bundestag und endet schließlich mit der formellen Verkündung des
+        Gesetzes im Bundesgesetzblatt.
       </p>
     {/snippet}
 
@@ -419,9 +415,8 @@
       <Bubble title="Stellungnahme Bundesrat" color="#D2EDB9">
         <h3>Weiterleitung an den Bundesrat</h3>
         <p>
-          Chef:in des Bundeskanzleramts setzt die Kabinettvorlage auf die
-          Agenda der Kabinettsitzung. Leitet die Kabinettvorlage an den
-          Bundesrat.
+          Chef:in des Bundeskanzleramts setzt die Kabinettvorlage auf die Agenda
+          der Kabinettsitzung. Leitet die Kabinettvorlage an den Bundesrat.
         </p>
         <h3>Stellungnahme</h3>
         <p>
@@ -429,8 +424,8 @@
           Wochen Stellung dazu.
         </p>
         <h3>Weiterleitung an den Bundestag</h3>
-        Leitet Vorlage mit Stellungnahme und Gegenäußerung an den/die
-        Präsident:in des Bundestages.
+        Leitet Vorlage mit Stellungnahme und Gegenäußerung an den/die Präsident:in
+        des Bundestages.
       </Bubble>
     </Cluster>
 
@@ -442,8 +437,8 @@
       <Bubble title="Abstimmung im Bundestag">
         <h3>Ausschuss</h3>
         <p>
-          Regelung wird an den zuständigen Ausschuss geleitet, dort geprüft
-          und bearbeitet. Im Ausschuss wird ein Bericht verfasst mit einer
+          Regelung wird an den zuständigen Ausschuss geleitet, dort geprüft und
+          bearbeitet. Im Ausschuss wird ein Bericht verfasst mit einer
           Beschlussempfehlung und dem Plenum vorgelegt.
         </p>
         <h3>Erste Lesung</h3>
@@ -494,8 +489,8 @@
         Das Gesetz wird im Bundesgesetzblatt verkündet. Danach schließen sich
         die abschließende Dokumentation und das offizielle Inkrafttreten der
         neuen Regelungen an. Damit verlässt das Gesetz den eigentlichen
-        Gesetzgebungsprozess und geht in den Vollzug über, wo die Regelungen
-        von den zuständigen Behörden der Länder und des Bundes in der Praxis
+        Gesetzgebungsprozess und geht in den Vollzug über, wo die Regelungen von
+        den zuständigen Behörden der Länder und des Bundes in der Praxis
         angewendet und umgesetzt werden.
       </p>
     {/snippet}
@@ -509,8 +504,8 @@
         <h3>Übergabe der Regelung an die Dokumentations&shy;stelle</h3>
         <h3>Dokumentation Gesetze</h3>
         <p>
-          Metadaten werden hinzugefügt (z. B. Ministerium, amtliche
-          Fundstelle, basiert auf EU-Verordnung, ...)
+          Metadaten werden hinzugefügt (z. B. Ministerium, amtliche Fundstelle,
+          basiert auf EU-Verordnung, ...)
         </p>
         <h3>Dokumentation Änderungsgesetze</h3>
         <p>
@@ -521,7 +516,9 @@
         <p>Die Regelung tritt in Kraft und wird veröffentlicht.</p>
         <ul>
           <li>Veröffentlichung auf gesetze-im-internet.de</li>
-          <li>Gesetz und Metadaten werden im Dokstellenportal veröffentlicht.</li>
+          <li>
+            Gesetz und Metadaten werden im Dokstellenportal veröffentlicht.
+          </li>
         </ul>
       </Bubble>
     </Cluster>
@@ -542,5 +539,5 @@
     </Cluster>
   </Section>
 
-  <OutTrigger />
+  <HideSidebarTrigger />
 </FlowLayout>
