@@ -11,5 +11,5 @@ export const slugify = (text: string): string =>
     // letter (e.g. "é" -> "e" + U+0301), leaving plain ASCII.
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+/, "")
-    .replace(/-+$/, "");
+    .replace(/^-/, "")
+    .replace(/-$/, "");
