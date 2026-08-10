@@ -198,6 +198,17 @@ export const ueber_zahlenUndFakten = {
   navLabel: null,
 } as const;
 
+export const ueber_zahlenUndFaktenNeu = {
+  key: "ueber_zahlenUndFaktenNeu",
+  path: "/ueber/zahlen-und-fakten-neu",
+  title: "Zahlen und Fakten (neu)",
+  parent: ueber,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
 export const werkzeuge = {
   key: "werkzeuge",
   path: "/werkzeuge",
@@ -238,6 +249,7 @@ export const allRoutes = [
   ueber_daranArbeitenWir,
   ueber_neueFruehphase,
   ueber_zahlenUndFakten,
+  ueber_zahlenUndFaktenNeu,
   werkzeuge,
   werkzeuge_praxistauglichkeit,
 ] as const;

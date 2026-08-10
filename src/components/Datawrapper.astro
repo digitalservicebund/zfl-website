@@ -1,0 +1,20 @@
+<slot />
+
+<script is:inline>
+  (function () {
+    function e() {
+      window.addEventListener("message", function (e) {
+        if (e.data["datawrapper-height"] !== void 0) {
+          const t = document.querySelectorAll("iframe");
+          for (const n in e.data["datawrapper-height"])
+            for (let r = 0, i; (i = t[r]); r++)
+              if (i.contentWindow === e.source) {
+                const a = e.data["datawrapper-height"][n] + "px";
+                i.style.height = a;
+              }
+        }
+      });
+    }
+    e();
+  })();
+</script>
