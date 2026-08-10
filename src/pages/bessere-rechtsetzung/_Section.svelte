@@ -49,18 +49,18 @@
         : [sidebar],
   );
 
-  // Registers this section's sidebar content as soon as it mounts
-  $effect(() => {
-    if (!sidebarPages || sidebarPages.length === 0) return;
-
+  // Registers this section's sidebar content synchronously (not inside an
+  // `$effect`) so it's part of the server-rendered markup too - `$effect`
+  // never runs during SSR, which otherwise left the sidebar panel and
+  // DotNav dots missing until hydration.
+  if (sidebarPages && sidebarPages.length > 0) {
     sidebarContext?.register({
       id,
       title,
       children: sidebarPages,
       color,
     });
-    return () => sidebarContext?.unregister(id);
-  });
+  }
 
   const isActive = $derived(sidebarContext?.activeId === id);
 

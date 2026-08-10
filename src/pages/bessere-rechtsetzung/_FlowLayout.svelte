@@ -46,10 +46,6 @@
     registry[entry.id] = entry;
   }
 
-  function unregister(id: string) {
-    delete registry[id];
-  }
-
   // Content for `id` is expected to already be in the registry - every
   // Bubble/Cluster registers itself as soon as it mounts, well before it can
   // be clicked.
@@ -232,7 +228,6 @@
       return jumping;
     },
     register,
-    unregister,
     toggle,
     setActive,
     activate,

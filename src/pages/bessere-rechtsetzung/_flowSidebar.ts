@@ -42,7 +42,6 @@ export interface FlowSidebarContext {
    * back/forward buttons, before the bubble has ever been clicked.
    */
   register(content: FlowSidebarContent): void;
-  unregister(id: string): void;
   /**
    * Opens the sidebar with the already-registered content for `id`, or
    * closes it if already open for that id.
