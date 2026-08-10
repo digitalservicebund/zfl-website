@@ -318,7 +318,7 @@
       </div>
 
       <div
-        role="img"
+        role={ariaLabel ? "img" : undefined}
         aria-label={ariaLabel}
         class={`relative rounded-full ${isFlexPositioned ? "flex items-center justify-center" : ""}`}
         style={`width: ${diameter}em; height: ${diameter}em; ${isFlexPositioned ? `gap: ${BUBBLE_PADDING}em;` : ""}`}
