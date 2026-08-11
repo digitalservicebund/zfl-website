@@ -37,7 +37,6 @@
     activeId ? (registry[activeId] ?? null) : null,
   );
 
-  // All registered clusters' sidebar content
   const sidebarEntries = $derived(Object.values(registry));
 
   function register(entry: FlowSidebarContent) {
@@ -48,42 +47,32 @@
     activeId = id;
   }
 
-  // Sidebar panel's root element (see `_FlowSidebar.svelte`'s `panelEl`
-  // bindable prop) - a focus target (`tabindex="-1"`) for `activate` below.
+  // Focus target for `activate` below - see FlowSidebar's `panelEl` bindable prop.
   let sidebarPanelEl: HTMLDivElement | undefined = $state();
 
   async function focusSidebar() {
-    // Wait for the DOM update triggered by `setActive`
-    await tick();
+    await tick(); // wait for the DOM update from setActive
     sidebarPanelEl?.focus({ preventScroll: true });
   }
 
-  // Explicit user interactions (e.g. clicking a Cluster's title button)
-  // move focus into the sidebar, so Tab continues into its content/nav
-  // instead of back into the rest of the flow diagram. Scroll-driven
-  // activation (`setActive`, called from `_Cluster.svelte`'s
-  // `IntersectionObserver`) deliberately does not do this - it would hijack
-  // focus mid-scroll.
+  // Moves focus into the sidebar for explicit interactions (e.g. clicking a
+  // Cluster title). Scroll-driven activation (setActive) must not do this -
+  // it would hijack focus mid-scroll.
   function activate(id: string) {
     setActive(id);
     void focusSidebar();
   }
 
-  // Marks the flow as "auto-scrolling" while `navigateStep`'s
-  // `scrollIntoView` animation is in flight, so `_Cluster.svelte`'s
-  // IntersectionObserver-driven `setActive` (triggered as clusters pass the
-  // viewport's midline during the smooth scroll) doesn't fight with the
-  // step explicitly requested here.
+  // True while navigateStep's scrollIntoView animation is in flight, so
+  // Section's IntersectionObserver-driven setActive doesn't fight with it.
   let jumping = $state(false);
   let jumpingTimeout: ReturnType<typeof setTimeout> | undefined;
 
   function startJump() {
     jumping = true;
     clearTimeout(jumpingTimeout);
-    // Safety net in case `scrollend` never fires (e.g. unsupported browser,
-    // or no actual scroll movement needed).
     jumpingTimeout = setTimeout(() => {
-      jumping = false;
+      jumping = false; // safety net if `scrollend` never fires
     }, 1000);
   }
 
@@ -96,13 +85,10 @@
     activeId = null;
   }
 
-  // Ids of all currently registered Section steps, used to cycle "Zurück"/"Weiter"
-  // through steps of the same kind as the currently open one.
+  // Registered Section ids, used to cycle "Zurück"/"Weiter".
   const sectionIds = $derived(Object.values(registry).map((entry) => entry.id));
 
-  // Section dots shown in `_DotNav.svelte`, in the same registration order
-  // as `sectionIds`. `title` is passed alongside the (now slugified) `id`
-  // so the dots' accessible label stays human-readable.
+  // Dots shown in DotNav, in registration order.
   const sectionDots = $derived(
     sectionIds.map((id) => ({
       id,
@@ -119,14 +105,10 @@
       sidebarContent.id === sectionIds[sectionIds.length - 1],
   );
 
-  // Scrolls `el` into view like `Element.scrollIntoView({ block: "start" })`,
-  // but clamps the target scroll position so it never scrolls past the
-  // point where the layout wrapper's bottom edge would rise above the
-  // viewport - beyond that point, `_FlowSidebar.svelte` (whose sticky
-  // containing block is this wrapper) starts scrolling away with the
-  // content instead of staying pinned. Most relevant for the last cluster
-  // ("Nach der Verkündung"), which would otherwise scroll the sidebar out of
-  // view.
+  // Scrolls `el` into view, but clamps the target position so it never
+  // scrolls past the point where FlowSidebar's sticky container (this
+  // wrapper) would start scrolling away with the content. Most relevant for
+  // the last cluster ("Nach der Verkündung").
   function scrollToStep(el: HTMLElement) {
     startJump();
     if (!wrapperEl) {
@@ -134,10 +116,7 @@
       return;
     }
 
-    // `scrollIntoView` honors `scroll-margin-top` (e.g. the cluster titles'
-    // `scroll-mt-40`) automatically, but reading `getBoundingClientRect()`
-    // directly doesn't - subtract it manually so the clamped scroll lands
-    // at the same offset the native call would have used.
+    // scrollIntoView honors scroll-margin-top automatically; getBoundingClientRect doesn't.
     const scrollMarginTop = parseFloat(
       getComputedStyle(el).scrollMarginTop || "0",
     );
@@ -176,8 +155,6 @@
     if (activeEl) scrollToStep(activeEl);
   }
 
-  // Clears the `jumping` flag once the auto-scroll triggered by
-  // `navigateStep` actually finishes.
   $effect(() => {
     window.addEventListener("scrollend", endJump);
     return () => window.removeEventListener("scrollend", endJump);
@@ -196,8 +173,7 @@
     close: closeSidebar,
   });
 
-  // The grid wrapper whose bottom edge bounds `_FlowSidebar.svelte`'s sticky
-  // positioning - see `scrollToStep`.
+  // Bounds FlowSidebar's sticky positioning - see scrollToStep.
   let wrapperEl: HTMLDivElement | undefined = $state();
 </script>
 

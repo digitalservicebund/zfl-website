@@ -11,26 +11,15 @@
     panelEl = $bindable(),
   }: {
     content: FlowSidebarContent | null;
-    /**
-     * Every registered cluster's content, not just `content` (the active
-     * one) - rendered unconditionally below so each stays reachable via
-     * `_Cluster.svelte`'s static `aria-owns` no matter which cluster is
-     * currently active.
-     */
+    /** Every registered cluster's content, rendered unconditionally so each
+     * stays reachable via Section's static `aria-owns` regardless of which is active. */
     entries: FlowSidebarContent[];
-    /** Whether `content` is the first cluster - hides the "Zurück" button. */
+    /** Hides the "Zurück" button on the first cluster. */
     isFirst?: boolean;
-    /**
-     * Whether `content` is the last cluster - "Weiter" then scrolls to the
-     * page's outro section instead of cycling back to the first cluster.
-     */
+    /** On the last cluster, "Weiter" scrolls to the outro instead of cycling back. */
     isLast?: boolean;
     onNavigate: (step: -1 | 1) => void;
-    /**
-     * The panel's root element, bound out to `_FlowLayout.svelte` so it can
-     * move keyboard focus here on an explicit Cluster activation (see
-     * `activate` in `_flowSidebar.ts`).
-     */
+    /** Bound out to FlowLayout so it can move focus here on explicit activation. */
     panelEl?: HTMLDivElement;
   } = $props();
 
@@ -58,15 +47,14 @@
 
   let dragStart: { pointerY: number; drawerHeight: number } | undefined;
 
-  function handleHandlePointerDown(event: PointerEvent) {
+  function handleDragStart(event: PointerEvent) {
     dragStart = { pointerY: event.clientY, drawerHeight };
     (event.currentTarget as HTMLElement).setPointerCapture(event.pointerId);
   }
 
-  function handleHandlePointerMove(event: PointerEvent) {
+  function handleDragMove(event: PointerEvent) {
     if (!dragStart) return;
-    // Dragging up (negative clientY delta) should grow the drawer, since the
-    // sheet is anchored to the bottom of the screen on mobile.
+    // Dragging up grows the drawer, since it's anchored to the bottom on mobile.
     const delta = dragStart.pointerY - event.clientY;
     const maxHeight = window.innerHeight * MAX_DRAWER_HEIGHT_RATIO;
     drawerHeight = Math.min(
@@ -75,7 +63,7 @@
     );
   }
 
-  function handleHandlePointerUp() {
+  function handleDragEnd() {
     dragStart = undefined;
   }
 </script>
@@ -103,10 +91,10 @@
           aria-label="Größe einstellen"
           data-sidebar-mobile-handle
           class="lg:hidden shrink-0 py-16 touch-none"
-          onpointerdown={handleHandlePointerDown}
-          onpointermove={handleHandlePointerMove}
-          onpointerup={handleHandlePointerUp}
-          onpointercancel={handleHandlePointerUp}
+          onpointerdown={handleDragStart}
+          onpointermove={handleDragMove}
+          onpointerup={handleDragEnd}
+          onpointercancel={handleDragEnd}
         >
           <div class="bg-[#D9D9D9] rounded-full h-10 w-55 mx-auto"></div>
         </button>

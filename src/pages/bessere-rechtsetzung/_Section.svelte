@@ -33,10 +33,8 @@
   // Slugified so it's safe to use as an HTML id
   const id = $derived(slugify(title));
 
-  // Registers this section's sidebar content synchronously (not inside an
-  // `$effect`) so it's part of the server-rendered markup too - `$effect`
-  // never runs during SSR, which otherwise left the sidebar panel and
-  // DotNav dots missing until hydration.
+  // Registered synchronously (not in `$effect`, which never runs during SSR)
+  // so the sidebar panel and DotNav dots exist in the server-rendered markup too.
   if (sidebar) {
     sidebarContext?.register({
       id,
@@ -51,8 +49,7 @@
   let rootEl: HTMLDivElement | undefined = $state();
   let titleEl: HTMLHeadingElement | undefined = $state();
 
-  // Tracks Tailwind's `max-sm` breakpoint, used only for the scroll-activation
-  // margin below.
+  // Tailwind's `max-sm` breakpoint, used only for the scroll-activation margin below.
   let isSmallScreen = $state(false);
   $effect(() => {
     const mql = window.matchMedia("(max-width: 639px)");

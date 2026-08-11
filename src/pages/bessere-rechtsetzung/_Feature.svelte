@@ -15,7 +15,7 @@
     children,
     details,
     tag,
-    // Defaults to the wrapping Sections's own color, set by `_FlowSidebar.svelte`
+    // Defaults to the wrapping Section's color, set by FlowSidebar.
     color = "var(--content-color)",
   }: {
     children: Snippet;
@@ -30,12 +30,10 @@
     BUBBLE_HIGHLIGHT_CONTEXT_NAME,
   );
 
-  // True only while a real mouse hover (not a click/tap) is previewing this
-  // Feature's highlight
+  // True only while a real mouse hover (not click/tap) is previewing this highlight.
   let previewing = $state(false);
 
-  // Explicit state driven by click/tap, so opening one Feature
-  // always closes any other that's open.
+  // Explicit click/tap state, so opening one Feature closes any other.
   const expanded = $derived(
     highlightContext.highlighted.includes(tag) && !previewing,
   );
@@ -50,7 +48,7 @@
   });
 
   function previewOn() {
-    // Don't steal the highlight from whichever Feature is pinned open.
+    // Don't steal the highlight from a Feature pinned open by click.
     if (!canHover || highlightContext.highlighted.length > 0) return;
     highlightContext.setHighlighted(tag);
     previewing = true;
@@ -64,7 +62,6 @@
 
   function toggle() {
     if (previewing) {
-      // Already highlighted by hover
       previewing = false;
       return;
     }

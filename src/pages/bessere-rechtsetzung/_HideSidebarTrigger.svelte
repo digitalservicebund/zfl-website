@@ -13,10 +13,9 @@
 
   let rootEl: HTMLDivElement | undefined = $state();
 
-  // Clears the active step once this hint (above the first cluster) crosses
-  // the viewport's midline, mirroring `_Cluster.svelte`'s scrollspy - so
-  // scrolling back up to the very start also resets the sidebar/DotNav
-  // highlight instead of leaving the last-active step highlighted.
+  // Closes the sidebar once this hint (above the first cluster) crosses the
+  // viewport's midline, mirroring Section's scrollspy - so scrolling back to
+  // the top resets the sidebar/DotNav highlight too.
   $effect(() => {
     if (!rootEl) return;
 

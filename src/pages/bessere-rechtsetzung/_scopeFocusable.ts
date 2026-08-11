@@ -2,14 +2,9 @@ const ORIGINAL_TABINDEX_ATTR = "data-scope-focusable-original-tabindex";
 const FOCUSABLE_SELECTOR =
   "a[href], button, input, select, textarea, [tabindex]";
 
-// Keeps `node`'s interactive descendants reachable by screen readers at all
-// times, while removing them from the sighted keyboard Tab sequence whenever
-// `active` is false. `tabindex="-1"` (unlike `inert`/`aria-hidden`/
-// `display:none`) only affects sequential focus navigation, not
-// accessibility-tree membership - swapping it for any of those would put
-// this cluster's owned sidebar content (see `_Cluster.svelte`'s static
-// `aria-owns`) back behind the same "is it active *right now*" race this
-// exists to avoid.
+// Removes `node`'s interactive descendants from the Tab order while `active`
+// is false, without hiding them from screen readers - unlike inert/aria-hidden/
+// display:none, tabindex="-1" only affects sequential focus navigation.
 export function scopeFocusable(node: HTMLElement, active: boolean) {
   function apply(isActive: boolean) {
     node.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR).forEach((el) => {
