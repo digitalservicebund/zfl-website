@@ -1,0 +1,141 @@
+---
+import "charts.css/dist/charts.min.css";
+
+export interface ChartDataPoint {
+  x: string | number;
+  y: number;
+}
+
+export interface ChartSeries {
+  label: string;
+  values: ChartDataPoint[];
+}
+
+interface Props {
+  data: ChartSeries[];
+  /** Stack series on top of each other instead of grouping them side by side. */
+  stack?: boolean;
+  /** Accessible name for the chart, exposed as a screen-reader-only table caption. */
+  title?: string;
+  class?: string;
+}
+
+const { data, stack = false, title, class: className } = Astro.props;
+
+const seriesColors = [
+  "var(--color-cosmic-blue-base)",
+  "var(--color-cosmic-blue-400)",
+];
+const colorFor = (index: number) => seriesColors[index % seriesColors.length];
+
+// Categories are taken from the first series; every series is expected to
+// provide one value per category, aligned by index.
+const categories = data[0]?.values.map((point) => String(point.x)) ?? [];
+
+const rows = categories.map((_, categoryIndex) =>
+  data.map((series) => series.values[categoryIndex]?.y ?? 0),
+);
+
+const axisMax = stack
+  ? Math.max(
+      0,
+      ...rows.map((row) => row.reduce((sum, value) => sum + value, 0)),
+    )
+  : Math.max(0, ...rows.flat());
+
+const isMultiSeries = data.length > 1;
+
+const chartClasses = [
+  "charts-css",
+  "column",
+  "show-labels",
+  "show-data-on-hover",
+  "data-spacing-10",
+  stack && "stacked",
+  isMultiSeries && !stack && "datasets-spacing-1",
+]
+  .filter(Boolean)
+  .join(" ");
+
+const colorVars = data
+  .map((_, index) => `--color-${index + 1}: ${colorFor(index)};`)
+  .join(" ");
+
+const formatValue = (value: number) => value.toLocaleString("de-DE");
+---
+
+<div class:list={["zfl-chart bg-lavender-200 p-24", className]}>
+  {title && <p class="font-bold">{title}</p>}
+  <table class={chartClasses} style={colorVars}>
+    {title && <caption>{title}</caption>}
+    <thead>
+      <tr>
+        <th scope="col"> </th>
+        {data.map((series) => <th scope="col">{series.label}</th>)}
+      </tr>
+    </thead>
+    <tbody>
+      {
+        categories.map((category, categoryIndex) => (
+          <tr>
+            <th scope="row">{category}</th>
+            {data.map((series, seriesIndex) => {
+              const value = series.values[categoryIndex]?.y ?? 0;
+              return (
+                <td
+                  style={`--size: ${axisMax > 0 ? value / axisMax : 0}; --color: ${colorFor(seriesIndex)};`}
+                  tabindex="0"
+                >
+                  <span class="data">{formatValue(value)}</span>
+                  <span class="tooltip">
+                    {series.label}: {formatValue(value)}
+                  </span>
+                </td>
+              );
+            })}
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+
+  {
+    isMultiSeries && (
+      <ul
+        class="charts-css legend legend-inline legend-circle"
+        style={colorVars}
+      >
+        {data.map((series) => (
+          <li>{series.label}</li>
+        ))}
+      </ul>
+    )
+  }
+</div>
+
+<style>
+  .zfl-chart .stacked tbody tr {
+    gap: 2px;
+  }
+
+  .zfl-chart .column {
+    --aspect-ratio: 4/3;
+
+    & tr th {
+      padding-top: 16px;
+    }
+  }
+
+  .zfl-chart td:focus-visible .tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .legend {
+    border: none;
+
+    & li::before {
+      border: none;
+    }
+  }
+</style>

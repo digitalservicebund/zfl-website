@@ -1,0 +1,107 @@
+---
+import Chart from "@/components/Chart.astro";
+import Hero from "@/components/Hero.astro";
+import { begleitungen, schulungen } from "@/config/routes";
+import Layout from "@/layouts/Layout.astro";
+import { regbegData, schulungenData, websiteData } from "./_dummyData";
+
+export const frontmatter = {
+  title: "Zahlen und Fakten (CSS)",
+  isStagingOnly: true,
+};
+
+const gridClass = "gap-24 py-md grid max-w-1000 grid-cols-1 md:grid-cols-2";
+const bigClass = "text-[4rem] font-bold block";
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero level="sub">
+      <h1>Bessere Rechtsetzung in Zahlen</h1>
+      <div slot="subtitle">
+        <p>Auf dem Weg zum Ziel ist das unser aktueller Fortschritt</p>
+      </div>
+    </Hero>
+
+    <section>
+      <h2>Vorhaben begleiten</h2>
+      <p>
+        <a href={begleitungen.path} class="kern-link">
+          <span
+            class="kern-icon kern-icon--arrow-forward kern-icon--default"
+            aria-hidden="true"></span>
+          Mehr zu unseren Regelungsbegleitungen erfahren
+        </a>
+      </p>
+
+      <div class={gridClass}>
+        <div class="row-span-2">
+          <Chart data={regbegData} title="14 Vorhaben begleitet" stack />
+        </div>
+
+        <div class="bg-lavender-200 p-24 text-2xl">
+          <p>
+            <span class={bigClass}>85 %</span> der Teilnehmenden würden das Format
+            weiterempfehlen
+          </p>
+        </div>
+        <div class="bg-lavender-200 p-24 text-2xl">
+          <p>
+            <span class={bigClass}>90 %</span> der Teilnehmenden haben in der Regelungsbegleitung
+            neue Methoden gelernt
+          </p>
+        </div>
+      </div>
+
+      <h2>Neue Kompetenzen vermitteln</h2>
+      <p>
+        <a href={schulungen.path} class="kern-link">
+          <span
+            class="kern-icon kern-icon--arrow-forward kern-icon--default"
+            aria-hidden="true"></span>
+          Mehr zu unseren Schulungen erfahren
+        </a>
+      </p>
+      <div class={gridClass}>
+        <div class="row-span-2">
+          <Chart
+            data={schulungenData}
+            title="70 Teilnehmende in Online-Schulungen"
+          />
+        </div>
+
+        <div class="bg-lavender-200 p-24 text-2xl">
+          <p>
+            <span class={bigClass}>85 %</span> der Teilnehmenden bewerten Zeit als
+            sinnvoll investiert
+          </p>
+        </div>
+        <div class="bg-lavender-200 p-24 text-2xl">
+          <p>
+            <span class={bigClass}>90 %</span> der Teilnehmenden haben Mehrwert neuer
+            Methoden verstanden
+          </p>
+        </div>
+      </div>
+
+      <h2>Durch digitale Angebote unterstützen</h2>
+      <div class={gridClass}>
+        <div class="bg-lavender-200 p-24 text-2xl">
+          <p>
+            <span class={bigClass}>7473</span> Website-Besuche in 2026
+          </p>
+        </div>
+        <div class="row-span-2">
+          <Chart data={websiteData} stack />
+        </div>
+        <div class="bg-lavender-200 p-24 text-2xl">
+          <p>
+            <span class={bigClass}>&gt; 10 Minuten</span> durchschnittliche Verweildauer
+          </p>
+        </div>
+      </div>
+
+      <p class="mt-md italic">Daten zuletzt aktualisiert am 1. August 2026</p>
+    </section>
+  </main>
+</Layout>

@@ -198,10 +198,21 @@ export const ueber_zahlenUndFakten = {
   navLabel: null,
 } as const;
 
-export const ueber_zahlenUndFaktenNeu = {
-  key: "ueber_zahlenUndFaktenNeu",
-  path: "/ueber/zahlen-und-fakten-neu",
-  title: "Zahlen und Fakten (neu)",
+export const ueber_zahlenUndFaktenCss = {
+  key: "ueber_zahlenUndFaktenCss",
+  path: "/ueber/zahlen-und-fakten-css",
+  title: "Zahlen und Fakten (CSS)",
+  parent: ueber,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
+export const ueber_zahlenUndFaktenDatawrapper = {
+  key: "ueber_zahlenUndFaktenDatawrapper",
+  path: "/ueber/zahlen-und-fakten-datawrapper",
+  title: "Zahlen und Fakten (Datawrapper)",
   parent: ueber,
   sitemap: true,
   isStagingOnly: true,
@@ -249,7 +260,8 @@ export const allRoutes = [
   ueber_daranArbeitenWir,
   ueber_neueFruehphase,
   ueber_zahlenUndFakten,
-  ueber_zahlenUndFaktenNeu,
+  ueber_zahlenUndFaktenCss,
+  ueber_zahlenUndFaktenDatawrapper,
   werkzeuge,
   werkzeuge_praxistauglichkeit,
 ] as const;
