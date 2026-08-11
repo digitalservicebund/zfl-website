@@ -1,6 +1,6 @@
 ---
 import Hero from "@/components/Hero.astro";
-import { begleitungen } from "@/config/routes";
+import { begleitungen, schulungen } from "@/config/routes";
 import Layout from "@/layouts/Layout.astro";
 import Datawrapper from "@/components/Datawrapper.astro";
 
@@ -43,6 +43,41 @@ export const frontmatter = {
           data-external="1"></iframe>
       </div>
 
+      <h2>Schulungen</h2>
+      <p>
+        <a href={schulungen.path} class="kern-link">
+          <span
+            class="kern-icon kern-icon--arrow-forward kern-icon--default"
+            aria-hidden="true"></span>
+          Mehr zu unseren Schulungen erfahren
+        </a>
+      </p>
+
+      <div class="gap-lg py-md grid max-w-900 grid-cols-1 md:grid-cols-2">
+        <Datawrapper>
+          <iframe
+            class="row-span-2"
+            title="x Vorhaben begleitet (dummy)"
+            aria-label="Säulendiagramm (gruppiert)"
+            id="datawrapper-chart-3chbq"
+            src="https://datawrapper.dwcdn.net/3chbq/2/"
+            style="width: 0; min-width: 100% !important; border: none;"
+            height="500"
+            data-external="1"></iframe>
+        </Datawrapper>
+        <div class="bg-lavender-200 p-24 text-2xl">
+          <p>
+            <span class="text-5xl font-bold">85 %</span> der Teilnehmenden bewerten
+            Zeit als sinnvoll investiert
+          </p>
+        </div>
+        <div class="bg-lavender-200 p-24 text-2xl">
+          <p>
+            <span class="text-5xl font-bold">90 %</span> der Teilnehmenden haben Mehrwert
+            neuer Methoden verstanden
+          </p>
+        </div>
+      </div>
       <h2>Vorhaben begleiten</h2>
       <p>
         <a href={begleitungen.path} class="kern-link">
