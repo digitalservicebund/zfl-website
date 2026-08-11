@@ -46,14 +46,6 @@
     registry[entry.id] = entry;
   }
 
-  // Content for `id` is expected to already be in the registry - every
-  // Bubble/Cluster registers itself as soon as it mounts, well before it can
-  // be clicked.
-  function toggle(id: string) {
-    activeId = activeId === id ? null : id;
-    activePage = 0;
-  }
-
   function setActive(id: string) {
     activeId = id;
     activePage = 0;
@@ -228,7 +220,6 @@
       return jumping;
     },
     register,
-    toggle,
     setActive,
     activate,
     close: closeSidebar,

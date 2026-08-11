@@ -43,11 +43,6 @@ export interface FlowSidebarContext {
    */
   register(content: FlowSidebarContent): void;
   /**
-   * Opens the sidebar with the already-registered content for `id`, or
-   * closes it if already open for that id.
-   */
-  toggle(id: string): void;
-  /**
    * Silently switches the active id, e.g. from a scroll-driven
    * `IntersectionObserver` (see `_Cluster.svelte`) - never moves keyboard
    * focus, since that would hijack focus mid-scroll. Use `activate` instead

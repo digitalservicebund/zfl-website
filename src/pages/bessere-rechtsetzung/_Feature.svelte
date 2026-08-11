@@ -64,8 +64,7 @@
 
   function toggle() {
     if (previewing) {
-      // Already highlighted by hover - clicking pins it open rather than
-      // toggling it straight back off.
+      // Already highlighted by hover
       previewing = false;
       return;
     }
