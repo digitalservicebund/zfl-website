@@ -1,14 +1,7 @@
 ---
 import Self from "@/components/global/AccordeonMenuLevel.astro";
 import { twMerge } from "tailwind-merge";
-
-export type AccordeonNavigationEntry = {
-  path: string;
-  label: string;
-  children: AccordeonNavigationEntry[];
-  isCurrent: boolean;
-  isInCurrentBranch: boolean;
-};
+import type { AccordeonNavigationEntry } from "@/utils/navigation/accordion";
 
 interface Props {
   entries: AccordeonNavigationEntry[];
