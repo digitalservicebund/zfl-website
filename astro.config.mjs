@@ -68,13 +68,6 @@ export default defineConfig({
       // it's an Astro-only component.
       Icons({ compiler: "svelte" }),
     ],
-    build: {
-      // lightningcss (Vite's default CSS minifier) doesn't yet parse the
-      // CSS anchor positioning "anchored" container query syntax used in
-      // _Tooltip.svelte (see https://www.joshwcomeau.com/css/anchor-positioning/),
-      // so fall back to esbuild for CSS minification.
-      cssMinify: "esbuild",
-    },
   },
   prefetch: {
     prefetchAll: true,

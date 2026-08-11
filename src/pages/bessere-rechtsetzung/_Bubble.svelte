@@ -5,7 +5,6 @@
     BUBBLE_HIGHLIGHT_CONTEXT_NAME,
     type BubbleHighlightContext,
   } from "./_bubbleHighlight";
-  import Tooltip from "./_Tooltip.svelte";
   import BubbleIcon from "./_BubbleIcon.svelte";
   import { iconMap, type TagName } from "./_icons.ts";
   import {
@@ -126,9 +125,7 @@
       </div>
     </div>
     {#if children && active}
-      <Tooltip {anchorName} id={uid}>
-        {@render children()}
-      </Tooltip>
+      <!-- Tooltip here -->
     {/if}
   {/snippet}
 
