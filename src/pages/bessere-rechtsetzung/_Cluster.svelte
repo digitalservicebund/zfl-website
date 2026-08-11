@@ -1,10 +1,6 @@
 <script lang="ts">
-  import { getContext, setContext } from "svelte";
+  import { setContext } from "svelte";
   import type { Snippet } from "svelte";
-  import {
-    FLOW_SECTION_CONTEXT_NAME,
-    type FlowSectionContext,
-  } from "./_flowSection";
   import {
     BUBBLE_SIZE_EM,
     RESPONSIVE_BUBBLE_FONT_CLASS,
@@ -191,14 +187,6 @@
     ariaLabel?: string;
   } = $props();
 
-  // Reflects the enclosing `_Section.svelte`'s active state, if any - `undefined`
-  // when this cluster isn't part of a Section (e.g. a standalone Cluster with
-  // no title/highlight identity of its own).
-  const sectionContext = getContext<FlowSectionContext | undefined>(
-    FLOW_SECTION_CONTEXT_NAME,
-  );
-  const isActive = $derived(sectionContext?.isActive ?? false);
-
   // Tracks Tailwind's `max-sm` breakpoint, used only for the horizontal
   // jitter range below (unrelated to bubble packing, which is now static).
   let isSmallScreen = $state(false);
@@ -298,7 +286,7 @@
   <div class={contentWrapperClass} role="presentation">
     <div
       role="presentation"
-      class={`relative flex items-center justify-center ${RESPONSIVE_BUBBLE_FONT_CLASS} ${isActive ? "z-10" : ""}`}
+      class={`relative flex items-center justify-center ${RESPONSIVE_BUBBLE_FONT_CLASS}`}
       style={`width: calc(${diameter}em + 2 * var(--halo-thickness)); height: calc(${diameter}em + 2 * var(--halo-thickness)); margin-left: ${offset ?? clusterOffset}px; --halo-color: color-mix(in srgb, ${color} 20%, white)`}
     >
       <!-- Isolated so the halo/dashed-circle negative z-indices only stack

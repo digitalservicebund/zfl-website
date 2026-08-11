@@ -1,14 +1,10 @@
 <script lang="ts">
-  import { getContext, setContext } from "svelte";
+  import { getContext } from "svelte";
   import type { Snippet } from "svelte";
   import {
     FLOW_SIDEBAR_CONTEXT_NAME,
     type FlowSidebarContext,
   } from "./_flowSidebar";
-  import {
-    FLOW_SECTION_CONTEXT_NAME,
-    type FlowSectionContext,
-  } from "./_flowSection";
   import { slugify } from "@/utils/slugify";
 
   let {
@@ -63,14 +59,6 @@
   }
 
   const isActive = $derived(sidebarContext?.activeId === id);
-
-  // Exposed to nested `_Cluster.svelte` instances that have no title/highlight
-  // identity of their own, so they can still reflect the group's active state.
-  setContext<FlowSectionContext>(FLOW_SECTION_CONTEXT_NAME, {
-    get isActive() {
-      return isActive;
-    },
-  });
 
   let rootEl: HTMLDivElement | undefined = $state();
   let titleEl: HTMLHeadingElement | undefined = $state();
