@@ -11,6 +11,7 @@
     "clean:deps": "pnpm knip",
     "dev": "pnpm sync && pnpm build:search-index && PUBLIC_STAGE=development astro dev",
     "dev:preview": "PUBLIC_STAGE=preview PREVIEW_BASE_PATH=/preview astro dev",
+    "cms": "npx npx decap-server",
     "docker:build": "docker build --load -t zfl-website .",
     "docker:run": "docker run -d -p 8080:8080 --name zfl-website zfl-website:latest",
     "docker:stop": "docker stop zfl-website || true && docker rm zfl-website",

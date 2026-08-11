@@ -1,7 +1,11 @@
-backend:
-  name: test-repo # In-browser mock backend for local testing only, no server or auth required
+local_backend: true # reads/writes the local repo via `npx decap-server`
 
-media_folder: "public/images"
+backend:
+  name: github
+  repo: digitalservicebund/zfl-website
+  branch: main
+
+media_folder: "src/images"
 public_folder: "/images"
 
 collections:
@@ -12,6 +16,8 @@ collections:
     create: true
     extension: "md"
     format: "frontmatter"
+    media_folder: ""
+    public_folder: ""
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - label: "Type"
