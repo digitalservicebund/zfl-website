@@ -5,7 +5,6 @@
   let {
     content,
     entries,
-    page = 0,
     isFirst = false,
     isLast = false,
     onNavigate,
@@ -19,12 +18,6 @@
      * currently active.
      */
     entries: FlowSidebarContent[];
-    /**
-     * Index of the currently shown page within `content.children`, for
-     * clusters with more than one sidebar "page" (see `_Cluster.svelte`'s
-     * `sidebar` prop).
-     */
-    page?: number;
     /** Whether `content` is the first cluster - hides the "Zurück" button. */
     isFirst?: boolean;
     /**
@@ -33,8 +26,6 @@
      */
     isLast?: boolean;
     onNavigate: (step: -1 | 1) => void;
-    /** Jumps directly to a given page index within the active step. */
-    onSelectPage: (page: number) => void;
     /**
      * The panel's root element, bound out to `_FlowLayout.svelte` so it can
      * move keyboard focus here on an explicit Cluster activation (see
@@ -55,17 +46,10 @@
 
   $effect(() => {
     void content;
-    void page;
     if (scrollContainer) scrollContainer.scrollTop = 0;
   });
 
   const isOpen = $derived(content !== null);
-  const pageCount = $derived(content?.children.length ?? 0);
-  // "Weiter" advances to a new cluster (rather than just the next page
-  // within the current cluster) only
-  // when the current cluster's last page is shown and there's a following
-  // cluster to move on to (i.e. not `isLast`).
-  const nextIsNewCluster = $derived(!isLast && page === pageCount - 1);
 
   let drawerHeight = $state(300); // px
 
@@ -155,15 +139,7 @@
             class={isEntryActive ? "" : "sr-only"}
             use:scopeFocusable={isEntryActive}
           >
-            {#if isEntryActive}
-              {@render entry.children[
-                Math.min(page, entry.children.length - 1)
-              ]()}
-            {:else}
-              {#each entry.children as entryPage, i (i)}
-                {@render entryPage()}
-              {/each}
-            {/if}
+            {@render entry.child()}
           </div>
         {/each}
       </div>
@@ -187,7 +163,7 @@
             onclick={handleWeiterClick}
           >
             <span class="kern-label"
-              >{nextIsNewCluster ? "Zur nächsten Phase" : "Weiter"}</span
+              >{isLast ? "Weiter" : "Zur nächsten Phase"}</span
             >
           </button>
         </div>

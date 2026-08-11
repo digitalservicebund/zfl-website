@@ -32,8 +32,6 @@
   // Every Section registers its content here as soon as it mounts
   let registry = $state<Record<string, FlowSidebarContent>>({});
   let activeId = $state<string | null>(null);
-  // Index into the active step's `children` pages array
-  let activePage = $state(0);
 
   const sidebarContent = $derived(
     activeId ? (registry[activeId] ?? null) : null,
@@ -48,7 +46,6 @@
 
   function setActive(id: string) {
     activeId = id;
-    activePage = 0;
   }
 
   // Sidebar panel's root element (see `_FlowSidebar.svelte`'s `panelEl`
@@ -97,7 +94,6 @@
 
   function closeSidebar() {
     activeId = null;
-    activePage = 0;
   }
 
   // Ids of all currently registered Section steps, used to cycle "Zurück"/"Weiter"
@@ -116,12 +112,11 @@
   );
 
   const isFirstSection = $derived(
-    !!sidebarContent && sidebarContent.id === sectionIds[0] && activePage === 0,
+    !!sidebarContent && sidebarContent.id === sectionIds[0],
   );
   const isLastSection = $derived(
     !!sidebarContent &&
-      sidebarContent.id === sectionIds[sectionIds.length - 1] &&
-      activePage === sidebarContent.children.length - 1,
+      sidebarContent.id === sectionIds[sectionIds.length - 1],
   );
 
   // Scrolls `el` into view like `Element.scrollIntoView({ block: "start" })`,
@@ -165,15 +160,6 @@
   function navigateStep(step: -1 | 1) {
     if (!sidebarContent) return;
 
-    // Cycle through this step's own sidebar pages first (see
-    // `_Cluster.svelte`'s `sidebar` prop), only advancing to the
-    // previous/next cluster/bubble once the first/last page is reached.
-    const nextPage = activePage + step;
-    if (nextPage >= 0 && nextPage < sidebarContent.children.length) {
-      activePage = nextPage;
-      return;
-    }
-
     const ids = sectionIds;
     if (ids.length === 0) return;
 
@@ -186,23 +172,8 @@
     if (!nextContent) return;
 
     activeId = nextContent.id;
-    // Land on the new step's first page when moving forward ("Weiter"), or
-    // its last page when moving backward ("Zurück"), so the "Zurück"/
-    // "Weiter" buttons always move exactly one page at a time through a
-    // continuous sequence instead of jumping to the same page index in the
-    // next step.
-    activePage = step === 1 ? 0 : nextContent.children.length - 1;
     const activeEl = document.getElementById(nextContent.id);
     if (activeEl) scrollToStep(activeEl);
-  }
-
-  // Jumps directly to a given page within the active step, e.g. when a
-  // `_Stepper.svelte` element is clicked, rather than only stepping by ±1.
-  function selectPage(index: number) {
-    if (!sidebarContent) return;
-    if (index < 0 || index >= sidebarContent.children.length) return;
-
-    activePage = index;
   }
 
   // Clears the `jumping` flag once the auto-scroll triggered by
@@ -251,10 +222,8 @@
     bind:panelEl={sidebarPanelEl}
     content={sidebarContent}
     entries={sidebarEntries}
-    page={activePage}
     isFirst={isFirstSection}
     isLast={isLastSection}
     onNavigate={navigateStep}
-    onSelectPage={selectPage}
   />
 </div>

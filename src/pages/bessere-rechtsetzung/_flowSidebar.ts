@@ -11,15 +11,8 @@ export interface FlowSidebarContent {
   /** Unique identifier of the bubble whose content is shown, e.g. its title. */
   id: string;
   title: string;
-  /**
-   * Sidebar "pages" for this step, always normalized to an array (even for
-   * a single page) so `_FlowSidebar.svelte`/`_FlowLayout.svelte` don't need
-   * to special-case the single-page case. When a `_Cluster.svelte` defines
-   * more than one page, `_FlowLayout.svelte`'s "Zurück"/"Weiter" navigation
-   * cycles through these pages before moving on to the previous/next
-   * cluster.
-   */
-  children: Snippet[];
+  /** Sidebar content shown in the global sidebar while this step is active. */
+  child: Snippet;
   /**
    * Fill color of the cluster that opened this content
    */

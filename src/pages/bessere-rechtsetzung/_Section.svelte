@@ -22,11 +22,8 @@
     anchorName?: string;
     color?: string;
     children: Snippet;
-    /**
-     * Sidebar content shown in the global sidebar.
-     * Accepts either a single `Snippet` or an array of `Snippet`s (multi-page).
-     */
-    sidebar?: Snippet | Snippet[];
+    /** Sidebar content shown in the global sidebar. */
+    sidebar?: Snippet;
   } = $props();
 
   const sidebarContext = getContext<FlowSidebarContext | undefined>(
@@ -36,24 +33,15 @@
   // Slugified so it's safe to use as an HTML id
   const id = $derived(slugify(title));
 
-  // Normalizes `sidebar` to an array of pages
-  const sidebarPages = $derived(
-    sidebar === undefined
-      ? undefined
-      : Array.isArray(sidebar)
-        ? sidebar
-        : [sidebar],
-  );
-
   // Registers this section's sidebar content synchronously (not inside an
   // `$effect`) so it's part of the server-rendered markup too - `$effect`
   // never runs during SSR, which otherwise left the sidebar panel and
   // DotNav dots missing until hydration.
-  if (sidebarPages && sidebarPages.length > 0) {
+  if (sidebar) {
     sidebarContext?.register({
       id,
       title,
-      children: sidebarPages,
+      child: sidebar,
       color,
     });
   }
@@ -105,9 +93,7 @@
   };
 
   const sidebarContentId = $derived(
-    sidebarPages && sidebarPages.length > 0
-      ? `sidebar-content-${id}`
-      : undefined,
+    sidebar ? `sidebar-content-${id}` : undefined,
   );
 </script>
 
