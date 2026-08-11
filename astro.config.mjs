@@ -57,6 +57,9 @@ export default defineConfig({
   },
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      cssMinify: "esbuild",
+    },
   },
   prefetch: {
     prefetchAll: true,
