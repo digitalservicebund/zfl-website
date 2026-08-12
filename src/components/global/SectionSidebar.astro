@@ -21,11 +21,6 @@ const showSidebar = !!sectionRoot && hasVisibleChildren(sectionRoot);
         sectionRoot={sectionRoot}
         currentPath={currentRoute.path}
       />
-      {Astro.slots.has("extra") && (
-        <div class="sticky">
-          <slot name="extra" />
-        </div>
-      )}
     </nav>
   )
 }
