@@ -220,10 +220,11 @@
         Der erste Rohentwurf ist fertig. Das federführende Referat holt nun
         hausinternes Feedback ein und übergibt anschließend den Hausentwurf zur
         Frühkoordinierung an das Bundeskanzleramt. Parallel dazu starten die
-        politischen Abstimmungen, Berichterstattergespräche und die finale
-        Gesetzesfolgenabschätzung. So werden rechtzeitig externe Stellungnahmen
-        von weiteren Ressorts sowie Prüfstellen (wie dem NKR) eingeholt und der
-        Entwurf strukturiert zum Ressortentwurf weiterentwickelt.
+        politischen Abstimmungen, Bericht&shy;erstatter&shy;gespräche und die
+        finale Gesetzesfolgen&shy;abschätzung. So werden rechtzeitig externe
+        Stellungnahmen von weiteren Ressorts sowie Prüfstellen (wie dem NKR)
+        eingeholt und der Entwurf strukturiert zum Ressortentwurf
+        weiterentwickelt.
       </p>
       <p>
         Abschließend informiert das Ressort die betroffenen Verbände und
