@@ -205,11 +205,11 @@
       sizes={["sm", "sm", "sm", "sm", "sm"]}
       ariaLabel="Schritte in dieser Phase: Frühzeitige Beteiligung, Austausch, Vorblatt, Erster Textentwurf, Gesetzesfolgen besprechen"
     >
-      <Bubble title="Frühzeitige Beteiligung" optional size="sm" />
+      <Bubble title="Gesetzesfolgen besprechen" optional size="sm" />
       <Bubble title="Austausch" size="sm" />
       <Bubble title="Vorblatt" size="sm" />
       <Bubble title="Erster Textentwurf" size="sm" />
-      <Bubble title="Gesetzesfolgen besprechen" optional size="sm" />
+      <Bubble title="Frühzeitige Beteiligung" optional size="sm" />
     </Cluster>
   </Section>
 
