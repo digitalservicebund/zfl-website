@@ -161,7 +161,7 @@
       color="#B3B7E0"
       offset={0}
       sizes={["lg", "md", "sm", "sm", "md", "sm", "md", "sm"]}
-      ariaLabel="Schritte in dieser Phase: Workshops mit Ländern und Kommunen, Erarbeiten von Eckpunkten, Vorschläge von Verbänden, Gesetzesumfeld, Gutachten und Sachverständigenkommissionen, Materialrecherche, Ziel- und Wirkungsdefinition, Vorarbeit"
+      ariaLabel="Schritte in dieser Phase: Workshops mit Ländern und Kommunen, Erarbeiten von Eckpunkten, Vorschläge von externen Akteuren, Gesetzesumfeld, Gutachten und Sachverständigenkommissionen, Materialrecherche, Ziel- und Wirkungsdefinition, Vorarbeit"
     >
       <Bubble
         title="Workshops mit Ländern und Kommunen"
