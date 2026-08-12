@@ -1,0 +1,126 @@
+<script lang="ts">
+  import { getContext } from "svelte";
+  import type { Snippet } from "svelte";
+  import {
+    FLOW_SIDEBAR_CONTEXT_NAME,
+    type FlowSidebarContext,
+  } from "./_flowSidebar";
+  import { slugify } from "@/utils/slugify";
+
+  let {
+    title,
+    anchorName,
+    color,
+    children,
+    sidebar,
+    overlap,
+  }: {
+    title: string;
+    /**
+     * CSS anchor name (e.g. "--cluster-first") assigned to this section's
+     * title dot, so it can be targeted from outside via `anchor()`.
+     */
+    anchorName?: string;
+    color?: string;
+    children: Snippet;
+    /** Sidebar content shown in the global sidebar. */
+    sidebar?: Snippet;
+    /** Controls --space-factor for visual overlap with previous section/cluster (desktop-only) */
+    overlap?: boolean;
+  } = $props();
+
+  const sidebarContext = getContext<FlowSidebarContext | undefined>(
+    FLOW_SIDEBAR_CONTEXT_NAME,
+  );
+
+  // Slugified so it's safe to use as an HTML id
+  const id = $derived(slugify(title));
+
+  // Registered synchronously (not in `$effect`, which never runs during SSR)
+  // so the sidebar panel and DotNav dots exist in the server-rendered markup too.
+  if (sidebar) {
+    sidebarContext?.register({
+      id,
+      title,
+      child: sidebar,
+      color,
+    });
+  }
+
+  const isActive = $derived(sidebarContext?.activeId === id);
+
+  let rootEl: HTMLDivElement | undefined = $state();
+  let titleEl: HTMLHeadingElement | undefined = $state();
+
+  // Tailwind's `max-sm` breakpoint, used only for the scroll-activation margin below.
+  let isSmallScreen = $state(false);
+  $effect(() => {
+    const mql = window.matchMedia("(max-width: 639px)");
+    isSmallScreen = mql.matches;
+    const onChange = (e: MediaQueryListEvent) => (isSmallScreen = e.matches);
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
+  });
+
+  // IntersectionObserver: Activates this section as soon as it crosses the
+  // viewport's midline while scrolling.
+  $effect(() => {
+    if (!rootEl) return;
+
+    const rootMargin = isSmallScreen
+      ? "-15% 0px -85% 0px"
+      : "-50% 0px -50% 0px";
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !sidebarContext?.isJumping) {
+          sidebarContext?.setActive(id);
+        }
+      },
+      { rootMargin },
+    );
+
+    observer.observe(rootEl);
+    return () => observer.disconnect();
+  });
+
+  const titleWrapperClass =
+    "z-20 flex gap-16 top-0 left-16 flex-row items-center self-start max-md:my-(--halo-thickness) max-md:ml-16 md:absolute md:left-[4vw]";
+
+  const activate = () => {
+    sidebarContext?.activate(id);
+    titleEl?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const sidebarContentId = $derived(
+    sidebar ? `sidebar-content-${id}` : undefined,
+  );
+</script>
+
+<div
+  bind:this={rootEl}
+  class="flow-block relative w-full [--halo-thickness:24px] md:[--halo-thickness:40px] [--space-factor:1] md:[--space-factor:-1] md:data-overlap:[--space-factor:-2.5] [--cluster-spacing:calc(var(--space-factor)*var(--halo-thickness))]"
+  aria-owns={sidebarContentId}
+  data-overlap={overlap ?? undefined}
+  style={color ? `--bubble-color: ${color}` : undefined}
+>
+  <div class={titleWrapperClass}>
+    <div
+      data-active={isActive ? "true" : undefined}
+      class="size-28 border-2 border-white rounded-full transition-colors duration-300 outline-2 bg-black outline-transparent data-active:bg-(--bubble-color) data-active:outline-black"
+      aria-hidden="true"
+      style={anchorName ? `anchor-name: ${anchorName};` : undefined}
+    ></div>
+    <h2
+      {id}
+      bind:this={titleEl}
+      class="kern-heading-small scroll-mt-40 my-0! bg-black text-white px-4 focus-within:outline-2 outline-offset-2 outline-(--kern-color-action-focus-default)"
+    >
+      <button type="button" class="focus:outline-none" onclick={activate}>
+        {title}
+      </button>
+    </h2>
+  </div>
+
+  {@render children()}
+</div>

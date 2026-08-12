@@ -2,12 +2,14 @@
 import alpinejs from "@astrojs/alpinejs";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
+import svelte from "@astrojs/svelte";
 import tailwindcss from "@tailwindcss/vite";
 import icon from "astro-icon";
 import pagefind from "astro-pagefind";
 import { generateRoutes } from "astro-route-generator";
 import { defineConfig } from "astro/config";
 import process from "node:process";
+import Icons from "unplugin-icons/vite";
 import { allRoutes } from "./src/config/routes.ts";
 
 const isPreview = process.env.PUBLIC_STAGE === "preview";
@@ -51,12 +53,18 @@ export default defineConfig({
         includeCharacters: ".",
       },
     }),
+    svelte(),
   ],
   build: {
     assets: "_astro",
   },
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),
+      // Renders Iconify icons (e.g. from @iconify-json/ic, also used by
+      // astro-icon) as tree-shaken Svelte components
+      Icons({ compiler: "svelte" }),
+    ],
   },
   prefetch: {
     prefetchAll: true,

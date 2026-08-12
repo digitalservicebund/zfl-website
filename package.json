@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "license": "MIT",
   "scripts": {
-    "audit:licences": "license-checker-rseidelsohn --production --excludePrivatePackages --onlyAllow 'MIT;BSD-3-Clause;BSD-2-Clause;0BSD;ISC;Apache-2.0;MPL-2.0;BlueOak-1.0.0;Custom: LICENSE;Unlicense;EUPL-1.2;Python-2.0;CC0-1.0' --summary",
+    "audit:licences": "license-checker-rseidelsohn --production --excludePrivatePackages --onlyAllow 'MIT;BSD-3-Clause;BSD-2-Clause;0BSD;ISC;Apache-2.0;MPL-2.0;BlueOak-1.0.0;Custom: LICENSE;Unlicense;EUPL-1.2;Python-2.0;CC0-1.0;CC-BY-4.0' --summary",
     "build": "pnpm sync && astro build",
     "build:search-index": "[ ! -d \"dist\" ] && pnpm build || true",
     "clean": "rm -rf dist",
@@ -34,6 +34,7 @@
     "@astrojs/alpinejs": "^1.0.0",
     "@astrojs/mdx": "^7.0.5",
     "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/svelte": "^9.0.1",
     "@iconify-json/ic": "^1.2.4",
     "@kern-ux/native": "^2.7.2",
     "@pagefind/component-ui": "^1.5.2",
@@ -48,10 +49,12 @@
     "pagefind": "^1.5.2",
     "posthog-js": "^1.415.2",
     "sharp": "^0.35.3",
+    "svelte": "^5.56.8",
     "tailwind-merge": "^3.6.0",
     "tailwind-variants": "^3.3.1",
     "tailwindcss": "^4.3.3",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "unplugin-icons": "^23.0.1"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
@@ -70,6 +73,7 @@
     "eslint": "^10.8.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-astro": "^3.1.0",
+    "eslint-plugin-svelte": "^3.19.0",
     "globals": "^17.9.0",
     "jsdom": "^30.0.1",
     "knip": "^6.32.1",
@@ -77,6 +81,7 @@
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-organize-imports": "^4.3.0",
+    "prettier-plugin-svelte": "^4.1.1",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "typescript-eslint": "^8.67.0",
     "vite": "^8.2.1",
