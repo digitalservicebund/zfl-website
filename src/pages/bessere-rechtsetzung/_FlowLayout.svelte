@@ -47,6 +47,12 @@
     activeId = id;
   }
 
+  // Reset highlighted when activeId changes
+  $effect(() => {
+    void activeId;
+    setHighlighted(null);
+  });
+
   // Focus target for `activate` below - see FlowSidebar's `panelEl` bindable prop.
   let sidebarPanelEl: HTMLDivElement | undefined = $state();
 
@@ -101,8 +107,7 @@
     !!sidebarContent && sidebarContent.id === sectionIds[0],
   );
   const isLastSection = $derived(
-    !!sidebarContent &&
-      sidebarContent.id === sectionIds[sectionIds.length - 1],
+    !!sidebarContent && sidebarContent.id === sectionIds[sectionIds.length - 1],
   );
 
   // Scrolls `el` into view, but clamps the target position so it never

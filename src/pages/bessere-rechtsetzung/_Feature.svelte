@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getContext, onDestroy } from "svelte";
+  import { getContext } from "svelte";
   import type { Snippet } from "svelte";
   import BubbleIcon from "./_BubbleIcon.svelte";
   import ArrowUp from "~icons/ic/round-keyboard-arrow-up";
@@ -67,10 +67,6 @@
     }
     highlightContext.toggleHighlighted(tag);
   }
-
-  onDestroy(() => {
-    highlightContext.setHighlighted(null);
-  });
 </script>
 
 <div
