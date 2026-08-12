@@ -83,7 +83,7 @@
 >
   <div
     class={`group/circle flex items-center justify-center rounded-full transition-[transform,filter,box-shadow,opacity] duration-200 ease-out ${dimmed ? "opacity-50" : ""}`}
-    style={`background-color: ${color ?? "var(--bubble-color)"}; width: ${BUBBLE_SIZE_EM[size]}em; height: ${BUBBLE_SIZE_EM[size]}em; anchor-name: ${anchorName};`}
+    style={`background: ${color ?? "var(--bubble-color)"}; width: ${BUBBLE_SIZE_EM[size]}em; height: ${BUBBLE_SIZE_EM[size]}em; anchor-name: ${anchorName};`}
   >
     <div class="text-center space-y-8 px-16">
       {#if title}

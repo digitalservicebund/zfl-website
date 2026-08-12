@@ -209,7 +209,12 @@
       <Bubble title="Austausch" size="sm" />
       <Bubble title="Vorblatt" size="sm" />
       <Bubble title="Erster Textentwurf" size="sm" />
-      <Bubble title="Frühzeitige Beteiligung" optional size="sm" />
+      <Bubble
+        title="Frühzeitige Beteiligung"
+        optional
+        size="sm"
+        color="linear-gradient(180deg, #B3B7E0, #ABD7F9)"
+      />
     </Cluster>
   </Section>
 
