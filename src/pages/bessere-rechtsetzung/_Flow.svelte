@@ -89,7 +89,7 @@
     </Cluster>
   </Section>
 
-  <Section title="Frühphase" color="#B3B7E0">
+  <Section title="Frühphase: Konzeption" color="#B3B7E0">
     {#snippet sidebar()}
       <h3>Was passiert hier?</h3>
       <p>
@@ -188,7 +188,7 @@
     </Cluster>
   </Section>
 
-  <Section title="Referentenentwurf" color="#ABD7F9">
+  <Section title="Frühphase: Erster Textentwurf" color="#ABD7F9">
     {#snippet sidebar()}
       <h3>Was passiert hier?</h3>
       <p>
@@ -203,17 +203,17 @@
     <Cluster
       color="#ABD7F9"
       sizes={["sm", "sm", "sm", "sm", "sm"]}
-      ariaLabel="Schritte in dieser Phase: Frühzeitige Beteiligung, Austausch, Vorblatt, Rohentwurf, Gesetzesfolgen besprechen"
+      ariaLabel="Schritte in dieser Phase: Frühzeitige Beteiligung, Austausch, Vorblatt, Erster Textentwurf, Gesetzesfolgen besprechen"
     >
       <Bubble title="Frühzeitige Beteiligung" optional size="sm" />
       <Bubble title="Austausch" size="sm" />
       <Bubble title="Vorblatt" size="sm" />
-      <Bubble title="Rohentwurf" size="sm" />
+      <Bubble title="Erster Textentwurf" size="sm" />
       <Bubble title="Gesetzesfolgen besprechen" optional size="sm" />
     </Cluster>
   </Section>
 
-  <Section title="Hausentwurf & Ressortentwurf" color="#A0EBEE">
+  <Section title="Referentenentwurf & Ressortabstimmung" color="#A0EBEE">
     {#snippet sidebar()}
       <h3>Was passiert hier?</h3>
       <p>
@@ -235,10 +235,10 @@
     <Cluster
       color="#A0EBEE"
       sizes={["sm", "sm", "lg"]}
-      ariaLabel="Schritte in dieser Phase: Beteiligung der Referate, Hausentwurf erstellen, Frühkoordinierung/ Vorhabenclearing Bundeskanzleramt"
+      ariaLabel="Schritte in dieser Phase: Beteiligung der Referate, Referentenentwurf, Frühkoordinierung/ Vorhabenclearing Bundeskanzleramt"
     >
       <Bubble title="Beteiligung der Referate" size="sm" />
-      <Bubble title="Hausentwurf erstellen" size="sm" />
+      <Bubble title="Referenten&shy;entwurf" size="sm" />
       <Bubble
         title="Frühkoordinierung/ Vorhabenclearing Bundeskanzleramt"
         size="lg"
@@ -248,12 +248,12 @@
     <Cluster
       color="#9EDCD0"
       sizes={["md", "sm", "md", "sm", "sm"]}
-      ariaLabel="Schritte in dieser Phase: Gesetzesfolgenabschätzung, Beteiligung Dritter, Weitere Abstimmungen & Stellungnahmen, Ressortentwurf, Politische Abstimmung"
+      ariaLabel="Schritte in dieser Phase: Gesetzesfolgenabschätzung, Beteiligung Dritter, Weitere Abstimmungen & Stellungnahmen, Regierungsentwurf, Politische Abstimmung"
     >
       <Bubble title="Finale Gesetzes&shy;folgen&shy;abschätzung" size="md" />
       <Bubble title="Beteiligung Dritter" size="sm" />
       <Bubble title="Weitere Abstimmungen & Stellung&shy;nahmen" size="md" />
-      <Bubble title="Ressort&shy;entwurf" size="sm" />
+      <Bubble title="Regierungs&shy;entwurf" size="sm" />
       <Bubble title="Politische Abstimmung" size="sm" />
     </Cluster>
 
