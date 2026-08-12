@@ -7,6 +7,7 @@
   import Feature from "./_Feature.svelte";
   import HideSidebarTrigger from "./_HideSidebarTrigger.svelte";
   import IconArrowDown from "~icons/ic/round-keyboard-double-arrow-down";
+  import { werkzeuge } from "@/config/routes";
 
   const CLUSTER_FIRST_ANCHOR = "--cluster-first";
   const CLUSTER_LAST_ANCHOR = "--cluster-last";
@@ -94,9 +95,10 @@
       <p>
         Wenn der Bedarf für eine neue Regelung feststeht, analysiert das
         federführende Referat das genaue Problem und legt klare Ziele fest.
-        Parallel dazu wird das rechtliche und fachliche Umfeld recherchiert. So
-        wird frühzeitig ermittelt, welche weiteren Ressorts und externen
-        Stakeholder in die Arbeit eingebunden werden müssen.
+        Parallel dazu wird das rechtliche und fachliche Umfeld beleuchtet und
+        bereits frühzeitig die Umsetzungsperspektive eingenommen. Auf dieser
+        Basis lässt sich rechtzeitig ermitteln, welche weiteren Ressorts und
+        externen Stakeholder in den Prozess einzubinden sind.
       </p>
       <h4>Wie könnte diese Phase in Zukunft aussehen?</h4>
 
@@ -108,7 +110,7 @@
           {#snippet details()}
             <p>
               So können Sie das eigentliche Problem präzise durchdenken,
-              Wirkungsziele festlegen und alle relevanten Akteure frühzeitig
+              Wirkziele festlegen und alle relevanten Akteure frühzeitig
               einbinden. Informationen dokumentieren Sie an einer zentralen
               Stelle.
             </p>
@@ -124,15 +126,11 @@
           <strong>Verschiedene Checks und Arbeitshilfen</strong> sind
           konsolidiert und direkt in Ihren Arbeitsablauf eingebunden.
           {#snippet details()}
+            <p>So berücksichtigen Sie automatisch notwendige Anforderungen.</p>
             <p>
-              So berücksichtigen Sie automatisch notwendige Anforderungen wie
-              den
-              <a href="https://digitalcheck.bund.de/">Digitalcheck</a>.
-            </p>
-            <p>
-              <strong>So arbeiten wir daran:</strong> Wir reduzieren die Vielzahl
-              bestehender Leitfäden und bündeln diese Schritt für Schritt an einem
-              zentralen Ort.
+              <strong>So arbeiten wir daran:</strong> Wir evaluieren bestehende
+              <a href={werkzeuge.path}>Leitfäden</a>
+              und bündeln diese später Schritt für Schritt an einem zentralen Ort.
             </p>
           {/snippet}
         </Feature>
@@ -222,7 +220,7 @@
         Der erste Rohentwurf ist fertig. Das federführende Referat holt nun
         hausinternes Feedback ein und übergibt anschließend den Hausentwurf zur
         Frühkoordinierung an das Bundeskanzleramt. Parallel dazu starten die
-        politischen Abstimmungen, Berichterstattergespräche und die
+        politischen Abstimmungen, Berichterstattergespräche und die finale
         Gesetzesfolgenabschätzung. So werden rechtzeitig externe Stellungnahmen
         von weiteren Ressorts sowie Prüfstellen (wie dem NKR) eingeholt und der
         Entwurf strukturiert zum Ressortentwurf weiterentwickelt.
@@ -251,7 +249,7 @@
       sizes={["md", "sm", "md", "sm", "sm"]}
       ariaLabel="Schritte in dieser Phase: Gesetzesfolgenabschätzung, Beteiligung Dritter, Weitere Abstimmungen & Stellungnahmen, Ressortentwurf, Politische Abstimmung"
     >
-      <Bubble title="Gesetzes&shy;folgen&shy;abschätzung" size="md" />
+      <Bubble title="Finale Gesetzes&shy;folgen&shy;abschätzung" size="md" />
       <Bubble title="Beteiligung Dritter" size="sm" />
       <Bubble title="Weitere Abstimmungen & Stellung&shy;nahmen" size="md" />
       <Bubble title="Ressort&shy;entwurf" size="sm" />
