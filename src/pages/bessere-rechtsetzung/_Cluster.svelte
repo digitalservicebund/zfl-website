@@ -105,6 +105,7 @@
             block: "center",
           })}
         tabIndex={-1}
+        title="Cluster zentrieren"
         aria-hidden="true"
       >
         <div
