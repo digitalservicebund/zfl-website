@@ -97,7 +97,16 @@
       style={`width: calc(${diameter}em + 2 * var(--halo-thickness)); height: calc(${diameter}em + 2 * var(--halo-thickness)); margin-left: ${offset ?? clusterOffset}px; --halo-color: color-mix(in srgb, ${color} 20%, white)`}
     >
       <!-- Isolated so halo/dashed-circle z-indices don't stack against sibling clusters. -->
-      <div class="isolate absolute inset-0" aria-hidden="true">
+      <button
+        class="isolate absolute inset-0 rounded-full"
+        onclick={(e) =>
+          e.currentTarget?.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          })}
+        tabIndex={-1}
+        aria-hidden="true"
+      >
         <div
           class="pointer-events-none absolute inset-0 -z-20 rounded-full bg-[#F7F7F7]"
         ></div>
@@ -107,7 +116,7 @@
             style={`width: ${diameter}em; height: ${diameter}em; top: var(--halo-thickness); left: var(--halo-thickness);`}
           ></div>
         {/if}
-      </div>
+      </button>
 
       <div
         role={ariaLabel ? "img" : undefined}
