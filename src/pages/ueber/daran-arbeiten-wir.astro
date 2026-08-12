@@ -6,6 +6,7 @@ import TimelineList from "@/components/TimelineList.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import {
   begleitungen,
+  bessereRechtsetzung,
   home,
   kontakt,
   schulungen,
@@ -137,6 +138,16 @@ export const frontmatter = {
     <section>
       <h2 class="mb-40">Neuerungen auf der Webseite</h2>
       <TimelineList>
+        <li>
+          <Badge look="gray">August 2026</Badge>
+          <ul>
+            <li>
+              Neue Seite ergänzt: Scrollbare Darstellung des
+              Gesetzgebungsprozesses
+              <a href={bessereRechtsetzung.path} class="block">Hier ansehen</a>
+            </li>
+          </ul>
+        </li>
         <li>
           <Badge look="gray">Juli 2026</Badge>
           <ul>

@@ -1,0 +1,66 @@
+---
+import { Image } from "astro:assets";
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import Flow from "./_Flow.svelte";
+import outroIllustration from "./outro-illustration.svg";
+import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
+
+export const frontmatter = {
+  title: "Wie gelingt eine praxistaugliche und bürgerfreundliche Gesetzgebung?",
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main>
+    <Hero class="breakout-grid">
+      <h1 class="max-w-a11y">{frontmatter.title}</h1>
+      <div slot="subtitle">
+        <p>
+          Komplexe Vorgaben und hoher Zeitdruck prägen den Alltag in der
+          Gesetzgebung. Das Zentrum für Legistik unterstützt Sie dort, wo die
+          entscheidenden Weichen gestellt werden: in der Konzeptionsphase vor
+          der eigentlichen Textarbeit. Wir analysieren Potenziale und entwickeln
+          gemeinsam mit Ihnen Hilfestellungen, die Ihre Arbeit spürbar
+          entlasten.
+        </p>
+        <p>
+          <strong>Hinweis:</strong> Es handelt sich hierbei um die <strong
+            >konzeptionelle Vision</strong
+          > einer neuen Gesetzgebung. Die spätere Realität in der Praxis kann davon
+          abweichen.
+        </p>
+        <p>
+          Die Grafik bietet Ihnen einen <strong>Überblick</strong> und zeigt zur besseren
+          Orientierung eine vereinfachte Darstellung des Gesetzgebungsprozesses.
+        </p>
+      </div>
+    </Hero>
+
+    <Flow client:load />
+
+    <section
+      class="bg-lavender-400 flex min-h-screen items-center justify-center"
+      id="outro"
+    >
+      <div class="p-lg max-w-900 space-y-24">
+        <Image
+          src={outroIllustration}
+          alt="Illustration"
+          class="mb-lg mx-auto lg:max-w-573"
+        />
+        <h2>
+          Sie möchten gemeinsam mit uns eine moderne und praxistaugliche
+          Rechtsetzung gestalten?
+        </h2>
+        <p>
+          Kontaktieren Sie uns unter <a class="font-bold" href={ZFL_PHONE.url}
+            >{ZFL_PHONE.display}</a
+          > oder <a class="font-bold" href={ZFL_EMAIL.url}
+            >{ZFL_EMAIL.display}</a
+          >.
+        </p>
+      </div>
+    </section>
+  </main>
+</Layout>
