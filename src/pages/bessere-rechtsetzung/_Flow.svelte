@@ -175,7 +175,7 @@
         size="md"
         tags={["Prozess"]}
       />
-      <Bubble title="Vorschläge von Verbänden" optional size="sm" />
+      <Bubble title="Vorschläge von externen Akteuren" size="sm" />
       <Bubble title="Gesetzes&shy;umfeld" size="sm" tags={["KI"]} />
       <Bubble title="Gutachten und Sach&shy;verständigen&shy;kommissionen" />
       <Bubble title="Material&shy;recherche" size="sm" tags={["Checks"]} />
