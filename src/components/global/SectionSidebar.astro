@@ -1,43 +1,26 @@
 ---
-import DrilldownNavigation from "@/components/global/DrilldownNavigation.astro";
 import AccordeonMenu from "@/components/global/AccordeonMenu.astro";
-import { isProduction } from "@/config/stage";
-import { getSectionNavigation } from "@/utils/navigation/drilldown";
-import { getRouteByPath, getRouteChain } from "@/utils/navigation/routeUtils";
-
-const navigation = getSectionNavigation(Astro.url.pathname);
-const initialDepth = navigation?.activePanel.depth;
-const sidebarState = navigation
-  ? `{ currentPanel: "${navigation.activePanel.id}", currentDepth: ${initialDepth} }`
-  : null;
+import {
+  getRouteByPath,
+  getRouteChain,
+  hasVisibleChildren,
+} from "@/utils/navigation/routeUtils";
 
 const currentRoute = getRouteByPath(Astro.url.pathname);
 const [sectionRoot] = currentRoute ? getRouteChain(currentRoute) : [];
+const showSidebar = !!sectionRoot && hasVisibleChildren(sectionRoot);
 ---
 
 {
-  navigation && sectionRoot && currentRoute && (
+  showSidebar && sectionRoot && currentRoute && (
     <nav
       aria-label="Abschnittsnavigation"
       class="bg-form-input-background hidden border-r border-neutral-300 *:sticky *:top-0 min-[900px]:block"
-      x-data={sidebarState}
-      data-depth={initialDepth}
-      x-bind:data-depth="currentDepth"
     >
-      {isProduction && (
-        <div class="overflow-auto">
-          <DrilldownNavigation
-            navigation={navigation}
-            panelIdPrefix="section-sidebar"
-          />
-        </div>
-      )}
-      {!isProduction && (
-        <AccordeonMenu
-          sectionRoot={sectionRoot}
-          currentPath={currentRoute.path}
-        />
-      )}
+      <AccordeonMenu
+        sectionRoot={sectionRoot}
+        currentPath={currentRoute.path}
+      />
       {Astro.slots.has("extra") && (
         <div class="sticky">
           <slot name="extra" />
@@ -46,9 +29,3 @@ const [sectionRoot] = currentRoute ? getRouteChain(currentRoute) : [];
     </nav>
   )
 }
-
-<style>
-  nav[data-depth="1"] {
-    --active-item-bg-color: var(--color-lavender-surface-highlight);
-  }
-</style>
