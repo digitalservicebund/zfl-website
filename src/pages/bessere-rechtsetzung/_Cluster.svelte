@@ -86,7 +86,7 @@
 </script>
 
 <div
-  class={`flow-block [--halo-thickness:24px] md:[--halo-thickness:40px] [--cluster-spacing:var(--halo-thickness)] md:[--cluster-spacing:calc(-1*var(--halo-thickness))] ${className}`}
+  class={`flow-block [--halo-thickness:24px] md:[--halo-thickness:40px] [--cluster-spacing:var(--halo-thickness)] md:[--cluster-spacing:calc(var(--space-factor)*var(--halo-thickness))] ${className}`}
   style={color ? `--bubble-color: ${color}` : undefined}
   role="presentation"
 >
@@ -96,9 +96,9 @@
       class={`relative flex items-center justify-center ${RESPONSIVE_BUBBLE_FONT_CLASS}`}
       style={`width: calc(${diameter}em + 2 * var(--halo-thickness)); height: calc(${diameter}em + 2 * var(--halo-thickness)); margin-left: ${offset ?? clusterOffset}px; --halo-color: color-mix(in srgb, ${color} 20%, white)`}
     >
-      <!-- Isolated so halo/dashed-circle z-indices don't stack against sibling clusters. -->
+      <!-- halo/dashed-circle -->
       <button
-        class="isolate absolute inset-0 rounded-full"
+        class="absolute inset-0 rounded-full"
         onclick={(e) =>
           e.currentTarget?.scrollIntoView({
             behavior: "smooth",
@@ -108,11 +108,11 @@
         aria-hidden="true"
       >
         <div
-          class="pointer-events-none absolute inset-0 -z-20 rounded-full bg-[#F7F7F7]"
+          class="pointer-events-none absolute inset-0 rounded-full bg-[#F7F7F7]"
         ></div>
         {#if !isSingleBubble}
           <div
-            class="pointer-events-none absolute -z-10 rounded-full border border-dashed border-black bg-white"
+            class="z-10 pointer-events-none absolute rounded-full outline outline-dashed outline-black"
             style={`width: ${diameter}em; height: ${diameter}em; top: var(--halo-thickness); left: var(--halo-thickness);`}
           ></div>
         {/if}
@@ -121,7 +121,7 @@
       <div
         role={ariaLabel ? "img" : undefined}
         aria-label={ariaLabel}
-        class={`relative rounded-full ${isFlexPositioned ? "flex items-center justify-center" : ""}`}
+        class={`relative z-20 ${!isSingleBubble ? "bg-white" : ""} rounded-full ${isFlexPositioned ? "flex items-center justify-center" : ""}`}
         style={`width: ${diameter}em; height: ${diameter}em; ${isFlexPositioned ? `gap: ${BUBBLE_PADDING}em;` : ""}`}
       >
         {@render children?.()}

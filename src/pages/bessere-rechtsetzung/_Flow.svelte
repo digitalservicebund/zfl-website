@@ -188,7 +188,7 @@
     </Cluster>
   </Section>
 
-  <Section title="Frühphase: Erster Textentwurf" color="#ABD7F9">
+  <Section title="Frühphase: Erster Textentwurf" color="#ABD7F9" overlap>
     {#snippet sidebar()}
       <h3>Was passiert hier?</h3>
       <p>

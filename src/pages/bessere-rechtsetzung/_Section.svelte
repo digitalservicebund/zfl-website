@@ -13,6 +13,7 @@
     color,
     children,
     sidebar,
+    overlap,
   }: {
     title: string;
     /**
@@ -24,6 +25,8 @@
     children: Snippet;
     /** Sidebar content shown in the global sidebar. */
     sidebar?: Snippet;
+    /** Controls --space-factor for visual overlap with previous section/cluster (desktop-only) */
+    overlap?: boolean;
   } = $props();
 
   const sidebarContext = getContext<FlowSidebarContext | undefined>(
@@ -96,8 +99,9 @@
 
 <div
   bind:this={rootEl}
-  class="flow-block relative w-full [--halo-thickness:24px] md:[--halo-thickness:40px] [--cluster-spacing:var(--halo-thickness)] md:[--cluster-spacing:calc(-1*var(--halo-thickness))]"
+  class="flow-block relative w-full [--halo-thickness:24px] md:[--halo-thickness:40px] [--space-factor:1] md:[--space-factor:-1] md:data-overlap:[--space-factor:-2.5] [--cluster-spacing:calc(var(--space-factor)*var(--halo-thickness))]"
   aria-owns={sidebarContentId}
+  data-overlap={overlap ?? undefined}
   style={color ? `--bubble-color: ${color}` : undefined}
 >
   <div class={titleWrapperClass}>
