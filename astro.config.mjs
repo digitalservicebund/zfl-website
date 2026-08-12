@@ -2,6 +2,7 @@
 import alpinejs from "@astrojs/alpinejs";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
+import svelte from "@astrojs/svelte";
 import tailwindcss from "@tailwindcss/vite";
 import icon from "astro-icon";
 import pagefind from "astro-pagefind";
@@ -10,8 +11,6 @@ import { defineConfig } from "astro/config";
 import process from "node:process";
 import Icons from "unplugin-icons/vite";
 import { allRoutes } from "./src/config/routes.ts";
-
-import svelte from "@astrojs/svelte";
 
 const isPreview = process.env.PUBLIC_STAGE === "preview";
 const isDevelopment = process.env.PUBLIC_STAGE === "development";
@@ -63,9 +62,7 @@ export default defineConfig({
     plugins: [
       tailwindcss(),
       // Renders Iconify icons (e.g. from @iconify-json/ic, also used by
-      // astro-icon) as tree-shaken Svelte components for use inside
-      // framework islands, where astro-icon's <Icon> can't be used since
-      // it's an Astro-only component.
+      // astro-icon) as tree-shaken Svelte components
       Icons({ compiler: "svelte" }),
     ],
   },
