@@ -49,7 +49,7 @@ const chartClasses = [
   "charts-css",
   "column",
   "show-labels",
-  "show-data-on-hover",
+  stack ? "hide-data" : "data-outside",
   "data-spacing-10",
   stack && "stacked",
   isMultiSeries && !stack && "datasets-spacing-1",
@@ -65,7 +65,7 @@ const formatValue = (value: number) => value.toLocaleString("de-DE");
 ---
 
 <div class:list={["zfl-chart bg-lavender-200 p-24", className]}>
-  {title && <p class="font-bold">{title}</p>}
+  {title && <p class="mb-24 font-bold">{title}</p>}
   <table class={chartClasses} style={colorVars}>
     {title && <caption>{title}</caption>}
     <thead>
@@ -123,6 +123,13 @@ const formatValue = (value: number) => value.toLocaleString("de-DE");
 
     & tr th {
       padding-top: 16px;
+    }
+  }
+
+  .zfl-chart .tooltip {
+    background-color: black;
+    &::after {
+      border-top-color: black;
     }
   }
 

@@ -37,8 +37,8 @@ export const websiteData: ChartSeries[] = [
   {
     label: "Digitalcheck",
     values: [
-      { x: "1. Quartal", y: 2538 },
-      { x: "2. Quartal", y: 2622 },
+      { x: "1. Quartal 2026", y: 2538 },
+      { x: "2. Quartal 2026", y: 2622 },
     ],
   },
   {
