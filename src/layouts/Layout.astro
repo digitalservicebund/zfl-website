@@ -5,7 +5,11 @@ import PageHeader from "@/components/global/PageHeader.astro";
 import SectionSidebar from "@/components/global/SectionSidebar.astro";
 import Posthog from "@/components/global/Posthog.astro";
 import { isProduction } from "@/config/stage";
-import { getSectionNavigation } from "@/utils/navigation/drilldown";
+import {
+  getRouteByPath,
+  getRouteChain,
+  hasVisibleChildren,
+} from "@/utils/navigation/routeUtils";
 import { withBase } from "@/utils/path";
 import firaSansMediumUrl from "@kern-ux/native/dist/fonts/fira-sans/FiraSans-Medium.woff2?url";
 import firaSansRegularUrl from "@kern-ux/native/dist/fonts/fira-sans/FiraSans-Regular.woff2?url";
@@ -29,7 +33,9 @@ const {
 const siteName = "Zentrum für Legistik";
 const title = pageTitle ? `${pageTitle} — ${siteName}` : siteName;
 const SEOImage = `${Astro.url.origin}/SEO_ZfL.png`;
-const showSectionSidebar = getSectionNavigation(Astro.url.pathname) !== null;
+const currentRoute = getRouteByPath(Astro.url.pathname);
+const [sectionRoot] = currentRoute ? getRouteChain(currentRoute) : [];
+const showSectionSidebar = !!sectionRoot && hasVisibleChildren(sectionRoot);
 
 const defaultDescription =
   "Das Zentrum für Legistik unterstützt Sie bei der Ausarbeitung von Regelungen. Sie stellen damit sicher, dass Ihr Vorhaben betroffenenzentriert, praxistauglich und digital umsetzbar ist.";
@@ -91,7 +97,7 @@ const defaultDescription =
     >
       {
         showSectionSidebar ? (
-          <div class="h-full min-[900px]:grid min-[900px]:grid-cols-[240px_minmax(0,1fr)]">
+          <div class="h-full min-[900px]:grid min-[900px]:grid-cols-[264px_minmax(0,1fr)]">
             <SectionSidebar />
             <slot />
           </div>

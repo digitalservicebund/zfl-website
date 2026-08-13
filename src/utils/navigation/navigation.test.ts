@@ -78,63 +78,6 @@ afterEach(() => {
 });
 
 describe("navigation helpers", () => {
-  it("builds sidebar panels for the current section and selects the active panel", async () => {
-    const { allRoutes } = createUeberBranch();
-    const { getSectionNavigation } = await loadNavigationHelpers(allRoutes);
-    const navigation = getSectionNavigation("/ueber/checklist/summary");
-
-    expect(navigation).toMatchObject({
-      currentPath: "/ueber/checklist/summary",
-      activePanel: expect.objectContaining({ id: "ueber_checklist", depth: 2 }),
-    });
-    expect(navigation?.panels.map((panel) => panel.id)).toEqual([
-      "ueber",
-      "ueber_checklist",
-    ]);
-    expect(navigation?.panels).toMatchObject([
-      {
-        id: "ueber",
-        depth: 1,
-        parent: null,
-        sectionRoute: expect.objectContaining({
-          path: "/ueber",
-          label: "Über das ZfL",
-        }),
-        items: [
-          expect.objectContaining({
-            label: "Checkliste",
-            panelId: "ueber_checklist",
-          }),
-          expect.objectContaining({ label: "Zusammenfassung", panelId: null }),
-        ],
-      },
-      {
-        id: "ueber_checklist",
-        depth: 2,
-        parent: {
-          id: "ueber",
-          label: "Über das ZfL",
-        },
-        sectionRoute: expect.objectContaining({
-          path: "/ueber/checklist",
-          label: "Checkliste",
-        }),
-        items: [expect.objectContaining({ label: "Zusammenfassung" })],
-      },
-    ]);
-  });
-
-  it("sorts visible child routes within sidebar panels by nav order", async () => {
-    const { allRoutes } = createUeberBranch();
-    const { getSectionNavigation } = await loadNavigationHelpers(allRoutes);
-    const navigation = getSectionNavigation("/ueber");
-
-    expect(navigation?.panels[0]?.items.map((item) => item.label)).toEqual([
-      "Checkliste",
-      "Zusammenfassung",
-    ]);
-  });
-
   it("opens the current nested sidebar level in the mobile menu", async () => {
     const werkzeuge = createRoute({
       key: "werkzeuge",

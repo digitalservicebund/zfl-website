@@ -29,26 +29,6 @@ export type DrilldownNavigationData = {
   panels: DrilldownPanel[];
 };
 
-export function getSectionNavigation(
-  currentPath: string,
-): DrilldownNavigationData | null {
-  const currentRoute = getRouteByPath(currentPath);
-  if (!currentRoute) return null;
-
-  const [sectionRoot] = getRouteChain(currentRoute);
-  if (!sectionRoot || !hasVisibleChildren(sectionRoot)) return null;
-
-  const panels = collectPanels(sectionRoot, 1);
-  const activePanel = findActivePanel(currentPath, panels);
-  if (!activePanel) return null;
-
-  return {
-    currentPath: currentRoute.path,
-    activePanel,
-    panels,
-  };
-}
-
 const MOBILE_ROOT_PANEL_ID = "root";
 const MOBILE_ROOT_PARENT = { id: MOBILE_ROOT_PANEL_ID, label: "Hauptmenü" };
 
