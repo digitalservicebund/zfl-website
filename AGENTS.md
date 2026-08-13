@@ -62,7 +62,7 @@ import { isProduction, isStaging, isPreview } from "@/config/stage";
 
 **Styling with `tailwind-variants`**: Use `tv()` from `tailwind-variants` to define component variants. Accept `class?: string` for overrides. See `doc/tailwind-variants.md`.
 
-**Icons**: Use `<Icon name="ic:..." />` from `astro-icon/components`. Icon set is Google Material Icons (`@iconify-json/ic`). Find icons at `icon-sets.iconify.design/ic/`. Prefix names with `ic:`.
+**Icons**: Import directly from `~icons/ic/<name>` (via `unplugin-icons`), e.g. `import IconTimer from "~icons/ic/outline-timer"`, then use as `<IconTimer />` — works in both `.astro` and `.svelte` files. Icon set is Google Material Icons (`@iconify-json/ic`). Find icons at `icon-sets.iconify.design/ic/`. See `doc/icons.md`.
 
 **Layout**: All pages use `<Layout title="...">` from `src/layouts/Layout.astro`, which includes the `PageHeader`, `Footer`, and conditional Posthog analytics.
 

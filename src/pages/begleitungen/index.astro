@@ -8,7 +8,10 @@ import gesetzentwurfImg from "./gesetzentwurf.png";
 import Layout from "@/layouts/Layout.astro";
 import { Image } from "astro:assets";
 import { ZFL_EMAIL_REGBEG, ZFL_PHONE_REGBEG } from "@/config/constants";
-import { Icon } from "astro-icon/components";
+import IconArrowDownward from "~icons/ic/baseline-arrow-downward";
+import IconAccountTree from "~icons/ic/twotone-account-tree";
+import IconHub from "~icons/ic/twotone-hub";
+import IconLightbulb from "~icons/ic/twotone-lightbulb";
 
 export const frontmatter = {
   title: "Regelungsbegleitung",
@@ -37,11 +40,7 @@ const description =
             und Prozessmanagement direkt zur Verfügung.
           </p>
           <a class="kern-btn kern-btn--primary mt-32" href="#leistungspakete">
-            <Icon
-              name="ic:baseline-arrow-downward"
-              class="kern-label"
-              aria-hidden
-            />
+            <IconArrowDownward class="kern-label" aria-hidden />
             <span class="kern-label">Leistungspakete anzeigen</span>
           </a>
         </div>
@@ -65,20 +64,23 @@ const description =
 
       <FeatureSet>
         <FeatureItem
-          icon="ic:twotone-account-tree"
           title="Sachverhalte visualisieren"
           body="Komplexe Sachverhalte durch Prozess-Visualisierungen strukturieren, interne und externe Abstimmung vereinfachen"
-        />
+        >
+          <IconAccountTree slot="icon" class="size-full" />
+        </FeatureItem>
         <FeatureItem
-          icon="ic:twotone-lightbulb"
           title="Umsetzung mitdenken"
           body="Betroffenen-Perspektive frühzeitig identifizieren, bestehende Umsetzungshürden beheben"
-        />
+        >
+          <IconLightbulb slot="icon" class="size-full" />
+        </FeatureItem>
         <FeatureItem
-          icon="ic:twotone-hub"
           title="Prozesse strukturieren"
           body="Methodische Unterstützung nutzen, Anleitungen für Praxis- und Digitaltauglichkeit erhalten"
-        />
+        >
+          <IconHub slot="icon" class="size-full" />
+        </FeatureItem>
       </FeatureSet>
 
       <div id="leistungspakete">

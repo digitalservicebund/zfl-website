@@ -1,7 +1,7 @@
 ---
 import DrilldownNavigationItem from "@/components/global/DrilldownNavigationItem.astro";
 import type { DrilldownNavigationData } from "@/utils/navigation/drilldown";
-import { Icon } from "astro-icon/components";
+import IconChevronLeft from "~icons/ic/outline-chevron-left";
 
 interface Props {
   navigation: DrilldownNavigationData;
@@ -38,11 +38,7 @@ function getPanelElementId(panelId: string) {
           @click={`currentPanel = "${panel.parent.id}"; currentDepth--`}
           aria-controls={getPanelElementId(panel.parent.id)}
         >
-          <Icon
-            name="ic:outline-chevron-left"
-            class="size-24"
-            aria-hidden="true"
-          />
+          <IconChevronLeft class="size-24" aria-hidden="true" />
           <span>{panel.parent.label}</span>
         </button>
       )}

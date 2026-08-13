@@ -6,10 +6,14 @@ import KernCard from "@/components/KernCard.astro";
 import SearchButton from "@/components/search/SearchButton.astro";
 import SearchModal from "@/components/search/SearchModal.astro";
 import { werkzeugKeywords } from "@/components/search/keywords";
-import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import { WERKZEUGE_TYPES } from "@/content.config";
+import IconArrowDownward from "~icons/ic/round-arrow-downward";
+import IconAutoStories from "~icons/ic/baseline-auto-stories";
+import IconBookmarkAdd from "~icons/ic/outline-bookmark-add";
+import IconBookmarkAdded from "~icons/ic/round-bookmark-added";
+import IconHelpOutline from "~icons/ic/outline-help-outline";
 
 export const frontmatter = {
   title: "Werkzeuge",
@@ -72,10 +76,7 @@ const PAGEFIND_INSTANCE = "werkzeuge";
         categories.map(({ id, title }) => (
           <p>
             <a href={`#${id}`} class="kern-heading-medium">
-              <Icon
-                name="ic:round-arrow-downward"
-                class="text-cosmic-blue-base inline-block h-32 w-32 pr-4"
-              />
+              <IconArrowDownward class="text-cosmic-blue-base inline-block h-32 w-32 pr-4" />
               {title}
             </a>
           </p>
@@ -106,10 +107,7 @@ const PAGEFIND_INSTANCE = "werkzeuge";
                   x-bind:data-inactive={`filterType && filterType !== '${type}'`}
                 >
                   {type === BOOKMARKED_TYPE ? (
-                    <Icon
-                      name="ic:round-bookmark-added"
-                      class="text-icon-muted h-24 w-24"
-                    />
+                    <IconBookmarkAdded class="text-icon-muted h-24 w-24" />
                   ) : (
                     <span
                       class="kern-icon kern-icon--check kern-icon--default"
@@ -127,7 +125,7 @@ const PAGEFIND_INSTANCE = "werkzeuge";
             popovertarget="hintSidebarContent"
             aria-label="Hinweise ein- oder ausblenden"
           >
-            <Icon name="ic:outline-help-outline" class="h-32 w-32" />
+            <IconHelpOutline class="h-32 w-32" />
           </button>
         </div>
         <SearchButton instance={PAGEFIND_INSTANCE} />
@@ -175,13 +173,11 @@ const PAGEFIND_INSTANCE = "werkzeuge";
                           aria-label={"Lesezeichen hinzufügen"}
                           @click={`toggleBookmark(${JSON.stringify(t.id)})`}
                         >
-                          <Icon
-                            name={"ic:outline-bookmark-add"}
+                          <IconBookmarkAdd
                             x-show={`!bookmarkedTools.includes(${JSON.stringify(t.id)})`}
                             class="h-32 w-32"
                           />
-                          <Icon
-                            name="ic:round-bookmark-added"
+                          <IconBookmarkAdded
                             x-cloak
                             x-show={`bookmarkedTools.includes(${JSON.stringify(t.id)})`}
                             class="h-32 w-32"
@@ -192,10 +188,7 @@ const PAGEFIND_INSTANCE = "werkzeuge";
                         slot="footer"
                         class="text-icon-muted! flex items-center gap-8"
                       >
-                        <Icon
-                          name="ic:baseline-auto-stories"
-                          class="h-32 w-32 shrink-0"
-                        />
+                        <IconAutoStories class="h-32 w-32 shrink-0" />
                         <p class="kern-subline kern-subline-dark py-0">
                           Quelle: {t.data.source}
                         </p>

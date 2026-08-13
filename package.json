@@ -42,7 +42,6 @@
     "@types/alpinejs": "^3.13.11",
     "alpinejs": "^3.16.1",
     "astro": "^7.2.1",
-    "astro-icon": "^1.1.5",
     "astro-pagefind": "^2.0.1",
     "astro-route-generator": "github:digitalservicebund/astro-route-generator#0.1.8",
     "astro-seo": "^1.1.0",

@@ -3,7 +3,6 @@ import InfoPanel from "@/components/InfoPanel.astro";
 import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
 import MediaText from "@/components/MediaText.astro";
-import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import ansatzImg from "@/images/Ansatz.jpg";
 import zusammenarbeitImg from "@/images/Zusammenarbeit.png";
@@ -17,6 +16,8 @@ import {
   ueber_zahlenUndFakten,
   werkzeuge,
 } from "@/config/routes.ts";
+import IconArrowDownward from "~icons/ic/round-arrow-downward";
+import IconArrowForward from "~icons/ic/round-arrow-forward";
 
 export const frontmatter = {
   title: "Über uns",
@@ -102,8 +103,7 @@ const contactId = "kontaktieren-sie-uns";
           <ul class="list-unstyled">
             <li>
               <a href={werkzeuge.path} class="kern-link text-2xl font-bold"
-                ><Icon
-                  name="ic:round-arrow-forward"
+                ><IconArrowForward
                   class="mr-4 inline size-32"
                   aria-hidden="true"
                 />Werkzeuge</a
@@ -111,8 +111,7 @@ const contactId = "kontaktieren-sie-uns";
             </li>
             <li>
               <a href={begleitungen.path} class="kern-link text-2xl font-bold"
-                ><Icon
-                  name="ic:round-arrow-forward"
+                ><IconArrowForward
                   class="mr-4 inline size-32"
                   aria-hidden="true"
                 />Regelungsbegleitung</a
@@ -120,8 +119,7 @@ const contactId = "kontaktieren-sie-uns";
             </li>
             <li>
               <a href={schulungen.path} class="kern-link text-2xl font-bold"
-                ><Icon
-                  name="ic:round-arrow-forward"
+                ><IconArrowForward
                   class="mr-4 inline size-32"
                   aria-hidden="true"
                 />Schulungen</a
@@ -135,8 +133,7 @@ const contactId = "kontaktieren-sie-uns";
             Service-Testenden aufgenommen werden?
           </p>
           <a href={"#" + contactId}
-            ><Icon
-              name="ic:round-arrow-downward"
+            ><IconArrowDownward
               class="mr-4 inline size-24"
               aria-hidden="true"
             />Unterstützen Sie uns bei der Entwicklung des Angebots</a

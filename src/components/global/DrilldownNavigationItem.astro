@@ -1,7 +1,7 @@
 ---
 import type { DrilldownEntry } from "@/utils/navigation/drilldown";
-import { Icon } from "astro-icon/components";
 import { twMerge } from "tailwind-merge";
+import IconChevronRight from "~icons/ic/outline-chevron-right";
 
 type DrilldownNavigationItemData = Omit<DrilldownEntry, "isVisible">;
 
@@ -38,11 +38,7 @@ function itemStyle(active = false, hasChildren = false) {
         x-bind:aria-expanded={`currentPanel === "${item.panelId}"`}
       >
         <span>{item.label}</span>
-        <Icon
-          name="ic:outline-chevron-right"
-          class="size-20"
-          aria-hidden="true"
-        />
+        <IconChevronRight class="size-20" aria-hidden="true" />
       </button>
     ) : (
       <a

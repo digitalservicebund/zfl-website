@@ -1,5 +1,5 @@
 ---
-import { Icon } from "astro-icon/components";
+import IconClose from "~icons/ic/round-close";
 
 // Usage example:
 // <button popovertarget="my-modal">Open Modal</button>
@@ -27,7 +27,7 @@ const { id } = Astro.props;
           popovertarget={id}
           aria-label="Hinweisfenster schließen"
         >
-          <Icon name="ic:round-close" class="h-24 w-24" />
+          <IconClose class="h-24 w-24" />
         </button>
       </div>
       <slot />

@@ -8,8 +8,8 @@ import { Image } from "astro:assets";
 import praxistauglichkeit from "@/images/praxistauglichkeit.png";
 import praxistauglichkeit_vortrag from "@/images/praxistauglichkeit_vortrag.jpg";
 import { getCollection } from "astro:content";
-import { Icon } from "astro-icon/components";
 import { ZFL_PHONE, ZFL_EMAIL } from "@/config/constants";
+import IconAutoStories from "~icons/ic/baseline-auto-stories";
 
 const frontmatter = {
   title: "Praxistauglichkeit",
@@ -235,10 +235,7 @@ const praxistauglichkeitTools = allTools.filter(
                         slot="footer"
                         class="text-icon-muted! flex items-center gap-8"
                       >
-                        <Icon
-                          name="ic:baseline-auto-stories"
-                          class="h-32 w-32 shrink-0"
-                        />
+                        <IconAutoStories class="h-32 w-32 shrink-0" />
                         <p class="kern-subline kern-subline-dark py-0">
                           Quelle: {werkzeug.data.source}
                         </p>

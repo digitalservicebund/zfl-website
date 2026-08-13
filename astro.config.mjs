@@ -4,7 +4,6 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import svelte from "@astrojs/svelte";
 import tailwindcss from "@tailwindcss/vite";
-import icon from "astro-icon";
 import pagefind from "astro-pagefind";
 import { generateRoutes } from "astro-route-generator";
 import { defineConfig } from "astro/config";
@@ -34,7 +33,6 @@ export default defineConfig({
       "https://digitalservicebund.github.io/zfl-website/previews/prototyp/pflichten/werkzeuge/pflichten/",
   },
   integrations: [
-    icon(),
     alpinejs(),
     sitemap({
       filter: (page) =>
@@ -61,8 +59,8 @@ export default defineConfig({
   vite: {
     plugins: [
       tailwindcss(),
-      // Renders Iconify icons (e.g. from @iconify-json/ic, also used by
-      // astro-icon) as tree-shaken Svelte components
+      // Renders Iconify icons (e.g. from @iconify-json/ic) as tree-shaken
+      // Svelte components
       Icons({ compiler: "svelte" }),
     ],
   },

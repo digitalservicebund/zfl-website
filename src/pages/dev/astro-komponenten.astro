@@ -14,8 +14,12 @@ import PostTeaser from "@/components/PostTeaser.astro";
 import TimelineList from "@/components/TimelineList.astro";
 import trainingImage from "@/images/Trainings.jpg";
 import Layout from "@/layouts/Layout.astro";
-import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
+import IconCheckCircle from "~icons/ic/outline-check-circle";
+import IconBuild from "~icons/ic/outline-build";
+import IconDevices from "~icons/ic/outline-devices";
+import IconInfo from "~icons/ic/outline-info";
+import IconWidgets from "~icons/ic/twotone-widgets";
 
 export const frontmatter = {
   title: "Astro Komponenten",
@@ -54,7 +58,7 @@ export const frontmatter = {
       <div class="space-y-32">
         <p class="variant-label kern-label">mit Icon-Slot</p>
         <Badge look="hint">
-          <Icon slot="icon" name="ic:outline-info" class="size-16" />
+          <IconInfo slot="icon" class="size-16" />
           Mit Icon
         </Badge>
       </div>
@@ -152,7 +156,7 @@ export const frontmatter = {
       <div class="space-y-32">
         <p class="variant-label kern-label">mit Icon-Slot</p>
         <InfoPanel>
-          <Icon name="ic:twotone-widgets" slot="icon" />
+          <IconWidgets slot="icon" />
           <h3>Karte mit Icon</h3>
           <p>
             Beim Übergeben des Icon-Slots wird links ein farbiger Ikonbereich
@@ -170,20 +174,22 @@ export const frontmatter = {
         <p class="variant-label kern-label">FeatureSet mit drei FeatureItems</p>
         <FeatureSet>
           <FeatureItem
-            icon="ic:outline-check-circle"
             title="Betroffenenzentriert"
             body="Vorhaben konsequent aus der Perspektive Betroffener entwickeln."
-          />
+          >
+            <IconCheckCircle slot="icon" class="size-full" />
+          </FeatureItem>
           <FeatureItem
-            icon="ic:outline-build"
             title="Praxistauglich"
             body="Praktische Umsetzbarkeit von Anfang an mitdenken."
-          />
+          >
+            <IconBuild slot="icon" class="size-full" />
+          </FeatureItem>
           <FeatureItem
-            icon="ic:outline-devices"
             title="Digital umsetzbar"
             body="Regelungen so gestalten, dass sie digital vollziehbar sind."
           >
+            <IconDevices slot="icon" class="size-full" />
             <a href="#">Mehr erfahren</a>
           </FeatureItem>
         </FeatureSet>
