@@ -100,15 +100,16 @@ test.describe("Header navigation", () => {
     });
     await expect(sectionSidebar).toBeVisible();
 
-    const rootPanel = sectionSidebar.locator('[data-panel="ueber"]');
-    await expect(rootPanel).toBeVisible();
     await expect(
-      rootPanel.getByRole("link", { name: "Über uns", exact: true }),
+      sectionSidebar.getByRole("link", { name: "Über uns", exact: true }),
     ).toBeVisible();
     await expect(
-      rootPanel.getByRole("link", { name: "Daran arbeiten wir", exact: true }),
+      sectionSidebar.getByRole("link", {
+        name: "Daran arbeiten wir",
+        exact: true,
+      }),
     ).toBeVisible();
-    const zahlenUndFaktenLink = rootPanel.getByRole("link", {
+    const zahlenUndFaktenLink = sectionSidebar.getByRole("link", {
       name: "Zahlen und Fakten",
       exact: true,
     });
