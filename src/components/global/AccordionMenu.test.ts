@@ -82,7 +82,7 @@ async function renderAccordeonMenu(
     isPreview: false,
   }));
 
-  const { default: AccordeonMenu } = await import("./AccordeonMenu.astro");
+  const { default: AccordeonMenu } = await import("./AccordionMenu.astro");
 
   return renderToDOM(AccordeonMenu, { props });
 }
