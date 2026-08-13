@@ -35,17 +35,17 @@ export const schulungenData: ChartSeries[] = [
 
 export const websiteData: ChartSeries[] = [
   {
-    label: "Digitalcheck",
-    values: [
-      { x: "1. Quartal 2026", y: 2538 },
-      { x: "2. Quartal 2026", y: 2622 },
-    ],
-  },
-  {
     label: "Zentrum für Legistik",
     values: [
       { x: "1. Quartal", y: 609 },
       { x: "2. Quartal", y: 1704 },
+    ],
+  },
+  {
+    label: "Digitalcheck",
+    values: [
+      { x: "1. Quartal 2026", y: 2538 },
+      { x: "2. Quartal 2026", y: 2622 },
     ],
   },
 ];
