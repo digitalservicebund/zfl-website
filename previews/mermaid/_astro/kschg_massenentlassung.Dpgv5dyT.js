@@ -1,0 +1,41 @@
+var e=`sequenceDiagram
+    participant AG as Arbeitgeber
+    participant BR as Betriebsrat
+    participant AfA as Agentur für Arbeit
+
+    Note over AG: Beabsichtigt anzeigepflichtige<br/>Entlassung (Schwellenwerte §17 I)
+
+    AG->>BR: Rechtzeitige schriftliche Unterrichtung<br/>(Gründe, Zahl/Berufsgruppen, Zeitraum,<br/>Auswahl-/Abfindungskriterien) — §17 II
+    AG-->>AfA: Abschrift der Mitteilung an BR<br/>(mind. Angaben Nr.1-5) — §17 III S.1
+
+    AG->>BR: Beratung: Vermeidung/Einschränkung<br/>der Entlassungen, Folgenmilderung — §17 II S.2
+    BR-->>AG: Beratungsergebnis
+
+    alt Stellungnahme des Betriebsrats liegt vor
+        BR->>AG: Schriftliche Stellungnahme — §17 III S.2
+        AG->>AfA: Anzeige samt Stellungnahme des BR
+    else Keine Stellungnahme
+        AG->>AfA: Anzeige mit Glaubhaftmachung:<br/>BR mind. 2 Wochen vorher unterrichtet,<br/>Stand der Beratungen dargelegt — §17 III S.3
+    end
+
+    AG-->>BR: Abschrift der Anzeige — §17 III S.6
+
+    opt Betriebsrat äußert sich weiter
+        BR->>AfA: Weitere Stellungnahme
+        BR-->>AG: Abschrift davon — §17 III S.7
+    end
+
+    Note over AfA: Sperrfrist beginnt mit<br/>Eingang der Anzeige — §18 I
+
+    alt Zustimmung vor Fristablauf erteilt
+        AfA->>AG: Zustimmung (ggf. rückwirkend<br/>bis Antragstellung) — §18 I
+        Note over AG: Entlassungen können<br/>vorzeitig wirksam werden
+    else Keine vorzeitige Zustimmung
+        Note over AG: Entlassungen erst nach Ablauf<br/>eines Monats wirksam — §18 I
+        opt Verlängerung im Einzelfall
+            AfA->>AG: Verlängerung der Sperrfrist<br/>auf bis zu 2 Monate — §18 II
+        end
+    end
+
+    Note over AG: Nicht innerhalb 90 Tagen nach<br/>Zulässigkeit durchgeführt?<br/>→ erneute Anzeige erforderlich — §18 IV
+`;export{e as default};
