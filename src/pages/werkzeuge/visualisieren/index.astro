@@ -1,0 +1,19 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import Wizard from "./_Wizard.svelte";
+export const frontmatter = {
+  title: "Gesetze visualisieren",
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero>
+      <h1>{frontmatter.title}</h1>
+    </Hero>
+    <section>
+      <Wizard client:load />
+    </section>
+  </main>
+</Layout>

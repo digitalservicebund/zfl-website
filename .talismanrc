@@ -80,6 +80,14 @@ fileignoreconfig:
   - filename: src/components/global/AccordionMenu.test.ts
     allowed_patterns:
       - key
+  - filename: src/pages/werkzeuge/visualisieren/_data/heizkostenv_geltungsbereich.mmd
+    ignore_detectors: [filename]
+  - filename: src/pages/werkzeuge/visualisieren/_data/heizkostenv_kostenverteilung.mmd
+    ignore_detectors: [filename]
+  - filename: src/pages/werkzeuge/visualisieren/_data/heizkostenv_kuerzungsrecht.mmd
+    ignore_detectors: [filename]
+  - filename: src/pages/werkzeuge/visualisieren/_data/heizkostenv_pflichtenkreislauf.mmd
+    ignore_detectors: [filename]
 scopeconfig:
   - scope: node
 allowed_patterns:
