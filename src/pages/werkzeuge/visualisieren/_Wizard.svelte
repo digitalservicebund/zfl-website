@@ -13,7 +13,18 @@
     import: "default",
   });
 
-  let selectedTitle = $state(examples[0]?.title);
+  const initialSearchParams =
+    typeof window === "undefined"
+      ? new URLSearchParams()
+      : new URLSearchParams(window.location.search);
+  const initialNorm = initialSearchParams.get("norm");
+  const initialVisualization = initialSearchParams.get("visualization");
+  let hasAppliedInitialVisualization = false;
+
+  let selectedTitle = $state(
+    examples.find((example) => example.short === initialNorm)?.title ??
+      examples[0]?.title,
+  );
 
   let selectedExample = $derived(
     examples.find((example) => example.title === selectedTitle),
@@ -22,12 +33,38 @@
   let selectedType = $state<string>();
 
   $effect(() => {
-    selectedType = selectedExample?.visOptions[0]?.name;
+    if (!selectedExample) {
+      selectedType = undefined;
+      return;
+    }
+
+    if (!hasAppliedInitialVisualization) {
+      hasAppliedInitialVisualization = true;
+      const initialOption = selectedExample.visOptions.find(
+        (option) => option.name === initialVisualization,
+      );
+      if (initialOption) {
+        selectedType = initialOption.name;
+        return;
+      }
+    }
+
+    selectedType = selectedExample.visOptions[0]?.name;
   });
 
   let selectedOption = $derived(
     selectedExample?.visOptions.find((option) => option.name === selectedType),
   );
+
+  $effect(() => {
+    if (!selectedExample || !selectedOption) return;
+
+    const params = new URLSearchParams(window.location.search);
+    params.set("norm", selectedExample.short);
+    params.set("visualization", selectedOption.name);
+    const newUrl = `${window.location.pathname}?${params.toString()}${window.location.hash}`;
+    window.history.replaceState(null, "", newUrl);
+  });
 
   let mermaidSource = $state("");
   let diagramSvg = $state("");
