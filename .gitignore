@@ -33,3 +33,7 @@ pnpm-debug.log*
 
 # Lefthook
 /lefthook-local.yml
+
+# Claude: Allow skills only
+.claude/*
+!.claude/skills/

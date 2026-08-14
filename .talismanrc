@@ -88,6 +88,8 @@ fileignoreconfig:
     ignore_detectors: [filename]
   - filename: src/pages/werkzeuge/visualisieren/_data/heizkostenv_pflichtenkreislauf.mmd
     ignore_detectors: [filename]
+  - filename: .claude/skills/gesetz-visualisieren/SKILL.md
+    checksum: ce79ba7efa69a4f32e44fc592e62a672dcbd973485ac977b865ec6ff51deda64
 scopeconfig:
   - scope: node
 allowed_patterns:
