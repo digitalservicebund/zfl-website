@@ -5,6 +5,11 @@
 
   mermaid.initialize({ startOnLoad: false });
 
+  const mermaidSources = import.meta.glob<string>("./_data/*/*.mmd", {
+    query: "?raw",
+    import: "default",
+  });
+
   let selectedTitle = $state(examples[0]?.title);
 
   let selectedExample = $derived(
@@ -14,11 +19,11 @@
   let selectedType = $state<string>();
 
   $effect(() => {
-    selectedType = selectedExample?.visOptions[0]?.type;
+    selectedType = selectedExample?.visOptions[0]?.name;
   });
 
   let selectedOption = $derived(
-    selectedExample?.visOptions.find((option) => option.type === selectedType),
+    selectedExample?.visOptions.find((option) => option.name === selectedType),
   );
 
   let mermaidSource = $state("");
@@ -31,7 +36,7 @@
   let renderCount = 0;
 
   $effect(() => {
-    if (!selectedOption) {
+    if (!selectedExample || !selectedOption) {
       mermaidSource = "";
       return;
     }
@@ -39,7 +44,8 @@
     let cancelled = false;
     isLoading = true;
 
-    selectedOption.loadMermaid().then((source) => {
+    const path = `./_data/${selectedExample.short}/${selectedOption.filename}.mmd`;
+    mermaidSources[path]().then((source) => {
       if (!cancelled) mermaidSource = source;
     });
 
@@ -135,7 +141,7 @@
         bind:value={selectedTitle}
       >
         {#each examples as example (example.title)}
-          <option value={example.title}>{example.title}</option>
+          <option value={example.title}>{example.title} ({example.short})</option>
         {/each}
       </select>
     </div>
@@ -149,8 +155,8 @@
           id="darstellung"
           bind:value={selectedType}
         >
-          {#each selectedExample.visOptions as option (option.type)}
-            <option value={option.type}>{option.type}</option>
+          {#each selectedExample.visOptions as option (option.name)}
+            <option value={option.name}>{option.name}</option>
           {/each}
         </select>
       </div>
