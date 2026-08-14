@@ -231,6 +231,17 @@ export const werkzeuge_praxistauglichkeit = {
   navLabel: "Praxistauglichkeit",
 } as const;
 
+export const werkzeuge_visualisierungen = {
+  key: "werkzeuge_visualisierungen",
+  path: "/werkzeuge/visualisierungen",
+  title: "Beispiele für Visualisierungen",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: null,
+  navLabel: "Visualisierungen",
+} as const;
+
 export const allRoutes = [
   barrierefreiheit,
   begleitungen,
@@ -252,4 +263,5 @@ export const allRoutes = [
   ueber_zahlenUndFakten,
   werkzeuge,
   werkzeuge_praxistauglichkeit,
+  werkzeuge_visualisierungen,
 ] as const;

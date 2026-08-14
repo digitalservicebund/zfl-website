@@ -82,6 +82,16 @@ fileignoreconfig:
   - filename: src/components/global/AccordionMenu.test.ts
     allowed_patterns:
       - key
+  - filename: src/content/visualisierung/ablauf-eines-online-verfahrens.md
+    checksum: 3932230805182a9e132fbb7ec41ef5dc7447f98c77fef3d5faf7460ca1e97c2a
+  - filename: src/content/visualisierung/uebersicht-verantwortlicher-akteure.md
+    checksum: 42b081de8c3183b5c2eae44e7a6102fa204694c1888c26b110b779a9b3505430
+  - filename: src/content/visualisierung/vorher-nachher-vergleich.jpg
+    checksum: 21fb0ef9745037afe4e1a73ea6ebe4ecbdb20b11cb1d08073f170694b2398ecd
+  - filename: src/content/visualisierung/abstrahierter-antragsprozess.jpg
+    checksum: cb597079743914c8e1df3372772f970b33394b7583c858c5c200a5603b981d3a
+  - filename: src/content/visualisierung/verknuepfung-von-paragraphen-und-prozessschitten.jpg
+    checksum: d36251a8ba44b5b5b0906dfe1af5549621605bac7f0e5492742d9c2b9fd01b2b
 scopeconfig:
   - scope: node
 allowed_patterns:
