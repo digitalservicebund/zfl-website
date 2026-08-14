@@ -2,6 +2,9 @@
   import mermaid from "mermaid";
   import { deflate } from "pako";
   import { examples } from "./_data.ts";
+  import IconZoomIn from "~icons/ic/outline-zoom-in";
+  import IconZoomOut from "~icons/ic/outline-zoom-out";
+  import IconRestartAlt from "~icons/ic/outline-restart-alt";
 
   mermaid.initialize({ startOnLoad: false });
 
@@ -76,19 +79,27 @@
     };
   });
 
-  function onWheel(event: WheelEvent) {
-    event.preventDefault();
-
-    const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
-    const mouseX = event.clientX - rect.left;
-    const mouseY = event.clientY - rect.top;
-
-    const newScale = Math.min(Math.max(scale - event.deltaY * 0.003, 0.2), 5);
+  function zoomBy(factor: number) {
+    const newScale = Math.min(Math.max(scale * factor, 0.2), 5);
     const ratio = newScale / scale;
 
-    translateX = mouseX - (mouseX - translateX) * ratio;
-    translateY = mouseY - (mouseY - translateY) * ratio;
+    translateX *= ratio;
+    translateY *= ratio;
     scale = newScale;
+  }
+
+  function zoomIn() {
+    zoomBy(1.25);
+  }
+
+  function zoomOut() {
+    zoomBy(0.8);
+  }
+
+  function resetZoom() {
+    scale = 1;
+    translateX = 0;
+    translateY = 0;
   }
 
   function onPointerDown(event: PointerEvent) {
@@ -141,7 +152,9 @@
         bind:value={selectedTitle}
       >
         {#each examples as example (example.title)}
-          <option value={example.title}>{example.title} ({example.short})</option>
+          <option value={example.title}
+            >{example.title} ({example.short})</option
+          >
         {/each}
       </select>
     </div>
@@ -171,13 +184,47 @@
   {:else if mermaidSource}
     <div
       role="presentation"
-      class="touch-none cursor-grab overflow-hidden rounded-md border active:cursor-grabbing"
-      onwheel={onWheel}
+      class="relative touch-none cursor-grab overflow-hidden bg-lavender-200 p-16 active:cursor-grabbing"
       onpointerdown={onPointerDown}
       onpointermove={onPointerMove}
       onpointerup={onPointerUp}
       onpointerleave={onPointerUp}
     >
+      <div class="absolute right-16 top-16 z-10 flex flex-col gap-8">
+        <button
+          type="button"
+          class="kern-btn kern-btn--secondary kern-btn--only-icon"
+          onclick={zoomIn}
+          aria-label="Vergrößern"
+        >
+          <IconZoomIn
+            class="text-cosmic-blue-base text-xl"
+            aria-hidden="true"
+          />
+        </button>
+        <button
+          type="button"
+          class="kern-btn kern-btn--secondary kern-btn--only-icon"
+          onclick={zoomOut}
+          aria-label="Verkleinern"
+        >
+          <IconZoomOut
+            class="text-cosmic-blue-base text-xl"
+            aria-hidden="true"
+          />
+        </button>
+        <button
+          type="button"
+          class="kern-btn kern-btn--secondary kern-btn--only-icon"
+          onclick={resetZoom}
+          aria-label="Zoom zurücksetzen"
+        >
+          <IconRestartAlt
+            class="text-cosmic-blue-base text-xl"
+            aria-hidden="true"
+          />
+        </button>
+      </div>
       <div
         style={`transform: translate(${translateX}px, ${translateY}px) scale(${scale}); transform-origin: 0 0;`}
       >
