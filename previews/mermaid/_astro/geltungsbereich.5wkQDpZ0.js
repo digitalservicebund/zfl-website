@@ -1,0 +1,38 @@
+var e=`flowchart TD
+    A["Gebäude mit zentraler Heizungs-<br/>und/oder Warmwasseranlage<br/>oder Wärme-/Warmwasserlieferung? — §1"] -->|Nein| Z1["HeizkostenV nicht anwendbar"]
+    A -->|Ja| B{"Nur 2 Wohnungen,<br/>eine davon vom Vermieter<br/>selbst bewohnt? — §2"}
+
+    B -->|Ja| Z2["Vertragliche Regelungen<br/>gehen vor (kein Vorrang der VO)"]
+    B -->|Nein| C["Ausnahmetatbestand nach §11 einschlägig?"]
+
+    C --> D1{"Heizwärmebedarf<br/>< 15 kWh/(m²·a)?<br/>§11 I Nr.1a"}
+    C --> D2{"Erfassung nur mit<br/>unverhältnismäßig hohen Kosten<br/>möglich (Amortisation > 10 J.)?<br/>§11 I Nr.1b"}
+    C --> D3{"Bezugsfertig vor 1.7.1981<br/>UND Nutzer kann Verbrauch<br/>nicht beeinflussen?<br/>§11 I Nr.1c"}
+    C --> D4{"Alten-/Pflegeheim,<br/>Studenten-/Lehrlingsheim o.ä.<br/>Sonderwohnform?<br/>§11 I Nr.2"}
+    C --> D5{"Gebäude überwiegend versorgt<br/>durch Wärmerückgewinnung<br/>oder Solaranlage?<br/>§11 I Nr.3a"}
+    C --> D6{"Gebäude überwiegend versorgt<br/>durch KWK/Abwärme UND<br/>Wärmeverbrauch nicht erfasst?<br/>§11 I Nr.3b"}
+    C --> D7{"Befreiung im Einzelfall durch<br/>Landesbehörde (unbillige Härte)?<br/>§11 I Nr.5"}
+
+    D1 -->|Ja| Z3["Keine Pflicht zur<br/>Verbrauchserfassung &<br/>verbrauchsabh. Kostenverteilung"]
+    D2 -->|Ja| Z3
+    D3 -->|Ja| Z3
+    D4 -->|Ja| Z3
+    D5 -->|Ja| Z3
+    D6 -->|Ja| Z3
+    D7 -->|Ja| Z3
+
+    D1 -->|Nein| E
+    D2 -->|Nein| E
+    D3 -->|Nein| E
+    D4 -->|Nein| E
+    D5 -->|Nein| E
+    D6 -->|Nein| E
+    D7 -->|Nein| E
+
+    E["HeizkostenV gilt vollständig:<br/>Verbrauchserfassung (§4/§5) +<br/>verbrauchsabhängige Kostenverteilung (§6–§9)"]
+
+    style Z1 fill:#f5f5f5,stroke:#999
+    style Z2 fill:#fff3cd,stroke:#c9a227
+    style Z3 fill:#f5f5f5,stroke:#999
+    style E fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};

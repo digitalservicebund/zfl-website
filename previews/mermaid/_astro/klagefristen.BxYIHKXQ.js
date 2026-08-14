@@ -1,0 +1,29 @@
+var e=`flowchart TD
+    K["Schriftliche Kündigung geht<br/>dem Arbeitnehmer zu"] --> F1{"Bedarf die Kündigung der<br/>Zustimmung einer Behörde?<br/>— §4 S.4"}
+
+    F1 -->|Ja| F1B["Klagefrist beginnt erst mit<br/>Bekanntgabe der Behörden-<br/>entscheidung an den AN"]
+    F1 -->|Nein| F1C["Klagefrist beginnt mit<br/>Zugang der Kündigung"]
+
+    F1B --> FRIST
+    F1C --> FRIST["3-Wochen-Frist zur Klage beim<br/>Arbeitsgericht auf Feststellung,<br/>dass das Arbeitsverhältnis<br/>fortbesteht — §4"]
+
+    FRIST --> Q1{"Klage innerhalb der<br/>3-Wochen-Frist erhoben?"}
+
+    Q1 -->|Ja| VERF["Verfahren läuft: AN kann bis<br/>Schluss der mündl. Verhandlung<br/>1. Instanz auch nicht fristgerecht<br/>genannte Gründe nachschieben<br/>— §6"]
+    VERF --> URT["Gerichtliche Entscheidung<br/>über Wirksamkeit der Kündigung"]
+
+    Q1 -->|Nein| Q2{"War AN trotz zumutbarer Sorgfalt<br/>an rechtzeitiger Klage gehindert?<br/>(oder: Schwangerschaft erst nach<br/>Fristablauf unverschuldet bekannt)<br/>— §5 I"}
+
+    Q2 -->|Nein| W7["Kündigung gilt als von Anfang<br/>an rechtswirksam; Vorbehalt<br/>nach §2 erlischt — §7"]
+
+    Q2 -->|Ja| ANTRAG["Antrag auf nachträgliche Zulassung,<br/>verbunden mit Klageerhebung — §5 II<br/><br/>Frist: binnen 2 Wochen nach<br/>Behebung des Hindernisses,<br/>spätestens 6 Monate nach<br/>Ende der versäumten Frist — §5 III"]
+
+    ANTRAG --> Q3{"Wird der Antrag vom<br/>Arbeitsgericht (ggf. per<br/>Zwischenurteil) zugelassen?<br/>— §5 IV"}
+
+    Q3 -->|Ja| VERF
+    Q3 -->|Nein| W7
+
+    style W7 fill:#f8d7da,stroke:#c0392b
+    style URT fill:#d4edda,stroke:#2d8a4a
+    style ANTRAG fill:#fff3cd,stroke:#c9a227
+`;export{e as default};

@@ -1,0 +1,32 @@
+var e=`flowchart TD
+    Start["Anbauvereinigung stellt Antrag auf<br/>Erlaubnis für gemeinschaftlichen<br/>Eigenanbau — §11 Abs.1, Abs.2"] --> F1{"Antrag enthält alle Angaben/<br/>Nachweise nach §11 Abs.4<br/>(Führungszeugnis, Standort,<br/>Mengen, Präventions- und<br/>Schutzkonzept etc.)?"}
+
+    F1 -->|Nein| UNVOLLST["Antrag unvollständig — die<br/>3-Monats-Entscheidungsfrist<br/>beginnt erst mit Vollständigkeit<br/>— §11 Abs.5"]
+    UNVOLLST --> F1
+
+    F1 -->|Ja| F2{"Zwingender Versagungsgrund<br/>nach §12 Abs.1 einschlägig?<br/>(fehlende Zuverlässigkeit/<br/>Geschäftsfähigkeit; kein<br/>Präventionsbeauftragter; kein<br/>Gesundheits-/Jugendschutz-<br/>konzept; Satzungsmängel;<br/>Standort <200 m zu Schule/<br/>Kita/Spielplatz, in Wohnung<br/>oder militärischem Bereich)"}
+
+    F2 -->|Ja| VERSAGT["Erlaubnis ist zu versagen<br/>— §12 Abs.1"]
+
+    F2 -->|Nein| F3{"Ermessens-Versagungsgrund<br/>nach §12 Abs.3 einschlägig?<br/>(baulicher Verbund/räumliche<br/>Nähe zu Anbauflächen anderer<br/>Anbauvereinigungen; konkrete<br/>Verstoßwahrscheinlichkeit)"}
+
+    F3 -->|"Ja, Behörde übt<br/>Ermessen zulasten aus"| VERSAGT2["Erlaubnis kann<br/>versagt werden<br/>— §12 Abs.3"]
+
+    F3 -->|"Nein bzw. Ermessen<br/>zugunsten der Vereinigung"| ERTEILT["Erlaubnis wird erteilt,<br/>befristet auf 7 Jahre — §11<br/>Abs.3, §14 S.1<br/><br/>Inhalt: Standortbindung, jährliche<br/>Anbau-/Weitergabemenge, ggf.<br/>Bedingungen/Auflagen — §13"]
+
+    ERTEILT --> BETRIEB{"Während der Laufzeit:<br/>Widerrufsgrund nach §15 Abs.1<br/>erfüllt? (nicht genehmigter<br/>Standort; wiederholte Mengen-<br/>überschreitung; wiederholt zu<br/>hoher THC-Gehalt bei Weitergabe<br/>an Heranwachsende; 2 Jahre<br/>ungenutzt; wiederholte Verletzung<br/>der Mitwirkungspflichten)"}
+
+    BETRIEB -->|Ja| WIDERRUF["Erlaubnis kann ganz oder<br/>teilweise widerrufen werden<br/>(nach VwVfG) — §15"]
+
+    BETRIEB -->|"Nein, Ablauf der<br/>7 Jahre naht"| VERLAENGERUNG{"Verlängerungsantrag<br/>frühestens nach 5 Jahren<br/>gestellt? — §14 S.2"}
+
+    VERLAENGERUNG -->|"Ja, Voraussetzungen<br/>§§11-13 weiter erfüllt"| ERTEILT
+    VERLAENGERUNG -->|Nein| ABLAUF["Erlaubnis erlischt<br/>mit Fristablauf<br/>— §14 S.1"]
+
+    style ERTEILT fill:#d4edda,stroke:#2d8a4a
+    style VERSAGT fill:#f8d7da,stroke:#c0392b
+    style VERSAGT2 fill:#f8d7da,stroke:#c0392b
+    style WIDERRUF fill:#f8d7da,stroke:#c0392b
+    style ABLAUF fill:#f8d7da,stroke:#c0392b
+    style UNVOLLST fill:#fff3cd,stroke:#c9a227
+`;export{e as default};

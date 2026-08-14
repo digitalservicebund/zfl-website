@@ -1,0 +1,28 @@
+var e=`flowchart TD
+    A{"Welche Art der Heizungs-/<br/>Warmwasserversorgung<br/>liegt vor?"} --> B["Zentrale Heizungsanlage<br/>im Gebäude — §2 Nr.4 Buchst. a"]
+    A --> C["Zentrale eigene<br/>Brennstoffversorgungs-<br/>anlage — §2 Nr.4 Buchst. b"]
+    A --> D["Fernwärme/gewerbliche<br/>Wärmelieferung durch<br/>Dritte (Contracting) —<br/>§2 Nr.4 Buchst. c"]
+    A --> E["Einzelöfen/Gasöfen/<br/>Etagenheizung — §2 Nr.4 Buchst. d"]
+    A --> F["Zentrale Warmwasser-<br/>anlage — §2 Nr.5 Buchst. a"]
+    A --> G["Fernwärme/gewerbliche<br/>Warmwasserlieferung —<br/>§2 Nr.5 Buchst. b"]
+    A --> H["Einzelgeräte für<br/>Warmwasser — §2 Nr.5 Buchst. c"]
+    A --> I["Verbundene Heizungs-<br/>und Warmwasser-<br/>versorgungsanlage —<br/>§2 Nr.6"]
+
+    B --> Z1["Umlagefähig: Brennstoffkosten,<br/>Betriebsstrom, Bedienung/<br/>Überwachung/Pflege,<br/>Reinigung, Emissionsmessung,<br/>Wartung — §2 Nr.4 Buchst. a"]
+    C --> Z2["Umlagefähig: Betriebsstrom,<br/>Überwachung, Reinigung<br/>der Brennstoffversorgung<br/>— §2 Nr.4 Buchst. b"]
+    D --> Z3["Umlagefähig: Entgelt für<br/>Wärmelieferung + Betrieb der<br/>hauseigenen Verteilanlage<br/>— §2 Nr.4 Buchst. c"]
+    E --> Z4["Umlagefähig: Kosten für<br/>Wartung, Reinigung,<br/>Emissionsmessung je<br/>Einzelanlage — §2 Nr.4 Buchst. d"]
+    F --> Z5["Umlagefähig: Wasser- und<br/>Energiekosten der zentralen<br/>Warmwassererzeugung —<br/>§2 Nr.5 Buchst. a"]
+    G --> Z6["Umlagefähig: Entgelt für<br/>Warmwasserlieferung + Betrieb<br/>der Verteilanlage — §2 Nr.5 Buchst. b"]
+    H --> Z7["Umlagefähig: Wartung/<br/>Entkalkung der Einzelgeräte<br/>durch Fachkraft — §2 Nr.5 Buchst. c"]
+    I --> Z8["Umlagefähig: entsprechende<br/>Kosten je nach Betriebsform<br/>(zentral/gewerblich/Einzelgerät),<br/>anteilig nach Verbrauchsanteil<br/>Heizung/Warmwasser — §2 Nr.6"]
+
+    style Z1 fill:#d4edda,stroke:#2d8a4a
+    style Z2 fill:#d4edda,stroke:#2d8a4a
+    style Z3 fill:#d4edda,stroke:#2d8a4a
+    style Z4 fill:#d4edda,stroke:#2d8a4a
+    style Z5 fill:#d4edda,stroke:#2d8a4a
+    style Z6 fill:#d4edda,stroke:#2d8a4a
+    style Z7 fill:#d4edda,stroke:#2d8a4a
+    style Z8 fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};
