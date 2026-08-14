@@ -65,7 +65,7 @@ hergibt) und benenne jeden kurz und prägnant (2-4 Wörter, wie oben).
 
 Für jeden identifizierten Prozess ein `flowchart TD`-Diagramm erstellen.
 Stilkonventionen (siehe existierende Dateien unter
-`src/pages/werkzeuge/visualisieren/_data/*.mmd` für Beispiele):
+`src/pages/werkzeuge/visualisieren/_data/{Abkuerzung}/*.mmd` für Beispiele):
 
 - Knotenlabels in doppelten Anführungszeichen, Zeilenumbrüche mit `<br/>`
   (nicht `\n`), damit lange Texte lesbar bleiben.
@@ -82,18 +82,19 @@ Stilkonventionen (siehe existierende Dateien unter
 Speichern:
 
 1. Lege pro Prozess eine Datei
-   `src/pages/werkzeuge/visualisieren/_data/{abkuerzung_lowercase}_{slug}.mmd`
-   an (`slug` = kurzer, kebab-freier snake_case-Bezeichner, z.B.
-   `kschg_klagefristen.mmd`). Nur den reinen Mermaid-Code hineinschreiben,
-   keine Markdown-Codefences.
+   `src/pages/werkzeuge/visualisieren/_data/{Abkuerzung}/{slug}.mmd`
+   an (`Abkuerzung` = amtliche Abkürzung des Gesetzes, z.B. `KSchG`;
+   `slug` = kurzer, kebab-freier snake_case-Bezeichner ohne Abkürzungspräfix,
+   z.B. `KSchG/klagefristen.mmd`). Nur den reinen Mermaid-Code
+   hineinschreiben, keine Markdown-Codefences.
 2. Ergänze `src/pages/werkzeuge/visualisieren/_data.ts`:
    - Falls das Gesetz dort noch keinen Eintrag hat, einen neuen
-     `LawExample`-Eintrag mit `title` (offizieller Name, ggf. mit
-     Abkürzung in Klammern, z.B. `"Kündigungsschutzgesetz (KSchG)"`) und
-     leerem `visOptions`-Array anlegen.
-   - Für jeden Prozess ein `visOptions`-Objekt mit `type` (Prozessname aus
-     Schritt 3) und `loadMermaid` (dynamischer Import der neuen `.mmd`-Datei,
-     exakt nach dem Muster der bestehenden Einträge) hinzufügen.
+     `LawExample`-Eintrag mit `title` (offizieller Name ohne Abkürzung),
+     `short` (Abkürzung, z.B. `"KSchG"`, identisch zum Ordnernamen aus
+     Schritt 1) und leerem `visOptions`-Array anlegen.
+   - Für jeden Prozess ein `visOptions`-Objekt mit `name` (Prozessname aus
+     Schritt 3) und `filename` (Dateiname der `.mmd`-Datei ohne
+     Verzeichnis und Endung, z.B. `"klagefristen"`) hinzufügen.
 3. Kurze Zusammenfassung an den Nutzer: welches Gesetz, welche Prozesse,
    wo gespeichert. Auf `/werkzeuge/visualisieren` im lokalen Dev-Server
    verweisen, um die Diagramme zu prüfen.
