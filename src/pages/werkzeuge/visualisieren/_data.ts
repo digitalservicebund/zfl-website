@@ -79,4 +79,28 @@ export const examples: LawExample[] = [
       },
     ],
   },
+  {
+    title: "Betriebskostenverordnung (BetrKV)",
+    visOptions: [
+      {
+        type: "Abgrenzung Betriebskosten",
+        loadMermaid: () =>
+          import("./_data/betrkv_abgrenzung.mmd?raw").then((m) => m.default),
+      },
+      {
+        type: "Kabelanschluss-/Antennenkosten",
+        loadMermaid: () =>
+          import("./_data/betrkv_kabelanschluss.mmd?raw").then(
+            (m) => m.default,
+          ),
+      },
+      {
+        type: "Heiz- und Warmwasserkosten",
+        loadMermaid: () =>
+          import("./_data/betrkv_heizwarmwasser.mmd?raw").then(
+            (m) => m.default,
+          ),
+      },
+    ],
+  },
 ];
