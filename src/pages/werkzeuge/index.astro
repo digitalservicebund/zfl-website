@@ -91,10 +91,10 @@ const PAGEFIND_INSTANCE = "werkzeuge";
       x-data="{ stuck: false }"
       x-bind:class="stuck ? 'lg:shadow-md' : ''"
       x-init="
-        new IntersectionObserver(([e]) => { stuck = !e.isIntersecting }, { threshold: [1] })
-          .observe($refs.sentinel);
-        stuck = false;
-      "
+          new IntersectionObserver(([e]) => { stuck = !e.isIntersecting }, { threshold: [1] })
+            .observe($refs.sentinel);
+          stuck = false;
+        "
     >
       <div class="flex flex-col flex-wrap justify-between gap-16 lg:flex-row">
         <div class="flex flex-wrap items-center gap-8 lg:gap-16">
@@ -254,11 +254,12 @@ const PAGEFIND_INSTANCE = "werkzeuge";
 
 <script>
   import Alpine from "alpinejs";
+  import { filterBarData } from "@/utils/filterBar";
   const BOOKMARKED_TYPE = "Gemerkte Werkzeuge"; // TODO: DRY with frontmatter
 
   document.addEventListener("alpine:init", () => {
     Alpine.data("werkzeuge", () => ({
-      filterType: null as string | null,
+      ...filterBarData(),
       bookmarkedTools: [] as string[],
       searchQuery: "",
 
@@ -279,14 +280,9 @@ const PAGEFIND_INSTANCE = "werkzeuge";
         });
       },
 
-      toggleFilterType(type: string) {
-        this.filterType = this.filterType === type ? null : type;
-      },
-
       isCardVisible(toolId: string, types: string[]) {
         return (
-          this.filterType === null ||
-          types.includes(this.filterType) ||
+          this.matchesFilter(types) ||
           (this.filterType === BOOKMARKED_TYPE &&
             this.bookmarkedTools.includes(toolId))
         );

@@ -28,3 +28,15 @@
   border: 1px solid #8412af;
   --kern-color-layout-text-default: #8412af;
 }
+.kern-badge--tag {
+  background-color: var(--kern-color-layout-background-default);
+  border: 1px solid var(--kern-color-layout-text-muted-contextual);
+}
+.kern-badge--tag .kern-label {
+  color: var(--kern-color-layout-text-muted-contextual);
+}
+
+.kern-badge--filter {
+  background-color: var(--kern-color-layout-background-default);
+  border: 1px solid var(--kern-color-layout-text-default-contextual);
+}
