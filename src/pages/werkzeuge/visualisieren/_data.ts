@@ -80,6 +80,42 @@ export const examples: LawExample[] = [
     ],
   },
   {
+    title: "Gesetz zum Umgang mit Konsumcannabis (KCanG)",
+    visOptions: [
+      {
+        type: "Besitzmengen-Ampel",
+        loadMermaid: () =>
+          import("./_data/kcang_besitzmengen.mmd?raw").then((m) => m.default),
+      },
+      {
+        type: "Privater Eigenanbau",
+        loadMermaid: () =>
+          import("./_data/kcang_privater_eigenanbau.mmd?raw").then(
+            (m) => m.default,
+          ),
+      },
+      {
+        type: "Erlaubnisverfahren Anbauvereinigung",
+        loadMermaid: () =>
+          import("./_data/kcang_anbauvereinigung_erlaubnis.mmd?raw").then(
+            (m) => m.default,
+          ),
+      },
+      {
+        type: "Straf- und Bußgeldschema",
+        loadMermaid: () =>
+          import("./_data/kcang_straf_bussgeld.mmd?raw").then((m) => m.default),
+      },
+      {
+        type: "Tilgungsverfahren Bundeszentralregister",
+        loadMermaid: () =>
+          import("./_data/kcang_tilgungsverfahren.mmd?raw").then(
+            (m) => m.default,
+          ),
+      },
+    ],
+  },
+  {
     title: "Betriebskostenverordnung (BetrKV)",
     visOptions: [
       {

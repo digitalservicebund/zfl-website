@@ -1,0 +1,30 @@
+flowchart TD
+    Start["Person ist im Bundeszentral-<br/>register wegen einer Verurteilung<br/>nach §29 BtMG eingetragen"] --> Q1{"Verurteilung erfolgte<br/>ausschließlich wegen unerlaubten<br/>Umgangs mit Cannabis oder<br/>Vermehrungsmaterial?<br/>— §40 Abs.1 Nr.1"}
+
+    Q1 -->|"Nein, auch wegen<br/>weiterhin strafbarer<br/>anderer Taten"| AUSSCHLUSS["Tilgung der Eintragung<br/>ausgeschlossen<br/>— §40 Abs.3"]
+
+    Q1 -->|Ja| Q2{"Ist die zugrunde liegende<br/>Handlung nach dem KCanG<br/>straflos oder nur noch mit<br/>Geldbuße bedroht?<br/>— §40 Abs.1 Nr.2"}
+
+    Q2 -->|Nein| KEINE_TILGUNG["Eintragung (noch)<br/>nicht tilgungsfähig"]
+
+    Q2 -->|Ja| TILGUNGSFAEHIG["Eintragung ist tilgungsfähig<br/>— §40 Abs.1 (entsprechend auch<br/>bei nachträglicher Gesamtstrafen-<br/>bildung — §40 Abs.2)"]
+
+    TILGUNGSFAEHIG --> ANTRAG["Verurteilte Person stellt Antrag<br/>auf Feststellung der Tilgungs-<br/>fähigkeit bei der zuständigen<br/>Staatsanwaltschaft — §41 Abs.1,<br/>Abs.3"]
+
+    ANTRAG --> GLAUBHAFT["Voraussetzungen können durch<br/>Glaubhaftmachung, ggf. eides-<br/>stattliche Versicherung,<br/>nachgewiesen werden<br/>— §41 Abs.2"]
+
+    GLAUBHAFT --> Q3{"Staatsanwaltschaft stellt<br/>Tilgungsfähigkeit fest?<br/>— §41 Abs.1"}
+
+    Q3 -->|Nein| ABLEHNUNG["Kein Feststellungsbescheid;<br/>Eintragung bleibt bestehen<br/>— §42 Abs.1 S.2"]
+
+    Q3 -->|Ja| MITTEILUNG["Mitteilung der Feststellung an<br/>Registerbehörde und verurteilte<br/>Person — §42 Abs.1 S.1"]
+
+    MITTEILUNG --> TILGUNG["Registerbehörde tilgt die<br/>Eintragung im Bundeszentral-<br/>register — §42 Abs.2"]
+
+    MITTEILUNG -->|"Feststellung war<br/>zu Unrecht getroffen<br/>und wird zurückgenommen"| WIEDEREINTRAGUNG["Staatsanwaltschaft nimmt<br/>Feststellung zurück; getilgte<br/>Verurteilung wird wieder<br/>eingetragen — §41 Abs.4"]
+
+    style TILGUNG fill:#d4edda,stroke:#2d8a4a
+    style AUSSCHLUSS fill:#f8d7da,stroke:#c0392b
+    style KEINE_TILGUNG fill:#f8d7da,stroke:#c0392b
+    style ABLEHNUNG fill:#f8d7da,stroke:#c0392b
+    style WIEDEREINTRAGUNG fill:#fff3cd,stroke:#c9a227
