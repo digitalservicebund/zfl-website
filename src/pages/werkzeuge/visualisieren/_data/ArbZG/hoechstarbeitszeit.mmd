@@ -1,0 +1,19 @@
+flowchart TD
+    START["Werktägliche Arbeitszeit<br/>eines Arbeitnehmers"] --> Q1{"Überschreitet die Arbeitszeit<br/>acht Stunden? — <a href='{{ELI}}#art-z3_abs-z' target='_blank' rel='noopener'>§3 S.1</a>"}
+
+    Q1 -->|Nein| OK1["Zulässig - Grundmaß<br/>eingehalten"]
+
+    Q1 -->|Ja| Q2{"Überschreitet die Arbeitszeit<br/>zehn Stunden? — <a href='{{ELI}}#art-z3_abs-z' target='_blank' rel='noopener'>§3 S.2</a>"}
+
+    Q2 -->|Ja| UNZUL["Unzulässig: absolute<br/>Höchstgrenze von 10 Stunden<br/>überschritten"]
+
+    Q2 -->|Nein| Q3{"Wird im Durchschnitt von sechs<br/>Kalendermonaten oder 24 Wochen<br/>eine werktägliche Arbeitszeit von<br/>acht Stunden nicht überschritten? — <a href='{{ELI}}#art-z3_abs-z' target='_blank' rel='noopener'>§3 S.2</a>"}
+
+    Q3 -->|Ja| OK2["Verlängerung auf bis zu<br/>zehn Stunden zulässig"]
+
+    Q3 -->|Noch offen /<br/>Nein| AUSGLEICH["Ausgleich muss innerhalb<br/>des Bezugszeitraums noch<br/>erfolgen, sonst unzulässig"]
+
+    style OK1 fill:#d4edda,stroke:#2d8a4a
+    style OK2 fill:#d4edda,stroke:#2d8a4a
+    style UNZUL fill:#f8d7da,stroke:#c0392b
+    style AUSGLEICH fill:#fff3cd,stroke:#c9a227

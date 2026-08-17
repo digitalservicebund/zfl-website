@@ -1,0 +1,27 @@
+flowchart TD
+    START["Beendigung der<br/>täglichen Arbeitszeit"] --> BASE["Grundsatz: ununterbrochene<br/>Ruhezeit von mindestens<br/>11 Stunden — <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I</a>"]
+
+    BASE --> Q1{"Tätigkeit in Krankenhaus/Pflege,<br/>Gaststätte/Beherbergung, Verkehrs-<br/>betrieb, Rundfunk, Landwirtschaft<br/>oder Tierhaltung? — <a href='{{ELI}}#art-z5_abs-z2' target='_blank' rel='noopener'>§5 II</a>"}
+
+    Q1 -->|Nein| STANDARD["11 Stunden Ruhezeit<br/>sind einzuhalten"]
+
+    Q1 -->|Ja| Q1B{"Kürzung durch Inanspruchnahme<br/>während Rufbereitschaft in<br/>Krankenhaus/Pflegeeinrichtung? — <a href='{{ELI}}#art-z5_abs-z3' target='_blank' rel='noopener'>§5 III</a>"}
+
+    Q1B -->|Ja| Q3B{"Beträgt die Inanspruchnahme<br/>nicht mehr als die Hälfte der<br/>Ruhezeit und wird sie zu anderen<br/>Zeiten ausgeglichen? — <a href='{{ELI}}#art-z5_abs-z3' target='_blank' rel='noopener'>§5 III</a>"}
+
+    Q3B -->|Ja| VERKUERZT2["Verkürzung durch<br/>Rufbereitschaft zulässig"]
+    Q3B -->|Nein| UNZUL["Unzulässig: Ruhezeit<br/>nicht ordnungsgemäß gewahrt"]
+
+    Q1B -->|Nein| Q2{"Verkürzung der Ruhezeit um<br/>bis zu eine Stunde vorgesehen? — <a href='{{ELI}}#art-z5_abs-z2' target='_blank' rel='noopener'>§5 II</a>"}
+
+    Q2 -->|Nein| STANDARD
+
+    Q2 -->|Ja| Q3{"Wird die Verkürzung innerhalb<br/>eines Kalendermonats oder vier<br/>Wochen durch Verlängerung einer<br/>anderen Ruhezeit auf mindestens<br/>12 Stunden ausgeglichen? — <a href='{{ELI}}#art-z5_abs-z2' target='_blank' rel='noopener'>§5 II</a>"}
+
+    Q3 -->|Ja| VERKUERZT["Verkürzung um bis zu<br/>1 Stunde zulässig"]
+    Q3 -->|Nein| UNZUL
+
+    style STANDARD fill:#d4edda,stroke:#2d8a4a
+    style VERKUERZT fill:#d4edda,stroke:#2d8a4a
+    style VERKUERZT2 fill:#d4edda,stroke:#2d8a4a
+    style UNZUL fill:#f8d7da,stroke:#c0392b
