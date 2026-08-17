@@ -13,6 +13,12 @@
     import: "default",
   });
 
+  const RIS_BASE_URL = "https://testphase.rechtsinformationen.bund.de/gesetze";
+
+  function resolveNormLinks(source: string, eli: string): string {
+    return source.replaceAll("{{ELI}}", `${RIS_BASE_URL}/${eli}`);
+  }
+
   const initialSearchParams =
     typeof window === "undefined"
       ? new URLSearchParams()
@@ -85,8 +91,9 @@
     isLoading = true;
 
     const path = `./_data/${selectedExample.short}/${selectedOption.filename}.mmd`;
+    const eli = selectedExample.eli;
     mermaidSources[path]().then((source) => {
-      if (!cancelled) mermaidSource = source;
+      if (!cancelled) mermaidSource = resolveNormLinks(source, eli);
     });
 
     return () => {

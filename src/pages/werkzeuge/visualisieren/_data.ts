@@ -6,6 +6,10 @@ interface VisExample {
 interface LawExample {
   title: string;
   short: string;
+  /** ELI-Pfad des Gesetzes auf rechtsinformationen.bund.de, z.B.
+   * "eli/bund/bgbl-1/2000/s1966/2022-08-01/1/deu". Wird verwendet, um
+   * "{{ELI}}"-Platzhalter in den .mmd-Dateien zu Norm-Links aufzulösen. */
+  eli: string;
   visOptions: VisExample[];
 }
 
@@ -14,6 +18,7 @@ export const examples: LawExample[] = [
     title:
       "Verordnung über die verbrauchsabhängige Abrechnung der Heiz- und Warmwasserkosten",
     short: "HeizkostenV",
+    eli: "eli/bund/bgbl-1/1981/s261/2024-10-01/1/deu",
     visOptions: [
       { name: "Geltungsbereich", filename: "geltungsbereich" },
       { name: "Kürzungsrecht", filename: "kuerzungsrecht" },
@@ -27,6 +32,7 @@ export const examples: LawExample[] = [
   {
     title: "Kündigungsschutzgesetz",
     short: "KSchG",
+    eli: "eli/bund/bgbl-1/1951/s499/2021-06-18/1/deu",
     visOptions: [
       { name: "Anwendbarkeitsprüfung", filename: "anwendbarkeit" },
       {
@@ -47,6 +53,7 @@ export const examples: LawExample[] = [
   {
     title: "Gesetz zum Umgang mit Konsumcannabis",
     short: "KCanG",
+    eli: "eli/bund/bgbl-1/2024/109-2/2025-01-01/1/deu",
     visOptions: [
       { name: "Besitzmengen-Ampel", filename: "besitzmengen" },
       { name: "Privater Eigenanbau", filename: "privater_eigenanbau" },
@@ -64,6 +71,7 @@ export const examples: LawExample[] = [
   {
     title: "Betriebskostenverordnung",
     short: "BetrKV",
+    eli: "eli/bund/bgbl-1/2003/s2347/2024-01-01/1/deu",
     visOptions: [
       { name: "Abgrenzung Betriebskosten", filename: "abgrenzung" },
       {
@@ -76,6 +84,7 @@ export const examples: LawExample[] = [
   {
     title: "Gesetz über Teilzeitarbeit und befristete Arbeitsverträge",
     short: "TzBfG",
+    eli: "eli/bund/bgbl-1/2000/s1966/2022-08-01/1/deu",
     visOptions: [
       {
         name: "Zulässigkeit der Befristung",

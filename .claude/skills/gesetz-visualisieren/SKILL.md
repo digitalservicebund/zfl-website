@@ -35,7 +35,11 @@ https://raw.githubusercontent.com/digitalservicebund/ris-search/refs/heads/main/
 3. Aus dem gewählten Treffer das `encoding[]`-Array auslesen und die
    HTML-Manifestation (Content-Type `text/html`, meist
    `.../regelungstext-1.html` oder `.../regelungstext-verkuendung-1.html`)
-   per WebFetch laden. Das ist der vollständige, konsolidierte Gesetzestext.
+   per WebFetch/curl laden. Das ist der vollständige, konsolidierte
+   Gesetzestext — er enthält bei jedem Absatz bereits eine Anker-ID
+   (`id="art-zN_abs-zM"`), die in Schritt 4 zum Verlinken gebraucht wird.
+   Außerdem den `legislationIdentifier` des Treffers notieren (den
+   **ELI-Pfad**, z.B. `eli/bund/bgbl-1/1951/s499/2021-06-18/1/deu`).
 4. Falls das Gesetz sehr lang ist (>~50 Paragraphen), zunächst nur das
    Inhaltsverzeichnis/die Paragraphenüberschriften sichten und gezielt die
    Abschnitte nachladen, die für Ablaufprüfungen relevant wirken (Fristen,
@@ -78,6 +82,19 @@ Stilkonventionen (siehe existierende Dateien unter
   `style <Knoten> fill:#f8d7da,stroke:#c0392b` (negativ/rot),
   `style <Knoten> fill:#fff3cd,stroke:#c9a227` (Zwischenschritt/gelb).
 - Nur den Prozess selbst modellieren, keine Meta-Kommentare im Diagramm.
+- Jeden Paragraphenverweis (nur den Verweis, nicht das ganze Knotenlabel)
+  als Link auf die Norm setzen:
+  `<a href='{{ELI}}#art-zN_abs-zM' target='_blank' rel='noopener'>§N M</a>`
+  (Anker-ID aus dem in Schritt 2 geladenen HTML übernehmen, nicht raten).
+  `{{ELI}}` ist ein Platzhalter, den die Wizard-Komponente zur Laufzeit
+  auflöst — nicht die volle URL eintragen. Einfache statt doppelte
+  Anführungszeichen im `<a>`-Tag verwenden, da das Knotenlabel selbst in
+  doppelten Anführungszeichen steht. Bezieht sich ein Knoten auf mehrere
+  Absätze oder nur pauschal auf den ganzen Paragraphen, stattdessen auf
+  `{{ELI}}/art-zN` verlinken; Verweise auf andere Gesetze nicht verlinken.
+  Das funktioniert nur bei `flowchart`- und `stateDiagram`-Diagrammen
+  (HTML-Labels); bei `sequenceDiagram` und `gantt` gibt es dafür keine
+  Entsprechung — dort Verweise unverlinkt lassen.
 
 Speichern:
 
@@ -91,7 +108,8 @@ Speichern:
    - Falls das Gesetz dort noch keinen Eintrag hat, einen neuen
      `LawExample`-Eintrag mit `title` (offizieller Name ohne Abkürzung),
      `short` (Abkürzung, z.B. `"KSchG"`, identisch zum Ordnernamen aus
-     Schritt 1) und leerem `visOptions`-Array anlegen.
+     Schritt 1), `eli` (ELI-Pfad aus Schritt 2, Pflichtfeld) und leerem
+     `visOptions`-Array anlegen.
    - Für jeden Prozess ein `visOptions`-Objekt mit `name` (Prozessname aus
      Schritt 3) und `filename` (Dateiname der `.mmd`-Datei ohne
      Verzeichnis und Endung, z.B. `"klagefristen"`) hinzufügen.

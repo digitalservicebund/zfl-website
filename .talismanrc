@@ -80,13 +80,13 @@ fileignoreconfig:
   - filename: src/components/global/AccordionMenu.test.ts
     allowed_patterns:
       - key
-  - filename: src/pages/werkzeuge/visualisieren/_data/heizkostenv_geltungsbereich.mmd
+  - filename: src/pages/werkzeuge/visualisieren/_data/HeizkostenV/geltungsbereich.mmd
     ignore_detectors: [filename]
-  - filename: src/pages/werkzeuge/visualisieren/_data/heizkostenv_kostenverteilung.mmd
+  - filename: src/pages/werkzeuge/visualisieren/_data/HeizkostenV/kostenverteilung.mmd
     ignore_detectors: [filename]
-  - filename: src/pages/werkzeuge/visualisieren/_data/heizkostenv_kuerzungsrecht.mmd
+  - filename: src/pages/werkzeuge/visualisieren/_data/HeizkostenV/kuerzungsrecht.mmd
     ignore_detectors: [filename]
-  - filename: src/pages/werkzeuge/visualisieren/_data/heizkostenv_pflichtenkreislauf.mmd
+  - filename: src/pages/werkzeuge/visualisieren/_data/HeizkostenV/pflichtenkreislauf.mmd
     ignore_detectors: [filename]
   - filename: .claude/skills/gesetz-visualisieren/SKILL.md
     checksum: ce79ba7efa69a4f32e44fc592e62a672dcbd973485ac977b865ec6ff51deda64
