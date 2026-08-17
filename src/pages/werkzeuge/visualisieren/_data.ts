@@ -120,4 +120,31 @@ export const examples: LawExample[] = [
       { name: "Notfall-Abweichungen", filename: "notfall_abweichungen" },
     ],
   },
+  {
+    title: "Allgemeines Gleichbehandlungsgesetz",
+    short: "AGG",
+    eli: "eli/bund/bgbl-1/2006/s1897/2025-01-01/1/deu",
+    visOptions: [
+      {
+        name: "Prüfschema Benachteiligung",
+        filename: "pruefschema_benachteiligung",
+      },
+      {
+        name: "Rechtfertigung im Beschäftigungsverhältnis",
+        filename: "rechtfertigung_beschaeftigung",
+      },
+      {
+        name: "Beschwerde- & Schutzpflichten",
+        filename: "beschwerde_schutzpflichten",
+      },
+      {
+        name: "Entschädigungs- & Klagefristen",
+        filename: "entschaedigung_fristen",
+      },
+      {
+        name: "Zivilrechtliche Ansprüche",
+        filename: "zivilrecht_ansprueche",
+      },
+    ],
+  },
 ];

@@ -1,0 +1,16 @@
+flowchart TD
+    S["Arbeitgeber muss vorbeugende<br/>Maßnahmen zum Schutz vor<br/>Benachteiligung treffen; geeignete<br/>Schulung erfüllt diese Pflicht<br/>— <a href='{{ELI}}#art-z12_abs-z1' target='_blank' rel='noopener'>§12 Abs. 1</a>, <a href='{{ELI}}#art-z12_abs-z2' target='_blank' rel='noopener'>Abs. 2</a>"] --> A["Beschäftigte/r fühlt sich wegen<br/>eines §1-Grundes benachteiligt<br/>oder belästigt"]
+    A --> B["Beschwerde bei zuständiger<br/>Stelle des Betriebs, Unternehmens<br/>oder der Dienststelle<br/>— <a href='{{ELI}}#art-z13_abs-z1' target='_blank' rel='noopener'>§13 Abs. 1</a>"]
+    B --> C["Arbeitgeber prüft die Beschwerde<br/>und teilt das Ergebnis mit<br/>— <a href='{{ELI}}#art-z13_abs-z1' target='_blank' rel='noopener'>§13 Abs. 1</a>"]
+    C --> D{"Geht es um (sexuelle)<br/>Belästigung am Arbeitsplatz?<br/>— <a href='{{ELI}}#art-z14_abs-z' target='_blank' rel='noopener'>§14</a>"}
+    D -->|Ja| E{"Ergreift der Arbeitgeber<br/>geeignete Maßnahmen zur<br/>Unterbindung?<br/>— <a href='{{ELI}}#art-z14_abs-z' target='_blank' rel='noopener'>§14</a>"}
+    E -->|Ja| Z1["Kein Leistungsverweigerungs-<br/>recht der Beschäftigten"]
+    E -->|"Nein/offensichtlich<br/>ungeeignet"| Z2["Beschäftigte dürfen Tätigkeit<br/>ohne Verlust des Arbeitsentgelts<br/>einstellen — <a href='{{ELI}}#art-z14_abs-z' target='_blank' rel='noopener'>§14</a>"]
+    D -->|Nein| F{"Verstößt ein/e Beschäftigte/r<br/>gegen das Benachteiligungs-<br/>verbot? — <a href='{{ELI}}#art-z12_abs-z3' target='_blank' rel='noopener'>§12 Abs. 3</a>"}
+    F -->|Ja| G["Arbeitgeber muss geeignete<br/>Maßnahmen ergreifen: Abmahnung,<br/>Umsetzung, Versetzung oder<br/>Kündigung<br/>— <a href='{{ELI}}#art-z12_abs-z3' target='_blank' rel='noopener'>§12 Abs. 3</a>"]
+    F -->|"Nein, Benachteiligung<br/>durch Dritte"| H["Arbeitgeber muss geeignete<br/>Schutzmaßnahmen ergreifen<br/>— <a href='{{ELI}}#art-z12_abs-z4' target='_blank' rel='noopener'>§12 Abs. 4</a>"]
+
+    style Z2 fill:#d4edda,stroke:#2d8a4a
+    style Z1 fill:#f8d7da,stroke:#c0392b
+    style G fill:#fff3cd,stroke:#c9a227
+    style H fill:#fff3cd,stroke:#c9a227

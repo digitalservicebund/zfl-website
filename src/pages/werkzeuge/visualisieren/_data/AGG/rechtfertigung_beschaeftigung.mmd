@@ -1,0 +1,19 @@
+flowchart TD
+    A{"Um welchen Grund der<br/>unterschiedlichen Behandlung<br/>geht es?"}
+    A -->|"Berufliche Anforderung"| B{"Stellt der Grund wegen Art/<br/>Bedingungen der Tätigkeit eine<br/>wesentliche, entscheidende<br/>berufliche Anforderung dar,<br/>bei rechtmäßigem Zweck und<br/>angemessener Anforderung?<br/>— <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 Abs. 1</a>"}
+    B -->|Ja| C{"Wird zugleich eine geringere<br/>Vergütung für gleiche/<br/>gleichwertige Arbeit vereinbart?<br/>— <a href='{{ELI}}#art-z8_abs-z2' target='_blank' rel='noopener'>§8 Abs. 2</a>"}
+    C -->|Ja| N1["Unzulässig — besondere<br/>Schutzvorschriften<br/>rechtfertigen dies nicht"]
+    C -->|Nein| Z1["Zulässig"]
+    B -->|Nein| N2["Unzulässig — Verstoß<br/>gegen <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 Abs. 1</a>"]
+    A -->|"Religion/Weltanschauung"| D{"Erfolgt die Beschäftigung bei<br/>einer Religionsgemeinschaft,<br/>zugeordneten Einrichtung oder<br/>Weltanschauungsvereinigung,<br/>und ist die Religion/<br/>Weltanschauung nach deren<br/>Selbstverständnis eine<br/>gerechtfertigte berufliche<br/>Anforderung?<br/>— <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 Abs. 1</a>"}
+    D -->|Ja| Z2["Zulässig, inkl. Anspruch auf<br/>loyales/aufrichtiges Verhalten<br/>— <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 Abs. 2</a>"]
+    D -->|Nein| N2
+    A -->|"Alter"| E{"Ist die Behandlung objektiv<br/>und angemessen, durch ein<br/>legitimes Ziel gerechtfertigt,<br/>mit angemessenen/<br/>erforderlichen Mitteln?<br/>— <a href='{{ELI}}#art-z10_abs-z' target='_blank' rel='noopener'>§10</a>"}
+    E -->|Ja| Z3["Zulässig, z.B. Alters-/<br/>Erfahrungsgrenzen, gestaffelte<br/>Abfindungen — <a href='{{ELI}}#art-z10_abs-z' target='_blank' rel='noopener'>§10 Nr. 1-6</a>"]
+    E -->|Nein| N2
+
+    style Z1 fill:#d4edda,stroke:#2d8a4a
+    style Z2 fill:#d4edda,stroke:#2d8a4a
+    style Z3 fill:#d4edda,stroke:#2d8a4a
+    style N1 fill:#f8d7da,stroke:#c0392b
+    style N2 fill:#f8d7da,stroke:#c0392b
