@@ -73,4 +73,27 @@ export const examples: LawExample[] = [
       { name: "Heiz- und Warmwasserkosten", filename: "heizwarmwasser" },
     ],
   },
+  {
+    title: "Gesetz über Teilzeitarbeit und befristete Arbeitsverträge",
+    short: "TzBfG",
+    visOptions: [
+      {
+        name: "Zulässigkeit der Befristung",
+        filename: "befristung_zulaessigkeit",
+      },
+      {
+        name: "Anspruch auf Arbeitszeitverringerung",
+        filename: "verringerung_arbeitszeit",
+      },
+      { name: "Brückenteilzeit", filename: "bruecken_teilzeit" },
+      {
+        name: "Verlängerung der Arbeitszeit",
+        filename: "verlaengerung_arbeitszeit",
+      },
+      {
+        name: "Folgen unwirksamer Befristung",
+        filename: "unwirksame_befristung",
+      },
+    ],
+  },
 ];

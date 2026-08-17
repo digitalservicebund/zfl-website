@@ -1,0 +1,34 @@
+flowchart TD
+    A["AN wünscht dauerhafte<br/>Verringerung der vertraglichen<br/>Arbeitszeit"] --> Q1{"Hat das Arbeitsverhältnis<br/>länger als 6 Monate<br/>bestanden? — §8 I"}
+
+    Q1 -->|Nein| N1["Kein Anspruch<br/>nach §8"]
+
+    Q1 -->|Ja| Q2{"Beschäftigt der Arbeitgeber<br/>i.d.R. mehr als 15<br/>Arbeitnehmer? — §8 VII"}
+
+    Q2 -->|Nein| N1
+
+    Q2 -->|Ja| G["AN macht Verringerung und<br/>gewünschten Umfang spätestens<br/>3 Monate vor Beginn in<br/>Textform geltend — §8 II"]
+
+    G --> E["AG und AN erörtern die<br/>Verringerung mit dem Ziel<br/>einer Vereinbarung; Einvernehmen<br/>über Verteilung anstreben<br/>— §8 III"]
+
+    E --> Q3{"Stehen betriebliche Gründe der<br/>Verringerung entgegen? (z.B. wesentliche<br/>Beeinträchtigung von Organisation,<br/>Arbeitsablauf, Sicherheit oder<br/>unverhältnismäßige Kosten) — §8 IV"}
+
+    Q3 -->|Nein| Z1["Arbeitgeber muss zustimmen und<br/>Verteilung entsprechend den<br/>Wünschen des AN festlegen<br/>— §8 IV S.1"]
+
+    Q3 -->|Ja| Q4{"Lehnt der Arbeitgeber spätestens<br/>1 Monat vor gewünschtem Beginn<br/>in Textform ab? — §8 V S.1-2"}
+
+    Q4 -->|Ja| N2["Ablehnung wirksam;<br/>keine Verringerung der<br/>Arbeitszeit"]
+
+    Q4 -->|Nein| Z2["Verringerung gilt in dem vom AN<br/>gewünschten Umfang als<br/>fingiert genehmigt — §8 V S.2"]
+
+    Z1 --> V["Bei fehlendem Einvernehmen über die<br/>Verteilung gilt diese als nach Wunsch<br/>des AN festgelegt, wenn der AG nicht<br/>spätestens 1 Monat vorher in Textform<br/>widerspricht — §8 V S.3"]
+
+    Z2 --> W["Erneute Verringerung frühestens<br/>nach Ablauf von 2 Jahren seit<br/>Zustimmung/berechtigter<br/>Ablehnung — §8 VI"]
+    N2 --> W
+
+    style N1 fill:#f8d7da,stroke:#c0392b
+    style N2 fill:#f8d7da,stroke:#c0392b
+    style Z1 fill:#d4edda,stroke:#2d8a4a
+    style Z2 fill:#d4edda,stroke:#2d8a4a
+    style V fill:#fff3cd,stroke:#c9a227
+    style W fill:#fff3cd,stroke:#c9a227
