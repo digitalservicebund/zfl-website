@@ -1,0 +1,16 @@
+var e=`flowchart TD
+    A["Abgabe eines alkoholischen Getränks<br/>oder Gestattung des Verzehrs an Kind<br/>oder Jugendlichen in Gaststätte,<br/>Verkaufsstelle oder Öffentlichkeit"] --> Q1{"Um welche Art von Getränk<br/>handelt es sich?<br/>— <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 I</a>"}
+
+    Q1 -->|"Bier, Wein, weinähnliche<br/>Getränke, Schaumwein oder<br/>Mischungen mit nichtalkoh.<br/>Getränken — §9 I Nr.1"| Q2{"Person ist mindestens<br/>16 Jahre alt?<br/>— <a href='{{ELI}}#art-z1_abs-z1' target='_blank' rel='noopener'>§1 I Nr.1-2</a>"}
+    Q1 -->|"Andere alkoholische Getränke<br/>bzw. Lebensmittel mit nicht nur<br/>geringfügiger Alkoholmenge<br/>— §9 I Nr.2"| Z1["Abgabe und Verzehr<br/>generell verboten<br/>(keine Altersausnahme)"]
+
+    Q2 -->|Ja| Z2["Abgabe und<br/>Verzehr gestattet"]
+    Q2 -->|Nein| Q3{"Begleitung durch personen-<br/>sorgeberechtigte Person?<br/>— <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II</a>"}
+
+    Q3 -->|Ja| Z2
+    Q3 -->|Nein| Z3["Abgabe und<br/>Verzehr verboten"]
+
+    style Z1 fill:#f8d7da,stroke:#c0392b
+    style Z2 fill:#d4edda,stroke:#2d8a4a
+    style Z3 fill:#f8d7da,stroke:#c0392b
+`;export{e as default};

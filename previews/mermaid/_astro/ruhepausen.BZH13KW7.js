@@ -1,0 +1,24 @@
+var e=`flowchart TD
+    START["Ununterbrochene Arbeitszeit<br/>eines Arbeitnehmers"] --> Q1{"Beträgt die Arbeitszeit<br/>insgesamt bis zu sechs Stunden?"}
+
+    Q1 -->|Ja| OK["Keine Ruhepausenpflicht"]
+
+    Q1 -->|Nein| Q2{"Beträgt die Arbeitszeit mehr<br/>als sechs bis zu neun Stunden? — <a href='{{ELI}}#art-z4_abs-z' target='_blank' rel='noopener'>§4 S.1</a>"}
+
+    Q2 -->|Ja| P30["Ruhepause von mindestens<br/>30 Minuten erforderlich — <a href='{{ELI}}#art-z4_abs-z' target='_blank' rel='noopener'>§4 S.1</a>"]
+
+    Q2 -->|Nein, mehr als<br/>neun Stunden| P45["Ruhepause von mindestens<br/>45 Minuten erforderlich — <a href='{{ELI}}#art-z4_abs-z' target='_blank' rel='noopener'>§4 S.1</a>"]
+
+    P30 --> SPLIT{"Aufteilung in Zeitabschnitte<br/>von je mindestens 15 Minuten<br/>möglich — <a href='{{ELI}}#art-z4_abs-z' target='_blank' rel='noopener'>§4 S.2</a>"}
+    P45 --> SPLIT
+
+    SPLIT --> MAX6{"Länger als sechs Stunden<br/>hintereinander ohne Ruhepause<br/>beschäftigt? — <a href='{{ELI}}#art-z4_abs-z' target='_blank' rel='noopener'>§4 S.3</a>"}
+
+    MAX6 -->|Ja| VERBOTEN["Unzulässig: Beschäftigung<br/>ohne rechtzeitige Ruhepause"]
+
+    MAX6 -->|Nein| ZULAESSIG["Ruhepausenregelung<br/>eingehalten"]
+
+    style OK fill:#d4edda,stroke:#2d8a4a
+    style ZULAESSIG fill:#d4edda,stroke:#2d8a4a
+    style VERBOTEN fill:#f8d7da,stroke:#c0392b
+`;export{e as default};

@@ -1,0 +1,31 @@
+var e=`flowchart TD
+    Start["Person ist im Bundeszentral-<br/>register wegen einer Verurteilung<br/>nach §29 BtMG eingetragen"] --> Q1{"Verurteilung erfolgte<br/>ausschließlich wegen unerlaubten<br/>Umgangs mit Cannabis oder<br/>Vermehrungsmaterial?<br/>— <a href='{{ELI}}#art-z40_abs-z1' target='_blank' rel='noopener'>§40 Abs.1 Nr.1</a>"}
+
+    Q1 -->|"Nein, auch wegen<br/>weiterhin strafbarer<br/>anderer Taten"| AUSSCHLUSS["Tilgung der Eintragung<br/>ausgeschlossen<br/>— <a href='{{ELI}}#art-z40_abs-z3' target='_blank' rel='noopener'>§40 Abs.3</a>"]
+
+    Q1 -->|Ja| Q2{"Ist die zugrunde liegende<br/>Handlung nach dem KCanG<br/>straflos oder nur noch mit<br/>Geldbuße bedroht?<br/>— <a href='{{ELI}}#art-z40_abs-z1' target='_blank' rel='noopener'>§40 Abs.1 Nr.2</a>"}
+
+    Q2 -->|Nein| KEINE_TILGUNG["Eintragung (noch)<br/>nicht tilgungsfähig"]
+
+    Q2 -->|Ja| TILGUNGSFAEHIG["Eintragung ist tilgungsfähig<br/>— <a href='{{ELI}}#art-z40_abs-z1' target='_blank' rel='noopener'>§40 Abs.1</a> (entsprechend auch<br/>bei nachträglicher Gesamtstrafen-<br/>bildung — <a href='{{ELI}}#art-z40_abs-z2' target='_blank' rel='noopener'>§40 Abs.2</a>)"]
+
+    TILGUNGSFAEHIG --> ANTRAG["Verurteilte Person stellt Antrag<br/>auf Feststellung der Tilgungs-<br/>fähigkeit bei der zuständigen<br/>Staatsanwaltschaft — <a href='{{ELI}}#art-z41_abs-z1' target='_blank' rel='noopener'>§41 Abs.1</a>,<br/><a href='{{ELI}}#art-z41_abs-z3' target='_blank' rel='noopener'>Abs.3</a>"]
+
+    ANTRAG --> GLAUBHAFT["Voraussetzungen können durch<br/>Glaubhaftmachung, ggf. eides-<br/>stattliche Versicherung,<br/>nachgewiesen werden<br/>— <a href='{{ELI}}#art-z41_abs-z2' target='_blank' rel='noopener'>§41 Abs.2</a>"]
+
+    GLAUBHAFT --> Q3{"Staatsanwaltschaft stellt<br/>Tilgungsfähigkeit fest?<br/>— <a href='{{ELI}}#art-z41_abs-z1' target='_blank' rel='noopener'>§41 Abs.1</a>"}
+
+    Q3 -->|Nein| ABLEHNUNG["Kein Feststellungsbescheid;<br/>Eintragung bleibt bestehen<br/>— <a href='{{ELI}}#art-z42_abs-z1' target='_blank' rel='noopener'>§42 Abs.1 S.2</a>"]
+
+    Q3 -->|Ja| MITTEILUNG["Mitteilung der Feststellung an<br/>Registerbehörde und verurteilte<br/>Person — <a href='{{ELI}}#art-z42_abs-z1' target='_blank' rel='noopener'>§42 Abs.1 S.1</a>"]
+
+    MITTEILUNG --> TILGUNG["Registerbehörde tilgt die<br/>Eintragung im Bundeszentral-<br/>register — <a href='{{ELI}}#art-z42_abs-z2' target='_blank' rel='noopener'>§42 Abs.2</a>"]
+
+    MITTEILUNG -->|"Feststellung war<br/>zu Unrecht getroffen<br/>und wird zurückgenommen"| WIEDEREINTRAGUNG["Staatsanwaltschaft nimmt<br/>Feststellung zurück; getilgte<br/>Verurteilung wird wieder<br/>eingetragen — <a href='{{ELI}}#art-z41_abs-z4' target='_blank' rel='noopener'>§41 Abs.4</a>"]
+
+    style TILGUNG fill:#d4edda,stroke:#2d8a4a
+    style AUSSCHLUSS fill:#f8d7da,stroke:#c0392b
+    style KEINE_TILGUNG fill:#f8d7da,stroke:#c0392b
+    style ABLEHNUNG fill:#f8d7da,stroke:#c0392b
+    style WIEDEREINTRAGUNG fill:#fff3cd,stroke:#c9a227
+`;export{e as default};

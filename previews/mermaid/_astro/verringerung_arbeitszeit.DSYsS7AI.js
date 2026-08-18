@@ -1,0 +1,35 @@
+var e=`flowchart TD
+    A["AN wünscht dauerhafte<br/>Verringerung der vertraglichen<br/>Arbeitszeit"] --> Q1{"Hat das Arbeitsverhältnis<br/>länger als 6 Monate<br/>bestanden? — <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 I</a>"}
+
+    Q1 -->|Nein| N1["Kein Anspruch<br/>nach <a href='{{ELI}}/art-z8' target='_blank' rel='noopener'>§8</a>"]
+
+    Q1 -->|Ja| Q2{"Beschäftigt der Arbeitgeber<br/>i.d.R. mehr als 15<br/>Arbeitnehmer? — <a href='{{ELI}}#art-z8_abs-z7' target='_blank' rel='noopener'>§8 VII</a>"}
+
+    Q2 -->|Nein| N1
+
+    Q2 -->|Ja| G["AN macht Verringerung und<br/>gewünschten Umfang spätestens<br/>3 Monate vor Beginn in<br/>Textform geltend — <a href='{{ELI}}#art-z8_abs-z2' target='_blank' rel='noopener'>§8 II</a>"]
+
+    G --> E["AG und AN erörtern die<br/>Verringerung mit dem Ziel<br/>einer Vereinbarung; Einvernehmen<br/>über Verteilung anstreben<br/>— <a href='{{ELI}}#art-z8_abs-z3' target='_blank' rel='noopener'>§8 III</a>"]
+
+    E --> Q3{"Stehen betriebliche Gründe der<br/>Verringerung entgegen? (z.B. wesentliche<br/>Beeinträchtigung von Organisation,<br/>Arbeitsablauf, Sicherheit oder<br/>unverhältnismäßige Kosten) — <a href='{{ELI}}#art-z8_abs-z4' target='_blank' rel='noopener'>§8 IV</a>"}
+
+    Q3 -->|Nein| Z1["Arbeitgeber muss zustimmen und<br/>Verteilung entsprechend den<br/>Wünschen des AN festlegen<br/>— <a href='{{ELI}}#art-z8_abs-z4' target='_blank' rel='noopener'>§8 IV S.1</a>"]
+
+    Q3 -->|Ja| Q4{"Lehnt der Arbeitgeber spätestens<br/>1 Monat vor gewünschtem Beginn<br/>in Textform ab? — <a href='{{ELI}}#art-z8_abs-z5' target='_blank' rel='noopener'>§8 V S.1-2</a>"}
+
+    Q4 -->|Ja| N2["Ablehnung wirksam;<br/>keine Verringerung der<br/>Arbeitszeit"]
+
+    Q4 -->|Nein| Z2["Verringerung gilt in dem vom AN<br/>gewünschten Umfang als<br/>fingiert genehmigt — <a href='{{ELI}}#art-z8_abs-z5' target='_blank' rel='noopener'>§8 V S.2</a>"]
+
+    Z1 --> V["Bei fehlendem Einvernehmen über die<br/>Verteilung gilt diese als nach Wunsch<br/>des AN festgelegt, wenn der AG nicht<br/>spätestens 1 Monat vorher in Textform<br/>widerspricht — <a href='{{ELI}}#art-z8_abs-z5' target='_blank' rel='noopener'>§8 V S.3</a>"]
+
+    Z2 --> W["Erneute Verringerung frühestens<br/>nach Ablauf von 2 Jahren seit<br/>Zustimmung/berechtigter<br/>Ablehnung — <a href='{{ELI}}#art-z8_abs-z6' target='_blank' rel='noopener'>§8 VI</a>"]
+    N2 --> W
+
+    style N1 fill:#f8d7da,stroke:#c0392b
+    style N2 fill:#f8d7da,stroke:#c0392b
+    style Z1 fill:#d4edda,stroke:#2d8a4a
+    style Z2 fill:#d4edda,stroke:#2d8a4a
+    style V fill:#fff3cd,stroke:#c9a227
+    style W fill:#fff3cd,stroke:#c9a227
+`;export{e as default};

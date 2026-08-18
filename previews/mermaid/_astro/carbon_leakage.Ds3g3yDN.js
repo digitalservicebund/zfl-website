@@ -1,0 +1,22 @@
+var e=`flowchart TD
+    A["Unzumutbare Härte durch<br/>Einführung des Brennstoff-<br/>emissionshandels für ein betroffenes<br/>Unternehmen (und verbundenes<br/>Unternehmen)<br/>— <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 Abs. 1 S. 1</a>"] --> B{"Ist das Unternehmen selbst<br/>Verantwortlicher i.S.d. §3 Nr. 3?<br/>— <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 Abs. 1 S. 2</a>"}
+    B -->|Ja| Z1["Kein Anspruch auf<br/>Billigkeitsleistung<br/>— <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 Abs. 1 S. 2</a>"]
+    B -->|Nein| C{"Brennstoffkosten &gt; 20% der<br/>betriebswirtschaftlichen<br/>Gesamtkosten oder Zusatzkosten<br/>&gt; 20% der Bruttowertschöpfung?<br/>— <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 Abs. 1 S. 3</a>"}
+    C -->|Nein| Z2["In der Regel keine<br/>unzumutbare Härte<br/>— <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 Abs. 1 S. 3</a>"]
+    C -->|Ja| D["Antrag auf Billigkeitsleistung<br/>bei zuständiger Behörde<br/>— <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 Abs. 1 S. 1</a>"]
+    D --> E{"Beihilferechtliche Genehmigung<br/>im Einzelfall durch die<br/>Europäische Kommission?<br/>— <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 Abs. 1 S. 4</a>"}
+    E -->|Nein| Z3["Keine Auszahlung, bis<br/>Genehmigung vorliegt"]
+    E -->|Ja| F["Finanzielle Kompensation in<br/>erforderlicher Höhe wird gewährt<br/>— <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 Abs. 1 S. 1</a>"]
+    G["Rechtsverordnung zu Carbon-Leakage-<br/>Schutzmaßnahmen, vorrangig finanzielle<br/>Förderung klimafreundlicher<br/>Investitionen<br/>— <a href='{{ELI}}#art-z11_abs-z3' target='_blank' rel='noopener'>§11 Abs. 3 S. 1-2</a>"] --> H{"Befasst sich der Bundestag<br/>innerhalb von 6 Sitzungswochen<br/>seit Eingang mit der RVO?<br/>— <a href='{{ELI}}#art-z11_abs-z3' target='_blank' rel='noopener'>§11 Abs. 3 S. 3-4</a>"}
+    H -->|"Nein"| I["Zustimmung des Bundestages<br/>gilt als erteilt<br/>— <a href='{{ELI}}#art-z11_abs-z3' target='_blank' rel='noopener'>§11 Abs. 3 S. 4</a>"]
+    H -->|"Ja, Zustimmung erteilt"| I
+    H -->|"Ja, Zustimmung verweigert"| Z4["Rechtsverordnung kann<br/>nicht in Kraft treten"]
+    I --> Z5["Carbon-Leakage-Schutz-<br/>maßnahmen werden wirksam"]
+
+    style Z1 fill:#f8d7da,stroke:#c0392b
+    style Z2 fill:#f8d7da,stroke:#c0392b
+    style Z3 fill:#fff3cd,stroke:#c9a227
+    style Z4 fill:#f8d7da,stroke:#c0392b
+    style F fill:#d4edda,stroke:#2d8a4a
+    style Z5 fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};

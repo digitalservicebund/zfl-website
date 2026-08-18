@@ -1,0 +1,35 @@
+var e=`flowchart TD
+    A["Welches Besteuerungsverfahren<br/>liegt vor?<br/>— <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1</a>"] --> B{"Veranlagung zur<br/>Einkommensteuer?<br/>— <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1 Nr. 1</a>"}
+    B -->|Ja| B1["Bemessungsgrundlage:<br/>festgesetzte Einkommensteuer<br/>für die Veranlagungszeiträume<br/>1991 und 1992<br/>— <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1 Nr. 1</a>"]
+    B -->|Nein| C{"Veranlagung zur<br/>Körperschaftsteuer?<br/>— <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1 Nr. 2</a>"}
+    C -->|Ja| C1["Bemessungsgrundlage:<br/>festgesetzte positive<br/>Körperschaftsteuer für die<br/>Veranlagungszeiträume<br/>1991 und 1992<br/>— <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1 Nr. 2</a>"]
+    C -->|Nein| D{"Vorauszahlungen zur<br/>Einkommen- oder<br/>Körperschaftsteuer zu leisten?<br/>— <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1 Nr. 3</a>"}
+    D -->|Ja| D1["Bemessungsgrundlage:<br/>Vorauszahlungen für die<br/>Kalenderjahre 1991/1992,<br/>zu leisten vom 1.7.1991<br/>bis 30.6.1992<br/>— <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1 Nr. 3</a>"]
+    D -->|Nein| E{"Lohnsteuer zu erheben?<br/>— <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1 Nr. 4</a>"}
+    E -->|"Ja, laufender<br/>Arbeitslohn"| E1["Bemessungsgrundlage:<br/>Lohnsteuer für Lohnzahlungs-<br/>zeitraum, der zwischen dem<br/>30.6.1991 und dem 1.7.1992<br/>endet<br/>— <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1 Nr. 4 Buchst. a</a>"]
+    E -->|"Ja, sonstige<br/>Bezüge"| E2["Bemessungsgrundlage:<br/>Lohnsteuer auf sonstige<br/>Bezüge, die zwischen dem<br/>30.6.1991 und dem 1.7.1992<br/>zufließen<br/>— <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1 Nr. 4 Buchst. b</a>"]
+    E -->|Nein| F{"Lohnsteuer-Jahresausgleich<br/>durchzuführen?<br/>— <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1 Nr. 5</a>"}
+    F -->|Ja| F1["Bemessungsgrundlage:<br/>Jahreslohnsteuer für die<br/>Ausgleichsjahre 1991 und 1992<br/>— <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1 Nr. 5</a>"]
+    F -->|Nein| G{"Kapitalertragsteuer zu<br/>erheben (außer §44d EStG)?<br/>— <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1 Nr. 6</a>"}
+    G -->|Ja| G1["Bemessungsgrundlage:<br/>Kapitalertragsteuer, zu<br/>erheben vom 1.7.1991<br/>bis 30.6.1992<br/>— <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1 Nr. 6</a>"]
+    G -->|Nein| H{"Steuerabzug nach §50a EStG<br/>bei beschränkt Steuerpflichtigen<br/>zu erheben?<br/>— <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1 Nr. 7</a>"}
+    H -->|Ja| H1["Bemessungsgrundlage:<br/>Steuerabzugsbetrag, zu<br/>erheben vom 1.7.1991<br/>bis 30.6.1992<br/>— <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1 Nr. 7</a>"]
+    H -->|Nein| Z0["Kein Fall des §3 Abs. 1 —<br/>keine Bemessungsgrundlage<br/>für den Solidaritätszuschlag<br/>in diesem Verfahren"]
+
+    B1 --> K{"Greift eine der<br/>Sonderregelungen des<br/>Absatzes 2?<br/>— <a href='{{ELI}}#art-z3_abs-z2' target='_blank' rel='noopener'>§3 Abs. 2</a>"}
+    C1 --> K
+    D1 --> K
+    E1 --> K
+    E2 --> K
+    F1 --> K
+    G1 --> K
+    H1 --> K
+    K -->|"§51a Abs. 2 EStG"| K1["§51a Abs. 2 EStG bleibt<br/>unangewendet<br/>— <a href='{{ELI}}#art-z3_abs-z2' target='_blank' rel='noopener'>§3 Abs. 2 S. 1</a>"]
+    K -->|"Steuerermäßigung nach<br/>§§21, 26 Berlinförderungsgesetz"| K2["Ermäßigung mindert die<br/>Bemessungsgrundlage nicht<br/>— <a href='{{ELI}}#art-z3_abs-z2' target='_blank' rel='noopener'>§3 Abs. 2 S. 2</a>"]
+    K -->|Nein| Z2["Bemessungsgrundlage steht<br/>unverändert fest"]
+    K1 --> Z2
+    K2 --> Z2
+
+    style Z0 fill:#f8d7da,stroke:#c0392b
+    style Z2 fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};

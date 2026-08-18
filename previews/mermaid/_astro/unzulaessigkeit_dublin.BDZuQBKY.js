@@ -1,0 +1,26 @@
+var e=`flowchart TD
+    A["Asylantrag liegt vor"] --> B{"Fall des Art. 38 Abs. 1<br/>Buchst. d oder e VO (EU)<br/>2024/1348 (Unzulässigkeit nach<br/>Unionsrecht)?<br/>— <a href='{{ELI}}#art-z29_abs-z' target='_blank' rel='noopener'>§29 Nr. 1</a>"}
+    B -->|Ja| Z
+    B -->|Nein| C{"Hat ein anderer<br/>EU-Mitgliedstaat dem Ausländer<br/>bereits internationalen<br/>Schutz gewährt?<br/>— <a href='{{ELI}}#art-z29_abs-z' target='_blank' rel='noopener'>§29 Nr. 2</a>"}
+    C -->|Ja| Z
+    C -->|Nein| D{"Ist ein zur Wiederaufnahme<br/>bereiter Nicht-EU-Staat als<br/>sicherer Drittstaat nach<br/>§26a einzustufen?<br/>— <a href='{{ELI}}#art-z29_abs-z' target='_blank' rel='noopener'>§29 Nr. 3</a>"}
+    D -->|Ja| Z
+    D -->|Nein| E{"Gilt ein Nicht-EU-Staat als<br/>sicherer Drittstaat nach<br/>Art. 59 VO (EU) 2024/1348 und<br/>ist die Übernahme gesichert?<br/>— <a href='{{ELI}}#art-z29_abs-z' target='_blank' rel='noopener'>§29 Nr. 4</a>"}
+    E -->|Ja| Z
+    E -->|Nein| F{"Gilt ein Nicht-EU-Staat als<br/>erster Asylstaat nach<br/>Art. 58 VO (EU) 2024/1348 und<br/>ist die Übernahme gesichert?<br/>— <a href='{{ELI}}#art-z29_abs-z' target='_blank' rel='noopener'>§29 Nr. 5</a>"}
+    F -->|Ja| Z
+    F -->|Nein| G{"Folgeantrag, für den kein<br/>weiteres Asylverfahren<br/>durchzuführen ist?<br/>— <a href='{{ELI}}#art-z29_abs-z' target='_blank' rel='noopener'>§29 Nr. 6</a>, <a href='{{ELI}}#art-z71_abs-z1' target='_blank' rel='noopener'>§71 Abs. 1</a>"}
+    G -->|Ja| Z
+    G -->|Nein| H["Kein Unzulässigkeitsgrund:<br/>inhaltliche Prüfung des<br/>Asylantrags"]
+
+    Z["Asylantrag als<br/>unzulässig abgelehnt<br/>— <a href='{{ELI}}#art-z29_abs-z' target='_blank' rel='noopener'>§29</a>"] --> I{"Soll die Überstellung in den<br/>zuständigen Staat auf Grund<br/>einer Überstellungsentscheidung<br/>erfolgen (Dublin-Fall)?<br/>— <a href='{{ELI}}#art-z34a_abs-z1' target='_blank' rel='noopener'>§34a Abs. 1</a>"}
+    I -->|Ja| J["Abschiebungsanordnung ohne<br/>vorherige Androhung und<br/>Fristsetzung, sobald die<br/>Durchführung feststeht<br/>— <a href='{{ELI}}#art-z34a_abs-z1' target='_blank' rel='noopener'>§34a Abs. 1</a>"]
+    I -->|Nein| K["Abschiebungsandrohung<br/>für den jeweiligen Staat<br/>— <a href='{{ELI}}#art-z34a_abs-z1' target='_blank' rel='noopener'>§34a Abs. 1 S. 3</a>"]
+    J --> L["Eilantrag gegen die<br/>Abschiebungsanordnung binnen<br/>einer Woche nach Bekanntgabe;<br/>Abschiebung vorher unzulässig<br/>— <a href='{{ELI}}#art-z34a_abs-z3' target='_blank' rel='noopener'>§34a Abs. 3</a>"]
+
+    style Z fill:#fff3cd,stroke:#c9a227
+    style H fill:#d4edda,stroke:#2d8a4a
+    style J fill:#f8d7da,stroke:#c0392b
+    style K fill:#f8d7da,stroke:#c0392b
+    style L fill:#fff3cd,stroke:#c9a227
+`;export{e as default};

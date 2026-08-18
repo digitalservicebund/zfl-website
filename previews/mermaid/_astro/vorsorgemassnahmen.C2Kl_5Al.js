@@ -1,0 +1,22 @@
+var e=`flowchart TD
+    A["jugendschutz.net erstellt erste<br/>Einschätzung der Vorsorgemaßnahmen<br/>eines Anbieters und unterrichtet<br/>die Bundeszentrale<br/>— <a href='{{ELI}}#art-z24b_abs-z2' target='_blank' rel='noopener'>§24b II</a>"] --> Q1{"Bundeszentrale stellt fest: keine<br/>oder nur unzureichende Vorsorge-<br/>maßnahmen (Art. 28 I DSA) getroffen?<br/>— <a href='{{ELI}}#art-z24b_abs-z3' target='_blank' rel='noopener'>§24b III S.1</a>"}
+
+    Q1 -->|Nein| Z1["Keine weiteren<br/>Maßnahmen erforderlich"]
+    Q1 -->|Ja| B["Bundeszentrale gibt Anbieter<br/>Gelegenheit zur Stellungnahme und<br/>berät ihn über erforderliche<br/>Vorsorgemaßnahmen — §24b III S.1<br/>(Beispiele: Melde-/Abhilfeverfahren,<br/>Alterseinstufung, Altersverifikation<br/>— <a href='{{ELI}}#art-z24a_abs-z2' target='_blank' rel='noopener'>§24a II</a>)"]
+
+    B --> Q2{"Trifft der Anbieter nach<br/>Abschluss der Beratung die<br/>erforderlichen Maßnahmen?<br/>— <a href='{{ELI}}#art-z24b_abs-z3' target='_blank' rel='noopener'>§24b III S.2</a>"}
+
+    Q2 -->|Ja| Z2["Vorsorgemaßnahmen<br/>umgesetzt"]
+    Q2 -->|Nein| F["Bundeszentrale fordert Anbieter<br/>unter angemessener Fristsetzung<br/>zur Umsetzung auf — §24b III S.2"]
+
+    F --> Q3{"Kommt der Anbieter der<br/>Aufforderung innerhalb der Frist<br/>ausreichend nach?<br/>— <a href='{{ELI}}#art-z24b_abs-z4' target='_blank' rel='noopener'>§24b IV</a>"}
+
+    Q3 -->|Ja| Z2
+    Q3 -->|Nein| S["Zentrale Aufsichtsstelle der<br/>Länder erhält Gelegenheit zur<br/>Stellungnahme — §24b IV S.2"]
+
+    S --> Z3["Bundeszentrale ordnet die<br/>Vorsorgemaßnahmen unter erneuter<br/>angemessener Fristsetzung selbst<br/>an — §24b IV S.1"]
+
+    style Z1 fill:#d4edda,stroke:#2d8a4a
+    style Z2 fill:#d4edda,stroke:#2d8a4a
+    style Z3 fill:#fff3cd,stroke:#c9a227
+`;export{e as default};

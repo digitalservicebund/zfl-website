@@ -1,0 +1,26 @@
+var e=`flowchart TD
+    A["Sämtliche Bezüge und Abzüge einzeln<br/>nach Art erfassen (außer Beiträgen zu<br/>freiw./privater KV/PV und AG-Anteil<br/>berufsständ. Versorgung)<br/>— <a href='{{ELI}}#art-z1_abs-z2' target='_blank' rel='noopener'>§1 Abs. 2 Nr. 1</a>"] --> B["Saldo der Bezüge und Abzüge<br/>je Kategorie bilden<br/>— <a href='{{ELI}}#art-z1_abs-z2_inhalt-n1_liste-n1_listenelem-n2' target='_blank' rel='noopener'>§1 Abs. 2 Nr. 2</a>"]
+
+    B --> C["Steuerpflichtiger Arbeitslohn,<br/>getrennt nach laufenden/sonstigen<br/>Bezügen<br/>— <a href='{{ELI}}#art-z1_abs-z2_inhalt-n1_liste-n1_listenelem-n2_liste-n1_listenelem-n1' target='_blank' rel='noopener'>Nr. 2 Bst. a</a>"]
+    B --> D["Sozialversicherungsbruttoentgelt,<br/>ggf. je Versicherungszweig getrennt<br/>— <a href='{{ELI}}#art-z1_abs-z2_inhalt-n1_liste-n1_listenelem-n2_liste-n1_listenelem-n2' target='_blank' rel='noopener'>Nr. 2 Bst. b</a>"]
+    B --> E["Gesamtbruttoentgelt<br/>ohne Trennung nach laufend/einmalig<br/>— <a href='{{ELI}}#art-z1_abs-z2_inhalt-n1_liste-n1_listenelem-n2_liste-n1_listenelem-n3' target='_blank' rel='noopener'>Nr. 2 Bst. c</a>"]
+    B --> F["Pauschal besteuerte Bezüge<br/>nach ihrer gesetzl. Grundlage getrennt<br/>— <a href='{{ELI}}#art-z1_abs-z2_inhalt-n1_liste-n1_listenelem-n2_liste-n1_listenelem-n4' target='_blank' rel='noopener'>Nr. 2 Bst. d</a>"]
+
+    E --> G{"Wirkt sich der einzelne Wert auf das<br/>Gesamtbruttoentgelt aus?<br/>— <a href='{{ELI}}#art-z1_abs-z3' target='_blank' rel='noopener'>§1 Abs. 3</a>"}
+
+    G -->|"erhöhend: z.B. ATZ-Aufstockung,<br/>Nebenbezüge, AG-Zuschüsse zu<br/>Entgeltersatzleistungen"| H["Wert erhöht<br/>das Gesamtbruttoentgelt<br/>— <a href='{{ELI}}#art-z1_abs-z3_inhalt-n1_liste-n1_listenelem-n1' target='_blank' rel='noopener'>§1 Abs. 3 Nr. 1</a>"]
+    G -->|"mindernd: z.B. übernommene<br/>AG-Leistungen, Einstellung<br/>in Wertguthaben"| I["Wert mindert<br/>das Gesamtbruttoentgelt<br/>— <a href='{{ELI}}#art-z1_abs-z3_inhalt-n1_liste-n1_listenelem-n2' target='_blank' rel='noopener'>§1 Abs. 3 Nr. 2</a>"]
+    G -->|"neutral: z.B. Entgeltumwandlung,<br/>Beiträge zur Zukunftssicherung"| J["Wert bleibt beim<br/>Gesamtbruttoentgelt unberücksichtigt<br/>— <a href='{{ELI}}#art-z1_abs-z3_inhalt-n1_liste-n1_listenelem-n3' target='_blank' rel='noopener'>§1 Abs. 3 Nr. 3</a>"]
+
+    H --> K
+    I --> K
+    J --> K
+
+    K["Gesetzliche Abzüge ermitteln:<br/>Lohn-/Kirchensteuer, Soli,<br/>AN-Beiträge zur Sozialversicherung<br/>— <a href='{{ELI}}#art-z1_abs-z2_inhalt-n1_liste-n1_listenelem-n3' target='_blank' rel='noopener'>§1 Abs. 2 Nr. 3</a>"] --> L["Nettoentgelt = Gesamtbruttoentgelt<br/>abzüglich gesetzliche Abzüge<br/>— <a href='{{ELI}}#art-z1_abs-z2_inhalt-n1_liste-n1_listenelem-n4' target='_blank' rel='noopener'>§1 Abs. 2 Nr. 4</a>"]
+
+    L --> M["Weitere Bezüge/Abzüge, Verrechnungen<br/>und Einbehalte ohne Bruttowirkung<br/>(<a href='{{ELI}}#art-z1_abs-z2_inhalt-n1_liste-n1_listenelem-n6' target='_blank' rel='noopener'>Nr. 6</a>) sowie AG-Zuschuss zu<br/>freiw./privater KV/PV<br/>(<a href='{{ELI}}#art-z1_abs-z2_inhalt-n1_liste-n1_listenelem-n5' target='_blank' rel='noopener'>§1 Abs. 2 Nr. 5</a>)"]
+
+    M --> N["Auszahlungsbetrag = Nettoentgelt<br/>saldiert mit Beträgen nach Nr. 5 und 6<br/>— <a href='{{ELI}}#art-z1_abs-z2_inhalt-n1_liste-n1_listenelem-n7' target='_blank' rel='noopener'>§1 Abs. 2 Nr. 7</a>"]
+
+    style N fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};

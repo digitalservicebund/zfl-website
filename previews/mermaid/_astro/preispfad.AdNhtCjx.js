@@ -1,0 +1,24 @@
+var e=`flowchart TD
+    A["Zuständige Behörde veräußert die<br/>nach §4 festgelegte Zertifikatsmenge<br/>zzgl. Zusatzbedarf der Einführungsphase<br/>— <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>§10 Abs. 1 S. 1</a>"] --> B{"In welchem Kalenderjahr erfolgt<br/>der Verkauf?<br/>— <a href='{{ELI}}#art-z10_abs-z2' target='_blank' rel='noopener'>§10 Abs. 2</a>"}
+    B -->|2021| C1["Festpreis: 25 Euro<br/>je Emissionszertifikat<br/>— <a href='{{ELI}}#art-z10_abs-z2' target='_blank' rel='noopener'>§10 Abs. 2 S. 2 Nr. 1</a>"]
+    B -->|2022| C2["Festpreis: 30 Euro<br/>je Emissionszertifikat<br/>— <a href='{{ELI}}#art-z10_abs-z2' target='_blank' rel='noopener'>§10 Abs. 2 S. 2 Nr. 2</a>"]
+    B -->|2023| C3["Festpreis: 30 Euro<br/>je Emissionszertifikat<br/>— <a href='{{ELI}}#art-z10_abs-z2' target='_blank' rel='noopener'>§10 Abs. 2 S. 2 Nr. 3</a>"]
+    B -->|2024| C4["Festpreis: 45 Euro<br/>je Emissionszertifikat<br/>— <a href='{{ELI}}#art-z10_abs-z2' target='_blank' rel='noopener'>§10 Abs. 2 S. 2 Nr. 4</a>"]
+    B -->|2025| C5["Festpreis: 55 Euro<br/>je Emissionszertifikat<br/>— <a href='{{ELI}}#art-z10_abs-z2' target='_blank' rel='noopener'>§10 Abs. 2 S. 2 Nr. 5</a>"]
+    C1 --> D{"Bis zu 10% der im Vorjahr<br/>erworbenen Zertifikate im<br/>Folgejahr zum Vorjahrespreis<br/>nacherwerben?<br/>— <a href='{{ELI}}#art-z10_abs-z2' target='_blank' rel='noopener'>§10 Abs. 2 S. 3</a>"}
+    C2 --> D
+    C3 --> D
+    C4 --> D
+    C5 --> D
+    D -->|"Ja, bis 30. September<br/>des Folgejahres"| E["Nacherwerb zur Erfüllung<br/>der Abgabepflicht nach §8<br/>für das Vorjahr möglich"]
+    D -->|Nein| F["Regulärer Erwerb zum<br/>Festpreis des laufenden Jahres"]
+    B -->|2026| G["Preiskorridor: Mindestpreis<br/>55 Euro, Höchstpreis 65 Euro<br/>je Emissionszertifikat<br/>— <a href='{{ELI}}#art-z10_abs-z2' target='_blank' rel='noopener'>§10 Abs. 2 S. 4</a>"]
+    G --> H["Versteigerung auf nationaler<br/>Versteigerungsplattform in gleichen<br/>Teilmengen, Termine mind. 2 Monate<br/>im Voraus bekannt gemacht<br/>— <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>§10 Abs. 1 S. 2-4</a>"]
+    B -->|"ab 2027, sofern nach RVO<br/>zu §24 Abs. 2 Nr. 2 eine jährliche<br/>Emissionsmenge verbleibt"| I["Fortführung des Verkaufs zu<br/>marktbasiertem Preis nach Maßgabe<br/>der Rechtsverordnung<br/>— <a href='{{ELI}}#art-z10_abs-z3' target='_blank' rel='noopener'>§10 Abs. 3 Nr. 4</a>"]
+    H --> Z1["Preisbildung durch<br/>Versteigerungsverfahren"]
+    I --> Z1
+
+    style E fill:#fff3cd,stroke:#c9a227
+    style F fill:#fff3cd,stroke:#c9a227
+    style Z1 fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};
