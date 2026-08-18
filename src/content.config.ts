@@ -41,6 +41,23 @@ const werkzeuge = defineCollection({
     }),
 });
 
+const articles = defineCollection({
+  loader: glob({
+    pattern: "**/*.mdx",
+    base: "src/content/articles",
+    generateId: ({ entry }) => {
+      console.log(entry);
+      return entry.replace(/\.mdx$/, "");
+    },
+  }),
+  schema: z.object({
+    paragraphNummer: z.string(),
+    paragraphGesetz: z.string(),
+    paragraphTitel: z.string().nullable(),
+  }),
+});
+
 export const collections = {
   werkzeuge,
+  articles,
 };

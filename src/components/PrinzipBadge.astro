@@ -1,0 +1,37 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { tv, type VariantProps } from "tailwind-variants";
+
+interface Props extends HTMLAttributes<"span">, VariantProps<typeof styles> {
+  class?: string;
+}
+
+const styles = tv({
+  base: "kern-badge w-max outline-1 outline-offset-[-1px]",
+  variants: {
+    prinzip: {
+      "1": "bg-orange-050 text-yellow-900 outline-yellow-700",
+      "2": "bg-red-050 text-red-800",
+      "3": "bg-violet-050 text-[#8412AF]",
+      "4": "bg-green-050 text-[#3D4D00]",
+      "5": "bg-lightblue-025 text-[#051D91]",
+    },
+  },
+});
+
+const { class: className, prinzip } = Astro.props;
+---
+
+<span class={styles({ prinzip, className })}>
+  <span class="kern-label">
+    <slot />
+  </span>
+</span>
+
+<style>
+  @layer theme {
+    .kern-label {
+      color: inherit;
+    }
+  }
+</style>
