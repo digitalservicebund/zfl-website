@@ -80,6 +80,7 @@ fileignoreconfig:
   - filename: src/components/global/AccordionMenu.test.ts
     allowed_patterns:
       - key
+  
 scopeconfig:
   - scope: node
 allowed_patterns:
