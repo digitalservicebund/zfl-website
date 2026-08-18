@@ -228,7 +228,7 @@ export const werkzeuge_digitaltauglichkeit = {
   sitemap: true,
   isStagingOnly: false,
   navOrder: null,
-  navLabel: null,
+  navLabel: "Digitaltauglichkeit",
 } as const;
 
 export const werkzeuge_praxistauglichkeit = {
