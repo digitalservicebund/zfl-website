@@ -1,0 +1,28 @@
+flowchart TD
+    A["Kind oder Jugendlicher möchte an<br/>öffentlicher Filmveranstaltung<br/>teilnehmen"] --> Q1{"Film für diese Altersstufe freigegeben<br/>und gekennzeichnet, oder als Info-/<br/>Lehrprogramm gekennzeichnet?<br/>— <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I</a>"}
+
+    Q1 -->|Nein| Q2{"Kind ab 6 Jahren, Film 'ab 12<br/>Jahren' freigegeben und Begleitung<br/>durch personensorgeberechtigte<br/>oder erziehungsbeauftragte Person?<br/>— <a href='{{ELI}}#art-z11_abs-z2' target='_blank' rel='noopener'>§11 II</a>"}
+    Q2 -->|Nein| Z1["Teilnahme nicht gestattet"]
+    Q2 -->|Ja| Q3
+
+    Q1 -->|Ja| Q3{"Altersgruppe der Person?<br/>— <a href='{{ELI}}#art-z11_abs-z3' target='_blank' rel='noopener'>§11 III</a>"}
+
+    Q3 -->|"Kind unter 6 Jahren"| B["Begleitungspflicht:<br/>immer erforderlich<br/>— §11 III Nr.1"]
+    Q3 -->|"Kind ab 6 Jahren"| Q4{"Vorführung endet<br/>nach 20 Uhr?<br/>— §11 III Nr.2"}
+    Q3 -->|"Jugendliche/r unter 16"| Q5{"Vorführung endet<br/>nach 22 Uhr?<br/>— §11 III Nr.3"}
+    Q3 -->|"Jugendliche/r ab 16"| Q6{"Vorführung endet<br/>nach 24 Uhr?<br/>— §11 III Nr.4"}
+
+    Q4 -->|Ja| B
+    Q4 -->|Nein| Z2["Teilnahme ohne<br/>Begleitung gestattet"]
+    Q5 -->|Ja| B
+    Q5 -->|Nein| Z2
+    Q6 -->|Ja| B
+    Q6 -->|Nein| Z2
+
+    B --> Q7{"Begleitung durch personen-<br/>sorgeberechtigte oder erziehungs-<br/>beauftragte Person vorhanden?"}
+    Q7 -->|Ja| Z2
+    Q7 -->|Nein| Z1
+
+    style Z1 fill:#f8d7da,stroke:#c0392b
+    style Z2 fill:#d4edda,stroke:#2d8a4a
+    style B fill:#fff3cd,stroke:#c9a227

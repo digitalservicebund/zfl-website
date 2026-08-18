@@ -1,0 +1,34 @@
+flowchart TD
+    ENTSTEHUNG["Steuer entsteht mit der<br/>Leistung des Wetteinsatzes<br/>— <a href='{{ELI}}#art-z12_abs-z' target='_blank' rel='noopener'>§12</a>"] --> ZEITRAUM["Anmeldungszeitraum: jeder<br/>Kalendermonat mit mind. einem<br/>Rennen (Totalisatorsteuer) bzw.<br/>jeder Kalendermonat<br/>(Buchmachersteuer) — <a href='{{ELI}}#art-z13_abs-z1' target='_blank' rel='noopener'>§13 I, II</a>"]
+
+    ZEITRAUM --> ANMELDUNG["Bis zum 15. Tag nach Ablauf des<br/>Anmeldungszeitraums: eigenhändig<br/>unterschriebene Steueranmeldung<br/>beim zuständigen Finanzamt abgeben<br/>(Steuer selbst berechnen) — <a href='{{ELI}}#art-z13_abs-z3' target='_blank' rel='noopener'>§13 III S.1</a>"]
+
+    ANMELDUNG --> UEBERMITTLUNG{"Ist elektronischer Zugang für<br/>Datenfernübertragung eröffnet? — <a href='{{ELI}}#art-z13_abs-z3' target='_blank' rel='noopener'>§13 III S.2</a>"}
+
+    UEBERMITTLUNG -->|Ja| ELEKTRONISCH["Anmeldung kann elektronisch<br/>nach amtlichem Datensatz<br/>übermittelt werden"]
+    UEBERMITTLUNG -->|Nein| PAPIER["Anmeldung auf amtlichem<br/>Vordruck in Papierform"]
+
+    ELEKTRONISCH --> FAELLIGKEIT["Steuer ist am 15. Tag nach<br/>Ablauf des Anmeldungszeitraums<br/>fällig und zu entrichten — <a href='{{ELI}}#art-z13_abs-z3' target='_blank' rel='noopener'>§13 III S.3</a>"]
+    PAPIER --> FAELLIGKEIT
+
+    FAELLIGKEIT --> NACHSCHAU{"Ordnet die Finanzbehörde eine<br/>unangekündigte Nachschau in den<br/>Geschäftsräumen an? — <a href='{{ELI}}#art-z58_abs-z1' target='_blank' rel='noopener'>§58 I</a>"}
+
+    NACHSCHAU -->|Nein| ABGESCHLOSSEN["Besteuerungsverfahren<br/>abgeschlossen"]
+
+    NACHSCHAU -->|Ja| VORLAGE["Betroffene Person muss<br/>Aufzeichnungen, Bücher und<br/>Unterlagen vorlegen sowie<br/>Auskünfte erteilen — <a href='{{ELI}}#art-z58_abs-z2' target='_blank' rel='noopener'>§58 II</a>"]
+
+    VORLAGE --> ANLASS{"Geben die Feststellungen Anlass<br/>zu einer Außenprüfung? — <a href='{{ELI}}#art-z58_abs-z3' target='_blank' rel='noopener'>§58 III</a>"}
+
+    ANLASS -->|Nein| ABGESCHLOSSEN
+    ANLASS -->|Ja| AUSSENPRUEFUNG["Übergang zur Außenprüfung ohne<br/>vorherige Prüfungsanordnung;<br/>schriftlicher Hinweis erforderlich<br/>— <a href='{{ELI}}#art-z58_abs-z3' target='_blank' rel='noopener'>§58 III</a>"]
+
+    AUSSENPRUEFUNG --> NACHENTRICHTUNG{"Ergeben sich Steuerbeträge, die<br/>nachzuentrichten oder zu<br/>erstatten sind? — <a href='{{ELI}}#art-z59_abs-z' target='_blank' rel='noopener'>§59</a>"}
+
+    NACHENTRICHTUNG -->|Nein| ABGESCHLOSSEN
+    NACHENTRICHTUNG -->|Ja| FESTSETZUNG["Festsetzung zusammen mit der<br/>Steuer für den letzten Kalender-<br/>monat des Prüfungszeitraums;<br/>fällig einen Monat nach<br/>Bekanntgabe — <a href='{{ELI}}#art-z59_abs-z' target='_blank' rel='noopener'>§59</a>"]
+
+    FESTSETZUNG --> ABGESCHLOSSEN
+
+    style ABGESCHLOSSEN fill:#d4edda,stroke:#2d8a4a
+    style AUSSENPRUEFUNG fill:#fff3cd,stroke:#c9a227
+    style FESTSETZUNG fill:#fff3cd,stroke:#c9a227

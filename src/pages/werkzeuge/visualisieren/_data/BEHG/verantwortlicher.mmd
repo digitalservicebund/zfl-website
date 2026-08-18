@@ -1,0 +1,17 @@
+flowchart TD
+    A["Brennstoff nach Anlage 1 wird<br/>in Verkehr gebracht<br/>— <a href='{{ELI}}#art-z2_abs-z1' target='_blank' rel='noopener'>§2 Abs. 1</a>"] --> B{"Entsteht die Energiesteuer nach<br/>§8 Abs. 1, §9 Abs. 1 u.a. des<br/>EnergieStG (Regelfall)?<br/>— <a href='{{ELI}}#art-z2_abs-z2' target='_blank' rel='noopener'>§2 Abs. 2 S. 1</a>"}
+    B -->|Ja| C["Verantwortlicher ist der<br/>Steuerschuldner<br/>— <a href='{{ELI}}/art-z3' target='_blank' rel='noopener'>§3 Nr. 3 Buchst. a</a>"]
+    B -->|"Steuerfreie Verwendung<br/>§37 Abs. 2 Nr. 3/4 EnergieStG"| D["Verantwortlicher ist der<br/>Erlaubnisinhaber nach<br/>§37 Abs. 1 EnergieStG<br/>— <a href='{{ELI}}#art-z2_abs-z2' target='_blank' rel='noopener'>§2 Abs. 2 S. 2</a>, <a href='{{ELI}}/art-z3' target='_blank' rel='noopener'>§3 Nr. 3 Buchst. b</a>"]
+    B -->|"Nein, kein Inverkehrbringen<br/>nach Abs. 2"| E{"Verwendung als Hauptbrennstoff<br/>Altöl in genehmigungsbedürftiger<br/>Abfallanlage?<br/>— <a href='{{ELI}}#art-z2_abs-z2a' target='_blank' rel='noopener'>§2 Abs. 2a S. 1</a>"}
+    E -->|"Ja, und Betreiber ist nicht<br/>bereits nach §7 Abs. 1 TEHG<br/>abgabepflichtig"| F["Verantwortlicher ist der<br/>Betreiber der Anlage<br/>— <a href='{{ELI}}/art-z3' target='_blank' rel='noopener'>§3 Nr. 3 Buchst. c</a>"]
+    E -->|"Nein"| Z1["Kein Inverkehrbringen<br/>nach diesem Gesetz —<br/>keine BEHG-Pflichten"]
+    C --> G{"Tritt ein Dritter als Einlagerer<br/>nach §7 Abs. 4 EnergieStG an die<br/>Stelle des Steuerlagerinhabers?"}
+    G -->|Ja| H["Verantwortlicher ist der<br/>Einlagerer<br/>— <a href='{{ELI}}/art-z3' target='_blank' rel='noopener'>§3 Nr. 3 Buchst. d</a>"]
+    G -->|Nein| I["Verantwortlicher bleibt der<br/>festgestellte Steuerschuldner"]
+    D --> J["Verantwortlicher trägt die<br/>Grundpflichten: Überwachungsplan,<br/>Emissionsbericht, Zertifikatsabgabe<br/>— <a href='{{ELI}}/art-z6' target='_blank' rel='noopener'>§6</a>-<a href='{{ELI}}/art-z8' target='_blank' rel='noopener'>§8</a>"]
+    F --> J
+    H --> J
+    I --> J
+
+    style Z1 fill:#f8d7da,stroke:#c0392b
+    style J fill:#d4edda,stroke:#2d8a4a

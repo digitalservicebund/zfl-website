@@ -1,0 +1,13 @@
+flowchart TD
+    A["Ehemalige Soldatin/ehemaliger Soldat<br/>möchte Uniform tragen"] --> B{"Liegt ein Anlass nach<br/><a href='{{ELI}}/art-z3' target='_blank' rel='noopener'>§3</a> vor?"}
+    B -->|Nein| C["Genehmigung scheidet aus"]
+    B -->|Ja| D{"Ausschlusstatbestand nach<br/><a href='{{ELI}}/art-z4' target='_blank' rel='noopener'>§4</a> erfüllt?<br/>(berufliche/ehrenamtliche Teilnahme<br/>oder Anlass, bei dem auch aktive<br/>Soldatinnen/Soldaten keine Uniform<br/>tragen dürfen)"}
+    D -->|Ja| E["Genehmigung darf nicht erteilt<br/>werden<br/>— <a href='{{ELI}}/art-z4' target='_blank' rel='noopener'>§4</a>"]
+    D -->|Nein| F{"Bieten Antragstellerin/Antragsteller<br/>bzw. Art und Umstände der<br/>Veranstaltung die Gewähr, dass das<br/>Ansehen der Bundeswehr nicht<br/>beeinträchtigt und die<br/>Trageberechtigung nicht missbraucht<br/>wird?<br/>— <a href='{{ELI}}#art-z6_abs-z3' target='_blank' rel='noopener'>§6 Abs. 3</a>"}
+    F -->|Nein| G["Genehmigung wird nicht erteilt<br/>— <a href='{{ELI}}#art-z6_abs-z3' target='_blank' rel='noopener'>§6 Abs. 3</a>"]
+    F -->|Ja| H["Genehmigungsfähig — weiter mit<br/>Zuständigkeits- und<br/>Antragsverfahren<br/>— <a href='{{ELI}}/art-z5' target='_blank' rel='noopener'>§5</a>"]
+
+    style C fill:#f8d7da,stroke:#c0392b
+    style E fill:#f8d7da,stroke:#c0392b
+    style G fill:#f8d7da,stroke:#c0392b
+    style H fill:#d4edda,stroke:#2d8a4a

@@ -1,0 +1,23 @@
+flowchart TD
+    A["Fahrzeug nähert sich<br/>Kreuzung oder Einmündung<br/>— <a href='{{ELI}}/art-z8' target='_blank' rel='noopener'>§8</a>"] --> B{"Ist die Vorfahrt durch<br/>Verkehrszeichen geregelt<br/>(Zeichen 205, 206, 301, 306)?<br/>— <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 Abs. 1 Nr. 1</a>"}
+    B -->|Ja| Z1["Verkehrszeichen<br/>maßgeblich befolgen"]
+    B -->|Nein| C{"Kommt das eigene Fahrzeug<br/>aus einem Feld- oder<br/>Waldweg?<br/>— <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 Abs. 1 Nr. 2</a>"}
+    C -->|Ja| Z2["Keine Vorfahrt —<br/>anderer Verkehr hat Vorrang"]
+    C -->|Nein| D{"Zeichen 215 (Kreisverkehr)<br/>unter Zeichen 205 an der<br/>Einmündung angeordnet?<br/>— <a href='{{ELI}}#art-z8_abs-z1a' target='_blank' rel='noopener'>§8 Abs. 1a</a>"}
+    D -->|Ja| Z3["Verkehr auf der<br/>Kreisfahrbahn hat Vorfahrt;<br/>Fahrtrichtungsanzeiger bei<br/>Einfahrt unzulässig<br/>— <a href='{{ELI}}#art-z8_abs-z1a' target='_blank' rel='noopener'>§8 Abs. 1a</a>"]
+    D -->|Nein| E{"Kommt das andere<br/>Fahrzeug von rechts?<br/>— <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 Abs. 1 S. 1</a>"}
+    E -->|Ja| F["Wartepflicht: mäßige<br/>Geschwindigkeit, erkennen<br/>lassen, dass gewartet wird<br/>— <a href='{{ELI}}#art-z8_abs-z2' target='_blank' rel='noopener'>§8 Abs. 2 S. 1</a>"]
+    E -->|Nein| Z4["Eigene Vorfahrt —<br/>weiterfahren"]
+    F --> G{"Ist übersehbar, dass der<br/>Vorfahrtberechtigte weder<br/>gefährdet noch wesentlich<br/>behindert wird?<br/>— <a href='{{ELI}}#art-z8_abs-z2' target='_blank' rel='noopener'>§8 Abs. 2 S. 2</a>"}
+    G -->|Ja| Z5["Weiterfahren erlaubt"]
+    G -->|Nein| H{"Ist die Straßenstelle<br/>unübersichtlich?<br/>— <a href='{{ELI}}#art-z8_abs-z2' target='_blank' rel='noopener'>§8 Abs. 2 S. 3</a>"}
+    H -->|Ja| I["Vorsichtig in Kreuzung/<br/>Einmündung hineintasten,<br/>bis Übersicht gegeben ist<br/>— <a href='{{ELI}}#art-z8_abs-z2' target='_blank' rel='noopener'>§8 Abs. 2 S. 3</a>"]
+    I --> G
+    H -->|Nein| Z6["Warten, bis Gefährdung/<br/>Behinderung ausgeschlossen ist"]
+
+    style Z1 fill:#fff3cd,stroke:#c9a227
+    style Z2 fill:#f8d7da,stroke:#c0392b
+    style Z3 fill:#d4edda,stroke:#2d8a4a
+    style Z4 fill:#d4edda,stroke:#2d8a4a
+    style Z5 fill:#d4edda,stroke:#2d8a4a
+    style Z6 fill:#f8d7da,stroke:#c0392b

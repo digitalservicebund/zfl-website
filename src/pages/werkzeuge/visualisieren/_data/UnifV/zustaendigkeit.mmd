@@ -1,0 +1,17 @@
+flowchart TD
+    A["Genehmigungsfähiger Antrag<br/>(bzw. Zuziehung zu dienstlicher<br/>Veranstaltung)<br/>— <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 Abs. 1</a>"] --> B{"Anlass nach<br/><a href='{{ELI}}/art-z3' target='_blank' rel='noopener'>§3 Nr. 6</a><br/>(dienstliche Veranstaltung)?"}
+    B -->|Ja| C["Genehmigung erfolgt von Amts<br/>wegen<br/>— <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 Abs. 1 S. 2</a><br/>Zuständige Stelle für die Zuziehung<br/>entscheidet<br/>— <a href='{{ELI}}#art-z5_abs-z4' target='_blank' rel='noopener'>§5 Abs. 4</a>"]
+    B -->|Nein| D{"Soll die Uniform im Einzelfall im<br/>Ausland getragen werden?<br/>— <a href='{{ELI}}#art-z5_abs-z3' target='_blank' rel='noopener'>§5 Abs. 3 Nr. 2</a>"}
+    D -->|Ja| E["Streitkräfteamt entscheidet<br/>— <a href='{{ELI}}#art-z5_abs-z3' target='_blank' rel='noopener'>§5 Abs. 3</a>"]
+    D -->|Nein| F{"Antrag einer Generalin/eines<br/>Generals oder einer Admiralin/eines<br/>Admirals bei später gestellten<br/>Anträgen oder Anlässen nach<br/><a href='{{ELI}}/art-z3' target='_blank' rel='noopener'>§3 Nr. 5</a>?<br/>— <a href='{{ELI}}#art-z5_abs-z3' target='_blank' rel='noopener'>§5 Abs. 3 Nr. 3</a>"}
+    F -->|Ja| E
+    F -->|Nein| G{"Antrag vor Beendigung des<br/>Wehrdienstverhältnisses gestellt und<br/>Anlass nach<br/><a href='{{ELI}}/art-z3' target='_blank' rel='noopener'>§3 Nr. 1 bis 4</a>?"}
+    G -->|Ja| H["Letzte Disziplinarvorgesetzte/letzter<br/>Disziplinarvorgesetzter entscheidet<br/>— <a href='{{ELI}}#art-z5_abs-z2' target='_blank' rel='noopener'>§5 Abs. 2 S. 1</a>"]
+    G -->|Nein| I{"Besteht eine Zuständigkeit nach<br/>— <a href='{{ELI}}#art-z5_abs-z2' target='_blank' rel='noopener'>§5 Abs. 2</a>?"}
+    I -->|Nein| E
+    I -->|Ja| J["Zuständiges Landeskommando<br/>(Wohnsitz) entscheidet<br/>— <a href='{{ELI}}#art-z5_abs-z2' target='_blank' rel='noopener'>§5 Abs. 2 S. 2</a>"]
+
+    style C fill:#d4edda,stroke:#2d8a4a
+    style E fill:#d4edda,stroke:#2d8a4a
+    style H fill:#d4edda,stroke:#2d8a4a
+    style J fill:#d4edda,stroke:#2d8a4a

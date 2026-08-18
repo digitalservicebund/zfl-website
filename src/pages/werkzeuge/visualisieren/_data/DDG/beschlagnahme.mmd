@@ -1,0 +1,30 @@
+flowchart TD
+    S["Koordinierungsstelle für digitale<br/>Dienste oder zuständige Behörde<br/>beschlagnahmt beweiserhebliche<br/>Gegenstände — <a href='{{ELI}}#art-z26_abs-z1' target='_blank' rel='noopener'>§26 I S.1</a>"] --> A1["Beschlagnahme wird dem<br/>Betroffenen unverzüglich<br/>bekanntgegeben<br/>— <a href='{{ELI}}#art-z26_abs-z1' target='_blank' rel='noopener'>§26 I S.2</a>"]
+
+    A1 --> Q1{"War weder der Betroffene noch ein<br/>erwachsener Angehöriger bei der<br/>Beschlagnahme anwesend, oder wurde<br/>ausdrücklich Widerspruch erhoben?<br/>— <a href='{{ELI}}#art-z26_abs-z1' target='_blank' rel='noopener'>§26 I S.3 Nr.1, Nr.2</a>"}
+
+    Q1 -->|Nein| Z1["Keine behördliche Pflicht zur<br/>gerichtlichen Bestätigung —<br/>Beschlagnahme bleibt bestehen"]
+
+    Q1 -->|Ja| F["Behörde muss innerhalb von<br/>3 Tagen die gerichtliche<br/>Bestätigung beim zuständigen<br/>Amtsgericht beantragen<br/>— <a href='{{ELI}}#art-z26_abs-z1' target='_blank' rel='noopener'>§26 I S.3</a>"]
+
+    F --> Z2["Amtsgericht (Bezirk der<br/>Beschlagnahme) entscheidet über<br/>die Bestätigung der Beschlagnahme<br/>— <a href='{{ELI}}#art-z26_abs-z1' target='_blank' rel='noopener'>§26 I S.3</a>"]
+
+    A1 --> Q2{"Beantragt der Betroffene<br/>(jederzeit möglich) eine<br/>gerichtliche Entscheidung?<br/>— <a href='{{ELI}}#art-z26_abs-z2' target='_blank' rel='noopener'>§26 II S.1</a>"}
+
+    Q2 -->|Nein| Z3["Beschlagnahme bleibt ohne<br/>gerichtliche Überprüfung auf<br/>Antrag des Betroffenen bestehen"]
+
+    Q2 -->|Ja| B1["Betroffener ist über sein<br/>Antragsrecht zu belehren<br/>— <a href='{{ELI}}#art-z26_abs-z2' target='_blank' rel='noopener'>§26 II S.2</a>"]
+
+    B1 --> B2["Zuständiges Amtsgericht<br/>entscheidet über den Antrag<br/>— <a href='{{ELI}}#art-z26_abs-z2' target='_blank' rel='noopener'>§26 II S.3</a>"]
+
+    B2 --> Q3{"Wird gegen die gerichtliche<br/>Entscheidung Beschwerde<br/>eingelegt?"}
+
+    Q3 -->|Ja| Z4["Beschwerde zulässig;<br/>§§306-310, 311a StPO<br/>entsprechend anwendbar<br/>— <a href='{{ELI}}#art-z26_abs-z2' target='_blank' rel='noopener'>§26 II S.4-5</a>"]
+
+    Q3 -->|Nein| Z5["Gerichtliche Entscheidung<br/>wird bestandskräftig"]
+
+    style Z1 fill:#fff3cd,stroke:#c9a227
+    style Z2 fill:#fff3cd,stroke:#c9a227
+    style Z3 fill:#fff3cd,stroke:#c9a227
+    style Z4 fill:#d4edda,stroke:#2d8a4a
+    style Z5 fill:#fff3cd,stroke:#c9a227

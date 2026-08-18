@@ -1,0 +1,34 @@
+flowchart TD
+    START{"In welcher Verfahrensart<br/>ist die Gebühr entstanden?"}
+
+    START -->|"Bürgerliche Rechtsstreitigkeit,<br/>Insolvenz-/Verteilungsverfahren,<br/>Rechtsmittel des gewerblichen<br/>Rechtsschutzes, Verwaltungs-,<br/>Finanz- oder Sozialgerichts-<br/>barkeit"| ALLGEMEIN["Verfahrensgebühr wird fällig<br/>mit Einreichung der Klage-,<br/>Antrags-, Einspruchs- oder<br/>Rechtsmittelschrift bzw. mit<br/>Erklärung zu Protokoll<br/>— <a href='{{ELI}}#art-z6_abs-z1' target='_blank' rel='noopener'>§6 I S.1</a>"]
+    START -->|"Verfahren vor den<br/>Gerichten für Arbeitssachen"| ARBG["Fälligkeit richtet sich<br/>nach § 9 — <a href='{{ELI}}#art-z6_abs-z3' target='_blank' rel='noopener'>§6 III</a>"]
+    START -->|"Gebühr setzt eine<br/>gerichtliche Entscheidung oder<br/>Handlung voraus"| ENTSCHEIDUNG["Gebühr wird fällig mit<br/>dieser Entscheidung/Handlung<br/>— <a href='{{ELI}}#art-z6_abs-z2' target='_blank' rel='noopener'>§6 II</a>"]
+
+    ALLGEMEIN --> ZUGELASSEN{"Wurde das Rechtsmittel erst<br/>durch das Rechtsmittelgericht<br/>zugelassen?"}
+    ZUGELASSEN -->|Ja| ZULASSUNG["Verfahrensgebühr wird abweichend<br/>erst mit der Zulassung fällig<br/>— <a href='{{ELI}}#art-z6_abs-z1' target='_blank' rel='noopener'>§6 I S.2</a>"]
+    ZUGELASSEN -->|Nein| ENDE_ALLGEMEIN["Fälligkeit wie oben"]
+
+    ARBG --> SONSTIGE{"Liegt einer der folgenden<br/>Beendigungs-/Ruhetatbestände vor?<br/>— <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 III</a>"}
+
+    SONSTIGE -->|"Unbedingte Kosten-<br/>entscheidung ergangen"| FAELLIG1["Gebühren und Auslagen<br/>werden fällig<br/>— <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 III Nr.1</a>"]
+    SONSTIGE -->|"Verfahren/Rechtszug durch<br/>Vergleich oder Rücknahme<br/>beendet"| FAELLIG2["Gebühren und Auslagen<br/>werden fällig<br/>— <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 III Nr.2</a>"]
+    SONSTIGE -->|"Verfahren ruht oder wird<br/>6 Monate nicht betrieben"| FAELLIG3["Gebühren und Auslagen<br/>werden fällig<br/>— <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 III Nr.3</a>"]
+    SONSTIGE -->|"Verfahren 6 Monate<br/>unterbrochen oder ausgesetzt"| FAELLIG4["Gebühren und Auslagen<br/>werden fällig<br/>— <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 III Nr.4</a>"]
+    SONSTIGE -->|"Verfahren durch anderweitige<br/>Erledigung beendet"| FAELLIG5["Gebühren und Auslagen<br/>werden fällig<br/>— <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 III Nr.5</a>"]
+    SONSTIGE -->|"Keiner der Tatbestände<br/>erfüllt"| NOCH_NICHT["Gebühr noch nicht fällig"]
+
+    FAELLIG1 --> DOKPAUSCHALE["Dokumentenpauschale und<br/>Versendungsauslagen werden<br/>stets sofort mit Entstehung<br/>fällig — <a href='{{ELI}}#art-z9_abs-z4' target='_blank' rel='noopener'>§9 IV</a>"]
+    FAELLIG2 --> DOKPAUSCHALE
+    FAELLIG3 --> DOKPAUSCHALE
+    FAELLIG4 --> DOKPAUSCHALE
+    FAELLIG5 --> DOKPAUSCHALE
+
+    style ZULASSUNG fill:#fff3cd,stroke:#c9a227
+    style FAELLIG1 fill:#d4edda,stroke:#2d8a4a
+    style FAELLIG2 fill:#d4edda,stroke:#2d8a4a
+    style FAELLIG3 fill:#d4edda,stroke:#2d8a4a
+    style FAELLIG4 fill:#d4edda,stroke:#2d8a4a
+    style FAELLIG5 fill:#d4edda,stroke:#2d8a4a
+    style NOCH_NICHT fill:#f8d7da,stroke:#c0392b
+    style DOKPAUSCHALE fill:#fff3cd,stroke:#c9a227
