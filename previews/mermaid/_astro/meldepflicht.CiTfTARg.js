@@ -1,0 +1,23 @@
+var e=`flowchart TD
+    START["Meldepflichtige Krankheit (Verdacht,<br/>Erkrankung, Tod) — <a href='{{ELI}}#art-z6_abs-z1' target='_blank' rel='noopener'>§6 Abs.1</a><br/>oder meldepflichtiger Erregernachweis<br/>— <a href='{{ELI}}/art-z7' target='_blank' rel='noopener'>§7</a> festgestellt"] --> F1{"Handelt es sich um Personal des<br/>Not- oder Rettungsdienstes, das den<br/>Patienten unverzüglich in eine ärztlich<br/>geleitete Einrichtung gebracht hat?<br/>— <a href='{{ELI}}#art-z8_abs-z2' target='_blank' rel='noopener'>§8 Abs.2 S.1</a>"}
+
+    F1 -->|Ja| KEINE["Keine Meldepflicht"]
+    F1 -->|Nein| F2{"Liegt bereits ein Nachweis vor,<br/>dass die Meldung erfolgt ist und<br/>keine weiteren Angaben erhoben<br/>wurden? — <a href='{{ELI}}#art-z8_abs-z3' target='_blank' rel='noopener'>§8 Abs.3</a>"}
+
+    F2 -->|Ja| KEINE
+    F2 -->|Nein| MELD["Namentliche Meldung mit den<br/>Pflichtangaben an das zuständige<br/>Gesundheitsamt — <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 Abs.1</a>,<br/><a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>Abs.2</a>"]
+
+    MELD --> FRIST["Frist: unverzüglich, spätestens<br/>24 Stunden nach Kenntniserlangung<br/>— <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 Abs.3 S.1</a>"]
+
+    FRIST --> F3{"Bestätigt sich eine gemeldete<br/>Verdachtsdiagnose nachträglich<br/>nicht? — <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 Abs.3 S.5</a>"}
+
+    F3 -->|Ja| NACHMELD["Unverzügliche Mitteilung an das<br/>Gesundheitsamt, dass sich der<br/>Verdacht nicht bestätigt hat<br/>— <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 Abs.3 S.5</a>"]
+    F3 -->|Nein| WEITER["Übermittlung an die zuständige<br/>Landesbehörde und das Robert<br/>Koch-Institut — <a href='{{ELI}}/art-z11' target='_blank' rel='noopener'>§11</a>"]
+
+    NACHMELD --> ENDE["Meldevorgang abgeschlossen"]
+    WEITER --> ENDE
+
+    style KEINE fill:#d4edda,stroke:#2d8a4a
+    style ENDE fill:#d4edda,stroke:#2d8a4a
+    style NACHMELD fill:#fff3cd,stroke:#c9a227
+`;export{e as default};

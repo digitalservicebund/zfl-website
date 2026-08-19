@@ -1,0 +1,18 @@
+var e=`flowchart TD
+    A["Pfand wird verwertet; eine<br/>Vereinbarung nach<br/><a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I Nr.2</a><br/>besteht"] --> B["Nicht zur Befriedigung<br/>benötigter und nicht an den<br/>Verpfänder ausgezahlter<br/>Erlösteil = Überschuss<br/>— <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I Nr.2</a>"]
+    B --> C{"Bestehen Mindererlöse aus<br/>früheren Vereinbarungen nach<br/>§5 mit demselben Verpfänder?<br/>— <a href='{{ELI}}#art-z11_abs-z2' target='_blank' rel='noopener'>§11 II</a>"}
+    C -->|Ja| D["Pfandleiher darf sich aus<br/>dem Überschuss auch wegen<br/>des Mindererlöses befriedigen<br/>— <a href='{{ELI}}#art-z11_abs-z2' target='_blank' rel='noopener'>§11 II</a>"]
+    C -->|Nein| E["3-Jahres-Frist ab Ablauf des<br/>Verwertungsjahres läuft ab<br/>— <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I Nr.2</a>"]
+    D --> E
+    E --> F{"Verlängert die Behörde die<br/>Monatsfrist auf Antrag des<br/>Pfandleihers aus wichtigem<br/>Grund?<br/>— <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I</a>"}
+    F -->|Ja| G["Verlängerte Frist gilt"]
+    F -->|Nein| H["Reguläre Frist: 1 Monat nach<br/>Ablauf der 3-Jahres-Frist<br/>— <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I S.1</a>"]
+    G --> I{"Führt der Pfandleiher den<br/>Überschuss innerhalb der<br/>Frist an die zuständige<br/>Behörde ab?"}
+    H --> I
+    I -->|Ja| J["Überschuss verfällt dem<br/>Fiskus des Landes, in dem die<br/>Verpfändung erfolgt ist<br/>— <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I S.2</a>"]
+    I -->|Nein| K["Ordnungswidrigkeit<br/>— <a href='{{ELI}}/art-z12a' target='_blank' rel='noopener'>§12a Nr.6</a>"]
+
+    style J fill:#d4edda,stroke:#2d8a4a
+    style K fill:#f8d7da,stroke:#c0392b
+    style D fill:#fff3cd,stroke:#c9a227
+`;export{e as default};

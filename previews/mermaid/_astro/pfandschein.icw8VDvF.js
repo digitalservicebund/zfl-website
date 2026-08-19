@@ -1,0 +1,14 @@
+var e=`flowchart TD
+    A["Pfandleihvertrag<br/>abgeschlossen"] --> B["Pfandleiher händigt dem<br/>Verpfänder unverzüglich einen<br/>von ihm oder seinem<br/>Bevollmächtigten unterzeichneten<br/>Pfandschein aus<br/>— <a href='{{ELI}}#art-z6_abs-z1' target='_blank' rel='noopener'>§6 I</a>"]
+    B --> C{"Enthält der Pfandschein die<br/>Angaben nach<br/><a href='{{ELI}}#art-z3_abs-z2' target='_blank' rel='noopener'>§3 II Nr.1-3, 5-8</a><br/>sowie die Geschäftsbedingungen<br/>und ist er gut lesbar?<br/>— <a href='{{ELI}}#art-z6_abs-z2' target='_blank' rel='noopener'>§6 II</a>"}
+    C -->|Nein| X["Pfandschein<br/>formell mangelhaft"]
+    C -->|Ja| D["Pfandschein<br/>wirksam ausgehändigt"]
+    D --> E{"Wird der Pfandleihvertrag<br/>später verlängert oder<br/>sonst geändert (Erneuerung)?<br/>— <a href='{{ELI}}#art-z6_abs-z3' target='_blank' rel='noopener'>§6 III</a>"}
+    E -->|Ja| F["Pfandleiher händigt<br/>neuen Pfandschein aus<br/>— <a href='{{ELI}}#art-z6_abs-z3' target='_blank' rel='noopener'>§6 III</a>"]
+    F --> C
+    E -->|Nein| G["Ursprünglicher Pfandschein<br/>bleibt maßgeblich"]
+
+    style X fill:#f8d7da,stroke:#c0392b
+    style D fill:#d4edda,stroke:#2d8a4a
+    style G fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};
