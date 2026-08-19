@@ -9,9 +9,7 @@
   } from "./_mermaid2RulemapXML.ts";
   import ChipBtn from "./_ChipBtn.svelte";
   import LawFinder from "./_LawFinder.svelte";
-  import IconZoomIn from "~icons/ic/outline-zoom-in";
-  import IconZoomOut from "~icons/ic/outline-zoom-out";
-  import IconRestartAlt from "~icons/ic/outline-restart-alt";
+  import Viewer from "./_Viewer.svelte";
 
   interface VisExample {
     name: string;
@@ -73,8 +71,8 @@
     "Erstelle Diagramm …",
     "Rendere Visualisierung …",
   ];
-  const FAKE_LOADING_DELAY_MS = 3600;
-  const FAKE_LOADING_STATUS_INTERVAL_MS = 1200;
+  const FAKE_LOADING_DELAY_MS = 2100;
+  const FAKE_LOADING_STATUS_INTERVAL_MS = 700;
 
   let loadingStatusMessage = $state(LAW_STEP_STATUS_MESSAGES[0]);
 
@@ -173,10 +171,7 @@
   let mermaidSource = $state("");
   let diagramSvg = $state("");
   let isLoading = $state(false);
-  let scale = $state(1);
-  let translateX = $state(0);
-  let translateY = $state(0);
-  let dragOrigin: { x: number; y: number } | null = null;
+  let viewerOpen = $state(false);
   let renderCount = 0;
 
   $effect(() => {
@@ -212,10 +207,6 @@
   $effect(() => {
     if (!mermaidSource) return;
 
-    scale = 1;
-    translateX = 0;
-    translateY = 0;
-
     let cancelled = false;
 
     mermaid
@@ -230,46 +221,6 @@
       cancelled = true;
     };
   });
-
-  function zoomBy(factor: number) {
-    const newScale = Math.min(Math.max(scale * factor, 0.2), 5);
-    const ratio = newScale / scale;
-
-    translateX *= ratio;
-    translateY *= ratio;
-    scale = newScale;
-  }
-
-  function zoomIn() {
-    zoomBy(1.25);
-  }
-
-  function zoomOut() {
-    zoomBy(0.8);
-  }
-
-  function resetZoom() {
-    scale = 1;
-    translateX = 0;
-    translateY = 0;
-  }
-
-  function onPointerDown(event: PointerEvent) {
-    dragOrigin = {
-      x: event.clientX - translateX,
-      y: event.clientY - translateY,
-    };
-  }
-
-  function onPointerMove(event: PointerEvent) {
-    if (!dragOrigin) return;
-    translateX = event.clientX - dragOrigin.x;
-    translateY = event.clientY - dragOrigin.y;
-  }
-
-  function onPointerUp() {
-    dragOrigin = null;
-  }
 
   // Drops <a href="...">text</a> wrappers, keeping just the link text: SVG
   // viewers outside the browser (Miro, Illustrator, ...) don't render
@@ -333,27 +284,27 @@
     URL.revokeObjectURL(url);
   }
 
-  function toBase64Url(bytes: Uint8Array): string {
-    let binary = "";
-    for (const byte of bytes) binary += String.fromCharCode(byte);
-    return btoa(binary)
-      .replace(/\+/g, "-")
-      .replace(/\//g, "_")
-      .replace(/=+$/, "");
-  }
-
-  let pakoStr = $derived.by(() => {
-    if (!mermaidSource) return undefined;
-
-    const state = {
-      code: mermaidSource,
-      mermaid: JSON.stringify({ theme: "default" }, null, 2),
-      autoSync: true,
-      updateDiagram: true,
-    };
-    const compressed = deflate(JSON.stringify(state), { level: 9 });
-    return `${toBase64Url(compressed)}`;
-  });
+  // function toBase64Url(bytes: Uint8Array): string {
+  //   let binary = "";
+  //   for (const byte of bytes) binary += String.fromCharCode(byte);
+  //   return btoa(binary)
+  //     .replace(/\+/g, "-")
+  //     .replace(/\//g, "_")
+  //     .replace(/=+$/, "");
+  // }
+  //
+  // let pakoStr = $derived.by(() => {
+  //   if (!mermaidSource) return undefined;
+  //
+  //   const state = {
+  //     code: mermaidSource,
+  //     mermaid: JSON.stringify({ theme: "default" }, null, 2),
+  //     autoSync: true,
+  //     updateDiagram: true,
+  //   };
+  //   const compressed = deflate(JSON.stringify(state), { level: 9 });
+  //   return `${toBase64Url(compressed)}`;
+  // });
 </script>
 
 {#snippet loadingIndicator()}
@@ -371,121 +322,199 @@
   </div>
 {/snippet}
 
-<div class="space-y-32 min-h-[50vh]">
-  <LawFinder {examples} bind:selected={selectedExample} />
-  {#if selectedExample}
-    {#if isLoadingVisOptions}
-      {@render loadingIndicator()}
-    {:else}
-      <div class="kern-form-input">
-        <span class="kern-label"
-          >Welchen Teilbereich möchten Sie visualisieren?</span
-        >
-        <div class="mt-8 flex flex-wrap gap-8">
-          {#each selectedExample.visOptions as option (option.name)}
-            <ChipBtn
-              selected={option.name === selectedVisOption}
-              onclick={() => (selectedVisOption = option.name)}
+{#snippet loadingDiagramPlaceholder()}
+  <svg
+    viewBox="0 0 320 260"
+    class="h-full max-h-500 w-full max-w-420"
+    role="img"
+    aria-label="Diagramm wird geladen"
+  >
+    <g
+      class="fill-none stroke-gray-400"
+      stroke-width="2"
+      stroke-linecap="round"
+    >
+      <path d="M160 56 V80" />
+      <path d="M160 116 V128 H60 V152" />
+      <path d="M160 116 V128 H260 V152" />
+      <path d="M60 188 V200 H160 V222" />
+      <path d="M260 188 V200 H160 V222" />
+    </g>
+    <g class="stroke-gray-400" stroke-width="2">
+      <rect
+        x="110"
+        y="20"
+        width="100"
+        height="36"
+        rx="6"
+        class="fill-gray-300 animate-pulse"
+        style="animation-delay: 0ms"
+      />
+      <rect
+        x="110"
+        y="80"
+        width="100"
+        height="36"
+        rx="6"
+        class="fill-gray-300 animate-pulse"
+        style="animation-delay: 150ms"
+      />
+      <rect
+        x="10"
+        y="152"
+        width="100"
+        height="36"
+        rx="6"
+        class="fill-gray-300 animate-pulse"
+        style="animation-delay: 300ms"
+      />
+      <rect
+        x="210"
+        y="152"
+        width="100"
+        height="36"
+        rx="6"
+        class="fill-gray-300 animate-pulse"
+        style="animation-delay: 450ms"
+      />
+      <rect
+        x="110"
+        y="222"
+        width="100"
+        height="36"
+        rx="6"
+        class="fill-gray-300 animate-pulse"
+        style="animation-delay: 600ms"
+      />
+    </g>
+  </svg>
+{/snippet}
+
+{#snippet buttons()}
+  <div class="flex gap-8 flex-wrap">
+    <!-- <a -->
+    <!--   href={`https://mermaid.live/edit#pako:${pakoStr}`} -->
+    <!--   target="_blank" -->
+    <!--   rel="noreferrer" -->
+    <!--   class="kern-btn kern-btn--primary" -->
+    <!-- > -->
+    <!--   <span -->
+    <!--     class="kern-icon kern-icon--open-in-new kern-icon--default" -->
+    <!--     aria-hidden="true" -->
+    <!--   ></span> -->
+    <!--   <span class="kern-label">Im Editor öffnen</span> -->
+    <!-- </a> -->
+    <button
+      class="kern-btn kern-btn--primary"
+      onclick={() => {
+        viewerOpen = true;
+      }}
+    >
+      <span
+        class="kern-icon kern-icon--search kern-icon--default"
+        aria-hidden="true"
+      ></span>
+      <span class="kern-label">Öffnen</span>
+    </button>
+    <button
+      type="button"
+      onclick={downloadSvg}
+      class="kern-btn kern-btn--secondary"
+    >
+      <span
+        class="kern-icon kern-icon--download kern-icon--default"
+        aria-hidden="true"
+      ></span>
+      <span class="kern-label">SVG Export</span>
+    </button>
+    <button
+      type="button"
+      onclick={downloadRulemapXml}
+      disabled={!canExportRulemap}
+      class="kern-btn kern-btn--secondary"
+      title={canExportRulemap
+        ? undefined
+        : "Rulemap XML Export ist derzeit nur für Flowcharts verfügbar"}
+    >
+      <span
+        class="kern-icon kern-icon--download kern-icon--default"
+        aria-hidden="true"
+      ></span>
+      <span class="kern-label">Rulemap XML Export</span>
+    </button>
+  </div>
+{/snippet}
+
+<div class="grid grid-cols-1 sm:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] gap-40">
+  <div class="flex min-w-0 flex-col justify-between">
+    <div class="space-y-32">
+      <LawFinder {examples} bind:selected={selectedExample} />
+      {#if selectedExample}
+        {#if !isLoadingVisOptions}
+          <div class="kern-form-input">
+            <span class="kern-label"
+              >Welchen Teilbereich möchten Sie visualisieren?</span
             >
-              {option.name}
-            </ChipBtn>
-          {/each}
+            <div class="mt-8 flex flex-wrap gap-8">
+              {#each selectedExample.visOptions as option (option.name)}
+                <ChipBtn
+                  selected={option.name === selectedVisOption}
+                  onclick={() => (selectedVisOption = option.name)}
+                >
+                  {option.name}
+                </ChipBtn>
+              {/each}
+            </div>
+          </div>
+        {/if}
+        {#if isLoadingVisOptions || isLoading}
+          {@render loadingIndicator()}
+        {/if}
+      {/if}
+    </div>
+    {#if mermaidSource}
+      {@render buttons()}
+    {/if}
+  </div>
+  <div class="w-full h-700 min-w-0 flex justify-center items-center">
+    {#if isLoading}
+      <div
+        class="flex w-full h-full items-center justify-center bg-lavender-200 p-16"
+      >
+        {@render loadingDiagramPlaceholder()}
+      </div>
+    {:else if mermaidSource}
+      <div
+        class="diagram-preview relative flex w-full items-center justify-center overflow-hidden bg-lavender-200 p-16"
+      >
+        <button
+          type="button"
+          class="absolute inset-0 z-0 cursor-zoom-in"
+          aria-label="Visualisierung in Vollbildansicht öffnen"
+          onclick={() => (viewerOpen = true)}
+        ></button>
+        <div class="pointer-events-none relative z-[1]">
+          <!-- eslint-disable-next-line svelte/no-at-html-tags -- diagramSvg comes from mermaid.render() on our own bundled .mmd sources, not user input -->
+          {@html diagramSvg}
         </div>
       </div>
+      <Viewer
+        bind:open={viewerOpen}
+        svg={diagramSvg}
+        title={selectedExample && selectedOption
+          ? `${selectedExample.title}: ${selectedOption.name}`
+          : "Visualisierung"}
+      />
     {/if}
-  {/if}
-  {#if isLoading}
-    {@render loadingIndicator()}
-  {:else if mermaidSource}
-    <div
-      role="presentation"
-      class="relative touch-none cursor-grab overflow-hidden bg-lavender-200 p-16 active:cursor-grabbing"
-      onpointerdown={onPointerDown}
-      onpointermove={onPointerMove}
-      onpointerup={onPointerUp}
-      onpointerleave={onPointerUp}
-    >
-      <div class="absolute right-16 top-16 z-10 flex flex-col gap-8">
-        <button
-          type="button"
-          class="kern-btn kern-btn--secondary kern-btn--only-icon"
-          onclick={zoomIn}
-          aria-label="Vergrößern"
-        >
-          <IconZoomIn
-            class="text-cosmic-blue-base text-xl"
-            aria-hidden="true"
-          />
-        </button>
-        <button
-          type="button"
-          class="kern-btn kern-btn--secondary kern-btn--only-icon"
-          onclick={zoomOut}
-          aria-label="Verkleinern"
-        >
-          <IconZoomOut
-            class="text-cosmic-blue-base text-xl"
-            aria-hidden="true"
-          />
-        </button>
-        <button
-          type="button"
-          class="kern-btn kern-btn--secondary kern-btn--only-icon"
-          onclick={resetZoom}
-          aria-label="Zoom zurücksetzen"
-        >
-          <IconRestartAlt
-            class="text-cosmic-blue-base text-xl"
-            aria-hidden="true"
-          />
-        </button>
-      </div>
-      <div
-        style={`transform: translate(${translateX}px, ${translateY}px) scale(${scale}); transform-origin: 0 0;`}
-      >
-        <!-- eslint-disable-next-line svelte/no-at-html-tags -- diagramSvg comes from mermaid.render() on our own bundled .mmd sources, not user input -->
-        {@html diagramSvg}
-      </div>
-    </div>
-    <div class="flex gap-16">
-      <a
-        href={`https://mermaid.live/edit#pako:${pakoStr}`}
-        target="_blank"
-        rel="noreferrer"
-        class="kern-btn kern-btn--primary"
-      >
-        <span
-          class="kern-icon kern-icon--open-in-new kern-icon--default"
-          aria-hidden="true"
-        ></span>
-        <span class="kern-label">Im Editor öffnen</span>
-      </a>
-      <button
-        type="button"
-        onclick={downloadSvg}
-        class="kern-btn kern-btn--secondary"
-      >
-        <span
-          class="kern-icon kern-icon--download kern-icon--default"
-          aria-hidden="true"
-        ></span>
-        <span class="kern-label">SVG Export</span>
-      </button>
-      <button
-        type="button"
-        onclick={downloadRulemapXml}
-        disabled={!canExportRulemap}
-        class="kern-btn kern-btn--secondary"
-        title={canExportRulemap
-          ? undefined
-          : "Rulemap XML Export ist derzeit nur für Flowcharts verfügbar"}
-      >
-        <span
-          class="kern-icon kern-icon--download kern-icon--default"
-          aria-hidden="true"
-        ></span>
-        <span class="kern-label">Rulemap XML Export</span>
-      </button>
-    </div>
-  {/if}
+  </div>
 </div>
+
+<style>
+  .diagram-preview :global(svg) {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    height: 700px;
+  }
+</style>
