@@ -1,0 +1,41 @@
+var e=`flowchart TD
+    Q1{"Wer übermittelt die Daten<br/>an das Unternehmensregister?"}
+
+    Q1 -->|"Betreiber Bundesanzeiger<br/>(Jahresabschlüsse etc.)"| BAZ["Übermittlung unverzüglich nach<br/>Veröffentlichung, spätestens bis<br/>Ablauf des folgenden Arbeitstages;<br/>Zeitstempel mit fortgeschrittener<br/>elektronischer Signatur<br/>— <a href='{{ELI}}#art-z10_abs-z' target='_blank' rel='noopener'>§10</a>"]
+
+    Q1 -->|"Veröffentlichungs-/<br/>Offenlegungspflichtiger"| VOP["Übermittlung unverzüglich nach<br/>Veröffentlichung bzw. Mitteilung;<br/>Registrierung nach<br/><a href='{{ELI}}/art-z3' target='_blank' rel='noopener'>§3</a> erforderlich<br/>— <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I</a>"]
+
+    Q1 -->|Rechnungslegungsunterlagen| RL["Übermittlung im vorgeschriebenen<br/>Format (ESEF/XML/Erstellungsformat)<br/>über gesicherte Internetverbindung<br/>— <a href='{{ELI}}#art-z11_abs-z2' target='_blank' rel='noopener'>§11 II</a>"]
+
+    Q1 -->|BaFin| BAFIN["Übermittlung elektronisch über<br/>gesicherte Internetverbindung<br/>— <a href='{{ELI}}#art-z11_abs-z3' target='_blank' rel='noopener'>§11 III</a>"]
+
+    BAZ --> ZUG1["Unverzüglich, spätestens bis Ablauf<br/>des folgenden Arbeitstages<br/>zugänglich gemacht<br/>— <a href='{{ELI}}#art-z12_abs-z1' target='_blank' rel='noopener'>§12 I S.1</a>"]
+
+    VOP --> ZUG1
+
+    RL --> Q2{"Ist eine Prüfung der<br/>Unterlagen gesetzlich<br/>vorgeschrieben?<br/>— <a href='{{ELI}}#art-z12_abs-z1' target='_blank' rel='noopener'>§12 I S.2</a>"}
+
+    Q2 -->|Ja| PRUEF["Unverzügliche Prüfung durch die<br/>registerführende Stelle<br/>— <a href='{{ELI}}#art-z12_abs-z1' target='_blank' rel='noopener'>§12 I S.2</a>"]
+    PRUEF --> ZUG2
+
+    Q2 -->|Nein| ZUG2["Unverzüglich nach Prüfung bzw.<br/>Übermittlung zugänglich gemacht<br/>(außer dauerhaft hinterlegte<br/>Unterlagen)<br/>— <a href='{{ELI}}#art-z12_abs-z1' target='_blank' rel='noopener'>§12 I S.3</a>"]
+
+    BAFIN --> BAFINENDE["Daten dienen der Aufsicht durch<br/>die Bundesanstalt für<br/>Finanzdienstleistungsaufsicht<br/>— <a href='{{ELI}}/art-z16' target='_blank' rel='noopener'>§16</a>"]
+
+    ZUG1 --> Q3{"Wurden übermittelte Unterlagen<br/>durch die registerführende Stelle<br/>fehlerhaft eingestellt?<br/>— <a href='{{ELI}}#art-z12_abs-z1' target='_blank' rel='noopener'>§12 I S.4</a>"}
+    ZUG2 --> Q3
+
+    Q3 -->|Ja| BERICHT["Berichtigung auf Verlangen des<br/>Veröffentlichungs-/Offenlegungs-<br/>pflichtigen; als Berichtigung<br/>gekennzeichnet<br/>— <a href='{{ELI}}#art-z12_abs-z1' target='_blank' rel='noopener'>§12 I S.4-5</a>"]
+    Q3 -->|Nein| LOESCH{"Welche Löschfrist gilt?"}
+    BERICHT --> LOESCH
+
+    LOESCH -->|"Daten nach §10"| LOESCH1["Löschung, sobald das Original<br/>nicht mehr im Bundesanzeiger<br/>zugänglich ist<br/>— <a href='{{ELI}}#art-z12_abs-z2' target='_blank' rel='noopener'>§12 II S.1</a>"]
+
+    LOESCH -->|"Daten nach §11 I, III"| LOESCH2["10 Jahre zugänglich zu halten,<br/>danach Löschung<br/>— <a href='{{ELI}}#art-z12_abs-z2' target='_blank' rel='noopener'>§12 II S.2</a>"]
+
+    style ZUG1 fill:#fff3cd,stroke:#c9a227
+    style ZUG2 fill:#fff3cd,stroke:#c9a227
+    style BAFINENDE fill:#fff3cd,stroke:#c9a227
+    style LOESCH1 fill:#d4edda,stroke:#2d8a4a
+    style LOESCH2 fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};
