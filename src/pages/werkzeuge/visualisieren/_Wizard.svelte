@@ -2,6 +2,7 @@
   import mermaid from "mermaid";
   import { deflate } from "pako";
   import { fade } from "svelte/transition";
+  import { SvelteURLSearchParams } from "svelte/reactivity";
   import {
     isMermaidFlowchart,
     mermaidFlowchartToRulemapXml,
@@ -49,12 +50,11 @@
     return source.replaceAll("{{ELI}}", `${RIS_BASE_URL}/${eli}`);
   }
 
-  const initialSearchParams =
-    typeof window === "undefined"
-      ? new URLSearchParams()
-      : new URLSearchParams(window.location.search);
-  const initialNorm = initialSearchParams.get("norm");
-  const initialVisualization = initialSearchParams.get("visualization");
+  const searchParams = new SvelteURLSearchParams(
+    typeof window === "undefined" ? "" : window.location.search,
+  );
+  const initialNorm = searchParams.get("norm");
+  const initialVisualization = searchParams.get("visualization");
   let hasAppliedInitialVisualization = false;
 
   let selectedExample = $state(
@@ -150,12 +150,20 @@
   );
 
   $effect(() => {
-    if (!selectedExample || !selectedOption) return;
+    if (selectedExample) {
+      searchParams.set("norm", selectedExample.short);
+    } else {
+      searchParams.delete("norm");
+    }
 
-    const params = new URLSearchParams(window.location.search);
-    params.set("norm", selectedExample.short);
-    params.set("visualization", selectedOption.name);
-    const newUrl = `${window.location.pathname}?${params.toString()}${window.location.hash}`;
+    if (selectedOption) {
+      searchParams.set("visualization", selectedOption.name);
+    } else {
+      searchParams.delete("visualization");
+    }
+
+    const query = searchParams.toString();
+    const newUrl = `${window.location.pathname}${query ? `?${query}` : ""}${window.location.hash}`;
     window.history.replaceState(null, "", newUrl);
   });
 

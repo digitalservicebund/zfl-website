@@ -124,7 +124,7 @@
         class="kern-form-input__input"
         id="gesetz"
         name="gesetz"
-        type="search"
+        type="text"
         role="combobox"
         aria-expanded={open}
         aria-controls="gesetz-listbox"
