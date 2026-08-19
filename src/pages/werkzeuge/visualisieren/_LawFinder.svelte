@@ -54,6 +54,11 @@
     query = exampleLabel(selected);
   }
 
+  function resetSelection() {
+    selected = undefined;
+    query = "";
+  }
+
   function handleInput() {
     open = true;
     activeIndex = filtered.length > 0 ? 0 : -1;
@@ -110,51 +115,68 @@
   }
 </script>
 
-<div class="kern-form-input">
-  <label class="kern-label" for="gesetz">Finden Sie Ihr Gesetz</label>
-  <!-- eslint-disable-next-line svelte/no-static-element-interactions -- listens for focusout bubbling from the input/listbox to close the popup on outside focus -->
-  <div class="relative w-full max-w-a11y" onfocusout={handleFocusOut}>
-    <input
-      class="kern-form-input__input"
-      id="gesetz"
-      name="gesetz"
-      type="text"
-      role="combobox"
-      aria-expanded={open}
-      aria-controls="gesetz-listbox"
-      aria-autocomplete="list"
-      aria-activedescendant={activeIndex >= 0
-        ? `gesetz-option-${activeIndex}`
-        : undefined}
-      autocomplete="off"
-      bind:value={query}
-      oninput={handleInput}
-      onfocus={handleFocus}
-      onkeydown={handleKeydown}
-    />
-    {#if open && filtered.length > 0}
-      <ul
-        id="gesetz-listbox"
-        role="listbox"
-        class="absolute z-10 mt-4 max-h-320 w-full overflow-auto rounded border border-gray-400 bg-white shadow-lg list-unstyled"
+<div class="kern-form-input max-w-a11y">
+  <label class="kern-label" for="gesetz">Wählen Sie Ihr Gesetz</label>
+  <div class="kern-input-group">
+    <!-- eslint-disable-next-line svelte/no-static-element-interactions -- listens for focusout bubbling from the input/listbox to close the popup on outside focus -->
+    <div class="relative flex-[999_1_220px]" onfocusout={handleFocusOut}>
+      <input
+        class="kern-form-input__input"
+        id="gesetz"
+        name="gesetz"
+        type="search"
+        role="combobox"
+        aria-expanded={open}
+        aria-controls="gesetz-listbox"
+        aria-autocomplete="list"
+        aria-activedescendant={activeIndex >= 0
+          ? `gesetz-option-${activeIndex}`
+          : undefined}
+        autocomplete="off"
+        bind:value={query}
+        placeholder="Titel oder Kürzel des Gesetzes (z.B. JuSchG)"
+        oninput={handleInput}
+        onfocus={handleFocus}
+        onkeydown={handleKeydown}
+      />
+      {#if open && filtered.length > 0}
+        <ul
+          id="gesetz-listbox"
+          role="listbox"
+          class="absolute z-10 mt-4 max-h-320 w-full overflow-auto rounded border border-gray-400 bg-white shadow-lg list-unstyled"
+        >
+          {#each filtered as example, index (example.title)}
+            <li
+              bind:this={optionRefs[index]}
+              id={`gesetz-option-${index}`}
+              role="option"
+              aria-selected={example === selected}
+              class={`cursor-pointer px-16 py-8 ${index === activeIndex ? "bg-lavender-200" : ""}`}
+              onmousedown={(event) => {
+                event.preventDefault();
+                selectExample(example);
+              }}
+              onmouseenter={() => (activeIndex = index)}
+            >
+              {exampleLabel(example)}
+            </li>
+          {/each}
+        </ul>
+      {/if}
+    </div>
+    {#if selected}
+      <button
+        type="button"
+        class="kern-btn kern-btn--secondary"
+        onclick={resetSelection}
       >
-        {#each filtered as example, index (example.title)}
-          <li
-            bind:this={optionRefs[index]}
-            id={`gesetz-option-${index}`}
-            role="option"
-            aria-selected={example === selected}
-            class={`cursor-pointer px-16 py-8 ${index === activeIndex ? "bg-lavender-200" : ""}`}
-            onmousedown={(event) => {
-              event.preventDefault();
-              selectExample(example);
-            }}
-            onmouseenter={() => (activeIndex = index)}
-          >
-            {exampleLabel(example)}
-          </li>
-        {/each}
-      </ul>
+        <span class="kern-label">Löschen</span>
+      </button>
+    {:else}
+      <button class="kern-btn kern-btn--primary">
+        <span class="kern-icon kern-icon--search" aria-hidden="true"></span>
+        <span class="kern-label">Suchen</span>
+      </button>
     {/if}
   </div>
 </div>

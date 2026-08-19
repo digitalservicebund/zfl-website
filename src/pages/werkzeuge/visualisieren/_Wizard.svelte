@@ -57,14 +57,14 @@
   let hasAppliedInitialVisualization = false;
 
   let selectedExample = $state(
-    examples.find((example) => example.short === initialNorm) ?? examples[0],
+    examples.find((example) => example.short === initialNorm),
   );
 
-  let selectedType = $state<string>();
+  let selectedVisOption = $state<string>();
 
   $effect(() => {
     if (!selectedExample) {
-      selectedType = undefined;
+      selectedVisOption = undefined;
       return;
     }
 
@@ -74,16 +74,18 @@
         (option) => option.name === initialVisualization,
       );
       if (initialOption) {
-        selectedType = initialOption.name;
+        selectedVisOption = initialOption.name;
         return;
       }
     }
 
-    selectedType = selectedExample.visOptions[0]?.name;
+    selectedVisOption = undefined;
   });
 
   let selectedOption = $derived(
-    selectedExample?.visOptions.find((option) => option.name === selectedType),
+    selectedExample?.visOptions.find(
+      (option) => option.name === selectedVisOption,
+    ),
   );
 
   $effect(() => {
@@ -275,15 +277,15 @@
 <div class="space-y-32 min-h-[50vh]">
   <LawFinder {examples} bind:selected={selectedExample} />
   {#if selectedExample}
-    <div>
+    <div class="kern-form-input">
       <span class="kern-label"
         >Welchen Teilbereich möchten Sie visualisieren?</span
       >
       <div class="mt-8 flex flex-wrap gap-8">
         {#each selectedExample.visOptions as option (option.name)}
           <ChipBtn
-            selected={option.name === selectedType}
-            onclick={() => (selectedType = option.name)}
+            selected={option.name === selectedVisOption}
+            onclick={() => (selectedVisOption = option.name)}
           >
             {option.name}
           </ChipBtn>
