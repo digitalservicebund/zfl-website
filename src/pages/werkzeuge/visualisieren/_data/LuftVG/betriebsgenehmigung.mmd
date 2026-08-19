@@ -1,0 +1,30 @@
+flowchart TD
+    A["Luftfahrtunternehmen will Fluggäste,<br/>Post oder Fracht gewerblich befördern<br/>— <a href='{{ELI}}#art-z20_abs-z1' target='_blank' rel='noopener'>§20 Abs. 1</a>"] --> B{"Unterliegt das Unternehmen<br/>dem Luftverkehrsrecht der EU?<br/>— <a href='{{ELI}}#art-z20_abs-z1' target='_blank' rel='noopener'>§20 Abs. 1 S. 1</a>"}
+    B -->|Nein| B2["Sonderregime, z.B. Betriebs-<br/>genehmigung für Drittstaaten-<br/>Unternehmen — <a href='{{ELI}}/art-z21a' target='_blank' rel='noopener'>§21a</a>"]
+    B -->|Ja| C["Betriebsgenehmigung nach<br/>Art. 3 Abs. 1 VO (EG) 1008/2008<br/>erforderlich — <a href='{{ELI}}#art-z20_abs-z1' target='_blank' rel='noopener'>§20 Abs. 1 S. 1</a>"]
+    C --> D{"Rechtfertigen Tatsachen die<br/>Annahme, dass öffentliche<br/>Sicherheit/Ordnung gefährdet<br/>wird (z.B. Unzuverlässigkeit)?<br/>— <a href='{{ELI}}#art-z20_abs-z2' target='_blank' rel='noopener'>§20 Abs. 2 S. 2</a>"}
+    D -->|Ja| Z1["Genehmigung ist zu versagen"]
+    D -->|Nein| E{"Sind ausreichende finanzielle<br/>Mittel/Sicherheiten für den<br/>sicheren Betrieb nachgewiesen?<br/>— <a href='{{ELI}}#art-z20_abs-z2' target='_blank' rel='noopener'>§20 Abs. 2 S. 3</a>"}
+    E -->|Nein| Z1
+    E -->|Ja| F{"Luftfahrzeuge nicht in dt.<br/>Luftfahrzeugrolle (bzw.<br/>gleichgestelltem Register)<br/>eingetragen oder nicht im<br/>Alleineigentum des Antrag-<br/>stellers?<br/>— <a href='{{ELI}}#art-z20_abs-z2' target='_blank' rel='noopener'>§20 Abs. 2 S. 4</a>"}
+    F -->|Ja| G["Genehmigung kann versagt<br/>werden (Ermessen)<br/>— <a href='{{ELI}}#art-z20_abs-z2' target='_blank' rel='noopener'>§20 Abs. 2 S. 4</a>"]
+    F -->|Nein| H["Betriebsgenehmigung wird<br/>erteilt, ggf. mit Neben-<br/>bestimmungen<br/>— <a href='{{ELI}}#art-z20_abs-z2' target='_blank' rel='noopener'>§20 Abs. 2 S. 1</a>"]
+    G --> H
+    H --> I["Genehmigung besteht fort"]
+    I --> J{"Sind die Erteilungsvoraus-<br/>setzungen nachträglich<br/>nicht nur vorübergehend<br/>entfallen?<br/>— <a href='{{ELI}}#art-z20_abs-z3' target='_blank' rel='noopener'>§20 Abs. 3 S. 1</a>"}
+    J -->|Ja| Z2["Widerruf (zwingend)<br/>— <a href='{{ELI}}#art-z20_abs-z3' target='_blank' rel='noopener'>§20 Abs. 3 S. 1</a>"]
+    J -->|Nein| K{"Hätten die Voraussetzungen<br/>für die Erteilung von Anfang<br/>an nicht vorgelegen?<br/>— <a href='{{ELI}}#art-z20_abs-z3' target='_blank' rel='noopener'>§20 Abs. 3 S. 3</a>"}
+    K -->|Ja| Z3["Rücknahme (zwingend)<br/>— <a href='{{ELI}}#art-z20_abs-z3' target='_blank' rel='noopener'>§20 Abs. 3 S. 3</a>"]
+    K -->|Nein| L{"Werden erteilte Auflagen<br/>nicht eingehalten?<br/>— <a href='{{ELI}}#art-z20_abs-z3' target='_blank' rel='noopener'>§20 Abs. 3 S. 2</a>"}
+    L -->|Ja| M["Widerruf möglich (Ermessen),<br/>oder Ruhen auf Zeit, wenn<br/>dies zur Sicherheit ausreicht<br/>— <a href='{{ELI}}#art-z20_abs-z3' target='_blank' rel='noopener'>§20 Abs. 3 S. 2, 4</a>"]
+    L -->|Nein| N{"Wurde von der Genehmigung<br/>länger als sechs Monate<br/>kein Gebrauch gemacht?<br/>— <a href='{{ELI}}#art-z20_abs-z3' target='_blank' rel='noopener'>§20 Abs. 3 S. 5</a>"}
+    N -->|Ja| Z4["Genehmigung erlischt<br/>kraft Gesetzes"]
+    N -->|Nein| I
+
+    style Z1 fill:#f8d7da,stroke:#c0392b
+    style Z2 fill:#f8d7da,stroke:#c0392b
+    style Z3 fill:#f8d7da,stroke:#c0392b
+    style Z4 fill:#f8d7da,stroke:#c0392b
+    style H fill:#d4edda,stroke:#2d8a4a
+    style G fill:#fff3cd,stroke:#c9a227
+    style M fill:#fff3cd,stroke:#c9a227

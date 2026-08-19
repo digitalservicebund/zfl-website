@@ -90,6 +90,8 @@ fileignoreconfig:
     ignore_detectors: [filename]
   - filename: src/pages/werkzeuge/visualisieren/_data/GKG/kostenvorschusspflicht.mmd
     ignore_detectors: [filename]
+  - filename: src/pages/werkzeuge/visualisieren/_data/URV/registrierung.mmd
+    checksum: b9b484659c20fb5daf957d0a561b06bfdee13bad48c88e0806e51fe604ff3985
   - filename: .claude/skills/gesetz-visualisieren/SKILL.md
     checksum: ce79ba7efa69a4f32e44fc592e62a672dcbd973485ac977b865ec6ff51deda64
 scopeconfig:

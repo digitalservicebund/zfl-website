@@ -1,0 +1,26 @@
+flowchart TD
+    START["Nutzung des Unternehmensregisters, die<br/>eine Registrierung erfordert (Datenübermittlung,<br/>Kopie-Antrag, Dienstleistungen)<br/>— <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I</a>, <a href='{{ELI}}#art-z13_abs-z4' target='_blank' rel='noopener'>§13 IV</a>, <a href='{{ELI}}#art-z15_abs-z1' target='_blank' rel='noopener'>§15 I</a>"] --> REG["Registrierung über eine nach dem Stand<br/>der Technik gesicherte Internetverbindung<br/>— <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 I S.1</a>"]
+
+    REG --> ANG["Mindestangaben: Firma/Name, Anschrift,<br/>elektronische Postadresse, Rufnummer<br/>— <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 I S.2</a>"]
+
+    ANG --> Q1{"Registrierung erfolgt nach<br/><a href='{{ELI}}#art-z13_abs-z4' target='_blank' rel='noopener'>§13 IV</a><br/>(Antrag auf Kopie dauerhaft<br/>hinterlegter Unterlagen)?"}
+
+    Q1 -->|Ja| ANG2["Rufnummer nicht erforderlich<br/>— <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 I S.3</a>"]
+    Q1 -->|Nein| Q2
+
+    ANG2 --> Q2{"Registrierung zur Datenübermittlung<br/>nach <a href='{{ELI}}#art-z11_abs-z2' target='_blank' rel='noopener'>§11 II</a> für ein im Handels-<br/>oder Genossenschaftsregister<br/>eingetragenes Unternehmen?<br/>— <a href='{{ELI}}#art-z3_abs-z2' target='_blank' rel='noopener'>§3 II</a>"}
+
+    Q2 -->|Ja| ANG3["Zusätzliche Angaben: Firma des<br/>Unternehmens, Registergericht,<br/>Registerart, Registernummer<br/>— <a href='{{ELI}}#art-z3_abs-z2' target='_blank' rel='noopener'>§3 II</a>"]
+    ANG3 --> IDENT["Elektronische Identifikation des<br/>Nutzers erforderlich<br/>— <a href='{{ELI}}#art-z3a_abs-z1' target='_blank' rel='noopener'>§3a I</a>"]
+
+    Q2 -->|Nein| AUTH
+    IDENT --> AUTH["Nutzer bestimmt bei der Registrierung<br/>Kennung und Passwort oder ein<br/>gleichwertiges Authentifizierungsverfahren<br/>— <a href='{{ELI}}#art-z3_abs-z3' target='_blank' rel='noopener'>§3 III S.1-2</a>"]
+
+    AUTH --> Q3{"Nutzer ist Kunde eines<br/>Datenverarbeiters mit<br/>Großkundenschnittstelle?<br/>— <a href='{{ELI}}#art-z3_abs-z3' target='_blank' rel='noopener'>§3 III S.3</a>"}
+
+    Q3 -->|Ja| GK["Registrierung durch den Datenverarbeiter<br/>ohne Vergabe von Kennung/Passwort möglich,<br/>sofern die registerführende Stelle<br/>dies vorsieht<br/>— <a href='{{ELI}}#art-z3_abs-z3' target='_blank' rel='noopener'>§3 III S.3</a>"]
+    Q3 -->|Nein| ENDE["Registrierung abgeschlossen"]
+    GK --> ENDE
+
+    style ENDE fill:#d4edda,stroke:#2d8a4a
+    style IDENT fill:#fff3cd,stroke:#c9a227

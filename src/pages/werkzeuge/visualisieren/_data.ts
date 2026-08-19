@@ -380,6 +380,48 @@ export const examples: LawExample[] = [
     ],
   },
   {
+    title: "Verordnung über das Unternehmensregister",
+    short: "URV",
+    eli: "eli/bund/bgbl-1/2007/s217/2024-10-11/1/deu",
+    visOptions: [
+      { name: "Registrierung der Nutzer", filename: "registrierung" },
+      { name: "Identifikation der Nutzer", filename: "identifikation" },
+      {
+        name: "Datenübermittlung & Prüfung",
+        filename: "datenuebermittlung_pruefung",
+      },
+      { name: "Einsichtnahme ins Register", filename: "einsichtnahme" },
+      {
+        name: "Aktualisierungsfristen Indexdaten",
+        filename: "aktualisierungsfristen",
+      },
+    ],
+  },
+  {
+    title: "Luftverkehrsgesetz",
+    short: "LuftVG",
+    eli: "eli/bund/banz-at/1922/s681/2026-07-29/1/deu",
+    visOptions: [
+      {
+        name: "Betriebsgenehmigung Luftfahrtunternehmen",
+        filename: "betriebsgenehmigung",
+      },
+      { name: "Haftung für Fluggastschäden", filename: "haftung_fluggast" },
+      {
+        name: "Schlichtungsverfahren Fluggastrechte",
+        filename: "schlichtungsverfahren",
+      },
+      {
+        name: "Register über Betreiber unbemannter Fluggeräte",
+        filename: "register_drohnenbetreiber",
+      },
+      {
+        name: "Ordnungswidrigkeiten beim Drohnenbetrieb",
+        filename: "bussgeld_drohnenbetrieb",
+      },
+    ],
+  },
+  {
     title:
       "Gesetz über einen nationalen Zertifikatehandel für Brennstoffemissionen",
     short: "BEHG",
