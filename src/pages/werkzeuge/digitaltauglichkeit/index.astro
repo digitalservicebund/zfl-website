@@ -3,6 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
 import AnnotatedArticle from "./_AnnotatedArticle.astro";
 import PrinzipBadge from "@/components/PrinzipBadge.astro";
+import AspectSection from "./_AspectSection.astro";
 import PrinzipSection from "./_PrinzipSection.astro";
 import { ZFL_EMAIL } from "@/config/constants";
 
@@ -65,59 +66,59 @@ const description =
         href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/digitale-angebote-fuer-alle-nutzbar-gestalten"
         >Mehr zum Prinzip beim Digitalcheck</a
       >
-      <section>
-        <h3>Digitale Kommunikation</h3>
+      <AspectSection>
+        <h3 id="digitale-kommunikation">Digitale Kommunikation</h3>
         <AnnotatedArticle slug="BVerfGG/23a-1" />
         <AnnotatedArticle slug="ZPO/1132-1" />
-      </section>
-      <section>
-        <h3>Technologieoffenheit</h3>
+      </AspectSection>
+      <AspectSection>
+        <h3 id="technologieoffenheit">Technologieoffenheit</h3>
         <AnnotatedArticle slug="LuftVG/66a-5" />
-      </section>
-      <section>
-        <h3>Antragsprozess beachten</h3>
+      </AspectSection>
+      <AspectSection>
+        <h3 id="antragsprozess-beachten">Antragsprozess beachten</h3>
         <AnnotatedArticle slug="PostG/92" />
-      </section>
-      <section>
-        <h3>Barrierefreiheit</h3>
+      </AspectSection>
+      <AspectSection>
+        <h3 id="barrierefreiheit">Barrierefreiheit</h3>
         <AnnotatedArticle slug="ZPO/1125-2" />
-      </section>
-      <section>
-        <h3>Nutzerfreundlichkeit</h3>
+      </AspectSection>
+      <AspectSection>
+        <h3 id="nutzerfreundlichkeit">Nutzerfreundlichkeit</h3>
         <AnnotatedArticle slug="ZPO/1131-1" />
-      </section>
+      </AspectSection>
     </PrinzipSection>
     <PrinzipSection prinzip="2">
       <h2>Datenwiederverwendung benötigt einheitliches Recht</h2>
       <p>
-        Normadressatinnen und -adressaten sowie umsetzende Behörden sparen
-        Kosten und Zeit, wenn das <a
+        Das <a
           href="https://www.digitale-verwaltung.de/Webs/DV/DE/registermodernisierung/registermodernisierung-node.html"
           >Once-Only-Prinzip</a
-        > konsequent angewendet wird – also wenn Daten nur einmal angegeben und dann
-        wiederverwendet werden. Die Grundlage dafür sind harmonisierte Rechtsbegriffe,
-        ein datenschutzkonformer Austausch und die Berücksichtigung etablierter technischer
-        Standards.
+        > spart Zeit und Kosten, indem Daten nur einmal angegeben und dann auf Basis
+        harmonisierter Rechtsbegriffe, Datenschutz und technischer Standards wiederverwendet
+        werden.
       </p>
       <a
         href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/datenwiederverwendung-benoetigt-einheitliches-recht"
         >Mehr zum Prinzip beim Digitalcheck</a
       >
-      <section>
-        <h3>Existierende Daten nachnutzen</h3>
+      <AspectSection>
+        <h3 id="existierende-daten-nachnutzen">
+          Existierende Daten nachnutzen
+        </h3>
         <AnnotatedArticle slug="PostG/93" />
         <AnnotatedArticle slug="GWKHV/39-1" />
-      </section>
-      <section>
-        <h3>Datennachnutzung ermöglichen</h3>
+      </AspectSection>
+      <AspectSection>
+        <h3 id="datennachnutzung-ermoeglichen">Datennachnutzung ermöglichen</h3>
         <AnnotatedArticle slug="GWKHV/39-5" />
         <AnnotatedArticle slug="PostG/11" />
-      </section>
-      <section>
-        <h3>Technische Standards nutzen</h3>
+      </AspectSection>
+      <AspectSection>
+        <h3 id="technische-standards-nutzen">Technische Standards nutzen</h3>
         <AnnotatedArticle slug="BVerfGG/23a-2" />
         <AnnotatedArticle slug="ZPO/1131-5" />
-      </section>
+      </AspectSection>
     </PrinzipSection>
     <PrinzipSection prinzip="3">
       <h2>Etablierte Technologien ermöglichen effiziente Umsetzung</h2>
@@ -131,16 +132,16 @@ const description =
         href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/etablierte-technologien-ermoeglichen-effiziente-umsetzung"
         >Mehr zum Prinzip beim Digitalcheck</a
       >
-      <section>
-        <h3>Vorhandene Lösungen</h3>
+      <AspectSection>
+        <h3 id="vorhandene-loesungen">Vorhandene Lösungen</h3>
         <AnnotatedArticle slug="ZPO/1132-1" />
         <AnnotatedArticle slug="ZPO/1131-2" />
-      </section>
-      <section>
-        <h3>Open-Source-Software</h3>
+      </AspectSection>
+      <AspectSection>
+        <h3 id="open-source-software">Open-Source-Software</h3>
         <AnnotatedArticle slug="ZPO/1135-1" />
         <AnnotatedArticle slug="ZPO/1125-1" />
-      </section>
+      </AspectSection>
     </PrinzipSection>
     <PrinzipSection prinzip="4">
       <h2>Automatisierung basiert auf eindeutigen Regelungen</h2>
@@ -156,21 +157,21 @@ const description =
         href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/automatisierung-basiert-auf-eindeutigen-regelungen"
         >Mehr zum Prinzip beim Digitalcheck</a
       >
-      <section>
-        <h3>Bestehende Prozesse</h3>
+      <AspectSection>
+        <h3 id="bestehende-prozesse">Bestehende Prozesse</h3>
         <AnnotatedArticle slug="LuftVG/66a-3" />
-      </section>
-      <section>
-        <h3>Automatisierung</h3>
+      </AspectSection>
+      <AspectSection>
+        <h3 id="automatisierung">Automatisierung</h3>
         <AnnotatedArticle slug="ZPO/1132-2" />
         <AnnotatedArticle slug="LuftVG/66a-5-2" />
         <AnnotatedArticle slug="PostG/5" />
-      </section>
-      <section>
-        <h3>Unterscheidungen</h3>
+      </AspectSection>
+      <AspectSection>
+        <h3 id="unterscheidungen">Unterscheidungen</h3>
         <AnnotatedArticle slug="PostG/4-3" />
         <AnnotatedArticle slug="SGB VI/13a-4" />
-      </section>
+      </AspectSection>
     </PrinzipSection>
     <PrinzipSection prinzip="5">
       <h2>Datenschutz und Informationssicherheit schaffen Vertrauen</h2>
@@ -184,17 +185,17 @@ const description =
         href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/datenschutz-und-informationssicherheit-schaffen-vertrauen"
         >Mehr zum Prinzip beim Digitalcheck</a
       >
-      <section>
-        <h3>Datenschutz</h3>
+      <AspectSection>
+        <h3 id="datenschutz-beispiele">Datenschutz</h3>
         <AnnotatedArticle slug="GWKHV/39-3" />
         <AnnotatedArticle slug="BIPAM–ErrichtungsG/2" />
         <AnnotatedArticle slug="URV/3a" />
-      </section>
-      <section>
-        <h3>Informationssicherheit</h3>
+      </AspectSection>
+      <AspectSection>
+        <h3 id="informationssicherheit">Informationssicherheit</h3>
         <AnnotatedArticle slug="LuftVG/66a-2" />
         <AnnotatedArticle slug="BVerfGG/23a-3" />
-      </section>
+      </AspectSection>
     </PrinzipSection>
     <Hero level="root">
       <h2>Sie möchten Ihr Beispiel hier sehen?</h2>
@@ -211,5 +212,8 @@ const description =
   @reference "@/styles/global.css";
   h2 {
     @apply mt-16;
+  }
+  h3 {
+    @apply scroll-m-96; /* The top bar obscures headings */
   }
 </style>
