@@ -1,0 +1,32 @@
+flowchart TD
+    A["Übermittlung personen-<br/>bezogener Daten an ein<br/>Drittland oder eine<br/>internationale Organisation<br/>geplant"] --> B{"Angemessenheitsbeschluss<br/>der Kommission für das<br/>Drittland/den Sektor?<br/>— Art. 45 Abs. 1, Abs. 3"}
+
+    B -->|"Ja"| Z1["Übermittlung ohne<br/>besondere Genehmigung<br/>zulässig<br/>— Art. 45 Abs. 1"]
+
+    B -->|"Nein"| C{"Geeignete Garantien<br/>vorhanden?<br/>— Art. 46 Abs. 1"}
+
+    C -->|"Ja — z.B. Standard-<br/>datenschutzklauseln, BCR,<br/>genehmigte Verhaltensregeln<br/>— Art. 46 Abs. 2"| Z2["Übermittlung ohne<br/>zusätzliche Genehmigung<br/>der Aufsichtsbehörde<br/>zulässig"]
+
+    C -->|"Ja — z.B. Ad-hoc-<br/>Vertragsklauseln,<br/>Verwaltungsvereinbarungen<br/>— Art. 46 Abs. 3"| D["Genehmigung der<br/>zuständigen Aufsichtsbehörde<br/>erforderlich<br/>— Art. 46 Abs. 3"]
+    D --> Z2
+
+    C -->|"Nein"| E{"Greift eine Ausnahme<br/>nach Art. 49 Abs. 1<br/>UAbs. 1?"}
+
+    E -->|"Ausdrückliche Einwilligung<br/>nach Risikoaufklärung<br/>— lit. a"| Z3["Übermittlung im<br/>Einzelfall zulässig<br/>— Art. 49 Abs. 1"]
+    E -->|"Vertragserfüllung oder<br/>-anbahnung — lit. b, c"| Z3
+    E -->|"Wichtige Gründe des<br/>öffentlichen Interesses<br/>— lit. d"| Z3
+    E -->|"Geltendmachung von<br/>Rechtsansprüchen<br/>— lit. e"| Z3
+    E -->|"Schutz lebenswichtiger<br/>Interessen — lit. f"| Z3
+    E -->|"Übermittlung aus<br/>öffentlichem Register<br/>— lit. g"| Z3
+
+    E -->|"Keine Ausnahme<br/>einschlägig"| F{"Nur gelegentliche, begrenzte<br/>Übermittlung zur Wahrung<br/>zwingender berechtigter<br/>Interessen, mit Interessen-<br/>abwägung und dokumentierten<br/>Garantien?<br/>— Art. 49 Abs. 1 UAbs. 2"}
+
+    F -->|"Ja, und Aufsichtsbehörde<br/>sowie betroffene Person<br/>informiert"| Z4["Übermittlung<br/>ausnahmsweise zulässig<br/>— Art. 49 Abs. 1 UAbs. 2"]
+
+    F -->|"Nein"| N["Übermittlung<br/>unzulässig"]
+
+    style Z1 fill:#d4edda,stroke:#2d8a4a
+    style Z2 fill:#d4edda,stroke:#2d8a4a
+    style Z3 fill:#d4edda,stroke:#2d8a4a
+    style Z4 fill:#fff3cd,stroke:#c9a227
+    style N fill:#f8d7da,stroke:#c0392b

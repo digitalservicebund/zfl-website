@@ -1,0 +1,13 @@
+title: Infektionsschutzgesetz
+eli: eli/bund/bgbl-1/2000/s1045/2026-07-02/1/deu
+visOptions:
+  - name: Meldepflicht bei Erkrankung
+    filename: meldepflicht
+  - name: Schutzmaßnahmen-Prüfschema
+    filename: schutzmassnahmen
+  - name: Absonderung (Quarantäne)
+    filename: absonderung
+  - name: Tätigkeitsverbote Lebensmittelbereich
+    filename: taetigkeitsverbote
+  - name: Entschädigungsanspruch
+    filename: entschaedigung

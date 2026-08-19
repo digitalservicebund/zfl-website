@@ -1,0 +1,17 @@
+title: Verordnung (EU) 2016/679 (Datenschutz-Grundverordnung)
+# DSGVO ist nicht in der RIS-Search-Datenbank enthalten (EU-Verordnung, kein
+# deutsches Bundesgesetz). Es gibt daher keinen RIS-ELI-Pfad; die .mmd-Dateien
+# verwenden folglich keine {{ELI}}-Norm-Links. Textquelle: dejure.org/gesetze/DSGVO
+# (konsolidierte Fassung, Stand siehe https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX%3A02016R0679-20160504).
+eli: ""
+visOptions:
+  - name: Rechtmäßigkeit der Verarbeitung
+    filename: rechtmaessigkeit
+  - name: Auskunftsrecht und Fristen
+    filename: auskunftsrecht_fristen
+  - name: Meldung von Datenschutzverletzungen
+    filename: datenpanne_meldung
+  - name: Datenschutz-Folgenabschätzung
+    filename: folgenabschaetzung
+  - name: Internationale Datenübermittlung
+    filename: drittlandtransfer
