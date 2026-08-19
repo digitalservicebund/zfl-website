@@ -73,7 +73,7 @@
     "Erstelle Diagramm …",
     "Rendere Visualisierung …",
   ];
-  const FAKE_LOADING_DELAY_MS = 3000;
+  const FAKE_LOADING_DELAY_MS = 3600;
   const FAKE_LOADING_STATUS_INTERVAL_MS = 1200;
 
   let loadingStatusMessage = $state(LAW_STEP_STATUS_MESSAGES[0]);
@@ -91,7 +91,10 @@
 
     let timeoutId: ReturnType<typeof setTimeout>;
     const promise = new Promise<void>((resolve) => {
-      timeoutId = setTimeout(resolve, FAKE_LOADING_DELAY_MS);
+      timeoutId = setTimeout(() => {
+        clearInterval(interval);
+        resolve();
+      }, FAKE_LOADING_DELAY_MS);
     });
 
     return {
