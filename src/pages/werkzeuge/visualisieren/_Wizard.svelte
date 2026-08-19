@@ -163,6 +163,30 @@
     dragOrigin = null;
   }
 
+  function downloadSvg() {
+    if (!diagramSvg || !selectedExample || !selectedOption) return;
+
+    // diagramSvg is parsed as HTML by {@html}, so foreignObject content like
+    // unclosed <br> is valid there but not as standalone XML. Reparsing and
+    // re-serializing via XMLSerializer produces well-formed, self-closed XML.
+    const container = document.createElement("div");
+    container.innerHTML = diagramSvg;
+    const svgElement = container.querySelector("svg");
+    if (!svgElement) return;
+
+    const serialized = new XMLSerializer().serializeToString(svgElement);
+    const blob = new Blob(
+      [`<?xml version="1.0" encoding="UTF-8"?>\n${serialized}`],
+      { type: "image/svg+xml" },
+    );
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `${selectedExample.short}-${selectedOption.name}.svg`;
+    link.click();
+    URL.revokeObjectURL(url);
+  }
+
   function toBase64Url(bytes: Uint8Array): string {
     let binary = "";
     for (const byte of bytes) binary += String.fromCharCode(byte);
@@ -289,18 +313,17 @@
         ></span>
         <span class="kern-label">Im Editor öffnen</span>
       </a>
-      <a
-        href={`https://mermaid.ink/svg/pako:${pakoStr}`}
-        target="_blank"
-        rel="noreferrer"
+      <button
+        type="button"
+        onclick={downloadSvg}
         class="kern-btn kern-btn--secondary"
       >
         <span
-          class="kern-icon kern-icon--open-in-new kern-icon--default"
+          class="kern-icon kern-icon--download kern-icon--default"
           aria-hidden="true"
         ></span>
         <span class="kern-label">SVG Export</span>
-      </a>
+      </button>
     </div>
   {/if}
 </div>
