@@ -1,0 +1,28 @@
+flowchart TD
+    A["Unregelmäßigkeit im<br/>Zusammenhang mit einer<br/>Beförderung unter<br/>Steueraussetzung"] --> B{"Art der<br/>Unregelmäßigkeit?"}
+
+    B -->|Fehlmenge beim<br/>Empfänger festgestellt| C{"Fehlmenge bis 0,5 %<br/>und kein Schaumwein in<br/>Fertigpackungen?<br/>— <a href='{{ELI}}#art-z29_abs-z1' target='_blank' rel='noopener'>§29 I</a>"}
+    C -->|Ja| D["Hauptzollamt kann Fehlmenge<br/>als beschaffenheitsbedingt<br/>unwiederbringlich verloren<br/>ansehen — <a href='{{ELI}}#art-z29_abs-z1' target='_blank' rel='noopener'>§29 I</a>"]
+    C -->|Nein| E["Hauptzollamt entscheidet<br/>im Einzelfall über die<br/>steuerliche Behandlung<br/>— <a href='{{ELI}}#art-z29_abs-z1' target='_blank' rel='noopener'>§29 I</a>"]
+
+    B -->|Rückschein nicht<br/>eingegangen| F{"Rückschein binnen<br/>2 Monaten beim Versender<br/>eingegangen?<br/>— <a href='{{ELI}}#art-z29_abs-z2' target='_blank' rel='noopener'>§29 II</a>"}
+    F -->|Ja| G["Kein Handlungsbedarf"]
+    F -->|Nein| H["Versender zeigt dies<br/>unverzüglich dem<br/>Hauptzollamt an<br/>— <a href='{{ELI}}#art-z29_abs-z2' target='_blank' rel='noopener'>§29 II</a>"]
+
+    B -->|Zerstörung/Verlust<br/>während der Beförderung| I{"Vollständige Zerstörung oder<br/>unwiederbringlicher Verlust durch<br/>unvorhersehbares Ereignis oder<br/>höhere Gewalt?<br/>— <a href='{{ELI}}#art-z29_abs-z3' target='_blank' rel='noopener'>§29 III</a>"}
+    I -->|Ja| J["Beförderer zeigt dies<br/>unverzüglich dem Hauptzollamt<br/>an und weist es durch<br/>Unterlagen nach — <a href='{{ELI}}#art-z29_abs-z3' target='_blank' rel='noopener'>§29 III</a>"]
+    J --> K{"Nachweis vom<br/>Hauptzollamt anerkannt?"}
+    K -->|Ja| L["Kein Verlust im Sinn<br/>einer Unregelmäßigkeit;<br/>keine Steuerentstehung"]
+    K -->|Nein| M
+
+    B -->|Sonstige<br/>Unregelmäßigkeit| M["Feststellung der<br/>Unregelmäßigkeit wird dem<br/>Steuerschuldner schriftlich<br/>bekanntgegeben — <a href='{{ELI}}#art-z29_abs-z4' target='_blank' rel='noopener'>§29 IV</a>"]
+
+    M --> N["Nachweisführung entsprechend<br/><a href='{{ELI}}/art-z21' target='_blank' rel='noopener'>§21</a> und <a href='{{ELI}}/art-z28' target='_blank' rel='noopener'>§28</a>;<br/>Frist beginnt mit Bekanntgabe<br/>— <a href='{{ELI}}#art-z29_abs-z4' target='_blank' rel='noopener'>§29 IV</a>"]
+
+    N --> O["Weitere steuerliche Behandlung<br/>der Unregelmäßigkeit nach<br/>§14 Abs. 4 des Gesetzes"]
+
+    style L fill:#d4edda,stroke:#2d8a4a
+    style G fill:#d4edda,stroke:#2d8a4a
+    style D fill:#fff3cd,stroke:#c9a227
+    style E fill:#fff3cd,stroke:#c9a227
+    style O fill:#f8d7da,stroke:#c0392b

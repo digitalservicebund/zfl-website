@@ -1,0 +1,30 @@
+flowchart TD
+    A["Versender will Schaumwein<br/>unter Steueraussetzung<br/>befördern"] --> B["Versender übermittelt vor<br/>Beginn Entwurf des elektronischen<br/>Verwaltungsdokuments (e-VD) über<br/>EDV-System — <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 I</a>"]
+
+    B --> C{"Hauptzollamt prüft Angaben<br/>automatisiert (bei Einfuhr zusätzlich<br/>Abgleich mit Zollanmeldung) —<br/><a href='{{ELI}}#art-z16_abs-z2' target='_blank' rel='noopener'>§16 II</a>"}
+
+    C -->|Beanstandung| D["Beanstandung wird dem<br/>Versender mitgeteilt<br/>— <a href='{{ELI}}#art-z16_abs-z2' target='_blank' rel='noopener'>§16 II S.4</a>"]
+    D --> B
+
+    C -->|Keine Beanstandung| E["Entwurf erhält eindeutigen<br/>Referenzcode und wird als<br/>e-VD an Versender übermittelt<br/>— <a href='{{ELI}}#art-z16_abs-z2' target='_blank' rel='noopener'>§16 II S.3</a>"]
+
+    E --> F{"Beförderung bereits<br/>begonnen?"}
+    F -->|Nein, Versender<br/>will annullieren| G["Entwurf der elektronischen<br/>Annullierungsmeldung übermitteln<br/>— <a href='{{ELI}}#art-z19_abs-z2' target='_blank' rel='noopener'>§19 II</a>"]
+
+    G --> H{"Hauptzollamt prüft<br/>Annullierungsmeldung<br/>— <a href='{{ELI}}#art-z19_abs-z3' target='_blank' rel='noopener'>§19 III</a>"}
+    H -->|Beanstandung| D
+    H -->|Keine Beanstandung| ANNULLIERT["e-VD annulliert;<br/>Beförderung entfällt<br/>— <a href='{{ELI}}#art-z19_abs-z1' target='_blank' rel='noopener'>§19 I</a>"]
+
+    F -->|Ja| I["Beförderer führt eindeutigen<br/>Referenzcode mit, teilt ihn auf<br/>Verlangen mit — <a href='{{ELI}}#art-z16_abs-z3' target='_blank' rel='noopener'>§16 III</a>"]
+
+    I --> J["Empfänger übermittelt nach<br/>Aufnahme des Schaumweins<br/>Eingangsmeldung: unverzüglich,<br/>spätestens 5 Werktage nach<br/>Beendigung — <a href='{{ELI}}#art-z21_abs-z1' target='_blank' rel='noopener'>§21 I</a>"]
+
+    J --> K{"Hauptzollamt prüft<br/>Eingangsmeldung automatisiert<br/>— <a href='{{ELI}}#art-z21_abs-z2' target='_blank' rel='noopener'>§21 II</a>"}
+
+    K -->|Beanstandung| L["Beanstandung wird dem<br/>Empfänger mitgeteilt<br/>— <a href='{{ELI}}#art-z21_abs-z2' target='_blank' rel='noopener'>§21 II</a>"]
+    K -->|Keine Beanstandung| M["Eingangsmeldung gilt als<br/>Nachweis der Beendigung<br/>der Beförderung — <a href='{{ELI}}#art-z21_abs-z6' target='_blank' rel='noopener'>§21 VI</a>"]
+
+    style M fill:#d4edda,stroke:#2d8a4a
+    style ANNULLIERT fill:#f8d7da,stroke:#c0392b
+    style D fill:#fff3cd,stroke:#c9a227
+    style L fill:#fff3cd,stroke:#c9a227

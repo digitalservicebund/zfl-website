@@ -1,0 +1,13 @@
+title: Bundeskleingartengesetz
+eli: eli/bund/bgbl-1/1983/s210/2006-10-01/1/deu
+visOptions:
+  - name: Kleingarten-Begriffsprüfung
+    filename: begriffspruefung
+  - name: Höchstpacht und Anpassung
+    filename: pachthoehe
+  - name: Kündigungsarten und -fristen
+    filename: kuendigungsarten
+  - name: Kündigungsentschädigung
+    filename: kuendigungsentschaedigung
+  - name: Enteignungsverfahren
+    filename: enteignung

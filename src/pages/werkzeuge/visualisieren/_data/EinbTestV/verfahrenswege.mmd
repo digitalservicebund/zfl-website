@@ -1,0 +1,30 @@
+flowchart TD
+    A{"Organisiert das Land die<br/>gesamte technische Durchführung<br/>selbst mittels eigener oder<br/>beauftragter Stellen?<br/>— <a href='{{ELI}}/art-z3' target='_blank' rel='noopener'>§3</a>"}
+
+    A -->|Nein| B["Land nutzt die vom Bundesamt<br/>für Migration und Flüchtlinge<br/>benannten Prüfstellen (bundesweit<br/>vorgehalten, für Orientierungskurs-<br/>test zugelassen) — <a href='{{ELI}}#art-z2_abs-z1' target='_blank' rel='noopener'>§2 I S.1</a>"]
+
+    B --> C["Bundesamt stellt pro<br/>Prüfungsteilnehmer eine<br/>Kostenpauschale von 25 Euro<br/>in Rechnung — <a href='{{ELI}}#art-z2_abs-z1' target='_blank' rel='noopener'>§2 I S.2</a>"]
+
+    C --> D["Teilnehmer vereinbart mit der<br/>benannten Prüfstelle einen<br/>Prüfungstermin unter Angabe<br/>der Daten nach §4 S.1<br/>— <a href='{{ELI}}#art-z2_abs-z2' target='_blank' rel='noopener'>§2 II S.1</a>"]
+
+    D --> E{"Vereinbart ein externer<br/>Kursanbieter (keine eigene<br/>Prüfstelle) einen kursbezogenen<br/>Termin? — <a href='{{ELI}}#art-z2_abs-z2' target='_blank' rel='noopener'>§2 II S.2</a>"}
+
+    E -->|Ja| F["Kursbezogener Prüfungstermin<br/>für die Kursteilnehmer"]
+    E -->|Nein| G["Individueller Prüfungstermin"]
+
+    F --> H
+    G --> H["Prüfstelle erhält je Teilnehmer<br/>einen Fragebogen, der sich von<br/>dem anderer Teilnehmer desselben<br/>Termins unterscheidet<br/>— <a href='{{ELI}}#art-z2_abs-z3' target='_blank' rel='noopener'>§2 III S.1</a>"]
+
+    H --> I["Identität wird anhand eines<br/>amtlichen Identitätspapiers<br/>geprüft — <a href='{{ELI}}#art-z2_abs-z3' target='_blank' rel='noopener'>§2 III S.2</a>"]
+
+    I --> Z["Testauswertung und Ausstellung<br/>der Bescheinigung"]
+
+    A -->|Ja| J["Land erhält die zugelassenen<br/>Fragebögen selbst — <a href='{{ELI}}/art-z3' target='_blank' rel='noopener'>§3</a>"]
+
+    J --> K["Land sorgt für den<br/>ordnungsgemäßen Prüfungsablauf<br/>entsprechend §2 III<br/>(individueller Fragebogen,<br/>Identitätsprüfung) — <a href='{{ELI}}/art-z3' target='_blank' rel='noopener'>§3</a>"]
+
+    K --> L["Land sorgt selbst für die<br/>Testauswertung und die Ausstellung<br/>der Bescheinigung nach<br/>einheitlichem Vordruck<br/>— <a href='{{ELI}}/art-z3' target='_blank' rel='noopener'>§3</a>"]
+
+    L --> Z
+
+    style Z fill:#d4edda,stroke:#2d8a4a

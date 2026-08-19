@@ -1,0 +1,25 @@
+flowchart TD
+    A["Begründung eines Kleingarten-<br/>pachtvertrags durch Enteignung<br/>zugunsten Pachtwilliger wird<br/>geprüft"] --> Q1{"Ist die Fläche im Bebauungs-<br/>plan für Dauerkleingärten<br/>festgesetzt? — <a href='{{ELI}}#art-z15_abs-z1' target='_blank' rel='noopener'>§15 I</a>"}
+
+    Q1 -->|Nein| Z1["Enteignung nach §15<br/>nicht möglich"]
+    Q1 -->|Ja| Q2{"Erfordert das Wohl der<br/>Allgemeinheit die Enteignung?<br/>— <a href='{{ELI}}#art-z15_abs-z2_inhalt-n1_liste-n1_listenelem-n1' target='_blank' rel='noopener'>§15 II Nr.1</a>"}
+
+    Q2 -->|Nein| Z1
+    Q2 -->|Ja| Q3{"Kann der Enteignungszweck<br/>auf andere zumutbare Weise<br/>erreicht werden? — <a href='{{ELI}}#art-z15_abs-z2_inhalt-n1_liste-n1_listenelem-n2' target='_blank' rel='noopener'>§15 II Nr.2</a>"}
+
+    Q3 -->|Ja| Z2["Enteignung unzulässig<br/>(Erforderlichkeit fehlt)"]
+    Q3 -->|Nein| Q4{"Wurde dem Eigentümer ein<br/>angemessenes Angebot zur<br/>Begründung des Pachtvertrags<br/>gemacht? — <a href='{{ELI}}#art-z15_abs-z2_inhalt-n1_liste-n1_listenelem-n3' target='_blank' rel='noopener'>§15 II Nr.3</a>"}
+
+    Q4 -->|Nein| Z3["Enteignung (noch)<br/>unzulässig"]
+    Q4 -->|Ja| B1["Angebot gilt als angemessen,<br/>wenn die Pacht §5 entspricht<br/>— <a href='{{ELI}}#art-z15_abs-z2_inhalt-n1_liste-n1_listenelem-n3' target='_blank' rel='noopener'>§15 II Nr.3</a>"]
+
+    B1 --> Z4["Enteignung zulässig: Klein-<br/>gartenpachtvertrag wird<br/>zugunsten Pachtwilliger<br/>begründet — <a href='{{ELI}}#art-z15_abs-z1' target='_blank' rel='noopener'>§15 I</a>"]
+
+    Z4 --> B2["Als Entschädigung fest-<br/>zusetzende Pacht bemisst<br/>sich nach §5 — <a href='{{ELI}}#art-z15_abs-z3' target='_blank' rel='noopener'>§15 III</a>"]
+    B2 --> Z5["Im Übrigen gilt das Landes-<br/>enteignungsrecht — <a href='{{ELI}}#art-z15_abs-z4' target='_blank' rel='noopener'>§15 IV</a>"]
+
+    style Z1 fill:#f8d7da,stroke:#c0392b
+    style Z2 fill:#f8d7da,stroke:#c0392b
+    style Z3 fill:#f8d7da,stroke:#c0392b
+    style Z4 fill:#d4edda,stroke:#2d8a4a
+    style Z5 fill:#d4edda,stroke:#2d8a4a
