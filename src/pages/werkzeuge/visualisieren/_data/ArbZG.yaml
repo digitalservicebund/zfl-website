@@ -1,0 +1,13 @@
+title: Arbeitszeitgesetz
+eli: eli/bund/bgbl-1/1994/s1171/2025-01-01/1/deu
+visOptions:
+  - name: Werktägliche Höchstarbeitszeit
+    filename: hoechstarbeitszeit
+  - name: Ruhepausen
+    filename: ruhepausen
+  - name: Ruhezeit & Verkürzung
+    filename: ruhezeit
+  - name: Sonn-/Feiertagsbeschäftigung
+    filename: sonn_feiertage
+  - name: Notfall-Abweichungen
+    filename: notfall_abweichungen

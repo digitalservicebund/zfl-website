@@ -1,7 +1,6 @@
 <script lang="ts">
   import mermaid from "mermaid";
   import { deflate } from "pako";
-  import { examples } from "./_data.ts";
   import {
     isMermaidFlowchart,
     mermaidFlowchartToRulemapXml,
@@ -9,6 +8,20 @@
   import IconZoomIn from "~icons/ic/outline-zoom-in";
   import IconZoomOut from "~icons/ic/outline-zoom-out";
   import IconRestartAlt from "~icons/ic/outline-restart-alt";
+
+  interface VisExample {
+    name: string;
+    filename: string;
+  }
+
+  interface LawExample {
+    title: string;
+    short: string;
+    eli: string;
+    visOptions: VisExample[];
+  }
+
+  let { examples }: { examples: LawExample[] } = $props();
 
   function configureMermaid(htmlLabels: boolean) {
     mermaid.initialize({

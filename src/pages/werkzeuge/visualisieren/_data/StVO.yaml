@@ -1,0 +1,13 @@
+title: Straßenverkehrs-Ordnung
+eli: eli/bund/bgbl-1/2013/s367/2025-01-01/1/deu
+visOptions:
+  - name: Vorfahrtsregeln-Prüfschema
+    filename: vorfahrt
+  - name: Überholvorgang-Voraussetzungen
+    filename: ueberholen
+  - name: Halten/Parken-Verbotsschema
+    filename: halten_parken
+  - name: Verhalten bei Unfall
+    filename: unfall
+  - name: Abbiegen an Kreuzungen
+    filename: abbiegen

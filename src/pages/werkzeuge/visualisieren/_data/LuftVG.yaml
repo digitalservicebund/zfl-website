@@ -1,0 +1,13 @@
+title: Luftverkehrsgesetz
+eli: eli/bund/banz-at/1922/s681/2026-07-29/1/deu
+visOptions:
+  - name: Betriebsgenehmigung Luftfahrtunternehmen
+    filename: betriebsgenehmigung
+  - name: Haftung für Fluggastschäden
+    filename: haftung_fluggast
+  - name: Schlichtungsverfahren Fluggastrechte
+    filename: schlichtungsverfahren
+  - name: Register über Betreiber unbemannter Fluggeräte
+    filename: register_drohnenbetreiber
+  - name: Ordnungswidrigkeiten beim Drohnenbetrieb
+    filename: bussgeld_drohnenbetrieb

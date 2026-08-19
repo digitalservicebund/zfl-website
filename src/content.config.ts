@@ -41,6 +41,27 @@ const werkzeuge = defineCollection({
     }),
 });
 
+const visualisierungen = defineCollection({
+  loader: glob({
+    pattern: "*.yaml",
+    base: "src/pages/werkzeuge/visualisieren/_data",
+  }),
+  schema: z.object({
+    title: z.string(),
+    /** ELI-Pfad des Gesetzes auf rechtsinformationen.bund.de, z.B.
+     * "eli/bund/bgbl-1/2000/s1966/2022-08-01/1/deu". Wird verwendet, um
+     * "{{ELI}}"-Platzhalter in den .mmd-Dateien zu Norm-Links aufzulösen. */
+    eli: z.string(),
+    visOptions: z.array(
+      z.object({
+        name: z.string(),
+        filename: z.string(),
+      }),
+    ),
+  }),
+});
+
 export const collections = {
   werkzeuge,
+  visualisierungen,
 };

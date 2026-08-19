@@ -1,0 +1,9 @@
+title: Betriebskostenverordnung
+eli: eli/bund/bgbl-1/2003/s2347/2024-01-01/1/deu
+visOptions:
+  - name: Abgrenzung Betriebskosten
+    filename: abgrenzung
+  - name: Kabelanschluss-/Antennenkosten
+    filename: kabelanschluss
+  - name: Heiz- und Warmwasserkosten
+    filename: heizwarmwasser

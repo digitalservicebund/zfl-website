@@ -1,0 +1,13 @@
+title: Gesetz zum Umgang mit Konsumcannabis
+eli: eli/bund/bgbl-1/2024/109-2/2025-01-01/1/deu
+visOptions:
+  - name: Besitzmengen-Ampel
+    filename: besitzmengen
+  - name: Privater Eigenanbau
+    filename: privater_eigenanbau
+  - name: Erlaubnisverfahren Anbauvereinigung
+    filename: anbauvereinigung_erlaubnis
+  - name: Straf- und Bußgeldschema
+    filename: straf_bussgeld
+  - name: Tilgungsverfahren Bundeszentralregister
+    filename: tilgungsverfahren

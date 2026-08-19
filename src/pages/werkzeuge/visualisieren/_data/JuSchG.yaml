@@ -1,0 +1,13 @@
+title: Jugendschutzgesetz
+eli: eli/bund/bgbl-1/2002/s2730/2024-05-14/1/deu
+visOptions:
+  - name: Aufenthalt in Gaststätten
+    filename: gaststaetten
+  - name: Abgabe alkoholischer Getränke
+    filename: alkoholabgabe
+  - name: Zutritt zu Filmveranstaltungen
+    filename: filmveranstaltungen
+  - name: Indizierungsverfahren
+    filename: indizierungsverfahren
+  - name: Vorsorgemaßnahmen der Anbieter
+    filename: vorsorgemassnahmen

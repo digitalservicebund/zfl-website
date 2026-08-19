@@ -1,0 +1,13 @@
+title: Gerichtskostengesetz
+eli: eli/bund/bgbl-1/2004/s718/2026-01-01/1/deu
+visOptions:
+  - name: Fälligkeit der Gerichtsgebühren
+    filename: faelligkeit_gebuehren
+  - name: Kostenvorschusspflicht-Prüfschema
+    filename: kostenvorschusspflicht
+  - name: Streitwertfestsetzung
+    filename: streitwertfestsetzung
+  - name: Ermäßigung bei vorzeitiger Erledigung
+    filename: ermaessigung_vorzeitige_erledigung
+  - name: PKH-Auswirkung auf Kostenerhebung
+    filename: pkh_kostenerhebung

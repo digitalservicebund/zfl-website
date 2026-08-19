@@ -54,7 +54,7 @@ Reine Definitionskataloge oder unstrukturierte Aufzählungen eignen sich
 nicht.
 
 Bereits vorhandene Beispiele in diesem Repo (als Referenz für den
-Detailgrad, siehe `src/pages/werkzeuge/visualisieren/_data.ts`):
+Detailgrad, siehe `src/pages/werkzeuge/visualisieren/_data/*.yaml`):
 
 - KSchG: Anwendbarkeitsprüfung, Prüfschema "sozial ungerechtfertigt",
   Klagefristen-Kette, Sonderkündigungsschutz-Zeiträume, Anzeigeverfahren
@@ -104,12 +104,12 @@ Speichern:
    `slug` = kurzer, kebab-freier snake_case-Bezeichner ohne Abkürzungspräfix,
    z.B. `KSchG/klagefristen.mmd`). Nur den reinen Mermaid-Code
    hineinschreiben, keine Markdown-Codefences.
-2. Ergänze `src/pages/werkzeuge/visualisieren/_data.ts`:
-   - Falls das Gesetz dort noch keinen Eintrag hat, einen neuen
-     `LawExample`-Eintrag mit `title` (offizieller Name ohne Abkürzung),
-     `short` (Abkürzung, z.B. `"KSchG"`, identisch zum Ordnernamen aus
-     Schritt 1), `eli` (ELI-Pfad aus Schritt 2, Pflichtfeld) und leerem
-     `visOptions`-Array anlegen.
+2. Ergänze `src/pages/werkzeuge/visualisieren/_data/{Abkuerzung}.yaml`:
+   - Falls das Gesetz dort noch keine Metadaten-Datei hat, eine neue Datei
+     `{Abkuerzung}.yaml` (identisch zum Ordnernamen aus Schritt 1, z.B.
+     `KSchG.yaml`) mit `title` (offizieller Name ohne Abkürzung), `eli`
+     (ELI-Pfad aus Schritt 2, Pflichtfeld) und leerem `visOptions`-Array
+     anlegen. Die Datei ist reine YAML-Daten, kein Markdown-Frontmatter.
    - Für jeden Prozess ein `visOptions`-Objekt mit `name` (Prozessname aus
      Schritt 3) und `filename` (Dateiname der `.mmd`-Datei ohne
      Verzeichnis und Endung, z.B. `"klagefristen"`) hinzufügen.

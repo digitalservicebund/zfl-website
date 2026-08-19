@@ -1,0 +1,13 @@
+title: Gesetz zum Elterngeld und zur Elternzeit
+eli: eli/bund/bgbl-1/2006/s2748/2026-01-01/1/deu
+visOptions:
+  - name: Anspruchsvoraussetzungen Elterngeld
+    filename: anspruchsvoraussetzungen
+  - name: Basiselterngeld, Plus & Bonus
+    filename: basiselterngeld_plus_bonus
+  - name: Bezugsdauer & Partnermonate
+    filename: bezugsdauer_partnermonate
+  - name: Elternzeit-Anmeldeverfahren
+    filename: elternzeit_anmeldung
+  - name: Einkommensgrenzen & -anrechnung
+    filename: einkommensgrenzen_anrechnung
