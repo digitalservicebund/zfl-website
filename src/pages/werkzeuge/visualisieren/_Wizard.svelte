@@ -6,7 +6,17 @@
   import IconZoomOut from "~icons/ic/outline-zoom-out";
   import IconRestartAlt from "~icons/ic/outline-restart-alt";
 
-  mermaid.initialize({ startOnLoad: false });
+  function configureMermaid(htmlLabels: boolean) {
+    mermaid.initialize({
+      startOnLoad: false,
+      htmlLabels,
+      flowchart: { htmlLabels },
+    });
+  }
+
+  // Interactive, on-screen rendering keeps HTML labels so the <a> links in
+  // the .mmd sources (see resolveNormLinks) are clickable.
+  configureMermaid(true);
 
   const mermaidSources = import.meta.glob<string>("./_data/*/*.mmd", {
     query: "?raw",
@@ -163,14 +173,31 @@
     dragOrigin = null;
   }
 
-  function downloadSvg() {
-    if (!diagramSvg || !selectedExample || !selectedOption) return;
+  // Drops <a href="...">text</a> wrappers, keeping just the link text: SVG
+  // viewers outside the browser (Miro, Illustrator, ...) don't render
+  // foreignObject/HTML, so exported links must become plain SVG text.
+  function stripLinks(source: string): string {
+    return source.replace(/<a\b[^>]*>(.*?)<\/a>/gis, "$1");
+  }
 
-    // diagramSvg is parsed as HTML by {@html}, so foreignObject content like
-    // unclosed <br> is valid there but not as standalone XML. Reparsing and
-    // re-serializing via XMLSerializer produces well-formed, self-closed XML.
+  async function downloadSvg() {
+    if (!mermaidSource || !selectedExample || !selectedOption) return;
+
+    const exportSource = stripLinks(mermaidSource);
+
+    configureMermaid(false);
+    let svg: string;
+    try {
+      ({ svg } = await mermaid.render(
+        `mermaid-export-${renderCount++}`,
+        exportSource,
+      ));
+    } finally {
+      configureMermaid(true);
+    }
+
     const container = document.createElement("div");
-    container.innerHTML = diagramSvg;
+    container.innerHTML = svg;
     const svgElement = container.querySelector("svg");
     if (!svgElement) return;
 
