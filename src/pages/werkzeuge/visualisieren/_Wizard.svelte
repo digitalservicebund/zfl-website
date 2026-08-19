@@ -1,6 +1,7 @@
 <script lang="ts">
   import mermaid from "mermaid";
   import { deflate } from "pako";
+  import { fade } from "svelte/transition";
   import {
     isMermaidFlowchart,
     mermaidFlowchartToRulemapXml,
@@ -62,24 +63,84 @@
 
   let selectedVisOption = $state<string>();
 
+  const LAW_STEP_STATUS_MESSAGES = [
+    "Lese Gesetzestext …",
+    "Analysiere Struktur …",
+    "Identifiziere mögliche Visualisierungen …",
+  ];
+  const VIS_OPTION_STEP_STATUS_MESSAGES = [
+    "Extrahiere Prozessschritte …",
+    "Erstelle Diagramm …",
+    "Rendere Visualisierung …",
+  ];
+  const FAKE_LOADING_DELAY_MS = 3000;
+  const FAKE_LOADING_STATUS_INTERVAL_MS = 1200;
+
+  let loadingStatusMessage = $state(LAW_STEP_STATUS_MESSAGES[0]);
+
+  function createFakeLoadingSequence(
+    messages: string[],
+    onMessage: (message: string) => void,
+  ): { promise: Promise<void>; cancel: () => void } {
+    let messageIndex = 0;
+    onMessage(messages[0]);
+    const interval = setInterval(() => {
+      messageIndex = (messageIndex + 1) % messages.length;
+      onMessage(messages[messageIndex]);
+    }, FAKE_LOADING_STATUS_INTERVAL_MS);
+
+    let timeoutId: ReturnType<typeof setTimeout>;
+    const promise = new Promise<void>((resolve) => {
+      timeoutId = setTimeout(resolve, FAKE_LOADING_DELAY_MS);
+    });
+
+    return {
+      promise,
+      cancel: () => {
+        clearInterval(interval);
+        clearTimeout(timeoutId);
+      },
+    };
+  }
+
+  let isLoadingVisOptions = $state(false);
+
   $effect(() => {
     if (!selectedExample) {
       selectedVisOption = undefined;
+      isLoadingVisOptions = false;
       return;
     }
+    const example = selectedExample;
 
-    if (!hasAppliedInitialVisualization) {
-      hasAppliedInitialVisualization = true;
-      const initialOption = selectedExample.visOptions.find(
-        (option) => option.name === initialVisualization,
-      );
-      if (initialOption) {
-        selectedVisOption = initialOption.name;
-        return;
-      }
-    }
-
+    let cancelled = false;
+    isLoadingVisOptions = true;
     selectedVisOption = undefined;
+
+    const { promise, cancel } = createFakeLoadingSequence(
+      LAW_STEP_STATUS_MESSAGES,
+      (message) => (loadingStatusMessage = message),
+    );
+
+    promise.then(() => {
+      if (cancelled) return;
+      isLoadingVisOptions = false;
+
+      if (!hasAppliedInitialVisualization) {
+        hasAppliedInitialVisualization = true;
+        const initialOption = example.visOptions.find(
+          (option) => option.name === initialVisualization,
+        );
+        if (initialOption) {
+          selectedVisOption = initialOption.name;
+        }
+      }
+    });
+
+    return () => {
+      cancelled = true;
+      cancel();
+    };
   });
 
   let selectedOption = $derived(
@@ -110,20 +171,30 @@
   $effect(() => {
     if (!selectedExample || !selectedOption) {
       mermaidSource = "";
+      isLoading = false;
       return;
     }
+    const example = selectedExample;
+    const option = selectedOption;
 
     let cancelled = false;
     isLoading = true;
 
-    const path = `./_data/${selectedExample.short}/${selectedOption.filename}.mmd`;
-    const eli = selectedExample.eli;
-    mermaidSources[path]().then((source) => {
+    const path = `./_data/${example.short}/${option.filename}.mmd`;
+    const eli = example.eli;
+
+    const { promise: fakeDelay, cancel } = createFakeLoadingSequence(
+      VIS_OPTION_STEP_STATUS_MESSAGES,
+      (message) => (loadingStatusMessage = message),
+    );
+
+    Promise.all([mermaidSources[path](), fakeDelay]).then(([source]) => {
       if (!cancelled) mermaidSource = resolveNormLinks(source, eli);
     });
 
     return () => {
       cancelled = true;
+      cancel();
     };
   });
 
@@ -274,31 +345,46 @@
   });
 </script>
 
+{#snippet loadingIndicator()}
+  <div class="flex flex-col items-center gap-16 p-32">
+    <div class="kern-loader kern-loader--visible" role="status">
+      <span class="kern-sr-only">Wird geladen…</span>
+    </div>
+    <p class="text-cosmic-blue-base" aria-live="polite">
+      {#key loadingStatusMessage}
+        <span class="inline-block animate-pulse" in:fade={{ duration: 300 }}>
+          {loadingStatusMessage}
+        </span>
+      {/key}
+    </p>
+  </div>
+{/snippet}
+
 <div class="space-y-32 min-h-[50vh]">
   <LawFinder {examples} bind:selected={selectedExample} />
   {#if selectedExample}
-    <div class="kern-form-input">
-      <span class="kern-label"
-        >Welchen Teilbereich möchten Sie visualisieren?</span
-      >
-      <div class="mt-8 flex flex-wrap gap-8">
-        {#each selectedExample.visOptions as option (option.name)}
-          <ChipBtn
-            selected={option.name === selectedVisOption}
-            onclick={() => (selectedVisOption = option.name)}
-          >
-            {option.name}
-          </ChipBtn>
-        {/each}
+    {#if isLoadingVisOptions}
+      {@render loadingIndicator()}
+    {:else}
+      <div class="kern-form-input">
+        <span class="kern-label"
+          >Welchen Teilbereich möchten Sie visualisieren?</span
+        >
+        <div class="mt-8 flex flex-wrap gap-8">
+          {#each selectedExample.visOptions as option (option.name)}
+            <ChipBtn
+              selected={option.name === selectedVisOption}
+              onclick={() => (selectedVisOption = option.name)}
+            >
+              {option.name}
+            </ChipBtn>
+          {/each}
+        </div>
       </div>
-    </div>
+    {/if}
   {/if}
   {#if isLoading}
-    <div class="flex justify-center p-32">
-      <div class="kern-loader kern-loader--visible" role="status">
-        <span class="kern-sr-only">Wird geladen…</span>
-      </div>
-    </div>
+    {@render loadingIndicator()}
   {:else if mermaidSource}
     <div
       role="presentation"
