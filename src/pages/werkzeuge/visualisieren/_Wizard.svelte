@@ -2,6 +2,10 @@
   import mermaid from "mermaid";
   import { deflate } from "pako";
   import { examples } from "./_data.ts";
+  import {
+    isMermaidFlowchart,
+    mermaidFlowchartToRulemapXml,
+  } from "./_mermaid2RulemapXML.ts";
   import IconZoomIn from "~icons/ic/outline-zoom-in";
   import IconZoomOut from "~icons/ic/outline-zoom-out";
   import IconRestartAlt from "~icons/ic/outline-restart-alt";
@@ -214,6 +218,27 @@
     URL.revokeObjectURL(url);
   }
 
+  let canExportRulemap = $derived(
+    mermaidSource ? isMermaidFlowchart(mermaidSource) : false,
+  );
+
+  function downloadRulemapXml() {
+    if (!mermaidSource || !selectedExample || !selectedOption) return;
+
+    const xml = mermaidFlowchartToRulemapXml(
+      mermaidSource,
+      `${selectedExample.short}: ${selectedOption.name}`,
+    );
+
+    const blob = new Blob([xml], { type: "application/xml" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `${selectedExample.short}-${selectedOption.name}.xml`;
+    link.click();
+    URL.revokeObjectURL(url);
+  }
+
   function toBase64Url(bytes: Uint8Array): string {
     let binary = "";
     for (const byte of bytes) binary += String.fromCharCode(byte);
@@ -350,6 +375,21 @@
           aria-hidden="true"
         ></span>
         <span class="kern-label">SVG Export</span>
+      </button>
+      <button
+        type="button"
+        onclick={downloadRulemapXml}
+        disabled={!canExportRulemap}
+        class="kern-btn kern-btn--secondary"
+        title={canExportRulemap
+          ? undefined
+          : "Rulemap XML Export ist derzeit nur für Flowcharts verfügbar"}
+      >
+        <span
+          class="kern-icon kern-icon--download kern-icon--default"
+          aria-hidden="true"
+        ></span>
+        <span class="kern-label">Rulemap XML Export</span>
       </button>
     </div>
   {/if}

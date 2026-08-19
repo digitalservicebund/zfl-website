@@ -92,6 +92,8 @@ fileignoreconfig:
     ignore_detectors: [filename]
   - filename: src/pages/werkzeuge/visualisieren/_data/URV/registrierung.mmd
     checksum: b9b484659c20fb5daf957d0a561b06bfdee13bad48c88e0806e51fe604ff3985
+  - filename: src/pages/werkzeuge/visualisieren/_mermaid2RulemapXML.ts
+    checksum: 01019ab0f49d7695a85a1e669ccca19f15620f8c6908a96eaa41c7a823a8e9f5
   - filename: .claude/skills/gesetz-visualisieren/SKILL.md
     checksum: ce79ba7efa69a4f32e44fc592e62a672dcbd973485ac977b865ec6ff51deda64
 scopeconfig:
