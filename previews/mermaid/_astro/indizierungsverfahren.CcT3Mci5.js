@@ -1,0 +1,40 @@
+var e=`---
+summary: "Veranschaulicht das Indizierungsverfahren der Prüfstelle für jugendgefährdende Medien nach §§21 bis 25 JuSchG, vom Antrag über das vereinfachte Verfahren bis zur Bestandskraft der Entscheidung oder einer verwaltungsgerichtlichen Klage."
+---
+flowchart TD
+    A["Antrag einer antragsberechtigten Stelle<br/>— <a href='{{ELI}}#art-z21_abs-z2' target='_blank' rel='noopener'>§21 II</a> — oder Anregung/Tätigwerden<br/>von Amts wegen — <a href='{{ELI}}#art-z21_abs-z4' target='_blank' rel='noopener'>§21 IV</a>, <a href='{{ELI}}#art-z21_abs-z5' target='_blank' rel='noopener'>V</a>"] --> Q1{"Kommt Listenaufnahme oder<br/>Streichung offensichtlich nicht<br/>in Betracht? — <a href='{{ELI}}#art-z21_abs-z3' target='_blank' rel='noopener'>§21 III</a>"}
+
+    Q1 -->|Ja| Z1["Vorsitz stellt<br/>Verfahren ein"]
+    Q1 -->|Nein| Q2{"Betrifft die Entscheidung<br/>einen digitalen Dienst?<br/>— <a href='{{ELI}}#art-z21_abs-z6' target='_blank' rel='noopener'>§21 VI</a>"}
+
+    Q2 -->|Ja| S1["Zentrale Aufsichtsstelle der Länder<br/>erhält Gelegenheit zur Stellungnahme<br/>(Frist: 5 Werktage) — <a href='{{ELI}}#art-z21_abs-z6' target='_blank' rel='noopener'>§21 VI</a>"]
+    Q2 -->|Nein| S2
+
+    S1 --> S2["Urheber/in, Inhaber/in der<br/>Nutzungsrechte bzw. Anbieter erhält<br/>Gelegenheit zur Stellungnahme,<br/>soweit Anschrift bekannt<br/>— <a href='{{ELI}}#art-z21_abs-z7' target='_blank' rel='noopener'>§21 VII</a>"]
+
+    S2 --> Q3{"Voraussetzungen des vereinfachten<br/>Verfahrens erfüllt (offensichtliche<br/>Jugendgefährdung o.ä.)?<br/>— <a href='{{ELI}}#art-z23_abs-z1' target='_blank' rel='noopener'>§23 I</a>"}
+
+    Q3 -->|Ja| Q4{"Einstimmige Entscheidung von<br/>Vorsitz und zwei weiteren<br/>Mitgliedern? — §23 I S.2-3"}
+    Q3 -->|Nein| E2["Entscheidung durch Prüfstelle<br/>in voller Besetzung<br/>— §23 I S.4"]
+
+    Q4 -->|Ja| E1["Entscheidung im<br/>vereinfachten Verfahren"]
+    Q4 -->|Nein| E2
+
+    E1 --> Z2["Zustellung mit Begründung an<br/>Beteiligte und Behörden<br/>— <a href='{{ELI}}#art-z21_abs-z8' target='_blank' rel='noopener'>§21 VIII</a>"]
+    E2 --> Z2
+
+    Z2 --> Q5{"Entscheidung im vereinfachten<br/>Verfahren ergangen?"}
+
+    Q5 -->|Ja| Q6{"Antrag der Betroffenen auf<br/>Entscheidung in voller Besetzung<br/>binnen 1 Monat?<br/>— <a href='{{ELI}}#art-z23_abs-z3' target='_blank' rel='noopener'>§23 III</a>"}
+    Q5 -->|Nein| R["Klage im Verwaltungsrechtsweg<br/>gegen den Bund (Bundeszentrale)<br/>möglich — <a href='{{ELI}}#art-z25_abs-z1' target='_blank' rel='noopener'>§25 I-III</a>"]
+
+    Q6 -->|Ja| E2b["Erneute Entscheidung durch<br/>Prüfstelle in voller Besetzung<br/>— §23 III"]
+    Q6 -->|Nein| Z3["Entscheidung im vereinfachten<br/>Verfahren wird bestandskräftig"]
+
+    E2b --> R
+    R --> Z4["Klage ohne aufschiebende Wirkung;<br/>grds. kein Vorverfahren nötig<br/>— <a href='{{ELI}}#art-z25_abs-z4' target='_blank' rel='noopener'>§25 IV</a>"]
+
+    style Z1 fill:#f8d7da,stroke:#c0392b
+    style Z3 fill:#fff3cd,stroke:#c9a227
+    style Z4 fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};

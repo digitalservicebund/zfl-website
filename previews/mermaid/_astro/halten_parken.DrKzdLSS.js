@@ -1,0 +1,23 @@
+var e=`---
+summary: "Zeigt, wann Halten und Parken nach § 12 StVO zulässig sind, und unterscheidet dabei Halteverbots- und Parkverbotssituationen sowie Sonderregeln für schwere Fahrzeuge und länger abgestellte Anhänger."
+---
+flowchart TD
+    A["Fahrzeug soll angehalten<br/>werden<br/>— <a href='{{ELI}}/art-z12' target='_blank' rel='noopener'>§12</a>"] --> B{"Verlässt man das<br/>Fahrzeug oder hält man<br/>länger als 3 Minuten?<br/>— <a href='{{ELI}}#art-z12_abs-z2' target='_blank' rel='noopener'>§12 Abs. 2</a>"}
+    B -->|Nein: Halten| C{"Liegt eine Halteverbots-<br/>Situation vor (enge/<br/>unübersichtliche Stelle,<br/>scharfe Kurve, Ein-/Aus-<br/>fädelungsstreifen, Bahn-<br/>übergang, Feuerwehr-<br/>zufahrt)?<br/>— <a href='{{ELI}}#art-z12_abs-z1' target='_blank' rel='noopener'>§12 Abs. 1</a>"}
+    C -->|Ja| Z1["Halten unzulässig"]
+    C -->|Nein| Z2["Halten zulässig — rechter<br/>Seitenstreifen/Fahrbahn-<br/>rand nutzen<br/>— <a href='{{ELI}}#art-z12_abs-z4' target='_blank' rel='noopener'>§12 Abs. 4</a>"]
+    B -->|Ja: Parken| D{"Liegt eine Halteverbots-<br/>Situation nach Abs. 1<br/>vor?<br/>— <a href='{{ELI}}#art-z12_abs-z1' target='_blank' rel='noopener'>§12 Abs. 1</a>"}
+    D -->|Ja| Z3["Parken unzulässig"]
+    D -->|Nein| E{"Liegt eine zusätzliche<br/>Parkverbots-Situation vor<br/>(Kreuzungsnähe 5/8 m,<br/>Parkflächenmarkierung,<br/>Grundstückszufahrt,<br/>Schachtdeckel, Bordstein-<br/>absenkung)?<br/>— <a href='{{ELI}}#art-z12_abs-z3' target='_blank' rel='noopener'>§12 Abs. 3</a>"}
+    E -->|Ja| Z3
+    E -->|Nein| F{"Kfz über 7,5 t oder<br/>Anhänger über 2 t in<br/>Wohn-/Erholungs-/Kur-/<br/>Klinikgebiet zwischen<br/>22 und 6 Uhr oder an<br/>Sonn-/Feiertagen?<br/>— <a href='{{ELI}}#art-z12_abs-z3a' target='_blank' rel='noopener'>§12 Abs. 3a</a>"}
+    F -->|Ja| Z3
+    F -->|Nein| G{"Kfz-Anhänger ohne<br/>Zugfahrzeug länger als<br/>zwei Wochen abgestellt?<br/>— <a href='{{ELI}}#art-z12_abs-z3b' target='_blank' rel='noopener'>§12 Abs. 3b</a>"}
+    G -->|Ja| Z3
+    G -->|Nein| Z4["Parken zulässig —<br/>platzsparend und rechter<br/>Seitenstreifen/-fahrbahn<br/>— <a href='{{ELI}}#art-z12_abs-z6' target='_blank' rel='noopener'>§12 Abs. 6</a>"]
+
+    style Z1 fill:#f8d7da,stroke:#c0392b
+    style Z2 fill:#d4edda,stroke:#2d8a4a
+    style Z3 fill:#f8d7da,stroke:#c0392b
+    style Z4 fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};

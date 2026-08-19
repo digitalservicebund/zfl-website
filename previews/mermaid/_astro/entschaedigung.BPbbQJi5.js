@@ -1,0 +1,31 @@
+var e=`---
+summary: "Stellt den Anspruch auf Entschädigung für Verdienstausfall nach §56 IfSG bei Tätigkeitsverbot oder Absonderung dar, einschließlich der Berechnung der Höhe, der Auszahlung durch Arbeitgeber oder Behörde und der Antragsfrist."
+---
+flowchart TD
+    START["Person erleidet Verdienstausfall<br/>wegen Tätigkeitsverbot oder<br/>Absonderung"] --> F1{"Beruht der Ausfall auf einem<br/>Tätigkeitsverbot (<a href='{{ELI}}/art-z31' target='_blank' rel='noopener'>§31</a>) oder<br/>einer Absonderung (<a href='{{ELI}}/art-z30' target='_blank' rel='noopener'>§30</a>,<br/>ggf. i.V.m. §32)? — <a href='{{ELI}}#art-z56_abs-z1' target='_blank' rel='noopener'>§56 Abs.1 S.1-2</a>"}
+
+    F1 -->|Nein| KEIN["Kein Anspruch nach §56"]
+    F1 -->|Ja| VERMEID{"Hätte das Verbot oder die<br/>Absonderung durch eine gesetzlich<br/>vorgeschriebene oder öffentlich<br/>empfohlene Schutzimpfung bzw. durch<br/>Verzicht auf eine vermeidbare<br/>Risikogebiets-Reise vermieden<br/>werden können? — <a href='{{ELI}}#art-z56_abs-z1' target='_blank' rel='noopener'>§56 Abs.1 S.4</a>"}
+
+    VERMEID -->|Ja| KEIN
+    VERMEID -->|Nein| HOEHE["Entschädigung in Höhe des Netto-<br/>Verdienstausfalls — <a href='{{ELI}}#art-z56_abs-z2' target='_blank' rel='noopener'>§56 Abs.2</a>,<br/><a href='{{ELI}}#art-z56_abs-z3' target='_blank' rel='noopener'>Abs.3</a>"]
+
+    HOEHE --> DAUER{"Dauert die Maßnahme länger als<br/>6 Wochen? — <a href='{{ELI}}#art-z56_abs-z2' target='_blank' rel='noopener'>§56 Abs.2 S.2-3</a>"}
+    DAUER -->|Nein| VOLL["Volle Höhe für die ersten<br/>6 Wochen — <a href='{{ELI}}#art-z56_abs-z2' target='_blank' rel='noopener'>§56 Abs.2 S.2</a>"]
+    DAUER -->|Ja| RED["Ab der 7. Woche 67% des<br/>Verdienstausfalls, gedeckelt auf<br/>2.016 € pro Monat — <a href='{{ELI}}#art-z56_abs-z2' target='_blank' rel='noopener'>§56 Abs.2 S.3</a>"]
+
+    VOLL --> AUSZ
+    RED --> AUSZ{"Besteht ein fortlaufendes<br/>Arbeitsverhältnis? — <a href='{{ELI}}#art-z56_abs-z5' target='_blank' rel='noopener'>§56 Abs.5</a>"}
+    AUSZ -->|Ja| ARBGEB["Arbeitgeber zahlt Entschädigung<br/>aus (längstens 6 Wochen) und<br/>erhält Erstattung auf Antrag<br/>— <a href='{{ELI}}#art-z56_abs-z5' target='_blank' rel='noopener'>§56 Abs.5 S.1, S.3</a>"]
+    AUSZ -->|Nein| BEHOERDE["Zuständige Behörde gewährt die<br/>Entschädigung auf Antrag<br/>— <a href='{{ELI}}#art-z56_abs-z5' target='_blank' rel='noopener'>§56 Abs.5 S.4</a>"]
+
+    ARBGEB --> FRIST
+    BEHOERDE --> FRIST{"Antrag innerhalb von 2 Jahren<br/>nach Ende der Maßnahme gestellt?<br/>— <a href='{{ELI}}#art-z56_abs-z11' target='_blank' rel='noopener'>§56 Abs.11 S.1</a>"}
+
+    FRIST -->|Nein| VERFRIST["Anspruch ist verfristet"]
+    FRIST -->|Ja| GEWAEHRT["Entschädigung wird gewährt"]
+
+    style KEIN fill:#f8d7da,stroke:#c0392b
+    style VERFRIST fill:#f8d7da,stroke:#c0392b
+    style GEWAEHRT fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};

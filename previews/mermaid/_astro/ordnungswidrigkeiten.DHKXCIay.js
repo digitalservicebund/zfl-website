@@ -1,0 +1,29 @@
+var e=`---
+summary: "Zeigt, welche vorsätzlichen oder fahrlässigen Verstöße eines Pfandleihers gegen Aufzeichnungs-, Annahme-, Pfandschein-, Versicherungs-, Verwertungs- oder Überschussabführungspflichten eine Ordnungswidrigkeit nach §12a PfandlV begründen."
+---
+flowchart TD
+    A["Handelt der Pfandleiher<br/>vorsätzlich oder fahrlässig?<br/>— <a href='{{ELI}}/art-z12a' target='_blank' rel='noopener'>§12a</a>"] -->|Nein| Z0["Keine Ordnungswidrigkeit"]
+    A -->|Ja| B{"Verstoß gegen Aufzeichnungs-,<br/>Unterlagen- oder<br/>Belegpflichten?<br/>— <a href='{{ELI}}/art-z3' target='_blank' rel='noopener'>§3 I, II oder III</a><br/>— <a href='{{ELI}}/art-z12a' target='_blank' rel='noopener'>§12a Nr.1</a>"}
+    A -->|Ja| C{"Verstoß gegen Vorschriften über<br/>Annahme des Pfandes/Fälligkeit<br/>(<a href='{{ELI}}/art-z5' target='_blank' rel='noopener'>§5</a>), Pfandschein<br/>(<a href='{{ELI}}/art-z6' target='_blank' rel='noopener'>§6</a>) oder<br/>Numerierung/Aufbewahrung<br/>(<a href='{{ELI}}/art-z7' target='_blank' rel='noopener'>§7</a>)?<br/>— <a href='{{ELI}}/art-z12a' target='_blank' rel='noopener'>§12a Nr.2</a>"}
+    A -->|Ja| D{"Pfand entgegen<br/><a href='{{ELI}}/art-z8' target='_blank' rel='noopener'>§8</a><br/>nicht vorschriftsmäßig<br/>versichert?<br/>— <a href='{{ELI}}/art-z12a' target='_blank' rel='noopener'>§12a Nr.3</a>"}
+    A -->|Ja| E{"Verstoß gegen<br/>Verwertungsvorschriften<br/>(Befriedigung, Verwertungsfrist,<br/>Bekanntmachung)?<br/>— <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 I</a>,<br/><a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>II S.1</a>,<br/><a href='{{ELI}}#art-z9_abs-z4' target='_blank' rel='noopener'>IV</a><br/>— <a href='{{ELI}}/art-z12a' target='_blank' rel='noopener'>§12a Nr.4</a>"}
+    A -->|Ja| F{"Verstoß gegen Vorschriften<br/>über Zinsen, Kosten oder<br/>Vergütungen?<br/>— <a href='{{ELI}}/art-z10' target='_blank' rel='noopener'>§10</a><br/>— <a href='{{ELI}}/art-z12a' target='_blank' rel='noopener'>§12a Nr.5</a>"}
+    A -->|Ja| G{"Überschüsse nicht oder<br/>nicht rechtzeitig abgeführt?<br/>— <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 S.1</a><br/>— <a href='{{ELI}}/art-z12a' target='_blank' rel='noopener'>§12a Nr.6</a>"}
+
+    B -->|Ja| X["Ordnungswidrigkeit nach<br/><a href='{{ELI}}/art-z12a' target='_blank' rel='noopener'>§12a</a><br/>i.V.m. §144 II Nr.1b GewO"]
+    C -->|Ja| X
+    D -->|Ja| X
+    E -->|Ja| X
+    F -->|Ja| X
+    G -->|Ja| X
+    B -->|Nein| Y
+    C -->|Nein| Y
+    D -->|Nein| Y
+    E -->|Nein| Y
+    F -->|Nein| Y
+    G -->|Nein| Y["Kein Ordnungswidrig-<br/>keitentatbestand erfüllt"]
+
+    style Z0 fill:#d4edda,stroke:#2d8a4a
+    style Y fill:#d4edda,stroke:#2d8a4a
+    style X fill:#f8d7da,stroke:#c0392b
+`;export{e as default};

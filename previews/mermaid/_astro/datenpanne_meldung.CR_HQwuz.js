@@ -1,0 +1,36 @@
+var e=`---
+summary: "Zeigt den Ablauf bei einer Verletzung des Schutzes personenbezogener Daten: die Prüfung der Meldepflicht an die Aufsichtsbehörde binnen 72 Stunden nach Art. 33 DSGVO sowie die Voraussetzungen für eine zusätzliche Benachrichtigung der betroffenen Person nach Art. 34 DSGVO."
+---
+flowchart TD
+    A["Verletzung des Schutzes<br/>personenbezogener Daten<br/>wird bekannt"] --> B{"Voraussichtlich kein Risiko<br/>für Rechte und Freiheiten<br/>natürlicher Personen?<br/>— Art. 33 Abs. 1"}
+
+    B -->|"Ja"| N1["Keine Meldung an die<br/>Aufsichtsbehörde erforderlich"]
+    B -->|"Nein/unklar"| C["Meldung an zuständige<br/>Aufsichtsbehörde,<br/>unverzüglich und möglichst<br/>binnen 72 Stunden<br/>— Art. 33 Abs. 1"]
+
+    C --> D{"Meldung erfolgt<br/>binnen 72 Stunden?"}
+    D -->|"Nein"| E["Begründung für die<br/>Verzögerung beifügen<br/>— Art. 33 Abs. 1 S. 2"]
+    D -->|"Ja"| F
+    E --> F["Meldung enthält Art der<br/>Verletzung, Kontaktstelle,<br/>Folgen und Abhilfemaßnahmen<br/>— Art. 33 Abs. 3"]
+
+    F --> DOK["Dokumentation der<br/>Verletzung, ihrer Folgen<br/>und Abhilfemaßnahmen<br/>— Art. 33 Abs. 5"]
+
+    DOK --> G{"Voraussichtlich hohes Risiko<br/>für Rechte und Freiheiten<br/>der betroffenen Person?<br/>— Art. 34 Abs. 1"}
+
+    G -->|"Nein"| H["Keine Benachrichtigung<br/>der betroffenen Person<br/>erforderlich"]
+    G -->|"Ja"| I{"Greift eine Ausnahme<br/>nach Art. 34 Abs. 3?"}
+
+    I -->|"Schutzvorkehrungen<br/>(z.B. Verschlüsselung)<br/>vorab getroffen<br/>— lit. a"| H
+    I -->|"Hohes Risiko nachträglich<br/>beseitigt — lit. b"| H
+    I -->|"Unverhältnismäßiger<br/>Aufwand — lit. c"| J["Öffentliche Bekanntmachung<br/>statt Einzelbenachrichtigung<br/>— Art. 34 Abs. 3 lit. c"]
+    I -->|"Keine Ausnahme"| K["Benachrichtigung der<br/>betroffenen Person<br/>unverzüglich, in klarer<br/>und einfacher Sprache<br/>— Art. 34 Abs. 1–2"]
+
+    H --> L{"Verlangt die Aufsichtsbehörde<br/>eine nachträgliche<br/>Benachrichtigung?<br/>— Art. 34 Abs. 4"}
+    L -->|"Ja"| K
+    L -->|"Nein"| END["Verfahren abgeschlossen"]
+
+    style K fill:#d4edda,stroke:#2d8a4a
+    style J fill:#d4edda,stroke:#2d8a4a
+    style END fill:#d4edda,stroke:#2d8a4a
+    style H fill:#fff3cd,stroke:#c9a227
+    style N1 fill:#fff3cd,stroke:#c9a227
+`;export{e as default};

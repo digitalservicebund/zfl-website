@@ -1,0 +1,32 @@
+var e=`---
+summary: "Zeigt die Prüfung von Schadensersatz- und Entschädigungsansprüchen nach einem Verstoß gegen das AGG-Benachteiligungsverbot, einschließlich der Deckelung der Entschädigung und der zweimonatigen Frist zur Geltendmachung."
+---
+flowchart TD
+    A["Verstoß gegen das<br/>Benachteiligungsverbot im<br/>Beschäftigungsverhältnis<br/>— <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 Abs. 1</a>"] --> B{"Hat der Arbeitgeber die<br/>Pflichtverletzung zu vertreten?<br/>— <a href='{{ELI}}#art-z15_abs-z1' target='_blank' rel='noopener'>§15 Abs. 1</a>"}
+    B -->|Nein| Z0["Kein Schadensersatzanspruch"]
+    B -->|Ja| C["Ersatz des materiellen<br/>Schadens — <a href='{{ELI}}#art-z15_abs-z1' target='_blank' rel='noopener'>§15 Abs. 1</a>"]
+    C --> D{"Liegt zusätzlich ein<br/>immaterieller Schaden vor?<br/>— <a href='{{ELI}}#art-z15_abs-z2' target='_blank' rel='noopener'>§15 Abs. 2</a>"}
+    D -->|Nein| E["Weiter mit Frist zur<br/>Geltendmachung"]
+    D -->|Ja| F{"Wäre der/die Beschäftigte<br/>auch bei benachteiligungs-<br/>freier Auswahl nicht<br/>eingestellt worden?<br/>— <a href='{{ELI}}#art-z15_abs-z2' target='_blank' rel='noopener'>§15 Abs. 2 S. 2</a>"}
+    F -->|Ja| G["Entschädigung gedeckelt auf<br/>3 Monatsgehälter<br/>— <a href='{{ELI}}#art-z15_abs-z2' target='_blank' rel='noopener'>§15 Abs. 2 S. 2</a>"]
+    F -->|Nein| H["Angemessene Entschädigung<br/>ohne Deckelung<br/>— <a href='{{ELI}}#art-z15_abs-z2' target='_blank' rel='noopener'>§15 Abs. 2 S. 1</a>"]
+    G --> E
+    H --> E
+    E --> I{"Beruht der Verstoß auf einer<br/>kollektivrechtlichen<br/>Vereinbarung?<br/>— <a href='{{ELI}}#art-z15_abs-z3' target='_blank' rel='noopener'>§15 Abs. 3</a>"}
+    I -->|Ja| J{"Handelte der Arbeitgeber<br/>vorsätzlich oder grob<br/>fahrlässig?<br/>— <a href='{{ELI}}#art-z15_abs-z3' target='_blank' rel='noopener'>§15 Abs. 3</a>"}
+    J -->|Nein| Z1["Keine Entschädigungspflicht"]
+    J -->|Ja| K
+    I -->|Nein| K["Frist: Anspruch innerhalb<br/>von 2 Monaten schriftlich<br/>geltend machen<br/>— <a href='{{ELI}}#art-z15_abs-z4' target='_blank' rel='noopener'>§15 Abs. 4 S. 1</a>"]
+    K --> L{"Fristbeginn: Bewerbung/<br/>beruflicher Aufstieg oder<br/>sonstige Benachteiligung?<br/>— <a href='{{ELI}}#art-z15_abs-z4' target='_blank' rel='noopener'>§15 Abs. 4 S. 2</a>"}
+    L -->|"Bewerbung/Aufstieg"| M["Frist beginnt mit Zugang<br/>der Ablehnung"]
+    L -->|"Sonstige<br/>Benachteiligung"| N["Frist beginnt mit Kenntnis<br/>von der Benachteiligung"]
+    M --> O{"Innerhalb der 2-Monats-Frist<br/>schriftlich geltend gemacht?"}
+    N --> O
+    O -->|Nein| Z2["Anspruch ausgeschlossen<br/>(sofern Tarifvertrag nichts<br/>anderes regelt)"]
+    O -->|Ja| Z3["Anspruch besteht — begründet<br/>aber keinen Anspruch auf<br/>Einstellung/Aufstieg selbst<br/>— <a href='{{ELI}}#art-z15_abs-z6' target='_blank' rel='noopener'>§15 Abs. 6</a>"]
+
+    style Z0 fill:#f8d7da,stroke:#c0392b
+    style Z1 fill:#f8d7da,stroke:#c0392b
+    style Z2 fill:#f8d7da,stroke:#c0392b
+    style Z3 fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};

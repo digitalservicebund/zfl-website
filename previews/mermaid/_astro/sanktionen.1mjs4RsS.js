@@ -1,0 +1,29 @@
+var e=`---
+summary: "Zeigt die Sanktionsfolgen bei Verstößen gegen Berichts- und Abgabepflichten im Brennstoffemissionshandel, von der Kontosperrung bei fehlendem Emissionsbericht über die Zahlungspflicht bei fehlenden Zertifikaten bis zu möglichen Bußgeldern wegen Ordnungswidrigkeiten."
+---
+flowchart TD
+    A["Einführungsphase (Festpreisverkauf)<br/>nach §10 Abs. 2 S. 1, 2 ist beendet"] --> B{"Ist der Verantwortliche seiner<br/>Berichtspflicht nach §7 Abs. 1<br/>nachgekommen?<br/>— <a href='{{ELI}}/art-z20' target='_blank' rel='noopener'>§20 S. 1</a>"}
+    B -->|Nein| C["Zuständige Behörde sperrt das<br/>Konto im nationalen<br/>Emissionshandelsregister<br/>— <a href='{{ELI}}/art-z20' target='_blank' rel='noopener'>§20 S. 1</a>"]
+    C --> D{"Emissionsbericht nachgereicht<br/>und als ausreichend anerkannt,<br/>oder Schätzung nach §21 Abs. 2<br/>erfolgt?<br/>— <a href='{{ELI}}/art-z20' target='_blank' rel='noopener'>§20 S. 2</a>"}
+    D -->|Nein| C
+    D -->|Ja| E["Kontosperrung wird aufgehoben<br/>— <a href='{{ELI}}/art-z20' target='_blank' rel='noopener'>§20 S. 2</a>"]
+    B -->|Ja| F
+    E --> F{"Wurden ausreichend<br/>Emissionszertifikate nach §8<br/>abgegeben?<br/>— <a href='{{ELI}}#art-z21_abs-z1' target='_blank' rel='noopener'>§21 Abs. 1 S. 1</a>"}
+    F -->|Ja| Z1["Keine Sanktion nach §21"]
+    F -->|Nein| G{"Konnte der Verantwortliche wegen<br/>höherer Gewalt nicht abgeben?<br/>— <a href='{{ELI}}#art-z21_abs-z1' target='_blank' rel='noopener'>§21 Abs. 1 S. 3</a>"}
+    G -->|Ja| H["Von Leistungsbescheid kann<br/>abgesehen werden<br/>— <a href='{{ELI}}#art-z21_abs-z1' target='_blank' rel='noopener'>§21 Abs. 1 S. 3</a>"]
+    G -->|Nein| I["Zahlungspflicht je fehlender<br/>Tonne CO2: Doppelter Festpreis<br/>(Einführungsphase) bzw. Zahlungs-<br/>pflicht nach §46 Abs. 1 TEHG<br/>— <a href='{{ELI}}#art-z21_abs-z1' target='_blank' rel='noopener'>§21 Abs. 1 S. 1, 2</a>"]
+    I --> J["Fehlende Zertifikate zusätzlich<br/>bis 30. September des Folgejahres<br/>abzugeben<br/>— <a href='{{ELI}}#art-z21_abs-z3' target='_blank' rel='noopener'>§21 Abs. 3</a>"]
+    J --> K{"Liegt zugleich ein vorsätzlicher<br/>oder fahrlässiger Verstoß gegen<br/>Berichts-, Überwachungsplan-,<br/>Auskunfts- oder Anzeigepflichten<br/>vor?<br/>— <a href='{{ELI}}/art-z22' target='_blank' rel='noopener'>§22 Abs. 1, 3</a>"}
+    K -->|"Verstoß gegen<br/>Berichtspflicht §7 Abs. 1"| L["Ordnungswidrigkeit: Bußgeld<br/>bis 500.000 Euro<br/>— <a href='{{ELI}}#art-z22_abs-z1' target='_blank' rel='noopener'>§22 Abs. 1</a>, <a href='{{ELI}}#art-z22_abs-z4' target='_blank' rel='noopener'>Abs. 4 S. 1</a>"]
+    K -->|"Verstoß gegen §6 Abs. 1/4,<br/>§14 Abs. 2 oder §18 Abs. 1"| M["Ordnungswidrigkeit: Bußgeld<br/>bis 50.000 Euro<br/>— <a href='{{ELI}}#art-z22_abs-z3' target='_blank' rel='noopener'>§22 Abs. 3</a>, <a href='{{ELI}}#art-z22_abs-z4' target='_blank' rel='noopener'>Abs. 4 S. 1</a>"]
+    K -->|Nein| Z2["Keine Ordnungswidrigkeit"]
+
+    style Z1 fill:#d4edda,stroke:#2d8a4a
+    style Z2 fill:#d4edda,stroke:#2d8a4a
+    style H fill:#fff3cd,stroke:#c9a227
+    style C fill:#f8d7da,stroke:#c0392b
+    style I fill:#f8d7da,stroke:#c0392b
+    style L fill:#f8d7da,stroke:#c0392b
+    style M fill:#f8d7da,stroke:#c0392b
+`;export{e as default};

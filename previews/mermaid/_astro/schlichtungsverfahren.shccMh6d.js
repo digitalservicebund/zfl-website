@@ -1,0 +1,26 @@
+var e=`---
+summary: "Zeigt das Schlichtungsverfahren nach dem LuftVG für Zahlungsansprüche von Fluggästen gegen Luftfahrtunternehmen, von der Zuständigkeitsprüfung über die Wahl der privaten oder behördlichen Schlichtungsstelle bis zum Schlichtungsergebnis."
+---
+flowchart TD
+    A["Fluggast (Verbraucher) will<br/>Zahlungsanspruch aus<br/>Luftbeförderung gegen<br/>Luftfahrtunternehmen klären<br/>— <a href='{{ELI}}#art-z57b_abs-z1' target='_blank' rel='noopener'>§57b Abs. 1</a>"] --> B{"Betrifft der Anspruch<br/>Nichtbeförderung/Verspätung/<br/>Herabstufung/Annullierung,<br/>Gepäckschäden, mitgeführte<br/>Sachen oder Pflichtverletzungen<br/>ggü. mobilitätseingeschränkten<br/>Fluggästen — und liegt er<br/>bei bis zu 5 000 Euro?<br/>— <a href='{{ELI}}#art-z57b_abs-z1' target='_blank' rel='noopener'>§57b Abs. 1 S. 1</a>"}
+    B -->|"Nein, aber über<br/>5 000 Euro und Verfahrens-<br/>ordnung sieht es vor"| C
+    B -->|"Nein, sonst"| Z1["Keine Schlichtung nach<br/>§57/§57a möglich —<br/>nur Klageweg"]
+    B -->|Ja| C{"Liegt ein Ausschlussgrund vor<br/>(u.a. keine dt. Gerichts-<br/>zuständigkeit, bereits<br/>rechtshängig, im Verbands-<br/>klageregister angemeldet,<br/>bereits bei zuständiger<br/>Schlichtungsstelle anhängig,<br/>missbräuchlich, Anspruch<br/>nicht zuerst dem Unternehmen<br/>gegenüber geltend gemacht,<br/>oder Anspruch ≤ 10 Euro)?<br/>— <a href='{{ELI}}#art-z57b_abs-z2' target='_blank' rel='noopener'>§57b Abs. 2</a>"}
+    C -->|Ja| Z1
+    C -->|Nein| D{"Nimmt das Luftfahrtunternehmen<br/>an einer anerkannten privat-<br/>rechtlich organisierten<br/>Schlichtungsstelle teil?<br/>— <a href='{{ELI}}#art-z57_abs-z3' target='_blank' rel='noopener'>§57 Abs. 3</a>"}
+    D -->|Ja| E["Anrufung der privatrechtlich<br/>organisierten Schlichtungsstelle<br/>— <a href='{{ELI}}/art-z57' target='_blank' rel='noopener'>§57</a>"]
+    D -->|Nein| F["Anrufung der behördlichen<br/>Schlichtungsstelle beim<br/>Bundesamt für Justiz<br/>— <a href='{{ELI}}#art-z57a_abs-z1' target='_blank' rel='noopener'>§57a Abs. 1</a>"]
+    E --> G{"Betrifft die Streitigkeit eine<br/>ungeklärte grundsätzliche<br/>Rechtsfrage?<br/>— <a href='{{ELI}}#art-z57b_abs-z3' target='_blank' rel='noopener'>§57b Abs. 3</a>"}
+    F --> G
+    G -->|Ja| H["Schlichtungsstelle kann die<br/>Schlichtung ablehnen<br/>— <a href='{{ELI}}#art-z57b_abs-z3' target='_blank' rel='noopener'>§57b Abs. 3</a>"]
+    G -->|Nein| I["Schlichtungsverfahren wird<br/>durchgeführt"]
+    H --> J
+    I --> J{"Wird der Anspruch während<br/>des Verfahrens gerichtlich<br/>rechtshängig gemacht?<br/>— <a href='{{ELI}}#art-z57b_abs-z2' target='_blank' rel='noopener'>§57b Abs. 2 S. 2</a>"}
+    J -->|Ja| Z2["Schlichtung wird unzulässig"]
+    J -->|Nein| Z3["Schlichtungsergebnis liegt vor<br/>— Recht auf Klage bleibt<br/>daneben unberührt<br/>— <a href='{{ELI}}#art-z57b_abs-z4' target='_blank' rel='noopener'>§57b Abs. 4</a>"]
+
+    style Z1 fill:#fff3cd,stroke:#c9a227
+    style Z2 fill:#f8d7da,stroke:#c0392b
+    style Z3 fill:#d4edda,stroke:#2d8a4a
+    style H fill:#fff3cd,stroke:#c9a227
+`;export{e as default};

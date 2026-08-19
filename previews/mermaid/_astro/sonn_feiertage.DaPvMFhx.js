@@ -1,0 +1,39 @@
+var e=`---
+summary: "Zeigt, unter welchen Voraussetzungen eine Beschäftigung an Sonn- und Feiertagen nach dem ArbZG zulässig ist und welcher Ersatzruhetag sowie welche Mindestzahl beschäftigungsfreier Sonntage im Jahr einzuhalten sind."
+---
+flowchart TD
+    START["Geplante Beschäftigung<br/>eines Arbeitnehmers"] --> Q1{"Liegt der Einsatz an einem<br/>Sonntag oder gesetzlichen<br/>Feiertag (0-24 Uhr)? — <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 I</a>"}
+
+    Q1 -->|Nein| ZUL["Zulässig - allgemeine<br/>Werktagsregeln gelten"]
+
+    Q1 -->|Ja| Q2{"Fällt die Tätigkeit unter einen<br/>Ausnahmetatbestand des Katalogs<br/>(z.B. Not-/Rettungsdienst, Kranken-<br/>haus, Gaststätte, Energie-/Wasser-<br/>versorgung, Rundfunk u.a.)? — <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>§10 I</a>"}
+
+    Q2 -->|Nein| VERBOTEN["Beschäftigung unzulässig"]
+
+    Q2 -->|Ja| Q3{"Können die Arbeiten<br/>an Werktagen vorgenommen<br/>werden? — <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>§10 I</a>"}
+
+    Q3 -->|Ja| VERBOTEN
+
+    Q3 -->|Nein| Q4{"Beschäftigung an einem<br/>Sonntag (statt an einem<br/>Feiertag)? — <a href='{{ELI}}#art-z11_abs-z3' target='_blank' rel='noopener'>§11 III</a>"}
+
+    Q4 -->|Ja| ERSATZ_SO["Ersatzruhetag innerhalb eines<br/>den Beschäftigungstag einschlie-<br/>ßenden Zeitraums von 2 Wochen — <a href='{{ELI}}#art-z11_abs-z3' target='_blank' rel='noopener'>§11 III S.1</a>"]
+
+    Q4 -->|Nein, Feiertag<br/>auf Werktag| ERSATZ_FT["Ersatzruhetag innerhalb eines<br/>den Beschäftigungstag einschlie-<br/>ßenden Zeitraums von 8 Wochen — <a href='{{ELI}}#art-z11_abs-z3' target='_blank' rel='noopener'>§11 III S.2</a>"]
+
+    ERSATZ_SO --> Q5{"Bleiben mindestens 15 Sonntage<br/>im Jahr beschäftigungsfrei? — <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I</a>"}
+
+    Q5 -->|Ja| KOMBI["Ersatzruhetag ist unmittelbar<br/>mit einer Ruhezeit nach §5 zu<br/>verbinden, soweit technisch/<br/>organisatorisch möglich — <a href='{{ELI}}#art-z11_abs-z4' target='_blank' rel='noopener'>§11 IV</a>"]
+
+    Q5 -->|Nein| UNZUL_JAHR["Unzulässig: Jahresmindest-<br/>zahl beschäftigungsfreier<br/>Sonntage unterschritten"]
+
+    ERSATZ_FT --> KOMBI
+
+    KOMBI --> OK["Sonn-/Feiertags-<br/>beschäftigung und Ausgleich<br/>ordnungsgemäß"]
+
+    style ZUL fill:#d4edda,stroke:#2d8a4a
+    style OK fill:#d4edda,stroke:#2d8a4a
+    style VERBOTEN fill:#f8d7da,stroke:#c0392b
+    style UNZUL_JAHR fill:#f8d7da,stroke:#c0392b
+    style ERSATZ_SO fill:#fff3cd,stroke:#c9a227
+    style ERSATZ_FT fill:#fff3cd,stroke:#c9a227
+`;export{e as default};
