@@ -6,6 +6,7 @@
     mermaidFlowchartToRulemapXml,
   } from "./_mermaid2RulemapXML.ts";
   import ChipBtn from "./_ChipBtn.svelte";
+  import LawFinder from "./_LawFinder.svelte";
   import IconZoomIn from "~icons/ic/outline-zoom-in";
   import IconZoomOut from "~icons/ic/outline-zoom-out";
   import IconRestartAlt from "~icons/ic/outline-restart-alt";
@@ -55,13 +56,8 @@
   const initialVisualization = initialSearchParams.get("visualization");
   let hasAppliedInitialVisualization = false;
 
-  let selectedTitle = $state(
-    examples.find((example) => example.short === initialNorm)?.title ??
-      examples[0]?.title,
-  );
-
-  let selectedExample = $derived(
-    examples.find((example) => example.title === selectedTitle),
+  let selectedExample = $state(
+    examples.find((example) => example.short === initialNorm) ?? examples[0],
   );
 
   let selectedType = $state<string>();
@@ -276,33 +272,23 @@
   });
 </script>
 
-<div class="space-y-24 min-h-[50vh]">
-  <div class="kern-form-input">
-    <label class="kern-label" for="gesetz">Gesetz</label>
-    <div class="kern-form-input__select-wrapper">
-      <select
-        class="kern-form-input__select"
-        id="gesetz"
-        bind:value={selectedTitle}
-      >
-        {#each examples as example (example.title)}
-          <option value={example.title}
-            >{example.title} ({example.short})</option
-          >
-        {/each}
-      </select>
-    </div>
-  </div>
+<div class="space-y-32 min-h-[50vh]">
+  <LawFinder {examples} bind:selected={selectedExample} />
   {#if selectedExample}
-    <div class="flex flex-wrap gap-8">
-      {#each selectedExample.visOptions as option (option.name)}
-        <ChipBtn
-          selected={option.name === selectedType}
-          onclick={() => (selectedType = option.name)}
-        >
-          {option.name}
-        </ChipBtn>
-      {/each}
+    <div>
+      <span class="kern-label"
+        >Welchen Teilbereich möchten Sie visualisieren?</span
+      >
+      <div class="mt-8 flex flex-wrap gap-8">
+        {#each selectedExample.visOptions as option (option.name)}
+          <ChipBtn
+            selected={option.name === selectedType}
+            onclick={() => (selectedType = option.name)}
+          >
+            {option.name}
+          </ChipBtn>
+        {/each}
+      </div>
     </div>
   {/if}
   {#if isLoading}
