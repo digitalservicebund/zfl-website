@@ -95,7 +95,7 @@ fileignoreconfig:
   - filename: src/pages/werkzeuge/visualisieren/_data/EinbTestV/datenverarbeitung.mmd
     ignore_detectors: [filename]
   - filename: src/pages/werkzeuge/visualisieren/_data/BKleingG/pachthoehe.mmd
-    checksum: 026695cd3ce59c3bd186baad3a31d15437e5132853b0ca6fd95aa331bdc04aa9
+    checksum: 4ef525f5b449fc5f5863fbc1964e4ecdae41363aabf295290f6ad825956dc1fd
   - filename: src/pages/werkzeuge/visualisieren/_mermaid2RulemapXML.ts
     checksum: 01019ab0f49d7695a85a1e669ccca19f15620f8c6908a96eaa41c7a823a8e9f5
   - filename: src/pages/werkzeuge/visualisieren/_LawFinder.svelte

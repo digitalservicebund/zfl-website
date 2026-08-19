@@ -68,7 +68,24 @@ hergibt) und benenne jeden kurz und prägnant (2-4 Wörter, wie oben).
 ## Schritt 4 — Mermaid-Diagramme erstellen und speichern
 
 Für jeden identifizierten Prozess ein `flowchart TD`-Diagramm erstellen.
-Stilkonventionen (siehe existierende Dateien unter
+Jede `.mmd`-Datei beginnt mit einem Frontmatter-Block (Repo-Konvention, keine
+Mermaid-Syntax — wird von `_mmdFrontmatter.ts` vor dem Rendern entfernt) mit
+einem `summary`-Feld: 1-2 Sätze, die den visualisierten Prozess beschreiben
+(erscheint im Wizard unter den Auswahl-Chips). Format:
+
+```
+---
+summary: "Kurze Zusammenfassung des Diagramms in ein bis zwei Sätzen."
+---
+flowchart TD
+    ...
+```
+
+Der Summary-Text muss auf einer einzigen Zeile stehen (keine `<br/>` oder
+echte Zeilenumbrüche), in doppelten Anführungszeichen; enthaltene `"` als
+`\"` und `\` als `\\` escapen.
+
+Stilkonventionen für das Diagramm selbst (siehe existierende Dateien unter
 `src/pages/werkzeuge/visualisieren/_data/{Abkuerzung}/*.mmd` für Beispiele):
 
 - Knotenlabels in doppelten Anführungszeichen, Zeilenumbrüche mit `<br/>`
@@ -102,8 +119,8 @@ Speichern:
    `src/pages/werkzeuge/visualisieren/_data/{Abkuerzung}/{slug}.mmd`
    an (`Abkuerzung` = amtliche Abkürzung des Gesetzes, z.B. `KSchG`;
    `slug` = kurzer, kebab-freier snake_case-Bezeichner ohne Abkürzungspräfix,
-   z.B. `KSchG/klagefristen.mmd`). Nur den reinen Mermaid-Code
-   hineinschreiben, keine Markdown-Codefences.
+   z.B. `KSchG/klagefristen.mmd`). Frontmatter-Block (siehe oben) gefolgt
+   vom reinen Mermaid-Code hineinschreiben, keine Markdown-Codefences.
 2. Ergänze `src/pages/werkzeuge/visualisieren/_data/{Abkuerzung}.yaml`:
    - Falls das Gesetz dort noch keine Metadaten-Datei hat, eine neue Datei
      `{Abkuerzung}.yaml` (identisch zum Ordnernamen aus Schritt 1, z.B.

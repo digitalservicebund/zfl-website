@@ -7,6 +7,7 @@
     isMermaidFlowchart,
     mermaidFlowchartToRulemapXml,
   } from "./_mermaid2RulemapXML.ts";
+  import { parseMmdFrontmatter } from "./_mmdFrontmatter.ts";
   import ChipBtn from "./_ChipBtn.svelte";
   import LawFinder from "./_LawFinder.svelte";
   import Viewer from "./_Viewer.svelte";
@@ -169,6 +170,7 @@
   });
 
   let mermaidSource = $state("");
+  let summary = $state("");
   let diagramSvg = $state("");
   let isLoading = $state(false);
   let viewerOpen = $state(false);
@@ -177,6 +179,7 @@
   $effect(() => {
     if (!selectedExample || !selectedOption) {
       mermaidSource = "";
+      summary = "";
       isLoading = false;
       return;
     }
@@ -195,7 +198,10 @@
     );
 
     Promise.all([mermaidSources[path](), fakeDelay]).then(([source]) => {
-      if (!cancelled) mermaidSource = resolveNormLinks(source, eli);
+      if (cancelled) return;
+      const parsed = parseMmdFrontmatter(resolveNormLinks(source, eli));
+      summary = parsed.summary;
+      mermaidSource = parsed.body;
     });
 
     return () => {
@@ -469,6 +475,8 @@
         {/if}
         {#if isLoadingVisOptions || isLoading}
           {@render loadingIndicator()}
+        {:else if summary}
+          <div class="kern-body kern-body--muted">{summary}</div>
         {/if}
       {/if}
     </div>
@@ -476,7 +484,10 @@
       {@render buttons()}
     {/if}
   </div>
-  <div class="w-full h-700 min-w-0 flex justify-center items-center">
+  <div
+    class="w-full h-(--preview-height) min-w-0 flex justify-center items-center"
+    style="--preview-height: calc(100vh - 128px);"
+  >
     {#if isLoading}
       <div
         class="flex w-full h-full items-center justify-center bg-lavender-200 p-16"
@@ -515,6 +526,6 @@
     width: auto;
     height: auto;
     max-width: 100%;
-    height: 700px;
+    height: var(--preview-height);
   }
 </style>
