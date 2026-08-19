@@ -5,6 +5,7 @@
     isMermaidFlowchart,
     mermaidFlowchartToRulemapXml,
   } from "./_mermaid2RulemapXML.ts";
+  import ChipBtn from "./_ChipBtn.svelte";
   import IconZoomIn from "~icons/ic/outline-zoom-in";
   import IconZoomOut from "~icons/ic/outline-zoom-out";
   import IconRestartAlt from "~icons/ic/outline-restart-alt";
@@ -293,19 +294,15 @@
     </div>
   </div>
   {#if selectedExample}
-    <div class="kern-form-input">
-      <label class="kern-label" for="darstellung">Darstellung</label>
-      <div class="kern-form-input__select-wrapper">
-        <select
-          class="kern-form-input__select"
-          id="darstellung"
-          bind:value={selectedType}
+    <div class="flex flex-wrap gap-8">
+      {#each selectedExample.visOptions as option (option.name)}
+        <ChipBtn
+          selected={option.name === selectedType}
+          onclick={() => (selectedType = option.name)}
         >
-          {#each selectedExample.visOptions as option (option.name)}
-            <option value={option.name}>{option.name}</option>
-          {/each}
-        </select>
-      </div>
+          {option.name}
+        </ChipBtn>
+      {/each}
     </div>
   {/if}
   {#if isLoading}
