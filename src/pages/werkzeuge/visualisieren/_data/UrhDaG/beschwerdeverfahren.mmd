@@ -1,0 +1,25 @@
+---
+summary: "Beschreibt den Ablauf des internen Beschwerdeverfahrens gegen Blockierung oder öffentliche Wiedergabe, einschließlich der Ausnahme für vertrauenswürdige Rechtsinhaber und der Wochenfrist zur Entscheidung."
+---
+flowchart TD
+    A["Nutzer oder Rechtsinhaber legt<br/>Beschwerde gegen Blockierung oder<br/>öffentliche Wiedergabe ein —<br/><a href='{{ELI}}#art-z14_abs-z1' target='_blank' rel='noopener'>§14 I</a>"] --> B{"Beschwerde<br/>begründet? —<br/><a href='{{ELI}}#art-z14_abs-z2' target='_blank' rel='noopener'>§14 II</a>"}
+
+    B -->|Nein| Z1["Beschwerde unzulässig,<br/>keine weitere Prüfung"]
+    B -->|Ja| C["Diensteanbieter teilt Beschwerde<br/>unverzüglich allen Beteiligten mit<br/>und gibt Gelegenheit zur<br/>Stellungnahme — <a href='{{ELI}}#art-z14_abs-z3' target='_blank' rel='noopener'>§14 III Nr.1-2</a>"]
+
+    C --> D{"Vertrauenswürdiger Rechtsinhaber<br/>erklärt nach Prüfung durch natürliche<br/>Person, Vermutung nach<br/><a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II</a> sei<br/>widerlegt und Verwertung erheblich<br/>beeinträchtigt? — <a href='{{ELI}}#art-z14_abs-z4' target='_blank' rel='noopener'>§14 IV</a>"}
+
+    D -->|Ja| E["Sofortige Blockierung bis zum<br/>Abschluss des Beschwerdeverfahrens<br/>(abweichend von<br/><a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 I</a>) —<br/><a href='{{ELI}}#art-z14_abs-z4' target='_blank' rel='noopener'>§14 IV</a>"]
+    D -->|Nein| F["Inhalt bleibt bis zur<br/>Entscheidung verfügbar"]
+
+    E --> G["Entscheidung durch unparteiische<br/>natürliche Person —<br/><a href='{{ELI}}#art-z14_abs-z5' target='_blank' rel='noopener'>§14 V</a>"]
+    F --> G
+
+    G --> H{"Entscheidung innerhalb einer<br/>Woche nach Einlegung? —<br/><a href='{{ELI}}#art-z14_abs-z3' target='_blank' rel='noopener'>§14 III Nr.3</a>"}
+
+    H -->|Ja| Z2["Endgültige Entscheidung über<br/>Blockierung oder Freigabe"]
+    H -->|Nein| Z3["Fristverstoß: Verletzung der<br/>Pflicht zum zügigen<br/>Beschwerdeverfahren — <a href='{{ELI}}#art-z14_abs-z1' target='_blank' rel='noopener'>§14 I</a>"]
+
+    style Z1 fill:#f5f5f5,stroke:#999
+    style Z2 fill:#d4edda,stroke:#2d8a4a
+    style Z3 fill:#f8d7da,stroke:#c0392b

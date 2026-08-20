@@ -1,0 +1,21 @@
+---
+summary: "Zeigt die Voraussetzungen und Zuständigkeit der außergerichtlichen Streitbeilegung durch private oder – subsidiär – behördliche Schlichtungsstellen nach vorherigem internen Beschwerdeverfahren."
+---
+flowchart TD
+    A["Rechtsinhaber oder Nutzer will Streit über<br/>Blockierung, öffentliche Wiedergabe oder<br/>Auskunftsrechte (<a href='{{ELI}}/art-z19' target='_blank' rel='noopener'>§19</a>) außergerichtlich<br/>beilegen"] --> B{"Zuvor internes Beschwerde-<br/>verfahren (<a href='{{ELI}}/art-z14' target='_blank' rel='noopener'>§14</a>) durchgeführt oder<br/>Überprüfung durch externe<br/>Beschwerdestelle (<a href='{{ELI}}/art-z15' target='_blank' rel='noopener'>§15</a>) erfolgt? —<br/><a href='{{ELI}}#art-z16_abs-z3' target='_blank' rel='noopener'>§16 III Nr.1</a>"}
+
+    B -->|Nein| Z1["Schlichtungsstelle darf<br/>noch nicht angerufen werden"]
+    B -->|Ja| C{"Steht eine anerkannte<br/>privatrechtlich organisierte<br/>Schlichtungsstelle zur Verfügung? —<br/><a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 I</a>, <a href='{{ELI}}#art-z17_abs-z2' target='_blank' rel='noopener'>§17 II</a>"}
+
+    C -->|Ja| D["Private Schlichtungsstelle<br/>ist zuständig — <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 I</a>"]
+    C -->|Nein| E["Behördliche Schlichtungsstelle beim<br/>Bundesamt für Justiz ist zuständig —<br/><a href='{{ELI}}#art-z17_abs-z1' target='_blank' rel='noopener'>§17 I</a>"]
+
+    D --> F{"Diensteanbieter nimmt an<br/>der Schlichtung teil? —<br/><a href='{{ELI}}#art-z16_abs-z3' target='_blank' rel='noopener'>§16 III Nr.2</a>"}
+    E --> F
+
+    F -->|Nein| Z2["Schlichtungsverfahren findet<br/>nicht statt; ordentlicher<br/>Rechtsweg bleibt offen"]
+    F -->|Ja| Z3["Schlichtungsverfahren wird<br/>durchgeführt; Parteien können<br/>eine Einigung erzielen"]
+
+    style Z1 fill:#fff3cd,stroke:#c9a227
+    style Z2 fill:#f8d7da,stroke:#c0392b
+    style Z3 fill:#d4edda,stroke:#2d8a4a
