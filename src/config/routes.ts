@@ -220,6 +220,17 @@ export const werkzeuge = {
   navLabel: null,
 } as const;
 
+export const werkzeuge_digitaltauglichkeit = {
+  key: "werkzeuge_digitaltauglichkeit",
+  path: "/werkzeuge/digitaltauglichkeit",
+  title: "Beispiele für Digitaltauglichkeit im Regelungstext",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: "Digitaltauglichkeit",
+} as const;
+
 export const werkzeuge_praxistauglichkeit = {
   key: "werkzeuge_praxistauglichkeit",
   path: "/werkzeuge/praxistauglichkeit",
@@ -251,5 +262,6 @@ export const allRoutes = [
   ueber_neueFruehphase,
   ueber_zahlenUndFakten,
   werkzeuge,
+  werkzeuge_digitaltauglichkeit,
   werkzeuge_praxistauglichkeit,
 ] as const;
