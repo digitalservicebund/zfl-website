@@ -97,6 +97,9 @@ allowed_patterns:
   - "route key"
   - RouteMetaKey
   - childKey
+  - enterkeyhint
+  - event\.key
+  - shiftKey
   - parentKey
   - getRouteByKey
   - keydown

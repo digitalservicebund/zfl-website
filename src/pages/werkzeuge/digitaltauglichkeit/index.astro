@@ -6,6 +6,7 @@ import PrinzipBadge from "@/components/PrinzipBadge.astro";
 import AspectSection from "./_AspectSection.astro";
 import PrinzipSection from "./_PrinzipSection.astro";
 import { ZFL_EMAIL } from "@/config/constants";
+import PageSearch from "@/components/search/PageSearch.astro";
 
 export const frontmatter = {
   title: "Beispiele für Digitaltauglichkeit im Regelungstext",
@@ -39,7 +40,7 @@ const description =
         stuck = false;
       "
     >
-      <div class="flex flex-col flex-wrap justify-between gap-16 lg:flex-row">
+      <div class="flex flex-col flex-wrap justify-between gap-32 lg:flex-row">
         <div class="flex flex-wrap items-center gap-8 lg:gap-16">
           <p class="kern-label my-0 py-0">Springen zu:</p>
           {
@@ -52,151 +53,160 @@ const description =
             ))
           }
         </div>
+        <PageSearch
+          keyboardShortcut
+          class="max-lg:hidden"
+          rootSelector="#content"
+        />
       </div>
     </div>
-    <PrinzipSection prinzip="1">
-      <h2 class="mt-16">Digitale Angebote für alle nutzbar gestalten</h2>
-      <p>
-        Eine Regelung gilt als erfolgreich digitalisiert, wenn Bürger und
-        Unternehmen Anträge intuitiv online stellen können, Behörden die Daten
-        systemübergreifend ohne manuelle Nacherfassung verarbeiten und
-        Digitaltauglichkeit von Anfang an mitgedacht wurde.
-      </p>
-      <a
-        href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/digitale-angebote-fuer-alle-nutzbar-gestalten"
-        >Mehr zum Prinzip beim Digitalcheck</a
-      >
-      <AspectSection>
-        <h3 id="digitale-kommunikation">Digitale Kommunikation</h3>
-        <AnnotatedArticle slug="BVerfGG/23a-1" />
-        <AnnotatedArticle slug="ZPO/1132-1" />
-      </AspectSection>
-      <AspectSection>
-        <h3 id="technologieoffenheit">Technologieoffenheit</h3>
-        <AnnotatedArticle slug="LuftVG/66a-5" />
-      </AspectSection>
-      <AspectSection>
-        <h3 id="antragsprozess-beachten">Antragsprozess beachten</h3>
-        <AnnotatedArticle slug="PostG/92" />
-      </AspectSection>
-      <AspectSection>
-        <h3 id="barrierefreiheit">Barrierefreiheit</h3>
-        <AnnotatedArticle slug="ZPO/1125-2" />
-      </AspectSection>
-      <AspectSection>
-        <h3 id="nutzerfreundlichkeit">Nutzerfreundlichkeit</h3>
-        <AnnotatedArticle slug="ZPO/1131-1" />
-      </AspectSection>
-    </PrinzipSection>
-    <PrinzipSection prinzip="2">
-      <h2>Datenwiederverwendung benötigt einheitliches Recht</h2>
-      <p>
-        Das <a
-          href="https://www.digitale-verwaltung.de/Webs/DV/DE/registermodernisierung/registermodernisierung-node.html"
-          >Once-Only-Prinzip</a
-        > spart Zeit und Kosten, indem Daten nur einmal angegeben und dann auf Basis
-        harmonisierter Rechtsbegriffe, Datenschutz und technischer Standards wiederverwendet
-        werden.
-      </p>
-      <a
-        href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/datenwiederverwendung-benoetigt-einheitliches-recht"
-        >Mehr zum Prinzip beim Digitalcheck</a
-      >
-      <AspectSection>
-        <h3 id="existierende-daten-nachnutzen">
-          Existierende Daten nachnutzen
-        </h3>
-        <AnnotatedArticle slug="PostG/93" />
-        <AnnotatedArticle slug="GWKHV/39-1" />
-      </AspectSection>
-      <AspectSection>
-        <h3 id="datennachnutzung-ermoeglichen">Datennachnutzung ermöglichen</h3>
-        <AnnotatedArticle slug="GWKHV/39-5" />
-        <AnnotatedArticle slug="PostG/11" />
-      </AspectSection>
-      <AspectSection>
-        <h3 id="technische-standards-nutzen">Technische Standards nutzen</h3>
-        <AnnotatedArticle slug="BVerfGG/23a-2" />
-        <AnnotatedArticle slug="ZPO/1131-5" />
-      </AspectSection>
-    </PrinzipSection>
-    <PrinzipSection prinzip="3">
-      <h2>Etablierte Technologien ermöglichen effiziente Umsetzung</h2>
-      <p>
-        Digitale Angebote lassen sich schneller, günstiger und sicherer
-        bereitstellen, wenn sie auf bestehenden Technologien, offenen
-        Schnittstellen und Open-Source aufbauen – was zugleich die
-        Interoperabilität fördert.
-      </p>
-      <a
-        href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/etablierte-technologien-ermoeglichen-effiziente-umsetzung"
-        >Mehr zum Prinzip beim Digitalcheck</a
-      >
-      <AspectSection>
-        <h3 id="vorhandene-loesungen">Vorhandene Lösungen</h3>
-        <AnnotatedArticle slug="ZPO/1132-1" />
-        <AnnotatedArticle slug="ZPO/1131-2" />
-      </AspectSection>
-      <AspectSection>
-        <h3 id="open-source-software">Open-Source-Software</h3>
-        <AnnotatedArticle slug="ZPO/1135-1" />
-        <AnnotatedArticle slug="ZPO/1125-1" />
-      </AspectSection>
-    </PrinzipSection>
-    <PrinzipSection prinzip="4">
-      <h2>Automatisierung basiert auf eindeutigen Regelungen</h2>
+    <div id="content" class="breakout">
+      <PrinzipSection prinzip="1">
+        <h2 class="mt-16">Digitale Angebote für alle nutzbar gestalten</h2>
+        <p>
+          Eine Regelung gilt als erfolgreich digitalisiert, wenn Bürger und
+          Unternehmen Anträge intuitiv online stellen können, Behörden die Daten
+          systemübergreifend ohne manuelle Nacherfassung verarbeiten und
+          Digitaltauglichkeit von Anfang an mitgedacht wurde.
+        </p>
+        <a
+          href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/digitale-angebote-fuer-alle-nutzbar-gestalten"
+          >Mehr zum Prinzip beim Digitalcheck</a
+        >
+        <AspectSection>
+          <h3 id="digitale-kommunikation">Digitale Kommunikation</h3>
+          <AnnotatedArticle slug="BVerfGG/23a-1" />
+          <AnnotatedArticle slug="ZPO/1132-1" />
+        </AspectSection>
+        <AspectSection>
+          <h3 id="technologieoffenheit">Technologieoffenheit</h3>
+          <AnnotatedArticle slug="LuftVG/66a-5" />
+        </AspectSection>
+        <AspectSection>
+          <h3 id="antragsprozess-beachten">Antragsprozess beachten</h3>
+          <AnnotatedArticle slug="PostG/92" />
+        </AspectSection>
+        <AspectSection>
+          <h3 id="barrierefreiheit">Barrierefreiheit</h3>
+          <AnnotatedArticle slug="ZPO/1125-2" />
+        </AspectSection>
+        <AspectSection>
+          <h3 id="nutzerfreundlichkeit">Nutzerfreundlichkeit</h3>
+          <AnnotatedArticle slug="ZPO/1131-1" />
+        </AspectSection>
+      </PrinzipSection>
+      <PrinzipSection prinzip="2">
+        <h2>Datenwiederverwendung benötigt einheitliches Recht</h2>
+        <p>
+          Das <a
+            href="https://www.digitale-verwaltung.de/Webs/DV/DE/registermodernisierung/registermodernisierung-node.html"
+            >Once-Only-Prinzip</a
+          > spart Zeit und Kosten, indem Daten nur einmal angegeben und dann auf Basis
+          harmonisierter Rechtsbegriffe, Datenschutz und technischer Standards wiederverwendet
+          werden.
+        </p>
+        <a
+          href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/datenwiederverwendung-benoetigt-einheitliches-recht"
+          >Mehr zum Prinzip beim Digitalcheck</a
+        >
+        <AspectSection>
+          <h3 id="existierende-daten-nachnutzen">
+            Existierende Daten nachnutzen
+          </h3>
+          <AnnotatedArticle slug="PostG/93" />
+          <AnnotatedArticle slug="GWKHV/39-1" />
+        </AspectSection>
+        <AspectSection>
+          <h3 id="datennachnutzung-ermoeglichen">
+            Datennachnutzung ermöglichen
+          </h3>
+          <AnnotatedArticle slug="GWKHV/39-5" />
+          <AnnotatedArticle slug="PostG/11" />
+        </AspectSection>
+        <AspectSection>
+          <h3 id="technische-standards-nutzen">Technische Standards nutzen</h3>
+          <AnnotatedArticle slug="BVerfGG/23a-2" />
+          <AnnotatedArticle slug="ZPO/1131-5" />
+        </AspectSection>
+      </PrinzipSection>
+      <PrinzipSection prinzip="3">
+        <h2>Etablierte Technologien ermöglichen effiziente Umsetzung</h2>
+        <p>
+          Digitale Angebote lassen sich schneller, günstiger und sicherer
+          bereitstellen, wenn sie auf bestehenden Technologien, offenen
+          Schnittstellen und Open-Source aufbauen – was zugleich die
+          Interoperabilität fördert.
+        </p>
+        <a
+          href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/etablierte-technologien-ermoeglichen-effiziente-umsetzung"
+          >Mehr zum Prinzip beim Digitalcheck</a
+        >
+        <AspectSection>
+          <h3 id="vorhandene-loesungen">Vorhandene Lösungen</h3>
+          <AnnotatedArticle slug="ZPO/1132-1" />
+          <AnnotatedArticle slug="ZPO/1131-2" />
+        </AspectSection>
+        <AspectSection>
+          <h3 id="open-source-software">Open-Source-Software</h3>
+          <AnnotatedArticle slug="ZPO/1135-1" />
+          <AnnotatedArticle slug="ZPO/1125-1" />
+        </AspectSection>
+      </PrinzipSection>
+      <PrinzipSection prinzip="4">
+        <h2>Automatisierung basiert auf eindeutigen Regelungen</h2>
 
-      <p>
-        Klare, logische und verständliche Regelungen – wie sie GGO und Handbuch
-        der Rechtsförmlichkeit vorschreiben – stärken das Vertrauen in den
-        Staat, ermöglichen automatisierte Verwaltungsprozesse und setzen dadurch
-        Ressourcen für komplexere Fälle frei.
-      </p>
+        <p>
+          Klare, logische und verständliche Regelungen – wie sie GGO und
+          Handbuch der Rechtsförmlichkeit vorschreiben – stärken das Vertrauen
+          in den Staat, ermöglichen automatisierte Verwaltungsprozesse und
+          setzen dadurch Ressourcen für komplexere Fälle frei.
+        </p>
 
-      <a
-        href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/automatisierung-basiert-auf-eindeutigen-regelungen"
-        >Mehr zum Prinzip beim Digitalcheck</a
-      >
-      <AspectSection>
-        <h3 id="bestehende-prozesse">Bestehende Prozesse</h3>
-        <AnnotatedArticle slug="LuftVG/66a-3" />
-      </AspectSection>
-      <AspectSection>
-        <h3 id="automatisierung">Automatisierung</h3>
-        <AnnotatedArticle slug="ZPO/1132-2" />
-        <AnnotatedArticle slug="LuftVG/66a-5-2" />
-        <AnnotatedArticle slug="PostG/5" />
-      </AspectSection>
-      <AspectSection>
-        <h3 id="unterscheidungen">Unterscheidungen</h3>
-        <AnnotatedArticle slug="PostG/4-3" />
-        <AnnotatedArticle slug="SGB VI/13a-4" />
-      </AspectSection>
-    </PrinzipSection>
-    <PrinzipSection prinzip="5">
-      <h2>Datenschutz und Informationssicherheit schaffen Vertrauen</h2>
-      <p>
-        Datenschutz nach DSGVO und Informationssicherheit schützen Menschen vor
-        unbefugtem Zugriff, stärken das Vertrauen in den Staat und werden durch
-        konsequente Datensparsamkeit erleichtert, die zugleich den
-        Erfüllungsaufwand reduziert.
-      </p>
-      <a
-        href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/datenschutz-und-informationssicherheit-schaffen-vertrauen"
-        >Mehr zum Prinzip beim Digitalcheck</a
-      >
-      <AspectSection>
-        <h3 id="datenschutz-beispiele">Datenschutz</h3>
-        <AnnotatedArticle slug="GWKHV/39-3" />
-        <AnnotatedArticle slug="BIPAM–ErrichtungsG/2" />
-        <AnnotatedArticle slug="URV/3a" />
-      </AspectSection>
-      <AspectSection>
-        <h3 id="informationssicherheit">Informationssicherheit</h3>
-        <AnnotatedArticle slug="LuftVG/66a-2" />
-        <AnnotatedArticle slug="BVerfGG/23a-3" />
-      </AspectSection>
-    </PrinzipSection>
+        <a
+          href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/automatisierung-basiert-auf-eindeutigen-regelungen"
+          >Mehr zum Prinzip beim Digitalcheck</a
+        >
+        <AspectSection>
+          <h3 id="bestehende-prozesse">Bestehende Prozesse</h3>
+          <AnnotatedArticle slug="LuftVG/66a-3" />
+        </AspectSection>
+        <AspectSection>
+          <h3 id="automatisierung">Automatisierung</h3>
+          <AnnotatedArticle slug="ZPO/1132-2" />
+          <AnnotatedArticle slug="LuftVG/66a-5-2" />
+          <AnnotatedArticle slug="PostG/5" />
+        </AspectSection>
+        <AspectSection>
+          <h3 id="unterscheidungen">Unterscheidungen</h3>
+          <AnnotatedArticle slug="PostG/4-3" />
+          <AnnotatedArticle slug="SGB VI/13a-4" />
+        </AspectSection>
+      </PrinzipSection>
+      <PrinzipSection prinzip="5">
+        <h2>Datenschutz und Informationssicherheit schaffen Vertrauen</h2>
+        <p>
+          Datenschutz nach DSGVO und Informationssicherheit schützen Menschen
+          vor unbefugtem Zugriff, stärken das Vertrauen in den Staat und werden
+          durch konsequente Datensparsamkeit erleichtert, die zugleich den
+          Erfüllungsaufwand reduziert.
+        </p>
+        <a
+          href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/datenschutz-und-informationssicherheit-schaffen-vertrauen"
+          >Mehr zum Prinzip beim Digitalcheck</a
+        >
+        <AspectSection>
+          <h3 id="datenschutz-beispiele">Datenschutz</h3>
+          <AnnotatedArticle slug="GWKHV/39-3" />
+          <AnnotatedArticle slug="BIPAM–ErrichtungsG/2" />
+          <AnnotatedArticle slug="URV/3a" />
+        </AspectSection>
+        <AspectSection>
+          <h3 id="informationssicherheit">Informationssicherheit</h3>
+          <AnnotatedArticle slug="LuftVG/66a-2" />
+          <AnnotatedArticle slug="BVerfGG/23a-3" />
+        </AspectSection>
+      </PrinzipSection>
+    </div>
     <Hero level="root">
       <h2>Sie möchten Ihr Beispiel hier sehen?</h2>
       <p>

@@ -1,0 +1,110 @@
+---
+import { twMerge } from "tailwind-merge";
+import SearchButton from "./SearchButton.astro";
+
+// Usage example:
+// <PageSearch />
+//
+// Lets users search the text of the current page's main content, similar to
+// the browser's built-in "find in page" (Ctrl+F). Clicking the toggle button
+// swaps it for a search input with a result count and prev/next/close
+// buttons, in the same spot.
+
+interface Props {
+  keyboardShortcut?: boolean;
+  class?: string;
+  /** CSS selector for the element whose text content should be searched. */
+  rootSelector?: string;
+}
+
+const {
+  keyboardShortcut = false,
+  class: className,
+  rootSelector = "main",
+} = Astro.props;
+---
+
+<page-search
+  class={twMerge("inline-flex min-h-48 items-center", className)}
+  root-selector={rootSelector}
+  {...keyboardShortcut ? { "keyboard-shortcut": "true" } : {}}
+>
+  <SearchButton
+    aria-expanded="false"
+    aria-controls="page-search-form"
+    data-page-search-toggle
+  >
+    <span class="kern-icon kern-icon--search" aria-hidden="true"></span>
+    <span class="kern-label">Seite durchsuchen</span>
+  </SearchButton>
+
+  <form
+    id="page-search-form"
+    class="flex flex-wrap items-center gap-8"
+    role="search"
+    hidden
+    data-page-search-form
+  >
+    <span
+      class="kern-body mr-16 whitespace-nowrap"
+      aria-live="polite"
+      data-page-search-count></span>
+    <div class="kern-form-input">
+      <label class="kern-label kern-sr-only" for="page-search-input"
+        >Suchbegriff</label
+      >
+      <input
+        id="page-search-input"
+        class="kern-form-input__input"
+        type="text"
+        placeholder="Suchbegriff eingeben"
+        autocomplete="off"
+        enterkeyhint="search"
+        data-page-search-input
+      />
+    </div>
+
+    <button
+      type="button"
+      class="kern-btn kern-btn--secondary kern-btn--x-small"
+      aria-label="Vorheriger Treffer"
+      disabled
+      data-page-search-prev
+    >
+      <span class="kern-icon kern-icon--arrow-up" aria-hidden="true"></span>
+    </button>
+
+    <button
+      type="button"
+      class="kern-btn kern-btn--secondary kern-btn--x-small"
+      aria-label="Nächster Treffer"
+      disabled
+      data-page-search-next
+    >
+      <span class="kern-icon kern-icon--arrow-down" aria-hidden="true"></span>
+    </button>
+
+    <button
+      type="button"
+      class="kern-btn kern-btn--secondary kern-btn--x-small"
+      aria-label="Suche schließen"
+      data-page-search-close
+    >
+      <span class="kern-icon kern-icon--close" aria-hidden="true"></span>
+    </button>
+  </form>
+</page-search>
+
+<style>
+  :global(mark.page-search__highlight) {
+    background-color: var(--color-orange-050);
+    color: inherit;
+  }
+
+  :global(mark.page-search__highlight--current) {
+    background-color: var(--color-cosmic-blue-base);
+    color: var(--color-white);
+  }
+</style>
+
+<script src="./PageSearch.ts"></script>

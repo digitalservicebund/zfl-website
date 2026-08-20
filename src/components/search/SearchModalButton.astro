@@ -1,0 +1,51 @@
+---
+import SearchButton from "./SearchButton.astro";
+
+interface Props {
+  class?: string;
+  instance?: string;
+  keyboardToggle?: boolean;
+}
+
+const { class: className, instance, keyboardToggle } = Astro.props;
+---
+
+<custom-modal-trigger
+  instance={instance}
+  {...keyboardToggle ? { "keyboard-toggle": "true" } : {}}
+>
+  <SearchButton class={className} keyboardToggle={keyboardToggle} />
+</custom-modal-trigger>
+
+<script>
+  import { getInstanceManager } from "@pagefind/component-ui";
+  import type { PagefindModal } from "@pagefind/component-ui";
+
+  class CustomModalTrigger extends HTMLElement {
+    toggleModal() {
+      const instanceName = this.getAttribute("instance") || "default";
+      const instance = getInstanceManager().getInstance(instanceName);
+      const modals = (instance.getUtilities("modal") || []) as PagefindModal[];
+      const modal = modals.find((m) => (m as HTMLElement).isConnected);
+      if (modal?.isOpen) modal?.close();
+      else modal?.open();
+    }
+
+    handleKeyDown(event: KeyboardEvent) {
+      const isCmdOrCtrl = event.metaKey || event.ctrlKey;
+      const isKPressed = event.key.toLowerCase() === "k";
+      if (isCmdOrCtrl && isKPressed) this.toggleModal();
+    }
+
+    connectedCallback() {
+      const button = this.querySelector("button");
+      button?.addEventListener("click", this.toggleModal.bind(this));
+      if (this.getAttribute("keyboard-toggle") === "true")
+        document.addEventListener("keydown", this.handleKeyDown.bind(this));
+    }
+  }
+
+  if (!customElements.get("custom-modal-trigger")) {
+    customElements.define("custom-modal-trigger", CustomModalTrigger);
+  }
+</script>
