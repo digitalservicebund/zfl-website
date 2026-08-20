@@ -192,6 +192,9 @@
   }
 
   function onPointerDown(event: PointerEvent) {
+    // Let clicks on links inside the SVG through untouched
+    if ((event.target as HTMLElement).closest("a")) return;
+
     (event.currentTarget as HTMLElement).setPointerCapture(event.pointerId);
     pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
 
