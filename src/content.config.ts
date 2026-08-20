@@ -45,10 +45,7 @@ const articles = defineCollection({
   loader: glob({
     pattern: "**/*.mdx",
     base: "src/content/articles",
-    generateId: ({ entry }) => {
-      console.log(entry);
-      return entry.replace(/\.mdx$/, "");
-    },
+    generateId: ({ entry }) => entry.replace(/\.mdx$/, ""),
   }),
   schema: z.object({
     paragraphNummer: z.string(),
