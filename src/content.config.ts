@@ -70,7 +70,7 @@ export const VISUALISIERUNGS_FILTER = [
 ] as const;
 
 const visualisierungen = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/visualisierung" }),
+  loader: glob({ pattern: "**/*.md", base: "./src/content/visualisierungen" }),
   schema: ({ image }) =>
     z.object({
       Titel: z.string(),
