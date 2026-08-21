@@ -231,6 +231,28 @@ export const werkzeuge_praxistauglichkeit = {
   navLabel: "Praxistauglichkeit",
 } as const;
 
+export const werkzeuge_ressourcen = {
+  key: "werkzeuge_ressourcen",
+  path: "/werkzeuge/ressourcen",
+  title: "Ressourcen",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: 2,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_ressourcen_visualisierungen = {
+  key: "werkzeuge_ressourcen_visualisierungen",
+  path: "/werkzeuge/ressourcen/visualisierungen",
+  title: "Beispiele für Visualisierungen",
+  parent: werkzeuge_ressourcen,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: null,
+  navLabel: "Visualisierungen",
+} as const;
+
 export const allRoutes = [
   barrierefreiheit,
   begleitungen,
@@ -252,4 +274,6 @@ export const allRoutes = [
   ueber_zahlenUndFakten,
   werkzeuge,
   werkzeuge_praxistauglichkeit,
+  werkzeuge_ressourcen,
+  werkzeuge_ressourcen_visualisierungen,
 ] as const;

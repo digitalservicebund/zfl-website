@@ -21,7 +21,7 @@ export const WERKZEUGE_TYPES = [
 export type WerkzeugCategory = (typeof WERKZEUGE_CATEGORIES)[number];
 
 const werkzeuge = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "src/werkzeuge" }),
+  loader: glob({ pattern: "**/*.md", base: "src/content/werkzeuge" }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),
@@ -41,6 +41,56 @@ const werkzeuge = defineCollection({
     }),
 });
 
+export const VISUALISIERUNGSARTEN = [
+  "Schaubild",
+  "Flussdiagramm",
+  "Entscheidungsbaum",
+] as const;
+
+export const VISUALISIERUNGS_TOOL = [
+  "Miro",
+  "Miro / digitales Whiteboard",
+  "MS Visio",
+  "Bizagi",
+  "draw.io",
+  "PowerPoint",
+  "Conceptboard",
+] as const;
+
+export const VISUALISIERUNGS_FILTER = [
+  "Verknüpft Recht und Prozess",
+  "Deckt Potenziale auf",
+  "Macht Risiken sichtbar",
+  "Schafft Konsens",
+  "Vorher-Nachher-Vergleich",
+  "Daten",
+  "Führt Prozesse zusammen",
+  "Klärt Rollen",
+  "Mit NKR-Stellungnahme",
+] as const;
+
+const visualisierungen = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/visualisierungen" }),
+  schema: ({ image }) =>
+    z.object({
+      Titel: z.string(),
+      Visualisierungsart: z.enum(VISUALISIERUNGSARTEN),
+      Visualisierungstool: z.enum(VISUALISIERUNGS_TOOL).optional(),
+      Bild: z.object({
+        alternativeText: z.string(),
+        path: image(),
+      }),
+      tags: z.array(z.enum(VISUALISIERUNGS_FILTER)),
+      Beispielvorhaben: z.object({
+        Titel: z.string(),
+        Ressort: z.string(),
+        LinkRegelungstext: z.string().nullable(),
+        NKRStellungnahmeLink: z.string().nullable(),
+      }),
+    }),
+});
+
 export const collections = {
   werkzeuge,
+  visualisierungen,
 };
