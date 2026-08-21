@@ -4,7 +4,7 @@ Visualisierungsart: "Schaubild"
 Bild:
   alternativeText: "Flussdiagramm zur Koordinierungsstelle für digitale Dienste, das Zuständigkeiten und Zusammenarbeit mit Bundesnetzagentur, BfDI, Bundeskriminalamt und weiteren Akteuren zeigt."
   path: "./uebersicht-verantwortlicher-akteure.jpg"
-tags: ["Mit KNR-Stellungnahme", "Klärt Rollen", "Verknüpfung Recht und Prozess"]
+tags: ["Mit NKR-Stellungnahme", "Klärt Rollen", "Verknüpft Recht und Prozess"]
 Beispielvorhaben:
   Titel: "Digitale-Dienste-Gesetz"
   Ressort: "BMV"

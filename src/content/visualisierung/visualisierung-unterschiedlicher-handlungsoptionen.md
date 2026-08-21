@@ -5,7 +5,7 @@ Visualisierungstool: "Bizagi"
 Bild:
   alternativeText: "Das vorliegende Diagramm veranschaulicht zwei alternative Optionen für die Signatur durch Beteiligte, nämlich eine qualifizierte elektronische Signatur oder eine eigenhändige Signatur auf einem Gerät. Zudem wird der abschließende Schritt der qualifizierten elektronischen Signatur durch den Notar dargestellt. "
   path: "./visualisierung-unterschiedlicher-handlungsoptionen.png"
-tags: ["Deckt Potenziale auf", "Klärt Rollen", "Verknüpfung Recht und Prozess"]
+tags: ["Deckt Potenziale auf", "Klärt Rollen", "Verknüpft Recht und Prozess"]
 Beispielvorhaben:
   Titel: "Entwurf eines Gesetzes zur Einführung einer elektronischen Präsenzbeurkundung"
   Ressort: "BMJV"

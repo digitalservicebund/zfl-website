@@ -10,7 +10,7 @@ tags:
     "Macht Risiken sichtbar",
     "Deckt Potenziale auf",
     "Schafft Konsens",
-    "Mit KNR-Stellungnahme",
+    "Mit NKR-Stellungnahme",
   ]
 Beispielvorhaben:
   Titel: "Gesetz zur Modernisierung und zum Bürokratieabbau im Strom- und Energiesteuerrecht"

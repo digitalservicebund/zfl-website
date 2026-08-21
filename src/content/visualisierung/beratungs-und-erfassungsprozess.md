@@ -10,7 +10,7 @@ Beispielvorhaben:
   Ressort: "BMBFSFJ"
   LinkRegelungstext: null
   NKRStellungnahmeLink: null
-tags: ["Verknüpfung Recht und Prozess", "Deckt Potenziale auf"]
+tags: ["Verknüpft Recht und Prozess", "Deckt Potenziale auf"]
 ---
 
 1. Digitalisiert den Status Quo des Beratungs- und Erfassungsprozesses.

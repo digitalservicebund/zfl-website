@@ -5,7 +5,7 @@ Visualisierungstool: "draw.io"
 Bild:
   alternativeText: "Die Abbildung zeigt das Online-Verfahren in der Zivilgerichtsbarkeit, welches nach § 1124 I ZPO eröffnet ist."
   path: "./ablauf-eines-online-verfahrens.png"
-tags: ["Verknüpfung Recht und Prozess", "Schafft Konsens"]
+tags: ["Verknüpft Recht und Prozess", "Schafft Konsens"]
 Beispielvorhaben:
   Titel: "Entwurf eines Gesetzes zur Entwicklung und Erprobung eines Online-Verfahrens in der Zivilgerichtsbarkeit"
   Ressort: "BMJV"
