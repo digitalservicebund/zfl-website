@@ -4,7 +4,7 @@ Visualisierungsart: "Schaubild"
 Bild:
   alternativeText: "Das übersichtliche Schaubild zeigt Schritt für Schritt, wann Energieerzeugnisse zur Stromerzeugung steuerfrei oder steuerlich entlastet sind. Dazu erfolgt ein Vergleich zwischen der bisherigen Rechtslage und den ab dem 1. Januar 2026 geltenden Regeln."
   path: "./vorher-nachher-vergleich-komplexer-regelungen.jpg"
-tags: ["Vorher-Nachher-Vergleich", "Verknüpfung Recht und Prozess"]
+tags: ["Vorher-Nachher-Vergleich", "Verknüpft Recht und Prozess"]
 Beispielvorhaben:
   Titel: "Umsetzung der Energiesteuerrichtlinie beim Einsatz von Energieerzeugnissen zur Stromerzeugung"
   Ressort: "BMF"

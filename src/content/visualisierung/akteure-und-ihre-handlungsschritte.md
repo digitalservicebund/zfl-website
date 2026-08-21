@@ -4,8 +4,7 @@ Visualisierungsart: "Entscheidungsbaum"
 Bild:
   alternativeText: "Flussdiagramm, das den Entscheidungsprozess für den Versand verschreibungspflichtiger Tierarzneimittel gemäß § 44a visualisiert. Es zeigt die unterschiedlichen Prüfwege für Tierärzte und Apotheken, die je nach Erfüllung der gesetzlichen Voraussetzungen zu einem erlaubten oder verbotenen Versand an den Tierhalter führen."
   path: "./akteure-und-ihre-handlungsschritte.jpg"
-tags:
-  ["Klärt Rollen", "Verknüpfung Recht und Prozess", "Führt Prozesse zusammen"]
+tags: ["Klärt Rollen", "Verknüpft Recht und Prozess", "Führt Prozesse zusammen"]
 Beispielvorhaben:
   Titel: "Entwurf eines Gesetzes zur Änderung des Tierarzneimittelgesetzes und des Apothekengesetzes"
   Ressort: "BMELH"

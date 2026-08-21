@@ -8,9 +8,9 @@ Bild:
 tags:
   [
     "Schafft Konsens",
-    "Verknüpfung Recht und Prozess",
+    "Verknüpft Recht und Prozess",
     "Deckt Potenziale auf",
-    "Mit KNR-Stellungnahme",
+    "Mit NKR-Stellungnahme",
   ]
 Beispielvorhaben:
   Titel: "Register über Betreiber von unbemannten Fluggeräten – LuftVG"

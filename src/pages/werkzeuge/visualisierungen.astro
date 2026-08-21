@@ -54,11 +54,17 @@ const visualisierungen = await Promise.all(
         stuck = false;
       "
     >
-      <div class="flex flex-wrap items-center gap-8">
-        <span class="kern-label">Filter nach:</span>
+      <div
+        class="-mb-16 flex items-center gap-8 pb-16"
+        x-bind:class="stuck ? 'flex-nowrap overflow-x-auto' : 'flex-wrap'"
+      >
+        <span class="kern-label shrink-0">Filtern nach:</span>
         {
           VISUALISIERUNGS_FILTER.map((filter) => (
-            <button class="h-32" @click={`toggleFilterType('${filter}')`}>
+            <button
+              class="h-32 shrink-0"
+              @click={`toggleFilterType('${filter}')`}
+            >
               <span
                 class="kern-badge kern-badge--filter interactive"
                 x-bind:data-inactive={`filterType && filterType !== '${filter}'`}
@@ -68,7 +74,7 @@ const visualisierungen = await Promise.all(
                   aria-hidden="true"
                   x-show={`filterType === '${filter}'`}
                 />
-                <span class="kern-label">{filter}</span>
+                <span class="kern-label kern-label--small">{filter}</span>
               </span>
             </button>
           ))
@@ -96,7 +102,7 @@ const visualisierungen = await Promise.all(
               <span class="space-y-8 space-x-8">
                 {visualisierung.data.tags.map((tag) => (
                   <span class="kern-badge kern-badge--tag">
-                    <span class="kern-label">{tag}</span>
+                    <span class="kern-label kern-label--small">{tag}</span>
                   </span>
                 ))}
               </span>
@@ -106,11 +112,11 @@ const visualisierungen = await Promise.all(
               contentClass="w-[1712px] max-w-[95vw] h-[926px] max-h-[95vh]"
             >
               <div class="xl:gap-lg xl:grid xl:grid-cols-3">
-                <div class="xl:col-span-2">
+                <div class="flex items-center justify-center xl:col-span-2">
                   <Image
                     src={visualisierung.data.Bild.path}
                     alt={visualisierung.data.Bild.alternativeText}
-                    height="851"
+                    height={Math.min(851, visualisierung.data.Bild.path.height)}
                   />
                 </div>
                 <div class="space-y-md">

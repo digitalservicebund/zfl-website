@@ -9,7 +9,7 @@ tags:
   [
     "Daten",
     "Macht Risiken sichtbar",
-    "Verknüpfung Recht und Prozess",
+    "Verknüpft Recht und Prozess",
     "Schafft Konsens",
     "Deckt Potenziale auf",
   ]

@@ -58,7 +58,7 @@ export const VISUALISIERUNGS_TOOL = [
 ] as const;
 
 export const VISUALISIERUNGS_FILTER = [
-  "Verknüpfung Recht und Prozess",
+  "Verknüpft Recht und Prozess",
   "Deckt Potenziale auf",
   "Macht Risiken sichtbar",
   "Schafft Konsens",
@@ -66,7 +66,7 @@ export const VISUALISIERUNGS_FILTER = [
   "Daten",
   "Führt Prozesse zusammen",
   "Klärt Rollen",
-  "Mit KNR-Stellungnahme",
+  "Mit NKR-Stellungnahme",
 ] as const;
 
 const visualisierungen = defineCollection({
