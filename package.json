@@ -46,7 +46,7 @@
     "astro-route-generator": "github:digitalservicebund/astro-route-generator#0.1.9",
     "astro-seo": "^1.1.0",
     "pagefind": "^1.5.2",
-    "posthog-js": "^1.417.2",
+    "posthog-js": "^1.418.0",
     "sharp": "^0.35.3",
     "svelte": "^5.56.9",
     "tailwind-merge": "^3.6.0",
