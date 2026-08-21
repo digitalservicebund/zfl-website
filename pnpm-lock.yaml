@@ -54,8 +54,8 @@ importers:
         specifier: ^1.5.2
         version: 1.5.2
       posthog-js:
-        specifier: ^1.417.2
-        version: 1.417.2
+        specifier: ^1.418.0
+        version: 1.418.0
       sharp:
         specifier: ^0.35.3
         version: 0.35.3(@types/node@26.2.0)
@@ -1414,8 +1414,8 @@ packages:
   '@posthog/core@1.48.2':
     resolution: {integrity: sha512-zZNvsEg+YCezvJKeWdaZ77ngjKJvGnAEo31DIy2guYeDtZ5kNjJ4c6CkwqtmXmwNXjzOFGJyshzv3Fv2gHVJYA==}
 
-  '@posthog/types@1.404.1':
-    resolution: {integrity: sha512-i2Gei6ARfOSBeTN4s2yUP1p97s2UNI+1NWmtLjhnR/V6t3RFOfI1sBWKcJNWHjtoOCCWoAFU+PNPY6SgT2VtEQ==}
+  '@posthog/types@1.405.0':
+    resolution: {integrity: sha512-4rZ/taVXKQxs9Jrf7ZjlCRgrOSL69oKAgIWJQa5kRNJ6wll1UANbrJTSY+Su1e88LIG4zZVjKKKjyQHCkHdHcw==}
 
   '@rolldown/binding-android-arm64@1.2.4':
     resolution: {integrity: sha512-jHC2cnyKz5xU2fhECtFl8OZ83cYNt13GZQD+0uMJ/X3o+ijmd56okHhTUwxVSHPx1IRVIJEZ1/1pPzeLCU6XKA==}
@@ -3557,8 +3557,8 @@ packages:
     resolution: {integrity: sha512-u82N74LFzG8ca+dD8puPnplTXoGH4fTPpVGuIbt36G3qvNlkvfD0lEAZSxaly3KX8TS/L1A1gsCEmvKmBcVbkQ==}
     engines: {node: ^10 || ^12 || >=14}
 
-  posthog-js@1.417.2:
-    resolution: {integrity: sha512-DQ3E/CqRNs+l9qqOJo4iIL0tcA3eQ/9NzxkVTr0H2lWhXkWRfFKuVKh6/y25rdK4w7j1X9jCAGd8QZKLYD6jJA==}
+  posthog-js@1.418.0:
+    resolution: {integrity: sha512-LlhAB4FKnQftvc+POOBdZJL/XShA60/7qTRDZ7NUL0BCKfdW55YcEG3n7wl1qHIaf4H74O7SAOuf6OckvltEWw==}
 
   preact@10.29.8:
     resolution: {integrity: sha512-ej2aVZ+vZ8WO7tvlQWRM9N63A0KzF9q4mWJfDUHgYaIofWY9hu74QdnQrjoPMmZi2/nZ5gN0bJCQF49xQqx09Q==}
@@ -5787,13 +5787,13 @@ snapshots:
   '@posthog/browser-common@0.5.0':
     dependencies:
       '@posthog/core': 1.48.2
-      '@posthog/types': 1.404.1
+      '@posthog/types': 1.405.0
 
   '@posthog/core@1.48.2':
     dependencies:
-      '@posthog/types': 1.404.1
+      '@posthog/types': 1.405.0
 
-  '@posthog/types@1.404.1': {}
+  '@posthog/types@1.405.0': {}
 
   '@rolldown/binding-android-arm64@1.2.4':
     optional: true
@@ -8480,11 +8480,11 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
-  posthog-js@1.417.2:
+  posthog-js@1.418.0:
     dependencies:
       '@posthog/browser-common': 0.5.0
       '@posthog/core': 1.48.2
-      '@posthog/types': 1.404.1
+      '@posthog/types': 1.405.0
       core-js: 3.50.0
       dompurify: 3.4.13
       fflate: 0.4.9
