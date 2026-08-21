@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@astrojs/alpinejs':
         specifier: ^1.0.0
-        version: 1.0.0(@types/alpinejs@3.13.11)(alpinejs@3.16.1)
+        version: 1.0.0(@types/alpinejs@3.13.11)(alpinejs@3.16.2)
       '@astrojs/mdx':
         specifier: ^7.0.6
         version: 7.0.6(@astrojs/markdown-satteri@0.3.6)(astro@7.2.3(@astrojs/markdown-remark@7.2.3(supports-color@7.2.0))(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@types/node@26.2.0)(jiti@2.7.0)(yaml@2.9.0))(supports-color@7.2.0)
@@ -36,8 +36,8 @@ importers:
         specifier: ^3.13.11
         version: 3.13.11
       alpinejs:
-        specifier: ^3.16.1
-        version: 3.16.1
+        specifier: ^3.16.2
+        version: 3.16.2
       astro:
         specifier: ^7.2.3
         version: 7.2.3(@astrojs/markdown-remark@7.2.3(supports-color@7.2.0))(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@types/node@26.2.0)(jiti@2.7.0)(yaml@2.9.0)
@@ -1902,11 +1902,11 @@ packages:
   '@vscode/l10n@0.0.18':
     resolution: {integrity: sha512-KYSIHVmslkaCDyw013pphY+d7x1qV8IZupYfeIfzNA+nsaWHbn5uPuQRvdRFsa9zFzGeudPuoGoZ1Op4jrJXIQ==}
 
-  '@vue/reactivity@3.1.5':
-    resolution: {integrity: sha512-1tdfLmNjWG6t/CsPldh+foumYFo3cpyCHgBYQ34ylaMsJ+SNHQ1kApMIa8jN+i593zQuaw3AdWH0nJTARzCFhg==}
+  '@vue/reactivity@3.5.41':
+    resolution: {integrity: sha512-rznsqKM0np0x18EjzF8x88MpEhdNsffbvFbckLL5+oUKz1BxAImEmO7J1ArRYSyo6aQaVoBDp7jEkT91OOxydA==}
 
-  '@vue/shared@3.1.5':
-    resolution: {integrity: sha512-oJ4F3TnvpXaQwZJNF3ZK+kLPHKarDmJjJ6jyzVNDKH9md1dptjC7lWR//jrGuLdek/U6iltWxqAnYOu8gCiOvA==}
+  '@vue/shared@3.5.41':
+    resolution: {integrity: sha512-IOnwSCma8j+9xJT6b8H0dEYidC80NsYmNMlZxRsukYcSoGaDBohog5hDxzeUXdFeGWFA++vWvxqOmrr96VlqMA==}
 
   abbrev@2.0.0:
     resolution: {integrity: sha512-6/mh1E2u2YgEsCHdY0Yx5oW+61gZU+1vXaoiHHrpKeuRNNgFvS+/jrwHiQhB5apAf5oB7UB7E19ol2R2LKH8hQ==}
@@ -1953,8 +1953,8 @@ packages:
   ajv@8.20.0:
     resolution: {integrity: sha512-Thbli+OlOj+iMPYFBVBfJ3OmCAnaSyNn4M1vz9T6Gka5Jt9ba/HIR56joy65tY6kx/FCF5VXNB819Y7/GUrBGA==}
 
-  alpinejs@3.16.1:
-    resolution: {integrity: sha512-QXcW8MK9JoG8GZ7vCt2cXJlcEPIA7Xk/7IQ1+L2iLp7sXcIxct0PrgidmHzK97gD9QlfUjHXPxujdZ1mC2PYVg==}
+  alpinejs@3.16.2:
+    resolution: {integrity: sha512-6kbqqrRK7iGPYx5upTfqc8Tcl1xhpcurLCxTdn4/ym2Kb68+cYj+2I5Zji53vUIPf7zj3C1DoIvrDkgrNDCXdA==}
 
   am-i-vibing@0.4.0:
     resolution: {integrity: sha512-MxT4XZL7pzLHpuvhDKdMaQHMGGkJDLluKBLsbstn+8wv9sWcFT6h+0ve9qkml95amVTZtZV83gQe2hY+ojgHLg==}
@@ -4635,10 +4635,10 @@ snapshots:
       is-potential-custom-element-name: 1.0.1
       lru-cache: 11.5.2
 
-  '@astrojs/alpinejs@1.0.0(@types/alpinejs@3.13.11)(alpinejs@3.16.1)':
+  '@astrojs/alpinejs@1.0.0(@types/alpinejs@3.13.11)(alpinejs@3.16.2)':
     dependencies:
       '@types/alpinejs': 3.13.11
-      alpinejs: 3.16.1
+      alpinejs: 3.16.2
 
   '@astrojs/check@0.9.10(prettier-plugin-astro@0.14.1)(prettier@3.9.6)(typescript@6.0.3)':
     dependencies:
@@ -6303,11 +6303,11 @@ snapshots:
 
   '@vscode/l10n@0.0.18': {}
 
-  '@vue/reactivity@3.1.5':
+  '@vue/reactivity@3.5.41':
     dependencies:
-      '@vue/shared': 3.1.5
+      '@vue/shared': 3.5.41
 
-  '@vue/shared@3.1.5': {}
+  '@vue/shared@3.5.41': {}
 
   abbrev@2.0.0: {}
 
@@ -6345,9 +6345,9 @@ snapshots:
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
 
-  alpinejs@3.16.1:
+  alpinejs@3.16.2:
     dependencies:
-      '@vue/reactivity': 3.1.5
+      '@vue/reactivity': 3.5.41
 
   am-i-vibing@0.4.0:
     dependencies:
