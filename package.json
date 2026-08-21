@@ -40,7 +40,7 @@
     "@pagefind/component-ui": "^1.5.2",
     "@tailwindcss/vite": "^4.3.3",
     "@types/alpinejs": "^3.13.11",
-    "alpinejs": "^3.16.1",
+    "alpinejs": "^3.16.2",
     "astro": "^7.2.3",
     "astro-pagefind": "^2.0.1",
     "astro-route-generator": "github:digitalservicebund/astro-route-generator#0.1.9",
