@@ -223,12 +223,23 @@ export const werkzeuge = {
 export const werkzeuge_digitaltauglichkeit = {
   key: "werkzeuge_digitaltauglichkeit",
   path: "/werkzeuge/digitaltauglichkeit",
-  title: "Beispiele für Digitaltauglichkeit im Regelungstext",
+  title: "Ihr Weg zur Digitaltauglichkeit",
   parent: werkzeuge,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
+  navOrder: 4,
   navLabel: "Digitaltauglichkeit",
+} as const;
+
+export const werkzeuge_digitaltauglichkeit_beispiele = {
+  key: "werkzeuge_digitaltauglichkeit_beispiele",
+  path: "/werkzeuge/digitaltauglichkeit/beispiele",
+  title: "Beispiele für Digitaltauglichkeit im Regelungstext",
+  parent: werkzeuge_digitaltauglichkeit,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: "Beispiele am Gesetzestext",
 } as const;
 
 export const werkzeuge_praxistauglichkeit = {
@@ -238,7 +249,7 @@ export const werkzeuge_praxistauglichkeit = {
   parent: werkzeuge,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
+  navOrder: 3,
   navLabel: "Praxistauglichkeit",
 } as const;
 
@@ -263,5 +274,6 @@ export const allRoutes = [
   ueber_zahlenUndFakten,
   werkzeuge,
   werkzeuge_digitaltauglichkeit,
+  werkzeuge_digitaltauglichkeit_beispiele,
   werkzeuge_praxistauglichkeit,
 ] as const;
