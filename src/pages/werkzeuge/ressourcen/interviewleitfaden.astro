@@ -1,0 +1,48 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+
+const frontmatter = {
+  title: "Akteurinnen und Akteure identifizieren und Interviews vorbereiten",
+  navLabel: "Interviewleitfaden",
+  navOrder: 3,
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero level="plain">
+      <h1>{frontmatter.title}</h1>
+      <p>
+        Im folgenden Abschnitt finden Sie eine praxisnahe Anleitung zur
+        strukturierten Vorbereitung und Durchführung von Interviews.
+      </p>
+      <p>
+        Das Angebot wird derzeit weiterentwickelt, einschließlich der
+        barrierefreien Optimierung der Vorlagen.
+      </p>
+      <p>
+        Die Inhalte sind auf Basis von den unten aufgeführten Quellen
+        entstanden.
+      </p>
+    </Hero>
+    <section>
+      <h2>Anleitung</h2>
+      <div class="bg-lavender-200">
+        <h3>Relevante Akteurinnen und Akteure identifizieren</h3>
+      </div>
+      <div>
+        <h3>Halten Sie die Akteurinnen und Akteure in einer Übersicht fest</h3>
+      </div>
+      <div class="bg-lavender-200">
+        <h3>Passende Interviewmethode wählen</h3>
+      </div>
+      <div>
+        <h3>Gespräche durchführen</h3>
+      </div>
+      <div class="bg-lavender-200">
+        <h3>Auswerten</h3>
+      </div>
+    </section>
+  </main>
+</Layout>
