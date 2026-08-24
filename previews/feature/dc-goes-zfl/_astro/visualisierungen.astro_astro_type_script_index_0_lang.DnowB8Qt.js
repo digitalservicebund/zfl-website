@@ -1,0 +1,1 @@
+import{t as e}from"./module.esm.9lJk27A4.js";import{t}from"./filterBar.CyAZ576h.js";document.addEventListener(`alpine:init`,()=>{e.data(`visualisierungenFilter`,t)});
