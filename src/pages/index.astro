@@ -3,7 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
 import KernCard from "@/components/KernCard.astro";
 import InfoPanel from "@/components/InfoPanel.astro";
-import { Image } from "astro:assets";
+import ImageTextOverlay from "@/components/ImageTextOverlay.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import allgemeinImage from "@/images/Trainings.jpg";
 import zusammenarbeitImg from "@/images/Zusammenarbeit.png";
@@ -76,33 +76,20 @@ export const frontmatter = {
           />
         </div>
       </div>
-      <div
-        class="relative space-y-24 lg:grid lg:h-482 lg:grid-cols-6 lg:items-center lg:overflow-hidden"
+      <ImageTextOverlay
+        image={ansatzImg}
+        imageAlt="Eine großflächige Grafik an einer Glaswand. Sie zeigt verschiedenfarbige Kreise mit Textinhalten."
+        linkHref={ueber.path}
+        linkText="Mehr erfahren"
       >
-        <InfoPanel
-          look="gray"
-          class="z-1 self-start lg:col-span-3 lg:w-600 lg:self-center"
-        >
+        <Fragment slot="content">
           <h2>Über uns</h2>
           <p>
             Erfahren Sie mehr über den Auftrag und die Herangehensweise des
             Zentrum für Legistik, aktuelle Arbeitspakete und Statistiken.
           </p>
-          <a class="inline-flex items-center gap-8" href={ueber.path}
-            ><span
-              class="kern-icon kern-icon--arrow-forward kern-icon--default"
-              aria-hidden="true"
-              style="background-color: currentColor"></span><p>
-              Mehr erfahren
-            </p></a
-          >
-        </InfoPanel>
-        <Image
-          src={ansatzImg}
-          alt="Eine großflächige Grafik an einer Glaswand. Sie zeigt verschiedenfarbige Kreise mit Textinhalten."
-          class="lg:absolute lg:right-1 lg:h-482 lg:w-727"
-        />
-      </div>
+        </Fragment>
+      </ImageTextOverlay>
     </section>
     <section class="bg-lavender-base breakout">
       <div class="grid grid-cols-1 gap-24 md:grid-cols-3 md:gap-32">
