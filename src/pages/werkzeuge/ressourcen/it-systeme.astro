@@ -1,0 +1,88 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
+import ImageTextOverlay from "@/components/ImageTextOverlay.astro";
+import itSystemeImg from "../_assets/it-systeme.png";
+
+const frontmatter = {
+  title: "IT-Systeme gemeinsam erfassen",
+  navLabel: "IT-Systeme erfassen",
+  navOrder: 4,
+};
+
+const template = "/downloads/TemplateITSysteme.xlsx";
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero level="plain">
+      <h1>{frontmatter.title}</h1>
+      <p>
+        Nutzen Sie das Fachwissen der zuständigen Akteurinnen und Akteure, um
+        die verwendete IT-Infrastruktur für die im vorigen Schritt
+        identifizierten Abläufe zu erfassen und zu verstehen.
+      </p>
+    </Hero>
+    <section class="bg-lavender-200 breakout">
+      <h2>So erfassen Sie die IT-Systeme</h2>
+      <p>
+        Dokumentieren Sie die verwendeten IT-Systeme mit ihren Funktionalitäten,
+        Schnittstellen und Anforderungen.
+      </p>
+      <p>Ein Überblick über die IT-Landschaft hilft Ihnen dabei,</p>
+      <ul>
+        <li>
+          alle relevanten Aspekte aufzuschlüsseln und potenziell blinde Flecken
+          zu identifizieren,
+        </li>
+        <li>auf bestehende Standards und Prozesse aufzusetzen,</li>
+        <li>oder Potenzial für Vereinheitlichung zu nutzen.</li>
+      </ul>
+      <ImageTextOverlay
+        image={itSystemeImg}
+        imageAlt="Eine stilisierte, schematische Darstellung der Excel-Vorlage zu IT-Systeme erfassen. Die Tabelle umfasst eine Kopfzeile, undmehrere leere Spalten und Reihen"
+        linkHref={template}
+        linkText="Vorlage herunterladen (xlsx-Datei)"
+        icon="open-in-new"
+      >
+        <Fragment slot="content">
+          <h2>Vorlage: IT-Systeme erfassen</h2>
+          <p>
+            Nutzen Sie die Vorlage, um die IT-Systeme systematisch und
+            detailliert zu dokumentieren. Sie müssen nicht selbst über das
+            Wissen verfügen: Fragen Sie die zuständigen Akteurinnen und Akteure
+            und ziehen Sie ggf. neutrale IT-Expertise hinzu.
+          </p>
+        </Fragment>
+      </ImageTextOverlay>
+    </section>
+    <section>
+      <h2>Falls Länder oder Kommunen für die Umsetzung zuständig sind</h2>
+      <p>
+        Wenn Länder und Kommunen für die Umsetzung zuständig ist, legen die
+        Gesetze auf Bundesebene die Grundlage für eine reibungslose Umsetzung.
+        Sicherlich stehen Sie bereits inhaltlich mit den entsprechenden
+        Vertreterinnen und Vertretern im Austausch, z. B. mit den
+        Landesministerien. Für die digitale Umsetzung sollten Sie zusätzlich das
+        Gespräch mit denen suchen, die <b
+          >aktuellen Arbeitsabläufe, Prozesse und Systeme</b
+        > kennen. Das funktioniert am besten in bilateralen Gesprächen, die formellen
+        Beteiligungsformate ergänzen.
+      </p>
+    </section>
+    <Hero level="root">
+      <h2>IT-Wissen einfach erklärt</h2>
+      <p>
+        Der Support unterstützt Sie mit kostenloser IT-Beratung, um Erkenntnisse
+        zu erläutern und für Ihre Regelung zu nutzen, z. B. durch
+        IT-Hintergrundwissen zu Schnittstellen. Jede Frage ist berechtigt – jede
+        verstandene Antwort wird die Regelung digitaltauglicher machen.
+      </p>
+      <p>
+        Schreiben Sie über <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a> oder rufen
+        Sie uns an unter <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>.
+      </p>
+    </Hero>
+  </main>
+</Layout>

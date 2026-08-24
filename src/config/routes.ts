@@ -242,6 +242,39 @@ export const werkzeuge_ressourcen = {
   navLabel: null,
 } as const;
 
+export const werkzeuge_ressourcen_interviewleitfaden = {
+  key: "werkzeuge_ressourcen_interviewleitfaden",
+  path: "/werkzeuge/ressourcen/interviewleitfaden",
+  title: "Akteurinnen und Akteure identifizieren und Interviews vorbereiten",
+  parent: werkzeuge_ressourcen,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: 3,
+  navLabel: "Interviewleitfaden",
+} as const;
+
+export const werkzeuge_ressourcen_itSysteme = {
+  key: "werkzeuge_ressourcen_itSysteme",
+  path: "/werkzeuge/ressourcen/it-systeme",
+  title: "IT-Systeme gemeinsam erfassen",
+  parent: werkzeuge_ressourcen,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: 4,
+  navLabel: "IT-Systeme erfassen",
+} as const;
+
+export const werkzeuge_ressourcen_technischeUmsetzbarkeit = {
+  key: "werkzeuge_ressourcen_technischeUmsetzbarkeit",
+  path: "/werkzeuge/ressourcen/technische-umsetzbarkeit",
+  title: "Technische Umsetzbarkeit sicherstellen",
+  parent: werkzeuge_ressourcen,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: 5,
+  navLabel: "Technische Umsetzbarkeit",
+} as const;
+
 export const werkzeuge_ressourcen_visualisierungen = {
   key: "werkzeuge_ressourcen_visualisierungen",
   path: "/werkzeuge/ressourcen/visualisierungen",
@@ -249,7 +282,7 @@ export const werkzeuge_ressourcen_visualisierungen = {
   parent: werkzeuge_ressourcen,
   sitemap: true,
   isStagingOnly: true,
-  navOrder: null,
+  navOrder: 1,
   navLabel: "Visualisierungen",
 } as const;
 
@@ -275,5 +308,8 @@ export const allRoutes = [
   werkzeuge,
   werkzeuge_praxistauglichkeit,
   werkzeuge_ressourcen,
+  werkzeuge_ressourcen_interviewleitfaden,
+  werkzeuge_ressourcen_itSysteme,
+  werkzeuge_ressourcen_technischeUmsetzbarkeit,
   werkzeuge_ressourcen_visualisierungen,
 ] as const;
