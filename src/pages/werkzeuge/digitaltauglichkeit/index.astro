@@ -9,7 +9,7 @@ import IconComputer from "~icons/ic/outline-computer";
 import IconQueryBuilder from "~icons/ic/outline-query-builder";
 import IconPlaylistAddCheck from "~icons/ic/outline-playlist-add-check";
 import digitalcheckImg from "@/images/Digitalcheck.png";
-import { DIGITALCHECK_URL } from "@/config/constants";
+import { DIGITALCHECK_URL, ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 
 const frontmatter = {
   title: "Ihr Weg zur Digitaltauglichkeit",
@@ -157,5 +157,11 @@ const resources = resourceTitles.map((title) =>
         }
       </div>
     </section>
+    <Hero level="root">
+      <h2>Fragen zu Digitaltauglichkeit?</h2>
+      <p>Wir können Sie gerne beraten. Kontaktieren Sie uns!</p>
+      <p>Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a></p>
+      <p>E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a></p>
+    </Hero>
   </main>
 </Layout>
