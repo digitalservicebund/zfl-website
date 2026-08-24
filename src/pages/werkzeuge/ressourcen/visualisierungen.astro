@@ -7,6 +7,7 @@ import { getCollection, render, type CollectionEntry } from "astro:content";
 import KernCard from "@/components/KernCard.astro";
 import { VISUALISIERUNGS_FILTER } from "@/content.config";
 import { ZFL_EMAIL } from "@/config/constants";
+import IconOpenInFull from "~icons/ic/outline-open-in-full";
 
 const frontmatter = {
   title: "Beispiele für Visualisierungen",
@@ -118,14 +119,28 @@ const visualisierungen = await Promise.all(
               >
                 <div class="xl:gap-lg xl:grid xl:grid-cols-3">
                   <div class="flex items-center justify-center xl:col-span-2">
-                    <Image
-                      src={visualisierung.data.Bild.path}
-                      alt={visualisierung.data.Bild.alternativeText}
-                      height={Math.min(
-                        851,
-                        visualisierung.data.Bild.path.height,
-                      )}
-                    />
+                    <a
+                      class="relative"
+                      href={visualisierung.data.Bild.path.src}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Bild in neuem Tab öffnen"
+                    >
+                      <Image
+                        src={visualisierung.data.Bild.path}
+                        alt={visualisierung.data.Bild.alternativeText}
+                        height={Math.min(
+                          851,
+                          visualisierung.data.Bild.path.height,
+                        )}
+                      />
+                      <span
+                        class="absolute right-0 bottom-0 flex h-40 w-40 items-center justify-center bg-gray-800/80 text-white"
+                        aria-hidden="true"
+                      >
+                        <IconOpenInFull class="h-20 w-20" />
+                      </span>
+                    </a>
                   </div>
                   <div class="space-y-md">
                     <div class="space-y-8">
