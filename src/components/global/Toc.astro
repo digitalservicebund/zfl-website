@@ -1,0 +1,28 @@
+---
+import Self from "./Toc.astro";
+
+type TocItem = {
+  id: string;
+  label: string;
+  children?: TocItem[];
+};
+
+interface Props {
+  items: TocItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul>
+  {
+    items.map((item) => (
+      <li>
+        <a class="kern-link kern-link--small" href={`#${item.id}`}>
+          {item.label}
+        </a>
+        {item.children && <Self items={item.children} />}
+      </li>
+    ))
+  }
+</ul>

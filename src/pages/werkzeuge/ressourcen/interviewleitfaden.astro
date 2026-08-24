@@ -1,17 +1,47 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
+import SidebarContainer from "@/components/global/SidebarContainer.astro";
+import Toc from "@/components/global/Toc.astro";
+import { slugify } from "@/utils/slugify";
 
 const frontmatter = {
   title: "Akteurinnen und Akteure identifizieren und Interviews vorbereiten",
   navLabel: "Interviewleitfaden",
   navOrder: 3,
 };
+
+const toc = [
+  {
+    label: "Anleitung",
+    children: [
+      { label: "Relevante Akteurinnen und Akteure identifizieren" },
+      { label: "Akteurinnen und Akteure identifizieren" },
+      {
+        label: "Halten Sie die Akteurinnen und Akteure in einer Übersicht fest",
+      },
+      { label: "Passende Interviewmethode wählen" },
+      { label: "Gespräche durchführen" },
+      { label: "Auswerten" },
+    ],
+  },
+  {
+    label: "Checkliste",
+  },
+  { label: "Relevante Quellen" },
+].map((item) => ({
+  ...item,
+  id: slugify(item.label),
+  children: item.children?.map((child) => ({
+    ...child,
+    id: slugify(child.label),
+  })),
+}));
 ---
 
 <Layout title={frontmatter.title}>
-  <main class="breakout-grid">
-    <Hero level="plain">
+  <main>
+    <Hero class="breakout-grid" level="plain">
       <h1>{frontmatter.title}</h1>
       <p>
         Im folgenden Abschnitt finden Sie eine praxisnahe Anleitung zur
@@ -26,23 +56,27 @@ const frontmatter = {
         entstanden.
       </p>
     </Hero>
-    <section>
-      <h2>Anleitung</h2>
-      <div class="bg-lavender-200">
+    <SidebarContainer>
+      <h2 id={toc[0].id}>{toc[0].label}</h2>
+      <section class="breakout! bg-lavender-200">
         <h3>Relevante Akteurinnen und Akteure identifizieren</h3>
-      </div>
-      <div>
+      </section>
+      <section>
         <h3>Halten Sie die Akteurinnen und Akteure in einer Übersicht fest</h3>
-      </div>
-      <div class="bg-lavender-200">
+      </section>
+      <section class="breakout! bg-lavender-200">
         <h3>Passende Interviewmethode wählen</h3>
-      </div>
-      <div>
+      </section>
+      <section>
         <h3>Gespräche durchführen</h3>
-      </div>
-      <div class="bg-lavender-200">
+      </section>
+      <section class="breakout! bg-lavender-200">
         <h3>Auswerten</h3>
-      </div>
-    </section>
+      </section>
+
+      <nav slot="sidebar">
+        <Toc items={toc} />
+      </nav>
+    </SidebarContainer>
   </main>
 </Layout>
