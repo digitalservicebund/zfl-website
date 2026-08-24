@@ -17,7 +17,7 @@ const { items } = Astro.props;
 <ul>
   {
     items.map((item) => (
-      <li>
+      <li class="list-none">
         <a class="kern-link kern-link--small" href={`#${item.id}`}>
           {item.label}
         </a>

@@ -15,14 +15,15 @@ const toc = [
   {
     label: "Anleitung",
     children: [
-      { label: "Relevante Akteurinnen und Akteure identifizieren" },
-      { label: "Akteurinnen und Akteure identifizieren" },
+      { label: "1. Relevante Akteurinnen und Akteure identifizieren" },
+      { label: "2. Akteurinnen und Akteure identifizieren" },
       {
-        label: "Halten Sie die Akteurinnen und Akteure in einer Übersicht fest",
+        label:
+          "3. Halten Sie die Akteurinnen und Akteure in einer Übersicht fest",
       },
-      { label: "Passende Interviewmethode wählen" },
-      { label: "Gespräche durchführen" },
-      { label: "Auswerten" },
+      { label: "4. Passende Interviewmethode wählen" },
+      { label: "5. Gespräche durchführen" },
+      { label: "6. Auswerten" },
     ],
   },
   {
@@ -60,6 +61,18 @@ const toc = [
       <h2 id={toc[0].id}>{toc[0].label}</h2>
       <section class="breakout! bg-lavender-200">
         <h3>Relevante Akteurinnen und Akteure identifizieren</h3>
+        <p>
+          Zu Beginn wird ein Überblick über alle relevanten Akteurinnen und
+          Akteure geschaffen. Ziel ist es, Personen oder Gruppen zu
+          identifizieren, die von der Regelung betroffen sind oder an ihrer
+          Umsetzung beteiligt sind. Dazu gehören sowohl direkt betroffene
+          Akteure als auch solche, die vorbereitende, unterstützende oder
+          steuernde Aufgaben übernehmen.
+        </p>
+        <p>
+          Eine Einteilung nach Rollen hilft Ihnen dabei, die Akteurinnen und
+          Akteure systematisch zu ordnen:
+        </p>
       </section>
       <section>
         <h3>Halten Sie die Akteurinnen und Akteure in einer Übersicht fest</h3>
@@ -73,8 +86,8 @@ const toc = [
       <section class="breakout! bg-lavender-200">
         <h3>Auswerten</h3>
       </section>
-
-      <nav slot="sidebar">
+      <nav slot="sidebar" class="space-y-md">
+        <p class="kern-heading-small">Auf dieser Seite</p>
         <Toc items={toc} />
       </nav>
     </SidebarContainer>
