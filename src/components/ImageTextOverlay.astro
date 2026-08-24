@@ -8,9 +8,16 @@ interface Props {
   imageAlt: string;
   linkHref: string;
   linkText: string;
+  icon?: string;
 }
 
-const { image, imageAlt, linkHref, linkText } = Astro.props;
+const {
+  image,
+  imageAlt,
+  linkHref,
+  linkText,
+  icon = "arrow-forward",
+} = Astro.props;
 ---
 
 <div
@@ -23,7 +30,7 @@ const { image, imageAlt, linkHref, linkText } = Astro.props;
     <slot name="content" />
     <a class="inline-flex items-center gap-8 before:hidden" href={linkHref}
       ><span
-        class="kern-icon kern-icon--arrow-forward kern-icon--default"
+        class=`kern-icon kern-icon--${icon} kern-icon--default`
         aria-hidden="true"
         style="background-color: currentColor"></span><p>
         {linkText}
