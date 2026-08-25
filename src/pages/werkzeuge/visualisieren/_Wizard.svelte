@@ -280,8 +280,16 @@
     clearTimeout(mermaidCopiedTimeoutId);
     mermaidCopiedTimeoutId = setTimeout(() => {
       mermaidCopied = false;
-    }, 1000);
+    }, 1500);
   }
+
+  let drawioUrl = $derived(
+    mermaidSource
+      ? `https://app.diagrams.net/#create=${encodeURIComponent(
+          JSON.stringify({ type: "mermaid", data: mermaidSource }),
+        )}`
+      : undefined,
+  );
 
   let canExportRulemap = $derived(
     mermaidSource ? isMermaidFlowchart(mermaidSource) : false,
@@ -303,28 +311,6 @@
     link.click();
     URL.revokeObjectURL(url);
   }
-
-  // function toBase64Url(bytes: Uint8Array): string {
-  //   let binary = "";
-  //   for (const byte of bytes) binary += String.fromCharCode(byte);
-  //   return btoa(binary)
-  //     .replace(/\+/g, "-")
-  //     .replace(/\//g, "_")
-  //     .replace(/=+$/, "");
-  // }
-  //
-  // let pakoStr = $derived.by(() => {
-  //   if (!mermaidSource) return undefined;
-  //
-  //   const state = {
-  //     code: mermaidSource,
-  //     mermaid: JSON.stringify({ theme: "default" }, null, 2),
-  //     autoSync: true,
-  //     updateDiagram: true,
-  //   };
-  //   const compressed = deflate(JSON.stringify(state), { level: 9 });
-  //   return `${toBase64Url(compressed)}`;
-  // });
 </script>
 
 {#snippet loadingIndicator()}
@@ -413,20 +399,20 @@
 {#snippet buttons()}
   <div class="flex flex-col gap-8">
     <div class="flex gap-8 flex-wrap">
-      <!-- <a -->
-      <!--   href={`https://mermaid.live/edit#pako:${pakoStr}`} -->
-      <!--   target="_blank" -->
-      <!--   rel="noreferrer" -->
-      <!--   class="kern-btn kern-btn--primary" -->
-      <!-- > -->
-      <!--   <span -->
-      <!--     class="kern-icon kern-icon--open-in-new kern-icon--default" -->
-      <!--     aria-hidden="true" -->
-      <!--   ></span> -->
-      <!--   <span class="kern-label">Im Editor öffnen</span> -->
-      <!-- </a> -->
-      <button
+      <a
+        href={drawioUrl}
+        target="_blank"
+        rel="noreferrer"
         class="kern-btn kern-btn--primary"
+      >
+        <span
+          class="kern-icon kern-icon--edit kern-icon--default"
+          aria-hidden="true"
+        ></span>
+        <span class="kern-label">Bearbeiten mit Draw.io</span>
+      </a>
+      <button
+        class="kern-btn kern-btn--secondary"
         onclick={() => {
           viewerOpen = true;
         }}
@@ -435,7 +421,35 @@
           class="kern-icon kern-icon--search kern-icon--default"
           aria-hidden="true"
         ></span>
-        <span class="kern-label">Öffnen</span>
+        <span class="kern-label">Vorschau</span>
+      </button>
+    </div>
+    <div class="flex gap-8 flex-wrap">
+      <button
+        type="button"
+        onclick={downloadSvg}
+        class="kern-btn kern-btn--secondary"
+      >
+        <span
+          class="kern-icon kern-icon--download kern-icon--default"
+          aria-hidden="true"
+        ></span>
+        <span class="kern-label">SVG</span>
+      </button>
+      <button
+        type="button"
+        onclick={downloadRulemapXml}
+        disabled={!canExportRulemap}
+        class="kern-btn kern-btn--secondary"
+        title={canExportRulemap
+          ? undefined
+          : "Rulemap XML Export ist derzeit nur für Flowcharts verfügbar"}
+      >
+        <span
+          class="kern-icon kern-icon--download kern-icon--default"
+          aria-hidden="true"
+        ></span>
+        <span class="kern-label">Rulemap XML</span>
       </button>
       <button
         type="button"
@@ -451,34 +465,6 @@
         <span class="kern-label" aria-live="polite">
           {mermaidCopied ? "In Zwischenablage kopiert" : "Mermaid kopieren"}
         </span>
-      </button>
-    </div>
-    <div class="flex gap-8 flex-wrap">
-      <button
-        type="button"
-        onclick={downloadSvg}
-        class="kern-btn kern-btn--secondary"
-      >
-        <span
-          class="kern-icon kern-icon--download kern-icon--default"
-          aria-hidden="true"
-        ></span>
-        <span class="kern-label">SVG Export</span>
-      </button>
-      <button
-        type="button"
-        onclick={downloadRulemapXml}
-        disabled={!canExportRulemap}
-        class="kern-btn kern-btn--secondary"
-        title={canExportRulemap
-          ? undefined
-          : "Rulemap XML Export ist derzeit nur für Flowcharts verfügbar"}
-      >
-        <span
-          class="kern-icon kern-icon--download kern-icon--default"
-          aria-hidden="true"
-        ></span>
-        <span class="kern-label">Rulemap XML Export</span>
       </button>
     </div>
   </div>
