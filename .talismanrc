@@ -82,6 +82,11 @@ fileignoreconfig:
   - filename: src/components/global/AccordionMenu.test.ts
     allowed_patterns:
       - key
+  - filename: src/components/global/TocContainer.astro
+    allowed_patterns:
+      - key
+  - filename: src/scripts/toc.ts
+    checksum: 5478839febe093ac90ca0405735836e17b2eb984a77dbcd3739c38d96ef261d6
   - filename: src/content/visualisierung/ablauf-eines-online-verfahrens.md
     checksum: 3932230805182a9e132fbb7ec41ef5dc7447f98c77fef3d5faf7460ca1e97c2a
   - filename: src/content/visualisierung/uebersicht-verantwortlicher-akteure.md
