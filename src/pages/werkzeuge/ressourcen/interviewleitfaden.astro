@@ -3,9 +3,8 @@ import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
 import KernAccordion from "@/components/KernAccordion.astro";
 import KernCard from "@/components/KernCard.astro";
-import SidebarContainer from "@/components/global/SidebarContainer.astro";
-import Toc from "@/components/global/Toc.astro";
-import { slugify } from "@/utils/slugify";
+import StepNumber from "@/components/StepNumber.astro";
+import TocContainer from "@/components/global/TocContainer.astro";
 import akteureImg from "../_assets/akteure.png";
 import zielgruppeImg from "../_assets/zielgruppe.png";
 import checklistenImg from "../_assets/checkliste.png";
@@ -16,33 +15,10 @@ const frontmatter = {
   navOrder: 3,
 };
 
-const toc = [
-  {
-    label: "Anleitung",
-    children: [
-      { label: "1. Relevante Akteurinnen und Akteure identifizieren" },
-      { label: "2. Akteurinnen und Akteure identifizieren" },
-      {
-        label:
-          "3. Halten Sie die Akteurinnen und Akteure in einer Übersicht fest",
-      },
-      { label: "4. Passende Interviewmethode wählen" },
-      { label: "5. Gespräche durchführen" },
-      { label: "6. Auswerten" },
-    ],
-  },
-  {
-    label: "Checkliste",
-  },
-  { label: "Relevante Quellen" },
-].map((item) => ({
-  ...item,
-  id: slugify(item.label),
-  children: item.children?.map((child) => ({
-    ...child,
-    id: slugify(child.label),
-  })),
-}));
+const template_akteure = "/public/downloads/Akteure-auflisten.docx";
+const powerpoint_zielgruppe = "/public/downloads/Zielgruppenanalyse.pptx";
+const template_checklist = "/public/downloads/Checkliste-Interviewführung.docx";
+const buergercheck = "/public/downloads/Buergercheck.pdf";
 ---
 
 <Layout title={frontmatter.title}>
@@ -62,11 +38,12 @@ const toc = [
         entstanden.
       </p>
     </Hero>
-    <SidebarContainer>
+    <TocContainer>
       <div class="breakout! bg-lavender-200 pt-64">
-        <h2 id={toc[0].id}>{toc[0].label}</h2>
+        <h2>Anleitung</h2>
       </div>
       <section class="breakout! bg-lavender-200 pt-32">
+        <StepNumber number={1} />
         <h3>Relevante Akteurinnen und Akteure identifizieren</h3>
         <p>
           Zu Beginn wird ein Überblick über alle relevanten Akteurinnen und
@@ -98,6 +75,7 @@ const toc = [
         </ul>
       </section>
       <section>
+        <StepNumber number={2} />
         <h3>Halten Sie die Akteurinnen und Akteure in einer Übersicht fest</h3>
         <p>
           Im nächsten Schritt werden die identifizierten Akteurinnen und Akteure
@@ -138,8 +116,7 @@ const toc = [
           erleichtern den Zugang zu spezifischen Zielgruppen - insbesondere bei
           schwer erreichbaren Akteurinnen und Akteuren wie Leistungsempfängern.
         </p>
-
-        <div class="tool-grid gap-md grid grid-cols-1 md:grid-cols-2">
+        <div class="tool-grid gap-md mt-32 grid grid-cols-1 md:grid-cols-2">
           <KernCard
             preline="Vorlage"
             title="Akteure auflisten"
@@ -149,10 +126,7 @@ const toc = [
             imageAlt="Schematische Darstellung der Vorlage mit dunkelblauen Blöcken mit den Aufschriften Akteursgruppe, Staatlich und Privatwirtschaft"
           >
             <div slot="footer">
-              <a
-                href="/downloads/AkteureAuflisten.docx"
-                class="kern-btn kern-btn--secondary"
-              >
+              <a href={template_akteure} class="kern-btn kern-btn--secondary">
                 <span class="kern-icon kern-icon--download" aria-hidden="true"
                 ></span>
                 <span class="kern-label">Word-Vorlage</span>
@@ -169,7 +143,7 @@ const toc = [
           >
             <div slot="footer">
               <a
-                href="/downloads/ZielgruppeAnalysieren.pptx"
+                href={powerpoint_zielgruppe}
                 class="kern-btn kern-btn--secondary"
               >
                 <span class="kern-icon kern-icon--download" aria-hidden="true"
@@ -181,6 +155,7 @@ const toc = [
         </div>
       </section>
       <section class="breakout! bg-lavender-200">
+        <StepNumber number={3} />
         <h3>Passende Interviewmethode wählen</h3>
         <p>
           Basierend auf Ihrer Übersicht der Akteurinnen und Akteure, können Sie
@@ -188,53 +163,56 @@ const toc = [
           Projektphase und Informationsbedarf eignen sich unterschiedliche
           Formen:
         </p>
-        <KernAccordion>
-          <span slot="header">Quantitative Interviews</span>
-          <span slot="body" class="accordion-body-full-width space-y-8">
-            <p>
-              Quantitative Interviews dienen der Überprüfung bestehender
-              Annahmen.
-            </p>
-            <p>
-              Sie arbeiten mit standardisierten Fragen und vorgegebenen
-              Antwortoptionen, um vergleichbare und statistisch auswertbare
-              Daten zu erheben. Geeignet zur Messung von Häufigkeiten und
-              Verteilungen.
-            </p>
-          </span>
-        </KernAccordion>
-        <KernAccordion>
-          <span slot="header">Qualitative Interviews</span>
-          <span slot="body" class="accordion-body-full-width space-y-8">
-            <p>
-              Qualitative Interviews dienen der Gewinnung neuer Erkenntnisse.
-            </p>
-            <p>
-              Sie machen Erfahrungen, Perspektiven und Zusammenhänge sichtbar
-              und ermöglichen ein vertieftes Verständnis der Praxis. Die Fragen
-              sind offen, der Gesprächsverlauf flexibel.
-            </p>
-            <p>Diese lassen sich nochmal unterscheiden:</p>
-            <ul>
-              <li>
-                <strong>Standardisiertes Leitfaden-Interview</strong>: Das
-                Interview folgt einem festen, vorab definierten Fragenkatalog.
-                Abweichungen sind nicht vorgesehen. Es eignet sich, wenn
-                relevante Informationen bereits bekannt sind und systematisch
-                erhoben werden sollen.
-              </li>
-              <li>
-                <strong>Halb-standardisiertes Leitfaden-Interview</strong>: Ein
-                Interviewleitfaden gibt die Themen vor, lässt aber Spielraum in
-                Reihenfolge und Formulierung der Fragen. Das Format ermöglicht
-                gezielte Vertiefungen und neue Erkenntnisse bei gleichzeitig
-                überschaubarem Auswertungsaufwand.
-              </li>
-            </ul>
-          </span>
-        </KernAccordion>
+        <div class="mt-16">
+          <KernAccordion>
+            <span slot="header">Quantitative Interviews</span>
+            <span slot="body" class="accordion-body-full-width space-y-8">
+              <p>
+                Quantitative Interviews dienen der Überprüfung bestehender
+                Annahmen.
+              </p>
+              <p>
+                Sie arbeiten mit standardisierten Fragen und vorgegebenen
+                Antwortoptionen, um vergleichbare und statistisch auswertbare
+                Daten zu erheben. Geeignet zur Messung von Häufigkeiten und
+                Verteilungen.
+              </p>
+            </span>
+          </KernAccordion>
+          <KernAccordion>
+            <span slot="header">Qualitative Interviews</span>
+            <span slot="body" class="accordion-body-full-width space-y-8">
+              <p>
+                Qualitative Interviews dienen der Gewinnung neuer Erkenntnisse.
+              </p>
+              <p>
+                Sie machen Erfahrungen, Perspektiven und Zusammenhänge sichtbar
+                und ermöglichen ein vertieftes Verständnis der Praxis. Die
+                Fragen sind offen, der Gesprächsverlauf flexibel.
+              </p>
+              <p>Diese lassen sich nochmal unterscheiden:</p>
+              <ul>
+                <li>
+                  <strong>Standardisiertes Leitfaden-Interview</strong>: Das
+                  Interview folgt einem festen, vorab definierten Fragenkatalog.
+                  Abweichungen sind nicht vorgesehen. Es eignet sich, wenn
+                  relevante Informationen bereits bekannt sind und systematisch
+                  erhoben werden sollen.
+                </li>
+                <li>
+                  <strong>Halb-standardisiertes Leitfaden-Interview</strong>:
+                  Ein Interviewleitfaden gibt die Themen vor, lässt aber
+                  Spielraum in Reihenfolge und Formulierung der Fragen. Das
+                  Format ermöglicht gezielte Vertiefungen und neue Erkenntnisse
+                  bei gleichzeitig überschaubarem Auswertungsaufwand.
+                </li>
+              </ul>
+            </span>
+          </KernAccordion>
+        </div>
       </section>
       <section>
+        <StepNumber number={4} />
         <h3>Gespräche durchführen</h3>
         <p>
           Nach der Vorbereitung laden Sie Ihre Gesprächspartnerinnen und
@@ -269,142 +247,152 @@ const toc = [
           Vorgehen, um eine positive Grundlage für zukünftige Gespräche zu schaffen.
         </p>
         <p>
-          <strong>Weiterführende Quelle:</strong> Orghandbuch des BMI 2026
+          <strong>Weiterführende Quelle: </strong>
+          <a
+            href="https://www.orghandbuch.de/SharedDocs/faqs/Webs/OHB/DE/Methoden_Befragung/13_Durchfuehrung_muendliches_Interview.html"
+            target="_blank">Orghandbuch des BMI 2026</a
+          >
         </p>
         <p>
           <strong
             >Für die parallele Dokumentation bieten sich folgende Formen an:</strong
           >
         </p>
-        <KernAccordion>
-          <span slot="header">Wortgetreues Transkript</span>
-          <span slot="body" class="accordion-body-full-width space-y-8">
-            <p>
-              Beim Transkript wird das Interview vollständig und möglichst
-              wortgetreu verschriftlicht.
-            </p>
-            <div>
-              <b>Vorteile:</b>
-              <ul>
-                <li>hohe Genauigkeit und Nachvollziehbarkeit</li>
-                <li>
-                  detaillierte Auswertung auch zu einem späteren Zeitpunkt
-                  möglich
-                </li>
-                <li>besonders geeignet bei komplexen oder sensiblen Themen</li>
-              </ul>
-            </div>
-            <div>
-              <b>Nachteile:</b>
-              <ul>
-                <li>sehr zeit- und ressourcenintensiv</li>
-                <li>hoher Aufwand bei Datenschutz und Anonymisierung</li>
-              </ul>
-            </div>
-          </span>
-        </KernAccordion>
-        <KernAccordion>
-          <span slot="header">Inhaltsnahe Mitschrift / Ergebnisprotokoll</span>
-          <span slot="body" class="accordion-body-full-width space-y-8">
-            <p>
-              Hierbei werden die zentralen Aussagen, Argumente und Beispiele
-              während oder unmittelbar nach dem Interview schriftlich
-              festgehalten.
-            </p>
-            <div>
-              <b>Vorteile:</b>
-              <ul>
-                <li>deutlich geringerer Aufwand</li>
-                <li>schnelle Weiterverarbeitung der Ergebnisse</li>
-                <li>
-                  gut geeignet bei klarer Fragestellung und begrenzter
-                  Interviewanzahl
-                </li>
-              </ul>
-            </div>
-            <div>
-              <b>Nachteile:</b>
-              <ul>
-                <li>geringere Detailtiefe</li>
-                <li>
-                  stärkere Abhängigkeit von der Interpretation der
-                  interviewführenden Person
-                </li>
-              </ul>
-            </div>
-          </span>
-        </KernAccordion>
-        <KernAccordion>
-          <span slot="header">Audioaufzeichnung</span>
-          <span slot="body" class="accordion-body-full-width space-y-8">
-            <p>
-              Das Interview wird aufgezeichnet und bei Bedarf später ausgewertet
-              oder teilweise transkribiert.
-            </p>
-            <div>
-              <b>Voraussetzungen dafür sind:</b>
-              <ul>
-                <li>
-                  vorherige ausdrückliche Einwilligung der befragten Person
-                </li>
-                <li>klare Regelung zur Speicherung, Nutzung und Löschung</li>
-              </ul>
-            </div>
-            <div>
-              <b>Vorteile:</b>
-              <ul>
-                <li>Entlastung während des Gesprächs</li>
-              </ul>
-            </div>
-            <div>
-              <b>Nachteile:</b>
-              <ul>
-                <li>Möglichkeit, Aussagen später zu überprüfen</li>
-                <li>
-                  Transkription und spätere Auswertung bedeuten einen großen
-                  zeitlichen Invest
-                </li>
-              </ul>
-            </div>
-          </span>
-        </KernAccordion>
-        <KernAccordion>
-          <span slot="header">Videoaufzeichnung</span>
-          <span slot="body" class="accordion-body-full-width space-y-8">
-            <p>
-              Videoaufzeichnungen in der Praxis Videoformate sind aufgrund des
-              hohen Datenschutz-Aufwands selten. Prüfen Sie vorab, ob die
-              Relevanz für die Regelungserarbeitung den Aufwand rechtfertigt.
-            </p>
-            <div>
-              <b>Voraussetzungen dafür sind, dass:</b>
-              <ul>
-                <li>Vertraulichkeit zugesichert und eingehalten wird,</li>
-                <li>personenbezogene Daten anonymisiert werden,</li>
-                <li>
-                  die Befragten über Art und Zweck der Dokumentation informiert
-                  sind.
-                </li>
-              </ul>
-            </div>
-            <div>
-              <b>Vorteile:</b>
-              <ul>
-                <li>zusätzliche Informationen durch Mimik und Gestik</li>
-              </ul>
-            </div>
-            <div>
-              <b>Nachteile:</b>
-              <ul>
-                <li>hohe Hemmschwelle für Befragte</li>
-                <li>erhöhter Datenschutz- und Organisationsaufwand</li>
-                <li>meist nicht erforderlich für die Regelungserarbeitung</li>
-              </ul>
-            </div>
-          </span>
-        </KernAccordion>
+        <div class="mt-32">
+          <KernAccordion>
+            <span slot="header">Wortgetreues Transkript</span>
+            <span slot="body" class="accordion-body-full-width space-y-8">
+              <p>
+                Beim Transkript wird das Interview vollständig und möglichst
+                wortgetreu verschriftlicht.
+              </p>
+              <div>
+                <b>Vorteile:</b>
+                <ul>
+                  <li>hohe Genauigkeit und Nachvollziehbarkeit</li>
+                  <li>
+                    detaillierte Auswertung auch zu einem späteren Zeitpunkt
+                    möglich
+                  </li>
+                  <li>
+                    besonders geeignet bei komplexen oder sensiblen Themen
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <b>Nachteile:</b>
+                <ul>
+                  <li>sehr zeit- und ressourcenintensiv</li>
+                  <li>hoher Aufwand bei Datenschutz und Anonymisierung</li>
+                </ul>
+              </div>
+            </span>
+          </KernAccordion>
+          <KernAccordion>
+            <span slot="header">Inhaltsnahe Mitschrift / Ergebnisprotokoll</span
+            >
+            <span slot="body" class="accordion-body-full-width space-y-8">
+              <p>
+                Hierbei werden die zentralen Aussagen, Argumente und Beispiele
+                während oder unmittelbar nach dem Interview schriftlich
+                festgehalten.
+              </p>
+              <div>
+                <b>Vorteile:</b>
+                <ul>
+                  <li>deutlich geringerer Aufwand</li>
+                  <li>schnelle Weiterverarbeitung der Ergebnisse</li>
+                  <li>
+                    gut geeignet bei klarer Fragestellung und begrenzter
+                    Interviewanzahl
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <b>Nachteile:</b>
+                <ul>
+                  <li>geringere Detailtiefe</li>
+                  <li>
+                    stärkere Abhängigkeit von der Interpretation der
+                    interviewführenden Person
+                  </li>
+                </ul>
+              </div>
+            </span>
+          </KernAccordion>
+          <KernAccordion>
+            <span slot="header">Audioaufzeichnung</span>
+            <span slot="body" class="accordion-body-full-width space-y-8">
+              <p>
+                Das Interview wird aufgezeichnet und bei Bedarf später
+                ausgewertet oder teilweise transkribiert.
+              </p>
+              <div>
+                <b>Voraussetzungen dafür sind:</b>
+                <ul>
+                  <li>
+                    vorherige ausdrückliche Einwilligung der befragten Person
+                  </li>
+                  <li>klare Regelung zur Speicherung, Nutzung und Löschung</li>
+                </ul>
+              </div>
+              <div>
+                <b>Vorteile:</b>
+                <ul>
+                  <li>Entlastung während des Gesprächs</li>
+                </ul>
+              </div>
+              <div>
+                <b>Nachteile:</b>
+                <ul>
+                  <li>Möglichkeit, Aussagen später zu überprüfen</li>
+                  <li>
+                    Transkription und spätere Auswertung bedeuten einen großen
+                    zeitlichen Invest
+                  </li>
+                </ul>
+              </div>
+            </span>
+          </KernAccordion>
+          <KernAccordion>
+            <span slot="header">Videoaufzeichnung</span>
+            <span slot="body" class="accordion-body-full-width space-y-8">
+              <p>
+                Videoaufzeichnungen in der Praxis Videoformate sind aufgrund des
+                hohen Datenschutz-Aufwands selten. Prüfen Sie vorab, ob die
+                Relevanz für die Regelungserarbeitung den Aufwand rechtfertigt.
+              </p>
+              <div>
+                <b>Voraussetzungen dafür sind, dass:</b>
+                <ul>
+                  <li>Vertraulichkeit zugesichert und eingehalten wird,</li>
+                  <li>personenbezogene Daten anonymisiert werden,</li>
+                  <li>
+                    die Befragten über Art und Zweck der Dokumentation
+                    informiert sind.
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <b>Vorteile:</b>
+                <ul>
+                  <li>zusätzliche Informationen durch Mimik und Gestik</li>
+                </ul>
+              </div>
+              <div>
+                <b>Nachteile:</b>
+                <ul>
+                  <li>hohe Hemmschwelle für Befragte</li>
+                  <li>erhöhter Datenschutz- und Organisationsaufwand</li>
+                  <li>meist nicht erforderlich für die Regelungserarbeitung</li>
+                </ul>
+              </div>
+            </span>
+          </KernAccordion>
+        </div>
       </section>
       <section class="breakout! bg-lavender-200">
+        <StepNumber number={5} />
         <h3>Auswerten</h3>
         <p>
           In mehreren Gesprächen mit einer Dauer von 45 - 60 Minuten kommen eine
@@ -418,7 +406,9 @@ const toc = [
         </p>
       </section>
       <section>
-        <h3>Alles auf einem Blick: Kompakte Checkliste zur Interviewführung</h3>
+        <h2 data-toc-label="Checkliste">
+          Alles auf einem Blick: Kompakte Checkliste zur Interviewführung
+        </h2>
         <p>
           Nutzen Sie diese Zusammenfassung, um die methodische Qualität Ihrer
           Interviews abzusichern und eine lückenlose Vorbereitung sowie
@@ -429,15 +419,12 @@ const toc = [
             preline="Vorlage"
             title="Checkliste"
             background="white"
-            body="Die Checkliste bündelt die wichtigsten Handlungsempfehlungen für Vorbereitung, Durchführung und Nachbereitung."
+            body="Die Checkliste bündelt die wichtigsten Handlungsempfehlun­gen für Vorbereitung, Durchführung und Nachbereitung."
             image={checklistenImg}
             imageAlt="Schematische Darstellung der Checkliste mit dem Titel Ablaufplan: Stakeholder-Interviews und Elementen zum  Abhaken"
           >
             <div slot="footer">
-              <a
-                href="/downloads/AkteureAuflisten.docx"
-                class="kern-btn kern-btn--secondary"
-              >
+              <a href={template_checklist} class="kern-btn kern-btn--secondary">
                 <span class="kern-icon kern-icon--download" aria-hidden="true"
                 ></span>
                 <span class="kern-label">Word-Vorlage</span>
@@ -447,7 +434,7 @@ const toc = [
         </div>
       </section>
       <section>
-        <h3>Relevante Quellen</h3>
+        <h2>Relevante Quellen</h2>
         <p>
           Nutzen Sie diese Zusammenfassung, um die methodische Qualität Ihrer
           Interviews abzusichern und eine lückenlose Vorbereitung sowie
@@ -486,20 +473,17 @@ const toc = [
           </li>
           <li>
             <a
-              href="https://digitalcheck.bund.de/documents/interview-leitfaden/Buergercheck.pdf"
+              href={buergercheck}
               target="_blank"
               rel="noopener"
               class="text-link text-link--download"
+              download
             >
               Bürgercheck (PDF)
             </a>
           </li>
         </ul>
       </section>
-      <nav slot="sidebar" class="space-y-md">
-        <p class="kern-heading-small">Auf dieser Seite</p>
-        <Toc items={toc} />
-      </nav>
-    </SidebarContainer>
+    </TocContainer>
   </main>
 </Layout>
