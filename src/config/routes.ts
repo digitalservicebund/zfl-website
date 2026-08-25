@@ -220,6 +220,17 @@ export const werkzeuge = {
   navLabel: null,
 } as const;
 
+export const werkzeuge_potenziale = {
+  key: "werkzeuge_potenziale",
+  path: "/werkzeuge/potenziale",
+  title: "Potenziale aufdecken",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: 5,
+  navLabel: null,
+} as const;
+
 export const werkzeuge_praxistauglichkeit = {
   key: "werkzeuge_praxistauglichkeit",
   path: "/werkzeuge/praxistauglichkeit",
@@ -237,7 +248,7 @@ export const werkzeuge_visualisieren = {
   title: "Gesetze visualisieren",
   parent: werkzeuge,
   sitemap: true,
-  isStagingOnly: false,
+  isStagingOnly: true,
   navOrder: null,
   navLabel: null,
 } as const;
@@ -262,6 +273,7 @@ export const allRoutes = [
   ueber_neueFruehphase,
   ueber_zahlenUndFakten,
   werkzeuge,
+  werkzeuge_potenziale,
   werkzeuge_praxistauglichkeit,
   werkzeuge_visualisieren,
 ] as const;
