@@ -3,9 +3,13 @@ eli: eli/bund/bgbl-1/2008/s778/2019-08-09/1/deu
 visOptions:
   - name: Genehmigungsvoraussetzungen
     filename: voraussetzungen
+    articles: ["3", "4", "5", "6"]
   - name: Zuständigkeitsprüfung
     filename: zustaendigkeit
+    articles: ["3", "5"]
   - name: Form und Dauer
     filename: form_und_dauer
+    articles: ["3", "6"]
   - name: Widerrufsverfahren
     filename: widerruf
+    articles: ["7"]

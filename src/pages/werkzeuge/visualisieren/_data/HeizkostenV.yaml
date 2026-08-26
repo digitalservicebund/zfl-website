@@ -3,9 +3,13 @@ eli: eli/bund/bgbl-1/1981/s261/2024-10-01/1/deu
 visOptions:
   - name: Geltungsbereich
     filename: geltungsbereich
+    articles: ["1", "2", "4", "5", "11"]
   - name: Kürzungsrecht
     filename: kuerzungsrecht
+    articles: ["5", "6a", "12"]
   - name: Kostenverteilung
     filename: kostenverteilung
+    articles: ["5", "6", "6a", "7", "8", "9"]
   - name: Pflichten des Gebäudeeigentümers
     filename: pflichtenkreislauf
+    articles: ["4", "5", "6", "6a", "6b", "12"]

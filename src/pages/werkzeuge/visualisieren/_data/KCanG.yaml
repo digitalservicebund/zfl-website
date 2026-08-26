@@ -3,11 +3,16 @@ eli: eli/bund/bgbl-1/2024/109-2/2025-01-01/1/deu
 visOptions:
   - name: Besitzmengen-Ampel
     filename: besitzmengen
+    articles: ["3", "34", "36"]
   - name: Privater Eigenanbau
     filename: privater_eigenanbau
+    articles: ["4", "9", "10", "34", "36"]
   - name: Erlaubnisverfahren Anbauvereinigung
     filename: anbauvereinigung_erlaubnis
+    articles: ["11", "12", "13", "14", "15"]
   - name: Straf- und Bußgeldschema
     filename: straf_bussgeld
+    articles: ["34", "35", "35a", "36"]
   - name: Tilgungsverfahren Bundeszentralregister
     filename: tilgungsverfahren
+    articles: ["40", "41", "42"]

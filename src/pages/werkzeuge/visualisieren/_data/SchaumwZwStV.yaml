@@ -3,11 +3,16 @@ eli: eli/bund/bgbl-1/2009/s3302/2023-02-13/1/deu
 visOptions:
   - name: Erlaubnisverfahren Steuerlager
     filename: erlaubnisverfahren
+    articles: ["4", "5", "6", "6a", "7", "8"]
   - name: Beförderung mit e-Verwaltungsdokument
     filename: befoerderung_evd
+    articles: ["16", "19", "21"]
   - name: Ausfallverfahren bei Systemausfall
     filename: ausfallverfahren
+    articles: ["24", "25", "27", "28"]
   - name: Unregelmäßigkeiten während der Beförderung
     filename: unregelmaessigkeiten
+    articles: ["21", "28", "29"]
   - name: Zerstörung, Verlust und Vernichtung
     filename: zerstoerung_verlust
+    articles: ["10", "18"]

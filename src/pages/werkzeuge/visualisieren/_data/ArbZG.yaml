@@ -3,11 +3,16 @@ eli: eli/bund/bgbl-1/1994/s1171/2025-01-01/1/deu
 visOptions:
   - name: Werktägliche Höchstarbeitszeit
     filename: hoechstarbeitszeit
+    articles: ["3"]
   - name: Ruhepausen
     filename: ruhepausen
+    articles: ["4"]
   - name: Ruhezeit & Verkürzung
     filename: ruhezeit
+    articles: ["5"]
   - name: Sonn-/Feiertagsbeschäftigung
     filename: sonn_feiertage
+    articles: ["9", "10", "11"]
   - name: Notfall-Abweichungen
     filename: notfall_abweichungen
+    articles: ["14"]

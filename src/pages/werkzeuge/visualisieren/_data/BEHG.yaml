@@ -3,11 +3,16 @@ eli: eli/bund/bgbl-1/2019/s2728/2025-03-06/1/deu
 visOptions:
   - name: Verantwortlicher-Bestimmung
     filename: verantwortlicher
+    articles: ["2", "3", "6", "8"]
   - name: Emissionsberichterstattung & -abgabe
     filename: emissionsberichterstattung
+    articles: ["6", "7", "8"]
   - name: Preispfad Festpreis/Versteigerung
     filename: preispfad
+    articles: ["10"]
   - name: Carbon-Leakage-Kompensation
     filename: carbon_leakage
+    articles: ["11"]
   - name: Sanktionen bei Pflichtverletzung
     filename: sanktionen
+    articles: ["20", "21", "22"]

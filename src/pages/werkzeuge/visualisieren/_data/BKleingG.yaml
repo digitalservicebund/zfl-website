@@ -3,11 +3,16 @@ eli: eli/bund/bgbl-1/1983/s210/2006-10-01/1/deu
 visOptions:
   - name: Kleingarten-Begriffsprüfung
     filename: begriffspruefung
+    articles: ["1", "6", "9", "15"]
   - name: Höchstpacht und Anpassung
     filename: pachthoehe
+    articles: ["5"]
   - name: Kündigungsarten und -fristen
     filename: kuendigungsarten
+    articles: ["7", "8", "9"]
   - name: Kündigungsentschädigung
     filename: kuendigungsentschaedigung
+    articles: ["9", "11"]
   - name: Enteignungsverfahren
     filename: enteignung
+    articles: ["15"]

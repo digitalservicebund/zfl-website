@@ -3,11 +3,16 @@ eli: eli/bund/bgbl-1/2017/s1822/2026-06-27/1/deu
 visOptions:
   - name: Kundensorgfaltspflichten-Prüfschema
     filename: kundensorgfaltspflichten
+    articles: ["10", "11", "12", "15"]
   - name: Wirtschaftlich Berechtigter-Ermittlung
     filename: wirtschaftlich_berechtigter
+    articles: ["3"]
   - name: Verstärkte Sorgfaltspflichten Hochrisiko
     filename: verstaerkte_sorgfaltspflichten
+    articles: ["10", "15", "43"]
   - name: Verdachtsmeldeverfahren
     filename: verdachtsmeldeverfahren
+    articles: ["43", "46"]
   - name: Risikomanagement & interne Sicherung
     filename: risikomanagement
+    articles: ["4", "5", "6", "7"]

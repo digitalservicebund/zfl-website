@@ -3,11 +3,16 @@ eli: eli/bund/bgbl-1/2000/s1045/2026-07-02/1/deu
 visOptions:
   - name: Meldepflicht bei Erkrankung
     filename: meldepflicht
+    articles: ["6", "7", "8", "9", "11"]
   - name: Schutzmaßnahmen-Prüfschema
     filename: schutzmassnahmen
+    articles: ["28", "29", "30", "31", "33"]
   - name: Absonderung (Quarantäne)
     filename: absonderung
+    articles: ["30"]
   - name: Tätigkeitsverbote Lebensmittelbereich
     filename: taetigkeitsverbote
+    articles: ["42", "43"]
   - name: Entschädigungsanspruch
     filename: entschaedigung
+    articles: ["30", "31", "56"]

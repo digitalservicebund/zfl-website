@@ -3,11 +3,16 @@ eli: eli/bund/banz-at/1922/s681/2026-07-29/1/deu
 visOptions:
   - name: Betriebsgenehmigung Luftfahrtunternehmen
     filename: betriebsgenehmigung
+    articles: ["20", "21a"]
   - name: Haftung für Fluggastschäden
     filename: haftung_fluggast
+    articles: ["44", "45", "46", "47", "49a"]
   - name: Schlichtungsverfahren Fluggastrechte
     filename: schlichtungsverfahren
+    articles: ["57", "57a", "57b"]
   - name: Register über Betreiber unbemannter Fluggeräte
     filename: register_drohnenbetreiber
+    articles: ["66a"]
   - name: Ordnungswidrigkeiten beim Drohnenbetrieb
     filename: bussgeld_drohnenbetrieb
+    articles: ["58"]

@@ -1,15 +1,5 @@
 <script lang="ts">
-  interface VisExample {
-    name: string;
-    filename: string;
-  }
-
-  interface LawExample {
-    title: string;
-    short: string;
-    eli: string;
-    visOptions: VisExample[];
-  }
+  import type { LawExample } from "./_types";
 
   interface Props {
     examples: LawExample[];

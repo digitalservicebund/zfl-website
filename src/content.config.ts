@@ -56,6 +56,9 @@ const visualisierungen = defineCollection({
       z.object({
         name: z.string(),
         filename: z.string(),
+        /** Relevante Paragraphen, auf denen die Visualisierung basiert
+         * bzw. auf die sie sich bezieht, z.B. "29a" -> "§ 29a". */
+        articles: z.array(z.string()).default([]),
       }),
     ),
   }),

@@ -3,11 +3,16 @@ eli: eli/bund/bgbl-1/2021/s1215/2024-05-14/1/deu
 visOptions:
   - name: Anwendbarkeitsprüfung
     filename: anwendbarkeit
+    articles: ["2", "3", "7"]
   - name: Automatisierter Upload-Filter
     filename: upload_filter
+    articles: ["7", "8", "9", "10", "11", "14"]
   - name: Internes Beschwerdeverfahren
     filename: beschwerdeverfahren
+    articles: ["9", "14"]
   - name: Außergerichtliche Streitbeilegung
     filename: streitbeilegung
+    articles: ["14", "15", "16", "17", "19"]
   - name: Maßnahmen gegen Missbrauch
     filename: missbrauch
+    articles: ["7", "8", "14", "18"]

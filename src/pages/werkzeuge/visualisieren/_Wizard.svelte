@@ -10,18 +10,7 @@
   import ChipBtn from "./_ChipBtn.svelte";
   import LawFinder from "./_LawFinder.svelte";
   import Viewer from "./_Viewer.svelte";
-
-  interface VisExample {
-    name: string;
-    filename: string;
-  }
-
-  interface LawExample {
-    title: string;
-    short: string;
-    eli: string;
-    visOptions: VisExample[];
-  }
+  import type { LawExample } from "./_types";
 
   let { examples }: { examples: LawExample[] } = $props();
 
@@ -493,6 +482,9 @@
                   onclick={() => (selectedVisOption = option.name)}
                 >
                   {option.name}
+                  {#if option.articles.length}
+                    ({option.articles.map((a) => `§${a}`).join(", ")})
+                  {/if}
                 </ChipBtn>
               {/each}
             </div>
