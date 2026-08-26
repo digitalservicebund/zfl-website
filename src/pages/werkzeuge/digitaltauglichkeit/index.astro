@@ -3,7 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
 import KernCard from "@/components/KernCard.astro";
 import ImageTextOverlay from "@/components/ImageTextOverlay.astro";
-import { getCollection } from "astro:content";
+import { getEntries } from "astro:content";
 import IconAutoStories from "~icons/ic/baseline-auto-stories";
 import IconComputer from "~icons/ic/outline-computer";
 import IconQueryBuilder from "~icons/ic/outline-query-builder";
@@ -17,16 +17,13 @@ const frontmatter = {
   navOrder: 4,
 };
 
-const allTools = await getCollection("werkzeuge");
-
-const resourceTitles = [
-  "5 Prinzipien der Digitaltauglichkeit",
-  "Beispiele von Digitaltauglichkeit im Regelungstext",
-];
-
-const resources = resourceTitles.map((title) =>
-  allTools.find((tool) => tool.data.title === title),
-);
+const resources = await getEntries([
+  { collection: "werkzeuge", id: "5-prinzipien-der-digitaltauglichkeit" },
+  {
+    collection: "werkzeuge",
+    id: "beispiele-von-digitaltauglichkeit-im-regelungstext",
+  },
+]);
 ---
 
 <Layout title={frontmatter.title}>
@@ -90,6 +87,13 @@ const resources = resourceTitles.map((title) =>
               Der Digitalcheck gilt für alle Regelungsvorhaben auf Bundesebene
               (Gesetze, Verordnungen und Verwaltungsvorschriften), sowohl für
               neue Vorhaben als auch für Änderungen an bestehenden Regelungen.
+            </p>
+            <p>
+              Auch die Länder sind eingeladen den Digitalcheck nach zu nutzen.
+              Informationen dazu finden Sie auf der <a
+                href="https://digitalcheck.bund.de/bundeslaender"
+                target="_blank">Bundesländer-Infoseite</a
+              >
             </p>
           </div>
         </div>
