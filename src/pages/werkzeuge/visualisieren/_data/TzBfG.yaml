@@ -3,16 +3,16 @@ eli: eli/bund/bgbl-1/2000/s1966/2022-08-01/1/deu
 visOptions:
   - name: Zulässigkeit der Befristung
     filename: befristung_zulaessigkeit
-    articles: ["14", "16"]
+    articles: ["§14", "§16"]
   - name: Anspruch auf Arbeitszeitverringerung
     filename: verringerung_arbeitszeit
-    articles: ["8"]
+    articles: ["§8"]
   - name: Brückenteilzeit
     filename: bruecken_teilzeit
-    articles: ["8", "9a"]
+    articles: ["§8", "§9a"]
   - name: Verlängerung der Arbeitszeit
     filename: verlaengerung_arbeitszeit
-    articles: ["9"]
+    articles: ["§9"]
   - name: Folgen unwirksamer Befristung
     filename: unwirksame_befristung
-    articles: ["15", "16", "17"]
+    articles: ["§15", "§16", "§17"]

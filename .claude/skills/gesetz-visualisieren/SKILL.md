@@ -131,13 +131,17 @@ Speichern:
      Schritt 3), `filename` (Dateiname der `.mmd`-Datei ohne Verzeichnis und
      Endung, z.B. `"klagefristen"`) und `articles` hinzufügen: die Liste
      aller im Diagramm referenzierten Paragraphen/Artikel dieses Gesetzes,
-     dedupliziert, als reine Nummer ohne "§"/"Art."-Präfix (z.B. `"29a"`
-     für `§ 29a`). Bei `flowchart`/`stateDiagram`-Diagrammen aus den
+     dedupliziert, jeweils mit dem im Gesetzestext verwendeten Präfix
+     (z.B. `"§29a"` bei deutschen Gesetzen/Verordnungen, `"Art. 17"` bei
+     EU-Rechtsakten — Schreibweise wie in den Knotenlabels der `.mmd`-Datei
+     übernehmen). Bei `flowchart`/`stateDiagram`-Diagrammen aus den
      `art-zN`-Ankern der `{{ELI}}`-Links ableiten (nur die Zahl+Buchstabe
-     vor `_abs-z`, nicht die Absatznummer); bei `sequenceDiagram`/`gantt`
-     ohne Links aus den unverlinkten `§N`-Textverweisen. Verweise auf
-     andere Gesetze nicht aufnehmen. Kein Prozess ohne Paragraphenbezug →
-     `articles: []`.
+     vor `_abs-z`, nicht die Absatznummer) und mit "§" versehen, außer bei
+     EU-Rechtsakten (siehe Schritt 2/4-Linkkonvention), dort das im Diagramm
+     verwendete "Art. N"-Format übernehmen; bei `sequenceDiagram`/`gantt`
+     ohne Links direkt aus den unverlinkten Textverweisen im jeweils
+     verwendeten Format übernehmen. Verweise auf andere Gesetze nicht
+     aufnehmen. Kein Prozess ohne Paragraphenbezug → `articles: []`.
 3. Kurze Zusammenfassung an den Nutzer: welches Gesetz, welche Prozesse,
    wo gespeichert. Auf `/werkzeuge/visualisieren` im lokalen Dev-Server
    verweisen, um die Diagramme zu prüfen.

@@ -3,13 +3,13 @@ eli: eli/bund/bgbl-1/1991/s1318/1992-02-29/1/deu
 visOptions:
   - name: Abgabepflicht-Prüfung
     filename: abgabepflicht
-    articles: ["1", "2"]
+    articles: ["§1", "§2"]
   - name: Bemessungsgrundlagen-Ermittlung
     filename: bemessungsgrundlage
-    articles: ["3"]
+    articles: ["§3"]
   - name: Tarifberechnung
     filename: tarifberechnung
-    articles: ["3", "4"]
+    articles: ["§3", "§4"]
   - name: Anrechnung bei Doppelbesteuerung
     filename: doppelbesteuerung
-    articles: ["5"]
+    articles: ["§5"]

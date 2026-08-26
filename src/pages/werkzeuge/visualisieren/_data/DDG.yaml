@@ -3,16 +3,16 @@ eli: eli/bund/bgbl-1/2024/149/2026-07-01/1/deu
 visOptions:
   - name: Anwendungsbereichsprüfung
     filename: anwendungsbereich
-    articles: ["1"]
+    articles: ["§1"]
   - name: Haftungsprivileg & Sperrungsanspruch
     filename: haftungsprivileg
-    articles: ["7", "8"]
+    articles: ["§7", "§8"]
   - name: Beschlagnahmeverfahren
     filename: beschlagnahme
-    articles: ["26"]
+    articles: ["§26"]
   - name: Durchsetzungsverfahren
     filename: durchsetzungsverfahren
-    articles: ["27"]
+    articles: ["§27"]
   - name: Gerichtliche Zugangsbeschränkung
     filename: zugangsbeschraenkung
-    articles: ["29"]
+    articles: ["§29"]

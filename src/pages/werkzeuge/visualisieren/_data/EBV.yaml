@@ -3,7 +3,7 @@ eli: eli/bund/bgbl-1/2012/s2712/2025-01-01/1/deu
 visOptions:
   - name: Ausstellungspflicht Entgeltbescheinigung
     filename: ausstellungspflicht
-    articles: ["1", "2"]
+    articles: ["§1", "§2"]
   - name: Berechnungskaskade Entgelt
     filename: berechnungskaskade
-    articles: ["1"]
+    articles: ["§1"]

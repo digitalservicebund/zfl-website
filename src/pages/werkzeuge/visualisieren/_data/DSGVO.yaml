@@ -7,16 +7,16 @@ eli: ""
 visOptions:
   - name: Rechtmäßigkeit der Verarbeitung
     filename: rechtmaessigkeit
-    articles: ["6"]
+    articles: ["Art. 6"]
   - name: Auskunftsrecht und Fristen
     filename: auskunftsrecht_fristen
-    articles: ["12", "15"]
+    articles: ["Art. 12", "Art. 15"]
   - name: Meldung von Datenschutzverletzungen
     filename: datenpanne_meldung
-    articles: ["33", "34"]
+    articles: ["Art. 33", "Art. 34"]
   - name: Datenschutz-Folgenabschätzung
     filename: folgenabschaetzung
-    articles: ["35", "36", "58"]
+    articles: ["Art. 35", "Art. 36", "Art. 58"]
   - name: Internationale Datenübermittlung
     filename: drittlandtransfer
-    articles: ["45", "46", "49"]
+    articles: ["Art. 45", "Art. 46", "Art. 49"]

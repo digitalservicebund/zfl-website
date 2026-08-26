@@ -3,16 +3,16 @@ eli: eli/bund/bgbl-1/2004/s718/2026-01-01/1/deu
 visOptions:
   - name: Fälligkeit der Gerichtsgebühren
     filename: faelligkeit_gebuehren
-    articles: ["6", "9"]
+    articles: ["§6", "§9"]
   - name: Kostenvorschusspflicht-Prüfschema
     filename: kostenvorschusspflicht
-    articles: ["12", "14", "17", "18"]
+    articles: ["§12", "§14", "§17", "§18"]
   - name: Streitwertfestsetzung
     filename: streitwertfestsetzung
-    articles: ["61", "62", "63", "64", "68"]
+    articles: ["§61", "§62", "§63", "§64", "§68"]
   - name: Ermäßigung bei vorzeitiger Erledigung
     filename: ermaessigung_vorzeitige_erledigung
     articles: []
   - name: PKH-Auswirkung auf Kostenerhebung
     filename: pkh_kostenerhebung
-    articles: ["14", "28", "31"]
+    articles: ["§14", "§28", "§31"]

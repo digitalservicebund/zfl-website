@@ -3,16 +3,16 @@ eli: eli/bund/bgbl-1/1961/s58/2025-01-01/1/deu
 visOptions:
   - name: Annahme des Pfandes
     filename: annahme
-    articles: ["5"]
+    articles: ["§5"]
   - name: Pfandschein
     filename: pfandschein
-    articles: ["3", "6"]
+    articles: ["§3", "§6"]
   - name: Verwertung des Pfandes
     filename: verwertung
-    articles: ["9", "12a"]
+    articles: ["§9", "§12a"]
   - name: Überschüsse aus Verwertung
     filename: ueberschuss
-    articles: ["5", "11", "12a"]
+    articles: ["§5", "§11", "§12a"]
   - name: Ordnungswidrigkeiten-Prüfschema
     filename: ordnungswidrigkeiten
-    articles: ["3", "5", "6", "7", "8", "9", "10", "11", "12a"]
+    articles: ["§3", "§5", "§6", "§7", "§8", "§9", "§10", "§11", "§12a"]

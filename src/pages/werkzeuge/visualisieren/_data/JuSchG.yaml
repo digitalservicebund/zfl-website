@@ -3,16 +3,16 @@ eli: eli/bund/bgbl-1/2002/s2730/2024-05-14/1/deu
 visOptions:
   - name: Aufenthalt in Gaststätten
     filename: gaststaetten
-    articles: ["4"]
+    articles: ["§4"]
   - name: Abgabe alkoholischer Getränke
     filename: alkoholabgabe
-    articles: ["1", "9"]
+    articles: ["§1", "§9"]
   - name: Zutritt zu Filmveranstaltungen
     filename: filmveranstaltungen
-    articles: ["11"]
+    articles: ["§11"]
   - name: Indizierungsverfahren
     filename: indizierungsverfahren
-    articles: ["21", "23", "25"]
+    articles: ["§21", "§23", "§25"]
   - name: Vorsorgemaßnahmen der Anbieter
     filename: vorsorgemassnahmen
-    articles: ["24a", "24b"]
+    articles: ["§24a", "§24b"]

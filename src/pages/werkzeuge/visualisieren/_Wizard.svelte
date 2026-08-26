@@ -489,7 +489,7 @@
                 >
                   {option.name}
                   {#if option.articles.length}
-                    ({option.articles.map((a) => `§${a}`).join(", ")})
+                    ({option.articles.join(", ")})
                   {/if}
                 </ChipBtn>
               {/each}

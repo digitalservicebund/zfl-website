@@ -3,10 +3,10 @@ eli: eli/bund/bgbl-1/2008/s1649/2024-07-01/1/deu
 visOptions:
   - name: Testablauf und Bestehen
     filename: testablauf
-    articles: ["1"]
+    articles: ["§1"]
   - name: Verfahrenswege (Bundesamt/Land)
     filename: verfahrenswege
-    articles: ["2", "3"]
+    articles: ["§2", "§3"]
   - name: Datenverarbeitung und Löschung
     filename: datenverarbeitung
-    articles: ["4"]
+    articles: ["§4"]

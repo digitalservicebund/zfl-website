@@ -3,16 +3,17 @@ eli: eli/bund/bgbl-1/2006/s1897/2025-01-01/1/deu
 visOptions:
   - name: Prüfschema Benachteiligung
     filename: pruefschema_benachteiligung
-    articles: ["1", "2", "3", "4", "5", "7", "8", "9", "10", "20", "22"]
+    articles:
+      ["§1", "§2", "§3", "§4", "§5", "§7", "§8", "§9", "§10", "§20", "§22"]
   - name: Rechtfertigung im Beschäftigungsverhältnis
     filename: rechtfertigung_beschaeftigung
-    articles: ["7", "8", "9", "10"]
+    articles: ["§7", "§8", "§9", "§10"]
   - name: Beschwerde- & Schutzpflichten
     filename: beschwerde_schutzpflichten
-    articles: ["12", "13", "14"]
+    articles: ["§12", "§13", "§14"]
   - name: Entschädigungs- & Klagefristen
     filename: entschaedigung_fristen
-    articles: ["7", "15"]
+    articles: ["§7", "§15"]
   - name: Zivilrechtliche Ansprüche
     filename: zivilrecht_ansprueche
-    articles: ["19", "21"]
+    articles: ["§19", "§21"]

@@ -4,16 +4,28 @@ visOptions:
   - name: Asylverfahren-Ablauf
     filename: asylverfahren_ablauf
     articles:
-      ["13", "13a", "14", "16", "18", "19", "20", "25", "31", "34", "38"]
+      [
+        "§13",
+        "§13a",
+        "§14",
+        "§16",
+        "§18",
+        "§19",
+        "§20",
+        "§25",
+        "§31",
+        "§34",
+        "§38",
+      ]
   - name: Unzulässigkeits-/Dublin-Prüfung
     filename: unzulaessigkeit_dublin
-    articles: ["29", "34a", "71"]
+    articles: ["§29", "§34a", "§71"]
   - name: Offensichtlich unbegründet & Klagefristen
     filename: offensichtlich_unbegruendet_klagefristen
-    articles: ["29a", "30", "36", "74", "75"]
+    articles: ["§29a", "§30", "§36", "§74", "§75"]
   - name: Sicherer Herkunfts-/Drittstaat
     filename: sicherer_herkunftsstaat_drittstaat
-    articles: ["18", "26a", "27", "29a", "29b"]
+    articles: ["§18", "§26a", "§27", "§29a", "§29b"]
   - name: Folgeantrag-Prüfung
     filename: folgeantrag
-    articles: ["29", "34", "34a", "71"]
+    articles: ["§29", "§34", "§34a", "§71"]

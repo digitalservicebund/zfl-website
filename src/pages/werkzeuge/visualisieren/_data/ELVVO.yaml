@@ -3,16 +3,16 @@ eli: "https://eur-lex.europa.eu/eli/reg/2026/1738/oj/deu"
 visOptions:
   - name: "Anwendungsbereich"
     filename: "anwendungsbereich"
-    articles: ["2"]
+    articles: ["Art. 2"]
   - name: "Verwertungsnachweis"
     filename: "verwertungsnachweis"
-    articles: ["24", "25"]
+    articles: ["Art. 24", "Art. 25"]
   - name: "Behandlungspflichten"
     filename: "behandlungspflichten"
-    articles: ["26", "27", "28", "29", "30"]
+    articles: ["Art. 26", "Art. 27", "Art. 28", "Art. 29", "Art. 30"]
   - name: "Herstellerverantwortung"
     filename: "herstellerverantwortung"
-    articles: ["17", "18", "19"]
+    articles: ["Art. 17", "Art. 18", "Art. 19"]
   - name: "Ausfuhrkontrolle"
     filename: "ausfuhrkontrolle"
-    articles: ["39", "40", "41", "42", "43", "44"]
+    articles: ["Art. 39", "Art. 40", "Art. 41", "Art. 42", "Art. 43", "Art. 44"]

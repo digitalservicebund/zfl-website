@@ -3,16 +3,16 @@ eli: eli/bund/bgbl-1/2006/s2748/2026-01-01/1/deu
 visOptions:
   - name: Anspruchsvoraussetzungen Elterngeld
     filename: anspruchsvoraussetzungen
-    articles: ["1"]
+    articles: ["§1"]
   - name: Basiselterngeld, Plus & Bonus
     filename: basiselterngeld_plus_bonus
-    articles: ["4", "4a", "4b"]
+    articles: ["§4", "§4a", "§4b"]
   - name: Bezugsdauer & Partnermonate
     filename: bezugsdauer_partnermonate
-    articles: ["4"]
+    articles: ["§4"]
   - name: Elternzeit-Anmeldeverfahren
     filename: elternzeit_anmeldung
-    articles: ["16"]
+    articles: ["§16"]
   - name: Einkommensgrenzen & -anrechnung
     filename: einkommensgrenzen_anrechnung
-    articles: ["1", "2", "3"]
+    articles: ["§1", "§2", "§3"]

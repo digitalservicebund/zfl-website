@@ -3,16 +3,16 @@ eli: eli/bund/bgbl-1/2021/s2065/2022-01-01/1/deu
 visOptions:
   - name: Erlaubnisverfahren
     filename: erlaubnisverfahren
-    articles: ["1", "2"]
+    articles: ["§1", "§2"]
   - name: Straftat vs. Ordnungswidrigkeit
     filename: straftat_owi
-    articles: ["4", "5"]
+    articles: ["§4", "§5"]
   - name: Zuordnung der Spielsteuerart
     filename: steuerartenzuordnung
-    articles: ["8", "16", "26", "36", "46"]
+    articles: ["§8", "§16", "§26", "§36", "§46"]
   - name: Lotteriesteuerbefreiung
     filename: lotteriesteuerbefreiung
-    articles: ["28", "32"]
+    articles: ["§28", "§32"]
   - name: Besteuerungsverfahren
     filename: besteuerungsverfahren
-    articles: ["12", "13", "58", "59"]
+    articles: ["§12", "§13", "§58", "§59"]

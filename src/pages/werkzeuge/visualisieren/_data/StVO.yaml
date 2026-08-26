@@ -3,16 +3,16 @@ eli: eli/bund/bgbl-1/2013/s367/2025-01-01/1/deu
 visOptions:
   - name: Vorfahrtsregeln-Prüfschema
     filename: vorfahrt
-    articles: ["8"]
+    articles: ["§8"]
   - name: Überholvorgang-Voraussetzungen
     filename: ueberholen
-    articles: ["5"]
+    articles: ["§5"]
   - name: Halten/Parken-Verbotsschema
     filename: halten_parken
-    articles: ["12"]
+    articles: ["§12"]
   - name: Verhalten bei Unfall
     filename: unfall
-    articles: ["34"]
+    articles: ["§34"]
   - name: Abbiegen an Kreuzungen
     filename: abbiegen
-    articles: ["9"]
+    articles: ["§9"]
