@@ -50,7 +50,9 @@ const visualisierungen = defineCollection({
     title: z.string(),
     /** ELI-Pfad des Gesetzes auf rechtsinformationen.bund.de, z.B.
      * "eli/bund/bgbl-1/2000/s1966/2022-08-01/1/deu". Wird verwendet, um
-     * "{{ELI}}"-Platzhalter in den .mmd-Dateien zu Norm-Links aufzulösen. */
+     * "{{ELI}}"-Platzhalter in den .mmd-Dateien zu Norm-Links aufzulösen.
+     * Für EU-Rechtsakte (nicht in RIS indexiert) stattdessen eine volle
+     * EUR-Lex-URL, z.B. "https://eur-lex.europa.eu/eli/reg/2026/1738/oj/deu". */
     eli: z.string(),
     visOptions: z.array(
       z.object({

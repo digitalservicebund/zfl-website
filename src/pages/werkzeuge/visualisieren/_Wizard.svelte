@@ -33,8 +33,14 @@
 
   const RIS_BASE_URL = "https://testphase.rechtsinformationen.bund.de/gesetze";
 
+  // Most examples reference a RIS ELI path. EU legislation isn't indexed in
+  // RIS, so its `eli` field holds a full EUR-Lex URL instead — used as-is.
+  function resolveEliUrl(eli: string): string {
+    return eli.startsWith("http") ? eli : `${RIS_BASE_URL}/${eli}`;
+  }
+
   function resolveNormLinks(source: string, eli: string): string {
-    return source.replaceAll("{{ELI}}", `${RIS_BASE_URL}/${eli}`);
+    return source.replaceAll("{{ELI}}", resolveEliUrl(eli));
   }
 
   const searchParams = new SvelteURLSearchParams(
@@ -466,7 +472,7 @@
       {#if selectedExample}
         <p class="kern-body kern-body--muted">
           Originaltext: <a
-            href={`${RIS_BASE_URL}/${selectedExample.eli}`}
+            href={resolveEliUrl(selectedExample.eli)}
             target="_blank">{selectedExample.short}</a
           >
         </p>
