@@ -28,14 +28,16 @@ const { class: className } = Astro.props;
         <template x-for="item in items" :key="item.id">
           <li class="list-none">
             <a
-              class="kern-link kern-link--small"
+              class="kern-link kern-link--small toc-link"
+              :class="{ 'toc-link--active': activeId === item.id }"
               :href="`#${item.id}`"
               x-text="item.label"></a>
             <ol x-show="item.children.length > 0" type="1">
               <template x-for="child in item.children" :key="child.id">
                 <li>
                   <a
-                    class="kern-link kern-link--small"
+                    class="kern-link kern-link--small toc-link"
+                    :class="{ 'toc-link--active': activeId === child.id }"
                     :href="`#${child.id}`"
                     x-text="child.label"></a>
                 </li>
@@ -53,6 +55,14 @@ const { class: className } = Astro.props;
     color: var(--kern-color-action-default-contextual, #2044aa);
     font-size: var(--kern-typography-font-size-small-static, 16px);
     font-weight: var(--kern-typography-font-weight-body-default, 400);
+  }
+
+  .toc-link {
+    text-decoration: none;
+  }
+
+  .toc-link--active {
+    text-decoration: underline;
   }
 </style>
 

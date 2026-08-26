@@ -37,6 +37,10 @@ function buildTocTree(headings: HTMLHeadingElement[]): TocNode[] {
   return root;
 }
 
+function flattenIds(nodes: TocNode[]): string[] {
+  return nodes.flatMap((node) => [node.id, ...flattenIds(node.children)]);
+}
+
 /**
  * Scans `contentRoot` for heading elements and returns them as a nested
  * tree, nested by heading level. Headings without an `id` get one
@@ -62,9 +66,38 @@ export function getTocTree(
 export function sidebarTocData() {
   return {
     items: [] as TocNode[],
+    activeId: null as string | null,
     setup(el: HTMLElement) {
       const content = el.querySelector<HTMLElement>("[data-sidebar-content]");
-      if (content) this.items = getTocTree(content);
+      if (!content) return;
+
+      this.items = getTocTree(content);
+
+      const headings = flattenIds(this.items)
+        .map((id) => document.getElementById(id))
+        .filter((heading): heading is HTMLElement => heading !== null);
+      if (headings.length === 0) return;
+
+      // Recomputed from scratch on every crossing so it works the same
+      // whether the user scrolls down or back up: the active heading is
+      // simply the last one (in document order) that has scrolled past
+      // the trigger line near the top of the viewport.
+      const updateActiveId = () => {
+        const triggerY = window.innerHeight * 0.3;
+        let current: string | null = null;
+        for (const heading of headings) {
+          if (heading.getBoundingClientRect().top > triggerY) break;
+          current = heading.id;
+        }
+        this.activeId = current;
+      };
+
+      const observer = new IntersectionObserver(updateActiveId, {
+        rootMargin: "0px 0px -70% 0px",
+      });
+
+      for (const heading of headings) observer.observe(heading);
+      updateActiveId();
     },
   };
 }
