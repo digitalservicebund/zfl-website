@@ -2,11 +2,16 @@
 import Hero from "@/components/Hero.astro";
 import KernCard from "@/components/KernCard.astro";
 import Layout from "@/layouts/Layout.astro";
-import { begleitungen, bessereRechtsetzung, werkzeuge } from "@/config/routes";
+import {
+  begleitungen,
+  bessereRechtsetzung,
+  werkzeuge_ressourcen_visualisierungen,
+} from "@/config/routes";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import { mailto } from "@/utils/mailtoHelper";
 import AblaufFruephase from "@/images/AblaufFruephase.png";
 import { Image } from "astro:assets";
+import { werkzeuge_ressourcen } from "@/config/routes";
 
 export const frontmatter = {
   title: "Die neue Frühphase",
@@ -81,7 +86,7 @@ export const frontmatter = {
           title="Visualisieren Sie den Status Quo"
           background="white"
           interactive
-          href="https://digitalcheck.bund.de/methoden/visualisieren/flussdiagramm"
+          href={werkzeuge_ressourcen_visualisierungen.path}
           target_option="_blank"
         >
           <div slot="pre-header" class="mb-16">
@@ -100,7 +105,7 @@ export const frontmatter = {
           title="Nutzen Sie unsere Methodensammlung"
           background="white"
           interactive
-          href={werkzeuge.path}
+          href={werkzeuge_ressourcen.path}
         >
           <div class="kern-body">
             <p>

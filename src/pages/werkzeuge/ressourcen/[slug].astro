@@ -56,7 +56,8 @@ const { Content } = await render(werkzeug);
         <div class="py-md flex gap-8" data-pagefind-ignore>
           <a
             class="kern-btn kern-btn--primary"
-            href={werkzeug.data.externalUrl}
+            href={werkzeug.data.href}
+            target={werkzeug.data.isExternal ? "_blank" : "_self"}
           >
             <span
               class="kern-icon kern-icon--open-in-new kern-icon--default"

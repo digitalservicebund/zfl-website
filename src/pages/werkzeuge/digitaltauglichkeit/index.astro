@@ -126,7 +126,8 @@ const resources = await getEntries([
                   title={resource.data.title}
                   body={resource.data.description}
                   interactive={true}
-                  href={resource.data.externalUrl}
+                  href={resource.data.href}
+                  target_option={resource.data.isExternal ? "_blank" : "_self"}
                   image={resource.data.image}
                   imageAlt={
                     resource.data.image ? resource.data.title : undefined

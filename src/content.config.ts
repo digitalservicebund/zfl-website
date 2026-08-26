@@ -1,3 +1,4 @@
+import { allRoutes } from "@/config/routes";
 import { withBase } from "@/utils/path";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
@@ -23,22 +24,26 @@ export type WerkzeugCategory = (typeof WERKZEUGE_CATEGORIES)[number];
 const werkzeuge = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "src/content/werkzeuge" }),
   schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      type: z.array(z.enum(WERKZEUGE_TYPES)),
-      category: z.array(z.enum(WERKZEUGE_CATEGORIES)),
-      description: z.string(),
-      source: z.string().optional(),
-      externalUrl: z
-        .string()
-        .optional()
-        .transform((val) =>
-          val?.startsWith("/") // prefix local assets with base URL, e.g. /zfl-website/previews/test-branch
-            ? withBase(val)
-            : val,
-        ),
-      image: image().optional(),
-    }),
+    z
+      .object({
+        title: z.string(),
+        type: z.array(z.enum(WERKZEUGE_TYPES)),
+        category: z.array(z.enum(WERKZEUGE_CATEGORIES)),
+        description: z.string(),
+        source: z.string().optional(),
+        url: z.string().optional(),
+        image: image().optional(),
+      })
+      .transform(({ url, ...rest }) => {
+        const route = allRoutes.find((r) => r.key === url);
+        const href = route
+          ? withBase(route.path)
+          : url?.startsWith("/") // prefix local assets with base URL, e.g. /zfl-website/previews/test-branch
+            ? withBase(url)
+            : url;
+
+        return { ...rest, href, isExternal: !route };
+      }),
 });
 
 export const VISUALISIERUNGSARTEN = [

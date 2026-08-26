@@ -149,7 +149,8 @@ const PAGEFIND_INSTANCE = "werkzeuge";
                   >
                     <KernCard
                       title={t.data.title}
-                      href={t.data.externalUrl}
+                      href={t.data.href}
+                      target_option={t.data.isExternal ? "_blank" : "_self"}
                       body={t.data.description}
                       background="white"
                       interactive={false}

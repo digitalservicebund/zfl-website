@@ -500,7 +500,8 @@ const powerpointTemplate =
           external_ressources.map((ressource) => (
             <KernCard
               title={ressource.data.title}
-              href={ressource.data.externalUrl}
+              href={ressource.data.href}
+              target_option={ressource.data.isExternal ? "_blank" : "_self"}
               body={ressource.data.description}
               background="white"
               interactive={false}

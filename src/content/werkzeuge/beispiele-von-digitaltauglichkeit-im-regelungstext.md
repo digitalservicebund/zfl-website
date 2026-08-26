@@ -4,6 +4,6 @@ type: [Leitfaden]
 category: [Praxistauglichkeit]
 description: Hier finden Sie Regelungsbeispiele zur Anwendung der Prinzipien.
 source: Zentrum für Legistik
-externalUrl: https://zfl.bund.de/
+url: werkzeuge_digitaltauglichkeit_beispiele
 image: ./beispiele-von-digitaltauglichkeit-im-regelungstext.png
 ---
