@@ -1,0 +1,171 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import KernCard from "@/components/KernCard.astro";
+import ImageTextOverlay from "@/components/ImageTextOverlay.astro";
+import { getEntries } from "astro:content";
+import IconAutoStories from "~icons/ic/baseline-auto-stories";
+import IconComputer from "~icons/ic/outline-computer";
+import IconQueryBuilder from "~icons/ic/outline-query-builder";
+import IconPlaylistAddCheck from "~icons/ic/outline-playlist-add-check";
+import digitalcheckImg from "@/images/Digitalcheck.png";
+import { DIGITALCHECK_URL, ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
+
+const frontmatter = {
+  title: "Ihr Weg zur Digitaltauglichkeit",
+  navLabel: "Digitaltauglichkeit",
+  navOrder: 4,
+};
+
+const resources = await getEntries([
+  { collection: "werkzeuge", id: "5-prinzipien-der-digitaltauglichkeit" },
+  {
+    collection: "werkzeuge",
+    id: "beispiele-von-digitaltauglichkeit-im-regelungstext",
+  },
+]);
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero
+      ><h1>{frontmatter.title}</h1><p>
+        Erfahren Sie hier, was Digitaltauglichkeit für Ihr Vorhaben bedeutet,
+        welche Vorteile sie bietet, welche Vorhaben betroffen sind und wie sich
+        der Digitalcheck nahtlos in die Phasen Ihres Regelungsentwurfs einfügt.
+      </p>
+    </Hero>
+    <section>
+      <h2>Zusammengefasst</h2>
+      <div class="mt-32 space-y-32">
+        <div class="flex gap-24">
+          <IconComputer
+            class="text-cosmic-blue-base size-64 shrink-0"
+            aria-hidden="true"
+          />
+          <div class="px-16 pt-3">
+            <h3>Was ist Digitaltauglichkeit?</h3>
+            <p>
+              Regelungen werden vermehrt digital umgesetzt. Beispiele sind eine
+              Gesetzesänderung, mit der ein Papierantrag durch einen
+              Online-Antrag ersetzt wird oder eine Verordnung, die Änderungen in
+              den IT-Verfahren nachgelagerter Behörden erfordert.
+            </p>
+            <p>
+              Damit die digitale Umsetzung reibungslos klappt, muss die Regelung
+              digitaltauglich gestaltet sein. Das heißt erstens, dass der
+              digitalen Umsetzung nichts im Wege steht, wie zum Beispiel das
+              persönliche Einreichen von Dokumenten. Zweitens soll aktiv
+              gefördert werden, dass möglichst viele Schritte von Computern
+              durchgeführt oder unterstützt werden.
+            </p>
+          </div>
+        </div>
+        <div class="flex gap-24">
+          <IconQueryBuilder
+            class="text-cosmic-blue-base size-64 shrink-0"
+            aria-hidden="true"
+          />
+          <div class="px-16 pt-3">
+            <h3>Digitaltaugliche Regelungen sparen Ressourcen</h3>
+            <p>
+              Eine gute digitale Umsetzung spart langfristig Zeit und sorgt
+              dafür, dass Ziel und Wirkung des Vorhabens erreicht werden:
+              aufseiten der Normadressatinnen und Normadressaten und aufseiten
+              der Verwaltung.
+            </p>
+          </div>
+        </div>
+        <div class="flex gap-24">
+          <IconPlaylistAddCheck
+            class="text-cosmic-blue-base size-64 shrink-0"
+            aria-hidden="true"
+          />
+          <div class="px-16 pt-3">
+            <h3>Alle Regelungsvorhaben sind betroffen</h3>
+            <p>
+              Der Digitalcheck gilt für alle Regelungsvorhaben auf Bundesebene
+              (Gesetze, Verordnungen und Verwaltungsvorschriften), sowohl für
+              neue Vorhaben als auch für Änderungen an bestehenden Regelungen.
+            </p>
+            <p>
+              Auch die Länder sind eingeladen den Digitalcheck nach zu nutzen.
+              Informationen dazu finden Sie auf der <a
+                href="https://digitalcheck.bund.de/bundeslaender"
+                target="_blank">Bundesländer-Infoseite</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <ImageTextOverlay
+        image={digitalcheckImg}
+        imageAlt="Screenshot der Digitalcheck-Startseite, wo der Prozess zu Digitaltauglichkeit in drei Schritten dargestellt ist"
+        linkHref={DIGITALCHECK_URL.url}
+        linkText="Zum Digitalcheck"
+      >
+        <Fragment slot="content">
+          <h2>Digitalcheck</h2>
+          <p>
+            Auf der Webseite des Digitalcheck finden Sie alle notwendigen
+            Schritte, um Digitaltauglichkeit sicherzustellen.
+          </p>
+        </Fragment>
+      </ImageTextOverlay>
+    </section>
+    <section>
+      <h1>Hilfreiche Ressourcen</h1>
+      <div class="gap-md grid grid-cols-3">
+        {
+          resources.map(
+            (resource) =>
+              resource && (
+                <KernCard
+                  title={resource.data.title}
+                  body={resource.data.description}
+                  interactive={true}
+                  href={resource.data.externalUrl}
+                  image={resource.data.image}
+                  imageAlt={
+                    resource.data.image ? resource.data.title : undefined
+                  }
+                >
+                  <div
+                    slot="pre-header"
+                    class="mb-16 flex w-full justify-between"
+                  >
+                    <div class="flex gap-8">
+                      {resource.data.type.map((type) => (
+                        <span
+                          class={`kern-badge kern-badge--${type.toLowerCase()}`}
+                        >
+                          <span class="kern-label">{type}</span>
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div
+                    slot="footer"
+                    class="text-icon-muted! flex items-center gap-8"
+                  >
+                    <IconAutoStories class="h-32 w-32 shrink-0" />
+                    <p class="kern-subline kern-subline-dark py-0">
+                      Quelle: {resource.data.source}
+                    </p>
+                  </div>
+                </KernCard>
+              ),
+          )
+        }
+      </div>
+    </section>
+    <Hero level="root">
+      <h2>Fragen zu Digitaltauglichkeit?</h2>
+      <p>Wir können Sie gerne beraten. Kontaktieren Sie uns!</p>
+      <p>Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a></p>
+      <p>E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a></p>
+    </Hero>
+  </main>
+</Layout>

@@ -25,10 +25,14 @@ pnpm test:e2e -- --grep "<test name>"    # Run e2e tests by name
 
 ### Content model
 
-All content lives as files in `src/pages/` — no CMS, no Content Collections (see ADR 0007):
+Most content lives as files in `src/pages/` (see ADR 0007):
 
 - `.astro` for pages with complex component structure
 - `.mdx` for text-heavy pages; must specify `layout: "@/layouts/MdxLayout.astro"` in frontmatter
+
+Some content is defined in content collections under `src/content`.
+
+Prettier's built-in MDX parser can't reliably format a Markdown list (`- item`) that's a direct child of a custom JSX component. Always write these lists with a blank line right after the opening tag and right before the closing tag.
 
 ### Route management
 

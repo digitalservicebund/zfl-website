@@ -19,8 +19,5 @@ const { class: className, keyboardToggle, ...props } = Astro.props;
   type="button"
   {...props}
 >
-  <span
-    class="kern-icon kern-icon--search kern-icon--default"
-    aria-hidden="true"></span>
-  <span class="hidden sm:block" aria-hidden="true">Suche</span>
+  <slot />
 </button>

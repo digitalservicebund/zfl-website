@@ -17,11 +17,21 @@
   --color-lavender-400: #eceef6;
   --color-lavender-surface-highlight: #e3e6f2;
 
+  --color-kern-contextual: #6e7597;
+
   --color-icon-muted: #757575;
 
   --color-ds-violet: #4c2c92;
 
   --spacing-kern-default: var(--kern-metric-space-default);
+
+  /* KERN Foundations generic colors */
+  /* See https://www.kern-ux.de/design-system/foundations/farbe/generisch */
+  --color-orange-050: #ffe7b6;
+  --color-red-050: #fee4e0;
+  --color-violet-050: #f2e6f9;
+  --color-green-050: #cfe7d2;
+  --color-lightblue-025: #ddf8ff;
 
   --spacing-sm: 1.25rem; /* 20px */
   --spacing-md: 2rem; /* 32px */

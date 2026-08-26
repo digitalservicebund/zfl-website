@@ -22,3 +22,7 @@ export const ZFL_EMAIL_SCHULUNG = {
   url: "mailto:schulung@zfl.bund.de",
   display: "schulung@zfl.bund.de",
 };
+
+export const DIGITALCHECK_URL = {
+  url: "https://digitalcheck.bund.de/",
+};
