@@ -22,7 +22,7 @@ Frage den Nutzer nach dem Namen oder der Abkürzung des Gesetzes (z.B.
 
 Basis-URL: `https://testphase.rechtsinformationen.bund.de`
 (OpenAPI-Spec zur Referenz:
-https://raw.githubusercontent.com/digitalservicebund/ris-search/refs/heads/main/frontend/src/public/openapi.json)
+https://docs.rechtsinformationen.bund.de/v3/api-docs)
 
 1. Suche das Gesetz:
    `GET /v1/legislation?searchTerm={name}&size=10&pageIndex=0`
