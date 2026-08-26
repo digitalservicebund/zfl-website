@@ -269,7 +269,7 @@
   async function copyMermaidSource() {
     if (!mermaidSource) return;
 
-    await navigator.clipboard.writeText(mermaidSource);
+    await navigator.clipboard.writeText(stripLinks(mermaidSource));
 
     mermaidCopied = true;
     clearTimeout(mermaidCopiedTimeoutId);
