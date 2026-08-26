@@ -85,6 +85,9 @@ fileignoreconfig:
   - filename: src/components/global/TocContainer.astro
     allowed_patterns:
       - key
+  - filename: src/pages/werkzeuge/ressourcen/flussdiagramme.astro
+    allowed_patterns:
+      - "Falls Sie noch keine Legende haben, erstellen Sie eine."
   - filename: src/scripts/toc.ts
     checksum: 5478839febe093ac90ca0405735836e17b2eb984a77dbcd3739c38d96ef261d6
   - filename: src/content/visualisierung/ablauf-eines-online-verfahrens.md
