@@ -1,0 +1,33 @@
+var e=`---
+summary: "Zeigt den Weg von der Wahl zwischen individueller und kollektiver Herstellerverantwortung über die Zulassung bis zur Registrierung des Herstellers oder der Organisation für Herstellerverantwortung."
+---
+flowchart TD
+    A["Hersteller stellt erstmals Fahrzeuge in<br/>einem Mitgliedstaat bereit"] --> B{"Individuelle oder kollektive Erfüllung<br/>der erweiterten Herstellerverantwortung?<br/>— <a href='{{ELI}}#017.001' target='_blank' rel='noopener'>Art. 17 Abs. 1</a>"}
+
+    B -->|Individuell| C["Hersteller beantragt Zulassung bei<br/>zuständiger Behörde<br/>— <a href='{{ELI}}#018.001' target='_blank' rel='noopener'>Art. 18 Abs. 1</a>"]
+    B -->|Kollektiv| D["Benannte Organisation für Hersteller-<br/>verantwortung beantragt Zulassung<br/>— <a href='{{ELI}}#018.001' target='_blank' rel='noopener'>Art. 18 Abs. 1</a>"]
+
+    C --> E{"Anforderungen nach Art. 8a Abs. 3<br/>Buchst. a–d RL 2008/98/EG erfüllt und<br/>Maßnahmen ausreichend?<br/>— <a href='{{ELI}}#018.002' target='_blank' rel='noopener'>Art. 18 Abs. 2</a>"}
+    D --> E
+
+    E -->|Nein| F["Zulassung wird nicht erteilt"]
+    E -->|Ja| G["Zulassung erteilt<br/>— <a href='{{ELI}}#018.002' target='_blank' rel='noopener'>Art. 18 Abs. 2</a>"]
+
+    G --> H["Registrierungsantrag im nationalen<br/>Herstellerregister mit Angaben<br/>nach Anhang IX<br/>— <a href='{{ELI}}#019.002' target='_blank' rel='noopener'>Art. 19 Abs. 2</a>,<br/><a href='{{ELI}}#019.003' target='_blank' rel='noopener'>Abs. 3</a>"]
+
+    H --> I{"Zuständige Behörde prüft Antrag<br/>binnen 12 Wochen<br/>— <a href='{{ELI}}#019.008' target='_blank' rel='noopener'>Art. 19 Abs. 8 Buchst. b</a>"}
+
+    I -->|"Vollständig und<br/>Anforderungen erfüllt"| J["Registrierungsnummer wird erteilt<br/>— <a href='{{ELI}}#019.008' target='_blank' rel='noopener'>Art. 19 Abs. 8 Buchst. b</a>"]
+    I -->|"Unvollständig oder<br/>Anforderungen nicht erfüllt"| K["Registrierung wird verweigert oder<br/>zurückgezogen<br/>— <a href='{{ELI}}#019.010' target='_blank' rel='noopener'>Art. 19 Abs. 10</a>"]
+
+    J --> L["Inverkehrbringen im Mitgliedstaat<br/>zulässig — <a href='{{ELI}}#019.002' target='_blank' rel='noopener'>Art. 19 Abs. 2</a>"]
+    K --> M["Kein Inverkehrbringen im<br/>Mitgliedstaat zulässig"]
+
+    G --> N{"Eigenkontrolle mind. alle 3 Jahre:<br/>Zulassungsvoraussetzungen weiterhin<br/>erfüllt? — <a href='{{ELI}}#018.005' target='_blank' rel='noopener'>Art. 18 Abs. 5</a>"}
+    N -->|Nein| O["Zuständige Behörde kann die<br/>Zulassung widerrufen<br/>— <a href='{{ELI}}#018.006' target='_blank' rel='noopener'>Art. 18 Abs. 6</a>"]
+
+    style L fill:#d4edda,stroke:#2d8a4a
+    style F fill:#f8d7da,stroke:#c0392b
+    style M fill:#f8d7da,stroke:#c0392b
+    style O fill:#f8d7da,stroke:#c0392b
+`;export{e as default};
