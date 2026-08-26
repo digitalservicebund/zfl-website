@@ -242,6 +242,17 @@ export const werkzeuge_ressourcen = {
   navLabel: null,
 } as const;
 
+export const werkzeuge_ressourcen_flussdiagramme = {
+  key: "werkzeuge_ressourcen_flussdiagramme",
+  path: "/werkzeuge/ressourcen/flussdiagramme",
+  title: "Flussdiagramm erstellen",
+  parent: werkzeuge_ressourcen,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: 2,
+  navLabel: "Flussdiagramm",
+} as const;
+
 export const werkzeuge_ressourcen_interviewleitfaden = {
   key: "werkzeuge_ressourcen_interviewleitfaden",
   path: "/werkzeuge/ressourcen/interviewleitfaden",
@@ -308,6 +319,7 @@ export const allRoutes = [
   werkzeuge,
   werkzeuge_praxistauglichkeit,
   werkzeuge_ressourcen,
+  werkzeuge_ressourcen_flussdiagramme,
   werkzeuge_ressourcen_interviewleitfaden,
   werkzeuge_ressourcen_itSysteme,
   werkzeuge_ressourcen_technischeUmsetzbarkeit,
