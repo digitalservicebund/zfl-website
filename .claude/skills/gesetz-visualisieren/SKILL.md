@@ -121,6 +121,15 @@ Speichern:
    `slug` = kurzer, kebab-freier snake_case-Bezeichner ohne Abkürzungspräfix,
    z.B. `KSchG/klagefristen.mmd`). Frontmatter-Block (siehe oben) gefolgt
    vom reinen Mermaid-Code hineinschreiben, keine Markdown-Codefences.
+   Für `Abkuerzung` nur eine offizielle oder in der Praxis gebräuchliche
+   Abkürzung verwenden (z.B. aus dem `abbreviation`-Feld der RIS-Trefferliste
+   aus Schritt 2, aus dem Gesetzestext selbst oder einer verbreiteten
+   Fundstelle) — niemals eine neue Abkürzung erfinden (z.B. durch
+   Kombinieren von Fragmenten wie einem englischen Akronym mit "VO"). Gibt
+   es keine gebräuchliche deutsche Abkürzung (z.B. bei neueren EU-Verordnungen),
+   die im Ausland/EU-Kontext gebräuchliche Abkürzung verwenden (z.B. `ELVR`
+   statt einer selbst konstruierten wie `ELVVO`). Ist auch das nicht
+   auffindbar, den Nutzer nach der gewünschten Abkürzung fragen statt zu raten.
 2. Ergänze `src/pages/werkzeuge/visualisieren/_data/{Abkuerzung}.yaml`:
    - Falls das Gesetz dort noch keine Metadaten-Datei hat, eine neue Datei
      `{Abkuerzung}.yaml` (identisch zum Ordnernamen aus Schritt 1, z.B.
