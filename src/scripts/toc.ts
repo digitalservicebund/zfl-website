@@ -24,11 +24,12 @@ function buildTocTree(headings: HTMLHeadingElement[]): TocNode[] {
     const level = Number(heading.tagName[1]);
     const node: TocNode = { id: heading.id, label, children: [] };
 
-    while (stack.length > 0 && stack[stack.length - 1].level >= level) {
+    // -1 as fallback keeps the condition false when the stack is empty.
+    while ((stack.at(-1)?.level ?? -1) >= level) {
       stack.pop();
     }
 
-    const parent = stack[stack.length - 1];
+    const parent = stack.at(-1);
     (parent ? parent.node.children : root).push(node);
     stack.push({ level, node });
   }
