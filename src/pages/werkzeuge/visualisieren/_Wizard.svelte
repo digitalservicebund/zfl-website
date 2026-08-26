@@ -475,6 +475,12 @@
     <div class="space-y-32">
       <LawFinder {examples} bind:selected={selectedExample} />
       {#if selectedExample}
+        <p class="kern-body kern-body--muted">
+          Originaltext: <a
+            href={`${RIS_BASE_URL}/${selectedExample.eli}`}
+            target="_blank">{selectedExample.short}</a
+          >
+        </p>
         {#if !isLoadingVisOptions}
           <div class="kern-form-input">
             <span class="kern-label"
@@ -495,7 +501,7 @@
         {#if isLoadingVisOptions || isLoading}
           {@render loadingIndicator()}
         {:else if summary}
-          <div class="kern-body kern-body--muted">{summary}</div>
+          <p class="kern-body kern-body--muted">{summary}</p>
         {/if}
       {/if}
     </div>
