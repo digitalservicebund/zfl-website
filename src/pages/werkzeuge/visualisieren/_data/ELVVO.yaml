@@ -9,10 +9,10 @@ visOptions:
     articles: ["Art. 24", "Art. 25"]
   - name: "Behandlungspflichten"
     filename: "behandlungspflichten"
-    articles: ["Art. 26", "Art. 27", "Art. 28", "Art. 29", "Art. 30"]
+    articles: ["Art. 26-30"]
   - name: "Herstellerverantwortung"
     filename: "herstellerverantwortung"
-    articles: ["Art. 17", "Art. 18", "Art. 19"]
+    articles: ["Art. 17-19"]
   - name: "Ausfuhrkontrolle"
     filename: "ausfuhrkontrolle"
-    articles: ["Art. 39", "Art. 40", "Art. 41", "Art. 42", "Art. 43", "Art. 44"]
+    articles: ["Art. 39-44"]

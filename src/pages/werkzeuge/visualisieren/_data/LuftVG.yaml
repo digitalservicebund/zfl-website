@@ -6,10 +6,10 @@ visOptions:
     articles: ["§20", "§21a"]
   - name: Haftung für Fluggastschäden
     filename: haftung_fluggast
-    articles: ["§44", "§45", "§46", "§47", "§49a"]
+    articles: ["§§44-47", "§49a"]
   - name: Schlichtungsverfahren Fluggastrechte
     filename: schlichtungsverfahren
-    articles: ["§57", "§57a", "§57b"]
+    articles: ["§§57-57b"]
   - name: Register über Betreiber unbemannter Fluggeräte
     filename: register_drohnenbetreiber
     articles: ["§66a"]

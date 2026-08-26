@@ -12,7 +12,7 @@ visOptions:
     articles: ["§5"]
   - name: Sonn-/Feiertagsbeschäftigung
     filename: sonn_feiertage
-    articles: ["§9", "§10", "§11"]
+    articles: ["§§9-11"]
   - name: Notfall-Abweichungen
     filename: notfall_abweichungen
     articles: ["§14"]

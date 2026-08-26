@@ -9,7 +9,7 @@ visOptions:
     articles: ["§12", "§14", "§17", "§18"]
   - name: Streitwertfestsetzung
     filename: streitwertfestsetzung
-    articles: ["§61", "§62", "§63", "§64", "§68"]
+    articles: ["§§61-64", "§68"]
   - name: Ermäßigung bei vorzeitiger Erledigung
     filename: ermaessigung_vorzeitige_erledigung
     articles: []

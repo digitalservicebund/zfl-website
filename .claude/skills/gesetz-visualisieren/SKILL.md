@@ -129,19 +129,40 @@ Speichern:
      anlegen. Die Datei ist reine YAML-Daten, kein Markdown-Frontmatter.
    - Für jeden Prozess ein `visOptions`-Objekt mit `name` (Prozessname aus
      Schritt 3), `filename` (Dateiname der `.mmd`-Datei ohne Verzeichnis und
-     Endung, z.B. `"klagefristen"`) und `articles` hinzufügen: die Liste
-     aller im Diagramm referenzierten Paragraphen/Artikel dieses Gesetzes,
-     dedupliziert, jeweils mit dem im Gesetzestext verwendeten Präfix
+     Endung, z.B. `"klagefristen"`) und `articles` hinzufügen: die Liste der
+     **Haupt-Paragraphen/Artikel**, in denen die im Diagramm visualisierte
+     Logik tatsächlich verankert ist (die Norm(en), aus denen sich Fristen,
+     Voraussetzungen, Prüfschritte oder Rechtsfolgen des Diagramms ergeben) —
+     nicht jede im Diagramm verlinkte Nebenfundstelle. Reine Querverweise
+     (z.B. eine Begriffsbestimmungsnorm, ein "vgl. §X"-Verweis, eine
+     Verfahrensvorschrift, die im Diagramm nur am Rande erwähnt wird, ohne
+     dass ihre eigene Prüflogik abgebildet ist) gehören nicht in `articles`,
+     auch wenn im Knotenlabel auf sie verlinkt wird. Faustregel: Nur Normen
+     aufnehmen, ohne die das Diagramm seinen Sinn verliert, weil eine
+     zentrale Frist, Voraussetzung oder Rechtsfolge fehlen würde — nicht
+     jede Norm, die irgendwo im Diagramm auftaucht. In der Praxis meist 1-2
+     Paragraphen pro Prozess. Im Zweifel (z.B. bei einer Ausnahmeregel, die
+     eine eigene Voraussetzungsprüfung enthält) mit gesundem Menschenverstand
+     entscheiden, ob die Norm tragend oder nur begleitend ist.
+     Dedupliziert, jeweils mit dem im Gesetzestext verwendeten Präfix
      (z.B. `"§29a"` bei deutschen Gesetzen/Verordnungen, `"Art. 17"` bei
      EU-Rechtsakten — Schreibweise wie in den Knotenlabels der `.mmd`-Datei
-     übernehmen). Bei `flowchart`/`stateDiagram`-Diagrammen aus den
-     `art-zN`-Ankern der `{{ELI}}`-Links ableiten (nur die Zahl+Buchstabe
-     vor `_abs-z`, nicht die Absatznummer) und mit "§" versehen, außer bei
-     EU-Rechtsakten (siehe Schritt 2/4-Linkkonvention), dort das im Diagramm
-     verwendete "Art. N"-Format übernehmen; bei `sequenceDiagram`/`gantt`
-     ohne Links direkt aus den unverlinkten Textverweisen im jeweils
-     verwendeten Format übernehmen. Verweise auf andere Gesetze nicht
-     aufnehmen. Kein Prozess ohne Paragraphenbezug → `articles: []`.
+     übernehmen). Mindestens drei unmittelbar aufeinanderfolgende Paragraphen/
+     Artikel zu einem Bereich zusammenfassen statt einzeln aufzulisten, z.B.
+     `"§7", "§8", "§9"` → `"§§7-9"` (Doppel-Paragraphenzeichen bei
+     Bereichen deutscher Normen) und `"Art. 3", "Art. 4", "Art. 5"` →
+     `"Art. 3-5"`. Bei nur zwei aufeinanderfolgenden oder bei Lücken in der
+     Nummerierung einzeln auflisten (z.B. `"§7", "§9"` bleibt getrennt, da
+     §8 fehlt).
+     Bei `flowchart`/`stateDiagram`-Diagrammen aus den
+     `art-zN`-Ankern der `{{ELI}}`-Links der so identifizierten
+     Hauptparagraphen ableiten (nur die Zahl+Buchstabe vor `_abs-z`, nicht
+     die Absatznummer) und mit "§" versehen, außer bei EU-Rechtsakten
+     (siehe Schritt 2/4-Linkkonvention), dort das im Diagramm verwendete
+     "Art. N"-Format übernehmen; bei `sequenceDiagram`/`gantt` ohne Links
+     direkt aus den unverlinkten Textverweisen im jeweils verwendeten
+     Format übernehmen. Verweise auf andere Gesetze nicht aufnehmen. Kein
+     Prozess ohne Paragraphenbezug → `articles: []`.
 3. Kurze Zusammenfassung an den Nutzer: welches Gesetz, welche Prozesse,
    wo gespeichert. Auf `/werkzeuge/visualisieren` im lokalen Dev-Server
    verweisen, um die Diagramme zu prüfen.

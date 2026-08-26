@@ -6,13 +6,13 @@ visOptions:
     articles: ["§2", "§3", "§7"]
   - name: Automatisierter Upload-Filter
     filename: upload_filter
-    articles: ["§7", "§8", "§9", "§10", "§11", "§14"]
+    articles: ["§§7-11"]
   - name: Internes Beschwerdeverfahren
     filename: beschwerdeverfahren
     articles: ["§9", "§14"]
   - name: Außergerichtliche Streitbeilegung
     filename: streitbeilegung
-    articles: ["§14", "§15", "§16", "§17", "§19"]
+    articles: ["§16", "§17"]
   - name: Maßnahmen gegen Missbrauch
     filename: missbrauch
-    articles: ["§7", "§8", "§14", "§18"]
+    articles: ["§18"]

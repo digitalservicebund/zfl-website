@@ -3,13 +3,13 @@ eli: eli/bund/bgbl-1/2003/s1593/2026-01-01/1/deu
 visOptions:
   - name: Antragsverfahren
     filename: antragsverfahren
-    articles: ["§2", "§4", "§5", "§6", "§7"]
+    articles: ["§2", "§§4-7"]
   - name: Rechtsbehelfsverfahren
     filename: rechtsbehelfsverfahren
-    articles: ["§7", "§9", "§10"]
+    articles: ["§9", "§10"]
   - name: Spannungs- und Verteidigungsfall
     filename: spannungs_verteidigungsfall
-    articles: ["§3", "§6", "§11"]
+    articles: ["§11"]
   - name: Vorgezogener Antrag
     filename: vorgezogener_antrag
     articles: ["§2"]

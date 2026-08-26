@@ -6,7 +6,7 @@ visOptions:
     articles: ["§4"]
   - name: Abgabe alkoholischer Getränke
     filename: alkoholabgabe
-    articles: ["§1", "§9"]
+    articles: ["§9"]
   - name: Zutritt zu Filmveranstaltungen
     filename: filmveranstaltungen
     articles: ["§11"]
@@ -15,4 +15,4 @@ visOptions:
     articles: ["§21", "§23", "§25"]
   - name: Vorsorgemaßnahmen der Anbieter
     filename: vorsorgemassnahmen
-    articles: ["§24a", "§24b"]
+    articles: ["§24b"]
