@@ -45,8 +45,8 @@ importers:
         specifier: ^2.0.1
         version: 2.0.1(astro@7.2.6(@astrojs/markdown-remark@7.2.4(supports-color@7.2.0))(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@types/node@26.3.0)(jiti@2.7.0)(yaml@2.9.0))
       astro-route-generator:
-        specifier: github:digitalservicebund/astro-route-generator#0.1.12
-        version: https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/023209dd7765b8502f22dacef7442fa3df317f8e(astro@7.2.6(@astrojs/markdown-remark@7.2.4(supports-color@7.2.0))(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@types/node@26.3.0)(jiti@2.7.0)(yaml@2.9.0))
+        specifier: github:digitalservicebund/astro-route-generator#0.1.11
+        version: https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/8b8a2c7677964c5c880d23c05aaffed2a7023258(astro@7.2.6(@astrojs/markdown-remark@7.2.4(supports-color@7.2.0))(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@types/node@26.3.0)(jiti@2.7.0)(yaml@2.9.0))
       astro-seo:
         specifier: ^1.1.0
         version: 1.1.0(prettier-plugin-astro@0.14.1)(prettier@3.9.6)(typescript@6.0.3)
@@ -1959,9 +1959,9 @@ packages:
     peerDependencies:
       astro: ^2.0.4 || ^3 || ^4 || ^5 || ^6 || ^7
 
-  astro-route-generator@https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/023209dd7765b8502f22dacef7442fa3df317f8e:
-    resolution: {gitHosted: true, integrity: sha512-1GFmRLTdbpKMsntj8oGrOumca/TpYmcosYtOiFrrqksfjPPVwQNuWfQGPW0PbGgWPgLU2YQRi2dn3gDFBy0TxA==, tarball: https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/023209dd7765b8502f22dacef7442fa3df317f8e}
-    version: 0.1.12
+  astro-route-generator@https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/8b8a2c7677964c5c880d23c05aaffed2a7023258:
+    resolution: {gitHosted: true, integrity: sha512-BgMz+/nCtGHnHHGv1ynT00iaIUd3/XmQXDt1JV2NPLW8Tvikp2r39OIRINWkIAlvNFt3U/Mty+0CxNGVbrKNYg==, tarball: https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/8b8a2c7677964c5c880d23c05aaffed2a7023258}
+    version: 0.1.11
     peerDependencies:
       astro: '>=4.0.0'
 
@@ -2749,8 +2749,8 @@ packages:
     resolution: {integrity: sha512-CY6crGq313MX8GkwvB7tzgp99vjQxY1++5y10/BKN/GUfHqWaOGQMNZkBvqSzsZKWk/ijwHlWzzkLulsGHhjWQ==}
     hasBin: true
 
-  js-yaml@5.4.0:
-    resolution: {integrity: sha512-jE7vUJIebKzYQI5xu4co5CRBDlDEYnHrdzsxs4O2giCz4v2SbVMYKpmt1D9L38OKQAeCWmrOTRiCV93u0UkaJA==}
+  js-yaml@5.3.0:
+    resolution: {integrity: sha512-muutsYr+e2+d3rTgUGslq5rxbBlUy3cJ61IsHag2QNDQV+7zXWjkUpmALIajhrlLlrgRUiymj6U3zUr/TMK84Q==}
     hasBin: true
 
   jsdom@30.0.1:
@@ -3445,6 +3445,10 @@ packages:
   picomatch@2.3.2:
     resolution: {integrity: sha512-V7+vQEJ06Z+c5tSye8S+nHUfI51xoXIXjHQ99cQtKUkQqqO1kO/KCJUfZXuB47h/YBlDhah2H3hdUGXn8ie0oA==}
     engines: {node: '>=8.6'}
+
+  picomatch@4.0.5:
+    resolution: {integrity: sha512-RvwwcruNjI1ncT5xRakeyS9Lf8lcItv34KD+aif+VH9kduAyfYBipGh12274xtenIPZ119/R9BdTBa8gAwSh0A==}
+    engines: {node: '>=12'}
 
   picomatch@4.0.7:
     resolution: {integrity: sha512-qcJu88Q2IWqJsDD529JKMdwGm/dvInW4HvQnRwiH9JtihJvzGOscDtHE3x1pBKeUOTysQ8kVmLnJ2kJu7yhcGA==}
@@ -4654,7 +4658,7 @@ snapshots:
       '@types/hast': 3.0.5
       '@types/mdast': 4.0.4
       js-yaml: 4.3.1
-      picomatch: 4.0.7
+      picomatch: 4.0.5
       retext-smartypants: 6.2.0
       shiki: 4.4.3
       smol-toml: 1.8.0
@@ -6297,10 +6301,10 @@ snapshots:
       pagefind: 1.5.2
       sirv: 3.0.2
 
-  astro-route-generator@https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/023209dd7765b8502f22dacef7442fa3df317f8e(astro@7.2.6(@astrojs/markdown-remark@7.2.4(supports-color@7.2.0))(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@types/node@26.3.0)(jiti@2.7.0)(yaml@2.9.0)):
+  astro-route-generator@https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/8b8a2c7677964c5c880d23c05aaffed2a7023258(astro@7.2.6(@astrojs/markdown-remark@7.2.4(supports-color@7.2.0))(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@types/node@26.3.0)(jiti@2.7.0)(yaml@2.9.0)):
     dependencies:
       astro: 7.2.6(@astrojs/markdown-remark@7.2.4(supports-color@7.2.0))(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@types/node@26.3.0)(jiti@2.7.0)(yaml@2.9.0)
-      js-yaml: 5.4.0
+      js-yaml: 5.3.0
       typescript: 6.0.3
 
   astro-seo@1.1.0(prettier-plugin-astro@0.14.1)(prettier@3.9.6)(typescript@6.0.3):
@@ -7258,7 +7262,7 @@ snapshots:
     dependencies:
       argparse: 2.0.1
 
-  js-yaml@5.4.0:
+  js-yaml@5.3.0:
     dependencies:
       argparse: 2.0.1
 
@@ -8326,6 +8330,8 @@ snapshots:
   picocolors@1.1.1: {}
 
   picomatch@2.3.2: {}
+
+  picomatch@4.0.5: {}
 
   picomatch@4.0.7: {}
 
