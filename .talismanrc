@@ -122,6 +122,10 @@ fileignoreconfig:
     checksum: 27f3b4e145771e0899a85d77aea83f42caaddb5c7027309ba67377aec1075470
   - filename: src/pages/werkzeuge/potenziale/_data/LuftVG_digitalcheck.md
     checksum: 9d5981e3e0d94d1e2599cb728b481d0e434e8a914fc0e768188ca7c8bb69bfb0
+  - filename: src/pages/werkzeuge/potenziale/_data/GwG_buergercheck.md
+    checksum: 56d17e12e254f6b012a5aa6ea81d3c0ec1b2f5aa3580869ebac03dfd260b4845
+  - filename: src/pages/werkzeuge/potenziale/_data/GwG_digitalcheck.md
+    checksum: a5bb033241a5ab143ad85749b820661aef77ab1a31f9536272e30951e6788fd2
 scopeconfig:
   - scope: node
 allowed_patterns:
