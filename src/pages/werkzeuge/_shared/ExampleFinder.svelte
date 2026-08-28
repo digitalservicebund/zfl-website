@@ -1,14 +1,14 @@
-<script lang="ts">
-  import type { LawExample } from "./_types";
+<script lang="ts" generics="T extends FindableExample">
+  import type { FindableExample } from "./types";
 
   interface Props {
-    examples: LawExample[];
-    selected: LawExample | undefined;
+    examples: T[];
+    selected: T | undefined;
   }
 
   let { examples, selected = $bindable() }: Props = $props();
 
-  function exampleLabel(example: LawExample | undefined): string {
+  function exampleLabel(example: T | undefined): string {
     return example ? `${example.title} (${example.short})` : "";
   }
 
@@ -31,7 +31,7 @@
     }
   });
 
-  function selectExample(example: LawExample) {
+  function selectExample(example: T) {
     selected = example;
     query = exampleLabel(example);
     open = false;

@@ -1,14 +1,16 @@
 <script lang="ts">
   import mermaid from "mermaid";
-  import { fade } from "svelte/transition";
   import { SvelteURLSearchParams } from "svelte/reactivity";
   import {
     isMermaidFlowchart,
     mermaidFlowchartToRulemapXml,
   } from "./_mermaid2RulemapXML.ts";
   import { parseMmdFrontmatter } from "./_mmdFrontmatter.ts";
-  import ChipBtn from "./_ChipBtn.svelte";
-  import LawFinder from "./_LawFinder.svelte";
+  import ChipBtn from "../_shared/ChipBtn.svelte";
+  import { resolveEliUrl } from "../_shared/eli.ts";
+  import ExampleFinder from "../_shared/ExampleFinder.svelte";
+  import { createFakeLoadingSequence } from "../_shared/fakeLoading.ts";
+  import LoadingIndicator from "../_shared/LoadingIndicator.svelte";
   import Viewer from "./_Viewer.svelte";
   import type { LawExample } from "./_types";
 
@@ -30,14 +32,6 @@
     query: "?raw",
     import: "default",
   });
-
-  const RIS_BASE_URL = "https://testphase.rechtsinformationen.bund.de/gesetze";
-
-  // Most examples reference a RIS ELI path. EU legislation isn't indexed in
-  // RIS, so its `eli` field holds a full EUR-Lex URL instead — used as-is.
-  function resolveEliUrl(eli: string): string {
-    return eli.startsWith("http") ? eli : `${RIS_BASE_URL}/${eli}`;
-  }
 
   function resolveNormLinks(source: string, eli: string): string {
     return source.replaceAll("{{ELI}}", resolveEliUrl(eli));
@@ -66,38 +60,7 @@
     "Erstelle Diagramm …",
     "Rendere Visualisierung …",
   ];
-  const FAKE_LOADING_DELAY_MS = 2100;
-  const FAKE_LOADING_STATUS_INTERVAL_MS = 700;
-
   let loadingStatusMessage = $state(LAW_STEP_STATUS_MESSAGES[0]);
-
-  function createFakeLoadingSequence(
-    messages: string[],
-    onMessage: (message: string) => void,
-  ): { promise: Promise<void>; cancel: () => void } {
-    let messageIndex = 0;
-    onMessage(messages[0]);
-    const interval = setInterval(() => {
-      messageIndex = (messageIndex + 1) % messages.length;
-      onMessage(messages[messageIndex]);
-    }, FAKE_LOADING_STATUS_INTERVAL_MS);
-
-    let timeoutId: ReturnType<typeof setTimeout>;
-    const promise = new Promise<void>((resolve) => {
-      timeoutId = setTimeout(() => {
-        clearInterval(interval);
-        resolve();
-      }, FAKE_LOADING_DELAY_MS);
-    });
-
-    return {
-      promise,
-      cancel: () => {
-        clearInterval(interval);
-        clearTimeout(timeoutId);
-      },
-    };
-  }
 
   let isLoadingVisOptions = $state(false);
 
@@ -308,21 +271,6 @@
   }
 </script>
 
-{#snippet loadingIndicator()}
-  <div class="flex flex-col items-center gap-16 p-32">
-    <div class="kern-loader kern-loader--visible" role="status">
-      <span class="kern-sr-only">Wird geladen…</span>
-    </div>
-    <p class="text-cosmic-blue-base" aria-live="polite">
-      {#key loadingStatusMessage}
-        <span class="inline-block animate-pulse" in:fade={{ duration: 300 }}>
-          {loadingStatusMessage}
-        </span>
-      {/key}
-    </p>
-  </div>
-{/snippet}
-
 {#snippet loadingDiagramPlaceholder()}
   <svg
     viewBox="0 0 320 260"
@@ -468,7 +416,7 @@
 <div class="grid grid-cols-1 sm:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] gap-40">
   <div class="flex min-w-0 flex-col justify-between">
     <div class="space-y-32">
-      <LawFinder {examples} bind:selected={selectedExample} />
+      <ExampleFinder {examples} bind:selected={selectedExample} />
       {#if selectedExample}
         <p class="kern-body kern-body--muted">
           Originaltext: <a
@@ -497,7 +445,7 @@
           </div>
         {/if}
         {#if isLoadingVisOptions || isLoading}
-          {@render loadingIndicator()}
+          <LoadingIndicator message={loadingStatusMessage} />
         {:else if summary}
           <p class="kern-body kern-body--muted">{summary}</p>
         {/if}
