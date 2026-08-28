@@ -24,6 +24,9 @@ import aktivitaet5Img from "./_assets/aktivitaet-5.png";
 import swimlane5Img from "./_assets/swim-5.png";
 import informationen6Img from "./_assets/informationen-6.png";
 import flussdiagramm6Img from "./_assets/flussdiagramm-6.png";
+import flussdiagrammThumbnail from "./_assets/flussdiagrammThumbnail.png";
+import flussdiagrammVideo from "./_assets/flussdiagramm-video.mp4";
+
 import { getEntries } from "astro:content";
 
 const frontmatter = {
@@ -128,6 +131,34 @@ const powerpointTemplate =
         </div>
       </section>
       <section>
+        <h2
+          data-toc-label="Video Anleitung"
+          id="flussdiagramm-erstellen-live-desc"
+        >
+          Videoanleitung: So entsteht ein Flussdiagramm
+        </h2>
+        <p>
+          Im Video sehen Sie die zuvor erklärten Schritte in kompakter Form –
+          diesmal am Beispiel Einbürgerung. So wird deutlich, wie sich die
+          Methode aus dem Führerschein-Beispiel auch auf andere Themen
+          übertragen lässt.
+        </p>
+        <video
+          controls
+          muted
+          width="100%"
+          class="max-w-a11y"
+          preload="none"
+          poster={flussdiagrammThumbnail.src}
+          aria-labelledby="flussdiagramm-erstellen-live-desc"
+        >
+          <source src={flussdiagrammVideo} type="video/mp4" />
+          <a href={flussdiagrammVideo} target="_blank" rel="noreferrer">
+            Video herunterladen
+          </a>
+        </video>
+      </section>
+      <section class="breakout! bg-lavender-200">
         <h2 class="mb-32">Anleitung</h2>
         <StepNumber number={1} />
         <h3 data-toc-label="Format">
@@ -137,7 +168,7 @@ const powerpointTemplate =
           Wir empfehlen, den ersten Entwurf auf Papier oder einem Whiteboard zu
           erstellen. Sie können Fehler jederzeit leicht korrigieren und die
           Darstellung flexibel anpassen. Perfektion ist hier nicht entscheidend
-          – wichtig ist, dass Sie anfangen Sie können auch in einem einfachen
+          – wichtig ist, dass Sie anfangen. Sie können auch in einem einfachen
           Whiteboard-Programm oder Powerpoint arbeiten.
         </p>
         <p><b>Darauf sollten Sie achten:</b></p>
@@ -182,7 +213,7 @@ const powerpointTemplate =
           </InfoPanel>
         </div>
       </section>
-      <section class="breakout! bg-lavender-200">
+      <section>
         <StepNumber number={2} />
         <h3 data-toc-label="Akteure">Identifizieren Sie relevante Akteure</h3>
         <p>
@@ -216,7 +247,7 @@ const powerpointTemplate =
           </div>
         </InfoPanel>
       </section>
-      <section>
+      <section class="breakout! bg-lavender-200">
         <StepNumber number={3} />
         <h3 data-toc-label="Ziele & Perspektiven">
           Legen Sie fest, was Ziel und Perspektive der Visualisierung sind
@@ -250,7 +281,7 @@ const powerpointTemplate =
           </div>
         </InfoPanel>
       </section>
-      <section class="breakout! bg-lavender-200">
+      <section>
         <StepNumber number={4} />
         <h3 data-toc-label="Start & Ende definieren">
           Legen Sie fest, was Start- und Endpunkt sind
@@ -310,7 +341,7 @@ const powerpointTemplate =
           </div>
         </InfoPanel>
       </section>
-      <section class="space-y-32">
+      <section class="breakout! bg-lavender-200 space-y-32">
         <div>
           <StepNumber number={5} />
           <h3 data-toc-label="Prozess abbilden">
@@ -388,7 +419,7 @@ const powerpointTemplate =
                 eine eigene Schwimmbahn.
               </li>
               <li>
-                <b>Startpunkt</b> ("Möchte Führerschein erlangen") liegt am Anfang
+                <b>Startpunkt</b> („Möchte Führerschein erlangen") liegt am Anfang
                 der Fahrschülerin-Schwimmbahn.
               </li>
               <li>
@@ -404,7 +435,7 @@ const powerpointTemplate =
           </div>
         </InfoPanel>
       </section>
-      <section class="breakout! bg-lavender-200 space-y-32">
+      <section class="space-y-32">
         <div>
           <StepNumber number={6} />
           <h3 data-toc-label="Informationen ergänzen">
@@ -466,12 +497,12 @@ const powerpointTemplate =
             <ul>
               <li>
                 <b>Ablauf/Entscheidungen</b>: Der Prozess ist durch
-                Entscheidungssymbole (◇) erweitert, die einen "bestanden/nicht
+                Entscheidungssymbole (◇) erweitert, die einen „bestanden/nicht
                 bestanden" Zweig nach der Theorie- und Praxisprüfung anzeigen.
               </li>
               <li>
                 <b>Datenspeicherung</b>: Ein Datenbank-Symbol wurde hinzugefügt,
-                um das "Melderegister" darzustellen.
+                um das „Melderegister" darzustellen.
               </li>
               <li>
                 <b>Legenden</b>: Die Bedeutung der neuen Symbole wird in einer
@@ -481,19 +512,9 @@ const powerpointTemplate =
           </div>
         </InfoPanel>
       </section>
-      <section>
-        <h2 data-toc-label="Video Anleitung">
-          Zusammenfassende Anleitung: So entsteht ein Flussdiagramm
-        </h2>
-        <p>
-          Im Video sehen Sie die zuvor erklärten Schritte in kompakter Form –
-          diesmal am Beispiel Einbürgerung. So wird deutlich, wie sich die
-          Methode aus dem Führerschein-Beispiel auch auf andere Themen
-          übertragen lässt.
-        </p>
-      </section>
     </TocContainer>
-    <section class="breakout-grid bg-lavender-200 space-y-32">
+
+    <section class="breakout-grid space-y-32">
       <h2>Weitere Ressourcen</h2>
       <div class="lg:grid lg:grid-cols-2 lg:gap-32 xl:grid-cols-3">
         {
