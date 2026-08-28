@@ -36,11 +36,16 @@ const werkzeuge = defineCollection({
       })
       .transform(({ url, ...rest }) => {
         const route = allRoutes.find((r) => r.key === url);
-        const href = route
-          ? withBase(route.path)
-          : url?.startsWith("/") // prefix local assets with base URL, e.g. /zfl-website/previews/test-branch
-            ? withBase(url)
-            : url;
+
+        let href: string | undefined;
+        if (route) {
+          href = withBase(route.path);
+        } else if (url?.startsWith("/")) {
+          // prefix local assets with base URL, e.g. /zfl-website/previews/test-branch
+          href = withBase(url);
+        } else {
+          href = url;
+        }
 
         return { ...rest, href, isExternal: !route };
       }),
