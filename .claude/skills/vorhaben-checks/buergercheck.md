@@ -41,13 +41,13 @@ Bewerte jeden identifizierten Aspekt hinsichtlich seines **Potenzials zur Verbes
 
 Erstelle eine übersichtliche **Ergebnis-Darstellung** nach folgendem Format:
 
-### 1. ZUSAMMENFASSUNG DER VORPRÜFUNG
+### 1. Zusammenfassung der Vorprüfung
 
 - **Bürgerbezug vorhanden:** \[Ja / Nein\]
 - **Betroffene Hauptzielgruppen:** \[Kurze Aufzählung\]
 - **Gesamteinschätzung:** \[2-3 Sätze zum Grad der Bürgerzentrierung\]
 
-### 2. DETAILLIERTE ASPEKT-ANALYSE NACH THEMENFELDERN
+### 2. Detaillierte Aspekt-Analyse nach Themenfeldern
 
 #### Themenfeld 1: Zielgruppen & Adressatenanalyse
 
@@ -84,6 +84,6 @@ Erstelle eine übersichtliche **Ergebnis-Darstellung** nach folgendem Format:
 - **Trade-Off-Analyse:** \[Abwägung zwischen Einzelfallgerechtigkeit vs. Automatisierbarkeit & einfacher Inanspruchnahme\]
 - **Empfohlenes Legal-Design-Tool:** \[z.B. _Regelungsbaum (Entscheidungslogik)_\]
 
-### 3. KONKRETE EMPFEHLUNGEN FÜR REFORM UND NORMENPRÜFUNG
+### 3. Konkrete Empfehlungen für Reform und Normenprüfung
 
 Gib 3 bis 5 **konkrete Formulierungsvorschläge oder Prozessanpassungen**, um die Bürgerfreundlichkeit des Regelungsentwurfs direkt zu erhöhen.
