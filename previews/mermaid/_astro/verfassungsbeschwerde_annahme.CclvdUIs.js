@@ -1,0 +1,34 @@
+var e=`---
+summary: "Zeigt das Annahmeverfahren für zulässige Verfassungsbeschwerden: Vorprüfung durch die Dreierkammer, Stattgabe bei bereits geklärter Rechtsfrage und die Entscheidung des Senats über die Annahme."
+---
+flowchart TD
+    ZUL["Zulässige Verfassungsbeschwerde<br/>bedarf der Annahme zur<br/>Entscheidung — <a href='{{ELI}}#art-z93a_abs-z1' target='_blank' rel='noopener'>§93a I</a>"] --> V{"Grundsätzliche verfassungs-<br/>rechtliche Bedeutung?<br/>— <a href='{{ELI}}#art-z93a_abs-z2' target='_blank' rel='noopener'>§93a II a</a>"}
+
+    V -->|Ja| SENAT
+    V -->|Nein| DURCHS{"Zur Durchsetzung der<br/>Grundrechte angezeigt oder<br/>besonders schwerer Nachteil<br/>bei Versagung?<br/>— <a href='{{ELI}}#art-z93a_abs-z2' target='_blank' rel='noopener'>§93a II b</a>"}
+
+    DURCHS -->|Nein| KAB{"Kammer lehnt Annahme ab<br/>— <a href='{{ELI}}#art-z93b' target='_blank' rel='noopener'>§93b S.1</a><br/>(nur einstimmig)<br/>— <a href='{{ELI}}#art-z93d_abs-z3' target='_blank' rel='noopener'>§93d III</a>"}
+
+    KAB -->|Einstimmig| NICHT["Nichtannahme:<br/>unanfechtbar, ohne<br/>Begründung — <a href='{{ELI}}#art-z93d_abs-z1' target='_blank' rel='noopener'>§93d I</a>"]
+    KAB -->|Nicht einstimmig| SENAT["Senat entscheidet über<br/>die Annahme — <a href='{{ELI}}#art-z93b' target='_blank' rel='noopener'>§93b S.2</a>"]
+
+    DURCHS -->|Ja| GEKLAERT{"Maßgebliche Rechtsfrage<br/>vom BVerfG bereits entschieden<br/>und Beschwerde offensichtlich<br/>begründet?<br/>— <a href='{{ELI}}#art-z93c_abs-z1' target='_blank' rel='noopener'>§93c I</a>"}
+
+    GEKLAERT -->|Nein| SENAT
+    GEKLAERT -->|Ja| NICHTIG{"Soll ein Gesetz für nichtig/<br/>unvereinbar erklärt werden?<br/>— <a href='{{ELI}}#art-z93c_abs-z1' target='_blank' rel='noopener'>§93c I S.3</a>"}
+
+    NICHTIG -->|Ja| SENAT
+    NICHTIG -->|Nein| KSTATT{"Kammer gibt einstimmig<br/>statt — <a href='{{ELI}}#art-z93d_abs-z3' target='_blank' rel='noopener'>§93d III</a>"}
+
+    KSTATT -->|Ja| STATTG["Stattgabe durch Kammer,<br/>steht Senatsentscheidung<br/>gleich — <a href='{{ELI}}#art-z93c_abs-z1' target='_blank' rel='noopener'>§93c I S.2</a>"]
+    KSTATT -->|Nein| SENAT
+
+    SENAT --> SANN{"Annahme durch mindestens<br/>3 Richter beschlossen?<br/>— <a href='{{ELI}}#art-z93d_abs-z3' target='_blank' rel='noopener'>§93d III S.2</a>"}
+
+    SANN -->|Ja| ANG["Angenommen:<br/>Entscheidung in der Sache"]
+    SANN -->|Nein| NICHT
+
+    style NICHT fill:#f8d7da,stroke:#c0392b
+    style STATTG fill:#d4edda,stroke:#2d8a4a
+    style ANG fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};

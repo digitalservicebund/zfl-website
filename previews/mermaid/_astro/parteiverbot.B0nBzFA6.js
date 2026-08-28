@@ -1,0 +1,39 @@
+var e=`---
+summary: "Zeigt das Verfahren zur Feststellung der Verfassungswidrigkeit einer Partei oder ihres Ausschlusses von staatlicher Finanzierung: Antragsberechtigung, Anhörung und die jeweiligen Rechtsfolgen."
+---
+flowchart TD
+    START["Antrag auf Feststellung:<br/>Partei verfassungswidrig<br/>(Art. 21 II GG) oder von<br/>staatlicher Finanzierung<br/>ausgeschlossen (Art. 21 III GG)"] --> BER{"Antragsberechtigt: Bundestag,<br/>Bundesrat, Bundesregierung —<br/><a href='{{ELI}}#art-z43_abs-z1' target='_blank' rel='noopener'>§43 I</a><br/>(Landesregierung nur gegen<br/>Partei mit auf ihr Land<br/>beschränkter Organisation<br/>— <a href='{{ELI}}#art-z43_abs-z2' target='_blank' rel='noopener'>§43 II</a>)"}
+
+    BER -->|Nein| U1["Unzulässig:<br/>keine Antragsberechtigung"]
+    BER -->|Ja| ZIEL{"Antragsziel?"}
+
+    ZIEL -->|Verfassungswidrigkeit<br/>Art. 21 II GG| ANH["BVerfG gibt dem<br/>Vertretungsberechtigten<br/>(<a href='{{ELI}}#art-z44' target='_blank' rel='noopener'>§44</a>) Gelegenheit zur<br/>Äußerung binnen bestimmter<br/>Frist — <a href='{{ELI}}#art-z45' target='_blank' rel='noopener'>§45</a>"]
+
+    ANH --> BESCHL{"Beschluss: unzulässig/nicht<br/>hinreichend begründet<br/>zurückweisen oder Verhandlung<br/>durchführen? — <a href='{{ELI}}#art-z45' target='_blank' rel='noopener'>§45</a>"}
+
+    BESCHL -->|Zurückweisung| U2["Antrag zurückgewiesen"]
+    BESCHL -->|Verhandlung| BEGR21{"Antrag begründet?"}
+
+    BEGR21 -->|Nein| ABW["Antrag abgewiesen"]
+    BEGR21 -->|Ja| FEST["Feststellung der Verfassungs-<br/>widrigkeit, ggf. beschränkt auf<br/>selbständigen Parteiteil<br/>— <a href='{{ELI}}#art-z46_abs-z1' target='_blank' rel='noopener'>§46 I</a>, <a href='{{ELI}}#art-z46_abs-z2' target='_blank' rel='noopener'>II</a>"]
+
+    FEST --> FOLGE["Auflösung der Partei/des<br/>Parteiteils, Verbot einer<br/>Ersatzorganisation, ggf.<br/>Vermögenseinziehung<br/>— <a href='{{ELI}}#art-z46_abs-z3' target='_blank' rel='noopener'>§46 III</a>"]
+
+    ZIEL -->|Finanzierungsausschluss<br/>Art. 21 III GG| BEGR46A{"Antrag begründet?<br/>(§45 nicht anwendbar<br/>— <a href='{{ELI}}#art-z46a_abs-z1' target='_blank' rel='noopener'>§46a I S.4</a>)"}
+
+    BEGR46A -->|Nein| ABW
+    BEGR46A -->|Ja| AUSSCHL["Ausschluss von staatlicher<br/>Finanzierung für 6 Jahre,<br/>erstreckt auf Ersatzparteien<br/>— <a href='{{ELI}}#art-z46a_abs-z1' target='_blank' rel='noopener'>§46a I</a>"]
+
+    AUSSCHL --> VERL{"Verlängerungsantrag<br/>spätestens 6 Monate vor<br/>Fristablauf gestellt?<br/>— <a href='{{ELI}}#art-z46a_abs-z2' target='_blank' rel='noopener'>§46a II</a>"}
+
+    VERL -->|Ja| FORT["Partei bleibt bis zur<br/>Entscheidung über den<br/>Verlängerungsantrag<br/>ausgeschlossen (ggf. ohne<br/>mündliche Verhandlung)<br/>— <a href='{{ELI}}#art-z46a_abs-z2' target='_blank' rel='noopener'>§46a II</a>"]
+    VERL -->|Nein| ENDE["Ausschluss endet nach<br/>Ablauf der 6 Jahre"]
+
+    style U1 fill:#f8d7da,stroke:#c0392b
+    style U2 fill:#f8d7da,stroke:#c0392b
+    style ABW fill:#f8d7da,stroke:#c0392b
+    style FOLGE fill:#d4edda,stroke:#2d8a4a
+    style AUSSCHL fill:#fff3cd,stroke:#c9a227
+    style FORT fill:#fff3cd,stroke:#c9a227
+    style ENDE fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};

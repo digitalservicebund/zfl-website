@@ -1,0 +1,27 @@
+var e=`---
+summary: "Zeigt das Vorlageverfahren der konkreten Normenkontrolle nach Art. 100 GG: Voraussetzungen der Richtervorlage, Begründungsanforderungen und die auf die Rechtsfrage beschränkte Entscheidung des BVerfG."
+---
+flowchart TD
+    START["Gericht hält im anhängigen<br/>Verfahren eine entscheidungs-<br/>erhebliche Rechtsvorschrift<br/>für verfassungswidrig"] --> V100{"Voraussetzungen des<br/>Art. 100 Abs. 1 GG gegeben<br/>(Überzeugung von der<br/>Verfassungswidrigkeit)?<br/>— <a href='{{ELI}}#art-z80_abs-z1' target='_blank' rel='noopener'>§80 I</a>"}
+
+    V100 -->|Nein| WEITER["Gericht entscheidet selbst<br/>weiter, keine Vorlage"]
+    V100 -->|Ja| VORL["Gericht setzt Verfahren aus<br/>und holt Entscheidung des<br/>BVerfG unmittelbar ein<br/>— <a href='{{ELI}}#art-z80_abs-z1' target='_blank' rel='noopener'>§80 I</a>"]
+
+    VORL --> BEGR{"Begründung gibt an, inwiefern<br/>die Entscheidung von der<br/>Gültigkeit der Norm abhängt<br/>und mit welcher übergeordneten<br/>Norm sie unvereinbar ist;<br/>Akten beigefügt?<br/>— <a href='{{ELI}}#art-z80_abs-z2' target='_blank' rel='noopener'>§80 II</a>"}
+
+    BEGR -->|Nein| KUZ{"Kammer stellt Unzulässigkeit<br/>einstimmig fest<br/>— <a href='{{ELI}}#art-z81a' target='_blank' rel='noopener'>§81a S.1</a>"}
+
+    KUZ -->|Ja| UNZ["Unzulässige Vorlage"]
+    KUZ -->|Vorlage von Landes-<br/>verfassungsgericht oder<br/>oberstem Bundesgerichtshof| SENAT["Entscheidung bleibt<br/>dem Senat vorbehalten<br/>— <a href='{{ELI}}#art-z81a' target='_blank' rel='noopener'>§81a S.2</a>"]
+
+    BEGR -->|Ja| ZUL["Zulässige Vorlage"]
+    SENAT --> ZUL
+
+    ZUL --> ENT["BVerfG entscheidet nur<br/>über die Rechtsfrage<br/>— <a href='{{ELI}}#art-z81' target='_blank' rel='noopener'>§81</a>,<br/>unabhängig von einer<br/>Rüge der Beteiligten<br/>— <a href='{{ELI}}#art-z80_abs-z3' target='_blank' rel='noopener'>§80 III</a>"]
+
+    ENT --> BIND["Vorlegendes Gericht ist an<br/>die Entscheidung gebunden"]
+
+    style UNZ fill:#f8d7da,stroke:#c0392b
+    style ZUL fill:#d4edda,stroke:#2d8a4a
+    style BIND fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};
