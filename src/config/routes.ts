@@ -314,7 +314,7 @@ export const werkzeuge_ressourcen_visualisierungen = {
   title: "Beispiele für Visualisierungen",
   parent: werkzeuge_ressourcen,
   sitemap: true,
-  isStagingOnly: true,
+  isStagingOnly: false,
   navOrder: 1,
   navLabel: "Visualisierungen",
 } as const;
