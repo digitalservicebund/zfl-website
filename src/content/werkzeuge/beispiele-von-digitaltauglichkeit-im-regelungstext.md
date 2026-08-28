@@ -1,6 +1,6 @@
 ---
 title: Beispiele von Digitaltauglichkeit im Regelungstext
-type: [Leitfaden]
+type: [Ressource]
 category: [Praxistauglichkeit]
 description: Hier finden Sie Regelungsbeispiele zur Anwendung der Prinzipien.
 source: Zentrum für Legistik
