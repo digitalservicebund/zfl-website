@@ -1,0 +1,12 @@
+title: Verordnung über die Registrierung homöopathischer Tierarzneimittel
+eli: eli/bund/bgbl-1/2022/s1102/2022-07-06/1/deu
+visOptions:
+  - name: Registrierungsverfahren
+    filename: registrierungsverfahren
+    articles: ["§1"]
+  - name: Änderungsarten-Klassifikation
+    filename: aenderungsarten
+    articles: ["§§3-5"]
+  - name: Rücknahme und Widerruf
+    filename: ruecknahme_widerruf
+    articles: ["§6", "§7"]

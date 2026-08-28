@@ -1,0 +1,18 @@
+title: Gesetz über das Bundesverfassungsgericht
+eli: eli/bund/bgbl-1/1951/s243/2026-01-01/1/deu
+visOptions:
+  - name: Verfassungsbeschwerde Zulässigkeit
+    filename: verfassungsbeschwerde_zulaessigkeit
+    articles: ["§§90-93"]
+  - name: Verfassungsbeschwerde Annahmeverfahren
+    filename: verfassungsbeschwerde_annahme
+    articles: ["§§93a-93d"]
+  - name: Organstreitverfahren Zulässigkeit
+    filename: organstreit_zulaessigkeit
+    articles: ["§63", "§64", "§67"]
+  - name: Konkrete Normenkontrolle
+    filename: konkrete_normenkontrolle
+    articles: ["§§80-81a"]
+  - name: Parteiverbotsverfahren
+    filename: parteiverbot
+    articles: ["§§43-46a"]

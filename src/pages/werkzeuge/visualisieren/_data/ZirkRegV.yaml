@@ -1,0 +1,12 @@
+title: Verordnung über die Registrierung von Erlaubnissen zur Zurschaustellung von Tieren an wechselnden Orten
+eli: eli/bund/bgbl-1/2008/s376/2013-12-18/1/deu
+visOptions:
+  - name: Datenerhebung
+    filename: datenerhebung
+    articles: ["§3"]
+  - name: Datenverwendung
+    filename: datenverwendung
+    articles: ["§4"]
+  - name: Löschfristen
+    filename: loeschfristen
+    articles: ["§5"]
