@@ -1,6 +1,7 @@
 <script lang="ts">
   import mermaid from "mermaid";
   import { SvelteURLSearchParams } from "svelte/reactivity";
+  import { werkzeuge_potenziale } from "@/config/routes";
   import {
     isMermaidFlowchart,
     mermaidFlowchartToRulemapXml,
@@ -10,11 +11,15 @@
   import { resolveEliUrl } from "../_shared/eli.ts";
   import ExampleFinder from "../_shared/ExampleFinder.svelte";
   import { createFakeLoadingSequence } from "../_shared/fakeLoading.ts";
+  import Hint from "../_shared/Hint.svelte";
   import LoadingIndicator from "../_shared/LoadingIndicator.svelte";
   import Viewer from "./_Viewer.svelte";
   import type { LawExample } from "./_types";
 
-  let { examples }: { examples: LawExample[] } = $props();
+  let {
+    examples,
+    pruefbareShorts,
+  }: { examples: LawExample[]; pruefbareShorts: string[] } = $props();
 
   function configureMermaid(htmlLabels: boolean) {
     mermaid.initialize({
@@ -106,6 +111,10 @@
     selectedExample?.visOptions.find(
       (option) => option.name === selectedVisOption,
     ),
+  );
+
+  let canPruefen = $derived(
+    selectedExample ? pruefbareShorts.includes(selectedExample.short) : false,
   );
 
   $effect(() => {
@@ -448,6 +457,15 @@
           <LoadingIndicator message={loadingStatusMessage} />
         {:else if summary}
           <p class="kern-body kern-body--muted">{summary}</p>
+          {#if canPruefen}
+            <Hint>
+              Zu {selectedExample.short} gibt es auch einen Potenzialcheck:
+              <a
+                href={`${werkzeuge_potenziale.path}?vorhaben=${selectedExample.short}`}
+                >Hier ansehen</a
+              >
+            </Hint>
+          {/if}
         {/if}
       {/if}
     </div>

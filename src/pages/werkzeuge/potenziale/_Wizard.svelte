@@ -1,14 +1,20 @@
 <script lang="ts">
   import { marked } from "marked";
   import { SvelteURLSearchParams } from "svelte/reactivity";
+  import { werkzeuge_visualisieren } from "@/config/routes";
   import ChipBtn from "../_shared/ChipBtn.svelte";
   import { resolveEliUrl } from "../_shared/eli.ts";
   import ExampleFinder from "../_shared/ExampleFinder.svelte";
   import { createFakeLoadingSequence } from "../_shared/fakeLoading.ts";
+  import Hint from "../_shared/Hint.svelte";
   import LoadingIndicator from "../_shared/LoadingIndicator.svelte";
   import type { PotenzialeExample } from "./_types";
 
-  let { examples }: { examples: PotenzialeExample[] } = $props();
+  let {
+    examples,
+    visualisierbareShorts,
+  }: { examples: PotenzialeExample[]; visualisierbareShorts: string[] } =
+    $props();
 
   const reportSources = import.meta.glob<string>("./_data/*.md", {
     query: "?raw",
@@ -82,6 +88,12 @@
 
   let selectedCheck = $derived(
     selectedExample?.checks.find((check) => check.type === selectedCheckType),
+  );
+
+  let canVisualisieren = $derived(
+    selectedExample
+      ? visualisierbareShorts.includes(selectedExample.short)
+      : false,
   );
 
   $effect(() => {
@@ -169,6 +181,15 @@
         <!-- eslint-disable-next-line svelte/no-at-html-tags -- reportHtml is markdown rendered from our own generated check reports, not user input -->
         {@html reportHtml}
       </div>
+      {#if canVisualisieren}
+        <Hint>
+          Zu {selectedExample.short} gibt es auch Visualisierungen:
+          <a
+            href={`${werkzeuge_visualisieren.path}?norm=${selectedExample.short}`}
+            >Hier ansehen</a
+          >
+        </Hint>
+      {/if}
     {/if}
   {/if}
 </div>

@@ -18,6 +18,11 @@ const examples = potenziale.map(({ data, filePath }) => ({
   // lowercased `id` (e.g. "HeizkostenV.yaml" -> id "heizkostenv").
   short: basename(filePath ?? "", ".yaml"),
 }));
+
+const visualisierungen = await getCollection("visualisierungen");
+const visualisierbareShorts = visualisierungen.map(({ filePath }) =>
+  basename(filePath ?? "", ".yaml"),
+);
 ---
 
 <Layout title={frontmatter.title}>
@@ -26,7 +31,7 @@ const examples = potenziale.map(({ data, filePath }) => ({
       <h1>{frontmatter.title}</h1>
     </Hero>
     <section class="min-h-screen">
-      <Wizard {examples} client:load />
+      <Wizard {examples} {visualisierbareShorts} client:load />
     </section>
   </main>
 </Layout>
