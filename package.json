@@ -45,6 +45,7 @@
     "astro-pagefind": "^2.0.1",
     "astro-route-generator": "github:digitalservicebund/astro-route-generator#0.1.12",
     "astro-seo": "^1.1.0",
+    "marked": "^18.0.11",
     "mermaid": "^11.16.1",
     "pagefind": "^1.5.2",
     "posthog-js": "^1.418.16",

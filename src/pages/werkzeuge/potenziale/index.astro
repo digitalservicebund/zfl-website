@@ -1,13 +1,23 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
-import Potentials from "./_Potentials.svelte";
+import Wizard from "./_Wizard.svelte";
+import { getCollection } from "astro:content";
+import { basename } from "node:path";
 
 export const frontmatter = {
   title: "Potenziale aufdecken",
   isStagingOnly: true,
   navOrder: 5,
 };
+
+const potenziale = await getCollection("potenziale");
+const examples = potenziale.map(({ data, filePath }) => ({
+  ...data,
+  // filePath preserves the on-disk casing, unlike the glob loader's
+  // lowercased `id` (e.g. "HeizkostenV.yaml" -> id "heizkostenv").
+  short: basename(filePath ?? "", ".yaml"),
+}));
 ---
 
 <Layout title={frontmatter.title}>
@@ -15,8 +25,8 @@ export const frontmatter = {
     <Hero>
       <h1>{frontmatter.title}</h1>
     </Hero>
-    <section>
-      <Potentials client:load />
+    <section class="min-h-screen">
+      <Wizard {examples} client:load />
     </section>
   </main>
 </Layout>
