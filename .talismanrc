@@ -102,6 +102,12 @@ fileignoreconfig:
     allowed_patterns: [handleKeydown]
   - filename: .claude/skills/gesetz-visualisieren/SKILL.md
     checksum: ce79ba7efa69a4f32e44fc592e62a672dcbd973485ac977b865ec6ff51deda64
+  - filename: .claude/skills/vorhaben-checks/praxischeck.md
+    checksum: 619ddebc8ecba2805a0c25981a2708ee9845a3534261aade12612ce7764704ba
+  - filename: .claude/skills/vorhaben-checks/digitalcheck.md
+    checksum: 5051e4b7042945790861ef7c625ba99c9b2aca151c9e823d12c93247d9bf51de
+  - filename: .claude/skills/vorhaben-checks/buergercheck.md
+    checksum: 1b010679bff032ec3089ec7960e0b10ed9f636640bdef57f7ad0194d28641e5d
 scopeconfig:
   - scope: node
 allowed_patterns:

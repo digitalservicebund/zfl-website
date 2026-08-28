@@ -67,7 +67,25 @@ const visualisierungen = defineCollection({
   }),
 });
 
+const potenziale = defineCollection({
+  loader: glob({
+    pattern: "*.yaml",
+    base: "src/pages/werkzeuge/potenziale/_data",
+  }),
+  schema: z.object({
+    title: z.string(),
+    eli: z.string().optional(),
+    checks: z.array(
+      z.object({
+        type: z.enum(["Bürgercheck", "Digitalcheck", "Praxischeck"]),
+        filename: z.string(),
+      }),
+    ),
+  }),
+});
+
 export const collections = {
   werkzeuge,
   visualisierungen,
+  potenziale,
 };
