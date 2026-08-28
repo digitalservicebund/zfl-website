@@ -15,16 +15,16 @@ const frontmatter = {
   navOrder: 3,
 };
 
-const template_akteure = "/public/downloads/Akteure-auflisten.docx";
-const powerpoint_zielgruppe = "/public/downloads/Zielgruppenanalyse.pptx";
-const template_checklist = "/public/downloads/Checkliste-Interviewführung.docx";
-const buergercheck = "/public/downloads/Buergercheck.pdf";
+const template_akteure = "/downloads/Akteure-auflisten.docx";
+const powerpoint_zielgruppe = "/downloads/Zielgruppenanalyse.pptx";
+const template_checklist = "/downloads/Checkliste-Interviewführung.docx";
+const buergercheck = "/downloads/Buergercheck.pdf";
 ---
 
 <Layout title={frontmatter.title}>
   <main>
     <Hero class="breakout-grid" level="plain">
-      <h1>{frontmatter.title}</h1>
+      <h1 class="max-w-a11y">{frontmatter.title}</h1>
       <p>
         Im folgenden Abschnitt finden Sie eine praxisnahe Anleitung zur
         strukturierten Vorbereitung und Durchführung von Interviews.
@@ -397,7 +397,7 @@ const buergercheck = "/public/downloads/Buergercheck.pdf";
           Gesprächen zentrale Muster, Herausforderungen und Erfolgsfaktoren
           ableiten. Nutzen Sie ggf. die <a
             href="https://www.oeffentliches-gestalten.de/buch/erkennen/erkenntnisse-formulieren#individuelle-gespr%C3%A4chsauswertung"
-            >Methode Individuelle Gesprächsauswertung</a
+            target="_blank">Methode Individuelle Gesprächsauswertung</a
           >, um Schlüsselaspekte herauszuarbeiten.
         </p>
       </section>
