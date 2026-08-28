@@ -15,12 +15,14 @@ interface Props {
   class?: string;
   /** CSS selector for the element whose text content should be searched. */
   rootSelector?: string;
+  displayName: string;
 }
 
 const {
   keyboardShortcut = false,
   class: className,
   rootSelector = "main",
+  displayName,
 } = Astro.props;
 ---
 
@@ -35,7 +37,7 @@ const {
     data-page-search-toggle
   >
     <span class="kern-icon kern-icon--search" aria-hidden="true"></span>
-    <span class="kern-label">Seite durchsuchen</span>
+    <span>{displayName}</span>
   </SearchButton>
 
   <form

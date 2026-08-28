@@ -212,14 +212,11 @@ class PageSearchElement extends HTMLElement {
 
   updateCount() {
     const hasQuery = this.input.value.trim().length > 0;
-    if (hasQuery) {
-      this.countEl.textContent =
-        this.matchCount === 0
-          ? "Keine Treffer"
-          : `${this.currentIndex} von ${this.matchCount}`;
-    } else {
-      this.countEl.textContent = "";
-    }
+    this.countEl.textContent = !hasQuery
+      ? ""
+      : this.matchCount === 0
+        ? "Keine Treffer"
+        : `${this.currentIndex} von ${this.matchCount}`;
 
     this.prevButton.disabled = this.matchCount === 0;
     this.nextButton.disabled = this.matchCount === 0;

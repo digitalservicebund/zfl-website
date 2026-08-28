@@ -25,7 +25,7 @@ fileignoreconfig:
       - "key:"
       - "TRIVY_PASSWORD: \\${{  }}"
   - filename: AGENTS.md
-    checksum: b9624ad9a7c7eedb976906db678ccd1f22b0debf711c6a5b965616c2dccb5646
+    checksum: 13688243c7810b6fd967ed62831deee450395e6154e87ebc301558b72aaf4c8d
   - filename: package.json # astro-route-generator commit sha misinterpreted as potential secret
     ignore_detectors: [filecontent]
   - filename: doc/adr/0007-use-posthog-reverse-proxy.md
@@ -82,6 +82,49 @@ fileignoreconfig:
   - filename: src/components/global/AccordionMenu.test.ts
     allowed_patterns:
       - key
+  - filename: src/components/global/TocContainer.astro
+    allowed_patterns:
+      - key
+  - filename: src/pages/werkzeuge/ressourcen/flussdiagramme.astro
+    allowed_patterns:
+      - "Falls Sie noch keine Legende haben, erstellen Sie eine."
+  - filename: src/scripts/toc.ts
+    allowed_patterns:
+      - $el
+  - filename: src/content/visualisierung/ablauf-eines-online-verfahrens.md
+    checksum: 3932230805182a9e132fbb7ec41ef5dc7447f98c77fef3d5faf7460ca1e97c2a
+  - filename: src/content/visualisierung/uebersicht-verantwortlicher-akteure.md
+    checksum: 42b081de8c3183b5c2eae44e7a6102fa204694c1888c26b110b779a9b3505430
+  - filename: src/content/visualisierung/vorher-nachher-vergleich.jpg
+    checksum: 21fb0ef9745037afe4e1a73ea6ebe4ecbdb20b11cb1d08073f170694b2398ecd
+  - filename: src/content/visualisierung/abstrahierter-antragsprozess.jpg
+    checksum: cb597079743914c8e1df3372772f970b33394b7583c858c5c200a5603b981d3a
+  - filename: src/content/visualisierung/verknuepfung-von-paragraphen-und-prozessschitten.jpg
+    checksum: d36251a8ba44b5b5b0906dfe1af5549621605bac7f0e5492742d9c2b9fd01b2b
+  - filename: public/downloads/SchaubildTechnischeUmsetzbarkeit.pdf
+    checksum: a9e7eb714221a776c9d23e918fa6cdc84ce306e7f0f7d86fee453b4e888d58d5
+  - filename: src/pages/werkzeuge/ressourcen/_assets/flussdiagramm-video.mp4
+    checksum: f5f37084c86e45cd303f1280d8deb8143310473d64d3ede12ce4882bd59a121f
+  - filename: public/downloads/Buergercheck.pdf
+    checksum: 02ad61aefb05f1bbabdf918048497a42a2039737125f223d1f7a69f5fdc115d9
+  - filename: src/content/werkzeuge/5-prinzipien-der-digitaltauglichkeit.png
+    checksum: a6441423b979f46ab19e1fe81f1051b04f8eeb4f7b5561b74a25785f17017a90
+  - filename: src/content/visualisierungen/uebersicht-verantwortlicher-akteure.md
+    checksum: 213e1eecfd34b42523fee75b03dfbd25b02b8d871b19b86a368fe225e95b6574
+  - filename: src/content/visualisierungen/ablauf-eines-online-verfahrens.md
+    checksum: 6f55b8b8f0fbcbb1b478b158ce66e236ac1cef4d0d3357bf21703989e548ca8b
+  - filename: src/scripts/toc.ts
+    checksum: 81ebc6889c6372af7408d61ada6407b042255d325579c39941281a9d158417e4
+  - filename: public/downloads/Zielgruppenanalyse.pptx
+    checksum: d3158428fdd66fe859dbd09de7d6062fada34e38ca9e021d7e9708a7660ad877
+  - filename: src/content/visualisierungen/verknuepfung-von-paragraphen-und-prozessschitten.jpg
+    checksum: 0557534acc435b6b7a49bca7fdebc2085a7cd41587ea017d32c79c8cad3720d7
+  - filename: src/content/visualisierungen/abstrahierter-antragsprozess.jpg
+    checksum: 365710bfc38b6b56915cbd8a35a51ad1aa98cf9bce3e436cf9e8a8bb03e92257
+  - filename: src/content/visualisierungen/vorher-nachher-vergleich.jpg
+    checksum: 6fd026b3401e84ff4d82109e3e2c14964fa1d9ba70b1a61fff5b8b6f21ed737f
+  - filename: src/content/werkzeuge/visualisierungen.png
+    checksum: d68b2abea5a2f030c40821897777800100d7491f847bdea1993c190c6ed16800
 scopeconfig:
   - scope: node
 allowed_patterns:

@@ -1,0 +1,316 @@
+---
+import Hero from "@/components/Hero.astro";
+import Layout from "@/layouts/Layout.astro";
+import Modal from "@/components/Modal.astro";
+import KernCard from "@/components/KernCard.astro";
+import SearchButton from "@/components/search/SearchModalButton.astro";
+import SearchModal from "@/components/search/SearchModal.astro";
+import { werkzeugKeywords } from "@/components/search/keywords";
+import { getCollection } from "astro:content";
+import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
+import { WERKZEUGE_TYPES } from "@/content.config";
+import IconArrowDownward from "~icons/ic/round-arrow-downward";
+import IconAutoStories from "~icons/ic/baseline-auto-stories";
+import IconBookmarkAdd from "~icons/ic/outline-bookmark-add";
+import IconBookmarkAdded from "~icons/ic/round-bookmark-added";
+import IconHelpOutline from "~icons/ic/outline-help-outline";
+
+export const frontmatter = {
+  title: "Ressourcen",
+  navOrder: 2,
+};
+
+const description =
+  "Auf dieser Seite finden Sie Werkzeuge, die Sie bei der Regelungsarbeit unterstützen: hilfreiche Links zu Anleitungen, Hilfsmittel und Tools.";
+
+const allTools = await getCollection("werkzeuge");
+
+type Category = (typeof allTools)[number]["data"]["category"][number];
+
+const getFilteredTools = (category: Category) =>
+  allTools.filter((tool) => tool.data.category.includes(category));
+
+const categories = [
+  {
+    id: "problemanalyse",
+    title: "ein Problem besser verstehen und analysieren",
+    tools: getFilteredTools("Problemanalyse"),
+  },
+  {
+    id: "digital-und-praxistauglichkeit",
+    title: "Digital- und Praxistauglichkeit sicherstellen",
+    tools: getFilteredTools("Praxistauglichkeit"),
+  },
+  {
+    id: "rechtsfoermlichkeit",
+    title: "die Rechtsförmlichkeit des Vorhabens gewährleisten",
+    tools: getFilteredTools("Rechtsförmlichkeit"),
+  },
+  {
+    id: "folgenabschaetzung",
+    title: "die Folgen eines Vorhabens abschätzen",
+    tools: getFilteredTools("Folgenabschätzung"),
+  },
+  {
+    id: "beteiligung",
+    title: "näher mit Beteiligten arbeiten",
+    tools: getFilteredTools("Beteiligung"),
+  },
+];
+
+const BOOKMARKED_TYPE = "Gemerkte Werkzeuge";
+const PAGEFIND_INSTANCE = "werkzeuge";
+---
+
+<Layout title={frontmatter.title} description={description}>
+  <main x-data="werkzeuge" class="breakout-grid">
+    <Hero level="main">
+      <h1>{frontmatter.title}</h1>
+      <p slot="subtitle">
+        Auf dieser Seite finden Sie Werkzeuge, die Sie bei der Regelungsarbeit
+        unterstützen. Diese Sammlung wird stetig ausgebaut.
+      </p>
+    </Hero>
+    <section>
+      <h2>Ich möchte ...</h2>
+      {
+        categories.map(({ id, title }) => (
+          <p>
+            <a href={`#${id}`} class="kern-heading-medium">
+              <IconArrowDownward class="text-cosmic-blue-base inline-block h-32 w-32 pr-4" />
+              {title}
+            </a>
+          </p>
+        ))
+      }
+      <hr class="kern-divider mt-lg -mb-16" aria-hidden="true" />
+    </section>
+    <div aria-hidden="true" x-ref="sentinel" class="h-px -translate-y-px"></div>
+
+    <div
+      class="breakout top-0 z-10 bg-white py-16 transition-shadow lg:sticky"
+      x-data="{ stuck: false }"
+      x-bind:class="stuck ? 'lg:shadow-md' : ''"
+      x-init="
+          new IntersectionObserver(([e]) => { stuck = !e.isIntersecting }, { threshold: [1] })
+            .observe($refs.sentinel);
+          stuck = false;
+        "
+    >
+      <div class="flex flex-col flex-wrap justify-between gap-16 lg:flex-row">
+        <div class="flex flex-wrap items-center gap-8 lg:gap-16">
+          <p class="kern-label my-0 py-0">Filtern nach:</p>
+          {
+            [BOOKMARKED_TYPE, ...WERKZEUGE_TYPES].map((type) => (
+              <button class="h-32" @click={`toggleFilterType('${type}')`}>
+                <span
+                  class={`kern-badge kern-badge--${type.replaceAll(" ", "_").toLowerCase()} interactive`}
+                  x-bind:data-inactive={`filterType && filterType !== '${type}'`}
+                >
+                  {type === BOOKMARKED_TYPE ? (
+                    <IconBookmarkAdded class="text-icon-muted h-24 w-24" />
+                  ) : (
+                    <span
+                      class="kern-icon kern-icon--check kern-icon--default"
+                      aria-hidden="true"
+                      x-show={`filterType === '${type}'`}
+                    />
+                  )}
+                  <span class="kern-label">{type}</span>
+                </span>
+              </button>
+            ))
+          }
+          <button
+            class="text-cosmic-blue-base"
+            popovertarget="hintSidebarContent"
+            aria-label="Hinweise ein- oder ausblenden"
+          >
+            <IconHelpOutline class="h-32 w-32" />
+          </button>
+        </div>
+        <SearchButton instance={PAGEFIND_INSTANCE} />
+      </div>
+    </div>
+
+    <section>
+      {
+        categories.map(({ id, title, tools }) => {
+          return (
+            <>
+              <h2 id={id} class="mb-56 scroll-mt-104">
+                {title.charAt(0).toUpperCase() + title.slice(1)}
+              </h2>
+              <div class="tool-grid gap-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                {tools.map((t) => (
+                  <div
+                    class="tool-wrapper"
+                    x-bind:data-visible={`isCardVisible(${JSON.stringify(t.id)}, ${JSON.stringify(t.data.type)})`}
+                  >
+                    <KernCard
+                      title={t.data.title}
+                      href={t.data.href}
+                      target_option={t.data.isExternal ? "_blank" : "_self"}
+                      body={t.data.description}
+                      background="white"
+                      interactive={false}
+                      image={t.data.image}
+                      imageAlt={t.data.image ? t.data.title : undefined}
+                    >
+                      <div
+                        slot="pre-header"
+                        class="mb-16 flex w-full justify-between"
+                      >
+                        <div class="flex gap-8">
+                          {t.data.type.map((type) => (
+                            <span
+                              class={`kern-badge kern-badge--${type.toLowerCase()}`}
+                            >
+                              <span class="kern-label">{type}</span>
+                            </span>
+                          ))}
+                        </div>
+                        <button
+                          class="text-icon-muted"
+                          aria-label={"Lesezeichen hinzufügen"}
+                          @click={`toggleBookmark(${JSON.stringify(t.id)})`}
+                        >
+                          <IconBookmarkAdd
+                            x-show={`!bookmarkedTools.includes(${JSON.stringify(t.id)})`}
+                            class="h-32 w-32"
+                          />
+                          <IconBookmarkAdded
+                            x-cloak
+                            x-show={`bookmarkedTools.includes(${JSON.stringify(t.id)})`}
+                            class="h-32 w-32"
+                          />
+                        </button>
+                      </div>
+                      <div
+                        slot="footer"
+                        class="text-icon-muted! flex items-center gap-8"
+                      >
+                        <IconAutoStories class="h-32 w-32 shrink-0" />
+                        <p class="kern-subline kern-subline-dark py-0">
+                          Quelle: {t.data.source}
+                        </p>
+                      </div>
+                    </KernCard>
+                  </div>
+                ))}
+                <p class="no-results" data-pagefind-ignore>
+                  <em>Keine Treffer</em>
+                </p>
+              </div>
+            </>
+          );
+        })
+      }
+    </section>
+
+    <Modal id="hintSidebarContent">
+      <h2 class="mt-0 text-xl">Filterfunktionen</h2>
+      <ul>
+        <li>
+          <strong>Gemerkte Werkzeuge:</strong> Jedes Werkzeug kann per Klick auf das
+          Lesezeichen-Symbol gemerkt werden. Diese werden im Browser gespeichert.
+          Achtung: Die gemerkten Werkzeuge verschwinden, sobald Sie den Browser zurücksetzen.
+        </li>
+        <li>
+          <strong>Methode:</strong> Systematische Vorgehensweisen, die Ihnen zu Erkenntnissen
+          verhelfen.
+        </li>
+        <li>
+          <strong>Tool:</strong> Interaktive Werkzeuge, wie beispielsweise Editoren,
+          Plugins und Klickstrecken.
+        </li>
+        <li>
+          <strong>Leitfaden:</strong> Strukturierte Anleitungen, die Orientierung
+          bieten.
+        </li>
+        <li>
+          <strong>Ressource: </strong> Informative Angebote, Services, Datenbanken
+          und weitere Wissensquellen.
+        </li>
+      </ul>
+    </Modal>
+
+    <Hero level="root">
+      <h2>Werkzeug ergänzen</h2>
+      <p>
+        Kennen Sie weitere hilfreiche Werkzeuge, die auf dieser Seite fehlen?
+        Kontaktieren Sie uns gerne.
+      </p>
+      <p>Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a></p>
+      <p>E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a></p>
+    </Hero>
+
+    <SearchModal
+      instance={PAGEFIND_INSTANCE}
+      placeholder="Suche Werkzeuge"
+      fuzzyKeywords={werkzeugKeywords}
+      filterTypes={[...WERKZEUGE_TYPES]}
+    />
+  </main>
+</Layout>
+
+<script>
+  import Alpine from "alpinejs";
+  import { filterBarData } from "@/utils/filterBar";
+  const BOOKMARKED_TYPE = "Gemerkte Werkzeuge"; // TODO: DRY with frontmatter
+
+  document.addEventListener("alpine:init", () => {
+    Alpine.data("werkzeuge", () => ({
+      ...filterBarData(),
+      bookmarkedTools: [] as string[],
+      searchQuery: "",
+
+      init() {
+        const stored = localStorage.getItem("bookmarkedTools");
+        if (stored) {
+          try {
+            this.bookmarkedTools = JSON.parse(stored) as string[];
+          } catch (e) {
+            console.error(
+              "Failed to parse bookmarked tools from localStorage",
+              e,
+            );
+          }
+        }
+        this.$watch("bookmarkedTools", (value: string[]) => {
+          localStorage.setItem("bookmarkedTools", JSON.stringify(value));
+        });
+      },
+
+      isCardVisible(toolId: string, types: string[]) {
+        return (
+          this.matchesFilter(types) ||
+          (this.filterType === BOOKMARKED_TYPE &&
+            this.bookmarkedTools.includes(toolId))
+        );
+      },
+
+      toggleBookmark(toolId: string) {
+        if (this.bookmarkedTools.includes(toolId)) {
+          this.bookmarkedTools = this.bookmarkedTools.filter(
+            (id) => id !== toolId,
+          );
+        } else {
+          this.bookmarkedTools.push(toolId);
+        }
+      },
+    }));
+  });
+</script>
+
+<style>
+  .tool-wrapper:not([data-visible="true"]) {
+    display: none;
+  }
+  .no-results {
+    display: none;
+  }
+  .tool-grid:not(:has(.tool-wrapper[data-visible="true"])) .no-results {
+    display: block;
+  }
+</style>

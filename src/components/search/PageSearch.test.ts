@@ -4,10 +4,12 @@ import PageSearch from "./PageSearch.astro";
 
 describe("PageSearch", () => {
   it("renders a toggle button and a hidden search form", async () => {
-    const { dom } = await renderToDOM(PageSearch);
+    const { dom } = await renderToDOM(PageSearch, {
+      props: { displayName: "Beispiele durchsuchen" },
+    });
 
     const toggle = dom.querySelector("[data-page-search-toggle]");
-    expect(toggle?.textContent).toContain("Suche");
+    expect(toggle?.textContent).toContain("Beispiele durchsuchen");
     expect(toggle?.getAttribute("aria-expanded")).toBe("false");
 
     const form = dom.querySelector("[data-page-search-form]");

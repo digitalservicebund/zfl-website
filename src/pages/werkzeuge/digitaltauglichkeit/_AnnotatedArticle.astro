@@ -1,0 +1,38 @@
+---
+import { render } from "astro:content";
+import Explanation from "./_Explanation.astro";
+import AspectMark from "./_AspectMark.astro";
+import { getEntry } from "astro:content";
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+
+// legal article means German *paragraph* (§),
+// consisting of one or many text paragraphs (German: Absatz)
+const article = await getEntry("articles", slug);
+
+if (!article) throw Error("could not find article with slug " + slug);
+
+const { Content } = await render(article);
+---
+
+<article class="mt-32 ml-24">
+  <h4 class="mb-24">
+    § {article.data.paragraphNummer}{" "}
+    {article.data.paragraphGesetz}
+    {article.data.paragraphTitel && <br />}
+    {article.data.paragraphTitel}
+  </h4>
+  <div
+    class="flex flex-col italic *:col-start-1 md:grid md:grid-cols-[5fr_3fr] md:gap-x-32 [&>aside]:col-start-2 max-md:[&>aside]:mt-16"
+  >
+    <Content
+      components={{
+        Explanation,
+        mark: AspectMark,
+      }}
+    />
+  </div>
+</article>
