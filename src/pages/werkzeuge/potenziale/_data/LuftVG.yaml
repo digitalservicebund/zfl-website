@@ -1,0 +1,9 @@
+title: Luftverkehrsgesetz
+eli: eli/bund/banz-at/1922/s681/2026-07-29/1/deu
+checks:
+  - type: Bürgercheck
+    filename: LuftVG_buergercheck
+  - type: Digitalcheck
+    filename: LuftVG_digitalcheck
+  - type: Praxischeck
+    filename: LuftVG_praxischeck

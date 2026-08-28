@@ -1,0 +1,9 @@
+title: Verordnung über die Führung des Mautdienstregisters
+eli: eli/bund/bgbl-1/2016/s1854/2023-03-09/1/deu
+checks:
+  - type: Bürgercheck
+    filename: MautRegV_buergercheck
+  - type: Digitalcheck
+    filename: MautRegV_digitalcheck
+  - type: Praxischeck
+    filename: MautRegV_praxischeck

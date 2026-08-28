@@ -94,12 +94,22 @@ fileignoreconfig:
     checksum: b9b484659c20fb5daf957d0a561b06bfdee13bad48c88e0806e51fe604ff3985
   - filename: src/pages/werkzeuge/visualisieren/_data/EinbTestV/datenverarbeitung.mmd
     ignore_detectors: [filename]
+  - filename: src/pages/werkzeuge/visualisieren/_data/ZirkRegV/datenverwendung.mmd
+    ignore_detectors: [filename]
   - filename: src/pages/werkzeuge/visualisieren/_data/BKleingG/pachthoehe.mmd
     checksum: 4ef525f5b449fc5f5863fbc1964e4ecdae41363aabf295290f6ad825956dc1fd
   - filename: src/pages/werkzeuge/visualisieren/_mermaid2RulemapXML.ts
     checksum: 01019ab0f49d7695a85a1e669ccca19f15620f8c6908a96eaa41c7a823a8e9f5
-  - filename: src/pages/werkzeuge/visualisieren/_LawFinder.svelte
+  - filename: src/pages/werkzeuge/_shared/ExampleFinder.svelte
     allowed_patterns: [handleKeydown]
+  - filename: src/pages/werkzeuge/potenziale/_data/BVerfGG_praxischeck.md
+    checksum: 27ef255b262e083fdc998a00a1b3854bb9ae67bbbf3136584b81201c7d9ea42e
+  - filename: src/pages/werkzeuge/potenziale/_data/BVerfGG_buergercheck.md
+    checksum: 92d5a661871648601adac55df6a15274c78843aa29d7e69a7a62d961ffbbd3c5
+  - filename: src/pages/werkzeuge/potenziale/_data/LuftVG_buergercheck.md
+    checksum: bb22599bc1fce83999a71d343f0715aa0b7aedef6ade8029b1eedd9fbcc44f14
+  - filename: src/pages/werkzeuge/potenziale/_data/ZirkRegV_buergercheck.md
+    checksum: faef13c94bed18ee8203bd49d8ccea99abc8a2a2baa9759ed7f9d809f0c11f82
   - filename: .claude/skills/gesetz-visualisieren/SKILL.md
     checksum: ce79ba7efa69a4f32e44fc592e62a672dcbd973485ac977b865ec6ff51deda64
   - filename: .claude/skills/vorhaben-checks/praxischeck.md
@@ -108,6 +118,10 @@ fileignoreconfig:
     checksum: 5051e4b7042945790861ef7c625ba99c9b2aca151c9e823d12c93247d9bf51de
   - filename: .claude/skills/vorhaben-checks/buergercheck.md
     checksum: 1b010679bff032ec3089ec7960e0b10ed9f636640bdef57f7ad0194d28641e5d
+  - filename: src/pages/werkzeuge/potenziale/_data/HeizkostenV_buergercheck.md
+    checksum: 27f3b4e145771e0899a85d77aea83f42caaddb5c7027309ba67377aec1075470
+  - filename: src/pages/werkzeuge/potenziale/_data/LuftVG_digitalcheck.md
+    checksum: 9d5981e3e0d94d1e2599cb728b481d0e434e8a914fc0e768188ca7c8bb69bfb0
 scopeconfig:
   - scope: node
 allowed_patterns:
