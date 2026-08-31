@@ -438,7 +438,10 @@
         <div class="flex flex-wrap gap-8">
           {#each lawTypes as lt (lt.id)}
             <ChipBtn
-              onclick={() => (selectedLawType = lt.id)}
+              onclick={() => {
+                selectedExample = undefined;
+                selectedLawType = lt.id;
+              }}
               selected={selectedLawType === lt.id}>{lt.label}</ChipBtn
             >
           {/each}
@@ -527,7 +530,7 @@
           aria-label="Visualisierung in Vollbildansicht öffnen"
           onclick={() => (viewerOpen = true)}
         ></button>
-        <div class="pointer-events-none relative z-[1]">
+        <div class="pointer-events-none relative z-1">
           <!-- eslint-disable-next-line svelte/no-at-html-tags -- diagramSvg comes from mermaid.render() on our own bundled .mmd sources, not user input -->
           {@html diagramSvg}
         </div>
