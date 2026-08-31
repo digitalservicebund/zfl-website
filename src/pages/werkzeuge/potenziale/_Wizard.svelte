@@ -1,5 +1,6 @@
 <script lang="ts">
   import { marked } from "marked";
+  import { untrack } from "svelte";
   import { SvelteURLSearchParams } from "svelte/reactivity";
   import { werkzeuge_visualisieren } from "@/config/routes";
   import ChipBtn from "../_shared/ChipBtn.svelte";
@@ -29,7 +30,9 @@
   let hasAppliedInitialCheck = false;
 
   let selectedExample = $state(
-    examples.find((example) => example.short === initialVorhaben),
+    untrack(() =>
+      examples.find((example) => example.short === initialVorhaben),
+    ),
   );
 
   let selectedCheckType = $state<string>();

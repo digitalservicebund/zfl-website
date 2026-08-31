@@ -1,5 +1,6 @@
 <script lang="ts">
   import mermaid from "mermaid";
+  import { untrack } from "svelte";
   import { SvelteURLSearchParams } from "svelte/reactivity";
   import { werkzeuge_potenziale } from "@/config/routes";
   import {
@@ -50,7 +51,7 @@
   let hasAppliedInitialVisualization = false;
 
   let selectedExample = $state(
-    examples.find((example) => example.short === initialNorm),
+    untrack(() => examples.find((example) => example.short === initialNorm)),
   );
 
   let selectedVisOption = $state<string>();
