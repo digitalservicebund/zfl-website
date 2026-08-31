@@ -1,0 +1,114 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import ImageTextOverlay from "@/components/ImageTextOverlay.astro";
+import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
+import { werkzeuge_ressourcen_interviewleitfaden } from "@/config/routes";
+import technischeUmsetzbarkeit from "../_assets/technischeUmsetzbarkeit.png";
+
+const frontmatter = {
+  title: "Technische Umsetzbarkeit sicherstellen",
+  navLabel: "Technische Umsetzbarkeit",
+  navOrder: 5,
+};
+
+const schaubild = "/downloads/SchaubildTechnischeUmsetzbarkeit.pdf";
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero level="plain">
+      <h1>{frontmatter.title}</h1>
+      <p>
+        Analysieren Sie die Auswirkungen Ihres Regelungsvorhabens auf bestehende
+        und neue Abläufe und IT-Systeme. Damit stellen Sie die technische
+        Machbarkeit sicher. Greifen Sie dafür auf das Fachwissen der zuständigen
+        Akteurinnen und Akteure zurück und holen Sie sich Hilfe von neutralen
+        IT-Expertinnen und -Experten.
+      </p>
+    </Hero>
+    <section class="breakout bg-lavender-200">
+      <h2>Verstehen Sie die Auswirkungen auf IT-Systeme</h2>
+      <p>
+        Vergleichen Sie gemeinsam mit den <a
+          href={werkzeuge_ressourcen_interviewleitfaden.path}
+          >zuständigen Akteurinnen und Akteuren</a
+        > das geplante Vorhaben mit den Möglichkeiten der bestehenden IT-Systeme.
+        Überprüfen Sie die Informationen mithilfe neutraler IT-Expertinnen und -Experten.
+      </p>
+      <p>So erfahren Sie</p>
+      <ul>
+        <li>welche IT-Systeme für Ihr Vorhaben verwendet werden können</li>
+        <li>und an welchen Stellen Änderungen nötig sind.</li>
+      </ul>
+      <ImageTextOverlay
+        image={technischeUmsetzbarkeit}
+        imageAlt="Schematische und stilisierte Darstellung des Dokuments Gesprächsleitfaden technische Umsetzbarkeit. Mehrere bunte Kästen sind untereinander dargestellt, mit einer schwarzen Linie, die sie verbindet. "
+        linkHref={schaubild}
+        linkText="Vorlage herunterladen (PDF-Datei)"
+        icon="open-in-new"
+      >
+        <Fragment slot="content">
+          <h2>Gesprächsleitfaden: Aspekte technischer Umsetzbarkeit</h2>
+          <p>
+            Besprechen Sie die Fragen im Schaubild gemeinsam mit den
+            IT-Expertinnen und Experten in der Umsetzung. Multidisziplinäre
+            Zusammenarbeit ist hier der Schlüssel.
+          </p>
+          <p>Das PDF ist barrierearm/barrierefrei.</p>
+        </Fragment>
+      </ImageTextOverlay>
+      <h3>Sie müssen nicht alles allein bewältigen</h3>
+      <p>
+        Bei kleinen Fragen rufen Sie den Support an unter <a
+          href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a
+        >. Für ein unterstützendes, einstündiges Videotelefonat schreiben Sie
+        eine E-Mail an <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>.
+      </p>
+    </section>
+    <section>
+      <h2>Tipps: Gespräche über IT-Anpassungen</h2>
+      <ul>
+        <li>
+          <b>Aufwand verstehen:</b> Fragen Sie nach dem Aufwand für IT-Anpassungen.
+          Lassen Sie sich die Details erklären, bis Sie die Aufwände nachvollziehen
+          können. So werden Sie selbst sprechfähig.
+        </li>
+        <li>
+          <b>Fokus auf das Regelungsziel:</b> Gehen Sie konstruktiv und mit dem Regelungsziel
+          im Fokus in Gespräche. Veränderungen in der IT bedeuten organisatorischen
+          und finanziellen Aufwand, was die Lösungsfindung erschweren kann.
+        </li>
+      </ul>
+    </section>
+    <Hero level="root">
+      <h2>Die technische Umsetzung gemeinsam durchdenken</h2>
+      <p>
+        Wenn die technischen Anforderungen zu komplex werden, unterstützt Sie
+        der Support. Wir helfen als neutraler Akteur dabei
+      </p>
+      <ul>
+        <li>
+          die <b>technische Umsetzung</b> im Detail zu durchdenken und Nutzerfreundlichkeit,
+          Datenverwendung und IT-Sicherheit zu beachten,
+        </li>
+        <li>
+          als <b>neutrale Moderation</b> in Gesprächen mit zuständigen Akteurinnen
+          und Akteuren, um potenzielle Interessenkonflikte durch Fachlichkeit zu entschärfen,
+        </li>
+        <li>
+          <b>Erkenntnisse visuell aufzubereiten</b> – das ist die beste Grundlage
+          für interne und externe Beteiligungsprozesse – und
+        </li>
+        <li>
+          die <b>Aussagen externer Dienstleister</b> zu reflektieren: Wirtschaftlichkeit
+          kann eine Motivation für aufwändige Lösungen sein.
+        </li>
+      </ul>
+      <p>
+        Schreiben Sie über <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a> oder rufen
+        Sie uns an unter <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>.
+      </p>
+    </Hero>
+  </main>
+</Layout>

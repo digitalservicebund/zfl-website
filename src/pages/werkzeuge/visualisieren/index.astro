@@ -10,7 +10,7 @@ export const frontmatter = {
   isStagingOnly: true,
 };
 
-const visualisierungen = await getCollection("visualisierungen");
+const visualisierungen = await getCollection("kiVisualisierungen");
 const examples = visualisierungen.map(({ data, filePath }) => ({
   ...data,
   // filePath preserves the on-disk casing, unlike the glob loader's

@@ -1,0 +1,485 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import KernAccordion from "@/components/KernAccordion.astro";
+import KernCard from "@/components/KernCard.astro";
+import StepNumber from "@/components/StepNumber.astro";
+import TocContainer from "@/components/global/TocContainer.astro";
+import akteureImg from "./_assets/akteure.png";
+import zielgruppeImg from "./_assets/zielgruppe.png";
+import checklistenImg from "./_assets/checkliste.png";
+
+const frontmatter = {
+  title: "Akteurinnen und Akteure identifizieren und Interviews vorbereiten",
+  navLabel: "Interviewleitfaden",
+  navOrder: 3,
+};
+
+const template_akteure = "/downloads/Akteure-auflisten.docx";
+const powerpoint_zielgruppe = "/downloads/Zielgruppenanalyse.pptx";
+const template_checklist = "/downloads/Checkliste-Interviewführung.docx";
+const buergercheck = "/downloads/Buergercheck.pdf";
+---
+
+<Layout title={frontmatter.title}>
+  <main>
+    <Hero class="breakout-grid" level="plain">
+      <h1 class="max-w-a11y">{frontmatter.title}</h1>
+      <p>
+        Im folgenden Abschnitt finden Sie eine praxisnahe Anleitung zur
+        strukturierten Vorbereitung und Durchführung von Interviews.
+      </p>
+      <p>
+        Die Inhalte sind auf Basis von den unten aufgeführten Quellen
+        entstanden.
+      </p>
+    </Hero>
+    <TocContainer>
+      <div class="breakout! bg-lavender-200 pt-64">
+        <h2>Anleitung</h2>
+      </div>
+      <section class="breakout! bg-lavender-200 pt-32">
+        <StepNumber number={1} />
+        <h3>Relevante Akteurinnen und Akteure identifizieren</h3>
+        <p>
+          Zu Beginn wird ein Überblick über alle relevanten Akteurinnen und
+          Akteure geschaffen. Ziel ist es, Personen oder Gruppen zu
+          identifizieren, die von der Regelung betroffen sind oder an ihrer
+          Umsetzung beteiligt sind. Dazu gehören sowohl direkt betroffene
+          Akteure als auch solche, die vorbereitende, unterstützende oder
+          steuernde Aufgaben übernehmen.
+        </p>
+        <p>
+          Eine Einteilung nach Rollen hilft Ihnen dabei, die Akteurinnen und
+          Akteure systematisch zu ordnen:
+        </p>
+        <ul>
+          <li>
+            <strong>Wer setzt den Rechtsrahmen?</strong> Akteurinnen und Akteure,
+            die Gesetze oder Regelungen gestalten oder beeinflussen (z.B. Gerichte,
+            EU-Institutionen).
+          </li>
+          <li>
+            <strong>Wer setzt das Gesetz um?</strong> Akteurinnen und Akteure, die
+            die praktische Umsetzung übernehmen (z.B. Behörden, Vollzugsstellen, private
+            Träger).
+          </li>
+          <li>
+            <strong>Wen betrifft das Gesetz?</strong> Akteurinnen und Akteure, die
+            direkt betroffen sind (z.B. Bürgerinnen und Bürger, Unternehmen).
+          </li>
+        </ul>
+      </section>
+      <section>
+        <StepNumber number={2} />
+        <h3>Halten Sie die Akteurinnen und Akteure in einer Übersicht fest</h3>
+        <p>
+          Im nächsten Schritt werden die identifizierten Akteurinnen und Akteure
+          in einer Übersicht festgehalten. Diese dient als Arbeitsgrundlage für
+          die weitere Interviewplanung und hilft, unterschiedliche Perspektiven
+          gezielt abzudecken.
+        </p>
+        <p>
+          Nutzen Sie die folgende Tabellen, um die Ebenen von Betroffenheit und
+          Vollzug präzise abzubilden und relevante Interview-Partnerinnen und
+          Partner zu identifizieren.
+        </p>
+        <p>Leitfragen zur Auswahl:</p>
+        <ul>
+          <li>
+            <strong>Betroffenheit</strong>: Wer ist unmittelbar oder mittelbar
+            von der Regelung betroffen? Und wer ist wie stark betroffen?
+          </li>
+          <li>
+            <strong>Entscheidungskompetenz</strong>: Wer entscheidet oder
+            beeinflusst Entscheidungen im Vollzug?
+          </li>
+          <li>
+            <strong>Relevanz</strong>: Welche Akteure verfügen über besonderes
+            Fachwissen oder praktische Erfahrung?
+          </li>
+          <li>
+            <strong>Zielsetzung</strong>: Welches Wissen soll konkret
+            erschlossen werden?
+          </li>
+          <li>
+            <strong>Praxisnähe</strong> Wer kann konkrete Auswirkungen und Herausforderungen
+            beschreiben?
+          </li>
+        </ul>
+        <p>
+          <strong>Tipp</strong>: Kooperationen mit Verbänden oder Gewerkschaften
+          erleichtern den Zugang zu spezifischen Zielgruppen - insbesondere bei
+          schwer erreichbaren Akteurinnen und Akteuren wie Leistungsempfängern.
+        </p>
+        <div class="tool-grid gap-md mt-32 grid grid-cols-1 md:grid-cols-2">
+          <KernCard
+            preline="Vorlage"
+            title="Akteure auflisten"
+            background="white"
+            body="Nutzen Sie diese Tabelle zur systematischen Erfassung und Gewichtung Ihrer Gesprächspartnerinnen und -partner. Dokumentieren Sie hier die Relevanz und den angestrebten Erkenntnisgewinn auf Basis der Leitfragen."
+            image={akteureImg}
+            imageAlt="Schematische Darstellung der Vorlage mit dunkelblauen Blöcken mit den Aufschriften Akteursgruppe, Staatlich und Privatwirtschaft"
+          >
+            <div slot="footer">
+              <a href={template_akteure} class="kern-btn kern-btn--secondary">
+                <span class="kern-icon kern-icon--download" aria-hidden="true"
+                ></span>
+                <span class="kern-label">Word-Vorlage</span>
+              </a>
+            </div>
+          </KernCard>
+          <KernCard
+            preline="Vorlage"
+            title="Zielgruppe analysieren"
+            background="white"
+            body="Nutzen Sie die Vorlage zum Zielgruppen-Profil aus dem Bürgercheck, um die Bedürfnisse der betroffenen Akteurinnen und Akteure (Normadressaten) tiefgreifend zu verstehen und diese gezielt zu priorisieren."
+            image={zielgruppeImg}
+            imageAlt="Schematische Darstellung der Vorlage mit einer blauen Spalten mit dem Titel Betroffenheit und einer gelben Spalte mit dem Titel Gruppengröße"
+          >
+            <div slot="footer">
+              <a
+                href={powerpoint_zielgruppe}
+                class="kern-btn kern-btn--secondary"
+              >
+                <span class="kern-icon kern-icon--download" aria-hidden="true"
+                ></span>
+                <span class="kern-label">Powerpoint-Vorlage</span>
+              </a>
+            </div>
+          </KernCard>
+        </div>
+      </section>
+      <section class="breakout! bg-lavender-200">
+        <StepNumber number={3} />
+        <h3>Passende Interviewmethode wählen</h3>
+        <p>
+          Basierend auf Ihrer Übersicht der Akteurinnen und Akteure, können Sie
+          eine passende Interviewmethode wählen. Je nach Zielsetzung,
+          Projektphase und Informationsbedarf eignen sich unterschiedliche
+          Formen:
+        </p>
+        <div class="mt-16">
+          <KernAccordion>
+            <span slot="header">Quantitative Interviews</span>
+            <span slot="body" class="accordion-body-full-width space-y-8">
+              <p>
+                Quantitative Interviews dienen der Überprüfung bestehender
+                Annahmen.
+              </p>
+              <p>
+                Sie arbeiten mit standardisierten Fragen und vorgegebenen
+                Antwortoptionen, um vergleichbare und statistisch auswertbare
+                Daten zu erheben. Geeignet zur Messung von Häufigkeiten und
+                Verteilungen.
+              </p>
+            </span>
+          </KernAccordion>
+          <KernAccordion>
+            <span slot="header">Qualitative Interviews</span>
+            <span slot="body" class="accordion-body-full-width space-y-8">
+              <p>
+                Qualitative Interviews dienen der Gewinnung neuer Erkenntnisse.
+              </p>
+              <p>
+                Sie machen Erfahrungen, Perspektiven und Zusammenhänge sichtbar
+                und ermöglichen ein vertieftes Verständnis der Praxis. Die
+                Fragen sind offen, der Gesprächsverlauf flexibel.
+              </p>
+              <p>Diese lassen sich nochmal unterscheiden:</p>
+              <ul>
+                <li>
+                  <strong>Standardisiertes Leitfaden-Interview</strong>: Das
+                  Interview folgt einem festen, vorab definierten Fragenkatalog.
+                  Abweichungen sind nicht vorgesehen. Es eignet sich, wenn
+                  relevante Informationen bereits bekannt sind und systematisch
+                  erhoben werden sollen.
+                </li>
+                <li>
+                  <strong>Halb-standardisiertes Leitfaden-Interview</strong>:
+                  Ein Interviewleitfaden gibt die Themen vor, lässt aber
+                  Spielraum in Reihenfolge und Formulierung der Fragen. Das
+                  Format ermöglicht gezielte Vertiefungen und neue Erkenntnisse
+                  bei gleichzeitig überschaubarem Auswertungsaufwand.
+                </li>
+              </ul>
+            </span>
+          </KernAccordion>
+        </div>
+      </section>
+      <section>
+        <StepNumber number={4} />
+        <h3>Gespräche durchführen</h3>
+        <p>
+          Nach der Vorbereitung laden Sie Ihre Gesprächspartnerinnen und
+          Gesprächspartner zum Interview ein und treten in den direkten Dialog.
+          Ziel ist es, durch gezieltes Nachfragen die tatsächliche
+          Umsetzungspraxis zu verstehen und blinde Flecken im Vollzug
+          aufzudecken. Das Interview gliedert sich in drei Phasen:
+        </p>
+        <p>
+          <b>Kontaktphase:</b> Schaffen Sie eine vertrauensvolle Gesprächsatmosphäre.
+          Erläutern Sie nach der Begrüßung kurz Zweck, Ziele und Ablauf des Interviews.
+        </p>
+        <p>
+          <b>Erhebungsphase:</b> Beginnen Sie mit offenen Fragen und vertiefen Sie
+          diese gezielt entlang Ihres Leitfadens. Achten Sie auf eine ausgewogene
+          Kombination aus offenen und geschlossenen Fragen. Behandelt werden:
+        </p>
+        <ul>
+          <li><strong>Kontext:</strong> Aufgaben und Abläufe klären</li>
+          <li>
+            <strong>Erfahrungen:</strong> Probleme und Stärken identifizieren
+          </li>
+          <li><strong>Analyse:</strong> Ursachen herausarbeiten</li>
+          <li>
+            <strong>Lösungen:</strong> Ansätze und Potenziale bewerten
+          </li>
+        </ul>
+        <p>
+          <b>Ausklang &amp; Dokumentation:</b> Fassen Sie nach jedem Themenblock die
+          zentralen Inhalte zusammen und dokumentieren Sie diese parallel zum Gespräch.
+          Zum Abschluss danken Sie Ihrem Gegenüber und informieren über das weitere
+          Vorgehen, um eine positive Grundlage für zukünftige Gespräche zu schaffen.
+        </p>
+        <p>
+          <strong>Weiterführende Quelle: </strong>
+          <a
+            href="https://www.orghandbuch.de/SharedDocs/faqs/Webs/OHB/DE/Methoden_Befragung/13_Durchfuehrung_muendliches_Interview.html"
+            target="_blank">Orghandbuch des BMI 2026</a
+          >
+        </p>
+        <p>
+          <strong
+            >Für die parallele Dokumentation bieten sich folgende Formen an:</strong
+          >
+        </p>
+        <div class="mt-32">
+          <KernAccordion>
+            <span slot="header">Wortgetreues Transkript</span>
+            <span slot="body" class="accordion-body-full-width space-y-8">
+              <p>
+                Beim Transkript wird das Interview vollständig und möglichst
+                wortgetreu verschriftlicht.
+              </p>
+              <div>
+                <b>Vorteile:</b>
+                <ul>
+                  <li>hohe Genauigkeit und Nachvollziehbarkeit</li>
+                  <li>
+                    detaillierte Auswertung auch zu einem späteren Zeitpunkt
+                    möglich
+                  </li>
+                  <li>
+                    besonders geeignet bei komplexen oder sensiblen Themen
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <b>Nachteile:</b>
+                <ul>
+                  <li>sehr zeit- und ressourcenintensiv</li>
+                  <li>hoher Aufwand bei Datenschutz und Anonymisierung</li>
+                </ul>
+              </div>
+            </span>
+          </KernAccordion>
+          <KernAccordion>
+            <span slot="header">Inhaltsnahe Mitschrift / Ergebnisprotokoll</span
+            >
+            <span slot="body" class="accordion-body-full-width space-y-8">
+              <p>
+                Hierbei werden die zentralen Aussagen, Argumente und Beispiele
+                während oder unmittelbar nach dem Interview schriftlich
+                festgehalten.
+              </p>
+              <div>
+                <b>Vorteile:</b>
+                <ul>
+                  <li>deutlich geringerer Aufwand</li>
+                  <li>schnelle Weiterverarbeitung der Ergebnisse</li>
+                  <li>
+                    gut geeignet bei klarer Fragestellung und begrenzter
+                    Interviewanzahl
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <b>Nachteile:</b>
+                <ul>
+                  <li>geringere Detailtiefe</li>
+                  <li>
+                    stärkere Abhängigkeit von der Interpretation der
+                    interviewführenden Person
+                  </li>
+                </ul>
+              </div>
+            </span>
+          </KernAccordion>
+          <KernAccordion>
+            <span slot="header">Audioaufzeichnung</span>
+            <span slot="body" class="accordion-body-full-width space-y-8">
+              <p>
+                Das Interview wird aufgezeichnet und bei Bedarf später
+                ausgewertet oder teilweise transkribiert.
+              </p>
+              <div>
+                <b>Voraussetzungen dafür sind:</b>
+                <ul>
+                  <li>
+                    vorherige ausdrückliche Einwilligung der befragten Person
+                  </li>
+                  <li>klare Regelung zur Speicherung, Nutzung und Löschung</li>
+                </ul>
+              </div>
+              <div>
+                <b>Vorteile:</b>
+                <ul>
+                  <li>Entlastung während des Gesprächs</li>
+                </ul>
+              </div>
+              <div>
+                <b>Nachteile:</b>
+                <ul>
+                  <li>Möglichkeit, Aussagen später zu überprüfen</li>
+                  <li>
+                    Transkription und spätere Auswertung bedeuten einen großen
+                    zeitlichen Invest
+                  </li>
+                </ul>
+              </div>
+            </span>
+          </KernAccordion>
+          <KernAccordion>
+            <span slot="header">Videoaufzeichnung</span>
+            <span slot="body" class="accordion-body-full-width space-y-8">
+              <p>
+                Videoaufzeichnungen in der Praxis Videoformate sind aufgrund des
+                hohen Datenschutz-Aufwands selten. Prüfen Sie vorab, ob die
+                Relevanz für die Regelungserarbeitung den Aufwand rechtfertigt.
+              </p>
+              <div>
+                <b>Voraussetzungen dafür sind, dass:</b>
+                <ul>
+                  <li>Vertraulichkeit zugesichert und eingehalten wird,</li>
+                  <li>personenbezogene Daten anonymisiert werden,</li>
+                  <li>
+                    die Befragten über Art und Zweck der Dokumentation
+                    informiert sind.
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <b>Vorteile:</b>
+                <ul>
+                  <li>zusätzliche Informationen durch Mimik und Gestik</li>
+                </ul>
+              </div>
+              <div>
+                <b>Nachteile:</b>
+                <ul>
+                  <li>hohe Hemmschwelle für Befragte</li>
+                  <li>erhöhter Datenschutz- und Organisationsaufwand</li>
+                  <li>meist nicht erforderlich für die Regelungserarbeitung</li>
+                </ul>
+              </div>
+            </span>
+          </KernAccordion>
+        </div>
+      </section>
+      <section class="breakout! bg-lavender-200">
+        <StepNumber number={5} />
+        <h3>Auswerten</h3>
+        <p>
+          In mehreren Gesprächen mit einer Dauer von 45 - 60 Minuten kommen eine
+          Menge Informationen zusammen. Im Anschluss werden die gesammelten
+          Informationen ausgewertet. In der Regel lassen sich aus mehreren
+          Gesprächen zentrale Muster, Herausforderungen und Erfolgsfaktoren
+          ableiten. Nutzen Sie ggf. die <a
+            href="https://www.oeffentliches-gestalten.de/buch/erkennen/erkenntnisse-formulieren#individuelle-gespr%C3%A4chsauswertung"
+            target="_blank">Methode Individuelle Gesprächsauswertung</a
+          >, um Schlüsselaspekte herauszuarbeiten.
+        </p>
+      </section>
+      <section>
+        <h2 data-toc-label="Checkliste">
+          Alles auf einem Blick: Kompakte Checkliste zur Interviewführung
+        </h2>
+        <p>
+          Nutzen Sie diese Zusammenfassung, um die methodische Qualität Ihrer
+          Interviews abzusichern und eine lückenlose Vorbereitung sowie
+          Nachbereitung sicherzustellen.
+        </p>
+        <div class="lg:grid lg:grid-cols-2">
+          <KernCard
+            preline="Vorlage"
+            title="Checkliste"
+            background="white"
+            body="Die Checkliste bündelt die wichtigsten Handlungsempfehlun­gen für Vorbereitung, Durchführung und Nachbereitung."
+            image={checklistenImg}
+            imageAlt="Schematische Darstellung der Checkliste mit dem Titel Ablaufplan: Stakeholder-Interviews und Elementen zum  Abhaken"
+          >
+            <div slot="footer">
+              <a href={template_checklist} class="kern-btn kern-btn--secondary">
+                <span class="kern-icon kern-icon--download" aria-hidden="true"
+                ></span>
+                <span class="kern-label">Word-Vorlage</span>
+              </a>
+            </div>
+          </KernCard>
+        </div>
+      </section>
+      <section>
+        <h2>Relevante Quellen</h2>
+        <p>
+          Nutzen Sie diese Zusammenfassung, um die methodische Qualität Ihrer
+          Interviews abzusichern und eine lückenlose Vorbereitung sowie
+          Nachbereitung sicherzustellen.
+        </p>
+        <ul class="list-unstyled space-y-8">
+          <li>
+            <a
+              href="https://www.oeffentliches-gestalten.de"
+              target="_blank"
+              rel="noopener"
+              class="text-link"
+            >
+              Öffentliches Gestalten
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.digitale-verwaltung.de/SharedDocs/downloads/Webs/DV/DE/servicehandbuch.pdf?__blob=publicationFile&v=5#page=18"
+              target="_blank"
+              rel="noopener"
+              class="text-link"
+            >
+              Servicehandbuch
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://servicestandard.gov.de/handbuch/#aus-der-praxis"
+              target="_blank"
+              rel="noopener"
+              class="text-link"
+            >
+              Servicestandard - Handbuch
+            </a>
+          </li>
+          <li>
+            <a
+              href={buergercheck}
+              target="_blank"
+              rel="noopener"
+              class="text-link text-link--download"
+              download
+            >
+              Bürgercheck (PDF)
+            </a>
+          </li>
+        </ul>
+      </section>
+    </TocContainer>
+  </main>
+</Layout>

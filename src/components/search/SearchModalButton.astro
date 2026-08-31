@@ -14,7 +14,10 @@ const { class: className, instance, keyboardToggle } = Astro.props;
   instance={instance}
   {...keyboardToggle ? { "keyboard-toggle": "true" } : {}}
 >
-  <SearchButton class={className} keyboardToggle={keyboardToggle} />
+  <SearchButton class={className} keyboardToggle={keyboardToggle}>
+    <span class="kern-icon kern-icon--search" aria-hidden="true"></span>
+    <span>Suche</span>
+  </SearchButton>
 </custom-modal-trigger>
 
 <script>

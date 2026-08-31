@@ -1,0 +1,557 @@
+---
+import Image from "@/components/Image.astro";
+import TocContainer from "@/components/global/TocContainer.astro";
+import Hero from "@/components/Hero.astro";
+import Layout from "@/layouts/Layout.astro";
+import StepNumber from "@/components/StepNumber.astro";
+import InfoPanel from "@/components/InfoPanel.astro";
+import KernCard from "@/components/KernCard.astro";
+import { ZFL_EMAIL } from "@/config/constants";
+import IconAutoStories from "~icons/ic/baseline-auto-stories";
+import startEndImg from "./_assets/start-endsymbol.png";
+import akteurImg from "./_assets/akteurin-akteur.png";
+import prozessImg from "./_assets/prozess-aktivitaetssymbol.png";
+import entscheidungImg from "./_assets/entscheidungssymbol.png";
+import datenImg from "./_assets/datensymbol.png";
+import verbindungImg from "./_assets/verbindungspfeil.png";
+import beispielImg from "./_assets/beispiel-flussdiagramm.png";
+import akteureImg from "./_assets/akteure-2.png";
+import perspektiveImg from "./_assets/perspektive-3.png";
+import startEndeImg from "./_assets/start-ende.png";
+import visual4Img from "./_assets/start-ende-4.png";
+import flussdiagramm5Img from "./_assets/flussdiagramm-5.png";
+import aktivitaet5Img from "./_assets/aktivitaet-5.png";
+import swimlane5Img from "./_assets/swim-5.png";
+import informationen6Img from "./_assets/informationen-6.png";
+import flussdiagramm6Img from "./_assets/flussdiagramm-6.png";
+import flussdiagrammThumbnail from "./_assets/flussdiagrammThumbnail.png";
+import flussdiagrammVideo from "./_assets/flussdiagramm-video.mp4";
+
+import { getEntries } from "astro:content";
+
+const frontmatter = {
+  title: "Flussdiagramm erstellen",
+  navOrder: 2,
+  navLabel: "Flussdiagramm",
+};
+
+const external_ressources = await getEntries([
+  { collection: "werkzeuge", id: "visualisierungen" },
+  { collection: "werkzeuge", id: "interviewleitfaden" },
+]);
+
+const aufbauElemente = [
+  {
+    image: startEndImg,
+    title: "Start-/Endsymbol",
+    body: "Der Kreis stellt den Beginn oder das Ende eines Prozesses dar (z.B. Antrag wird gestellt).",
+  },
+  {
+    image: akteurImg,
+    title: "Akteurin/Akteur",
+    body: "Ein Rechteck mit Symbol steht für eine beteiligte Person oder Institution im Prozess (z.B. Meldebehörde oder Fahrschülerin).",
+  },
+  {
+    image: prozessImg,
+    title: "Prozess-/Aktivitätssymbol",
+    body: "Das Rechteck stellt eine Aktivität oder einen Arbeitsschritt dar (z.B. Antrag prüfen).",
+  },
+  {
+    image: entscheidungImg,
+    title: "Entscheidungssymbol",
+    body: "Eine Raute steht für eine Abfrage mit mindestens zwei möglichen Ausgängen (z.B. Antrag vollständig? – ja/nein).",
+  },
+  {
+    image: datenImg,
+    title: "Datensymbol (Eingabe/Ausgabe)",
+    body: "Dieses Symbol zeigt genutzte oder erzeugte Daten oder Ressourcen (z.B. Melderegister).",
+  },
+  {
+    image: verbindungImg,
+    title: "Verbindungspfeil",
+    body: "Pfeile verbinden die Symbole und machen die zeitliche Reihenfolge der Prozessschritte sichtbar.",
+  },
+];
+
+const conceptboardTemplate =
+  "https://bmas.de.conceptboard.com/board-welcome/board/qh33-xcny-usde-7nc6-82cy?afterwardsUrl=https%3A%2F%2Fbmas.de.conceptboard.com%2Fboard%2Fqh33-xcny-usde-7nc6-82cy";
+const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
+---
+
+<Layout title={frontmatter.title}>
+  <main>
+    <Hero level="plain" class="breakout-grid">
+      <h1>{frontmatter.title}</h1>
+      <p>
+        Ein Flussdiagramm visualisiert, wie ein Prozess Schritt für Schritt
+        abläuft. Es hilft, die Reihenfolge von z.B. Handlungen, Datenflüssen
+        oder Entscheidungen übersichtlich darzustellen.
+      </p>
+    </Hero>
+    <TocContainer>
+      <section class="breakout! bg-lavender-200 pt-64">
+        <h2 data-toc-label="Übersicht">
+          Typischer Aufbau eines Flussdiagramms
+        </h2>
+        <div class="space-y-56">
+          <div
+            class="gap-md mt-32 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
+          >
+            {
+              aufbauElemente.map((element) => (
+                <div>
+                  <Image
+                    src={element.image}
+                    alt={element.title}
+                    class="h-64 w-auto"
+                  />
+                  <p class="kern-heading-medium mt-16 hyphens-auto">
+                    {element.title}
+                  </p>
+                  <p>{element.body}</p>
+                </div>
+              ))
+            }
+          </div>
+          <figure class="space-y-16">
+            <p class="kern-heading-large">Beispiel eines Flussdiagramms</p>
+            <Image
+              src={beispielImg}
+              alt="Das Bild zeigt am Beispiel des Führerscheinantrags, wie ein Flussdiagramm funktioniert. Es stellt alle Schritte von der Anmeldung bis zur Meldebestätigung in chronologischer Reihenfolge übersichtlich dar. Die grünen Boxen erklären die jeweiligen Vorteile. Ein Flussdiagramm veranschaulicht Prozesse, verdeutlicht Verantwortlichkeiten und hilft, die Orientierung über den gesamten Ablauf zu bewahren."
+              zoom
+            />
+            <figcaption>
+              <p class="kern-subline kern-subline--small">
+                In diesem Beispiel ist der Antragsprozess für einen Führerschein
+                aus Sicht der Fahrschülerin visualisiert.
+              </p>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+      <section>
+        <h2
+          data-toc-label="Video Anleitung"
+          id="flussdiagramm-erstellen-live-desc"
+        >
+          Videoanleitung: So entsteht ein Flussdiagramm
+        </h2>
+        <p>
+          Im Video sehen Sie die zuvor erklärten Schritte in kompakter Form –
+          diesmal am Beispiel Einbürgerung. So wird deutlich, wie sich die
+          Methode aus dem Führerschein-Beispiel auch auf andere Themen
+          übertragen lässt.
+        </p>
+        <video
+          controls
+          muted
+          width="100%"
+          class="max-w-a11y"
+          preload="none"
+          poster={flussdiagrammThumbnail.src}
+          aria-labelledby="flussdiagramm-erstellen-live-desc"
+        >
+          <source src={flussdiagrammVideo} type="video/mp4" />
+          <a href={flussdiagrammVideo} target="_blank" rel="noreferrer">
+            Video herunterladen
+          </a>
+        </video>
+      </section>
+      <section class="breakout! bg-lavender-200">
+        <h2 class="mb-32">Anleitung</h2>
+        <StepNumber number={1} />
+        <h3 data-toc-label="Format">
+          Entscheiden Sie, in welchem Medium Sie arbeiten möchten
+        </h3>
+        <p>
+          Wir empfehlen, den ersten Entwurf auf Papier oder einem Whiteboard zu
+          erstellen. Sie können Fehler jederzeit leicht korrigieren und die
+          Darstellung flexibel anpassen. Perfektion ist hier nicht entscheidend
+          – wichtig ist, dass Sie anfangen. Sie können auch in einem einfachen
+          Whiteboard-Programm oder Powerpoint arbeiten.
+        </p>
+        <p><b>Darauf sollten Sie achten:</b></p>
+        <ul>
+          <li>Visualisierung ist klar strukturiert und gut lesbar</li>
+          <li>Beschränkt sich auf die wesentlichen Elemente des Prozesses</li>
+        </ul>
+        <div class="mt-32">
+          <InfoPanel look="lightLavender" contentClass="gap-16">
+            <div class="flex items-center gap-8">
+              <p class="font-bold">Vorlage für Flussdiagramm</p>
+            </div>
+            <p>
+              Hier können Sie eine <strong>Powerpoint-Vorlage (PPT)</strong> für das
+              Flussdiagramm herunterladen. In der Vorlage ist eine Schritt-für-Schritt-Anleitung
+              enthalten. Sie können diese ausdrucken oder an Ihrem Computer bearbeiten.
+              Sofern in Ihrem Ressort <strong>Conceptboard</strong> genutzt werden
+              kann, können Sie sich auch eine Kopie dieser Conceptboard-Vorlage erstellen.
+              Für letzteres können Sie einen <strong>Gast-Zugang</strong> anlegen.
+            </p>
+            <ul class="list-unstyled space-y-8">
+              <li>
+                <a
+                  href={conceptboardTemplate}
+                  target="_blank"
+                  rel="noopener"
+                  class="text-link">Conceptboard-Vorlage</a
+                >
+              </li>
+              <li>
+                <a
+                  href={powerpointTemplate}
+                  class="text-link text-link--download"
+                  download>Powerpoint-Vorlage</a
+                >
+              </li>
+            </ul>
+            <p>
+              Sie wünschen sich ein anderes Medium? Schicken Sie uns eine E-Mail
+              an <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>.
+            </p>
+          </InfoPanel>
+        </div>
+      </section>
+      <section>
+        <StepNumber number={2} />
+        <h3 data-toc-label="Akteure">Identifizieren Sie relevante Akteure</h3>
+        <p>
+          Sie starten mit einer unsortierten Liste der relevanten Akteure.
+          Schreiben Sie alle Akteure auf, die für den Vollzug der Regelung
+          zuständig sind. Vergessen Sie dabei nicht die Normadressaten. Es ist
+          nicht schlimm, wenn Sie dabei einen Akteur vergessen. Dieser kann
+          später hinzugefügt werden.
+        </p>
+        <InfoPanel look="white" class="space-y-32">
+          <div>
+            <Image
+              src={akteureImg}
+              alt="Unsortierte Liste relevanter Akteure am Beispiel der Fahrerlaubnis: Meldebehörde, Anerkannte Prüfstelle (Fahrschule), Fahrerlaubnisbehörde, Bundesdruckerei, Fahrschülerin und Bundesamt für Justiz."
+              zoom={true}
+            />
+          </div>
+          <div>
+            <p class="font-bold">Beispiel: Fahrerlaubnis</p>
+            <p>
+              Am Beispiel der Fahrerlaubnis sind die wichtigsten Akteure und
+              Berührungspunkte:
+            </p>
+            <ul>
+              <li>Fahrschülerin</li>
+              <li>Anerkannte Prüfstelle (Fahrschule)</li>
+              <li>Meldebehörde</li>
+              <li>Fahrerlaubnisbehörde</li>
+              <li>Bundesamt für Justiz</li>
+            </ul>
+          </div>
+        </InfoPanel>
+      </section>
+      <section class="breakout! bg-lavender-200">
+        <StepNumber number={3} />
+        <h3 data-toc-label="Ziele & Perspektiven">
+          Legen Sie fest, was Ziel und Perspektive der Visualisierung sind
+        </h3>
+        <p>
+          Das Ziel der Visualisierung dient Ihnen als Orientierungspunkt, auf
+          den Sie während des Visualisierens immer wieder schauen können. Die
+          Perspektive legt fest, welcher Akteur im Fokus steht. Häufig sind das
+          die Normadressaten, es kann aber auch eine bestimmte Behörde sein,
+          deren interne Abläufe verbessert werden sollen.
+        </p>
+        <p>Schreiben Sie beides auf.</p>
+        <InfoPanel look="lightLavender" contentClass="space-y-32">
+          <Image
+            src={perspektiveImg}
+            alt="Schaubild, welches Ziel der Visualisierung und Perspektive abstrakt darstellt. Das Ziel ist: Ich möchte den Prozess für Normenadressaten verbessern. Die Perspektive ist: Normenadressaten."
+            zoom={true}
+          />
+          <div>
+            <p>Beispiel: Fahrerlaubnis</p>
+            <ul>
+              <li>
+                <b>Ziel</b> der Visualisierung: „Ich möchte den Prozess für die Erlangung
+                der Fahrerlaubnis verändern und digital ermöglichen.“
+              </li>
+              <li>
+                Die <b>Perspektive</b> der Visualisierung ist die der Normadressaten
+                und -adressatinnen. In diesem Fall die einer Fahrschülerin.
+              </li>
+            </ul>
+          </div>
+        </InfoPanel>
+      </section>
+      <section>
+        <StepNumber number={4} />
+        <h3 data-toc-label="Start & Ende definieren">
+          Legen Sie fest, was Start- und Endpunkt sind
+        </h3>
+        <p>
+          Jetzt definieren Sie, womit der Prozess beginnt und womit er endet.
+          Nutzen Sie dafür die Perspektive des in Schritt 2 identifizierten
+          Akteurs.
+        </p>
+        <p>
+          Schreiben Sie beides unter die entsprechenden Symbole auf der Vorlage.
+          Es gibt zwei Symbole, die in Flussdiagrammen Standard sind:
+        </p>
+        <ul>
+          <li>
+            <b>Start</b> (Kreis mit dünner Linie): Wann startet der Prozess der Akteurin
+            oder Akteurs?
+          </li>
+          <li>
+            <b>Ende</b> (Kreis mit dicker Linie): Was soll die Akteurin oder Akteur
+            am Ende erreichen?
+          </li>
+        </ul>
+        <p>
+          Es kann für verschiedene Akteure unterschiedliche Start- und Endpunkte
+          geben. Konzentrieren Sie sich auf den wichtigsten.
+        </p>
+        <figure class="my-32">
+          <Image
+            src={startEndeImg}
+            alt="Darstellung von Start- und Endknoten"
+            width="242"
+          />
+          <figcaption class="kern-subline--small">
+            Der Start markiert die erste Aktion eines Akteurs, das Ende die
+            letzte.
+          </figcaption>
+        </figure>
+        <InfoPanel look="white" contentClass="space-y-32">
+          <Image
+            src={visual4Img}
+            alt="Ausschnitt eines Flussdiagramms: Start des Prozesses durch einen Kreis mit dünner Linie für den Akteur Fahrschülerin. Zwei dick umrandete Kreise zeigen verschiedene mögliche Endergebnisse."
+            zoom={true}
+          />
+          <div>
+            <p><b>Beispiel: Fahrerlaubnis</b></p>
+            <ul>
+              <li>
+                Der Startpunkt für die Fahrschülerin ist der Wunsch, einen
+                Führerschein der Klasse B zu erlangen.
+              </li>
+              <li>
+                Der Endpunkt ist erst erreicht, wenn sie den Führerschein als
+                Plastikkarte erhalten hat.
+              </li>
+            </ul>
+          </div>
+        </InfoPanel>
+      </section>
+      <section class="breakout! bg-lavender-200 space-y-32">
+        <div>
+          <StepNumber number={5} />
+          <h3 data-toc-label="Prozess abbilden">
+            Visualisieren Sie den Prozess
+          </h3>
+          <p>
+            Jetzt <b>übertragen Sie auf das Template</b> die Akteure sowie Start-
+            und Endpunkt:
+          </p>
+          <p>
+            Jeder Akteur erhält eine sogenannte Schwimmbahn. Alle Aktivitäten
+            des Akteurs finden auf dieser Schwimmbahn statt.
+          </p>
+        </div>
+        <figure>
+          <Image
+            src={swimlane5Img}
+            alt="Fragment eines Flussdiagramms mit drei horizontalen, länglichen Kästen, die am Anfang mit einer Platzhalter-Box “Akteurin/Akteur” markiert sind."
+            width="528"
+          />
+          <figcaption class="kern-subline--small">
+            Akteure können alle Normenadressaten oder Institutionen sein.
+          </figcaption>
+        </figure>
+        <p>
+          Setzen Sie den Startpunkt an den Anfang der Bahn des Akteurs, den
+          Endpunkt ans Ende. Der genaue Platz wird im Verlauf noch angepasst.
+          Der genaue Punkt findet sich später. Fügen Sie nun Aktivitäten,
+          Entscheidungen und Informationsflüsse der Akteure nacheinander in die
+          Bahnen ein. Formulieren Sie die Aktivitäten möglichst aktiv, z. B.
+          „Akteur X beantragt Y“ oder „Akteur X versendet Y“.
+        </p>
+        <figure>
+          <Image
+            src={aktivitaet5Img}
+            alt="Fragment eines Flussdiagramms, in denen Kästen für Aktivitäten mit Pfeilen verbunden sind."
+            width="550"
+          />
+          <figcaption class="kern-subline--small">
+            Jede Aktivität der Akteure wird mit einem Pfeil verbunden.
+          </figcaption>
+        </figure>
+        <div>
+          <p>
+            <b> Darauf sollten Sie achten: </b>
+          </p>
+          <ul>
+            <li>
+              Akteure, Hierarchien, Abläufe und Entscheidungen sind klar und
+              konsistent
+            </li>
+            <li>
+              Eine eindeutige visuelle Kodierung, zum Beispiel Farben oder
+              Symbole, um Informationen zu unterscheiden
+            </li>
+            <li>
+              Verweis auf wesentliche Paragraphen, relevante Akteure und
+              EU-Vorgaben
+            </li>
+          </ul>
+          <p>Das Ergebnis muss an dieser Stelle noch nicht perfekt aussehen.</p>
+        </div>
+        <InfoPanel look="lightLavender" contentClass="space-y-32">
+          <Image
+            src={flussdiagramm5Img}
+            alt="Flussdiagramm, welches Aktivitäten für Akteure Fahrschülerin, Anerkannte Prüfstelle (Fahrschule) sowie Meldebehörde in farblich unterschiedlich kodierten Schwimmbahnen wie im Text beschrieben darstellt."
+            width="496"
+            zoom={true}
+          />
+          <div>
+            <p><b>Beispiel Fahrerlaubnis</b></p>
+            <ul>
+              <li>
+                <b>Akteure</b> (Fahrschülerin, Fahrschule, Meldebehörde) haben je
+                eine eigene Schwimmbahn.
+              </li>
+              <li>
+                <b>Startpunkt</b> („Möchte Führerschein erlangen") liegt am Anfang
+                der Fahrschülerin-Schwimmbahn.
+              </li>
+              <li>
+                Prozess-Ablauf wird durch <b>Verbindungslinien</b> und <b
+                  >Schritte</b
+                > dargestellt.
+              </li>
+              <li>
+                Wesentliche <b>Paragraphen</b> (z.B. FeV § 16, BMG § 18) sind in den
+                Kästen vermerkt.
+              </li>
+            </ul>
+          </div>
+        </InfoPanel>
+      </section>
+      <section class="space-y-32">
+        <div>
+          <StepNumber number={6} />
+          <h3 data-toc-label="Informationen ergänzen">
+            Räumen Sie die Visualisierung auf und fügen Sie wichtige Metadaten
+            hinzu
+          </h3>
+          <p>
+            Nachdem Sie den Prozess visualisiert haben, können Sie mit dem
+            Feinschliff beginnen und alles ordnen.
+          </p>
+          <p>
+            Prüfen Sie, ob die Elemente in Ihrer Visualisierung zu Ihrer Legende
+            passen. Falls Sie noch keine Legende haben, erstellen Sie eine. Sie
+            sollte Abkürzungen und Symbole klar erklären. Ähnlich wie in diesem
+            Beispiel:
+          </p>
+        </div>
+        <figure>
+          <Image
+            src={informationen6Img}
+            alt="Eine Legende, die zu Symbolen aus dem Diagramm Beschriftungen ergänzt"
+            width="568"
+            zoom={true}
+          />
+          <figcaption class="kern-subline--small">
+            Eine Legende erklärt Symbole und Abkürzungen und macht so die
+            Visualisierung verständlich.
+          </figcaption>
+        </figure>
+        <div>
+          <p>
+            Kennzeichnen Sie Ihre Visualisierung mit den wichtigsten Metadaten:
+          </p>
+          <ul>
+            <li>Datum</li>
+            <li>Titel</li>
+            <li>Referat</li>
+            <li>Version</li>
+            <li>Leitfrage, die beantwortet wird und,</li>
+            <li>falls zutreffend, Seitenzahlen</li>
+          </ul>
+          <p><b>Darauf sollten Sie achten:</b></p>
+          <ul>
+            <li>
+              Zusammenhänge und Abgrenzungen sind klar erkennbar z.B. zu anderen
+              Regelungen und Akteuren
+            </li>
+          </ul>
+        </div>
+        <InfoPanel contentClass="space-y-32">
+          <Image
+            src={flussdiagramm6Img}
+            alt="Flussdiagramm, welches zusätzliche Entscheidungssymbole, ein Datenbank-Symbol sowie eine Legende enthält."
+            width="867"
+            zoom={true}
+          />
+          <div>
+            <p><b>Beispiel: Fahrerlaubnis</b></p>
+            <ul>
+              <li>
+                <b>Ablauf/Entscheidungen</b>: Der Prozess ist durch
+                Entscheidungssymbole (◇) erweitert, die einen „bestanden/nicht
+                bestanden" Zweig nach der Theorie- und Praxisprüfung anzeigen.
+              </li>
+              <li>
+                <b>Datenspeicherung</b>: Ein Datenbank-Symbol wurde hinzugefügt,
+                um das „Melderegister" darzustellen.
+              </li>
+              <li>
+                <b>Legenden</b>: Die Bedeutung der neuen Symbole wird in einer
+                Legende erklärt.
+              </li>
+            </ul>
+          </div>
+        </InfoPanel>
+      </section>
+    </TocContainer>
+
+    <section class="breakout-grid space-y-32">
+      <h2>Weitere Ressourcen</h2>
+      <div class="lg:grid lg:grid-cols-2 lg:gap-32 xl:grid-cols-3">
+        {
+          external_ressources.map((ressource) => (
+            <KernCard
+              title={ressource.data.title}
+              href={ressource.data.href}
+              target_option={ressource.data.isExternal ? "_blank" : "_self"}
+              body={ressource.data.description}
+              background="white"
+              interactive={false}
+              image={ressource.data.image}
+              imageAlt={ressource.data.image ? ressource.data.title : undefined}
+            >
+              <div slot="pre-header" class="mb-16 flex w-full justify-between">
+                <div class="flex gap-8">
+                  {ressource.data.type.map((type) => (
+                    <span
+                      class={`kern-badge kern-badge--${type.toLowerCase()}`}
+                    >
+                      <span class="kern-label">{type}</span>
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div
+                slot="footer"
+                class="text-icon-muted! flex items-center gap-8"
+              >
+                <IconAutoStories class="h-32 w-32 shrink-0" />
+                <p class="kern-subline kern-subline-dark py-0">
+                  Quelle: {ressource.data.source}
+                </p>
+              </div>
+            </KernCard>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+</Layout>

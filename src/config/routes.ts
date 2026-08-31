@@ -220,6 +220,28 @@ export const werkzeuge = {
   navLabel: null,
 } as const;
 
+export const werkzeuge_digitaltauglichkeit = {
+  key: "werkzeuge_digitaltauglichkeit",
+  path: "/werkzeuge/digitaltauglichkeit",
+  title: "Ihr Weg zur Digitaltauglichkeit",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: 4,
+  navLabel: "Digitaltauglichkeit",
+} as const;
+
+export const werkzeuge_digitaltauglichkeit_beispiele = {
+  key: "werkzeuge_digitaltauglichkeit_beispiele",
+  path: "/werkzeuge/digitaltauglichkeit/beispiele",
+  title: "Beispiele für Digitaltauglichkeit im Regelungstext",
+  parent: werkzeuge_digitaltauglichkeit,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: null,
+  navLabel: "Beispiele am Gesetzestext",
+} as const;
+
 export const werkzeuge_potenziale = {
   key: "werkzeuge_potenziale",
   path: "/werkzeuge/potenziale",
@@ -238,8 +260,74 @@ export const werkzeuge_praxistauglichkeit = {
   parent: werkzeuge,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
+  navOrder: 3,
   navLabel: "Praxistauglichkeit",
+} as const;
+
+export const werkzeuge_ressourcen = {
+  key: "werkzeuge_ressourcen",
+  path: "/werkzeuge/ressourcen",
+  title: "Ressourcen",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: 2,
+  navLabel: null,
+} as const;
+
+export const werkzeuge_ressourcen_flussdiagramme = {
+  key: "werkzeuge_ressourcen_flussdiagramme",
+  path: "/werkzeuge/ressourcen/flussdiagramme",
+  title: "Flussdiagramm erstellen",
+  parent: werkzeuge_ressourcen,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: 2,
+  navLabel: "Flussdiagramm",
+} as const;
+
+export const werkzeuge_ressourcen_interviewleitfaden = {
+  key: "werkzeuge_ressourcen_interviewleitfaden",
+  path: "/werkzeuge/ressourcen/interviewleitfaden",
+  title: "Akteurinnen und Akteure identifizieren und Interviews vorbereiten",
+  parent: werkzeuge_ressourcen,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: 3,
+  navLabel: "Interviewleitfaden",
+} as const;
+
+export const werkzeuge_ressourcen_itSysteme = {
+  key: "werkzeuge_ressourcen_itSysteme",
+  path: "/werkzeuge/ressourcen/it-systeme",
+  title: "IT-Systeme gemeinsam erfassen",
+  parent: werkzeuge_ressourcen,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: 4,
+  navLabel: "IT-Systeme erfassen",
+} as const;
+
+export const werkzeuge_ressourcen_technischeUmsetzbarkeit = {
+  key: "werkzeuge_ressourcen_technischeUmsetzbarkeit",
+  path: "/werkzeuge/ressourcen/technische-umsetzbarkeit",
+  title: "Technische Umsetzbarkeit sicherstellen",
+  parent: werkzeuge_ressourcen,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: 5,
+  navLabel: "Technische Umsetzbarkeit",
+} as const;
+
+export const werkzeuge_ressourcen_visualisierungen = {
+  key: "werkzeuge_ressourcen_visualisierungen",
+  path: "/werkzeuge/ressourcen/visualisierungen",
+  title: "Beispiele für Visualisierungen",
+  parent: werkzeuge_ressourcen,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: 1,
+  navLabel: "Visualisierungen",
 } as const;
 
 export const werkzeuge_visualisieren = {
@@ -273,7 +361,15 @@ export const allRoutes = [
   ueber_neueFruehphase,
   ueber_zahlenUndFakten,
   werkzeuge,
+  werkzeuge_digitaltauglichkeit,
+  werkzeuge_digitaltauglichkeit_beispiele,
   werkzeuge_potenziale,
   werkzeuge_praxistauglichkeit,
+  werkzeuge_ressourcen,
+  werkzeuge_ressourcen_flussdiagramme,
+  werkzeuge_ressourcen_interviewleitfaden,
+  werkzeuge_ressourcen_itSysteme,
+  werkzeuge_ressourcen_technischeUmsetzbarkeit,
+  werkzeuge_ressourcen_visualisierungen,
   werkzeuge_visualisieren,
 ] as const;

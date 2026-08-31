@@ -17,13 +17,27 @@
   --color-lavender-400: #eceef6;
   --color-lavender-surface-highlight: #e3e6f2;
 
+  --color-kern-contextual: #6e7597;
+
   --color-icon-muted: #757575;
 
   --color-ds-violet: #4c2c92;
 
+  --spacing-kern-default: var(--kern-metric-space-default);
+
+  /* KERN Foundations generic colors */
+  /* See https://www.kern-ux.de/design-system/foundations/farbe/generisch */
+  --color-orange-050: #ffe7b6;
+  --color-red-050: #fee4e0;
+  --color-violet-050: #f2e6f9;
+  --color-green-050: #cfe7d2;
+  --color-lightblue-025: #ddf8ff;
+
   --spacing-sm: 1.25rem; /* 20px */
   --spacing-md: 2rem; /* 32px */
   --spacing-lg: 2.5rem; /* 48px */
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem; /* 64px */
 
   --max-content-width: 82rem;
   --container-padding-inline: clamp(1rem, 5vw, 3rem);
@@ -191,7 +205,8 @@ address {
   }
 
   /* mark external links according to the guidelines at https://www.kern-ux.de/komponenten/link#verwendungsregeln */
-  &[href^="http"]::before {
+  &[href^="http"]::before,
+  &.text-link--download[href^="/public/downloads/"]::before {
     content: "";
     display: inline-block;
     width: 0.875em;
@@ -203,6 +218,11 @@ address {
     mask-size: contain;
     mask-repeat: no-repeat;
     mask-position: center;
+  }
+
+  /* use a download icon instead of the external-link icon for file downloads */
+  &.text-link--download[href^="/public/downloads/"]::before {
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960'%3E%3Cpath d='M480-337q-8 0-15-2.5t-13-8.5L308-492q-12-12-11.5-28t11.5-28q12-12 28.5-12.5T365-549l75 75v-286q0-17 11.5-28.5T480-800q17 0 28.5 11.5T520-760v286l75-75q12-12 28.5-11.5T652-548q11 12 11.5 28T652-492L508-348q-6 6-13 8.5t-15 2.5ZM240-160q-33 0-56.5-23.5T160-240v-80q0-17 11.5-28.5T200-360q17 0 28.5 11.5T240-320v80h480v-80q0-17 11.5-28.5T760-360q17 0 28.5 11.5T800-320v80q0 33-23.5 56.5T720-160H240Z'/%3E%3C/svg%3E");
   }
 }
 
@@ -251,6 +271,42 @@ address {
 
   & > *:not([class*="breakout"]) {
     grid-column: content;
+  }
+}
+
+/*
+  Extends `breakout-grid` to create a 4-column layout for pages with a sidebar/Table of Contents (TOC).
+  The layout is: [gutter] [main content] [TOC] [gutter].
+  - The combined width of [main content] + [TOC] (including their gutter) aligns with `.container`:
+    it never exceeds `--max-content-width - 2 × --container-padding-inline`.
+  - A child element with the `.toc` class is placed in the dedicated TOC column.
+  - As seen in `SidebarContainer.tsx`, this is used for desktop layouts.
+*/
+@utility breakout-grid-toc {
+  --toc-min-width: 250px;
+  --toc-max-width: 350px;
+  --toc-gutter: 2.5rem; /* 40px */
+
+  @apply breakout-grid;
+
+  @media (width >= 64rem) {
+    /* breakpoint lg, 1024px */
+    grid-template-columns:
+      [full-start] minmax(var(--container-padding-inline), 1fr)
+      [content-start] min(
+        100% - (var(--container-padding-inline) * 2) - var(--toc-gutter) -
+          var(--toc-min-width),
+        var(--max-content-width) - (var(--container-padding-inline) * 2) -
+          var(--toc-max-width) - var(--toc-gutter)
+      )
+      [content-end]
+      var(--toc-gutter) /* Gutter column */
+      [toc] minmax(var(--toc-min-width), var(--toc-max-width)) /* TOC column */
+      minmax(var(--container-padding-inline), 1fr) [full-end];
+
+    & > .toc {
+      grid-column: toc;
+    }
   }
 }
 

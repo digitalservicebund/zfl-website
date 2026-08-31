@@ -20,6 +20,7 @@ interface Props extends VariantProps<typeof cardStyles> {
   title: string;
   target_option?: "_blank" | "_self";
   href?: string;
+  popovertarget?: string;
   preline?: string;
   body?: string;
   subline?: string;
@@ -35,13 +36,14 @@ const {
   title,
   target_option = "_self",
   href,
+  popovertarget,
   subline,
   body,
   background,
   image,
   imageAlt,
   imageSource,
-  interactive = !!href,
+  interactive = !!href || !!popovertarget,
 } = Astro.props;
 
 const hasFooter = Astro.slots.has("footer");
@@ -83,6 +85,14 @@ const hasFooter = Astro.slots.has("footer");
             href ? (
               /* prettier-ignore */ <a href={href} class="kern-link--stretched hyphens-auto [word-break:break-word]" target={target_option}>{title}
               </a>
+            ) : popovertarget ? (
+              <button
+                type="button"
+                popovertarget={popovertarget}
+                class="kern-link--stretched w-full text-left [word-break:break-word] hyphens-auto"
+              >
+                {title}
+              </button>
             ) : (
               title
             )
@@ -92,7 +102,7 @@ const hasFooter = Astro.slots.has("footer");
       </hgroup>
     </header>
     <section class="kern-card__body">
-      {body && <p class="kern-body">{body}</p>}
+      {body && <p class="kern-body hyphens-manual">{body}</p>}
       <slot />
     </section>
     {

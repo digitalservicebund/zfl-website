@@ -19,7 +19,7 @@ const examples = potenziale.map(({ data, filePath }) => ({
   short: basename(filePath ?? "", ".yaml"),
 }));
 
-const visualisierungen = await getCollection("visualisierungen");
+const visualisierungen = await getCollection("kiVisualisierungen");
 const visualisierbareShorts = visualisierungen.map(({ filePath }) =>
   basename(filePath ?? "", ".yaml"),
 );
