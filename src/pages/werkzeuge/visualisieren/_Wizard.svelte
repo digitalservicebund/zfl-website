@@ -14,6 +14,7 @@
   import { createFakeLoadingSequence } from "../_shared/fakeLoading.ts";
   import Hint from "../_shared/Hint.svelte";
   import LoadingIndicator from "../_shared/LoadingIndicator.svelte";
+  import { getMermaid, getVisOptions, type VisOption } from "../_shared/api.ts";
   import Viewer from "./_Viewer.svelte";
   import type { LawExample } from "./_types";
 
@@ -61,6 +62,19 @@
     untrack(() => examples.find((example) => example.short === initialNorm)),
   );
 
+  let draftText = $state("");
+  let analyzedDraftText = $state<string>();
+
+  function analyzeDraft() {
+    const trimmed = draftText.trim();
+    if (!trimmed) return;
+    analyzedDraftText = trimmed;
+  }
+
+  let visOptionsSource = $derived<LawExample | string | undefined>(
+    selectedLawType === "existing" ? selectedExample : analyzedDraftText,
+  );
+
   let selectedVisOption = $state<string>();
 
   const LAW_STEP_STATUS_MESSAGES = [
@@ -76,38 +90,57 @@
   let loadingStatusMessage = $state(LAW_STEP_STATUS_MESSAGES[0]);
 
   let isLoadingVisOptions = $state(false);
+  let visOptions = $state<VisOption[]>([]);
+  let visOptionsSessionId = $state<string>();
+  let visOptionsError = $state<string>();
 
   $effect(() => {
-    if (!selectedExample) {
+    if (!visOptionsSource) {
+      visOptions = [];
       selectedVisOption = undefined;
+      visOptionsSessionId = undefined;
+      visOptionsError = undefined;
       isLoadingVisOptions = false;
       return;
     }
-    const example = selectedExample;
+    const source = visOptionsSource;
 
     let cancelled = false;
     isLoadingVisOptions = true;
     selectedVisOption = undefined;
+    visOptions = [];
+    visOptionsSessionId = undefined;
+    visOptionsError = undefined;
 
-    const { promise, cancel } = createFakeLoadingSequence(
+    const { promise: fakeDelay, cancel } = createFakeLoadingSequence(
       LAW_STEP_STATUS_MESSAGES,
       (message) => (loadingStatusMessage = message),
     );
 
-    promise.then(() => {
-      if (cancelled) return;
-      isLoadingVisOptions = false;
+    Promise.all([getVisOptions(source), fakeDelay])
+      .then(([result]) => {
+        if (cancelled) return;
+        visOptions = result.options;
+        visOptionsSessionId = result.sessionId;
+        isLoadingVisOptions = false;
 
-      if (!hasAppliedInitialVisualization) {
-        hasAppliedInitialVisualization = true;
-        const initialOption = example.visOptions.find(
-          (option) => option.name === initialVisualization,
-        );
-        if (initialOption) {
-          selectedVisOption = initialOption.name;
+        if (!hasAppliedInitialVisualization) {
+          hasAppliedInitialVisualization = true;
+          const initialOption = result.options.find(
+            (option) => option.name === initialVisualization,
+          );
+          if (initialOption) {
+            selectedVisOption = initialOption.name;
+          }
         }
-      }
-    });
+      })
+      .catch((error: unknown) => {
+        if (cancelled) return;
+        console.error(error);
+        visOptionsError =
+          "Die Visualisierungsoptionen konnten nicht geladen werden.";
+        isLoadingVisOptions = false;
+      });
 
     return () => {
       cancelled = true;
@@ -116,9 +149,7 @@
   });
 
   let selectedOption = $derived(
-    selectedExample?.visOptions.find(
-      (option) => option.name === selectedVisOption,
-    ),
+    visOptions.find((option) => option.name === selectedVisOption),
   );
 
   let canPruefen = $derived(
@@ -147,41 +178,89 @@
   let summary = $state("");
   let diagramSvg = $state("");
   let isLoading = $state(false);
+  let mermaidError = $state<string>();
   let viewerOpen = $state(false);
   let renderCount = 0;
 
   $effect(() => {
-    if (!selectedExample || !selectedOption) {
+    if (!selectedOption) {
       mermaidSource = "";
       summary = "";
       isLoading = false;
+      mermaidError = undefined;
       return;
     }
-    const example = selectedExample;
-    const option = selectedOption;
 
-    let cancelled = false;
-    isLoading = true;
+    if (selectedLawType === "existing") {
+      if (!selectedExample) {
+        mermaidSource = "";
+        summary = "";
+        isLoading = false;
+        return;
+      }
+      const example = selectedExample;
+      const option = selectedOption;
 
-    const path = `./_data/${example.short}/${option.filename}.mmd`;
-    const eli = example.eli;
+      let cancelled = false;
+      isLoading = true;
+      mermaidError = undefined;
 
-    const { promise: fakeDelay, cancel } = createFakeLoadingSequence(
-      VIS_OPTION_STEP_STATUS_MESSAGES,
-      (message) => (loadingStatusMessage = message),
-    );
+      const path = `./_data/${example.short}/${option.filename}.mmd`;
+      const eli = example.eli;
 
-    Promise.all([mermaidSources[path](), fakeDelay]).then(([source]) => {
-      if (cancelled) return;
-      const parsed = parseMmdFrontmatter(resolveNormLinks(source, eli));
-      summary = parsed.summary;
-      mermaidSource = parsed.body;
-    });
+      const { promise: fakeDelay, cancel } = createFakeLoadingSequence(
+        VIS_OPTION_STEP_STATUS_MESSAGES,
+        (message) => (loadingStatusMessage = message),
+      );
 
-    return () => {
-      cancelled = true;
-      cancel();
-    };
+      Promise.all([mermaidSources[path](), fakeDelay]).then(([source]) => {
+        if (cancelled) return;
+        const parsed = parseMmdFrontmatter(resolveNormLinks(source, eli));
+        summary = parsed.summary;
+        mermaidSource = parsed.body;
+      });
+
+      return () => {
+        cancelled = true;
+        cancel();
+      };
+    } else {
+      if (!visOptionsSessionId) {
+        mermaidSource = "";
+        summary = "";
+        isLoading = false;
+        return;
+      }
+      const sessionId = visOptionsSessionId;
+      const option = selectedOption;
+
+      let cancelled = false;
+      isLoading = true;
+      summary = "";
+      mermaidError = undefined;
+
+      const { promise: fakeDelay, cancel } = createFakeLoadingSequence(
+        VIS_OPTION_STEP_STATUS_MESSAGES,
+        (message) => (loadingStatusMessage = message),
+      );
+
+      Promise.all([getMermaid(sessionId, option), fakeDelay])
+        .then(([source]) => {
+          if (cancelled) return;
+          mermaidSource = source;
+        })
+        .catch((error: unknown) => {
+          if (cancelled) return;
+          console.error(error);
+          mermaidError = "Das Diagramm konnte nicht erstellt werden.";
+          isLoading = false;
+        });
+
+      return () => {
+        cancelled = true;
+        cancel();
+      };
+    }
   });
 
   $effect(() => {
@@ -209,8 +288,10 @@
     return source.replace(/<a\b[^>]*>(.*?)<\/a>/gis, "$1");
   }
 
+  let filenameBase = $derived(selectedExample?.short ?? "eigener-entwurf");
+
   async function downloadSvg() {
-    if (!mermaidSource || !selectedExample || !selectedOption) return;
+    if (!mermaidSource || !selectedOption) return;
 
     const exportSource = stripLinks(mermaidSource);
 
@@ -238,7 +319,7 @@
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `${selectedExample.short}-${selectedOption.name}.svg`;
+    link.download = `${filenameBase}-${selectedOption.name}.svg`;
     link.click();
     URL.revokeObjectURL(url);
   }
@@ -271,18 +352,18 @@
   );
 
   function downloadRulemapXml() {
-    if (!mermaidSource || !selectedExample || !selectedOption) return;
+    if (!mermaidSource || !selectedOption) return;
 
     const xml = mermaidFlowchartToRulemapXml(
       mermaidSource,
-      `${selectedExample.short}: ${selectedOption.name}`,
+      `${filenameBase}: ${selectedOption.name}`,
     );
 
     const blob = new Blob([xml], { type: "application/xml" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `${selectedExample.short}-${selectedOption.name}.xml`;
+    link.download = `${filenameBase}-${selectedOption.name}.xml`;
     link.click();
     URL.revokeObjectURL(url);
   }
@@ -440,6 +521,7 @@
             <ChipBtn
               onclick={() => {
                 selectedExample = undefined;
+                analyzedDraftText = undefined;
                 selectedLawType = lt.id;
               }}
               selected={selectedLawType === lt.id}>{lt.label}</ChipBtn
@@ -453,11 +535,19 @@
         <div class="space-y-16">
           <div class="kern-form-input">
             <label class="kern-label" for="draft">Ihr Entwurf</label>
-            <textarea class="kern-form-input__input" id="draft" name="draft"
+            <textarea
+              class="kern-form-input__input"
+              id="draft"
+              name="draft"
+              bind:value={draftText}
             ></textarea>
           </div>
           <div>
-            <button class="kern-btn kern-btn--primary"
+            <button
+              type="button"
+              class="kern-btn kern-btn--primary"
+              disabled={!draftText.trim()}
+              onclick={analyzeDraft}
               ><span class="kern-label">Analysieren</span></button
             >
           </div>
@@ -470,38 +560,46 @@
             target="_blank">{selectedExample.short}</a
           >
         </p>
-        {#if !isLoadingVisOptions}
-          <div class="kern-form-input">
-            <span class="kern-label"
-              >Welchen Teilbereich möchten Sie visualisieren?</span
-            >
-            <div class="mt-8 flex flex-wrap gap-8">
-              {#each selectedExample.visOptions as option (option.name)}
-                <ChipBtn
-                  selected={option.name === selectedVisOption}
-                  onclick={() => (selectedVisOption = option.name)}
-                >
-                  {option.name}
-                  {#if option.articles.length}
-                    ({option.articles.join(", ")})
-                  {/if}
-                </ChipBtn>
-              {/each}
-            </div>
-          </div>
-        {/if}
-        {#if isLoadingVisOptions || isLoading}
-          <LoadingIndicator message={loadingStatusMessage} />
-        {:else if summary}
-          <p class="kern-body kern-body--muted">{summary}</p>
-          {#if canPruefen}
-            <Hint>
-              Zu {selectedExample.short} gibt es auch einen Potenzialcheck:
-              <a
-                href={`${werkzeuge_potenziale.path}?vorhaben=${selectedExample.short}`}
-                >Hier ansehen</a
+      {/if}
+      {#if visOptionsSource}
+        {#if visOptionsError}
+          <p class="kern-error" role="alert">{visOptionsError}</p>
+        {:else}
+          {#if !isLoadingVisOptions}
+            <div class="kern-form-input">
+              <span class="kern-label"
+                >Welchen Teilbereich möchten Sie visualisieren?</span
               >
-            </Hint>
+              <div class="mt-8 flex flex-wrap gap-8">
+                {#each visOptions as option (option.name)}
+                  <ChipBtn
+                    selected={option.name === selectedVisOption}
+                    onclick={() => (selectedVisOption = option.name)}
+                  >
+                    {option.name}
+                    {#if option.articles.length}
+                      ({option.articles.join(", ")})
+                    {/if}
+                  </ChipBtn>
+                {/each}
+              </div>
+            </div>
+          {/if}
+          {#if isLoadingVisOptions || isLoading}
+            <LoadingIndicator message={loadingStatusMessage} />
+          {:else if mermaidError}
+            <p class="kern-error" role="alert">{mermaidError}</p>
+          {:else if summary}
+            <p class="kern-body kern-body--muted">{summary}</p>
+            {#if canPruefen && selectedExample}
+              <Hint>
+                Zu {selectedExample.short} gibt es auch einen Potenzialcheck:
+                <a
+                  href={`${werkzeuge_potenziale.path}?vorhaben=${selectedExample.short}`}
+                  >Hier ansehen</a
+                >
+              </Hint>
+            {/if}
           {/if}
         {/if}
       {/if}
@@ -538,8 +636,8 @@
       <Viewer
         bind:open={viewerOpen}
         svg={diagramSvg}
-        title={selectedExample && selectedOption
-          ? `${selectedExample.title}: ${selectedOption.name}`
+        title={selectedOption
+          ? `${selectedExample?.title ?? "Eigenes Vorhaben"}: ${selectedOption.name}`
           : "Visualisierung"}
       />
     {/if}

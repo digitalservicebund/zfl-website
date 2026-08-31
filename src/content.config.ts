@@ -1,4 +1,5 @@
 import { allRoutes } from "@/config/routes";
+import { visOptionType } from "@/pages/werkzeuge/visualisieren/_types";
 import { withBase } from "@/utils/path";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
@@ -113,16 +114,7 @@ const kiVisualisierungen = defineCollection({
      * Für EU-Rechtsakte (nicht in RIS indexiert) stattdessen eine volle
      * EUR-Lex-URL, z.B. "https://eur-lex.europa.eu/eli/reg/2026/1738/oj/deu". */
     eli: z.string(),
-    visOptions: z.array(
-      z.object({
-        name: z.string(),
-        filename: z.string(),
-        /** Relevante Paragraphen/Artikel, auf denen die Visualisierung
-         * basiert bzw. auf die sie sich bezieht, inkl. Präfix wie im
-         * Gesetzestext verwendet, z.B. "§29a" oder "Art. 17". */
-        articles: z.array(z.string()).default([]),
-      }),
-    ),
+    visOptions: z.array(visOptionType),
   }),
 });
 
