@@ -423,7 +423,7 @@
 {/snippet}
 
 <div class="grid grid-cols-1 sm:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] gap-40">
-  <div class="flex min-w-0 flex-col justify-between">
+  <div class="flex min-w-0 flex-col justify-between gap-32">
     <div class="space-y-32">
       <ExampleFinder {examples} bind:selected={selectedExample} />
       {#if selectedExample}

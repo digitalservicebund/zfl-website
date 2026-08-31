@@ -1,8 +1,8 @@
 import type { CollectionEntry } from "astro:content";
 
 export type VisExample =
-  CollectionEntry<"visualisierungen">["data"]["visOptions"][number];
+  CollectionEntry<"kiVisualisierungen">["data"]["visOptions"][number];
 
-export type LawExample = CollectionEntry<"visualisierungen">["data"] & {
+export type LawExample = CollectionEntry<"kiVisualisierungen">["data"] & {
   short: string;
 };
