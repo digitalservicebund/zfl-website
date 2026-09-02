@@ -3,6 +3,7 @@ import Badge from "@/components/Badge.astro";
 import Hero from "@/components/Hero.astro";
 import KernCard from "@/components/KernCard.astro";
 import TimelineList from "@/components/TimelineList.astro";
+import Metadata from "./_Metadata.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import {
   begleitungen,
@@ -35,6 +36,7 @@ export const frontmatter = {
         Hier halten wir Sie über aktuelle Arbeitspakete und neue Inhalte auf dem
         Laufenden.
       </p>
+      <Metadata lastUpdate="31.08.2026" nextUpdate="Oktober 2026" />
     </Hero>
 
     <section class="breakout breakout-grid">
