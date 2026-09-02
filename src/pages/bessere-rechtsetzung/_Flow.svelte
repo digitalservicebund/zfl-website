@@ -73,8 +73,8 @@
       sizes={["md", "md"]}
       ariaLabel="Schritte in dieser Phase: Arbeitsgruppenbildung, Workshops mit Ländern und Kommunen"
     >
-      <Bubble title="Arbeits&shy;gruppen&shy;bildung" optional />
-      <Bubble title="Workshops mit Ländern und Kommunen" optional />
+      <Bubble title="Arbeits&shy;gruppen&shy;bildung" />
+      <Bubble title="Workshops mit Ländern und Kommunen" />
     </Cluster>
 
     <Arrow>Übergabe an das Fachreferat</Arrow>
@@ -165,16 +165,10 @@
     >
       <Bubble
         title="Workshops mit Ländern und Kommunen"
-        optional
         tags={["Checks"]}
         size="lg"
       />
-      <Bubble
-        title="Erarbeiten von Eckpunkten"
-        optional
-        size="md"
-        tags={["Prozess"]}
-      />
+      <Bubble title="Erarbeiten von Eckpunkten" size="md" tags={["Prozess"]} />
       <Bubble title="Vorschläge von externen Akteuren" size="sm" />
       <Bubble title="Gesetzes&shy;umfeld" size="sm" tags={["KI"]} />
       <Bubble title="Gutachten und Sach&shy;verständigen&shy;kommissionen" />
@@ -205,13 +199,12 @@
       sizes={["sm", "sm", "sm", "sm", "sm"]}
       ariaLabel="Schritte in dieser Phase: Frühzeitige Beteiligung, Austausch, Vorblatt, Erster Textentwurf, Gesetzesfolgen besprechen"
     >
-      <Bubble title="Gesetzesfolgen besprechen" optional size="sm" />
+      <Bubble title="Gesetzesfolgen besprechen" size="sm" />
       <Bubble title="Austausch" size="sm" />
       <Bubble title="Vorblatt" size="sm" />
       <Bubble title="Erster Textentwurf" size="sm" />
       <Bubble
         title="Frühzeitige Beteiligung"
-        optional
         size="sm"
         color="linear-gradient(180deg, #B3B7E0, #ABD7F9)"
       />
