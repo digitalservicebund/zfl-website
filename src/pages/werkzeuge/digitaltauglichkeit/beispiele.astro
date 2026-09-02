@@ -26,8 +26,8 @@ const description =
           href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien"
           >Webseite des Digitalcheck</a
         >.
-      </p></Hero
-    >
+      </p>
+    </Hero>
     <div aria-hidden="true" x-ref="sentinel" class="h-px -translate-y-px"></div>
 
     <div
@@ -208,7 +208,7 @@ const description =
         </AspectSection>
       </PrinzipSection>
     </div>
-    <Hero level="root">
+    <section class="breakout bg-cosmic-blue-base text-white">
       <h2>Sie möchten Ihr Beispiel hier sehen?</h2>
       <p>
         Wir nehmen gerne Vorschläge für Beispiele entgegen. Wenn Sie einen
@@ -216,15 +216,18 @@ const description =
           href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a
         >. Wir melden uns zeitnah bei Ihnen.
       </p>
-    </Hero>
+    </section>
   </main></Layout
 >
 <style>
   @reference "@/styles/global.css";
-  h2 {
-    @apply mt-16;
-  }
-  h3 {
-    @apply scroll-m-96; /* The top bar obscures headings */
+
+  div#content {
+    h2 {
+      @apply mt-16;
+    }
+    h3 {
+      @apply scroll-m-96; /* The top bar obscures headings */
+    }
   }
 </style>

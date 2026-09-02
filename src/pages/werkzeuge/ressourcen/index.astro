@@ -66,7 +66,7 @@ const PAGEFIND_INSTANCE = "werkzeuge";
   <main x-data="werkzeuge" class="breakout-grid">
     <Hero level="main">
       <h1>{frontmatter.title}</h1>
-      <p slot="subtitle">
+      <p>
         Auf dieser Seite finden Sie Werkzeuge, die Sie bei der Regelungsarbeit
         unterstützen. Diese Sammlung wird stetig ausgebaut.
       </p>
@@ -235,7 +235,7 @@ const PAGEFIND_INSTANCE = "werkzeuge";
       </ul>
     </Modal>
 
-    <Hero level="root">
+    <section class="breakout bg-cosmic-blue-base text-white">
       <h2>Werkzeug ergänzen</h2>
       <p>
         Kennen Sie weitere hilfreiche Werkzeuge, die auf dieser Seite fehlen?
@@ -243,7 +243,7 @@ const PAGEFIND_INSTANCE = "werkzeuge";
       </p>
       <p>Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a></p>
       <p>E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a></p>
-    </Hero>
+    </section>
 
     <SearchModal
       instance={PAGEFIND_INSTANCE}
