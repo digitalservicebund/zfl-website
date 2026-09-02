@@ -14,6 +14,7 @@ interface Props {
   imageAlt?: string | null;
   imageSource?: string;
   interactive?: boolean;
+  small?: boolean;
 }
 
 const {
@@ -28,13 +29,18 @@ const {
   imageAlt,
   imageSource,
   interactive = !!href || !!popovertarget,
+  small,
 } = Astro.props;
 
 const hasFooter = Astro.slots.has("footer");
 ---
 
 <article
-  class:list={["kern-card", interactive ? "kern-card--interactive" : undefined]}
+  class:list={[
+    "kern-card",
+    interactive && "kern-card--interactive",
+    small && "kern-card--small",
+  ]}
 >
   {
     image && imageAlt !== undefined && (
