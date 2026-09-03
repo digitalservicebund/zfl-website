@@ -1,9 +1,0 @@
-title: Gesetz über das Bundesverfassungsgericht
-eli: eli/bund/bgbl-1/1951/s243/2026-01-01/1/deu
-checks:
-  - type: Bürgercheck
-    filename: BVerfGG_buergercheck
-  - type: Digitalcheck
-    filename: BVerfGG_digitalcheck
-  - type: Praxischeck
-    filename: BVerfGG_praxischeck

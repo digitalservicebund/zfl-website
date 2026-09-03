@@ -1,9 +1,0 @@
-title: Verordnung über die Registrierung homöopathischer Tierarzneimittel
-eli: eli/bund/bgbl-1/2022/s1102/2022-07-06/1/deu
-checks:
-  - type: Bürgercheck
-    filename: HomTAMRegV_buergercheck
-  - type: Digitalcheck
-    filename: HomTAMRegV_digitalcheck
-  - type: Praxischeck
-    filename: HomTAMRegV_praxischeck

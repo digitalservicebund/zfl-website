@@ -1,9 +1,0 @@
-title: Gesetz zum Umgang mit Konsumcannabis
-eli: eli/bund/bgbl-1/2024/109-2/2025-01-01/1/deu
-checks:
-  - type: Bürgercheck
-    filename: KCanG_buergercheck
-  - type: Digitalcheck
-    filename: KCanG_digitalcheck
-  - type: Praxischeck
-    filename: KCanG_praxischeck

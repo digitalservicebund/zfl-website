@@ -118,20 +118,66 @@ const kiVisualisierungen = defineCollection({
   }),
 });
 
+const baseFinding = {
+  location: z.object({
+    label: z.string(), // "§ 14 S.2"
+    offsetFrom: z.number(),
+    offsetTo: z.number(),
+  }),
+  reasoning: z.string(), // short explanation why this was flagged
+  hint: z.string(), // experimental: suggestions, recommendations
+};
+
+const findingType = z.discriminatedUnion("type", [
+  z.object({
+    ...baseFinding,
+    type: z.literal("Digitalcheck"),
+    tag: z.enum([
+      "Prinzip 1.1",
+      "Prinzip 1.2",
+      "Prinzip 1.3",
+      "Prinzip 1.4",
+      "Prinzip 1.5",
+      "Prinzip 2.1",
+      "Prinzip 2.2",
+      "Prinzip 2.3",
+      "Prinzip 2.4",
+      "Prinzip 2.5",
+      "Prinzip 3.1",
+      "Prinzip 3.2",
+      "Prinzip 4.1",
+      "Prinzip 4.2",
+      "Prinzip 4.3",
+      "Prinzip 4.4",
+      "Prinzip 4.5",
+      "Prinzip 5.1",
+      "Prinzip 5.2",
+      "EU-Interoperabilität",
+    ]),
+  }),
+  z.object({
+    ...baseFinding,
+    type: z.literal("Bürgercheck"),
+    tag: z.enum(["Bürgerbezug"]),
+  }),
+  z.object({
+    ...baseFinding,
+    type: z.literal("Praxischeck"),
+    tag: z.enum(["Placeholder PC"]), // TODO: define real Praxischeck tags
+  }),
+]);
+
+export type Finding = z.infer<typeof findingType>;
+
 const potenziale = defineCollection({
   loader: glob({
-    pattern: "*.yaml",
-    base: "src/pages/werkzeuge/potenziale/_data",
+    pattern: "*.md",
+    base: "src/content/potenziale",
   }),
   schema: z.object({
     title: z.string(),
     eli: z.string().optional(),
-    checks: z.array(
-      z.object({
-        type: z.enum(["Bürgercheck", "Digitalcheck", "Praxischeck"]),
-        filename: z.string(),
-      }),
-    ),
+    findings: z.array(findingType),
   }),
 });
 

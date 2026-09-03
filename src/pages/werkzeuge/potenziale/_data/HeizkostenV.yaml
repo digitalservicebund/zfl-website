@@ -1,9 +1,0 @@
-title: Verordnung über die verbrauchsabhängige Abrechnung der Heiz- und Warmwasserkosten
-eli: eli/bund/bgbl-1/1981/s261/2024-10-01/1/deu
-checks:
-  - type: "Bürgercheck"
-    filename: "HeizkostenV_buergercheck"
-  - type: "Digitalcheck"
-    filename: "HeizkostenV_digitalcheck"
-  - type: "Praxischeck"
-    filename: "HeizkostenV_praxischeck"

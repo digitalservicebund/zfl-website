@@ -1,9 +1,0 @@
-title: Geldwäschegesetz
-eli: eli/bund/bgbl-1/2017/s1822/2026-06-27/1/deu
-checks:
-  - type: Bürgercheck
-    filename: GwG_buergercheck
-  - type: Digitalcheck
-    filename: GwG_digitalcheck
-  - type: Praxischeck
-    filename: GwG_praxischeck

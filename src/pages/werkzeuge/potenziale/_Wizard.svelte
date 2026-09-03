@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { marked } from "marked";
   import { untrack } from "svelte";
   import { SvelteURLSearchParams } from "svelte/reactivity";
   import { werkzeuge_visualisieren } from "@/config/routes";
@@ -9,18 +8,16 @@
   import { createFakeLoadingSequence } from "../_shared/fakeLoading.ts";
   import Hint from "../_shared/Hint.svelte";
   import LoadingIndicator from "../_shared/LoadingIndicator.svelte";
-  import type { PotenzialeExample } from "./_types";
+  import Finding from "./_Finding.svelte";
+  import PotenzialeSidebar from "./_PotenzialeSidebar.svelte";
+  import type { CheckType, PotenzialeExample } from "./_types";
+  import type { Finding as FindingData } from "@/content.config";
 
   let {
     examples,
     visualisierbareShorts,
   }: { examples: PotenzialeExample[]; visualisierbareShorts: string[] } =
     $props();
-
-  const reportSources = import.meta.glob<string>("./_data/*.md", {
-    query: "?raw",
-    import: "default",
-  });
 
   const searchParams = new SvelteURLSearchParams(
     typeof window === "undefined" ? "" : window.location.search,
@@ -35,7 +32,8 @@
     ),
   );
 
-  let selectedCheckType = $state<string>();
+  let selectedCheckType = $state<CheckType>();
+  let activeFinding = $state<FindingData>();
 
   const VORHABEN_STEP_STATUS_MESSAGES = [
     "Lade Vorhaben …",
@@ -51,6 +49,12 @@
 
   let isLoadingChecks = $state(false);
 
+  let checkTypes = $derived(
+    selectedExample
+      ? [...new Set(selectedExample.findings.map((finding) => finding.type))]
+      : [],
+  );
+
   $effect(() => {
     if (!selectedExample) {
       selectedCheckType = undefined;
@@ -62,6 +66,7 @@
     let cancelled = false;
     isLoadingChecks = true;
     selectedCheckType = undefined;
+    activeFinding = undefined;
 
     const { promise, cancel } = createFakeLoadingSequence(
       VORHABEN_STEP_STATUS_MESSAGES,
@@ -74,11 +79,11 @@
 
       if (!hasAppliedInitialCheck) {
         hasAppliedInitialCheck = true;
-        const initialCheckEntry = example.checks.find(
-          (check) => check.type === initialCheck,
+        const initialFinding = example.findings.find(
+          (finding) => finding.type === initialCheck,
         );
-        if (initialCheckEntry) {
-          selectedCheckType = initialCheckEntry.type;
+        if (initialFinding) {
+          selectedCheckType = initialFinding.type;
         }
       }
     });
@@ -88,10 +93,6 @@
       cancel();
     };
   });
-
-  let selectedCheck = $derived(
-    selectedExample?.checks.find((check) => check.type === selectedCheckType),
-  );
 
   let canVisualisieren = $derived(
     selectedExample
@@ -106,8 +107,8 @@
       searchParams.delete("vorhaben");
     }
 
-    if (selectedCheck) {
-      searchParams.set("check", selectedCheck.type);
+    if (selectedCheckType) {
+      searchParams.set("check", selectedCheckType);
     } else {
       searchParams.delete("check");
     }
@@ -117,30 +118,34 @@
     window.history.replaceState(null, "", newUrl);
   });
 
-  let reportHtml = $state("");
+  let selectedFindings = $derived(
+    selectedExample && selectedCheckType
+      ? selectedExample.findings.filter(
+          (finding) => finding.type === selectedCheckType,
+        )
+      : [],
+  );
+
   let isLoadingReport = $state(false);
 
   $effect(() => {
-    if (!selectedCheck) {
-      reportHtml = "";
+    if (!selectedCheckType) {
       isLoadingReport = false;
       return;
     }
-    const check = selectedCheck;
+
+    activeFinding = undefined;
 
     let cancelled = false;
     isLoadingReport = true;
 
-    const path = `./_data/${check.filename}.md`;
-
-    const { promise: fakeDelay, cancel } = createFakeLoadingSequence(
+    const { promise, cancel } = createFakeLoadingSequence(
       CHECK_STEP_STATUS_MESSAGES,
       (message) => (loadingStatusMessage = message),
     );
 
-    Promise.all([reportSources[path](), fakeDelay]).then(async ([source]) => {
+    promise.then(() => {
       if (cancelled) return;
-      reportHtml = await marked.parse(source);
       isLoadingReport = false;
     });
 
@@ -151,48 +156,63 @@
   });
 </script>
 
-<div class="space-y-32">
-  <ExampleFinder {examples} bind:selected={selectedExample} />
-  {#if selectedExample}
-    {#if selectedExample.eli}
-      <p class="kern-body kern-body--muted">
-        Originaltext: <a
-          href={resolveEliUrl(selectedExample.eli)}
-          target="_blank">{selectedExample.short}</a
-        >
-      </p>
-    {/if}
-    {#if !isLoadingChecks}
-      <div class="kern-form-input">
-        <span class="kern-label">Welchen Check möchten Sie machen?</span>
-        <div class="mt-8 flex flex-wrap gap-8">
-          {#each selectedExample.checks as check (check.type)}
-            <ChipBtn
-              selected={check.type === selectedCheckType}
-              onclick={() => (selectedCheckType = check.type)}
-            >
-              {check.type}
-            </ChipBtn>
+<div class="grid grid-cols-1 items-start gap-24 lg:grid-cols-[1fr_auto]">
+  <div class="breakout-grid py-lg min-w-0 space-y-32">
+    <ExampleFinder {examples} bind:selected={selectedExample} />
+    {#if selectedExample}
+      {#if selectedExample.eli}
+        <p class="kern-body kern-body--muted">
+          Originaltext: <a
+            href={resolveEliUrl(selectedExample.eli)}
+            target="_blank">{selectedExample.short}</a
+          >
+        </p>
+      {/if}
+      {#if !isLoadingChecks}
+        <div class="kern-form-input">
+          <span class="kern-label">Welchen Check möchten Sie machen?</span>
+          <div class="mt-8 flex flex-wrap gap-8">
+            {#each checkTypes as checkType (checkType)}
+              <ChipBtn
+                selected={checkType === selectedCheckType}
+                onclick={() => (selectedCheckType = checkType)}
+              >
+                {checkType}
+              </ChipBtn>
+            {/each}
+          </div>
+        </div>
+      {/if}
+      {#if isLoadingChecks || isLoadingReport}
+        <LoadingIndicator message={loadingStatusMessage} />
+      {:else if selectedFindings.length}
+        <div class="space-y-12">
+          {#each selectedFindings as finding (`${finding.tag}:${finding.location.offsetFrom}:${finding.location.offsetTo}`)}
+            <Finding
+              {finding}
+              onOpenLocation={(clicked) => (activeFinding = clicked)}
+            />
           {/each}
         </div>
-      </div>
-    {/if}
-    {#if isLoadingChecks || isLoadingReport}
-      <LoadingIndicator message={loadingStatusMessage} />
-    {:else if reportHtml}
-      <div class="bg-lavender-200 px-32 py-48 kern-body">
-        <!-- eslint-disable-next-line svelte/no-at-html-tags -- reportHtml is markdown rendered from our own generated check reports, not user input -->
-        {@html reportHtml}
-      </div>
-      {#if canVisualisieren}
-        <Hint>
-          Zu {selectedExample.short} gibt es auch Visualisierungen:
-          <a
-            href={`${werkzeuge_visualisieren.path}?norm=${selectedExample.short}`}
-            >Hier ansehen</a
-          >
-        </Hint>
+        {#if canVisualisieren}
+          <Hint>
+            Zu {selectedExample.short} gibt es auch Visualisierungen:
+            <a
+              href={`${werkzeuge_visualisieren.path}?norm=${selectedExample.short}`}
+              >Hier ansehen</a
+            >
+          </Hint>
+        {/if}
+      {:else if selectedCheckType}
+        <p class="kern-body kern-body--muted">
+          Keine Findings für diesen Check.
+        </p>
       {/if}
     {/if}
-  {/if}
+  </div>
+  <PotenzialeSidebar
+    body={selectedExample?.body ?? ""}
+    finding={activeFinding}
+    onClose={() => (activeFinding = undefined)}
+  />
 </div>

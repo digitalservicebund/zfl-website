@@ -1,9 +1,0 @@
-title: Kündigungsschutzgesetz
-eli: eli/bund/bgbl-1/1951/s499/2021-06-18/1/deu
-checks:
-  - type: Bürgercheck
-    filename: KSchG_buergercheck
-  - type: Digitalcheck
-    filename: KSchG_digitalcheck
-  - type: Praxischeck
-    filename: KSchG_praxischeck

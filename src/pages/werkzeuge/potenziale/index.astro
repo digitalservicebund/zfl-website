@@ -12,11 +12,12 @@ export const frontmatter = {
 };
 
 const potenziale = await getCollection("potenziale");
-const examples = potenziale.map(({ data, filePath }) => ({
+const examples = potenziale.map(({ data, filePath, body }) => ({
   ...data,
   // filePath preserves the on-disk casing, unlike the glob loader's
-  // lowercased `id` (e.g. "HeizkostenV.yaml" -> id "heizkostenv").
-  short: basename(filePath ?? "", ".yaml"),
+  // lowercased `id` (e.g. "HeizkostenV.md" -> id "heizkostenv").
+  short: basename(filePath ?? "", ".md"),
+  body: body ?? "",
 }));
 
 const visualisierungen = await getCollection("kiVisualisierungen");
@@ -26,12 +27,10 @@ const visualisierbareShorts = visualisierungen.map(({ filePath }) =>
 ---
 
 <Layout title={frontmatter.title}>
-  <main class="breakout-grid">
-    <Hero>
+  <main>
+    <Hero class="breakout-grid">
       <h1>{frontmatter.title}</h1>
     </Hero>
-    <section class="min-h-screen">
-      <Wizard {examples} {visualisierbareShorts} client:load />
-    </section>
+    <Wizard {examples} {visualisierbareShorts} client:load />
   </main>
 </Layout>

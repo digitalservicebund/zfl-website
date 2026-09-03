@@ -1,9 +1,0 @@
-title: Gesetz über einen nationalen Zertifikatehandel für Brennstoffemissionen
-eli: eli/bund/bgbl-1/2019/s2728/2025-03-06/1/deu
-checks:
-  - type: "Bürgercheck"
-    filename: "BEHG_buergercheck"
-  - type: "Digitalcheck"
-    filename: "BEHG_digitalcheck"
-  - type: "Praxischeck"
-    filename: "BEHG_praxischeck"

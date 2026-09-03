@@ -1,9 +1,0 @@
-title: Gesetz zum Elterngeld und zur Elternzeit
-eli: eli/bund/bgbl-1/2006/s2748/2026-01-01/1/deu
-checks:
-  - type: "Bürgercheck"
-    filename: "BEEG_buergercheck"
-  - type: "Digitalcheck"
-    filename: "BEEG_digitalcheck"
-  - type: "Praxischeck"
-    filename: "BEEG_praxischeck"

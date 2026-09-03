@@ -1,9 +1,0 @@
-title: Verordnung über das Unternehmensregister
-eli: eli/bund/bgbl-1/2007/s217/2024-10-11/1/deu
-checks:
-  - type: "Bürgercheck"
-    filename: "URV_buergercheck"
-  - type: "Digitalcheck"
-    filename: "URV_digitalcheck"
-  - type: "Praxischeck"
-    filename: "URV_praxischeck"

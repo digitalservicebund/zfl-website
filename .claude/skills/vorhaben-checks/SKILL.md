@@ -1,14 +1,16 @@
 ---
 name: vorhaben-checks
-description: Sucht ein Gesetz über die RIS-Search-API, lädt den Volltext und führt darüber Bürgercheck, Digitalcheck und Praxischeck aus. Ergebnisse werden als Markdown-Berichte im Potenziale-Tool (src/pages/werkzeuge/potenziale) gespeichert. Trigger bei "Vorhabencheck", "Bürgercheck", "Digitalcheck", "Praxischeck", "Gesetz auf Potenziale prüfen".
+description: Sucht ein Gesetz über die RIS-Search-API, lädt den Volltext und führt darüber den Digitalcheck aus. Ergebnisse werden im Potenziale-Tool (src/pages/werkzeuge/potenziale) gespeichert. Trigger bei "Vorhabencheck", "Digitalcheck", "Gesetz auf Potenziale prüfen". (Bürgercheck und Praxischeck folgen später.)
 ---
 
 # Vorhaben-Checks
 
 Dieser Skill führt den Nutzer durch einen 4-stufigen Ablauf, um einen
-Gesetzestext mit drei standardisierten Prüfschemata (Bürgercheck,
-Digitalcheck, Praxischeck) zu analysieren und die Ergebnisse in dieses Repo
-einzupflegen (Tool unter `/werkzeuge/potenziale`).
+Gesetzestext mit dem Digitalcheck zu analysieren und das Ergebnis in dieses
+Repo einzupflegen (Tool unter `/werkzeuge/potenziale`). Bürgercheck und
+Praxischeck sind vorerst entfernt — sie werden ergänzt, sobald für sie ein
+vergleichbares Prüfschema wie für den Digitalcheck vorliegt (strukturierte
+Findings statt Fließtext, siehe `digitalcheck.md`).
 
 Ein optionales Argument kann bereits den Gesetznamen enthalten
 (`$ARGUMENTS`). Wenn vorhanden, überspringe Schritt 1.
@@ -54,32 +56,37 @@ https://docs.rechtsinformationen.bund.de/v3/api-docs)
    nach einzelnen Prozess-Ausschnitten gefiltert, da alle drei Checks den
    gesamten Text nach unterschiedlichen Kriterien durchsuchen).
 
-## Schritt 3 — Die drei Checks ausführen
+## Schritt 3 — Den Digitalcheck ausführen
 
-Die drei Prüfschemata liegen als eigenständige Anweisungsdateien in diesem
-Skill-Verzeichnis vor:
+Das Prüfschema liegt als eigenständige Anweisungsdatei in diesem
+Skill-Verzeichnis vor: `.claude/skills/vorhaben-checks/digitalcheck.md`.
 
-- `.claude/skills/vorhaben-checks/buergercheck.md`
-- `.claude/skills/vorhaben-checks/digitalcheck.md`
-- `.claude/skills/vorhaben-checks/praxischeck.md`
-
-Lies alle drei Dateien (falls noch nicht geschehen). Starte anschließend für
-jeden Check **parallel** (alle drei Agent-Aufrufe in einem einzigen
-Nachrichtenblock) einen Agenten mit `subagent_type: "fork"`. Jeder
-Fork-Agent bekommt:
+Lies die Datei (falls noch nicht geschehen). Starte anschließend einen
+Agenten mit `subagent_type: "fork"`. Der Fork-Agent bekommt:
 
 - den vollständigen Gesetzestext aus Schritt 2,
-- die komplette Anweisung aus der jeweiligen Check-Datei (Rolle, Auftrag und
-  alle 4 Prüfschritte),
-- den Zielpfad, unter dem er sein Ergebnis selbst als Markdown-Datei
-  speichern soll (siehe Schritt 4 für die genaue Namenskonvention),
-- den Hinweis, dem Ausgabeformat aus "Schritt 4" der jeweiligen Check-Datei
-  zu folgen (inkl. der Vorprüfung — bricht ein Check mangels Bezug ab, wird
-  trotzdem genau dieses Ergebnis als kurzer Bericht gespeichert).
+- die komplette Anweisung aus `digitalcheck.md` (Rolle, Auftrag und alle 4
+  Prüfschritte),
+- den Hinweis, das Ergebnis exakt im Ausgabeformat aus deren "Schritt 4"
+  **als finale Nachricht zurückzugeben** (kurze Chat-Zusammenfassung plus
+  strukturierte Findings-Liste als YAML, passend zum `findings`-Array aus
+  `src/content.config.ts`) — inkl. der Vorprüfung: bricht der Check mangels
+  Bezug ab, wird trotzdem genau dieses Ergebnis (mit leerer Findings-Liste)
+  zurückgegeben.
 
-Da die Fork-Agenten deinen vollen Kontext erben, kennen sie den geladenen
-Gesetzestext bereits — im Prompt trotzdem explizit referenzieren, welcher
-Check auszuführen ist und wohin das Ergebnis geschrieben werden soll.
+Der Fork-Agent legt **keine eigene Datei** an — er gibt sein Ergebnis als
+finale Nachricht zurück, die vom Orchestrator in Schritt 4 weiterverarbeitet
+wird.
+
+Da der Fork-Agent deinen vollen Kontext erbt, kennt er den geladenen
+Gesetzestext bereits — im Prompt trotzdem explizit referenzieren, dass der
+Digitalcheck auszuführen ist.
+
+> Bürgercheck und Praxischeck sind aktuell nicht Teil dieses Ablaufs. Ihre
+> Anweisungsdateien (`buergercheck.md`, `praxischeck.md`) liegen weiterhin
+> im Skill-Verzeichnis, liefern aber noch Fließtext statt strukturierter
+> Findings und werden hier bewusst nicht aufgerufen — sie werden ergänzt,
+> sobald ein zum Digitalcheck äquivalentes Prüfschema für sie vorliegt.
 
 ## Schritt 4 — Ergebnisse speichern
 
@@ -92,25 +99,25 @@ Check auszuführen ist und wohin das Ergebnis geschrieben werden soll.
    gebräuchliche deutsche Abkürzung, die im Ausland/EU-Kontext gebräuchliche
    Abkürzung verwenden. Ist auch das nicht auffindbar, den Nutzer fragen
    statt zu raten.
-2. Für jeden der drei Checks eine Datei
-   `src/pages/werkzeuge/potenziale/_data/{shortTitle}_{checkName}.md`
-   speichern, mit `{checkName}` ∈ `buergercheck`, `digitalcheck`,
-   `praxischeck` (identisch zu den Dateinamen der Anweisungsdateien ohne
-   Endung). Inhalt: reines Markdown mit dem Prüfbericht im in der jeweiligen
-   Check-Datei definierten Ausgabeformat (Schritt 4), kein YAML-Frontmatter.
-3. Lege `src/pages/werkzeuge/potenziale/_data/{shortTitle}.yaml` an (reine
-   YAML-Daten, kein Markdown-Frontmatter), passend zum `potenziale`-Schema
-   aus `src/content.config.ts`:
-   - `title`: offizieller Name des Gesetzes (ohne Abkürzung).
-   - `eli`: ELI-Pfad aus Schritt 2 (optional — nur setzen, wenn das Gesetz
-     über RIS gefunden wurde).
-   - `checks`: ein Eintrag pro ausgeführtem Check mit
-     - `type`: exakt `"Bürgercheck"`, `"Digitalcheck"` oder `"Praxischeck"`,
-     - `filename`: Dateiname der `.md`-Datei aus Schritt 4.2 ohne
-       Verzeichnis und Endung (z.B. `"KSchG_buergercheck"`).
-4. Kurze Zusammenfassung an den Nutzer: welches Gesetz, welche Checks mit
-   welchem Gesamtergebnis (Bürgerbezug/Digitalbezug/Unternehmensbezug
-   ja/nein), wo gespeichert. Auf `/werkzeuge/potenziale` im lokalen
-   Dev-Server verweisen, um die Ergebnisse zu prüfen.
+2. Lege genau eine Datei `src/pages/werkzeuge/potenziale/_data/{shortTitle}.md`
+   an, passend zum `potenziale`-Schema aus `src/content.config.ts`:
+   - **YAML-Frontmatter:**
+     - `title`: offizieller Name des Gesetzes (ohne Abkürzung).
+     - `eli`: ELI-Pfad aus Schritt 2 (optional — nur setzen, wenn das Gesetz
+       über RIS gefunden wurde).
+     - `findings`: die YAML-Findings-Liste aus der finalen Nachricht des
+       Digitalcheck-Forks, unverändert übernommen (Schema exakt wie in
+       `digitalcheck.md` Schritt 4 spezifiziert).
+   - **Body:** der vollständige Gesetzestext aus Schritt 2 als reines
+     Markdown (Tags entfernt, lesbarer Fließtext) — **exakt derselbe Text**,
+     gegen den der Digitalcheck-Fork seine `offsetFrom`/`offsetTo`-Angaben
+     berechnet hat. Unverändert und vollständig übernehmen, nicht kürzen
+     oder umformulieren — sonst stimmen die Offsets nicht mehr.
+3. Gib im Chat an den Nutzer die Kurzfassung + Findings-Liste des
+   Digitalchecks aus.
+4. Kurze Zusammenfassung an den Nutzer: welches Gesetz, Digitalbezug
+   ja/nein, Anzahl Findings, wo der Gesetzestext gespeichert wurde. Auf
+   `/werkzeuge/potenziale` im lokalen Dev-Server verweisen, um den Eintrag
+   zu prüfen.
 
 Nicht committen, es sei denn der Nutzer bittet explizit darum.
