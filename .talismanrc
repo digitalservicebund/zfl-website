@@ -170,6 +170,14 @@ fileignoreconfig:
     checksum: 6fd026b3401e84ff4d82109e3e2c14964fa1d9ba70b1a61fff5b8b6f21ed737f
   - filename: src/content/werkzeuge/visualisierungen.png
     checksum: d68b2abea5a2f030c40821897777800100d7491f847bdea1993c190c6ed16800
+  - filename: src/content/potenziale/URV.md
+    checksum: 82e2a9c2954faa113ad538146ca1f3d22b5261c2ef1ba3055cc05f17b2b11374
+  - filename: src/content/potenziale/KCanG.md
+    checksum: e22de6b41d2c15bb7c447d0465b78b7ea6f0f88334184fada7138f06bbd3f177
+  - filename: src/content/potenziale/AsylG.md
+    checksum: 9a3298a21e76647bb746f8b8a2eaf6e80d350c2694a49c069d9b65357d6c77ad
+  - filename: src/content/potenziale/LuftVG.md
+    checksum: 686650737e96a0e0966dd82f141204b4382435e1a6cf68b132d35321fd935ded
 scopeconfig:
   - scope: node
 allowed_patterns:

@@ -6,72 +6,72 @@ findings:
     tag: "Prinzip 1.1"
     location:
       label: "§ 7 Abs. 1"
-      offsetFrom: 39335
-      offsetTo: 39376
+      offsetFrom: 39416
+      offsetTo: 39457
     reasoning: "Die zwingende Schriftform für den zentralen Elterngeldantrag schließt eine rein digitale Antragstellung ohne Medienbruch (z. B. per Online-Formular mit elektronischer Identifizierung) aus."
     hint: "Schriftform durch Textform bzw. eine elektronische Antragstellung mit eID/ELSTER-Authentifizierung ersetzen, analoge Kanäle für Menschen ohne digitalen Zugang optional offenhalten."
   - type: "Digitalcheck"
     tag: "Prinzip 1.1"
     location:
       label: "§ 7 Abs. 3"
-      offsetFrom: 40329
-      offsetTo: 40563
+      offsetFrom: 40410
+      offsetTo: 40644
     reasoning: "Das Unterschriftserfordernis für Antragsteller:in und die weitere berechtigte Person erzwingt physische oder qualifiziert-elektronische Signaturen und verhindert einen durchgängig digitalen Bearbeitungsprozess."
     hint: "Bestätigung der Kenntnisnahme durch eine einfache elektronische Erklärung (z. B. im Online-Portal, ggf. mit Benachrichtigung der anderen Person) statt durch Unterschrift ermöglichen."
   - type: "Digitalcheck"
     tag: "Prinzip 1.3"
     location:
       label: "§ 8 Abs. 1"
-      offsetFrom: 41321
-      offsetTo: 41542
+      offsetFrom: 41404
+      offsetTo: 41625
     reasoning: "Der nachträgliche Einkommensnachweis nach Ablauf des Bezugszeitraums ist als eigener Verfahrensschritt ausgestaltet, ohne dass automatisierte Abgleiche mit vorhandenen Steuer-/Sozialversicherungsdaten vorgesehen sind."
     hint: "Automatisierten Abgleich mit bereits vorliegenden Einkommensdaten (z. B. über ELSTER/DEÜV-Meldungen) ermöglichen, um manuelle Nachweiserbringung zu reduzieren."
   - type: "Digitalcheck"
     tag: "Prinzip 2.2"
     location:
       label: "§ 2c Abs. 2"
-      offsetFrom: 16599
-      offsetTo: 16759
+      offsetFrom: 16637
+      offsetTo: 16797
     reasoning: "Die Einkommensermittlung stützt sich auf durch den Arbeitgeber gesondert erstellte Lohn- und Gehaltsbescheinigungen, obwohl vergleichbare Daten bereits in bestehenden Meldeverfahren (z. B. DEÜV, ELStAM) vorliegen."
     hint: "Rechtsgrundlage für einen direkten, automatisierten Zugriff der zuständigen Behörde auf bereits vorhandene Entgeltdaten schaffen, wie es § 9 Abs. 2 BEEG für das DSRV-Verfahren bereits ansatzweise vorsieht."
   - type: "Digitalcheck"
     tag: "Prinzip 2.1"
     location:
       label: "§ 10 Abs. 1"
-      offsetFrom: 44774
-      offsetTo: 45066
+      offsetFrom: 44862
+      offsetTo: 45154
     reasoning: 'Der Begriff "vergleichbare Leistungen der Länder" wird an mehreren Stellen (§ 10, § 11, § 28 Abs. 2) verwendet, ohne im Gesetz definiert zu sein, was eine einheitliche maschinelle Auslegung zwischen Bund- und Länderstellen erschwert.'
     hint: 'Den Begriff "vergleichbare Leistungen der Länder" gesetzlich definieren oder auf eine zentrale, gepflegte Liste/ein Register verweisen, damit er semantisch eindeutig und automatisiert prüfbar ist.'
   - type: "Digitalcheck"
     tag: "Prinzip 4.2"
     location:
       label: "§ 12 Abs. 1"
-      offsetFrom: 47560
-      offsetTo: 47692
+      offsetFrom: 47647
+      offsetTo: 47779
     reasoning: "Die Zuständigkeit wird den Ländern und deren Behörden überlassen, was zu einer Vielzahl paralleler, uneinheitlicher IT-Fachverfahren für ein bundesweit standardisiertes Massenverfahren führt."
     hint: "Bündelung der Fallbearbeitung in wenigen Kompetenzzentren oder gemeinsame Nutzung einer zentralen Fachverfahrenslösung zwischen den Ländern gesetzlich ermöglichen bzw. anreizen."
   - type: "Digitalcheck"
     tag: "Prinzip 4.5"
     location:
       label: "§ 1 Abs. 7 Satz 1 Nr. 2"
-      offsetFrom: 4362
-      offsetTo: 4648
+      offsetFrom: 4384
+      offsetTo: 4670
     reasoning: "Die verschachtelte Aufzählung unterschiedlicher Aufenthaltstitel mit jeweils eigenen Ausnahmen (Buchstaben a-c) macht die Anspruchsprüfung komplex und schwer als eindeutige, automatisierbare Regel abzubilden."
     hint: "Die Aufenthaltstitel-Tatbestände vereinheitlichen oder in einer strukturierten Tabelle/Referenzliste außerhalb des Fließtexts abbilden, um eine regelbasierte, automatisierte Prüfung zu erleichtern."
   - type: "Digitalcheck"
     tag: "Prinzip 4.4"
     location:
       label: "§ 28 Abs. 1a"
-      offsetFrom: 74223
-      offsetTo: 74427
+      offsetFrom: 74353
+      offsetTo: 74557
     reasoning: "Die Übergangsvorschrift reiht mehrere zeitlich versetzte Stichtagsregelungen (Abs. 1, 1a, 1b) mit jeweils eigenen anwendbaren Gesetzesfassungen aneinander, was die Automatisierung der Fallzuordnung nach Geburtsdatum erschwert."
     hint: "Die verschiedenen Fassungsstände in einer maschinenlesbaren Übergangstabelle (Geburtsdatum → anwendbare Fassung) hinterlegen, auf die Fachverfahren referenzieren können, statt sie nur im Normtext aufzulösen."
   - type: "Digitalcheck"
     tag: "EU-Interoperabilität"
     location:
       label: "§ 3 Abs. 1 Nr. 3"
-      offsetFrom: 26094
-      offsetTo: 26309
+      offsetFrom: 26144
+      offsetTo: 26359
     reasoning: "Für die Anrechnung ausländischer, dem Elterngeld vergleichbarer Leistungen fehlt eine Regelung zum elektronischen Datenaustausch mit den zuständigen Stellen anderer Mitgliedstaaten, wodurch die Feststellung auf manuellen Nachweisen beruht."
     hint: "Eine Rechtsgrundlage für den strukturierten elektronischen Austausch mit ausländischen Familienleistungsträgern (z. B. über bestehende EU-Systeme zur Koordinierung der sozialen Sicherheit) schaffen."
 ---

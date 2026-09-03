@@ -124,7 +124,7 @@
           : undefined}
         autocomplete="off"
         bind:value={query}
-        placeholder="Titel oder Kürzel des Gesetzes (z.B. JuSchG)"
+        placeholder="Titel oder Kürzel des Gesetzes (z.B. BEEG)"
         oninput={handleInput}
         onfocus={handleFocus}
         onkeydown={handleKeydown}
