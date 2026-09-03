@@ -9,8 +9,9 @@
   @reference "@/styles/global.css";
 
   .timeline {
+    --timeline-padding: 24px;
     /* space to the left of the line so year badges can be centered on it */
-    @apply pl-md relative scroll-my-40 space-y-32;
+    @apply relative scroll-my-40 space-y-32 pl-(--timeline-padding);
 
     h3 {
       margin-top: 1rem;
@@ -19,7 +20,7 @@
     &::before {
       content: "";
       @apply bg-cosmic-blue-base absolute inset-0 w-1;
-      left: calc(var(--spacing-md) + 9.5px);
+      left: calc(var(--timeline-padding) + 9.5px);
     }
 
     & > li {
@@ -28,7 +29,7 @@
     & > li::before {
       position: absolute;
       content: "";
-      @apply size-sm bg-cosmic-blue-base top-14 left-0 rounded-full outline-4 outline-white;
+      @apply bg-cosmic-blue-base top-16 left-2 size-16 rounded-full outline-4 outline-white;
     }
 
     & > li.timeline-year-item {
