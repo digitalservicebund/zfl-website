@@ -98,7 +98,6 @@ const visualisierungen = await Promise.all(
             >
               <KernCard
                 title={visualisierung.data.Titel}
-                background="white"
                 image={visualisierung.data.Bild.path}
                 imageAlt={visualisierung.data.Bild.alternativeText}
                 preline={visualisierung.data.Beispielvorhaben.Ressort}
@@ -189,7 +188,7 @@ const visualisierungen = await Promise.all(
         <em>Keine Treffer</em>
       </p>
     </div>
-    <Hero level="root">
+    <section class="breakout bg-cosmic-blue-base text-white">
       <h2>Sie möchten Ihr Beispiel hier sehen?</h2>
       <p>
         Wir nehmen gerne Vorschläge für Beispiele entgegen. Wenn Sie eine
@@ -197,7 +196,7 @@ const visualisierungen = await Promise.all(
           href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a
         >. Wir melden uns zeitnah bei Ihnen.
       </p>
-    </Hero>
+    </section>
   </main>
 </Layout>
 

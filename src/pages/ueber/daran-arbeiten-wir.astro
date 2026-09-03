@@ -3,6 +3,7 @@ import Badge from "@/components/Badge.astro";
 import Hero from "@/components/Hero.astro";
 import KernCard from "@/components/KernCard.astro";
 import TimelineList from "@/components/TimelineList.astro";
+import Metadata from "./_Metadata.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import {
   begleitungen,
@@ -31,10 +32,11 @@ export const frontmatter = {
   <main class="breakout-grid">
     <Hero level="sub">
       <h1>{frontmatter.title}</h1>
-      <div slot="subtitle">
+      <p>
         Hier halten wir Sie über aktuelle Arbeitspakete und neue Inhalte auf dem
         Laufenden.
-      </div>
+      </p>
+      <Metadata lastUpdate="31.08.2026" nextUpdate="Oktober 2026" />
     </Hero>
 
     <section class="breakout breakout-grid">
@@ -45,14 +47,17 @@ export const frontmatter = {
         gerade auf diese Schwerpunktthemen:
       </p>
 
-      <div class="mt-md gap-lg grid grid-cols-1 md:grid-cols-2">
+      <div class="mt-md grid grid-cols-1 gap-32 md:grid-cols-2 xl:grid-cols-3">
         <KernCard title="Frühphase erfahrbar machen">
-          <p class="kern-body--muted">
+          <div slot="pre-header" class="mb-8">
+            <span class="kern-badge kern-badge--small kern-badge--warning">
+              <span class="kern-label">In Arbeit</span>
+            </span>
+          </div>
+          <p>
             Die Frühphase eines gesetzlichen Vorhabens entscheidet oft darüber,
-            wie gut eine Regelung später funktioniert.
-          </p>
-          <p class="kern-body--muted">
-            Gemeinsam mit Legistinnen und Legisten entwickeln wir ein neues
+            wie gut eine Regelung später funktioniert. Gemeinsam mit Legistinnen
+            und Legisten entwickeln wir ein neues
             {" "}<a href={ueber_neueFruehphase.path} class="font-bold"
               >Konzept der Frühphase</a
             >. Dabei starten wir mit einer prozessualen Übersicht, die dabei
@@ -62,7 +67,12 @@ export const frontmatter = {
         </KernCard>
 
         <KernCard title="Digitalcheck weiterentwickeln">
-          <p class="kern-body--muted">
+          <div slot="pre-header" class="mb-8">
+            <span class="kern-badge kern-badge--small kern-badge--warning">
+              <span class="kern-label">In Arbeit</span>
+            </span>
+          </div>
+          <p>
             Der <a href="https://digitalcheck.bund.de/" class="font-bold"
               >Digitalcheck</a
             > wird gemäß der föderalen Modernisierungsagenda auch für die Länder ein
@@ -70,7 +80,7 @@ export const frontmatter = {
               >Kooperationen zwischen Bund und Ländern</strong
             > werden gestärkt.
           </p>
-          <p class="kern-body--muted">
+          <p>
             Methoden und Beispiele ziehen Schritt für Schritt auf das Zentrum
             für Legistik um, Inhalte werden in Bezug auf Nutzen und Einfachheit
             verbessert. Landes-Legistinnen und -Legisten können die Inhalte
@@ -85,11 +95,16 @@ export const frontmatter = {
         <KernCard
           title="Kompetenzrahmen für Legistinnen und Legisten entwickeln"
         >
-          <p class="kern-body--muted">
+          <div slot="pre-header" class="mb-8">
+            <span class="kern-badge kern-badge--small kern-badge--warning">
+              <span class="kern-label">In Arbeit</span>
+            </span>
+          </div>
+          <p>
             Was ist Legistik, was macht wirkungsorientierte Gesetzgebungsarbeit
             aus – und welche <strong>Kompetenzen</strong> braucht es dafür?
           </p>
-          <p class="kern-body--muted">
+          <p>
             Gemeinsam mit Expertinnen und Experten erarbeiten wir einen
             Kompetenzrahmen, der zeigt, welches Wissen und welche Fähigkeiten in
             der Praxis zählen. Der Rahmen versteht sich als <strong
@@ -139,8 +154,12 @@ export const frontmatter = {
     <section>
       <h2 class="mb-40">Neuerungen auf der Webseite</h2>
       <TimelineList>
+        <li class="timeline-year-item">
+          <Badge look="timelineYear">2026</Badge>
+        </li>
         <li>
-          <Badge look="gray">August 2026</Badge>
+          <Badge look="timeline">August 2026</Badge>
+          <h3>Neue Informationen zur Frühphase und Leitfäden</h3>
           <ul>
             <li>
               Seiten vom Digitalcheck umgezogen: Methoden und Leitfäden
@@ -154,7 +173,8 @@ export const frontmatter = {
           </ul>
         </li>
         <li>
-          <Badge look="gray">Juli 2026</Badge>
+          <Badge look="timeline">Juli 2026</Badge>
+          <h3>Inhalte zur Praxistauglichkeit ergänzt</h3>
           <ul>
             <li>
               Neue Seite ergänzt: Vorhaben praxistauglich gestalten
@@ -165,7 +185,8 @@ export const frontmatter = {
           </ul>
         </li>
         <li>
-          <Badge look="gray">Juni 2026</Badge>
+          <Badge look="timeline">Juni 2026</Badge>
+          <h3>Volltextsuche und erste Informationen zur Frühphase</h3>
           <ul>
             <li>Neue Funktion: Volltextsuche</li>
             <li>
@@ -175,7 +196,8 @@ export const frontmatter = {
           </ul>
         </li>
         <li>
-          <Badge look="gray">Mai 2026</Badge>
+          <Badge look="timeline">Mai 2026</Badge>
+          <h3>Neue Bereiche für Kontakt und News</h3>
           <ul>
             <li>
               Startseite: Aktuelles und Newsletter ergänzt, Einstieg in
@@ -197,7 +219,8 @@ export const frontmatter = {
         </li>
 
         <li>
-          <Badge look="gray">April 2026</Badge>
+          <Badge look="timeline">April 2026</Badge>
+          <h3>Neue Bereiche für Kontakt und News</h3>
           <ul>
             <li>
               Neue Seite ergänzt: Kontakt
@@ -221,7 +244,8 @@ export const frontmatter = {
         </li>
 
         <li>
-          <Badge look="gray">März 2026</Badge>
+          <Badge look="timeline">März 2026</Badge>
+          <h3>Neues Design der Website</h3>
           <ul>
             <li>
               Seitendesign: Umstellung auf den <a
@@ -233,7 +257,8 @@ export const frontmatter = {
         </li>
 
         <li>
-          <Badge look="gray">Februar 2026</Badge>
+          <Badge look="timeline">Februar 2026</Badge>
+          <h3>Erweiterung der Service- und Schulungsangebote</h3>
           <ul>
             <li>
               Regelungsbegleitungen: Tabelle mit Service-Paketen ergänzt
@@ -255,7 +280,8 @@ export const frontmatter = {
         </li>
 
         <li>
-          <Badge look="gray">Januar 2026</Badge>
+          <Badge look="timeline">Januar 2026</Badge>
+          <h3>Website Launch</h3>
           <ul>
             <li>
               Launch der Website des Zentrum für Legistik am 5.&nbsp;Januar 2026

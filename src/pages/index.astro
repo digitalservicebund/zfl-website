@@ -30,7 +30,7 @@ export const frontmatter = {
       <h1 class="max-w-a11y">
         Die zentrale Anlaufstelle für bessere Rechtsetzung
       </h1>
-      <p slot="subtitle">
+      <p>
         Das Zentrum für Legistik unterstützt Legistinnen und Legisten bei der
         Ausarbeitung von Regelungen, die betroffenenzentriert, praxistauglich
         und digital umsetzbar sind.
@@ -45,7 +45,6 @@ export const frontmatter = {
         </p>
         <div class="grid grid-cols-1 gap-32 md:grid-cols-3">
           <KernCard
-            background="white"
             title="Werkzeuge"
             target_option="_self"
             href={werkzeuge.path}
@@ -55,7 +54,6 @@ export const frontmatter = {
             interactive
           />
           <KernCard
-            background="white"
             title="Regelungsbegleitung"
             target_option="_self"
             href={begleitungen.path}
@@ -65,7 +63,6 @@ export const frontmatter = {
             interactive
           />
           <KernCard
-            background="white"
             title="Schulungen"
             target_option="_self"
             href={schulungen.path}
@@ -153,7 +150,7 @@ export const frontmatter = {
         </InfoPanel>
       </div>
     </section>
-    <Hero level="root">
+    <section class="breakout bg-cosmic-blue-base text-white">
       <h2>Kontakt</h2>
       <p>
         Sie haben Fragen zum Zentrum für Legistik oder den einzelnen Angeboten?
@@ -161,6 +158,6 @@ export const frontmatter = {
       </p>
       <p>Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a></p>
       <p>E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a></p>
-    </Hero>
+    </section>
   </main>
 </Layout>
