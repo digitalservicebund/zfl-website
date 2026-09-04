@@ -17,13 +17,7 @@
   const isOpen = $derived(!!finding);
 
   const highlightedHtml = $derived(
-    finding
-      ? highlightBody(
-          body,
-          finding.location.offsetFrom,
-          finding.location.offsetTo,
-        )
-      : "",
+    finding ? highlightBody(body, finding.id) : "",
   );
 
   let scrollContainer: HTMLDivElement | undefined = $state();
@@ -51,7 +45,7 @@
     >
       <div class="flex shrink-0 items-center justify-between gap-16 p-24">
         <p class="kern-label mb-0 truncate">
-          {finding?.location.label}
+          {finding?.locationLabel}
         </p>
         <button
           type="button"

@@ -68,11 +68,12 @@ Agenten mit `subagent_type: "fork"`. Der Fork-Agent bekommt:
 - die komplette Anweisung aus `digitalcheck.md` (Rolle, Auftrag und alle 4
   Prüfschritte),
 - den Hinweis, das Ergebnis exakt im Ausgabeformat aus deren "Schritt 4"
-  **als finale Nachricht zurückzugeben** (kurze Chat-Zusammenfassung plus
-  strukturierte Findings-Liste als YAML, passend zum `findings`-Array aus
-  `src/content.config.ts`) — inkl. der Vorprüfung: bricht der Check mangels
-  Bezug ab, wird trotzdem genau dieses Ergebnis (mit leerer Findings-Liste)
-  zurückgegeben.
+  **als finale Nachricht zurückzugeben** (kurze Chat-Zusammenfassung, die
+  strukturierte Findings-Liste als YAML passend zum `findings`-Array aus
+  `src/content.config.ts`, sowie den Pfad zur annotierten Gesetzestext-Datei
+  im Scratchpad-Verzeichnis) — inkl. der Vorprüfung: bricht der Check mangels
+  Bezug ab, wird trotzdem genau dieses Ergebnis (mit leerer Findings-Liste und
+  unverändertem, unannotiertem Gesetzestext) zurückgegeben.
 
 Der Fork-Agent legt **keine eigene Datei** an — er gibt sein Ergebnis als
 finale Nachricht zurück, die vom Orchestrator in Schritt 4 weiterverarbeitet
@@ -108,11 +109,12 @@ Digitalcheck auszuführen ist.
      - `findings`: die YAML-Findings-Liste aus der finalen Nachricht des
        Digitalcheck-Forks, unverändert übernommen (Schema exakt wie in
        `digitalcheck.md` Schritt 4 spezifiziert).
-   - **Body:** der vollständige Gesetzestext aus Schritt 2 als reines
-     Markdown (Tags entfernt, lesbarer Fließtext) — **exakt derselbe Text**,
-     gegen den der Digitalcheck-Fork seine `offsetFrom`/`offsetTo`-Angaben
-     berechnet hat. Unverändert und vollständig übernehmen, nicht kürzen
-     oder umformulieren — sonst stimmen die Offsets nicht mehr.
+   - **Body:** der Inhalt der **annotierten** Gesetzestext-Datei, deren Pfad
+     der Digitalcheck-Fork in Schritt 4 (Teil 3) zurückgegeben hat —
+     der vollständige Gesetzestext aus Schritt 2 inklusive der darin
+     eingefügten `<!--finding:{id}:start/end-->`-Marker. Unverändert und
+     vollständig übernehmen, nicht kürzen oder umformulieren — sonst gehen
+     Findings ohne passendes Marker-Paar verloren.
 3. Gib im Chat an den Nutzer die Kurzfassung + Findings-Liste des
    Digitalchecks aus.
 4. Kurze Zusammenfassung an den Nutzer: welches Gesetz, Digitalbezug

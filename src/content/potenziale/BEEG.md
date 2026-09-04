@@ -4,74 +4,56 @@ eli: "eli/bund/bgbl-1/2006/s2748/2026-01-01/1/deu"
 findings:
   - type: "Digitalcheck"
     tag: "Prinzip 1.1"
-    location:
-      label: "§ 7 Abs. 1"
-      offsetFrom: 39416
-      offsetTo: 39457
+    id: "39579c6d-12cb-4121-82cc-e175ca59f92a"
+    locationLabel: "§ 7 Abs. 1"
     reasoning: "Die zwingende Schriftform für den zentralen Elterngeldantrag schließt eine rein digitale Antragstellung ohne Medienbruch (z. B. per Online-Formular mit elektronischer Identifizierung) aus."
     hint: "Schriftform durch Textform bzw. eine elektronische Antragstellung mit eID/ELSTER-Authentifizierung ersetzen, analoge Kanäle für Menschen ohne digitalen Zugang optional offenhalten."
   - type: "Digitalcheck"
     tag: "Prinzip 1.1"
-    location:
-      label: "§ 7 Abs. 3"
-      offsetFrom: 40410
-      offsetTo: 40644
+    id: "dd98b25b-3d78-49a9-8e06-ee6d6bfde419"
+    locationLabel: "§ 7 Abs. 3"
     reasoning: "Das Unterschriftserfordernis für Antragsteller:in und die weitere berechtigte Person erzwingt physische oder qualifiziert-elektronische Signaturen und verhindert einen durchgängig digitalen Bearbeitungsprozess."
     hint: "Bestätigung der Kenntnisnahme durch eine einfache elektronische Erklärung (z. B. im Online-Portal, ggf. mit Benachrichtigung der anderen Person) statt durch Unterschrift ermöglichen."
   - type: "Digitalcheck"
     tag: "Prinzip 1.3"
-    location:
-      label: "§ 8 Abs. 1"
-      offsetFrom: 41404
-      offsetTo: 41625
+    id: "3353df9d-dcc5-4b95-84ca-51663242d152"
+    locationLabel: "§ 8 Abs. 1"
     reasoning: "Der nachträgliche Einkommensnachweis nach Ablauf des Bezugszeitraums ist als eigener Verfahrensschritt ausgestaltet, ohne dass automatisierte Abgleiche mit vorhandenen Steuer-/Sozialversicherungsdaten vorgesehen sind."
     hint: "Automatisierten Abgleich mit bereits vorliegenden Einkommensdaten (z. B. über ELSTER/DEÜV-Meldungen) ermöglichen, um manuelle Nachweiserbringung zu reduzieren."
   - type: "Digitalcheck"
     tag: "Prinzip 2.2"
-    location:
-      label: "§ 2c Abs. 2"
-      offsetFrom: 16637
-      offsetTo: 16797
+    id: "bf64dc4c-cf85-4f75-9009-8533ea26c31b"
+    locationLabel: "§ 2c Abs. 2"
     reasoning: "Die Einkommensermittlung stützt sich auf durch den Arbeitgeber gesondert erstellte Lohn- und Gehaltsbescheinigungen, obwohl vergleichbare Daten bereits in bestehenden Meldeverfahren (z. B. DEÜV, ELStAM) vorliegen."
     hint: "Rechtsgrundlage für einen direkten, automatisierten Zugriff der zuständigen Behörde auf bereits vorhandene Entgeltdaten schaffen, wie es § 9 Abs. 2 BEEG für das DSRV-Verfahren bereits ansatzweise vorsieht."
   - type: "Digitalcheck"
     tag: "Prinzip 2.1"
-    location:
-      label: "§ 10 Abs. 1"
-      offsetFrom: 44862
-      offsetTo: 45154
+    id: "715fd91b-5915-4f15-a1f8-72d6b34a3c0f"
+    locationLabel: "§ 10 Abs. 1"
     reasoning: 'Der Begriff "vergleichbare Leistungen der Länder" wird an mehreren Stellen (§ 10, § 11, § 28 Abs. 2) verwendet, ohne im Gesetz definiert zu sein, was eine einheitliche maschinelle Auslegung zwischen Bund- und Länderstellen erschwert.'
     hint: 'Den Begriff "vergleichbare Leistungen der Länder" gesetzlich definieren oder auf eine zentrale, gepflegte Liste/ein Register verweisen, damit er semantisch eindeutig und automatisiert prüfbar ist.'
   - type: "Digitalcheck"
     tag: "Prinzip 4.2"
-    location:
-      label: "§ 12 Abs. 1"
-      offsetFrom: 47647
-      offsetTo: 47779
+    id: "3341d1c2-1d9f-478a-ae3a-c0105336c9c5"
+    locationLabel: "§ 12 Abs. 1"
     reasoning: "Die Zuständigkeit wird den Ländern und deren Behörden überlassen, was zu einer Vielzahl paralleler, uneinheitlicher IT-Fachverfahren für ein bundesweit standardisiertes Massenverfahren führt."
     hint: "Bündelung der Fallbearbeitung in wenigen Kompetenzzentren oder gemeinsame Nutzung einer zentralen Fachverfahrenslösung zwischen den Ländern gesetzlich ermöglichen bzw. anreizen."
   - type: "Digitalcheck"
     tag: "Prinzip 4.5"
-    location:
-      label: "§ 1 Abs. 7 Satz 1 Nr. 2"
-      offsetFrom: 4384
-      offsetTo: 4670
+    id: "58a11da7-73db-4566-b28d-1a1546a57707"
+    locationLabel: "§ 1 Abs. 7 Satz 1 Nr. 2"
     reasoning: "Die verschachtelte Aufzählung unterschiedlicher Aufenthaltstitel mit jeweils eigenen Ausnahmen (Buchstaben a-c) macht die Anspruchsprüfung komplex und schwer als eindeutige, automatisierbare Regel abzubilden."
     hint: "Die Aufenthaltstitel-Tatbestände vereinheitlichen oder in einer strukturierten Tabelle/Referenzliste außerhalb des Fließtexts abbilden, um eine regelbasierte, automatisierte Prüfung zu erleichtern."
   - type: "Digitalcheck"
     tag: "Prinzip 4.4"
-    location:
-      label: "§ 28 Abs. 1a"
-      offsetFrom: 74353
-      offsetTo: 74557
+    id: "8e7808b1-90af-4f3e-b3c7-f2cefce067f6"
+    locationLabel: "§ 28 Abs. 1a"
     reasoning: "Die Übergangsvorschrift reiht mehrere zeitlich versetzte Stichtagsregelungen (Abs. 1, 1a, 1b) mit jeweils eigenen anwendbaren Gesetzesfassungen aneinander, was die Automatisierung der Fallzuordnung nach Geburtsdatum erschwert."
     hint: "Die verschiedenen Fassungsstände in einer maschinenlesbaren Übergangstabelle (Geburtsdatum → anwendbare Fassung) hinterlegen, auf die Fachverfahren referenzieren können, statt sie nur im Normtext aufzulösen."
   - type: "Digitalcheck"
     tag: "EU-Interoperabilität"
-    location:
-      label: "§ 3 Abs. 1 Nr. 3"
-      offsetFrom: 26144
-      offsetTo: 26359
+    id: "40c92074-7778-42fb-99d8-2e6cc1b00a8a"
+    locationLabel: "§ 3 Abs. 1 Nr. 3"
     reasoning: "Für die Anrechnung ausländischer, dem Elterngeld vergleichbarer Leistungen fehlt eine Regelung zum elektronischen Datenaustausch mit den zuständigen Stellen anderer Mitgliedstaaten, wodurch die Feststellung auf manuellen Nachweisen beruht."
     hint: "Eine Rechtsgrundlage für den strukturierten elektronischen Austausch mit ausländischen Familienleistungsträgern (z. B. über bestehende EU-Systeme zur Koordinierung der sozialen Sicherheit) schaffen."
 ---
@@ -192,8 +174,8 @@ Ein nicht freizügigkeitsberechtigter Ausländer oder eine nicht freizügigkeits
 eine Niederlassungserlaubnis oder eine Erlaubnis zum Daueraufenthalt-EU besitzt,
 
 - 2.
-
-eine Blaue Karte EU, eine ICT-Karte, eine Mobiler-ICT-Karte oder eine Aufenthaltserlaubnis besitzt, die für einen Zeitraum von mindestens sechs Monaten zur Ausübung einer Erwerbstätigkeit berechtigen oder berechtigt haben oder diese erlauben, es sei denn, die Aufenthaltserlaubnis wurde
+<!--finding:58a11da7-73db-4566-b28d-1a1546a57707:start-->
+eine Blaue Karte EU, eine ICT-Karte, eine Mobiler-ICT-Karte oder eine Aufenthaltserlaubnis besitzt, die für einen Zeitraum von mindestens sechs Monaten zur Ausübung einer Erwerbstätigkeit berechtigen oder berechtigt haben oder diese erlauben, es sei denn, die Aufenthaltserlaubnis wurd<!--finding:58a11da7-73db-4566-b28d-1a1546a57707:end-->e
 
 - a)
 
@@ -334,8 +316,8 @@ Abweichend von § 2 Absatz 1 Satz 3 Nummer 2 ist für die Berechnung des Elterng
 Der monatlich durchschnittlich zu berücksichtigende Überschuss der Einnahmen aus nichtselbstständiger Arbeit in Geld oder Geldeswert über ein Zwölftel des Arbeitnehmer-Pauschbetrags, vermindert um die Abzüge für Steuern und Sozialabgaben nach den §§ 2e und 2f, ergibt das Einkommen aus nichtselbstständiger Erwerbstätigkeit. Nicht berücksichtigt werden Einnahmen, die im Lohnsteuerabzugsverfahren nach den lohnsteuerlichen Vorgaben als sonstige Bezüge zu behandeln sind. Die zeitliche Zuordnung von Einnahmen erfolgt nach den lohnsteuerlichen Vorgaben für das Lohnsteuerabzugsverfahren. Maßgeblich ist der Arbeitnehmer-Pauschbetrag nach § 9a Satz 1 Nummer 1 Buchstabe a des Einkommensteuergesetzes in der am 1. Januar des Kalenderjahres vor der Geburt des Kindes für dieses Jahr geltenden Fassung.
 
 (2)
-
-Grundlage der Ermittlung der Einnahmen sind die Angaben in den für die maßgeblichen Kalendermonate erstellten Lohn- und Gehaltsbescheinigungen des Arbeitgebers. Die Richtigkeit und Vollständigkeit der Angaben in den maßgeblichen Lohn- und Gehaltsbescheinigungen wird vermutet.
+<!--finding:bf64dc4c-cf85-4f75-9009-8533ea26c31b:start-->
+Grundlage der Ermittlung der Einnahmen sind die Angaben in den für die maßgeblichen Kalendermonate erstellten Lohn- und Gehaltsbescheinigungen des Arbeitgebers<!--finding:bf64dc4c-cf85-4f75-9009-8533ea26c31b:end-->. Die Richtigkeit und Vollständigkeit der Angaben in den maßgeblichen Lohn- und Gehaltsbescheinigungen wird vermutet.
 
 (3)
 
@@ -464,8 +446,8 @@ in Form des Zuschusses zum Mutterschaftsgeld nach § 20 des Mutterschutzgesetzes
 Dienst- und Anwärterbezüge sowie Zuschüsse, die der berechtigten Person nach beamten- oder soldatenrechtlichen Vorschriften für die Zeit eines Beschäftigungsverbots ab dem Tag der Geburt des Kindes zustehen,
 
 - 3.
-
-dem Elterngeld oder den Mutterschaftsleistungen vergleichbare Leistungen, auf die eine nach § 1 berechtigte Person außerhalb Deutschlands oder gegenüber einer über- oder zwischenstaatlichen Einrichtung Anspruch hat,
+<!--finding:40c92074-7778-42fb-99d8-2e6cc1b00a8a:start-->
+dem Elterngeld oder den Mutterschaftsleistungen vergleichbare Leistungen, auf die eine nach § 1 berechtigte Person außerhalb Deutschlands oder gegenüber einer über- oder zwischenstaatlichen Einrichtung Anspruch hat<!--finding:40c92074-7778-42fb-99d8-2e6cc1b00a8a:end-->,
 
 - 4.
 
@@ -709,16 +691,16 @@ Elterngeld wird im Laufe des Lebensmonats gezahlt, für den es bestimmt ist.
 ## § 7 Antragstellung
 
 (1)
-
-Elterngeld ist schriftlich zu beantragen. Es wird rückwirkend nur für die letzten drei Lebensmonate vor Beginn des Lebensmonats geleistet, in dem der Antrag auf Elterngeld eingegangen ist. Im Antrag ist anzugeben, für welche Lebensmonate Basiselterngeld, für welche Lebensmonate Elterngeld Plus oder für welche Lebensmonate Partnerschaftsbonus beantragt wird.
+<!--finding:39579c6d-12cb-4121-82cc-e175ca59f92a:start-->
+Elterngeld ist schriftlich zu beantragen<!--finding:39579c6d-12cb-4121-82cc-e175ca59f92a:end-->. Es wird rückwirkend nur für die letzten drei Lebensmonate vor Beginn des Lebensmonats geleistet, in dem der Antrag auf Elterngeld eingegangen ist. Im Antrag ist anzugeben, für welche Lebensmonate Basiselterngeld, für welche Lebensmonate Elterngeld Plus oder für welche Lebensmonate Partnerschaftsbonus beantragt wird.
 
 (2)
 
 Die im Antrag getroffenen Entscheidungen können bis zum Ende des Bezugszeitraums geändert werden. Eine Änderung kann rückwirkend nur für die letzten drei Lebensmonate vor Beginn des Lebensmonats verlangt werden, in dem der Änderungsantrag eingegangen ist. Sie ist außer in den Fällen besonderer Härte unzulässig, soweit Monatsbeträge bereits ausgezahlt sind. Abweichend von den Sätzen 2 und 3 kann für einen Lebensmonat, in dem bereits Elterngeld Plus bezogen wurde, nachträglich Basiselterngeld beantragt werden. Im Übrigen finden die für die Antragstellung geltenden Vorschriften auch auf den Änderungsantrag Anwendung.
 
 (3)
-
-Der Antrag ist, außer im Fall des § 4c und der Antragstellung durch eine allein sorgeberechtigte Person, zu unterschreiben von der Person, die ihn stellt, und zur Bestätigung der Kenntnisnahme auch von der anderen berechtigten Person. Die andere berechtigte Person kann gleichzeitig
+<!--finding:dd98b25b-3d78-49a9-8e06-ee6d6bfde419:start-->
+Der Antrag ist, außer im Fall des § 4c und der Antragstellung durch eine allein sorgeberechtigte Person, zu unterschreiben von der Person, die ihn stellt, und zur Bestätigung der Kenntnisnahme auch von der anderen berechtigten Person<!--finding:dd98b25b-3d78-49a9-8e06-ee6d6bfde419:end-->. Die andere berechtigte Person kann gleichzeitig
 
 - 1.
 
@@ -733,8 +715,8 @@ Liegt der Behörde von der anderen berechtigten Person weder ein Antrag auf Elte
 ## § 8 Auskunftspflicht, Nebenbestimmungen
 
 (1)
-
-Soweit im Antrag auf Elterngeld Angaben zum voraussichtlichen Einkommen aus Erwerbstätigkeit gemacht wurden, ist nach Ablauf des Bezugszeitraums für diese Zeit das tatsächliche Einkommen aus Erwerbstätigkeit nachzuweisen.
+<!--finding:3353df9d-dcc5-4b95-84ca-51663242d152:start-->
+Soweit im Antrag auf Elterngeld Angaben zum voraussichtlichen Einkommen aus Erwerbstätigkeit gemacht wurden, ist nach Ablauf des Bezugszeitraums für diese Zeit das tatsächliche Einkommen aus Erwerbstätigkeit nachzuweisen<!--finding:3353df9d-dcc5-4b95-84ca-51663242d152:end-->.
 
 (1a)
 
@@ -783,8 +765,8 @@ Für den Nachweis des Einkommens aus Erwerbstätigkeit kann die nach § 12 Absat
 ## § 10 Verhältnis zu anderen Sozialleistungen
 
 (1)
-
-Das Elterngeld und vergleichbare Leistungen der Länder sowie die nach § 3 auf die Leistung angerechneten Einnahmen oder Leistungen bleiben bei Sozialleistungen, deren Zahlung von anderen Einkommen abhängig ist, bis zu einer Höhe von insgesamt 300 Euro im Monat als Einkommen unberücksichtigt.
+<!--finding:715fd91b-5915-4f15-a1f8-72d6b34a3c0f:start-->
+Das Elterngeld und vergleichbare Leistungen der Länder sowie die nach § 3 auf die Leistung angerechneten Einnahmen oder Leistungen bleiben bei Sozialleistungen, deren Zahlung von anderen Einkommen abhängig ist, bis zu einer Höhe von insgesamt 300 Euro im Monat als Einkommen unberücksichtigt<!--finding:715fd91b-5915-4f15-a1f8-72d6b34a3c0f:end-->.
 
 (2)
 
@@ -813,8 +795,8 @@ Unterhaltsverpflichtungen werden durch die Zahlung des Elterngeldes und vergleic
 ## § 12 Zuständigkeit; Bewirtschaftung der Mittel
 
 (1)
-
-Die Landesregierungen oder die von ihnen beauftragten Stellen bestimmen die für die Ausführung dieses Gesetzes zuständigen Behörden. Zuständig ist die von den Ländern für die Durchführung dieses Gesetzes bestimmte Behörde des Bezirks, in dem das Kind, für das Elterngeld beansprucht wird, zum Zeitpunkt der ersten Antragstellung seinen inländischen Wohnsitz hat. Hat das Kind, für das Elterngeld beansprucht wird, in den Fällen des § 1 Absatz 2 zum Zeitpunkt der ersten Antragstellung keinen inländischen Wohnsitz, so ist die von den Ländern für die Durchführung dieses Gesetzes bestimmte Behörde des Bezirks zuständig, in dem die berechtigte Person ihren letzten inländischen Wohnsitz hatte; hilfsweise ist die Behörde des Bezirks zuständig, in dem der entsendende Dienstherr oder Arbeitgeber der berechtigten Person oder der Arbeitgeber des Ehegatten oder der Ehegattin der berechtigten Person den inländischen Sitz hat.
+<!--finding:3341d1c2-1d9f-478a-ae3a-c0105336c9c5:start-->
+Die Landesregierungen oder die von ihnen beauftragten Stellen bestimmen die für die Ausführung dieses Gesetzes zuständigen Behörden<!--finding:3341d1c2-1d9f-478a-ae3a-c0105336c9c5:end-->. Zuständig ist die von den Ländern für die Durchführung dieses Gesetzes bestimmte Behörde des Bezirks, in dem das Kind, für das Elterngeld beansprucht wird, zum Zeitpunkt der ersten Antragstellung seinen inländischen Wohnsitz hat. Hat das Kind, für das Elterngeld beansprucht wird, in den Fällen des § 1 Absatz 2 zum Zeitpunkt der ersten Antragstellung keinen inländischen Wohnsitz, so ist die von den Ländern für die Durchführung dieses Gesetzes bestimmte Behörde des Bezirks zuständig, in dem die berechtigte Person ihren letzten inländischen Wohnsitz hatte; hilfsweise ist die Behörde des Bezirks zuständig, in dem der entsendende Dienstherr oder Arbeitgeber der berechtigten Person oder der Arbeitgeber des Ehegatten oder der Ehegattin der berechtigten Person den inländischen Sitz hat.
 
 (2)
 
@@ -1268,8 +1250,8 @@ Liegt der Bezug des Partnerschaftsbonus ganz oder teilweise vor dem Ablauf des 2
 Für die vor dem 1. September 2021 geborenen oder mit dem Ziel der Adoption aufgenommenen Kinder ist dieses Gesetz in der bis zum 31. August 2021 geltenden Fassung weiter anzuwenden.
 
 (1a)
-
-Für die nach dem 31. August 2021 und vor dem 1. April 2024 geborenen oder mit dem Ziel der Adoption aufgenommenen Kinder ist dieses Gesetz in der bis zum 31. März 2024 geltenden Fassung weiter anzuwenden.
+<!--finding:8e7808b1-90af-4f3e-b3c7-f2cefce067f6:start-->
+Für die nach dem 31. August 2021 und vor dem 1. April 2024 geborenen oder mit dem Ziel der Adoption aufgenommenen Kinder ist dieses Gesetz in der bis zum 31. März 2024 geltenden Fassung weiter anzuwenden<!--finding:8e7808b1-90af-4f3e-b3c7-f2cefce067f6:end-->.
 
 (1b)
 

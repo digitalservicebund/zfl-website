@@ -4,50 +4,38 @@ eli: "eli/bund/bgbl-1/2007/s217/2024-10-11/1/deu"
 findings:
   - type: "Digitalcheck"
     tag: "Prinzip 2.4"
-    location:
-      label: "§ 4 S.2"
-      offsetFrom: 9148
-      offsetTo: 9269
+    id: "3b6ecba1-4562-4304-926d-c370d97f2841"
+    locationLabel: "§ 4 S.2"
     reasoning: "Statt einer einheitlichen technischen Schnittstelle können Landesjustizverwaltungen bilateral mit der registerführenden Stelle eine 'andere Art der Datenbereitstellung' vereinbaren, was zu uneinheitlichen, nicht standardisierten Übermittlungswegen zwischen den Ländern führen kann."
     hint: "Statt individueller Vereinbarungen einen einheitlichen technischen Standard (z. B. über XÖV/FITKO) für alle Landesjustizverwaltungen vorschreiben, um Interoperabilität sicherzustellen."
   - type: "Digitalcheck"
     tag: "Prinzip 2.4"
-    location:
-      label: "§ 5 Abs. 2 S.1"
-      offsetFrom: 9596
-      offsetTo: 9687
+    id: "51963311-c7a1-4d16-9f8a-8f9234fb9a29"
+    locationLabel: "§ 5 Abs. 2 S.1"
     reasoning: "Das strukturierte Format für Indexdaten wird jeweils individuell zwischen registerführender Stelle und einzelnen Landesjustizverwaltungen vereinbart, statt auf einen bundesweit einheitlichen, bereits etablierten Standard zu verweisen."
     hint: "Einen konkreten, bereits etablierten Austauschstandard (z. B. XJustiz) in der Verordnung referenzieren, statt die Formatwahl 16 bilateralen Vereinbarungen zu überlassen."
   - type: "Digitalcheck"
     tag: "Prinzip 1.1"
-    location:
-      label: "§ 11 Abs. 1 S.3"
-      offsetFrom: 15449
-      offsetTo: 15636
+    id: "fad5995e-8c12-4c7a-9b9f-3637468f9f39"
+    locationLabel: "§ 11 Abs. 1 S.3"
     reasoning: "Die digitale Übermittlung über Internet-Formulare ist mit 'kann ... ermöglicht werden' nur als Option formuliert, nicht als verbindlicher digitaler Zugang für Veröffentlichungspflichtige und beauftragte Dritte."
     hint: "Die Formulierung von 'kann ermöglicht werden' zu 'ist zu ermöglichen' ändern, um digitale Antragstellung verbindlich sicherzustellen, ohne alternative Kanäle für Personen ohne digitalen Zugang auszuschließen."
   - type: "Digitalcheck"
     tag: "Prinzip 4.3"
-    location:
-      label: "§ 12 Abs. 1 S.1"
-      offsetFrom: 18362
-      offsetTo: 18535
+    id: "bda53a76-9f26-419d-ba03-8cdbe178b0ed"
+    locationLabel: "§ 12 Abs. 1 S.1"
     reasoning: "Die Frist 'spätestens bis zum Ablauf des auf die Übermittlung folgenden Arbeitstages' deutet auf einen manuellen Zwischenschritt hin, obwohl bei rein elektronischer Übermittlung eine sofortige, automatisierte Zugänglichmachung möglich wäre."
     hint: "Prüfen, ob eine vollautomatisierte, unmittelbare Bereitstellung direkt nach Eingang technisch umsetzbar ist, statt einer Arbeitstagesfrist."
   - type: "Digitalcheck"
     tag: "Prinzip 4.3"
-    location:
-      label: "§ 12 Abs. 1 S.4"
-      offsetFrom: 19036
-      offsetTo: 19254
+    id: "152b79a3-ea97-4ca6-acd9-49bf67cd2d5e"
+    locationLabel: "§ 12 Abs. 1 S.4"
     reasoning: "Die Berichtigung fehlerhaft eingestellter Unterlagen erfolgt erst 'auf Verlangen' des Betroffenen, statt dass Fehler bei der Einstellung automatisiert erkannt und korrigiert werden."
     hint: "Automatisierte Plausibilitätsprüfungen bei der Einstellung vorsehen, die fehlerhafte Übermittlungen frühzeitig erkennen, statt die Korrektur von einem aktiven Antrag abhängig zu machen."
   - type: "Digitalcheck"
     tag: "EU-Interoperabilität"
-    location:
-      label: "§ 16 Abs. 1"
-      offsetFrom: 23152
-      offsetTo: 23236
+    id: "fe91e20e-2c08-40cf-a5e6-fc70333eaee5"
+    locationLabel: "§ 16 Abs. 1"
     reasoning: "Die Zusammenarbeit im 'europaweiten Netzwerk zwischen den Speicherungssystemen' wird nur abstrakt benannt, ohne auf einen konkreten technischen/semantischen Standard (z. B. das bestehende EU-Unternehmensregister-Verbundsystem BRIS) zu verweisen."
     hint: "Einen expliziten Verweis auf das bestehende System zur Verknüpfung der Unternehmensregister (BRIS) und dessen technische Standards aufnehmen, um EU-weite Interoperabilität rechtssicher abzusichern."
 ---
@@ -136,12 +124,12 @@ Sofern keine Datenübermittlung erfolgt ist, sind die in Satz 2 genannten Daten 
 (4)Die registerführende Stelle ist befugt, nach ihren technischen Vorgaben eine Schnittstelle zur Steuerberaterplattform nach § 86c des Steuerberatungsgesetzes einzurichten. Ist eine solche Schnittstelle eingerichtet, so müssen sich Nutzer, die bereits über die Steuerberaterplattform identifiziert sind, für die Registrierung nach § 3 nicht nach Absatz 1 identifizieren. In diesen Fällen kann die registerführende Stelle vom Betreiber der Steuerberaterplattform verlangen, ihr die dort erhobenen Identifizierungsdaten über die Schnittstelle zu übermitteln. Die registerführende Stelle ist befugt, die übermittelten Identifizierungsdaten und die Daten der SAFE-Visitenkarte zu verarbeiten. Absatz 2 Satz 1 bis 3 gilt entsprechend. Die registerführende Stelle ist berechtigt, sich auf die Richtigkeit und Vollständigkeit der ihr übermittelten Daten zu verlassen, es sei denn, an deren Richtigkeit oder Vollständigkeit bestehen ernstliche Zweifel; in diesem Fall ist sie verpflichtet, vom Betreiber der Steuerberaterplattform die erforderlichen Nachweise über eine erfolgte Identifizierung zu verlangen.
 
 ## § 4 Art der Datenübermittlung
-Daten werden dem Unternehmensregister im Wege der Datenfernübertragung übermittelt. Die Landesjustizverwaltungen können mit der registerführenden Stelle eine andere Art der Datenbereitstellung vereinbaren.
+Daten werden dem Unternehmensregister im Wege der Datenfernübertragung übermittelt. <!--finding:3b6ecba1-4562-4304-926d-c370d97f2841:start-->Die Landesjustizverwaltungen können mit der registerführenden Stelle eine andere Art der Datenbereitstellung vereinbaren.<!--finding:3b6ecba1-4562-4304-926d-c370d97f2841:end-->
 
 ## § 5 Datenübermittlung durch die Landesjustizverwaltungen
 (1)Die Landesjustizverwaltungen übermitteln dem Unternehmensregister die Indexdaten (§ 1 Abs. 2) über eine nach dem Stand der Technik gesicherte, zwischen der registerführenden Stelle und den Landesjustizverwaltungen vereinbarte Verbindung.
 
-(2)Die Indexdaten sind in einem mit den Landesjustizverwaltungen vereinbarten strukturierten Format zu übermitteln. Die Landesjustizverwaltungen stellen sicher, dass die übermittelten Indexdaten ohne Aufbereitung oder Veränderung den Zugang zu den Originaldaten und eine Suche im Unternehmensregister ermöglichen.
+(2)Die Indexdaten sind <!--finding:51963311-c7a1-4d16-9f8a-8f9234fb9a29:start-->in einem mit den Landesjustizverwaltungen vereinbarten strukturierten Format zu übermitteln<!--finding:51963311-c7a1-4d16-9f8a-8f9234fb9a29:end-->. Die Landesjustizverwaltungen stellen sicher, dass die übermittelten Indexdaten ohne Aufbereitung oder Veränderung den Zugang zu den Originaldaten und eine Suche im Unternehmensregister ermöglichen.
 
 (3)Die Landesjustizverwaltungen übermitteln Änderungen der Indexdaten zu Eintragungen im Handels-, Genossenschafts-, Gesellschafts- oder Partnerschaftsregister (§ 6) unverzüglich. Die Indexdaten zu Registerbekanntmachungen aus dem Handels-, Genossenschafts-, Gesellschafts- und Partnerschaftsregister (§ 7) sowie die Indexdaten zu Insolvenzbekanntmachungen (§ 8) sind täglich zu aktualisieren. Die Landesjustizverwaltungen können in Absprache mit der registerführenden Stelle eine häufigere Aktualisierung oder eine vollständige Neuübermittlung vornehmen, wenn dadurch der Betrieb des Unternehmensregisters nicht beeinträchtigt wird.
 
@@ -211,7 +199,7 @@ Die Landesjustizverwaltungen übermitteln dem Unternehmensregister folgende Inde
 Der Betreiber des Bundesanzeigers übermittelt dem Unternehmensregister die Daten im Sinn des § 8b Abs. 3 Satz 1 Nr. 1 des Handelsgesetzbuchs unverzüglich nach ihrer Veröffentlichung, spätestens bis zum Ablauf des auf die Veröffentlichung folgenden Arbeitstages. Die Daten sind unter Verwendung einer von der registerführenden Stelle bestimmten, nach dem Stand der Technik gesicherten Verbindung sowie in einem von der registerführenden Stelle bestimmten, in Wirtschaftskreisen verbreiteten strukturierten Format, zum Beispiel in Form der Extensible Markup Language (XML), zu übermitteln. Der Eingang übermittelter Daten ist mit einem Zeitstempel unter Verwendung einer fortgeschrittenen elektronischen Signatur zu dokumentieren.
 
 ## § 11 Datenübermittlung durch Veröffentlichungs- und Offenlegungspflichtige, durch mit der Veranlassung der Veröffentlichung oder Offenlegung beauftragte Dritte oder durch die Bundesanstalt für Finanzdienstleistungsaufsicht
-(1)Daten im Sinn des § 8b Abs. 2 Nr. 9 des Handelsgesetzbuchs sind dem Unternehmensregister unverzüglich nach der Veröffentlichung sowie Daten im Sinn des § 8b Abs. 2 Nr. 10 des Handelsgesetzbuchs unverzüglich nach der Mitteilung zu übermitteln. § 10 Satz 2 und 3 gilt entsprechend. Den Veröffentlichungspflichtigen und den von diesen mit der Veranlassung der Veröffentlichung beauftragten Dritten kann auch die Übermittlung über Formulare im Internet ermöglicht werden. Für die Übermittlung ist eine Registrierung des Veröffentlichungspflichtigen oder des mit der Veranlassung der Veröffentlichung beauftragten Dritten nach § 3 erforderlich. Der Erfolg der Übermittlung wird elektronisch angezeigt.
+(1)Daten im Sinn des § 8b Abs. 2 Nr. 9 des Handelsgesetzbuchs sind dem Unternehmensregister unverzüglich nach der Veröffentlichung sowie Daten im Sinn des § 8b Abs. 2 Nr. 10 des Handelsgesetzbuchs unverzüglich nach der Mitteilung zu übermitteln. § 10 Satz 2 und 3 gilt entsprechend. <!--finding:fad5995e-8c12-4c7a-9b9f-3637468f9f39:start-->Den Veröffentlichungspflichtigen und den von diesen mit der Veranlassung der Veröffentlichung beauftragten Dritten kann auch die Übermittlung über Formulare im Internet ermöglicht werden.<!--finding:fad5995e-8c12-4c7a-9b9f-3637468f9f39:end--> Für die Übermittlung ist eine Registrierung des Veröffentlichungspflichtigen oder des mit der Veranlassung der Veröffentlichung beauftragten Dritten nach § 3 erforderlich. Der Erfolg der Übermittlung wird elektronisch angezeigt.
 
 (2)Daten im Sinne des § 8b Absatz 2 Nummer 4 des Handelsgesetzbuchs sowie die Unterlagen, die dauerhaft hinterlegt werden sollen, sind dem Unternehmensregister unter Verwendung einer von der registerführenden Stelle bestimmten, nach dem Stand der Technik gesicherten Internetverbindung wie folgt elektronisch zu übermitteln:
 1.Jahresfinanzberichte (§ 114 des Wertpapierhandelsgesetzes) oder die in § 328 Absatz 1 Satz 1 des Handelsgesetzbuchs bezeichneten Rechnungslegungsunterlagen eines Unternehmens, das als Inlandsemittent (§ 2 Absatz 14 des Wertpapierhandelsgesetzes) Wertpapiere (§ 2 Absatz 1 des Wertpapierhandelsgesetzes) begibt: in dem einheitlichen elektronischen Berichtsformat nach Maßgabe der Delegierten Verordnung (EU) 2019/815 der Kommission vom 17. Dezember 2018 zur Ergänzung der Richtlinie 2004/109/EG des Europäischen Parlaments und des Rates im Hinblick auf technische Regulierungsstandards für die Spezifikation eines einheitlichen elektronischen Berichtsformats (ABl. L 143 vom 29.5.2019, S. 1; L 145 vom 4.6.2019, S. 85), die zuletzt durch die Delegierte Verordnung (EU) 2022/352 (ABl. L 77 vom 7.3.2022, S. 1) geändert worden ist, in der jeweils geltenden Fassung,
@@ -227,7 +215,7 @@ Abweichend von Satz 1 Nummer 4 dürfen bei Unternehmen im Sinne des Satzes 1 Num
 (3)Die Bundesanstalt für Finanzdienstleistungsaufsicht übermittelt die Daten im Sinne des § 8b Absatz 2 Nummer 13 des Handelsgesetzbuchs an das Unternehmensregister elektronisch über eine nach dem Stand der Technik gesicherte Internetverbindung.
 
 ## § 12 Prüfung, Zugänglichkeit, Berichtigung und Löschung von Daten
-(1)Die nach den §§ 10 und 11 Absatz 1 übermittelten Daten werden unverzüglich nach ihrer Übermittlung, spätestens bis zum Ablauf des auf die Übermittlung folgenden Arbeitstages im Unternehmensregister unmittelbar zugänglich gemacht. Die nach § 11 Absatz 2 übermittelten Daten werden unverzüglich nach Maßgabe des § 329 Absatz 1 bis 3 des Handelsgesetzbuchs geprüft, soweit eine solche Prüfung gesetzlich vorgeschrieben ist. Die nach § 11 Absatz 2 übermittelten Daten mit Ausnahme der zur dauerhaften Hinterlegung eingestellten Unterlagen werden unverzüglich nach ihrer Prüfung oder, falls eine Prüfung gesetzlich nicht vorgeschrieben ist, unverzüglich nach ihrer Übermittlung im Unternehmensregister unmittelbar zugänglich gemacht. Werden die übermittelten Unterlagen durch die registerführende Stelle fehlerhaft eingestellt, so wird dies auf Verlangen des Veröffentlichungs- oder Offenlegungspflichtigen durch die registerführende Stelle berichtigt. Berichtigungen zugänglich gemachter Daten sind als solche zu kennzeichnen.
+(1)Die nach den §§ 10 und 11 Absatz 1 übermittelten Daten <!--finding:bda53a76-9f26-419d-ba03-8cdbe178b0ed:start-->werden unverzüglich nach ihrer Übermittlung, spätestens bis zum Ablauf des auf die Übermittlung folgenden Arbeitstages im Unternehmensregister unmittelbar zugänglich gemacht<!--finding:bda53a76-9f26-419d-ba03-8cdbe178b0ed:end-->. Die nach § 11 Absatz 2 übermittelten Daten werden unverzüglich nach Maßgabe des § 329 Absatz 1 bis 3 des Handelsgesetzbuchs geprüft, soweit eine solche Prüfung gesetzlich vorgeschrieben ist. Die nach § 11 Absatz 2 übermittelten Daten mit Ausnahme der zur dauerhaften Hinterlegung eingestellten Unterlagen werden unverzüglich nach ihrer Prüfung oder, falls eine Prüfung gesetzlich nicht vorgeschrieben ist, unverzüglich nach ihrer Übermittlung im Unternehmensregister unmittelbar zugänglich gemacht. <!--finding:152b79a3-ea97-4ca6-acd9-49bf67cd2d5e:start-->Werden die übermittelten Unterlagen durch die registerführende Stelle fehlerhaft eingestellt, so wird dies auf Verlangen des Veröffentlichungs- oder Offenlegungspflichtigen durch die registerführende Stelle berichtigt.<!--finding:152b79a3-ea97-4ca6-acd9-49bf67cd2d5e:end--> Berichtigungen zugänglich gemachter Daten sind als solche zu kennzeichnen.
 
 (2)Die nach § 10 übermittelten Daten werden gelöscht, wenn die Originaldaten nicht mehr im Bundesanzeiger zugänglich sind. Nach § 11 Absatz 1 und 3 an das Unternehmensregister übermittelte Daten sind für zehn Jahre zugänglich zu halten und anschließend zu löschen. Gesetzliche Löschungsregelungen bleiben unberührt.
 
@@ -249,7 +237,7 @@ Das Unternehmensregister erlaubt die Suche nach allen eingestellten Daten sowie 
 (2)Zahlungen können über Kreditkarte, elektronisches Lastschriftverfahren oder einen vergleichbaren vereinbarten Zahlungsweg erfolgen. Der Zahlungsweg kann von einer Registrierung nach § 3 abhängig gemacht werden. Rechnungen oder Quittungen werden in Textform (§ 126b des Bürgerlichen Gesetzbuchs) übermittelt oder elektronisch angezeigt.
 
 ## § 16 Befugnisse der Bundesanstalt für Finanzdienstleistungsaufsicht
-(1)Im Hinblick auf kapitalmarktrechtliche Daten überwacht die Bundesanstalt für Finanzdienstleistungsaufsicht gegenüber der registerführenden Stelle die Einhaltung von Mindestqualitätsnormen in Bezug auf Datensicherheit, Herkunftsgewissheit, Zeitaufzeichnung und leichten Zugang der Endnutzer zu den Daten sowie die Zusammenarbeit mit amtlich bestellten Speicherungssystemen anderer Mitgliedstaaten der Europäischen Union oder anderer Vertragsstaaten des Abkommens über den Europäischen Wirtschaftsraum im Rahmen des Aufbaus eines europaweiten Netzwerks zwischen den Speicherungssystemen.
+(1)Im Hinblick auf kapitalmarktrechtliche Daten überwacht die Bundesanstalt für Finanzdienstleistungsaufsicht gegenüber der registerführenden Stelle die Einhaltung von Mindestqualitätsnormen in Bezug auf Datensicherheit, Herkunftsgewissheit, Zeitaufzeichnung und leichten Zugang der Endnutzer zu den Daten sowie die Zusammenarbeit mit amtlich bestellten Speicherungssystemen anderer Mitgliedstaaten der Europäischen Union oder anderer Vertragsstaaten des Abkommens über den Europäischen Wirtschaftsraum <!--finding:fe91e20e-2c08-40cf-a5e6-fc70333eaee5:start-->im Rahmen des Aufbaus eines europaweiten Netzwerks zwischen den Speicherungssystemen<!--finding:fe91e20e-2c08-40cf-a5e6-fc70333eaee5:end-->.
 
 (2)Soweit dies für die Überwachung nach Absatz 1 erforderlich ist, kann die Bundesanstalt für Finanzdienstleistungsaufsicht von der registerführenden Stelle Auskünfte, die Vorlage von Unterlagen und die Überlassung von Kopien verlangen. Gesetzliche Auskunfts- oder Aussageverweigerungsrechte sowie gesetzliche Verschwiegenheitspflichten bleiben unberührt. Sollte die registerführende Stelle berechtigten Verlangen der Bundesanstalt für Finanzdienstleistungsaufsicht nicht nachkommen, kann diese gegenüber dem Bundesministerium der Justiz und für Verbraucherschutz als der Kontroll- und Aufsichtsbehörde über das Unternehmensregister auf die Erfüllung der bestehenden Pflichten durch die registerführende Stelle und die Beseitigung von Missständen hinwirken.
 

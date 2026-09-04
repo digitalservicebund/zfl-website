@@ -4,114 +4,86 @@ eli: "eli/bund/bgbl-1/1992/s1126/2026-07-29/1/deu"
 findings:
   - type: "Digitalcheck"
     tag: "Prinzip 1.1"
-    location:
-      label: "§ 14 Abs. 1"
-      offsetFrom: 31993
-      offsetTo: 32160
+    id: "96359724-9e30-4476-8ca8-50075bf8cbf2"
+    locationLabel: "§ 14 Abs. 1"
     reasoning: "Die Pflicht zur persönlichen Einreichung des Asylantrags bei der Außenstelle schreibt eine Präsenzpflicht fest, ohne eine digitale Antragstellung als Alternative vorzusehen."
     hint: "Regelung technologieoffen ergänzen, sodass die Antragseinreichung auch über einen digitalen Kanal (z. B. Online-Formular mit anschließender Identitätsprüfung) möglich ist, soweit die persönliche Identifizierung anderweitig sichergestellt wird."
   - type: "Digitalcheck"
     tag: "Prinzip 1.1"
-    location:
-      label: "§ 10 Abs. 7"
-      offsetFrom: 27621
-      offsetTo: 27750
+    id: "1f9d13bb-9f6a-4021-8fb2-b360330d9df7"
+    locationLabel: "§ 10 Abs. 7"
     reasoning: "Der Hinweis auf Zustellungsvorschriften muss schriftlich und gegen Empfangsbestätigung erfolgen, was einen Medienbruch erzwingt und eine digitale Bestätigung (z. B. elektronische Signatur/Empfangsquittung) ausschließt."
     hint: "Textform mit elektronischer Bestätigungsmöglichkeit zulassen, etwa durch digitale Empfangsbestätigung im Rahmen eines Online-Verfahrens."
   - type: "Digitalcheck"
     tag: "Prinzip 1.1"
-    location:
-      label: "§ 44 Abs. 3"
-      offsetFrom: 92724
-      offsetTo: 93291
+    id: "9a1229c3-862d-41bb-bc6c-ad574d27ba69"
+    locationLabel: "§ 44 Abs. 3"
     reasoning: "Die Vorlage des Führungszeugnisses ist als physischer Vorgang ausgestaltet ('vorlegen lassen'), ohne eine elektronische Einholung oder Übermittlung vorzusehen."
     hint: "Auf das elektronische Antrags- und Übermittlungsverfahren beim Bundesamt für Justiz verweisen, damit Träger Führungszeugnisse digital anfordern und einsehen können."
   - type: "Digitalcheck"
     tag: "Prinzip 1.2"
-    location:
-      label: "§ 63a Abs. 1"
-      offsetFrom: 128748
-      offsetTo: 129129
+    id: "f9107967-1e7a-467a-93c3-6f7f9a94ce00"
+    locationLabel: "§ 63a Abs. 1"
     reasoning: "Der Ankunftsnachweis wird ausschließlich als physisches Dokument mit vorgegebenen Feldern (u. a. handschriftlicher Unterschrift) beschrieben, ohne technologieoffene Formulierung für ein digitales Äquivalent."
     hint: "Regelung so fassen, dass neben der physischen Bescheinigung auch eine digitale Ausstellungsform (z. B. eID-basiert) zulässig ist, ohne ein bestimmtes technisches Format vorzuschreiben."
   - type: "Digitalcheck"
     tag: "Prinzip 1.4"
-    location:
-      label: "§ 47 Abs. 4"
-      offsetFrom: 105210
-      offsetTo: 105664
+    id: "cb02c0a6-abab-4188-bce6-8f451239fc22"
+    locationLabel: "§ 47 Abs. 4"
     reasoning: "Die Vorschrift verlangt verständliche, klare und einfache Sprache sowie mündliche/bildliche Bereitstellung, adressiert aber nicht explizit Barrierefreiheit im Sinne des § 12a BGG (z. B. Gebärdensprache, Screenreader-taugliche Formate für blinde Menschen)."
     hint: "Ausdrücklichen Verweis auf § 12a BGG aufnehmen, damit Informationsmaterialien von vornherein barrierefrei (Leichte Sprache, Gebärdensprachvideos, barrierefreie digitale Formate) bereitgestellt werden."
   - type: "Digitalcheck"
     tag: "Prinzip 1.5"
-    location:
-      label: "§ 38 Abs. 5"
-      offsetFrom: 86458
-      offsetTo: 86794
+    id: "a81f36f9-5d00-48f8-bb89-e10d91562fc8"
+    locationLabel: "§ 38 Abs. 5"
     reasoning: "Die kaskadierenden, in Werktagen bemessenen Fristen mit mehrfachen Verweisen auf andere Absätze sind für Betroffene kaum nachvollziehbar und erschweren eine nutzerfreundliche, verständliche Umsetzung."
     hint: "Fristen vereinheitlichen bzw. durch ein digitales Fristen-Tracking-Tool im Verfahren begleiten, das dem Ausländer den maßgeblichen Stichtag automatisch und verständlich anzeigt."
   - type: "Digitalcheck"
     tag: "Prinzip 2.1"
-    location:
-      label: "§ 44 Abs. 1a"
-      offsetFrom: 91458
-      offsetTo: 91793
+    id: "9869f2a8-2fc8-4d9a-94b4-33f5836be8db"
+    locationLabel: "§ 44 Abs. 1a"
     reasoning: "Mit der 'Aufnahmeeinrichtung zur Durchführung von Verfahren bei Sekundärmigration' wird ein weiterer, ähnlich klingender Einrichtungstyp neben 'Aufnahmeeinrichtung' und 'besonderer Aufnahmeeinrichtung' (§ 5 Abs. 5) eingeführt, ohne die Begriffe im Gesetz einheitlich abzugrenzen."
     hint: "Einrichtungstypen in einer zentralen Begriffsbestimmung klar voneinander abgrenzen und einheitlich referenzieren, um Verwechslungen im Vollzug und bei der Systemabbildung zu vermeiden."
   - type: "Digitalcheck"
     tag: "Prinzip 2.2"
-    location:
-      label: "§ 20 Abs. 2"
-      offsetFrom: 61034
-      offsetTo: 61200
+    id: "c1963c03-6a9a-4855-a98d-43e08be55fe2"
+    locationLabel: "§ 20 Abs. 2"
     reasoning: "Die Mitteilung der Weiterleitung und Antragstellung zwischen Behörde und Aufnahmeeinrichtung erfolgt schriftlich statt über einen strukturierten, wiederverwendbaren digitalen Datensatz."
     hint: "Digitalen Datenaustausch zwischen den beteiligten Behörden vorsehen (z. B. über eine gemeinsame Fachanwendung), sodass bereits erfasste Daten nicht erneut schriftlich übermittelt werden müssen."
   - type: "Digitalcheck"
     tag: "Prinzip 2.3"
-    location:
-      label: "§ 62 Abs. 1"
-      offsetFrom: 126024
-      offsetTo: 126255
+    id: "9f3b4abf-c9f2-47ca-a63d-1cb688d569a0"
+    locationLabel: "§ 62 Abs. 1"
     reasoning: "Für die verpflichtende Gesundheitsuntersuchung fehlt eine Regelung, wie die erhobenen Untersuchungsergebnisse strukturiert für eine spätere Nachnutzung durch andere zuständige Stellen (z. B. Gesundheitsämter) bereitgestellt werden."
     hint: "Vorgeben, dass Untersuchungsergebnisse in einem strukturierten, wiederverwendbaren Format dokumentiert und den zuständigen Gesundheitsbehörden zugänglich gemacht werden, um Doppeluntersuchungen zu vermeiden."
   - type: "Digitalcheck"
     tag: "Prinzip 2.4"
-    location:
-      label: "§ 46 Abs. 4"
-      offsetFrom: 98480
-      offsetTo: 98771
+    id: "f2cd0df0-4a9b-4f22-bbe6-8cbff2b02e2e"
+    locationLabel: "§ 46 Abs. 4"
     reasoning: "Die Pflicht der Länder zur laufenden Unterrichtung der zentralen Verteilungsstelle über Belegungsstände nennt kein technisches Austauschformat oder keinen Standard, wodurch uneinheitliche Schnittstellen zwischen den Ländern drohen."
     hint: "Auf einen bestehenden technischen Standard (z. B. über die FITKO oder ein XÖV-Standarddatenformat) für die Belegungsdatenübermittlung verweisen, um eine einheitliche technische Anbindung sicherzustellen."
   - type: "Digitalcheck"
     tag: "Prinzip 4.2"
-    location:
-      label: "§ 60 Abs. 3"
-      offsetFrom: 121584
-      offsetTo: 121730
+    id: "6975e508-3d51-433b-80be-669add4364f4"
+    locationLabel: "§ 60 Abs. 3"
     reasoning: "Die Zuständigkeit für Auflagenmaßnahmen liegt bei der jeweils örtlichen Ausländerbehörde, wodurch eine standardisierbare, hochvolumige Aufgabe auf viele einzelne Stellen verteilt statt gebündelt bearbeitet wird."
     hint: "Prüfen, ob solche Maßnahmen bei einer zentraleren oder zumindest technisch stärker vernetzten Stelle gebündelt werden können, um Bearbeitung und IT-Unterstützung zu vereinheitlichen."
   - type: "Digitalcheck"
     tag: "Prinzip 4.4"
-    location:
-      label: "§ 57 Abs. 1"
-      offsetFrom: 113714
-      offsetTo: 114045
+    id: "e908743e-39b7-470e-ad1a-6ad4d1b80461"
+    locationLabel: "§ 57 Abs. 1"
     reasoning: "Unbestimmte Rechtsbegriffe wie 'hinreichend begründete dringende und schwerwiegende familiäre Gründe' oder 'sonstige zwingende Gründe' erfordern durchgehend Einzelfallermessen und verhindern eine automatisierte Vorprüfung oder Bescheidung."
     hint: "Regelbeispiele oder klar definierte Fallgruppen ergänzen, die als gebundene Entscheidung automatisiert vorgeprüft werden können, während echte Ausnahmefälle weiterhin im Ermessen verbleiben."
   - type: "Digitalcheck"
     tag: "Prinzip 5.2"
-    location:
-      label: "§ 8 Abs. 1c"
-      offsetFrom: 20462
-      offsetTo: 21104
+    id: "5523a6fa-c127-4529-8ef3-515ef4dd8150"
+    locationLabel: "§ 8 Abs. 1c"
     reasoning: "Sensible personenbezogene Daten (u. a. zu Ausreise ins Herkunftsland) werden zwischen einer Vielzahl unterschiedlicher Stellen (Grundsicherungsträger, Grenzkontrollbehörden, Ausländerbehörden, Auslandsvertretungen) ausgetauscht, ohne dass ein sicherer Übermittlungsstandard vorgegeben wird."
     hint: "Verbindliche technische und organisatorische Mindestanforderungen (z. B. verschlüsselte Fachverfahrensanbindung) für die Übermittlung nach BSI-Empfehlungen festschreiben oder referenzieren."
   - type: "Digitalcheck"
     tag: "EU-Interoperabilität"
-    location:
-      label: "§ 8 Abs. 1b"
-      offsetFrom: 19987
-      offsetTo: 20454
+    id: "13a867c9-beda-4290-96d0-0c6ed3064151"
+    locationLabel: "§ 8 Abs. 1b"
     reasoning: "Die Übermittlung der nach mehreren EU-Rechtsakten erhobenen personenbezogenen Daten an das Bundesamt wird inhaltlich geregelt, ohne auf einheitliche semantische oder technische Schnittstellenstandards für den Datenaustausch zu verweisen."
     hint: "Auf gemeinsame EU-Interoperabilitätsstandards (z. B. einheitliche Datenfelder/Schnittstellen im Rahmen des Eurodac- bzw. Asyl- und Migrationsmanagementsystems) verweisen, um eine konsistente technische Anbindung sicherzustellen."
 ---
@@ -643,11 +615,11 @@ Die für die Einleitung eines Strafverfahrens zuständigen Stellen haben in Stra
 
 (1b)
 
-Die nach Artikel 12 Absatz 1 Satz 1 und Absatz 3 Satz 1 der Verordnung (EU) 2024/1356, nach den Artikeln 24 und 25 der Richtlinie (EU) 2024/1346 und nach Artikel 20 Absatz 1 Satz 1 der Verordnung (EU) 2024/1348 durch eine Bundes- oder Landesbehörde erhobenen personenbezogenen Daten werden dem Bundesamt zur Erfüllung seiner Aufgaben nach § 5 Absatz 1 übermittelt und dürfen nur zu diesem Zweck verarbeitet werden und sind durch das Bundesamt anschließend zu löschen.
+<!--finding:13a867c9-beda-4290-96d0-0c6ed3064151:start-->Die nach Artikel 12 Absatz 1 Satz 1 und Absatz 3 Satz 1 der Verordnung (EU) 2024/1356, nach den Artikeln 24 und 25 der Richtlinie (EU) 2024/1346 und nach Artikel 20 Absatz 1 Satz 1 der Verordnung (EU) 2024/1348 durch eine Bundes- oder Landesbehörde erhobenen personenbezogenen Daten werden dem Bundesamt zur Erfüllung seiner Aufgaben nach § 5 Absatz 1 übermittelt und dürfen nur zu diesem Zweck verarbeitet werden und sind durch das Bundesamt anschließend zu löschen.<!--finding:13a867c9-beda-4290-96d0-0c6ed3064151:end-->
 
 (1c)
 
-Die Träger der Grundsicherung für Arbeitsuchende, die mit der polizeilichen Kontrolle des grenzüberschreitenden Verkehrs beauftragten Behörden, die Ausländerbehörden und die deutschen Auslandsvertretungen teilen den mit der Ausführung dieses Gesetzes betrauten Behörden mit, wenn sie von Umständen Kenntnis erlangt haben, dass ein Ausländer, der einen Asylantrag gestellt hat, ein Asylberechtigter oder ein Ausländer, dem internationaler Schutz im Sinne des § 1 Absatz 1 Nummer 2 zuerkannt oder für den ein Abschiebungsverbot nach § 60 Absatz 5 oder Absatz 7 des Aufenthaltsgesetzes festgestellt worden ist, in sein Herkunftsland gereist ist. Die nach Satz 1 übermittelten personenbezogenen Daten dürfen nur für die Prüfung verarbeitet werden, ob die Voraussetzungen für die Erklärung der stillschweigenden Rücknahme nach Artikel 41 Absatz 1 der Verordnung (EU) 2024/1348 oder für einen Entzug der Asylberechtigung oder des internationalen Schutzes oder für einen Widerruf oder eine Rücknahme der Feststellung eines Abschiebungsverbots nach § 60 Absatz 5 oder Absatz 7 des Aufenthaltsgesetzes vorliegen.
+<!--finding:5523a6fa-c127-4529-8ef3-515ef4dd8150:start-->Die Träger der Grundsicherung für Arbeitsuchende, die mit der polizeilichen Kontrolle des grenzüberschreitenden Verkehrs beauftragten Behörden, die Ausländerbehörden und die deutschen Auslandsvertretungen teilen den mit der Ausführung dieses Gesetzes betrauten Behörden mit, wenn sie von Umständen Kenntnis erlangt haben, dass ein Ausländer, der einen Asylantrag gestellt hat, ein Asylberechtigter oder ein Ausländer, dem internationaler Schutz im Sinne des § 1 Absatz 1 Nummer 2 zuerkannt oder für den ein Abschiebungsverbot nach § 60 Absatz 5 oder Absatz 7 des Aufenthaltsgesetzes festgestellt worden ist, in sein Herkunftsland gereist ist.<!--finding:5523a6fa-c127-4529-8ef3-515ef4dd8150:end--> Die nach Satz 1 übermittelten personenbezogenen Daten dürfen nur für die Prüfung verarbeitet werden, ob die Voraussetzungen für die Erklärung der stillschweigenden Rücknahme nach Artikel 41 Absatz 1 der Verordnung (EU) 2024/1348 oder für einen Entzug der Asylberechtigung oder des internationalen Schutzes oder für einen Widerruf oder eine Rücknahme der Feststellung eines Abschiebungsverbots nach § 60 Absatz 5 oder Absatz 7 des Aufenthaltsgesetzes vorliegen.
 
 (2)
 
@@ -712,7 +684,7 @@ Müsste eine Zustellung außerhalb des Bundesgebiets erfolgen, so ist durch öff
 
 (7)
 
-Der Ausländer ist bei der Antragstellung schriftlich und gegen Empfangsbestätigung auf diese Zustellungsvorschriften hinzuweisen.
+<!--finding:1f9d13bb-9f6a-4021-8fb2-b360330d9df7:start-->Der Ausländer ist bei der Antragstellung schriftlich und gegen Empfangsbestätigung auf diese Zustellungsvorschriften hinzuweisen.<!--finding:1f9d13bb-9f6a-4021-8fb2-b360330d9df7:end-->
 
 § 11 Ausschluss des Widerspruchs
 
@@ -778,7 +750,7 @@ Zuständig für die Registrierung des Asylantrags nach Artikel 27 der Verordnung
 
 (1)
 
-Der Asylantrag ist persönlich bei der Außenstelle des Bundesamtes einzureichen, die der für die Aufnahme des Ausländers zuständigen Aufnahmeeinrichtung zugeordnet ist. Das Bundesamt kann den Ausländer in Abstimmung mit der von der obersten Landesbehörde bestimmten Stelle verpflichten, seinen Asylantrag bei einer anderen Außenstelle einzureichen. Der Ausländer ist vor der Einreichung schriftlich und gegen Empfangsbestätigung darauf hinzuweisen, dass nach Rücknahme oder unanfechtbarer Ablehnung seines Asylantrages die Erteilung eines Aufenthaltstitels gemäß § 10 Absatz 3 des Aufenthaltsgesetzes Beschränkungen unterliegt. In Fällen des Absatzes 2 Satz 1 Nr. 2 ist der Hinweis unverzüglich nachzuholen.
+<!--finding:96359724-9e30-4476-8ca8-50075bf8cbf2:start-->Der Asylantrag ist persönlich bei der Außenstelle des Bundesamtes einzureichen, die der für die Aufnahme des Ausländers zuständigen Aufnahmeeinrichtung zugeordnet ist.<!--finding:96359724-9e30-4476-8ca8-50075bf8cbf2:end--> Das Bundesamt kann den Ausländer in Abstimmung mit der von der obersten Landesbehörde bestimmten Stelle verpflichten, seinen Asylantrag bei einer anderen Außenstelle einzureichen. Der Ausländer ist vor der Einreichung schriftlich und gegen Empfangsbestätigung darauf hinzuweisen, dass nach Rücknahme oder unanfechtbarer Ablehnung seines Asylantrages die Erteilung eines Aufenthaltstitels gemäß § 10 Absatz 3 des Aufenthaltsgesetzes Beschränkungen unterliegt. In Fällen des Absatzes 2 Satz 1 Nr. 2 ist der Hinweis unverzüglich nachzuholen.
 
 (2)
 
@@ -1081,7 +1053,7 @@ Der Ausländer ist verpflichtet, der Weiterleitung nach § 18 Absatz 1 oder § 1
 
 (2)
 
-Die Behörde, die den Ausländer an eine Aufnahmeeinrichtung weiterleitet, teilt dieser unverzüglich die Weiterleitung und die Stellung des Asylantrags schriftlich mit. Die Aufnahmeeinrichtung unterrichtet unverzüglich, spätestens nach Ablauf einer Woche nach Eingang der Mitteilung nach Satz 1, die ihr zugeordnete Außenstelle des Bundesamtes darüber, ob der Ausländer in der Aufnahmeeinrichtung aufgenommen worden ist, und leitet ihr die Mitteilung nach Satz 1 zu.
+<!--finding:c1963c03-6a9a-4855-a98d-43e08be55fe2:start-->Die Behörde, die den Ausländer an eine Aufnahmeeinrichtung weiterleitet, teilt dieser unverzüglich die Weiterleitung und die Stellung des Asylantrags schriftlich mit.<!--finding:c1963c03-6a9a-4855-a98d-43e08be55fe2:end--> Die Aufnahmeeinrichtung unterrichtet unverzüglich, spätestens nach Ablauf einer Woche nach Eingang der Mitteilung nach Satz 1, die ihr zugeordnete Außenstelle des Bundesamtes darüber, ob der Ausländer in der Aufnahmeeinrichtung aufgenommen worden ist, und leitet ihr die Mitteilung nach Satz 1 zu.
 
 § 21 Verwahrung und Weitergabe von Unterlagen
 
@@ -1403,7 +1375,7 @@ Abweichend von § 59 Absatz 1 Satz 1 des Aufenthaltsgesetzes wird dem Ausländer
 
 (5)
 
-Abweichend von Absatz 1 gilt für Entscheidungen im Rahmen des Asylgrenzverfahrens nach Artikel 44 Absatz 1 Buchstabe a der Verordnung (EU) 2024/1348 die Regelung in Artikel 4 Absatz 5 der Verordnung (EU) 2024/1349. Der zur Gewährung einer Frist für die freiwillige Ausreise erforderliche Antrag ist vom Ausländer beim Bundesamt zu stellen. Der Antrag soll vom Ausländer spätestens drei Arbeitstage nach Verstreichen der Frist des § 18a Absatz 4 Satz 1 beziehungsweise für den Fall, dass ein Antrag auf Gewährung vorläufigen Rechtsschutzes gestellt wurde, spätestens drei Arbeitstage nach der Zustellung der Entscheidung des Gerichts nach § 18a Absatz 4 Satz 6 gestellt werden. Handelt es sich bei dem Ausländer um einen unbegleiteten Minderjährigen, soll der Antrag abweichend von Satz 3 spätestens drei Arbeitstage nach Verstreichen der Frist des § 18a Absatz 7 Satz 2 beziehungsweise für den Fall, dass Klage erhoben wurde, spätestens drei Arbeitstage nach der Zustellung der Entscheidung des Gerichts nach § 18a Absatz 7 Satz 3 gestellt werden. Nach Ablauf der Frist des Satzes 3 beziehungsweise des Satzes 4 ist ein Antrag auf Gewährung einer Frist zur freiwilligen Ausreise unzulässig. Das Bundesamt hat über den Antrag nach Satz 2 innerhalb von drei Arbeitstagen zu entscheiden. Der Ausländer ist über das Recht zur Stellung eines Antrags zur Gewährung einer Frist zur freiwilligen Ausreise und über die Rechtsfolgen der unterlassenen oder verspäteten Antragstellung spätestens bei der Registrierung seines Asylantrags in einer Sprache, die er versteht oder von der vernünftigerweise vorausgesetzt werden darf, dass er sie versteht, zu belehren. Ist die Belehrung unterblieben oder unrichtig erteilt, findet Satz 5 keine Anwendung. § 59 Absatz 1 Satz 4 des Aufenthaltsgesetzes findet entsprechende Anwendung.
+Abweichend von Absatz 1 gilt für Entscheidungen im Rahmen des Asylgrenzverfahrens nach Artikel 44 Absatz 1 Buchstabe a der Verordnung (EU) 2024/1348 die Regelung in Artikel 4 Absatz 5 der Verordnung (EU) 2024/1349. Der zur Gewährung einer Frist für die freiwillige Ausreise erforderliche Antrag ist vom Ausländer beim Bundesamt zu stellen. <!--finding:a81f36f9-5d00-48f8-bb89-e10d91562fc8:start-->Der Antrag soll vom Ausländer spätestens drei Arbeitstage nach Verstreichen der Frist des § 18a Absatz 4 Satz 1 beziehungsweise für den Fall, dass ein Antrag auf Gewährung vorläufigen Rechtsschutzes gestellt wurde, spätestens drei Arbeitstage nach der Zustellung der Entscheidung des Gerichts nach § 18a Absatz 4 Satz 6 gestellt werden.<!--finding:a81f36f9-5d00-48f8-bb89-e10d91562fc8:end--> Handelt es sich bei dem Ausländer um einen unbegleiteten Minderjährigen, soll der Antrag abweichend von Satz 3 spätestens drei Arbeitstage nach Verstreichen der Frist des § 18a Absatz 7 Satz 2 beziehungsweise für den Fall, dass Klage erhoben wurde, spätestens drei Arbeitstage nach der Zustellung der Entscheidung des Gerichts nach § 18a Absatz 7 Satz 3 gestellt werden. Nach Ablauf der Frist des Satzes 3 beziehungsweise des Satzes 4 ist ein Antrag auf Gewährung einer Frist zur freiwilligen Ausreise unzulässig. Das Bundesamt hat über den Antrag nach Satz 2 innerhalb von drei Arbeitstagen zu entscheiden. Der Ausländer ist über das Recht zur Stellung eines Antrags zur Gewährung einer Frist zur freiwilligen Ausreise und über die Rechtsfolgen der unterlassenen oder verspäteten Antragstellung spätestens bei der Registrierung seines Asylantrags in einer Sprache, die er versteht oder von der vernünftigerweise vorausgesetzt werden darf, dass er sie versteht, zu belehren. Ist die Belehrung unterblieben oder unrichtig erteilt, findet Satz 5 keine Anwendung. § 59 Absatz 1 Satz 4 des Aufenthaltsgesetzes findet entsprechende Anwendung.
 
 § 39 Zuständigkeit der Ausländerbehörden bei Aufenthaltsbeendigung
 
@@ -1457,7 +1429,7 @@ Die Länder sind verpflichtet, für die Unterbringung von Ausländern die dazu e
 
 (1a)
 
-Die Länder können zur Durchführung von Verfahren bei Sekundärmigration Aufnahmeeinrichtungen für die Unterbringung von Ausländern einrichten, die sich nach Artikel 17 Absatz 4 der Verordnung (EU) 2024/1351 in einem anderen Mitgliedstaat aufzuhalten haben oder denen ein anderer Mitgliedstaat bereits internationalen Schutz gewährt hat.
+<!--finding:9869f2a8-2fc8-4d9a-94b4-33f5836be8db:start-->Die Länder können zur Durchführung von Verfahren bei Sekundärmigration Aufnahmeeinrichtungen für die Unterbringung von Ausländern einrichten, die sich nach Artikel 17 Absatz 4 der Verordnung (EU) 2024/1351 in einem anderen Mitgliedstaat aufzuhalten haben oder denen ein anderer Mitgliedstaat bereits internationalen Schutz gewährt hat.<!--finding:9869f2a8-2fc8-4d9a-94b4-33f5836be8db:end-->
 
 (2)
 
@@ -1465,7 +1437,7 @@ Die Länder sollen geeignete Maßnahmen treffen, um bei der Unterbringung von Au
 
 (3)
 
-§ 45 des Achten Buches Sozialgesetzbuch (Artikel 1 des Gesetzes vom 26. Juni 1990, BGBl. I S. 1163) gilt nicht für Aufnahmeeinrichtungen. Träger von Aufnahmeeinrichtungen sollen sich von Personen, die in diesen Einrichtungen mit der Beaufsichtigung, Betreuung, Erziehung oder Ausbildung Minderjähriger oder mit Tätigkeiten, die in vergleichbarer Weise geeignet sind, Kontakt zu Minderjährigen aufzunehmen, betraut sind, zur Prüfung, ob sie für die aufgeführten Tätigkeiten geeignet sind, vor deren Einstellung oder Aufnahme einer dauerhaften ehrenamtlichen Tätigkeit und in regelmäßigen Abständen ein Führungszeugnis nach § 30 Absatz 5 und § 30a Absatz 1 des Bundeszentralregistergesetzes vorlegen lassen. Träger von Aufnahmeeinrichtungen dürfen für die Tätigkeiten nach Satz 2 keine Personen beschäftigen oder mit diesen Tätigkeiten ehrenamtlich betrauen, die rechtskräftig wegen einer Straftat nach den §§ 171, 174 bis 174c, 176 bis 180a, 181a, 182 bis 184g, 184i bis 184l, 225, 232 bis 233a, 234, 235 oder 236 des Strafgesetzbuchs verurteilt worden sind. Nimmt der Träger einer Aufnahmeeinrichtung Einsicht in ein Führungszeugnis nach § 30 Absatz 5 und § 30a Absatz 1 des Bundeszentralregistergesetzes, so speichert er nur den Umstand der Einsichtnahme, das Datum des Führungszeugnisses und die Information, ob die das Führungszeugnis betreffende Person wegen einer in Satz 3 genannten Straftat rechtskräftig verurteilt worden ist. Der Träger einer Aufnahmeeinrichtung darf diese Daten nur verarbeiten, soweit dies zur Prüfung der Eignung einer Person für die in Satz 2 genannten Tätigkeiten erforderlich ist. Die Daten sind vor dem Zugriff Unbefugter zu schützen. Sie sind unverzüglich zu löschen, wenn im Anschluss an die Einsichtnahme keine Tätigkeit nach Satz 2 wahrgenommen wird. Sie sind spätestens sechs Monate nach der letztmaligen Ausübung einer in Satz 2 genannten Tätigkeit zu löschen.
+§ 45 des Achten Buches Sozialgesetzbuch (Artikel 1 des Gesetzes vom 26. Juni 1990, BGBl. I S. 1163) gilt nicht für Aufnahmeeinrichtungen. <!--finding:9a1229c3-862d-41bb-bc6c-ad574d27ba69:start-->Träger von Aufnahmeeinrichtungen sollen sich von Personen, die in diesen Einrichtungen mit der Beaufsichtigung, Betreuung, Erziehung oder Ausbildung Minderjähriger oder mit Tätigkeiten, die in vergleichbarer Weise geeignet sind, Kontakt zu Minderjährigen aufzunehmen, betraut sind, zur Prüfung, ob sie für die aufgeführten Tätigkeiten geeignet sind, vor deren Einstellung oder Aufnahme einer dauerhaften ehrenamtlichen Tätigkeit und in regelmäßigen Abständen ein Führungszeugnis nach § 30 Absatz 5 und § 30a Absatz 1 des Bundeszentralregistergesetzes vorlegen lassen.<!--finding:9a1229c3-862d-41bb-bc6c-ad574d27ba69:end--> Träger von Aufnahmeeinrichtungen dürfen für die Tätigkeiten nach Satz 2 keine Personen beschäftigen oder mit diesen Tätigkeiten ehrenamtlich betrauen, die rechtskräftig wegen einer Straftat nach den §§ 171, 174 bis 174c, 176 bis 180a, 181a, 182 bis 184g, 184i bis 184l, 225, 232 bis 233a, 234, 235 oder 236 des Strafgesetzbuchs verurteilt worden sind. Nimmt der Träger einer Aufnahmeeinrichtung Einsicht in ein Führungszeugnis nach § 30 Absatz 5 und § 30a Absatz 1 des Bundeszentralregistergesetzes, so speichert er nur den Umstand der Einsichtnahme, das Datum des Führungszeugnisses und die Information, ob die das Führungszeugnis betreffende Person wegen einer in Satz 3 genannten Straftat rechtskräftig verurteilt worden ist. Der Träger einer Aufnahmeeinrichtung darf diese Daten nur verarbeiten, soweit dies zur Prüfung der Eignung einer Person für die in Satz 2 genannten Tätigkeiten erforderlich ist. Die Daten sind vor dem Zugriff Unbefugter zu schützen. Sie sind unverzüglich zu löschen, wenn im Anschluss an die Einsichtnahme keine Tätigkeit nach Satz 2 wahrgenommen wird. Sie sind spätestens sechs Monate nach der letztmaligen Ausübung einer in Satz 2 genannten Tätigkeit zu löschen.
 
 (4)
 
@@ -1505,7 +1477,7 @@ Die veranlassende Aufnahmeeinrichtung teilt der zentralen Verteilungsstelle nur 
 
 (4)
 
-Die Länder stellen sicher, dass die zentrale Verteilungsstelle jederzeit über die für die Bestimmung der zuständigen Aufnahmeeinrichtung erforderlichen Angaben, insbesondere über Zu- und Abgänge, Belegungsstand und alle freien Unterbringungsplätze jeder Aufnahmeeinrichtung unterrichtet ist.
+<!--finding:f2cd0df0-4a9b-4f22-bbe6-8cbff2b02e2e:start-->Die Länder stellen sicher, dass die zentrale Verteilungsstelle jederzeit über die für die Bestimmung der zuständigen Aufnahmeeinrichtung erforderlichen Angaben, insbesondere über Zu- und Abgänge, Belegungsstand und alle freien Unterbringungsplätze jeder Aufnahmeeinrichtung unterrichtet ist.<!--finding:f2cd0df0-4a9b-4f22-bbe6-8cbff2b02e2e:end-->
 
 (5)
 
@@ -1554,7 +1526,7 @@ Für die Dauer der Pflicht, in einer Aufnahmeeinrichtung zu wohnen, ist der Ausl
 
 (4)
 
-Die Aufnahmeeinrichtung weist den Ausländer innerhalb der Frist für die Registrierung des Asylantrags nach Artikel 27 der Verordnung (EU) 2024/1348 nach der Asylantragstellung möglichst schriftlich in transparenter, verständlicher und leicht zugänglicher Form, unter Verwendung einer klaren und einfachen Ausdrucksweise und in einer Sprache, deren Kenntnis vernünftigerweise vorausgesetzt werden kann, auf seine Rechte und Pflichten bei der Aufnahme hin. Erforderlichenfalls werden diese Informationen auch zunächst mündlich oder bildlich bereitgestellt und an die Bedürfnisse des Ausländers angepasst. Die Aufnahmeeinrichtung benennt in dem Hinweis nach Satz 1 auch, wer dem Ausländer Rechtsberatung und -vertretung gewähren kann, darunter auch Vereinigungen, die eine solche Rechtsberatung und -vertretung unentgeltlich erbringen, und welche Vereinigungen den Ausländer über seine Rechten und Pflichten bei der Aufnahme, einschließlich medizinischer Versorgung beraten können.
+<!--finding:cb02c0a6-abab-4188-bce6-8f451239fc22:start-->Die Aufnahmeeinrichtung weist den Ausländer innerhalb der Frist für die Registrierung des Asylantrags nach Artikel 27 der Verordnung (EU) 2024/1348 nach der Asylantragstellung möglichst schriftlich in transparenter, verständlicher und leicht zugänglicher Form, unter Verwendung einer klaren und einfachen Ausdrucksweise und in einer Sprache, deren Kenntnis vernünftigerweise vorausgesetzt werden kann, auf seine Rechte und Pflichten bei der Aufnahme hin.<!--finding:cb02c0a6-abab-4188-bce6-8f451239fc22:end--> Erforderlichenfalls werden diese Informationen auch zunächst mündlich oder bildlich bereitgestellt und an die Bedürfnisse des Ausländers angepasst. Die Aufnahmeeinrichtung benennt in dem Hinweis nach Satz 1 auch, wer dem Ausländer Rechtsberatung und -vertretung gewähren kann, darunter auch Vereinigungen, die eine solche Rechtsberatung und -vertretung unentgeltlich erbringen, und welche Vereinigungen den Ausländer über seine Rechten und Pflichten bei der Aufnahme, einschließlich medizinischer Versorgung beraten können.
 
 § 48 Beendigung der Verpflichtung, in einer Aufnahmeeinrichtung zu wohnen
 
@@ -1683,7 +1655,7 @@ Wenn der Ausländer verpflichtet ist, in dem Bezirk einer anderen Ausländerbeh�
 
 (1)
 
-Das Bundesamt erlaubt einem Ausländer, der verpflichtet ist, in einer Aufnahmeeinrichtung zu wohnen, den Geltungsbereich der Aufenthaltsgestattung vorübergehend zu verlassen, wenn hinreichend begründete dringende und schwerwiegende familiäre Gründe, notwendige medizinische Behandlungen oder sonstige zwingende Gründe es erfordern.
+<!--finding:e908743e-39b7-470e-ad1a-6ad4d1b80461:start-->Das Bundesamt erlaubt einem Ausländer, der verpflichtet ist, in einer Aufnahmeeinrichtung zu wohnen, den Geltungsbereich der Aufenthaltsgestattung vorübergehend zu verlassen, wenn hinreichend begründete dringende und schwerwiegende familiäre Gründe, notwendige medizinische Behandlungen oder sonstige zwingende Gründe es erfordern.<!--finding:e908743e-39b7-470e-ad1a-6ad4d1b80461:end-->
 
 (2)
 
@@ -1794,7 +1766,7 @@ Eine Anhörung des Ausländers ist erforderlich in den Fällen des Satzes 1 Numm
 
 (3)
 
-Zuständig für Maßnahmen nach Absatz 1 Satz 1 ist die nach § 50 zuständige Landesbehörde. Die Wohnsitzauflage soll mit der Zuweisungsentscheidung nach § 50 verbunden werden. Zuständig für Maßnahmen nach Absatz 1 Satz 2 ist die nach § 51 Absatz 2 Satz 2 zuständige Landesbehörde. Die Wohnsitzauflage soll mit der Verteilungsentscheidung nach § 51 Absatz 2 Satz 2 verbunden werden. Zuständig für Maßnahmen nach Absatz 2 ist die Ausländerbehörde, in deren Bezirk die Gemeinde oder die zu beziehende Wohnung oder Unterkunft liegt.
+Zuständig für Maßnahmen nach Absatz 1 Satz 1 ist die nach § 50 zuständige Landesbehörde. Die Wohnsitzauflage soll mit der Zuweisungsentscheidung nach § 50 verbunden werden. Zuständig für Maßnahmen nach Absatz 1 Satz 2 ist die nach § 51 Absatz 2 Satz 2 zuständige Landesbehörde. Die Wohnsitzauflage soll mit der Verteilungsentscheidung nach § 51 Absatz 2 Satz 2 verbunden werden. <!--finding:6975e508-3d51-433b-80be-669add4364f4:start-->Zuständig für Maßnahmen nach Absatz 2 ist die Ausländerbehörde, in deren Bezirk die Gemeinde oder die zu beziehende Wohnung oder Unterkunft liegt.<!--finding:6975e508-3d51-433b-80be-669add4364f4:end-->
 
 § 61 Erwerbstätigkeit
 
@@ -1837,7 +1809,7 @@ Im Übrigen ist einem Ausländer im Asylverfahren, der sich seit drei Monaten ge
 
 (1)
 
-Ausländer, die in einer Aufnahmeeinrichtung oder Gemeinschaftsunterkunft zu wohnen haben, sind verpflichtet, eine ärztliche Untersuchung auf übertragbare Krankheiten einschließlich einer Röntgenaufnahme der Atmungsorgane zu dulden. Die oberste Landesgesundheitsbehörde oder die von ihr bestimmte Stelle bestimmt den Umfang der Untersuchung und den Arzt, der die Untersuchung durchführt.
+<!--finding:9f3b4abf-c9f2-47ca-a63d-1cb688d569a0:start-->Ausländer, die in einer Aufnahmeeinrichtung oder Gemeinschaftsunterkunft zu wohnen haben, sind verpflichtet, eine ärztliche Untersuchung auf übertragbare Krankheiten einschließlich einer Röntgenaufnahme der Atmungsorgane zu dulden.<!--finding:9f3b4abf-c9f2-47ca-a63d-1cb688d569a0:end--> Die oberste Landesgesundheitsbehörde oder die von ihr bestimmte Stelle bestimmt den Umfang der Untersuchung und den Arzt, der die Untersuchung durchführt.
 
 (2)
 
@@ -1874,7 +1846,7 @@ Im Übrigen gilt § 78a Absatz 5 des Aufenthaltsgesetzes entsprechend.
 
 (1)
 
-Einem Ausländer, der einen Asylantrag gestellt hat und dessen Asylantrag registriert wurde, der den Asylantrag aber noch nicht eingereicht hat, wird bei der Registrierung des Antrags nach Artikel 27 der Verordnung (EU) 2024/1348 eine Bescheinigung über die Meldung als Asylantragsteller (Ankunftsnachweis) im Sinne von Artikel 29 Absatz 1 der Verordnung (EU) 2024/1348 ausgestellt. Dieses Dokument enthält folgende sichtbar aufgebrachte Angaben:
+<!--finding:f9107967-1e7a-467a-93c3-6f7f9a94ce00:start-->Einem Ausländer, der einen Asylantrag gestellt hat und dessen Asylantrag registriert wurde, der den Asylantrag aber noch nicht eingereicht hat, wird bei der Registrierung des Antrags nach Artikel 27 der Verordnung (EU) 2024/1348 eine Bescheinigung über die Meldung als Asylantragsteller (Ankunftsnachweis) im Sinne von Artikel 29 Absatz 1 der Verordnung (EU) 2024/1348 ausgestellt.<!--finding:f9107967-1e7a-467a-93c3-6f7f9a94ce00:end--> Dieses Dokument enthält folgende sichtbar aufgebrachte Angaben:
 
 1.  1.
     Name und Vornamen,

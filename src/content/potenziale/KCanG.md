@@ -4,98 +4,74 @@ eli: "eli/bund/bgbl-1/2024/109-2/2025-01-01/1/deu"
 findings:
   - type: "Digitalcheck"
     tag: "Prinzip 1.1"
-    location:
-      label: "§ 22 Abs. 3 Nr. 5"
-      offsetFrom: 57617
-      offsetTo: 57798
+    id: "10608504-8f6f-4a9d-ae7e-92a360ac1b79"
+    locationLabel: "§ 22 Abs. 3 Nr. 5"
     reasoning: "Die eigenhändige Unterschrift auf der beim Transport mitzuführenden Transportbescheinigung erzwingt ein physisches Papierdokument und verhindert einen durchgängig digitalen Prozess für den Cannabis-Transport zwischen Teilen des befriedeten Besitztums."
     hint: "Eine elektronische Signatur oder eine digital abrufbare, qualifiziert signierte Transportbescheinigung (z. B. per App) als gleichwertige Alternative zur eigenhändigen Unterschrift zulassen."
   - type: "Digitalcheck"
     tag: "Prinzip 2.2"
-    location:
-      label: "§ 11 Abs. 4 Nr. 5"
-      offsetFrom: 25792
-      offsetTo: 26255
+    id: "603ce8c1-e2f8-44a1-828c-342068e42c35"
+    locationLabel: "§ 11 Abs. 4 Nr. 5"
     reasoning: "Antragstellende müssen Führungszeugnis und Gewerbezentralregisterauskunft eigenständig bei den jeweiligen Registerbehörden beantragen und vorlegen, obwohl die zuständige Erlaubnisbehörde diese Daten grundsätzlich per Direktabruf bei den Registern einholen könnte."
     hint: "Eine Rechtsgrundlage für den automatisierten Direktabruf von Führungszeugnis und Gewerbezentralregisterauskunft durch die Erlaubnisbehörde schaffen (Once-Only-Prinzip), statt die Vorlage durch die Antragstellenden zu verlangen."
   - type: "Digitalcheck"
     tag: "Prinzip 2.2"
-    location:
-      label: "§ 16 Abs. 3"
-      offsetFrom: 39816
-      offsetTo: 39957
+    id: "0b4788d3-3b9b-4edc-a1d0-d1d3c4f8d07b"
+    locationLabel: "§ 16 Abs. 3"
     reasoning: "Die Einhaltung des Verbots der Mehrfachmitgliedschaft in Anbauvereinigungen stützt sich ausschließlich auf eine Selbstauskunft der beitretenden Person, da kein zentrales Register zum Abgleich bestehender Mitgliedschaften existiert."
     hint: "Ein zentrales, datenschutzkonformes Register oder einen Abgleichmechanismus zwischen Anbauvereinigungen schaffen, um Mehrfachmitgliedschaften automatisiert zu erkennen, statt sich allein auf Selbstauskünfte zu verlassen."
   - type: "Digitalcheck"
     tag: "Prinzip 2.4"
-    location:
-      label: "§ 43 Abs. 3"
-      offsetFrom: 106298
-      offsetTo: 106519
+    id: "b699cda0-de33-43e9-855c-f9592da89e97"
+    locationLabel: "§ 43 Abs. 3"
     reasoning: "Für die jährliche elektronische Datenübermittlung der Landesbehörden an die vom Bundesministerium für Gesundheit benannte Evaluationsstelle wird kein einheitliches Datenformat oder technischer Standard vorgegeben, was die Zusammenführung der Daten aus 16 Bundesländern erschwert."
     hint: "Ein einheitliches, standardisiertes Datenformat (z. B. über XÖV/FITKO) für die Übermittlung der Evaluationsdaten festlegen oder in einer Rechtsverordnung referenzieren."
   - type: "Digitalcheck"
     tag: "Prinzip 3.1"
-    location:
-      label: "§ 26 Abs. 1"
-      offsetFrom: 62144
-      offsetTo: 62361
+    id: "9a236a58-a1cb-4873-a0ae-9da16d0261ed"
+    locationLabel: "§ 26 Abs. 1"
     reasoning: "Das Gesetz verpflichtet Anbauvereinigungen zu umfangreichen, fortlaufenden Dokumentationspflichten, ohne eine etablierte digitale Lösung oder Referenzsoftware für diese Nachweisführung vorzugeben oder bereitzustellen."
     hint: "Eine zentrale, öffentlich bereitgestellte oder empfohlene Software-/Meldeplattform für die Dokumentations- und Berichtspflichten der Anbauvereinigungen ermöglichen, um uneinheitliche Insellösungen zu vermeiden."
   - type: "Digitalcheck"
     tag: "Prinzip 4.1"
-    location:
-      label: "§ 33 Abs. 1 S. 2"
-      offsetFrom: 83735
-      offsetTo: 84228
+    id: "d2546003-8137-4914-824d-66613f2aac68"
+    locationLabel: "§ 33 Abs. 1 S. 2"
     reasoning: "Die länderübergreifende Zuständigkeitsregelung bei Anbauvereinigungen mit Besitztum in mehreren Ländern erfordert aufwändige Abstimmungsprozesse zwischen unterschiedlichen Landesbehörden, ohne dass ein einheitlicher, digital gestützter Zuständigkeits- oder Verfahrensablauf vorgesehen ist."
     hint: "Einen standardisierten, digital unterstützten Abstimmungsprozess (z. B. gemeinsame Fallakte/Schnittstelle) zwischen den beteiligten Landesbehörden für länderübergreifende Erlaubnisverfahren vorsehen."
   - type: "Digitalcheck"
     tag: "Prinzip 2.4"
-    location:
-      label: "§ 33 Abs. 1 S. 5"
-      offsetFrom: 84930
-      offsetTo: 85116
+    id: "566e4b62-51a1-433b-8f17-e108512ae600"
+    locationLabel: "§ 33 Abs. 1 S. 5"
     reasoning: "Die Übermittlung von Kontrollergebnissen zwischen den zuständigen Behörden unterschiedlicher Länder erfolgt ohne Vorgabe eines einheitlichen Datenformats oder einer technischen Schnittstelle."
     hint: "Einen standardisierten Datenaustauschstandard für die Übermittlung von Kontrollergebnissen zwischen Landesbehörden festlegen, um manuelle Mehrfacherfassung zu vermeiden."
   - type: "Digitalcheck"
     tag: "Prinzip 1.1"
-    location:
-      label: "§ 41 Abs. 3"
-      offsetFrom: 103328
-      offsetTo: 103450
+    id: "e1b98794-96a9-431d-b809-15682fc7942b"
+    locationLabel: "§ 41 Abs. 3"
     reasoning: "Der Antrag auf Feststellung der Tilgungsfähigkeit kann nur schriftlich oder mündlich zu Protokoll der Geschäftsstelle gestellt werden; eine elektronische Antragstellung ist nicht vorgesehen."
     hint: "Eine elektronische Antragstellung (z. B. über ein Online-Formular mit eID) als gleichwertige Alternative zur schriftlichen Einreichung oder Protokollerklärung ermöglichen."
   - type: "Digitalcheck"
     tag: "Prinzip 1.1"
-    location:
-      label: "§ 41 Abs. 2"
-      offsetFrom: 102570
-      offsetTo: 102690
+    id: "09ff1c10-59b3-4f62-86f9-a904c0bb3f3f"
+    locationLabel: "§ 41 Abs. 2"
     reasoning: "Die eidesstattliche Versicherung zur Glaubhaftmachung der Tilgungsvoraussetzungen muss vor der Staatsanwaltschaft abgegeben werden, was faktisch eine Präsenzpflicht der verurteilten Person begründet."
     hint: "Eine Abgabe der eidesstattlichen Versicherung auch über einen sicheren elektronischen Kanal (z. B. mit eID-Authentifizierung) ermöglichen, um die Präsenzpflicht zu vermeiden."
   - type: "Digitalcheck"
     tag: "Prinzip 1.3"
-    location:
-      label: "§ 42 Abs. 1"
-      offsetFrom: 104409
-      offsetTo: 104485
+    id: "5ac0caea-b8b7-44fb-a601-30f92706d014"
+    locationLabel: "§ 42 Abs. 1"
     reasoning: "Die Mitteilungspflicht der Staatsanwaltschaft an die Registerbehörde bei festgestellter Tilgungsfähigkeit ist ohne Vorgabe eines automatisierten, medienbruchfreien Übermittlungswegs ausgestaltet, obwohl es sich um einen strukturierten, hochvolumigen Verwaltungsvorgang handelt."
     hint: "Eine automatisierte, direkte Schnittstelle zwischen Staatsanwaltschaften und der Registerbehörde (Bundeszentralregister) für die Mitteilung der Tilgungsfähigkeit vorsehen, um manuelle Übertragungsfehler und Medienbrüche zu vermeiden."
   - type: "Digitalcheck"
     tag: "Prinzip 5.1"
-    location:
-      label: "§ 28 Abs. 4 Nr. 5"
-      offsetFrom: 76076
-      offsetTo: 76156
+    id: "86bb756d-3f35-4217-a312-4de5acaad1db"
+    locationLabel: "§ 28 Abs. 4 Nr. 5"
     reasoning: "Die Befugnis zur Erhebung personenbezogener Daten erstreckt sich auch auf 'sonstige im befriedeten Besitztum angetroffene Personen' – eine unbestimmte Kategorie, die über die für die Aufgabenerfüllung erforderlichen Personengruppen hinausgehen kann."
     hint: "Die Kategorie der erfassbaren Personen präziser eingrenzen oder an konkrete Anhaltspunkte für einen Bezug zur Tätigkeit der Anbauvereinigung knüpfen, um die datenschutzrechtliche Erforderlichkeit klarer zu begrenzen."
   - type: "Digitalcheck"
     tag: "Prinzip 1.4"
-    location:
-      label: "§ 8 Abs. 1 Nr. 1"
-      offsetFrom: 21265
-      offsetTo: 21384
+    id: "a5334b43-c6ee-473b-9f7e-37a5762b7d1e"
+    locationLabel: "§ 8 Abs. 1 Nr. 1"
     reasoning: "Die Vorgabe zur digitalen Informationsplattform der Bundeszentrale für gesundheitliche Aufklärung nennt zwar Nutzerfreundlichkeit und Adressatengerechtigkeit, verweist aber nicht explizit auf die Anforderungen der Barrierefreiheit nach § 12a BGG."
     hint: "Die Barrierefreiheitsanforderungen nach § 12a BGG (z. B. Gebärdensprache, Leichte Sprache, Screenreader-Kompatibilität) ausdrücklich für die digitale Plattform vorschreiben."
 ---
@@ -1071,8 +1047,8 @@ Die Bundeszentrale für gesundheitliche Aufklärung
 1.  1.
     
 
-    errichtet eine digitale Plattform, auf der sie Informationen
-    nutzerfreundlich und adressatengerecht bereitstellt zu
+    <!--finding:a5334b43-c6ee-473b-9f7e-37a5762b7d1e:start-->errichtet eine digitale Plattform, auf der sie Informationen
+    nutzerfreundlich und adressatengerecht bereitstellt zu<!--finding:a5334b43-c6ee-473b-9f7e-37a5762b7d1e:end-->
 
     1.  a)
         
@@ -1272,13 +1248,13 @@ enthalten:
 5.  5.
     
 
-    ein höchstens drei Monate vor der Antragstellung auf Erlaubnis
+    <!--finding:603ce8c1-e2f8-44a1-828c-342068e42c35:start-->ein höchstens drei Monate vor der Antragstellung auf Erlaubnis
     erteiltes Führungszeugnis zur Vorlage bei einer Behörde nach § 30
     Absatz 5 des Bundeszentralregistergesetzes sowie eine höchstens drei
     Monate vor der Antragstellung auf Erlaubnis erteilte Auskunft aus
     dem Gewerbezentralregister nach § 150 Absatz 1 Satz 1 der
     Gewerbeordnung für jedes Vorstandsmitglied sowie für jede sonstige
-    vertretungsberechtigte Person der Anbauvereinigung,
+    vertretungsberechtigte Person der Anbauvereinigung<!--finding:603ce8c1-e2f8-44a1-828c-342068e42c35:end-->,
 
     
 6.  6.
@@ -1795,8 +1771,8 @@ darf nur Mitglied in einer Anbauvereinigung sein.
 (3)
 
 Als Mitglied in einer Anbauvereinigung darf nur aufgenommen werden, wer
-gegenüber der Anbauvereinigung schriftlich oder elektronisch versichert,
-dass er oder sie kein Mitglied in einer anderen Anbauvereinigung ist.
+<!--finding:0b4788d3-3b9b-4edc-a1d0-d1d3c4f8d07b:start-->gegenüber der Anbauvereinigung schriftlich oder elektronisch versichert,
+dass er oder sie kein Mitglied in einer anderen Anbauvereinigung ist<!--finding:0b4788d3-3b9b-4edc-a1d0-d1d3c4f8d07b:end-->.
 Die Selbstauskunft nach Satz 1 ist von der Anbauvereinigung drei Jahre
 aufzubewahren.
 
@@ -2466,9 +2442,9 @@ Teile räumlich unmittelbar miteinander verbunden sind oder wenn
     das den Transport durchführende oder begleitende Mitglied beim
     Transport seinen Mitgliedsausweis der Anbauvereinigung, eine analoge
     oder digitale Kopie der Erlaubnis der Anbauvereinigung nach § 11
-    Absatz 1 sowie eine von der Anbauvereinigung ausgestellte und von
+    Absatz 1 sowie <!--finding:10608504-8f6f-4a9d-ae7e-92a360ac1b79:start-->eine von der Anbauvereinigung ausgestellte und von
     einer vertretungsberechtigten Person der Anbauvereinigung
-    eigenhändig unterzeichnete Transportbescheinigung mit sich führt.
+    eigenhändig unterzeichnete Transportbescheinigung mit sich führt<!--finding:10608504-8f6f-4a9d-ae7e-92a360ac1b79:end-->.
 
     
 
@@ -2612,9 +2588,9 @@ Anbauvereinigungen
 
 (1)
 
-Anbauvereinigungen haben zum Nachweis der Einhaltung der Vorgaben der §§
+<!--finding:9a236a58-a1cb-4873-a0ae-9da16d0261ed:start-->Anbauvereinigungen haben zum Nachweis der Einhaltung der Vorgaben der §§
 18 bis 20 und 22 für die Rückverfolgbarkeit des weitergegebenen Cannabis
-und Vermehrungsmaterials fortlaufend folgende Angaben zu dokumentieren:
+und Vermehrungsmaterials fortlaufend folgende Angaben zu dokumentieren:<!--finding:9a236a58-a1cb-4873-a0ae-9da16d0261ed:end-->
 
 1.  1.
     
@@ -3065,8 +3041,8 @@ Sicherung von Beweisen erforderlich ist:
 5.  5.
     
 
-    sonstige im befriedeten Besitztum der Anbauvereinigung angetroffene
-    Personen oder
+    <!--finding:86bb756d-3f35-4217-a312-4de5acaad1db:start-->sonstige im befriedeten Besitztum der Anbauvereinigung angetroffene
+    Personen<!--finding:86bb756d-3f35-4217-a312-4de5acaad1db:end--> oder
 
     
 6.  6.
@@ -3264,14 +3240,14 @@ Kapitel
 
 Für die Erteilung der Erlaubnis nach § 11 Absatz 1 und die behördliche
 Überwachung nach § 27 sind die Behörden des Landes örtlich zuständig, in
-dem die Anbauvereinigung ihren Sitz hat. Liegen der Sitz und Teile des
+dem die Anbauvereinigung ihren Sitz hat. <!--finding:d2546003-8137-4914-824d-66613f2aac68:start-->Liegen der Sitz und Teile des
 befriedeten Besitztums einer Anbauvereinigung in unterschiedlichen
 Ländern, kann die Behörde des Landes, in dem der nach seiner Größe
 überwiegende Teil des befriedeten Besitztums liegt, im Einvernehmen mit
 der nach Satz 1 örtlich zuständigen Behörde die Zuständigkeit für die
 Erteilung der Erlaubnis nach § 11 Absatz 1 übernehmen und die Erlaubnis
 nach § 11 Absatz 1 im Einvernehmen mit den zuständigen Behörden der
-betroffenen Länder länderübergreifend erteilen. Im Fall einer
+betroffenen Länder länderübergreifend erteilen.<!--finding:d2546003-8137-4914-824d-66613f2aac68:end--> Im Fall einer
 länderübergreifenden Erlaubnis nach Satz 2 wirken die zuständigen
 Behörden der betroffenen Länder bei der behördlichen Überwachung nach §
 27 entsprechend ihren Zuständigkeiten zusammen. Soweit bei
@@ -3282,9 +3258,9 @@ länderübergreifenden Erlaubnis zuständigen Behörde, ist die Kontrolle,
 wenn sie nicht durch die für die Erlaubniserteilung zuständige Behörde
 durchgeführt werden kann, durch die zuständige Behörde des Landes
 durchzuführen, in dem die betreffenden Teile des befriedeten Besitztums
-liegen. Die zuständige Behörde dieses Landes hat die Kontrolle nach
+liegen. <!--finding:566e4b62-51a1-433b-8f17-e108512ae600:start-->Die zuständige Behörde dieses Landes hat die Kontrolle nach
 Abstimmung mit der für die Erlaubniserteilung zuständigen Behörde
-durchzuführen und ihr die Kontrollergebnisse zu übermitteln. Maßnahmen
+durchzuführen und ihr die Kontrollergebnisse zu übermitteln.<!--finding:566e4b62-51a1-433b-8f17-e108512ae600:end--> Maßnahmen
 nach § 27 Absatz 3 trifft im Fall einer länderübergreifenden Erlaubnis
 nach Satz 2 die für die Erlaubniserteilung zuständige Behörde. Soweit
 sich Maßnahmen nach Satz 6 auf Teile des befriedeten Besitztums einer
@@ -4058,8 +4034,8 @@ ob eine die Person betreffende Eintragung im Bundeszentralregister nach
 Im Rahmen der Feststellung durch die Staatsanwaltschaft nach Absatz 1
 genügt es zum Nachweis der Voraussetzungen nach § 40 Absatz 1 oder
 Absatz 2, wenn diese durch die verurteilte Person glaubhaft gemacht
-werden. Zur Glaubhaftmachung kann die Staatsanwaltschaft auch die
-eidesstattliche Versicherung der verurteilten Person zulassen. Für die
+werden. <!--finding:09ff1c10-59b3-4f62-86f9-a904c0bb3f3f:start-->Zur Glaubhaftmachung kann die Staatsanwaltschaft auch die
+eidesstattliche Versicherung der verurteilten Person zulassen.<!--finding:09ff1c10-59b3-4f62-86f9-a904c0bb3f3f:end--> Für die
 Abnahme der eidesstattlichen Versicherung ist die Staatsanwaltschaft
 zuständig.
 
@@ -4072,9 +4048,9 @@ erlassen hat. Lässt sich diese Staatsanwaltschaft nicht nach Satz 1
 bestimmen, so ist diejenige Staatsanwaltschaft zuständig, in deren
 Bezirk die verurteilte Person zum Zeitpunkt der Antragstellung ihren
 Wohnsitz im Inland hat. Hat die verurteilte Person ihren Wohnsitz im
-Ausland, so ist die Staatsanwaltschaft Berlin zuständig. Der Antrag kann
+Ausland, so ist die Staatsanwaltschaft Berlin zuständig. <!--finding:e1b98794-96a9-431d-b809-15682fc7942b:start-->Der Antrag kann
 bei jeder Staatsanwaltschaft schriftlich eingereicht oder zu Protokoll
-der Geschäftsstelle erklärt werden.
+der Geschäftsstelle erklärt werden.<!--finding:e1b98794-96a9-431d-b809-15682fc7942b:end-->
 
 (4)
 
@@ -4097,8 +4073,8 @@ anzuwenden.
 
 Stellt die Staatsanwaltschaft die Tilgungsfähigkeit einer Eintragung im
 Bundeszentralregister über eine strafgerichtliche Verurteilung oder über
-eine strafgerichtliche Entscheidung fest (§ 41), so hat sie dies der
-Registerbehörde und der verurteilten Person mitzuteilen. Liegen die
+eine strafgerichtliche Entscheidung fest (§ 41), <!--finding:5ac0caea-b8b7-44fb-a601-30f92706d014:start-->so hat sie dies der
+Registerbehörde und der verurteilten Person mitzuteilen.<!--finding:5ac0caea-b8b7-44fb-a601-30f92706d014:end--> Liegen die
 Voraussetzungen für die Tilgung nicht vor, so hat die Staatsanwaltschaft
 die verurteilte Person darüber unter Angabe der Gründe zu bescheiden.
 
@@ -4144,10 +4120,10 @@ sichergestellt.
 
 (3)
 
-Zur Unterstützung der Evaluation übermitteln die zuständigen Behörden
+Zur Unterstützung der Evaluation <!--finding:b699cda0-de33-43e9-855c-f9592da89e97:start-->übermitteln die zuständigen Behörden
 jährlich bis zum 30. April elektronisch folgende Daten aus dem
 vorangegangenen Kalenderjahr in nicht personenbezogener Form an eine vom
-Bundesministerium für Gesundheit benannte Stelle:
+Bundesministerium für Gesundheit benannte Stelle<!--finding:b699cda0-de33-43e9-855c-f9592da89e97:end-->:
 
 1.  1.
     

@@ -119,11 +119,10 @@ const kiVisualisierungen = defineCollection({
 });
 
 const baseFinding = {
-  location: z.object({
-    label: z.string(), // "§ 14 S.2"
-    offsetFrom: z.number(),
-    offsetTo: z.number(),
-  }),
+  // Matches a <!--finding:{id}:start--> / <!--finding:{id}:end--> marker pair
+  // embedded in the potenziale entry's markdown body.
+  id: z.string(),
+  locationLabel: z.string(), // "§ 14 S.2"
   reasoning: z.string(), // short explanation why this was flagged
   hint: z.string(), // experimental: suggestions, recommendations
 };

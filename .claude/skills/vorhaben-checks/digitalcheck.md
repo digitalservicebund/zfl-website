@@ -198,9 +198,14 @@ ist besser als ein Finding, das mehrere Absätze zusammenfasst — spätere
 Provenienz-Anzeige/Highlighting im Tool braucht eine eindeutig lokalisierbare
 Textstelle.
 
+Wenn mehrere Findings dieselbe oder eine überlappende Textstelle betreffen
+(z. B. mehrere Kategorien für denselben Satz), ist das unproblematisch — jedes
+Finding bekommt trotzdem sein eigenes Marker-Paar (siehe Schritt 4), Marker
+verschiedener Findings dürfen sich beliebig überlappen oder ineinander liegen.
+
 ## Schritt 4: Ausgabe der Ergebnisse
 
-Gib **zwei Teile** zurück:
+Gib **drei Teile** zurück:
 
 ### 1. Kurzfassung (für den Chat)
 
@@ -218,19 +223,39 @@ Verbesserungspotenzial identifiziert, gib eine leere Liste (`[]`) aus.
 ```yaml
 - type: "Digitalcheck"
   tag: "Prinzip 1.1" # exakt einer der 20 Werte aus Schritt 2 (oder "EU-Interoperabilität")
-  location:
-    label: "§ 14 Abs. 2" # nächstgelegene Gliederungsangabe (§, Art., Abs., S., Nr.) zur Textstelle
-    offsetFrom: 0 # 0-basierter Zeichen-Offset des Zitats im Gesetzestext aus Schritt 2
-    offsetTo: 0 # Offset des Zitat-Endes (exklusiv)
+  id: "<uuid>" # per Finding neu erzeugte UUID, siehe unten
+  locationLabel: "§ 14 Abs. 2" # nächstgelegene Gliederungsangabe (§, Art., Abs., S., Nr.) zur Textstelle
   reasoning: "..."
   hint: "..."
 ```
 
-**Offsets korrekt berechnen:** Zähle `offsetFrom`/`offsetTo` **nicht von
-Hand** — nutze die Bash-Tool-Umgebung, um sie programmatisch zu bestimmen
-(z. B. den kompletten Gesetzestext aus Schritt 2 unverändert in eine Datei
-im Scratchpad-Verzeichnis schreiben und je Zitat per Node/Python
-`text.indexOf(zitat)` bzw. `text.find(zitat)` den Start-Offset ermitteln;
-`offsetTo = offsetFrom + zitat.length`). Die Offsets müssen sich exakt auf
-denselben Text beziehen, der unverändert als Body der `.md`-Datei
-gespeichert wird — kein eigenes Trimmen/Normalisieren des Textes vornehmen.
+### 3. Annotierter Gesetzestext (Datei im Scratchpad-Verzeichnis)
+
+Jedes Finding braucht eine im Gesetzestext eindeutig verortete Textstelle.
+Statt Zeichen-Offsets zu berechnen und separat zu speichern (fragil: bricht
+lautlos, sobald der gespeicherte Text später auch nur geringfügig verändert
+wird), wird die Textstelle direkt im Gesetzestext markiert:
+
+1. Erzeuge für jedes Finding eine neue UUID (z. B. per Node
+   `crypto.randomUUID()`), identisch zu der im `id`-Feld aus Teil 2.
+2. Schreibe den kompletten Gesetzestext aus Schritt 2 unverändert in eine
+   Datei im Scratchpad-Verzeichnis.
+3. Ermittle je Zitat programmatisch (nicht von Hand!) per Node/Python
+   `text.indexOf(zitat)` bzw. `text.find(zitat)` Start- und Ende-Offset des
+   wortwörtlichen Zitats aus Schritt 3.1. Kommt das Zitat mehrfach vor,
+   das richtige Vorkommen anhand des Kontexts (z. B. der Gliederungsangabe
+   aus `locationLabel`) gezielt auswählen, nicht einfach das erste nehmen.
+4. Füge an genau diesen Positionen ein Marker-Paar in den Text ein:
+   `<!--finding:{id}:start-->` direkt vor und `<!--finding:{id}:end-->`
+   direkt nach dem zitierten Ausschnitt (`{id}` = die UUID aus Schritt 1).
+   Wichtig: Offsets **rückwärts** (von der höchsten Position zur niedrigsten)
+   einfügen, sonst verschieben frühere Einfügungen die noch offenen Offsets.
+   Überlappende oder identische Textstellen mehrerer Findings sind dabei
+   unproblematisch — die Marker sind reine Textmarken ohne Verschachtelungs-
+   zwang.
+5. Schreibe den so annotierten Volltext in eine weitere Datei im
+   Scratchpad-Verzeichnis (der ursprüngliche, unannotierte Text aus Schritt 2
+   bleibt unverändert erhalten) und nenne deren Pfad in der finalen Nachricht.
+   Außer den eingefügten Marken darf der Text **nicht** verändert werden
+   (kein Trimmen/Normalisieren) — der Orchestrator übernimmt ihn unverändert
+   als Body der `.md`-Datei.

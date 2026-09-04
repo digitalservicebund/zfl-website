@@ -259,7 +259,7 @@
           <LoadingIndicator message={loadingStatusMessage} />
         {:else if selectedFindings.length}
           <div class="space-y-12">
-            {#each selectedFindings as finding (`${finding.tag}:${finding.location.offsetFrom}:${finding.location.offsetTo}`)}
+            {#each selectedFindings as finding (finding.id)}
               <Finding
                 {finding}
                 onOpenLocation={(clicked) => (activeFinding = clicked)}

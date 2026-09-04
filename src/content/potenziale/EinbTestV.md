@@ -4,42 +4,32 @@ eli: "eli/bund/bgbl-1/2008/s1649/2024-07-01/1/deu"
 findings:
   - type: "Digitalcheck"
     tag: "Prinzip 1.1"
-    location:
-      label: "§ 1 Abs. 3"
-      offsetFrom: 1133
-      offsetTo: 1293
+    id: "8e350f69-80a4-4856-83e6-611b6af66348"
+    locationLabel: "§ 1 Abs. 3"
     reasoning: "Der Test muss zwingend unter Aufsicht an einer Prüfstelle in Präsenz abgelegt werden; eine digitale oder ortsunabhängige Durchführung ist nicht vorgesehen."
     hint: "Prüfen, ob für Teile der Zielgruppe eine beaufsichtigte digitale/remote Durchführung (z. B. per Video-Proctoring) technisch und rechtssicher ermöglicht werden kann, ohne die Prüfungsintegrität zu gefährden."
   - type: "Digitalcheck"
     tag: "Prinzip 1.2"
-    location:
-      label: "§ 2 Abs. 3"
-      offsetFrom: 2886
-      offsetTo: 2979
+    id: "59bf2050-ca8c-432a-9fcc-7f6b54045bdf"
+    locationLabel: "§ 2 Abs. 3"
     reasoning: "Die Identitätsprüfung ist auf ein 'amtliches Identitätspapier' beschränkt und schließt damit technologieoffene, digitale Identifizierungsmittel (z. B. eID-Funktion des Personalausweises) aus."
     hint: "Die Regelung so formulieren, dass neben dem physischen Identitätsdokument auch anerkannte elektronische Identifizierungsmittel (eID) zur Identitätsprüfung zugelassen sind."
   - type: "Digitalcheck"
     tag: "Prinzip 2.2"
-    location:
-      label: "§ 1 Abs. 4"
-      offsetFrom: 1298
-      offsetTo: 1459
+    id: "ffb94226-87ad-42cf-a091-b9cdb1515d52"
+    locationLabel: "§ 1 Abs. 4"
     reasoning: "Bei Wohnsitzwechsel muss die neue zuständige Behörde offenbar auf die von der Person vorgelegte physische Bescheinigung zurückgreifen, statt auf bereits bei der ausstellenden Stelle vorliegende Daten zuzugreifen — ein Once-Only-Verstoß."
     hint: "Rechtsgrundlage schaffen, damit die neu zuständige Behörde die Bestehensdaten direkt bei der ausstellenden Stelle bzw. über ein gemeinsames Register elektronisch abrufen kann, statt sich auf die Vorlage der Bescheinigung durch die Person zu verlassen."
   - type: "Digitalcheck"
     tag: "Prinzip 2.4"
-    location:
-      label: "§ 3"
-      offsetFrom: 3036
-      offsetTo: 3483
+    id: "dfbfd873-016d-4302-87ee-170027383187"
+    locationLabel: "§ 3"
     reasoning: "Für die länderseitig organisierte Testdurchführung fehlt ein Verweis auf ein einheitliches technisches Austauschformat für Testauswertung und Bescheinigungsdaten gegenüber dem Bundesamt bzw. anderen Ländern, was zu uneinheitlicher, nicht interoperabler Datenhaltung führen kann."
     hint: "Einen einheitlichen technischen Standard (z. B. XÖV-Datenformat) für den Austausch von Testauswertungs- und Bescheinigungsdaten zwischen Ländern und Bundesamt vorschreiben oder referenzieren."
   - type: "Digitalcheck"
     tag: "Prinzip 5.1"
-    location:
-      label: "§ 4"
-      offsetFrom: 3520
-      offsetTo: 3814
+    id: "aadc8b96-2a70-4bf7-bd1f-86f3688362cf"
+    locationLabel: "§ 4"
     reasoning: "Die Ermächtigung zur Datenerhebung und -verwendung ist ausdrücklich nur auf das Verfahren nach § 2 Abs. 1 (Bundesamt-Prüfstellen) bezogen; für das länderseitige Verfahren nach § 3 fehlt eine vergleichbare explizite Rechtsgrundlage für die Datenverarbeitung."
     hint: "§ 4 auf das Verfahren nach § 3 erweitern bzw. eine spiegelbildliche Erhebungs- und Verwendungsermächtigung für die länderseitig durchgeführten Einbürgerungstests schaffen."
 ---
@@ -60,10 +50,10 @@ Auf Grund des § 10 Abs. 7 des Staatsangehörigkeitsgesetzes, der durch Artikel 
 Der bundeseinheitliche Einbürgerungstest wird mittels Fragebögen durchgeführt, bei denen jeweils aus vier möglichen Antworten die richtige gewählt werden muss.
 (2)
 Die aus dem Fragenkatalog in Anlage 1 erstellten 100 Fragebögen enthalten 33 Fragen, darunter jeweils drei aus den Fragen, die sich auf das Bundesland beziehen, in dem der Prüfungsteilnehmer wohnt. Die Fragebögen werden nicht veröffentlicht.
-(3)
-Der Einbürgerungstest ist bestanden, wenn unter Aufsicht innerhalb von 60 Minuten mindestens 17 der 33 Fragen eines Fragebogens richtig beantwortet worden sind.
-(4)
-Über das Bestehen wird eine Bescheinigung nach einheitlichem Vordruck ausgestellt. Sie gilt bei Wohnsitzwechsel auch gegenüber der dann zuständigen Behörde fort.
+(3)<!--finding:8e350f69-80a4-4856-83e6-611b6af66348:start-->
+Der Einbürgerungstest ist bestanden, wenn unter Aufsicht innerhalb von 60 Minuten mindestens 17 der 33 Fragen eines Fragebogens richtig beantwortet worden sind<!--finding:8e350f69-80a4-4856-83e6-611b6af66348:end-->.
+(4)<!--finding:ffb94226-87ad-42cf-a091-b9cdb1515d52:start-->
+Über das Bestehen wird eine Bescheinigung nach einheitlichem Vordruck ausgestellt. Sie gilt bei Wohnsitzwechsel auch gegenüber der dann zuständigen Behörde fort<!--finding:ffb94226-87ad-42cf-a091-b9cdb1515d52:end-->.
 (5)
 Grundstruktur und Lerninhalte des Einbürgerungskurses ergeben sich aus dem Rahmencurriculum in Anlage 2, das für die Durchführung von Einbürgerungskursen verbindlich ist.
 § 2 Verfahren des Einbürgerungstests unter Mitnutzung von Prüfstellen des Bundesamtes
@@ -72,11 +62,11 @@ Für die technische Durchführung des bundeseinheitlichen Einbürgerungstests k�
 (2)
 Im Verfahren nach Absatz 1 vereinbart die Person, die den Einbürgerungstest ablegen möchte, mit einer ihr von der zuständigen Einbürgerungsbehörde benannten Prüfstelle einen Prüfungstermin unter Angabe der in § 4 Satz 1 genannten Daten. Ein Anbieter eines Einbürgerungskurses, der nicht selbst zum Kreis der vom Bundesamt zugelassenen Prüfstellen gehört, kann für seine Teilnehmer einen kursbezogenen Prüfungstermin mit einer Prüfstelle vereinbaren.
 (3)
-Die Prüfstelle erhält für jeden Prüfungsteilnehmer einen der nach § 1 Abs. 2 Satz 1 zugelassenen Fragebögen, der nicht mit denen anderer Prüfungsteilnehmer desselben Prüfungstermins identisch ist. Die Identität des Prüfungsteilnehmers ist anhand eines amtlichen Identitätspapiers zu prüfen.
-§ 3 Verfahren des Einbürgerungstests über Landesstellen
-In dem Fall, dass ein Land die gesamte technische Durchführung des bundeseinheitlichen Einbürgerungstests in seinem Zuständigkeitsbereich selbst mittels seiner Behörden oder von ihm beauftragter Stellen organisiert, erhält es die nach § 1 Abs. 2 Satz 1 zugelassenen Fragebögen und sorgt für den ordnungsgemäßen Prüfungsablauf entsprechend § 2 Abs. 3 sowie für die Testauswertung und die Ausstellung einer Bescheinigung nach einheitlichem Vordruck.
-§ 4 Datenerhebung und -verarbeitung
-Im Verfahren nach § 2 Abs. 1 darf das Bundesamt über die Prüfstelle zum Zwecke der Durchführung des Einbürgerungstests und der Ausstellung der Bescheinigung nach einheitlichem Vordruck Familiennamen, Vornamen, Geburtsdatum, Geburtsort und Anschrift der Prüfungsteilnehmer erheben und verwenden. Die Daten sind spätestens zwei Jahre nach Ausstellung der Bescheinigung zu löschen.
+Die Prüfstelle erhält für jeden Prüfungsteilnehmer einen der nach § 1 Abs. 2 Satz 1 zugelassenen Fragebögen, der nicht mit denen anderer Prüfungsteilnehmer desselben Prüfungstermins identisch ist.<!--finding:59bf2050-ca8c-432a-9fcc-7f6b54045bdf:start--> Die Identität des Prüfungsteilnehmers ist anhand eines amtlichen Identitätspapiers zu prüfen<!--finding:59bf2050-ca8c-432a-9fcc-7f6b54045bdf:end-->.
+§ 3 Verfahren des Einbürgerungstests über Landesstellen<!--finding:dfbfd873-016d-4302-87ee-170027383187:start-->
+In dem Fall, dass ein Land die gesamte technische Durchführung des bundeseinheitlichen Einbürgerungstests in seinem Zuständigkeitsbereich selbst mittels seiner Behörden oder von ihm beauftragter Stellen organisiert, erhält es die nach § 1 Abs. 2 Satz 1 zugelassenen Fragebögen und sorgt für den ordnungsgemäßen Prüfungsablauf entsprechend § 2 Abs. 3 sowie für die Testauswertung und die Ausstellung einer Bescheinigung nach einheitlichem Vordruck<!--finding:dfbfd873-016d-4302-87ee-170027383187:end-->.
+§ 4 Datenerhebung und -verarbeitung<!--finding:aadc8b96-2a70-4bf7-bd1f-86f3688362cf:start-->
+Im Verfahren nach § 2 Abs. 1 darf das Bundesamt über die Prüfstelle zum Zwecke der Durchführung des Einbürgerungstests und der Ausstellung der Bescheinigung nach einheitlichem Vordruck Familiennamen, Vornamen, Geburtsdatum, Geburtsort und Anschrift der Prüfungsteilnehmer erheben und verwenden<!--finding:aadc8b96-2a70-4bf7-bd1f-86f3688362cf:end-->. Die Daten sind spätestens zwei Jahre nach Ausstellung der Bescheinigung zu löschen.
 § 5 Inkrafttreten
 Diese Verordnung tritt am 1. September 2008 in Kraft.
 Anlage 1 Gesamtkatalog der für den Einbürgerungstest zugelassenen Prüfungsfragen

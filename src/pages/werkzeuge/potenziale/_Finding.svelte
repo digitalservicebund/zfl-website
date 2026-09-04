@@ -47,7 +47,7 @@
             class="kern-badge kern-badge--small kern-badge--tag"
             onclick={() => onOpenLocation(finding)}
           >
-            <span class="kern-label">{finding.location.label}</span>
+            <span class="kern-label">{finding.locationLabel}</span>
           </button>
         </dd>
 

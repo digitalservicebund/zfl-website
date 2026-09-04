@@ -4,114 +4,86 @@ eli: "eli/bund/banz-at/1922/s681/2026-07-29/1/deu"
 findings:
   - type: "Digitalcheck"
     tag: "Prinzip 1.1"
-    location:
-      label: "§ 47 Abs. 6"
-      offsetFrom: 178152
-      offsetTo: 178488
+    id: "0c256a68-9ea7-466f-a63e-0f1210ff707e"
+    locationLabel: "§ 47 Abs. 6"
     reasoning: "Die Schadensanzeige bei beschädigtem oder verspätetem Reisegepäck ist an eine Schriftformerfordernis gebunden, obwohl die Airline längst digitale Kanäle für Gepäckschäden anbietet (Kiosksysteme, Apps, Web-Formulare)."
     hint: "Schriftform durch Textform (§ 126b BGB) ersetzen, sodass die Anzeige auch per E-Mail oder digitalem Formular fristwahrend erfolgen kann."
   - type: "Digitalcheck"
     tag: "Prinzip 1.2"
-    location:
-      label: "§ 65b Abs. 7"
-      offsetFrom: 231148
-      offsetTo: 231420
+    id: "e675dd21-7d99-4d18-98ea-66526152b3f1"
+    locationLabel: "§ 65b Abs. 7"
     reasoning: "Die Norm schreibt die Nutzung einer konkreten, vom Luftfahrt-Bundesamt bereitgestellten Software zwingend vor, statt die Anforderungen an die elektronische Übermittlung technologieoffen zu formulieren."
     hint: "Statt einer konkreten Software nur die zu erfüllenden Schnittstellen-/Sicherheitsanforderungen (z. B. Verschlüsselung, Authentifizierung) vorgeben und alternative konforme Übermittlungswege zulassen."
   - type: "Digitalcheck"
     tag: "Prinzip 3.2"
-    location:
-      label: "§ 65b Abs. 7"
-      offsetFrom: 231148
-      offsetTo: 231420
+    id: "c15af2aa-e1f6-4bfb-a031-eca23fa80442"
+    locationLabel: "§ 65b Abs. 7"
     reasoning: "Die verpflichtende Nutzung einer einzigen, vom Luftfahrt-Bundesamt gestellten Software ohne Offenlegung von Quellcode oder Schnittstellenspezifikation begünstigt Anbieter-Lock-in und verhindert den Einsatz alternativer, ggf. quelloffener Lösungen."
     hint: "Offene Schnittstellenspezifikationen veröffentlichen, damit auch andere (ggf. Open-Source-)Klienten die Datenübermittlung technisch konform umsetzen können."
   - type: "Digitalcheck"
     tag: "Prinzip 1.4"
-    location:
-      label: "§ 19e Abs. 1"
-      offsetFrom: 63425
-      offsetTo: 63606
+    id: "1460f7da-d712-46b4-851a-c63c735eb576"
+    locationLabel: "§ 19e Abs. 1"
     reasoning: "Die Regelung zur digitalen Fluggastabfertigung (automatisierte Kontrolle von Flugscheinen/Reisedokumenten) enthält keinerlei Vorgaben zur Barrierefreiheit der eingesetzten automatisierten Systeme für blinde, sehbehinderte oder anderweitig beeinträchtigte Fluggäste."
     hint: "Anforderungen aus § 12a BGG (Barrierefreiheit digitaler Angebote) explizit für die eingesetzten automatisierten Systeme referenzieren, z. B. barrierefreie Bedienoberflächen an Kontrollpunkten."
   - type: "Digitalcheck"
     tag: "Prinzip 4.2"
-    location:
-      label: "§ 31 Abs. 2 Nr. 1"
-      offsetFrom: 113775
-      offsetTo: 114344
+    id: "59a0f27a-5a1e-46d5-827b-59601e283393"
+    locationLabel: "§ 31 Abs. 2 Nr. 1"
     reasoning: "Die Erteilung von Erlaubnissen für eine Vielzahl unterschiedlicher Luftfahrerkategorien (Privatpiloten, Segelflugzeugführer, Freiballonführer, Flugmodell-Steuerer u.a.) ist auf die einzelnen Landesbehörden verteilt, obwohl es sich um vergleichbare, standardisierbare Prüf- und Erlaubnisverfahren handelt."
     hint: "Prüfen, ob diese Erlaubnisverfahren bei einer zentralen Bundesstelle oder wenigen gebündelten Stellen mit einheitlicher digitaler Fallbearbeitung zusammengeführt werden können, um Skaleneffekte bei hohem Fallaufkommen zu nutzen."
   - type: "Digitalcheck"
     tag: "Prinzip 4.3"
-    location:
-      label: "§ 4 Abs. 1"
-      offsetFrom: 13480
-      offsetTo: 13591
+    id: "f89b689b-f73d-4271-95c3-090db8107887"
+    locationLabel: "§ 4 Abs. 1"
     reasoning: "Die Erlaubnis zum Führen/Bedienen eines Luftfahrzeugs hängt von klar prüfbaren, gebundenen Kriterien ab (Mindestalter, nachgewiesene Tauglichkeit, bestandene Prüfung), ist aber – anders als die Registrierung nach § 66a Abs. 3 – nicht ausdrücklich für den Erlass durch automatische Einrichtungen geöffnet."
     hint: "Analog zu § 66a Abs. 3 eine ausdrückliche Ermächtigung zum Erlass vollautomatisierter Erlaubnisbescheide (§ 35a VwVfG) vorsehen, soweit die Nachweise elektronisch prüfbar vorliegen."
   - type: "Digitalcheck"
     tag: "Prinzip 4.4"
-    location:
-      label: "§ 3 Abs. 2"
-      offsetFrom: 12430
-      offsetTo: 12551
+    id: "d022606d-a7c0-4016-b182-9b4d71042d35"
+    locationLabel: "§ 3 Abs. 2"
     reasoning: "Die Ausnahme von den Eintragungsvoraussetzungen bei 'besonderen Umständen' ist unbestimmt formuliert und eröffnet einen weiten Ermessensspielraum, der einer klaren Abgrenzung von Regel und Ausnahme sowie einer Automatisierung des Regelfalls entgegensteht."
     hint: "Die als 'besondere Umstände' erfassten Fallgruppen im Gesetz oder in einer Rechtsverordnung abschließend konkretisieren, damit der Regelfall automatisiert und nur echte Ausnahmefälle manuell bearbeitet werden."
   - type: "Digitalcheck"
     tag: "Prinzip 4.5"
-    location:
-      label: "§ 29b Abs. 1"
-      offsetFrom: 105436
-      offsetTo: 105829
+    id: "f03b4b5f-fab5-464a-87c1-c3ce610bd2b7"
+    locationLabel: "§ 29b Abs. 1"
     reasoning: "Die Begriffe 'vermeidbare Geräusche' und 'Mindestmaß' sind unbestimmte Rechtsbegriffe ohne quantifizierte Schwellenwerte, was eine eindeutige, automatisiert prüfbare Umsetzung der Lärmschutzpflicht erschwert."
     hint: "Konkrete, messbare Grenzwerte oder Verweise auf technische Regelwerke (z. B. Lärmschutzklassen) ergänzen, um die Pflicht objektiv und softwaregestützt überprüfbar zu machen."
   - type: "Digitalcheck"
     tag: "Prinzip 5.1"
-    location:
-      label: "§ 27c Abs. 3"
-      offsetFrom: 88189
-      offsetTo: 88342
+    id: "4871137e-639b-45d6-9666-b26a67a1b823"
+    locationLabel: "§ 27c Abs. 3"
     reasoning: "Die Verarbeitung personenbezogener Daten für die Flugsicherung wird pauschal mit einer 'Erforderlichkeits'-Generalklausel erlaubt, ohne Datenkategorien, Zweckbindung oder Löschfristen zu konkretisieren, wie es andere Register in diesem Gesetz (z. B. §§ 64–66a) tun."
     hint: "Konkrete Datenkategorien und Löschfristen für die im Rahmen der Flugsicherung verarbeiteten personenbezogenen Daten analog zu §§ 64 ff. festlegen, um Rechtssicherheit und Datenschutzkonformität zu erhöhen."
   - type: "Digitalcheck"
     tag: "Prinzip 5.2"
-    location:
-      label: "§ 65a Abs. 4"
-      offsetFrom: 225656
-      offsetTo: 225835
+    id: "b8101193-5395-45d4-80fa-98856b173dac"
+    locationLabel: "§ 65a Abs. 4"
     reasoning: "Anders als bei der flugmedizinischen Datenbank (§ 65b Abs. 7, mit expliziten Anforderungen nach Art. 24, 25, 32 DSGVO) fehlt bei der Übermittlung von Flugbegleiterdaten an das Luftfahrt-Bundesamt jede Vorgabe zu Übertragungsweg oder Informationssicherheit."
     hint: "Für die Datenübermittlung nach § 65a Abs. 4 vergleichbare Sicherheitsanforderungen (Verschlüsselung, gesicherter Übertragungsweg) wie in § 65b Abs. 7 vorsehen, um ein einheitliches Schutzniveau sicherzustellen."
   - type: "Digitalcheck"
     tag: "EU-Interoperabilität"
-    location:
-      label: "§ 27a Abs. 1"
-      offsetFrom: 85334
-      offsetTo: 85425
+    id: "2f10b3b7-086f-478b-9cc9-a3c1d4d375e7"
+    locationLabel: "§ 27a Abs. 1"
     reasoning: "Die Flughafenkoordinierung wird vollständig auf EU-Recht verwiesen, ohne dass das Gesetz selbst festlegt, wie die für die Koordinierungseckwerte und Zeitnischen benötigten Daten semantisch oder technisch mit anderen EU-Mitgliedstaaten und deren Koordinierungsstellen ausgetauscht werden."
     hint: "Auf etablierte europäische Datenformate/Schnittstellen für den Zeitnischenaustausch (z. B. IATA/EU-Slot-Koordinierungsstandards) verweisen, um semantische und technische Interoperabilität sicherzustellen."
   - type: "Digitalcheck"
     tag: "Prinzip 2.4"
-    location:
-      label: "§ 32d"
-      offsetFrom: 162241
-      offsetTo: 162639
+    id: "b692f37e-b4bf-4e09-bfa1-cd8d61ca9f29"
+    locationLabel: "§ 32d"
     reasoning: "Die Regelung erlaubt eine 'elektronische Ausgabe' der Nachrichten für Luftfahrer/des Luftfahrthandbuchs, ohne ein etabliertes Datenformat oder einen technischen Standard (z. B. ICAO-AIXM/digitale AIP-Standards) für diese Veröffentlichung zu benennen."
     hint: "Einen Verweis auf einen etablierten, international genutzten Datenaustauschstandard (z. B. AIXM) für die elektronische Ausgabe aufnehmen, um Interoperabilität mit Luftfahrt-IT-Systemen sicherzustellen."
   - type: "Digitalcheck"
     tag: "Prinzip 2.2"
-    location:
-      label: "§ 18a Abs. 1a"
-      offsetFrom: 44510
-      offsetTo: 44873
+    id: "c3b6528d-4ad0-4dff-8744-eaf3c3486195"
+    locationLabel: "§ 18a Abs. 1a"
     reasoning: "Unterlagen zur Prüfung von Windenergieanlagen werden manuell über drei Behördenebenen (Immissionsschutzbehörde, Landesluftfahrtbehörde, Bundesaufsichtsamt für Flugsicherung) 'übersendet', statt auf ein gemeinsames Register oder eine bestehende Schnittstelle zuzugreifen."
     hint: "Eine gemeinsame elektronische Fachanwendung oder Schnittstelle zwischen den beteiligten Behörden vorsehen, über die die Unterlagen einmalig eingestellt und von allen Beteiligten abgerufen werden können (Once-Only)."
   - type: "Digitalcheck"
     tag: "Prinzip 1.3"
-    location:
-      label: "§ 8a Abs. 1"
-      offsetFrom: 26424
-      offsetTo: 26722
+    id: "d2f8b29e-1854-4eef-bfc1-4d0d2d235e78"
+    locationLabel: "§ 8a Abs. 1"
     reasoning: "Die Auslösung der Veränderungssperre ist an die physische 'Auslegung' des Plans bzw. eine 'andere Gelegenheit' zur Einsichtnahme geknüpft, ohne eine digitale Einsichtnahme (z. B. Online-Portal) als gleichwertigen, den gesamten Vollzugsprozess unterstützenden Weg zu benennen."
     hint: "Eine öffentlich zugängliche digitale Einsichtnahme in den ausgelegten Plan als gleichwertige Alternative zur physischen Auslegung gesetzlich verankern."
 ---
@@ -463,8 +435,8 @@ ein Recht eines deutschen Staatsangehörigen, an einem Luftfahrzeug Eigentum dur
 Staatsangehörige der Mitgliedstaaten der Europäischen Union stehen deutschen Staatsangehörigen gleich. Das Gleiche gilt für Angehörige aus anderen Staaten, in denen das Luftverkehrsrecht der Europäischen Union Anwendung findet.
 
 (2)
-
-Die für die Verkehrszulassung zuständige Stelle kann im Einzelfall Ausnahmen zulassen, wenn besondere Umstände vorliegen.
+<!--finding:d022606d-a7c0-4016-b182-9b4d71042d35:start-->
+Die für die Verkehrszulassung zuständige Stelle kann im Einzelfall Ausnahmen zulassen, wenn besondere Umstände vorliegen<!--finding:d022606d-a7c0-4016-b182-9b4d71042d35:end-->.
 
 § 3a
 
@@ -483,8 +455,8 @@ Desgleichen kann die Bundesrepublik Deutschland durch Verwaltungsabkommen nach A
 § 4
 
 (1)
-
-Wer ein Luftfahrzeug führt oder bedient (Luftfahrer) bedarf der Erlaubnis. Die Erlaubnis wird nur erteilt, wenn
+<!--finding:f89b689b-f73d-4271-95c3-090db8107887:start-->
+Wer ein Luftfahrzeug führt oder bedient (Luftfahrer) bedarf der Erlaubnis. Die Erlaubnis wird nur erteilt, wen<!--finding:f89b689b-f73d-4271-95c3-090db8107887:end-->n
 
 1.
 
@@ -651,8 +623,8 @@ Absatz 5 Satz 1 bis 3 gilt entsprechend bei der zivilen Nutzung oder Mitbenutzun
 § 8a
 
 (1)
-
-Sobald der Plan ausgelegt oder andere Gelegenheit gegeben ist, den Plan einzusehen, dürfen auf den vom Plan betroffenen Flächen bis zu ihrer Inanspruchnahme wesentlich wertsteigernde oder die geplanten Baumaßnahmen erheblich erschwerende Veränderungen nicht vorgenommen werden (Veränderungssperre). Als vom Plan betroffen gelten Flächen auch insoweit, als für die Erteilung einer Baugenehmigung nach dem im Plan für den Ausbau bezeichneten Bauschutzbereich (§§ 12, 17) ein Zustimmungsvorbehalt der Luftfahrtbehörde besteht. Veränderungen, die in rechtlich zulässiger Weise vorher begonnen worden sind, Unterhaltungsarbeiten und die Fortführung einer bisher ausgeübten Nutzung werden davon nicht berührt. Unzulässige Veränderungen bleiben bei der Anordnung von Vorkehrungen und Anlagen und im Entschädigungsverfahren unberücksichtigt.
+<!--finding:d2f8b29e-1854-4eef-bfc1-4d0d2d235e78:start-->
+Sobald der Plan ausgelegt oder andere Gelegenheit gegeben ist, den Plan einzusehen, dürfen auf den vom Plan betroffenen Flächen bis zu ihrer Inanspruchnahme wesentlich wertsteigernde oder die geplanten Baumaßnahmen erheblich erschwerende Veränderungen nicht vorgenommen werden (Veränderungssperre)<!--finding:d2f8b29e-1854-4eef-bfc1-4d0d2d235e78:end-->. Als vom Plan betroffen gelten Flächen auch insoweit, als für die Erteilung einer Baugenehmigung nach dem im Plan für den Ausbau bezeichneten Bauschutzbereich (§§ 12, 17) ein Zustimmungsvorbehalt der Luftfahrtbehörde besteht. Veränderungen, die in rechtlich zulässiger Weise vorher begonnen worden sind, Unterhaltungsarbeiten und die Fortführung einer bisher ausgeübten Nutzung werden davon nicht berührt. Unzulässige Veränderungen bleiben bei der Anordnung von Vorkehrungen und Anlagen und im Entschädigungsverfahren unberücksichtigt.
 
 (2)
 
@@ -902,7 +874,7 @@ Eine erhebliche Beeinträchtigung liegt vor, wenn durch eine gutachtliche Stellu
 
 (1a)
 
-Bei der Errichtung von Windenergieanlagen an Land hat die zuständige Immissionsschutzbehörde über die zuständige Landesluftfahrtbehörde dem Bundesaufsichtsamt für Flugsicherung die für die Entscheidung nach Absatz 1 notwendigen Unterlagen und Informationen zu übersenden und dabei Name, Anschrift, Telefonnummer und E-Mailadresse des zuständigen Bearbeiters in der zuständigen Immissionsschutzbehörde mitzuteilen. Das Bundesaufsichtsamt für Flugsicherung hat nach Eingang der Unterlagen binnen zehn Arbeitstagen der vorlegenden Immissionsschutzbehörde mitzuteilen, ob die Unterlagen und Informationen vollständig sind. Sind diese nicht vollständig, so hat das Bundesaufsichtsamt für Flugsicherung die zuständige Immissionsschutzbehörde unverzüglich aufzufordern, die Unterlagen und Informationen innerhalb einer angemessenen Frist zu ergänzen. Teilprüfungen sollen vor Vorlage der vollständigen Unterlagen und Informationen vorgenommen werden, soweit dies nach den bereits vorliegenden Unterlagen und Informationen möglich ist. Das Bundesaufsichtsamt für Flugsicherung soll seine Entscheidung nach Absatz 1 spätestens zwei Monate nach Erhalt aller angeforderten und vollständigen Unterlagen und Informationen mitteilen. Das Bundesaufsichtsamt für Flugsicherung hat seine Aufsichtsbehörde quartalsweise über die Einhaltung der Fristen zu unterrichten.
+Bei der Errichtung von Windenergieanlagen an Land<!--finding:c3b6528d-4ad0-4dff-8744-eaf3c3486195:start--> hat die zuständige Immissionsschutzbehörde über die zuständige Landesluftfahrtbehörde dem Bundesaufsichtsamt für Flugsicherung die für die Entscheidung nach Absatz 1 notwendigen Unterlagen und Informationen zu übersenden und dabei Name, Anschrift, Telefonnummer und E-Mailadresse des zuständigen Bearbeiters in der zuständigen Immissionsschutzbehörde mitzuteilen<!--finding:c3b6528d-4ad0-4dff-8744-eaf3c3486195:end-->. Das Bundesaufsichtsamt für Flugsicherung hat nach Eingang der Unterlagen binnen zehn Arbeitstagen der vorlegenden Immissionsschutzbehörde mitzuteilen, ob die Unterlagen und Informationen vollständig sind. Sind diese nicht vollständig, so hat das Bundesaufsichtsamt für Flugsicherung die zuständige Immissionsschutzbehörde unverzüglich aufzufordern, die Unterlagen und Informationen innerhalb einer angemessenen Frist zu ergänzen. Teilprüfungen sollen vor Vorlage der vollständigen Unterlagen und Informationen vorgenommen werden, soweit dies nach den bereits vorliegenden Unterlagen und Informationen möglich ist. Das Bundesaufsichtsamt für Flugsicherung soll seine Entscheidung nach Absatz 1 spätestens zwei Monate nach Erhalt aller angeforderten und vollständigen Unterlagen und Informationen mitteilen. Das Bundesaufsichtsamt für Flugsicherung hat seine Aufsichtsbehörde quartalsweise über die Einhaltung der Fristen zu unterrichten.
 
 (1b)
 
@@ -1133,8 +1105,8 @@ Die Unternehmer von Flughäfen haben für eine gefahrlose und leicht zugänglich
 § 19e Digitale Fluggastabfertigung
 
 (1)
-
-Luftfahrtunternehmen dürfen die Kontrolle der Flugscheine und der Reisedokumente vor Abflug auch unter Verwendung automatisierter Systeme durchführen (digitale Fluggastabfertigung). Die digitale Fluggastabfertigung darf durchgeführt werden
+<!--finding:1460f7da-d712-46b4-851a-c63c735eb576:start-->
+Luftfahrtunternehmen dürfen die Kontrolle der Flugscheine und der Reisedokumente vor Abflug auch unter Verwendung automatisierter Systeme durchführen (digitale Fluggastabfertigung)<!--finding:1460f7da-d712-46b4-851a-c63c735eb576:end-->. Die digitale Fluggastabfertigung darf durchgeführt werden
 
 1.
 
@@ -1505,8 +1477,8 @@ und Flugwetterdienst
 § 27a
 
 (1)
-
-Die Flughafenkoordinierung wird nach Maßgabe des Rechts der Europäischen Union vorgenommen.
+<!--finding:2f10b3b7-086f-478b-9cc9-a3c1d4d375e7:start-->
+Die Flughafenkoordinierung wird nach Maßgabe des Rechts der Europäischen Union vorgenommen<!--finding:2f10b3b7-086f-478b-9cc9-a3c1d4d375e7:end-->.
 
 (2)
 
@@ -1569,8 +1541,8 @@ die Flugwetterdienste
 sowie die Verkehrsflussregelung, die Steuerung der Luftraumnutzung und die Flugvermessungsdienste. Flugsicherungsdienste nach den Nummern 2 bis 5 sowie Flugvermessungsdienste stellen Unterstützungsdienste für die Flugsicherung dar. Sie sind keine hoheitliche Aufgabe des Bundes und werden zu Marktbedingungen als privatwirtschaftliche Dienstleistung in Übereinstimmung mit dem Recht der Europäischen Union erbracht. Die Absicht zur Aufnahme von Flugsicherungsdiensten nach den Nummern 2 bis 5 ist dem Bundesaufsichtsamt für Flugsicherung spätestens einen Monat im Voraus anzuzeigen; der Anzeige ist ein von einem Mitgliedstaat der Europäischen Union ausgestellter Befähigungsnachweis nach Maßgabe von Artikel 7 der Verordnung (EG) Nr. 550/2004 des Europäischen Parlaments und des Rates vom 10. März 2004 über die Erbringung von Flugsicherungsdiensten im einheitlichen europäischen Luftraum („Flugsicherungsdienste-Verordnung“) (ABl. L 96 vom 31.3.2004, S. 10) beizufügen. Das Nähere wird durch Rechtsverordnung nach § 32 Absatz 4 Nummer 4b geregelt. Die Voraussetzungen für die Erbringung von Flugvermessungsdiensten werden durch Rechtsverordnung nach § 32 Absatz 4 Nummer 2 und 3 geregelt. Im Bedarfsfall kann die nach § 31b Absatz 1 beauftragte Flugsicherungsorganisation verpflichtet werden, die in Satz 2 genannten Dienste vorzuhalten.
 
 (3)
-
-Die Verarbeitung personenbezogener Daten ist zulässig, soweit dies zur Erfüllung der in den Absätzen 1 und 2 genannten Aufgaben jeweils erforderlich ist.
+<!--finding:4871137e-639b-45d6-9666-b26a67a1b823:start-->
+Die Verarbeitung personenbezogener Daten ist zulässig, soweit dies zur Erfüllung der in den Absätzen 1 und 2 genannten Aufgaben jeweils erforderlich ist<!--finding:4871137e-639b-45d6-9666-b26a67a1b823:end-->.
 
 (4)
 
@@ -1810,8 +1782,8 @@ Die für die Durchführung der Luftaufsicht auf Flugplätzen erforderlichen Räu
 § 29b
 
 (1)
-
-Flugplatzunternehmer, Luftfahrzeughalter und Luftfahrzeugführer sind verpflichtet, beim Betrieb von Luftfahrzeugen in der Luft und am Boden vermeidbare Geräusche zu verhindern und die Ausbreitung unvermeidbarer Geräusche auf ein Mindestmaß zu beschränken, wenn dies erforderlich ist, um die Bevölkerung vor Gefahren, erheblichen Nachteilen und erheblichen Belästigungen durch Lärm zu schützen. Auf die Nachtruhe der Bevölkerung ist in besonderem Maße Rücksicht zu nehmen.
+<!--finding:f03b4b5f-fab5-464a-87c1-c3ce610bd2b7:start-->
+Flugplatzunternehmer, Luftfahrzeughalter und Luftfahrzeugführer sind verpflichtet, beim Betrieb von Luftfahrzeugen in der Luft und am Boden vermeidbare Geräusche zu verhindern und die Ausbreitung unvermeidbarer Geräusche auf ein Mindestmaß zu beschränken, wenn dies erforderlich ist, um die Bevölkerung vor Gefahren, erheblichen Nachteilen und erheblichen Belästigungen durch Lärm zu schützen<!--finding:f03b4b5f-fab5-464a-87c1-c3ce610bd2b7:end-->. Auf die Nachtruhe der Bevölkerung ist in besonderem Maße Rücksicht zu nehmen.
 
 (2)
 
@@ -1918,8 +1890,8 @@ Die Aufgaben des Bundes nach diesem Gesetz, den Verordnungen der Europäischen G
 Die Länder führen nachstehende Aufgaben dieses Gesetzes im Auftrage des Bundes aus:
 
 1.
-
-die Erteilung der Erlaubnis für Piloten von Leichtluftfahrzeugen, Privatpiloten, Segelflugzeugführer, Freiballonführer, Steuerer von verkehrszulassungspflichtigen Flugmodellen und sonstigem verkehrszulassungspflichtigen Luftfahrtgerät ohne Luftsportgerät (§ 4) sowie der Berechtigungen nach der Verordnung (EU) Nr. 1178/2011 und nach der Verordnung über Luftfahrtpersonal an diese Personen; ausgenommen hiervon bleiben die Erlaubnisse, die zugleich mit der Instrumentenflugberechtigung erteilt oder die nachträglich um die Instrumentenflugberechtigung erweitert werden;
+<!--finding:59a0f27a-5a1e-46d5-827b-59601e283393:start-->
+die Erteilung der Erlaubnis für Piloten von Leichtluftfahrzeugen, Privatpiloten, Segelflugzeugführer, Freiballonführer, Steuerer von verkehrszulassungspflichtigen Flugmodellen und sonstigem verkehrszulassungspflichtigen Luftfahrtgerät ohne Luftsportgerät (§ 4) sowie der Berechtigungen nach der Verordnung (EU) Nr. 1178/2011 und nach der Verordnung über Luftfahrtpersonal an diese Personen; ausgenommen hiervon bleiben die Erlaubnisse, die zugleich mit der Instrumentenflugberechtigung erteilt oder die nachträglich um die Instrumentenflugberechtigung erweitert werden<!--finding:59a0f27a-5a1e-46d5-827b-59601e283393:end-->;
 
 2.
 
@@ -2566,8 +2538,8 @@ Die Genehmigungsbehörde ordnet für andere als die in Absatz 1 bezeichneten Flu
 Eine Erlaubnis, Genehmigung, Zulassung oder Berechtigung auf Grund dieses Gesetzes, der zu seiner Durchführung erlassenen Rechtsvorschriften, der im Inland anwendbaren international verbindlichen Luftverkehrsregeln und Betriebsvorschriften im Sinne des Artikels 37 Abs. 2 Buchstabe c und des Artikels 38 des Abkommens vom 7. Dezember 1944 über die Internationale Zivilluftfahrt (BGBl. 1956 II S. 411), der Verordnungen des Rates der Europäischen Union oder der zu deren Durchführung erlassenen nationalen Rechtsvorschriften kann widerrufen werden, wenn der Antragsteller mit der Zahlung fälliger Gebühren auf Grund des Luftrechts und fälliger Entgelte für das Starten, Landen oder Abstellen von Luftfahrzeugen länger als drei Monate im Rückstand ist. An Stelle des Widerrufs kann das Ruhen auf Zeit angeordnet werden, solange der Zahlungsrückstand währt. Eine beantragte Erteilung kann aus den Gründen nach Satz 1 versagt werden, bis die ausstehende Zahlung eingegangen ist.
 
 § 32d Elektronische Veröffentlichungen
-
-Unbeschadet der Regelungen von § 15 Absatz 1 des E-Government-Gesetzes kann eine durch Verordnung des Bundesministeriums für Verkehr bestimmte Pflicht zur Publikation in den Nachrichten für Luftfahrer oder im Luftfahrthandbuch der Bundesrepublik Deutschland zusätzlich oder ausschließlich durch eine elektronische Ausgabe erfüllt werden, wenn diese über öffentlich zugängliche Netze angeboten wird. In diesem Fall gilt § 15 Absatz 2 des E-Government-Gesetzes entsprechend.
+<!--finding:b692f37e-b4bf-4e09-bfa1-cd8d61ca9f29:start-->
+Unbeschadet der Regelungen von § 15 Absatz 1 des E-Government-Gesetzes kann eine durch Verordnung des Bundesministeriums für Verkehr bestimmte Pflicht zur Publikation in den Nachrichten für Luftfahrer oder im Luftfahrthandbuch der Bundesrepublik Deutschland zusätzlich oder ausschließlich durch eine elektronische Ausgabe erfüllt werden, wenn diese über öffentlich zugängliche Netze angeboten wird<!--finding:b692f37e-b4bf-4e09-bfa1-cd8d61ca9f29:end-->. In diesem Fall gilt § 15 Absatz 2 des E-Government-Gesetzes entsprechend.
 
 Zweiter AbschnittHaftpflicht und Schlichtung1. UnterabschnittHaftung für Personen und
 Sachen, die nicht im Luftfahrzeug befördert werden
@@ -2806,7 +2778,7 @@ Absatz 4 gilt nicht, wenn der Schaden vom Luftfrachtführer oder seinen Leuten i
 
 (6)
 
-Ist aufgegebenes Reisegepäck beschädigt oder verspätet befördert worden, können Ansprüche nach Absatz 1 oder 2 nur geltend gemacht werden, wenn der Fluggast dem Luftfrachtführer den Schaden unverzüglich nach seiner Entdeckung, bei der Beschädigung von Reisegepäck spätestens binnen sieben Tagen nach der Annahme, bei der verspäteten Beförderung von Reisegepäck spätestens binnen 21 Tagen, nachdem das Reisegepäck dem Fluggast zur Verfügung gestellt worden ist, schriftlich anzeigt. Dies gilt nicht, wenn der Luftfrachtführer arglistig gehandelt hat. Für die Einhaltung der Frist ist die Übergabe der Anzeige oder ihre Absendung maßgeblich. Nimmt der Fluggast aufgegebenes Reisegepäck vorbehaltlos an, so begründet dies die Vermutung, dass es unbeschädigt abgeliefert worden ist.
+Ist aufgegebenes Reisegepäck beschädigt oder verspätet befördert worden, können Ansprüche nach Absatz 1 oder 2 nur geltend gemacht werden, wenn<!--finding:0c256a68-9ea7-466f-a63e-0f1210ff707e:start--> der Fluggast dem Luftfrachtführer den Schaden unverzüglich nach seiner Entdeckung, bei der Beschädigung von Reisegepäck spätestens binnen sieben Tagen nach der Annahme, bei der verspäteten Beförderung von Reisegepäck spätestens binnen 21 Tagen, nachdem das Reisegepäck dem Fluggast zur Verfügung gestellt worden ist, schriftlich anzeig<!--finding:0c256a68-9ea7-466f-a63e-0f1210ff707e:end-->t. Dies gilt nicht, wenn der Luftfrachtführer arglistig gehandelt hat. Für die Einhaltung der Frist ist die Übergabe der Anzeige oder ihre Absendung maßgeblich. Nimmt der Fluggast aufgegebenes Reisegepäck vorbehaltlos an, so begründet dies die Vermutung, dass es unbeschädigt abgeliefert worden ist.
 
 (7)
 
@@ -3750,8 +3722,8 @@ Name und Anschrift der Organisation, welche die Flugbegleiterschulung durchgefü
 Luftfahrzeugmuster- oder Variantenqualifikation nach der Verordnung (EU) Nr. 1178/2011, Anhang V (Teil CC), CC.TRA.225.
 
 (4)
-
-Wer Flugbegleiterschulungen durchführt und Flugbegleiterbescheinigungen ausstellt, hat dem Luftfahrt-Bundesamt die Daten nach Absatz 3 zu übermitteln und auf Verlangen zu belegen.
+<!--finding:b8101193-5395-45d4-80fa-98856b173dac:start-->
+Wer Flugbegleiterschulungen durchführt und Flugbegleiterbescheinigungen ausstellt, hat dem Luftfahrt-Bundesamt die Daten nach Absatz 3 zu übermitteln und auf Verlangen zu belegen<!--finding:b8101193-5395-45d4-80fa-98856b173dac:end-->.
 
 (5)
 
@@ -3841,7 +3813,7 @@ Die flugmedizinischen Sachverständigen und die flugmedizinischen Zentren haben 
 
 (7)
 
-Die in Absatz 3 genannten Daten werden durch die flugmedizinischen Sachverständigen und die flugmedizinischen Zentren an die medizinischen Sachverständigen des Luftfahrt-Bundesamtes zur Speicherung in der Datenbank nach Absatz 1 übermittelt. Die Übermittlung erfolgt ausschließlich auf elektronischem Weg mittels einer Software, die vom Luftfahrt-Bundesamt kostenfrei zur Verfügung gestellt wird. Die flugmedizinischen Sachverständigen und die flugmedizinischen Zentren sind verpflichtet, diese Software zu nutzen. Die Software und die Datenübertragung müssen gegen den unbefugten Zugriff durch Dritte nach den Artikeln 24, 25 und 32 der Verordnung (EU) 2016/679 des Europäischen Parlaments und des Rates vom 27. April 2016 zum Schutz natürlicher Personen bei der Verarbeitung personenbezogener Daten, zum freien Datenverkehr und zur Aufhebung der Richtlinie 95/46/EG (Datenschutz-Grundverordnung) (ABl. L 119 vom 4.5.2016, S. 1; L 314 vom 22.11.2016, S. 72; L 127 vom 23.5.2018, S. 2) in der jeweils geltenden Fassung besonders gesichert sein.
+Die in Absatz 3 genannten Daten werden durch die flugmedizinischen Sachverständigen und die flugmedizinischen Zentren an die medizinischen Sachverständigen des Luftfahrt-Bundesamtes zur Speicherung in der Datenbank nach Absatz 1 übermittelt.<!--finding:c15af2aa-e1f6-4bfb-a031-eca23fa80442:start--><!--finding:e675dd21-7d99-4d18-98ea-66526152b3f1:start--> Die Übermittlung erfolgt ausschließlich auf elektronischem Weg mittels einer Software, die vom Luftfahrt-Bundesamt kostenfrei zur Verfügung gestellt wird. Die flugmedizinischen Sachverständigen und die flugmedizini<!--finding:c15af2aa-e1f6-4bfb-a031-eca23fa80442:end-->schen Zentren sind verpflichtet, diese Software zu nutzen<!--finding:e675dd21-7d99-4d18-98ea-66526152b3f1:end-->. Die Software und die Datenübertragung müssen gegen den unbefugten Zugriff durch Dritte nach den Artikeln 24, 25 und 32 der Verordnung (EU) 2016/679 des Europäischen Parlaments und des Rates vom 27. April 2016 zum Schutz natürlicher Personen bei der Verarbeitung personenbezogener Daten, zum freien Datenverkehr und zur Aufhebung der Richtlinie 95/46/EG (Datenschutz-Grundverordnung) (ABl. L 119 vom 4.5.2016, S. 1; L 314 vom 22.11.2016, S. 72; L 127 vom 23.5.2018, S. 2) in der jeweils geltenden Fassung besonders gesichert sein.
 
 (8)
 
