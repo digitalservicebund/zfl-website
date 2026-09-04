@@ -21,7 +21,7 @@ const examples = visualisierungen.map(({ data, filePath }) => ({
 
 const potenziale = await getCollection("potenziale");
 const pruefbareShorts = potenziale.map(({ filePath }) =>
-  basename(filePath ?? "", ".yaml"),
+  basename(filePath ?? "", ".md"),
 );
 ---
 

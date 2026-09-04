@@ -1,3 +1,5 @@
+import type { Finding } from "@/content.config";
+import type { PotenzialeExample } from "../potenziale/_types";
 import type { LawExample, VisOption } from "../visualisieren/_types";
 
 // TODO: move to env/config once the backend has a stable deployment.
@@ -61,4 +63,31 @@ export async function getMermaid(
   }
   const data = await response.json();
   return data.mermaid;
+}
+
+export type ChecksResult = {
+  /** Set when the findings came from the backend; currently unused but kept for parity with getVisOptions(). */
+  sessionId?: string;
+  findings: Finding[];
+};
+
+export async function getChecks(
+  exampleOrDraftText: PotenzialeExample | string,
+): Promise<ChecksResult> {
+  if (typeof exampleOrDraftText === "string") {
+    const response = await fetch(`${API_BASE}/checks`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: exampleOrDraftText }),
+    });
+    if (!response.ok) {
+      throw new Error(
+        `getChecks failed: ${response.status} ${await extractErrorDetail(response)}`,
+      );
+    }
+    const data = await response.json();
+    return { sessionId: data.sessionId, findings: data.findings };
+  } else {
+    return { findings: exampleOrDraftText.findings };
+  }
 }
