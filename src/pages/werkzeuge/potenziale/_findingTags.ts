@@ -3,12 +3,13 @@ import type { Finding } from "@/content.config";
 
 interface TagMeta {
   title: string;
+  subtitle?: string;
   badgeClass?: string;
   links?: { label: string; href: string }[];
 }
 
 // Titles from digitalcheck.md Schritt 2 — keep in sync when that file changes.
-const TAG_META: Record<string, TagMeta> = {
+const DIGITALCHECK_TAG_META: Record<string, TagMeta> = {
   "Prinzip 1.1": {
     title: "Ermöglichen Sie digitale Kommunikation und Bearbeitung",
     badgeClass: "kern-badge--prinzip-1",
@@ -279,37 +280,56 @@ const TAG_META: Record<string, TagMeta> = {
     title: "Zusatzmodul: EU-Interoperabilität",
     badgeClass: "kern-badge--tag",
   },
-  // Titles from buergercheck.md Schritt 2 — keep in sync when that file changes.
+};
+
+// Titles from buergercheck.md Schritt 2 — keep in sync when that file changes.
+const BUERGERCHECK_TAG_META: Record<string, TagMeta> = {
   "Prinzip 1": {
     title: "Strukturierte Zielgruppen-/Adressatenanalyse sicherstellen",
     badgeClass: "kern-badge--tag",
   },
   "Prinzip 2": {
-    title:
+    title: "Handlungsfähigkeit der Zielgruppen sicherstellen",
+    subtitle:
       "Gewährleisten, dass Zielgruppen die erforderlichen Handlungsfähigkeiten besitzen, um den Erfordernissen des Regelungsvorhabens nachzukommen",
     badgeClass: "kern-badge--tag",
   },
   "Prinzip 3": {
-    title:
-      "Lebenslagen und Begleitumstände aus Sicht der Bürgerinnen und Bürger berücksichtigen",
+    title: "Lebenslagen der Bürgerinnen und Bürger berücksichtigen",
     badgeClass: "kern-badge--tag",
   },
   "Prinzip 4": {
-    title:
+    title: "Verbraucherinformationen nutzerfreundlich gestalten",
+    subtitle:
       "Verbraucherinformationen und Kontaktpunkte zu den Bürgerinnen und Bürgern nutzerfreundlich, praxistauglich und wo möglich automatisiert gestalten",
     badgeClass: "kern-badge--tag",
   },
   "Prinzip 5": {
-    title:
+    title: "Einzelfallgerechtigkeit und Automatisierbarkeit abwägen",
+    subtitle:
       "Trade-off zwischen Einzelfallgerechtigkeit und Inanspruchnahme / Automatisierbarkeit von Prozessen berücksichtigen",
     badgeClass: "kern-badge--tag",
   },
+};
+
+const PRAXISCHECK_TAG_META: Record<string, TagMeta> = {
   "Placeholder PC": {
     title: "Placeholder PC",
     badgeClass: "kern-badge--tag",
   },
 };
 
-export function findingTagMeta(tag: Finding["tag"]): TagMeta {
-  return TAG_META[tag] ?? { title: tag, badgeClass: "kern-badge--tag" };
+const TAG_META_BY_TYPE: Record<Finding["type"], Record<string, TagMeta>> = {
+  Digitalcheck: DIGITALCHECK_TAG_META,
+  Bürgercheck: BUERGERCHECK_TAG_META,
+  Praxischeck: PRAXISCHECK_TAG_META,
+};
+
+export function findingTagMeta(finding: Finding): TagMeta {
+  return (
+    TAG_META_BY_TYPE[finding.type][finding.tag] ?? {
+      title: finding.tag,
+      badgeClass: "kern-badge--tag",
+    }
+  );
 }

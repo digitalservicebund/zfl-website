@@ -16,7 +16,7 @@
   let expanded = $state(false);
   let currFinding = $state(findingsGroup[0]);
 
-  const tagMeta = $derived(findingTagMeta(findingsGroup[0].tag));
+  const tagMeta = $derived(findingTagMeta(findingsGroup[0]));
 
   function selectFinding(finding: Finding) {
     currFinding = finding;
@@ -35,7 +35,7 @@
   <button
     type="button"
     aria-expanded={expanded}
-    class="flex w-full cursor-pointer items-center gap-12 rounded-sm p-16 text-left hover:bg-lavender-100 focus-visible:outline-4 focus-visible:outline-(--kern-color-action-focus-default) outline-offset-2"
+    class="flex w-full cursor-pointer items-center gap-12 rounded-sm p-16 text-left hover:bg-lavender-100 focus-visible:outline-4 focus-visible:outline-(--kern-color-action-focus-default) outline-offset-2 bg-lavender-200"
     onclick={toggleExpanded}
   >
     <span class={`kern-badge ${tagMeta.badgeClass} shrink-0`}>
@@ -55,7 +55,17 @@
     class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-100 ease-in-out data-expanded:grid-rows-[1fr]"
   >
     <div class="overflow-hidden" aria-hidden={!expanded} inert={!expanded}>
-      <dl class="grid grid-cols-[auto_1fr] gap-x-24 gap-y-16 px-16 pb-16">
+      {#if tagMeta.subtitle}
+        <div class="flex items-start gap-12 px-16 pb-24 bg-lavender-200">
+          <span class="kern-badge invisible shrink-0" aria-hidden="true">
+            <span class="kern-label">{findingsGroup[0].tag}</span>
+          </span>
+          <p class="pt-0 kern-body kern-body--muted kern-body--small flex-1">
+            {tagMeta.subtitle}
+          </p>
+        </div>
+      {/if}
+      <dl class="grid grid-cols-[auto_1fr] gap-x-24 gap-y-16 px-16 py-16">
         <dt class="kern-body kern-body--bold">Betrifft</dt>
         <dd class="flex flex-wrap gap-8">
           {#each findingsGroup as finding (finding.id)}
