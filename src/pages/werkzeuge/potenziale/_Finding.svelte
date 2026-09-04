@@ -39,23 +39,35 @@
     class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-100 ease-in-out data-expanded:grid-rows-[1fr]"
   >
     <div class="overflow-hidden" aria-hidden={!expanded} inert={!expanded}>
-      <div class="space-y-12 px-16 pb-16">
-        <button
-          type="button"
-          class="kern-badge kern-badge--small kern-badge--tag"
-          onclick={() => onOpenLocation(finding)}
-        >
-          <span class="kern-label">{finding.location.label}</span>
-        </button>
-        <p class="kern-body">
-          <strong>Begründung:</strong>
-          {finding.reasoning}
-        </p>
-        <p class="kern-body kern-body--muted">
-          <strong>Empfehlung:</strong>
-          {finding.hint}
-        </p>
-      </div>
+      <dl class="grid grid-cols-[auto_1fr] gap-x-24 gap-y-16 px-16 pb-16">
+        <dt class="kern-body kern-body--bold">Betrifft</dt>
+        <dd>
+          <button
+            type="button"
+            class="kern-badge kern-badge--small kern-badge--tag"
+            onclick={() => onOpenLocation(finding)}
+          >
+            <span class="kern-label">{finding.location.label}</span>
+          </button>
+        </dd>
+
+        <dt class="kern-body kern-body--bold">Begründung</dt>
+        <dd class="kern-body">{finding.reasoning}</dd>
+
+        <dt class="kern-body kern-body--bold">Empfehlung</dt>
+        <dd class="kern-body kern-body--muted">{finding.hint}</dd>
+
+        {#if tagMeta.links?.length}
+          <dt class="kern-body kern-body--bold">Weitere Infos</dt>
+          <dd>
+            <ul>
+              {#each tagMeta.links as link (link.href)}
+                <li><a href={link.href}>{link.label}</a></li>
+              {/each}
+            </ul>
+          </dd>
+        {/if}
+      </dl>
     </div>
   </div>
 </div>

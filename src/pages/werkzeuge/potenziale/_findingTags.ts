@@ -1,37 +1,294 @@
+import { werkzeuge_digitaltauglichkeit_beispiele } from "@/config/routes";
 import type { Finding } from "@/content.config";
 
+interface TagMeta {
+  title: string;
+  badgeClass?: string;
+  links?: { label: string; href: string }[];
+}
+
 // Titles from digitalcheck.md Schritt 2 — keep in sync when that file changes.
-const DIGITALCHECK_TAG_TITLES: Record<string, string> = {
-  "Prinzip 1.1": "Ermöglichen Sie digitale Kommunikation und Bearbeitung",
-  "Prinzip 1.2": "Formulieren Sie die Regelung technologieoffen",
-  "Prinzip 1.3": "Denken Sie an Antragstellung, Bearbeitung und Bescheid",
-  "Prinzip 1.4": "Denken Sie Barrierefreiheit von Anfang an mit",
-  "Prinzip 1.5": "Stellen Sie eine nutzerfreundliche Umsetzung sicher",
-  "Prinzip 2.1": "Nutzen Sie harmonisierte Rechtsbegriffe",
-  "Prinzip 2.2": "Nutzen Sie existierende Daten",
-  "Prinzip 2.3": "Machen Sie erhobene Daten für andere nutzbar",
-  "Prinzip 2.4": "Nutzen Sie bestehende technische Standards",
-  "Prinzip 2.5": "Suchen Sie frühzeitig den Austausch mit allen Beteiligten",
-  "Prinzip 3.1":
-    "Ermöglichen Sie die Nutzung etablierter, öffentlicher Lösungen",
-  "Prinzip 3.2":
-    "Bevorzugen Sie Open-Source-Software und offene Spezifikationen",
-  "Prinzip 4.1": "Berücksichtigen Sie bestehende Prozesse und Zuständigkeiten",
-  "Prinzip 4.2": "Bündeln Sie Aufgaben im Vollzug",
-  "Prinzip 4.3": "Nutzen Sie Automatisierungspotenziale",
-  "Prinzip 4.4": "Unterscheiden Sie Regel, Ausnahme und Ermessen",
-  "Prinzip 4.5": "Schreiben Sie einfach, eindeutig, konsistent",
-  "Prinzip 5.1": "Stellen Sie den Datenschutz sicher",
-  "Prinzip 5.2": "Stellen Sie die Informationssicherheit sicher",
-  "EU-Interoperabilität": "Zusatzmodul: EU-Interoperabilität",
+const TAG_META: Record<string, TagMeta> = {
+  "Prinzip 1.1": {
+    title: "Ermöglichen Sie digitale Kommunikation und Bearbeitung",
+    badgeClass: "kern-badge--prinzip-1",
+    links: [
+      {
+        label: "Mehr zum Prinzip 1.1",
+        href: "https://digitalcheck.bund.de/methoden/fuenf-prinzipien/digitale-angebote-fuer-alle-nutzbar-gestalten#digitale-kommunikation",
+      },
+      {
+        label: "Beispiele ansehen",
+        href: `${werkzeuge_digitaltauglichkeit_beispiele.path}#prinzip-1`,
+      },
+    ],
+  },
+  "Prinzip 1.2": {
+    title: "Formulieren Sie die Regelung technologieoffen",
+    badgeClass: "kern-badge--prinzip-1",
+    links: [
+      {
+        label: "Mehr zum Prinzip 1.2",
+        href: "https://digitalcheck.bund.de/methoden/fuenf-prinzipien/digitale-angebote-fuer-alle-nutzbar-gestalten#technologieoffenheit",
+      },
+      {
+        label: "Beispiele ansehen",
+        href: `${werkzeuge_digitaltauglichkeit_beispiele.path}#prinzip-1`,
+      },
+    ],
+  },
+  "Prinzip 1.3": {
+    title: "Denken Sie an Antragstellung, Bearbeitung und Bescheid",
+    badgeClass: "kern-badge--prinzip-1",
+    links: [
+      {
+        label: "Mehr zum Prinzip 1.3",
+        href: "https://digitalcheck.bund.de/methoden/fuenf-prinzipien/digitale-angebote-fuer-alle-nutzbar-gestalten#antragsprozess-beachten",
+      },
+      {
+        label: "Beispiele ansehen",
+        href: `${werkzeuge_digitaltauglichkeit_beispiele.path}#prinzip-1`,
+      },
+    ],
+  },
+  "Prinzip 1.4": {
+    title: "Denken Sie Barrierefreiheit von Anfang an mit",
+    badgeClass: "kern-badge--prinzip-1",
+    links: [
+      {
+        label: "Mehr zum Prinzip 1.4",
+        href: "https://digitalcheck.bund.de/methoden/fuenf-prinzipien/digitale-angebote-fuer-alle-nutzbar-gestalten#barrierefreiheit",
+      },
+      {
+        label: "Beispiele ansehen",
+        href: `${werkzeuge_digitaltauglichkeit_beispiele.path}#prinzip-1`,
+      },
+    ],
+  },
+  "Prinzip 1.5": {
+    title: "Stellen Sie eine nutzerfreundliche Umsetzung sicher",
+    badgeClass: "kern-badge--prinzip-1",
+    links: [
+      {
+        label: "Mehr zum Prinzip 1.5",
+        href: "https://digitalcheck.bund.de/methoden/fuenf-prinzipien/digitale-angebote-fuer-alle-nutzbar-gestalten#nutzerfreundlichkeit",
+      },
+      {
+        label: "Beispiele ansehen",
+        href: `${werkzeuge_digitaltauglichkeit_beispiele.path}#prinzip-1`,
+      },
+    ],
+  },
+  "Prinzip 2.1": {
+    title: "Nutzen Sie harmonisierte Rechtsbegriffe",
+    badgeClass: "kern-badge--prinzip-2",
+    links: [
+      {
+        label: "Mehr zum Prinzip 2.1",
+        href: "https://digitalcheck.bund.de/methoden/fuenf-prinzipien/datenwiederverwendung-benoetigt-einheitliches-recht#harmonisierung-von-rechtsbegriffen",
+      },
+      {
+        label: "Beispiele ansehen",
+        href: `${werkzeuge_digitaltauglichkeit_beispiele.path}#prinzip-2`,
+      },
+    ],
+  },
+  "Prinzip 2.2": {
+    title: "Nutzen Sie existierende Daten",
+    badgeClass: "kern-badge--prinzip-2",
+    links: [
+      {
+        label: "Mehr zum Prinzip 2.2",
+        href: "https://digitalcheck.bund.de/methoden/fuenf-prinzipien/datenwiederverwendung-benoetigt-einheitliches-recht#existierende-daten-nachnutzen",
+      },
+      {
+        label: "Beispiele ansehen",
+        href: `${werkzeuge_digitaltauglichkeit_beispiele.path}#prinzip-2`,
+      },
+    ],
+  },
+  "Prinzip 2.3": {
+    title: "Machen Sie erhobene Daten für andere nutzbar",
+    badgeClass: "kern-badge--prinzip-2",
+    links: [
+      {
+        label: "Mehr zum Prinzip 2.3",
+        href: "https://digitalcheck.bund.de/methoden/fuenf-prinzipien/datenwiederverwendung-benoetigt-einheitliches-recht#datennachnutzung-erm-glichen",
+      },
+      {
+        label: "Beispiele ansehen",
+        href: `${werkzeuge_digitaltauglichkeit_beispiele.path}#prinzip-2`,
+      },
+    ],
+  },
+  "Prinzip 2.4": {
+    title: "Nutzen Sie bestehende technische Standards",
+    badgeClass: "kern-badge--prinzip-2",
+    links: [
+      {
+        label: "Mehr zum Prinzip 2.4",
+        href: "https://digitalcheck.bund.de/methoden/fuenf-prinzipien/datenwiederverwendung-benoetigt-einheitliches-recht#technische-standards-nutzen",
+      },
+      {
+        label: "Beispiele ansehen",
+        href: `${werkzeuge_digitaltauglichkeit_beispiele.path}#prinzip-2`,
+      },
+    ],
+  },
+  "Prinzip 2.5": {
+    title: "Suchen Sie frühzeitig den Austausch mit allen Beteiligten",
+    badgeClass: "kern-badge--prinzip-2",
+    links: [
+      {
+        label: "Mehr zum Prinzip 2.5",
+        href: "https://digitalcheck.bund.de/methoden/fuenf-prinzipien/datenwiederverwendung-benoetigt-einheitliches-recht#fr-hzeitigen-austausch-suchen",
+      },
+      {
+        label: "Beispiele ansehen",
+        href: `${werkzeuge_digitaltauglichkeit_beispiele.path}#prinzip-2`,
+      },
+    ],
+  },
+  "Prinzip 3.1": {
+    title: "Ermöglichen Sie die Nutzung etablierter, öffentlicher Lösungen",
+    badgeClass: "kern-badge--prinzip-3",
+    links: [
+      {
+        label: "Mehr zum Prinzip 3.1",
+        href: "https://digitalcheck.bund.de/methoden/fuenf-prinzipien/etablierte-technologien-ermoeglichen-effiziente-umsetzung#vorhandene-l-sungen",
+      },
+      {
+        label: "Beispiele ansehen",
+        href: `${werkzeuge_digitaltauglichkeit_beispiele.path}#prinzip-3`,
+      },
+    ],
+  },
+  "Prinzip 3.2": {
+    title: "Bevorzugen Sie Open-Source-Software und offene Spezifikationen",
+    badgeClass: "kern-badge--prinzip-3",
+    links: [
+      {
+        label: "Mehr zum Prinzip 3.2",
+        href: "https://digitalcheck.bund.de/methoden/fuenf-prinzipien/etablierte-technologien-ermoeglichen-effiziente-umsetzung#open-source-software",
+      },
+      {
+        label: "Beispiele ansehen",
+        href: `${werkzeuge_digitaltauglichkeit_beispiele.path}#prinzip-3`,
+      },
+    ],
+  },
+  "Prinzip 4.1": {
+    title: "Berücksichtigen Sie bestehende Prozesse und Zuständigkeiten",
+    badgeClass: "kern-badge--prinzip-4",
+    links: [
+      {
+        label: "Mehr zum Prinzip 4.1",
+        href: "https://digitalcheck.bund.de/methoden/fuenf-prinzipien/automatisierung-basiert-auf-eindeutigen-regelungen#bestehende-prozesse",
+      },
+      {
+        label: "Beispiele ansehen",
+        href: `${werkzeuge_digitaltauglichkeit_beispiele.path}#prinzip-4`,
+      },
+    ],
+  },
+  "Prinzip 4.2": {
+    title: "Bündeln Sie Aufgaben im Vollzug",
+    badgeClass: "kern-badge--prinzip-4",
+    links: [
+      {
+        label: "Mehr zum Prinzip 4.2",
+        href: "https://digitalcheck.bund.de/methoden/fuenf-prinzipien/automatisierung-basiert-auf-eindeutigen-regelungen#aufgabenb-ndelung",
+      },
+      {
+        label: "Beispiele ansehen",
+        href: `${werkzeuge_digitaltauglichkeit_beispiele.path}#prinzip-4`,
+      },
+    ],
+  },
+  "Prinzip 4.3": {
+    title: "Nutzen Sie Automatisierungspotenziale",
+    badgeClass: "kern-badge--prinzip-4",
+    links: [
+      {
+        label: "Mehr zum Prinzip 4.3",
+        href: "https://digitalcheck.bund.de/methoden/fuenf-prinzipien/automatisierung-basiert-auf-eindeutigen-regelungen#automatisierung",
+      },
+      {
+        label: "Beispiele ansehen",
+        href: `${werkzeuge_digitaltauglichkeit_beispiele.path}#prinzip-4`,
+      },
+    ],
+  },
+  "Prinzip 4.4": {
+    title: "Unterscheiden Sie Regel, Ausnahme und Ermessen",
+    badgeClass: "kern-badge--prinzip-4",
+    links: [
+      {
+        label: "Mehr zum Prinzip 4.4",
+        href: "https://digitalcheck.bund.de/methoden/fuenf-prinzipien/automatisierung-basiert-auf-eindeutigen-regelungen#unterscheidungen",
+      },
+      {
+        label: "Beispiele ansehen",
+        href: `${werkzeuge_digitaltauglichkeit_beispiele.path}#prinzip-4`,
+      },
+    ],
+  },
+  "Prinzip 4.5": {
+    title: "Schreiben Sie einfach, eindeutig, konsistent",
+    badgeClass: "kern-badge--prinzip-4",
+    links: [
+      {
+        label: "Mehr zum Prinzip 4.5",
+        href: "https://digitalcheck.bund.de/methoden/fuenf-prinzipien/automatisierung-basiert-auf-eindeutigen-regelungen#schreibstil",
+      },
+      {
+        label: "Beispiele ansehen",
+        href: `${werkzeuge_digitaltauglichkeit_beispiele.path}#prinzip-4`,
+      },
+    ],
+  },
+  "Prinzip 5.1": {
+    title: "Stellen Sie den Datenschutz sicher",
+    badgeClass: "kern-badge--prinzip-5",
+    links: [
+      {
+        label: "Mehr zum Prinzip 5.1",
+        href: "https://digitalcheck.bund.de/methoden/fuenf-prinzipien/datenschutz-und-informationssicherheit-schaffen-vertrauen#datenschutz",
+      },
+      {
+        label: "Beispiele ansehen",
+        href: `${werkzeuge_digitaltauglichkeit_beispiele.path}#prinzip-5`,
+      },
+    ],
+  },
+  "Prinzip 5.2": {
+    title: "Stellen Sie die Informationssicherheit sicher",
+    badgeClass: "kern-badge--prinzip-5",
+    links: [
+      {
+        label: "Mehr zum Prinzip 5.2",
+        href: "https://digitalcheck.bund.de/methoden/fuenf-prinzipien/datenschutz-und-informationssicherheit-schaffen-vertrauen#informationssicherheit",
+      },
+      {
+        label: "Beispiele ansehen",
+        href: `${werkzeuge_digitaltauglichkeit_beispiele.path}#prinzip-5`,
+      },
+    ],
+  },
+  "EU-Interoperabilität": {
+    title: "Zusatzmodul: EU-Interoperabilität",
+    badgeClass: "kern-badge--tag",
+  },
+  Bürgerbezug: {
+    title: "Bürgerbezug",
+    badgeClass: "kern-badge--tag",
+  },
+  "Placeholder PC": {
+    title: "Placeholder PC",
+    badgeClass: "kern-badge--tag",
+  },
 };
 
-export function findingTagMeta(tag: Finding["tag"]) {
-  const principleMatch = /^Prinzip (\d)\./.exec(tag);
-  return {
-    title: DIGITALCHECK_TAG_TITLES[tag] ?? tag,
-    badgeClass: principleMatch
-      ? `kern-badge--prinzip-${principleMatch[1]}`
-      : "kern-badge--tag",
-  };
+export function findingTagMeta(tag: Finding["tag"]): TagMeta {
+  return TAG_META[tag] ?? { title: tag, badgeClass: "kern-badge--tag" };
 }

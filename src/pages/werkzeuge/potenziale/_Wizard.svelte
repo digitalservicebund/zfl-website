@@ -156,7 +156,7 @@
   });
 </script>
 
-<div class="grid grid-cols-1 items-start gap-24 lg:grid-cols-[1fr_auto]">
+<div class="grid grid-cols-1 items-start lg:grid-cols-[1fr_auto]">
   <div class="breakout-grid py-lg min-w-0 space-y-32">
     <ExampleFinder {examples} bind:selected={selectedExample} />
     {#if selectedExample}
