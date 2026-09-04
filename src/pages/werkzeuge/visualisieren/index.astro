@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
+import AIDisclaimer from "../_shared/AIDisclaimer.astro";
 import Wizard from "./_Wizard.svelte";
 import { getCollection } from "astro:content";
 import { basename } from "node:path";
@@ -29,6 +30,7 @@ const pruefbareShorts = potenziale.map(({ filePath }) =>
     <Hero>
       <h1>{frontmatter.title}</h1>
     </Hero>
+    <AIDisclaimer />
     <section>
       <Wizard {examples} {pruefbareShorts} client:load />
     </section>

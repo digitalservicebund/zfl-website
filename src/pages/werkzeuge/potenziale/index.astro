@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
+import AIDisclaimer from "../_shared/AIDisclaimer.astro";
 import Wizard from "./_Wizard.svelte";
 import { getCollection } from "astro:content";
 import { basename } from "node:path";
@@ -31,6 +32,7 @@ const visualisierbareShorts = visualisierungen.map(({ filePath }) =>
     <Hero class="breakout-grid">
       <h1>{frontmatter.title}</h1>
     </Hero>
+    <AIDisclaimer />
     <Wizard {examples} {visualisierbareShorts} client:load />
   </main>
 </Layout>
