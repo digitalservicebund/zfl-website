@@ -9,7 +9,7 @@
   import { createFakeLoadingSequence } from "../_shared/fakeLoading.ts";
   import Hint from "../_shared/Hint.svelte";
   import LoadingIndicator from "../_shared/LoadingIndicator.svelte";
-  import Finding from "./_Finding.svelte";
+  import FindingsGroup from "./_FindingsGroup.svelte";
   import PotenzialeSidebar from "./_PotenzialeSidebar.svelte";
   import type { CheckType, PotenzialeExample } from "./_types";
   import type { Finding as FindingData } from "@/content.config";
@@ -158,6 +158,19 @@
       : [],
   );
 
+  let selectedFindingsGroups = $derived.by(() => {
+    const groups = new Map<string, FindingData[]>();
+    for (const finding of selectedFindings) {
+      const group = groups.get(finding.tag);
+      if (group) {
+        group.push(finding);
+      } else {
+        groups.set(finding.tag, [finding]);
+      }
+    }
+    return [...groups.values()];
+  });
+
   let isLoadingReport = $state(false);
 
   $effect(() => {
@@ -259,9 +272,9 @@
           <LoadingIndicator message={loadingStatusMessage} />
         {:else if selectedFindings.length}
           <div class="space-y-12">
-            {#each selectedFindings as finding (finding.id)}
-              <Finding
-                {finding}
+            {#each selectedFindingsGroups as findingsGroup (findingsGroup[0].tag)}
+              <FindingsGroup
+                {findingsGroup}
                 onOpenLocation={(clicked) => (activeFinding = clicked)}
               />
             {/each}
