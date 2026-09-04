@@ -98,6 +98,78 @@ findings:
     confidence: "medium"
     reasoning: "Die Vorgabe zur digitalen Informationsplattform der Bundeszentrale für gesundheitliche Aufklärung nennt zwar Nutzerfreundlichkeit und Adressatengerechtigkeit, verweist aber nicht explizit auf die Anforderungen der Barrierefreiheit nach § 12a BGG."
     hint: "Die Barrierefreiheitsanforderungen nach § 12a BGG (z. B. Gebärdensprache, Leichte Sprache, Screenreader-Kompatibilität) ausdrücklich für die digitale Plattform vorschreiben."
+  - type: "Bürgercheck"
+    tag: "Prinzip 2"
+    id: "88d61198-9afc-4d70-aa4f-c8cf531f7d3f"
+    locationLabel: "§ 3 Abs. 2"
+    potential: "high"
+    confidence: "high"
+    reasoning: "Die Besitzmengen für Cannabis unterscheiden sich je nach Ort (25 Gramm allgemein, 50 Gramm am Wohnsitz/gewöhnlichen Aufenthalt) und sind zugleich unmittelbar straf- bzw. bußgeldbewehrt (§ 34 Abs. 1 Nr. 1, § 36 Abs. 1 Nr. 1: Schwellen bei 30/60 Gramm). Bürgerinnen und Bürger müssen mehrere ortsabhängige Grenzwerte gleichzeitig im Blick behalten, um nicht versehentlich eine Straftat zu begehen."
+    hint: "Eine einprägsame, visuell aufbereitete Übersicht der erlaubten Mengen je nach Ort (z. B. als Grafik auf der Präventionsplattform nach § 8) bereitstellen und die Schwellenwerte nach Möglichkeit vereinheitlichen oder klarer voneinander abgrenzen."
+  - type: "Bürgercheck"
+    tag: "Prinzip 1"
+    id: "1d37ddd8-7371-4710-9ee5-430808c9235a"
+    locationLabel: "§ 9 Abs. 1"
+    potential: "medium"
+    confidence: "medium"
+    reasoning: "Die Begrenzung auf drei Cannabispflanzen 'gleichzeitig' bleibt offen, ob sie pro Person oder pro Wohnung/Haushalt gilt. Für Mehrpersonenhaushalte (WGs, Familien mit mehreren erwachsenen Mitgliedern) ist damit unklar, wie viele Pflanzen insgesamt am selben Wohnsitz zulässig sind - eine Zielgruppe, die das Gesetz nicht explizit adressiert."
+    hint: "Klarstellen, ob sich die Höchstgrenze von drei Pflanzen auf die einzelne Person oder auf den Wohnsitz/Haushalt bezieht, insbesondere für den häufigen Fall mehrerer erwachsener Bewohnerinnen und Bewohner in einer Wohnung."
+  - type: "Bürgercheck"
+    tag: "Prinzip 2"
+    id: "d758404a-377b-4dc6-8422-bb59a0963003"
+    locationLabel: "§ 5 Abs. 2 S. 2"
+    potential: "medium"
+    confidence: "medium"
+    reasoning: "Die 100-Meter-'Sichtweite'-Regel um Schulen, Spielplätze, Jugendeinrichtungen und Sportstätten lässt sich im Alltag kaum zuverlässig einschätzen, da Bürgerinnen und Bürger weder Entfernungen noch die genauen Standorte relevanter Einrichtungen präzise kennen. Das führt zu Rechtsunsicherheit bei einer alltäglichen Handlung (öffentlicher Konsum)."
+    hint: "Eine praxistaugliche Orientierungshilfe schaffen, z. B. eine Karten- oder App-Funktion, die die 100-Meter-Verbotszonen um relevante Einrichtungen sichtbar macht, statt die Einschätzung allein den Bürgerinnen und Bürgern zu überlassen."
+  - type: "Bürgercheck"
+    tag: "Prinzip 4"
+    id: "bb249b0b-24b8-4ca7-98f4-2671a910d341"
+    locationLabel: "§ 41 Abs. 1"
+    potential: "high"
+    confidence: "high"
+    reasoning: "Die Feststellung der Tilgungsfähigkeit einer Eintragung im Bundeszentralregister erfolgt nur 'auf Antrag der verurteilten Person' - es gibt keine aktive Benachrichtigung der potenziell großen Zahl Betroffener mit einschlägigen Vorstrafen. Wer nichts von dieser Möglichkeit weiß, wird sie faktisch nicht nutzen können."
+    hint: "Eine proaktive Informationskampagne oder direkte Benachrichtigung (z. B. durch die Registerbehörde) für Personen mit potenziell tilgungsfähigen Eintragungen vorsehen, statt die Initiative vollständig den Betroffenen zu überlassen."
+  - type: "Bürgercheck"
+    tag: "Prinzip 2"
+    id: "787aa457-e4e2-4fcf-8334-56591e047800"
+    locationLabel: "§ 22 Abs. 3 Nr. 3"
+    potential: "low"
+    confidence: "high"
+    reasoning: "Für den Transport von mehr als 25 Gramm Cannabis zwischen Teilen desselben befriedeten Besitztums einer Anbauvereinigung ist eine vorherige Anzeige spätestens einen Werktag vor Transportbeginn mit mehreren Detailangaben erforderlich - ein bürokratischer Aufwand für einen routinemäßigen internen Vorgang einzelner Mitglieder."
+    hint: "Für Transporte innerhalb desselben Besitztums einer Anbauvereinigung eine vereinfachte, formlose oder nachträgliche Meldepflicht statt einer Vorabanzeige mit Werktagsfrist vorsehen."
+  - type: "Bürgercheck"
+    tag: "Prinzip 2"
+    id: "36ef9967-28f3-499e-aa70-0c44b08deb20"
+    locationLabel: "§ 12 Abs. 1 Nr. 5"
+    potential: "high"
+    confidence: "medium"
+    reasoning: "Der Katalog an zwingenden Satzungsinhalten (Buchst. a-e) für Anbauvereinigungen ist umfangreich und juristisch formuliert. Gründungswillige Bürgerinnen und Bürger, die ehrenamtlich einen Verein oder eine Genossenschaft gründen wollen, benötigen ohne Unterstützung erhebliches Spezialwissen, um eine erlaubnisfähige Satzung zu erstellen."
+    hint: "Eine amtliche Mustersatzung oder Checkliste bereitstellen, die alle nach § 12 Absatz 1 Nummer 5 erforderlichen Satzungsinhalte abdeckt, um Gründungswilligen die rechtssichere Umsetzung zu erleichtern."
+  - type: "Bürgercheck"
+    tag: "Prinzip 3"
+    id: "df8ebf18-5630-4869-87a1-02c37717cb0e"
+    locationLabel: "§ 14"
+    potential: "medium"
+    confidence: "medium"
+    reasoning: "Die siebenjährige Befristung der Erlaubnis mit Verlängerungsmöglichkeit ab dem fünften Jahr sieht keinen Hinweis- oder Erinnerungsmechanismus vor Fristablauf vor. Anbauvereinigungen, oft ehrenamtlich organisiert, riskieren, den Verlängerungsantrag im Alltagsgeschäft zu übersehen und ihre Erlaubnis verstreichen zu lassen."
+    hint: "Eine automatisierte Erinnerung der zuständigen Behörde an die Anbauvereinigung rechtzeitig vor Ablauf der Erlaubnis bzw. vor Erreichen des frühestmöglichen Verlängerungszeitpunkts vorsehen."
+  - type: "Bürgercheck"
+    tag: "Prinzip 3"
+    id: "2332fe3d-b9b9-47a7-a452-b49139d2e3e8"
+    locationLabel: "§ 16 Abs. 4 S. 2"
+    potential: "low"
+    confidence: "medium"
+    reasoning: "Die Pflicht der Mitglieder, einen Wohnsitzwechsel 'unverzüglich' mitzuteilen, definiert keine konkrete Frist. Gerade bei Umzügen, die mit vielen anderen Meldepflichten (Einwohnermeldeamt etc.) zusammenfallen, kann diese unbestimmte Frist im Alltag leicht übersehen werden und zugleich zu Unsicherheit führen, was noch rechtzeitig ist."
+    hint: "Eine konkrete Frist (z. B. zwei Wochen, angelehnt an die Meldepflicht beim Einwohnermeldeamt) statt der unbestimmten Formulierung 'unverzüglich' vorsehen, um Mitgliedern eine klare Orientierung zu geben."
+  - type: "Bürgercheck"
+    tag: "Prinzip 5"
+    id: "58fa5307-b776-4d23-9f58-9710ef7671cf"
+    locationLabel: "§ 12 Abs. 3 Nr. 1"
+    potential: "medium"
+    confidence: "low"
+    reasoning: "Die Versagung der Erlaubnis 'kann' erfolgen, wenn 'konkrete Tatsachen' eine bestimmte Prognose rechtfertigen - ein weiter Ermessens- und Prognosespielraum der Behörde, der den Ausgang eines Erlaubnisverfahrens für Antragstellende schwer vorhersehbar macht und die Nachvollziehbarkeit des Verfahrens einschränkt."
+    hint: "Konkretisierende Regelbeispiele oder Kriterien für die Ermessensausübung nach § 12 Absatz 3 Nummer 1 vorsehen, um Antragstellenden eine bessere Einschätzung ihrer Erfolgsaussichten zu ermöglichen."
 ---
 
 
@@ -898,9 +970,9 @@ Trocknen, zum Eigenkonsum erlaubt.
 
 (2)
 
-Personen, die das 18. Lebensjahr vollendet haben, ist abweichend von
+<!--finding:88d61198-9afc-4d70-aa4f-c8cf531f7d3f:start-->Personen, die das 18. Lebensjahr vollendet haben, ist abweichend von
 Absatz 1 im Geltungsbereich dieses Gesetzes an ihrem Wohnsitz oder an
-ihrem gewöhnlichen Aufenthalt der Besitz von Cannabis wie folgt erlaubt:
+ihrem gewöhnlichen Aufenthalt der Besitz von Cannabis wie folgt erlaubt:<!--finding:88d61198-9afc-4d70-aa4f-c8cf531f7d3f:end-->
 
 1.  1.
     
@@ -1013,9 +1085,9 @@ Der öffentliche Konsum von Cannabis ist verboten:
 
     
 
-Im Sinne von Satz 1 ist eine Sichtweite bei einem Abstand von mehr als
+<!--finding:d758404a-377b-4dc6-8422-bb59a0963003:start-->Im Sinne von Satz 1 ist eine Sichtweite bei einem Abstand von mehr als
 100 Metern von dem Eingangsbereich der in Satz 1 Nummer 1 bis 4 und 6
-genannten Einrichtungen nicht mehr gegeben.
+genannten Einrichtungen nicht mehr gegeben.<!--finding:d758404a-377b-4dc6-8422-bb59a0963003:end-->
 
 (3)
 
@@ -1165,10 +1237,10 @@ Kapitel
 
 (1)
 
-Personen, die das 18. Lebensjahr vollendet haben, ist im Geltungsbereich
+<!--finding:1d37ddd8-7371-4710-9ee5-430808c9235a:start-->Personen, die das 18. Lebensjahr vollendet haben, ist im Geltungsbereich
 dieses Gesetzes an ihrem Wohnsitz oder an ihrem gewöhnlichen Aufenthalt
 der private Eigenanbau von insgesamt nicht mehr als drei
-Cannabispflanzen gleichzeitig erlaubt.
+Cannabispflanzen gleichzeitig erlaubt.<!--finding:1d37ddd8-7371-4710-9ee5-430808c9235a:end-->
 
 (2)
 
@@ -1430,10 +1502,10 @@ Die Erlaubnis nach § 11 Absatz 1 ist zu versagen, wenn
     1.  a)
         
 
-        als Zweck der Anbauvereinigung nicht ausschließlich der
+        <!--finding:36ef9967-28f3-499e-aa70-0c44b08deb20:start-->als Zweck der Anbauvereinigung nicht ausschließlich der
         gemeinschaftliche Eigenanbau und die Weitergabe des in
         gemeinschaftlichem Eigenanbau angebauten Cannabis durch und an
-        ihre Mitglieder zum Eigenkonsum, die Information von Mitgliedern
+        ihre Mitglieder zum Eigenkonsum,<!--finding:36ef9967-28f3-499e-aa70-0c44b08deb20:end--> die Information von Mitgliedern
         über cannabisspezifische Suchtprävention und -beratung sowie die
         Weitergabe von beim gemeinschaftlichen Eigenanbau gewonnenem
         Vermehrungsmaterial für den privaten Eigenanbau an ihre
@@ -1622,10 +1694,10 @@ Die Erlaubnis nach § 11 Absatz 1 kann versagt werden, wenn
 1.  1.
     
 
-    konkrete Tatsachen die Annahme rechtfertigen, dass ein
+    <!--finding:58fa5307-b776-4d23-9f58-9710ef7671cf:start-->konkrete Tatsachen die Annahme rechtfertigen, dass ein
     Vorstandsmitglied oder eine sonstige vertretungsberechtigte Person
     der Anbauvereinigung sich mit hinreichender Wahrscheinlichkeit nicht
-    an die in den §§ 2, 5, 6 oder den §§ 19 bis 23 geregelten Verbote,
+    an die in den §§ 2, 5, 6 oder den §§ 19 bis 23 geregelten Verbote,<!--finding:58fa5307-b776-4d23-9f58-9710ef7671cf:end-->
     die in den §§ 17 bis 23, 25 oder § 26 geregelten Gebote oder die in
     den §§ 3, 16, 17 oder den §§ 19 bis 22 geregelten Anforderungen
     halten wird, oder
@@ -1714,9 +1786,9 @@ Voraussetzungen sicherzustellen.
 
 ## § 14 Dauer der Erlaubnis
 
-Die Dauer der Erlaubnis ist auf einen Zeitraum von sieben Jahren zu
+<!--finding:df8ebf18-5630-4869-87a1-02c37717cb0e:start-->Die Dauer der Erlaubnis ist auf einen Zeitraum von sieben Jahren zu
 befristen. Sie kann nach Ablauf von mindestens fünf Jahren auf Antrag
-verlängert werden; die Vorschriften der §§ 11 bis 13 gelten entsprechend
+verlängert werden;<!--finding:df8ebf18-5630-4869-87a1-02c37717cb0e:end--> die Vorschriften der §§ 11 bis 13 gelten entsprechend
 für die Verlängerung der Erlaubnis.
 
 [](regelungstext-verkuendung-1/art-z15.html)
@@ -1820,8 +1892,8 @@ nachweist, dass er oder sie
 
     
 
-Ändert sich der Wohnsitz oder der gewöhnliche Aufenthalt, so hat das
-Mitglied dies der Anbauvereinigung unverzüglich mitzuteilen.
+<!--finding:2332fe3d-b9b9-47a7-a452-b49139d2e3e8:start-->Ändert sich der Wohnsitz oder der gewöhnliche Aufenthalt, so hat das
+Mitglied dies der Anbauvereinigung unverzüglich mitzuteilen.<!--finding:2332fe3d-b9b9-47a7-a452-b49139d2e3e8:end-->
 
 (5)
 
@@ -2445,11 +2517,11 @@ Teile räumlich unmittelbar miteinander verbunden sind oder wenn
 3.  3.
     
 
-    die Anbauvereinigung das Datum, die Start- und Zieladresse des
+    <!--finding:787aa457-e4e2-4fcf-8334-56591e047800:start-->die Anbauvereinigung das Datum, die Start- und Zieladresse des
     Transports sowie die Mengen in Gramm und Sorten des transportierten
     Cannabis spätestens einen Werktag vor Beginn des Transports
     gegenüber der zuständigen Behörde schriftlich oder elektronisch
-    anzeigt,
+    anzeigt,<!--finding:787aa457-e4e2-4fcf-8334-56591e047800:end-->
 
     
 4.  4.
@@ -4049,9 +4121,9 @@ gebildete Gesamtstrafen beruhen.
 
 (1)
 
-Die Staatsanwaltschaft stellt auf Antrag der verurteilten Person fest,
+<!--finding:bb249b0b-24b8-4ca7-98f4-2671a910d341:start-->Die Staatsanwaltschaft stellt auf Antrag der verurteilten Person fest,
 ob eine die Person betreffende Eintragung im Bundeszentralregister nach
-§ 40 tilgungsfähig ist.
+§ 40 tilgungsfähig ist.<!--finding:bb249b0b-24b8-4ca7-98f4-2671a910d341:end-->
 
 (2)
 

@@ -1,0 +1,18 @@
+title: Gesetz zur Verbesserung des Onlinezugangs zu Verwaltungsleistungen
+eli: eli/bund/bgbl-1/2017/s3138/2026-07-29/1/deu
+visOptions:
+  - name: Anwendbarkeitsprüfung
+    filename: anwendbarkeit
+    articles: ["§1"]
+  - name: Fristenkette Portalverbund
+    filename: fristenkette_portalverbund
+    articles: ["§1a"]
+  - name: Identitätsnachweis
+    filename: identitaetsnachweis
+    articles: ["§3"]
+  - name: Bekanntgabefiktion
+    filename: bekanntgabefiktion
+    articles: ["§9"]
+  - name: Schriftformersatz
+    filename: schriftformersatz
+    articles: ["§9a"]

@@ -1,0 +1,42 @@
+---
+summary: "Prüft, wann Empfänger vorrangiger Transferleistungen (und mitbetroffene Haushaltsmitglieder) vom Wohngeld ausgeschlossen sind, welche Ausnahmen gelten und für welchen Zeitraum der Ausschluss wirkt."
+---
+flowchart TD
+    A["Ausschluss vom Wohngeld prüfen"] --> Q1{"Empfängt die Person eine<br/>Leistung nach <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 I</a> (u.a. Bürgergeld,<br/>Grundsicherung/Hilfe zum Lebensunterhalt<br/>SGB XII, Verletztengeld, Asylbewerber-<br/>leistungen, Jugendhilfe mit Unterkunftskosten)?"}
+
+    Q1 -->|Nein| Q2{"Haushaltsmitglied ohne eigenen<br/>Leistungsbezug, dessen Einkommen/Vermögen<br/>bei Berechnung eines anderen Haushalts-<br/>mitglieds berücksichtigt wurde? — <a href='{{ELI}}#art-z7_abs-z2' target='_blank' rel='noopener'>§7 II</a>"}
+    Q2 -->|Nein| Z1["Kein Ausschluss<br/>vom Wohngeld"]
+
+    Q1 -->|Ja| Q3{"Leistung wird ausschließlich<br/>als Darlehen gewährt? — <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 I S.3 Nr.1</a>"}
+    Q2 -->|Ja| Q3
+
+    Q3 -->|Ja| Z1
+    Q3 -->|Nein| Q4{"Vermeidet/beseitigt Wohngeld die<br/>Hilfebedürftigkeit UND Leistung während<br/>Verwaltungsverfahren noch nicht erbracht<br/>oder nachrangiger Träger nach §104 SGB X? —<br/><a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 I S.3 Nr.2</a>"}
+
+    Q4 -->|Ja| Z1
+    Q4 -->|Nein| Z2["Ausschluss vom<br/>Wohngeld besteht — <a href='{{ELI}}/art-z7' target='_blank' rel='noopener'>§7</a>"]
+
+    Z2 --> Q5{"Wann beginnt der<br/>Ausschluss? — <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 I</a>"}
+
+    Q5 -->|"Ab Antragstellung auf<br/>Leistung nach §7 I"| Z3["Ausschluss ab 1. des<br/>Antragsmonats (bzw. des<br/>nächsten Monats) — <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 I S.2 Nr.1</a>"]
+    Q5 -->|"Ab Bewilligung der<br/>Leistung nach §7 I"| Z4["Ausschluss ab 1. des<br/>Bewilligungsmonats (bzw. des<br/>nächsten Monats) — <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 I S.2 Nr.2</a>"]
+    Q5 -->|"Bis Ende der<br/>Leistungsbewilligung"| Z5["Ausschluss bis zum<br/>Monatsletzten (bzw. Vormonat) —<br/><a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 I S.2 Nr.3</a>"]
+
+    Z3 --> Q6{"Antrag zurückgenommen, Leistung<br/>abgelehnt/versagt/entzogen/nur als Darlehen<br/>gewährt, Bewilligungsbescheid aufgehoben,<br/>Anspruch nachträgl. entfallen/nachrangig oder<br/>voll erstattet? — <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 I S.3</a>"}
+    Z4 --> Q6
+    Z5 --> Q6
+
+    Q6 -->|Ja| Z6["Ausschluss gilt für<br/>diesen Zeitraum als<br/>nicht erfolgt — <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 I S.3</a>"]
+    Q6 -->|Nein| Q7{"Haushaltsmitglied verzichtet auf<br/>Leistung nach §7 I, um Wohngeld zu<br/>beantragen? — <a href='{{ELI}}#art-z8_abs-z2' target='_blank' rel='noopener'>§8 II</a>"}
+
+    Q7 -->|Ja| Z7["Ausschluss gilt ab<br/>Wirkung des Verzichts als<br/>nicht erfolgt — <a href='{{ELI}}#art-z8_abs-z2' target='_blank' rel='noopener'>§8 II</a>"]
+    Q7 -->|Nein| Z8["Ausschluss bleibt<br/>für den festgestellten<br/>Zeitraum bestehen"]
+
+    style Z1 fill:#d4edda,stroke:#2d8a4a
+    style Z2 fill:#f8d7da,stroke:#c0392b
+    style Z3 fill:#fff3cd,stroke:#c9a227
+    style Z4 fill:#fff3cd,stroke:#c9a227
+    style Z5 fill:#fff3cd,stroke:#c9a227
+    style Z6 fill:#d4edda,stroke:#2d8a4a
+    style Z7 fill:#d4edda,stroke:#2d8a4a
+    style Z8 fill:#f8d7da,stroke:#c0392b

@@ -178,6 +178,10 @@ fileignoreconfig:
     checksum: 0a8298ed7447068b7e723cea48b773b066427607e95289934c36f28b0d87b8e1
   - filename: src/content/potenziale/LuftVG.md
     checksum: 686650737e96a0e0966dd82f141204b4382435e1a6cf68b132d35321fd935ded
+  - filename: src/content/potenziale/BEEG.md
+    checksum: 40be7929d66ed36cab2acd35cb0f804d0b37e279ee03822fb1b7feb4cbddcb95
+  - filename: src/content/potenziale/TzBfG.md
+    checksum: 2849cd59f7125c2020341104d8e792808fc3c0dd7778208c8a8dfbbc3b2d87cb
 scopeconfig:
   - scope: node
 allowed_patterns:

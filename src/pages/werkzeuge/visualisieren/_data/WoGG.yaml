@@ -1,0 +1,18 @@
+title: Wohngeldgesetz
+eli: eli/bund/bgbl-1/2008/s1856/2026-07-01/1/deu
+visOptions:
+  - name: Wohngeldberechtigung
+    filename: berechtigung
+    articles: ["§3"]
+  - name: Ausschluss vom Wohngeld
+    filename: ausschluss
+    articles: ["§7", "§8"]
+  - name: Wohngeldantrag und Bewilligung
+    filename: antragsverfahren
+    articles: ["§22", "§24", "§25"]
+  - name: Vorläufige Zahlung
+    filename: vorlaeufige_zahlung
+    articles: ["§26a"]
+  - name: Änderung des Wohngeldes
+    filename: aenderung
+    articles: ["§27"]

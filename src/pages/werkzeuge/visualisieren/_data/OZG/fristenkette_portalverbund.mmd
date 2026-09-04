@@ -1,0 +1,16 @@
+---
+summary: "Zeigt die gestaffelten Fristen für Portalverbund, Nutzeranspruch und verpflichtendes elektronisches Angebot nach der OZG-Novelle vom 19.7.2024."
+---
+flowchart TD
+    A["Verkündung des Änderungsgesetzes vom 19.7.2024"] --> B["Bis 31.12.2027: Verwaltungsportale von Bund und Ländern zu einem gemeinsamen Verwaltungsportal verknüpft — <a href='{{ELI}}#art-z1a_abs-z5' target='_blank' rel='noopener'>§1a 5</a>"]
+    B --> C["Ablauf des vierten Kalenderjahres nach der Verkündung: Nutzer haben Anspruch auf elektronischen Zugang zu Verwaltungsleistungen des Bundes — <a href='{{ELI}}#art-z1a_abs-z2' target='_blank' rel='noopener'>§1a 2</a>"]
+    C --> D{"Dient die Verwaltungsleistung der Ausführung von Bundesgesetzen und betrifft sie ausschließlich Nutzer nach §2 Absatz 4 Nummer 2 (Unternehmen)? — <a href='{{ELI}}#art-z1a_abs-z1' target='_blank' rel='noopener'>§1a 1</a>"}
+    D -->|Nein| E["Elektronisches Angebot besteht verpflichtend zusätzlich zu anderen Zugangswegen — <a href='{{ELI}}#art-z1a_abs-z1' target='_blank' rel='noopener'>§1a 1</a>"]
+    D -->|Ja| F["Ablauf des fünften Kalenderjahres nach der Verkündung: ausschließlich elektronisches Angebot verpflichtend — <a href='{{ELI}}#art-z1a_abs-z1' target='_blank' rel='noopener'>§1a 1</a>"]
+    F --> G{"Besteht ein berechtigtes Interesse des Nutzers an einem nicht-elektronischen Zugang? — <a href='{{ELI}}#art-z1a_abs-z1' target='_blank' rel='noopener'>§1a 1</a>"}
+    G -->|Ja| H["Abweichung vom ausschließlich elektronischen Angebot zulässig — <a href='{{ELI}}#art-z1a_abs-z1' target='_blank' rel='noopener'>§1a 1</a>"]
+    G -->|Nein| I["Verwaltungsleistung wird ausschließlich elektronisch angeboten — <a href='{{ELI}}#art-z1a_abs-z1' target='_blank' rel='noopener'>§1a 1</a>"]
+
+    style E fill:#d4edda,stroke:#2d8a4a
+    style H fill:#fff3cd,stroke:#c9a227
+    style I fill:#d4edda,stroke:#2d8a4a

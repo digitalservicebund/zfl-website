@@ -1,0 +1,20 @@
+---
+summary: "Bildet ab, wann ein elektronischer Verwaltungsakt über das Postfach eines Nutzerkontos wirksam bekannt gegeben wird und wie die Zugangsfiktion funktioniert."
+---
+flowchart TD
+    A["Elektronischer Verwaltungsakt soll dem Nutzer bekannt gegeben werden"] --> B{"Hat der Nutzer die elektronische Bekanntgabe über sein Postfach bei Inanspruchnahme der Leistung ausgeschlossen? — <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 1</a>"}
+    B -->|Ja| C["Einwilligung liegt nicht vor — Bekanntgabe über das Postfach ausgeschlossen"]
+    B -->|Nein| D["Einwilligung gilt als erteilt — Behörde stellt den Verwaltungsakt authentifiziert zum Abruf im Postfach bereit — <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 1</a>"]
+    D --> E["Nutzer wird spätestens am Tag der Bereitstellung über die Abrufmöglichkeit benachrichtigt — <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 1</a>"]
+    E --> F["Verwaltungsakt gilt am vierten Tag nach der Bereitstellung als bekannt gegeben (Zugangsfiktion) — <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 1</a>"]
+    F --> G{"Bestehen Zweifel am Eintritt der Fiktionswirkung? — <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 1</a>"}
+    G -->|Ja| H["Behörde muss die Bereitstellung und deren Zeitpunkt nachweisen — <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 1</a>"]
+    G -->|Nein| I["Bekanntgabe zum fingierten Zeitpunkt wirksam"]
+    F --> J{"Erfolgt eine erneute Bekanntgabe desselben Verwaltungsaktes, nachdem der Nutzer bereits vor Eintritt der Fiktion abgerufen hatte? — <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 1</a>"}
+    J -->|Ja| K["Für den Zugang bleibt der Tag des ersten Abrufs maßgeblich — <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 1</a>"]
+    J -->|Nein| I
+
+    style C fill:#f8d7da,stroke:#c0392b
+    style H fill:#fff3cd,stroke:#c9a227
+    style I fill:#d4edda,stroke:#2d8a4a
+    style K fill:#d4edda,stroke:#2d8a4a
