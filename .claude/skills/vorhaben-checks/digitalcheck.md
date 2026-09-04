@@ -192,6 +192,17 @@ gibt es nichts vorzuschlagen) erzeugst du **ein eigenes Finding**:
    Lösungsvorschlag (z. B. Ersetzung von Schriftform durch Textform/eID,
    Standardisierung von Begriffen, Ermöglichen automatisierter Bescheide
    nach § 35a VwVfG).
+5. **Potential:** Verbesserungspotenzial dieser Stelle als `"low"`,
+   `"medium"` oder `"high"` — wie groß wäre der Effekt, würde der Hint
+   umgesetzt? Nur **relativ zu den anderen Findings desselben
+   Gesetzestextes** einordnen (nicht absolut über verschiedene Prüfläufe
+   hinweg vergleichbar) — das Feld wird im Frontend zum Sortieren aller
+   Findings _dieses_ Gesetzes verwendet, nicht gesetzesübergreifend.
+6. **Confidence:** eigene Sicherheit als `"low"`, `"medium"` oder `"high"`,
+   dass es sich tatsächlich um eine relevante Fundstelle handelt — bei
+   mehrdeutigen Formulierungen, Grenzfällen zwischen zwei Prinzipien oder
+   unklarem Bezug eher `"low"` ansetzen. Wird im Frontend nur informativ
+   angezeigt, nicht zum Sortieren verwendet.
 
 Sei präzise statt vollständig: Ein Finding pro klar abgrenzbarer Textstelle
 ist besser als ein Finding, das mehrere Absätze zusammenfasst — spätere
@@ -225,6 +236,8 @@ Verbesserungspotenzial identifiziert, gib eine leere Liste (`[]`) aus.
   tag: "Prinzip 1.1" # exakt einer der 20 Werte aus Schritt 2 (oder "EU-Interoperabilität")
   id: "<uuid>" # per Finding neu erzeugte UUID, siehe unten
   locationLabel: "§ 14 Abs. 2" # nächstgelegene Gliederungsangabe (§, Art., Abs., S., Nr.) zur Textstelle
+  potential: "high" # low | medium | high — relativ zu den anderen Findings dieses Gesetzestextes, siehe Schritt 3.5
+  confidence: "medium" # low | medium | high — Sicherheit, dass es sich um ein echtes Finding handelt, siehe Schritt 3.6
   reasoning: "..."
   hint: "..."
 ```

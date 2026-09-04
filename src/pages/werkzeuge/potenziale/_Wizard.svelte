@@ -10,6 +10,7 @@
   import Hint from "../_shared/Hint.svelte";
   import LoadingIndicator from "../_shared/LoadingIndicator.svelte";
   import FindingsGroup from "./_FindingsGroup.svelte";
+  import { maxPotential, scoreRank } from "./_findingScore";
   import PotenzialeSidebar from "./_PotenzialeSidebar.svelte";
   import type { CheckType, PotenzialeExample } from "./_types";
   import type { Finding as FindingData } from "@/content.config";
@@ -168,7 +169,14 @@
         groups.set(finding.tag, [finding]);
       }
     }
-    return [...groups.values()];
+    for (const group of groups.values()) {
+      group.sort(
+        (a, b) => scoreRank(b.potential) - scoreRank(a.potential),
+      );
+    }
+    return [...groups.values()].sort(
+      (a, b) => maxPotential(b) - maxPotential(a),
+    );
   });
 
   let isLoadingReport = $state(false);

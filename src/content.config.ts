@@ -118,11 +118,15 @@ const kiVisualisierungen = defineCollection({
   }),
 });
 
+const findingScore = z.enum(["low", "medium", "high"]);
+
 const baseFinding = {
   // Matches a <!--finding:{id}:start--> / <!--finding:{id}:end--> marker pair
   // embedded in the potenziale entry's markdown body.
   id: z.string(),
   locationLabel: z.string(), // "§ 14 S.2"
+  potential: findingScore, // improvement potential, relative to other findings in the same law — drives frontend sort order
+  confidence: findingScore, // model's confidence that this is a genuine finding — informational only, not used for sorting
   reasoning: z.string(), // short explanation why this was flagged
   hint: z.string(), // experimental: suggestions, recommendations
 };

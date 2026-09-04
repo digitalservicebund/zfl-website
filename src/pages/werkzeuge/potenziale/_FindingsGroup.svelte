@@ -3,6 +3,7 @@
   import ArrowDown from "~icons/ic/round-keyboard-arrow-down";
   import ArrowUp from "~icons/ic/round-keyboard-arrow-up";
   import { findingTagMeta } from "./_findingTags";
+  import Score from "./_Score.svelte";
 
   let {
     findingsGroup,
@@ -70,6 +71,14 @@
           {/each}
         </dd>
 
+        <dt></dt>
+        <dd
+          class="kern-body kern-body--small kern-body--muted grid grid-cols-2 gap-24"
+        >
+          <Score score={currFinding.potential} label="Potenzial" />
+          <Score score={currFinding.confidence} label="Konfidenz" />
+        </dd>
+
         <dt class="kern-body kern-body--bold">Begründung</dt>
         <dd class="kern-body">{currFinding.reasoning}</dd>
 
@@ -78,8 +87,8 @@
 
         {#if tagMeta.links?.length}
           <dt class="kern-body kern-body--bold">Weitere Infos</dt>
-          <dd>
-            <ul>
+          <dd class="kern-body">
+            <ul class="list-unstyled space-y-8">
               {#each tagMeta.links as link (link.href)}
                 <li><a href={link.href}>{link.label}</a></li>
               {/each}
