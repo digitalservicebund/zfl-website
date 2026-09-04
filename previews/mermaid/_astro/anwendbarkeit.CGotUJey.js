@@ -1,0 +1,15 @@
+var e=`---
+summary: "Prüft, ob eine Verwaltungsleistung in den Anwendungsbereich des OZG fällt, einschließlich der Rückausnahme für Gerichts- und Justizverwaltung."
+---
+flowchart TD
+    A["Verwaltungsleistung einer öffentlichen Stelle"] --> B{"Handelt es sich um eine Stelle des Bundes (einschl. bundesunmittelbarer Körperschaften, Anstalten, Stiftungen) oder eines Landes (einschl. Gemeinden, Gemeindeverbänden, sonstiger der Landesaufsicht unterstehender jur. Personen)? — <a href='{{ELI}}#art-z1_abs-z1' target='_blank' rel='noopener'>§1 1</a>"}
+    B -->|Nein| C["OZG gilt nicht"]
+    B -->|Ja| D{"Handelt es sich um eine Tätigkeit der Gerichtsverwaltung oder einer Behörde der Justizverwaltung (einschl. deren Aufsichtskörperschaften)? — <a href='{{ELI}}#art-z1_abs-z2' target='_blank' rel='noopener'>§1 2</a>"}
+    D -->|Nein| E["OZG gilt"]
+    D -->|Ja| F{"Unterliegt diese Tätigkeit der Nachprüfung durch die Verwaltungsgerichtsbarkeit oder durch die in verwaltungsrechtlichen Anwalts-, Patentanwalts- und Notarsachen zuständigen Gerichte? — <a href='{{ELI}}#art-z1_abs-z2' target='_blank' rel='noopener'>§1 2</a>"}
+    F -->|Ja| E
+    F -->|Nein| C
+
+    style C fill:#f8d7da,stroke:#c0392b
+    style E fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};

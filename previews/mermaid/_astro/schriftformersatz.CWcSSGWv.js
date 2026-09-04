@@ -1,0 +1,21 @@
+var e=`---
+summary: "Zeigt die Schutzmechanismen bei der elektronischen Abgabe von Erklärungen über Verwaltungsportale und wann dadurch die gesetzliche Schriftform ersetzt wird."
+---
+flowchart TD
+    A["Nutzer gibt über ein Verwaltungsportal mittels Online-Formular eine Erklärung ab"] --> B{"Dient die Verwaltungsleistung der Ausführung von Bundesgesetzen oder der Durchführung unmittelbar geltender EU-Rechtsakte mit Bundeskompetenz, ohne abweichende bundesgesetzliche Regelung? — <a href='{{ELI}}#art-z9a_abs-z1' target='_blank' rel='noopener'>§9a 1</a>"}
+    B -->|Nein| Z["Grundsätze dieser Vorschrift nicht anwendbar — andere Regelungen maßgeblich"]
+    B -->|Ja| C["Vor Abgabe erhält der Nutzer Gelegenheit, die Erklärung auf Vollständigkeit und Richtigkeit zu prüfen — <a href='{{ELI}}#art-z9a_abs-z2' target='_blank' rel='noopener'>§9a 2</a>"]
+    C --> D["Nutzer wird durch geeignete Maßnahmen vor einer übereilten Abgabe gewarnt — <a href='{{ELI}}#art-z9a_abs-z3' target='_blank' rel='noopener'>§9a 3</a>"]
+    D --> E["Erklärung wird abgegeben"]
+    E --> F["Nutzer erhält nach Abgabe eine Kopie seiner Erklärung zum Abruf — <a href='{{ELI}}#art-z9a_abs-z4' target='_blank' rel='noopener'>§9a 4</a>"]
+    F --> G{"Hat der Nutzer den Identitätsnachweis nach §3 Absatz 4 über ein Nutzerkonto erbracht und die Erklärung, für die Schriftform vorgeschrieben ist, über ein Online-Formular abgegeben? — <a href='{{ELI}}#art-z9a_abs-z5' target='_blank' rel='noopener'>§9a 5</a>"}
+    G -->|Ja| H["Schriftform gilt als ersetzt — <a href='{{ELI}}#art-z9a_abs-z5' target='_blank' rel='noopener'>§9a 5</a>"]
+    G -->|Nein| I{"Wird stattdessen ein elektronischer Verwaltungsakt oder ein sonstiges elektronisches Dokument der Behörde mit qualifiziertem elektronischem Siegel an das Postfach des Nutzerkontos übermittelt? — <a href='{{ELI}}#art-z9a_abs-z6' target='_blank' rel='noopener'>§9a 6</a>"}
+    I -->|Ja| J["Schriftform gilt als ersetzt — <a href='{{ELI}}#art-z9a_abs-z6' target='_blank' rel='noopener'>§9a 6</a>"]
+    I -->|Nein| K["Schriftform nicht ersetzt — gesetzliches Schriftformerfordernis bleibt bestehen"]
+
+    style Z fill:#fff3cd,stroke:#c9a227
+    style H fill:#d4edda,stroke:#2d8a4a
+    style J fill:#d4edda,stroke:#2d8a4a
+    style K fill:#f8d7da,stroke:#c0392b
+`;export{e as default};
