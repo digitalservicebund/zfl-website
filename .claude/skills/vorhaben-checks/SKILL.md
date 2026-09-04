@@ -1,16 +1,17 @@
 ---
 name: vorhaben-checks
-description: Sucht ein Gesetz über die RIS-Search-API, lädt den Volltext und führt darüber den Digitalcheck aus. Ergebnisse werden im Potenziale-Tool (src/pages/werkzeuge/potenziale) gespeichert. Trigger bei "Vorhabencheck", "Digitalcheck", "Gesetz auf Potenziale prüfen". (Bürgercheck und Praxischeck folgen später.)
+description: Sucht ein Gesetz über die RIS-Search-API, lädt den Volltext und führt darüber den Digitalcheck und den Bürgercheck aus. Ergebnisse werden im Potenziale-Tool (src/pages/werkzeuge/potenziale) gespeichert. Trigger bei "Vorhabencheck", "Digitalcheck", "Bürgercheck", "Gesetz auf Potenziale prüfen". (Praxischeck folgt später.)
 ---
 
 # Vorhaben-Checks
 
 Dieser Skill führt den Nutzer durch einen 4-stufigen Ablauf, um einen
-Gesetzestext mit dem Digitalcheck zu analysieren und das Ergebnis in dieses
-Repo einzupflegen (Tool unter `/werkzeuge/potenziale`). Bürgercheck und
-Praxischeck sind vorerst entfernt — sie werden ergänzt, sobald für sie ein
-vergleichbares Prüfschema wie für den Digitalcheck vorliegt (strukturierte
-Findings statt Fließtext, siehe `digitalcheck.md`).
+Gesetzestext mit dem Digitalcheck und dem Bürgercheck zu analysieren und das
+Ergebnis in dieses Repo einzupflegen (Tool unter `/werkzeuge/potenziale`).
+Praxischeck ist vorerst entfernt — er wird ergänzt, sobald für ihn ein
+vergleichbares Prüfschema wie für Digitalcheck und Bürgercheck vorliegt
+(strukturierte Findings statt Fließtext, siehe `digitalcheck.md` und
+`buergercheck.md`).
 
 Ein optionales Argument kann bereits den Gesetznamen enthalten
 (`$ARGUMENTS`). Wenn vorhanden, überspringe Schritt 1.
@@ -56,38 +57,65 @@ https://docs.rechtsinformationen.bund.de/v3/api-docs)
    nach einzelnen Prozess-Ausschnitten gefiltert, da alle drei Checks den
    gesamten Text nach unterschiedlichen Kriterien durchsuchen).
 
-## Schritt 3 — Den Digitalcheck ausführen
+## Schritt 3 — Digitalcheck und Bürgercheck ausführen
 
-Das Prüfschema liegt als eigenständige Anweisungsdatei in diesem
-Skill-Verzeichnis vor: `.claude/skills/vorhaben-checks/digitalcheck.md`.
+Beide Prüfschemata liegen als eigenständige Anweisungsdateien in diesem
+Skill-Verzeichnis vor: `.claude/skills/vorhaben-checks/digitalcheck.md` und
+`.claude/skills/vorhaben-checks/buergercheck.md`. Lies beide Dateien (falls
+noch nicht geschehen).
 
-Lies die Datei (falls noch nicht geschehen). Starte anschließend einen
-Agenten mit `subagent_type: "fork"`. Der Fork-Agent bekommt:
+Führe die beiden Checks **sequenziell** aus (nicht parallel), da der
+Bürgercheck-Fork im annotierten Text des Digitalcheck-Forks weiterarbeitet:
 
-- den vollständigen Gesetzestext aus Schritt 2,
-- die komplette Anweisung aus `digitalcheck.md` (Rolle, Auftrag und alle 4
-  Prüfschritte),
-- den Hinweis, das Ergebnis exakt im Ausgabeformat aus deren "Schritt 4"
-  **als finale Nachricht zurückzugeben** (kurze Chat-Zusammenfassung, die
-  strukturierte Findings-Liste als YAML passend zum `findings`-Array aus
-  `src/content.config.ts`, sowie den Pfad zur annotierten Gesetzestext-Datei
-  im Scratchpad-Verzeichnis) — inkl. der Vorprüfung: bricht der Check mangels
-  Bezug ab, wird trotzdem genau dieses Ergebnis (mit leerer Findings-Liste und
-  unverändertem, unannotiertem Gesetzestext) zurückgegeben.
+1. Starte einen Agenten mit `subagent_type: "fork"` für den Digitalcheck. Der
+   Fork-Agent bekommt:
+   - den vollständigen Gesetzestext aus Schritt 2,
+   - die komplette Anweisung aus `digitalcheck.md` (Rolle, Auftrag und alle
+     4 Prüfschritte),
+   - den Hinweis, das Ergebnis exakt im Ausgabeformat aus deren "Schritt 4"
+     **als finale Nachricht zurückzugeben** (kurze Chat-Zusammenfassung, die
+     strukturierte Findings-Liste als YAML passend zum `findings`-Array aus
+     `src/content.config.ts`, sowie den Pfad zur annotierten
+     Gesetzestext-Datei im Scratchpad-Verzeichnis) — inkl. der Vorprüfung:
+     bricht der Check mangels Bezug ab, wird trotzdem genau dieses Ergebnis
+     (mit leerer Findings-Liste und unverändertem, unannotiertem
+     Gesetzestext) zurückgegeben.
+2. Starte danach einen zweiten Agenten mit `subagent_type: "fork"` für den
+   Bürgercheck. Der Fork-Agent bekommt:
+   - den vollständigen Gesetzestext aus Schritt 2,
+   - die komplette Anweisung aus `buergercheck.md` (Rolle, Auftrag und alle
+     4 Prüfschritte),
+   - den expliziten Hinweis, dass er in deren Schritt 4 (Teil 3, Punkt 2)
+     **nicht** den rohen Gesetzestext aus Schritt 2 dieses Skills als
+     Ausgangsdatei verwenden soll, sondern die vom Digitalcheck-Fork bereits
+     annotierte Datei (Pfad aus Schritt 1 dieser Aufzählung) — die darin
+     enthaltenen `<!--finding:...:start/end-->`-Kommentare des Digitalcheck
+     sind reiner Text und stören sein `indexOf`-Zitatmatching nicht, solange
+     er seine Zitate weiterhin wortwörtlich aus dem Regelungstext entnimmt.
+     Liegt ein Bürgercheck-Zitat ausnahmsweise exakt so, dass ein
+     Digitalcheck-Marker mitten darin liegt (`indexOf` findet das Zitat
+     dadurch nicht mehr), weicht er auf eine eindeutig lokalisierbare
+     Teilstelle direkt davor oder danach aus, statt das Finding zu verwerfen.
+   - den gleichen Hinweis zum Ausgabeformat wie beim Digitalcheck-Fork
+     (kurze Zusammenfassung, YAML-Findings-Liste, Pfad zur — nun beide
+     Marker-Sets enthaltenden — annotierten Datei).
 
-Der Fork-Agent legt **keine eigene Datei** an — er gibt sein Ergebnis als
-finale Nachricht zurück, die vom Orchestrator in Schritt 4 weiterverarbeitet
-wird.
+Beide Fork-Agenten legen **keine eigene Datei im Zielverzeichnis** an — sie
+geben ihr Ergebnis als finale Nachricht zurück, die vom Orchestrator in
+Schritt 4 weiterverarbeitet wird. Nur die annotierten Zwischen-Dateien im
+Scratchpad sind Dateien im eigentlichen Sinne; die aus Schritt 1 wird nach
+Schritt 2 nicht mehr benötigt, sobald die aus Schritt 2 (mit beiden
+Marker-Sets) vorliegt.
 
-Da der Fork-Agent deinen vollen Kontext erbt, kennt er den geladenen
-Gesetzestext bereits — im Prompt trotzdem explizit referenzieren, dass der
-Digitalcheck auszuführen ist.
+Da die Fork-Agenten deinen vollen Kontext erben, kennen sie den geladenen
+Gesetzestext bereits — im Prompt trotzdem explizit referenzieren, welcher
+Check jeweils auszuführen ist.
 
-> Bürgercheck und Praxischeck sind aktuell nicht Teil dieses Ablaufs. Ihre
-> Anweisungsdateien (`buergercheck.md`, `praxischeck.md`) liegen weiterhin
-> im Skill-Verzeichnis, liefern aber noch Fließtext statt strukturierter
-> Findings und werden hier bewusst nicht aufgerufen — sie werden ergänzt,
-> sobald ein zum Digitalcheck äquivalentes Prüfschema für sie vorliegt.
+> Praxischeck ist aktuell nicht Teil dieses Ablaufs. Seine Anweisungsdatei
+> (`praxischeck.md`) liegt weiterhin im Skill-Verzeichnis, liefert aber noch
+> Fließtext statt strukturierter Findings und wird hier bewusst nicht
+> aufgerufen — er wird ergänzt, sobald ein zu Digitalcheck/Bürgercheck
+> äquivalentes Prüfschema für ihn vorliegt.
 
 ## Schritt 4 — Ergebnisse speichern
 
@@ -106,20 +134,23 @@ Digitalcheck auszuführen ist.
      - `title`: offizieller Name des Gesetzes (ohne Abkürzung).
      - `eli`: ELI-Pfad aus Schritt 2 (optional — nur setzen, wenn das Gesetz
        über RIS gefunden wurde).
-     - `findings`: die YAML-Findings-Liste aus der finalen Nachricht des
-       Digitalcheck-Forks, unverändert übernommen (Schema exakt wie in
-       `digitalcheck.md` Schritt 4 spezifiziert).
+     - `findings`: die YAML-Findings-Listen aus den finalen Nachrichten
+       beider Forks, **zu einer Liste zusammengeführt** (Digitalcheck-
+       Findings gefolgt von Bürgercheck-Findings), unverändert übernommen
+       (Schema exakt wie in `digitalcheck.md` bzw. `buergercheck.md`
+       Schritt 4 spezifiziert).
    - **Body:** der Inhalt der **annotierten** Gesetzestext-Datei, deren Pfad
-     der Digitalcheck-Fork in Schritt 4 (Teil 3) zurückgegeben hat —
-     der vollständige Gesetzestext aus Schritt 2 inklusive der darin
-     eingefügten `<!--finding:{id}:start/end-->`-Marker. Unverändert und
-     vollständig übernehmen, nicht kürzen oder umformulieren — sonst gehen
-     Findings ohne passendes Marker-Paar verloren.
-3. Gib im Chat an den Nutzer die Kurzfassung + Findings-Liste des
-   Digitalchecks aus.
-4. Kurze Zusammenfassung an den Nutzer: welches Gesetz, Digitalbezug
-   ja/nein, Anzahl Findings, wo der Gesetzestext gespeichert wurde. Auf
-   `/werkzeuge/potenziale` im lokalen Dev-Server verweisen, um den Eintrag
-   zu prüfen.
+     der Bürgercheck-Fork in Schritt 4 (Teil 3) zurückgegeben hat — der
+     vollständige Gesetzestext aus Schritt 2 inklusive aller darin
+     eingefügten `<!--finding:{id}:start/end-->`-Marker beider Checks.
+     Unverändert und vollständig übernehmen, nicht kürzen oder
+     umformulieren — sonst gehen Findings ohne passendes Marker-Paar
+     verloren.
+3. Gib im Chat an den Nutzer die Kurzfassungen + Findings-Listen beider
+   Checks aus.
+4. Kurze Zusammenfassung an den Nutzer: welches Gesetz, Digital- und
+   Bürgerbezug ja/nein, Anzahl Findings (je Check), wo der Gesetzestext
+   gespeichert wurde. Auf `/werkzeuge/potenziale` im lokalen Dev-Server
+   verweisen, um den Eintrag zu prüfen.
 
 Nicht committen, es sei denn der Nutzer bittet explizit darum.

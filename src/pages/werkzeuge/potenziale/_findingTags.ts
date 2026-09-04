@@ -279,8 +279,29 @@ const TAG_META: Record<string, TagMeta> = {
     title: "Zusatzmodul: EU-Interoperabilität",
     badgeClass: "kern-badge--tag",
   },
-  Bürgerbezug: {
-    title: "Bürgerbezug",
+  // Titles from buergercheck.md Schritt 2 — keep in sync when that file changes.
+  "Prinzip 1": {
+    title: "Strukturierte Zielgruppen-/Adressatenanalyse sicherstellen",
+    badgeClass: "kern-badge--tag",
+  },
+  "Prinzip 2": {
+    title:
+      "Gewährleisten, dass Zielgruppen die erforderlichen Handlungsfähigkeiten besitzen, um den Erfordernissen des Regelungsvorhabens nachzukommen",
+    badgeClass: "kern-badge--tag",
+  },
+  "Prinzip 3": {
+    title:
+      "Lebenslagen und Begleitumstände aus Sicht der Bürgerinnen und Bürger berücksichtigen",
+    badgeClass: "kern-badge--tag",
+  },
+  "Prinzip 4": {
+    title:
+      "Verbraucherinformationen und Kontaktpunkte zu den Bürgerinnen und Bürgern nutzerfreundlich, praxistauglich und wo möglich automatisiert gestalten",
+    badgeClass: "kern-badge--tag",
+  },
+  "Prinzip 5": {
+    title:
+      "Trade-off zwischen Einzelfallgerechtigkeit und Inanspruchnahme / Automatisierbarkeit von Prozessen berücksichtigen",
     badgeClass: "kern-badge--tag",
   },
   "Placeholder PC": {

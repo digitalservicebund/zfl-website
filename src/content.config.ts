@@ -161,7 +161,13 @@ const findingType = z.discriminatedUnion("type", [
   z.object({
     ...baseFinding,
     type: z.literal("Bürgercheck"),
-    tag: z.enum(["Bürgerbezug"]),
+    tag: z.enum([
+      "Prinzip 1",
+      "Prinzip 2",
+      "Prinzip 3",
+      "Prinzip 4",
+      "Prinzip 5",
+    ]),
   }),
   z.object({
     ...baseFinding,

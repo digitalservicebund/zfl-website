@@ -119,7 +119,7 @@ fileignoreconfig:
   - filename: .claude/skills/vorhaben-checks/digitalcheck.md
     checksum: 5051e4b7042945790861ef7c625ba99c9b2aca151c9e823d12c93247d9bf51de
   - filename: .claude/skills/vorhaben-checks/buergercheck.md
-    checksum: 1b010679bff032ec3089ec7960e0b10ed9f636640bdef57f7ad0194d28641e5d
+    checksum: c50e5a44d463b748d548df853948cd7e478d1a2e1ee51240e77cfa248a60649c
   - filename: src/pages/werkzeuge/potenziale/_data/HeizkostenV_buergercheck.md
     checksum: 27f3b4e145771e0899a85d77aea83f42caaddb5c7027309ba67377aec1075470
   - filename: src/pages/werkzeuge/potenziale/_data/LuftVG_digitalcheck.md
