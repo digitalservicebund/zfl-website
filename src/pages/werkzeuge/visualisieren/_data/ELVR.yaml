@@ -16,3 +16,6 @@ visOptions:
   - name: "Ausfuhrkontrolle"
     filename: "ausfuhrkontrolle"
     articles: ["Art. 39-44"]
+  - name: "Verkauf Gebrauchtfahrzeuge"
+    filename: "verkauf_gebrauchtfahrzeuge"
+    articles: ["Art. 36"]
