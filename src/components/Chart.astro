@@ -48,6 +48,7 @@ const isMultiSeries = data.length > 1;
 const chartClasses = [
   "charts-css",
   "column",
+  !!title && "show-heading",
   "show-labels",
   stack ? "hide-data" : "data-outside pt-24",
   "data-spacing-10",
@@ -64,10 +65,9 @@ const colorVars = data
 const formatValue = (value: number) => value.toLocaleString("de-DE");
 ---
 
-<div class:list={["zfl-chart bg-lavender-200 p-24", className]}>
-  {title && <p class="font-bold">{title}</p>}
+<div class:list={["zfl-chart flex h-full flex-col", className]}>
   <table class={chartClasses} style={colorVars}>
-    {title && <caption>{title}</caption>}
+    {title && <caption class="kern-title text-left">{title}</caption>}
     <thead>
       <tr>
         <th scope="col"> </th>
@@ -114,6 +114,12 @@ const formatValue = (value: number) => value.toLocaleString("de-DE");
 </div>
 
 <style>
+  .zfl-chart {
+    table.show-labels tbody {
+      padding-top: 32px;
+    }
+  }
+
   .zfl-chart .stacked tbody tr {
     gap: 2px;
   }
@@ -123,6 +129,10 @@ const formatValue = (value: number) => value.toLocaleString("de-DE");
 
     & tr th {
       padding-top: 16px;
+    }
+
+    & tr td {
+      border-radius: 2px;
     }
   }
 

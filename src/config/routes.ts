@@ -205,28 +205,6 @@ export const ueber_zahlenUndFakten = {
   parent: ueber,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: 2,
-  navLabel: null,
-} as const;
-
-export const ueber_zahlenUndFaktenCss = {
-  key: "ueber_zahlenUndFaktenCss",
-  path: "/ueber/zahlen-und-fakten-css",
-  title: "Zahlen und Fakten (CSS)",
-  parent: ueber,
-  sitemap: true,
-  isStagingOnly: true,
-  navOrder: null,
-  navLabel: null,
-} as const;
-
-export const ueber_zahlenUndFaktenDatawrapper = {
-  key: "ueber_zahlenUndFaktenDatawrapper",
-  path: "/ueber/zahlen-und-fakten-datawrapper",
-  title: "Zahlen und Fakten (Datawrapper)",
-  parent: ueber,
-  sitemap: true,
-  isStagingOnly: true,
   navOrder: null,
   navLabel: null,
 } as const;
@@ -360,8 +338,6 @@ export const allRoutes = [
   ueber_daranArbeitenWir,
   ueber_neueFruehphase,
   ueber_zahlenUndFakten,
-  ueber_zahlenUndFaktenCss,
-  ueber_zahlenUndFaktenDatawrapper,
   werkzeuge,
   werkzeuge_digitaltauglichkeit,
   werkzeuge_digitaltauglichkeit_beispiele,
