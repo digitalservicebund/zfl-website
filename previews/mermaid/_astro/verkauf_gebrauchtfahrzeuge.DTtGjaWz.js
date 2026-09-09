@@ -1,0 +1,22 @@
+var e=`---
+summary: "Zeigt, wer beim Verkauf eines Gebrauchtfahrzeugs innerhalb der Union welche Nachweise vorlegen muss, dass es sich nicht um ein Altfahrzeug handelt."
+---
+flowchart TD
+    START["Eigentumsübertragung an einem<br/>Gebrauchtfahrzeug innerhalb der Union"] --> AKTEUR{"Wer überträgt das Eigentum?<br/>— <a href='{{ELI}}#art_36' target='_blank' rel='noopener'>Art. 36</a>"}
+
+    AKTEUR -->|"Wirtschaftsteilnehmer"| PFLICHT["Nachweispflicht gegenüber jeder<br/>erwerbsinteressierten Person<br/>— <a href='{{ELI}}#036.001' target='_blank' rel='noopener'>Art. 36 Abs. 1</a>"]
+    AKTEUR -->|"Private Person<br/>(kein Wirtschaftsteilnehmer)"| PRIVCHECK{"Fahrzeug von Versicherung als<br/>wirtschaftlicher Totalschaden eingestuft<br/>oder Verkauf vollständig über<br/>Online-Plattform ohne physische<br/>Übergabe?<br/>— <a href='{{ELI}}#036.002' target='_blank' rel='noopener'>Art. 36 Abs. 2</a>"}
+
+    PRIVCHECK -->|"Ja, mind. eine<br/>Voraussetzung erfüllt"| PFLICHT
+    PRIVCHECK -->|"Nein, keine der<br/>Voraussetzungen erfüllt"| FREI["Keine Nachweispflicht"]
+
+    PFLICHT --> NACHWEIS{"Wie wird nachgewiesen, dass<br/>kein Altfahrzeug vorliegt?<br/>— <a href='{{ELI}}#036.001' target='_blank' rel='noopener'>Art. 36 Abs. 1</a>"}
+
+    NACHWEIS -->|"Unterlagen belegen<br/>Verkehrssicherheit"| UEBERTRAGUNG["Eigentum kann<br/>übertragen werden"]
+    NACHWEIS -->|"Bewertung gemäß<br/>Anhang I bestätigt:<br/>kein Altfahrzeug"| UEBERTRAGUNG
+
+    FREI --> UEBERTRAGUNG
+
+    style FREI fill:#d4edda,stroke:#2d8a4a
+    style UEBERTRAGUNG fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};
