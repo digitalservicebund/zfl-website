@@ -8,7 +8,11 @@ import gesetzentwurfImg from "./gesetzentwurf.png";
 import Layout from "@/layouts/Layout.astro";
 import { Image } from "astro:assets";
 import { ZFL_EMAIL_REGBEG, ZFL_PHONE_REGBEG } from "@/config/constants";
-import { Icon } from "astro-icon/components";
+import IconArrowDownward from "~icons/ic/baseline-arrow-downward";
+import IconAccountTree from "~icons/ic/twotone-account-tree";
+import IconHub from "~icons/ic/twotone-hub";
+import IconLightbulb from "~icons/ic/twotone-lightbulb";
+import praxisbeispielVisImg from "@/content/visualisierungen/gesamtprozess-ueber-gesetz-und-verordnungen.jpg?url";
 
 export const frontmatter = {
   title: "Regelungsbegleitung",
@@ -25,9 +29,9 @@ const description =
       <div class="items-center gap-32 md:flex">
         <div>
           <h1>Regelungsbegleitung</h1>
-          <h2 class="kern-heading-medium mb-24">
+          <p class="kern-subline kern-subline--large">
             Individuelle Unterstützung für Ihr Vorhaben nutzen
-          </h2>
+          </p>
           <p>
             Ein in Gesetzgebungspraxis erfahrenes interdisziplinäres Team
             unterstützt Sie dabei, die Regelung praxisnah, digitaltauglich und
@@ -37,11 +41,7 @@ const description =
             und Prozessmanagement direkt zur Verfügung.
           </p>
           <a class="kern-btn kern-btn--primary mt-32" href="#leistungspakete">
-            <Icon
-              name="ic:baseline-arrow-downward"
-              class="kern-label"
-              aria-hidden
-            />
+            <IconArrowDownward class="kern-label" aria-hidden />
             <span class="kern-label">Leistungspakete anzeigen</span>
           </a>
         </div>
@@ -65,20 +65,23 @@ const description =
 
       <FeatureSet>
         <FeatureItem
-          icon="ic:twotone-account-tree"
           title="Sachverhalte visualisieren"
           body="Komplexe Sachverhalte durch Prozess-Visualisierungen strukturieren, interne und externe Abstimmung vereinfachen"
-        />
+        >
+          <IconAccountTree slot="icon" class="size-full" />
+        </FeatureItem>
         <FeatureItem
-          icon="ic:twotone-lightbulb"
           title="Umsetzung mitdenken"
           body="Betroffenen-Perspektive frühzeitig identifizieren, bestehende Umsetzungshürden beheben"
-        />
+        >
+          <IconLightbulb slot="icon" class="size-full" />
+        </FeatureItem>
         <FeatureItem
-          icon="ic:twotone-hub"
           title="Prozesse strukturieren"
           body="Methodische Unterstützung nutzen, Anleitungen für Praxis- und Digitaltauglichkeit erhalten"
-        />
+        >
+          <IconHub slot="icon" class="size-full" />
+        </FeatureItem>
       </FeatureSet>
 
       <div id="leistungspakete">
@@ -212,11 +215,13 @@ const description =
           zu verstehen und so den digitalen Vollzug zu gestalten.“
         </p>
         <a
-          href="https://digitalcheck.bund.de/beispiele/regelungen/gesetz-zur-modernisierung-und-zum-buerokratieabbau-im-strom-und-energiesteuerrecht"
-          target="_blank"
+          href="https://digitalservice.bund.de/blog/aktuelles-beispiel-fuer-digitaltaugliche-regelungen-das-stromsteuerrecht"
         >
-          Mehr erfahren
-        </a>
+          Zum Blogpost
+        </a> / <a href={praxisbeispielVisImg}>Visualisierung ansehen</a> / <a
+          href="https://dip.bundestag.de/vorgang/gesetz-zur-modernisierung-und-zum-b%C3%BCrokratieabbau-im-strom-und-energiesteuerrecht/312306"
+          >Aktuelle Fassung</a
+        >
         <Image
           slot="media"
           src={gesetzentwurfImg}

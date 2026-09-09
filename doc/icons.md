@@ -1,6 +1,6 @@
 # Using Icons
 
-This project uses [astro-icon](https://github.com/natemoo-re/astro-icon) to display icons. `astro-icon` is a powerful tool that allows us to use icons from various icon sets directly in our Astro components.
+This project uses [unplugin-icons](https://github.com/unplugin/unplugin-icons) to display icons as tree-shaken Svelte components — works in both `.astro` and `.svelte` files.
 
 ## Icon Set
 
@@ -8,22 +8,22 @@ We are using the [Google Material Icons](https://icon-sets.iconify.design/ic/) i
 
 ## How to use
 
-To use an icon, you need to import the `Icon` component from `astro-icon/components` and then use it in your component.
+Import the icon directly from `~icons/ic/<name>` and use it like any other component — including in `.astro` files, since the Svelte compiler renders it to static HTML/SVG at build time.
 
 ### Example
 
-Here is an example of how to use the `timer-outline` icon from the `material-symbols` collection:
+Here is an example of how to use the `outline-timer` icon:
 
 ```astro
 ---
-import { Icon } from "astro-icon/components";
+import IconTimer from "~icons/ic/outline-timer";
 ---
 
-<Icon name="ic:outline-timer" />
+<IconTimer />
 ```
 
 ### Finding Icons
 
 You can find all available icons in the [Google Material Icons](https://icon-sets.iconify.design/ic/) collection on the Iconify website.
 
-When you find an icon you want to use, just copy the name (e.g., `outliner-timer`) and prefix it with `ic:`.
+When you find an icon you want to use, copy its name (e.g., `outline-timer`) and import it from `~icons/ic/<name>`.

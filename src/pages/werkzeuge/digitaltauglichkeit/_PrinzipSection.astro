@@ -1,0 +1,30 @@
+---
+import { tv, type VariantProps } from "tailwind-variants";
+import PrinzipBadge from "@/components/PrinzipBadge.astro";
+interface Props extends VariantProps<typeof styles> {
+  class?: string;
+}
+
+const styles = tv({
+  base: "nth-[2n+1]:bg-lavender-200 nth-[2n+1]:breakout col-[content] scroll-m-32",
+  variants: {
+    // sets the --accent custom property consumed by descendant MDX components
+    // (Explanation, AspectMark) rendered inside the <slot />, so each principle's
+    // color only needs to be defined once here
+    prinzip: {
+      "1": "[--accent:theme(colors.orange.050)]",
+      "2": "[--accent:theme(colors.red.050)]",
+      "3": "[--accent:theme(colors.violet.050)]",
+      "4": "[--accent:theme(colors.green.050)]",
+      "5": "[--accent:theme(colors.lightblue.025)]",
+    },
+  },
+});
+
+const { class: className, prinzip } = Astro.props;
+---
+
+<section id={`prinzip-${prinzip}`} class={styles({ prinzip, className })}>
+  <PrinzipBadge prinzip={prinzip}>Prinzip {prinzip}</PrinzipBadge>
+  <slot />
+</section>

@@ -25,10 +25,14 @@ pnpm test:e2e -- --grep "<test name>"    # Run e2e tests by name
 
 ### Content model
 
-All content lives as files in `src/pages/` — no CMS, no Content Collections (see ADR 0007):
+Most content lives as files in `src/pages/` (see ADR 0007):
 
 - `.astro` for pages with complex component structure
 - `.mdx` for text-heavy pages; must specify `layout: "@/layouts/MdxLayout.astro"` in frontmatter
+
+Some content is defined in content collections under `src/content`.
+
+Prettier's built-in MDX parser can't reliably format a Markdown list (`- item`) that's a direct child of a custom JSX component. Always write these lists with a blank line right after the opening tag and right before the closing tag.
 
 ### Route management
 
@@ -62,7 +66,7 @@ import { isProduction, isStaging, isPreview } from "@/config/stage";
 
 **Styling with `tailwind-variants`**: Use `tv()` from `tailwind-variants` to define component variants. Accept `class?: string` for overrides. See `doc/tailwind-variants.md`.
 
-**Icons**: Use `<Icon name="ic:..." />` from `astro-icon/components`. Icon set is Google Material Icons (`@iconify-json/ic`). Find icons at `icon-sets.iconify.design/ic/`. Prefix names with `ic:`.
+**Icons**: Import directly from `~icons/ic/<name>` (via `unplugin-icons`), e.g. `import IconTimer from "~icons/ic/outline-timer"`, then use as `<IconTimer />` — works in both `.astro` and `.svelte` files. Icon set is Google Material Icons (`@iconify-json/ic`). Find icons at `icon-sets.iconify.design/ic/`. See `doc/icons.md`.
 
 **Layout**: All pages use `<Layout title="...">` from `src/layouts/Layout.astro`, which includes the `PageHeader`, `Footer`, and conditional Posthog analytics.
 

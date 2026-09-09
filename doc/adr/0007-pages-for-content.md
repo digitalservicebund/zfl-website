@@ -44,7 +44,7 @@ We will organize all our content as code files in the `pages` folder:
 
 ## Implementation
 
-- `.mdx` files must specify a `layout` in their frontmatter
+- `.mdx` files in the `pages` directory must specify a `layout` in their frontmatter
 - Custom components can be imported and [used inline](https://docs.astro.build/en/guides/integrations-guide/mdx/#using-components-in-mdx) in `.mdx`
 
 ```mdx

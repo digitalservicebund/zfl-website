@@ -28,3 +28,40 @@
   border: 1px solid #8412af;
   --kern-color-layout-text-default: #8412af;
 }
+.kern-badge--tag {
+  background-color: var(--kern-color-layout-background-default);
+  border: 1px solid var(--kern-color-layout-text-muted-contextual);
+}
+.kern-badge--tag .kern-label {
+  color: var(--kern-color-layout-text-muted-contextual);
+}
+
+.kern-badge--filter {
+  background-color: var(--kern-color-layout-background-default);
+  border: 1px solid var(--kern-color-layout-text-default-contextual);
+}
+
+[class*="kern-badge--prinzip"] {
+  border: 1px solid var(--kern-color-layout-text-default-contextual);
+}
+
+.kern-badge--prinzip-1 {
+  background-color: var(--color-orange-050);
+  --kern-color-layout-text-default-contextual: var(--color-yellow-900);
+}
+.kern-badge--prinzip-2 {
+  background-color: var(--color-red-050);
+  --kern-color-layout-text-default-contextual: var(--color-red-800);
+}
+.kern-badge--prinzip-3 {
+  background-color: var(--color-violet-050);
+  --kern-color-layout-text-default-contextual: #8412af;
+}
+.kern-badge--prinzip-4 {
+  background-color: var(--color-green-050);
+  --kern-color-layout-text-default-contextual: #3d4d00;
+}
+.kern-badge--prinzip-5 {
+  background-color: var(--color-lightblue-025);
+  --kern-color-layout-text-default-contextual: #051d91;
+}

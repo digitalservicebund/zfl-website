@@ -2,17 +2,21 @@
 import type { HTMLAttributes } from "astro/types";
 import { tv, type VariantProps } from "tailwind-variants";
 
-interface Props extends HTMLAttributes<"mark">, VariantProps<typeof styles> {
+interface Props extends HTMLAttributes<"span">, VariantProps<typeof styles> {
   class?: string;
 }
 
 const styles = tv({
-  base: "kern-preline kern-preline--small inline-flex flex-row items-center gap-4 self-start rounded-sm bg-transparent p-4 py-2 forced-colors:dark:bg-transparent forced-colors:dark:text-white forced-colors:dark:[forced-color-adjust:none]",
+  base: "kern-badge",
   variants: {
     look: {
       hint: "text-cosmic-blue-base",
       gray: "bg-lavender-base",
       white: "bg-white",
+      timeline:
+        "kern-badge--small bg-[#F3F4F7] [&>span.kern-label]:font-normal",
+      timelineYear:
+        "kern-badge timeline-year-badge border-cosmic-blue-base border bg-white outline-4 outline-white [&>span.kern-label]:font-bold",
     },
   },
 });
@@ -20,7 +24,9 @@ const styles = tv({
 const { class: className, look, ...attrs } = Astro.props;
 ---
 
-<mark class={styles({ look, className })} {...attrs}>
+<span class={styles({ look, className })} {...attrs}>
   <slot name="icon" />
-  <slot />
-</mark>
+  <span class="kern-label">
+    <slot />
+  </span>
+</span>

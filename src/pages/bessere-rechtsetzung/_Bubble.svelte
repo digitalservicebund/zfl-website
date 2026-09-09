@@ -20,20 +20,12 @@
     /** Fill color of the bubble, defaults `--bubble-color` from Cluster. */
     color?: string;
     title?: string;
-    optional?: boolean;
     size?: BubbleSize;
     className?: string;
     tags?: TagName[];
   }
 
-  let {
-    color,
-    title,
-    optional,
-    size = "md",
-    className = "",
-    tags,
-  }: Props = $props();
+  let { color, title, size = "md", className = "", tags }: Props = $props();
 
   const icons = $derived(tags?.map((t) => iconMap[t]));
 
@@ -89,9 +81,6 @@
       {#if title}
         <div class="kern-label max-md:text-sm md:text-base text-black">
           {title}
-          {#if optional}
-            <span class="block font-normal text-sm"> (optional)</span>
-          {/if}
         </div>
       {/if}
       {#if icons}

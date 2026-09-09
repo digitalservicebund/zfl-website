@@ -14,14 +14,13 @@ To set up the project for development, follow these steps:
 
 ### Prerequisites
 
-#### Node.js
+#### Node.js & Dependencies
 
-We aim to use the current active [LTS version of nodejs](https://nodejs.dev/en/about/releases/).
-There is a `.node-version` file to simplify setup using [nodenv](https://github.com/nodenv/nodenv).
+We aim to use the current active [LTS version of nodejs](https://nodejs.dev/en/about/releases/). We use [mise](https://mise.jdx.dev/) to manage the runtimes and tools for development.
 
-#### Dependencies
+You need to have mise installed on your computer; see the [mise installation docs](https://mise.jdx.dev/installing-mise.html) for the available options.
 
-Install the dependencies using pnpm:
+Install the dependencies by [integrating mise into your shell](https://mise.jdx.dev/getting-started.html#activate-mise) and running:
 
 ```sh
 pnpm install
@@ -29,10 +28,9 @@ pnpm install
 
 #### Git Hooks
 
-For the provided Git hooks, you will need to install [lefthook](https://github.com/evilmartians/lefthook/) and [talisman](https://github.com/thoughtworks/talisman):
+The Git hooks use [lefthook](https://github.com/evilmartians/lefthook/) and [talisman](https://github.com/thoughtworks/talisman), both managed via mise. Once mise is integrated into your shell, activate the hooks with:
 
 ```bash
-brew install lefthook talisman
 lefthook install
 ```
 

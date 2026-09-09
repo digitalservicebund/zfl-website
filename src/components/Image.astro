@@ -1,0 +1,41 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import type { HTMLAttributes } from "astro/types";
+import IconZoomIn from "~icons/ic/outline-zoom-in";
+
+interface Props extends Omit<
+  HTMLAttributes<"img">,
+  "src" | "alt" | "width" | "height"
+> {
+  src: ImageMetadata;
+  alt: string;
+  zoom?: boolean;
+  width?: number | `${number}`;
+  height?: number | `${number}`;
+}
+
+const { zoom = false, src, alt, ...attrs } = Astro.props;
+---
+
+{
+  zoom ? (
+    <a
+      class="relative block"
+      href={src.src}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Bild in neuem Tab öffnen"
+    >
+      <Image src={src} alt={alt} {...attrs} />
+      <span
+        class="text-cosmic-blue-base absolute bottom-16 left-16 flex h-32 w-32 items-center justify-center"
+        aria-hidden="true"
+      >
+        <IconZoomIn class="h-20 w-20" />
+      </span>
+    </a>
+  ) : (
+    <Image src={src} alt={alt} {...attrs} />
+  )
+}

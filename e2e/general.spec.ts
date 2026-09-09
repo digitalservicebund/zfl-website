@@ -13,7 +13,7 @@ test.describe("page titles", () => {
     test(`${route.path} has correct title`, async ({ page }) => {
       await page.goto(route.path);
       const expectedTitle =
-        route.isStagingOnly && !isStaging ? TITLE_404 : getTitle(route.title);
+        route.isStagingOnly && isProduction ? TITLE_404 : getTitle(route.title);
       await expect(page).toHaveTitle(expectedTitle);
       await expect(
         page.getByRole("heading", { level: 1 }).first(),
