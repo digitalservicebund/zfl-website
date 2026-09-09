@@ -19,3 +19,6 @@ visOptions:
   - name: "Verkauf Gebrauchtfahrzeuge"
     filename: "verkauf_gebrauchtfahrzeuge"
     articles: ["Art. 36"]
+  - name: "Reparaturwillen"
+    filename: "reparaturwillen"
+    articles: ["Art. 37", "Anhang I"]
