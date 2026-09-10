@@ -539,8 +539,7 @@
               class="kern-form-input__input"
               id="draft"
               name="draft"
-              bind:value={draftText}
-            ></textarea>
+              bind:value={draftText}></textarea>
           </div>
           <div>
             <button

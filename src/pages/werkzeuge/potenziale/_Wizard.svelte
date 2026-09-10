@@ -170,9 +170,7 @@
       }
     }
     for (const group of groups.values()) {
-      group.sort(
-        (a, b) => scoreRank(b.potential) - scoreRank(a.potential),
-      );
+      group.sort((a, b) => scoreRank(b.potential) - scoreRank(a.potential));
     }
     return [...groups.values()].sort(
       (a, b) => maxPotential(b) - maxPotential(a),
