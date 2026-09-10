@@ -33,6 +33,39 @@ export const schulungenData: ChartSeries[] = [
   },
 ];
 
+export const digitalcheckData: ChartSeries[] = [
+  {
+    label: "angewendete Digitalchecks",
+    values: [
+      { x: 2023, y: 20 },
+      { x: 2024, y: 30 },
+      { x: 2025, y: 40 },
+      { x: 2026, y: 60 },
+    ],
+  },
+];
+
+export const visualisierungenData: ChartSeries[] = [
+  {
+    label: "Vorhaben mit Digitalbezug mit Visualisierung",
+    values: [{ x: "all", y: 29 }],
+  },
+  {
+    label: "Vorhaben mit Digitalbezug ohne Visualisierung",
+    values: [{ x: "all", y: 33 }],
+  },
+];
+
+export const interopData: ChartSeries[] = [
+  {
+    label: "Vorhaben mit Interoperabilitätsbezug",
+    values: [
+      { x: 2025, y: 12 },
+      { x: 2026, y: 18 },
+    ],
+  },
+];
+
 export const websiteData: ChartSeries[] = [
   {
     label: "Zentrum für Legistik",

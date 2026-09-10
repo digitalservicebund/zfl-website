@@ -6,10 +6,18 @@ import Metadata from "./_Metadata.astro";
 import StarIcon from "~icons/ic/baseline-star";
 import StarHalfIcon from "~icons/ic/baseline-star-half";
 import { begleitungen, schulungen } from "@/config/routes";
-import { regbegData, schulungenData, websiteData } from "./_dummyData";
+import {
+  digitalcheckData,
+  regbegData,
+  schulungenData,
+  websiteData,
+  interopData,
+  visualisierungenData,
+} from "./_dashboard-data";
 
 export const frontmatter = {
   title: "Zahlen und Fakten",
+  navOrder: 2,
 };
 ---
 
@@ -25,7 +33,7 @@ export const frontmatter = {
         jetzt im Zentrum für Legistik schrittweise zusammengeführt und
         weiterentwickelt.
       </p>
-      <Metadata lastUpdate="09.09.2026" />
+      <Metadata lastUpdate="10.09.2026" />
     </Hero>
 
     <section>
@@ -144,18 +152,18 @@ export const frontmatter = {
         nützliche Informationen für die Rechtsetzung bereit.
       </p>
       <div class="metrics-grid">
-        <div class="fact-card row-span-2">
-          <Chart data={websiteData} title="7.469 Website-Besuche" />
-          <p class="footnote">
-            Quelle: Posthog für Zentrum für Legistik und Digitalcheck
-          </p>
-        </div>
         <div class="fact-card">
           <p class="headline">15 Minuten</p>
           <p>durchschnittliche Verweildauer pro Besuch</p>
           <p class="footnote">
             Durchschnittswert für beide Webseiten 2026
             <br />
+            Quelle: Posthog für Zentrum für Legistik und Digitalcheck
+          </p>
+        </div>
+        <div class="fact-card row-span-2">
+          <Chart data={websiteData} title="7.469 Website-Besuche" />
+          <p class="footnote">
             Quelle: Posthog für Zentrum für Legistik und Digitalcheck
           </p>
         </div>
@@ -177,16 +185,27 @@ export const frontmatter = {
       <div class="metrics-grid">
         <div class="fact-card row-span-2">
           <Chart
-            data={schulungenData}
+            data={digitalcheckData}
             title="XXX angewendete Digitalchecks seit 2023"
           />
           <p class="footnote">
-            Zeitraum für 2026: Erstes und zweites Quartal
+            Zeitraum für 2026: erstes und zweites Quartal
             <br />
             Quelle: NKR
           </p>
         </div>
-        <div class="fact-card row-span-2"></div>
+        <div class="fact-card row-span-2">
+          <Chart
+            data={visualisierungenData}
+            type="pie"
+            title="17 Prozent mit Visualisierungen"
+          />
+          <p class="footnote">
+            Zeitraum: 2023 bis Juni 2026
+            <br />
+            Quelle: NKR
+          </p>
+        </div>
       </div>
     </section>
 
@@ -198,7 +217,12 @@ export const frontmatter = {
         Systeme in der EU zu fördern.
       </p>
       <div class="metrics-grid">
-        <div class="fact-card row-span-2"></div>
+        <div class="fact-card row-span-2">
+          <Chart
+            data={interopData}
+            title="30 Vorhaben mit Interoperabilitätsbezug"
+          />
+        </div>
         <div class="fact-card">
           <p class="headline">19 Begleitungen</p>
           <p>
@@ -233,7 +257,7 @@ export const frontmatter = {
     @apply bg-lavender-200 flex flex-col justify-between rounded-xl p-32;
 
     p:not(.headline):not(.footnote) {
-      @apply text-2xl;
+      @apply text-(length:--kern-typography-font-size-large-static);
     }
 
     p.headline {

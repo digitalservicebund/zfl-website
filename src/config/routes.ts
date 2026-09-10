@@ -205,7 +205,7 @@ export const ueber_zahlenUndFakten = {
   parent: ueber,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
+  navOrder: 2,
   navLabel: null,
 } as const;
 
