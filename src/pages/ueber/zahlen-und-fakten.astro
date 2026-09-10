@@ -2,7 +2,7 @@
 import Chart, { type ChartSeries } from "@/components/Chart.astro";
 import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
-import Metadata from "../_Metadata.astro";
+import Metadata from "./_Metadata.astro";
 import StarRating from "./_StarRating.astro";
 import { begleitungen, schulungen, werkzeuge } from "@/config/routes";
 import { ZFL_EMAIL } from "@/config/constants";
@@ -197,7 +197,7 @@ const interopSum = getSum(interopData[0]);
         <div class="fact-card row-span-2">
           <Chart
             data={websiteData}
-            title={`${pageViewSum.toLocaleString("de-DE")} Website-Besuche`}
+            title={`${pageViewSum.toLocaleString("de-DE")} Website-Besuche in 2026`}
           />
           <p class="footnote">
             Quelle: Posthog für Zentrum für Legistik und Digitalcheck
@@ -240,7 +240,7 @@ const interopSum = getSum(interopData[0]);
             title={`${digitalchecksSum} Digitalchecks seit 2023`}
           />
           <p class="footnote">
-            Zeitraum für 2026: erstes und zweites Quartal
+            Zeitraum für 2026: Januar bis August
             <br />
             Quelle: NKR
           </p>
