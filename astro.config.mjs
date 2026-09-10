@@ -57,9 +57,6 @@ export default defineConfig({
     assets: "_astro",
   },
   vite: {
-    build: {
-      cssMinify: "esbuild",
-    },
     plugins: [
       tailwindcss(),
       // Renders Iconify icons (e.g. from @iconify-json/ic) as tree-shaken

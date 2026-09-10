@@ -50,9 +50,6 @@ importers:
       astro-seo:
         specifier: ^1.2.0
         version: 1.2.0
-      charts.css:
-        specifier: ^1.2.0
-        version: 1.2.0
       pagefind:
         specifier: ^1.5.2
         version: 1.5.2
@@ -2036,9 +2033,6 @@ packages:
 
   character-entities@2.0.2:
     resolution: {integrity: sha512-shx7oQ0Awen/BRIdkjkvz54PnEEI/EjwXDSIZp86/KKdbafHh1Df/RYGBhn4hbe2+uKC9FnT5UCEdyPz3ai9hQ==}
-
-  charts.css@1.2.0:
-    resolution: {integrity: sha512-/NCeCMOYZHHeS5vR/32Ubl84Ob500SGriFUxUReMYFPnBIsaBcfO91EQsRHp6/1LwraXTqizCx+iSQ7XSsy4WA==}
 
   chokidar@4.0.3:
     resolution: {integrity: sha512-Qgzu8kfBvo+cA4962jnP1KkS6Dop5NS6g7R5LFYJr4b8Ub94PPQXUksCw9PvXoeXPRRddRNC5C1JQUR2SMGtnA==}
@@ -6217,8 +6211,6 @@ snapshots:
   character-entities-legacy@3.0.0: {}
 
   character-entities@2.0.2: {}
-
-  charts.css@1.2.0: {}
 
   chokidar@4.0.3:
     dependencies:
