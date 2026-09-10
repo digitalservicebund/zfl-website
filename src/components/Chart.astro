@@ -134,7 +134,9 @@ const pieClipPath = (start: number, end: number) => {
                 style={`${cellStyle} --color: ${colorFor(seriesIndex)};`}
                 tabindex="0"
               >
-                <span class="data">{formatValue(value)}</span>
+                <span class="data kern-body kern-body--small kern-body--muted">
+                  {formatValue(value)}
+                </span>
                 <span class="tooltip">
                   <span class="max-sm:hidden">{series.label}:</span>{" "}
                   {formatValue(value)}
@@ -174,7 +176,7 @@ const pieClipPath = (start: number, end: number) => {
   }
 
   table.column.show-labels tbody {
-    padding-top: 32px;
+    padding-top: 24px;
     padding-bottom: 8px;
   }
 
