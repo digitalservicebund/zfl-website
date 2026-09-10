@@ -93,7 +93,7 @@ const pieClipPath = (start: number, end: number) => {
 };
 ---
 
-<div class:list={["zfl-chart flex h-full flex-col", className]}>
+<div class:list={["zfl-chart flex flex-col", className]}>
   <table
     class:list={[
       "charts-css",
@@ -157,16 +157,28 @@ const pieClipPath = (start: number, end: number) => {
 
 <style>
   .zfl-chart {
-    table.show-labels tbody {
-      padding-top: 32px;
+    height: 100%;
+  }
+
+  table.charts-css {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    tbody {
+      height: 100%;
     }
+  }
+
+  table.column.show-labels tbody {
+    padding-top: 32px;
+    padding-bottom: 8px;
   }
 
   table.show-heading caption {
     margin-bottom: 1em;
   }
 
-  .charts-css.pie tbody {
+  table.pie tbody {
     width: 67%;
     margin-inline: auto;
 
@@ -175,36 +187,38 @@ const pieClipPath = (start: number, end: number) => {
     }
   }
 
-  .zfl-chart .stacked tbody tr {
+  table.stacked tbody tr {
     gap: 2px;
   }
 
-  .zfl-chart .column {
+  table.column {
     --aspect-ratio: 4/3;
 
-    & tr th {
-      padding-top: 16px;
+    tr th {
+      transform: translateY(8px);
     }
 
-    & tr td {
+    tr td {
+      max-width: 80px;
+      margin-inline: auto;
       border-radius: 2px;
     }
   }
 
-  .zfl-chart .tooltip {
+  .tooltip {
     background-color: black;
     &::after {
       border-top-color: black;
     }
   }
 
-  .zfl-chart .pie td {
+  table.pie td {
     --tooltip-radius: 30%;
     --tooltip-angle: calc(0.5turn * var(--start, 0) + 0.5turn * var(--end, 0));
     /* Only the wedge-shaped ::before (see below) should receive hover/click. */
     pointer-events: none;
 
-    & .tooltip {
+    .tooltip {
       inset-inline-start: calc(
         50% + var(--tooltip-radius) * sin(var(--tooltip-angle))
       );
@@ -219,17 +233,24 @@ const pieClipPath = (start: number, end: number) => {
     }
   }
 
-  .zfl-chart td:focus-visible .tooltip {
+  table td:focus-visible .tooltip {
     visibility: visible;
     opacity: 1;
   }
 
   .legend {
+    height: auto;
+    flex-shrink: 0;
     border: none;
     padding-bottom: 0;
+    gap: 8px;
 
-    & li::before {
-      border: none;
+    li {
+      line-height: 1.5;
+      &::before {
+        border: none;
+        flex-shrink: 0;
+      }
     }
   }
 </style>

@@ -222,6 +222,7 @@ export const frontmatter = {
             data={interopData}
             title="30 Vorhaben mit Interoperabilitätsbezug"
           />
+          <p class="footnote">Zeitraum für 2026: Januar bis August</p>
         </div>
         <div class="fact-card">
           <p class="headline">19 Begleitungen</p>
@@ -254,7 +255,7 @@ export const frontmatter = {
   }
 
   .fact-card {
-    @apply bg-lavender-200 flex flex-col justify-between rounded-xl p-32;
+    @apply bg-lavender-200 flex flex-col justify-between rounded-xl p-24 sm:p-32;
 
     p:not(.headline):not(.footnote) {
       @apply text-(length:--kern-typography-font-size-large-static);
