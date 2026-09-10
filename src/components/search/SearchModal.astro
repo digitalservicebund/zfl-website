@@ -20,13 +20,16 @@ const imgPrefix = isDevelopment ? "/dist" : "";
 <PagefindConfig instance={instance} filterTypes={filterTypes} />
 <pagefind-modal instance={instance}>
   <pagefind-modal-header>
-    <pagefind-input placeholder={placeholder} instance={instance}
+    <pagefind-input
+      placeholder={placeholder}
+      instance={instance}
     ></pagefind-input>
   </pagefind-modal-header>
   <pagefind-modal-body>
     <search-modal-summary
       data-fuzzy-keywords={keywordsDotSeparated}
-      instance={instance}></search-modal-summary>
+      instance={instance}
+    ></search-modal-summary>
     <pagefind-results hide-sub-results instance={instance}>
       <script
         is:inline
@@ -59,7 +62,7 @@ const imgPrefix = isDevelopment ? "/dist" : "";
             </article>
           </li>
         `}
-      />
+      ></script>
     </pagefind-results>
   </pagefind-modal-body>
   <pagefind-modal-footer>

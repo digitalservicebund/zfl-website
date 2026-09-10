@@ -124,6 +124,8 @@ fileignoreconfig:
     checksum: 6fd026b3401e84ff4d82109e3e2c14964fa1d9ba70b1a61fff5b8b6f21ed737f
   - filename: src/content/werkzeuge/visualisierungen.png
     checksum: d68b2abea5a2f030c40821897777800100d7491f847bdea1993c190c6ed16800
+  - filename: src/pages/werkzeuge/ressourcen/technische-umsetzbarkeit.astro
+    allowed_patterns: [IT-Anpassungen]
 scopeconfig:
   - scope: node
 allowed_patterns:

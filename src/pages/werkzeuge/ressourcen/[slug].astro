@@ -27,23 +27,21 @@ const { Content } = await render(werkzeug);
     <Hero level="sub" class="no-highlight bg-transparent">
       <MediaText>
         <div class="mb-16 flex gap-8">
-          {
-            werkzeug.data.type.map((type, i) => {
-              /* pagefind: take only first, as metadata can be only a single string */
-              const pfTypeMeta = i == 0 && "pageType";
-              return (
-                <span class={`kern-badge kern-badge--${type.toLowerCase()}`}>
-                  <span
-                    class="kern-label"
-                    data-pagefind-meta={pfTypeMeta}
-                    data-pagefind-filter="pageType"
-                  >
-                    {type}
-                  </span>
+          {werkzeug.data.type.map((type, i) => {
+            /* pagefind: take only first, as metadata can be only a single string */
+            const pfTypeMeta = i == 0 && "pageType";
+            return (
+              <span class={`kern-badge kern-badge--${type.toLowerCase()}`}>
+                <span
+                  class="kern-label"
+                  data-pagefind-meta={pfTypeMeta}
+                  data-pagefind-filter="pageType"
+                >
+                  {type}
                 </span>
-              );
-            })
-          }
+              </span>
+            );
+          })}
         </div>
         <h1>{title}</h1>
         <p>{description}</p>
@@ -61,7 +59,8 @@ const { Content } = await render(werkzeug);
           >
             <span
               class="kern-icon kern-icon--open-in-new kern-icon--default"
-              aria-hidden="true"></span>
+              aria-hidden="true"
+            ></span>
             <span class="kern-label">Werkzeug öffnen</span>
           </a>
           <a href={werkzeugeRoute.path} class="kern-btn kern-btn--secondary">
@@ -71,12 +70,10 @@ const { Content } = await render(werkzeug);
         {image && <Image slot="media" src={image} alt={title} class="my-md" />}
       </MediaText>
     </Hero>
-    {
-      werkzeug.body && (
-        <section>
-          <Content />
-        </section>
-      )
-    }
+    {werkzeug.body && (
+      <section>
+        <Content />
+      </section>
+    )}
   </main>
 </Layout>

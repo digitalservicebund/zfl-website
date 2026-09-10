@@ -22,10 +22,11 @@ const description =
       <h1>{frontmatter.title}</h1>
       <p>
         Hier finden Sie Regelungsbeispiele zur Anwendung der Prinzipien. Mehr
-        Details zu den Prinzipien selbst finden Sie auf der <a
-          href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien"
-          >Webseite des Digitalcheck</a
-        >.
+        Details zu den Prinzipien selbst finden Sie auf der{" "}
+        <a href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien">
+          Webseite des Digitalcheck
+        </a>
+        .
       </p>
     </Hero>
     <div aria-hidden="true" x-ref="sentinel" class="h-px -translate-y-px"></div>
@@ -43,15 +44,13 @@ const description =
       <div class="flex flex-col flex-wrap justify-between gap-32 lg:flex-row">
         <div class="flex flex-wrap items-center gap-8 lg:gap-16">
           <p class="kern-label my-0 py-0">Springen zu:</p>
-          {
-            (["1", "2", "3", "4", "5"] as const).map((principleIndex) => (
-              <a href={`#prinzip-${principleIndex}`}>
-                <PrinzipBadge prinzip={principleIndex}>
-                  Prinzip {principleIndex}
-                </PrinzipBadge>
-              </a>
-            ))
-          }
+          {(["1", "2", "3", "4", "5"] as const).map((principleIndex) => (
+            <a href={`#prinzip-${principleIndex}`}>
+              <PrinzipBadge prinzip={principleIndex}>
+                Prinzip {principleIndex}
+              </PrinzipBadge>
+            </a>
+          ))}
         </div>
         <PageSearch
           keyboardShortcut
@@ -70,10 +69,9 @@ const description =
           systemübergreifend ohne manuelle Nacherfassung verarbeiten und
           Digitaltauglichkeit von Anfang an mitgedacht wurde.
         </p>
-        <a
-          href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/digitale-angebote-fuer-alle-nutzbar-gestalten"
-          >Mehr zum Prinzip beim Digitalcheck</a
-        >
+        <a href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/digitale-angebote-fuer-alle-nutzbar-gestalten">
+          Mehr zum Prinzip beim Digitalcheck
+        </a>
         <AspectSection>
           <h3 id="digitale-kommunikation">Digitale Kommunikation</h3>
           <AnnotatedArticle slug="BVerfGG/23a-1" />
@@ -99,17 +97,17 @@ const description =
       <PrinzipSection prinzip="2">
         <h2>Datenwiederverwendung benötigt einheitliches Recht</h2>
         <p>
-          Das <a
-            href="https://www.digitale-verwaltung.de/Webs/DV/DE/registermodernisierung/registermodernisierung-node.html"
-            >Once-Only-Prinzip</a
-          > spart Zeit und Kosten, indem Daten nur einmal angegeben und dann auf Basis
-          harmonisierter Rechtsbegriffe, Datenschutz und technischer Standards wiederverwendet
-          werden.
+          Das{" "}
+          <a href="https://www.digitale-verwaltung.de/Webs/DV/DE/registermodernisierung/registermodernisierung-node.html">
+            Once-Only-Prinzip
+          </a>{" "}
+          spart Zeit und Kosten, indem Daten nur einmal angegeben und dann auf
+          Basis harmonisierter Rechtsbegriffe, Datenschutz und technischer
+          Standards wiederverwendet werden.
         </p>
-        <a
-          href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/datenwiederverwendung-benoetigt-einheitliches-recht"
-          >Mehr zum Prinzip beim Digitalcheck</a
-        >
+        <a href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/datenwiederverwendung-benoetigt-einheitliches-recht">
+          Mehr zum Prinzip beim Digitalcheck
+        </a>
         <AspectSection>
           <h3 id="existierende-daten-nachnutzen">
             Existierende Daten nachnutzen
@@ -138,10 +136,9 @@ const description =
           Schnittstellen und Open-Source aufbauen – was zugleich die
           Interoperabilität fördert.
         </p>
-        <a
-          href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/etablierte-technologien-ermoeglichen-effiziente-umsetzung"
-          >Mehr zum Prinzip beim Digitalcheck</a
-        >
+        <a href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/etablierte-technologien-ermoeglichen-effiziente-umsetzung">
+          Mehr zum Prinzip beim Digitalcheck
+        </a>
         <AspectSection>
           <h3 id="vorhandene-loesungen">Vorhandene Lösungen</h3>
           <AnnotatedArticle slug="ZPO/1132-1" />
@@ -163,10 +160,9 @@ const description =
           setzen dadurch Ressourcen für komplexere Fälle frei.
         </p>
 
-        <a
-          href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/automatisierung-basiert-auf-eindeutigen-regelungen"
-          >Mehr zum Prinzip beim Digitalcheck</a
-        >
+        <a href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/automatisierung-basiert-auf-eindeutigen-regelungen">
+          Mehr zum Prinzip beim Digitalcheck
+        </a>
         <AspectSection>
           <h3 id="bestehende-prozesse">Bestehende Prozesse</h3>
           <AnnotatedArticle slug="LuftVG/66a-3" />
@@ -191,10 +187,9 @@ const description =
           durch konsequente Datensparsamkeit erleichtert, die zugleich den
           Erfüllungsaufwand reduziert.
         </p>
-        <a
-          href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/datenschutz-und-informationssicherheit-schaffen-vertrauen"
-          >Mehr zum Prinzip beim Digitalcheck</a
-        >
+        <a href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/datenschutz-und-informationssicherheit-schaffen-vertrauen">
+          Mehr zum Prinzip beim Digitalcheck
+        </a>
         <AspectSection>
           <h3 id="datenschutz-beispiele">Datenschutz</h3>
           <AnnotatedArticle slug="GWKHV/39-3" />
@@ -212,13 +207,13 @@ const description =
       <h2>Sie möchten Ihr Beispiel hier sehen?</h2>
       <p>
         Wir nehmen gerne Vorschläge für Beispiele entgegen. Wenn Sie einen
-        digitaltauglichen Regelungstext haben, schreiben Sie uns eine E-Mail an <a
-          href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a
-        >. Wir melden uns zeitnah bei Ihnen.
+        digitaltauglichen Regelungstext haben, schreiben Sie uns eine E-Mail an{" "}
+        <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>. Wir melden uns zeitnah
+        bei Ihnen.
       </p>
     </section>
-  </main></Layout
->
+  </main>
+</Layout>
 <style>
   @reference "@/styles/global.css";
 

@@ -39,13 +39,11 @@ const { class: className, contentClass, look, padding, ...attrs } = Astro.props;
 ---
 
 <div class={cardStyles({ look, padding, className })} {...attrs}>
-  {
-    Astro.slots.icon && (
-      <div class={iconStyle()}>
-        <slot name="icon" />
-      </div>
-    )
-  }
+  {Astro.slots.icon && (
+    <div class={iconStyle()}>
+      <slot name="icon" />
+    </div>
+  )}
   <div class={contentStyles({ class: contentClass })}>
     <slot />
   </div>
