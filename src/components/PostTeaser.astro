@@ -25,18 +25,16 @@ const {
     <hgroup>
       <p class="kern-preline">
         {date} · {source}
-        {
-          paywalled && (
-            <>
-              <span aria-hidden="true"> (€)</span>
-              <span class="kern-sr-only"> Bezahlinhalt</span>
-            </>
-          )
-        }
+        {paywalled && (
+          <>
+            <span aria-hidden="true"> (€)</span>
+            <span class="kern-sr-only"> Bezahlinhalt</span>
+          </>
+        )}
       </p>
       <h2 class="kern-title">
-        <a href={href} class="kern-link--stretched leading-32" target="_blank"
-          >{title}
+        <a href={href} class="kern-link--stretched leading-32" target="_blank">
+          {title}
         </a>
       </h2>
     </hgroup>

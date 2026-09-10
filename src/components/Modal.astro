@@ -16,9 +16,7 @@ const { id, contentClass = "max-w-a11y max-h-screen" } = Astro.props;
 ---
 
 <dialog id={id} popover class="pointer-events-none bg-transparent">
-  <div
-    class="backdrop flex h-screen w-screen items-center justify-center bg-black/20"
-  >
+  <div class="backdrop flex h-screen w-screen items-center justify-center bg-black/20">
     <div
       class:list={[
         "p-md pb-lg pointer-events-auto overflow-auto rounded-sm bg-white",

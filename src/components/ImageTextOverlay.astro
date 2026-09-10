@@ -20,22 +20,20 @@ const {
 } = Astro.props;
 ---
 
-<div
-  class="relative space-y-24 lg:grid lg:h-482 lg:grid-cols-6 lg:items-center lg:overflow-hidden"
->
+<div class="relative space-y-24 lg:grid lg:h-482 lg:grid-cols-6 lg:items-center lg:overflow-hidden">
   <InfoPanel
     look="gray"
     class="z-1 self-start lg:col-span-3 lg:w-600 lg:self-center"
   >
     <slot name="content" />
-    <a class="inline-flex items-center gap-8 before:hidden" href={linkHref}
-      ><span
+    <a class="inline-flex items-center gap-8 before:hidden" href={linkHref}>
+      <span
         class=`kern-icon kern-icon--${icon} kern-icon--default`
         aria-hidden="true"
-        style="background-color: currentColor"></span><p>
-        {linkText}
-      </p></a
-    >
+        style="background-color: currentColor"
+      ></span>
+      <p>{linkText}</p>
+    </a>
   </InfoPanel>
   <Image
     src={image}

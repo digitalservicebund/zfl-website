@@ -78,22 +78,20 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
     <div class="flex">
       <!-- Desktop Navigation -->
       <nav class="hidden h-full min-[900px]:flex" aria-label="Hauptnavigation">
-        {
-          headerNavigation.map((route) => {
-            const isActive =
-              currentPath === route.path ||
-              currentPath.startsWith(route.path + "/");
-            return (
-              <a
-                href={route.path}
-                class={navItemStyle("main", isActive)}
-                aria-current={isActive ? "page" : undefined}
-              >
-                {getRouteLabel(route)}
-              </a>
-            );
-          })
-        }
+        {headerNavigation.map((route) => {
+          const isActive =
+            currentPath === route.path ||
+            currentPath.startsWith(route.path + "/");
+          return (
+            <a
+              href={route.path}
+              class={navItemStyle("main", isActive)}
+              aria-current={isActive ? "page" : undefined}
+            >
+              {getRouteLabel(route)}
+            </a>
+          );
+        })}
       </nav>
 
       <SearchButton class={navItemStyle("main")} keyboardToggle />
@@ -127,8 +125,7 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
     class="mobile-menu-backdrop fixed inset-x-0 bottom-0 z-10 bg-black/40 min-[900px]:hidden"
     @click="mobileMenuOpen = false"
     aria-hidden="true"
-  >
-  </div>
+  ></div>
   <!-- Mobile Navigation -->
   <nav
     id={mobileMenuId}

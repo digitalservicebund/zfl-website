@@ -94,24 +94,20 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
           Typischer Aufbau eines Flussdiagramms
         </h2>
         <div class="space-y-56">
-          <div
-            class="gap-md mt-32 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
-          >
-            {
-              aufbauElemente.map((element) => (
-                <div>
-                  <Image
-                    src={element.image}
-                    alt={element.title}
-                    class="h-64 w-auto"
-                  />
-                  <p class="kern-heading-medium mt-16 hyphens-auto">
-                    {element.title}
-                  </p>
-                  <p>{element.body}</p>
-                </div>
-              ))
-            }
+          <div class="gap-md mt-32 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+            {aufbauElemente.map((element) => (
+              <div>
+                <Image
+                  src={element.image}
+                  alt={element.title}
+                  class="h-64 w-auto"
+                />
+                <p class="kern-heading-medium mt-16 hyphens-auto">
+                  {element.title}
+                </p>
+                <p>{element.body}</p>
+              </div>
+            ))}
           </div>
           <figure class="space-y-16">
             <p class="kern-heading-large">Beispiel eines Flussdiagramms</p>
@@ -170,7 +166,9 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
           – wichtig ist, dass Sie anfangen. Sie können auch in einem einfachen
           Whiteboard-Programm oder Powerpoint arbeiten.
         </p>
-        <p><b>Darauf sollten Sie achten:</b></p>
+        <p>
+          <b>Darauf sollten Sie achten:</b>
+        </p>
         <ul>
           <li>Visualisierung ist klar strukturiert und gut lesbar</li>
           <li>Beschränkt sich auf die wesentlichen Elemente des Prozesses</li>
@@ -181,12 +179,14 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
               <p class="font-bold">Vorlage für Flussdiagramm</p>
             </div>
             <p>
-              Hier können Sie eine <strong>Powerpoint-Vorlage (PPT)</strong> für das
-              Flussdiagramm herunterladen. In der Vorlage ist eine Schritt-für-Schritt-Anleitung
-              enthalten. Sie können diese ausdrucken oder an Ihrem Computer bearbeiten.
-              Sofern in Ihrem Ressort <strong>Conceptboard</strong> genutzt werden
-              kann, können Sie sich auch eine Kopie dieser Conceptboard-Vorlage erstellen.
-              Für letzteres können Sie einen <strong>Gast-Zugang</strong> anlegen.
+              Hier können Sie eine <strong>Powerpoint-Vorlage (PPT)</strong> für
+              das Flussdiagramm herunterladen. In der Vorlage ist eine
+              Schritt-für-Schritt-Anleitung enthalten. Sie können diese
+              ausdrucken oder an Ihrem Computer bearbeiten. Sofern in Ihrem
+              Ressort <strong>Conceptboard</strong> genutzt werden kann, können
+              Sie sich auch eine Kopie dieser Conceptboard-Vorlage erstellen.
+              Für letzteres können Sie einen <strong>Gast-Zugang</strong>{" "}
+              anlegen.
             </p>
             <ul class="list-unstyled space-y-8">
               <li>
@@ -194,15 +194,19 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
                   href={conceptboardTemplate}
                   target="_blank"
                   rel="noopener"
-                  class="text-link">Conceptboard-Vorlage</a
+                  class="text-link"
                 >
+                  Conceptboard-Vorlage
+                </a>
               </li>
               <li>
                 <a
                   href={powerpointTemplate}
                   class="text-link text-link--download"
-                  download>Powerpoint-Vorlage</a
+                  download
                 >
+                  Powerpoint-Vorlage
+                </a>
               </li>
             </ul>
             <p>
@@ -269,12 +273,13 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
             <p>Beispiel: Fahrerlaubnis</p>
             <ul>
               <li>
-                <b>Ziel</b> der Visualisierung: „Ich möchte den Prozess für die Erlangung
-                der Fahrerlaubnis verändern und digital ermöglichen.“
+                <b>Ziel</b> der Visualisierung: „Ich möchte den Prozess für die
+                Erlangung der Fahrerlaubnis verändern und digital ermöglichen.“
               </li>
               <li>
-                Die <b>Perspektive</b> der Visualisierung ist die der Normadressaten
-                und -adressatinnen. In diesem Fall die einer Fahrschülerin.
+                Die <b>Perspektive</b> der Visualisierung ist die der
+                Normadressaten und -adressatinnen. In diesem Fall die einer
+                Fahrschülerin.
               </li>
             </ul>
           </div>
@@ -296,12 +301,12 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
         </p>
         <ul>
           <li>
-            <b>Start</b> (Kreis mit dünner Linie): Wann startet der Prozess der Akteurin
-            oder Akteurs?
+            <b>Start</b> (Kreis mit dünner Linie): Wann startet der Prozess der
+            Akteurin oder Akteurs?
           </li>
           <li>
-            <b>Ende</b> (Kreis mit dicker Linie): Was soll die Akteurin oder Akteur
-            am Ende erreichen?
+            <b>Ende</b> (Kreis mit dicker Linie): Was soll die Akteurin oder
+            Akteur am Ende erreichen?
           </li>
         </ul>
         <p>
@@ -326,7 +331,9 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
             zoom={true}
           />
           <div>
-            <p><b>Beispiel: Fahrerlaubnis</b></p>
+            <p>
+              <b>Beispiel: Fahrerlaubnis</b>
+            </p>
             <ul>
               <li>
                 Der Startpunkt für die Fahrschülerin ist der Wunsch, einen
@@ -347,8 +354,8 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
             Visualisieren Sie den Prozess
           </h3>
           <p>
-            Jetzt <b>übertragen Sie auf das Template</b> die Akteure sowie Start-
-            und Endpunkt:
+            Jetzt <b>übertragen Sie auf das Template</b> die Akteure sowie
+            Start- und Endpunkt:
           </p>
           <p>
             Jeder Akteur erhält eine sogenannte Schwimmbahn. Alle Aktivitäten
@@ -411,24 +418,25 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
             zoom={true}
           />
           <div>
-            <p><b>Beispiel Fahrerlaubnis</b></p>
+            <p>
+              <b>Beispiel Fahrerlaubnis</b>
+            </p>
             <ul>
               <li>
-                <b>Akteure</b> (Fahrschülerin, Fahrschule, Meldebehörde) haben je
-                eine eigene Schwimmbahn.
+                <b>Akteure</b> (Fahrschülerin, Fahrschule, Meldebehörde) haben
+                je eine eigene Schwimmbahn.
               </li>
               <li>
-                <b>Startpunkt</b> („Möchte Führerschein erlangen") liegt am Anfang
-                der Fahrschülerin-Schwimmbahn.
+                <b>Startpunkt</b> („Möchte Führerschein erlangen") liegt am
+                Anfang der Fahrschülerin-Schwimmbahn.
               </li>
               <li>
-                Prozess-Ablauf wird durch <b>Verbindungslinien</b> und <b
-                  >Schritte</b
-                > dargestellt.
+                Prozess-Ablauf wird durch <b>Verbindungslinien</b> und{" "}
+                <b>Schritte</b> dargestellt.
               </li>
               <li>
-                Wesentliche <b>Paragraphen</b> (z.B. FeV § 16, BMG § 18) sind in den
-                Kästen vermerkt.
+                Wesentliche <b>Paragraphen</b> (z.B. FeV § 16, BMG § 18) sind in
+                den Kästen vermerkt.
               </li>
             </ul>
           </div>
@@ -476,7 +484,9 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
             <li>Leitfrage, die beantwortet wird und,</li>
             <li>falls zutreffend, Seitenzahlen</li>
           </ul>
-          <p><b>Darauf sollten Sie achten:</b></p>
+          <p>
+            <b>Darauf sollten Sie achten:</b>
+          </p>
           <ul>
             <li>
               Zusammenhänge und Abgrenzungen sind klar erkennbar z.B. zu anderen
@@ -492,7 +502,9 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
             zoom={true}
           />
           <div>
-            <p><b>Beispiel: Fahrerlaubnis</b></p>
+            <p>
+              <b>Beispiel: Fahrerlaubnis</b>
+            </p>
             <ul>
               <li>
                 <b>Ablauf/Entscheidungen</b>: Der Prozess ist durch
@@ -516,40 +528,33 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
     <section class="breakout-grid space-y-32">
       <h2>Weitere Ressourcen</h2>
       <div class="lg:grid lg:grid-cols-2 lg:gap-32 xl:grid-cols-3">
-        {
-          external_ressources.map((ressource) => (
-            <KernCard
-              title={ressource.data.title}
-              href={ressource.data.href}
-              target_option={ressource.data.isExternal ? "_blank" : "_self"}
-              body={ressource.data.description}
-              interactive={false}
-              image={ressource.data.image}
-              imageAlt={ressource.data.image ? ressource.data.title : undefined}
-            >
-              <div slot="pre-header" class="mb-16 flex w-full justify-between">
-                <div class="flex gap-8">
-                  {ressource.data.type.map((type) => (
-                    <span
-                      class={`kern-badge kern-badge--${type.toLowerCase()}`}
-                    >
-                      <span class="kern-label">{type}</span>
-                    </span>
-                  ))}
-                </div>
+        {external_ressources.map((ressource) => (
+          <KernCard
+            title={ressource.data.title}
+            href={ressource.data.href}
+            target_option={ressource.data.isExternal ? "_blank" : "_self"}
+            body={ressource.data.description}
+            interactive={false}
+            image={ressource.data.image}
+            imageAlt={ressource.data.image ? ressource.data.title : undefined}
+          >
+            <div slot="pre-header" class="mb-16 flex w-full justify-between">
+              <div class="flex gap-8">
+                {ressource.data.type.map((type) => (
+                  <span class={`kern-badge kern-badge--${type.toLowerCase()}`}>
+                    <span class="kern-label">{type}</span>
+                  </span>
+                ))}
               </div>
-              <div
-                slot="footer"
-                class="text-icon-muted! flex items-center gap-8"
-              >
-                <IconAutoStories class="h-32 w-32 shrink-0" />
-                <p class="kern-subline kern-subline-dark py-0">
-                  Quelle: {ressource.data.source}
-                </p>
-              </div>
-            </KernCard>
-          ))
-        }
+            </div>
+            <div slot="footer" class="text-icon-muted! flex items-center gap-8">
+              <IconAutoStories class="h-32 w-32 shrink-0" />
+              <p class="kern-subline kern-subline-dark py-0">
+                Quelle: {ressource.data.source}
+              </p>
+            </div>
+          </KernCard>
+        ))}
       </div>
     </section>
   </main>

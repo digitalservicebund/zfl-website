@@ -73,16 +73,14 @@ const PAGEFIND_INSTANCE = "werkzeuge";
     </Hero>
     <section>
       <h2>Ich möchte ...</h2>
-      {
-        categories.map(({ id, title }) => (
-          <p>
-            <a href={`#${id}`} class="kern-heading-medium">
-              <IconArrowDownward class="text-cosmic-blue-base inline-block h-32 w-32 pr-4" />
-              {title}
-            </a>
-          </p>
-        ))
-      }
+      {categories.map(({ id, title }) => (
+        <p>
+          <a href={`#${id}`} class="kern-heading-medium">
+            <IconArrowDownward class="text-cosmic-blue-base inline-block h-32 w-32 pr-4" />
+            {title}
+          </a>
+        </p>
+      ))}
       <hr class="kern-divider mt-lg -mb-16" aria-hidden="true" />
     </section>
     <div aria-hidden="true" x-ref="sentinel" class="h-px -translate-y-px"></div>
@@ -100,27 +98,25 @@ const PAGEFIND_INSTANCE = "werkzeuge";
       <div class="flex flex-col flex-wrap justify-between gap-16 lg:flex-row">
         <div class="flex flex-wrap items-center gap-8 lg:gap-16">
           <p class="kern-label my-0 py-0">Filtern nach:</p>
-          {
-            [BOOKMARKED_TYPE, ...WERKZEUGE_TYPES].map((type) => (
-              <button class="h-32" @click={`toggleFilterType('${type}')`}>
-                <span
-                  class={`kern-badge kern-badge--${type.replaceAll(" ", "_").toLowerCase()} interactive`}
-                  x-bind:data-inactive={`filterType && filterType !== '${type}'`}
-                >
-                  {type === BOOKMARKED_TYPE ? (
-                    <IconBookmarkAdded class="text-icon-muted h-24 w-24" />
-                  ) : (
-                    <span
-                      class="kern-icon kern-icon--check kern-icon--default"
-                      aria-hidden="true"
-                      x-show={`filterType === '${type}'`}
-                    />
-                  )}
-                  <span class="kern-label">{type}</span>
-                </span>
-              </button>
-            ))
-          }
+          {[BOOKMARKED_TYPE, ...WERKZEUGE_TYPES].map((type) => (
+            <button class="h-32" @click={`toggleFilterType('${type}')`}>
+              <span
+                class={`kern-badge kern-badge--${type.replaceAll(" ", "_").toLowerCase()} interactive`}
+                x-bind:data-inactive={`filterType && filterType !== '${type}'`}
+              >
+                {type === BOOKMARKED_TYPE ? (
+                  <IconBookmarkAdded class="text-icon-muted h-24 w-24" />
+                ) : (
+                  <span
+                    class="kern-icon kern-icon--check kern-icon--default"
+                    aria-hidden="true"
+                    x-show={`filterType === '${type}'`}
+                  />
+                )}
+                <span class="kern-label">{type}</span>
+              </span>
+            </button>
+          ))}
           <button
             class="text-cosmic-blue-base"
             popovertarget="hintSidebarContent"
@@ -134,102 +130,101 @@ const PAGEFIND_INSTANCE = "werkzeuge";
     </div>
 
     <section>
-      {
-        categories.map(({ id, title, tools }) => {
-          return (
-            <>
-              <h2 id={id} class="mb-56 scroll-mt-104">
-                {title.charAt(0).toUpperCase() + title.slice(1)}
-              </h2>
-              <div class="tool-grid gap-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                {tools.map((t) => (
-                  <div
-                    class="tool-wrapper"
-                    x-bind:data-visible={`isCardVisible(${JSON.stringify(t.id)}, ${JSON.stringify(t.data.type)})`}
+      {categories.map(({ id, title, tools }) => {
+        return (
+          <>
+            <h2 id={id} class="mb-56 scroll-mt-104">
+              {title.charAt(0).toUpperCase() + title.slice(1)}
+            </h2>
+            <div class="tool-grid gap-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+              {tools.map((t) => (
+                <div
+                  class="tool-wrapper"
+                  x-bind:data-visible={`isCardVisible(${JSON.stringify(t.id)}, ${JSON.stringify(t.data.type)})`}
+                >
+                  <KernCard
+                    title={t.data.title}
+                    href={t.data.href}
+                    target_option={t.data.isExternal ? "_blank" : "_self"}
+                    body={t.data.description}
+                    interactive={false}
+                    image={t.data.image}
+                    imageAlt={t.data.image ? t.data.title : undefined}
                   >
-                    <KernCard
-                      title={t.data.title}
-                      href={t.data.href}
-                      target_option={t.data.isExternal ? "_blank" : "_self"}
-                      body={t.data.description}
-                      interactive={false}
-                      image={t.data.image}
-                      imageAlt={t.data.image ? t.data.title : undefined}
+                    <div
+                      slot="pre-header"
+                      class="mb-16 flex w-full justify-between"
                     >
-                      <div
-                        slot="pre-header"
-                        class="mb-16 flex w-full justify-between"
-                      >
-                        <div class="flex gap-8">
-                          {t.data.type.map((type) => (
-                            <span
-                              class={`kern-badge kern-badge--${type.toLowerCase()}`}
-                            >
-                              <span class="kern-label">{type}</span>
-                            </span>
-                          ))}
-                        </div>
-                        <button
-                          class="text-icon-muted"
-                          aria-label={"Lesezeichen hinzufügen"}
-                          @click={`toggleBookmark(${JSON.stringify(t.id)})`}
-                        >
-                          <IconBookmarkAdd
-                            x-show={`!bookmarkedTools.includes(${JSON.stringify(t.id)})`}
-                            class="h-32 w-32"
-                          />
-                          <IconBookmarkAdded
-                            x-cloak
-                            x-show={`bookmarkedTools.includes(${JSON.stringify(t.id)})`}
-                            class="h-32 w-32"
-                          />
-                        </button>
+                      <div class="flex gap-8">
+                        {t.data.type.map((type) => (
+                          <span
+                            class={`kern-badge kern-badge--${type.toLowerCase()}`}
+                          >
+                            <span class="kern-label">{type}</span>
+                          </span>
+                        ))}
                       </div>
-                      <div
-                        slot="footer"
-                        class="text-icon-muted! flex items-center gap-8"
+                      <button
+                        class="text-icon-muted"
+                        aria-label={"Lesezeichen hinzufügen"}
+                        @click={`toggleBookmark(${JSON.stringify(t.id)})`}
                       >
-                        <IconAutoStories class="h-32 w-32 shrink-0" />
-                        <p class="kern-subline kern-subline-dark py-0">
-                          Quelle: {t.data.source}
-                        </p>
-                      </div>
-                    </KernCard>
-                  </div>
-                ))}
-                <p class="no-results" data-pagefind-ignore>
-                  <em>Keine Treffer</em>
-                </p>
-              </div>
-            </>
-          );
-        })
-      }
+                        <IconBookmarkAdd
+                          x-show={`!bookmarkedTools.includes(${JSON.stringify(t.id)})`}
+                          class="h-32 w-32"
+                        />
+                        <IconBookmarkAdded
+                          x-cloak
+                          x-show={`bookmarkedTools.includes(${JSON.stringify(t.id)})`}
+                          class="h-32 w-32"
+                        />
+                      </button>
+                    </div>
+                    <div
+                      slot="footer"
+                      class="text-icon-muted! flex items-center gap-8"
+                    >
+                      <IconAutoStories class="h-32 w-32 shrink-0" />
+                      <p class="kern-subline kern-subline-dark py-0">
+                        Quelle: {t.data.source}
+                      </p>
+                    </div>
+                  </KernCard>
+                </div>
+              ))}
+              <p class="no-results" data-pagefind-ignore>
+                <em>Keine Treffer</em>
+              </p>
+            </div>
+          </>
+        );
+      })}
     </section>
 
     <Modal id="hintSidebarContent">
       <h2 class="mt-0 text-xl">Filterfunktionen</h2>
       <ul>
         <li>
-          <strong>Gemerkte Werkzeuge:</strong> Jedes Werkzeug kann per Klick auf das
-          Lesezeichen-Symbol gemerkt werden. Diese werden im Browser gespeichert.
-          Achtung: Die gemerkten Werkzeuge verschwinden, sobald Sie den Browser zurücksetzen.
+          <strong>Gemerkte Werkzeuge:</strong> Jedes Werkzeug kann per Klick auf
+          das Lesezeichen-Symbol gemerkt werden. Diese werden im Browser
+          gespeichert. Achtung: Die gemerkten Werkzeuge verschwinden, sobald Sie
+          den Browser zurücksetzen.
         </li>
         <li>
-          <strong>Methode:</strong> Systematische Vorgehensweisen, die Ihnen zu Erkenntnissen
-          verhelfen.
+          <strong>Methode:</strong> Systematische Vorgehensweisen, die Ihnen zu
+          Erkenntnissen verhelfen.
         </li>
         <li>
-          <strong>Tool:</strong> Interaktive Werkzeuge, wie beispielsweise Editoren,
-          Plugins und Klickstrecken.
+          <strong>Tool:</strong> Interaktive Werkzeuge, wie beispielsweise
+          Editoren, Plugins und Klickstrecken.
         </li>
         <li>
-          <strong>Leitfaden:</strong> Strukturierte Anleitungen, die Orientierung
-          bieten.
+          <strong>Leitfaden:</strong> Strukturierte Anleitungen, die
+          Orientierung bieten.
         </li>
         <li>
-          <strong>Ressource: </strong> Informative Angebote, Services, Datenbanken
-          und weitere Wissensquellen.
+          <strong>Ressource: </strong> Informative Angebote, Services,
+          Datenbanken und weitere Wissensquellen.
         </li>
       </ul>
     </Modal>
@@ -240,8 +235,12 @@ const PAGEFIND_INSTANCE = "werkzeuge";
         Kennen Sie weitere hilfreiche Werkzeuge, die auf dieser Seite fehlen?
         Kontaktieren Sie uns gerne.
       </p>
-      <p>Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a></p>
-      <p>E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a></p>
+      <p>
+        Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>
+      </p>
+      <p>
+        E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
+      </p>
     </section>
 
     <SearchModal

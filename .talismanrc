@@ -182,6 +182,8 @@ fileignoreconfig:
     checksum: 40be7929d66ed36cab2acd35cb0f804d0b37e279ee03822fb1b7feb4cbddcb95
   - filename: src/content/potenziale/TzBfG.md
     checksum: 2849cd59f7125c2020341104d8e792808fc3c0dd7778208c8a8dfbbc3b2d87cb
+  - filename: src/pages/werkzeuge/ressourcen/technische-umsetzbarkeit.astro
+    allowed_patterns: [IT-Anpassungen]
 scopeconfig:
   - scope: node
 allowed_patterns:

@@ -92,19 +92,17 @@ const defaultDescription =
     <PageHeader />
     <div
       data-pagefind-default-meta="pageType:Seite"
-      {...!excludeFromSearch && { "data-pagefind-body": "" }}
-      {...pagefindWeight && { "data-pagefind-weight": pagefindWeight }}
+      {...(!excludeFromSearch && { "data-pagefind-body": "" })}
+      {...(pagefindWeight && { "data-pagefind-weight": pagefindWeight })}
     >
-      {
-        showSectionSidebar ? (
-          <div class="h-full min-[900px]:grid min-[900px]:grid-cols-[264px_minmax(0,1fr)]">
-            <SectionSidebar />
-            <slot />
-          </div>
-        ) : (
+      {showSectionSidebar ? (
+        <div class="h-full min-[900px]:grid min-[900px]:grid-cols-[264px_minmax(0,1fr)]">
+          <SectionSidebar />
           <slot />
-        )
-      }
+        </div>
+      ) : (
+        <slot />
+      )}
     </div>
     <Footer />
     <SearchModal />
