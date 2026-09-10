@@ -25,34 +25,34 @@ export const schulungenData: ChartSeries[] = [
   {
     label: "Teilnehmende in Online-Schulungen",
     values: [
-      { x: 2023, y: 20 },
-      { x: 2024, y: 30 },
-      { x: 2025, y: 50 },
-      { x: 2026, y: 70 },
+      { x: 2025, y: 79 },
+      { x: 2026, y: 99 },
     ],
   },
 ];
 
+// source: Metabase > NKR: Digitalchecks pro Jahr
 export const digitalcheckData: ChartSeries[] = [
   {
     label: "angewendete Digitalchecks",
     values: [
-      { x: 2023, y: 20 },
-      { x: 2024, y: 30 },
-      { x: 2025, y: 40 },
-      { x: 2026, y: 60 },
+      { x: 2023, y: 268 },
+      { x: 2024, y: 346 },
+      { x: 2025, y: 277 },
+      { x: 2026, y: 209 },
     ],
   },
 ];
 
+// source: Metabase > NKR: Visualisierungen
 export const visualisierungenData: ChartSeries[] = [
   {
     label: "Vorhaben mit Digitalbezug mit Visualisierung",
-    values: [{ x: "all", y: 29 }],
+    values: [{ x: "(2026-Q1+Q2)", y: 34 }],
   },
   {
     label: "Vorhaben mit Digitalbezug ohne Visualisierung",
-    values: [{ x: "all", y: 33 }],
+    values: [{ x: "(2026-Q1+Q2)", y: 82 }],
   },
 ];
 
