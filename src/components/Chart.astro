@@ -13,9 +13,7 @@ export interface ChartSeries {
 
 interface Props {
   data: ChartSeries[];
-  /** Stack series on top of each other instead of grouping them side by side. */
   stack?: boolean;
-  /** Accessible name for the chart, exposed as a screen-reader-only table caption. */
   title?: string;
   class?: string;
   type?: "column" | "pie";
@@ -37,8 +35,7 @@ const seriesColors = [
 ];
 const colorFor = (index: number) => seriesColors[index % seriesColors.length];
 
-// Categories are taken from the first series; every series is expected to
-// provide one value per category, aligned by index.
+// Categories are taken from the first series
 const categories = data[0]?.values.map((point) => String(point.x)) ?? [];
 
 const rows = categories.map((_, categoryIndex) =>
@@ -54,8 +51,6 @@ const axisMax = stack
 
 // Pie charts render every cell (across all categories and series) as a
 // slice of a single circle, drawn via cumulative --start/--end fractions
-// (0-1) instead of the --size used by column/bar charts. Cells all overlay
-// the same tbody, so ordering follows the row/series iteration below.
 const pieTotal = rows.flat().reduce((sum, value) => sum + value, 0);
 let pieCumulative = 0;
 const pieStartEnd = (value: number) => {
@@ -73,12 +68,7 @@ const colorVars = data
 
 const formatValue = (value: number) => value.toLocaleString("de-DE");
 
-// The pie tds all cover the full circle (so their transparent areas can
-// overlay each other for the conic-gradient trick), which means whichever
-// td paints last would otherwise swallow hover/focus for the whole circle.
-// Clipping this wedge shape onto ::before (see <style> below) restricts the
-// actual hit area to the slice itself, without clipping the td's visible
-// children (the value label and tooltip), which may extend past the wedge.
+// Custom clip path for tooltips of pie slices
 const pieClipPath = (start: number, end: number) => {
   const segments = Math.max(2, Math.ceil((end - start) * 64));
   const points = ["50% 50%"];
