@@ -15,7 +15,7 @@ const { class: className, keyboardToggle, ...props } = Astro.props;
     className,
   )}
   aria-label="Suche öffnen"
-  {...keyboardToggle ? { "aria-keyshortcuts": "Control+k Meta+k" } : {}}
+  {...(keyboardToggle ? { "aria-keyshortcuts": "Control+k Meta+k" } : {})}
   type="button"
   {...props}
 >

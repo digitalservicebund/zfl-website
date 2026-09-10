@@ -29,7 +29,7 @@ const {
 <page-search
   class={twMerge("inline-flex min-h-48 items-center", className)}
   root-selector={rootSelector}
-  {...keyboardShortcut ? { "keyboard-shortcut": "true" } : {}}
+  {...(keyboardShortcut ? { "keyboard-shortcut": "true" } : {})}
 >
   <SearchButton
     aria-expanded="false"
@@ -50,11 +50,12 @@ const {
     <span
       class="kern-body mr-16 whitespace-nowrap"
       aria-live="polite"
-      data-page-search-count></span>
+      data-page-search-count
+    ></span>
     <div class="kern-form-input">
-      <label class="kern-label kern-sr-only" for="page-search-input"
-        >Suchbegriff</label
-      >
+      <label class="kern-label kern-sr-only" for="page-search-input">
+        Suchbegriff
+      </label>
       <input
         id="page-search-input"
         class="kern-form-input__input"
