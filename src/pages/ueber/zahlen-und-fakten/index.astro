@@ -3,8 +3,7 @@ import Chart, { type ChartSeries } from "@/components/Chart.astro";
 import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
 import Metadata from "../_Metadata.astro";
-import StarIcon from "~icons/ic/baseline-star";
-import StarHalfIcon from "~icons/ic/baseline-star-half";
+import StarRating from "./_StarRating.astro";
 import { begleitungen, schulungen, werkzeuge } from "@/config/routes";
 import { ZFL_EMAIL } from "@/config/constants";
 import { mailto } from "@/utils/mailtoHelper";
@@ -141,13 +140,7 @@ const interopSum = getSum(interopData[0]);
           <p class="headline">
             4,7<span class="text-xl!">/5</span>
           </p>
-          <p class="text-cosmic-blue-base flex gap-4 text-3xl!">
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-            <StarIcon />
-            <StarHalfIcon />
-          </p>
+          <StarRating stars={4.7} />
           <p>durchschnittliche Zufriedenheit mit den Online-Schulungen</p>
           <p class="footnote">
             Zeitraum: Januar bis August 2026,
