@@ -73,7 +73,6 @@ const interopSum = getSum(interopData[0]);
           <Chart
             data={regbegData}
             title={`${regbegSum} Vorhaben begleitet seit 2023`}
-            stack
           />
           <p class="footnote">
             Bis 2025 im Rahmen des Digitalcheck
@@ -243,7 +242,7 @@ const interopSum = getSum(interopData[0]);
         <div class="fact-card row-span-2">
           <Chart
             data={digitalcheckData}
-            title={`${digitalchecksSum} Regelungsvorhaben, in denen sich seit 2023 mit digitaler Umsetzung auseinandergesetzt wurde`}
+            title={`${digitalchecksSum.toLocaleString("de-DE")} Regelungsvorhaben, in denen sich seit 2023 mit digitaler Umsetzung auseinandergesetzt wurde`}
           />
           <p class="footnote">
             Zeitraum für 2026: Januar bis August
