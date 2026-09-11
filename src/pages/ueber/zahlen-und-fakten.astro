@@ -46,11 +46,9 @@ const interopSum = getSum(interopData[0]);
         Die Daten auf dieser Seite zeigen, wie unsere Instrumente und
         Unterstützungsangebote – zum Beispiel Digitalcheck, Begleitungen,
         Schulungen und Prozessvisualisierung – die Gesetzgebung in der Praxis
-        verändern. Die verschiedenen Werkzeuge und Prozesse der Frühphase werden
-        jetzt im Zentrum für Legistik schrittweise zusammengeführt und
-        weiterentwickelt.
+        verändern.
       </p>
-      <Metadata lastUpdate="10.09.2026" />
+      <Metadata lastUpdate="11.09.2026" />
     </Hero>
 
     <section>
@@ -85,15 +83,6 @@ const interopSum = getSum(interopData[0]);
         </div>
 
         <div class="fact-card">
-          <p class="headline">92 %</p>
-          <p>der Nutzenden empfehlen das Unterstützungsabgebot aktiv weiter</p>
-          <p class="footnote">
-            Zeitraum: Januar bis August 2026
-            <br />
-            Quelle: Bewertungs-Fragebogen, 13 Antworten
-          </p>
-        </div>
-        <div class="fact-card">
           <p class="headline">75 %</p>
           <p>
             der Befragten bestätigen den direkten Nutzen für qualitativ bessere
@@ -102,7 +91,17 @@ const interopSum = getSum(interopData[0]);
           <p class="footnote">
             Zeitraum: Januar bis August 2026
             <br />
-            Quelle: Bewertungs-Fragebogen, 13 Antworten
+            Quelle: Eigene Umfrage (n = 13)
+          </p>
+        </div>
+
+        <div class="fact-card">
+          <p class="headline">92 %</p>
+          <p>der Nutzenden empfehlen das Unterstützungsabgebot aktiv weiter</p>
+          <p class="footnote">
+            Zeitraum: Januar bis August 2026
+            <br />
+            Quelle: Eigene Umfrage (n = 13)
           </p>
         </div>
       </div>
@@ -136,6 +135,20 @@ const interopSum = getSum(interopData[0]);
             2026 im Rahmen des ZfL (Januar bis August)
           </p>
         </div>
+
+        <div class="fact-card">
+          <p class="headline">76 %</p>
+          <p>
+            der Teilnehmenden bewerten die Inhalte der Online-Schulung als
+            hilfreich für den Arbeitsalltag
+          </p>
+          <p class="footnote">
+            Zeitraum: Januar bis August 2026
+            <br />
+            Quelle: Eigene Umfrage (n = 17)
+          </p>
+        </div>
+
         <div class="fact-card">
           <p class="headline">
             4,7<span class="text-xl!">/5</span>
@@ -143,18 +156,9 @@ const interopSum = getSum(interopData[0]);
           <StarRating stars={4.7} />
           <p>durchschnittliche Zufriedenheit mit den Online-Schulungen</p>
           <p class="footnote">
-            Zeitraum: Januar bis August 2026,
+            Zeitraum: Januar bis August 2026
             <br />
-            Stichprobe: n = 17 von N = 99 Befragten
-          </p>
-        </div>
-        <div class="fact-card">
-          <p class="headline">100 %</p>
-          <p>der Teilnehmenden würden die Online-Schulung weiterempfehlen</p>
-          <p class="footnote">
-            Zeitraum: Januar bis August 2026,
-            <br />
-            Stichprobe: n = 17 von N = 99 Befragten
+            Quelle: Eigene Umfrage (n = 17)
           </p>
         </div>
       </div>
@@ -186,24 +190,6 @@ const interopSum = getSum(interopData[0]);
       </p>
       <div class="metrics-grid">
         <div class="fact-card">
-          <p class="headline">15 Minuten</p>
-          <p>durchschnittliche Verweildauer pro Besuch</p>
-          <p class="footnote">
-            Durchschnittswert für beide Webseiten 2026
-            <br />
-            Quelle: Posthog für Zentrum für Legistik und Digitalcheck
-          </p>
-        </div>
-        <div class="fact-card row-span-2">
-          <Chart
-            data={websiteData}
-            title={`${pageViewSum.toLocaleString("de-DE")} Website-Besuche in 2026`}
-          />
-          <p class="footnote">
-            Quelle: Posthog für Zentrum für Legistik und Digitalcheck
-          </p>
-        </div>
-        <div class="fact-card">
           <p class="headline">21 User Tests</p>
           <p>um Nutzen und einfache Anwendbarkeit sicherzustellen</p>
           <p class="footnote">
@@ -213,6 +199,26 @@ const interopSum = getSum(interopData[0]);
             </a>
           </p>
           <p class="footnote">Zeitraum: Januar bis August 2026</p>
+        </div>
+
+        <div class="fact-card row-span-2">
+          <Chart
+            data={websiteData}
+            title={`${pageViewSum.toLocaleString("de-DE")} Website-Besuche in 2026`}
+          />
+          <p class="footnote">
+            Quelle: Posthog für Zentrum für Legistik und Digitalcheck
+          </p>
+        </div>
+
+        <div class="fact-card">
+          <p class="headline">15 Minuten</p>
+          <p>durchschnittliche Website-Verweildauer pro Besuch</p>
+          <p class="footnote">
+            Durchschnitt Zentrum für Legistik / Digitalcheck
+            <br />
+            Zeitraum: Erstes Halbjahr 2026
+          </p>
         </div>
       </div>
     </section>
@@ -237,7 +243,7 @@ const interopSum = getSum(interopData[0]);
         <div class="fact-card row-span-2">
           <Chart
             data={digitalcheckData}
-            title={`${digitalchecksSum} Digitalchecks seit 2023`}
+            title={`${digitalchecksSum} Regelungsvorhaben, in denen sich seit 2023 mit digitaler Umsetzung auseinandergesetzt wurde`}
           />
           <p class="footnote">
             Zeitraum für 2026: Januar bis August
@@ -245,11 +251,12 @@ const interopSum = getSum(interopData[0]);
             Quelle: NKR
           </p>
         </div>
+
         <div class="fact-card row-span-2">
           <Chart
             data={visualisierungenData}
             type="pie"
-            title={`${visPercent} Prozent mit Visualisierungen`}
+            title={`${visPercent} % der Vorhaben mit Digitalbezug beinhalten mind. eine Visualisierung`}
           />
           <p class="footnote">
             Zeitraum: Januar bis August 2026
@@ -287,6 +294,7 @@ const interopSum = getSum(interopData[0]);
           />
           <p class="footnote">Zeitraum für 2026: Januar bis August</p>
         </div>
+
         <div class="fact-card">
           <p class="headline">19 Begleitungen</p>
           <p>
@@ -294,6 +302,7 @@ const interopSum = getSum(interopData[0]);
           </p>
           <p class="footnote">Zeitraum: Juni 2025 bis August 2026</p>
         </div>
+
         <div class="fact-card">
           <p class="headline">9 Einreichungen</p>
           <p>

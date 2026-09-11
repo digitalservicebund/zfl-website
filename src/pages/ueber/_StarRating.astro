@@ -13,7 +13,7 @@ const hasHalfStar = stars - fullStars >= 0.5;
 const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 ---
 
-<p class="text-cosmic-blue-base flex gap-4 text-3xl!">
+<p class="text-cosmic-blue-400 flex gap-4 text-3xl!">
   {Array.from({ length: fullStars }).map(() => (
     <StarIcon />
   ))}
