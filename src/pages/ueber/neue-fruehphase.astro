@@ -2,6 +2,7 @@
 import Hero from "@/components/Hero.astro";
 import KernCard from "@/components/KernCard.astro";
 import Layout from "@/layouts/Layout.astro";
+import MediaText from "@/components/MediaText.astro";
 import {
   begleitungen,
   bessereRechtsetzung,
@@ -9,7 +10,8 @@ import {
 } from "@/config/routes";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import { mailto } from "@/utils/mailtoHelper";
-import AblaufFruephase from "@/images/fruehphase-ablauf.png";
+import ablaufImg from "@/images/fruehphase-ablauf.png";
+import mockupImg from "@/images/fruehphase-mockup.png";
 import { Image } from "astro:assets";
 import { werkzeuge_ressourcen } from "@/config/routes";
 
@@ -36,7 +38,7 @@ export const frontmatter = {
       <h2>Die neue Frühphase einfach verständlich</h2>
       <figure>
         <Image
-          src={AblaufFruephase}
+          src={ablaufImg}
           alt="Infografik 'Die neue Frühphase – einfach verständlich'. Ein vierstufiger Prozess dargestellt von links nach rechts: 1. Start. 2. Inhalte erarbeiten. Als 'NEU' markiert, wird abgebildet durch Symbole für Visualisierung und Methoden, integrierte Arbeitshilfen und leichten informellen Austausch. 3. Schreiben. 4. Bundestag/Bundesrat."
         />
         <figcaption class="text-base leading-tight font-normal text-gray-500">
@@ -71,15 +73,29 @@ export const frontmatter = {
         </a>{" "}
         und bettet sich im Fachbereich bessere Rechtsetzung ein.
       </p>
-      <div class="mt-24">
-        <a href={bessereRechtsetzung.path} class="kern-btn kern-btn--primary">
-          <span
-            class="kern-icon kern-icon--arrow-forward"
-            aria-hidden="true"
-          ></span>
-          <span class="kern-label">Frühphase erkunden</span>
+    </section>
+    <section class="breakout bg-surface-default">
+      <MediaText>
+        <h2>
+          Wie gelingt eine praxistaugliche und bürokratiearme Rechtsetzung?
+        </h2>
+        <p>
+          Das Zentrum für Legistik unterstützt Sie bereits in der
+          Konzeptionsphase, Regelungen neu zu gestalten. Diese Übersicht zeigt,
+          wie dies konkret aussehen könnte.
+        </p>
+        <a
+          href={bessereRechtsetzung.path}
+          class="kern-btn kern-btn--primary mt-8"
+        >
+          <span class="kern-label">Darstellung öffnen</span>
         </a>
-      </div>
+        <Image
+          slot="media"
+          src={mockupImg}
+          alt="Das Bild zeigt einen Laptop-Bildschirm mit einer Webseite des Zentrums für Legistik, die ein Prozess zur frühen Phase der Gesetzgebung zeigt."
+        />
+      </MediaText>
     </section>
     <section>
       <h2>Diese Angebote helfen schon jetzt:</h2>
