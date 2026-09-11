@@ -36,56 +36,54 @@ export const frontmatter = {
         und digital umsetzbar sind.
       </p>
     </Hero>
-    <section class="space-y-48 lg:space-y-80">
-      <div>
-        <h2>Unsere Angebote</h2>
-        <p>
-          Das Zentrum für Legistik stellt mehrere Unterstützungsangebote zur
-          Verfügung, die laufend weiterentwickelt werden.
-        </p>
-        <div class="grid grid-cols-1 gap-32 md:grid-cols-3">
-          <KernCard
-            title="Werkzeuge"
-            target_option="_self"
-            href={werkzeuge.path}
-            body="Nutzen Sie Anleitungen und Hilfsmittel wie den Digitalcheck und den Rulemap Builder."
-            image={allgemeinImage}
-            imageAlt="Symbolbild: Erstellung eines Flussdiagrams"
-            interactive
-          />
-          <KernCard
-            title="Regelungsbegleitung"
-            target_option="_self"
-            href={begleitungen.path}
-            body="Erhalten Sie individuelle Unterstützung für Ihr Vorhaben durch interdisziplinäre Teams – vertraulich und kostenfrei."
-            image={zusammenarbeitImg}
-            imageAlt="Mehrere Personen vor einem großen Whiteboard, an dem sie Klebepunkte an bereits vorhandenen Papieren und Post-its anbringen."
-            interactive
-          />
-          <KernCard
-            title="Schulungen"
-            target_option="_self"
-            href={schulungen.path}
-            image={schulungImage}
-            imageAlt="Symbolbild: Ein Laptop zeigt die fünf Prinzipien des Digitalchecks"
-            body="Lernen Sie moderne Methoden und Werkzeuge der legistischen Arbeit kennen."
-            interactive
-          />
-        </div>
+    <section>
+      <h2>Unsere Angebote</h2>
+      <p>
+        Das Zentrum für Legistik stellt mehrere Unterstützungsangebote zur
+        Verfügung, die laufend weiterentwickelt werden.
+      </p>
+      <div class="grid grid-cols-1 gap-32 md:grid-cols-3">
+        <KernCard
+          title="Werkzeuge"
+          target_option="_self"
+          href={werkzeuge.path}
+          body="Nutzen Sie Anleitungen und Hilfsmittel wie den Digitalcheck und den Rulemap Builder."
+          image={allgemeinImage}
+          imageAlt="Symbolbild: Erstellung eines Flussdiagrams"
+          interactive
+        />
+        <KernCard
+          title="Regelungsbegleitung"
+          target_option="_self"
+          href={begleitungen.path}
+          body="Erhalten Sie individuelle Unterstützung für Ihr Vorhaben durch interdisziplinäre Teams – vertraulich und kostenfrei."
+          image={zusammenarbeitImg}
+          imageAlt="Mehrere Personen vor einem großen Whiteboard, an dem sie Klebepunkte an bereits vorhandenen Papieren und Post-its anbringen."
+          interactive
+        />
+        <KernCard
+          title="Schulungen"
+          target_option="_self"
+          href={schulungen.path}
+          image={schulungImage}
+          imageAlt="Symbolbild: Ein Laptop zeigt die fünf Prinzipien des Digitalchecks"
+          body="Lernen Sie moderne Methoden und Werkzeuge der legistischen Arbeit kennen."
+          interactive
+        />
       </div>
+    </section>
+    <section>
       <ImageTextOverlay
         image={ansatzImg}
         imageAlt="Eine großflächige Grafik an einer Glaswand. Sie zeigt verschiedenfarbige Kreise mit Textinhalten."
         linkHref={ueber.path}
         linkText="Mehr erfahren"
       >
-        <Fragment slot="content">
-          <h2>Über uns</h2>
-          <p>
-            Erfahren Sie mehr über den Auftrag und die Herangehensweise des
-            Zentrum für Legistik, aktuelle Arbeitspakete und Statistiken.
-          </p>
-        </Fragment>
+        <h2>Über uns</h2>
+        <p>
+          Erfahren Sie mehr über den Auftrag und die Herangehensweise des
+          Zentrum für Legistik, aktuelle Arbeitspakete und Statistiken.
+        </p>
       </ImageTextOverlay>
     </section>
     <section class="bg-lavender-base breakout">

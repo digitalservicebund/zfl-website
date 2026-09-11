@@ -2,7 +2,8 @@
 import { tv, type VariantProps } from "tailwind-variants";
 import type { HTMLAttributes } from "astro/types";
 
-interface Props extends HTMLAttributes<"div">, VariantProps<typeof cardStyles> {
+export interface Props
+  extends HTMLAttributes<"div">, VariantProps<typeof cardStyles> {
   contentClass?: string;
   class?: string;
 }
@@ -12,6 +13,7 @@ const cardStyles = tv({
   variants: {
     padding: {
       default: "p-24 md:p-32",
+      medium: "p-32 md:p-48",
       wide: "px-lg py-md md:py-48",
     },
     look: {

@@ -96,8 +96,14 @@
     margin-top: 0;
   }
 
+  /* default padding for sections */
   section {
     @apply py-lg;
+
+    /* collapse padding for consecutive sections with no background */
+    &:not(.breakout) + &:not(.breakout) {
+      @apply pt-0;
+    }
   }
 
   a:not(.link-unstyled, .kern-btn) {
