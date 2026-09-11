@@ -9,6 +9,7 @@ interface Props {
   image: ImageMetadata;
   imageAlt: string;
   imageBorder?: boolean;
+  imageClass?: string;
   linkHref?: string;
   linkText?: string;
   icon?: string;
@@ -20,6 +21,7 @@ const {
   image,
   imageAlt,
   imageBorder,
+  imageClass,
   linkHref,
   linkText,
   icon = "arrow-forward",
@@ -50,8 +52,9 @@ const {
     src={image}
     alt={imageAlt}
     class:list={[
-      "lg:absolute lg:right-1 lg:h-482 lg:w-727",
-      imageBorder && "border-lavender-base border ",
+      "object-cover lg:absolute lg:right-1 lg:h-482 lg:w-727",
+      imageBorder && "border border-lavender-base",
+      imageClass,
     ]}
   />
 </div>
