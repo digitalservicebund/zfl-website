@@ -1,7 +1,9 @@
 ---
 import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
-import InfoPanel from "@/components/InfoPanel.astro";
+import InfoPanel, {
+  type Props as InfoPanelProps,
+} from "@/components/InfoPanel.astro";
 
 interface Props {
   image: ImageMetadata;
@@ -9,6 +11,8 @@ interface Props {
   linkHref: string;
   linkText: string;
   icon?: string;
+  look?: InfoPanelProps["look"];
+  padding?: InfoPanelProps["padding"];
 }
 
 const {
@@ -17,12 +21,15 @@ const {
   linkHref,
   linkText,
   icon = "arrow-forward",
+  look = "gray",
+  padding = "medium",
 } = Astro.props;
 ---
 
-<div class="relative space-y-24 lg:grid lg:h-482 lg:grid-cols-6 lg:items-center lg:overflow-hidden">
+<div class="relative max-lg:space-y-24 lg:grid lg:h-482 lg:grid-cols-6 lg:items-center lg:overflow-hidden">
   <InfoPanel
-    look="gray"
+    look={look}
+    padding={padding}
     class="z-1 self-start lg:col-span-3 lg:w-600 lg:self-center"
   >
     <slot name="content" />
@@ -38,6 +45,6 @@ const {
   <Image
     src={image}
     alt={imageAlt}
-    class="border-kern-contextual border lg:absolute lg:right-1 lg:h-482 lg:w-727"
+    class="border-lavender-base border lg:absolute lg:right-1 lg:h-482 lg:w-727"
   />
 </div>
