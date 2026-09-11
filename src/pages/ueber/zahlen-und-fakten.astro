@@ -1,132 +1,41 @@
 ---
-import Badge from "@/components/Badge.astro";
+import Chart, { type ChartSeries } from "@/components/Chart.astro";
 import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
-import IconLocalActivity from "~icons/ic/outline-local-activity";
-import IconShare from "~icons/ic/outline-share";
-import IconStarOutline from "~icons/ic/outline-star-outline";
-import IconVolunteerActivism from "~icons/ic/outline-volunteer-activism";
+import Metadata from "./_Metadata.astro";
+import StarRating from "./_StarRating.astro";
+import { begleitungen, schulungen, werkzeuge } from "@/config/routes";
+import { ZFL_EMAIL } from "@/config/constants";
+import { mailto } from "@/utils/mailtoHelper";
+import {
+  digitalcheckData,
+  regbegData,
+  schulungenData,
+  websiteData,
+  interopData,
+  visualisierungenData,
+} from "./_dashboard-data";
 
 export const frontmatter = {
   title: "Zahlen und Fakten",
-  sitemap: true,
   navOrder: 2,
 };
 
-type DsData = {
-  title: string;
-  elements: {
-    badge: {
-      icon: typeof IconLocalActivity;
-      text: string;
-    };
-    count: string;
-    description: string;
-  }[];
-}[];
+function getSum(series: ChartSeries) {
+  return series.values.reduce((acc, v) => acc + v.y, 0);
+}
 
-const dsData: DsData = [
-  {
-    title: "Digitalcheck und Visualisierungen (seit 2023)",
-    elements: [
-      {
-        badge: {
-          icon: IconLocalActivity,
-          text: "Regelungschecks",
-        },
-        count: "850+",
-        description:
-          "Regelungsvorhaben haben sich mit der digitalen Umsetzung auseinandergesetzt.",
-      },
-      {
-        badge: {
-          icon: IconLocalActivity,
-          text: "Regelungschecks",
-        },
-        count: "120+",
-        description:
-          "Visualisierte Wirklogiken, durch die Komplexität reduziert und Verständlichkeit geschaffen wurde.",
-      },
-    ],
-  },
-  {
-    title: "Wissenstransfer und Unterstützung (seit 2023)",
-    elements: [
-      {
-        badge: {
-          icon: IconVolunteerActivism,
-          text: "Unterstützung",
-        },
-        count: "400+",
-        description:
-          "Geschulte Mitarbeitende: Seit 2023 gibt es Schulungen und Roadshows zu Visualisierungen und Digitaltauglichkeit, in denen wir langfristige Kompetenzen aufbauen.",
-      },
-      {
-        badge: {
-          icon: IconVolunteerActivism,
-          text: "Unterstützung",
-        },
-        count: "15+",
-        description:
-          "Begleitungen durch interdisziplinäre Teams: Bei besonders komplexen Vorhaben standen unsere Regelungsbegleitungen den Legistinnen und Legisten direkt zur Seite.",
-      },
-      {
-        badge: {
-          icon: IconVolunteerActivism,
-          text: "Unterstützung",
-        },
-        count: "170+",
-        description:
-          "Service-Anfragen: Der kurze Dienstweg zu Expertinnen und Experten, für Fragen und Sparring.",
-      },
-    ],
-  },
-  {
-    title: "Fokusfeld Interoperabilität (seit Juni 2025)",
-    elements: [
-      {
-        badge: {
-          icon: IconStarOutline,
-          text: "Interoperabilität",
-        },
-        count: "17",
-        description: "Vorhaben hatten einen Interoperabilitätsbezug.",
-      },
-      {
-        badge: {
-          icon: IconStarOutline,
-          text: "Interoperabilität",
-        },
-        count: "18",
-        description:
-          "Ausführliche Beratungsfälle zum Thema Interoperabilität hat das Team durchgeführt.",
-      },
-      {
-        badge: {
-          icon: IconStarOutline,
-          text: "Interoperabilität",
-        },
-        count: "4",
-        description:
-          "Vorhaben wurden zur Transparenz auf dem Interoperable Europe Portal eingereicht.",
-      },
-    ],
-  },
-  {
-    title: "Ressortübergreifende Vernetzung",
-    elements: [
-      {
-        badge: {
-          icon: IconShare,
-          text: "Vernetzung",
-        },
-        count: "20+",
-        description:
-          "Interministerielle Arbeitsgruppen haben die Erarbeitung des Digitalcheck begleitet.",
-      },
-    ],
-  },
-];
+const regbegSum = getSum(regbegData[0]) + getSum(regbegData[1]);
+const schulungenSum = getSum(schulungenData[0]);
+const digitalchecksSum = getSum(digitalcheckData[0]);
+const withVisSum = getSum(visualisierungenData[0]);
+const withoutVisSum = getSum(visualisierungenData[1]);
+const visPercent = Math.round(
+  (withVisSum / (withVisSum + withoutVisSum)) * 100,
+);
+
+const pageViewSum = getSum(websiteData[0]) + getSum(websiteData[1]);
+const interopSum = getSum(interopData[0]);
 ---
 
 <Layout title={frontmatter.title}>
@@ -134,42 +43,314 @@ const dsData: DsData = [
     <Hero level="sub">
       <h1>Das Zentrum für Legistik in Zahlen</h1>
       <p>
-        Seit Januar 2023 setzt die Bundesregierung den Fokus auf
-        digitaltaugliche Regelungen (Digitalcheck) und begleitet Legistinnen und
-        Legisten in den Bundesministerien auf dem Weg dorthin.
-      </p>
-      <p>2026 markiert den Beginn des Zentrum für Legistik.</p>
-      <p>
         Die Daten auf dieser Seite zeigen, wie unsere Instrumente und
         Unterstützungsangebote – zum Beispiel Digitalcheck, Begleitungen,
         Schulungen und Prozessvisualisierung – die Gesetzgebung in der Praxis
-        verändern. Die verschiedenen Werkzeuge und Prozesse der Frühphase werden
-        jetzt im Zentrum für Legistik schrittweise zusammengeführt und
-        weiterentwickelt.
+        verändern.
       </p>
+      <Metadata lastUpdate="01.09.2026" />
     </Hero>
 
     <section>
-      {dsData.map(({ title, elements }) => (
-        <Fragment>
-          <h2>{title}</h2>
-          <ul class="list-unstyled mt-md gap-md grid items-stretch justify-between sm:grid-cols-2 lg:grid-cols-3">
-            {elements.map((el) => {
-              const BadgeIcon = el.badge.icon;
-              return (
-                <li class="bg-lavender-base p-md min-w-240 space-y-16 rounded-sm">
-                  <Badge look="white">
-                    <BadgeIcon slot="icon" />
-                    {el.badge.text}
-                  </Badge>
-                  <p class="kern-title kern-title--large">{el.count}</p>
-                  <p>{el.description}</p>
-                </li>
-              );
-            })}
-          </ul>
-        </Fragment>
-      ))}
+      <h2>Vorhaben begleiten</h2>
+      <p>
+        Ein in der Gesetzgebungspraxis erfahrenes, interdisziplinäres Team
+        unterstützt bei der praxisnahen, digitaltauglichen und bürokratiearmen
+        Gestaltung von Vorhaben.
+      </p>
+      <p>
+        <a href={begleitungen.path} class="kern-link">
+          <span
+            class="kern-icon kern-icon--arrow-forward kern-icon--default"
+            aria-hidden="true"
+          ></span>
+          Mehr zu Unterstützungsangeboten erfahren
+        </a>
+      </p>
+
+      <div class="metrics-grid">
+        <div class="fact-card row-span-2">
+          <Chart
+            data={regbegData}
+            title={`${regbegSum} Vorhaben begleitet seit 2023`}
+          />
+          <p class="footnote">
+            Bis 2025 im Rahmen des Digitalcheck
+            <br />
+            Ab 2026 im Rahmen des ZfL (Januar bis August)
+          </p>
+        </div>
+
+        <div class="fact-card">
+          <p class="headline">75 %</p>
+          <p>
+            der Befragten bestätigen den direkten Nutzen für qualitativ bessere
+            Regelungen
+          </p>
+          <p class="footnote">
+            Zeitraum: Januar bis August 2026
+            <br />
+            Quelle: Eigene Umfrage (n = 13)
+          </p>
+        </div>
+
+        <div class="fact-card">
+          <p class="headline">92 %</p>
+          <p>der Nutzenden empfehlen das Unterstützungsabgebot aktiv weiter</p>
+          <p class="footnote">
+            Zeitraum: Januar bis August 2026
+            <br />
+            Quelle: Eigene Umfrage (n = 13)
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Neues Wissen vermitteln</h2>
+      <p>
+        Die umsetzungsorientierten Schulungen des Zentrum für Legistik
+        vermitteln Methoden und Werkzeuge zur Erarbeitung wirkungsorientierter
+        Regelungen.
+      </p>
+      <p>
+        <a href={schulungen.path} class="kern-link">
+          <span
+            class="kern-icon kern-icon--arrow-forward kern-icon--default"
+            aria-hidden="true"
+          ></span>
+          Mehr zum Schulungsangebot erfahren
+        </a>
+      </p>
+      <div class="metrics-grid">
+        <div class="fact-card row-span-2">
+          <Chart
+            data={schulungenData}
+            title={`${schulungenSum} Teilnehmende in Online-Schulungen seit 2025`}
+          />
+          <p class="footnote">
+            2025 im Rahmen des Digitalcheck
+            <br />
+            2026 im Rahmen des ZfL (Januar bis August)
+          </p>
+        </div>
+
+        <div class="fact-card">
+          <p class="headline">76 %</p>
+          <p>
+            der Teilnehmenden bewerten die Inhalte der Online-Schulung als
+            hilfreich für den Arbeitsalltag
+          </p>
+          <p class="footnote">
+            Zeitraum: Januar bis August 2026
+            <br />
+            Quelle: Eigene Umfrage (n = 17)
+          </p>
+        </div>
+
+        <div class="fact-card">
+          <p class="headline">
+            4,7<span class="text-xl!">/5</span>
+          </p>
+          <StarRating stars={4.7} />
+          <p>durchschnittliche Zufriedenheit mit den Online-Schulungen</p>
+          <p class="footnote">
+            Zeitraum: Januar bis August 2026
+            <br />
+            Quelle: Eigene Umfrage (n = 17)
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Digitale Hilfestellungen</h2>
+      <p>
+        Auf zwei Online-Angeboten stellen wir einfach anwendbare Tools und
+        nützliche Informationen für die Rechtsetzung bereit.
+      </p>
+      <p>
+        <a href={werkzeuge.path} class="kern-link">
+          <span
+            class="kern-icon kern-icon--arrow-forward kern-icon--default"
+            aria-hidden="true"
+          ></span>
+          Mehr zu Werkzeugen erfahren
+        </a>
+      </p>
+      <p>
+        <a href="https://digitalcheck.bund.de" class="link-unstyled kern-link">
+          <span
+            class="kern-icon kern-icon--arrow-forward kern-icon--default"
+            aria-hidden="true"
+          ></span>
+          Mehr zum Digitalcheck erfahren
+        </a>
+      </p>
+      <div class="metrics-grid">
+        <div class="fact-card">
+          <p class="headline">21 User Tests</p>
+          <p>um Nutzen und einfache Anwendbarkeit sicherzustellen</p>
+          <p class="footnote">
+            Haben Sie auch Interesse daran, mitzumachen?{" "}
+            <a href={mailto(ZFL_EMAIL.url, "Interesse an User Tests")}>
+              Kontaktieren Sie uns!
+            </a>
+          </p>
+          <p class="footnote">Zeitraum: Januar bis August 2026</p>
+        </div>
+
+        <div class="fact-card row-span-2">
+          <Chart
+            data={websiteData}
+            title={`${pageViewSum.toLocaleString("de-DE")} Website-Besuche in 2026`}
+          />
+          <p class="footnote">
+            Quelle: Posthog für{" "}
+            <a
+              href="https://eu.posthog.com/shared/rZHw3Hn9HKW-86-1nHQUWP0LZe5-cg"
+              target="_blank"
+            >
+              ZfL
+            </a>{" "}
+            und{" "}
+            <a
+              href="https://eu.posthog.com/shared/Sxzmf2FkxTibbNVByMIFM3srA_7GBw"
+              target="_blank"
+            >
+              Digitalcheck
+            </a>
+          </p>
+        </div>
+
+        <div class="fact-card">
+          <p class="headline">15 Minuten</p>
+          <p>durchschnittliche Website-Verweildauer pro Besuch</p>
+          <p class="footnote">
+            Durchschnitt Zentrum für Legistik / Digitalcheck
+            <br />
+            Zeitraum: Erstes Halbjahr 2026
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Digitalcheck und Visualisierungen</h2>
+      <p>
+        Der Digitalcheck unterstützt dabei, Gesetze von Anfang an
+        digitaltauglich zu gestalten. Visualisierungen sind dabei ein zentrales
+        Element, um komplexe Regelungen und Prozesse verständlich abzubilden.
+      </p>
+      <p>
+        <a href="https://digitalcheck.bund.de" class="link-unstyled kern-link">
+          <span
+            class="kern-icon kern-icon--arrow-forward kern-icon--default"
+            aria-hidden="true"
+          ></span>
+          Mehr zum Digitalcheck erfahren
+        </a>
+      </p>
+      <div class="metrics-grid">
+        <div class="fact-card row-span-2">
+          <Chart
+            data={digitalcheckData}
+            title={`${digitalchecksSum.toLocaleString("de-DE")} Regelungsvorhaben, in denen sich seit 2023 mit digitaler Umsetzung auseinandergesetzt wurde`}
+          />
+          <p class="footnote">
+            Zeitraum für 2026: Januar bis August
+            <br />
+            Quelle: NKR
+          </p>
+        </div>
+
+        <div class="fact-card row-span-2">
+          <Chart
+            data={visualisierungenData}
+            type="pie"
+            title={`${visPercent} % der Vorhaben mit Digitalbezug beinhalten mind. eine Visualisierung`}
+          />
+          <p class="footnote">
+            Zeitraum: Januar bis August 2026
+            <br />
+            Quelle: NKR
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>EU-Interoperabilität unterstützen</h2>
+      <p>
+        Als Nationale Kontaktstelle unterstützen wir bei der Umsetzung der
+        Verordnung für ein interoperables Europa. Das Ziel: Vernetzte digitale
+        Systeme in der EU zu fördern.
+      </p>
+      <p>
+        <a
+          href="https://digitalcheck.bund.de/interoperabel"
+          class="link-unstyled kern-link"
+        >
+          <span
+            class="kern-icon kern-icon--arrow-forward kern-icon--default"
+            aria-hidden="true"
+          ></span>
+          Mehr zu Interoperabilität erfahren
+        </a>
+      </p>
+      <div class="metrics-grid">
+        <div class="fact-card row-span-2">
+          <Chart
+            data={interopData}
+            title={`${interopSum} Vorhaben mit Interoperabilitätsbezug`}
+          />
+          <p class="footnote">Zeitraum für 2026: Januar bis August</p>
+        </div>
+
+        <div class="fact-card">
+          <p class="headline">19 Begleitungen</p>
+          <p>
+            durch unser spezialisiertes Team bei umfangreicherem Prüfungsaufwand
+          </p>
+          <p class="footnote">Zeitraum: Juni 2025 bis August 2026</p>
+        </div>
+
+        <div class="fact-card">
+          <p class="headline">9 Einreichungen</p>
+          <p>
+            von Berichten zur Bewertung von Interoperabilität auf dem EU-Portal
+          </p>
+          <p class="footnote">Zeitraum: Juni 2025 bis August 2026</p>
+        </div>
+      </div>
     </section>
   </main>
 </Layout>
+
+<style>
+  @reference "@/styles/global.css";
+
+  section + section {
+    @apply pt-0;
+  }
+
+  .metrics-grid {
+    @apply py-md grid max-w-1000 grid-cols-1 gap-24 md:grid-cols-2;
+  }
+
+  .fact-card {
+    @apply bg-lavender-200 flex flex-col justify-between rounded-sm p-24 sm:p-32;
+
+    p:not(.headline):not(.footnote) {
+      @apply text-(length:--kern-typography-font-size-large-static);
+    }
+
+    p.headline {
+      @apply kern-heading-x-large;
+    }
+
+    p.footnote {
+      @apply mt-24 text-base text-(--kern-color-layout-text-muted);
+    }
+  }
+</style>
