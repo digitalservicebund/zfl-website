@@ -147,6 +147,7 @@ const pieClipPath = (start: number, end: number) => {
               <td
                 style={`${cellStyle} --color: ${colorFor(seriesIndex)};`}
                 tabindex="0"
+                class:list={[value === 0 && "invisible"]}
               >
                 <span class="data kern-body kern-body--small kern-body--muted">
                   {formatValue(value)}
