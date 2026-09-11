@@ -107,16 +107,16 @@ const resources = await getEntries([
       <ImageTextOverlay
         image={digitalcheckImg}
         imageAlt="Screenshot der Digitalcheck-Startseite, wo der Prozess zu Digitaltauglichkeit in drei Schritten dargestellt ist"
+        imageBorder
+        imageClass="object-top"
         linkHref={DIGITALCHECK_URL.url}
         linkText="Zum Digitalcheck"
       >
-        <Fragment slot="content">
-          <h2>Digitalcheck</h2>
-          <p>
-            Auf der Webseite des Digitalcheck finden Sie alle notwendigen
-            Schritte, um Digitaltauglichkeit sicherzustellen.
-          </p>
-        </Fragment>
+        <h2>Digitalcheck</h2>
+        <p>
+          Auf der Webseite des Digitalcheck finden Sie alle notwendigen
+          Schritte, um Digitaltauglichkeit sicherzustellen.
+        </p>
       </ImageTextOverlay>
     </section>
     <section>

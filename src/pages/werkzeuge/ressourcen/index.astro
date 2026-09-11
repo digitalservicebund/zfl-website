@@ -129,77 +129,75 @@ const PAGEFIND_INSTANCE = "werkzeuge";
       </div>
     </div>
 
-    <section>
-      {categories.map(({ id, title, tools }) => {
-        return (
-          <>
-            <h2 id={id} class="mb-56 scroll-mt-104">
-              {title.charAt(0).toUpperCase() + title.slice(1)}
-            </h2>
-            <div class="tool-grid gap-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-              {tools.map((t) => (
-                <div
-                  class="tool-wrapper"
-                  x-bind:data-visible={`isCardVisible(${JSON.stringify(t.id)}, ${JSON.stringify(t.data.type)})`}
+    {categories.map(({ id, title, tools }) => {
+      return (
+        <section id={id} class="scroll-mt-104">
+          <h2 class="mb-56">
+            {title.charAt(0).toUpperCase() + title.slice(1)}
+          </h2>
+          <div class="tool-grid gap-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            {tools.map((t) => (
+              <div
+                class="tool-wrapper"
+                x-bind:data-visible={`isCardVisible(${JSON.stringify(t.id)}, ${JSON.stringify(t.data.type)})`}
+              >
+                <KernCard
+                  title={t.data.title}
+                  href={t.data.href}
+                  target_option={t.data.isExternal ? "_blank" : "_self"}
+                  body={t.data.description}
+                  interactive={false}
+                  image={t.data.image}
+                  imageAlt={t.data.image ? t.data.title : undefined}
                 >
-                  <KernCard
-                    title={t.data.title}
-                    href={t.data.href}
-                    target_option={t.data.isExternal ? "_blank" : "_self"}
-                    body={t.data.description}
-                    interactive={false}
-                    image={t.data.image}
-                    imageAlt={t.data.image ? t.data.title : undefined}
+                  <div
+                    slot="pre-header"
+                    class="mb-16 flex w-full justify-between"
                   >
-                    <div
-                      slot="pre-header"
-                      class="mb-16 flex w-full justify-between"
-                    >
-                      <div class="flex gap-8">
-                        {t.data.type.map((type) => (
-                          <span
-                            class={`kern-badge kern-badge--${type.toLowerCase()}`}
-                          >
-                            <span class="kern-label">{type}</span>
-                          </span>
-                        ))}
-                      </div>
-                      <button
-                        class="text-icon-muted"
-                        aria-label={"Lesezeichen hinzufügen"}
-                        @click={`toggleBookmark(${JSON.stringify(t.id)})`}
-                      >
-                        <IconBookmarkAdd
-                          x-show={`!bookmarkedTools.includes(${JSON.stringify(t.id)})`}
-                          class="h-32 w-32"
-                        />
-                        <IconBookmarkAdded
-                          x-cloak
-                          x-show={`bookmarkedTools.includes(${JSON.stringify(t.id)})`}
-                          class="h-32 w-32"
-                        />
-                      </button>
+                    <div class="flex gap-8">
+                      {t.data.type.map((type) => (
+                        <span
+                          class={`kern-badge kern-badge--${type.toLowerCase()}`}
+                        >
+                          <span class="kern-label">{type}</span>
+                        </span>
+                      ))}
                     </div>
-                    <div
-                      slot="footer"
-                      class="text-icon-muted! flex items-center gap-8"
+                    <button
+                      class="text-icon-muted"
+                      aria-label={"Lesezeichen hinzufügen"}
+                      @click={`toggleBookmark(${JSON.stringify(t.id)})`}
                     >
-                      <IconAutoStories class="h-32 w-32 shrink-0" />
-                      <p class="kern-subline kern-subline-dark py-0">
-                        Quelle: {t.data.source}
-                      </p>
-                    </div>
-                  </KernCard>
-                </div>
-              ))}
-              <p class="no-results" data-pagefind-ignore>
-                <em>Keine Treffer</em>
-              </p>
-            </div>
-          </>
-        );
-      })}
-    </section>
+                      <IconBookmarkAdd
+                        x-show={`!bookmarkedTools.includes(${JSON.stringify(t.id)})`}
+                        class="h-32 w-32"
+                      />
+                      <IconBookmarkAdded
+                        x-cloak
+                        x-show={`bookmarkedTools.includes(${JSON.stringify(t.id)})`}
+                        class="h-32 w-32"
+                      />
+                    </button>
+                  </div>
+                  <div
+                    slot="footer"
+                    class="text-icon-muted! flex items-center gap-8"
+                  >
+                    <IconAutoStories class="h-32 w-32 shrink-0" />
+                    <p class="kern-subline kern-subline-dark py-0">
+                      Quelle: {t.data.source}
+                    </p>
+                  </div>
+                </KernCard>
+              </div>
+            ))}
+            <p class="no-results" data-pagefind-ignore>
+              <em>Keine Treffer</em>
+            </p>
+          </div>
+        </section>
+      );
+    })}
 
     <Modal id="hintSidebarContent">
       <h2 class="mt-0 text-xl">Filterfunktionen</h2>
