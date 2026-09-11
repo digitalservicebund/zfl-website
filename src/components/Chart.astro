@@ -100,7 +100,9 @@ const pieClipPath = (start: number, end: number) => {
     {title && <caption class="kern-title text-left">{title}</caption>}
     <thead>
       <tr>
-        <th scope="col"></th>
+        <th scope="col">
+          <span class="sr-only">Kategorie</span>
+        </th>
         {data.map((series) => (
           <th scope="col">{series.label}</th>
         ))}
