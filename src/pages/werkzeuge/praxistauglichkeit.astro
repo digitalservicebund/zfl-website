@@ -1,7 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
-import InfoPanel from "@/components/InfoPanel.astro";
+import ImageTextOverlay from "@/components/ImageTextOverlay.astro";
 import KernCard from "@/components/KernCard.astro";
 import KernAccordion from "@/components/KernAccordion.astro";
 import { Image } from "astro:assets";
@@ -43,31 +43,23 @@ const praxistauglichkeitTools = allTools.filter(
       </p>
     </Hero>
     <section>
-      <div class="relative space-y-24 lg:grid lg:h-482 lg:grid-cols-6 lg:items-center lg:overflow-hidden">
-        <InfoPanel
-          look="gray"
-          class="z-1 self-start lg:col-span-3 lg:w-600 lg:self-center"
-        >
-          <h2>Was ist Praxistauglichkeit?</h2>
-          <p>
-            Praxistauglichkeit lebt vom{" "}
-            <b>direkten Austausch mit der Umsetzung.</b> Gemeinsam werden mit
-            ihnen Hürden und Lösungen identifiziert. So kann eine Regelung von
-            Beginn an effizient gestaltet und aufwandsarm umgesetzt werden. Im
-            Ergebnis wird damit <b>unnötige Bürokratie verhindert</b>.
-          </p>
-          <p>
-            Praxistauglichkeit fokussiert die <b>frühe Phase</b> der
-            Gesetzgebung, d.h. den Erarbeitungszeitraum vor Erstellung des
-            Regelungstextes.
-          </p>
-        </InfoPanel>
-        <Image
-          src={praxistauglichkeit}
-          alt="Drei Personen stehen an einem Poster einer Nutzendenreise und besprechen sich"
-          class="lg:absolute lg:right-1 lg:h-545 lg:w-727"
-        />
-      </div>
+      <ImageTextOverlay
+        image={praxistauglichkeit}
+        imageAlt="Drei Personen stehen an einem Poster einer Nutzendenreise und besprechen sich"
+      >
+        <h2>Was ist Praxistauglichkeit?</h2>
+        <p>
+          Praxistauglichkeit lebt vom{" "}
+          <b>direkten Austausch mit der Umsetzung.</b> Gemeinsam werden mit
+          ihnen Hürden und Lösungen identifiziert. So kann eine Regelung von
+          Beginn an effizient gestaltet und aufwandsarm umgesetzt werden. Im
+          Ergebnis wird damit <b>unnötige Bürokratie verhindert</b>.
+        </p>
+        <p>
+          Praxistauglichkeit fokussiert die <b>frühe Phase</b> der Gesetzgebung,
+          d.h. den Erarbeitungszeitraum vor Erstellung des Regelungstextes.
+        </p>
+      </ImageTextOverlay>
       <h2>Wie setzen Sie Praxistauglichkeit um?</h2>
       <p>
         Praxistauglichkeit kann auf verschiedene Weise sichergestellt werden.
