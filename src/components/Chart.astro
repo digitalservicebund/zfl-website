@@ -66,6 +66,28 @@ const colorVars = data
   .map((_, index) => `--color-${index + 1}: ${colorFor(index)};`)
   .join(" ");
 
+// For each series, hovering its legend item or any of its cells dims
+// everything else (other legend items, other columns' cells). One rule per
+// series since the selectors depend on data.length; not expressible in
+// Astro's static <style>.
+const legendHoverCss = data
+  .map((_, index) => {
+    const hoverLi = `.legend li:nth-child(${index + 1}):hover`;
+    const hoverTd = `td:nth-child(${index + 1} of td):hover`;
+    const otherLi = `.legend li:not(:nth-child(${index + 1}))`;
+    const otherTd = `td:not(:nth-child(${index + 1} of td))`;
+    return `
+      .zfl-chart:has(${hoverLi}) ${otherTd},
+      .zfl-chart:has(${hoverLi}) ${otherLi},
+      .zfl-chart:has(${hoverTd}) ${otherLi},
+      .zfl-chart:has(${hoverTd}) ${otherTd} {
+        opacity: 0.2;
+        filter: grayscale(1);
+      }
+    `;
+  })
+  .join("");
+
 const formatValue = (value: number) => value.toLocaleString("de-DE");
 
 // Custom clip path for tooltips of pie slices
@@ -149,6 +171,8 @@ const pieClipPath = (start: number, end: number) => {
     </ul>
   )}
 </div>
+
+{isMultiSeries && <style set:html={legendHoverCss}></style>}
 
 <style>
   .zfl-chart {
@@ -244,10 +268,19 @@ const pieClipPath = (start: number, end: number) => {
 
     li {
       line-height: 1.5;
+      transition:
+        opacity 0.15s ease,
+        filter 0.15s ease;
       &::before {
         border: none;
         flex-shrink: 0;
       }
     }
+  }
+
+  table.charts-css td {
+    transition:
+      opacity 0.15s ease,
+      filter 0.15s ease;
   }
 </style>
