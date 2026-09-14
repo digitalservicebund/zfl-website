@@ -107,22 +107,10 @@ vorzuschlagen) erzeugst du **ein eigenes Finding**:
    Nachweispflicht, Anpassung einer Frist an typische Lebenslagen,
    nutzerfreundlichere Gestaltung eines Antragsprozesses, klarere
    Abgrenzung von Regel und Ausnahme).
-5. **Potential:** Verbesserungspotenzial dieser Stelle als `"low"`,
-   `"medium"` oder `"high"` — wie groß wäre der Effekt, würde der Hint
-   umgesetzt? Nur **relativ zu den anderen Findings desselben
-   Gesetzestextes** einordnen (nicht absolut über verschiedene Prüfläufe
-   hinweg vergleichbar) — das Feld wird im Frontend zum Sortieren aller
-   Findings _dieses_ Gesetzes verwendet, nicht gesetzesübergreifend.
-6. **Confidence:** eigene Sicherheit als `"low"`, `"medium"` oder `"high"`,
-   dass es sich tatsächlich um eine relevante Fundstelle handelt — bei
-   mehrdeutigen Formulierungen, Grenzfällen zwischen zwei Prinzipien oder
-   unklarem Bezug eher `"low"` ansetzen. Wird im Frontend nur informativ
-   angezeigt, nicht zum Sortieren verwendet.
-
-Sei präzise statt vollständig: Ein Finding pro klar abgrenzbarer Textstelle
-ist besser als ein Finding, das mehrere Absätze zusammenfasst — spätere
-Provenienz-Anzeige/Highlighting im Tool braucht eine eindeutig lokalisierbare
-Textstelle.
+   Sei präzise statt vollständig: Ein Finding pro klar abgrenzbarer Textstelle
+   ist besser als ein Finding, das mehrere Absätze zusammenfasst — spätere
+   Provenienz-Anzeige/Highlighting im Tool braucht eine eindeutig lokalisierbare
+   Textstelle.
 
 Wenn mehrere Findings dieselbe oder eine überlappende Textstelle betreffen
 (z. B. mehrere Prinzipien für denselben Satz), ist das unproblematisch — jedes
@@ -150,8 +138,6 @@ Verbesserungspotenzial identifiziert, gib eine leere Liste (`[]`) aus.
   tag: "Prinzip 2" # exakt einer der 5 Werte aus Schritt 2
   id: "<uuid>" # per Finding neu erzeugte UUID, siehe unten
   locationLabel: "§ 14 Abs. 2" # nächstgelegene Gliederungsangabe (§, Art., Abs., S., Nr.) zur Textstelle
-  potential: "high" # low | medium | high — relativ zu den anderen Findings dieses Gesetzestextes, siehe Schritt 3.5
-  confidence: "medium" # low | medium | high — Sicherheit, dass es sich um ein echtes Finding handelt, siehe Schritt 3.6
   reasoning: "..."
   hint: "..."
 ```
