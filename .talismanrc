@@ -89,8 +89,7 @@ fileignoreconfig:
     allowed_patterns:
       - "Falls Sie noch keine Legende haben, erstellen Sie eine."
   - filename: src/scripts/toc.ts
-    allowed_patterns:
-      - $el
+    checksum: 81ebc6889c6372af7408d61ada6407b042255d325579c39941281a9d158417e4
   - filename: src/content/visualisierung/ablauf-eines-online-verfahrens.md
     checksum: 3932230805182a9e132fbb7ec41ef5dc7447f98c77fef3d5faf7460ca1e97c2a
   - filename: src/content/visualisierung/uebersicht-verantwortlicher-akteure.md
@@ -127,6 +126,10 @@ fileignoreconfig:
     checksum: d68b2abea5a2f030c40821897777800100d7491f847bdea1993c190c6ed16800
   - filename: src/pages/werkzeuge/ressourcen/technische-umsetzbarkeit.astro
     allowed_patterns: [IT-Anpassungen]
+  - filename: src/pages/ueber/zahlen-und-fakten.astro # posthog dashboard links
+    allowed_patterns:
+      - rZHw3Hn9HKW-86-1nHQUWP0LZe5-cg
+      - Sxzmf2FkxTibbNVByMIFM3srA_7GBw
 scopeconfig:
   - scope: node
 allowed_patterns:
