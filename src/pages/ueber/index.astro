@@ -52,7 +52,7 @@ const contactId = "kontaktieren-sie-uns";
           src={ansatzImg}
           alt="Eine großflächige Grafik an einer Glaswand. Sie zeigt verschiedenfarbige Kreise mit Textinhalten."
         />
-        <h2 class="kern-heading-large pt-0">Auftrag</h2>
+        <h2>Auftrag</h2>
         <p>
           Die{" "}
           <a
@@ -95,7 +95,7 @@ const contactId = "kontaktieren-sie-uns";
     </section>
 
     <section class="breakout bg-lavender-400">
-      <h2 class="kern-heading-large">Unsere Angebote</h2>
+      <h2>Unsere Angebote</h2>
       <div class="grid grid-cols-1 gap-x-120 gap-y-16 md:grid-cols-2">
         <p class="mb-0">
           Das Zentrum für Legistik stellt mehrere Unterstützungsangebote zur
@@ -103,31 +103,22 @@ const contactId = "kontaktieren-sie-uns";
           mit der Praxis weiterentwickelt.
         </p>
         <div class="md:col-start-2 md:row-span-2 md:row-start-1">
-          <ul class="list-unstyled">
+          <ul class="list-unstyled service-list">
             <li>
-              <a href={werkzeuge.path} class="kern-link text-2xl font-bold">
-                <IconArrowForward
-                  class="mr-4 inline size-32"
-                  aria-hidden="true"
-                />
+              <a href={werkzeuge.path}>
+                <IconArrowForward aria-hidden="true" />
                 Werkzeuge
               </a>
             </li>
             <li>
-              <a href={begleitungen.path} class="kern-link text-2xl font-bold">
-                <IconArrowForward
-                  class="mr-4 inline size-32"
-                  aria-hidden="true"
-                />
+              <a href={begleitungen.path}>
+                <IconArrowForward aria-hidden="true" />
                 Regelungsbegleitung
               </a>
             </li>
             <li>
-              <a href={schulungen.path} class="kern-link text-2xl font-bold">
-                <IconArrowForward
-                  class="mr-4 inline size-32"
-                  aria-hidden="true"
-                />
+              <a href={schulungen.path}>
+                <IconArrowForward aria-hidden="true" />
                 Schulungen
               </a>
             </li>
@@ -148,7 +139,7 @@ const contactId = "kontaktieren-sie-uns";
 
     <section>
       <MediaText>
-        <h2 class="kern-heading-large mb-16 pt-0">Herangehensweise</h2>
+        <h2>Herangehensweise</h2>
         <p>
           Das Zentrum für Legistik nimmt den gesamten Gesetzgebungsprozess vom
           ersten Entwurf bis zur praktischen Umsetzung in den Blick. Der Fokus
@@ -224,3 +215,17 @@ const contactId = "kontaktieren-sie-uns";
     </section>
   </main>
 </Layout>
+
+<style>
+  @reference "@/styles/global.css";
+
+  .service-list {
+    @apply space-y-24;
+    li a {
+      @apply flex items-center gap-4 text-2xl font-bold;
+      svg {
+        @apply size-32;
+      }
+    }
+  }
+</style>
