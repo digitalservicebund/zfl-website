@@ -181,7 +181,11 @@ gibt es nichts vorzuschlagen) erzeugst du **ein eigenes Finding**:
 
 1. **Exakte Textstelle zitieren:** Kopiere den relevanten Ausschnitt
    **wortwörtlich** aus dem übergebenen Gesetzestext (keine Paraphrase) —
-   dieser Ausschnitt wird für `location` gebraucht.
+   dieser Ausschnitt wird als `quote` in Teil 2 der Ausgabe (Schritt 4)
+   zurückgegeben. `quote` ist kein Teil des `findings`-Schemas aus
+   `src/content.config.ts` — er dient dem Orchestrator ausschließlich zur
+   späteren Marker-Platzierung im Gesetzestext und wird vor dem Speichern
+   der Findings-Liste wieder entfernt.
 2. **Kategorie zuordnen:** Genau eine der 20 Kategorien aus Schritt 2
    auswählen. Betrifft eine Stelle mehrere Kategorien, erzeuge mehrere
    Findings (eines pro Kategorie), nicht ein Finding mit mehreren Tags.
@@ -204,7 +208,12 @@ verschiedener Findings dürfen sich beliebig überlappen oder ineinander liegen.
 
 ## Schritt 4: Ausgabe der Ergebnisse
 
-Gib **drei Teile** zurück:
+Gib **zwei Teile** zurück. Du schreibst keine Datei und fasst den
+Gesetzestext nicht an — die Marker-Platzierung im Gesetzestext übernimmt der
+Orchestrator zentral, nachdem beide Checks (Digitalcheck und Bürgercheck)
+fertig sind (siehe `SKILL.md` Schritt 3/4). Das erlaubt es, diesen Check
+parallel zum Bürgercheck laufen zu lassen, da du nur den unveränderten
+Gesetzestext aus Schritt 2 des Skills liest, ihn aber nie veränderst.
 
 ### 1. Kurzfassung (für den Chat)
 
@@ -214,47 +223,21 @@ identifiziert? Gibt es besonders gravierende Befunde?
 
 ### 2. Strukturierte Findings-Liste (YAML)
 
-Gib **alle** Findings als YAML-Liste aus, exakt im Format des
-`findings`-Arrays aus dem `potenziale`-Schema in `src/content.config.ts`.
-Liegt laut Schritt 1 kein Digitalbezug vor oder wurden keine Findings mit
-Verbesserungspotenzial identifiziert, gib eine leere Liste (`[]`) aus.
+Gib **alle** Findings als YAML-Liste aus. Jedes Finding enthält exakt die
+Felder des `findings`-Arrays aus dem `potenziale`-Schema in
+`src/content.config.ts`, plus ein zusätzliches `quote`-Feld:
 
 ```yaml
 - type: "Digitalcheck"
   tag: "Prinzip 1.1" # exakt einer der 20 Werte aus Schritt 2 (oder "EU-Interoperabilität")
-  id: "<uuid>" # per Finding neu erzeugte UUID, siehe unten
+  id: "<uuid>" # per Finding neu erzeugte UUID (z. B. per Node crypto.randomUUID())
   locationLabel: "§ 14 Abs. 2" # nächstgelegene Gliederungsangabe (§, Art., Abs., S., Nr.) zur Textstelle
   reasoning: "..."
   hint: "..."
+  quote:
+    "..." # wortwörtliches Zitat aus Schritt 3.1 — nur für die Marker-Platzierung durch
+    # den Orchestrator, kein Teil des potenziale-Schemas, wird vor dem Speichern entfernt
 ```
 
-### 3. Annotierter Gesetzestext (Datei im Scratchpad-Verzeichnis)
-
-Jedes Finding braucht eine im Gesetzestext eindeutig verortete Textstelle.
-Statt Zeichen-Offsets zu berechnen und separat zu speichern (fragil: bricht
-lautlos, sobald der gespeicherte Text später auch nur geringfügig verändert
-wird), wird die Textstelle direkt im Gesetzestext markiert:
-
-1. Erzeuge für jedes Finding eine neue UUID (z. B. per Node
-   `crypto.randomUUID()`), identisch zu der im `id`-Feld aus Teil 2.
-2. Schreibe den kompletten Gesetzestext aus Schritt 2 unverändert in eine
-   Datei im Scratchpad-Verzeichnis.
-3. Ermittle je Zitat programmatisch (nicht von Hand!) per Node/Python
-   `text.indexOf(zitat)` bzw. `text.find(zitat)` Start- und Ende-Offset des
-   wortwörtlichen Zitats aus Schritt 3.1. Kommt das Zitat mehrfach vor,
-   das richtige Vorkommen anhand des Kontexts (z. B. der Gliederungsangabe
-   aus `locationLabel`) gezielt auswählen, nicht einfach das erste nehmen.
-4. Füge an genau diesen Positionen ein Marker-Paar in den Text ein:
-   `<!--finding:{id}:start-->` direkt vor und `<!--finding:{id}:end-->`
-   direkt nach dem zitierten Ausschnitt (`{id}` = die UUID aus Schritt 1).
-   Wichtig: Offsets **rückwärts** (von der höchsten Position zur niedrigsten)
-   einfügen, sonst verschieben frühere Einfügungen die noch offenen Offsets.
-   Überlappende oder identische Textstellen mehrerer Findings sind dabei
-   unproblematisch — die Marker sind reine Textmarken ohne Verschachtelungs-
-   zwang.
-5. Schreibe den so annotierten Volltext in eine weitere Datei im
-   Scratchpad-Verzeichnis (der ursprüngliche, unannotierte Text aus Schritt 2
-   bleibt unverändert erhalten) und nenne deren Pfad in der finalen Nachricht.
-   Außer den eingefügten Marken darf der Text **nicht** verändert werden
-   (kein Trimmen/Normalisieren) — der Orchestrator übernimmt ihn unverändert
-   als Body der `.md`-Datei.
+Liegt laut Schritt 1 kein Digitalbezug vor oder wurden keine Findings mit
+Verbesserungspotenzial identifiziert, gib eine leere Liste (`[]`) aus.

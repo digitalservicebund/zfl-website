@@ -64,48 +64,37 @@ Skill-Verzeichnis vor: `.claude/skills/vorhaben-checks/digitalcheck.md` und
 `.claude/skills/vorhaben-checks/buergercheck.md`. Lies beide Dateien (falls
 noch nicht geschehen).
 
-Führe die beiden Checks **sequenziell** aus (nicht parallel), da der
-Bürgercheck-Fork im annotierten Text des Digitalcheck-Forks weiterarbeitet:
+Führe die beiden Checks **parallel** aus: beide lesen nur den unveränderten
+Gesetzestext aus Schritt 2 und schreiben oder annotieren keine Datei — die
+Marker-Platzierung erfolgt einmalig und zentral in Schritt 4, nachdem beide
+Ergebnisse vorliegen. Dadurch gibt es keine Abhängigkeit zwischen den Checks
+mehr und beide Agent-Aufrufe können in **einer** Nachricht gestartet werden:
 
-1. Starte einen Agenten mit `subagent_type: "fork"` für den Digitalcheck. Der
-   Fork-Agent bekommt:
+1. Ein Agent mit `subagent_type: "fork"` für den Digitalcheck. Der Fork-Agent
+   bekommt:
    - den vollständigen Gesetzestext aus Schritt 2,
    - die komplette Anweisung aus `digitalcheck.md` (Rolle, Auftrag und alle
      4 Prüfschritte),
    - den Hinweis, das Ergebnis exakt im Ausgabeformat aus deren "Schritt 4"
-     **als finale Nachricht zurückzugeben** (kurze Chat-Zusammenfassung, die
-     strukturierte Findings-Liste als YAML passend zum `findings`-Array aus
-     `src/content.config.ts`, sowie den Pfad zur annotierten
-     Gesetzestext-Datei im Scratchpad-Verzeichnis) — inkl. der Vorprüfung:
-     bricht der Check mangels Bezug ab, wird trotzdem genau dieses Ergebnis
-     (mit leerer Findings-Liste und unverändertem, unannotiertem
-     Gesetzestext) zurückgegeben.
-2. Starte danach einen zweiten Agenten mit `subagent_type: "fork"` für den
-   Bürgercheck. Der Fork-Agent bekommt:
-   - den vollständigen Gesetzestext aus Schritt 2,
+     **als finale Nachricht zurückzugeben** (kurze Chat-Zusammenfassung sowie
+     die strukturierte Findings-Liste als YAML — Felder des `findings`-Arrays
+     aus `src/content.config.ts` plus je Finding ein zusätzliches
+     `quote`-Feld) — inkl. der Vorprüfung: bricht der Check mangels Bezug ab,
+     wird trotzdem genau dieses Ergebnis mit leerer Findings-Liste
+     zurückgegeben.
+2. Ein zweiter Agent mit `subagent_type: "fork"` für den Bürgercheck, parallel
+   zum ersten gestartet (gleiche Nachricht, zweiter Tool-Aufruf). Der
+   Fork-Agent bekommt:
+   - den vollständigen Gesetzestext aus Schritt 2 (denselben unannotierten
+     Text wie der Digitalcheck-Fork — beide arbeiten auf derselben Vorlage),
    - die komplette Anweisung aus `buergercheck.md` (Rolle, Auftrag und alle
      4 Prüfschritte),
-   - den expliziten Hinweis, dass er in deren Schritt 4 (Teil 3, Punkt 2)
-     **nicht** den rohen Gesetzestext aus Schritt 2 dieses Skills als
-     Ausgangsdatei verwenden soll, sondern die vom Digitalcheck-Fork bereits
-     annotierte Datei (Pfad aus Schritt 1 dieser Aufzählung) — die darin
-     enthaltenen `<!--finding:...:start/end-->`-Kommentare des Digitalcheck
-     sind reiner Text und stören sein `indexOf`-Zitatmatching nicht, solange
-     er seine Zitate weiterhin wortwörtlich aus dem Regelungstext entnimmt.
-     Liegt ein Bürgercheck-Zitat ausnahmsweise exakt so, dass ein
-     Digitalcheck-Marker mitten darin liegt (`indexOf` findet das Zitat
-     dadurch nicht mehr), weicht er auf eine eindeutig lokalisierbare
-     Teilstelle direkt davor oder danach aus, statt das Finding zu verwerfen.
    - den gleichen Hinweis zum Ausgabeformat wie beim Digitalcheck-Fork
-     (kurze Zusammenfassung, YAML-Findings-Liste, Pfad zur — nun beide
-     Marker-Sets enthaltenden — annotierten Datei).
+     (kurze Zusammenfassung, YAML-Findings-Liste inkl. `quote`-Feld).
 
-Beide Fork-Agenten legen **keine eigene Datei im Zielverzeichnis** an — sie
-geben ihr Ergebnis als finale Nachricht zurück, die vom Orchestrator in
-Schritt 4 weiterverarbeitet wird. Nur die annotierten Zwischen-Dateien im
-Scratchpad sind Dateien im eigentlichen Sinne; die aus Schritt 1 wird nach
-Schritt 2 nicht mehr benötigt, sobald die aus Schritt 2 (mit beiden
-Marker-Sets) vorliegt.
+Beide Fork-Agenten legen **keine Datei** an — sie geben ihr Ergebnis
+ausschließlich als finale Nachricht zurück, die vom Orchestrator in Schritt 4
+zu einer einzigen annotierten Gesetzestext-Datei zusammengeführt wird.
 
 Da die Fork-Agenten deinen vollen Kontext erben, kennen sie den geladenen
 Gesetzestext bereits — im Prompt trotzdem explizit referenzieren, welcher
@@ -117,9 +106,38 @@ Check jeweils auszuführen ist.
 > aufgerufen — er wird ergänzt, sobald ein zu Digitalcheck/Bürgercheck
 > äquivalentes Prüfschema für ihn vorliegt.
 
-## Schritt 4 — Ergebnisse speichern
+## Schritt 4 — Ergebnisse zusammenführen und speichern
 
-1. Bestimme `{shortTitle}` = amtliche oder gebräuchliche Abkürzung des
+1. Kombiniere die YAML-Findings-Listen aus den finalen Nachrichten beider
+   Forks zu einer Liste (Digitalcheck-Findings gefolgt von
+   Bürgercheck-Findings). Jedes Finding trägt in dieser Zwischenliste noch
+   sein `quote`-Feld.
+2. Platziere die Marker **einmalig und zentral** im unveränderten
+   Gesetzestext aus Schritt 2 (nicht mehr pro Fork):
+   1. Schreibe den kompletten, unannotierten Gesetzestext aus Schritt 2
+      unverändert in eine Datei im Scratchpad-Verzeichnis.
+   2. Ermittle **programmatisch** (per Node/Python-Skript, nicht von Hand)
+      für **jedes** Finding aus der kombinierten Liste (Schritt 4.1) mit
+      `text.indexOf(quote)` bzw. `text.find(quote)` Start- und Ende-Offset
+      seines `quote`-Werts im unannotierten Text. Kommt ein Zitat mehrfach
+      vor, das richtige Vorkommen anhand des Kontexts (z. B. der
+      Gliederungsangabe aus `locationLabel`) gezielt auswählen, nicht
+      einfach das erste nehmen.
+   3. Sortiere alle so ermittelten Einfüge-Positionen (Start und Ende aller
+      Findings beider Checks zusammen) **absteigend** und füge die
+      Marker-Paare `<!--finding:{id}:start-->` / `<!--finding:{id}:end-->` in
+      dieser Reihenfolge in den Text ein. Rückwärts einfügen ist Pflicht,
+      sonst verschieben frühere Einfügungen die noch offenen Offsets.
+      Überlappende oder ineinanderliegende Textstellen verschiedener
+      Findings (auch checkübergreifend, z. B. ein Digitalcheck- und ein
+      Bürgercheck-Zitat im selben Satz) sind unproblematisch — die Marker
+      sind reine Textmarken ohne Verschachtelungszwang, und da beide
+      Zitat-Listen gegen denselben unveränderten Ausgangstext aufgelöst
+      werden, kann keine Marker-Insertion des einen Checks das
+      Zitat-Matching des anderen stören.
+   4. Schreibe den so annotierten Volltext in eine weitere Datei im
+      Scratchpad-Verzeichnis.
+3. Bestimme `{shortTitle}` = amtliche oder gebräuchliche Abkürzung des
    Gesetzes (z.B. `KSchG`), nach denselben Regeln wie in
    `gesetz-visualisieren` Schritt 4.1: nur eine offizielle oder in der Praxis
    gebräuchliche Abkürzung verwenden (aus dem `abbreviation`-Feld der
@@ -128,27 +146,25 @@ Check jeweils auszuführen ist.
    gebräuchliche deutsche Abkürzung, die im Ausland/EU-Kontext gebräuchliche
    Abkürzung verwenden. Ist auch das nicht auffindbar, den Nutzer fragen
    statt zu raten.
-2. Lege genau eine Datei `src/content/potenziale/{shortTitle}.md`
+4. Lege genau eine Datei `src/content/potenziale/{shortTitle}.md`
    an, passend zum `potenziale`-Schema aus `src/content.config.ts`:
    - **YAML-Frontmatter:**
      - `title`: offizieller Name des Gesetzes (ohne Abkürzung).
      - `eli`: ELI-Pfad aus Schritt 2 (optional — nur setzen, wenn das Gesetz
        über RIS gefunden wurde).
-     - `findings`: die YAML-Findings-Listen aus den finalen Nachrichten
-       beider Forks, **zu einer Liste zusammengeführt** (Digitalcheck-
-       Findings gefolgt von Bürgercheck-Findings), unverändert übernommen
-       (Schema exakt wie in `digitalcheck.md` bzw. `buergercheck.md`
-       Schritt 4 spezifiziert).
-   - **Body:** der Inhalt der **annotierten** Gesetzestext-Datei, deren Pfad
-     der Bürgercheck-Fork in Schritt 4 (Teil 3) zurückgegeben hat — der
-     vollständige Gesetzestext aus Schritt 2 inklusive aller darin
+     - `findings`: die kombinierte Liste aus Schritt 4.1, aber **ohne das
+       `quote`-Feld** (das war nur für die Marker-Platzierung in Schritt 4.2
+       nötig und ist kein Teil des `findings`-Schemas) — sonst unverändert
+       übernommen.
+   - **Body:** der Inhalt der annotierten Gesetzestext-Datei aus Schritt 4.2.4
+     — der vollständige Gesetzestext aus Schritt 2 inklusive aller darin
      eingefügten `<!--finding:{id}:start/end-->`-Marker beider Checks.
      Unverändert und vollständig übernehmen, nicht kürzen oder
      umformulieren — sonst gehen Findings ohne passendes Marker-Paar
      verloren.
-3. Gib im Chat an den Nutzer die Kurzfassungen + Findings-Listen beider
+5. Gib im Chat an den Nutzer die Kurzfassungen + Findings-Listen beider
    Checks aus.
-4. Kurze Zusammenfassung an den Nutzer: welches Gesetz, Digital- und
+6. Kurze Zusammenfassung an den Nutzer: welches Gesetz, Digital- und
    Bürgerbezug ja/nein, Anzahl Findings (je Check), wo der Gesetzestext
    gespeichert wurde. Auf `/werkzeuge/potenziale` im lokalen Dev-Server
    verweisen, um den Eintrag zu prüfen.
