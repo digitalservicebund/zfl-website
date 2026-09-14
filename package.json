@@ -46,14 +46,14 @@
     "astro-route-generator": "github:digitalservicebund/astro-route-generator#0.1.15",
     "astro-seo": "^1.2.0",
     "pagefind": "^1.5.2",
-    "posthog-js": "^1.428.7",
+    "posthog-js": "^1.430.3",
     "sharp": "^0.35.4",
     "svelte": "^5.57.0",
-    "tailwind-merge": "^3.6.0",
+    "tailwind-merge": "^3.7.0",
     "tailwind-variants": "^3.3.1",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3",
-    "unplugin-icons": "^23.0.1"
+    "unplugin-icons": "^24.0.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
@@ -65,7 +65,7 @@
     "@eslint/markdown": "^8.0.3",
     "@playwright/test": "^1.63.0",
     "@types/jsdom": "^30.0.0",
-    "@types/node": "^26.5.0",
+    "@types/node": "^26.5.1",
     "@typescript-eslint/parser": "^8.70.0",
     "@vitest/browser-playwright": "^5.0.0",
     "astro-eslint-parser": "^3.1.0",
@@ -83,7 +83,7 @@
     "prettier-plugin-svelte": "^4.1.1",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "typescript-eslint": "^8.70.0",
-    "vite": "^8.2.2",
+    "vite": "^8.3.0",
     "vitest": "^5.0.0"
   }
 }
