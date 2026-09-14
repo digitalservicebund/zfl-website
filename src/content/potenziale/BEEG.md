@@ -58,64 +58,94 @@ findings:
     hint: "Eine Rechtsgrundlage für den strukturierten elektronischen Austausch mit ausländischen Familienleistungsträgern (z. B. über bestehende EU-Systeme zur Koordinierung der sozialen Sicherheit) schaffen."
   - type: "Bürgercheck"
     tag: "Prinzip 1"
-    id: "50af26f7-855f-4088-920e-26ee1c02170e"
+    id: "823b7772-1d63-4409-81fe-2aa03584dee5"
     locationLabel: "§ 1 Abs. 7"
-    reasoning: "Für nicht freizügigkeitsberechtigte Ausländer:innen wird die Anspruchsberechtigung über eine feingliedrige Kategorisierung verschiedenster Aufenthaltstitel definiert, ohne dass erkennbar ist, ob diese besonders vulnerable und teils sprachlich/rechtlich weniger versierte Zielgruppe bei der Umsetzung gezielt (z. B. mehrsprachig) adressiert wird."
-    hint: "Für diese Zielgruppe zielgruppenspezifische, mehrsprachige Erklärhilfen (z. B. eine Zuordnungstabelle Aufenthaltstitel → Anspruch) bereitstellen, statt die Komplexität allein über den Normtext zu vermitteln."
+    reasoning: "Die Anspruchsberechtigung für nicht freizügigkeitsberechtigte Ausländer:innen wird über eine feingliedrige Kategorisierung verschiedenster Aufenthaltstitel definiert, ohne dass erkennbar ist, ob diese oft sprachlich/rechtlich weniger versierte und besonders vulnerable Zielgruppe bei der Umsetzung gezielt (z. B. mehrsprachig) adressiert wird."
+    hint: "Für diese Zielgruppe mehrsprachige Erklärhilfen bzw. eine visuelle Zuordnungstabelle \"Aufenthaltstitel → Anspruch\" bereitstellen, statt die Komplexität allein über den Normtext zu vermitteln."
+  - type: "Bürgercheck"
+    tag: "Prinzip 1"
+    id: "4bd762fd-8609-4ed5-8d09-36dbc27b1bcc"
+    locationLabel: "§ 15 Abs. 1a"
+    reasoning: "Der Anspruch von Großeltern auf Elternzeit für ihr Enkelkind ist eine seltene Sonderkonstellation, die im allgemeinen Bewusstsein kaum verankert ist; ohne gezielte Ansprache dieser sehr spezifischen Zielgruppe (Großeltern minderjähriger oder in Ausbildung befindlicher Eltern) bleibt der Anspruch für Betroffene vermutlich unentdeckt."
+    hint: "Diese Anspruchsgruppe in Informationsmaterialien für (werdende) Großeltern sowie in Beratungsangeboten von Jugendämtern/Schwangerschaftsberatungsstellen aktiv bewerben, statt sie nur im Gesetzestext zu regeln."
   - type: "Bürgercheck"
     tag: "Prinzip 2"
-    id: "c8175feb-f4ee-4b2c-b456-ee28e25b08e2"
+    id: "ed9a87ae-a398-42cc-a59e-3fe38f977e61"
     locationLabel: "§ 2 Abs. 2"
-    reasoning: "Die gestaffelte, prozentpunktgenaue Anpassung des Elterngeldsatzes (0,1 Prozentpunkte je 2 Euro Über-/Unterschreitung) ist für Bürger:innen ohne Rechner faktisch nicht selbst nachvollziehbar, wodurch die Höhe der eigenen Leistung im Vorfeld kaum abschätzbar ist."
-    hint: "Einen offiziellen, leicht auffindbaren Elterngeldrechner verbindlich vorsehen bzw. referenzieren und die Berechnungslogik in einfacher Sprache mit Beispielrechnungen erläutern."
+    reasoning: "Die gestaffelte, prozentpunktgenaue Anpassung des Elterngeldsatzes ist ohne Rechenhilfe für Bürger:innen faktisch nicht selbst nachvollziehbar, wodurch die konkrete Höhe der eigenen Leistung im Vorfeld kaum abschätzbar ist."
+    hint: "Einen offiziellen, leicht auffindbaren Elterngeldrechner verbindlich vorsehen bzw. gesetzlich referenzieren und die Berechnungslogik in einfacher Sprache mit Beispielrechnungen erläutern."
   - type: "Bürgercheck"
     tag: "Prinzip 2"
-    id: "1b169aa6-f8bc-4128-be86-261588de47a4"
+    id: "a55052dd-b60a-4d40-b60e-6d9a3585cab7"
     locationLabel: "§ 2b Abs. 1"
-    reasoning: "Für sie günstige Ausnahmen vom Bemessungszeitraum (z. B. bei vorheriger Elterngeld- oder Mutterschaftsgeldzeit) müssen Berechtigte aktiv beantragen; wer diese Möglichkeit nicht kennt, verliert unbemerkt finanziellen Vorteil, weil Handlungsfähigkeit ('das muss ich selbst beantragen') vorausgesetzt wird."
-    hint: "Antragsformulare und Merkblätter sollten proaktiv auf diese Ausnahmetatbestände hinweisen bzw. die Behörde sollte erkennbare Fälle von Amts wegen berücksichtigen, statt Antragstellung vorauszusetzen."
+    reasoning: "Für Berechtigte günstige Ausnahmen vom Bemessungszeitraum (z. B. bei vorheriger Elterngeld- oder Mutterschaftsgeldzeit) müssen aktiv beantragt werden; wer diese Möglichkeit nicht kennt, verliert unbemerkt einen finanziellen Vorteil, weil Handlungsfähigkeit im Sinne von Wissen um eigene Antragsrechte vorausgesetzt wird."
+    hint: "Antragsformulare und Merkblätter sollten proaktiv auf diese Ausnahmetatbestände hinweisen, oder die Behörde sollte erkennbare Fälle von Amts wegen berücksichtigen, statt Antragstellung vorauszusetzen."
+  - type: "Bürgercheck"
+    tag: "Prinzip 2"
+    id: "809cc3e2-2af9-4b07-b1f3-ac4c78996d0e"
+    locationLabel: "§ 4 Abs. 5"
+    reasoning: "Um die erhöhten Basiselterngeld-Monatsbeträge bei Frühgeburt zu erhalten, müssen Eltern in einer besonders belastenden ersten Zeit nach der Geburt aktiv ein ärztliches Zeugnis zum voraussichtlichen Entbindungstermin beibringen und einreichen — eine zusätzliche organisatorische Handlung, deren Erforderlichkeit vielen Eltern in dieser Ausnahmesituation nicht bewusst sein dürfte."
+    hint: "Die Behörde sollte, wo der voraussichtliche Geburtstermin bereits aus dem Mutterpass oder der Geburtsanzeige hervorgeht, den Nachweis von Amts wegen anfordern bzw. den erhöhten Anspruch automatisch prüfen, statt die Vorlage vollständig den Eltern zu überlassen."
   - type: "Bürgercheck"
     tag: "Prinzip 3"
-    id: "fdb44c4e-a664-45bd-961a-18cbbe216054"
+    id: "b9ad43ee-e605-45b8-bbed-0d91036dda7c"
     locationLabel: "§ 7 Abs. 1"
     reasoning: "Die starre Drei-Monats-Rückwirkungsfrist für den Erstantrag berücksichtigt nicht, dass frischgebackene Eltern gerade in den ersten Monaten nach der Geburt (Krankheit, Frühgeburt, Überforderung) besonders wahrscheinlich Fristen versäumen, ohne dass für diesen Erstantrag eine Härtefallregelung wie bei Änderungsanträgen (Abs. 2) vorgesehen ist."
     hint: "Eine Härtefallregelung für den Erstantrag ergänzen, die eine Fristverlängerung bei nachweisbar unverschuldeter Verhinderung (z. B. schwere Erkrankung, Krankenhausaufenthalt des Kindes) ermöglicht."
   - type: "Bürgercheck"
     tag: "Prinzip 3"
-    id: "5269754c-6d3a-4f53-8bfb-3e8cfc0d6bd4"
-    locationLabel: "§ 16 Abs. 1"
-    reasoning: "Die verbindliche Vorlauffrist von sieben bzw. 13 Wochen für die Anmeldung von Elternzeit beim Arbeitgeber passt nicht zu Lebenslagen mit kurzfristigem Betreuungsbedarf (z. B. plötzlicher Ausfall der Kinderbetreuung, kurzfristige Pflegschaft), da nur 'dringende Gründe' eine verkürzte Frist erlauben und unklar bleibt, was darunterfällt."
-    hint: "Den Begriff 'dringende Gründe' durch Regelbeispiele konkretisieren, damit Berechtigte selbst einschätzen können, ob eine kürzere Frist möglich ist."
+    id: "3a6244e2-6537-4330-befb-fb76924b58c6"
+    locationLabel: "§ 3 Abs. 3"
+    reasoning: "Betroffene mit Anspruch auf ausländische, dem Elterngeld vergleichbare Leistungen müssen diese zunächst separat beantragen, sonst ruht ihr deutsches Elterngeld — eine Lebenslage (grenzüberschreitende Familien direkt nach der Geburt), in der die Notwendigkeit eines zusätzlichen, oft fremdsprachigen Antragsverfahrens leicht übersehen wird und zu einer finanziellen Lücke in der sensibelsten Phase führt."
+    hint: "Bei erkennbarem Auslandsbezug proaktiv über die Antragspflicht bei der ausländischen/über-/zwischenstaatlichen Stelle informieren und, wo möglich, eine Übergangszahlung ohne Ruhen des Anspruchs bis zur Klärung vorsehen."
   - type: "Bürgercheck"
     tag: "Prinzip 3"
-    id: "422134d3-aac5-48cf-96d9-86480a63ffc0"
+    id: "bb41f62c-2880-4e22-afee-bc7c8848d1ca"
+    locationLabel: "§ 16 Abs. 1"
+    reasoning: "Die verbindliche Vorlauffrist von sieben bzw. 13 Wochen für die Anmeldung von Elternzeit beim Arbeitgeber passt nicht zu Lebenslagen mit kurzfristigem Betreuungsbedarf (z. B. plötzlicher Ausfall der Kinderbetreuung), da nur \"dringende Gründe\" eine verkürzte Frist erlauben und unklar bleibt, was darunterfällt."
+    hint: "Den Begriff \"dringende Gründe\" durch Regelbeispiele konkretisieren, damit Berechtigte selbst einschätzen können, ob eine kürzere Frist möglich ist."
+  - type: "Bürgercheck"
+    tag: "Prinzip 3"
+    id: "db6bb6a6-ad21-46ff-a61b-af47f42a18eb"
     locationLabel: "§ 8 Abs. 2"
     reasoning: "Die vorläufige Zahlung unter Widerrufsvorbehalt lässt Familien in einer finanziell besonders sensiblen Lebensphase im Unklaren über eine mögliche spätere Rückforderung, ohne dass die Regelung selbst Hinweise zur Risikominimierung (z. B. frühzeitige Meldung von Einkommensänderungen) vorsieht."
     hint: "Bei vorläufiger Zahlung standardmäßig eine verständliche Erläuterung zum Rückforderungsrisiko und zur Pflicht, Einkommensänderungen zeitnah zu melden, mitgeben."
   - type: "Bürgercheck"
     tag: "Prinzip 4"
-    id: "9454c6ae-7276-4c29-94fa-00d4dc01a00d"
+    id: "41bafa5d-a524-4dec-a79c-dd647f9c09d3"
     locationLabel: "§ 12 Abs. 1"
     reasoning: "Da jedes Bundesland eigene Behörden mit eigenen Verfahren und Formularen bestimmt, müssen Bürger:innen den für sie richtigen Kontaktpunkt erst selbst ermitteln; ein bundesweit einheitlicher, klar auffindbarer Zugang fehlt."
     hint: "Eine zentrale, bundesweite Einstiegsseite/Weiterleitung schaffen, die Bürger:innen anhand des Wohnsitzes automatisch zur zuständigen Landesbehörde führt."
   - type: "Bürgercheck"
     tag: "Prinzip 4"
-    id: "1c2dcb93-4626-4819-b175-d4b8c2cbd51b"
+    id: "b6143efc-3c5e-4607-8007-589c4ad79cbf"
     locationLabel: "§ 7 Abs. 1"
     reasoning: "Die zwingende Schriftform für den Antrag auf eine für viele Familien existenziell wichtige Leistung stellt für Menschen ohne Drucker, mit Mobilitätseinschränkungen oder eingeschränkter Schriftsprachkompetenz eine konkrete Zugangshürde zum zentralen Kontaktpunkt mit der Verwaltung dar."
     hint: "Einen vollständig digitalen, niedrigschwelligen Antragsweg (z. B. Online-Formular mit eID) als gleichwertige Alternative zur Schriftform anbieten."
   - type: "Bürgercheck"
-    tag: "Prinzip 5"
-    id: "47b61c3c-38a0-4c82-88e9-8ba2b9193248"
-    locationLabel: "§ 1 Abs. 7 Satz 2"
-    reasoning: "Die Ausnahme von einer bereits komplexen Ausnahmeregelung (Minderjährige ohne Erwerbstätigkeitserfordernis) erschwert die Nachvollziehbarkeit von 'Für wen gilt was' zusätzlich und macht eine einfache, kommunizierbare Faustregel für Betroffene kaum möglich."
-    hint: "Die Regelung für minderjährige Ausländer:innen in einer eigenständigen, leicht auffindbaren Vorschrift statt als Rückausnahme in Satz 2 formulieren."
+    tag: "Prinzip 4"
+    id: "10f0bc57-b6d7-4981-8895-46a3b99ffe53"
+    locationLabel: "§ 8 Abs. 1a"
+    reasoning: "Welche konkreten Mitwirkungspflichten für Bürger:innen gelten, erschließt sich nur über einen Verweis auf § 60 SGB I in einem anderen Gesetzbuch; dieser Kontaktpunkt zur Verwaltung ist dadurch nicht aus sich heraus verständlich und erfordert zusätzliche Recherche."
+    hint: "Die wesentlichen Mitwirkungspflichten (z. B. Anzeige von Einkommensänderungen) in eigenen Worten direkt im Antragsformular bzw. Bewilligungsbescheid zusammenfassen, statt nur auf § 60 SGB I zu verweisen."
   - type: "Bürgercheck"
     tag: "Prinzip 5"
-    id: "b23d2f38-f509-4669-b0cf-802e6157b980"
+    id: "703684b9-b02c-48a9-993d-d7412036a8cb"
+    locationLabel: "§ 1 Abs. 7 Satz 2"
+    reasoning: "Die Ausnahme von einer bereits komplexen Ausnahmeregelung erschwert die Nachvollziehbarkeit von \"Für wen gilt was\" zusätzlich und macht eine einfache, kommunizierbare Faustregel für Betroffene kaum möglich."
+    hint: "Die Regelung für minderjährige Ausländer:innen in einer eigenständigen, leicht auffindbaren Vorschrift statt als Rückausnahme formulieren."
+  - type: "Bürgercheck"
+    tag: "Prinzip 5"
+    id: "06323c64-34a1-4205-8039-d615259d962c"
     locationLabel: "§ 4 Abs. 5 Nr. 1"
-    reasoning: "Die vierstufige Staffelung zusätzlicher Basiselterngeld-Monatsbeträge nach Wochen vor dem errechneten Entbindungstermin (mit jeweils eigenen Folgeregelungen im nachfolgenden Absatz) ist ein bewusster, sachlich begründeter Kompromiss zwischen Einzelfallgerechtigkeit bei Frühgeburten und einfacher Verständlichkeit, wirkt in der Kombination aber unübersichtlich."
+    reasoning: "Die vierstufige Staffelung zusätzlicher Basiselterngeld-Monatsbeträge nach Wochen vor dem errechneten Entbindungstermin (mit jeweils eigenen Folgeregelungen im nachfolgenden Absatz) ist ein sachlich begründeter Kompromiss zwischen Einzelfallgerechtigkeit bei Frühgeburten und einfacher Verständlichkeit, wirkt in der Kombination aber unübersichtlich."
     hint: "Die vier Stufen und ihre jeweiligen Folgeregelungen in einer kompakten Übersichtstabelle darstellen (in Merkblättern/online), statt sie nur im Fließtext aufzulösen."
+  - type: "Bürgercheck"
+    tag: "Prinzip 5"
+    id: "475cbc62-de61-42df-990c-318d9de1bf80"
+    locationLabel: "§ 2e Abs. 1"
+    reasoning: "Die hochpräzise, mehrstufige Ermittlung der Steuerabzüge (eigener Programmablaufplan, mehrere Pauschalen, Steuerklassenlogik über mehrere Paragraphen hinweg) erkauft Einzelfallgenauigkeit mit einer für Bürger:innen praktisch nicht mehr nachvollziehbaren Berechnung."
+    hint: "Eine vereinfachte, pauschalierte Nettoberechnung als Regelfall anbieten (mit Option auf die genaue Berechnung bei Bedarf), statt die volle Komplexität für jede berechtigte Person verpflichtend vorzuschreiben."
 ---
 
 Gesetz zum Elterngeld und zur Elternzeit (BEEG)
@@ -227,7 +257,7 @@ selbständig erwerbstätig sind.
 
 (7)
 
-<!--finding:50af26f7-855f-4088-920e-26ee1c02170e:start-->Ein nicht freizügigkeitsberechtigter Ausländer oder eine nicht freizügigkeitsberechtigte Ausländerin ist nur anspruchsberechtigt, wenn diese Person<!--finding:50af26f7-855f-4088-920e-26ee1c02170e:end-->
+<!--finding:823b7772-1d63-4409-81fe-2aa03584dee5:start-->Ein nicht freizügigkeitsberechtigter Ausländer oder eine nicht freizügigkeitsberechtigte Ausländerin ist nur anspruchsberechtigt, wenn diese Person<!--finding:823b7772-1d63-4409-81fe-2aa03584dee5:end-->
 
 - 1.
 
@@ -261,7 +291,7 @@ eine in Nummer 2 Buchstabe c genannte Aufenthaltserlaubnis besitzt und sich seit
 
 eine Beschäftigungsduldung gemäß § 60d in Verbindung mit § 60a Absatz 2 Satz 3 des Aufenthaltsgesetzes besitzt.
 
-<!--finding:47b61c3c-38a0-4c82-88e9-8ba2b9193248:start-->Abweichend von Satz 1 Nummer 3 erste Alternative ist ein minderjähriger nicht freizügigkeitsberechtigter Ausländer oder eine minderjährige nicht freizügigkeitsberechtigte Ausländerin unabhängig von einer Erwerbstätigkeit anspruchsberechtigt.<!--finding:47b61c3c-38a0-4c82-88e9-8ba2b9193248:end-->
+<!--finding:703684b9-b02c-48a9-993d-d7412036a8cb:start-->Abweichend von Satz 1 Nummer 3 erste Alternative ist ein minderjähriger nicht freizügigkeitsberechtigter Ausländer oder eine minderjährige nicht freizügigkeitsberechtigte Ausländerin unabhängig von einer Erwerbstätigkeit anspruchsberechtigt.<!--finding:703684b9-b02c-48a9-993d-d7412036a8cb:end-->
 
 (8)
 
@@ -285,7 +315,7 @@ die im Inland zu versteuern sind und die die berechtigte Person durchschnittlich
 
 (2)
 
-<!--finding:c8175feb-f4ee-4b2c-b456-ee28e25b08e2:start-->In den Fällen, in denen das Einkommen aus Erwerbstätigkeit vor der Geburt geringer als 1 000 Euro war, erhöht sich der Prozentsatz von 67 Prozent um 0,1 Prozentpunkte für je 2 Euro, um die dieses Einkommen den Betrag von 1 000 Euro unterschreitet, auf bis zu 100 Prozent.<!--finding:c8175feb-f4ee-4b2c-b456-ee28e25b08e2:end--> In den Fällen, in denen das Einkommen aus Erwerbstätigkeit vor der Geburt höher als 1 200 Euro war, sinkt der Prozentsatz von 67 Prozent um 0,1 Prozentpunkte für je 2 Euro, um die dieses Einkommen den Betrag von 1 200 Euro überschreitet, auf bis zu 65 Prozent.
+<!--finding:ed9a87ae-a398-42cc-a59e-3fe38f977e61:start-->In den Fällen, in denen das Einkommen aus Erwerbstätigkeit vor der Geburt geringer als 1 000 Euro war, erhöht sich der Prozentsatz von 67 Prozent um 0,1 Prozentpunkte für je 2 Euro, um die dieses Einkommen den Betrag von 1 000 Euro unterschreitet, auf bis zu 100 Prozent.<!--finding:ed9a87ae-a398-42cc-a59e-3fe38f977e61:end--> In den Fällen, in denen das Einkommen aus Erwerbstätigkeit vor der Geburt höher als 1 200 Euro war, sinkt der Prozentsatz von 67 Prozent um 0,1 Prozentpunkte für je 2 Euro, um die dieses Einkommen den Betrag von 1 200 Euro überschreitet, auf bis zu 65 Prozent.
 
 (3)
 
@@ -345,7 +375,7 @@ eine Krankheit hatte, die maßgeblich durch eine Schwangerschaft bedingt war, od
 
 Wehrdienst nach dem Wehrpflichtgesetz oder nach dem Vierten Abschnitt des Soldatengesetzes oder Zivildienst nach dem Zivildienstgesetz geleistet hat.
 
-<!--finding:1b169aa6-f8bc-4128-be86-261588de47a4:start-->Abweichend von Satz 2 sind Kalendermonate im Sinne des Satzes 2 Nummer 1 bis 4 auf Antrag der berechtigten Person zu berücksichtigen.<!--finding:1b169aa6-f8bc-4128-be86-261588de47a4:end--> Abweichend von Satz 2 bleiben auf Antrag bei der Ermittlung des Einkommens für die Zeit vom 1. März 2020 bis zum Ablauf des 23. September 2022 auch solche Kalendermonate unberücksichtigt, in denen die berechtigte Person aufgrund der COVID-19-Pandemie ein geringeres Einkommen aus Erwerbstätigkeit hatte und dies glaubhaft machen kann. Satz 2 Nummer 1 gilt in den Fällen des § 27 Absatz 1 Satz 1 mit der Maßgabe, dass auf Antrag auch Kalendermonate mit Elterngeldbezug für ein älteres Kind nach Vollendung von dessen 14. Lebensmonat unberücksichtigt bleiben, soweit der Elterngeldbezug von der Zeit vor Vollendung des 14. Lebensmonats auf danach verschoben wurde.
+<!--finding:a55052dd-b60a-4d40-b60e-6d9a3585cab7:start-->Abweichend von Satz 2 sind Kalendermonate im Sinne des Satzes 2 Nummer 1 bis 4 auf Antrag der berechtigten Person zu berücksichtigen.<!--finding:a55052dd-b60a-4d40-b60e-6d9a3585cab7:end--> Abweichend von Satz 2 bleiben auf Antrag bei der Ermittlung des Einkommens für die Zeit vom 1. März 2020 bis zum Ablauf des 23. September 2022 auch solche Kalendermonate unberücksichtigt, in denen die berechtigte Person aufgrund der COVID-19-Pandemie ein geringeres Einkommen aus Erwerbstätigkeit hatte und dies glaubhaft machen kann. Satz 2 Nummer 1 gilt in den Fällen des § 27 Absatz 1 Satz 1 mit der Maßgabe, dass auf Antrag auch Kalendermonate mit Elterngeldbezug für ein älteres Kind nach Vollendung von dessen 14. Lebensmonat unberücksichtigt bleiben, soweit der Elterngeldbezug von der Zeit vor Vollendung des 14. Lebensmonats auf danach verschoben wurde.
 
 (2)
 
@@ -413,7 +443,7 @@ Die zeitliche Zuordnung von Einnahmen und Ausgaben erfolgt nach den einkommenste
 
 (1)
 
-Als Abzüge für Steuern sind Beträge für die Einkommensteuer, den Solidaritätszuschlag und, wenn die berechtigte Person kirchensteuerpflichtig ist, die Kirchensteuer zu berücksichtigen. Die Abzüge für Steuern werden einheitlich für Einkommen aus nichtselbstständiger und selbstständiger Erwerbstätigkeit auf Grundlage einer Berechnung anhand des am 1. Januar des Kalenderjahres vor der Geburt des Kindes für dieses Jahr geltenden Programmablaufplans für die maschinelle Berechnung der vom Arbeitslohn einzubehaltenden Lohnsteuer, des Solidaritätszuschlags und der Maßstabsteuer für die Kirchenlohnsteuer im Sinne von § 39b Absatz 6 des Einkommensteuergesetzes nach den Maßgaben der Absätze 2 bis 5 ermittelt.
+Als Abzüge für Steuern sind Beträge für die Einkommensteuer, den Solidaritätszuschlag und, wenn die berechtigte Person kirchensteuerpflichtig ist, die Kirchensteuer zu berücksichtigen. <!--finding:475cbc62-de61-42df-990c-318d9de1bf80:start-->Die Abzüge für Steuern werden einheitlich für Einkommen aus nichtselbstständiger und selbstständiger Erwerbstätigkeit auf Grundlage einer Berechnung anhand des am 1. Januar des Kalenderjahres vor der Geburt des Kindes für dieses Jahr geltenden Programmablaufplans für die maschinelle Berechnung der vom Arbeitslohn einzubehaltenden Lohnsteuer, des Solidaritätszuschlags und der Maßstabsteuer für die Kirchenlohnsteuer im Sinne von § 39b Absatz 6 des Einkommensteuergesetzes nach den Maßgaben der Absätze 2 bis 5 ermittelt.<!--finding:475cbc62-de61-42df-990c-318d9de1bf80:end-->
 
 (2)
 
@@ -533,7 +563,7 @@ Bis zu einem Betrag von 300 Euro ist das Elterngeld von der Anrechnung nach Absa
 
 (3)
 
-Solange kein Antrag auf die in Absatz 1 Satz 1 Nummer 3 genannten vergleichbaren Leistungen gestellt wird, ruht der Anspruch auf Elterngeld bis zur möglichen Höhe der vergleichbaren Leistung.
+<!--finding:3a6244e2-6537-4330-befb-fb76924b58c6:start-->Solange kein Antrag auf die in Absatz 1 Satz 1 Nummer 3 genannten vergleichbaren Leistungen gestellt wird, ruht der Anspruch auf Elterngeld bis zur möglichen Höhe der vergleichbaren Leistung.<!--finding:3a6244e2-6537-4330-befb-fb76924b58c6:end-->
 
 ## § 4 Bezugsdauer, Anspruchsumfang
 
@@ -559,7 +589,7 @@ Abweichend von Absatz 3 Satz 1 beträgt der gemeinsame Anspruch der Eltern auf B
 
 - 1.
 
-<!--finding:b23d2f38-f509-4669-b0cf-802e6157b980:start-->mindestens sechs Wochen vor dem voraussichtlichen Tag der Entbindung geboren wurde: 13 Monatsbeträge Basiselterngeld;<!--finding:b23d2f38-f509-4669-b0cf-802e6157b980:end-->
+<!--finding:06323c64-34a1-4205-8039-d615259d962c:start-->mindestens sechs Wochen vor dem voraussichtlichen Tag der Entbindung geboren wurde: 13 Monatsbeträge Basiselterngeld;<!--finding:06323c64-34a1-4205-8039-d615259d962c:end-->
 
 - 2.
 
@@ -573,7 +603,7 @@ mindestens zwölf Wochen vor dem voraussichtlichen Tag der Entbindung geboren wu
 
 mindestens 16 Wochen vor dem voraussichtlichen Tag der Entbindung geboren wurde: 16 Monatsbeträge Basiselterngeld.
 
-Für die Berechnung des Zeitraums zwischen dem voraussichtlichen Tag der Entbindung und dem tatsächlichen Tag der Geburt ist der voraussichtliche Tag der Entbindung maßgeblich, wie er sich aus dem ärztlichen Zeugnis oder dem Zeugnis einer Hebamme oder eines Entbindungspflegers ergibt.
+Für die Berechnung des Zeitraums zwischen dem voraussichtlichen Tag der Entbindung und dem tatsächlichen Tag der Geburt ist der voraussichtliche Tag der Entbindung maßgeblich, <!--finding:809cc3e2-2af9-4b07-b1f3-ac4c78996d0e:start-->wie er sich aus dem ärztlichen Zeugnis oder dem Zeugnis einer Hebamme oder eines Entbindungspflegers ergibt<!--finding:809cc3e2-2af9-4b07-b1f3-ac4c78996d0e:end-->.
 Im Fall von
 
 - 1.
@@ -752,7 +782,7 @@ Elterngeld wird im Laufe des Lebensmonats gezahlt, für den es bestimmt ist.
 
 (1)
 <!--finding:39579c6d-12cb-4121-82cc-e175ca59f92a:start-->
-<!--finding:1c2dcb93-4626-4819-b175-d4b8c2cbd51b:start-->Elterngeld ist schriftlich zu beantragen<!--finding:1c2dcb93-4626-4819-b175-d4b8c2cbd51b:end--><!--finding:39579c6d-12cb-4121-82cc-e175ca59f92a:end-->. <!--finding:fdb44c4e-a664-45bd-961a-18cbbe216054:start-->Es wird rückwirkend nur für die letzten drei Lebensmonate vor Beginn des Lebensmonats geleistet, in dem der Antrag auf Elterngeld eingegangen ist.<!--finding:fdb44c4e-a664-45bd-961a-18cbbe216054:end--> Im Antrag ist anzugeben, für welche Lebensmonate Basiselterngeld, für welche Lebensmonate Elterngeld Plus oder für welche Lebensmonate Partnerschaftsbonus beantragt wird.
+<!--finding:b6143efc-3c5e-4607-8007-589c4ad79cbf:start-->Elterngeld ist schriftlich zu beantragen<!--finding:b6143efc-3c5e-4607-8007-589c4ad79cbf:end--><!--finding:39579c6d-12cb-4121-82cc-e175ca59f92a:end-->. <!--finding:b9ad43ee-e605-45b8-bbed-0d91036dda7c:start-->Es wird rückwirkend nur für die letzten drei Lebensmonate vor Beginn des Lebensmonats geleistet, in dem der Antrag auf Elterngeld eingegangen ist.<!--finding:b9ad43ee-e605-45b8-bbed-0d91036dda7c:end--> Im Antrag ist anzugeben, für welche Lebensmonate Basiselterngeld, für welche Lebensmonate Elterngeld Plus oder für welche Lebensmonate Partnerschaftsbonus beantragt wird.
 
 (2)
 
@@ -780,7 +810,7 @@ Soweit im Antrag auf Elterngeld Angaben zum voraussichtlichen Einkommen aus Erwe
 
 (1a)
 
-Die Mitwirkungspflichten nach § 60 des Ersten Buches Sozialgesetzbuch gelten
+<!--finding:10f0bc57-b6d7-4981-8895-46a3b99ffe53:start-->Die Mitwirkungspflichten nach § 60 des Ersten Buches Sozialgesetzbuch gelten<!--finding:10f0bc57-b6d7-4981-8895-46a3b99ffe53:end-->
 
 - 1.
 
@@ -794,7 +824,7 @@ im Falle des § 4b oder des § 4b in Verbindung mit § 4d Satz 1 für beide Pers
 
 (2)
 
-Elterngeld wird in den Fällen, in denen die berechtigte Person nach ihren Angaben im Antrag im Bezugszeitraum voraussichtlich kein Einkommen aus Erwerbstätigkeit haben wird, <!--finding:422134d3-aac5-48cf-96d9-86480a63ffc0:start-->unter dem Vorbehalt des Widerrufs für den Fall gezahlt, dass sie entgegen ihren Angaben im Antrag Einkommen aus Erwerbstätigkeit hat.<!--finding:422134d3-aac5-48cf-96d9-86480a63ffc0:end--> In den Fällen, in denen zum Zeitpunkt der Antragstellung der Steuerbescheid für den letzten abgeschlossenen steuerlichen Veranlagungszeitraum vor der Geburt des Kindes nicht vorliegt und nach den Angaben im Antrag die Beträge nach § 1 Absatz 8 voraussichtlich nicht überschritten werden, wird das Elterngeld unter dem Vorbehalt des Widerrufs für den Fall gezahlt, dass entgegen den Angaben im Antrag die Beträge nach § 1 Absatz 8 überschritten werden.
+Elterngeld wird in den Fällen, in denen die berechtigte Person nach ihren Angaben im Antrag im Bezugszeitraum voraussichtlich kein Einkommen aus Erwerbstätigkeit haben wird, <!--finding:db6bb6a6-ad21-46ff-a61b-af47f42a18eb:start-->unter dem Vorbehalt des Widerrufs für den Fall gezahlt, dass sie entgegen ihren Angaben im Antrag Einkommen aus Erwerbstätigkeit hat<!--finding:db6bb6a6-ad21-46ff-a61b-af47f42a18eb:end-->. In den Fällen, in denen zum Zeitpunkt der Antragstellung der Steuerbescheid für den letzten abgeschlossenen steuerlichen Veranlagungszeitraum vor der Geburt des Kindes nicht vorliegt und nach den Angaben im Antrag die Beträge nach § 1 Absatz 8 voraussichtlich nicht überschritten werden, wird das Elterngeld unter dem Vorbehalt des Widerrufs für den Fall gezahlt, dass entgegen den Angaben im Antrag die Beträge nach § 1 Absatz 8 überschritten werden.
 
 (3)
 
@@ -856,7 +886,7 @@ Unterhaltsverpflichtungen werden durch die Zahlung des Elterngeldes und vergleic
 
 (1)
 <!--finding:3341d1c2-1d9f-478a-ae3a-c0105336c9c5:start-->
-<!--finding:9454c6ae-7276-4c29-94fa-00d4dc01a00d:start-->Die Landesregierungen oder die von ihnen beauftragten Stellen bestimmen die für die Ausführung dieses Gesetzes zuständigen Behörden<!--finding:9454c6ae-7276-4c29-94fa-00d4dc01a00d:end--><!--finding:3341d1c2-1d9f-478a-ae3a-c0105336c9c5:end-->. Zuständig ist die von den Ländern für die Durchführung dieses Gesetzes bestimmte Behörde des Bezirks, in dem das Kind, für das Elterngeld beansprucht wird, zum Zeitpunkt der ersten Antragstellung seinen inländischen Wohnsitz hat. Hat das Kind, für das Elterngeld beansprucht wird, in den Fällen des § 1 Absatz 2 zum Zeitpunkt der ersten Antragstellung keinen inländischen Wohnsitz, so ist die von den Ländern für die Durchführung dieses Gesetzes bestimmte Behörde des Bezirks zuständig, in dem die berechtigte Person ihren letzten inländischen Wohnsitz hatte; hilfsweise ist die Behörde des Bezirks zuständig, in dem der entsendende Dienstherr oder Arbeitgeber der berechtigten Person oder der Arbeitgeber des Ehegatten oder der Ehegattin der berechtigten Person den inländischen Sitz hat.
+<!--finding:41bafa5d-a524-4dec-a79c-dd647f9c09d3:start-->Die Landesregierungen oder die von ihnen beauftragten Stellen bestimmen die für die Ausführung dieses Gesetzes zuständigen Behörden<!--finding:41bafa5d-a524-4dec-a79c-dd647f9c09d3:end--><!--finding:3341d1c2-1d9f-478a-ae3a-c0105336c9c5:end-->. Zuständig ist die von den Ländern für die Durchführung dieses Gesetzes bestimmte Behörde des Bezirks, in dem das Kind, für das Elterngeld beansprucht wird, zum Zeitpunkt der ersten Antragstellung seinen inländischen Wohnsitz hat. Hat das Kind, für das Elterngeld beansprucht wird, in den Fällen des § 1 Absatz 2 zum Zeitpunkt der ersten Antragstellung keinen inländischen Wohnsitz, so ist die von den Ländern für die Durchführung dieses Gesetzes bestimmte Behörde des Bezirks zuständig, in dem die berechtigte Person ihren letzten inländischen Wohnsitz hatte; hilfsweise ist die Behörde des Bezirks zuständig, in dem der entsendende Dienstherr oder Arbeitgeber der berechtigten Person oder der Arbeitgeber des Ehegatten oder der Ehegattin der berechtigten Person den inländischen Sitz hat.
 
 (2)
 
@@ -941,7 +971,7 @@ Nicht sorgeberechtigte Elternteile und Personen, die nach Satz 1 Nummer 1 Buchst
 
 (1a)
 
-Anspruch auf Elternzeit haben Arbeitnehmerinnen und Arbeitnehmer auch, wenn sie mit ihrem Enkelkind in einem Haushalt leben und dieses Kind selbst betreuen und erziehen und
+<!--finding:4bd762fd-8609-4ed5-8d09-36dbc27b1bcc:start-->Anspruch auf Elternzeit haben Arbeitnehmerinnen und Arbeitnehmer auch, wenn sie mit ihrem Enkelkind in einem Haushalt leben und dieses Kind selbst betreuen und erziehen und<!--finding:4bd762fd-8609-4ed5-8d09-36dbc27b1bcc:end-->
 
 - 1.
 
@@ -1027,7 +1057,7 @@ Wer Elternzeit beanspruchen will, muss sie
 
 - 1.
 
-<!--finding:5269754c-6d3a-4f53-8bfb-3e8cfc0d6bd4:start-->für den Zeitraum bis zum vollendeten dritten Lebensjahr des Kindes spätestens sieben Wochen und<!--finding:5269754c-6d3a-4f53-8bfb-3e8cfc0d6bd4:end-->
+<!--finding:bb41f62c-2880-4e22-afee-bc7c8848d1ca:start-->für den Zeitraum bis zum vollendeten dritten Lebensjahr des Kindes spätestens sieben Wochen und<!--finding:bb41f62c-2880-4e22-afee-bc7c8848d1ca:end-->
 
 - 2.
 
