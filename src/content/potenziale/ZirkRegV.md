@@ -39,25 +39,39 @@ findings:
     quote: "Erlangt die zuständige Behörde hiervon erst nach Ablauf eines Jahres Kenntnis, sind die Daten unverzüglich zu löschen."
   - type: "Bürgercheck"
     tag: "Prinzip 1"
-    id: "dc5be410-8a4a-47e6-b8fa-b2bab6f1b442"
+    id: "356183f9-3703-4ff2-8a99-9c2691649506"
     locationLabel: "§ 3 Abs. 1 Nr. 1"
-    reasoning: "Die Regelung verlangt den 'Ort der jeweiligen Gewerbeanmeldung', ohne die Zielgruppe der reisenden Schausteller (die häufig international tätig sind oder ihre Gewerbeanmeldung an wechselnden Orten vorweisen) und deren besondere Situation näher zu berücksichtigen."
-    hint: "Klarstellen, welcher Anmeldeort bei mehreren oder im Ausland erfolgten Gewerbeanmeldungen maßgeblich ist, um Unsicherheit bei dieser mobilen Zielgruppe zu vermeiden."
+    reasoning: "Die Vorschrift verlangt den 'Ort der jeweiligen Gewerbeanmeldung', ohne zu klären, welcher Ort bei mehreren oder ausländischen Gewerbeanmeldungen mobiler Schausteller maßgeblich ist – eine für diese spezifische, reisende Zielgruppe typische Konstellation bleibt unadressiert."
+    hint: "Klarstellen, welcher Anmeldeort bei mehreren oder im Ausland erfolgten Gewerbeanmeldungen anzugeben ist, um Unsicherheit bei dieser mobilen Zielgruppe zu vermeiden."
     quote: "Name, Anschrift, Geburtsdatum, Geburtsort des Antragstellers sowie den Ort der jeweiligen Gewerbeanmeldung,"
   - type: "Bürgercheck"
     tag: "Prinzip 2"
-    id: "f29f9185-655e-4b64-85d6-491dfea387d5"
+    id: "72b53c24-c7cd-46ba-9aa5-a9a2d2076cd3"
     locationLabel: "§ 3 Abs. 1 S.1"
-    reasoning: "Der Begriff 'wechselnden Orten' als Auslöser der zusätzlichen Datenerhebungspflicht wird nicht definiert, sodass Antragstellende schwer einschätzen können, ob diese Pflicht für ihre Tätigkeit gilt."
-    hint: "Den Begriff 'wechselnde Orte' durch ein konkretes Abgrenzungskriterium (z. B. Anzahl Standorte pro Zeitraum) präzisieren, damit Betroffene ihre Pflicht eindeutig erkennen können."
+    reasoning: "Der unbestimmte Begriff 'wechselnde Orte' entscheidet darüber, ob die zusätzliche Datenerhebungspflicht überhaupt greift; Antragstellende können ohne klares Abgrenzungskriterium kaum verlässlich einschätzen, ob sie betroffen sind."
+    hint: "Den Begriff 'wechselnde Orte' durch ein konkretes, leicht prüfbares Kriterium (z. B. Mindestanzahl an Standortwechseln pro Zeitraum) ersetzen, damit Betroffene ihre Pflicht eindeutig erkennen können."
     quote: "wenn die Tätigkeit an wechselnden Orten ausgeübt wird, folgende Daten:"
   - type: "Bürgercheck"
+    tag: "Prinzip 3"
+    id: "5026af49-e357-49f5-8441-f52db991737f"
+    locationLabel: "§ 3 Abs. 1 Nr. 2"
+    reasoning: "Die Regelung geht von einem 'Winterquartier' als Regelfall saisonaler Tätigkeit aus, klärt aber nicht, was für durchgehend reisende Schausteller ohne festen Winterstandort gilt – eine in dieser Branche verbreitete Lebens- und Arbeitsform bleibt unberücksichtigt."
+    hint: "Klarstellen, welche Angabe zu machen ist, wenn kein festes Winterquartier existiert, damit auch durchgehend reisende Betriebe die Vorgabe eindeutig erfüllen können."
+    quote: "und im Fall eines Winterquartiers dessen Anschrift,"
+  - type: "Bürgercheck"
     tag: "Prinzip 4"
-    id: "e3b7c2db-87e1-4d31-8a4f-ee874cf01fb3"
+    id: "84674b30-8bdc-4da9-86a3-5cd42f953b9b"
     locationLabel: "§ 4 Abs. 5"
-    reasoning: "Erlaubnisinhaber erhalten Auskunft über die zu ihnen gespeicherten Daten nur auf aktiven Antrag hin, statt einen automatisierten oder proaktiven Einblick in ihre eigenen Daten zu erhalten."
-    hint: "Einen digitalen Self-Service-Zugang zur eigenen Akte einrichten, sodass Erlaubnisinhaber ihre gespeicherten Daten jederzeit ohne gesonderten Antrag einsehen können."
+    reasoning: "Erlaubnisinhaber erhalten Auskunft über die zu ihnen gespeicherten Daten nur auf aktiven, vermutlich schriftlichen Antrag hin, statt über einen automatisierten oder proaktiven digitalen Kontaktpunkt jederzeit Einblick zu erhalten."
+    hint: "Einen digitalen Self-Service-Zugang (z. B. Portal mit elektronischer Identifizierung) einrichten, über den Erlaubnisinhaber ihre gespeicherten Daten ohne gesonderten Antrag einsehen können."
     quote: "auf Antrag Auskunft über die ihn betreffenden in Absatz 1 genannten Daten."
+  - type: "Bürgercheck"
+    tag: "Prinzip 5"
+    id: "7ee5d30e-4e25-4500-8c56-5baefca580d5"
+    locationLabel: "§ 5 Abs. 1 S.1"
+    reasoning: "Die Löschfrist knüpft an den individuellen, im Einzelfall festzustellenden Zeitpunkt der Tätigkeitseinstellung an, was eine aufwändige Einzelfallbeobachtung statt einer automatisierbaren, standardisierten Fristberechnung erfordert – mit Unsicherheit für Betroffene, wann ihre Daten tatsächlich gelöscht werden."
+    hint: "Eine feste, automatisiert berechenbare Registrierungsdauer mit optionaler Verlängerung durch aktive Bestätigung vorsehen, statt die Frist an ein unscharfes Einzelereignis zu knüpfen."
+    quote: "sind, vorbehaltlich des Absatzes 3, ein Jahr nachdem der Inhaber der Erlaubnis nach § 11 Absatz 1 Satz 1 Nummer 8 Buchstabe d des Tierschutzgesetzes das Zurschaustellen der Tiere oder das für diese Zwecke Zurverfügungstellen eingestellt hat, zu löschen."
 ---
 Verordnung über die Registrierung von Erlaubnissen zur Zurschaustellung von Tieren an wechselnden Orten
 # Verordnung über die Registrierung von Erlaubnissen zur Zurschaustellung von Tieren an wechselnden Orten
@@ -81,10 +95,10 @@ Im Sinne dieser Verordnung ist
 2.kontrollierende Behörde: die für die Kontrolle nach § 16 Abs. 1 Nr. 4 des Tierschutzgesetzes zuständige Behörde.
 
 ## § 3 Datenerhebung
-(1)Die erteilende Behörde erhebt vor Erteilung einer Erlaubnis nach § 11 Absatz 1 Satz 1 Nummer 8 Buchstabe d des Tierschutzgesetzes, <!--finding:f29f9185-655e-4b64-85d6-491dfea387d5:start-->wenn die Tätigkeit an wechselnden Orten ausgeübt wird, folgende Daten:<!--finding:f29f9185-655e-4b64-85d6-491dfea387d5:end--> 
-1.<!--finding:dc5be410-8a4a-47e6-b8fa-b2bab6f1b442:start-->Name, Anschrift, Geburtsdatum, Geburtsort des Antragstellers sowie den Ort der jeweiligen Gewerbeanmeldung,<!--finding:dc5be410-8a4a-47e6-b8fa-b2bab6f1b442:end-->
+(1)Die erteilende Behörde erhebt vor Erteilung einer Erlaubnis nach § 11 Absatz 1 Satz 1 Nummer 8 Buchstabe d des Tierschutzgesetzes, <!--finding:72b53c24-c7cd-46ba-9aa5-a9a2d2076cd3:start-->wenn die Tätigkeit an wechselnden Orten ausgeübt wird, folgende Daten:<!--finding:72b53c24-c7cd-46ba-9aa5-a9a2d2076cd3:end--> 
+1.<!--finding:356183f9-3703-4ff2-8a99-9c2691649506:start-->Name, Anschrift, Geburtsdatum, Geburtsort des Antragstellers sowie den Ort der jeweiligen Gewerbeanmeldung,<!--finding:356183f9-3703-4ff2-8a99-9c2691649506:end-->
 
-2.Name des Betriebes, in dem der Antragsteller tätig ist, und im Fall eines Winterquartiers dessen Anschrift,
+2.Name des Betriebes, in dem der Antragsteller tätig ist, <!--finding:5026af49-e357-49f5-8441-f52db991737f:start-->und im Fall eines Winterquartiers dessen Anschrift,<!--finding:5026af49-e357-49f5-8441-f52db991737f:end-->
 
 3.Name des Inhabers des Betriebes nach Nummer 2,
 
@@ -123,10 +137,10 @@ Im Sinne dieser Verordnung ist
 
 (4)<!--finding:e45de380-7deb-4bd4-8145-64a85ebb5bbf:start-->Stellt eine Behörde bei Wahrnehmung ihrer Aufgaben fest, dass die von einer anderen Behörde gespeicherten Daten unvollständig, fehlerhaft oder nicht schlüssig sind, so teilt sie dies der anderen Behörde mit.<!--finding:e45de380-7deb-4bd4-8145-64a85ebb5bbf:end-->
 
-(5)<!--finding:13c5f992-4eee-4b37-b3fd-1f5f89369448:start-->Die erteilende Behörde erteilt dem Inhaber der Erlaubnis nach § 11 Absatz 1 Satz 1 Nummer 8 Buchstabe d des Tierschutzgesetzes <!--finding:e3b7c2db-87e1-4d31-8a4f-ee874cf01fb3:start-->auf Antrag Auskunft über die ihn betreffenden in Absatz 1 genannten Daten.<!--finding:e3b7c2db-87e1-4d31-8a4f-ee874cf01fb3:end--><!--finding:13c5f992-4eee-4b37-b3fd-1f5f89369448:end-->
+(5)<!--finding:13c5f992-4eee-4b37-b3fd-1f5f89369448:start-->Die erteilende Behörde erteilt dem Inhaber der Erlaubnis nach § 11 Absatz 1 Satz 1 Nummer 8 Buchstabe d des Tierschutzgesetzes <!--finding:84674b30-8bdc-4da9-86a3-5cd42f953b9b:start-->auf Antrag Auskunft über die ihn betreffenden in Absatz 1 genannten Daten.<!--finding:84674b30-8bdc-4da9-86a3-5cd42f953b9b:end--><!--finding:13c5f992-4eee-4b37-b3fd-1f5f89369448:end-->
 
 ## § 5 Löschung
-(1)Die Daten nach den §§ 3 und 4 Abs. 1 Satz 2 Nr. 1 bis 7 sind, vorbehaltlich des Absatzes 3, ein Jahr nachdem der Inhaber der Erlaubnis nach § 11 Absatz 1 Satz 1 Nummer 8 Buchstabe d des Tierschutzgesetzes das Zurschaustellen der Tiere oder das für diese Zwecke Zurverfügungstellen eingestellt hat, zu löschen. <!--finding:092a4010-5ac8-4af6-a80a-acd27399a400:start-->Erlangt die zuständige Behörde hiervon erst nach Ablauf eines Jahres Kenntnis, sind die Daten unverzüglich zu löschen.<!--finding:092a4010-5ac8-4af6-a80a-acd27399a400:end-->
+(1)Die Daten nach den §§ 3 und 4 Abs. 1 Satz 2 Nr. 1 bis 7 <!--finding:7ee5d30e-4e25-4500-8c56-5baefca580d5:start-->sind, vorbehaltlich des Absatzes 3, ein Jahr nachdem der Inhaber der Erlaubnis nach § 11 Absatz 1 Satz 1 Nummer 8 Buchstabe d des Tierschutzgesetzes das Zurschaustellen der Tiere oder das für diese Zwecke Zurverfügungstellen eingestellt hat, zu löschen.<!--finding:7ee5d30e-4e25-4500-8c56-5baefca580d5:end--> <!--finding:092a4010-5ac8-4af6-a80a-acd27399a400:start-->Erlangt die zuständige Behörde hiervon erst nach Ablauf eines Jahres Kenntnis, sind die Daten unverzüglich zu löschen.<!--finding:092a4010-5ac8-4af6-a80a-acd27399a400:end-->
 
 (2)Die Daten nach § 3 Abs. 2 Nr. 1 und § 4 Abs. 1 Satz 2 Nr. 4 bis 7 sind fünf Jahre nach dem Datum der Kontrolle im Sinne des § 4 Abs. 1 Satz 2 Nr. 5 durch die kontrollierende Behörde zu löschen, soweit die Daten nicht bereits nach Absatz 1 gelöscht worden sind.
 

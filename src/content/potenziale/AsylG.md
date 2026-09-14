@@ -100,6 +100,76 @@ findings:
     reasoning: "Die Übermittlung der nach mehreren EU-Rechtsakten erhobenen personenbezogenen Daten an das Bundesamt wird inhaltlich geregelt, ohne auf einheitliche semantische oder technische Schnittstellenstandards für den Datenaustausch zu verweisen."
     hint: "Auf gemeinsame EU-Interoperabilitätsstandards (z. B. einheitliche Datenfelder/Schnittstellen im Rahmen des Eurodac- bzw. Asyl- und Migrationsmanagementsystems) verweisen, um eine konsistente technische Anbindung sicherzustellen."
     quote: "Die nach Artikel 12 Absatz 1 Satz 1 und Absatz 3 Satz 1 der Verordnung (EU) 2024/1356, nach den Artikeln 24 und 25 der Richtlinie (EU) 2024/1346 und nach Artikel 20 Absatz 1 Satz 1 der Verordnung (EU) 2024/1348 durch eine Bundes- oder Landesbehörde erhobenen personenbezogenen Daten werden dem Bundesamt zur Erfüllung seiner Aufgaben nach § 5 Absatz 1 übermittelt und dürfen nur zu diesem Zweck verarbeitet werden und sind durch das Bundesamt anschließend zu löschen."
+  - type: "Bürgercheck"
+    tag: "Prinzip 1"
+    id: "b205aea4-bd74-4829-8a5b-652a2a8ac07f"
+    locationLabel: "§ 46 Abs. 3"
+    reasoning: "Besondere Bedürfnisse von Ausländern bei der Aufnahme werden der zentralen Verteilungsstelle nur \"soweit bereits identifiziert\" mitgeteilt — ein verbindliches, systematisches Screening schutzbedürftiger Gruppen vor der Verteilentscheidung fehlt."
+    hint: "Verbindliches, standardisiertes Screening besonderer Bedürfnisse vor der Verteilentscheidung vorschreiben, damit schutzbedürftige Gruppen zuverlässig erkannt und bei der Zuweisung berücksichtigt werden."
+    quote: "Die veranlassende Aufnahmeeinrichtung teilt der zentralen Verteilungsstelle nur die Zahl der Ausländer unter Angabe der Herkunftsländer und, soweit bereits identifiziert, besondere Bedürfnisse der Ausländer bei der Aufnahme mit."
+  - type: "Bürgercheck"
+    tag: "Prinzip 1"
+    id: "4a0241ea-da0e-467a-b510-46804917547a"
+    locationLabel: "§ 15 Abs. 1"
+    reasoning: "Die persönliche Mitwirkungspflicht gilt einheitlich für alle Ausländer, ohne Differenzierung nach kognitiven, sprachlichen oder gesundheitlichen Einschränkungen (z. B. Analphabetismus, Trauma, Behinderung)."
+    hint: "Ausdrücklich klarstellen, dass Unterstützungsbedarf (Dolmetscher, Vertrauensperson, angepasste Form der Mitwirkung) bei eingeschränkter Handlungsfähigkeit anerkannt und ermöglicht wird."
+    quote: "Der Ausländer ist persönlich verpflichtet, bei der Aufklärung des Sachverhalts mitzuwirken. Dies gilt auch, wenn er sich durch einen Bevollmächtigten vertreten lässt."
+  - type: "Bürgercheck"
+    tag: "Prinzip 2"
+    id: "d4024bcd-a158-4e91-b4f7-eca84eb9ef59"
+    locationLabel: "§ 74 Abs. 1"
+    reasoning: "Die zweiwöchige Klagefrist gegen Bundesamtsentscheidungen verlangt von Betroffenen — oft ohne Rechtsbeistand, mit Sprachbarrieren und unter psychischer Belastung — innerhalb kurzer Zeit eine fundierte Rechtsschutzentscheidung zu treffen."
+    hint: "Frist mit einer proaktiven, niedrigschwelligen Information über die unentgeltliche Rechtsauskunft (§ 12b) koppeln, damit die kurze Frist tatsächlich handhabbar bleibt."
+    quote: "Die Klage gegen Entscheidungen nach diesem Gesetz muss im Einklang mit Artikel 67 Absatz 7 Buchstabe b der Verordnung (EU) 2024/1348 und mit Artikel 43 Absatz 2 der Verordnung (EU) 2024/1351 innerhalb von zwei Wochen nach Zustellung der Entscheidung erhoben werden."
+  - type: "Bürgercheck"
+    tag: "Prinzip 2"
+    id: "f09eb435-7e39-42ce-a1ce-ed9740b49b23"
+    locationLabel: "§ 38 Abs. 5"
+    reasoning: "Die mehrstufige Fristenkette mit Verweisen auf weitere Fristen verlangt von Betroffenen ein Verständnis komplexer Verweisstrukturen, um den für den eigenen Antrag maßgeblichen Stichtag korrekt zu bestimmen — eine Anforderung, die realistische kognitive und sprachliche Fähigkeiten vieler Betroffener übersteigen kann."
+    hint: "Klar berechenbare, einheitliche Frist statt kaskadierender Verweisketten vorsehen oder den maßgeblichen Stichtag durch die Behörde aktiv und individuell mitteilen."
+    quote: "Der Antrag soll vom Ausländer spätestens drei Arbeitstage nach Verstreichen der Frist des § 18a Absatz 4 Satz 1 beziehungsweise für den Fall, dass ein Antrag auf Gewährung vorläufigen Rechtsschutzes gestellt wurde, spätestens drei Arbeitstage nach der Zustellung der Entscheidung des Gerichts nach § 18a Absatz 4 Satz 6 gestellt werden."
+  - type: "Bürgercheck"
+    tag: "Prinzip 3"
+    id: "35ba797f-3845-495b-9040-2d76bef33b63"
+    locationLabel: "§ 60 Abs. 1"
+    reasoning: "Die Wohnsitzauflage bindet Betroffene verpflichtend an einen zugewiesenen Ort, unabhängig von zwischenzeitlich entstandenen persönlichen Lebensumständen wie Arbeitsverhältnis, Schulbesuch der Kinder oder aufgebautem sozialen Netz am tatsächlichen Aufenthaltsort."
+    hint: "Vorsehen, dass bereits entstandene, stabile Lebensverhältnisse (Arbeitsplatz, Schulplatz, soziales Netz) als Kriterium für eine Anpassung der Wohnsitzauflage berücksichtigt werden können, nicht nur Haushaltsgemeinschaft und humanitäre Gründe."
+    quote: "Ein Ausländer, der nicht oder nicht mehr verpflichtet ist, in einer Aufnahmeeinrichtung zu wohnen, und dessen Lebensunterhalt nicht gesichert ist (§ 2 Absatz 3 des Aufenthaltsgesetzes), wird verpflichtet, an dem in der Verteilentscheidung nach § 50 Absatz 4 genannten Ort seinen gewöhnlichen Aufenthalt zu nehmen (Wohnsitzauflage)."
+  - type: "Bürgercheck"
+    tag: "Prinzip 3"
+    id: "c02f068c-a337-4fb0-a742-9dcf1a4b91c6"
+    locationLabel: "§ 25 Abs. 3"
+    reasoning: "Die entscheidende Anhörung kann bereits innerhalb einer Woche nach Antragseinreichung angesetzt werden, ohne dass die besonderen Lebensumstände frisch angekommener, oft traumatisierter oder erschöpfter Betroffener berücksichtigt werden."
+    hint: "Mindestvorbereitungszeit vor der Anhörung vorsehen bzw. sicherstellen, dass Betroffene in dieser Frist tatsächlich Zugang zur unentgeltlichen Rechtsauskunft nach § 12b erhalten haben, bevor die Anhörung stattfindet."
+    quote: "Entsprechendes gilt, wenn dem Ausländer bei oder innerhalb einer Woche nach der Antragseinreichung der Termin für die Anhörung mitgeteilt wird."
+  - type: "Bürgercheck"
+    tag: "Prinzip 4"
+    id: "ba01b3e2-b5eb-4828-b77b-48b9f621d011"
+    locationLabel: "§ 22 Abs. 1"
+    reasoning: "Die persönliche Meldepflicht als einziger vorgesehener Kontaktweg schafft eine Zugangshürde für Betroffene mit eingeschränkter Mobilität, langen Anfahrtswegen oder Betreuungsverantwortung, ohne alternative Kontaktmöglichkeit vorzusehen."
+    hint: "Ergänzende, niedrigschwellige Kontaktwege (z. B. Terminvereinbarung, digitale Vorregistrierung über die Aufnahmeeinrichtung) vorsehen, die die persönliche Meldung vorbereiten oder in begründeten Fällen ersetzen."
+    quote: "Ein Ausländer, der den Asylantrag bei einer Außenstelle des Bundesamtes einzureichen hat (§ 14 Absatz 1), hat sich in einer Aufnahmeeinrichtung persönlich zu melden."
+  - type: "Bürgercheck"
+    tag: "Prinzip 4"
+    id: "03e46afe-f75c-4a77-b017-478c432b88b4"
+    locationLabel: "§ 12a Abs. 1"
+    reasoning: "Das Gesetz regelt die Förderung der Asylverfahrensberatung, macht aber nicht deutlich, wie und über welchen konkreten, leicht auffindbaren Kontaktpunkt Betroffene diese Beratung tatsächlich erreichen."
+    hint: "Einen verbindlichen, standardisierten Kontaktpunkt (z. B. Aushang, digitale Übersicht, aktive Vermittlung durch die Aufnahmeeinrichtung) für die Vermittlung an die Asylverfahrensberatung vorschreiben."
+    quote: "Der Bund fördert eine behördenunabhängige, ergebnisoffene, unentgeltliche, individuelle und freiwillige Asylverfahrensberatung."
+  - type: "Bürgercheck"
+    tag: "Prinzip 5"
+    id: "67e8bf33-c222-4fdc-bbe8-bb09ecbb9470"
+    locationLabel: "§ 57 Abs. 1"
+    reasoning: "Die unbestimmten Rechtsbegriffe (\"hinreichend begründete dringende und schwerwiegende familiäre Gründe\", \"sonstige zwingende Gründe\") erfordern durchgehend eine Einzelfallprüfung und machen den Ausgang für Betroffene bei alltäglichen, wiederkehrenden Anliegen (z. B. Arztbesuch, Beerdigung eines Angehörigen) kaum vorhersehbar."
+    hint: "Typische, klar umrissene Regelfälle (z. B. Arzttermin, Beerdigung enger Angehöriger) als Regelbeispiele mit vereinfachtem, schnellem Verfahren definieren; echte atypische Ausnahmefälle bleiben im Ermessen."
+    quote: "Das Bundesamt erlaubt einem Ausländer, der verpflichtet ist, in einer Aufnahmeeinrichtung zu wohnen, den Geltungsbereich der Aufenthaltsgestattung vorübergehend zu verlassen, wenn hinreichend begründete dringende und schwerwiegende familiäre Gründe, notwendige medizinische Behandlungen oder sonstige zwingende Gründe es erfordern."
+  - type: "Bürgercheck"
+    tag: "Prinzip 5"
+    id: "57b92aba-1446-47e4-aea7-872887562d1a"
+    locationLabel: "§ 46 Abs. 2"
+    reasoning: "Die Zuweisungskriterien (Quote, Kapazität, Bearbeitungsmöglichkeit) sind klar automatisierbar, während \"besondere Bedürfnisse\" nur unspezifisch \"berücksichtigt\" werden, ohne dass die Gewichtung zwischen automatisierbarer Standardzuweisung und notwendiger Einzelfallprüfung geregelt ist."
+    hint: "Klar regeln, in welchen Fällen besondere Bedürfnisse Vorrang vor der automatisierten Quotenzuweisung haben, damit weder Standardfälle unnötig verzögert noch schutzbedürftige Personen durch rein algorithmische Zuweisung benachteiligt werden."
+    quote: "Maßgebend dafür sind die Aufnahmequoten nach § 45, in diesem Rahmen die vorhandenen freien Unterbringungsplätze und sodann die Bearbeitungsmöglichkeiten der jeweiligen Außenstelle des Bundesamtes in Bezug auf die Herkunftsländer der Ausländer. Etwaige besondere Bedürfnisse der Ausländer bei der Aufnahme werden berücksichtigt."
 ---
 Asylgesetz
 
@@ -722,7 +792,7 @@ Bei der Anwendung dieses Gesetzes sind die Vorschriften des Bürgerlichen Gesetz
 
 (1)
 
-Der Bund fördert eine behördenunabhängige, ergebnisoffene, unentgeltliche, individuelle und freiwillige Asylverfahrensberatung. Die Förderung setzt voraus, dass die Träger der Asylverfahrensberatung ihre Zuverlässigkeit, die ordnungsgemäße und gewissenhafte Durchführung der Beratung sowie Verfahren zur Qualitätssicherung und -entwicklung nachweisen.
+<!--finding:03e46afe-f75c-4a77-b017-478c432b88b4:start-->Der Bund fördert eine behördenunabhängige, ergebnisoffene, unentgeltliche, individuelle und freiwillige Asylverfahrensberatung.<!--finding:03e46afe-f75c-4a77-b017-478c432b88b4:end--> Die Förderung setzt voraus, dass die Träger der Asylverfahrensberatung ihre Zuverlässigkeit, die ordnungsgemäße und gewissenhafte Durchführung der Beratung sowie Verfahren zur Qualitätssicherung und -entwicklung nachweisen.
 
 (2)
 
@@ -795,7 +865,7 @@ Reist ein minderjähriges lediges Kind des Ausländers nach dessen Asylantragste
 
 (1)
 
-Der Ausländer ist persönlich verpflichtet, bei der Aufklärung des Sachverhalts mitzuwirken. Dies gilt auch, wenn er sich durch einen Bevollmächtigten vertreten lässt.
+<!--finding:4a0241ea-da0e-467a-b510-46804917547a:start-->Der Ausländer ist persönlich verpflichtet, bei der Aufklärung des Sachverhalts mitzuwirken. Dies gilt auch, wenn er sich durch einen Bevollmächtigten vertreten lässt.<!--finding:4a0241ea-da0e-467a-b510-46804917547a:end-->
 
 (2)
 
@@ -1091,7 +1161,7 @@ Die Unterlagen sind dem Ausländer wieder auszuhändigen, wenn sie für die weit
 
 (1)
 
-Ein Ausländer, der den Asylantrag bei einer Außenstelle des Bundesamtes einzureichen hat (§ 14 Absatz 1), hat sich in einer Aufnahmeeinrichtung persönlich zu melden. Diese nimmt ihn auf oder leitet ihn an die für seine Aufnahme zuständige Aufnahmeeinrichtung weiter; im Falle der Weiterleitung ist der Ausländer, soweit möglich, erkennungsdienstlich zu behandeln.
+<!--finding:ba01b3e2-b5eb-4828-b77b-48b9f621d011:start-->Ein Ausländer, der den Asylantrag bei einer Außenstelle des Bundesamtes einzureichen hat (§ 14 Absatz 1), hat sich in einer Aufnahmeeinrichtung persönlich zu melden.<!--finding:ba01b3e2-b5eb-4828-b77b-48b9f621d011:end--> Diese nimmt ihn auf oder leitet ihn an die für seine Aufnahme zuständige Aufnahmeeinrichtung weiter; im Falle der Weiterleitung ist der Ausländer, soweit möglich, erkennungsdienstlich zu behandeln.
 
 (2)
 
@@ -1132,7 +1202,7 @@ Ein späteres Vorbringen des Ausländers kann unberücksichtigt bleiben, wenn an
 
 (3)
 
-Die Anhörung soll möglichst bald nach der Asylantragseinreichung erfolgen. Einer besonderen Ladung des Ausländers und seines Bevollmächtigten bedarf es nicht. Entsprechendes gilt, wenn dem Ausländer bei oder innerhalb einer Woche nach der Antragseinreichung der Termin für die Anhörung mitgeteilt wird. Kann die Anhörung nicht an demselben Tag stattfinden, sind der Ausländer und sein Bevollmächtigter von dem Anhörungstermin unverzüglich zu verständigen.
+Die Anhörung soll möglichst bald nach der Asylantragseinreichung erfolgen. Einer besonderen Ladung des Ausländers und seines Bevollmächtigten bedarf es nicht. <!--finding:c02f068c-a337-4fb0-a742-9dcf1a4b91c6:start-->Entsprechendes gilt, wenn dem Ausländer bei oder innerhalb einer Woche nach der Antragseinreichung der Termin für die Anhörung mitgeteilt wird.<!--finding:c02f068c-a337-4fb0-a742-9dcf1a4b91c6:end--> Kann die Anhörung nicht an demselben Tag stattfinden, sind der Ausländer und sein Bevollmächtigter von dem Anhörungstermin unverzüglich zu verständigen.
 
 (4)
 
@@ -1389,7 +1459,7 @@ Abweichend von § 59 Absatz 1 Satz 1 des Aufenthaltsgesetzes wird dem Ausländer
 
 (5)
 
-Abweichend von Absatz 1 gilt für Entscheidungen im Rahmen des Asylgrenzverfahrens nach Artikel 44 Absatz 1 Buchstabe a der Verordnung (EU) 2024/1348 die Regelung in Artikel 4 Absatz 5 der Verordnung (EU) 2024/1349. Der zur Gewährung einer Frist für die freiwillige Ausreise erforderliche Antrag ist vom Ausländer beim Bundesamt zu stellen. <!--finding:a81f36f9-5d00-48f8-bb89-e10d91562fc8:start-->Der Antrag soll vom Ausländer spätestens drei Arbeitstage nach Verstreichen der Frist des § 18a Absatz 4 Satz 1 beziehungsweise für den Fall, dass ein Antrag auf Gewährung vorläufigen Rechtsschutzes gestellt wurde, spätestens drei Arbeitstage nach der Zustellung der Entscheidung des Gerichts nach § 18a Absatz 4 Satz 6 gestellt werden.<!--finding:a81f36f9-5d00-48f8-bb89-e10d91562fc8:end--> Handelt es sich bei dem Ausländer um einen unbegleiteten Minderjährigen, soll der Antrag abweichend von Satz 3 spätestens drei Arbeitstage nach Verstreichen der Frist des § 18a Absatz 7 Satz 2 beziehungsweise für den Fall, dass Klage erhoben wurde, spätestens drei Arbeitstage nach der Zustellung der Entscheidung des Gerichts nach § 18a Absatz 7 Satz 3 gestellt werden. Nach Ablauf der Frist des Satzes 3 beziehungsweise des Satzes 4 ist ein Antrag auf Gewährung einer Frist zur freiwilligen Ausreise unzulässig. Das Bundesamt hat über den Antrag nach Satz 2 innerhalb von drei Arbeitstagen zu entscheiden. Der Ausländer ist über das Recht zur Stellung eines Antrags zur Gewährung einer Frist zur freiwilligen Ausreise und über die Rechtsfolgen der unterlassenen oder verspäteten Antragstellung spätestens bei der Registrierung seines Asylantrags in einer Sprache, die er versteht oder von der vernünftigerweise vorausgesetzt werden darf, dass er sie versteht, zu belehren. Ist die Belehrung unterblieben oder unrichtig erteilt, findet Satz 5 keine Anwendung. § 59 Absatz 1 Satz 4 des Aufenthaltsgesetzes findet entsprechende Anwendung.
+Abweichend von Absatz 1 gilt für Entscheidungen im Rahmen des Asylgrenzverfahrens nach Artikel 44 Absatz 1 Buchstabe a der Verordnung (EU) 2024/1348 die Regelung in Artikel 4 Absatz 5 der Verordnung (EU) 2024/1349. Der zur Gewährung einer Frist für die freiwillige Ausreise erforderliche Antrag ist vom Ausländer beim Bundesamt zu stellen. <!--finding:f09eb435-7e39-42ce-a1ce-ed9740b49b23:start--><!--finding:a81f36f9-5d00-48f8-bb89-e10d91562fc8:start-->Der Antrag soll vom Ausländer spätestens drei Arbeitstage nach Verstreichen der Frist des § 18a Absatz 4 Satz 1 beziehungsweise für den Fall, dass ein Antrag auf Gewährung vorläufigen Rechtsschutzes gestellt wurde, spätestens drei Arbeitstage nach der Zustellung der Entscheidung des Gerichts nach § 18a Absatz 4 Satz 6 gestellt werden.<!--finding:f09eb435-7e39-42ce-a1ce-ed9740b49b23:end--><!--finding:a81f36f9-5d00-48f8-bb89-e10d91562fc8:end--> Handelt es sich bei dem Ausländer um einen unbegleiteten Minderjährigen, soll der Antrag abweichend von Satz 3 spätestens drei Arbeitstage nach Verstreichen der Frist des § 18a Absatz 7 Satz 2 beziehungsweise für den Fall, dass Klage erhoben wurde, spätestens drei Arbeitstage nach der Zustellung der Entscheidung des Gerichts nach § 18a Absatz 7 Satz 3 gestellt werden. Nach Ablauf der Frist des Satzes 3 beziehungsweise des Satzes 4 ist ein Antrag auf Gewährung einer Frist zur freiwilligen Ausreise unzulässig. Das Bundesamt hat über den Antrag nach Satz 2 innerhalb von drei Arbeitstagen zu entscheiden. Der Ausländer ist über das Recht zur Stellung eines Antrags zur Gewährung einer Frist zur freiwilligen Ausreise und über die Rechtsfolgen der unterlassenen oder verspäteten Antragstellung spätestens bei der Registrierung seines Asylantrags in einer Sprache, die er versteht oder von der vernünftigerweise vorausgesetzt werden darf, dass er sie versteht, zu belehren. Ist die Belehrung unterblieben oder unrichtig erteilt, findet Satz 5 keine Anwendung. § 59 Absatz 1 Satz 4 des Aufenthaltsgesetzes findet entsprechende Anwendung.
 
 § 39 Zuständigkeit der Ausländerbehörden bei Aufenthaltsbeendigung
 
@@ -1479,7 +1549,7 @@ Liegen die Voraussetzungen nach Absatz 1 nicht vor, ist die Aufnahmeeinrichtung 
 
 (2)
 
-Eine vom Bundesministerium des Innern bestimmte zentrale Verteilungsstelle benennt auf Veranlassung einer Aufnahmeeinrichtung dieser die für die Aufnahme des Ausländers zuständige Aufnahmeeinrichtung. Maßgebend dafür sind die Aufnahmequoten nach § 45, in diesem Rahmen die vorhandenen freien Unterbringungsplätze und sodann die Bearbeitungsmöglichkeiten der jeweiligen Außenstelle des Bundesamtes in Bezug auf die Herkunftsländer der Ausländer. Etwaige besondere Bedürfnisse der Ausländer bei der Aufnahme werden berücksichtigt. Von mehreren danach in Betracht kommenden Aufnahmeeinrichtungen wird die nächstgelegene als zuständig benannt.
+Eine vom Bundesministerium des Innern bestimmte zentrale Verteilungsstelle benennt auf Veranlassung einer Aufnahmeeinrichtung dieser die für die Aufnahme des Ausländers zuständige Aufnahmeeinrichtung. <!--finding:57b92aba-1446-47e4-aea7-872887562d1a:start-->Maßgebend dafür sind die Aufnahmequoten nach § 45, in diesem Rahmen die vorhandenen freien Unterbringungsplätze und sodann die Bearbeitungsmöglichkeiten der jeweiligen Außenstelle des Bundesamtes in Bezug auf die Herkunftsländer der Ausländer. Etwaige besondere Bedürfnisse der Ausländer bei der Aufnahme werden berücksichtigt.<!--finding:57b92aba-1446-47e4-aea7-872887562d1a:end--> Von mehreren danach in Betracht kommenden Aufnahmeeinrichtungen wird die nächstgelegene als zuständig benannt.
 
 (2a)
 
@@ -1487,7 +1557,7 @@ Ergibt sich aus einer Vereinbarung nach § 45 Absatz 2 Satz 1 eine von den Absä
 
 (3)
 
-Die veranlassende Aufnahmeeinrichtung teilt der zentralen Verteilungsstelle nur die Zahl der Ausländer unter Angabe der Herkunftsländer und, soweit bereits identifiziert, besondere Bedürfnisse der Ausländer bei der Aufnahme mit. Ausländer und ihre Familienangehörigen im Sinne des Artikels 2 Nummer 3 der Richtlinie (EU) 2024/1346 sind mit ihrer Zustimmung als Gruppe zu melden, sodass bei der Verteilung die Familieneinheit gewahrt wird.
+<!--finding:b205aea4-bd74-4829-8a5b-652a2a8ac07f:start-->Die veranlassende Aufnahmeeinrichtung teilt der zentralen Verteilungsstelle nur die Zahl der Ausländer unter Angabe der Herkunftsländer und, soweit bereits identifiziert, besondere Bedürfnisse der Ausländer bei der Aufnahme mit.<!--finding:b205aea4-bd74-4829-8a5b-652a2a8ac07f:end--> Ausländer und ihre Familienangehörigen im Sinne des Artikels 2 Nummer 3 der Richtlinie (EU) 2024/1346 sind mit ihrer Zustimmung als Gruppe zu melden, sodass bei der Verteilung die Familieneinheit gewahrt wird.
 
 (4)
 
@@ -1669,7 +1739,7 @@ Wenn der Ausländer verpflichtet ist, in dem Bezirk einer anderen Ausländerbeh�
 
 (1)
 
-<!--finding:e908743e-39b7-470e-ad1a-6ad4d1b80461:start-->Das Bundesamt erlaubt einem Ausländer, der verpflichtet ist, in einer Aufnahmeeinrichtung zu wohnen, den Geltungsbereich der Aufenthaltsgestattung vorübergehend zu verlassen, wenn hinreichend begründete dringende und schwerwiegende familiäre Gründe, notwendige medizinische Behandlungen oder sonstige zwingende Gründe es erfordern.<!--finding:e908743e-39b7-470e-ad1a-6ad4d1b80461:end-->
+<!--finding:67e8bf33-c222-4fdc-bbe8-bb09ecbb9470:start--><!--finding:e908743e-39b7-470e-ad1a-6ad4d1b80461:start-->Das Bundesamt erlaubt einem Ausländer, der verpflichtet ist, in einer Aufnahmeeinrichtung zu wohnen, den Geltungsbereich der Aufenthaltsgestattung vorübergehend zu verlassen, wenn hinreichend begründete dringende und schwerwiegende familiäre Gründe, notwendige medizinische Behandlungen oder sonstige zwingende Gründe es erfordern.<!--finding:67e8bf33-c222-4fdc-bbe8-bb09ecbb9470:end--><!--finding:e908743e-39b7-470e-ad1a-6ad4d1b80461:end-->
 
 (2)
 
@@ -1763,7 +1833,7 @@ Die §§ 56, 58, 59 und 59a Absatz 2 gelten entsprechend.
 
 (1)
 
-Ein Ausländer, der nicht oder nicht mehr verpflichtet ist, in einer Aufnahmeeinrichtung zu wohnen, und dessen Lebensunterhalt nicht gesichert ist (§ 2 Absatz 3 des Aufenthaltsgesetzes), wird verpflichtet, an dem in der Verteilentscheidung nach § 50 Absatz 4 genannten Ort seinen gewöhnlichen Aufenthalt zu nehmen (Wohnsitzauflage). Findet eine länderübergreifende Verteilung gemäß § 51 statt, dann ergeht die Wohnsitzauflage im Hinblick auf den sich danach ergebenden Aufenthaltsort. Der Ausländer kann den in der Wohnsitzauflage genannten Ort ohne Erlaubnis vorübergehend verlassen.
+<!--finding:35ba797f-3845-495b-9040-2d76bef33b63:start-->Ein Ausländer, der nicht oder nicht mehr verpflichtet ist, in einer Aufnahmeeinrichtung zu wohnen, und dessen Lebensunterhalt nicht gesichert ist (§ 2 Absatz 3 des Aufenthaltsgesetzes), wird verpflichtet, an dem in der Verteilentscheidung nach § 50 Absatz 4 genannten Ort seinen gewöhnlichen Aufenthalt zu nehmen (Wohnsitzauflage).<!--finding:35ba797f-3845-495b-9040-2d76bef33b63:end--> Findet eine länderübergreifende Verteilung gemäß § 51 statt, dann ergeht die Wohnsitzauflage im Hinblick auf den sich danach ergebenden Aufenthaltsort. Der Ausländer kann den in der Wohnsitzauflage genannten Ort ohne Erlaubnis vorübergehend verlassen.
 
 (2)
 
@@ -2311,7 +2381,7 @@ Abschnitt 9Gerichtsverfahren
 
 (1)
 
-Die Klage gegen Entscheidungen nach diesem Gesetz muss im Einklang mit Artikel 67 Absatz 7 Buchstabe b der Verordnung (EU) 2024/1348 und mit Artikel 43 Absatz 2 der Verordnung (EU) 2024/1351 innerhalb von zwei Wochen nach Zustellung der Entscheidung erhoben werden. Abweichend von Satz 1 ist die Klage im Einklang mit Artikel 43 Absatz 3 der Verordnung (EU) 2024/1351 innerhalb einer Woche zu erheben, wenn der Antrag nach § 80 Absatz 5 der Verwaltungsgerichtsordnung innerhalb einer Woche zu stellen ist (§ 34a Absatz 3 Satz 1). Die Frist von einer Woche gilt auch in den in Artikel 67 Absatz 7 Buchstabe a der Verordnung (EU) 2024/1348 genannten Fällen. § 58 der Verwaltungsgerichtsordnung gilt mit der Maßgabe, dass die Frist nach § 58 Absatz 2 der Verwaltungsgerichtsordnung drei Monate beträgt.
+<!--finding:d4024bcd-a158-4e91-b4f7-eca84eb9ef59:start-->Die Klage gegen Entscheidungen nach diesem Gesetz muss im Einklang mit Artikel 67 Absatz 7 Buchstabe b der Verordnung (EU) 2024/1348 und mit Artikel 43 Absatz 2 der Verordnung (EU) 2024/1351 innerhalb von zwei Wochen nach Zustellung der Entscheidung erhoben werden.<!--finding:d4024bcd-a158-4e91-b4f7-eca84eb9ef59:end--> Abweichend von Satz 1 ist die Klage im Einklang mit Artikel 43 Absatz 3 der Verordnung (EU) 2024/1351 innerhalb einer Woche zu erheben, wenn der Antrag nach § 80 Absatz 5 der Verwaltungsgerichtsordnung innerhalb einer Woche zu stellen ist (§ 34a Absatz 3 Satz 1). Die Frist von einer Woche gilt auch in den in Artikel 67 Absatz 7 Buchstabe a der Verordnung (EU) 2024/1348 genannten Fällen. § 58 der Verwaltungsgerichtsordnung gilt mit der Maßgabe, dass die Frist nach § 58 Absatz 2 der Verwaltungsgerichtsordnung drei Monate beträgt.
 
 (2)
 

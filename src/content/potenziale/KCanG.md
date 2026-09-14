@@ -1,155 +1,238 @@
 ---
-title: "Gesetz zum Umgang mit Konsumcannabis"
-eli: "eli/bund/bgbl-1/2024/109-2/2025-01-01/1/deu"
+title: Gesetz zum Umgang mit Konsumcannabis
+eli: eli/bund/bgbl-1/2024/109-2/2025-01-01/1/deu
 findings:
-  - type: "Digitalcheck"
-    tag: "Prinzip 1.1"
-    id: "10608504-8f6f-4a9d-ae7e-92a360ac1b79"
-    locationLabel: "§ 22 Abs. 3 Nr. 5"
-    reasoning: "Die eigenhändige Unterschrift auf der beim Transport mitzuführenden Transportbescheinigung erzwingt ein physisches Papierdokument und verhindert einen durchgängig digitalen Prozess für den Cannabis-Transport zwischen Teilen des befriedeten Besitztums."
-    hint: "Eine elektronische Signatur oder eine digital abrufbare, qualifiziert signierte Transportbescheinigung (z. B. per App) als gleichwertige Alternative zur eigenhändigen Unterschrift zulassen."
-    quote: "eine von der Anbauvereinigung ausgestellte und von\n    einer vertretungsberechtigten Person der Anbauvereinigung\n    eigenhändig unterzeichnete Transportbescheinigung mit sich führt"
-  - type: "Digitalcheck"
-    tag: "Prinzip 2.2"
-    id: "603ce8c1-e2f8-44a1-828c-342068e42c35"
-    locationLabel: "§ 11 Abs. 4 Nr. 5"
-    reasoning: "Antragstellende müssen Führungszeugnis und Gewerbezentralregisterauskunft eigenständig bei den jeweiligen Registerbehörden beantragen und vorlegen, obwohl die zuständige Erlaubnisbehörde diese Daten grundsätzlich per Direktabruf bei den Registern einholen könnte."
-    hint: "Eine Rechtsgrundlage für den automatisierten Direktabruf von Führungszeugnis und Gewerbezentralregisterauskunft durch die Erlaubnisbehörde schaffen (Once-Only-Prinzip), statt die Vorlage durch die Antragstellenden zu verlangen."
-    quote: "ein höchstens drei Monate vor der Antragstellung auf Erlaubnis\n    erteiltes Führungszeugnis zur Vorlage bei einer Behörde nach § 30\n    Absatz 5 des Bundeszentralregistergesetzes sowie eine höchstens drei\n    Monate vor der Antragstellung auf Erlaubnis erteilte Auskunft aus\n    dem Gewerbezentralregister nach § 150 Absatz 1 Satz 1 der\n    Gewerbeordnung für jedes Vorstandsmitglied sowie für jede sonstige\n    vertretungsberechtigte Person der Anbauvereinigung"
-  - type: "Digitalcheck"
-    tag: "Prinzip 2.2"
-    id: "0b4788d3-3b9b-4edc-a1d0-d1d3c4f8d07b"
-    locationLabel: "§ 16 Abs. 3"
-    reasoning: "Die Einhaltung des Verbots der Mehrfachmitgliedschaft in Anbauvereinigungen stützt sich ausschließlich auf eine Selbstauskunft der beitretenden Person, da kein zentrales Register zum Abgleich bestehender Mitgliedschaften existiert."
-    hint: "Ein zentrales, datenschutzkonformes Register oder einen Abgleichmechanismus zwischen Anbauvereinigungen schaffen, um Mehrfachmitgliedschaften automatisiert zu erkennen, statt sich allein auf Selbstauskünfte zu verlassen."
-    quote: "gegenüber der Anbauvereinigung schriftlich oder elektronisch versichert,\ndass er oder sie kein Mitglied in einer anderen Anbauvereinigung ist"
-  - type: "Digitalcheck"
-    tag: "Prinzip 2.4"
-    id: "b699cda0-de33-43e9-855c-f9592da89e97"
-    locationLabel: "§ 43 Abs. 3"
-    reasoning: "Für die jährliche elektronische Datenübermittlung der Landesbehörden an die vom Bundesministerium für Gesundheit benannte Evaluationsstelle wird kein einheitliches Datenformat oder technischer Standard vorgegeben, was die Zusammenführung der Daten aus 16 Bundesländern erschwert."
-    hint: "Ein einheitliches, standardisiertes Datenformat (z. B. über XÖV/FITKO) für die Übermittlung der Evaluationsdaten festlegen oder in einer Rechtsverordnung referenzieren."
-    quote: "übermitteln die zuständigen Behörden\njährlich bis zum 30. April elektronisch folgende Daten aus dem\nvorangegangenen Kalenderjahr in nicht personenbezogener Form an eine vom\nBundesministerium für Gesundheit benannte Stelle"
-  - type: "Digitalcheck"
-    tag: "Prinzip 3.1"
-    id: "9a236a58-a1cb-4873-a0ae-9da16d0261ed"
-    locationLabel: "§ 26 Abs. 1"
-    reasoning: "Das Gesetz verpflichtet Anbauvereinigungen zu umfangreichen, fortlaufenden Dokumentationspflichten, ohne eine etablierte digitale Lösung oder Referenzsoftware für diese Nachweisführung vorzugeben oder bereitzustellen."
-    hint: "Eine zentrale, öffentlich bereitgestellte oder empfohlene Software-/Meldeplattform für die Dokumentations- und Berichtspflichten der Anbauvereinigungen ermöglichen, um uneinheitliche Insellösungen zu vermeiden."
-    quote: "Anbauvereinigungen haben zum Nachweis der Einhaltung der Vorgaben der §§\n18 bis 20 und 22 für die Rückverfolgbarkeit des weitergegebenen Cannabis\nund Vermehrungsmaterials fortlaufend folgende Angaben zu dokumentieren:"
-  - type: "Digitalcheck"
-    tag: "Prinzip 4.1"
-    id: "d2546003-8137-4914-824d-66613f2aac68"
-    locationLabel: "§ 33 Abs. 1 S. 2"
-    reasoning: "Die länderübergreifende Zuständigkeitsregelung bei Anbauvereinigungen mit Besitztum in mehreren Ländern erfordert aufwändige Abstimmungsprozesse zwischen unterschiedlichen Landesbehörden, ohne dass ein einheitlicher, digital gestützter Zuständigkeits- oder Verfahrensablauf vorgesehen ist."
-    hint: "Einen standardisierten, digital unterstützten Abstimmungsprozess (z. B. gemeinsame Fallakte/Schnittstelle) zwischen den beteiligten Landesbehörden für länderübergreifende Erlaubnisverfahren vorsehen."
-    quote: "Liegen der Sitz und Teile des\nbefriedeten Besitztums einer Anbauvereinigung in unterschiedlichen\nLändern, kann die Behörde des Landes, in dem der nach seiner Größe\nüberwiegende Teil des befriedeten Besitztums liegt, im Einvernehmen mit\nder nach Satz 1 örtlich zuständigen Behörde die Zuständigkeit für die\nErteilung der Erlaubnis nach § 11 Absatz 1 übernehmen und die Erlaubnis\nnach § 11 Absatz 1 im Einvernehmen mit den zuständigen Behörden der\nbetroffenen Länder länderübergreifend erteilen."
-  - type: "Digitalcheck"
-    tag: "Prinzip 2.4"
-    id: "566e4b62-51a1-433b-8f17-e108512ae600"
-    locationLabel: "§ 33 Abs. 1 S. 5"
-    reasoning: "Die Übermittlung von Kontrollergebnissen zwischen den zuständigen Behörden unterschiedlicher Länder erfolgt ohne Vorgabe eines einheitlichen Datenformats oder einer technischen Schnittstelle."
-    hint: "Einen standardisierten Datenaustauschstandard für die Übermittlung von Kontrollergebnissen zwischen Landesbehörden festlegen, um manuelle Mehrfacherfassung zu vermeiden."
-    quote: "Die zuständige Behörde dieses Landes hat die Kontrolle nach\nAbstimmung mit der für die Erlaubniserteilung zuständigen Behörde\ndurchzuführen und ihr die Kontrollergebnisse zu übermitteln."
-  - type: "Digitalcheck"
-    tag: "Prinzip 1.1"
-    id: "e1b98794-96a9-431d-b809-15682fc7942b"
-    locationLabel: "§ 41 Abs. 3"
-    reasoning: "Der Antrag auf Feststellung der Tilgungsfähigkeit kann nur schriftlich oder mündlich zu Protokoll der Geschäftsstelle gestellt werden; eine elektronische Antragstellung ist nicht vorgesehen."
-    hint: "Eine elektronische Antragstellung (z. B. über ein Online-Formular mit eID) als gleichwertige Alternative zur schriftlichen Einreichung oder Protokollerklärung ermöglichen."
-    quote: "Der Antrag kann\nbei jeder Staatsanwaltschaft schriftlich eingereicht oder zu Protokoll\nder Geschäftsstelle erklärt werden."
-  - type: "Digitalcheck"
-    tag: "Prinzip 1.1"
-    id: "09ff1c10-59b3-4f62-86f9-a904c0bb3f3f"
-    locationLabel: "§ 41 Abs. 2"
-    reasoning: "Die eidesstattliche Versicherung zur Glaubhaftmachung der Tilgungsvoraussetzungen muss vor der Staatsanwaltschaft abgegeben werden, was faktisch eine Präsenzpflicht der verurteilten Person begründet."
-    hint: "Eine Abgabe der eidesstattlichen Versicherung auch über einen sicheren elektronischen Kanal (z. B. mit eID-Authentifizierung) ermöglichen, um die Präsenzpflicht zu vermeiden."
-    quote: "Zur Glaubhaftmachung kann die Staatsanwaltschaft auch die\neidesstattliche Versicherung der verurteilten Person zulassen."
-  - type: "Digitalcheck"
-    tag: "Prinzip 1.3"
-    id: "5ac0caea-b8b7-44fb-a601-30f92706d014"
-    locationLabel: "§ 42 Abs. 1"
-    reasoning: "Die Mitteilungspflicht der Staatsanwaltschaft an die Registerbehörde bei festgestellter Tilgungsfähigkeit ist ohne Vorgabe eines automatisierten, medienbruchfreien Übermittlungswegs ausgestaltet, obwohl es sich um einen strukturierten, hochvolumigen Verwaltungsvorgang handelt."
-    hint: "Eine automatisierte, direkte Schnittstelle zwischen Staatsanwaltschaften und der Registerbehörde (Bundeszentralregister) für die Mitteilung der Tilgungsfähigkeit vorsehen, um manuelle Übertragungsfehler und Medienbrüche zu vermeiden."
-    quote: "so hat sie dies der\nRegisterbehörde und der verurteilten Person mitzuteilen."
-  - type: "Digitalcheck"
-    tag: "Prinzip 5.1"
-    id: "86bb756d-3f35-4217-a312-4de5acaad1db"
-    locationLabel: "§ 28 Abs. 4 Nr. 5"
-    reasoning: "Die Befugnis zur Erhebung personenbezogener Daten erstreckt sich auch auf 'sonstige im befriedeten Besitztum angetroffene Personen' – eine unbestimmte Kategorie, die über die für die Aufgabenerfüllung erforderlichen Personengruppen hinausgehen kann."
-    hint: "Die Kategorie der erfassbaren Personen präziser eingrenzen oder an konkrete Anhaltspunkte für einen Bezug zur Tätigkeit der Anbauvereinigung knüpfen, um die datenschutzrechtliche Erforderlichkeit klarer zu begrenzen."
-    quote: "sonstige im befriedeten Besitztum der Anbauvereinigung angetroffene\n    Personen"
-  - type: "Digitalcheck"
-    tag: "Prinzip 1.4"
-    id: "a5334b43-c6ee-473b-9f7e-37a5762b7d1e"
-    locationLabel: "§ 8 Abs. 1 Nr. 1"
-    reasoning: "Die Vorgabe zur digitalen Informationsplattform der Bundeszentrale für gesundheitliche Aufklärung nennt zwar Nutzerfreundlichkeit und Adressatengerechtigkeit, verweist aber nicht explizit auf die Anforderungen der Barrierefreiheit nach § 12a BGG."
-    hint: "Die Barrierefreiheitsanforderungen nach § 12a BGG (z. B. Gebärdensprache, Leichte Sprache, Screenreader-Kompatibilität) ausdrücklich für die digitale Plattform vorschreiben."
-    quote: "errichtet eine digitale Plattform, auf der sie Informationen\n    nutzerfreundlich und adressatengerecht bereitstellt zu"
-  - type: "Bürgercheck"
-    tag: "Prinzip 2"
-    id: "88d61198-9afc-4d70-aa4f-c8cf531f7d3f"
-    locationLabel: "§ 3 Abs. 2"
+  - type: Digitalcheck
+    tag: Prinzip 1.1
+    id: 10608504-8f6f-4a9d-ae7e-92a360ac1b79
+    locationLabel: § 22 Abs. 3 Nr. 5
+    reasoning: Die eigenhändige Unterschrift auf der beim Transport mitzuführenden Transportbescheinigung erzwingt ein physisches Papierdokument und verhindert einen durchgängig digitalen Prozess für den Cannabis-Transport zwischen Teilen des befriedeten Besitztums.
+    hint: Eine elektronische Signatur oder eine digital abrufbare, qualifiziert signierte Transportbescheinigung (z. B. per App) als gleichwertige Alternative zur eigenhändigen Unterschrift zulassen.
+    quote: |-
+      eine von der Anbauvereinigung ausgestellte und von
+          einer vertretungsberechtigten Person der Anbauvereinigung
+          eigenhändig unterzeichnete Transportbescheinigung mit sich führt
+  - type: Digitalcheck
+    tag: Prinzip 2.2
+    id: 603ce8c1-e2f8-44a1-828c-342068e42c35
+    locationLabel: § 11 Abs. 4 Nr. 5
+    reasoning: Antragstellende müssen Führungszeugnis und Gewerbezentralregisterauskunft eigenständig bei den jeweiligen Registerbehörden beantragen und vorlegen, obwohl die zuständige Erlaubnisbehörde diese Daten grundsätzlich per Direktabruf bei den Registern einholen könnte.
+    hint: Eine Rechtsgrundlage für den automatisierten Direktabruf von Führungszeugnis und Gewerbezentralregisterauskunft durch die Erlaubnisbehörde schaffen (Once-Only-Prinzip), statt die Vorlage durch die Antragstellenden zu verlangen.
+    quote: |-
+      ein höchstens drei Monate vor der Antragstellung auf Erlaubnis
+          erteiltes Führungszeugnis zur Vorlage bei einer Behörde nach § 30
+          Absatz 5 des Bundeszentralregistergesetzes sowie eine höchstens drei
+          Monate vor der Antragstellung auf Erlaubnis erteilte Auskunft aus
+          dem Gewerbezentralregister nach § 150 Absatz 1 Satz 1 der
+          Gewerbeordnung für jedes Vorstandsmitglied sowie für jede sonstige
+          vertretungsberechtigte Person der Anbauvereinigung
+  - type: Digitalcheck
+    tag: Prinzip 2.2
+    id: 0b4788d3-3b9b-4edc-a1d0-d1d3c4f8d07b
+    locationLabel: § 16 Abs. 3
+    reasoning: Die Einhaltung des Verbots der Mehrfachmitgliedschaft in Anbauvereinigungen stützt sich ausschließlich auf eine Selbstauskunft der beitretenden Person, da kein zentrales Register zum Abgleich bestehender Mitgliedschaften existiert.
+    hint: Ein zentrales, datenschutzkonformes Register oder einen Abgleichmechanismus zwischen Anbauvereinigungen schaffen, um Mehrfachmitgliedschaften automatisiert zu erkennen, statt sich allein auf Selbstauskünfte zu verlassen.
+    quote: |-
+      gegenüber der Anbauvereinigung schriftlich oder elektronisch versichert,
+      dass er oder sie kein Mitglied in einer anderen Anbauvereinigung ist
+  - type: Digitalcheck
+    tag: Prinzip 2.4
+    id: b699cda0-de33-43e9-855c-f9592da89e97
+    locationLabel: § 43 Abs. 3
+    reasoning: Für die jährliche elektronische Datenübermittlung der Landesbehörden an die vom Bundesministerium für Gesundheit benannte Evaluationsstelle wird kein einheitliches Datenformat oder technischer Standard vorgegeben, was die Zusammenführung der Daten aus 16 Bundesländern erschwert.
+    hint: Ein einheitliches, standardisiertes Datenformat (z. B. über XÖV/FITKO) für die Übermittlung der Evaluationsdaten festlegen oder in einer Rechtsverordnung referenzieren.
+    quote: |-
+      übermitteln die zuständigen Behörden
+      jährlich bis zum 30. April elektronisch folgende Daten aus dem
+      vorangegangenen Kalenderjahr in nicht personenbezogener Form an eine vom
+      Bundesministerium für Gesundheit benannte Stelle
+  - type: Digitalcheck
+    tag: Prinzip 3.1
+    id: 9a236a58-a1cb-4873-a0ae-9da16d0261ed
+    locationLabel: § 26 Abs. 1
+    reasoning: Das Gesetz verpflichtet Anbauvereinigungen zu umfangreichen, fortlaufenden Dokumentationspflichten, ohne eine etablierte digitale Lösung oder Referenzsoftware für diese Nachweisführung vorzugeben oder bereitzustellen.
+    hint: Eine zentrale, öffentlich bereitgestellte oder empfohlene Software-/Meldeplattform für die Dokumentations- und Berichtspflichten der Anbauvereinigungen ermöglichen, um uneinheitliche Insellösungen zu vermeiden.
+    quote: |-
+      Anbauvereinigungen haben zum Nachweis der Einhaltung der Vorgaben der §§
+      18 bis 20 und 22 für die Rückverfolgbarkeit des weitergegebenen Cannabis
+      und Vermehrungsmaterials fortlaufend folgende Angaben zu dokumentieren:
+  - type: Digitalcheck
+    tag: Prinzip 4.1
+    id: d2546003-8137-4914-824d-66613f2aac68
+    locationLabel: § 33 Abs. 1 S. 2
+    reasoning: Die länderübergreifende Zuständigkeitsregelung bei Anbauvereinigungen mit Besitztum in mehreren Ländern erfordert aufwändige Abstimmungsprozesse zwischen unterschiedlichen Landesbehörden, ohne dass ein einheitlicher, digital gestützter Zuständigkeits- oder Verfahrensablauf vorgesehen ist.
+    hint: Einen standardisierten, digital unterstützten Abstimmungsprozess (z. B. gemeinsame Fallakte/Schnittstelle) zwischen den beteiligten Landesbehörden für länderübergreifende Erlaubnisverfahren vorsehen.
+    quote: |-
+      Liegen der Sitz und Teile des
+      befriedeten Besitztums einer Anbauvereinigung in unterschiedlichen
+      Ländern, kann die Behörde des Landes, in dem der nach seiner Größe
+      überwiegende Teil des befriedeten Besitztums liegt, im Einvernehmen mit
+      der nach Satz 1 örtlich zuständigen Behörde die Zuständigkeit für die
+      Erteilung der Erlaubnis nach § 11 Absatz 1 übernehmen und die Erlaubnis
+      nach § 11 Absatz 1 im Einvernehmen mit den zuständigen Behörden der
+      betroffenen Länder länderübergreifend erteilen.
+  - type: Digitalcheck
+    tag: Prinzip 2.4
+    id: 566e4b62-51a1-433b-8f17-e108512ae600
+    locationLabel: § 33 Abs. 1 S. 5
+    reasoning: Die Übermittlung von Kontrollergebnissen zwischen den zuständigen Behörden unterschiedlicher Länder erfolgt ohne Vorgabe eines einheitlichen Datenformats oder einer technischen Schnittstelle.
+    hint: Einen standardisierten Datenaustauschstandard für die Übermittlung von Kontrollergebnissen zwischen Landesbehörden festlegen, um manuelle Mehrfacherfassung zu vermeiden.
+    quote: |-
+      Die zuständige Behörde dieses Landes hat die Kontrolle nach
+      Abstimmung mit der für die Erlaubniserteilung zuständigen Behörde
+      durchzuführen und ihr die Kontrollergebnisse zu übermitteln.
+  - type: Digitalcheck
+    tag: Prinzip 1.1
+    id: e1b98794-96a9-431d-b809-15682fc7942b
+    locationLabel: § 41 Abs. 3
+    reasoning: Der Antrag auf Feststellung der Tilgungsfähigkeit kann nur schriftlich oder mündlich zu Protokoll der Geschäftsstelle gestellt werden; eine elektronische Antragstellung ist nicht vorgesehen.
+    hint: Eine elektronische Antragstellung (z. B. über ein Online-Formular mit eID) als gleichwertige Alternative zur schriftlichen Einreichung oder Protokollerklärung ermöglichen.
+    quote: |-
+      Der Antrag kann
+      bei jeder Staatsanwaltschaft schriftlich eingereicht oder zu Protokoll
+      der Geschäftsstelle erklärt werden.
+  - type: Digitalcheck
+    tag: Prinzip 1.1
+    id: 09ff1c10-59b3-4f62-86f9-a904c0bb3f3f
+    locationLabel: § 41 Abs. 2
+    reasoning: Die eidesstattliche Versicherung zur Glaubhaftmachung der Tilgungsvoraussetzungen muss vor der Staatsanwaltschaft abgegeben werden, was faktisch eine Präsenzpflicht der verurteilten Person begründet.
+    hint: Eine Abgabe der eidesstattlichen Versicherung auch über einen sicheren elektronischen Kanal (z. B. mit eID-Authentifizierung) ermöglichen, um die Präsenzpflicht zu vermeiden.
+    quote: |-
+      Zur Glaubhaftmachung kann die Staatsanwaltschaft auch die
+      eidesstattliche Versicherung der verurteilten Person zulassen.
+  - type: Digitalcheck
+    tag: Prinzip 1.3
+    id: 5ac0caea-b8b7-44fb-a601-30f92706d014
+    locationLabel: § 42 Abs. 1
+    reasoning: Die Mitteilungspflicht der Staatsanwaltschaft an die Registerbehörde bei festgestellter Tilgungsfähigkeit ist ohne Vorgabe eines automatisierten, medienbruchfreien Übermittlungswegs ausgestaltet, obwohl es sich um einen strukturierten, hochvolumigen Verwaltungsvorgang handelt.
+    hint: Eine automatisierte, direkte Schnittstelle zwischen Staatsanwaltschaften und der Registerbehörde (Bundeszentralregister) für die Mitteilung der Tilgungsfähigkeit vorsehen, um manuelle Übertragungsfehler und Medienbrüche zu vermeiden.
+    quote: |-
+      so hat sie dies der
+      Registerbehörde und der verurteilten Person mitzuteilen.
+  - type: Digitalcheck
+    tag: Prinzip 5.1
+    id: 86bb756d-3f35-4217-a312-4de5acaad1db
+    locationLabel: § 28 Abs. 4 Nr. 5
+    reasoning: Die Befugnis zur Erhebung personenbezogener Daten erstreckt sich auch auf 'sonstige im befriedeten Besitztum angetroffene Personen' – eine unbestimmte Kategorie, die über die für die Aufgabenerfüllung erforderlichen Personengruppen hinausgehen kann.
+    hint: Die Kategorie der erfassbaren Personen präziser eingrenzen oder an konkrete Anhaltspunkte für einen Bezug zur Tätigkeit der Anbauvereinigung knüpfen, um die datenschutzrechtliche Erforderlichkeit klarer zu begrenzen.
+    quote: |-
+      sonstige im befriedeten Besitztum der Anbauvereinigung angetroffene
+          Personen
+  - type: Digitalcheck
+    tag: Prinzip 1.4
+    id: a5334b43-c6ee-473b-9f7e-37a5762b7d1e
+    locationLabel: § 8 Abs. 1 Nr. 1
+    reasoning: Die Vorgabe zur digitalen Informationsplattform der Bundeszentrale für gesundheitliche Aufklärung nennt zwar Nutzerfreundlichkeit und Adressatengerechtigkeit, verweist aber nicht explizit auf die Anforderungen der Barrierefreiheit nach § 12a BGG.
+    hint: Die Barrierefreiheitsanforderungen nach § 12a BGG (z. B. Gebärdensprache, Leichte Sprache, Screenreader-Kompatibilität) ausdrücklich für die digitale Plattform vorschreiben.
+    quote: |-
+      errichtet eine digitale Plattform, auf der sie Informationen
+          nutzerfreundlich und adressatengerecht bereitstellt zu
+  - type: Bürgercheck
+    tag: Prinzip 2
+    id: 2933d7fa-365f-430d-9d3e-4289a3a2fd41
+    locationLabel: § 3 Abs. 2
     reasoning: "Die Besitzmengen für Cannabis unterscheiden sich je nach Ort (25 Gramm allgemein, 50 Gramm am Wohnsitz/gewöhnlichen Aufenthalt) und sind zugleich unmittelbar straf- bzw. bußgeldbewehrt (§ 34 Abs. 1 Nr. 1, § 36 Abs. 1 Nr. 1: Schwellen bei 30/60 Gramm). Bürgerinnen und Bürger müssen mehrere ortsabhängige Grenzwerte gleichzeitig im Blick behalten, um nicht versehentlich eine Straftat zu begehen."
-    hint: "Eine einprägsame, visuell aufbereitete Übersicht der erlaubten Mengen je nach Ort (z. B. als Grafik auf der Präventionsplattform nach § 8) bereitstellen und die Schwellenwerte nach Möglichkeit vereinheitlichen oder klarer voneinander abgrenzen."
-    quote: "Personen, die das 18. Lebensjahr vollendet haben, ist abweichend von\nAbsatz 1 im Geltungsbereich dieses Gesetzes an ihrem Wohnsitz oder an\nihrem gewöhnlichen Aufenthalt der Besitz von Cannabis wie folgt erlaubt:"
-  - type: "Bürgercheck"
-    tag: "Prinzip 1"
-    id: "1d37ddd8-7371-4710-9ee5-430808c9235a"
-    locationLabel: "§ 9 Abs. 1"
-    reasoning: "Die Begrenzung auf drei Cannabispflanzen 'gleichzeitig' bleibt offen, ob sie pro Person oder pro Wohnung/Haushalt gilt. Für Mehrpersonenhaushalte (WGs, Familien mit mehreren erwachsenen Mitgliedern) ist damit unklar, wie viele Pflanzen insgesamt am selben Wohnsitz zulässig sind - eine Zielgruppe, die das Gesetz nicht explizit adressiert."
-    hint: "Klarstellen, ob sich die Höchstgrenze von drei Pflanzen auf die einzelne Person oder auf den Wohnsitz/Haushalt bezieht, insbesondere für den häufigen Fall mehrerer erwachsener Bewohnerinnen und Bewohner in einer Wohnung."
-    quote: "Personen, die das 18. Lebensjahr vollendet haben, ist im Geltungsbereich\ndieses Gesetzes an ihrem Wohnsitz oder an ihrem gewöhnlichen Aufenthalt\nder private Eigenanbau von insgesamt nicht mehr als drei\nCannabispflanzen gleichzeitig erlaubt."
-  - type: "Bürgercheck"
-    tag: "Prinzip 2"
-    id: "d758404a-377b-4dc6-8422-bb59a0963003"
-    locationLabel: "§ 5 Abs. 2 S. 2"
-    reasoning: "Die 100-Meter-'Sichtweite'-Regel um Schulen, Spielplätze, Jugendeinrichtungen und Sportstätten lässt sich im Alltag kaum zuverlässig einschätzen, da Bürgerinnen und Bürger weder Entfernungen noch die genauen Standorte relevanter Einrichtungen präzise kennen. Das führt zu Rechtsunsicherheit bei einer alltäglichen Handlung (öffentlicher Konsum)."
-    hint: "Eine praxistaugliche Orientierungshilfe schaffen, z. B. eine Karten- oder App-Funktion, die die 100-Meter-Verbotszonen um relevante Einrichtungen sichtbar macht, statt die Einschätzung allein den Bürgerinnen und Bürgern zu überlassen."
-    quote: "Im Sinne von Satz 1 ist eine Sichtweite bei einem Abstand von mehr als\n100 Metern von dem Eingangsbereich der in Satz 1 Nummer 1 bis 4 und 6\ngenannten Einrichtungen nicht mehr gegeben."
-  - type: "Bürgercheck"
-    tag: "Prinzip 4"
-    id: "bb249b0b-24b8-4ca7-98f4-2671a910d341"
-    locationLabel: "§ 41 Abs. 1"
-    reasoning: "Die Feststellung der Tilgungsfähigkeit einer Eintragung im Bundeszentralregister erfolgt nur 'auf Antrag der verurteilten Person' - es gibt keine aktive Benachrichtigung der potenziell großen Zahl Betroffener mit einschlägigen Vorstrafen. Wer nichts von dieser Möglichkeit weiß, wird sie faktisch nicht nutzen können."
-    hint: "Eine proaktive Informationskampagne oder direkte Benachrichtigung (z. B. durch die Registerbehörde) für Personen mit potenziell tilgungsfähigen Eintragungen vorsehen, statt die Initiative vollständig den Betroffenen zu überlassen."
-    quote: "Die Staatsanwaltschaft stellt auf Antrag der verurteilten Person fest,\nob eine die Person betreffende Eintragung im Bundeszentralregister nach\n§ 40 tilgungsfähig ist."
-  - type: "Bürgercheck"
-    tag: "Prinzip 2"
-    id: "787aa457-e4e2-4fcf-8334-56591e047800"
-    locationLabel: "§ 22 Abs. 3 Nr. 3"
-    reasoning: "Für den Transport von mehr als 25 Gramm Cannabis zwischen Teilen desselben befriedeten Besitztums einer Anbauvereinigung ist eine vorherige Anzeige spätestens einen Werktag vor Transportbeginn mit mehreren Detailangaben erforderlich - ein bürokratischer Aufwand für einen routinemäßigen internen Vorgang einzelner Mitglieder."
-    hint: "Für Transporte innerhalb desselben Besitztums einer Anbauvereinigung eine vereinfachte, formlose oder nachträgliche Meldepflicht statt einer Vorabanzeige mit Werktagsfrist vorsehen."
-    quote: "die Anbauvereinigung das Datum, die Start- und Zieladresse des\n    Transports sowie die Mengen in Gramm und Sorten des transportierten\n    Cannabis spätestens einen Werktag vor Beginn des Transports\n    gegenüber der zuständigen Behörde schriftlich oder elektronisch\n    anzeigt,"
-  - type: "Bürgercheck"
-    tag: "Prinzip 2"
-    id: "36ef9967-28f3-499e-aa70-0c44b08deb20"
-    locationLabel: "§ 12 Abs. 1 Nr. 5"
-    reasoning: "Der Katalog an zwingenden Satzungsinhalten (Buchst. a-e) für Anbauvereinigungen ist umfangreich und juristisch formuliert. Gründungswillige Bürgerinnen und Bürger, die ehrenamtlich einen Verein oder eine Genossenschaft gründen wollen, benötigen ohne Unterstützung erhebliches Spezialwissen, um eine erlaubnisfähige Satzung zu erstellen."
-    hint: "Eine amtliche Mustersatzung oder Checkliste bereitstellen, die alle nach § 12 Absatz 1 Nummer 5 erforderlichen Satzungsinhalte abdeckt, um Gründungswilligen die rechtssichere Umsetzung zu erleichtern."
-    quote: "als Zweck der Anbauvereinigung nicht ausschließlich der\n        gemeinschaftliche Eigenanbau und die Weitergabe des in\n        gemeinschaftlichem Eigenanbau angebauten Cannabis durch und an\n        ihre Mitglieder zum Eigenkonsum,"
-  - type: "Bürgercheck"
-    tag: "Prinzip 3"
-    id: "df8ebf18-5630-4869-87a1-02c37717cb0e"
-    locationLabel: "§ 14"
-    reasoning: "Die siebenjährige Befristung der Erlaubnis mit Verlängerungsmöglichkeit ab dem fünften Jahr sieht keinen Hinweis- oder Erinnerungsmechanismus vor Fristablauf vor. Anbauvereinigungen, oft ehrenamtlich organisiert, riskieren, den Verlängerungsantrag im Alltagsgeschäft zu übersehen und ihre Erlaubnis verstreichen zu lassen."
-    hint: "Eine automatisierte Erinnerung der zuständigen Behörde an die Anbauvereinigung rechtzeitig vor Ablauf der Erlaubnis bzw. vor Erreichen des frühestmöglichen Verlängerungszeitpunkts vorsehen."
-    quote: "Die Dauer der Erlaubnis ist auf einen Zeitraum von sieben Jahren zu\nbefristen. Sie kann nach Ablauf von mindestens fünf Jahren auf Antrag\nverlängert werden;"
-  - type: "Bürgercheck"
-    tag: "Prinzip 3"
-    id: "2332fe3d-b9b9-47a7-a452-b49139d2e3e8"
-    locationLabel: "§ 16 Abs. 4 S. 2"
-    reasoning: "Die Pflicht der Mitglieder, einen Wohnsitzwechsel 'unverzüglich' mitzuteilen, definiert keine konkrete Frist. Gerade bei Umzügen, die mit vielen anderen Meldepflichten (Einwohnermeldeamt etc.) zusammenfallen, kann diese unbestimmte Frist im Alltag leicht übersehen werden und zugleich zu Unsicherheit führen, was noch rechtzeitig ist."
-    hint: "Eine konkrete Frist (z. B. zwei Wochen, angelehnt an die Meldepflicht beim Einwohnermeldeamt) statt der unbestimmten Formulierung 'unverzüglich' vorsehen, um Mitgliedern eine klare Orientierung zu geben."
-    quote: "Ändert sich der Wohnsitz oder der gewöhnliche Aufenthalt, so hat das\nMitglied dies der Anbauvereinigung unverzüglich mitzuteilen."
-  - type: "Bürgercheck"
-    tag: "Prinzip 5"
-    id: "58fa5307-b776-4d23-9f58-9710ef7671cf"
-    locationLabel: "§ 12 Abs. 3 Nr. 1"
-    reasoning: "Die Versagung der Erlaubnis 'kann' erfolgen, wenn 'konkrete Tatsachen' eine bestimmte Prognose rechtfertigen - ein weiter Ermessens- und Prognosespielraum der Behörde, der den Ausgang eines Erlaubnisverfahrens für Antragstellende schwer vorhersehbar macht und die Nachvollziehbarkeit des Verfahrens einschränkt."
-    hint: "Konkretisierende Regelbeispiele oder Kriterien für die Ermessensausübung nach § 12 Absatz 3 Nummer 1 vorsehen, um Antragstellenden eine bessere Einschätzung ihrer Erfolgsaussichten zu ermöglichen."
-    quote: "konkrete Tatsachen die Annahme rechtfertigen, dass ein\n    Vorstandsmitglied oder eine sonstige vertretungsberechtigte Person\n    der Anbauvereinigung sich mit hinreichender Wahrscheinlichkeit nicht\n    an die in den §§ 2, 5, 6 oder den §§ 19 bis 23 geregelten Verbote,"
+    hint: Eine einprägsame, visuell aufbereitete Übersicht der erlaubten Mengen je nach Ort (z. B. als Grafik auf der Präventionsplattform nach § 8) bereitstellen und die Schwellenwerte nach Möglichkeit vereinheitlichen oder klarer voneinander abgrenzen.
+    quote: |-
+      Personen, die das 18. Lebensjahr vollendet haben, ist abweichend von
+      Absatz 1 im Geltungsbereich dieses Gesetzes an ihrem Wohnsitz oder an
+      ihrem gewöhnlichen Aufenthalt der Besitz von Cannabis wie folgt erlaubt:
+  - type: Bürgercheck
+    tag: Prinzip 1
+    id: 50b112ff-54da-47d2-852f-241974672baf
+    locationLabel: § 9 Abs. 1
+    reasoning: Die Begrenzung auf drei Cannabispflanzen 'gleichzeitig' bleibt offen, ob sie pro Person oder pro Wohnung/Haushalt gilt. Für Mehrpersonenhaushalte (WGs, Familien mit mehreren erwachsenen Mitgliedern) ist damit unklar, wie viele Pflanzen insgesamt am selben Wohnsitz zulässig sind - eine Zielgruppe, die das Gesetz nicht explizit adressiert.
+    hint: Klarstellen, ob sich die Höchstgrenze von drei Pflanzen auf die einzelne Person oder auf den Wohnsitz/Haushalt bezieht, insbesondere für den häufigen Fall mehrerer erwachsener Bewohnerinnen und Bewohner in einer Wohnung.
+    quote: |-
+      Personen, die das 18. Lebensjahr vollendet haben, ist im Geltungsbereich
+      dieses Gesetzes an ihrem Wohnsitz oder an ihrem gewöhnlichen Aufenthalt
+      der private Eigenanbau von insgesamt nicht mehr als drei
+      Cannabispflanzen gleichzeitig erlaubt.
+  - type: Bürgercheck
+    tag: Prinzip 2
+    id: 96930653-d2d5-44bb-872c-653ff9ca7309
+    locationLabel: § 5 Abs. 2 S. 2
+    reasoning: Die 100-Meter-'Sichtweite'-Regel um Schulen, Spielplätze, Jugendeinrichtungen und Sportstätten lässt sich im Alltag kaum zuverlässig einschätzen, da Bürgerinnen und Bürger weder Entfernungen noch die genauen Standorte relevanter Einrichtungen präzise kennen. Das führt zu Rechtsunsicherheit bei einer alltäglichen Handlung (öffentlicher Konsum).
+    hint: Eine praxistaugliche Orientierungshilfe schaffen, z. B. eine Karten- oder App-Funktion, die die 100-Meter-Verbotszonen um relevante Einrichtungen sichtbar macht, statt die Einschätzung allein den Bürgerinnen und Bürgern zu überlassen.
+    quote: |-
+      Im Sinne von Satz 1 ist eine Sichtweite bei einem Abstand von mehr als
+      100 Metern von dem Eingangsbereich der in Satz 1 Nummer 1 bis 4 und 6
+      genannten Einrichtungen nicht mehr gegeben.
+  - type: Bürgercheck
+    tag: Prinzip 4
+    id: 2cb9cd83-2b7f-4d89-a831-2c3519619dd8
+    locationLabel: § 41 Abs. 1
+    reasoning: Die Feststellung der Tilgungsfähigkeit einer Eintragung im Bundeszentralregister erfolgt nur 'auf Antrag der verurteilten Person' - es gibt keine aktive Benachrichtigung der potenziell großen Zahl Betroffener mit einschlägigen Vorstrafen. Wer nichts von dieser Möglichkeit weiß, wird sie faktisch nicht nutzen können.
+    hint: Eine proaktive Informationskampagne oder direkte Benachrichtigung (z. B. durch die Registerbehörde) für Personen mit potenziell tilgungsfähigen Eintragungen vorsehen, statt die Initiative vollständig den Betroffenen zu überlassen.
+    quote: |-
+      Die Staatsanwaltschaft stellt auf Antrag der verurteilten Person fest,
+      ob eine die Person betreffende Eintragung im Bundeszentralregister nach
+      § 40 tilgungsfähig ist.
+  - type: Bürgercheck
+    tag: Prinzip 2
+    id: e2e567e9-e1cb-4592-8e94-37a9c4d51d7c
+    locationLabel: § 22 Abs. 3 Nr. 3
+    reasoning: Für den Transport von mehr als 25 Gramm Cannabis zwischen Teilen desselben befriedeten Besitztums einer Anbauvereinigung ist eine vorherige Anzeige spätestens einen Werktag vor Transportbeginn mit mehreren Detailangaben erforderlich - ein bürokratischer Aufwand für einen routinemäßigen internen Vorgang einzelner Mitglieder.
+    hint: Für Transporte innerhalb desselben Besitztums einer Anbauvereinigung eine vereinfachte, formlose oder nachträgliche Meldepflicht statt einer Vorabanzeige mit Werktagsfrist vorsehen.
+    quote: |-
+      die Anbauvereinigung das Datum, die Start- und Zieladresse des
+          Transports sowie die Mengen in Gramm und Sorten des transportierten
+          Cannabis spätestens einen Werktag vor Beginn des Transports
+          gegenüber der zuständigen Behörde schriftlich oder elektronisch
+          anzeigt,
+  - type: Bürgercheck
+    tag: Prinzip 2
+    id: 1055ca2f-bb75-4151-a49c-71c0d8c5ce81
+    locationLabel: § 12 Abs. 1 Nr. 5 Buchst. a
+    reasoning: Der Katalog an zwingenden Satzungsinhalten für Anbauvereinigungen ist umfangreich und juristisch formuliert. Gründungswillige Bürgerinnen und Bürger, die ehrenamtlich einen Verein oder eine Genossenschaft gründen wollen, benötigen ohne Unterstützung erhebliches Spezialwissen, um eine erlaubnisfähige Satzung zu erstellen.
+    hint: Eine amtliche Mustersatzung oder Checkliste bereitstellen, die alle nach § 12 Absatz 1 Nummer 5 erforderlichen Satzungsinhalte abdeckt, um Gründungswilligen die rechtssichere Umsetzung zu erleichtern.
+    quote: |-
+      als Zweck der Anbauvereinigung nicht ausschließlich der
+              gemeinschaftliche Eigenanbau und die Weitergabe des in
+              gemeinschaftlichem Eigenanbau angebauten Cannabis durch und an
+              ihre Mitglieder zum Eigenkonsum,
+  - type: Bürgercheck
+    tag: Prinzip 3
+    id: 310f5392-69c2-4665-b459-ad38b87dc6e9
+    locationLabel: § 14
+    reasoning: Die siebenjährige Befristung der Erlaubnis mit Verlängerungsmöglichkeit ab dem fünften Jahr sieht keinen Hinweis- oder Erinnerungsmechanismus vor Fristablauf vor. Anbauvereinigungen, oft ehrenamtlich organisiert, riskieren, den Verlängerungsantrag im Alltagsgeschäft zu übersehen und ihre Erlaubnis verstreichen zu lassen.
+    hint: Eine automatisierte Erinnerung der zuständigen Behörde an die Anbauvereinigung rechtzeitig vor Ablauf der Erlaubnis bzw. vor Erreichen des frühestmöglichen Verlängerungszeitpunkts vorsehen.
+    quote: |-
+      Die Dauer der Erlaubnis ist auf einen Zeitraum von sieben Jahren zu
+      befristen. Sie kann nach Ablauf von mindestens fünf Jahren auf Antrag
+      verlängert werden;
+  - type: Bürgercheck
+    tag: Prinzip 3
+    id: dbcbbf7b-4297-4a63-9419-52e81f8f5945
+    locationLabel: § 16 Abs. 4 S. 2
+    reasoning: Die Pflicht der Mitglieder, einen Wohnsitzwechsel 'unverzüglich' mitzuteilen, definiert keine konkrete Frist. Gerade bei Umzügen, die mit vielen anderen Meldepflichten (Einwohnermeldeamt etc.) zusammenfallen, kann diese unbestimmte Frist im Alltag leicht übersehen werden und zugleich zu Unsicherheit führen, was noch rechtzeitig ist.
+    hint: Eine konkrete Frist (z. B. zwei Wochen, angelehnt an die Meldepflicht beim Einwohnermeldeamt) statt der unbestimmten Formulierung 'unverzüglich' vorsehen, um Mitgliedern eine klare Orientierung zu geben.
+    quote: |-
+      Ändert sich der Wohnsitz oder der gewöhnliche Aufenthalt, so hat das
+      Mitglied dies der Anbauvereinigung unverzüglich mitzuteilen.
+  - type: Bürgercheck
+    tag: Prinzip 5
+    id: 8242c95e-850d-4b38-bd37-7a3c6c2ebd37
+    locationLabel: § 12 Abs. 3 Nr. 1
+    reasoning: Die Versagung der Erlaubnis 'kann' erfolgen, wenn 'konkrete Tatsachen' eine bestimmte Prognose rechtfertigen - ein weiter Ermessens- und Prognosespielraum der Behörde, der den Ausgang eines Erlaubnisverfahrens für Antragstellende schwer vorhersehbar macht und die Nachvollziehbarkeit des Verfahrens einschränkt.
+    hint: Konkretisierende Regelbeispiele oder Kriterien für die Ermessensausübung nach § 12 Absatz 3 Nummer 1 vorsehen, um Antragstellenden eine bessere Einschätzung ihrer Erfolgsaussichten zu ermöglichen.
+    quote: |-
+      konkrete Tatsachen die Annahme rechtfertigen, dass ein
+          Vorstandsmitglied oder eine sonstige vertretungsberechtigte Person
+          der Anbauvereinigung sich mit hinreichender Wahrscheinlichkeit nicht
+          an die in den §§ 2, 5, 6 oder den §§ 19 bis 23 geregelten Verbote,
+  - type: Bürgercheck
+    tag: Prinzip 4
+    id: 9e3fc79e-8e86-4b55-9ebf-0f2fc18ab79d
+    locationLabel: § 21 Abs. 2 S. 2
+    reasoning: Bei jeder Weitergabe von Cannabis oder Vermehrungsmaterial muss ein papierbasierter Informationszettel mit mehreren Pflichtangaben ausgehändigt werden, ohne dass eine digitale Alternative (z. B. Abruf über App/QR-Code) vorgesehen ist - ein wiederkehrender Kontaktpunkt zwischen Anbauvereinigung und Mitglied, der ohne Automatisierungs- oder Digitalisierungsoption bleibt.
+    hint: Eine digitale Alternative zum papierbasierten Informationszettel ermöglichen, z. B. Bereitstellung der Pflichtangaben über eine App oder einen QR-Code, der auf die Plattform nach § 8 Absatz 1 Nummer 1 verweist.
+    quote: |-
+      haben sie der
+      entgegennehmenden Person einen Informationszettel mit mindestens den
+      folgenden Angaben zum weitergegebenen Cannabis auszuhändigen:
 ---
+
 
 
 # Gesetz zum Umgang mit Konsumcannabis
@@ -949,9 +1032,9 @@ Trocknen, zum Eigenkonsum erlaubt.
 
 (2)
 
-<!--finding:88d61198-9afc-4d70-aa4f-c8cf531f7d3f:start-->Personen, die das 18. Lebensjahr vollendet haben, ist abweichend von
+<!--finding:2933d7fa-365f-430d-9d3e-4289a3a2fd41:start-->Personen, die das 18. Lebensjahr vollendet haben, ist abweichend von
 Absatz 1 im Geltungsbereich dieses Gesetzes an ihrem Wohnsitz oder an
-ihrem gewöhnlichen Aufenthalt der Besitz von Cannabis wie folgt erlaubt:<!--finding:88d61198-9afc-4d70-aa4f-c8cf531f7d3f:end-->
+ihrem gewöhnlichen Aufenthalt der Besitz von Cannabis wie folgt erlaubt:<!--finding:2933d7fa-365f-430d-9d3e-4289a3a2fd41:end-->
 
 1.  1.
     
@@ -1064,9 +1147,9 @@ Der öffentliche Konsum von Cannabis ist verboten:
 
     
 
-<!--finding:d758404a-377b-4dc6-8422-bb59a0963003:start-->Im Sinne von Satz 1 ist eine Sichtweite bei einem Abstand von mehr als
+<!--finding:96930653-d2d5-44bb-872c-653ff9ca7309:start-->Im Sinne von Satz 1 ist eine Sichtweite bei einem Abstand von mehr als
 100 Metern von dem Eingangsbereich der in Satz 1 Nummer 1 bis 4 und 6
-genannten Einrichtungen nicht mehr gegeben.<!--finding:d758404a-377b-4dc6-8422-bb59a0963003:end-->
+genannten Einrichtungen nicht mehr gegeben.<!--finding:96930653-d2d5-44bb-872c-653ff9ca7309:end-->
 
 (3)
 
@@ -1216,10 +1299,10 @@ Kapitel
 
 (1)
 
-<!--finding:1d37ddd8-7371-4710-9ee5-430808c9235a:start-->Personen, die das 18. Lebensjahr vollendet haben, ist im Geltungsbereich
+<!--finding:50b112ff-54da-47d2-852f-241974672baf:start-->Personen, die das 18. Lebensjahr vollendet haben, ist im Geltungsbereich
 dieses Gesetzes an ihrem Wohnsitz oder an ihrem gewöhnlichen Aufenthalt
 der private Eigenanbau von insgesamt nicht mehr als drei
-Cannabispflanzen gleichzeitig erlaubt.<!--finding:1d37ddd8-7371-4710-9ee5-430808c9235a:end-->
+Cannabispflanzen gleichzeitig erlaubt.<!--finding:50b112ff-54da-47d2-852f-241974672baf:end-->
 
 (2)
 
@@ -1481,10 +1564,10 @@ Die Erlaubnis nach § 11 Absatz 1 ist zu versagen, wenn
     1.  a)
         
 
-        <!--finding:36ef9967-28f3-499e-aa70-0c44b08deb20:start-->als Zweck der Anbauvereinigung nicht ausschließlich der
+        <!--finding:1055ca2f-bb75-4151-a49c-71c0d8c5ce81:start-->als Zweck der Anbauvereinigung nicht ausschließlich der
         gemeinschaftliche Eigenanbau und die Weitergabe des in
         gemeinschaftlichem Eigenanbau angebauten Cannabis durch und an
-        ihre Mitglieder zum Eigenkonsum,<!--finding:36ef9967-28f3-499e-aa70-0c44b08deb20:end--> die Information von Mitgliedern
+        ihre Mitglieder zum Eigenkonsum,<!--finding:1055ca2f-bb75-4151-a49c-71c0d8c5ce81:end--> die Information von Mitgliedern
         über cannabisspezifische Suchtprävention und -beratung sowie die
         Weitergabe von beim gemeinschaftlichen Eigenanbau gewonnenem
         Vermehrungsmaterial für den privaten Eigenanbau an ihre
@@ -1673,10 +1756,10 @@ Die Erlaubnis nach § 11 Absatz 1 kann versagt werden, wenn
 1.  1.
     
 
-    <!--finding:58fa5307-b776-4d23-9f58-9710ef7671cf:start-->konkrete Tatsachen die Annahme rechtfertigen, dass ein
+    <!--finding:8242c95e-850d-4b38-bd37-7a3c6c2ebd37:start-->konkrete Tatsachen die Annahme rechtfertigen, dass ein
     Vorstandsmitglied oder eine sonstige vertretungsberechtigte Person
     der Anbauvereinigung sich mit hinreichender Wahrscheinlichkeit nicht
-    an die in den §§ 2, 5, 6 oder den §§ 19 bis 23 geregelten Verbote,<!--finding:58fa5307-b776-4d23-9f58-9710ef7671cf:end-->
+    an die in den §§ 2, 5, 6 oder den §§ 19 bis 23 geregelten Verbote,<!--finding:8242c95e-850d-4b38-bd37-7a3c6c2ebd37:end-->
     die in den §§ 17 bis 23, 25 oder § 26 geregelten Gebote oder die in
     den §§ 3, 16, 17 oder den §§ 19 bis 22 geregelten Anforderungen
     halten wird, oder
@@ -1765,9 +1848,9 @@ Voraussetzungen sicherzustellen.
 
 ## § 14 Dauer der Erlaubnis
 
-<!--finding:df8ebf18-5630-4869-87a1-02c37717cb0e:start-->Die Dauer der Erlaubnis ist auf einen Zeitraum von sieben Jahren zu
+<!--finding:310f5392-69c2-4665-b459-ad38b87dc6e9:start-->Die Dauer der Erlaubnis ist auf einen Zeitraum von sieben Jahren zu
 befristen. Sie kann nach Ablauf von mindestens fünf Jahren auf Antrag
-verlängert werden;<!--finding:df8ebf18-5630-4869-87a1-02c37717cb0e:end--> die Vorschriften der §§ 11 bis 13 gelten entsprechend
+verlängert werden;<!--finding:310f5392-69c2-4665-b459-ad38b87dc6e9:end--> die Vorschriften der §§ 11 bis 13 gelten entsprechend
 für die Verlängerung der Erlaubnis.
 
 [](regelungstext-verkuendung-1/art-z15.html)
@@ -1871,8 +1954,8 @@ nachweist, dass er oder sie
 
     
 
-<!--finding:2332fe3d-b9b9-47a7-a452-b49139d2e3e8:start-->Ändert sich der Wohnsitz oder der gewöhnliche Aufenthalt, so hat das
-Mitglied dies der Anbauvereinigung unverzüglich mitzuteilen.<!--finding:2332fe3d-b9b9-47a7-a452-b49139d2e3e8:end-->
+<!--finding:dbcbbf7b-4297-4a63-9419-52e81f8f5945:start-->Ändert sich der Wohnsitz oder der gewöhnliche Aufenthalt, so hat das
+Mitglied dies der Anbauvereinigung unverzüglich mitzuteilen.<!--finding:dbcbbf7b-4297-4a63-9419-52e81f8f5945:end-->
 
 (5)
 
@@ -2309,9 +2392,9 @@ weitergeben.
 (2)
 
 Anbauvereinigungen dürfen Cannabis und Vermehrungsmaterial nur in einer
-neutralen Verpackung weitergeben. Bei der Weitergabe haben sie der
+neutralen Verpackung weitergeben. Bei der Weitergabe <!--finding:9e3fc79e-8e86-4b55-9ebf-0f2fc18ab79d:start-->haben sie der
 entgegennehmenden Person einen Informationszettel mit mindestens den
-folgenden Angaben zum weitergegebenen Cannabis auszuhändigen:
+folgenden Angaben zum weitergegebenen Cannabis auszuhändigen:<!--finding:9e3fc79e-8e86-4b55-9ebf-0f2fc18ab79d:end-->
 
 1.  1.
     
@@ -2496,11 +2579,11 @@ Teile räumlich unmittelbar miteinander verbunden sind oder wenn
 3.  3.
     
 
-    <!--finding:787aa457-e4e2-4fcf-8334-56591e047800:start-->die Anbauvereinigung das Datum, die Start- und Zieladresse des
+    <!--finding:e2e567e9-e1cb-4592-8e94-37a9c4d51d7c:start-->die Anbauvereinigung das Datum, die Start- und Zieladresse des
     Transports sowie die Mengen in Gramm und Sorten des transportierten
     Cannabis spätestens einen Werktag vor Beginn des Transports
     gegenüber der zuständigen Behörde schriftlich oder elektronisch
-    anzeigt,<!--finding:787aa457-e4e2-4fcf-8334-56591e047800:end-->
+    anzeigt,<!--finding:e2e567e9-e1cb-4592-8e94-37a9c4d51d7c:end-->
 
     
 4.  4.
@@ -4100,9 +4183,9 @@ gebildete Gesamtstrafen beruhen.
 
 (1)
 
-<!--finding:bb249b0b-24b8-4ca7-98f4-2671a910d341:start-->Die Staatsanwaltschaft stellt auf Antrag der verurteilten Person fest,
+<!--finding:2cb9cd83-2b7f-4d89-a831-2c3519619dd8:start-->Die Staatsanwaltschaft stellt auf Antrag der verurteilten Person fest,
 ob eine die Person betreffende Eintragung im Bundeszentralregister nach
-§ 40 tilgungsfähig ist.<!--finding:bb249b0b-24b8-4ca7-98f4-2671a910d341:end-->
+§ 40 tilgungsfähig ist.<!--finding:2cb9cd83-2b7f-4d89-a831-2c3519619dd8:end-->
 
 (2)
 

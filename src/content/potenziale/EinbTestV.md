@@ -39,46 +39,46 @@ findings:
     quote: "\nIm Verfahren nach § 2 Abs. 1 darf das Bundesamt über die Prüfstelle zum Zwecke der Durchführung des Einbürgerungstests und der Ausstellung der Bescheinigung nach einheitlichem Vordruck Familiennamen, Vornamen, Geburtsdatum, Geburtsort und Anschrift der Prüfungsteilnehmer erheben und verwenden"
   - type: "Bürgercheck"
     tag: "Prinzip 1"
-    id: "3b11358e-c709-4632-b101-c42315eedda1"
+    id: "a04d601d-0b5a-48ad-af60-030e8a861061"
     locationLabel: "§ 1 Abs. 3"
-    reasoning: "Die Bestehensregel gilt einheitlich für alle Prüfungsteilnehmer; besondere Hürden von Teilgruppen (z. B. Menschen mit Behinderung, geringer Literalität, hohem Alter) werden in der Verordnung an keiner Stelle als eigene Zielgruppe identifiziert oder berücksichtigt."
+    reasoning: "Die Bestehensregel gilt einheitlich für alle Prüfungsteilnehmer; besondere Hürden von Teilgruppen (z. B. Menschen mit Behinderung, geringer Literalität, hohem Alter) werden an keiner Stelle der Verordnung als eigene Zielgruppe identifiziert oder berücksichtigt."
     hint: "Zielgruppenanalyse ergänzen und für identifizierte vulnerable Teilgruppen einen klar definierten Nachteilsausgleich vorsehen (z. B. Zeitverlängerung, leichte Sprache, Vorlesefunktion), ohne die Prüfungsintegrität für die übrige Gruppe zu verändern."
     quote: "Der Einbürgerungstest ist bestanden, wenn unter Aufsicht innerhalb von 60 Minuten mindestens 17 der 33 Fragen eines Fragebogens richtig beantwortet worden sind"
   - type: "Bürgercheck"
+    tag: "Prinzip 5"
+    id: "3cc7cbe1-3468-4839-8e80-414a83416610"
+    locationLabel: "§ 1 Abs. 3"
+    reasoning: "Die Bestehensregel ist vollständig starr und automatisierbar gestaltet (fester Zeitrahmen, feste Punktzahl), ohne jede Möglichkeit einer Einzelfallprüfung bei besonderen Umständen — der Trade-off zwischen Automatisierbarkeit und Einzelfallgerechtigkeit scheint einseitig zugunsten der Automatisierbarkeit entschieden."
+    hint: "Eine eng gefasste, klar definierte Ausnahmeregelung für begründete Einzelfälle (z. B. gesundheitliche Gründe) einführen, die die Automatisierbarkeit des Regelfalls nicht beeinträchtigt."
+    quote: "innerhalb von 60 Minuten mindestens 17 der 33 Fragen eines Fragebogens richtig beantwortet worden sind"
+  - type: "Bürgercheck"
     tag: "Prinzip 2"
-    id: "ba790239-02d5-4341-885a-74c4ffd0c11c"
+    id: "1cf1b41f-c2e3-44e1-8a5b-6d99e186ef36"
     locationLabel: "Anlage 2, II.9.a"
-    reasoning: "Das Rahmencurriculum setzt Sprachniveau B1 voraus, insbesondere im Leseverstehen, ohne zu regeln, was bei Teilnehmern unterhalb dieses Niveaus geschieht – es droht Überforderung oder faktischer Ausschluss statt eines gestuften Zugangs."
+    reasoning: "Das Rahmencurriculum setzt Sprachniveau B1 voraus, insbesondere im Leseverstehen, ohne zu regeln, was bei Teilnehmern unterhalb dieses Niveaus geschieht — es droht Überforderung oder faktischer Ausschluss statt eines gestuften Zugangs."
     hint: "Ergänzende Unterstützungsangebote oder ein vorgeschaltetes Sprachmodul für Teilnehmer unterhalb B1 vorsehen, statt das Sprachniveau als reine Zugangsvoraussetzung zu formulieren."
     quote: "Teilnehmer am Einbürgerungskurs sollten über das Sprachniveau B1 nach dem Gemeinsamen europäischen Referenzrahmen für Sprachen (GER) verfügen."
   - type: "Bürgercheck"
     tag: "Prinzip 2"
-    id: "c05f215a-5bc1-421a-b1a8-e589dcb9fbe5"
+    id: "3c14dffc-fd7f-489d-8260-8ca68b4c64a7"
     locationLabel: "Anlage 2, II.9.b"
-    reasoning: "Das Curriculum setzt selbstständige Lerntechniken (Wörterbuchnutzung, Mitschreiben, eigenständige Nachbereitung) voraus; Teilnehmer ohne entsprechende Bildungsbiografie könnten dadurch strukturell benachteiligt sein, ohne dass eine Unterstützung vorgesehen ist."
-    hint: "Im Kurs gezielt niedrigschwellige Lernhilfen (z. B. Lernstrategietraining, vereinfachte Materialien, Lernpatenschaften) für Teilnehmer ohne ausgeprägte Lerntechniken anbieten."
+    reasoning: "Das Curriculum setzt selbstständige Lerntechniken (Wörterbuchnutzung, Mitschreiben, eigenständige Nachbereitung) voraus; Teilnehmer ohne entsprechende Bildungsbiografie könnten dadurch strukturell benachteiligt sein, ohne dass eine gezielte Unterstützung vorgesehen ist."
+    hint: "Im Kurs niedrigschwellige Lernhilfen (z. B. Lernstrategietraining, vereinfachte Materialien, Lernpatenschaften) für Teilnehmer ohne ausgeprägte Lerntechniken anbieten."
     quote: "sollten die Teilnehmer in der Lage sein, sich grundlegender Lerntechniken zu bedienen, wie etwa Nachschlagen in einem Wörterbuch oder in Lexika, selbstständiges Mitschreiben im Unterricht, Organisation des Arbeitsplatzes und der Arbeitsmaterialien, selbstständiges Vor- und Nachbereiten sowie Wiederholen des Unterrichtsstoffes"
   - type: "Bürgercheck"
     tag: "Prinzip 3"
-    id: "c997112c-ca35-4c00-bcec-69fa91341817"
+    id: "edbe3215-a0fa-4272-b8ad-1c532ac6e619"
     locationLabel: "§ 2 Abs. 1"
     reasoning: "Die Kostenpauschale von 25 Euro pro Prüfungsteilnehmer wird ohne Regelung zu Härtefällen oder Gebührenbefreiung bei geringem Einkommen erhoben, was für einkommensschwache Zielgruppen eine zusätzliche Hürde darstellen kann."
     hint: "Eine Härtefall- oder Ermäßigungsregelung für einkommensschwache Prüfungsteilnehmer prüfen, etwa analog zu bestehenden Gebührenbefreiungen im Integrationskursrecht."
     quote: "Das Bundesamt stellt pro Prüfungsteilnehmer eine Kostenpauschale von 25 Euro in Rechnung."
   - type: "Bürgercheck"
     tag: "Prinzip 4"
-    id: "3c55540f-5d69-4a9f-b640-ac1870423880"
+    id: "040a6687-1711-46f2-b2e8-363a640d04f5"
     locationLabel: "§ 2 Abs. 2"
-    reasoning: "Die Terminvereinbarung erfordert eine Abstimmung zwischen Prüfungsteilnehmer, der von der Einbürgerungsbehörde benannten Prüfstelle und ggf. dem Kursanbieter, ohne dass ein einheitlicher, insbesondere digitaler Kontaktpunkt vorgegeben wird – das erhöht das Risiko von Missverständnissen und Aufwand für die Bürgerinnen und Bürger."
+    reasoning: "Die Terminvereinbarung erfordert eine Abstimmung zwischen Prüfungsteilnehmer, der von der Einbürgerungsbehörde benannten Prüfstelle und ggf. dem Kursanbieter, ohne dass ein einheitlicher, insbesondere digitaler Kontaktpunkt vorgegeben wird — das erhöht das Risiko von Missverständnissen und Aufwand für die Bürgerinnen und Bürger."
     hint: "Einen klaren, möglichst digitalen Anlaufpunkt (z. B. Online-Terminbuchung über die Prüfstelle oder Behörde) als Regelfall vorsehen, um die Koordination zwischen den beteiligten Stellen zu vereinfachen."
     quote: "vereinbart die Person, die den Einbürgerungstest ablegen möchte, mit einer ihr von der zuständigen Einbürgerungsbehörde benannten Prüfstelle einen Prüfungstermin unter Angabe der in § 4 Satz 1 genannten Daten"
-  - type: "Bürgercheck"
-    tag: "Prinzip 5"
-    id: "ee911c37-c9df-4341-bcd9-035b468b94a6"
-    locationLabel: "§ 1 Abs. 3"
-    reasoning: "Die Bestehensregel ist vollständig starr und automatisierbar gestaltet (fester Zeitrahmen, feste Punktzahl), ohne jede Möglichkeit einer Einzelfallprüfung bei besonderen Umständen – der Trade-off zwischen Automatisierbarkeit und Einzelfallgerechtigkeit scheint einseitig zugunsten der Automatisierbarkeit entschieden, ohne dass dies erkennbar bewusst abgewogen wurde."
-    hint: "Eine eng gefasste, klar definierte Ausnahmeregelung für begründete Einzelfälle (z. B. gesundheitliche Gründe) einführen, die die Automatisierbarkeit des Regelfalls nicht beeinträchtigt."
-    quote: "Der Einbürgerungstest ist bestanden, wenn unter Aufsicht innerhalb von 60 Minuten mindestens 17 der 33"
 ---
 
 Verordnung zu Einbürgerungstest und Einbürgerungskurs (EinbTestV)
@@ -98,16 +98,16 @@ Der bundeseinheitliche Einbürgerungstest wird mittels Fragebögen durchgeführt
 (2)
 Die aus dem Fragenkatalog in Anlage 1 erstellten 100 Fragebögen enthalten 33 Fragen, darunter jeweils drei aus den Fragen, die sich auf das Bundesland beziehen, in dem der Prüfungsteilnehmer wohnt. Die Fragebögen werden nicht veröffentlicht.
 (3)<!--finding:8e350f69-80a4-4856-83e6-611b6af66348:start-->
-<!--finding:ee911c37-c9df-4341-bcd9-035b468b94a6:start--><!--finding:3b11358e-c709-4632-b101-c42315eedda1:start-->Der Einbürgerungstest ist bestanden, wenn unter Aufsicht innerhalb von 60 Minuten mindestens 17 der 33<!--finding:ee911c37-c9df-4341-bcd9-035b468b94a6:end--> Fragen eines Fragebogens richtig beantwortet worden sind<!--finding:3b11358e-c709-4632-b101-c42315eedda1:end--><!--finding:8e350f69-80a4-4856-83e6-611b6af66348:end-->.
+<!--finding:a04d601d-0b5a-48ad-af60-030e8a861061:start-->Der Einbürgerungstest ist bestanden, wenn unter Aufsicht <!--finding:3cc7cbe1-3468-4839-8e80-414a83416610:start-->innerhalb von 60 Minuten mindestens 17 der 33 Fragen eines Fragebogens richtig beantwortet worden sind<!--finding:3cc7cbe1-3468-4839-8e80-414a83416610:end--><!--finding:a04d601d-0b5a-48ad-af60-030e8a861061:end--><!--finding:8e350f69-80a4-4856-83e6-611b6af66348:end-->.
 (4)<!--finding:ffb94226-87ad-42cf-a091-b9cdb1515d52:start-->
 Über das Bestehen wird eine Bescheinigung nach einheitlichem Vordruck ausgestellt. Sie gilt bei Wohnsitzwechsel auch gegenüber der dann zuständigen Behörde fort<!--finding:ffb94226-87ad-42cf-a091-b9cdb1515d52:end-->.
 (5)
 Grundstruktur und Lerninhalte des Einbürgerungskurses ergeben sich aus dem Rahmencurriculum in Anlage 2, das für die Durchführung von Einbürgerungskursen verbindlich ist.
 § 2 Verfahren des Einbürgerungstests unter Mitnutzung von Prüfstellen des Bundesamtes
 (1)
-Für die technische Durchführung des bundeseinheitlichen Einbürgerungstests können nach Maßgabe von Verwaltungsvereinbarungen der Länder mit dem Bundesamt für Migration und Flüchtlinge (Bundesamt) die Prüfstellen genutzt werden, die dieses den Ländern aus dem Kreis seiner Träger benennt, die es für seinen eigenen Test zum Orientierungskurs nach der Integrationskursverordnung zugelassen hat und bundesweit vorhält. <!--finding:c997112c-ca35-4c00-bcec-69fa91341817:start-->Das Bundesamt stellt pro Prüfungsteilnehmer eine Kostenpauschale von 25 Euro in Rechnung.<!--finding:c997112c-ca35-4c00-bcec-69fa91341817:end-->
+Für die technische Durchführung des bundeseinheitlichen Einbürgerungstests können nach Maßgabe von Verwaltungsvereinbarungen der Länder mit dem Bundesamt für Migration und Flüchtlinge (Bundesamt) die Prüfstellen genutzt werden, die dieses den Ländern aus dem Kreis seiner Träger benennt, die es für seinen eigenen Test zum Orientierungskurs nach der Integrationskursverordnung zugelassen hat und bundesweit vorhält. <!--finding:edbe3215-a0fa-4272-b8ad-1c532ac6e619:start-->Das Bundesamt stellt pro Prüfungsteilnehmer eine Kostenpauschale von 25 Euro in Rechnung.<!--finding:edbe3215-a0fa-4272-b8ad-1c532ac6e619:end-->
 (2)
-Im Verfahren nach Absatz 1 <!--finding:3c55540f-5d69-4a9f-b640-ac1870423880:start-->vereinbart die Person, die den Einbürgerungstest ablegen möchte, mit einer ihr von der zuständigen Einbürgerungsbehörde benannten Prüfstelle einen Prüfungstermin unter Angabe der in § 4 Satz 1 genannten Daten<!--finding:3c55540f-5d69-4a9f-b640-ac1870423880:end-->. Ein Anbieter eines Einbürgerungskurses, der nicht selbst zum Kreis der vom Bundesamt zugelassenen Prüfstellen gehört, kann für seine Teilnehmer einen kursbezogenen Prüfungstermin mit einer Prüfstelle vereinbaren.
+Im Verfahren nach Absatz 1 <!--finding:040a6687-1711-46f2-b2e8-363a640d04f5:start-->vereinbart die Person, die den Einbürgerungstest ablegen möchte, mit einer ihr von der zuständigen Einbürgerungsbehörde benannten Prüfstelle einen Prüfungstermin unter Angabe der in § 4 Satz 1 genannten Daten<!--finding:040a6687-1711-46f2-b2e8-363a640d04f5:end-->. Ein Anbieter eines Einbürgerungskurses, der nicht selbst zum Kreis der vom Bundesamt zugelassenen Prüfstellen gehört, kann für seine Teilnehmer einen kursbezogenen Prüfungstermin mit einer Prüfstelle vereinbaren.
 (3)
 Die Prüfstelle erhält für jeden Prüfungsteilnehmer einen der nach § 1 Abs. 2 Satz 1 zugelassenen Fragebögen, der nicht mit denen anderer Prüfungsteilnehmer desselben Prüfungstermins identisch ist.<!--finding:59bf2050-ca8c-432a-9fcc-7f6b54045bdf:start--> Die Identität des Prüfungsteilnehmers ist anhand eines amtlichen Identitätspapiers zu prüfen<!--finding:59bf2050-ca8c-432a-9fcc-7f6b54045bdf:end-->.
 § 3 Verfahren des Einbürgerungstests über Landesstellen<!--finding:dfbfd873-016d-4302-87ee-170027383187:start-->
@@ -4402,9 +4402,9 @@ Maßgaben für das Curriculum
    Um den Blick stärker auf die gesellschaftliche Dimension von Kultur zu richten, ist auch das Thema Bildung in den Lerninhaltekatalog aufgenommen worden. Bildung soll als zentrale Voraussetzung zur gleichberechtigten Teilhabe am gesellschaftlich-politischen Leben in Deutschland vermittelt werden.
 9. Voraussetzungen auf Seiten der Teilnehmer
    a. Sprachliche Voraussetzungen
-   <!--finding:ba790239-02d5-4341-885a-74c4ffd0c11c:start-->Teilnehmer am Einbürgerungskurs sollten über das Sprachniveau B1 nach dem Gemeinsamen europäischen Referenzrahmen für Sprachen (GER) verfügen.<!--finding:ba790239-02d5-4341-885a-74c4ffd0c11c:end--> Nur so ist gewährleistet, dass sowohl das Unterrichtsmaterial hinreichend verstanden als auch den Ausführungen von Lehrkräften und Mitlernenden angemessen gefolgt werden kann. Insbesondere im Bereich Leseverstehen sollte das Sprachniveau B1 sicher beherrscht werden.
+   <!--finding:1cf1b41f-c2e3-44e1-8a5b-6d99e186ef36:start-->Teilnehmer am Einbürgerungskurs sollten über das Sprachniveau B1 nach dem Gemeinsamen europäischen Referenzrahmen für Sprachen (GER) verfügen.<!--finding:1cf1b41f-c2e3-44e1-8a5b-6d99e186ef36:end--> Nur so ist gewährleistet, dass sowohl das Unterrichtsmaterial hinreichend verstanden als auch den Ausführungen von Lehrkräften und Mitlernenden angemessen gefolgt werden kann. Insbesondere im Bereich Leseverstehen sollte das Sprachniveau B1 sicher beherrscht werden.
    b. Selbstständiges Lernen
-   Obgleich alle Inhalte des Einbürgerungstests Gegenstand des Kurses sind, <!--finding:c05f215a-5bc1-421a-b1a8-e589dcb9fbe5:start-->sollten die Teilnehmer in der Lage sein, sich grundlegender Lerntechniken zu bedienen, wie etwa Nachschlagen in einem Wörterbuch oder in Lexika, selbstständiges Mitschreiben im Unterricht, Organisation des Arbeitsplatzes und der Arbeitsmaterialien, selbstständiges Vor- und Nachbereiten sowie Wiederholen des Unterrichtsstoffes<!--finding:c05f215a-5bc1-421a-b1a8-e589dcb9fbe5:end-->. Diese Lerntechniken ermöglichen den Teilnehmern eine individuelle und intensive Vorbereitung auf den Test über das Geschehen im Kurs hinaus und erhöhen die Bestehenschancen bei der abschließenden Prüfung.
+   Obgleich alle Inhalte des Einbürgerungstests Gegenstand des Kurses sind, <!--finding:3c14dffc-fd7f-489d-8260-8ca68b4c64a7:start-->sollten die Teilnehmer in der Lage sein, sich grundlegender Lerntechniken zu bedienen, wie etwa Nachschlagen in einem Wörterbuch oder in Lexika, selbstständiges Mitschreiben im Unterricht, Organisation des Arbeitsplatzes und der Arbeitsmaterialien, selbstständiges Vor- und Nachbereiten sowie Wiederholen des Unterrichtsstoffes<!--finding:3c14dffc-fd7f-489d-8260-8ca68b4c64a7:end-->. Diese Lerntechniken ermöglichen den Teilnehmern eine individuelle und intensive Vorbereitung auf den Test über das Geschehen im Kurs hinaus und erhöhen die Bestehenschancen bei der abschließenden Prüfung.
    c. Bereitschaft zur aktiven Mitarbeit im Kurs
    Der handlungsorientierte Ansatz des Einbürgerungskurses erfordert die Bereitschaft des Einzelnen, sich aktiv in die Gestaltung des Unterrichtsgeschehens einzubringen. Nur so können die Teilnehmer umfassend von der Vermittlung der Inhalte im Kurs profitieren.
 10. Methodisch-didaktische Prinzipien im Einbürgerungskurs
