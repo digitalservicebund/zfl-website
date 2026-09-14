@@ -125,6 +125,10 @@ const baseFinding = {
   locationLabel: z.string(), // "§ 14 S.2"
   reasoning: z.string(), // short explanation why this was flagged
   hint: z.string(), // experimental: suggestions, recommendations
+  // Verbatim quote the marker pair above wraps. Kept alongside the markers
+  // (not just used to place them) so the frontend can later match on this
+  // directly instead of the markers, without a skill/schema change.
+  quote: z.string(),
 };
 
 const findingType = z.discriminatedUnion("type", [

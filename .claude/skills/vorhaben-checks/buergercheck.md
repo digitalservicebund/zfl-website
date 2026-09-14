@@ -75,10 +75,7 @@ vorzuschlagen) erzeugst du **ein eigenes Finding**:
 1. **Exakte Textstelle zitieren:** Kopiere den relevanten Ausschnitt
    **wortwörtlich** aus dem übergebenen Gesetzestext (keine Paraphrase) —
    dieser Ausschnitt wird als `quote` in Teil 2 der Ausgabe (Schritt 4)
-   zurückgegeben. `quote` ist kein Teil des `findings`-Schemas aus
-   `src/content.config.ts` — er dient dem Orchestrator ausschließlich zur
-   späteren Marker-Platzierung im Gesetzestext und wird vor dem Speichern
-   der Findings-Liste wieder entfernt.
+   zurückgegeben.
 2. **Prinzip zuordnen:** Genau eines der 5 Prinzipien aus Schritt 2
    auswählen. Betrifft eine Stelle mehrere Prinzipien, erzeuge mehrere
    Findings (eines pro Prinzip), nicht ein Finding mit mehreren Tags.
@@ -117,9 +114,9 @@ wurden pro Prinzip (1–5) identifiziert? Gibt es besonders gravierende Befunde?
 
 ### 2. Strukturierte Findings-Liste (YAML)
 
-Gib **alle** Findings als YAML-Liste aus. Jedes Finding enthält exakt die
-Felder des `findings`-Arrays aus dem `potenziale`-Schema in
-`src/content.config.ts`, plus ein zusätzliches `quote`-Feld:
+Gib **alle** Findings als YAML-Liste aus, exakt im Format des
+`findings`-Arrays aus dem `potenziale`-Schema in `src/content.config.ts`
+(inklusive `quote`):
 
 ```yaml
 - type: "Bürgercheck"
@@ -128,9 +125,7 @@ Felder des `findings`-Arrays aus dem `potenziale`-Schema in
   locationLabel: "§ 14 Abs. 2" # nächstgelegene Gliederungsangabe (§, Art., Abs., S., Nr.) zur Textstelle
   reasoning: "..."
   hint: "..."
-  quote:
-    "..." # wortwörtliches Zitat aus Schritt 3.1 — nur für die Marker-Platzierung durch
-    # den Orchestrator, kein Teil des potenziale-Schemas, wird vor dem Speichern entfernt
+  quote: "..." # wortwörtliches Zitat aus Schritt 3.1
 ```
 
 Liegt laut Schritt 1 kein Bürgerbezug vor oder wurden keine Findings mit

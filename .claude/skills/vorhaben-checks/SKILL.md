@@ -77,11 +77,10 @@ mehr und beide Agent-Aufrufe können in **einer** Nachricht gestartet werden:
      4 Prüfschritte),
    - den Hinweis, das Ergebnis exakt im Ausgabeformat aus deren "Schritt 4"
      **als finale Nachricht zurückzugeben** (kurze Chat-Zusammenfassung sowie
-     die strukturierte Findings-Liste als YAML — Felder des `findings`-Arrays
-     aus `src/content.config.ts` plus je Finding ein zusätzliches
-     `quote`-Feld) — inkl. der Vorprüfung: bricht der Check mangels Bezug ab,
-     wird trotzdem genau dieses Ergebnis mit leerer Findings-Liste
-     zurückgegeben.
+     die strukturierte Findings-Liste als YAML, exakt im Format des
+     `findings`-Arrays aus `src/content.config.ts`, inklusive `quote`) —
+     inkl. der Vorprüfung: bricht der Check mangels Bezug ab, wird trotzdem
+     genau dieses Ergebnis mit leerer Findings-Liste zurückgegeben.
 2. Ein zweiter Agent mit `subagent_type: "fork"` für den Bürgercheck, parallel
    zum ersten gestartet (gleiche Nachricht, zweiter Tool-Aufruf). Der
    Fork-Agent bekommt:
@@ -110,8 +109,11 @@ Check jeweils auszuführen ist.
 
 1. Kombiniere die YAML-Findings-Listen aus den finalen Nachrichten beider
    Forks zu einer Liste (Digitalcheck-Findings gefolgt von
-   Bürgercheck-Findings). Jedes Finding trägt in dieser Zwischenliste noch
-   sein `quote`-Feld.
+   Bürgercheck-Findings). Jedes Finding behält dabei sein `quote`-Feld — es
+   ist Teil des `findings`-Schemas (`src/content.config.ts`) und wird mit
+   gespeichert, nicht nur für die Marker-Platzierung in Schritt 4.2 benutzt.
+   Das hält die Tür offen, Marker künftig durch client-seitiges Matching auf
+   `quote` zu ersetzen, ohne Skill oder Schema erneut anzufassen.
 2. Platziere die Marker **einmalig und zentral** im unveränderten
    Gesetzestext aus Schritt 2 (nicht mehr pro Fork):
    1. Schreibe den kompletten, unannotierten Gesetzestext aus Schritt 2
@@ -152,10 +154,8 @@ Check jeweils auszuführen ist.
      - `title`: offizieller Name des Gesetzes (ohne Abkürzung).
      - `eli`: ELI-Pfad aus Schritt 2 (optional — nur setzen, wenn das Gesetz
        über RIS gefunden wurde).
-     - `findings`: die kombinierte Liste aus Schritt 4.1, aber **ohne das
-       `quote`-Feld** (das war nur für die Marker-Platzierung in Schritt 4.2
-       nötig und ist kein Teil des `findings`-Schemas) — sonst unverändert
-       übernommen.
+     - `findings`: die kombinierte Liste aus Schritt 4.1, unverändert
+       übernommen (inklusive `quote` je Finding).
    - **Body:** der Inhalt der annotierten Gesetzestext-Datei aus Schritt 4.2.4
      — der vollständige Gesetzestext aus Schritt 2 inklusive aller darin
      eingefügten `<!--finding:{id}:start/end-->`-Marker beider Checks.
