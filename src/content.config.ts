@@ -104,7 +104,7 @@ const visualisierungen = defineCollection({
 const kiVisualisierungen = defineCollection({
   loader: glob({
     pattern: "*.yaml",
-    base: "src/pages/werkzeuge/visualisieren/_data",
+    base: "src/content/ki-visualisierungen",
   }),
   schema: z.object({
     title: z.string(),

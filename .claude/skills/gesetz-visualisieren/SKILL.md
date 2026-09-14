@@ -54,7 +54,7 @@ Reine Definitionskataloge oder unstrukturierte Aufzählungen eignen sich
 nicht.
 
 Bereits vorhandene Beispiele in diesem Repo (als Referenz für den
-Detailgrad, siehe `src/pages/werkzeuge/visualisieren/_data/*.yaml`):
+Detailgrad, siehe `src/content/ki-visualisierungen/*.yaml`):
 
 - KSchG: Anwendbarkeitsprüfung, Prüfschema "sozial ungerechtfertigt",
   Klagefristen-Kette, Sonderkündigungsschutz-Zeiträume, Anzeigeverfahren
@@ -86,7 +86,7 @@ echte Zeilenumbrüche), in doppelten Anführungszeichen; enthaltene `"` als
 `\"` und `\` als `\\` escapen.
 
 Stilkonventionen für das Diagramm selbst (siehe existierende Dateien unter
-`src/pages/werkzeuge/visualisieren/_data/{Abkuerzung}/*.mmd` für Beispiele):
+`src/content/ki-visualisierungen/{Abkuerzung}/*.mmd` für Beispiele):
 
 - Knotenlabels in doppelten Anführungszeichen, Zeilenumbrüche mit `<br/>`
   (nicht `\n`), damit lange Texte lesbar bleiben.
@@ -116,7 +116,7 @@ Stilkonventionen für das Diagramm selbst (siehe existierende Dateien unter
 Speichern:
 
 1. Lege pro Prozess eine Datei
-   `src/pages/werkzeuge/visualisieren/_data/{Abkuerzung}/{slug}.mmd`
+   `src/content/ki-visualisierungen/{Abkuerzung}/{slug}.mmd`
    an (`Abkuerzung` = amtliche Abkürzung des Gesetzes, z.B. `KSchG`;
    `slug` = kurzer, kebab-freier snake_case-Bezeichner ohne Abkürzungspräfix,
    z.B. `KSchG/klagefristen.mmd`). Frontmatter-Block (siehe oben) gefolgt
@@ -130,7 +130,7 @@ Speichern:
    die im Ausland/EU-Kontext gebräuchliche Abkürzung verwenden (z.B. `ELVR`
    statt einer selbst konstruierten wie `ELVVO`). Ist auch das nicht
    auffindbar, den Nutzer nach der gewünschten Abkürzung fragen statt zu raten.
-2. Ergänze `src/pages/werkzeuge/visualisieren/_data/{Abkuerzung}.yaml`:
+2. Ergänze `src/content/ki-visualisierungen/{Abkuerzung}.yaml`:
    - Falls das Gesetz dort noch keine Metadaten-Datei hat, eine neue Datei
      `{Abkuerzung}.yaml` (identisch zum Ordnernamen aus Schritt 1, z.B.
      `KSchG.yaml`) mit `title` (offizieller Name ohne Abkürzung), `eli`

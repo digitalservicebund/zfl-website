@@ -82,35 +82,35 @@ fileignoreconfig:
   - filename: src/components/global/AccordionMenu.test.ts
     allowed_patterns:
       - key
-  - filename: src/pages/werkzeuge/visualisieren/_data/HeizkostenV/geltungsbereich.mmd
+  - filename: src/content/ki-visualisierungen/HeizkostenV/geltungsbereich.mmd
     ignore_detectors: [filename]
-  - filename: src/pages/werkzeuge/visualisieren/_data/HeizkostenV/kostenverteilung.mmd
+  - filename: src/content/ki-visualisierungen/HeizkostenV/kostenverteilung.mmd
     ignore_detectors: [filename]
-  - filename: src/pages/werkzeuge/visualisieren/_data/HeizkostenV/kuerzungsrecht.mmd
+  - filename: src/content/ki-visualisierungen/HeizkostenV/kuerzungsrecht.mmd
     ignore_detectors: [filename]
-  - filename: src/pages/werkzeuge/visualisieren/_data/HeizkostenV/pflichtenkreislauf.mmd
+  - filename: src/content/ki-visualisierungen/HeizkostenV/pflichtenkreislauf.mmd
     ignore_detectors: [filename]
-  - filename: src/pages/werkzeuge/visualisieren/_data/GKG/kostenvorschusspflicht.mmd
+  - filename: src/content/ki-visualisierungen/GKG/kostenvorschusspflicht.mmd
     ignore_detectors: [filename]
-  - filename: src/pages/werkzeuge/visualisieren/_data/URV/registrierung.mmd
+  - filename: src/content/ki-visualisierungen/URV/registrierung.mmd
     checksum: b9b484659c20fb5daf957d0a561b06bfdee13bad48c88e0806e51fe604ff3985
-  - filename: src/pages/werkzeuge/visualisieren/_data/EinbTestV/datenverarbeitung.mmd
+  - filename: src/content/ki-visualisierungen/EinbTestV/datenverarbeitung.mmd
     ignore_detectors: [filename]
-  - filename: src/pages/werkzeuge/visualisieren/_data/ZirkRegV/datenverwendung.mmd
+  - filename: src/content/ki-visualisierungen/ZirkRegV/datenverwendung.mmd
     ignore_detectors: [filename]
-  - filename: src/pages/werkzeuge/visualisieren/_data/BKleingG/pachthoehe.mmd
+  - filename: src/content/ki-visualisierungen/BKleingG/pachthoehe.mmd
     checksum: 4ef525f5b449fc5f5863fbc1964e4ecdae41363aabf295290f6ad825956dc1fd
   - filename: src/pages/werkzeuge/visualisieren/_mermaid2RulemapXML.ts
     checksum: 01019ab0f49d7695a85a1e669ccca19f15620f8c6908a96eaa41c7a823a8e9f5
   - filename: src/pages/werkzeuge/_shared/ExampleFinder.svelte
     allowed_patterns: [handleKeydown]
-  - filename: src/pages/werkzeuge/potenziale/_data/BVerfGG_praxischeck.md
+  - filename: src/content/potenziale/BVerfGG_praxischeck.md
     checksum: 27ef255b262e083fdc998a00a1b3854bb9ae67bbbf3136584b81201c7d9ea42e
-  - filename: src/pages/werkzeuge/potenziale/_data/BVerfGG_buergercheck.md
+  - filename: src/content/potenziale/BVerfGG_buergercheck.md
     checksum: 92d5a661871648601adac55df6a15274c78843aa29d7e69a7a62d961ffbbd3c5
-  - filename: src/pages/werkzeuge/potenziale/_data/LuftVG_buergercheck.md
+  - filename: src/content/potenziale/LuftVG_buergercheck.md
     checksum: bb22599bc1fce83999a71d343f0715aa0b7aedef6ade8029b1eedd9fbcc44f14
-  - filename: src/pages/werkzeuge/potenziale/_data/ZirkRegV_buergercheck.md
+  - filename: src/content/potenziale/ZirkRegV_buergercheck.md
     checksum: faef13c94bed18ee8203bd49d8ccea99abc8a2a2baa9759ed7f9d809f0c11f82
   - filename: .claude/skills/gesetz-visualisieren/SKILL.md
     checksum: ce79ba7efa69a4f32e44fc592e62a672dcbd973485ac977b865ec6ff51deda64
@@ -120,13 +120,13 @@ fileignoreconfig:
     checksum: 5051e4b7042945790861ef7c625ba99c9b2aca151c9e823d12c93247d9bf51de
   - filename: .claude/skills/vorhaben-checks/buergercheck.md
     checksum: c50e5a44d463b748d548df853948cd7e478d1a2e1ee51240e77cfa248a60649c
-  - filename: src/pages/werkzeuge/potenziale/_data/HeizkostenV_buergercheck.md
+  - filename: src/content/potenziale/HeizkostenV_buergercheck.md
     checksum: 27f3b4e145771e0899a85d77aea83f42caaddb5c7027309ba67377aec1075470
-  - filename: src/pages/werkzeuge/potenziale/_data/LuftVG_digitalcheck.md
+  - filename: src/content/potenziale/LuftVG_digitalcheck.md
     checksum: 9d5981e3e0d94d1e2599cb728b481d0e434e8a914fc0e768188ca7c8bb69bfb0
-  - filename: src/pages/werkzeuge/potenziale/_data/GwG_buergercheck.md
+  - filename: src/content/potenziale/GwG_buergercheck.md
     checksum: 56d17e12e254f6b012a5aa6ea81d3c0ec1b2f5aa3580869ebac03dfd260b4845
-  - filename: src/pages/werkzeuge/potenziale/_data/GwG_digitalcheck.md
+  - filename: src/content/potenziale/GwG_digitalcheck.md
     checksum: a5bb033241a5ab143ad85749b820661aef77ab1a31f9536272e30951e6788fd2
   - filename: src/components/global/TocContainer.astro
     allowed_patterns:

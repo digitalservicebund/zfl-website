@@ -14,9 +14,9 @@
   import { createFakeLoadingSequence } from "../_shared/fakeLoading.ts";
   import Hint from "../_shared/Hint.svelte";
   import LoadingIndicator from "../_shared/LoadingIndicator.svelte";
-  import { getMermaid, getVisOptions, type VisOption } from "../_shared/api.ts";
+  import { getMermaid, getVisOptions } from "../_shared/api.ts";
   import Viewer from "./_Viewer.svelte";
-  import type { LawExample } from "./_types";
+  import type { LawExample, VisOption } from "./_types";
 
   let {
     examples,
@@ -42,10 +42,13 @@
   // the .mmd sources (see resolveNormLinks) are clickable.
   configureMermaid(true);
 
-  const mermaidSources = import.meta.glob<string>("./_data/*/*.mmd", {
-    query: "?raw",
-    import: "default",
-  });
+  const mermaidSources = import.meta.glob<string>(
+    "../../../content/ki-visualisierungen/*/*.mmd",
+    {
+      query: "?raw",
+      import: "default",
+    },
+  );
 
   function resolveNormLinks(source: string, eli: string): string {
     return source.replaceAll("{{ELI}}", resolveEliUrl(eli));
@@ -205,7 +208,7 @@
       isLoading = true;
       mermaidError = undefined;
 
-      const path = `./_data/${example.short}/${option.filename}.mmd`;
+      const path = `../../../content/ki-visualisierungen/${example.short}/${option.filename}.mmd`;
       const eli = example.eli;
 
       const { promise: fakeDelay, cancel } = createFakeLoadingSequence(

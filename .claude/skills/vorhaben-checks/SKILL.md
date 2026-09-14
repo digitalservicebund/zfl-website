@@ -128,7 +128,7 @@ Check jeweils auszuführen ist.
    gebräuchliche deutsche Abkürzung, die im Ausland/EU-Kontext gebräuchliche
    Abkürzung verwenden. Ist auch das nicht auffindbar, den Nutzer fragen
    statt zu raten.
-2. Lege genau eine Datei `src/pages/werkzeuge/potenziale/_data/{shortTitle}.md`
+2. Lege genau eine Datei `src/content/potenziale/{shortTitle}.md`
    an, passend zum `potenziale`-Schema aus `src/content.config.ts`:
    - **YAML-Frontmatter:**
      - `title`: offizieller Name des Gesetzes (ohne Abkürzung).
