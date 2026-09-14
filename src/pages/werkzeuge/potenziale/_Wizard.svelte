@@ -54,7 +54,7 @@
     selectedVorhabenType === "existing" ? selectedExample : analyzedDraftText,
   );
 
-  let selectedCheckType = $state<CheckType>();
+  let selectedCheckType = $state<CheckFilter>();
   let activeFinding = $state<FindingData>();
 
   const VORHABEN_STEP_STATUS_MESSAGES = [
@@ -62,18 +62,17 @@
     "Analysiere Prüfschemata …",
     "Bereite Checks vor …",
   ];
-  const CHECK_STEP_STATUS_MESSAGES = [
-    "Lade Prüfbericht …",
-    "Werte Ergebnisse aus …",
-    "Rendere Bericht …",
-  ];
   let loadingStatusMessage = $state(VORHABEN_STEP_STATUS_MESSAGES[0]);
 
   let isLoadingChecks = $state(false);
   let findings = $state<FindingData[]>([]);
   let checksError = $state<string>();
 
-  let checkTypes = $derived([
+  const ALLE_CHECK_TYPE = "alle" as const;
+  type CheckFilter = typeof ALLE_CHECK_TYPE | CheckType;
+
+  let checkTypes = $derived<CheckFilter[]>([
+    ALLE_CHECK_TYPE,
     ...new Set(findings.map((finding) => finding.type)),
   ]);
 
@@ -89,7 +88,7 @@
 
     let cancelled = false;
     isLoadingChecks = true;
-    selectedCheckType = undefined;
+    selectedCheckType = ALLE_CHECK_TYPE;
     activeFinding = undefined;
     findings = [];
     checksError = undefined;
@@ -153,9 +152,11 @@
   });
 
   let selectedFindings = $derived(
-    selectedCheckType
-      ? findings.filter((finding) => finding.type === selectedCheckType)
-      : [],
+    !selectedCheckType
+      ? []
+      : selectedCheckType === ALLE_CHECK_TYPE
+        ? findings
+        : findings.filter((finding) => finding.type === selectedCheckType),
   );
 
   let selectedFindingsGroups = $derived.by(() => {
@@ -171,33 +172,9 @@
     return [...groups.values()];
   });
 
-  let isLoadingReport = $state(false);
-
   $effect(() => {
-    if (!selectedCheckType) {
-      isLoadingReport = false;
-      return;
-    }
-
+    selectedCheckType;
     activeFinding = undefined;
-
-    let cancelled = false;
-    isLoadingReport = true;
-
-    const { promise, cancel } = createFakeLoadingSequence(
-      CHECK_STEP_STATUS_MESSAGES,
-      (message) => (loadingStatusMessage = message),
-    );
-
-    promise.then(() => {
-      if (cancelled) return;
-      isLoadingReport = false;
-    });
-
-    return () => {
-      cancelled = true;
-      cancel();
-    };
   });
 </script>
 
@@ -255,20 +232,20 @@
       {:else}
         {#if !isLoadingChecks}
           <div class="kern-form-input">
-            <span class="kern-label">Welchen Check möchten Sie machen?</span>
+            <span class="kern-label">Ergebnisse nach Check filtern</span>
             <div class="mt-8 flex flex-wrap gap-8">
               {#each checkTypes as checkType (checkType)}
                 <ChipBtn
                   selected={checkType === selectedCheckType}
                   onclick={() => (selectedCheckType = checkType)}
                 >
-                  {checkType}
+                  {checkType === ALLE_CHECK_TYPE ? "Alle" : checkType}
                 </ChipBtn>
               {/each}
             </div>
           </div>
         {/if}
-        {#if isLoadingChecks || isLoadingReport}
+        {#if isLoadingChecks}
           <LoadingIndicator message={loadingStatusMessage} />
         {:else if selectedFindings.length}
           <div class="space-y-12">

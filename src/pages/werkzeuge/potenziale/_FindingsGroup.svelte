@@ -37,6 +37,9 @@
     class="flex w-full cursor-pointer items-center gap-12 rounded-sm p-16 text-left hover:bg-lavender-100 focus-visible:outline-4 focus-visible:outline-(--kern-color-action-focus-default) outline-offset-2 bg-lavender-200"
     onclick={toggleExpanded}
   >
+    <span class="kern-badge kern-badge--tag shrink-0">
+      <span class="kern-label">{findingsGroup[0].type}</span>
+    </span>
     <span class={`kern-badge ${tagMeta.badgeClass} shrink-0`}>
       <span class="kern-label">{findingsGroup[0].tag}</span>
     </span>
