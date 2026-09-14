@@ -1,6 +1,6 @@
 <script lang="ts">
   import { untrack } from "svelte";
-  import { SvelteURLSearchParams } from "svelte/reactivity";
+  import { SvelteURLSearchParams, SvelteMap } from "svelte/reactivity";
   import { werkzeuge_visualisieren } from "@/config/routes";
   import { getChecks } from "../_shared/api.ts";
   import ChipBtn from "../_shared/ChipBtn.svelte";
@@ -160,7 +160,7 @@
   );
 
   let selectedFindingsGroups = $derived.by(() => {
-    const groups = new Map<string, FindingData[]>();
+    const groups = new SvelteMap<string, FindingData[]>();
     for (const finding of selectedFindings) {
       const group = groups.get(finding.tag);
       if (group) {
