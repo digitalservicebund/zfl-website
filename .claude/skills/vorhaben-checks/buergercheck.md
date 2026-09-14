@@ -47,43 +47,23 @@ mehrerer Prinzipien zu einem Finding.
 
 ### (`Prinzip 1`) Strukturierte Zielgruppen-/Adressatenanalyse sicherstellen
 
-Wer ist von der Regelung wie stark betroffen? Sind die Zielgruppen und
-Adressat:innen klar identifiziert, inklusive besonderer Hürden, Vorkenntnisse
-oder Vulnerabilitäten innerhalb dieser Gruppen? Eine unvollständige oder zu
-grobe Zielgruppenanalyse führt dazu, dass Regelungen an der Lebenswirklichkeit
-von Teilgruppen vorbeigehen.
+Wo adressiert der Text spezifische Gruppen? Wo fehlen notwendige Differenzierungen (z. B. zwischen gewerblichen Akteuren, privaten Bürgerinnen/Bürgern, "Hereinwachsenden" oder besonders belasteten Gruppen)?
 
 ### (`Prinzip 2`) Gewährleisten, dass Zielgruppen die erforderlichen Handlungsfähigkeiten besitzen, um den Erfordernissen des Regelungsvorhabens nachzukommen
 
-Was müssen Bürgerinnen und Bürger konkret wissen und tun, um der Regelung
-nachzukommen ("die letzte Meile")? Reichen Wissen, Fähigkeiten und Ressourcen
-der Zielgruppen dafür aus, oder droht Überforderung, Bürokratiefrust bzw.
-Nicht-Inanspruchnahme, weil Anforderungen zu komplex, voraussetzungsreich oder
-unklar formuliert sind?
+Wo erlegt der Text Pflichten, Duldungen, Fristen oder Nachweise auf? Haben die betroffenen Bürgerinnen und Bürger die erforderlichen kognitiven, zeitlichen oder praktischen Fähigkeiten, um diesen Erfordernissen problemlos nachzukommen?
 
 ### (`Prinzip 3`) Lebenslagen und Begleitumstände aus Sicht der Bürgerinnen und Bürger berücksichtigen
 
-Passt die Regelung — insbesondere Fristen, Nachweispflichten und ihre
-zeitliche Abfolge — in den Lebensalltag, die Lebenslage und den
-Lebensereignisverlauf der Zielgruppen? Werden typische Begleitumstände (z. B.
-Krisensituationen, mehrfache gleichzeitige Betroffenheit, fehlende
-Unterstützung) mitgedacht?
+In welchen Alltagssituationen, Kalendermomenten oder Lebensphasen greift die Regelung? Harmonieren die gesetzlichen Vorgaben mit den realen Lebensumständen der Betroffenen oder entstehen unnötige Belastungen?
 
 ### (`Prinzip 4`) Verbraucherinformationen und Kontaktpunkte zu den Bürgerinnen und Bürgern nutzerfreundlich, praxistauglich und wo möglich automatisiert gestalten
 
-Wie treten Bürgerinnen und Bürger mit der Verwaltung bzw. der Regelung in
-Interaktion (Antrags-, Melde- oder Auskunftsprozesse, digital wie analog)?
-Sind diese Kontaktpunkte verständlich, medienbruchfrei und, wo möglich,
-automatisiert gestaltet, oder drohen Hürden durch komplizierte Formulare,
-Identifikationsverfahren oder unklare Informationsangebote?
+Wo entstehen Schnittstellen zwischen Bürgerinnen/Bürgern und der Verwaltung? Wo schreibt der Text analoge Aufwände, Nachweise oder Schriftformerfordernisse vor? Wo bestehen Chancen für eine bürgerfreundliche Informationsvermittlung oder eine vollständige Automatisierung von Prozessen?
 
 ### (`Prinzip 5`) Trade-off zwischen Einzelfallgerechtigkeit und Inanspruchnahme / Automatisierbarkeit von Prozessen berücksichtigen
 
-Ist die Regelungsstruktur ("Für wen gilt was?") klar und verständlich
-aufgebaut, oder erschweren komplexe Ausnahmen, Schwellenwerte und
-Einzelfallprüfungen die Nachvollziehbarkeit? Wurde bewusst abgewogen zwischen
-Einzelfallgerechtigkeit einerseits und einfacher Inanspruchnahme sowie
-Automatisierbarkeit des Verfahrens andererseits?
+Wo führt eine extrem detaillierte Einzelfallprüfung im Text zu hoher Komplexität, Bürokratie oder einer geringen Inanspruchnahme von Leistungen? Wo bietet der Text Chancen für Standardisierung, Pauschalierung, Typisierung oder "Digital-first"-Logiken?
 
 ## Schritt 3: Findings identifizieren
 

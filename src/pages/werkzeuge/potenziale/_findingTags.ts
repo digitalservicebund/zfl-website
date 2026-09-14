@@ -285,27 +285,27 @@ const DIGITALCHECK_TAG_META: Record<string, TagMeta> = {
 // Titles from buergercheck.md Schritt 2 — keep in sync when that file changes.
 const BUERGERCHECK_TAG_META: Record<string, TagMeta> = {
   "Prinzip 1": {
-    title: "Strukturierte Zielgruppen-/Adressatenanalyse sicherstellen",
+    title: "Zielgruppen- und Adressatenanalyse",
     badgeClass: "kern-badge--tag",
   },
   "Prinzip 2": {
-    title: "Handlungsfähigkeit der Zielgruppen sicherstellen",
+    title: "Handlungsfähigkeit gewährleisten",
     subtitle:
       "Gewährleisten, dass Zielgruppen die erforderlichen Handlungsfähigkeiten besitzen, um den Erfordernissen des Regelungsvorhabens nachzukommen",
     badgeClass: "kern-badge--tag",
   },
   "Prinzip 3": {
-    title: "Lebenslagen der Bürgerinnen und Bürger berücksichtigen",
+    title: "Lebenslagen berücksichtigen",
     badgeClass: "kern-badge--tag",
   },
   "Prinzip 4": {
-    title: "Verbraucherinformationen nutzerfreundlich gestalten",
+    title: "Nutzerfreundliche Kontaktpunkte",
     subtitle:
       "Verbraucherinformationen und Kontaktpunkte zu den Bürgerinnen und Bürgern nutzerfreundlich, praxistauglich und wo möglich automatisiert gestalten",
     badgeClass: "kern-badge--tag",
   },
   "Prinzip 5": {
-    title: "Einzelfallgerechtigkeit und Automatisierbarkeit abwägen",
+    title: "Einzelfallgerechtigkeit vs. Automatisierbarkeit",
     subtitle:
       "Trade-off zwischen Einzelfallgerechtigkeit und Inanspruchnahme / Automatisierbarkeit von Prozessen berücksichtigen",
     badgeClass: "kern-badge--tag",
