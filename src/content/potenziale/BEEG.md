@@ -170,6 +170,217 @@ findings:
     reasoning: "Die hochpräzise, mehrstufige Ermittlung der Steuerabzüge (eigener Programmablaufplan, mehrere Pauschalen, Steuerklassenlogik über mehrere Paragraphen hinweg) erkauft Einzelfallgenauigkeit mit einer für Bürger:innen praktisch nicht mehr nachvollziehbaren Berechnung."
     hint: "Eine vereinfachte, pauschalierte Nettoberechnung als Regelfall anbieten (mit Option auf die genaue Berechnung bei Bedarf), statt die volle Komplexität für jede berechtigte Person verpflichtend vorzuschreiben."
     quote: "Die Abzüge für Steuern werden einheitlich für Einkommen aus nichtselbstständiger und selbstständiger Erwerbstätigkeit auf Grundlage einer Berechnung anhand des am 1. Januar des Kalenderjahres vor der Geburt des Kindes für dieses Jahr geltenden Programmablaufplans für die maschinelle Berechnung der vom Arbeitslohn einzubehaltenden Lohnsteuer, des Solidaritätszuschlags und der Maßstabsteuer für die Kirchenlohnsteuer im Sinne von § 39b Absatz 6 des Einkommensteuergesetzes nach den Maßgaben der Absätze 2 bis 5 ermittelt."
+obligations:
+  - id: "610bd641-53e5-4dda-80f6-31aa85714832"
+    who: "die nach § 12 Absatz 1 zuständige Behörde"
+    summary: "Elterngeld im Laufe des jeweiligen Lebensmonats auszahlen."
+    locationLabel: "§ 6"
+    quote: "Elterngeld wird im Laufe des Lebensmonats gezahlt, für den es bestimmt ist."
+  - id: "6660ab3c-436f-4af2-8ed3-b742142ec9eb"
+    who: "Antragstellerin oder Antragsteller"
+    summary: "Elterngeld schriftlich beantragen."
+    locationLabel: "§ 7 Abs. 1"
+    quote: "Elterngeld ist schriftlich zu beantragen."
+  - id: "d70d4d8d-8ed7-4940-aae2-63ce256976d7"
+    who: "Antragstellerin oder Antragsteller"
+    summary: "Im Antrag angeben, für welche Lebensmonate Basiselterngeld, Elterngeld Plus oder Partnerschaftsbonus beantragt wird."
+    locationLabel: "§ 7 Abs. 1"
+    quote: "Im Antrag ist anzugeben, für welche Lebensmonate Basiselterngeld, für welche Lebensmonate Elterngeld Plus oder für welche Lebensmonate Partnerschaftsbonus beantragt wird."
+  - id: "0c1690c5-f985-4452-a641-8e94a2f17476"
+    who: "Antragstellerin oder Antragsteller"
+    summary: "Antrag eigenhändig unterschreiben (außer bei alleinigem Sorgerecht oder Antrag nach § 4c)."
+    locationLabel: "§ 7 Abs. 3"
+    quote: "Der Antrag ist, außer im Fall des § 4c und der Antragstellung durch eine allein sorgeberechtigte Person, zu unterschreiben von der Person, die ihn stellt"
+  - id: "9de2a5f3-e622-4151-8652-740a147a979a"
+    who: "die andere berechtigte Person"
+    summary: "Zur Bestätigung der Kenntnisnahme den Antrag mitunterschreiben."
+    locationLabel: "§ 7 Abs. 3"
+    quote: "und zur Bestätigung der Kenntnisnahme auch von der anderen berechtigten Person"
+  - id: "3363254b-0a6c-412c-b31e-97f164cbd402"
+    who: "Antragstellerin oder Antragsteller"
+    summary: "Nach Ablauf des Bezugszeitraums das tatsächliche Einkommen aus Erwerbstätigkeit nachweisen, wenn im Antrag Angaben zum voraussichtlichen Einkommen gemacht wurden."
+    locationLabel: "§ 8 Abs. 1"
+    quote: "ist nach Ablauf des Bezugszeitraums für diese Zeit das tatsächliche Einkommen aus Erwerbstätigkeit nachzuweisen"
+  - id: "edf49438-5b96-4a48-a97b-e8536fe60342"
+    who: "die andere berechtigte Person"
+    summary: "Unterliegt in den Fällen des § 1 Absatz 8 Satz 2 sowie des Partnerschaftsbonus (§ 4b) den Mitwirkungspflichten nach § 60 SGB I."
+    locationLabel: "§ 8 Abs. 1a"
+    quote: "Die Mitwirkungspflichten nach § 60 des Ersten Buches Sozialgesetzbuch gelten"
+  - id: "c8e70984-a3ca-49a5-8e38-e77fc5889999"
+    who: "Arbeitgeber"
+    summary: "Der zuständigen Behörde auf Verlangen Arbeitsentgelt, Abzugsmerkmale und Arbeitszeit der Beschäftigten bescheinigen; gilt auch für ehemalige Arbeitgeber."
+    locationLabel: "§ 9 Abs. 1"
+    quote: "hat der Arbeitgeber der nach § 12 zuständigen Behörde für bei ihm Beschäftigte das Arbeitsentgelt, die für die Ermittlung der nach den §§ 2e und 2f erforderlichen Abzugsmerkmale für Steuern und Sozialabgaben sowie die Arbeitszeit auf Verlangen zu bescheinigen; das Gleiche gilt für ehemalige Arbeitgeber"
+  - id: "22ab3701-ff16-4297-aeb7-6d32ae98a729"
+    who: "die nach § 12 Absatz 1 zuständige Behörde"
+    summary: "Das elektronische Abfrageverfahren nach § 108a Absatz 1 SGB IV nur mit vorheriger Einwilligung der betroffenen Arbeitnehmerin oder des betroffenen Arbeitnehmers nutzen."
+    locationLabel: "§ 9 Abs. 2"
+    quote: "Sie darf dieses Verfahren nur nutzen, wenn die betroffene Arbeitnehmerin oder der betroffene Arbeitnehmer zuvor in dessen Nutzung eingewilligt hat."
+  - id: "3460cffb-2ede-4903-af47-aa9c8ee2d30d"
+    who: "Arbeitgeber"
+    summary: "Entgeltbescheinigungsdaten mit dem Verfahren nach § 108a Absatz 1 SGB IV übermitteln, wenn ein systemgeprüftes Entgeltabrechnungsprogramm genutzt wird."
+    locationLabel: "§ 9 Abs. 2"
+    quote: "ist er verpflichtet, die jeweiligen Entgeltbescheinigungsdaten mit dem in § 108a Absatz 1 des Vierten Buches Sozialgesetzbuch vorgesehenen Verfahren zu übermitteln"
+  - id: "dba58021-8d2e-4830-aa6d-d27114ceedbe"
+    who: "die nach § 12 Absatz 1 zuständige Behörde"
+    summary: "Zur Elternzeit beraten."
+    locationLabel: "§ 12 Abs. 2"
+    quote: "Den nach Absatz 1 zuständigen Behörden obliegt auch die Beratung zur Elternzeit."
+  - id: "1de78538-86e2-4dc6-8a94-8a9815a6f0a4"
+    who: "die nach § 12 Absatz 1 zuständige Behörde"
+    summary: "Mit dem Elterngeldvollzug zusammenhängende Einnahmen an den Bund abführen."
+    locationLabel: "§ 12 Abs. 3"
+    quote: "Die damit zusammenhängenden Einnahmen sind an den Bund abzuführen."
+  - id: "cb71c9ab-f569-4303-87ba-4b250c614a90"
+    who: "Arbeitnehmerin oder Arbeitnehmer"
+    summary: "Während der Elternzeit nicht mehr als 32 Wochenstunden im Monatsdurchschnitt erwerbstätig sein."
+    locationLabel: "§ 15 Abs. 4"
+    quote: "Die Arbeitnehmerin oder der Arbeitnehmer darf während der Elternzeit nicht mehr als 32 Wochenstunden im Durchschnitt des Monats erwerbstätig sein."
+  - id: "d0d0d31b-d046-470d-a525-6c55b53ba255"
+    who: "Arbeitgeber"
+    summary: "Ablehnung des Antrags auf Verringerung der Arbeitszeit dem Arbeitnehmer oder der Arbeitnehmerin fristgerecht und begründet mitteilen."
+    locationLabel: "§ 15 Abs. 5"
+    quote: "Lehnt der Arbeitgeber den Antrag ab, so hat er dies dem Arbeitnehmer oder der Arbeitnehmerin innerhalb der Frist nach Satz 3 mit einer Begründung mitzuteilen."
+  - id: "7539921c-4fa0-44bb-9599-4c0a4fd40c84"
+    who: "Arbeitnehmerin oder Arbeitnehmer"
+    summary: "Anspruch auf Verringerung der Arbeitszeit dem Arbeitgeber fristgerecht (7 bzw. 13 Wochen vor Beginn) in Textform mitteilen."
+    locationLabel: "§ 15 Abs. 7 Nr. 5"
+    quote: "der Anspruch auf Teilzeit wurde dem Arbeitgeber"
+  - id: "06211e36-1df6-4f01-9987-ebd2806c360a"
+    who: "Arbeitnehmerin oder Arbeitnehmer"
+    summary: "Im Antrag auf Verringerung der Arbeitszeit Beginn und Umfang der verringerten Arbeitszeit angeben."
+    locationLabel: "§ 15 Abs. 7"
+    quote: "Der Antrag muss den Beginn und den Umfang der verringerten Arbeitszeit enthalten."
+  - id: "292adab2-d5e8-4e51-923b-c0dcd0e8edee"
+    who: "Arbeitgeber"
+    summary: "Ablehnung der beanspruchten Verringerung oder Verteilung der Arbeitszeit fristgerecht, begründet und in Textform erklären."
+    locationLabel: "§ 15 Abs. 7"
+    quote: "muss die Ablehnung innerhalb der in Satz 5 genannten Frist und mit Begründung in Textform erfolgen"
+  - id: "c2eea652-b98b-41a9-b6a5-4467a45385b4"
+    who: "Arbeitnehmerin oder Arbeitnehmer"
+    summary: "Elternzeit fristgerecht (7 bzw. 13 Wochen vor Beginn) in Textform vom Arbeitgeber verlangen."
+    locationLabel: "§ 16 Abs. 1"
+    quote: "vor Beginn der Elternzeit in Textform vom Arbeitgeber verlangen"
+  - id: "993e64cf-3cdd-4bec-89bb-411163493616"
+    who: "Arbeitnehmerin oder Arbeitnehmer"
+    summary: "Gleichzeitig mit dem Verlangen nach Elternzeit erklären, für welche Zeiten innerhalb von zwei Jahren Elternzeit genommen werden soll."
+    locationLabel: "§ 16 Abs. 1"
+    quote: "muss sie oder er gleichzeitig erklären, für welche Zeiten innerhalb von zwei Jahren Elternzeit genommen werden soll"
+  - id: "38d27ee4-4f55-4bf4-b03d-16b189150df9"
+    who: "Arbeitgeber"
+    summary: "Die Elternzeit bescheinigen."
+    locationLabel: "§ 16 Abs. 1"
+    quote: "Der Arbeitgeber hat dem Arbeitnehmer oder der Arbeitnehmerin die Elternzeit zu bescheinigen."
+  - id: "dc72efb4-53d3-41a0-b79e-8746b0ea209a"
+    who: "Arbeitnehmerin oder Arbeitnehmer"
+    summary: "Bei Arbeitgeberwechsel auf Verlangen des neuen Arbeitgebers eine Bescheinigung des früheren Arbeitgebers über bereits genommene Elternzeit vorlegen."
+    locationLabel: "§ 16 Abs. 1"
+    quote: "ist bei der Anmeldung der Elternzeit auf Verlangen des neuen Arbeitgebers eine Bescheinigung des früheren Arbeitgebers über bereits genommene Elternzeit durch die Arbeitnehmerin oder den Arbeitnehmer vorzulegen"
+  - id: "08055fe6-1935-493c-a7d4-088d3d328395"
+    who: "Arbeitnehmerin oder Arbeitnehmer"
+    summary: "Eine Änderung in der Anspruchsberechtigung dem Arbeitgeber unverzüglich mitteilen."
+    locationLabel: "§ 16 Abs. 5"
+    quote: "Eine Änderung in der Anspruchsberechtigung hat der Arbeitnehmer oder die Arbeitnehmerin dem Arbeitgeber unverzüglich mitzuteilen."
+  - id: "ad309adf-6be7-4c25-b7f2-75c8d28f457d"
+    who: "Arbeitgeber"
+    summary: "Nicht genommenen Resturlaub nach der Elternzeit im laufenden oder nächsten Urlaubsjahr gewähren."
+    locationLabel: "§ 17 Abs. 2"
+    quote: "hat der Arbeitgeber den Resturlaub nach der Elternzeit im laufenden oder im nächsten Urlaubsjahr zu gewähren"
+  - id: "f9dc9bb1-d30f-4658-aee0-ed332adbd03b"
+    who: "Arbeitgeber"
+    summary: "Bei Beendigung des Arbeitsverhältnisses während oder im Anschluss an die Elternzeit noch nicht gewährten Urlaub abgelten."
+    locationLabel: "§ 17 Abs. 3"
+    quote: "so hat der Arbeitgeber den noch nicht gewährten Urlaub abzugelten"
+  - id: "79c12f69-96a9-47ad-88a4-5493ef9710dd"
+    who: "Arbeitgeber"
+    summary: "Ab dem Verlangen der Elternzeit das Arbeitsverhältnis nicht kündigen."
+    locationLabel: "§ 18 Abs. 1"
+    quote: "Der Arbeitgeber darf das Arbeitsverhältnis ab dem Zeitpunkt, von dem an Elternzeit verlangt worden ist, nicht kündigen."
+  - id: "4a0bc904-1706-4fbd-89b0-50b442d58d92"
+    who: "Arbeitgeber"
+    summary: "Während der Elternzeit das Arbeitsverhältnis nicht kündigen."
+    locationLabel: "§ 18 Abs. 1"
+    quote: "Während der Elternzeit darf der Arbeitgeber das Arbeitsverhältnis nicht kündigen."
+  - id: "bcfb6dc2-9920-46d0-ab99-267e43960b08"
+    who: "Arbeitnehmerin oder Arbeitnehmer"
+    summary: "Bei Kündigung zum Ende der Elternzeit eine Kündigungsfrist von drei Monaten einhalten."
+    locationLabel: "§ 19"
+    quote: "kann das Arbeitsverhältnis zum Ende der Elternzeit nur unter Einhaltung einer Kündigungsfrist von drei Monaten kündigen"
+  - id: "985f68b5-a8b1-4b2d-9fdb-b195dda64a76"
+    who: "Statistisches Bundesamt"
+    summary: "Laufende Erhebungen zum Bezug von Elterngeld als Bundesstatistik zentral durchführen."
+    locationLabel: "§ 22 Abs. 1"
+    quote: "sind laufende Erhebungen zum Bezug von Elterngeld als Bundesstatistiken durchzuführen. Die Erhebungen erfolgen zentral beim Statistischen Bundesamt."
+  - id: "c617f140-8380-4690-bd23-e975b0d70c7a"
+    who: "die nach § 12 Absatz 1 zuständige Behörde"
+    summary: "Bestimmte Erhebungsmerkmale für jeden Lebensmonat des Kindes im möglichen Leistungsbezugszeitraum an das Statistische Bundesamt melden."
+    locationLabel: "§ 22 Abs. 2"
+    quote: "Die Angaben nach den Nummern 2, 3, 5 und 6 sind für jeden Lebensmonat des Kindes bezogen auf den nach § 4 Absatz 1 möglichen Zeitraum des Leistungsbezugs zu melden."
+  - id: "9630e19f-12ad-415a-9a1b-97f2bba4de2b"
+    who: "die nach § 12 Absatz 1 zuständige Behörde"
+    summary: "Für die Erhebung nach § 22 gegenüber dem Statistischen Bundesamt auskunftspflichtig sein."
+    locationLabel: "§ 23 Abs. 1"
+    quote: "Auskunftspflichtig sind die nach § 12 Absatz 1 zuständigen Stellen."
+  - id: "55cccdc3-6bc0-4469-872e-617a0f02259a"
+    who: "Antragstellerin oder Antragsteller"
+    summary: "Gegenüber der zuständigen Behörde zu den Erhebungsmerkmalen nach § 22 Absatz 2 auskunftspflichtig sein."
+    locationLabel: "§ 23 Abs. 2"
+    quote: "Die Antragstellerin oder der Antragsteller ist gegenüber den nach § 12 Absatz 1 zuständigen Stellen zu den Erhebungsmerkmalen nach § 22 Absatz 2 auskunftspflichtig."
+  - id: "71fee70a-64d4-4954-b9f4-537666db1f48"
+    who: "die nach § 12 Absatz 1 zuständige Behörde"
+    summary: "Nicht vollzugsnotwendige Angaben nach § 22 Absatz 2 Satz 1 Nummer 8 getrennt verarbeiten, nur zur Übermittlung an das Statistische Bundesamt verwenden und nach Übermittlung unverzüglich löschen."
+    locationLabel: "§ 23 Abs. 2"
+    quote: "dürfen die Angaben nach § 22 Absatz 2 Satz 1 Nummer 8, soweit sie für den Vollzug dieses Gesetzes nicht erforderlich sind, nur durch technische und organisatorische Maßnahmen getrennt von den übrigen Daten nach § 22 Absatz 2 und nur für die Übermittlung an das Statistische Bundesamt verwenden und haben diese unverzüglich nach Übermittlung an das Statistische Bundesamt zu löschen"
+  - id: "d7f24034-562c-4c7a-a6ad-b1839ea8d77f"
+    who: "die nach § 12 Absatz 1 zuständige Behörde"
+    summary: "Die in sich schlüssigen Angaben als Einzeldatensätze elektronisch binnen 30 Arbeitstagen nach Ablauf des Berichtszeitraums an das Statistische Bundesamt übermitteln."
+    locationLabel: "§ 23 Abs. 3"
+    quote: "sind als Einzeldatensätze elektronisch bis zum Ablauf von 30 Arbeitstagen nach Ablauf des Berichtszeitraums an das Statistische Bundesamt zu übermitteln"
+  - id: "c098daa3-aca2-4fd0-b23a-625b9ab32937"
+    who: "Statistisches Bundesamt"
+    summary: "Tabellen mit statistischen Ergebnissen ausschließlich zu Planungs- und nicht zu Einzelfallzwecken an die fachlich zuständigen obersten Bundes- oder Landesbehörden übermitteln, wobei Tabellen mit Einzelfallausweis nur bis Regierungsbezirksebene aufbereitet übermittelt werden dürfen."
+    locationLabel: "§ 24"
+    quote: "übermittelt das Statistische Bundesamt Tabellen mit statistischen Ergebnissen, auch soweit Tabellenfelder nur einen einzigen Fall ausweisen, an die fachlich zuständigen obersten Bundes- oder Landesbehörden"
+  - id: "5a0b6796-8602-4762-b5fd-d1a19e01a849"
+    who: "Statistisches Bundesamt"
+    summary: "Auf Anforderung des zuständigen Bundesministeriums Einzelangaben ohne Hilfsmerkmale (außer Kennnummer) für Mikrosimulationsmodelle übermitteln, nur im erforderlichen Umfang und mittels sicheren Datentransfers."
+    locationLabel: "§ 24a Abs. 1"
+    quote: "übermittelt das Statistische Bundesamt auf Anforderung des fachlich zuständigen Bundesministeriums diesem oder von ihm beauftragten Forschungseinrichtungen Einzelangaben ab dem Jahr 2007 ohne Hilfsmerkmale mit Ausnahme des Merkmals nach § 22 Absatz 3 Nummer 3 für die Entwicklung und den Betrieb von Mikrosimulationsmodellen"
+  - id: "1e4f2697-e1c5-4dde-af22-579e3596f3c2"
+    who: "Statistisches Bundesamt"
+    summary: "Bei der Datenverarbeitung das Statistikgeheimnis wahren und die organisatorische Trennung von statistischen und nichtstatistischen Aufgaben gewährleisten."
+    locationLabel: "§ 24a Abs. 2"
+    quote: "ist das Statistikgeheimnis nach § 16 des Bundesstatistikgesetzes zu wahren. Dafür ist die Trennung von statistischen und nichtstatistischen Aufgaben durch Organisation und Verfahren zu gewährleisten."
+  - id: "33fc60b1-9f84-4b1f-a84b-7ae674394d97"
+    who: "Empfängerinnen und Empfänger von Einzelangaben nach Absatz 1"
+    summary: "Übermittelte Daten nur für den Zweck verwenden, für den sie übermittelt wurden."
+    locationLabel: "§ 24a Abs. 2"
+    quote: "Die nach Absatz 1 übermittelten Daten dürfen nur für die Zwecke verwendet werden, für die sie übermittelt wurden."
+  - id: "30b11181-a308-44ef-bd42-e41bb2032781"
+    who: "Empfängerinnen und Empfänger von Einzelangaben nach Absatz 1"
+    summary: "Übermittelte Einzeldaten nach Zweckerreichung löschen."
+    locationLabel: "§ 24a Abs. 2"
+    quote: "Die übermittelten Einzeldaten sind nach dem Erreichen des Zweckes zu löschen, zu dem sie übermittelt wurden."
+  - id: "ad716408-7901-4c8a-8ce5-fa9aa4867743"
+    who: "Empfängerinnen und Empfänger von Einzelangaben nach Absatz 1"
+    summary: "Der Pflicht zur Geheimhaltung nach § 16 Absatz 1 und 10 Bundesstatistikgesetz unterliegen."
+    locationLabel: "§ 24a Abs. 3"
+    quote: "unterliegen der Pflicht zur Geheimhaltung nach § 16 Absatz 1 und 10 des Bundesstatistikgesetzes"
+  - id: "6229930a-22f5-4e6f-9ca9-1144258db083"
+    who: "Statistisches Bundesamt"
+    summary: "Personen, die Einzelangaben erhalten sollen und nicht Amtsträger oder besonders Verpflichtete sind, vor der Übermittlung zur Geheimhaltung verpflichten."
+    locationLabel: "§ 24a Abs. 3"
+    quote: "sind vor der Übermittlung zur Geheimhaltung zu verpflichten"
+  - id: "d89695c8-b2b5-49f3-bdab-24039bf6e1b4"
+    who: "Empfängerinnen und Empfänger von Einzelangaben nach Absatz 1"
+    summary: "Aus der Tätigkeit gewonnene Erkenntnisse nur für die Zwecke nach Absatz 1 verwenden."
+    locationLabel: "§ 24a Abs. 3"
+    quote: "Die Empfängerinnen und Empfänger von Einzelangaben dürfen aus ihrer Tätigkeit gewonnene Erkenntnisse nur für die in Absatz 1 genannten Zwecke verwenden."
+  - id: "e7c6c401-e0ee-421f-916f-896f7d449e76"
+    who: "Elternteil"
+    summary: "Bei Aufschub des Elterngeldbezugs wegen systemrelevanter Tätigkeit den Bezug der verschobenen Lebensmonate spätestens bis zum 30. Juni 2021 antreten."
+    locationLabel: "§ 27 Abs. 1"
+    quote: "Der Bezug der verschobenen Lebensmonate ist spätestens bis zum 30. Juni 2021 anzutreten."
 ---
 
 Gesetz zum Elterngeld und zur Elternzeit (BEEG)
@@ -800,13 +1011,13 @@ Die Absätze 1 und 2 gelten in den Fällen des § 1 Absatz 3 und 4 entsprechend.
 
 ## § 6 Auszahlung
 
-Elterngeld wird im Laufe des Lebensmonats gezahlt, für den es bestimmt ist.
+<!--obligation:610bd641-53e5-4dda-80f6-31aa85714832:start-->Elterngeld wird im Laufe des Lebensmonats gezahlt, für den es bestimmt ist.<!--obligation:610bd641-53e5-4dda-80f6-31aa85714832:end-->
 
 ## § 7 Antragstellung
 
 (1)
 <!--finding:39579c6d-12cb-4121-82cc-e175ca59f92a:start-->
-<!--finding:b6143efc-3c5e-4607-8007-589c4ad79cbf:start-->Elterngeld ist schriftlich zu beantragen<!--finding:b6143efc-3c5e-4607-8007-589c4ad79cbf:end--><!--finding:39579c6d-12cb-4121-82cc-e175ca59f92a:end-->. <!--finding:b9ad43ee-e605-45b8-bbed-0d91036dda7c:start-->Es wird rückwirkend nur für die letzten drei Lebensmonate vor Beginn des Lebensmonats geleistet, in dem der Antrag auf Elterngeld eingegangen ist.<!--finding:b9ad43ee-e605-45b8-bbed-0d91036dda7c:end--> Im Antrag ist anzugeben, für welche Lebensmonate Basiselterngeld, für welche Lebensmonate Elterngeld Plus oder für welche Lebensmonate Partnerschaftsbonus beantragt wird.
+<!--obligation:6660ab3c-436f-4af2-8ed3-b742142ec9eb:start--><!--finding:b6143efc-3c5e-4607-8007-589c4ad79cbf:start-->Elterngeld ist schriftlich zu beantragen<!--finding:b6143efc-3c5e-4607-8007-589c4ad79cbf:end--><!--finding:39579c6d-12cb-4121-82cc-e175ca59f92a:end-->.<!--obligation:6660ab3c-436f-4af2-8ed3-b742142ec9eb:end--> <!--finding:b9ad43ee-e605-45b8-bbed-0d91036dda7c:start-->Es wird rückwirkend nur für die letzten drei Lebensmonate vor Beginn des Lebensmonats geleistet, in dem der Antrag auf Elterngeld eingegangen ist.<!--finding:b9ad43ee-e605-45b8-bbed-0d91036dda7c:end--> <!--obligation:d70d4d8d-8ed7-4940-aae2-63ce256976d7:start-->Im Antrag ist anzugeben, für welche Lebensmonate Basiselterngeld, für welche Lebensmonate Elterngeld Plus oder für welche Lebensmonate Partnerschaftsbonus beantragt wird.<!--obligation:d70d4d8d-8ed7-4940-aae2-63ce256976d7:end-->
 
 (2)
 
@@ -814,7 +1025,7 @@ Die im Antrag getroffenen Entscheidungen können bis zum Ende des Bezugszeitraum
 
 (3)
 <!--finding:dd98b25b-3d78-49a9-8e06-ee6d6bfde419:start-->
-Der Antrag ist, außer im Fall des § 4c und der Antragstellung durch eine allein sorgeberechtigte Person, zu unterschreiben von der Person, die ihn stellt, und zur Bestätigung der Kenntnisnahme auch von der anderen berechtigten Person<!--finding:dd98b25b-3d78-49a9-8e06-ee6d6bfde419:end-->. Die andere berechtigte Person kann gleichzeitig
+<!--obligation:0c1690c5-f985-4452-a641-8e94a2f17476:start-->Der Antrag ist, außer im Fall des § 4c und der Antragstellung durch eine allein sorgeberechtigte Person, zu unterschreiben von der Person, die ihn stellt<!--obligation:0c1690c5-f985-4452-a641-8e94a2f17476:end-->, <!--obligation:9de2a5f3-e622-4151-8652-740a147a979a:start-->und zur Bestätigung der Kenntnisnahme auch von der anderen berechtigten Person<!--obligation:9de2a5f3-e622-4151-8652-740a147a979a:end--><!--finding:dd98b25b-3d78-49a9-8e06-ee6d6bfde419:end-->. Die andere berechtigte Person kann gleichzeitig
 
 - 1.
 
@@ -830,11 +1041,11 @@ Liegt der Behörde von der anderen berechtigten Person weder ein Antrag auf Elte
 
 (1)
 <!--finding:3353df9d-dcc5-4b95-84ca-51663242d152:start-->
-Soweit im Antrag auf Elterngeld Angaben zum voraussichtlichen Einkommen aus Erwerbstätigkeit gemacht wurden, ist nach Ablauf des Bezugszeitraums für diese Zeit das tatsächliche Einkommen aus Erwerbstätigkeit nachzuweisen<!--finding:3353df9d-dcc5-4b95-84ca-51663242d152:end-->.
+Soweit im Antrag auf Elterngeld Angaben zum voraussichtlichen Einkommen aus Erwerbstätigkeit gemacht wurden, <!--obligation:3363254b-0a6c-412c-b31e-97f164cbd402:start-->ist nach Ablauf des Bezugszeitraums für diese Zeit das tatsächliche Einkommen aus Erwerbstätigkeit nachzuweisen<!--obligation:3363254b-0a6c-412c-b31e-97f164cbd402:end--><!--finding:3353df9d-dcc5-4b95-84ca-51663242d152:end-->.
 
 (1a)
 
-<!--finding:10f0bc57-b6d7-4981-8895-46a3b99ffe53:start-->Die Mitwirkungspflichten nach § 60 des Ersten Buches Sozialgesetzbuch gelten<!--finding:10f0bc57-b6d7-4981-8895-46a3b99ffe53:end-->
+<!--obligation:edf49438-5b96-4a48-a97b-e8536fe60342:start--><!--finding:10f0bc57-b6d7-4981-8895-46a3b99ffe53:start-->Die Mitwirkungspflichten nach § 60 des Ersten Buches Sozialgesetzbuch gelten<!--obligation:edf49438-5b96-4a48-a97b-e8536fe60342:end--><!--finding:10f0bc57-b6d7-4981-8895-46a3b99ffe53:end-->
 
 - 1.
 
@@ -870,11 +1081,11 @@ die berechtigte Person nach den Angaben im Antrag auf Elterngeld im Bezugszeitra
 
 (1)
 
-Soweit es zum Nachweis des Einkommens aus Erwerbstätigkeit oder der wöchentlichen Arbeitszeit erforderlich ist, hat der Arbeitgeber der nach § 12 zuständigen Behörde für bei ihm Beschäftigte das Arbeitsentgelt, die für die Ermittlung der nach den §§ 2e und 2f erforderlichen Abzugsmerkmale für Steuern und Sozialabgaben sowie die Arbeitszeit auf Verlangen zu bescheinigen; das Gleiche gilt für ehemalige Arbeitgeber. Für die in Heimarbeit Beschäftigten und die ihnen Gleichgestellten (§ 1 Absatz 1 und 2 des Heimarbeitsgesetzes) tritt an die Stelle des Arbeitgebers der Auftraggeber oder Zwischenmeister.
+Soweit es zum Nachweis des Einkommens aus Erwerbstätigkeit oder der wöchentlichen Arbeitszeit erforderlich ist, <!--obligation:c8e70984-a3ca-49a5-8e38-e77fc5889999:start-->hat der Arbeitgeber der nach § 12 zuständigen Behörde für bei ihm Beschäftigte das Arbeitsentgelt, die für die Ermittlung der nach den §§ 2e und 2f erforderlichen Abzugsmerkmale für Steuern und Sozialabgaben sowie die Arbeitszeit auf Verlangen zu bescheinigen; das Gleiche gilt für ehemalige Arbeitgeber<!--obligation:c8e70984-a3ca-49a5-8e38-e77fc5889999:end-->. Für die in Heimarbeit Beschäftigten und die ihnen Gleichgestellten (§ 1 Absatz 1 und 2 des Heimarbeitsgesetzes) tritt an die Stelle des Arbeitgebers der Auftraggeber oder Zwischenmeister.
 
 (2)
 
-Für den Nachweis des Einkommens aus Erwerbstätigkeit kann die nach § 12 Absatz 1 zuständige Behörde auch das in § 108a Absatz 1 des Vierten Buches Sozialgesetzbuch vorgesehene Verfahren zur elektronischen Abfrage und Übermittlung von Entgeltbescheinigungsdaten nutzen. Sie darf dieses Verfahren nur nutzen, wenn die betroffene Arbeitnehmerin oder der betroffene Arbeitnehmer zuvor in dessen Nutzung eingewilligt hat. Wenn der betroffene Arbeitgeber ein systemgeprüftes Entgeltabrechnungsprogramm nutzt, ist er verpflichtet, die jeweiligen Entgeltbescheinigungsdaten mit dem in § 108a Absatz 1 des Vierten Buches Sozialgesetzbuch vorgesehenen Verfahren zu übermitteln.
+Für den Nachweis des Einkommens aus Erwerbstätigkeit kann die nach § 12 Absatz 1 zuständige Behörde auch das in § 108a Absatz 1 des Vierten Buches Sozialgesetzbuch vorgesehene Verfahren zur elektronischen Abfrage und Übermittlung von Entgeltbescheinigungsdaten nutzen. <!--obligation:22ab3701-ff16-4297-aeb7-6d32ae98a729:start-->Sie darf dieses Verfahren nur nutzen, wenn die betroffene Arbeitnehmerin oder der betroffene Arbeitnehmer zuvor in dessen Nutzung eingewilligt hat.<!--obligation:22ab3701-ff16-4297-aeb7-6d32ae98a729:end--> Wenn der betroffene Arbeitgeber ein systemgeprüftes Entgeltabrechnungsprogramm nutzt, <!--obligation:3460cffb-2ede-4903-af47-aa9c8ee2d30d:start-->ist er verpflichtet, die jeweiligen Entgeltbescheinigungsdaten mit dem in § 108a Absatz 1 des Vierten Buches Sozialgesetzbuch vorgesehenen Verfahren zu übermitteln<!--obligation:3460cffb-2ede-4903-af47-aa9c8ee2d30d:end-->.
 
 ## § 10 Verhältnis zu anderen Sozialleistungen
 
@@ -914,11 +1125,11 @@ Unterhaltsverpflichtungen werden durch die Zahlung des Elterngeldes und vergleic
 
 (2)
 
-Den nach Absatz 1 zuständigen Behörden obliegt auch die Beratung zur Elternzeit.
+<!--obligation:dba58021-8d2e-4830-aa6d-d27114ceedbe:start-->Den nach Absatz 1 zuständigen Behörden obliegt auch die Beratung zur Elternzeit.<!--obligation:dba58021-8d2e-4830-aa6d-d27114ceedbe:end-->
 
 (3)
 
-Der Bund trägt die Ausgaben für das Elterngeld. Die damit zusammenhängenden Einnahmen sind an den Bund abzuführen. Für die Ausgaben und die mit ihnen zusammenhängenden Einnahmen sind die Vorschriften über das Haushaltsrecht des Bundes einschließlich der Verwaltungsvorschriften anzuwenden.
+Der Bund trägt die Ausgaben für das Elterngeld. <!--obligation:1de78538-86e2-4dc6-8a94-8a9815a6f0a4:start-->Die damit zusammenhängenden Einnahmen sind an den Bund abzuführen.<!--obligation:1de78538-86e2-4dc6-8a94-8a9815a6f0a4:end--> Für die Ausgaben und die mit ihnen zusammenhängenden Einnahmen sind die Vorschriften über das Haushaltsrecht des Bundes einschließlich der Verwaltungsvorschriften anzuwenden.
 
 ## § 13 Rechtsweg
 
@@ -1017,11 +1228,11 @@ Die Elternzeit kann, auch anteilig, von jedem Elternteil allein oder von beiden 
 
 (4)
 
-Die Arbeitnehmerin oder der Arbeitnehmer darf während der Elternzeit nicht mehr als 32 Wochenstunden im Durchschnitt des Monats erwerbstätig sein. Die Beschränkung auf 32 Wochenstunden im Durchschnitt des Monats gilt nicht für die Tätigkeit einer im Sinne der §§ 23 und 43 des Achten Buches Sozialgesetzbuch geeigneten Kindertagespflegeperson. Die Ausübung einer Teilzeitarbeit bei einem anderen Arbeitgeber oder einer selbständigen Erwerbstätigkeit nach Satz 1 bedürfen der Zustimmung des Arbeitgebers. Dieser kann seine Zustimmung nur innerhalb von vier Wochen nach der Beantragung aus dringenden betrieblichen Gründen in Textform verweigern.
+<!--obligation:cb71c9ab-f569-4303-87ba-4b250c614a90:start-->Die Arbeitnehmerin oder der Arbeitnehmer darf während der Elternzeit nicht mehr als 32 Wochenstunden im Durchschnitt des Monats erwerbstätig sein.<!--obligation:cb71c9ab-f569-4303-87ba-4b250c614a90:end--> Die Beschränkung auf 32 Wochenstunden im Durchschnitt des Monats gilt nicht für die Tätigkeit einer im Sinne der §§ 23 und 43 des Achten Buches Sozialgesetzbuch geeigneten Kindertagespflegeperson. Die Ausübung einer Teilzeitarbeit bei einem anderen Arbeitgeber oder einer selbständigen Erwerbstätigkeit nach Satz 1 bedürfen der Zustimmung des Arbeitgebers. Dieser kann seine Zustimmung nur innerhalb von vier Wochen nach der Beantragung aus dringenden betrieblichen Gründen in Textform verweigern.
 
 (5)
 
-Der Arbeitnehmer oder die Arbeitnehmerin kann eine Verringerung der Arbeitszeit und ihre Verteilung beantragen. Der Antrag kann mit der Mitteilung nach Absatz 7 Satz 1 Nummer 5 in Textform verbunden werden. Über den Antrag sollen sich der Arbeitgeber und der Arbeitnehmer oder die Arbeitnehmerin innerhalb von vier Wochen einigen. Lehnt der Arbeitgeber den Antrag ab, so hat er dies dem Arbeitnehmer oder der Arbeitnehmerin innerhalb der Frist nach Satz 3 mit einer Begründung mitzuteilen. Unberührt bleibt das Recht, sowohl die vor der Elternzeit bestehende Teilzeitarbeit unverändert während der Elternzeit fortzusetzen, soweit Absatz 4 beachtet ist, als auch nach der Elternzeit zu der Arbeitszeit zurückzukehren, die vor Beginn der Elternzeit vereinbart war.
+Der Arbeitnehmer oder die Arbeitnehmerin kann eine Verringerung der Arbeitszeit und ihre Verteilung beantragen. Der Antrag kann mit der Mitteilung nach Absatz 7 Satz 1 Nummer 5 in Textform verbunden werden. Über den Antrag sollen sich der Arbeitgeber und der Arbeitnehmer oder die Arbeitnehmerin innerhalb von vier Wochen einigen. <!--obligation:d0d0d31b-d046-470d-a525-6c55b53ba255:start-->Lehnt der Arbeitgeber den Antrag ab, so hat er dies dem Arbeitnehmer oder der Arbeitnehmerin innerhalb der Frist nach Satz 3 mit einer Begründung mitzuteilen.<!--obligation:d0d0d31b-d046-470d-a525-6c55b53ba255:end--> Unberührt bleibt das Recht, sowohl die vor der Elternzeit bestehende Teilzeitarbeit unverändert während der Elternzeit fortzusetzen, soweit Absatz 4 beachtet ist, als auch nach der Elternzeit zu der Arbeitszeit zurückzukehren, die vor Beginn der Elternzeit vereinbart war.
 
 (6)
 
@@ -1049,7 +1260,7 @@ dem Anspruch stehen keine dringenden betrieblichen Gründe entgegen und
 
 - 5.
 
-der Anspruch auf Teilzeit wurde dem Arbeitgeber
+<!--obligation:7539921c-4fa0-44bb-9599-4c0a4fd40c84:start-->der Anspruch auf Teilzeit wurde dem Arbeitgeber<!--obligation:7539921c-4fa0-44bb-9599-4c0a4fd40c84:end-->
 
 - a)
 
@@ -1061,7 +1272,7 @@ für den Zeitraum zwischen dem dritten Geburtstag und dem vollendeten achten Leb
 
 vor Beginn der Teilzeittätigkeit in Textform mitgeteilt.
 
-Der Antrag muss den Beginn und den Umfang der verringerten Arbeitszeit enthalten. Die gewünschte Verteilung der verringerten Arbeitszeit soll im Antrag angegeben werden. Falls der Arbeitgeber die beanspruchte Verringerung oder Verteilung der Arbeitszeit ablehnt, muss die Ablehnung innerhalb der in Satz 5 genannten Frist und mit Begründung in Textform erfolgen. Hat ein Arbeitgeber die Verringerung der Arbeitszeit
+<!--obligation:06211e36-1df6-4f01-9987-ebd2806c360a:start-->Der Antrag muss den Beginn und den Umfang der verringerten Arbeitszeit enthalten.<!--obligation:06211e36-1df6-4f01-9987-ebd2806c360a:end--> Die gewünschte Verteilung der verringerten Arbeitszeit soll im Antrag angegeben werden. Falls der Arbeitgeber die beanspruchte Verringerung oder Verteilung der Arbeitszeit ablehnt, <!--obligation:292adab2-d5e8-4e51-923b-c0dcd0e8edee:start-->muss die Ablehnung innerhalb der in Satz 5 genannten Frist und mit Begründung in Textform erfolgen<!--obligation:292adab2-d5e8-4e51-923b-c0dcd0e8edee:end-->. Hat ein Arbeitgeber die Verringerung der Arbeitszeit
 
 - 1.
 
@@ -1087,7 +1298,7 @@ Wer Elternzeit beanspruchen will, muss sie
 
 für den Zeitraum zwischen dem dritten Geburtstag und dem vollendeten achten Lebensjahr des Kindes spätestens 13 Wochen
 
-vor Beginn der Elternzeit in Textform vom Arbeitgeber verlangen. Verlangt die Arbeitnehmerin oder der Arbeitnehmer Elternzeit nach Satz 1 Nummer 1, muss sie oder er gleichzeitig erklären, für welche Zeiten innerhalb von zwei Jahren Elternzeit genommen werden soll. Bei dringenden Gründen ist ausnahmsweise eine angemessene kürzere Frist möglich. Nimmt die Mutter die Elternzeit im Anschluss an die Mutterschutzfrist, wird die Zeit der Mutterschutzfrist nach § 3 Absatz 2 und 3 des Mutterschutzgesetzes auf den Zeitraum nach Satz 2 angerechnet. Nimmt die Mutter die Elternzeit im Anschluss an einen auf die Mutterschutzfrist folgenden Erholungsurlaub, werden die Zeit der Mutterschutzfrist nach § 3 Absatz 2 und 3 des Mutterschutzgesetzes und die Zeit des Erholungsurlaubs auf den Zweijahreszeitraum nach Satz 2 angerechnet. Jeder Elternteil kann seine Elternzeit auf drei Zeitabschnitte verteilen; eine Verteilung auf weitere Zeitabschnitte ist nur mit der Zustimmung des Arbeitgebers möglich. Der Arbeitgeber kann die Inanspruchnahme eines dritten Abschnitts einer Elternzeit innerhalb von acht Wochen nach Zugang des Antrags aus dringenden betrieblichen Gründen ablehnen, wenn dieser Abschnitt im Zeitraum zwischen dem dritten Geburtstag und dem vollendeten achten Lebensjahr des Kindes liegen soll. Der Arbeitgeber hat dem Arbeitnehmer oder der Arbeitnehmerin die Elternzeit zu bescheinigen. Bei einem Arbeitgeberwechsel ist bei der Anmeldung der Elternzeit auf Verlangen des neuen Arbeitgebers eine Bescheinigung des früheren Arbeitgebers über bereits genommene Elternzeit durch die Arbeitnehmerin oder den Arbeitnehmer vorzulegen.
+<!--obligation:c2eea652-b98b-41a9-b6a5-4467a45385b4:start-->vor Beginn der Elternzeit in Textform vom Arbeitgeber verlangen<!--obligation:c2eea652-b98b-41a9-b6a5-4467a45385b4:end-->. Verlangt die Arbeitnehmerin oder der Arbeitnehmer Elternzeit nach Satz 1 Nummer 1, <!--obligation:993e64cf-3cdd-4bec-89bb-411163493616:start-->muss sie oder er gleichzeitig erklären, für welche Zeiten innerhalb von zwei Jahren Elternzeit genommen werden soll<!--obligation:993e64cf-3cdd-4bec-89bb-411163493616:end-->. Bei dringenden Gründen ist ausnahmsweise eine angemessene kürzere Frist möglich. Nimmt die Mutter die Elternzeit im Anschluss an die Mutterschutzfrist, wird die Zeit der Mutterschutzfrist nach § 3 Absatz 2 und 3 des Mutterschutzgesetzes auf den Zeitraum nach Satz 2 angerechnet. Nimmt die Mutter die Elternzeit im Anschluss an einen auf die Mutterschutzfrist folgenden Erholungsurlaub, werden die Zeit der Mutterschutzfrist nach § 3 Absatz 2 und 3 des Mutterschutzgesetzes und die Zeit des Erholungsurlaubs auf den Zweijahreszeitraum nach Satz 2 angerechnet. Jeder Elternteil kann seine Elternzeit auf drei Zeitabschnitte verteilen; eine Verteilung auf weitere Zeitabschnitte ist nur mit der Zustimmung des Arbeitgebers möglich. Der Arbeitgeber kann die Inanspruchnahme eines dritten Abschnitts einer Elternzeit innerhalb von acht Wochen nach Zugang des Antrags aus dringenden betrieblichen Gründen ablehnen, wenn dieser Abschnitt im Zeitraum zwischen dem dritten Geburtstag und dem vollendeten achten Lebensjahr des Kindes liegen soll. <!--obligation:38d27ee4-4f55-4bf4-b03d-16b189150df9:start-->Der Arbeitgeber hat dem Arbeitnehmer oder der Arbeitnehmerin die Elternzeit zu bescheinigen.<!--obligation:38d27ee4-4f55-4bf4-b03d-16b189150df9:end--> Bei einem Arbeitgeberwechsel <!--obligation:dc72efb4-53d3-41a0-b79e-8746b0ea209a:start-->ist bei der Anmeldung der Elternzeit auf Verlangen des neuen Arbeitgebers eine Bescheinigung des früheren Arbeitgebers über bereits genommene Elternzeit durch die Arbeitnehmerin oder den Arbeitnehmer vorzulegen<!--obligation:dc72efb4-53d3-41a0-b79e-8746b0ea209a:end-->.
 
 (2)
 
@@ -1103,7 +1314,7 @@ Stirbt das Kind während der Elternzeit, endet diese spätestens drei Wochen nac
 
 (5)
 
-Eine Änderung in der Anspruchsberechtigung hat der Arbeitnehmer oder die Arbeitnehmerin dem Arbeitgeber unverzüglich mitzuteilen.
+<!--obligation:08055fe6-1935-493c-a7d4-088d3d328395:start-->Eine Änderung in der Anspruchsberechtigung hat der Arbeitnehmer oder die Arbeitnehmerin dem Arbeitgeber unverzüglich mitzuteilen.<!--obligation:08055fe6-1935-493c-a7d4-088d3d328395:end-->
 
 ## § 17 Urlaub
 
@@ -1113,11 +1324,11 @@ Der Arbeitgeber kann den Erholungsurlaub, der dem Arbeitnehmer oder der Arbeitne
 
 (2)
 
-Hat der Arbeitnehmer oder die Arbeitnehmerin den ihm oder ihr zustehenden Urlaub vor dem Beginn der Elternzeit nicht oder nicht vollständig erhalten, hat der Arbeitgeber den Resturlaub nach der Elternzeit im laufenden oder im nächsten Urlaubsjahr zu gewähren.
+Hat der Arbeitnehmer oder die Arbeitnehmerin den ihm oder ihr zustehenden Urlaub vor dem Beginn der Elternzeit nicht oder nicht vollständig erhalten, <!--obligation:ad309adf-6be7-4c25-b7f2-75c8d28f457d:start-->hat der Arbeitgeber den Resturlaub nach der Elternzeit im laufenden oder im nächsten Urlaubsjahr zu gewähren<!--obligation:ad309adf-6be7-4c25-b7f2-75c8d28f457d:end-->.
 
 (3)
 
-Endet das Arbeitsverhältnis während der Elternzeit oder wird es im Anschluss an die Elternzeit nicht fortgesetzt, so hat der Arbeitgeber den noch nicht gewährten Urlaub abzugelten.
+Endet das Arbeitsverhältnis während der Elternzeit oder wird es im Anschluss an die Elternzeit nicht fortgesetzt, <!--obligation:f9dc9bb1-d30f-4658-aee0-ed332adbd03b:start-->so hat der Arbeitgeber den noch nicht gewährten Urlaub abzugelten<!--obligation:f9dc9bb1-d30f-4658-aee0-ed332adbd03b:end-->.
 
 (4)
 
@@ -1127,7 +1338,7 @@ Hat der Arbeitnehmer oder die Arbeitnehmerin vor Beginn der Elternzeit mehr Urla
 
 (1)
 
-Der Arbeitgeber darf das Arbeitsverhältnis ab dem Zeitpunkt, von dem an Elternzeit verlangt worden ist, nicht kündigen. Der Kündigungsschutz nach Satz 1 beginnt
+<!--obligation:79c12f69-96a9-47ad-88a4-5493ef9710dd:start-->Der Arbeitgeber darf das Arbeitsverhältnis ab dem Zeitpunkt, von dem an Elternzeit verlangt worden ist, nicht kündigen.<!--obligation:79c12f69-96a9-47ad-88a4-5493ef9710dd:end--> Der Kündigungsschutz nach Satz 1 beginnt
 
 - 1.
 
@@ -1137,7 +1348,7 @@ frühestens acht Wochen vor Beginn einer Elternzeit bis zum vollendeten dritten 
 
 frühestens 14 Wochen vor Beginn einer Elternzeit zwischen dem dritten Geburtstag und dem vollendeten achten Lebensjahr des Kindes.
 
-Während der Elternzeit darf der Arbeitgeber das Arbeitsverhältnis nicht kündigen. In besonderen Fällen kann ausnahmsweise eine Kündigung für zulässig erklärt werden. Die Zulässigkeitserklärung erfolgt durch die für den Arbeitsschutz zuständige oberste Landesbehörde oder die von ihr bestimmte Stelle. Die Bundesregierung kann mit Zustimmung des Bundesrates allgemeine Verwaltungsvorschriften zur Durchführung des Satzes 4 erlassen.
+<!--obligation:4a0bc904-1706-4fbd-89b0-50b442d58d92:start-->Während der Elternzeit darf der Arbeitgeber das Arbeitsverhältnis nicht kündigen.<!--obligation:4a0bc904-1706-4fbd-89b0-50b442d58d92:end--> In besonderen Fällen kann ausnahmsweise eine Kündigung für zulässig erklärt werden. Die Zulässigkeitserklärung erfolgt durch die für den Arbeitsschutz zuständige oberste Landesbehörde oder die von ihr bestimmte Stelle. Die Bundesregierung kann mit Zustimmung des Bundesrates allgemeine Verwaltungsvorschriften zur Durchführung des Satzes 4 erlassen.
 
 (2)
 
@@ -1153,7 +1364,7 @@ ohne Elternzeit in Anspruch zu nehmen, Teilzeitarbeit leisten und Anspruch auf E
 
 ## § 19 Kündigung zum Ende der Elternzeit
 
-Der Arbeitnehmer oder die Arbeitnehmerin kann das Arbeitsverhältnis zum Ende der Elternzeit nur unter Einhaltung einer Kündigungsfrist von drei Monaten kündigen.
+Der Arbeitnehmer oder die Arbeitnehmerin <!--obligation:bcfb6dc2-9920-46d0-ab99-267e43960b08:start-->kann das Arbeitsverhältnis zum Ende der Elternzeit nur unter Einhaltung einer Kündigungsfrist von drei Monaten kündigen<!--obligation:bcfb6dc2-9920-46d0-ab99-267e43960b08:end-->.
 
 ## § 20 Zur Berufsbildung Beschäftigte, in Heimarbeit Beschäftigte
 
@@ -1201,7 +1412,7 @@ Abschnitt 4 Statistik und Schlussvorschriften
 
 (1)
 
-Zur Beurteilung der Auswirkungen dieses Gesetzes sowie zu seiner Fortentwicklung sind laufende Erhebungen zum Bezug von Elterngeld als Bundesstatistiken durchzuführen. Die Erhebungen erfolgen zentral beim Statistischen Bundesamt.
+Zur Beurteilung der Auswirkungen dieses Gesetzes sowie zu seiner Fortentwicklung <!--obligation:985f68b5-a8b1-4b2d-9fdb-b195dda64a76:start-->sind laufende Erhebungen zum Bezug von Elterngeld als Bundesstatistiken durchzuführen. Die Erhebungen erfolgen zentral beim Statistischen Bundesamt.<!--obligation:985f68b5-a8b1-4b2d-9fdb-b195dda64a76:end-->
 
 (2)
 
@@ -1263,7 +1474,7 @@ Vorliegen der Voraussetzungen nach § 4c Absatz 1 Nummer 1 und
 
 Anzahl der im Haushalt lebenden Kinder.
 
-Die Angaben nach den Nummern 2, 3, 5 und 6 sind für jeden Lebensmonat des Kindes bezogen auf den nach § 4 Absatz 1 möglichen Zeitraum des Leistungsbezugs zu melden.
+<!--obligation:c617f140-8380-4690-bd23-e975b0d70c7a:start-->Die Angaben nach den Nummern 2, 3, 5 und 6 sind für jeden Lebensmonat des Kindes bezogen auf den nach § 4 Absatz 1 möglichen Zeitraum des Leistungsbezugs zu melden.<!--obligation:c617f140-8380-4690-bd23-e975b0d70c7a:end-->
 
 (3)
 
@@ -1285,33 +1496,33 @@ Kennnummer des Antragstellers oder der Antragstellerin.
 
 (1)
 
-Für die Erhebung nach § 22 besteht Auskunftspflicht. Die Angaben nach § 22 Absatz 3 Nummer 2 sind freiwillig. Auskunftspflichtig sind die nach § 12 Absatz 1 zuständigen Stellen.
+Für die Erhebung nach § 22 besteht Auskunftspflicht. Die Angaben nach § 22 Absatz 3 Nummer 2 sind freiwillig. <!--obligation:9630e19f-12ad-415a-9a1b-97f2bba4de2b:start-->Auskunftspflichtig sind die nach § 12 Absatz 1 zuständigen Stellen.<!--obligation:9630e19f-12ad-415a-9a1b-97f2bba4de2b:end-->
 
 (2)
 
-Die Antragstellerin oder der Antragsteller ist gegenüber den nach § 12 Absatz 1 zuständigen Stellen zu den Erhebungsmerkmalen nach § 22 Absatz 2 auskunftspflichtig. Die zuständigen Stellen nach § 12 Absatz 1 dürfen die Angaben nach § 22 Absatz 2 Satz 1 Nummer 8, soweit sie für den Vollzug dieses Gesetzes nicht erforderlich sind, nur durch technische und organisatorische Maßnahmen getrennt von den übrigen Daten nach § 22 Absatz 2 und nur für die Übermittlung an das Statistische Bundesamt verwenden und haben diese unverzüglich nach Übermittlung an das Statistische Bundesamt zu löschen.
+<!--obligation:55cccdc3-6bc0-4469-872e-617a0f02259a:start-->Die Antragstellerin oder der Antragsteller ist gegenüber den nach § 12 Absatz 1 zuständigen Stellen zu den Erhebungsmerkmalen nach § 22 Absatz 2 auskunftspflichtig.<!--obligation:55cccdc3-6bc0-4469-872e-617a0f02259a:end--> Die zuständigen Stellen nach § 12 Absatz 1 <!--obligation:71fee70a-64d4-4954-b9f4-537666db1f48:start-->dürfen die Angaben nach § 22 Absatz 2 Satz 1 Nummer 8, soweit sie für den Vollzug dieses Gesetzes nicht erforderlich sind, nur durch technische und organisatorische Maßnahmen getrennt von den übrigen Daten nach § 22 Absatz 2 und nur für die Übermittlung an das Statistische Bundesamt verwenden und haben diese unverzüglich nach Übermittlung an das Statistische Bundesamt zu löschen<!--obligation:71fee70a-64d4-4954-b9f4-537666db1f48:end-->.
 
 (3)
 
-Die in sich schlüssigen Angaben sind als Einzeldatensätze elektronisch bis zum Ablauf von 30 Arbeitstagen nach Ablauf des Berichtszeitraums an das Statistische Bundesamt zu übermitteln.
+Die in sich schlüssigen Angaben <!--obligation:d7f24034-562c-4c7a-a6ad-b1839ea8d77f:start-->sind als Einzeldatensätze elektronisch bis zum Ablauf von 30 Arbeitstagen nach Ablauf des Berichtszeitraums an das Statistische Bundesamt zu übermitteln<!--obligation:d7f24034-562c-4c7a-a6ad-b1839ea8d77f:end-->.
 
 ## § 24 Übermittlung von Tabellen mit statistischen Ergebnissen durch das Statistische Bundesamt
 
-Zur Verwendung gegenüber den gesetzgebenden Körperschaften und zu Zwecken der Planung, jedoch nicht zur Regelung von Einzelfällen, übermittelt das Statistische Bundesamt Tabellen mit statistischen Ergebnissen, auch soweit Tabellenfelder nur einen einzigen Fall ausweisen, an die fachlich zuständigen obersten Bundes- oder Landesbehörden. Tabellen, deren Tabellenfelder nur einen einzigen Fall ausweisen, dürfen nur dann übermittelt werden, wenn sie nicht differenzierter als auf Regierungsbezirksebene, im Falle der Stadtstaaten auf Bezirksebene, aufbereitet sind.
+Zur Verwendung gegenüber den gesetzgebenden Körperschaften und zu Zwecken der Planung, jedoch nicht zur Regelung von Einzelfällen, <!--obligation:c098daa3-aca2-4fd0-b23a-625b9ab32937:start-->übermittelt das Statistische Bundesamt Tabellen mit statistischen Ergebnissen, auch soweit Tabellenfelder nur einen einzigen Fall ausweisen, an die fachlich zuständigen obersten Bundes- oder Landesbehörden<!--obligation:c098daa3-aca2-4fd0-b23a-625b9ab32937:end-->. Tabellen, deren Tabellenfelder nur einen einzigen Fall ausweisen, dürfen nur dann übermittelt werden, wenn sie nicht differenzierter als auf Regierungsbezirksebene, im Falle der Stadtstaaten auf Bezirksebene, aufbereitet sind.
 
 ## § 24a Übermittlung von Einzelangaben durch das Statistische Bundesamt
 
 (1)
 
-Zur Abschätzung von Auswirkungen der Änderungen dieses Gesetzes im Rahmen der Zwecke nach § 24 übermittelt das Statistische Bundesamt auf Anforderung des fachlich zuständigen Bundesministeriums diesem oder von ihm beauftragten Forschungseinrichtungen Einzelangaben ab dem Jahr 2007 ohne Hilfsmerkmale mit Ausnahme des Merkmals nach § 22 Absatz 3 Nummer 3 für die Entwicklung und den Betrieb von Mikrosimulationsmodellen. Die Einzelangaben dürfen nur im hierfür erforderlichen Umfang und mittels eines sicheren Datentransfers übermittelt werden.
+Zur Abschätzung von Auswirkungen der Änderungen dieses Gesetzes im Rahmen der Zwecke nach § 24 <!--obligation:5a0b6796-8602-4762-b5fd-d1a19e01a849:start-->übermittelt das Statistische Bundesamt auf Anforderung des fachlich zuständigen Bundesministeriums diesem oder von ihm beauftragten Forschungseinrichtungen Einzelangaben ab dem Jahr 2007 ohne Hilfsmerkmale mit Ausnahme des Merkmals nach § 22 Absatz 3 Nummer 3 für die Entwicklung und den Betrieb von Mikrosimulationsmodellen<!--obligation:5a0b6796-8602-4762-b5fd-d1a19e01a849:end-->. Die Einzelangaben dürfen nur im hierfür erforderlichen Umfang und mittels eines sicheren Datentransfers übermittelt werden.
 
 (2)
 
-Bei der Verarbeitung der Daten nach Absatz 1 ist das Statistikgeheimnis nach § 16 des Bundesstatistikgesetzes zu wahren. Dafür ist die Trennung von statistischen und nichtstatistischen Aufgaben durch Organisation und Verfahren zu gewährleisten. Die nach Absatz 1 übermittelten Daten dürfen nur für die Zwecke verwendet werden, für die sie übermittelt wurden. Die übermittelten Einzeldaten sind nach dem Erreichen des Zweckes zu löschen, zu dem sie übermittelt wurden.
+Bei der Verarbeitung der Daten nach Absatz 1 <!--obligation:1e4f2697-e1c5-4dde-af22-579e3596f3c2:start-->ist das Statistikgeheimnis nach § 16 des Bundesstatistikgesetzes zu wahren. Dafür ist die Trennung von statistischen und nichtstatistischen Aufgaben durch Organisation und Verfahren zu gewährleisten.<!--obligation:1e4f2697-e1c5-4dde-af22-579e3596f3c2:end--> <!--obligation:33fc60b1-9f84-4b1f-a84b-7ae674394d97:start-->Die nach Absatz 1 übermittelten Daten dürfen nur für die Zwecke verwendet werden, für die sie übermittelt wurden.<!--obligation:33fc60b1-9f84-4b1f-a84b-7ae674394d97:end--> <!--obligation:30b11181-a308-44ef-bd42-e41bb2032781:start-->Die übermittelten Einzeldaten sind nach dem Erreichen des Zweckes zu löschen, zu dem sie übermittelt wurden.<!--obligation:30b11181-a308-44ef-bd42-e41bb2032781:end-->
 
 (3)
 
-Personen, die Empfängerinnen und Empfänger von Einzelangaben nach Absatz 1 Satz 1 sind, unterliegen der Pflicht zur Geheimhaltung nach § 16 Absatz 1 und 10 des Bundesstatistikgesetzes. Personen, die Einzelangaben nach Absatz 1 Satz 1 erhalten sollen, müssen Amtsträger oder für den öffentlichen Dienst besonders Verpflichtete sein. Personen, die Einzelangaben erhalten sollen und die nicht Amtsträger oder für den öffentlichen Dienst besonders Verpflichtete sind, sind vor der Übermittlung zur Geheimhaltung zu verpflichten. § 1 Absatz 2, 3 und 4 Nummer 2 des Verpflichtungsgesetzes vom 2. März 1974 (BGBl. I S. 469, 547), das durch § 1 Nummer 4 des Gesetzes vom 15. August 1974 (BGBl. I S. 1942) geändert worden ist, gilt in der jeweils geltenden Fassung entsprechend. Die Empfängerinnen und Empfänger von Einzelangaben dürfen aus ihrer Tätigkeit gewonnene Erkenntnisse nur für die in Absatz 1 genannten Zwecke verwenden.
+Personen, die Empfängerinnen und Empfänger von Einzelangaben nach Absatz 1 Satz 1 sind, <!--obligation:ad716408-7901-4c8a-8ce5-fa9aa4867743:start-->unterliegen der Pflicht zur Geheimhaltung nach § 16 Absatz 1 und 10 des Bundesstatistikgesetzes<!--obligation:ad716408-7901-4c8a-8ce5-fa9aa4867743:end-->. Personen, die Einzelangaben nach Absatz 1 Satz 1 erhalten sollen, müssen Amtsträger oder für den öffentlichen Dienst besonders Verpflichtete sein. Personen, die Einzelangaben erhalten sollen und die nicht Amtsträger oder für den öffentlichen Dienst besonders Verpflichtete sind, <!--obligation:6229930a-22f5-4e6f-9ca9-1144258db083:start-->sind vor der Übermittlung zur Geheimhaltung zu verpflichten<!--obligation:6229930a-22f5-4e6f-9ca9-1144258db083:end-->. § 1 Absatz 2, 3 und 4 Nummer 2 des Verpflichtungsgesetzes vom 2. März 1974 (BGBl. I S. 469, 547), das durch § 1 Nummer 4 des Gesetzes vom 15. August 1974 (BGBl. I S. 1942) geändert worden ist, gilt in der jeweils geltenden Fassung entsprechend. <!--obligation:d89695c8-b2b5-49f3-bdab-24039bf6e1b4:start-->Die Empfängerinnen und Empfänger von Einzelangaben dürfen aus ihrer Tätigkeit gewonnene Erkenntnisse nur für die in Absatz 1 genannten Zwecke verwenden.<!--obligation:d89695c8-b2b5-49f3-bdab-24039bf6e1b4:end-->
 
 ## § 25 Automatisierter Datenabruf bei den Standesämtern
 
@@ -1343,7 +1554,7 @@ Soweit dieses Gesetz zum Elterngeld keine ausdrückliche Regelung trifft, ist be
 
 (1)
 
-Übt ein Elternteil eine systemrelevante Tätigkeit aus, so kann sein Bezug von Elterngeld auf Antrag für die Zeit vom 1. März 2020 bis 31. Dezember 2020 aufgeschoben werden. Der Bezug der verschobenen Lebensmonate ist spätestens bis zum 30. Juni 2021 anzutreten. Wird von der Möglichkeit des Aufschubs Gebrauch gemacht, so kann das Basiselterngeld abweichend von § 4 Absatz 1 Satz 2 und 3 auch noch nach Vollendung des 14. Lebensmonats bezogen werden. In der Zeit vom 1. März 2020 bis 30. Juni 2021 entstehende Lücken im Elterngeldbezug sind abweichend von § 4 Absatz 1 Satz 4 unschädlich.
+Übt ein Elternteil eine systemrelevante Tätigkeit aus, so kann sein Bezug von Elterngeld auf Antrag für die Zeit vom 1. März 2020 bis 31. Dezember 2020 aufgeschoben werden. <!--obligation:e7c6c401-e0ee-421f-916f-896f7d449e76:start-->Der Bezug der verschobenen Lebensmonate ist spätestens bis zum 30. Juni 2021 anzutreten.<!--obligation:e7c6c401-e0ee-421f-916f-896f7d449e76:end--> Wird von der Möglichkeit des Aufschubs Gebrauch gemacht, so kann das Basiselterngeld abweichend von § 4 Absatz 1 Satz 2 und 3 auch noch nach Vollendung des 14. Lebensmonats bezogen werden. In der Zeit vom 1. März 2020 bis 30. Juni 2021 entstehende Lücken im Elterngeldbezug sind abweichend von § 4 Absatz 1 Satz 4 unschädlich.
 
 (2)
 

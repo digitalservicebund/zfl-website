@@ -1,29 +1,32 @@
 <script lang="ts">
   import { tick } from "svelte";
   import IconClose from "~icons/ic/round-close";
-  import type { Finding } from "@/content.config";
+  import type { Finding, Obligation } from "@/content.config";
   import { highlightBody } from "./_highlight";
 
   let {
     body,
-    finding,
+    active,
     onClose,
   }: {
     body: string;
-    finding: Finding | undefined;
+    active:
+      | { kind: "finding"; data: Finding }
+      | { kind: "obligation"; data: Obligation }
+      | undefined;
     onClose: () => void;
   } = $props();
 
-  const isOpen = $derived(!!finding);
+  const isOpen = $derived(!!active);
 
   const highlightedHtml = $derived(
-    finding ? highlightBody(body, finding.id) : "",
+    active ? highlightBody(body, active.data.id, active.kind) : "",
   );
 
   let scrollContainer: HTMLDivElement | undefined = $state();
 
   $effect(() => {
-    void finding;
+    void active;
     if (!scrollContainer) return;
     tick().then(() => {
       scrollContainer
@@ -45,7 +48,7 @@
     >
       <div class="flex shrink-0 items-center justify-between gap-16 p-24">
         <p class="kern-label mb-0 truncate">
-          {finding?.locationLabel}
+          {active?.data.locationLabel}
         </p>
         <button
           type="button"

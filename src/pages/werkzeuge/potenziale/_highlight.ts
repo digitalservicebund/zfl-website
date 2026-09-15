@@ -12,22 +12,28 @@ function escapeHtml(text: string): string {
   );
 }
 
-const markerPattern = /<!--finding:[^:]+:(?:start|end)-->/g;
+export type MarkerKind = "finding" | "obligation";
 
-// Strips finding markers belonging to other findings so they never leak into
-// the rendered output.
+const markerPattern = /<!--(?:finding|obligation):[^:]+:(?:start|end)-->/g;
+
+// Strips finding/obligation markers belonging to other findings/obligations
+// so they never leak into the rendered output.
 function stripMarkers(text: string): string {
   return text.replace(markerPattern, "");
 }
 
-// Highlights the span wrapped by the <!--finding:{id}:start/end--> marker
+// Highlights the span wrapped by the <!--{kind}:{id}:start/end--> marker
 // pair with a <mark>. Markers are embedded directly in the stored markdown
 // body (see vorhaben-checks skill), so they stay valid even if unrelated
 // parts of the text are edited later - unlike numeric offsets, which would
 // silently drift.
-export function highlightBody(body: string, id: string): string {
-  const startMarker = `<!--finding:${id}:start-->`;
-  const endMarker = `<!--finding:${id}:end-->`;
+export function highlightBody(
+  body: string,
+  id: string,
+  kind: MarkerKind = "finding",
+): string {
+  const startMarker = `<!--${kind}:${id}:start-->`;
+  const endMarker = `<!--${kind}:${id}:end-->`;
   const startIndex = body.indexOf(startMarker);
   const endIndex = body.indexOf(endMarker);
   if (startIndex === -1 || endIndex === -1 || endIndex < startIndex) {

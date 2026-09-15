@@ -10,9 +10,10 @@
   import Hint from "../_shared/Hint.svelte";
   import LoadingIndicator from "../_shared/LoadingIndicator.svelte";
   import FindingsGroup from "./_FindingsGroup.svelte";
+  import ObligationsGroup from "./_ObligationsGroup.svelte";
   import PotenzialeSidebar from "./_PotenzialeSidebar.svelte";
   import type { CheckType, PotenzialeExample } from "./_types";
-  import type { Finding as FindingData } from "@/content.config";
+  import type { Finding as FindingData, Obligation } from "@/content.config";
 
   let {
     examples,
@@ -55,7 +56,17 @@
   );
 
   let selectedCheckType = $state<CheckFilter>();
-  let activeFinding = $state<FindingData>();
+  let activeItem = $state<
+    | { kind: "finding"; data: FindingData }
+    | { kind: "obligation"; data: Obligation }
+    | undefined
+  >();
+
+  const RESULTS_TAB_FINDINGS = "findings" as const;
+  const RESULTS_TAB_OBLIGATIONS = "obligations" as const;
+  type ResultsTab =
+    typeof RESULTS_TAB_FINDINGS | typeof RESULTS_TAB_OBLIGATIONS;
+  let resultsTab = $state<ResultsTab>(RESULTS_TAB_FINDINGS);
 
   const VORHABEN_STEP_STATUS_MESSAGES = [
     "Lade Vorhaben …",
@@ -80,6 +91,7 @@
     if (!checksSource) {
       findings = [];
       selectedCheckType = undefined;
+      resultsTab = RESULTS_TAB_FINDINGS;
       checksError = undefined;
       isLoadingChecks = false;
       return;
@@ -89,7 +101,8 @@
     let cancelled = false;
     isLoadingChecks = true;
     selectedCheckType = ALLE_CHECK_TYPE;
-    activeFinding = undefined;
+    resultsTab = RESULTS_TAB_FINDINGS;
+    activeItem = undefined;
     findings = [];
     checksError = undefined;
 
@@ -172,9 +185,33 @@
     return [...groups.values()];
   });
 
+  let obligations = $derived<Obligation[]>(
+    selectedVorhabenType === "existing"
+      ? (selectedExample?.obligations ?? [])
+      : [],
+  );
+  let hasObligations = $derived(obligations.length > 0);
+  let activeResultsTab = $derived<ResultsTab>(
+    hasObligations ? resultsTab : RESULTS_TAB_FINDINGS,
+  );
+
+  let obligationGroups = $derived.by(() => {
+    const groups = new SvelteMap<string, Obligation[]>();
+    for (const obligation of obligations) {
+      const group = groups.get(obligation.who);
+      if (group) {
+        group.push(obligation);
+      } else {
+        groups.set(obligation.who, [obligation]);
+      }
+    }
+    return [...groups.values()].sort((a, b) => b.length - a.length);
+  });
+
   $effect(() => {
-    selectedCheckType;
-    activeFinding = undefined;
+    void selectedCheckType;
+    void activeResultsTab;
+    activeItem = undefined;
   });
 </script>
 
@@ -232,27 +269,63 @@
       {:else}
         {#if !isLoadingChecks}
           <div class="kern-form-input">
-            <span class="kern-label">Ergebnisse nach Check filtern</span>
-            <div class="mt-8 flex flex-wrap gap-8">
-              {#each checkTypes as checkType (checkType)}
+            {#if hasObligations}
+              <div class="flex flex-wrap gap-8" role="tablist">
                 <ChipBtn
-                  selected={checkType === selectedCheckType}
-                  onclick={() => (selectedCheckType = checkType)}
+                  selected={activeResultsTab === RESULTS_TAB_FINDINGS}
+                  onclick={() => (resultsTab = RESULTS_TAB_FINDINGS)}
                 >
-                  {checkType === ALLE_CHECK_TYPE ? "Alle" : checkType}
+                  Ergebnisse nach Check filtern
                 </ChipBtn>
-              {/each}
-            </div>
+                <ChipBtn
+                  selected={activeResultsTab === RESULTS_TAB_OBLIGATIONS}
+                  onclick={() => (resultsTab = RESULTS_TAB_OBLIGATIONS)}
+                >
+                  Akteure/Pflichten
+                </ChipBtn>
+              </div>
+            {:else}
+              <span class="kern-label">Ergebnisse nach Check filtern</span>
+            {/if}
+            {#if activeResultsTab === RESULTS_TAB_FINDINGS}
+              <div class="mt-8 flex flex-wrap gap-8">
+                {#each checkTypes as checkType (checkType)}
+                  <ChipBtn
+                    selected={checkType === selectedCheckType}
+                    onclick={() => (selectedCheckType = checkType)}
+                  >
+                    {checkType === ALLE_CHECK_TYPE ? "Alle" : checkType}
+                  </ChipBtn>
+                {/each}
+              </div>
+            {/if}
           </div>
         {/if}
-        {#if isLoadingChecks}
+        {#if activeResultsTab === RESULTS_TAB_OBLIGATIONS}
+          {#if obligationGroups.length}
+            <div class="space-y-12">
+              {#each obligationGroups as obligationGroup (obligationGroup[0].who)}
+                <ObligationsGroup
+                  {obligationGroup}
+                  onOpenLocation={(clicked) =>
+                    (activeItem = { kind: "obligation", data: clicked })}
+                />
+              {/each}
+            </div>
+          {:else}
+            <p class="kern-body kern-body--muted">
+              Keine Pflichten für dieses Vorhaben.
+            </p>
+          {/if}
+        {:else if isLoadingChecks}
           <LoadingIndicator message={loadingStatusMessage} />
         {:else if selectedFindings.length}
           <div class="space-y-12">
             {#each selectedFindingsGroups as findingsGroup (findingsGroup[0].tag)}
               <FindingsGroup
                 {findingsGroup}
-                onOpenLocation={(clicked) => (activeFinding = clicked)}
+                onOpenLocation={(clicked) =>
+                  (activeItem = { kind: "finding", data: clicked })}
               />
             {/each}
           </div>
@@ -277,7 +350,7 @@
     body={selectedVorhabenType === "existing"
       ? (selectedExample?.body ?? "")
       : (analyzedDraftText ?? "")}
-    finding={activeFinding}
-    onClose={() => (activeFinding = undefined)}
+    active={activeItem}
+    onClose={() => (activeItem = undefined)}
   />
 </div>

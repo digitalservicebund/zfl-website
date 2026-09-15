@@ -178,6 +178,21 @@ const findingType = z.discriminatedUnion("type", [
 
 export type Finding = z.infer<typeof findingType>;
 
+const obligationType = z.object({
+  // Matches a <!--obligation:{id}:start--> / <!--obligation:{id}:end-->
+  // marker pair embedded in the potenziale entry's markdown body.
+  id: z.string(),
+  locationLabel: z.string(), // "§ 14 Abs. 2"
+  who: z.string(),
+  summary: z.string(),
+  // Verbatim quote the marker pair above wraps. Kept alongside the markers
+  // (not just used to place them) so the frontend can later match on this
+  // directly instead of the markers, without a skill/schema change.
+  quote: z.string(),
+});
+
+export type Obligation = z.infer<typeof obligationType>;
+
 const potenziale = defineCollection({
   loader: glob({
     pattern: "*.md",
@@ -187,6 +202,7 @@ const potenziale = defineCollection({
     title: z.string(),
     eli: z.string().optional(),
     findings: z.array(findingType),
+    obligations: z.array(obligationType).optional(),
   }),
 });
 
