@@ -17,10 +17,9 @@
   --color-lavender-400: #eceef6;
   --color-lavender-surface-highlight: #e3e6f2;
 
+  --color-surface-default: #f3f4f7;
   --color-kern-contextual: #6e7597;
-
   --color-icon-muted: #757575;
-
   --color-ds-violet: #4c2c92;
 
   --spacing-kern-default: var(--kern-metric-space-default);
