@@ -127,6 +127,8 @@ fileignoreconfig:
     checksum: d68b2abea5a2f030c40821897777800100d7491f847bdea1993c190c6ed16800
   - filename: src/pages/werkzeuge/ressourcen/technische-umsetzbarkeit.astro
     allowed_patterns: [IT-Anpassungen]
+  - filename: src/images/online-schulung.png
+    checksum: b4076e0bb36ad019ce4b14a5c1e3a6239adf73a8075423d84cb0db23e52ff542
 scopeconfig:
   - scope: node
 allowed_patterns:
