@@ -1,13 +1,17 @@
 ---
-import Hero from "@/components/Hero.astro";
-import { ZFL_PHONE, ZFL_EMAIL_SCHULUNG } from "@/config/constants.ts";
-import schulungenImage from "@/images/Schulungen.png";
 import Layout from "@/layouts/Layout.astro";
-import { Image } from "astro:assets";
-import appointments from "./_appointments.json";
+import Hero from "@/components/Hero.astro";
 import Schedule from "./_schedule.astro";
 import InfoPanel from "@/components/InfoPanel.astro";
+import KernCard from "@/components/KernCard.astro";
+import { Image } from "astro:assets";
+import { ZFL_PHONE, ZFL_EMAIL_SCHULUNG } from "@/config/constants.ts";
+import schulungenImg from "@/images/Schulungen.png";
 import onlineSchulungImg from "@/images/online-schulung.png";
+import visImg from "@/images/Trainings.jpg";
+import trainTheTrainerImg from "@/images/train-the-trainer.jpg";
+import computerImg from "@/images/computer.jpg";
+import appointments from "./_appointments.json";
 
 export const frontmatter = {
   title: "Schulungen",
@@ -33,7 +37,7 @@ const description =
         </div>
         <Image
           class="hidden h-344 w-530 md:block"
-          src={schulungenImage}
+          src={schulungenImg}
           alt=""
           aria-hidden
         />
@@ -126,6 +130,88 @@ const description =
           wir bestätigen die Anmeldung.
         </p>
       </InfoPanel>
+    </section>
+    <section>
+      <h2>Schulungsmaterialien herunterladen</h2>
+      <p>
+        Hier können Sie die Unterlagen (Foliensätze) zu den Schulungsangeboten
+        des Zentrums für Legistik herunterladen.
+      </p>
+      <div class="mt-md gap-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <KernCard
+          preline="Präsentation zur Schulung"
+          title="Regelungen digitaltauglich und interoperabel gestalten"
+          image={computerImg}
+          imageAlt="Symboldbild: Ein Laptop zeigt die fünf Prinzipien des Digitalchecks"
+        >
+          <p>
+            Praktische Tipps für den Digitalcheck: Wir zeigen Ihnen, wie Sie
+            mithilfe der fünf Prinzipien für digitaltaugliche Gesetzgebung Ihre
+            Vorhaben praxisnah, digital umsetzbar und über EU-Grenzen hinweg
+            kompatibel gestalten.
+          </p>
+          <a
+            slot="footer"
+            href="https://github.com/digitalservicebund/digitalcheck-content/blob/main/src/online-schulungen/2026-04__Digitalcheck_Online-Schulung_5_Prinzipien.pdf?raw=true"
+            class="kern-btn kern-btn--secondary"
+          >
+            <span
+              class="kern-icon kern-icon--download kern-icon--default"
+              aria-hidden="true"
+            ></span>
+            <span class="kern-label">Foliensätze (PDF)</span>
+          </a>
+        </KernCard>
+        <KernCard
+          preline="Präsentation zur Schulung"
+          title="Visualisierungen erstellen"
+          image={visImg}
+          imageAlt="Symbolbild: Erstellung eines Flussdiagrams"
+        >
+          <p>
+            „Recht gut gedacht – Recht besser gemacht! Visualisierung als
+            Werkzeug der Besseren Rechtsetzung”. Wir zeigen Ihnen, warum
+            Visualisierung nützlich ist und wie Sie Inhalte einfach darstellen
+            und für den Digitalcheck nutzen können.
+          </p>
+          <a
+            slot="footer"
+            href="https://github.com/digitalservicebund/digitalcheck-content/blob/main/src/online-schulungen/2025-06_Digitalcheck%20Online-Schulung_Visualisieren.pdf?raw=true"
+            class="kern-btn kern-btn--secondary"
+          >
+            <span
+              class="kern-icon kern-icon--download kern-icon--default"
+              aria-hidden="true"
+            ></span>
+            <span class="kern-label">Foliensätze (PDF)</span>
+          </a>
+        </KernCard>
+        <KernCard
+          preline="Präsentation zur Schulung"
+          title="Train-The-Trainer"
+          image={trainTheTrainerImg}
+          imageAlt="Symbolbild: Training"
+        >
+          <p>
+            Schulungsreihe in 3 Modulen zum Aufbau eines Kompetenzzentrums zur
+            Gestaltung digitaltauglicher Gesetze: Von den fünf Prinzipien und
+            EU-Interoperabilität über Praxischecks, Visualisierung und
+            Beteiligungsformate bis zur strategischen Beratung im
+            Gesetzgebungsprozess.
+          </p>
+          <a
+            slot="footer"
+            href="https://github.com/digitalservicebund/digitalcheck-content/blob/main/src/train-the-trainer-modul/2026_02_18_train-the-trainer-module.zip?raw=true"
+            class="kern-btn kern-btn--secondary"
+          >
+            <span
+              class="kern-icon kern-icon--download kern-icon--default"
+              aria-hidden="true"
+            ></span>
+            <span class="kern-label">Foliensätze (3 PDFs in ZIP)</span>
+          </a>
+        </KernCard>
+      </div>
     </section>
     <section class="space-y-40">
       <h2 id="schulungen-weitere" class="scroll-m-20">
