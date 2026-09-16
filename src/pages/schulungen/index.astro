@@ -103,16 +103,18 @@ const description =
         </div>
       </div>
     </section>
-    <section class="breakout bg-cosmic-blue-base text-white">
-      <h2 id="anmeldung">Anmeldung</h2>
-      <p>
-        Schicken Sie uns für eine Anmeldung den Schulungs- oder Modul-Namen und
-        Termin an die E-Mail{" "}
-        <a href={ZFL_EMAIL_SCHULUNG.url}>{ZFL_EMAIL_SCHULUNG.display}</a> und
-        wir bestätigen die Anmeldung.
-      </p>
+    <section>
+      <InfoPanel id="anmeldung" look="blue" padding="center">
+        <h2>Anmeldung</h2>
+        <p>
+          Schicken Sie uns für eine Anmeldung den Schulungs- oder Modul-Namen
+          und Termin an die E-Mail{" "}
+          <a href={ZFL_EMAIL_SCHULUNG.url}>{ZFL_EMAIL_SCHULUNG.display}</a> und
+          wir bestätigen die Anmeldung.
+        </p>
+      </InfoPanel>
     </section>
-    <section class="space-y-56">
+    <section class="space-y-40">
       <h2 id="schulungen-weitere" class="scroll-m-20">
         Weitere Angebote
       </h2>
