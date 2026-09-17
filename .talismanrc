@@ -130,6 +130,8 @@ fileignoreconfig:
     allowed_patterns:
       - rZHw3Hn9HKW-86-1nHQUWP0LZe5-cg
       - Sxzmf2FkxTibbNVByMIFM3srA_7GBw
+  - filename: src/images/online-schulung.png
+    ignore_detectors: [filecontent]
 scopeconfig:
   - scope: node
 allowed_patterns:
