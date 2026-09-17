@@ -8,17 +8,18 @@ import TocContainer from "@/components/global/TocContainer.astro";
 import akteureImg from "./_assets/akteure.png";
 import zielgruppeImg from "./_assets/zielgruppe.png";
 import checklistenImg from "./_assets/checkliste.png";
+import {
+  akteureAuflisten_docx,
+  zielgruppenanalyse_pptx,
+  checklisteInterviewfuehrung_docx,
+  buergercheck_pdf,
+} from "@/config/downloads";
 
 const frontmatter = {
   title: "Akteurinnen und Akteure identifizieren und Interviews vorbereiten",
   navLabel: "Interviewleitfaden",
   navOrder: 3,
 };
-
-const template_akteure = "/downloads/Akteure-auflisten.docx";
-const powerpoint_zielgruppe = "/downloads/Zielgruppenanalyse.pptx";
-const template_checklist = "/downloads/Checkliste-Interviewführung.docx";
-const buergercheck = "/downloads/Buergercheck.pdf";
 ---
 
 <Layout title={frontmatter.title}>
@@ -122,7 +123,10 @@ const buergercheck = "/downloads/Buergercheck.pdf";
             imageAlt="Schematische Darstellung der Vorlage mit dunkelblauen Blöcken mit den Aufschriften Akteursgruppe, Staatlich und Privatwirtschaft"
           >
             <div slot="footer">
-              <a href={template_akteure} class="kern-btn kern-btn--secondary">
+              <a
+                href={akteureAuflisten_docx.path}
+                class="kern-btn kern-btn--secondary"
+              >
                 <span
                   class="kern-icon kern-icon--download"
                   aria-hidden="true"
@@ -140,7 +144,7 @@ const buergercheck = "/downloads/Buergercheck.pdf";
           >
             <div slot="footer">
               <a
-                href={powerpoint_zielgruppe}
+                href={zielgruppenanalyse_pptx.path}
                 class="kern-btn kern-btn--secondary"
               >
                 <span
@@ -436,7 +440,10 @@ const buergercheck = "/downloads/Buergercheck.pdf";
             imageAlt="Schematische Darstellung der Checkliste mit dem Titel Ablaufplan: Stakeholder-Interviews und Elementen zum  Abhaken"
           >
             <div slot="footer">
-              <a href={template_checklist} class="kern-btn kern-btn--secondary">
+              <a
+                href={checklisteInterviewfuehrung_docx.path}
+                class="kern-btn kern-btn--secondary"
+              >
                 <span
                   class="kern-icon kern-icon--download"
                   aria-hidden="true"
@@ -487,7 +494,7 @@ const buergercheck = "/downloads/Buergercheck.pdf";
           </li>
           <li>
             <a
-              href={buergercheck}
+              href={buergercheck_pdf.path}
               target="_blank"
               rel="noopener"
               class="text-link text-link--download"

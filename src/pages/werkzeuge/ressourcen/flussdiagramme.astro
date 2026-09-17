@@ -7,6 +7,7 @@ import StepNumber from "@/components/StepNumber.astro";
 import InfoPanel from "@/components/InfoPanel.astro";
 import KernCard from "@/components/KernCard.astro";
 import { ZFL_EMAIL } from "@/config/constants";
+import { anleitungFlussdiagrammErstellen_pptx } from "@/config/downloads";
 import IconAutoStories from "~icons/ic/baseline-auto-stories";
 import startEndImg from "./_assets/start-endsymbol.png";
 import akteurImg from "./_assets/akteurin-akteur.png";
@@ -75,7 +76,6 @@ const aufbauElemente = [
 
 const conceptboardTemplate =
   "https://bmas.de.conceptboard.com/board-welcome/board/qh33-xcny-usde-7nc6-82cy?afterwardsUrl=https%3A%2F%2Fbmas.de.conceptboard.com%2Fboard%2Fqh33-xcny-usde-7nc6-82cy";
-const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
 ---
 
 <Layout title={frontmatter.title}>
@@ -201,7 +201,7 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
               </li>
               <li>
                 <a
-                  href={powerpointTemplate}
+                  href={anleitungFlussdiagrammErstellen_pptx.path}
                   class="text-link text-link--download"
                   download
                 >
