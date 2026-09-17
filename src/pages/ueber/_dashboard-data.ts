@@ -7,7 +7,7 @@ export const regbegData: ChartSeries[] = [
       { x: 2023, y: 2 },
       { x: 2024, y: 3 },
       { x: 2025, y: 6 },
-      { x: 2026, y: 9 },
+      { x: 2026, y: 10 },
     ],
   },
   {
@@ -16,7 +16,7 @@ export const regbegData: ChartSeries[] = [
       { x: 2023, y: 0 },
       { x: 2024, y: 2 },
       { x: 2025, y: 1 },
-      { x: 2026, y: 5 },
+      { x: 2026, y: 8 },
     ],
   },
 ];
