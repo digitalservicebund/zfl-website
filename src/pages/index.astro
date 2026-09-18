@@ -2,19 +2,21 @@
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
 import KernCard from "@/components/KernCard.astro";
-import InfoPanel from "@/components/InfoPanel.astro";
 import ImageTextOverlay from "@/components/ImageTextOverlay.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import allgemeinImage from "@/images/Trainings.jpg";
 import zusammenarbeitImg from "@/images/Zusammenarbeit.png";
 import schulungImage from "@/images/computer.jpg";
+import fruehphaseImage from "@/images/fruehphase-mockup-cropped.png";
 import ansatzImg from "@/images/Ansatz.jpg";
+import stickyNotesImg from "@/images/sticky-notes.jpg";
 import {
   schulungen,
   ueber_neueFruehphase,
   begleitungen,
   werkzeuge,
   ueber,
+  bessereRechtsetzung,
 } from "@/config/routes";
 import { mailto } from "@/utils/mailtoHelper";
 
@@ -74,22 +76,45 @@ export const frontmatter = {
     </section>
     <section>
       <ImageTextOverlay
-        image={ansatzImg}
-        imageAlt="Eine großflächige Grafik an einer Glaswand. Sie zeigt verschiedenfarbige Kreise mit Textinhalten."
-        linkHref={ueber.path}
-        linkText="Mehr erfahren"
+        image={fruehphaseImage}
+        imageAlt="Das Bild zeigt einen Laptop-Bildschirm mit einer Webseite des Zentrums für Legistik, die ein Prozess zur frühen Phase der Gesetzgebung zeigt."
+        linkHref={bessereRechtsetzung.path}
+        linkText="Darstellung öffnen"
+        look="lavender"
       >
-        <h2>Über uns</h2>
+        <h3>
+          Wie gelingt eine praxistaugliche und bürokratiearme Rechtsetzung?
+        </h3>
         <p>
-          Erfahren Sie mehr über den Auftrag und die Herangehensweise des
-          Zentrum für Legistik, aktuelle Arbeitspakete und Statistiken.
+          Das Zentrum für Legistik unterstützt Sie bereits in der
+          Konzeptionsphase, Regelungen neu zu gestalten. Diese Übersicht zeigt,
+          wie dies konkret aussehen könnte.
         </p>
       </ImageTextOverlay>
     </section>
-    <section class="bg-lavender-base breakout">
+    <section class="bg-lavender-400 breakout space-y-32">
+      <h2>Auf dem Laufenden bleiben</h2>
       <div class="grid grid-cols-1 gap-24 md:grid-cols-3 md:gap-32">
-        <InfoPanel>
-          <h2>Im Fokus</h2>
+        <KernCard
+          title="Über uns"
+          image={ansatzImg}
+          imageAlt="Eine großflächige Grafik an einer Glaswand. Sie zeigt verschiedenfarbige Kreise mit Textinhalten."
+        >
+          <p>
+            Erfahren Sie mehr über den Auftrag und die Herangehensweise des
+            Zentrum für Legistik, aktuelle Arbeitspakete und Statistiken.
+          </p>
+          <div slot="footer">
+            <a href={ueber.path} class="kern-btn kern-btn--secondary">
+              <span class="kern-label">Mehr erfahren</span>
+            </a>
+          </div>
+        </KernCard>
+        <KernCard
+          title="Im Fokus"
+          image={stickyNotesImg}
+          imageAlt="Symbolbild: Brainstorming"
+        >
           <p>
             <a href={schulungen.path}>Neue Schulungstermine</a>: Melden Sie sich
             für Schulungen zur besseren Rechtsetzung an.
@@ -110,9 +135,8 @@ export const frontmatter = {
             Das Zentrum für Legistik ist eine von vielen Initiativen, um den
             Staat schneller, digitaler und bürgernäher zu machen.
           </p>
-        </InfoPanel>
-        <InfoPanel class="md:col-span-2">
-          <h2 class="">Auf dem Laufenden bleiben</h2>
+        </KernCard>
+        <KernCard title="Newsletter">
           <p>
             Der Newsletter des Zentrum für Legistik erscheint mehrmals im Jahr
             und informiert Sie über:
@@ -137,21 +161,23 @@ export const frontmatter = {
             </a>
             .
           </p>
-          <a
-            class="kern-btn kern-btn--secondary mt-16 self-start"
-            href={mailto(
-              ZFL_EMAIL.url,
-              "Anmeldung Zentrum für Legistik Newsletter",
-              "Hiermit melde ich mich für den Zentrum für Legistik Newsletter an.",
-            )}
-          >
-            <span
-              class="kern-icon kern-icon--open-in-new"
-              aria-hidden="true"
-            ></span>
-            <span class="kern-label">E-Mail Programm öffnen</span>
-          </a>
-        </InfoPanel>
+          <div slot="footer">
+            <a
+              class="kern-btn kern-btn--secondary"
+              href={mailto(
+                ZFL_EMAIL.url,
+                "Anmeldung Zentrum für Legistik Newsletter",
+                "Hiermit melde ich mich für den Zentrum für Legistik Newsletter an.",
+              )}
+            >
+              <span
+                class="kern-icon kern-icon--open-in-new"
+                aria-hidden="true"
+              ></span>
+              <span class="kern-label">E-Mail Programm öffnen</span>
+            </a>
+          </div>
+        </KernCard>
       </div>
     </section>
     <section class="breakout bg-cosmic-blue-base text-white">

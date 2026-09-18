@@ -5,6 +5,7 @@ import KernCard from "@/components/KernCard.astro";
 import {
   werkzeuge_ressourcen,
   werkzeuge_praxistauglichkeit,
+  werkzeuge_digitaltauglichkeit,
 } from "@/config/routes";
 import ressourcenImg from "./_assets/ressourcen.png";
 import praxitauglichkeitImg from "./_assets/praxistauglichkeit.png";
@@ -51,7 +52,7 @@ export const frontmatter = {
         title={"Digitaltauglichkeit"}
         image={digitaltauglichkeitImg}
         imageAlt={""}
-        href={werkzeuge_ressourcen.path}
+        href={werkzeuge_digitaltauglichkeit.path}
         interactive={true}
       >
         Erfahren Sie hier, was Digitaltauglichkeit für Ihr Vorhaben bedeutet,

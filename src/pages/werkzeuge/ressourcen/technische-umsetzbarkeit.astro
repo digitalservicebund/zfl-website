@@ -4,6 +4,7 @@ import Hero from "@/components/Hero.astro";
 import ImageTextOverlay from "@/components/ImageTextOverlay.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import { werkzeuge_ressourcen_interviewleitfaden } from "@/config/routes";
+import { schaubildTechnischeUmsetzbarkeit_pdf } from "@/config/downloads";
 import technischeUmsetzbarkeit from "../_assets/technischeUmsetzbarkeit.png";
 
 const frontmatter = {
@@ -11,8 +12,6 @@ const frontmatter = {
   navLabel: "Technische Umsetzbarkeit",
   navOrder: 5,
 };
-
-const schaubild = "/downloads/SchaubildTechnischeUmsetzbarkeit.pdf";
 ---
 
 <Layout title={frontmatter.title}>
@@ -47,7 +46,7 @@ const schaubild = "/downloads/SchaubildTechnischeUmsetzbarkeit.pdf";
         image={technischeUmsetzbarkeit}
         imageAlt="Schematische und stilisierte Darstellung des Dokuments Gesprächsleitfaden technische Umsetzbarkeit. Mehrere bunte Kästen sind untereinander dargestellt, mit einer schwarzen Linie, die sie verbindet. "
         imageBorder
-        linkHref={schaubild}
+        linkHref={schaubildTechnischeUmsetzbarkeit_pdf.path}
         linkText="Vorlage herunterladen (PDF-Datei)"
         icon="open-in-new"
       >
