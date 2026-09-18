@@ -1,0 +1,287 @@
+---
+import "@/styles/charts.css";
+
+export interface ChartDataPoint {
+  x: string | number;
+  y: number;
+}
+
+export interface ChartSeries {
+  label: string;
+  values: ChartDataPoint[];
+}
+
+interface Props {
+  data: ChartSeries[];
+  stack?: boolean;
+  title?: string;
+  class?: string;
+  type?: "column" | "pie";
+}
+
+const {
+  data,
+  type = "column",
+  stack = false,
+  title,
+  class: className,
+} = Astro.props;
+
+const isPie = type === "pie";
+
+const seriesColors = [
+  "var(--color-cosmic-blue-base)",
+  "var(--color-cosmic-blue-400)",
+];
+const colorFor = (index: number) => seriesColors[index % seriesColors.length];
+
+// Categories are taken from the first series
+const categories = data[0]?.values.map((point) => String(point.x)) ?? [];
+
+const rows = categories.map((_, categoryIndex) =>
+  data.map((series) => series.values[categoryIndex]?.y ?? 0),
+);
+
+const axisMax = stack
+  ? Math.max(
+      0,
+      ...rows.map((row) => row.reduce((sum, value) => sum + value, 0)),
+    )
+  : Math.max(0, ...rows.flat());
+
+// Pie charts render every cell (across all categories and series) as a
+// slice of a single circle, drawn via cumulative --start/--end fractions
+const pieTotal = rows.flat().reduce((sum, value) => sum + value, 0);
+let pieCumulative = 0;
+const pieStartEnd = (value: number) => {
+  const start = pieTotal > 0 ? pieCumulative / pieTotal : 0;
+  pieCumulative += value;
+  const end = pieTotal > 0 ? pieCumulative / pieTotal : 0;
+  return { start, end };
+};
+
+const isMultiSeries = data.length > 1;
+
+const colorVars = data
+  .map((_, index) => `--color-${index + 1}: ${colorFor(index)};`)
+  .join(" ");
+
+// For each series, hovering its legend item or any of its cells dims
+// everything else (other legend items, other columns' cells). One rule per
+// series since the selectors depend on data.length; not expressible in
+// Astro's static <style>.
+const legendHoverCss = data
+  .map((_, index) => {
+    const hoverLi = `.legend li:nth-child(${index + 1}):hover`;
+    const hoverTd = `td:nth-child(${index + 1} of td):hover`;
+    const otherLi = `.legend li:not(:nth-child(${index + 1}))`;
+    const otherTd = `td:not(:nth-child(${index + 1} of td))`;
+    return `
+      .zfl-chart:has(${hoverLi}) ${otherTd},
+      .zfl-chart:has(${hoverLi}) ${otherLi},
+      .zfl-chart:has(${hoverTd}) ${otherLi},
+      .zfl-chart:has(${hoverTd}) ${otherTd} {
+        opacity: 0.2;
+        filter: grayscale(1);
+      }
+    `;
+  })
+  .join("");
+
+const formatValue = (value: number) => value.toLocaleString("de-DE");
+
+// Custom clip path for tooltips of pie slices
+const pieClipPath = (start: number, end: number) => {
+  const segments = Math.max(2, Math.ceil((end - start) * 64));
+  const points = ["50% 50%"];
+  for (let i = 0; i <= segments; i++) {
+    const fraction = start + ((end - start) * i) / segments;
+    const angle = fraction * Math.PI * 2;
+    const x = 50 + 50 * Math.sin(angle);
+    const y = 50 - 50 * Math.cos(angle);
+    points.push(`${x.toFixed(2)}% ${y.toFixed(2)}%`);
+  }
+  return `polygon(${points.join(", ")})`;
+};
+---
+
+<div class:list={["zfl-chart", className]}>
+  <table
+    class:list={[
+      "charts-css",
+      type,
+      !!title && "show-heading",
+      "show-labels",
+      stack ? "hide-data" : "data-outside pt-24",
+      "data-spacing-10",
+      stack && "stacked",
+      isMultiSeries && !stack && "datasets-spacing-1",
+    ]}
+    style={colorVars}
+  >
+    {title && <caption class="kern-title text-left">{title}</caption>}
+    <thead>
+      <tr>
+        <th scope="col">
+          <span class="sr-only">Kategorie</span>
+        </th>
+        {data.map((series) => (
+          <th scope="col">{series.label}</th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {categories.map((category, categoryIndex) => (
+        <tr>
+          <th scope="row">{category}</th>
+          {data.map((series, seriesIndex) => {
+            const value = series.values[categoryIndex]?.y ?? 0;
+            let cellStyle: string;
+            if (isPie) {
+              const { start, end } = pieStartEnd(value);
+              cellStyle = `--start: ${start}; --end: ${end}; --pie-clip: ${pieClipPath(start, end)};`;
+            } else {
+              cellStyle = `--size: ${axisMax > 0 ? value / axisMax : 0};`;
+            }
+            return (
+              <td
+                style={`${cellStyle} --color: ${colorFor(seriesIndex)};`}
+                tabindex="0"
+                class:list={[value === 0 && "invisible"]}
+              >
+                <span class="data kern-body kern-body--small kern-body--muted">
+                  {formatValue(value)}
+                </span>
+                <span class="tooltip">
+                  <span class="max-sm:hidden">{series.label}:</span>{" "}
+                  {formatValue(value)}
+                </span>
+              </td>
+            );
+          })}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+
+  {isMultiSeries && (
+    <ul class="charts-css legend legend-inline legend-circle" style={colorVars}>
+      {data.map((series) => (
+        <li>{series.label}</li>
+      ))}
+    </ul>
+  )}
+</div>
+
+{isMultiSeries && <style set:html={legendHoverCss}></style>}
+
+<style>
+  .zfl-chart {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  table.charts-css {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    tbody {
+      height: 100%;
+    }
+  }
+
+  table.column.show-labels tbody {
+    padding-top: 24px;
+    padding-bottom: 8px;
+  }
+
+  table.show-heading caption {
+    margin-bottom: 1em;
+  }
+
+  table.pie tbody {
+    width: 67%;
+    margin-inline: auto;
+
+    td span.data {
+      visibility: hidden;
+    }
+  }
+
+  table.stacked tbody tr {
+    gap: 2px;
+  }
+
+  table.column {
+    --aspect-ratio: 4/3;
+
+    tr th {
+      transform: translateY(8px);
+    }
+
+    tr td {
+      margin-inline: auto;
+      border-radius: 2px;
+    }
+  }
+
+  .tooltip {
+    background-color: black;
+    &::after {
+      border-top-color: black;
+    }
+  }
+
+  table.pie td {
+    --tooltip-radius: 30%;
+    --tooltip-angle: calc(0.5turn * var(--start, 0) + 0.5turn * var(--end, 0));
+    /* Only the wedge-shaped ::before (see below) should receive hover/click. */
+    pointer-events: none;
+
+    .tooltip {
+      inset-inline-start: calc(
+        50% + var(--tooltip-radius) * sin(var(--tooltip-angle))
+      );
+      inset-block-end: calc(
+        50% + var(--tooltip-radius) * cos(var(--tooltip-angle))
+      );
+    }
+
+    &::before {
+      clip-path: var(--pie-clip);
+      pointer-events: auto;
+    }
+  }
+
+  table td:focus-visible .tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .legend {
+    height: auto;
+    flex-shrink: 0;
+    border: none;
+    padding: 0;
+    gap: 8px;
+
+    li {
+      line-height: 1.5;
+      transition:
+        opacity 0.15s ease,
+        filter 0.15s ease;
+      &::before {
+        border: none;
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  table.charts-css td {
+    transition:
+      opacity 0.15s ease,
+      filter 0.15s ease;
+  }
+</style>
