@@ -43,7 +43,7 @@
     "alpinejs": "^3.17.3",
     "astro": "^7.3.2",
     "astro-pagefind": "^2.0.1",
-    "astro-route-generator": "github:digitalservicebund/astro-route-generator#0.2.5",
+    "astro-route-generator": "github:digitalservicebund/astro-route-generator#0.1.15",
     "astro-seo": "^1.2.0",
     "pagefind": "^1.5.2",
     "posthog-js": "^1.433.5",
