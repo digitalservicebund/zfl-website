@@ -327,9 +327,9 @@ address {
 
   /*
     By default, children of a `breakout` element are placed back into the central `content` column of the parent grid.
-    To make a child of a `breakout` element also span the full width, apply `grid-column: full` to it.
+    To make a child of a `breakout` element also span the full width, apply `grid-column: full` to it (or nest another `.breakout`).
   */
-  & > * {
+  & > *:not([class*="breakout"]) {
     grid-column: content;
   }
 }
