@@ -17,6 +17,10 @@
   import { getMermaid, getVisOptions } from "../_shared/api.ts";
   import Viewer from "./_Viewer.svelte";
   import type { LawExample, VisOption } from "./_types";
+  import PresetBtn from "./_PresetBtn.svelte";
+  import IconAccountTree from "~icons/ic/outline-account-tree";
+  import IconHub from "~icons/ic/outline-hub";
+  import IconTimeline from "~icons/ic/outline-view-timeline";
 
   let {
     examples,
@@ -25,10 +29,13 @@
 
   type LawType = { id: string; label: string };
   const lawTypes = [
-    { id: "existing", label: "bestehendes Gesetz" },
     { id: "own", label: "eigenes Vorhaben" },
+    { id: "existing", label: "bestehendes Gesetz" },
   ] as const satisfies LawType[];
-  let selectedLawType = $state<(typeof lawTypes)[number]["id"]>("existing");
+  let selectedLawType = $state<(typeof lawTypes)[number]["id"]>("own");
+
+  type Preset = "flow" | "swimlane" | "graph";
+  let preset = $state<Preset>("flow");
 
   function configureMermaid(htmlLabels: boolean) {
     mermaid.initialize({
@@ -514,11 +521,37 @@
   </div>
 {/snippet}
 
+{#snippet presets()}
+  <div class="grid lg:grid-cols-3 gap-16">
+    <PresetBtn
+      title="Entscheidungslogik"
+      active={preset === "flow"}
+      onclick={() => (preset = "flow")}
+      icon={IconAccountTree}
+    ></PresetBtn>
+    <PresetBtn
+      title="Ablauf in der Praxis"
+      active={preset === "swimlane"}
+      onclick={() => (preset = "swimlane")}
+      icon={IconTimeline}
+    ></PresetBtn>
+    <PresetBtn
+      title="Akteure"
+      active={preset === "graph"}
+      onclick={() => (preset = "graph")}
+      icon={IconHub}
+    ></PresetBtn>
+  </div>
+{/snippet}
+
 <div class="grid grid-cols-1 sm:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] gap-40">
   <div class="flex min-w-0 flex-col justify-between gap-32">
     <div class="space-y-32">
       <div class="kern-form-input">
         <span class="kern-label">Was möchten Sie visualisieren?</span>
+        {@render presets()}
+      </div>
+      <div class="space-y-16">
         <div class="flex flex-wrap gap-8">
           {#each lawTypes as lt (lt.id)}
             <ChipBtn
@@ -531,30 +564,30 @@
             >
           {/each}
         </div>
+        {#if selectedLawType === "existing"}
+          <ExampleFinder {examples} bind:selected={selectedExample} />
+        {:else}
+          <div class="space-y-16">
+            <div class="kern-form-input">
+              <textarea
+                class="kern-form-input__input h-150"
+                id="draft"
+                name="draft"
+                placeholder="Kopieren Sie einen Ausschnitt ihres Vorhabens hierher, den Sie visualisieren möchten"
+                bind:value={draftText}></textarea>
+            </div>
+            <div>
+              <button
+                type="button"
+                class="kern-btn kern-btn--primary"
+                disabled={!draftText.trim()}
+                onclick={analyzeDraft}
+                ><span class="kern-label">Analysieren</span></button
+              >
+            </div>
+          </div>
+        {/if}
       </div>
-      {#if selectedLawType === "existing"}
-        <ExampleFinder {examples} bind:selected={selectedExample} />
-      {:else}
-        <div class="space-y-16">
-          <div class="kern-form-input">
-            <label class="kern-label" for="draft">Ihr Entwurf</label>
-            <textarea
-              class="kern-form-input__input"
-              id="draft"
-              name="draft"
-              bind:value={draftText}></textarea>
-          </div>
-          <div>
-            <button
-              type="button"
-              class="kern-btn kern-btn--primary"
-              disabled={!draftText.trim()}
-              onclick={analyzeDraft}
-              ><span class="kern-label">Analysieren</span></button
-            >
-          </div>
-        </div>
-      {/if}
       {#if selectedExample}
         <p class="kern-body kern-body--muted">
           Originaltext: <a

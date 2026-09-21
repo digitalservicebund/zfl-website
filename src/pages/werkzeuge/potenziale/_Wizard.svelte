@@ -233,7 +233,11 @@
       </div>
     </div>
     {#if selectedVorhabenType === "existing"}
-      <ExampleFinder {examples} bind:selected={selectedExample} />
+      <ExampleFinder
+        {examples}
+        bind:selected={selectedExample}
+        showLabel={true}
+      />
     {:else}
       <div class="space-y-16">
         <div class="kern-form-input">

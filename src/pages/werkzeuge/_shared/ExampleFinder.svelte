@@ -4,9 +4,10 @@
   interface Props {
     examples: T[];
     selected: T | undefined;
+    showLabel?: boolean;
   }
 
-  let { examples, selected = $bindable() }: Props = $props();
+  let { examples, selected = $bindable(), showLabel }: Props = $props();
 
   function exampleLabel(example: T | undefined): string {
     return example ? `${example.title} (${example.short})` : "";
@@ -106,7 +107,9 @@
 </script>
 
 <div class="kern-form-input max-w-a11y">
-  <label class="kern-label" for="gesetz">Wählen Sie Ihr Gesetz</label>
+  {#if showLabel}
+    <label class="kern-label" for="gesetz">Wählen Sie Ihr Gesetz</label>
+  {/if}
   <div class="kern-input-group">
     <!-- eslint-disable-next-line svelte/no-static-element-interactions -- listens for focusout bubbling from the input/listbox to close the popup on outside focus -->
     <div class="relative flex-[999_1_220px]" onfocusout={handleFocusOut}>
