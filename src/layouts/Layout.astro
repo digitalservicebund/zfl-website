@@ -21,6 +21,7 @@ interface Props {
   description?: string;
   excludeFromSearch?: boolean;
   pagefindWeight?: number;
+  noMenu?: boolean;
 }
 
 const {
@@ -28,6 +29,7 @@ const {
   description,
   excludeFromSearch,
   pagefindWeight,
+  noMenu,
 } = Astro.props;
 
 const siteName = "Zentrum für Legistik";
@@ -35,7 +37,8 @@ const title = pageTitle ? `${pageTitle} — ${siteName}` : siteName;
 const SEOImage = `${Astro.url.origin}/SEO_ZfL.png`;
 const currentRoute = getRouteByPath(Astro.url.pathname);
 const [sectionRoot] = currentRoute ? getRouteChain(currentRoute) : [];
-const showSectionSidebar = !!sectionRoot && hasVisibleChildren(sectionRoot);
+const showSectionSidebar =
+  !!sectionRoot && hasVisibleChildren(sectionRoot) && !noMenu;
 
 const defaultDescription =
   "Das Zentrum für Legistik unterstützt Sie bei der Ausarbeitung von Regelungen. Sie stellen damit sicher, dass Ihr Vorhaben betroffenenzentriert, praxistauglich und digital umsetzbar ist.";
