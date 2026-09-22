@@ -2,40 +2,37 @@
   import mermaid from "mermaid";
   import { untrack } from "svelte";
   import { SvelteURLSearchParams } from "svelte/reactivity";
-  import { werkzeuge_potenziale } from "@/config/routes";
   import {
     isMermaidFlowchart,
     mermaidFlowchartToRulemapXml,
   } from "./_mermaid2RulemapXML.ts";
   import { parseMmdFrontmatter } from "./_mmdFrontmatter.ts";
-  import ChipBtn from "../_shared/ChipBtn.svelte";
   import { resolveEliUrl } from "../_shared/eli.ts";
-  import ExampleFinder from "../_shared/ExampleFinder.svelte";
   import { createFakeLoadingSequence } from "../_shared/fakeLoading.ts";
-  import Hint from "../_shared/Hint.svelte";
-  import LoadingIndicator from "../_shared/LoadingIndicator.svelte";
   import { getMermaid, getVisOptions } from "../_shared/api.ts";
   import Viewer from "./_Viewer.svelte";
-  import type { LawExample, VisOption } from "./_types";
-  import PresetBtn from "./_PresetBtn.svelte";
-  import IconAccountTree from "~icons/ic/outline-account-tree";
-  import IconHub from "~icons/ic/outline-hub";
-  import IconTimeline from "~icons/ic/outline-view-timeline";
+  import type { LawExample } from "./_types";
+  import Step1 from "./_Step1.svelte";
+  import { WizardState, setWizardContext } from "./_wizardState.svelte.ts";
+  import Step2 from "./_Step2.svelte";
+  import Step3 from "./_Step3.svelte";
 
   let {
     examples,
     pruefbareShorts,
   }: { examples: LawExample[]; pruefbareShorts: string[] } = $props();
 
-  type LawType = { id: string; label: string };
-  const lawTypes = [
-    { id: "own", label: "eigenes Vorhaben" },
-    { id: "existing", label: "bestehendes Gesetz" },
-  ] as const satisfies LawType[];
-  let selectedLawType = $state<(typeof lawTypes)[number]["id"]>("own");
+  const wizard = new WizardState();
+  setWizardContext(wizard);
 
-  type Preset = "flow" | "swimlane" | "graph";
-  let preset = $state<Preset>("flow");
+  // Defines the order of the steps; each step's own component still takes
+  // its own specific props, wired explicitly where it's rendered below.
+  type StepDef = { title: string };
+  const steps: StepDef[] = [
+    { title: "Vorhaben wählen" },
+    { title: "Teilbereich wählen" },
+    { title: "Ergebnis" },
+  ];
 
   function configureMermaid(htmlLabels: boolean) {
     mermaid.initialize({
@@ -68,24 +65,9 @@
   const initialVisualization = searchParams.get("visualization");
   let hasAppliedInitialVisualization = false;
 
-  let selectedExample = $state(
-    untrack(() => examples.find((example) => example.short === initialNorm)),
+  wizard.selectedExample = untrack(() =>
+    examples.find((example) => example.short === initialNorm),
   );
-
-  let draftText = $state("");
-  let analyzedDraftText = $state<string>();
-
-  function analyzeDraft() {
-    const trimmed = draftText.trim();
-    if (!trimmed) return;
-    analyzedDraftText = trimmed;
-  }
-
-  let visOptionsSource = $derived<LawExample | string | undefined>(
-    selectedLawType === "existing" ? selectedExample : analyzedDraftText,
-  );
-
-  let selectedVisOption = $state<string>();
 
   const LAW_STEP_STATUS_MESSAGES = [
     "Lese Gesetzestext …",
@@ -97,42 +79,37 @@
     "Erstelle Diagramm …",
     "Rendere Visualisierung …",
   ];
-  let loadingStatusMessage = $state(LAW_STEP_STATUS_MESSAGES[0]);
-
-  let isLoadingVisOptions = $state(false);
-  let visOptions = $state<VisOption[]>([]);
-  let visOptionsSessionId = $state<string>();
-  let visOptionsError = $state<string>();
+  wizard.loadingStatusMessage = LAW_STEP_STATUS_MESSAGES[0];
 
   $effect(() => {
-    if (!visOptionsSource) {
-      visOptions = [];
-      selectedVisOption = undefined;
-      visOptionsSessionId = undefined;
-      visOptionsError = undefined;
-      isLoadingVisOptions = false;
+    if (!wizard.visOptionsSource) {
+      wizard.visOptions = [];
+      wizard.selectedVisOption = undefined;
+      wizard.visOptionsSessionId = undefined;
+      wizard.visOptionsError = undefined;
+      wizard.isLoadingVisOptions = false;
       return;
     }
-    const source = visOptionsSource;
+    const source = wizard.visOptionsSource;
 
     let cancelled = false;
-    isLoadingVisOptions = true;
-    selectedVisOption = undefined;
-    visOptions = [];
-    visOptionsSessionId = undefined;
-    visOptionsError = undefined;
+    wizard.isLoadingVisOptions = true;
+    wizard.selectedVisOption = undefined;
+    wizard.visOptions = [];
+    wizard.visOptionsSessionId = undefined;
+    wizard.visOptionsError = undefined;
 
     const { promise: fakeDelay, cancel } = createFakeLoadingSequence(
       LAW_STEP_STATUS_MESSAGES,
-      (message) => (loadingStatusMessage = message),
+      (message) => (wizard.loadingStatusMessage = message),
     );
 
     Promise.all([getVisOptions(source), fakeDelay])
       .then(([result]) => {
         if (cancelled) return;
-        visOptions = result.options;
-        visOptionsSessionId = result.sessionId;
-        isLoadingVisOptions = false;
+        wizard.visOptions = result.options;
+        wizard.visOptionsSessionId = result.sessionId;
+        wizard.isLoadingVisOptions = false;
 
         if (!hasAppliedInitialVisualization) {
           hasAppliedInitialVisualization = true;
@@ -140,16 +117,16 @@
             (option) => option.name === initialVisualization,
           );
           if (initialOption) {
-            selectedVisOption = initialOption.name;
+            wizard.selectedVisOption = initialOption.name;
           }
         }
       })
       .catch((error: unknown) => {
         if (cancelled) return;
         console.error(error);
-        visOptionsError =
+        wizard.visOptionsError =
           "Die Visualisierungsoptionen konnten nicht geladen werden.";
-        isLoadingVisOptions = false;
+        wizard.isLoadingVisOptions = false;
       });
 
     return () => {
@@ -158,17 +135,43 @@
     };
   });
 
+  // Advances past step 1 as soon as a valid input is provided. Reads
+  // wizard.currentStep via untrack so navigating back to step 1 (where the
+  // input is still set from before) doesn't immediately bounce forward again.
+  $effect(() => {
+    if (wizard.visOptionsSource) {
+      untrack(() => {
+        if (wizard.currentStep < 2) wizard.currentStep = 2;
+      });
+    }
+  });
+
   let selectedOption = $derived(
-    visOptions.find((option) => option.name === selectedVisOption),
+    wizard.visOptions.find(
+      (option) => option.name === wizard.selectedVisOption,
+    ),
   );
 
+  // Same rationale as the step 1 → 2 advance above: advances as soon as the
+  // user picks a vis option, before the mermaid diagram has even started
+  // loading, so Step3 is on screen to show its own loading state.
+  $effect(() => {
+    if (wizard.selectedVisOption) {
+      untrack(() => {
+        if (wizard.currentStep < 3) wizard.currentStep = 3;
+      });
+    }
+  });
+
   let canPruefen = $derived(
-    selectedExample ? pruefbareShorts.includes(selectedExample.short) : false,
+    wizard.selectedExample
+      ? pruefbareShorts.includes(wizard.selectedExample.short)
+      : false,
   );
 
   $effect(() => {
-    if (selectedExample) {
-      searchParams.set("norm", selectedExample.short);
+    if (wizard.selectedExample) {
+      searchParams.set("norm", wizard.selectedExample.short);
     } else {
       searchParams.delete("norm");
     }
@@ -184,50 +187,46 @@
     window.history.replaceState(null, "", newUrl);
   });
 
-  let mermaidSource = $state("");
-  let summary = $state("");
   let diagramSvg = $state("");
-  let isLoading = $state(false);
-  let mermaidError = $state<string>();
   let viewerOpen = $state(false);
   let renderCount = 0;
 
   $effect(() => {
     if (!selectedOption) {
-      mermaidSource = "";
-      summary = "";
-      isLoading = false;
-      mermaidError = undefined;
+      wizard.mermaidSource = "";
+      wizard.summary = "";
+      wizard.isLoading = false;
+      wizard.mermaidError = undefined;
       return;
     }
 
-    if (selectedLawType === "existing") {
-      if (!selectedExample) {
-        mermaidSource = "";
-        summary = "";
-        isLoading = false;
+    if (wizard.selectedLawType === "existing") {
+      if (!wizard.selectedExample) {
+        wizard.mermaidSource = "";
+        wizard.summary = "";
+        wizard.isLoading = false;
         return;
       }
-      const example = selectedExample;
+      const example = wizard.selectedExample;
       const option = selectedOption;
 
       let cancelled = false;
-      isLoading = true;
-      mermaidError = undefined;
+      wizard.isLoading = true;
+      wizard.mermaidError = undefined;
 
       const path = `../../../content/ki-visualisierungen/${example.short}/${option.filename}.mmd`;
       const eli = example.eli;
 
       const { promise: fakeDelay, cancel } = createFakeLoadingSequence(
         VIS_OPTION_STEP_STATUS_MESSAGES,
-        (message) => (loadingStatusMessage = message),
+        (message) => (wizard.loadingStatusMessage = message),
       );
 
       Promise.all([mermaidSources[path](), fakeDelay]).then(([source]) => {
         if (cancelled) return;
         const parsed = parseMmdFrontmatter(resolveNormLinks(source, eli));
-        summary = parsed.summary;
-        mermaidSource = parsed.body;
+        wizard.summary = parsed.summary;
+        wizard.mermaidSource = parsed.body;
       });
 
       return () => {
@@ -235,35 +234,35 @@
         cancel();
       };
     } else {
-      if (!visOptionsSessionId) {
-        mermaidSource = "";
-        summary = "";
-        isLoading = false;
+      if (!wizard.visOptionsSessionId) {
+        wizard.mermaidSource = "";
+        wizard.summary = "";
+        wizard.isLoading = false;
         return;
       }
-      const sessionId = visOptionsSessionId;
+      const sessionId = wizard.visOptionsSessionId;
       const option = selectedOption;
 
       let cancelled = false;
-      isLoading = true;
-      summary = "";
-      mermaidError = undefined;
+      wizard.isLoading = true;
+      wizard.summary = "";
+      wizard.mermaidError = undefined;
 
       const { promise: fakeDelay, cancel } = createFakeLoadingSequence(
         VIS_OPTION_STEP_STATUS_MESSAGES,
-        (message) => (loadingStatusMessage = message),
+        (message) => (wizard.loadingStatusMessage = message),
       );
 
       Promise.all([getMermaid(sessionId, option), fakeDelay])
         .then(([source]) => {
           if (cancelled) return;
-          mermaidSource = source;
+          wizard.mermaidSource = source;
         })
         .catch((error: unknown) => {
           if (cancelled) return;
           console.error(error);
-          mermaidError = "Das Diagramm konnte nicht erstellt werden.";
-          isLoading = false;
+          wizard.mermaidError = "Das Diagramm konnte nicht erstellt werden.";
+          wizard.isLoading = false;
         });
 
       return () => {
@@ -274,16 +273,16 @@
   });
 
   $effect(() => {
-    if (!mermaidSource) return;
+    if (!wizard.mermaidSource) return;
 
     let cancelled = false;
 
     mermaid
-      .render(`mermaid-diagram-${renderCount++}`, mermaidSource)
+      .render(`mermaid-diagram-${renderCount++}`, wizard.mermaidSource)
       .then(({ svg }) => {
         if (cancelled) return;
         diagramSvg = svg;
-        isLoading = false;
+        wizard.isLoading = false;
       });
 
     return () => {
@@ -298,12 +297,14 @@
     return source.replace(/<a\b[^>]*>(.*?)<\/a>/gis, "$1");
   }
 
-  let filenameBase = $derived(selectedExample?.short ?? "eigener-entwurf");
+  let filenameBase = $derived(
+    wizard.selectedExample?.short ?? "eigener-entwurf",
+  );
 
   async function downloadSvg() {
-    if (!mermaidSource || !selectedOption) return;
+    if (!wizard.mermaidSource || !selectedOption) return;
 
-    const exportSource = stripLinks(mermaidSource);
+    const exportSource = stripLinks(wizard.mermaidSource);
 
     configureMermaid(false);
     let svg: string;
@@ -338,9 +339,9 @@
   let mermaidCopiedTimeoutId: ReturnType<typeof setTimeout> | undefined;
 
   async function copyMermaidSource() {
-    if (!mermaidSource) return;
+    if (!wizard.mermaidSource) return;
 
-    await navigator.clipboard.writeText(stripLinks(mermaidSource));
+    await navigator.clipboard.writeText(stripLinks(wizard.mermaidSource));
 
     mermaidCopied = true;
     clearTimeout(mermaidCopiedTimeoutId);
@@ -350,22 +351,24 @@
   }
 
   let drawioUrl = $derived(
-    mermaidSource
+    wizard.mermaidSource
       ? `https://app.diagrams.net/#create=${encodeURIComponent(
-          JSON.stringify({ type: "mermaid", data: mermaidSource }),
+          JSON.stringify({ type: "mermaid", data: wizard.mermaidSource }),
         )}`
       : undefined,
   );
 
   let canExportRulemap = $derived(
-    mermaidSource ? isMermaidFlowchart(mermaidSource) : false,
+    wizard.mermaidSource ? isMermaidFlowchart(wizard.mermaidSource) : false,
   );
 
+  let showCanvas = $derived(wizard.isLoading || !!wizard.mermaidSource);
+
   function downloadRulemapXml() {
-    if (!mermaidSource || !selectedOption) return;
+    if (!wizard.mermaidSource || !selectedOption) return;
 
     const xml = mermaidFlowchartToRulemapXml(
-      mermaidSource,
+      wizard.mermaidSource,
       `${filenameBase}: ${selectedOption.name}`,
     );
 
@@ -521,162 +524,88 @@
   </div>
 {/snippet}
 
-{#snippet presets()}
-  <div class="grid lg:grid-cols-3 gap-16">
-    <PresetBtn
-      title="Entscheidungslogik"
-      active={preset === "flow"}
-      onclick={() => (preset = "flow")}
-      icon={IconAccountTree}
-    ></PresetBtn>
-    <PresetBtn
-      title="Ablauf in der Praxis"
-      active={preset === "swimlane"}
-      onclick={() => (preset = "swimlane")}
-      icon={IconTimeline}
-    ></PresetBtn>
-    <PresetBtn
-      title="Akteure"
-      active={preset === "graph"}
-      onclick={() => (preset = "graph")}
-      icon={IconHub}
-    ></PresetBtn>
-  </div>
-{/snippet}
-
-<div class="grid grid-cols-1 sm:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] gap-40">
-  <div class="flex min-w-0 flex-col justify-between gap-32">
-    <div class="space-y-32">
-      <div class="kern-form-input">
-        <span class="kern-label">Was möchten Sie visualisieren?</span>
-        {@render presets()}
-      </div>
-      <div class="space-y-16">
-        <div class="flex flex-wrap gap-8">
-          {#each lawTypes as lt (lt.id)}
-            <ChipBtn
-              onclick={() => {
-                selectedExample = undefined;
-                analyzedDraftText = undefined;
-                selectedLawType = lt.id;
-              }}
-              selected={selectedLawType === lt.id}>{lt.label}</ChipBtn
-            >
-          {/each}
+<div
+  id="wizard"
+  class="grid grid-cols-1 h-screen"
+  class:sm:grid-cols-2={showCanvas}
+>
+  <div
+    id="vis-chat"
+    class="min-w-0 py-lg px-16 sm:px-32 w-full max-w-900 mx-auto max-h-full overflow-auto"
+  >
+    <div class="flex flex-col h-full gap-32">
+      <div class="vis-chat-header space-y-16">
+        <div class="kern-progress">
+          <label class="kern-label" for="progress1"
+            >Schritt {wizard.currentStep} von {steps.length}</label
+          >
+          <progress id="progress1" value={wizard.currentStep} max={steps.length}
+          ></progress>
         </div>
-        {#if selectedLawType === "existing"}
-          <ExampleFinder {examples} bind:selected={selectedExample} />
-        {:else}
-          <div class="space-y-16">
-            <div class="kern-form-input">
-              <textarea
-                class="kern-form-input__input h-150"
-                id="draft"
-                name="draft"
-                placeholder="Kopieren Sie einen Ausschnitt ihres Vorhabens hierher, den Sie visualisieren möchten"
-                bind:value={draftText}></textarea>
-            </div>
-            <div>
-              <button
-                type="button"
-                class="kern-btn kern-btn--primary"
-                disabled={!draftText.trim()}
-                onclick={analyzeDraft}
-                ><span class="kern-label">Analysieren</span></button
-              >
-            </div>
+        {#if wizard.currentStep > 1}
+          <div>
+            <button
+              type="button"
+              class="kern-btn kern-btn--tertiary"
+              onclick={() => wizard.back()}
+            >
+              <span
+                class="kern-icon kern-icon--arrow-back kern-icon--default"
+                aria-hidden="true"
+              ></span>
+              <span class="kern-label">Zurück</span>
+            </button>
           </div>
         {/if}
       </div>
-      {#if selectedExample}
-        <p class="kern-body kern-body--muted">
-          Originaltext: <a
-            href={resolveEliUrl(selectedExample.eli)}
-            target="_blank">{selectedExample.short}</a
-          >
-        </p>
-      {/if}
-      {#if visOptionsSource}
-        {#if visOptionsError}
-          <p class="kern-error" role="alert">{visOptionsError}</p>
-        {:else}
-          {#if !isLoadingVisOptions}
-            <div class="kern-form-input">
-              <span class="kern-label"
-                >Welchen Teilbereich möchten Sie visualisieren?</span
-              >
-              <div class="mt-8 flex flex-wrap gap-8">
-                {#each visOptions as option (option.name)}
-                  <ChipBtn
-                    selected={option.name === selectedVisOption}
-                    onclick={() => (selectedVisOption = option.name)}
-                  >
-                    {option.name}
-                    {#if option.articles.length}
-                      ({option.articles.join(", ")})
-                    {/if}
-                  </ChipBtn>
-                {/each}
-              </div>
-            </div>
-          {/if}
-          {#if isLoadingVisOptions || isLoading}
-            <LoadingIndicator message={loadingStatusMessage} />
-          {:else if mermaidError}
-            <p class="kern-error" role="alert">{mermaidError}</p>
-          {:else if summary}
-            <p class="kern-body kern-body--muted">{summary}</p>
-            {#if canPruefen && selectedExample}
-              <Hint>
-                Zu {selectedExample.short} gibt es auch einen Potenzialcheck:
-                <a
-                  href={`${werkzeuge_potenziale.path}?vorhaben=${selectedExample.short}`}
-                  >Hier ansehen</a
-                >
-              </Hint>
-            {/if}
-          {/if}
+      <div class="h-full w-full flex flex-col gap-32 justify-center">
+        {#if wizard.currentStep === 1}
+          <Step1 {examples} />
+        {:else if wizard.currentStep === 2}
+          <Step2 />
+        {:else if wizard.currentStep === 3}
+          <Step3 {canPruefen} {buttons} />
         {/if}
+      </div>
+    </div>
+  </div>
+  {#if showCanvas}
+    <div
+      id="vis-canvas"
+      class="w-full h-full min-w-0 flex justify-center items-center bg-lavender-200"
+      style="--preview-height: 100dvh;"
+    >
+      {#if wizard.isLoading}
+        <div
+          class="flex w-full h-full items-center justify-center bg-lavender-200 p-16"
+        >
+          {@render loadingDiagramPlaceholder()}
+        </div>
+      {:else if wizard.mermaidSource}
+        <div
+          class="diagram-preview relative flex w-full items-center justify-center overflow-hidden bg-lavender-200 p-16"
+        >
+          <button
+            type="button"
+            class="absolute inset-0 z-0 cursor-zoom-in"
+            aria-label="Visualisierung in Vollbildansicht öffnen"
+            onclick={() => (viewerOpen = true)}
+          ></button>
+          <div class="pointer-events-none relative z-1">
+            <!-- eslint-disable-next-line svelte/no-at-html-tags -- diagramSvg comes from mermaid.render() on our own bundled .mmd sources, not user input -->
+            {@html diagramSvg}
+          </div>
+        </div>
+        <Viewer
+          bind:open={viewerOpen}
+          svg={diagramSvg}
+          title={selectedOption
+            ? `${wizard.selectedExample?.title ?? "Eigenes Vorhaben"}: ${selectedOption.name}`
+            : "Visualisierung"}
+        />
       {/if}
     </div>
-    {#if mermaidSource}
-      {@render buttons()}
-    {/if}
-  </div>
-  <div
-    class="w-full h-(--preview-height) min-w-0 flex justify-center items-center"
-    style="--preview-height: calc(100vh - 128px);"
-  >
-    {#if isLoading}
-      <div
-        class="flex w-full h-full items-center justify-center bg-lavender-200 p-16"
-      >
-        {@render loadingDiagramPlaceholder()}
-      </div>
-    {:else if mermaidSource}
-      <div
-        class="diagram-preview relative flex w-full items-center justify-center overflow-hidden bg-lavender-200 p-16"
-      >
-        <button
-          type="button"
-          class="absolute inset-0 z-0 cursor-zoom-in"
-          aria-label="Visualisierung in Vollbildansicht öffnen"
-          onclick={() => (viewerOpen = true)}
-        ></button>
-        <div class="pointer-events-none relative z-1">
-          <!-- eslint-disable-next-line svelte/no-at-html-tags -- diagramSvg comes from mermaid.render() on our own bundled .mmd sources, not user input -->
-          {@html diagramSvg}
-        </div>
-      </div>
-      <Viewer
-        bind:open={viewerOpen}
-        svg={diagramSvg}
-        title={selectedOption
-          ? `${selectedExample?.title ?? "Eigenes Vorhaben"}: ${selectedOption.name}`
-          : "Visualisierung"}
-      />
-    {/if}
-  </div>
+  {/if}
 </div>
 
 <style>

@@ -190,6 +190,8 @@ fileignoreconfig:
       - Sxzmf2FkxTibbNVByMIFM3srA_7GBw
   - filename: src/images/online-schulung.png
     ignore_detectors: [filecontent]
+  - filename: src/pages/werkzeuge/visualisieren/_wizardState.svelte.ts
+    allowed_patterns: [WIZARD_CONTEXT_KEY]
 scopeconfig:
   - scope: node
 allowed_patterns:

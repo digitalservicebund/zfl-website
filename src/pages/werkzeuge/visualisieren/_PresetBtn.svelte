@@ -2,9 +2,9 @@
   import type { Component, Snippet } from "svelte";
 
   interface Props {
-    title: string;
+    title?: string;
     children?: Snippet;
-    icon: Component<{ class?: string }>;
+    icon?: Component<{ class?: string }>;
     active?: boolean;
     onclick: () => void;
   }
@@ -16,7 +16,11 @@
   aria-current={active ? "true" : undefined}
   onclick={() => onclick()}
 >
-  <Icon class="size-32 text-cosmic-blue-400" />
-  <strong>{title}</strong>
+  {#if Icon}
+    <Icon class="size-32 text-cosmic-blue-400" />
+  {/if}
+  {#if title}
+    <strong>{title}</strong>
+  {/if}
   {@render children?.()}
 </button>
