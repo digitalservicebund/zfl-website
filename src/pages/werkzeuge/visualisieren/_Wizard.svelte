@@ -189,6 +189,7 @@
 
   let diagramSvg = $state("");
   let renderCount = 0;
+  let saveDialogEl: HTMLDialogElement | undefined = $state();
 
   $effect(() => {
     if (!selectedOption) {
@@ -450,12 +451,12 @@
 {/snippet}
 
 {#snippet buttons()}
-  <div class="flex flex-wrap gap-8">
+  <div class="flex flex-col items-start">
     <a
       href={drawioUrl}
       target="_blank"
       rel="noreferrer"
-      class="kern-btn kern-btn--primary"
+      class="kern-btn kern-btn--tertiary"
     >
       <span
         class="kern-icon kern-icon--edit kern-icon--default"
@@ -466,7 +467,7 @@
     <button
       type="button"
       onclick={downloadSvg}
-      class="kern-btn kern-btn--secondary"
+      class="kern-btn kern-btn--tertiary"
     >
       <span
         class="kern-icon kern-icon--download kern-icon--default"
@@ -478,7 +479,7 @@
       type="button"
       onclick={downloadRulemapXml}
       disabled={!canExportRulemap}
-      class="kern-btn kern-btn--secondary"
+      class="kern-btn kern-btn--tertiary"
       title={canExportRulemap
         ? undefined
         : "Rulemap XML Export ist derzeit nur für Flowcharts verfügbar"}
@@ -492,7 +493,7 @@
     <button
       type="button"
       onclick={copyMermaidSource}
-      class="kern-btn kern-btn--secondary"
+      class="kern-btn kern-btn--tertiary"
     >
       <span
         class="kern-icon {mermaidCopied
@@ -547,7 +548,7 @@
         {:else if wizard.currentStep === 2}
           <Step2 />
         {:else if wizard.currentStep === 3}
-          <Step3 {canPruefen} {buttons} />
+          <Step3 {canPruefen} />
         {/if}
       </div>
     </div>
@@ -568,6 +569,44 @@
             ? `${wizard.selectedExample?.title ?? "Eigenes Vorhaben"}: ${selectedOption.name}`
             : "Visualisierung"}
         />
+        <div class="absolute bottom-24 right-32">
+          <button
+            type="button"
+            class="kern-btn kern-btn--primary"
+            onclick={() => saveDialogEl?.showModal()}
+          >
+            <span
+              class="kern-icon kern-icon--download kern-icon--default"
+              aria-hidden="true"
+            ></span>
+            <span class="kern-label">Speichern</span>
+          </button>
+        </div>
+        <dialog
+          bind:this={saveDialogEl}
+          class="kern-dialog"
+          onclick={(event) => {
+            if (event.target === saveDialogEl) saveDialogEl?.close();
+          }}
+        >
+          <div class="kern-dialog__header">
+            <h2 class="kern-title">Visualisierung exportieren</h2>
+            <button
+              type="button"
+              class="kern-btn kern-btn--tertiary kern-btn--only-icon"
+              onclick={() => saveDialogEl?.close()}
+              aria-label="Schließen"
+            >
+              <span
+                class="kern-icon kern-icon--close kern-icon--default"
+                aria-hidden="true"
+              ></span>
+            </button>
+          </div>
+          <div class="kern-dialog__body">
+            {@render buttons()}
+          </div>
+        </dialog>
       {/if}
     </div>
   {/if}
@@ -576,5 +615,11 @@
 <style>
   #vis-chat :global(.step-heading) {
     margin-top: -1em;
+  }
+
+  /* Tailwind's preflight resets margin to 0, which breaks the browser
+     default `margin: auto` that centers a `showModal()`-opened dialog. */
+  dialog.kern-dialog {
+    margin: auto;
   }
 </style>

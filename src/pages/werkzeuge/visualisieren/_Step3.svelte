@@ -1,5 +1,4 @@
 <script lang="ts">
-  import type { Snippet } from "svelte";
   import { werkzeuge_potenziale } from "@/config/routes";
   import Hint from "../_shared/Hint.svelte";
   import LoadingIndicator from "../_shared/LoadingIndicator.svelte";
@@ -7,8 +6,7 @@
   import { getWizardContext } from "./_wizardState.svelte.ts";
 
   const wizard = getWizardContext();
-  let { canPruefen, buttons }: { canPruefen: boolean; buttons: Snippet } =
-    $props();
+  let { canPruefen }: { canPruefen: boolean } = $props();
 </script>
 
 <div class="flex flex-col gap-32 h-full">
@@ -38,7 +36,4 @@
       </p>
     {/if}
   </div>
-  {#if wizard.mermaidSource}
-    <div>{@render buttons()}</div>
-  {/if}
 </div>
