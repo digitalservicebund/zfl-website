@@ -12,7 +12,7 @@
 </script>
 
 <button
-  class="rounded-sm border border-(--kern-color-decorative-border-contextual) aria-current:bg-lavender-400 p-16 flex flex-col items-start justify-start gap-16"
+  class="rounded-sm border border-(--kern-color-decorative-border-contextual) aria-current:bg-lavender-400 hover:bg-lavender-200 p-16 flex flex-col items-start justify-start gap-16"
   aria-current={active ? "true" : undefined}
   onclick={() => onclick()}
 >

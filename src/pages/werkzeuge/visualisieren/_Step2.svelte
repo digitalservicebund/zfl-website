@@ -13,19 +13,23 @@
     {:else}
       {#if !wizard.isLoadingVisOptions}
         <div class="kern-form-input">
-          <span class="kern-label kern-heading-large"
-            >Welchen Teilbereich möchten Sie visualisieren?</span
-          >
+          <h2 class="step-heading">
+            Welchen Teilbereich möchten Sie visualisieren?
+          </h2>
           <div class="mt-16 flex flex-col w-full gap-8">
             {#each wizard.visOptions as option (option.name)}
               <PresetBtn
                 active={option.name === wizard.selectedVisOption}
                 onclick={() => (wizard.selectedVisOption = option.name)}
               >
-                {option.name}
-                {#if option.articles.length}
-                  ({option.articles.join(", ")})
-                {/if}
+                <div class="flex justify-between items-center w-full">
+                  <span>{option.name}</span>
+                  {#if option.articles.length}
+                    <span class="kern-body--muted"
+                      >{option.articles.join(", ")}</span
+                    >
+                  {/if}
+                </div>
               </PresetBtn>
             {/each}
           </div>

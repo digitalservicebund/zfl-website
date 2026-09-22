@@ -466,20 +466,6 @@
         <span class="kern-label">Bearbeiten mit Draw.io</span>
       </a>
       <button
-        class="kern-btn kern-btn--secondary"
-        onclick={() => {
-          viewerOpen = true;
-        }}
-      >
-        <span
-          class="kern-icon kern-icon--search kern-icon--default"
-          aria-hidden="true"
-        ></span>
-        <span class="kern-label">Vorschau</span>
-      </button>
-    </div>
-    <div class="flex gap-8 flex-wrap">
-      <button
         type="button"
         onclick={downloadSvg}
         class="kern-btn kern-btn--secondary"
@@ -526,12 +512,12 @@
 
 <div
   id="wizard"
-  class="grid grid-cols-1 h-screen"
-  class:sm:grid-cols-2={showCanvas}
+  class="grid grid-cols-1 h-screen data-show-canvas:sm:grid-cols-[1fr_2fr]"
+  data-show-canvas={showCanvas || undefined}
 >
   <div
     id="vis-chat"
-    class="min-w-0 py-lg px-16 sm:px-32 w-full max-w-900 mx-auto max-h-full overflow-auto"
+    class="min-w-0 py-md px-16 w-full max-w-900 mx-auto max-h-full overflow-auto"
   >
     <div class="flex flex-col h-full gap-32">
       <div class="vis-chat-header space-y-16">
@@ -615,5 +601,8 @@
     height: auto;
     max-width: 100%;
     height: var(--preview-height);
+  }
+  #vis-chat :global(.step-heading) {
+    margin-top: -1em;
   }
 </style>

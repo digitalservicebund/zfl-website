@@ -38,7 +38,7 @@
 
 <div class="space-y-32">
   <div class="w-full space-y-24">
-    <p class="kern-label kern-heading-large">Was möchten Sie visualisieren?</p>
+    <h2 class="step-heading">Was möchten Sie visualisieren?</h2>
     {@render presets()}
   </div>
   <div class="space-y-16">
