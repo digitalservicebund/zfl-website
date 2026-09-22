@@ -10,7 +10,7 @@
   import { resolveEliUrl } from "../_shared/eli.ts";
   import { createFakeLoadingSequence } from "../_shared/fakeLoading.ts";
   import { getMermaid, getVisOptions } from "../_shared/api.ts";
-  import Viewer from "./_Viewer.svelte";
+  import CanvasViewer from "./_CanvasViewer.svelte";
   import type { LawExample } from "./_types";
   import Step1 from "./_Step1.svelte";
   import { WizardState, setWizardContext } from "./_wizardState.svelte.ts";
@@ -188,7 +188,6 @@
   });
 
   let diagramSvg = $state("");
-  let viewerOpen = $state(false);
   let renderCount = 0;
 
   $effect(() => {
@@ -451,62 +450,60 @@
 {/snippet}
 
 {#snippet buttons()}
-  <div class="flex flex-col gap-8">
-    <div class="flex gap-8 flex-wrap">
-      <a
-        href={drawioUrl}
-        target="_blank"
-        rel="noreferrer"
-        class="kern-btn kern-btn--primary"
-      >
-        <span
-          class="kern-icon kern-icon--edit kern-icon--default"
-          aria-hidden="true"
-        ></span>
-        <span class="kern-label">Bearbeiten mit Draw.io</span>
-      </a>
-      <button
-        type="button"
-        onclick={downloadSvg}
-        class="kern-btn kern-btn--secondary"
-      >
-        <span
-          class="kern-icon kern-icon--download kern-icon--default"
-          aria-hidden="true"
-        ></span>
-        <span class="kern-label">SVG</span>
-      </button>
-      <button
-        type="button"
-        onclick={downloadRulemapXml}
-        disabled={!canExportRulemap}
-        class="kern-btn kern-btn--secondary"
-        title={canExportRulemap
-          ? undefined
-          : "Rulemap XML Export ist derzeit nur für Flowcharts verfügbar"}
-      >
-        <span
-          class="kern-icon kern-icon--download kern-icon--default"
-          aria-hidden="true"
-        ></span>
-        <span class="kern-label">Rulemap XML</span>
-      </button>
-      <button
-        type="button"
-        onclick={copyMermaidSource}
-        class="kern-btn kern-btn--secondary"
-      >
-        <span
-          class="kern-icon {mermaidCopied
-            ? 'kern-icon--check'
-            : 'kern-icon--content-copy'} kern-icon--default"
-          aria-hidden="true"
-        ></span>
-        <span class="kern-label" aria-live="polite">
-          {mermaidCopied ? "In Zwischenablage kopiert" : "Mermaid kopieren"}
-        </span>
-      </button>
-    </div>
+  <div class="flex flex-wrap gap-8">
+    <a
+      href={drawioUrl}
+      target="_blank"
+      rel="noreferrer"
+      class="kern-btn kern-btn--primary"
+    >
+      <span
+        class="kern-icon kern-icon--edit kern-icon--default"
+        aria-hidden="true"
+      ></span>
+      <span class="kern-label">Bearbeiten mit Draw.io</span>
+    </a>
+    <button
+      type="button"
+      onclick={downloadSvg}
+      class="kern-btn kern-btn--secondary"
+    >
+      <span
+        class="kern-icon kern-icon--download kern-icon--default"
+        aria-hidden="true"
+      ></span>
+      <span class="kern-label">SVG</span>
+    </button>
+    <button
+      type="button"
+      onclick={downloadRulemapXml}
+      disabled={!canExportRulemap}
+      class="kern-btn kern-btn--secondary"
+      title={canExportRulemap
+        ? undefined
+        : "Rulemap XML Export ist derzeit nur für Flowcharts verfügbar"}
+    >
+      <span
+        class="kern-icon kern-icon--download kern-icon--default"
+        aria-hidden="true"
+      ></span>
+      <span class="kern-label">Rulemap XML</span>
+    </button>
+    <button
+      type="button"
+      onclick={copyMermaidSource}
+      class="kern-btn kern-btn--secondary"
+    >
+      <span
+        class="kern-icon {mermaidCopied
+          ? 'kern-icon--check'
+          : 'kern-icon--content-copy'} kern-icon--default"
+        aria-hidden="true"
+      ></span>
+      <span class="kern-label" aria-live="polite">
+        {mermaidCopied ? "In Zwischenablage kopiert" : "Mermaid kopieren"}
+      </span>
+    </button>
   </div>
 {/snippet}
 
@@ -558,32 +555,14 @@
   {#if showCanvas}
     <div
       id="vis-canvas"
-      class="w-full h-full min-w-0 flex justify-center items-center bg-lavender-200"
-      style="--preview-height: 100dvh;"
+      class="relative w-full h-dvh min-w-0 flex flex-col justify-center items-center bg-lavender-200"
     >
       {#if wizard.isLoading}
-        <div
-          class="flex w-full h-full items-center justify-center bg-lavender-200 p-16"
-        >
+        <div class="flex w-full h-full items-center justify-center p-16">
           {@render loadingDiagramPlaceholder()}
         </div>
       {:else if wizard.mermaidSource}
-        <div
-          class="diagram-preview relative flex w-full items-center justify-center overflow-hidden bg-lavender-200 p-16"
-        >
-          <button
-            type="button"
-            class="absolute inset-0 z-0 cursor-zoom-in"
-            aria-label="Visualisierung in Vollbildansicht öffnen"
-            onclick={() => (viewerOpen = true)}
-          ></button>
-          <div class="pointer-events-none relative z-1">
-            <!-- eslint-disable-next-line svelte/no-at-html-tags -- diagramSvg comes from mermaid.render() on our own bundled .mmd sources, not user input -->
-            {@html diagramSvg}
-          </div>
-        </div>
-        <Viewer
-          bind:open={viewerOpen}
+        <CanvasViewer
           svg={diagramSvg}
           title={selectedOption
             ? `${wizard.selectedExample?.title ?? "Eigenes Vorhaben"}: ${selectedOption.name}`
@@ -595,13 +574,6 @@
 </div>
 
 <style>
-  .diagram-preview :global(svg) {
-    display: block;
-    width: auto;
-    height: auto;
-    max-width: 100%;
-    height: var(--preview-height);
-  }
   #vis-chat :global(.step-heading) {
     margin-top: -1em;
   }

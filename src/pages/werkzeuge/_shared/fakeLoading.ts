@@ -1,4 +1,4 @@
-const FAKE_LOADING_DELAY_MS = 2100;
+const FAKE_LOADING_DELAY_MS = 500; // 2100;
 const FAKE_LOADING_STATUS_INTERVAL_MS = 700;
 
 export function createFakeLoadingSequence(

@@ -4,19 +4,13 @@
   import IconZoomIn from "~icons/ic/outline-zoom-in";
   import IconZoomOut from "~icons/ic/outline-zoom-out";
   import IconRestartAlt from "~icons/ic/outline-restart-alt";
-  import IconClose from "~icons/ic/outline-close";
 
   interface Props {
-    open: boolean;
     svg: string;
     title?: string;
   }
 
-  let {
-    open = $bindable(false),
-    svg,
-    title = "Visualisierung",
-  }: Props = $props();
+  let { svg, title = "Visualisierung" }: Props = $props();
 
   const PINCH_SENSITIVITY = 2;
   const WHEEL_ZOOM_SENSITIVITY = 0.012;
@@ -27,15 +21,14 @@
   // size on each side, so there's room to freely scroll/drag past its edges.
   const PADDING_RATIO = 0.5;
 
-  let dialogEl: HTMLDialogElement | undefined = $state();
   let canvasEl: HTMLDivElement | undefined = $state();
   let contentEl: HTMLDivElement | undefined = $state();
   let sizerEl: HTMLDivElement | undefined = $state();
 
   let scale = $state(1);
-  // Unscaled size of the diagram, measured once per open/svg so zoom can
-  // resize the sizer synchronously instead of round-tripping through the
-  // DOM (which raced under fast, repeated pinch/scroll updates).
+  // Unscaled size of the diagram, measured once per svg so zoom can resize
+  // the sizer synchronously instead of round-tripping through the DOM
+  // (which raced under fast, repeated pinch/scroll updates).
   let naturalWidth = 0;
   let naturalHeight = 0;
 
@@ -49,13 +42,7 @@
   let pinchDistance: number | null = null;
 
   $effect(() => {
-    if (!dialogEl) return;
-    if (open) {
-      if (!dialogEl.open) dialogEl.showModal();
-      resetView();
-    } else if (dialogEl.open) {
-      dialogEl.close();
-    }
+    if (svg) resetView();
   });
 
   // Computes the sizer's dimensions for a given scale, along with the
@@ -170,16 +157,6 @@
     zoomAt(0.8, x, y);
   }
 
-  function requestClose() {
-    dialogEl?.close();
-  }
-
-  function onDialogClick(event: MouseEvent) {
-    // A click that lands on the dialog element itself (not a descendant)
-    // only happens on the ::backdrop area.
-    if (event.target === dialogEl) requestClose();
-  }
-
   function distance(
     a: { x: number; y: number },
     b: { x: number; y: number },
@@ -264,79 +241,60 @@
   }
 </script>
 
-<dialog
-  bind:this={dialogEl}
-  class="fixed inset-0 m-auto h-[95vh] w-[95vw] max-w-none border-0 bg-transparent p-0 backdrop:bg-black/[0.72]"
-  aria-label={title}
-  onclick={onDialogClick}
-  onclose={() => (open = false)}
->
-  <div
-    class="relative flex h-full w-full flex-col overflow-hidden rounded bg-white shadow-xl"
-  >
+<div class="relative flex h-full w-full flex-col overflow-hidden">
+  <div class="absolute left-16 top-16 z-20 flex flex-col gap-8">
     <button
       type="button"
-      class="kern-btn kern-btn--secondary kern-btn--only-icon absolute right-16 top-16 z-20"
-      onclick={requestClose}
-      aria-label="Schließen"
+      class="kern-btn kern-btn--secondary kern-btn--only-icon"
+      onclick={zoomIn}
+      aria-label="Vergrößern"
     >
-      <IconClose class="text-cosmic-blue-base text-xl" aria-hidden="true" />
+      <IconZoomIn class="text-cosmic-blue-base text-xl" aria-hidden="true" />
     </button>
+    <button
+      type="button"
+      class="kern-btn kern-btn--secondary kern-btn--only-icon"
+      onclick={zoomOut}
+      aria-label="Verkleinern"
+    >
+      <IconZoomOut class="text-cosmic-blue-base text-xl" aria-hidden="true" />
+    </button>
+    <button
+      type="button"
+      class="kern-btn kern-btn--secondary kern-btn--only-icon"
+      onclick={resetView}
+      aria-label="Zoom zurücksetzen"
+    >
+      <IconRestartAlt
+        class="text-cosmic-blue-base text-xl"
+        aria-hidden="true"
+      />
+    </button>
+  </div>
 
-    <div class="absolute left-16 top-16 z-20 flex flex-col gap-8">
-      <button
-        type="button"
-        class="kern-btn kern-btn--secondary kern-btn--only-icon"
-        onclick={zoomIn}
-        aria-label="Vergrößern"
-      >
-        <IconZoomIn class="text-cosmic-blue-base text-xl" aria-hidden="true" />
-      </button>
-      <button
-        type="button"
-        class="kern-btn kern-btn--secondary kern-btn--only-icon"
-        onclick={zoomOut}
-        aria-label="Verkleinern"
-      >
-        <IconZoomOut class="text-cosmic-blue-base text-xl" aria-hidden="true" />
-      </button>
-      <button
-        type="button"
-        class="kern-btn kern-btn--secondary kern-btn--only-icon"
-        onclick={resetView}
-        aria-label="Zoom zurücksetzen"
-      >
-        <IconRestartAlt
-          class="text-cosmic-blue-base text-xl"
-          aria-hidden="true"
-        />
-      </button>
-    </div>
-
+  <div
+    bind:this={canvasEl}
+    tabindex="0"
+    aria-label={`${title}, verschiebbar per Ziehen oder Scrollen`}
+    class="viewer-canvas h-full w-full touch-none select-none overflow-auto [cursor:grab] active:[cursor:grabbing]"
+    onpointerdown={onPointerDown}
+    onpointermove={onPointerMove}
+    onpointerup={onPointerUp}
+    onpointercancel={onPointerUp}
+    onwheel={onWheel}
+  >
     <div
-      bind:this={canvasEl}
-      tabindex="0"
-      aria-label="Visualisierung, verschiebbar per Ziehen oder Scrollen"
-      class="viewer-canvas h-full w-full touch-none select-none overflow-auto bg-lavender-200 [cursor:grab] active:[cursor:grabbing]"
-      onpointerdown={onPointerDown}
-      onpointermove={onPointerMove}
-      onpointerup={onPointerUp}
-      onpointercancel={onPointerUp}
-      onwheel={onWheel}
+      bind:this={sizerEl}
+      class="flex min-h-full min-w-full items-center justify-center"
     >
       <div
-        bind:this={sizerEl}
-        class="flex min-h-full min-w-full items-center justify-center"
+        bind:this={contentEl}
+        class="inline-block"
+        style={`transform: scale(${scale}); transform-origin: center;`}
       >
-        <div
-          bind:this={contentEl}
-          class="inline-block"
-          style={`transform: scale(${scale}); transform-origin: center;`}
-        >
-          <!-- eslint-disable-next-line svelte/no-at-html-tags -- svg comes from mermaid.render() on our own bundled .mmd sources, not user input -->
-          {@html svg}
-        </div>
+        <!-- eslint-disable-next-line svelte/no-at-html-tags -- svg comes from mermaid.render() on our own bundled .mmd sources, not user input -->
+        {@html svg}
       </div>
     </div>
   </div>
-</dialog>
+</div>

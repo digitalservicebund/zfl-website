@@ -39,6 +39,6 @@
     {/if}
   </div>
   {#if wizard.mermaidSource}
-    <div class="pb-32">{@render buttons()}</div>
+    <div>{@render buttons()}</div>
   {/if}
 </div>
