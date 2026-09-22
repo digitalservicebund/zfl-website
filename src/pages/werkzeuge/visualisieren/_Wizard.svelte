@@ -15,7 +15,9 @@
   import Step1 from "./_Step1.svelte";
   import { WizardState, setWizardContext } from "./_wizardState.svelte.ts";
   import Step2 from "./_Step2.svelte";
+  import StepFinal from "./_StepFinal.svelte";
   import Step3 from "./_Step3.svelte";
+  import { steps } from "./_steps.ts";
 
   let {
     examples,
@@ -24,15 +26,6 @@
 
   const wizard = new WizardState();
   setWizardContext(wizard);
-
-  // Defines the order of the steps; each step's own component still takes
-  // its own specific props, wired explicitly where it's rendered below.
-  type StepDef = { title: string };
-  const steps: StepDef[] = [
-    { title: "Vorhaben wählen" },
-    { title: "Teilbereich wählen" },
-    { title: "Ergebnis" },
-  ];
 
   function configureMermaid(htmlLabels: boolean) {
     mermaid.initialize({
@@ -154,11 +147,22 @@
 
   // Same rationale as the step 1 → 2 advance above: advances as soon as the
   // user picks a vis option, before the mermaid diagram has even started
-  // loading, so Step3 is on screen to show its own loading state.
+  // loading, so StepFinal is on screen to show its own loading state.
   $effect(() => {
     if (wizard.selectedVisOption) {
       untrack(() => {
         if (wizard.currentStep < 3) wizard.currentStep = 3;
+      });
+    }
+  });
+
+  // Same rationale as the step 1 → 2 advance above: advances as soon as the
+  // user picks a perspective.
+  $effect(() => {
+    if (wizard.selectedVisPerspective) {
+      untrack(() => {
+        if (wizard.currentStep < steps.length)
+          wizard.currentStep = steps.length;
       });
     }
   });
@@ -561,7 +565,9 @@
         {:else if wizard.currentStep === 2}
           <Step2 />
         {:else if wizard.currentStep === 3}
-          <Step3 {canPruefen} />
+          <Step3 />
+        {:else if wizard.currentStep === steps.length}
+          <StepFinal {canPruefen} {buttons} />
         {/if}
       </div>
     </div>
@@ -627,7 +633,7 @@
 
 <style>
   #vis-chat :global(.step-heading) {
-    margin-top: -1em;
+    margin-top: -4em;
   }
 
   /* Tailwind's preflight resets margin to 0, which breaks the browser
