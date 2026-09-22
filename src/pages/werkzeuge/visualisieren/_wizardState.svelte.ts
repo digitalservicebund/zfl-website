@@ -51,6 +51,21 @@ export class WizardState {
   back() {
     this.currentStep = Math.max(1, this.currentStep - 1);
   }
+
+  // Mirrors the auto-advance conditions in the effects in _Wizard.svelte:
+  // lets the user manually re-advance after going back with the same
+  // input still valid (going back doesn't re-trigger those effects since
+  // they only fire when their source value changes).
+  get canAdvance(): boolean {
+    if (this.currentStep === 1) return !!this.visOptionsSource;
+    if (this.currentStep === 2) return !!this.selectedVisOption;
+    return false;
+  }
+
+  next() {
+    if (!this.canAdvance) return;
+    this.currentStep = Math.min(3, this.currentStep + 1);
+  }
 }
 
 const WIZARD_CONTEXT_KEY = Symbol("wizard");

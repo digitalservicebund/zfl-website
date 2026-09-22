@@ -526,8 +526,8 @@
           <progress id="progress1" value={wizard.currentStep} max={steps.length}
           ></progress>
         </div>
-        {#if wizard.currentStep > 1}
-          <div>
+        <div class="flex">
+          {#if wizard.currentStep > 1}
             <button
               type="button"
               class="kern-btn kern-btn--tertiary"
@@ -539,8 +539,21 @@
               ></span>
               <span class="kern-label">Zurück</span>
             </button>
-          </div>
-        {/if}
+          {/if}
+          {#if wizard.currentStep < steps.length && wizard.canAdvance}
+            <button
+              type="button"
+              class="kern-btn kern-btn--tertiary ms-auto"
+              onclick={() => wizard.next()}
+            >
+              <span class="kern-label">Weiter</span>
+              <span
+                class="kern-icon kern-icon--arrow-forward kern-icon--default"
+                aria-hidden="true"
+              ></span>
+            </button>
+          {/if}
+        </div>
       </div>
       <div class="h-full w-full flex flex-col gap-32 justify-center">
         {#if wizard.currentStep === 1}
