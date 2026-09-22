@@ -62,7 +62,15 @@
             placeholder="Kopieren Sie einen Ausschnitt ihres Vorhabens hierher, den Sie visualisieren möchten"
             bind:value={wizard.draftText}></textarea>
         </div>
-        <div class="flex w-full justify-end">
+        <div class="flex w-full justify-end gap-8">
+          {#if wizard.draftText.trim()}
+            <button
+              class="kern-btn kern-btn--secondary"
+              onclick={() => (wizard.draftText = "")}
+            >
+              <span class="kern-label">Löschen</span>
+            </button>
+          {/if}
           <button
             type="button"
             class="kern-btn kern-btn--primary"
