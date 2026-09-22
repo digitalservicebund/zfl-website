@@ -514,7 +514,7 @@
 
 <div
   id="wizard"
-  class="grid grid-cols-1 h-screen data-show-canvas:sm:grid-cols-[1fr_2fr]"
+  class="grid grid-cols-1 h-screen overflow-hidden transition-[grid-template-columns] duration-300 ease-in-out sm:grid-cols-[1fr_0fr] data-show-canvas:sm:grid-cols-[1fr_2fr]"
   data-show-canvas={showCanvas || undefined}
 >
   <div
