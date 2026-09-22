@@ -16,7 +16,7 @@
 {#snippet presets()}
   <div class="grid lg:grid-cols-3 gap-16">
     <PresetBtn
-      title="Entscheidungslogik"
+      title="Entscheidungs&shy;logik"
       active={wizard.preset === "flow"}
       onclick={() => (wizard.preset = "flow")}
       icon={IconAccountTree}

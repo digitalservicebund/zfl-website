@@ -362,7 +362,7 @@
     wizard.mermaidSource ? isMermaidFlowchart(wizard.mermaidSource) : false,
   );
 
-  let showCanvas = $derived(wizard.isLoading || !!wizard.mermaidSource);
+  let showCanvas = $derived(wizard.currentStep === steps.length);
 
   function downloadRulemapXml() {
     if (!wizard.mermaidSource || !selectedOption) return;
