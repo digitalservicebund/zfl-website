@@ -25,14 +25,12 @@ const pruefbareShorts = potenziale.map(({ filePath }) =>
 );
 ---
 
-<Layout title={frontmatter.title}>
-  <main class="breakout-grid">
-    <Hero>
+<Layout title={frontmatter.title} noMenu>
+  <main>
+    <Hero class="breakout-grid">
       <h1>{frontmatter.title}</h1>
     </Hero>
     <AIDisclaimer />
-    <section>
-      <Wizard {examples} {pruefbareShorts} client:load />
-    </section>
+    <Wizard {examples} {pruefbareShorts} client:load />
   </main>
 </Layout>
