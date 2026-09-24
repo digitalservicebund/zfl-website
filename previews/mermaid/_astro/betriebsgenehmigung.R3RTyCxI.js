@@ -1,0 +1,34 @@
+var e=`---
+summary: "Zeigt das Verfahren zur Erteilung, dem Fortbestand und dem Erlöschen einer luftverkehrsrechtlichen Betriebsgenehmigung nach dem LuftVG, einschließlich Versagungsgründen, Widerruf und Rücknahme."
+---
+flowchart TD
+    A["Luftfahrtunternehmen will Fluggäste,<br/>Post oder Fracht gewerblich befördern<br/>— <a href='{{ELI}}#art-z20_abs-z1' target='_blank' rel='noopener'>§20 Abs. 1</a>"] --> B{"Unterliegt das Unternehmen dem<br/>Luftverkehrsrecht der EU?<br/>— <a href='{{ELI}}#art-z20_abs-z1' target='_blank' rel='noopener'>§20 Abs. 1 S. 1</a>"}
+    B -->|Nein| B2["Sonderregime, z.B. Betriebsgenehmigung<br/>für Drittstaaten-Unternehmen — <a href='{{ELI}}/art-z21a' target='_blank' rel='noopener'>§21a</a>"]
+    B -->|Ja| C["Betriebsgenehmigung nach Art. 3 Abs. 1<br/>VO (EG) 1008/2008 erforderlich — <a href='{{ELI}}#art-z20_abs-z1' target='_blank' rel='noopener'>§20<br/>Abs. 1 S. 1</a>"]
+    C --> D{"Rechtfertigen Tatsachen die<br/>Annahme, dass öffentliche<br/>Sicherheit/Ordnung gefährdet<br/>wird (z.B. Unzuverlässigkeit)?<br/>— <a href='{{ELI}}#art-z20_abs-z2' target='_blank' rel='noopener'>§20 Abs. 2 S. 2</a>"}
+    D -->|Ja| Z1["Genehmigung ist zu versagen"]
+    D -->|Nein| E{"Sind ausreichende finanzielle<br/>Mittel/Sicherheiten für den<br/>sicheren Betrieb nachgewiesen?<br/>— <a href='{{ELI}}#art-z20_abs-z2' target='_blank' rel='noopener'>§20 Abs. 2 S. 3</a>"}
+    E -->|Nein| Z1
+    E -->|Ja| F{"Luftfahrzeuge nicht in dt.<br/>Luftfahrzeugrolle (bzw.<br/>gleichgestelltem Register)<br/>eingetragen oder nicht im<br/>Alleineigentum des<br/>Antragstellers? — <a href='{{ELI}}#art-z20_abs-z2' target='_blank' rel='noopener'>§20 Abs. 2<br/>S. 4</a>"}
+    F -->|Ja| G["Genehmigung kann versagt werden<br/>(Ermessen) — <a href='{{ELI}}#art-z20_abs-z2' target='_blank' rel='noopener'>§20 Abs. 2 S. 4</a>"]
+    F -->|Nein| H["Betriebsgenehmigung wird erteilt, ggf.<br/>mit Nebenbestimmungen — <a href='{{ELI}}#art-z20_abs-z2' target='_blank' rel='noopener'>§20 Abs. 2 S. 1</a>"]
+    G --> H
+    H --> I["Genehmigung besteht fort"]
+    I --> J{"Sind die<br/>Erteilungsvoraussetzungen<br/>nachträglich nicht nur<br/>vorübergehend entfallen? — <a href='{{ELI}}#art-z20_abs-z3' target='_blank' rel='noopener'>§20<br/>Abs. 3 S. 1</a>"}
+    J -->|Ja| Z2["Widerruf (zwingend) — <a href='{{ELI}}#art-z20_abs-z3' target='_blank' rel='noopener'>§20 Abs. 3 S. 1</a>"]
+    J -->|Nein| K{"Hätten die Voraussetzungen für<br/>die Erteilung von Anfang an<br/>nicht vorgelegen? — <a href='{{ELI}}#art-z20_abs-z3' target='_blank' rel='noopener'>§20 Abs. 3<br/>S. 3</a>"}
+    K -->|Ja| Z3["Rücknahme (zwingend) — <a href='{{ELI}}#art-z20_abs-z3' target='_blank' rel='noopener'>§20 Abs. 3 S. 3</a>"]
+    K -->|Nein| L{"Werden erteilte Auflagen nicht<br/>eingehalten? — <a href='{{ELI}}#art-z20_abs-z3' target='_blank' rel='noopener'>§20 Abs. 3 S. 2</a>"}
+    L -->|Ja| M["Widerruf möglich (Ermessen), oder Ruhen<br/>auf Zeit, wenn dies zur Sicherheit<br/>ausreicht — <a href='{{ELI}}#art-z20_abs-z3' target='_blank' rel='noopener'>§20 Abs. 3 S. 2, 4</a>"]
+    L -->|Nein| N{"Wurde von der Genehmigung<br/>länger als sechs Monate kein<br/>Gebrauch gemacht? — <a href='{{ELI}}#art-z20_abs-z3' target='_blank' rel='noopener'>§20 Abs. 3<br/>S. 5</a>"}
+    N -->|Ja| Z4["Genehmigung erlischt kraft Gesetzes"]
+    N -->|Nein| I
+
+    style Z1 fill:#f8d7da,stroke:#c0392b
+    style Z2 fill:#f8d7da,stroke:#c0392b
+    style Z3 fill:#f8d7da,stroke:#c0392b
+    style Z4 fill:#f8d7da,stroke:#c0392b
+    style H fill:#d4edda,stroke:#2d8a4a
+    style G fill:#fff3cd,stroke:#c9a227
+    style M fill:#fff3cd,stroke:#c9a227
+`;export{e as default};

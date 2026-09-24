@@ -1,0 +1,56 @@
+var e=`---
+summary: "Stellt das Verdachtsmeldeverfahren nach §43 GwG mit Verpflichtetem, Zentralstelle für Finanztransaktionsuntersuchungen (FIU) und Staatsanwaltschaft dar: Meldung, Analyse und Weiterleitung sowie das Durchführungsverbot für gemeldete Transaktionen nach §46 GwG."
+---
+swimlane-beta TD
+    subgraph VP["Verpflichteter"]
+        start(["Tatsachen deuten auf Geldwäsche,<br/>Terrorismusfinanzierung oder fehlende<br/>Offenlegung nach §11 Abs. 6 S. 3 hin<br/>— <a href='{{ELI}}#art-z43_abs-z1' target='_blank' rel='noopener'>§43 Abs. 1</a>"])
+        berater{"Verpflichteter nach §2 Abs. 1<br/>Nr. 10/12<br/>(Rechtsanwalt/Steuerberater)<br/>und Information aus<br/>Rechtsberatung/Prozessvertretung?<br/>— <a href='{{ELI}}#art-z43_abs-z2' target='_blank' rel='noopener'>§43 Abs. 2</a>"}
+        keineMeldung(["Keine Meldepflicht"])
+        transaktion{"Betrifft der Sachverhalt eine<br/>noch nicht durchgeführte<br/>Transaktion? — <a href='{{ELI}}#art-z46_abs-z1' target='_blank' rel='noopener'>§46 Abs. 1</a>"}
+        aufschub{"Aufschub der Transaktion<br/>unmöglich oder würde<br/>Verfolgung einer mutmaßlichen<br/>Straftat behindern? — <a href='{{ELI}}#art-z46_abs-z2' target='_blank' rel='noopener'>§46 Abs.<br/>2</a>"}
+        sofort["Transaktion darf sofort durchgeführt<br/>werden; Meldung ist unverzüglich<br/>nachzuholen — <a href='{{ELI}}#art-z46_abs-z2' target='_blank' rel='noopener'>§46 Abs. 2</a>"]
+        meldung["Unverzügliche elektronische Meldung an<br/>die FIU — <a href='{{ELI}}#art-z43_abs-z1' target='_blank' rel='noopener'>§43 Abs. 1</a>, <a href='{{ELI}}#art-z45_abs-z1' target='_blank' rel='noopener'>§45 Abs. 1</a>;<br/>Vertragspartner und Dritte dürfen nicht<br/>informiert werden — <a href='{{ELI}}#art-z47_abs-z1' target='_blank' rel='noopener'>§47 Abs. 1</a>"]
+        frist{"Zustimmung von FIU oder<br/>Staatsanwaltschaft erhalten,<br/>oder 3. Werktag nach Abgang<br/>der Meldung verstrichen<br/>(Samstag kein Werktag), ohne<br/>dass FIU oder<br/>Staatsanwaltschaft die<br/>Durchführung untersagt haben?<br/>— <a href='{{ELI}}#art-z46_abs-z1' target='_blank' rel='noopener'>§46 Abs. 1</a>, <a href='{{ELI}}#art-z40_abs-z1' target='_blank' rel='noopener'>§40 Abs. 1</a>"}
+        durchfuehren(["Transaktion darf durchgeführt werden"])
+        untersagt(["Transaktion darf nicht durchgeführt werden"])
+    end
+
+    subgraph FIU["Zentralstelle für Finanztransaktionsuntersuchungen (FIU)"]
+        eingang["Bestätigt unverzüglich den Eingang der<br/>Meldung — <a href='{{ELI}}#art-z41_abs-z1' target='_blank' rel='noopener'>§41 Abs. 1</a>"]
+        analyse["Analysiert die Meldung risikoorientiert<br/>— <a href='{{ELI}}#art-z30_abs-z2' target='_blank' rel='noopener'>§30 Abs. 2</a>"]
+        befund{"Zusammenhang mit Geldwäsche,<br/>Terrorismusfinanzierung oder<br/>sonstiger Straftat<br/>festgestellt? — <a href='{{ELI}}#art-z32_abs-z2' target='_blank' rel='noopener'>§32 Abs. 2</a>"}
+        weiterleitung["Übermittelt Analyseergebnis und<br/>sachdienliche Informationen unverzüglich<br/>an die Strafverfolgungsbehörden — <a href='{{ELI}}#art-z32_abs-z2' target='_blank' rel='noopener'>§32<br/>Abs. 2</a>"]
+        keineWeiterleitung(["Keine Übermittlung an<br/>Strafverfolgungsbehörden"])
+    end
+
+    subgraph StA["Staatsanwaltschaft"]
+        staEntscheidung{"Zustimmung zur Durchführung<br/>oder Untersagung? — <a href='{{ELI}}#art-z46_abs-z1' target='_blank' rel='noopener'>§46 Abs. 1</a>"}
+    end
+
+    start --> berater
+    berater -->|"Ja, kein Missbrauch bekannt"| keineMeldung
+    berater -->|"Nein oder Missbrauch bekannt"| transaktion
+    transaktion -->|Nein| meldung
+    transaktion -->|Ja| aufschub
+    aufschub -->|Ja| sofort
+    aufschub -->|Nein| meldung
+    sofort --> meldung
+    meldung --> eingang
+    meldung -->|"Transaktion angehalten"| frist
+    eingang --> analyse
+    analyse --> befund
+    befund -->|Ja| weiterleitung
+    befund -->|Nein| keineWeiterleitung
+    weiterleitung --> staEntscheidung
+    staEntscheidung -.->|"Zustimmung/ Untersagung"| frist
+    frist -->|Ja| durchfuehren
+    frist -->|"Nein: untersagt"| untersagt
+    keineMeldung ~~~ transaktion
+    keineWeiterleitung ~~~ weiterleitung
+
+    style keineMeldung fill:#d4edda,stroke:#2d8a4a
+    style durchfuehren fill:#d4edda,stroke:#2d8a4a
+    style untersagt fill:#f8d7da,stroke:#c0392b
+    style sofort fill:#fff3cd,stroke:#c9a227
+    style weiterleitung fill:#fff3cd,stroke:#c9a227
+`;export{e as default};

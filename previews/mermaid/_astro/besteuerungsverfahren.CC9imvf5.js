@@ -1,0 +1,51 @@
+var e=`---
+summary: "Zeigt den Ablauf der Steueranmeldung und -entrichtung für Renn- und Buchmacherwetten zwischen Steuerschuldner und Finanzamt sowie die möglichen Folgeschritte einer unangekündigten Nachschau bis zur Außenprüfung und Nachentrichtung der Steuer."
+---
+swimlane-beta TD
+    subgraph DR["Beteiligte Dritte"]
+        info["Informieren den Steuerschuldner<br/>unverzüglich über besteuerungserhebliche<br/>Tatsachen, insb. geleistete Wetteinsätze<br/>— <a href='{{ELI}}/art-z56' target='_blank' rel='noopener'>§56</a>"]
+    end
+
+    subgraph ST["Steuerschuldner (Totalisatorbetreiber / Buchmacher)"]
+        entstehung(["Steuer entsteht mit der Leistung des<br/>Wetteinsatzes — <a href='{{ELI}}/art-z12' target='_blank' rel='noopener'>§12</a><br/>(Aufzeichnungen zur Ermittlung der<br/>Steuer führen — <a href='{{ELI}}/art-z14' target='_blank' rel='noopener'>§14</a>)"])
+        anmeldung["Steueranmeldung bis zum 15. Tag nach<br/>Ablauf des Anmeldungszeitraums<br/>(Totalisatorsteuer:<br/>jeder Kalendermonat mit mind. einem<br/>Rennen — <a href='{{ELI}}#art-z13_abs-z1' target='_blank' rel='noopener'>§13 I</a>; Buchmachersteuer: jeder<br/>Kalendermonat — <a href='{{ELI}}#art-z13_abs-z2' target='_blank' rel='noopener'>§13 II</a>): eigenhändig<br/>unterschrieben nach amtlichem Vordruck<br/>oder per Datenfernübertragung, Steuer<br/>selbst berechnet — <a href='{{ELI}}#art-z13_abs-z3' target='_blank' rel='noopener'>§13 III S.1-2</a>; mit<br/>Rennprogramm bzw. Aufstellung je<br/>Wettannahmestelle — <a href='{{ELI}}#art-z13_abs-z4' target='_blank' rel='noopener'>§13 IV</a>"]
+        entrichtung["Steuer am 15. Tag nach Ablauf des<br/>Anmeldungszeitraums entrichten — <a href='{{ELI}}#art-z13_abs-z3' target='_blank' rel='noopener'>§13 III<br/>S.3</a>"]
+        vorlage["Von der Nachschau betroffene Personen<br/>(auch Angestellte/Beauftragte) legen auf<br/>Ersuchen Aufzeichnungen, Bücher,<br/>Geschäftspapiere und andere Unterlagen<br/>vor und erteilen Auskünfte — <a href='{{ELI}}#art-z58_abs-z2' target='_blank' rel='noopener'>§58 II</a>"]
+        faellig(["Nachzuentrichtende oder zu erstattende<br/>Beträge sind einen Monat nach<br/>Bekanntgabe der Festsetzung fällig — <a href='{{ELI}}/art-z59' target='_blank' rel='noopener'>§59<br/>S.2</a>"])
+    end
+
+    subgraph FA["Zuständiges Finanzamt"]
+        eingang("Steueranmeldung und Zahlung gehen ein<br/>(örtlich zuständig: Finanzamt am<br/>Wohnsitz/Sitz des Steuerschuldners<br/>— <a href='{{ELI}}/art-z15' target='_blank' rel='noopener'>§15</a>)")
+        nachschau{"Unangekündigte Nachschau:<br/>Amtsträger betreten<br/>Grundstücke und Geschäftsräume<br/>während der Geschäfts- und<br/>Arbeitszeiten? — <a href='{{ELI}}#art-z58_abs-z1' target='_blank' rel='noopener'>§58 I</a>"}
+        keineNachschau(["Keine Nachschau"])
+        anlass{"Geben die Feststellungen<br/>Anlass zu einer Außenprüfung?<br/>— <a href='{{ELI}}#art-z58_abs-z3' target='_blank' rel='noopener'>§58 III S.1</a><br/>(Auswertung auch für andere<br/>Steuern — <a href='{{ELI}}#art-z58_abs-z4' target='_blank' rel='noopener'>§58 IV</a>)"}
+        keinePruefung(["Keine Außenprüfung"])
+        aussen["Übergang zur Außenprüfung (§193 AO) ohne<br/>vorherige Prüfungsanordnung;<br/>schriftlicher Hinweis — <a href='{{ELI}}#art-z58_abs-z3' target='_blank' rel='noopener'>§58 III</a>"]
+        nachentr{"Ergeben sich Steuerbeträge,<br/>die nachzuentrichten oder zu<br/>erstatten sind? — <a href='{{ELI}}/art-z59' target='_blank' rel='noopener'>§59</a>"}
+        keineAenderung(["Keine Änderung"])
+        festsetzung["Festsetzung zusammen mit der Steuer für<br/>den letzten Kalendermonat des<br/>Prüfungszeitraums — <a href='{{ELI}}/art-z59' target='_blank' rel='noopener'>§59 S.1</a>"]
+    end
+
+    info -.-> anmeldung
+    entstehung --> anmeldung
+    anmeldung --> entrichtung
+    entrichtung --> eingang
+    eingang --> nachschau
+    nachschau -->|Nein| keineNachschau
+    nachschau -->|Ja| vorlage
+    vorlage --> anlass
+    anlass -->|Nein| keinePruefung
+    anlass -->|Ja| aussen
+    aussen --> nachentr
+    nachentr -->|Nein| keineAenderung
+    nachentr -->|Ja| festsetzung
+    festsetzung --> faellig
+    keineAenderung ~~~ festsetzung
+    keinePruefung ~~~ aussen
+
+    style keineNachschau fill:#d4edda,stroke:#2d8a4a
+    style keinePruefung fill:#d4edda,stroke:#2d8a4a
+    style keineAenderung fill:#d4edda,stroke:#2d8a4a
+    style aussen fill:#fff3cd,stroke:#c9a227
+    style faellig fill:#fff3cd,stroke:#c9a227
+`;export{e as default};

@@ -1,0 +1,43 @@
+var e=`---
+summary: "Zeigt das Verfahren zur zeitlich nicht begrenzten Verringerung der Arbeitszeit nach § 8 TzBfG zwischen Arbeitnehmer/in und Arbeitgeber: Voraussetzungen, Geltendmachung, Erörterung, Entscheidung des Arbeitgebers bis zur Verringerung durch Einigung, Zustimmung oder fehlende rechtzeitige Ablehnung oder zur berechtigten Ablehnung."
+---
+swimlane-beta TD
+    subgraph AN["Arbeitnehmer/in"]
+        start(["Möchte die vertraglich vereinbarte<br/>Arbeitszeit verringern — <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 I</a>"])
+        voraussetzungen{"Arbeitsverhältnis länger als 6<br/>Monate bestanden (<a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 I</a>) und<br/>Arbeitgeber beschäftigt i.d.R.<br/>mehr als 15 Arbeitnehmer,<br/>unabhängig von Personen in<br/>Berufsbildung (<a href='{{ELI}}#art-z8_abs-z7' target='_blank' rel='noopener'>§8 VII</a>)?"}
+        keinAnspruch(["Kein Anspruch nach <a href='{{ELI}}/art-z8' target='_blank' rel='noopener'>§8</a>"])
+        geltend["Macht Verringerung und Umfang spätestens<br/>3 Monate vor Beginn in Textform geltend;<br/>soll gewünschte Verteilung angeben — <a href='{{ELI}}#art-z8_abs-z2' target='_blank' rel='noopener'>§8<br/>II</a>"]
+        einigung{"Einigung über die<br/>Verringerung? — <a href='{{ELI}}#art-z8_abs-z3' target='_blank' rel='noopener'>§8 III S.1</a>"}
+        verringert["Arbeitszeit wird verringert (nach<br/>Zustimmung: erneutes Verlangen<br/>frühestens nach 2 Jahren — <a href='{{ELI}}#art-z8_abs-z6' target='_blank' rel='noopener'>§8 VI</a>)"]
+    end
+
+    subgraph AG["Arbeitgeber"]
+        eroertern["Erörtert die gewünschte Verringerung mit<br/>dem Ziel einer Vereinbarung;<br/>Einvernehmen über die Verteilung<br/>erzielen — <a href='{{ELI}}#art-z8_abs-z3' target='_blank' rel='noopener'>§8 III</a>"]
+        gruende{"Stehen betriebliche Gründe<br/>entgegen? (insb. wesentliche<br/>Beeinträchtigung von<br/>Organisation, Arbeitsablauf<br/>oder Sicherheit im Betrieb<br/>oder unverhältnismäßige<br/>Kosten;<br/>Ablehnungsgründe auch per<br/>Tarifvertrag) — <a href='{{ELI}}#art-z8_abs-z4' target='_blank' rel='noopener'>§8 IV</a>"}
+        zustimmung["Hat der Verringerung zuzustimmen und die<br/>Verteilung entsprechend den Wünschen<br/>festzulegen — <a href='{{ELI}}#art-z8_abs-z4' target='_blank' rel='noopener'>§8 IV S.1</a>; Mitteilung<br/>spätestens 1 Monat vor Beginn in<br/>Textform — <a href='{{ELI}}#art-z8_abs-z5' target='_blank' rel='noopener'>§8 V S.1</a>"]
+        ablehnung{"Ablehnung spätestens 1 Monat<br/>vor gewünschtem Beginn in<br/>Textform? — <a href='{{ELI}}#art-z8_abs-z5' target='_blank' rel='noopener'>§8 V S.1-2</a>"}
+        abgelehnt(["Verringerung berechtigt abgelehnt;<br/>erneutes Verlangen frühestens nach 2<br/>Jahren — <a href='{{ELI}}#art-z8_abs-z6' target='_blank' rel='noopener'>§8 VI</a>"])
+        verteilung(["Ohne Einvernehmen über die Verteilung<br/>gilt die gewünschte Verteilung als<br/>festgelegt, wenn der Arbeitgeber sie<br/>nicht spätestens 1 Monat vor Beginn in<br/>Textform ablehnt — <a href='{{ELI}}#art-z8_abs-z5' target='_blank' rel='noopener'>§8 V S.3</a>;<br/>spätere Änderung, wenn betriebliches<br/>Interesse erheblich überwiegt und 1<br/>Monat vorher angekündigt — <a href='{{ELI}}#art-z8_abs-z5' target='_blank' rel='noopener'>§8 V S.4</a>"])
+    end
+
+    start --> voraussetzungen
+    voraussetzungen -->|Nein| keinAnspruch
+    voraussetzungen -->|Ja| geltend
+    geltend --> eroertern
+    eroertern --> einigung
+    einigung -->|"Ja: wie vereinbart"| verringert
+    einigung -->|Nein| gruende
+    gruende -->|Nein| zustimmung
+    gruende -->|Ja| ablehnung
+    zustimmung --> verringert
+    ablehnung -->|Ja| abgelehnt
+    ablehnung -->|"Nein: im gewünschten Umfang<br/>— <a href='{{ELI}}#art-z8_abs-z5' target='_blank' rel='noopener'>§8 V S.2</a>"| verringert
+    verringert --> verteilung
+    keinAnspruch ~~~ geltend
+    zustimmung ~~~ ablehnung
+
+    style keinAnspruch fill:#f8d7da,stroke:#c0392b
+    style abgelehnt fill:#f8d7da,stroke:#c0392b
+    style verringert fill:#d4edda,stroke:#2d8a4a
+    style verteilung fill:#fff3cd,stroke:#c9a227
+`;export{e as default};

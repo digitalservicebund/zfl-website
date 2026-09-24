@@ -1,0 +1,19 @@
+var e=`---
+summary: "Prüft, unter welchen Voraussetzungen ein Pfandleiher eine bewegliche Sache als Pfand annehmen darf, insbesondere hinsichtlich Vertretungsbefugnis des Überbringers, Haftungsbeschränkung auf das Pfand, Verfallvereinbarung und Mindestlaufzeit des Darlehens."
+---
+flowchart TD
+    A["Verpfänder bietet bewegliche Sache als<br/>Pfand an"] --> B{"Ist der Überbringer der<br/>Verpfänder selbst? — <a href='{{ELI}}#art-z5_abs-z2' target='_blank' rel='noopener'>§5 II</a>"}
+    B -->|Nein| C{"Liegt schriftliche Vollmacht<br/>des Verpfänders vor? — <a href='{{ELI}}#art-z5_abs-z2' target='_blank' rel='noopener'>§5 II</a>"}
+    C -->|Nein| X["Pfandannahme unzulässig"]
+    C -->|Ja| D
+    B -->|Ja| D{"Vereinbart, dass sich der<br/>Pfandleiher wegen seiner<br/>Forderungen nur aus dem Pfand<br/>befriedigen darf? — <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I Nr.1</a>"}
+    D -->|Nein| X
+    D -->|Ja| E{"Vereinbart, dass der<br/>Pfandleiher berechtigt ist, 3<br/>Jahre nach Ablauf des<br/>Verwertungsjahres den nicht<br/>ausgezahlten Erlösanteil<br/>abzuführen (Verfall)? — <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I<br/>Nr.2</a>"}
+    E -->|Nein| X
+    E -->|Ja| F{"Beträgt die vereinbarte<br/>Fälligkeitsfrist des Darlehens<br/>mindestens 3 Monate? — <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I<br/>S.2</a>"}
+    F -->|Nein| X
+    F -->|Ja| G["Pfand darf angenommen werden — <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I</a>"]
+
+    style X fill:#f8d7da,stroke:#c0392b
+    style G fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};

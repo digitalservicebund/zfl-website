@@ -1,0 +1,77 @@
+var e=`---
+summary: "Zeigt die Schutzfristen vor und nach der Entbindung nach dem MuSchG: sechs Wochen vor dem voraussichtlichen Entbindungstag, acht oder zwölf Wochen danach, die Verlängerung bei vorzeitiger Entbindung, die Sonderregel beim Tod des Kindes und die gestaffelten Schutzfristen nach einer Fehlgeburt."
+---
+flowchart TD
+    start(["Schwangere Frau in Beschäftigung"])
+    fehlgeburt{"Endet die Schwangerschaft mit<br/>einer Fehlgeburt? — <a href='{{ELI}}#art-z3_abs-z5' target='_blank' rel='noopener'>§3 V</a>"}
+
+    ssw13{"Ab der 13. SSW?"}
+    keineFrist(["Keine Schutzfrist nach <a href='{{ELI}}#art-z3_abs-z5' target='_blank' rel='noopener'>§3 V</a>"])
+    ssw17{"Ab der 17. SSW?"}
+    ssw20{"Ab der 20. SSW?"}
+    fg2["2 Wochen — <a href='{{ELI}}#art-z3_abs-z5' target='_blank' rel='noopener'>§3 V S.1 Nr.1</a>"]
+    fg6["6 Wochen — <a href='{{ELI}}#art-z3_abs-z5' target='_blank' rel='noopener'>§3 V S.1 Nr.2</a>"]
+    fg8["8 Wochen — <a href='{{ELI}}#art-z3_abs-z5' target='_blank' rel='noopener'>§3 V S.1 Nr.3</a>"]
+    fgBereit{"Ausdrücklich zur Arbeit bereit<br/>erklärt? — <a href='{{ELI}}#art-z3_abs-z5' target='_blank' rel='noopener'>§3 V S.1</a>"}
+    fgArbeit(["Beschäftigung zulässig (jederzeit<br/>widerruflich) — <a href='{{ELI}}#art-z3_abs-z5' target='_blank' rel='noopener'>§3 V S.2</a>"])
+    fgVerbot(["Keine Beschäftigung bis zum Fristablauf<br/>— <a href='{{ELI}}#art-z3_abs-z5' target='_blank' rel='noopener'>§3 V S.1</a>"])
+    fgHinweis["Abs. 1 bis 3 gelten nicht — <a href='{{ELI}}#art-z3_abs-z5' target='_blank' rel='noopener'>§3 V S.3</a>;<br/>Kündigungsschutz bis 4 Monate nach<br/>Fehlgeburt nach der 12. SSW<br/>— <a href='{{ELI}}#art-z17_abs-z1' target='_blank' rel='noopener'>§17 I S.1 Nr.2</a>"]
+
+    vor["Schutzfrist vor der Entbindung: letzte 6<br/>Wochen vor dem voraussichtlichen<br/>Entbindungstag laut ärztlichem Zeugnis<br/>oder Hebammenzeugnis — <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 I S.1, 3</a>"]
+    vorBereit{"Ausdrücklich zur Arbeit bereit<br/>erklärt? (jederzeit<br/>widerruflich) — <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 I S.1, 2</a>"}
+    entbindung("Entbindung (Lebend- oder Totgeburt<br/>— <a href='{{ELI}}#art-z2_abs-z6' target='_blank' rel='noopener'>§2 VI S.1</a>);<br/>die Frist davor verkürzt oder verlängert<br/>sich entsprechend — <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 I S.4</a>")
+    nach["Schutzfrist nach der Entbindung: 8<br/>Wochen — <a href='{{ELI}}#art-z3_abs-z2' target='_blank' rel='noopener'>§3 II S.1</a>"]
+    grund{"Früh- oder Mehrlingsgeburt<br/>oder vor Ablauf von 8 Wochen<br/>festgestellte Behinderung des<br/>Kindes (nur auf Antrag), keine<br/>Totgeburt? — <a href='{{ELI}}#art-z3_abs-z2' target='_blank' rel='noopener'>§3 II S.2, 4, 5</a>"}
+    zwoelf["Verlängerung auf 12 Wochen — <a href='{{ELI}}#art-z3_abs-z2' target='_blank' rel='noopener'>§3 II S.2</a>"]
+    vorzeitig{"Vorzeitige Entbindung?<br/>— <a href='{{ELI}}#art-z3_abs-z2' target='_blank' rel='noopener'>§3 II S.3</a>"}
+    verlaengert["Verlängerung um die Tage, um die sich<br/>die Frist vor der Entbindung verkürzt<br/>hat — <a href='{{ELI}}#art-z3_abs-z2' target='_blank' rel='noopener'>§3 II S.3</a>"]
+    kindTod{"Tod des Kindes? — <a href='{{ELI}}#art-z3_abs-z4' target='_blank' rel='noopener'>§3 IV</a>"}
+    todBedingung{"Frau verlangt es ausdrücklich,<br/>und nach ärztlichem Zeugnis<br/>spricht nichts dagegen?<br/>— <a href='{{ELI}}#art-z3_abs-z4' target='_blank' rel='noopener'>§3 IV S.1</a>"}
+    frueherArbeit(["Beschäftigung schon nach den ersten 2<br/>Wochen zulässig (jederzeit widerruflich)<br/>— <a href='{{ELI}}#art-z3_abs-z4' target='_blank' rel='noopener'>§3 IV</a>"])
+    verbot(["Keine Beschäftigung bis zum Ablauf der<br/>Schutzfrist — <a href='{{ELI}}#art-z3_abs-z2' target='_blank' rel='noopener'>§3 II S.1</a>"])
+    ausbildung["Schülerinnen und Studentinnen: Tätigkeit<br/>in der Schutzfrist, wenn sie es<br/>ausdrücklich verlangen — <a href='{{ELI}}#art-z3_abs-z3' target='_blank' rel='noopener'>§3 III</a>"]
+    geld["Für die Schutzfristen und den<br/>Entbindungstag: Mutterschaftsgeld — <a href='{{ELI}}/art-z19' target='_blank' rel='noopener'>§19</a><br/>und Arbeitgeberzuschuss — <a href='{{ELI}}#art-z20_abs-z1' target='_blank' rel='noopener'>§20 I</a>"]
+
+    start --> fehlgeburt
+    fehlgeburt -->|Ja| ssw13
+    ssw13 -->|Nein| keineFrist
+    ssw13 -->|Ja| ssw17
+    ssw17 -->|Nein| fg2
+    ssw17 -->|Ja| ssw20
+    ssw20 -->|Nein| fg6
+    ssw20 -->|Ja| fg8
+    fg2 --> fgBereit
+    fg6 --> fgBereit
+    fg8 --> fgBereit
+    fgBereit -->|Ja| fgArbeit
+    fgBereit -->|Nein| fgVerbot
+    fgBereit -.- fgHinweis
+
+    fehlgeburt -->|Nein| vor
+    vor --> vorBereit
+    vorBereit -->|"Ja: Beschäftigung zulässig"| entbindung
+    vorBereit -->|"Nein: keine Beschäftigung"| entbindung
+    entbindung --> nach
+    nach --> grund
+    grund -->|Ja| zwoelf
+    grund -->|"Nein: bleibt bei 8 Wochen"| vorzeitig
+    zwoelf --> vorzeitig
+    vorzeitig -->|Ja| verlaengert
+    vorzeitig -->|Nein| kindTod
+    verlaengert --> kindTod
+    kindTod -->|Ja| todBedingung
+    kindTod -->|Nein| verbot
+    todBedingung -->|Ja| frueherArbeit
+    todBedingung -->|Nein| verbot
+    nach -.- ausbildung
+    verbot -.- geld
+
+    style fgArbeit fill:#d4edda,stroke:#2d8a4a
+    style frueherArbeit fill:#d4edda,stroke:#2d8a4a
+    style fgVerbot fill:#f8d7da,stroke:#c0392b
+    style verbot fill:#f8d7da,stroke:#c0392b
+    style keineFrist fill:#fff3cd,stroke:#c9a227
+    style fgHinweis fill:#f5f5f5,stroke:#999
+    style ausbildung fill:#f5f5f5,stroke:#999
+    style geld fill:#f5f5f5,stroke:#999
+`;export{e as default};

@@ -1,0 +1,11 @@
+var e=`---
+summary: "Zeigt, wann eine erteilte Genehmigung zum Tragen der Uniform nach § 7 UnifV zwingend widerrufen werden muss und wann sie nach Ermessen widerrufen werden kann."
+---
+flowchart TD
+    A["Genehmigung zum Tragen der Uniform liegt<br/>vor"] --> B{"Ist zu befürchten, dass durch<br/>das Auftreten der früheren<br/>Soldatin/des früheren Soldaten<br/>in Uniform das Ansehen der<br/>Bundeswehr in der<br/>Öffentlichkeit beeinträchtigt<br/>oder die Trageberechtigung<br/>missbraucht wird? — <a href='{{ELI}}/art-z7' target='_blank' rel='noopener'>§7 S. 2</a>"}
+    B -->|Ja| C["Genehmigung ist zu widerrufen (gebundene<br/>Entscheidung) — <a href='{{ELI}}/art-z7' target='_blank' rel='noopener'>§7 S. 2</a>"]
+    B -->|Nein| D["Genehmigung kann jederzeit widerrufen<br/>werden (Ermessen) — <a href='{{ELI}}/art-z7' target='_blank' rel='noopener'>§7 S. 1</a>"]
+
+    style C fill:#f8d7da,stroke:#c0392b
+    style D fill:#fff3cd,stroke:#c9a227
+`;export{e as default};

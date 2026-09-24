@@ -1,0 +1,49 @@
+var e=`---
+summary: "Zeigt die Behörden und Stellen der Luftverwaltung nach dem LuftVG – Bundesministerium für Verkehr, Luftfahrt-Bundesamt, Bundesaufsichtsamt für Flugsicherung, Flugsicherungsorganisation und die im Auftrag des Bundes handelnden Länder – sowie ihre Aufsichts-, Beauftragungs- und Beratungsbeziehungen zueinander und zu Flugplatzunternehmern und Luftfahrtunternehmen."
+---
+flowchart LR
+    subgraph Bund["Bundesverwaltung"]
+        BMV["<b>Bundesministerium für Verkehr</b><br/>nimmt Aufgaben des Bundes wahr<br/>oder bestimmt eine Stelle — <a href='{{ELI}}#art-z31_abs-z1' target='_blank' rel='noopener'>§31 I</a><br/>erkennt Bedarf an Flugsicherung<br/>an Flugplätzen an — <a href='{{ELI}}#art-z27d_abs-z1' target='_blank' rel='noopener'>§27d I</a><br/>bestimmt den Koordinierungseckwert — <a href='{{ELI}}#art-z27a_abs-z2' target='_blank' rel='noopener'>§27a II</a>"]
+        LBA["<b>Luftfahrt-Bundesamt</b><br/>prüft Luftfahrtunternehmen im Einzelfall — <a href='{{ELI}}#art-z31_abs-z4' target='_blank' rel='noopener'>§31 IV</a><br/>führt Luftfahrer-Eignungsdatei — <a href='{{ELI}}#art-z66_abs-z1' target='_blank' rel='noopener'>§66 I</a><br/>führt Deliktsregister — <a href='{{ELI}}#art-z68_abs-z1' target='_blank' rel='noopener'>§68 I</a>"]
+        BAF["<b>Bundesaufsichtsamt für Flugsicherung</b><br/>nimmt Anzeigen von Unterstützungsdiensten entgegen — <a href='{{ELI}}#art-z27c_abs-z2' target='_blank' rel='noopener'>§27c II</a><br/>erteilt Erlaubnisse für Flugsicherungspersonal — <a href='{{ELI}}/art-z67' target='_blank' rel='noopener'>§67</a><br/>erkennt Kosten der Flugsicherung an — <a href='{{ELI}}#art-z31f_abs-z2a' target='_blank' rel='noopener'>§31f IIa</a>"]
+        DWD["<b>Deutscher Wetterdienst</b><br/>Flugwetterdienst — <a href='{{ELI}}#art-z27e_abs-z1' target='_blank' rel='noopener'>§27e I</a><br/>Fachaufsicht über Beauftragte — <a href='{{ELI}}#art-z27f_abs-z5' target='_blank' rel='noopener'>§27f V</a>"]
+    end
+
+    subgraph Beauftragte["Beauftragte Stellen"]
+        FSO["<b>Flugsicherungsorganisation</b><br/>GmbH des Bundes für die Flugverkehrsdienste — <a href='{{ELI}}#art-z31b_abs-z1' target='_blank' rel='noopener'>§31b I</a><br/>Luftaufsicht neben den Luftfahrtbehörden — <a href='{{ELI}}#art-z29_abs-z1' target='_blank' rel='noopener'>§29 I</a><br/>Kostengläubigerin für Flugsicherungsgebühren — <a href='{{ELI}}#art-z31b_abs-z3' target='_blank' rel='noopener'>§31b III</a>"]
+        Koord["<b>Flughafenkoordinator</b><br/>Flughafenkoordinierung nach EU-Recht — <a href='{{ELI}}/art-z31a' target='_blank' rel='noopener'>§31a</a>"]
+    end
+
+    subgraph Laender["Länderebene"]
+        LLB["<b>Länder (im Auftrag des Bundes)</b><br/>Genehmigung von Flugplätzen und Entgelten — <a href='{{ELI}}#art-z31_abs-z2' target='_blank' rel='noopener'>§31 II Nr. 4</a><br/>Erlaubnisse für Privatpiloten — <a href='{{ELI}}#art-z31_abs-z2' target='_blank' rel='noopener'>§31 II Nr. 1</a><br/>Luftaufsicht, soweit nicht Bundesstellen — <a href='{{ELI}}#art-z31_abs-z2' target='_blank' rel='noopener'>§31 II Nr. 18</a>"]
+        Kom["<b>Kommission am Verkehrsflughafen</b><br/>berät zum Schutz gegen Fluglärm — <a href='{{ELI}}#art-z32b_abs-z1' target='_blank' rel='noopener'>§32b I</a><br/>Mitglieder beruft die Genehmigungsbehörde — <a href='{{ELI}}#art-z32b_abs-z5' target='_blank' rel='noopener'>§32b V</a>"]
+    end
+
+    subgraph Luftfahrt["Luftfahrt"]
+        FPU["<b>Flugplatzunternehmer</b><br/>stellen Räume für die Luftaufsicht — <a href='{{ELI}}/art-z29a' target='_blank' rel='noopener'>§29a</a><br/>dulden Untersuchungen auf dem Flugplatz — <a href='{{ELI}}#art-z29_abs-z3' target='_blank' rel='noopener'>§29 III</a><br/>vermeiden Fluglärm — <a href='{{ELI}}#art-z29b_abs-z1' target='_blank' rel='noopener'>§29b I</a>"]
+        LFU["<b>Luftfahrtunternehmen</b><br/>Betriebsgenehmigung erforderlich — <a href='{{ELI}}#art-z20_abs-z1' target='_blank' rel='noopener'>§20 I</a><br/>Drittstaaten-Unternehmen für Fluglinienverkehr — <a href='{{ELI}}/art-z21a' target='_blank' rel='noopener'>§21a</a>"]
+    end
+
+    BMV -->|"beauftragt — <a href='{{ELI}}#art-z31b_abs-z1' target='_blank' rel='noopener'>§31b I</a>"| FSO
+    BAF -->|"Rechts- und Fachaufsicht — <a href='{{ELI}}#art-z31d_abs-z2' target='_blank' rel='noopener'>§31d II</a>, §31f IV"| FSO
+    BMV -->|"beauftragt, Aufsicht — <a href='{{ELI}}/art-z31a' target='_blank' rel='noopener'>§31a</a>, §31d II"| Koord
+    BMV -->|"Auftragsverwaltung — <a href='{{ELI}}#art-z31_abs-z2' target='_blank' rel='noopener'>§31 II</a>"| LLB
+    BMV -->|"Bedarfsanerkennung — <a href='{{ELI}}#art-z27f_abs-z5' target='_blank' rel='noopener'>§27f V</a>"| DWD
+    FSO -->|"gutachtliche Stellungnahme — <a href='{{ELI}}#art-z31_abs-z3' target='_blank' rel='noopener'>§31 III</a>"| LLB
+    LBA -->|"gutachtliche Stellungnahme — <a href='{{ELI}}#art-z31_abs-z3a' target='_blank' rel='noopener'>§31 IIIa</a>, IV"| LLB
+    LBA -->|"Widerruf, Einflugverbot — <a href='{{ELI}}#art-z29_abs-z7' target='_blank' rel='noopener'>§29 VII</a>"| LFU
+    LLB -->|"Genehmigung, Aufsicht — <a href='{{ELI}}#art-z31_abs-z2' target='_blank' rel='noopener'>§31 II Nr. 4, 4d</a>"| FPU
+    FSO -->|"fordert Infrastruktur, erstattet Kosten — <a href='{{ELI}}#art-z27d_abs-z2' target='_blank' rel='noopener'>§27d II</a>, III"| FPU
+    DWD -->|"fordert Infrastruktur, erstattet Kosten — <a href='{{ELI}}#art-z27f_abs-z2' target='_blank' rel='noopener'>§27f II</a>, III"| FPU
+    LLB & BAF & FSO -.-|"Beratung zu Fluglärm — <a href='{{ELI}}#art-z32b_abs-z1' target='_blank' rel='noopener'>§32b I</a>"| Kom
+
+    classDef zentral fill:#fff3cd,stroke:#c9a227,stroke-width:2px
+    classDef behoerde fill:#e8f0fe,stroke:#3b6fd4
+    classDef privat fill:#f5f5f5,stroke:#999
+    classDef parlament fill:#ede7f6,stroke:#7e57c2
+    classDef gremium fill:#e6f4ea,stroke:#2d8a4a
+    class LBA,BAF,DWD,LLB,FSO behoerde
+    class Koord,FPU,LFU privat
+    class BMV parlament
+    class Kom gremium
+`;export{e as default};

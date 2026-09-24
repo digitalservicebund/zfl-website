@@ -1,0 +1,49 @@
+var e=`---
+summary: "Zeigt die Beteiligung des Betriebsrats bei Betriebsänderungen: Unterrichtung und Beratung, Verhandlungen über Interessenausgleich und Sozialplan, Vermittlung und Einigungsstelle sowie den Nachteilsausgleich für Arbeitnehmer, wenn der Unternehmer keinen Interessenausgleich versucht oder davon abweicht."
+---
+swimlane-beta TD
+    subgraph AN["Arbeitnehmer"]
+        nachteilsausgleich(["Nachteilsausgleich: Klage auf Abfindung<br/>bei Entlassung, Ausgleich anderer<br/>wirtschaftlicher Nachteile bis zu<br/>12 Monate — <a href='{{ELI}}#art-z113_abs-z1' target='_blank' rel='noopener'>§113 I</a>, <a href='{{ELI}}#art-z113_abs-z2' target='_blank' rel='noopener'>§113 II</a>, <a href='{{ELI}}#art-z113_abs-z3' target='_blank' rel='noopener'>§113 III</a>"])
+    end
+
+    subgraph U["Unternehmer"]
+        start(["Geplante Betriebsänderung (Nr. 1-5) mit<br/>möglichen wesentlichen Nachteilen, Unternehmen<br/>mit i.d.R. mehr als 20 wahlberechtigten AN — <a href='{{ELI}}/art-z111' target='_blank' rel='noopener'>§111 S.1, S.3</a>"])
+        ohneVersuch{"Durchführung ohne Versuch<br/>eines Interessenausgleichs? — <a href='{{ELI}}#art-z113_abs-z3' target='_blank' rel='noopener'>§113 III</a>"}
+        unterrichtung["Rechtzeitige und umfassende<br/>Unterrichtung, Beratung mit dem BR — <a href='{{ELI}}/art-z111' target='_blank' rel='noopener'>§111 S.1</a>"]
+    end
+
+    subgraph BR["Betriebsrat"]
+        beratung["Beratung der geplanten Betriebsänderung<br/>(Unternehmen mit mehr als 300 AN:<br/>ggf. Hinzuziehung eines Beraters — <a href='{{ELI}}/art-z111' target='_blank' rel='noopener'>§111 S.2</a>)"]
+        einigung{"Einigung über Interessenausgleich<br/>und Sozialplan (ggf. nach Vermittlung<br/>durch den Vorstand der BA)? — <a href='{{ELI}}#art-z112_abs-z1' target='_blank' rel='noopener'>§112 I</a>, <a href='{{ELI}}#art-z112_abs-z2' target='_blank' rel='noopener'>§112 II S.1</a>"}
+        vereinbart(["Interessenausgleich bzw. Sozialplan schriftlich<br/>niedergelegt und unterschrieben — <a href='{{ELI}}#art-z112_abs-z1' target='_blank' rel='noopener'>§112 I S.1-2</a>, <a href='{{ELI}}#art-z112_abs-z3' target='_blank' rel='noopener'>§112 III S.3</a>;<br/>Sozialplan wirkt wie Betriebsvereinbarung — <a href='{{ELI}}#art-z112_abs-z1' target='_blank' rel='noopener'>§112 I S.3</a><br/>(Abweichung ohne zwingenden Grund:<br/>Nachteilsausgleich — <a href='{{ELI}}#art-z113_abs-z1' target='_blank' rel='noopener'>§113 I</a>, <a href='{{ELI}}#art-z113_abs-z2' target='_blank' rel='noopener'>§113 II</a>)"])
+        keinSpruch(["Kein Spruch: Sozialplan<br/>nicht erzwingbar — <a href='{{ELI}}/art-z112a' target='_blank' rel='noopener'>§112a</a>"])
+    end
+
+    subgraph ESt["Einigungsstelle"]
+        anrufung["Anrufung durch Unternehmer oder BR — <a href='{{ELI}}#art-z112_abs-z2' target='_blank' rel='noopener'>§112 II S.2</a><br/>(auf Ersuchen des Vorsitzenden nimmt<br/>die BA an der Verhandlung teil — <a href='{{ELI}}#art-z112_abs-z2' target='_blank' rel='noopener'>§112 II S.3</a>)"]
+        esEinigung{"Einigung der Parteien<br/>vor der Einigungsstelle? — <a href='{{ELI}}#art-z112_abs-z3' target='_blank' rel='noopener'>§112 III</a>"}
+        erzwingbar{"Sozialplan erzwingbar? — <a href='{{ELI}}/art-z112a' target='_blank' rel='noopener'>§112a</a><br/>nicht bei reinem Personalabbau unter<br/>den Schwellenwerten — <a href='{{ELI}}#art-z112a_abs-z1' target='_blank' rel='noopener'>§112a I</a><br/>und nicht in den ersten 4 Jahren<br/>nach Unternehmensgründung — <a href='{{ELI}}#art-z112a_abs-z2' target='_blank' rel='noopener'>§112a II</a>"}
+        spruch(["Einigungsstelle entscheidet über den<br/>Sozialplan, Spruch ersetzt die Einigung — <a href='{{ELI}}#art-z112_abs-z4' target='_blank' rel='noopener'>§112 IV</a><br/>(soziale Belange und wirtschaftliche<br/>Vertretbarkeit — <a href='{{ELI}}#art-z112_abs-z5' target='_blank' rel='noopener'>§112 V</a>)"])
+    end
+
+    start --> ohneVersuch
+    ohneVersuch -->|Ja| nachteilsausgleich
+    ohneVersuch -->|Nein| unterrichtung
+    unterrichtung --> beratung
+    beratung --> einigung
+    einigung -->|Ja| vereinbart
+    einigung -->|Nein| anrufung
+    anrufung --> esEinigung
+    esEinigung -->|Ja| vereinbart
+    esEinigung -->|Nein| erzwingbar
+    erzwingbar -->|Ja| spruch
+    erzwingbar -->|Nein| keinSpruch
+
+    vereinbart ~~~ erzwingbar
+    keinSpruch ~~~ spruch
+
+    style vereinbart fill:#d4edda,stroke:#2d8a4a
+    style spruch fill:#d4edda,stroke:#2d8a4a
+    style keinSpruch fill:#fff3cd,stroke:#c9a227
+    style nachteilsausgleich fill:#f8d7da,stroke:#c0392b
+`;export{e as default};

@@ -1,0 +1,31 @@
+var e=`---
+summary: "Zeigt, welche Kosten je nach Art der Heizungs- und Warmwasserversorgung (zentrale Anlage, Fernwärme, Einzelöfen oder verbundene Anlage) nach §2 Nr. 4-6 BetrKV auf den Mieter umlagefähig sind."
+---
+flowchart TD
+    A{"Welche Art der Heizungs-/<br/>Warmwasserversorgung liegt<br/>vor?"} --> B["Zentrale Heizungsanlage im Gebäude — <a href='{{ELI}}#art-z2_abs-z' target='_blank' rel='noopener'>§2<br/>Nr.4 Buchst. a</a>"]
+    A --> C["Zentrale eigene<br/>Brennstoffversorgungsanlage — <a href='{{ELI}}#art-z2_abs-z' target='_blank' rel='noopener'>§2 Nr.4<br/>Buchst. b</a>"]
+    A --> D["Fernwärme/gewerbliche Wärmelieferung<br/>durch Dritte (Contracting) — <a href='{{ELI}}#art-z2_abs-z' target='_blank' rel='noopener'>§2 Nr.4<br/>Buchst. c</a>"]
+    A --> E["Einzelöfen/Gasöfen/ Etagenheizung — <a href='{{ELI}}#art-z2_abs-z' target='_blank' rel='noopener'>§2<br/>Nr.4 Buchst. d</a>"]
+    A --> F["Zentrale Warmwasseranlage — <a href='{{ELI}}#art-z2_abs-z' target='_blank' rel='noopener'>§2 Nr.5<br/>Buchst. a</a>"]
+    A --> G["Fernwärme/gewerbliche<br/>Warmwasserlieferung — <a href='{{ELI}}#art-z2_abs-z' target='_blank' rel='noopener'>§2 Nr.5 Buchst. b</a>"]
+    A --> H["Einzelgeräte für Warmwasser — <a href='{{ELI}}#art-z2_abs-z' target='_blank' rel='noopener'>§2 Nr.5<br/>Buchst. c</a>"]
+    A --> I["Verbundene Heizungs- und<br/>Warmwasserversorgungsanlage — <a href='{{ELI}}#art-z2_abs-z' target='_blank' rel='noopener'>§2 Nr.6</a>"]
+
+    B --> Z1["Umlagefähig: Brennstoffkosten,<br/>Betriebsstrom, Bedienung/<br/>Überwachung/Pflege, Reinigung,<br/>Emissionsmessung, Wartung — <a href='{{ELI}}#art-z2_abs-z' target='_blank' rel='noopener'>§2 Nr.4<br/>Buchst. a</a>"]
+    C --> Z2["Umlagefähig: Betriebsstrom, Überwachung,<br/>Reinigung der Brennstoffversorgung — <a href='{{ELI}}#art-z2_abs-z' target='_blank' rel='noopener'>§2<br/>Nr.4 Buchst. b</a>"]
+    D --> Z3["Umlagefähig: Entgelt für Wärmelieferung<br/>+ Betrieb der hauseigenen Verteilanlage<br/>— <a href='{{ELI}}#art-z2_abs-z' target='_blank' rel='noopener'>§2 Nr.4 Buchst. c</a>"]
+    E --> Z4["Umlagefähig: Kosten für Wartung,<br/>Reinigung, Emissionsmessung je<br/>Einzelanlage — <a href='{{ELI}}#art-z2_abs-z' target='_blank' rel='noopener'>§2 Nr.4 Buchst. d</a>"]
+    F --> Z5["Umlagefähig: Wasser- und Energiekosten<br/>der zentralen Warmwassererzeugung — <a href='{{ELI}}#art-z2_abs-z' target='_blank' rel='noopener'>§2<br/>Nr.5 Buchst. a</a>"]
+    G --> Z6["Umlagefähig: Entgelt für<br/>Warmwasserlieferung + Betrieb der<br/>Verteilanlage — <a href='{{ELI}}#art-z2_abs-z' target='_blank' rel='noopener'>§2 Nr.5 Buchst. b</a>"]
+    H --> Z7["Umlagefähig: Wartung/ Entkalkung der<br/>Einzelgeräte durch Fachkraft — <a href='{{ELI}}#art-z2_abs-z' target='_blank' rel='noopener'>§2 Nr.5<br/>Buchst. c</a>"]
+    I --> Z8["Umlagefähig: entsprechende Kosten je<br/>nach Betriebsform<br/>(zentral/gewerblich/Einzelgerät),<br/>anteilig nach Verbrauchsanteil<br/>Heizung/Warmwasser — <a href='{{ELI}}#art-z2_abs-z' target='_blank' rel='noopener'>§2 Nr.6</a>"]
+
+    style Z1 fill:#d4edda,stroke:#2d8a4a
+    style Z2 fill:#d4edda,stroke:#2d8a4a
+    style Z3 fill:#d4edda,stroke:#2d8a4a
+    style Z4 fill:#d4edda,stroke:#2d8a4a
+    style Z5 fill:#d4edda,stroke:#2d8a4a
+    style Z6 fill:#d4edda,stroke:#2d8a4a
+    style Z7 fill:#d4edda,stroke:#2d8a4a
+    style Z8 fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};

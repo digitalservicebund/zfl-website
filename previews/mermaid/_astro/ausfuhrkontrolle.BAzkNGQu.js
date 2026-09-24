@@ -1,0 +1,48 @@
+var e=`---
+summary: "Zeigt die Kontrolle bei der Ausfuhr eines Gebrauchtfahrzeugs aus der Union: automatische Prüfung und risikobasierte Kontrolle durch die Zollbehörden, Aussetzung und Entscheidung der zuständigen Behörde sowie Überlassung oder Ablehnung und Vermerk im Fahrzeugregister."
+---
+swimlane-beta TD
+    subgraph Person["An der Ausfuhr beteiligte Person"]
+        start(["Gebrauchtfahrzeug soll ab dem 1.9.2031<br/>aus der Union ausgeführt werden — <a href='{{ELI}}#039.001' target='_blank' rel='noopener'>Art.<br/>39 Abs. 1</a>"])
+        angaben["Ausfuhranmeldung mit FIN, Mitgliedstaat<br/>der letzten Zulassung und Erklärung:<br/>kein Altfahrzeug, verkehrssicher (oder<br/>Bescheinigung nach Anhang II) — <a href='{{ELI}}#039.003' target='_blank' rel='noopener'>Art. 39<br/>Abs. 3</a>, <a href='{{ELI}}#039.004' target='_blank' rel='noopener'>Abs. 4</a>"]
+    end
+
+    subgraph Zoll["Zollbehörden"]
+        auto{"Angaben stimmen mit den<br/>Registern überein? — <a href='{{ELI}}#040.002' target='_blank' rel='noopener'>Art. 40<br/>Abs. 2</a>"}
+        keine1(["Keine Überlassung, Person wird<br/>unterrichtet — <a href='{{ELI}}#040.002' target='_blank' rel='noopener'>Art. 40 Abs. 2</a>"])
+        risiko{"Grund zur Annahme, dass<br/>Anforderungen nicht erfüllt<br/>sind? — <a href='{{ELI}}#042.001' target='_blank' rel='noopener'>Art. 42 Abs. 1</a>"}
+        aussetzen["Aussetzung der Überlassung,<br/>Unterrichtung der zuständigen Behörde<br/>— <a href='{{ELI}}#042.001' target='_blank' rel='noopener'>Art. 42 Abs. 1</a>"]
+        keine2(["Keine Überlassung zur Ausfuhr — <a href='{{ELI}}#044.002' target='_blank' rel='noopener'>Art. 44<br/>Abs. 2</a>"])
+        ueberlassen["Überlassung zur Ausfuhr, automatische<br/>Meldung des Abgangs aus der Union — <a href='{{ELI}}#043.003' target='_blank' rel='noopener'>Art.<br/>43 Abs. 3</a>"]
+    end
+
+    subgraph ZB["Zuständige Behörde (Art. 38)"]
+        frist{"Bitte an die Zollbehörden, die<br/>Aussetzung aufrechtzuerhalten,<br/>binnen vier Arbeitstagen nach<br/>Beginn der Aussetzung? — <a href='{{ELI}}#043.001' target='_blank' rel='noopener'>Art.<br/>43 Abs. 1 lit. a</a>"}
+        pruefung{"Gelangt die zuständige Behörde<br/>zu dem Schluss, dass die<br/>Anforderungen des Kapitels<br/>nicht erfüllt sind? — <a href='{{ELI}}#044.001' target='_blank' rel='noopener'>Art. 44<br/>Abs. 1</a>"}
+        freigabe("Voraussetzung für die Überlassung<br/>erfüllt, sofern alle übrigen<br/>Anforderungen und Förmlichkeiten erfüllt<br/>sind — <a href='{{ELI}}#043.001' target='_blank' rel='noopener'>Art. 43 Abs. 1</a>")
+    end
+
+    subgraph FZB["Fahrzeugzulassungsbehörde"]
+        vermerk(["Vermerk im nationalen Fahrzeugregister:<br/>in ein Drittland ausgeführt — <a href='{{ELI}}#043.003' target='_blank' rel='noopener'>Art. 43<br/>Abs. 3</a>"])
+    end
+
+    start --> angaben
+    angaben -->|"automatische Prüfung — <a href='{{ELI}}#040.001' target='_blank' rel='noopener'>Art. 40<br/>Abs. 1</a>"| auto
+    auto -->|Nein| keine1
+    auto -->|"Ja: risikobasierte Kontrolle<br/>— <a href='{{ELI}}#041.001' target='_blank' rel='noopener'>Art. 41 Abs. 1</a>"| risiko
+    risiko -->|Nein| ueberlassen
+    risiko -->|Ja| aussetzen
+    aussetzen -->|"ggf. Anforderung zusätzlicher<br/>Informationen — <a href='{{ELI}}#042.002' target='_blank' rel='noopener'>Art. 42 Abs. 2</a>"| frist
+    frist -->|"Nein (lit. a)"| freigabe
+    frist -->|Ja| pruefung
+    pruefung -->|"Ja: Bitte um Nichtüberlassung<br/>— <a href='{{ELI}}#044.001' target='_blank' rel='noopener'>Art. 44 Abs. 1</a>"| keine2
+    pruefung -->|"Nein: Zustimmung zur<br/>Überlassung (lit. b)"| freigabe
+    freigabe --> ueberlassen
+    ueberlassen --> vermerk
+
+    keine1 ~~~ risiko
+
+    style vermerk fill:#d4edda,stroke:#2d8a4a
+    style keine1 fill:#f8d7da,stroke:#c0392b
+    style keine2 fill:#f8d7da,stroke:#c0392b
+`;export{e as default};

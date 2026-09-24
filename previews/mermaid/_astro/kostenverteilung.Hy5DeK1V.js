@@ -1,0 +1,48 @@
+var e=`---
+summary: "Zeigt die Verteilung der Heiz- und Warmwasserkosten nach §§6 bis 9 HeizkostenV, einschließlich der Aufteilung bei baulich verbundenen Anlagen, der Vorerfassung bei unterschiedlicher Ausstattung und der Kostenanteile nach erfasstem Verbrauch."
+---
+flowchart TD
+    S["Gesamtkosten der Versorgung mit Wärme<br/>und/oder Warmwasser"] --> Q1{"Zentrale Wärme- und<br/>Warmwasseranlage baulich<br/>verbunden? — <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 I</a>"}
+
+    Q1 -->|Ja| C9["Einheitlich entstandene Kosten aufteilen<br/>nach<br/>Brennstoff-/Energieverbrauchsanteilen<br/>(Heizkessel) bzw.<br/>Wärmeverbrauchsanteilen (Wärmepumpe/gew.<br/>Wärmelieferung) — <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 I</a>"]
+    C9 --> C9Q["Warmwasser-Wärmeanteil (Q) messen oder<br/>berechnen: Q = 2,5 × V × (tw−10),<br/>hilfsweise Q = 32 × A_Wohn — <a href='{{ELI}}/art-z9' target='_blank' rel='noopener'>§9 II/III</a>"]
+    C9Q --> KW["Kostenblock: Wärme"]
+    C9Q --> KWW["Kostenblock: Warmwasser"]
+
+    Q1 -->|Nein, getrennte Anlagen| KW
+    Q1 -->|Nein, getrennte Anlagen| KWW
+
+    KW --> R1{"Verbrauch mit<br/>unterschiedlichen<br/>Ausstattungen erfasst?<br/>(Vorerfassung nötig) — <a href='{{ELI}}#art-z5_abs-z7' target='_blank' rel='noopener'>§5 VII</a>"}
+    KWW --> R2{"Verbrauch mit<br/>unterschiedlichen<br/>Ausstattungen erfasst?<br/>(Vorerfassung nötig) — <a href='{{ELI}}#art-z5_abs-z7' target='_blank' rel='noopener'>§5 VII</a>"}
+
+    R1 -->|Ja| VGW["Vorerfassung: mind. 50% nach<br/>Verbrauchsanteil der Nutzergruppen, Rest<br/>nach Fläche/Raum je Gruppe — <a href='{{ELI}}#art-z6_abs-z2' target='_blank' rel='noopener'>§6 II Nr.1</a>"]
+    R2 -->|Ja| VGWW["Vorerfassung: mind. 50% nach<br/>Verbrauchsanteil der Nutzergruppen, Rest<br/>nach Fläche je Gruppe — <a href='{{ELI}}#art-z6_abs-z2' target='_blank' rel='noopener'>§6 II Nr.2</a>"]
+
+    R1 -->|Nein| G1{"Sonderfall Gebäude-/<br/>Leitungsdämmung? — <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 I</a>"}
+    G1 -->|"Altbau vor WärmeschutzV 1994,<br/>Öl/Gas, Leitungen gedämmt"| F70["Zwingend 70% nach erfasstem<br/>Wärmeverbrauch — <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 I S.2</a>"]
+    G1 -->|"Leitungen überwiegend<br/>ungedämmt"| FSCH["Wärmeverbrauch nach anerkannten Regeln<br/>der Technik geschätzt, gilt als<br/>erfasster Verbrauch — <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 I S.3/4</a>"]
+    G1 -->|"Regelfall"| FWAHL["Eigentümer wählt frei zwischen 50–70%<br/>nach erfasstem Wärmeverbrauch — <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 I S.1</a>"]
+    F70 --> REST_W["Rest nach Wohn-/Nutzfläche oder umbautem<br/>Raum — <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 I S.5</a>"]
+    FSCH --> REST_W
+    FWAHL --> REST_W
+
+    R2 -->|Nein| FWW["Eigentümer wählt frei zwischen 50–70%<br/>nach erfasstem Warmwasserverbrauch — <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8<br/>I</a>"]
+    FWW --> REST_WW["Rest nach Wohn-/ Nutzfläche — <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 I</a>"]
+
+    VGW --> IND
+    VGWW --> IND
+    REST_W --> IND
+    REST_WW --> IND
+
+    IND["Individuelle Verteilung auf jeden Nutzer<br/>— <a href='{{ELI}}#art-z6_abs-z1' target='_blank' rel='noopener'>§6 I</a>"] --> END["Abrechnung + Verbrauchsinformation an<br/>den Nutzer — <a href='{{ELI}}/art-z6' target='_blank' rel='noopener'>§6</a>, <a href='{{ELI}}/art-z6a' target='_blank' rel='noopener'>§6a</a>"]
+
+    classDef preStep fill:#cfe2f3,stroke:#2b6ea3
+    classDef waerme fill:#ffe5cc,stroke:#cc7a00
+    classDef wasser fill:#d9f2f0,stroke:#1a8f87
+    classDef final fill:#d4edda,stroke:#2d8a4a
+
+    class S,Q1,C9,C9Q,KW,KWW preStep
+    class R1,G1,F70,FSCH,FWAHL,REST_W,VGW waerme
+    class R2,FWW,REST_WW,VGWW wasser
+    class IND,END final
+`;export{e as default};

@@ -1,0 +1,53 @@
+var e=`---
+summary: "Zeigt die Akteure im Asylverfahren nach dem AsylG mit dem Bundesamt für Migration und Flüchtlinge im Zentrum: wo der Asylantrag gestellt wird, wer weiterleitet, registriert, unterbringt, entscheidet und die Entscheidung umsetzt, und wie Bund, Länder, Gerichte und der Ausländer dabei zusammenwirken."
+---
+flowchart LR
+    BAMF["<b>Bundesamt für Migration und Flüchtlinge</b><br/>Asylbehörde: nimmt Asylanträge entgegen, prüft und entscheidet — <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I</a><br/>Außenstellen bei den Aufnahmeeinrichtungen — <a href='{{ELI}}#art-z5_abs-z3' target='_blank' rel='noopener'>§5 III</a><br/>entscheidet über Abschiebungsverbote — <a href='{{ELI}}/art-z23' target='_blank' rel='noopener'>§23</a><br/>gewährt unentgeltliche Rechtsauskunft — <a href='{{ELI}}#art-z12b_abs-z1' target='_blank' rel='noopener'>§12b I</a>"]
+
+    subgraph Bund["Bund"]
+        BMI["<b>Bundesministerium des Innern</b><br/>bestellt den Präsidenten des Bundesamtes — <a href='{{ELI}}#art-z5_abs-z2' target='_blank' rel='noopener'>§5 II</a><br/>kann Absehen von der Einreiseverweigerung anordnen — <a href='{{ELI}}#art-z18_abs-z4' target='_blank' rel='noopener'>§18 IV</a><br/>bestimmt die zentrale Verteilungsstelle — <a href='{{ELI}}#art-z46_abs-z2' target='_blank' rel='noopener'>§46 II</a>"]
+        BKA["<b>Bundeskriminalamt</b><br/>Amtshilfe bei der Identitätsfeststellung — <a href='{{ELI}}#art-z16_abs-z3' target='_blank' rel='noopener'>§16 III</a><br/>speichert die erkennungsdienstlichen Daten getrennt — <a href='{{ELI}}#art-z16_abs-z4' target='_blank' rel='noopener'>§16 IV</a>"]
+    end
+
+    subgraph Polizei["Grenzbehörde und Polizei"]
+        GB["<b>Grenzbehörde</b><br/>nimmt Asylanträge an der Grenze entgegen — <a href='{{ELI}}#art-z13_abs-z2' target='_blank' rel='noopener'>§13 II</a><br/>verweigert die Einreise in den Fällen des §18 II — <a href='{{ELI}}#art-z18_abs-z2' target='_blank' rel='noopener'>§18 II</a><br/>erkennungsdienstliche Behandlung — <a href='{{ELI}}#art-z18_abs-z5' target='_blank' rel='noopener'>§18 V</a>"]
+        Pol["<b>Bundespolizei und Polizei eines Landes</b><br/>nehmen Asylanträge nach unerlaubter Einreise entgegen — <a href='{{ELI}}#art-z19_abs-z1' target='_blank' rel='noopener'>§19 I</a><br/>erkennungsdienstliche Behandlung — <a href='{{ELI}}#art-z19_abs-z2' target='_blank' rel='noopener'>§19 II</a>"]
+    end
+
+    subgraph Laender["Länder"]
+        Land["<b>Länder</b><br/>schaffen und unterhalten Aufnahmeeinrichtungen — <a href='{{ELI}}#art-z44_abs-z1' target='_blank' rel='noopener'>§44 I</a><br/>Aufnahmequote — <a href='{{ELI}}#art-z45_abs-z1' target='_blank' rel='noopener'>§45 I</a><br/>Landesregierungen bilden besondere Spruchkörper — <a href='{{ELI}}#art-z83_abs-z2' target='_blank' rel='noopener'>§83 II</a>"]
+        AE["<b>Aufnahmeeinrichtung</b><br/>registriert den Asylantrag — <a href='{{ELI}}/art-z13a' target='_blank' rel='noopener'>§13a</a><br/>nimmt auf oder leitet weiter — <a href='{{ELI}}#art-z22_abs-z1' target='_blank' rel='noopener'>§22 I</a><br/>Identitätssicherung — <a href='{{ELI}}#art-z16_abs-z2' target='_blank' rel='noopener'>§16 II</a>"]
+        ABH["<b>Ausländerbehörde</b><br/>nimmt Asylanträge entgegen — <a href='{{ELI}}#art-z19_abs-z1' target='_blank' rel='noopener'>§19 I</a><br/>an Entscheidung über §60 V, VII AufenthG gebunden — <a href='{{ELI}}/art-z42' target='_blank' rel='noopener'>§42</a><br/>nach Abschluss zuständig für Aufenthaltsbeendigung — <a href='{{ELI}}/art-z39' target='_blank' rel='noopener'>§39</a>"]
+        VG["<b>Verwaltungsgericht</b><br/>entscheidet über Klagen gegen Entscheidungen nach dem AsylG — <a href='{{ELI}}#art-z74_abs-z1' target='_blank' rel='noopener'>§74 I</a><br/>Streitigkeiten in besonderen Spruchkörpern — <a href='{{ELI}}#art-z83_abs-z1' target='_blank' rel='noopener'>§83 I</a>"]
+    end
+
+    subgraph Beteiligte["Antragsteller und Beratung"]
+        Ausl["<b>Ausländer, der einen Asylantrag stellt</b><br/>allgemeine Mitwirkungspflichten — <a href='{{ELI}}#art-z15_abs-z1' target='_blank' rel='noopener'>§15 I</a><br/>reicht den Antrag persönlich bei der Außenstelle ein — <a href='{{ELI}}#art-z14_abs-z1' target='_blank' rel='noopener'>§14 I</a><br/>muss der Weiterleitung folgen — <a href='{{ELI}}#art-z20_abs-z1' target='_blank' rel='noopener'>§20 I</a>"]
+        Traeger["<b>Träger der Asylverfahrensberatung</b><br/>behördenunabhängige Beratung, vom Bund gefördert — <a href='{{ELI}}#art-z12a_abs-z1' target='_blank' rel='noopener'>§12a I</a>"]
+    end
+
+    BMI -->|"bestellt Präsidenten — <a href='{{ELI}}#art-z5_abs-z2' target='_blank' rel='noopener'>§5 II</a>"| BAMF
+    BAMF <-->|"Abstimmung zu Außenstellen — <a href='{{ELI}}#art-z5_abs-z3' target='_blank' rel='noopener'>§5 III</a>, IV"| Land
+    Land -->|"schaffen, unterhalten — <a href='{{ELI}}#art-z44_abs-z1' target='_blank' rel='noopener'>§44 I</a>"| AE
+    GB -->|"Weiterleitung — <a href='{{ELI}}#art-z18_abs-z1' target='_blank' rel='noopener'>§18 I</a>"| AE
+    Pol & ABH -->|"Weiterleitung — <a href='{{ELI}}#art-z19_abs-z1' target='_blank' rel='noopener'>§19 I</a>"| AE
+    Ausl -->|"meldet sich — <a href='{{ELI}}#art-z22_abs-z1' target='_blank' rel='noopener'>§22 I</a>"| AE
+    AE -->|"Mitteilung, Unterlagen — <a href='{{ELI}}#art-z20_abs-z2' target='_blank' rel='noopener'>§20 II</a>, §21 III"| BAMF
+    BKA -->|"Amtshilfe — <a href='{{ELI}}#art-z16_abs-z3' target='_blank' rel='noopener'>§16 III</a>"| BAMF
+    BAMF -->|"Anhörung, Entscheidung — <a href='{{ELI}}/art-z25' target='_blank' rel='noopener'>§25</a>, §31 I"| Ausl
+    Traeger -->|"Daten zu besonderen Bedürfnissen — <a href='{{ELI}}#art-z12a_abs-z3' target='_blank' rel='noopener'>§12a III</a>"| BAMF
+    BAMF -->|"Unterrichtung — <a href='{{ELI}}#art-z31_abs-z4' target='_blank' rel='noopener'>§31 IV</a>, §40"| ABH
+    ABH -->|"Anschrift, Ausschreibung — <a href='{{ELI}}/art-z54' target='_blank' rel='noopener'>§54</a>"| BAMF
+    Ausl -->|"Klage — <a href='{{ELI}}#art-z74_abs-z1' target='_blank' rel='noopener'>§74 I</a>"| VG
+    VG -->|"Mitteilung des Ergebnisses — <a href='{{ELI}}/art-z83a' target='_blank' rel='noopener'>§83a</a>"| ABH
+
+    classDef zentral fill:#fff3cd,stroke:#c9a227,stroke-width:2px
+    classDef behoerde fill:#e8f0fe,stroke:#3b6fd4
+    classDef privat fill:#f5f5f5,stroke:#999
+    classDef parlament fill:#ede7f6,stroke:#7e57c2
+    classDef gremium fill:#e6f4ea,stroke:#2d8a4a
+    class BAMF zentral
+    class BKA,GB,Pol,AE,ABH,VG behoerde
+    class Ausl,Traeger privat
+    class BMI,Land parlament
+`;export{e as default};

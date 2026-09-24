@@ -1,0 +1,55 @@
+var e=`---
+summary: "Zeigt die Akteure, die das UrhDaG adressiert oder einrichtet: Diensteanbieter, Rechtsinhaber, Urheber, Nutzer und Verwertungsgesellschaften sowie Beschwerde- und Schlichtungsstellen, Bundesamt für Justiz und Deutsches Patent- und Markenamt, mit ihren Pflichten, Rechten und Beziehungen."
+---
+flowchart LR
+    DA["<b>Diensteanbieter</b><br/>bestmögliche Anstrengungen zum Erwerb von Nutzungsrechten — <a href='{{ELI}}#art-z4_abs-z1' target='_blank' rel='noopener'>§4 I</a><br/>Blockierung auf Verlangen des Rechtsinhabers — <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 I</a>, <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 I</a><br/>öffentliche Wiedergabe mutmaßlich erlaubter Nutzungen — <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 I</a><br/>internes Beschwerdeverfahren — <a href='{{ELI}}#art-z14_abs-z1' target='_blank' rel='noopener'>§14 I</a>"]
+
+    subgraph Rechte["Rechtsinhaber und Urheber"]
+        RI["<b>Rechtsinhaber</b><br/>als vertrauenswürdiger Rechtsinhaber: sofortige Blockierung — <a href='{{ELI}}#art-z14_abs-z4' target='_blank' rel='noopener'>§14 IV</a><br/>Auskunftsrechte — <a href='{{ELI}}/art-z19' target='_blank' rel='noopener'>§19</a><br/>Schadensersatz bei schuldhaft falschem Blockierverlangen — <a href='{{ELI}}#art-z18_abs-z2' target='_blank' rel='noopener'>§18 II</a><br/>Ausschluss bei wiederholtem Missbrauch — <a href='{{ELI}}#art-z18_abs-z3' target='_blank' rel='noopener'>§18 III</a>"]
+        URH["<b>Urheber</b><br/>Direktvergütungsanspruch — <a href='{{ELI}}#art-z4_abs-z3' target='_blank' rel='noopener'>§4 III</a><br/>Vergütung für Karikaturen, Parodien, Pastiches — <a href='{{ELI}}#art-z5_abs-z2' target='_blank' rel='noopener'>§5 II</a><br/>Vergütung für mutmaßlich erlaubte Nutzungen — <a href='{{ELI}}#art-z12_abs-z1' target='_blank' rel='noopener'>§12 I</a><br/>Schutz vor Entstellung — <a href='{{ELI}}#art-z13_abs-z3' target='_blank' rel='noopener'>§13 III</a>"]
+        VG["<b>Verwertungsgesellschaften</b><br/>Erwerb von Nutzungsrechten über inländische Verwertungsgesellschaften — <a href='{{ELI}}#art-z4_abs-z1' target='_blank' rel='noopener'>§4 I</a><br/>Vergütungsansprüche nur durch Verwertungsgesellschaften geltend zu machen — <a href='{{ELI}}#art-z4_abs-z4' target='_blank' rel='noopener'>§4 IV</a>, <a href='{{ELI}}#art-z5_abs-z2' target='_blank' rel='noopener'>§5 II</a>"]
+    end
+
+    subgraph Nutzerseite["Nutzer"]
+        NU["<b>Nutzer</b><br/>gesetzlich erlaubte Nutzungen (Zitat, Parodie u.a.) — <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I</a><br/>Kennzeichnung als gesetzlich erlaubt — <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I</a><br/>Teilnahme an Beschwerdeverfahren freiwillig — <a href='{{ELI}}#art-z13_abs-z1' target='_blank' rel='noopener'>§13 I</a><br/>Ausschluss von der Kennzeichnung bei Missbrauch — <a href='{{ELI}}#art-z18_abs-z5' target='_blank' rel='noopener'>§18 V</a>"]
+        EV["<b>Eingetragener Verein zur Förderung der Interessen von Nutzern</b><br/>Unterlassungsanspruch bei wiederholt fälschlicher Blockierung — <a href='{{ELI}}#art-z18_abs-z6' target='_blank' rel='noopener'>§18 VI</a>"]
+    end
+
+    subgraph Stellen["Beschwerde- und Schlichtungsstellen"]
+        EBS["<b>Anerkannte externe Beschwerdestelle</b><br/>erfüllt §14-Pflichten für den Diensteanbieter — <a href='{{ELI}}#art-z15_abs-z1' target='_blank' rel='noopener'>§15 I</a><br/>unabhängige, sachkundige Prüfer, Prüfung in sieben Tagen — <a href='{{ELI}}#art-z15_abs-z3' target='_blank' rel='noopener'>§15 III</a><br/>jährlicher Tätigkeitsbericht — <a href='{{ELI}}#art-z15_abs-z5' target='_blank' rel='noopener'>§15 V</a>"]
+        PSS["<b>Privatrechtlich organisierte Schlichtungsstellen</b><br/>Streitbeilegung über Blockierung, Wiedergabe und Auskunftsrechte — <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 I</a><br/>anrufbar nach internem Beschwerdeverfahren, wenn der Diensteanbieter teilnimmt — <a href='{{ELI}}#art-z16_abs-z3' target='_blank' rel='noopener'>§16 III</a>"]
+        BSS["<b>Behördliche Schlichtungsstelle</b><br/>nur zuständig, wenn keine private Schlichtungsstelle zur Verfügung steht — <a href='{{ELI}}#art-z17_abs-z2' target='_blank' rel='noopener'>§17 II</a><br/>jährlicher Tätigkeitsbericht — <a href='{{ELI}}#art-z17_abs-z3' target='_blank' rel='noopener'>§17 III</a><br/>kann Gebühren erheben — <a href='{{ELI}}#art-z17_abs-z4' target='_blank' rel='noopener'>§17 IV</a>"]
+    end
+
+    subgraph Bund["Bundesbehörden"]
+        BfJ["<b>Bundesamt für Justiz</b><br/>Anerkennung externer Beschwerdestellen — <a href='{{ELI}}#art-z15_abs-z2' target='_blank' rel='noopener'>§15 II</a><br/>Anerkennung privater Schlichtungsstellen — <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 I</a><br/>Widerruf der Anerkennung — <a href='{{ELI}}#art-z15_abs-z4' target='_blank' rel='noopener'>§15 IV</a><br/>Einrichtung der behördlichen Schlichtungsstelle — <a href='{{ELI}}#art-z17_abs-z1' target='_blank' rel='noopener'>§17 I</a>"]
+        DPMA["<b>Deutsches Patent- und Markenamt</b><br/>Einvernehmen bei der Anerkennung — <a href='{{ELI}}#art-z15_abs-z2' target='_blank' rel='noopener'>§15 II</a><br/>Einvernehmen bei der Einrichtung der behördlichen Schlichtungsstelle — <a href='{{ELI}}#art-z17_abs-z1' target='_blank' rel='noopener'>§17 I</a>"]
+    end
+
+    RI -->|"Blockierverlangen, Beschwerde — <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 I</a>, §8 I, §14"| DA
+    DA -->|"informiert über Wiedergabe — <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 III</a>"| RI
+    NU -->|"Kennzeichnung, Beschwerde — <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I</a>, §14"| DA
+    DA -->|"informiert über Blockierung — <a href='{{ELI}}#art-z7_abs-z3' target='_blank' rel='noopener'>§7 III</a>"| NU
+    DA -->|"angemessene Vergütung — <a href='{{ELI}}#art-z4_abs-z3' target='_blank' rel='noopener'>§4 III</a>, §5 II, §12 I"| URH
+    URH -->|"einfache Blockierung bei Entstellung — <a href='{{ELI}}#art-z13_abs-z3' target='_blank' rel='noopener'>§13 III</a>"| DA
+    DA -->|"erwirbt Nutzungsrechte — <a href='{{ELI}}#art-z4_abs-z1' target='_blank' rel='noopener'>§4 I</a>"| VG
+    URH -->|"Abtretung, Geltendmachung — <a href='{{ELI}}#art-z4_abs-z4' target='_blank' rel='noopener'>§4 IV</a>"| VG
+    EV -->|"Unterlassung — <a href='{{ELI}}#art-z18_abs-z6' target='_blank' rel='noopener'>§18 VI</a>"| DA
+    DA -->|"bedient sich — <a href='{{ELI}}#art-z15_abs-z1' target='_blank' rel='noopener'>§15 I</a>"| EBS
+    RI & NU -->|"rufen an — <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 I</a>"| PSS
+    PSS -.-|"subsidiär — <a href='{{ELI}}#art-z17_abs-z2' target='_blank' rel='noopener'>§17 II</a>"| BSS
+    BfJ -->|"anerkennt — <a href='{{ELI}}#art-z15_abs-z2' target='_blank' rel='noopener'>§15 II</a>"| EBS
+    EBS -->|"Unterrichtung, Tätigkeitsbericht — <a href='{{ELI}}#art-z15_abs-z4' target='_blank' rel='noopener'>§15 IV</a>, V"| BfJ
+    BfJ -->|"anerkennt — <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 I</a>"| PSS
+    BfJ -->|"richtet ein — <a href='{{ELI}}#art-z17_abs-z1' target='_blank' rel='noopener'>§17 I</a>"| BSS
+    DPMA -->|"Einvernehmen — <a href='{{ELI}}#art-z15_abs-z2' target='_blank' rel='noopener'>§15 II</a>, §17 I"| BfJ
+
+    classDef zentral fill:#fff3cd,stroke:#c9a227,stroke-width:2px
+    classDef behoerde fill:#e8f0fe,stroke:#3b6fd4
+    classDef privat fill:#f5f5f5,stroke:#999
+    classDef parlament fill:#ede7f6,stroke:#7e57c2
+    classDef gremium fill:#e6f4ea,stroke:#2d8a4a
+    class DA zentral
+    class BfJ,DPMA,BSS behoerde
+    class RI,URH,VG,NU,EV,EBS,PSS privat
+`;export{e as default};

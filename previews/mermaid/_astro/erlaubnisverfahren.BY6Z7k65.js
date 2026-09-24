@@ -1,0 +1,53 @@
+var e=`---
+summary: "Zeigt das Erlaubnisverfahren für den Betrieb eines Steuerlagers für Schaumwein beim Hauptzollamt, die laufende Überprüfung während des Betriebs sowie die Voraussetzungen für Widerruf, Erlöschen und Fortführung der Erlaubnis."
+---
+flowchart TD
+    A["Antragsteller will Steuerlager für<br/>Schaumwein betreiben"] --> B["Antrag auf amtlichem Vordruck vor<br/>geplantem Betriebsbeginn beim<br/>Hauptzollamt — <a href='{{ELI}}#art-z4_abs-z1' target='_blank' rel='noopener'>§4 I</a><br/>mit Lageplänen und Betriebserklärung (je<br/>2-fach)"]
+
+    B --> C{"Hauptzollamt verlangt weitere<br/>Angaben/Unterlagen zur<br/>Steueraufsicht? — <a href='{{ELI}}#art-z4_abs-z2' target='_blank' rel='noopener'>§4 II</a>"}
+    C -->|Ja| C1["Antragsteller ergänzt Angaben/Unterlagen"]
+    C1 --> D
+    C -->|Nein| D{"Nur Lagerung von Schaumwein<br/>geplant und Umschlag < 100<br/>hl/Jahr oder Lagerdauer < 1,5<br/>Monate im Schnitt? — <a href='{{ELI}}#art-z5_abs-z2' target='_blank' rel='noopener'>§5 II</a>"}
+
+    D -->|Nein| F
+    D -->|Ja| E{"Ausnahmefall nach <a href='{{ELI}}#art-z5_abs-z3' target='_blank' rel='noopener'>§5 III</a><br/>einschlägig? (z.B. bestehendes<br/>Herstellungslager,<br/>unversteuerte Abgabe,<br/>Lohnherstellung)"}
+    E -->|Nein| ABLEHN["Erlaubnis wird nicht erteilt — <a href='{{ELI}}#art-z5_abs-z2' target='_blank' rel='noopener'>§5 II</a>"]
+    E -->|Ja| F{"Anzeichen für<br/>Steuergefährdung? — <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I S.4</a>"}
+
+    F -->|Ja| G["Sicherheitsleistung nach <a href='{{ELI}}#art-z6' target='_blank' rel='noopener'>§6</a> vor<br/>Erteilung zu leisten"]
+    G --> H
+    F -->|Nein| H["Hauptzollamt erteilt schriftlich oder<br/>elektronisch Erlaubnis unter<br/>Widerrufsvorbehalt, vergibt<br/>Verbrauchsteuernummern — <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I</a>"]
+
+    H --> I["Laufender Betrieb:<br/>regelmäßige Überprüfung der<br/>Erlaubnisvoraussetzungen binnen 3 Jahren<br/>— <a href='{{ELI}}#art-z6a_abs-z' target='_blank' rel='noopener'>§6a</a>"]
+
+    I --> J{"Änderung der angegebenen<br/>Verhältnisse (z.B.<br/>Gesellschafter, Sitz,<br/>Auflösung)? — <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 I</a>"}
+    J -->|Ja| J1["Vorherige schriftliche Anzeige beim<br/>Hauptzollamt;<br/>räumliche Änderungen bedürfen Zustimmung<br/>— <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 I</a>"]
+    J1 --> K
+    J -->|Nein| K{"Betrieb wird eingestellt oder<br/>ruht mehr als 6 Wochen? — <a href='{{ELI}}#art-z7_abs-z3' target='_blank' rel='noopener'>§7<br/>III</a>"}
+
+    K -->|Ja| L["Schriftliche Anzeige vor<br/>Einstellung/Ruhen; bei Einstellung<br/>widerruft Hauptzollamt die Erlaubnis<br/>— <a href='{{ELI}}#art-z7_abs-z3' target='_blank' rel='noopener'>§7 III</a>"]
+    L --> M
+    K -->|Nein| N["Erlaubnis bleibt bestehen"]
+
+    M{"Erlöschensgrund nach <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 I</a><br/>eingetreten? (Verzicht, Tod,<br/>Auflösung, Übergabe,<br/>Umwandlung, Insolvenz)"}
+    N --> M
+    M -->|Nein| N
+    M -->|Ja| O{"Fortführungsanzeige vor<br/>Erlöschen (Erben,<br/>Insolvenzverwalter etc.) oder<br/>neue Erlaubnis beantragt? — <a href='{{ELI}}/art-z8' target='_blank' rel='noopener'>§8<br/>III, IV</a>"}
+
+    O -->|Ja| P["Alte Erlaubnis gilt bis zur<br/>Bestandskraft der Entscheidung bzw. bis<br/>zur festgesetzten Frist fort — <a href='{{ELI}}/art-z8' target='_blank' rel='noopener'>§8 III,<br/>IV</a>"]
+    P --> Q{"Neue Erlaubnis erteilt bzw.<br/>Fortführung nicht widerrufen?"}
+    Q -->|Ja| FORT["Steuerlagerbetrieb läuft fort"]
+    Q -->|Nein| ERLOSCH
+
+    O -->|Nein| ERLOSCH["Erlaubnis erlischt zum maßgeblichen<br/>Zeitpunkt — <a href='{{ELI}}#art-z8_abs-z2' target='_blank' rel='noopener'>§8 II</a>"]
+
+    ERLOSCH --> R["Bestand gilt als in den freien Verkehr<br/>überführt;<br/>Steueranmeldung durch Verantwortlichen;<br/>Steuer sofort fällig — <a href='{{ELI}}#art-z8_abs-z6' target='_blank' rel='noopener'>§8 VI</a>"]
+
+    style FORT fill:#d4edda,stroke:#2d8a4a
+    style H fill:#d4edda,stroke:#2d8a4a
+    style ABLEHN fill:#f8d7da,stroke:#c0392b
+    style ERLOSCH fill:#f8d7da,stroke:#c0392b
+    style R fill:#f8d7da,stroke:#c0392b
+    style G fill:#fff3cd,stroke:#c9a227
+    style P fill:#fff3cd,stroke:#c9a227
+`;export{e as default};

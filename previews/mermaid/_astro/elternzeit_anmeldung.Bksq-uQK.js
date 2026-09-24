@@ -1,0 +1,30 @@
+var e=`---
+summary: "Zeigt die Anmeldefristen für die Elternzeit nach § 16 BEEG je nach Zeitraum, mögliche Ausnahmen bei dringenden Gründen und die Regeln für die Verteilung der Elternzeit auf mehrere Abschnitte."
+---
+flowchart TD
+    A["Arbeitnehmer/in möchte Elternzeit<br/>beanspruchen"] --> B{"Für welchen Zeitraum soll die<br/>Elternzeit genommen werden?<br/>— <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 Abs. 1</a>"}
+    B -->|"Bis zum vollendeten<br/>3. Lebensjahr des Kindes"| C["Anmeldefrist: spätestens 7 Wochen vor<br/>Beginn, in Textform beim Arbeitgeber,<br/>mit Festlegung für 2 Jahre — <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 Abs. 1<br/>S. 1 Nr. 1, S. 2</a>"]
+    B -->|"Zwischen 3. Geburtstag und<br/>vollendetem<br/>8. Lebensjahr"| D["Anmeldefrist: spätestens 13 Wochen vor<br/>Beginn, in Textform beim Arbeitgeber<br/>— <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 Abs. 1 S. 1 Nr. 2</a>"]
+
+    C --> E{"Liegen dringende Gründe für<br/>eine kürzere Frist vor? — <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16<br/>Abs. 1 S. 3</a>"}
+    D --> E
+    E -->|Ja| F["Ausnahmsweise angemessene kürzere Frist<br/>möglich — <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 Abs. 1 S. 3</a>"]
+    E -->|Nein| G["Regelfrist muss eingehalten werden"]
+
+    F --> H{"Konnte die Frist aus einem<br/>nicht zu vertretenden Grund<br/>nicht rechtzeitig eingehalten<br/>werden (Anschluss an<br/>Mutterschutz)? — <a href='{{ELI}}#art-z16_abs-z2' target='_blank' rel='noopener'>§16 Abs. 2</a>"}
+    G --> H
+    H -->|Ja| I["Nachholung innerhalb einer Woche nach<br/>Wegfall des Grundes möglich — <a href='{{ELI}}#art-z16_abs-z2' target='_blank' rel='noopener'>§16 Abs. 2</a>"]
+    H -->|Nein| J{"Soll die Elternzeit auf<br/>mehrere Zeitabschnitte<br/>verteilt werden? — <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 Abs. 1<br/>S. 6, 7</a>"}
+    I --> J
+
+    J -->|"Bis zu 3 Abschnitte"| K["Verteilung ohne Zustimmung des<br/>Arbeitgebers zulässig — <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 Abs. 1 S. 6</a>"]
+    J -->|"Weiterer (4.) Abschnitt"| L{"Liegt der weitere Abschnitt<br/>zwischen 3. und 8. Geburtstag<br/>des Kindes? — <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 Abs. 1 S. 7</a>"}
+    L -->|Ja| M["Arbeitgeber kann binnen 8 Wochen nach<br/>Zugang aus dringenden betrieblichen<br/>Gründen ablehnen — <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 Abs. 1 S. 7</a>"]
+    L -->|Nein| N["Nur mit Zustimmung des Arbeitgebers<br/>zulässig — <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 Abs. 1 S. 6</a>"]
+
+    K --> Z["Elternzeit wirksam angemeldet — <a href='{{ELI}}/art-z16' target='_blank' rel='noopener'>§16</a>"]
+    M --> Z
+    N --> Z
+
+    style Z fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};

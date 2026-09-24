@@ -1,0 +1,57 @@
+var e=`---
+summary: "Beschreibt das Ausfallverfahren für die Beförderung von Schaumwein unter Steueraussetzung mit Versender, Hauptzollamt, Beförderer und Empfänger, wenn das EDV-gestützte Beförderungs- und Kontrollsystem nicht verfügbar ist: Ausfalldokument, Annullierung, Nachholen des e-VD, Eingangsdokument und Ersatznachweis."
+---
+swimlane-beta TD
+    subgraph VS["Versender"]
+        start(["EDV-System steht nicht zur Verfügung;<br/>Beförderung nur mit Ausfalldokument<br/>— <a href='{{ELI}}#art-z24_abs-z1' target='_blank' rel='noopener'>§24 I</a>"])
+        veroeffentlicht{"Vom ITZBund veröffentlichter<br/>Ausfall? — <a href='{{ELI}}#art-z24_abs-z2' target='_blank' rel='noopener'>§24 II S.2</a>"}
+        ausfalldok["Fertigt vor Beginn Ausfalldokument in 3<br/>Exemplaren:<br/>1. eigene Aufzeichnungen,<br/>2. unverzüglich ans HZA — <a href='{{ELI}}#art-z24_abs-z3' target='_blank' rel='noopener'>§24 III</a> (auf<br/>Verlangen vorab Anzeige/Vorlage — <a href='{{ELI}}#art-z24_abs-z4' target='_blank' rel='noopener'>§24<br/>IV</a>)"]
+        annullieren{"Annullierung, solange die<br/>Beförderung noch nicht<br/>begonnen hat? — <a href='{{ELI}}#art-z25_abs-z1' target='_blank' rel='noopener'>§25 I</a>"}
+        annulliert(["Annullierungsdokument in 2 Exemplaren:<br/>1. eigene Aufzeichnungen, mit 2. HZA<br/>unverzüglich unterrichten — <a href='{{ELI}}#art-z25_abs-z2' target='_blank' rel='noopener'>§25 II</a><br/>(später elektronisch — <a href='{{ELI}}#art-z25_abs-z3' target='_blank' rel='noopener'>§25 III</a>)"])
+        wiederVorEnde{"EDV-System vor Beendigung der<br/>Beförderung wieder verfügbar?"}
+        entwurf["Übermittelt unverzüglich für alle<br/>Ausfall-Beförderungen Entwurf des e-VD<br/>mit den Daten des Ausfalldokuments — <a href='{{ELI}}#art-z24_abs-z5' target='_blank' rel='noopener'>§24<br/>V</a>; trägt danach Referenzcode<br/>unverzüglich auf der 1. Ausfertigung ein<br/>— <a href='{{ELI}}#art-z24_abs-z7' target='_blank' rel='noopener'>§24 VII S.1</a>"]
+    end
+
+    subgraph HZA["Hauptzollamt"]
+        unterrichtet("Wird vor der ersten Beförderung<br/>schriftlich über den Ausfall<br/>unterrichtet — <a href='{{ELI}}#art-z24_abs-z2' target='_blank' rel='noopener'>§24 II S.1</a>")
+        evd["Prüft Entwurf und übermittelt e-VD (§16<br/>II, V entsprechend);<br/>e-VD tritt an die Stelle des<br/>Ausfalldokuments — <a href='{{ELI}}#art-z24_abs-z5' target='_blank' rel='noopener'>§24 V S.2</a>, <a href='{{ELI}}#art-z24_abs-z6' target='_blank' rel='noopener'>VI</a>"]
+        bestaetigt["Bestätigt die 3 Exemplare, gibt 1.<br/>Ausfertigung zurück;<br/>ohne fristgerechte Eingangsmeldung 2.<br/>Ausfertigung über HZA des Versenders an<br/>diesen — <a href='{{ELI}}#art-z27_abs-z2' target='_blank' rel='noopener'>§27 II</a>"]
+        nachweis(["Eingangsmeldung als Nachweis der<br/>Beendigung der Beförderung — <a href='{{ELI}}#art-z21_abs-z6' target='_blank' rel='noopener'>§21 VI</a>"])
+        ersatz(["Bestätigt Beendigung, wenn<br/>Ersatznachweis hinreichend belegt, dass<br/>Bestimmungsort erreicht (insb. vom<br/>Empfänger vorgelegtes Dokument mit<br/>Angaben einer Eingangsmeldung) — <a href='{{ELI}}#art-z28_abs-z1' target='_blank' rel='noopener'>§28 I<br/>Nr.1</a>, <a href='{{ELI}}#art-z28_abs-z2' target='_blank' rel='noopener'>II</a>"])
+    end
+
+    subgraph BF["Beförderer"]
+        mitfuehren["Beförderung beginnt;<br/>führt 3. Ausfertigung des<br/>Ausfalldokuments mit — <a href='{{ELI}}#art-z24_abs-z3' target='_blank' rel='noopener'>§24 III S.4</a>"]
+        referenzBF["Erhält Referenzcode unverzüglich<br/>mitgeteilt, trägt ihn auf<br/>3. Ausfertigung ein, wenn kein Ausdruck<br/>des e-VD (gilt als Nachweis nach §16 III<br/>S.1) — <a href='{{ELI}}#art-z24_abs-z7' target='_blank' rel='noopener'>§24 VII S.2, 3</a>"]
+    end
+
+    subgraph EM["Empfänger"]
+        eingangsmeldung["Übermittelt Eingangsmeldung nach §21<br/>— <a href='{{ELI}}#art-z24_abs-z7' target='_blank' rel='noopener'>§24 VII S.4</a><br/>(nach Eingangsdokument:<br/>unverzüglich, mit dessen Daten — <a href='{{ELI}}#art-z27_abs-z3' target='_blank' rel='noopener'>§27<br/>III</a>)"]
+        eingangsdok["Eingangsmeldung nicht fristgerecht<br/>möglich: fertigt unverzüglich<br/>Eingangsdokument in 3 Exemplaren, legt<br/>es HZA vor (Frist wie §21 I) — <a href='{{ELI}}#art-z27_abs-z1' target='_blank' rel='noopener'>§27 I</a>,<br/><a href='{{ELI}}#art-z27_abs-z2' target='_blank' rel='noopener'>II S.1</a>"]
+    end
+
+    start --> veroeffentlicht
+    veroeffentlicht -->|Nein| unterrichtet
+    unterrichtet --> ausfalldok
+    veroeffentlicht -->|Ja| ausfalldok
+    ausfalldok --> annullieren
+    annullieren -->|Ja| annulliert
+    annullieren -->|Nein| mitfuehren
+    mitfuehren --> wiederVorEnde
+    wiederVorEnde -->|Ja| entwurf
+    entwurf --> evd
+    evd -->|"Referenzcode über Versender"| referenzBF
+    referenzBF --> eingangsmeldung
+    eingangsmeldung --> nachweis
+    wiederVorEnde -->|Nein| eingangsdok
+    eingangsdok --> bestaetigt
+    bestaetigt -->|"EDV-System wieder verfügbar<br/>(Entwurf e-VD nach §24 V),<br/>e-VD liegt vor"| eingangsmeldung
+    bestaetigt -->|"keine Eingangsmeldung nach §27"| ersatz
+
+    annulliert ~~~ mitfuehren
+    ersatz ~~~ entwurf
+
+    style nachweis fill:#d4edda,stroke:#2d8a4a
+    style ersatz fill:#fff3cd,stroke:#c9a227
+    style annulliert fill:#f8d7da,stroke:#c0392b
+`;export{e as default};

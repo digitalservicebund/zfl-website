@@ -1,0 +1,23 @@
+var e=`---
+summary: "Zeigt die Prüfung der werktäglichen Höchstarbeitszeit nach dem ArbZG, einschließlich der absoluten Grenze von zehn Stunden und der Möglichkeit, eine Verlängerung über acht Stunden durch einen Ausgleich im Bezugszeitraum zulässig zu machen."
+---
+flowchart TD
+    START["Werktägliche Arbeitszeit eines<br/>Arbeitnehmers"] --> Q1{"Überschreitet die Arbeitszeit<br/>acht Stunden? — <a href='{{ELI}}#art-z3_abs-z' target='_blank' rel='noopener'>§3 S.1</a>"}
+
+    Q1 -->|Nein| OK1["Zulässig - Grundmaß eingehalten"]
+
+    Q1 -->|Ja| Q2{"Überschreitet die Arbeitszeit<br/>zehn Stunden? — <a href='{{ELI}}#art-z3_abs-z' target='_blank' rel='noopener'>§3 S.2</a>"}
+
+    Q2 -->|Ja| UNZUL["Unzulässig: absolute Höchstgrenze von 10<br/>Stunden überschritten"]
+
+    Q2 -->|Nein| Q3{"Wird im Durchschnitt von sechs<br/>Kalendermonaten oder 24 Wochen<br/>eine werktägliche Arbeitszeit<br/>von acht Stunden nicht<br/>überschritten? — <a href='{{ELI}}#art-z3_abs-z' target='_blank' rel='noopener'>§3 S.2</a>"}
+
+    Q3 -->|Ja| OK2["Verlängerung auf bis zu zehn Stunden<br/>zulässig"]
+
+    Q3 -->|Noch offen /<br/>Nein| AUSGLEICH["Ausgleich muss innerhalb des<br/>Bezugszeitraums noch erfolgen, sonst<br/>unzulässig"]
+
+    style OK1 fill:#d4edda,stroke:#2d8a4a
+    style OK2 fill:#d4edda,stroke:#2d8a4a
+    style UNZUL fill:#f8d7da,stroke:#c0392b
+    style AUSGLEICH fill:#fff3cd,stroke:#c9a227
+`;export{e as default};

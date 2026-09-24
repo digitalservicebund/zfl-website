@@ -1,0 +1,39 @@
+var e=`---
+summary: "Zeigt die Schutzpflichten des Arbeitgebers nach dem AGG und den Ablauf einer Beschwerde wegen Benachteiligung im Beschäftigungsverhältnis: Prüfung und Mitteilung des Ergebnisses, Maßnahmen gegen benachteiligende Beschäftigte oder Dritte sowie das Leistungsverweigerungsrecht bei Belästigung."
+---
+swimlane-beta TD
+    subgraph BS["Beschäftigte/r"]
+        start(["Fühlt sich im Zusammenhang mit dem<br/>Beschäftigungsverhältnis vom<br/>Arbeitgeber, von Vorgesetzten, anderen<br/>Beschäftigten oder Dritten wegen eines<br/>in <a href='{{ELI}}#art-z1_abs-z' target='_blank' rel='noopener'>§1</a><br/>genannten Grundes benachteiligt — <a href='{{ELI}}#art-z13_abs-z1' target='_blank' rel='noopener'>§13<br/>Abs. 1 S. 1</a>"])
+        beschwerde["Beschwerde bei den zuständigen Stellen<br/>des Betriebs, des Unternehmens oder der<br/>Dienststelle — <a href='{{ELI}}#art-z13_abs-z1' target='_blank' rel='noopener'>§13 Abs. 1 S. 1</a><br/>(Rechte der Arbeitnehmervertretungen<br/>bleiben unberührt — <a href='{{ELI}}#art-z13_abs-z2' target='_blank' rel='noopener'>§13 Abs. 2</a>)"]
+        lvr{"Belästigung oder sexuelle<br/>Belästigung am Arbeitsplatz,<br/>gegen die der Arbeitgeber<br/>keine oder offensichtlich<br/>ungeeignete Maßnahmen zur<br/>Unterbindung ergreift? — <a href='{{ELI}}#art-z14_abs-z' target='_blank' rel='noopener'>§14<br/>S. 1</a>"}
+        einstellen(["Berechtigt, die Tätigkeit ohne Verlust<br/>des Arbeitsentgelts einzustellen, soweit<br/>dies zum Schutz erforderlich ist — <a href='{{ELI}}#art-z14_abs-z' target='_blank' rel='noopener'>§14<br/>S. 1</a>"])
+        keinLvr(["Kein Leistungsverweigerungsrecht nach<br/><a href='{{ELI}}#art-z14_abs-z' target='_blank' rel='noopener'>§14</a> (§273 BGB bleibt unberührt — <a href='{{ELI}}#art-z14_abs-z' target='_blank' rel='noopener'>§14 S.<br/>2</a>)"])
+    end
+
+    subgraph AG["Arbeitgeber / zuständige Stelle"]
+        praevention["Erforderliche Maßnahmen zum Schutz vor<br/>Benachteiligungen, auch vorbeugende<br/>— <a href='{{ELI}}#art-z12_abs-z1' target='_blank' rel='noopener'>§12 Abs. 1</a>; Hinweis auf<br/>Unzulässigkeit, insb. in Aus- und<br/>Fortbildung; geeignete Schulung gilt als<br/>Erfüllung — <a href='{{ELI}}#art-z12_abs-z2' target='_blank' rel='noopener'>§12 Abs. 2</a>;<br/>Bekanntmachung von AGG, §61b ArbGG und<br/>Beschwerdestellen — <a href='{{ELI}}#art-z12_abs-z5' target='_blank' rel='noopener'>§12 Abs. 5</a>"]
+        pruefung["Prüft die Beschwerde und teilt dem oder<br/>der Beschäftigten das Ergebnis mit — <a href='{{ELI}}#art-z13_abs-z1' target='_blank' rel='noopener'>§13<br/>Abs. 1 S. 2</a>"]
+        verstoss{"Verstoßen Beschäftigte gegen<br/>das Benachteiligungsverbot des<br/><a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 Abs. 1</a>? — <a href='{{ELI}}#art-z12_abs-z3' target='_blank' rel='noopener'>§12 Abs. 3</a>"}
+        massnahmen["Im Einzelfall geeignete, erforderliche<br/>und angemessene Maßnahmen zur<br/>Unterbindung der Benachteiligung wie<br/>Abmahnung, Umsetzung, Versetzung oder<br/>Kündigung — <a href='{{ELI}}#art-z12_abs-z3' target='_blank' rel='noopener'>§12 Abs. 3</a>"]
+        dritte{"Werden Beschäftigte bei der<br/>Ausübung ihrer Tätigkeit durch<br/>Dritte nach <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 Abs. 1</a><br/>benachteiligt? — <a href='{{ELI}}#art-z12_abs-z4' target='_blank' rel='noopener'>§12 Abs. 4</a>"}
+        schutz["Im Einzelfall geeignete, erforderliche<br/>und angemessene Maßnahmen zum Schutz der<br/>Beschäftigten — <a href='{{ELI}}#art-z12_abs-z4' target='_blank' rel='noopener'>§12 Abs. 4</a>"]
+    end
+
+    praevention -.->|"Information über<br/>Beschwerdestellen"| beschwerde
+    start --> beschwerde
+    beschwerde --> pruefung
+    pruefung --> verstoss
+    verstoss -->|Ja| massnahmen
+    verstoss -->|Nein| dritte
+    massnahmen --> dritte
+    dritte -->|Ja| schutz
+    dritte -->|Nein| lvr
+    schutz --> lvr
+    lvr -->|Ja| einstellen
+    lvr -->|Nein| keinLvr
+
+    style einstellen fill:#d4edda,stroke:#2d8a4a
+    style keinLvr fill:#f8d7da,stroke:#c0392b
+    style massnahmen fill:#fff3cd,stroke:#c9a227
+    style schutz fill:#fff3cd,stroke:#c9a227
+`;export{e as default};

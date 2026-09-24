@@ -1,0 +1,25 @@
+var e=`---
+summary: "Zeigt das Verfahren der Bundeszentrale zur Durchsetzung von Vorsorgemaßnahmen gegen jugendgefährdende Inhalte nach §24b JuSchG, von der Einschätzung durch jugendschutz.net über Beratung und Fristsetzung bis zur behördlichen Anordnung."
+---
+flowchart TD
+    A["jugendschutz.net erstellt erste<br/>Einschätzung der Vorsorgemaßnahmen eines<br/>Anbieters und unterrichtet die<br/>Bundeszentrale — <a href='{{ELI}}#art-z24b_abs-z2' target='_blank' rel='noopener'>§24b II</a>"] --> Q1{"Bundeszentrale stellt fest:<br/>keine oder nur unzureichende<br/>Vorsorgemaßnahmen (Art. 28 I<br/>DSA) getroffen? — <a href='{{ELI}}#art-z24b_abs-z3' target='_blank' rel='noopener'>§24b III S.1</a>"}
+
+    Q1 -->|Nein| Z1["Keine weiteren Maßnahmen erforderlich"]
+    Q1 -->|Ja| B["Bundeszentrale gibt Anbieter Gelegenheit<br/>zur Stellungnahme und berät ihn über<br/>erforderliche Vorsorgemaßnahmen — §24b<br/>III S.1 (Beispiele:<br/>Melde-/Abhilfeverfahren,<br/>Alterseinstufung, Altersverifikation<br/>— <a href='{{ELI}}#art-z24a_abs-z2' target='_blank' rel='noopener'>§24a II</a>)"]
+
+    B --> Q2{"Trifft der Anbieter nach<br/>Abschluss der Beratung die<br/>erforderlichen Maßnahmen?<br/>— <a href='{{ELI}}#art-z24b_abs-z3' target='_blank' rel='noopener'>§24b III S.2</a>"}
+
+    Q2 -->|Ja| Z2["Vorsorgemaßnahmen umgesetzt"]
+    Q2 -->|Nein| F["Bundeszentrale fordert Anbieter unter<br/>angemessener Fristsetzung zur Umsetzung<br/>auf — §24b III S.2"]
+
+    F --> Q3{"Kommt der Anbieter der<br/>Aufforderung innerhalb der<br/>Frist ausreichend nach? — <a href='{{ELI}}#art-z24b_abs-z4' target='_blank' rel='noopener'>§24b<br/>IV</a>"}
+
+    Q3 -->|Ja| Z2
+    Q3 -->|Nein| S["Zentrale Aufsichtsstelle der Länder<br/>erhält Gelegenheit zur Stellungnahme<br/>— §24b IV S.2"]
+
+    S --> Z3["Bundeszentrale ordnet die<br/>Vorsorgemaßnahmen unter erneuter<br/>angemessener Fristsetzung selbst an<br/>— §24b IV S.1"]
+
+    style Z1 fill:#d4edda,stroke:#2d8a4a
+    style Z2 fill:#d4edda,stroke:#2d8a4a
+    style Z3 fill:#fff3cd,stroke:#c9a227
+`;export{e as default};

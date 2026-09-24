@@ -1,0 +1,42 @@
+var e=`---
+summary: "Zeigt, wann der Pfandleiher nach Fälligkeit des Darlehens das Pfand verwerten darf und muss, wie Zustimmung und Verlangen des Verpfänders sowie eine Fristverlängerung durch die zuständige Behörde darauf einwirken und welche Bekanntmachung vor der Versteigerung nötig ist."
+---
+swimlane-beta TD
+    subgraph VP["Verpfänder"]
+        zustimmung("Kann nach Eintritt der Fälligkeit einer<br/>früheren Verwertung zustimmen — <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 I</a>")
+        verlangen{"Verlangt eine andere<br/>Verwertungsfrist, die mit dem<br/>Pfandleiher vereinbart wird?<br/>— <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 III</a>"}
+    end
+
+    subgraph PL["Pfandleiher"]
+        start(["Fälligkeit des gesamten Darlehens tritt<br/>ein — <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 I</a>"])
+        berechtigt["Verwertungsberechtigung: darf sich<br/>frühestens 1 Monat nach Fälligkeit aus<br/>dem Pfand befriedigen, bei Zustimmung<br/>des Verpfänders früher — <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 I</a>"]
+        frist6["Muss spätestens 6 Monate nach Eintritt<br/>der Verwertungsberechtigung verwerten<br/>— <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II S.1</a><br/>(gehemmt, solange eine gerichtliche oder<br/>behördliche Maßnahme die fristgerechte<br/>Verwertung verhindert — <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II S.3</a>)"]
+        antrag{"Antrag auf Verlängerung aus<br/>wichtigem Grund? — <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II S.2</a>"}
+        bekanntmachung["Veranlasst Bekanntmachung der<br/>Versteigerung mind. 1 und höchstens 2<br/>Wochen vorher in einer Tageszeitung,<br/>sonstigen Zeitung oder auf seiner<br/>Homepage (Ort, Zeit, allgemeine<br/>Bezeichnung der Pfänder, Name/Firma,<br/>Vertragsnummern oder Serie, Zeitraum der<br/>Verpfändungen) — <a href='{{ELI}}#art-z9_abs-z4' target='_blank' rel='noopener'>§9 IV</a>"]
+        pruefung{"Rechtzeitig und<br/>vorschriftsmäßig<br/>bekanntgemacht und<br/>fristgerecht verwertet?"}
+        verwertet(["Pfand wird fristgerecht versteigert"])
+        owi(["Ordnungswidrigkeit bei nicht<br/>rechtzeitiger oder nicht<br/>vorschriftsmäßiger Bekanntmachung oder<br/>Verwertung nach Ablauf der Frist nach §9<br/>II S.1 — <a href='{{ELI}}/art-z12a' target='_blank' rel='noopener'>§12a Nr.4</a>"])
+    end
+
+    subgraph BH["Zuständige Behörde"]
+        verlaengerung["Kann die Frist auf Antrag aus wichtigem<br/>Grund verlängern — <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II S.2</a>"]
+    end
+
+    start --> berechtigt
+    zustimmung -.-> berechtigt
+    berechtigt --> verlangen
+    verlangen -->|"Ja: vereinbarte Frist gilt, §9<br/>II S.1 findet keine Anwendung<br/>— <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 III</a>"| bekanntmachung
+    verlangen -->|Nein| frist6
+    frist6 --> antrag
+    antrag -->|Ja| verlaengerung
+    antrag -->|Nein| bekanntmachung
+    verlaengerung -->|"verlängerte oder<br/>6-Monats-Frist"| bekanntmachung
+    bekanntmachung --> pruefung
+    pruefung -->|Ja| verwertet
+    pruefung -->|Nein| owi
+    start ~~~ zustimmung
+    verwertet ~~~ owi
+
+    style verwertet fill:#d4edda,stroke:#2d8a4a
+    style owi fill:#f8d7da,stroke:#c0392b
+`;export{e as default};

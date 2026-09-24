@@ -1,0 +1,37 @@
+var e=`---
+summary: "Zeigt den Weg eines Antrags auf Informationszugang nach dem IFG zwischen Antragsteller und Behörde: zuständige Behörde, Prüfung der Ausschluss- und Ablehnungsgründe, vollständige oder teilweise Stattgabe binnen eines Monats sowie Ablehnung mit Rechtsbehelf."
+---
+swimlane-beta TD
+    subgraph AS["Antragsteller"]
+        start(["Antrag auf Zugang zu amtlichen<br/>Informationen (jeder) — <a href='{{ELI}}#art-z1_abs-z1' target='_blank' rel='noopener'>§1 Abs. 1</a>; <br/>gewünschte Zugangsart bindet die<br/>Behörde außer aus wichtigem<br/>Grund — <a href='{{ELI}}#art-z1_abs-z2' target='_blank' rel='noopener'>§1 Abs. 2</a>"])
+        erhalt(["Erhält Auskunft oder Akteneinsicht<br/>— <a href='{{ELI}}#art-z7_abs-z3' target='_blank' rel='noopener'>§7 Abs. 3</a>, <a href='{{ELI}}#art-z7_abs-z4' target='_blank' rel='noopener'>§7 Abs. 4</a>; Gebühren<br/>außer für einfache Auskünfte<br/>— <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>§10 Abs. 1</a>"])
+        teilErhalt(["Erhält Zugang zum<br/>freigebbaren Teil<br/>— <a href='{{ELI}}#art-z7_abs-z2' target='_blank' rel='noopener'>§7 Abs. 2</a>"])
+        rechtsbehelf(["Widerspruch und<br/>Verpflichtungsklage<br/>— <a href='{{ELI}}#art-z9_abs-z4' target='_blank' rel='noopener'>§9 Abs. 4</a>;<br/>Anrufung des Bundesbeauftragten<br/>für die Informationsfreiheit<br/>— <a href='{{ELI}}#art-z12_abs-z1' target='_blank' rel='noopener'>§12 Abs. 1</a>"])
+    end
+
+    subgraph BH["Behörde"]
+        zustaendig["Zuständig ist die Behörde, die über<br/>die Information verfügen darf<br/>— <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 Abs. 1 S. 1</a>; bei Einschaltung<br/>Privater die Behörde, die sich<br/>ihrer bedient — <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 Abs. 1 S. 2</a>"]
+        dritte{"Betrifft der Antrag<br/>Daten Dritter nach<br/>§5 Abs. 1, 2 oder §6?"}
+        begruendung["Antrag ist zu begründen<br/>— <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 Abs. 1 S. 3</a>;<br/>Dritter wird beteiligt<br/>— <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 Abs. 1</a>"]
+        ausschluss{"Ausschlussgrund<br/>(<a href='{{ELI}}/art-z3' target='_blank' rel='noopener'>§3</a>, <a href='{{ELI}}/art-z4' target='_blank' rel='noopener'>§4</a>, <a href='{{ELI}}/art-z5' target='_blank' rel='noopener'>§5</a>, <a href='{{ELI}}/art-z6' target='_blank' rel='noopener'>§6</a>) oder<br/>Information schon vorhanden<br/>bzw. allgemein zugänglich<br/>(<a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 Abs. 3</a>)?"}
+        teilweise["Stattgabe, soweit ohne Preisgabe<br/>geheimhaltungsbedürftiger<br/>Informationen und ohne unverhältnismäßigen<br/>Aufwand möglich, auch durch<br/>Schwärzung mit Einverständnis<br/>— <a href='{{ELI}}#art-z7_abs-z2' target='_blank' rel='noopener'>§7 Abs. 2</a>"]
+        ablehnung["Ablehnung binnen<br/>eines Monats — <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 Abs. 1</a>;<br/>mit Angabe, ob und wann<br/>Zugang später möglich<br/>ist — <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 Abs. 2</a>"]
+    end
+
+    start --> zustaendig
+    zustaendig --> dritte
+    dritte -->|Ja| begruendung
+    dritte -->|Nein| ausschluss
+    begruendung --> ausschluss
+    ausschluss -->|"Nein: unverzüglich,<br/>binnen eines Monats<br/>— <a href='{{ELI}}#art-z7_abs-z5' target='_blank' rel='noopener'>§7 Abs. 5</a>"| erhalt
+    ausschluss -->|"Ja, für<br/>einen Teil"| teilweise
+    ausschluss -->|"Ja, insgesamt"| ablehnung
+    teilweise --> teilErhalt
+    teilweise -->|"im Übrigen"| ablehnung
+    ablehnung --> rechtsbehelf
+    teilErhalt ~~~ rechtsbehelf
+
+    style erhalt fill:#d4edda,stroke:#2d8a4a
+    style teilErhalt fill:#fff3cd,stroke:#c9a227
+    style rechtsbehelf fill:#f8d7da,stroke:#c0392b
+`;export{e as default};

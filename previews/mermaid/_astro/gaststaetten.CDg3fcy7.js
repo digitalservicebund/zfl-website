@@ -1,0 +1,37 @@
+var e=`---
+summary: "Stellt dar, unter welchen Voraussetzungen sich Kinder und Jugendliche nach §4 JuSchG in Gaststätten aufhalten dürfen, einschließlich der Ausnahmen für Nachtbars, Jugendhilfeveranstaltungen und behördliche Ausnahmegenehmigungen."
+---
+flowchart TD
+    A["Kind oder Jugendlicher möchte sich in<br/>einer Gaststätte aufhalten"] --> Q1{"Nachtbar, Nachtclub oder<br/>vergleichbarer<br/>Vergnügungsbetrieb? — <a href='{{ELI}}#art-z4_abs-z3' target='_blank' rel='noopener'>§4 III</a>"}
+
+    Q1 -->|Ja| Z1["Aufenthalt nicht gestattet"]
+    Q1 -->|Nein| Q2{"Teilnahme an Veranstaltung<br/>eines anerkannten Trägers der<br/>Jugendhilfe oder auf Reisen?<br/>— <a href='{{ELI}}#art-z4_abs-z2' target='_blank' rel='noopener'>§4 II</a>"}
+
+    Q2 -->|Ja| Z2["Absatz 1 gilt nicht — Aufenthalt<br/>gestattet"]
+    Q2 -->|Nein| Q3{"Altersgruppe der Person?"}
+
+    Q3 -->|"unter 16 Jahre"| Q4{"Begleitung durch<br/>personensorgeberechtigte oder<br/>erziehungsbeauftragte Person?<br/>— <a href='{{ELI}}#art-z4_abs-z1' target='_blank' rel='noopener'>§4 I S.1</a>"}
+    Q3 -->|"ab 16 Jahre"| Q6{"Aufenthalt zwischen 24 Uhr und<br/>5 Uhr morgens ohne Begleitung?<br/>— <a href='{{ELI}}#art-z4_abs-z1' target='_blank' rel='noopener'>§4 I S.2</a>"}
+
+    Q4 -->|Ja| Z3["Aufenthalt gestattet"]
+    Q4 -->|Nein| Q5{"Zeit zwischen 5 und 23 Uhr und<br/>nur Einnahme einer Mahlzeit<br/>oder eines Getränks? — <a href='{{ELI}}#art-z4_abs-z1' target='_blank' rel='noopener'>§4 I<br/>S.1</a>"}
+
+    Q5 -->|Ja| Z3
+    Q5 -->|Nein| Z4["Aufenthalt ohne Begleitung nicht<br/>gestattet"]
+
+    Q6 -->|Nein| Z3
+    Q6 -->|Ja| Z5["Aufenthalt ohne Begleitung nicht<br/>gestattet"]
+
+    Z4 --> Q7{"Ausnahme durch zuständige<br/>Behörde genehmigt? — <a href='{{ELI}}#art-z4_abs-z4' target='_blank' rel='noopener'>§4 IV</a>"}
+    Z5 --> Q7
+
+    Q7 -->|Ja| Z3
+    Q7 -->|Nein| Z6["Aufenthalt bleibt untersagt"]
+
+    style Z1 fill:#f8d7da,stroke:#c0392b
+    style Z2 fill:#d4edda,stroke:#2d8a4a
+    style Z3 fill:#d4edda,stroke:#2d8a4a
+    style Z4 fill:#fff3cd,stroke:#c9a227
+    style Z5 fill:#fff3cd,stroke:#c9a227
+    style Z6 fill:#f8d7da,stroke:#c0392b
+`;export{e as default};

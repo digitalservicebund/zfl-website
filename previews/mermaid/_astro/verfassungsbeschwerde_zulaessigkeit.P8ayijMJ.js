@@ -1,0 +1,40 @@
+var e=`---
+summary: "Prüfschema für die Zulässigkeit einer Verfassungsbeschwerde: Beschwerdefähigkeit, Rechtswegerschöpfung, Form und die je nach Angriffsgegenstand unterschiedlichen Fristen."
+---
+flowchart TD
+    START["Behauptung: Verletzung eines Grundrechts<br/>oder grundrechtsgleichen Rechts durch<br/>die öffentliche Gewalt"] --> BF{"Beschwerdefähig? Jedermann<br/>— <a href='{{ELI}}#art-z90_abs-z1' target='_blank' rel='noopener'>§90 I</a><br/>oder Gemeinde/Gemeindeverband<br/>bzgl. Art. 28 GG — <a href='{{ELI}}#art-z91' target='_blank' rel='noopener'>§91</a>"}
+
+    BF -->|Nein| U1["Unzulässig:<br/>keine Beschwerdefähigkeit"]
+    BF -->|Ja| RW{"Ist gegen die Verletzung ein<br/>Rechtsweg eröffnet? — <a href='{{ELI}}#art-z90_abs-z2' target='_blank' rel='noopener'>§90 II<br/>S.1</a>"}
+
+    RW -->|Nein| FORM
+    RW -->|Ja| ERSCH{"Rechtsweg erschöpft?"}
+
+    ERSCH -->|Ja| FORM
+    ERSCH -->|Nein| AUSN{"Ausnahme: allgemeine Bedeutung<br/>oder schwerer, unabwendbarer<br/>Nachteil bei Verweis auf<br/>Rechtsweg? — <a href='{{ELI}}#art-z90_abs-z2' target='_blank' rel='noopener'>§90 II S.2</a>"}
+
+    AUSN -->|Nein| U2["Unzulässig:<br/>Rechtsweg nicht erschöpft"]
+    AUSN -->|Ja| FORM["Recht und beanstandete<br/>Handlung/Unterlassung in der Begründung<br/>bezeichnet? — <a href='{{ELI}}#art-z92' target='_blank' rel='noopener'>§92</a>"]
+
+    FORM -->|Nein| U3["Unzulässig: Form- und Begründungsmangel"]
+    FORM -->|Ja| GEGEN{"Richtet sich die Beschwerde<br/>gegen eine gerichtliche<br/>Entscheidung?"}
+
+    GEGEN -->|Ja| F1M{"Erhoben und begründet binnen 1<br/>Monat ab Zustellung/<br/>Bekanntgabe der Entscheidung?<br/>— <a href='{{ELI}}#art-z93_abs-z1' target='_blank' rel='noopener'>§93 I</a>"}
+
+    F1M -->|Ja| ZUL["Zulässig — weiter im Annahmeverfahren"]
+    F1M -->|Nein| WE{"Ohne Verschulden an<br/>Fristwahrung gehindert?<br/>Wiedereinsetzungsantrag binnen<br/>2 Wochen nach Wegfall des<br/>Hindernisses, spätestens<br/>binnen 1 Jahr — <a href='{{ELI}}#art-z93_abs-z2' target='_blank' rel='noopener'>§93 II</a>"}
+
+    WE -->|Ja| ZUL
+    WE -->|Nein| U4["Unzulässig: verfristet"]
+
+    GEGEN -->|Nein, z.B. gegen<br/>Gesetz/Hoheitsakt| F1J{"Erhoben binnen 1 Jahr seit<br/>Inkrafttreten des Gesetzes<br/>bzw. Erlass des Hoheitsakts?<br/>— <a href='{{ELI}}#art-z93_abs-z3' target='_blank' rel='noopener'>§93 III</a>"}
+
+    F1J -->|Ja| ZUL
+    F1J -->|Nein| U4
+
+    style U1 fill:#f8d7da,stroke:#c0392b
+    style U2 fill:#f8d7da,stroke:#c0392b
+    style U3 fill:#f8d7da,stroke:#c0392b
+    style U4 fill:#f8d7da,stroke:#c0392b
+    style ZUL fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};

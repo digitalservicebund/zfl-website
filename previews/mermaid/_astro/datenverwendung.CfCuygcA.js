@@ -1,0 +1,42 @@
+var e=`---
+summary: "Zeigt, wie die speichernde Behörde die erhobenen Daten im automatisierten Verfahren vorhält, an andere Aufsichtsbehörden übermittelt, Fehlermitteilungen erhält und dem Erlaubnisinhaber auf Antrag Auskunft erteilt."
+---
+swimlane-beta TD
+    subgraph SB["Erteilende oder kontrollierende Behörde (speichernd)"]
+        speichern["Speichert die Daten nach §3 sowie u.a.<br/>Erlaubnisinhalt, Kontrollergebnis und<br/>Auflagenerfüllung im automatisierten<br/>Abrufverfahren — <a href='{{ELI}}#art-z4_abs-z1' target='_blank' rel='noopener'>§4 I</a>"]
+        erforderlich{"Für die Aufgaben der<br/>ersuchenden Behörde<br/>erforderlich? — <a href='{{ELI}}#art-z4_abs-z2' target='_blank' rel='noopener'>§4 II S.1</a>"}
+        uebermittlung["Übermittelt die gespeicherten Daten,<br/>ggf. durch Abruf — <a href='{{ELI}}#art-z4_abs-z2' target='_blank' rel='noopener'>§4 II</a><br/>(prüft Abrufe nur bei Anlass,<br/>Stichproben gewährleisten — <a href='{{ELI}}#art-z4_abs-z3' target='_blank' rel='noopener'>§4 III S.2,<br/>3</a>)"]
+        mitteilungErhalten["Erhält Mitteilung über unvollständige,<br/>fehlerhafte oder nicht schlüssige Daten<br/>— <a href='{{ELI}}#art-z4_abs-z4' target='_blank' rel='noopener'>§4 IV</a>"]
+        auskunft["Erteilende Behörde erteilt Auskunft über<br/>die Daten nach §4 I — <a href='{{ELI}}#art-z4_abs-z5' target='_blank' rel='noopener'>§4 V</a>"]
+    end
+
+    subgraph AB["Andere Aufsichtsbehörde (§16 I Nr.4 TierSchG)"]
+        ersuchen["Ersucht um die Daten zur Wahrnehmung<br/>ihrer Aufgaben — <a href='{{ELI}}#art-z4_abs-z2' target='_blank' rel='noopener'>§4 II S.1</a>"]
+        keineDaten(["Keine Übermittlung"])
+        empfang["Erhält die Daten; trägt die<br/>Verantwortung für die Zulässigkeit des<br/>einzelnen Abrufs — <a href='{{ELI}}#art-z4_abs-z3' target='_blank' rel='noopener'>§4 III S.1</a>"]
+        fehler{"Gespeicherte Daten<br/>unvollständig, fehlerhaft oder<br/>nicht schlüssig? — <a href='{{ELI}}#art-z4_abs-z4' target='_blank' rel='noopener'>§4 IV</a>"}
+        keineMitteilung(["Keine Mitteilung"])
+    end
+
+    subgraph EI["Erlaubnisinhaber"]
+        antrag["Beantragt Auskunft über die ihn<br/>betreffenden Daten — <a href='{{ELI}}#art-z4_abs-z5' target='_blank' rel='noopener'>§4 V</a>"]
+    end
+
+    speichern --> ersuchen
+    ersuchen --> erforderlich
+    erforderlich -->|Ja| uebermittlung
+    erforderlich -->|Nein| keineDaten
+    uebermittlung --> empfang
+    empfang --> fehler
+    fehler -->|"Ja: Mitteilung"| mitteilungErhalten
+    fehler -->|Nein| keineMitteilung
+    antrag --> auskunft
+    keineDaten ~~~ empfang
+    keineMitteilung ~~~ antrag
+    mitteilungErhalten ~~~ auskunft
+
+    style auskunft fill:#d4edda,stroke:#2d8a4a
+    style keineDaten fill:#fff3cd,stroke:#c9a227
+    style mitteilungErhalten fill:#fff3cd,stroke:#c9a227
+    style keineMitteilung fill:#fff3cd,stroke:#c9a227
+`;export{e as default};

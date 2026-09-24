@@ -1,0 +1,24 @@
+var e=`---
+summary: "Zeigt die Verhaltenspflichten von Unfallbeteiligten nach § 34 StVO, vom unverzüglichen Halten und Sichern der Unfallstelle über die Hilfeleistung bis zur Ermöglichung der Feststellung von Person und Fahrzeug oder der nachträglichen Mitteilung."
+---
+flowchart TD
+    A["Verkehrsunfall, an dem man beteiligt ist<br/>(Verhalten kann zum Unfall beigetragen<br/>haben) — <a href='{{ELI}}#art-z34_abs-z2' target='_blank' rel='noopener'>§34 Abs. 2</a>"] --> B["Unverzüglich halten — <a href='{{ELI}}#art-z34_abs-z1' target='_blank' rel='noopener'>§34 Abs. 1 Nr. 1</a>"]
+    B --> C["Verkehr sichern; bei geringfügigem<br/>Schaden unverzüglich beiseite fahren<br/>— <a href='{{ELI}}#art-z34_abs-z1' target='_blank' rel='noopener'>§34 Abs. 1 Nr. 2</a>"]
+    C --> D["Sich über die Unfallfolgen vergewissern<br/>— <a href='{{ELI}}#art-z34_abs-z1' target='_blank' rel='noopener'>§34 Abs. 1 Nr. 3</a>"]
+    D --> E{"Sind Personen verletzt?"}
+    E -->|Ja| F["Verletzten helfen (§323c StGB) — <a href='{{ELI}}#art-z34_abs-z1' target='_blank' rel='noopener'>§34<br/>Abs. 1 Nr. 4</a>"]
+    F --> G
+    E -->|Nein| G["Beteiligung angeben; auf Verlangen Name,<br/>Anschrift, Führerschein, Fahrzeugschein<br/>und Haftpflichtversicherung nachweisen<br/>— <a href='{{ELI}}#art-z34_abs-z1' target='_blank' rel='noopener'>§34 Abs. 1 Nr. 5</a>"]
+    G --> H{"Ist ein Berechtigter/<br/>Geschädigter am Unfallort<br/>anwesend, dem die Feststellung<br/>ermöglicht werden kann? — <a href='{{ELI}}#art-z34_abs-z1' target='_blank' rel='noopener'>§34<br/>Abs. 1 Nr. 6</a>"}
+    H -->|Ja| Z1["Am Unfallort bleiben, bis Feststellung<br/>von Person, Fahrzeug und Art der<br/>Beteiligung ermöglicht wurde — <a href='{{ELI}}#art-z34_abs-z1' target='_blank' rel='noopener'>§34 Abs.<br/>1 Nr. 6 Buchst. a</a>"]
+    H -->|Nein| I["Angemessene Zeit warten und<br/>Name/Anschrift am Unfallort hinterlassen<br/>— <a href='{{ELI}}#art-z34_abs-z1' target='_blank' rel='noopener'>§34 Abs. 1 Nr. 6 Buchst. b</a>"]
+    I --> J{"Entfernt man sich berechtigt,<br/>entschuldigt oder nach Ablauf<br/>der Wartefrist vom Unfallort?"}
+    J -->|Ja| K["Unverzüglich Feststellungen nachträglich<br/>ermöglichen:<br/>Mitteilung an Berechtigten oder nahe<br/>Polizeidienststelle über Beteiligung,<br/>Anschrift, Aufenthalt, Kennzeichen und<br/>Standort — <a href='{{ELI}}#art-z34_abs-z1' target='_blank' rel='noopener'>§34 Abs. 1 Nr. 7</a>"]
+    K --> Z2["Mitwirkungspflichten erfüllt"]
+    J -->|Nein| Z2
+    Z1 --> L["Unfallspuren nicht beseitigen, bevor<br/>notwendige Feststellungen getroffen<br/>wurden — <a href='{{ELI}}#art-z34_abs-z3' target='_blank' rel='noopener'>§34 Abs. 3</a>"]
+    L --> Z2
+
+    style Z1 fill:#d4edda,stroke:#2d8a4a
+    style Z2 fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};

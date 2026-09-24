@@ -1,0 +1,58 @@
+var e=`---
+summary: "Zeigt den regulären Ablauf der Beförderung von Schaumwein unter Steueraussetzung mittels elektronischem Verwaltungsdokument (e-VD) und die Aufgaben von Versender, Hauptzollamt, Beförderer und Empfänger, von der Übermittlung des Entwurfs bis zur Eingangsmeldung."
+---
+swimlane-beta TD
+    subgraph VS["Versender"]
+        start(["Will Schaumwein unter Steueraussetzung<br/>befördern"])
+        entwurf["Übermittelt vor Beginn Entwurf des e-VD<br/>über EDV-System — <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 I</a>"]
+        evdErhalten("e-VD mit eindeutigem Referenzcode liegt<br/>vor — <a href='{{ELI}}#art-z16_abs-z2' target='_blank' rel='noopener'>§16 II S.3</a>")
+        begonnen{"Beförderung bereits begonnen?"}
+        annullierung["Übermittelt Entwurf der elektronischen<br/>Annullierungsmeldung — <a href='{{ELI}}#art-z19_abs-z2' target='_blank' rel='noopener'>§19 II</a>"]
+        annulliert(["e-VD annulliert;<br/>Beförderung entfällt — <a href='{{ELI}}#art-z19_abs-z1' target='_blank' rel='noopener'>§19 I</a>"])
+        eingangVS("Erhält Eingangsmeldung — <a href='{{ELI}}#art-z21_abs-z2' target='_blank' rel='noopener'>§21 II S.4</a>")
+    end
+
+    subgraph HZA["Hauptzollamt"]
+        pruefungEntwurf{"Prüft Angaben automatisiert<br/>(bei Einfuhr zusätzlich<br/>Abgleich mit Zollanmeldung)<br/>— <a href='{{ELI}}#art-z16_abs-z2' target='_blank' rel='noopener'>§16 II</a>"}
+        beanstandungVS["Beanstandung wird dem Versender<br/>mitgeteilt — <a href='{{ELI}}#art-z16_abs-z2' target='_blank' rel='noopener'>§16 II S.4</a>"]
+        beanstandungAnn["Beanstandung wird dem Versender<br/>mitgeteilt — <a href='{{ELI}}#art-z19_abs-z3' target='_blank' rel='noopener'>§19 III S.3</a>"]
+        pruefungAnnullierung{"Prüft Annullierungsmeldung<br/>— <a href='{{ELI}}#art-z19_abs-z3' target='_blank' rel='noopener'>§19 III</a>"}
+        pruefungEingang{"Prüft Eingangsmeldung<br/>automatisiert — <a href='{{ELI}}#art-z21_abs-z2' target='_blank' rel='noopener'>§21 II</a>"}
+        beanstandungEM["Beanstandung wird dem Empfänger<br/>mitgeteilt — <a href='{{ELI}}#art-z21_abs-z2' target='_blank' rel='noopener'>§21 II S.3</a>"]
+        nachweis(["Eingangsmeldung gilt als Nachweis der<br/>Beendigung der Beförderung — <a href='{{ELI}}#art-z21_abs-z6' target='_blank' rel='noopener'>§21 VI</a>"])
+    end
+
+    subgraph BF["Beförderer"]
+        referenzcode["Führt eindeutigen Referenzcode mit,<br/>teilt ihn auf Verlangen mit — <a href='{{ELI}}#art-z16_abs-z3' target='_blank' rel='noopener'>§16 III</a>"]
+    end
+
+    subgraph EM["Empfänger"]
+        evdEM("Erhält e-VD, wenn Steuerlagerinhaber<br/>— <a href='{{ELI}}#art-z16_abs-z5' target='_blank' rel='noopener'>§16 V</a>")
+        eingangsmeldung["Übermittelt nach Aufnahme<br/>Eingangsmeldung: unverzüglich,<br/>spätestens 5 Werktage nach Beendigung<br/>— <a href='{{ELI}}#art-z21_abs-z1' target='_blank' rel='noopener'>§21 I</a>"]
+    end
+
+    start --> entwurf
+    entwurf --> pruefungEntwurf
+    pruefungEntwurf -->|Beanstandung| beanstandungVS
+    pruefungEntwurf -->|Keine Beanstandung| evdErhalten
+    pruefungEntwurf -.-> evdEM
+    evdErhalten --> begonnen
+    begonnen -->|"Nein, Versender will<br/>annullieren"| annullierung
+    annullierung --> pruefungAnnullierung
+    pruefungAnnullierung -->|Beanstandung| beanstandungAnn
+    pruefungAnnullierung -->|Keine Beanstandung| annulliert
+    begonnen -->|Ja| referenzcode
+    referenzcode --> eingangsmeldung
+    eingangsmeldung --> pruefungEingang
+    pruefungEingang -->|Beanstandung| beanstandungEM
+    pruefungEingang -->|Keine Beanstandung| nachweis
+    nachweis -.-> eingangVS
+    annulliert ~~~ referenzcode
+    beanstandungEM ~~~ nachweis
+
+    style nachweis fill:#d4edda,stroke:#2d8a4a
+    style annulliert fill:#f8d7da,stroke:#c0392b
+    style beanstandungVS fill:#fff3cd,stroke:#c9a227
+    style beanstandungEM fill:#fff3cd,stroke:#c9a227
+    style beanstandungAnn fill:#fff3cd,stroke:#c9a227
+`;export{e as default};

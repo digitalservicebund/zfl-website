@@ -1,0 +1,32 @@
+var e=`---
+summary: "Zeigt den Ablauf und die Fristen bei einem Antrag einer betroffenen Person auf Auskunft oder Ausübung anderer Betroffenenrechte nach Art. 12 bis 22 DSGVO, von der Identitätsprüfung über die Monatsfrist bis zur fristgerechten Beantwortung oder Ablehnung."
+---
+flowchart TD
+    A["Antrag der betroffenen Person auf<br/>Ausübung eines Rechts (Art. 15 bis 22)<br/>— Art. 12 Abs. 1"] --> B{"Kann die betroffene Person<br/>identifiziert werden? — Art.<br/>12 Abs. 2"}
+
+    B -->|"Nein"| R["Tätigwerden kann verweigert werden"]
+    B -->|"Ja, aber Zweifel an der<br/>Identität"| ID["Zusätzliche Informationen zur<br/>Identitätsbestätigung anfordern — Art.<br/>12 Abs. 6"]
+    B -->|"Ja"| F
+
+    ID --> F{"Ist der Antrag offenkundig<br/>unbegründet oder exzessiv<br/>(Nachweis durch<br/>Verantwortlichen)? — Art. 12<br/>Abs. 5"}
+
+    F -->|"Ja"| G["Angemessenes Entgelt verlangen oder<br/>Tätigwerden verweigern — Art. 12 Abs. 5<br/>lit. a, b"]
+
+    F -->|"Nein"| M1["Frist: 1 Monat nach Antragseingang<br/>— Art. 12 Abs. 3 S. 1"]
+
+    M1 --> V{"Erfordern Komplexität oder<br/>Anzahl der Anträge eine<br/>Verlängerung?"}
+
+    V -->|"Ja"| M2["Verlängerung um bis zu 2 weitere Monate;<br/>Unterrichtung mit Gründen binnen 1 Monat<br/>— Art. 12 Abs. 3 S. 2–3"]
+    V -->|"Nein"| T
+
+    M2 --> T{"Wird der Verantwortliche<br/>innerhalb der Frist tätig?"}
+
+    T -->|"Ja"| OK["Information/Maßnahme fristgerecht und<br/>unentgeltlich bereitgestellt — Art. 12<br/>Abs. 3, Abs. 5"]
+
+    T -->|"Nein"| ABL["Unterrichtung über Gründe sowie<br/>Beschwerde- und<br/>Rechtsbehelfsmöglichkeit, spätestens<br/>binnen 1 Monat — Art. 12 Abs. 4"]
+
+    style OK fill:#d4edda,stroke:#2d8a4a
+    style R fill:#f8d7da,stroke:#c0392b
+    style ABL fill:#f8d7da,stroke:#c0392b
+    style G fill:#fff3cd,stroke:#c9a227
+`;export{e as default};
