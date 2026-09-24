@@ -27,13 +27,15 @@
   aria-current={active ? "true" : undefined}
   onclick={() => onclick()}
 >
-  {#if Icon}
-    <Icon
-      class="{inline ? 'size-24' : 'size-32'} shrink-0 text-cosmic-blue-400"
-    />
-  {/if}
-  {#if title}
-    <strong>{title}</strong>
-  {/if}
+  <div class="flex gap-16 items-center">
+    {#if Icon}
+      <Icon
+        class="{inline ? 'size-24' : 'size-32'} shrink-0 text-cosmic-blue-400"
+      />
+    {/if}
+    {#if title}
+      <strong>{title}</strong>
+    {/if}
+  </div>
   {@render children?.()}
 </button>

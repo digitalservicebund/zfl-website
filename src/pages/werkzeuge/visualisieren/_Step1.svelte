@@ -18,19 +18,43 @@
       active={wizard.preset === "flowchart"}
       onclick={() => (wizard.preset = "flowchart")}
       icon={visTypeIcons.flowchart}
-    ></PresetBtn>
+    >
+      <div>
+        <ul class="kern-body--small">
+          <li>Wo sind Komplexitäten?</li>
+          <li>Wo sind Lücken?</li>
+        </ul>
+        <p class="kern-body--muted">→ Flussdiagramm</p>
+      </div>
+    </PresetBtn>
     <PresetBtn
       title="Ablauf in der Praxis"
       active={wizard.preset === "swimlane"}
       onclick={() => (wizard.preset = "swimlane")}
       icon={visTypeIcons.swimlane}
-    ></PresetBtn>
+    >
+      <div>
+        <ul class="kern-body--small">
+          <li>Wer macht was?</li>
+          <li>Was folgt worauf?</li>
+        </ul>
+        <p class="kern-body--muted">→ Swimlane-Flussdiagramm</p>
+      </div>
+    </PresetBtn>
     <PresetBtn
       title="Akteure"
       active={wizard.preset === "actors"}
       onclick={() => (wizard.preset = "actors")}
       icon={visTypeIcons.actors}
-    ></PresetBtn>
+    >
+      <div>
+        <ul class="kern-body--small">
+          <li>Wer ist involviert?</li>
+          <li>Wer ist wofür zuständig?</li>
+        </ul>
+        <p class="kern-body--muted">→ Akteursübersicht</p>
+      </div>
+    </PresetBtn>
   </div>
 {/snippet}
 
