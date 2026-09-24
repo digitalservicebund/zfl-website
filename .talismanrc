@@ -192,6 +192,8 @@ fileignoreconfig:
     ignore_detectors: [filecontent]
   - filename: src/pages/werkzeuge/visualisieren/_wizardState.svelte.ts
     allowed_patterns: [WIZARD_CONTEXT_KEY]
+  - filename: src/content/ki-visualisierungen/IfSG/akteure.mmd
+    checksum: 13f0a74a0442793b8ba5b3187c596ae893b2c3499baf5b7928172ec1af38e9b0
 scopeconfig:
   - scope: node
 allowed_patterns:

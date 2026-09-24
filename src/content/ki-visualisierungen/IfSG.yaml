@@ -21,3 +21,7 @@ visOptions:
     visType: flowchart
     filename: entschaedigung
     articles: ["§56"]
+  - name: Akteure im Meldewesen
+    visType: actors
+    filename: akteure
+    articles: []

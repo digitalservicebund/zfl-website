@@ -25,3 +25,7 @@ visOptions:
     visType: flowchart
     filename: drittlandtransfer
     articles: ["Art. 45", "Art. 46", "Art. 49"]
+  - name: Akteure und Rollen
+    visType: actors
+    filename: akteure
+    articles: []

@@ -29,3 +29,7 @@ visOptions:
     visType: swimlane
     filename: ueberwachung
     articles: ["§26", "§27"]
+  - name: Akteure und Zuständigkeiten
+    visType: actors
+    filename: akteure
+    articles: []

@@ -21,3 +21,7 @@ visOptions:
     visType: flowchart
     filename: zugangsbeschraenkung
     articles: ["§29"]
+  - name: Akteure und Zuständigkeiten
+    visType: actors
+    filename: akteure
+    articles: []
