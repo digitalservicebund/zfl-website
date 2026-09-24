@@ -10,9 +10,9 @@ visOptions:
     filename: kostenvorschusspflicht
     articles: ["§12", "§14", "§17", "§18"]
   - name: Streitwertfestsetzung
-    visType: flowchart
+    visType: swimlane
     filename: streitwertfestsetzung
-    articles: ["§§61-64", "§68"]
+    articles: ["§§61-63", "§66", "§68"]
   - name: Ermäßigung bei vorzeitiger Erledigung
     visType: flowchart
     filename: ermaessigung_vorzeitige_erledigung

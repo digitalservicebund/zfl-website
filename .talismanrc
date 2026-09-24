@@ -196,6 +196,8 @@ fileignoreconfig:
     checksum: 13f0a74a0442793b8ba5b3187c596ae893b2c3499baf5b7928172ec1af38e9b0
   - filename: src/content/ki-visualisierungen/BEHG/emissionsberichterstattung.mmd
     checksum: 5608d0cf227d4008dfbec9ee1c6662bc26cef759ff3f26056c8d44fc84caf127
+  - filename: src/content/ki-visualisierungen/BKleingG/pachthoehe.mmd
+    ignore_detectors: [filecontent]
 scopeconfig:
   - scope: node
 allowed_patterns:

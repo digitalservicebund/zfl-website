@@ -21,3 +21,11 @@ visOptions:
     visType: flowchart
     filename: notfall_abweichungen
     articles: ["§14"]
+  - name: Umsetzung auf Tagesarbeitsplatz
+    visType: swimlane
+    filename: umsetzung_tagesarbeitsplatz
+    articles: ["§6"]
+  - name: Akteure und Zuständigkeiten
+    visType: actors
+    filename: akteure
+    articles: []

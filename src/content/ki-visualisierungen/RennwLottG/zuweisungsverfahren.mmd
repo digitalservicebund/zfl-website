@@ -1,0 +1,33 @@
+---
+summary: "Zeigt das Zuweisungsverfahren nach §7: Aufzeichnungen und Mitteilungen der Wettanbieter zum zuweisungsfähigen Steueraufkommen, die Festsetzung der Anteile durch die zuständige Landesbehörde und die zweckgebundene Verwendung der Zuweisung durch die Rennvereine."
+---
+swimlane-beta TD
+    subgraph WA["Totalisatorbetreiber, Buchmacher, Sportwettveranstalter"]
+        aufzeichnung(["Im Inland ansässige Totalisatorbetreiber<br/>und Buchmacher sowie im Ausland ansässige<br/>Veranstalter von Sportwetten auf inländische<br/>Pferderennen führen für das zuweisungsfähige<br/>Steueraufkommen besondere Aufzeichnungen<br/>— <a href='{{ELI}}#art-z7_abs-z3' target='_blank' rel='noopener'>§7 III S.1</a>"])
+        mitteilung["Buchmacher und ausländische Sportwett-<br/>veranstalter teilen monatlich die für Wetten<br/>auf inländische Pferderennen angemeldeten<br/>und abgeführten Steuerbeträge aufgeschlüsselt<br/>mit — <a href='{{ELI}}#art-z7_abs-z3' target='_blank' rel='noopener'>§7 III S.2</a> (Anforderung auch im<br/>Steueranmeldungsverfahren zulässig<br/>— <a href='{{ELI}}#art-z7_abs-z3' target='_blank' rel='noopener'>§7 III S.3</a>)"]
+    end
+
+    subgraph FB["Finanzbehörde"]
+        offenbarung["Kann die nach §30 AO geschützten Daten<br/>der für das Zuweisungsverfahren<br/>zuständigen Behörde offenbaren<br/>— <a href='{{ELI}}/art-z61' target='_blank' rel='noopener'>§61</a>"]
+    end
+
+    subgraph LB["Nach Landesrecht zuständige Behörde"]
+        ausnahme{"Totalisatorsteuer aus Erlaubnissen nach §1 IV<br/>oder Buchmacher-/Sportwettensteuer aus<br/>Anlass von Pferderennen im Ausland?<br/>— <a href='{{ELI}}#art-z7_abs-z2' target='_blank' rel='noopener'>§7 II</a>"}
+        keine(["Aufkommen nicht<br/>zuweisungsfähig — <a href='{{ELI}}#art-z7_abs-z2' target='_blank' rel='noopener'>§7 II</a>"])
+        festsetzung["Setzt die Anteile der Rennvereine (bis zu 96 %<br/>des Aufkommens der Totalisator- und Buchmacher-<br/>steuer sowie der Sportwettensteuer ausländischer<br/>Veranstalter für inländische Pferderennen) fest und trifft die erforder-<br/>lichen Bestimmungen — <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 I S.1, 3</a>;<br/>je Rennverein unterschiedlich bemessbar,<br/>höchstens zur Deckung seiner Nettokosten<br/>der öffentlichen Leistungsprüfungen<br/>für Pferde — <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 I S.4-5</a>"]
+    end
+
+    subgraph RV["Rennvereine, die einen Totalisator betreiben"]
+        verwendung(["Erhalten die Zuweisung und verwenden<br/>die Beträge zu Zwecken der öffentlichen<br/>Leistungsprüfungen für Pferde<br/>— <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 I S.1-2</a>"])
+    end
+
+    aufzeichnung --> mitteilung
+    mitteilung --> offenbarung
+    offenbarung --> ausnahme
+    ausnahme -->|Ja| keine
+    ausnahme -->|Nein| festsetzung
+    festsetzung --> verwendung
+    keine ~~~ festsetzung
+
+    style keine fill:#f8d7da,stroke:#c0392b
+    style verwendung fill:#d4edda,stroke:#2d8a4a

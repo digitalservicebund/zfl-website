@@ -1,0 +1,24 @@
+---
+summary: "Berechnet die Fristen der Pfandverwertung: ab wann der Pfandleiher sich aus dem Pfand befriedigen darf und bis wann er es verwerten muss, einschließlich vereinbarter Frist, behördlicher Verlängerung, Hemmung und Bekanntmachungsfrist vor der Versteigerung."
+---
+flowchart TD
+    A["Fälligkeit des gesamten<br/>Darlehens ist eingetreten<br/>— <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 I</a>"] --> B{"Stimmt der Verpfänder nach<br/>Fälligkeit einer früheren<br/>Verwertung zu?<br/>— <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 I</a>"}
+    B -->|Ja| C1["Verwertungsberechtigung<br/>ab Zustimmung"]
+    B -->|Nein| C2["Verwertungsberechtigung<br/>frühestens 1 Monat nach<br/>Fälligkeit<br/>— <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 I</a>"]
+    C1 --> D{"Andere Verwertungsfrist auf<br/>Verlangen des Verpfänders<br/>vereinbart?<br/>— <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 III</a>"}
+    C2 --> D
+    D -->|Ja| E1["Vereinbarte Frist gilt<br/>(§9 II S.1 findet keine<br/>Anwendung)<br/>— <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 III</a>"]
+    D -->|Nein| E2["Verwertung spätestens 6 Monate<br/>nach Eintritt der<br/>Verwertungsberechtigung<br/>— <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II S.1</a>"]
+    E2 --> F{"Verlängert die zuständige<br/>Behörde die Frist auf Antrag<br/>des Pfandleihers aus<br/>wichtigem Grund?<br/>— <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II S.2</a>"}
+    F -->|Ja| G1["Verlängerte Frist gilt<br/>— <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II S.2</a>"]
+    F -->|Nein| G2["6-Monats-Frist gilt<br/>— <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II S.1</a>"]
+    G1 --> H{"Ist der Pfandleiher durch eine<br/>gerichtliche oder behördliche<br/>Maßnahme an der fristgerechten<br/>Verwertung verhindert?<br/>— <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II S.3</a>"}
+    G2 --> H
+    H -->|Ja| I["Frist gehemmt bis zur<br/>Aufhebung der Maßnahme;<br/>Hemmungszeitraum wird nicht<br/>eingerechnet<br/>— <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II S.3</a>"]
+    H -->|Nein| J
+    I --> J["Versteigerung mind. 1 und<br/>höchstens 2 Wochen vorher<br/>bekanntmachen lassen<br/>— <a href='{{ELI}}#art-z9_abs-z4' target='_blank' rel='noopener'>§9 IV S.1</a>"]
+    E1 --> J
+    J --> K["Pfand wird innerhalb der<br/>maßgeblichen Frist verwertet"]
+
+    style K fill:#d4edda,stroke:#2d8a4a
+    style I fill:#fff3cd,stroke:#c9a227

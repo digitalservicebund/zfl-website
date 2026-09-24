@@ -17,7 +17,15 @@ visOptions:
     visType: flowchart
     filename: kuendigungsentschaedigung
     articles: ["§11"]
+  - name: "Entschädigung & Ersatzland: Beteiligte"
+    visType: swimlane
+    filename: entschaedigung_ersatzland
+    articles: ["§11", "§14"]
   - name: Enteignungsverfahren
     visType: flowchart
     filename: enteignung
     articles: ["§15"]
+  - name: Akteure und Zuständigkeiten
+    visType: actors
+    filename: akteure
+    articles: []

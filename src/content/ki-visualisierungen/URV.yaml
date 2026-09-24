@@ -10,7 +10,7 @@ visOptions:
     filename: identifikation
     articles: ["§3a"]
   - name: Datenübermittlung & Prüfung
-    visType: flowchart
+    visType: swimlane
     filename: datenuebermittlung_pruefung
     articles: ["§§10-12"]
   - name: Einsichtnahme ins Register
@@ -21,3 +21,7 @@ visOptions:
     visType: flowchart
     filename: aktualisierungsfristen
     articles: ["§5"]
+  - name: Akteure und Zuständigkeiten
+    visType: actors
+    filename: akteure
+    articles: []

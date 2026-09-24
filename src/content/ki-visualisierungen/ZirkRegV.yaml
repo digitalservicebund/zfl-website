@@ -6,7 +6,7 @@ visOptions:
     filename: datenerhebung
     articles: ["§3"]
   - name: Datenverwendung
-    visType: flowchart
+    visType: swimlane
     filename: datenverwendung
     articles: ["§4"]
   - name: Löschfristen

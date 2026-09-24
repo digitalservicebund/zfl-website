@@ -18,6 +18,14 @@ visOptions:
     filename: lotteriesteuerbefreiung
     articles: ["§28", "§32"]
   - name: Besteuerungsverfahren
-    visType: flowchart
+    visType: swimlane
     filename: besteuerungsverfahren
     articles: ["§12", "§13", "§58", "§59"]
+  - name: Zuweisungsverfahren
+    visType: swimlane
+    filename: zuweisungsverfahren
+    articles: ["§7"]
+  - name: Akteure und Zuständigkeiten
+    visType: actors
+    filename: akteure
+    articles: []

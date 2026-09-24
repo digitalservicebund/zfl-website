@@ -1,13 +1,13 @@
 ---
-summary: "Zeigt, wie ein bei der Pfandverwertung entstandener Überschuss mit Mindererlösen aus früheren Vereinbarungen verrechnet wird und innerhalb welcher Frist der Pfandleiher ihn an die zuständige Behörde abführen muss, andernfalls droht eine Ordnungswidrigkeit."
+summary: "Zeigt, was mit einem bei der Pfandverwertung entstandenen Überschuss geschieht: Nach Ablauf von drei Jahren darf der Pfandleiher ihn mit Mindererlösen aus früheren Vereinbarungen mit demselben Verpfänder verrechnen und muss den Rest fristgerecht an die zuständige Behörde abführen, andernfalls droht eine Ordnungswidrigkeit."
 ---
 flowchart TD
-    A["Pfand wird verwertet; eine<br/>Vereinbarung nach<br/><a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I Nr.2</a><br/>besteht"] --> B["Nicht zur Befriedigung<br/>benötigter und nicht an den<br/>Verpfänder ausgezahlter<br/>Erlösteil = Überschuss<br/>— <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I Nr.2</a>"]
-    B --> C{"Bestehen Mindererlöse aus<br/>früheren Vereinbarungen nach<br/>§5 mit demselben Verpfänder?<br/>— <a href='{{ELI}}#art-z11_abs-z2' target='_blank' rel='noopener'>§11 II</a>"}
-    C -->|Ja| D["Pfandleiher darf sich aus<br/>dem Überschuss auch wegen<br/>des Mindererlöses befriedigen<br/>— <a href='{{ELI}}#art-z11_abs-z2' target='_blank' rel='noopener'>§11 II</a>"]
-    C -->|Nein| E["3-Jahres-Frist ab Ablauf des<br/>Verwertungsjahres läuft ab<br/>— <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I Nr.2</a>"]
-    D --> E
-    E --> F{"Verlängert die Behörde die<br/>Monatsfrist auf Antrag des<br/>Pfandleihers aus wichtigem<br/>Grund?<br/>— <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I</a>"}
+    A["Pfand wird verwertet; eine<br/>Vereinbarung nach<br/><a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I Nr.2</a><br/>besteht"] --> B["Erlösteil, der dem Pfandleiher<br/>nicht zu seiner Befriedigung<br/>gebührt = Überschuss<br/>— <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I Nr.2</a>"]
+    B --> E["3 Jahre nach Ablauf des<br/>Verwertungsjahres: Überschuss,<br/>soweit nicht an den Verpfänder<br/>ausgezahlt, ist abzuführen oder<br/>nach §11 II zu verrechnen;<br/>damit verfällt er<br/>— <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I Nr.2</a>"]
+    E --> C{"Stehen dem Überschuss<br/>Mindererlöse aus früheren<br/>Vereinbarungen nach §5 mit<br/>demselben Verpfänder gegenüber?<br/>— <a href='{{ELI}}#art-z11_abs-z2' target='_blank' rel='noopener'>§11 II</a>"}
+    C -->|Ja| D["Pfandleiher darf sich aus<br/>dem Überschuss auch wegen<br/>des Mindererlöses befriedigen;<br/>nur der Rest ist abzuführen<br/>— <a href='{{ELI}}#art-z11_abs-z2' target='_blank' rel='noopener'>§11 II</a>"]
+    C -->|Nein| F
+    D --> F{"Verlängert die Behörde die<br/>Monatsfrist auf Antrag des<br/>Pfandleihers aus wichtigem<br/>Grund?<br/>— <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I</a>"}
     F -->|Ja| G["Verlängerte Frist gilt"]
     F -->|Nein| H["Reguläre Frist: 1 Monat nach<br/>Ablauf der 3-Jahres-Frist<br/>— <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I S.1</a>"]
     G --> I{"Führt der Pfandleiher den<br/>Überschuss innerhalb der<br/>Frist an die zuständige<br/>Behörde ab?"}

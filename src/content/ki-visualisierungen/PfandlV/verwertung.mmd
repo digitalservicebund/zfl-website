@@ -1,25 +1,41 @@
 ---
-summary: "Zeigt, ab wann ein Pfandleiher nach Fälligkeit des Darlehens zur Verwertung des Pfandes berechtigt ist, welche Verwertungsfrist gilt und welche Bekanntmachungspflichten vor einer Versteigerung einzuhalten sind."
+summary: "Zeigt, wann der Pfandleiher nach Fälligkeit des Darlehens das Pfand verwerten darf und muss, wie Zustimmung und Verlangen des Verpfänders sowie eine Fristverlängerung durch die zuständige Behörde darauf einwirken und welche Bekanntmachung vor der Versteigerung nötig ist."
 ---
-flowchart TD
-    A["Fälligkeit des gesamten<br/>Darlehens ist eingetreten<br/>— <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 I</a>"] --> B{"Stimmt der Verpfänder nach<br/>Fälligkeit einer früheren<br/>Verwertung zu?<br/>— <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 I</a>"}
-    B -->|Ja| C1["Verwertungsberechtigung<br/>tritt sofort ein"]
-    B -->|Nein| C2["Verwertungsberechtigung tritt<br/>frühestens 1 Monat nach<br/>Fälligkeit ein<br/>— <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 I</a>"]
-    C1 --> D{"Andere Verwertungsfrist auf<br/>Verlangen des Verpfänders<br/>vereinbart?<br/>— <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 III</a>"}
-    C2 --> D
-    D -->|Ja| E1["Vereinbarte Frist gilt<br/>(gesetzliche 6-Monats-Frist<br/>nicht anwendbar)<br/>— <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 III</a>"]
-    D -->|Nein| E2{"Verhindert eine gerichtliche<br/>oder behördliche Maßnahme<br/>die fristgerechte Verwertung?<br/>— <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II S.3</a>"}
-    E2 -->|Ja| F1["Frist gehemmt bis zur<br/>Aufhebung der Maßnahme;<br/>Hemmungszeitraum zählt<br/>nicht mit<br/>— <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II S.3</a>"]
-    E2 -->|Nein| F2{"Verlängert die zuständige<br/>Behörde die 6-Monats-Frist auf<br/>Antrag aus wichtigem Grund?<br/>— <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II S.2</a>"}
-    F1 --> G["Verwertungsfrist: 6 Monate<br/>zzgl. Hemmungszeitraum<br/>— <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II</a>"]
-    F2 -->|Ja| G
-    F2 -->|Nein| H["Verwertungsfrist: 6 Monate<br/>nach Eintritt der<br/>Verwertungsberechtigung<br/>— <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II S.1</a>"]
-    E1 --> I{"Wird die Versteigerung<br/>mindestens 1 Woche und<br/>höchstens 2 Wochen vorher in<br/>Zeitung oder auf Homepage<br/>bekanntgemacht (Ort, Zeit,<br/>Pfandbezeichnung,<br/>Vertragsnummern)?<br/>— <a href='{{ELI}}#art-z9_abs-z4' target='_blank' rel='noopener'>§9 IV</a>"}
-    G --> I
-    H --> I
-    I -->|Ja| J["Pfand wird fristgerecht<br/>und formgerecht verwertet"]
-    I -->|Nein| K["Ordnungswidrigkeit<br/>— <a href='{{ELI}}/art-z12a' target='_blank' rel='noopener'>§12a Nr.4</a>"]
+swimlane-beta TD
+    subgraph VP["Verpfänder"]
+        zustimmung("Kann nach Eintritt der Fälligkeit<br/>einer früheren Verwertung<br/>zustimmen — <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 I</a>")
+        verlangen{"Verlangt eine andere<br/>Verwertungsfrist, die mit dem<br/>Pfandleiher vereinbart wird?<br/>— <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 III</a>"}
+    end
 
-    style J fill:#d4edda,stroke:#2d8a4a
-    style K fill:#f8d7da,stroke:#c0392b
-    style F1 fill:#fff3cd,stroke:#c9a227
+    subgraph PL["Pfandleiher"]
+        start(["Fälligkeit des gesamten<br/>Darlehens tritt ein<br/>— <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 I</a>"])
+        berechtigt["Verwertungsberechtigung: darf sich<br/>frühestens 1 Monat nach Fälligkeit aus<br/>dem Pfand befriedigen, bei Zustimmung<br/>des Verpfänders früher — <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 I</a>"]
+        frist6["Muss spätestens 6 Monate nach Eintritt der<br/>Verwertungsberechtigung verwerten — <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II S.1</a><br/>(gehemmt, solange eine gerichtliche oder<br/>behördliche Maßnahme die fristgerechte<br/>Verwertung verhindert — <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II S.3</a>)"]
+        antrag{"Antrag auf Verlängerung<br/>aus wichtigem Grund?<br/>— <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II S.2</a>"}
+        bekanntmachung["Veranlasst Bekanntmachung der Versteigerung<br/>mind. 1 und höchstens 2 Wochen vorher in einer<br/>Tageszeitung, sonstigen Zeitung oder auf seiner<br/>Homepage (Ort, Zeit, allgemeine Bezeichnung der<br/>Pfänder, Name/Firma, Vertragsnummern oder<br/>Serie, Zeitraum der Verpfändungen) — <a href='{{ELI}}#art-z9_abs-z4' target='_blank' rel='noopener'>§9 IV</a>"]
+        pruefung{"Rechtzeitig und vorschrifts-<br/>mäßig bekanntgemacht und<br/>fristgerecht verwertet?"}
+        verwertet(["Pfand wird fristgerecht<br/>versteigert"])
+        owi(["Ordnungswidrigkeit bei nicht rechtzeitiger<br/>oder nicht vorschriftsmäßiger Bekanntmachung<br/>oder Verwertung nach Ablauf der Frist<br/>nach §9 II S.1 — <a href='{{ELI}}/art-z12a' target='_blank' rel='noopener'>§12a Nr.4</a>"])
+    end
+
+    subgraph BH["Zuständige Behörde"]
+        verlaengerung["Kann die Frist auf Antrag<br/>aus wichtigem Grund verlängern<br/>— <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II S.2</a>"]
+    end
+
+    start --> berechtigt
+    zustimmung -.-> berechtigt
+    berechtigt --> verlangen
+    verlangen -->|"Ja: vereinbarte Frist gilt,<br/>§9 II S.1 findet keine<br/>Anwendung — <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 III</a>"| bekanntmachung
+    verlangen -->|Nein| frist6
+    frist6 --> antrag
+    antrag -->|Ja| verlaengerung
+    antrag -->|Nein| bekanntmachung
+    verlaengerung -->|"verlängerte oder<br/>6-Monats-Frist"| bekanntmachung
+    bekanntmachung --> pruefung
+    pruefung -->|Ja| verwertet
+    pruefung -->|Nein| owi
+    start ~~~ zustimmung
+    verwertet ~~~ owi
+
+    style verwertet fill:#d4edda,stroke:#2d8a4a
+    style owi fill:#f8d7da,stroke:#c0392b

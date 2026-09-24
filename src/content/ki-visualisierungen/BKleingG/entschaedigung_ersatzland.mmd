@@ -1,0 +1,39 @@
+---
+summary: "Zeigt, wer nach einer Kündigung des Kleingartenpachtvertrags nach §9 I Nr.2 bis 6 was tut: Der Pächter erhält eine Entschädigung vom Verpächter oder vom Bedarfsträger; bei Dauerkleingärten stellt die Gemeinde Ersatzland bereit, wofür der Bedarfsträger ihr einen Ausgleich leistet."
+---
+swimlane-beta TD
+    subgraph VP["Verpächter"]
+        start(["Kündigt den Kleingartenpachtvertrag<br/>— <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 I</a>"])
+        grund{"Kündigung nach §9 I<br/>Nr.2 bis 6? — <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I S.1</a>"}
+        keine(["Kein Entschädigungsanspruch<br/>nach §11"])
+        zahltVP(["Verpächter ist zur Entschädigung<br/>verpflichtet — <a href='{{ELI}}#art-z11_abs-z2' target='_blank' rel='noopener'>§11 II S.1</a>"])
+    end
+
+    subgraph PA["Pächter"]
+        anspruch["Anspruch auf angemessene Entschädigung<br/>für Anpflanzungen und Anlagen<br/>— <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I</a>"]
+        faellig["Anspruch wird fällig, sobald das Pacht-<br/>verhältnis beendet und der Kleingarten<br/>geräumt ist — <a href='{{ELI}}#art-z11_abs-z3' target='_blank' rel='noopener'>§11 III</a>"]
+    end
+
+    subgraph GE["Gemeinde"]
+        ersatzland["Bei Dauerkleingärten: stellt geeignetes<br/>Ersatzland bereit oder beschafft es, es sei denn,<br/>sie ist dazu außerstande — <a href='{{ELI}}#art-z14_abs-z1' target='_blank' rel='noopener'>§14 I</a>; es soll bei<br/>Räumung zur Verfügung stehen — <a href='{{ELI}}#art-z14_abs-z3' target='_blank' rel='noopener'>§14 III</a>"]
+    end
+
+    subgraph BT["Bedarfsträger (nimmt die Fläche in Anspruch)"]
+        ausgleich(["Leistet an die Gemeinde einen Ausgleichs-<br/>betrag in Höhe des Wertunterschieds zwischen<br/>Kleingartenfläche und Ersatzland — <a href='{{ELI}}#art-z14_abs-z2' target='_blank' rel='noopener'>§14 II</a>"])
+        zahltBT(["Ist zur Entschädigung verpflichtet<br/>— <a href='{{ELI}}#art-z11_abs-z2' target='_blank' rel='noopener'>§11 II S.2</a>"])
+    end
+
+    start --> grund
+    grund -->|Nein| keine
+    grund -->|Ja| anspruch
+    grund -->|"Nr.5 oder 6 bei<br/>Dauerkleingarten"| ersatzland
+    ersatzland --> ausgleich
+    anspruch --> faellig
+    faellig -->|"Nr.2-4"| zahltVP
+    faellig -->|"Nr.5 oder 6"| zahltBT
+    keine ~~~ anspruch
+
+    style keine fill:#f8d7da,stroke:#c0392b
+    style zahltVP fill:#d4edda,stroke:#2d8a4a
+    style zahltBT fill:#d4edda,stroke:#2d8a4a
+    style ausgleich fill:#d4edda,stroke:#2d8a4a

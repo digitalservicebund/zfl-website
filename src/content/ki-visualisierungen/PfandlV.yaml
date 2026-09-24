@@ -10,9 +10,13 @@ visOptions:
     filename: pfandschein
     articles: ["§3", "§6"]
   - name: Verwertung des Pfandes
-    visType: flowchart
+    visType: swimlane
     filename: verwertung
     articles: ["§9", "§12a"]
+  - name: Verwertungsfristen
+    visType: flowchart
+    filename: verwertungsfristen
+    articles: ["§9"]
   - name: Überschüsse aus Verwertung
     visType: flowchart
     filename: ueberschuss
