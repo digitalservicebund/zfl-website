@@ -1,0 +1,56 @@
+var e=`---
+summary: "Zeigt die Behörden und Stellen, die das DDG für die Durchsetzung des Digital Services Act einrichtet oder einbindet, ihre Zuständigkeiten und wie sie mit der Koordinierungsstelle für digitale Dienste zusammenarbeiten, berichten und beraten."
+---
+flowchart LR
+    KDD["<b>Koordinierungsstelle für digitale Dienste</b><br/>Durchsetzung und Überwachung des DSA — <a href='{{ELI}}#art-z14_abs-z1' target='_blank' rel='noopener'>§14 I</a><br/>völlig unabhängig — <a href='{{ELI}}/art-z15' target='_blank' rel='noopener'>§15</a><br/>zentrale Beschwerdestelle — <a href='{{ELI}}#art-z20_abs-z1' target='_blank' rel='noopener'>§20 I</a>"]
+
+    subgraph Bund["Bundesbehörden"]
+        BNetzA["<b>Bundesnetzagentur</b><br/>zuständige Behörde nach Art. 49 DSA — <a href='{{ELI}}#art-z12_abs-z1' target='_blank' rel='noopener'>§12 I</a><br/>zuständig für die P2B-VO — <a href='{{ELI}}/art-z22' target='_blank' rel='noopener'>§22</a><br/>zuständig für Kurzzeitvermietung — <a href='{{ELI}}/art-z22a' target='_blank' rel='noopener'>§22a</a><br/>Verbindungsstelle — <a href='{{ELI}}/art-z23' target='_blank' rel='noopener'>§23</a>"]
+        BzKJ["<b>Bundeszentrale für Kinder- und Jugendmedienschutz</b><br/>zuständig für Art. 14 III und 28 I DSA — <a href='{{ELI}}#art-z12_abs-z2' target='_blank' rel='noopener'>§12 II</a><br/>mit Stelle zur Durchsetzung von Kinderrechten — <a href='{{ELI}}#art-z12_abs-z2' target='_blank' rel='noopener'>§12 II</a>"]
+        BfDI["<b>Bundesbeauftragte/r für den Datenschutz</b><br/>zuständig für Art. 26 III und 28 II, III DSA — <a href='{{ELI}}#art-z12_abs-z3' target='_blank' rel='noopener'>§12 III</a>"]
+        BKA["<b>Bundeskriminalamt</b><br/>Zentralstelle für Meldungen nach Art. 18 DSA — <a href='{{ELI}}/art-z13' target='_blank' rel='noopener'>§13</a><br/>leitet an Strafverfolgungsbehörden weiter — <a href='{{ELI}}/art-z13' target='_blank' rel='noopener'>§13</a>"]
+        BKartA["<b>Bundeskartellamt</b><br/>Wettbewerbsaufsicht, Schnittstellen zum DSA — <a href='{{ELI}}#art-z19_abs-z2' target='_blank' rel='noopener'>§19 II</a>"]
+    end
+
+    subgraph Weitere["Weitere Aufsichtsbehörden"]
+        LMR["<b>Nach Landesrecht benannte Stellen</b><br/>Jugendmedienschutz- und Einzelmaßnahmen nach JMStV — <a href='{{ELI}}#art-z12_abs-z2' target='_blank' rel='noopener'>§12 II S.2</a>"]
+        DSB["<b>Zuständige Datenschutzaufsichtsbehörde</b><br/>eingebunden, wenn Datenschutzrecht berührt ist — <a href='{{ELI}}#art-z19_abs-z1' target='_blank' rel='noopener'>§19 I</a>"]
+    end
+
+    subgraph Gremien["Parlament und Gremien"]
+        Parl["<b>Bundestag und Bundesrat</b><br/>erhalten den jährlichen Tätigkeitsbericht — <a href='{{ELI}}#art-z17_abs-z1' target='_blank' rel='noopener'>§17 I</a><br/>Bundestag schlägt Beiratsmitglieder vor — <a href='{{ELI}}#art-z21_abs-z4' target='_blank' rel='noopener'>§21 IV</a>"]
+        Beirat["<b>Beirat</b><br/>16 Mitglieder aus Wissenschaft, Zivilgesellschaft und Wirtschaftsverbänden — <a href='{{ELI}}#art-z21_abs-z2' target='_blank' rel='noopener'>§21 II</a>"]
+        EUGremium["<b>Europäisches Gremium für digitale Dienste</b><br/>Gremium nach Art. 61 DSA — <a href='{{ELI}}#art-z16_abs-z2' target='_blank' rel='noopener'>§16 II</a>"]
+    end
+
+    subgraph Verpflichtete["Verpflichtete"]
+        Anbieter["<b>Anbieter von Vermittlungsdiensten</b><br/>müssen DSA-Pflichten erfüllen — <a href='{{ELI}}#art-z27_abs-z2' target='_blank' rel='noopener'>§27 II</a><br/>erstatten Aufwendungen bei Verstößen — <a href='{{ELI}}#art-z24_abs-z5' target='_blank' rel='noopener'>§24 V</a>"]
+    end
+
+    BNetzA -->|"beherbergt, schlägt Leitung vor — <a href='{{ELI}}#art-z14_abs-z1' target='_blank' rel='noopener'>§14 I</a>, §16 V"| KDD
+    KDD <-->|"Zusammenarbeit, Datenaustausch — <a href='{{ELI}}#art-z18_abs-z1' target='_blank' rel='noopener'>§18 I</a>, III"| BzKJ
+    KDD <-->|"Zusammenarbeit, Datenaustausch — <a href='{{ELI}}#art-z18_abs-z1' target='_blank' rel='noopener'>§18 I</a>, III"| BfDI
+    KDD <-->|"Zusammenarbeit — <a href='{{ELI}}#art-z18_abs-z1' target='_blank' rel='noopener'>§18 I</a>"| LMR
+    KDD <-->|"Zusammenarbeit, Datenaustausch — <a href='{{ELI}}#art-z19_abs-z3' target='_blank' rel='noopener'>§19 III</a>"| BKA
+    KDD <-->|"Informationsaustausch — <a href='{{ELI}}#art-z19_abs-z2' target='_blank' rel='noopener'>§19 II</a>"| BKartA
+    BNetzA <-->|"Zusammenarbeit zur P2B-VO — <a href='{{ELI}}#art-z22_abs-z3' target='_blank' rel='noopener'>§22 III</a>"| BKartA
+    KDD -->|"entscheidet im Benehmen — <a href='{{ELI}}#art-z19_abs-z1' target='_blank' rel='noopener'>§19 I</a>"| DSB
+    KDD -->|"vertritt Deutschland — <a href='{{ELI}}#art-z16_abs-z2' target='_blank' rel='noopener'>§16 II</a>"| EUGremium
+    KDD -->|"Tätigkeitsbericht — <a href='{{ELI}}#art-z17_abs-z1' target='_blank' rel='noopener'>§17 I</a>, II"| Parl
+    Beirat -.-|"berät, schlägt Empfehlungen vor — <a href='{{ELI}}#art-z21_abs-z3' target='_blank' rel='noopener'>§21 III</a>"| KDD
+    Parl -->|"schlägt Mitglieder vor — <a href='{{ELI}}#art-z21_abs-z4' target='_blank' rel='noopener'>§21 IV</a>"| Beirat
+    Beirat -->|"jährlicher Bericht — <a href='{{ELI}}#art-z21_abs-z13' target='_blank' rel='noopener'>§21 XIII</a>"| Parl
+    KDD -->|"Abhilfeverlangen, Anordnungen — <a href='{{ELI}}#art-z24_abs-z1' target='_blank' rel='noopener'>§24 I</a>, §27"| Anbieter
+    Anbieter -->|"Meldung Straftatverdacht — <a href='{{ELI}}/art-z13' target='_blank' rel='noopener'>§13</a>"| BKA
+
+    classDef zentral fill:#fff3cd,stroke:#c9a227,stroke-width:2px
+    classDef behoerde fill:#e8f0fe,stroke:#3b6fd4
+    classDef privat fill:#f5f5f5,stroke:#999
+    classDef parlament fill:#ede7f6,stroke:#7e57c2
+    classDef gremium fill:#e6f4ea,stroke:#2d8a4a
+    class KDD zentral
+    class BNetzA,BzKJ,BfDI,BKA,BKartA,LMR,DSB behoerde
+    class Anbieter privat
+    class Parl parlament
+    class Beirat,EUGremium gremium
+`;export{e as default};

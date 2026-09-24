@@ -1,0 +1,53 @@
+var e=`---
+summary: "Zeigt die Akteure des KCanG und ihre Beziehungen: Die zuständige Landesbehörde erteilt Erlaubnisse für Anbauvereinigungen und überwacht sie, arbeitet mit Behörden anderer Länder zusammen und liefert Daten für die vom Bundesministerium für Gesundheit verantwortete Evaluation; daneben stehen Präventionsaufgaben von BZgA, Präventionsbeauftragten und Suchtberatung."
+---
+flowchart LR
+    zustBehoerde["<b>Zuständige Behörde</b><br/>Erlaubnis und Überwachung der Anbauvereinigungen — <a href='{{ELI}}#art-z33_abs-z1' target='_blank' rel='noopener'>§33 I</a>"]
+
+    subgraph Laender["Länder"]
+        andereLaender["<b>Behörden anderer Länder</b><br/>Kontrollen bei länderübergreifender Erlaubnis — <a href='{{ELI}}#art-z33_abs-z1' target='_blank' rel='noopener'>§33 I</a>"]
+        landesregierung["<b>Landesregierungen</b><br/>Bestimmen die zuständigen Behörden — <a href='{{ELI}}#art-z33_abs-z3' target='_blank' rel='noopener'>§33 III</a><br/>Können Zahl der Anbauvereinigungen begrenzen — <a href='{{ELI}}/art-z30' target='_blank' rel='noopener'>§30</a>"]
+    end
+
+    subgraph AVG["Anbauvereinigung"]
+        av["<b>Anbauvereinigung</b><br/>Verein oder Genossenschaft für gemeinschaftlichen Eigenanbau — <a href='{{ELI}}/art-z1' target='_blank' rel='noopener'>§1 Nr. 13</a><br/>Weitergabe an Mitglieder — <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I</a>"]
+        vorstand["<b>Vorstand</b><br/>Vertritt die Vereinigung, muss Mitglied sein — <a href='{{ELI}}#art-z16_abs-z6' target='_blank' rel='noopener'>§16 VI</a><br/>Muss zuverlässig sein — <a href='{{ELI}}#art-z12_abs-z1' target='_blank' rel='noopener'>§12 I</a>"]
+        praevention["<b>Präventionsbeauftragte/r</b><br/>Ansprechperson für Suchtprävention — <a href='{{ELI}}#art-z23_abs-z4' target='_blank' rel='noopener'>§23 IV</a><br/>Sichert das Jugendschutzkonzept — <a href='{{ELI}}#art-z23_abs-z4' target='_blank' rel='noopener'>§23 IV</a>"]
+        mitglieder["<b>Mitglieder</b><br/>Volljährig, Wohnsitz in Deutschland — <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 I</a><br/>Wirken aktiv beim Anbau mit — <a href='{{ELI}}#art-z17_abs-z2' target='_blank' rel='noopener'>§17 II</a>"]
+    end
+
+    subgraph Bund["Bund"]
+        bmg["<b>Bundesministerium für Gesundheit</b><br/>Verantwortet die Evaluation des Gesetzes — <a href='{{ELI}}#art-z43_abs-z2' target='_blank' rel='noopener'>§43 II</a>"]
+        dritte["<b>Unabhängige Dritte</b><br/>Führen die Evaluation durch, legen Berichte vor — <a href='{{ELI}}#art-z43_abs-z2' target='_blank' rel='noopener'>§43 II</a>"]
+        bzga["<b>Bundeszentrale für gesundheitliche Aufklärung</b><br/>Digitale Informationsplattform, Prävention, Beratung — <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 I</a>"]
+    end
+
+    subgraph Weitere["Weitere Akteure"]
+        sucht["<b>Suchtberatungsstellen vor Ort</b><br/>Zugang zum Suchthilfesystem bei riskantem Konsum — <a href='{{ELI}}#art-z23_abs-z5' target='_blank' rel='noopener'>§23 V</a>"]
+    end
+
+    zustBehoerde -->|"Erlaubnis, Auflagen, Widerruf — <a href='{{ELI}}#art-z11_abs-z3' target='_blank' rel='noopener'>§11 III</a>, §13 IV, §15 I"| av
+    zustBehoerde -->|"Überwachung, Anordnungen — <a href='{{ELI}}/art-z27' target='_blank' rel='noopener'>§27</a>, §28"| av
+    av -->|"Berichte, Meldungen — <a href='{{ELI}}/art-z26' target='_blank' rel='noopener'>§26</a>, §29"| zustBehoerde
+    zustBehoerde <-->|"Zusammenarbeit — <a href='{{ELI}}#art-z33_abs-z1' target='_blank' rel='noopener'>§33 I</a>, §33 II"| andereLaender
+    landesregierung -->|"bestimmt Zuständigkeit — <a href='{{ELI}}#art-z33_abs-z3' target='_blank' rel='noopener'>§33 III</a>"| zustBehoerde
+    zustBehoerde -->|"jährliche Datenübermittlung — <a href='{{ELI}}#art-z43_abs-z3' target='_blank' rel='noopener'>§43 III</a>"| bmg
+    bmg -->|"Beauftragung — <a href='{{ELI}}#art-z43_abs-z2' target='_blank' rel='noopener'>§43 II</a>"| dritte
+    av -.-|"ermöglicht Befragungen — <a href='{{ELI}}#art-z43_abs-z4' target='_blank' rel='noopener'>§43 IV</a>"| dritte
+    bzga -->|"Informationsmaterial — <a href='{{ELI}}#art-z8_abs-z2' target='_blank' rel='noopener'>§8 II</a>"| av
+    vorstand -->|"Ernennung — <a href='{{ELI}}#art-z23_abs-z4' target='_blank' rel='noopener'>§23 IV</a>"| praevention
+    praevention -->|"Beratung zur Suchtprävention — <a href='{{ELI}}#art-z23_abs-z4' target='_blank' rel='noopener'>§23 IV</a>"| mitglieder
+    av -->|"Weitergabe und Information — <a href='{{ELI}}/art-z19' target='_blank' rel='noopener'>§19</a>, §21 III"| mitglieder
+    vorstand -.-|"muss Mitglied sein — <a href='{{ELI}}#art-z16_abs-z6' target='_blank' rel='noopener'>§16 VI</a>"| mitglieder
+    av <-->|"Kooperation — <a href='{{ELI}}#art-z23_abs-z5' target='_blank' rel='noopener'>§23 V</a>"| sucht
+
+    classDef zentral fill:#fff3cd,stroke:#c9a227,stroke-width:2px
+    classDef behoerde fill:#e8f0fe,stroke:#3b6fd4
+    classDef privat fill:#f5f5f5,stroke:#999
+    classDef parlament fill:#ede7f6,stroke:#7e57c2
+    classDef gremium fill:#e6f4ea,stroke:#2d8a4a
+    class zustBehoerde zentral
+    class andereLaender,bzga behoerde
+    class av,vorstand,praevention,mitglieder,sucht,dritte privat
+    class landesregierung,bmg parlament
+`;export{e as default};

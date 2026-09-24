@@ -1,0 +1,64 @@
+var e=`---
+summary: "Zeigt die behördliche Überwachung von Anbauvereinigungen nach dem KCanG: Meldungen der Anbauvereinigung zu Gesundheitsrisiken oder abhandengekommenem Cannabis, Kontrollen und Stichproben der Behörde, die abgestuften Anordnungen bei begründetem Verdacht und deren Aufhebung."
+---
+swimlane-beta TD
+    subgraph AV["Anbauvereinigung"]
+        risiko(["Weiß oder vermutet ein über typische<br/>Gefahren hinausgehendes Gesundheitsrisiko<br/>des weitergegebenen Cannabis<br/>— <a href='{{ELI}}#art-z26_abs-z4' target='_blank' rel='noopener'>§26 IV S.1</a>"])
+        abhanden(["Verdacht auf Abhandenkommen<br/>oder unerlaubte Weitergabe<br/>— <a href='{{ELI}}#art-z26_abs-z5' target='_blank' rel='noopener'>§26 V S.1</a>"])
+        berichte["Jahresmeldungen bis 31.01.,<br/>Aufzeichnungen auf Verlangen<br/>— <a href='{{ELI}}#art-z26_abs-z2' target='_blank' rel='noopener'>§26 II S.1</a>, <a href='{{ELI}}#art-z26_abs-z3' target='_blank' rel='noopener'>§26 III</a>"]
+        meldungRisiko["Informiert unverzüglich<br/>die Behörde — <a href='{{ELI}}#art-z26_abs-z4' target='_blank' rel='noopener'>§26 IV S.1</a>"]
+        eigeneMassnahmen["Trifft unverzüglich Maßnahmen:<br/>Mitglieder informieren, Rückruf,<br/>Rücknahme, Vernichtung<br/>— <a href='{{ELI}}#art-z26_abs-z4' target='_blank' rel='noopener'>§26 IV S.2</a>"]
+        meldungAbh["Informiert unverzüglich die Behörde<br/>(Auskunftsverweigerungsrecht bei<br/>Selbstbelastung) — <a href='{{ELI}}#art-z26_abs-z5' target='_blank' rel='noopener'>§26 V</a>"]
+        ergaenzend["Übermittelt ergänzende<br/>Informationen — <a href='{{ELI}}#art-z27_abs-z2' target='_blank' rel='noopener'>§27 II S.2</a>"]
+        hinweisMitwirkung["Duldungs-, Mitwirkungs- und<br/>Auskunftspflichten, Auskunfts-<br/>verweigerungsrecht bei Selbstbelastung<br/>— <a href='{{ELI}}/art-z29' target='_blank' rel='noopener'>§29</a>"]
+        umsetzung["Setzt Anordnung um; Widerspruch<br/>und Klage ohne aufschiebende<br/>Wirkung — <a href='{{ELI}}#art-z27_abs-z6' target='_blank' rel='noopener'>§27 VI</a>"]
+        darlegung["Legt schlüssig dar, dass wirksame<br/>Maßnahmen zur Einhaltung<br/>getroffen wurden — <a href='{{ELI}}#art-z27_abs-z5' target='_blank' rel='noopener'>§27 V</a>"]
+    end
+
+    subgraph BH["Zuständige Behörde"]
+        kontrolle["Regelmäßige und anlassbezogene<br/>Kontrollen vor Ort und Stichproben<br/>— <a href='{{ELI}}#art-z27_abs-z1' target='_blank' rel='noopener'>§27 I</a>; Befugnisse<br/>— <a href='{{ELI}}/art-z28' target='_blank' rel='noopener'>§28</a>"]
+        nachfrage{"Ergänzende Informationen<br/>zur Risikoprüfung nötig?<br/>— <a href='{{ELI}}#art-z27_abs-z2' target='_blank' rel='noopener'>§27 II S.2</a>"}
+        verdacht{"Begründeter Verdacht auf Verstoß<br/>gegen Anforderungen, Schutzvorgaben<br/>oder Auflagen? — <a href='{{ELI}}#art-z27_abs-z3' target='_blank' rel='noopener'>§27 III S.1</a>"}
+        keineMassnahme(["Keine Anordnung,<br/>weitere Überwachung"])
+        rasch{"Risikobewertung: Gesundheitsrisiko<br/>erfordert rasches Eingreifen?<br/>— <a href='{{ELI}}#art-z27_abs-z4' target='_blank' rel='noopener'>§27 IV</a>"}
+        anordnung["Anordnungen: Weitergabe erst bei<br/>Konformität, Prüfpflicht, Warnung,<br/>Beseitigung von Werbung<br/>— <a href='{{ELI}}#art-z27_abs-z3' target='_blank' rel='noopener'>§27 III Nr.1, 2, 7, 8</a>"]
+        eingriff["Zusätzlich: vorübergehendes Anbau-/<br/>Weitergabeverbot, Rückruf, Sicherstellung<br/>und Vernichtung, Untersagung<br/>— <a href='{{ELI}}#art-z27_abs-z3' target='_blank' rel='noopener'>§27 III Nr.3-6</a>"]
+        behoerdeWarnt["Warnt selbst Öffentlichkeit<br/>oder Mitglieder — <a href='{{ELI}}#art-z27_abs-z2' target='_blank' rel='noopener'>§27 II S.3</a>"]
+        aufhebung(["Widerruft oder ändert<br/>die Maßnahme — <a href='{{ELI}}#art-z27_abs-z5' target='_blank' rel='noopener'>§27 V</a>"])
+    end
+
+    subgraph MG["Mitglieder / Öffentlichkeit"]
+        hinweise("Beschwerden und Hinweise<br/>über Anbauvereinigungen<br/>— <a href='{{ELI}}#art-z27_abs-z2' target='_blank' rel='noopener'>§27 II S.1</a>")
+        gewarnt("Werden gewarnt bzw.<br/>Cannabis wird zurückgerufen")
+    end
+
+    risiko --> meldungRisiko
+    risiko --> eigeneMassnahmen
+    eigeneMassnahmen -.-> gewarnt
+    eigeneMassnahmen -.->|"unterbleibt oder<br/>nicht rechtzeitig"| behoerdeWarnt
+    behoerdeWarnt --> gewarnt
+    meldungRisiko --> nachfrage
+    nachfrage -->|Ja| ergaenzend
+    nachfrage -->|Nein| verdacht
+    ergaenzend --> verdacht
+    abhanden --> meldungAbh
+    meldungAbh --> kontrolle
+    berichte -.-> kontrolle
+    hinweise -.-> kontrolle
+    kontrolle -.- hinweisMitwirkung
+    kontrolle --> verdacht
+    verdacht -->|Nein| keineMassnahme
+    verdacht -->|Ja| rasch
+    rasch -->|Nein| anordnung
+    rasch -->|Ja| eingriff
+    anordnung --> umsetzung
+    eingriff --> umsetzung
+    umsetzung --> darlegung
+    darlegung --> aufhebung
+
+    style aufhebung fill:#d4edda,stroke:#2d8a4a
+    style keineMassnahme fill:#d4edda,stroke:#2d8a4a
+    style eingriff fill:#f8d7da,stroke:#c0392b
+    style anordnung fill:#fff3cd,stroke:#c9a227
+    style hinweisMitwirkung fill:#f5f5f5,stroke:#999
+`;export{e as default};
