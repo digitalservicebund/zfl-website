@@ -2,17 +2,22 @@ title: Gesetz über einen nationalen Zertifikatehandel für Brennstoffemissionen
 eli: eli/bund/bgbl-1/2019/s2728/2025-03-06/1/deu
 visOptions:
   - name: Verantwortlicher-Bestimmung
+    visType: flowchart
     filename: verantwortlicher
     articles: ["§2", "§3"]
   - name: Emissionsberichterstattung & -abgabe
+    visType: flowchart
     filename: emissionsberichterstattung
     articles: ["§§6-8"]
   - name: Preispfad Festpreis/Versteigerung
+    visType: flowchart
     filename: preispfad
     articles: ["§10"]
   - name: Carbon-Leakage-Kompensation
+    visType: flowchart
     filename: carbon_leakage
     articles: ["§11"]
   - name: Sanktionen bei Pflichtverletzung
+    visType: flowchart
     filename: sanktionen
     articles: ["§§20-22"]

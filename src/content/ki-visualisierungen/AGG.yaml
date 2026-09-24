@@ -2,17 +2,22 @@ title: Allgemeines Gleichbehandlungsgesetz
 eli: eli/bund/bgbl-1/2006/s1897/2025-01-01/1/deu
 visOptions:
   - name: Prüfschema Benachteiligung
+    visType: flowchart
     filename: pruefschema_benachteiligung
     articles: ["§§1-5", "§§7-10", "§20", "§22"]
   - name: Rechtfertigung im Beschäftigungsverhältnis
+    visType: flowchart
     filename: rechtfertigung_beschaeftigung
     articles: ["§§7-10"]
   - name: Beschwerde- & Schutzpflichten
+    visType: flowchart
     filename: beschwerde_schutzpflichten
     articles: ["§§12-14"]
   - name: Entschädigungs- & Klagefristen
+    visType: flowchart
     filename: entschaedigung_fristen
     articles: ["§7", "§15"]
   - name: Zivilrechtliche Ansprüche
+    visType: flowchart
     filename: zivilrecht_ansprueche
     articles: ["§19", "§21"]

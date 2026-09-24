@@ -2,17 +2,22 @@ title: Gesetz über Teilzeitarbeit und befristete Arbeitsverträge
 eli: eli/bund/bgbl-1/2000/s1966/2022-08-01/1/deu
 visOptions:
   - name: Zulässigkeit der Befristung
+    visType: flowchart
     filename: befristung_zulaessigkeit
     articles: ["§14", "§16"]
   - name: Anspruch auf Arbeitszeitverringerung
+    visType: flowchart
     filename: verringerung_arbeitszeit
     articles: ["§8"]
   - name: Brückenteilzeit
+    visType: flowchart
     filename: bruecken_teilzeit
     articles: ["§8", "§9a"]
   - name: Verlängerung der Arbeitszeit
+    visType: flowchart
     filename: verlaengerung_arbeitszeit
     articles: ["§9"]
   - name: Folgen unwirksamer Befristung
+    visType: flowchart
     filename: unwirksame_befristung
     articles: ["§§15-17"]

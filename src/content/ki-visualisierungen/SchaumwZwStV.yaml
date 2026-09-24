@@ -2,17 +2,22 @@ title: Verordnung zur Durchführung des Schaumwein- und Zwischenerzeugnissteuerg
 eli: eli/bund/bgbl-1/2009/s3302/2023-02-13/1/deu
 visOptions:
   - name: Erlaubnisverfahren Steuerlager
+    visType: flowchart
     filename: erlaubnisverfahren
     articles: ["§§4-8"]
   - name: Beförderung mit e-Verwaltungsdokument
+    visType: flowchart
     filename: befoerderung_evd
     articles: ["§16", "§19", "§21"]
   - name: Ausfallverfahren bei Systemausfall
+    visType: flowchart
     filename: ausfallverfahren
     articles: ["§24", "§25", "§27", "§28"]
   - name: Unregelmäßigkeiten während der Beförderung
+    visType: flowchart
     filename: unregelmaessigkeiten
     articles: ["§29"]
   - name: Zerstörung, Verlust und Vernichtung
+    visType: flowchart
     filename: zerstoerung_verlust
     articles: ["§10", "§18"]

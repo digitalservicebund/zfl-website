@@ -6,17 +6,22 @@ title: Verordnung (EU) 2016/679 (Datenschutz-Grundverordnung)
 eli: ""
 visOptions:
   - name: Rechtmäßigkeit der Verarbeitung
+    visType: flowchart
     filename: rechtmaessigkeit
     articles: ["Art. 6"]
   - name: Auskunftsrecht und Fristen
+    visType: flowchart
     filename: auskunftsrecht_fristen
     articles: ["Art. 12"]
   - name: Meldung von Datenschutzverletzungen
+    visType: flowchart
     filename: datenpanne_meldung
     articles: ["Art. 33", "Art. 34"]
   - name: Datenschutz-Folgenabschätzung
+    visType: flowchart
     filename: folgenabschaetzung
     articles: ["Art. 35", "Art. 36"]
   - name: Internationale Datenübermittlung
+    visType: flowchart
     filename: drittlandtransfer
     articles: ["Art. 45", "Art. 46", "Art. 49"]

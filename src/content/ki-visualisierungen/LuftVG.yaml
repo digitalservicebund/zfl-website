@@ -2,17 +2,22 @@ title: Luftverkehrsgesetz
 eli: eli/bund/banz-at/1922/s681/2026-07-29/1/deu
 visOptions:
   - name: Betriebsgenehmigung Luftfahrtunternehmen
+    visType: flowchart
     filename: betriebsgenehmigung
     articles: ["§20", "§21a"]
   - name: Haftung für Fluggastschäden
+    visType: flowchart
     filename: haftung_fluggast
     articles: ["§§44-47", "§49a"]
   - name: Schlichtungsverfahren Fluggastrechte
+    visType: flowchart
     filename: schlichtungsverfahren
     articles: ["§§57-57b"]
   - name: Register über Betreiber unbemannter Fluggeräte
+    visType: flowchart
     filename: register_drohnenbetreiber
     articles: ["§66a"]
   - name: Ordnungswidrigkeiten beim Drohnenbetrieb
+    visType: flowchart
     filename: bussgeld_drohnenbetrieb
     articles: ["§58"]

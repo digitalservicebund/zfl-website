@@ -2,23 +2,30 @@ title: "Verordnung über Anforderungen an die kreislauforientierte Konstruktion 
 eli: "https://eur-lex.europa.eu/eli/reg/2026/1738/oj/deu"
 visOptions:
   - name: "Anwendungsbereich"
+    visType: flowchart
     filename: "anwendungsbereich"
     articles: ["Art. 2"]
   - name: "Verwertungsnachweis"
+    visType: flowchart
     filename: "verwertungsnachweis"
     articles: ["Art. 24", "Art. 25"]
   - name: "Behandlungspflichten"
+    visType: flowchart
     filename: "behandlungspflichten"
     articles: ["Art. 26-30"]
   - name: "Herstellerverantwortung"
+    visType: flowchart
     filename: "herstellerverantwortung"
     articles: ["Art. 17-19"]
   - name: "Ausfuhrkontrolle"
+    visType: flowchart
     filename: "ausfuhrkontrolle"
     articles: ["Art. 39-44"]
   - name: "Verkauf Gebrauchtfahrzeuge"
+    visType: flowchart
     filename: "verkauf_gebrauchtfahrzeuge"
     articles: ["Art. 36"]
   - name: "Reparaturwillen"
+    visType: flowchart
     filename: "reparaturwillen"
     articles: ["Art. 37", "Anhang I"]

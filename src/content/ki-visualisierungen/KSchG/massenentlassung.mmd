@@ -1,43 +1,55 @@
 ---
 summary: "Stellt den Ablauf einer Massenentlassungsanzeige nach dem KSchG dar: Unterrichtung und Beratung mit dem Betriebsrat, Anzeige bei der Agentur für Arbeit und die anschließende Sperrfrist bis zur Wirksamkeit der Entlassungen."
 ---
-sequenceDiagram
-    participant AG as Arbeitgeber
-    participant BR as Betriebsrat
-    participant AfA as Agentur für Arbeit
-
-    Note over AG: Beabsichtigt anzeigepflichtige<br/>Entlassung (Schwellenwerte §17 I)
-
-    AG->>BR: Rechtzeitige schriftliche Unterrichtung<br/>(Gründe, Zahl/Berufsgruppen, Zeitraum,<br/>Auswahl-/Abfindungskriterien) — §17 II
-    AG-->>AfA: Abschrift der Mitteilung an BR<br/>(mind. Angaben Nr.1-5) — §17 III S.1
-
-    AG->>BR: Beratung: Vermeidung/Einschränkung<br/>der Entlassungen, Folgenmilderung — §17 II S.2
-    BR-->>AG: Beratungsergebnis
-
-    alt Stellungnahme des Betriebsrats liegt vor
-        BR->>AG: Schriftliche Stellungnahme — §17 III S.2
-        AG->>AfA: Anzeige samt Stellungnahme des BR
-    else Keine Stellungnahme
-        AG->>AfA: Anzeige mit Glaubhaftmachung:<br/>BR mind. 2 Wochen vorher unterrichtet,<br/>Stand der Beratungen dargelegt — §17 III S.3
+swimlane-beta
+    subgraph AG["Arbeitgeber"]
+        start(["Beabsichtigt anzeigepflichtige Entlassung<br/>(Schwellenwerte) — §17 I"])
+        unterrichtung["Rechtzeitige schriftliche Unterrichtung des BR<br/>(Gründe, Zahl/Berufsgruppen, Zeitraum,<br/>Auswahl-/Abfindungskriterien) — §17 II"]
+        beratung["Beratung: Vermeidung/Einschränkung<br/>der Entlassungen, Folgenmilderung — §17 II S.2"]
+        anzeigeMit["Anzeige samt Stellungnahme des BR — §17 III S.2"]
+        anzeigeOhne["Anzeige mit Glaubhaftmachung:<br/>BR mind. 2 Wochen vorher unterrichtet,<br/>Stand der Beratungen dargelegt — §17 III S.3"]
+        abschriftAnzeige["Abschrift der Anzeige an BR — §17 III S.6"]
+        vorzeitig["Entlassungen können<br/>vorzeitig wirksam werden"]
+        einMonat["Entlassungen erst nach Ablauf<br/>eines Monats wirksam — §18 I"]
+        zweiMonate["Entlassungen erst nach Ablauf<br/>von bis zu 2 Monaten wirksam — §18 II"]
+        frist90{"Innerhalb 90 Tagen nach<br/>Zulässigkeit durchgeführt? — §18 IV"}
+        erledigt(["Entlassungen durchgeführt"])
+        erneut(["Erneute Anzeige erforderlich — §18 IV"])
     end
 
-    AG-->>BR: Abschrift der Anzeige — §17 III S.6
-
-    opt Betriebsrat äußert sich weiter
-        BR->>AfA: Weitere Stellungnahme
-        BR-->>AG: Abschrift davon — §17 III S.7
+    subgraph BR["Betriebsrat"]
+        beratungsergebnis("Beratungsergebnis")
+        stellungnahme{"Schriftliche Stellungnahme<br/>abgegeben? — §17 III S.2"}
+        weitereStellungnahme["Weitere Stellungnahme an AfA,<br/>Abschrift an AG — §17 III S.7"]
     end
 
-    Note over AfA: Sperrfrist beginnt mit<br/>Eingang der Anzeige — §18 I
-
-    alt Zustimmung vor Fristablauf erteilt
-        AfA->>AG: Zustimmung (ggf. rückwirkend<br/>bis Antragstellung) — §18 I
-        Note over AG: Entlassungen können<br/>vorzeitig wirksam werden
-    else Keine vorzeitige Zustimmung
-        Note over AG: Entlassungen erst nach Ablauf<br/>eines Monats wirksam — §18 I
-        opt Verlängerung im Einzelfall
-            AfA->>AG: Verlängerung der Sperrfrist<br/>auf bis zu 2 Monate — §18 II
-        end
+    subgraph AfA["Agentur für Arbeit"]
+        abschriftMitteilung("Abschrift der Mitteilung an BR<br/>(mind. Angaben Nr. 1-5) — §17 III S.1")
+        eingang["Eingang der Anzeige:<br/>Sperrfrist beginnt — §18 I"]
+        zustimmung{"Zustimmung vor<br/>Fristablauf? — §18 I"}
+        verlaengerung{"Verlängerung im<br/>Einzelfall? — §18 II"}
     end
 
-    Note over AG: Nicht innerhalb 90 Tagen nach<br/>Zulässigkeit durchgeführt?<br/>→ erneute Anzeige erforderlich — §18 IV
+    start --> unterrichtung
+    unterrichtung -.-> abschriftMitteilung
+    unterrichtung --> beratung
+    beratung --> beratungsergebnis
+    beratungsergebnis --> stellungnahme
+    stellungnahme -->|Ja| anzeigeMit
+    stellungnahme -->|Nein| anzeigeOhne
+    anzeigeMit --> eingang
+    anzeigeOhne --> eingang
+    anzeigeMit --> abschriftAnzeige
+    anzeigeOhne --> abschriftAnzeige
+    abschriftAnzeige -.->|optional| weitereStellungnahme
+    weitereStellungnahme -.-> zustimmung
+    eingang --> zustimmung
+    zustimmung -->|"Ja (ggf. rückwirkend<br/>bis Antragstellung)"| vorzeitig
+    zustimmung -->|Nein| verlaengerung
+    verlaengerung -->|Nein| einMonat
+    verlaengerung -->|Ja| zweiMonate
+    vorzeitig --> frist90
+    einMonat --> frist90
+    zweiMonate --> frist90
+    frist90 -->|Ja| erledigt
+    frist90 -->|Nein| erneut

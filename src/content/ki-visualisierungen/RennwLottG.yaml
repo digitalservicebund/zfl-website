@@ -2,17 +2,22 @@ title: Rennwett- und Lotteriegesetz
 eli: eli/bund/bgbl-1/2021/s2065/2022-01-01/1/deu
 visOptions:
   - name: Erlaubnisverfahren
+    visType: flowchart
     filename: erlaubnisverfahren
     articles: ["§1", "§2"]
   - name: Straftat vs. Ordnungswidrigkeit
+    visType: flowchart
     filename: straftat_owi
     articles: ["§4", "§5"]
   - name: Zuordnung der Spielsteuerart
+    visType: flowchart
     filename: steuerartenzuordnung
     articles: ["§8", "§16", "§26", "§36", "§46"]
   - name: Lotteriesteuerbefreiung
+    visType: flowchart
     filename: lotteriesteuerbefreiung
     articles: ["§28", "§32"]
   - name: Besteuerungsverfahren
+    visType: flowchart
     filename: besteuerungsverfahren
     articles: ["§12", "§13", "§58", "§59"]

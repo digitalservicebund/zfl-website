@@ -2,17 +2,22 @@ title: Gesetz über das Aufspüren von Gewinnen aus schweren Straftaten
 eli: eli/bund/bgbl-1/2017/s1822/2026-06-27/1/deu
 visOptions:
   - name: Kundensorgfaltspflichten-Prüfschema
+    visType: flowchart
     filename: kundensorgfaltspflichten
     articles: ["§§10-12"]
   - name: Wirtschaftlich Berechtigter-Ermittlung
+    visType: flowchart
     filename: wirtschaftlich_berechtigter
     articles: ["§3"]
   - name: Verstärkte Sorgfaltspflichten Hochrisiko
+    visType: flowchart
     filename: verstaerkte_sorgfaltspflichten
     articles: ["§15"]
   - name: Verdachtsmeldeverfahren
+    visType: flowchart
     filename: verdachtsmeldeverfahren
     articles: ["§43", "§46"]
   - name: Risikomanagement & interne Sicherung
+    visType: flowchart
     filename: risikomanagement
     articles: ["§§4-7"]

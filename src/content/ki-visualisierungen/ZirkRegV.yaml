@@ -2,11 +2,14 @@ title: Verordnung über die Registrierung von Erlaubnissen zur Zurschaustellung 
 eli: eli/bund/bgbl-1/2008/s376/2013-12-18/1/deu
 visOptions:
   - name: Datenerhebung
+    visType: flowchart
     filename: datenerhebung
     articles: ["§3"]
   - name: Datenverwendung
+    visType: flowchart
     filename: datenverwendung
     articles: ["§4"]
   - name: Löschfristen
+    visType: flowchart
     filename: loeschfristen
     articles: ["§5"]

@@ -2,8 +2,10 @@ title: Verordnung zur Erstellung einer Entgeltbescheinigung nach § 108 Absatz 3
 eli: eli/bund/bgbl-1/2012/s2712/2025-01-01/1/deu
 visOptions:
   - name: Ausstellungspflicht Entgeltbescheinigung
+    visType: flowchart
     filename: ausstellungspflicht
     articles: ["§1", "§2"]
   - name: Berechnungskaskade Entgelt
+    visType: flowchart
     filename: berechnungskaskade
     articles: ["§1"]

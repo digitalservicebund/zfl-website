@@ -2,17 +2,22 @@ title: Jugendschutzgesetz
 eli: eli/bund/bgbl-1/2002/s2730/2024-05-14/1/deu
 visOptions:
   - name: Aufenthalt in Gaststätten
+    visType: flowchart
     filename: gaststaetten
     articles: ["§4"]
   - name: Abgabe alkoholischer Getränke
+    visType: flowchart
     filename: alkoholabgabe
     articles: ["§9"]
   - name: Zutritt zu Filmveranstaltungen
+    visType: flowchart
     filename: filmveranstaltungen
     articles: ["§11"]
   - name: Indizierungsverfahren
+    visType: flowchart
     filename: indizierungsverfahren
     articles: ["§21", "§23", "§25"]
   - name: Vorsorgemaßnahmen der Anbieter
+    visType: flowchart
     filename: vorsorgemassnahmen
     articles: ["§24b"]

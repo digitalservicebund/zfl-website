@@ -2,18 +2,23 @@ title: Asylgesetz
 eli: eli/bund/bgbl-1/1992/s1126/2026-07-29/1/deu
 visOptions:
   - name: Asylverfahren-Ablauf
+    visType: flowchart
     filename: asylverfahren_ablauf
     articles:
       ["§13", "§13a", "§14", "§16", "§§18-20", "§25", "§31", "§34", "§38"]
   - name: Unzulässigkeits-/Dublin-Prüfung
+    visType: flowchart
     filename: unzulaessigkeit_dublin
     articles: ["§29", "§34a"]
   - name: Offensichtlich unbegründet & Klagefristen
+    visType: flowchart
     filename: offensichtlich_unbegruendet_klagefristen
     articles: ["§29a", "§30", "§36", "§74", "§75"]
   - name: Sicherer Herkunfts-/Drittstaat
+    visType: flowchart
     filename: sicherer_herkunftsstaat_drittstaat
     articles: ["§26a", "§27", "§29a", "§29b"]
   - name: Folgeantrag-Prüfung
+    visType: flowchart
     filename: folgeantrag
     articles: ["§29", "§34", "§34a", "§71"]

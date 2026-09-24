@@ -2,17 +2,22 @@ title: Verordnung über das Unternehmensregister
 eli: eli/bund/bgbl-1/2007/s217/2024-10-11/1/deu
 visOptions:
   - name: Registrierung der Nutzer
+    visType: flowchart
     filename: registrierung
     articles: ["§3", "§11", "§13"]
   - name: Identifikation der Nutzer
+    visType: flowchart
     filename: identifikation
     articles: ["§3a"]
   - name: Datenübermittlung & Prüfung
+    visType: flowchart
     filename: datenuebermittlung_pruefung
     articles: ["§§10-12"]
   - name: Einsichtnahme ins Register
+    visType: flowchart
     filename: einsichtnahme
     articles: ["§13"]
   - name: Aktualisierungsfristen Indexdaten
+    visType: flowchart
     filename: aktualisierungsfristen
     articles: ["§5"]

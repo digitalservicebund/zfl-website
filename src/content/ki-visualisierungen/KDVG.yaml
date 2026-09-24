@@ -2,17 +2,22 @@ title: Gesetz über die Verweigerung des Kriegsdienstes mit der Waffe aus Gewiss
 eli: eli/bund/bgbl-1/2003/s1593/2026-01-01/1/deu
 visOptions:
   - name: Antragsverfahren
+    visType: flowchart
     filename: antragsverfahren
     articles: ["§2", "§§4-7"]
   - name: Rechtsbehelfsverfahren
+    visType: flowchart
     filename: rechtsbehelfsverfahren
     articles: ["§9", "§10"]
   - name: Spannungs- und Verteidigungsfall
+    visType: flowchart
     filename: spannungs_verteidigungsfall
     articles: ["§11"]
   - name: Vorgezogener Antrag
+    visType: flowchart
     filename: vorgezogener_antrag
     articles: ["§2"]
   - name: Rechtsfolgen & Aktenführung
+    visType: flowchart
     filename: rechtsfolgen_aktenfuehrung
     articles: ["§1", "§12"]

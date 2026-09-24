@@ -1,44 +1,29 @@
 ---
 summary: "Veranschaulicht den jährlich wiederkehrenden Pflichtenkreislauf der Heizkostenverordnung von der Installation der Erfassungsausstattung über Verbrauchserfassung und unterjährige Verbrauchsinformation bis zur Abrechnung, sowie die Verknüpfung mit dem Kürzungsrecht bei Pflichtverstößen."
 ---
-stateDiagram-v2
-    [*] --> Ausstattung
+flowchart TD
+    Start(["Start"]) --> Ausstattung["Ausstattung installieren & warten<br/>(<a href='{{ELI}}/art-z4' target='_blank' rel='noopener'>§4</a>, <a href='{{ELI}}/art-z5' target='_blank' rel='noopener'>§5</a>)"]
 
-    Ausstattung: Ausstattung installieren & warten (<a href='{{ELI}}/art-z4' target='_blank' rel='noopener'>§4</a>, <a href='{{ELI}}/art-z5' target='_blank' rel='noopener'>§5</a>)
-    Ausstattung --> Erfassung: Ausstattung betriebsbereit
+    Ausstattung -->|Ausstattung betriebsbereit| Erfassung["Verbrauch laufend erfassen<br/>(<a href='{{ELI}}#art-z4_abs-z1' target='_blank' rel='noopener'>§4 I</a>)"]
 
-    Erfassung: Verbrauch laufend erfassen (<a href='{{ELI}}#art-z4_abs-z1' target='_blank' rel='noopener'>§4 I</a>)
-    Erfassung --> Zwischeninfo
+    Erfassung --> Zwischeninfo["Unterjährige Verbrauchsinformation<br/>(<a href='{{ELI}}#art-z6a_abs-z1' target='_blank' rel='noopener'>§6a I</a>)"]
 
-    Zwischeninfo: Unterjährige Verbrauchsinformation (<a href='{{ELI}}#art-z6a_abs-z1' target='_blank' rel='noopener'>§6a I</a>)
-    Zwischeninfo --> Zwischeninfo: nächster Monat / nächstes Quartal
-    Zwischeninfo --> Ablesung: Ende des Abrechnungszeitraums
+    Zwischeninfo --> Zeitraum{"Ende des<br/>Abrechnungszeitraums?"}
+    Zeitraum -->|"Nein: nächster Monat /<br/>nächstes Quartal"| Zwischeninfo
+    Zeitraum -->|Ja| Ablesung["Ablesung / Verbrauchsermittlung<br/>(<a href='{{ELI}}#art-z6_abs-z1' target='_blank' rel='noopener'>§6 I</a>)"]
 
-    Ablesung: Ablesung / Verbrauchsermittlung (<a href='{{ELI}}#art-z6_abs-z1' target='_blank' rel='noopener'>§6 I</a>)
-    Ablesung --> Kostenverteilung
+    Ablesung --> Kostenverteilung["Kostenverteilung nach §§6-9 durchführen"]
 
-    Kostenverteilung: Kostenverteilung nach §§6-9 durchführen
-    Kostenverteilung --> Abrechnungserstellung
+    Kostenverteilung --> Abrechnungserstellung["Abrechnung inkl. Pflichtangaben erstellen<br/>(<a href='{{ELI}}#art-z6a_abs-z3' target='_blank' rel='noopener'>§6a III</a>)"]
 
-    Abrechnungserstellung: Abrechnung inkl. Pflichtangaben erstellen (<a href='{{ELI}}#art-z6a_abs-z3' target='_blank' rel='noopener'>§6a III</a>)
-    Abrechnungserstellung --> Mitteilung
+    Abrechnungserstellung --> Mitteilung["Abrechnung an Nutzer mitteilen<br/>(<a href='{{ELI}}/art-z6' target='_blank' rel='noopener'>§6</a>, <a href='{{ELI}}/art-z6a' target='_blank' rel='noopener'>§6a</a>)"]
 
-    Mitteilung: Abrechnung an Nutzer mitteilen (<a href='{{ELI}}/art-z6' target='_blank' rel='noopener'>§6</a>, <a href='{{ELI}}/art-z6a' target='_blank' rel='noopener'>§6a</a>)
-    Mitteilung --> Erfassung: nächster Abrechnungszeitraum beginnt
+    Mitteilung -->|nächster Abrechnungszeitraum beginnt| Erfassung
 
-    note right of Ausstattung
-        Nutzer kann Erfüllung dieser
-        Pflicht verlangen — <a href='{{ELI}}#art-z4_abs-z4' target='_blank' rel='noopener'>§4 IV</a>
-    end note
+    Ausstattung -.- NoteAusstattung["Nutzer kann Erfüllung dieser<br/>Pflicht verlangen — <a href='{{ELI}}#art-z4_abs-z4' target='_blank' rel='noopener'>§4 IV</a>"]
+    Erfassung -.- NoteErfassung["Datenerhebung/-verarbeitung nur<br/>zweckgebunden zulässig — <a href='{{ELI}}#art-z6b_abs-z' target='_blank' rel='noopener'>§6b</a>"]
+    Mitteilung -.- NoteMitteilung["Pflichtverletzung entlang des<br/>Kreislaufs löst Kürzungsrecht<br/>des Nutzers aus — <a href='{{ELI}}/art-z12' target='_blank' rel='noopener'>§12</a><br/>(15% / 3%, ggf. kumulativ)"]
 
-    note right of Erfassung
-        Datenerhebung/-verarbeitung nur
-        zweckgebunden zulässig — <a href='{{ELI}}#art-z6b_abs-z' target='_blank' rel='noopener'>§6b</a>
-    end note
-
-    note right of Mitteilung
-        Pflichtverletzung entlang des
-        Kreislaufs löst Kürzungsrecht
-        des Nutzers aus — <a href='{{ELI}}/art-z12' target='_blank' rel='noopener'>§12</a>
-        (15% / 3%, ggf. kumulativ)
-    end note
+    style NoteAusstattung fill:#f5f5f5,stroke:#999
+    style NoteErfassung fill:#f5f5f5,stroke:#999
+    style NoteMitteilung fill:#f5f5f5,stroke:#999

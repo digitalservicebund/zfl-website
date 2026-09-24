@@ -3,6 +3,7 @@ import type { CollectionEntry } from "astro:content";
 
 export const visOptionType = z.object({
   name: z.string(),
+  visType: z.enum(["flowchart", "swimlane"]).optional(),
   filename: z.string().optional(),
   /** Relevante Paragraphen/Artikel, auf denen die Visualisierung
    * basiert bzw. auf die sie sich bezieht, inkl. Präfix wie im

@@ -2,17 +2,22 @@ title: Bundeskleingartengesetz
 eli: eli/bund/bgbl-1/1983/s210/2006-10-01/1/deu
 visOptions:
   - name: Kleingarten-Begriffsprüfung
+    visType: flowchart
     filename: begriffspruefung
     articles: ["§1"]
   - name: Höchstpacht und Anpassung
+    visType: flowchart
     filename: pachthoehe
     articles: ["§5"]
   - name: Kündigungsarten und -fristen
+    visType: flowchart
     filename: kuendigungsarten
     articles: ["§§7-9"]
   - name: Kündigungsentschädigung
+    visType: flowchart
     filename: kuendigungsentschaedigung
     articles: ["§11"]
   - name: Enteignungsverfahren
+    visType: flowchart
     filename: enteignung
     articles: ["§15"]

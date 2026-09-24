@@ -2,17 +2,22 @@ title: Gesetz zum Elterngeld und zur Elternzeit
 eli: eli/bund/bgbl-1/2006/s2748/2026-01-01/1/deu
 visOptions:
   - name: Anspruchsvoraussetzungen Elterngeld
+    visType: flowchart
     filename: anspruchsvoraussetzungen
     articles: ["§1"]
   - name: Basiselterngeld, Plus & Bonus
+    visType: flowchart
     filename: basiselterngeld_plus_bonus
     articles: ["§4", "§4a", "§4b"]
   - name: Bezugsdauer & Partnermonate
+    visType: flowchart
     filename: bezugsdauer_partnermonate
     articles: ["§4"]
   - name: Elternzeit-Anmeldeverfahren
+    visType: flowchart
     filename: elternzeit_anmeldung
     articles: ["§16"]
   - name: Einkommensgrenzen & -anrechnung
+    visType: flowchart
     filename: einkommensgrenzen_anrechnung
     articles: ["§§1-3"]

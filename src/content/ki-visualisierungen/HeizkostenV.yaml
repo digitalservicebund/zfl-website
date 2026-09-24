@@ -2,14 +2,18 @@ title: Verordnung über die verbrauchsabhängige Abrechnung der Heiz- und Warmwa
 eli: eli/bund/bgbl-1/1981/s261/2024-10-01/1/deu
 visOptions:
   - name: Geltungsbereich
+    visType: flowchart
     filename: geltungsbereich
     articles: ["§1", "§2", "§11"]
   - name: Kürzungsrecht
+    visType: flowchart
     filename: kuerzungsrecht
     articles: ["§12"]
   - name: Kostenverteilung
+    visType: flowchart
     filename: kostenverteilung
     articles: ["§§6-9"]
   - name: Pflichten des Gebäudeeigentümers
+    visType: flowchart
     filename: pflichtenkreislauf
     articles: ["§4", "§5", "§6", "§6a"]

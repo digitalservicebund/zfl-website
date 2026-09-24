@@ -2,17 +2,22 @@ title: Verordnung über den Geschäftsbetrieb der gewerblichen Pfandleiher
 eli: eli/bund/bgbl-1/1961/s58/2025-01-01/1/deu
 visOptions:
   - name: Annahme des Pfandes
+    visType: flowchart
     filename: annahme
     articles: ["§5"]
   - name: Pfandschein
+    visType: flowchart
     filename: pfandschein
     articles: ["§3", "§6"]
   - name: Verwertung des Pfandes
+    visType: flowchart
     filename: verwertung
     articles: ["§9", "§12a"]
   - name: Überschüsse aus Verwertung
+    visType: flowchart
     filename: ueberschuss
     articles: ["§5", "§11", "§12a"]
   - name: Ordnungswidrigkeiten-Prüfschema
+    visType: flowchart
     filename: ordnungswidrigkeiten
     articles: ["§3", "§§5-11", "§12a"]

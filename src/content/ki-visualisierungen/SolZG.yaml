@@ -2,14 +2,18 @@ title: Solidaritätszuschlaggesetz
 eli: eli/bund/bgbl-1/1991/s1318/1992-02-29/1/deu
 visOptions:
   - name: Abgabepflicht-Prüfung
+    visType: flowchart
     filename: abgabepflicht
     articles: ["§2"]
   - name: Bemessungsgrundlagen-Ermittlung
+    visType: flowchart
     filename: bemessungsgrundlage
     articles: ["§3"]
   - name: Tarifberechnung
+    visType: flowchart
     filename: tarifberechnung
     articles: ["§4"]
   - name: Anrechnung bei Doppelbesteuerung
+    visType: flowchart
     filename: doppelbesteuerung
     articles: ["§5"]

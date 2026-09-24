@@ -2,17 +2,22 @@ title: Digitale-Dienste-Gesetz
 eli: eli/bund/bgbl-1/2024/149/2026-07-01/1/deu
 visOptions:
   - name: Anwendungsbereichsprüfung
+    visType: flowchart
     filename: anwendungsbereich
     articles: ["§1"]
   - name: Haftungsprivileg & Sperrungsanspruch
+    visType: flowchart
     filename: haftungsprivileg
     articles: ["§7", "§8"]
   - name: Beschlagnahmeverfahren
+    visType: flowchart
     filename: beschlagnahme
     articles: ["§26"]
   - name: Durchsetzungsverfahren
+    visType: flowchart
     filename: durchsetzungsverfahren
     articles: ["§27"]
   - name: Gerichtliche Zugangsbeschränkung
+    visType: flowchart
     filename: zugangsbeschraenkung
     articles: ["§29"]

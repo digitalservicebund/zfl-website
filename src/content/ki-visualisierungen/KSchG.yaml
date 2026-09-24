@@ -2,17 +2,18 @@ title: Kündigungsschutzgesetz
 eli: eli/bund/bgbl-1/1951/s499/2021-06-18/1/deu
 visOptions:
   - name: Anwendbarkeitsprüfung
+    visType: flowchart
     filename: anwendbarkeit
     articles: ["§1", "§14", "§23"]
   - name: 'Prüfschema "sozial ungerechtfertigt"'
+    visType: flowchart
     filename: sozial_ungerechtfertigt
     articles: ["§1"]
   - name: Klagefristen-Kette
+    visType: flowchart
     filename: klagefristen
     articles: ["§§4-7"]
-  - name: Sonderkündigungsschutz-Zeiträume
-    filename: sonderkuendigungsschutz
-    articles: ["§15"]
   - name: Anzeigeverfahren Massenentlassung
+    visType: swimlane
     filename: massenentlassung
     articles: ["§17", "§18"]

@@ -2,14 +2,18 @@ title: Verordnung über die Berechtigung zum Tragen der Uniform außerhalb eines
 eli: eli/bund/bgbl-1/2008/s778/2019-08-09/1/deu
 visOptions:
   - name: Genehmigungsvoraussetzungen
+    visType: flowchart
     filename: voraussetzungen
     articles: ["§3", "§4", "§6"]
   - name: Zuständigkeitsprüfung
+    visType: flowchart
     filename: zustaendigkeit
     articles: ["§3", "§5"]
   - name: Form und Dauer
+    visType: flowchart
     filename: form_und_dauer
     articles: ["§3", "§6"]
   - name: Widerrufsverfahren
+    visType: flowchart
     filename: widerruf
     articles: ["§7"]
