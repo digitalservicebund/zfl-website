@@ -5,6 +5,16 @@
   import { visTypeIcons } from "./_visTypeIcons.ts";
 
   const wizard = getWizardContext();
+
+  // Options matching the preset chosen in step 1 first; the sort is stable,
+  // so the original order is kept within each group.
+  const sortedVisOptions = $derived(
+    wizard.visOptions.toSorted(
+      (a, b) =>
+        Number(b.visType === wizard.preset) -
+        Number(a.visType === wizard.preset),
+    ),
+  );
 </script>
 
 <div class="space-y-32">
@@ -18,7 +28,7 @@
             Welchen Teilbereich möchten Sie visualisieren?
           </h2>
           <div class="mt-16 flex flex-col w-full gap-8">
-            {#each wizard.visOptions as option (option.name)}
+            {#each sortedVisOptions as option (option.name)}
               <PresetBtn
                 active={option.name === wizard.selectedVisOption}
                 onclick={() => (wizard.selectedVisOption = option.name)}

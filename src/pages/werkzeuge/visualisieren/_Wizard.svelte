@@ -633,7 +633,7 @@
 
 <style>
   #vis-chat :global(.step-heading) {
-    margin-top: -4em;
+    margin-top: -2em;
   }
 
   /* Tailwind's preflight resets margin to 0, which breaks the browser
