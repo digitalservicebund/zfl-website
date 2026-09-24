@@ -18,6 +18,14 @@ visOptions:
     filename: straf_bussgeld
     articles: ["§34", "§35", "§35a", "§36"]
   - name: Tilgungsverfahren Bundeszentralregister
-    visType: flowchart
+    visType: swimlane
     filename: tilgungsverfahren
     articles: ["§§40-42"]
+  - name: Frühintervention bei Minderjährigen
+    visType: swimlane
+    filename: fruehintervention
+    articles: ["§7"]
+  - name: Überwachung von Anbauvereinigungen
+    visType: swimlane
+    filename: ueberwachung
+    articles: ["§26", "§27"]
