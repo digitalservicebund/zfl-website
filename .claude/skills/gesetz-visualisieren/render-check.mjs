@@ -31,7 +31,10 @@ const size = await page.evaluate(async (src) => {
   mermaid.initialize({
     startOnLoad: false,
     htmlLabels: true,
-    flowchart: { htmlLabels: true, wrappingWidth: 400 },
+    flowchart: {
+      htmlLabels: true,
+      wrappingWidth: /^\s*flowchart\s+(LR|RL)\b/.test(src) ? 200 : 400,
+    },
   });
   const { svg } = await mermaid.render("d", src);
   document.getElementById("c").innerHTML = svg;

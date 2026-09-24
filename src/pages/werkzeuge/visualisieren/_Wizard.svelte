@@ -26,13 +26,19 @@
   const wizard = new WizardState();
   setWizardContext(wizard);
 
-  function configureMermaid(htmlLabels: boolean) {
+  // Mermaid's default (200px) re-wraps the <br/>-separated lines in top-down
+  // diagrams, making nodes narrow and diagrams very tall. Left-right actor
+  // overviews keep the default: their one-line-per-duty labels would
+  // otherwise make the diagram very wide and flat.
+  function wrappingWidthFor(source: string): number {
+    return /^\s*flowchart\s+(LR|RL)\b/.test(source) ? 200 : 400;
+  }
+
+  function configureMermaid(htmlLabels: boolean, wrappingWidth = 400) {
     mermaid.initialize({
       startOnLoad: false,
       htmlLabels,
-      // Mermaid's default (200px) re-wraps the <br/>-separated lines in the
-      // .mmd sources, making nodes narrow and diagrams very tall.
-      flowchart: { htmlLabels, wrappingWidth: 400 },
+      flowchart: { htmlLabels, wrappingWidth },
     });
   }
 
@@ -285,6 +291,7 @@
 
     let cancelled = false;
 
+    configureMermaid(true, wrappingWidthFor(wizard.mermaidSource));
     mermaid
       .render(`mermaid-diagram-${renderCount++}`, wizard.mermaidSource)
       .then(({ svg }) => {
@@ -314,7 +321,8 @@
 
     const exportSource = stripLinks(wizard.mermaidSource);
 
-    configureMermaid(false);
+    const wrappingWidth = wrappingWidthFor(exportSource);
+    configureMermaid(false, wrappingWidth);
     let svg: string;
     try {
       ({ svg } = await mermaid.render(
@@ -322,7 +330,7 @@
         exportSource,
       ));
     } finally {
-      configureMermaid(true);
+      configureMermaid(true, wrappingWidth);
     }
 
     const container = document.createElement("div");
