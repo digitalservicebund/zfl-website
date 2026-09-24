@@ -3,33 +3,33 @@ summary: "Zeigt, wann der Verantwortliche eine Datenschutz-Folgenabschätzung na
 ---
 swimlane-beta TD
     subgraph VA["Verantwortlicher"]
-        start(["Verarbeitung geplant,<br/>insb. mit neuen<br/>Technologien<br/>— Art. 35 Abs. 1"])
-        risiko{"Voraussichtlich hohes<br/>Risiko für Rechte und<br/>Freiheiten natürlicher<br/>Personen aufgrund Art,<br/>Umfang, Umständen,<br/>Zwecken? (insb. Abs. 3<br/>lit. a–c, Liste nach Abs. 4)<br/>— Art. 35 Abs. 1, 3, 4"}
-        ausnahme{"Art. 6 Abs. 1 lit. c/e,<br/>Rechtsgrundlage regelt<br/>den konkreten Vorgang,<br/>Folgenabschätzung schon<br/>bei ihrem Erlass erfolgt?<br/>— Art. 35 Abs. 10"}
-        keineDSFA(["Keine Datenschutz-<br/>Folgenabschätzung<br/>erforderlich (ggf. Liste<br/>nach Art. 35 Abs. 5)"])
-        dsfa["Datenschutz-Folgen-<br/>abschätzung vorab<br/>durchführen (ähnliche<br/>Vorgänge ggf. gemeinsam)<br/>— Art. 35 Abs. 1"]
-        inhalt["Mindestinhalt: Beschreibung<br/>und Zwecke, Notwendigkeit<br/>und Verhältnismäßigkeit,<br/>Risikobewertung, Abhilfe-<br/>maßnahmen — Art. 35 Abs. 7<br/>(Verhaltensregeln — Abs. 8;<br/>ggf. Standpunkt Betroffener<br/>— Abs. 9; erforderlichenfalls<br/>Überprüfung — Abs. 11)"]
-        hohesRisiko{"Hätte die Verarbeitung<br/>laut Folgenabschätzung<br/>ein hohes Risiko, sofern<br/>keine Maßnahmen zur<br/>Eindämmung getroffen<br/>werden? — Art. 36 Abs. 1"}
-        keineKonsultation(["Keine vorherige<br/>Konsultation<br/>erforderlich"])
-        konsultation["Konsultiert Aufsichts-<br/>behörde vor der Verarbeitung<br/>mit Angaben nach Art. 36<br/>Abs. 3 lit. a–f (u.a. Folgen-<br/>abschätzung) — Art. 36 Abs. 1, 3"]
+        start(["Verarbeitung geplant, insb. mit neuen<br/>Technologien — Art. 35 Abs. 1"])
+        risiko{"Voraussichtlich hohes Risiko<br/>für Rechte und Freiheiten<br/>natürlicher Personen aufgrund<br/>Art, Umfang, Umständen,<br/>Zwecken? (insb. Abs. 3<br/>lit. a–c, Liste nach Abs. 4)<br/>— Art. 35 Abs. 1, 3, 4"}
+        ausnahme{"Art. 6 Abs. 1 lit. c/e,<br/>Rechtsgrundlage regelt den<br/>konkreten Vorgang,<br/>Folgenabschätzung schon bei<br/>ihrem Erlass erfolgt? — Art.<br/>35 Abs. 10"}
+        keineDSFA(["Keine Datenschutz-Folgenabschätzung<br/>erforderlich (ggf. Liste nach Art. 35<br/>Abs. 5)"])
+        dsfa["Datenschutz-Folgenabschätzung vorab<br/>durchführen (ähnliche Vorgänge ggf.<br/>gemeinsam) — Art. 35 Abs. 1"]
+        inhalt["Mindestinhalt: Beschreibung und Zwecke,<br/>Notwendigkeit und Verhältnismäßigkeit,<br/>Risikobewertung, Abhilfemaßnahmen — Art.<br/>35 Abs. 7 (Verhaltensregeln — Abs. 8;<br/>ggf. Standpunkt Betroffener — Abs. 9;<br/>erforderlichenfalls Überprüfung — Abs.<br/>11)"]
+        hohesRisiko{"Hätte die Verarbeitung laut<br/>Folgenabschätzung ein hohes<br/>Risiko, sofern keine Maßnahmen<br/>zur Eindämmung getroffen<br/>werden? — Art. 36 Abs. 1"}
+        keineKonsultation(["Keine vorherige Konsultation<br/>erforderlich"])
+        konsultation["Konsultiert Aufsichtsbehörde vor der<br/>Verarbeitung mit Angaben nach Art. 36<br/>Abs. 3 lit. a–f (u.a. Folgenabschätzung)<br/>— Art. 36 Abs. 1, 3"]
     end
 
     subgraph DSB["Datenschutzbeauftragter"]
-        rat["Rat des Datenschutz-<br/>beauftragten, sofern<br/>benannt — Art. 35 Abs. 2"]
+        rat["Rat des Datenschutzbeauftragten, sofern<br/>benannt — Art. 35 Abs. 2"]
     end
 
     subgraph AB["Aufsichtsbehörde"]
-        verstoss{"Stünde die Verarbeitung<br/>nach Auffassung der<br/>Aufsichtsbehörde nicht<br/>im Einklang mit der DSGVO<br/>(insb. Risiko nicht ausreichend<br/>ermittelt/eingedämmt)?<br/>— Art. 36 Abs. 2"}
-        keineEmpfehlung(["Keine Empfehlung<br/>nach Art. 36 Abs. 2"])
-        empfehlung(["Schriftliche Empfehlung<br/>an Verantwortlichen, ggf.<br/>Auftragsverarbeiter, binnen<br/>bis zu 8 Wochen (+6 Wochen,<br/>Aussetzung möglich); ggf.<br/>Befugnisse nach Art. 58<br/>— Art. 36 Abs. 2"])
+        verstoss{"Stünde die Verarbeitung nach<br/>Auffassung der<br/>Aufsichtsbehörde nicht im<br/>Einklang mit der DSGVO (insb.<br/>Risiko nicht ausreichend<br/>ermittelt/eingedämmt)? — Art.<br/>36 Abs. 2"}
+        keineEmpfehlung(["Keine Empfehlung nach Art. 36 Abs. 2"])
+        empfehlung(["Schriftliche Empfehlung an<br/>Verantwortlichen, ggf.<br/>Auftragsverarbeiter, binnen bis zu 8<br/>Wochen (+6 Wochen, Aussetzung möglich);<br/>ggf. Befugnisse nach Art. 58 — Art. 36<br/>Abs. 2"])
     end
 
     start --> risiko
     risiko -->|Nein| keineDSFA
     risiko -->|Ja| ausnahme
-    ausnahme -->|"Ja: Abs. 1–7 nur, wenn<br/>nach Ermessen der Mit-<br/>gliedstaaten erforderlich"| keineDSFA
+    ausnahme -->|"Ja: Abs. 1–7 nur, wenn nach<br/>Ermessen der Mitgliedstaaten<br/>erforderlich"| keineDSFA
     ausnahme -->|Nein| dsfa
-    dsfa -->|"sofern<br/>benannt"| rat
+    dsfa -->|"sofern benannt"| rat
     dsfa --> inhalt
     rat -.-> inhalt
     inhalt --> hohesRisiko

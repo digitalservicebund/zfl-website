@@ -2,18 +2,18 @@
 summary: "Zeigt, was mit einem bei der Pfandverwertung entstandenen Überschuss geschieht: Nach Ablauf von drei Jahren darf der Pfandleiher ihn mit Mindererlösen aus früheren Vereinbarungen mit demselben Verpfänder verrechnen und muss den Rest fristgerecht an die zuständige Behörde abführen, andernfalls droht eine Ordnungswidrigkeit."
 ---
 flowchart TD
-    A["Pfand wird verwertet; eine<br/>Vereinbarung nach<br/><a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I Nr.2</a><br/>besteht"] --> B["Erlösteil, der dem Pfandleiher<br/>nicht zu seiner Befriedigung<br/>gebührt = Überschuss<br/>— <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I Nr.2</a>"]
-    B --> E["3 Jahre nach Ablauf des<br/>Verwertungsjahres: Überschuss,<br/>soweit nicht an den Verpfänder<br/>ausgezahlt, ist abzuführen oder<br/>nach §11 II zu verrechnen;<br/>damit verfällt er<br/>— <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I Nr.2</a>"]
-    E --> C{"Stehen dem Überschuss<br/>Mindererlöse aus früheren<br/>Vereinbarungen nach §5 mit<br/>demselben Verpfänder gegenüber?<br/>— <a href='{{ELI}}#art-z11_abs-z2' target='_blank' rel='noopener'>§11 II</a>"}
-    C -->|Ja| D["Pfandleiher darf sich aus<br/>dem Überschuss auch wegen<br/>des Mindererlöses befriedigen;<br/>nur der Rest ist abzuführen<br/>— <a href='{{ELI}}#art-z11_abs-z2' target='_blank' rel='noopener'>§11 II</a>"]
+    A["Pfand wird verwertet; eine Vereinbarung<br/>nach <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I Nr.2</a><br/>besteht"] --> B["Erlösteil, der dem Pfandleiher nicht zu<br/>seiner Befriedigung gebührt = Überschuss<br/>— <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I Nr.2</a>"]
+    B --> E["3 Jahre nach Ablauf des<br/>Verwertungsjahres: Überschuss, soweit<br/>nicht an den Verpfänder ausgezahlt, ist<br/>abzuführen oder nach §11 II zu<br/>verrechnen;<br/>damit verfällt er — <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I Nr.2</a>"]
+    E --> C{"Stehen dem Überschuss<br/>Mindererlöse aus früheren<br/>Vereinbarungen nach §5 mit<br/>demselben Verpfänder<br/>gegenüber? — <a href='{{ELI}}#art-z11_abs-z2' target='_blank' rel='noopener'>§11 II</a>"}
+    C -->|Ja| D["Pfandleiher darf sich aus dem Überschuss<br/>auch wegen des Mindererlöses<br/>befriedigen;<br/>nur der Rest ist abzuführen — <a href='{{ELI}}#art-z11_abs-z2' target='_blank' rel='noopener'>§11 II</a>"]
     C -->|Nein| F
-    D --> F{"Verlängert die Behörde die<br/>Monatsfrist auf Antrag des<br/>Pfandleihers aus wichtigem<br/>Grund?<br/>— <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I</a>"}
+    D --> F{"Verlängert die Behörde die<br/>Monatsfrist auf Antrag des<br/>Pfandleihers aus wichtigem<br/>Grund? — <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I</a>"}
     F -->|Ja| G["Verlängerte Frist gilt"]
-    F -->|Nein| H["Reguläre Frist: 1 Monat nach<br/>Ablauf der 3-Jahres-Frist<br/>— <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I S.1</a>"]
-    G --> I{"Führt der Pfandleiher den<br/>Überschuss innerhalb der<br/>Frist an die zuständige<br/>Behörde ab?"}
+    F -->|Nein| H["Reguläre Frist: 1 Monat nach Ablauf der<br/>3-Jahres-Frist — <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I S.1</a>"]
+    G --> I{"Führt der Pfandleiher den<br/>Überschuss innerhalb der Frist<br/>an die zuständige Behörde ab?"}
     H --> I
-    I -->|Ja| J["Überschuss verfällt dem<br/>Fiskus des Landes, in dem die<br/>Verpfändung erfolgt ist<br/>— <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I S.2</a>"]
-    I -->|Nein| K["Ordnungswidrigkeit<br/>— <a href='{{ELI}}/art-z12a' target='_blank' rel='noopener'>§12a Nr.6</a>"]
+    I -->|Ja| J["Überschuss verfällt dem Fiskus des<br/>Landes, in dem die Verpfändung erfolgt<br/>ist — <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I S.2</a>"]
+    I -->|Nein| K["Ordnungswidrigkeit — <a href='{{ELI}}/art-z12a' target='_blank' rel='noopener'>§12a Nr.6</a>"]
 
     style J fill:#d4edda,stroke:#2d8a4a
     style K fill:#f8d7da,stroke:#c0392b

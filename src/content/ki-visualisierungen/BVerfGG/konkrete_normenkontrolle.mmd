@@ -3,22 +3,22 @@ summary: "Zeigt das Vorlageverfahren der konkreten Normenkontrolle nach Art. 100
 ---
 swimlane-beta TD
     subgraph VG["Vorlegendes Gericht"]
-        start(["Gericht hält ein Gesetz, auf dessen<br/>Gültigkeit es bei der Entscheidung<br/>ankommt, für verfassungswidrig<br/>(Art. 100 Abs. 1 GG)"])
-        v100{"Voraussetzungen des<br/>Art. 100 Abs. 1 GG gegeben?<br/>— <a href='{{ELI}}#art-z80_abs-z1' target='_blank' rel='noopener'>§80 I</a>"}
+        start(["Gericht hält ein Gesetz, auf dessen<br/>Gültigkeit es bei der Entscheidung<br/>ankommt, für verfassungswidrig (Art. 100<br/>Abs. 1 GG)"])
+        v100{"Voraussetzungen des Art. 100<br/>Abs. 1 GG gegeben? — <a href='{{ELI}}#art-z80_abs-z1' target='_blank' rel='noopener'>§80 I</a>"}
         keineVorlage(["Keine Vorlage an das<br/>Bundesverfassungsgericht"])
-        vorlage["Holt unmittelbar die Entscheidung des<br/>BVerfG ein — <a href='{{ELI}}#art-z80_abs-z1' target='_blank' rel='noopener'>§80 I</a>; Begründung: inwiefern<br/>die Entscheidung von der Gültigkeit der<br/>Rechtsvorschrift abhängt und mit welcher<br/>übergeordneten Rechtsnorm sie unvereinbar<br/>ist, Akten beigefügt — <a href='{{ELI}}#art-z80_abs-z2' target='_blank' rel='noopener'>§80 II</a><br/>(unabhängig von einer Rüge der<br/>Prozessbeteiligten — <a href='{{ELI}}#art-z80_abs-z3' target='_blank' rel='noopener'>§80 III</a>)"]
+        vorlage["Holt unmittelbar die Entscheidung des<br/>BVerfG ein — <a href='{{ELI}}#art-z80_abs-z1' target='_blank' rel='noopener'>§80 I</a>; Begründung:<br/>inwiefern die Entscheidung von der<br/>Gültigkeit der Rechtsvorschrift abhängt<br/>und mit welcher übergeordneten<br/>Rechtsnorm sie unvereinbar ist, Akten<br/>beigefügt — <a href='{{ELI}}#art-z80_abs-z2' target='_blank' rel='noopener'>§80 II</a><br/>(unabhängig von einer Rüge der<br/>Prozessbeteiligten — <a href='{{ELI}}#art-z80_abs-z3' target='_blank' rel='noopener'>§80 III</a>)"]
     end
 
     subgraph K["Kammer"]
-        vorbehalt{"Antrag von einem Landes-<br/>verfassungsgericht oder einem<br/>obersten Gerichtshof des Bundes?<br/>— <a href='{{ELI}}/art-z81a' target='_blank' rel='noopener'>§81a S.2</a>"}
-        kammer{"Kammer stellt durch einstimmigen<br/>Beschluss die Unzulässigkeit<br/>des Antrags fest?<br/>— <a href='{{ELI}}/art-z81a' target='_blank' rel='noopener'>§81a S.1</a>"}
+        vorbehalt{"Antrag von einem<br/>Landesverfassungsgericht oder<br/>einem obersten Gerichtshof des<br/>Bundes? — <a href='{{ELI}}/art-z81a' target='_blank' rel='noopener'>§81a S.2</a>"}
+        kammer{"Kammer stellt durch<br/>einstimmigen Beschluss die<br/>Unzulässigkeit des Antrags<br/>fest? — <a href='{{ELI}}/art-z81a' target='_blank' rel='noopener'>§81a S.1</a>"}
         unzulaessig(["Antrag unzulässig"])
     end
 
     subgraph S["Senat"]
-        senat["Entscheidung durch den Senat<br/>(in den Fällen des <a href='{{ELI}}/art-z81a' target='_blank' rel='noopener'>§81a S.2</a><br/>auch über die Unzulässigkeit)"]
-        rechtsfrage{"Entscheidet nur über die Rechtsfrage<br/>— <a href='{{ELI}}/art-z81' target='_blank' rel='noopener'>§81</a>: Rechtsvorschrift mit dem<br/>Grundgesetz bzw. sonstigem Bundesrecht<br/>unvereinbar? — §78 i.V.m. <a href='{{ELI}}#art-z82_abs-z1' target='_blank' rel='noopener'>§82 I</a>"}
-        nichtig["Erklärt das Gesetz für nichtig, ggf. auch<br/>weitere Bestimmungen desselben Gesetzes<br/>aus denselben Gründen — <a href='{{ELI}}/art-z78' target='_blank' rel='noopener'>§78</a>"]
+        senat["Entscheidung durch den Senat (in den<br/>Fällen des <a href='{{ELI}}/art-z81a' target='_blank' rel='noopener'>§81a S.2</a><br/>auch über die Unzulässigkeit)"]
+        rechtsfrage{"Entscheidet nur über die<br/>Rechtsfrage — <a href='{{ELI}}/art-z81' target='_blank' rel='noopener'>§81</a>:<br/>Rechtsvorschrift mit dem<br/>Grundgesetz bzw. sonstigem<br/>Bundesrecht unvereinbar? — §78<br/>i.V.m. <a href='{{ELI}}#art-z82_abs-z1' target='_blank' rel='noopener'>§82 I</a>"}
+        nichtig["Erklärt das Gesetz für nichtig, ggf.<br/>auch weitere Bestimmungen desselben<br/>Gesetzes aus denselben Gründen — <a href='{{ELI}}/art-z78' target='_blank' rel='noopener'>§78</a>"]
         bindung(["Entscheidung bindet alle Gerichte und<br/>Behörden — <a href='{{ELI}}#art-z31_abs-z1' target='_blank' rel='noopener'>§31 I</a>; hat Gesetzeskraft,<br/>Veröffentlichung der Entscheidungsformel<br/>im Bundesgesetzblatt — <a href='{{ELI}}#art-z31_abs-z2' target='_blank' rel='noopener'>§31 II</a>"])
     end
 
@@ -34,7 +34,7 @@ swimlane-beta TD
     vorbehalt -->|Nein| kammer
     kammer -->|Ja| unzulaessig
     kammer -->|Nein| senat
-    senat -.->|"Gelegenheit<br/>zur Äußerung"| aeusserung
+    senat -.->|"Gelegenheit zur Äußerung"| aeusserung
     aeusserung -.-> rechtsfrage
     senat --> rechtsfrage
     rechtsfrage -->|Ja| nichtig

@@ -2,29 +2,29 @@
 summary: "Zeigt die Ermittlung der zulässigen Höchstpacht für Kleingärten nach §5 BKleingG auf Grundlage ortsüblicher Pachtbeträge sowie das Verfahren zur Anpassung einer vereinbarten Pacht, die von dieser Höchstpacht abweicht."
 ---
 flowchart TD
-    A["Ermittlung der zulässigen<br/>Höchstpacht und Anpassung<br/>der vereinbarten Pacht"] --> Q1{"Liegen ortsübliche Pachtbeträge<br/>im erwerbsmäßigen Obst- und<br/>Gemüseanbau in der Gemeinde vor?<br/>— <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I S.3</a>"}
+    A["Ermittlung der zulässigen Höchstpacht<br/>und Anpassung der vereinbarten Pacht"] --> Q1{"Liegen ortsübliche<br/>Pachtbeträge im erwerbsmäßigen<br/>Obst- und Gemüseanbau in der<br/>Gemeinde vor? — <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I S.3</a>"}
 
-    Q1 -->|Ja| B0["Bemessungsgrundlage: in der<br/>Gemeinde durchschnittlich<br/>gezahlte Pacht<br/>— <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I S.4</a>"]
-    Q1 -->|Nein| B2["Bemessungsgrundlage: entsprechende<br/>Pacht in einer vergleichbaren<br/>Gemeinde<br/>— <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I S.3</a>"]
+    Q1 -->|Ja| B0["Bemessungsgrundlage: in der Gemeinde<br/>durchschnittlich gezahlte Pacht — <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I<br/>S.4</a>"]
+    Q1 -->|Nein| B2["Bemessungsgrundlage: entsprechende Pacht<br/>in einer vergleichbaren Gemeinde — <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I<br/>S.3</a>"]
 
-    B0 --> B1["Höchstpacht = 4-facher Betrag<br/>der ortsüblichen Pacht, bezogen<br/>auf die Gesamtfläche der Klein-<br/>gartenanlage (gemeinschaftl.<br/>Flächen anteilig berücksichtigt)<br/>— <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I S.1-2</a>"]
+    B0 --> B1["Höchstpacht = 4-facher Betrag der<br/>ortsüblichen Pacht, bezogen auf die<br/>Gesamtfläche der Kleingartenanlage<br/>(gemeinschaftl. Flächen anteilig<br/>berücksichtigt) — <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I S.1-2</a>"]
     B2 --> B1
 
-    Q1 -.- H1["Auf Antrag einer Vertragspartei<br/>erstattet der Gutachterausschuss<br/>(§192 BauGB) ein Gutachten über die<br/>ortsübliche Pacht; fehlen anonymisierbare<br/>Daten, ist ergänzend die Pacht einer<br/>vergleichbaren Gemeinde heranzuziehen<br/>— <a href='{{ELI}}#art-z5_abs-z2' target='_blank' rel='noopener'>§5 II</a>"]
+    Q1 -.- H1["Auf Antrag einer Vertragspartei<br/>erstattet der Gutachterausschuss (§192<br/>BauGB) ein Gutachten über die<br/>ortsübliche Pacht; fehlen<br/>anonymisierbare Daten, ist ergänzend die<br/>Pacht einer vergleichbaren Gemeinde<br/>heranzuziehen — <a href='{{ELI}}#art-z5_abs-z2' target='_blank' rel='noopener'>§5 II</a>"]
 
     B1 --> Q2{"Entspricht die vereinbarte<br/>Pacht der Höchstpacht?"}
     Q2 -->|Ja| Z1["Keine Anpassung erforderlich"]
-    Q2 -->|Nein| Q3{"Seit Vertragsschluss oder<br/>letzter Anpassung mind.<br/>3 Jahre vergangen? — <a href='{{ELI}}#art-z5_abs-z3' target='_blank' rel='noopener'>§5 III S.3</a>"}
+    Q2 -->|Nein| Q3{"Seit Vertragsschluss oder<br/>letzter Anpassung mind. 3<br/>Jahre vergangen? — <a href='{{ELI}}#art-z5_abs-z3' target='_blank' rel='noopener'>§5 III S.3</a>"}
 
-    Q3 -->|Nein| Z2["Anpassung erst nach<br/>Ablauf der 3-Jahres-Frist<br/>möglich"]
-    Q3 -->|Ja| C1["Vertragspartei erklärt<br/>Anpassung in Textform<br/>— <a href='{{ELI}}#art-z5_abs-z3' target='_blank' rel='noopener'>§5 III S.1</a>"]
+    Q3 -->|Nein| Z2["Anpassung erst nach Ablauf der<br/>3-Jahres-Frist möglich"]
+    Q3 -->|Ja| C1["Vertragspartei erklärt Anpassung in<br/>Textform — <a href='{{ELI}}#art-z5_abs-z3' target='_blank' rel='noopener'>§5 III S.1</a>"]
 
     C1 --> Q4{"Handelt es sich um eine<br/>Pachterhöhung durch den<br/>Verpächter?"}
-    Q4 -->|Nein| Z3["Pacht wird ab dem 1. Tag des<br/>folgenden Zahlungszeitraums<br/>herab- oder heraufgesetzt<br/>— <a href='{{ELI}}#art-z5_abs-z3' target='_blank' rel='noopener'>§5 III S.2</a>"]
-    Q4 -->|Ja| Q5{"Kündigt der Pächter spätestens<br/>am 15. Werktag des Zahlungs-<br/>zeitraums zum Ablauf des<br/>nächsten Monats? — <a href='{{ELI}}#art-z5_abs-z3' target='_blank' rel='noopener'>§5 III S.4</a>"}
+    Q4 -->|Nein| Z3["Pacht wird ab dem 1. Tag des folgenden<br/>Zahlungszeitraums herab- oder<br/>heraufgesetzt — <a href='{{ELI}}#art-z5_abs-z3' target='_blank' rel='noopener'>§5 III S.2</a>"]
+    Q4 -->|Ja| Q5{"Kündigt der Pächter spätestens<br/>am 15. Werktag des<br/>Zahlungszeitraums zum Ablauf<br/>des nächsten Monats? — <a href='{{ELI}}#art-z5_abs-z3' target='_blank' rel='noopener'>§5 III<br/>S.4</a>"}
 
     Q5 -->|Nein| Z3
-    Q5 -->|Ja| Z4["Pachtverhältnis endet mit Ablauf<br/>des nächsten Kalendermonats; die<br/>Erhöhung tritt nicht ein<br/>— <a href='{{ELI}}#art-z5_abs-z3' target='_blank' rel='noopener'>§5 III S.4-5</a>"]
+    Q5 -->|Ja| Z4["Pachtverhältnis endet mit Ablauf des<br/>nächsten Kalendermonats; die Erhöhung<br/>tritt nicht ein — <a href='{{ELI}}#art-z5_abs-z3' target='_blank' rel='noopener'>§5 III S.4-5</a>"]
 
     style H1 fill:#f5f5f5,stroke:#999
     style Z1 fill:#f5f5f5,stroke:#999

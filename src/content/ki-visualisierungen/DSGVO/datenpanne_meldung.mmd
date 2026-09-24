@@ -3,31 +3,31 @@ summary: "Zeigt den Ablauf bei einer Verletzung des Schutzes personenbezogener D
 ---
 swimlane-beta TD
     subgraph AV["Auftragsverarbeiter"]
-        avKenntnis(["Verletzung wird beim<br/>Auftragsverarbeiter bekannt"])
-        avMeldung["Meldung an den Verantwortlichen<br/>unverzüglich nach Bekanntwerden<br/>— Art. 33 Abs. 2"]
+        avKenntnis(["Verletzung wird beim Auftragsverarbeiter<br/>bekannt"])
+        avMeldung["Meldung an den Verantwortlichen<br/>unverzüglich nach Bekanntwerden — Art.<br/>33 Abs. 2"]
     end
 
     subgraph VA["Verantwortlicher"]
-        start(["Verletzung des Schutzes<br/>personenbezogener Daten<br/>wird bekannt"])
-        dokumentation["Dokumentation der Verletzung,<br/>ihrer Folgen und Abhilfemaßnahmen<br/>— Art. 33 Abs. 5"]
-        risiko{"Voraussichtlich kein Risiko<br/>für Rechte und Freiheiten<br/>natürlicher Personen?<br/>— Art. 33 Abs. 1"}
-        keineMeldung(["Keine Meldung an die<br/>Aufsichtsbehörde erforderlich"])
-        meldung["Meldung an zuständige Aufsichtsbehörde<br/>unverzüglich, möglichst binnen 72 Stunden,<br/>sonst mit Begründung der Verzögerung:<br/>Art der Verletzung, Kontaktstelle,<br/>Folgen und Abhilfemaßnahmen<br/>— Art. 33 Abs. 1, 3"]
-        hohesRisiko{"Voraussichtlich hohes Risiko<br/>für Rechte und Freiheiten<br/>der betroffenen Person?<br/>— Art. 34 Abs. 1"}
-        ausnahmeAB{"Schutzvorkehrungen vorab getroffen<br/>(z.B. Verschlüsselung) oder hohes<br/>Risiko nachträglich beseitigt?<br/>— Art. 34 Abs. 3 lit. a, b"}
-        aufwand{"Benachrichtigung mit unverhältnis-<br/>mäßigem Aufwand verbunden?<br/>— Art. 34 Abs. 3 lit. c"}
-        benachrichtigung["Benachrichtigung der betroffenen<br/>Person unverzüglich, in klarer<br/>und einfacher Sprache<br/>— Art. 34 Abs. 1–2"]
-        bekanntmachung["Öffentliche Bekanntmachung<br/>statt Einzelbenachrichtigung<br/>— Art. 34 Abs. 3 lit. c"]
+        start(["Verletzung des Schutzes<br/>personenbezogener Daten wird bekannt"])
+        dokumentation["Dokumentation der Verletzung, ihrer<br/>Folgen und Abhilfemaßnahmen — Art. 33<br/>Abs. 5"]
+        risiko{"Voraussichtlich kein Risiko<br/>für Rechte und Freiheiten<br/>natürlicher Personen? — Art.<br/>33 Abs. 1"}
+        keineMeldung(["Keine Meldung an die Aufsichtsbehörde<br/>erforderlich"])
+        meldung["Meldung an zuständige Aufsichtsbehörde<br/>unverzüglich, möglichst binnen 72<br/>Stunden, sonst mit Begründung der<br/>Verzögerung:<br/>Art der Verletzung, Kontaktstelle,<br/>Folgen und Abhilfemaßnahmen — Art. 33<br/>Abs. 1, 3"]
+        hohesRisiko{"Voraussichtlich hohes Risiko<br/>für Rechte und Freiheiten der<br/>betroffenen Person? — Art. 34<br/>Abs. 1"}
+        ausnahmeAB{"Schutzvorkehrungen vorab<br/>getroffen (z.B.<br/>Verschlüsselung) oder hohes<br/>Risiko nachträglich beseitigt?<br/>— Art. 34 Abs. 3 lit. a, b"}
+        aufwand{"Benachrichtigung mit<br/>unverhältnismäßigem Aufwand<br/>verbunden? — Art. 34 Abs. 3<br/>lit. c"}
+        benachrichtigung["Benachrichtigung der betroffenen Person<br/>unverzüglich, in klarer und einfacher<br/>Sprache — Art. 34 Abs. 1–2"]
+        bekanntmachung["Öffentliche Bekanntmachung statt<br/>Einzelbenachrichtigung — Art. 34 Abs. 3<br/>lit. c"]
     end
 
     subgraph AB["Aufsichtsbehörde"]
-        eingang("Meldung geht ein<br/>— Art. 33 Abs. 1")
-        nachholen{"Verlangt die Aufsichtsbehörde,<br/>die Benachrichtigung nachzuholen?<br/>— Art. 34 Abs. 4"}
+        eingang("Meldung geht ein — Art. 33 Abs. 1")
+        nachholen{"Verlangt die Aufsichtsbehörde,<br/>die Benachrichtigung<br/>nachzuholen? — Art. 34 Abs. 4"}
         abgeschlossen(["Verfahren abgeschlossen"])
     end
 
     subgraph BP["Betroffene Person"]
-        informiert(["Ist über die Verletzung<br/>und ihre Folgen informiert<br/>— Art. 34 Abs. 2, 3 lit. c"])
+        informiert(["Ist über die Verletzung und ihre Folgen<br/>informiert — Art. 34 Abs. 2, 3 lit. c"])
     end
 
     avKenntnis --> avMeldung
@@ -39,8 +39,8 @@ swimlane-beta TD
     meldung --> eingang
     meldung --> hohesRisiko
     hohesRisiko -->|Ja| ausnahmeAB
-    hohesRisiko -->|"Nein: keine<br/>Benachrichtigung"| nachholen
-    ausnahmeAB -->|"Ja: keine<br/>Benachrichtigung"| nachholen
+    hohesRisiko -->|"Nein: keine Benachrichtigung"| nachholen
+    ausnahmeAB -->|"Ja: keine Benachrichtigung"| nachholen
     ausnahmeAB -->|Nein| aufwand
     aufwand -->|Nein| benachrichtigung
     aufwand -->|Ja| bekanntmachung

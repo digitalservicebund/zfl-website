@@ -2,30 +2,30 @@
 summary: "Zeigt die Anzeige- und Nachweispflichten bei unbeabsichtigter Zerstörung oder Verlust, geplanter Vernichtung sowie beabsichtigter Zerstörung von Schaumwein im Steuerlager oder während der Beförderung und deren Auswirkung auf die Steuerpflicht."
 ---
 flowchart TD
-    A["Schaumwein im Steuerlager<br/>oder während der Beförderung<br/>betroffen"] --> B{"Art des<br/>Ereignisses?"}
+    A["Schaumwein im Steuerlager oder während<br/>der Beförderung betroffen"] --> B{"Art des Ereignisses?"}
 
-    B -->|Unbeabsichtigt vollständig<br/>zerstört oder ganz/teilweise<br/>unwiederbringlich verloren| C["Steuerlagerinhaber zeigt dies<br/>dem Hauptzollamt unverzüglich<br/>an und weist es anhand<br/>betrieblicher Unterlagen nach<br/>— <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>§10 I</a>"]
+    B -->|Unbeabsichtigt vollständig<br/>zerstört oder ganz/teilweise<br/>unwiederbringlich verloren| C["Steuerlagerinhaber zeigt dies dem<br/>Hauptzollamt unverzüglich an und weist<br/>es anhand betrieblicher Unterlagen nach<br/>— <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>§10 I</a>"]
 
-    C --> D{"Hauptzollamt lässt<br/>Vereinfachungen zu bzw.<br/>trifft Anordnungen zur<br/>Nachweisführung?<br/>— <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>§10 I S.2</a>"}
-    D -->|Ja| E["Vereinfachter<br/>Nachweis genügt"]
-    D -->|Nein| F["Regulärer Nachweis<br/>anhand betrieblicher<br/>Unterlagen erforderlich"]
+    C --> D{"Hauptzollamt lässt<br/>Vereinfachungen zu bzw. trifft<br/>Anordnungen zur<br/>Nachweisführung? — <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>§10 I S.2</a>"}
+    D -->|Ja| E["Vereinfachter Nachweis genügt"]
+    D -->|Nein| F["Regulärer Nachweis anhand betrieblicher<br/>Unterlagen erforderlich"]
     E --> G
-    F --> G{"Nachweis vom<br/>Hauptzollamt anerkannt?"}
-    G -->|Ja| H["Kein steuerbarer Verlust;<br/>keine Steuer auf zerstörte/<br/>verlorene Menge"]
-    G -->|Nein| I["Menge gilt nicht als<br/>nachgewiesen zerstört/<br/>verloren; Besteuerung<br/>möglich"]
+    F --> G{"Nachweis vom Hauptzollamt<br/>anerkannt?"}
+    G -->|Ja| H["Kein steuerbarer Verlust;<br/>keine Steuer auf zerstörte/ verlorene<br/>Menge"]
+    G -->|Nein| I["Menge gilt nicht als nachgewiesen<br/>zerstört/ verloren; Besteuerung möglich"]
 
-    B -->|Geplante Vernichtung<br/>nach §23 Abs. 2 Nr. 4<br/>des Gesetzes| J["Steuerlagerinhaber zeigt die<br/>Vernichtung mind. 1 Woche<br/>im Voraus an und weist sie<br/>anhand betrieblicher<br/>Unterlagen nach — <a href='{{ELI}}#art-z10_abs-z2' target='_blank' rel='noopener'>§10 II</a>"]
+    B -->|Geplante Vernichtung<br/>nach §23 Abs. 2 Nr. 4<br/>des Gesetzes| J["Steuerlagerinhaber zeigt die Vernichtung<br/>mind. 1 Woche im Voraus an und weist sie<br/>anhand betrieblicher Unterlagen nach<br/>— <a href='{{ELI}}#art-z10_abs-z2' target='_blank' rel='noopener'>§10 II</a>"]
 
-    J --> K{"Hauptzollamt verzichtet<br/>auf amtliche Überwachung?<br/>— <a href='{{ELI}}#art-z10_abs-z2' target='_blank' rel='noopener'>§10 II S.3</a>"}
-    K -->|Nein| L["Vernichtung wird<br/>amtlich überwacht<br/>— <a href='{{ELI}}#art-z10_abs-z2' target='_blank' rel='noopener'>§10 II S.3</a>"]
-    K -->|Ja| M["Vernichtung ohne<br/>amtliche Überwachung"]
+    J --> K{"Hauptzollamt verzichtet auf<br/>amtliche Überwachung? — <a href='{{ELI}}#art-z10_abs-z2' target='_blank' rel='noopener'>§10 II<br/>S.3</a>"}
+    K -->|Nein| L["Vernichtung wird amtlich überwacht — <a href='{{ELI}}#art-z10_abs-z2' target='_blank' rel='noopener'>§10<br/>II S.3</a>"]
+    K -->|Ja| M["Vernichtung ohne amtliche Überwachung"]
     L --> H
     M --> H
 
-    B -->|Beabsichtigte Zerstörung<br/>bei Beförderung unter<br/>Steueraussetzung| N["Anzeige der beabsichtigten<br/>Zerstörung durch den<br/>Versender — <a href='{{ELI}}#art-z10_abs-z3' target='_blank' rel='noopener'>§10 III</a>"]
+    B -->|Beabsichtigte Zerstörung<br/>bei Beförderung unter<br/>Steueraussetzung| N["Anzeige der beabsichtigten Zerstörung<br/>durch den Versender — <a href='{{ELI}}#art-z10_abs-z3' target='_blank' rel='noopener'>§10 III</a>"]
 
-    N --> O{"Vorgelegte Nachweise<br/>vom Hauptzollamt<br/>anerkannt?"}
-    O -->|Ja| P["Für die Beförderung<br/>geleistete Sicherheit nach<br/><a href='{{ELI}}/art-z18' target='_blank' rel='noopener'>§18</a> wird freigegeben<br/>— <a href='{{ELI}}#art-z10_abs-z3' target='_blank' rel='noopener'>§10 III S.3</a>"]
+    N --> O{"Vorgelegte Nachweise vom<br/>Hauptzollamt anerkannt?"}
+    O -->|Ja| P["Für die Beförderung geleistete<br/>Sicherheit nach <a href='{{ELI}}/art-z18' target='_blank' rel='noopener'>§18</a> wird freigegeben<br/>— <a href='{{ELI}}#art-z10_abs-z3' target='_blank' rel='noopener'>§10 III S.3</a>"]
     O -->|Nein| I
 
     style H fill:#d4edda,stroke:#2d8a4a

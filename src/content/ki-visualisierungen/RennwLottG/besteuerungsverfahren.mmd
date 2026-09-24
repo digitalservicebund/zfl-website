@@ -3,27 +3,27 @@ summary: "Zeigt den Ablauf der Steueranmeldung und -entrichtung für Renn- und B
 ---
 swimlane-beta TD
     subgraph DR["Beteiligte Dritte"]
-        info["Informieren den Steuerschuldner unverzüglich<br/>über besteuerungserhebliche Tatsachen,<br/>insb. geleistete Wetteinsätze — <a href='{{ELI}}/art-z56' target='_blank' rel='noopener'>§56</a>"]
+        info["Informieren den Steuerschuldner<br/>unverzüglich über besteuerungserhebliche<br/>Tatsachen, insb. geleistete Wetteinsätze<br/>— <a href='{{ELI}}/art-z56' target='_blank' rel='noopener'>§56</a>"]
     end
 
     subgraph ST["Steuerschuldner (Totalisatorbetreiber / Buchmacher)"]
-        entstehung(["Steuer entsteht mit der Leistung<br/>des Wetteinsatzes — <a href='{{ELI}}/art-z12' target='_blank' rel='noopener'>§12</a><br/>(Aufzeichnungen zur Ermittlung der<br/>Steuer führen — <a href='{{ELI}}/art-z14' target='_blank' rel='noopener'>§14</a>)"])
-        anmeldung["Steueranmeldung bis zum 15. Tag nach Ablauf<br/>des Anmeldungszeitraums (Totalisatorsteuer:<br/>jeder Kalendermonat mit mind. einem Rennen<br/>— <a href='{{ELI}}#art-z13_abs-z1' target='_blank' rel='noopener'>§13 I</a>; Buchmachersteuer: jeder Kalender-<br/>monat — <a href='{{ELI}}#art-z13_abs-z2' target='_blank' rel='noopener'>§13 II</a>): eigenhändig unterschrieben<br/>nach amtlichem Vordruck oder per Datenfern-<br/>übertragung, Steuer selbst berechnet<br/>— <a href='{{ELI}}#art-z13_abs-z3' target='_blank' rel='noopener'>§13 III S.1-2</a>; mit Rennprogramm bzw.<br/>Aufstellung je Wettannahmestelle — <a href='{{ELI}}#art-z13_abs-z4' target='_blank' rel='noopener'>§13 IV</a>"]
-        entrichtung["Steuer am 15. Tag nach Ablauf des<br/>Anmeldungszeitraums entrichten<br/>— <a href='{{ELI}}#art-z13_abs-z3' target='_blank' rel='noopener'>§13 III S.3</a>"]
-        vorlage["Von der Nachschau betroffene Personen<br/>(auch Angestellte/Beauftragte) legen auf<br/>Ersuchen Aufzeichnungen, Bücher, Geschäfts-<br/>papiere und andere Unterlagen vor und<br/>erteilen Auskünfte — <a href='{{ELI}}#art-z58_abs-z2' target='_blank' rel='noopener'>§58 II</a>"]
-        faellig(["Nachzuentrichtende oder zu erstattende<br/>Beträge sind einen Monat nach Bekanntgabe<br/>der Festsetzung fällig — <a href='{{ELI}}/art-z59' target='_blank' rel='noopener'>§59 S.2</a>"])
+        entstehung(["Steuer entsteht mit der Leistung des<br/>Wetteinsatzes — <a href='{{ELI}}/art-z12' target='_blank' rel='noopener'>§12</a><br/>(Aufzeichnungen zur Ermittlung der<br/>Steuer führen — <a href='{{ELI}}/art-z14' target='_blank' rel='noopener'>§14</a>)"])
+        anmeldung["Steueranmeldung bis zum 15. Tag nach<br/>Ablauf des Anmeldungszeitraums<br/>(Totalisatorsteuer:<br/>jeder Kalendermonat mit mind. einem<br/>Rennen — <a href='{{ELI}}#art-z13_abs-z1' target='_blank' rel='noopener'>§13 I</a>; Buchmachersteuer: jeder<br/>Kalendermonat — <a href='{{ELI}}#art-z13_abs-z2' target='_blank' rel='noopener'>§13 II</a>): eigenhändig<br/>unterschrieben nach amtlichem Vordruck<br/>oder per Datenfernübertragung, Steuer<br/>selbst berechnet — <a href='{{ELI}}#art-z13_abs-z3' target='_blank' rel='noopener'>§13 III S.1-2</a>; mit<br/>Rennprogramm bzw. Aufstellung je<br/>Wettannahmestelle — <a href='{{ELI}}#art-z13_abs-z4' target='_blank' rel='noopener'>§13 IV</a>"]
+        entrichtung["Steuer am 15. Tag nach Ablauf des<br/>Anmeldungszeitraums entrichten — <a href='{{ELI}}#art-z13_abs-z3' target='_blank' rel='noopener'>§13 III<br/>S.3</a>"]
+        vorlage["Von der Nachschau betroffene Personen<br/>(auch Angestellte/Beauftragte) legen auf<br/>Ersuchen Aufzeichnungen, Bücher,<br/>Geschäftspapiere und andere Unterlagen<br/>vor und erteilen Auskünfte — <a href='{{ELI}}#art-z58_abs-z2' target='_blank' rel='noopener'>§58 II</a>"]
+        faellig(["Nachzuentrichtende oder zu erstattende<br/>Beträge sind einen Monat nach<br/>Bekanntgabe der Festsetzung fällig — <a href='{{ELI}}/art-z59' target='_blank' rel='noopener'>§59<br/>S.2</a>"])
     end
 
     subgraph FA["Zuständiges Finanzamt"]
-        eingang("Steueranmeldung und Zahlung gehen ein (örtlich<br/>zuständig: Finanzamt am Wohnsitz/Sitz<br/>des Steuerschuldners — <a href='{{ELI}}/art-z15' target='_blank' rel='noopener'>§15</a>)")
-        nachschau{"Unangekündigte Nachschau: Amtsträger<br/>betreten Grundstücke und Geschäftsräume<br/>während der Geschäfts- und Arbeitszeiten?<br/>— <a href='{{ELI}}#art-z58_abs-z1' target='_blank' rel='noopener'>§58 I</a>"}
+        eingang("Steueranmeldung und Zahlung gehen ein<br/>(örtlich zuständig: Finanzamt am<br/>Wohnsitz/Sitz des Steuerschuldners<br/>— <a href='{{ELI}}/art-z15' target='_blank' rel='noopener'>§15</a>)")
+        nachschau{"Unangekündigte Nachschau:<br/>Amtsträger betreten<br/>Grundstücke und Geschäftsräume<br/>während der Geschäfts- und<br/>Arbeitszeiten? — <a href='{{ELI}}#art-z58_abs-z1' target='_blank' rel='noopener'>§58 I</a>"}
         keineNachschau(["Keine Nachschau"])
-        anlass{"Geben die Feststellungen Anlass<br/>zu einer Außenprüfung? — <a href='{{ELI}}#art-z58_abs-z3' target='_blank' rel='noopener'>§58 III S.1</a><br/>(Auswertung auch für andere<br/>Steuern — <a href='{{ELI}}#art-z58_abs-z4' target='_blank' rel='noopener'>§58 IV</a>)"}
+        anlass{"Geben die Feststellungen<br/>Anlass zu einer Außenprüfung?<br/>— <a href='{{ELI}}#art-z58_abs-z3' target='_blank' rel='noopener'>§58 III S.1</a><br/>(Auswertung auch für andere<br/>Steuern — <a href='{{ELI}}#art-z58_abs-z4' target='_blank' rel='noopener'>§58 IV</a>)"}
         keinePruefung(["Keine Außenprüfung"])
-        aussen["Übergang zur Außenprüfung (§193 AO)<br/>ohne vorherige Prüfungsanordnung;<br/>schriftlicher Hinweis — <a href='{{ELI}}#art-z58_abs-z3' target='_blank' rel='noopener'>§58 III</a>"]
-        nachentr{"Ergeben sich Steuerbeträge, die<br/>nachzuentrichten oder zu erstatten<br/>sind? — <a href='{{ELI}}/art-z59' target='_blank' rel='noopener'>§59</a>"}
+        aussen["Übergang zur Außenprüfung (§193 AO) ohne<br/>vorherige Prüfungsanordnung;<br/>schriftlicher Hinweis — <a href='{{ELI}}#art-z58_abs-z3' target='_blank' rel='noopener'>§58 III</a>"]
+        nachentr{"Ergeben sich Steuerbeträge,<br/>die nachzuentrichten oder zu<br/>erstatten sind? — <a href='{{ELI}}/art-z59' target='_blank' rel='noopener'>§59</a>"}
         keineAenderung(["Keine Änderung"])
-        festsetzung["Festsetzung zusammen mit der<br/>Steuer für den letzten Kalendermonat<br/>des Prüfungszeitraums — <a href='{{ELI}}/art-z59' target='_blank' rel='noopener'>§59 S.1</a>"]
+        festsetzung["Festsetzung zusammen mit der Steuer für<br/>den letzten Kalendermonat des<br/>Prüfungszeitraums — <a href='{{ELI}}/art-z59' target='_blank' rel='noopener'>§59 S.1</a>"]
     end
 
     info -.-> anmeldung

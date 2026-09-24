@@ -3,16 +3,16 @@ summary: "Zeigt, wann ein Nachtarbeitnehmer nach dem ArbZG verlangen kann, auf e
 ---
 swimlane-beta TD
     subgraph NAN["Nachtarbeitnehmer"]
-        start(["Verlangt Umsetzung auf einen<br/>für ihn geeigneten<br/>Tagesarbeitsplatz — <a href='{{ELI}}#art-z6_abs-z4' target='_blank' rel='noopener'>§6 IV S.1</a>"])
-        kein(["Kein Anspruch auf Umsetzung<br/>nach <a href='{{ELI}}#art-z6_abs-z4' target='_blank' rel='noopener'>§6 IV</a>"])
-        umgesetzt(["Umsetzung auf einen<br/>geeigneten Tagesarbeitsplatz — <a href='{{ELI}}#art-z6_abs-z4' target='_blank' rel='noopener'>§6 IV S.1</a>"])
+        start(["Verlangt Umsetzung auf einen für ihn<br/>geeigneten Tagesarbeitsplatz — <a href='{{ELI}}#art-z6_abs-z4' target='_blank' rel='noopener'>§6 IV S.1</a>"])
+        kein(["Kein Anspruch auf Umsetzung nach <a href='{{ELI}}#art-z6_abs-z4' target='_blank' rel='noopener'>§6 IV</a>"])
+        umgesetzt(["Umsetzung auf einen geeigneten<br/>Tagesarbeitsplatz — <a href='{{ELI}}#art-z6_abs-z4' target='_blank' rel='noopener'>§6 IV S.1</a>"])
     end
 
     subgraph AG["Arbeitgeber"]
-        pruefung["Prüft die Umsetzungsgründe:<br/>a) nach arbeitsmedizinischer Feststellung gefährdet<br/>die weitere Nachtarbeit die Gesundheit des Arbeitnehmers<br/>b) im Haushalt lebt ein Kind unter zwölf Jahren, das nicht<br/>von einer anderen im Haushalt lebenden Person betreut werden kann<br/>c) der Arbeitnehmer hat einen schwerpflegebedürftigen Angehörigen<br/>zu versorgen, der nicht von einem anderen im Haushalt<br/>lebenden Angehörigen versorgt werden kann — <a href='{{ELI}}#art-z6_abs-z4' target='_blank' rel='noopener'>§6 IV S.1</a>"]
-        grund{"Liegt einer der<br/>Gründe a) bis c) vor?"}
-        erford{"Stehen nach Auffassung des<br/>Arbeitgebers dringende betriebliche<br/>Erfordernisse entgegen? — <a href='{{ELI}}#art-z6_abs-z4' target='_blank' rel='noopener'>§6 IV S.2</a>"}
-        anhoeren["Hört den Betriebs-<br/>oder Personalrat — <a href='{{ELI}}#art-z6_abs-z4' target='_blank' rel='noopener'>§6 IV S.2</a>"]
+        pruefung["Prüft die Umsetzungsgründe:<br/>a) nach arbeitsmedizinischer<br/>Feststellung gefährdet die weitere<br/>Nachtarbeit die Gesundheit des<br/>Arbeitnehmers<br/>b) im Haushalt lebt ein Kind unter zwölf<br/>Jahren, das nicht von einer anderen im<br/>Haushalt lebenden Person betreut werden<br/>kann<br/>c) der Arbeitnehmer hat einen<br/>schwerpflegebedürftigen Angehörigen zu<br/>versorgen, der nicht von einem anderen<br/>im Haushalt lebenden Angehörigen<br/>versorgt werden kann — <a href='{{ELI}}#art-z6_abs-z4' target='_blank' rel='noopener'>§6 IV S.1</a>"]
+        grund{"Liegt einer der Gründe a) bis<br/>c) vor?"}
+        erford{"Stehen nach Auffassung des<br/>Arbeitgebers dringende<br/>betriebliche Erfordernisse<br/>entgegen? — <a href='{{ELI}}#art-z6_abs-z4' target='_blank' rel='noopener'>§6 IV S.2</a>"}
+        anhoeren["Hört den Betriebs- oder Personalrat — <a href='{{ELI}}#art-z6_abs-z4' target='_blank' rel='noopener'>§6<br/>IV S.2</a>"]
         unterbleibt(["Keine Umsetzung, sofern dringende<br/>betriebliche Erfordernisse<br/>entgegenstehen — <a href='{{ELI}}#art-z6_abs-z4' target='_blank' rel='noopener'>§6 IV S.1</a>"])
     end
 

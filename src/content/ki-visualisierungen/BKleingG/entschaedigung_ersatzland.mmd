@@ -3,24 +3,24 @@ summary: "Zeigt, wer nach einer Kündigung des Kleingartenpachtvertrags nach §9
 ---
 swimlane-beta TD
     subgraph VP["Verpächter"]
-        start(["Kündigt den Kleingartenpachtvertrag<br/>— <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 I</a>"])
+        start(["Kündigt den Kleingartenpachtvertrag — <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9<br/>I</a>"])
         grund{"Kündigung nach §9 I<br/>Nr.2 bis 6? — <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I S.1</a>"}
-        keine(["Kein Entschädigungsanspruch<br/>nach §11"])
+        keine(["Kein Entschädigungsanspruch nach §11"])
         zahltVP(["Verpächter ist zur Entschädigung<br/>verpflichtet — <a href='{{ELI}}#art-z11_abs-z2' target='_blank' rel='noopener'>§11 II S.1</a>"])
     end
 
     subgraph PA["Pächter"]
-        anspruch["Anspruch auf angemessene Entschädigung<br/>für Anpflanzungen und Anlagen<br/>— <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I</a>"]
-        faellig["Anspruch wird fällig, sobald das Pacht-<br/>verhältnis beendet und der Kleingarten<br/>geräumt ist — <a href='{{ELI}}#art-z11_abs-z3' target='_blank' rel='noopener'>§11 III</a>"]
+        anspruch["Anspruch auf angemessene Entschädigung<br/>für Anpflanzungen und Anlagen — <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I</a>"]
+        faellig["Anspruch wird fällig, sobald das<br/>Pachtverhältnis beendet und der<br/>Kleingarten geräumt ist — <a href='{{ELI}}#art-z11_abs-z3' target='_blank' rel='noopener'>§11 III</a>"]
     end
 
     subgraph GE["Gemeinde"]
-        ersatzland["Bei Dauerkleingärten: stellt geeignetes<br/>Ersatzland bereit oder beschafft es, es sei denn,<br/>sie ist dazu außerstande — <a href='{{ELI}}#art-z14_abs-z1' target='_blank' rel='noopener'>§14 I</a>; es soll bei<br/>Räumung zur Verfügung stehen — <a href='{{ELI}}#art-z14_abs-z3' target='_blank' rel='noopener'>§14 III</a>"]
+        ersatzland["Bei Dauerkleingärten: stellt geeignetes<br/>Ersatzland bereit oder beschafft es, es<br/>sei denn, sie ist dazu außerstande — <a href='{{ELI}}#art-z14_abs-z1' target='_blank' rel='noopener'>§14<br/>I</a>; es soll bei Räumung zur Verfügung<br/>stehen — <a href='{{ELI}}#art-z14_abs-z3' target='_blank' rel='noopener'>§14 III</a>"]
     end
 
     subgraph BT["Bedarfsträger (nimmt die Fläche in Anspruch)"]
-        ausgleich(["Leistet an die Gemeinde einen Ausgleichs-<br/>betrag in Höhe des Wertunterschieds zwischen<br/>Kleingartenfläche und Ersatzland — <a href='{{ELI}}#art-z14_abs-z2' target='_blank' rel='noopener'>§14 II</a>"])
-        zahltBT(["Ist zur Entschädigung verpflichtet<br/>— <a href='{{ELI}}#art-z11_abs-z2' target='_blank' rel='noopener'>§11 II S.2</a>"])
+        ausgleich(["Leistet an die Gemeinde einen<br/>Ausgleichsbetrag in Höhe des<br/>Wertunterschieds zwischen<br/>Kleingartenfläche und Ersatzland — <a href='{{ELI}}#art-z14_abs-z2' target='_blank' rel='noopener'>§14<br/>II</a>"])
+        zahltBT(["Ist zur Entschädigung verpflichtet — <a href='{{ELI}}#art-z11_abs-z2' target='_blank' rel='noopener'>§11<br/>II S.2</a>"])
     end
 
     start --> grund

@@ -2,24 +2,24 @@
 summary: "Zeigt die Prüfung der Unzulässigkeitsgründe eines Asylantrags nach § 29 AsylG, etwa bei bereits gewährtem Schutz in einem anderen Staat oder Dublin-Fällen, sowie die daran anknüpfende Abschiebungsanordnung oder -androhung."
 ---
 flowchart TD
-    A["Asylantrag liegt vor"] --> B{"Fall des Art. 38 Abs. 1<br/>Buchst. d oder e VO (EU)<br/>2024/1348 (Unzulässigkeit nach<br/>Unionsrecht)?<br/>— <a href='{{ELI}}#art-z29_abs-z' target='_blank' rel='noopener'>§29 Nr. 1</a>"}
+    A["Asylantrag liegt vor"] --> B{"Fall des Art. 38 Abs. 1<br/>Buchst. d oder e VO (EU)<br/>2024/1348 (Unzulässigkeit nach<br/>Unionsrecht)? — <a href='{{ELI}}#art-z29_abs-z' target='_blank' rel='noopener'>§29 Nr. 1</a>"}
     B -->|Ja| Z
-    B -->|Nein| C{"Hat ein anderer<br/>EU-Mitgliedstaat dem Ausländer<br/>bereits internationalen<br/>Schutz gewährt?<br/>— <a href='{{ELI}}#art-z29_abs-z' target='_blank' rel='noopener'>§29 Nr. 2</a>"}
+    B -->|Nein| C{"Hat ein anderer<br/>EU-Mitgliedstaat dem Ausländer<br/>bereits internationalen Schutz<br/>gewährt? — <a href='{{ELI}}#art-z29_abs-z' target='_blank' rel='noopener'>§29 Nr. 2</a>"}
     C -->|Ja| Z
-    C -->|Nein| D{"Ist ein zur Wiederaufnahme<br/>bereiter Nicht-EU-Staat als<br/>sicherer Drittstaat nach<br/>§26a einzustufen?<br/>— <a href='{{ELI}}#art-z29_abs-z' target='_blank' rel='noopener'>§29 Nr. 3</a>"}
+    C -->|Nein| D{"Ist ein zur Wiederaufnahme<br/>bereiter Nicht-EU-Staat als<br/>sicherer Drittstaat nach §26a<br/>einzustufen? — <a href='{{ELI}}#art-z29_abs-z' target='_blank' rel='noopener'>§29 Nr. 3</a>"}
     D -->|Ja| Z
-    D -->|Nein| E{"Gilt ein Nicht-EU-Staat als<br/>sicherer Drittstaat nach<br/>Art. 59 VO (EU) 2024/1348 und<br/>ist die Übernahme gesichert?<br/>— <a href='{{ELI}}#art-z29_abs-z' target='_blank' rel='noopener'>§29 Nr. 4</a>"}
+    D -->|Nein| E{"Gilt ein Nicht-EU-Staat als<br/>sicherer Drittstaat nach Art.<br/>59 VO (EU) 2024/1348 und ist<br/>die Übernahme gesichert? — <a href='{{ELI}}#art-z29_abs-z' target='_blank' rel='noopener'>§29<br/>Nr. 4</a>"}
     E -->|Ja| Z
-    E -->|Nein| F{"Gilt ein Nicht-EU-Staat als<br/>erster Asylstaat nach<br/>Art. 58 VO (EU) 2024/1348 und<br/>ist die Übernahme gesichert?<br/>— <a href='{{ELI}}#art-z29_abs-z' target='_blank' rel='noopener'>§29 Nr. 5</a>"}
+    E -->|Nein| F{"Gilt ein Nicht-EU-Staat als<br/>erster Asylstaat nach Art. 58<br/>VO (EU) 2024/1348 und ist die<br/>Übernahme gesichert? — <a href='{{ELI}}#art-z29_abs-z' target='_blank' rel='noopener'>§29 Nr.<br/>5</a>"}
     F -->|Ja| Z
-    F -->|Nein| G{"Folgeantrag, für den kein<br/>weiteres Asylverfahren<br/>durchzuführen ist?<br/>— <a href='{{ELI}}#art-z29_abs-z' target='_blank' rel='noopener'>§29 Nr. 6</a>, <a href='{{ELI}}#art-z71_abs-z1' target='_blank' rel='noopener'>§71 Abs. 1</a>"}
+    F -->|Nein| G{"Folgeantrag, für den kein<br/>weiteres Asylverfahren<br/>durchzuführen ist? — <a href='{{ELI}}#art-z29_abs-z' target='_blank' rel='noopener'>§29 Nr.<br/>6</a>, <a href='{{ELI}}#art-z71_abs-z1' target='_blank' rel='noopener'>§71 Abs. 1</a>"}
     G -->|Ja| Z
-    G -->|Nein| H["Kein Unzulässigkeitsgrund:<br/>inhaltliche Prüfung des<br/>Asylantrags"]
+    G -->|Nein| H["Kein Unzulässigkeitsgrund:<br/>inhaltliche Prüfung des Asylantrags"]
 
-    Z["Asylantrag als<br/>unzulässig abgelehnt<br/>— <a href='{{ELI}}#art-z29_abs-z' target='_blank' rel='noopener'>§29</a>"] --> I{"Soll die Überstellung in den<br/>zuständigen Staat auf Grund<br/>einer Überstellungsentscheidung<br/>erfolgen (Dublin-Fall)?<br/>— <a href='{{ELI}}#art-z34a_abs-z1' target='_blank' rel='noopener'>§34a Abs. 1</a>"}
-    I -->|Ja| J["Abschiebungsanordnung ohne<br/>vorherige Androhung und<br/>Fristsetzung, sobald die<br/>Durchführung feststeht<br/>— <a href='{{ELI}}#art-z34a_abs-z1' target='_blank' rel='noopener'>§34a Abs. 1</a>"]
-    I -->|Nein| K["Abschiebungsandrohung<br/>für den jeweiligen Staat<br/>— <a href='{{ELI}}#art-z34a_abs-z1' target='_blank' rel='noopener'>§34a Abs. 1 S. 3</a>"]
-    J --> L["Eilantrag gegen die<br/>Abschiebungsanordnung binnen<br/>einer Woche nach Bekanntgabe;<br/>Abschiebung vorher unzulässig<br/>— <a href='{{ELI}}#art-z34a_abs-z3' target='_blank' rel='noopener'>§34a Abs. 3</a>"]
+    Z["Asylantrag als unzulässig abgelehnt<br/>— <a href='{{ELI}}#art-z29_abs-z' target='_blank' rel='noopener'>§29</a>"] --> I{"Soll die Überstellung in den<br/>zuständigen Staat auf Grund<br/>einer<br/>Überstellungsentscheidung<br/>erfolgen (Dublin-Fall)? — <a href='{{ELI}}#art-z34a_abs-z1' target='_blank' rel='noopener'>§34a<br/>Abs. 1</a>"}
+    I -->|Ja| J["Abschiebungsanordnung ohne vorherige<br/>Androhung und Fristsetzung, sobald die<br/>Durchführung feststeht — <a href='{{ELI}}#art-z34a_abs-z1' target='_blank' rel='noopener'>§34a Abs. 1</a>"]
+    I -->|Nein| K["Abschiebungsandrohung für den jeweiligen<br/>Staat — <a href='{{ELI}}#art-z34a_abs-z1' target='_blank' rel='noopener'>§34a Abs. 1 S. 3</a>"]
+    J --> L["Eilantrag gegen die<br/>Abschiebungsanordnung binnen einer Woche<br/>nach Bekanntgabe;<br/>Abschiebung vorher unzulässig — <a href='{{ELI}}#art-z34a_abs-z3' target='_blank' rel='noopener'>§34a<br/>Abs. 3</a>"]
 
     style Z fill:#fff3cd,stroke:#c9a227
     style H fill:#d4edda,stroke:#2d8a4a
