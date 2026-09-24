@@ -1,0 +1,27 @@
+title: Gesetz zum Schutz von Müttern bei der Arbeit, in der Ausbildung und im Studium
+eli: eli/bund/bgbl-1/2017/s1228/2026-01-01/1/deu
+visOptions:
+  - name: Kündigungsverbot und Zulässigerklärung
+    visType: swimlane
+    filename: kuendigungsverbot
+    articles: ["§17"]
+  - name: Mitteilung und Benachrichtigung
+    visType: swimlane
+    filename: mitteilung_benachrichtigung
+    articles: ["§10", "§15", "§27"]
+  - name: Genehmigung 20 bis 22 Uhr
+    visType: swimlane
+    filename: genehmigung_20_22_uhr
+    articles: ["§5", "§28"]
+  - name: Schutzfristen
+    visType: flowchart
+    filename: schutzfristen
+    articles: ["§3"]
+  - name: Schutzmaßnahmen-Rangfolge
+    visType: flowchart
+    filename: schutzmassnahmen_rangfolge
+    articles: ["§10", "§13"]
+  - name: Akteure und Zuständigkeiten
+    visType: actors
+    filename: akteure
+    articles: []

@@ -1,0 +1,27 @@
+title: Gesetz über die unternehmerischen Sorgfaltspflichten zur Vermeidung von Menschenrechtsverletzungen in Lieferketten
+eli: eli/bund/bgbl-1/2021/s2959/2023-01-01/1/deu
+visOptions:
+  - name: Anwendungsbereich
+    visType: flowchart
+    filename: anwendungsbereich
+    articles: ["§1"]
+  - name: Risikoanalyse, Prävention, Abhilfe
+    visType: flowchart
+    filename: risikoanalyse_abhilfe
+    articles: ["§§5-7"]
+  - name: Beschwerdeverfahren
+    visType: swimlane
+    filename: beschwerdeverfahren
+    articles: ["§8"]
+  - name: Bericht und Berichtsprüfung
+    visType: swimlane
+    filename: berichtspflicht
+    articles: ["§10", "§12", "§13"]
+  - name: Behördliche Kontrolle
+    visType: swimlane
+    filename: behoerdliche_kontrolle
+    articles: ["§§14-18", "§§22-24"]
+  - name: Akteure und Zuständigkeiten
+    visType: actors
+    filename: akteure
+    articles: []

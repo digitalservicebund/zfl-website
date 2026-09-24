@@ -1,0 +1,44 @@
+---
+summary: "Zeigt das Kündigungsverbot nach dem MuSchG: die geschützten Zeiträume, die Kenntnis des Arbeitgebers oder die nachträgliche Mitteilung durch die Frau innerhalb von zwei Wochen und die ausnahmsweise Zulässigerklärung der Kündigung durch die oberste Landesbehörde."
+---
+swimlane-beta TD
+    subgraph FR["Frau"]
+        frei(["Kein Kündigungsverbot nach <a href='{{ELI}}#art-z17_abs-z1' target='_blank' rel='noopener'>§17 I</a>"])
+        mitteilung{"Schwangerschaft, Fehlgeburt<br/>oder Entbindung binnen 2<br/>Wochen nach Zugang der<br/>Kündigung mitgeteilt?<br/>— <a href='{{ELI}}#art-z17_abs-z1' target='_blank' rel='noopener'>§17 I S.1</a>"}
+        verspaetet{"Fristüberschreitung von der<br/>Frau nicht zu vertreten und<br/>Mitteilung unverzüglich<br/>nachgeholt? — <a href='{{ELI}}#art-z17_abs-z1' target='_blank' rel='noopener'>§17 I S.2</a>"}
+        keinSchutz(["Kündigung ist nicht nach <a href='{{ELI}}#art-z17_abs-z1' target='_blank' rel='noopener'>§17 I</a><br/>unzulässig"])
+    end
+
+    subgraph AG["Arbeitgeber"]
+        start(["Beabsichtigt eine Kündigung (gilt auch<br/>für Vorbereitungsmaßnahmen — <a href='{{ELI}}#art-z17_abs-z1' target='_blank' rel='noopener'>§17 I S.3</a>)"])
+        zeitraum{"Während der Schwangerschaft,<br/>bis 4 Monate nach Fehlgeburt<br/>nach der 12. SSW oder bis Ende<br/>der Schutzfrist nach der<br/>Entbindung (mind. 4 Monate)?<br/>— <a href='{{ELI}}#art-z17_abs-z1' target='_blank' rel='noopener'>§17 I S.1 Nr.1-3</a>"}
+        kenntnis{"Schwangerschaft, Fehlgeburt<br/>oder Entbindung bei Kündigung<br/>bekannt? — <a href='{{ELI}}#art-z17_abs-z1' target='_blank' rel='noopener'>§17 I S.1</a>"}
+        verbot["Kündigungsverbot greift: Kündigung nur<br/>nach behördlicher Zulässigerklärung<br/>— <a href='{{ELI}}#art-z17_abs-z1' target='_blank' rel='noopener'>§17 I</a>, <a href='{{ELI}}#art-z17_abs-z2' target='_blank' rel='noopener'>II</a>"]
+        unzulaessig(["Kündigung unzulässig — <a href='{{ELI}}#art-z17_abs-z1' target='_blank' rel='noopener'>§17 I S.1</a>"])
+        schriftlich(["Kündigt schriftlich unter Angabe des<br/>Kündigungsgrundes — <a href='{{ELI}}#art-z17_abs-z2' target='_blank' rel='noopener'>§17 II S.2</a><br/>(Zuschuss zum Mutterschaftsgeld danach<br/>von der für das Mutterschaftsgeld<br/>zuständigen Stelle — <a href='{{ELI}}#art-z20_abs-z3' target='_blank' rel='noopener'>§20 III</a>)"])
+    end
+
+    subgraph BH["Oberste Landesbehörde für Arbeitsschutz<br/>oder von ihr bestimmte Stelle"]
+        besonders{"Besonderer Fall ohne<br/>Zusammenhang mit dem Zustand<br/>der Frau in der<br/>Schwangerschaft, nach<br/>Fehlgeburt oder Entbindung?<br/>— <a href='{{ELI}}#art-z17_abs-z2' target='_blank' rel='noopener'>§17 II S.1</a>"}
+        zulaessig["Erklärt die Kündigung ausnahmsweise für<br/>zulässig — <a href='{{ELI}}#art-z17_abs-z2' target='_blank' rel='noopener'>§17 II S.1</a>"]
+    end
+
+    start --> zeitraum
+    zeitraum -->|Nein| frei
+    zeitraum -->|Ja| kenntnis
+    kenntnis -->|Ja| verbot
+    kenntnis -->|"Nein: Kündigung ausgesprochen"| mitteilung
+    mitteilung -->|"Ja: ausgesprochene Kündigung<br/>unzulässig"| verbot
+    mitteilung -->|Nein| verspaetet
+    verspaetet -->|"Ja: ausgesprochene Kündigung<br/>unzulässig"| verbot
+    verspaetet -->|Nein| keinSchutz
+    verbot -->|"Zulässigerklärung einholen"| besonders
+    besonders -->|Nein| unzulaessig
+    besonders -->|Ja| zulaessig
+    zulaessig --> schriftlich
+
+    style frei fill:#d4edda,stroke:#2d8a4a
+    style keinSchutz fill:#d4edda,stroke:#2d8a4a
+    style schriftlich fill:#d4edda,stroke:#2d8a4a
+    style unzulaessig fill:#f8d7da,stroke:#c0392b
+    style verbot fill:#fff3cd,stroke:#c9a227

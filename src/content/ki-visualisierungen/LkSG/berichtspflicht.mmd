@@ -1,0 +1,29 @@
+---
+summary: "Zeigt die jährliche Berichtspflicht nach dem LkSG mit Unternehmen und Bundesamt für Wirtschaft und Ausfuhrkontrolle (BAFA): Dokumentation, Erstellung, Veröffentlichung und Einreichung des Berichts sowie die behördliche Berichtsprüfung mit möglicher Nachbesserung und Bußgeld."
+---
+swimlane-beta TD
+    subgraph U["Unternehmen"]
+        doku(["Dokumentiert die Erfüllung<br/>der Sorgfaltspflichten<br/>fortlaufend, Aufbewahrung<br/>mind. 7 Jahre — <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>§10 I</a>"])
+        bericht["Erstellt jährlich Bericht:<br/>Risiken, Maßnahmen, Bewertung,<br/>Schlussfolgerungen — <a href='{{ELI}}#art-z10_abs-z2' target='_blank' rel='noopener'>§10 II S.2</a><br/>(nichts festgestellt: plausible<br/>Darlegung genügt — <a href='{{ELI}}#art-z10_abs-z3' target='_blank' rel='noopener'>§10 III</a>)"]
+        veroeffentlichen["Veröffentlicht ihn spätestens<br/>4 Monate nach Geschäftsjahres-<br/>ende für 7 Jahre kostenfrei<br/>im Internet — <a href='{{ELI}}#art-z10_abs-z2' target='_blank' rel='noopener'>§10 II S.1</a><br/>(Geschäftsgeheimnisse<br/>wahren — <a href='{{ELI}}#art-z10_abs-z4' target='_blank' rel='noopener'>§10 IV</a>)"]
+        einreichen["Reicht ihn auf Deutsch<br/>elektronisch ein — <a href='{{ELI}}#art-z12_abs-z1' target='_blank' rel='noopener'>§12 I</a>,<br/>spätestens 4 Monate nach<br/>Geschäftsjahresende<br/>— <a href='{{ELI}}#art-z12_abs-z2' target='_blank' rel='noopener'>§12 II</a>"]
+        nachbessern{"Fristgerecht<br/>nachgebessert?"}
+    end
+
+    subgraph BAFA["Bundesamt für Wirtschaft und Ausfuhrkontrolle (BAFA)"]
+        pruefung{"Bericht liegt vor<br/>und erfüllt §10 II<br/>und III?<br/>— <a href='{{ELI}}#art-z13_abs-z1' target='_blank' rel='noopener'>§13 I</a>"}
+        erfuellt(["Berichtspflicht erfüllt;<br/>anonyme Auswertung im<br/>Rechenschaftsbericht<br/>— <a href='{{ELI}}#art-z21_abs-z2' target='_blank' rel='noopener'>§21 II</a>"])
+        bussgeld(["Ordnungswidrigkeit:<br/>Geldbuße bis 500.000 €<br/>— <a href='{{ELI}}#art-z24_abs-z1' target='_blank' rel='noopener'>§24 I Nr.13</a>,<br/><a href='{{ELI}}#art-z24_abs-z2' target='_blank' rel='noopener'>§24 II S.1 Nr.2</a>"])
+    end
+
+    doku --> bericht
+    bericht --> veroeffentlichen
+    veroeffentlichen --> einreichen
+    einreichen --> pruefung
+    pruefung -->|Ja| erfuellt
+    pruefung -->|"Nein: Nachbesserung<br/>verlangt — <a href='{{ELI}}#art-z13_abs-z2' target='_blank' rel='noopener'>§13 II</a>"| nachbessern
+    nachbessern -->|Ja| erfuellt
+    nachbessern -->|Nein| bussgeld
+
+    style erfuellt fill:#d4edda,stroke:#2d8a4a
+    style bussgeld fill:#f8d7da,stroke:#c0392b

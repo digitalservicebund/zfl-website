@@ -1,0 +1,38 @@
+---
+summary: "Zeigt, was nach der Mitteilung einer Schwangerschaft oder der Stillzeit an den Arbeitgeber passiert: Nachweis auf Verlangen, unverzügliche Benachrichtigung der Aufsichtsbehörde, Festlegung der Schutzmaßnahmen mit Gesprächsangebot und die Aufsicht durch die Behörde."
+---
+swimlane-beta TD
+    subgraph FR["Schwangere oder stillende Frau"]
+        start(["Teilt dem AG die Schwangerschaft und den<br/>voraussichtlichen Entbindungstag mit,<br/>sobald sie davon weiß; das Stillen so<br/>früh wie möglich — <a href='{{ELI}}#art-z15_abs-z1' target='_blank' rel='noopener'>§15 I</a>"])
+        zeugnis["Legt ein ärztliches Zeugnis oder das<br/>einer Hebamme/ eines Entbindungspflegers<br/>mit dem voraussichtlichen Entbindungstag<br/>vor — <a href='{{ELI}}#art-z15_abs-z2' target='_blank' rel='noopener'>§15 II</a><br/>(Kosten trägt der AG — <a href='{{ELI}}#art-z9_abs-z6' target='_blank' rel='noopener'>§9 VI S.2</a>)"]
+        informiert(["Wird über die Gefährdungsbeurteilung und<br/>die für sie erforderlichen<br/>Schutzmaßnahmen informiert — <a href='{{ELI}}#art-z14_abs-z3' target='_blank' rel='noopener'>§14 III</a>"])
+    end
+
+    subgraph AG["Arbeitgeber"]
+        erhalt("Mitteilung geht ein")
+        nachweis{"Verlangt Nachweis der<br/>Schwangerschaft? — <a href='{{ELI}}#art-z15_abs-z2' target='_blank' rel='noopener'>§15 II</a>"}
+        benachrichtigen["Benachrichtigt unverzüglich die<br/>Aufsichtsbehörde — <a href='{{ELI}}#art-z27_abs-z1' target='_blank' rel='noopener'>§27 I S.1 Nr.1</a><br/>(beim Stillen nicht, wenn schon über die<br/>Schwangerschaft benachrichtigt; keine<br/>unbefugte Weitergabe an Dritte<br/>— <a href='{{ELI}}#art-z27_abs-z1' target='_blank' rel='noopener'>§27 I S.2</a>)"]
+        schutz["Legt unverzüglich die erforderlichen<br/>Schutzmaßnahmen fest<br/>(Gefährdungsbeurteilung, Rangfolge nach<br/><a href='{{ELI}}#art-z13_abs-z1' target='_blank' rel='noopener'>§13</a>)<br/>und bietet ein Gespräch über weitere<br/>Anpassungen an — <a href='{{ELI}}#art-z10_abs-z2' target='_blank' rel='noopener'>§10 II</a>"]
+        taetigkeit["Lässt nur Tätigkeiten ausüben, für die<br/>Schutzmaßnahmen getroffen sind<br/>— <a href='{{ELI}}#art-z10_abs-z3' target='_blank' rel='noopener'>§10 III</a>;<br/>dokumentiert — <a href='{{ELI}}#art-z14_abs-z1' target='_blank' rel='noopener'>§14 I</a>"]
+    end
+
+    subgraph BH["Aufsichtsbehörde"]
+        eingang("Benachrichtigung geht ein (nach<br/>Landesrecht zuständige Behörde — <a href='{{ELI}}#art-z29_abs-z1' target='_blank' rel='noopener'>§29 I</a>)")
+        aufsicht["Kann Angaben und Unterlagen verlangen<br/>— <a href='{{ELI}}#art-z27_abs-z2' target='_blank' rel='noopener'>§27 II</a>, III; berät Arbeitgeber und<br/>Beschäftigte — <a href='{{ELI}}#art-z29_abs-z4' target='_blank' rel='noopener'>§29 IV</a>"]
+        anordnung(["Kann im Einzelfall die erforderlichen<br/>Maßnahmen anordnen, z.B. Schutzmaßnahmen<br/>nach §§9, 13 oder Tätigkeitsverbote<br/>— <a href='{{ELI}}#art-z29_abs-z3' target='_blank' rel='noopener'>§29 III</a>"])
+    end
+
+    start --> erhalt
+    erhalt --> nachweis
+    nachweis -->|Ja| zeugnis
+    zeugnis --> benachrichtigen
+    nachweis -->|Nein| benachrichtigen
+    benachrichtigen --> schutz
+    benachrichtigen --> eingang
+    eingang --> aufsicht
+    aufsicht --> anordnung
+    schutz --> taetigkeit
+    taetigkeit --> informiert
+
+    style informiert fill:#d4edda,stroke:#2d8a4a
+    style anordnung fill:#fff3cd,stroke:#c9a227

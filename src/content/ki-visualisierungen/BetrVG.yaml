@@ -1,0 +1,27 @@
+title: Betriebsverfassungsgesetz
+eli: eli/bund/bgbl-1/1972/s13/2024-07-25/1/deu
+visOptions:
+  - name: Anhörung vor Kündigung
+    visType: swimlane
+    filename: anhoerung_kuendigung
+    articles: ["§102"]
+  - name: Personelle Einzelmaßnahmen
+    visType: swimlane
+    filename: personelle_einzelmassnahmen
+    articles: ["§99", "§100"]
+  - name: Betriebsänderung & Sozialplan
+    visType: swimlane
+    filename: betriebsaenderung
+    articles: ["§§111-113"]
+  - name: Einigungsstellenverfahren
+    visType: swimlane
+    filename: einigungsstelle
+    articles: ["§76"]
+  - name: Wahlvorstand & Wahlverfahren
+    visType: flowchart
+    filename: wahlvorstand
+    articles: ["§1", "§14a", "§§16-17a"]
+  - name: Akteure der Betriebsverfassung
+    visType: actors
+    filename: akteure
+    articles: []

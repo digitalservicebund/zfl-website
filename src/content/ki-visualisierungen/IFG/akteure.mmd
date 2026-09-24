@@ -1,0 +1,40 @@
+---
+summary: "Zeigt die Akteure des Informationsfreiheitsgesetzes: die informationspflichtigen Behörden des Bundes, Antragsteller und betroffene Dritte, den Bundesbeauftragten für die Informationsfreiheit, die Verwaltungsgerichte und das für die Gebühren zuständige Bundesministerium mit ihren Beziehungen."
+---
+flowchart LR
+    Behoerde["<b>Behörden des Bundes</b><br/>gewähren Zugang zu amtlichen Informationen — <a href='{{ELI}}#art-z1_abs-z1' target='_blank' rel='noopener'>§1 Abs. 1 S. 1</a><br/>ebenso sonstige Bundesorgane und -einrichtungen, soweit Verwaltungsaufgaben — <a href='{{ELI}}#art-z1_abs-z1' target='_blank' rel='noopener'>§1 Abs. 1 S. 2</a><br/>entscheiden über den Antrag — <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 Abs. 1 S. 1</a><br/>sollen Informationssammlungen verzeichnen und Pläne zugänglich machen — <a href='{{ELI}}/art-z11' target='_blank' rel='noopener'>§11</a>"]
+
+    subgraph Private["Antragsteller und Betroffene"]
+        Antragsteller["<b>Antragsteller (jeder)</b><br/>Anspruch auf Zugang zu amtlichen Informationen — <a href='{{ELI}}#art-z1_abs-z1' target='_blank' rel='noopener'>§1 Abs. 1 S. 1</a><br/>wählt die Art des Informationszugangs — <a href='{{ELI}}#art-z1_abs-z2' target='_blank' rel='noopener'>§1 Abs. 2 S. 2</a><br/>zahlt Gebühren und Auslagen, außer für einfache Auskünfte — <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>§10 Abs. 1</a>"]
+        Dritter["<b>Dritter</b><br/>jeder, über den Informationen vorliegen — <a href='{{ELI}}/art-z2' target='_blank' rel='noopener'>§2 Nr. 2</a><br/>willigt ggf. in die Offenlegung ein — <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 Abs. 1</a>, §6 S. 2"]
+        Private2["<b>Natürliche und juristische Personen des Privatrechts</b><br/>stehen einer Behörde gleich, soweit sich diese ihrer bedient — <a href='{{ELI}}#art-z1_abs-z1' target='_blank' rel='noopener'>§1 Abs. 1 S. 3</a>"]
+    end
+
+    subgraph Bund["Weitere Stellen des Bundes"]
+        BfI["<b>Bundesbeauftragter für die Informationsfreiheit</b><br/>kann von jedem angerufen werden — <a href='{{ELI}}#art-z12_abs-z1' target='_blank' rel='noopener'>§12 Abs. 1</a><br/>Aufgabe des Bundesbeauftragten für den Datenschutz — <a href='{{ELI}}#art-z12_abs-z2' target='_blank' rel='noopener'>§12 Abs. 2</a><br/>Kontrolle und Beanstandung — <a href='{{ELI}}#art-z12_abs-z3' target='_blank' rel='noopener'>§12 Abs. 3</a>"]
+        BMI["<b>Bundesministerium des Innern, für Bau und Heimat</b><br/>bestimmt Gebührentatbestände und -sätze per Rechtsverordnung — <a href='{{ELI}}#art-z10_abs-z3' target='_blank' rel='noopener'>§10 Abs. 3</a>"]
+    end
+
+    subgraph Gerichte["Gerichte"]
+        Gericht["<b>Verwaltungsgerichte</b><br/>entscheiden über Verpflichtungsklagen — <a href='{{ELI}}#art-z9_abs-z4' target='_blank' rel='noopener'>§9 Abs. 4</a>"]
+    end
+
+    Antragsteller -->|"Antrag — <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 Abs. 1</a>"| Behoerde
+    Antragsteller -->|"Anrufung — <a href='{{ELI}}#art-z12_abs-z1' target='_blank' rel='noopener'>§12 Abs. 1</a>"| BfI
+    BfI -->|"Kontrolle, Beanstandung — <a href='{{ELI}}#art-z12_abs-z3' target='_blank' rel='noopener'>§12 Abs. 3</a>"| Behoerde
+    BMI -->|"Gebührenverordnung — <a href='{{ELI}}#art-z10_abs-z3' target='_blank' rel='noopener'>§10 Abs. 3</a>"| Behoerde
+    Behoerde -->|"Zugang oder Ablehnung — <a href='{{ELI}}#art-z7_abs-z5' target='_blank' rel='noopener'>§7 Abs. 5</a>, §9"| Antragsteller
+    Behoerde -->|"Anhörung — <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 Abs. 1</a>"| Dritter
+    Behoerde -->|"bedient sich — <a href='{{ELI}}#art-z1_abs-z1' target='_blank' rel='noopener'>§1 Abs. 1 S. 3</a>"| Private2
+    Antragsteller -->|"Verpflichtungsklage — <a href='{{ELI}}#art-z9_abs-z4' target='_blank' rel='noopener'>§9 Abs. 4</a>"| Gericht
+    Dritter -->|"Klage — <a href='{{ELI}}#art-z8_abs-z2' target='_blank' rel='noopener'>§8 Abs. 2 S. 3</a>"| Gericht
+
+    classDef zentral fill:#fff3cd,stroke:#c9a227,stroke-width:2px
+    classDef behoerde fill:#e8f0fe,stroke:#3b6fd4
+    classDef privat fill:#f5f5f5,stroke:#999
+    classDef parlament fill:#ede7f6,stroke:#7e57c2
+    classDef gremium fill:#e6f4ea,stroke:#2d8a4a
+    class Behoerde zentral
+    class BfI,Gericht behoerde
+    class Antragsteller,Dritter,Private2 privat
+    class BMI parlament

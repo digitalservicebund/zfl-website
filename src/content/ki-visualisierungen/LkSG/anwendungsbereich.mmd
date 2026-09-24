@@ -1,0 +1,35 @@
+---
+summary: "Prüft, ob ein Unternehmen unter das LkSG fällt: Sitz oder Zweigniederlassung im Inland und in der Regel mindestens 1.000 im Inland beschäftigte Arbeitnehmer, einschließlich der Zurechnung von Leiharbeitnehmern und Konzerngesellschaften."
+---
+flowchart TD
+    start(["Unternehmen, ungeachtet<br/>seiner Rechtsform — <a href='{{ELI}}#art-z1_abs-z1' target='_blank' rel='noopener'>§1 I S.1</a>"])
+    sitz{"Sitz im Inland?<br/>(Hauptverwaltung, -niederlassung,<br/>Verwaltungs- oder Satzungssitz)<br/>— <a href='{{ELI}}#art-z1_abs-z1' target='_blank' rel='noopener'>§1 I S.1 Nr.1</a>"}
+    zweig{"Zweigniederlassung nach<br/>§13d HGB im Inland?<br/>— <a href='{{ELI}}#art-z1_abs-z1' target='_blank' rel='noopener'>§1 I S.2 Nr.1</a>"}
+    zaehlenSitz["Arbeitnehmer im Inland zählen,<br/>ins Ausland entsandte inklusive<br/>— <a href='{{ELI}}#art-z1_abs-z1' target='_blank' rel='noopener'>§1 I S.1 Nr.2</a>"]
+    konzern{"Obergesellschaft verbundener<br/>Unternehmen (§15 AktG)?<br/>— <a href='{{ELI}}#art-z1_abs-z3' target='_blank' rel='noopener'>§1 III</a>"}
+    konzernAN["Inländische Arbeitnehmer aller<br/>Konzerngesellschaften zurechnen,<br/>entsandte inklusive — <a href='{{ELI}}#art-z1_abs-z3' target='_blank' rel='noopener'>§1 III</a>"]
+    zaehlenZweig["Arbeitnehmer im Inland zählen<br/>— <a href='{{ELI}}#art-z1_abs-z1' target='_blank' rel='noopener'>§1 I S.2 Nr.2</a>"]
+    leih["Leiharbeitnehmer mitzählen,<br/>wenn Einsatz > 6 Monate<br/>— <a href='{{ELI}}#art-z1_abs-z2' target='_blank' rel='noopener'>§1 II</a>"]
+    schwelle{"In der Regel mind.<br/>1.000 Arbeitnehmer<br/>im Inland? (bis 2023:<br/>3.000) — <a href='{{ELI}}#art-z1_abs-z1' target='_blank' rel='noopener'>§1 I S.3</a>"}
+    anwendbar(["LkSG anwendbar:<br/>Sorgfaltspflichten in der<br/>Lieferkette — <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 I</a>"])
+    nicht(["LkSG nicht anwendbar"])
+    haftung["Keine zivilrechtliche Haftung<br/>aus dem LkSG; andere Haftung<br/>bleibt unberührt — <a href='{{ELI}}#art-z3_abs-z3' target='_blank' rel='noopener'>§3 III</a>"]
+
+    start --> sitz
+    sitz -->|Ja| zaehlenSitz
+    sitz -->|Nein| zweig
+    zweig -->|Ja| zaehlenZweig
+    zweig -->|Nein| nicht
+    zaehlenSitz --> konzern
+    konzern -->|Ja| konzernAN
+    konzern -->|Nein| leih
+    konzernAN --> leih
+    zaehlenZweig --> leih
+    leih --> schwelle
+    schwelle -->|Ja| anwendbar
+    schwelle -->|Nein| nicht
+    anwendbar -.- haftung
+
+    style anwendbar fill:#d4edda,stroke:#2d8a4a
+    style nicht fill:#f8d7da,stroke:#c0392b
+    style haftung fill:#f5f5f5,stroke:#999

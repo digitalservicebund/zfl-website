@@ -1,0 +1,54 @@
+---
+summary: "Zeigt den Weg zur Betriebsratswahl: ob der Betrieb betriebsratsfähig ist, wer den Wahlvorstand bestellt oder wählt (Betriebsrat, Gesamt- oder Konzernbetriebsrat, Betriebsversammlung oder Arbeitsgericht) samt Fristen und welches Wahlverfahren anschließend gilt."
+---
+flowchart TD
+    start(["Betriebsratswahl steht an"])
+    betriebsratsfaehig{"In der Regel mind. 5 ständige<br/>wahlberechtigte AN, davon<br/>3 wählbar? — <a href='{{ELI}}#art-z1_abs-z1' target='_blank' rel='noopener'>§1 I S.1</a>"}
+    nichtFaehig(["Kein eigener Betriebsrat;<br/>ggf. Zuordnung zum Hauptbetrieb — <a href='{{ELI}}#art-z4_abs-z2' target='_blank' rel='noopener'>§4 II</a>"])
+    brBesteht{"Besteht ein Betriebsrat?"}
+    brBestellt["BR bestellt Wahlvorstand aus 3 Wahlberechtigten<br/>und einen Vorsitzenden, spätestens 10 Wochen<br/>vor Ablauf der Amtszeit — <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 I S.1</a><br/>(vereinfachtes Verfahren: 4 Wochen — <a href='{{ELI}}/art-z17a' target='_blank' rel='noopener'>§17a Nr. 1</a>)"]
+    rechtzeitig{"Wahlvorstand 8 Wochen vor Ablauf<br/>der Amtszeit bestellt? — <a href='{{ELI}}#art-z16_abs-z2' target='_blank' rel='noopener'>§16 II S.1</a><br/>(vereinfachtes Verfahren: 3 Wochen — <a href='{{ELI}}/art-z17a' target='_blank' rel='noopener'>§17a Nr. 1</a>)"}
+    ersatzBestellung["Bestellung durch das Arbeitsgericht auf Antrag<br/>von mind. 3 Wahlberechtigten oder einer<br/>im Betrieb vertretenen Gewerkschaft — <a href='{{ELI}}#art-z16_abs-z2' target='_blank' rel='noopener'>§16 II</a><br/>oder durch GBR bzw. KBR — <a href='{{ELI}}#art-z16_abs-z3' target='_blank' rel='noopener'>§16 III</a>"]
+    gbrKbr{"Bestellt der Gesamt- oder<br/>Konzernbetriebsrat einen<br/>Wahlvorstand? — <a href='{{ELI}}#art-z17_abs-z1' target='_blank' rel='noopener'>§17 I</a>"}
+    versammlung["Einladung durch 3 wahlberechtigte AN oder<br/>eine im Betrieb vertretene Gewerkschaft — <a href='{{ELI}}#art-z17_abs-z3' target='_blank' rel='noopener'>§17 III</a>;<br/>Wahl des Wahlvorstands durch die Mehrheit<br/>der anwesenden AN in einer Betriebsversammlung — <a href='{{ELI}}#art-z17_abs-z2' target='_blank' rel='noopener'>§17 II</a><br/>(vereinfachtes Verfahren: Wahlversammlung — <a href='{{ELI}}/art-z17a' target='_blank' rel='noopener'>§17a Nr. 3</a>)"]
+    gewaehlt{"Versammlung findet statt<br/>und wählt einen Wahlvorstand? — <a href='{{ELI}}#art-z17_abs-z4' target='_blank' rel='noopener'>§17 IV</a>"}
+    arbgBestellung["Bestellung durch das Arbeitsgericht auf Antrag<br/>von mind. 3 wahlberechtigten AN oder einer<br/>im Betrieb vertretenen Gewerkschaft — <a href='{{ELI}}#art-z17_abs-z4' target='_blank' rel='noopener'>§17 IV</a><br/>(vereinfachtes Verfahren: <a href='{{ELI}}/art-z17a' target='_blank' rel='noopener'>§17a Nr. 4</a>)"]
+    wahlvorstand["Wahlvorstand leitet die Wahl unverzüglich ein,<br/>führt sie durch und stellt das Ergebnis fest — <a href='{{ELI}}#art-z18_abs-z1' target='_blank' rel='noopener'>§18 I S.1</a>"]
+    vereinfacht{"In der Regel 5 bis 100<br/>wahlberechtigte AN? — <a href='{{ELI}}#art-z14a_abs-z1' target='_blank' rel='noopener'>§14a I S.1</a>"}
+    wvGewaehlt{"Wahlvorstand auf einer<br/>Wahlversammlung gewählt? — <a href='{{ELI}}#art-z14a_abs-z1' target='_blank' rel='noopener'>§14a I S.2</a>, <a href='{{ELI}}#art-z14a_abs-z3' target='_blank' rel='noopener'>§14a III</a>"}
+    zweistufig(["Zweistufiges Verfahren: 1. Wahlversammlung wählt<br/>den Wahlvorstand, Wahlvorschläge bis zu deren Ende;<br/>eine Woche später 2. Wahlversammlung wählt<br/>den Betriebsrat — <a href='{{ELI}}#art-z14a_abs-z1' target='_blank' rel='noopener'>§14a I</a>, <a href='{{ELI}}#art-z14a_abs-z2' target='_blank' rel='noopener'>§14a II</a>"])
+    einstufig(["Nur eine Wahlversammlung zur Wahl des<br/>Betriebsrats; Wahlvorschläge bis eine Woche<br/>vorher — <a href='{{ELI}}#art-z14a_abs-z3' target='_blank' rel='noopener'>§14a III</a>"])
+    regulaer(["Allgemeines Wahlverfahren: geheime und<br/>unmittelbare Verhältniswahl, bei nur einem<br/>Wahlvorschlag Mehrheitswahl — <a href='{{ELI}}#art-z14_abs-z1' target='_blank' rel='noopener'>§14 I</a>, <a href='{{ELI}}#art-z14_abs-z2' target='_blank' rel='noopener'>§14 II</a>"])
+    hinweis101["101 bis 200 wahlberechtigte AN: Wahlvorstand<br/>und AG können das vereinfachte Verfahren<br/>vereinbaren — <a href='{{ELI}}#art-z14a_abs-z5' target='_blank' rel='noopener'>§14a V</a>"]
+    hinweisBrief["Schriftliche Stimmabgabe für Verhinderte — <a href='{{ELI}}#art-z14a_abs-z4' target='_blank' rel='noopener'>§14a IV</a>"]
+
+    start --> betriebsratsfaehig
+    betriebsratsfaehig -->|Nein| nichtFaehig
+    betriebsratsfaehig -->|Ja| brBesteht
+    brBesteht -->|Ja| brBestellt
+    brBestellt --> rechtzeitig
+    rechtzeitig -->|Ja| wahlvorstand
+    rechtzeitig -->|Nein| ersatzBestellung
+    ersatzBestellung --> wahlvorstand
+    brBesteht -->|Nein| gbrKbr
+    gbrKbr -->|Ja| wahlvorstand
+    gbrKbr -->|"Nein (keiner besteht<br/>oder Bestellung unterbleibt)"| versammlung
+    versammlung --> gewaehlt
+    gewaehlt -->|Ja| wahlvorstand
+    gewaehlt -->|Nein| arbgBestellung
+    arbgBestellung --> wahlvorstand
+    wahlvorstand --> vereinfacht
+    vereinfacht -->|Ja| wvGewaehlt
+    vereinfacht -->|Nein| regulaer
+    wvGewaehlt -->|Ja| zweistufig
+    wvGewaehlt -->|"Nein: bestellt durch BR,<br/>GBR, KBR oder ArbG"| einstufig
+    vereinfacht -.- hinweis101
+    wvGewaehlt -.- hinweisBrief
+
+    style nichtFaehig fill:#f8d7da,stroke:#c0392b
+    style wahlvorstand fill:#fff3cd,stroke:#c9a227
+    style zweistufig fill:#d4edda,stroke:#2d8a4a
+    style einstufig fill:#d4edda,stroke:#2d8a4a
+    style regulaer fill:#d4edda,stroke:#2d8a4a
+    style hinweis101 fill:#f5f5f5,stroke:#999
+    style hinweisBrief fill:#f5f5f5,stroke:#999

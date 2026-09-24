@@ -1,0 +1,30 @@
+---
+summary: "Prüft, ob ein Anspruch auf Informationszugang nach dem IFG eröffnet ist: Anspruchsberechtigung, verpflichtete Stelle des Bundes, Vorliegen einer amtlichen Information und Vorrang spezieller Zugangsregelungen."
+---
+flowchart TD
+    start(["Jeder begehrt Zugang zu<br/>Informationen — <a href='{{ELI}}#art-z1_abs-z1' target='_blank' rel='noopener'>§1 Abs. 1 S. 1</a>"]) --> behoerde{"Behörde des Bundes?<br/>— <a href='{{ELI}}#art-z1_abs-z1' target='_blank' rel='noopener'>§1 Abs. 1 S. 1</a>"}
+
+    behoerde -->|Nein| organ{"Sonstiges Bundesorgan<br/>oder -einrichtung, soweit<br/>öffentlich-rechtliche<br/>Verwaltungsaufgaben?<br/>— <a href='{{ELI}}#art-z1_abs-z1' target='_blank' rel='noopener'>§1 Abs. 1 S. 2</a>"}
+    organ -->|Nein| privat{"Natürliche oder juristische<br/>Person des Privatrechts, derer<br/>sich eine Behörde zur Erfüllung<br/>öffentlich-rechtlicher<br/>Aufgaben bedient?<br/>— <a href='{{ELI}}#art-z1_abs-z1' target='_blank' rel='noopener'>§1 Abs. 1 S. 3</a>"}
+    privat -->|Nein| keinAdressat["Kein Anspruch nach dem IFG:<br/>keine verpflichtete Stelle"]
+    privat -->|"Ja: Antrag an die Behörde,<br/>die sich der Person bedient<br/>— <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 Abs. 1 S. 2</a>"| info
+
+    behoerde -->|Ja| info{"Amtlichen Zwecken<br/>dienende Aufzeichnung,<br/>gleich wie gespeichert?<br/>— <a href='{{ELI}}/art-z2' target='_blank' rel='noopener'>§2 Nr. 1 S. 1</a>"}
+    organ -->|Ja| info
+
+    info -->|Nein| keineInfo["Kein Anspruch nach dem IFG:<br/>keine amtliche Information"]
+    info -->|Ja| entwurf{"Entwurf oder Notiz,<br/>die nicht Bestandteil eines<br/>Vorgangs werden soll?<br/>— <a href='{{ELI}}/art-z2' target='_blank' rel='noopener'>§2 Nr. 1 S. 2</a>"}
+
+    entwurf -->|Ja| keineInfo
+    entwurf -->|Nein| spezial{"Zugangsregelung in<br/>anderer Rechtsvorschrift?<br/>— <a href='{{ELI}}#art-z1_abs-z3' target='_blank' rel='noopener'>§1 Abs. 3</a>"}
+
+    spezial -->|"Ja (nicht aber §29 VwVfG<br/>oder §25 SGB X)"| vorrang["Die andere Regelung geht vor<br/>— <a href='{{ELI}}#art-z1_abs-z3' target='_blank' rel='noopener'>§1 Abs. 3</a>"]
+    spezial -->|Nein| eroeffnet["Anspruch nach dem IFG eröffnet;<br/>weiter mit den Ausschlussgründen<br/>— <a href='{{ELI}}/art-z3' target='_blank' rel='noopener'>§3</a>, <a href='{{ELI}}/art-z4' target='_blank' rel='noopener'>§4</a>, <a href='{{ELI}}/art-z5' target='_blank' rel='noopener'>§5</a>, <a href='{{ELI}}/art-z6' target='_blank' rel='noopener'>§6</a>"]
+
+    eroeffnet -.- art["Zugang durch Auskunft, Akteneinsicht<br/>oder in sonstiger Weise; von der<br/>gewünschten Art nur aus wichtigem<br/>Grund abweichen (insbesondere deutlich<br/>höherer Verwaltungsaufwand) — <a href='{{ELI}}#art-z1_abs-z2' target='_blank' rel='noopener'>§1 Abs. 2</a>"]
+
+    style keinAdressat fill:#f8d7da,stroke:#c0392b
+    style keineInfo fill:#f8d7da,stroke:#c0392b
+    style vorrang fill:#fff3cd,stroke:#c9a227
+    style eroeffnet fill:#d4edda,stroke:#2d8a4a
+    style art fill:#f5f5f5,stroke:#999
