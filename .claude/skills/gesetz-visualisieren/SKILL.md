@@ -177,6 +177,13 @@ https://mermaid.ai/open-source/syntax/swimlanes.html
   (z.B. Abschriften, optionale Stellungnahmen) gestrichelt (`-.->`).
 - Kanten erst nach allen `subgraph`-Blöcken aufführen.
 - Beispiel: `src/content/ki-visualisierungen/KSchG/massenentlassung.mmd`.
+- Der Swimlane-Renderer ordnet Knoten anders an als `flowchart` (eine Zeile
+  pro Knoten und Lane, Endknoten rutschen nach unten), was schnell zu langen
+  Umwegkanten führt. Vor dem Erstellen `swimlane-layout.md` in diesem
+  Skill-Verzeichnis lesen, die dortigen Techniken anwenden (u.a. Hinweise
+  ins Label statt als eigenen Knoten, unsichtbare Kanten `~~~`, keine
+  Rückkanten) und jede Swimlane mit `render-check.mjs` rendern und
+  visuell prüfen.
 
 Zusätzlich für die Akteursübersicht (`actors`):
 
