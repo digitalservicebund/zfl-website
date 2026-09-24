@@ -25,9 +25,25 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Sync node version with Dockerfile
+        # node is excluded from the upgrade step below: its version bumps have
+        # a bigger blast radius and deserve deliberate review rather than mise
+        # picking its own "latest". Dependabot already bumps the Dockerfile's
+        # node version (and gets reviewed via its own PR), so once that lands
+        # on main, mirror it into mise.toml/mise.lock instead of drifting.
+        run: |
+          NODE_VERSION=$(sed -n "s/^FROM node:\([0-9.]*\)-.*/\1/p" Dockerfile)
+          CURRENT=$(sed -n "s/^node = '\(.*\)'/\1/p" mise.toml)
+          if [ -n "$NODE_VERSION" ] && [ "$NODE_VERSION" != "$CURRENT" ]; then
+            sed -i "s/^node = '.*'/node = '$NODE_VERSION'/" mise.toml
+            mise lock node
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Upgrade pinned tool versions
-        # node is excluded: its version bumps have a bigger blast radius and
-        # deserve deliberate review rather than an automated PR.
+        # node is excluded here too: it's kept in sync with the Dockerfile by
+        # the step above, not by mise's own "latest" resolution.
         # minimum-release-age holds back versions released in the last 3 days,
         # giving newly-published releases time to surface problems before we
         # pick them up automatically.
@@ -41,11 +57,12 @@ jobs:
           commit-message: "chore(mise): bump pinned tool versions"
           title: "chore(mise): bump pinned tool versions"
           body: >
-            Automated upgrade of the tool versions pinned in `mise.toml`
-            (all except node). Dependabot does not currently support the
-            mise ecosystem, so this workflow keeps these pins from going
-            stale. Versions released in the last 3 days are held back; see
-            the draft "bump tool versions still in cooldown" PR for those.
+            Automated upgrade of the tool versions pinned in `mise.toml`.
+            Dependabot does not currently support the mise ecosystem, so this
+            workflow keeps these pins from going stale. node is kept in sync
+            with the Dockerfile's version rather than upgraded independently.
+            Versions released in the last 3 days are held back; see the draft
+            "bump tool versions still in cooldown" PR for those.
           branch: chore/mise-upgrade
           labels: dependencies
 
