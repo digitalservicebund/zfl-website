@@ -368,6 +368,19 @@
     wizard.mermaidSource ? isMermaidFlowchart(wizard.mermaidSource) : false,
   );
 
+  // Matches the direction in a diagram header, e.g. "flowchart TD"
+  const DIRECTION_PATTERN = /^(\s*(?:flowchart|swimlane-beta)\s+)(TD|TB|LR)\b/m;
+
+  let canFlip = $derived(DIRECTION_PATTERN.test(wizard.mermaidSource));
+
+  function flipDirection() {
+    wizard.mermaidSource = wizard.mermaidSource.replace(
+      DIRECTION_PATTERN,
+      (_, prefix: string, direction: string) =>
+        `${prefix}${direction === "LR" ? "TD" : "LR"}`,
+    );
+  }
+
   let showCanvas = $derived(wizard.currentStep === steps.length);
 
   function downloadRulemapXml() {
@@ -587,6 +600,7 @@
           title={selectedOption
             ? `${wizard.selectedExample?.title ?? "Eigenes Vorhaben"}: ${selectedOption.name}`
             : "Visualisierung"}
+          onFlip={canFlip ? flipDirection : undefined}
         />
         <div class="absolute bottom-24 right-32">
           <button

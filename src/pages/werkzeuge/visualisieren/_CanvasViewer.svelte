@@ -3,14 +3,17 @@
   import { SvelteMap } from "svelte/reactivity";
   import IconZoomIn from "~icons/ic/outline-zoom-in";
   import IconZoomOut from "~icons/ic/outline-zoom-out";
-  import IconRestartAlt from "~icons/ic/outline-restart-alt";
+  import IconFitScreen from "~icons/ic/outline-fit-screen";
+  import IconRotate from "~icons/ic/outline-rotate-90-degrees-cw";
 
   interface Props {
     svg: string;
     title?: string;
+    // Shows a button to flip the diagram's direction when provided
+    onFlip?: () => void;
   }
 
-  let { svg, title = "Visualisierung" }: Props = $props();
+  let { svg, title = "Visualisierung", onFlip }: Props = $props();
 
   const PINCH_SENSITIVITY = 2;
   const WHEEL_ZOOM_SENSITIVITY = 0.012;
@@ -265,11 +268,18 @@
       onclick={resetView}
       aria-label="Zoom zurücksetzen"
     >
-      <IconRestartAlt
-        class="text-cosmic-blue-base text-xl"
-        aria-hidden="true"
-      />
+      <IconFitScreen class="text-cosmic-blue-base text-xl" aria-hidden="true" />
     </button>
+    {#if onFlip}
+      <button
+        type="button"
+        class="kern-btn kern-btn--secondary kern-btn--only-icon"
+        onclick={onFlip}
+        aria-label="Ausrichtung wechseln"
+      >
+        <IconRotate class="text-cosmic-blue-base text-xl" aria-hidden="true" />
+      </button>
+    {/if}
   </div>
 
   <div
