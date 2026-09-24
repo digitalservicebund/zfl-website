@@ -57,9 +57,20 @@
   const initialVisualization = searchParams.get("visualization");
   let hasAppliedInitialVisualization = false;
 
-  wizard.selectedExample = untrack(() =>
+  const initialExample = untrack(() =>
     examples.find((example) => example.short === initialNorm),
   );
+  const initialOption = initialExample?.visOptions.find(
+    (option) => option.name === initialVisualization,
+  );
+
+  if (initialExample) {
+    wizard.selectedLawType = "existing";
+    wizard.selectedExample = initialExample;
+  }
+  // A shared URL with both norm and visualization should open the result
+  // directly instead of walking through the earlier steps.
+  if (initialOption) wizard.currentStep = steps.length;
 
   const LAW_STEP_STATUS_MESSAGES = [
     "Lese Gesetzestext …",
@@ -91,10 +102,18 @@
     wizard.visOptionsSessionId = undefined;
     wizard.visOptionsError = undefined;
 
-    const { promise: fakeDelay, cancel } = createFakeLoadingSequence(
-      LAW_STEP_STATUS_MESSAGES,
-      (message) => (wizard.loadingStatusMessage = message),
-    );
+    const isInitialLoad = !hasAppliedInitialVisualization;
+    hasAppliedInitialVisualization = true;
+
+    // Skips the fake delay when opening a shared URL: the step showing it
+    // (step 2) is skipped anyway.
+    const { promise: fakeDelay, cancel } =
+      isInitialLoad && initialOption
+        ? { promise: Promise.resolve(), cancel: () => {} }
+        : createFakeLoadingSequence(
+            LAW_STEP_STATUS_MESSAGES,
+            (message) => (wizard.loadingStatusMessage = message),
+          );
 
     Promise.all([getVisOptions(source), fakeDelay])
       .then(([result]) => {
@@ -103,14 +122,8 @@
         wizard.visOptionsSessionId = result.sessionId;
         wizard.isLoadingVisOptions = false;
 
-        if (!hasAppliedInitialVisualization) {
-          hasAppliedInitialVisualization = true;
-          const initialOption = result.options.find(
-            (option) => option.name === initialVisualization,
-          );
-          if (initialOption) {
-            wizard.selectedVisOption = initialOption.name;
-          }
+        if (isInitialLoad && initialOption) {
+          wizard.selectedVisOption = initialOption.name;
         }
       })
       .catch((error: unknown) => {
