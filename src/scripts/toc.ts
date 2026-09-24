@@ -17,12 +17,22 @@ function buildTocTree(headings: HTMLHeadingElement[]): TocNode[] {
       heading.dataset.tocLabel?.trim() || (heading.textContent ?? "").trim();
     if (!label) continue;
 
-    if (!heading.id) {
-      heading.id = slugify(label);
+    // Headings preceded by a StepNumber should jump-mark to the step
+    // number circle instead of the heading text, so the step indicator
+    // is visible after the jump.
+    const previousSibling = heading.previousElementSibling;
+    const anchor: HTMLElement =
+      previousSibling instanceof HTMLElement &&
+      "tocAnchor" in previousSibling.dataset
+        ? previousSibling
+        : heading;
+
+    if (!anchor.id) {
+      anchor.id = slugify(label);
     }
 
     const level = Number(heading.tagName[1]);
-    const node: TocNode = { id: heading.id, label, children: [] };
+    const node: TocNode = { id: anchor.id, label, children: [] };
 
     // -1 as fallback keeps the condition false when the stack is empty.
     while ((stack.at(-1)?.level ?? -1) >= level) {

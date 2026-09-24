@@ -27,6 +27,7 @@ import informationen6Img from "./_assets/informationen-6.png";
 import flussdiagramm6Img from "./_assets/flussdiagramm-6.png";
 import flussdiagrammThumbnail from "./_assets/flussdiagrammThumbnail.png";
 import flussdiagrammVideo from "./_assets/flussdiagramm-video.mp4";
+import type { WerkzeugType } from "@/content.config";
 
 import { getEntries } from "astro:content";
 
@@ -527,7 +528,7 @@ const conceptboardTemplate =
 
     <section class="breakout-grid space-y-32">
       <h2>Weitere Ressourcen</h2>
-      <div class="lg:grid lg:grid-cols-2 lg:gap-32 xl:grid-cols-3">
+      <div class="grid sm:grid-cols-1 gap-y-32 lg:grid-cols-2 lg:gap-x-32 xl:grid-cols-3">
         {external_ressources.map((ressource) => (
           <KernCard
             title={ressource.data.title}
@@ -540,7 +541,7 @@ const conceptboardTemplate =
           >
             <div slot="pre-header" class="mb-16 flex w-full justify-between">
               <div class="flex gap-8">
-                {ressource.data.type.map((type) => (
+                {ressource.data.type.map((type: WerkzeugType) => (
                   <span class={`kern-badge kern-badge--${type.toLowerCase()}`}>
                     <span class="kern-label">{type}</span>
                   </span>
