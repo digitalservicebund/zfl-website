@@ -30,7 +30,9 @@
     mermaid.initialize({
       startOnLoad: false,
       htmlLabels,
-      flowchart: { htmlLabels },
+      // Mermaid's default (200px) re-wraps the <br/>-separated lines in the
+      // .mmd sources, making nodes narrow and diagrams very tall.
+      flowchart: { htmlLabels, wrappingWidth: 400 },
     });
   }
 
