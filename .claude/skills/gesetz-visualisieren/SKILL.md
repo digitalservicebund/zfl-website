@@ -41,7 +41,16 @@ https://docs.rechtsinformationen.bund.de/v3/api-docs)
    (`id="art-zN_abs-zM"`), die in Schritt 4 zum Verlinken gebraucht wird.
    Außerdem den `legislationIdentifier` des Treffers notieren (den
    **ELI-Pfad**, z.B. `eli/bund/bgbl-1/1951/s499/2021-06-18/1/deu`).
-4. Falls das Gesetz sehr lang ist (>~50 Paragraphen), zunächst nur das
+   Das HTML als Datei speichern (für `check-anchors.mjs` in Schritt 4).
+   Arbeitsdateien (HTML, Hilfsskripte, Renderings) in einem eigenen
+   Unterordner `<scratchpad>/{Abkuerzung}/` ablegen, damit parallele Läufe
+   für mehrere Gesetze sich nicht gegenseitig überschreiben.
+4. Den Fassungsstand prüfen (Datum im ELI-Pfad). RIS enthält teils nur
+   ältere Fassungen (z.B. LkSG: Stand 2023-01-01). Liegt der Stand mehr als
+   ~1 Jahr zurück oder sind spätere Änderungen bekannt, den Nutzer darauf
+   hinweisen, bevor Prozesse ausgewählt werden, die davon betroffen sein
+   könnten.
+5. Falls das Gesetz sehr lang ist (>~50 Paragraphen), zunächst nur das
    Inhaltsverzeichnis/die Paragraphenüberschriften sichten und gezielt die
    Abschnitte nachladen, die für Ablaufprüfungen relevant wirken (Fristen,
    Verfahren, Anspruchsvoraussetzungen, Anzeige-/Meldepflichten).
@@ -133,6 +142,19 @@ Stilkonventionen für das Diagramm selbst (siehe existierende Dateien unter
 
 - Knotenlabels in doppelten Anführungszeichen, Zeilenumbrüche mit `<br/>`
   (nicht `\n`), damit lange Texte lesbar bleiben.
+- Zeilenlänge (sichtbarer Text ohne HTML-Tags) pro `<br/>`-Zeile:
+  - **Rauten `{"..."}`: ~25-30 Zeichen.** Mermaid bemisst die Raute an der
+    Textbox; lange Zeilen ergeben riesige, flache Rauten mit viel Leerraum.
+  - **Alle anderen Knoten und Kantenbeschriftungen: ~40 Zeichen**, bevorzugt
+    an inhaltlichen Grenzen umbrechen (eine Aussage mit ihrem Verweis pro
+    Zeile).
+  - Keine Silbentrennung per `-<br/>` und keine sehr kurzen Zeilen
+    (< ~20 Zeichen) — das macht Knoten unnötig schmal und hoch.
+  - Den Verweis nicht vom Paragraphenzeichen trennen (`— §17 I S.1` bleibt
+    zusammen).
+  - Gilt für `flowchart TD` und `swimlane`. Wizard und `render-check.mjs`
+    brechen bei diesen erst ab 400px automatisch um, bei `flowchart LR`
+    (Akteure) schon ab 200px — dort siehe die Akteurs-Konventionen unten.
 - Jede inhaltliche Aussage mit Paragraphen-/Artikelverweis versehen
   (z.B. `— §4 S.4`), damit die Diagramme rechtlich nachvollziehbar bleiben.
 - Entscheidungen als Raute `{"..."}`, Ja/Nein bzw. Fristablauf-Pfade als
@@ -156,8 +178,17 @@ Stilkonventionen für das Diagramm selbst (siehe existierende Dateien unter
   doppelten Anführungszeichen steht. Bezieht sich ein Knoten auf mehrere
   Absätze oder nur pauschal auf den ganzen Paragraphen, stattdessen auf
   `{{ELI}}/art-zN` verlinken; Verweise auf andere Gesetze nicht verlinken.
+  Paragraphen ohne nummerierte Absätze haben im HTML den Anker
+  `art-zN_abs-z` (leere Absatznummer) — darauf verlinken
+  (`{{ELI}}#art-zN_abs-z`), wie in den bestehenden Diagrammen.
   Das gilt für `flowchart` und `swimlane` gleichermaßen (Swimlanes nutzen
   dieselbe Knotensyntax).
+- Nach dem Schreiben alle Anker gegen das HTML aus Schritt 2 prüfen:
+  `node .claude/skills/gesetz-visualisieren/check-anchors.mjs <gesetz.html> src/content/ki-visualisierungen/{Abkuerzung}/*.mmd`
+  (meldet jeden Link, dessen Anker-ID im HTML fehlt).
+- Jedes Diagramm (nicht nur Swimlanes) mit `render-check.mjs` rendern und
+  das PNG ansehen (siehe `swimlane-layout.md`, Abschnitt „Rendern und
+  prüfen"), auch Flowcharts und Akteursübersichten.
 
 Zusätzlich für `swimlane`-Diagramme. Die Syntax ist neu (Beta, ab Mermaid
 12), daher vor dem Erstellen die Referenz lesen:
@@ -204,7 +235,10 @@ Zusätzlich für die Akteursübersicht (`actors`):
 - Ein Knoten pro Akteur: erste Zeile der Name in `<b>…</b>`, danach eine
   Zeile pro Zuständigkeit/Pflicht/Befugnis, jede mit eigenem
   Paragraphenverweis (statt alle Verweise gesammelt am Ende); höchstens
-  5 Zeilen insgesamt. Beispiel:
+  5 Zeilen insgesamt. Innerhalb einer Zeile keine weiteren `<br/>` setzen
+  (abweichend von der Zeilenlängen-Regel oben) — bei `flowchart LR` bricht
+  der Renderer ab 200px selbst um, so bleiben die Knoten schmal und das
+  Diagramm nicht zu breit. Beispiel:
   `KDD["<b>Koordinierungsstelle für digitale Dienste</b><br/>Durchsetzung des DSA — <a href='{{ELI}}#art-z14_abs-z1' target='_blank' rel='noopener'>§14 I</a><br/>völlig unabhängig — <a href='{{ELI}}/art-z15' target='_blank' rel='noopener'>§15</a>"]`
 - Kanten sind Beziehungen und immer beschriftet: Beziehungsart + genau
   **ein** verlinkter Paragraphenverweis (weitere Verweise als Klartext),
@@ -217,6 +251,18 @@ Zusätzlich für die Akteursübersicht (`actors`):
   - Stehen zwei Akteure in beide Richtungen in unterschiedlicher Beziehung
     (z.B. Meldung an die Behörde, Anordnungen der Behörde), zwei
     gerichtete Kanten statt einer `<-->`-Kante mit Sammelbeschriftung.
+    Jede solche Gegenkante läuft im LR-Layout aber als Bogen um das ganze
+    Diagramm (die Anordnung folgt allein der Kantenrichtung; Reihenfolge
+    von Knoten, Gruppen und Kanten im Quelltext ändert daran nichts). Ist
+    eine der beiden Richtungen nur eine Nebenbeziehung, sie stattdessen als
+    Zeile in den Knoten des handelnden Akteurs aufnehmen (z.B. BetrVG:
+    „beantragt Maßnahmen beim BR — §70 I" im Knoten der JAV) und nur die
+    Hauptbeziehung als Kante zeichnen.
+  - Kanten möglichst in eine Richtung laufen lassen (von den Akteuren, die
+    einrichten, beaufsichtigen oder anordnen, zu denen, die ausführen), dann
+    bleiben die Kanten kurz. Beziehungen dafür, wo sinnvoll, aus Sicht des
+    zentralen Akteurs formulieren (z.B. „nimmt Beschwerden entgegen" statt
+    einer Gegenkante „beschwert sich").
   - Höchstens ~15 verbundene Akteurspaare (ein Paar mit zwei
     Gegenrichtungskanten zählt einfach).
   - Beziehung zu mehreren Akteuren gleichzeitig: `A --> B & C`.
@@ -314,7 +360,11 @@ Speichern:
      dem gesamten Gesetzestext, nicht auf einzelnen Paragraphen.
 3. Kurze Zusammenfassung an den Nutzer: welches Gesetz, welche Prozesse
    (jeweils mit Diagrammtyp) und ob eine Akteursübersicht erstellt wurde
-   (falls nicht, kurz warum), wo gespeichert. Auf `/werkzeuge/visualisieren`
-   im lokalen Dev-Server verweisen, um die Diagramme zu prüfen.
+   (falls nicht, kurz warum), wo gespeichert. Stellen auflisten, an denen
+   das Diagramm über den Wortlaut hinausgeht oder vereinfacht (z.B. aus
+   allgemeinem Verfahrensrecht oder Rechtsprechung abgeleitete Schritte,
+   bewusst weggelassene Ausnahmen), damit sie fachlich geprüft werden
+   können. Auf `/werkzeuge/visualisieren` im lokalen Dev-Server verweisen,
+   um die Diagramme zu prüfen.
 
 Nicht committen, es sei denn der Nutzer bittet explizit darum.

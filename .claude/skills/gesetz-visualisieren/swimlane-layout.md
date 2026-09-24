@@ -66,6 +66,30 @@ Parse-Fehlerfreiheit sagt nichts über lange Umwege oder Kanten aus dem Nichts.
    handelnden Akteur führen, statt einen zusätzlichen Endknoten in der Lane
    anzulegen (z.B. DSGVO: „Nein: keine Benachrichtigung" direkt zur
    Entscheidung der Aufsichtsbehörde).
+9. **Fristentscheidungen in die Lane der wartenden Partei.** Wartet ein
+   Akteur auf die Reaktion eines anderen (z.B. ArbnErfG §16 II: Arbeitgeber
+   wartet 3 Monate auf das Übertragungsverlangen), die Entscheidung
+   „binnen Frist reagiert?" in die Lane des Wartenden legen. Liegt sie in
+   der Lane des Reagierenden, läuft der „Nein"-Zweig oft unten herum
+   zurück.
+10. **Empfangsknoten in der Ziel-Lane.** Läuft eine Übergabe an eine Lane,
+    deren erster Knoten eine Entscheidung ist, kann ein kurzer Knoten wie
+    „Antrag geht ein" davor eine Kante verhindern, die über den ganzen
+    Diagrammkopf läuft (BetrVG §§99, 100: Arbeitsgericht).
+11. **Selten genutzte Lanes an den Rand.** Eine Lane, die erst ganz am Ende
+    einen Knoten bekommt (z.B. LkSG: Öffentliche Auftraggeber), als erste
+    oder letzte Lane anlegen; dann kreuzt nur eine gerade Kante eine leere
+    Nachbar-Lane statt mehrerer.
+12. **Gerichtliche Nebenverfahren als gestrichelte Kante zu einem
+    Ergebnisknoten** (z.B. BetrVG §102 V S.2: „auf Antrag des AG" →
+    „Entbindung per einstweiliger Verfügung, wenn …"), statt einer
+    Ja/Nein-Raute in der Gerichts-Lane, die fast immer lange Umlaufkanten
+    erzeugt.
+13. **Wartezeiten ins Kantenlabel** statt als eigener Knoten, z.B. IFG
+    §8 II S.2: `-->|"Ja: zwei Wochen nach<br/>Bekanntgabe der Anordnung"|`.
+14. **Gemeinsam handelnde Akteure in eine Lane**, wenn sie im Verfahren nur
+    zusammen auftreten (z.B. BetrVG §76: „Arbeitgeber und Betriebsrat"
+    gegenüber der Einigungsstelle). Spart Lane-Wechsel.
 
 ## Rechtslogik geht vor
 
@@ -85,11 +109,12 @@ Aus dem Repo-Root:
 ```sh
 node .claude/skills/gesetz-visualisieren/render-check.mjs \
   src/content/ki-visualisierungen/{Abkuerzung}/{slug}.mmd \
-  <scratchpad>/{slug}.png
+  <scratchpad>/{Abkuerzung}/{slug}.png
 ```
 
 Das Skript nutzt die im Repo installierte Mermaid-Version mit derselben
-Konfiguration wie `_Wizard.svelte`. Chromium startet nicht in der Sandbox
+Konfiguration wie `_Wizard.svelte` (inkl. `wrappingWidth`: 400px für
+TD-Diagramme, 200px für `flowchart LR`). Chromium startet nicht in der Sandbox
 (Mach-Port-Registrierung wird verweigert) — den Befehl außerhalb der
 Sandbox ausführen. Danach das PNG ansehen und prüfen:
 
