@@ -88,8 +88,6 @@ fileignoreconfig:
   - filename: src/pages/werkzeuge/ressourcen/flussdiagramme.astro
     allowed_patterns:
       - "Falls Sie noch keine Legende haben, erstellen Sie eine."
-  - filename: src/scripts/toc.ts
-    checksum: 81ebc6889c6372af7408d61ada6407b042255d325579c39941281a9d158417e4
   - filename: src/content/visualisierung/ablauf-eines-online-verfahrens.md
     checksum: 3932230805182a9e132fbb7ec41ef5dc7447f98c77fef3d5faf7460ca1e97c2a
   - filename: src/content/visualisierung/uebersicht-verantwortlicher-akteure.md
@@ -113,7 +111,7 @@ fileignoreconfig:
   - filename: src/content/visualisierungen/ablauf-eines-online-verfahrens.md
     checksum: 6f55b8b8f0fbcbb1b478b158ce66e236ac1cef4d0d3357bf21703989e548ca8b
   - filename: src/scripts/toc.ts
-    checksum: 81ebc6889c6372af7408d61ada6407b042255d325579c39941281a9d158417e4
+    checksum: dd12a3c7ae848776bf7d80d7ffe7502265785a6edaa5bd9f7b6cc3e1467d029e
   - filename: public/downloads/Zielgruppenanalyse.pptx
     checksum: d3158428fdd66fe859dbd09de7d6062fada34e38ca9e021d7e9708a7660ad877
   - filename: src/content/visualisierungen/verknuepfung-von-paragraphen-und-prozessschitten.jpg
