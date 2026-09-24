@@ -1,14 +1,14 @@
 ---
 name: gesetz-visualisieren
-description: Sucht ein Gesetz über die RIS-Search-API, identifiziert bis zu 5 Prozesse/Abläufe im Gesetzestext und erzeugt dafür Mermaid-Diagramme (Flowcharts oder Swimlanes), die als .mmd-Dateien im Visualisierungs-Tool (src/pages/werkzeuge/visualisieren) gespeichert werden. Trigger bei "Gesetz visualisieren", "Mermaid-Diagramm für Gesetz", "Prozessvisualisierung Gesetzestext".
+description: Sucht ein Gesetz über die RIS-Search-API, identifiziert bis zu 5 Prozesse/Abläufe im Gesetzestext und erzeugt dafür Mermaid-Diagramme (Flowcharts oder Swimlanes), optional ergänzt um eine Akteursübersicht, die als .mmd-Dateien im Visualisierungs-Tool (src/pages/werkzeuge/visualisieren) gespeichert werden. Trigger bei "Gesetz visualisieren", "Mermaid-Diagramm für Gesetz", "Prozessvisualisierung Gesetzestext".
 ---
 
 # Gesetz visualisieren
 
 Dieser Skill führt den Nutzer durch einen 4-stufigen Ablauf, um aus einem
-Gesetzestext bis zu 5 Mermaid-Diagramme (`flowchart` oder `swimlane`) zu
-erzeugen und in dieses Repo einzupflegen (Tool unter
-`/werkzeuge/visualisieren`).
+Gesetzestext bis zu 5 Mermaid-Diagramme (`flowchart` oder `swimlane`) und
+optional eine Akteursübersicht (`actors`) zu erzeugen und in dieses Repo
+einzupflegen (Tool unter `/werkzeuge/visualisieren`).
 
 Ein optionales Argument kann bereits den Gesetznamen enthalten
 (`$ARGUMENTS`). Wenn vorhanden, überspringe Schritt 1.
@@ -79,13 +79,36 @@ Lege für jeden Prozess den Diagrammtyp (`visType`) fest:
   Wesentlichen nur ein Akteur handelt (z.B. "Pflichten des
   Gebäudeeigentümers").
 
-Andere Mermaid-Diagrammtypen (`sequenceDiagram`, `stateDiagram`, `gantt`
-usw.) nicht verwenden.
+Andere Mermaid-Diagrammtypen (`sequenceDiagram`, `stateDiagram`, `gantt`,
+`erDiagram` usw.) nicht verwenden.
+
+### Zusätzlich: Akteursübersicht (`actors`)
+
+Unabhängig von den bis zu 5 Prozessen prüfen, ob sich eine
+**Akteursübersicht** lohnt: ein Diagramm, das zeigt, welche Akteure das
+Gesetz einrichtet oder adressiert, wofür jeder zuständig ist und wie sie
+zueinander stehen (Aufsicht, Zusammenarbeit, Melde-/Berichtspflichten,
+Weisungen, Anordnungen, Beteiligung). Es ist weder Ablauf noch Prüfschema,
+sondern zeigt Rollen ohne zeitliche Reihenfolge.
+
+- Nur erstellen, wenn das Gesetz **mindestens drei Akteure mit gesetzlich
+  bestimmten Rollen** und ausdrücklich geregelte Beziehungen zwischen ihnen
+  enthält (typisch: Behördenorganisation, Aufsichts- und Meldestrukturen,
+  Rollenmodelle wie Verantwortlicher/Auftragsverarbeiter). Gute Beispiele:
+  DDG, GwG, IfSG (Meldewesen), DSGVO, KCanG.
+- Nicht erstellen bei Gesetzen, die im Wesentlichen einen Akteur
+  adressieren oder vor allem Berechnungen, Definitionen oder Tarife regeln
+  (z.B. SolZG, BetrKV, GKG).
+- Höchstens **ein** Akteursdiagramm pro Gesetz, zusätzlich zu den bis zu
+  5 Prozessdiagrammen.
+- Bei sehr umfangreichen Gesetzen auf einen klar benannten Teilbereich
+  eingrenzen (z.B. IfSG: "Akteure im Meldewesen") statt alles abzubilden.
 
 ## Schritt 4 — Mermaid-Diagramme erstellen und speichern
 
 Für jeden identifizierten Prozess ein Diagramm des in Schritt 3 gewählten
-Typs erstellen: `flowchart TD` bzw. `swimlane-beta TD`. Jede `.mmd`-Datei
+Typs erstellen: `flowchart TD` bzw. `swimlane-beta TD`; für die
+Akteursübersicht `flowchart LR`. Jede `.mmd`-Datei
 beginnt mit einem Frontmatter-Block (Repo-Konvention, keine Mermaid-Syntax —
 wird von `_mmdFrontmatter.ts` vor dem Rendern entfernt) mit einem
 `summary`-Feld: 1-2 Sätze, die den visualisierten Prozess beschreiben
@@ -155,6 +178,71 @@ https://mermaid.ai/open-source/syntax/swimlanes.html
 - Kanten erst nach allen `subgraph`-Blöcken aufführen.
 - Beispiel: `src/content/ki-visualisierungen/KSchG/massenentlassung.mmd`.
 
+Zusätzlich für die Akteursübersicht (`actors`):
+
+- Header `flowchart LR`. Keine Entscheidungsrauten, keine Nummerierung,
+  keine zeitliche Reihenfolge.
+- 6-12 Akteure; Randakteure, die nur in einem Nebensatz vorkommen,
+  weglassen statt das Diagramm zu überladen. Lange Aufzählungen
+  gleichartiger Akteure (z.B. die Aufsichtsbehörden nach §50 GwG) zu
+  einem Knoten zusammenfassen. Akteure mit Namen aus dem Gesetzestext
+  benennen (z.B. "nach den medienrechtlichen Bestimmungen der Länder
+  benannte Stellen", nicht "Landesmedienanstalten", wenn das Gesetz diesen
+  Begriff nicht verwendet); überlässt das Gesetz die Zuständigkeit dem
+  Landesrecht, die Rolle benennen ("Zuständige Behörde").
+- Zentraler Akteur zuerst: der Akteur mit den meisten Beziehungen (nicht
+  zwingend der Hauptadressat des Gesetzes, z.B. KCanG: zuständige Behörde
+  statt Anbauvereinigung). Gibt es keinen klaren Mittelpunkt, keinen
+  Akteur als zentral markieren.
+- Ein Knoten pro Akteur: erste Zeile der Name in `<b>…</b>`, danach eine
+  Zeile pro Zuständigkeit/Pflicht/Befugnis, jede mit eigenem
+  Paragraphenverweis (statt alle Verweise gesammelt am Ende); höchstens
+  5 Zeilen insgesamt. Beispiel:
+  `KDD["<b>Koordinierungsstelle für digitale Dienste</b><br/>Durchsetzung des DSA — <a href='{{ELI}}#art-z14_abs-z1' target='_blank' rel='noopener'>§14 I</a><br/>völlig unabhängig — <a href='{{ELI}}/art-z15' target='_blank' rel='noopener'>§15</a>"]`
+- Kanten sind Beziehungen und immer beschriftet: Beziehungsart + genau
+  **ein** verlinkter Paragraphenverweis (weitere Verweise als Klartext),
+  kurz halten (Beschriftungen werden sonst im LR-Layout sehr breit), z.B.
+  `BNetzA -->|"beherbergt — <a href='{{ELI}}#art-z14_abs-z1' target='_blank' rel='noopener'>§14 I</a>"| KDD`.
+  - `-->` gerichtete Beziehungen (Aufsicht, Weisung, Anordnung, Meldung,
+    Bericht, Beauftragung).
+  - `<-->` gegenseitige Beziehungen (Zusammenarbeit, Informationsaustausch).
+  - `-.-` lose Anbindung (Beratung, Beirat, freiwillige Mitwirkung).
+  - Stehen zwei Akteure in beide Richtungen in unterschiedlicher Beziehung
+    (z.B. Meldung an die Behörde, Anordnungen der Behörde), zwei
+    gerichtete Kanten statt einer `<-->`-Kante mit Sammelbeschriftung.
+  - Höchstens ~15 verbundene Akteurspaare (ein Paar mit zwei
+    Gegenrichtungskanten zählt einfach).
+  - Beziehung zu mehreren Akteuren gleichzeitig: `A --> B & C`.
+- Akteure mit top-level `subgraph ID["Label"] ... end` nach Ebene oder
+  Rolle gruppieren (z.B. `Bund["Bundesbehörden"]`, `Laender["Länder"]`,
+  `EU["EU-Ebene"]`, `Verpflichtete["Verpflichtete"]`), 2-4 Gruppen. ID
+  ohne Bindestriche und Umlaute, Anzeigename im Label. Der zentrale Akteur
+  darf außerhalb der Gruppen stehen. Zerfällt das Gesetz in getrennte
+  Akteursinseln, die nichts miteinander zu tun haben, nur den
+  zusammenhängenden Kern abbilden; eine kleine Insel darf als Gruppe
+  `Weitere["Weitere Akteure"]` dazukommen, wenn sie für das Verständnis
+  wichtig ist.
+- Farben per `classDef` am Ende, in allen Akteursdiagrammen einheitlich:
+  ```
+      classDef zentral fill:#fff3cd,stroke:#c9a227,stroke-width:2px
+      classDef behoerde fill:#e8f0fe,stroke:#3b6fd4
+      classDef privat fill:#f5f5f5,stroke:#999
+      classDef parlament fill:#ede7f6,stroke:#7e57c2
+      classDef gremium fill:#e6f4ea,stroke:#2d8a4a
+      class KDD zentral
+      class BNetzA,BfDI behoerde
+  ```
+  `zentral` für den zentralen Akteur (auch wenn er selbst eine Behörde
+  ist), `behoerde` für Behörden, Institute und Gerichte, `privat` für
+  Verpflichtete, Unternehmen, Vereinigungen und Bürger, `parlament` für
+  Parlamente, Regierungen und Ministerien, `gremium` für Beiräte,
+  Ausschüsse und EU-Gremien. Knoten-IDs dürfen nicht wie eine
+  `classDef` heißen (z.B. nicht `behoerde`).
+- Die Verlinkungskonventionen oben gelten unverändert (bei EU-Rechtsakten
+  ohne ELI Verweise als Klartext wie in den übrigen Diagrammen des
+  Gesetzes).
+- Beispiel: `src/content/ki-visualisierungen/DDG/akteure.mmd`.
+
 Speichern:
 
 1. Lege pro Prozess eine Datei
@@ -178,7 +266,7 @@ Speichern:
      `KSchG.yaml`) mit `title` (offizieller Name ohne Abkürzung), `eli`
      (ELI-Pfad aus Schritt 2, Pflichtfeld) und leerem `visOptions`-Array
      anlegen. Die Datei ist reine YAML-Daten, kein Markdown-Frontmatter.
-   - Für jeden Prozess ein `visOptions`-Objekt mit `name` (Prozessname aus
+   - Für jedes Prozessdiagramm ein `visOptions`-Objekt mit `name` (Prozessname aus
      Schritt 3), `visType` (`flowchart` oder `swimlane`, siehe Schritt 3),
      `filename` (Dateiname der `.mmd`-Datei ohne Verzeichnis und
      Endung, z.B. `"klagefristen"`) und `articles` hinzufügen: die Liste der
@@ -212,8 +300,14 @@ Speichern:
      (siehe Schritt 2/4-Linkkonvention), dort das im Diagramm verwendete
      "Art. N"-Format übernehmen. Verweise auf andere Gesetze nicht
      aufnehmen. Kein Prozess ohne Paragraphenbezug → `articles: []`.
+   - Für die Akteursübersicht (falls erstellt) ein `visOptions`-Objekt mit
+     `name: Akteure und Zuständigkeiten` (bei eingegrenztem Teilbereich
+     entsprechend, z.B. `Akteure im Meldewesen`), `visType: actors`,
+     `filename: akteure` und immer `articles: []` — die Übersicht beruht auf
+     dem gesamten Gesetzestext, nicht auf einzelnen Paragraphen.
 3. Kurze Zusammenfassung an den Nutzer: welches Gesetz, welche Prozesse
-   (jeweils mit Diagrammtyp), wo gespeichert. Auf `/werkzeuge/visualisieren`
+   (jeweils mit Diagrammtyp) und ob eine Akteursübersicht erstellt wurde
+   (falls nicht, kurz warum), wo gespeichert. Auf `/werkzeuge/visualisieren`
    im lokalen Dev-Server verweisen, um die Diagramme zu prüfen.
 
 Nicht committen, es sei denn der Nutzer bittet explizit darum.
