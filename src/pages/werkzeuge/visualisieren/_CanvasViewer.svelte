@@ -19,7 +19,10 @@
   const WHEEL_ZOOM_SENSITIVITY = 0.012;
   const MIN_SCALE = 0.2;
   const MAX_SCALE = 8;
-  const INITIAL_SCALE = 2;
+  // Upper bound for the initial fit, so small diagrams aren't blown up.
+  const MAX_INITIAL_SCALE = 2;
+  // Share of the viewport the diagram fills along its fitted axis.
+  const FIT_MARGIN = 0.9;
   // Extra scrollable margin around the diagram, as a fraction of its own
   // size on each side, so there's room to freely scroll/drag past its edges.
   const PADDING_RATIO = 0.5;
@@ -91,15 +94,45 @@
     canvasEl.scrollTop = (canvasEl.scrollHeight - canvasEl.clientHeight) / 2;
   }
 
+  // Mermaid renders its SVG with width="100%" and a max-width of its natural
+  // width, so a diagram wider than the viewport (typically LR) gets squeezed
+  // to the viewport width, making it look much smaller than a TD one at the
+  // same scale. Pinning the SVG to its natural (viewBox) size makes scale
+  // mean the same for every diagram.
+  function pinSvgSize() {
+    const svgEl = contentEl?.querySelector("svg");
+    if (!svgEl) return;
+    const { width, height } = svgEl.viewBox.baseVal;
+    if (!width || !height) return;
+    svgEl.style.maxWidth = "none";
+    svgEl.setAttribute("width", `${width}`);
+    svgEl.setAttribute("height", `${height}`);
+  }
+
+  // Fits the diagram's cross axis to the viewport (width for tall TD
+  // diagrams, height for wide LR ones), leaving the flow direction to
+  // scroll through. Fitting both axes would shrink long diagrams to an
+  // unreadable size.
+  function initialScale(): number {
+    if (!canvasEl || naturalWidth === 0 || naturalHeight === 0) return 1;
+    const fitWidth = canvasEl.clientWidth / naturalWidth;
+    const fitHeight = canvasEl.clientHeight / naturalHeight;
+    return Math.min(
+      Math.max(fitWidth, fitHeight) * FIT_MARGIN,
+      MAX_INITIAL_SCALE,
+    );
+  }
+
   async function resetView() {
     scale = 1;
     await tick();
     if (!canvasEl || !contentEl) return;
+    pinSvgSize();
     // Measured at scale 1, so this rect is the diagram's unscaled size.
     const rect = contentEl.getBoundingClientRect();
     naturalWidth = rect.width;
     naturalHeight = rect.height;
-    scale = clampScale(INITIAL_SCALE);
+    scale = clampScale(initialScale());
     applySizer(scale);
     await tick();
     centerScroll();
