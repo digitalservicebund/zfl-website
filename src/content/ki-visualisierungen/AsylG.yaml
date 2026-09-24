@@ -2,10 +2,21 @@ title: Asylgesetz
 eli: eli/bund/bgbl-1/1992/s1126/2026-07-29/1/deu
 visOptions:
   - name: Asylverfahren-Ablauf
-    visType: flowchart
+    visType: swimlane
     filename: asylverfahren_ablauf
     articles:
-      ["§13", "§13a", "§14", "§16", "§§18-20", "§25", "§31", "§34", "§38"]
+      [
+        "§13",
+        "§13a",
+        "§14",
+        "§16",
+        "§§18-20",
+        "§22",
+        "§25",
+        "§31",
+        "§34",
+        "§38",
+      ]
   - name: Unzulässigkeits-/Dublin-Prüfung
     visType: flowchart
     filename: unzulaessigkeit_dublin
@@ -22,3 +33,7 @@ visOptions:
     visType: flowchart
     filename: folgeantrag
     articles: ["§29", "§34", "§34a", "§71"]
+  - name: Akteure im Asylverfahren
+    visType: actors
+    filename: akteure
+    articles: []

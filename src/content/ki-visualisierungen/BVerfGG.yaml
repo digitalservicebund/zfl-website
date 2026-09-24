@@ -14,10 +14,14 @@ visOptions:
     filename: organstreit_zulaessigkeit
     articles: ["§63", "§64", "§67"]
   - name: Konkrete Normenkontrolle
-    visType: flowchart
+    visType: swimlane
     filename: konkrete_normenkontrolle
-    articles: ["§§80-81a"]
+    articles: ["§§80-82"]
   - name: Parteiverbotsverfahren
     visType: flowchart
     filename: parteiverbot
     articles: ["§§43-46a"]
+  - name: "Akteure: Organisation und Richterwahl"
+    visType: actors
+    filename: akteure
+    articles: []

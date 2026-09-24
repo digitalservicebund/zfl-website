@@ -10,7 +10,7 @@ visOptions:
     filename: befoerderung_evd
     articles: ["§16", "§19", "§21"]
   - name: Ausfallverfahren bei Systemausfall
-    visType: flowchart
+    visType: swimlane
     filename: ausfallverfahren
     articles: ["§24", "§25", "§27", "§28"]
   - name: Unregelmäßigkeiten während der Beförderung

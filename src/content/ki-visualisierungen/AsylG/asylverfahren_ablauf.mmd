@@ -1,25 +1,56 @@
 ---
-summary: "Zeigt den Ablauf des Asylverfahrens von der Antragstellung über Registrierung, persönliche Antragseinreichung und Anhörung bis zur Entscheidung des Bundesamtes über Schutzstatus oder Ablehnung mit Abschiebungsandrohung."
+summary: "Zeigt den Ablauf des Asylverfahrens von der Antragstellung über Weiterleitung, Registrierung, persönliche Antragseinreichung und Anhörung bis zur Entscheidung des Bundesamtes über Schutzstatus oder Ablehnung mit Abschiebungsandrohung."
 ---
-flowchart TD
-    A["Ausländer möchte<br/>Asyl beantragen"] --> B{"Im Besitz erforderlicher<br/>Einreisepapiere?<br/>— <a href='{{ELI}}#art-z13_abs-z2' target='_blank' rel='noopener'>§13 Abs. 2</a>"}
-    B -->|Nein| C["Antrag bei der Grenzbehörde<br/>bzw. bei unerlaubter Einreise<br/>unverzügliche Meldung bei<br/>Aufnahmeeinrichtung oder Antrag<br/>bei Ausländerbehörde/Polizei<br/>— <a href='{{ELI}}#art-z13_abs-z2' target='_blank' rel='noopener'>§13 Abs. 2</a>, <a href='{{ELI}}#art-z18_abs-z1' target='_blank' rel='noopener'>§18 Abs. 1</a>, <a href='{{ELI}}#art-z19_abs-z1' target='_blank' rel='noopener'>§19 Abs. 1</a>"]
-    B -->|Ja| D["Antrag bei Ausländerbehörde,<br/>Grenzbehörde oder Polizei<br/>— <a href='{{ELI}}#art-z13_abs-z2' target='_blank' rel='noopener'>§13 Abs. 2</a>"]
-    C --> E
-    D --> E["Weiterleitung an die zuständige<br/>Aufnahmeeinrichtung<br/>— <a href='{{ELI}}#art-z20_abs-z1' target='_blank' rel='noopener'>§20 Abs. 1</a>"]
-    E --> F["Registrierung des Asylantrags<br/>durch die Aufnahmeeinrichtung<br/>— <a href='{{ELI}}#art-z13a_abs-z' target='_blank' rel='noopener'>§13a</a>"]
-    F --> G["Persönliche Einreichung des<br/>Asylantrags bei der Außenstelle<br/>des Bundesamtes<br/>— <a href='{{ELI}}#art-z14_abs-z1' target='_blank' rel='noopener'>§14 Abs. 1</a>"]
-    G --> H["Sicherung der Identität durch<br/>erkennungsdienstliche Maßnahmen<br/>— <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 Abs. 1</a>"]
-    H --> I["Anhörung im Asylverfahren,<br/>soll möglichst bald nach der<br/>Antragseinreichung erfolgen<br/>— <a href='{{ELI}}#art-z25_abs-z3' target='_blank' rel='noopener'>§25 Abs. 3</a>"]
-    I --> J{"Vorbringen erst nach der<br/>Anhörung, obwohl es die<br/>Entscheidung verzögern würde?<br/>— <a href='{{ELI}}#art-z25_abs-z2' target='_blank' rel='noopener'>§25 Abs. 2</a>"}
-    J -->|Ja| K["Verspätetes Vorbringen<br/>kann unberücksichtigt bleiben<br/>— <a href='{{ELI}}#art-z25_abs-z2' target='_blank' rel='noopener'>§25 Abs. 2</a>"]
-    J -->|Nein| L
-    K --> L["Entscheidung des Bundesamtes<br/>über den Asylantrag<br/>— <a href='{{ELI}}#art-z31_abs-z2' target='_blank' rel='noopener'>§31 Abs. 2</a>"]
-    L --> M{"Asylberechtigung, Flüchtlingseigenschaft<br/>oder subsidiärer Schutz zuerkannt?<br/>— <a href='{{ELI}}#art-z31_abs-z2' target='_blank' rel='noopener'>§31 Abs. 2</a>"}
-    M -->|Ja| N["Anerkennung bzw. Zuerkennung<br/>internationalen Schutzes"]
-    M -->|Nein| O["Ablehnung mit schriftlicher<br/>Abschiebungsandrohung<br/>— <a href='{{ELI}}#art-z34_abs-z1' target='_blank' rel='noopener'>§34 Abs. 1</a>"]
-    O --> P["Ausreisefrist von<br/>i. d. R. einer Woche<br/>— <a href='{{ELI}}#art-z38_abs-z1' target='_blank' rel='noopener'>§38 Abs. 1</a>"]
+swimlane-beta TD
+    subgraph BEH["Grenzbehörde, Ausländerbehörde, Polizei"]
+        antragGB["Asylantrag bei der Grenzbehörde,<br/>erkennungsdienstliche Behandlung<br/>— <a href='{{ELI}}#art-z18_abs-z5' target='_blank' rel='noopener'>§18 Abs. 5</a><br/>(Einreiseverweigerung in den Fällen<br/>des <a href='{{ELI}}#art-z18_abs-z2' target='_blank' rel='noopener'>§18 Abs. 2</a>)"]
+        antragAB["Asylantrag bei Ausländerbehörde,<br/>Bundespolizei oder Polizei eines Landes,<br/>erkennungsdienstliche Behandlung<br/>— <a href='{{ELI}}#art-z19_abs-z2' target='_blank' rel='noopener'>§19 Abs. 2</a>"]
+        weiter["Weiterleitung an die zuständige oder<br/>nächstgelegene Aufnahmeeinrichtung<br/>— <a href='{{ELI}}#art-z18_abs-z1' target='_blank' rel='noopener'>§18 Abs. 1</a>, <a href='{{ELI}}#art-z19_abs-z1' target='_blank' rel='noopener'>§19 Abs. 1</a>"]
+    end
 
-    style N fill:#d4edda,stroke:#2d8a4a
-    style O fill:#f8d7da,stroke:#c0392b
-    style P fill:#fff3cd,stroke:#c9a227
+    subgraph AE["Aufnahmeeinrichtung"]
+        reg["Registrierung des Asylantrags durch<br/>die zuerst kontaktierte Aufnahmeeinrichtung<br/>— <a href='{{ELI}}/art-z13a' target='_blank' rel='noopener'>§13a</a>"]
+        aufnahme["Aufnahme oder Weiterleitung an die<br/>zuständige Aufnahmeeinrichtung<br/>— <a href='{{ELI}}#art-z22_abs-z1' target='_blank' rel='noopener'>§22 Abs. 1</a>"]
+        info["Unterrichtung der zugeordneten<br/>Außenstelle, Zuleitung der Unterlagen<br/>— <a href='{{ELI}}#art-z20_abs-z2' target='_blank' rel='noopener'>§20 Abs. 2</a>, <a href='{{ELI}}#art-z21_abs-z3' target='_blank' rel='noopener'>§21 Abs. 3</a>"]
+    end
+
+    subgraph AUS["Ausländer"]
+        start(["Ausländer möchte<br/>Asyl beantragen"])
+        grenze{"An der Grenze ohne erforderliche<br/>Einreisepapiere?<br/>— <a href='{{ELI}}#art-z13_abs-z2' target='_blank' rel='noopener'>§13 Abs. 2</a>"}
+        ort{"Asylantrag bei Ausländerbehörde<br/>oder Polizei?<br/>— <a href='{{ELI}}#art-z13_abs-z2' target='_blank' rel='noopener'>§13 Abs. 2</a>"}
+        meldung["Persönliche Meldung in einer<br/>Aufnahmeeinrichtung<br/>— <a href='{{ELI}}#art-z22_abs-z1' target='_blank' rel='noopener'>§22 Abs. 1</a>"]
+        einreichung["Persönliche Einreichung des<br/>Asylantrags bei der Außenstelle<br/>des Bundesamtes<br/>— <a href='{{ELI}}#art-z14_abs-z1' target='_blank' rel='noopener'>§14 Abs. 1</a>"]
+    end
+
+    subgraph BA["Bundesamt für Migration und Flüchtlinge"]
+        ident["Sicherung der Identität durch<br/>erkennungsdienstliche Maßnahmen<br/>— <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 Abs. 1</a>"]
+        anhoerung["Anhörung möglichst bald nach der<br/>Antragseinreichung — <a href='{{ELI}}#art-z25_abs-z3' target='_blank' rel='noopener'>§25 Abs. 3</a><br/>(späteres Vorbringen kann unberücksichtigt<br/>bleiben — <a href='{{ELI}}#art-z25_abs-z2' target='_blank' rel='noopener'>§25 Abs. 2</a>)"]
+        entscheidung["Entscheidung über den Asylantrag,<br/>unverzügliche Zustellung<br/>— <a href='{{ELI}}#art-z31_abs-z1' target='_blank' rel='noopener'>§31 Abs. 1</a><br/>(Unterrichtung der Ausländerbehörde<br/>— <a href='{{ELI}}#art-z31_abs-z4' target='_blank' rel='noopener'>§31 Abs. 4</a>)"]
+        status{"Asylberechtigung, Flüchtlingseigenschaft<br/>oder subsidiärer Schutz zuerkannt?<br/>— <a href='{{ELI}}#art-z31_abs-z2' target='_blank' rel='noopener'>§31 Abs. 2</a>"}
+        schutz(["Anerkennung bzw. Zuerkennung<br/>internationalen Schutzes"])
+        ablehnung(["Ablehnung; schriftliche Abschiebungsandrohung,<br/>wenn die Voraussetzungen des <a href='{{ELI}}#art-z34_abs-z1' target='_blank' rel='noopener'>§34 Abs. 1</a> vorliegen,<br/>mit Ausreisefrist von einer Woche bzw. 30 Tagen<br/>— <a href='{{ELI}}#art-z38_abs-z1' target='_blank' rel='noopener'>§38 Abs. 1</a>, <a href='{{ELI}}#art-z38_abs-z2' target='_blank' rel='noopener'>Abs. 2</a>"])
+    end
+
+    start --> grenze
+    grenze -->|Ja| antragGB
+    grenze -->|Nein| ort
+    ort -->|Ja| antragAB
+    ort -->|Nein| meldung
+    antragGB --> weiter
+    antragAB --> weiter
+    weiter -->|"Ausländer muss unverzüglich folgen,<br/>sonst gilt der Antrag nach fünf Tagen<br/>als nicht gestellt — <a href='{{ELI}}#art-z20_abs-z1' target='_blank' rel='noopener'>§20 Abs. 1</a>"| reg
+    meldung --> reg
+    reg --> aufnahme
+    aufnahme --> info
+    info --> einreichung
+    einreichung --> ident
+    ident --> anhoerung
+    anhoerung --> entscheidung
+    entscheidung --> status
+    status -->|Ja| schutz
+    status -->|Nein| ablehnung
+
+    schutz ~~~ ablehnung
+
+    style schutz fill:#d4edda,stroke:#2d8a4a
+    style ablehnung fill:#f8d7da,stroke:#c0392b

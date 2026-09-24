@@ -2,9 +2,9 @@ title: Infektionsschutzgesetz
 eli: eli/bund/bgbl-1/2000/s1045/2026-07-02/1/deu
 visOptions:
   - name: Meldepflicht bei Erkrankung
-    visType: flowchart
+    visType: swimlane
     filename: meldepflicht
-    articles: ["§§6-9", "§11"]
+    articles: ["§§6-11"]
   - name: Schutzmaßnahmen-Prüfschema
     visType: flowchart
     filename: schutzmassnahmen

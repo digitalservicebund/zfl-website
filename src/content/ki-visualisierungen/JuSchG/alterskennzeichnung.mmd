@@ -1,0 +1,56 @@
+---
+summary: "Stellt die Alterskennzeichnung von Filmen und Spielprogrammen nach §14 JuSchG dar: Anbieterkennzeichnung als Info- oder Lehrprogramm, Prüfung durch die oberste Landesbehörde oder eine Organisation der freiwilligen Selbstkontrolle, Beteiligung der Prüfstelle für jugendgefährdende Medien bei Inhaltsgleichheit und Mitteilung an die Strafverfolgungsbehörde."
+---
+swimlane-beta TD
+    subgraph AN["Anbieter"]
+        start(["Film oder Spielprogramm (auch zur<br/>Verbreitung in digitalen Diensten<br/>— <a href='{{ELI}}#art-z14_abs-z9' target='_blank' rel='noopener'>§14 IX</a>)"])
+        info{"Zu Informations-, Instruktions- oder<br/>Lehrzwecken und offensichtlich keine<br/>Beeinträchtigung der Entwicklung oder<br/>Erziehung? — <a href='{{ELI}}#art-z14_abs-z7' target='_blank' rel='noopener'>§14 VII S.1</a>"}
+        infoKz["Anbieter darf mit „Infoprogramm“ oder<br/>„Lehrprogramm“ kennzeichnen; Abs. 1-5<br/>finden keine Anwendung — <a href='{{ELI}}#art-z14_abs-z7' target='_blank' rel='noopener'>§14 VII S.1-2</a><br/>(oberste Landesbehörde kann das Recht<br/>zur Anbieterkennzeichnung ausschließen<br/>und Kennzeichnungen des Anbieters<br/>aufheben — <a href='{{ELI}}#art-z14_abs-z7' target='_blank' rel='noopener'>§14 VII S.3</a>)"]
+    end
+
+    subgraph KS["Oberste Landesbehörde oder Organisation der freiwilligen Selbstkontrolle (Verfahren nach Abs. 6)"]
+        inhalte{"Inhalt nach §15 II Nr. 1-5 oder<br/>in die Liste nach §18 aufgenommen?<br/>— <a href='{{ELI}}#art-z14_abs-z3' target='_blank' rel='noopener'>§14 III S.1</a>"}
+        keineKz(["Keine Kennzeichnung<br/>— <a href='{{ELI}}#art-z14_abs-z3' target='_blank' rel='noopener'>§14 III S.1</a>"])
+        zweifel{"Zweifelsfall zur Inhaltsgleichheit<br/>mit einem Listenmedium?<br/>— <a href='{{ELI}}#art-z14_abs-z4' target='_blank' rel='noopener'>§14 IV S.4</a>"}
+        inhaltsgleich{"Ganz oder im Wesentlichen inhaltsgleich<br/>mit einem Listenmedium oder Voraussetzungen<br/>für Listenaufnahme erfüllt? (nicht bei<br/>Freigaben nach §11 I — <a href='{{ELI}}#art-z14_abs-z4a' target='_blank' rel='noopener'>§14 IVa</a>)<br/>— <a href='{{ELI}}#art-z14_abs-z4' target='_blank' rel='noopener'>§14 IV S.1, S.3</a>"}
+        ausgeschlossen(["Kennzeichnung ausgeschlossen<br/>— <a href='{{ELI}}#art-z14_abs-z4' target='_blank' rel='noopener'>§14 IV S.1</a>"])
+        alter["Keine Freigabe für Altersstufen, für die<br/>entwicklungsbeeinträchtigend — <a href='{{ELI}}#art-z14_abs-z1' target='_blank' rel='noopener'>§14 I</a>;<br/>Titel, Zusätze und weitere Darstellungen<br/>mit berücksichtigen — <a href='{{ELI}}#art-z14_abs-z8' target='_blank' rel='noopener'>§14 VIII</a>"]
+        kennzeichnung["Kennzeichnung: ohne Altersbeschränkung,<br/>ab 6, ab 12, ab 16 Jahren oder<br/>„Keine Jugendfreigabe“ — <a href='{{ELI}}#art-z14_abs-z2' target='_blank' rel='noopener'>§14 II</a>; soll<br/>zusätzlich Symbole und weitere Mittel zu den<br/>wesentlichen Gründen und zur potenziellen<br/>Beeinträchtigung der persönlichen Integrität<br/>enthalten — <a href='{{ELI}}#art-z14_abs-z2a' target='_blank' rel='noopener'>§14 IIa</a>"]
+    end
+
+    subgraph PS["Prüfstelle für jugendgefährdende Medien"]
+        pruefstelle["Entscheidet über das Vorliegen<br/>einer Inhaltsgleichheit<br/>— <a href='{{ELI}}#art-z14_abs-z4' target='_blank' rel='noopener'>§14 IV S.2</a>"]
+    end
+
+    subgraph OLB["Oberste Landesbehörde"]
+        mitteilung["Teilt Tatsachen, die auf einen Verstoß<br/>gegen §15 I schließen lassen, mit<br/>— <a href='{{ELI}}#art-z14_abs-z3' target='_blank' rel='noopener'>§14 III S.2</a>"]
+        abweichend["Abweichende Entscheidung für ihren Bereich<br/>möglich, wenn die Vereinbarung Kennzeichnungen<br/>der Selbstkontrolle als solche aller Länder<br/>bestimmt — <a href='{{ELI}}#art-z14_abs-z6' target='_blank' rel='noopener'>§14 VI S.2</a>"]
+    end
+
+    subgraph SV["Zuständige Strafverfolgungsbehörde"]
+        strafverfolgung(["Erhält Mitteilung<br/>— <a href='{{ELI}}#art-z14_abs-z3' target='_blank' rel='noopener'>§14 III S.2</a>"])
+    end
+
+    start --> info
+    info -->|Ja| infoKz
+    info -->|Nein| inhalte
+    inhalte -->|Ja| keineKz
+    inhalte -->|Nein| zweifel
+    keineKz -.->|"Tatsachen für Verstoß<br/>gegen §15 I"| mitteilung
+    mitteilung --> strafverfolgung
+    zweifel -->|"Ja: Entscheidung<br/>herbeiführen"| pruefstelle
+    zweifel -->|Nein| inhaltsgleich
+    pruefstelle --> inhaltsgleich
+    inhaltsgleich -->|Ja| ausgeschlossen
+    inhaltsgleich -->|Nein| alter
+    alter --> kennzeichnung
+    kennzeichnung -.-> abweichend
+    keineKz ~~~ zweifel
+    ausgeschlossen ~~~ alter
+
+    style keineKz fill:#f8d7da,stroke:#c0392b
+    style ausgeschlossen fill:#f8d7da,stroke:#c0392b
+    style kennzeichnung fill:#d4edda,stroke:#2d8a4a
+    style infoKz fill:#d4edda,stroke:#2d8a4a
+    style abweichend fill:#fff3cd,stroke:#c9a227
+    style strafverfolgung fill:#fff3cd,stroke:#c9a227

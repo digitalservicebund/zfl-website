@@ -1,0 +1,43 @@
+---
+summary: "Zeigt die Gliederung des Bundesverfassungsgerichts in Plenum, Senate und Kammern sowie die an der Richterwahl beteiligten Organe: Bundestag mit Wahlausschuss, Bundesrat, Bundesministerium der Justiz und Bundespräsident."
+---
+flowchart LR
+    subgraph Gericht["Bundesverfassungsgericht"]
+        Plenum["<b>Plenum</b><br/>beschließt die Geschäftsordnung — <a href='{{ELI}}#art-z1_abs-z3' target='_blank' rel='noopener'>§1 III</a><br/>schlägt Richter vor, wenn die Wahl nicht zustande kommt — <a href='{{ELI}}#art-z7a_abs-z2' target='_blank' rel='noopener'>§7a II</a><br/>kann die Senatszuständigkeit bei Überlastung neu regeln — <a href='{{ELI}}#art-z14_abs-z4' target='_blank' rel='noopener'>§14 IV</a><br/>entscheidet über Abweichungen zwischen den Senaten — <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 I</a>"]
+        Praesidium["<b>Präsident und Vizepräsident</b><br/>führen den Vorsitz in ihrem Senat — <a href='{{ELI}}#art-z15_abs-z1' target='_blank' rel='noopener'>§15 I</a><br/>Vizepräsident aus dem anderen Senat — <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 I</a>"]
+        Senate["<b>Erster und Zweiter Senat</b><br/>je acht Richter — <a href='{{ELI}}#art-z2_abs-z2' target='_blank' rel='noopener'>§2 II</a><br/>je drei aus den obersten Gerichtshöfen des Bundes — <a href='{{ELI}}#art-z2_abs-z3' target='_blank' rel='noopener'>§2 III</a><br/>Zuständigkeitsverteilung — <a href='{{ELI}}#art-z14_abs-z1' target='_blank' rel='noopener'>§14 I</a>, II<br/>beschlussfähig mit mindestens sechs Richtern — <a href='{{ELI}}#art-z15_abs-z2' target='_blank' rel='noopener'>§15 II</a>"]
+        Kammern["<b>Kammern</b><br/>je drei Richter, für ein Geschäftsjahr berufen — <a href='{{ELI}}#art-z15a_abs-z1' target='_blank' rel='noopener'>§15a I</a><br/>können Unzulässigkeit von Vorlagen feststellen — <a href='{{ELI}}/art-z81a' target='_blank' rel='noopener'>§81a</a><br/>können Annahme von Verfassungsbeschwerden ablehnen — <a href='{{ELI}}/art-z93b' target='_blank' rel='noopener'>§93b</a>"]
+    end
+
+    subgraph Wahlorgane["Wahlorgane"]
+        BT["<b>Bundestag</b><br/>wählt die Hälfte der Richter jedes Senats — <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I</a><br/>Wahl mit zwei Dritteln der abgegebenen Stimmen, mindestens der Mehrheit der Mitglieder — <a href='{{ELI}}#art-z6_abs-z1' target='_blank' rel='noopener'>§6 I</a>"]
+        WA["<b>Wahlausschuss</b><br/>zwölf Mitglieder des Bundestages — <a href='{{ELI}}#art-z6_abs-z2' target='_blank' rel='noopener'>§6 II</a><br/>zur Verschwiegenheit verpflichtet — <a href='{{ELI}}#art-z6_abs-z4' target='_blank' rel='noopener'>§6 IV</a><br/>Wahlvorschlag mit mindestens acht Stimmen — <a href='{{ELI}}#art-z6_abs-z5' target='_blank' rel='noopener'>§6 V</a>"]
+        BR["<b>Bundesrat</b><br/>wählt die Hälfte der Richter jedes Senats — <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I</a><br/>Wahl mit zwei Dritteln seiner Stimmen — <a href='{{ELI}}/art-z7' target='_blank' rel='noopener'>§7</a>"]
+    end
+
+    subgraph Weitere["Weitere Beteiligte"]
+        BMJ["<b>Bundesministerium der Justiz und für Verbraucherschutz</b><br/>Liste aller Bundesrichter, die die Voraussetzungen des §3 I, II erfüllen — <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 I</a><br/>Liste der vorgeschlagenen Personen — <a href='{{ELI}}#art-z8_abs-z2' target='_blank' rel='noopener'>§8 II</a>"]
+        Vorschlag["<b>Fraktionen des Bundestages, Bundesregierung, Landesregierungen</b><br/>schlagen Personen für das Richteramt vor — <a href='{{ELI}}#art-z8_abs-z2' target='_blank' rel='noopener'>§8 II</a>"]
+        BPraes["<b>Bundespräsident</b><br/>ernennt die Gewählten — <a href='{{ELI}}/art-z10' target='_blank' rel='noopener'>§10</a><br/>nimmt den Eid ab — <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I</a><br/>spricht die beantragte Entlassung aus — <a href='{{ELI}}/art-z12' target='_blank' rel='noopener'>§12</a>"]
+    end
+
+    BT -->|"wählt — <a href='{{ELI}}#art-z6_abs-z2' target='_blank' rel='noopener'>§6 II</a>"| WA
+    WA -->|"Wahlvorschlag — <a href='{{ELI}}#art-z6_abs-z1' target='_blank' rel='noopener'>§6 I</a>"| BT
+    BT & BR -->|"wählen je zur Hälfte — <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I</a>"| Senate
+    BT & BR -->|"wählen im Wechsel — <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 I</a>"| Praesidium
+    Vorschlag -->|"Vorschläge — <a href='{{ELI}}#art-z8_abs-z2' target='_blank' rel='noopener'>§8 II</a>"| BMJ
+    BMJ -->|"leitet Listen zu — <a href='{{ELI}}#art-z8_abs-z3' target='_blank' rel='noopener'>§8 III</a>"| BT & BR
+    WA -->|"ältestes Mitglied fordert zu Vorschlägen auf — <a href='{{ELI}}#art-z7a_abs-z1' target='_blank' rel='noopener'>§7a I</a>"| Plenum
+    BR -->|"Präsident fordert zu Vorschlägen auf — <a href='{{ELI}}#art-z7a_abs-z3' target='_blank' rel='noopener'>§7a III</a>"| Plenum
+    BPraes -->|"ernennt — <a href='{{ELI}}/art-z10' target='_blank' rel='noopener'>§10</a>"| Senate
+    Senate -->|"berufen — <a href='{{ELI}}#art-z15a_abs-z1' target='_blank' rel='noopener'>§15a I</a>"| Kammern
+    Plenum -->|"entscheidet bei Abweichung — <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 I</a>"| Senate
+
+    classDef zentral fill:#fff3cd,stroke:#c9a227,stroke-width:2px
+    classDef behoerde fill:#e8f0fe,stroke:#3b6fd4
+    classDef privat fill:#f5f5f5,stroke:#999
+    classDef parlament fill:#ede7f6,stroke:#7e57c2
+    classDef gremium fill:#e6f4ea,stroke:#2d8a4a
+    class Plenum,Praesidium,Senate,Kammern behoerde
+    class BT,BR,BMJ,Vorschlag,BPraes parlament
+    class WA gremium

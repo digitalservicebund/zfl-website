@@ -1,33 +1,41 @@
 ---
 summary: "Zeigt die beiden möglichen Verfahrenswege zur Durchführung des Einbürgerungstests nach §§ 2 und 3 EinbTestV: Nutzung der vom Bundesamt benannten Prüfstellen gegen Kostenpauschale oder eigenständige Organisation durch das Land."
 ---
-flowchart TD
-    A{"Organisiert das Land die<br/>gesamte technische Durchführung<br/>selbst mittels eigener oder<br/>beauftragter Stellen?<br/>— <a href='{{ELI}}/art-z3' target='_blank' rel='noopener'>§3</a>"}
+swimlane-beta TD
+    subgraph LA["Land"]
+        start{"Organisiert das Land die gesamte<br/>technische Durchführung in seinem<br/>Zuständigkeitsbereich selbst mittels<br/>seiner Behörden oder von ihm<br/>beauftragter Stellen?<br/>— <a href='{{ELI}}/art-z3' target='_blank' rel='noopener'>§3</a>"}
+        landselbst(["Land erhält die zugelassenen Fragebögen,<br/>sorgt für den ordnungsgemäßen Prüfungsablauf<br/>entsprechend §2 III (individueller Fragebogen,<br/>Identitätsprüfung) sowie für die Testauswertung<br/>und die Ausstellung einer Bescheinigung<br/>nach einheitlichem Vordruck — <a href='{{ELI}}/art-z3' target='_blank' rel='noopener'>§3</a>"])
+    end
 
-    A -->|Nein| B["Land nutzt die vom Bundesamt<br/>für Migration und Flüchtlinge<br/>benannten Prüfstellen (bundesweit<br/>vorgehalten, für Orientierungskurs-<br/>test zugelassen) — <a href='{{ELI}}#art-z2_abs-z1' target='_blank' rel='noopener'>§2 I S.1</a>"]
+    subgraph BA["Bundesamt für Migration und Flüchtlinge"]
+        pruefstellen["Benennt den Ländern nach Maßgabe von<br/>Verwaltungsvereinbarungen Prüfstellen aus<br/>dem Kreis seiner Träger (für den Test zum<br/>Orientierungskurs zugelassen, bundesweit<br/>vorgehalten) — <a href='{{ELI}}#art-z2_abs-z1' target='_blank' rel='noopener'>§2 I S.1</a>;<br/>stellt pro Prüfungsteilnehmer 25 Euro<br/>Kostenpauschale in Rechnung<br/>— <a href='{{ELI}}#art-z2_abs-z1' target='_blank' rel='noopener'>§2 I S.2</a>"]
+    end
 
-    B --> C["Bundesamt stellt pro<br/>Prüfungsteilnehmer eine<br/>Kostenpauschale von 25 Euro<br/>in Rechnung — <a href='{{ELI}}#art-z2_abs-z1' target='_blank' rel='noopener'>§2 I S.2</a>"]
+    subgraph EB["Zuständige Einbürgerungsbehörde"]
+        benennung["Benennt der Person, die den Test<br/>ablegen möchte, eine Prüfstelle<br/>— <a href='{{ELI}}#art-z2_abs-z2' target='_blank' rel='noopener'>§2 II S.1</a>"]
+    end
 
-    C --> D["Teilnehmer vereinbart mit der<br/>benannten Prüfstelle einen<br/>Prüfungstermin unter Angabe<br/>der Daten nach §4 S.1<br/>— <a href='{{ELI}}#art-z2_abs-z2' target='_blank' rel='noopener'>§2 II S.1</a>"]
+    subgraph TN["Prüfungsteilnehmer/in"]
+        termin["Vereinbart mit der benannten Prüfstelle<br/>einen Prüfungstermin unter Angabe der in<br/><a href='{{ELI}}/art-z4' target='_blank' rel='noopener'>§4 S.1</a> genannten Daten<br/>— <a href='{{ELI}}#art-z2_abs-z2' target='_blank' rel='noopener'>§2 II S.1</a>"]
+    end
 
-    D --> E{"Vereinbart ein externer<br/>Kursanbieter (keine eigene<br/>Prüfstelle) einen kursbezogenen<br/>Termin? — <a href='{{ELI}}#art-z2_abs-z2' target='_blank' rel='noopener'>§2 II S.2</a>"}
+    subgraph PS["Prüfstelle"]
+        fragebogen["Erhält je Prüfungsteilnehmer einen<br/>zugelassenen Fragebogen, der nicht mit denen<br/>anderer Teilnehmer desselben Termins<br/>identisch ist — <a href='{{ELI}}#art-z2_abs-z3' target='_blank' rel='noopener'>§2 III S.1</a>"]
+        identitaet(["Prüft die Identität des Prüfungsteilnehmers<br/>anhand eines amtlichen Identitätspapiers<br/>— <a href='{{ELI}}#art-z2_abs-z3' target='_blank' rel='noopener'>§2 III S.2</a>"])
+    end
 
-    E -->|Ja| F["Kursbezogener Prüfungstermin<br/>für die Kursteilnehmer"]
-    E -->|Nein| G["Individueller Prüfungstermin"]
+    subgraph KA["Anbieter eines Einbürgerungskurses"]
+        kurs["Kann für seine Teilnehmer einen<br/>kursbezogenen Prüfungstermin mit einer<br/>Prüfstelle vereinbaren (wenn nicht selbst<br/>vom Bundesamt zugelassene Prüfstelle)<br/>— <a href='{{ELI}}#art-z2_abs-z2' target='_blank' rel='noopener'>§2 II S.2</a>"]
+    end
 
-    F --> H
-    G --> H["Prüfstelle erhält je Teilnehmer<br/>einen Fragebogen, der sich von<br/>dem anderer Teilnehmer desselben<br/>Termins unterscheidet<br/>— <a href='{{ELI}}#art-z2_abs-z3' target='_blank' rel='noopener'>§2 III S.1</a>"]
+    start -->|Ja| landselbst
+    start -->|"Nein: Nutzung der Prüfstellen<br/>des Bundesamtes"| pruefstellen
+    pruefstellen --> benennung
+    benennung --> termin
+    termin --> fragebogen
+    kurs -.->|optional| fragebogen
+    fragebogen --> identitaet
+    benennung ~~~ kurs
 
-    H --> I["Identität wird anhand eines<br/>amtlichen Identitätspapiers<br/>geprüft — <a href='{{ELI}}#art-z2_abs-z3' target='_blank' rel='noopener'>§2 III S.2</a>"]
-
-    I --> Z["Testauswertung und Ausstellung<br/>der Bescheinigung"]
-
-    A -->|Ja| J["Land erhält die zugelassenen<br/>Fragebögen selbst — <a href='{{ELI}}/art-z3' target='_blank' rel='noopener'>§3</a>"]
-
-    J --> K["Land sorgt für den<br/>ordnungsgemäßen Prüfungsablauf<br/>entsprechend §2 III<br/>(individueller Fragebogen,<br/>Identitätsprüfung) — <a href='{{ELI}}/art-z3' target='_blank' rel='noopener'>§3</a>"]
-
-    K --> L["Land sorgt selbst für die<br/>Testauswertung und die Ausstellung<br/>der Bescheinigung nach<br/>einheitlichem Vordruck<br/>— <a href='{{ELI}}/art-z3' target='_blank' rel='noopener'>§3</a>"]
-
-    L --> Z
-
-    style Z fill:#d4edda,stroke:#2d8a4a
+    style landselbst fill:#d4edda,stroke:#2d8a4a
+    style identitaet fill:#d4edda,stroke:#2d8a4a

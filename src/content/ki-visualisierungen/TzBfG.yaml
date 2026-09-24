@@ -6,7 +6,7 @@ visOptions:
     filename: befristung_zulaessigkeit
     articles: ["§14", "§16"]
   - name: Anspruch auf Arbeitszeitverringerung
-    visType: flowchart
+    visType: swimlane
     filename: verringerung_arbeitszeit
     articles: ["§8"]
   - name: Brückenteilzeit

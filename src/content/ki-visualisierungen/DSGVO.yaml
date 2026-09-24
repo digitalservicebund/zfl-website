@@ -18,7 +18,7 @@ visOptions:
     filename: datenpanne_meldung
     articles: ["Art. 33", "Art. 34"]
   - name: Datenschutz-Folgenabschätzung
-    visType: flowchart
+    visType: swimlane
     filename: folgenabschaetzung
     articles: ["Art. 35", "Art. 36"]
   - name: Internationale Datenübermittlung

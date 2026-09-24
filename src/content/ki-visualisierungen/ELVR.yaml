@@ -6,7 +6,7 @@ visOptions:
     filename: "anwendungsbereich"
     articles: ["Art. 2"]
   - name: "Verwertungsnachweis"
-    visType: flowchart
+    visType: swimlane
     filename: "verwertungsnachweis"
     articles: ["Art. 24", "Art. 25"]
   - name: "Behandlungspflichten"
@@ -18,7 +18,7 @@ visOptions:
     filename: "herstellerverantwortung"
     articles: ["Art. 17-19"]
   - name: "Ausfuhrkontrolle"
-    visType: flowchart
+    visType: swimlane
     filename: "ausfuhrkontrolle"
     articles: ["Art. 39-44"]
   - name: "Verkauf Gebrauchtfahrzeuge"
@@ -29,3 +29,7 @@ visOptions:
     visType: flowchart
     filename: "reparaturwillen"
     articles: ["Art. 37", "Anhang I"]
+  - name: "Akteure und Zuständigkeiten"
+    visType: actors
+    filename: "akteure"
+    articles: []

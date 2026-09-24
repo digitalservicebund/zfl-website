@@ -1,37 +1,42 @@
 ---
-summary: "Zeigt das Verfahren zur dauerhaften Verringerung der Arbeitszeit nach § 8 TzBfG, von der Geltendmachung durch den Arbeitnehmer über die Erörterung mit dem Arbeitgeber bis zur Zustimmung, zur Ablehnung aus betrieblichen Gründen oder zur fingierten Genehmigung."
+summary: "Zeigt das Verfahren zur zeitlich nicht begrenzten Verringerung der Arbeitszeit nach § 8 TzBfG zwischen Arbeitnehmer/in und Arbeitgeber: Voraussetzungen, Geltendmachung, Erörterung, Entscheidung des Arbeitgebers bis zur Verringerung durch Einigung, Zustimmung oder fehlende rechtzeitige Ablehnung oder zur berechtigten Ablehnung."
 ---
-flowchart TD
-    A["AN wünscht dauerhafte<br/>Verringerung der vertraglichen<br/>Arbeitszeit"] --> Q1{"Hat das Arbeitsverhältnis<br/>länger als 6 Monate<br/>bestanden? — <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 I</a>"}
+swimlane-beta TD
+    subgraph AN["Arbeitnehmer/in"]
+        start(["Möchte die vertraglich vereinbarte<br/>Arbeitszeit verringern — <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 I</a>"])
+        voraussetzungen{"Arbeitsverhältnis länger als 6 Monate<br/>bestanden (<a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 I</a>) und Arbeitgeber<br/>beschäftigt i.d.R. mehr als 15 Arbeitnehmer,<br/>unabhängig von Personen in Berufsbildung<br/>(<a href='{{ELI}}#art-z8_abs-z7' target='_blank' rel='noopener'>§8 VII</a>)?"}
+        keinAnspruch(["Kein Anspruch nach <a href='{{ELI}}/art-z8' target='_blank' rel='noopener'>§8</a>"])
+        geltend["Macht Verringerung und Umfang spätestens<br/>3 Monate vor Beginn in Textform geltend;<br/>soll gewünschte Verteilung angeben<br/>— <a href='{{ELI}}#art-z8_abs-z2' target='_blank' rel='noopener'>§8 II</a>"]
+        einigung{"Einigung über die<br/>Verringerung? — <a href='{{ELI}}#art-z8_abs-z3' target='_blank' rel='noopener'>§8 III S.1</a>"}
+        verringert["Arbeitszeit wird verringert<br/>(nach Zustimmung: erneutes Verlangen<br/>frühestens nach 2 Jahren — <a href='{{ELI}}#art-z8_abs-z6' target='_blank' rel='noopener'>§8 VI</a>)"]
+    end
 
-    Q1 -->|Nein| N1["Kein Anspruch<br/>nach <a href='{{ELI}}/art-z8' target='_blank' rel='noopener'>§8</a>"]
+    subgraph AG["Arbeitgeber"]
+        eroertern["Erörtert die gewünschte Verringerung mit<br/>dem Ziel einer Vereinbarung; Einvernehmen<br/>über die Verteilung erzielen — <a href='{{ELI}}#art-z8_abs-z3' target='_blank' rel='noopener'>§8 III</a>"]
+        gruende{"Stehen betriebliche Gründe entgegen?<br/>(insb. wesentliche Beeinträchtigung von<br/>Organisation, Arbeitsablauf oder Sicherheit<br/>im Betrieb oder unverhältnismäßige Kosten;<br/>Ablehnungsgründe auch per Tarifvertrag)<br/>— <a href='{{ELI}}#art-z8_abs-z4' target='_blank' rel='noopener'>§8 IV</a>"}
+        zustimmung["Hat der Verringerung zuzustimmen und<br/>die Verteilung entsprechend den Wünschen<br/>festzulegen — <a href='{{ELI}}#art-z8_abs-z4' target='_blank' rel='noopener'>§8 IV S.1</a>; Mitteilung<br/>spätestens 1 Monat vor Beginn in Textform<br/>— <a href='{{ELI}}#art-z8_abs-z5' target='_blank' rel='noopener'>§8 V S.1</a>"]
+        ablehnung{"Ablehnung spätestens 1 Monat vor<br/>gewünschtem Beginn in Textform?<br/>— <a href='{{ELI}}#art-z8_abs-z5' target='_blank' rel='noopener'>§8 V S.1-2</a>"}
+        abgelehnt(["Verringerung berechtigt abgelehnt;<br/>erneutes Verlangen frühestens nach<br/>2 Jahren — <a href='{{ELI}}#art-z8_abs-z6' target='_blank' rel='noopener'>§8 VI</a>"])
+        verteilung(["Ohne Einvernehmen über die Verteilung gilt<br/>die gewünschte Verteilung als festgelegt, wenn<br/>der Arbeitgeber sie nicht spätestens 1 Monat<br/>vor Beginn in Textform ablehnt — <a href='{{ELI}}#art-z8_abs-z5' target='_blank' rel='noopener'>§8 V S.3</a>;<br/>spätere Änderung, wenn betriebliches Interesse<br/>erheblich überwiegt und 1 Monat vorher<br/>angekündigt — <a href='{{ELI}}#art-z8_abs-z5' target='_blank' rel='noopener'>§8 V S.4</a>"])
+    end
 
-    Q1 -->|Ja| Q2{"Beschäftigt der Arbeitgeber<br/>i.d.R. mehr als 15<br/>Arbeitnehmer? — <a href='{{ELI}}#art-z8_abs-z7' target='_blank' rel='noopener'>§8 VII</a>"}
+    start --> voraussetzungen
+    voraussetzungen -->|Nein| keinAnspruch
+    voraussetzungen -->|Ja| geltend
+    geltend --> eroertern
+    eroertern --> einigung
+    einigung -->|"Ja: wie vereinbart"| verringert
+    einigung -->|Nein| gruende
+    gruende -->|Nein| zustimmung
+    gruende -->|Ja| ablehnung
+    zustimmung --> verringert
+    ablehnung -->|Ja| abgelehnt
+    ablehnung -->|"Nein: im gewünschten<br/>Umfang — <a href='{{ELI}}#art-z8_abs-z5' target='_blank' rel='noopener'>§8 V S.2</a>"| verringert
+    verringert --> verteilung
+    keinAnspruch ~~~ geltend
+    zustimmung ~~~ ablehnung
 
-    Q2 -->|Nein| N1
-
-    Q2 -->|Ja| G["AN macht Verringerung und<br/>gewünschten Umfang spätestens<br/>3 Monate vor Beginn in<br/>Textform geltend — <a href='{{ELI}}#art-z8_abs-z2' target='_blank' rel='noopener'>§8 II</a>"]
-
-    G --> E["AG und AN erörtern die<br/>Verringerung mit dem Ziel<br/>einer Vereinbarung; Einvernehmen<br/>über Verteilung anstreben<br/>— <a href='{{ELI}}#art-z8_abs-z3' target='_blank' rel='noopener'>§8 III</a>"]
-
-    E --> Q3{"Stehen betriebliche Gründe der<br/>Verringerung entgegen? (z.B. wesentliche<br/>Beeinträchtigung von Organisation,<br/>Arbeitsablauf, Sicherheit oder<br/>unverhältnismäßige Kosten) — <a href='{{ELI}}#art-z8_abs-z4' target='_blank' rel='noopener'>§8 IV</a>"}
-
-    Q3 -->|Nein| Z1["Arbeitgeber muss zustimmen und<br/>Verteilung entsprechend den<br/>Wünschen des AN festlegen<br/>— <a href='{{ELI}}#art-z8_abs-z4' target='_blank' rel='noopener'>§8 IV S.1</a>"]
-
-    Q3 -->|Ja| Q4{"Lehnt der Arbeitgeber spätestens<br/>1 Monat vor gewünschtem Beginn<br/>in Textform ab? — <a href='{{ELI}}#art-z8_abs-z5' target='_blank' rel='noopener'>§8 V S.1-2</a>"}
-
-    Q4 -->|Ja| N2["Ablehnung wirksam;<br/>keine Verringerung der<br/>Arbeitszeit"]
-
-    Q4 -->|Nein| Z2["Verringerung gilt in dem vom AN<br/>gewünschten Umfang als<br/>fingiert genehmigt — <a href='{{ELI}}#art-z8_abs-z5' target='_blank' rel='noopener'>§8 V S.2</a>"]
-
-    Z1 --> V["Bei fehlendem Einvernehmen über die<br/>Verteilung gilt diese als nach Wunsch<br/>des AN festgelegt, wenn der AG nicht<br/>spätestens 1 Monat vorher in Textform<br/>widerspricht — <a href='{{ELI}}#art-z8_abs-z5' target='_blank' rel='noopener'>§8 V S.3</a>"]
-
-    Z2 --> W["Erneute Verringerung frühestens<br/>nach Ablauf von 2 Jahren seit<br/>Zustimmung/berechtigter<br/>Ablehnung — <a href='{{ELI}}#art-z8_abs-z6' target='_blank' rel='noopener'>§8 VI</a>"]
-    N2 --> W
-
-    style N1 fill:#f8d7da,stroke:#c0392b
-    style N2 fill:#f8d7da,stroke:#c0392b
-    style Z1 fill:#d4edda,stroke:#2d8a4a
-    style Z2 fill:#d4edda,stroke:#2d8a4a
-    style V fill:#fff3cd,stroke:#c9a227
-    style W fill:#fff3cd,stroke:#c9a227
+    style keinAnspruch fill:#f8d7da,stroke:#c0392b
+    style abgelehnt fill:#f8d7da,stroke:#c0392b
+    style verringert fill:#d4edda,stroke:#2d8a4a
+    style verteilung fill:#fff3cd,stroke:#c9a227

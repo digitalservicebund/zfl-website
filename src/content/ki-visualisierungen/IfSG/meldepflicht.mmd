@@ -1,25 +1,47 @@
 ---
-summary: "Zeigt den Ablauf der namentlichen Meldepflicht nach §§6 bis 9 IfSG bei meldepflichtigen Krankheiten oder Erregernachweisen, von den Ausnahmen von der Meldepflicht über die 24-Stunden-Frist bis zur Übermittlung an Landesbehörde und Robert Koch-Institut."
+summary: "Zeigt den Meldeweg bei meldepflichtigen Krankheiten und Erregernachweisen nach §§6 bis 11 IfSG: Ausnahmen von der Meldepflicht, namentliche Meldung an das Gesundheitsamt binnen 24 Stunden, Übermittlung über die zuständige Landesbehörde an das Robert Koch-Institut sowie die nichtnamentliche Meldung direkt an das Robert Koch-Institut."
 ---
-flowchart TD
-    START["Meldepflichtige Krankheit (Verdacht,<br/>Erkrankung, Tod) — <a href='{{ELI}}#art-z6_abs-z1' target='_blank' rel='noopener'>§6 Abs.1</a><br/>oder meldepflichtiger Erregernachweis<br/>— <a href='{{ELI}}/art-z7' target='_blank' rel='noopener'>§7</a> festgestellt"] --> F1{"Handelt es sich um Personal des<br/>Not- oder Rettungsdienstes, das den<br/>Patienten unverzüglich in eine ärztlich<br/>geleitete Einrichtung gebracht hat?<br/>— <a href='{{ELI}}#art-z8_abs-z2' target='_blank' rel='noopener'>§8 Abs.2 S.1</a>"}
+swimlane-beta TD
+    subgraph MP["Meldepflichtige Person"]
+        start(["Zur Meldung Verpflichteter<br/>(u.a. feststellender Arzt,<br/>Leiter von Untersuchungs-<br/>stellen — <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 I</a>) stellt<br/>meldepflichtige Krankheit<br/>(<a href='{{ELI}}/art-z6' target='_blank' rel='noopener'>§6</a>) oder Erregernachweis<br/>(<a href='{{ELI}}/art-z7' target='_blank' rel='noopener'>§7</a>) fest"])
+        nichtnamentlich{"Nichtnamentlich zu<br/>meldender Nachweis?<br/>— <a href='{{ELI}}#art-z7_abs-z3' target='_blank' rel='noopener'>§7 III</a>, <a href='{{ELI}}#art-z7_abs-z4' target='_blank' rel='noopener'>IV</a>"}
+        ausnahme8II{"Not- oder Rettungsdienst,<br/>Patient unverzüglich in ärztlich<br/>geleitete Einrichtung gebracht,<br/>oder Person nach §8 I Nr. 5–7<br/>und ein Arzt wurde hinzugezogen?<br/>— <a href='{{ELI}}#art-z8_abs-z2' target='_blank' rel='noopener'>§8 II</a>"}
+        ausnahme8III{"Nachweis, dass Meldung bereits<br/>erfolgte, oder bei Erkrankung<br/>Verdacht bereits gemeldet, und<br/>keine anderen Angaben erhoben?<br/>— <a href='{{ELI}}#art-z8_abs-z3' target='_blank' rel='noopener'>§8 III</a>"}
+        keine(["Keine Meldepflicht"])
+        meldung["Namentliche Meldung mit<br/>Angaben nach <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 I</a> bzw. <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>II</a> an das<br/>Gesundheitsamt (u.a. des Aufent-<br/>haltsorts — <a href='{{ELI}}#art-z9_abs-z4' target='_blank' rel='noopener'>§9 IV</a>): unverzüglich,<br/>dort spätestens 24 Stunden<br/>nach Kenntniserlangung;<br/>nicht wegen fehlender Angaben<br/>verzögern — <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 III S.1, 2</a>"]
+        nachmeldung["Nachmeldung/Korrektur<br/>unverzüglich; Angabe, wenn sich<br/>ein Verdacht nicht bestätigt<br/>— <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 III S.3, 5</a>"]
+    end
 
-    F1 -->|Ja| KEINE["Keine Meldepflicht"]
-    F1 -->|Nein| F2{"Liegt bereits ein Nachweis vor,<br/>dass die Meldung erfolgt ist und<br/>keine weiteren Angaben erhoben<br/>wurden? — <a href='{{ELI}}#art-z8_abs-z3' target='_blank' rel='noopener'>§8 Abs.3</a>"}
+    subgraph GA["Gesundheitsamt"]
+        eingang("Meldung liegt vor; kann<br/>Auskunft über Pflichtangaben<br/>verlangen — <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 III S.4</a>")
+        bewertung["Zuständiges Gesundheitsamt<br/>(Hauptwohnung — <a href='{{ELI}}#art-z11_abs-z3' target='_blank' rel='noopener'>§11 III</a>)<br/>bewertet anhand der Falldefini-<br/>tionen des RKI (<a href='{{ELI}}#art-z11_abs-z2' target='_blank' rel='noopener'>§11 II</a>), vervoll-<br/>ständigt bis zum folgenden<br/>Arbeitstag, führt ggf. zusammen,<br/>übermittelt — <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I S.1</a>"]
+    end
 
-    F2 -->|Ja| KEINE
-    F2 -->|Nein| MELD["Namentliche Meldung mit den<br/>Pflichtangaben an das zuständige<br/>Gesundheitsamt — <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 Abs.1</a>,<br/><a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>Abs.2</a>"]
+    subgraph LB["Zuständige Landesbehörde"]
+        landesbehoerde["Übermittelt spätestens am<br/>folgenden Arbeitstag an das RKI<br/>— <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I S.1</a> (Verdacht nach §6 I Nr. 3:<br/>vom Gesundheitsamt unverzüglich,<br/>weiter an das Paul-Ehrlich-Institut<br/>— <a href='{{ELI}}#art-z11_abs-z4' target='_blank' rel='noopener'>§11 IV</a>)"]
+    end
 
-    MELD --> FRIST["Frist: unverzüglich, spätestens<br/>24 Stunden nach Kenntniserlangung<br/>— <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 Abs.3 S.1</a>"]
+    subgraph RKI["Robert Koch-Institut"]
+        rkiNN(["Nichtnamentliche Meldung:<br/>bei §7 III binnen 2 Wochen<br/>nach Kenntnis — <a href='{{ELI}}#art-z10_abs-z2' target='_blank' rel='noopener'>§10 II</a>, bei §7 IV spätestens<br/>24 Stunden nach Kenntnis — <a href='{{ELI}}#art-z10_abs-z3' target='_blank' rel='noopener'>§10 III</a>"])
+        rki(["Daten liegen dem RKI vor<br/>(frühere Übermittlungen<br/>ggf. berichtigt/ergänzt<br/>— <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I S.4</a>)"])
+    end
 
-    FRIST --> F3{"Bestätigt sich eine gemeldete<br/>Verdachtsdiagnose nachträglich<br/>nicht? — <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 Abs.3 S.5</a>"}
+    start --> ausnahme8II
+    ausnahme8II -->|Ja| keine
+    ausnahme8II -->|Nein| ausnahme8III
+    ausnahme8III -->|Ja| keine
+    ausnahme8III -->|Nein| nichtnamentlich
+    nichtnamentlich -->|"Ja: direkt an das<br/>Robert Koch-Institut"| rkiNN
+    nichtnamentlich -->|"Nein:<br/>namentlich"| meldung
+    meldung --> eingang
+    meldung -.-> nachmeldung
+    eingang --> bewertung
+    nachmeldung -.-> bewertung
+    bewertung --> landesbehoerde
+    landesbehoerde --> rki
+    keine ~~~ nichtnamentlich
+    rkiNN ~~~ meldung
 
-    F3 -->|Ja| NACHMELD["Unverzügliche Mitteilung an das<br/>Gesundheitsamt, dass sich der<br/>Verdacht nicht bestätigt hat<br/>— <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 Abs.3 S.5</a>"]
-    F3 -->|Nein| WEITER["Übermittlung an die zuständige<br/>Landesbehörde und das Robert<br/>Koch-Institut — <a href='{{ELI}}/art-z11' target='_blank' rel='noopener'>§11</a>"]
-
-    NACHMELD --> ENDE["Meldevorgang abgeschlossen"]
-    WEITER --> ENDE
-
-    style KEINE fill:#d4edda,stroke:#2d8a4a
-    style ENDE fill:#d4edda,stroke:#2d8a4a
-    style NACHMELD fill:#fff3cd,stroke:#c9a227
+    style keine fill:#d4edda,stroke:#2d8a4a
+    style rkiNN fill:#d4edda,stroke:#2d8a4a
+    style rki fill:#d4edda,stroke:#2d8a4a

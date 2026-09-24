@@ -21,3 +21,7 @@ visOptions:
     visType: flowchart
     filename: bussgeld_drohnenbetrieb
     articles: ["§58"]
+  - name: Akteure der Luftverwaltung
+    visType: actors
+    filename: akteure
+    articles: []

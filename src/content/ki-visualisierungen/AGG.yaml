@@ -10,7 +10,7 @@ visOptions:
     filename: rechtfertigung_beschaeftigung
     articles: ["§§7-10"]
   - name: Beschwerde- & Schutzpflichten
-    visType: flowchart
+    visType: swimlane
     filename: beschwerde_schutzpflichten
     articles: ["§§12-14"]
   - name: Entschädigungs- & Klagefristen
@@ -21,3 +21,7 @@ visOptions:
     visType: flowchart
     filename: zivilrecht_ansprueche
     articles: ["§19", "§21"]
+  - name: Akteure und Zuständigkeiten
+    visType: actors
+    filename: akteure
+    articles: []

@@ -1,20 +1,36 @@
 ---
-summary: "Zeigt den Ablauf der Grundpflichten eines Verantwortlichen im Brennstoffemissionshandel: von der Genehmigung des Überwachungsplans über die jährliche Emissionsberichterstattung und deren Verifizierung bis zur fristgerechten Abgabe der Emissionszertifikate."
+summary: "Zeigt die Grundpflichten eines Verantwortlichen im Brennstoffemissionshandel mit zuständiger Behörde und Prüfstelle: Genehmigung des (vereinfachten) Überwachungsplans, jährliche Ermittlung, Verifizierung und Berichterstattung der Brennstoffemissionen sowie fristgerechte Abgabe der Emissionszertifikate."
 ---
-flowchart TD
-    A["Verantwortlicher muss für jede<br/>Handelsperiode einen Überwachungsplan<br/>einreichen<br/>— <a href='{{ELI}}#art-z6_abs-z1' target='_blank' rel='noopener'>§6 Abs. 1 S. 1</a>"] --> B{"Ermittlung ausschließlich anhand von<br/>Standardemissionsfaktoren?<br/>— <a href='{{ELI}}#art-z6_abs-z1' target='_blank' rel='noopener'>§6 Abs. 1 S. 2</a>"}
-    B -->|Ja| C["Vereinfachter Überwachungsplan<br/>genügt<br/>— <a href='{{ELI}}#art-z6_abs-z1' target='_blank' rel='noopener'>§6 Abs. 1 S. 2</a>"]
-    B -->|Nein| D["Vollständiger Überwachungsplan<br/>erforderlich<br/>— <a href='{{ELI}}#art-z6_abs-z1' target='_blank' rel='noopener'>§6 Abs. 1 S. 1</a>"]
-    C --> E{"Entspricht der Plan den Vorgaben<br/>der Rechtsverordnung?<br/>— <a href='{{ELI}}#art-z6_abs-z2' target='_blank' rel='noopener'>§6 Abs. 2 S. 1</a>, <a href='{{ELI}}#art-z6_abs-z3' target='_blank' rel='noopener'>Abs. 3 S. 1</a>"}
-    D --> E
-    E -->|Nein| F["Mängel innerhalb gesetzter Frist<br/>beseitigen und geänderten Plan<br/>vorlegen<br/>— <a href='{{ELI}}#art-z6_abs-z2' target='_blank' rel='noopener'>§6 Abs. 2 S. 2</a>"]
-    F --> E
-    E -->|"Ja (bei vereinfachtem Plan:<br/>keine Mängelrüge binnen<br/>2 Monaten)"| G["Genehmigung erteilt bzw. gilt<br/>als erteilt<br/>— <a href='{{ELI}}#art-z6_abs-z2' target='_blank' rel='noopener'>§6 Abs. 2 S. 1</a>, <a href='{{ELI}}#art-z6_abs-z3' target='_blank' rel='noopener'>Abs. 3 S. 3</a>"]
-    G --> H["Ermittlung und Bericht über<br/>Brennstoffemissionen bis 31. Juli<br/>des Folgejahres<br/>— <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 Abs. 1</a>"]
-    H --> I{"Wurden die Angaben im<br/>Emissionsbericht von einer<br/>Prüfstelle verifiziert?<br/>— <a href='{{ELI}}#art-z7_abs-z3' target='_blank' rel='noopener'>§7 Abs. 3</a>"}
-    I -->|Nein| Z1["Bericht genügt den<br/>Anforderungen nicht"]
-    I -->|Ja| J["Abgabe der der berichteten<br/>Gesamtmenge entsprechenden<br/>Emissionszertifikate bis<br/>30. September<br/>— <a href='{{ELI}}/art-z8' target='_blank' rel='noopener'>§8</a>"]
-    J --> Z2["Grundpflichten für das<br/>Kalenderjahr erfüllt"]
+swimlane-beta TD
+    subgraph ZB["Zuständige Behörde"]
+        pruef{"Entspricht der Überwachungsplan den<br/>Vorgaben der Rechtsverordnung nach Abs. 5?<br/>— <a href='{{ELI}}#art-z6_abs-z2' target='_blank' rel='noopener'>§6 Abs. 2 S. 1</a><br/>Beim vereinfachten Plan: Erklärung, nur<br/>Standardemissionsfaktoren anzuwenden, und<br/>Methodik zur Erfassung von Art und Menge<br/>der Brennstoffe entspricht diesen Vorgaben?<br/>— <a href='{{ELI}}#art-z6_abs-z3' target='_blank' rel='noopener'>§6 Abs. 3 S. 1</a>"}
+        aufforderung{"Aufforderung binnen 2 Monaten nach<br/>Einreichung, festgestellte Mängel zu<br/>beseitigen oder fehlende Erläuterungen<br/>nachzureichen?<br/>— <a href='{{ELI}}#art-z6_abs-z3' target='_blank' rel='noopener'>§6 Abs. 3 S. 3</a>"}
+        genehmigung["Genehmigung erteilt bzw. gilt als erteilt<br/>(ggf. mit Auflagen für Überwachung und<br/>Berichterstattung — <a href='{{ELI}}#art-z6_abs-z2' target='_blank' rel='noopener'>§6 Abs. 2 S. 3</a>)<br/>— <a href='{{ELI}}#art-z6_abs-z1' target='_blank' rel='noopener'>§6 Abs. 1 S. 3</a>"]
+    end
 
-    style Z1 fill:#f8d7da,stroke:#c0392b
-    style Z2 fill:#d4edda,stroke:#2d8a4a
+    subgraph VA["Verantwortlicher"]
+        start(["Reicht für jede Handelsperiode bei der<br/>zuständigen Behörde einen Überwachungsplan<br/>ein — <a href='{{ELI}}#art-z6_abs-z1' target='_blank' rel='noopener'>§6 Abs. 1 S. 1</a>; bei Ermittlung<br/>ausschließlich unter Anwendung von<br/>Standardemissionsfaktoren genügt ein<br/>vereinfachter Überwachungsplan<br/>— <a href='{{ELI}}#art-z6_abs-z1' target='_blank' rel='noopener'>§6 Abs. 1 S. 2</a>"])
+        maengel(["Festgestellte Mängel innerhalb der<br/>festgesetzten Frist beseitigen und<br/>geänderten Plan vorlegen<br/>— <a href='{{ELI}}#art-z6_abs-z2' target='_blank' rel='noopener'>§6 Abs. 2 S. 2</a>, <a href='{{ELI}}#art-z6_abs-z3' target='_blank' rel='noopener'>Abs. 3 S. 2</a>"])
+        ermitteln["Ermittelt die Brennstoffemissionen der im<br/>Kalenderjahr in Verkehr gebrachten Brennstoffe<br/>auf Grundlage des Überwachungsplans<br/>— <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 Abs. 1</a><br/>(Plan bei Änderungen nach Abs. 4 Nr. 1-3<br/>unverzüglich anpassen und einreichen<br/>— <a href='{{ELI}}#art-z6_abs-z4' target='_blank' rel='noopener'>§6 Abs. 4</a>)"]
+        bericht["Berichtet der zuständigen Behörde bis<br/>31. Juli des Folgejahres über die<br/>Brennstoffemissionen — <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 Abs. 1</a>"]
+        abgabe(["Gibt bis 30. September Emissionszertifikate<br/>entsprechend der nach §7 berichteten<br/>Gesamtmenge des Vorjahres an die<br/>zuständige Behörde ab — <a href='{{ELI}}/art-z8' target='_blank' rel='noopener'>§8</a>"])
+    end
+
+    subgraph PS["Prüfstelle"]
+        verifizierung["Verifiziert die Angaben im<br/>Emissionsbericht (Prüfstelle nach<br/><a href='{{ELI}}/art-z15' target='_blank' rel='noopener'>§15</a>) — <a href='{{ELI}}#art-z7_abs-z3' target='_blank' rel='noopener'>§7 Abs. 3</a>"]
+    end
+
+    start --> pruef
+    pruef -->|"Nein: Überwachungsplan"| maengel
+    pruef -->|"Nein: vereinfachter<br/>Überwachungsplan"| aufforderung
+    aufforderung -->|Ja| maengel
+    aufforderung -->|"Nein: gilt<br/>als erteilt"| genehmigung
+    pruef -->|Ja| genehmigung
+    genehmigung --> ermitteln
+    ermitteln --> verifizierung
+    verifizierung --> bericht
+    bericht --> abgabe
+    maengel ~~~ ermitteln
+
+    style maengel fill:#fff3cd,stroke:#c9a227
+    style abgabe fill:#d4edda,stroke:#2d8a4a

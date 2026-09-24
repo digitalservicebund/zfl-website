@@ -6,7 +6,7 @@ visOptions:
     filename: verantwortlicher
     articles: ["§2", "§3"]
   - name: Emissionsberichterstattung & -abgabe
-    visType: flowchart
+    visType: swimlane
     filename: emissionsberichterstattung
     articles: ["§§6-8"]
   - name: Preispfad Festpreis/Versteigerung
@@ -21,3 +21,7 @@ visOptions:
     visType: flowchart
     filename: sanktionen
     articles: ["§§20-22"]
+  - name: Akteure und Zuständigkeiten
+    visType: actors
+    filename: akteure
+    articles: []

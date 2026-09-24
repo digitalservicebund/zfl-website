@@ -21,3 +21,7 @@ visOptions:
     visType: flowchart
     filename: aenderung
     articles: ["§27"]
+  - name: Datenabgleich
+    visType: swimlane
+    filename: datenabgleich
+    articles: ["§29", "§33"]

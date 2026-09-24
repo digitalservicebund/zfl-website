@@ -1,0 +1,58 @@
+---
+summary: "Zeigt den Datenabgleich nach §33 WoGG zwischen Wohngeldbehörde, Datenstelle der Rentenversicherung und den abgleichenden Stellen sowie die möglichen Folgen abweichender Feststellungen: Auskunftsersuchen zu Kapitalerträgen und vorläufige Einstellung der Wohngeldzahlung."
+---
+swimlane-beta TD
+    subgraph WP["Wohngeldberechtigte Person und Haushaltsmitglieder"]
+        hinweis("Betroffene Personen werden auf die<br/>Datenübermittlung hingewiesen<br/>— <a href='{{ELI}}#art-z33_abs-z3' target='_blank' rel='noopener'>§33 III S.4</a>")
+        aeusserung(["Erhält unverzüglich Mitteilung über<br/>Einstellung und Gründe, Gelegenheit<br/>zur Äußerung (soweit Kenntnis nicht auf<br/>ihren Angaben beruht) — <a href='{{ELI}}#art-z29_abs-z4' target='_blank' rel='noopener'>§29 IV S.2</a>"])
+    end
+
+    subgraph WB["Wohngeldbehörde"]
+        start(["Überprüft die Haushaltsmitglieder regelmäßig<br/>per Datenabgleich, um rechtswidrige Inanspruch-<br/>nahme zu vermeiden oder aufzudecken, auf:<br/>Leistungen nach §7 I / Ausschlussgründe (Nr.1),<br/>an das BZSt übermittelte Kapitalertragsdaten (Nr.2),<br/>Wohngeldbezug (Nr.3), Einstellung des Arbeits-<br/>losengeldes (Nr.4), Meldestatus (Nr.5), Versiche-<br/>rungspflicht / geringfügige Beschäftigung (Nr.6),<br/>Renten- und Unfallversicherungsleistungen (Nr.7)<br/>— <a href='{{ELI}}#art-z33_abs-z2' target='_blank' rel='noopener'>§33 II S.1</a>; abgelaufener Bewilligungszeitraum:<br/>bis 10 Jahre nach Bekanntgabe — <a href='{{ELI}}#art-z33_abs-z2' target='_blank' rel='noopener'>§33 II S.2</a>"])
+        automatisiert{"Datenabgleich in<br/>automatisierter Form?<br/>— <a href='{{ELI}}#art-z33_abs-z5' target='_blank' rel='noopener'>§33 V S.1</a>"}
+        direkt["Übermittelt nur Name, Geburtsdatum/-ort,<br/>Anschrift der Wohnung, Tatsache und Zeitraum<br/>des Wohngeldantrags/-empfangs, Geschlecht<br/>— <a href='{{ELI}}#art-z33_abs-z3' target='_blank' rel='noopener'>§33 III S.1</a>"]
+        vermittlung["Übermittelt die erforderlichen Daten<br/>nach Abs. 1-3 an die Datenstelle als<br/>Vermittlungsstelle — <a href='{{ELI}}#art-z33_abs-z5' target='_blank' rel='noopener'>§33 V S.2</a>"]
+        feststellung{"Feststellungen erhalten (ggf. über die<br/>zentrale Landesstelle); führt die Überprüfung<br/>zu abweichenden Feststellungen?<br/>(Nutzung nur zur Überprüfung — <a href='{{ELI}}#art-z33_abs-z3' target='_blank' rel='noopener'>§33 III S.2</a>)"}
+        loeschen(["Übermittelte Daten unverzüglich<br/>löschen oder vernichten<br/>— <a href='{{ELI}}#art-z33_abs-z3' target='_blank' rel='noopener'>§33 III S.3</a>"])
+        auskunft["Bei Verdacht rechtswidriger Inanspruchnahme<br/>und fehlender Mitwirkung des Haushaltsmitglieds:<br/>Auskunftsersuchen an Kapitalerträge<br/>auszahlende Stellen zulässig — <a href='{{ELI}}#art-z23_abs-z4' target='_blank' rel='noopener'>§23 IV</a>"]
+        einstellung["Kann die Zahlung ohne Bescheid vorläufig ganz<br/>oder teilweise einstellen, wenn Tatsachen annehmen<br/>lassen: Bescheid bei Erlass rechtswidrig (kein<br/>Vertrauensschutz nach §45 II S.3 SGB X) oder<br/>Voraussetzungen des §27 II (auch i.V.m. IV)<br/>oder §28 I-III — <a href='{{ELI}}#art-z29_abs-z4' target='_blank' rel='noopener'>§29 IV S.1</a>"]
+        aufhebung{"Bewilligungsbescheid binnen 2 Monaten<br/>nach Einstellung für die Vergangenheit<br/>aufgehoben oder Unwirksamkeit festgestellt,<br/>oder Leistung nach §66 SGB I entzogen?<br/>— <a href='{{ELI}}#art-z29_abs-z4' target='_blank' rel='noopener'>§29 IV S.3-4</a>"}
+        nachzahlung(["Unverzügliche Nachzahlung<br/>— <a href='{{ELI}}#art-z29_abs-z4' target='_blank' rel='noopener'>§29 IV S.3</a>"])
+        erstattung(["Keine Nachzahlung; bei Erstattung nach §50 SGB X<br/>haften volljährige berücksichtigte Haushalts-<br/>mitglieder als Gesamtschuldner — <a href='{{ELI}}#art-z29_abs-z1' target='_blank' rel='noopener'>§29 I</a>;<br/>Aufrechnung in voller Höhe möglich — <a href='{{ELI}}#art-z29_abs-z2' target='_blank' rel='noopener'>§29 II</a>"])
+    end
+
+    subgraph DS["Datenstelle der Rentenversicherung"]
+        speichern["Speichert und nutzt die Daten, übermittelt sie<br/>an die Stellen nach Abs. 2 S.1 Nr.2, 4, 6, 7 weiter<br/>(dort gilt Abs. 4 entsprechend — <a href='{{ELI}}#art-z33_abs-z5' target='_blank' rel='noopener'>§33 V S.7</a>)<br/>und nutzt Daten nach §52 SGB II, §118 SGB XII,<br/>§150 SGB VI und §28p VIII S.3 SGB IV, soweit<br/>erforderlich — <a href='{{ELI}}#art-z33_abs-z5' target='_blank' rel='noopener'>§33 V S.3-4</a>"]
+        rueckleitung["Gleicht ab und leitet Feststellungen an die<br/>Wohngeldbehörde oder die zentrale Landes-<br/>stelle (oder über diese) zurück — <a href='{{ELI}}#art-z33_abs-z5' target='_blank' rel='noopener'>§33 V S.5</a>;<br/>löscht gespeicherte Daten unverzüglich nach<br/>Abschluss — <a href='{{ELI}}#art-z33_abs-z5' target='_blank' rel='noopener'>§33 V S.6</a>"]
+    end
+
+    subgraph ST["Abgleichende Stellen und Meldebehörden"]
+        abgleich["BZSt (Nr.2), Bundesagentur für Arbeit (Nr.4),<br/>Datenstelle und Minijob-Zentrale (Nr.6),<br/>Deutsche Post AG / DRV Knappschaft-Bahn-See<br/>(Nr.7), für Leistungen nach Nr.1 und 3 zuständige<br/>Stellen und Meldebehörden führen den Datenabgleich<br/>durch — <a href='{{ELI}}#art-z33_abs-z4' target='_blank' rel='noopener'>§33 IV S.1</a>"]
+        uebermittlung["Übermitteln Feststellungen an die Wohngeld-<br/>behörde oder die zentrale Landesstelle (oder über<br/>diese); überlassene Daten unverzüglich zurückgeben,<br/>löschen oder vernichten — <a href='{{ELI}}#art-z33_abs-z4' target='_blank' rel='noopener'>§33 IV</a>"]
+    end
+
+    start -.-> hinweis
+    start --> automatisiert
+    automatisiert -->|Nein| direkt
+    automatisiert -->|Ja| vermittlung
+    direkt --> abgleich
+    vermittlung --> speichern
+    speichern --> rueckleitung
+    abgleich --> uebermittlung
+    uebermittlung --> feststellung
+    rueckleitung --> feststellung
+    feststellung -->|Nein| loeschen
+    feststellung -->|Ja| auskunft
+    auskunft --> einstellung
+    einstellung --> aeusserung
+    einstellung --> aufhebung
+    aufhebung -->|Nein| nachzahlung
+    aufhebung -->|Ja| erstattung
+    loeschen ~~~ auskunft
+    hinweis ~~~ automatisiert
+    nachzahlung ~~~ erstattung
+
+    style loeschen fill:#d4edda,stroke:#2d8a4a
+    style nachzahlung fill:#d4edda,stroke:#2d8a4a
+    style erstattung fill:#f8d7da,stroke:#c0392b
+    style aeusserung fill:#fff3cd,stroke:#c9a227

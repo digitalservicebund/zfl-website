@@ -21,6 +21,10 @@ visOptions:
     visType: flowchart
     filename: risikomanagement
     articles: ["§§4-7"]
+  - name: Unstimmigkeitsmeldung Transparenzregister
+    visType: swimlane
+    filename: unstimmigkeitsmeldung
+    articles: ["§23a"]
   - name: Akteure und Zuständigkeiten
     visType: actors
     filename: akteure

@@ -1,28 +1,42 @@
 ---
-summary: "Zeigt den Ablauf von der Übergabe eines Altfahrzeugs über die Kostenfrage bis zur Ausstellung, Übermittlung und EU-weiten Anerkennung des Verwertungsnachweises."
+summary: "Zeigt den Weg eines Altfahrzeugs vom Fahrzeugeigner über Sammelstelle oder zugelassene Behandlungsanlage bis zum Verwertungsnachweis, dessen elektronischer Übermittlung an die zuständigen Behörden und der Aufhebung der Zulassung."
 ---
-flowchart TD
-    A["Fahrzeug wird zum Altfahrzeug"] --> B["Fahrzeugeigner übergibt es unverzüglich<br/>an Sammelstelle oder zugelassene<br/>Behandlungsanlage — <a href='{{ELI}}#024.001' target='_blank' rel='noopener'>Art. 24 Abs. 1</a>"]
+swimlane-beta TD
+    subgraph Eigner["Fahrzeugeigner"]
+        start(["Fahrzeug wird zum Altfahrzeug"])
+        kosten["Kostenlose Übergabe, außer es fehlen<br/>wesentliche Teile oder Abfälle wurden<br/>hinzugefügt — <a href='{{ELI}}#024.002' target='_blank' rel='noopener'>Art. 24 Abs. 2</a> (kostenlos trotz<br/>fehlender Batterie mit Behandlungsnachweis<br/>oder bei Totalschaden — <a href='{{ELI}}#024.004' target='_blank' rel='noopener'>Abs. 4</a>, <a href='{{ELI}}#024.005' target='_blank' rel='noopener'>Abs. 5</a>)"]
+        uebergabe{"Unverzügliche<br/>Übergabe an …<br/>— <a href='{{ELI}}#024.001' target='_blank' rel='noopener'>Art. 24 Abs. 1</a>"}
+    end
 
-    B --> C{"Fehlen wesentliche Teile (z.B. Batterie,<br/>Motor) oder wurden Abfälle hinzugefügt?<br/>— <a href='{{ELI}}#024.003' target='_blank' rel='noopener'>Art. 24 Abs. 3</a>"}
+    subgraph SSt["Sammelstelle"]
+        erhalt["Elektronische Empfangsbestätigung<br/>an Eigner und zuständige Behörden<br/>— <a href='{{ELI}}#023.006' target='_blank' rel='noopener'>Art. 23 Abs. 6</a>"]
+        verbringen["Verbringung in eine zugelassene<br/>Behandlungsanlage binnen zwei Monaten<br/>— <a href='{{ELI}}#023.005' target='_blank' rel='noopener'>Art. 23 Abs. 5 Buchst. c</a>"]
+    end
 
-    C -->|Nein| D["Übergabe ist für den letzten<br/>Eigner kostenlos<br/>— <a href='{{ELI}}#024.002' target='_blank' rel='noopener'>Art. 24 Abs. 2</a>"]
-    C -->|Ja| E{"Nachweis über ordnungsgemäße<br/>Batteriebehandlung oder Einstufung als<br/>Totalschaden durch Versicherung?<br/>— <a href='{{ELI}}#024.004' target='_blank' rel='noopener'>Art. 24 Abs. 4</a>,<br/><a href='{{ELI}}#024.005' target='_blank' rel='noopener'>Art. 24 Abs. 5</a>"}
+    subgraph BA["Zugelassene Behandlungsanlage"]
+        nachweis["Verwertungsnachweis für den letzten<br/>Eigner nach Muster Anhang X<br/>— <a href='{{ELI}}#025.001' target='_blank' rel='noopener'>Art. 25 Abs. 1</a>"]
+        mitteilung["Elektronische Übermittlung an die<br/>zuständigen Behörden, Kopie an den<br/>Eigner — <a href='{{ELI}}#025.002' target='_blank' rel='noopener'>Art. 25 Abs. 2</a>"]
+    end
 
-    E -->|Ja| D
-    E -->|Nein| F["Übergabe kann kostenpflichtig sein"]
+    subgraph ZB["Zuständige Behörden"]
+        anderer{"Fahrzeug in einem anderen<br/>Mitgliedstaat zugelassen?<br/>— <a href='{{ELI}}#025.003' target='_blank' rel='noopener'>Art. 25 Abs. 3</a>"}
+        unterrichtung["Mitteilung an die zuständigen Behörden<br/>des Zulassungsmitgliedstaats<br/>(Nachweis wird dort anerkannt —<br/><a href='{{ELI}}#025.005' target='_blank' rel='noopener'>Art. 25 Abs. 5</a>) — <a href='{{ELI}}#025.003' target='_blank' rel='noopener'>Art. 25 Abs. 3</a>"]
+    end
 
-    D --> G["Zugelassene Behandlungsanlage stellt<br/>Verwertungsnachweis nach Muster<br/>Anhang X aus — <a href='{{ELI}}#025.001' target='_blank' rel='noopener'>Art. 25 Abs. 1</a>"]
-    F --> G
+    subgraph FZB["Fahrzeugzulassungsbehörde"]
+        aufhebung(["Aufhebung der Zulassung erst nach<br/>Erhalt des Verwertungsnachweises<br/>— <a href='{{ELI}}#025.004' target='_blank' rel='noopener'>Art. 25 Abs. 4</a>"])
+    end
 
-    G --> H["Elektronische Übermittlung an die<br/>zuständigen Behörden<br/>— <a href='{{ELI}}#025.002' target='_blank' rel='noopener'>Art. 25 Abs. 2</a>"]
+    start --> kosten
+    kosten --> uebergabe
+    uebergabe -->|"an Sammelstelle"| erhalt
+    uebergabe -->|"an Behandlungsanlage"| nachweis
+    erhalt --> verbringen
+    verbringen --> nachweis
+    nachweis --> mitteilung
+    mitteilung --> anderer
+    anderer -->|Ja| unterrichtung
+    anderer -->|Nein| aufhebung
+    unterrichtung --> aufhebung
 
-    H --> I{"Fahrzeug in einem anderen<br/>Mitgliedstaat zugelassen?<br/>— <a href='{{ELI}}#025.003' target='_blank' rel='noopener'>Art. 25 Abs. 3</a>"}
-
-    I -->|Ja| J["Ausstellende Behörden unterrichten<br/>Behörden des Zulassungsmitgliedstaats<br/>— <a href='{{ELI}}#025.003' target='_blank' rel='noopener'>Art. 25 Abs. 3</a>"]
-    I -->|Nein| K["Zulassungsbehörde hebt die<br/>Fahrzeugzulassung auf<br/>— <a href='{{ELI}}#025.004' target='_blank' rel='noopener'>Art. 25 Abs. 4</a>"]
-    J --> K
-
-    K --> L["Verwertungsnachweis wird von allen<br/>Mitgliedstaaten anerkannt<br/>— <a href='{{ELI}}#025.005' target='_blank' rel='noopener'>Art. 25 Abs. 5</a>"]
-
-    style L fill:#d4edda,stroke:#2d8a4a
+    style aufhebung fill:#d4edda,stroke:#2d8a4a

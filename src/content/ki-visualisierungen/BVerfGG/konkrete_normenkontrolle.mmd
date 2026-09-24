@@ -1,26 +1,48 @@
 ---
-summary: "Zeigt das Vorlageverfahren der konkreten Normenkontrolle nach Art. 100 GG: Voraussetzungen der Richtervorlage, Begründungsanforderungen und die auf die Rechtsfrage beschränkte Entscheidung des BVerfG."
+summary: "Zeigt das Vorlageverfahren der konkreten Normenkontrolle nach Art. 100 GG mit vorlegendem Gericht, Kammer, Senat und Äußerungsberechtigten: Vorlage und Begründung, Zulässigkeitsprüfung durch die Kammer und die auf die Rechtsfrage beschränkte Entscheidung des Senats."
 ---
-flowchart TD
-    START["Gericht hält im anhängigen<br/>Verfahren eine entscheidungs-<br/>erhebliche Rechtsvorschrift<br/>für verfassungswidrig"] --> V100{"Voraussetzungen des<br/>Art. 100 Abs. 1 GG gegeben<br/>(Überzeugung von der<br/>Verfassungswidrigkeit)?<br/>— <a href='{{ELI}}#art-z80_abs-z1' target='_blank' rel='noopener'>§80 I</a>"}
+swimlane-beta TD
+    subgraph VG["Vorlegendes Gericht"]
+        start(["Gericht hält ein Gesetz, auf dessen<br/>Gültigkeit es bei der Entscheidung<br/>ankommt, für verfassungswidrig<br/>(Art. 100 Abs. 1 GG)"])
+        v100{"Voraussetzungen des<br/>Art. 100 Abs. 1 GG gegeben?<br/>— <a href='{{ELI}}#art-z80_abs-z1' target='_blank' rel='noopener'>§80 I</a>"}
+        keineVorlage(["Keine Vorlage an das<br/>Bundesverfassungsgericht"])
+        vorlage["Holt unmittelbar die Entscheidung des<br/>BVerfG ein — <a href='{{ELI}}#art-z80_abs-z1' target='_blank' rel='noopener'>§80 I</a>; Begründung: inwiefern<br/>die Entscheidung von der Gültigkeit der<br/>Rechtsvorschrift abhängt und mit welcher<br/>übergeordneten Rechtsnorm sie unvereinbar<br/>ist, Akten beigefügt — <a href='{{ELI}}#art-z80_abs-z2' target='_blank' rel='noopener'>§80 II</a><br/>(unabhängig von einer Rüge der<br/>Prozessbeteiligten — <a href='{{ELI}}#art-z80_abs-z3' target='_blank' rel='noopener'>§80 III</a>)"]
+    end
 
-    V100 -->|Nein| WEITER["Gericht entscheidet selbst<br/>weiter, keine Vorlage"]
-    V100 -->|Ja| VORL["Gericht setzt Verfahren aus<br/>und holt Entscheidung des<br/>BVerfG unmittelbar ein<br/>— <a href='{{ELI}}#art-z80_abs-z1' target='_blank' rel='noopener'>§80 I</a>"]
+    subgraph K["Kammer"]
+        vorbehalt{"Antrag von einem Landes-<br/>verfassungsgericht oder einem<br/>obersten Gerichtshof des Bundes?<br/>— <a href='{{ELI}}/art-z81a' target='_blank' rel='noopener'>§81a S.2</a>"}
+        kammer{"Kammer stellt durch einstimmigen<br/>Beschluss die Unzulässigkeit<br/>des Antrags fest?<br/>— <a href='{{ELI}}/art-z81a' target='_blank' rel='noopener'>§81a S.1</a>"}
+        unzulaessig(["Antrag unzulässig"])
+    end
 
-    VORL --> BEGR{"Begründung gibt an, inwiefern<br/>die Entscheidung von der<br/>Gültigkeit der Norm abhängt<br/>und mit welcher übergeordneten<br/>Norm sie unvereinbar ist;<br/>Akten beigefügt?<br/>— <a href='{{ELI}}#art-z80_abs-z2' target='_blank' rel='noopener'>§80 II</a>"}
+    subgraph S["Senat"]
+        senat["Entscheidung durch den Senat<br/>(in den Fällen des <a href='{{ELI}}/art-z81a' target='_blank' rel='noopener'>§81a S.2</a><br/>auch über die Unzulässigkeit)"]
+        rechtsfrage{"Entscheidet nur über die Rechtsfrage<br/>— <a href='{{ELI}}/art-z81' target='_blank' rel='noopener'>§81</a>: Rechtsvorschrift mit dem<br/>Grundgesetz bzw. sonstigem Bundesrecht<br/>unvereinbar? — §78 i.V.m. <a href='{{ELI}}#art-z82_abs-z1' target='_blank' rel='noopener'>§82 I</a>"}
+        nichtig["Erklärt das Gesetz für nichtig, ggf. auch<br/>weitere Bestimmungen desselben Gesetzes<br/>aus denselben Gründen — <a href='{{ELI}}/art-z78' target='_blank' rel='noopener'>§78</a>"]
+        bindung(["Entscheidung bindet alle Gerichte und<br/>Behörden — <a href='{{ELI}}#art-z31_abs-z1' target='_blank' rel='noopener'>§31 I</a>; hat Gesetzeskraft,<br/>Veröffentlichung der Entscheidungsformel<br/>im Bundesgesetzblatt — <a href='{{ELI}}#art-z31_abs-z2' target='_blank' rel='noopener'>§31 II</a>"])
+    end
 
-    BEGR -->|Nein| KUZ{"Kammer stellt Unzulässigkeit<br/>einstimmig fest<br/>— <a href='{{ELI}}#art-z81a' target='_blank' rel='noopener'>§81a S.1</a>"}
+    subgraph AE["Äußerungsberechtigte"]
+        aeusserung["Verfassungsorgane nach §77: Äußerung<br/>binnen Frist — <a href='{{ELI}}#art-z82_abs-z1' target='_blank' rel='noopener'>§82 I</a>, Beitritt in jeder<br/>Lage des Verfahrens — <a href='{{ELI}}#art-z82_abs-z2' target='_blank' rel='noopener'>§82 II</a>;<br/>Beteiligte des Ausgangsverfahrens:<br/>Äußerung, Ladung zur mündlichen<br/>Verhandlung — <a href='{{ELI}}#art-z82_abs-z3' target='_blank' rel='noopener'>§82 III</a>;<br/>ggf. Stellungnahme oberster Gerichtshöfe<br/>auf Ersuchen des BVerfG — <a href='{{ELI}}#art-z82_abs-z4' target='_blank' rel='noopener'>§82 IV</a>"]
+    end
 
-    KUZ -->|Ja| UNZ["Unzulässige Vorlage"]
-    KUZ -->|Vorlage von Landes-<br/>verfassungsgericht oder<br/>oberstem Bundesgerichtshof| SENAT["Entscheidung bleibt<br/>dem Senat vorbehalten<br/>— <a href='{{ELI}}#art-z81a' target='_blank' rel='noopener'>§81a S.2</a>"]
+    start --> v100
+    v100 -->|Nein| keineVorlage
+    v100 -->|Ja| vorlage
+    vorlage --> vorbehalt
+    vorbehalt -->|Ja| senat
+    vorbehalt -->|Nein| kammer
+    kammer -->|Ja| unzulaessig
+    kammer -->|Nein| senat
+    senat -.->|"Gelegenheit<br/>zur Äußerung"| aeusserung
+    aeusserung -.-> rechtsfrage
+    senat --> rechtsfrage
+    rechtsfrage -->|Ja| nichtig
+    rechtsfrage -->|"Nein: Rechtsvorschrift<br/>vereinbar"| bindung
+    nichtig --> bindung
+    keineVorlage ~~~ vorlage
 
-    BEGR -->|Ja| ZUL["Zulässige Vorlage"]
-    SENAT --> ZUL
-
-    ZUL --> ENT["BVerfG entscheidet nur<br/>über die Rechtsfrage<br/>— <a href='{{ELI}}#art-z81' target='_blank' rel='noopener'>§81</a>,<br/>unabhängig von einer<br/>Rüge der Beteiligten<br/>— <a href='{{ELI}}#art-z80_abs-z3' target='_blank' rel='noopener'>§80 III</a>"]
-
-    ENT --> BIND["Vorlegendes Gericht ist an<br/>die Entscheidung gebunden"]
-
-    style UNZ fill:#f8d7da,stroke:#c0392b
-    style ZUL fill:#d4edda,stroke:#2d8a4a
-    style BIND fill:#d4edda,stroke:#2d8a4a
+    style keineVorlage fill:#fff3cd,stroke:#c9a227
+    style unzulaessig fill:#f8d7da,stroke:#c0392b
+    style nichtig fill:#fff3cd,stroke:#c9a227
+    style bindung fill:#d4edda,stroke:#2d8a4a

@@ -10,7 +10,7 @@ visOptions:
     filename: upload_filter
     articles: ["§§7-11"]
   - name: Internes Beschwerdeverfahren
-    visType: flowchart
+    visType: swimlane
     filename: beschwerdeverfahren
     articles: ["§9", "§14"]
   - name: Außergerichtliche Streitbeilegung
@@ -21,3 +21,7 @@ visOptions:
     visType: flowchart
     filename: missbrauch
     articles: ["§18"]
+  - name: Akteure und Zuständigkeiten
+    visType: actors
+    filename: akteure
+    articles: []

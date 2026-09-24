@@ -1,0 +1,50 @@
+---
+summary: "Zeigt die Akteure, die die Verordnung einrichtet oder verpflichtet – von Kommission und Mitgliedstaaten über zuständige Behörden und Zollbehörden bis zu Herstellern, Behandlungsanlagen, Sammelstellen und Fahrzeugeignern – und wie sie über Zulassung, Übergabe, Verwertungsnachweis und Ausfuhrkontrolle verbunden sind."
+---
+flowchart LR
+    ZB["<b>Zuständige Behörde für die Bewirtschaftung von Altfahrzeugen</b><br/>überwacht Wirtschaftsteilnehmer, Hersteller<br/>und Organisationen für Herstellerverantwortung — <a href='{{ELI}}#014.001' target='_blank' rel='noopener'>Art. 14 Abs. 1</a><br/>erteilt und widerruft Zulassungen — <a href='{{ELI}}#018.006' target='_blank' rel='noopener'>Art. 18 Abs. 6</a><br/>registriert Hersteller binnen zwölf Wochen — <a href='{{ELI}}#019.008' target='_blank' rel='noopener'>Art. 19 Abs. 8</a><br/>informiert Behörden des Zulassungsstaats — <a href='{{ELI}}#025.003' target='_blank' rel='noopener'>Art. 25 Abs. 3</a>"]
+
+    subgraph EU["EU-Ebene"]
+        KOM["<b>Kommission</b><br/>Website mit Links zu allen Herstellerregistern — <a href='{{ELI}}#019.001' target='_blank' rel='noopener'>Art. 19 Abs. 1</a><br/>legt Berichtsformat fest — <a href='{{ELI}}#050.005' target='_blank' rel='noopener'>Art. 50 Abs. 5</a><br/>überprüft Berichte der Mitgliedstaaten — <a href='{{ELI}}#050.003' target='_blank' rel='noopener'>Art. 50 Abs. 3</a>"]
+    end
+
+    subgraph Mitgliedstaaten["Mitgliedstaaten"]
+        MS["<b>Mitgliedstaaten</b><br/>richten Herstellerregister ein — <a href='{{ELI}}#019.001' target='_blank' rel='noopener'>Art. 19 Abs. 1</a><br/>inspizieren Behandlungsanlagen und Sammelstellen — <a href='{{ELI}}#047.002' target='_blank' rel='noopener'>Art. 47 Abs. 2</a><br/>veröffentlichen jährliche Daten — <a href='{{ELI}}#050.001' target='_blank' rel='noopener'>Art. 50 Abs. 1</a>"]
+        ZBA["<b>Zuständige Behörde für die Ausfuhr<br/>von Gebrauchtfahrzeugen</b><br/>verantwortlich für die Ausfuhrkontrolle — <a href='{{ELI}}#038.001' target='_blank' rel='noopener'>Art. 38 Abs. 1</a><br/>Informationsaustausch mit anderen Mitgliedstaaten — <a href='{{ELI}}#045.001' target='_blank' rel='noopener'>Art. 45 Abs. 1</a><br/>Zusammenarbeit mit Drittländern — <a href='{{ELI}}#045.002' target='_blank' rel='noopener'>Art. 45 Abs. 2</a>"]
+        Zoll["<b>Zollbehörden</b><br/>prüfen Fahrzeugstatus automatisch — <a href='{{ELI}}#040.001' target='_blank' rel='noopener'>Art. 40 Abs. 1</a><br/>risikobasierte Kontrollen — <a href='{{ELI}}#041.001' target='_blank' rel='noopener'>Art. 41 Abs. 1</a><br/>setzen Überlassung aus und<br/>unterrichten die zuständige Behörde — <a href='{{ELI}}#042.001' target='_blank' rel='noopener'>Art. 42 Abs. 1</a>"]
+        FZB["<b>Zuständige Fahrzeugzulassungsbehörden</b><br/>heben Zulassung erst nach Erhalt<br/>des Verwertungsnachweises auf — <a href='{{ELI}}#025.004' target='_blank' rel='noopener'>Art. 25 Abs. 4</a>"]
+    end
+
+    subgraph Herstellerseite["Erweiterte Herstellerverantwortung"]
+        H["<b>Hersteller</b><br/>erweiterte Herstellerverantwortung ab 1.9.2029 — <a href='{{ELI}}#016.001' target='_blank' rel='noopener'>Art. 16 Abs. 1</a><br/>finanzielle Beiträge für Sammlung und Behandlung — <a href='{{ELI}}#020.001' target='_blank' rel='noopener'>Art. 20 Abs. 1</a><br/>Verträge mit Behandlungsanlagen — <a href='{{ELI}}#015.004' target='_blank' rel='noopener'>Art. 15 Abs. 4</a><br/>richten Sammelsysteme ein — <a href='{{ELI}}#023.002' target='_blank' rel='noopener'>Art. 23 Abs. 2</a>"]
+        OfH["<b>Organisation für Herstellerverantwortung</b><br/>erfüllt Pflichten im Namen der Hersteller — <a href='{{ELI}}#017.001' target='_blank' rel='noopener'>Art. 17 Abs. 1</a><br/>beantragt Zulassung bei kollektiver Erfüllung — <a href='{{ELI}}#018.001' target='_blank' rel='noopener'>Art. 18 Abs. 1</a><br/>Abfallbewirtschafter benennen Beobachter im Vorstand — <a href='{{ELI}}#017.004' target='_blank' rel='noopener'>Art. 17 Abs. 4</a>"]
+    end
+
+    subgraph Altfahrzeuge["Sammlung und Behandlung"]
+        Eigner["<b>Fahrzeugeigner</b><br/>übergibt Altfahrzeug unverzüglich — <a href='{{ELI}}#024.001' target='_blank' rel='noopener'>Art. 24 Abs. 1</a><br/>Übergabe grundsätzlich kostenlos — <a href='{{ELI}}#024.002' target='_blank' rel='noopener'>Art. 24 Abs. 2</a>"]
+        SSt["<b>Sammelstellen</b><br/>nur, wenn der Mitgliedstaat es gestattet — <a href='{{ELI}}#023.005' target='_blank' rel='noopener'>Art. 23 Abs. 5</a><br/>bestätigen dem Eigner den Erhalt — <a href='{{ELI}}#023.006' target='_blank' rel='noopener'>Art. 23 Abs. 6</a><br/>verbringen Altfahrzeuge binnen zwei Monaten — <a href='{{ELI}}#023.005' target='_blank' rel='noopener'>Art. 23 Abs. 5</a>"]
+        BA["<b>Zugelassene Behandlungsanlagen</b><br/>Genehmigung nach Art. 23 RL 2008/98/EG — <a href='{{ELI}}#015.001' target='_blank' rel='noopener'>Art. 15 Abs. 1</a><br/>behandeln Altfahrzeuge binnen zwölf Monaten — <a href='{{ELI}}#026.002' target='_blank' rel='noopener'>Art. 26 Abs. 2</a><br/>stellen dem letzten Eigner<br/>Verwertungsnachweis aus — <a href='{{ELI}}#025.001' target='_blank' rel='noopener'>Art. 25 Abs. 1</a>"]
+    end
+
+    MS -->|"benennen — <a href='{{ELI}}#014.001' target='_blank' rel='noopener'>Art. 14 Abs. 1</a>"| ZB
+    MS -->|"benennen — <a href='{{ELI}}#038.001' target='_blank' rel='noopener'>Art. 38 Abs. 1</a>"| ZBA
+    MS -->|"Berichte — <a href='{{ELI}}#050.003' target='_blank' rel='noopener'>Art. 50 Abs. 3</a>, Art. 14 Abs. 4"| KOM
+    H -->|"beantragt Zulassung, Registrierung — <a href='{{ELI}}#018.001' target='_blank' rel='noopener'>Art. 18 Abs. 1</a>, Art. 19 Abs. 2"| ZB
+    OfH -->|"beantragt Zulassung — <a href='{{ELI}}#018.001' target='_blank' rel='noopener'>Art. 18 Abs. 1</a>"| ZB
+    H -->|"benennt — <a href='{{ELI}}#017.001' target='_blank' rel='noopener'>Art. 17 Abs. 1</a>"| OfH
+    Eigner -->|"übergibt Altfahrzeug — <a href='{{ELI}}#024.001' target='_blank' rel='noopener'>Art. 24 Abs. 1</a>"| SSt & BA
+    SSt -->|"Verbringung — <a href='{{ELI}}#023.005' target='_blank' rel='noopener'>Art. 23 Abs. 5</a>"| BA
+    SSt -->|"Empfangsbestätigung — <a href='{{ELI}}#023.006' target='_blank' rel='noopener'>Art. 23 Abs. 6</a>"| ZB
+    BA -->|"Verwertungsnachweis — <a href='{{ELI}}#025.002' target='_blank' rel='noopener'>Art. 25 Abs. 2</a>, Abs. 4"| ZB & FZB
+    Zoll <-->|"Zusammenarbeit — <a href='{{ELI}}#045.003' target='_blank' rel='noopener'>Art. 45 Abs. 3</a>, Art. 42, 44"| ZBA
+    KOM <-->|"Risikoinformationen — <a href='{{ELI}}#045.005' target='_blank' rel='noopener'>Art. 45 Abs. 5</a>"| Zoll
+
+    classDef zentral fill:#fff3cd,stroke:#c9a227,stroke-width:2px
+    classDef behoerde fill:#e8f0fe,stroke:#3b6fd4
+    classDef privat fill:#f5f5f5,stroke:#999
+    classDef parlament fill:#ede7f6,stroke:#7e57c2
+    classDef gremium fill:#e6f4ea,stroke:#2d8a4a
+    class ZB zentral
+    class ZBA,Zoll,FZB behoerde
+    class H,OfH,BA,SSt,Eigner privat
+    class KOM,MS parlament

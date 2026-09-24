@@ -6,7 +6,7 @@ visOptions:
     filename: testablauf
     articles: ["§1"]
   - name: Verfahrenswege (Bundesamt/Land)
-    visType: flowchart
+    visType: swimlane
     filename: verfahrenswege
     articles: ["§2", "§3"]
   - name: Datenverarbeitung und Löschung

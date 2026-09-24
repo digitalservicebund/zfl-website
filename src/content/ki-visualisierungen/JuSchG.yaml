@@ -14,13 +14,17 @@ visOptions:
     filename: filmveranstaltungen
     articles: ["§11"]
   - name: Indizierungsverfahren
-    visType: flowchart
+    visType: swimlane
     filename: indizierungsverfahren
     articles: ["§21", "§23", "§25"]
   - name: Vorsorgemaßnahmen der Anbieter
     visType: flowchart
     filename: vorsorgemassnahmen
     articles: ["§24b"]
+  - name: Alterskennzeichnung Filme und Spiele
+    visType: swimlane
+    filename: alterskennzeichnung
+    articles: ["§14"]
   - name: Akteure und Zuständigkeiten
     visType: actors
     filename: akteure

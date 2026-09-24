@@ -10,11 +10,11 @@ visOptions:
     filename: haftungsprivileg
     articles: ["§7", "§8"]
   - name: Beschlagnahmeverfahren
-    visType: flowchart
+    visType: swimlane
     filename: beschlagnahme
     articles: ["§26"]
   - name: Durchsetzungsverfahren
-    visType: flowchart
+    visType: swimlane
     filename: durchsetzungsverfahren
     articles: ["§27"]
   - name: Gerichtliche Zugangsbeschränkung
