@@ -9,9 +9,7 @@ swimlane-beta TD
         anzeigeMit["Anzeige samt Stellungnahme des BR — <a href='{{ELI}}#art-z17_abs-z3' target='_blank' rel='noopener'>§17 III S.2</a>"]
         anzeigeOhne["Anzeige mit Glaubhaftmachung:<br/>BR mind. 2 Wochen vorher unterrichtet,<br/>Stand der Beratungen dargelegt — <a href='{{ELI}}#art-z17_abs-z3' target='_blank' rel='noopener'>§17 III S.3</a>"]
         abschriftAnzeige["Abschrift der Anzeige an BR — <a href='{{ELI}}#art-z17_abs-z3' target='_blank' rel='noopener'>§17 III S.6</a>"]
-        vorzeitig["Entlassungen können<br/>vorzeitig wirksam werden"]
-        einMonat["Entlassungen erst nach Ablauf<br/>eines Monats wirksam — <a href='{{ELI}}#art-z18_abs-z1' target='_blank' rel='noopener'>§18 I</a>"]
-        zweiMonate["Entlassungen erst nach Ablauf<br/>von bis zu 2 Monaten wirksam — <a href='{{ELI}}#art-z18_abs-z2' target='_blank' rel='noopener'>§18 II</a>"]
+        wirksam["Entlassungen werden wirksam:<br/>bei Zustimmung ggf. vorzeitig,<br/>sonst nach Ablauf der Sperrfrist<br/>— <a href='{{ELI}}#art-z18_abs-z1' target='_blank' rel='noopener'>§18 I</a>, <a href='{{ELI}}#art-z18_abs-z2' target='_blank' rel='noopener'>§18 II</a>"]
         frist90{"Innerhalb 90 Tagen nach<br/>Zulässigkeit durchgeführt? — <a href='{{ELI}}#art-z18_abs-z4' target='_blank' rel='noopener'>§18 IV</a>"}
         erledigt(["Entlassungen durchgeführt"])
         erneut(["Erneute Anzeige erforderlich — <a href='{{ELI}}#art-z18_abs-z4' target='_blank' rel='noopener'>§18 IV</a>"])
@@ -44,12 +42,10 @@ swimlane-beta TD
     abschriftAnzeige -.->|optional| weitereStellungnahme
     weitereStellungnahme -.-> zustimmung
     eingang --> zustimmung
-    zustimmung -->|"Ja (ggf. rückwirkend<br/>bis Antragstellung)"| vorzeitig
+    zustimmung -->|"Ja: vorzeitig (ggf. rückwirkend<br/>bis Antragstellung)"| wirksam
     zustimmung -->|Nein| verlaengerung
-    verlaengerung -->|Nein| einMonat
-    verlaengerung -->|Ja| zweiMonate
-    vorzeitig --> frist90
-    einMonat --> frist90
-    zweiMonate --> frist90
+    verlaengerung -->|"Nein: nach<br/>1 Monat"| wirksam
+    verlaengerung -->|"Ja: nach bis<br/>zu 2 Monaten"| wirksam
+    wirksam --> frist90
     frist90 -->|Ja| erledigt
     frist90 -->|Nein| erneut

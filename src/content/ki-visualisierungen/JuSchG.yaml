@@ -21,3 +21,7 @@ visOptions:
     visType: flowchart
     filename: vorsorgemassnahmen
     articles: ["§24b"]
+  - name: Akteure und Zuständigkeiten
+    visType: actors
+    filename: akteure
+    articles: []

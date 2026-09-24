@@ -14,7 +14,7 @@ visOptions:
     filename: auskunftsrecht_fristen
     articles: ["Art. 12"]
   - name: Meldung von Datenschutzverletzungen
-    visType: flowchart
+    visType: swimlane
     filename: datenpanne_meldung
     articles: ["Art. 33", "Art. 34"]
   - name: Datenschutz-Folgenabschätzung

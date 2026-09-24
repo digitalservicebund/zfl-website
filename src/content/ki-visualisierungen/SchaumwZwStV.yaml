@@ -6,7 +6,7 @@ visOptions:
     filename: erlaubnisverfahren
     articles: ["§§4-8"]
   - name: Beförderung mit e-Verwaltungsdokument
-    visType: flowchart
+    visType: swimlane
     filename: befoerderung_evd
     articles: ["§16", "§19", "§21"]
   - name: Ausfallverfahren bei Systemausfall

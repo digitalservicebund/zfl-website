@@ -10,13 +10,12 @@ swimlane-beta TD
         eigeneMassnahmen["Trifft unverzüglich Maßnahmen:<br/>Mitglieder informieren, Rückruf,<br/>Rücknahme, Vernichtung<br/>— <a href='{{ELI}}#art-z26_abs-z4' target='_blank' rel='noopener'>§26 IV S.2</a>"]
         meldungAbh["Informiert unverzüglich die Behörde<br/>(Auskunftsverweigerungsrecht bei<br/>Selbstbelastung) — <a href='{{ELI}}#art-z26_abs-z5' target='_blank' rel='noopener'>§26 V</a>"]
         ergaenzend["Übermittelt ergänzende<br/>Informationen — <a href='{{ELI}}#art-z27_abs-z2' target='_blank' rel='noopener'>§27 II S.2</a>"]
-        hinweisMitwirkung["Duldungs-, Mitwirkungs- und<br/>Auskunftspflichten, Auskunfts-<br/>verweigerungsrecht bei Selbstbelastung<br/>— <a href='{{ELI}}/art-z29' target='_blank' rel='noopener'>§29</a>"]
         umsetzung["Setzt Anordnung um; Widerspruch<br/>und Klage ohne aufschiebende<br/>Wirkung — <a href='{{ELI}}#art-z27_abs-z6' target='_blank' rel='noopener'>§27 VI</a>"]
         darlegung["Legt schlüssig dar, dass wirksame<br/>Maßnahmen zur Einhaltung<br/>getroffen wurden — <a href='{{ELI}}#art-z27_abs-z5' target='_blank' rel='noopener'>§27 V</a>"]
     end
 
     subgraph BH["Zuständige Behörde"]
-        kontrolle["Regelmäßige und anlassbezogene<br/>Kontrollen vor Ort und Stichproben<br/>— <a href='{{ELI}}#art-z27_abs-z1' target='_blank' rel='noopener'>§27 I</a>; Befugnisse<br/>— <a href='{{ELI}}/art-z28' target='_blank' rel='noopener'>§28</a>"]
+        kontrolle["Regelmäßige und anlassbezogene<br/>Kontrollen vor Ort und Stichproben<br/>— <a href='{{ELI}}#art-z27_abs-z1' target='_blank' rel='noopener'>§27 I</a>; Befugnisse<br/>— <a href='{{ELI}}/art-z28' target='_blank' rel='noopener'>§28</a>; Duldungs- und<br/>Mitwirkungspflichten — <a href='{{ELI}}/art-z29' target='_blank' rel='noopener'>§29</a>"]
         nachfrage{"Ergänzende Informationen<br/>zur Risikoprüfung nötig?<br/>— <a href='{{ELI}}#art-z27_abs-z2' target='_blank' rel='noopener'>§27 II S.2</a>"}
         verdacht{"Begründeter Verdacht auf Verstoß<br/>gegen Anforderungen, Schutzvorgaben<br/>oder Auflagen? — <a href='{{ELI}}#art-z27_abs-z3' target='_blank' rel='noopener'>§27 III S.1</a>"}
         keineMassnahme(["Keine Anordnung,<br/>weitere Überwachung"])
@@ -45,7 +44,6 @@ swimlane-beta TD
     meldungAbh --> kontrolle
     berichte -.-> kontrolle
     hinweise -.-> kontrolle
-    kontrolle -.- hinweisMitwirkung
     kontrolle --> verdacht
     verdacht -->|Nein| keineMassnahme
     verdacht -->|Ja| rasch
@@ -55,9 +53,11 @@ swimlane-beta TD
     eingriff --> umsetzung
     umsetzung --> darlegung
     darlegung --> aufhebung
+    meldungRisiko ~~~ abhanden
+    ergaenzend ~~~ meldungAbh
+    abhanden ~~~ berichte
 
     style aufhebung fill:#d4edda,stroke:#2d8a4a
     style keineMassnahme fill:#d4edda,stroke:#2d8a4a
     style eingriff fill:#f8d7da,stroke:#c0392b
     style anordnung fill:#fff3cd,stroke:#c9a227
-    style hinweisMitwirkung fill:#f5f5f5,stroke:#999
