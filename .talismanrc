@@ -188,7 +188,7 @@ fileignoreconfig:
     allowed_patterns:
       - rZHw3Hn9HKW-86-1nHQUWP0LZe5-cg
       - Sxzmf2FkxTibbNVByMIFM3srA_7GBw
-  - filename: src/images/online-schulung.png
+  - filename: src/images/online-schulung.jpg
     ignore_detectors: [filecontent]
   - filename: src/pages/werkzeuge/visualisieren/_wizardState.svelte.ts
     allowed_patterns: [WIZARD_CONTEXT_KEY]
