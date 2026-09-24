@@ -6,6 +6,5 @@ export type StepDef = { title: string };
 export const steps: StepDef[] = [
   { title: "Text" },
   { title: "Teilbereich" },
-  { title: "Perspektive" },
   { title: "Ergebnis" },
 ];

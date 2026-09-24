@@ -1,22 +1,12 @@
 import { getContext, setContext } from "svelte";
 import { steps } from "./_steps.ts";
-import type {
-  LawExample,
-  PerspectiveOption,
-  VisOption,
-  VisType,
-} from "./_types";
+import type { LawExample, VisOption, VisType } from "./_types";
 
 export type LawType = { id: string; label: string };
 export const lawTypes = [
   { id: "own", label: "eigenes Vorhaben" },
   { id: "existing", label: "bestehendes Gesetz" },
 ] as const satisfies LawType[];
-
-const visPerspectives: PerspectiveOption[] = [
-  { name: "Bürgerperspektive" },
-  { name: "Behördenperspektive" },
-];
 
 export class WizardState {
   currentStep = $state(1);
@@ -33,9 +23,6 @@ export class WizardState {
   visOptionsError = $state<string>();
   isLoadingVisOptions = $state(false);
   loadingStatusMessage = $state("");
-
-  visPerspectives = $state<PerspectiveOption[]>(visPerspectives);
-  selectedVisPerspective = $state<string>();
 
   mermaidSource = $state("");
   summary = $state("");
@@ -71,7 +58,6 @@ export class WizardState {
   get canAdvance(): boolean {
     if (this.currentStep === 1) return !!this.visOptionsSource;
     if (this.currentStep === 2) return !!this.selectedVisOption;
-    if (this.currentStep === 3) return !!this.selectedVisPerspective;
     return false;
   }
 

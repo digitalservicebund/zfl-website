@@ -16,7 +16,6 @@
   import { WizardState, setWizardContext } from "./_wizardState.svelte.ts";
   import Step2 from "./_Step2.svelte";
   import StepFinal from "./_StepFinal.svelte";
-  import Step3 from "./_Step3.svelte";
   import { steps } from "./_steps.ts";
 
   let {
@@ -150,16 +149,6 @@
   // loading, so StepFinal is on screen to show its own loading state.
   $effect(() => {
     if (wizard.selectedVisOption) {
-      untrack(() => {
-        if (wizard.currentStep < 3) wizard.currentStep = 3;
-      });
-    }
-  });
-
-  // Same rationale as the step 1 → 2 advance above: advances as soon as the
-  // user picks a perspective.
-  $effect(() => {
-    if (wizard.selectedVisPerspective) {
       untrack(() => {
         if (wizard.currentStep < steps.length)
           wizard.currentStep = steps.length;
@@ -564,8 +553,6 @@
           <Step1 {examples} />
         {:else if wizard.currentStep === 2}
           <Step2 />
-        {:else if wizard.currentStep === 3}
-          <Step3 />
         {:else if wizard.currentStep === steps.length}
           <StepFinal {canPruefen} {buttons} />
         {/if}

@@ -22,7 +22,3 @@ export type VisOption = z.infer<typeof visOptionType>;
 export type LawExample = CollectionEntry<"kiVisualisierungen">["data"] & {
   short: string;
 };
-
-export interface PerspectiveOption {
-  name: string;
-}
