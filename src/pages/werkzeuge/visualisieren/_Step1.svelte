@@ -19,13 +19,9 @@
       onclick={() => (wizard.preset = "flowchart")}
       icon={visTypeIcons.flowchart}
     >
-      <div>
-        <ul class="kern-body--small">
-          <li>Wo sind Komplexitäten?</li>
-          <li>Wo sind Lücken?</li>
-        </ul>
-        <p class="kern-body--muted">→ Flussdiagramm</p>
-      </div>
+      <p class="kern-body--small kern-body--muted">
+        Wo sind Komplexitäten/Lücken?
+      </p>
     </PresetBtn>
     <PresetBtn
       title="Ablauf in der Praxis"
@@ -33,13 +29,7 @@
       onclick={() => (wizard.preset = "swimlane")}
       icon={visTypeIcons.swimlane}
     >
-      <div>
-        <ul class="kern-body--small">
-          <li>Wer macht was?</li>
-          <li>Was folgt worauf?</li>
-        </ul>
-        <p class="kern-body--muted">→ Swimlane-Flussdiagramm</p>
-      </div>
+      <p class="kern-body--small kern-body--muted">Wer macht wann was?</p>
     </PresetBtn>
     <PresetBtn
       title="Akteure"
@@ -47,13 +37,7 @@
       onclick={() => (wizard.preset = "actors")}
       icon={visTypeIcons.actors}
     >
-      <div>
-        <ul class="kern-body--small">
-          <li>Wer ist involviert?</li>
-          <li>Wer ist wofür zuständig?</li>
-        </ul>
-        <p class="kern-body--muted">→ Akteursübersicht</p>
-      </div>
+      <p class="kern-body--small kern-body--muted">Wer ist involviert?</p>
     </PresetBtn>
   </div>
 {/snippet}

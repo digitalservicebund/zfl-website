@@ -23,7 +23,7 @@
 <button
   class="rounded-sm border border-(--kern-color-decorative-border-contextual) aria-current:bg-lavender-400 hover:bg-lavender-200 p-16 flex justify-start text-left {inline
     ? 'flex-row items-center gap-8'
-    : 'flex-col items-start gap-16'}"
+    : 'flex-col items-start gap-8'}"
   aria-current={active ? "true" : undefined}
   onclick={() => onclick()}
 >
