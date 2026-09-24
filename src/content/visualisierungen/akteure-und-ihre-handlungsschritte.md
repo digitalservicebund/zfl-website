@@ -7,7 +7,7 @@ Bild:
 tags: ["Klärt Rollen", "Verknüpft Recht und Prozess", "Führt Prozesse zusammen"]
 Beispielvorhaben:
   Titel: "Entwurf eines Gesetzes zur Änderung des Tierarzneimittelgesetzes und des Apothekengesetzes"
-  Ressort: "BMELH"
+  Ressort: "BMLEH"
   LinkRegelungstext: "https://dip.bundestag.de/vorgang/gesetz-zur-%C3%A4nderung-des-tierarzneimittelgesetzes-und-des-apothekengesetzes/324742"
   NKRStellungnahmeLink: null
 ---
