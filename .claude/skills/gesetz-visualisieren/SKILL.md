@@ -1,13 +1,14 @@
 ---
 name: gesetz-visualisieren
-description: Sucht ein Gesetz über die RIS-Search-API, identifiziert bis zu 5 Prozesse/Abläufe im Gesetzestext und erzeugt dafür Mermaid-Flowcharts, die als .mmd-Dateien im Visualisierungs-Tool (src/pages/werkzeuge/visualisieren) gespeichert werden. Trigger bei "Gesetz visualisieren", "Mermaid-Diagramm für Gesetz", "Prozessvisualisierung Gesetzestext".
+description: Sucht ein Gesetz über die RIS-Search-API, identifiziert bis zu 5 Prozesse/Abläufe im Gesetzestext und erzeugt dafür Mermaid-Diagramme (Flowcharts oder Swimlanes), die als .mmd-Dateien im Visualisierungs-Tool (src/pages/werkzeuge/visualisieren) gespeichert werden. Trigger bei "Gesetz visualisieren", "Mermaid-Diagramm für Gesetz", "Prozessvisualisierung Gesetzestext".
 ---
 
 # Gesetz visualisieren
 
 Dieser Skill führt den Nutzer durch einen 4-stufigen Ablauf, um aus einem
-Gesetzestext bis zu 5 Mermaid-Flowcharts zu erzeugen und in dieses Repo
-einzupflegen (Tool unter `/werkzeuge/visualisieren`).
+Gesetzestext bis zu 5 Mermaid-Diagramme (`flowchart` oder `swimlane`) zu
+erzeugen und in dieses Repo einzupflegen (Tool unter
+`/werkzeuge/visualisieren`).
 
 Ein optionales Argument kann bereits den Gesetznamen enthalten
 (`$ARGUMENTS`). Wenn vorhanden, überspringe Schritt 1.
@@ -57,20 +58,37 @@ Bereits vorhandene Beispiele in diesem Repo (als Referenz für den
 Detailgrad, siehe `src/content/ki-visualisierungen/*.yaml`):
 
 - KSchG: Anwendbarkeitsprüfung, Prüfschema "sozial ungerechtfertigt",
-  Klagefristen-Kette, Sonderkündigungsschutz-Zeiträume, Anzeigeverfahren
-  Massenentlassung
+  Klagefristen-Kette (alle `flowchart`), Anzeigeverfahren Massenentlassung
+  (`swimlane`)
 - HeizkostenV: Geltungsbereich, Kürzungsrecht, Kostenverteilung, Pflichten
-  des Gebäudeeigentümers
+  des Gebäudeeigentümers (alle `flowchart`)
 
 Wähle bis zu 5 Prozesse (weniger ist ok, wenn das Gesetz nicht mehr
 hergibt) und benenne jeden kurz und prägnant (2-4 Wörter, wie oben).
 
+Lege für jeden Prozess den Diagrammtyp (`visType`) fest:
+
+- **`swimlane`** — bevorzugt für Abläufe mit verteilten Zuständigkeiten, bei
+  denen mehrere Akteure (z.B. Arbeitgeber, Betriebsrat, Behörde) jeweils
+  eigene Schritte übernehmen und Vorgänge zwischen ihnen übergeben werden
+  (Anzeige-, Melde-, Antrags-, Beteiligungsverfahren). Jede Lane steht für
+  einen Akteur.
+- **`flowchart`** — wenn es vor allem um Entscheidungslogik geht und weniger
+  um Zuständigkeiten: Prüfschemata, Anwendbarkeitsprüfungen,
+  Anspruchsvoraussetzungen, Fristenketten, Berechnungen. Auch wenn im
+  Wesentlichen nur ein Akteur handelt (z.B. "Pflichten des
+  Gebäudeeigentümers").
+
+Andere Mermaid-Diagrammtypen (`sequenceDiagram`, `stateDiagram`, `gantt`
+usw.) nicht verwenden.
+
 ## Schritt 4 — Mermaid-Diagramme erstellen und speichern
 
-Für jeden identifizierten Prozess ein `flowchart TD`-Diagramm erstellen.
-Jede `.mmd`-Datei beginnt mit einem Frontmatter-Block (Repo-Konvention, keine
-Mermaid-Syntax — wird von `_mmdFrontmatter.ts` vor dem Rendern entfernt) mit
-einem `summary`-Feld: 1-2 Sätze, die den visualisierten Prozess beschreiben
+Für jeden identifizierten Prozess ein Diagramm des in Schritt 3 gewählten
+Typs erstellen: `flowchart TD` bzw. `swimlane-beta TD`. Jede `.mmd`-Datei
+beginnt mit einem Frontmatter-Block (Repo-Konvention, keine Mermaid-Syntax —
+wird von `_mmdFrontmatter.ts` vor dem Rendern entfernt) mit einem
+`summary`-Feld: 1-2 Sätze, die den visualisierten Prozess beschreiben
 (erscheint im Wizard unter den Auswahl-Chips). Format:
 
 ```
@@ -80,6 +98,8 @@ summary: "Kurze Zusammenfassung des Diagramms in ein bis zwei Sätzen."
 flowchart TD
     ...
 ```
+
+bzw. für Swimlanes `swimlane-beta TD` statt `flowchart TD`.
 
 Der Summary-Text muss auf einer einzigen Zeile stehen (keine `<br/>` oder
 echte Zeilenumbrüche), in doppelten Anführungszeichen; enthaltene `"` als
@@ -99,6 +119,10 @@ Stilkonventionen für das Diagramm selbst (siehe existierende Dateien unter
   `style <Knoten> fill:#f8d7da,stroke:#c0392b` (negativ/rot),
   `style <Knoten> fill:#fff3cd,stroke:#c9a227` (Zwischenschritt/gelb).
 - Nur den Prozess selbst modellieren, keine Meta-Kommentare im Diagramm.
+- Ergänzende Hinweise (z.B. Rechte Dritter, Nebenpflichten) als eigenen
+  Knoten mit gestrichelter Linie anhängen
+  (`Knoten -.- Hinweis["..."]`, `style Hinweis fill:#f5f5f5,stroke:#999`)
+  statt den Hauptablauf damit zu überfrachten.
 - Jeden Paragraphenverweis (nur den Verweis, nicht das ganze Knotenlabel)
   als Link auf die Norm setzen:
   `<a href='{{ELI}}#art-zN_abs-zM' target='_blank' rel='noopener'>§N M</a>`
@@ -109,9 +133,27 @@ Stilkonventionen für das Diagramm selbst (siehe existierende Dateien unter
   doppelten Anführungszeichen steht. Bezieht sich ein Knoten auf mehrere
   Absätze oder nur pauschal auf den ganzen Paragraphen, stattdessen auf
   `{{ELI}}/art-zN` verlinken; Verweise auf andere Gesetze nicht verlinken.
-  Das funktioniert nur bei `flowchart`- und `stateDiagram`-Diagrammen
-  (HTML-Labels); bei `sequenceDiagram` und `gantt` gibt es dafür keine
-  Entsprechung — dort Verweise unverlinkt lassen.
+  Das gilt für `flowchart` und `swimlane` gleichermaßen (Swimlanes nutzen
+  dieselbe Knotensyntax).
+
+Zusätzlich für `swimlane`-Diagramme. Die Syntax ist neu (Beta, ab Mermaid
+12), daher vor dem Erstellen die Referenz lesen:
+https://mermaid.ai/open-source/syntax/swimlanes.html
+
+- Header `swimlane-beta TD` (Richtung immer explizit angeben, wie bei
+  `flowchart TD`).
+- Jede Lane ist ein Top-Level-`subgraph` mit Akteur als Label, z.B.
+  `subgraph AG["Arbeitgeber"] ... end`. Knoten innerhalb des `subgraph`
+  definieren, auf dessen Akteur der Schritt entfällt.
+- Knoten- und Kantensyntax wie bei `flowchart`: `id["..."]` Aufgabe,
+  `id("...")` Ereignis, `id(["..."])` Start/Ende, `id{"..."}` Entscheidung;
+  `-->`, `-->|Label|`, `-.->` (gestrichelt).
+- Entscheidungen in die Lane des Akteurs legen, der entscheidet, und die
+  Ergebnisse zu den Lanes führen, die darauf handeln.
+- Kanten zwischen Lanes stehen für Übergaben. Nebenläufige Übergaben
+  (z.B. Abschriften, optionale Stellungnahmen) gestrichelt (`-.->`).
+- Kanten erst nach allen `subgraph`-Blöcken aufführen.
+- Beispiel: `src/content/ki-visualisierungen/KSchG/massenentlassung.mmd`.
 
 Speichern:
 
@@ -137,7 +179,8 @@ Speichern:
      (ELI-Pfad aus Schritt 2, Pflichtfeld) und leerem `visOptions`-Array
      anlegen. Die Datei ist reine YAML-Daten, kein Markdown-Frontmatter.
    - Für jeden Prozess ein `visOptions`-Objekt mit `name` (Prozessname aus
-     Schritt 3), `filename` (Dateiname der `.mmd`-Datei ohne Verzeichnis und
+     Schritt 3), `visType` (`flowchart` oder `swimlane`, siehe Schritt 3),
+     `filename` (Dateiname der `.mmd`-Datei ohne Verzeichnis und
      Endung, z.B. `"klagefristen"`) und `articles` hinzufügen: die Liste der
      **Haupt-Paragraphen/Artikel**, in denen die im Diagramm visualisierte
      Logik tatsächlich verankert ist (die Norm(en), aus denen sich Fristen,
@@ -163,17 +206,14 @@ Speichern:
      `"Art. 3-5"`. Bei nur zwei aufeinanderfolgenden oder bei Lücken in der
      Nummerierung einzeln auflisten (z.B. `"§7", "§9"` bleibt getrennt, da
      §8 fehlt).
-     Bei `flowchart`/`stateDiagram`-Diagrammen aus den
-     `art-zN`-Ankern der `{{ELI}}`-Links der so identifizierten
+     Aus den `art-zN`-Ankern der `{{ELI}}`-Links der so identifizierten
      Hauptparagraphen ableiten (nur die Zahl+Buchstabe vor `_abs-z`, nicht
      die Absatznummer) und mit "§" versehen, außer bei EU-Rechtsakten
      (siehe Schritt 2/4-Linkkonvention), dort das im Diagramm verwendete
-     "Art. N"-Format übernehmen; bei `sequenceDiagram`/`gantt` ohne Links
-     direkt aus den unverlinkten Textverweisen im jeweils verwendeten
-     Format übernehmen. Verweise auf andere Gesetze nicht aufnehmen. Kein
-     Prozess ohne Paragraphenbezug → `articles: []`.
-3. Kurze Zusammenfassung an den Nutzer: welches Gesetz, welche Prozesse,
-   wo gespeichert. Auf `/werkzeuge/visualisieren` im lokalen Dev-Server
-   verweisen, um die Diagramme zu prüfen.
+     "Art. N"-Format übernehmen. Verweise auf andere Gesetze nicht
+     aufnehmen. Kein Prozess ohne Paragraphenbezug → `articles: []`.
+3. Kurze Zusammenfassung an den Nutzer: welches Gesetz, welche Prozesse
+   (jeweils mit Diagrammtyp), wo gespeichert. Auf `/werkzeuge/visualisieren`
+   im lokalen Dev-Server verweisen, um die Diagramme zu prüfen.
 
 Nicht committen, es sei denn der Nutzer bittet explizit darum.
