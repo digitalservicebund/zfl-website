@@ -1,14 +1,17 @@
 import { getContext, setContext } from "svelte";
 import { steps } from "./_steps.ts";
-import type { LawExample, PerspectiveOption, VisOption } from "./_types";
+import type {
+  LawExample,
+  PerspectiveOption,
+  VisOption,
+  VisType,
+} from "./_types";
 
 export type LawType = { id: string; label: string };
 export const lawTypes = [
   { id: "own", label: "eigenes Vorhaben" },
   { id: "existing", label: "bestehendes Gesetz" },
 ] as const satisfies LawType[];
-
-export type Preset = "flow" | "swimlane" | "graph";
 
 const visPerspectives: PerspectiveOption[] = [
   { name: "Bürgerperspektive" },
@@ -19,7 +22,7 @@ export class WizardState {
   currentStep = $state(1);
 
   selectedLawType = $state<(typeof lawTypes)[number]["id"]>("own");
-  preset = $state<Preset>("flow");
+  preset = $state<VisType>("flowchart");
   selectedExample = $state<LawExample>();
   draftText = $state("");
   analyzedDraftText = $state<string>();

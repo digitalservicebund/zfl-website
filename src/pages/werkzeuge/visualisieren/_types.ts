@@ -1,9 +1,13 @@
 import { z } from "astro/zod";
 import type { CollectionEntry } from "astro:content";
 
+export const visType = z.enum(["flowchart", "swimlane", "actors"]);
+
+export type VisType = z.infer<typeof visType>;
+
 export const visOptionType = z.object({
   name: z.string(),
-  visType: z.enum(["flowchart", "swimlane", "actors"]).optional(),
+  visType,
   filename: z.string().optional(),
   /** Relevante Paragraphen/Artikel, auf denen die Visualisierung
    * basiert bzw. auf die sie sich bezieht, inkl. Präfix wie im

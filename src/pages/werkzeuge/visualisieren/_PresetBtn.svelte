@@ -6,18 +6,31 @@
     children?: Snippet;
     icon?: Component<{ class?: string }>;
     active?: boolean;
+    /** Renders the icon smaller and in line before the title/content. */
+    inline?: boolean;
     onclick: () => void;
   }
-  let { title, children, icon: Icon, active, onclick }: Props = $props();
+  let {
+    title,
+    children,
+    icon: Icon,
+    active,
+    inline = false,
+    onclick,
+  }: Props = $props();
 </script>
 
 <button
-  class="rounded-sm border border-(--kern-color-decorative-border-contextual) aria-current:bg-lavender-400 hover:bg-lavender-200 p-16 flex flex-col items-start justify-start gap-16 text-left"
+  class="rounded-sm border border-(--kern-color-decorative-border-contextual) aria-current:bg-lavender-400 hover:bg-lavender-200 p-16 flex justify-start text-left {inline
+    ? 'flex-row items-center gap-8'
+    : 'flex-col items-start gap-16'}"
   aria-current={active ? "true" : undefined}
   onclick={() => onclick()}
 >
   {#if Icon}
-    <Icon class="size-32 text-cosmic-blue-400" />
+    <Icon
+      class="{inline ? 'size-24' : 'size-32'} shrink-0 text-cosmic-blue-400"
+    />
   {/if}
   {#if title}
     <strong>{title}</strong>

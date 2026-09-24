@@ -2,6 +2,7 @@
   import PresetBtn from "./_PresetBtn.svelte";
   import LoadingIndicator from "../_shared/LoadingIndicator.svelte";
   import { getWizardContext } from "./_wizardState.svelte.ts";
+  import { visTypeIcons } from "./_visTypeIcons.ts";
 
   const wizard = getWizardContext();
 </script>
@@ -21,6 +22,8 @@
               <PresetBtn
                 active={option.name === wizard.selectedVisOption}
                 onclick={() => (wizard.selectedVisOption = option.name)}
+                icon={visTypeIcons[option.visType]}
+                inline
               >
                 <div class="flex justify-between items-center w-full">
                   <span>{option.name}</span>

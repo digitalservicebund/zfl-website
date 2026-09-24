@@ -4,9 +4,7 @@
   import PresetBtn from "./_PresetBtn.svelte";
   import { getWizardContext, lawTypes } from "./_wizardState.svelte.ts";
   import type { LawExample } from "./_types";
-  import IconAccountTree from "~icons/ic/outline-account-tree";
-  import IconHub from "~icons/ic/outline-hub";
-  import IconTimeline from "~icons/ic/outline-view-timeline";
+  import { visTypeIcons } from "./_visTypeIcons.ts";
 
   let { examples }: { examples: LawExample[] } = $props();
 
@@ -17,21 +15,21 @@
   <div class="grid lg:grid-cols-3 gap-16">
     <PresetBtn
       title="Entscheidungs&shy;logik"
-      active={wizard.preset === "flow"}
-      onclick={() => (wizard.preset = "flow")}
-      icon={IconAccountTree}
+      active={wizard.preset === "flowchart"}
+      onclick={() => (wizard.preset = "flowchart")}
+      icon={visTypeIcons.flowchart}
     ></PresetBtn>
     <PresetBtn
       title="Ablauf in der Praxis"
       active={wizard.preset === "swimlane"}
       onclick={() => (wizard.preset = "swimlane")}
-      icon={IconTimeline}
+      icon={visTypeIcons.swimlane}
     ></PresetBtn>
     <PresetBtn
       title="Akteure"
-      active={wizard.preset === "graph"}
-      onclick={() => (wizard.preset = "graph")}
-      icon={IconHub}
+      active={wizard.preset === "actors"}
+      onclick={() => (wizard.preset = "actors")}
+      icon={visTypeIcons.actors}
     ></PresetBtn>
   </div>
 {/snippet}
