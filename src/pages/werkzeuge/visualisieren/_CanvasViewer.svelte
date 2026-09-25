@@ -341,3 +341,10 @@
     </div>
   </div>
 </div>
+
+<style lang="postcss">
+  @reference "@/styles/global.css";
+  button {
+    @apply hover:bg-lavender-200 border-none bg-white shadow-md;
+  }
+</style>
