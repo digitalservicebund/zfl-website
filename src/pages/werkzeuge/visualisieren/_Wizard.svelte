@@ -18,10 +18,7 @@
   import StepFinal from "./_StepFinal.svelte";
   import { steps } from "./_steps.ts";
 
-  let {
-    examples,
-    pruefbareShorts,
-  }: { examples: LawExample[]; pruefbareShorts: string[] } = $props();
+  let { examples }: { examples: LawExample[] } = $props();
 
   const wizard = new WizardState();
   setWizardContext(wizard);
@@ -176,12 +173,6 @@
       });
     }
   });
-
-  let canPruefen = $derived(
-    wizard.selectedExample
-      ? pruefbareShorts.includes(wizard.selectedExample.short)
-      : false,
-  );
 
   $effect(() => {
     if (wizard.selectedExample) {
@@ -590,7 +581,7 @@
         {:else if wizard.currentStep === 2}
           <Step2 />
         {:else if wizard.currentStep === steps.length}
-          <StepFinal {canPruefen} {buttons} />
+          <StepFinal {buttons} />
         {/if}
       </div>
     </div>
