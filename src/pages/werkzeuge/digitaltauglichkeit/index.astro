@@ -10,6 +10,7 @@ import IconQueryBuilder from "~icons/ic/outline-query-builder";
 import IconPlaylistAddCheck from "~icons/ic/outline-playlist-add-check";
 import digitalcheckImg from "@/images/Digitalcheck.png";
 import { DIGITALCHECK_URL, ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
+import type { WerkzeugType } from "@/content.config";
 
 const frontmatter = {
   title: "Ihr Weg zur Digitaltauglichkeit",
@@ -39,9 +40,9 @@ const resources = await getEntries([
     <section>
       <h2>Zusammengefasst</h2>
       <div class="mt-32 space-y-32">
-        <div class="flex gap-24">
+        <div class="md:flex gap-24">
           <IconComputer
-            class="text-cosmic-blue-base size-64 shrink-0"
+            class="text-cosmic-blue-base size-64 shrink-0 mx-16 md:mx-0"
             aria-hidden="true"
           />
           <div class="px-16 pt-3">
@@ -62,9 +63,9 @@ const resources = await getEntries([
             </p>
           </div>
         </div>
-        <div class="flex gap-24">
+        <div class="md:flex gap-24">
           <IconQueryBuilder
-            class="text-cosmic-blue-base size-64 shrink-0"
+            class="text-cosmic-blue-base size-64 shrink-0 mx-16 md:mx-0"
             aria-hidden="true"
           />
           <div class="px-16 pt-3">
@@ -77,9 +78,9 @@ const resources = await getEntries([
             </p>
           </div>
         </div>
-        <div class="flex gap-24">
+        <div class="md:flex gap-24">
           <IconPlaylistAddCheck
-            class="text-cosmic-blue-base size-64 shrink-0"
+            class="text-cosmic-blue-base size-64 shrink-0 mx-16 md:mx-0"
             aria-hidden="true"
           />
           <div class="px-16 pt-3">
@@ -121,7 +122,7 @@ const resources = await getEntries([
     </section>
     <section>
       <h2>Hilfreiche Ressourcen</h2>
-      <div class="gap-md grid grid-cols-3">
+      <div class="md:gap-md md:grid xl:grid-cols-3 md:grid-cols-2 space-y-32">
         {resources.map(
           (resource) =>
             resource && (
@@ -139,7 +140,7 @@ const resources = await getEntries([
                   class="mb-16 flex w-full justify-between"
                 >
                   <div class="flex gap-8">
-                    {resource.data.type.map((type) => (
+                    {resource.data.type.map((type: WerkzeugType) => (
                       <span
                         class={`kern-badge kern-badge--${type.toLowerCase()}`}
                       >

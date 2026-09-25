@@ -148,8 +148,16 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
 <style>
   @reference "@/styles/global.css";
   .page-header {
-    /* 32px is the height of the Kopfzeile, 72px is the height of the header */
-    --page-header-offset: 104px;
+    /* 48px is the height of the Kopfzeile, 72px is the height of the header*/
+    --page-header-offset: 122px;
+  }
+
+  /* Kopfzeile is shorter on bigger screens */
+  @media (width >= 48rem) {
+    .page-header {
+      /* 32px is the height of the Kopfzeile, 72px is the height of the header*/
+      --page-header-offset: 104px;
+    }
   }
 
   .mobile-menu-backdrop {
