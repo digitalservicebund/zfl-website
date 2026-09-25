@@ -30,8 +30,8 @@
           <div class="mt-16 flex flex-col w-full gap-8">
             {#each sortedVisOptions as option (option.name)}
               <PresetBtn
-                active={option.name === wizard.selectedVisOption}
-                onclick={() => (wizard.selectedVisOption = option.name)}
+                active={option.name === wizard.selectedVisOption?.name}
+                onclick={() => (wizard.selectedVisOption = option)}
                 icon={visTypeIcons[option.visType]}
                 inline
               >

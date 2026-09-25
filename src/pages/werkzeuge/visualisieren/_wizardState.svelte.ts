@@ -17,8 +17,8 @@ export class WizardState {
   draftText = $state("");
   analyzedDraftText = $state<string>();
 
-  selectedVisOption = $state<string>();
-  visOptions = $state<VisOption[]>([]);
+  selectedVisOption = $state.raw<VisOption>();
+  visOptions = $state.raw<VisOption[]>([]);
   visOptionsSessionId = $state<string>();
   visOptionsError = $state<string>();
   isLoadingVisOptions = $state(false);

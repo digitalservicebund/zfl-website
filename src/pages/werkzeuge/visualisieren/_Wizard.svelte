@@ -128,7 +128,9 @@
         wizard.isLoadingVisOptions = false;
 
         if (isInitialLoad && initialOption) {
-          wizard.selectedVisOption = initialOption.name;
+          wizard.selectedVisOption = result.options.find(
+            (option) => option.name === initialOption.name,
+          );
         }
       })
       .catch((error: unknown) => {
@@ -156,12 +158,6 @@
     }
   });
 
-  let selectedOption = $derived(
-    wizard.visOptions.find(
-      (option) => option.name === wizard.selectedVisOption,
-    ),
-  );
-
   // Same rationale as the step 1 → 2 advance above: advances as soon as the
   // user picks a vis option, before the mermaid diagram has even started
   // loading, so StepFinal is on screen to show its own loading state.
@@ -181,8 +177,8 @@
       searchParams.delete("norm");
     }
 
-    if (selectedOption) {
-      searchParams.set("visualization", selectedOption.name);
+    if (wizard.selectedVisOption) {
+      searchParams.set("visualization", wizard.selectedVisOption.name);
     } else {
       searchParams.delete("visualization");
     }
@@ -197,7 +193,7 @@
   let saveDialogEl: HTMLDialogElement | undefined = $state();
 
   $effect(() => {
-    if (!selectedOption) {
+    if (!wizard.selectedVisOption) {
       wizard.mermaidSource = "";
       wizard.summary = "";
       wizard.isLoading = false;
@@ -213,7 +209,7 @@
         return;
       }
       const example = wizard.selectedExample;
-      const option = selectedOption;
+      const option = wizard.selectedVisOption;
 
       let cancelled = false;
       wizard.isLoading = true;
@@ -246,7 +242,7 @@
         return;
       }
       const sessionId = wizard.visOptionsSessionId;
-      const option = selectedOption;
+      const option = wizard.selectedVisOption;
 
       let cancelled = false;
       wizard.isLoading = true;
@@ -308,7 +304,7 @@
   );
 
   async function downloadSvg() {
-    if (!wizard.mermaidSource || !selectedOption) return;
+    if (!wizard.mermaidSource || !wizard.selectedVisOption) return;
 
     const exportSource = stripLinks(wizard.mermaidSource);
 
@@ -337,7 +333,7 @@
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `${filenameBase}-${selectedOption.name}.svg`;
+    link.download = `${filenameBase}-${wizard.selectedVisOption.name}.svg`;
     link.click();
     URL.revokeObjectURL(url);
   }
@@ -385,18 +381,18 @@
   let showCanvas = $derived(wizard.currentStep === steps.length);
 
   function downloadRulemapXml() {
-    if (!wizard.mermaidSource || !selectedOption) return;
+    if (!wizard.mermaidSource || !wizard.selectedVisOption) return;
 
     const xml = mermaidFlowchartToRulemapXml(
       wizard.mermaidSource,
-      `${filenameBase}: ${selectedOption.name}`,
+      `${filenameBase}: ${wizard.selectedVisOption.name}`,
     );
 
     const blob = new Blob([xml], { type: "application/xml" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `${filenameBase}-${selectedOption.name}.xml`;
+    link.download = `${filenameBase}-${wizard.selectedVisOption.name}.xml`;
     link.click();
     URL.revokeObjectURL(url);
   }
@@ -535,7 +531,7 @@
 >
   <div
     id="vis-chat"
-    class="min-w-0 py-md px-16 w-full max-w-900 mx-auto max-h-full overflow-auto"
+    class="min-w-0 py-md px-16 sm:px-24 w-full max-w-900 mx-auto max-h-full overflow-auto"
   >
     <div class="flex flex-col h-full gap-32">
       <div class="vis-chat-header space-y-16">
@@ -598,8 +594,8 @@
       {:else if wizard.mermaidSource}
         <CanvasViewer
           svg={diagramSvg}
-          title={selectedOption
-            ? `${wizard.selectedExample?.title ?? "Eigenes Vorhaben"}: ${selectedOption.name}`
+          title={wizard.selectedVisOption
+            ? `${wizard.selectedExample?.title ?? "Eigenes Vorhaben"}: ${wizard.selectedVisOption.name}`
             : "Visualisierung"}
           onFlip={canFlip ? flipDirection : undefined}
         />
