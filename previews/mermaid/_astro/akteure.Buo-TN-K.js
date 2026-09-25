@@ -1,0 +1,52 @@
+var e=`---
+summary: "Die Akteure des Mutterschutzgesetzes rund um die schwangere oder stillende Frau: Arbeitgeber, Aufsichtsbehörden und oberste Landesbehörden, Ärztinnen und Ärzte, die Stellen für das Mutterschaftsgeld sowie der Ausschuss für Mutterschutz beim Bundesfamilienministerium."
+---
+flowchart LR
+    Frau["<b>Schwangere oder stillende Frau</b><br/>teilt Schwangerschaft und Stillen mit<br/>— <a href='{{ELI}}#art-z15_abs-z1' target='_blank' rel='noopener'>§15 I</a><br/>Schutzfristen vor und nach der<br/>Entbindung — <a href='{{ELI}}/art-z3' target='_blank' rel='noopener'>§3</a><br/>Kündigungsschutz — <a href='{{ELI}}#art-z17_abs-z1' target='_blank' rel='noopener'>§17 I</a>"]
+
+    subgraph Beschaeftigung["Beschäftigung"]
+        AG["<b>Arbeitgeber</b><br/>einschließlich Gleichgestellter, z.B.<br/>Ausbildungsstelle — <a href='{{ELI}}#art-z2_abs-z1' target='_blank' rel='noopener'>§2 I</a><br/>Gefährdungsbeurteilung — <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>§10 I</a><br/>Schutzmaßnahmen in Rangfolge — <a href='{{ELI}}#art-z13_abs-z1' target='_blank' rel='noopener'>§13 I</a><br/>Mutterschutzlohn — <a href='{{ELI}}#art-z18_abs-z' target='_blank' rel='noopener'>§18</a>, Zuschuss — <a href='{{ELI}}#art-z20_abs-z1' target='_blank' rel='noopener'>§20 I</a>"]
+    end
+
+    subgraph Laender["Länder"]
+        AB["<b>Aufsichtsbehörden</b><br/>nach Landesrecht zuständig — <a href='{{ELI}}#art-z29_abs-z1' target='_blank' rel='noopener'>§29 I</a><br/>Anordnungen im Einzelfall — <a href='{{ELI}}#art-z29_abs-z3' target='_blank' rel='noopener'>§29 III</a><br/>Genehmigung 20 bis 22 Uhr — <a href='{{ELI}}#art-z28_abs-z1' target='_blank' rel='noopener'>§28 I</a><br/>berät auch die Beschäftigten — <a href='{{ELI}}#art-z29_abs-z4' target='_blank' rel='noopener'>§29 IV</a>"]
+        OLB["<b>Oberste Landesbehörden</b><br/>Zulässigerklärung einer Kündigung<br/>— <a href='{{ELI}}#art-z17_abs-z2' target='_blank' rel='noopener'>§17 II</a><br/>Jahresbericht — <a href='{{ELI}}#art-z29_abs-z6' target='_blank' rel='noopener'>§29 VI</a><br/>können Vertreter in den Ausschuss<br/>entsenden — <a href='{{ELI}}#art-z30_abs-z5' target='_blank' rel='noopener'>§30 V</a>"]
+    end
+
+    subgraph Bund["Bund"]
+        BMFSFJ["<b>Bundesministerium für Familie, Senioren,<br/>Frauen und Jugend</b><br/>beruft die Ausschussmitglieder — <a href='{{ELI}}#art-z30_abs-z2' target='_blank' rel='noopener'>§30 II</a><br/>veröffentlicht Regeln im GMBl — <a href='{{ELI}}#art-z30_abs-z4' target='_blank' rel='noopener'>§30 IV</a>"]
+        Ausschuss["<b>Ausschuss für Mutterschutz</b><br/>höchstens 15 Mitglieder, ehrenamtlich<br/>— <a href='{{ELI}}#art-z30_abs-z1' target='_blank' rel='noopener'>§30 I</a><br/>ermittelt unverantwortbare Gefährdungen<br/>— <a href='{{ELI}}#art-z30_abs-z3' target='_blank' rel='noopener'>§30 III Nr.1</a><br/>stellt Regeln auf — <a href='{{ELI}}#art-z30_abs-z3' target='_blank' rel='noopener'>§30 III Nr.2</a>"]
+        BAFzA["<b>Bundesamt für Familie und<br/>zivilgesellschaftliche Aufgaben</b><br/>Geschäftsführung des Ausschusses<br/>— <a href='{{ELI}}#art-z30_abs-z6' target='_blank' rel='noopener'>§30 VI</a>"]
+    end
+
+    subgraph Leistung["Gesundheit und Mutterschaftsgeld"]
+        Arzt["<b>Ärztin/Arzt, Hebamme, Entbindungspfleger</b><br/>Zeugnis über den Entbindungstag<br/>— <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 I S.3</a><br/>ärztliches Beschäftigungsverbot — <a href='{{ELI}}/art-z16' target='_blank' rel='noopener'>§16</a>"]
+        KK["<b>Gesetzliche Krankenkasse</b><br/>Mutterschaftsgeld für Mitglieder — <a href='{{ELI}}#art-z19_abs-z1' target='_blank' rel='noopener'>§19 I</a>"]
+        BAS["<b>Bundesamt für Soziale Sicherung</b><br/>Mutterschaftsgeld für Nichtmitglieder,<br/>auf Antrag — <a href='{{ELI}}#art-z19_abs-z2' target='_blank' rel='noopener'>§19 II</a>"]
+    end
+
+    Frau -->|"Mitteilung — <a href='{{ELI}}#art-z15_abs-z1' target='_blank' rel='noopener'>§15 I</a>"| AG
+    AG -->|"Information, Gesprächsangebot — <a href='{{ELI}}#art-z14_abs-z3' target='_blank' rel='noopener'>§14 III</a>, §10 II"| Frau
+    Arzt -->|"Zeugnisse — <a href='{{ELI}}#art-z15_abs-z2' target='_blank' rel='noopener'>§15 II</a>"| Frau
+    AG -->|"Benachrichtigung, Auskünfte — <a href='{{ELI}}#art-z27_abs-z1' target='_blank' rel='noopener'>§27 I</a>, II"| AB
+    AB -->|"Anordnungen, Beratung — <a href='{{ELI}}#art-z29_abs-z3' target='_blank' rel='noopener'>§29 III</a>, IV"| AG
+    OLB -->|"Jahresbericht über die Aufsicht — <a href='{{ELI}}#art-z29_abs-z6' target='_blank' rel='noopener'>§29 VI</a>"| AB
+    OLB -->|"erklärt Kündigung für zulässig — <a href='{{ELI}}#art-z17_abs-z2' target='_blank' rel='noopener'>§17 II</a>"| AG
+    BMFSFJ -->|"beruft Mitglieder — <a href='{{ELI}}#art-z30_abs-z2' target='_blank' rel='noopener'>§30 II</a>"| Ausschuss
+    Ausschuss -->|"berät — <a href='{{ELI}}#art-z30_abs-z3' target='_blank' rel='noopener'>§30 III Nr.3</a>"| BMFSFJ
+    BAFzA -->|"führt die Geschäfte — <a href='{{ELI}}#art-z30_abs-z6' target='_blank' rel='noopener'>§30 VI</a>"| Ausschuss
+    Ausschuss -->|"Regeln sind zu berücksichtigen — <a href='{{ELI}}#art-z9_abs-z4' target='_blank' rel='noopener'>§9 IV</a>"| AG
+    KK -->|"Mutterschaftsgeld — <a href='{{ELI}}#art-z19_abs-z1' target='_blank' rel='noopener'>§19 I</a>"| Frau
+    BAS -->|"Mutterschaftsgeld — <a href='{{ELI}}#art-z19_abs-z2' target='_blank' rel='noopener'>§19 II</a>"| Frau
+
+    classDef zentral fill:#fff3cd,stroke:#c9a227,stroke-width:2px
+    classDef behoerde fill:#e8f0fe,stroke:#3b6fd4
+    classDef privat fill:#f5f5f5,stroke:#999
+    classDef parlament fill:#ede7f6,stroke:#7e57c2
+    classDef gremium fill:#e6f4ea,stroke:#2d8a4a
+    class Frau zentral
+    class AB,OLB,BAFzA,BAS,KK behoerde
+    class AG,Arzt privat
+    class BMFSFJ parlament
+    class Ausschuss gremium
+`;export{e as default};

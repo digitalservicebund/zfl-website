@@ -1,0 +1,34 @@
+var e=`---
+summary: "Die Anzeige- und Nachweispflichten bei unbeabsichtigter Zerstörung oder Verlust, geplanter Vernichtung sowie beabsichtigter Zerstörung von Schaumwein im Steuerlager oder während der Beförderung und deren Auswirkung auf die Steuerpflicht."
+---
+flowchart TD
+    A["Schaumwein im Steuerlager oder während<br/>der Beförderung betroffen"] --> B{"Art des Ereignisses?"}
+
+    B -->|Unbeabsichtigt vollständig<br/>zerstört oder ganz/teilweise<br/>unwiederbringlich verloren| C["Steuerlagerinhaber zeigt dies dem<br/>Hauptzollamt unverzüglich an und weist<br/>es anhand betrieblicher Unterlagen nach<br/>— <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>§10 I</a>"]
+
+    C --> D{"Hauptzollamt lässt<br/>Vereinfachungen zu bzw. trifft<br/>Anordnungen zur<br/>Nachweisführung? — <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>§10 I S.2</a>"}
+    D -->|Ja| E["Vereinfachter Nachweis genügt"]
+    D -->|Nein| F["Regulärer Nachweis anhand betrieblicher<br/>Unterlagen erforderlich"]
+    E --> G
+    F --> G{"Nachweis vom Hauptzollamt<br/>anerkannt?"}
+    G -->|Ja| H["Kein steuerbarer Verlust;<br/>keine Steuer auf zerstörte/ verlorene<br/>Menge"]
+    G -->|Nein| I["Menge gilt nicht als nachgewiesen<br/>zerstört/ verloren; Besteuerung möglich"]
+
+    B -->|Geplante Vernichtung<br/>nach §23 Abs. 2 Nr. 4<br/>des Gesetzes| J["Steuerlagerinhaber zeigt die Vernichtung<br/>mind. 1 Woche im Voraus an und weist sie<br/>anhand betrieblicher Unterlagen nach<br/>— <a href='{{ELI}}#art-z10_abs-z2' target='_blank' rel='noopener'>§10 II</a>"]
+
+    J --> K{"Hauptzollamt verzichtet auf<br/>amtliche Überwachung? — <a href='{{ELI}}#art-z10_abs-z2' target='_blank' rel='noopener'>§10 II<br/>S.3</a>"}
+    K -->|Nein| L["Vernichtung wird amtlich überwacht — <a href='{{ELI}}#art-z10_abs-z2' target='_blank' rel='noopener'>§10<br/>II S.3</a>"]
+    K -->|Ja| M["Vernichtung ohne amtliche Überwachung"]
+    L --> H
+    M --> H
+
+    B -->|Beabsichtigte Zerstörung<br/>bei Beförderung unter<br/>Steueraussetzung| N["Anzeige der beabsichtigten Zerstörung<br/>durch den Versender — <a href='{{ELI}}#art-z10_abs-z3' target='_blank' rel='noopener'>§10 III</a>"]
+
+    N --> O{"Vorgelegte Nachweise vom<br/>Hauptzollamt anerkannt?"}
+    O -->|Ja| P["Für die Beförderung geleistete<br/>Sicherheit nach <a href='{{ELI}}/art-z18' target='_blank' rel='noopener'>§18</a> wird freigegeben<br/>— <a href='{{ELI}}#art-z10_abs-z3' target='_blank' rel='noopener'>§10 III S.3</a>"]
+    O -->|Nein| I
+
+    style H fill:#d4edda,stroke:#2d8a4a
+    style P fill:#d4edda,stroke:#2d8a4a
+    style I fill:#f8d7da,stroke:#c0392b
+`;export{e as default};

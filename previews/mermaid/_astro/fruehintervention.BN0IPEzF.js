@@ -1,0 +1,47 @@
+var e=`---
+summary: "Die Frühintervention nach dem KCanG, wenn eine minderjährige Person mit Cannabis angetroffen wird: Die Polizei- oder Ordnungsbehörde informiert die Personensorgeberechtigten und, wenn das Kindeswohl gefährdet sein könnte, das Jugendamt, das auf die Teilnahme an einem Frühinterventionsprogramm hinwirkt."
+---
+swimlane-beta TD
+    subgraph MJ["Minderjährige Person"]
+        start(["Verstößt gegen das Verbot von Besitz,<br/>Anbau oder Erwerb/Entgegennahme — <a href='{{ELI}}#art-z2_abs-z1' target='_blank' rel='noopener'>§2 I<br/>Nr.1, 2, 12</a>"])
+        programm(["Nimmt Frühinterventionsprogramm oder<br/>vergleichbare Maßnahme in Anspruch — <a href='{{ELI}}#art-z7_abs-z3' target='_blank' rel='noopener'>§7<br/>III</a>"])
+    end
+
+    subgraph POL["Polizei- und Ordnungsbehörde"]
+        strafbar{"Zugleich strafbar nach <a href='{{ELI}}#art-z34_abs-z1' target='_blank' rel='noopener'>§34 I<br/>Nr.1, 2 oder 12</a>?"}
+        strafverfolgung(["Strafverfolgung nach <a href='{{ELI}}#art-z34_abs-z1' target='_blank' rel='noopener'>§34</a>"])
+        infoPSB["Informiert unverzüglich die<br/>Personensorgeberechtigten — <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 I</a>"]
+        gefaehrdung{"Gewichtige Anhaltspunkte für<br/>Kindeswohlgefährdung? (z.B.<br/>riskantes Konsumverhalten,<br/>Alter) — <a href='{{ELI}}#art-z7_abs-z2' target='_blank' rel='noopener'>§7 II S.1-2</a>"}
+        keineWeitere(["Keine Information der Jugendhilfe"])
+        infoJH["Informiert unverzüglich den örtlichen<br/>Träger der Jugendhilfe und übermittelt<br/>Daten zur Gefährdungseinschätzung — <a href='{{ELI}}#art-z7_abs-z2' target='_blank' rel='noopener'>§7<br/>II S.1</a><br/>(§4 Abs.2 KKG gilt entsprechend — <a href='{{ELI}}#art-z7_abs-z2' target='_blank' rel='noopener'>§7 II<br/>S.3</a>)"]
+    end
+
+    subgraph PSB["Personensorgeberechtigte"]
+        informiert("Werden über den Verstoß informiert")
+        einbezogen("Werden in die Frühintervention<br/>einbezogen — <a href='{{ELI}}#art-z7_abs-z3' target='_blank' rel='noopener'>§7 III</a>")
+    end
+
+    subgraph JH["Träger der öffentlichen Jugendhilfe"]
+        eingang("Eingang der Information und Daten")
+        hinwirken["Wirkt auf die Inanspruchnahme geeigneter<br/>Frühinterventionsprogramme oder<br/>vergleichbarer Maßnahmen hin — <a href='{{ELI}}#art-z7_abs-z3' target='_blank' rel='noopener'>§7 III</a>"]
+    end
+
+    start --> strafbar
+    strafbar -->|Ja| strafverfolgung
+    strafbar -->|Nein| infoPSB
+    infoPSB --> informiert
+    infoPSB --> gefaehrdung
+    gefaehrdung -->|Nein| keineWeitere
+    gefaehrdung -->|Ja| infoJH
+    infoJH --> eingang
+    eingang --> hinwirken
+    hinwirken -.-> einbezogen
+    hinwirken --> programm
+    strafverfolgung ~~~ infoPSB
+    informiert ~~~ gefaehrdung
+    keineWeitere ~~~ infoJH
+
+    style programm fill:#d4edda,stroke:#2d8a4a
+    style strafverfolgung fill:#f8d7da,stroke:#c0392b
+    style keineWeitere fill:#fff3cd,stroke:#c9a227
+`;export{e as default};

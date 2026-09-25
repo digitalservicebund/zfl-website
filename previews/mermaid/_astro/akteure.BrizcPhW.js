@@ -1,0 +1,47 @@
+var e=`---
+summary: "Die Akteure des Lieferkettensorgfaltspflichtengesetzes: das verpflichtete Unternehmen mit seinen Zulieferern, das Bundesamt für Wirtschaft und Ausfuhrkontrolle als Kontrollbehörde samt Aufsicht, betroffene Personen, Gewerkschaften und Nichtregierungsorganisationen sowie öffentliche Auftraggeber."
+---
+flowchart LR
+    UN["<b>Unternehmen</b><br/>ab 1.000 Arbeitnehmern im Inland — <a href='{{ELI}}#art-z1_abs-z1' target='_blank' rel='noopener'>§1 I</a><br/>Sorgfaltspflichten in der Lieferkette — <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 I</a><br/>Grundsatzerklärung der Unternehmensleitung — <a href='{{ELI}}#art-z6_abs-z2' target='_blank' rel='noopener'>§6 II</a><br/>jährlicher Bericht — <a href='{{ELI}}#art-z10_abs-z2' target='_blank' rel='noopener'>§10 II</a>, beim BAFA einzureichen — <a href='{{ELI}}#art-z12_abs-z1' target='_blank' rel='noopener'>§12 I</a>"]
+
+    subgraph Staat["Staatliche Stellen"]
+        BAFA["<b>Bundesamt für Wirtschaft und Ausfuhrkontrolle</b><br/>zuständig für Kontrolle und Durchsetzung — <a href='{{ELI}}#art-z19_abs-z1' target='_blank' rel='noopener'>§19 I</a><br/>prüft die Berichte — <a href='{{ELI}}#art-z13_abs-z1' target='_blank' rel='noopener'>§13 I</a><br/>veröffentlicht Handreichungen — <a href='{{ELI}}/art-z20' target='_blank' rel='noopener'>§20</a><br/>Bußgeldbehörde — <a href='{{ELI}}#art-z24_abs-z5' target='_blank' rel='noopener'>§24 V</a>"]
+        BMWi["<b>Bundesministerium für Wirtschaft und Energie</b><br/>Rechts- und Fachaufsicht über das BAFA — <a href='{{ELI}}#art-z19_abs-z1' target='_blank' rel='noopener'>§19 I S.2</a>"]
+        BMAS["<b>Bundesministerium für Arbeit und Soziales</b><br/>Verordnungsermächtigungen — <a href='{{ELI}}#art-z14_abs-z2' target='_blank' rel='noopener'>§14 II</a>, §9 IV, §13 III"]
+        AA["<b>Auswärtiges Amt</b><br/>Zustimmung bei außenpolitischen Belangen — <a href='{{ELI}}/art-z20' target='_blank' rel='noopener'>§20 S.2</a>"]
+        OA["<b>Öffentliche Auftraggeber</b><br/>nach §§99, 100 GWB — <a href='{{ELI}}#art-z22_abs-z1' target='_blank' rel='noopener'>§22 I</a>"]
+    end
+
+    subgraph Lieferkette["Geschäftsbereich und Lieferkette"]
+        MRB["<b>Für das Risikomanagement zuständige Person</b><br/>etwa Menschenrechtsbeauftragter — <a href='{{ELI}}#art-z4_abs-z3' target='_blank' rel='noopener'>§4 III</a>"]
+        UZ["<b>Unmittelbare Zulieferer</b><br/>Vertragspartner mit notwendigen Zulieferungen — <a href='{{ELI}}#art-z2_abs-z7' target='_blank' rel='noopener'>§2 VII</a>"]
+        MZ["<b>Mittelbare Zulieferer</b><br/>sonstige Unternehmen mit notwendigen Zulieferungen — <a href='{{ELI}}#art-z2_abs-z8' target='_blank' rel='noopener'>§2 VIII</a>"]
+    end
+
+    subgraph Zivil["Betroffene und Zivilgesellschaft"]
+        BP["<b>Betroffene und hinweisgebende Personen</b><br/>Beschwerdeverfahren — <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 I</a><br/>Antrag auf behördliches Tätigwerden — <a href='{{ELI}}#art-z14_abs-z1' target='_blank' rel='noopener'>§14 I Nr.2</a>"]
+        NGO["<b>Inländische Gewerkschaften und Nichtregierungsorganisationen</b><br/>mit dauerhafter eigener Präsenz — <a href='{{ELI}}#art-z11_abs-z2' target='_blank' rel='noopener'>§11 II</a>"]
+    end
+
+    BMWi -->|"Rechts- und Fachaufsicht — <a href='{{ELI}}#art-z19_abs-z1' target='_blank' rel='noopener'>§19 I</a>"| BAFA
+    BMWi <-->|"Aufsicht im Einvernehmen — <a href='{{ELI}}#art-z19_abs-z1' target='_blank' rel='noopener'>§19 I S.3</a>"| BMAS
+    AA -->|"Zustimmung zu Handreichungen — <a href='{{ELI}}/art-z20' target='_blank' rel='noopener'>§20</a>"| BAFA
+    BAFA -->|"Berichtsprüfung, Kontrolle, Anordnungen — <a href='{{ELI}}/art-z15' target='_blank' rel='noopener'>§15</a>, §13, §24"| UN
+    UN -->|"benennt; Geschäftsleitung informiert sich jährlich — <a href='{{ELI}}#art-z4_abs-z3' target='_blank' rel='noopener'>§4 III</a>"| MRB
+    UN -->|"Prävention, Abhilfe — <a href='{{ELI}}#art-z6_abs-z4' target='_blank' rel='noopener'>§6 IV</a>, §7"| UZ
+    UN -->|"Maßnahmen bei substantiierter Kenntnis — <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 III</a>"| MZ
+    BP -->|"Hinweis, Beschwerde — <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 I</a>"| UN
+    BP -->|"Antrag — <a href='{{ELI}}#art-z14_abs-z1' target='_blank' rel='noopener'>§14 I Nr.2</a>"| BAFA
+    BP -->|"ermächtigt zur Prozessführung — <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I</a>"| NGO
+    OA -->|"Ausschluss von Vergabeverfahren — <a href='{{ELI}}#art-z22_abs-z1' target='_blank' rel='noopener'>§22 I</a>"| UN
+
+    classDef zentral fill:#fff3cd,stroke:#c9a227,stroke-width:2px
+    classDef behoerde fill:#e8f0fe,stroke:#3b6fd4
+    classDef privat fill:#f5f5f5,stroke:#999
+    classDef parlament fill:#ede7f6,stroke:#7e57c2
+    classDef gremium fill:#e6f4ea,stroke:#2d8a4a
+    class UN zentral
+    class BAFA,OA behoerde
+    class BMWi,BMAS,AA parlament
+    class MRB,UZ,MZ,BP,NGO privat
+`;export{e as default};

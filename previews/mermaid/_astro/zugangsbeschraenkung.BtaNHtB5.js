@@ -1,0 +1,27 @@
+var e=`---
+summary: "Das gerichtliche Verfahren nach §29 DDG, mit dem die Koordinierungsstelle für digitale Dienste beim Amtsgericht eine zeitlich befristete Zugangs- oder Schnittstellenbeschränkung nach der Verordnung (EU) 2022/2065 beantragen kann."
+---
+flowchart TD
+    S["Koordinierungsstelle für digitale<br/>Dienste oder zuständige Behörde will<br/>eine Maßnahme nach Art. 51 III<br/>Unterabs.1 Buchst. b VO (EU) 2022/2065<br/>erwirken (z.B. Zugangs- oder<br/>Schnittstellenbeschränkung)"] --> Q1{"Wird der Antrag von der<br/>Koordinierungsstelle oder der<br/>zuständigen Behörde nach §12<br/>II S.1, III gestellt? — <a href='{{ELI}}#art-z29_abs-z3' target='_blank' rel='noopener'>§29<br/>III S.1</a>"}
+
+    Q1 -->|Nein| Z1["Antrag unzulässig — das Gericht darf die<br/>Maßnahme nur auf Antrag dieser Stellen<br/>anordnen"]
+
+    Q1 -->|Ja| A1["Antrag ist beim zuständigen Amtsgericht<br/>(Sitz der Koordinierungsstelle) zu<br/>begründen — <a href='{{ELI}}#art-z29_abs-z1' target='_blank' rel='noopener'>§29 I S.1</a>, <a href='{{ELI}}#art-z29_abs-z3' target='_blank' rel='noopener'>III S.2</a>"]
+
+    A1 --> Q2{"Enthält die Begründung Angaben<br/>zu:<br/>Voraussetzungen (Nr.1), Art<br/>der Einschränkung – Zugang<br/>oder Online-Schnittstelle<br/>(Nr.2), Kommissionsverlangen<br/>(Nr.3) und ggf. Verlängerung<br/>über 4 Wochen hinaus (Nr.4)?<br/>— <a href='{{ELI}}#art-z29_abs-z3' target='_blank' rel='noopener'>§29 III S.3 Nr.1-4</a>"}
+
+    Q2 -->|Nein| Z2["Antrag unvollständig — Nachbesserung<br/>erforderlich"]
+
+    Q2 -->|Ja| Q3{"Sind die Angaben zum Vorliegen<br/>der Voraussetzungen (Nr.1)<br/>glaubhaft gemacht? — <a href='{{ELI}}#art-z29_abs-z3' target='_blank' rel='noopener'>§29 III<br/>S.4</a>"}
+
+    Q3 -->|Nein| Z3["Voraussetzungen nicht glaubhaft gemacht<br/>— keine Anordnung"]
+
+    Q3 -->|Ja| A2["Verfahren richtet sich nach dem FamFG,<br/>mit Ausnahme der §§49-57 FamFG — <a href='{{ELI}}#art-z29_abs-z1' target='_blank' rel='noopener'>§29 I<br/>S.2</a>, <a href='{{ELI}}#art-z29_abs-z2' target='_blank' rel='noopener'>II</a>"]
+
+    A2 --> Z4["Amtsgericht kann die Zugangs-/<br/>Schnittstellenbeschränkung anordnen<br/>(Geltungszeitraum 4 Wochen, auf Antrag<br/>verlängerbar) — <a href='{{ELI}}#art-z29_abs-z3' target='_blank' rel='noopener'>§29 III S.3 Nr.4</a>"]
+
+    style Z1 fill:#f8d7da,stroke:#c0392b
+    style Z2 fill:#fff3cd,stroke:#c9a227
+    style Z3 fill:#f8d7da,stroke:#c0392b
+    style Z4 fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};

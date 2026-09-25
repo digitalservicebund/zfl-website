@@ -1,0 +1,52 @@
+var e=`---
+summary: "Die Akteure der Betriebsverfassung rund um den Betriebsrat: Arbeitgeber, Belegschaft und Betriebsversammlung, Jugend- und Auszubildendenvertretung, Gesamt- und Konzernbetriebsrat, Wirtschaftsausschuss, Einigungsstelle, Arbeitsgericht und Gewerkschaften sowie ihre Mitwirkungs-, Unterrichtungs- und Kontrollbeziehungen."
+---
+flowchart LR
+    BR["<b>Betriebsrat</b><br/>gewählt in Betrieben mit mind. 5 wahlberechtigten AN — <a href='{{ELI}}#art-z1_abs-z1' target='_blank' rel='noopener'>§1 I</a><br/>überwacht Gesetze, Tarifverträge, Betriebsvereinbarungen — <a href='{{ELI}}#art-z80_abs-z1' target='_blank' rel='noopener'>§80 I</a><br/>Mitbestimmung in sozialen Angelegenheiten — <a href='{{ELI}}#art-z87_abs-z1' target='_blank' rel='noopener'>§87 I</a><br/>Beteiligung bei Einstellung, Versetzung, Kündigung — <a href='{{ELI}}#art-z99_abs-z1' target='_blank' rel='noopener'>§99 I</a>, <a href='{{ELI}}#art-z102_abs-z1' target='_blank' rel='noopener'>§102 I</a>"]
+
+    subgraph Belegschaft["Belegschaft"]
+        AN["<b>Arbeitnehmer</b><br/>wählen den BR ab 16 Jahren — <a href='{{ELI}}/art-z7' target='_blank' rel='noopener'>§7</a><br/>Beschwerderecht — <a href='{{ELI}}#art-z84_abs-z1' target='_blank' rel='noopener'>§84 I</a>"]
+        BV["<b>Betriebsversammlung</b><br/>alle AN des Betriebs, geleitet vom BR-Vorsitz — <a href='{{ELI}}#art-z42_abs-z1' target='_blank' rel='noopener'>§42 I</a><br/>einmal in jedem Kalendervierteljahr — <a href='{{ELI}}#art-z43_abs-z1' target='_blank' rel='noopener'>§43 I</a><br/>kann dem BR Anträge unterbreiten — <a href='{{ELI}}/art-z45' target='_blank' rel='noopener'>§45</a>"]
+        JAV["<b>Jugend- und Auszubildendenvertretung</b><br/>ab 5 jugendlichen AN oder Auszubildenden — <a href='{{ELI}}#art-z60_abs-z1' target='_blank' rel='noopener'>§60 I</a><br/>nimmt deren besondere Belange wahr — <a href='{{ELI}}#art-z60_abs-z2' target='_blank' rel='noopener'>§60 II</a><br/>beantragt Maßnahmen beim BR — <a href='{{ELI}}#art-z70_abs-z1' target='_blank' rel='noopener'>§70 I</a>"]
+    end
+
+    subgraph Unternehmen["Arbeitgeberseite, Unternehmen und Konzern"]
+        AG["<b>Arbeitgeber</b><br/>vertrauensvolle Zusammenarbeit mit dem BR — <a href='{{ELI}}#art-z2_abs-z1' target='_blank' rel='noopener'>§2 I</a><br/>trägt die Kosten des BR — <a href='{{ELI}}#art-z40_abs-z1' target='_blank' rel='noopener'>§40 I</a><br/>unterrichtet den BR rechtzeitig und umfassend — <a href='{{ELI}}#art-z80_abs-z2' target='_blank' rel='noopener'>§80 II</a>"]
+        GBR["<b>Gesamtbetriebsrat</b><br/>zu errichten bei mehreren BR im Unternehmen — <a href='{{ELI}}#art-z47_abs-z1' target='_blank' rel='noopener'>§47 I</a><br/>zuständig für betriebsübergreifende Angelegenheiten — <a href='{{ELI}}#art-z50_abs-z1' target='_blank' rel='noopener'>§50 I</a>"]
+        KBR["<b>Konzernbetriebsrat</b><br/>kann für einen Konzern errichtet werden — <a href='{{ELI}}#art-z54_abs-z1' target='_blank' rel='noopener'>§54 I</a><br/>zuständig für konzernweite Angelegenheiten — <a href='{{ELI}}#art-z58_abs-z1' target='_blank' rel='noopener'>§58 I</a>"]
+        WA["<b>Wirtschaftsausschuss</b><br/>in Unternehmen mit mehr als 100 AN — <a href='{{ELI}}#art-z106_abs-z1' target='_blank' rel='noopener'>§106 I S.1</a><br/>berät wirtschaftliche Angelegenheiten mit dem Unternehmer — <a href='{{ELI}}#art-z106_abs-z1' target='_blank' rel='noopener'>§106 I S.2</a><br/>berichtet dem BR über jede Sitzung — <a href='{{ELI}}#art-z108_abs-z4' target='_blank' rel='noopener'>§108 IV</a>"]
+    end
+
+    subgraph Konflikt["Konfliktlösung"]
+        ESt["<b>Einigungsstelle</b><br/>legt Meinungsverschiedenheiten zwischen AG und BR bei — <a href='{{ELI}}#art-z76_abs-z1' target='_blank' rel='noopener'>§76 I</a><br/>paritätische Beisitzer, unparteiischer Vorsitz — <a href='{{ELI}}#art-z76_abs-z2' target='_blank' rel='noopener'>§76 II</a><br/>Spruch ersetzt teils die Einigung — <a href='{{ELI}}#art-z76_abs-z5' target='_blank' rel='noopener'>§76 V</a>"]
+    end
+
+    subgraph Aussen["Gewerkschaften und Gerichte"]
+        ArbG["<b>Arbeitsgericht</b><br/>bestellt ggf. den Wahlvorstand — <a href='{{ELI}}#art-z16_abs-z2' target='_blank' rel='noopener'>§16 II</a><br/>entscheidet über Ausschluss und Auflösung des BR — <a href='{{ELI}}#art-z23_abs-z1' target='_blank' rel='noopener'>§23 I</a>"]
+        Gew["<b>Im Betrieb vertretene Gewerkschaften</b><br/>Zugangsrecht zum Betrieb — <a href='{{ELI}}#art-z2_abs-z2' target='_blank' rel='noopener'>§2 II</a><br/>Wahlvorschlagsrecht — <a href='{{ELI}}#art-z14_abs-z3' target='_blank' rel='noopener'>§14 III</a>"]
+    end
+
+    BR -->|"Mitbestimmung, Beteiligung — <a href='{{ELI}}#art-z87_abs-z1' target='_blank' rel='noopener'>§87 I</a>, §§99, 102"| AG
+    BR -->|"nimmt Beschwerden entgegen — <a href='{{ELI}}#art-z85_abs-z1' target='_blank' rel='noopener'>§85 I</a>"| AN
+    BR -->|"beruft ein, Tätigkeitsbericht — <a href='{{ELI}}#art-z43_abs-z1' target='_blank' rel='noopener'>§43 I</a>"| BV
+    BR -->|"unterrichtet — <a href='{{ELI}}#art-z70_abs-z2' target='_blank' rel='noopener'>§70 II</a>"| JAV
+    BR -->|"entsendet Mitglieder — <a href='{{ELI}}#art-z47_abs-z2' target='_blank' rel='noopener'>§47 II</a>"| GBR
+    GBR -->|"errichtet, entsendet — <a href='{{ELI}}#art-z54_abs-z1' target='_blank' rel='noopener'>§54 I</a>, §55"| KBR
+    BR -->|"bestimmt Mitglieder — <a href='{{ELI}}#art-z107_abs-z2' target='_blank' rel='noopener'>§107 II</a>"| WA
+    AG -->|"unterrichtet — <a href='{{ELI}}#art-z106_abs-z2' target='_blank' rel='noopener'>§106 II</a>"| WA
+    AG & BR -->|"rufen an — <a href='{{ELI}}#art-z76_abs-z1' target='_blank' rel='noopener'>§76 I</a>"| ESt
+    Gew -.-|"Zusammenwirken — <a href='{{ELI}}#art-z2_abs-z1' target='_blank' rel='noopener'>§2 I</a>"| BR
+    Gew -->|"Antrag bei groben Verstößen — <a href='{{ELI}}#art-z23_abs-z3' target='_blank' rel='noopener'>§23 III</a>"| ArbG
+    ArbG -->|"Ausschluss, Auflösung — <a href='{{ELI}}#art-z23_abs-z1' target='_blank' rel='noopener'>§23 I</a>"| BR
+    ArbG -->|"Ordnungs-, Zwangsgeld — <a href='{{ELI}}#art-z23_abs-z3' target='_blank' rel='noopener'>§23 III</a>"| AG
+
+    classDef zentral fill:#fff3cd,stroke:#c9a227,stroke-width:2px
+    classDef behoerde fill:#e8f0fe,stroke:#3b6fd4
+    classDef privat fill:#f5f5f5,stroke:#999
+    classDef parlament fill:#ede7f6,stroke:#7e57c2
+    classDef gremium fill:#e6f4ea,stroke:#2d8a4a
+    class BR zentral
+    class ArbG behoerde
+    class AG,AN,Gew privat
+    class BV,JAV,GBR,KBR,WA,ESt gremium
+`;export{e as default};

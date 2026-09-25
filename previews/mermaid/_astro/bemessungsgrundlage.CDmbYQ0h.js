@@ -1,0 +1,38 @@
+var e=`---
+summary: "Die maßgebliche Bemessungsgrundlage für den Solidaritätszuschlag je nach Besteuerungsverfahren (Veranlagung, Vorauszahlung, Lohnsteuer, Kapitalertragsteuer oder Steuerabzug), einschließlich der Sonderregelungen des §3 Abs. 2 SolZG."
+---
+flowchart TD
+    A["Welches Besteuerungsverfahren liegt vor?<br/>— <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1</a>"] --> B{"Veranlagung zur<br/>Einkommensteuer? — <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1<br/>Nr. 1</a>"}
+    B -->|Ja| B1["Bemessungsgrundlage:<br/>festgesetzte Einkommensteuer für die<br/>Veranlagungszeiträume 1991 und 1992 — <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3<br/>Abs. 1 Nr. 1</a>"]
+    B -->|Nein| C{"Veranlagung zur<br/>Körperschaftsteuer? — <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs.<br/>1 Nr. 2</a>"}
+    C -->|Ja| C1["Bemessungsgrundlage:<br/>festgesetzte positive Körperschaftsteuer<br/>für die Veranlagungszeiträume 1991 und<br/>1992 — <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1 Nr. 2</a>"]
+    C -->|Nein| D{"Vorauszahlungen zur Einkommen-<br/>oder Körperschaftsteuer zu<br/>leisten? — <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1 Nr. 3</a>"}
+    D -->|Ja| D1["Bemessungsgrundlage:<br/>Vorauszahlungen für die Kalenderjahre<br/>1991/1992, zu leisten vom 1.7.1991 bis<br/>30.6.1992 — <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1 Nr. 3</a>"]
+    D -->|Nein| E{"Lohnsteuer zu erheben? — <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3<br/>Abs. 1 Nr. 4</a>"}
+    E -->|"Ja, laufender Arbeitslohn"| E1["Bemessungsgrundlage:<br/>Lohnsteuer für Lohnzahlungszeitraum, der<br/>zwischen dem 30.6.1991 und dem 1.7.1992<br/>endet — <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1 Nr. 4 Buchst. a</a>"]
+    E -->|"Ja, sonstige Bezüge"| E2["Bemessungsgrundlage:<br/>Lohnsteuer auf sonstige Bezüge, die<br/>zwischen dem 30.6.1991 und dem 1.7.1992<br/>zufließen — <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1 Nr. 4 Buchst. b</a>"]
+    E -->|Nein| F{"Lohnsteuer-Jahresausgleich<br/>durchzuführen? — <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1 Nr.<br/>5</a>"}
+    F -->|Ja| F1["Bemessungsgrundlage:<br/>Jahreslohnsteuer für die Ausgleichsjahre<br/>1991 und 1992 — <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1 Nr. 5</a>"]
+    F -->|Nein| G{"Kapitalertragsteuer zu erheben<br/>(außer §44d EStG)? — <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1<br/>Nr. 6</a>"}
+    G -->|Ja| G1["Bemessungsgrundlage:<br/>Kapitalertragsteuer, zu erheben vom<br/>1.7.1991 bis 30.6.1992 — <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1 Nr. 6</a>"]
+    G -->|Nein| H{"Steuerabzug nach §50a EStG bei<br/>beschränkt Steuerpflichtigen<br/>zu erheben? — <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1 Nr. 7</a>"}
+    H -->|Ja| H1["Bemessungsgrundlage:<br/>Steuerabzugsbetrag, zu erheben vom<br/>1.7.1991 bis 30.6.1992 — <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1 Nr. 7</a>"]
+    H -->|Nein| Z0["Kein Fall des §3 Abs. 1 — keine<br/>Bemessungsgrundlage für den<br/>Solidaritätszuschlag in diesem Verfahren"]
+
+    B1 --> K{"Greift eine der<br/>Sonderregelungen des Absatzes<br/>2? — <a href='{{ELI}}#art-z3_abs-z2' target='_blank' rel='noopener'>§3 Abs. 2</a>"}
+    C1 --> K
+    D1 --> K
+    E1 --> K
+    E2 --> K
+    F1 --> K
+    G1 --> K
+    H1 --> K
+    K -->|"§51a Abs. 2 EStG"| K1["§51a Abs. 2 EStG bleibt unangewendet<br/>— <a href='{{ELI}}#art-z3_abs-z2' target='_blank' rel='noopener'>§3 Abs. 2 S. 1</a>"]
+    K -->|"Steuerermäßigung nach §§21, 26<br/>Berlinförderungsgesetz"| K2["Ermäßigung mindert die<br/>Bemessungsgrundlage nicht — <a href='{{ELI}}#art-z3_abs-z2' target='_blank' rel='noopener'>§3 Abs. 2 S.<br/>2</a>"]
+    K -->|Nein| Z2["Bemessungsgrundlage steht unverändert<br/>fest"]
+    K1 --> Z2
+    K2 --> Z2
+
+    style Z0 fill:#f8d7da,stroke:#c0392b
+    style Z2 fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};

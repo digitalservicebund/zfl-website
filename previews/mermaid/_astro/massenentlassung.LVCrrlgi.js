@@ -1,0 +1,52 @@
+var e=`---
+summary: "Der Ablauf einer Massenentlassungsanzeige nach dem KSchG: Unterrichtung und Beratung mit dem Betriebsrat, Anzeige bei der Agentur für Arbeit und die anschließende Sperrfrist bis zur Wirksamkeit der Entlassungen."
+---
+swimlane-beta TD
+    subgraph AG["Arbeitgeber"]
+        start(["Beabsichtigt anzeigepflichtige<br/>Entlassung (Schwellenwerte) — <a href='{{ELI}}#art-z17_abs-z1' target='_blank' rel='noopener'>§17 I</a>"])
+        unterrichtung["Rechtzeitige schriftliche Unterrichtung<br/>des BR (Gründe, Zahl/Berufsgruppen,<br/>Zeitraum, Auswahl-/Abfindungskriterien)<br/>— <a href='{{ELI}}#art-z17_abs-z2' target='_blank' rel='noopener'>§17 II</a>"]
+        beratung["Beratung: Vermeidung/Einschränkung der<br/>Entlassungen, Folgenmilderung — <a href='{{ELI}}#art-z17_abs-z2' target='_blank' rel='noopener'>§17 II<br/>S.2</a>"]
+        anzeigeMit["Anzeige samt Stellungnahme des BR — <a href='{{ELI}}#art-z17_abs-z3' target='_blank' rel='noopener'>§17 III S.2</a>"]
+        anzeigeOhne["Anzeige mit Glaubhaftmachung:<br/>BR mind. 2 Wochen vorher unterrichtet,<br/>Stand der Beratungen dargelegt — <a href='{{ELI}}#art-z17_abs-z3' target='_blank' rel='noopener'>§17 III<br/>S.3</a>"]
+        abschriftAnzeige["Abschrift der Anzeige an BR — <a href='{{ELI}}#art-z17_abs-z3' target='_blank' rel='noopener'>§17 III S.6</a>"]
+        wirksam["Entlassungen werden wirksam:<br/>bei Zustimmung ggf. vorzeitig, sonst<br/>nach Ablauf der Sperrfrist — <a href='{{ELI}}#art-z18_abs-z1' target='_blank' rel='noopener'>§18 I</a>,<br/><a href='{{ELI}}#art-z18_abs-z2' target='_blank' rel='noopener'>§18 II</a>"]
+        frist90{"Innerhalb 90 Tagen nach<br/>Zulässigkeit durchgeführt?<br/>— <a href='{{ELI}}#art-z18_abs-z4' target='_blank' rel='noopener'>§18 IV</a>"}
+        erledigt(["Entlassungen durchgeführt"])
+        erneut(["Erneute Anzeige erforderlich — <a href='{{ELI}}#art-z18_abs-z4' target='_blank' rel='noopener'>§18 IV</a>"])
+    end
+
+    subgraph BR["Betriebsrat"]
+        beratungsergebnis("Beratungsergebnis")
+        stellungnahme{"Schriftliche Stellungnahme<br/>abgegeben? — <a href='{{ELI}}#art-z17_abs-z3' target='_blank' rel='noopener'>§17 III S.2</a>"}
+        weitereStellungnahme["Weitere Stellungnahme an AfA, Abschrift<br/>an AG — <a href='{{ELI}}#art-z17_abs-z3' target='_blank' rel='noopener'>§17 III S.7</a>"]
+    end
+
+    subgraph AfA["Agentur für Arbeit"]
+        abschriftMitteilung("Abschrift der Mitteilung an BR (mind.<br/>Angaben Nr. 1-5) — <a href='{{ELI}}#art-z17_abs-z3' target='_blank' rel='noopener'>§17 III S.1</a>")
+        eingang["Eingang der Anzeige:<br/>Sperrfrist beginnt — <a href='{{ELI}}#art-z18_abs-z1' target='_blank' rel='noopener'>§18 I</a>"]
+        zustimmung{"Zustimmung vor Fristablauf?<br/>— <a href='{{ELI}}#art-z18_abs-z1' target='_blank' rel='noopener'>§18 I</a>"}
+        verlaengerung{"Verlängerung im Einzelfall?<br/>— <a href='{{ELI}}#art-z18_abs-z2' target='_blank' rel='noopener'>§18 II</a>"}
+    end
+
+    start --> unterrichtung
+    unterrichtung -.-> abschriftMitteilung
+    unterrichtung --> beratung
+    beratung --> beratungsergebnis
+    beratungsergebnis --> stellungnahme
+    stellungnahme -->|Ja| anzeigeMit
+    stellungnahme -->|Nein| anzeigeOhne
+    anzeigeMit --> eingang
+    anzeigeOhne --> eingang
+    anzeigeMit --> abschriftAnzeige
+    anzeigeOhne --> abschriftAnzeige
+    abschriftAnzeige -.->|optional| weitereStellungnahme
+    weitereStellungnahme -.-> zustimmung
+    eingang --> zustimmung
+    zustimmung -->|"Ja: vorzeitig (ggf.<br/>rückwirkend bis<br/>Antragstellung)"| wirksam
+    zustimmung -->|Nein| verlaengerung
+    verlaengerung -->|"Nein: nach 1 Monat"| wirksam
+    verlaengerung -->|"Ja: nach bis zu 2 Monaten"| wirksam
+    wirksam --> frist90
+    frist90 -->|Ja| erledigt
+    frist90 -->|Nein| erneut
+`;export{e as default};

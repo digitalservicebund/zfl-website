@@ -1,0 +1,50 @@
+var e=`---
+summary: "Die Akteure des AGG mit der Antidiskriminierungsstelle des Bundes im Zentrum: Wahl und Rechtsaufsicht über die oder den Unabhängigen Bundesbeauftragten, Berichte an den Bundestag, Beirat und Unterstützung durch Bundesbehörden sowie Arbeitgeber, Beschäftigte, Betriebsrat und Antidiskriminierungsverbände."
+---
+flowchart LR
+    ADS["<b>Antidiskriminierungsstelle des Bundes</b><br/>geleitet von der/dem Unabhängigen Bundesbeauftragten für Antidiskriminierung — <a href='{{ELI}}#art-z25_abs-z3' target='_blank' rel='noopener'>§25 III</a><br/>Bundesbeauftragte/r unabhängig, nur dem Gesetz unterworfen — <a href='{{ELI}}#art-z26a_abs-z1' target='_blank' rel='noopener'>§26a I</a><br/>unterstützt Benachteiligte auf unabhängige Weise — <a href='{{ELI}}#art-z27_abs-z2' target='_blank' rel='noopener'>§27 II</a><br/>Öffentlichkeitsarbeit, Prävention, Untersuchungen — <a href='{{ELI}}#art-z27_abs-z3' target='_blank' rel='noopener'>§27 III</a>"]
+
+    subgraph Gremium["Beratung"]
+        Beirat["<b>Beirat der Antidiskriminierungsstelle</b><br/>fördert den Dialog mit gesellschaftlichen Gruppen — <a href='{{ELI}}#art-z30_abs-z1' target='_blank' rel='noopener'>§30 I</a><br/>Mitgliederzahl soll 16 nicht überschreiten — <a href='{{ELI}}#art-z30_abs-z2' target='_blank' rel='noopener'>§30 II</a><br/>ehrenamtliche Tätigkeit — <a href='{{ELI}}#art-z30_abs-z4' target='_blank' rel='noopener'>§30 IV</a>"]
+    end
+
+    subgraph Bund["Bundestag, Bundesregierung und Bundesbehörden"]
+        BT["<b>Deutscher Bundestag</b><br/>wählt die/den Bundesbeauftragte/n — <a href='{{ELI}}#art-z26_abs-z1' target='_blank' rel='noopener'>§26 I</a><br/>erhält Berichte alle vier Jahre — <a href='{{ELI}}#art-z27_abs-z4' target='_blank' rel='noopener'>§27 IV</a>"]
+        BReg["<b>Bundesregierung</b><br/>schlägt die/den Bundesbeauftragte/n vor — <a href='{{ELI}}#art-z26_abs-z1' target='_blank' rel='noopener'>§26 I</a><br/>Rechtsaufsicht — <a href='{{ELI}}#art-z26a_abs-z2' target='_blank' rel='noopener'>§26a II</a>"]
+        BMFSFJ["<b>Bundesministerium für Familie, Senioren, Frauen und Jugend</b><br/>Antidiskriminierungsstelle dort errichtet — <a href='{{ELI}}#art-z25_abs-z1' target='_blank' rel='noopener'>§25 I</a><br/>beruft die Mitglieder des Beirats — <a href='{{ELI}}#art-z30_abs-z2' target='_blank' rel='noopener'>§30 II</a><br/>stimmt der Geschäftsordnung des Beirats zu — <a href='{{ELI}}#art-z30_abs-z3' target='_blank' rel='noopener'>§30 III</a>"]
+        Beauftragte["<b>Beauftragte des Bundestages oder der Bundesregierung</b><br/>Zuständigkeit bleibt unberührt — <a href='{{ELI}}#art-z25_abs-z1' target='_blank' rel='noopener'>§25 I</a><br/>erhalten Anliegen mit Einverständnis weitergeleitet — <a href='{{ELI}}#art-z27_abs-z2' target='_blank' rel='noopener'>§27 II</a>"]
+        Behoerden["<b>Bundesministerien, Bundesbehörden und öffentliche Stellen des Bundes</b><br/>Bundesministerien werden frühzeitig informiert — <a href='{{ELI}}#art-z28_abs-z2' target='_blank' rel='noopener'>§28 II</a><br/>Pflicht zur Unterstützung, insb. Auskünfte — <a href='{{ELI}}#art-z28_abs-z4' target='_blank' rel='noopener'>§28 IV</a>"]
+    end
+
+    subgraph Privat["Beschäftigung und Verbände"]
+        AG["<b>Arbeitgeber</b><br/>Maßnahmen zum Schutz, auch vorbeugend — <a href='{{ELI}}#art-z12_abs-z1' target='_blank' rel='noopener'>§12 I</a><br/>Maßnahmen bei Benachteiligung durch Beschäftigte oder Dritte — <a href='{{ELI}}/art-z12' target='_blank' rel='noopener'>§12 III, IV</a><br/>Schadensersatz bei Verstoß — <a href='{{ELI}}#art-z15_abs-z1' target='_blank' rel='noopener'>§15 I</a>"]
+        BS["<b>Beschäftigte</b><br/>auch Bewerberinnen und Bewerber — <a href='{{ELI}}#art-z6_abs-z1' target='_blank' rel='noopener'>§6 I</a><br/>Beschwerderecht — <a href='{{ELI}}#art-z13_abs-z1' target='_blank' rel='noopener'>§13 I</a><br/>Leistungsverweigerungsrecht bei Belästigung — <a href='{{ELI}}#art-z14_abs-z' target='_blank' rel='noopener'>§14</a><br/>können sich an die Antidiskriminierungsstelle wenden — <a href='{{ELI}}#art-z27_abs-z1' target='_blank' rel='noopener'>§27 I</a>"]
+        BR["<b>Betriebsrat oder im Betrieb vertretene Gewerkschaft</b><br/>gerichtliche Geltendmachung bei grobem Verstoß — <a href='{{ELI}}#art-z17_abs-z2' target='_blank' rel='noopener'>§17 II</a>"]
+        Verbaende["<b>Antidiskriminierungsverbände</b><br/>mind. 75 Mitglieder oder Zusammenschluss aus mind. 7 Verbänden — <a href='{{ELI}}#art-z23_abs-z1' target='_blank' rel='noopener'>§23 I</a><br/>Beistand Benachteiligter in gerichtlichen Verfahren — <a href='{{ELI}}#art-z23_abs-z2' target='_blank' rel='noopener'>§23 II</a><br/>Besorgung von Rechtsangelegenheiten Benachteiligter — <a href='{{ELI}}#art-z23_abs-z3' target='_blank' rel='noopener'>§23 III</a>"]
+    end
+
+    BMFSFJ -->|"Stelle beim Ministerium errichtet — <a href='{{ELI}}#art-z25_abs-z1' target='_blank' rel='noopener'>§25 I</a>"| ADS
+    BT -->|"wählt Bundesbeauftragte/n — <a href='{{ELI}}#art-z26_abs-z1' target='_blank' rel='noopener'>§26 I</a>"| ADS
+    BReg -->|"Vorschlag, Rechtsaufsicht — <a href='{{ELI}}#art-z26a_abs-z2' target='_blank' rel='noopener'>§26a II</a>, §26 I"| ADS
+    Behoerden -->|"Unterstützung, Auskünfte — <a href='{{ELI}}#art-z28_abs-z4' target='_blank' rel='noopener'>§28 IV</a>"| ADS
+    ADS -->|"Berichte, Empfehlungen — <a href='{{ELI}}#art-z27_abs-z4' target='_blank' rel='noopener'>§27 IV</a>"| BT
+    Beauftragte <-->|"Zusammenarbeit, gemeinsame Berichte — <a href='{{ELI}}#art-z27_abs-z5' target='_blank' rel='noopener'>§27 V</a>, IV"| ADS
+    Beirat -.-|"berät, eigene Vorschläge — <a href='{{ELI}}#art-z30_abs-z1' target='_blank' rel='noopener'>§30 I</a>"| ADS
+    BMFSFJ -->|"beruft Mitglieder — <a href='{{ELI}}#art-z30_abs-z2' target='_blank' rel='noopener'>§30 II</a>"| Beirat
+    ADS -->|"unterstützt, gütliche Beilegung — <a href='{{ELI}}#art-z27_abs-z2' target='_blank' rel='noopener'>§27 II</a>"| BS
+    AG -->|"Schutzpflichten — <a href='{{ELI}}#art-z12_abs-z1' target='_blank' rel='noopener'>§12 I</a>"| BS
+    BS -->|"Beschwerde bei zuständigen Stellen — <a href='{{ELI}}#art-z13_abs-z1' target='_blank' rel='noopener'>§13 I</a>"| AG
+    BR -->|"gerichtliche Geltendmachung — <a href='{{ELI}}#art-z17_abs-z2' target='_blank' rel='noopener'>§17 II</a>"| AG
+    Verbaende -->|"Beistand, Rechtsbesorgung — <a href='{{ELI}}#art-z23_abs-z2' target='_blank' rel='noopener'>§23 II</a>, III"| BS
+
+    classDef zentral fill:#fff3cd,stroke:#c9a227,stroke-width:2px
+    classDef behoerde fill:#e8f0fe,stroke:#3b6fd4
+    classDef privat fill:#f5f5f5,stroke:#999
+    classDef parlament fill:#ede7f6,stroke:#7e57c2
+    classDef gremium fill:#e6f4ea,stroke:#2d8a4a
+    class ADS zentral
+    class Beauftragte,Behoerden behoerde
+    class AG,BS,BR,Verbaende privat
+    class BT,BReg,BMFSFJ parlament
+    class Beirat gremium
+`;export{e as default};

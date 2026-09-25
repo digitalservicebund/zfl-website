@@ -1,0 +1,45 @@
+var e=`---
+summary: "Die Zustimmung des Betriebsrats zu Einstellung, Eingruppierung, Umgruppierung und Versetzung: Unterrichtung, Wochenfrist für die Zustimmungsverweigerung, Zustimmungsersetzung durch das Arbeitsgericht und die vorläufige Durchführung bei dringendem Bedarf."
+---
+swimlane-beta TD
+    subgraph AG["Arbeitgeber"]
+        start(["Einstellung, Eingruppierung, Umgruppierung<br/>oder Versetzung geplant (Unternehmen mit<br/>i.d.R. mehr als 20 wahlberechtigten AN) — <a href='{{ELI}}#art-z99_abs-z1' target='_blank' rel='noopener'>§99 I S.1</a>"])
+        unterrichtung["Unterrichtung des BR mit Bewerbungsunterlagen,<br/>Auskunft über Beteiligte und Auswirkungen,<br/>Zustimmung einholen — <a href='{{ELI}}#art-z99_abs-z1' target='_blank' rel='noopener'>§99 I S.1-2</a>"]
+        zugestimmt(["Maßnahme darf durchgeführt werden"])
+        vorlaeufig{"Vorläufige Durchführung aus<br/>sachlichen Gründen dringend<br/>erforderlich? — <a href='{{ELI}}#art-z100_abs-z1' target='_blank' rel='noopener'>§100 I S.1</a><br/>(auch schon vor Äußerung des BR)"}
+        vorlDurch["Vorläufige Durchführung:<br/>AN über Sach- und Rechtslage aufklären,<br/>BR unverzüglich unterrichten — <a href='{{ELI}}#art-z100_abs-z1' target='_blank' rel='noopener'>§100 I S.2</a>, <a href='{{ELI}}#art-z100_abs-z2' target='_blank' rel='noopener'>§100 II S.1</a>"]
+        ersetzung["Antrag auf Ersetzung der Zustimmung — <a href='{{ELI}}#art-z99_abs-z4' target='_blank' rel='noopener'>§99 IV</a><br/>(bei bestrittener Dringlichkeit binnen 3 Tagen<br/>samt Feststellungsantrag, sonst keine<br/>Aufrechterhaltung — <a href='{{ELI}}#art-z100_abs-z2' target='_blank' rel='noopener'>§100 II S.3</a>)"]
+        ersetzt(["Maßnahme darf endgültig<br/>durchgeführt werden — <a href='{{ELI}}#art-z99_abs-z4' target='_blank' rel='noopener'>§99 IV</a>"])
+    end
+
+    subgraph BR["Betriebsrat"]
+        verweigerung{"Zustimmung binnen 1 Woche<br/>schriftlich mit Gründen<br/>verweigert? — <a href='{{ELI}}#art-z99_abs-z3' target='_blank' rel='noopener'>§99 III S.1</a><br/>(nur aus Gründen nach <a href='{{ELI}}#art-z99_abs-z2' target='_blank' rel='noopener'>§99 II Nr. 1-6</a>)"}
+        bestreiten["Bestreitet ggf. unverzüglich die<br/>dringende Erforderlichkeit — <a href='{{ELI}}#art-z100_abs-z2' target='_blank' rel='noopener'>§100 II S.2</a>"]
+    end
+
+    subgraph ArbG["Arbeitsgericht"]
+        verfahren("Antrag geht ein")
+        gericht{"Zustimmung rechtskräftig<br/>ersetzt? — <a href='{{ELI}}#art-z99_abs-z4' target='_blank' rel='noopener'>§99 IV</a><br/>(ggf. auch Feststellung, ob<br/>offensichtlich nicht dringend — <a href='{{ELI}}#art-z100_abs-z3' target='_blank' rel='noopener'>§100 III</a>)"}
+        abgelehnt(["Maßnahme darf nicht durchgeführt bzw.<br/>aufrechterhalten werden: vorläufige Maßnahme endet 2 Wochen nach<br/>Rechtskraft — <a href='{{ELI}}#art-z100_abs-z3' target='_blank' rel='noopener'>§100 III</a> (sonst auf Antrag<br/>des BR Aufhebung, Zwangsgeld — <a href='{{ELI}}/art-z101' target='_blank' rel='noopener'>§101</a>)"])
+    end
+
+    start --> unterrichtung
+    unterrichtung --> verweigerung
+    verweigerung -->|"Nein: Zustimmung erteilt oder<br/>gilt als erteilt — <a href='{{ELI}}#art-z99_abs-z3' target='_blank' rel='noopener'>§99 III S.2</a>"| zugestimmt
+    verweigerung -->|Ja| vorlaeufig
+    vorlaeufig -->|Nein| ersetzung
+    vorlaeufig -->|Ja| vorlDurch
+    vorlDurch --> bestreiten
+    bestreiten --> ersetzung
+    ersetzung --> verfahren
+    verfahren --> gericht
+    gericht -->|Ja| ersetzt
+    gericht -->|Nein| abgelehnt
+
+    zugestimmt ~~~ vorlaeufig
+    ersetzung ~~~ ersetzt
+
+    style zugestimmt fill:#d4edda,stroke:#2d8a4a
+    style ersetzt fill:#d4edda,stroke:#2d8a4a
+    style abgelehnt fill:#f8d7da,stroke:#c0392b
+`;export{e as default};

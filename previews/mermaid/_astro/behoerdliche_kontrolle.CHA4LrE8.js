@@ -1,0 +1,45 @@
+var e=`---
+summary: "Die risikobasierte Kontrolle durch das Bundesamt für Wirtschaft und Ausfuhrkontrolle (BAFA) nach §§14 ff. LkSG: Tätigwerden auf Antrag oder von Amts wegen, Ermittlungsbefugnisse und Mitwirkungspflichten des Unternehmens, Anordnungen sowie Zwangsgeld, Bußgeld und Ausschluss von öffentlichen Aufträgen."
+---
+swimlane-beta TD
+    subgraph OA["Öffentliche Auftraggeber"]
+        ausschluss(["Ausschluss von Vergabe-<br/>verfahren bis zur Selbst-<br/>reinigung, höchstens<br/>3 Jahre, nach Anhörung<br/>— <a href='{{ELI}}#art-z22_abs-z1' target='_blank' rel='noopener'>§22 I</a>, <a href='{{ELI}}#art-z22_abs-z3' target='_blank' rel='noopener'>§22 III</a>"])
+    end
+
+    subgraph AS["Antragstellende Person"]
+        antrag(["Antrag: macht substantiiert<br/>geltend, wegen Nichterfüllung<br/>von Pflichten aus §§3-9 in<br/>geschützter Rechtsposition<br/>verletzt zu sein oder dies<br/>stehe unmittelbar bevor<br/>— <a href='{{ELI}}#art-z14_abs-z1' target='_blank' rel='noopener'>§14 I Nr.2</a>"])
+    end
+
+    subgraph BAFA["Bundesamt für Wirtschaft und Ausfuhrkontrolle (BAFA)"]
+        taetig["Wird tätig: auf Antrag oder<br/>von Amts wegen nach pflicht-<br/>gemäßem Ermessen — <a href='{{ELI}}#art-z14_abs-z1' target='_blank' rel='noopener'>§14 I</a>,<br/>risikobasiert — <a href='{{ELI}}#art-z19_abs-z2' target='_blank' rel='noopener'>§19 II</a>"]
+        ermittlung["Lädt Personen — <a href='{{ELI}}/art-z15' target='_blank' rel='noopener'>§15 S.2 Nr.1</a>,<br/>verlangt Auskünfte und<br/>Unterlagen — <a href='{{ELI}}#art-z17_abs-z1' target='_blank' rel='noopener'>§17 I</a>,<br/>betritt Geschäftsräume und<br/>prüft Unterlagen — <a href='{{ELI}}/art-z16' target='_blank' rel='noopener'>§16</a>"]
+        verstoss{"Verstoß gegen<br/>Pflichten nach<br/>§§3-10 I?<br/>— <a href='{{ELI}}/art-z15' target='_blank' rel='noopener'>§15 S.1</a>"}
+        anordnung["Ordnet an: Plan zur Behebung<br/>der Missstände binnen 3 Monaten<br/>— <a href='{{ELI}}/art-z15' target='_blank' rel='noopener'>§15 S.2 Nr.2</a> oder konkrete<br/>Handlungen — <a href='{{ELI}}/art-z15' target='_blank' rel='noopener'>§15 S.2 Nr.3</a><br/>(daneben Bußgeld für den Verstoß,<br/>bis 800.000 € bzw. 2 % des<br/>Umsatzes — <a href='{{ELI}}#art-z24_abs-z2' target='_blank' rel='noopener'>§24 II</a>, <a href='{{ELI}}#art-z24_abs-z3' target='_blank' rel='noopener'>§24 III</a>)"]
+        zwang["Zwangsgeld bis 50.000 €<br/>— <a href='{{ELI}}/art-z23' target='_blank' rel='noopener'>§23</a>; Geldbuße bei<br/>Verstoß gegen Plan-Anordnung<br/>— <a href='{{ELI}}#art-z24_abs-z1' target='_blank' rel='noopener'>§24 I Nr.13</a>"]
+    end
+
+    subgraph U["Unternehmen"]
+        mitwirkung["Erteilt Auskünfte, auch zu<br/>Zulieferern, gibt Unterlagen<br/>heraus — <a href='{{ELI}}#art-z17_abs-z1' target='_blank' rel='noopener'>§17 I</a>; duldet<br/>Maßnahmen, wirkt mit — <a href='{{ELI}}/art-z18' target='_blank' rel='noopener'>§18</a><br/>(Verweigerungsrecht bei<br/>Selbstbelastung — <a href='{{ELI}}#art-z17_abs-z3' target='_blank' rel='noopener'>§17 III</a>)"]
+        keinVerstoss(["Verfahren ohne<br/>Anordnung beendet"])
+        umsetzung["Legt Plan vor bzw.<br/>setzt aufgegebene<br/>Handlungen um"]
+        befolgt{"Anordnung<br/>befolgt?"}
+        behoben(["Missstände<br/>behoben"])
+    end
+
+    antrag --> taetig
+    taetig --> ermittlung
+    ermittlung -.-> mitwirkung
+    mitwirkung --> verstoss
+    verstoss -->|Nein| keinVerstoss
+    verstoss -->|Ja| anordnung
+    anordnung --> umsetzung
+    umsetzung --> befolgt
+    befolgt -->|Ja| behoben
+    befolgt -->|Nein| zwang
+    zwang -->|"rechtskräftige Geldbuße ab<br/>175.000 € (Regelfall) — <a href='{{ELI}}#art-z22_abs-z2' target='_blank' rel='noopener'>§22 II</a>"| ausschluss
+
+    style keinVerstoss fill:#d4edda,stroke:#2d8a4a
+    style behoben fill:#d4edda,stroke:#2d8a4a
+    style zwang fill:#f8d7da,stroke:#c0392b
+    style ausschluss fill:#f8d7da,stroke:#c0392b
+`;export{e as default};
