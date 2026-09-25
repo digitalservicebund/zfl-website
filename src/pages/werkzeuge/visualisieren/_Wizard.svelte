@@ -380,6 +380,26 @@
 
   let showCanvas = $derived(wizard.currentStep === steps.length);
 
+  let wizardEl: HTMLDivElement | undefined = $state();
+  // Unsupported e.g. on iPhone Safari, where the button is hidden
+  const canFullscreen =
+    typeof document !== "undefined" && document.fullscreenEnabled;
+  let isFullscreen = $state(false);
+
+  // Synced from the fullscreenchange event rather than set in
+  // toggleFullscreen, so leaving fullscreen via Esc also restores the sidebar.
+  function onFullscreenChange() {
+    isFullscreen = document.fullscreenElement === wizardEl;
+  }
+
+  function toggleFullscreen() {
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    } else {
+      wizardEl?.requestFullscreen();
+    }
+  }
+
   function downloadRulemapXml() {
     if (!wizard.mermaidSource || !wizard.selectedVisOption) return;
 
@@ -524,7 +544,10 @@
   </div>
 {/snippet}
 
+<svelte:document onfullscreenchange={onFullscreenChange} />
+
 <div
+  bind:this={wizardEl}
   id="wizard"
   class="grid grid-cols-1 h-screen overflow-hidden transition-[grid-template-columns] duration-300 ease-in-out sm:grid-cols-[1fr_0fr] data-show-canvas:sm:grid-cols-[1fr_2fr]"
   data-show-canvas={showCanvas || undefined}
@@ -532,6 +555,7 @@
   <div
     id="vis-chat"
     class="min-w-0 py-md px-16 sm:px-24 w-full max-w-900 mx-auto max-h-full overflow-auto"
+    class:hidden={isFullscreen}
   >
     <div class="flex flex-col h-full gap-32">
       <div class="vis-chat-header space-y-16">
@@ -588,7 +612,10 @@
   {#if showCanvas}
     <div
       id="vis-canvas"
-      class="relative w-full h-dvh min-w-0 flex flex-col justify-center items-center bg-lavender-200"
+      class={[
+        "relative w-full h-dvh min-w-0 flex flex-col justify-center items-center bg-lavender-200",
+        isFullscreen && "sm:col-span-2",
+      ]}
     >
       {#if wizard.isLoading}
         <div class="flex w-full h-full items-center justify-center p-16">
@@ -601,6 +628,8 @@
             ? `${wizard.selectedExample?.title ?? "Eigenes Vorhaben"}: ${wizard.selectedVisOption.name}`
             : "Visualisierung"}
           onFlip={canFlip ? flipDirection : undefined}
+          {isFullscreen}
+          onToggleFullscreen={canFullscreen ? toggleFullscreen : undefined}
         />
         <dialog
           bind:this={saveDialogEl}

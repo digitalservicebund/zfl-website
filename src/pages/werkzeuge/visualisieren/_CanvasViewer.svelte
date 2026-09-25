@@ -5,15 +5,26 @@
   import IconZoomOut from "~icons/ic/outline-zoom-out";
   import IconFitScreen from "~icons/ic/outline-fit-screen";
   import IconRotate from "~icons/ic/outline-rotate-90-degrees-cw";
+  import IconFullscreen from "~icons/ic/outline-fullscreen";
+  import IconFullscreenExit from "~icons/ic/outline-fullscreen-exit";
 
   interface Props {
     svg: string;
     title?: string;
     // Shows a button to flip the diagram's direction when provided
     onFlip?: () => void;
+    isFullscreen?: boolean;
+    // Shows a button to toggle fullscreen mode when provided
+    onToggleFullscreen?: () => void;
   }
 
-  let { svg, title = "Visualisierung", onFlip }: Props = $props();
+  let {
+    svg,
+    title = "Visualisierung",
+    onFlip,
+    isFullscreen = false,
+    onToggleFullscreen,
+  }: Props = $props();
 
   const PINCH_SENSITIVITY = 2;
   const WHEEL_ZOOM_SENSITIVITY = 0.012;
@@ -279,6 +290,26 @@
 
 <div class="relative flex h-full w-full flex-col overflow-hidden">
   <div class="absolute left-16 top-16 z-20 flex flex-col gap-8">
+    {#if onToggleFullscreen}
+      <button
+        type="button"
+        class="kern-btn kern-btn--secondary kern-btn--only-icon"
+        onclick={onToggleFullscreen}
+        aria-label={isFullscreen ? "Vollbild beenden" : "Vollbild"}
+      >
+        {#if isFullscreen}
+          <IconFullscreenExit
+            class="text-cosmic-blue-base text-xl"
+            aria-hidden="true"
+          />
+        {:else}
+          <IconFullscreen
+            class="text-cosmic-blue-base text-xl"
+            aria-hidden="true"
+          />
+        {/if}
+      </button>
+    {/if}
     <button
       type="button"
       class="kern-btn kern-btn--secondary kern-btn--only-icon"
