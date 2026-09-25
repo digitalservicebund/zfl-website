@@ -50,13 +50,12 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
 ---
 
 <header
-  class="page-header border-lavender-base relative border-b-2"
-  x-data={`{
-    mobileMenuOpen: false,
-    kontaktOpen: false
-  }`}
-  @resize.window="mobileMenuOpen = false; kontaktOpen = false"
-  @keydown.escape.window="mobileMenuOpen = false; kontaktOpen = false"
+  class="page-header border-lavender-base relative border-b-2 bg-white"
+  x-data="pageHeader()"
+  :class="{ 'header-floating': headerFloating, 'header-visible': headerVisible }"
+  @scroll.window="handleScroll($el)"
+  @resize.window="closeMenus()"
+  @keydown.escape.window="closeMenus()"
 >
   <Kopfzeile />
   <div class="flex h-72 justify-between px-24">
@@ -152,6 +151,22 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
     --page-header-offset: 122px;
   }
 
+  /* Below the desktop nav breakpoint, the header scrolls away with the page
+     and only becomes a floating bar once the user scrolls back up. */
+  @media (width < 900px) {
+    .page-header.header-floating {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      transform: translateY(-100%);
+      transition: transform 200ms ease-out;
+    }
+
+    .page-header.header-floating.header-visible {
+      transform: translateY(0);
+    }
+  }
+
   /* Kopfzeile is shorter on bigger screens */
   @media (width >= 48rem) {
     .page-header {
@@ -193,3 +208,12 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
     display: none !important;
   }
 </style>
+
+<script>
+  import Alpine from "alpinejs";
+  import { pageHeaderData } from "@/scripts/pageHeader";
+
+  document.addEventListener("alpine:init", () => {
+    Alpine.data("pageHeader", pageHeaderData);
+  });
+</script>
