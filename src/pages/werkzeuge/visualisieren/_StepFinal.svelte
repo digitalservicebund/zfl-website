@@ -4,10 +4,11 @@
   import { resolveEliUrl } from "../_shared/eli.ts";
   import { getWizardContext } from "./_wizardState.svelte.ts";
   import { visTypeIcons } from "./_visTypeIcons.ts";
-  import type { Snippet } from "svelte";
 
   const wizard = getWizardContext();
-  let { buttons }: { buttons: Snippet } = $props();
+  let { onSave }: { onSave: () => void } = $props();
+
+  let resetDialogEl: HTMLDialogElement | undefined = $state();
 </script>
 
 <div class="flex flex-col gap-32 h-full">
@@ -58,7 +59,86 @@
   </div>
   <div>
     {#if !wizard.isLoading && wizard.mermaidSource}
-      {@render buttons()}
+      <div class="flex flex-row-reverse justify-start gap-8">
+        <button
+          type="button"
+          class="kern-btn kern-btn--primary"
+          onclick={onSave}
+        >
+          <span
+            class="kern-icon kern-icon--download kern-icon--default"
+            aria-hidden="true"
+          ></span>
+          <span class="kern-label">Speichern</span>
+        </button>
+        <button
+          type="button"
+          class="kern-btn kern-btn--tertiary"
+          onclick={() => resetDialogEl?.showModal()}
+        >
+          <span
+            class="kern-icon kern-icon--autorenew kern-icon--default"
+            aria-hidden="true"
+          ></span>
+          <span class="kern-label">Neu beginnen</span>
+        </button>
+      </div>
     {/if}
   </div>
 </div>
+
+<dialog
+  bind:this={resetDialogEl}
+  class="kern-dialog"
+  aria-labelledby="reset-dialog-title"
+  onclick={(event) => {
+    if (event.target === resetDialogEl) resetDialogEl?.close();
+  }}
+>
+  <div class="kern-dialog__header">
+    <h2 class="kern-title" id="reset-dialog-title">Neu beginnen?</h2>
+    <button
+      type="button"
+      class="kern-btn kern-btn--tertiary kern-btn--only-icon"
+      onclick={() => resetDialogEl?.close()}
+      aria-label="Schließen"
+    >
+      <span
+        class="kern-icon kern-icon--close kern-icon--default"
+        aria-hidden="true"
+      ></span>
+    </button>
+  </div>
+  <div class="kern-dialog__body">
+    <p class="kern-body">
+      Alle Eingaben und die aktuelle Visualisierung gehen verloren.
+    </p>
+  </div>
+  <div class="kern-dialog__footer">
+    <button
+      type="button"
+      class="kern-btn kern-btn--secondary"
+      onclick={() => resetDialogEl?.close()}
+    >
+      <span class="kern-label">Abbrechen</span>
+    </button>
+    <button
+      type="button"
+      class="kern-btn kern-btn--primary"
+      onclick={() => {
+        resetDialogEl?.close();
+        wizard.reset();
+      }}
+    >
+      <span class="kern-label">Neu beginnen</span>
+    </button>
+  </div>
+</dialog>
+
+<style>
+  /* Tailwind's preflight resets margin to 0, which breaks the browser
+     default `margin: auto` that centers a `showModal()`-opened dialog. */
+  dialog.kern-dialog {
+    margin: auto;
+  }
+</style>

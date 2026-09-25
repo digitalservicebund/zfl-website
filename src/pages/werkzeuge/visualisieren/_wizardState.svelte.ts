@@ -65,6 +65,19 @@ export class WizardState {
     if (!this.canAdvance) return;
     this.currentStep = Math.min(steps.length, this.currentStep + 1);
   }
+
+  // Only resets the user's inputs: the effects in _Wizard.svelte clear the
+  // loaded vis options, mermaid source and URL params once their source
+  // values are gone.
+  reset() {
+    this.selectedLawType = "own";
+    this.preset = "flowchart";
+    this.selectedExample = undefined;
+    this.draftText = "";
+    this.analyzedDraftText = undefined;
+    this.selectedVisOption = undefined;
+    this.currentStep = 1;
+  }
 }
 
 const WIZARD_CONTEXT_KEY = Symbol("wizard");

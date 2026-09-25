@@ -580,7 +580,7 @@
         {:else if wizard.currentStep === 2}
           <Step2 />
         {:else if wizard.currentStep === steps.length}
-          <StepFinal {buttons} />
+          <StepFinal onSave={() => saveDialogEl?.showModal()} />
         {/if}
       </div>
     </div>
@@ -602,19 +602,6 @@
             : "Visualisierung"}
           onFlip={canFlip ? flipDirection : undefined}
         />
-        <div class="absolute bottom-24 right-32">
-          <button
-            type="button"
-            class="kern-btn kern-btn--primary"
-            onclick={() => saveDialogEl?.showModal()}
-          >
-            <span
-              class="kern-icon kern-icon--download kern-icon--default"
-              aria-hidden="true"
-            ></span>
-            <span class="kern-label">Speichern</span>
-          </button>
-        </div>
         <dialog
           bind:this={saveDialogEl}
           class="kern-dialog"
