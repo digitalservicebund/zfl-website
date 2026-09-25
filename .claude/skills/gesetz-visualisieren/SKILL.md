@@ -120,12 +120,17 @@ Typs erstellen: `flowchart TD` bzw. `swimlane-beta TD`; für die
 Akteursübersicht `flowchart LR`. Jede `.mmd`-Datei
 beginnt mit einem Frontmatter-Block (Repo-Konvention, keine Mermaid-Syntax —
 wird von `_mmdFrontmatter.ts` vor dem Rendern entfernt) mit einem
-`summary`-Feld: 1-2 Sätze, die den visualisierten Prozess beschreiben
-(erscheint im Wizard unter den Auswahl-Chips). Format:
+`summary`-Feld: 1-2 Sätze, die den visualisierten Prozess beschreiben.
+Der Text erscheint im Wizard unter der Überschrift „Was ist zu sehen?" und
+beantwortet diese Frage elliptisch, also ohne einleitendes Verb wie
+„Zeigt", „Prüft" oder „Stellt … dar": mit einer Nominalphrase im Nominativ
+(„Das Antragsverfahren für Elterngeld …", „Die Prüfung, ob …", „Der Ablauf
+…") oder einem indirekten Fragesatz („Wann …", „Unter welchen
+Voraussetzungen …", „Wie …", „Ob …"). Format:
 
 ```
 ---
-summary: "Kurze Zusammenfassung des Diagramms in ein bis zwei Sätzen."
+summary: "Das Antragsverfahren für … nach dem …: Antrag, Prüfung und Entscheidung."
 ---
 flowchart TD
     ...
