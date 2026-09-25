@@ -193,7 +193,7 @@ fileignoreconfig:
   - filename: src/content/ki-visualisierungen/BKleingG/pachthoehe.mmd
     ignore_detectors: [filecontent]
   - filename: src/content/ki-visualisierungen/MuSchG/mitteilung_benachrichtigung.mmd
-    checksum: 5c52f3e9e29cea253ade17c86b2d158116a54bfa0d7fe57fca6e17957cf88004
+    checksum: af939badebd409324d6987bbcf78c825c394726d0525afa25e0bffd62261c3cc
   - filename: src/content/ki-visualisierungen/MuSchG/schutzmassnahmen_rangfolge.mmd
     checksum: a1d83ab1b2a1fbdd9eb509fff401dee210eec561d96b70ebc2f24c487d8d93ac
   - filename: src/content/ki-visualisierungen/URV/registrierung.mmd
