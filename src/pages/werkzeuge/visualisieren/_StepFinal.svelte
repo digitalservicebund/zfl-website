@@ -15,14 +15,18 @@
     {:else if wizard.mermaidError}
       <p class="kern-error" role="alert">{wizard.mermaidError}</p>
     {:else if wizard.summary}
-      <p class="kern-body kern-body--muted">{wizard.summary}</p>
+      <h2 class="kern-heading-medium p-0">Was ist zu sehen?</h2>
+      <p>{wizard.summary}</p>
     {/if}
     {#if !wizard.isLoading && wizard.selectedExample}
       <p class="kern-body kern-body--muted">
-        Originaltext: <a
-          href={resolveEliUrl(wizard.selectedExample.eli)}
-          target="_blank">{wizard.selectedExample.short}</a
+        Quelle:
+        <a href={resolveEliUrl(wizard.selectedExample.eli)} target="_blank"
+          >{wizard.selectedExample.short}</a
         >
+        {#if wizard.selectedVisOption?.articles.length}
+          {wizard.selectedVisOption.articles.join(", ")}
+        {/if}
       </p>
     {/if}
   </div>
