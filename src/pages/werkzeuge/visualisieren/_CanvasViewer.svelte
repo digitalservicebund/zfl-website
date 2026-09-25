@@ -288,12 +288,22 @@
   }
 </script>
 
+<!-- Visual-only label: screen readers get the button's aria-label instead -->
+{#snippet tooltip(label: string)}
+  <span
+    aria-hidden="true"
+    class="pointer-events-none absolute left-full top-1/2 ml-8 -translate-y-1/2 whitespace-nowrap rounded bg-gray-900 px-8 py-4 text-sm text-white opacity-0 shadow-md transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+  >
+    {label}
+  </span>
+{/snippet}
+
 <div class="relative flex h-full w-full flex-col overflow-hidden">
   <div class="absolute left-16 top-16 z-20 flex flex-col gap-8">
     {#if onToggleFullscreen}
       <button
         type="button"
-        class="kern-btn kern-btn--secondary kern-btn--only-icon"
+        class="group kern-btn kern-btn--secondary kern-btn--only-icon"
         onclick={onToggleFullscreen}
         aria-label={isFullscreen ? "Vollbild beenden" : "Vollbild"}
       >
@@ -308,40 +318,45 @@
             aria-hidden="true"
           />
         {/if}
+        {@render tooltip(isFullscreen ? "Vollbild beenden" : "Vollbild")}
       </button>
     {/if}
     <button
       type="button"
-      class="kern-btn kern-btn--secondary kern-btn--only-icon"
+      class="group kern-btn kern-btn--secondary kern-btn--only-icon"
       onclick={zoomIn}
       aria-label="Vergrößern"
     >
       <IconZoomIn class="text-cosmic-blue-base text-xl" aria-hidden="true" />
+      {@render tooltip("Vergrößern")}
     </button>
     <button
       type="button"
-      class="kern-btn kern-btn--secondary kern-btn--only-icon"
+      class="group kern-btn kern-btn--secondary kern-btn--only-icon"
       onclick={zoomOut}
       aria-label="Verkleinern"
     >
       <IconZoomOut class="text-cosmic-blue-base text-xl" aria-hidden="true" />
+      {@render tooltip("Verkleinern")}
     </button>
     <button
       type="button"
-      class="kern-btn kern-btn--secondary kern-btn--only-icon"
+      class="group kern-btn kern-btn--secondary kern-btn--only-icon"
       onclick={resetView}
       aria-label="Zoom zurücksetzen"
     >
       <IconFitScreen class="text-cosmic-blue-base text-xl" aria-hidden="true" />
+      {@render tooltip("Zoom zurücksetzen")}
     </button>
     {#if onFlip}
       <button
         type="button"
-        class="kern-btn kern-btn--secondary kern-btn--only-icon"
+        class="group kern-btn kern-btn--secondary kern-btn--only-icon"
         onclick={onFlip}
         aria-label="Ausrichtung wechseln"
       >
         <IconRotate class="text-cosmic-blue-base text-xl" aria-hidden="true" />
+        {@render tooltip("Ausrichtung wechseln")}
       </button>
     {/if}
   </div>
