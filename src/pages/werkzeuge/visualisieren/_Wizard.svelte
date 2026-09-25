@@ -536,7 +536,10 @@
     <div class="flex flex-col h-full gap-32">
       <div class="vis-chat-header space-y-16">
         <div class="kern-progress">
-          <label class="kern-label" for="progress1"
+          <label
+            class="kern-label"
+            class:hidden={wizard.currentStep === steps.length}
+            for="progress1"
             >Schritt {wizard.currentStep} von {steps.length}</label
           >
           <progress id="progress1" value={wizard.currentStep} max={steps.length}

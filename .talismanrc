@@ -229,4 +229,6 @@ allowed_patterns:
   - Keyword
   - fuzzyKeyword
   - aria-keyshortcuts
+  - key
+  - handleKeydown
 version: "1.0"
