@@ -598,7 +598,12 @@
           {/if}
         </div>
       </div>
-      <div class="h-full w-full flex flex-col gap-32 justify-center">
+      <!-- min-h-0 only on the final step: it scrolls its chat internally,
+           while earlier steps overflow into #vis-chat's scrollbar -->
+      <div
+        class="flex-1 w-full flex flex-col gap-32 justify-center"
+        class:min-h-0={wizard.currentStep === steps.length}
+      >
         {#if wizard.currentStep === 1}
           <Step1 {examples} />
         {:else if wizard.currentStep === 2}

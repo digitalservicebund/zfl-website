@@ -231,4 +231,5 @@ allowed_patterns:
   - aria-keyshortcuts
   - key
   - handleKeydown
+  - passes
 version: "1.0"

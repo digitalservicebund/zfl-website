@@ -4,15 +4,40 @@
   import { resolveEliUrl } from "../_shared/eli.ts";
   import { getWizardContext } from "./_wizardState.svelte.ts";
   import { visTypeIcons } from "./_visTypeIcons.ts";
+  import ChatInput from "./_ChatInput.svelte";
+  import ChatMessages from "./_ChatMessages.svelte";
+  import { ChatState } from "./_chatState.svelte.ts";
+  import { createFakeChatBackend } from "./_chatBackend.ts";
 
   const wizard = getWizardContext();
   let { onSave }: { onSave: () => void } = $props();
 
   let resetDialogEl: HTMLDialogElement | undefined = $state();
+
+  const chat = new ChatState(createFakeChatBackend(), [
+    {
+      id: "greeting",
+      role: "assistant",
+      content: "Haben Sie Änderungswünsche?",
+    },
+  ]);
+
+  let chatScrollEl: HTMLDivElement | undefined = $state();
+
+  // Keeps the newest message in view, including while a reply streams in
+  $effect(() => {
+    void chat.messages.length;
+    void chat.messages.at(-1)?.content;
+    void chat.status;
+    chatScrollEl?.scrollTo({
+      top: chatScrollEl.scrollHeight,
+      behavior: "smooth",
+    });
+  });
 </script>
 
-<div class="flex flex-col gap-32 h-full">
-  <div class="h-full flex flex-col gap-32">
+<div class="flex flex-1 min-h-0 flex-col gap-32">
+  <div class="flex flex-1 min-h-0 flex-col gap-32">
     {#if wizard.selectedExample}
       <h2 class="kern-heading-medium mb-0 p-0">
         {wizard.selectedExample.title}
@@ -39,7 +64,10 @@
     {:else if wizard.mermaidError}
       <p class="kern-error" role="alert">{wizard.mermaidError}</p>
     {:else}
-      <div>
+      <div
+        bind:this={chatScrollEl}
+        class="scrollable-chat scroll-shadow flex-1 min-h-0 overflow-y-auto"
+      >
         {#if wizard.summary}
           <p>{wizard.summary}</p>
         {/if}
@@ -54,11 +82,17 @@
             {/if}
           </p>
         {/if}
+        <ChatMessages messages={chat.messages} status={chat.status} />
       </div>
     {/if}
   </div>
-  <div>
+  <div class="space-y-24">
     {#if !wizard.isLoading && wizard.mermaidSource}
+      <ChatInput
+        onSubmit={(text) => chat.send(text)}
+        onStop={() => chat.stop()}
+        isBusy={chat.isBusy}
+      />
       <div class="flex flex-row-reverse justify-start gap-8">
         <button
           type="button"
@@ -140,5 +174,46 @@
      default `margin: auto` that centers a `showModal()`-opened dialog. */
   dialog.kern-dialog {
     margin: auto;
+  }
+
+  /* Pure-CSS "scroll shadow", same as in bessere-rechtsetzung/_FlowSidebar.svelte
+     Reference: https://css-tricks.com/books/greatest-css-tricks/scroll-shadows/
+  */
+  .scroll-shadow {
+    background:
+    /* Shadow Cover TOP */
+      linear-gradient(
+          var(--kern-color-layout-background-default) 30%,
+          rgba(255, 255, 255, 0)
+        )
+        center top,
+      /* Shadow Cover BOTTOM */
+      linear-gradient(
+          rgba(255, 255, 255, 0),
+          var(--kern-color-layout-background-default) 70%
+        )
+        center bottom,
+      /* Shadow TOP */
+      radial-gradient(
+          farthest-side at 50% 0,
+          rgba(0, 0, 0, 0.2),
+          rgba(0, 0, 0, 0)
+        )
+        center top,
+      /* Shadow BOTTOM */
+      radial-gradient(
+          farthest-side at 50% 100%,
+          rgba(0, 0, 0, 0.2),
+          rgba(0, 0, 0, 0)
+        )
+        center bottom;
+
+    background-repeat: no-repeat;
+    background-size:
+      100% 40px,
+      100% 40px,
+      100% 14px,
+      100% 14px;
+    background-attachment: local, local, scroll, scroll;
   }
 </style>
