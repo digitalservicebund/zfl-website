@@ -1,0 +1,14 @@
+{
+  "pnpm": {
+    "name": "pnpm",
+    "requested": "12.5.1",
+    "current": "12.5.1",
+    "bump": "12.6.0",
+    "latest": "12.6.0",
+    "release_url": "https://github.com/pnpm/pnpm/releases/tag/v12.6.0",
+    "source": {
+      "type": "mise.toml",
+      "path": "/home/runner/work/zfl-website/zfl-website/mise.toml"
+    }
+  }
+}
