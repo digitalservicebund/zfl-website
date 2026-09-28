@@ -80,7 +80,7 @@ Lege für jeden Prozess den Diagrammtyp (`visType`) fest:
 - **`swimlane`** — bevorzugt für Abläufe mit verteilten Zuständigkeiten, bei
   denen mehrere Akteure (z.B. Arbeitgeber, Betriebsrat, Behörde) jeweils
   eigene Schritte übernehmen und Vorgänge zwischen ihnen übergeben werden
-  (Anzeige-, Melde-, Antrags-, Beteiligungsverfahren). Jede Lane steht für
+  (Anzeige-, Melde-, Antrags-, Beteiligungsverfahren). Jede Bahn steht für
   einen Akteur.
 - **`flowchart`** — wenn es vor allem um Entscheidungslogik geht und weniger
   um Zuständigkeiten: Prüfschemata, Anwendbarkeitsprüfungen,
@@ -121,12 +121,12 @@ Akteursübersicht `flowchart LR`. Jede `.mmd`-Datei
 beginnt mit einem Frontmatter-Block (Repo-Konvention, keine Mermaid-Syntax —
 wird von `_mmdFrontmatter.ts` vor dem Rendern entfernt) mit einem
 `summary`-Feld: 1-2 Sätze, die den visualisierten Prozess beschreiben.
-Der Text erscheint im Wizard unter der Überschrift „Was ist zu sehen?" und
+Der Text erscheint im Wizard unter der Überschrift „Was ist zu sehen?“ und
 beantwortet diese Frage elliptisch, also ohne einleitendes Verb wie
-„Zeigt", „Prüft" oder „Stellt … dar": mit einer Nominalphrase im Nominativ
-(„Das Antragsverfahren für Elterngeld …", „Die Prüfung, ob …", „Der Ablauf
-…") oder einem indirekten Fragesatz („Wann …", „Unter welchen
-Voraussetzungen …", „Wie …", „Ob …"). Format:
+„Zeigt“, „Prüft“ oder „Stellt … dar“: mit einer Nominalphrase im Nominativ
+(„Das Antragsverfahren für Elterngeld …“, „Die Prüfung, ob …“, „Der Ablauf
+…“) oder einem indirekten Fragesatz („Wann …“, „Unter welchen
+Voraussetzungen …“, „Wie …“, „Ob …“). Format:
 
 ```
 ---
@@ -150,7 +150,7 @@ Stilkonventionen für das Diagramm selbst (siehe existierende Dateien unter
 - Zeilenlänge (sichtbarer Text ohne HTML-Tags) pro `<br/>`-Zeile:
   - **Rauten `{"..."}`: ~25-30 Zeichen.** Mermaid bemisst die Raute an der
     Textbox; lange Zeilen ergeben riesige, flache Rauten mit viel Leerraum.
-  - **Alle anderen Knoten und Kantenbeschriftungen: ~40 Zeichen**, bevorzugt
+  - **Alle anderen Knoten und Verbindungsbeschriftungen: ~40 Zeichen**, bevorzugt
     an inhaltlichen Grenzen umbrechen (eine Aussage mit ihrem Verweis pro
     Zeile).
   - Keine Silbentrennung per `-<br/>` und keine sehr kurzen Zeilen
@@ -163,7 +163,7 @@ Stilkonventionen für das Diagramm selbst (siehe existierende Dateien unter
 - Jede inhaltliche Aussage mit Paragraphen-/Artikelverweis versehen
   (z.B. `— §4 S.4`), damit die Diagramme rechtlich nachvollziehbar bleiben.
 - Entscheidungen als Raute `{"..."}`, Ja/Nein bzw. Fristablauf-Pfade als
-  beschriftete Kanten (`-->|Ja|`, `-->|Nein|`).
+  beschriftete Verbindungen (`-->|Ja|`, `-->|Nein|`).
 - Terminale Endzustände farblich hervorheben:
   `style <Knoten> fill:#d4edda,stroke:#2d8a4a` (positiv/grün),
   `style <Knoten> fill:#f8d7da,stroke:#c0392b` (negativ/rot),
@@ -193,7 +193,7 @@ Stilkonventionen für das Diagramm selbst (siehe existierende Dateien unter
   (meldet jeden Link, dessen Anker-ID im HTML fehlt).
 - Jedes Diagramm (nicht nur Swimlanes) mit `render-check.mjs` rendern und
   das PNG ansehen (siehe `swimlane-layout.md`, Abschnitt „Rendern und
-  prüfen"), auch Flowcharts und Akteursübersichten.
+  prüfen“), auch Flowcharts und Akteursübersichten.
 
 Zusätzlich für `swimlane`-Diagramme. Die Syntax ist neu (Beta, ab Mermaid
 12), daher vor dem Erstellen die Referenz lesen:
@@ -201,24 +201,24 @@ https://mermaid.ai/open-source/syntax/swimlanes.html
 
 - Header `swimlane-beta TD` (Richtung immer explizit angeben, wie bei
   `flowchart TD`).
-- Jede Lane ist ein Top-Level-`subgraph` mit Akteur als Label, z.B.
+- Jede Bahn ist ein Top-Level-`subgraph` mit Akteur als Label, z.B.
   `subgraph AG["Arbeitgeber"] ... end`. Knoten innerhalb des `subgraph`
   definieren, auf dessen Akteur der Schritt entfällt.
-- Knoten- und Kantensyntax wie bei `flowchart`: `id["..."]` Aufgabe,
+- Knoten- und Verbindungssyntax wie bei `flowchart`: `id["..."]` Aufgabe,
   `id("...")` Ereignis, `id(["..."])` Start/Ende, `id{"..."}` Entscheidung;
   `-->`, `-->|Label|`, `-.->` (gestrichelt).
-- Entscheidungen in die Lane des Akteurs legen, der entscheidet, und die
-  Ergebnisse zu den Lanes führen, die darauf handeln.
-- Kanten zwischen Lanes stehen für Übergaben. Nebenläufige Übergaben
+- Entscheidungen in die Bahn des Akteurs legen, der entscheidet, und die
+  Ergebnisse zu den Bahnen führen, die darauf handeln.
+- Verbindungen zwischen Bahnen stehen für Übergaben. Nebenläufige Übergaben
   (z.B. Abschriften, optionale Stellungnahmen) gestrichelt (`-.->`).
-- Kanten erst nach allen `subgraph`-Blöcken aufführen.
+- Verbindungen erst nach allen `subgraph`-Blöcken aufführen.
 - Beispiel: `src/content/ki-visualisierungen/KSchG/massenentlassung.mmd`.
 - Der Swimlane-Renderer ordnet Knoten anders an als `flowchart` (eine Zeile
-  pro Knoten und Lane, Endknoten rutschen nach unten), was schnell zu langen
-  Umwegkanten führt. Vor dem Erstellen `swimlane-layout.md` in diesem
+  pro Knoten und Bahn, Endknoten rutschen nach unten), was schnell zu langen
+  Umwegverbindungen führt. Vor dem Erstellen `swimlane-layout.md` in diesem
   Skill-Verzeichnis lesen, die dortigen Techniken anwenden (u.a. Hinweise
-  ins Label statt als eigenen Knoten, unsichtbare Kanten `~~~`, keine
-  Rückkanten) und jede Swimlane mit `render-check.mjs` rendern und
+  ins Label statt als eigenen Knoten, unsichtbare Verbindungen `~~~`, keine
+  Rückverbindungen) und jede Swimlane mit `render-check.mjs` rendern und
   visuell prüfen.
 
 Zusätzlich für die Akteursübersicht (`actors`):
@@ -245,7 +245,7 @@ Zusätzlich für die Akteursübersicht (`actors`):
   der Renderer ab 200px selbst um, so bleiben die Knoten schmal und das
   Diagramm nicht zu breit. Beispiel:
   `KDD["<b>Koordinierungsstelle für digitale Dienste</b><br/>Durchsetzung des DSA — <a href='{{ELI}}#art-z14_abs-z1' target='_blank' rel='noopener'>§14 I</a><br/>völlig unabhängig — <a href='{{ELI}}/art-z15' target='_blank' rel='noopener'>§15</a>"]`
-- Kanten sind Beziehungen und immer beschriftet: Beziehungsart + genau
+- Verbindungen sind Beziehungen und immer beschriftet: Beziehungsart + genau
   **ein** verlinkter Paragraphenverweis (weitere Verweise als Klartext),
   kurz halten (Beschriftungen werden sonst im LR-Layout sehr breit), z.B.
   `BNetzA -->|"beherbergt — <a href='{{ELI}}#art-z14_abs-z1' target='_blank' rel='noopener'>§14 I</a>"| KDD`.
@@ -255,21 +255,21 @@ Zusätzlich für die Akteursübersicht (`actors`):
   - `-.-` lose Anbindung (Beratung, Beirat, freiwillige Mitwirkung).
   - Stehen zwei Akteure in beide Richtungen in unterschiedlicher Beziehung
     (z.B. Meldung an die Behörde, Anordnungen der Behörde), zwei
-    gerichtete Kanten statt einer `<-->`-Kante mit Sammelbeschriftung.
-    Jede solche Gegenkante läuft im LR-Layout aber als Bogen um das ganze
-    Diagramm (die Anordnung folgt allein der Kantenrichtung; Reihenfolge
-    von Knoten, Gruppen und Kanten im Quelltext ändert daran nichts). Ist
+    gerichtete Verbindungen statt einer `<-->`-Verbindung mit Sammelbeschriftung.
+    Jede solche Verbindung in Gegenrichtung läuft im LR-Layout aber als Bogen um das ganze
+    Diagramm (die Anordnung folgt allein der Verbindungsrichtung; Reihenfolge
+    von Knoten, Gruppen und Verbindungen im Quelltext ändert daran nichts). Ist
     eine der beiden Richtungen nur eine Nebenbeziehung, sie stattdessen als
     Zeile in den Knoten des handelnden Akteurs aufnehmen (z.B. BetrVG:
-    „beantragt Maßnahmen beim BR — §70 I" im Knoten der JAV) und nur die
-    Hauptbeziehung als Kante zeichnen.
-  - Kanten möglichst in eine Richtung laufen lassen (von den Akteuren, die
+    „beantragt Maßnahmen beim BR — §70 I“ im Knoten der JAV) und nur die
+    Hauptbeziehung als Verbindung zeichnen.
+  - Verbindungen möglichst in eine Richtung laufen lassen (von den Akteuren, die
     einrichten, beaufsichtigen oder anordnen, zu denen, die ausführen), dann
-    bleiben die Kanten kurz. Beziehungen dafür, wo sinnvoll, aus Sicht des
+    bleiben die Verbindungen kurz. Beziehungen dafür, wo sinnvoll, aus Sicht des
     zentralen Akteurs formulieren (z.B. „nimmt Beschwerden entgegen" statt
-    einer Gegenkante „beschwert sich").
-  - Höchstens ~15 verbundene Akteurspaare (ein Paar mit zwei
-    Gegenrichtungskanten zählt einfach).
+    einer Verbindung in Gegenrichtung „beschwert sich“).
+  - Höchstens ~15 verbundene Akteurspaare (ein Paar mit Verbindungen in
+    beide Richtungen zählt einfach).
   - Beziehung zu mehreren Akteuren gleichzeitig: `A --> B & C`.
 - Akteure mit top-level `subgraph ID["Label"] ... end` nach Ebene oder
   Rolle gruppieren (z.B. `Bund["Bundesbehörden"]`, `Laender["Länder"]`,
