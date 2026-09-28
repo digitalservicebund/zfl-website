@@ -47,7 +47,11 @@ jobs:
         # minimum-release-age holds back versions released in the last 3 days,
         # giving newly-published releases time to surface problems before we
         # pick them up automatically.
-        run: mise upgrade --bump --exclude node --minimum-release-age 3d
+        run: |
+          mise upgrade --bump --exclude node --minimum-release-age 3d
+          # Saved so the cooldown-detection step below can compare against
+          # what actually got proposed, without redoing this resolution.
+          cp mise.toml mise.lock "$RUNNER_TEMP/"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -73,16 +77,17 @@ jobs:
         run: |
           # peter-evans/create-pull-request resets the working tree back to a
           # clean, pre-upgrade origin/main once it's done pushing the branch
-          # above. Reapply the same safe upgrade here so the `mise outdated`
-          # check below compares against what that step actually proposed,
-          # rather than re-reporting everything as still outdated.
-          mise upgrade --bump --exclude node --minimum-release-age 3d
+          # above. Restore the upgraded files saved by the previous step so
+          # the `mise outdated` check below compares against what that step
+          # actually proposed, rather than re-reporting everything as still
+          # outdated.
+          cp "$RUNNER_TEMP/mise.toml" "$RUNNER_TEMP/mise.lock" .
 
           outdated_json="$RUNNER_TEMP/outdated.json"
           mise outdated --bump --json | jq 'del(.node)' > "$outdated_json"
 
           # Reset to main's actual mise.toml/mise.lock: this PR must be an
-          # independent, minimal diff from main, not stacked on the reapplied
+          # independent, minimal diff from main, not stacked on the restored
           # upgrade above.
           git fetch origin main
           git checkout origin/main -- mise.toml mise.lock
