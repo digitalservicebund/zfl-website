@@ -32,7 +32,7 @@ const description =
     <div aria-hidden="true" x-ref="sentinel" class="h-px -translate-y-px"></div>
 
     <div
-      class="breakout top-0 z-10 bg-white py-32 xl:py-8 transition-shadow lg:sticky"
+      class="breakout top-0 z-10 bg-white py-32 transition-shadow lg:sticky xl:py-8"
       x-data="{ stuck: false }"
       x-bind:class="stuck ? 'lg:shadow-md' : ''"
       x-init="
@@ -44,13 +44,15 @@ const description =
       <div class="flex flex-col flex-wrap justify-between gap-32 lg:flex-row">
         <div class="flex flex-wrap items-center gap-8 lg:gap-16">
           <p class="kern-label my-0 py-0">Springen zu:</p>
-          {(["1", "2", "3", "4", "5"] as const).map((principleIndex) => (
-            <a href={`#prinzip-${principleIndex}`}>
-              <PrinzipBadge prinzip={principleIndex}>
-                Prinzip {principleIndex}
-              </PrinzipBadge>
-            </a>
-          ))}
+          {
+            (["1", "2", "3", "4", "5"] as const).map((principleIndex) => (
+              <a href={`#prinzip-${principleIndex}`}>
+                <PrinzipBadge prinzip={principleIndex}>
+                  Prinzip {principleIndex}
+                </PrinzipBadge>
+              </a>
+            ))
+          }
         </div>
         <PageSearch
           keyboardShortcut
@@ -69,7 +71,9 @@ const description =
           systemübergreifend ohne manuelle Nacherfassung verarbeiten und
           Digitaltauglichkeit von Anfang an mitgedacht wurde.
         </p>
-        <a href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/digitale-angebote-fuer-alle-nutzbar-gestalten">
+        <a
+          href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/digitale-angebote-fuer-alle-nutzbar-gestalten"
+        >
           Mehr zum Prinzip beim Digitalcheck
         </a>
         <AspectSection>
@@ -98,14 +102,18 @@ const description =
         <h2>Datenwiederverwendung benötigt einheitliches Recht</h2>
         <p>
           Das{" "}
-          <a href="https://www.digitale-verwaltung.de/Webs/DV/DE/registermodernisierung/registermodernisierung-node.html">
+          <a
+            href="https://www.digitale-verwaltung.de/Webs/DV/DE/registermodernisierung/registermodernisierung-node.html"
+          >
             Once-Only-Prinzip
           </a>{" "}
-          spart Zeit und Kosten, indem Daten nur einmal angegeben und dann auf
-          Basis harmonisierter Rechtsbegriffe, Datenschutz und technischer
-          Standards wiederverwendet werden.
+          spart Zeit und Kosten, indem Daten nur einmal angegeben und dann auf Basis
+          harmonisierter Rechtsbegriffe, Datenschutz und technischer Standards wiederverwendet
+          werden.
         </p>
-        <a href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/datenwiederverwendung-benoetigt-einheitliches-recht">
+        <a
+          href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/datenwiederverwendung-benoetigt-einheitliches-recht"
+        >
           Mehr zum Prinzip beim Digitalcheck
         </a>
         <AspectSection>
@@ -136,7 +144,9 @@ const description =
           Schnittstellen und Open-Source aufbauen – was zugleich die
           Interoperabilität fördert.
         </p>
-        <a href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/etablierte-technologien-ermoeglichen-effiziente-umsetzung">
+        <a
+          href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/etablierte-technologien-ermoeglichen-effiziente-umsetzung"
+        >
           Mehr zum Prinzip beim Digitalcheck
         </a>
         <AspectSection>
@@ -158,7 +168,9 @@ const description =
           in den Staat, ermöglichen automatisierte Verwaltungsprozesse und
           setzen dadurch Ressourcen für komplexere Fälle frei.
         </p>
-        <a href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/automatisierung-basiert-auf-eindeutigen-regelungen">
+        <a
+          href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/automatisierung-basiert-auf-eindeutigen-regelungen"
+        >
           Mehr zum Prinzip beim Digitalcheck
         </a>
         <AspectSection>
@@ -185,7 +197,9 @@ const description =
           durch konsequente Datensparsamkeit erleichtert, die zugleich den
           Erfüllungsaufwand reduziert.
         </p>
-        <a href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/datenschutz-und-informationssicherheit-schaffen-vertrauen">
+        <a
+          href="https://digitalcheck.bund.de/methoden/fuenf-prinzipien/datenschutz-und-informationssicherheit-schaffen-vertrauen"
+        >
           Mehr zum Prinzip beim Digitalcheck
         </a>
         <AspectSection>
@@ -198,6 +212,8 @@ const description =
           <h3 id="informationssicherheit">Informationssicherheit</h3>
           <AnnotatedArticle slug="LuftVG/66a-2" />
           <AnnotatedArticle slug="BVerfGG/23a-3" />
+          <AnnotatedArticle slug="KaffeeStG/23-V-1" />
+          <AnnotatedArticle slug="VStDÜV/4-1" />
         </AspectSection>
       </PrinzipSection>
     </div>
@@ -205,7 +221,9 @@ const description =
       <h2>Sie möchten Ihr Beispiel hier sehen?</h2>
       <p>
         Wir nehmen gerne Vorschläge für Beispiele entgegen. Wenn Sie einen
-        digitaltauglichen Regelungstext haben, schreiben Sie uns eine E-Mail an{" "}
+        digitaltauglichen Regelungstext haben, schreiben Sie uns eine E-Mail an{
+          " "
+        }
         <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>. Wir melden uns zeitnah
         bei Ihnen.
       </p>

@@ -125,55 +125,60 @@ const pieClipPath = (start: number, end: number) => {
         <th scope="col">
           <span class="sr-only">Kategorie</span>
         </th>
-        {data.map((series) => (
-          <th scope="col">{series.label}</th>
-        ))}
+        {data.map((series) => <th scope="col">{series.label}</th>)}
       </tr>
     </thead>
     <tbody>
-      {categories.map((category, categoryIndex) => (
-        <tr>
-          <th scope="row">{category}</th>
-          {data.map((series, seriesIndex) => {
-            const value = series.values[categoryIndex]?.y ?? 0;
-            let cellStyle: string;
-            if (isPie) {
-              const { start, end } = pieStartEnd(value);
-              cellStyle = `--start: ${start}; --end: ${end}; --pie-clip: ${pieClipPath(start, end)};`;
-            } else {
-              cellStyle = `--size: ${axisMax > 0 ? value / axisMax : 0};`;
-            }
-            return (
-              <td
-                style={`${cellStyle} --color: ${colorFor(seriesIndex)};`}
-                tabindex="0"
-                class:list={[value === 0 && "invisible"]}
-              >
-                <span class="data kern-body kern-body--small kern-body--muted">
-                  {formatValue(value)}
-                </span>
-                <span class="tooltip">
-                  <span class="max-sm:hidden">{series.label}:</span>{" "}
-                  {formatValue(value)}
-                </span>
-              </td>
-            );
-          })}
-        </tr>
-      ))}
+      {
+        categories.map((category, categoryIndex) => (
+          <tr>
+            <th scope="row">{category}</th>
+            {data.map((series, seriesIndex) => {
+              const value = series.values[categoryIndex]?.y ?? 0;
+              let cellStyle: string;
+              if (isPie) {
+                const { start, end } = pieStartEnd(value);
+                cellStyle = `--start: ${start}; --end: ${end}; --pie-clip: ${pieClipPath(start, end)};`;
+              } else {
+                cellStyle = `--size: ${axisMax > 0 ? value / axisMax : 0};`;
+              }
+              return (
+                <td
+                  style={`${cellStyle} --color: ${colorFor(seriesIndex)};`}
+                  tabindex="0"
+                  class:list={[value === 0 && "invisible"]}
+                >
+                  <span class="data kern-body kern-body--small kern-body--muted">
+                    {formatValue(value)}
+                  </span>
+                  <span class="tooltip">
+                    <span class="max-sm:hidden">{series.label}:</span>{" "}
+                    {formatValue(value)}
+                  </span>
+                </td>
+              );
+            })}
+          </tr>
+        ))
+      }
     </tbody>
   </table>
 
-  {isMultiSeries && (
-    <ul class="charts-css legend legend-inline legend-circle" style={colorVars}>
-      {data.map((series) => (
-        <li>{series.label}</li>
-      ))}
-    </ul>
-  )}
+  {
+    isMultiSeries && (
+      <ul
+        class="charts-css legend legend-inline legend-circle"
+        style={colorVars}
+      >
+        {data.map((series) => (
+          <li>{series.label}</li>
+        ))}
+      </ul>
+    )
+  }
 </div>
 
-{isMultiSeries && <style set:html={legendHoverCss}></style>}
+{isMultiSeries && <style set:html={legendHoverCss} />}
 
 <style>
   .zfl-chart {

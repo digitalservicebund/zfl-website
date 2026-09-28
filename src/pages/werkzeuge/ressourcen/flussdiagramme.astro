@@ -95,20 +95,24 @@ const conceptboardTemplate =
           Typischer Aufbau eines Flussdiagramms
         </h2>
         <div class="space-y-56">
-          <div class="gap-md mt-32 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-            {aufbauElemente.map((element) => (
-              <div>
-                <Image
-                  src={element.image}
-                  alt={element.title}
-                  class="h-64 w-auto"
-                />
-                <p class="kern-heading-medium mt-16 hyphens-auto">
-                  {element.title}
-                </p>
-                <p>{element.body}</p>
-              </div>
-            ))}
+          <div
+            class="gap-md mt-32 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
+          >
+            {
+              aufbauElemente.map((element) => (
+                <div>
+                  <Image
+                    src={element.image}
+                    alt={element.title}
+                    class="h-64 w-auto"
+                  />
+                  <p class="kern-heading-medium mt-16 hyphens-auto">
+                    {element.title}
+                  </p>
+                  <p>{element.body}</p>
+                </div>
+              ))
+            }
           </div>
           <figure class="space-y-16">
             <p class="kern-heading-large">Beispiel eines Flussdiagramms</p>
@@ -180,12 +184,11 @@ const conceptboardTemplate =
               <p class="font-bold">Vorlage für Flussdiagramm</p>
             </div>
             <p>
-              Hier können Sie eine <strong>Powerpoint-Vorlage (PPT)</strong> für
-              das Flussdiagramm herunterladen. In der Vorlage ist eine
-              Schritt-für-Schritt-Anleitung enthalten. Sie können diese
-              ausdrucken oder an Ihrem Computer bearbeiten. Sofern in Ihrem
-              Ressort <strong>Conceptboard</strong> genutzt werden kann, können
-              Sie sich auch eine Kopie dieser Conceptboard-Vorlage erstellen.
+              Hier können Sie eine <strong>Powerpoint-Vorlage (PPT)</strong> für das
+              Flussdiagramm herunterladen. In der Vorlage ist eine Schritt-für-Schritt-Anleitung
+              enthalten. Sie können diese ausdrucken oder an Ihrem Computer bearbeiten.
+              Sofern in Ihrem Ressort <strong>Conceptboard</strong> genutzt werden
+              kann, können Sie sich auch eine Kopie dieser Conceptboard-Vorlage erstellen.
               Für letzteres können Sie einen <strong>Gast-Zugang</strong>{" "}
               anlegen.
             </p>
@@ -274,13 +277,12 @@ const conceptboardTemplate =
             <p>Beispiel: Fahrerlaubnis</p>
             <ul>
               <li>
-                <b>Ziel</b> der Visualisierung: „Ich möchte den Prozess für die
-                Erlangung der Fahrerlaubnis verändern und digital ermöglichen.“
+                <b>Ziel</b> der Visualisierung: „Ich möchte den Prozess für die Erlangung
+                der Fahrerlaubnis verändern und digital ermöglichen.“
               </li>
               <li>
-                Die <b>Perspektive</b> der Visualisierung ist die der
-                Normadressaten und -adressatinnen. In diesem Fall die einer
-                Fahrschülerin.
+                Die <b>Perspektive</b> der Visualisierung ist die der Normadressaten
+                und -adressatinnen. In diesem Fall die einer Fahrschülerin.
               </li>
             </ul>
           </div>
@@ -302,12 +304,12 @@ const conceptboardTemplate =
         </p>
         <ul>
           <li>
-            <b>Start</b> (Kreis mit dünner Linie): Wann startet der Prozess der
-            Akteurin oder Akteurs?
+            <b>Start</b> (Kreis mit dünner Linie): Wann startet der Prozess der Akteurin
+            oder Akteurs?
           </li>
           <li>
-            <b>Ende</b> (Kreis mit dicker Linie): Was soll die Akteurin oder
-            Akteur am Ende erreichen?
+            <b>Ende</b> (Kreis mit dicker Linie): Was soll die Akteurin oder Akteur
+            am Ende erreichen?
           </li>
         </ul>
         <p>
@@ -355,8 +357,8 @@ const conceptboardTemplate =
             Visualisieren Sie den Prozess
           </h3>
           <p>
-            Jetzt <b>übertragen Sie auf das Template</b> die Akteure sowie
-            Start- und Endpunkt:
+            Jetzt <b>übertragen Sie auf das Template</b> die Akteure sowie Start-
+            und Endpunkt:
           </p>
           <p>
             Jeder Akteur erhält eine sogenannte Schwimmbahn. Alle Aktivitäten
@@ -424,20 +426,20 @@ const conceptboardTemplate =
             </p>
             <ul>
               <li>
-                <b>Akteure</b> (Fahrschülerin, Fahrschule, Meldebehörde) haben
-                je eine eigene Schwimmbahn.
+                <b>Akteure</b> (Fahrschülerin, Fahrschule, Meldebehörde) haben je
+                eine eigene Schwimmbahn.
               </li>
               <li>
-                <b>Startpunkt</b> („Möchte Führerschein erlangen") liegt am
-                Anfang der Fahrschülerin-Schwimmbahn.
+                <b>Startpunkt</b> („Möchte Führerschein erlangen") liegt am Anfang
+                der Fahrschülerin-Schwimmbahn.
               </li>
               <li>
                 Prozess-Ablauf wird durch <b>Verbindungslinien</b> und{" "}
                 <b>Schritte</b> dargestellt.
               </li>
               <li>
-                Wesentliche <b>Paragraphen</b> (z.B. FeV § 16, BMG § 18) sind in
-                den Kästen vermerkt.
+                Wesentliche <b>Paragraphen</b> (z.B. FeV § 16, BMG § 18) sind in den
+                Kästen vermerkt.
               </li>
             </ul>
           </div>
@@ -528,34 +530,43 @@ const conceptboardTemplate =
 
     <section class="breakout-grid space-y-32">
       <h2>Weitere Ressourcen</h2>
-      <div class="grid sm:grid-cols-1 gap-y-32 lg:grid-cols-2 lg:gap-x-32 xl:grid-cols-3">
-        {external_ressources.map((ressource) => (
-          <KernCard
-            title={ressource.data.title}
-            href={ressource.data.href}
-            target_option={ressource.data.isExternal ? "_blank" : "_self"}
-            body={ressource.data.description}
-            interactive={false}
-            image={ressource.data.image}
-            imageAlt={ressource.data.image ? ressource.data.title : undefined}
-          >
-            <div slot="pre-header" class="mb-16 flex w-full justify-between">
-              <div class="flex gap-8">
-                {ressource.data.type.map((type: WerkzeugType) => (
-                  <span class={`kern-badge kern-badge--${type.toLowerCase()}`}>
-                    <span class="kern-label">{type}</span>
-                  </span>
-                ))}
+      <div
+        class="grid gap-y-32 sm:grid-cols-1 lg:grid-cols-2 lg:gap-x-32 xl:grid-cols-3"
+      >
+        {
+          external_ressources.map((ressource) => (
+            <KernCard
+              title={ressource.data.title}
+              href={ressource.data.href}
+              target_option={ressource.data.isExternal ? "_blank" : "_self"}
+              body={ressource.data.description}
+              interactive={false}
+              image={ressource.data.image}
+              imageAlt={ressource.data.image ? ressource.data.title : undefined}
+            >
+              <div slot="pre-header" class="mb-16 flex w-full justify-between">
+                <div class="flex gap-8">
+                  {ressource.data.type.map((type: WerkzeugType) => (
+                    <span
+                      class={`kern-badge kern-badge--${type.toLowerCase()}`}
+                    >
+                      <span class="kern-label">{type}</span>
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-            <div slot="footer" class="text-icon-muted flex items-center gap-8">
-              <IconAutoStories class="h-32 w-32 shrink-0" />
-              <p class="kern-subline kern-subline-dark py-0">
-                Quelle: {ressource.data.source}
-              </p>
-            </div>
-          </KernCard>
-        ))}
+              <div
+                slot="footer"
+                class="text-icon-muted flex items-center gap-8"
+              >
+                <IconAutoStories class="h-32 w-32 shrink-0" />
+                <p class="kern-subline kern-subline-dark py-0">
+                  Quelle: {ressource.data.source}
+                </p>
+              </div>
+            </KernCard>
+          ))
+        }
       </div>
     </section>
   </main>

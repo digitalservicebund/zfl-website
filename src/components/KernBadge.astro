@@ -28,9 +28,11 @@ const {
   ]}
   {...attrs}
 >
-  {showIcon && (
-    <span class={`kern-icon kern-icon--${variant}`} aria-hidden="true" />
-  )}
+  {
+    showIcon && (
+      <span class={`kern-icon kern-icon--${variant}`} aria-hidden="true" />
+    )
+  }
   <span class="kern-label">
     <slot />
   </span>
