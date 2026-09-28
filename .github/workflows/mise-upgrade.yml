@@ -64,6 +64,7 @@ jobs:
             with the Dockerfile's version rather than upgraded independently.
             Versions released in the last 3 days are held back; see the draft
             "bump tool versions still in cooldown" PR for those.
+          base: main
           branch: chore/mise-upgrade
           labels: dependencies
 
