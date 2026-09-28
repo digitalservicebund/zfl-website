@@ -10,6 +10,7 @@ import IconQueryBuilder from "~icons/ic/outline-query-builder";
 import IconPlaylistAddCheck from "~icons/ic/outline-playlist-add-check";
 import digitalcheckImg from "@/images/Digitalcheck.png";
 import { DIGITALCHECK_URL, ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
+import type { WerkzeugType } from "@/content.config";
 
 const frontmatter = {
   title: "Ihr Weg zur Digitaltauglichkeit",
@@ -39,9 +40,9 @@ const resources = await getEntries([
     <section>
       <h2>Zusammengefasst</h2>
       <div class="mt-32 space-y-32">
-        <div class="flex gap-24">
+        <div class="gap-24 md:flex">
           <IconComputer
-            class="text-cosmic-blue-base size-64 shrink-0"
+            class="text-cosmic-blue-base mx-16 size-64 shrink-0 md:mx-0"
             aria-hidden="true"
           />
           <div class="px-16 pt-3">
@@ -62,9 +63,9 @@ const resources = await getEntries([
             </p>
           </div>
         </div>
-        <div class="flex gap-24">
+        <div class="gap-24 md:flex">
           <IconQueryBuilder
-            class="text-cosmic-blue-base size-64 shrink-0"
+            class="text-cosmic-blue-base mx-16 size-64 shrink-0 md:mx-0"
             aria-hidden="true"
           />
           <div class="px-16 pt-3">
@@ -77,9 +78,9 @@ const resources = await getEntries([
             </p>
           </div>
         </div>
-        <div class="flex gap-24">
+        <div class="gap-24 md:flex">
           <IconPlaylistAddCheck
-            class="text-cosmic-blue-base size-64 shrink-0"
+            class="text-cosmic-blue-base mx-16 size-64 shrink-0 md:mx-0"
             aria-hidden="true"
           />
           <div class="px-16 pt-3">
@@ -91,10 +92,13 @@ const resources = await getEntries([
             </p>
             <p>
               Auch die Länder sind eingeladen den Digitalcheck nach zu nutzen.
-              Informationen dazu finden Sie auf der <a
+              Informationen dazu finden Sie auf der{" "}
+              <a
                 href="https://digitalcheck.bund.de/bundeslaender"
-                target="_blank">Bundesländer-Infoseite</a
+                target="_blank"
               >
+                Bundesländer-Infoseite
+              </a>
             </p>
           </div>
         </div>
@@ -104,21 +108,21 @@ const resources = await getEntries([
       <ImageTextOverlay
         image={digitalcheckImg}
         imageAlt="Screenshot der Digitalcheck-Startseite, wo der Prozess zu Digitaltauglichkeit in drei Schritten dargestellt ist"
+        imageBorder
+        imageClass="object-top"
         linkHref={DIGITALCHECK_URL.url}
         linkText="Zum Digitalcheck"
       >
-        <Fragment slot="content">
-          <h2>Digitalcheck</h2>
-          <p>
-            Auf der Webseite des Digitalcheck finden Sie alle notwendigen
-            Schritte, um Digitaltauglichkeit sicherzustellen.
-          </p>
-        </Fragment>
+        <h2>Digitalcheck</h2>
+        <p>
+          Auf der Webseite des Digitalcheck finden Sie alle notwendigen
+          Schritte, um Digitaltauglichkeit sicherzustellen.
+        </p>
       </ImageTextOverlay>
     </section>
     <section>
-      <h1>Hilfreiche Ressourcen</h1>
-      <div class="gap-md grid grid-cols-3">
+      <h2>Hilfreiche Ressourcen</h2>
+      <div class="md:gap-md space-y-32 md:grid md:grid-cols-2 xl:grid-cols-3">
         {
           resources.map(
             (resource) =>
@@ -139,7 +143,7 @@ const resources = await getEntries([
                     class="mb-16 flex w-full justify-between"
                   >
                     <div class="flex gap-8">
-                      {resource.data.type.map((type) => (
+                      {resource.data.type.map((type: WerkzeugType) => (
                         <span
                           class={`kern-badge kern-badge--${type.toLowerCase()}`}
                         >
@@ -150,7 +154,7 @@ const resources = await getEntries([
                   </div>
                   <div
                     slot="footer"
-                    class="text-icon-muted! flex items-center gap-8"
+                    class="text-icon-muted flex items-center gap-8"
                   >
                     <IconAutoStories class="h-32 w-32 shrink-0" />
                     <p class="kern-subline kern-subline-dark py-0">
@@ -166,8 +170,12 @@ const resources = await getEntries([
     <section class="breakout bg-cosmic-blue-base text-white">
       <h2>Fragen zu Digitaltauglichkeit?</h2>
       <p>Wir können Sie gerne beraten. Kontaktieren Sie uns!</p>
-      <p>Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a></p>
-      <p>E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a></p>
+      <p>
+        Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>
+      </p>
+      <p>
+        E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
+      </p>
     </section>
   </main>
 </Layout>

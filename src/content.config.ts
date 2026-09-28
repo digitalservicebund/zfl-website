@@ -12,7 +12,7 @@ export const WERKZEUGE_CATEGORIES = [
   "Beteiligung",
 ] as const;
 
-export const WERKZEUGE_TYPES = [
+export const WERKZEUGE_TAGS = [
   "Methode",
   "Leitfaden",
   "Tool",
@@ -20,6 +20,7 @@ export const WERKZEUGE_TYPES = [
 ] as const;
 
 export type WerkzeugCategory = (typeof WERKZEUGE_CATEGORIES)[number];
+export type WerkzeugType = (typeof WERKZEUGE_TAGS)[number];
 
 const werkzeuge = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "src/content/werkzeuge" }),
@@ -27,7 +28,7 @@ const werkzeuge = defineCollection({
     z
       .object({
         title: z.string(),
-        type: z.array(z.enum(WERKZEUGE_TYPES)),
+        type: z.array(z.enum(WERKZEUGE_TAGS)),
         category: z.array(z.enum(WERKZEUGE_CATEGORIES)),
         description: z.string(),
         source: z.string().optional(),

@@ -7,18 +7,19 @@ import StepNumber from "@/components/StepNumber.astro";
 import TocContainer from "@/components/global/TocContainer.astro";
 import akteureImg from "./_assets/akteure.png";
 import zielgruppeImg from "./_assets/zielgruppe.png";
-import checklistenImg from "./_assets/checkliste.png";
+import interviewleitfadenImg from "@/content/werkzeuge/interviewleitfaden.png";
+import {
+  akteureAuflisten_docx,
+  zielgruppenanalyse_pptx,
+  checklisteInterviewfuehrung_docx,
+  buergercheck_pdf,
+} from "@/config/downloads";
 
 const frontmatter = {
   title: "Akteurinnen und Akteure identifizieren und Interviews vorbereiten",
   navLabel: "Interviewleitfaden",
   navOrder: 3,
 };
-
-const template_akteure = "/downloads/Akteure-auflisten.docx";
-const powerpoint_zielgruppe = "/downloads/Zielgruppenanalyse.pptx";
-const template_checklist = "/downloads/Checkliste-Interviewführung.docx";
-const buergercheck = "/downloads/Buergercheck.pdf";
 ---
 
 <Layout title={frontmatter.title}>
@@ -30,15 +31,15 @@ const buergercheck = "/downloads/Buergercheck.pdf";
         strukturierten Vorbereitung und Durchführung von Interviews.
       </p>
       <p>
-        Die Inhalte sind auf Basis von den unten aufgeführten Quellen
-        entstanden.
+        Die Inhalte sind auf Basis von den{" "}
+        <a href="#quellen">unten aufgeführten Quellen</a> entstanden.
       </p>
     </Hero>
     <TocContainer>
-      <div class="breakout! bg-lavender-200 pt-64">
+      <div class="breakout bg-lavender-200 pt-64">
         <h2>Anleitung</h2>
       </div>
-      <section class="breakout! bg-lavender-200 pt-32">
+      <section class="breakout bg-lavender-200 pt-32">
         <StepNumber number={1} />
         <h3>Relevante Akteurinnen und Akteure identifizieren</h3>
         <p>
@@ -121,7 +122,10 @@ const buergercheck = "/downloads/Buergercheck.pdf";
             imageAlt="Schematische Darstellung der Vorlage mit dunkelblauen Blöcken mit den Aufschriften Akteursgruppe, Staatlich und Privatwirtschaft"
           >
             <div slot="footer">
-              <a href={template_akteure} class="kern-btn kern-btn--secondary">
+              <a
+                href={akteureAuflisten_docx.path}
+                class="kern-btn kern-btn--secondary"
+              >
                 <span class="kern-icon kern-icon--download" aria-hidden="true"
                 ></span>
                 <span class="kern-label">Word-Vorlage</span>
@@ -137,7 +141,7 @@ const buergercheck = "/downloads/Buergercheck.pdf";
           >
             <div slot="footer">
               <a
-                href={powerpoint_zielgruppe}
+                href={zielgruppenanalyse_pptx.path}
                 class="kern-btn kern-btn--secondary"
               >
                 <span class="kern-icon kern-icon--download" aria-hidden="true"
@@ -148,7 +152,7 @@ const buergercheck = "/downloads/Buergercheck.pdf";
           </KernCard>
         </div>
       </section>
-      <section class="breakout! bg-lavender-200">
+      <section class="breakout bg-lavender-200">
         <StepNumber number={3} />
         <h3>Passende Interviewmethode wählen</h3>
         <p>
@@ -225,11 +229,15 @@ const buergercheck = "/downloads/Buergercheck.pdf";
           Kombination aus offenen und geschlossenen Fragen. Behandelt werden:
         </p>
         <ul>
-          <li><strong>Kontext:</strong> Aufgaben und Abläufe klären</li>
+          <li>
+            <strong>Kontext:</strong> Aufgaben und Abläufe klären
+          </li>
           <li>
             <strong>Erfahrungen:</strong> Probleme und Stärken identifizieren
           </li>
-          <li><strong>Analyse:</strong> Ursachen herausarbeiten</li>
+          <li>
+            <strong>Analyse:</strong> Ursachen herausarbeiten
+          </li>
           <li>
             <strong>Lösungen:</strong> Ansätze und Potenziale bewerten
           </li>
@@ -244,13 +252,15 @@ const buergercheck = "/downloads/Buergercheck.pdf";
           <strong>Weiterführende Quelle: </strong>
           <a
             href="https://www.orghandbuch.de/SharedDocs/faqs/Webs/OHB/DE/Methoden_Befragung/13_Durchfuehrung_muendliches_Interview.html"
-            target="_blank">Orghandbuch des BMI 2026</a
+            target="_blank"
           >
+            Orghandbuch des BMI 2026
+          </a>
         </p>
         <p>
-          <strong
-            >Für die parallele Dokumentation bieten sich folgende Formen an:</strong
-          >
+          <strong>
+            Für die parallele Dokumentation bieten sich folgende Formen an:
+          </strong>
         </p>
         <div class="mt-32">
           <KernAccordion>
@@ -283,8 +293,9 @@ const buergercheck = "/downloads/Buergercheck.pdf";
             </span>
           </KernAccordion>
           <KernAccordion>
-            <span slot="header">Inhaltsnahe Mitschrift / Ergebnisprotokoll</span
-            >
+            <span slot="header">
+              Inhaltsnahe Mitschrift / Ergebnisprotokoll
+            </span>
             <span slot="body" class="accordion-body-full-width space-y-8">
               <p>
                 Hierbei werden die zentralen Aussagen, Argumente und Beispiele
@@ -385,7 +396,7 @@ const buergercheck = "/downloads/Buergercheck.pdf";
           </KernAccordion>
         </div>
       </section>
-      <section class="breakout! bg-lavender-200">
+      <section class="breakout bg-lavender-200">
         <StepNumber number={5} />
         <h3>Auswerten</h3>
         <p>
@@ -393,10 +404,14 @@ const buergercheck = "/downloads/Buergercheck.pdf";
           Menge Informationen zusammen. Im Anschluss werden die gesammelten
           Informationen ausgewertet. In der Regel lassen sich aus mehreren
           Gesprächen zentrale Muster, Herausforderungen und Erfolgsfaktoren
-          ableiten. Nutzen Sie ggf. die <a
+          ableiten. Nutzen Sie ggf. die{" "}
+          <a
             href="https://www.oeffentliches-gestalten.de/buch/erkennen/erkenntnisse-formulieren#individuelle-gespr%C3%A4chsauswertung"
-            target="_blank">Methode Individuelle Gesprächsauswertung</a
-          >, um Schlüsselaspekte herauszuarbeiten.
+            target="_blank"
+          >
+            Methode Individuelle Gesprächsauswertung
+          </a>
+          , um Schlüsselaspekte herauszuarbeiten.
         </p>
       </section>
       <section>
@@ -413,11 +428,14 @@ const buergercheck = "/downloads/Buergercheck.pdf";
             preline="Vorlage"
             title="Checkliste"
             body="Die Checkliste bündelt die wichtigsten Handlungsempfehlun­gen für Vorbereitung, Durchführung und Nachbereitung."
-            image={checklistenImg}
+            image={interviewleitfadenImg}
             imageAlt="Schematische Darstellung der Checkliste mit dem Titel Ablaufplan: Stakeholder-Interviews und Elementen zum  Abhaken"
           >
             <div slot="footer">
-              <a href={template_checklist} class="kern-btn kern-btn--secondary">
+              <a
+                href={checklisteInterviewfuehrung_docx.path}
+                class="kern-btn kern-btn--secondary"
+              >
                 <span class="kern-icon kern-icon--download" aria-hidden="true"
                 ></span>
                 <span class="kern-label">Word-Vorlage</span>
@@ -427,7 +445,7 @@ const buergercheck = "/downloads/Buergercheck.pdf";
         </div>
       </section>
       <section>
-        <h2>Relevante Quellen</h2>
+        <h2 id="quellen">Relevante Quellen</h2>
         <p>
           Nutzen Sie diese Zusammenfassung, um die methodische Qualität Ihrer
           Interviews abzusichern und eine lückenlose Vorbereitung sowie
@@ -466,7 +484,7 @@ const buergercheck = "/downloads/Buergercheck.pdf";
           </li>
           <li>
             <a
-              href={buergercheck}
+              href={buergercheck_pdf.path}
               target="_blank"
               rel="noopener"
               class="text-link text-link--download"

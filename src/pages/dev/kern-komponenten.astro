@@ -63,23 +63,24 @@ export const frontmatter = {
       <p class="kern-label kern-label--large">label--large</p>
       <p class="kern-label">label (default)</p>
       <p class="kern-label kern-label--small">label--small</p>
-      <label class="kern-label"
-        >Mit optionalem Hinweis <span class="kern-label__optional"
-          >- Optional</span
-        ></label
-      >
+      <label class="kern-label">
+        Mit optionalem Hinweis{" "}
+        <span class="kern-label__optional">- Optional</span>
+      </label>
 
       <hr class="kern-divider" aria-hidden="true" />
 
       <h3 class="kern-heading-medium">Link</h3>
       <p class="kern-body">
-        <a href="#" class="kern-link">Standardlink</a> ·
-        <a href="#" class="kern-link">Besucht</a> ·
-        <a href="#" class="kern-link"
-          >Mit Icon <span
-            class="kern-icon kern-icon--open-in-new"
-            aria-hidden="true"></span></a
-        >
+        <a href="#" class="kern-link"> Standardlink </a>{" "}
+        ·
+        <a href="#" class="kern-link"> Besucht </a>{" "}
+        ·
+        <a href="#" class="kern-link">
+          Mit Icon{" "}
+          <span class="kern-icon kern-icon--open-in-new" aria-hidden="true"
+          ></span>
+        </a>
       </p>
     </section>
 
@@ -205,9 +206,9 @@ export const frontmatter = {
         </button>
         <button class="kern-btn kern-btn--secondary">
           <span class="kern-icon kern-icon--edit" aria-hidden="true"></span>
-          <span class="kern-label kern-sr-only-mobile"
-            >Bearbeiten (mobil versteckt)</span
-          >
+          <span class="kern-label kern-sr-only-mobile">
+            Bearbeiten (mobil versteckt)
+          </span>
         </button>
       </div>
 
@@ -461,17 +462,29 @@ export const frontmatter = {
         <div>
           <h3 class="kern-heading-medium">Bullet</h3>
           <ul class="kern-list kern-list--bullet">
-            <li><span class="kern-body">Listenpunkt eins</span></li>
-            <li><span class="kern-body">Listenpunkt zwei</span></li>
-            <li><span class="kern-body">Listenpunkt drei</span></li>
+            <li>
+              <span class="kern-body">Listenpunkt eins</span>
+            </li>
+            <li>
+              <span class="kern-body">Listenpunkt zwei</span>
+            </li>
+            <li>
+              <span class="kern-body">Listenpunkt drei</span>
+            </li>
           </ul>
         </div>
         <div>
           <h3 class="kern-heading-medium">Nummeriert</h3>
           <ol class="kern-list kern-list--number">
-            <li><span class="kern-body">Erster Schritt</span></li>
-            <li><span class="kern-body">Zweiter Schritt</span></li>
-            <li><span class="kern-body">Dritter Schritt</span></li>
+            <li>
+              <span class="kern-body">Erster Schritt</span>
+            </li>
+            <li>
+              <span class="kern-body">Zweiter Schritt</span>
+            </li>
+            <li>
+              <span class="kern-body">Dritter Schritt</span>
+            </li>
           </ol>
         </div>
         <div>
@@ -512,9 +525,9 @@ export const frontmatter = {
         <div class="shrink grow basis-260">
           <h3 class="kern-heading-medium">Text</h3>
           <div class="kern-form-input">
-            <label class="kern-label" for="demo-text"
-              >Name <span class="kern-label__optional">- Optional</span></label
-            >
+            <label class="kern-label" for="demo-text">
+              Name <span class="kern-label__optional">- Optional</span>
+            </label>
             <div class="kern-hint" id="demo-text-hint">
               Ihr vollständiger Name
             </div>
@@ -529,7 +542,7 @@ export const frontmatter = {
 
           <h3 class="kern-heading-medium">Text – Fehler</h3>
           <div class="kern-form-input kern-form-input--error">
-            <label class="kern-label" for="demo-text-err">Name</label>
+            <label class="kern-label" for="demo-text-err"> Name </label>
             <input
               class="kern-form-input__input kern-form-input__input--error"
               id="demo-text-err"
@@ -549,7 +562,7 @@ export const frontmatter = {
         <div class="shrink grow basis-260">
           <h3 class="kern-heading-medium">Email</h3>
           <div class="kern-form-input">
-            <label class="kern-label" for="demo-email">Email</label>
+            <label class="kern-label" for="demo-email"> Email </label>
             <div class="kern-hint" id="demo-email-hint">
               Beispiel: name@domain.de
             </div>
@@ -568,7 +581,7 @@ export const frontmatter = {
         <div class="shrink grow basis-260">
           <h3 class="kern-heading-medium">Passwort</h3>
           <div class="kern-form-input">
-            <label class="kern-label" for="demo-pw">Passwort</label>
+            <label class="kern-label" for="demo-pw"> Passwort </label>
             <input
               class="kern-form-input__input"
               id="demo-pw"
@@ -583,7 +596,7 @@ export const frontmatter = {
         <div class="shrink grow basis-260">
           <h3 class="kern-heading-medium">Telefon</h3>
           <div class="kern-form-input">
-            <label class="kern-label" for="demo-tel">Telefonnummer</label>
+            <label class="kern-label" for="demo-tel"> Telefonnummer </label>
             <input
               class="kern-form-input__input"
               id="demo-tel"
@@ -598,7 +611,7 @@ export const frontmatter = {
         <div class="shrink grow basis-260">
           <h3 class="kern-heading-medium">Zahl</h3>
           <div class="kern-form-input">
-            <label class="kern-label" for="demo-num">Anzahl</label>
+            <label class="kern-label" for="demo-num"> Anzahl </label>
             <input
               class="kern-form-input__input"
               id="demo-num"
@@ -613,7 +626,7 @@ export const frontmatter = {
         <div class="shrink grow basis-xs">
           <h3 class="kern-heading-medium">Textarea</h3>
           <div class="kern-form-input">
-            <label class="kern-label" for="demo-area">Beschreibung</label>
+            <label class="kern-label" for="demo-area"> Beschreibung </label>
             <div class="kern-hint" id="demo-area-hint">Maximal 500 Zeichen</div>
             <textarea
               class="kern-form-input__input"
@@ -628,7 +641,7 @@ export const frontmatter = {
         <div class="shrink grow basis-260">
           <h3 class="kern-heading-medium">Datei-Upload</h3>
           <div class="kern-form-input">
-            <label class="kern-label" for="demo-file">Datei hochladen</label>
+            <label class="kern-label" for="demo-file"> Datei hochladen </label>
             <div class="kern-hint" id="demo-file-hint">
               Erlaubte Formate: jpg, png, pdf
             </div>
@@ -646,7 +659,7 @@ export const frontmatter = {
         <div class="shrink grow basis-260">
           <h3 class="kern-heading-medium">Select</h3>
           <div class="kern-form-input">
-            <label class="kern-label" for="demo-select">Auswählen</label>
+            <label class="kern-label" for="demo-select"> Auswählen </label>
             <div class="kern-hint" id="demo-select-hint">
               Bitte wählen Sie eine Option
             </div>
@@ -667,7 +680,7 @@ export const frontmatter = {
 
           <h3 class="kern-heading-medium">Select – Fehler</h3>
           <div class="kern-form-input kern-form-input--error">
-            <label class="kern-label" for="demo-select-err">Auswählen</label>
+            <label class="kern-label" for="demo-select-err"> Auswählen </label>
             <div class="kern-form-input__select-wrapper">
               <select
                 class="kern-form-input__select kern-form-input__select--error"
@@ -682,8 +695,9 @@ export const frontmatter = {
             <p class="kern-error" id="demo-select-error" role="alert">
               <span class="kern-icon kern-icon--danger" aria-hidden="true"
               ></span>
-              <span class="kern-body">Bitte wählen Sie eine gültige Option</span
-              >
+              <span class="kern-body">
+                Bitte wählen Sie eine gültige Option
+              </span>
             </p>
           </div>
         </div>
@@ -699,7 +713,7 @@ export const frontmatter = {
               id="demo-cb1"
               type="checkbox"
             />
-            <label class="kern-label" for="demo-cb1">Option A</label>
+            <label class="kern-label" for="demo-cb1"> Option A </label>
           </div>
           <div class="kern-form-check">
             <input
@@ -708,9 +722,9 @@ export const frontmatter = {
               type="checkbox"
               checked
             />
-            <label class="kern-label" for="demo-cb2"
-              >Option B (ausgewählt)</label
-            >
+            <label class="kern-label" for="demo-cb2">
+              Option B (ausgewählt)
+            </label>
           </div>
           <div class="kern-form-check">
             <input
@@ -719,9 +733,9 @@ export const frontmatter = {
               type="checkbox"
               disabled
             />
-            <label class="kern-label" for="demo-cb3"
-              >Option C (deaktiviert)</label
-            >
+            <label class="kern-label" for="demo-cb3">
+              Option C (deaktiviert)
+            </label>
           </div>
 
           <div class="kern-form-check kern-form-check--error">
@@ -731,7 +745,9 @@ export const frontmatter = {
               type="checkbox"
               aria-describedby="cb-error"
             />
-            <label class="kern-label" for="demo-cb-err">AGB akzeptieren</label>
+            <label class="kern-label" for="demo-cb-err">
+              AGB akzeptieren
+            </label>
             <p class="kern-error" id="cb-error" role="alert">
               <span class="kern-icon kern-icon--danger" aria-hidden="true"
               ></span>
@@ -753,7 +769,7 @@ export const frontmatter = {
                 name="anrede"
                 type="radio"
               />
-              <label class="kern-label" for="radio-herr">Herr</label>
+              <label class="kern-label" for="radio-herr"> Herr </label>
             </div>
             <div class="kern-form-check">
               <input
@@ -762,7 +778,7 @@ export const frontmatter = {
                 name="anrede"
                 type="radio"
               />
-              <label class="kern-label" for="radio-frau">Frau</label>
+              <label class="kern-label" for="radio-frau"> Frau </label>
             </div>
             <div class="kern-form-check">
               <input
@@ -771,7 +787,7 @@ export const frontmatter = {
                 name="anrede"
                 type="radio"
               />
-              <label class="kern-label" for="radio-divers">Divers</label>
+              <label class="kern-label" for="radio-divers"> Divers </label>
             </div>
           </div>
         </fieldset>
@@ -791,7 +807,7 @@ export const frontmatter = {
                 type="radio"
                 aria-describedby="radio-group-error"
               />
-              <label class="kern-label" for="radio2-herr">Herr</label>
+              <label class="kern-label" for="radio2-herr"> Herr </label>
             </div>
             <div class="kern-form-check">
               <input
@@ -801,7 +817,7 @@ export const frontmatter = {
                 type="radio"
                 aria-describedby="radio-group-error"
               />
-              <label class="kern-label" for="radio2-frau">Frau</label>
+              <label class="kern-label" for="radio2-frau"> Frau </label>
             </div>
           </div>
           <p class="kern-error" id="radio-group-error" role="alert">
@@ -818,7 +834,7 @@ export const frontmatter = {
         <div class="kern-hint" id="date-hint-demo">z. B. 17 3 2015</div>
         <div class="kern-fieldset__body kern-fieldset__body--horizontal">
           <div class="kern-form-input">
-            <label class="kern-label" for="demo-tag">Tag</label>
+            <label class="kern-label" for="demo-tag"> Tag </label>
             <input
               class="kern-form-input__input kern-form-input__input--width-2"
               id="demo-tag"
@@ -827,7 +843,7 @@ export const frontmatter = {
             />
           </div>
           <div class="kern-form-input">
-            <label class="kern-label" for="demo-monat">Monat</label>
+            <label class="kern-label" for="demo-monat"> Monat </label>
             <input
               class="kern-form-input__input kern-form-input__input--width-2"
               id="demo-monat"
@@ -836,7 +852,7 @@ export const frontmatter = {
             />
           </div>
           <div class="kern-form-input">
-            <label class="kern-label" for="demo-jahr">Jahr</label>
+            <label class="kern-label" for="demo-jahr"> Jahr </label>
             <input
               class="kern-form-input__input kern-form-input__input--width-4"
               id="demo-jahr"
@@ -859,7 +875,7 @@ export const frontmatter = {
         </div>
         <div class="kern-fieldset__body">
           <div class="kern-form-input">
-            <label class="kern-label" for="fs-vorname">Vorname</label>
+            <label class="kern-label" for="fs-vorname"> Vorname </label>
             <input
               class="kern-form-input__input kern-form-input__input--error"
               id="fs-vorname"
@@ -868,7 +884,7 @@ export const frontmatter = {
             />
           </div>
           <div class="kern-form-input">
-            <label class="kern-label" for="fs-name">Nachname</label>
+            <label class="kern-label" for="fs-name"> Nachname </label>
             <input
               class="kern-form-input__input kern-form-input__input--error"
               id="fs-name"
@@ -942,27 +958,29 @@ export const frontmatter = {
           <caption class="kern-title">Datentabelle – Standard</caption>
           <thead class="kern-table__head">
             <tr class="kern-table__row">
-              <th scope="col" class="kern-table__header">Name</th>
-              <th scope="col" class="kern-table__header">Ort</th>
+              <th scope="col" class="kern-table__header"> Name </th>
+              <th scope="col" class="kern-table__header"> Ort </th>
               <th
                 scope="col"
-                class="kern-table__header kern-table__header--numeric">Wert</th
+                class="kern-table__header kern-table__header--numeric"
               >
+                Wert
+              </th>
             </tr>
           </thead>
           <tbody class="kern-table__body">
             <tr class="kern-table__row">
-              <th scope="row" class="kern-table__header">Alpha</th>
+              <th scope="row" class="kern-table__header"> Alpha </th>
               <td class="kern-table__cell">Berlin</td>
               <td class="kern-table__cell kern-table__cell--numeric">42</td>
             </tr>
             <tr class="kern-table__row">
-              <th scope="row" class="kern-table__header">Beta</th>
+              <th scope="row" class="kern-table__header"> Beta </th>
               <td class="kern-table__cell">Hamburg</td>
               <td class="kern-table__cell kern-table__cell--numeric">17</td>
             </tr>
             <tr class="kern-table__row">
-              <th scope="row" class="kern-table__header">Gamma</th>
+              <th scope="row" class="kern-table__header"> Gamma </th>
               <td class="kern-table__cell">München</td>
               <td class="kern-table__cell kern-table__cell--numeric">99</td>
             </tr>
@@ -978,43 +996,49 @@ export const frontmatter = {
           <caption class="kern-title">Datentabelle – Striped & Small</caption>
           <thead class="kern-table__head">
             <tr class="kern-table__row">
-              <th scope="col" class="kern-table__header">Bezeichnung</th>
+              <th scope="col" class="kern-table__header"> Bezeichnung </th>
               <th
                 scope="col"
-                class="kern-table__header kern-table__header--numeric">Menge</th
+                class="kern-table__header kern-table__header--numeric"
               >
+                Menge
+              </th>
               <th
                 scope="col"
-                class="kern-table__header kern-table__header--numeric">Preis</th
+                class="kern-table__header kern-table__header--numeric"
               >
+                Preis
+              </th>
             </tr>
           </thead>
           <tbody class="kern-table__body">
             <tr class="kern-table__row">
-              <th scope="row" class="kern-table__header">Produkt A</th>
+              <th scope="row" class="kern-table__header"> Produkt A </th>
               <td class="kern-table__cell kern-table__cell--numeric">3</td>
-              <td class="kern-table__cell kern-table__cell--numeric">12,00 €</td
-              >
+              <td class="kern-table__cell kern-table__cell--numeric">
+                12,00 €
+              </td>
             </tr>
             <tr class="kern-table__row">
-              <th scope="row" class="kern-table__header">Produkt B</th>
+              <th scope="row" class="kern-table__header"> Produkt B </th>
               <td class="kern-table__cell kern-table__cell--numeric">1</td>
-              <td class="kern-table__cell kern-table__cell--numeric">45,00 €</td
-              >
+              <td class="kern-table__cell kern-table__cell--numeric">
+                45,00 €
+              </td>
             </tr>
             <tr class="kern-table__row">
-              <th scope="row" class="kern-table__header">Produkt C</th>
+              <th scope="row" class="kern-table__header"> Produkt C </th>
               <td class="kern-table__cell kern-table__cell--numeric">7</td>
               <td class="kern-table__cell kern-table__cell--numeric">8,50 €</td>
             </tr>
           </tbody>
           <tfoot class="kern-table__footer">
             <tr class="kern-table__row">
-              <th scope="row" class="kern-table__header">Gesamt</th>
+              <th scope="row" class="kern-table__header"> Gesamt </th>
               <td class="kern-table__cell kern-table__cell--numeric">11</td>
-              <td class="kern-table__cell kern-table__cell--numeric"
-                >153,50 €</td
-              >
+              <td class="kern-table__cell kern-table__cell--numeric">
+                153,50 €
+              </td>
             </tr>
           </tfoot>
         </table>
@@ -1096,8 +1120,10 @@ export const frontmatter = {
               <a
                 href="#"
                 class="kern-link kern-link--stretched"
-                aria-describedby="task-1-status">Persönliche Angaben</a
+                aria-describedby="task-1-status"
               >
+                Persönliche Angaben
+              </a>
               <div class="kern-task-list__status" id="task-1-status">
                 <span class="kern-badge kern-badge--success">
                   <span class="kern-icon kern-icon--success" aria-hidden="true"
@@ -1113,8 +1139,10 @@ export const frontmatter = {
               <a
                 href="#"
                 class="kern-link kern-link--stretched"
-                aria-describedby="task-2-status">Dokumente hochladen</a
+                aria-describedby="task-2-status"
               >
+                Dokumente hochladen
+              </a>
               <div class="kern-task-list__status" id="task-2-status">
                 <span class="kern-badge kern-badge--warning">
                   <span class="kern-label kern-label--small">Ausstehend</span>
@@ -1128,13 +1156,15 @@ export const frontmatter = {
               <a
                 href="#"
                 class="kern-link kern-link--stretched"
-                aria-describedby="task-3-status">Zusammenfassung prüfen</a
+                aria-describedby="task-3-status"
               >
+                Zusammenfassung prüfen
+              </a>
               <div class="kern-task-list__status" id="task-3-status">
                 <span class="kern-badge kern-badge--info">
-                  <span class="kern-label kern-label--small"
-                    >Nicht begonnen</span
-                  >
+                  <span class="kern-label kern-label--small">
+                    Nicht begonnen
+                  </span>
                 </span>
               </div>
             </div>
@@ -1163,11 +1193,11 @@ export const frontmatter = {
     <section aria-labelledby="progress-heading">
       <h2 class="kern-heading-large" id="progress-heading">Fortschritt</h2>
       <div class="kern-progress">
-        <label class="kern-label" for="progress-demo">Schritt 2 von 5</label>
+        <label class="kern-label" for="progress-demo"> Schritt 2 von 5 </label>
         <progress id="progress-demo" value="2" max="5"></progress>
       </div>
       <div class="kern-progress">
-        <label class="kern-label" for="progress-demo2">Schritt 5 von 5</label>
+        <label class="kern-label" for="progress-demo2"> Schritt 5 von 5 </label>
         <progress id="progress-demo2" value="5" max="5"></progress>
       </div>
     </section>

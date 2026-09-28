@@ -44,6 +44,8 @@ export default defineConfig({
     generateRoutes({
       pagesDir: "src/pages",
       output: "src/config/routes.ts",
+      downloadsDir: "public/downloads",
+      downloadsOutput: "src/config/downloads.ts",
     }),
     pagefind({
       indexConfig: {

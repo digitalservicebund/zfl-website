@@ -4,6 +4,7 @@ import Hero from "@/components/Hero.astro";
 import ImageTextOverlay from "@/components/ImageTextOverlay.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import { werkzeuge_ressourcen_interviewleitfaden } from "@/config/routes";
+import { schaubildTechnischeUmsetzbarkeit_pdf } from "@/config/downloads";
 import technischeUmsetzbarkeit from "../_assets/technischeUmsetzbarkeit.png";
 
 const frontmatter = {
@@ -11,8 +12,6 @@ const frontmatter = {
   navLabel: "Technische Umsetzbarkeit",
   navOrder: 5,
 };
-
-const schaubild = "/downloads/SchaubildTechnischeUmsetzbarkeit.pdf";
 ---
 
 <Layout title={frontmatter.title}>
@@ -27,43 +26,45 @@ const schaubild = "/downloads/SchaubildTechnischeUmsetzbarkeit.pdf";
         IT-Expertinnen und -Experten.
       </p>
     </Hero>
-    <section class="breakout bg-lavender-200">
-      <h2>Verstehen Sie die Auswirkungen auf IT-Systeme</h2>
-      <p>
-        Vergleichen Sie gemeinsam mit den <a
-          href={werkzeuge_ressourcen_interviewleitfaden.path}
-          >zuständigen Akteurinnen und Akteuren</a
-        > das geplante Vorhaben mit den Möglichkeiten der bestehenden IT-Systeme.
-        Überprüfen Sie die Informationen mithilfe neutraler IT-Expertinnen und -Experten.
-      </p>
-      <p>So erfahren Sie</p>
-      <ul>
-        <li>welche IT-Systeme für Ihr Vorhaben verwendet werden können</li>
-        <li>und an welchen Stellen Änderungen nötig sind.</li>
-      </ul>
+    <section class="breakout bg-lavender-200 space-y-32">
+      <div>
+        <h2>Verstehen Sie die Auswirkungen auf IT-Systeme</h2>
+        <p>
+          Vergleichen Sie gemeinsam mit den{" "}
+          <a href={werkzeuge_ressourcen_interviewleitfaden.path}>
+            zuständigen Akteurinnen und Akteuren
+          </a>{" "}
+          das geplante Vorhaben mit den Möglichkeiten der bestehenden IT-Systeme.
+          Überprüfen Sie die Informationen mithilfe neutraler IT-Expertinnen und -Experten.
+        </p>
+        <p>So erfahren Sie</p>
+        <ul>
+          <li>welche IT-Systeme für Ihr Vorhaben verwendet werden können</li>
+          <li>und an welchen Stellen Änderungen nötig sind.</li>
+        </ul>
+      </div>
       <ImageTextOverlay
         image={technischeUmsetzbarkeit}
         imageAlt="Schematische und stilisierte Darstellung des Dokuments Gesprächsleitfaden technische Umsetzbarkeit. Mehrere bunte Kästen sind untereinander dargestellt, mit einer schwarzen Linie, die sie verbindet. "
-        linkHref={schaubild}
+        imageBorder
+        linkHref={schaubildTechnischeUmsetzbarkeit_pdf.path}
         linkText="Vorlage herunterladen (PDF-Datei)"
         icon="open-in-new"
       >
-        <Fragment slot="content">
-          <h2>Gesprächsleitfaden: Aspekte technischer Umsetzbarkeit</h2>
-          <p>
-            Besprechen Sie die Fragen im Schaubild gemeinsam mit den
-            IT-Expertinnen und Experten in der Umsetzung. Multidisziplinäre
-            Zusammenarbeit ist hier der Schlüssel.
-          </p>
-          <p>Das PDF ist barrierearm/barrierefrei.</p>
-        </Fragment>
+        <h3>Gesprächsleitfaden: Aspekte technischer Umsetzbarkeit</h3>
+        <p>
+          Besprechen Sie die Fragen im Schaubild gemeinsam mit den
+          IT-Expertinnen und Experten in der Umsetzung. Multidisziplinäre
+          Zusammenarbeit ist hier der Schlüssel.
+        </p>
+        <p>Das PDF ist barrierearm/barrierefrei.</p>
       </ImageTextOverlay>
       <h3>Sie müssen nicht alles allein bewältigen</h3>
       <p>
-        Bei kleinen Fragen rufen Sie den Support an unter <a
-          href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a
-        >. Für ein unterstützendes, einstündiges Videotelefonat schreiben Sie
-        eine E-Mail an <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>.
+        Bei kleinen Fragen rufen Sie den Support an unter{" "}
+        <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>. Für ein
+        unterstützendes, einstündiges Videotelefonat schreiben Sie eine E-Mail
+        an <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>.
       </p>
     </section>
     <section>

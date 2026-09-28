@@ -73,8 +73,8 @@ fileignoreconfig:
   - filename: src/pages/dev/kern-komponenten.astro
     allowed_patterns:
       - key
-  - filename: public/downloads/2026-02-Anleitung-Fokusgruppe.pdf
-    checksum: 80bdb51a9b0cc47cf426516f333c0c59ccab9a1a68b2d1a412c560906e96f15a
+  - filename: public/downloads/Anleitung-Fokusgruppe-2026-02.pdf
+    checksum: f08773ef81ca157bc1a379c5386e260c4eaf58732c8dde14699940e4e54987fb
   - filename: "*.jpg"
     checksum: be575fbd00cc04575751289146248f1e64acd5144c5d5ac2e66ec4b48717d50e
   - filename: "*.png"
@@ -88,9 +88,6 @@ fileignoreconfig:
   - filename: src/pages/werkzeuge/ressourcen/flussdiagramme.astro
     allowed_patterns:
       - "Falls Sie noch keine Legende haben, erstellen Sie eine."
-  - filename: src/scripts/toc.ts
-    allowed_patterns:
-      - $el
   - filename: src/content/visualisierung/ablauf-eines-online-verfahrens.md
     checksum: 3932230805182a9e132fbb7ec41ef5dc7447f98c77fef3d5faf7460ca1e97c2a
   - filename: src/content/visualisierung/uebersicht-verantwortlicher-akteure.md
@@ -101,8 +98,8 @@ fileignoreconfig:
     checksum: cb597079743914c8e1df3372772f970b33394b7583c858c5c200a5603b981d3a
   - filename: src/content/visualisierung/verknuepfung-von-paragraphen-und-prozessschitten.jpg
     checksum: d36251a8ba44b5b5b0906dfe1af5549621605bac7f0e5492742d9c2b9fd01b2b
-  - filename: public/downloads/SchaubildTechnischeUmsetzbarkeit.pdf
-    checksum: a9e7eb714221a776c9d23e918fa6cdc84ce306e7f0f7d86fee453b4e888d58d5
+  - filename: public/downloads/Schaubild_technische_Umsetzbarkeit.pdf
+    checksum: b803bae7b0e7349a5f67cc39c04b50d20ead9bd03becfc83e9371e57cbc8bbaf
   - filename: src/pages/werkzeuge/ressourcen/_assets/flussdiagramm-video.mp4
     checksum: f5f37084c86e45cd303f1280d8deb8143310473d64d3ede12ce4882bd59a121f
   - filename: public/downloads/Buergercheck.pdf
@@ -114,7 +111,7 @@ fileignoreconfig:
   - filename: src/content/visualisierungen/ablauf-eines-online-verfahrens.md
     checksum: 6f55b8b8f0fbcbb1b478b158ce66e236ac1cef4d0d3357bf21703989e548ca8b
   - filename: src/scripts/toc.ts
-    checksum: 81ebc6889c6372af7408d61ada6407b042255d325579c39941281a9d158417e4
+    checksum: dd12a3c7ae848776bf7d80d7ffe7502265785a6edaa5bd9f7b6cc3e1467d029e
   - filename: public/downloads/Zielgruppenanalyse.pptx
     checksum: d3158428fdd66fe859dbd09de7d6062fada34e38ca9e021d7e9708a7660ad877
   - filename: src/content/visualisierungen/verknuepfung-von-paragraphen-und-prozessschitten.jpg
@@ -125,6 +122,14 @@ fileignoreconfig:
     checksum: 6fd026b3401e84ff4d82109e3e2c14964fa1d9ba70b1a61fff5b8b6f21ed737f
   - filename: src/content/werkzeuge/visualisierungen.png
     checksum: d68b2abea5a2f030c40821897777800100d7491f847bdea1993c190c6ed16800
+  - filename: src/pages/werkzeuge/ressourcen/technische-umsetzbarkeit.astro
+    allowed_patterns: [IT-Anpassungen]
+  - filename: src/pages/ueber/zahlen-und-fakten.astro # posthog dashboard links
+    allowed_patterns:
+      - rZHw3Hn9HKW-86-1nHQUWP0LZe5-cg
+      - Sxzmf2FkxTibbNVByMIFM3srA_7GBw
+  - filename: src/images/online-schulung.jpg
+    ignore_detectors: [filecontent]
 scopeconfig:
   - scope: node
 allowed_patterns:

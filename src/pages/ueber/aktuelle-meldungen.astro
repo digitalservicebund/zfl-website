@@ -2,6 +2,7 @@
 import Hero from "@/components/Hero.astro";
 import PostTeaser from "@/components/PostTeaser.astro";
 import Layout from "@/layouts/Layout.astro";
+import { behoerdenSpiegelJuni2026_pdf } from "@/config/downloads";
 
 export const frontmatter = {
   title: "Aktuelle Meldungen",
@@ -48,7 +49,7 @@ export const frontmatter = {
         title="Quo Vadis, Rechtsetzung?"
         date="02.06.2026"
         source="BehördenSpiegel"
-        href="/downloads/behoerden_spiegel_juni-2026.pdf"
+        href={behoerdenSpiegelJuni2026_pdf.path}
         body="Das Zentrum für Legistik gestaltet als neue zentrale Einheit im Bundesministerium für Digitales und Staatsmodernisierung den Wandel zu einer modernen und innovativen Rechtsetzung aktiv mit. Nach sechs Monaten Modernisierungsagenda ist Zeit für eine erste Bilanz."
       />
       <hr class="kern-divider" aria-hidden="true" />

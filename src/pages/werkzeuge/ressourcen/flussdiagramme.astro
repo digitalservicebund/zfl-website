@@ -7,6 +7,7 @@ import StepNumber from "@/components/StepNumber.astro";
 import InfoPanel from "@/components/InfoPanel.astro";
 import KernCard from "@/components/KernCard.astro";
 import { ZFL_EMAIL } from "@/config/constants";
+import { anleitungFlussdiagrammErstellen_pptx } from "@/config/downloads";
 import IconAutoStories from "~icons/ic/baseline-auto-stories";
 import startEndImg from "./_assets/start-endsymbol.png";
 import akteurImg from "./_assets/akteurin-akteur.png";
@@ -26,6 +27,7 @@ import informationen6Img from "./_assets/informationen-6.png";
 import flussdiagramm6Img from "./_assets/flussdiagramm-6.png";
 import flussdiagrammThumbnail from "./_assets/flussdiagrammThumbnail.png";
 import flussdiagrammVideo from "./_assets/flussdiagramm-video.mp4";
+import type { WerkzeugType } from "@/content.config";
 
 import { getEntries } from "astro:content";
 
@@ -75,7 +77,6 @@ const aufbauElemente = [
 
 const conceptboardTemplate =
   "https://bmas.de.conceptboard.com/board-welcome/board/qh33-xcny-usde-7nc6-82cy?afterwardsUrl=https%3A%2F%2Fbmas.de.conceptboard.com%2Fboard%2Fqh33-xcny-usde-7nc6-82cy";
-const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
 ---
 
 <Layout title={frontmatter.title}>
@@ -89,7 +90,7 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
       </p>
     </Hero>
     <TocContainer>
-      <section class="breakout! bg-lavender-200 pt-64">
+      <section class="breakout bg-lavender-200 pt-64">
         <h2 data-toc-label="Übersicht">
           Typischer Aufbau eines Flussdiagramms
         </h2>
@@ -157,7 +158,7 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
           </a>
         </video>
       </section>
-      <section class="breakout! bg-lavender-200">
+      <section class="breakout bg-lavender-200">
         <h2 class="mb-32">Anleitung</h2>
         <StepNumber number={1} />
         <h3 data-toc-label="Format">
@@ -170,7 +171,9 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
           – wichtig ist, dass Sie anfangen. Sie können auch in einem einfachen
           Whiteboard-Programm oder Powerpoint arbeiten.
         </p>
-        <p><b>Darauf sollten Sie achten:</b></p>
+        <p>
+          <b>Darauf sollten Sie achten:</b>
+        </p>
         <ul>
           <li>Visualisierung ist klar strukturiert und gut lesbar</li>
           <li>Beschränkt sich auf die wesentlichen Elemente des Prozesses</li>
@@ -186,7 +189,8 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
               enthalten. Sie können diese ausdrucken oder an Ihrem Computer bearbeiten.
               Sofern in Ihrem Ressort <strong>Conceptboard</strong> genutzt werden
               kann, können Sie sich auch eine Kopie dieser Conceptboard-Vorlage erstellen.
-              Für letzteres können Sie einen <strong>Gast-Zugang</strong> anlegen.
+              Für letzteres können Sie einen <strong>Gast-Zugang</strong>{" "}
+              anlegen.
             </p>
             <ul class="list-unstyled space-y-8">
               <li>
@@ -194,15 +198,19 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
                   href={conceptboardTemplate}
                   target="_blank"
                   rel="noopener"
-                  class="text-link">Conceptboard-Vorlage</a
+                  class="text-link"
                 >
+                  Conceptboard-Vorlage
+                </a>
               </li>
               <li>
                 <a
-                  href={powerpointTemplate}
+                  href={anleitungFlussdiagrammErstellen_pptx.path}
                   class="text-link text-link--download"
-                  download>Powerpoint-Vorlage</a
+                  download
                 >
+                  Powerpoint-Vorlage
+                </a>
               </li>
             </ul>
             <p>
@@ -246,7 +254,7 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
           </div>
         </InfoPanel>
       </section>
-      <section class="breakout! bg-lavender-200">
+      <section class="breakout bg-lavender-200">
         <StepNumber number={3} />
         <h3 data-toc-label="Ziele & Perspektiven">
           Legen Sie fest, was Ziel und Perspektive der Visualisierung sind
@@ -326,7 +334,9 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
             zoom={true}
           />
           <div>
-            <p><b>Beispiel: Fahrerlaubnis</b></p>
+            <p>
+              <b>Beispiel: Fahrerlaubnis</b>
+            </p>
             <ul>
               <li>
                 Der Startpunkt für die Fahrschülerin ist der Wunsch, einen
@@ -340,7 +350,7 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
           </div>
         </InfoPanel>
       </section>
-      <section class="breakout! bg-lavender-200 space-y-32">
+      <section class="breakout bg-lavender-200 space-y-32">
         <div>
           <StepNumber number={5} />
           <h3 data-toc-label="Prozess abbilden">
@@ -411,7 +421,9 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
             zoom={true}
           />
           <div>
-            <p><b>Beispiel Fahrerlaubnis</b></p>
+            <p>
+              <b>Beispiel Fahrerlaubnis</b>
+            </p>
             <ul>
               <li>
                 <b>Akteure</b> (Fahrschülerin, Fahrschule, Meldebehörde) haben je
@@ -422,9 +434,8 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
                 der Fahrschülerin-Schwimmbahn.
               </li>
               <li>
-                Prozess-Ablauf wird durch <b>Verbindungslinien</b> und <b
-                  >Schritte</b
-                > dargestellt.
+                Prozess-Ablauf wird durch <b>Verbindungslinien</b> und{" "}
+                <b>Schritte</b> dargestellt.
               </li>
               <li>
                 Wesentliche <b>Paragraphen</b> (z.B. FeV § 16, BMG § 18) sind in den
@@ -476,7 +487,9 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
             <li>Leitfrage, die beantwortet wird und,</li>
             <li>falls zutreffend, Seitenzahlen</li>
           </ul>
-          <p><b>Darauf sollten Sie achten:</b></p>
+          <p>
+            <b>Darauf sollten Sie achten:</b>
+          </p>
           <ul>
             <li>
               Zusammenhänge und Abgrenzungen sind klar erkennbar z.B. zu anderen
@@ -492,7 +505,9 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
             zoom={true}
           />
           <div>
-            <p><b>Beispiel: Fahrerlaubnis</b></p>
+            <p>
+              <b>Beispiel: Fahrerlaubnis</b>
+            </p>
             <ul>
               <li>
                 <b>Ablauf/Entscheidungen</b>: Der Prozess ist durch
@@ -515,7 +530,9 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
 
     <section class="breakout-grid space-y-32">
       <h2>Weitere Ressourcen</h2>
-      <div class="lg:grid lg:grid-cols-2 lg:gap-32 xl:grid-cols-3">
+      <div
+        class="grid gap-y-32 sm:grid-cols-1 lg:grid-cols-2 lg:gap-x-32 xl:grid-cols-3"
+      >
         {
           external_ressources.map((ressource) => (
             <KernCard
@@ -529,7 +546,7 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
             >
               <div slot="pre-header" class="mb-16 flex w-full justify-between">
                 <div class="flex gap-8">
-                  {ressource.data.type.map((type) => (
+                  {ressource.data.type.map((type: WerkzeugType) => (
                     <span
                       class={`kern-badge kern-badge--${type.toLowerCase()}`}
                     >
@@ -540,7 +557,7 @@ const powerpointTemplate = "/downloads/Anleitung_Flussdiagramm_erstellen.pptx";
               </div>
               <div
                 slot="footer"
-                class="text-icon-muted! flex items-center gap-8"
+                class="text-icon-muted flex items-center gap-8"
               >
                 <IconAutoStories class="h-32 w-32 shrink-0" />
                 <p class="kern-subline kern-subline-dark py-0">

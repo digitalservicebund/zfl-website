@@ -15,6 +15,7 @@ import {
   ueber_aktuelleMeldungen,
   ueber_daranArbeitenWir,
   ueber_neueFruehphase,
+  ueber_zahlenUndFakten,
   werkzeuge,
   werkzeuge_praxistauglichkeit,
   werkzeuge_ressourcen,
@@ -39,7 +40,7 @@ export const frontmatter = {
       <Metadata lastUpdate="31.08.2026" nextUpdate="Oktober 2026" />
     </Hero>
 
-    <section class="breakout breakout-grid">
+    <section>
       <h2>Aktuelle Arbeitspakete im dritten Quartal 2026</h2>
       <p>
         Das Angebot des Zentrum für Legistik, zu dem auch der Digitalcheck
@@ -57,12 +58,12 @@ export const frontmatter = {
           <p>
             Die Frühphase eines gesetzlichen Vorhabens entscheidet oft darüber,
             wie gut eine Regelung später funktioniert. Gemeinsam mit Legistinnen
-            und Legisten entwickeln wir ein neues
-            {" "}<a href={ueber_neueFruehphase.path} class="font-bold"
-              >Konzept der Frühphase</a
-            >. Dabei starten wir mit einer prozessualen Übersicht, die dabei
-            hilft, eine Regelung anhand einer klaren Struktur inhaltlich zu
-            durchdenken.
+            und Legisten entwickeln wir ein neues{" "}
+            <a href={ueber_neueFruehphase.path} class="font-bold">
+              Konzept der Frühphase
+            </a>
+            . Dabei starten wir mit einer prozessualen Übersicht, die dabei hilft,
+            eine Regelung anhand einer klaren Struktur inhaltlich zu durchdenken.
           </p>
         </KernCard>
 
@@ -73,21 +74,23 @@ export const frontmatter = {
             </span>
           </div>
           <p>
-            Der <a href="https://digitalcheck.bund.de/" class="font-bold"
-              >Digitalcheck</a
-            > wird gemäß der föderalen Modernisierungsagenda auch für die Länder ein
-            verlässliches, gut auffindbares Angebot. <strong
-              >Kooperationen zwischen Bund und Ländern</strong
-            > werden gestärkt.
+            Der{" "}
+            <a href="https://digitalcheck.bund.de/" class="font-bold">
+              Digitalcheck
+            </a>{" "}
+            wird gemäß der föderalen Modernisierungsagenda auch für die Länder ein
+            verlässliches, gut auffindbares Angebot.{" "}
+            <strong>Kooperationen zwischen Bund und Ländern</strong> werden gestärkt.
           </p>
           <p>
             Methoden und Beispiele ziehen Schritt für Schritt auf das Zentrum
             für Legistik um, Inhalte werden in Bezug auf Nutzen und Einfachheit
             verbessert. Landes-Legistinnen und -Legisten können die Inhalte
-            nutzen. Dabei setzen wir auch die <a
-              href="https://dachmarke.gov.de/"
-              class="font-bold">Dachmarke</a
-            > um, für die bessere Erkennbarkeit staatlicher Angebote für Bund, Ländern
+            nutzen. Dabei setzen wir auch die{" "}
+            <a href="https://dachmarke.gov.de/" class="font-bold">
+              Dachmarke
+            </a>{" "}
+            um, für die bessere Erkennbarkeit staatlicher Angebote für Bund, Ländern
             und Kommunen.
           </p>
         </KernCard>
@@ -107,13 +110,16 @@ export const frontmatter = {
           <p>
             Gemeinsam mit Expertinnen und Experten erarbeiten wir einen
             Kompetenzrahmen, der zeigt, welches Wissen und welche Fähigkeiten in
-            der Praxis zählen. Der Rahmen versteht sich als <strong
-              >Orientierung, nicht als starre Vorgabe</strong
-            >. Er wächst als lebendes Modell mit– auch als fachliche und
-            strukturelle Grundlage für das zukünftige Schulungscurriculum.
+            der Praxis zählen. Der Rahmen versteht sich als{" "}
+            <strong>Orientierung, nicht als starre Vorgabe</strong>. Er wächst
+            als lebendes Modell mit– auch als fachliche und strukturelle
+            Grundlage für das zukünftige Schulungscurriculum.
           </p>
         </KernCard>
       </div>
+    </section>
+
+    <section>
       <h2>Ergänzende Themen</h2>
       <ul>
         <li>
@@ -121,12 +127,14 @@ export const frontmatter = {
           verschiedener Checks wird die Regelungsarbeit vereinfacht.
         </li>
         <li>
-          <a href={schulungen.path} class="font-bold">Schulungen:</a> Kontinuierliche
-          Erweiterung des Schulungsangebot – online und in Präsenzformaten
+          <a href={schulungen.path} class="font-bold"> Schulungen: </a>{" "}
+          Kontinuierliche Erweiterung des Schulungsangebot – online und in Präsenzformaten
         </li>
         <li>
-          <a href={begleitungen.path} class="font-bold">Regelungsbegleitung:</a> Laufende
-          Unterstützung von Referaten bei ausgewählten Vorhaben
+          <a href={begleitungen.path} class="font-bold">
+            Regelungsbegleitung:
+          </a>{" "}
+          Laufende Unterstützung von Referaten bei ausgewählten Vorhaben
         </li>
       </ul>
     </section>
@@ -145,9 +153,9 @@ export const frontmatter = {
         überschaubar und wird vorab mit Ihnen abgestimmt.
       </p>
       <strong>
-        Kontaktieren Sie uns zu diesem Zweck unter <a href={ZFL_PHONE.url}
-          >{ZFL_PHONE.display}</a
-        > oder <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>.
+        Kontaktieren Sie uns zu diesem Zweck unter{" "}
+        <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a> oder{" "}
+        <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>.
       </strong>
     </section>
 
@@ -158,17 +166,39 @@ export const frontmatter = {
           <Badge look="timelineYear">2026</Badge>
         </li>
         <li>
+          <Badge look="timeline">September 2026</Badge>
+          <h3>Schulungsmaterialien und Zahlen und Fakten</h3>
+          <ul>
+            <li>
+              Schulungen: Unterlagen zum Herunterladen ergänzt
+              <a href={`${schulungen.path}#downloads`} class="block">
+                Hier ansehen
+              </a>
+            </li>
+            <li>
+              Zahlen und Fakten: Kennzahlen und Visualisierungen ergänzt
+              <a href={ueber_zahlenUndFakten.path} class="block">
+                Hier ansehen
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
           <Badge look="timeline">August 2026</Badge>
           <h3>Neue Informationen zur Frühphase und Leitfäden</h3>
           <ul>
             <li>
               Seiten vom Digitalcheck umgezogen: Methoden und Leitfäden
-              <a href={werkzeuge_ressourcen.path} class="block">Hier ansehen</a>
+              <a href={werkzeuge_ressourcen.path} class="block">
+                Hier ansehen
+              </a>
             </li>
             <li>
               Neue Seite ergänzt: Scrollbare Darstellung des
               Gesetzgebungsprozesses
-              <a href={bessereRechtsetzung.path} class="block">Hier ansehen</a>
+              <a href={bessereRechtsetzung.path} class="block">
+                Hier ansehen
+              </a>
             </li>
           </ul>
         </li>
@@ -178,9 +208,9 @@ export const frontmatter = {
           <ul>
             <li>
               Neue Seite ergänzt: Vorhaben praxistauglich gestalten
-              <a href={werkzeuge_praxistauglichkeit.path} class="block"
-                >Hier ansehen</a
-              >
+              <a href={werkzeuge_praxistauglichkeit.path} class="block">
+                Hier ansehen
+              </a>
             </li>
           </ul>
         </li>
@@ -191,7 +221,9 @@ export const frontmatter = {
             <li>Neue Funktion: Volltextsuche</li>
             <li>
               Neue Seite ergänzt: Die neue Frühphase
-              <a href={ueber_neueFruehphase.path} class="block">Hier ansehen</a>
+              <a href={ueber_neueFruehphase.path} class="block">
+                Hier ansehen
+              </a>
             </li>
           </ul>
         </li>
@@ -202,18 +234,18 @@ export const frontmatter = {
             <li>
               Startseite: Aktuelles und Newsletter ergänzt, Einstieg in
               Website-Bereiche vereinfacht
-              <a href={home.path} class="block">Hier ansehen</a>
+              <a href={home.path} class="block"> Hier ansehen </a>
             </li>
             <li>
               Werkzeuge Seite: Inhalte erweitert, Sortierung und Filter ergänzt
-              <a href={werkzeuge.path} class="block">Hier ansehen</a>
+              <a href={werkzeuge.path} class="block"> Hier ansehen </a>
             </li>
             <li>
               Daran arbeiten wir: Umsetzungsstand bei aktuellen Arbeitspaketen
               ergänzt
-              <a href={ueber_daranArbeitenWir.path} class="block"
-                >Hier ansehen</a
-              >
+              <a href={ueber_daranArbeitenWir.path} class="block">
+                Hier ansehen
+              </a>
             </li>
           </ul>
         </li>
@@ -224,21 +256,21 @@ export const frontmatter = {
           <ul>
             <li>
               Neue Seite ergänzt: Kontakt
-              <a href={kontakt.path} class="block">Hier ansehen</a>
+              <a href={kontakt.path} class="block"> Hier ansehen </a>
             </li>
             <li>
               Neue Seite ergänzt: Aktuelle Meldungen
-              <a href={ueber_aktuelleMeldungen.path} class="block"
-                >Hier ansehen</a
-              >
+              <a href={ueber_aktuelleMeldungen.path} class="block">
+                Hier ansehen
+              </a>
             </li>
             <li>
               Über Uns: Unter-Navigation ergänzt
-              <a href={ueber.path} class="block">Hier ansehen</a>
+              <a href={ueber.path} class="block"> Hier ansehen </a>
             </li>
             <li>
               Neuer Bereich ergänzt: Über Uns
-              <a href={ueber.path} class="block">Hier ansehen</a>
+              <a href={ueber.path} class="block"> Hier ansehen </a>
             </li>
           </ul>
         </li>
@@ -248,10 +280,10 @@ export const frontmatter = {
           <h3>Neues Design der Website</h3>
           <ul>
             <li>
-              Seitendesign: Umstellung auf den <a
-                href="https://www.kern-ux.de/"
-                target="_blank">KERN-UX-Standard</a
-              >
+              Seitendesign: Umstellung auf den{" "}
+              <a href="https://www.kern-ux.de/" target="_blank">
+                KERN-UX-Standard
+              </a>
             </li>
           </ul>
         </li>
@@ -262,19 +294,19 @@ export const frontmatter = {
           <ul>
             <li>
               Regelungsbegleitungen: Tabelle mit Service-Paketen ergänzt
-              <a href={`${begleitungen.path}#leistungspakete`} class="block"
-                >Hier ansehen</a
-              >
+              <a href={`${begleitungen.path}#leistungspakete`} class="block">
+                Hier ansehen
+              </a>
             </li>
             <li>
               Schulungen: Hinweise zu externen Angeboten ergänzt
-              <a href={`${schulungen.path}#schulungen-weitere`} class="block"
-                >Hier ansehen</a
-              >
+              <a href={`${schulungen.path}#schulungen-weitere`} class="block">
+                Hier ansehen
+              </a>
             </li>
             <li>
               Neue Seite ergänzt: Anleitungen und Hilfsmittel
-              <a href={werkzeuge.path} class="block">Hier ansehen</a>
+              <a href={werkzeuge.path} class="block"> Hier ansehen </a>
             </li>
           </ul>
         </li>
