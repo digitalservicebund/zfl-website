@@ -1,0 +1,303 @@
+---
+import Hero from "@/components/Hero.astro";
+import Layout from "@/layouts/Layout.astro";
+import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
+import IconBackHand from "~icons/ic/outline-back-hand";
+import IconPublic from "~icons/ic/outline-public";
+import IconShield from "~icons/ic/outline-shield";
+import IconThumbUp from "~icons/ic/outline-thumb-up";
+import IconGridView from "~icons/ic/outline-grid-view";
+import { werkzeuge_ressourcen } from "@/config/routes";
+
+export const frontmatter = {
+  title: "Qualitätskriterien zur Aufnahme externer Inhalte",
+  sitemap: true,
+  isStagingOnly: true,
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero level="sub">
+      <h1>{frontmatter.title}</h1>
+      <p>
+        Auf der Seite <a href={werkzeuge_ressourcen.path}>Ressourcen</a> sammeln
+        wir Werkzeuge, die Legistinnen und Legisten bei der Regelungsarbeit
+        unterstützen. Um eine hohe Qualität der Sammlung zu gewährleisten,
+        wählen wir externe Werkzeuge nach den folgenden Kriterien aus.
+      </p>
+    </Hero>
+
+    <section>
+      <div class="grid grid-cols-1 gap-x-64 gap-y-56 md:grid-cols-2">
+        <div class="flex flex-col gap-32">
+          <div class="text-cosmic-blue-400 bg-lavender-400 flex size-64 flex-none items-center justify-center rounded-sm">
+            <IconBackHand class="size-32" aria-hidden="true" />
+          </div>
+          <h2 class="m-0">Praxistauglichkeit und Verständlichkeit</h2>
+          <ul class="list-unstyled checklist">
+            <li>
+              <span
+                class="kern-icon kern-icon--check kern-icon--default"
+                aria-hidden="true"
+              ></span>
+              <div class="space-y-4">
+                <p class="kern-heading-medium">Sofortiger Einsatz:</p>
+                <p>
+                  Legistinnen und Legisten können das Werkzeug direkt und ohne
+                  Transferleistung in ihren Arbeitsalltag integrieren.
+                </p>
+              </div>
+            </li>
+            <li>
+              <span
+                class="kern-icon kern-icon--check kern-icon--default"
+                aria-hidden="true"
+              ></span>
+              <div class="space-y-4">
+                <p class="kern-heading-medium">Klarer Einsatzzeitpunkt:</p>
+                <p>
+                  Es ist klar zu erkennen, in welchem Verfahrensschritt das
+                  Werkzeug angewendet werden kann.
+                </p>
+              </div>
+            </li>
+            <li>
+              <span
+                class="kern-icon kern-icon--check kern-icon--default"
+                aria-hidden="true"
+              ></span>
+              <div class="space-y-4">
+                <p class="kern-heading-medium">Servicestandard:</p>
+                <p>
+                  Gestaltung und Bereitstellung folgen den Prinzipien des
+                  Servicestandards für die öffentliche Verwaltung (z. B.
+                  Nutzerzentrierung und Barrierefreiheit).
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="flex flex-col gap-32">
+          <div class="text-cosmic-blue-400 bg-lavender-400 flex size-64 flex-none items-center justify-center rounded-sm">
+            <IconPublic class="size-32" aria-hidden="true" />
+          </div>
+          <h2 class="m-0">Zugänglichkeit und Kostenfreiheit</h2>
+          <ul class="list-unstyled checklist">
+            <li>
+              <span
+                class="kern-icon kern-icon--check kern-icon--default"
+                aria-hidden="true"
+              ></span>
+              <div class="space-y-4">
+                <p class="kern-heading-medium">Kostenfrei:</p>
+                <p>Das Werkzeug ist vollständig kostenfrei nutzbar.</p>
+              </div>
+            </li>
+            <li>
+              <span
+                class="kern-icon kern-icon--check kern-icon--default"
+                aria-hidden="true"
+              ></span>
+              <div class="space-y-4">
+                <p class="kern-heading-medium">Direkter Zugang:</p>
+                <p>
+                  Die Nutzung ist idealerweise ohne vorherige Registrierung oder
+                  Anmeldung möglich.
+                </p>
+              </div>
+            </li>
+            <li>
+              <span
+                class="kern-icon kern-icon--check kern-icon--default"
+                aria-hidden="true"
+              ></span>
+              <div class="space-y-4">
+                <p class="kern-heading-medium">Keine Anbieterbindung:</p>
+                <p>
+                  Das Werkzeug benötigt keine zusätzliche Software eines
+                  einzelnen Anbieters. Inhalte lassen sich in gängigen,
+                  kostenfreien Programmen bearbeiten und exportieren.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <hr class="kern-divider md:col-span-2" aria-hidden="true" />
+
+        <div class="flex flex-col gap-32">
+          <div class="text-cosmic-blue-400 bg-lavender-400 flex size-64 flex-none items-center justify-center rounded-sm">
+            <IconShield class="size-32" aria-hidden="true" />
+          </div>
+          <h2 class="m-0">Datenschutz und IT-Sicherheit</h2>
+          <ul class="list-unstyled checklist">
+            <li>
+              <span
+                class="kern-icon kern-icon--check kern-icon--default"
+                aria-hidden="true"
+              ></span>
+              <div class="space-y-4">
+                <p class="kern-heading-medium">
+                  Transparente Datenverarbeitung:
+                </p>
+                <p>
+                  Klare Dokumentation der Verarbeitung eingegebener Daten nach
+                  DSGVO. Der Serverstandort liegt idealerweise in Deutschland
+                  oder der EU.
+                </p>
+              </div>
+            </li>
+            <li>
+              <span
+                class="kern-icon kern-icon--check kern-icon--default"
+                aria-hidden="true"
+              ></span>
+              <div class="space-y-4">
+                <p class="kern-heading-medium">Sparsamer Umgang mit Daten:</p>
+                <p>
+                  Bei der Nutzung werden weder sensible Entwurfsdaten noch
+                  personenbezogene Daten ungeschützt verarbeitet oder mit
+                  Dritten geteilt.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="flex flex-col gap-32">
+          <div class="text-cosmic-blue-400 bg-lavender-400 flex size-64 flex-none items-center justify-center rounded-sm">
+            <IconThumbUp class="size-32" aria-hidden="true" />
+          </div>
+          <h2 class="m-0">Qualität und Verlässlichkeit</h2>
+          <ul class="list-unstyled checklist">
+            <li>
+              <span
+                class="kern-icon kern-icon--check kern-icon--default"
+                aria-hidden="true"
+              ></span>
+              <div class="space-y-4">
+                <p class="kern-heading-medium">Inhaltliche Korrektheit:</p>
+                <p>
+                  Das Werkzeug ist fachlich geprüft und entspricht dem aktuellen
+                  Stand der Gesetzgebungs- und Verwaltungspraxis.
+                </p>
+              </div>
+            </li>
+            <li>
+              <span
+                class="kern-icon kern-icon--check kern-icon--default"
+                aria-hidden="true"
+              ></span>
+              <div class="space-y-4">
+                <p class="kern-heading-medium">Regelmäßige Wartung:</p>
+                <p>
+                  Der Anbieter gewährleistet, dass Inhalte und Verlinkungen
+                  kontinuierlich gewartet und aktualisiert werden.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <hr class="kern-divider md:col-span-2" aria-hidden="true" />
+
+        <div class="flex flex-col gap-32">
+          <div class="text-cosmic-blue-400 bg-lavender-400 flex size-64 flex-none items-center justify-center rounded-sm">
+            <IconGridView class="size-32" aria-hidden="true" />
+          </div>
+          <h2 class="m-0">Inhaltliche Relevanz und Mehrwert</h2>
+          <ul class="list-unstyled checklist">
+            <li>
+              <span
+                class="kern-icon kern-icon--check kern-icon--default"
+                aria-hidden="true"
+              ></span>
+              <div class="space-y-4">
+                <p class="kern-heading-medium">Phasen-Zuordnung:</p>
+                <p>
+                  Das Werkzeug hat einen klaren Bezug zu einer Phase in der
+                  Regelungsarbeit (z. B. Digital- und Praxistauglichkeit
+                  sicherstellen).
+                </p>
+              </div>
+            </li>
+            <li>
+              <span
+                class="kern-icon kern-icon--check kern-icon--default"
+                aria-hidden="true"
+              ></span>
+              <div class="space-y-4">
+                <p class="kern-heading-medium">Passender Werkzeug-Typ:</p>
+                <p>
+                  Es handelt sich eindeutig um eine Methode, einen Leitfaden,
+                  ein Tool oder ein Unterstützungsangebot und passt zu
+                  mindestens einer Kategorie in der Ressourcensammlung.
+                </p>
+              </div>
+            </li>
+            <li>
+              <span
+                class="kern-icon kern-icon--check kern-icon--default"
+                aria-hidden="true"
+              ></span>
+              <div class="space-y-4">
+                <p class="kern-heading-medium">Keine Redundanz:</p>
+                <p>
+                  Es stellt eine sinnvolle Erweiterung der vorhandenen Werkzeuge
+                  dar und führt nicht zu einer Doppelung der Inhalte.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="breakout bg-cosmic-blue-base text-white">
+      <h2 class="text-inherit">Ressourcen vorschlagen</h2>
+      <div class="grid grid-cols-1 gap-64 lg:grid-cols-2">
+        <div>
+          <p>
+            Sie kennen ein passendes Werkzeug für das Zentrum für Legistik?
+            Senden Sie uns einfach eine E-Mail inkl. Link oder Dokument an{" "}
+            <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>.
+          </p>
+          <p>
+            Das Digitalcheck-Team prüft jeden Vorschlag anhand unserer
+            Qualitätskriterien und meldet sich im Anschluss bei Ihnen.
+          </p>
+        </div>
+        <div>
+          <p>
+            <b>Kontakt:</b>
+          </p>
+          <p>
+            Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>
+          </p>
+          <p>
+            E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  @reference "@/styles/global.css";
+
+  ul.checklist {
+    @apply max-w-a11y space-y-24;
+    li {
+      @apply flex items-start gap-8 md:gap-32;
+      span.kern-icon {
+        @apply bg-cosmic-blue-base! size-48 shrink-0;
+      }
+      p.kern-heading-medium {
+        padding: 0;
+      }
+    }
+  }
+</style>

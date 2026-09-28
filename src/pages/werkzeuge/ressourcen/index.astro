@@ -14,6 +14,8 @@ import IconAutoStories from "~icons/ic/baseline-auto-stories";
 import IconBookmarkAdd from "~icons/ic/outline-bookmark-add";
 import IconBookmarkAdded from "~icons/ic/round-bookmark-added";
 import IconHelpOutline from "~icons/ic/outline-help-outline";
+import { qualitaetskriterien } from "@/config/routes";
+import { isProduction } from "@/config/stage";
 
 export const frontmatter = {
   title: "Ressourcen",
@@ -229,16 +231,42 @@ const PAGEFIND_INSTANCE = "werkzeuge";
 
     <section class="breakout bg-cosmic-blue-base text-white">
       <h2>Werkzeug ergänzen</h2>
-      <p>
-        Kennen Sie weitere hilfreiche Werkzeuge, die auf dieser Seite fehlen?
-        Kontaktieren Sie uns gerne.
-      </p>
-      <p>
-        Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>
-      </p>
-      <p>
-        E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
-      </p>
+      {isProduction ? (
+        <>
+          <p>
+            Kennen Sie weitere hilfreiche Werkzeuge, die auf dieser Seite
+            fehlen? Kontaktieren Sie uns gerne.
+          </p>
+          <p>
+            Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>
+          </p>
+          <p>
+            E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
+          </p>
+        </>
+      ) : (
+        <div class="grid grid-cols-1 gap-64 lg:grid-cols-2">
+          <div>
+            <p>
+              Kennen Sie weitere hilfreiche Werkzeuge, die auf dieser Seite
+              fehlen? Kontaktieren Sie uns gerne.
+            </p>
+            <p>
+              Damit Sie sich auf diese Sammlung verlassen können, prüfen wir
+              jeden Vorschlag anhand festgelegter{" "}
+              <a href={qualitaetskriterien.path}>Qualitätskriterien</a>.
+            </p>
+          </div>
+          <div>
+            <p>
+              Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>
+            </p>
+            <p>
+              E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
+            </p>
+          </div>
+        </div>
+      )}
     </section>
 
     <SearchModal

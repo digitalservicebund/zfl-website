@@ -121,6 +121,17 @@ export const kontakt = {
   navLabel: null,
 } as const;
 
+export const qualitaetskriterien = {
+  key: "qualitaetskriterien",
+  path: "/qualitaetskriterien",
+  title: "Qualitätskriterien zur Aufnahme externer Inhalte",
+  parent: null,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
 export const schulungen = {
   key: "schulungen",
   path: "/schulungen",
@@ -330,6 +341,7 @@ export const allRoutes = [
   home,
   impressum,
   kontakt,
+  qualitaetskriterien,
   schulungen,
   sitemap,
   staging,
