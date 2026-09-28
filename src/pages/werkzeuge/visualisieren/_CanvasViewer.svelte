@@ -393,4 +393,28 @@
   button {
     @apply hover:bg-lavender-200 border-none bg-white shadow-md;
   }
+
+  /* Nodes and edges changed by a chat refinement (see _diagramDiff.ts):
+     pulse a few times, then keep a subtle glow until the next change */
+  .viewer-canvas :global(.diagram-changed) {
+    animation: diagram-changed 1.2s ease-in-out 3 forwards;
+  }
+
+  @keyframes diagram-changed {
+    0%,
+    100% {
+      filter: drop-shadow(0 0 3px var(--color-cosmic-blue-400));
+    }
+    50% {
+      filter: drop-shadow(0 0 4px var(--color-cosmic-blue-base))
+        drop-shadow(0 0 12px var(--color-cosmic-blue-base));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .viewer-canvas :global(.diagram-changed) {
+      animation: none;
+      filter: drop-shadow(0 0 3px var(--color-cosmic-blue-base));
+    }
+  }
 </style>

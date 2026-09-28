@@ -36,7 +36,10 @@ const INVALID_DIAGRAM_REPLY =
 export function createRefineChatBackend(
   wizard: Pick<
     WizardState,
-    "visOptionsSessionId" | "selectedVisOption" | "mermaidSource"
+    | "visOptionsSessionId"
+    | "selectedVisOption"
+    | "mermaidSource"
+    | "highlightChanges"
   >,
 ): ChatBackend {
   return {
@@ -74,6 +77,7 @@ export function createRefineChatBackend(
           yield INVALID_DIAGRAM_REPLY;
           return;
         }
+        wizard.highlightChanges = true;
         wizard.mermaidSource = result.mermaid;
       }
       yield result.reply;

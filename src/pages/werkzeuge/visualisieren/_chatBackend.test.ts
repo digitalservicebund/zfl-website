@@ -14,6 +14,7 @@ function createWizard() {
     visOptionsSessionId: "session-1",
     selectedVisOption: { name: "Test", visType: "flowchart", articles: [] },
     mermaidSource: OLD_DIAGRAM,
+    highlightChanges: false,
   } as Parameters<typeof createRefineChatBackend>[0];
 }
 
@@ -74,6 +75,7 @@ describe("createRefineChatBackend", () => {
 
     expect(reply).toBe("X eingefügt.");
     expect(wizard.mermaidSource).toBe(NEW_DIAGRAM);
+    expect(wizard.highlightChanges).toBe(true);
   });
 
   it("keeps the diagram when the backend only answers", async () => {
@@ -112,6 +114,7 @@ describe("createRefineChatBackend", () => {
 
     expect(reply).toMatch(/nicht übernommen/);
     expect(wizard.mermaidSource).toBe(OLD_DIAGRAM);
+    expect(wizard.highlightChanges).toBe(false);
   });
 
   it("doesn't touch the diagram once aborted", async () => {

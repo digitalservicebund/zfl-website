@@ -232,4 +232,5 @@ allowed_patterns:
   - key
   - handleKeydown
   - passes
+  - nodeKey
 version: "1.0"

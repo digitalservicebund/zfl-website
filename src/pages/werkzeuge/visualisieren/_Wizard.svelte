@@ -11,6 +11,7 @@
   import { createFakeLoadingSequence } from "../_shared/fakeLoading.ts";
   import { getMermaid, getVisOptions } from "../_shared/api.ts";
   import CanvasViewer from "./_CanvasViewer.svelte";
+  import { markChanges } from "./_diagramDiff.ts";
   import type { LawExample } from "./_types";
   import Step1 from "./_Step1.svelte";
   import { WizardState, setWizardContext } from "./_wizardState.svelte.ts";
@@ -277,13 +278,17 @@
     if (!wizard.mermaidSource) return;
 
     let cancelled = false;
+    const highlightChanges = wizard.highlightChanges;
+    wizard.highlightChanges = false;
+    const previousSvg = untrack(() => diagramSvg);
 
     configureMermaid(true, wrappingWidthFor(wizard.mermaidSource));
     mermaid
       .render(`mermaid-diagram-${renderCount++}`, wizard.mermaidSource)
       .then(({ svg }) => {
         if (cancelled) return;
-        diagramSvg = svg;
+        diagramSvg =
+          highlightChanges && previousSvg ? markChanges(previousSvg, svg) : svg;
         wizard.isLoading = false;
       });
 

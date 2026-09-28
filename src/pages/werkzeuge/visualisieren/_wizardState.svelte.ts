@@ -25,6 +25,9 @@ export class WizardState {
   loadingStatusMessage = $state("");
 
   mermaidSource = $state("");
+  /** Set along with mermaidSource by a chat refinement, so the next render
+   * highlights what changed. Not reactive: only read by that render. */
+  highlightChanges = false;
   summary = $state("");
   isLoading = $state(false);
   mermaidError = $state<string>();
