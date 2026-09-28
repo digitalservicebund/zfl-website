@@ -43,10 +43,16 @@ export async function getVisOptions(
   }
 }
 
+export type MermaidResult = {
+  mermaid: string;
+  /** Shown under "Was ist zu sehen?"; empty if the model left it out. */
+  summary: string;
+};
+
 export async function getMermaid(
   sessionId: string,
   option: VisOption,
-): Promise<string> {
+): Promise<MermaidResult> {
   const response = await fetch(`${API_BASE}/mermaid`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -63,7 +69,7 @@ export async function getMermaid(
     );
   }
   const data = await response.json();
-  return data.mermaid;
+  return { mermaid: data.mermaid, summary: data.summary ?? "" };
 }
 
 export type RefineRequest = {

@@ -256,9 +256,10 @@
       );
 
       Promise.all([getMermaid(sessionId, option), fakeDelay])
-        .then(([source]) => {
+        .then(([{ mermaid, summary }]) => {
           if (cancelled) return;
-          wizard.mermaidSource = source;
+          wizard.summary = summary;
+          wizard.mermaidSource = mermaid;
         })
         .catch((error: unknown) => {
           if (cancelled) return;
