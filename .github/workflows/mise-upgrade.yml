@@ -70,18 +70,26 @@ jobs:
       - name: Detect updates still held back by the cooldown
         id: cooldown-pending
         run: |
-          mise outdated --bump --json | jq 'del(.node)' > outdated.json
+          # peter-evans/create-pull-request resets the working tree back to a
+          # clean, pre-upgrade origin/main once it's done pushing the branch
+          # above. Reapply the same safe upgrade here so the `mise outdated`
+          # check below compares against what that step actually proposed,
+          # rather than re-reporting everything as still outdated.
+          mise upgrade --bump --exclude node --minimum-release-age 3d
 
-          # Reset to main's actual mise.toml/mise.lock: the previous step may have
-          # left the checkout on the chore/mise-upgrade branch, and this PR must be
-          # an independent, minimal diff from main, not stacked on that branch.
+          outdated_json="$RUNNER_TEMP/outdated.json"
+          mise outdated --bump --json | jq 'del(.node)' > "$outdated_json"
+
+          # Reset to main's actual mise.toml/mise.lock: this PR must be an
+          # independent, minimal diff from main, not stacked on the reapplied
+          # upgrade above.
           git fetch origin main
           git checkout origin/main -- mise.toml mise.lock
 
           # Explicit tool@version pins bypass minimum-release-age entirely (mise
           # only filters fuzzy/latest lookups), so this applies just the still-
           # cooling-down versions without waiting out the cooldown.
-          args=$(jq -r 'to_entries | map("\(.key)@\(.value.latest)") | join(" ")' outdated.json)
+          args=$(jq -r 'to_entries | map("\(.key)@\(.value.latest)") | join(" ")' "$outdated_json")
           if [ -n "$args" ]; then
             mise upgrade --bump $args
           fi
@@ -93,7 +101,7 @@ jobs:
               "The following updates are still inside the 3-day upgrade cooldown. Check the release notes before merging this early — only do so if one is a security fix:\n\n" +
               (to_entries | map("- **\(.key)** \(.value.current // "?") → \(.value.latest)" + (if .value.release_url then " — [release notes](\(.value.release_url))" else "" end)) | join("\n"))
             end
-          ' outdated.json)
+          ' "$outdated_json")
 
           delimiter="$(openssl rand -hex 8)"
           echo "body<<$delimiter" >> "$GITHUB_OUTPUT"
