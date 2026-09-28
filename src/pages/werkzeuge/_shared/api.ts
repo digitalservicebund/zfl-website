@@ -1,6 +1,6 @@
 import type { Finding } from "@/content.config";
 import type { PotenzialeExample } from "../potenziale/_types";
-import type { LawExample, VisOption } from "../visualisieren/_types";
+import type { LawExample, VisOption, VisType } from "../visualisieren/_types";
 
 // TODO: move to env/config once the backend has a stable deployment.
 const API_BASE = "http://localhost:8000";
@@ -53,6 +53,7 @@ export async function getMermaid(
     body: JSON.stringify({
       sessionId,
       name: option.name,
+      visType: option.visType,
       articles: option.articles,
     }),
   });
@@ -63,6 +64,39 @@ export async function getMermaid(
   }
   const data = await response.json();
   return data.mermaid;
+}
+
+export type RefineRequest = {
+  /** Absent for preset examples; the backend then refines without the law text. */
+  sessionId?: string;
+  visType: VisType;
+  mermaid: string;
+  /** Chat turns so far, ending with the new change request. */
+  history: { role: "user" | "assistant"; content: string }[];
+};
+
+export type RefineResult = {
+  reply: string;
+  /** null when the backend answered or asked back without changing the diagram. */
+  mermaid: string | null;
+};
+
+export async function refineMermaid(
+  request: RefineRequest,
+  signal?: AbortSignal,
+): Promise<RefineResult> {
+  const response = await fetch(`${API_BASE}/refine`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(request),
+    signal,
+  });
+  if (!response.ok) {
+    throw new Error(
+      `refineMermaid failed: ${response.status} ${await extractErrorDetail(response)}`,
+    );
+  }
+  return await response.json();
 }
 
 export type ChecksResult = {

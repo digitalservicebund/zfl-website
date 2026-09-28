@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { untrack } from "svelte";
   import Select from "../_shared/Select.svelte";
   import LoadingIndicator from "../_shared/LoadingIndicator.svelte";
   import { resolveEliUrl } from "../_shared/eli.ts";
@@ -7,20 +8,27 @@
   import ChatInput from "./_ChatInput.svelte";
   import ChatMessages from "./_ChatMessages.svelte";
   import { ChatState } from "./_chatState.svelte.ts";
-  import { createFakeChatBackend } from "./_chatBackend.ts";
+  import { createRefineChatBackend } from "./_chatBackend.ts";
 
   const wizard = getWizardContext();
   let { onSave }: { onSave: () => void } = $props();
 
   let resetDialogEl: HTMLDialogElement | undefined = $state();
 
-  const chat = new ChatState(createFakeChatBackend(), [
+  const chat = new ChatState(createRefineChatBackend(wizard), [
     {
       id: "greeting",
       role: "assistant",
       content: "Haben Sie Änderungswünsche?",
     },
   ]);
+
+  // The chat refers to the current diagram, so it starts over (and cancels
+  // a pending refinement) when the user switches to another Teilbereich
+  $effect(() => {
+    void wizard.selectedVisOption;
+    untrack(() => chat.reset());
+  });
 
   let chatScrollEl: HTMLDivElement | undefined = $state();
 
