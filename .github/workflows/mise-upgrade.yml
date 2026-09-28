@@ -54,6 +54,7 @@ jobs:
       - name: Create pull request
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
+          sign-commits: true
           commit-message: "chore(mise): bump pinned tool versions"
           title: "chore(mise): bump pinned tool versions"
           body: >
@@ -104,6 +105,7 @@ jobs:
       - name: Create draft pull request for cooldown-pending updates
         uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
         with:
+          sign-commits: true
           base: main
           commit-message: "chore(mise): bump tool versions still in cooldown"
           title: "chore(mise): bump tool versions still in cooldown"
