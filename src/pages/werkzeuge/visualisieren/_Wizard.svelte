@@ -190,6 +190,9 @@
   });
 
   let diagramSvg = $state("");
+  // Set with diagramSvg: after a chat refinement, the viewer keeps its zoom
+  // and scroll position instead of fitting the new diagram
+  let keepDiagramView = $state(false);
   let renderCount = 0;
   let saveDialogEl: HTMLDialogElement | undefined = $state();
 
@@ -288,6 +291,7 @@
       .render(`mermaid-diagram-${renderCount++}`, wizard.mermaidSource)
       .then(({ svg }) => {
         if (cancelled) return;
+        keepDiagramView = highlightChanges && Boolean(previousSvg);
         diagramSvg =
           highlightChanges && previousSvg ? markChanges(previousSvg, svg) : svg;
         wizard.isLoading = false;
@@ -641,6 +645,7 @@
           onFlip={canFlip ? flipDirection : undefined}
           {isFullscreen}
           onToggleFullscreen={canFullscreen ? toggleFullscreen : undefined}
+          keepView={keepDiagramView}
         />
         <dialog
           bind:this={saveDialogEl}

@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { tick } from "svelte";
+  import { tick, untrack } from "svelte";
   import { SvelteMap } from "svelte/reactivity";
+  import { diagramNodeKey } from "./_diagramDiff.ts";
   import IconZoomIn from "~icons/ic/outline-zoom-in";
   import IconZoomOut from "~icons/ic/outline-zoom-out";
   import IconFitScreen from "~icons/ic/outline-fit-screen";
@@ -16,6 +17,9 @@
     isFullscreen?: boolean;
     // Shows a button to toggle fullscreen mode when provided
     onToggleFullscreen?: () => void;
+    // Keeps zoom and scroll position when the svg changes instead of fitting
+    // the new diagram, e.g. after a small edit
+    keepView?: boolean;
   }
 
   let {
@@ -24,6 +28,7 @@
     onFlip,
     isFullscreen = false,
     onToggleFullscreen,
+    keepView = false,
   }: Props = $props();
 
   const PINCH_SENSITIVITY = 2;
@@ -58,8 +63,20 @@
   const pointers = new SvelteMap<number, { x: number; y: number }>();
   let pinchDistance: number | null = null;
 
+  // Node to keep in place across a kept-view update, with its screen
+  // position in the previous render
+  let viewAnchor: { key: string; x: number; y: number } | undefined;
+
+  // Runs before the new svg replaces the old one in the DOM
+  $effect.pre(() => {
+    void svg;
+    viewAnchor = untrack(() => keepView) ? nodeNearestCenter() : undefined;
+  });
+
   $effect(() => {
-    if (svg) resetView();
+    if (!svg) return;
+    if (viewAnchor) keepViewAt(viewAnchor);
+    else resetView();
   });
 
   // Computes the sizer's dimensions for a given scale, along with the
@@ -132,6 +149,48 @@
       Math.max(fitWidth, fitHeight) * FIT_MARGIN,
       MAX_INITIAL_SCALE,
     );
+  }
+
+  function nodeCenter(node: Element): { x: number; y: number } {
+    const rect = node.getBoundingClientRect();
+    return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+  }
+
+  function nodeNearestCenter() {
+    if (!contentEl) return undefined;
+    const center = viewerCenter();
+    let nearest: { key: string; x: number; y: number } | undefined;
+    let nearestDistance = Infinity;
+    for (const node of contentEl.querySelectorAll("g.node")) {
+      const key = diagramNodeKey(node);
+      if (!key) continue;
+      const { x, y } = nodeCenter(node);
+      const distance = Math.hypot(x - center.x, y - center.y);
+      if (distance < nearestDistance) {
+        nearest = { key, x, y };
+        nearestDistance = distance;
+      }
+    }
+    return nearest;
+  }
+
+  // Keeps the scale and scrolls so the anchor node sits where it was, which
+  // stays stable even when an edit shifts the layout around it. If the node
+  // is gone, the scroll position just stays as it is.
+  function keepViewAt(anchor: { key: string; x: number; y: number }) {
+    if (!canvasEl || !contentEl) return;
+    pinSvgSize();
+    // Layout size, unaffected by the scale transform
+    naturalWidth = contentEl.offsetWidth;
+    naturalHeight = contentEl.offsetHeight;
+    applySizer(scale);
+    const node = [...contentEl.querySelectorAll("g.node")].find(
+      (element) => diagramNodeKey(element) === anchor.key,
+    );
+    if (!node) return;
+    const { x, y } = nodeCenter(node);
+    canvasEl.scrollLeft += x - anchor.x;
+    canvasEl.scrollTop += y - anchor.y;
   }
 
   async function resetView() {

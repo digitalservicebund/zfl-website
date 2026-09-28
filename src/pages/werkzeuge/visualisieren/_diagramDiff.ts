@@ -7,7 +7,8 @@ export const CHANGED_CLASS = "diagram-changed";
 // follows the definition order, so it shifts when a node is inserted.
 const NODE_ID_PATTERN = /flowchart-(.+)-\d+$/;
 
-function nodeKey(element: Element): string | undefined {
+/** The node ID from the Mermaid source, stable across renders. */
+export function diagramNodeKey(element: Element): string | undefined {
   return element.id.match(NODE_ID_PATTERN)?.[1];
 }
 
@@ -30,7 +31,7 @@ function parseSvg(svg: string): Document {
 function texts(doc: Document): Map<Element, { key: string; text: string }> {
   const result = new Map<Element, { key: string; text: string }>();
   for (const node of doc.querySelectorAll("g.node")) {
-    const key = nodeKey(node);
+    const key = diagramNodeKey(node);
     if (key) {
       result.set(node, { key: `node:${key}`, text: node.textContent ?? "" });
     }

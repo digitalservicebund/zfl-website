@@ -233,4 +233,5 @@ allowed_patterns:
   - handleKeydown
   - passes
   - nodeKey
+  - diagramNodeKey
 version: "1.0"
