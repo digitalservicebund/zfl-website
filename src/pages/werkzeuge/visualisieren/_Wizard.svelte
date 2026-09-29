@@ -13,6 +13,14 @@
   import CanvasViewer from "./_CanvasViewer.svelte";
   import Select from "../_shared/Select.svelte";
   import { markChanges } from "./_diagramDiff.ts";
+  import {
+    boldToMarkdown,
+    downloadBlob,
+    parseSvg,
+    stripLinks,
+    svgToPngBlob,
+    svgToSvgBlob,
+  } from "./_diagramExport.ts";
   import type { LawExample } from "./_types";
   import Step1 from "./_Step1.svelte";
   import { WizardState, setWizardContext } from "./_wizardState.svelte.ts";
@@ -303,21 +311,22 @@
     };
   });
 
-  // Drops <a href="...">text</a> wrappers, keeping just the link text: SVG
-  // viewers outside the browser (Miro, Illustrator, ...) don't render
-  // foreignObject/HTML, so exported links must become plain SVG text.
-  function stripLinks(source: string): string {
-    return source.replace(/<a\b[^>]*>(.*?)<\/a>/gis, "$1");
-  }
-
   let filenameBase = $derived(
     wizard.selectedExample?.short ?? "eigener-entwurf",
   );
 
-  async function downloadSvg() {
-    if (!wizard.mermaidSource || !wizard.selectedVisOption) return;
+  function downloadExport(blob: Blob, extension: string) {
+    if (!wizard.selectedVisOption) return;
+    downloadBlob(
+      blob,
+      `${filenameBase}-${wizard.selectedVisOption.name}.${extension}`,
+    );
+  }
 
-    const exportSource = stripLinks(wizard.mermaidSource);
+  // Renders without HTML labels, so the SVG has no foreignObject, which
+  // external SVG viewers can't display.
+  async function renderExportSvg(): Promise<SVGSVGElement | null> {
+    const exportSource = boldToMarkdown(stripLinks(wizard.mermaidSource));
 
     const wrappingWidth = wrappingWidthFor(exportSource);
     configureMermaid(false, wrappingWidth);
@@ -331,22 +340,24 @@
       configureMermaid(true, wrappingWidth);
     }
 
-    const container = document.createElement("div");
-    container.innerHTML = svg;
-    const svgElement = container.querySelector("svg");
+    return parseSvg(svg);
+  }
+
+  async function downloadSvg() {
+    if (!wizard.mermaidSource || !wizard.selectedVisOption) return;
+
+    const svgElement = await renderExportSvg();
+    if (svgElement) downloadExport(svgToSvgBlob(svgElement), "svg");
+  }
+
+  async function downloadPng() {
+    if (!diagramSvg || !wizard.selectedVisOption) return;
+
+    const svgElement = parseSvg(diagramSvg);
     if (!svgElement) return;
 
-    const serialized = new XMLSerializer().serializeToString(svgElement);
-    const blob = new Blob(
-      [`<?xml version="1.0" encoding="UTF-8"?>\n${serialized}`],
-      { type: "image/svg+xml" },
-    );
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `${filenameBase}-${wizard.selectedVisOption.name}.svg`;
-    link.click();
-    URL.revokeObjectURL(url);
+    const blob = await svgToPngBlob(svgElement);
+    if (blob) downloadExport(blob, "png");
   }
 
   let mermaidCopied = $state(false);
@@ -432,13 +443,7 @@
       `${filenameBase}: ${wizard.selectedVisOption.name}`,
     );
 
-    const blob = new Blob([xml], { type: "application/xml" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `${filenameBase}-${wizard.selectedVisOption.name}.xml`;
-    link.click();
-    URL.revokeObjectURL(url);
+    downloadExport(new Blob([xml], { type: "application/xml" }), "xml");
   }
 </script>
 
@@ -534,6 +539,17 @@
         aria-hidden="true"
       ></span>
       <span class="kern-label">SVG</span>
+    </button>
+    <button
+      type="button"
+      onclick={downloadPng}
+      class="kern-btn kern-btn--tertiary"
+    >
+      <span
+        class="kern-icon kern-icon--download kern-icon--default"
+        aria-hidden="true"
+      ></span>
+      <span class="kern-label">PNG</span>
     </button>
     <button
       type="button"
