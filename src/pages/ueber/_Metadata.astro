@@ -12,13 +12,11 @@ const { lastUpdate, nextUpdate } = Astro.props;
     <br />
     {lastUpdate}
   </p>
-  {
-    nextUpdate && (
-      <p>
-        <strong>Nächstes Update</strong>
-        <br />
-        {nextUpdate}
-      </p>
-    )
-  }
+  {nextUpdate && (
+    <p>
+      <strong>Nächstes Update</strong>
+      <br />
+      {nextUpdate}
+    </p>
+  )}
 </div>

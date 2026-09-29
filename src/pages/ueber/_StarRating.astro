@@ -14,7 +14,11 @@ const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 ---
 
 <p class="text-cosmic-blue-400 flex gap-4 text-3xl!">
-  {Array.from({ length: fullStars }).map(() => <StarIcon />)}
+  {Array.from({ length: fullStars }).map(() => (
+    <StarIcon />
+  ))}
   {hasHalfStar && <StarHalfIcon />}
-  {Array.from({ length: emptyStars }).map(() => <StarBorderIcon />)}
+  {Array.from({ length: emptyStars }).map(() => (
+    <StarBorderIcon />
+  ))}
 </p>

@@ -49,92 +49,87 @@ function panelId(path: string) {
 }
 ---
 
-{
-  entries.map((entry) =>
-    isFirstLevelChildWithChildren(entry, level) ? (
+{entries.map((entry) =>
+  isFirstLevelChildWithChildren(entry, level) ? (
+    <div class="accordion-item" x-data={`{ open: ${entry.isInCurrentBranch} }`}>
       <div
-        class="accordion-item"
-        x-data={`{ open: ${entry.isInCurrentBranch} }`}
+        class={twMerge(
+          headerStyle(entry.isCurrent),
+          "kern-accordion__header rounded-sm",
+        )}
       >
-        <div
-          class={twMerge(
-            headerStyle(entry.isCurrent),
-            "kern-accordion__header rounded-sm",
-          )}
-        >
-          <a
-            href={entry.path}
-            style={indentStyle(level)}
-            class={twMerge(
-              linkHoverStyle(entry.isCurrent),
-              "peer link-unstyled kern-body block flex-1 rounded-sm",
-            )}
-            aria-current={entry.isCurrent ? "page" : undefined}
-          >
-            {entry.label}
-          </a>
-          <button
-            type="button"
-            class={twMerge(
-              arrowHoverStyle(entry.isCurrent),
-              "mr-3 flex h-32 w-32 shrink-0 items-center justify-center rounded-sm",
-            )}
-            aria-label={`Untermenü ${entry.label} ein-/ausklappen`}
-            aria-controls={panelId(entry.path)}
-            x-bind:aria-expanded="open"
-            @click="open = !open"
-          >
-            <span
-              class="kern-icon kern-icon--arrow-down kern-icon--default"
-              style={entry.isInCurrentBranch ? undefined : "display: none;"}
-              x-show="open"
-              aria-hidden="true"
-            />
-            <span
-              class="kern-icon kern-icon--chevron-right kern-icon--default"
-              style={entry.isInCurrentBranch ? "display: none;" : undefined}
-              x-show="!open"
-              aria-hidden="true"
-            />
-          </button>
-        </div>
-        <section
-          id={panelId(entry.path)}
-          class="kern-accordion__body"
-          style={entry.isInCurrentBranch ? undefined : "display: none;"}
-          x-show="open"
-        >
-          <Self
-            entries={entry.children}
-            currentPath={currentPath}
-            level={level + 1}
-          />
-        </section>
-      </div>
-    ) : (
-      <>
         <a
           href={entry.path}
-          class={twMerge(
-            linkHoverStyle(currentPath === entry.path),
-            "accordion-item link-unstyled kern-body block rounded-sm",
-          )}
           style={indentStyle(level)}
-          aria-current={currentPath === entry.path ? "page" : undefined}
+          class={twMerge(
+            linkHoverStyle(entry.isCurrent),
+            "peer link-unstyled kern-body block flex-1 rounded-sm",
+          )}
+          aria-current={entry.isCurrent ? "page" : undefined}
         >
           {entry.label}
         </a>
-        {entry.children.length > 0 && (
-          <Self
-            entries={entry.children}
-            currentPath={currentPath}
-            level={level + 1}
+        <button
+          type="button"
+          class={twMerge(
+            arrowHoverStyle(entry.isCurrent),
+            "mr-3 flex h-32 w-32 shrink-0 items-center justify-center rounded-sm",
+          )}
+          aria-label={`Untermenü ${entry.label} ein-/ausklappen`}
+          aria-controls={panelId(entry.path)}
+          x-bind:aria-expanded="open"
+          @click="open = !open"
+        >
+          <span
+            class="kern-icon kern-icon--arrow-down kern-icon--default"
+            style={entry.isInCurrentBranch ? undefined : "display: none;"}
+            x-show="open"
+            aria-hidden="true"
           />
+          <span
+            class="kern-icon kern-icon--chevron-right kern-icon--default"
+            style={entry.isInCurrentBranch ? "display: none;" : undefined}
+            x-show="!open"
+            aria-hidden="true"
+          />
+        </button>
+      </div>
+      <section
+        id={panelId(entry.path)}
+        class="kern-accordion__body"
+        style={entry.isInCurrentBranch ? undefined : "display: none;"}
+        x-show="open"
+      >
+        <Self
+          entries={entry.children}
+          currentPath={currentPath}
+          level={level + 1}
+        />
+      </section>
+    </div>
+  ) : (
+    <>
+      <a
+        href={entry.path}
+        class={twMerge(
+          linkHoverStyle(currentPath === entry.path),
+          "accordion-item link-unstyled kern-body block rounded-sm",
         )}
-      </>
-    ),
-  )
-}
+        style={indentStyle(level)}
+        aria-current={currentPath === entry.path ? "page" : undefined}
+      >
+        {entry.label}
+      </a>
+      {entry.children.length > 0 && (
+        <Self
+          entries={entry.children}
+          currentPath={currentPath}
+          level={level + 1}
+        />
+      )}
+    </>
+  ),
+)}
 
 <style>
   .kern-accordion__header,

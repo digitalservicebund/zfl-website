@@ -18,7 +18,9 @@ export const frontmatter = {
            TYPOGRAFIE
       ========================================================== -->
     <section aria-labelledby="typo-heading">
-      <h2 class="kern-heading-large" id="typo-heading">Typografie</h2>
+      <h2 class="kern-heading-large" id="typo-heading">
+        Typografie
+      </h2>
 
       <h3 class="kern-heading-medium">Headings</h3>
       <h1 class="kern-heading-display">heading-display</h1>
@@ -72,13 +74,21 @@ export const frontmatter = {
 
       <h3 class="kern-heading-medium">Link</h3>
       <p class="kern-body">
-        <a href="#" class="kern-link"> Standardlink </a>{" "}
+        <a href="#" class="kern-link">
+          {" "}
+          Standardlink{" "}
+        </a>{" "}
         ·
-        <a href="#" class="kern-link"> Besucht </a>{" "}
+        <a href="#" class="kern-link">
+          {" "}
+          Besucht{" "}
+        </a>{" "}
         ·
         <a href="#" class="kern-link">
           Mit Icon{" "}
-          <span class="kern-icon kern-icon--open-in-new" aria-hidden="true"
+          <span
+            class="kern-icon kern-icon--open-in-new"
+            aria-hidden="true"
           ></span>
         </a>
       </p>
@@ -90,26 +100,32 @@ export const frontmatter = {
            ICONS
       ========================================================== -->
     <section aria-labelledby="icons-heading">
-      <h2 class="kern-heading-large" id="icons-heading">Icons</h2>
+      <h2 class="kern-heading-large" id="icons-heading">
+        Icons
+      </h2>
 
       <h3 class="kern-heading-medium">Größen</h3>
       <div class="flex flex-wrap items-center gap-16">
         <span
           class="kern-icon kern-icon--home kern-icon--small"
           aria-hidden="true"
-          title="small"></span>
+          title="small"
+        ></span>
         <span
           class="kern-icon kern-icon--home"
           aria-hidden="true"
-          title="default"></span>
+          title="default"
+        ></span>
         <span
           class="kern-icon kern-icon--home kern-icon--large"
           aria-hidden="true"
-          title="large"></span>
+          title="large"
+        ></span>
         <span
           class="kern-icon kern-icon--home kern-icon--x-large"
           aria-hidden="true"
-          title="x-large"></span>
+          title="x-large"
+        ></span>
       </div>
       <p class="kern-body kern-body--small kern-body--muted">
         small · default · large · x-large
@@ -117,54 +133,52 @@ export const frontmatter = {
 
       <h3 class="kern-heading-medium">Glyphen-Auswahl</h3>
       <div class="flex flex-wrap items-center gap-12">
-        {
-          [
-            "home",
-            "arrow-up",
-            "arrow-down",
-            "arrow-forward",
-            "arrow-back",
-            "info",
-            "success",
-            "warning",
-            "danger",
-            "open-in-new",
-            "download",
-            "logout",
-            "checklist",
-            "mail",
-            "edit",
-            "sign-language",
-            "easy-language",
-            "autorenew",
-            "add",
-            "close",
-            "delete",
-            "search",
-            "question-mark",
-            "more-vert",
-            "content-copy",
-            "visibility",
-            "visibility-off",
-            "check",
-            "drive-folder-upload",
-            "chevron-left",
-            "chevron-right",
-            "keyboard-double-arrow-left",
-            "keyboard-double-arrow-right",
-            "brightness-medium",
-            "light-mode",
-            "dark-mode",
-            "help",
-            "calendar-today",
-          ].map((name) => (
-            <span
-              class={`kern-icon kern-icon--${name}`}
-              aria-hidden="true"
-              title={name}
-            />
-          ))
-        }
+        {[
+          "home",
+          "arrow-up",
+          "arrow-down",
+          "arrow-forward",
+          "arrow-back",
+          "info",
+          "success",
+          "warning",
+          "danger",
+          "open-in-new",
+          "download",
+          "logout",
+          "checklist",
+          "mail",
+          "edit",
+          "sign-language",
+          "easy-language",
+          "autorenew",
+          "add",
+          "close",
+          "delete",
+          "search",
+          "question-mark",
+          "more-vert",
+          "content-copy",
+          "visibility",
+          "visibility-off",
+          "check",
+          "drive-folder-upload",
+          "chevron-left",
+          "chevron-right",
+          "keyboard-double-arrow-left",
+          "keyboard-double-arrow-right",
+          "brightness-medium",
+          "light-mode",
+          "dark-mode",
+          "help",
+          "calendar-today",
+        ].map((name) => (
+          <span
+            class={`kern-icon kern-icon--${name}`}
+            aria-hidden="true"
+            title={name}
+          />
+        ))}
       </div>
     </section>
 
@@ -174,7 +188,9 @@ export const frontmatter = {
            BUTTON
       ========================================================== -->
     <section aria-labelledby="btn-heading">
-      <h2 class="kern-heading-large" id="btn-heading">Button</h2>
+      <h2 class="kern-heading-large" id="btn-heading">
+        Button
+      </h2>
 
       <h3 class="kern-heading-medium">Varianten</h3>
       <div class="flex flex-wrap items-center gap-16">
@@ -197,7 +213,9 @@ export const frontmatter = {
         </button>
         <button class="kern-btn kern-btn--primary">
           <span class="kern-label">Icon rechts</span>
-          <span class="kern-icon kern-icon--arrow-forward" aria-hidden="true"
+          <span
+            class="kern-icon kern-icon--arrow-forward"
+            aria-hidden="true"
           ></span>
         </button>
         <button class="kern-btn kern-btn--secondary">
@@ -237,7 +255,9 @@ export const frontmatter = {
            BADGE
       ========================================================== -->
     <section aria-labelledby="badge-heading">
-      <h2 class="kern-heading-large" id="badge-heading">Badge</h2>
+      <h2 class="kern-heading-large" id="badge-heading">
+        Badge
+      </h2>
       <div class="flex flex-wrap items-center gap-12">
         <span class="kern-badge kern-badge--info">
           <span class="kern-label kern-label--small">Info</span>
@@ -263,7 +283,9 @@ export const frontmatter = {
            ALERT
       ========================================================== -->
     <section aria-labelledby="alert-heading">
-      <h2 class="kern-heading-large" id="alert-heading">Alert</h2>
+      <h2 class="kern-heading-large" id="alert-heading">
+        Alert
+      </h2>
       <div class="flex flex-col gap-12">
         <div class="kern-alert kern-alert--info" role="alert">
           <div class="kern-alert__header">
@@ -276,14 +298,18 @@ export const frontmatter = {
         </div>
         <div class="kern-alert kern-alert--success" role="alert">
           <div class="kern-alert__header">
-            <span class="kern-icon kern-icon--success" aria-hidden="true"
+            <span
+              class="kern-icon kern-icon--success"
+              aria-hidden="true"
             ></span>
             <span class="kern-title">Erfolgreich gespeichert</span>
           </div>
         </div>
         <div class="kern-alert kern-alert--warning" role="alert">
           <div class="kern-alert__header">
-            <span class="kern-icon kern-icon--warning" aria-hidden="true"
+            <span
+              class="kern-icon kern-icon--warning"
+              aria-hidden="true"
             ></span>
             <span class="kern-title">Achtung: Bitte prüfen</span>
           </div>
@@ -308,7 +334,9 @@ export const frontmatter = {
            ACCORDION
       ========================================================== -->
     <section aria-labelledby="accordion-heading">
-      <h2 class="kern-heading-large" id="accordion-heading">Accordion</h2>
+      <h2 class="kern-heading-large" id="accordion-heading">
+        Accordion
+      </h2>
 
       <h3 class="kern-heading-medium">Einzeln</h3>
       <details class="kern-accordion">
@@ -366,7 +394,9 @@ export const frontmatter = {
            CARD
       ========================================================== -->
     <section aria-labelledby="card-heading">
-      <h2 class="kern-heading-large" id="card-heading">Card</h2>
+      <h2 class="kern-heading-large" id="card-heading">
+        Card
+      </h2>
 
       <div class="flex flex-wrap items-start gap-24">
         <!-- Standard -->
@@ -394,9 +424,7 @@ export const frontmatter = {
         </article>
 
         <!-- Small -->
-        <article
-          class="kern-card kern-card--small max-w-280 shrink grow basis-240"
-        >
+        <article class="kern-card kern-card--small max-w-280 shrink grow basis-240">
           <div class="kern-card__container">
             <header class="kern-card__header">
               <p class="kern-preline">Preline</p>
@@ -414,9 +442,7 @@ export const frontmatter = {
         </article>
 
         <!-- Large -->
-        <article
-          class="kern-card kern-card--large max-w-360 shrink grow basis-300"
-        >
+        <article class="kern-card kern-card--large max-w-360 shrink grow basis-300">
           <div class="kern-card__container">
             <header class="kern-card__header">
               <p class="kern-preline">Preline</p>
@@ -435,9 +461,7 @@ export const frontmatter = {
         </article>
 
         <!-- Hug -->
-        <article
-          class="kern-card kern-card--hug max-w-280 shrink grow basis-240"
-        >
+        <article class="kern-card kern-card--hug max-w-280 shrink grow basis-240">
           <div class="kern-card__container">
             <header class="kern-card__header">
               <h3 class="kern-title">Card --hug</h3>
@@ -456,7 +480,9 @@ export const frontmatter = {
            LISTS
       ========================================================== -->
     <section aria-labelledby="lists-heading">
-      <h2 class="kern-heading-large" id="lists-heading">Listen</h2>
+      <h2 class="kern-heading-large" id="lists-heading">
+        Listen
+      </h2>
 
       <div class="flex flex-wrap items-start gap-32">
         <div>
@@ -518,7 +544,9 @@ export const frontmatter = {
            FORM CONTROLS
       ========================================================== -->
     <section aria-labelledby="form-heading" class="space-y-md">
-      <h2 class="kern-heading-large" id="form-heading">Formulare</h2>
+      <h2 class="kern-heading-large" id="form-heading">
+        Formulare
+      </h2>
 
       <div class="flex flex-wrap items-start gap-32">
         <!-- Text Input -->
@@ -542,7 +570,10 @@ export const frontmatter = {
 
           <h3 class="kern-heading-medium">Text – Fehler</h3>
           <div class="kern-form-input kern-form-input--error">
-            <label class="kern-label" for="demo-text-err"> Name </label>
+            <label class="kern-label" for="demo-text-err">
+              {" "}
+              Name{" "}
+            </label>
             <input
               class="kern-form-input__input kern-form-input__input--error"
               id="demo-text-err"
@@ -551,7 +582,9 @@ export const frontmatter = {
               aria-describedby="demo-text-error"
             />
             <p class="kern-error" id="demo-text-error" role="alert">
-              <span class="kern-icon kern-icon--danger" aria-hidden="true"
+              <span
+                class="kern-icon kern-icon--danger"
+                aria-hidden="true"
               ></span>
               <span class="kern-body">Der Name darf nicht leer sein</span>
             </p>
@@ -562,7 +595,10 @@ export const frontmatter = {
         <div class="shrink grow basis-260">
           <h3 class="kern-heading-medium">Email</h3>
           <div class="kern-form-input">
-            <label class="kern-label" for="demo-email"> Email </label>
+            <label class="kern-label" for="demo-email">
+              {" "}
+              Email{" "}
+            </label>
             <div class="kern-hint" id="demo-email-hint">
               Beispiel: name@domain.de
             </div>
@@ -581,7 +617,10 @@ export const frontmatter = {
         <div class="shrink grow basis-260">
           <h3 class="kern-heading-medium">Passwort</h3>
           <div class="kern-form-input">
-            <label class="kern-label" for="demo-pw"> Passwort </label>
+            <label class="kern-label" for="demo-pw">
+              {" "}
+              Passwort{" "}
+            </label>
             <input
               class="kern-form-input__input"
               id="demo-pw"
@@ -596,7 +635,10 @@ export const frontmatter = {
         <div class="shrink grow basis-260">
           <h3 class="kern-heading-medium">Telefon</h3>
           <div class="kern-form-input">
-            <label class="kern-label" for="demo-tel"> Telefonnummer </label>
+            <label class="kern-label" for="demo-tel">
+              {" "}
+              Telefonnummer{" "}
+            </label>
             <input
               class="kern-form-input__input"
               id="demo-tel"
@@ -611,7 +653,10 @@ export const frontmatter = {
         <div class="shrink grow basis-260">
           <h3 class="kern-heading-medium">Zahl</h3>
           <div class="kern-form-input">
-            <label class="kern-label" for="demo-num"> Anzahl </label>
+            <label class="kern-label" for="demo-num">
+              {" "}
+              Anzahl{" "}
+            </label>
             <input
               class="kern-form-input__input"
               id="demo-num"
@@ -626,14 +671,20 @@ export const frontmatter = {
         <div class="shrink grow basis-xs">
           <h3 class="kern-heading-medium">Textarea</h3>
           <div class="kern-form-input">
-            <label class="kern-label" for="demo-area"> Beschreibung </label>
-            <div class="kern-hint" id="demo-area-hint">Maximal 500 Zeichen</div>
+            <label class="kern-label" for="demo-area">
+              {" "}
+              Beschreibung{" "}
+            </label>
+            <div class="kern-hint" id="demo-area-hint">
+              Maximal 500 Zeichen
+            </div>
             <textarea
               class="kern-form-input__input"
               id="demo-area"
               name="demo-area"
               rows="4"
-              aria-describedby="demo-area-hint"></textarea>
+              aria-describedby="demo-area-hint"
+            ></textarea>
           </div>
         </div>
 
@@ -641,7 +692,10 @@ export const frontmatter = {
         <div class="shrink grow basis-260">
           <h3 class="kern-heading-medium">Datei-Upload</h3>
           <div class="kern-form-input">
-            <label class="kern-label" for="demo-file"> Datei hochladen </label>
+            <label class="kern-label" for="demo-file">
+              {" "}
+              Datei hochladen{" "}
+            </label>
             <div class="kern-hint" id="demo-file-hint">
               Erlaubte Formate: jpg, png, pdf
             </div>
@@ -659,7 +713,10 @@ export const frontmatter = {
         <div class="shrink grow basis-260">
           <h3 class="kern-heading-medium">Select</h3>
           <div class="kern-form-input">
-            <label class="kern-label" for="demo-select"> Auswählen </label>
+            <label class="kern-label" for="demo-select">
+              {" "}
+              Auswählen{" "}
+            </label>
             <div class="kern-hint" id="demo-select-hint">
               Bitte wählen Sie eine Option
             </div>
@@ -680,7 +737,10 @@ export const frontmatter = {
 
           <h3 class="kern-heading-medium">Select – Fehler</h3>
           <div class="kern-form-input kern-form-input--error">
-            <label class="kern-label" for="demo-select-err"> Auswählen </label>
+            <label class="kern-label" for="demo-select-err">
+              {" "}
+              Auswählen{" "}
+            </label>
             <div class="kern-form-input__select-wrapper">
               <select
                 class="kern-form-input__select kern-form-input__select--error"
@@ -693,7 +753,9 @@ export const frontmatter = {
               </select>
             </div>
             <p class="kern-error" id="demo-select-error" role="alert">
-              <span class="kern-icon kern-icon--danger" aria-hidden="true"
+              <span
+                class="kern-icon kern-icon--danger"
+                aria-hidden="true"
               ></span>
               <span class="kern-body">
                 Bitte wählen Sie eine gültige Option
@@ -713,7 +775,10 @@ export const frontmatter = {
               id="demo-cb1"
               type="checkbox"
             />
-            <label class="kern-label" for="demo-cb1"> Option A </label>
+            <label class="kern-label" for="demo-cb1">
+              {" "}
+              Option A{" "}
+            </label>
           </div>
           <div class="kern-form-check">
             <input
@@ -749,7 +814,9 @@ export const frontmatter = {
               AGB akzeptieren
             </label>
             <p class="kern-error" id="cb-error" role="alert">
-              <span class="kern-icon kern-icon--danger" aria-hidden="true"
+              <span
+                class="kern-icon kern-icon--danger"
+                aria-hidden="true"
               ></span>
               <span class="kern-body">Bitte akzeptieren Sie die AGB</span>
             </p>
@@ -769,7 +836,10 @@ export const frontmatter = {
                 name="anrede"
                 type="radio"
               />
-              <label class="kern-label" for="radio-herr"> Herr </label>
+              <label class="kern-label" for="radio-herr">
+                {" "}
+                Herr{" "}
+              </label>
             </div>
             <div class="kern-form-check">
               <input
@@ -778,7 +848,10 @@ export const frontmatter = {
                 name="anrede"
                 type="radio"
               />
-              <label class="kern-label" for="radio-frau"> Frau </label>
+              <label class="kern-label" for="radio-frau">
+                {" "}
+                Frau{" "}
+              </label>
             </div>
             <div class="kern-form-check">
               <input
@@ -787,7 +860,10 @@ export const frontmatter = {
                 name="anrede"
                 type="radio"
               />
-              <label class="kern-label" for="radio-divers"> Divers </label>
+              <label class="kern-label" for="radio-divers">
+                {" "}
+                Divers{" "}
+              </label>
             </div>
           </div>
         </fieldset>
@@ -797,7 +873,9 @@ export const frontmatter = {
           aria-describedby="radio-err-hint"
         >
           <legend class="kern-label">Anrede (Fehler)</legend>
-          <div class="kern-hint" id="radio-err-hint">Pflichtfeld</div>
+          <div class="kern-hint" id="radio-err-hint">
+            Pflichtfeld
+          </div>
           <div class="kern-fieldset__body">
             <div class="kern-form-check">
               <input
@@ -807,7 +885,10 @@ export const frontmatter = {
                 type="radio"
                 aria-describedby="radio-group-error"
               />
-              <label class="kern-label" for="radio2-herr"> Herr </label>
+              <label class="kern-label" for="radio2-herr">
+                {" "}
+                Herr{" "}
+              </label>
             </div>
             <div class="kern-form-check">
               <input
@@ -817,7 +898,10 @@ export const frontmatter = {
                 type="radio"
                 aria-describedby="radio-group-error"
               />
-              <label class="kern-label" for="radio2-frau"> Frau </label>
+              <label class="kern-label" for="radio2-frau">
+                {" "}
+                Frau{" "}
+              </label>
             </div>
           </div>
           <p class="kern-error" id="radio-group-error" role="alert">
@@ -831,10 +915,15 @@ export const frontmatter = {
       <h3 class="kern-heading-medium">Datum (Einzelfelder)</h3>
       <fieldset class="kern-fieldset" aria-describedby="date-hint-demo">
         <legend class="kern-label">Ausstellungsdatum</legend>
-        <div class="kern-hint" id="date-hint-demo">z. B. 17 3 2015</div>
+        <div class="kern-hint" id="date-hint-demo">
+          z. B. 17 3 2015
+        </div>
         <div class="kern-fieldset__body kern-fieldset__body--horizontal">
           <div class="kern-form-input">
-            <label class="kern-label" for="demo-tag"> Tag </label>
+            <label class="kern-label" for="demo-tag">
+              {" "}
+              Tag{" "}
+            </label>
             <input
               class="kern-form-input__input kern-form-input__input--width-2"
               id="demo-tag"
@@ -843,7 +932,10 @@ export const frontmatter = {
             />
           </div>
           <div class="kern-form-input">
-            <label class="kern-label" for="demo-monat"> Monat </label>
+            <label class="kern-label" for="demo-monat">
+              {" "}
+              Monat{" "}
+            </label>
             <input
               class="kern-form-input__input kern-form-input__input--width-2"
               id="demo-monat"
@@ -852,7 +944,10 @@ export const frontmatter = {
             />
           </div>
           <div class="kern-form-input">
-            <label class="kern-label" for="demo-jahr"> Jahr </label>
+            <label class="kern-label" for="demo-jahr">
+              {" "}
+              Jahr{" "}
+            </label>
             <input
               class="kern-form-input__input kern-form-input__input--width-4"
               id="demo-jahr"
@@ -875,7 +970,10 @@ export const frontmatter = {
         </div>
         <div class="kern-fieldset__body">
           <div class="kern-form-input">
-            <label class="kern-label" for="fs-vorname"> Vorname </label>
+            <label class="kern-label" for="fs-vorname">
+              {" "}
+              Vorname{" "}
+            </label>
             <input
               class="kern-form-input__input kern-form-input__input--error"
               id="fs-vorname"
@@ -884,7 +982,10 @@ export const frontmatter = {
             />
           </div>
           <div class="kern-form-input">
-            <label class="kern-label" for="fs-name"> Nachname </label>
+            <label class="kern-label" for="fs-name">
+              {" "}
+              Nachname{" "}
+            </label>
             <input
               class="kern-form-input__input kern-form-input__input--error"
               id="fs-name"
@@ -906,7 +1007,9 @@ export const frontmatter = {
            DESCRIPTION LIST
       ========================================================== -->
     <section aria-labelledby="dl-heading">
-      <h2 class="kern-heading-large" id="dl-heading">Description List</h2>
+      <h2 class="kern-heading-large" id="dl-heading">
+        Description List
+      </h2>
 
       <div class="flex flex-col gap-32">
         <div>
@@ -950,7 +1053,9 @@ export const frontmatter = {
            TABLE
       ========================================================== -->
     <section aria-labelledby="table-heading" class="space-y-md">
-      <h2 class="kern-heading-large" id="table-heading">Tabelle</h2>
+      <h2 class="kern-heading-large" id="table-heading">
+        Tabelle
+      </h2>
 
       <h3 class="kern-heading-medium">Standard</h3>
       <div class="kern-table-responsive" tabindex="0">
@@ -958,8 +1063,12 @@ export const frontmatter = {
           <caption class="kern-title">Datentabelle – Standard</caption>
           <thead class="kern-table__head">
             <tr class="kern-table__row">
-              <th scope="col" class="kern-table__header"> Name </th>
-              <th scope="col" class="kern-table__header"> Ort </th>
+              <th scope="col" class="kern-table__header">
+                Name
+              </th>
+              <th scope="col" class="kern-table__header">
+                Ort
+              </th>
               <th
                 scope="col"
                 class="kern-table__header kern-table__header--numeric"
@@ -970,17 +1079,23 @@ export const frontmatter = {
           </thead>
           <tbody class="kern-table__body">
             <tr class="kern-table__row">
-              <th scope="row" class="kern-table__header"> Alpha </th>
+              <th scope="row" class="kern-table__header">
+                Alpha
+              </th>
               <td class="kern-table__cell">Berlin</td>
               <td class="kern-table__cell kern-table__cell--numeric">42</td>
             </tr>
             <tr class="kern-table__row">
-              <th scope="row" class="kern-table__header"> Beta </th>
+              <th scope="row" class="kern-table__header">
+                Beta
+              </th>
               <td class="kern-table__cell">Hamburg</td>
               <td class="kern-table__cell kern-table__cell--numeric">17</td>
             </tr>
             <tr class="kern-table__row">
-              <th scope="row" class="kern-table__header"> Gamma </th>
+              <th scope="row" class="kern-table__header">
+                Gamma
+              </th>
               <td class="kern-table__cell">München</td>
               <td class="kern-table__cell kern-table__cell--numeric">99</td>
             </tr>
@@ -996,7 +1111,9 @@ export const frontmatter = {
           <caption class="kern-title">Datentabelle – Striped & Small</caption>
           <thead class="kern-table__head">
             <tr class="kern-table__row">
-              <th scope="col" class="kern-table__header"> Bezeichnung </th>
+              <th scope="col" class="kern-table__header">
+                Bezeichnung
+              </th>
               <th
                 scope="col"
                 class="kern-table__header kern-table__header--numeric"
@@ -1013,28 +1130,36 @@ export const frontmatter = {
           </thead>
           <tbody class="kern-table__body">
             <tr class="kern-table__row">
-              <th scope="row" class="kern-table__header"> Produkt A </th>
+              <th scope="row" class="kern-table__header">
+                Produkt A
+              </th>
               <td class="kern-table__cell kern-table__cell--numeric">3</td>
               <td class="kern-table__cell kern-table__cell--numeric">
                 12,00 €
               </td>
             </tr>
             <tr class="kern-table__row">
-              <th scope="row" class="kern-table__header"> Produkt B </th>
+              <th scope="row" class="kern-table__header">
+                Produkt B
+              </th>
               <td class="kern-table__cell kern-table__cell--numeric">1</td>
               <td class="kern-table__cell kern-table__cell--numeric">
                 45,00 €
               </td>
             </tr>
             <tr class="kern-table__row">
-              <th scope="row" class="kern-table__header"> Produkt C </th>
+              <th scope="row" class="kern-table__header">
+                Produkt C
+              </th>
               <td class="kern-table__cell kern-table__cell--numeric">7</td>
               <td class="kern-table__cell kern-table__cell--numeric">8,50 €</td>
             </tr>
           </tbody>
           <tfoot class="kern-table__footer">
             <tr class="kern-table__row">
-              <th scope="row" class="kern-table__header"> Gesamt </th>
+              <th scope="row" class="kern-table__header">
+                Gesamt
+              </th>
               <td class="kern-table__cell kern-table__cell--numeric">11</td>
               <td class="kern-table__cell kern-table__cell--numeric">
                 153,50 €
@@ -1051,7 +1176,9 @@ export const frontmatter = {
            SUMMARY
       ========================================================== -->
     <section aria-labelledby="summary-heading">
-      <h2 class="kern-heading-large" id="summary-heading">Summary</h2>
+      <h2 class="kern-heading-large" id="summary-heading">
+        Summary
+      </h2>
       <div class="kern-summary">
         <div class="kern-summary__header">
           <span class="kern-number">1</span>
@@ -1108,7 +1235,9 @@ export const frontmatter = {
            TASK LIST
       ========================================================== -->
     <section aria-labelledby="tasklist-heading">
-      <h2 class="kern-heading-large" id="tasklist-heading">Task List</h2>
+      <h2 class="kern-heading-large" id="tasklist-heading">
+        Task List
+      </h2>
       <div class="kern-task-list">
         <div class="kern-task-list__header">
           <h3 class="kern-heading-medium">Antragsprozess</h3>
@@ -1126,7 +1255,9 @@ export const frontmatter = {
               </a>
               <div class="kern-task-list__status" id="task-1-status">
                 <span class="kern-badge kern-badge--success">
-                  <span class="kern-icon kern-icon--success" aria-hidden="true"
+                  <span
+                    class="kern-icon kern-icon--success"
+                    aria-hidden="true"
                   ></span>
                   <span class="kern-label kern-label--small">Erledigt</span>
                 </span>
@@ -1179,7 +1310,9 @@ export const frontmatter = {
            LOADER
       ========================================================== -->
     <section aria-labelledby="loader-heading">
-      <h2 class="kern-heading-large" id="loader-heading">Loader</h2>
+      <h2 class="kern-heading-large" id="loader-heading">
+        Loader
+      </h2>
       <div class="kern-loader kern-loader--visible" role="status">
         <span class="kern-sr-only">Wird geladen…</span>
       </div>
@@ -1191,13 +1324,21 @@ export const frontmatter = {
            PROGRESS
       ========================================================== -->
     <section aria-labelledby="progress-heading">
-      <h2 class="kern-heading-large" id="progress-heading">Fortschritt</h2>
+      <h2 class="kern-heading-large" id="progress-heading">
+        Fortschritt
+      </h2>
       <div class="kern-progress">
-        <label class="kern-label" for="progress-demo"> Schritt 2 von 5 </label>
+        <label class="kern-label" for="progress-demo">
+          {" "}
+          Schritt 2 von 5{" "}
+        </label>
         <progress id="progress-demo" value="2" max="5"></progress>
       </div>
       <div class="kern-progress">
-        <label class="kern-label" for="progress-demo2"> Schritt 5 von 5 </label>
+        <label class="kern-label" for="progress-demo2">
+          {" "}
+          Schritt 5 von 5{" "}
+        </label>
         <progress id="progress-demo2" value="5" max="5"></progress>
       </div>
     </section>
