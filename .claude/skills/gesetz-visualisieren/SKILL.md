@@ -116,8 +116,8 @@ sondern zeigt Rollen ohne zeitliche Reihenfolge.
 ## Schritt 4 — Mermaid-Diagramme erstellen und speichern
 
 Für jeden identifizierten Prozess ein Diagramm des in Schritt 3 gewählten
-Typs erstellen: `flowchart TD` bzw. `swimlane-beta TD`; für die
-Akteursübersicht `flowchart LR`. Jede `.mmd`-Datei
+Typs erstellen: `flowchart TD` bzw. `swimlane-beta TD`; auch die
+Akteursübersicht als `flowchart TD`. Jede `.mmd`-Datei
 beginnt mit einem Frontmatter-Block (Repo-Konvention, keine Mermaid-Syntax —
 wird von `_mmdFrontmatter.ts` vor dem Rendern entfernt) mit einem
 `summary`-Feld: 1-2 Sätze, die den visualisierten Prozess beschreiben.
@@ -157,9 +157,10 @@ Stilkonventionen für das Diagramm selbst (siehe existierende Dateien unter
     (< ~20 Zeichen) — das macht Knoten unnötig schmal und hoch.
   - Den Verweis nicht vom Paragraphenzeichen trennen (`— §17 I S.1` bleibt
     zusammen).
-  - Gilt für `flowchart TD` und `swimlane`. Wizard und `render-check.mjs`
-    brechen bei diesen erst ab 400px automatisch um, bei `flowchart LR`
-    (Akteure) schon ab 200px — dort siehe die Akteurs-Konventionen unten.
+  - Gilt für Prozessdiagramme (`flowchart`, `swimlane`). Wizard und
+    `render-check.mjs` brechen erst ab 400px automatisch um (bei
+    `flowchart LR` schon ab 200px). Für Akteursknoten siehe die
+    Akteurs-Konventionen unten.
 - Jede inhaltliche Aussage mit Paragraphen-/Artikelverweis versehen
   (z.B. `— §4 S.4`), damit die Diagramme rechtlich nachvollziehbar bleiben.
 - Entscheidungen als Raute `{"..."}`, Ja/Nein bzw. Fristablauf-Pfade als
@@ -223,8 +224,12 @@ https://mermaid.ai/open-source/syntax/swimlanes.html
 
 Zusätzlich für die Akteursübersicht (`actors`):
 
-- Header `flowchart LR`. Keine Entscheidungsrauten, keine Nummerierung,
-  keine zeitliche Reihenfolge.
+- Header `flowchart TD`. Keine Entscheidungsrauten, keine Nummerierung,
+  keine zeitliche Reihenfolge. `flowchart LR` ergibt bei Akteursdiagrammen
+  meist sehr breite, flache Bilder (Seitenverhältnis ~3-5:1) mit schmalen,
+  hohen Knoten; `TD` ist kompakter und die Knoten zeigen eine Zuständigkeit
+  pro Zeile. Nur wenn `TD` beim Rendern deutlich breiter als `LR` wird
+  (viele Verbindungen in Gegenrichtung, z.B. JuSchG), `LR` vergleichen.
 - 6-12 Akteure; Randakteure, die nur in einem Nebensatz vorkommen,
   weglassen statt das Diagramm zu überladen. Lange Aufzählungen
   gleichartiger Akteure (z.B. die Aufsichtsbehörden nach §50 GwG) zu
@@ -241,13 +246,13 @@ Zusätzlich für die Akteursübersicht (`actors`):
   Zeile pro Zuständigkeit/Pflicht/Befugnis, jede mit eigenem
   Paragraphenverweis (statt alle Verweise gesammelt am Ende); höchstens
   5 Zeilen insgesamt. Innerhalb einer Zeile keine weiteren `<br/>` setzen
-  (abweichend von der Zeilenlängen-Regel oben) — bei `flowchart LR` bricht
-  der Renderer ab 200px selbst um, so bleiben die Knoten schmal und das
-  Diagramm nicht zu breit. Beispiel:
+  (abweichend von der Zeilenlängen-Regel oben) — der Renderer bricht ab
+  400px selbst um, so bleibt jede Zuständigkeit meist auf einer Zeile.
+  Beispiel:
   `KDD["<b>Koordinierungsstelle für digitale Dienste</b><br/>Durchsetzung des DSA — <a href='{{ELI}}#art-z14_abs-z1' target='_blank' rel='noopener'>§14 I</a><br/>völlig unabhängig — <a href='{{ELI}}/art-z15' target='_blank' rel='noopener'>§15</a>"]`
 - Verbindungen sind Beziehungen und immer beschriftet: Beziehungsart + genau
   **ein** verlinkter Paragraphenverweis (weitere Verweise als Klartext),
-  kurz halten (Beschriftungen werden sonst im LR-Layout sehr breit), z.B.
+  kurz halten (lange Beschriftungen ziehen die Verbindungen auseinander), z.B.
   `BNetzA -->|"beherbergt — <a href='{{ELI}}#art-z14_abs-z1' target='_blank' rel='noopener'>§14 I</a>"| KDD`.
   - `-->` gerichtete Beziehungen (Aufsicht, Weisung, Anordnung, Meldung,
     Bericht, Beauftragung).
@@ -256,7 +261,7 @@ Zusätzlich für die Akteursübersicht (`actors`):
   - Stehen zwei Akteure in beide Richtungen in unterschiedlicher Beziehung
     (z.B. Meldung an die Behörde, Anordnungen der Behörde), zwei
     gerichtete Verbindungen statt einer `<-->`-Verbindung mit Sammelbeschriftung.
-    Jede solche Verbindung in Gegenrichtung läuft im LR-Layout aber als Bogen um das ganze
+    Jede solche Verbindung in Gegenrichtung läuft aber als Bogen um das ganze
     Diagramm (die Anordnung folgt allein der Verbindungsrichtung; Reihenfolge
     von Knoten, Gruppen und Verbindungen im Quelltext ändert daran nichts). Ist
     eine der beiden Richtungen nur eine Nebenbeziehung, sie stattdessen als
