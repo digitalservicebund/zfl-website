@@ -1,7 +1,11 @@
 import mermaid from "mermaid";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { refineMermaid } from "../_shared/api.ts";
-import { createRefineChatBackend, type ChatMessage } from "./_chatBackend.ts";
+import {
+  createRefineChatBackend,
+  type ChatMessage,
+  type ReplyChunk,
+} from "./_chatBackend.ts";
 
 vi.mock("mermaid", () => ({ default: { parse: vi.fn() } }));
 vi.mock("../_shared/api.ts", () => ({ refineMermaid: vi.fn() }));
@@ -14,14 +18,22 @@ function createWizard() {
     visOptionsSessionId: "session-1",
     selectedVisOption: { name: "Test", visType: "flowchart", articles: [] },
     mermaidSource: OLD_DIAGRAM,
-    addVersion: vi.fn(),
+    addVersion: vi.fn(() => 1),
   } satisfies Parameters<typeof createRefineChatBackend>[0];
 }
 
-async function collect(iterable: AsyncIterable<string>): Promise<string> {
-  let text = "";
-  for await (const chunk of iterable) text += chunk;
-  return text;
+async function collect(iterable: AsyncIterable<ReplyChunk>): Promise<string> {
+  return (await collectChunks(iterable))
+    .filter((c) => typeof c === "string")
+    .join("");
+}
+
+async function collectChunks(
+  iterable: AsyncIterable<ReplyChunk>,
+): Promise<ReplyChunk[]> {
+  const chunks: ReplyChunk[] = [];
+  for await (const chunk of iterable) chunks.push(chunk);
+  return chunks;
 }
 
 const history: ChatMessage[] = [
@@ -71,14 +83,14 @@ describe("createRefineChatBackend", () => {
     });
     const wizard = createWizard();
 
-    const reply = await collect(
+    const chunks = await collectChunks(
       createRefineChatBackend(wizard).reply(
         history,
         new AbortController().signal,
       ),
     );
 
-    expect(reply).toBe("X eingefügt.");
+    expect(chunks).toEqual(["X eingefügt.", { versionIndex: 1 }]);
     expect(wizard.addVersion).toHaveBeenCalledWith(NEW_DIAGRAM, "X ergänzt");
   });
 

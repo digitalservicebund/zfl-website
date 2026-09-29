@@ -62,7 +62,8 @@ export class ChatState {
           reply = this.messages.at(-1)!;
           this.status = "replying";
         }
-        reply.content += chunk;
+        if (typeof chunk === "string") reply.content += chunk;
+        else reply.versionIndex = chunk.versionIndex;
       }
     } catch (error) {
       if (!abortController.signal.aborted) {

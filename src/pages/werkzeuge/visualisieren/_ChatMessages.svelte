@@ -1,13 +1,19 @@
 <script lang="ts">
   import type { ChatMessage } from "./_chatBackend.ts";
   import type { ChatStatus } from "./_chatState.svelte.ts";
+  import ChipBtn from "../_shared/ChipBtn.svelte";
 
   let {
     messages,
     status,
+    versionIndex,
+    onShowVersion,
   }: {
     messages: ChatMessage[];
     status: ChatStatus;
+    /** The diagram version currently shown */
+    versionIndex?: number;
+    onShowVersion?: (index: number) => void;
   } = $props();
 </script>
 
@@ -21,9 +27,23 @@
         {message.content}
       </p>
     {:else}
-      <p class="whitespace-pre-wrap" class:kern-error={message.isError}>
-        {message.content}
-      </p>
+      <div class="space-y-8">
+        <p class="whitespace-pre-wrap" class:kern-error={message.isError}>
+          {message.content}
+        </p>
+        {#if message.versionIndex !== undefined && onShowVersion}
+          {@const index = message.versionIndex}
+          <!-- flex keeps the chip from stretching to the full width -->
+          <div class="flex">
+            <ChipBtn
+              standalone
+              selected={index === versionIndex}
+              onclick={() => onShowVersion(index)}
+              aria-label={`Version ${index + 1} anzeigen`}>v{index + 1}</ChipBtn
+            >
+          </div>
+        {/if}
+      </div>
     {/if}
   {/each}
   {#if status === "thinking"}

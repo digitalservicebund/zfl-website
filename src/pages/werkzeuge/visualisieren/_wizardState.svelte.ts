@@ -70,11 +70,12 @@ export class WizardState {
 
   /** Shows a chat refinement as a new version. Refining an older version
    * also appends, so the versions in between are kept. */
-  addVersion(source: string, label?: string) {
+  addVersion(source: string, label?: string): number {
     this.versions = [...this.versions, { source, label }];
     this.versionIndex = this.versions.length - 1;
     this.highlightChanges = true;
     this.mermaidSource = source;
+    return this.versionIndex;
   }
 
   showVersion(index: number) {

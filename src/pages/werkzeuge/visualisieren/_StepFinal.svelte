@@ -1,6 +1,7 @@
 <script lang="ts">
   import { untrack } from "svelte";
   import Select from "../_shared/Select.svelte";
+  import ChipBtn from "../_shared/ChipBtn.svelte";
   import LoadingIndicator from "../_shared/LoadingIndicator.svelte";
   import { resolveEliUrl } from "../_shared/eli.ts";
   import { getWizardContext } from "./_wizardState.svelte.ts";
@@ -79,6 +80,18 @@
         {#if wizard.summary}
           <p>{wizard.summary}</p>
         {/if}
+        {#if wizard.versions.length > 0}
+          <!-- The generated diagram, like the version chips in the chat
+               below; flex keeps the chip from stretching to the full width -->
+          <div class="flex mb-16">
+            <ChipBtn
+              standalone
+              selected={wizard.versionIndex === 0}
+              onclick={() => wizard.showVersion(0)}
+              aria-label="Version 1 anzeigen">v1</ChipBtn
+            >
+          </div>
+        {/if}
         {#if wizard.selectedExample}
           <p class="kern-body kern-body--muted">
             Quelle:
@@ -90,7 +103,12 @@
             {/if}
           </p>
         {/if}
-        <ChatMessages messages={chat.messages} status={chat.status} />
+        <ChatMessages
+          messages={chat.messages}
+          status={chat.status}
+          versionIndex={wizard.versionIndex}
+          onShowVersion={(index) => wizard.showVersion(index)}
+        />
       </div>
     {/if}
   </div>

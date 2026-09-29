@@ -23,6 +23,23 @@ describe("ChatState", () => {
     expect(chat.status).toBe("idle");
   });
 
+  it("marks the reply with the diagram version it created", async () => {
+    const chat = new ChatState({
+      async *reply() {
+        yield "Geändert.";
+        yield { versionIndex: 2 };
+      },
+    });
+
+    await chat.send("Ändere X");
+
+    expect(chat.messages.at(-1)).toMatchObject({
+      role: "assistant",
+      content: "Geändert.",
+      versionIndex: 2,
+    });
+  });
+
   it("passes the history including the new message to the backend", async () => {
     const reply = vi.fn(backendYielding("ok").reply);
     const chat = new ChatState({ reply });

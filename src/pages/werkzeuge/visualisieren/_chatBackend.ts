@@ -10,7 +10,12 @@ export type ChatMessage = {
   content: string;
   /** Set on assistant messages whose reply failed; content holds the error text. */
   isError?: boolean;
+  /** Set on assistant messages whose reply created a diagram version. */
+  versionIndex?: number;
 };
+
+/** A piece of the reply text, or the diagram version the reply created. */
+export type ReplyChunk = string | { versionIndex: number };
 
 /**
  * Produces the assistant's reply to a conversation. Yields the reply in
@@ -21,7 +26,7 @@ export type ChatMessage = {
  * belongs in the factory creating it, not in this interface.
  */
 export interface ChatBackend {
-  reply(history: ChatMessage[], signal: AbortSignal): AsyncIterable<string>;
+  reply(history: ChatMessage[], signal: AbortSignal): AsyncIterable<ReplyChunk>;
 }
 
 const INVALID_DIAGRAM_REPLY =
@@ -74,7 +79,13 @@ export function createRefineChatBackend(
           yield INVALID_DIAGRAM_REPLY;
           return;
         }
-        wizard.addVersion(result.mermaid, result.label ?? undefined);
+        const versionIndex = wizard.addVersion(
+          result.mermaid,
+          result.label ?? undefined,
+        );
+        yield result.reply;
+        yield { versionIndex };
+        return;
       }
       yield result.reply;
     },
