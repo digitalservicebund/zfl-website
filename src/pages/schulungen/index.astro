@@ -1,7 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
-import Schedule from "./_schedule.astro";
+//import Schedule from "./_schedule.astro";
 import InfoPanel from "@/components/InfoPanel.astro";
 import KernCard from "@/components/KernCard.astro";
 import { Image } from "astro:assets";
@@ -11,7 +11,7 @@ import onlineSchulungImg from "@/images/online-schulung.jpg";
 import visImg from "@/images/Trainings.jpg";
 // import trainTheTrainerImg from "@/images/train-the-trainer.jpg";
 import computerImg from "@/images/computer.jpg";
-import appointments from "./_appointments.json";
+//import appointments from "./_appointments.json";
 
 export const frontmatter = {
   title: "Schulungen",
@@ -60,9 +60,13 @@ const description =
             für Digitaltauglichkeit, Praxistauglichkeit berücksichtigen und
             EU-Interoperabilität.
           </p>
-          <div>
+          <p>
+            Die nächsten Schulungen befinden sich gerade in Planung. Sobald es
+            neue Termine gibt, finden Sie diese hier.
+          </p>
+          <!--<div>
             <Schedule appointments={appointments} caption="Nächste Termine" />
-          </div>
+          </div> -->
         </div>
         <div>
           <h3>
