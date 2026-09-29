@@ -1,4 +1,4 @@
-FROM node:26.9.0-alpine3.23 AS base
+FROM node:26.10.0-alpine3.23 AS base
 
 ENV PNPM_HOME="/pnpm"
 ENV MISE_DATA_DIR="/mise"

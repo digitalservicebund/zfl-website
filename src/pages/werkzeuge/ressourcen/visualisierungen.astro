@@ -50,17 +50,7 @@ const visualisierungen = await Promise.all(
       </p>
     </Hero>
 
-    <div aria-hidden="true" x-ref="sentinel" class="h-px -translate-y-px"></div>
-    <div
-      class="breakout z-10 bg-white py-16 transition-shadow lg:sticky lg:top-0"
-      x-data="{ stuck: false }"
-      x-bind:class="stuck ? 'lg:shadow-md' : ''"
-      x-init="
-        new IntersectionObserver(([e]) => { stuck = !e.isIntersecting }, { threshold: [1] })
-          .observe($refs.sentinel);
-        stuck = false;
-      "
-    >
+    <div class="breakout z-10 bg-white py-16">
       <div class="-mb-16 flex flex-wrap items-center gap-8 pb-16">
         <span class="kern-label shrink-0">Filtern nach:</span>
         {VISUALISIERUNGS_FILTER.map((filter) => (
@@ -77,7 +67,9 @@ const visualisierungen = await Promise.all(
                 aria-hidden="true"
                 x-show={`filterType === '${filter}'`}
               />
-              <span class="kern-label kern-label--small">{filter}</span>
+              <span class="kern-label kern-label--small kern-label--subtle">
+                {filter}
+              </span>
             </span>
           </button>
         ))}
@@ -102,7 +94,9 @@ const visualisierungen = await Promise.all(
               <span class="space-y-8 space-x-8">
                 {visualisierung.data.tags.map((tag) => (
                   <span class="kern-badge kern-badge--tag">
-                    <span class="kern-label kern-label--small">{tag}</span>
+                    <span class="kern-label kern-label--small kern-label--subtle">
+                      {tag}
+                    </span>
                   </span>
                 ))}
               </span>

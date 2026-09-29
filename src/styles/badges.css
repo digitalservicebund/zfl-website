@@ -32,13 +32,18 @@
   background-color: var(--kern-color-layout-background-default);
   border: 1px solid var(--kern-color-layout-text-muted-contextual);
 }
-.kern-badge--tag .kern-label {
+.kern-badge--tag .kern-label--subtle {
   color: var(--kern-color-layout-text-muted-contextual);
+  font-weight: var(--kern-typography-font-weight-label-subtle, 400);
 }
 
 .kern-badge--filter {
   background-color: var(--kern-color-layout-background-default);
   border: 1px solid var(--kern-color-layout-text-default-contextual);
+}
+
+.kern-badge--filter .kern-label--subtle {
+  font-weight: var(--kern-typography-font-weight-label-subtle, 400);
 }
 
 [class*="kern-badge--prinzip"] {

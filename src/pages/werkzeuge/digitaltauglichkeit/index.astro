@@ -40,9 +40,9 @@ const resources = await getEntries([
     <section>
       <h2>Zusammengefasst</h2>
       <div class="mt-32 space-y-32">
-        <div class="md:flex gap-24">
+        <div class="gap-24 md:flex">
           <IconComputer
-            class="text-cosmic-blue-base size-64 shrink-0 mx-16 md:mx-0"
+            class="text-cosmic-blue-base mx-16 size-64 shrink-0 md:mx-0"
             aria-hidden="true"
           />
           <div class="px-16 pt-3">
@@ -63,9 +63,9 @@ const resources = await getEntries([
             </p>
           </div>
         </div>
-        <div class="md:flex gap-24">
+        <div class="gap-24 md:flex">
           <IconQueryBuilder
-            class="text-cosmic-blue-base size-64 shrink-0 mx-16 md:mx-0"
+            class="text-cosmic-blue-base mx-16 size-64 shrink-0 md:mx-0"
             aria-hidden="true"
           />
           <div class="px-16 pt-3">
@@ -78,9 +78,9 @@ const resources = await getEntries([
             </p>
           </div>
         </div>
-        <div class="md:flex gap-24">
+        <div class="gap-24 md:flex">
           <IconPlaylistAddCheck
-            class="text-cosmic-blue-base size-64 shrink-0 mx-16 md:mx-0"
+            class="text-cosmic-blue-base mx-16 size-64 shrink-0 md:mx-0"
             aria-hidden="true"
           />
           <div class="px-16 pt-3">
@@ -122,7 +122,7 @@ const resources = await getEntries([
     </section>
     <section>
       <h2>Hilfreiche Ressourcen</h2>
-      <div class="md:gap-md md:grid xl:grid-cols-3 md:grid-cols-2 space-y-32">
+      <div class="md:gap-md space-y-32 md:grid md:grid-cols-2 xl:grid-cols-3">
         {resources.map(
           (resource) =>
             resource && (
