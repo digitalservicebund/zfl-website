@@ -17,15 +17,13 @@ export const frontmatter = {
     </Hero>
     <section>
       <ul>
-        {
-          allRoutes
-            .filter((route) => route.sitemap && !route.isStagingOnly)
-            .map((route) => (
-              <li>
-                <a href={route.path}>{route.title}</a>
-              </li>
-            ))
-        }
+        {allRoutes
+          .filter((route) => route.sitemap && !route.isStagingOnly)
+          .map((route) => (
+            <li>
+              <a href={route.path}>{route.title}</a>
+            </li>
+          ))}
       </ul>
     </section>
   </main>

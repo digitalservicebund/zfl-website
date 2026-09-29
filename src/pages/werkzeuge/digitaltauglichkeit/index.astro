@@ -123,48 +123,44 @@ const resources = await getEntries([
     <section>
       <h2>Hilfreiche Ressourcen</h2>
       <div class="md:gap-md space-y-32 md:grid md:grid-cols-2 xl:grid-cols-3">
-        {
-          resources.map(
-            (resource) =>
-              resource && (
-                <KernCard
-                  title={resource.data.title}
-                  body={resource.data.description}
-                  interactive={true}
-                  href={resource.data.href}
-                  target_option={resource.data.isExternal ? "_blank" : "_self"}
-                  image={resource.data.image}
-                  imageAlt={
-                    resource.data.image ? resource.data.title : undefined
-                  }
+        {resources.map(
+          (resource) =>
+            resource && (
+              <KernCard
+                title={resource.data.title}
+                body={resource.data.description}
+                interactive={true}
+                href={resource.data.href}
+                target_option={resource.data.isExternal ? "_blank" : "_self"}
+                image={resource.data.image}
+                imageAlt={resource.data.image ? resource.data.title : undefined}
+              >
+                <div
+                  slot="pre-header"
+                  class="mb-16 flex w-full justify-between"
                 >
-                  <div
-                    slot="pre-header"
-                    class="mb-16 flex w-full justify-between"
-                  >
-                    <div class="flex gap-8">
-                      {resource.data.type.map((type: WerkzeugType) => (
-                        <span
-                          class={`kern-badge kern-badge--${type.toLowerCase()}`}
-                        >
-                          <span class="kern-label">{type}</span>
-                        </span>
-                      ))}
-                    </div>
+                  <div class="flex gap-8">
+                    {resource.data.type.map((type: WerkzeugType) => (
+                      <span
+                        class={`kern-badge kern-badge--${type.toLowerCase()}`}
+                      >
+                        <span class="kern-label">{type}</span>
+                      </span>
+                    ))}
                   </div>
-                  <div
-                    slot="footer"
-                    class="text-icon-muted flex items-center gap-8"
-                  >
-                    <IconAutoStories class="h-32 w-32 shrink-0" />
-                    <p class="kern-subline kern-subline-dark py-0">
-                      Quelle: {resource.data.source}
-                    </p>
-                  </div>
-                </KernCard>
-              ),
-          )
-        }
+                </div>
+                <div
+                  slot="footer"
+                  class="text-icon-muted flex items-center gap-8"
+                >
+                  <IconAutoStories class="h-32 w-32 shrink-0" />
+                  <p class="kern-subline kern-subline-dark py-0">
+                    Quelle: {resource.data.source}
+                  </p>
+                </div>
+              </KernCard>
+            ),
+        )}
       </div>
     </section>
     <section class="breakout bg-cosmic-blue-base text-white">

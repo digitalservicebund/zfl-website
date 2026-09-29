@@ -15,7 +15,8 @@ const bundlePath = join(import.meta.env.BASE_URL, "pagefind/");
   {...props}
   instance={instance}
   data-bundle-path={bundlePath}
-  data-filter-types={filterTypes?.join(".") || ""}></custom-pagefind-config>
+  data-filter-types={filterTypes?.join(".") || ""}
+></custom-pagefind-config>
 
 <script>
   import { getInstanceManager } from "@pagefind/component-ui";
