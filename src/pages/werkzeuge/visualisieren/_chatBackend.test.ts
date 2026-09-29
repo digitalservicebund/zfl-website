@@ -14,8 +14,8 @@ function createWizard() {
     visOptionsSessionId: "session-1",
     selectedVisOption: { name: "Test", visType: "flowchart", articles: [] },
     mermaidSource: OLD_DIAGRAM,
-    highlightChanges: false,
-  } as Parameters<typeof createRefineChatBackend>[0];
+    addVersion: vi.fn(),
+  } satisfies Parameters<typeof createRefineChatBackend>[0];
 }
 
 async function collect(iterable: AsyncIterable<string>): Promise<string> {
@@ -38,7 +38,11 @@ describe("createRefineChatBackend", () => {
   });
 
   it("sends the current diagram and the chat turns without greeting and errors", async () => {
-    vi.mocked(refineMermaid).mockResolvedValue({ reply: "ok", mermaid: null });
+    vi.mocked(refineMermaid).mockResolvedValue({
+      reply: "ok",
+      mermaid: null,
+      label: null,
+    });
     const signal = new AbortController().signal;
 
     await collect(
@@ -59,10 +63,11 @@ describe("createRefineChatBackend", () => {
     );
   });
 
-  it("replaces the diagram and yields the reply", async () => {
+  it("adds the refined diagram as a new version and yields the reply", async () => {
     vi.mocked(refineMermaid).mockResolvedValue({
       reply: "X eingefügt.",
       mermaid: NEW_DIAGRAM,
+      label: "X ergänzt",
     });
     const wizard = createWizard();
 
@@ -74,14 +79,14 @@ describe("createRefineChatBackend", () => {
     );
 
     expect(reply).toBe("X eingefügt.");
-    expect(wizard.mermaidSource).toBe(NEW_DIAGRAM);
-    expect(wizard.highlightChanges).toBe(true);
+    expect(wizard.addVersion).toHaveBeenCalledWith(NEW_DIAGRAM, "X ergänzt");
   });
 
   it("keeps the diagram when the backend only answers", async () => {
     vi.mocked(refineMermaid).mockResolvedValue({
       reply: "Welcher Knoten?",
       mermaid: null,
+      label: null,
     });
     const wizard = createWizard();
 
@@ -93,13 +98,14 @@ describe("createRefineChatBackend", () => {
     );
 
     expect(reply).toBe("Welcher Knoten?");
-    expect(wizard.mermaidSource).toBe(OLD_DIAGRAM);
+    expect(wizard.addVersion).not.toHaveBeenCalled();
   });
 
   it("keeps the diagram when the refined one doesn't parse", async () => {
     vi.mocked(refineMermaid).mockResolvedValue({
       reply: "X eingefügt.",
       mermaid: "flowchart TD\n  A -->",
+      label: null,
     });
     vi.mocked(mermaid.parse).mockRejectedValue(new Error("Parse error"));
     vi.spyOn(console, "error").mockImplementation(() => {});
@@ -113,15 +119,14 @@ describe("createRefineChatBackend", () => {
     );
 
     expect(reply).toMatch(/nicht übernommen/);
-    expect(wizard.mermaidSource).toBe(OLD_DIAGRAM);
-    expect(wizard.highlightChanges).toBe(false);
+    expect(wizard.addVersion).not.toHaveBeenCalled();
   });
 
   it("doesn't touch the diagram once aborted", async () => {
     const abortController = new AbortController();
     vi.mocked(refineMermaid).mockImplementation(async () => {
       abortController.abort();
-      return { reply: "X eingefügt.", mermaid: NEW_DIAGRAM };
+      return { reply: "X eingefügt.", mermaid: NEW_DIAGRAM, label: null };
     });
     const wizard = createWizard();
 
@@ -130,6 +135,6 @@ describe("createRefineChatBackend", () => {
     );
 
     expect(reply).toBe("");
-    expect(wizard.mermaidSource).toBe(OLD_DIAGRAM);
+    expect(wizard.addVersion).not.toHaveBeenCalled();
   });
 });

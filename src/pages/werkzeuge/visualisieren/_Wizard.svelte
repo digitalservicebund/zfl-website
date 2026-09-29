@@ -11,6 +11,7 @@
   import { createFakeLoadingSequence } from "../_shared/fakeLoading.ts";
   import { getMermaid, getVisOptions } from "../_shared/api.ts";
   import CanvasViewer from "./_CanvasViewer.svelte";
+  import Select from "../_shared/Select.svelte";
   import { markChanges } from "./_diagramDiff.ts";
   import type { LawExample } from "./_types";
   import Step1 from "./_Step1.svelte";
@@ -231,7 +232,7 @@
         if (cancelled) return;
         const parsed = parseMmdFrontmatter(resolveNormLinks(source, eli));
         wizard.summary = parsed.summary;
-        wizard.mermaidSource = parsed.body;
+        wizard.startVersions(parsed.body);
       });
 
       return () => {
@@ -262,7 +263,7 @@
         .then(([{ mermaid, summary }]) => {
           if (cancelled) return;
           wizard.summary = summary;
-          wizard.mermaidSource = mermaid;
+          wizard.startVersions(mermaid);
         })
         .catch((error: unknown) => {
           if (cancelled) return;
@@ -381,11 +382,24 @@
   let canFlip = $derived(DIRECTION_PATTERN.test(wizard.mermaidSource));
 
   function flipDirection() {
-    wizard.mermaidSource = wizard.mermaidSource.replace(
-      DIRECTION_PATTERN,
-      (_, prefix: string, direction: string) =>
-        `${prefix}${direction === "LR" ? "TD" : "LR"}`,
+    wizard.updateCurrentVersion(
+      wizard.mermaidSource.replace(
+        DIRECTION_PATTERN,
+        (_, prefix: string, direction: string) =>
+          `${prefix}${direction === "LR" ? "TD" : "LR"}`,
+      ),
     );
+  }
+
+  // Newest first
+  let versionItems = $derived(
+    wizard.versions.map((version, index) => ({ ...version, index })).reverse(),
+  );
+
+  function versionLabel(item: { index: number; label?: string }): string {
+    return item.label
+      ? `v${item.index + 1} · ${item.label}`
+      : `v${item.index + 1}`;
   }
 
   let showCanvas = $derived(wizard.currentStep === steps.length);
@@ -646,7 +660,39 @@
           {isFullscreen}
           onToggleFullscreen={canFullscreen ? toggleFullscreen : undefined}
           keepView={keepDiagramView}
-        />
+        >
+          {#snippet topRight()}
+            {#if wizard.versions.length > 1}
+              <div
+                class="kern-form-input w-280 bg-white p-8 rounded-sm shadow-md"
+              >
+                <label class="kern-sr-only" for="diagram-version">Version</label
+                >
+                <Select
+                  items={versionItems}
+                  bind:selected={
+                    () =>
+                      versionItems.find(
+                        (item) => item.index === wizard.versionIndex,
+                      ),
+                    (item) => item && wizard.showVersion(item.index)
+                  }
+                  getLabel={versionLabel}
+                  id="diagram-version"
+                  class="w-full"
+                >
+                  {#snippet option(item)}
+                    <span class="shrink-0">v{item.index + 1}</span>
+                    {#if item.label}
+                      <span class="truncate kern-body--muted">{item.label}</span
+                      >
+                    {/if}
+                  {/snippet}
+                </Select>
+              </div>
+            {/if}
+          {/snippet}
+        </CanvasViewer>
         <dialog
           bind:this={saveDialogEl}
           class="kern-dialog"

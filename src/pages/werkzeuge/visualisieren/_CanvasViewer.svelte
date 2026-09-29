@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { tick, untrack } from "svelte";
+  import { tick, untrack, type Snippet } from "svelte";
   import { SvelteMap } from "svelte/reactivity";
   import { diagramNodeKey } from "./_diagramDiff.ts";
   import IconZoomIn from "~icons/ic/outline-zoom-in";
@@ -20,6 +20,8 @@
     // Keeps zoom and scroll position when the svg changes instead of fitting
     // the new diagram, e.g. after a small edit
     keepView?: boolean;
+    // Extra controls in the top right corner, e.g. a version select
+    topRight?: Snippet;
   }
 
   let {
@@ -29,6 +31,7 @@
     isFullscreen = false,
     onToggleFullscreen,
     keepView = false,
+    topRight,
   }: Props = $props();
 
   const PINCH_SENSITIVITY = 2;
@@ -419,6 +422,12 @@
       </button>
     {/if}
   </div>
+
+  {#if topRight}
+    <div class="absolute right-16 top-16 z-20">
+      {@render topRight()}
+    </div>
+  {/if}
 
   <div
     bind:this={canvasEl}

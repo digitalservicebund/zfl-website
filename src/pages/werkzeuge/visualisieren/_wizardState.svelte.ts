@@ -3,6 +3,12 @@ import { steps } from "./_steps.ts";
 import type { LawExample, VisOption, VisType } from "./_types";
 
 export type LawType = { id: string; label: string };
+
+export type DiagramVersion = {
+  source: string;
+  /** Short description of the change, e.g. "Pfeile beschriftet" */
+  label?: string;
+};
 export const lawTypes = [
   { id: "own", label: "eigenes Vorhaben" },
   { id: "existing", label: "bestehendes Gesetz" },
@@ -25,9 +31,14 @@ export class WizardState {
   loadingStatusMessage = $state("");
 
   mermaidSource = $state("");
-  /** Set along with mermaidSource by a chat refinement, so the next render
-   * highlights what changed. Not reactive: only read by that render. */
+  /** Set along with mermaidSource by a chat refinement or version switch, so
+   * the next render highlights what changed. Not reactive: only read by that
+   * render. */
   highlightChanges = false;
+  /** Every diagram version of the current Teilbereich; mermaidSource is
+   * the one at versionIndex. */
+  versions = $state.raw<DiagramVersion[]>([]);
+  versionIndex = $state(0);
   summary = $state("");
   isLoading = $state(false);
   mermaidError = $state<string>();
@@ -48,6 +59,41 @@ export class WizardState {
     const trimmed = this.draftText.trim();
     if (!trimmed) return;
     this.analyzedDraftText = trimmed;
+  }
+
+  /** Shows a newly loaded diagram as the first version. */
+  startVersions(source: string) {
+    this.versions = [{ source, label: "Ausgangsversion" }];
+    this.versionIndex = 0;
+    this.mermaidSource = source;
+  }
+
+  /** Shows a chat refinement as a new version. Refining an older version
+   * also appends, so the versions in between are kept. */
+  addVersion(source: string, label?: string) {
+    this.versions = [...this.versions, { source, label }];
+    this.versionIndex = this.versions.length - 1;
+    this.highlightChanges = true;
+    this.mermaidSource = source;
+  }
+
+  showVersion(index: number) {
+    const version = this.versions[index];
+    if (!version || index === this.versionIndex) return;
+    this.versionIndex = index;
+    // An identical source doesn't re-render, which would leave the flag set
+    // for the next, unrelated render
+    this.highlightChanges = version.source !== this.mermaidSource;
+    this.mermaidSource = version.source;
+  }
+
+  /** Changes the shown version in place, for view-only edits like flipping
+   * the direction that shouldn't count as a new version. */
+  updateCurrentVersion(source: string) {
+    this.versions = this.versions.map((version, index) =>
+      index === this.versionIndex ? { ...version, source } : version,
+    );
+    this.mermaidSource = source;
   }
 
   back() {

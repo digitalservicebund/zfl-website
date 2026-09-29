@@ -85,6 +85,8 @@ export type RefineResult = {
   reply: string;
   /** null when the backend answered or asked back without changing the diagram. */
   mermaid: string | null;
+  /** Short description of the change for the version list, e.g. "Pfeile beschriftet"; null along with mermaid or if the model left it out. */
+  label: string | null;
 };
 
 export async function refineMermaid(

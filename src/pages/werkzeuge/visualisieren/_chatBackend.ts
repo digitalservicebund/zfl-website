@@ -28,18 +28,15 @@ const INVALID_DIAGRAM_REPLY =
   "Die Änderung konnte nicht übernommen werden, da sie kein gültiges Diagramm ergab. Bitte formulieren Sie den Wunsch anders.";
 
 /**
- * Refines the wizard's current diagram via the backend and replaces
- * `mermaidSource` with the result. The diagram is sent with every request
+ * Refines the wizard's current diagram via the backend and adds the result
+ * as a new version. The diagram is sent with every request
  * rather than kept in the backend session, so this also works for preset
  * examples, which have no session.
  */
 export function createRefineChatBackend(
   wizard: Pick<
     WizardState,
-    | "visOptionsSessionId"
-    | "selectedVisOption"
-    | "mermaidSource"
-    | "highlightChanges"
+    "visOptionsSessionId" | "selectedVisOption" | "mermaidSource" | "addVersion"
   >,
 ): ChatBackend {
   return {
@@ -77,8 +74,7 @@ export function createRefineChatBackend(
           yield INVALID_DIAGRAM_REPLY;
           return;
         }
-        wizard.highlightChanges = true;
-        wizard.mermaidSource = result.mermaid;
+        wizard.addVersion(result.mermaid, result.label ?? undefined);
       }
       yield result.reply;
     },
