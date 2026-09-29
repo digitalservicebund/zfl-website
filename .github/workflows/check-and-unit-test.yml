@@ -58,7 +58,7 @@ jobs:
         run: pnpm test
 
       - name: Send failure to Slack
-        uses: digitalservicebund/notify-on-failure-gha@9fafd6e97d275a51126f80bec2285a2cf2beb1fc # v1.8.0
+        uses: digitalservicebund/notify-on-failure-gha@b8fdda76a38fa8e94cf623ebdd03e4570bc4ceb0 # v1.9.0
         if: ${{ failure() }}
         with:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
