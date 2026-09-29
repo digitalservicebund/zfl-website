@@ -1,0 +1,11 @@
+title: Gesetze visualisieren
+eli: https://github.com/digitalservicebund/zfl-website/tree/mermaid/src/pages/werkzeuge/visualisieren
+visOptions:
+  - name: Live visualization of a law text
+    visType: swimlane
+    filename: live_visualization
+    articles: []
+  - name: Architecture overview
+    visType: actors
+    filename: akteure
+    articles: []
