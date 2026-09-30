@@ -1,0 +1,39 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { werkzeuge_visualisieren } from "@/config/routes";
+import Wizard from "./_Wizard.svelte";
+import { getVisualisierungExamples } from "./_examples.ts";
+import IconArrowBack from "~icons/ic/outline-arrow-back";
+import IconInfo from "~icons/ic/outline-info";
+
+export const frontmatter = {
+  title: "Visualisierung erstellen",
+  sitemap: false,
+  isStagingOnly: true,
+};
+
+const examples = await getVisualisierungExamples();
+---
+
+<BaseLayout title={frontmatter.title}>
+  <div class="flex h-dvh flex-col">
+    <header class="border-lavender-base flex flex-wrap items-center gap-x-16 gap-y-4 border-b-2 bg-white px-16 py-8 sm:px-24">
+      <a
+        href={werkzeuge_visualisieren.path}
+        class="kern-btn kern-btn--tertiary"
+      >
+        <IconArrowBack class="size-24" aria-hidden="true" />
+        <span class="kern-label">Übersicht</span>
+      </a>
+      <h1 class="kern-heading-small mb-0">{werkzeuge_visualisieren.title}</h1>
+      <p class="kern-body--small kern-body--muted mb-0 flex items-center gap-4">
+        <IconInfo class="size-16 shrink-0" aria-hidden="true" />
+        Prototyp mit KI-generierten Inhalten. Diese können falsch oder unsinnig
+        sein.
+      </p>
+    </header>
+    <main class="min-h-0 flex-1">
+      <Wizard {examples} client:load />
+    </main>
+  </div>
+</BaseLayout>

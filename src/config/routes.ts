@@ -352,6 +352,17 @@ export const werkzeuge_visualisieren = {
   navLabel: null,
 } as const;
 
+export const werkzeuge_visualisieren_erstellen = {
+  key: "werkzeuge_visualisieren_erstellen",
+  path: "/werkzeuge/visualisieren/erstellen",
+  title: "Visualisierung erstellen",
+  parent: werkzeuge_visualisieren,
+  sitemap: false,
+  isStagingOnly: true,
+  navOrder: null,
+  navLabel: null,
+} as const;
+
 export const allRoutes = [
   barrierefreiheit,
   begleitungen,
@@ -384,4 +395,5 @@ export const allRoutes = [
   werkzeuge_ressourcen_technischeUmsetzbarkeit,
   werkzeuge_ressourcen_visualisierungen,
   werkzeuge_visualisieren,
+  werkzeuge_visualisieren_erstellen,
 ] as const;

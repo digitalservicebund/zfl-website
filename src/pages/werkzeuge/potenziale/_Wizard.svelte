@@ -1,7 +1,7 @@
 <script lang="ts">
   import { untrack } from "svelte";
   import { SvelteURLSearchParams, SvelteMap } from "svelte/reactivity";
-  import { werkzeuge_visualisieren } from "@/config/routes";
+  import { werkzeuge_visualisieren_erstellen } from "@/config/routes";
   import { getChecks } from "../_shared/api.ts";
   import ChipBtn from "../_shared/ChipBtn.svelte";
   import { resolveEliUrl } from "../_shared/eli.ts";
@@ -337,7 +337,7 @@
             <Hint>
               Zu {selectedExample.short} gibt es auch Visualisierungen:
               <a
-                href={`${werkzeuge_visualisieren.path}?norm=${selectedExample.short}`}
+                href={`${werkzeuge_visualisieren_erstellen.path}?norm=${selectedExample.short}`}
                 >Hier ansehen</a
               >
             </Hint>

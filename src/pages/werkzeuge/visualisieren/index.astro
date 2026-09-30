@@ -1,40 +1,145 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
+import KernCard from "@/components/KernCard.astro";
+import StepNumber from "@/components/StepNumber.astro";
+import { werkzeuge_visualisieren_erstellen } from "@/config/routes";
 import AIDisclaimer from "../_shared/AIDisclaimer.astro";
-import Wizard from "./_Wizard.svelte";
-import { getCollection } from "astro:content";
-import { basename } from "node:path";
+import { getVisualisierungExamples } from "./_examples.ts";
+import type { VisType } from "./_types";
+import { visTypeIcons } from "./_visTypeIcons.ts";
 
 export const frontmatter = {
   title: "Gesetze visualisieren",
   isStagingOnly: true,
 };
 
-const visualisierungen = await getCollection("kiVisualisierungen");
-const examples = visualisierungen.map(({ data, filePath }) => ({
-  ...data,
-  // filePath preserves the on-disk casing, unlike the glob loader's
-  // lowercased `id` (e.g. "HeizkostenV.yaml" -> id "heizkostenv").
-  short: basename(filePath ?? "", ".yaml"),
-}));
+const wizardPath = werkzeuge_visualisieren_erstellen.path;
+
+const visTypes: { type: VisType; title: string; body: string }[] = [
+  {
+    type: "flowchart",
+    title: "Entscheidungslogik",
+    body: "Prüfschemata und Voraussetzungen als Flussdiagramm – so werden Komplexitäten und Lücken sichtbar.",
+  },
+  {
+    type: "swimlane",
+    title: "Ablauf in der Praxis",
+    body: "Verfahren als Swimlane-Diagramm – wer macht wann was?",
+  },
+  {
+    type: "actors",
+    title: "Akteure",
+    body: "Übersicht über die Beteiligten und ihre Pflichten – wer ist involviert?",
+  },
+];
+
+// Hand-picked to show one example per vis type. Entries that no longer
+// exist in the collection are skipped.
+const featured = [
+  { short: "BEEG", visualization: "Anspruchsvoraussetzungen Elterngeld" },
+  { short: "AsylG", visualization: "Asylverfahren-Ablauf" },
+  { short: "OZG", visualization: "Akteure und Zuständigkeiten" },
+];
+const examples = await getVisualisierungExamples();
+const featuredExamples = featured.flatMap(({ short, visualization }) => {
+  const example = examples.find((e) => e.short === short);
+  const option = example?.visOptions.find((o) => o.name === visualization);
+  if (!example || !option) return [];
+  const params = new URLSearchParams({ norm: short, visualization });
+  return [{ example, option, href: `${wizardPath}?${params}` }];
+});
 ---
 
-<Layout title={frontmatter.title} noMenu>
-  <main>
-    <Hero class="breakout-grid">
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero>
       <h1>{frontmatter.title}</h1>
       <p>
         Visualisieren Sie Prozesse und Entscheidungslogiken in Ihrem
         Gesetzesvorhaben – mithilfe von künstlicher Intelligenz.
       </p>
       <div class="mt-16">
-        <a href="#wizard" class="kern-btn kern-btn--primary">
+        <a href={wizardPath} class="kern-btn kern-btn--primary">
           <span class="kern-label">Jetzt starten</span>
         </a>
       </div>
     </Hero>
     <AIDisclaimer />
-    <Wizard {examples} client:load />
+
+    <section>
+      <h2 class="pb-32">Was möchten Sie visualisieren?</h2>
+      <div class="gap-md grid grid-cols-1 md:grid-cols-3">
+        {visTypes.map(({ type, title, body }) => {
+          const Icon = visTypeIcons[type];
+          return (
+            <KernCard title={title} href={`${wizardPath}?preset=${type}`} small>
+              <Icon
+                slot="pre-header"
+                class="text-cosmic-blue-400 size-32"
+                aria-hidden="true"
+              />
+              {body}
+            </KernCard>
+          );
+        })}
+      </div>
+    </section>
+
+    <section>
+      <h2 class="pb-32">So funktioniert es</h2>
+      <ol class="list-unstyled gap-md grid grid-cols-1 md:grid-cols-3">
+        <li class="space-y-8">
+          <StepNumber number={1} />
+          <h3 class="kern-heading-small">Grundlage wählen</h3>
+          <p>
+            Fügen Sie den Text Ihres Vorhabens ein oder wählen Sie ein
+            bestehendes Gesetz.
+          </p>
+        </li>
+        <li class="space-y-8">
+          <StepNumber number={2} />
+          <h3 class="kern-heading-small">Ausschnitt auswählen</h3>
+          <p>
+            Die KI schlägt Prozesse und Regelungsbereiche vor, die sich für eine
+            Visualisierung eignen.
+          </p>
+        </li>
+        <li class="space-y-8">
+          <StepNumber number={3} />
+          <h3 class="kern-heading-small">Verfeinern und exportieren</h3>
+          <p>
+            Passen Sie das Diagramm im Chat an und laden Sie es als Bild oder
+            Mermaid-Code herunter.
+          </p>
+        </li>
+      </ol>
+    </section>
+
+    {featuredExamples.length > 0 && (
+      <section>
+        <h2 class="pb-32">Beispiele ansehen</h2>
+        <div class="gap-md grid grid-cols-1 md:grid-cols-3">
+          {featuredExamples.map(({ example, option, href }) => {
+            const Icon = visTypeIcons[option.visType];
+            return (
+              <KernCard
+                title={option.name}
+                preline={example.short}
+                href={href}
+                small
+              >
+                <Icon
+                  slot="pre-header"
+                  class="text-cosmic-blue-400 size-32"
+                  aria-hidden="true"
+                />
+                {example.title}
+              </KernCard>
+            );
+          })}
+        </div>
+      </section>
+    )}
   </main>
 </Layout>

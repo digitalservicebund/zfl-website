@@ -21,7 +21,8 @@
     svgToPngBlob,
     svgToSvgBlob,
   } from "./_diagramExport.ts";
-  import type { LawExample } from "./_types";
+  import type { LawExample, VisType } from "./_types";
+  import { visTypeIcons } from "./_visTypeIcons.ts";
   import Step1 from "./_Step1.svelte";
   import { WizardState, setWizardContext } from "./_wizardState.svelte.ts";
   import Step2 from "./_Step2.svelte";
@@ -70,7 +71,15 @@
   );
   const initialNorm = searchParams.get("norm");
   const initialVisualization = searchParams.get("visualization");
+  const initialPreset = searchParams.get("preset");
   let hasAppliedInitialVisualization = false;
+
+  // Lets the intro page's vis type links preselect the preset in step 1.
+  // visTypeIcons has one key per VisType, so it doubles as a runtime check
+  // without pulling zod into the client bundle.
+  if (initialPreset && Object.hasOwn(visTypeIcons, initialPreset)) {
+    wizard.preset = initialPreset as VisType;
+  }
 
   const initialExample = untrack(() =>
     examples.find((example) => example.short === initialNorm),
@@ -589,7 +598,15 @@
 <div
   bind:this={wizardEl}
   id="wizard"
-  class="grid grid-cols-1 h-screen overflow-hidden transition-[grid-template-columns] duration-300 ease-in-out sm:grid-cols-[1fr_0fr] data-show-canvas:sm:grid-cols-[1fr_2fr]"
+  class={[
+    // Explicit rows keep chat and canvas at the wizard's height; auto rows
+    // would grow with the chat's content. On mobile, chat and canvas stack
+    // and split the height.
+    "grid grid-cols-1 grid-rows-[minmax(0,1fr)] h-full overflow-hidden transition-[grid-template-columns] duration-300 ease-in-out sm:grid-cols-[1fr_0fr] data-show-canvas:sm:grid-cols-[1fr_2fr]",
+    showCanvas &&
+      !isFullscreen &&
+      "max-sm:grid-rows-[minmax(0,1fr)_minmax(0,1fr)]",
+  ]}
   data-show-canvas={showCanvas || undefined}
 >
   <div
@@ -658,7 +675,7 @@
     <div
       id="vis-canvas"
       class={[
-        "relative w-full h-dvh min-w-0 flex flex-col justify-center items-center bg-lavender-200",
+        "relative w-full h-full min-w-0 flex flex-col justify-center items-center bg-lavender-200",
         isFullscreen && "sm:col-span-2",
       ]}
     >
