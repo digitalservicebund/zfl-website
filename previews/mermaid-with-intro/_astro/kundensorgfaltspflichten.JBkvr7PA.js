@@ -1,0 +1,27 @@
+var e=`---
+summary: "Der Ablauf der allgemeinen Sorgfaltspflichten nach §10 GwG, von der Identifizierung des Vertragspartners und ggf. des wirtschaftlich Berechtigten über die Prüfung auf politisch exponierte Personen bis zur Entscheidung, ob eine Geschäftsbeziehung begründet oder abgelehnt werden muss."
+---
+flowchart TD
+    A["Geschäftsbeziehung wird begründet oder<br/>Transaktion vorgenommen"] --> B{"Auslösetatbestand erfüllt?<br/>Begründung einer<br/>Geschäftsbeziehung,<br/>Schwellenwert überschritten,<br/>Verdachtsmomente oder Zweifel<br/>an Identität — <a href='{{ELI}}/art-z10' target='_blank' rel='noopener'>§10 Abs. 3</a>"}
+    B -->|Nein| Z1["Keine allgemeinen Sorgfaltspflichten ausgelöst"]
+    B -->|Ja| C["Identifizierung des Vertragspartners<br/>&amp; ggf. für ihn auftretender Person<br/>— <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>§10 Abs. 1 Nr. 1</a>, <a href='{{ELI}}#art-z11_abs-z4' target='_blank' rel='noopener'>§11 Abs. 4</a>,<br/><a href='{{ELI}}#art-z12_abs-z1' target='_blank' rel='noopener'>§12 Abs. 1</a>"]
+    C --> D{"Handelt der Vertragspartner<br/>für einen wirtschaftlich<br/>Berechtigten? — <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>§10 Abs. 1 Nr.<br/>2</a>"}
+    D -->|Ja| E["Identifizierung des wirtschaftlich<br/>Berechtigten — <a href='{{ELI}}#art-z11_abs-z5' target='_blank' rel='noopener'>§11 Abs. 5</a>, <a href='{{ELI}}#art-z12_abs-z3' target='_blank' rel='noopener'>§12 Abs. 3</a>"]
+    D -->|Nein| F
+    E --> F["Zweck &amp; angestrebte Art der<br/>Geschäftsbeziehung einholen und bewerten<br/>— <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>§10 Abs. 1 Nr. 3</a>"]
+    F --> G{"Vertragspartner oder<br/>wirtschaftlich Berechtigter<br/>politisch exponierte Person<br/>(PEP), Familienmitglied oder<br/>nahestehende Person? — <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>§10<br/>Abs. 1 Nr. 4</a>"}
+    G -->|Ja| H["Zusätzlich verstärkte Sorgfaltspflichten<br/>anwenden — <a href='{{ELI}}/art-z15' target='_blank' rel='noopener'>§15</a>"]
+    G -->|Nein| I
+    H --> I["Kontinuierliche Überwachung der<br/>Geschäftsbeziehung &amp; ihrer<br/>Transaktionen, Aktualisierung der<br/>Angaben — <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>§10 Abs. 1 Nr. 5</a>"]
+    I --> J{"Konnten die Sorgfaltspflichten<br/>nach Nr. 1 bis 4 vollständig<br/>erfüllt werden? — <a href='{{ELI}}#art-z10_abs-z9' target='_blank' rel='noopener'>§10 Abs. 9</a>"}
+    J -->|Ja| N["Geschäftsbeziehung/Transaktion kann<br/>durchgeführt werden"]
+    J -->|Nein| K{"Rechtsanwalt/Notar/Steuerberater<br/>(§2 Abs. 1 Nr. 10/12) bei<br/>reiner Rechtsberatung oder<br/>Prozessvertretung ohne<br/>Missbrauchskenntnis?"}
+    K -->|Ja| L["Ausnahme: Geschäftsbeziehung/Transaktion<br/>dennoch möglich — <a href='{{ELI}}#art-z10_abs-z9' target='_blank' rel='noopener'>§10 Abs. 9 S. 3</a>"]
+    K -->|Nein| M["Geschäftsbeziehung nicht<br/>begründen/fortsetzen, Transaktion nicht<br/>durchführen, bestehende<br/>Geschäftsbeziehung kündigen — <a href='{{ELI}}#art-z10_abs-z9' target='_blank' rel='noopener'>§10 Abs. 9<br/>S. 1-2</a>"]
+
+    style N fill:#d4edda,stroke:#2d8a4a
+    style L fill:#d4edda,stroke:#2d8a4a
+    style Z1 fill:#d4edda,stroke:#2d8a4a
+    style H fill:#fff3cd,stroke:#c9a227
+    style M fill:#f8d7da,stroke:#c0392b
+`;export{e as default};

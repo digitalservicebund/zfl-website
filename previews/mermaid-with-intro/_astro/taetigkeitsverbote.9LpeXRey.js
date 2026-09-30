@@ -1,0 +1,33 @@
+var e=`---
+summary: "Das Verfahren der Belehrung, Erklärung und ärztlichen Bescheinigung vor Aufnahme einer Tätigkeit im Lebensmittelbereich nach §§42 und 43 IfSG sowie die Folgen, wenn während der Tätigkeit Hinderungsgründe auftreten."
+---
+flowchart TD
+    START["Person soll erstmals gewerbsmäßig eine<br/>Tätigkeit nach <a href='{{ELI}}#art-z42_abs-z1' target='_blank' rel='noopener'>§42 Abs.1</a><br/>(Umgang mit Lebensmitteln oder<br/>Gemeinschaftsverpflegung) aufnehmen"] --> BEL["Belehrung durch das Gesundheitsamt oder<br/>einen beauftragten Arzt über die Verbote<br/>nach §42 Abs.1 und die Pflichten — <a href='{{ELI}}#art-z43_abs-z1' target='_blank' rel='noopener'>§43<br/>Abs.1 S.1 Nr.1</a>"]
+
+    BEL --> ERKL["Erklärung in Textform: keine Tatsachen<br/>für ein Tätigkeitsverbot bekannt — <a href='{{ELI}}#art-z43_abs-z1' target='_blank' rel='noopener'>§43<br/>Abs.1 S.1 Nr.2</a>"]
+
+    ERKL --> F1{"Liegen Anhaltspunkte für<br/>Hinderungsgründe nach §42<br/>Abs.1 vor? — <a href='{{ELI}}#art-z43_abs-z1' target='_blank' rel='noopener'>§43 Abs.1 S.2</a>"}
+
+    F1 -->|Ja| ZEUGNIS{"Ärztliches Zeugnis:<br/>Hinderungsgründe bestehen<br/>nicht oder nicht mehr? — <a href='{{ELI}}#art-z43_abs-z1' target='_blank' rel='noopener'>§43<br/>Abs.1 S.2</a>"}
+    ZEUGNIS -->|Nein| VERBOT1["Bescheinigung darf nicht ausgestellt<br/>werden; Tätigkeit darf nicht aufgenommen<br/>werden"]
+    ZEUGNIS -->|Ja| BESCH
+    F1 -->|Nein| BESCH["Bescheinigung des Gesundheitsamtes<br/>ausstellen (nicht älter als 3 Monate)<br/>— <a href='{{ELI}}#art-z43_abs-z1' target='_blank' rel='noopener'>§43 Abs.1 S.1</a>"]
+
+    BESCH --> TAETIG["Tätigkeitsaufnahme zulässig"]
+
+    TAETIG --> LAUF{"Treten während der Tätigkeit<br/>Hinderungsgründe nach §42<br/>Abs.1 auf? — <a href='{{ELI}}#art-z43_abs-z2' target='_blank' rel='noopener'>§43 Abs.2</a>"}
+    LAUF -->|Nein| WEITER["Tätigkeit wird fortgesetzt;<br/>Belehrung ist alle 2 Jahre zu<br/>wiederholen — <a href='{{ELI}}#art-z43_abs-z4' target='_blank' rel='noopener'>§43 Abs.4</a>"]
+    LAUF -->|Ja| MITT["Unverzügliche Mitteilung an Arbeitgeber<br/>oder Dienstherrn — <a href='{{ELI}}#art-z43_abs-z2' target='_blank' rel='noopener'>§43 Abs.2</a>"]
+
+    MITT --> MASSN["Arbeitgeber leitet unverzüglich die zur<br/>Verhinderung der Weiterverbreitung<br/>erforderlichen Maßnahmen ein — <a href='{{ELI}}#art-z43_abs-z3' target='_blank' rel='noopener'>§43 Abs.3</a>"]
+
+    MASSN --> F2{"Lässt das Gesundheitsamt eine<br/>Ausnahme zu, weil der<br/>Übertragungsschutz durch<br/>andere Maßnahmen gewährleistet<br/>ist? — <a href='{{ELI}}#art-z42_abs-z4' target='_blank' rel='noopener'>§42 Abs.4</a>"}
+    F2 -->|Ja| AUSNAHME["Tätigkeit darf unter Auflagen<br/>fortgesetzt werden"]
+    F2 -->|Nein| SPERRE["Tätigkeits- und Beschäftigungsverbot<br/>nach <a href='{{ELI}}#art-z42_abs-z1' target='_blank' rel='noopener'>§42 Abs.1</a>"]
+
+    style VERBOT1 fill:#f8d7da,stroke:#c0392b
+    style SPERRE fill:#f8d7da,stroke:#c0392b
+    style AUSNAHME fill:#fff3cd,stroke:#c9a227
+    style TAETIG fill:#d4edda,stroke:#2d8a4a
+    style WEITER fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};
