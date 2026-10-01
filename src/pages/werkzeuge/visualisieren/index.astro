@@ -4,6 +4,7 @@ import Hero from "@/components/Hero.astro";
 import KernCard from "@/components/KernCard.astro";
 import StepNumber from "@/components/StepNumber.astro";
 import { werkzeuge_visualisieren_erstellen } from "@/config/routes";
+import { withBase } from "@/utils/path";
 import AIDisclaimer from "../_shared/AIDisclaimer.astro";
 import { getVisualisierungExamples } from "./_examples.ts";
 import type { VisType } from "./_types";
@@ -52,6 +53,15 @@ const featuredExamples = featured.flatMap(({ short, visualization }) => {
 ---
 
 <Layout title={frontmatter.title}>
+  {/* The wizard used to live at this path; forward old deep links. */}
+  <script is:inline define:vars={{ wizardUrl: withBase(wizardPath) }}>
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("norm") || params.has("visualization")) {
+      window.location.replace(
+        wizardUrl + window.location.search + window.location.hash,
+      );
+    }
+  </script>
   <main class="breakout-grid">
     <Hero>
       <h1>{frontmatter.title}</h1>
