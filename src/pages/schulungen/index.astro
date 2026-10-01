@@ -1,7 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
-import Schedule from "./_schedule.astro";
+//import Schedule from "./_schedule.astro";
 import InfoPanel from "@/components/InfoPanel.astro";
 import KernCard from "@/components/KernCard.astro";
 import { Image } from "astro:assets";
@@ -11,7 +11,7 @@ import onlineSchulungImg from "@/images/online-schulung.jpg";
 import visImg from "@/images/Trainings.jpg";
 // import trainTheTrainerImg from "@/images/train-the-trainer.jpg";
 import computerImg from "@/images/computer.jpg";
-import appointments from "./_appointments.json";
+//import appointments from "./_appointments.json";
 
 export const frontmatter = {
   title: "Schulungen",
@@ -48,11 +48,11 @@ const description =
       <div class="space-y-80">
         <div>
           <h3>
-            Regelungen digital- und praxistauglich gestalten - Tipps für den
-            Digitalcheck <span class="whitespace-nowrap">(1,5 Stunden)</span>
+            Regelungen digitaltauglich gestalten - Tipps für den Digitalcheck{" "}
+            <span class="whitespace-nowrap">(1,5 Stunden)</span>
           </h3>
           <p>
-            Erfahren Sie, wie Sie Ihr Vorhaben digital- und praxistauglich,
+            Erfahren Sie, wie Sie Ihr Vorhaben digitaltauglich,
             adressatenorientiert und bürokratiearm gestalten. In dieser
             kompakten 90-minütigen Online-Schulung erhalten Sie eine umfassende
             Einführung zu den folgenden Inhalten: Digitalcheck erfolgreich
@@ -60,36 +60,38 @@ const description =
             für Digitaltauglichkeit, Praxistauglichkeit berücksichtigen und
             EU-Interoperabilität.
           </p>
-          <div>
+          <p>
+            Die nächsten Schulungen befinden sich gerade in Planung. Sobald es
+            neue Termine gibt, finden Sie diese hier.
+          </p>
+          <!--<div>
             <Schedule appointments={appointments} caption="Nächste Termine" />
-          </div>
+          </div> -->
         </div>
         <div>
-          <h3>Visualisierung als Werkzeug der Besseren Rechtsetzung</h3>
+          <h3>
+            Visualisierung als Werkzeug der Besseren Rechtsetzung <br />
+            „Recht gut gedacht – Recht besser gemacht!“
+          </h3>
           <p>
             In Kooperation mit der Bundesakademie für öffentliche Verwaltung
-            (BAköV) bietet das ZfL im September ihre weiterentwickelte Schulung
-            zur Rechtsvisualisierung an: Visualisierung als
-            Modellierungswerkzeug für wirkungsorientierte Gesetzgebung „Recht
-            gut gedacht – Recht besser gemacht! Visualisierung als Werkzeug der
-            Besseren Rechtsetzung”.
+            (BAköV) bietet das ZfL auch im November nochmals ihre
+            weiterentwickelte Schulung zur Rechtsvisualisierung an:
+            Visualisierung als Modellierungswerkzeug für wirkungsorientierte
+            Gesetzgebung „Recht gut gedacht – Recht besser gemacht!
+            Visualisierung als Werkzeug der Besseren Rechtsetzung”.
           </p>
           <ul>
             <li>
               <p class="font-bold">
-                Termin: Freitag, 11.09.2026 von 09:00-16:30 Uhr
+                Termin: Donnerstag, 05.11. und Freitag, 06.11. jeweils von
+                9.00-13.30 Uhr
               </p>
               Eine detaillierte Beschreibung, Infos zum Veranstaltungsort sowie
-              die Anmeldung, finden Sie unter der RS 195.01/26 im IFOS.
+              die Anmeldung folgen zeitnah im IFOS.
               <br />
             </li>
           </ul>
-          <a
-            href="https://www.ifosbund.de/pub/Fortbildungsangebot/va_detail.xhtml?id=162289&from=%2Fpub%2FFortbildungsangebot%2Fva_suche.xhtml"
-            target="_blank"
-          >
-            Zur Anmeldung (IFOS-BUND)
-          </a>
         </div>
         <div>
           <h3>
