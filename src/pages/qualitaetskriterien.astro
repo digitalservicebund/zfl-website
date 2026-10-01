@@ -2,11 +2,11 @@
 import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
-import IconBackHand from "~icons/ic/outline-back-hand";
-import IconPublic from "~icons/ic/outline-public";
-import IconShield from "~icons/ic/outline-shield";
-import IconThumbUp from "~icons/ic/outline-thumb-up";
-import IconGridView from "~icons/ic/outline-grid-view";
+import IconSignLanguage from "~icons/ic/baseline-sign-language";
+import IconLanguage from "~icons/ic/baseline-language";
+import IconGppGood from "~icons/ic/baseline-gpp-good";
+import IconRecommend from "~icons/ic/baseline-recommend";
+import IconDashboardCustomize from "~icons/ic/baseline-dashboard-customize";
 import { werkzeuge_ressourcen } from "@/config/routes";
 
 export const frontmatter = {
@@ -32,7 +32,7 @@ export const frontmatter = {
       <div class="grid grid-cols-1 gap-x-64 gap-y-56 md:grid-cols-2">
         <div class="flex flex-col gap-32">
           <div class="text-cosmic-blue-400 bg-lavender-400 flex size-64 flex-none items-center justify-center rounded-sm">
-            <IconBackHand class="size-32" aria-hidden="true" />
+            <IconSignLanguage class="size-32" aria-hidden="true" />
           </div>
           <h2 class="m-0">Praxistauglichkeit und Verständlichkeit</h2>
           <ul class="list-unstyled checklist">
@@ -81,7 +81,7 @@ export const frontmatter = {
 
         <div class="flex flex-col gap-32">
           <div class="text-cosmic-blue-400 bg-lavender-400 flex size-64 flex-none items-center justify-center rounded-sm">
-            <IconPublic class="size-32" aria-hidden="true" />
+            <IconLanguage class="size-32" aria-hidden="true" />
           </div>
           <h2 class="m-0">Zugänglichkeit und Kostenfreiheit</h2>
           <ul class="list-unstyled checklist">
@@ -129,7 +129,7 @@ export const frontmatter = {
 
         <div class="flex flex-col gap-32">
           <div class="text-cosmic-blue-400 bg-lavender-400 flex size-64 flex-none items-center justify-center rounded-sm">
-            <IconShield class="size-32" aria-hidden="true" />
+            <IconGppGood class="size-32" aria-hidden="true" />
           </div>
           <h2 class="m-0">Datenschutz und IT-Sicherheit</h2>
           <ul class="list-unstyled checklist">
@@ -168,7 +168,7 @@ export const frontmatter = {
 
         <div class="flex flex-col gap-32">
           <div class="text-cosmic-blue-400 bg-lavender-400 flex size-64 flex-none items-center justify-center rounded-sm">
-            <IconThumbUp class="size-32" aria-hidden="true" />
+            <IconRecommend class="size-32" aria-hidden="true" />
           </div>
           <h2 class="m-0">Qualität und Verlässlichkeit</h2>
           <ul class="list-unstyled checklist">
@@ -205,7 +205,7 @@ export const frontmatter = {
 
         <div class="flex flex-col gap-32">
           <div class="text-cosmic-blue-400 bg-lavender-400 flex size-64 flex-none items-center justify-center rounded-sm">
-            <IconGridView class="size-32" aria-hidden="true" />
+            <IconDashboardCustomize class="size-32" aria-hidden="true" />
           </div>
           <h2 class="m-0">Inhaltliche Relevanz und Mehrwert</h2>
           <ul class="list-unstyled checklist">
@@ -293,7 +293,7 @@ export const frontmatter = {
     li {
       @apply flex items-start gap-8 md:gap-32;
       span.kern-icon {
-        @apply bg-cosmic-blue-base! size-48 shrink-0;
+        @apply bg-cosmic-blue-base! size-32 shrink-0;
       }
       p.kern-heading-medium {
         padding: 0;
