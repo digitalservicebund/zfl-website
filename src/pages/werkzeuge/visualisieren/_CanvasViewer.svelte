@@ -2,9 +2,8 @@
   import { tick, untrack, type Snippet } from "svelte";
   import { SvelteMap } from "svelte/reactivity";
   import { diagramNodeKey } from "./_diagramDiff.ts";
-  import IconZoomIn from "~icons/ic/outline-zoom-in";
-  import IconZoomOut from "~icons/ic/outline-zoom-out";
-  import IconFitScreen from "~icons/ic/outline-fit-screen";
+  import IconZoomIn from "~icons/ic/outline-plus";
+  import IconZoomOut from "~icons/ic/outline-minus";
   import IconRotate from "~icons/ic/outline-rotate-90-degrees-cw";
   import IconFullscreen from "~icons/ic/outline-fullscreen";
   import IconFullscreenExit from "~icons/ic/outline-fullscreen-exit";
@@ -401,15 +400,6 @@
       <IconZoomOut class="text-cosmic-blue-base text-xl" aria-hidden="true" />
       {@render tooltip("Verkleinern")}
     </button>
-    <button
-      type="button"
-      class="group kern-btn kern-btn--secondary kern-btn--only-icon"
-      onclick={resetView}
-      aria-label="Zoom zurücksetzen"
-    >
-      <IconFitScreen class="text-cosmic-blue-base text-xl" aria-hidden="true" />
-      {@render tooltip("Zoom zurücksetzen")}
-    </button>
     {#if onFlip}
       <button
         type="button"
@@ -433,7 +423,7 @@
     bind:this={canvasEl}
     tabindex="0"
     aria-label={`${title}, verschiebbar per Ziehen oder Scrollen`}
-    class="viewer-canvas h-full w-full touch-none select-none overflow-auto [cursor:grab] active:[cursor:grabbing]"
+    class="viewer-canvas h-full w-full touch-none select-none overflow-auto cursor-grab active:cursor-grabbing]"
     onpointerdown={onPointerDown}
     onpointermove={onPointerMove}
     onpointerup={onPointerUp}
