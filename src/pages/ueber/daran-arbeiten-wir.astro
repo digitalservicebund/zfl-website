@@ -10,6 +10,7 @@ import {
   bessereRechtsetzung,
   home,
   kontakt,
+  qualitaetskriterien,
   schulungen,
   ueber,
   ueber_aktuelleMeldungen,
@@ -21,6 +22,7 @@ import {
   werkzeuge_ressourcen,
 } from "@/config/routes";
 import Layout from "@/layouts/Layout.astro";
+import { isProduction } from "@/config/stage";
 
 export const frontmatter = {
   title: "Daran arbeiten wir",
@@ -170,6 +172,21 @@ export const frontmatter = {
         <li class="timeline-year-item">
           <Badge look="timelineYear">2026</Badge>
         </li>
+        {!isProduction && (
+          <li>
+            <Badge look="timeline">Oktober 2026</Badge>
+            <h3>Qualitätskriterien</h3>
+            <ul>
+              <li>
+                Neue Seite ergänzt: Qualitätskriterien zur Aufnahme externer
+                Inhalte
+                <a href={`${qualitaetskriterien.path}`} class="block">
+                  Hier ansehen
+                </a>
+              </li>
+            </ul>
+          </li>
+        )}
         <li>
           <Badge look="timeline">September 2026</Badge>
           <h3>Schulungsmaterialien und Zahlen und Fakten</h3>
