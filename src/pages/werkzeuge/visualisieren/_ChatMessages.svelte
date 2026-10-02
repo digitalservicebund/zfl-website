@@ -39,7 +39,8 @@
               standalone
               selected={index === versionIndex}
               onclick={() => onShowVersion(index)}
-              aria-label={`Version ${index + 1} anzeigen`}>v{index + 1}</ChipBtn
+              aria-label={`Version ${index + 1} anzeigen`}
+              >Version {index + 1}</ChipBtn
             >
           </div>
         {/if}

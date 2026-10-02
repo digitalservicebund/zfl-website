@@ -86,7 +86,7 @@
               standalone
               selected={wizard.versionIndex === 0}
               onclick={() => wizard.showVersion(0)}
-              aria-label="Version 1 anzeigen">v1</ChipBtn
+              aria-label="Version 1 anzeigen">Version 1</ChipBtn
             >
           </div>
         {/if}
