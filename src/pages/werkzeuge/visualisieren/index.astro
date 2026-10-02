@@ -2,11 +2,13 @@
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
 import KernCard from "@/components/KernCard.astro";
-import StepNumber from "@/components/StepNumber.astro";
+import FeatureSet from "@/components/FeatureSet.astro";
+import FeatureItem from "@/components/FeatureItem.astro";
+import IconShare from "~icons/ic/twotone-share";
+import IconLightbulb from "~icons/ic/twotone-lightbulb";
+import IconEye from "~icons/ic/twotone-remove-red-eye";
 import { werkzeuge_visualisieren_erstellen } from "@/config/routes";
-import AIDisclaimer from "../_shared/AIDisclaimer.astro";
 import { getVisualisierungExamples } from "./_examples.ts";
-import type { VisType } from "./_types";
 import { visTypeIcons } from "./_visTypeIcons.ts";
 
 export const frontmatter = {
@@ -15,24 +17,6 @@ export const frontmatter = {
 };
 
 const wizardPath = werkzeuge_visualisieren_erstellen.path;
-
-const visTypes: { type: VisType; title: string; body: string }[] = [
-  {
-    type: "flowchart",
-    title: "Entscheidungslogik",
-    body: "Prüfschemata und Voraussetzungen als Flussdiagramm – so werden Komplexitäten und Lücken sichtbar.",
-  },
-  {
-    type: "swimlane",
-    title: "Ablauf in der Praxis",
-    body: "Verfahren als Swimlane-Diagramm – wer macht wann was?",
-  },
-  {
-    type: "actors",
-    title: "Akteure",
-    body: "Übersicht über die Beteiligten und ihre Pflichten – wer ist involviert?",
-  },
-];
 
 // Hand-picked to show one example per vis type. Entries that no longer
 // exist in the collection are skipped.
@@ -68,61 +52,41 @@ const featuredExamples = featured.flatMap(({ short, visualization }) => {
         Visualisieren Sie Prozesse und Entscheidungslogiken in Ihrem
         Gesetzesvorhaben – mithilfe von künstlicher Intelligenz.
       </p>
-      <div class="mt-16">
+    </Hero>
+
+    <section>
+      <h2>Warum eine Visualisierung erstellen?</h2>
+      <FeatureSet>
+        <FeatureItem>
+          <IconShare slot="icon" class="size-full" />
+          <p>
+            Frühzeitig <strong>Komplexität</strong> erkennen und{" "}
+            <strong>reduzieren</strong>
+          </p>
+        </FeatureItem>
+        <FeatureItem>
+          <IconLightbulb slot="icon" class="size-full" />
+          <p>
+            <strong>Chancen und Hürden</strong> der Digitalisierung erkennen
+          </p>
+        </FeatureItem>
+        <FeatureItem>
+          <IconEye slot="icon" class="size-full" />
+          <p>
+            <strong>Abstimmung</strong> vereinfachen, z.&nbsp;B. im Ressort und
+            mit Verbänden
+          </p>
+        </FeatureItem>
+      </FeatureSet>
+    </section>
+
+    <section class="breakout bg-lavender-200">
+      <h2 class="mb-32">Visualisierung jetzt starten</h2>
+      <div>
         <a href={wizardPath} class="kern-btn kern-btn--primary">
           <span class="kern-label">Jetzt starten</span>
         </a>
       </div>
-    </Hero>
-    <AIDisclaimer />
-
-    <section>
-      <h2 class="pb-32">Was möchten Sie visualisieren?</h2>
-      <div class="gap-md grid grid-cols-1 md:grid-cols-3">
-        {visTypes.map(({ type, title, body }) => {
-          const Icon = visTypeIcons[type];
-          return (
-            <KernCard title={title} href={`${wizardPath}?preset=${type}`} small>
-              <Icon
-                slot="pre-header"
-                class="text-cosmic-blue-400 size-32"
-                aria-hidden="true"
-              />
-              {body}
-            </KernCard>
-          );
-        })}
-      </div>
-    </section>
-
-    <section>
-      <h2 class="pb-32">So funktioniert es</h2>
-      <ol class="list-unstyled gap-md grid grid-cols-1 md:grid-cols-3">
-        <li class="space-y-8">
-          <StepNumber number={1} />
-          <h3 class="kern-heading-small">Grundlage wählen</h3>
-          <p>
-            Fügen Sie den Text Ihres Vorhabens ein oder wählen Sie ein
-            bestehendes Gesetz.
-          </p>
-        </li>
-        <li class="space-y-8">
-          <StepNumber number={2} />
-          <h3 class="kern-heading-small">Ausschnitt auswählen</h3>
-          <p>
-            Die KI schlägt Prozesse und Regelungsbereiche vor, die sich für eine
-            Visualisierung eignen.
-          </p>
-        </li>
-        <li class="space-y-8">
-          <StepNumber number={3} />
-          <h3 class="kern-heading-small">Verfeinern und exportieren</h3>
-          <p>
-            Passen Sie das Diagramm im Chat an und laden Sie es als Bild oder
-            Mermaid-Code herunter.
-          </p>
-        </li>
-      </ol>
     </section>
 
     {featuredExamples.length > 0 && (
