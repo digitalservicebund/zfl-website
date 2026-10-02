@@ -28,6 +28,8 @@
   import Step2 from "./_Step2.svelte";
   import StepFinal from "./_StepFinal.svelte";
   import { steps } from "./_steps.ts";
+  import { werkzeuge_visualisieren } from "@/config/routes";
+  import IconChevronRight from "~icons/ic/outline-chevron-right";
 
   let { examples }: { examples: LawExample[] } = $props();
 
@@ -213,6 +215,8 @@
   let keepDiagramView = $state(false);
   let renderCount = 0;
   let saveDialogEl: HTMLDialogElement | undefined = $state();
+  let editDialogEl: HTMLDialogElement | undefined = $state();
+  let resetDialogEl: HTMLDialogElement | undefined = $state();
 
   $effect(() => {
     if (!wizard.selectedVisOption) {
@@ -424,6 +428,12 @@
 
   let showCanvas = $derived(wizard.currentStep === steps.length);
 
+  let lawTitle = $derived(
+    wizard.selectedLawType === "existing"
+      ? wizard.selectedExample?.title
+      : wizard.analyzedDraftText && "Eigenes Vorhaben",
+  );
+
   let wizardEl: HTMLDivElement | undefined = $state();
   // Unsupported e.g. on iPhone Safari, where the button is hidden
   const canFullscreen =
@@ -524,7 +534,7 @@
   </svg>
 {/snippet}
 
-{#snippet buttons()}
+{#snippet editButtons()}
   <div class="flex flex-col items-start">
     <a
       href={drawioUrl}
@@ -538,6 +548,11 @@
       ></span>
       <span class="kern-label">Bearbeiten mit Draw.io</span>
     </a>
+  </div>
+{/snippet}
+
+{#snippet exportButtons()}
+  <div class="flex flex-col items-start">
     <button
       type="button"
       onclick={downloadSvg}
@@ -593,168 +608,308 @@
   </div>
 {/snippet}
 
+{#snippet stepCrumb(label: string, step: number)}
+  <li class="flex items-center gap-4">
+    <IconChevronRight class="size-16 shrink-0" aria-hidden="true" />
+    {#if wizard.currentStep === step}
+      <span aria-current="page">{label}</span>
+    {:else}
+      <button
+        type="button"
+        class="kern-link kern-link--small py-0"
+        onclick={() => (wizard.currentStep = step)}>{label}</button
+      >
+    {/if}
+  </li>
+{/snippet}
+
 <svelte:document onfullscreenchange={onFullscreenChange} />
 
-<div
-  bind:this={wizardEl}
-  id="wizard"
-  class={[
-    // Explicit rows keep chat and canvas at the wizard's height; auto rows
-    // would grow with the chat's content. On mobile, chat and canvas stack
-    // and split the height.
-    "grid grid-cols-1 grid-rows-[minmax(0,1fr)] h-full overflow-hidden transition-[grid-template-columns] duration-300 ease-in-out sm:grid-cols-[1fr_0fr] data-show-canvas:sm:grid-cols-[1fr_2fr]",
-    showCanvas &&
-      !isFullscreen &&
-      "max-sm:grid-rows-[minmax(0,1fr)_minmax(0,1fr)]",
-  ]}
-  data-show-canvas={showCanvas || undefined}
->
-  <div
-    id="vis-chat"
-    class="min-w-0 py-md px-16 sm:px-24 w-full max-w-900 mx-auto max-h-full overflow-auto"
-    class:hidden={isFullscreen}
+<div class="flex h-full flex-col">
+  <header
+    class="border-lavender-base flex flex-wrap items-center justify-between gap-x-16 gap-y-8 border-b-2 bg-white px-16 py-16 sm:px-24"
   >
-    <div class="flex flex-col h-full gap-32">
-      <div class="vis-chat-header space-y-16">
-        <div class="kern-progress">
-          <label
-            class="kern-label"
-            class:hidden={wizard.currentStep === steps.length}
-            for="progress1"
-            >Schritt {wizard.currentStep} von {steps.length}</label
+    <div class="space-y-4">
+      <h1 class="kern-heading-small p-0">
+        {werkzeuge_visualisieren.title}
+      </h1>
+      <nav aria-label="Brotkrümelnavigation">
+        <ul
+          class="list-unstyled kern-body--small flex flex-wrap items-center gap-4"
+        >
+          <li>
+            <a
+              href={werkzeuge_visualisieren.path}
+              class="kern-link kern-link--small py-0"
+            >
+              Übersicht</a
+            >
+          </li>
+          {@render stepCrumb("Textauswahl", 1)}
+          {#if lawTitle && wizard.currentStep >= 2}
+            {@render stepCrumb(lawTitle, 2)}
+          {/if}
+          {#if wizard.selectedVisOption && wizard.currentStep === steps.length}
+            {@render stepCrumb(wizard.selectedVisOption.name, steps.length)}
+          {/if}
+        </ul>
+      </nav>
+    </div>
+    {#if wizard.currentStep > 1}
+      <div class="flex flex-row gap-8">
+        <button
+          type="button"
+          class="kern-btn kern-btn--tertiary"
+          onclick={() => resetDialogEl?.showModal()}
+        >
+          <span
+            class="kern-icon kern-icon--autorenew kern-icon--default"
+            aria-hidden="true"
+          ></span>
+          <span class="kern-label">Neu beginnen</span>
+        </button>
+        {#if showCanvas && !wizard.isLoading && wizard.mermaidSource}
+          <button
+            type="button"
+            class="kern-btn kern-btn--secondary"
+            onclick={() => editDialogEl?.showModal()}
           >
-          <progress id="progress1" value={wizard.currentStep} max={steps.length}
-          ></progress>
-        </div>
-        <div class="flex">
-          {#if wizard.currentStep > 1}
-            <button
-              type="button"
-              class="kern-btn kern-btn--tertiary"
-              onclick={() => wizard.back()}
-            >
-              <span
-                class="kern-icon kern-icon--arrow-back kern-icon--default"
-                aria-hidden="true"
-              ></span>
-              <span class="kern-label">Zurück</span>
-            </button>
-          {/if}
-          {#if wizard.currentStep < steps.length && wizard.canAdvance}
-            <button
-              type="button"
-              class="kern-btn kern-btn--tertiary ms-auto"
-              onclick={() => wizard.next()}
-            >
-              <span class="kern-label">Weiter</span>
-              <span
-                class="kern-icon kern-icon--arrow-forward kern-icon--default"
-                aria-hidden="true"
-              ></span>
-            </button>
-          {/if}
-        </div>
-      </div>
-      <!-- min-h-0 only on the final step: it scrolls its chat internally,
-           while earlier steps overflow into #vis-chat's scrollbar -->
-      <div
-        class="flex-1 w-full flex flex-col gap-32 justify-center"
-        class:min-h-0={wizard.currentStep === steps.length}
-      >
-        {#if wizard.currentStep === 1}
-          <Step1 {examples} />
-        {:else if wizard.currentStep === 2}
-          <Step2 />
-        {:else if wizard.currentStep === steps.length}
-          <StepFinal onSave={() => saveDialogEl?.showModal()} />
+            <span
+              class="kern-icon kern-icon--edit kern-icon--default"
+              aria-hidden="true"
+            ></span>
+            <span class="kern-label">Bearbeiten</span>
+          </button>
+          <button
+            type="button"
+            class="kern-btn kern-btn--primary"
+            onclick={() => saveDialogEl?.showModal()}
+          >
+            <span
+              class="kern-icon kern-icon--download kern-icon--default"
+              aria-hidden="true"
+            ></span>
+            <span class="kern-label">Exportieren</span>
+          </button>
         {/if}
       </div>
-    </div>
-  </div>
-  {#if showCanvas}
+    {/if}
+  </header>
+  <main class="min-h-0 flex-1">
     <div
-      id="vis-canvas"
+      bind:this={wizardEl}
+      id="wizard"
       class={[
-        "relative w-full h-full min-w-0 flex flex-col justify-center items-center bg-lavender-200",
-        isFullscreen && "sm:col-span-2",
+        // Explicit rows keep chat and canvas at the wizard's height; auto rows
+        // would grow with the chat's content. On mobile, chat and canvas stack
+        // and split the height.
+        "grid grid-cols-1 grid-rows-[minmax(0,1fr)] h-full overflow-hidden transition-[grid-template-columns] duration-300 ease-in-out sm:grid-cols-[1fr_0fr] data-show-canvas:sm:grid-cols-[1fr_2fr]",
+        showCanvas &&
+          !isFullscreen &&
+          "max-sm:grid-rows-[minmax(0,1fr)_minmax(0,1fr)]",
       ]}
+      data-show-canvas={showCanvas || undefined}
     >
-      {#if wizard.isLoading}
-        <div class="flex w-full h-full items-center justify-center p-16">
-          {@render loadingDiagramPlaceholder()}
-        </div>
-      {:else if wizard.mermaidSource}
-        <CanvasViewer
-          svg={diagramSvg}
-          title={wizard.selectedVisOption
-            ? `${wizard.selectedExample?.title ?? "Eigenes Vorhaben"}: ${wizard.selectedVisOption.name}`
-            : "Visualisierung"}
-          onFlip={canFlip ? flipDirection : undefined}
-          {isFullscreen}
-          onToggleFullscreen={canFullscreen ? toggleFullscreen : undefined}
-          keepView={keepDiagramView}
-        >
-          {#snippet topRight()}
-            {#if wizard.versions.length > 1}
-              <div
-                class="kern-form-input w-280 bg-white p-8 rounded-sm shadow-md"
-              >
-                <label class="kern-sr-only" for="diagram-version">Version</label
+      <div
+        id="vis-chat"
+        class="min-w-0 py-md px-16 sm:px-24 w-full max-w-900 mx-auto max-h-full overflow-auto"
+        class:hidden={isFullscreen}
+      >
+        <div class="flex flex-col h-full gap-32">
+          {#if wizard.currentStep !== steps.length}
+            <div class="vis-chat-header space-y-16">
+              <div class="kern-progress">
+                <label
+                  class="kern-label"
+                  class:hidden={wizard.currentStep === steps.length}
+                  for="progress1"
+                  >Schritt {wizard.currentStep} von {steps.length}</label
                 >
-                <Select
-                  items={versionItems}
-                  bind:selected={
-                    () =>
-                      versionItems.find(
-                        (item) => item.index === wizard.versionIndex,
-                      ),
-                    (item) => item && wizard.showVersion(item.index)
-                  }
-                  getLabel={versionLabel}
-                  id="diagram-version"
-                  class="w-full"
-                >
-                  {#snippet option(item)}
-                    <span class="shrink-0">v{item.index + 1}</span>
-                    {#if item.label}
-                      <span class="truncate kern-body--muted">{item.label}</span
-                      >
-                    {/if}
-                  {/snippet}
-                </Select>
+                <progress
+                  id="progress1"
+                  value={wizard.currentStep}
+                  max={steps.length}
+                ></progress>
               </div>
+            </div>
+          {/if}
+          <!-- min-h-0 only on the final step: it scrolls its chat internally,
+           while earlier steps overflow into #vis-chat's scrollbar -->
+          <div
+            class="flex-1 w-full flex flex-col gap-32 justify-center"
+            class:min-h-0={wizard.currentStep === steps.length}
+          >
+            {#if wizard.currentStep === 1}
+              <Step1 {examples} />
+            {:else if wizard.currentStep === 2}
+              <Step2 />
+            {:else if wizard.currentStep === steps.length}
+              <StepFinal />
             {/if}
-          {/snippet}
-        </CanvasViewer>
-        <dialog
-          bind:this={saveDialogEl}
-          class="kern-dialog"
-          onclick={(event) => {
-            if (event.target === saveDialogEl) saveDialogEl?.close();
-          }}
+          </div>
+        </div>
+      </div>
+      {#if showCanvas}
+        <div
+          id="vis-canvas"
+          class={[
+            "relative w-full h-full min-w-0 flex flex-col justify-center items-center bg-lavender-200",
+            isFullscreen && "sm:col-span-2",
+          ]}
         >
-          <div class="kern-dialog__header">
-            <h2 class="kern-title">Visualisierung exportieren</h2>
-            <button
-              type="button"
-              class="kern-btn kern-btn--tertiary kern-btn--only-icon"
-              onclick={() => saveDialogEl?.close()}
-              aria-label="Schließen"
+          {#if wizard.isLoading}
+            <div class="flex w-full h-full items-center justify-center p-16">
+              {@render loadingDiagramPlaceholder()}
+            </div>
+          {:else if wizard.mermaidSource}
+            <CanvasViewer
+              svg={diagramSvg}
+              title={wizard.selectedVisOption
+                ? `${wizard.selectedExample?.title ?? "Eigenes Vorhaben"}: ${wizard.selectedVisOption.name}`
+                : "Visualisierung"}
+              onFlip={canFlip ? flipDirection : undefined}
+              {isFullscreen}
+              onToggleFullscreen={canFullscreen ? toggleFullscreen : undefined}
+              keepView={keepDiagramView}
             >
-              <span
-                class="kern-icon kern-icon--close kern-icon--default"
-                aria-hidden="true"
-              ></span>
-            </button>
-          </div>
-          <div class="kern-dialog__body">
-            {@render buttons()}
-          </div>
-        </dialog>
+              {#snippet topRight()}
+                {#if wizard.versions.length > 1}
+                  <div
+                    class="kern-form-input w-280 bg-white p-8 rounded-sm shadow-md"
+                  >
+                    <label class="kern-sr-only" for="diagram-version"
+                      >Version</label
+                    >
+                    <Select
+                      items={versionItems}
+                      bind:selected={
+                        () =>
+                          versionItems.find(
+                            (item) => item.index === wizard.versionIndex,
+                          ),
+                        (item) => item && wizard.showVersion(item.index)
+                      }
+                      getLabel={versionLabel}
+                      id="diagram-version"
+                      class="w-full"
+                    >
+                      {#snippet option(item)}
+                        <span class="shrink-0">v{item.index + 1}</span>
+                        {#if item.label}
+                          <span class="truncate kern-body--muted"
+                            >{item.label}</span
+                          >
+                        {/if}
+                      {/snippet}
+                    </Select>
+                  </div>
+                {/if}
+              {/snippet}
+            </CanvasViewer>
+            <dialog
+              bind:this={saveDialogEl}
+              class="kern-dialog"
+              onclick={(event) => {
+                if (event.target === saveDialogEl) saveDialogEl?.close();
+              }}
+            >
+              <div class="kern-dialog__header">
+                <h2 class="kern-title">Visualisierung exportieren</h2>
+                <button
+                  type="button"
+                  class="kern-btn kern-btn--tertiary kern-btn--only-icon"
+                  onclick={() => saveDialogEl?.close()}
+                  aria-label="Schließen"
+                >
+                  <span
+                    class="kern-icon kern-icon--close kern-icon--default"
+                    aria-hidden="true"
+                  ></span>
+                </button>
+              </div>
+              <div class="kern-dialog__body">
+                {@render exportButtons()}
+              </div>
+            </dialog>
+            <dialog
+              bind:this={editDialogEl}
+              class="kern-dialog"
+              onclick={(event) => {
+                if (event.target === editDialogEl) editDialogEl?.close();
+              }}
+            >
+              <div class="kern-dialog__header">
+                <h2 class="kern-title">Visualisierung bearbeiten</h2>
+                <button
+                  type="button"
+                  class="kern-btn kern-btn--tertiary kern-btn--only-icon"
+                  onclick={() => editDialogEl?.close()}
+                  aria-label="Schließen"
+                >
+                  <span
+                    class="kern-icon kern-icon--close kern-icon--default"
+                    aria-hidden="true"
+                  ></span>
+                </button>
+              </div>
+              <div class="kern-dialog__body">
+                {@render editButtons()}
+              </div>
+            </dialog>
+          {/if}
+        </div>
       {/if}
     </div>
-  {/if}
+  </main>
 </div>
+
+<dialog
+  bind:this={resetDialogEl}
+  class="kern-dialog"
+  aria-labelledby="reset-dialog-title"
+  onclick={(event) => {
+    if (event.target === resetDialogEl) resetDialogEl?.close();
+  }}
+>
+  <div class="kern-dialog__header">
+    <h2 class="kern-title" id="reset-dialog-title">Neu beginnen?</h2>
+    <button
+      type="button"
+      class="kern-btn kern-btn--tertiary kern-btn--only-icon"
+      onclick={() => resetDialogEl?.close()}
+      aria-label="Schließen"
+    >
+      <span
+        class="kern-icon kern-icon--close kern-icon--default"
+        aria-hidden="true"
+      ></span>
+    </button>
+  </div>
+  <div class="kern-dialog__body">
+    <p class="kern-body">
+      Alle Eingaben und die aktuelle Visualisierung gehen verloren.
+    </p>
+  </div>
+  <div class="kern-dialog__footer">
+    <button
+      type="button"
+      class="kern-btn kern-btn--secondary"
+      onclick={() => resetDialogEl?.close()}
+    >
+      <span class="kern-label">Abbrechen</span>
+    </button>
+    <button
+      type="button"
+      class="kern-btn kern-btn--primary"
+      onclick={() => {
+        resetDialogEl?.close();
+        wizard.reset();
+      }}
+    >
+      <span class="kern-label">Neu beginnen</span>
+    </button>
+  </div>
+</dialog>
 
 <style>
   #vis-chat :global(.step-heading) {
