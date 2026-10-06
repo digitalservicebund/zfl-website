@@ -1,0 +1,29 @@
+title: Zivilprozessordnung
+# Die ZPO ist nicht in der RIS-Search-Datenbank enthalten. Textquelle ist
+# daher gesetze-im-internet.de (eine Seite pro Paragraph). Die .mmd-Dateien
+# verwenden keine {{ELI}}-Platzhalter, sondern verlinken direkt auf die
+# Paragraphenseiten, z.B. https://www.gesetze-im-internet.de/zpo/__840.html
+# (dort gibt es keine Absatz-Anker). `eli` ist eine volle URL und wird vom
+# Wizard unverändert als Quell-Link verwendet (siehe resolveEliUrl).
+eli: "https://www.gesetze-im-internet.de/zpo/"
+visOptions:
+  - name: Forderungspfändung beim Drittschuldner
+    visType: swimlane
+    filename: forderungspfaendung
+    articles: ["§829", "§835", "§840"]
+  - name: Drittschuldnererklärung
+    visType: flowchart
+    filename: drittschuldnererklaerung
+    articles: ["§840"]
+  - name: Vorpfändung
+    visType: flowchart
+    filename: vorpfaendung
+    articles: ["§845"]
+  - name: Leistung des Drittschuldners
+    visType: flowchart
+    filename: leistung_drittschuldner
+    articles: ["§835", "§853"]
+  - name: Einziehung durch den Gläubiger
+    visType: flowchart
+    filename: einziehung
+    articles: ["§835", "§836", "§841", "§843"]

@@ -1,0 +1,42 @@
+---
+summary: "Der Meldeweg bei einem Erkrankungsfall oder sonstigen Anzeichen einer erheblichen Gefahr für die öffentliche Gesundheit an Bord eines Luftfahrzeugs nach §§9 und 11 IGV-DG: Meldung über Flugsicherung und Luftfahrtunternehmen an das Gesundheitsamt, mögliche Umleitung auf einen Flughafen mit IGV-Kapazitäten und Übermittlung an die Landesbehörde."
+---
+swimlane-beta TD
+    subgraph LFF["Verantwortliche Luftfahrzeugführung"]
+        start(["Erfährt, dass eine Person an Bord ist,<br/>bei der klinische Anzeichen auf eine<br/>übertragbare Krankheit hindeuten, die die<br/>öffentliche Gesundheit erheblich<br/>gefährdet, oder dass sonstige Anzeichen<br/>für eine erhebliche Gefahr bestehen<br/>— <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I S.1</a><br/>(auch auf Inlandsflügen — <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I S.2</a>)"])
+        meldung["Meldet unverzüglich mit Mindestangaben:<br/>Funkrufzeichen, Start- und Zielflughafen,<br/>voraussichtliche Ankunftszeit, Zahl der<br/>Personen an Bord, Zahl und Art der<br/>vermuteten Krankheitsfälle, Art der<br/>Gefahr (wenn bekannt) — <a href='{{ELI}}#art-z11_abs-z2' target='_blank' rel='noopener'>§11 II</a>"]
+        keine(["Keine Umleitungsanordnung — <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II</a>"])
+        verstaendigen(["Verständigt rechtzeitig den Flughafen<br/>mit Kapazitäten, auf dem sie oder er zu<br/>landen beabsichtigt; §11 gilt entsprechend — <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II S.3</a>"])
+    end
+
+    subgraph FVK["Flugverkehrskontrollstelle und Verkehrsleitung des Luftfahrtunternehmens"]
+        weiterleiten["Leiten die Meldung unverzüglich an die<br/>im Notfallplan des Flughafens<br/>festgelegten Stellen weiter — <a href='{{ELI}}#art-z11_abs-z3' target='_blank' rel='noopener'>§11 III S.1</a>"]
+    end
+
+    subgraph NFP["Stellen nach dem Notfallplan des Flughafens"]
+        informieren["Informieren unverzüglich das für den<br/>Flughafen zuständige Gesundheitsamt<br/>— <a href='{{ELI}}#art-z11_abs-z3' target='_blank' rel='noopener'>§11 III S.2</a>"]
+    end
+
+    subgraph GA["Gesundheitsamt des Zielflughafens"]
+        eingang("Meldung geht ein; auf Verlangen holt das<br/>Luftfahrtunternehmen (ersatzweise die<br/>Flugverkehrskontrollstelle) ergänzende<br/>Angaben über die Verhältnisse an Bord ein<br/>— <a href='{{ELI}}#art-z11_abs-z4' target='_blank' rel='noopener'>§11 IV</a>")
+        einrichtungen{"Gefahr an Bord, für deren<br/>Beseitigung der<br/>Zielflughafen nicht über<br/>die erforderlichen<br/>Einrichtungen verfügt —<br/><a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II S.1</a>, und Weiterflug<br/>nicht wegen<br/>Funktionsstörung oder aus<br/>sonstigen Gründen<br/>unsicher? — <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II S.2</a>"}
+        anordnung["Kann anordnen, dass das Luftfahrzeug<br/>zunächst nur auf einem Flughafen mit<br/>Kapazitäten nach Anlage 1 Teil B IGV<br/>landen darf — <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II S.1</a>; informiert<br/>unverzüglich die zuständige<br/>Gesundheitsbehörde des neuen Zielortes<br/>— <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 III</a>"]
+    end
+
+    subgraph LB["Zuständige Landesbehörde"]
+        landesbehoerde(["Bei übertragbarer Krankheit:<br/>Übermittlung durch das Gesundheitsamt,<br/>das die Meldung erhalten hat (§11 I, II<br/>IfSG entsprechend) — <a href='{{ELI}}#art-z11_abs-z5' target='_blank' rel='noopener'>§11 V</a>"])
+    end
+
+    start --> meldung
+    meldung --> weiterleiten
+    weiterleiten --> informieren
+    informieren --> eingang
+    eingang --> einrichtungen
+    eingang -.-> landesbehoerde
+    einrichtungen -->|Nein| keine
+    einrichtungen -->|Ja| anordnung
+    anordnung --> verstaendigen
+
+    style keine fill:#d4edda,stroke:#2d8a4a
+    style verstaendigen fill:#fff3cd,stroke:#c9a227
+    style landesbehoerde fill:#d4edda,stroke:#2d8a4a

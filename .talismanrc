@@ -204,6 +204,10 @@ fileignoreconfig:
     allowed_patterns: [API_BASE_STORAGE_KEY]
   - filename: src/pages/werkzeuge/_shared/apiBase.ts
     allowed_patterns: [API_BASE_STORAGE_KEY]
+  - filename: src/content/ki-visualisierungen/PflBG/anerkennung.mmd
+    checksum: 2f7077b5dceeb465955d6641e9a7425df4ea5f468ed093a13b5546f9a2e4de1b
+  - filename: src/content/ki-visualisierungen/PflBG/partielle_berufsausuebung.mmd
+    checksum: 66055d99b758565fe76705b5c3f9203c3604d78324fd4e800e9671d04f344cf0
 
 scopeconfig:
   - scope: node

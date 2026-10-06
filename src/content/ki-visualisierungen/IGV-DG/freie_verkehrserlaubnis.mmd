@@ -1,0 +1,33 @@
+---
+summary: "Unter welchen Voraussetzungen der Hafenärztliche Dienst einem Schiff nach §18 IGV-DG die Freie Verkehrserlaubnis (free pratique) erteilt: Seegesundheitserklärung vor der Ankunft, vorläufige Erlaubnis per Funk, Untersuchung und Gesundheitsmaßnahmen bei Anzeichen einer Gefahr."
+---
+flowchart TD
+    start(["Seeschiff vor der Ankunft im ersten<br/>inländischen Hafen"]) --> SGE["Schiffsführung stellt den<br/>Gesundheitszustand an Bord fest, füllt die<br/>Seegesundheitserklärung aus (ggf. vom<br/>Schiffsarzt gegengezeichnet) und<br/>übermittelt sie dem Hafenärztlichen Dienst<br/>mind. 24 Stunden vor Ankunft (bei kürzerer<br/>Reise spätestens beim Auslaufen) — <a href='{{ELI}}#art-z15_abs-z1' target='_blank' rel='noopener'>§15 I</a>"]
+    SGE -.- HinweisSGE["Die oberste Landesgesundheitsbehörde kann<br/>allgemein anordnen, dass keine oder nur für<br/>bestimmte Schiffe eine<br/>Seegesundheitserklärung abzugeben ist<br/>— <a href='{{ELI}}#art-z15_abs-z2' target='_blank' rel='noopener'>§15 II</a>"]
+
+    SGE --> F0{"Nach den Informationen<br/>vor der Ankunft keine<br/>Einschleppung oder<br/>Verbreitung einer<br/>Krankheit zu erwarten?<br/>— <a href='{{ELI}}#art-z18_abs-z2' target='_blank' rel='noopener'>§18 II</a>"}
+    F0 -->|Ja| Vorl["Widerrufliche vorläufige Freie<br/>Verkehrserlaubnis per Funk oder andere<br/>Kommunikationsmittel (Soll-Vorschrift)<br/>— <a href='{{ELI}}#art-z18_abs-z2' target='_blank' rel='noopener'>§18 II</a>"]
+    F0 -->|Nein| Ankunft
+    Vorl --> Ankunft("Ankunft im Hafen")
+
+    Ankunft --> F1{"Erforderliche gültige<br/>Schiffshygienebescheinigung<br/>vorgelegt?<br/>— <a href='{{ELI}}#art-z18_abs-z1' target='_blank' rel='noopener'>§18 I Nr. 2</a>"}
+    F1 -->|Nein| Hyg["Hafenärztlicher Dienst überprüft die<br/>Schiffshygiene und stellt eine<br/>Bescheinigung aus — <a href='{{ELI}}#art-z19_abs-z4' target='_blank' rel='noopener'>§19 IV</a>, <a href='{{ELI}}#art-z19_abs-z5' target='_blank' rel='noopener'>V</a>"]
+    F1 -->|Ja| F2
+    Hyg --> F2{"Erforderliche<br/>Seegesundheitserklärung<br/>abgegeben und alle Fragen<br/>zur Gesundheit verneint?<br/>— <a href='{{ELI}}#art-z18_abs-z1' target='_blank' rel='noopener'>§18 I Nr. 1</a>"}
+
+    F2 -->|"Nein: mindestens<br/>eine Frage bejaht"| Unters["Untersuchung des Schiffes bei der<br/>Ankunft durch den Hafenärztlichen Dienst<br/>— <a href='{{ELI}}#art-z18_abs-z3' target='_blank' rel='noopener'>§18 III</a>; bis zur Erlaubnis für den<br/>öffentlichen Verkehr gesperrt — <a href='{{ELI}}#art-z18_abs-z5' target='_blank' rel='noopener'>§18 V S.1</a>"]
+    F2 -->|Ja| F3{"Keine Anzeichen für eine<br/>Gefahr für die öffentliche<br/>Gesundheit an Bord?<br/>— <a href='{{ELI}}#art-z18_abs-z1' target='_blank' rel='noopener'>§18 I Nr. 3</a>"}
+    F3 -->|Nein| F4
+    Unters --> F4{"Infektions- oder<br/>Verseuchungsquelle an<br/>Bord festgestellt?<br/>— <a href='{{ELI}}#art-z18_abs-z4' target='_blank' rel='noopener'>§18 IV</a>"}
+
+    F4 -->|Ja| Mass["Hafenärztlicher Dienst kann die Erlaubnis<br/>davon abhängig machen, dass die<br/>notwendigen Gesundheitsmaßnahmen<br/>zufriedenstellend durchgeführt wurden;<br/>bis dahin gesperrt — <a href='{{ELI}}#art-z18_abs-z4' target='_blank' rel='noopener'>§18 IV</a>, <a href='{{ELI}}#art-z18_abs-z5' target='_blank' rel='noopener'>V S.1</a>"]
+    F3 -->|Ja| Erteilung
+    F4 -->|Nein| Erteilung
+    Mass -->|"nach Durchführung<br/>der Maßnahmen"| Erteilung(["Hafenärztlicher Dienst erteilt die Freie<br/>Verkehrserlaubnis — <a href='{{ELI}}#art-z18_abs-z1' target='_blank' rel='noopener'>§18 I</a> — und stellt<br/>über die endgültige Erlaubnis eine<br/>Bescheinigung aus — <a href='{{ELI}}#art-z18_abs-z5' target='_blank' rel='noopener'>§18 V S.2</a>"])
+    Erteilung -.- HinweisGeb["Gebühren und Auslagen trägt die<br/>Eigentümerin oder der Eigentümer des<br/>Schiffes (Anlage 2) — <a href='{{ELI}}#art-z18_abs-z6' target='_blank' rel='noopener'>§18 VI</a>"]
+
+    style Vorl fill:#fff3cd,stroke:#c9a227
+    style Mass fill:#fff3cd,stroke:#c9a227
+    style Erteilung fill:#d4edda,stroke:#2d8a4a
+    style HinweisSGE fill:#f5f5f5,stroke:#999
+    style HinweisGeb fill:#f5f5f5,stroke:#999

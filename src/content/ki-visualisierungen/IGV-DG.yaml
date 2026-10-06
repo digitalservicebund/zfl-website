@@ -1,0 +1,27 @@
+title: Gesetz zur Durchführung der Internationalen Gesundheitsvorschriften (2005)
+eli: eli/bund/bgbl-1/2013/s566/2021-06-01/1/deu
+visOptions:
+  - name: Mitteilungen an die WHO
+    visType: swimlane
+    filename: mitteilungen_who
+    articles: ["§3", "§4"]
+  - name: Erkrankungsfall im Luftfahrzeug
+    visType: swimlane
+    filename: erkrankung_luftfahrzeug
+    articles: ["§9", "§11"]
+  - name: Ermittlung von Kontaktpersonen
+    visType: flowchart
+    filename: kontaktpersonen
+    articles: ["§12"]
+  - name: Erkrankungsfall auf Schiffen
+    visType: swimlane
+    filename: erkrankung_schiff
+    articles: ["§14", "§16"]
+  - name: Freie Verkehrserlaubnis
+    visType: flowchart
+    filename: freie_verkehrserlaubnis
+    articles: ["§15", "§18"]
+  - name: Akteure und Zuständigkeiten
+    visType: actors
+    filename: akteure
+    articles: []

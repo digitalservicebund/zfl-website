@@ -1,0 +1,44 @@
+---
+summary: "Der Meldeweg bei einem Erkrankungsfall oder sonstigen Anzeichen einer erheblichen Gefahr für die öffentliche Gesundheit an Bord eines Schiffes nach §§14, 16 und 17 IGV-DG: Meldung über Hafenaufsicht und Hafenärztlichen Dienst an das Gesundheitsamt, mögliche Umleitung in einen Hafen mit IGV-Kapazitäten und Übermittlung an die Landesbehörde."
+---
+swimlane-beta TD
+    subgraph SF["Schiffsführung"]
+        start(["Erfährt, dass eine Person an Bord ist,<br/>bei der klinische Anzeichen auf eine<br/>übertragbare Krankheit hindeuten, die die<br/>öffentliche Gesundheit erheblich<br/>gefährdet, oder dass sonstige Anzeichen<br/>für eine erhebliche Gefahr bestehen<br/>— <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 I S.1</a><br/>(auch auf Inlandsreisen — <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 I S.2</a>)"])
+        meldung["Meldet unverzüglich mit Mindestangaben:<br/>Name und Kennung des Schiffes, Start- und<br/>Bestimmungshafen, voraussichtliche<br/>Ankunftszeit, Zahl der Personen an Bord,<br/>Zahl und Art der vermuteten<br/>Krankheitsfälle, Art der Gefahr (soweit<br/>bekannt) — <a href='{{ELI}}#art-z16_abs-z2' target='_blank' rel='noopener'>§16 II</a>"]
+        keine(["Keine Umleitungsanordnung — <a href='{{ELI}}#art-z14_abs-z2' target='_blank' rel='noopener'>§14 II</a>"])
+        verstaendigen(["Verständigt rechtzeitig den Hafen mit<br/>Kapazitäten, den sie oder er anzulaufen<br/>beabsichtigt; §16 gilt entsprechend<br/>— <a href='{{ELI}}#art-z14_abs-z2' target='_blank' rel='noopener'>§14 II S.3</a>"])
+    end
+
+    subgraph HA["Zuständige Hafenaufsicht"]
+        weiterleiten["Leitet die Meldung unverzüglich an den<br/>zuständigen Hafenärztlichen Dienst<br/>weiter — <a href='{{ELI}}#art-z16_abs-z3' target='_blank' rel='noopener'>§16 III S.1</a>"]
+    end
+
+    subgraph HAED["Hafenärztlicher Dienst"]
+        eingangHAED("Meldung geht ein (auch vom Lotsen, der<br/>die Schiffsführung befragt, bei<br/>Anhaltspunkten für eine Gefahr — <a href='{{ELI}}#art-z17_abs-z1' target='_blank' rel='noopener'>§17 I</a>);<br/>kann alle Auskünfte über die<br/>gesundheitlichen Verhältnisse an Bord<br/>verlangen — <a href='{{ELI}}#art-z17_abs-z2' target='_blank' rel='noopener'>§17 II</a>")
+        informieren["Informiert unverzüglich das für den<br/>Hafen zuständige Gesundheitsamt<br/>— <a href='{{ELI}}#art-z16_abs-z3' target='_blank' rel='noopener'>§16 III S.2</a>"]
+    end
+
+    subgraph GB["Gesundheitsamt / Gesundheitsbehörde am Bestimmungshafen"]
+        eingangGA("Gesundheitsamt des Hafens erhält die<br/>Meldung — <a href='{{ELI}}#art-z16_abs-z3' target='_blank' rel='noopener'>§16 III S.2</a>")
+        bestimmungshafen{"Gefahr an Bord, für deren<br/>Beseitigung der<br/>Bestimmungshafen nicht<br/>über die erforderlichen<br/>Einrichtungen verfügt —<br/><a href='{{ELI}}#art-z14_abs-z2' target='_blank' rel='noopener'>§14 II S.1</a>, und Weiterfahrt<br/>nicht wegen<br/>Funktionsstörung oder aus<br/>sonstigen Gründen<br/>unsicher? — <a href='{{ELI}}#art-z14_abs-z2' target='_blank' rel='noopener'>§14 II S.2</a>"}
+        anordnung["Für den Ort des Bestimmungshafens<br/>zuständige Gesundheitsbehörde kann<br/>anordnen, dass das Schiff zunächst nur<br/>einen Hafen mit Kapazitäten nach Anlage 1<br/>Teil B IGV anlaufen darf — <a href='{{ELI}}#art-z14_abs-z2' target='_blank' rel='noopener'>§14 II S.1</a>;<br/>informiert unverzüglich die Behörde des<br/>neuen Bestimmungshafens — <a href='{{ELI}}#art-z14_abs-z3' target='_blank' rel='noopener'>§14 III</a>"]
+    end
+
+    subgraph LB["Zuständige Landesbehörde"]
+        landesbehoerde(["Bei übertragbarer Krankheit:<br/>Übermittlung durch das Gesundheitsamt,<br/>das die Meldung erhalten hat (§11 I, II<br/>IfSG entsprechend) — <a href='{{ELI}}#art-z16_abs-z4' target='_blank' rel='noopener'>§16 IV</a>"])
+    end
+
+    start --> meldung
+    meldung --> weiterleiten
+    weiterleiten --> eingangHAED
+    eingangHAED --> informieren
+    informieren --> eingangGA
+    eingangGA -.-> landesbehoerde
+    eingangGA --> bestimmungshafen
+    bestimmungshafen -->|Nein| keine
+    bestimmungshafen -->|Ja| anordnung
+    anordnung --> verstaendigen
+
+    style keine fill:#d4edda,stroke:#2d8a4a
+    style verstaendigen fill:#fff3cd,stroke:#c9a227
+    style landesbehoerde fill:#d4edda,stroke:#2d8a4a
