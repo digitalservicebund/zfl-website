@@ -1,0 +1,33 @@
+var e=`---
+summary: "Der Dreijahreszyklus der Präventions-, Vorsorge- und Reaktionsplanung: nationale Pläne im Einklang mit dem Unionsplan, Berichte der Mitgliedstaaten, Bewertung und Empfehlungen des ECDC, Maßnahmenpläne sowie Berichte der Kommission an den Gesundheitssicherheitsausschuss und an Parlament und Rat."
+---
+swimlane-beta TD
+    subgraph MS["Mitgliedstaaten"]
+        plan["Nationale Pläne: Benehmen im<br/>Gesundheitssicherheitsausschuss,<br/>Abstimmung mit der Kommission für<br/>Kohärenz mit dem Unionsplan<br/>— <a href='{{ELI}}#006.001' target='_blank' rel='noopener'>Art. 6 Abs. 1</a> (wesentliche Änderungen<br/>unverzüglich melden — <a href='{{ELI}}#006.003' target='_blank' rel='noopener'>Art. 6 Abs. 3</a>)"]
+        bericht["Bericht an Kommission und Agenturen bis<br/>27.12.2023, danach alle drei Jahre, auf<br/>Grundlage gemeinsamer Indikatoren und<br/>Formatvorlagen — <a href='{{ELI}}#007.001' target='_blank' rel='noopener'>Art. 7 Abs. 1</a>, <a href='{{ELI}}#007.003' target='_blank' rel='noopener'>Abs. 3</a>"]
+        massnahmen(["Gegebenenfalls Maßnahmenplan an<br/>Kommission und ECDC binnen neun Monaten<br/>nach Eingang der Schlussfolgerungen;<br/>Gründe angeben, wenn einer Empfehlung<br/>nicht gefolgt wird — <a href='{{ELI}}#008.003' target='_blank' rel='noopener'>Art. 8 Abs. 3</a>"])
+
+    end
+
+    subgraph ECDC["ECDC"]
+        bewertung["Bewertung der Umsetzung der<br/>nationalen Pläne alle drei Jahre anhand<br/>vereinbarter Indikatoren — <a href='{{ELI}}#008.001' target='_blank' rel='noopener'>Art. 8 Abs. 1</a>"]
+        empf["Gegebenenfalls Empfehlungen an die<br/>Mitgliedstaaten — <a href='{{ELI}}#008.002' target='_blank' rel='noopener'>Art. 8 Abs. 2</a>"]
+    end
+
+    subgraph KOM["Kommission"]
+        unionsplan(["Präventions-, Vorsorge- und<br/>Reaktionsplan der Union, erstellt mit<br/>den Mitgliedstaaten und Agenturen<br/>— <a href='{{ELI}}#005.001' target='_blank' rel='noopener'>Art. 5 Abs. 1</a>"])
+        hscbericht["Bericht alle drei Jahre an den<br/>Gesundheitssicherheitsausschuss, erstellt<br/>mit dem ECDC: Länderprofile, ggf.<br/>allgemeine Empfehlungen; Beratungen im<br/>Ausschuss über Fortschritte und Defizite<br/>— <a href='{{ELI}}#007.002' target='_blank' rel='noopener'>Art. 7 Abs. 2</a>"]
+        eprat(["Bericht an Europäisches Parlament und Rat<br/>bis 27.12.2023, danach alle drei Jahre;<br/>ggf. allgemeine Empfehlungen<br/>— <a href='{{ELI}}#009.001' target='_blank' rel='noopener'>Art. 9 Abs. 1</a>, <a href='{{ELI}}#009.003' target='_blank' rel='noopener'>Abs. 3</a>"])
+    end
+
+    unionsplan --> plan
+    plan --> bericht
+    bericht --> bewertung
+    bewertung --> empf
+    empf --> massnahmen
+    bewertung -->|"Ergebnisse"| hscbericht
+    hscbericht --> eprat
+
+    style massnahmen fill:#fff3cd,stroke:#c9a227
+    style eprat fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};
