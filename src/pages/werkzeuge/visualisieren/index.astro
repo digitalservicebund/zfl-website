@@ -45,6 +45,10 @@ const featuredExamples = featured.flatMap(({ short, visualization }) => {
       );
     }
   </script>
+  <script>
+    // Remembers a user-test ?api= link before the visitor moves on to the wizard.
+    import "../_shared/apiBase";
+  </script>
   <main class="breakout-grid">
     <Hero>
       <h1>{frontmatter.title}</h1>
@@ -83,8 +87,8 @@ const featuredExamples = featured.flatMap(({ short, visualization }) => {
     <section class="breakout bg-lavender-200">
       <h2 class="mb-24">Visualisierung jetzt starten</h2>
       <p class="mb-32">
-        Erstellen sie eine Visualisierung, um die wichtigsten Akteure zu
-        identifizieren und den Vollzug zu verstehen.
+        Visualisieren Sie den Vollzug Ihrer Regelung, um Zusammenhänge besser zu
+        verstehen und Ihr Vorhaben zu optimieren.
       </p>
       <div>
         <a href={wizardPath} class="kern-btn kern-btn--primary">

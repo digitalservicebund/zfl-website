@@ -202,6 +202,9 @@ fileignoreconfig:
     checksum: d7e2ee229a8eb9178dc754d84f6f50aa2de4de50bb870001b8b643c5dcc4c12c
   - filename: src/pages/werkzeuge/_shared/api.ts
     allowed_patterns: [API_BASE_STORAGE_KEY]
+  - filename: src/pages/werkzeuge/_shared/apiBase.ts
+    allowed_patterns: [API_BASE_STORAGE_KEY]
+
 scopeconfig:
   - scope: node
 allowed_patterns:
