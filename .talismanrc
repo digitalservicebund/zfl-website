@@ -200,6 +200,8 @@ fileignoreconfig:
     checksum: 362577e6dea3376983aad592ef3c38b6961064b0d9dbfc0c399afbe03e54bac3
   - filename: src/content/ki-visualisierungen/BEHG/emissionsberichterstattung.mmd
     checksum: d7e2ee229a8eb9178dc754d84f6f50aa2de4de50bb870001b8b643c5dcc4c12c
+  - filename: src/pages/werkzeuge/_shared/api.ts
+    allowed_patterns: [API_BASE_STORAGE_KEY]
 scopeconfig:
   - scope: node
 allowed_patterns:
