@@ -130,6 +130,10 @@ fileignoreconfig:
       - Sxzmf2FkxTibbNVByMIFM3srA_7GBw
   - filename: src/images/online-schulung.jpg
     ignore_detectors: [filecontent]
+  - filename: src/images/buergerzentriertheit.jpg
+    checksum: e4c07d0667db02b7abc581abc3a215e17c61c2187cbada87c8043cf8226578a5
+  - filename: src/images/buergerzentriertheit_workshop.jpg
+    checksum: a6d0551460755fb730929abaef0d7d791bc1efc87935d948e50e3b96a934d581
 scopeconfig:
   - scope: node
 allowed_patterns:
