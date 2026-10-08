@@ -1,0 +1,239 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import ImageTextOverlay from "@/components/ImageTextOverlay.astro";
+import KernCard from "@/components/KernCard.astro";
+import { Image } from "astro:assets";
+import buergerzentriertheit from "@/images/buergerzentriertheit.jpg";
+import buergerzentriertheit_workshop from "@/images/buergerzentriertheit_workshop.jpg";
+import buergercheck from "@/images/buergercheck.png";
+
+const frontmatter = {
+  title: "Bürgerzentriertheit",
+  navLabel: "Bürgerzentriertheit",
+  navOrder: 5,
+  isStagingOnly: true,
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid">
+    <Hero>
+      <h1>Vorhaben bürgerzentriert gestalten</h1>
+      <p>
+        Wirksame und praxistaugliche Gesetze denken die Perspektive der
+        Adressaten frühzeitig mit. Eine bürgerzentrierte Regelung hilft
+        nachweislich, Bürokratie abzubauen und Gesetze an den tatsächlichen
+        Bedürfnissen der Adressaten auszurichten.
+      </p>
+    </Hero>
+    <section>
+      <ImageTextOverlay
+        image={buergerzentriertheit}
+        imageAlt="Mehrere Personen sitzen im Kreis und unterhalten sich in einem Workshop"
+      >
+        <h2>Was bedeutet Bürgerzentriertheit?</h2>
+        <p>
+          Bürgerzentriertheit heißt, ein Regelungsvorhaben aus Sicht der
+          Bürgerinnen und Bürger zu betrachten. Was müssen sie wissen? Was
+          müssen sie tun? Und können sie den Anforderungen im Alltag tatsächlich
+          nachkommen?
+        </p>
+        <p>
+          Dafür werden die betroffenen Zielgruppen, ihre Bedürfnisse und ihre
+          Lebenslagen frühzeitig in den Blick genommen. So lassen sich Barrieren
+          erkennen und Regelungen verständlicher, zugänglicher und wirksamer
+          gestalten.
+        </p>
+      </ImageTextOverlay>
+    </section>
+    <section>
+      <h2>Wie setzen Sie Bürgerzentriertheit um?</h2>
+      <p class="mb-32">
+        Der Bürgercheck unterstützt Sie dabei, die wichtigsten Fragen in fünf
+        Schritten zu beantworten:
+      </p>
+      <ul class="list-unstyled checklist">
+        <li>
+          <span
+            class="kern-icon kern-icon--check kern-icon--default"
+            aria-hidden="true"
+          ></span>
+          <div class="space-y-4">
+            <p>
+              <b>Zielgruppen identifizieren</b>
+            </p>
+            <p>
+              Identifizieren Sie alle relevanten Adressaten, deren Gruppengröße
+              sowie die Stärke der jeweiligen Betroffenheit.
+            </p>
+          </div>
+        </li>
+        <li>
+          <span
+            class="kern-icon kern-icon--check kern-icon--default"
+            aria-hidden="true"
+          ></span>
+          <div class="space-y-4">
+            <p>
+              <b>Bedürfnisse und Barrieren verstehen</b>
+            </p>
+            <p>
+              Klären Sie konkrete Handlungserfordernisse und decken Sie
+              praktische Barrieren der Zielgruppen auf.
+            </p>
+          </div>
+        </li>
+        <li>
+          <span
+            class="kern-icon kern-icon--check kern-icon--default"
+            aria-hidden="true"
+          ></span>
+          <div class="space-y-4">
+            <p>
+              <b>Regelung transparent machen</b>
+            </p>
+            <p>
+              Visualisieren Sie, was für wen gilt, um Entscheidungsträgern einen
+              schnellen Überblick zu geben und Lücken aufzudecken.
+            </p>
+          </div>
+        </li>
+        <li>
+          <span
+            class="kern-icon kern-icon--check kern-icon--default"
+            aria-hidden="true"
+          ></span>
+          <div class="space-y-4">
+            <p>
+              <b>Kontaktpunkte mitdenken</b>
+            </p>
+            <p>
+              Prüfen Sie, wie Bürger mit der geplanten Regelung in Kontakt
+              kommen. Gestalten Sie diese Schnittstellen nutzerfreundlich.
+            </p>
+          </div>
+        </li>
+        <li>
+          <span
+            class="kern-icon kern-icon--check kern-icon--default"
+            aria-hidden="true"
+          ></span>
+          <div class="space-y-4">
+            <p>
+              <b>Lebenslagen berücksichtigen</b>
+            </p>
+            <p>
+              Beziehen Sie individuelle Begleitumstände, Zeitpunkte des Eingangs
+              von Informationen und andere relevante Regelungen ein.
+            </p>
+          </div>
+        </li>
+      </ul>
+      <figure class="mt-lg space-y-24">
+        <Image
+          src={buergerzentriertheit_workshop}
+          alt="Teilnehmende eines Workshops sitzen nebeneinander und machen sich Notizen"
+          width={1216}
+          height={636}
+          layout="constrained"
+        />
+        <figcaption>
+          <p class="kern-subline kern-subline--small">
+            Bürgerzentriertheit lebt vom direkten Austausch von Akteuren im
+            Präsenzformat
+          </p>
+        </figcaption>
+      </figure>
+    </section>
+    <section class="breakout bg-lavender-400">
+      <div class="gap-32 lg:grid lg:grid-cols-[1fr_2fr]">
+        <h2>Hilfreiche Tipps</h2>
+        <ul>
+          <li>
+            <b>Prüfen Sie den Bürgerbezug:</b> Klären Sie mit vier einfachen
+            Leitfragen vorab, ob sich durch Ihr Vorhaben Pflichten, Angebote,
+            Verwaltungsverfahren oder Mitwirkungsbedarfe für Bürgerinnen und
+            Bürger ändern.
+          </li>
+          <li>
+            <b>Suchen Sie den direkten Kontakt:</b> Eine Verbändebeteiligung
+            kann den Austausch mit echten Betroffenen nicht ersetzen, wenn Sie
+            deren Lebensrealität verstehen wollen.
+          </li>
+          <li>
+            <b>Handeln Sie nach dem Prinzip „Verstehen, Entwickeln, Testen“:</b>{" "}
+            Generieren Sie kollaborativ Lösungsalternativen und testen Sie diese
+            auf Praxistauglichkeit.
+          </li>
+          <li>
+            <b>Schaffen Sie Transparenz:</b> Machen Sie stets deutlich, was für
+            wen gelten soll, um auch Entscheidern in Leitungsbefassung oder
+            Ressortabstimmung den schnellen Überblick zu erleichtern.
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section>
+      <h2>Der Leitfaden für Bürgerzentrierung</h2>
+      <p>
+        Der Bürgercheck bietet verschiedene Arbeitshilfen. Sie können sie je
+        nach Fragestellung einzeln oder miteinander verbinden.
+      </p>
+      <div class="mt-32 sm:w-384">
+        <KernCard
+          preline="Leitfaden mit Templates"
+          title="Bürgercheck"
+          body="Eine praxisnahe Anleitung mit Beispielen, um Ihre Regelungen konsequent bürgernah zu gestalten. Der Leitfaden hilft Ihnen dabei, die Perspektive der Betroffenen einzunehmen und mögliche Hürden im Alltag frühzeitig zu erkennen und abzubauen."
+          image={buergercheck}
+          imageAlt="Titelfolie des Leitfadens Bürgercheck"
+        >
+          <a
+            slot="footer"
+            href="#"
+            target="_blank"
+            class="kern-btn kern-btn--secondary"
+          >
+            <span
+              class="kern-icon kern-icon--arrow-forward kern-icon--default"
+              aria-hidden="true"
+            ></span>
+            <span class="kern-label">Foliensätze (ZIP Datei)</span>
+          </a>
+        </KernCard>
+      </div>
+    </section>
+    <section class="breakout bg-cosmic-blue-base text-white">
+      <h2>Fragen zur Bürgerzentrierung?</h2>
+      <p>
+        Für Unterstützung bei der Durchführung des Bürgerchecks, für
+        Insight-Studien oder die Moderation von Workshops wenden Sie sich gern
+        an:
+      </p>
+      <p>
+        E-Mail:{" "}
+        <a href="mailto:wirksam.regieren@bk.bund.de">
+          wirksam.regieren@bk.bund.de
+        </a>{" "}
+        oder <a href="mailto:SBII4@bmds.bund.de">SBII4@bmds.bund.de</a>
+      </p>
+      <p>
+        Telefon: <a href="tel:030184002474">030 18400 2474</a>
+      </p>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  @reference "@/styles/global.css";
+
+  ul.checklist {
+    @apply gap-x-32 md:columns-2;
+    li {
+      @apply mb-12 flex break-inside-avoid items-start gap-8 md:gap-32;
+      span.kern-icon {
+        @apply bg-cosmic-blue-base! size-32 shrink-0;
+      }
+    }
+  }
+</style>

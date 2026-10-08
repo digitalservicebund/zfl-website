@@ -231,6 +231,17 @@ export const werkzeuge = {
   navLabel: null,
 } as const;
 
+export const werkzeuge_buergerzentriertheit = {
+  key: "werkzeuge_buergerzentriertheit",
+  path: "/werkzeuge/buergerzentriertheit",
+  title: "Bürgerzentriertheit",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: 5,
+  navLabel: "Bürgerzentriertheit",
+} as const;
+
 export const werkzeuge_digitaltauglichkeit = {
   key: "werkzeuge_digitaltauglichkeit",
   path: "/werkzeuge/digitaltauglichkeit",
@@ -351,6 +362,7 @@ export const allRoutes = [
   ueber_neueFruehphase,
   ueber_zahlenUndFakten,
   werkzeuge,
+  werkzeuge_buergerzentriertheit,
   werkzeuge_digitaltauglichkeit,
   werkzeuge_digitaltauglichkeit_beispiele,
   werkzeuge_praxistauglichkeit,
