@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schätzung von Legistischen Profilen in der Bundesregierung (Stand: 9.10.2026)</title>
+    <style>
+        /* KERN Design System - Basisvariablen */
+        :root {
+            --kern-color-bundesblau: #10355f;
+            --kern-color-link: #00639e;
+            --kern-color-link-hover: #004b76;
+            --kern-color-text: #1f1f1f;
+            --kern-color-text-light: #595959;
+            --kern-color-bg: #f5f5f5;
+            --kern-color-surface: #ffffff;
+            --kern-color-border: #d4d4d4;
+            --kern-color-bar: #8cb6ce;
+            
+            --kern-font-family: "BundesSans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --kern-spacing-m: 16px;
+            --kern-spacing-l: 24px;
+            --kern-spacing-xl: 32px;
+        }
+
+        body {
+            font-family: var(--kern-font-family);
+            line-height: 1.5;
+            color: var(--kern-color-text);
+            background-color: var(--kern-color-bg);
+            margin: 0;
+            padding: var(--kern-spacing-l);
+        }
+
+        /* Container-Box */
+        .kern-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--kern-color-surface);
+            padding: var(--kern-spacing-xl);
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: var(--kern-color-bundesblau);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: var(--kern-spacing-l);
+            line-height: 1.2;
+        }
+
+        h2 {
+            color: var(--kern-color-bundesblau);
+            font-size: 1.5rem;
+            margin-top: var(--kern-spacing-xl);
+            margin-bottom: var(--kern-spacing-m);
+            border-bottom: 2px solid var(--kern-color-bundesblau);
+            padding-bottom: 8px;
+        }
+
+        p {
+            margin-bottom: var(--kern-spacing-m);
+            font-size: 1.125rem;
+        }
+
+        a {
+            color: var(--kern-color-link);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+        }
+
+        a:hover, a:focus {
+            color: var(--kern-color-link-hover);
+            text-decoration-thickness: 2px;
+        }
+
+        /* Responsive Table Wrapper */
+        .kern-table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            margin-bottom: var(--kern-spacing-l);
+            border: 1px solid var(--kern-color-border);
+            border-radius: 4px;
+        }
+
+        /* KERN Table Styling */
+        .kern-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 1rem;
+            min-width: 1050px;
+        }
+
+        .kern-table th, 
+        .kern-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--kern-color-border);
+            vertical-align: middle;
+        }
+
+        .kern-table th {
+            background-color: var(--kern-color-bundesblau);
+            color: #ffffff;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            line-height: 1.3;
+        }
+
+        .kern-table tbody tr:hover {
+            background-color: rgba(16, 53, 95, 0.05);
+        }
+
+        .kern-table .total-row {
+            font-weight: 700;
+            background-color: #e9ecef;
+            border-top: 2px solid var(--kern-color-bundesblau);
+        }
+
+        /* Visualisierung: Data Bar in der Tabelle */
+        .data-bar-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .data-bar-value {
+            min-width: 40px;
+            font-weight: 700;
+        }
+
+        .data-bar-track {
+            flex-grow: 1;
+            background-color: #e0e0e0;
+            height: 12px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .data-bar-fill {
+            height: 100%;
+            background-color: var(--kern-color-bundesblau);
+        }
+
+        .data-bar-fill.secondary {
+            background-color: var(--kern-color-bar);
+        }
+
+        /* Quellenliste */
+        .kern-sources {
+            background-color: rgba(16, 53, 95, 0.05);
+            padding: var(--kern-spacing-l);
+            border-left: 4px solid var(--kern-color-bundesblau);
+            margin-top: var(--kern-spacing-l);
+        }
+
+        .kern-sources ul {
+            padding-left: 24px;
+            margin: 0;
+        }
+
+        .kern-sources li {
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+
+        .kern-note {
+            font-size: 0.875rem;
+            color: var(--kern-color-text-light);
+            margin-top: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="kern-container">
+    <h1>Legistische Profile in der Bundesregierung</h1>
+    
+    <p>Die Rolle / Profil Legist (Person die an der Erarbeitung von Gesetzen beteiligt ist, konzeptionell wie auch schreibend) ist in der deutschen Bundesverwaltung bisher nicht definiert oder extra ausgewisen. Heute wird die Ausarbeitung von Regelungen dezentral von Referentinnen und Referenten, meist im Höheren Dienst übernommen. Die folgende Modellierung schätzt die Anzal auf ca. <strong>3.500 Vollzeitäquivalente</strong> und setzt diese in Relation zu den tatsächlichen, im parlamentarischen Dokumentationssystem (DIP) verzeichneten Regierungsvorlagen. Die Auswertung basiert auf Annahmen und wurde KI gestützt erstellt.</p>
+
+    <h2>Verteilung der Kapazitäten & Reale Vorlagen (Stand 2026)</h2>
+    
+    <div class="kern-table-wrapper">
+        <table class="kern-table">
+            <thead>
+                <tr>
+                    <th style="width: 22%;">Ressort </th>
+                    <th style="width: 11%;">Vorlagen (Quelle: DIP)*</th>
+                    <th style="width: 10%;">Anteil (%)</th>
+                    <th style="width: 14%;">Fachressort (Stellen)</th>
+                    <th style="width: 15%;">BKAmt (Spiegelref.)</th>
+                    <th style="width: 28%;">Gesamtkapazität (Relation)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>BMF</strong> (Finanzen)</td>
+                    <td>112</td>
+                    <td>17,4 %</td>
+                    <td>590</td>
+                    <td>ca. 25</td>
+                    <td>
+                        <div class="data-bar-container">
+                            <span class="data-bar-value">615</span>
+                            <div class="data-bar-track"><div class="data-bar-fill" style="width: 100%;"></div></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>BMI</strong> (Inneres)</td>
+                    <td>89</td>
+                    <td>13,8 %</td>
+                    <td>500</td>
+                    <td>ca. 20</td>
+                    <td>
+                        <div class="data-bar-container">
+                            <span class="data-bar-value">520</span>
+                            <div class="data-bar-track"><div class="data-bar-fill" style="width: 84.6%;"></div></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>BMAS</strong> (Arbeit/Soziales)</td>
+                    <td>75</td>
+                    <td>11,7 %</td>
+                    <td>400</td>
+                    <td>ca. 15</td>
+                    <td>
+                        <div class="data-bar-container">
+                            <span class="data-bar-value">415</span>
+                            <div class="data-bar-track"><div class="data-bar-fill" style="width: 67.5%;"></div></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>BMWE</strong> (Wirtschaft/Energie)</td>
+                    <td>71</td>
+                    <td>11,0 %</td>
+                    <td>400</td>
+                    <td>ca. 15</td>
+                    <td>
+                        <div class="data-bar-container">
+                            <span class="data-bar-value">415</span>
+                            <div class="data-bar-track"><div class="data-bar-fill" style="width: 67.5%;"></div></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>BMG</strong> (Gesundheit)</td>
+                    <td>68</td>
+                    <td>10,6 %</td>
+                    <td>320</td>
+                    <td>ca. 14</td>
+                    <td>
+                        <div class="data-bar-container">
+                            <span class="data-bar-value">334</span>
+                            <div class="data-bar-track"><div class="data-bar-fill" style="width: 54.3%;"></div></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>BMJV</strong> (Justiz/Verbraucher)</td>
+                    <td>63</td>
+                    <td>9,8 %</td>
+                    <td>290</td>
+                    <td>ca. 10</td>
+                    <td>
+                        <div class="data-bar-container">
+                            <span class="data-bar-value">300</span>
+                            <div class="data-bar-track"><div class="data-bar-fill" style="width: 48.8%;"></div></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>BMV</strong> (Verkehr)</td>
+                    <td>35</td>
+                    <td>5,4 %</td>
+                    <td>170</td>
+                    <td>ca. 5</td>
+                    <td>
+                        <div class="data-bar-container">
+                            <span class="data-bar-value">175</span>
+                            <div class="data-bar-track"><div class="data-bar-fill secondary" style="width: 28.5%;"></div></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>BMUV</strong> (Umwelt)</td>
+                    <td>31</td>
+                    <td>4,8 %</td>
+                    <td>160</td>
+                    <td>ca. 5</td>
+                    <td>
+                        <div class="data-bar-container">
+                            <span class="data-bar-value">165</span>
+                            <div class="data-bar-track"><div class="data-bar-fill secondary" style="width: 26.8%;"></div></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>BMLEH</strong> (Landw., Ernährung, Heimat)</td>
+                    <td>26</td>
+                    <td>4,0 %</td>
+                    <td>140</td>
+                    <td>ca. 4</td>
+                    <td>
+                        <div class="data-bar-container">
+                            <span class="data-bar-value">144</span>
+                            <div class="data-bar-track"><div class="data-bar-fill secondary" style="width: 23.4%;"></div></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>BMBFSFJ</strong> (Bildung, Familie)</td>
+                    <td>23</td>
+                    <td>3,6 %</td>
+                    <td>120</td>
+                    <td>ca. 4</td>
+                    <td>
+                        <div class="data-bar-container">
+                            <span class="data-bar-value">124</span>
+                            <div class="data-bar-track"><div class="data-bar-fill secondary" style="width: 20.2%;"></div></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>BMWSB</strong> (Bau/Wohnen)</td>
+                    <td>15</td>
+                    <td>2,3 %</td>
+                    <td>85</td>
+                    <td>ca. 3</td>
+                    <td>
+                        <div class="data-bar-container">
+                            <span class="data-bar-value">88</span>
+                            <div class="data-bar-track"><div class="data-bar-fill secondary" style="width: 14.3%;"></div></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>BMDS</strong> (Digitales/Staatsmod.)</td>
+                    <td>11</td>
+                    <td>1,7 %</td>
+                    <td>70</td>
+                    <td>ca. 3</td>
+                    <td>
+                        <div class="data-bar-container">
+                            <span class="data-bar-value">73</span>
+                            <div class="data-bar-track"><div class="data-bar-fill secondary" style="width: 11.9%;"></div></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>AA</strong> (Auswärtiges Amt)</td>
+                    <td>10</td>
+                    <td>1,6 %</td>
+                    <td>35</td>
+                    <td>ca. 2</td>
+                    <td>
+                        <div class="data-bar-container">
+                            <span class="data-bar-value">37</span>
+                            <div class="data-bar-track"><div class="data-bar-fill secondary" style="width: 6.0%;"></div></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>BMFTR</strong> (Forschung, Technologie)</td>
+                    <td>9</td>
+                    <td>1,4 %</td>
+                    <td>40</td>
+                    <td>ca. 2</td>
+                    <td>
+                        <div class="data-bar-container">
+                            <span class="data-bar-value">42</span>
+                            <div class="data-bar-track"><div class="data-bar-fill secondary" style="width: 6.8%;"></div></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>BMVg</strong> (Verteidigung)</td>
+                    <td>4</td>
+                    <td>0,6 %</td>
+                    <td>35</td>
+                    <td>ca. 2</td>
+                    <td>
+                        <div class="data-bar-container">
+                            <span class="data-bar-value">37</span>
+                            <div class="data-bar-track"><div class="data-bar-fill secondary" style="width: 6.0%;"></div></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>BMZ</strong> (Wirtsch. Zusammenarb.)</td>
+                    <td>1</td>
+                    <td>0,3 %</td>
+                    <td>15</td>
+                    <td>ca. 1</td>
+                    <td>
+                        <div class="data-bar-container">
+                            <span class="data-bar-value">16</span>
+                            <div class="data-bar-track"><div class="data-bar-fill secondary" style="width: 2.6%;"></div></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>BKAmt</strong> (Querschnitt)</td>
+                    <td>–</td>
+                    <td>–</td>
+                    <td>–</td>
+                    <td>ca. 130</td>
+                    <td>
+                        <div class="data-bar-container">
+                            <span class="data-bar-value">130</span>
+                            <div class="data-bar-track"><div class="data-bar-fill secondary" style="width: 21.1%;"></div></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="total-row">
+                    <td>GESAMT</td>
+                    <td>643</td>
+                    <td>100 %</td>
+                    <td>3.370</td>
+                    <td>130</td>
+                    <td>3.500</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p class="kern-note"><strong>* Hinweis zu den DIP-Zahlen &amp; Ressortzuschnitt:</strong> Die Spalte zeigt die reale Anzahl der Regierungsvorlagen, umgelegt auf die aktuelle Ressortstruktur der 21. Wahlperiode (Stand Oktober 2026). Neu formierte Häuser wie das BMDS (Digitales) oder BMFTR (Forschung) sowie erweiterte Bereiche wie BMLEH und BMBFSFJ wurden hierbei kapazitiv aus den Vorgänger-Ressorts abgeleitet und bereinigt. Take it with a grain of Salt - this was done by KI.</p>
+    <p class="kern-note"><strong>Lesehinweis Kapazitäten:</strong> Die rechte Tabellenhälfte zeigt weiterhin das geschätzte „Vollzeitäquivalent“ des beamteten Höheren Dienstes, das anteilig auf die konkrete Gesetzgebung entfällt.</p>
+
+    <h2>Quellen die herangezogen wurden:</h2>
+    <div class="kern-sources">
+        <ul>
+            <li><strong>Historischer Gesetzesausstoß (Vorlagen):</strong> Echte Fallzahlen aus der amtlichen Statistik des <a href="https://dip.bundestag.de/" target="_blank" rel="noopener noreferrer">DIP (Dokumentations- und Informationssystem für Parlamentsmaterialien)</a>, gefiltert nach "Gesetzentwurf (Bundesregierung)" und projiziert auf die aktuellen Zuständigkeiten der 21. Wahlperiode.</li>
+            <li><strong>Personalstärke Höherer Dienst:</strong> Abgeleitet aus der Antwort der Bundesregierung auf die Kleine Anfrage zur Personalentwicklung, <a href="https://dserver.bundestag.de/btd/20/131/2013180.pdf" target="_blank" rel="noopener noreferrer">BT-Drucksache 20/13180</a>.</li>
+            <li><strong>Rechtliche Grundlagen & Prüfverfahren:</strong> <a href="https://www.verwaltungsvorschriften-im-internet.de/bsvwvbund_21072009_O11313012.htm" target="_blank" rel="noopener noreferrer">Gemeinsame Geschäftsordnung der Bundesministerien (GGO)</a>, insb. § 45 (Federführung) und § 46 (Rechtsförmliche Prüfung BMJ).</li>
+            <li><strong>BKAmt Spiegelreferate:</strong> Stellungnahmen der Regierung zur Struktur der Spiegelreferate, u.a. <a href="https://dserver.bundestag.de/btd/16/053/1605317.pdf" target="_blank" rel="noopener noreferrer">BT-Drucksache 16/5317</a>.</li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>
