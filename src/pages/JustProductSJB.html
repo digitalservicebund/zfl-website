@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Just Product 2026 - Master Agenda</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            blue: '#3b82f6', // Gemeinsam
+                            green: '#10b981', // Benedikt
+                            purple: '#8b5cf6', // Julius
+                            orange: '#f97316' // Sarah
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .accordion-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.3s ease-out;
+        }
+        .accordion-content.is-open {
+            grid-template-rows: 1fr;
+        }
+        .accordion-inner {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen pb-20">
+
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm border-b border-slate-200 w-full">
+        <div class="max-w-4xl mx-auto px-4 py-4 sm:py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+                <h1 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Just Product 2026</h1>
+                <h2 class="text-sm text-slate-500 font-medium mt-1">Master Agenda: Benedikt, Julius & Sarah</h2>
+            </div>
+            
+            <button onclick="downloadICS()" class="w-full sm:w-auto px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold rounded-lg shadow-sm transition-colors flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                Erweiterten Kalender (.ics) laden
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 space-y-6">
+
+        <!-- 09:45 Session -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-blue-500 transition-all hover:shadow-md">
+            <div class="p-5 cursor-pointer flex justify-between items-start" onclick="toggleAccordion('session-0945')">
+                <div class="space-y-2">
+                    <div class="flex flex-wrap items-center gap-2 mb-1">
+                        <span class="font-bold text-slate-900 text-lg">09:45</span>
+                        <span class="text-xs text-slate-500 uppercase tracking-wide font-semibold ml-2 mr-2">Main Stage</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-100 text-blue-800">Alle (Gemeinsam)</span>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900">How AI Broke Your Strategy</h3>
+                    <div class="text-sm text-slate-600 font-medium">Martin Eriksson</div>
+                </div>
+                <button class="text-slate-400 p-1 shrink-0">
+                    <svg id="icon-session-0945" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+            </div>
+            
+            <div id="session-0945" class="accordion-content">
+                <div class="accordion-inner">
+                    <div class="px-5 pb-5 pt-2 border-t border-slate-100 space-y-4">
+                        <div class="flex flex-wrap gap-4 text-sm mt-2">
+                            <a href="https://www.linkedin.com/search/results/people/?keywords=Martin+Eriksson" target="_blank" onclick="event.stopPropagation()" class="text-indigo-600 hover:text-indigo-800 flex items-center gap-1 font-medium">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg> LinkedIn
+                            </a>
+                            <a href="https://gibsonbiddle.medium.com/" target="_blank" onclick="event.stopPropagation()" class="text-slate-500 hover:text-slate-700 flex items-center gap-1">
+                                Vgl. Gibson Biddle: Product Strategy in the Age of AI
+                            </a>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-slate-700 leading-relaxed bg-slate-50 p-3 rounded-lg">
+                            <div><strong class="text-green-700">Benedikt:</strong> Interdisziplinäres Alignment bei steigender Execution-Geschwindigkeit.</div>
+                            <div><strong class="text-purple-700">Julius:</strong> Produktstrategie für skalierende HealthTech-Plattformen.</div>
+                            <div><strong class="text-orange-700">Sarah:</strong> Agile Organisationen an schnelle KI-Execution anpassen.</div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="bg-green-50 p-3 rounded-lg border border-green-100">
+                                <span class="block text-xs font-bold uppercase text-green-800 mb-1">Frage Benedikt</span>
+                                <p class="text-sm text-green-900 italic">"Wie kalibrieren wir den Decision Stack für Ministerien, um nicht sofort in Lösungsdetails zu verfallen?"</p>
+                            </div>
+                            <div class="bg-orange-50 p-3 rounded-lg border border-orange-100">
+                                <span class="block text-xs font-bold uppercase text-orange-800 mb-1">Frage Sarah</span>
+                                <p class="text-sm text-orange-900 italic">"Wie baut man psychologische Sicherheit auf, wenn Strategie-Pivots durch KI häufiger werden?"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 10:30 Session -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-purple-500 transition-all hover:shadow-md">
+            <div class="p-5 cursor-pointer flex justify-between items-start" onclick="toggleAccordion('session-1030')">
+                <div class="space-y-2">
+                    <div class="flex flex-wrap items-center gap-2 mb-1">
+                        <span class="font-bold text-slate-900 text-lg">10:30</span>
+                        <span class="text-xs text-slate-500 uppercase tracking-wide font-semibold ml-2 mr-2">Main Stage</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-purple-100 text-purple-800">Julius</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-500">Ben/Sarah optional</span>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900">AI Emptied Our Backlog. Now What?</h3>
+                    <div class="text-sm text-slate-600 font-medium">Verena Graber (medflex)</div>
+                </div>
+                <button class="text-slate-400 p-1 shrink-0">
+                    <svg id="icon-session-1030" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+            </div>
+            <div id="session-1030" class="accordion-content">
+                <div class="accordion-inner">
+                    <div class="px-5 pb-5 pt-2 border-t border-slate-100 space-y-4">
+                        <div class="flex flex-wrap gap-4 text-sm mt-2">
+                            <a href="https://www.linkedin.com/search/results/people/?keywords=Verena+Graber+medflex" target="_blank" onclick="event.stopPropagation()" class="text-indigo-600 hover:text-indigo-800 flex items-center gap-1 font-medium">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg> LinkedIn
+                            </a>
+                            <a href="https://www.producttalk.org/" target="_blank" onclick="event.stopPropagation()" class="text-slate-500 hover:text-slate-700 flex items-center gap-1">
+                                Vgl. Teresa Torres: Continuous Discovery Habits
+                            </a>
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed"><strong class="font-semibold text-slate-900">Fokus:</strong> Pflichttermin für Julius! Direkt aus der HealthTech-Branche. Mindset shift in operational PM for medical products.</p>
+                        <div class="bg-purple-50 p-4 rounded-lg border border-purple-100">
+                            <span class="block text-xs font-bold uppercase text-purple-800 mb-1">Frage von Julius</span>
+                            <p class="text-sm text-purple-900 italic font-medium">"Wenn KI den Backlog leert, wie stellt ihr sicher, dass die neu gewonnene Kapazität für echte 'Discovery' bei Ärzten/Patienten genutzt wird und nicht nur für Nice-to-have-Features?"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 11:00 Split Sessions -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
+            <!-- Benedikt & Sarah 11:00 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-green-500 transition-all hover:shadow-md">
+                <div class="p-5 cursor-pointer flex justify-between items-start" onclick="toggleAccordion('session-1100a')">
+                    <div class="space-y-2">
+                        <div class="flex flex-wrap items-center gap-2 mb-1">
+                            <span class="font-bold text-slate-900 text-lg">11:00</span>
+                            <span class="text-xs text-slate-500 uppercase tracking-wide font-semibold ml-2 mr-2">Main Stage</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-green-100 text-green-800">Ben</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-orange-100 text-orange-800">Sarah</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900">The Four Traps of AI Adoption</h3>
+                        <div class="text-sm text-slate-600 font-medium">Faith Forster</div>
+                    </div>
+                    <button class="text-slate-400 p-1 shrink-0">
+                        <svg id="icon-session-1100a" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                </div>
+                <div id="session-1100a" class="accordion-content">
+                    <div class="accordion-inner">
+                        <div class="px-5 pb-5 pt-2 border-t border-slate-100 space-y-4">
+                            <div class="flex flex-wrap gap-4 text-sm mt-2">
+                                <a href="https://www.linkedin.com/search/results/people/?keywords=Faith+Forster" target="_blank" onclick="event.stopPropagation()" class="text-indigo-600 hover:text-indigo-800 flex items-center gap-1 font-medium">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg> LinkedIn
+                                </a>
+                            </div>
+                            <div class="bg-green-50 p-4 rounded-lg border border-green-100">
+                                <span class="block text-xs font-bold uppercase text-green-800 mb-1">Frage Benedikt</span>
+                                <p class="text-sm text-green-900 italic font-medium">"Wie bauen wir frühe Adoptions-Zyklen im Public Sector, ohne das Vertrauen durch Fehler zu zerstören?"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Julius 11:00 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-purple-500 transition-all hover:shadow-md">
+                <div class="p-5 cursor-pointer flex justify-between items-start" onclick="toggleAccordion('session-1100b')">
+                    <div class="space-y-2">
+                        <div class="flex flex-wrap items-center gap-2 mb-1">
+                            <span class="font-bold text-slate-900 text-lg">11:00</span>
+                            <span class="text-xs text-slate-500 uppercase tracking-wide font-semibold ml-2 mr-2">Workshop Stage</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-purple-100 text-purple-800">Julius</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900">Build Your Evals Using AI</h3>
+                        <div class="text-sm text-slate-600 font-medium">Catalina Turlea</div>
+                    </div>
+                    <button class="text-slate-400 p-1 shrink-0">
+                        <svg id="icon-session-1100b" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                </div>
+                <div id="session-1100b" class="accordion-content">
+                    <div class="accordion-inner">
+                        <div class="px-5 pb-5 pt-2 border-t border-slate-100 space-y-4">
+                            <div class="flex flex-wrap gap-4 text-sm mt-2">
+                                <a href="https://www.linkedin.com/search/results/people/?keywords=Catalina+Turlea" target="_blank" onclick="event.stopPropagation()" class="text-indigo-600 hover:text-indigo-800 flex items-center gap-1 font-medium">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg> LinkedIn
+                                </a>
+                            </div>
+                            <div class="bg-purple-50 p-4 rounded-lg border border-purple-100">
+                                <span class="block text-xs font-bold uppercase text-purple-800 mb-1">Frage von Julius</span>
+                                <p class="text-sm text-purple-900 italic font-medium">"Wie baut man Experimente & Evaluierungs-Frameworks, die klinisch sicher sind (null Toleranz für Halluzinationen)?"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 11:30 Networking -->
+        <div class="bg-slate-100 rounded-xl shadow-inner border border-slate-200 border-l-4 border-l-blue-400 p-5">
+            <div class="flex items-center gap-4">
+                <div class="bg-white p-3 rounded-full shadow-sm text-blue-500 hidden sm:block">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                </div>
+                <div>
+                    <div class="flex flex-wrap items-center gap-2 mb-1">
+                        <span class="font-bold text-slate-900 text-lg">11:30</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-100 text-blue-800">Alle</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">Product Walk (Networking)</h3>
+                    <p class="text-sm text-slate-600 mt-1">Treffpunkt: ARRI Kino Eingang. Austausch über Regulierung, Strategie und Orga-Entwicklung in der Natur.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 13:30 Split Sessions -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
+            <!-- Benedikt 13:30 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-green-500 transition-all hover:shadow-md">
+                <div class="p-5 cursor-pointer flex justify-between items-start" onclick="toggleAccordion('session-1330a')">
+                    <div class="space-y-2">
+                        <div class="flex flex-wrap items-center gap-2 mb-1">
+                            <span class="font-bold text-slate-900 text-lg">13:30</span>
+                            <span class="text-xs text-slate-500 uppercase tracking-wide font-semibold ml-2 mr-2">Main Stage</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-green-100 text-green-800">Benedikt</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900">Lead Your Team of AI Agents</h3>
+                        <div class="text-sm text-slate-600 font-medium">Gopika Mohanan</div>
+                    </div>
+                    <button class="text-slate-400 p-1 shrink-0">
+                        <svg id="icon-session-1330a" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                </div>
+                <div id="session-1330a" class="accordion-content">
+                    <div class="accordion-inner">
+                        <div class="px-5 pb-5 pt-2 border-t border-slate-100 space-y-4">
+                            <div class="flex flex-wrap gap-4 text-sm mt-2">
+                                <a href="https://www.linkedin.com/search/results/people/?keywords=Gopika+Mohanan" target="_blank" onclick="event.stopPropagation()" class="text-indigo-600 hover:text-indigo-800 flex items-center gap-1 font-medium">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg> LinkedIn
+                                </a>
+                            </div>
+                            <p class="text-sm text-slate-700 leading-relaxed"><strong class="font-semibold text-slate-900">Fokus:</strong> Agenten in komplexen Verwaltungsstrukturen führen.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Julius & Sarah 13:30 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-purple-500 transition-all hover:shadow-md">
+                <div class="p-5 cursor-pointer flex justify-between items-start" onclick="toggleAccordion('session-1330b')">
+                    <div class="space-y-2">
+                        <div class="flex flex-wrap items-center gap-2 mb-1">
+                            <span class="font-bold text-slate-900 text-lg">13:30</span>
+                            <span class="text-xs text-slate-500 uppercase tracking-wide font-semibold ml-2 mr-2">Workshop</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-purple-100 text-purple-800">Jul</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-orange-100 text-orange-800">Sarah</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900">Built AI Agents for Our Product Org</h3>
+                        <div class="text-sm text-slate-600 font-medium">Julia Bastian</div>
+                    </div>
+                    <button class="text-slate-400 p-1 shrink-0">
+                        <svg id="icon-session-1330b" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                </div>
+                <div id="session-1330b" class="accordion-content">
+                    <div class="accordion-inner">
+                        <div class="px-5 pb-5 pt-2 border-t border-slate-100 space-y-4">
+                            <div class="flex flex-wrap gap-4 text-sm mt-2">
+                                <a href="https://www.linkedin.com/search/results/people/?keywords=Julia+Bastian+Alasco" target="_blank" onclick="event.stopPropagation()" class="text-indigo-600 hover:text-indigo-800 flex items-center gap-1 font-medium">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg> LinkedIn
+                                </a>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 mt-2">
+                                <span class="block text-xs font-bold uppercase text-slate-800 mb-1">Frage Julius / Sarah</span>
+                                <p class="text-sm text-slate-900 italic font-medium">"Wie baut man interne KI-Agenten für PM-Teams und Agile Coaches, ohne die Datenhoheit zu gefährden?"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 14:45 Session -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-blue-500 transition-all hover:shadow-md">
+            <div class="p-5 cursor-pointer flex justify-between items-start" onclick="toggleAccordion('session-1445')">
+                <div class="space-y-2">
+                    <div class="flex flex-wrap items-center gap-2 mb-1">
+                        <span class="font-bold text-slate-900 text-lg">14:45</span>
+                        <span class="text-xs text-slate-500 uppercase tracking-wide font-semibold ml-2 mr-2">Main Stage</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-100 text-blue-800">Alle (Gemeinsam)</span>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900">When Everyone Can Build, What Makes Great Product?</h3>
+                    <div class="text-sm text-slate-600 font-medium">Dave Killeen</div>
+                </div>
+                <button class="text-slate-400 p-1 shrink-0">
+                    <svg id="icon-session-1445" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+            </div>
+            
+            <div id="session-1445" class="accordion-content">
+                <div class="accordion-inner">
+                    <div class="px-5 pb-5 pt-2 border-t border-slate-100 space-y-4">
+                        <div class="flex flex-wrap gap-4 text-sm mt-2">
+                            <a href="https://www.linkedin.com/search/results/people/?keywords=Dave+Killeen+Pendo" target="_blank" onclick="event.stopPropagation()" class="text-indigo-600 hover:text-indigo-800 flex items-center gap-1 font-medium">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg> LinkedIn
+                            </a>
+                            <a href="https://melissaperri.com/" target="_blank" onclick="event.stopPropagation()" class="text-slate-500 hover:text-slate-700 flex items-center gap-1">
+                                Vgl. Melissa Perri: Escaping the Build Trap
+                            </a>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-slate-700 leading-relaxed bg-slate-50 p-3 rounded-lg">
+                            <div><strong class="text-green-700">Benedikt:</strong> Rolle der zentralen PM-Teams, wenn Juristen selbst bauen.</div>
+                            <div><strong class="text-purple-700">Julius:</strong> Patientenprobleme im Fokus halten.</div>
+                            <div><strong class="text-orange-700">Sarah:</strong> Kultureller Wandel, wenn Tech-Skills demokratisiert werden.</div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="bg-green-50 p-3 rounded-lg border border-green-100">
+                                <span class="block text-xs font-bold uppercase text-green-800 mb-1">Frage Benedikt</span>
+                                <p class="text-sm text-green-900 italic">"Wie verändert sich die Rolle von PM/Design zu reinen 'Leitplanken-Setzern'?"</p>
+                            </div>
+                            <div class="bg-orange-50 p-3 rounded-lg border border-orange-100">
+                                <span class="block text-xs font-bold uppercase text-orange-800 mb-1">Frage Sarah</span>
+                                <p class="text-sm text-orange-900 italic">"Welche neuen agilen Metriken brauchen wir, wenn Output (Bauen) nicht mehr der Engpass ist?"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 15:30 Split Sessions -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
+            <!-- Benedikt 15:30 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-green-500 transition-all hover:shadow-md">
+                <div class="p-5 cursor-pointer flex justify-between items-start" onclick="toggleAccordion('session-1530a')">
+                    <div class="space-y-2">
+                        <div class="flex flex-wrap items-center gap-2 mb-1">
+                            <span class="font-bold text-slate-900 text-lg">15:30</span>
+                            <span class="text-xs text-slate-500 uppercase tracking-wide font-semibold ml-2 mr-2">Workshop</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-green-100 text-green-800">Benedikt</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900">Strategy Slop</h3>
+                        <div class="text-sm text-slate-600 font-medium">Tim Herbig</div>
+                    </div>
+                    <button class="text-slate-400 p-1 shrink-0">
+                        <svg id="icon-session-1530a" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                </div>
+                <div id="session-1530a" class="accordion-content">
+                    <div class="accordion-inner">
+                        <div class="px-5 pb-5 pt-2 border-t border-slate-100 space-y-4">
+                            <div class="flex flex-wrap gap-4 text-sm mt-2">
+                                <a href="https://www.linkedin.com/search/results/people/?keywords=Tim+Herbig" target="_blank" onclick="event.stopPropagation()" class="text-indigo-600 hover:text-indigo-800 flex items-center gap-1 font-medium">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg> LinkedIn
+                                </a>
+                            </div>
+                            <div class="bg-green-50 p-4 rounded-lg border border-green-100 mt-2">
+                                <span class="block text-xs font-bold uppercase text-green-800 mb-1">Frage von Benedikt</span>
+                                <p class="text-sm text-green-900 italic font-medium">"Wie verhindern wir 'Strategy Slop', wenn KI zur Übersetzung von Legistik genutzt wird und Nuancen verliert?"</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Julius & Sarah 15:30 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-purple-500 transition-all hover:shadow-md">
+                <div class="p-5 cursor-pointer flex justify-between items-start" onclick="toggleAccordion('session-1530b')">
+                    <div class="space-y-2">
+                        <div class="flex flex-wrap items-center gap-2 mb-1">
+                            <span class="font-bold text-slate-900 text-lg">15:30</span>
+                            <span class="text-xs text-slate-500 uppercase tracking-wide font-semibold ml-2 mr-2">Main Stage</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-purple-100 text-purple-800">Jul</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-orange-100 text-orange-800">Sarah</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900">Building an AI Operating System</h3>
+                        <div class="text-sm text-slate-600 font-medium">Felix Geelhaar</div>
+                    </div>
+                    <button class="text-slate-400 p-1 shrink-0">
+                        <svg id="icon-session-1530b" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                </div>
+                <div id="session-1530b" class="accordion-content">
+                    <div class="accordion-inner">
+                        <div class="px-5 pb-5 pt-2 border-t border-slate-100 space-y-4">
+                            <div class="flex flex-wrap gap-4 text-sm mt-2">
+                                <a href="https://www.linkedin.com/search/results/people/?keywords=Felix+Geelhaar" target="_blank" onclick="event.stopPropagation()" class="text-indigo-600 hover:text-indigo-800 flex items-center gap-1 font-medium">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg> LinkedIn
+                                </a>
+                            </div>
+                            <p class="text-sm text-slate-700 leading-relaxed"><strong class="font-semibold text-slate-900">Fokus:</strong> Skalierung von R&D und Product Ops bei Scale-ups wie TeleClinic.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 16:30 Session -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-blue-500 transition-all hover:shadow-md">
+            <div class="p-5 cursor-pointer flex justify-between items-start" onclick="toggleAccordion('session-1630')">
+                <div class="space-y-2">
+                    <div class="flex flex-wrap items-center gap-2 mb-1">
+                        <span class="font-bold text-slate-900 text-lg">16:30</span>
+                        <span class="text-xs text-slate-500 uppercase tracking-wide font-semibold ml-2 mr-2">Main Stage</span>
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-100 text-blue-800">Alle (Gemeinsam)</span>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold text-slate-900">Move Early, Commit Carefully</h3>
+                    <div class="text-sm text-slate-600 font-medium">Simina Pasat</div>
+                </div>
+                <button class="text-slate-400 p-1 shrink-0">
+                    <svg id="icon-session-1630" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+            </div>
+            
+            <div id="session-1630" class="accordion-content">
+                <div class="accordion-inner">
+                    <div class="px-5 pb-5 pt-2 border-t border-slate-100 space-y-4">
+                        <div class="flex flex-wrap gap-4 text-sm mt-2">
+                            <a href="https://www.linkedin.com/search/results/people/?keywords=Simina+Pasat+GitHub" target="_blank" onclick="event.stopPropagation()" class="text-indigo-600 hover:text-indigo-800 flex items-center gap-1 font-medium">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg> LinkedIn
+                            </a>
+                            <a href="#" target="_blank" onclick="event.stopPropagation()" class="text-slate-500 hover:text-slate-700 flex items-center gap-1">
+                                Vgl. Simina Pasat: Enterprise Habit
+                            </a>
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed"><strong class="font-semibold text-slate-900">Fokus:</strong> Change Management und Vertrauensaufbau in hochregulierten und kritischen Umgebungen (Verwaltung & HealthTech).</p>
+                        <div class="bg-blue-50/50 p-4 rounded-lg border border-blue-100">
+                            <span class="block text-xs font-bold uppercase text-blue-800 mb-1">Gemeinsame Frage</span>
+                            <p class="text-sm text-blue-900 italic font-medium">"Der Weg vom Demo zum 'Enterprise Habit' ist in der Verwaltung und bei Ärzten enorm schwer. Welche Hebel haben sich bei GitHub bewährt, um bei hochskeptischen Nutzergruppen Verhaltensänderungen herbeizuführen?"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        function toggleAccordion(id) {
+            const element = document.getElementById(id);
+            const icon = document.getElementById('icon-' + id);
+            
+            if (element.classList.contains('is-open')) {
+                element.classList.remove('is-open');
+                icon.classList.remove('rotate-180');
+            } else {
+                element.classList.add('is-open');
+                icon.classList.add('rotate-180');
+            }
+        }
+
+        function downloadICS() {
+            // Using template literals to ensure literal \r\n (standard for ICS)
+            // Some parsers require CRLF (\r\n) while LF (\n) might fail, but JS template literals use \n. We will explicitly replace just in case.
+            let rawData = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Benedikt, Julius & Sarah//Just Product 2026 Agenda//DE
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+
+BEGIN:VEVENT
+SUMMARY:[Alle] Martin Eriksson: How AI Broke Your Strategy
+DTSTART;TZID=Europe/Berlin:20261016T094500
+DTEND;TZID=Europe/Berlin:20261016T103000
+LOCATION:Main Stage (Astor Lounge)
+DESCRIPTION:FOKUS:\\n- Benedikt: Interdisziplinäres Alignment bei steigender AI-Ausführungsgeschwindigkeit.\\n- Julius: Produktstrategie für skalierende HealthTech-Plattformen.\\n- Sarah: Agile Organisationen an schnelle KI-Execution anpassen.\\n\\nFRAGEN:\\n- Benedikt: Wie kalibrieren wir den Decision Stack für Ministerien, um nicht sofort in Lösungsdetails zu verfallen?\\n- Sarah: Wie baut man psychologische Sicherheit auf, wenn Strategie-Pivots durch KI häufiger werden?\\n\\nLINKS:\\n- Speaker: https://www.linkedin.com/search/results/people/?keywords=Martin+Eriksson\\n- Konferenz: https://www.product-masterclass.com/events/just-product/agenda\\n- Vgl. Talk: Gibson Biddle - Product Strategy in the Age of AI
+END:VEVENT
+
+BEGIN:VEVENT
+SUMMARY:[Julius + optional] Verena Graber: AI Emptied Our Backlog
+DTSTART;TZID=Europe/Berlin:20261016T103000
+DTEND;TZID=Europe/Berlin:20261016T110000
+LOCATION:Main Stage (Astor Lounge)
+DESCRIPTION:FOKUS:\\n- Julius: Pflichttermin! Direkt aus der HealthTech-Branche (medflex). Spannend für TeleClinic.\\n\\nFRAGE (Julius):\\n- Wenn KI den Backlog leert, wie stellt ihr sicher, dass die neu gewonnene Kapazität für echte 'Discovery' bei Ärzten/Patienten genutzt wird und nicht nur für Nice-to-have-Features?\\n\\nLINKS:\\n- Speaker: https://www.linkedin.com/search/results/people/?keywords=Verena+Graber+medflex\\n- Vgl. Talk: Teresa Torres - Continuous Discovery Habits
+END:VEVENT
+
+BEGIN:VEVENT
+SUMMARY:[SPLIT] Benedikt/Sarah: Faith Forster | Julius: Catalina Turlea
+DTSTART;TZID=Europe/Berlin:20261016T110000
+DTEND;TZID=Europe/Berlin:20261016T113000
+LOCATION:Main Stage (Faith) / AI Workshop Stage (Catalina)
+DESCRIPTION:BENEDIKT & SARAH (Main Stage):\\nFaith Forster - The Four Traps of AI Adoption\\nFrage Benedikt: Wie bauen wir frühe Adoptions-Zyklen im Public Sector, ohne das Vertrauen durch Fehler zu zerstören?\\nLink: https://www.linkedin.com/search/results/people/?keywords=Faith+Forster\\n\\nJULIUS (Workshop Stage):\\nCatalina Turlea - Build Your Evals Using AI\\nFrage Julius: Wie baut man Experimente & Evaluierungs-Frameworks, die klinisch sicher sind (null Toleranz für Halluzinationen)?\\nLink: https://www.linkedin.com/search/results/people/?keywords=Catalina+Turlea
+END:VEVENT
+
+BEGIN:VEVENT
+SUMMARY:[Alle] Product Walk & Networking
+DTSTART;TZID=Europe/Berlin:20261016T113000
+DTEND;TZID=Europe/Berlin:20261016T121500
+LOCATION:ARRI Kino Eingang
+DESCRIPTION:Networking in der Natur. Austausch über Regulierung, Strategie und Organisationsentwicklung fernab der Bildschirme.
+END:VEVENT
+
+BEGIN:VEVENT
+SUMMARY:[SPLIT] Benedikt: Gopika Mohanan | Julius/Sarah: Julia Bastian
+DTSTART;TZID=Europe/Berlin:20261016T133000
+DTEND;TZID=Europe/Berlin:20261016T140000
+LOCATION:Main Stage (Gopika) / AI Workshop Stage (Julia)
+DESCRIPTION:BENEDIKT (Main Stage):\\nGopika Mohanan - Lead Your Team of AI Agents\\nFokus: Agenten in komplexen Verwaltungsstrukturen führen.\\nLink: https://www.linkedin.com/search/results/people/?keywords=Gopika+Mohanan\\n\\nJULIUS & SARAH (Workshop Stage):\\nJulia Bastian - Built AI Agents for Our Product Org\\nFrage Julius/Sarah: Wie baut man interne KI-Agenten für PM-Teams und Agile Coaches, ohne die Datenhoheit zu gefährden?\\nLink: https://www.linkedin.com/search/results/people/?keywords=Julia+Bastian+Alasco
+END:VEVENT
+
+BEGIN:VEVENT
+SUMMARY:[Alle] Dave Killeen: When Everyone Can Build
+DTSTART;TZID=Europe/Berlin:20261016T144500
+DTEND;TZID=Europe/Berlin:20261016T151500
+LOCATION:Main Stage (Astor Lounge)
+DESCRIPTION:FOKUS:\\n- Benedikt: Rolle der zentralen PM-Teams, wenn Juristen selbst bauen.\\n- Julius: Patientenprobleme im Fokus halten.\\n- Sarah: Kultureller Wandel, wenn Tech-Skills demokratisiert werden.\\n\\nFRAGEN:\\n- Benedikt: Wie verändert sich die Rolle von PM/Design zu reinen 'Leitplanken-Setzern'?\\n- Sarah: Welche neuen agilen Metriken brauchen wir, wenn Output (Bauen) nicht mehr der Engpass ist?\\n\\nLINKS:\\n- Speaker: https://www.linkedin.com/search/results/people/?keywords=Dave+Killeen+Pendo\\n- Vgl. Talk: Melissa Perri - Escaping the Build Trap
+END:VEVENT
+
+BEGIN:VEVENT
+SUMMARY:[SPLIT] Benedikt: Tim Herbig | Julius/Sarah: Felix Geelhaar
+DTSTART;TZID=Europe/Berlin:20261016T153000
+DTEND;TZID=Europe/Berlin:20261016T163000
+LOCATION:AI Workshop Stage (Tim) / Main Stage (Felix)
+DESCRIPTION:BENEDIKT (Workshop Stage):\\nTim Herbig - Strategy Slop\\nFrage: Wie verhindern wir 'Strategy Slop', wenn KI zur Übersetzung von Legistik genutzt wird und Nuancen verliert?\\nLink: https://www.linkedin.com/search/results/people/?keywords=Tim+Herbig\\n\\nJULIUS & SARAH (Main Stage):\\nFelix Geelhaar - Building an AI Operating System\\nFokus: Skalierung von R&D und Product Ops bei Scale-ups wie TeleClinic.\\nLink: https://www.linkedin.com/search/results/people/?keywords=Felix+Geelhaar
+END:VEVENT
+
+BEGIN:VEVENT
+SUMMARY:[Alle] Simina Pasat: Move Early, Commit Carefully
+DTSTART;TZID=Europe/Berlin:20261016T163000
+DTEND;TZID=Europe/Berlin:20261016T171500
+LOCATION:Main Stage (Astor Lounge)
+DESCRIPTION:FOKUS:\\nChange Management und Vertrauensaufbau in hochregulierten und kritischen Umgebungen (Verwaltung & HealthTech).\\n\\nFRAGE:\\n- Der Weg vom Demo zum 'Enterprise Habit' ist in der Verwaltung und bei Ärzten enorm schwer. Welche Hebel haben sich bei GitHub bewährt, um bei hochskeptischen Nutzergruppen Verhaltensänderungen herbeizuführen?\\n\\nLINKS:\\n- Speaker: https://www.linkedin.com/search/results/people/?keywords=Simina+Pasat+GitHub\\n- Vgl. Talk: Simina Pasat - From Brilliant Demo to Enterprise Habit
+END:VEVENT
+
+END:VCALENDAR`;
+
+            // Replace actual newlines with CRLF for standard ICS compliance
+            const icsData = rawData.replace(/\n/g, "\r\n");
+
+            const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'just-product-2026-master.ics');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
