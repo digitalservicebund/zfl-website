@@ -7,6 +7,7 @@
     mermaidFlowchartToRulemapXml,
   } from "./_mermaid2RulemapXML.ts";
   import { parseMmdFrontmatter } from "./_mmdFrontmatter.ts";
+  import { wrappingWidthFor } from "./_mermaidConfig.ts";
   import { resolveEliUrl } from "../_shared/eli.ts";
   import { createFakeLoadingSequence } from "../_shared/fakeLoading.ts";
   import { getMermaid, getVisOptions } from "../_shared/api.ts";
@@ -35,14 +36,6 @@
 
   const wizard = new WizardState();
   setWizardContext(wizard);
-
-  // Mermaid's default (200px) re-wraps the <br/>-separated lines in top-down
-  // diagrams, making nodes narrow and diagrams very tall. Left-right actor
-  // overviews keep the default: their one-line-per-duty labels would
-  // otherwise make the diagram very wide and flat.
-  function wrappingWidthFor(source: string): number {
-    return /^\s*flowchart\s+(LR|RL)\b/.test(source) ? 200 : 400;
-  }
 
   function configureMermaid(htmlLabels: boolean, wrappingWidth = 400) {
     mermaid.initialize({

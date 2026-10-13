@@ -2,14 +2,17 @@
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
 import KernCard from "@/components/KernCard.astro";
-import FeatureSet from "@/components/FeatureSet.astro";
-import FeatureItem from "@/components/FeatureItem.astro";
-import IconShare from "~icons/ic/twotone-share";
-import IconLightbulb from "~icons/ic/twotone-lightbulb";
-import IconEye from "~icons/ic/twotone-remove-red-eye";
+import IconDeviceHub from "~icons/ic/round-device-hub";
+import IconWeb from "~icons/ic/round-web";
+import IconPeople from "~icons/ic/round-people";
+import IconDone from "~icons/ic/round-done";
 import { werkzeuge_visualisieren_erstellen } from "@/config/routes";
 import { getVisualisierungExamples } from "./_examples.ts";
-import { visTypeIcons } from "./_visTypeIcons.ts";
+import type { VisType } from "./_types";
+import DiagramPreview from "./_DiagramPreview.svelte";
+import { parseMmdFrontmatter } from "./_mmdFrontmatter.ts";
+import { wrappingWidthFor } from "./_mermaidConfig.ts";
+import { stripLinks } from "./_diagramExport.ts";
 
 export const frontmatter = {
   title: "Gesetze visualisieren",
@@ -18,21 +21,77 @@ export const frontmatter = {
 
 const wizardPath = werkzeuge_visualisieren_erstellen.path;
 
+// Each card preselects its vis type in step 1 of the wizard.
+const visTypeCards = [
+  {
+    preset: "flowchart",
+    icon: IconDeviceHub,
+    title: "Entscheidungslogiken prüfen",
+    body: "Analysieren Sie die Logik und Struktur Ihrer Regelung. Ideal, um Zusammenhänge zu prüfen und bestehendes Recht schnell zu erfassen.",
+    badge: "Regelbaum",
+    benefit: "Frühzeitig Komplexität erkennen und reduzieren",
+  },
+  {
+    preset: "swimlane",
+    icon: IconWeb,
+    title: "Vollzug veranschaulichen",
+    body: "Visualisieren Sie die praktische Umsetzung Ihrer Regelung, um Prozessschritte klar zu erkennen und Ihr Vorhaben gezielt zu optimieren.",
+    badge: "Flussdiagramm",
+    benefit: "Chancen und Hürden der Digitalisierung erkennen",
+  },
+  {
+    preset: "actors",
+    icon: IconPeople,
+    title: "Normadressaten identifizieren",
+    body: "Machen Sie sichtbar, welche Zielgruppen Ihre Regelung betrifft, um die Interaktionen aller Beteiligten ganzheitlich zu erfassen.",
+    badge: "Stakeholdermap",
+    benefit: "Abstimmung vereinfachen, z.\u00a0B. im Ressort und mit Verbänden",
+  },
+] as const satisfies { preset: VisType; [key: string]: unknown }[];
+
 // Hand-picked to show one example per vis type. Entries that no longer
 // exist in the collection are skipped.
 const featured = [
-  { short: "BEEG", visualization: "Anspruchsvoraussetzungen Elterngeld" },
   { short: "AsylG", visualization: "Asylverfahren-Ablauf" },
+  { short: "BEEG", visualization: "Anspruchsvoraussetzungen Elterngeld" },
   { short: "OZG", visualization: "Akteure und Zuständigkeiten" },
 ];
+const mermaidSources = import.meta.glob<string>(
+  "../../../content/ki-visualisierungen/*/*.mmd",
+  { query: "?raw", import: "default" },
+);
 const examples = await getVisualisierungExamples();
-const featuredExamples = featured.flatMap(({ short, visualization }) => {
-  const example = examples.find((e) => e.short === short);
-  const option = example?.visOptions.find((o) => o.name === visualization);
-  if (!example || !option) return [];
-  const params = new URLSearchParams({ norm: short, visualization });
-  return [{ example, option, href: `${wizardPath}?${params}` }];
-});
+const featuredExamples = (
+  await Promise.all(
+    featured.map(async ({ short, visualization }) => {
+      const example = examples.find((e) => e.short === short);
+      const option = example?.visOptions.find((o) => o.name === visualization);
+      const loadSource =
+        mermaidSources[
+          `../../../content/ki-visualisierungen/${short}/${option?.filename}.mmd`
+        ];
+      if (!option || !loadSource) return undefined;
+      // Links inside the labels would end up nested in the preview's link.
+      const body = stripLinks(parseMmdFrontmatter(await loadSource()).body);
+      // Per-diagram config, see _DiagramPreview.svelte
+      const config = `---
+config:
+  htmlLabels: true
+  flowchart:
+    htmlLabels: true
+    wrappingWidth: ${wrappingWidthFor(body)}
+---
+`;
+      const params = new URLSearchParams({ norm: short, visualization });
+      return {
+        short,
+        option,
+        source: config + body,
+        href: `${wizardPath}?${params}`,
+      };
+    }),
+  )
+).filter((e) => e !== undefined);
 ---
 
 <Layout title={frontmatter.title}>
@@ -59,66 +118,64 @@ const featuredExamples = featured.flatMap(({ short, visualization }) => {
     </Hero>
 
     <section>
-      <h2>Warum eine Visualisierung erstellen?</h2>
-      <FeatureSet>
-        <FeatureItem>
-          <IconShare slot="icon" class="size-full" />
-          <p>
-            Frühzeitig <strong>Komplexität</strong> erkennen und{" "}
-            <strong>reduzieren</strong>
-          </p>
-        </FeatureItem>
-        <FeatureItem>
-          <IconLightbulb slot="icon" class="size-full" />
-          <p>
-            <strong>Chancen und Hürden</strong> der Digitalisierung erkennen
-          </p>
-        </FeatureItem>
-        <FeatureItem>
-          <IconEye slot="icon" class="size-full" />
-          <p>
-            <strong>Abstimmung</strong> vereinfachen, z.&nbsp;B. im Ressort und
-            mit Verbänden
-          </p>
-        </FeatureItem>
-      </FeatureSet>
-    </section>
-
-    <section class="breakout bg-lavender-200">
-      <h2 class="mb-24">Visualisierung jetzt starten</h2>
-      <p class="mb-32">
-        Visualisieren Sie den Vollzug Ihrer Regelung, um Zusammenhänge besser zu
-        verstehen und Ihr Vorhaben zu optimieren.
+      <h2 class="mb-16">Visualisierungen jetzt erstellen</h2>
+      <p>
+        Wählen Sie eine der folgenden Optionen, je nachdem, was Sie
+        visualisieren möchten.
       </p>
-      <div>
-        <a href={wizardPath} class="kern-btn kern-btn--primary">
-          <span class="kern-label">Jetzt starten</span>
-        </a>
+      {/* Each benefit sits below its card; the subgrid keeps the benefits
+          aligned across columns regardless of card height. */}
+      <div class="mt-56 grid grid-cols-1 gap-x-32 gap-y-56 md:grid-cols-3 lg:gap-x-56">
+        {visTypeCards.map(
+          ({ preset, icon: Icon, title, body, badge, benefit }) => (
+            <div class="grid gap-24 md:row-span-2 md:grid-rows-subgrid md:gap-y-56">
+              <KernCard
+                title={title}
+                href={`${wizardPath}?${new URLSearchParams({ preset })}`}
+              >
+                <div
+                  slot="pre-header"
+                  class="text-cosmic-blue-base mb-24 flex w-full justify-center"
+                >
+                  <Icon class="size-74" aria-hidden="true" />
+                </div>
+                <p class="kern-body">{body}</p>
+                <span class="kern-badge kern-badge--methode mt-16">
+                  <span class="kern-label">{badge}</span>
+                </span>
+              </KernCard>
+              <p class="flex items-start gap-16">
+                <IconDone
+                  class="text-cosmic-blue-base size-48 flex-none"
+                  aria-hidden="true"
+                />
+                <span class="pt-12">{benefit}</span>
+              </p>
+            </div>
+          ),
+        )}
       </div>
     </section>
 
     {featuredExamples.length > 0 && (
       <section>
         <h2 class="pb-32">Beispiele ansehen</h2>
-        <div class="gap-md grid grid-cols-1 md:grid-cols-3">
-          {featuredExamples.map(({ example, option, href }) => {
-            const Icon = visTypeIcons[option.visType];
-            return (
-              <KernCard
-                title={option.name}
-                preline={example.short}
-                href={href}
-                small
-              >
-                <Icon
-                  slot="pre-header"
-                  class="text-cosmic-blue-400 size-32"
-                  aria-hidden="true"
-                />
-                {example.title}
-              </KernCard>
-            );
-          })}
+        <div class="grid grid-cols-1 gap-32 md:grid-cols-3">
+          {featuredExamples.map(({ short, option, source, href }, i) => (
+            <a
+              href={href}
+              class="bg-lavender-200 hover:bg-lavender-400 block h-240 overflow-hidden p-16 md:h-392"
+            >
+              <span class="sr-only">
+                {short}: {option.name}
+              </span>
+              <DiagramPreview
+                client:visible
+                source={source}
+                id={`beispiel-${i}`}
+              />
+            </a>
+          ))}
         </div>
       </section>
     )}
