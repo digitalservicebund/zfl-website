@@ -1,0 +1,38 @@
+var e=`---
+summary: "Die Kürzungsgründe und die Berechnung des Kürzungsanspruchs des Nutzers nach §12 HeizkostenV, etwa bei fehlender verbrauchsabhängiger Abrechnung, fehlender fernablesbarer Ausstattung oder unterlassener Verbrauchsinformation."
+---
+flowchart TD
+    A["Verhältnis Wohnungseigentümer zur<br/>Gemeinschaft der Wohnungseigentümer?<br/>— <a href='{{ELI}}/art-z12' target='_blank' rel='noopener'>§12 IV</a>"] -->|Ja| Z0["Kein Kürzungsrecht nach <a href='{{ELI}}/art-z12' target='_blank' rel='noopener'>§12</a> — es gelten<br/>die allgemeinen Vorschriften (z.B.<br/>Mängelrechte)"]
+
+    A -->|Nein| B["Prüfung der Kürzungsgründe (unabhängig<br/>voneinander, Ergebnisse summieren sich)"]
+
+    B --> C1{"Kosten entgegen den<br/>Vorschriften NICHT<br/>verbrauchsabhängig<br/>abgerechnet? (Verstoß gg.<br/>§§6–9) — <a href='{{ELI}}#art-z12_abs-z1' target='_blank' rel='noopener'>§12 I S.1</a>"}
+    B --> C2{"Keine fernablesbare<br/>Ausstattung installiert<br/>entgegen <a href='{{ELI}}#art-z5_abs-z2' target='_blank' rel='noopener'>§5 II</a> oder <a href='{{ELI}}#art-z5_abs-z3' target='_blank' rel='noopener'>III</a>? — <a href='{{ELI}}#art-z12_abs-z1' target='_blank' rel='noopener'>§12<br/>I S.2</a>"}
+    B --> C3{"Informationen nach <a href='{{ELI}}/art-z6a' target='_blank' rel='noopener'>§6a</a><br/>nicht oder nicht vollständig<br/>mitgeteilt? — <a href='{{ELI}}#art-z12_abs-z1' target='_blank' rel='noopener'>§12 I S.3</a>"}
+
+    C1 -->|Ja| P1["+15%"]
+    C1 -->|Nein| N1["+0%"]
+    C2 -->|Ja| P2["+3%"]
+    C2 -->|Nein| N2["+0%"]
+    C3 -->|Ja| P3["+3%"]
+    C3 -->|Nein| N3["+0%"]
+
+    P1 --> S["Gesamt-Kürzungsanspruch des Nutzers =<br/>Summe der zutreffenden Sätze (0% bis<br/>max. 21%)"]
+    N1 --> S
+    P2 --> S
+    N2 --> S
+    P3 --> S
+    N3 --> S
+
+    S --> T["Kürzung wird einseitig bei der nächsten<br/>Abrechnung vom Nutzer vorgenommen (kein<br/>Gerichtsverfahren erforderlich, aber im<br/>Streitfall überprüfbar)"]
+
+    style Z0 fill:#f5f5f5,stroke:#999
+    style P1 fill:#d4edda,stroke:#2d8a4a
+    style P2 fill:#d4edda,stroke:#2d8a4a
+    style P3 fill:#d4edda,stroke:#2d8a4a
+    style N1 fill:#f5f5f5,stroke:#999
+    style N2 fill:#f5f5f5,stroke:#999
+    style N3 fill:#f5f5f5,stroke:#999
+    style S fill:#cfe2f3,stroke:#2b6ea3
+    style T fill:#fff3cd,stroke:#c9a227
+`;export{e as default};

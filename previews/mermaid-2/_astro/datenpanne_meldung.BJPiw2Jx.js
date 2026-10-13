@@ -1,0 +1,56 @@
+var e=`---
+summary: "Der Ablauf bei einer Verletzung des Schutzes personenbezogener Daten mit Auftragsverarbeiter, Verantwortlichem, Aufsichtsbehörde und betroffener Person: die Meldung an die Aufsichtsbehörde binnen 72 Stunden nach Art. 33 DSGVO und die Benachrichtigung der betroffenen Person nach Art. 34 DSGVO."
+---
+swimlane-beta TD
+    subgraph AV["Auftragsverarbeiter"]
+        avKenntnis(["Verletzung wird beim Auftragsverarbeiter<br/>bekannt"])
+        avMeldung["Meldung an den Verantwortlichen<br/>unverzüglich nach Bekanntwerden — Art.<br/>33 Abs. 2"]
+    end
+
+    subgraph VA["Verantwortlicher"]
+        start(["Verletzung des Schutzes<br/>personenbezogener Daten wird bekannt"])
+        dokumentation["Dokumentation der Verletzung, ihrer<br/>Folgen und Abhilfemaßnahmen — Art. 33<br/>Abs. 5"]
+        risiko{"Voraussichtlich kein Risiko<br/>für Rechte und Freiheiten<br/>natürlicher Personen? — Art.<br/>33 Abs. 1"}
+        keineMeldung(["Keine Meldung an die Aufsichtsbehörde<br/>erforderlich"])
+        meldung["Meldung an zuständige Aufsichtsbehörde<br/>unverzüglich, möglichst binnen 72<br/>Stunden, sonst mit Begründung der<br/>Verzögerung:<br/>Art der Verletzung, Kontaktstelle,<br/>Folgen und Abhilfemaßnahmen — Art. 33<br/>Abs. 1, 3"]
+        hohesRisiko{"Voraussichtlich hohes Risiko<br/>für Rechte und Freiheiten der<br/>betroffenen Person? — Art. 34<br/>Abs. 1"}
+        ausnahmeAB{"Schutzvorkehrungen vorab<br/>getroffen (z.B.<br/>Verschlüsselung) oder hohes<br/>Risiko nachträglich beseitigt?<br/>— Art. 34 Abs. 3 lit. a, b"}
+        aufwand{"Benachrichtigung mit<br/>unverhältnismäßigem Aufwand<br/>verbunden? — Art. 34 Abs. 3<br/>lit. c"}
+        benachrichtigung["Benachrichtigung der betroffenen Person<br/>unverzüglich, in klarer und einfacher<br/>Sprache — Art. 34 Abs. 1–2"]
+        bekanntmachung["Öffentliche Bekanntmachung statt<br/>Einzelbenachrichtigung — Art. 34 Abs. 3<br/>lit. c"]
+    end
+
+    subgraph AB["Aufsichtsbehörde"]
+        eingang("Meldung geht ein — Art. 33 Abs. 1")
+        nachholen{"Verlangt die Aufsichtsbehörde,<br/>die Benachrichtigung<br/>nachzuholen? — Art. 34 Abs. 4"}
+        abgeschlossen(["Verfahren abgeschlossen"])
+    end
+
+    subgraph BP["Betroffene Person"]
+        informiert(["Ist über die Verletzung und ihre Folgen<br/>informiert — Art. 34 Abs. 2, 3 lit. c"])
+    end
+
+    avKenntnis --> avMeldung
+    avMeldung --> start
+    start --> dokumentation
+    dokumentation --> risiko
+    risiko -->|Ja| keineMeldung
+    risiko -->|"Nein/unklar"| meldung
+    meldung --> eingang
+    meldung --> hohesRisiko
+    hohesRisiko -->|Ja| ausnahmeAB
+    hohesRisiko -->|"Nein: keine Benachrichtigung"| nachholen
+    ausnahmeAB -->|"Ja: keine Benachrichtigung"| nachholen
+    ausnahmeAB -->|Nein| aufwand
+    aufwand -->|Nein| benachrichtigung
+    aufwand -->|Ja| bekanntmachung
+    eingang -.-> nachholen
+    nachholen -->|Ja| benachrichtigung
+    nachholen -->|Nein| abgeschlossen
+    benachrichtigung --> informiert
+    bekanntmachung --> informiert
+
+    style informiert fill:#d4edda,stroke:#2d8a4a
+    style abgeschlossen fill:#d4edda,stroke:#2d8a4a
+    style keineMeldung fill:#fff3cd,stroke:#c9a227
+`;export{e as default};

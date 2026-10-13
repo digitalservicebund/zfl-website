@@ -1,0 +1,16 @@
+var e=`---
+summary: "Welche Änderungen an einem registrierten homöopathischen Tierarzneimittel lediglich anzuzeigen sind, eine Änderung der Registrierung erfordern oder eine komplett neue Registrierung notwendig machen."
+---
+flowchart TD
+    A["Änderung bezüglich eines bereits registrierten homöopathischen Tierarzneimittels"] --> B{"Änderung der Zusammensetzung<br/>der Ursubstanzen nach Art oder<br/>Menge (inkl. Verdünnungsgrad)<br/>oder Wechsel zu einer nicht<br/>vergleichbaren<br/>Darreichungsform? — <a href='{{ELI}}/art-z5' target='_blank' rel='noopener'>§5</a>"}
+    B -->|Ja| C["Neue Registrierung ist zu beantragen<br/>— <a href='{{ELI}}/art-z5' target='_blank' rel='noopener'>§5</a>"]
+    B -->|Nein| D{"Betrifft die Änderung<br/>Herstellungsverfahren/Kontrolle,<br/>eine vergleichbare<br/>Darreichungsform,<br/>Verabreichungsart,<br/>Zieltierarten, Dosierung,<br/>Wartezeit, Packungsgröße oder<br/>zusätzliche Angaben nach §13<br/>Abs. 4 TAMG? — <a href='{{ELI}}#art-z4_abs-z1' target='_blank' rel='noopener'>§4 Abs. 1</a>"}
+    D -->|Ja| E["Änderung der Registrierung ist bei der<br/>zuständigen Bundesoberbehörde zu<br/>beantragen — <a href='{{ELI}}#art-z4_abs-z2' target='_blank' rel='noopener'>§4 Abs. 2</a>"]
+    D -->|Nein| F{"Betrifft die Änderung<br/>Angaben/Unterlagen nach Art.<br/>87 Abs. 1 VO (EU) 2019/6 oder<br/>Kennzeichnungsangaben nach §13<br/>Abs. 3/5 TAMG? — <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1</a>"}
+    F -->|Ja| G["Anzeige bei der zuständigen<br/>Bundesoberbehörde innerhalb von 30 Tagen<br/>nach der Änderung — <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 Abs. 1</a>"]
+    F -->|Nein| H["Keine Anzeige-, Änderungs- oder Neuregistrierungspflicht"]
+    style C fill:#fff3cd,stroke:#c9a227
+    style E fill:#fff3cd,stroke:#c9a227
+    style G fill:#d4edda,stroke:#2d8a4a
+    style H fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};

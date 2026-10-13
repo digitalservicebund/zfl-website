@@ -1,0 +1,48 @@
+var e=`---
+summary: "Der Meldeweg bei meldepflichtigen Krankheiten und Erregernachweisen nach §§6 bis 11 IfSG: Ausnahmen von der Meldepflicht, namentliche Meldung an das Gesundheitsamt binnen 24 Stunden, Übermittlung über die zuständige Landesbehörde an das Robert Koch-Institut sowie die nichtnamentliche Meldung direkt an das Robert Koch-Institut."
+---
+swimlane-beta TD
+    subgraph MP["Meldepflichtige Person"]
+        start(["Zur Meldung Verpflichteter (u.a.<br/>feststellender Arzt, Leiter von<br/>Untersuchungsstellen — <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 I</a>) stellt<br/>meldepflichtige Krankheit (<a href='{{ELI}}/art-z6' target='_blank' rel='noopener'>§6</a>) oder<br/>Erregernachweis (<a href='{{ELI}}/art-z7' target='_blank' rel='noopener'>§7</a>) fest"])
+        nichtnamentlich{"Nichtnamentlich zu meldender<br/>Nachweis? — <a href='{{ELI}}#art-z7_abs-z3' target='_blank' rel='noopener'>§7 III</a>, <a href='{{ELI}}#art-z7_abs-z4' target='_blank' rel='noopener'>IV</a>"}
+        ausnahme8II{"Not- oder Rettungsdienst,<br/>Patient unverzüglich in<br/>ärztlich geleitete Einrichtung<br/>gebracht, oder Person nach §8<br/>I Nr. 5–7 und ein Arzt wurde<br/>hinzugezogen? — <a href='{{ELI}}#art-z8_abs-z2' target='_blank' rel='noopener'>§8 II</a>"}
+        ausnahme8III{"Nachweis, dass Meldung bereits<br/>erfolgte, oder bei Erkrankung<br/>Verdacht bereits gemeldet, und<br/>keine anderen Angaben erhoben?<br/>— <a href='{{ELI}}#art-z8_abs-z3' target='_blank' rel='noopener'>§8 III</a>"}
+        keine(["Keine Meldepflicht"])
+        meldung["Namentliche Meldung mit Angaben nach <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9<br/>I</a> bzw. <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>II</a> an das Gesundheitsamt (u.a.<br/>des Aufenthaltsorts — <a href='{{ELI}}#art-z9_abs-z4' target='_blank' rel='noopener'>§9 IV</a>):<br/>unverzüglich, dort spätestens 24 Stunden<br/>nach Kenntniserlangung;<br/>nicht wegen fehlender Angaben verzögern<br/>— <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 III S.1, 2</a>"]
+        nachmeldung["Nachmeldung/Korrektur unverzüglich;<br/>Angabe, wenn sich ein Verdacht nicht<br/>bestätigt — <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 III S.3, 5</a>"]
+    end
+
+    subgraph GA["Gesundheitsamt"]
+        eingang("Meldung liegt vor; kann Auskunft über<br/>Pflichtangaben verlangen — <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 III S.4</a>")
+        bewertung["Zuständiges Gesundheitsamt (Hauptwohnung<br/>— <a href='{{ELI}}#art-z11_abs-z3' target='_blank' rel='noopener'>§11 III</a>)<br/>bewertet anhand der Falldefinitionen des<br/>RKI (<a href='{{ELI}}#art-z11_abs-z2' target='_blank' rel='noopener'>§11 II</a>),<br/>vervollständigt bis zum folgenden<br/>Arbeitstag, führt ggf. zusammen,<br/>übermittelt — <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I S.1</a>"]
+    end
+
+    subgraph LB["Zuständige Landesbehörde"]
+        landesbehoerde["Übermittelt spätestens am folgenden<br/>Arbeitstag an das RKI — <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I S.1</a><br/>(Verdacht nach §6 I Nr. 3:<br/>vom Gesundheitsamt unverzüglich, weiter<br/>an das Paul-Ehrlich-Institut — <a href='{{ELI}}#art-z11_abs-z4' target='_blank' rel='noopener'>§11 IV</a>)"]
+    end
+
+    subgraph RKI["Robert Koch-Institut"]
+        rkiNN(["Nichtnamentliche Meldung:<br/>bei §7 III binnen 2 Wochen nach Kenntnis<br/>— <a href='{{ELI}}#art-z10_abs-z2' target='_blank' rel='noopener'>§10 II</a>, bei §7 IV spätestens 24<br/>Stunden nach Kenntnis — <a href='{{ELI}}#art-z10_abs-z3' target='_blank' rel='noopener'>§10 III</a>"])
+        rki(["Daten liegen dem RKI vor (frühere<br/>Übermittlungen ggf. berichtigt/ergänzt<br/>— <a href='{{ELI}}#art-z11_abs-z1' target='_blank' rel='noopener'>§11 I S.4</a>)"])
+    end
+
+    start --> ausnahme8II
+    ausnahme8II -->|Ja| keine
+    ausnahme8II -->|Nein| ausnahme8III
+    ausnahme8III -->|Ja| keine
+    ausnahme8III -->|Nein| nichtnamentlich
+    nichtnamentlich -->|"Ja: direkt an das Robert<br/>Koch-Institut"| rkiNN
+    nichtnamentlich -->|"Nein:<br/>namentlich"| meldung
+    meldung --> eingang
+    meldung -.-> nachmeldung
+    eingang --> bewertung
+    nachmeldung -.-> bewertung
+    bewertung --> landesbehoerde
+    landesbehoerde --> rki
+    keine ~~~ nichtnamentlich
+    rkiNN ~~~ meldung
+
+    style keine fill:#d4edda,stroke:#2d8a4a
+    style rkiNN fill:#d4edda,stroke:#2d8a4a
+    style rki fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};

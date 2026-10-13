@@ -1,0 +1,43 @@
+var e=`---
+summary: "Der Ablauf vom Wohngeldantrag über die Entscheidung der Wohngeldbehörde bis zur Festlegung des Bewilligungszeitraums, einschließlich der Sonderregeln für den Beginn bei vorheriger Ablehnung einer Transferleistung."
+---
+flowchart TD
+    A["Wohngeldantrag stellen — <a href='{{ELI}}#art-z22_abs-z1' target='_blank' rel='noopener'>§22 I</a>"] --> Q1{"Mehrere Personen erfüllen<br/>Voraussetzungen für denselben<br/>Wohnraum (§3 III)? — <a href='{{ELI}}#art-z22_abs-z2' target='_blank' rel='noopener'>§22 II</a>"}
+
+    Q1 -->|Ja| Z1["Vermutung: antragstellende Person ist<br/>die von den anderen Haushaltsmitgliedern<br/>bestimmte wohngeldberechtigte Person<br/>— <a href='{{ELI}}#art-z22_abs-z2' target='_blank' rel='noopener'>§22 II</a>"]
+    Q1 -->|Nein| Q2{"Wohngeldberechtigte Person<br/>zieht aus oder verstirbt?<br/>— <a href='{{ELI}}#art-z22_abs-z3' target='_blank' rel='noopener'>§22 III</a>"}
+
+    Q2 -->|Ja| Z2["Anderes Haushaltsmitglied mit §3<br/>I/II-Voraussetzungen kann<br/>Änderungsantrag stellen — <a href='{{ELI}}#art-z22_abs-z3' target='_blank' rel='noopener'>§22 III</a>"]
+    Q2 -->|Nein| B["Wohngeldbehörde prüft Antrag — <a href='{{ELI}}/art-z24' target='_blank' rel='noopener'>§24</a>"]
+    Z1 --> B
+    Z2 --> B
+
+    B --> Q3{"Antrag früher als 2 Monate vor<br/>Ablauf des laufenden<br/>Bewilligungszeitraums für die<br/>Zeit danach gestellt? — <a href='{{ELI}}#art-z22_abs-z4' target='_blank' rel='noopener'>§22 IV</a>"}
+
+    Q3 -->|Ja| Z3["Als Zeitpunkt der Antragstellung gilt<br/>der 1. des<br/>2. Monats vor Fristablauf — <a href='{{ELI}}#art-z22_abs-z4' target='_blank' rel='noopener'>§22 IV</a>"]
+    Q3 -->|Nein| Z4["Tatsächlicher Zeitpunkt der<br/>Antragstellung gilt"]
+
+    Z3 --> C["Entscheidung auf Basis der im<br/>Bewilligungszeitraum zu erwartenden<br/>Verhältnisse im Zeitpunkt der<br/>Antragstellung — <a href='{{ELI}}#art-z24_abs-z2' target='_blank' rel='noopener'>§24 II</a>"]
+    Z4 --> C
+
+    C --> D["Bewilligungsbescheid schriftlich<br/>erlassen — <a href='{{ELI}}#art-z24_abs-z2' target='_blank' rel='noopener'>§24 II</a>"]
+
+    D --> Q4{"Wurde vor der Antragstellung<br/>eine Leistung nach §7 I<br/>abgelehnt (oder gilt der<br/>Ausschluss nach §8 I S.3/II<br/>als nicht erfolgt) und Antrag<br/>rechtzeitig gestellt? — <a href='{{ELI}}#art-z25_abs-z3' target='_blank' rel='noopener'>§25<br/>III</a>"}
+
+    Q4 -->|Ja| Z5["Bewilligungszeitraum beginnt am 1. des<br/>Monats der Leistungsablehnung — <a href='{{ELI}}#art-z25_abs-z3' target='_blank' rel='noopener'>§25 III</a>"]
+    Q4 -->|Nein| Q5{"Voraussetzungen für die<br/>Bewilligung treten erst später<br/>ein? — <a href='{{ELI}}#art-z25_abs-z2' target='_blank' rel='noopener'>§25 II</a>"}
+
+    Q5 -->|Ja| Z6["Bewilligungszeitraum beginnt am 1. des<br/>Monats des späteren Eintritts — <a href='{{ELI}}#art-z25_abs-z2' target='_blank' rel='noopener'>§25 II<br/>S.2</a>"]
+    Q5 -->|Nein| Z7["Bewilligungszeitraum beginnt am 1. des<br/>Antragsmonats — <a href='{{ELI}}#art-z25_abs-z2' target='_blank' rel='noopener'>§25 II S.1</a>"]
+
+    Z5 --> E["Dauer festlegen: grundsätzlich 12<br/>Monate; verkürzbar, teilbar oder bei<br/>gleichbleibenden Verhältnissen bis zu 24<br/>Monate verlängerbar — <a href='{{ELI}}#art-z25_abs-z1' target='_blank' rel='noopener'>§25 I</a>"]
+    Z6 --> E
+    Z7 --> E
+
+    style Z1 fill:#fff3cd,stroke:#c9a227
+    style Z2 fill:#fff3cd,stroke:#c9a227
+    style Z5 fill:#d4edda,stroke:#2d8a4a
+    style Z6 fill:#d4edda,stroke:#2d8a4a
+    style Z7 fill:#d4edda,stroke:#2d8a4a
+    style E fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};

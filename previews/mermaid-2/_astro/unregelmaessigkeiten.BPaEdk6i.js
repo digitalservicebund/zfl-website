@@ -1,0 +1,32 @@
+var e=`---
+summary: "Die steuerliche Behandlung verschiedener Unregelmäßigkeiten bei einer Beförderung von Schaumwein unter Steueraussetzung, etwa Fehlmengen, fehlender Rückschein oder Zerstörung, und die jeweiligen Anzeige- und Nachweispflichten."
+---
+flowchart TD
+    A["Unregelmäßigkeit im Zusammenhang mit<br/>einer Beförderung unter Steueraussetzung"] --> B{"Art der Unregelmäßigkeit?"}
+
+    B -->|Fehlmenge beim<br/>Empfänger festgestellt| C{"Fehlmenge bis 0,5 % und kein<br/>Schaumwein in Fertigpackungen?<br/>— <a href='{{ELI}}#art-z29_abs-z1' target='_blank' rel='noopener'>§29 I</a>"}
+    C -->|Ja| D["Hauptzollamt kann Fehlmenge als<br/>beschaffenheitsbedingt unwiederbringlich<br/>verloren ansehen — <a href='{{ELI}}#art-z29_abs-z1' target='_blank' rel='noopener'>§29 I</a>"]
+    C -->|Nein| E["Hauptzollamt entscheidet im Einzelfall<br/>über die steuerliche Behandlung — <a href='{{ELI}}#art-z29_abs-z1' target='_blank' rel='noopener'>§29 I</a>"]
+
+    B -->|Rückschein nicht<br/>eingegangen| F{"Rückschein binnen 2 Monaten<br/>beim Versender eingegangen?<br/>— <a href='{{ELI}}#art-z29_abs-z2' target='_blank' rel='noopener'>§29 II</a>"}
+    F -->|Ja| G["Kein Handlungsbedarf"]
+    F -->|Nein| H["Versender zeigt dies unverzüglich dem<br/>Hauptzollamt an — <a href='{{ELI}}#art-z29_abs-z2' target='_blank' rel='noopener'>§29 II</a>"]
+
+    B -->|Zerstörung/Verlust<br/>während der Beförderung| I{"Vollständige Zerstörung oder<br/>unwiederbringlicher Verlust<br/>durch unvorhersehbares<br/>Ereignis oder höhere Gewalt?<br/>— <a href='{{ELI}}#art-z29_abs-z3' target='_blank' rel='noopener'>§29 III</a>"}
+    I -->|Ja| J["Beförderer zeigt dies unverzüglich dem<br/>Hauptzollamt an und weist es durch<br/>Unterlagen nach — <a href='{{ELI}}#art-z29_abs-z3' target='_blank' rel='noopener'>§29 III</a>"]
+    J --> K{"Nachweis vom Hauptzollamt<br/>anerkannt?"}
+    K -->|Ja| L["Kein Verlust im Sinn einer<br/>Unregelmäßigkeit;<br/>keine Steuerentstehung"]
+    K -->|Nein| M
+
+    B -->|Sonstige<br/>Unregelmäßigkeit| M["Feststellung der Unregelmäßigkeit wird<br/>dem Steuerschuldner schriftlich<br/>bekanntgegeben — <a href='{{ELI}}#art-z29_abs-z4' target='_blank' rel='noopener'>§29 IV</a>"]
+
+    M --> N["Nachweisführung entsprechend <a href='{{ELI}}/art-z21' target='_blank' rel='noopener'>§21</a> und<br/><a href='{{ELI}}/art-z28' target='_blank' rel='noopener'>§28</a>;<br/>Frist beginnt mit Bekanntgabe — <a href='{{ELI}}#art-z29_abs-z4' target='_blank' rel='noopener'>§29 IV</a>"]
+
+    N --> O["Weitere steuerliche Behandlung der<br/>Unregelmäßigkeit nach §14 Abs. 4 des<br/>Gesetzes"]
+
+    style L fill:#d4edda,stroke:#2d8a4a
+    style G fill:#d4edda,stroke:#2d8a4a
+    style D fill:#fff3cd,stroke:#c9a227
+    style E fill:#fff3cd,stroke:#c9a227
+    style O fill:#f8d7da,stroke:#c0392b
+`;export{e as default};

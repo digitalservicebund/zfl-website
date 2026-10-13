@@ -1,0 +1,29 @@
+var e=`---
+summary: "Wann Betreiber unbemannter Fluggeräte sich nach dem LuftVG beim Luftfahrt-Bundesamt registrieren müssen, welche Ausnahmen gelten und wie lange die erhobenen Registrierungsdaten gespeichert und wieder gelöscht werden."
+---
+flowchart TD
+    A["Person mit Hauptwohnsitz/Sitz in<br/>Deutschland betreibt ein unbemanntes<br/>Fluggerät — <a href='{{ELI}}#art-z66a_abs-z1' target='_blank' rel='noopener'>§66a Abs. 1</a>"] --> B{"Betriebskategorie „offen“ mit<br/>Startmasse ≥ 250 g und<br/>kinetischer Energie > 80 Joule<br/>bei Aufprall auf einen<br/>Menschen? — <a href='{{ELI}}#art-z66a_abs-z1' target='_blank' rel='noopener'>§66a Abs. 1 Nr. 1</a>"}
+    B -->|Ja| E{"Behörde/Organisation mit<br/>Sicherheitsaufgaben zur<br/>Erfüllung gesetzlicher<br/>Aufgaben? — <a href='{{ELI}}#art-z66a_abs-z12' target='_blank' rel='noopener'>§66a Abs. 12</a>"}
+    B -->|Nein| C{"Betriebskategorie „offen“ mit<br/>Sensor zur Erhebung/<br/>Speicherung personenbezogener<br/>Daten (kein spielzeugkonformes<br/>Gerät)? — <a href='{{ELI}}#art-z66a_abs-z1' target='_blank' rel='noopener'>§66a Abs. 1 Nr. 2</a>"}
+    C -->|Ja| E
+    C -->|Nein| D{"Betriebskategorie „speziell“,<br/>beliebige Startmasse? — <a href='{{ELI}}#art-z66a_abs-z1' target='_blank' rel='noopener'>§66a<br/>Abs. 1 Nr. 3</a>"}
+    D -->|Ja| E
+    D -->|Nein| Z1["Keine Registrierungspflicht nach §66a"]
+    E -->|Ja| Z2["Von der Registrierungspflicht<br/>ausgenommen — <a href='{{ELI}}#art-z66a_abs-z12' target='_blank' rel='noopener'>§66a Abs. 12</a>"]
+    E -->|Nein| F{"Betreiber ist Mitglied eines<br/>Luftsportverbands? — <a href='{{ELI}}#art-z66a_abs-z4' target='_blank' rel='noopener'>§66a Abs.<br/>4</a>"}
+    F -->|Ja| G["Luftsportverband kann die<br/>Registrierungsdaten für seine Mitglieder<br/>unter Beachtung der DSGVO übermitteln<br/>— <a href='{{ELI}}#art-z66a_abs-z4' target='_blank' rel='noopener'>§66a Abs. 4</a>"]
+    F -->|Nein| H["Betreiber übermittelt dem<br/>Luftfahrt-Bundesamt vor Erstbetrieb die<br/>Registrierungsdaten nach Abs. 2 und<br/>belegt deren Richtigkeit auf Verlangen<br/>— <a href='{{ELI}}#art-z66a_abs-z3' target='_blank' rel='noopener'>§66a Abs. 3 S. 1</a>"]
+    G --> I
+    H --> I["Luftfahrt-Bundesamt registriert (ggf.<br/>automatisiert) und übermittelt eine<br/>Registrierungsnummer für alle<br/>betriebenen Fluggeräte — <a href='{{ELI}}#art-z66a_abs-z5' target='_blank' rel='noopener'>§66a Abs. 5</a>"]
+    I --> J["Registrierte Betreiber melden jede<br/>Änderung der Voraussetzungen oder Daten<br/>unverzüglich — <a href='{{ELI}}#art-z66a_abs-z3' target='_blank' rel='noopener'>§66a Abs. 3 S. 2</a>"]
+    J --> K{"Werden die Daten für die<br/>Aufgabenerfüllung des<br/>Luftfahrt-Bundesamtes noch<br/>benötigt? — <a href='{{ELI}}#art-z66a_abs-z9' target='_blank' rel='noopener'>§66a Abs. 9 S. 1</a>"}
+    K -->|Ja| L{"Wurden innerhalb von 5 Jahren<br/>Ermittlungen wegen eines<br/>Verstoßes gegen<br/>Verkehrsrecht/Strafgesetze<br/>bekannt, für die die Daten<br/>erforderlich sind? — <a href='{{ELI}}#art-z66a_abs-z9' target='_blank' rel='noopener'>§66a Abs.<br/>9 S. 2</a>"}
+    L -->|Ja| M["Löschung erst nach Abschluss des<br/>Ermittlungs- bzw. Strafverfahrens — <a href='{{ELI}}#art-z66a_abs-z9' target='_blank' rel='noopener'>§66a<br/>Abs. 9 S. 2</a>"]
+    L -->|Nein| J
+    K -->|Nein| Z3["Unverzügliche Löschung, spätestens nach<br/>5 Jahren — <a href='{{ELI}}#art-z66a_abs-z9' target='_blank' rel='noopener'>§66a Abs. 9 S. 1</a>"]
+    M --> Z3
+
+    style Z1 fill:#fff3cd,stroke:#c9a227
+    style Z2 fill:#fff3cd,stroke:#c9a227
+    style Z3 fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};
