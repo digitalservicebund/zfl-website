@@ -2,17 +2,16 @@
 import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
-import IconBackHand from "~icons/ic/outline-back-hand";
-import IconPublic from "~icons/ic/outline-public";
-import IconShield from "~icons/ic/outline-shield";
-import IconThumbUp from "~icons/ic/outline-thumb-up";
-import IconGridView from "~icons/ic/outline-grid-view";
+import IconSignLanguage from "~icons/ic/baseline-sign-language";
+import IconLanguage from "~icons/ic/baseline-language";
+import IconGppGood from "~icons/ic/baseline-gpp-good";
+import IconRecommend from "~icons/ic/baseline-recommend";
+import IconDashboardCustomize from "~icons/ic/baseline-dashboard-customize";
 import { werkzeuge_ressourcen } from "@/config/routes";
 
 export const frontmatter = {
   title: "Qualitätskriterien zur Aufnahme externer Inhalte",
   sitemap: true,
-  isStagingOnly: true,
 };
 ---
 
@@ -32,9 +31,9 @@ export const frontmatter = {
       <div class="grid grid-cols-1 gap-x-64 gap-y-56 md:grid-cols-2">
         <div class="flex flex-col gap-32">
           <div class="text-cosmic-blue-400 bg-lavender-400 flex size-64 flex-none items-center justify-center rounded-sm">
-            <IconBackHand class="size-32" aria-hidden="true" />
+            <IconSignLanguage class="size-32" aria-hidden="true" />
           </div>
-          <h2 class="m-0">Praxistauglichkeit und Verständlichkeit</h2>
+          <h2 class="m-0">Anwendbarkeit und Verständlichkeit</h2>
           <ul class="list-unstyled checklist">
             <li>
               <span
@@ -42,7 +41,7 @@ export const frontmatter = {
                 aria-hidden="true"
               ></span>
               <div class="space-y-4">
-                <p class="kern-heading-medium">Sofortiger Einsatz:</p>
+                <p class="kern-heading-medium">Sofortiger Einsatz</p>
                 <p>
                   Legistinnen und Legisten können das Werkzeug direkt und ohne
                   Transferleistung in ihren Arbeitsalltag integrieren.
@@ -55,10 +54,10 @@ export const frontmatter = {
                 aria-hidden="true"
               ></span>
               <div class="space-y-4">
-                <p class="kern-heading-medium">Klarer Einsatzzeitpunkt:</p>
+                <p class="kern-heading-medium">Klarer Anwendungszweck</p>
                 <p>
-                  Es ist klar zu erkennen, in welchem Verfahrensschritt das
-                  Werkzeug angewendet werden kann.
+                  Es ist leicht zu erkennen, bei welcher Aufgabenstellung das
+                  Werkzeug unterstützen kann.
                 </p>
               </div>
             </li>
@@ -68,7 +67,7 @@ export const frontmatter = {
                 aria-hidden="true"
               ></span>
               <div class="space-y-4">
-                <p class="kern-heading-medium">Servicestandard:</p>
+                <p class="kern-heading-medium">Servicestandard</p>
                 <p>
                   Gestaltung und Bereitstellung folgen den Prinzipien des
                   Servicestandards für die öffentliche Verwaltung (z. B.
@@ -81,7 +80,7 @@ export const frontmatter = {
 
         <div class="flex flex-col gap-32">
           <div class="text-cosmic-blue-400 bg-lavender-400 flex size-64 flex-none items-center justify-center rounded-sm">
-            <IconPublic class="size-32" aria-hidden="true" />
+            <IconLanguage class="size-32" aria-hidden="true" />
           </div>
           <h2 class="m-0">Zugänglichkeit und Kostenfreiheit</h2>
           <ul class="list-unstyled checklist">
@@ -91,7 +90,7 @@ export const frontmatter = {
                 aria-hidden="true"
               ></span>
               <div class="space-y-4">
-                <p class="kern-heading-medium">Kostenfrei:</p>
+                <p class="kern-heading-medium">Kostenfrei</p>
                 <p>Das Werkzeug ist vollständig kostenfrei nutzbar.</p>
               </div>
             </li>
@@ -101,7 +100,7 @@ export const frontmatter = {
                 aria-hidden="true"
               ></span>
               <div class="space-y-4">
-                <p class="kern-heading-medium">Direkter Zugang:</p>
+                <p class="kern-heading-medium">Direkter Zugang</p>
                 <p>
                   Die Nutzung ist idealerweise ohne vorherige Registrierung oder
                   Anmeldung möglich.
@@ -114,7 +113,7 @@ export const frontmatter = {
                 aria-hidden="true"
               ></span>
               <div class="space-y-4">
-                <p class="kern-heading-medium">Keine Anbieterbindung:</p>
+                <p class="kern-heading-medium">Keine Anbieterbindung</p>
                 <p>
                   Das Werkzeug benötigt keine zusätzliche Software eines
                   einzelnen Anbieters. Inhalte lassen sich in gängigen,
@@ -129,7 +128,7 @@ export const frontmatter = {
 
         <div class="flex flex-col gap-32">
           <div class="text-cosmic-blue-400 bg-lavender-400 flex size-64 flex-none items-center justify-center rounded-sm">
-            <IconShield class="size-32" aria-hidden="true" />
+            <IconGppGood class="size-32" aria-hidden="true" />
           </div>
           <h2 class="m-0">Datenschutz und IT-Sicherheit</h2>
           <ul class="list-unstyled checklist">
@@ -140,7 +139,7 @@ export const frontmatter = {
               ></span>
               <div class="space-y-4">
                 <p class="kern-heading-medium">
-                  Transparente Datenverarbeitung:
+                  Transparente Datenverarbeitung
                 </p>
                 <p>
                   Klare Dokumentation der Verarbeitung eingegebener Daten nach
@@ -155,7 +154,7 @@ export const frontmatter = {
                 aria-hidden="true"
               ></span>
               <div class="space-y-4">
-                <p class="kern-heading-medium">Sparsamer Umgang mit Daten:</p>
+                <p class="kern-heading-medium">Sparsamer Umgang mit Daten</p>
                 <p>
                   Bei der Nutzung werden weder sensible Entwurfsdaten noch
                   personenbezogene Daten ungeschützt verarbeitet oder mit
@@ -168,7 +167,7 @@ export const frontmatter = {
 
         <div class="flex flex-col gap-32">
           <div class="text-cosmic-blue-400 bg-lavender-400 flex size-64 flex-none items-center justify-center rounded-sm">
-            <IconThumbUp class="size-32" aria-hidden="true" />
+            <IconRecommend class="size-32" aria-hidden="true" />
           </div>
           <h2 class="m-0">Qualität und Verlässlichkeit</h2>
           <ul class="list-unstyled checklist">
@@ -178,7 +177,7 @@ export const frontmatter = {
                 aria-hidden="true"
               ></span>
               <div class="space-y-4">
-                <p class="kern-heading-medium">Inhaltliche Korrektheit:</p>
+                <p class="kern-heading-medium">Inhaltliche Korrektheit</p>
                 <p>
                   Das Werkzeug ist fachlich geprüft und entspricht dem aktuellen
                   Stand der Gesetzgebungs- und Verwaltungspraxis.
@@ -191,7 +190,7 @@ export const frontmatter = {
                 aria-hidden="true"
               ></span>
               <div class="space-y-4">
-                <p class="kern-heading-medium">Regelmäßige Wartung:</p>
+                <p class="kern-heading-medium">Regelmäßige Wartung</p>
                 <p>
                   Der Anbieter gewährleistet, dass Inhalte und Verlinkungen
                   kontinuierlich gewartet und aktualisiert werden.
@@ -205,7 +204,7 @@ export const frontmatter = {
 
         <div class="flex flex-col gap-32">
           <div class="text-cosmic-blue-400 bg-lavender-400 flex size-64 flex-none items-center justify-center rounded-sm">
-            <IconGridView class="size-32" aria-hidden="true" />
+            <IconDashboardCustomize class="size-32" aria-hidden="true" />
           </div>
           <h2 class="m-0">Inhaltliche Relevanz und Mehrwert</h2>
           <ul class="list-unstyled checklist">
@@ -215,11 +214,12 @@ export const frontmatter = {
                 aria-hidden="true"
               ></span>
               <div class="space-y-4">
-                <p class="kern-heading-medium">Phasen-Zuordnung:</p>
+                <p class="kern-heading-medium">
+                  Eingliederung in die Ressourcensammlung
+                </p>
                 <p>
-                  Das Werkzeug hat einen klaren Bezug zu einer Phase in der
-                  Regelungsarbeit (z. B. Digital- und Praxistauglichkeit
-                  sicherstellen).
+                  Das Werkzeug hat einen Bezug zu mindestens einem Aspekt der
+                  Regelungsarbeit (z. B. Folgen eines Vorhabens abschätzen).
                 </p>
               </div>
             </li>
@@ -229,7 +229,7 @@ export const frontmatter = {
                 aria-hidden="true"
               ></span>
               <div class="space-y-4">
-                <p class="kern-heading-medium">Passender Werkzeug-Typ:</p>
+                <p class="kern-heading-medium">Passender Werkzeug-Typ</p>
                 <p>
                   Es handelt sich eindeutig um eine Methode, einen Leitfaden,
                   ein Tool oder ein Unterstützungsangebot und passt zu
@@ -243,7 +243,7 @@ export const frontmatter = {
                 aria-hidden="true"
               ></span>
               <div class="space-y-4">
-                <p class="kern-heading-medium">Keine Redundanz:</p>
+                <p class="kern-heading-medium">Keine Redundanz</p>
                 <p>
                   Es stellt eine sinnvolle Erweiterung der vorhandenen Werkzeuge
                   dar und führt nicht zu einer Doppelung der Inhalte.
@@ -293,7 +293,7 @@ export const frontmatter = {
     li {
       @apply flex items-start gap-8 md:gap-32;
       span.kern-icon {
-        @apply bg-cosmic-blue-base! size-48 shrink-0;
+        @apply bg-cosmic-blue-base! size-32 shrink-0;
       }
       p.kern-heading-medium {
         padding: 0;

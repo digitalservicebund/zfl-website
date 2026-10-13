@@ -127,7 +127,7 @@ export const qualitaetskriterien = {
   title: "Qualitätskriterien zur Aufnahme externer Inhalte",
   parent: null,
   sitemap: true,
-  isStagingOnly: true,
+  isStagingOnly: false,
   navOrder: null,
   navLabel: null,
 } as const;
@@ -229,6 +229,17 @@ export const werkzeuge = {
   isStagingOnly: false,
   navOrder: null,
   navLabel: null,
+} as const;
+
+export const werkzeuge_buergerzentriertheit = {
+  key: "werkzeuge_buergerzentriertheit",
+  path: "/werkzeuge/buergerzentriertheit",
+  title: "Bürgerzentriertheit",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: 5,
+  navLabel: "Bürgerzentriertheit",
 } as const;
 
 export const werkzeuge_digitaltauglichkeit = {
@@ -384,6 +395,7 @@ export const allRoutes = [
   ueber_neueFruehphase,
   ueber_zahlenUndFakten,
   werkzeuge,
+  werkzeuge_buergerzentriertheit,
   werkzeuge_digitaltauglichkeit,
   werkzeuge_digitaltauglichkeit_beispiele,
   werkzeuge_potenziale,
