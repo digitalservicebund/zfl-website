@@ -2,7 +2,6 @@
   import PresetBtn from "./_PresetBtn.svelte";
   import LoadingIndicator from "../_shared/LoadingIndicator.svelte";
   import { getWizardContext } from "./_wizardState.svelte.ts";
-  import { visTypeIcons } from "./_visTypeIcons.ts";
 
   const wizard = getWizardContext();
 
@@ -23,27 +22,21 @@
       <p class="kern-error" role="alert">{wizard.visOptionsError}</p>
     {:else}
       {#if !wizard.isLoadingVisOptions}
-        <div class="kern-form-input">
-          <h2 class="step-heading">
-            Welchen Teilbereich möchten Sie visualisieren?
-          </h2>
-          <div class="mt-16 flex flex-col w-full gap-8">
+        <div class="space-y-24">
+          <div class="space-y-8">
+            <h2 class="kern-heading-large">
+              Welchen Teilbereich möchten Sie visualisieren?
+            </h2>
+            <p class="kern-body">Wählen Sie einen Teilbereich aus.</p>
+          </div>
+          <div class="grid gap-16 md:grid-cols-2">
             {#each sortedVisOptions as option (option.name)}
               <PresetBtn
+                title={option.name}
+                subline={option.articles.join(", ")}
                 active={option.name === wizard.selectedVisOption?.name}
                 onclick={() => (wizard.selectedVisOption = option)}
-                icon={visTypeIcons[option.visType]}
-                inline
-              >
-                <div class="flex justify-between items-center w-full">
-                  <span>{option.name}</span>
-                  {#if option.articles.length}
-                    <span class="kern-body--muted"
-                      >{option.articles.join(", ")}</span
-                    >
-                  {/if}
-                </div>
-              </PresetBtn>
+              />
             {/each}
           </div>
         </div>

@@ -1,41 +1,36 @@
 <script lang="ts">
-  import type { Component, Snippet } from "svelte";
-
   interface Props {
-    title?: string;
-    children?: Snippet;
-    icon?: Component<{ class?: string }>;
+    title: string;
+    subline?: string;
     active?: boolean;
-    /** Renders the icon smaller and in line before the title/content. */
-    inline?: boolean;
     onclick: () => void;
   }
-  let {
-    title,
-    children,
-    icon: Icon,
-    active,
-    inline = false,
-    onclick,
-  }: Props = $props();
+  let { title, subline, active, onclick }: Props = $props();
 </script>
 
+<!-- A button, not a radio input: picking an option advances the wizard, and
+     a radio group would already select (and advance) on arrow keys. The
+     radio circle is drawn to match KERN's .kern-form-check__radio. -->
 <button
-  class="rounded-sm border border-(--kern-color-decorative-border-contextual) aria-current:bg-lavender-400 hover:bg-lavender-200 p-16 flex justify-start text-left {inline
-    ? 'flex-row items-center gap-8'
-    : 'flex-col items-start gap-8'}"
+  type="button"
+  class="group flex items-start gap-24 rounded-sm border border-(--kern-color-decorative-border-default) bg-white p-24 text-left hover:bg-lavender-200 aria-current:bg-lavender-400"
   aria-current={active ? "true" : undefined}
   onclick={() => onclick()}
 >
-  <div class="flex gap-16 items-center">
-    {#if Icon}
-      <Icon
-        class="{inline ? 'size-24' : 'size-32'} shrink-0 text-cosmic-blue-400"
-      />
+  <span
+    class="flex size-32 shrink-0 items-center justify-center rounded-full border-2 border-(--kern-color-form-input-border-contextual) bg-(--kern-color-layout-layer-surface-contextual) group-hover:border-4"
+    aria-hidden="true"
+  >
+    {#if active}
+      <span
+        class="size-12 rounded-full bg-(--kern-color-form-input-border-contextual)"
+      ></span>
     {/if}
-    {#if title}
-      <strong>{title}</strong>
+  </span>
+  <span class="flex flex-col gap-16 pt-7 pb-9">
+    <span class="font-semibold">{title}</span>
+    {#if subline}
+      <span class="kern-body--small kern-body--muted">{subline}</span>
     {/if}
-  </div>
-  {@render children?.()}
+  </span>
 </button>

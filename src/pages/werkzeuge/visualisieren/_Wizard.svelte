@@ -728,13 +728,13 @@
           {/if}
           <!-- min-h-0 only on the final step: it scrolls its chat internally,
            while earlier steps overflow into #vis-chat's scrollbar -->
-          <!-- Step 1 is top-aligned so its content doesn't jump when the law
-           type switches between the (differently tall) inputs -->
+          <!-- The earlier steps are top-aligned so their content doesn't jump
+           when it changes height (e.g. switching the law type in step 1) -->
           <div
             class="flex-1 w-full flex flex-col gap-32"
             class:min-h-0={wizard.currentStep === steps.length}
-            class:justify-center={wizard.currentStep !== 1}
-            class:pt-32={wizard.currentStep === 1}
+            class:justify-center={wizard.currentStep === steps.length}
+            class:pt-32={wizard.currentStep !== steps.length}
           >
             {#if wizard.currentStep === 1}
               <Step1 {examples} />
@@ -909,10 +909,6 @@
 </dialog>
 
 <style>
-  #vis-chat :global(.step-heading) {
-    margin-top: -2em;
-  }
-
   /* Tailwind's preflight resets margin to 0, which breaks the browser
      default `margin: auto` that centers a `showModal()`-opened dialog. */
   dialog.kern-dialog {
