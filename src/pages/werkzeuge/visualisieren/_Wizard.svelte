@@ -728,9 +728,13 @@
           {/if}
           <!-- min-h-0 only on the final step: it scrolls its chat internally,
            while earlier steps overflow into #vis-chat's scrollbar -->
+          <!-- Step 1 is top-aligned so its content doesn't jump when the law
+           type switches between the (differently tall) inputs -->
           <div
-            class="flex-1 w-full flex flex-col gap-32 justify-center"
+            class="flex-1 w-full flex flex-col gap-32"
             class:min-h-0={wizard.currentStep === steps.length}
+            class:justify-center={wizard.currentStep !== 1}
+            class:pt-32={wizard.currentStep === 1}
           >
             {#if wizard.currentStep === 1}
               <Step1 {examples} />

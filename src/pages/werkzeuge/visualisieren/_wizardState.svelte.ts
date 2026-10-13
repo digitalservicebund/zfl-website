@@ -10,8 +10,8 @@ export type DiagramVersion = {
   label?: string;
 };
 export const lawTypes = [
-  { id: "own", label: "eigenes Vorhaben" },
-  { id: "existing", label: "bestehendes Gesetz" },
+  { id: "existing", label: "Bestehendes Gesetz" },
+  { id: "own", label: "Eigenes Vorhaben" },
 ] as const satisfies LawType[];
 
 export class WizardState {

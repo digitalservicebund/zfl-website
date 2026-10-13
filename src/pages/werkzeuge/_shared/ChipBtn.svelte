@@ -27,7 +27,7 @@
   aria-current={standalone && selected ? "true" : undefined}
   aria-label={ariaLabel}
   data-selected={selected || undefined}
-  class="flex items-center rounded-full border border-gray-400 bg-white px-16 py-6 text-sm font-medium transition-colors hover:bg-lavender-200 data-selected:border-cosmic-blue-400 data-selected:bg-cosmic-blue-400 data-selected:font-bold data-selected:text-white data-selected:hover:bg-cosmic-blue-base"
+  class="flex min-h-32 items-center rounded-full border border-(--kern-color-action-default) bg-white px-16 py-2 text-base/24 font-semibold text-(--kern-color-action-default) transition-colors hover:bg-(--kern-color-action-state-indicator-tint-hover-opacity) data-selected:bg-(--kern-color-action-default) data-selected:text-(--kern-color-action-on-default) data-selected:hover:bg-(--kern-color-action-state-indicator-shade-hover)"
 >
   {@render children()}
 </button>
