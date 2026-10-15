@@ -1,43 +1,93 @@
-<ol class="timeline list-unstyled">
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"ol"> {
+  look?: "dc" | "zfl";
+  /** `changelog`: room for year badges, more spacing between and indentation of the items */
+  variant?: "default" | "changelog";
+}
+
+const {
+  look = "zfl",
+  variant = "default",
+  class: className,
+  ...attrs
+} = Astro.props;
+---
+
+{/* Items: plain <li> (bullet), li.timeline-plain-item (no marker), li.timeline-year-item (.timeline-year-badge centered on the line) */}
+<ol
+  class:list={[
+    "timeline list-unstyled",
+    `timeline--${look}`,
+    `timeline--${variant}`,
+    className,
+  ]}
+  {...attrs}
+>
   <slot />
 </ol>
 
-{/* use the is:global directive to ensure that direct child descendant selectors (>) can be used */}
+{/* is:global so direct child selectors (>) work on slotted items; components layer so utilities on items can override */}
 <style is:global>
   @reference "@/styles/global.css";
 
-  .timeline {
-    --timeline-padding: 24px;
-    /* space to the left of the line so year badges can be centered on it */
-    @apply relative scroll-my-40 space-y-32 pl-(--timeline-padding);
+  /* Declare Tailwind's layer order in case this style loads before the global CSS */
+  @layer theme, base, components, utilities;
 
-    h3 {
-      margin-top: 1rem;
+  @layer components {
+    .timeline--dc {
+      --timeline-color: var(--color-kern-darkblue-850);
     }
-
-    &::before {
-      content: "";
-      @apply bg-cosmic-blue-base absolute inset-0 w-1;
-      left: calc(var(--timeline-padding) + 9.5px);
+    .timeline--zfl {
+      --timeline-color: var(--color-cosmic-blue-base);
     }
 
-    & > li {
-      @apply relative pt-10 pb-20 pl-40;
-    }
-    & > li::before {
-      position: absolute;
-      content: "";
-      @apply bg-cosmic-blue-base top-16 left-2 size-16 rounded-full outline-4 outline-white;
-    }
+    .timeline {
+      @apply scroll-my-40;
 
-    & > li.timeline-year-item {
-      @apply relative min-h-32 pt-0 pb-8 pl-0;
-    }
-    & > li.timeline-year-item::before {
-      content: none;
-    }
-    & > li.timeline-year-item > .timeline-year-badge {
-      @apply absolute top-1/2 left-10 -translate-x-1/2 -translate-y-1/2;
+      /* Each item draws its own line segment below its marker, so no
+         background-colored ring is needed to separate line and marker. */
+      & > li {
+        @apply relative scroll-my-40 pb-24 pl-40;
+      }
+      /* Margin, not padding: utilities like list-unstyled reset the padding.
+         Leaves room for year badges centered on the line. */
+      &.timeline--changelog {
+        @apply ml-26;
+      }
+      &.timeline--changelog > li {
+        @apply pb-40 pl-48;
+      }
+      & > li::before {
+        content: "";
+        @apply absolute top-4 left-0 size-16 rounded-full bg-(--timeline-color);
+      }
+      & > li::after {
+        content: "";
+        @apply absolute top-24 bottom-0 left-[7.5px] w-px bg-(--timeline-color);
+      }
+
+      & > li.timeline-plain-item::before {
+        content: none;
+      }
+      & > li.timeline-plain-item::after {
+        @apply top-0;
+      }
+
+      /* Year labels keep some distance to the next entry. */
+      & > li.timeline-year-item {
+        @apply pb-32 pl-0;
+      }
+      & > li.timeline-year-item::before {
+        content: none;
+      }
+      & > li.timeline-year-item::after {
+        @apply top-auto h-28;
+      }
+      & > li.timeline-year-item > .timeline-year-badge {
+        @apply relative left-8 -translate-x-1/2;
+      }
     }
   }
 </style>
