@@ -7,6 +7,7 @@ import { Image } from "astro:assets";
 import buergerzentriertheit from "@/images/buergerzentriertheit.jpg";
 import buergerzentriertheit_workshop from "@/images/buergerzentriertheit_workshop.jpg";
 import buergercheck from "@/images/buergercheck.png";
+import { werkzeuge_praxistauglichkeit } from "@/config/routes";
 
 const frontmatter = {
   title: "Bürgerzentriertheit",
@@ -22,9 +23,9 @@ const frontmatter = {
       <h1>Vorhaben bürgerzentriert gestalten</h1>
       <p>
         Wirksame und praxistaugliche Gesetze denken die Perspektive der
-        Adressaten frühzeitig mit. Eine bürgerzentrierte Regelung hilft
-        nachweislich, Bürokratie abzubauen und Gesetze an den tatsächlichen
-        Bedürfnissen der Adressaten auszurichten.
+        Bürgerinnen und Bürger frühzeitig mit. Eine bürgerzentrierte Regelung
+        hilft, Bürokratie abzubauen und Gesetze an tatsächlichen Bedürfnissen
+        auszurichten.
       </p>
     </Hero>
     <section>
@@ -35,23 +36,23 @@ const frontmatter = {
         <h2>Was bedeutet Bürgerzentriertheit?</h2>
         <p>
           Bürgerzentriertheit heißt, ein Regelungsvorhaben aus Sicht der
-          Bürgerinnen und Bürger zu betrachten. Was müssen sie wissen? Was
-          müssen sie tun? Und können sie den Anforderungen im Alltag tatsächlich
-          nachkommen?
+          Bürgerinnen und Bürger zu betrachten: Was müssen sie wissen? Was
+          müssen sie tun? Und können sie die Anforderungen im Alltag tatsächlich
+          erfüllen?
         </p>
         <p>
-          Dafür werden die betroffenen Zielgruppen, ihre Bedürfnisse und ihre
-          Lebenslagen frühzeitig in den Blick genommen. So lassen sich Barrieren
-          erkennen und Regelungen verständlicher, zugänglicher und wirksamer
-          gestalten.
+          Dafür werden die betroffenen Zielgruppen frühzeitig in den
+          Erarbeitungsprozess einbezogen. So lassen sich Barrieren erkennen und
+          Regelungen entwickeln, die verständlicher, zugänglicher und wirksamer
+          sind.
         </p>
       </ImageTextOverlay>
     </section>
     <section>
       <h2>Wie setzen Sie Bürgerzentriertheit um?</h2>
       <p class="mb-32">
-        Der Bürgercheck unterstützt Sie dabei, die wichtigsten Fragen in fünf
-        Schritten zu beantworten:
+        Mithilfe des Bürgerchecks beziehen Sie die Perspektive der Bürgerinnen
+        und Bürger in fünf Schritten ein.
       </p>
       <ul class="list-unstyled checklist">
         <li>
@@ -64,8 +65,8 @@ const frontmatter = {
               <b>Zielgruppen identifizieren</b>
             </p>
             <p>
-              Identifizieren Sie alle relevanten Adressaten, deren Gruppengröße
-              sowie die Stärke der jeweiligen Betroffenheit.
+              Identifizieren Sie alle relevanten Adressatinnen und Adressaten,
+              deren Gruppengröße und wie stark sie jeweils betroffen sind.
             </p>
           </div>
         </li>
@@ -79,8 +80,8 @@ const frontmatter = {
               <b>Bedürfnisse und Barrieren verstehen</b>
             </p>
             <p>
-              Klären Sie konkrete Handlungserfordernisse und decken Sie
-              praktische Barrieren der Zielgruppen auf.
+              Klären Sie konkrete Handlungserfordernisse und prüfen Sie, ob es
+              für die Zielgruppen Hindernisse bei der Umsetzung gibt.
             </p>
           </div>
         </li>
@@ -91,7 +92,7 @@ const frontmatter = {
           ></span>
           <div class="space-y-4">
             <p>
-              <b>Regelung transparent machen</b>
+              <b>Regelung transparent gestalten</b>
             </p>
             <p>
               Visualisieren Sie, was für wen gilt, um Entscheidungsträgern einen
@@ -109,8 +110,9 @@ const frontmatter = {
               <b>Kontaktpunkte mitdenken</b>
             </p>
             <p>
-              Prüfen Sie, wie Bürger mit der geplanten Regelung in Kontakt
-              kommen. Gestalten Sie diese Schnittstellen nutzerfreundlich.
+              Prüfen Sie, wie Bürgerinnen und Bürger mit der geplanten Regelung
+              in Kontakt kommen. Gestalten Sie diese Schnittstellen
+              nutzerfreundlich.
             </p>
           </div>
         </li>
@@ -121,11 +123,12 @@ const frontmatter = {
           ></span>
           <div class="space-y-4">
             <p>
-              <b>Lebenslagen berücksichtigen</b>
+              <b>Begleitumstände berücksichtigen</b>
             </p>
             <p>
-              Beziehen Sie individuelle Begleitumstände, Zeitpunkte des Eingangs
-              von Informationen und andere relevante Regelungen ein.
+              Bedenken Sie, wann und wie Informationen eingehen, welche
+              individuellen Lebensumstände vorliegen und ob es Überschneidungen
+              mit anderen Regelungen gibt.
             </p>
           </div>
         </li>
@@ -140,8 +143,8 @@ const frontmatter = {
         />
         <figcaption>
           <p class="kern-subline kern-subline--small">
-            Bürgerzentriertheit lebt vom direkten Austausch von Akteuren im
-            Präsenzformat
+            Bürgerzentriertheit lebt vom persönlichen Austausch mit
+            Adressatinnen und Adressaten.
           </p>
         </figcaption>
       </figure>
@@ -151,46 +154,48 @@ const frontmatter = {
         <h2>Hilfreiche Tipps</h2>
         <ul>
           <li>
-            <b>Prüfen Sie den Bürgerbezug:</b> Klären Sie mit vier einfachen
-            Leitfragen vorab, ob sich durch Ihr Vorhaben Pflichten, Angebote,
-            Verwaltungsverfahren oder Mitwirkungsbedarfe für Bürgerinnen und
-            Bürger ändern.
+            <b>Bürgerbezug prüfen:</b> Klären Sie frühzeitig, ob das Vorhaben
+            Pflichten, Ansprüche, Verwaltungsverfahren oder Mitwirkungspflichten
+            für Bürgerinnen und Bürger verändert.
           </li>
           <li>
-            <b>Suchen Sie den direkten Kontakt:</b> Eine Verbändebeteiligung
-            kann den Austausch mit echten Betroffenen nicht ersetzen, wenn Sie
-            deren Lebensrealität verstehen wollen.
+            <b>Direkten Kontakt suchen:</b> Eine Verbändebeteiligung ersetzt
+            nicht den persönlichen Austausch mit Bürgerinnen und Bürgern, wenn
+            Sie deren Lebensrealität genau verstehen möchten.
           </li>
           <li>
-            <b>Handeln Sie nach dem Prinzip „Verstehen, Entwickeln, Testen“:</b>{" "}
-            Generieren Sie kollaborativ Lösungsalternativen und testen Sie diese
-            auf Praxistauglichkeit.
+            <b>Nach dem Prinzip „Verstehen, Entwickeln, Testen“ vorgehen:</b>{" "}
+            Erarbeiten Sie gemeinsam Lösungsalternativen und prüfen Sie die
+            <a href={werkzeuge_praxistauglichkeit.path}>
+              Praxistauglichkeit
+            </a>{" "}
+            im Vollzug.
           </li>
           <li>
-            <b>Schaffen Sie Transparenz:</b> Machen Sie stets deutlich, was für
-            wen gelten soll, um auch Entscheidern in Leitungsbefassung oder
-            Ressortabstimmung den schnellen Überblick zu erleichtern.
+            <b>Transparenz schaffen:</b> Stellen Sie Ihr Regelungsvorhaben
+            übersichtlich dar, um Entscheidungsträgern die Einschätzung zu
+            erleichtern.
           </li>
         </ul>
       </div>
     </section>
     <section>
-      <h2>Der Leitfaden für Bürgerzentrierung</h2>
+      <h2>Leitfaden für Bürgerzentrierung</h2>
       <p>
-        Der Bürgercheck bietet verschiedene Arbeitshilfen. Sie können sie je
-        nach Fragestellung einzeln oder miteinander verbinden.
+        Der Bürgercheck bietet verschiedene Arbeitshilfen. Sie können diese je
+        nach Fragestellung einzeln nutzen oder miteinander verbinden.
       </p>
       <div class="mt-32 sm:w-384">
         <KernCard
           preline="Leitfaden mit Templates"
           title="Bürgercheck"
-          body="Eine praxisnahe Anleitung mit Beispielen, um Ihre Regelungen konsequent bürgernah zu gestalten. Der Leitfaden hilft Ihnen dabei, die Perspektive der Betroffenen einzunehmen und mögliche Hürden im Alltag frühzeitig zu erkennen und abzubauen."
+          body="Eine praxisnahe Anleitung mit Beispielen, um Ihre Regelungen bürgernah zu gestalten. Der Leitfaden hilft Ihnen dabei, die Perspektive der Bürgerinnen und Bürger einzunehmen und mögliche Hürden im Alltag frühzeitig zu erkennen und abzubauen."
           image={buergercheck}
           imageAlt="Titelfolie des Leitfadens Bürgercheck"
         >
           <a
             slot="footer"
-            href="#"
+            href="https://github.com/digitalservicebund/digitalcheck-content/blob/main/src/buergercheck/buergercheck_anleitungen_2026-09.zip?raw=true"
             target="_blank"
             class="kern-btn kern-btn--secondary"
           >
@@ -198,7 +203,7 @@ const frontmatter = {
               class="kern-icon kern-icon--arrow-forward kern-icon--default"
               aria-hidden="true"
             ></span>
-            <span class="kern-label">Foliensätze (ZIP Datei)</span>
+            <span class="kern-label">Foliensätze (ZIP-Datei)</span>
           </a>
         </KernCard>
       </div>
@@ -206,9 +211,8 @@ const frontmatter = {
     <section class="breakout bg-cosmic-blue-base text-white">
       <h2>Fragen zur Bürgerzentrierung?</h2>
       <p>
-        Für Unterstützung bei der Durchführung des Bürgerchecks, für
-        Insight-Studien oder die Moderation von Workshops wenden Sie sich gern
-        an:
+        Wir unterstützen Sie gerne bei der Durchführung des Bürgerchecks oder
+        bei der Moderation von Workshops mit Adressatinnen und Adressaten.
       </p>
       <p>
         E-Mail:{" "}
