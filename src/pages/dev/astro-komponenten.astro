@@ -299,9 +299,7 @@ export const frontmatter = {
       <h2>KernCard</h2>
 
       <div class="space-y-32">
-        <p class="variant-label kern-label">
-          mit preline, subline und body (default: lavender-200)
-        </p>
+        <p class="variant-label kern-label">mit preline, subline und body</p>
         <KernCard
           title="Mit Preline und Subline"
           preline="Kategorie"
@@ -342,6 +340,34 @@ export const frontmatter = {
             {" "}
             Mehr erfahren →{" "}
           </a>
+        </KernCard>
+      </div>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">headingLevel=3 mit Icon-Slot</p>
+        <KernCard
+          title="Karte mit h3 und Icon"
+          headingLevel={3}
+          body="Für Karten unterhalb einer h2-Zwischenüberschrift."
+        >
+          <IconBuild slot="icon" class="size-40" />
+        </KernCard>
+      </div>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">mit Image-Slot</p>
+        <KernCard
+          title="Karte mit eigenem Bild"
+          body="Der image-Slot erlaubt eigenes Markup statt des image-Props."
+        >
+          <Image
+            slot="image"
+            src={trainingImage}
+            alt="Schulungssituation"
+            class="h-208 object-cover"
+            width="382"
+            height="208"
+          />
         </KernCard>
       </div>
     </section>
