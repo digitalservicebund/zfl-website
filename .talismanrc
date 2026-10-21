@@ -200,6 +200,8 @@ fileignoreconfig:
     checksum: 362577e6dea3376983aad592ef3c38b6961064b0d9dbfc0c399afbe03e54bac3
   - filename: src/content/ki-visualisierungen/BEHG/emissionsberichterstattung.mmd
     checksum: d7e2ee229a8eb9178dc754d84f6f50aa2de4de50bb870001b8b643c5dcc4c12c
+  - filename: src/content/ki-visualisierungen/StiftFinG/mittelverteilung.mmd
+    checksum: e2275ef24913e61566bac7c966ae4e75f351ee873090a023b31431409578033f
   - filename: src/pages/werkzeuge/_shared/api.ts
     allowed_patterns: [API_BASE_STORAGE_KEY]
   - filename: src/pages/werkzeuge/_shared/apiBase.ts

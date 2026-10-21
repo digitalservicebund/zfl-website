@@ -1,0 +1,27 @@
+title: Gesetz zur Finanzierung politischer Stiftungen aus dem Bundeshaushalt
+eli: eli/bund/bgbl-1/2023/383/2023-12-19/1/deu
+visOptions:
+  - name: Förderfähigkeit
+    visType: flowchart
+    filename: foerderfaehigkeit
+    articles: ["§§1-3"]
+  - name: Antragsverfahren
+    visType: swimlane
+    filename: antragsverfahren
+    articles: ["§3", "§7", "§8"]
+  - name: Verteilung der Fördermittel
+    visType: flowchart
+    filename: mittelverteilung
+    articles: ["§3"]
+  - name: Ende der Förderung
+    visType: flowchart
+    filename: foerderende
+    articles: ["§4"]
+  - name: Rücknahme und Minderung
+    visType: flowchart
+    filename: ruecknahme_minderung
+    articles: ["§5"]
+  - name: Akteure und Zuständigkeiten
+    visType: actors
+    filename: akteure
+    articles: []
