@@ -1,0 +1,27 @@
+var e=`---
+summary: "Wann die laufende Förderung einer politischen Stiftung nach dem StiftFinG zu beenden ist und welche Folgen die einzelnen Beendigungsgründe für eine Auslauf- oder erneute Förderung haben."
+---
+flowchart TD
+    START(["Politische Stiftung wird gefördert"]) --> Q1{"BMI stellt fest: Anerkennung<br/>entfallen oder Partei nicht<br/>mehr im Bundestag nach<br/>§2 II? — <a href='{{ELI}}#art-z4_abs-z1' target='_blank' rel='noopener'>§4 I Nr.1</a>"}
+    START -.- H0["Beendigung durch die zuständige oberste<br/>Bundesbehörde — <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 I</a><br/>Feststellungen zu Nr. 1 und 2 durch das<br/>BMI — <a href='{{ELI}}#art-z7_abs-z2' target='_blank' rel='noopener'>§7 II</a>"]
+
+    Q1 -->|Ja| E1["Förderung endet spätestens mit Ablauf<br/>des laufenden Haushaltsjahres — <a href='{{ELI}}#art-z4_abs-z1' target='_blank' rel='noopener'>§4 I</a>"]
+    E1 -.- H1["Bei Abwicklung kann das Haushaltsgesetz<br/>bis zu 1 Jahr weitere Förderung vorsehen,<br/>soweit für die wirtschaftliche Auflösung<br/>oder gegen soziale Härten geboten<br/>— <a href='{{ELI}}#art-z4_abs-z3' target='_blank' rel='noopener'>§4 III S.1</a>"]
+    Q1 -->|Nein| Q2{"BMI stellt fest: Gewähr<br/>nach §2 IV oder fehlende<br/>Ausrichtung nach §2 V<br/>entfallen? — <a href='{{ELI}}#art-z4_abs-z1' target='_blank' rel='noopener'>§4 I Nr.2</a>"}
+
+    Q2 -->|Ja| E2["Förderung endet spätestens mit Ablauf<br/>des laufenden Haushaltsjahres — <a href='{{ELI}}#art-z4_abs-z1' target='_blank' rel='noopener'>§4 I</a><br/>keine Auslaufförderung — <a href='{{ELI}}#art-z4_abs-z3' target='_blank' rel='noopener'>§4 III S.2</a><br/>erneute Förderung in der laufenden<br/>Wahlperiode ausgeschlossen — <a href='{{ELI}}#art-z4_abs-z2' target='_blank' rel='noopener'>§4 II</a>"]
+    Q2 -->|Nein| Q3{"Partei von der staatlichen<br/>Parteienfinanzierung<br/>ausgeschlossen?<br/>— <a href='{{ELI}}#art-z4_abs-z1' target='_blank' rel='noopener'>§4 I Nr.3</a>"}
+
+    Q3 -->|Ja| E3["Förderung endet spätestens mit Ablauf<br/>des laufenden Haushaltsjahres — <a href='{{ELI}}#art-z4_abs-z1' target='_blank' rel='noopener'>§4 I</a><br/>keine Auslaufförderung — <a href='{{ELI}}#art-z4_abs-z3' target='_blank' rel='noopener'>§4 III S.2</a>"]
+    Q3 -->|Nein| Q4{"Vollziehbares Vereinsverbot<br/>oder Aufhebung nach §87a II<br/>Nr. 2 BGB wegen Gefährdung<br/>des Gemeinwohls?<br/>— <a href='{{ELI}}#art-z4_abs-z1' target='_blank' rel='noopener'>§4 I Nr.4, 5</a>"}
+
+    Q4 -->|Ja| E3
+    Q4 -->|Nein| WEITER["Förderung läuft weiter"]
+
+    style WEITER fill:#d4edda,stroke:#2d8a4a
+    style E1 fill:#fff3cd,stroke:#c9a227
+    style E2 fill:#f8d7da,stroke:#c0392b
+    style E3 fill:#f8d7da,stroke:#c0392b
+    style H0 fill:#f5f5f5,stroke:#999
+    style H1 fill:#f5f5f5,stroke:#999
+`;export{e as default};
