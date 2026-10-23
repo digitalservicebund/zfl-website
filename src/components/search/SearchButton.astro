@@ -4,9 +4,15 @@ import { twMerge } from "tailwind-merge";
 type Props = {
   class?: string;
   keyboardToggle?: boolean;
+  "aria-label"?: string;
 };
 
-const { class: className, keyboardToggle, ...props } = Astro.props;
+const {
+  class: className,
+  keyboardToggle,
+  "aria-label": ariaLabel = "Suche öffnen",
+  ...props
+} = Astro.props;
 ---
 
 <button
@@ -14,7 +20,7 @@ const { class: className, keyboardToggle, ...props } = Astro.props;
     "flex items-center cursor-pointer select-none gap-8",
     className,
   )}
-  aria-label="Suche öffnen"
+  aria-label={ariaLabel}
   {...(keyboardToggle ? { "aria-keyshortcuts": "Control+k Meta+k" } : {})}
   type="button"
   {...props}

@@ -32,6 +32,7 @@ const {
   {...(keyboardShortcut ? { "keyboard-shortcut": "true" } : {})}
 >
   <SearchButton
+    aria-label={displayName}
     aria-expanded="false"
     aria-controls="page-search-form"
     data-page-search-toggle
