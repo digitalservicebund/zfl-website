@@ -1,0 +1,1 @@
+function e(){return{filterType:null,toggleFilterType(e){this.filterType=this.filterType===e?null:e},matchesFilter(e){return this.filterType===null||e.includes(this.filterType)}}}export{e as t};
