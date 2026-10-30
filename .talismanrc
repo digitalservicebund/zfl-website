@@ -25,7 +25,8 @@ fileignoreconfig:
       - "key:"
       - "TRIVY_PASSWORD: \\${{  }}"
   - filename: AGENTS.md
-    checksum: 13688243c7810b6fd967ed62831deee450395e6154e87ebc301558b72aaf4c8d
+    allowed_patterns:
+      - secret scanning
   - filename: package.json # astro-route-generator commit sha misinterpreted as potential secret
     ignore_detectors: [filecontent]
   - filename: doc/adr/0007-use-posthog-reverse-proxy.md
