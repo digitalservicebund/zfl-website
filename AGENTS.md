@@ -14,9 +14,11 @@ pnpm format:check     # Check formatting
 pnpm format:fix       # Auto-format with Prettier
 pnpm test             # Unit tests (Vitest)
 pnpm test <filename>  # Run specific test (e.g. pnpm test src/components/global/PageHeader.test.ts)
-pnpm test:e2e         # E2E tests with Playwright (builds first)
+pnpm test:e2e         # E2E tests with Playwright against a production build, then a staging build
+pnpm test:e2e:staging     # Full e2e suite against a staging build
+pnpm test:e2e:production  # Full e2e suite against a production build
 pnpm test:e2e e2e/a11y.spec.ts           # Run specific e2e test file
-pnpm test:e2e -- --grep "<test name>"    # Run e2e tests by name
+pnpm test:e2e --grep "<test name>"    # Run e2e tests by name
 ```
 
 ## Architecture
@@ -76,6 +78,7 @@ import { isProduction, isStaging, isPreview } from "@/config/stage";
 
 - **Unit tests** (`*.test.ts` alongside source): Use `AstroContainer` to render Astro components — see `src/components/global/PageHeader.test.ts` for the pattern.
 - **E2E tests** (`e2e/*.spec.ts`): Playwright with Chromium. Accessibility tests in `e2e/a11y.spec.ts` use `@axe-core/playwright` and run axe on all routes automatically.
+- **Stages in e2e**: the suite runs against both a production and a staging build, the same as CI. On PRs, CI runs staging in all browsers and production in Chromium only; on `main` it's the other way round.
 - Prefer semantic selectors in tests (`getByRole`, `aria-label`, visible text, stable attributes already needed by the UI). Avoid adding `data-testid` unless there is no reasonable semantic selector.
 
 ### Path alias

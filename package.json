@@ -25,8 +25,10 @@
     "preinstall": "echo 'Please disable script execution for security reasons: npm config set ignore-scripts true' && exit 1",
     "preview": "astro preview",
     "test": "vitest run",
-    "test:a11y": "pnpm run build && playwright test --project=chromium e2e/a11y.spec.ts",
-    "test:e2e": "pnpm run build && playwright test --project=chromium",
+    "test:a11y": "PUBLIC_STAGE=staging playwright test --project=chromium e2e/a11y.spec.ts",
+    "test:e2e": "pnpm test:e2e:production && pnpm test:e2e:staging",
+    "test:e2e:production": "PUBLIC_STAGE=production playwright test --project=chromium",
+    "test:e2e:staging": "PUBLIC_STAGE=staging playwright test --project=chromium",
     "typecheck": "pnpm sync && astro check",
     "sync": "astro sync"
   },

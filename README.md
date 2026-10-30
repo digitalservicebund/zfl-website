@@ -65,21 +65,23 @@ pnpm dev
 
 All commands are run from the root of the project, from a terminal:
 
-| Command                | Action                                            |
-| :--------------------- | :------------------------------------------------ |
-| `pnpm install`         | Installs dependencies                             |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`       |
-| `pnpm build`           | Builds your production site to `./dist/`          |
-| `pnpm preview`         | Previews your build locally, before deploying     |
-| `pnpm lint`            | Runs ESLint to check for code quality and errors  |
-| `pnpm typecheck`       | Runs TypeScript to check for type errors          |
-| `pnpm format:check`    | Checks if files are formatted correctly           |
-| `pnpm format:fix`      | Automatically formats files using Prettier        |
-| `pnpm test`            | Runs unit tests with Vitest                       |
-| `pnpm test:e2e`        | Runs end-to-end tests with Playwright             |
-| `pnpm audit:licences`  | Audits dependency licenses                        |
-| `pnpm astro ...`       | Runs CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Gets help using the Astro CLI                     |
+| Command                    | Action                                            |
+| :------------------------- | :------------------------------------------------ |
+| `pnpm install`             | Installs dependencies                             |
+| `pnpm dev`                 | Starts local dev server at `localhost:4321`       |
+| `pnpm build`               | Builds your production site to `./dist/`          |
+| `pnpm preview`             | Previews your build locally, before deploying     |
+| `pnpm lint`                | Runs ESLint to check for code quality and errors  |
+| `pnpm typecheck`           | Runs TypeScript to check for type errors          |
+| `pnpm format:check`        | Checks if files are formatted correctly           |
+| `pnpm format:fix`          | Automatically formats files using Prettier        |
+| `pnpm test`                | Runs unit tests with Vitest                       |
+| `pnpm test:e2e`            | Runs end-to-end tests with Playwright             |
+| `pnpm test:e2e:staging`    | Runs all e2e tests against a staging build        |
+| `pnpm test:e2e:production` | Runs all e2e tests against a production build     |
+| `pnpm audit:licences`      | Audits dependency licenses                        |
+| `pnpm astro ...`           | Runs CLI commands like `astro add`, `astro check` |
+| `pnpm astro -- --help`     | Gets help using the Astro CLI                     |
 
 ## Testing
 
@@ -97,9 +99,10 @@ The project includes comprehensive testing with both unit and end-to-end tests:
 - Uses **Playwright** for e2e tests
 - Located in `e2e/` directory
 - Install browser binaries once: `pnpm exec playwright install`
-- Run all e2e tests: `pnpm test:e2e` (requires build first)
+- Run all e2e tests: `pnpm test:e2e` (builds the site itself)
+- `pnpm test:e2e` runs the suite against a production build and then against a staging build, the same as CI.
 - Run specific e2e test: `pnpm test:e2e e2e/navigation.spec.ts`
-- Run tests with grep: `pnpm test:e2e -- --grep "<test name>"`
+- Run tests with grep: `pnpm test:e2e --grep "<test name>"`
 
 ### Accessibility Testing
 
