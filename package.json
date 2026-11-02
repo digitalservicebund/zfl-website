@@ -71,7 +71,7 @@
     "@typescript-eslint/parser": "^8.72.1",
     "@vitest/browser-playwright": "^5.0.5",
     "astro-eslint-parser": "^3.2.0",
-    "eslint": "^10.13.0",
+    "eslint": "^10.14.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-astro": "^3.2.1",
     "eslint-plugin-svelte": "^3.23.1",
