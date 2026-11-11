@@ -1,6 +1,7 @@
 ---
 import Badge from "@/components/Badge.astro";
 import Banner from "@/components/Banner.astro";
+import Chart from "@/components/Chart.astro";
 import InfoPanel from "@/components/InfoPanel.astro";
 import FeatureItem from "@/components/FeatureItem.astro";
 import FeatureSet from "@/components/FeatureSet.astro";
@@ -20,6 +21,7 @@ import IconBuild from "~icons/ic/outline-build";
 import IconDevices from "~icons/ic/outline-devices";
 import IconInfo from "~icons/ic/outline-info";
 import IconWidgets from "~icons/ic/twotone-widgets";
+import { multiSeries, pieData, singleSeries } from "./_chart-data";
 
 export const frontmatter = {
   title: "Astro Komponenten",
@@ -107,7 +109,7 @@ export const frontmatter = {
     </section>
 
     <!-- ─── Banner ────────────────────────────────────────────────────── -->
-    <section class="breakout-grid contents">
+    <section class="space-y-48 breakout-grid contents">
       <h2 class="mt-32">Banner</h2>
       <Banner>
         <p class="mb-0">
@@ -116,6 +118,58 @@ export const frontmatter = {
         </p>
         <a href="#">Mehr dazu</a>
       </Banner>
+    </section>
+
+    <!-- ─── Chart ─────────────────────────────────────────────────────── -->
+    <section class="space-y-48">
+      <h2 class="mt-32">Chart</h2>
+
+      <div class="space-y-32">
+        <h3>Eine Datenreihe</h3>
+        <div class="chart-grid">
+          <div class="space-y-16">
+            <p class="variant-label kern-label">type: column (default)</p>
+            <div class="chart-card">
+              <Chart data={singleSeries} />
+            </div>
+          </div>
+
+          <div class="space-y-16">
+            <p class="variant-label kern-label">type: column, title</p>
+            <div class="chart-card">
+              <Chart data={singleSeries} title="Diagrammtitel" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-32">
+        <h3>Mehrere Datenreihen</h3>
+        <div class="chart-grid">
+          <div class="space-y-16">
+            <p class="variant-label kern-label">type: column, title</p>
+            <div class="chart-card">
+              <Chart data={multiSeries} title="Diagrammtitel" />
+            </div>
+          </div>
+
+          <div class="space-y-16">
+            <p class="variant-label kern-label">
+              type: column, title, stack: true
+            </p>
+            <div class="chart-card">
+              <Chart data={multiSeries} stack title="Diagrammtitel" />
+            </div>
+          </div>
+
+          <div class="space-y-16">
+            <p class="variant-label kern-label">type: pie, title</p>
+            <div class="chart-card">
+              <Chart data={pieData} type="pie" title="Diagrammtitel" />
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ─── InfoPanel ────────────────────────────────────────────────── -->
@@ -509,6 +563,16 @@ export const frontmatter = {
 </Layout>
 
 <style>
+  @reference "@/styles/global.css";
+
+  .chart-grid {
+    @apply grid max-w-1000 grid-cols-1 items-start gap-24 md:grid-cols-2 lg:grid-cols-3;
+  }
+
+  .chart-card {
+    @apply bg-lavender-400 flex flex-col rounded-sm p-24 sm:p-32;
+  }
+
   .variant-label {
     &::before {
       content: "❯";
