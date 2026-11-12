@@ -8,6 +8,7 @@ import FeatureSet from "@/components/FeatureSet.astro";
 import Hero from "@/components/Hero.astro";
 import HintSidebarWrapper from "@/components/HintSidebarWrapper.astro";
 import Image from "@/components/Image.astro";
+import ImageTextOverlay from "@/components/ImageTextOverlay.astro";
 import KernBadge from "@/components/KernBadge.astro";
 import KernCard from "@/components/KernCard.astro";
 import MediaText from "@/components/MediaText.astro";
@@ -371,6 +372,60 @@ export const frontmatter = {
             zoom
           />
         </div>
+      </div>
+    </section>
+
+    <!-- ─── ImageTextOverlay ──────────────────────────────────────────── -->
+    <section class="space-y-48">
+      <h2>ImageTextOverlay</h2>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">look: gray (default)</p>
+        <ImageTextOverlay image={trainingImage} imageAlt="Schulungssituation">
+          <h3>Überschrift</h3>
+          <p>
+            Ab dem Breakpoint lg überlappt das Textfeld das Bild, darunter
+            stehen beide untereinander.
+          </p>
+        </ImageTextOverlay>
+      </div>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">look: lavender, mit Link</p>
+        <ImageTextOverlay
+          image={trainingImage}
+          imageAlt="Schulungssituation"
+          look="lavender"
+          linkHref="#"
+          linkText="Mehr erfahren"
+        >
+          <h3>Überschrift</h3>
+          <p>
+            <code>linkHref</code> und <code>linkText</code> fügen einen Link mit
+            Icon hinzu (Standard-Icon: <code>arrow-forward</code>).
+          </p>
+        </ImageTextOverlay>
+      </div>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">
+          imageBorder, imageClass, icon: open-in-new
+        </p>
+        <ImageTextOverlay
+          image={trainingImage}
+          imageAlt="Schulungssituation"
+          imageBorder
+          imageClass="object-top"
+          linkHref="#"
+          linkText="Externer Link"
+          icon="open-in-new"
+        >
+          <h3>Überschrift</h3>
+          <p>
+            Mit Rahmen um das Bild, eigenem Bildausschnitt über
+            <code>imageClass</code> und anderem Link-Icon.
+          </p>
+        </ImageTextOverlay>
       </div>
     </section>
 
