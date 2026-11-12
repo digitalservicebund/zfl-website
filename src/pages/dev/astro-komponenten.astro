@@ -9,6 +9,7 @@ import Hero from "@/components/Hero.astro";
 import HintSidebarWrapper from "@/components/HintSidebarWrapper.astro";
 import Image from "@/components/Image.astro";
 import ImageTextOverlay from "@/components/ImageTextOverlay.astro";
+import KernAccordion from "@/components/KernAccordion.astro";
 import KernBadge from "@/components/KernBadge.astro";
 import KernCard from "@/components/KernCard.astro";
 import MediaText from "@/components/MediaText.astro";
@@ -426,6 +427,33 @@ export const frontmatter = {
             <code>imageClass</code> und anderem Link-Icon.
           </p>
         </ImageTextOverlay>
+      </div>
+    </section>
+
+    <!-- ─── KernAccordion ────────────────────────────────────────────── -->
+    <section class="space-y-48">
+      <h2>KernAccordion</h2>
+
+      <div class="space-y-32">
+        <div>
+          <KernAccordion>
+            <span slot="header">Überschrift 1</span>
+            <p slot="body">
+              Inhalt des Akkordeons. Er wird über den body-Slot übergeben und
+              nutzt die volle Breite.
+            </p>
+          </KernAccordion>
+          <KernAccordion>
+            <span slot="header">Überschrift 2</span>
+            <div slot="body" class="space-y-8">
+              <b>Zwischenüberschrift:</b>
+              <ul>
+                <li>Erster Listenpunkt</li>
+                <li>Zweiter Listenpunkt</li>
+              </ul>
+            </div>
+          </KernAccordion>
+        </div>
       </div>
     </section>
 
