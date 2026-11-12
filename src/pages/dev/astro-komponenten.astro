@@ -16,6 +16,7 @@ import MediaText from "@/components/MediaText.astro";
 import Modal from "@/components/Modal.astro";
 import PostTeaser from "@/components/PostTeaser.astro";
 import PrinzipBadge from "@/components/PrinzipBadge.astro";
+import StepNumber from "@/components/StepNumber.astro";
 import TimelineList from "@/components/TimelineList.astro";
 import trainingImage from "@/images/Trainings.jpg";
 import Layout from "@/layouts/Layout.astro";
@@ -657,6 +658,19 @@ export const frontmatter = {
           <PrinzipBadge prinzip="3">Prinzip 3</PrinzipBadge>
           <PrinzipBadge prinzip="4">Prinzip 4</PrinzipBadge>
           <PrinzipBadge prinzip="5">Prinzip 5</PrinzipBadge>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── StepNumber ───────────────────────────────────────────────── -->
+    <section class="space-y-48">
+      <h2>StepNumber</h2>
+
+      <div class="space-y-32">
+        <div class="flex flex-wrap gap-12">
+          <StepNumber number={1} />
+          <StepNumber number={2} />
+          <StepNumber number={3} />
         </div>
       </div>
     </section>
