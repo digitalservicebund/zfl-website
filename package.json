@@ -39,7 +39,7 @@
     "@astrojs/svelte": "^9.1.2",
     "@iconify-json/ic": "^1.2.4",
     "@kern-ux/native": "^2.8.2",
-    "@pagefind/component-ui": "^1.5.2",
+    "@pagefind/component-ui": "^1.6.0",
     "@tailwindcss/vite": "^4.3.5",
     "@types/alpinejs": "^3.17.0",
     "alpinejs": "^3.17.5",
