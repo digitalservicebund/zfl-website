@@ -7,6 +7,7 @@ import FeatureItem from "@/components/FeatureItem.astro";
 import FeatureSet from "@/components/FeatureSet.astro";
 import Hero from "@/components/Hero.astro";
 import HintSidebarWrapper from "@/components/HintSidebarWrapper.astro";
+import Image from "@/components/Image.astro";
 import KernBadge from "@/components/KernBadge.astro";
 import KernCard from "@/components/KernCard.astro";
 import MediaText from "@/components/MediaText.astro";
@@ -15,7 +16,7 @@ import PostTeaser from "@/components/PostTeaser.astro";
 import TimelineList from "@/components/TimelineList.astro";
 import trainingImage from "@/images/Trainings.jpg";
 import Layout from "@/layouts/Layout.astro";
-import { Image } from "astro:assets";
+import { Image as AstroImage } from "astro:assets";
 import IconCheckCircle from "~icons/ic/outline-check-circle";
 import IconBuild from "~icons/ic/outline-build";
 import IconDevices from "~icons/ic/outline-devices";
@@ -347,6 +348,32 @@ export const frontmatter = {
       </div>
     </HintSidebarWrapper>
 
+    <!-- ─── Image ─────────────────────────────────────────────────────── -->
+    <section class="space-y-48">
+      <h2>Image</h2>
+
+      <div class="grid max-w-full grid-cols-1 items-start gap-24 md:grid-cols-2">
+        <div class="space-y-32">
+          <p class="variant-label kern-label">zoom: false (default)</p>
+          <Image
+            src={trainingImage}
+            alt="Schulungssituation"
+            class="w-full rounded-sm"
+          />
+        </div>
+
+        <div class="space-y-32">
+          <p class="variant-label kern-label">zoom: true</p>
+          <Image
+            src={trainingImage}
+            alt="Schulungssituation"
+            class="w-full rounded-sm"
+            zoom
+          />
+        </div>
+      </div>
+    </section>
+
     <!-- ─── KernCard ──────────────────────────────────────────────────── -->
     <section class="space-y-48">
       <h2>KernCard</h2>
@@ -413,7 +440,7 @@ export const frontmatter = {
           title="Karte mit eigenem Bild"
           body="Der image-Slot erlaubt eigenes Markup statt des image-Props."
         >
-          <Image
+          <AstroImage
             slot="image"
             src={trainingImage}
             alt="Schulungssituation"
@@ -439,7 +466,7 @@ export const frontmatter = {
               Überschriften.
             </p>
           </div>
-          <Image
+          <AstroImage
             slot="media"
             src={trainingImage}
             alt="Schulungssituation"
@@ -457,7 +484,7 @@ export const frontmatter = {
               Durch <code>reversed</code> wechseln Text und Medium die Seite.
             </p>
           </div>
-          <Image
+          <AstroImage
             slot="media"
             src={trainingImage}
             alt="Schulungssituation"
@@ -475,7 +502,7 @@ export const frontmatter = {
               Hier ist der Textbereich breiter und das Medium schmaler (4/12).
             </p>
           </div>
-          <Image
+          <AstroImage
             slot="media"
             src={trainingImage}
             alt="Schulungssituation"
