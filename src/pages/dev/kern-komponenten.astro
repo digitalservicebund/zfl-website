@@ -391,6 +391,81 @@ export const frontmatter = {
     <hr class="kern-divider" aria-hidden="true" />
 
     <!-- =========================================================
+           DETAILS
+      ========================================================== -->
+    <section aria-labelledby="details-heading">
+      <h2 class="kern-heading-large" id="details-heading">
+        Details
+      </h2>
+
+      <h3 class="kern-heading-medium">Geschlossen</h3>
+      <details class="kern-details">
+        <summary class="kern-details__header">
+          <span class="kern-title">Mehr erfahren</span>
+        </summary>
+        <div class="kern-details__body">
+          <p class="kern-body">
+            Dieser Inhalt wird eingeblendet, wenn die Details geöffnet werden.
+          </p>
+        </div>
+      </details>
+
+      <h3 class="kern-heading-medium">Geöffnet</h3>
+      <details class="kern-details" open>
+        <summary class="kern-details__header">
+          <span class="kern-title">Weniger anzeigen</span>
+        </summary>
+        <div class="kern-details__body">
+          <p class="kern-body">Dieser Inhalt ist bereits sichtbar (open).</p>
+        </div>
+      </details>
+    </section>
+
+    <hr class="kern-divider" aria-hidden="true" />
+
+    <!-- =========================================================
+           DIALOG
+      ========================================================== -->
+    <section aria-labelledby="dialog-heading">
+      <h2 class="kern-heading-large" id="dialog-heading">
+        Dialog
+      </h2>
+
+      <h3 class="kern-heading-medium">Statisch</h3>
+      <dialog
+        class="kern-dialog relative"
+        open
+        aria-labelledby="dialog-static-title"
+      >
+        <header class="kern-dialog__header">
+          <h4 class="kern-title" id="dialog-static-title">
+            Dialogtitel
+          </h4>
+          <button type="button" class="kern-btn kern-btn--tertiary">
+            <span class="kern-icon kern-icon--close" aria-hidden="true"></span>
+            <span class="kern-label kern-sr-only">Schließen</span>
+          </button>
+        </header>
+        <section class="kern-dialog__body">
+          <p class="kern-body">
+            Nicht-modal und im Seitenfluss dargestellt, um den Aufbau aus
+            Header, Body und Footer zu zeigen.
+          </p>
+        </section>
+        <footer class="kern-dialog__footer">
+          <button type="button" class="kern-btn kern-btn--secondary">
+            <span class="kern-label">Abbrechen</span>
+          </button>
+          <button type="button" class="kern-btn kern-btn--primary">
+            <span class="kern-label">Bestätigen</span>
+          </button>
+        </footer>
+      </dialog>
+    </section>
+
+    <hr class="kern-divider" aria-hidden="true" />
+
+    <!-- =========================================================
            CARD
       ========================================================== -->
     <section aria-labelledby="card-heading">
@@ -664,6 +739,28 @@ export const frontmatter = {
               type="text"
               inputmode="numeric"
             />
+          </div>
+        </div>
+
+        <!-- URL with input group -->
+        <div class="shrink grow basis-260">
+          <h3 class="kern-heading-medium">URL (Input-Group)</h3>
+          <div class="kern-form-input">
+            <label class="kern-label" for="demo-url">
+              Webadresse
+            </label>
+            <div class="kern-input-group">
+              <input
+                class="kern-form-input__input"
+                id="demo-url"
+                name="demo-url"
+                type="url"
+                autocomplete="url"
+              />
+              <span class="kern-input-group-text" aria-hidden="true">
+                .gov.de
+              </span>
+            </div>
           </div>
         </div>
 
@@ -999,6 +1096,34 @@ export const frontmatter = {
           <span class="kern-body">Name darf nicht leer sein</span>
         </p>
       </fieldset>
+    </section>
+
+    <hr class="kern-divider" aria-hidden="true" />
+
+    <!-- =========================================================
+           SUCHE
+      ========================================================== -->
+    <section aria-labelledby="search-heading">
+      <h2 class="kern-heading-large" id="search-heading">
+        Suche
+      </h2>
+      <search class="kern-form-input">
+        <label class="kern-label" for="demo-search">
+          Suche
+        </label>
+        <div class="kern-input-group">
+          <input
+            class="kern-form-input__input"
+            id="demo-search"
+            name="demo-search"
+            type="search"
+          />
+          <button type="button" class="kern-btn kern-btn--primary">
+            <span class="kern-icon kern-icon--search" aria-hidden="true"></span>
+            <span class="kern-label">Suchen</span>
+          </button>
+        </div>
+      </search>
     </section>
 
     <hr class="kern-divider" aria-hidden="true" />
@@ -1380,5 +1505,9 @@ export const frontmatter = {
 <style>
   hr {
     margin-block: 1rem;
+  }
+
+  :global(body) {
+    overflow: auto;
   }
 </style>
