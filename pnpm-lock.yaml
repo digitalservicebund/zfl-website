@@ -27,8 +27,8 @@ importers:
         specifier: ^2.8.2
         version: 2.8.2
       '@pagefind/component-ui':
-        specifier: ^1.5.2
-        version: 1.5.2
+        specifier: ^1.6.0
+        version: 1.6.0
       '@tailwindcss/vite':
         specifier: ^4.3.5
         version: 4.3.5(vite@8.3.7(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))
@@ -1192,8 +1192,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@pagefind/component-ui@1.5.2':
-    resolution: {integrity: sha512-t8/aE0tan4JiKa6cyhhSt/5qrEVwAK/qlYBHFpnRoq+qaFFVrhmXFFMY+r6n4GJtVIFCN2A5nUpeLN68cYjEjw==}
+  '@pagefind/component-ui@1.6.0':
+    resolution: {integrity: sha512-Y1DGghiGTdPNzuXphHginp45/3wVUXiwRdfAPSGTBTEBnrj8VnAEC2mgFuy2RzVwBf4reqanPvJVwxPoLI89Ww==}
 
   '@pagefind/darwin-arm64@1.6.0':
     resolution: {integrity: sha512-611gl64aqN12UcMyKPtZ8+vRWBKlJFSh2JgO8uScxa1Eyjo1dXz9r4wZuRno0yCUE/KN0FauEoKZ3KEwUYHCCg==}
@@ -5301,7 +5301,7 @@ snapshots:
   '@oxc-resolver/binding-win32-x64-msvc@11.24.2':
     optional: true
 
-  '@pagefind/component-ui@1.5.2':
+  '@pagefind/component-ui@1.6.0':
     dependencies:
       adequate-little-templates: 1.0.2
       bcp-47: 2.1.2
@@ -5997,7 +5997,7 @@ snapshots:
 
   astro-pagefind@2.0.1(astro@7.4.7(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1)):
     dependencies:
-      '@pagefind/component-ui': 1.5.2
+      '@pagefind/component-ui': 1.6.0
       astro: 7.4.7(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1)
       pagefind: 1.6.0
       sirv: 3.0.2
