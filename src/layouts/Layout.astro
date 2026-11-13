@@ -15,6 +15,7 @@ import firaSansMediumUrl from "@kern-ux/native/dist/fonts/fira-sans/FiraSans-Med
 import firaSansRegularUrl from "@kern-ux/native/dist/fonts/fira-sans/FiraSans-Regular.woff2?url";
 import { SEO } from "astro-seo";
 import "@/styles/global.css";
+import SkipNavLink from "@/components/SkipNavLink.astro";
 
 interface Props {
   title: string;
@@ -89,6 +90,7 @@ const defaultDescription =
   />
 
   <body class="relative">
+    <SkipNavLink label="Zum Inhalt springen" target="#main" />
     <PageHeader />
     <div
       data-pagefind-default-meta="pageType:Seite"
