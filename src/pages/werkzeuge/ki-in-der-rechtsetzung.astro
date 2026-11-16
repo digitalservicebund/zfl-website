@@ -1,0 +1,446 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import ImageTextOverlay from "@/components/ImageTextOverlay.astro";
+import KernAccordion from "@/components/KernAccordion.astro";
+import PrototypeSection from "./_PrototypeSection.astro";
+import {
+  begleitungen,
+  werkzeuge_praxistauglichkeit,
+  werkzeuge_ressourcen,
+} from "@/config/routes";
+import {
+  BLOG_BESTANDSRECHTSANALYSE_URL,
+  BLOG_INTERDISZIPLINAER_URL,
+  BLOG_KI_IM_ZFL_URL,
+  DIGITALCHECK_PRINZIPIEN_URL,
+  EU_AI_ACT_URL,
+  PROTOTYP_PFLICHTEN_URL,
+  PROTOTYP_POTENZIALE_URL,
+  PROTOTYP_RECHT_ERKUNDEN_URL,
+  ZFL_EMAIL,
+} from "@/config/constants";
+import { mailto } from "@/utils/mailtoHelper";
+import IconPlaylistAddCheck from "~icons/ic/baseline-playlist-add-check";
+import IconPeople from "~icons/ic/baseline-people";
+import IconMessage from "~icons/ic/baseline-message";
+import Zitat from "./_assets/ki/zitat.svg";
+import botWorkshop from "./_assets/ki/bot-workshop.jpg";
+import bestandsrecht from "./_assets/ki/bestandsrecht.png";
+import optimierung from "./_assets/ki/optimierung.png";
+import angrenzendesRecht from "./_assets/ki/angrenzendes-recht.png";
+import lesbarkeit from "./_assets/ki/lesbarkeit.png";
+import visualisierung from "./_assets/ki/visualisierung.png";
+
+const frontmatter = {
+  title: "KI in der Rechtsetzung",
+  navLabel: "KI in der Rechtsetzung",
+  navOrder: 6,
+  isStagingOnly: true,
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid" id="main">
+    <Hero>
+      <h1>Künstliche Intelligenz in der Rechtsetzung</h1>
+      <p>
+        Künstliche Intelligenz (KI) eröffnet neue Möglichkeiten für die
+        Rechtsetzung. Mit den richtigen Werkzeugen können Legistinnen und
+        Legisten geltendes Recht analysieren, Informationen strukturieren und
+        Regelungsentwürfe weiterentwickeln.
+      </p>
+      <p>
+        Auf dieser Seite erfahren Sie, welche Chancen und Hindernisse der
+        Einsatz von KI in der Regelungsarbeit mit sich bringt und wie
+        KI-gestützte Werkzeuge in konkreten Anwendungsfällen genutzt werden
+        können.
+      </p>
+    </Hero>
+
+    <section>
+      <h2>Einsatz von KI in Regelungsvorhaben</h2>
+      <p>
+        Die Anforderungen an moderne Gesetzgebung steigen immer weiter. Komplexe
+        Abhängigkeiten, knappe Fristen und hohe fachliche Anforderungen
+        erfordern effiziente Werkzeuge. KI kann Legistinnen und Legisten dabei
+        unterstützen, Informationen schneller zu verarbeiten, Zusammenhänge zu
+        erkennen und dadurch langfristig die Qualität von Regelungsvorhaben zu
+        verbessern.
+      </p>
+      <p>
+        Das Zentrum für Legistik (ZfL) befasst sich als zentrale Anlaufstelle
+        für bessere Rechtsetzung intensiv mit diesem Thema und arbeitet bereits
+        an KI-gestützten Lösungen für die legistische Arbeit.
+      </p>
+      <h3>Praxisbeispiel: KI-Bot für das BMLEH</h3>
+      <p>
+        Beim Strukturieren großer Datenmengen kann der gezielte Einsatz von KI
+        einen Mehrwert schaffen. In Zusammenarbeit mit dem Bundesministerium für
+        Landwirtschaft, Ernährung und Heimat (BMLEH) hat das Team des ZfL einen
+        KI-gestützten Bot entwickelt.
+      </p>
+      <p>
+        Der Bot wurde eingesetzt, um geltende Melde- und Dokumentationspflichten
+        in der Tierhaltung systematisch zu erfassen und strukturiert
+        aufzubereiten. Der zuvor zeitaufwendige manuelle Analyseprozess konnte
+        durch die Nutzung des Bots deutlich beschleunigt werden. Weitere Details
+        zum Projekt finden Sie in diesem{" "}
+        <a href={BLOG_INTERDISZIPLINAER_URL.url} target="_blank">
+          Blogartikel
+        </a>
+        .
+      </p>
+      <p>
+        Das Praxisbeispiel zeigt, wie KI die Effizienz im Gesetzgebungsprozess
+        steigern kann. Dabei gilt jedoch immer:
+      </p>
+      <ul class="list-unstyled callouts">
+        <li class="bg-surface-default">
+          <span class="callout-icon">
+            <IconPlaylistAddCheck aria-hidden="true" />
+          </span>
+          <p>
+            KI-Ergebnisse sind ein fachlich zu prüfender Zwischenschritt,
+            niemals die fertige Lösung.
+          </p>
+        </li>
+        <li class="bg-surface-default">
+          <span class="callout-icon">
+            <IconPeople aria-hidden="true" />
+          </span>
+          <p>
+            KI ist kein Ersatz für die Beteiligung von Betroffenen, die
+            juristische Prüfung oder die Bewertung der{" "}
+            <a href={werkzeuge_praxistauglichkeit.path}>Praxistauglichkeit</a>.
+          </p>
+        </li>
+      </ul>
+      <p class="mt-32">
+        <a href="#herausforderungen">
+          ↓ Weitere Rahmenbedingungen für den Einsatz von KI
+        </a>
+      </p>
+    </section>
+
+    <section>
+      <ImageTextOverlay
+        image={botWorkshop}
+        imageAlt="Zwei Personen sitzen an einem Tisch und betrachten ausgedruckte Analyseergebnisse"
+        reversed
+      >
+        <figure class="space-y-24">
+          <Zitat class="text-darkblue-450" aria-hidden="true" />
+          <blockquote>
+            <p class="kern-heading-medium">
+              Ich schätze, dass wir mit dem Bot in kürzester Zeit schon 80 % der
+              Analyse-Arbeit erledigt haben.
+            </p>
+          </blockquote>
+          <figcaption>– Projektpartner, BMLEH</figcaption>
+        </figure>
+      </ImageTextOverlay>
+    </section>
+
+    <section class="breakout bg-lavender-400">
+      <h2>Anwendungsfälle und KI-Prototypen</h2>
+      <p>
+        Das Zentrum für Legistik bietet vielfältige{" "}
+        <a href={werkzeuge_ressourcen.path}>Ressourcen</a> für die legistische
+        Arbeit. Durch den engen Austausch mit Legistinnen und Legisten im Rahmen
+        der <a href={begleitungen.path}>Regelungsbegleitungen</a> gewinnt das
+        Team wertvolle Einblicke in die Bedürfnisse und Herausforderungen der
+        Praxis und kann mögliche Einsatzbereiche für KI identifizieren.
+      </p>
+      <p>
+        Auf dieser Grundlage sind erste Prototypen entstanden, die beispielhaft
+        zeigen, wie KI-gestützte Werkzeuge die legistische Arbeit in Zukunft
+        unterstützen können.
+      </p>
+      <div class="callouts">
+        <div class="bg-white">
+          <span class="callout-icon">
+            <IconMessage aria-hidden="true" />
+          </span>
+          <p>
+            Sie interessieren sich für einen der Prototypen oder möchten eine
+            neue KI-Lösung mitgestalten? Sprechen Sie uns gerne an!
+          </p>
+        </div>
+      </div>
+
+      <PrototypeSection
+        id="bestandsrecht"
+        title="Bestandsrecht analysieren"
+        tagline="Pflichten, Definitionen und Fristen schneller finden und verstehen."
+        image={bestandsrecht}
+        imageAlt="Screenshot des Prototyps: tabellarische Übersicht exportierter Pflichten aus dem SGB XI"
+        look="blue"
+        prototypeHref={PROTOTYP_PFLICHTEN_URL.url}
+      >
+        <p>
+          Der Prototyp zur Bestandsrechtsanalyse filtert die wichtigsten
+          Informationen aus bestehenden Rechtstexten und fasst diese in einer
+          strukturierten Übersicht zusammen.
+        </p>
+        <ul>
+          <li>
+            <b>Schnellere Recherche:</b> Durchsuchung großer Datenmengen in
+            wenigen Sekunden.
+          </li>
+          <li>
+            <b>Strukturierte Übersicht:</b> Einheitliche Aufbereitung relevanter
+            Inhalte in einer Tabelle.
+          </li>
+          <li>
+            <b>Fundierte Arbeitsgrundlage:</b> Übersicht bestehender Vorgaben
+            und Gesetze als Basis für die weitere Regelungsarbeit.
+          </li>
+        </ul>
+        <p>
+          Im Rahmen einer Regelungsbegleitung hat das Zentrum für Legistik
+          bereits eine KI-basierte Bestandsrechtsanalyse durchgeführt. Weitere
+          Details finden Sie in diesem{" "}
+          <a href={BLOG_BESTANDSRECHTSANALYSE_URL.url} target="_blank">
+            Blogartikel
+          </a>
+          .
+        </p>
+      </PrototypeSection>
+
+      <PrototypeSection
+        id="optimierungspotenziale"
+        title="Optimierungspotenziale aufdecken"
+        tagline="Regelungsentwürfe anhand festgelegter Qualitätskriterien prüfen."
+        image={optimierung}
+        imageAlt="Screenshot des Prototyps: Prüfergebnisse zu einem Gesetzentwurf nach den Prinzipien des Digitalcheck"
+        look="green"
+        reversed
+        prototypeHref={PROTOTYP_POTENZIALE_URL.url}
+      >
+        <p>
+          Dieser Prototyp analysiert Regelungsentwürfe anhand der Kernprinzipien
+          moderner Gesetzgebung und entwickelt konkrete Änderungsvorschläge.
+        </p>
+        <ul>
+          <li>
+            <b>Digitaltauglichkeit:</b> Abgleich mit den{" "}
+            <a href={DIGITALCHECK_PRINZIPIEN_URL.url} target="_blank">
+              fünf Prinzipien des Digitalcheck
+            </a>{" "}
+            und weiteren Arbeitshilfen.
+          </li>
+          <li>
+            <b>Interoperabilität:</b> Untersuchung der Kompatibilität mit
+            bestehenden Systemen.
+          </li>
+          <li>
+            <b>Rechtsförmlichkeit:</b> Prüfung formaler Anforderungen anhand des
+            Handbuchs der Rechtsförmlichkeit (BMJV).
+          </li>
+        </ul>
+      </PrototypeSection>
+
+      <PrototypeSection
+        id="angrenzendes-recht"
+        title="Angrenzendes Recht sichtbar machen"
+        tagline="Zusammenhänge und Abhängigkeiten auf einen Blick erkennen."
+        image={angrenzendesRecht}
+        imageAlt="Screenshot des Prototyps: Übersicht relevanten Rechts, geordnet nach Normenhierarchie und Relevanzgrund"
+        look="gray"
+        prototypeHref={PROTOTYP_RECHT_ERKUNDEN_URL.url}
+      >
+        <p>
+          Die Änderung eines Paragrafen kann sich ungewollt auf weitere
+          Regelungen auswirken. Dieser Prototyp macht komplexe Verbindungen und
+          angrenzendes Recht sichtbar.
+        </p>
+        <ul>
+          <li>
+            <b>Schnelle Orientierung:</b> Überblick über die Gesetze, die von
+            einer Anpassung betroffen sind.
+          </li>
+          <li>
+            <b>Thematische Zusammenhänge:</b> Strukturierte Darstellung von
+            Gesetzeszusammenhängen bei der Anpassung von Sachverhalten.
+          </li>
+          <li>
+            <b>Holistische Betrachtung:</b> Frühzeitige Identifizierung
+            möglicher Auswirkungen und Widersprüche.
+          </li>
+        </ul>
+      </PrototypeSection>
+
+      <PrototypeSection
+        id="lesbarkeit"
+        title="Regelungen lesbarer machen"
+        tagline="Rechtstexte verständlicher machen."
+        image={lesbarkeit}
+        imageAlt="Screenshot des Prototyps: Rechtstext mit farbig hervorgehobenen Akteuren, Aktionen, Bedingungen und Verweisen"
+        look="violet"
+        reversed
+      >
+        <p>
+          Lange, verschachtelte Regelungen beanspruchen viel Lesezeit. Dieser
+          Prototyp analysiert Regelungstexte und bereitet sie visuell auf. Er
+          hebt die einzelnen Bestandteile hervor und strukturiert sie neu.
+        </p>
+        <ul>
+          <li>
+            <b>Syntaxhervorhebung für Rechtstexte:</b> Farbliche Hervorhebung
+            von Definitionen, Rechtsfolgen und Bedingungen.
+          </li>
+          <li>
+            <b>Automatische Neuformatierung:</b> Anpassung von Absätzen und
+            Umbrüchen für eine optimale Lesbarkeit.
+          </li>
+          <li>
+            <b>Fokus beim Redigieren:</b> Schnelleres Erfassen der wesentlichen
+            Inhalte durch visuelle Hierarchien.
+          </li>
+        </ul>
+      </PrototypeSection>
+
+      <PrototypeSection
+        id="visualisierung"
+        title="Gesetze visualisieren"
+        tagline="Prozesse und Entscheidungslogiken in Gesetzesvorhaben visualisieren."
+        image={visualisierung}
+        imageAlt="Screenshot des Prototyps: Flussdiagramm zum Anzeigeverfahren bei Massenentlassungen nach dem Kündigungsschutzgesetz"
+        look="blue"
+      >
+        <p>
+          Visualisierungen helfen, komplexe Prozesse und Entscheidungslogiken
+          besser nachzuvollziehen. Mit diesem Prototyp lassen sich neue Vorhaben
+          und bestehende Regelungen z. B. in Form von Flussdiagrammen
+          darstellen.
+        </p>
+        <ul>
+          <li>
+            <b>Schnelle Visualisierung:</b> Übersicht der Entscheidungslogiken,
+            Abläufe und Beteiligten eines Vorhabens.
+          </li>
+          <li>
+            <b>Optimierungspotenziale:</b> Chancen und mögliche Hindernisse bei
+            der Umsetzung frühzeitig erkennen.
+          </li>
+          <li>
+            <b>Grundlage für Abstimmungen:</b> Gemeinsames Verständnis bei
+            Gesprächen im Ressort oder mit Verbänden schaffen.
+          </li>
+        </ul>
+      </PrototypeSection>
+    </section>
+
+    <section id="herausforderungen">
+      <h2>Herausforderungen von KI in der Rechtsetzung</h2>
+      <p class="mb-40">
+        KI kann die Effizienz bei der Erarbeitung von Regelungen steigern.
+        Gleichzeitig gibt es kritische Punkte, die man bei der Nutzung beachten
+        sollte, damit KI-gestützte Werkzeuge einen nachhaltigen Mehrwert
+        schaffen können.
+      </p>
+      <KernAccordion>
+        <span slot="header">Ausreichende Datenqualität</span>
+        <p slot="body">
+          Irrelevante oder widersprüchliche Daten in älteren Texten erschweren
+          das KI-Training. Zudem behindern reine PDFs ohne semantische Struktur
+          (wie XML/JSON/LegalDocML) die automatisierte Analyse und die
+          Interoperabilität zwischen EU, Bund, Ländern und Kommunen.
+        </p>
+      </KernAccordion>
+      <KernAccordion>
+        <span slot="header">Wahrscheinlichkeit statt Exaktheit</span>
+        <p slot="body">
+          Recht verlangt exakte und nachvollziehbare (deterministische)
+          Ergebnisse. Moderne Sprachmodelle (LLMs) agieren jedoch
+          wahrscheinlichkeitsbasiert (stochastisch). Dies birgt das Risiko von
+          „Halluzinationen“ (Fehlinformationen).
+        </p>
+      </KernAccordion>
+      <KernAccordion>
+        <span slot="header">Hinterfragung der Ergebnisse</span>
+        <p slot="body">
+          KI liefert in wenigen Sekunden Ergebnisse, die auf den ersten Blick
+          überzeugend wirken. Das kann dazu führen, dass Nutzende diesen
+          Inhalten vertrauen und sie ohne ausreichende Prüfung übernehmen
+          („Automation Bias“). Besonders in der Rechtsetzung, wo unter hohem
+          Zeitdruck gearbeitet wird, ist es daher wichtig, KI-generierte Inhalte
+          kritisch zu hinterfragen und fachlich zu prüfen.
+        </p>
+      </KernAccordion>
+      <KernAccordion>
+        <span slot="header">Aufbau von KI-Kompetenz</span>
+        <p slot="body">
+          Ohne ein grundlegendes Verständnis für die Funktionsweise von KI
+          können Nutzerinnen und Nutzer typische Fehler nicht zuverlässig
+          erkennen. Der{" "}
+          <a href={EU_AI_ACT_URL.url} target="_blank">
+            EU AI Act
+          </a>{" "}
+          verpflichtet Unternehmen und öffentliche Behörden bereits dazu, die
+          KI-Kompetenz ihrer Mitarbeitenden z. B. durch Schulungen
+          sicherzustellen.
+        </p>
+      </KernAccordion>
+      <KernAccordion>
+        <span slot="header">Passgenauigkeit statt Einheitslösung</span>
+        <p slot="body">
+          Standard-KI-Lösungen stoßen bei komplexen Zusammenhängen und
+          fachspezifischen Themen schnell an ihre Grenzen. Maßgeschneiderte
+          Werkzeuge für spezifische Regelungsbedürfnisse sind allerdings oft mit
+          hohen Kosten verbunden. Die Nutzung von KI ist daher in vielen Fällen
+          nicht über verschiedene Rechtsgebiete und Kontexte hinweg skalierbar.
+        </p>
+      </KernAccordion>
+      <p class="mt-40">
+        Weitere Einblicke zu diesem Thema finden Sie im Blogartikel{" "}
+        <a href={BLOG_KI_IM_ZFL_URL.url} target="_blank">
+          „Wie wir KI im Zentrum für Legistik nutzen“
+        </a>
+        .
+      </p>
+    </section>
+
+    <section class="breakout bg-cosmic-blue-base text-white">
+      <h2>Möchten Sie mit uns an Lösungen arbeiten?</h2>
+      <p>
+        Das Zentrum für Legistik (ZfL) wird gemeinsam mit Ihnen
+        weiterentwickelt. Ihr Feedback hilft uns, unsere Produkte und Services
+        zu verbessern und auf Ihre Regelungsarbeit abzustimmen. Wirken Sie mit
+        und nehmen Sie an einem unserer Nutzendentests teil!
+      </p>
+      <a
+        class="kern-btn kern-btn--secondary mt-16 bg-white"
+        href={mailto(
+          ZFL_EMAIL.url,
+          "Teilnahme an Nutzendentests",
+          "Guten Tag,\n ich bin interessiert daran, an einem Nutzertest für das Zentrum für Legistik teilzunehmen. Bitte setzen Sie mich auf die Testerliste und kontaktieren mich für eine der nächsten Testrunden.\n \n Mit freundlichen Grüßen",
+        )}
+      >
+        <span class="kern-label">Jetzt mitmachen</span>
+      </a>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  @reference "@/styles/global.css";
+
+  .callouts {
+    @apply max-w-690 space-y-16;
+    & > * {
+      @apply flex items-start gap-24 rounded-sm py-16 pr-32 pl-16;
+    }
+    p {
+      @apply mb-0;
+    }
+  }
+
+  .callout-icon {
+    @apply bg-lavender-surface-highlight text-cosmic-blue-base flex size-45 shrink-0 items-center justify-center rounded-xs;
+    :global(svg) {
+      @apply size-30;
+    }
+  }
+</style>
