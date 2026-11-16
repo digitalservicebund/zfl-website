@@ -16,7 +16,7 @@ const { frontmatter } = Astro.props;
   excludeFromSearch={frontmatter.excludeFromSearch ?? false}
   pagefindWeight={frontmatter.pagefindWeight}
 >
-  <main class="breakout-grid mb-lg">
+  <main class="breakout-grid mb-lg" id="main">
     <slot />
   </main>
 </Layout>
