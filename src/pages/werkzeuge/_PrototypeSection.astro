@@ -1,0 +1,80 @@
+---
+import type { ImageMetadata } from "astro";
+import { tv, type VariantProps } from "tailwind-variants";
+import MediaText from "@/components/MediaText.astro";
+import Image from "@/components/Image.astro";
+import { ZFL_EMAIL } from "@/config/constants";
+import { mailto } from "@/utils/mailtoHelper";
+
+const tileStyles = tv({
+  base: "flex aspect-[501/478] items-center justify-center px-24",
+  variants: {
+    look: {
+      blue: "bg-darkblue-150",
+      green: "bg-green-050",
+      gray: "bg-(--kern-color-feedback-default-background)",
+      violet: "bg-violet-050",
+    },
+  },
+  defaultVariants: {
+    look: "blue",
+  },
+});
+
+interface Props extends VariantProps<typeof tileStyles> {
+  id: string;
+  title: string;
+  tagline: string;
+  image: ImageMetadata;
+  imageAlt: string;
+  reversed?: boolean;
+  prototypeHref?: string;
+}
+
+const {
+  id,
+  title,
+  tagline,
+  image,
+  imageAlt,
+  look,
+  reversed = false,
+  prototypeHref,
+} = Astro.props;
+---
+
+<div class="py-32" id={id}>
+  <MediaText reversed={reversed} split="7-5" class="md:gap-64">
+    <h3 class="kern-heading-large">{title}</h3>
+    <p>
+      <em>{tagline}</em>
+    </p>
+    <slot />
+    <div class="flex flex-wrap gap-24 pt-16">
+      <a
+        class="kern-btn kern-btn--secondary"
+        href={mailto(ZFL_EMAIL.url, `Interesse an: ${title}`)}
+      >
+        <span class="kern-label">Sprechen Sie uns an</span>
+      </a>
+      {prototypeHref && (
+        <a
+          class="kern-btn kern-btn--tertiary"
+          href={prototypeHref}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="kern-label">Zum Online-Prototypen</span>
+        </a>
+      )}
+    </div>
+    <div slot="media" class={tileStyles({ look })}>
+      <Image
+        src={image}
+        alt={imageAlt}
+        width={902}
+        class="h-auto w-full shadow-[4px_7px_30.7px_0_rgba(0,0,0,0.1)]"
+      />
+    </div>
+  </MediaText>
+</div>
