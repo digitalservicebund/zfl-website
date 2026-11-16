@@ -26,3 +26,36 @@ export const ZFL_EMAIL_SCHULUNG = {
 export const DIGITALCHECK_URL = {
   url: "https://digitalcheck.bund.de/",
 };
+
+export const DIGITALCHECK_PRINZIPIEN_URL = {
+  url: "https://digitalcheck.bund.de/prinzipien",
+};
+
+export const EU_AI_ACT_URL = {
+  url: "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R1689",
+};
+
+export const BLOG_INTERDISZIPLINAER_URL = {
+  url: "https://digitalservice.bund.de/blog/interdisziplinaer-zu-besseren-gesetzen",
+};
+
+export const BLOG_KI_IM_ZFL_URL = {
+  url: "https://digitalservice.bund.de/blog/wie-wir-ki-im-zentrum-fuer-legistik-nutzen",
+};
+
+// TODO: placeholder links from the Figma design for the KI page, replace before going live
+export const BLOG_BESTANDSRECHTSANALYSE_URL = {
+  url: "https://miro.com/app/board/uXjVH7Loygk=/?moveToWidget=3458764685781763272&cot=14",
+};
+
+export const PROTOTYP_PFLICHTEN_URL = {
+  url: "https://digitalservicebund.github.io/zfl-website/previews/prototyp/pflichten/werkzeuge/pflichten/",
+};
+
+export const PROTOTYP_POTENZIALE_URL = {
+  url: "https://digitalservicebund.github.io/zfl-website/previews/mermaid/werkzeuge/potenziale/",
+};
+
+export const PROTOTYP_RECHT_ERKUNDEN_URL = {
+  url: "https://digitalservicebund.github.io/zfl-website/previews/prototyp/rechtexplorer/werkzeuge/recht-erkunden/",
+};
