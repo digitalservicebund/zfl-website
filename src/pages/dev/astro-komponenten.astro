@@ -16,6 +16,7 @@ import MediaText from "@/components/MediaText.astro";
 import Modal from "@/components/Modal.astro";
 import PostTeaser from "@/components/PostTeaser.astro";
 import PrinzipBadge from "@/components/PrinzipBadge.astro";
+import SkipNavLink from "@/components/SkipNavLink.astro";
 import StepNumber from "@/components/StepNumber.astro";
 import TimelineList from "@/components/TimelineList.astro";
 import trainingImage from "@/images/Trainings.jpg";
@@ -36,7 +37,7 @@ export const frontmatter = {
 ---
 
 <Layout title={frontmatter.title} excludeFromSearch>
-  <main class="breakout-grid">
+  <main class="breakout-grid" id="main">
     <Hero>
       <h1>Astro Komponenten</h1>
     </Hero>
@@ -658,6 +659,21 @@ export const frontmatter = {
           <PrinzipBadge prinzip="3">Prinzip 3</PrinzipBadge>
           <PrinzipBadge prinzip="4">Prinzip 4</PrinzipBadge>
           <PrinzipBadge prinzip="5">Prinzip 5</PrinzipBadge>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── SkipNavLink ──────────────────────────────────────────────── -->
+    <section class="space-y-48">
+      <h2>SkipNavLink</h2>
+
+      <div class="space-y-32">
+        <div
+          class="relative border border-dashed p-16 rounded-sm"
+          id="skipnavlink-demo"
+        >
+          <p>Nur bei Fokus sichtbar (mit Tab in den Rahmen springen).</p>
+          <SkipNavLink label="Zum Inhalt springen" target="#skipnavlink-demo" />
         </div>
       </div>
     </section>

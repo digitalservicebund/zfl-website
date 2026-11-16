@@ -27,7 +27,7 @@ export const frontmatter = {
 ---
 
 <Layout title="">
-  <main class="breakout-grid">
+  <main class="breakout-grid" id="main">
     <Hero level="root">
       <h1 class="max-w-a11y">
         Die zentrale Anlaufstelle für bessere Rechtsetzung
@@ -116,13 +116,11 @@ export const frontmatter = {
           imageAlt="Symbolbild: Brainstorming"
         >
           <p>
-            <a
-              href="https://digitalcheck.bund.de/"
-              target="_blank"
-            >
+            <a href="https://digitalcheck.bund.de/" target="_blank">
               Neu beim Digitalcheck
             </a>
-            : Navigation und Inhalte wurden zusammen mit Legistinnen und Legisten überarbeitet und verbessert.
+            : Navigation und Inhalte wurden zusammen mit Legistinnen und
+            Legisten überarbeitet und verbessert.
           </p>
           <p>
             <a href={`${schulungen.path}#downloads`}>

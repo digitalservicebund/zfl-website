@@ -40,7 +40,7 @@ const visualisierungen = await Promise.all(
 ---
 
 <Layout title={frontmatter.title}>
-  <main x-data="visualisierungenFilter" class="breakout-grid">
+  <main x-data="visualisierungenFilter" class="breakout-grid" id="main">
     <Hero level="plain">
       <h1>{frontmatter.title}</h1>
       <p>
