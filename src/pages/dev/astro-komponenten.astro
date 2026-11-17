@@ -1,6 +1,7 @@
 ---
 import Badge from "@/components/Badge.astro";
 import Banner from "@/components/Banner.astro";
+import Callout from "@/components/Callout.astro";
 import Chart from "@/components/Chart.astro";
 import InfoPanel from "@/components/InfoPanel.astro";
 import FeatureItem from "@/components/FeatureItem.astro";
@@ -124,6 +125,45 @@ export const frontmatter = {
         </p>
         <a href="#">Mehr dazu</a>
       </Banner>
+    </section>
+
+    <!-- ─── Callout ───────────────────────────────────────────────────── -->
+    <section class="space-y-48">
+      <h2 class="mt-32">Callout</h2>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">variant: surface (default)</p>
+        <Callout>
+          <IconInfo slot="icon" aria-hidden="true" />
+          <p>Ein kurzer Hinweis mit Icon auf weißem Hintergrund.</p>
+        </Callout>
+      </div>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">variant: white</p>
+        <div class="bg-lavender-400 p-16">
+          <Callout variant="white">
+            <IconInfo slot="icon" aria-hidden="true" />
+            <p>Ein kurzer Hinweis mit Icon auf farbigem Hintergrund.</p>
+          </Callout>
+        </div>
+      </div>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">as: li (in einer Liste)</p>
+        <ul class="list-unstyled space-y-16">
+          <Callout as="li">
+            <IconCheckCircle slot="icon" aria-hidden="true" />
+            <p>Erster Hinweis in einer Liste.</p>
+          </Callout>
+          <Callout as="li">
+            <IconBuild slot="icon" aria-hidden="true" />
+            <p>
+              Zweiter Hinweis mit <a href="#">Link</a>.
+            </p>
+          </Callout>
+        </ul>
+      </div>
     </section>
 
     <!-- ─── Chart ─────────────────────────────────────────────────────── -->

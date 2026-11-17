@@ -1,0 +1,36 @@
+---
+import { tv, type VariantProps } from "tailwind-variants";
+
+export interface Props extends VariantProps<typeof calloutStyles> {
+  as?: "div" | "li";
+  class?: string;
+}
+
+const calloutStyles = tv({
+  base: "max-w-a11y flex items-start gap-24 rounded-sm p-16 pr-32",
+  variants: {
+    variant: {
+      surface: "bg-surface-default",
+      white: "bg-white",
+    },
+  },
+  defaultVariants: {
+    variant: "surface",
+  },
+});
+
+const iconStyles = tv({
+  base: "bg-lavender-surface-highlight text-cosmic-blue-base size-2xl flex shrink-0 items-center justify-center rounded-xs [&_svg]:size-30",
+});
+
+const { as: Tag = "div", variant, class: className } = Astro.props;
+---
+
+<Tag class={calloutStyles({ variant, class: className })}>
+  <span class={iconStyles()}>
+    <slot name="icon" />
+  </span>
+  <div>
+    <slot />
+  </div>
+</Tag>
