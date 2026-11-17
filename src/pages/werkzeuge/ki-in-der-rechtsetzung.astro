@@ -1,5 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import Callout from "@/components/Callout.astro";
 import Hero from "@/components/Hero.astro";
 import ImageTextOverlay from "@/components/ImageTextOverlay.astro";
 import KernAccordion from "@/components/KernAccordion.astro";
@@ -95,26 +96,22 @@ const frontmatter = {
         Das Praxisbeispiel zeigt, wie KI die Effizienz im Gesetzgebungsprozess
         steigern kann. Dabei gilt jedoch immer:
       </p>
-      <ul class="list-unstyled callouts">
-        <li class="bg-surface-default">
-          <span class="callout-icon">
-            <IconPlaylistAddCheck aria-hidden="true" />
-          </span>
+      <ul class="list-unstyled space-y-16">
+        <Callout as="li">
+          <IconPlaylistAddCheck slot="icon" aria-hidden="true" />
           <p>
             KI-Ergebnisse sind ein fachlich zu prüfender Zwischenschritt,
             niemals die fertige Lösung.
           </p>
-        </li>
-        <li class="bg-surface-default">
-          <span class="callout-icon">
-            <IconPeople aria-hidden="true" />
-          </span>
+        </Callout>
+        <Callout as="li">
+          <IconPeople slot="icon" aria-hidden="true" />
           <p>
             KI ist kein Ersatz für die Beteiligung von Betroffenen, die
             juristische Prüfung oder die Bewertung der{" "}
             <a href={werkzeuge_praxistauglichkeit.path}>Praxistauglichkeit</a>.
           </p>
-        </li>
+        </Callout>
       </ul>
       <p class="mt-32">
         <a href="#herausforderungen">
@@ -157,17 +154,13 @@ const frontmatter = {
         zeigen, wie KI-gestützte Werkzeuge die legistische Arbeit in Zukunft
         unterstützen können.
       </p>
-      <div class="callouts mb-md">
-        <div class="bg-white">
-          <span class="callout-icon">
-            <IconMessage aria-hidden="true" />
-          </span>
-          <p>
-            Sie interessieren sich für einen der Prototypen oder möchten eine
-            neue KI-Lösung mitgestalten? Sprechen Sie uns gerne an!
-          </p>
-        </div>
-      </div>
+      <Callout variant="white" class="mb-md">
+        <IconMessage slot="icon" aria-hidden="true" />
+        <p>
+          Sie interessieren sich für einen der Prototypen oder möchten eine neue
+          KI-Lösung mitgestalten? Sprechen Sie uns gerne an!
+        </p>
+      </Callout>
 
       <div class="grid grid-cols-1 gap-3xl">
         <PrototypeSection
@@ -426,24 +419,3 @@ const frontmatter = {
     </section>
   </main>
 </Layout>
-
-<style>
-  @reference "@/styles/global.css";
-
-  .callouts {
-    @apply max-w-690 space-y-16;
-    & > * {
-      @apply flex items-start gap-24 rounded-sm py-16 pr-32 pl-16;
-    }
-    p {
-      @apply mb-0;
-    }
-  }
-
-  .callout-icon {
-    @apply bg-lavender-surface-highlight text-cosmic-blue-base flex size-45 shrink-0 items-center justify-center rounded-xs;
-    :global(svg) {
-      @apply size-30;
-    }
-  }
-</style>
