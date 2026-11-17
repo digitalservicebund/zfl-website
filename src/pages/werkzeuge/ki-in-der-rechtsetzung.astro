@@ -169,167 +169,170 @@ const frontmatter = {
         </div>
       </div>
 
-      <PrototypeSection
-        id="bestandsrecht"
-        title="Bestandsrecht analysieren"
-        tagline="Pflichten, Definitionen und Fristen schneller finden und verstehen."
-        image={bestandsrecht}
-        imageAlt="Screenshot des Prototyps: tabellarische Übersicht exportierter Pflichten aus dem SGB XI"
-        look="blue"
-        prototypeHref={PROTOTYP_PFLICHTEN_URL.url}
-      >
-        <p>
-          Der Prototyp zur Bestandsrechtsanalyse filtert die wichtigsten
-          Informationen aus bestehenden Rechtstexten und fasst diese in einer
-          strukturierten Übersicht zusammen.
-        </p>
-        <ul>
-          <li>
-            <b>Schnellere Recherche:</b> Durchsuchung großer Datenmengen in
-            wenigen Sekunden.
-          </li>
-          <li>
-            <b>Strukturierte Übersicht:</b> Einheitliche Aufbereitung relevanter
-            Inhalte in einer Tabelle.
-          </li>
-          <li>
-            <b>Fundierte Arbeitsgrundlage:</b> Übersicht bestehender Vorgaben
-            und Gesetze als Basis für die weitere Regelungsarbeit.
-          </li>
-        </ul>
-        <p>
-          Im Rahmen einer Regelungsbegleitung hat das Zentrum für Legistik
-          bereits eine KI-basierte Bestandsrechtsanalyse durchgeführt. Weitere
-          Details finden Sie in diesem{" "}
-          <a href={BLOG_BESTANDSRECHTSANALYSE_URL.url} target="_blank">
-            Blogartikel
-          </a>
-          .
-        </p>
-      </PrototypeSection>
+      <div class="grid grid-cols-1 gap-3xl">
+        <PrototypeSection
+          id="bestandsrecht"
+          title="Bestandsrecht analysieren"
+          tagline="Pflichten, Definitionen und Fristen schneller finden und verstehen."
+          image={bestandsrecht}
+          imageAlt="Screenshot des Prototyps: tabellarische Übersicht exportierter Pflichten aus dem SGB XI"
+          look="blue"
+          prototypeHref={PROTOTYP_PFLICHTEN_URL.url}
+        >
+          <p>
+            Der Prototyp zur Bestandsrechtsanalyse filtert die wichtigsten
+            Informationen aus bestehenden Rechtstexten und fasst diese in einer
+            strukturierten Übersicht zusammen.
+          </p>
+          <ul>
+            <li>
+              <b>Schnellere Recherche:</b> Durchsuchung großer Datenmengen in
+              wenigen Sekunden.
+            </li>
+            <li>
+              <b>Strukturierte Übersicht:</b> Einheitliche Aufbereitung
+              relevanter Inhalte in einer Tabelle.
+            </li>
+            <li>
+              <b>Fundierte Arbeitsgrundlage:</b> Übersicht bestehender Vorgaben
+              und Gesetze als Basis für die weitere Regelungsarbeit.
+            </li>
+          </ul>
+          <p>
+            Im Rahmen einer Regelungsbegleitung hat das Zentrum für Legistik
+            bereits eine KI-basierte Bestandsrechtsanalyse durchgeführt. Weitere
+            Details finden Sie in diesem{" "}
+            <a href={BLOG_BESTANDSRECHTSANALYSE_URL.url} target="_blank">
+              Blogartikel
+            </a>
+            .
+          </p>
+        </PrototypeSection>
 
-      <PrototypeSection
-        id="optimierungspotenziale"
-        title="Optimierungspotenziale aufdecken"
-        tagline="Regelungsentwürfe anhand festgelegter Qualitätskriterien prüfen."
-        image={optimierung}
-        imageAlt="Screenshot des Prototyps: Prüfergebnisse zu einem Gesetzentwurf nach den Prinzipien des Digitalcheck"
-        look="green"
-        reversed
-        prototypeHref={PROTOTYP_POTENZIALE_URL.url}
-      >
-        <p>
-          Dieser Prototyp analysiert Regelungsentwürfe anhand der Kernprinzipien
-          moderner Gesetzgebung und entwickelt konkrete Änderungsvorschläge.
-        </p>
-        <ul>
-          <li>
-            <b>Digitaltauglichkeit:</b> Abgleich mit den{" "}
-            <a href={DIGITALCHECK_PRINZIPIEN_URL.url} target="_blank">
-              fünf Prinzipien des Digitalcheck
-            </a>{" "}
-            und weiteren Arbeitshilfen.
-          </li>
-          <li>
-            <b>Interoperabilität:</b> Untersuchung der Kompatibilität mit
-            bestehenden Systemen.
-          </li>
-          <li>
-            <b>Rechtsförmlichkeit:</b> Prüfung formaler Anforderungen anhand des
-            Handbuchs der Rechtsförmlichkeit (BMJV).
-          </li>
-        </ul>
-      </PrototypeSection>
+        <PrototypeSection
+          id="optimierungspotenziale"
+          title="Optimierungspotenziale aufdecken"
+          tagline="Regelungsentwürfe anhand festgelegter Qualitätskriterien prüfen."
+          image={optimierung}
+          imageAlt="Screenshot des Prototyps: Prüfergebnisse zu einem Gesetzentwurf nach den Prinzipien des Digitalcheck"
+          look="green"
+          reversed
+          prototypeHref={PROTOTYP_POTENZIALE_URL.url}
+        >
+          <p>
+            Dieser Prototyp analysiert Regelungsentwürfe anhand der
+            Kernprinzipien moderner Gesetzgebung und entwickelt konkrete
+            Änderungsvorschläge.
+          </p>
+          <ul>
+            <li>
+              <b>Digitaltauglichkeit:</b> Abgleich mit den{" "}
+              <a href={DIGITALCHECK_PRINZIPIEN_URL.url} target="_blank">
+                fünf Prinzipien des Digitalcheck
+              </a>{" "}
+              und weiteren Arbeitshilfen.
+            </li>
+            <li>
+              <b>Interoperabilität:</b> Untersuchung der Kompatibilität mit
+              bestehenden Systemen.
+            </li>
+            <li>
+              <b>Rechtsförmlichkeit:</b> Prüfung formaler Anforderungen anhand
+              des Handbuchs der Rechtsförmlichkeit (BMJV).
+            </li>
+          </ul>
+        </PrototypeSection>
 
-      <PrototypeSection
-        id="angrenzendes-recht"
-        title="Angrenzendes Recht sichtbar machen"
-        tagline="Zusammenhänge und Abhängigkeiten auf einen Blick erkennen."
-        image={angrenzendesRecht}
-        imageAlt="Screenshot des Prototyps: Übersicht relevanten Rechts, geordnet nach Normenhierarchie und Relevanzgrund"
-        look="gray"
-        prototypeHref={PROTOTYP_RECHT_ERKUNDEN_URL.url}
-      >
-        <p>
-          Die Änderung eines Paragrafen kann sich ungewollt auf weitere
-          Regelungen auswirken. Dieser Prototyp macht komplexe Verbindungen und
-          angrenzendes Recht sichtbar.
-        </p>
-        <ul>
-          <li>
-            <b>Schnelle Orientierung:</b> Überblick über die Gesetze, die von
-            einer Anpassung betroffen sind.
-          </li>
-          <li>
-            <b>Thematische Zusammenhänge:</b> Strukturierte Darstellung von
-            Gesetzeszusammenhängen bei der Anpassung von Sachverhalten.
-          </li>
-          <li>
-            <b>Holistische Betrachtung:</b> Frühzeitige Identifizierung
-            möglicher Auswirkungen und Widersprüche.
-          </li>
-        </ul>
-      </PrototypeSection>
+        <PrototypeSection
+          id="angrenzendes-recht"
+          title="Angrenzendes Recht sichtbar machen"
+          tagline="Zusammenhänge und Abhängigkeiten auf einen Blick erkennen."
+          image={angrenzendesRecht}
+          imageAlt="Screenshot des Prototyps: Übersicht relevanten Rechts, geordnet nach Normenhierarchie und Relevanzgrund"
+          look="gray"
+          prototypeHref={PROTOTYP_RECHT_ERKUNDEN_URL.url}
+        >
+          <p>
+            Die Änderung eines Paragrafen kann sich ungewollt auf weitere
+            Regelungen auswirken. Dieser Prototyp macht komplexe Verbindungen
+            und angrenzendes Recht sichtbar.
+          </p>
+          <ul>
+            <li>
+              <b>Schnelle Orientierung:</b> Überblick über die Gesetze, die von
+              einer Anpassung betroffen sind.
+            </li>
+            <li>
+              <b>Thematische Zusammenhänge:</b> Strukturierte Darstellung von
+              Gesetzeszusammenhängen bei der Anpassung von Sachverhalten.
+            </li>
+            <li>
+              <b>Holistische Betrachtung:</b> Frühzeitige Identifizierung
+              möglicher Auswirkungen und Widersprüche.
+            </li>
+          </ul>
+        </PrototypeSection>
 
-      <PrototypeSection
-        id="lesbarkeit"
-        title="Regelungen lesbarer machen"
-        tagline="Rechtstexte verständlicher machen."
-        image={lesbarkeit}
-        imageAlt="Screenshot des Prototyps: Rechtstext mit farbig hervorgehobenen Akteuren, Aktionen, Bedingungen und Verweisen"
-        look="violet"
-        reversed
-      >
-        <p>
-          Lange, verschachtelte Regelungen beanspruchen viel Lesezeit. Dieser
-          Prototyp analysiert Regelungstexte und bereitet sie visuell auf. Er
-          hebt die einzelnen Bestandteile hervor und strukturiert sie neu.
-        </p>
-        <ul>
-          <li>
-            <b>Syntaxhervorhebung für Rechtstexte:</b> Farbliche Hervorhebung
-            von Definitionen, Rechtsfolgen und Bedingungen.
-          </li>
-          <li>
-            <b>Automatische Neuformatierung:</b> Anpassung von Absätzen und
-            Umbrüchen für eine optimale Lesbarkeit.
-          </li>
-          <li>
-            <b>Fokus beim Redigieren:</b> Schnelleres Erfassen der wesentlichen
-            Inhalte durch visuelle Hierarchien.
-          </li>
-        </ul>
-      </PrototypeSection>
+        <PrototypeSection
+          id="lesbarkeit"
+          title="Regelungen lesbarer machen"
+          tagline="Rechtstexte verständlicher machen."
+          image={lesbarkeit}
+          imageAlt="Screenshot des Prototyps: Rechtstext mit farbig hervorgehobenen Akteuren, Aktionen, Bedingungen und Verweisen"
+          look="violet"
+          reversed
+        >
+          <p>
+            Lange, verschachtelte Regelungen beanspruchen viel Lesezeit. Dieser
+            Prototyp analysiert Regelungstexte und bereitet sie visuell auf. Er
+            hebt die einzelnen Bestandteile hervor und strukturiert sie neu.
+          </p>
+          <ul>
+            <li>
+              <b>Syntaxhervorhebung für Rechtstexte:</b> Farbliche Hervorhebung
+              von Definitionen, Rechtsfolgen und Bedingungen.
+            </li>
+            <li>
+              <b>Automatische Neuformatierung:</b> Anpassung von Absätzen und
+              Umbrüchen für eine optimale Lesbarkeit.
+            </li>
+            <li>
+              <b>Fokus beim Redigieren:</b> Schnelleres Erfassen der
+              wesentlichen Inhalte durch visuelle Hierarchien.
+            </li>
+          </ul>
+        </PrototypeSection>
 
-      <PrototypeSection
-        id="visualisierung"
-        title="Gesetze visualisieren"
-        tagline="Prozesse und Entscheidungslogiken in Gesetzesvorhaben visualisieren."
-        image={visualisierung}
-        imageAlt="Screenshot des Prototyps: Flussdiagramm zum Anzeigeverfahren bei Massenentlassungen nach dem Kündigungsschutzgesetz"
-        look="blue"
-      >
-        <p>
-          Visualisierungen helfen, komplexe Prozesse und Entscheidungslogiken
-          besser nachzuvollziehen. Mit diesem Prototyp lassen sich neue Vorhaben
-          und bestehende Regelungen z. B. in Form von Flussdiagrammen
-          darstellen.
-        </p>
-        <ul>
-          <li>
-            <b>Schnelle Visualisierung:</b> Übersicht der Entscheidungslogiken,
-            Abläufe und Beteiligten eines Vorhabens.
-          </li>
-          <li>
-            <b>Optimierungspotenziale:</b> Chancen und mögliche Hindernisse bei
-            der Umsetzung frühzeitig erkennen.
-          </li>
-          <li>
-            <b>Grundlage für Abstimmungen:</b> Gemeinsames Verständnis bei
-            Gesprächen im Ressort oder mit Verbänden schaffen.
-          </li>
-        </ul>
-      </PrototypeSection>
+        <PrototypeSection
+          id="visualisierung"
+          title="Gesetze visualisieren"
+          tagline="Prozesse und Entscheidungslogiken in Gesetzesvorhaben visualisieren."
+          image={visualisierung}
+          imageAlt="Screenshot des Prototyps: Flussdiagramm zum Anzeigeverfahren bei Massenentlassungen nach dem Kündigungsschutzgesetz"
+          look="blue"
+        >
+          <p>
+            Visualisierungen helfen, komplexe Prozesse und Entscheidungslogiken
+            besser nachzuvollziehen. Mit diesem Prototyp lassen sich neue
+            Vorhaben und bestehende Regelungen z. B. in Form von Flussdiagrammen
+            darstellen.
+          </p>
+          <ul>
+            <li>
+              <b>Schnelle Visualisierung:</b> Übersicht der
+              Entscheidungslogiken, Abläufe und Beteiligten eines Vorhabens.
+            </li>
+            <li>
+              <b>Optimierungspotenziale:</b> Chancen und mögliche Hindernisse
+              bei der Umsetzung frühzeitig erkennen.
+            </li>
+            <li>
+              <b>Grundlage für Abstimmungen:</b> Gemeinsames Verständnis bei
+              Gesprächen im Ressort oder mit Verbänden schaffen.
+            </li>
+          </ul>
+        </PrototypeSection>
+      </div>
     </section>
 
     <section id="herausforderungen">
