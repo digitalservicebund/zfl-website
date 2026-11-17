@@ -16,6 +16,7 @@ import firaSansRegularUrl from "@kern-ux/native/dist/fonts/fira-sans/FiraSans-Re
 import { SEO } from "astro-seo";
 import "@/styles/global.css";
 import SkipNavLink from "@/components/SkipNavLink.astro";
+import ogImage from "@/images/og-image.png?url";
 
 interface Props {
   title: string;
@@ -33,7 +34,7 @@ const {
 
 const siteName = "Zentrum für Legistik";
 const title = pageTitle ? `${pageTitle} — ${siteName}` : siteName;
-const SEOImage = `${Astro.url.origin}/SEO_ZfL.png`;
+const SEOImage = `${Astro.url.origin}${ogImage}`;
 const currentRoute = getRouteByPath(Astro.url.pathname);
 const [sectionRoot] = currentRoute ? getRouteChain(currentRoute) : [];
 const showSectionSidebar = !!sectionRoot && hasVisibleChildren(sectionRoot);
