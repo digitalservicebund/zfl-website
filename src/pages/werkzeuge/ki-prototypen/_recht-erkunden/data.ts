@@ -152,23 +152,23 @@ export const RELEVANCE_REASONS: {
   },
 ];
 
+export type SourceKindId = "rechtsprechung" | "literatur";
+
+// Icons per kind are mapped in DetailSidebar.astro (unplugin-icons needs static imports).
 export const SOURCE_KINDS: {
-  id: "rechtsprechung" | "literatur";
+  id: SourceKindId;
   label: string;
   badgeClass: string;
-  icon: string;
 }[] = [
   {
     id: "rechtsprechung",
     label: "Rechtsprechung",
     badgeClass: "bg-indigo-100 text-indigo-900",
-    icon: "ic:round-gavel",
   },
   {
     id: "literatur",
     label: "Literatur",
     badgeClass: "bg-amber-100 text-amber-900",
-    icon: "ic:round-menu-book",
   },
 ];
 

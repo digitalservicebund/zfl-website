@@ -1,19 +1,18 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
-import { Icon } from "astro-icon/components";
 import { tv } from "tailwind-variants";
 import fs from "node:fs";
 import path from "node:path";
+import IconClose from "~icons/ic/round-close";
+import IconErrorOutline from "~icons/ic/round-error-outline";
+import IconHourglassEmpty from "~icons/ic/round-hourglass-empty";
+import IconSearch from "~icons/ic/round-search";
 
 export const frontmatter = {
   title: "Pflichten-Export",
-  sitemap: true,
-  isStagingOnly: false,
+  sitemap: false,
 };
-
-const description =
-  "Wählen Sie Gesetze aus, prüfen Sie die daraus extrahierten Pflichten und laden Sie das Ergebnis als CSV-Datei herunter.";
 
 const OBLIGATIONS_DIR = path.join(process.cwd(), "public/data/obligations");
 const EXTRACTION_FILE_PREFIX = "Pflichten_LLM_";
@@ -114,43 +113,42 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
   styles();
 ---
 
-<Layout title={frontmatter.title} description={description}>
-  <main x-data="pflichtenExport" class="breakout-grid pb-lg">
+<Layout title={frontmatter.title} excludeFromSearch>
+  <main x-data="pflichtenExport" class="breakout-grid pb-lg" id="main">
     <Hero level="main">
       <h1>{frontmatter.title}</h1>
-      <p slot="subtitle">{description}</p>
+      <p>
+        Wählen Sie Gesetze aus, prüfen Sie die daraus extrahierten Pflichten und
+        laden Sie das Ergebnis als CSV-Datei herunter.
+      </p>
     </Hero>
 
     <div class="breakout breakout-grid bg-yellow-100 py-8">
       <p class="mb-0">
-        <strong>Hinweis:</strong> Die hier angezeigten Pflichten wurden automatisiert
-        mittels KI/LLM aus den Gesetzestexten extrahiert und wurden nicht rechtlich
-        geprüft. Dieses Werkzeug ist ein Prototyp, mit dem wir erproben, ob dieser
-        Ansatz für die Praxis einen Mehrwert bietet – die Ergebnisse können unvollständig
-        oder fehlerhaft sein und ersetzen keine juristische Prüfung.
+        <strong>Hinweis:</strong> Die hier angezeigten Pflichten wurden
+        automatisiert mittels KI/LLM aus den Gesetzestexten extrahiert und
+        wurden nicht rechtlich geprüft. Dieses Werkzeug ist ein Prototyp, mit
+        dem wir erproben, ob dieser Ansatz für die Praxis einen Mehrwert bietet
+        – die Ergebnisse können unvollständig oder fehlerhaft sein und ersetzen
+        keine juristische Prüfung.
       </p>
     </div>
 
     {/* Loading state */}
-    <section x-show="loading" x-cloak class="py-lg">
+    <div x-show="loading" x-cloak class="py-lg">
       <p class="kern-subline flex items-center gap-8">
-        <Icon name="ic:round-hourglass-empty" class="h-24 w-24" />
+        <IconHourglassEmpty class="h-24 w-24" />
         Daten werden geladen …
       </p>
-    </section>
+    </div>
 
     {/* Error state */}
-    <section x-show="!loading && error" x-cloak>
-      <div
-        class="border-lavender-400 bg-lavender-200 flex items-start gap-12 rounded-sm border p-20"
-      >
-        <Icon
-          name="ic:round-error-outline"
-          class="text-cosmic-blue-base mt-2 h-24 w-24 shrink-0"
-        />
+    <div x-show="!loading && error" x-cloak>
+      <div class="border-lavender-400 bg-lavender-200 flex items-start gap-12 rounded-sm border p-20">
+        <IconErrorOutline class="text-cosmic-blue-base mt-2 h-24 w-24 shrink-0" />
         <p class="py-0" x-text="error"></p>
       </div>
-    </section>
+    </div>
 
     {/* Step 1: law selection */}
     <section x-show="!loading && !error" x-cloak class="space-y-md">
@@ -162,19 +160,16 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
             Gesetze aus.
           </p>
         </div>
-        <span class={countBadge()} x-text="`${selectedLaws.length} ausgewählt`"
+        <span
+          class={countBadge()}
+          x-text="`${selectedLaws.length} ausgewählt`"
         ></span>
       </div>
 
       {/* Search + bulk actions */}
-      <div
-        class="flex flex-col gap-12 md:flex-row md:items-center md:justify-between"
-      >
+      <div class="flex flex-col gap-12 md:flex-row md:items-center md:justify-between">
         <div class="relative w-full md:max-w-400">
-          <Icon
-            name="ic:round-search"
-            class="text-icon-muted pointer-events-none absolute top-1/2 left-12 h-24 w-24 -translate-y-1/2"
-          />
+          <IconSearch class="text-icon-muted pointer-events-none absolute top-1/2 left-12 h-24 w-24 -translate-y-1/2" />
           <input
             class={searchInput()}
             type="search"
@@ -190,7 +185,7 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
             aria-label="Suche löschen"
             @click="lawQuery = ''"
           >
-            <Icon name="ic:round-close" class="h-24 w-24" />
+            <IconClose class="h-24 w-24" />
           </button>
         </div>
         <div class="flex gap-8">
@@ -228,7 +223,7 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
               :aria-label="`${abbrev} aus Auswahl entfernen`"
               @click="toggleLaw(abbrev)"
             >
-              <Icon name="ic:round-close" class="h-16 w-16" />
+              <IconClose class="h-16 w-16" />
             </button>
           </span>
         </template>
@@ -258,25 +253,30 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
             <span class="min-w-0">
               <span
                 class="block text-base leading-snug font-semibold"
-                x-text="lawLabel(law)"></span>
+                x-text="lawLabel(law)"
+              ></span>
               <span
                 class="text-icon-muted mt-4 block text-xs leading-snug"
-                x-text="lawDescription(law)"></span>
+                x-text="lawDescription(law)"
+              ></span>
               <span
                 x-show="isLawAnalysed(law)"
                 x-cloak
                 class={analysisBadge()}
-                x-text="lawAnalysisLabel(law)"></span>
+                x-text="lawAnalysisLabel(law)"
+              ></span>
               <span
                 x-show="isLawAnalysed(law) && lawExtractionDateLabel(law)"
                 x-cloak
                 class="text-icon-muted mt-4 block text-xs"
-                x-text="lawExtractionDateLabel(law)"></span>
+                x-text="lawExtractionDateLabel(law)"
+              ></span>
               <span
                 x-show="!isLawAnalysed(law)"
                 x-cloak
                 class="text-icon-muted mt-8 block text-xs italic"
-                x-text="lawUnanalysedLabel(law)"></span>
+                x-text="lawUnanalysedLabel(law)"
+              ></span>
             </span>
           </label>
         </template>
@@ -289,8 +289,8 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
       >
         Es werden die ersten
         <span x-text="LAW_SEARCH_RESULT_LIMIT"></span> von
-        <span x-text="matchingLaws.length"></span> Treffern angezeigt. Bitte verfeinern
-        Sie die Suche, um weitere Ergebnisse zu finden.
+        <span x-text="matchingLaws.length"></span> Treffern angezeigt. Bitte
+        verfeinern Sie die Suche, um weitere Ergebnisse zu finden.
       </p>
 
       <p x-show="!lawQuery.trim()" x-cloak class="text-icon-muted py-0 italic">
@@ -352,27 +352,34 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
             <span class="min-w-0">
               <span
                 class="block text-base leading-snug font-semibold"
-                x-text="relatedLawLabel(suggestion)"></span>
+                x-text="relatedLawLabel(suggestion)"
+              ></span>
               <span
                 class="text-icon-muted mt-4 block text-xs leading-snug"
-                x-text="relatedLawDescription(suggestion)"></span>
-              <span class={analysisBadge()} x-text="suggestion.relationLabel"
+                x-text="relatedLawDescription(suggestion)"
+              ></span>
+              <span
+                class={analysisBadge()}
+                x-text="suggestion.relationLabel"
               ></span>
               <span
                 x-show="relatedIsLawAnalysed(suggestion)"
                 x-cloak
                 class={analysisBadge()}
-                x-text="relatedLawAnalysisLabel(suggestion)"></span>
+                x-text="relatedLawAnalysisLabel(suggestion)"
+              ></span>
               <span
                 x-show="relatedIsLawAnalysed(suggestion) && relatedLawExtractionDateLabel(suggestion)"
                 x-cloak
                 class="text-icon-muted mt-4 block text-xs"
-                x-text="relatedLawExtractionDateLabel(suggestion)"></span>
+                x-text="relatedLawExtractionDateLabel(suggestion)"
+              ></span>
               <span
                 x-show="!relatedIsLawAnalysed(suggestion)"
                 x-cloak
                 class="text-icon-muted mt-8 block text-xs italic"
-                x-text="relatedLawUnanalysedLabel(suggestion)"></span>
+                x-text="relatedLawUnanalysedLabel(suggestion)"
+              ></span>
             </span>
           </label>
         </template>
@@ -389,9 +396,7 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
 
     {/* Step 3: export + preview */}
     <section x-show="!loading && !error" x-cloak class="space-y-md">
-      <div
-        class="bg-lavender-base flex flex-col gap-16 rounded-sm p-20 md:flex-row md:items-center md:justify-between md:p-24"
-      >
+      <div class="bg-lavender-base flex flex-col gap-16 rounded-sm p-20 md:flex-row md:items-center md:justify-between md:p-24">
         <div>
           <h2 class="mt-0 mb-4">3. Pflichten exportieren</h2>
           <p class="py-0" x-show="selectedLaws.length === 0">
@@ -410,12 +415,14 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
             x-show="selectedLaws.length > 0 && !loadingObligations && filteredObligations.length > 0"
             x-cloak
           >
-            <span class="font-semibold" x-text="filteredObligations.length"
+            <span
+              class="font-semibold"
+              x-text="filteredObligations.length"
             ></span>
             Pflichten aus
             <span class="font-semibold" x-text="selectedLaws.length"></span>
-            <span x-text="selectedLaws.length === 1 ? 'Gesetz' : 'Gesetzen'"
-            ></span> ausgewählt.
+            <span x-text="selectedLaws.length === 1 ? 'Gesetz' : 'Gesetzen'"></span>{" "}
+            ausgewählt.
           </p>
           <p
             class="py-0"
@@ -429,8 +436,7 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
             x-show="obligationsError"
             x-cloak
             x-text="obligationsError"
-          >
-          </p>
+          ></p>
         </div>
         <button
           class="kern-btn kern-btn--primary shrink-0"
@@ -440,7 +446,8 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
         >
           <span
             class="kern-icon kern-icon--download kern-icon--default"
-            aria-hidden="true"></span>
+            aria-hidden="true"
+          ></span>
           <span class="kern-label">CSV herunterladen</span>
         </button>
       </div>
@@ -451,9 +458,7 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
         x-cloak
       >
         <h3 class="mt-0 mb-12">Vorschau</h3>
-        <div
-          class="preview-fade border-lavender-400 overflow-x-auto rounded-sm border"
-        >
+        <div class="preview-fade border-lavender-400 overflow-x-auto rounded-sm border">
           <table class="w-full border-collapse">
             <thead>
               <tr>
@@ -469,9 +474,9 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
               >
                 <tr class="even:bg-lavender-200">
                   <template x-for="header in exportHeaders" :key="header">
-                    <td class={td()} x-bind:class="previewCellClass(header)"
-                      ><span x-text="row[header]"></span></td
-                    >
+                    <td class={td()} x-bind:class="previewCellClass(header)">
+                      <span x-text="row[header]"></span>
+                    </td>
                   </template>
                 </tr>
               </template>

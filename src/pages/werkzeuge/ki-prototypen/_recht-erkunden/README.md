@@ -27,9 +27,10 @@ _warum_ ein Gesetz relevant ist und _wo_ es in der Normenhierarchie sitzt.
 pnpm dev
 ```
 
-Dann `/werkzeuge/recht-erkunden` öffnen. Die Seite ist `isStagingOnly` und
-`sitemap: false`, erscheint also nicht in Produktion und nicht in der Suche; im
-Dev-Server ist sie sichtbar. Ein gelber Hinweis-Banner kennzeichnet sie als
+Dann `/werkzeuge/ki-prototypen/recht-erkunden` öffnen. Die Seite ist
+veröffentlicht, aber nicht im Menü verlinkt (die Elternseite `ki-prototypen` ist
+`isStagingOnly`). Mit `sitemap: false` und `excludeFromSearch` erscheint sie
+weder in Suchmaschinen noch in der Seitensuche. Ein gelber Hinweis-Banner kennzeichnet sie als
 illustrativen Prototyp mit Beispieldaten.
 
 ## Annahmen und zu prüfende Hypothesen
@@ -217,7 +218,7 @@ Prototyp manuell kuratiert.
 ## Implementierung (Überblick)
 
 ```
-src/pages/werkzeuge/
+src/pages/werkzeuge/ki-prototypen/
   recht-erkunden.astro          # Route: Layout, Hero, Hinweis-Banner
   _recht-erkunden/              # nicht geroutet (Unterstrich-Präfix)
     README.md                   # dieses Dokument

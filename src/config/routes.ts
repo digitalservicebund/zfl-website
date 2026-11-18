@@ -228,6 +228,33 @@ export const werkzeuge_digitaltauglichkeit_beispiele = {
   navLabel: "Beispiele am Gesetzestext",
 } as const;
 
+export const werkzeuge_kiPrototypen = {
+  key: "werkzeuge_kiPrototypen",
+  path: "/werkzeuge/ki-prototypen",
+  title: "KI-Prototypen",
+  parent: werkzeuge,
+  sitemap: false,
+  isStagingOnly: true,
+} as const;
+
+export const werkzeuge_kiPrototypen_pflichten = {
+  key: "werkzeuge_kiPrototypen_pflichten",
+  path: "/werkzeuge/ki-prototypen/pflichten",
+  title: "Pflichten-Export",
+  parent: werkzeuge_kiPrototypen,
+  sitemap: false,
+  isStagingOnly: false,
+} as const;
+
+export const werkzeuge_kiPrototypen_rechtErkunden = {
+  key: "werkzeuge_kiPrototypen_rechtErkunden",
+  path: "/werkzeuge/ki-prototypen/recht-erkunden",
+  title: "Recht erkunden",
+  parent: werkzeuge_kiPrototypen,
+  sitemap: false,
+  isStagingOnly: false,
+} as const;
+
 export const werkzeuge_praxistauglichkeit = {
   key: "werkzeuge_praxistauglichkeit",
   path: "/werkzeuge/praxistauglichkeit",
@@ -328,6 +355,9 @@ export const allRoutes = [
   werkzeuge_buergerzentriertheit,
   werkzeuge_digitaltauglichkeit,
   werkzeuge_digitaltauglichkeit_beispiele,
+  werkzeuge_kiPrototypen,
+  werkzeuge_kiPrototypen_pflichten,
+  werkzeuge_kiPrototypen_rechtErkunden,
   werkzeuge_praxistauglichkeit,
   werkzeuge_ressourcen,
   werkzeuge_ressourcen_flussdiagramme,

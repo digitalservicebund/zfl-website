@@ -1,5 +1,6 @@
 ---
-import { Icon } from "astro-icon/components";
+import IconRoundExpandMore from "~icons/ic/round-expand-more";
+import IconRoundOpenInNew from "~icons/ic/round-open-in-new";
 
 interface Props {
   label: string;
@@ -43,16 +44,13 @@ const titleText = title
       <p
         class="mt-0 mb-0 text-base leading-snug font-semibold"
         x-text={titleText}
-      >
-      </p>
-      {
-        summary && (
-          <p
-            class="text-icon-muted mt-2 mb-0 text-xs leading-snug"
-            x-text={summary}
-          />
-        )
-      }
+      ></p>
+      {summary && (
+        <p
+          class="text-icon-muted mt-2 mb-0 text-xs leading-snug"
+          x-text={summary}
+        />
+      )}
     </div>
     <div class="flex shrink-0 items-center gap-8">
       <button
@@ -62,28 +60,25 @@ const titleText = title
         :aria-expanded="fulltextOpen"
         aria-label="Volltext ein- oder ausblenden"
       >
-        <Icon
-          name="ic:round-expand-more"
+        <IconRoundExpandMore
           class="h-18 w-18 transition-transform"
           x-bind:class="fulltextOpen ? 'rotate-180' : ''"
         />
       </button>
-      {
-        url && (
-          <a
-            x-show={`${url} && ${url} !== '#'`}
-            x-cloak
-            href="#"
-            x-bind:href={url}
-            target="_blank"
-            rel="noopener"
-            class="text-icon-muted hover:text-cosmic-blue-base before:hidden"
-            aria-label="Quelle öffnen"
-          >
-            <Icon name="ic:round-open-in-new" class="h-18 w-18" />
-          </a>
-        )
-      }
+      {url && (
+        <a
+          x-show={`${url} && ${url} !== '#'`}
+          x-cloak
+          href="#"
+          x-bind:href={url}
+          target="_blank"
+          rel="noopener"
+          class="text-icon-muted hover:text-cosmic-blue-base before:hidden"
+          aria-label="Quelle öffnen"
+        >
+          <IconRoundOpenInNew class="h-18 w-18" />
+        </a>
+      )}
     </div>
   </div>
   <p
@@ -91,6 +86,5 @@ const titleText = title
     x-cloak
     class="text-icon-muted border-lavender-400 mt-8 border-t py-0 pt-8 text-sm whitespace-pre-line"
     x-text={fullText}
-  >
-  </p>
+  ></p>
 </div>

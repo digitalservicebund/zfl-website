@@ -135,6 +135,22 @@ fileignoreconfig:
     checksum: e4c07d0667db02b7abc581abc3a215e17c61c2187cbada87c8043cf8226578a5
   - filename: src/images/buergerzentriertheit_workshop.jpg
     checksum: a6d0551460755fb730929abaef0d7d791bc1efc87935d948e50e3b96a934d581
+  # KI-Prototypen (src/pages/werkzeuge/ki-prototypen): generated data and Alpine `:key` bindings
+  - filename: public/data/laws.json
+    checksum: 82b2af876b8427fc26fb11d0d3c7e2b34759d8c366b2691e53b1cb74e2c08813
+  - filename: public/data/obligations/Pflichten_LLM_*.csv
+    checksum: ede188ba72fa0553767a5eebcc6e033b5c5e0eb22890c00d764c3a925bd222d4
+    ignore_detectors: [filecontent] # wildcard checksums are not stable across talisman modes
+  - filename: src/pages/werkzeuge/ki-prototypen/pflichten.astro
+    allowed_patterns:
+      - ":key="
+      - referenceSortKey
+      - "key: Array"
+      - key\.push
+      - (left|right)Key
+  - filename: src/pages/werkzeuge/ki-prototypen/_recht-erkunden/Step2RechtErkunden.astro
+    allowed_patterns:
+      - ":key="
 scopeconfig:
   - scope: node
 allowed_patterns:

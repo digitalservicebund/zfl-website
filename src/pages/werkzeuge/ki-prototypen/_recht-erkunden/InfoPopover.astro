@@ -1,5 +1,5 @@
 ---
-import { Icon } from "astro-icon/components";
+import IconOutlineInfo from "~icons/ic/outline-info";
 import { tv } from "tailwind-variants";
 
 interface Props {
@@ -36,7 +36,7 @@ const { wrapper, trigger, panel } = styles();
     x-bind:aria-expanded="open"
     aria-label={label}
   >
-    <Icon name="ic:outline-info" class="h-16 w-16" />
+    <IconOutlineInfo class="h-16 w-16" />
   </button>
   <span
     x-show="open"

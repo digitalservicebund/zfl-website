@@ -9,7 +9,6 @@ import Step2RechtErkunden from "./_recht-erkunden/Step2RechtErkunden.astro";
 export const frontmatter = {
   title: "Recht erkunden",
   sitemap: false,
-  isStagingOnly: true,
 };
 
 const description =
@@ -17,19 +16,19 @@ const description =
 ---
 
 <Layout title={frontmatter.title} description={description} excludeFromSearch>
-  <main x-data="rechtErkunden" class="breakout-grid pb-lg">
+  <main x-data="rechtErkunden" class="breakout-grid pb-lg" id="main">
     <Hero level="main">
       <h1>{frontmatter.title}</h1>
-      <p slot="subtitle">{description}</p>
+      <p>{description}</p>
     </Hero>
 
     <div class="breakout breakout-grid bg-yellow-100 py-8">
       <p class="mb-0">
-        <strong>Hinweis:</strong> Dieses Werkzeug ist ein illustrativer Prototyp mit
-        erfundenen Beispieldaten. Gesetzesnamen sind real, die dargestellten Verbindungen,
-        Zitate, Volltexte und Ähnlichkeits-Werte sind jedoch frei erfunden und nicht
-        rechtlich geprüft. Es zeigt, wie eine explorative Rechtsrecherche für Gesetzesvorhaben
-        aussehen könnte.
+        <strong>Hinweis:</strong> Dieses Werkzeug ist ein illustrativer Prototyp
+        mit erfundenen Beispieldaten. Gesetzesnamen sind real, die dargestellten
+        Verbindungen, Zitate, Volltexte und Ähnlichkeits-Werte sind jedoch frei
+        erfunden und nicht rechtlich geprüft. Es zeigt, wie eine explorative
+        Rechtsrecherche für Gesetzesvorhaben aussehen könnte.
       </p>
     </div>
 

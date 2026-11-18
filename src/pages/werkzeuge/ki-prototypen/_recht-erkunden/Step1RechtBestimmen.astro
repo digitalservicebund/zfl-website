@@ -1,6 +1,8 @@
 ---
 // Renders inside the rechtErkunden Alpine scope (see ./store.ts).
-import { Icon } from "astro-icon/components";
+import IconRoundClose from "~icons/ic/round-close";
+import IconRoundInfo from "~icons/ic/round-info";
+import IconRoundSearch from "~icons/ic/round-search";
 import { LAW_AREAS } from "./data";
 import InfoPopover from "./InfoPopover.astro";
 import NormDisplay from "./NormDisplay.astro";
@@ -46,10 +48,7 @@ const {
       </div>
 
       <div class="relative w-full md:max-w-400">
-        <Icon
-          name="ic:round-search"
-          class="text-icon-muted pointer-events-none absolute top-1/2 left-12 h-24 w-24 -translate-y-1/2"
-        />
+        <IconRoundSearch class="text-icon-muted pointer-events-none absolute top-1/2 left-12 h-24 w-24 -translate-y-1/2" />
         <input
           class={searchInput()}
           type="search"
@@ -65,7 +64,7 @@ const {
           aria-label="Suche löschen"
           @click="lawQuery = ''"
         >
-          <Icon name="ic:round-close" class="h-24 w-24" />
+          <IconRoundClose class="h-24 w-24" />
         </button>
       </div>
 
@@ -79,7 +78,9 @@ const {
         <template x-for="law in matchingLaws" :key="law.id">
           <button type="button" class={lawCard()} @click="selectLaw(law.id)">
             <span class="text-base font-semibold" x-text="law.label"></span>
-            <span class="text-icon-muted text-xs leading-snug" x-text="law.name"
+            <span
+              class="text-icon-muted text-xs leading-snug"
+              x-text="law.name"
             ></span>
           </button>
         </template>
@@ -106,13 +107,11 @@ const {
           <p
             class="mb-0 text-base font-semibold"
             x-text="selectedLaw ? selectedLaw.label : ''"
-          >
-          </p>
+          ></p>
           <p
             class="text-icon-muted py-0 text-xs"
             x-text="selectedLaw ? selectedLaw.name : ''"
-          >
-          </p>
+          ></p>
         </div>
         <button
           type="button"
@@ -128,10 +127,7 @@ const {
         x-cloak
         class="border-lavender-400 bg-lavender-200 flex items-start gap-12 rounded-sm border p-20"
       >
-        <Icon
-          name="ic:round-info"
-          class="text-cosmic-blue-base mt-2 h-24 w-24 shrink-0"
-        />
+        <IconRoundInfo class="text-cosmic-blue-base mt-2 h-24 w-24 shrink-0" />
         <div>
           <p class="mt-0 mb-4">
             Für dieses Gesetz liegen noch keine Analysedaten vor.
@@ -159,9 +155,7 @@ const {
           <span>
             Diese Rechtsgebiete werden im ausgewählten Gesetz behandelt.
           </span>
-          <InfoPopover
-            label="Hinweis zur Ermittlung der Rechtsgebiete anzeigen"
-          >
+          <InfoPopover label="Hinweis zur Ermittlung der Rechtsgebiete anzeigen">
             Im vorgesehenen Verfahren würden die Rechtsgebiete automatisiert
             über Textanalyse ermittelt (z. B. Keyword-Extraktion, Clustering
             ähnlicher Normen). Hier sind sie als Beispieldaten hinterlegt.
@@ -174,22 +168,20 @@ const {
         role="group"
         aria-label="Rechtsgebiete"
       >
-        {
-          LAW_AREAS.map((area) => (
-            <button
-              type="button"
-              class={areaCard()}
-              x-bind:class={`selectedAreaId === '${area.id}' ? '${selectedItem()}' : 'border-lavender-400 bg-white hover:border-cosmic-blue-400'`}
-              x-on:click={`selectArea('${area.id}')`}
-            >
-              <span class="text-base font-semibold">{area.label}</span>
-              <span class="text-icon-muted text-xs leading-snug">
-                {area.description}
-              </span>
-              <span class={countBadge()}>{area.normIds.length} Normen</span>
-            </button>
-          ))
-        }
+        {LAW_AREAS.map((area) => (
+          <button
+            type="button"
+            class={areaCard()}
+            x-bind:class={`selectedAreaId === '${area.id}' ? '${selectedItem()}' : 'border-lavender-400 bg-white hover:border-cosmic-blue-400'`}
+            x-on:click={`selectArea('${area.id}')`}
+          >
+            <span class="text-base font-semibold">{area.label}</span>
+            <span class="text-icon-muted text-xs leading-snug">
+              {area.description}
+            </span>
+            <span class={countBadge()}>{area.normIds.length} Normen</span>
+          </button>
+        ))}
       </div>
     </div>
 
