@@ -135,7 +135,7 @@ fileignoreconfig:
     checksum: e4c07d0667db02b7abc581abc3a215e17c61c2187cbada87c8043cf8226578a5
   - filename: src/images/buergerzentriertheit_workshop.jpg
     checksum: a6d0551460755fb730929abaef0d7d791bc1efc87935d948e50e3b96a934d581
-  # KI-Prototypen (src/pages/werkzeuge/ki-prototypen): generated data and Alpine `:key` bindings
+  # KI-Prototypen (src/pages/werkzeuge/ki-prototypen): generated data and Alpine x-for bindings
   - filename: public/data/laws.json
     checksum: 82b2af876b8427fc26fb11d0d3c7e2b34759d8c366b2691e53b1cb74e2c08813
   - filename: public/data/obligations/Pflichten_LLM_*.csv
@@ -148,9 +148,16 @@ fileignoreconfig:
       - "key: Array"
       - key\.push
       - (left|right)Key
-  - filename: src/pages/werkzeuge/ki-prototypen/_recht-erkunden/Step2RechtErkunden.astro
+  - filename: src/pages/werkzeuge/ki-prototypen/_recht-erkunden/*.astro
     allowed_patterns:
       - ":key="
+  - filename: src/pages/werkzeuge/ki-prototypen/recht-erkunden.astro
+    allowed_patterns:
+      - passenden
+  - filename: src/pages/werkzeuge/ki-prototypen/_recht-erkunden-bindings.test.ts
+    allowed_patterns:
+      - storeKeys
+      - keys are locals
 scopeconfig:
   - scope: node
 allowed_patterns:
