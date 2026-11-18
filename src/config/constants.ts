@@ -43,9 +43,8 @@ export const BLOG_KI_IM_ZFL_URL = {
   url: "https://digitalservice.bund.de/blog/wie-wir-ki-im-zentrum-fuer-legistik-nutzen",
 };
 
-// TODO: placeholder links from the Figma design for the KI page, replace before going live
 export const BLOG_BESTANDSRECHTSANALYSE_URL = {
-  url: "https://miro.com/app/board/uXjVH7Loygk=/?moveToWidget=3458764685781763272&cot=14",
+  url: "https://digitalservice.bund.de/blog/interdisziplinaer-zu-besseren-gesetzen",
 };
 
 export const PROTOTYP_PFLICHTEN_URL = {
