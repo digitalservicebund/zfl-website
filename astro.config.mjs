@@ -8,12 +8,14 @@ import pagefind from "astro-pagefind";
 import { generateRoutes } from "astro-route-generator";
 import { defineConfig } from "astro/config";
 import process from "node:process";
+import { URL } from "node:url";
 import Icons from "unplugin-icons/vite";
-import { allRoutes } from "./src/config/routes.ts";
+import { isNoIndexPath } from "./src/config/seo.ts";
 
 const isPreview = process.env.PUBLIC_STAGE === "preview";
 const isDevelopment = process.env.PUBLIC_STAGE === "development";
 const PREVIEW_BASE_PATH = process.env.PREVIEW_BASE_PATH;
+const BASE_PATH = isPreview ? PREVIEW_BASE_PATH : undefined;
 
 const PRODUCTION_SITE = "https://zfl.bund.de";
 const PREVIEW_SITE = "https://digitalservicebund.github.io";
@@ -21,7 +23,7 @@ const PREVIEW_SITE = "https://digitalservicebund.github.io";
 // https://astro.build/config
 export default defineConfig({
   site: isPreview ? PREVIEW_SITE : PRODUCTION_SITE,
-  base: isPreview ? PREVIEW_BASE_PATH : undefined,
+  base: BASE_PATH,
   redirects: {
     "/anleitungen-und-hilfsmittel": "/werkzeuge",
     "/ueber/neue-fruephase": "/ueber/neue-fruehphase",
@@ -35,10 +37,7 @@ export default defineConfig({
   integrations: [
     alpinejs(),
     sitemap({
-      filter: (page) =>
-        !allRoutes.some(
-          (route) => route.isStagingOnly && page.endsWith(route.path),
-        ),
+      filter: (page) => !isNoIndexPath(new URL(page).pathname, BASE_PATH),
     }),
     mdx(),
     generateRoutes({
