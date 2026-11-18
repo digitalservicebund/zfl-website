@@ -2,16 +2,23 @@
 import FramedModal from "./_FramedModal.astro";
 import HeadlessModal from "./_HeadlessModal.astro";
 
-// Usage example:
-// <button popovertarget="my-modal">Open Modal</button>
-// <Modal id="my-modal">
-//   <p>Main content goes here (default slot).</p>
-// </Modal>
-
+/**
+ * Modal component using the HTML Popover API. It is opened by a button with a `popovertarget` matching the `id`
+ *
+ * @example
+ * <button popovertarget="info">Mehr erfahren</button>
+ * <Modal id="info"><p>Inhalt</p></Modal>
+ *
+ * <Modal id="zoom" headless ariaLabel="Bild schließen"><img ... /></Modal>
+ */
 export interface Props {
+  /** Must match the `popovertarget` of the button that opens the modal. */
   id: string;
+  /** Shows the content only without a frame. A click on the content closes the dialog. Default: `false`. */
   headless?: boolean;
+  /** Classes merged with the default style of the dialog frame. */
   contentClass?: string;
+  /** Accessible name of the close button. Default: "Hinweisfenster schließen". */
   ariaLabel?: string;
 }
 
