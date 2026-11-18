@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import type { HTMLAttributes } from "astro/types";
 import IconZoomIn from "~icons/ic/outline-zoom-in";
-import Modal from "./Modal.astro";
+import Modal from "./modal/Modal.astro";
 
 interface Props extends Omit<
   HTMLAttributes<"img">,
@@ -18,7 +18,8 @@ interface Props extends Omit<
 
 const { zoom = false, src, alt, ...attrs } = Astro.props;
 const id = crypto.randomUUID();
-const ariaLabel = "Bild in neuem Tab öffnen";
+const buttonAriaLabel = `Bild vergrößern: ${alt}`;
+const dialogAriaLabel = "Bild schließen";
 ---
 
 {zoom ? (
@@ -26,7 +27,7 @@ const ariaLabel = "Bild in neuem Tab öffnen";
     <button
       popovertarget={id}
       class="relative block cursor-zoom-in"
-      aria-label={ariaLabel}
+      aria-label={buttonAriaLabel}
     >
       <Image src={src} alt={alt} {...attrs} />
       <span
@@ -36,8 +37,8 @@ const ariaLabel = "Bild in neuem Tab öffnen";
         <IconZoomIn class="h-20 w-20" />
       </span>
     </button>
-    <Modal id={id} headless>
-      <img src={src.src} alt={alt} />
+    <Modal id={id} ariaLabel={dialogAriaLabel} headless>
+      <img src={src.src} alt={alt} loading="lazy" decoding="async" />
     </Modal>
   </>
 ) : (

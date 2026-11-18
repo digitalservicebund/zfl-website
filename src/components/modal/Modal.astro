@@ -1,0 +1,79 @@
+---
+import FramedModal from "./_FramedModal.astro";
+import HeadlessModal from "./_HeadlessModal.astro";
+
+// Usage example:
+// <button popovertarget="my-modal">Open Modal</button>
+// <Modal id="my-modal">
+//   <p>Main content goes here (default slot).</p>
+// </Modal>
+
+export interface Props {
+  id: string;
+  headless?: boolean;
+  contentClass?: string;
+  ariaLabel?: string;
+}
+
+const {
+  id,
+  headless = false,
+  contentClass,
+  ariaLabel = "Hinweisfenster schließen",
+} = Astro.props;
+---
+
+<dialog
+  id={id}
+  popover
+  class="pointer-events-none bg-transparent size-full open:flex justify-center items-center"
+>
+  {headless ? (
+    <HeadlessModal {...{ id, contentClass, ariaLabel }}>
+      <slot />
+    </HeadlessModal>
+  ) : (
+    <FramedModal {...{ id, contentClass, ariaLabel }}>
+      <slot />
+    </FramedModal>
+  )}
+</dialog>
+
+<style>
+  dialog[popover] {
+    transition:
+      display 0.2s allow-discrete,
+      overlay 0.2s allow-discrete;
+  }
+
+  dialog[popover]::backdrop {
+    opacity: 0;
+    background-color: color-mix(in oklab, var(--color-black) 20%, transparent);
+    backdrop-filter: blur(0px);
+    transition:
+      opacity 0.2s ease,
+      backdrop-filter 0.2s ease;
+  }
+
+  dialog[popover]:popover-open::backdrop {
+    opacity: 1;
+    backdrop-filter: blur(2px);
+  }
+
+  @starting-style {
+    dialog[popover]:popover-open::backdrop {
+      opacity: 0;
+      backdrop-filter: blur(0px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    dialog[popover] {
+      transition: none;
+    }
+
+    dialog[popover]::backdrop {
+      transition: none;
+    }
+  }
+</style>

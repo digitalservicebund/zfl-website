@@ -1,0 +1,63 @@
+---
+import { tv } from "tailwind-variants";
+import { type Props } from "./Modal.astro";
+
+const { id, contentClass, ariaLabel } = Astro.props;
+const styles = tv({
+  base: "modal pointer-events-auto flex cursor-zoom-out items-center justify-center",
+});
+---
+
+<button
+  popovertarget={id}
+  popovertargetaction="hide"
+  aria-label={ariaLabel}
+  class={styles({ class: contentClass })}
+>
+  <slot />
+</button>
+
+<style>
+  .modal {
+    scale: 1;
+    opacity: 0;
+    transition:
+      scale 0.16s ease-in,
+      opacity 0.16s ease-in;
+  }
+
+  :global(:popover-open) > .modal {
+    scale: 1;
+    opacity: 1;
+    transition-timing-function: ease-out;
+  }
+
+  @starting-style {
+    :global(:popover-open) > .modal {
+      scale: 0.98;
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .modal {
+      transition: none;
+    }
+  }
+
+  .modal {
+    --inset: 0px;
+    margin: var(--inset);
+  }
+
+  @media (width >= 64rem) {
+    .modal {
+      --inset: var(--spacing-sm);
+    }
+  }
+
+  .modal > :global(*) {
+    max-width: calc(100svw - 2 * var(--inset));
+    max-height: calc(100svh - 2 * var(--inset));
+  }
+</style>
