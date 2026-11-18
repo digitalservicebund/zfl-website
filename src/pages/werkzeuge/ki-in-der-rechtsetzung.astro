@@ -16,12 +16,11 @@ import {
   BLOG_KI_IM_ZFL_URL,
   DIGITALCHECK_PRINZIPIEN_URL,
   EU_AI_ACT_URL,
+  KI_NUTZENDENTEST_TEILNAHME_URL,
   PROTOTYP_PFLICHTEN_URL,
   PROTOTYP_POTENZIALE_URL,
   PROTOTYP_RECHT_ERKUNDEN_URL,
-  ZFL_EMAIL,
 } from "@/config/constants";
-import { mailto } from "@/utils/mailtoHelper";
 import IconPlaylistAddCheck from "~icons/ic/baseline-playlist-add-check";
 import IconPeople from "~icons/ic/baseline-people";
 import IconMessage from "~icons/ic/baseline-message";
@@ -408,11 +407,9 @@ const frontmatter = {
       </p>
       <a
         class="kern-btn kern-btn--secondary mt-16 bg-white max-w-fit"
-        href={mailto(
-          ZFL_EMAIL.url,
-          "Teilnahme an Nutzendentests",
-          "Guten Tag,\n ich bin interessiert daran, an einem Nutzertest für das Zentrum für Legistik teilzunehmen. Bitte setzen Sie mich auf die Testerliste und kontaktieren mich für eine der nächsten Testrunden.\n \n Mit freundlichen Grüßen",
-        )}
+        target="_blank"
+        rel="noopener noreferrer"
+        href={KI_NUTZENDENTEST_TEILNAHME_URL.url}
       >
         <span class="kern-label">Jetzt mitmachen</span>
       </a>
