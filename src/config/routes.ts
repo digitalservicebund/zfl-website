@@ -240,7 +240,7 @@ export const werkzeuge_kiPrototypen = {
 export const werkzeuge_kiPrototypen_pflichten = {
   key: "werkzeuge_kiPrototypen_pflichten",
   path: "/werkzeuge/ki-prototypen/pflichten",
-  title: "Pflichten-Export",
+  title: "Prototyp: Pflichten im Bestandsrecht analysieren",
   parent: werkzeuge_kiPrototypen,
   sitemap: false,
   isStagingOnly: false,

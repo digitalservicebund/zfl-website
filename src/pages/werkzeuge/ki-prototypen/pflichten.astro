@@ -10,7 +10,7 @@ import IconHourglassEmpty from "~icons/ic/round-hourglass-empty";
 import IconSearch from "~icons/ic/round-search";
 
 export const frontmatter = {
-  title: "Pflichten-Export",
+  title: "Prototyp: Pflichten im Bestandsrecht analysieren",
   sitemap: false,
 };
 
@@ -125,12 +125,12 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
 
     <div class="breakout breakout-grid bg-yellow-100 py-8">
       <p class="mb-0">
-        <strong>Hinweis:</strong> Die hier angezeigten Pflichten wurden
-        automatisiert mittels KI/LLM aus den Gesetzestexten extrahiert und
-        wurden nicht rechtlich geprüft. Dieses Werkzeug ist ein Prototyp, mit
-        dem wir erproben, ob dieser Ansatz für die Praxis einen Mehrwert bietet
-        – die Ergebnisse können unvollständig oder fehlerhaft sein und ersetzen
-        keine juristische Prüfung.
+        <strong>Hinweis:</strong> Dieses Werkzeug ist ein Prototyp. Wir erproben
+        damit, ob eine KI-gestützte Analyse von Bestandsrecht in der Praxis
+        hilft. Die angezeigten Pflichten wurden automatisiert mithilfe von
+        Künstlicher Intelligenz aus den Gesetzestexten extrahiert und nicht
+        rechtlich geprüft. Sie können unvollständig oder fehlerhaft sein und
+        ersetzen keine juristische Prüfung.
       </p>
     </div>
 
@@ -173,7 +173,7 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
           <input
             class={searchInput()}
             type="search"
-            placeholder="Titel oder Kürzel suchen …"
+            placeholder="z. B. HGB, SGB 5 oder Datenschutz"
             aria-label="Gesetze durchsuchen"
             x-model.debounce.500ms="lawQuery"
           />
@@ -207,6 +207,12 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
           </button>
         </div>
       </div>
+
+      <p class="text-icon-muted py-0 text-sm">
+        Pflichten liegen derzeit für <span x-text="analysedLawCount"></span>{" "}
+        Gesetze vor, u. a. aus dem Finanzmarkt-, Sozial-, Steuer- und
+        Arbeitsschutzrecht.
+      </p>
 
       {/* Selected laws as removable chips */}
       <div
@@ -962,6 +968,11 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
 
       obligationCsvUrl(stem: string) {
         return `${OBLIGATIONS_PREFIX}${encodeURIComponent(stem)}.csv`;
+      },
+
+      /** Laws with extracted obligations that can be selected. */
+      get analysedLawCount() {
+        return Object.keys(this.analysisByLaw).length;
       },
 
       isLawAnalysed(law: LawRecord) {
