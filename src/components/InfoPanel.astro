@@ -2,7 +2,8 @@
 import { tv, type VariantProps } from "tailwind-variants";
 import type { HTMLAttributes } from "astro/types";
 
-interface Props extends HTMLAttributes<"div">, VariantProps<typeof cardStyles> {
+export interface Props
+  extends HTMLAttributes<"div">, VariantProps<typeof cardStyles> {
   contentClass?: string;
   class?: string;
 }
@@ -12,9 +13,12 @@ const cardStyles = tv({
   variants: {
     padding: {
       default: "p-24 md:p-32",
+      medium: "p-32 md:p-48",
       wide: "px-lg py-md md:py-48",
+      center: "p-lg justify-center",
     },
     look: {
+      white: "white",
       gray: "bg-lavender-base",
       lavender: "bg-lavender-400",
       lightLavender: "bg-lavender-200",
@@ -38,13 +42,11 @@ const { class: className, contentClass, look, padding, ...attrs } = Astro.props;
 ---
 
 <div class={cardStyles({ look, padding, className })} {...attrs}>
-  {
-    Astro.slots.icon && (
-      <div class={iconStyle()}>
-        <slot name="icon" />
-      </div>
-    )
-  }
+  {Astro.slots.icon && (
+    <div class={iconStyle()}>
+      <slot name="icon" />
+    </div>
+  )}
   <div class={contentStyles({ class: contentClass })}>
     <slot />
   </div>

@@ -1,0 +1,24 @@
+---
+import StarIcon from "~icons/ic/baseline-star";
+import StarHalfIcon from "~icons/ic/baseline-star-half";
+import StarBorderIcon from "~icons/ic/baseline-star-border";
+
+interface Props {
+  stars: number; // 0-5
+}
+const { stars } = Astro.props;
+
+const fullStars = Math.floor(stars);
+const hasHalfStar = stars - fullStars >= 0.5;
+const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+---
+
+<p class="text-cosmic-blue-400 flex gap-4 text-3xl!">
+  {Array.from({ length: fullStars }).map(() => (
+    <StarIcon />
+  ))}
+  {hasHalfStar && <StarHalfIcon />}
+  {Array.from({ length: emptyStars }).map(() => (
+    <StarBorderIcon />
+  ))}
+</p>

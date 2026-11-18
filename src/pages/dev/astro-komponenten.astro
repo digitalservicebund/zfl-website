@@ -1,21 +1,33 @@
 ---
 import Badge from "@/components/Badge.astro";
 import Banner from "@/components/Banner.astro";
+import Chart from "@/components/Chart.astro";
 import InfoPanel from "@/components/InfoPanel.astro";
 import FeatureItem from "@/components/FeatureItem.astro";
 import FeatureSet from "@/components/FeatureSet.astro";
 import Hero from "@/components/Hero.astro";
 import HintSidebarWrapper from "@/components/HintSidebarWrapper.astro";
+import Image from "@/components/Image.astro";
+import ImageTextOverlay from "@/components/ImageTextOverlay.astro";
+import KernAccordion from "@/components/KernAccordion.astro";
 import KernBadge from "@/components/KernBadge.astro";
 import KernCard from "@/components/KernCard.astro";
 import MediaText from "@/components/MediaText.astro";
 import Modal from "@/components/Modal.astro";
 import PostTeaser from "@/components/PostTeaser.astro";
+import PrinzipBadge from "@/components/PrinzipBadge.astro";
+import SkipNavLink from "@/components/SkipNavLink.astro";
+import StepNumber from "@/components/StepNumber.astro";
 import TimelineList from "@/components/TimelineList.astro";
 import trainingImage from "@/images/Trainings.jpg";
 import Layout from "@/layouts/Layout.astro";
-import { Icon } from "astro-icon/components";
-import { Image } from "astro:assets";
+import { Image as AstroImage } from "astro:assets";
+import IconCheckCircle from "~icons/ic/outline-check-circle";
+import IconBuild from "~icons/ic/outline-build";
+import IconDevices from "~icons/ic/outline-devices";
+import IconInfo from "~icons/ic/outline-info";
+import IconWidgets from "~icons/ic/twotone-widgets";
+import { multiSeries, pieData, singleSeries } from "./_chart-data";
 
 export const frontmatter = {
   title: "Astro Komponenten",
@@ -25,7 +37,7 @@ export const frontmatter = {
 ---
 
 <Layout title={frontmatter.title} excludeFromSearch>
-  <main class="breakout-grid">
+  <main class="breakout-grid" id="main">
     <Hero>
       <h1>Astro Komponenten</h1>
     </Hero>
@@ -54,7 +66,7 @@ export const frontmatter = {
       <div class="space-y-32">
         <p class="variant-label kern-label">mit Icon-Slot</p>
         <Badge look="hint">
-          <Icon slot="icon" name="ic:outline-info" class="size-16" />
+          <IconInfo slot="icon" class="size-16" />
           Mit Icon
         </Badge>
       </div>
@@ -77,24 +89,33 @@ export const frontmatter = {
       <div class="space-y-32">
         <p class="variant-label kern-label">showIcon: false</p>
         <div class="flex flex-wrap gap-12">
-          <KernBadge variant="info" showIcon={false}>Information</KernBadge>
-          <KernBadge variant="success" showIcon={false}>Erfolg</KernBadge>
+          <KernBadge variant="info" showIcon={false}>
+            {" "}
+            Information{" "}
+          </KernBadge>
+          <KernBadge variant="success" showIcon={false}>
+            {" "}
+            Erfolg{" "}
+          </KernBadge>
         </div>
       </div>
 
       <div class="space-y-32">
         <p class="variant-label kern-label">small: true</p>
         <div class="flex flex-wrap gap-12">
-          <KernBadge variant="warning" small={true}>Warnung</KernBadge>
-          <KernBadge variant="danger" showIcon={false} small={true}
-            >Fehler</KernBadge
-          >
+          <KernBadge variant="warning" small={true}>
+            {" "}
+            Warnung{" "}
+          </KernBadge>
+          <KernBadge variant="danger" showIcon={false} small={true}>
+            Fehler
+          </KernBadge>
         </div>
       </div>
     </section>
 
     <!-- ─── Banner ────────────────────────────────────────────────────── -->
-    <section class="breakout-grid contents">
+    <section class="space-y-48 breakout-grid contents">
       <h2 class="mt-32">Banner</h2>
       <Banner>
         <p class="mb-0">
@@ -103,6 +124,58 @@ export const frontmatter = {
         </p>
         <a href="#">Mehr dazu</a>
       </Banner>
+    </section>
+
+    <!-- ─── Chart ─────────────────────────────────────────────────────── -->
+    <section class="space-y-48">
+      <h2 class="mt-32">Chart</h2>
+
+      <div class="space-y-32">
+        <h3>Eine Datenreihe</h3>
+        <div class="chart-grid">
+          <div class="space-y-16">
+            <p class="variant-label kern-label">type: column (default)</p>
+            <div class="chart-card">
+              <Chart data={singleSeries} />
+            </div>
+          </div>
+
+          <div class="space-y-16">
+            <p class="variant-label kern-label">type: column, title</p>
+            <div class="chart-card">
+              <Chart data={singleSeries} title="Diagrammtitel" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-32">
+        <h3>Mehrere Datenreihen</h3>
+        <div class="chart-grid">
+          <div class="space-y-16">
+            <p class="variant-label kern-label">type: column, title</p>
+            <div class="chart-card">
+              <Chart data={multiSeries} title="Diagrammtitel" />
+            </div>
+          </div>
+
+          <div class="space-y-16">
+            <p class="variant-label kern-label">
+              type: column, title, stack: true
+            </p>
+            <div class="chart-card">
+              <Chart data={multiSeries} stack title="Diagrammtitel" />
+            </div>
+          </div>
+
+          <div class="space-y-16">
+            <p class="variant-label kern-label">type: pie, title</p>
+            <div class="chart-card">
+              <Chart data={pieData} type="pie" title="Diagrammtitel" />
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ─── InfoPanel ────────────────────────────────────────────────── -->
@@ -121,7 +194,9 @@ export const frontmatter = {
         <p class="variant-label kern-label">look: lavender</p>
         <InfoPanel look="lavender">
           <h3>Lavendel-Karte</h3>
-          <p>Hintergrund: <code>bg-lavender-400</code>.</p>
+          <p>
+            Hintergrund: <code>bg-lavender-400</code>.
+          </p>
         </InfoPanel>
       </div>
 
@@ -129,7 +204,9 @@ export const frontmatter = {
         <p class="variant-label kern-label">look: lightLavender</p>
         <InfoPanel look="lightLavender">
           <h3>Helles Lavendel</h3>
-          <p>Hintergrund: <code>bg-lavender-200</code>.</p>
+          <p>
+            Hintergrund: <code>bg-lavender-200</code>.
+          </p>
         </InfoPanel>
       </div>
 
@@ -137,7 +214,9 @@ export const frontmatter = {
         <p class="variant-label kern-label">look: blue</p>
         <InfoPanel look="blue">
           <h3>Blaue Karte</h3>
-          <p>Hintergrund: <code>bg-cosmic-blue-base</code>, weiße Schrift.</p>
+          <p>
+            Hintergrund: <code>bg-cosmic-blue-base</code>, weiße Schrift.
+          </p>
         </InfoPanel>
       </div>
 
@@ -152,7 +231,7 @@ export const frontmatter = {
       <div class="space-y-32">
         <p class="variant-label kern-label">mit Icon-Slot</p>
         <InfoPanel>
-          <Icon name="ic:twotone-widgets" slot="icon" />
+          <IconWidgets slot="icon" />
           <h3>Karte mit Icon</h3>
           <p>
             Beim Übergeben des Icon-Slots wird links ein farbiger Ikonbereich
@@ -170,20 +249,22 @@ export const frontmatter = {
         <p class="variant-label kern-label">FeatureSet mit drei FeatureItems</p>
         <FeatureSet>
           <FeatureItem
-            icon="ic:outline-check-circle"
             title="Betroffenenzentriert"
             body="Vorhaben konsequent aus der Perspektive Betroffener entwickeln."
-          />
+          >
+            <IconCheckCircle slot="icon" class="size-full" />
+          </FeatureItem>
           <FeatureItem
-            icon="ic:outline-build"
             title="Praxistauglich"
             body="Praktische Umsetzbarkeit von Anfang an mitdenken."
-          />
+          >
+            <IconBuild slot="icon" class="size-full" />
+          </FeatureItem>
           <FeatureItem
-            icon="ic:outline-devices"
             title="Digital umsetzbar"
             body="Regelungen so gestalten, dass sie digital vollziehbar sind."
           >
+            <IconDevices slot="icon" class="size-full" />
             <a href="#">Mehr erfahren</a>
           </FeatureItem>
         </FeatureSet>
@@ -198,14 +279,12 @@ export const frontmatter = {
         <h2 class="kern-heading-x-large py-0 text-white">
           Bessere Rechtsetzung
         </h2>
-        <p slot="subtitle">
-          Root-Level-Hero mit weißem Text auf dunkelblauem Hintergrund.
-        </p>
+        <p>Root-Level-Hero mit weißem Text auf dunkelblauem Hintergrund.</p>
       </Hero>
       <p class="variant-label kern-label mt-48 mb-32">level: main</p>
       <Hero level="main">
         <h2 class="kern-heading-x-large py-0">Hauptseite</h2>
-        <p slot="subtitle">Main-Level-Hero, Lavendel-Hintergrund.</p>
+        <p>Main-Level-Hero, Lavendel-Hintergrund.</p>
       </Hero>
       <p class="variant-label kern-label mt-48 mb-32">level: sub (default)</p>
       <Hero>
@@ -224,9 +303,8 @@ export const frontmatter = {
         <button
           class="border-cosmic-blue-base text-cosmic-blue-base rounded-sm border px-16 py-8"
           @click="hintSidebarOpen = !hintSidebarOpen"
-          aria-label="Seitenleiste ein- oder ausblenden"
         >
-          Sidebar öffnen/schließen
+          Seitenleiste ein- oder ausblenden
         </button>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -275,29 +353,124 @@ export const frontmatter = {
       </div>
     </HintSidebarWrapper>
 
+    <!-- ─── Image ─────────────────────────────────────────────────────── -->
+    <section class="space-y-48">
+      <h2>Image</h2>
+
+      <div class="grid max-w-full grid-cols-1 items-start gap-24 md:grid-cols-2">
+        <div class="space-y-32">
+          <p class="variant-label kern-label">zoom: false (default)</p>
+          <Image
+            src={trainingImage}
+            alt="Schulungssituation"
+            class="w-full rounded-sm"
+          />
+        </div>
+
+        <div class="space-y-32">
+          <p class="variant-label kern-label">zoom: true</p>
+          <Image
+            src={trainingImage}
+            alt="Schulungssituation"
+            class="w-full rounded-sm"
+            zoom
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── ImageTextOverlay ──────────────────────────────────────────── -->
+    <section class="space-y-48">
+      <h2>ImageTextOverlay</h2>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">look: gray (default)</p>
+        <ImageTextOverlay image={trainingImage} imageAlt="Schulungssituation">
+          <h3>Überschrift</h3>
+          <p>
+            Ab dem Breakpoint lg überlappt das Textfeld das Bild, darunter
+            stehen beide untereinander.
+          </p>
+        </ImageTextOverlay>
+      </div>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">look: lavender, mit Link</p>
+        <ImageTextOverlay
+          image={trainingImage}
+          imageAlt="Schulungssituation"
+          look="lavender"
+          linkHref="#"
+          linkText="Mehr erfahren"
+        >
+          <h3>Überschrift</h3>
+          <p>
+            <code>linkHref</code> und <code>linkText</code> fügen einen Link mit
+            Icon hinzu (Standard-Icon: <code>arrow-forward</code>).
+          </p>
+        </ImageTextOverlay>
+      </div>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">
+          imageBorder, imageClass, icon: open-in-new
+        </p>
+        <ImageTextOverlay
+          image={trainingImage}
+          imageAlt="Schulungssituation"
+          imageBorder
+          imageClass="object-top"
+          linkHref="#"
+          linkText="Externer Link"
+          icon="open-in-new"
+        >
+          <h3>Überschrift</h3>
+          <p>
+            Mit Rahmen um das Bild, eigenem Bildausschnitt über
+            <code>imageClass</code> und anderem Link-Icon.
+          </p>
+        </ImageTextOverlay>
+      </div>
+    </section>
+
+    <!-- ─── KernAccordion ────────────────────────────────────────────── -->
+    <section class="space-y-48">
+      <h2>KernAccordion</h2>
+
+      <div class="space-y-32">
+        <div>
+          <KernAccordion>
+            <span slot="header">Überschrift 1</span>
+            <p slot="body">
+              Inhalt des Akkordeons. Er wird über den body-Slot übergeben und
+              nutzt die volle Breite.
+            </p>
+          </KernAccordion>
+          <KernAccordion>
+            <span slot="header">Überschrift 2</span>
+            <div slot="body" class="space-y-8">
+              <b>Zwischenüberschrift:</b>
+              <ul>
+                <li>Erster Listenpunkt</li>
+                <li>Zweiter Listenpunkt</li>
+              </ul>
+            </div>
+          </KernAccordion>
+        </div>
+      </div>
+    </section>
+
     <!-- ─── KernCard ──────────────────────────────────────────────────── -->
     <section class="space-y-48">
       <h2>KernCard</h2>
 
       <div class="space-y-32">
-        <p class="variant-label kern-label">
-          mit preline, subline und body (default: lavender-200)
-        </p>
+        <p class="variant-label kern-label">mit preline, subline und body</p>
         <KernCard
           title="Mit Preline und Subline"
           preline="Kategorie"
           subline="Ergänzender Untertitel"
           body="Detailbeschreibung der Karte. Hier kann längerer Erklärungstext stehen."
-        />
-      </div>
-
-      <div class="space-y-32">
-        <p class="variant-label kern-label">mit weißem Hintergrund</p>
-        <KernCard
-          title="Weiße Karte"
-          preline="Variante"
-          background="white"
-          body="Diese Variante überschreibt den Standardhintergrund mit Weiß."
         />
       </div>
 
@@ -329,7 +502,38 @@ export const frontmatter = {
           title="Karte mit Footer"
           body="Der Footer-Bereich eignet sich für Links oder Metadaten."
         >
-          <a href="#" slot="footer">Mehr erfahren →</a>
+          <a href="#" slot="footer">
+            {" "}
+            Mehr erfahren →{" "}
+          </a>
+        </KernCard>
+      </div>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">headingLevel=3 mit Icon-Slot</p>
+        <KernCard
+          title="Karte mit h3 und Icon"
+          headingLevel={3}
+          body="Für Karten unterhalb einer h2-Zwischenüberschrift."
+        >
+          <IconBuild slot="icon" class="size-40" />
+        </KernCard>
+      </div>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">mit Image-Slot</p>
+        <KernCard
+          title="Karte mit eigenem Bild"
+          body="Der image-Slot erlaubt eigenes Markup statt des image-Props."
+        >
+          <AstroImage
+            slot="image"
+            src={trainingImage}
+            alt="Schulungssituation"
+            class="h-208 object-cover"
+            width="382"
+            height="208"
+          />
         </KernCard>
       </div>
     </section>
@@ -348,7 +552,7 @@ export const frontmatter = {
               Überschriften.
             </p>
           </div>
-          <Image
+          <AstroImage
             slot="media"
             src={trainingImage}
             alt="Schulungssituation"
@@ -366,7 +570,7 @@ export const frontmatter = {
               Durch <code>reversed</code> wechseln Text und Medium die Seite.
             </p>
           </div>
-          <Image
+          <AstroImage
             slot="media"
             src={trainingImage}
             alt="Schulungssituation"
@@ -384,7 +588,7 @@ export const frontmatter = {
               Hier ist der Textbereich breiter und das Medium schmaler (4/12).
             </p>
           </div>
-          <Image
+          <AstroImage
             slot="media"
             src={trainingImage}
             alt="Schulungssituation"
@@ -444,6 +648,49 @@ export const frontmatter = {
       </div>
     </section>
 
+    <!-- ─── PrinzipBadge ─────────────────────────────────────────────── -->
+    <section class="space-y-48">
+      <h2>PrinzipBadge</h2>
+
+      <div class="space-y-32">
+        <div class="flex flex-wrap gap-12">
+          <PrinzipBadge prinzip="1">Prinzip 1</PrinzipBadge>
+          <PrinzipBadge prinzip="2">Prinzip 2</PrinzipBadge>
+          <PrinzipBadge prinzip="3">Prinzip 3</PrinzipBadge>
+          <PrinzipBadge prinzip="4">Prinzip 4</PrinzipBadge>
+          <PrinzipBadge prinzip="5">Prinzip 5</PrinzipBadge>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── SkipNavLink ──────────────────────────────────────────────── -->
+    <section class="space-y-48">
+      <h2>SkipNavLink</h2>
+
+      <div class="space-y-32">
+        <div
+          class="relative border border-dashed p-16 rounded-sm"
+          id="skipnavlink-demo"
+        >
+          <p>Nur bei Fokus sichtbar (mit Tab in den Rahmen springen).</p>
+          <SkipNavLink label="Zum Inhalt springen" target="#skipnavlink-demo" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── StepNumber ───────────────────────────────────────────────── -->
+    <section class="space-y-48">
+      <h2>StepNumber</h2>
+
+      <div class="space-y-32">
+        <div class="flex flex-wrap gap-12">
+          <StepNumber number={1} />
+          <StepNumber number={2} />
+          <StepNumber number={3} />
+        </div>
+      </div>
+    </section>
+
     <!-- ─── TimelineList ──────────────────────────────────────────────── -->
     <section class="space-y-48">
       <h2>TimelineList</h2>
@@ -472,6 +719,16 @@ export const frontmatter = {
 </Layout>
 
 <style>
+  @reference "@/styles/global.css";
+
+  .chart-grid {
+    @apply grid max-w-1000 grid-cols-1 items-start gap-24 md:grid-cols-2 lg:grid-cols-3;
+  }
+
+  .chart-card {
+    @apply bg-lavender-400 flex flex-col rounded-sm p-24 sm:p-32;
+  }
+
   .variant-label {
     &::before {
       content: "❯";

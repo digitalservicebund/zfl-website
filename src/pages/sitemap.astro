@@ -11,21 +11,19 @@ export const frontmatter = {
 ---
 
 <Layout title="Sitemap" excludeFromSearch={frontmatter.excludeFromSearch}>
-  <main class="breakout-grid">
+  <main class="breakout-grid" id="main">
     <Hero>
       <h1>Sitemap</h1>
     </Hero>
     <section>
       <ul>
-        {
-          allRoutes
-            .filter((route) => route.sitemap && !route.isStagingOnly)
-            .map((route) => (
-              <li>
-                <a href={route.path}>{route.title}</a>
-              </li>
-            ))
-        }
+        {allRoutes
+          .filter((route) => route.sitemap && !route.isStagingOnly)
+          .map((route) => (
+            <li>
+              <a href={route.path}>{route.title}</a>
+            </li>
+          ))}
       </ul>
     </section>
   </main>

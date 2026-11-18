@@ -2,6 +2,7 @@
 import Hero from "@/components/Hero.astro";
 import PostTeaser from "@/components/PostTeaser.astro";
 import Layout from "@/layouts/Layout.astro";
+import { behoerdenSpiegelJuni2026_pdf } from "@/config/downloads";
 
 export const frontmatter = {
   title: "Aktuelle Meldungen",
@@ -11,16 +12,31 @@ export const frontmatter = {
 ---
 
 <Layout title={frontmatter.title}>
-  <main class="breakout-grid">
+  <main class="breakout-grid" id="main">
     <Hero level="sub">
-      <h1>Aktuelle Meldungen</h1><div>
-        <p slot="subtitle">
-          Hier finden Sie aktuelle Meldungen und Veröffentlichungen rund um das
-          Zentrum für Legistik.
-        </p>
-      </div>
+      <h1>Aktuelle Meldungen</h1>
+      <p>
+        Hier finden Sie aktuelle Meldungen und Veröffentlichungen rund um das
+        Zentrum für Legistik.
+      </p>
     </Hero>
     <section class="max-w-a11y flew-col flex flex-col gap-32">
+      <PostTeaser
+        title="Wie wir KI im Zentrum für Legistik nutzen"
+        date="30.07.2026"
+        source="DigitalService Blog"
+        href="https://digitalservice.bund.de/blog/wie-wir-ki-im-zentrum-fuer-legistik-nutzen"
+        body="KI kann die Regelungsarbeit effizienter machen. In diesem Beitrag zeigen wir, was das Zentrum für Legistik testet, umsetzt und wo die technologischen und strukturellen Grenzen liegen."
+      />
+      <hr class="kern-divider" aria-hidden="true" />
+      <PostTeaser
+        title="Erst das Problem, dann die Lösung: Bürokratieabbau im Datenrecht"
+        date="21.07.2026"
+        source="DigitalService Blog"
+        href="https://digitalservice.bund.de/blog/erst-das-problem-dann-die-loesung-buerokratieabbau-im-datenrecht"
+        body="Das Datenrecht stellt Unternehmen und Behörden vor Herausforderungen. Gemeinsam mit dem NKR und dem Bundesministerium für Digitales und Staatsmodernisierung hat sich ein interdisziplinäres Team des Zentrum für Legistik dem Problem aus juristischer, technischer und praktischer Perspektive genähert."
+      />
+      <hr class="kern-divider" aria-hidden="true" />
       <PostTeaser
         title="Interdisziplinär zu besseren Gesetzen"
         date="04.06.2026"
@@ -33,7 +49,7 @@ export const frontmatter = {
         title="Quo Vadis, Rechtsetzung?"
         date="02.06.2026"
         source="BehördenSpiegel"
-        href="/downloads/behoerden_spiegel_juni-2026.pdf"
+        href={behoerdenSpiegelJuni2026_pdf.path}
         body="Das Zentrum für Legistik gestaltet als neue zentrale Einheit im Bundesministerium für Digitales und Staatsmodernisierung den Wandel zu einer modernen und innovativen Rechtsetzung aktiv mit. Nach sechs Monaten Modernisierungsagenda ist Zeit für eine erste Bilanz."
       />
       <hr class="kern-divider" aria-hidden="true" />

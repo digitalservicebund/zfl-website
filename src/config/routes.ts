@@ -7,8 +7,9 @@ export type Route = {
   readonly parent: Route | null;
   readonly sitemap: boolean;
   readonly isStagingOnly: boolean;
-  readonly navOrder: number | null;
-  readonly navLabel: string | null;
+  readonly navOrder?: number;
+  readonly navLabel?: string;
+  readonly navEyebrow?: string;
 };
 
 export const barrierefreiheit = {
@@ -18,8 +19,6 @@ export const barrierefreiheit = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const begleitungen = {
@@ -29,8 +28,15 @@ export const begleitungen = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
+} as const;
+
+export const bessereRechtsetzung = {
+  key: "bessereRechtsetzung",
+  path: "/bessere-rechtsetzung",
+  title: "Wie gelingt eine praxistaugliche und bürgerfreundliche Gesetzgebung?",
+  parent: null,
+  sitemap: true,
+  isStagingOnly: false,
 } as const;
 
 export const datenschutz = {
@@ -40,8 +46,6 @@ export const datenschutz = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const dev = {
@@ -51,8 +55,6 @@ export const dev = {
   parent: null,
   sitemap: false,
   isStagingOnly: true,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const dev_astroKomponenten = {
@@ -62,8 +64,6 @@ export const dev_astroKomponenten = {
   parent: dev,
   sitemap: false,
   isStagingOnly: true,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const dev_kernKomponenten = {
@@ -73,8 +73,6 @@ export const dev_kernKomponenten = {
   parent: dev,
   sitemap: false,
   isStagingOnly: true,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const home = {
@@ -84,8 +82,6 @@ export const home = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const impressum = {
@@ -95,8 +91,6 @@ export const impressum = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const kontakt = {
@@ -106,8 +100,15 @@ export const kontakt = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
+} as const;
+
+export const qualitaetskriterien = {
+  key: "qualitaetskriterien",
+  path: "/qualitaetskriterien",
+  title: "Qualitätskriterien zur Aufnahme externer Inhalte",
+  parent: null,
+  sitemap: true,
+  isStagingOnly: false,
 } as const;
 
 export const schulungen = {
@@ -117,8 +118,6 @@ export const schulungen = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const sitemap = {
@@ -128,8 +127,6 @@ export const sitemap = {
   parent: null,
   sitemap: false,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const staging = {
@@ -139,8 +136,6 @@ export const staging = {
   parent: null,
   sitemap: false,
   isStagingOnly: true,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const ueber = {
@@ -150,8 +145,6 @@ export const ueber = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const ueber_aktuelleMeldungen = {
@@ -162,7 +155,6 @@ export const ueber_aktuelleMeldungen = {
   sitemap: true,
   isStagingOnly: false,
   navOrder: 3,
-  navLabel: null,
 } as const;
 
 export const ueber_daranArbeitenWir = {
@@ -173,18 +165,16 @@ export const ueber_daranArbeitenWir = {
   sitemap: true,
   isStagingOnly: false,
   navOrder: 1,
-  navLabel: null,
 } as const;
 
-export const ueber_neueFruephase = {
-  key: "ueber_neueFruephase",
-  path: "/ueber/neue-fruephase",
+export const ueber_neueFruehphase = {
+  key: "ueber_neueFruehphase",
+  path: "/ueber/neue-fruehphase",
   title: "Die neue Frühphase",
   parent: ueber,
   sitemap: true,
   isStagingOnly: false,
   navOrder: 4,
-  navLabel: null,
 } as const;
 
 export const ueber_zahlenUndFakten = {
@@ -195,7 +185,6 @@ export const ueber_zahlenUndFakten = {
   sitemap: true,
   isStagingOnly: false,
   navOrder: 2,
-  navLabel: null,
 } as const;
 
 export const werkzeuge = {
@@ -205,19 +194,38 @@ export const werkzeuge = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
-export const werkzeuge_pflichten = {
-  key: "werkzeuge_pflichten",
-  path: "/werkzeuge/pflichten",
-  title: "Pflichten-Export",
+export const werkzeuge_buergerzentriertheit = {
+  key: "werkzeuge_buergerzentriertheit",
+  path: "/werkzeuge/buergerzentriertheit",
+  title: "Bürgerzentriertheit",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: 5,
+  navLabel: "Bürgerzentriertheit",
+} as const;
+
+export const werkzeuge_digitaltauglichkeit = {
+  key: "werkzeuge_digitaltauglichkeit",
+  path: "/werkzeuge/digitaltauglichkeit",
+  title: "Ihr Weg zur Digitaltauglichkeit",
   parent: werkzeuge,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
+  navOrder: 4,
+  navLabel: "Digitaltauglichkeit",
+} as const;
+
+export const werkzeuge_digitaltauglichkeit_beispiele = {
+  key: "werkzeuge_digitaltauglichkeit_beispiele",
+  path: "/werkzeuge/digitaltauglichkeit/beispiele",
+  title: "Beispiele für Digitaltauglichkeit im Regelungstext",
+  parent: werkzeuge_digitaltauglichkeit,
+  sitemap: true,
+  isStagingOnly: false,
+  navLabel: "Beispiele am Gesetzestext",
 } as const;
 
 export const werkzeuge_praxistauglichkeit = {
@@ -227,24 +235,79 @@ export const werkzeuge_praxistauglichkeit = {
   parent: werkzeuge,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
+  navOrder: 3,
   navLabel: "Praxistauglichkeit",
 } as const;
 
-export const werkzeuge_rechtErkunden = {
-  key: "werkzeuge_rechtErkunden",
-  path: "/werkzeuge/recht-erkunden",
-  title: "Recht erkunden",
+export const werkzeuge_ressourcen = {
+  key: "werkzeuge_ressourcen",
+  path: "/werkzeuge/ressourcen",
+  title: "Ressourcen",
   parent: werkzeuge,
-  sitemap: false,
-  isStagingOnly: true,
-  navOrder: null,
-  navLabel: null,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: 2,
+} as const;
+
+export const werkzeuge_ressourcen_flussdiagramme = {
+  key: "werkzeuge_ressourcen_flussdiagramme",
+  path: "/werkzeuge/ressourcen/flussdiagramme",
+  title: "Flussdiagramm erstellen",
+  parent: werkzeuge_ressourcen,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: 2,
+  navLabel: "Flussdiagramm",
+} as const;
+
+export const werkzeuge_ressourcen_interviewleitfaden = {
+  key: "werkzeuge_ressourcen_interviewleitfaden",
+  path: "/werkzeuge/ressourcen/interviewleitfaden",
+  title: "Akteurinnen und Akteure identifizieren und Interviews vorbereiten",
+  parent: werkzeuge_ressourcen,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: 3,
+  navLabel: "Interviewleitfaden",
+} as const;
+
+export const werkzeuge_ressourcen_itSysteme = {
+  key: "werkzeuge_ressourcen_itSysteme",
+  path: "/werkzeuge/ressourcen/it-systeme",
+  title: "IT-Systeme gemeinsam erfassen",
+  parent: werkzeuge_ressourcen,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: 4,
+  navLabel: "IT-Systeme erfassen",
+} as const;
+
+export const werkzeuge_ressourcen_technischeUmsetzbarkeit = {
+  key: "werkzeuge_ressourcen_technischeUmsetzbarkeit",
+  path: "/werkzeuge/ressourcen/technische-umsetzbarkeit",
+  title: "Technische Umsetzbarkeit sicherstellen",
+  parent: werkzeuge_ressourcen,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: 5,
+  navLabel: "Technische Umsetzbarkeit",
+} as const;
+
+export const werkzeuge_ressourcen_visualisierungen = {
+  key: "werkzeuge_ressourcen_visualisierungen",
+  path: "/werkzeuge/ressourcen/visualisierungen",
+  title: "Beispiele für Visualisierungen",
+  parent: werkzeuge_ressourcen,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: 1,
+  navLabel: "Visualisierungen",
 } as const;
 
 export const allRoutes = [
   barrierefreiheit,
   begleitungen,
+  bessereRechtsetzung,
   datenschutz,
   dev,
   dev_astroKomponenten,
@@ -252,16 +315,24 @@ export const allRoutes = [
   home,
   impressum,
   kontakt,
+  qualitaetskriterien,
   schulungen,
   sitemap,
   staging,
   ueber,
   ueber_aktuelleMeldungen,
   ueber_daranArbeitenWir,
-  ueber_neueFruephase,
+  ueber_neueFruehphase,
   ueber_zahlenUndFakten,
   werkzeuge,
-  werkzeuge_pflichten,
+  werkzeuge_buergerzentriertheit,
+  werkzeuge_digitaltauglichkeit,
+  werkzeuge_digitaltauglichkeit_beispiele,
   werkzeuge_praxistauglichkeit,
-  werkzeuge_rechtErkunden,
+  werkzeuge_ressourcen,
+  werkzeuge_ressourcen_flussdiagramme,
+  werkzeuge_ressourcen_interviewleitfaden,
+  werkzeuge_ressourcen_itSysteme,
+  werkzeuge_ressourcen_technischeUmsetzbarkeit,
+  werkzeuge_ressourcen_visualisierungen,
 ] as const;

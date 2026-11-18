@@ -2,6 +2,7 @@ import { allRoutes, staging } from "@/config/routes";
 import { isStaging } from "@/config/stage";
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
+import { waitForHydration } from "./utils/waitForHydration";
 
 test.describe("a11y", () => {
   const relevantRoutes = allRoutes
@@ -12,6 +13,7 @@ test.describe("a11y", () => {
       page,
     }) => {
       await page.goto(route.path);
+      await waitForHydration(page);
 
       const accessibilityScanResults = await new AxeBuilder({
         page,

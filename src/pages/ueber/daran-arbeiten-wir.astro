@@ -3,18 +3,23 @@ import Badge from "@/components/Badge.astro";
 import Hero from "@/components/Hero.astro";
 import KernCard from "@/components/KernCard.astro";
 import TimelineList from "@/components/TimelineList.astro";
+import Metadata from "./_Metadata.astro";
 import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import {
   begleitungen,
+  bessereRechtsetzung,
   home,
   kontakt,
+  qualitaetskriterien,
   schulungen,
   ueber,
   ueber_aktuelleMeldungen,
   ueber_daranArbeitenWir,
-  ueber_neueFruephase,
+  ueber_neueFruehphase,
+  ueber_zahlenUndFakten,
   werkzeuge,
   werkzeuge_praxistauglichkeit,
+  werkzeuge_ressourcen,
 } from "@/config/routes";
 import Layout from "@/layouts/Layout.astro";
 
@@ -26,90 +31,115 @@ export const frontmatter = {
 ---
 
 <Layout title={frontmatter.title}>
-  <main class="breakout-grid">
+  <main class="breakout-grid" id="main">
     <Hero level="sub">
       <h1>{frontmatter.title}</h1>
-      <div slot="subtitle">
+      <p>
         Hier halten wir Sie über aktuelle Arbeitspakete und neue Inhalte auf dem
         Laufenden.
-      </div>
+      </p>
+      <Metadata lastUpdate="5. Oktober 2026" nextUpdate="Januar 2027" />
     </Hero>
 
-    <section class="breakout breakout-grid">
-      <h2>Aktuelle Arbeitspakete im dritten Quartal 2026</h2>
+    <section>
+      <h2>Aktuelle Arbeitspakete im vierten Quartal 2026</h2>
       <p>
         Das Angebot des Zentrum für Legistik, zu dem auch der Digitalcheck
         gehört, entwickelt sich kontinuierlich weiter. Wir fokussieren uns
         gerade auf diese Schwerpunktthemen:
       </p>
 
-      <div class="mt-md gap-lg grid grid-cols-1 md:grid-cols-2">
-        <KernCard title="Frühphase erfahrbar machen">
-          <p class="kern-body--muted">
-            Die Frühphase eines gesetzlichen Vorhabens entscheidet oft darüber,
-            wie gut eine Regelung später funktioniert.
-          </p>
-          <p class="kern-body--muted">
-            Gemeinsam mit Legistinnen und Legisten entwickeln wir ein neues
-            {" "}<a href={ueber_neueFruephase.path} class="font-bold"
-              >Konzept der Frühphase</a
-            >. Dabei starten wir mit einer prozessualen Übersicht, die dabei
-            hilft, eine Regelung anhand einer klaren Struktur inhaltlich zu
-            durchdenken.
-          </p>
-        </KernCard>
-
-        <KernCard title="Digitalcheck weiterentwickeln">
-          <p class="kern-body--muted">
-            Der <a href="https://digitalcheck.bund.de/" class="font-bold"
-              >Digitalcheck</a
-            > wird gemäß der föderalen Modernisierungsagenda auch für die Länder ein
-            verlässliches, gut auffindbares Angebot. <strong
-              >Kooperationen zwischen Bund und Ländern</strong
-            > werden gestärkt.
-          </p>
-          <p class="kern-body--muted">
-            Methoden und Beispiele ziehen Schritt für Schritt auf das Zentrum
-            für Legistik um, Inhalte werden in Bezug auf Nutzen und Einfachheit
-            verbessert. Landes-Legistinnen und -Legisten können die Inhalte
-            nutzen. Dabei setzen wir auch die <a
-              href="https://dachmarke.gov.de/"
-              class="font-bold">Dachmarke</a
-            > um, für die bessere Erkennbarkeit staatlicher Angebote für Bund, Ländern
-            und Kommunen.
+      <div class="mt-md grid grid-cols-1 gap-32 md:grid-cols-2 xl:grid-cols-3">
+        <KernCard
+          title="Einstieg in die Frühphase von Gesetzgebungsverfahren erleichtern"
+          headingLevel={3}
+        >
+          <div slot="pre-header" class="mb-8">
+            <span class="kern-badge kern-badge--small kern-badge--warning">
+              <span class="kern-label">In Arbeit</span>
+            </span>
+          </div>
+          <p>
+            Wir vereinfachen den Start in die Ausarbeitung neuer Regelungen
+            deutlich. Dafür stellen wir ein Werkzeug bereit, welches bestehende
+            Inhalte als Visualisierungen darstellt und Methoden liefert, mit
+            diesen weiterzuarbeiten.
           </p>
         </KernCard>
 
         <KernCard
-          title="Kompetenzrahmen für Legistinnen und Legisten entwickeln"
+          title="Informationszugang auf der Webseite verbessern"
+          headingLevel={3}
         >
-          <p class="kern-body--muted">
-            Was ist Legistik, was macht wirkungsorientierte Gesetzgebungsarbeit
-            aus – und welche <strong>Kompetenzen</strong> braucht es dafür?
+          <div slot="pre-header" class="mb-8">
+            <span class="kern-badge kern-badge--small kern-badge--warning">
+              <span class="kern-label">In Arbeit</span>
+            </span>
+          </div>
+          <p>
+            Wir gestalten die Webseite übersichtlicher, damit Legistinnen und
+            Legisten benötigte Informationen und Werkzeuge schneller finden.
+            Dafür schauen wir uns an, wann und wie sie die Plattform im
+            Arbeitsalltag nutzen. Auf dieser Basis bauen wir eine neue, klare
+            Ordnung auf.
           </p>
-          <p class="kern-body--muted">
-            Gemeinsam mit Expertinnen und Experten erarbeiten wir einen
-            Kompetenzrahmen, der zeigt, welches Wissen und welche Fähigkeiten in
-            der Praxis zählen. Der Rahmen versteht sich als <strong
-              >Orientierung, nicht als starre Vorgabe</strong
-            >. Er wächst als lebendes Modell mit– auch als fachliche und
-            strukturelle Grundlage für das zukünftige Schulungscurriculum.
+        </KernCard>
+
+        <KernCard
+          title="Methodisches und inhaltliches Fachwissen für Legisten und Legistinnen steigern"
+          headingLevel={3}
+        >
+          <div slot="pre-header" class="mb-8">
+            <span class="kern-badge kern-badge--small kern-badge--warning">
+              <span class="kern-label">In Arbeit</span>
+            </span>
+          </div>
+          <p>
+            Wir sammeln und beschreiben die benötigten Fähigkeiten für die
+            Regelungsarbeit und machen diese transparent zugänglich. Dies dient
+            als Struktur für das interne und externe Schulungsangebot rund um
+            das Erarbeiten von Regelungen. Dabei testen wir digitale
+            Möglichkeiten, um die Inhalte für mehr Personen zugänglich zu
+            machen.
           </p>
         </KernCard>
       </div>
+    </section>
+
+    <section>
       <h2>Ergänzende Themen</h2>
       <ul>
         <li>
-          <strong>Konsolidierung von Instrumenten (Konzeption):</strong> Durch Zusammenführung
-          verschiedener Checks wird die Regelungsarbeit vereinfacht.
+          <strong>Übergabe von Informationen an die E-Gesetzgebung:</strong>{" "}
+          Gemeinsam mit dem Team der E-Gesetzgebung wird ein Übergabestandard
+          erarbeitet, der einen direkten Übergang von Frühphase zum Schreiben in
+          der E-Gesetzgebung ermöglicht.
         </li>
         <li>
-          <a href={schulungen.path} class="font-bold">Schulungen:</a> Kontinuierliche
-          Erweiterung des Schulungsangebot – online und in Präsenzformaten
+          <strong>Länder-Kooperationen:</strong> Der{" "}
+          <a href="https://digitalcheck.bund.de" target="_blank">
+            Digitalcheck
+          </a>{" "}
+          wird gemäß der föderalen Modernisierungsagenda auch für die Länder ein
+          verlässliches, gut auffindbares Angebot. Kooperationen zwischen Bund
+          und Ländern werden gestärkt.
         </li>
         <li>
-          <a href={begleitungen.path} class="font-bold">Regelungsbegleitung:</a> Laufende
-          Unterstützung von Referaten bei ausgewählten Vorhaben
+          <strong>Roadshow Zentrum für Legistik:</strong>{" "}
+          Informationsveranstaltungen in den einzelnen Ressorts zu den Angeboten
+          und Mitwirkungsmöglichkeiten des Zentrum für Legistik zur Steigerung
+          der Bekanntheit und Nutzung.
+        </li>
+        <li>
+          <a href={begleitungen.path} class="font-bold">
+            Regelungsbegleitung:
+          </a>{" "}
+          Laufende Unterstützung von Referaten bei ausgewählten Vorhaben.
+        </li>
+        <li>
+          <strong>Konsolidierung von Instrumenten (Konzeption):</strong> Durch
+          Zusammenführung verschiedener Checks wird die Regelungsarbeit
+          vereinfacht.
         </li>
       </ul>
     </section>
@@ -128,118 +158,194 @@ export const frontmatter = {
         überschaubar und wird vorab mit Ihnen abgestimmt.
       </p>
       <strong>
-        Kontaktieren Sie uns zu diesem Zweck unter <a href={ZFL_PHONE.url}
-          >{ZFL_PHONE.display}</a
-        > oder <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>.
+        Kontaktieren Sie uns zu diesem Zweck unter{" "}
+        <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a> oder{" "}
+        <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>.
       </strong>
     </section>
 
     <section>
       <h2 class="mb-40">Neuerungen auf der Webseite</h2>
-      <TimelineList>
+      <TimelineList variant="changelog" class="[&_h3]:mt-16">
+        <li class="timeline-year-item">
+          <Badge look="timelineYear">2026</Badge>
+        </li>
         <li>
-          <Badge look="gray">Juli 2026</Badge>
+          <Badge look="timeline">Oktober 2026</Badge>
+          <h3>Qualitätskriterien</h3>
           <ul>
             <li>
-              Neue Seite ergänzt: Vorhaben praxistauglich gestalten
-              <a href={werkzeuge_praxistauglichkeit.path} class="block"
-                >Hier ansehen</a
-              >
+              Neue Seite ergänzt: Qualitätskriterien zur Aufnahme externer
+              Inhalte
+              <a href={`${qualitaetskriterien.path}`} class="block">
+                Hier ansehen
+              </a>
             </li>
           </ul>
         </li>
         <li>
-          <Badge look="gray">Juni 2026</Badge>
+          <Badge look="timeline">September 2026</Badge>
+          <h3>Schulungsmaterialien und Zahlen und Fakten</h3>
+          <ul>
+            <li>
+              Schulungen: Unterlagen zum Herunterladen ergänzt
+              <a href={`${schulungen.path}#downloads`} class="block">
+                Hier ansehen
+              </a>
+            </li>
+            <li>
+              Zahlen und Fakten: Kennzahlen und Visualisierungen ergänzt
+              <a href={ueber_zahlenUndFakten.path} class="block">
+                Hier ansehen
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <Badge look="timeline">August 2026</Badge>
+          <h3>Neue Informationen zur Frühphase und Leitfäden</h3>
+          <ul>
+            <li>
+              Seiten vom Digitalcheck umgezogen: Methoden und Leitfäden
+              <a href={werkzeuge_ressourcen.path} class="block">
+                Hier ansehen
+              </a>
+            </li>
+            <li>
+              Neue Seite ergänzt: Scrollbare Darstellung des
+              Gesetzgebungsprozesses
+              <a href={bessereRechtsetzung.path} class="block">
+                Hier ansehen
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <Badge look="timeline">Juli 2026</Badge>
+          <h3>Inhalte zur Praxistauglichkeit ergänzt</h3>
+          <ul>
+            <li>
+              Neue Seite ergänzt: Vorhaben praxistauglich gestalten
+              <a href={werkzeuge_praxistauglichkeit.path} class="block">
+                Hier ansehen
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <Badge look="timeline">Juni 2026</Badge>
+          <h3>Volltextsuche und erste Informationen zur Frühphase</h3>
           <ul>
             <li>Neue Funktion: Volltextsuche</li>
             <li>
               Neue Seite ergänzt: Die neue Frühphase
-              <a href={ueber_neueFruephase.path} class="block">Hier ansehen</a>
+              <a href={ueber_neueFruehphase.path} class="block">
+                Hier ansehen
+              </a>
             </li>
           </ul>
         </li>
         <li>
-          <Badge look="gray">Mai 2026</Badge>
+          <Badge look="timeline">Mai 2026</Badge>
+          <h3>Neue Bereiche für Kontakt und News</h3>
           <ul>
             <li>
               Startseite: Aktuelles und Newsletter ergänzt, Einstieg in
               Website-Bereiche vereinfacht
-              <a href={home.path} class="block">Hier ansehen</a>
+              <a href={home.path} class="block">
+                {" "}
+                Hier ansehen{" "}
+              </a>
             </li>
             <li>
               Werkzeuge Seite: Inhalte erweitert, Sortierung und Filter ergänzt
-              <a href={werkzeuge.path} class="block">Hier ansehen</a>
+              <a href={werkzeuge.path} class="block">
+                {" "}
+                Hier ansehen{" "}
+              </a>
             </li>
             <li>
               Daran arbeiten wir: Umsetzungsstand bei aktuellen Arbeitspaketen
               ergänzt
-              <a href={ueber_daranArbeitenWir.path} class="block"
-                >Hier ansehen</a
-              >
+              <a href={ueber_daranArbeitenWir.path} class="block">
+                Hier ansehen
+              </a>
             </li>
           </ul>
         </li>
-
         <li>
-          <Badge look="gray">April 2026</Badge>
+          <Badge look="timeline">April 2026</Badge>
+          <h3>Neue Bereiche für Kontakt und News</h3>
           <ul>
             <li>
               Neue Seite ergänzt: Kontakt
-              <a href={kontakt.path} class="block">Hier ansehen</a>
+              <a href={kontakt.path} class="block">
+                {" "}
+                Hier ansehen{" "}
+              </a>
             </li>
             <li>
               Neue Seite ergänzt: Aktuelle Meldungen
-              <a href={ueber_aktuelleMeldungen.path} class="block"
-                >Hier ansehen</a
-              >
+              <a href={ueber_aktuelleMeldungen.path} class="block">
+                Hier ansehen
+              </a>
             </li>
             <li>
               Über Uns: Unter-Navigation ergänzt
-              <a href={ueber.path} class="block">Hier ansehen</a>
+              <a href={ueber.path} class="block">
+                {" "}
+                Hier ansehen{" "}
+              </a>
             </li>
             <li>
               Neuer Bereich ergänzt: Über Uns
-              <a href={ueber.path} class="block">Hier ansehen</a>
+              <a href={ueber.path} class="block">
+                {" "}
+                Hier ansehen{" "}
+              </a>
             </li>
           </ul>
         </li>
-
         <li>
-          <Badge look="gray">März 2026</Badge>
+          <Badge look="timeline">März 2026</Badge>
+          <h3>Neues Design der Website</h3>
           <ul>
             <li>
-              Seitendesign: Umstellung auf den <a
-                href="https://www.kern-ux.de/"
-                target="_blank">KERN-UX-Standard</a
-              >
+              Seitendesign: Umstellung auf den{" "}
+              <a href="https://www.kern-ux.de/" target="_blank">
+                KERN-UX-Standard
+              </a>
             </li>
           </ul>
         </li>
-
         <li>
-          <Badge look="gray">Februar 2026</Badge>
+          <Badge look="timeline">Februar 2026</Badge>
+          <h3>Erweiterung der Service- und Schulungsangebote</h3>
           <ul>
             <li>
               Regelungsbegleitungen: Tabelle mit Service-Paketen ergänzt
-              <a href={`${begleitungen.path}#leistungspakete`} class="block"
-                >Hier ansehen</a
-              >
+              <a href={`${begleitungen.path}#leistungspakete`} class="block">
+                Hier ansehen
+              </a>
             </li>
             <li>
               Schulungen: Hinweise zu externen Angeboten ergänzt
-              <a href={`${schulungen.path}#schulungen-weitere`} class="block"
-                >Hier ansehen</a
-              >
+              <a href={`${schulungen.path}#schulungen-weitere`} class="block">
+                Hier ansehen
+              </a>
             </li>
             <li>
               Neue Seite ergänzt: Anleitungen und Hilfsmittel
-              <a href={werkzeuge.path} class="block">Hier ansehen</a>
+              <a href={werkzeuge.path} class="block">
+                {" "}
+                Hier ansehen{" "}
+              </a>
             </li>
           </ul>
         </li>
-
         <li>
-          <Badge look="gray">Januar 2026</Badge>
+          <Badge look="timeline">Januar 2026</Badge>
+          <h3>Website Launch</h3>
           <ul>
             <li>
               Launch der Website des Zentrum für Legistik am 5.&nbsp;Januar 2026

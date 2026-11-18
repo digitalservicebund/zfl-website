@@ -8,7 +8,11 @@ import gesetzentwurfImg from "./gesetzentwurf.png";
 import Layout from "@/layouts/Layout.astro";
 import { Image } from "astro:assets";
 import { ZFL_EMAIL_REGBEG, ZFL_PHONE_REGBEG } from "@/config/constants";
-import { Icon } from "astro-icon/components";
+import IconArrowDownward from "~icons/ic/baseline-arrow-downward";
+import IconAccountTree from "~icons/ic/twotone-account-tree";
+import IconHub from "~icons/ic/twotone-hub";
+import IconLightbulb from "~icons/ic/twotone-lightbulb";
+import praxisbeispielVisImg from "@/content/visualisierungen/gesamtprozess-ueber-gesetz-und-verordnungen.jpg?url";
 
 export const frontmatter = {
   title: "Regelungsbegleitung",
@@ -20,28 +24,25 @@ const description =
 ---
 
 <Layout title={frontmatter.title} description={description}>
-  <main class="breakout-grid">
+  <main class="breakout-grid" id="main">
     <Hero level="main" class="overflow-clip">
       <div class="items-center gap-32 md:flex">
         <div>
           <h1>Regelungsbegleitung</h1>
-          <h2 class="kern-heading-medium mb-24">
+          <p class="kern-subline kern-subline--large">
             Individuelle Unterstützung für Ihr Vorhaben nutzen
-          </h2>
+          </p>
           <p>
             Ein in Gesetzgebungspraxis erfahrenes interdisziplinäres Team
             unterstützt Sie dabei, die Regelung praxisnah, digitaltauglich und
-            bürokratiearm zu gestalten.<br />
-            Vertraulich und mit individuellem Fokus auf Ihr Vorhaben stehen Ihnen
-            während der Begleitung Kompetenzen in Design, Nutzerforschung, IT, Produkt-
-            und Prozessmanagement direkt zur Verfügung.
+            bürokratiearm zu gestalten.
+            <br />
+            Vertraulich und mit individuellem Fokus auf Ihr Vorhaben stehen
+            Ihnen während der Begleitung Kompetenzen in Design, Nutzerforschung,
+            IT, Produkt- und Prozessmanagement direkt zur Verfügung.
           </p>
           <a class="kern-btn kern-btn--primary mt-32" href="#leistungspakete">
-            <Icon
-              name="ic:baseline-arrow-downward"
-              class="kern-label"
-              aria-hidden
-            />
+            <IconArrowDownward class="kern-label" aria-hidden />
             <span class="kern-label">Leistungspakete anzeigen</span>
           </a>
         </div>
@@ -65,126 +66,134 @@ const description =
 
       <FeatureSet>
         <FeatureItem
-          icon="ic:twotone-account-tree"
           title="Sachverhalte visualisieren"
           body="Komplexe Sachverhalte durch Prozess-Visualisierungen strukturieren, interne und externe Abstimmung vereinfachen"
-        />
+        >
+          <IconAccountTree slot="icon" class="size-full" />
+        </FeatureItem>
         <FeatureItem
-          icon="ic:twotone-lightbulb"
           title="Umsetzung mitdenken"
           body="Betroffenen-Perspektive frühzeitig identifizieren, bestehende Umsetzungshürden beheben"
-        />
+        >
+          <IconLightbulb slot="icon" class="size-full" />
+        </FeatureItem>
         <FeatureItem
-          icon="ic:twotone-hub"
           title="Prozesse strukturieren"
           body="Methodische Unterstützung nutzen, Anleitungen für Praxis- und Digitaltauglichkeit erhalten"
-        />
+        >
+          <IconHub slot="icon" class="size-full" />
+        </FeatureItem>
       </FeatureSet>
+    </section>
+    <section id="leistungspakete">
+      <h2>Passende Leistungspakete für Ihr Vorhaben</h2>
+      <p class="pb-40">
+        In der folgenden Tabelle finden Sie unsere verschiedenen
+        Unterstützungsangebote im Vergleich. Alle Angebote sind kostenfrei und
+        werden vom BMDS finanziert.
+      </p>
+      <div class="overflow-x-auto" tabindex="0">
+        <table class="zfl-table zfl-table--striped w-full table-fixed text-left">
+          <thead class="zfl-table__head">
+            <tr>
+              <th scope="col" class="w-150">
+                Kriterien
+              </th>
+              <th scope="col" class="w-235">
+                Paket S
+              </th>
+              <th scope="col" class="w-235">
+                Paket M
+              </th>
+              <th scope="col" class="w-235">
+                Paket L
+              </th>
+            </tr>
+          </thead>
 
-      <div id="leistungspakete">
-        <h2 class="mt-lg">Passende Leistungspakete für Ihr Vorhaben</h2>
-        <p class="pb-40">
-          In der folgenden Tabelle finden Sie unsere verschiedenen
-          Unterstützungsangebote im Vergleich. Alle Angebote sind kostenfrei und
-          werden vom BMDS finanziert.
-        </p>
-        <div class="overflow-x-auto" tabindex="0">
-          <table
-            class="zfl-table zfl-table--striped w-full table-fixed text-left"
-          >
-            <thead class="zfl-table__head">
-              <tr>
-                <th scope="col" class="w-150">Kriterien</th>
-                <th scope="col" class="w-235">Paket S</th>
-                <th scope="col" class="w-235">Paket M</th>
-                <th scope="col" class="w-235">Paket L</th>
-              </tr>
-            </thead>
+          <tbody class="zfl-table__body">
+            <tr>
+              <td class="font-bold">Fokus</td>
+              <td>Punktuelle Unterstützung bei Ihrer Fragestellung</td>
+              <td>Vertiefte Analyse Ihres Vorhabens</td>
+              <td>Langfristige Begleitung des Gesetzgebungsprozesses</td>
+            </tr>
 
-            <tbody class="zfl-table__body">
-              <tr>
-                <td class="font-bold">Fokus</td>
-                <td> Punktuelle Unterstützung bei Ihrer Fragestellung </td>
-                <td> Vertiefte Analyse Ihres Vorhabens </td>
-                <td> Langfristige Begleitung des Gesetzgebungsprozesses </td>
-              </tr>
+            <tr>
+              <td class="font-bold">Dauer</td>
+              <td>1 gemeinsame Arbeitssitzung</td>
+              <td>ca. 4 Wochen</td>
+              <td>Ab 5 Wochen</td>
+            </tr>
 
-              <tr>
-                <td class="font-bold">Dauer</td>
-                <td>1 gemeinsame Arbeitssitzung</td>
-                <td>ca. 4 Wochen</td>
-                <td>Ab 5 Wochen</td>
-              </tr>
+            <tr>
+              <td class="font-bold">Team</td>
+              <td>
+                <p>1–2 Personen aus:</p>
+                <ul class="list-items">
+                  <li>Service Design</li>
+                  <li>Nutzerforschung</li>
+                </ul>
+              </td>
+              <td>
+                <p>3–4 Personen aus:</p>
+                <ul class="list-items">
+                  <li>Service Design</li>
+                  <li>Nutzerforschung</li>
+                  <li>Softwareentwicklung</li>
+                  <li>Produktmanagement</li>
+                  <li>Transformations&shy;management</li>
+                </ul>
+              </td>
+              <td>
+                <p>3–4 Personen aus:</p>
+                <ul class="list-items">
+                  <li>Service Design</li>
+                  <li>Nutzerforschung</li>
+                  <li>Softwareentwicklung</li>
+                  <li>Produktmanagement</li>
+                  <li>Transformations&shy;management</li>
+                </ul>
+              </td>
+            </tr>
 
-              <tr>
-                <td class="font-bold">Team</td>
-                <td>
-                  <p>1–2 Personen aus:</p>
-                  <ul class="list-items">
-                    <li>Service Design</li>
-                    <li>Nutzerforschung</li>
-                  </ul>
-                </td>
-                <td>
-                  <p>3–4 Personen aus:</p>
-                  <ul class="list-items">
-                    <li>Service Design</li>
-                    <li>Nutzerforschung</li>
-                    <li>Softwareentwicklung</li>
-                    <li>Produktmanagement</li>
-                    <li>Transformations&shy;management</li>
-                  </ul>
-                </td>
-                <td>
-                  <p>3–4 Personen aus:</p>
-                  <ul class="list-items">
-                    <li>Service Design</li>
-                    <li>Nutzerforschung</li>
-                    <li>Softwareentwicklung</li>
-                    <li>Produktmanagement</li>
-                    <li>Transformations&shy;management</li>
-                  </ul>
-                </td>
-              </tr>
+            <tr>
+              <td class="font-bold">Zeitpunkt</td>
+              <td>Individuell nach Bedarf</td>
+              <td>Konzept- bis Entwurfsphase</td>
+              <td>Ab Start der Initiative</td>
+            </tr>
 
-              <tr>
-                <td class="font-bold">Zeitpunkt</td>
-                <td>Individuell nach Bedarf</td>
-                <td>Konzept- bis Entwurfsphase</td>
-                <td>Ab Start der Initiative</td>
-              </tr>
-
-              <tr>
-                <td class="font-bold"> Tätigkeit (Beispiele) </td>
-                <td>
-                  <ul class="list-items">
-                    <li>Umsetzungsperspektive besser verstehen</li>
-                    <li>gemeinsam visualisieren</li>
-                    <li>technische Fragen beantworten</li>
-                  </ul>
-                </td>
-                <td>
-                  <ul class="list-items">
-                    <li>
-                      Umsetzungsperspektive auf technischer, organisatorischer
-                      und rechtlicher Ebene durchdenken
-                    </li>
-                    <li>technische Lösungsideen entwickeln</li>
-                    <li>Machbarkeit validieren</li>
-                  </ul>
-                </td>
-                <td>
-                  <ul class="list-items">
-                    <li>Gemeinsame Analyse</li>
-                    <li>Unterstützung bei Workshops und Hausabstimmungen</li>
-                    <li>moderierter Austausch mit Umsetzungsakteuren</li>
-                    <li>Evaluation von Lösungen</li>
-                  </ul>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+            <tr>
+              <td class="font-bold">Tätigkeit (Beispiele)</td>
+              <td>
+                <ul class="list-items">
+                  <li>Umsetzungsperspektive besser verstehen</li>
+                  <li>gemeinsam visualisieren</li>
+                  <li>technische Fragen beantworten</li>
+                </ul>
+              </td>
+              <td>
+                <ul class="list-items">
+                  <li>
+                    Umsetzungsperspektive auf technischer, organisatorischer und
+                    rechtlicher Ebene durchdenken
+                  </li>
+                  <li>technische Lösungsideen entwickeln</li>
+                  <li>Machbarkeit validieren</li>
+                </ul>
+              </td>
+              <td>
+                <ul class="list-items">
+                  <li>Gemeinsame Analyse</li>
+                  <li>Unterstützung bei Workshops und Hausabstimmungen</li>
+                  <li>moderierter Austausch mit Umsetzungsakteuren</li>
+                  <li>Evaluation von Lösungen</li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </section>
     <section class="breakout bg-cosmic-blue-base text-white">
@@ -211,11 +220,12 @@ const description =
           Zusammen­spiel zwischen den Regelungen und der Administration besser
           zu verstehen und so den digitalen Vollzug zu gestalten.“
         </p>
-        <a
-          href="https://digitalcheck.bund.de/beispiele/regelungen/gesetz-zur-modernisierung-und-zum-buerokratieabbau-im-strom-und-energiesteuerrecht"
-          target="_blank"
-        >
-          Mehr erfahren
+        <a href="https://digitalservice.bund.de/blog/aktuelles-beispiel-fuer-digitaltaugliche-regelungen-das-stromsteuerrecht">
+          Zum Blogpost
+        </a>{" "}
+        / <a href={praxisbeispielVisImg}>Visualisierung ansehen</a> /{" "}
+        <a href="https://dip.bundestag.de/vorgang/gesetz-zur-modernisierung-und-zum-b%C3%BCrokratieabbau-im-strom-und-energiesteuerrecht/312306">
+          Aktuelle Fassung
         </a>
         <Image
           slot="media"

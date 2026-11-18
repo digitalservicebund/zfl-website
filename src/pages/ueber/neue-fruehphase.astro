@@ -1,0 +1,191 @@
+---
+import Hero from "@/components/Hero.astro";
+import KernCard from "@/components/KernCard.astro";
+import Layout from "@/layouts/Layout.astro";
+import MediaText from "@/components/MediaText.astro";
+import {
+  begleitungen,
+  bessereRechtsetzung,
+  werkzeuge_ressourcen_visualisierungen,
+} from "@/config/routes";
+import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
+import { mailto } from "@/utils/mailtoHelper";
+import ablaufImg from "@/images/fruehphase-ablauf.png";
+import mockupImg from "@/images/fruehphase-mockup.png";
+import { Image } from "astro:assets";
+import { werkzeuge_ressourcen } from "@/config/routes";
+
+export const frontmatter = {
+  title: "Die neue Frühphase",
+  sitemap: true,
+  navOrder: 4,
+};
+---
+
+<Layout title={frontmatter.title}>
+  <main class="breakout-grid" id="main">
+    <Hero level="sub">
+      <h1 class="max-w-a11y">
+        Hier entsteht die neue Frühphase der Gesetzgebung
+      </h1>
+      <p>
+        In Zukunft finden Sie hier ein Vorgehensmodell, das Sie als Legistin und
+        Legist dabei unterstützt, frühzeitig verschiedene Perspektiven
+        einzubeziehen und Regelungsinhalte darzustellen.
+      </p>
+    </Hero>
+    <section>
+      <h2>Die neue Frühphase einfach verständlich</h2>
+      <figure>
+        <Image
+          src={ablaufImg}
+          alt="Infografik 'Die neue Frühphase – einfach verständlich'. Ein vierstufiger Prozess dargestellt von links nach rechts: 1. Start. 2. Inhalte erarbeiten. Als 'NEU' markiert, wird abgebildet durch Symbole für Visualisierung und Methoden, integrierte Arbeitshilfen und leichten informellen Austausch. 3. Schreiben. 4. Bundestag/Bundesrat."
+        />
+        <figcaption class="text-base leading-tight font-normal text-gray-500">
+          Schritt für Schritt unterstützt die neue Frühphase Sie durch
+          integrierte Arbeitshilfen, Anleitungen für hilfreiche Methoden wie
+          Visualisierungen und erleichtert den Austausch mit externen Akteuren.
+        </figcaption>
+      </figure>
+    </section>
+    <section>
+      <h2>Warum braucht es eine neue Frühphase?</h2>
+      <p>
+        Die Perspektiven von Bürgerinnen und Bürgern, Unternehmen und der
+        Verwaltung müssen bei der Erarbeitung von Regelungen stärker
+        berücksichtigt werden. Die neue Frühphase hilft Ihnen dabei und
+        ermöglicht es, diese Perspektiven anhand einer klaren Struktur
+        inhaltlich zu durchdenken – noch bevor der erste Paragraf entsteht.
+      </p>
+      <p>
+        Durch die Anwendung stellen Sie sicher, dass neue Regelungen wirksam,
+        praxistauglich, digitaltauglich und adressatengerecht sind.
+      </p>
+
+      <p>
+        Das Update für die frühe Phase der Rechtsetzung ist ein zentrales
+        Element der{" "}
+        <a
+          href="https://bmds.bund.de/themen/staatsmodernisierung/modernisierungsagenda-bund#c2065"
+          target="_blank"
+        >
+          Modernisierungsagenda Bund (Handlungsfeld 2)
+        </a>{" "}
+        und bettet sich im Fachbereich bessere Rechtsetzung ein.
+      </p>
+    </section>
+    <section class="breakout bg-surface-default">
+      <MediaText>
+        <h2>
+          Wie gelingt eine praxistaugliche und bürokratiearme Rechtsetzung?
+        </h2>
+        <p>
+          Das Zentrum für Legistik unterstützt Sie bereits in der
+          Konzeptionsphase, Regelungen neu zu gestalten. Diese Übersicht zeigt,
+          wie dies konkret aussehen könnte.
+        </p>
+        <a
+          href={bessereRechtsetzung.path}
+          class="kern-btn kern-btn--primary mt-8"
+        >
+          <span class="kern-label">Darstellung öffnen</span>
+        </a>
+        <Image
+          slot="media"
+          src={mockupImg}
+          alt="Das Bild zeigt einen Laptop-Bildschirm mit einer Webseite des Zentrums für Legistik, die ein Prozess zur frühen Phase der Gesetzgebung zeigt."
+        />
+      </MediaText>
+    </section>
+    <section>
+      <h2>Diese Angebote helfen schon jetzt:</h2>
+      <p>
+        Bevor das Vorgehensmodell der neuen Frühphase für Sie verfügbar ist,
+        können Sie diese bestehenden Angebote bereits jetzt schon nutzen.
+      </p>
+      <div class="grid grid-cols-1 gap-32 md:grid-cols-2 xl:grid-cols-4 xl:gap-16">
+        <KernCard
+          title="Visualisieren Sie den Status Quo"
+          interactive
+          href={werkzeuge_ressourcen_visualisierungen.path}
+          target_option="_blank"
+        >
+          <div slot="pre-header" class="mb-16">
+            <span class="kern-badge kern-badge--methode">
+              <span class="kern-label">Methode</span>
+            </span>
+          </div>
+          <div class="kern-body">
+            <p>
+              Ein Flussdiagramm des Status Quo erleichtert Ihnen das Verständnis
+              und die Kommunikation mit Anderen.
+            </p>
+          </div>
+        </KernCard>
+        <KernCard
+          title="Nutzen Sie unsere Methodensammlung"
+          interactive
+          href={werkzeuge_ressourcen.path}
+        >
+          <div class="kern-body">
+            <p>
+              Wir stellen Ihnen unterschiedliche Werkzeuge zur Verfügung, die
+              Sie bei der Regelungsarbeit unterstützen.
+            </p>
+          </div>
+        </KernCard>
+        <KernCard
+          title="Nehmen Sie eine Regelungsbegleitung in Anspruch"
+          href={begleitungen.path}
+          interactive
+        >
+          <div class="kern-body">
+            <p>
+              Ein interdisziplinäres Team – erfahren in Gesetzgebungspraxis –
+              unterstützt Sie dabei, Ihre Regelung praxisnah, digitaltauglich
+              und bürokratiearm zu gestalten.
+            </p>
+            <p>
+              Regelungsbegleitungen sind gelebte Frühphase, in denen wir schon
+              heute neue Methoden der besseren Rechtsetzung nutzen.
+            </p>
+          </div>
+        </KernCard>
+        <KernCard title="Werden Sie Tester!">
+          <div class="kern-body">
+            <p>
+              Wir überprüfen die Konzepte laufend mit der Praxis. Sie sind
+              Legistin oder Legist und möchten uns dabei helfen? Melden Sie sich
+              an und wir laden Sie zu einem 45–90 minütigen Nutzertest ein. Sie
+              müssen dafür nichts vorbereiten.
+            </p>
+          </div>
+          <a
+            slot="footer"
+            class="kern-btn kern-btn--primary kern-btn--block"
+            href={mailto(
+              ZFL_EMAIL.url,
+              "Teilnahme an Nutzendentests",
+              "Guten Tag,\n ich bin interessiert daran, an einem Nutzertest für das Zentrum für Legistik teilzunehmen. Bitte setzen Sie mich auf die Testerliste und kontaktieren mich für eine der nächsten Testrunden.\n \n Mit freundlichen Grüßen",
+            )}
+          >
+            <span class="kern-label">Anmelden</span>
+          </a>
+        </KernCard>
+      </div>
+    </section>
+    <section class="bg-cosmic-blue-base breakout text-white">
+      <h2>Hilfe</h2>
+      <p>
+        Sie haben konkrete Fragen, wünschen sich mehr Informationen oder wollen
+        mehr über unsere Arbeit erfahren? Kontaktieren Sie uns hier:
+      </p>
+      <p>
+        Telefon: <a href={ZFL_PHONE.url}>{ZFL_PHONE.display}</a>
+      </p>
+      <p>
+        E-Mail: <a href={ZFL_EMAIL.url}>{ZFL_EMAIL.display}</a>
+      </p>
+    </section>
+  </main>
+</Layout>

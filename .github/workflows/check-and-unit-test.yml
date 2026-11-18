@@ -20,15 +20,10 @@ jobs:
   licenses-format-lint-typecheck-unit-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Set up Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
-        with:
-          node-version-file: .node-version
-
-      - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
-        name: Install pnpm
+      - name: Setup mise
+        uses: jdx/mise-action@d5574b52816a478f9d4e6529a3f6ff17a8a36785 # v5.2.8
 
       - name: Cache pnpm dependencies
         id: cache-pnpm-deps
@@ -42,7 +37,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.cache-pnpm-deps.outputs.cache-hit != 'true'
-        run: pnpm install
+        run: pnpm install --ignore-scripts
 
       - name: Audit used licences
         run: pnpm run audit:licences
@@ -63,7 +58,7 @@ jobs:
         run: pnpm test
 
       - name: Send failure to Slack
-        uses: digitalservicebund/notify-on-failure-gha@671832f192aee0a068fd92b2f6deb975df794a84 # v1.6.1
+        uses: digitalservicebund/notify-on-failure-gha@b8fdda76a38fa8e94cf623ebdd03e4570bc4ceb0 # v1.9.0
         if: ${{ failure() }}
         with:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}

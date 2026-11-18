@@ -1,5 +1,5 @@
-import { describe, expect, test } from "vitest";
-import { buildRoutePath, hasTrailingSlash, removeTrailingSlash } from "./path";
+import { afterEach, describe, expect, test, vi } from "vitest";
+import { hasTrailingSlash, removeTrailingSlash, withBase } from "./path";
 
 describe("removeTrailingSlash", () => {
   test("keeps the root path stable", () => {
@@ -11,15 +11,21 @@ describe("removeTrailingSlash", () => {
   });
 });
 
-describe("buildRoutePath", () => {
+describe("withBase", () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+  });
+
   test("returns the href unchanged without a base path", () => {
-    expect(buildRoutePath("/ueber-uns")).toBe("/ueber-uns");
+    expect(withBase("/ueber-uns")).toBe("/ueber-uns");
   });
 
   test("prefixes the href with the configured base path", () => {
-    expect(
-      buildRoutePath("/ueber-uns", "/zfl-website/previews/test-branch"),
-    ).toBe("/zfl-website/previews/test-branch/ueber-uns");
+    vi.stubEnv("BASE_URL", "/zfl-website/previews/test-branch");
+
+    expect(withBase("/ueber-uns")).toBe(
+      "/zfl-website/previews/test-branch/ueber-uns",
+    );
   });
 });
 

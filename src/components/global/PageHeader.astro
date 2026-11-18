@@ -1,5 +1,5 @@
 ---
-import SearchButton from "@/components/search/SearchButton.astro";
+import SearchButton from "@/components/search/SearchModalButton.astro";
 import DrilldownNavigation from "@/components/global/DrilldownNavigation.astro";
 import Kopfzeile from "@/components/global/Kopfzeile.astro";
 import { ZFL_PHONE } from "@/config/constants";
@@ -17,9 +17,11 @@ import bundLogo from "@/images/logo/bund-logo.png";
 import { getMobileMenuNavigation } from "@/utils/navigation/drilldown";
 import { getRouteLabel, isRouteVisible } from "@/utils/navigation/routeUtils";
 import { removeTrailingSlash } from "@/utils/path";
-import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import { twMerge } from "tailwind-merge";
+import IconClose from "~icons/ic/outline-close";
+import IconMenu from "~icons/ic/twotone-menu";
+import IconPhoneEnabled from "~icons/ic/twotone-phone-enabled";
 
 const { pathname } = Astro.url;
 const currentPath = removeTrailingSlash(pathname);
@@ -48,13 +50,12 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
 ---
 
 <header
-  class="page-header border-lavender-base relative border-b-2"
-  x-data={`{
-    mobileMenuOpen: false,
-    kontaktOpen: false
-  }`}
-  @resize.window="mobileMenuOpen = false; kontaktOpen = false"
-  @keydown.escape.window="mobileMenuOpen = false; kontaktOpen = false"
+  class="page-header border-lavender-base relative border-b-2 bg-white"
+  x-data="pageHeader()"
+  :class="{ 'header-floating': headerFloating, 'header-visible': headerVisible }"
+  @scroll.window="handleScroll($el)"
+  @resize.window="closeMenus()"
+  @keydown.escape.window="closeMenus()"
 >
   <Kopfzeile />
   <div class="flex h-72 justify-between px-24">
@@ -76,22 +77,20 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
     <div class="flex">
       <!-- Desktop Navigation -->
       <nav class="hidden h-full min-[900px]:flex" aria-label="Hauptnavigation">
-        {
-          headerNavigation.map((route) => {
-            const isActive =
-              currentPath === route.path ||
-              currentPath.startsWith(route.path + "/");
-            return (
-              <a
-                href={route.path}
-                class={navItemStyle("main", isActive)}
-                aria-current={isActive ? "page" : undefined}
-              >
-                {getRouteLabel(route)}
-              </a>
-            );
-          })
-        }
+        {headerNavigation.map((route) => {
+          const isActive =
+            currentPath === route.path ||
+            currentPath.startsWith(route.path + "/");
+          return (
+            <a
+              href={route.path}
+              class={navItemStyle("main", isActive)}
+              aria-current={isActive ? "page" : undefined}
+            >
+              {getRouteLabel(route)}
+            </a>
+          );
+        })}
       </nav>
 
       <SearchButton class={navItemStyle("main")} keyboardToggle />
@@ -103,7 +102,7 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
           class={navItemStyle("main")}
           aria-label={ZFL_PHONE.display}
         >
-          <Icon name="ic:twotone-phone-enabled" class="size-24 -scale-x-100" />
+          <IconPhoneEnabled class="size-24 -scale-x-100" />
         </a>
         <button
           type="button"
@@ -113,16 +112,8 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
           :aria-expanded="mobileMenuOpen"
           @click="mobileMenuOpen = !mobileMenuOpen; kontaktOpen = false; if (mobileMenuOpen) $dispatch('page-header-mobile-menu-opened')"
         >
-          <Icon
-            x-show="!mobileMenuOpen"
-            name="ic:twotone-menu"
-            class="size-24"
-          />
-          <Icon
-            x-show="mobileMenuOpen"
-            name="ic:outline-close"
-            class="size-24"
-          />
+          <IconMenu x-show="!mobileMenuOpen" class="size-24" />
+          <IconClose x-show="mobileMenuOpen" class="size-24" />
         </button>
       </div>
     </div>
@@ -133,8 +124,7 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
     class="mobile-menu-backdrop fixed inset-x-0 bottom-0 z-10 bg-black/40 min-[900px]:hidden"
     @click="mobileMenuOpen = false"
     aria-hidden="true"
-  >
-  </div>
+  ></div>
   <!-- Mobile Navigation -->
   <nav
     id={mobileMenuId}
@@ -157,8 +147,32 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
 <style>
   @reference "@/styles/global.css";
   .page-header {
-    /* 32px is the height of the Kopfzeile, 72px is the height of the header */
-    --page-header-offset: 104px;
+    /* 48px is the height of the Kopfzeile, 72px is the height of the header*/
+    --page-header-offset: 122px;
+  }
+
+  /* Below the desktop nav breakpoint, the header scrolls away with the page
+     and only becomes a floating bar once the user scrolls back up. */
+  @media (width < 900px) {
+    .page-header.header-floating {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      transform: translateY(-100%);
+      transition: transform 200ms ease-out;
+    }
+
+    .page-header.header-floating.header-visible {
+      transform: translateY(0);
+    }
+  }
+
+  /* Kopfzeile is shorter on bigger screens */
+  @media (width >= 48rem) {
+    .page-header {
+      /* 32px is the height of the Kopfzeile, 72px is the height of the header*/
+      --page-header-offset: 104px;
+    }
   }
 
   .mobile-menu-backdrop {
@@ -190,3 +204,12 @@ function navItemStyle(variant: "main" | "sub" = "main", active = false) {
     --active-item-bg-color: var(--color-lavender-surface-highlight);
   }
 </style>
+
+<script>
+  import Alpine from "alpinejs";
+  import { pageHeaderData } from "@/scripts/pageHeader";
+
+  document.addEventListener("alpine:init", () => {
+    Alpine.data("pageHeader", pageHeaderData);
+  });
+</script>
