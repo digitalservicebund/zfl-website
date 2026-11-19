@@ -67,12 +67,13 @@ const {
       </a>
     )}
   </div>
-  <div slot="media" class={tileStyles({ look })}>
-    <Image
-      src={image}
-      alt={imageAlt}
-      width={902}
-      class="h-auto w-full shadow-[4px_7px_30.7px_0_rgba(0,0,0,0.1)]"
-    />
-  </div>
+  <Image
+    slot="media"
+    src={image}
+    alt={imageAlt}
+    width={902}
+    class="h-auto w-full shadow-[4px_7px_30.7px_0_rgba(0,0,0,0.1)]"
+    zoom
+    frameClass={tileStyles({ look })}
+  />
 </MediaText>

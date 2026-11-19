@@ -4,6 +4,7 @@ import type { ImageMetadata } from "astro";
 import type { HTMLAttributes } from "astro/types";
 import IconZoomIn from "~icons/ic/outline-zoom-in";
 import Modal from "./modal/Modal.astro";
+import { tv } from "tailwind-variants";
 
 interface Props extends Omit<
   HTMLAttributes<"img">,
@@ -12,35 +13,47 @@ interface Props extends Omit<
   src: ImageMetadata;
   alt: string;
   zoom?: boolean;
+  frameClass?: string;
   width?: number | `${number}`;
   height?: number | `${number}`;
 }
 
-const { zoom = false, src, alt, ...attrs } = Astro.props;
+const frameStyle = tv({
+  base: "relative block",
+  variants: {
+    zoom: { true: "cursor-zoom-in" },
+  },
+});
+
+const { zoom = false, frameClass, src, alt, ...attrs } = Astro.props;
 const id = crypto.randomUUID();
 const buttonAriaLabel = `Bild vergrößern: ${alt}`;
 const dialogAriaLabel = "Bild schließen";
+
+const Frame = zoom ? "button" : frameClass ? "div" : Fragment;
+const frameAttrs: HTMLAttributes<"button"> =
+  Frame === Fragment
+    ? {}
+    : {
+        class: frameStyle({ zoom, class: frameClass }),
+        ...(zoom && { popovertarget: id, "aria-label": buttonAriaLabel }),
+      };
 ---
 
-{zoom ? (
-  <>
-    <button
-      popovertarget={id}
-      class="relative block cursor-zoom-in"
-      aria-label={buttonAriaLabel}
-    >
-      <Image src={src} alt={alt} {...attrs} />
-      <span
-        class="text-cosmic-blue-base absolute bottom-16 left-16 flex h-32 w-32 items-center justify-center"
-        aria-hidden="true"
-      >
-        <IconZoomIn class="h-20 w-20" />
-      </span>
-    </button>
-    <Modal id={id} ariaLabel={dialogAriaLabel} headless>
-      <img src={src.src} alt={alt} loading="lazy" decoding="async" />
-    </Modal>
-  </>
-) : (
+<Frame {...frameAttrs}>
   <Image src={src} alt={alt} {...attrs} />
+  {zoom && (
+    <span
+      class="kern-btn kern-btn--primary absolute bottom-16 right-16 size-48 px-0"
+      aria-hidden="true"
+    >
+      <IconZoomIn class="h-24 w-24 text-white" />
+    </span>
+  )}
+</Frame>
+
+{zoom && (
+  <Modal id={id} ariaLabel={dialogAriaLabel} headless>
+    <Image src={src} alt={alt} />
+  </Modal>
 )}
