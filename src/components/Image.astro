@@ -6,13 +6,25 @@ import IconZoomIn from "~icons/ic/outline-zoom-in";
 import Modal from "./modal/Modal.astro";
 import { tv } from "tailwind-variants";
 
+/**
+ * Optimized image based on Astro's `<Image />`. Other attributes are passed to the `<img>`.
+ *
+ * @example
+ * <Image src={photo} alt="Schulungssituation" />
+ *
+ * <Image src={photo} alt="Schulungssituation" zoom frameClass="bg-green-050 p-24" />
+ */
 interface Props extends Omit<
   HTMLAttributes<"img">,
   "src" | "alt" | "width" | "height"
 > {
+  /** Imported image file, e.g. `import photo from "@/images/photo.jpg"`. */
   src: ImageMetadata;
+  /** Alternative text. Also used in the label of the zoom button. */
   alt: string;
+  /** Opens the image enlarged in a modal on click. Default: `false`. */
   zoom?: boolean;
+  /** Classes for a wrapper around the image. With `zoom`, the wrapper is the clickable button. */
   frameClass?: string;
   width?: number | `${number}`;
   height?: number | `${number}`;

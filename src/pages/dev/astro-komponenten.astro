@@ -416,6 +416,27 @@ export const frontmatter = {
             zoom
           />
         </div>
+
+        <div class="space-y-32">
+          <p class="variant-label kern-label">frameClass, zoom: false</p>
+          <Image
+            src={trainingImage}
+            alt="Schulungssituation"
+            class="w-full rounded-sm"
+            frameClass="bg-green-050 p-24"
+          />
+        </div>
+
+        <div class="space-y-32">
+          <p class="variant-label kern-label">frameClass, zoom: true</p>
+          <Image
+            src={trainingImage}
+            alt="Schulungssituation"
+            class="w-full rounded-sm"
+            frameClass="bg-green-050 p-24"
+            zoom
+          />
+        </div>
       </div>
     </section>
 
