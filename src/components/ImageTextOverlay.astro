@@ -15,6 +15,7 @@ interface Props {
   icon?: string;
   look?: InfoPanelProps["look"];
   padding?: InfoPanelProps["padding"];
+  reversed?: boolean;
 }
 
 const {
@@ -27,6 +28,7 @@ const {
   icon = "arrow-forward",
   look = "gray",
   padding = "medium",
+  reversed = false,
 } = Astro.props;
 ---
 
@@ -34,7 +36,10 @@ const {
   <InfoPanel
     look={look}
     padding={padding}
-    class="z-1 self-start lg:col-span-3 lg:w-600 lg:self-center"
+    class:list={[
+      "z-1 self-start lg:col-span-3 lg:w-600 lg:self-center",
+      reversed && "lg:col-start-4 lg:justify-self-end",
+    ]}
   >
     <slot />
     {linkHref && linkText && (
@@ -52,7 +57,8 @@ const {
     src={image}
     alt={imageAlt}
     class:list={[
-      "object-cover lg:absolute lg:right-1 lg:h-482 lg:w-727",
+      "object-cover lg:absolute lg:h-482 lg:w-727",
+      reversed ? "lg:left-1" : "lg:right-1",
       imageBorder && "border border-lavender-base",
       imageClass,
     ]}

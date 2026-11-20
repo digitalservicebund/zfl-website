@@ -1,0 +1,136 @@
+---
+import type { ImageMetadata } from "astro";
+import { tv, type VariantProps } from "tailwind-variants";
+import Image from "@/components/Image.astro";
+import { ZFL_EMAIL } from "@/config/constants";
+import { mailto } from "@/utils/mailtoHelper";
+
+const tileStyles = tv({
+  base: "flex aspect-[501/478] items-center justify-center px-24",
+  variants: {
+    look: {
+      blue: "bg-darkblue-150",
+      green: "bg-green-050",
+      gray: "bg-(--kern-color-feedback-default-background)",
+      violet: "bg-violet-050",
+    },
+  },
+  defaultVariants: {
+    look: "blue",
+  },
+});
+
+interface Props extends VariantProps<typeof tileStyles> {
+  title: string;
+  tagline: string;
+  image: ImageMetadata;
+  imageAlt: string;
+  reversed?: boolean;
+  prototypeHref?: string;
+}
+
+const {
+  title,
+  tagline,
+  image,
+  imageAlt,
+  look,
+  reversed = false,
+  prototypeHref,
+} = Astro.props;
+---
+
+<div class:list={["prototype", { reversed }]}>
+  <div class="text">
+    <h3 class="kern-heading-large mb-kern-default p-0">{title}</h3>
+    <p>
+      <em>{tagline}</em>
+    </p>
+    <slot />
+  </div>
+
+  <div class="media">
+    <Image
+      src={image}
+      alt={imageAlt}
+      width={902}
+      class="h-auto w-full shadow-[4px_7px_30.7px_0_rgba(0,0,0,0.1)]"
+      zoom
+      frameClass={tileStyles({ look })}
+    />
+  </div>
+
+  <div class:list={["actions", reversed && "md:flex md:justify-end"]}>
+    <div
+      class:list={[
+        "flex flex-wrap gap-24",
+        reversed && "md:min-w-full md:flex-none md:flex-nowrap",
+      ]}
+    >
+      <a
+        class="kern-btn kern-btn--secondary"
+        href={mailto(ZFL_EMAIL.url, `Interesse an: ${title}`)}
+      >
+        <span class="kern-label">Sprechen Sie uns an</span>
+      </a>
+      {prototypeHref && (
+        <a
+          class="kern-btn kern-btn--tertiary"
+          href={prototypeHref}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span
+            class="kern-icon kern-icon--open-in-new kern-icon--default"
+            aria-hidden="true"
+          ></span>
+          <span class="kern-label">
+            Zum Online-Prototypen
+            <span class="sr-only">(öffnet in neuem Tab)</span>
+          </span>
+        </a>
+      )}
+    </div>
+  </div>
+</div>
+
+<style>
+  .prototype {
+    display: grid;
+    gap: var(--spacing-md);
+    grid-template-areas:
+      "media"
+      "text"
+      "actions";
+  }
+
+  /* 48rem = md = 768px */
+  @media (width >= 48rem) {
+    .prototype {
+      column-gap: var(--spacing-3xl);
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      grid-template-areas:
+        "text media"
+        "actions actions";
+    }
+
+    .prototype.reversed {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      grid-template-areas:
+        "media text"
+        ". actions";
+    }
+  }
+
+  .text {
+    grid-area: text;
+  }
+
+  .media {
+    grid-area: media;
+  }
+
+  .actions {
+    grid-area: actions;
+  }
+</style>

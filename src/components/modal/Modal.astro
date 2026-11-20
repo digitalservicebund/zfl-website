@@ -1,0 +1,86 @@
+---
+import FramedModal from "./_FramedModal.astro";
+import HeadlessModal from "./_HeadlessModal.astro";
+
+/**
+ * Modal component using the HTML Popover API. It is opened by a button with a `popovertarget` matching the `id`
+ *
+ * @example
+ * <button popovertarget="info">Mehr erfahren</button>
+ * <Modal id="info"><p>Inhalt</p></Modal>
+ *
+ * <Modal id="zoom" headless ariaLabel="Bild schließen"><img ... /></Modal>
+ */
+export interface Props {
+  /** Must match the `popovertarget` of the button that opens the modal. */
+  id: string;
+  /** Shows the content only without a frame. A click on the content closes the dialog. Default: `false`. */
+  headless?: boolean;
+  /** Classes merged with the default style of the dialog frame. */
+  contentClass?: string;
+  /** Accessible name of the close button. Default: "Hinweisfenster schließen". */
+  ariaLabel?: string;
+}
+
+const {
+  id,
+  headless = false,
+  contentClass,
+  ariaLabel = "Hinweisfenster schließen",
+} = Astro.props;
+---
+
+<dialog
+  id={id}
+  popover
+  class="pointer-events-none bg-transparent size-full open:flex justify-center items-center"
+>
+  {headless ? (
+    <HeadlessModal {...{ id, contentClass, ariaLabel }}>
+      <slot />
+    </HeadlessModal>
+  ) : (
+    <FramedModal {...{ id, contentClass, ariaLabel }}>
+      <slot />
+    </FramedModal>
+  )}
+</dialog>
+
+<style>
+  dialog[popover] {
+    transition:
+      display 0.2s allow-discrete,
+      overlay 0.2s allow-discrete;
+  }
+
+  dialog[popover]::backdrop {
+    opacity: 0;
+    background-color: color-mix(in oklab, var(--color-black) 20%, transparent);
+    backdrop-filter: blur(0px);
+    transition:
+      opacity 0.2s ease,
+      backdrop-filter 0.2s ease;
+  }
+
+  dialog[popover]:popover-open::backdrop {
+    opacity: 1;
+    backdrop-filter: blur(2px);
+  }
+
+  @starting-style {
+    dialog[popover]:popover-open::backdrop {
+      opacity: 0;
+      backdrop-filter: blur(0px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    dialog[popover] {
+      transition: none;
+    }
+
+    dialog[popover]::backdrop {
+      transition: none;
+    }
+  }
+</style>
