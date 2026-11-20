@@ -1,36 +1,44 @@
 ---
 import { tv, type VariantProps } from "tailwind-variants";
 
-export interface Props extends VariantProps<typeof calloutStyles> {
+/**
+ * Highlighted note with an optional icon.
+ * Pass an optional decorative icon in the `icon` slot (hidden from screen readers).
+ * The default slot is placed next to the icon as one block: wrap several elements in one element.
+ *
+ * @example
+ * <Callout>
+ *   <IconInfo slot="icon" />
+ *   <p>Ein kurzer Hinweis.</p>
+ * </Callout>
+ */
+export interface Props {
+  /** Use `li` when the callout is an item of a `<ul>`. Default: `div`. */
   as?: "div" | "li";
+  /** Background color. Default: `surface`. */
+  variant?: VariantProps<typeof calloutStyles>["variant"];
   class?: string;
 }
 
 const calloutStyles = tv({
-  base: "max-w-a11y flex items-start gap-24 rounded-sm p-16 pr-32",
-  variants: {
-    variant: {
-      surface: "bg-surface-default",
-      white: "bg-white",
-    },
-  },
+  base: "max-w-a11y p-kern-default flex items-start gap-24 rounded-sm pr-32 break-words *:min-w-0",
+  variants: { variant: { surface: "bg-surface-default", white: "bg-white" } },
   defaultVariants: {
     variant: "surface",
   },
-});
-
-const iconStyles = tv({
-  base: "bg-lavender-surface-highlight text-cosmic-blue-base size-2xl flex shrink-0 items-center justify-center rounded-xs [&_svg]:size-30",
 });
 
 const { as: Tag = "div", variant, class: className } = Astro.props;
 ---
 
 <Tag class={calloutStyles({ variant, class: className })}>
-  <span class={iconStyles()}>
-    <slot name="icon" />
-  </span>
-  <div>
-    <slot />
-  </div>
+  {Astro.slots.has("icon") && (
+    <span
+      class="bg-lavender-surface-highlight text-cosmic-blue-base size-2xl flex shrink-0 items-center justify-center rounded-xs [&_svg]:size-30"
+      aria-hidden="true"
+    >
+      <slot name="icon" />
+    </span>
+  )}
+  <slot />
 </Tag>

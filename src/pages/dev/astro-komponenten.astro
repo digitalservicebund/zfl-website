@@ -134,7 +134,7 @@ export const frontmatter = {
       <div class="space-y-32">
         <p class="variant-label kern-label">variant: surface (default)</p>
         <Callout>
-          <IconInfo slot="icon" aria-hidden="true" />
+          <IconInfo slot="icon" />
           <p>Ein kurzer Hinweis mit Icon auf weißem Hintergrund.</p>
         </Callout>
       </div>
@@ -143,7 +143,7 @@ export const frontmatter = {
         <p class="variant-label kern-label">variant: white</p>
         <div class="bg-lavender-400 p-16">
           <Callout variant="white">
-            <IconInfo slot="icon" aria-hidden="true" />
+            <IconInfo slot="icon" />
             <p>Ein kurzer Hinweis mit Icon auf farbigem Hintergrund.</p>
           </Callout>
         </div>
@@ -153,16 +153,23 @@ export const frontmatter = {
         <p class="variant-label kern-label">as: li (in einer Liste)</p>
         <ul class="list-unstyled space-y-16">
           <Callout as="li">
-            <IconCheckCircle slot="icon" aria-hidden="true" />
+            <IconCheckCircle slot="icon" />
             <p>Erster Hinweis in einer Liste.</p>
           </Callout>
           <Callout as="li">
-            <IconBuild slot="icon" aria-hidden="true" />
+            <IconBuild slot="icon" />
             <p>
               Zweiter Hinweis mit <a href="#">Link</a>.
             </p>
           </Callout>
         </ul>
+      </div>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">ohne Icon</p>
+        <Callout>
+          <p>Ein kurzer Hinweis ohne Icon.</p>
+        </Callout>
       </div>
     </section>
 
