@@ -22,7 +22,6 @@ const tileStyles = tv({
 });
 
 interface Props extends VariantProps<typeof tileStyles> {
-  id: string;
   title: string;
   tagline: string;
   image: ImageMetadata;
@@ -32,7 +31,6 @@ interface Props extends VariantProps<typeof tileStyles> {
 }
 
 const {
-  id,
   title,
   tagline,
   image,
@@ -43,7 +41,7 @@ const {
 } = Astro.props;
 ---
 
-<MediaText id={id} reversed={reversed} class="flex-col-reverse md:gap-64">
+<MediaText reversed={reversed} class="flex-col-reverse md:gap-64">
   <h3 class="kern-heading-large">{title}</h3>
   <p>
     <em>{tagline}</em>
