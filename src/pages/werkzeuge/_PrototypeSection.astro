@@ -7,7 +7,7 @@ import { ZFL_EMAIL } from "@/config/constants";
 import { mailto } from "@/utils/mailtoHelper";
 
 const tileStyles = tv({
-  base: "flex aspect-[501/478] items-center justify-center px-24 md:mt-(--kern-metric-baseline-heading-large-padding-top)",
+  base: "flex aspect-[501/478] items-center justify-center px-24",
   variants: {
     look: {
       blue: "bg-darkblue-150",
@@ -42,7 +42,7 @@ const {
 ---
 
 <MediaText reversed={reversed} class="flex-col-reverse md:gap-64">
-  <h3 class="kern-heading-large">{title}</h3>
+  <h3 class="kern-heading-large p-0 mb-kern-default">{title}</h3>
   <p>
     <em>{tagline}</em>
   </p>
