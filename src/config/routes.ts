@@ -228,6 +228,17 @@ export const werkzeuge_digitaltauglichkeit_beispiele = {
   navLabel: "Beispiele am Gesetzestext",
 } as const;
 
+export const werkzeuge_kiInDerRechtsetzung = {
+  key: "werkzeuge_kiInDerRechtsetzung",
+  path: "/werkzeuge/ki-in-der-rechtsetzung",
+  title: "KI in der Rechtsetzung",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: 6,
+  navLabel: "KI in der Rechtsetzung",
+} as const;
+
 export const werkzeuge_kiPrototypen = {
   key: "werkzeuge_kiPrototypen",
   path: "/werkzeuge/ki-prototypen",
@@ -355,6 +366,7 @@ export const allRoutes = [
   werkzeuge_buergerzentriertheit,
   werkzeuge_digitaltauglichkeit,
   werkzeuge_digitaltauglichkeit_beispiele,
+  werkzeuge_kiInDerRechtsetzung,
   werkzeuge_kiPrototypen,
   werkzeuge_kiPrototypen_pflichten,
   werkzeuge_kiPrototypen_rechtErkunden,

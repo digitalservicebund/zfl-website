@@ -1,0 +1,54 @@
+---
+import { tv } from "tailwind-variants";
+import { type Props } from "./Modal.astro";
+import IconClose from "~icons/ic/round-close";
+
+const styles = tv({
+  base: "modal p-md pb-lg max-w-a11y pointer-events-auto max-h-svh overflow-auto rounded-sm bg-white",
+});
+const { id, contentClass, ariaLabel } = Astro.props;
+---
+
+<div class={styles({ class: contentClass })}>
+  <div class="mb-32 flex w-full justify-end">
+    <button
+      popovertarget={id}
+      popovertargetaction="hide"
+      aria-label={ariaLabel}
+      class="border-cosmic-blue-base text-cosmic-blue-base rounded-sm border p-8"
+    >
+      <IconClose class="h-24 w-24" />
+    </button>
+  </div>
+  <slot />
+</div>
+
+<style>
+  .modal {
+    opacity: 0;
+    translate: 0px 0px;
+    transition:
+      opacity 0.16s ease-in,
+      translate 0.16s ease-in;
+  }
+
+  :global(:popover-open) > .modal {
+    opacity: 1;
+    translate: 0px 0px;
+    transition-duration: 0.24s;
+    transition-timing-function: cubic-bezier(0, 0.55, 0.45, 1);
+  }
+
+  @starting-style {
+    :global(:popover-open) > .modal {
+      opacity: 0;
+      translate: 0px 4px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .modal {
+      transition: none;
+    }
+  }
+</style>
