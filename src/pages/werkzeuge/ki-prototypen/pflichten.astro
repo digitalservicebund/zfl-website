@@ -74,6 +74,9 @@ const obligationsIndex = loadObligationStemMeta();
 
 // Update together with the data in public/data/. Per-law dates are not shown:
 // file mtimes reflect checkout/build time, not the extraction.
+// The Python pipeline that generates public/data/ (scripts/*.py, documented in
+// doc/laws-pipeline.md) lives on the `prototyp/rechtexplorer` branch
+// (last commit 1f52ef36), not on main.
 const DATA_EXTRACTED = "Juni 2026";
 
 const styles = tv({
