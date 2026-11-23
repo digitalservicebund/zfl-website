@@ -32,7 +32,7 @@ export default defineConfig({
     "/ueber/das-ist-neu": "/ueber/daran-arbeiten-wir",
     "/ueber-uns/zahlen-und-fakten": "/ueber/zahlen-und-fakten",
     "/prototyp/ki-gestuetzte-bestandsrechtsanalyse":
-      "https://digitalservicebund.github.io/zfl-website/previews/prototyp/pflichten/werkzeuge/pflichten/",
+      "/werkzeuge/ki-prototypen/pflichten",
   },
   integrations: [
     alpinejs(),

@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
 
 const pages = import.meta.glob<string>(
-  ["/src/pages/**/*.astro", "!/src/pages/**/_*.astro"],
+  // Astro does not route files or folders prefixed with an underscore
+  ["/src/pages/**/*.astro", "!/src/pages/**/_*.astro", "!/src/pages/**/_*/**"],
   { query: "?raw", import: "default", eager: true },
 );
 

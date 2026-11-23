@@ -7,7 +7,7 @@
   import Feature from "./_Feature.svelte";
   import HideSidebarTrigger from "./_HideSidebarTrigger.svelte";
   import IconArrowDown from "~icons/ic/round-keyboard-double-arrow-down";
-  import { werkzeuge } from "@/config/routes";
+  import { werkzeuge, werkzeuge_kiPrototypen_pflichten } from "@/config/routes";
 
   const CLUSTER_FIRST_ANCHOR = "--cluster-first";
   const CLUSTER_LAST_ANCHOR = "--cluster-last";
@@ -147,10 +147,7 @@
               Prototypen, mit dem Sie Pflichten im Bestandsrecht schnell
               identifizieren und strukturiert analysieren können. Einen ersten
               Einblick erhalten Sie
-              <a
-                href="https://digitalservicebund.github.io/zfl-website/previews/prototyp/pflichten/werkzeuge/pflichten/"
-                >hier</a
-              >.
+              <a href={werkzeuge_kiPrototypen_pflichten.path}>hier</a>.
             </p>
           {/snippet}
         </Feature>
