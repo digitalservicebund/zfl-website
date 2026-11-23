@@ -260,11 +260,10 @@ export const werkzeuge_kiPrototypen_pflichten = {
 export const werkzeuge_kiPrototypen_potenziale = {
   key: "werkzeuge_kiPrototypen_potenziale",
   path: "/werkzeuge/ki-prototypen/potenziale",
-  title: "Potenziale aufdecken",
+  title: "Prototyp: Potenziale aufdecken",
   parent: werkzeuge_kiPrototypen,
-  sitemap: true,
-  isStagingOnly: true,
-  navOrder: 5,
+  sitemap: false,
+  isStagingOnly: false,
 } as const;
 
 export const werkzeuge_kiPrototypen_rechtErkunden = {
@@ -279,10 +278,10 @@ export const werkzeuge_kiPrototypen_rechtErkunden = {
 export const werkzeuge_kiPrototypen_visualisieren = {
   key: "werkzeuge_kiPrototypen_visualisieren",
   path: "/werkzeuge/ki-prototypen/visualisieren",
-  title: "Gesetze visualisieren",
+  title: "Prototyp: Gesetze visualisieren",
   parent: werkzeuge_kiPrototypen,
-  sitemap: true,
-  isStagingOnly: true,
+  sitemap: false,
+  isStagingOnly: false,
 } as const;
 
 export const werkzeuge_kiPrototypen_visualisieren_erstellen = {

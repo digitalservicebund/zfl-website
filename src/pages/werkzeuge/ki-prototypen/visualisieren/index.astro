@@ -12,8 +12,8 @@ import { getVisualisierungExamples } from "./_examples.ts";
 import { visTypeIcons } from "./_visTypeIcons.ts";
 
 export const frontmatter = {
-  title: "Gesetze visualisieren",
-  isStagingOnly: true,
+  title: "Prototyp: Gesetze visualisieren",
+  sitemap: false,
 };
 
 const wizardPath = werkzeuge_kiPrototypen_visualisieren_erstellen.path;
@@ -35,7 +35,7 @@ const featuredExamples = featured.flatMap(({ short, visualization }) => {
 });
 ---
 
-<Layout title={frontmatter.title}>
+<Layout title={frontmatter.title} excludeFromSearch>
   {/* The wizard used to live at this path; forward old deep links. */}
   <script is:inline define:vars={{ wizardPath }}>
     const params = new URLSearchParams(window.location.search);

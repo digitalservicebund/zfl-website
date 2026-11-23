@@ -7,9 +7,8 @@ import { getCollection } from "astro:content";
 import { basename } from "node:path";
 
 export const frontmatter = {
-  title: "Potenziale aufdecken",
-  isStagingOnly: true,
-  navOrder: 5,
+  title: "Prototyp: Potenziale aufdecken",
+  sitemap: false,
 };
 
 const potenziale = await getCollection("potenziale");
@@ -27,7 +26,7 @@ const visualisierbareShorts = visualisierungen.map(({ filePath }) =>
 );
 ---
 
-<Layout title={frontmatter.title}>
+<Layout title={frontmatter.title} excludeFromSearch>
   <main id="main">
     <Hero class="breakout-grid">
       <h1>{frontmatter.title}</h1>
