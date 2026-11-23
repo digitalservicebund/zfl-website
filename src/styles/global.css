@@ -40,6 +40,8 @@
   --spacing-lg: 2.5rem; /* 48px */
   --spacing-2xl: 3rem;
   --spacing-3xl: 4rem; /* 64px */
+  --spacing-4xl: 5rem; /* 80px */
+  --spacing-5xl: 6rem; /* 96px */
 
   --max-content-width: 82rem;
   --container-padding-inline: clamp(1rem, 5vw, 3rem);
