@@ -1,4 +1,4 @@
-import { refineMermaid } from "@/pages/werkzeuge/_shared/api.ts";
+import { refineMermaid } from "@/pages/werkzeuge/ki-prototypen/_shared/api.ts";
 import mermaid from "mermaid";
 import type { WizardState } from "./_wizardState.svelte.ts";
 

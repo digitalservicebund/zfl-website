@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { ChatMessage } from "./_chatBackend.ts";
   import type { ChatStatus } from "./_chatState.svelte.ts";
-  import ChipBtn from "@/pages/werkzeuge/_shared/ChipBtn.svelte";
+  import ChipBtn from "@/pages/werkzeuge/ki-prototypen/_shared/ChipBtn.svelte";
 
   let {
     messages,

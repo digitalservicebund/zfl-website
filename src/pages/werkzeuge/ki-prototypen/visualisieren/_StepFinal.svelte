@@ -1,11 +1,11 @@
 <script lang="ts">
   import { untrack } from "svelte";
   import { liveAi } from "@/config/features";
-  import Select from "@/pages/werkzeuge/_shared/Select.svelte";
-  import ChipBtn from "@/pages/werkzeuge/_shared/ChipBtn.svelte";
-  import LoadingIndicator from "@/pages/werkzeuge/_shared/LoadingIndicator.svelte";
+  import Select from "@/pages/werkzeuge/ki-prototypen/_shared/Select.svelte";
+  import ChipBtn from "@/pages/werkzeuge/ki-prototypen/_shared/ChipBtn.svelte";
+  import LoadingIndicator from "@/pages/werkzeuge/ki-prototypen/_shared/LoadingIndicator.svelte";
   import IconInfo from "~icons/ic/outline-info";
-  import { resolveEliUrl } from "@/pages/werkzeuge/_shared/eli.ts";
+  import { resolveEliUrl } from "@/pages/werkzeuge/ki-prototypen/_shared/eli.ts";
   import { getWizardContext } from "./_wizardState.svelte.ts";
   import { visTypeIcons } from "./_visTypeIcons.ts";
   import ChatInput from "./_ChatInput.svelte";

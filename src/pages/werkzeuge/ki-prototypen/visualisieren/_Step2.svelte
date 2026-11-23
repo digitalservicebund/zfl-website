@@ -1,6 +1,6 @@
 <script lang="ts">
   import PresetBtn from "./_PresetBtn.svelte";
-  import LoadingIndicator from "@/pages/werkzeuge/_shared/LoadingIndicator.svelte";
+  import LoadingIndicator from "@/pages/werkzeuge/ki-prototypen/_shared/LoadingIndicator.svelte";
   import { getWizardContext } from "./_wizardState.svelte.ts";
   import { visTypeIcons } from "./_visTypeIcons.ts";
 

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { liveAi } from "@/config/features";
-  import ChipBtn from "@/pages/werkzeuge/_shared/ChipBtn.svelte";
-  import ExampleFinder from "@/pages/werkzeuge/_shared/ExampleFinder.svelte";
+  import ChipBtn from "@/pages/werkzeuge/ki-prototypen/_shared/ChipBtn.svelte";
+  import ExampleFinder from "@/pages/werkzeuge/ki-prototypen/_shared/ExampleFinder.svelte";
   import PresetBtn from "./_PresetBtn.svelte";
   import { getWizardContext, lawTypes } from "./_wizardState.svelte.ts";
   import type { LawExample } from "./_types";

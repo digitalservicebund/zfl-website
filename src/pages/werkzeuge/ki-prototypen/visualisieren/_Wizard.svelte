@@ -7,11 +7,14 @@
     mermaidFlowchartToRulemapXml,
   } from "./_mermaid2RulemapXML.ts";
   import { parseMmdFrontmatter } from "./_mmdFrontmatter.ts";
-  import { resolveEliUrl } from "@/pages/werkzeuge/_shared/eli.ts";
-  import { createFakeLoadingSequence } from "@/pages/werkzeuge/_shared/fakeLoading.ts";
-  import { getMermaid, getVisOptions } from "@/pages/werkzeuge/_shared/api.ts";
+  import { resolveEliUrl } from "@/pages/werkzeuge/ki-prototypen/_shared/eli.ts";
+  import { createFakeLoadingSequence } from "@/pages/werkzeuge/ki-prototypen/_shared/fakeLoading.ts";
+  import {
+    getMermaid,
+    getVisOptions,
+  } from "@/pages/werkzeuge/ki-prototypen/_shared/api.ts";
   import CanvasViewer from "./_CanvasViewer.svelte";
-  import Select from "@/pages/werkzeuge/_shared/Select.svelte";
+  import Select from "@/pages/werkzeuge/ki-prototypen/_shared/Select.svelte";
   import { markChanges } from "./_diagramDiff.ts";
   import {
     boldToMarkdown,
