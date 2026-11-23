@@ -4,6 +4,7 @@ import Footer from "@/components/global/Footer.astro";
 import PageHeader from "@/components/global/PageHeader.astro";
 import SectionSidebar from "@/components/global/SectionSidebar.astro";
 import Posthog from "@/components/global/Posthog.astro";
+import { isNoIndexPath } from "@/config/seo";
 import { isProduction } from "@/config/stage";
 import {
   getRouteByPath,
@@ -16,6 +17,7 @@ import firaSansRegularUrl from "@kern-ux/native/dist/fonts/fira-sans/FiraSans-Re
 import { SEO } from "astro-seo";
 import "@/styles/global.css";
 import SkipNavLink from "@/components/SkipNavLink.astro";
+import ogImage from "@/images/og-image.png?url";
 
 interface Props {
   title: string;
@@ -33,7 +35,8 @@ const {
 
 const siteName = "Zentrum für Legistik";
 const title = pageTitle ? `${pageTitle} — ${siteName}` : siteName;
-const SEOImage = `${Astro.url.origin}/SEO_ZfL.png`;
+const SEOImage = `${Astro.url.origin}${ogImage}`;
+const noIndex = isNoIndexPath(Astro.url.pathname, import.meta.env.BASE_URL);
 const currentRoute = getRouteByPath(Astro.url.pathname);
 const [sectionRoot] = currentRoute ? getRouteChain(currentRoute) : [];
 const showSectionSidebar = !!sectionRoot && hasVisibleChildren(sectionRoot);
@@ -67,6 +70,8 @@ const defaultDescription =
   <SEO
     title={title}
     description={description ?? defaultDescription}
+    noindex={noIndex}
+    canonical={noIndex ? null : undefined}
     openGraph={{
       basic: {
         title,

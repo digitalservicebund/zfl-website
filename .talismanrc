@@ -139,6 +139,29 @@ fileignoreconfig:
     checksum: 3c03f44d564d8d546d3789c6ab2ee86978a689d0b694594a54ca24b36a5d9522
   - filename: src/pages/werkzeuge/_assets/ki/optimierung.png
     checksum: 8857e3f7850ad8216835bcdd5f647084f4977f632592498cc19bed0a8c1b654c
+  # KI-Prototypen (src/pages/werkzeuge/ki-prototypen): generated data and Alpine x-for bindings
+  - filename: public/data/laws.json
+    checksum: 82b2af876b8427fc26fb11d0d3c7e2b34759d8c366b2691e53b1cb74e2c08813
+  - filename: public/data/obligations/Pflichten_LLM_*.csv
+    checksum: ede188ba72fa0553767a5eebcc6e033b5c5e0eb22890c00d764c3a925bd222d4
+    ignore_detectors: [filecontent] # wildcard checksums are not stable across talisman modes
+  - filename: src/pages/werkzeuge/ki-prototypen/pflichten.astro
+    allowed_patterns:
+      - ":key="
+      - referenceSortKey
+      - "key: Array"
+      - key\.push
+      - (left|right)Key
+  - filename: src/pages/werkzeuge/ki-prototypen/_recht-erkunden/*.astro
+    allowed_patterns:
+      - ":key="
+  - filename: src/pages/werkzeuge/ki-prototypen/recht-erkunden.astro
+    allowed_patterns:
+      - passenden
+  - filename: src/pages/werkzeuge/ki-prototypen/_recht-erkunden-bindings.test.ts
+    allowed_patterns:
+      - storeKeys
+      - keys are locals
 scopeconfig:
   - scope: node
 allowed_patterns:

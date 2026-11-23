@@ -1,0 +1,39 @@
+---
+import Hero from "@/components/Hero.astro";
+import {
+  werkzeuge_kiPrototypen_pflichten,
+  werkzeuge_kiPrototypen_rechtErkunden,
+} from "@/config/routes";
+import Layout from "@/layouts/Layout.astro";
+
+export const frontmatter = {
+  title: "KI-Prototypen",
+  isStagingOnly: true, // TODO: consider a proper `hideInNav` prop?
+  sitemap: false,
+};
+
+const prototypes = [
+  werkzeuge_kiPrototypen_pflichten,
+  werkzeuge_kiPrototypen_rechtErkunden,
+];
+---
+
+<Layout title={frontmatter.title} excludeFromSearch>
+  <main class="breakout-grid pb-lg" id="main">
+    <Hero level="main">
+      <h1>{frontmatter.title}</h1>
+      <p>
+        Diese Übersicht ist nur auf Staging sichtbar. Die Prototypen selbst sind
+        veröffentlicht, aber nicht im Menü verlinkt.
+      </p>
+    </Hero>
+
+    <ul class="py-lg">
+      {prototypes.map((route) => (
+        <li>
+          <a href={route.path}>{route.title}</a>
+        </li>
+      ))}
+    </ul>
+  </main>
+</Layout>
