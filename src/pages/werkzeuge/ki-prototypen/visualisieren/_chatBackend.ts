@@ -1,5 +1,5 @@
+import { refineMermaid } from "@/pages/werkzeuge/_shared/api.ts";
 import mermaid from "mermaid";
-import { refineMermaid } from "../_shared/api.ts";
 import type { WizardState } from "./_wizardState.svelte.ts";
 
 export type ChatRole = "user" | "assistant";

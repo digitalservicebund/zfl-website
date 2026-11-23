@@ -99,7 +99,7 @@ fileignoreconfig:
     ignore_detectors: [filename]
   - filename: src/content/ki-visualisierungen/BKleingG/pachthoehe.mmd
     checksum: 4ef525f5b449fc5f5863fbc1964e4ecdae41363aabf295290f6ad825956dc1fd
-  - filename: src/pages/werkzeuge/visualisieren/_mermaid2RulemapXML.ts
+  - filename: src/pages/werkzeuge/ki-prototypen/visualisieren/_mermaid2RulemapXML.ts
     checksum: 01019ab0f49d7695a85a1e669ccca19f15620f8c6908a96eaa41c7a823a8e9f5
   - filename: src/pages/werkzeuge/_shared/ExampleFinder.svelte
     allowed_patterns: [handleKeydown]
@@ -112,7 +112,7 @@ fileignoreconfig:
   - filename: src/content/potenziale/ZirkRegV_buergercheck.md
     checksum: faef13c94bed18ee8203bd49d8ccea99abc8a2a2baa9759ed7f9d809f0c11f82
   - filename: .claude/skills/gesetz-visualisieren/SKILL.md
-    checksum: ce79ba7efa69a4f32e44fc592e62a672dcbd973485ac977b865ec6ff51deda64
+    checksum: 4b94c331455bf27f3673e181a397da1e3ed8b5b730f8e211250e3aadb7d641b7
   - filename: .claude/skills/vorhaben-checks/praxischeck.md
     checksum: 619ddebc8ecba2805a0c25981a2708ee9845a3534261aade12612ce7764704ba
   - filename: .claude/skills/vorhaben-checks/digitalcheck.md
@@ -187,7 +187,7 @@ fileignoreconfig:
       - Sxzmf2FkxTibbNVByMIFM3srA_7GBw
   - filename: src/images/online-schulung.jpg
     ignore_detectors: [filecontent]
-  - filename: src/pages/werkzeuge/visualisieren/_wizardState.svelte.ts
+  - filename: src/pages/werkzeuge/ki-prototypen/visualisieren/_wizardState.svelte.ts
     allowed_patterns: [WIZARD_CONTEXT_KEY]
   - filename: src/content/ki-visualisierungen/IfSG/akteure.mmd
     checksum: 13f0a74a0442793b8ba5b3187c596ae893b2c3499baf5b7928172ec1af38e9b0

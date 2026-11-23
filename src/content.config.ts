@@ -1,5 +1,5 @@
 import { allRoutes } from "@/config/routes";
-import { visOptionType } from "@/pages/werkzeuge/visualisieren/_types";
+import { visOptionType } from "@/pages/werkzeuge/ki-prototypen/visualisieren/_types";
 import { withBase } from "@/utils/path";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";

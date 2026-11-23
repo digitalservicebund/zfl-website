@@ -1,6 +1,6 @@
 <script lang="ts">
   import PresetBtn from "./_PresetBtn.svelte";
-  import LoadingIndicator from "../_shared/LoadingIndicator.svelte";
+  import LoadingIndicator from "@/pages/werkzeuge/_shared/LoadingIndicator.svelte";
   import { getWizardContext } from "./_wizardState.svelte.ts";
   import { visTypeIcons } from "./_visTypeIcons.ts";
 
@@ -38,9 +38,9 @@
                 <div class="flex justify-between items-center w-full">
                   <span>{option.name}</span>
                   {#if option.articles.length}
-                    <span class="kern-body--muted"
-                      >{option.articles.join(", ")}</span
-                    >
+                    <span class="kern-body--muted">
+                      {option.articles.join(", ")}
+                    </span>
                   {/if}
                 </div>
               </PresetBtn>

@@ -7,11 +7,11 @@
     mermaidFlowchartToRulemapXml,
   } from "./_mermaid2RulemapXML.ts";
   import { parseMmdFrontmatter } from "./_mmdFrontmatter.ts";
-  import { resolveEliUrl } from "../_shared/eli.ts";
-  import { createFakeLoadingSequence } from "../_shared/fakeLoading.ts";
-  import { getMermaid, getVisOptions } from "../_shared/api.ts";
+  import { resolveEliUrl } from "@/pages/werkzeuge/_shared/eli.ts";
+  import { createFakeLoadingSequence } from "@/pages/werkzeuge/_shared/fakeLoading.ts";
+  import { getMermaid, getVisOptions } from "@/pages/werkzeuge/_shared/api.ts";
   import CanvasViewer from "./_CanvasViewer.svelte";
-  import Select from "../_shared/Select.svelte";
+  import Select from "@/pages/werkzeuge/_shared/Select.svelte";
   import { markChanges } from "./_diagramDiff.ts";
   import {
     boldToMarkdown,
@@ -28,7 +28,7 @@
   import Step2 from "./_Step2.svelte";
   import StepFinal from "./_StepFinal.svelte";
   import { steps } from "./_steps.ts";
-  import { werkzeuge_visualisieren } from "@/config/routes";
+  import { werkzeuge_kiPrototypen_visualisieren } from "@/config/routes";
   import IconChevronRight from "~icons/ic/outline-chevron-right";
 
   let { examples }: { examples: LawExample[] } = $props();
@@ -617,8 +617,10 @@
       <button
         type="button"
         class="kern-link kern-link--small py-0"
-        onclick={() => (wizard.currentStep = step)}>{label}</button
+        onclick={() => (wizard.currentStep = step)}
       >
+        {label}
+      </button>
     {/if}
   </li>
 {/snippet}
@@ -631,7 +633,7 @@
   >
     <div class="space-y-4">
       <h1 class="kern-heading-small p-0">
-        {werkzeuge_visualisieren.title}
+        {werkzeuge_kiPrototypen_visualisieren.title}
       </h1>
       <nav aria-label="Brotkrümelnavigation">
         <ul
@@ -639,11 +641,11 @@
         >
           <li>
             <a
-              href={werkzeuge_visualisieren.path}
+              href={werkzeuge_kiPrototypen_visualisieren.path}
               class="kern-link kern-link--small py-0"
             >
-              Übersicht</a
-            >
+              Übersicht
+            </a>
           </li>
           {@render stepCrumb("Textauswahl", 1)}
           {#if lawTitle && wizard.currentStep >= 2}
@@ -723,8 +725,9 @@
                   class="kern-label"
                   class:hidden={wizard.currentStep === steps.length}
                   for="progress1"
-                  >Schritt {wizard.currentStep} von {steps.length}</label
                 >
+                  Schritt {wizard.currentStep} von {steps.length}
+                </label>
                 <progress
                   id="progress1"
                   value={wizard.currentStep}
@@ -777,9 +780,9 @@
                   <div
                     class="kern-form-input w-280 bg-white p-8 rounded-sm shadow-md"
                   >
-                    <label class="kern-sr-only" for="diagram-version"
-                      >Version</label
-                    >
+                    <label class="kern-sr-only" for="diagram-version">
+                      Version
+                    </label>
                     <Select
                       items={versionItems}
                       bind:selected={
@@ -796,9 +799,9 @@
                       {#snippet option(item)}
                         <span class="shrink-0">v{item.index + 1}</span>
                         {#if item.label}
-                          <span class="truncate kern-body--muted"
-                            >{item.label}</span
-                          >
+                          <span class="truncate kern-body--muted">
+                            {item.label}
+                          </span>
                         {/if}
                       {/snippet}
                     </Select>

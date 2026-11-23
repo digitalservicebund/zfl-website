@@ -1,6 +1,10 @@
 import type { Finding } from "@/content.config";
-import type { PotenzialeExample } from "../potenziale/_types";
-import type { LawExample, VisOption, VisType } from "../visualisieren/_types";
+import type { PotenzialeExample } from "../ki-prototypen/potenziale/_types";
+import type {
+  LawExample,
+  VisOption,
+  VisType,
+} from "../ki-prototypen/visualisieren/_types";
 import { API_BASE } from "./apiBase";
 
 export type VisOptionsResult = {

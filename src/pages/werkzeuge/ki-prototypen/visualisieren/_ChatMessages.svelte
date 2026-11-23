@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { ChatMessage } from "./_chatBackend.ts";
   import type { ChatStatus } from "./_chatState.svelte.ts";
-  import ChipBtn from "../_shared/ChipBtn.svelte";
+  import ChipBtn from "@/pages/werkzeuge/_shared/ChipBtn.svelte";
 
   let {
     messages,
@@ -40,8 +40,9 @@
               selected={index === versionIndex}
               onclick={() => onShowVersion(index)}
               aria-label={`Version ${index + 1} anzeigen`}
-              >Version {index + 1}</ChipBtn
             >
+              Version {index + 1}
+            </ChipBtn>
           </div>
         {/if}
       </div>
@@ -49,9 +50,9 @@
   {/each}
   {#if status === "thinking"}
     <p class="thinking text-cosmic-blue-base">
-      Denke nach<span aria-hidden="true"
-        ><span>.</span><span>.</span><span>.</span></span
-      >
+      Denke nach<span aria-hidden="true">
+        <span>.</span><span>.</span><span>.</span>
+      </span>
     </p>
   {/if}
 </div>

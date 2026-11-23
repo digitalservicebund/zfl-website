@@ -1,10 +1,10 @@
 <script lang="ts">
   import { untrack } from "svelte";
-  import Select from "../_shared/Select.svelte";
-  import ChipBtn from "../_shared/ChipBtn.svelte";
-  import LoadingIndicator from "../_shared/LoadingIndicator.svelte";
+  import Select from "@/pages/werkzeuge/_shared/Select.svelte";
+  import ChipBtn from "@/pages/werkzeuge/_shared/ChipBtn.svelte";
+  import LoadingIndicator from "@/pages/werkzeuge/_shared/LoadingIndicator.svelte";
   import IconInfo from "~icons/ic/outline-info";
-  import { resolveEliUrl } from "../_shared/eli.ts";
+  import { resolveEliUrl } from "@/pages/werkzeuge/_shared/eli.ts";
   import { getWizardContext } from "./_wizardState.svelte.ts";
   import { visTypeIcons } from "./_visTypeIcons.ts";
   import ChatInput from "./_ChatInput.svelte";
@@ -86,16 +86,18 @@
               standalone
               selected={wizard.versionIndex === 0}
               onclick={() => wizard.showVersion(0)}
-              aria-label="Version 1 anzeigen">Version 1</ChipBtn
+              aria-label="Version 1 anzeigen"
             >
+              Version 1
+            </ChipBtn>
           </div>
         {/if}
         {#if wizard.selectedExample}
           <p class="kern-body kern-body--muted">
             Quelle:
-            <a href={resolveEliUrl(wizard.selectedExample.eli)} target="_blank"
-              >{wizard.selectedExample.short}</a
-            >
+            <a href={resolveEliUrl(wizard.selectedExample.eli)} target="_blank">
+              {wizard.selectedExample.short}
+            </a>
             {#if wizard.selectedVisOption?.articles.length}
               {wizard.selectedVisOption.articles.join(", ")}
             {/if}

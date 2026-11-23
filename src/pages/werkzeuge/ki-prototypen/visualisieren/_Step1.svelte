@@ -1,6 +1,6 @@
 <script lang="ts">
-  import ChipBtn from "../_shared/ChipBtn.svelte";
-  import ExampleFinder from "../_shared/ExampleFinder.svelte";
+  import ChipBtn from "@/pages/werkzeuge/_shared/ChipBtn.svelte";
+  import ExampleFinder from "@/pages/werkzeuge/_shared/ExampleFinder.svelte";
   import PresetBtn from "./_PresetBtn.svelte";
   import { getWizardContext, lawTypes } from "./_wizardState.svelte.ts";
   import type { LawExample } from "./_types";
@@ -52,8 +52,10 @@
       {#each lawTypes as lt (lt.id)}
         <ChipBtn
           onclick={() => wizard.selectLawType(lt.id)}
-          selected={wizard.selectedLawType === lt.id}>{lt.label}</ChipBtn
+          selected={wizard.selectedLawType === lt.id}
         >
+          {lt.label}
+        </ChipBtn>
       {/each}
     </div>
     {#if wizard.selectedLawType === "existing"}
@@ -82,8 +84,9 @@
             class="kern-btn kern-btn--primary"
             disabled={!wizard.draftText.trim()}
             onclick={() => wizard.analyzeDraft()}
-            ><span class="kern-label">Analysieren</span></button
           >
+            <span class="kern-label">Analysieren</span>
+          </button>
         </div>
       </div>
     {/if}

@@ -1,14 +1,14 @@
 <script lang="ts">
   import { untrack } from "svelte";
   import { SvelteURLSearchParams, SvelteMap } from "svelte/reactivity";
-  import { werkzeuge_visualisieren_erstellen } from "@/config/routes";
-  import { getChecks } from "../_shared/api.ts";
-  import ChipBtn from "../_shared/ChipBtn.svelte";
-  import { resolveEliUrl } from "../_shared/eli.ts";
-  import ExampleFinder from "../_shared/ExampleFinder.svelte";
-  import { createFakeLoadingSequence } from "../_shared/fakeLoading.ts";
-  import Hint from "../_shared/Hint.svelte";
-  import LoadingIndicator from "../_shared/LoadingIndicator.svelte";
+  import { werkzeuge_kiPrototypen_visualisieren_erstellen } from "@/config/routes";
+  import { getChecks } from "@/pages/werkzeuge/_shared/api.ts";
+  import ChipBtn from "@/pages/werkzeuge/_shared/ChipBtn.svelte";
+  import { resolveEliUrl } from "@/pages/werkzeuge/_shared/eli.ts";
+  import ExampleFinder from "@/pages/werkzeuge/_shared/ExampleFinder.svelte";
+  import { createFakeLoadingSequence } from "@/pages/werkzeuge/_shared/fakeLoading.ts";
+  import Hint from "@/pages/werkzeuge/_shared/Hint.svelte";
+  import LoadingIndicator from "@/pages/werkzeuge/_shared/LoadingIndicator.svelte";
   import FindingsGroup from "./_FindingsGroup.svelte";
   import ObligationsGroup from "./_ObligationsGroup.svelte";
   import PotenzialeSidebar from "./_PotenzialeSidebar.svelte";
@@ -227,8 +227,10 @@
               analyzedDraftText = undefined;
               selectedVorhabenType = vt.id;
             }}
-            selected={selectedVorhabenType === vt.id}>{vt.label}</ChipBtn
+            selected={selectedVorhabenType === vt.id}
           >
+            {vt.label}
+          </ChipBtn>
         {/each}
       </div>
     </div>
@@ -254,8 +256,9 @@
             class="kern-btn kern-btn--primary"
             disabled={!draftText.trim()}
             onclick={analyzeDraft}
-            ><span class="kern-label">Analysieren</span></button
           >
+            <span class="kern-label">Analysieren</span>
+          </button>
         </div>
       </div>
     {/if}
@@ -263,8 +266,10 @@
       <p class="kern-body kern-body--muted">
         Originaltext: <a
           href={resolveEliUrl(selectedExample.eli)}
-          target="_blank">{selectedExample.short}</a
+          target="_blank"
         >
+          {selectedExample.short}
+        </a>
       </p>
     {/if}
     {#if checksSource}
@@ -337,9 +342,10 @@
             <Hint>
               Zu {selectedExample.short} gibt es auch Visualisierungen:
               <a
-                href={`${werkzeuge_visualisieren_erstellen.path}?norm=${selectedExample.short}`}
-                >Hier ansehen</a
+                href={`${werkzeuge_kiPrototypen_visualisieren_erstellen.path}?norm=${selectedExample.short}`}
               >
+                Hier ansehen
+              </a>
             </Hint>
           {/if}
         {:else if selectedCheckType}

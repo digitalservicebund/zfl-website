@@ -1,6 +1,6 @@
 ---
 name: vorhaben-checks
-description: Sucht ein Gesetz über die RIS-Search-API, lädt den Volltext, führt darüber den Digitalcheck und den Bürgercheck aus und extrahiert die im Gesetz enthaltenen Pflichten. Ergebnisse werden im Potenziale-Tool (src/pages/werkzeuge/potenziale) gespeichert. Trigger bei "Vorhabencheck", "Digitalcheck", "Bürgercheck", "Pflichten extrahieren", "Gesetz auf Potenziale prüfen". (Praxischeck folgt später.)
+description: Sucht ein Gesetz über die RIS-Search-API, lädt den Volltext, führt darüber den Digitalcheck und den Bürgercheck aus und extrahiert die im Gesetz enthaltenen Pflichten. Ergebnisse werden im Potenziale-Tool (src/pages/werkzeuge/ki-prototypen/potenziale) gespeichert. Trigger bei "Vorhabencheck", "Digitalcheck", "Bürgercheck", "Pflichten extrahieren", "Gesetz auf Potenziale prüfen". (Praxischeck folgt später.)
 ---
 
 # Vorhaben-Checks
@@ -8,7 +8,7 @@ description: Sucht ein Gesetz über die RIS-Search-API, lädt den Volltext, füh
 Dieser Skill führt den Nutzer durch einen 4-stufigen Ablauf, um einen
 Gesetzestext mit dem Digitalcheck und dem Bürgercheck zu analysieren, die
 darin enthaltenen Pflichten zu extrahieren und das Ergebnis in dieses Repo
-einzupflegen (Tool unter `/werkzeuge/potenziale`).
+einzupflegen (Tool unter `/werkzeuge/ki-prototypen/potenziale`).
 Praxischeck ist vorerst entfernt — er wird ergänzt, sobald für ihn ein
 vergleichbares Prüfschema wie für Digitalcheck und Bürgercheck vorliegt
 (strukturierte Findings statt Fließtext, siehe `digitalcheck.md` und
@@ -193,7 +193,7 @@ Analyse jeweils auszuführen ist.
 6. Kurze Zusammenfassung an den Nutzer: welches Gesetz, Digital- und
    Bürgerbezug ja/nein, Anzahl Findings (je Check), Anzahl extrahierter
    Pflichten, wo der Gesetzestext gespeichert wurde. Auf
-   `/werkzeuge/potenziale` im lokalen Dev-Server verweisen, um den Eintrag zu
+   `/werkzeuge/ki-prototypen/potenziale` im lokalen Dev-Server verweisen, um den Eintrag zu
    prüfen.
 
 Nicht committen, es sei denn der Nutzer bittet explizit darum.

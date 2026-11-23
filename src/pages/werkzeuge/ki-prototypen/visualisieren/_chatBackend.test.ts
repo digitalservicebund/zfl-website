@@ -1,6 +1,6 @@
+import { refineMermaid } from "@/pages/werkzeuge/_shared/api.ts";
 import mermaid from "mermaid";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { refineMermaid } from "../_shared/api.ts";
 import {
   createRefineChatBackend,
   type ChatMessage,
@@ -8,7 +8,7 @@ import {
 } from "./_chatBackend.ts";
 
 vi.mock("mermaid", () => ({ default: { parse: vi.fn() } }));
-vi.mock("../_shared/api.ts", () => ({ refineMermaid: vi.fn() }));
+vi.mock("@/pages/werkzeuge/_shared/api.ts", () => ({ refineMermaid: vi.fn() }));
 
 const OLD_DIAGRAM = "flowchart TD\n  A --> B";
 const NEW_DIAGRAM = "flowchart TD\n  A --> X --> B";

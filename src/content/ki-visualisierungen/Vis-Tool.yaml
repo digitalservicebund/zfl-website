@@ -1,5 +1,5 @@
 title: Gesetze visualisieren
-eli: https://github.com/digitalservicebund/zfl-website/tree/mermaid/src/pages/werkzeuge/visualisieren
+eli: https://github.com/digitalservicebund/zfl-website/tree/mermaid/src/pages/werkzeuge/ki-prototypen/visualisieren
 visOptions:
   - name: Live visualization of a law text
     visType: swimlane

@@ -52,7 +52,7 @@ export const PROTOTYP_PFLICHTEN_URL = {
 };
 
 export const PROTOTYP_POTENZIALE_URL = {
-  url: "https://digitalservicebund.github.io/zfl-website/previews/mermaid/werkzeuge/potenziale/",
+  url: "https://digitalservicebund.github.io/zfl-website/previews/mermaid/werkzeuge/ki-prototypen/potenziale/",
 };
 
 export const PROTOTYP_RECHT_ERKUNDEN_URL = {

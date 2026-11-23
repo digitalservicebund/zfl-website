@@ -7,7 +7,7 @@ import FeatureItem from "@/components/FeatureItem.astro";
 import IconShare from "~icons/ic/twotone-share";
 import IconLightbulb from "~icons/ic/twotone-lightbulb";
 import IconEye from "~icons/ic/twotone-remove-red-eye";
-import { werkzeuge_visualisieren_erstellen } from "@/config/routes";
+import { werkzeuge_kiPrototypen_visualisieren_erstellen } from "@/config/routes";
 import { getVisualisierungExamples } from "./_examples.ts";
 import { visTypeIcons } from "./_visTypeIcons.ts";
 
@@ -16,7 +16,7 @@ export const frontmatter = {
   isStagingOnly: true,
 };
 
-const wizardPath = werkzeuge_visualisieren_erstellen.path;
+const wizardPath = werkzeuge_kiPrototypen_visualisieren_erstellen.path;
 
 // Hand-picked to show one example per vis type. Entries that no longer
 // exist in the collection are skipped.
@@ -47,9 +47,9 @@ const featuredExamples = featured.flatMap(({ short, visualization }) => {
   </script>
   <script>
     // Remembers a user-test ?api= link before the visitor moves on to the wizard.
-    import "../_shared/apiBase";
+    import "@/pages/werkzeuge/_shared/apiBase";
   </script>
-  <main class="breakout-grid">
+  <main class="breakout-grid" id="main">
     <Hero>
       <h1>{frontmatter.title}</h1>
       <p>

@@ -1,6 +1,6 @@
 ---
 name: gesetz-visualisieren
-description: Sucht ein Gesetz über die RIS-Search-API, identifiziert bis zu 5 Prozesse/Abläufe im Gesetzestext und erzeugt dafür Mermaid-Diagramme (Flowcharts oder Swimlanes), optional ergänzt um eine Akteursübersicht, die als .mmd-Dateien im Visualisierungs-Tool (src/pages/werkzeuge/visualisieren) gespeichert werden. Trigger bei "Gesetz visualisieren", "Mermaid-Diagramm für Gesetz", "Prozessvisualisierung Gesetzestext".
+description: Sucht ein Gesetz über die RIS-Search-API, identifiziert bis zu 5 Prozesse/Abläufe im Gesetzestext und erzeugt dafür Mermaid-Diagramme (Flowcharts oder Swimlanes), optional ergänzt um eine Akteursübersicht, die als .mmd-Dateien im Visualisierungs-Tool (src/pages/werkzeuge/ki-prototypen/visualisieren) gespeichert werden. Trigger bei "Gesetz visualisieren", "Mermaid-Diagramm für Gesetz", "Prozessvisualisierung Gesetzestext".
 ---
 
 # Gesetz visualisieren
@@ -8,7 +8,7 @@ description: Sucht ein Gesetz über die RIS-Search-API, identifiziert bis zu 5 P
 Dieser Skill führt den Nutzer durch einen 4-stufigen Ablauf, um aus einem
 Gesetzestext bis zu 5 Mermaid-Diagramme (`flowchart` oder `swimlane`) und
 optional eine Akteursübersicht (`actors`) zu erzeugen und in dieses Repo
-einzupflegen (Tool unter `/werkzeuge/visualisieren`).
+einzupflegen (Tool unter `/werkzeuge/ki-prototypen/visualisieren`).
 
 Ein optionales Argument kann bereits den Gesetznamen enthalten
 (`$ARGUMENTS`). Wenn vorhanden, überspringe Schritt 1.
@@ -374,7 +374,8 @@ Speichern:
    das Diagramm über den Wortlaut hinausgeht oder vereinfacht (z.B. aus
    allgemeinem Verfahrensrecht oder Rechtsprechung abgeleitete Schritte,
    bewusst weggelassene Ausnahmen), damit sie fachlich geprüft werden
-   können. Auf `/werkzeuge/visualisieren` im lokalen Dev-Server verweisen,
+   können. Auf `/werkzeuge/ki-prototypen/visualisieren` im lokalen
+   Dev-Server verweisen,
    um die Diagramme zu prüfen.
 
 Nicht committen, es sei denn der Nutzer bittet explizit darum.
