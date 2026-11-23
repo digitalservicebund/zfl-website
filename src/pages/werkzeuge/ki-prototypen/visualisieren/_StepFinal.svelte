@@ -1,5 +1,6 @@
 <script lang="ts">
   import { untrack } from "svelte";
+  import { liveAi } from "@/config/features";
   import Select from "@/pages/werkzeuge/_shared/Select.svelte";
   import ChipBtn from "@/pages/werkzeuge/_shared/ChipBtn.svelte";
   import LoadingIndicator from "@/pages/werkzeuge/_shared/LoadingIndicator.svelte";
@@ -103,22 +104,27 @@
             {/if}
           </p>
         {/if}
-        <ChatMessages
-          messages={chat.messages}
-          status={chat.status}
-          versionIndex={wizard.versionIndex}
-          onShowVersion={(index) => wizard.showVersion(index)}
-        />
+        <!-- Refining the diagram via chat needs the live AI backend -->
+        {#if liveAi}
+          <ChatMessages
+            messages={chat.messages}
+            status={chat.status}
+            versionIndex={wizard.versionIndex}
+            onShowVersion={(index) => wizard.showVersion(index)}
+          />
+        {/if}
       </div>
     {/if}
   </div>
   <div class="space-y-24">
     {#if !wizard.isLoading && wizard.mermaidSource}
-      <ChatInput
-        onSubmit={(text) => chat.send(text)}
-        onStop={() => chat.stop()}
-        isBusy={chat.isBusy}
-      />
+      {#if liveAi}
+        <ChatInput
+          onSubmit={(text) => chat.send(text)}
+          onStop={() => chat.stop()}
+          isBusy={chat.isBusy}
+        />
+      {/if}
       <p class="kern-body--small kern-body--muted flex items-center gap-4">
         <IconInfo class="size-16 shrink-0" aria-hidden="true" />
         KI-generierte Inhalte. Diese können falsch sein.

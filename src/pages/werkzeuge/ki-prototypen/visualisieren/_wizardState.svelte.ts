@@ -1,3 +1,4 @@
+import { liveAi } from "@/config/features";
 import { getContext, setContext } from "svelte";
 import { steps } from "./_steps.ts";
 import type { LawExample, VisOption, VisType } from "./_types";
@@ -14,10 +15,13 @@ export const lawTypes = [
   { id: "existing", label: "bestehendes Gesetz" },
 ] as const satisfies LawType[];
 
+// Visualising an own draft needs the live AI backend
+const defaultLawType = liveAi ? "own" : "existing";
+
 export class WizardState {
   currentStep = $state(1);
 
-  selectedLawType = $state<(typeof lawTypes)[number]["id"]>("own");
+  selectedLawType = $state<(typeof lawTypes)[number]["id"]>(defaultLawType);
   preset = $state<VisType>("flowchart");
   selectedExample = $state<LawExample>();
   draftText = $state("");
@@ -120,7 +124,7 @@ export class WizardState {
   // loaded vis options, mermaid source and URL params once their source
   // values are gone.
   reset() {
-    this.selectedLawType = "own";
+    this.selectedLawType = defaultLawType;
     this.preset = "flowchart";
     this.selectedExample = undefined;
     this.draftText = "";

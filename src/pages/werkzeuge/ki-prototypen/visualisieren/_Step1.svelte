@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { liveAi } from "@/config/features";
   import ChipBtn from "@/pages/werkzeuge/_shared/ChipBtn.svelte";
   import ExampleFinder from "@/pages/werkzeuge/_shared/ExampleFinder.svelte";
   import PresetBtn from "./_PresetBtn.svelte";
@@ -48,19 +49,21 @@
     {@render presets()}
   </div>
   <div class="space-y-16">
-    <div class="flex flex-wrap gap-8">
-      {#each lawTypes as lt (lt.id)}
-        <ChipBtn
-          onclick={() => wizard.selectLawType(lt.id)}
-          selected={wizard.selectedLawType === lt.id}
-        >
-          {lt.label}
-        </ChipBtn>
-      {/each}
-    </div>
+    {#if liveAi}
+      <div class="flex flex-wrap gap-8">
+        {#each lawTypes as lt (lt.id)}
+          <ChipBtn
+            onclick={() => wizard.selectLawType(lt.id)}
+            selected={wizard.selectedLawType === lt.id}
+          >
+            {lt.label}
+          </ChipBtn>
+        {/each}
+      </div>
+    {/if}
     {#if wizard.selectedLawType === "existing"}
       <ExampleFinder {examples} bind:selected={wizard.selectedExample} />
-    {:else}
+    {:else if liveAi}
       <div class="space-y-16">
         <div class="kern-form-input">
           <textarea

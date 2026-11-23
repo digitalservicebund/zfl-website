@@ -1,6 +1,7 @@
 <script lang="ts">
   import { untrack } from "svelte";
   import { SvelteURLSearchParams, SvelteMap } from "svelte/reactivity";
+  import { liveAi } from "@/config/features";
   import { werkzeuge_kiPrototypen_visualisieren_erstellen } from "@/config/routes";
   import { getChecks } from "@/pages/werkzeuge/_shared/api.ts";
   import ChipBtn from "@/pages/werkzeuge/_shared/ChipBtn.svelte";
@@ -217,30 +218,33 @@
 
 <div class="grid grid-cols-1 items-start lg:grid-cols-[1fr_auto]">
   <div class="breakout-grid py-lg min-w-0 space-y-32">
-    <div class="kern-form-input">
-      <span class="kern-label">Was möchten Sie prüfen?</span>
-      <div class="flex flex-wrap gap-8">
-        {#each vorhabenTypes as vt (vt.id)}
-          <ChipBtn
-            onclick={() => {
-              selectedExample = undefined;
-              analyzedDraftText = undefined;
-              selectedVorhabenType = vt.id;
-            }}
-            selected={selectedVorhabenType === vt.id}
-          >
-            {vt.label}
-          </ChipBtn>
-        {/each}
+    <!-- Analysing an own draft needs the live AI backend -->
+    {#if liveAi}
+      <div class="kern-form-input">
+        <span class="kern-label">Was möchten Sie prüfen?</span>
+        <div class="flex flex-wrap gap-8">
+          {#each vorhabenTypes as vt (vt.id)}
+            <ChipBtn
+              onclick={() => {
+                selectedExample = undefined;
+                analyzedDraftText = undefined;
+                selectedVorhabenType = vt.id;
+              }}
+              selected={selectedVorhabenType === vt.id}
+            >
+              {vt.label}
+            </ChipBtn>
+          {/each}
+        </div>
       </div>
-    </div>
+    {/if}
     {#if selectedVorhabenType === "existing"}
       <ExampleFinder
         {examples}
         bind:selected={selectedExample}
         showLabel={true}
       />
-    {:else}
+    {:else if liveAi}
       <div class="space-y-16">
         <div class="kern-form-input">
           <label class="kern-label" for="draft">Ihr Entwurf</label>

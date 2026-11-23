@@ -1,7 +1,10 @@
+import { liveAi } from "@/config/features";
+
 // TODO: move to env/config once the backend has a stable deployment.
 // Until then, user-test links can point at a tunnelled backend via
 // ?api=https://<name>.trycloudflare.com, which is remembered across pages.
 // Import this module on any page a user-test link may land on.
+// Only active with the `liveAi` feature flag; otherwise there is no backend.
 const DEFAULT_API_BASE = "http://localhost:8000";
 const API_BASE_STORAGE_KEY = "zfl-api-base";
 
@@ -30,4 +33,4 @@ function resolveApiBase(): string {
   return stored && isAllowedApiBase(stored) ? stored : DEFAULT_API_BASE;
 }
 
-export const API_BASE = resolveApiBase();
+export const API_BASE = liveAi ? resolveApiBase() : null;

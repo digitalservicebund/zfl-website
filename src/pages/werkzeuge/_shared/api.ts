@@ -13,6 +13,13 @@ export type VisOptionsResult = {
   options: VisOption[];
 };
 
+function apiUrl(path: string): string {
+  if (!API_BASE) {
+    throw new Error("Live-KI-Funktionen sind deaktiviert.");
+  }
+  return `${API_BASE}${path}`;
+}
+
 // FastAPI's default error shape, e.g. from HTTPException(status_code, detail).
 async function extractErrorDetail(response: Response): Promise<string> {
   try {
@@ -28,7 +35,7 @@ export async function getVisOptions(
   exampleOrDraftText: LawExample | string,
 ): Promise<VisOptionsResult> {
   if (typeof exampleOrDraftText === "string") {
-    const response = await fetch(`${API_BASE}/vis-options`, {
+    const response = await fetch(apiUrl("/vis-options"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ text: exampleOrDraftText }),
@@ -55,7 +62,7 @@ export async function getMermaid(
   sessionId: string,
   option: VisOption,
 ): Promise<MermaidResult> {
-  const response = await fetch(`${API_BASE}/mermaid`, {
+  const response = await fetch(apiUrl("/mermaid"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -95,7 +102,7 @@ export async function refineMermaid(
   request: RefineRequest,
   signal?: AbortSignal,
 ): Promise<RefineResult> {
-  const response = await fetch(`${API_BASE}/refine`, {
+  const response = await fetch(apiUrl("/refine"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(request),
@@ -119,7 +126,7 @@ export async function getChecks(
   exampleOrDraftText: PotenzialeExample | string,
 ): Promise<ChecksResult> {
   if (typeof exampleOrDraftText === "string") {
-    const response = await fetch(`${API_BASE}/checks`, {
+    const response = await fetch(apiUrl("/checks"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ text: exampleOrDraftText }),
