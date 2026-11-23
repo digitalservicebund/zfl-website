@@ -290,7 +290,7 @@ export const werkzeuge_kiPrototypen_visualisieren_erstellen = {
   title: "Visualisierung erstellen",
   parent: werkzeuge_kiPrototypen_visualisieren,
   sitemap: false,
-  isStagingOnly: true,
+  isStagingOnly: false,
 } as const;
 
 export const werkzeuge_praxistauglichkeit = {

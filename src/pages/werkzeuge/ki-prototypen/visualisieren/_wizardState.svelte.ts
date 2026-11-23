@@ -11,8 +11,8 @@ export type DiagramVersion = {
   label?: string;
 };
 export const lawTypes = [
-  { id: "own", label: "eigenes Vorhaben" },
   { id: "existing", label: "bestehendes Gesetz" },
+  { id: "own", label: "eigenes Vorhaben" },
 ] as const satisfies LawType[];
 
 // Visualising an own draft needs the live AI backend
