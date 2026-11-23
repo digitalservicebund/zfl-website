@@ -249,7 +249,7 @@ export const werkzeuge_kiPrototypen_pflichten = {
 export const werkzeuge_kiPrototypen_rechtErkunden = {
   key: "werkzeuge_kiPrototypen_rechtErkunden",
   path: "/werkzeuge/ki-prototypen/recht-erkunden",
-  title: "Recht erkunden",
+  title: "Prototyp: Angrenzendes Recht sichtbar machen",
   parent: werkzeuge_kiPrototypen,
   sitemap: false,
   isStagingOnly: false,
