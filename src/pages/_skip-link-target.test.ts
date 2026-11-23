@@ -2,7 +2,13 @@ import { describe, expect, it } from "vitest";
 
 const pages = import.meta.glob<string>(
   // Astro does not route files or folders prefixed with an underscore
-  ["/src/pages/**/*.astro", "!/src/pages/**/_*.astro", "!/src/pages/**/_*/**"],
+  [
+    "/src/pages/**/*.astro",
+    "!/src/pages/**/_*.astro",
+    "!/src/pages/**/_*/**",
+    // Full-screen tool on BaseLayout: no skip link, its Wizard renders <main>
+    "!/src/pages/werkzeuge/ki-prototypen/visualisieren/erstellen.astro",
+  ],
   { query: "?raw", import: "default", eager: true },
 );
 
