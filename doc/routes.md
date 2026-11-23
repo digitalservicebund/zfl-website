@@ -1,6 +1,6 @@
 # Route management
 
-Routes are auto-generated from page frontmatter by the `integrations/routeGenerator.ts` Astro integration. It runs at dev start and build time, writing `src/config/routes.ts`. Never edit `routes.ts` manually.
+Routes are auto-generated from page frontmatter by the `astro-route-generator` Astro integration. It runs at dev start and build time, writing `src/config/routes.ts`. Never edit `routes.ts` manually.
 
 ## Registering a page
 
@@ -61,6 +61,15 @@ For iterating over all routes, use `allRoutes`:
 ```ts
 import { allRoutes } from "@/config/routes";
 ```
+
+## Excluding pages from search engines
+
+Set `sitemap: false` in the frontmatter to keep a page out of search engines. The page is still published, but:
+
+- it is left out of `sitemap-index.xml` and the HTML sitemap page (`/sitemap`)
+- it gets a `<meta name="robots" content="noindex, follow">` tag and no canonical link
+
+Staging-only pages are treated the same way. The logic lives in `src/config/seo.ts` and is used by `Layout.astro` and the sitemap integration in `astro.config.mjs`.
 
 ## Staging-only pages
 

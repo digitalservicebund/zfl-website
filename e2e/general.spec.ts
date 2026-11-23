@@ -52,6 +52,10 @@ test("staging-only pages are accessible in staging", async ({ page }) => {
 test("the 404 page is served with the correct status code", async ({
   page,
 }) => {
+  test.skip(
+    !process.env.PLAYWRIGHT_USE_DOCKER,
+    "the status code is set by nginx, which only runs in the Docker image",
+  );
   const response = await page.request.get("/404");
   const status = response.status();
   expect(status).toBe(404);

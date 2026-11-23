@@ -1,0 +1,233 @@
+---
+// Renders inside the rechtErkunden Alpine scope (see ./store.ts).
+import IconRoundClose from "~icons/ic/round-close";
+import IconRoundGavel from "~icons/ic/round-gavel";
+import IconRoundMenuBook from "~icons/ic/round-menu-book";
+import IconRoundOpenInNew from "~icons/ic/round-open-in-new";
+import { SOURCE_KINDS, type SourceKindId } from "./data";
+import NormDisplay from "./NormDisplay.astro";
+import { styles } from "./styles";
+
+const { levelBadge, sourceTag, evidenceCard } = styles();
+
+const SOURCE_KIND_ICONS: Record<SourceKindId, typeof IconRoundGavel> = {
+  rechtsprechung: IconRoundGavel,
+  literatur: IconRoundMenuBook,
+};
+---
+
+<div class="lg:sticky lg:top-24">
+  <div
+    class="fixed inset-0 z-40 bg-black/40 lg:hidden"
+    x-show="sidebarMode"
+    x-cloak
+    aria-hidden="true"
+    @click="closeSidebar()"
+  ></div>
+
+  <aside
+    x-show="sidebarMode"
+    x-cloak
+    class="border-lavender-400 fixed inset-x-0 bottom-0 z-50 max-h-[85vh] overflow-y-auto rounded-t-sm border-t bg-white p-20 shadow-lg lg:static lg:z-auto lg:max-h-[calc(100dvh-96px)] lg:rounded-sm lg:border lg:shadow-none"
+    aria-label="Details"
+  >
+    <div class="mb-12 flex items-start justify-between gap-12">
+      <h3 class="mt-0 mb-0">
+        <span x-text="sidebarMode === 'term' ? 'Begriff' : sidebarRelation ? reasonLabel(sidebarRelation.reason) : ''"></span>
+      </h3>
+      <button
+        type="button"
+        class="text-icon-muted shrink-0"
+        aria-label="Schließen"
+        @click="closeSidebar()"
+      >
+        <IconRoundClose class="h-24 w-24" />
+      </button>
+    </div>
+
+    <template x-if="sidebarMode === 'term' && sidebarTerm">
+      <div class="space-y-12">
+        <div>
+          <p
+            class="mt-0 mb-4 text-base font-semibold"
+            x-text="sidebarTerm.term"
+          ></p>
+          <p class="py-0 text-sm" x-text="sidebarTerm.definition"></p>
+        </div>
+
+        <div>
+          <p class="kern-label text-icon-muted mb-8">Definiert in</p>
+          <NormDisplay
+            label="sidebarTerm.definedIn.label"
+            fullText="sidebarTerm.definedIn.fullText"
+            url="sidebarTerm.definedIn.url"
+            bordered
+          />
+        </div>
+
+        <div>
+          <p class="kern-label text-icon-muted mb-8">
+            Verwendet in ausgewählten SGB-II-Normen
+          </p>
+          <ul class="list-none space-y-8 p-0" role="list">
+            <template
+              x-for="norm in activeTermNorms(sidebarTerm)"
+              :key="norm.id"
+            >
+              <li>
+                <NormDisplay
+                  label="norm.ref"
+                  title="norm.title"
+                  summary="norm.summary"
+                  fullText="norm.fullText"
+                  url="norm.url"
+                  bordered
+                />
+              </li>
+            </template>
+          </ul>
+        </div>
+
+        <div>
+          <p class="kern-label text-icon-muted mb-8">
+            Verbindet mit angrenzendem Recht
+          </p>
+          <ul class="list-none space-y-8 p-0" role="list">
+            <template
+              x-for="(entry, index) in sidebarTerm.usedIn.adjacentNorms"
+              :key="index"
+            >
+              <li>
+                <NormDisplay
+                  label="entry.ref.label"
+                  fullText="entry.ref.fullText"
+                  url="entry.ref.url"
+                  bordered
+                />
+              </li>
+            </template>
+          </ul>
+        </div>
+      </div>
+    </template>
+
+    <template x-if="sidebarMode === 'evidence' && sidebarRelation">
+      <div class="space-y-12">
+        <div>
+          <span
+            class={levelBadge()}
+            x-bind:class="levelBadgeClass(sidebarRelation.level)"
+            x-text="levelLabel(sidebarRelation.level)"
+          ></span>
+          <p
+            class="mt-4 py-0 text-base font-semibold"
+            x-text="sidebarRelation.lawName"
+          ></p>
+        </div>
+
+        <div
+          x-show="sidebarRelation.nlp"
+          x-cloak
+          class="border-lavender-400 rounded-sm border bg-white p-12"
+        >
+          <div class="flex flex-wrap gap-6">
+            <template
+              x-for="keyword in sidebarRelation.nlp ? sidebarRelation.nlp.keywords : []"
+              :key="keyword"
+            >
+              <span
+                class="bg-lavender-100 text-cosmic-blue-base rounded-full px-8 py-2 text-xs"
+                x-text="keyword"
+              ></span>
+            </template>
+          </div>
+        </div>
+
+        <div>
+          <p class="kern-label text-icon-muted mb-8">
+            Betroffene SGB-II-Normen
+          </p>
+          <div class="space-y-8">
+            <template x-for="normId in sidebarRelation.normIds" :key="normId">
+              <NormDisplay
+                label="normById(normId).ref"
+                title="normById(normId).title"
+                summary="normById(normId).summary"
+                fullText="normById(normId).fullText"
+                url="normById(normId)?.url"
+                bordered
+              />
+            </template>
+          </div>
+        </div>
+
+        <div>
+          <p
+            class="kern-label text-icon-muted mb-8"
+            x-text="evidenceSectionLabel(sidebarRelation.reason)"
+          ></p>
+          <ul class="list-none space-y-12 p-0" role="list">
+            <template
+              x-for="(item, index) in sidebarRelation.evidence"
+              :key="index"
+            >
+              <li class={evidenceCard()}>
+                <div x-show="item.citedIn" x-cloak class="space-y-4">
+                  <div class="flex items-center justify-between gap-8">
+                    <span
+                      class={sourceTag()}
+                      x-bind:class="sourceKindBadgeClass(item.citedIn?.kind)"
+                    >
+                      {SOURCE_KINDS.map((kind) => {
+                        const KindIcon = SOURCE_KIND_ICONS[kind.id];
+                        return (
+                          <KindIcon
+                            class="h-14 w-14"
+                            x-show={`item.citedIn?.kind === '${kind.id}'`}
+                            x-cloak
+                          />
+                        );
+                      })}
+                      <span x-text="sourceKindLabel(item.citedIn?.kind)"></span>
+                    </span>
+                    <a
+                      x-show="item.citedIn?.url && item.citedIn.url !== '#'"
+                      x-cloak
+                      :href="item.citedIn?.url"
+                      target="_blank"
+                      rel="noopener"
+                      class="text-icon-muted hover:text-cosmic-blue-base shrink-0 before:hidden"
+                      aria-label="Quelle öffnen"
+                    >
+                      <IconRoundOpenInNew class="h-18 w-18" />
+                    </a>
+                  </div>
+                  <p
+                    class="mb-0 text-sm font-semibold"
+                    x-text="item.citedIn?.label"
+                  ></p>
+                </div>
+
+                <p class="py-0 text-sm" x-text="item.quote"></p>
+
+                <div class="space-y-8">
+                  <template
+                    x-for="(norm, normIndex) in evidenceNorms(item)"
+                    :key="normIndex"
+                  >
+                    <NormDisplay
+                      label="norm.label"
+                      fullText="norm.fullText"
+                      url="norm.url"
+                      bordered
+                    />
+                  </template>
+                </div>
+              </li>
+            </template>
+          </ul>
+        </div>
+      </div>
+    </template>
+  </aside>
+</div>

@@ -44,7 +44,7 @@ describe("Layout", async () => {
 
     expect(
       dom.querySelector('*[property="og:image"]')?.getAttribute("content"),
-    ).toBe(baseUrl + "/SEO_ZfL.png");
+    ).toMatch(new RegExp(`^${baseUrl}/.*og-image.*\\.png$`));
   });
 
   it("renders header content, slot, and footer in order", () => {

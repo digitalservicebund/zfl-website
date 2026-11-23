@@ -12,6 +12,9 @@
   --color-cosmic-blue-base: #36349d;
   --color-cosmic-blue-400: #7978be;
 
+  --color-darkblue-150: #c5d3ef;
+  --color-darkblue-450: #6788cf;
+
   --color-lavender-base: #e3e6f2;
   --color-lavender-200: #f6f7fb;
   --color-lavender-400: #eceef6;
@@ -37,6 +40,8 @@
   --spacing-lg: 2.5rem; /* 48px */
   --spacing-2xl: 3rem;
   --spacing-3xl: 4rem; /* 64px */
+  --spacing-4xl: 5rem; /* 80px */
+  --spacing-5xl: 6rem; /* 96px */
 
   --max-content-width: 82rem;
   --container-padding-inline: clamp(1rem, 5vw, 3rem);
@@ -181,6 +186,10 @@
 
 address {
   font-style: normal;
+}
+
+[x-cloak] {
+  display: none !important;
 }
 
 @utility container {

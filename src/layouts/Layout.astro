@@ -3,6 +3,7 @@ import SearchModal from "@/components/search/SearchModal.astro";
 import Footer from "@/components/global/Footer.astro";
 import PageHeader from "@/components/global/PageHeader.astro";
 import SectionSidebar from "@/components/global/SectionSidebar.astro";
+import SkipNavLink from "@/components/SkipNavLink.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import {
   getRouteByPath,
@@ -28,6 +29,7 @@ const showSectionSidebar =
 ---
 
 <BaseLayout title={title} description={description}>
+  <SkipNavLink label="Zum Inhalt springen" target="#main" />
   <PageHeader />
   <div
     data-pagefind-default-meta="pageType:Seite"

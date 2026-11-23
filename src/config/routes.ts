@@ -7,8 +7,9 @@ export type Route = {
   readonly parent: Route | null;
   readonly sitemap: boolean;
   readonly isStagingOnly: boolean;
-  readonly navOrder: number | null;
-  readonly navLabel: string | null;
+  readonly navOrder?: number;
+  readonly navLabel?: string;
+  readonly navEyebrow?: string;
 };
 
 export const barrierefreiheit = {
@@ -18,8 +19,6 @@ export const barrierefreiheit = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const begleitungen = {
@@ -29,8 +28,6 @@ export const begleitungen = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const bessereRechtsetzung = {
@@ -40,8 +37,6 @@ export const bessereRechtsetzung = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const datenschutz = {
@@ -51,8 +46,6 @@ export const datenschutz = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const dev = {
@@ -62,8 +55,6 @@ export const dev = {
   parent: null,
   sitemap: false,
   isStagingOnly: true,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const dev_astroKomponenten = {
@@ -73,8 +64,6 @@ export const dev_astroKomponenten = {
   parent: dev,
   sitemap: false,
   isStagingOnly: true,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const dev_kernKomponenten = {
@@ -84,8 +73,6 @@ export const dev_kernKomponenten = {
   parent: dev,
   sitemap: false,
   isStagingOnly: true,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const home = {
@@ -95,8 +82,6 @@ export const home = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const impressum = {
@@ -106,8 +91,6 @@ export const impressum = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const kontakt = {
@@ -117,8 +100,6 @@ export const kontakt = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const qualitaetskriterien = {
@@ -128,8 +109,6 @@ export const qualitaetskriterien = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const schulungen = {
@@ -139,8 +118,6 @@ export const schulungen = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const sitemap = {
@@ -150,8 +127,6 @@ export const sitemap = {
   parent: null,
   sitemap: false,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const staging = {
@@ -161,8 +136,6 @@ export const staging = {
   parent: null,
   sitemap: false,
   isStagingOnly: true,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const ueber = {
@@ -172,8 +145,6 @@ export const ueber = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const ueber_aktuelleMeldungen = {
@@ -184,7 +155,6 @@ export const ueber_aktuelleMeldungen = {
   sitemap: true,
   isStagingOnly: false,
   navOrder: 3,
-  navLabel: null,
 } as const;
 
 export const ueber_daranArbeitenWir = {
@@ -195,7 +165,6 @@ export const ueber_daranArbeitenWir = {
   sitemap: true,
   isStagingOnly: false,
   navOrder: 1,
-  navLabel: null,
 } as const;
 
 export const ueber_neueFruehphase = {
@@ -206,7 +175,6 @@ export const ueber_neueFruehphase = {
   sitemap: true,
   isStagingOnly: false,
   navOrder: 4,
-  navLabel: null,
 } as const;
 
 export const ueber_zahlenUndFakten = {
@@ -217,7 +185,6 @@ export const ueber_zahlenUndFakten = {
   sitemap: true,
   isStagingOnly: false,
   navOrder: 2,
-  navLabel: null,
 } as const;
 
 export const werkzeuge = {
@@ -227,8 +194,6 @@ export const werkzeuge = {
   parent: null,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const werkzeuge_buergerzentriertheit = {
@@ -260,8 +225,45 @@ export const werkzeuge_digitaltauglichkeit_beispiele = {
   parent: werkzeuge_digitaltauglichkeit,
   sitemap: true,
   isStagingOnly: false,
-  navOrder: null,
   navLabel: "Beispiele am Gesetzestext",
+} as const;
+
+export const werkzeuge_kiInDerRechtsetzung = {
+  key: "werkzeuge_kiInDerRechtsetzung",
+  path: "/werkzeuge/ki-in-der-rechtsetzung",
+  title: "KI in der Rechtsetzung",
+  parent: werkzeuge,
+  sitemap: true,
+  isStagingOnly: true,
+  navOrder: 6,
+  navLabel: "KI in der Rechtsetzung",
+} as const;
+
+export const werkzeuge_kiPrototypen = {
+  key: "werkzeuge_kiPrototypen",
+  path: "/werkzeuge/ki-prototypen",
+  title: "KI-Prototypen",
+  parent: werkzeuge,
+  sitemap: false,
+  isStagingOnly: true,
+} as const;
+
+export const werkzeuge_kiPrototypen_pflichten = {
+  key: "werkzeuge_kiPrototypen_pflichten",
+  path: "/werkzeuge/ki-prototypen/pflichten",
+  title: "Prototyp: Pflichten im Bestandsrecht analysieren",
+  parent: werkzeuge_kiPrototypen,
+  sitemap: false,
+  isStagingOnly: false,
+} as const;
+
+export const werkzeuge_kiPrototypen_rechtErkunden = {
+  key: "werkzeuge_kiPrototypen_rechtErkunden",
+  path: "/werkzeuge/ki-prototypen/recht-erkunden",
+  title: "Prototyp: Angrenzendes Recht sichtbar machen",
+  parent: werkzeuge_kiPrototypen,
+  sitemap: false,
+  isStagingOnly: false,
 } as const;
 
 export const werkzeuge_potenziale = {
@@ -272,7 +274,6 @@ export const werkzeuge_potenziale = {
   sitemap: true,
   isStagingOnly: true,
   navOrder: 5,
-  navLabel: null,
 } as const;
 
 export const werkzeuge_praxistauglichkeit = {
@@ -294,7 +295,6 @@ export const werkzeuge_ressourcen = {
   sitemap: true,
   isStagingOnly: false,
   navOrder: 2,
-  navLabel: null,
 } as const;
 
 export const werkzeuge_ressourcen_flussdiagramme = {
@@ -359,8 +359,6 @@ export const werkzeuge_visualisieren = {
   parent: werkzeuge,
   sitemap: true,
   isStagingOnly: true,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const werkzeuge_visualisieren_erstellen = {
@@ -370,8 +368,6 @@ export const werkzeuge_visualisieren_erstellen = {
   parent: werkzeuge_visualisieren,
   sitemap: false,
   isStagingOnly: true,
-  navOrder: null,
-  navLabel: null,
 } as const;
 
 export const allRoutes = [
@@ -398,6 +394,10 @@ export const allRoutes = [
   werkzeuge_buergerzentriertheit,
   werkzeuge_digitaltauglichkeit,
   werkzeuge_digitaltauglichkeit_beispiele,
+  werkzeuge_kiInDerRechtsetzung,
+  werkzeuge_kiPrototypen,
+  werkzeuge_kiPrototypen_pflichten,
+  werkzeuge_kiPrototypen_rechtErkunden,
   werkzeuge_potenziale,
   werkzeuge_praxistauglichkeit,
   werkzeuge_ressourcen,

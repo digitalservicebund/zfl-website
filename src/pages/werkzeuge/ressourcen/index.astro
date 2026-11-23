@@ -1,7 +1,7 @@
 ---
 import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
-import Modal from "@/components/Modal.astro";
+import Modal from "@/components/modal/Modal.astro";
 import KernCard from "@/components/KernCard.astro";
 import SearchButton from "@/components/search/SearchModalButton.astro";
 import SearchModal from "@/components/search/SearchModal.astro";
@@ -64,7 +64,7 @@ const PAGEFIND_INSTANCE = "werkzeuge";
 ---
 
 <Layout title={frontmatter.title} description={description}>
-  <main x-data="werkzeuge" class="breakout-grid">
+  <main x-data="werkzeuge" class="breakout-grid" id="main">
     <Hero level="main">
       <h1>{frontmatter.title}</h1>
       <p>

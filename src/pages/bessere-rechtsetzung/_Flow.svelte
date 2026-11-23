@@ -7,11 +7,7 @@
   import Feature from "./_Feature.svelte";
   import HideSidebarTrigger from "./_HideSidebarTrigger.svelte";
   import IconArrowDown from "~icons/ic/round-keyboard-double-arrow-down";
-  import {
-    werkzeuge,
-    werkzeuge_potenziale,
-    werkzeuge_visualisieren,
-  } from "@/config/routes";
+  import { werkzeuge, werkzeuge_kiPrototypen_pflichten } from "@/config/routes";
 
   const CLUSTER_FIRST_ANCHOR = "--cluster-first";
   const CLUSTER_LAST_ANCHOR = "--cluster-last";
@@ -143,15 +139,16 @@
           Recherche. So finden und ordnen Sie wichtige Informationen deutlich
           schneller.
           {#snippet details()}
-            <p><strong>Erste Einblicke:</strong></p>
-            <ul>
-              <li>
-                <a href={werkzeuge_visualisieren.path}>Gesetze visualisieren</a>
-              </li>
-              <li>
-                <a href={werkzeuge_potenziale.path}>Potenziale aufdecken</a>
-              </li>
-            </ul>
+            <p>
+              So finden und ordnen Sie relevante Inhalte deutlich schneller.
+            </p>
+            <p>
+              <strong>So arbeiten wir daran:</strong> Wir testen einen
+              Prototypen, mit dem Sie Pflichten im Bestandsrecht schnell
+              identifizieren und strukturiert analysieren können. Einen ersten
+              Einblick erhalten Sie
+              <a href={werkzeuge_kiPrototypen_pflichten.path}>hier</a>.
+            </p>
           {/snippet}
         </Feature>
       </div>

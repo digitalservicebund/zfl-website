@@ -1,7 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
-import Modal from "@/components/Modal.astro";
+import Modal from "@/components/modal/Modal.astro";
 import { Image } from "astro:assets";
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import KernCard from "@/components/KernCard.astro";
@@ -40,7 +40,7 @@ const visualisierungen = await Promise.all(
 ---
 
 <Layout title={frontmatter.title}>
-  <main x-data="visualisierungenFilter" class="breakout-grid">
+  <main x-data="visualisierungenFilter" class="breakout-grid" id="main">
     <Hero level="plain">
       <h1>{frontmatter.title}</h1>
       <p>

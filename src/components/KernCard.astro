@@ -4,6 +4,7 @@ import type { ImageMetadata } from "astro";
 
 interface Props {
   title: string;
+  headingLevel?: 2 | 3;
   target_option?: "_blank" | "_self";
   href?: string;
   popovertarget?: string;
@@ -20,6 +21,7 @@ interface Props {
 const {
   preline,
   title,
+  headingLevel = 2,
   target_option = "_self",
   href,
   popovertarget,
@@ -32,6 +34,10 @@ const {
   small,
 } = Astro.props;
 
+const Heading = `h${headingLevel}` as const;
+const hasImageProp = !!image && imageAlt !== undefined;
+const hasImage = Astro.slots.has("image") || hasImageProp;
+const hasIcon = Astro.slots.has("icon");
 const hasFooter = Astro.slots.has("footer");
 ---
 
@@ -42,17 +48,20 @@ const hasFooter = Astro.slots.has("footer");
     small && "kern-card--small",
   ]}
 >
-  {image && imageAlt !== undefined && (
+  {hasImage && (
     <div class="kern-card__media relative">
-      <Image
-        src={image}
-        alt={imageAlt}
-        class="h-208 object-cover"
-        densities={[1, 2]}
-        width="382"
-        height="208"
-        quality={100}
-      />
+      <slot name="image" />
+      {hasImageProp && (
+        <Image
+          src={image!}
+          alt={imageAlt!}
+          class="h-208 object-cover"
+          densities={[1, 2]}
+          width="382"
+          height="208"
+          quality={100}
+        />
+      )}
       {imageSource && (
         <p class="absolute right-0 bottom-0 w-auto! rounded-none! bg-black/40 px-4 text-xs text-white">
           Quelle: {imageSource}
@@ -63,9 +72,14 @@ const hasFooter = Astro.slots.has("footer");
   <div class="kern-card__container">
     <header class="kern-card__header">
       <slot name="pre-header" />
-      <hgroup>
+      {hasIcon && (
+        <div class="mb-24" aria-hidden="true">
+          <slot name="icon" />
+        </div>
+      )}
+      <hgroup class="max-w-full">
         {preline && <p class="kern-preline">{preline}</p>}
-        <h2 class="kern-title [word-break:break-word] hyphens-auto">
+        <Heading class="kern-title hyphens-auto wrap-break-word">
           {href ? (
             /* prettier-ignore */ <a href={href} class="kern-link--stretched" target={target_option}>{title}
               </a>
@@ -80,7 +94,7 @@ const hasFooter = Astro.slots.has("footer");
           ) : (
             title
           )}
-        </h2>
+        </Heading>
         {subline && <p class="kern-subline">{subline}</p>}
       </hgroup>
     </header>
