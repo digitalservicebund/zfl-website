@@ -1,0 +1,27 @@
+title: Gesetz über die urheberrechtliche Verantwortlichkeit von Diensteanbietern für das Teilen von Online-Inhalten
+eli: eli/bund/bgbl-1/2021/s1215/2024-05-14/1/deu
+visOptions:
+  - name: Anwendbarkeitsprüfung
+    visType: flowchart
+    filename: anwendbarkeit
+    articles: ["§2", "§3", "§7"]
+  - name: Automatisierter Upload-Filter
+    visType: flowchart
+    filename: upload_filter
+    articles: ["§§7-11"]
+  - name: Internes Beschwerdeverfahren
+    visType: swimlane
+    filename: beschwerdeverfahren
+    articles: ["§9", "§14"]
+  - name: Außergerichtliche Streitbeilegung
+    visType: flowchart
+    filename: streitbeilegung
+    articles: ["§16", "§17"]
+  - name: Maßnahmen gegen Missbrauch
+    visType: flowchart
+    filename: missbrauch
+    articles: ["§18"]
+  - name: Akteure und Zuständigkeiten
+    visType: actors
+    filename: akteure
+    articles: []

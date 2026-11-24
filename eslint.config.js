@@ -32,9 +32,20 @@ export default defineConfig(
     plugins: { markdown },
     extends: ["markdown/processor"],
   },
+  {
+    // Node scripts for skills; page.evaluate callbacks run in the browser
+    files: [".claude/**/*.mjs"],
+    languageOptions: {
+      globals: {
+        ...globals.node,
+        ...globals.browser,
+        mermaid: "readonly",
+      },
+    },
+  },
   svelte.configs.recommended,
   {
-    files: ["**/*.svelte"],
+    files: ["**/*.svelte", "**/*.svelte.ts"],
     languageOptions: {
       globals: {
         ...globals.browser,

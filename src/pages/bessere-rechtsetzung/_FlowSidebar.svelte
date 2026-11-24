@@ -116,8 +116,10 @@
                   .getElementById(content.id)
                   ?.querySelector("button")
                   ?.focus();
-              }}>zur Grafik</button
+              }}
             >
+              zur Grafik
+            </button>
           </div>
         {/if}
         {#each entries as entry (entry.id)}
@@ -150,9 +152,9 @@
             class="kern-btn kern-btn--primary"
             onclick={handleWeiterClick}
           >
-            <span class="kern-label"
-              >{isLast ? "Weiter" : "Zur nächsten Phase"}</span
-            >
+            <span class="kern-label">
+              {isLast ? "Weiter" : "Zur nächsten Phase"}
+            </span>
           </button>
         </div>
       {/if}

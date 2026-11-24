@@ -2,6 +2,11 @@ name: Preview
 
 on:
   workflow_dispatch:
+    inputs:
+      tool_api:
+        description: "Backend for the live-AI prototypes, e.g. https://<name>.trycloudflare.com (leave empty to disable live AI). See doc/live-ai-prototypes.md."
+        required: false
+        type: string
   pull_request:
     types: [opened, synchronize, reopened, closed]
   delete:
@@ -44,6 +49,8 @@ jobs:
         run: pnpm build
         env:
           PUBLIC_STAGE: "preview"
+          # Only set on manual runs; enables live AI in this preview.
+          PUBLIC_TOOL_API: ${{ inputs.tool_api }}
 
       - name: Disable Jekyll # to allow assets being served from _astro directory
         run: touch dist/.nojekyll

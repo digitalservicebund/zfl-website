@@ -14,7 +14,7 @@
 
   --color-darkblue-150: #c5d3ef;
   --color-darkblue-450: #6788cf;
-  
+
   --color-lavender-base: #e3e6f2;
   --color-lavender-200: #f6f7fb;
   --color-lavender-400: #eceef6;
@@ -92,8 +92,11 @@
   h1,
   h2,
   h3 {
-    margin-bottom: 1rem;
     word-break: auto-phrase;
+
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
   }
 
   :is(h2, h3, h4):first-child {

@@ -1,0 +1,27 @@
+title: Gesetz über Arbeitnehmererfindungen
+eli: eli/bund/bgbl-1/1957/s756/2022-08-01/1/deu
+visOptions:
+  - name: Meldung und Inanspruchnahme
+    visType: swimlane
+    filename: meldung_inanspruchnahme
+    articles: ["§§5-8"]
+  - name: Vergütungsfestsetzung
+    visType: swimlane
+    filename: verguetung
+    articles: ["§12"]
+  - name: Schutzrechtsanmeldung und Aufgabe
+    visType: swimlane
+    filename: schutzrechte
+    articles: ["§13", "§16"]
+  - name: Freie Erfindungen
+    visType: flowchart
+    filename: freie_erfindung
+    articles: ["§18", "§19"]
+  - name: Schiedsstellenverfahren
+    visType: swimlane
+    filename: schiedsverfahren
+    articles: ["§31", "§34", "§35"]
+  - name: Akteure und Zuständigkeiten
+    visType: actors
+    filename: akteure
+    articles: []

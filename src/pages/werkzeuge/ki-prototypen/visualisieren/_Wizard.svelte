@@ -1,0 +1,930 @@
+<script lang="ts">
+  import mermaid from "mermaid";
+  import { untrack } from "svelte";
+  import { SvelteURLSearchParams } from "svelte/reactivity";
+  import {
+    isMermaidFlowchart,
+    mermaidFlowchartToRulemapXml,
+  } from "./_mermaid2RulemapXML.ts";
+  import { parseMmdFrontmatter } from "./_mmdFrontmatter.ts";
+  import { resolveEliUrl } from "@/pages/werkzeuge/ki-prototypen/_shared/eli.ts";
+  import { createFakeLoadingSequence } from "@/pages/werkzeuge/ki-prototypen/_shared/fakeLoading.ts";
+  import {
+    getMermaid,
+    getVisOptions,
+  } from "@/pages/werkzeuge/ki-prototypen/_shared/api.ts";
+  import CanvasViewer from "./_CanvasViewer.svelte";
+  import Select from "@/pages/werkzeuge/ki-prototypen/_shared/Select.svelte";
+  import { markChanges } from "./_diagramDiff.ts";
+  import {
+    boldToMarkdown,
+    downloadBlob,
+    parseSvg,
+    stripLinks,
+    svgToPngBlob,
+    svgToSvgBlob,
+  } from "./_diagramExport.ts";
+  import type { LawExample, VisType } from "./_types";
+  import { visTypeIcons } from "./_visTypeIcons.ts";
+  import Step1 from "./_Step1.svelte";
+  import { WizardState, setWizardContext } from "./_wizardState.svelte.ts";
+  import Step2 from "./_Step2.svelte";
+  import StepFinal from "./_StepFinal.svelte";
+  import { steps } from "./_steps.ts";
+  import { werkzeuge_kiPrototypen_visualisieren } from "@/config/routes";
+  import IconChevronRight from "~icons/ic/outline-chevron-right";
+
+  let { examples }: { examples: LawExample[] } = $props();
+
+  const wizard = new WizardState();
+  setWizardContext(wizard);
+
+  // Mermaid's default (200px) re-wraps the <br/>-separated lines in top-down
+  // diagrams, making nodes narrow and diagrams very tall. Left-right actor
+  // overviews keep the default: their one-line-per-duty labels would
+  // otherwise make the diagram very wide and flat.
+  function wrappingWidthFor(source: string): number {
+    return /^\s*flowchart\s+(LR|RL)\b/.test(source) ? 200 : 400;
+  }
+
+  function configureMermaid(htmlLabels: boolean, wrappingWidth = 400) {
+    mermaid.initialize({
+      startOnLoad: false,
+      htmlLabels,
+      flowchart: { htmlLabels, wrappingWidth },
+    });
+  }
+
+  // Interactive, on-screen rendering keeps HTML labels so the <a> links in
+  // the .mmd sources (see resolveNormLinks) are clickable.
+  configureMermaid(true);
+
+  const mermaidSources = import.meta.glob<string>(
+    "../../../content/ki-visualisierungen/*/*.mmd",
+    {
+      query: "?raw",
+      import: "default",
+    },
+  );
+
+  function resolveNormLinks(source: string, eli: string): string {
+    return source.replaceAll("{{ELI}}", resolveEliUrl(eli));
+  }
+
+  const searchParams = new SvelteURLSearchParams(
+    typeof window === "undefined" ? "" : window.location.search,
+  );
+  const initialNorm = searchParams.get("norm");
+  const initialVisualization = searchParams.get("visualization");
+  const initialPreset = searchParams.get("preset");
+  let hasAppliedInitialVisualization = false;
+
+  // Lets the intro page's vis type links preselect the preset in step 1.
+  // visTypeIcons has one key per VisType, so it doubles as a runtime check
+  // without pulling zod into the client bundle.
+  if (initialPreset && Object.hasOwn(visTypeIcons, initialPreset)) {
+    wizard.preset = initialPreset as VisType;
+  }
+
+  const initialExample = untrack(() =>
+    examples.find((example) => example.short === initialNorm),
+  );
+  const initialOption = initialExample?.visOptions.find(
+    (option) => option.name === initialVisualization,
+  );
+
+  if (initialExample) {
+    wizard.selectedLawType = "existing";
+    wizard.selectedExample = initialExample;
+  }
+  // A shared URL with both norm and visualization should open the result
+  // directly instead of walking through the earlier steps.
+  if (initialOption) wizard.currentStep = steps.length;
+
+  const LAW_STEP_STATUS_MESSAGES = [
+    "Lese Gesetzestext …",
+    "Analysiere Struktur …",
+    "Identifiziere mögliche Visualisierungen …",
+  ];
+  const VIS_OPTION_STEP_STATUS_MESSAGES = [
+    "Extrahiere Prozessschritte …",
+    "Erstelle Diagramm …",
+    "Rendere Visualisierung …",
+  ];
+  wizard.loadingStatusMessage = LAW_STEP_STATUS_MESSAGES[0];
+
+  $effect(() => {
+    if (!wizard.visOptionsSource) {
+      wizard.visOptions = [];
+      wizard.selectedVisOption = undefined;
+      wizard.visOptionsSessionId = undefined;
+      wizard.visOptionsError = undefined;
+      wizard.isLoadingVisOptions = false;
+      return;
+    }
+    const source = wizard.visOptionsSource;
+
+    let cancelled = false;
+    wizard.isLoadingVisOptions = true;
+    wizard.selectedVisOption = undefined;
+    wizard.visOptions = [];
+    wizard.visOptionsSessionId = undefined;
+    wizard.visOptionsError = undefined;
+
+    const isInitialLoad = !hasAppliedInitialVisualization;
+    hasAppliedInitialVisualization = true;
+
+    // Skips the fake delay when opening a shared URL: the step showing it
+    // (step 2) is skipped anyway.
+    const { promise: fakeDelay, cancel } =
+      isInitialLoad && initialOption
+        ? { promise: Promise.resolve(), cancel: () => {} }
+        : createFakeLoadingSequence(
+            LAW_STEP_STATUS_MESSAGES,
+            (message) => (wizard.loadingStatusMessage = message),
+          );
+
+    Promise.all([getVisOptions(source), fakeDelay])
+      .then(([result]) => {
+        if (cancelled) return;
+        wizard.visOptions = result.options;
+        wizard.visOptionsSessionId = result.sessionId;
+        wizard.isLoadingVisOptions = false;
+
+        if (isInitialLoad && initialOption) {
+          wizard.selectedVisOption = result.options.find(
+            (option) => option.name === initialOption.name,
+          );
+        }
+      })
+      .catch((error: unknown) => {
+        if (cancelled) return;
+        console.error(error);
+        wizard.visOptionsError =
+          "Die Visualisierungsoptionen konnten nicht geladen werden.";
+        wizard.isLoadingVisOptions = false;
+      });
+
+    return () => {
+      cancelled = true;
+      cancel();
+    };
+  });
+
+  // Advances past step 1 as soon as a valid input is provided. Reads
+  // wizard.currentStep via untrack so navigating back to step 1 (where the
+  // input is still set from before) doesn't immediately bounce forward again.
+  $effect(() => {
+    if (wizard.visOptionsSource) {
+      untrack(() => {
+        if (wizard.currentStep < 2) wizard.currentStep = 2;
+      });
+    }
+  });
+
+  // Same rationale as the step 1 → 2 advance above: advances as soon as the
+  // user picks a vis option, before the mermaid diagram has even started
+  // loading, so StepFinal is on screen to show its own loading state.
+  $effect(() => {
+    if (wizard.selectedVisOption) {
+      untrack(() => {
+        if (wizard.currentStep < steps.length)
+          wizard.currentStep = steps.length;
+      });
+    }
+  });
+
+  $effect(() => {
+    if (wizard.selectedExample) {
+      searchParams.set("norm", wizard.selectedExample.short);
+    } else {
+      searchParams.delete("norm");
+    }
+
+    if (wizard.selectedVisOption) {
+      searchParams.set("visualization", wizard.selectedVisOption.name);
+    } else {
+      searchParams.delete("visualization");
+    }
+
+    const query = searchParams.toString();
+    const newUrl = `${window.location.pathname}${query ? `?${query}` : ""}${window.location.hash}`;
+    window.history.replaceState(null, "", newUrl);
+  });
+
+  let diagramSvg = $state("");
+  // Set with diagramSvg: after a chat refinement, the viewer keeps its zoom
+  // and scroll position instead of fitting the new diagram
+  let keepDiagramView = $state(false);
+  let renderCount = 0;
+  let saveDialogEl: HTMLDialogElement | undefined = $state();
+  let editDialogEl: HTMLDialogElement | undefined = $state();
+  let resetDialogEl: HTMLDialogElement | undefined = $state();
+
+  $effect(() => {
+    if (!wizard.selectedVisOption) {
+      wizard.mermaidSource = "";
+      wizard.summary = "";
+      wizard.isLoading = false;
+      wizard.mermaidError = undefined;
+      return;
+    }
+
+    if (wizard.selectedLawType === "existing") {
+      if (!wizard.selectedExample) {
+        wizard.mermaidSource = "";
+        wizard.summary = "";
+        wizard.isLoading = false;
+        return;
+      }
+      const example = wizard.selectedExample;
+      const option = wizard.selectedVisOption;
+
+      let cancelled = false;
+      wizard.isLoading = true;
+      wizard.mermaidError = undefined;
+
+      const path = `../../../content/ki-visualisierungen/${example.short}/${option.filename}.mmd`;
+      const eli = example.eli;
+
+      const { promise: fakeDelay, cancel } = createFakeLoadingSequence(
+        VIS_OPTION_STEP_STATUS_MESSAGES,
+        (message) => (wizard.loadingStatusMessage = message),
+      );
+
+      Promise.all([mermaidSources[path](), fakeDelay]).then(([source]) => {
+        if (cancelled) return;
+        const parsed = parseMmdFrontmatter(resolveNormLinks(source, eli));
+        wizard.summary = parsed.summary;
+        wizard.startVersions(parsed.body);
+      });
+
+      return () => {
+        cancelled = true;
+        cancel();
+      };
+    } else {
+      if (!wizard.visOptionsSessionId) {
+        wizard.mermaidSource = "";
+        wizard.summary = "";
+        wizard.isLoading = false;
+        return;
+      }
+      const sessionId = wizard.visOptionsSessionId;
+      const option = wizard.selectedVisOption;
+
+      let cancelled = false;
+      wizard.isLoading = true;
+      wizard.summary = "";
+      wizard.mermaidError = undefined;
+
+      const { promise: fakeDelay, cancel } = createFakeLoadingSequence(
+        VIS_OPTION_STEP_STATUS_MESSAGES,
+        (message) => (wizard.loadingStatusMessage = message),
+      );
+
+      Promise.all([getMermaid(sessionId, option), fakeDelay])
+        .then(([{ mermaid, summary }]) => {
+          if (cancelled) return;
+          wizard.summary = summary;
+          wizard.startVersions(mermaid);
+        })
+        .catch((error: unknown) => {
+          if (cancelled) return;
+          console.error(error);
+          wizard.mermaidError = "Das Diagramm konnte nicht erstellt werden.";
+          wizard.isLoading = false;
+        });
+
+      return () => {
+        cancelled = true;
+        cancel();
+      };
+    }
+  });
+
+  $effect(() => {
+    if (!wizard.mermaidSource) return;
+
+    let cancelled = false;
+    const highlightChanges = wizard.highlightChanges;
+    wizard.highlightChanges = false;
+    const previousSvg = untrack(() => diagramSvg);
+
+    configureMermaid(true, wrappingWidthFor(wizard.mermaidSource));
+    mermaid
+      .render(`mermaid-diagram-${renderCount++}`, wizard.mermaidSource)
+      .then(({ svg }) => {
+        if (cancelled) return;
+        keepDiagramView = highlightChanges && Boolean(previousSvg);
+        diagramSvg =
+          highlightChanges && previousSvg ? markChanges(previousSvg, svg) : svg;
+        wizard.isLoading = false;
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  });
+
+  let filenameBase = $derived(
+    wizard.selectedExample?.short ?? "eigener-entwurf",
+  );
+
+  function downloadExport(blob: Blob, extension: string) {
+    if (!wizard.selectedVisOption) return;
+    downloadBlob(
+      blob,
+      `${filenameBase}-${wizard.selectedVisOption.name}.${extension}`,
+    );
+  }
+
+  // Renders without HTML labels, so the SVG has no foreignObject, which
+  // external SVG viewers can't display.
+  async function renderExportSvg(): Promise<SVGSVGElement | null> {
+    const exportSource = boldToMarkdown(stripLinks(wizard.mermaidSource));
+
+    const wrappingWidth = wrappingWidthFor(exportSource);
+    configureMermaid(false, wrappingWidth);
+    let svg: string;
+    try {
+      ({ svg } = await mermaid.render(
+        `mermaid-export-${renderCount++}`,
+        exportSource,
+      ));
+    } finally {
+      configureMermaid(true, wrappingWidth);
+    }
+
+    return parseSvg(svg);
+  }
+
+  async function downloadSvg() {
+    if (!wizard.mermaidSource || !wizard.selectedVisOption) return;
+
+    const svgElement = await renderExportSvg();
+    if (svgElement) downloadExport(svgToSvgBlob(svgElement), "svg");
+  }
+
+  async function downloadPng() {
+    if (!diagramSvg || !wizard.selectedVisOption) return;
+
+    const svgElement = parseSvg(diagramSvg);
+    if (!svgElement) return;
+
+    const blob = await svgToPngBlob(svgElement);
+    if (blob) downloadExport(blob, "png");
+  }
+
+  let mermaidCopied = $state(false);
+  let mermaidCopiedTimeoutId: ReturnType<typeof setTimeout> | undefined;
+
+  async function copyMermaidSource() {
+    if (!wizard.mermaidSource) return;
+
+    await navigator.clipboard.writeText(stripLinks(wizard.mermaidSource));
+
+    mermaidCopied = true;
+    clearTimeout(mermaidCopiedTimeoutId);
+    mermaidCopiedTimeoutId = setTimeout(() => {
+      mermaidCopied = false;
+    }, 1500);
+  }
+
+  let drawioUrl = $derived(
+    wizard.mermaidSource
+      ? `https://app.diagrams.net/#create=${encodeURIComponent(
+          JSON.stringify({ type: "mermaid", data: wizard.mermaidSource }),
+        )}`
+      : undefined,
+  );
+
+  let canExportRulemap = $derived(
+    wizard.mermaidSource ? isMermaidFlowchart(wizard.mermaidSource) : false,
+  );
+
+  // Matches the direction in a diagram header, e.g. "flowchart TD"
+  const DIRECTION_PATTERN = /^(\s*(?:flowchart|swimlane-beta)\s+)(TD|TB|LR)\b/m;
+
+  let canFlip = $derived(DIRECTION_PATTERN.test(wizard.mermaidSource));
+
+  function flipDirection() {
+    wizard.updateCurrentVersion(
+      wizard.mermaidSource.replace(
+        DIRECTION_PATTERN,
+        (_, prefix: string, direction: string) =>
+          `${prefix}${direction === "LR" ? "TD" : "LR"}`,
+      ),
+    );
+  }
+
+  // Newest first
+  let versionItems = $derived(
+    wizard.versions.map((version, index) => ({ ...version, index })).reverse(),
+  );
+
+  function versionLabel(item: { index: number; label?: string }): string {
+    return item.label
+      ? `v${item.index + 1} · ${item.label}`
+      : `v${item.index + 1}`;
+  }
+
+  let showCanvas = $derived(wizard.currentStep === steps.length);
+
+  let lawTitle = $derived(
+    wizard.selectedLawType === "existing"
+      ? wizard.selectedExample?.title
+      : wizard.analyzedDraftText && "Eigenes Vorhaben",
+  );
+
+  let wizardEl: HTMLDivElement | undefined = $state();
+  // Unsupported e.g. on iPhone Safari, where the button is hidden
+  const canFullscreen =
+    typeof document !== "undefined" && document.fullscreenEnabled;
+  let isFullscreen = $state(false);
+
+  // Synced from the fullscreenchange event rather than set in
+  // toggleFullscreen, so leaving fullscreen via Esc also restores the sidebar.
+  function onFullscreenChange() {
+    isFullscreen = document.fullscreenElement === wizardEl;
+  }
+
+  function toggleFullscreen() {
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    } else {
+      wizardEl?.requestFullscreen();
+    }
+  }
+
+  function downloadRulemapXml() {
+    if (!wizard.mermaidSource || !wizard.selectedVisOption) return;
+
+    const xml = mermaidFlowchartToRulemapXml(
+      wizard.mermaidSource,
+      `${filenameBase}: ${wizard.selectedVisOption.name}`,
+    );
+
+    downloadExport(new Blob([xml], { type: "application/xml" }), "xml");
+  }
+</script>
+
+{#snippet loadingDiagramPlaceholder()}
+  <svg
+    viewBox="0 0 320 260"
+    class="h-full max-h-500 w-full max-w-420"
+    role="img"
+    aria-label="Diagramm wird geladen"
+  >
+    <g
+      class="fill-none stroke-gray-400"
+      stroke-width="2"
+      stroke-linecap="round"
+    >
+      <path d="M160 56 V80" />
+      <path d="M160 116 V128 H60 V152" />
+      <path d="M160 116 V128 H260 V152" />
+      <path d="M60 188 V200 H160 V222" />
+      <path d="M260 188 V200 H160 V222" />
+    </g>
+    <g class="stroke-gray-400" stroke-width="2">
+      <rect
+        x="110"
+        y="20"
+        width="100"
+        height="36"
+        rx="6"
+        class="fill-gray-300 animate-pulse"
+        style="animation-delay: 0ms"
+      />
+      <rect
+        x="110"
+        y="80"
+        width="100"
+        height="36"
+        rx="6"
+        class="fill-gray-300 animate-pulse"
+        style="animation-delay: 150ms"
+      />
+      <rect
+        x="10"
+        y="152"
+        width="100"
+        height="36"
+        rx="6"
+        class="fill-gray-300 animate-pulse"
+        style="animation-delay: 300ms"
+      />
+      <rect
+        x="210"
+        y="152"
+        width="100"
+        height="36"
+        rx="6"
+        class="fill-gray-300 animate-pulse"
+        style="animation-delay: 450ms"
+      />
+      <rect
+        x="110"
+        y="222"
+        width="100"
+        height="36"
+        rx="6"
+        class="fill-gray-300 animate-pulse"
+        style="animation-delay: 600ms"
+      />
+    </g>
+  </svg>
+{/snippet}
+
+{#snippet editButtons()}
+  <div class="flex flex-col items-start">
+    <a
+      href={drawioUrl}
+      target="_blank"
+      rel="noreferrer"
+      class="kern-btn kern-btn--tertiary"
+    >
+      <span
+        class="kern-icon kern-icon--edit kern-icon--default"
+        aria-hidden="true"
+      ></span>
+      <span class="kern-label">Bearbeiten mit Draw.io</span>
+    </a>
+  </div>
+{/snippet}
+
+{#snippet exportButtons()}
+  <div class="flex flex-col items-start">
+    <button
+      type="button"
+      onclick={downloadSvg}
+      class="kern-btn kern-btn--tertiary"
+    >
+      <span
+        class="kern-icon kern-icon--download kern-icon--default"
+        aria-hidden="true"
+      ></span>
+      <span class="kern-label">SVG</span>
+    </button>
+    <button
+      type="button"
+      onclick={downloadPng}
+      class="kern-btn kern-btn--tertiary"
+    >
+      <span
+        class="kern-icon kern-icon--download kern-icon--default"
+        aria-hidden="true"
+      ></span>
+      <span class="kern-label">PNG</span>
+    </button>
+    <button
+      type="button"
+      onclick={downloadRulemapXml}
+      disabled={!canExportRulemap}
+      class="kern-btn kern-btn--tertiary"
+      title={canExportRulemap
+        ? undefined
+        : "Rulemap XML Export ist derzeit nur für Flowcharts verfügbar"}
+    >
+      <span
+        class="kern-icon kern-icon--download kern-icon--default"
+        aria-hidden="true"
+      ></span>
+      <span class="kern-label">Rulemap XML</span>
+    </button>
+    <button
+      type="button"
+      onclick={copyMermaidSource}
+      class="kern-btn kern-btn--tertiary"
+    >
+      <span
+        class="kern-icon {mermaidCopied
+          ? 'kern-icon--check'
+          : 'kern-icon--content-copy'} kern-icon--default"
+        aria-hidden="true"
+      ></span>
+      <span class="kern-label" aria-live="polite">
+        {mermaidCopied ? "In Zwischenablage kopiert" : "Mermaid kopieren"}
+      </span>
+    </button>
+  </div>
+{/snippet}
+
+{#snippet stepCrumb(label: string, step: number)}
+  <li class="flex items-center gap-4">
+    <IconChevronRight class="size-16 shrink-0" aria-hidden="true" />
+    {#if wizard.currentStep === step}
+      <span aria-current="page">{label}</span>
+    {:else}
+      <button
+        type="button"
+        class="kern-link kern-link--small py-0"
+        onclick={() => (wizard.currentStep = step)}
+      >
+        {label}
+      </button>
+    {/if}
+  </li>
+{/snippet}
+
+<svelte:document onfullscreenchange={onFullscreenChange} />
+
+<div class="flex h-full flex-col">
+  <header
+    class="border-lavender-base flex flex-wrap items-center justify-between gap-x-16 gap-y-8 border-b-2 bg-white px-16 py-16 sm:px-24"
+  >
+    <div class="space-y-4">
+      <h1 class="kern-heading-small p-0">
+        {werkzeuge_kiPrototypen_visualisieren.title}
+      </h1>
+      <nav aria-label="Brotkrümelnavigation">
+        <ul
+          class="list-unstyled kern-body--small flex flex-wrap items-center gap-4"
+        >
+          <li>
+            <a
+              href={werkzeuge_kiPrototypen_visualisieren.path}
+              class="kern-link kern-link--small py-0"
+            >
+              Übersicht
+            </a>
+          </li>
+          {@render stepCrumb("Textauswahl", 1)}
+          {#if lawTitle && wizard.currentStep >= 2}
+            {@render stepCrumb(lawTitle, 2)}
+          {/if}
+          {#if wizard.selectedVisOption && wizard.currentStep === steps.length}
+            {@render stepCrumb(wizard.selectedVisOption.name, steps.length)}
+          {/if}
+        </ul>
+      </nav>
+    </div>
+    {#if wizard.currentStep > 1}
+      <div class="flex flex-row gap-8">
+        <button
+          type="button"
+          class="kern-btn kern-btn--tertiary"
+          onclick={() => resetDialogEl?.showModal()}
+        >
+          <span
+            class="kern-icon kern-icon--autorenew kern-icon--default"
+            aria-hidden="true"
+          ></span>
+          <span class="kern-label">Neu beginnen</span>
+        </button>
+        {#if showCanvas && !wizard.isLoading && wizard.mermaidSource}
+          <button
+            type="button"
+            class="kern-btn kern-btn--secondary"
+            onclick={() => editDialogEl?.showModal()}
+          >
+            <span
+              class="kern-icon kern-icon--edit kern-icon--default"
+              aria-hidden="true"
+            ></span>
+            <span class="kern-label">Bearbeiten</span>
+          </button>
+          <button
+            type="button"
+            class="kern-btn kern-btn--primary"
+            onclick={() => saveDialogEl?.showModal()}
+          >
+            <span
+              class="kern-icon kern-icon--download kern-icon--default"
+              aria-hidden="true"
+            ></span>
+            <span class="kern-label">Exportieren</span>
+          </button>
+        {/if}
+      </div>
+    {/if}
+  </header>
+  <main class="min-h-0 flex-1">
+    <div
+      bind:this={wizardEl}
+      id="wizard"
+      class={[
+        // Explicit rows keep chat and canvas at the wizard's height; auto rows
+        // would grow with the chat's content. On mobile, chat and canvas stack
+        // and split the height.
+        "grid grid-cols-1 grid-rows-[minmax(0,1fr)] h-full overflow-hidden transition-[grid-template-columns] duration-300 ease-in-out sm:grid-cols-[1fr_0fr] data-show-canvas:sm:grid-cols-[1fr_2fr]",
+        showCanvas &&
+          !isFullscreen &&
+          "max-sm:grid-rows-[minmax(0,1fr)_minmax(0,1fr)]",
+      ]}
+      data-show-canvas={showCanvas || undefined}
+    >
+      <div
+        id="vis-chat"
+        class="min-w-0 py-md px-16 sm:px-24 w-full max-w-900 mx-auto max-h-full overflow-auto"
+        class:hidden={isFullscreen}
+      >
+        <div class="flex flex-col h-full gap-32">
+          {#if wizard.currentStep !== steps.length}
+            <div class="vis-chat-header space-y-16">
+              <div class="kern-progress">
+                <label
+                  class="kern-label"
+                  class:hidden={wizard.currentStep === steps.length}
+                  for="progress1"
+                >
+                  Schritt {wizard.currentStep} von {steps.length}
+                </label>
+                <progress
+                  id="progress1"
+                  value={wizard.currentStep}
+                  max={steps.length}
+                ></progress>
+              </div>
+            </div>
+          {/if}
+          <!-- min-h-0 only on the final step: it scrolls its chat internally,
+           while earlier steps overflow into #vis-chat's scrollbar -->
+          <div
+            class="flex-1 w-full flex flex-col gap-32 justify-center"
+            class:min-h-0={wizard.currentStep === steps.length}
+          >
+            {#if wizard.currentStep === 1}
+              <Step1 {examples} />
+            {:else if wizard.currentStep === 2}
+              <Step2 />
+            {:else if wizard.currentStep === steps.length}
+              <StepFinal />
+            {/if}
+          </div>
+        </div>
+      </div>
+      {#if showCanvas}
+        <div
+          id="vis-canvas"
+          class={[
+            "relative w-full h-full min-w-0 flex flex-col justify-center items-center bg-lavender-200",
+            isFullscreen && "sm:col-span-2",
+          ]}
+        >
+          {#if wizard.isLoading}
+            <div class="flex w-full h-full items-center justify-center p-16">
+              {@render loadingDiagramPlaceholder()}
+            </div>
+          {:else if wizard.mermaidSource}
+            <CanvasViewer
+              svg={diagramSvg}
+              title={wizard.selectedVisOption
+                ? `${wizard.selectedExample?.title ?? "Eigenes Vorhaben"}: ${wizard.selectedVisOption.name}`
+                : "Visualisierung"}
+              onFlip={canFlip ? flipDirection : undefined}
+              {isFullscreen}
+              onToggleFullscreen={canFullscreen ? toggleFullscreen : undefined}
+              keepView={keepDiagramView}
+            >
+              {#snippet topRight()}
+                {#if wizard.versions.length > 1}
+                  <div
+                    class="kern-form-input w-280 bg-white p-8 rounded-sm shadow-md"
+                  >
+                    <label class="kern-sr-only" for="diagram-version">
+                      Version
+                    </label>
+                    <Select
+                      items={versionItems}
+                      bind:selected={
+                        () =>
+                          versionItems.find(
+                            (item) => item.index === wizard.versionIndex,
+                          ),
+                        (item) => item && wizard.showVersion(item.index)
+                      }
+                      getLabel={versionLabel}
+                      id="diagram-version"
+                      class="w-full"
+                    >
+                      {#snippet option(item)}
+                        <span class="shrink-0">v{item.index + 1}</span>
+                        {#if item.label}
+                          <span class="truncate kern-body--muted">
+                            {item.label}
+                          </span>
+                        {/if}
+                      {/snippet}
+                    </Select>
+                  </div>
+                {/if}
+              {/snippet}
+            </CanvasViewer>
+            <dialog
+              bind:this={saveDialogEl}
+              class="kern-dialog"
+              onclick={(event) => {
+                if (event.target === saveDialogEl) saveDialogEl?.close();
+              }}
+            >
+              <div class="kern-dialog__header">
+                <h2 class="kern-title">Visualisierung exportieren</h2>
+                <button
+                  type="button"
+                  class="kern-btn kern-btn--tertiary kern-btn--only-icon"
+                  onclick={() => saveDialogEl?.close()}
+                  aria-label="Schließen"
+                >
+                  <span
+                    class="kern-icon kern-icon--close kern-icon--default"
+                    aria-hidden="true"
+                  ></span>
+                </button>
+              </div>
+              <div class="kern-dialog__body">
+                {@render exportButtons()}
+              </div>
+            </dialog>
+            <dialog
+              bind:this={editDialogEl}
+              class="kern-dialog"
+              onclick={(event) => {
+                if (event.target === editDialogEl) editDialogEl?.close();
+              }}
+            >
+              <div class="kern-dialog__header">
+                <h2 class="kern-title">Visualisierung bearbeiten</h2>
+                <button
+                  type="button"
+                  class="kern-btn kern-btn--tertiary kern-btn--only-icon"
+                  onclick={() => editDialogEl?.close()}
+                  aria-label="Schließen"
+                >
+                  <span
+                    class="kern-icon kern-icon--close kern-icon--default"
+                    aria-hidden="true"
+                  ></span>
+                </button>
+              </div>
+              <div class="kern-dialog__body">
+                {@render editButtons()}
+              </div>
+            </dialog>
+          {/if}
+        </div>
+      {/if}
+    </div>
+  </main>
+</div>
+
+<dialog
+  bind:this={resetDialogEl}
+  class="kern-dialog"
+  aria-labelledby="reset-dialog-title"
+  onclick={(event) => {
+    if (event.target === resetDialogEl) resetDialogEl?.close();
+  }}
+>
+  <div class="kern-dialog__header">
+    <h2 class="kern-title" id="reset-dialog-title">Neu beginnen?</h2>
+    <button
+      type="button"
+      class="kern-btn kern-btn--tertiary kern-btn--only-icon"
+      onclick={() => resetDialogEl?.close()}
+      aria-label="Schließen"
+    >
+      <span
+        class="kern-icon kern-icon--close kern-icon--default"
+        aria-hidden="true"
+      ></span>
+    </button>
+  </div>
+  <div class="kern-dialog__body">
+    <p class="kern-body">
+      Alle Eingaben und die aktuelle Visualisierung gehen verloren.
+    </p>
+  </div>
+  <div class="kern-dialog__footer">
+    <button
+      type="button"
+      class="kern-btn kern-btn--secondary"
+      onclick={() => resetDialogEl?.close()}
+    >
+      <span class="kern-label">Abbrechen</span>
+    </button>
+    <button
+      type="button"
+      class="kern-btn kern-btn--primary"
+      onclick={() => {
+        resetDialogEl?.close();
+        wizard.reset();
+      }}
+    >
+      <span class="kern-label">Neu beginnen</span>
+    </button>
+  </div>
+</dialog>
+
+<style>
+  #vis-chat :global(.step-heading) {
+    margin-top: -2em;
+  }
+
+  /* Tailwind's preflight resets margin to 0, which breaks the browser
+     default `margin: auto` that centers a `showModal()`-opened dialog. */
+  dialog.kern-dialog {
+    margin: auto;
+  }
+</style>

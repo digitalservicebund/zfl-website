@@ -1,0 +1,37 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import AIDisclaimer from "@/pages/werkzeuge/ki-prototypen/_shared/AIDisclaimer.astro";
+import Wizard from "./_Wizard.svelte";
+import { getCollection } from "astro:content";
+import { basename } from "node:path";
+
+export const frontmatter = {
+  title: "Prototyp: Potenziale aufdecken",
+  sitemap: false,
+};
+
+const potenziale = await getCollection("potenziale");
+const examples = potenziale.map(({ data, filePath, body }) => ({
+  ...data,
+  // filePath preserves the on-disk casing, unlike the glob loader's
+  // lowercased `id` (e.g. "HeizkostenV.md" -> id "heizkostenv").
+  short: basename(filePath ?? "", ".md"),
+  body: body ?? "",
+}));
+
+const visualisierungen = await getCollection("kiVisualisierungen");
+const visualisierbareShorts = visualisierungen.map(({ filePath }) =>
+  basename(filePath ?? "", ".yaml"),
+);
+---
+
+<Layout title={frontmatter.title} excludeFromSearch>
+  <main id="main">
+    <Hero class="breakout-grid">
+      <h1>{frontmatter.title}</h1>
+    </Hero>
+    <AIDisclaimer />
+    <Wizard {examples} {visualisierbareShorts} client:load />
+  </main>
+</Layout>

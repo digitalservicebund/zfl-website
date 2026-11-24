@@ -135,9 +135,9 @@
           {/snippet}
         </Feature>
         <Feature tag="KI">
-          <strong>Künstliche Intelligenz</strong> nimmt Ihnen zeitintensive
-          Arbeit bei der Recherche, Strukturierung und Zusammenstellung von
-          Informationen ab.
+          <strong>Künstliche Intelligenz</strong> unterstützt Sie bei der
+          Recherche. So finden und ordnen Sie wichtige Informationen deutlich
+          schneller.
           {#snippet details()}
             <p>
               So finden und ordnen Sie relevante Inhalte deutlich schneller.
@@ -175,7 +175,7 @@
         size="md"
         tags={["Prozess", "Checks"]}
       />
-      <Bubble title="Vorarbeit" size="sm" tags={["Prozess"]} />
+      <Bubble title="Vorarbeit" size="sm" tags={["KI"]} />
     </Cluster>
   </Section>
 

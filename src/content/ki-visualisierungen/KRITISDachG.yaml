@@ -1,0 +1,27 @@
+title: Dachgesetz zur Stärkung der physischen Resilienz kritischer Anlagen
+eli: eli/bund/bgbl-1/2026/66/2026-07-29/1/deu
+visOptions:
+  - name: Anwendbarkeitsprüfung
+    visType: flowchart
+    filename: anwendbarkeit
+    articles: ["§4", "§5", "§22"]
+  - name: Registrierung kritischer Anlagen
+    visType: swimlane
+    filename: registrierung
+    articles: ["§8"]
+  - name: Risikoanalyse und Resilienzplan
+    visType: flowchart
+    filename: resilienzplan
+    articles: ["§12", "§13", "§16"]
+  - name: Meldung von Vorfällen
+    visType: swimlane
+    filename: vorfallmeldung
+    articles: ["§18"]
+  - name: Besondere Bedeutung für Europa
+    visType: swimlane
+    filename: europa
+    articles: ["§9", "§10"]
+  - name: Akteure und Zuständigkeiten
+    visType: actors
+    filename: akteure
+    articles: []

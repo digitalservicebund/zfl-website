@@ -1,6 +1,6 @@
 ---
 interface Props {
-  title: string;
+  title?: string;
   body?: string;
 }
 
@@ -11,7 +11,7 @@ const { title, body } = Astro.props;
   <div class="text-cosmic-blue-400 bg-lavender-400 flex size-110 flex-none items-center justify-center rounded-sm px-18 py-22">
     <slot name="icon" />
   </div>
-  <h3 class="m-0 max-w-200">{title}</h3>
+  {title && <h3 class="m-0 max-w-200">{title}</h3>}
   {body && <p>{body}</p>}
   <slot />
 </div>

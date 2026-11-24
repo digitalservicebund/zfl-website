@@ -1,0 +1,31 @@
+---
+summary: "Wie das Gesundheitsamt nach §12 IGV-DG an Daten zur Erreichbarkeit von Flugreisenden und ihren möglichen Kontaktpersonen kommt: über Aussteigekarten, über Daten der Luftfahrtunternehmen und ersatzweise über die Fluggastdatenzentralstelle."
+---
+flowchart TD
+    start(["Luftfahrzeug kommt im Inland an"]) --> F1{"Kommt es aus einem<br/>betroffenen Gebiet und hat<br/>das BMG die Aussteigekarte<br/>allgemein angeordnet?<br/>— <a href='{{ELI}}#art-z12_abs-z1' target='_blank' rel='noopener'>§12 I S.1</a>"}
+
+    F1 -->|Nein| F2{"Gefahr für die öffentliche<br/>Gesundheit oder Verdacht<br/>an Bord festgestellt?<br/>— <a href='{{ELI}}#art-z12_abs-z3' target='_blank' rel='noopener'>§12 III</a>"}
+    F2 -->|Ja| GAAnordnung["Gesundheitsamt des Zielflughafens kann<br/>anordnen, dass die Reisenden eine<br/>Aussteigekarte ausfüllen — <a href='{{ELI}}#art-z12_abs-z3' target='_blank' rel='noopener'>§12 III S.1</a>"]
+    F1 -->|Ja| Karte["Reisende machen vor dem Verlassen des<br/>Luftfahrzeugs Angaben zum Flug und zur<br/>Erreichbarkeit in den folgenden 30 Tagen<br/>(Muster Anlage 1) — <a href='{{ELI}}#art-z12_abs-z1' target='_blank' rel='noopener'>§12 I</a>"]
+    GAAnordnung -->|angeordnet| Karte
+    GAAnordnung -->|"nicht<br/>angeordnet"| F3
+    Karte --> LU["Luftfahrtunternehmen händigt die Karten<br/>aus, hält zu Lesbarkeit und<br/>Vollständigkeit an und übergibt sie<br/>unverzüglich dem Gesundheitsamt des<br/>Zielflughafens — <a href='{{ELI}}#art-z12_abs-z2' target='_blank' rel='noopener'>§12 II</a>"]
+
+    F2 -->|Nein| F3
+    LU --> F3{"Verlangt das nach §25 I<br/>IfSG zuständige<br/>Gesundheitsamt Daten zur<br/>Erreichbarkeit verdächtiger<br/>oder betroffener Reisender<br/>oder ihrer möglichen<br/>Kontaktpersonen?<br/>— <a href='{{ELI}}#art-z12_abs-z5' target='_blank' rel='noopener'>§12 V</a>"}
+
+    F3 -->|Nein| KeinVerlangen(["Keine Datenanforderung"])
+    F3 -->|Ja| Daten["Luftfahrtunternehmen stellt die Daten<br/>unverzüglich zur Verfügung — <a href='{{ELI}}#art-z12_abs-z5' target='_blank' rel='noopener'>§12 V</a>"]
+    Daten --> F4{"Daten nicht, nicht<br/>rechtzeitig oder nicht<br/>vollständig übermittelt?<br/>— <a href='{{ELI}}#art-z12_abs-z5a' target='_blank' rel='noopener'>§12 Va S.1</a>"}
+
+    F4 -->|Ja| FDZ["Gesundheitsamt kann die<br/>Fluggastdatenzentralstelle (oder die Stelle<br/>nach §1 III FlugDaG) ersuchen; diese<br/>übermittelt vorhandene Daten unverzüglich<br/>(ohne depersonalisierte Daten)<br/>— <a href='{{ELI}}#art-z12_abs-z5a' target='_blank' rel='noopener'>§12 Va S.1, 2</a>"]
+    F4 -->|Nein| Verarbeitung
+    FDZ --> Verarbeitung(["Gesundheitsamt verarbeitet die Daten<br/>nur zur Erfüllung seiner Aufgaben<br/>— <a href='{{ELI}}#art-z12_abs-z6' target='_blank' rel='noopener'>§12 VI</a>"])
+
+    Daten -.- HinweisIV["Bei Gefahr der Einschleppung einer<br/>bedrohlichen übertragbaren Krankheit kann<br/>das BMG anordnen, dass Luftfahrtunternehmen<br/>bei Flügen aus betroffenen Gebieten<br/>vorhandene Daten (u.a. Sitzpläne) bis zu<br/>30 Tage bereithalten — <a href='{{ELI}}#art-z12_abs-z4' target='_blank' rel='noopener'>§12 IV</a>"]
+    Verarbeitung -.- HinweisVII["Auf Ersuchen der obersten<br/>Landesgesundheitsbehörde kann das RKI bei<br/>Ermittlungen und Kontaktaufnahme<br/>Amtshilfe leisten — <a href='{{ELI}}#art-z12_abs-z7' target='_blank' rel='noopener'>§12 VII</a>;<br/>im Schiffsverkehr gilt §12 entsprechend<br/>— <a href='{{ELI}}#art-z17_abs-z3' target='_blank' rel='noopener'>§17 III</a>"]
+
+    style KeinVerlangen fill:#fff3cd,stroke:#c9a227
+    style Verarbeitung fill:#d4edda,stroke:#2d8a4a
+    style HinweisIV fill:#f5f5f5,stroke:#999
+    style HinweisVII fill:#f5f5f5,stroke:#999

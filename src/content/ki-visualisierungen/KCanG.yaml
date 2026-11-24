@@ -1,0 +1,35 @@
+title: Gesetz zum Umgang mit Konsumcannabis
+eli: eli/bund/bgbl-1/2024/109-2/2025-01-01/1/deu
+visOptions:
+  - name: Besitzmengen-Ampel
+    visType: flowchart
+    filename: besitzmengen
+    articles: ["§3", "§34", "§36"]
+  - name: Privater Eigenanbau
+    visType: flowchart
+    filename: privater_eigenanbau
+    articles: ["§9", "§10", "§34", "§36"]
+  - name: Erlaubnisverfahren Anbauvereinigung
+    visType: flowchart
+    filename: anbauvereinigung_erlaubnis
+    articles: ["§11", "§12", "§14", "§15"]
+  - name: Straf- und Bußgeldschema
+    visType: flowchart
+    filename: straf_bussgeld
+    articles: ["§34", "§35", "§35a", "§36"]
+  - name: Tilgungsverfahren Bundeszentralregister
+    visType: swimlane
+    filename: tilgungsverfahren
+    articles: ["§§40-42"]
+  - name: Frühintervention bei Minderjährigen
+    visType: swimlane
+    filename: fruehintervention
+    articles: ["§7"]
+  - name: Überwachung von Anbauvereinigungen
+    visType: swimlane
+    filename: ueberwachung
+    articles: ["§26", "§27"]
+  - name: Akteure und Zuständigkeiten
+    visType: actors
+    filename: akteure
+    articles: []

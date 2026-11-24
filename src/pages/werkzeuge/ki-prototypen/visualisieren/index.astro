@@ -1,0 +1,124 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/Hero.astro";
+import KernCard from "@/components/KernCard.astro";
+import FeatureSet from "@/components/FeatureSet.astro";
+import FeatureItem from "@/components/FeatureItem.astro";
+import IconShare from "~icons/ic/twotone-share";
+import IconLightbulb from "~icons/ic/twotone-lightbulb";
+import IconEye from "~icons/ic/twotone-remove-red-eye";
+import { werkzeuge_kiPrototypen_visualisieren_erstellen } from "@/config/routes";
+import AIDisclaimer from "@/pages/werkzeuge/ki-prototypen/_shared/AIDisclaimer.astro";
+import { getVisualisierungExamples } from "./_examples.ts";
+import { visTypeIcons } from "./_visTypeIcons.ts";
+
+export const frontmatter = {
+  title: "Prototyp: Gesetze visualisieren",
+  sitemap: false,
+};
+
+const wizardPath = werkzeuge_kiPrototypen_visualisieren_erstellen.path;
+
+// Hand-picked to show one example per vis type. Entries that no longer
+// exist in the collection are skipped.
+const featured = [
+  { short: "BEEG", visualization: "Anspruchsvoraussetzungen Elterngeld" },
+  { short: "AsylG", visualization: "Asylverfahren-Ablauf" },
+  { short: "OZG", visualization: "Akteure und Zuständigkeiten" },
+];
+const examples = await getVisualisierungExamples();
+const featuredExamples = featured.flatMap(({ short, visualization }) => {
+  const example = examples.find((e) => e.short === short);
+  const option = example?.visOptions.find((o) => o.name === visualization);
+  if (!example || !option) return [];
+  const params = new URLSearchParams({ norm: short, visualization });
+  return [{ example, option, href: `${wizardPath}?${params}` }];
+});
+---
+
+<Layout title={frontmatter.title} excludeFromSearch>
+  {/* The wizard used to live at this path; forward old deep links. */}
+  <script is:inline define:vars={{ wizardPath }}>
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("norm") || params.has("visualization")) {
+      window.location.replace(
+        wizardPath + window.location.search + window.location.hash,
+      );
+    }
+  </script>
+  <main class="breakout-grid" id="main">
+    <Hero>
+      <h1>{frontmatter.title}</h1>
+      <p>
+        Visualisieren Sie Prozesse und Entscheidungslogiken in Ihrem
+        Gesetzesvorhaben – mithilfe von künstlicher Intelligenz.
+      </p>
+    </Hero>
+    <AIDisclaimer />
+
+    <section>
+      <h2>Warum eine Visualisierung erstellen?</h2>
+      <FeatureSet>
+        <FeatureItem>
+          <IconShare slot="icon" class="size-full" />
+          <p>
+            Frühzeitig <strong>Komplexität</strong> erkennen und{" "}
+            <strong>reduzieren</strong>
+          </p>
+        </FeatureItem>
+        <FeatureItem>
+          <IconLightbulb slot="icon" class="size-full" />
+          <p>
+            <strong>Chancen und Hürden</strong> der Digitalisierung erkennen
+          </p>
+        </FeatureItem>
+        <FeatureItem>
+          <IconEye slot="icon" class="size-full" />
+          <p>
+            <strong>Abstimmung</strong> vereinfachen, z.&nbsp;B. im Ressort und
+            mit Verbänden
+          </p>
+        </FeatureItem>
+      </FeatureSet>
+    </section>
+
+    <section class="breakout bg-lavender-200">
+      <h2 class="mb-24">Visualisierung jetzt starten</h2>
+      <p class="mb-32">
+        Visualisieren Sie den Vollzug Ihrer Regelung, um Zusammenhänge besser zu
+        verstehen und Ihr Vorhaben zu optimieren.
+      </p>
+      <div>
+        <a href={wizardPath} class="kern-btn kern-btn--primary">
+          <span class="kern-label">Jetzt starten</span>
+        </a>
+      </div>
+    </section>
+
+    {featuredExamples.length > 0 && (
+      <section>
+        <h2 class="pb-32">Beispiele ansehen</h2>
+        <div class="gap-md grid grid-cols-1 md:grid-cols-3">
+          {featuredExamples.map(({ example, option, href }) => {
+            const Icon = visTypeIcons[option.visType];
+            return (
+              <KernCard
+                title={option.name}
+                preline={example.short}
+                href={href}
+                small
+              >
+                <Icon
+                  slot="pre-header"
+                  class="text-cosmic-blue-400 size-32"
+                  aria-hidden="true"
+                />
+                {example.title}
+              </KernCard>
+            );
+          })}
+        </div>
+      </section>
+    )}
+  </main>
+</Layout>

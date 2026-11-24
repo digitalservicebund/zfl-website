@@ -3,3 +3,6 @@ pnpm-lock.yaml
 # Prettier doesn't support JSX components as of version 3.9.6
 # and converts some inline elements to block, changing the presentation
 src/content/**/*.mdx
+# Reformatting would shift finding.location.offsetFrom/offsetTo, which are
+# computed against the exact on-disk body text (see vorhaben-checks skill)
+src/content/potenziale/*.md

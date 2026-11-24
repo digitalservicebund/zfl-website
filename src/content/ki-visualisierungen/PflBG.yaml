@@ -1,0 +1,27 @@
+title: Gesetz über die Pflegeberufe
+eli: eli/bund/bgbl-1/2017/s2581/2026-01-01/1/deu
+visOptions:
+  - name: Anerkennung ausländischer Abschlüsse
+    visType: flowchart
+    filename: anerkennung
+    articles: ["§§40-43"]
+  - name: Dienstleistungserbringung aus dem EU-Ausland
+    visType: swimlane
+    filename: dienstleistung
+    articles: ["§44", "§46", "§48"]
+  - name: Partielle Berufsausübung
+    visType: flowchart
+    filename: partielle_berufsausuebung
+    articles: ["§48a", "§48b"]
+  - name: Erlaubnis zum Führen der Berufsbezeichnung
+    visType: flowchart
+    filename: erlaubnis
+    articles: ["§§1-3"]
+  - name: Zugang zur Ausbildung und Anrechnung
+    visType: flowchart
+    filename: ausbildungszugang
+    articles: ["§11", "§12"]
+  - name: Akteure bei Anerkennung und Berufszugang
+    visType: actors
+    filename: akteure
+    articles: []

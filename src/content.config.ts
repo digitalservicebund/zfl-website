@@ -1,4 +1,5 @@
 import { allRoutes } from "@/config/routes";
+import { visOptionType } from "@/pages/werkzeuge/ki-prototypen/visualisieren/_types";
 import { withBase } from "@/utils/path";
 import { glob } from "astro/loaders";
 import { z } from "astro/zod";
@@ -101,6 +102,111 @@ const visualisierungen = defineCollection({
     }),
 });
 
+const kiVisualisierungen = defineCollection({
+  loader: glob({
+    pattern: "*.yaml",
+    base: "src/content/ki-visualisierungen",
+  }),
+  schema: z.object({
+    title: z.string(),
+    /** ELI-Pfad des Gesetzes auf rechtsinformationen.bund.de, z.B.
+     * "eli/bund/bgbl-1/2000/s1966/2022-08-01/1/deu". Wird verwendet, um
+     * "{{ELI}}"-Platzhalter in den .mmd-Dateien zu Norm-Links aufzulösen.
+     * Für EU-Rechtsakte (nicht in RIS indexiert) stattdessen eine volle
+     * EUR-Lex-URL, z.B. "https://eur-lex.europa.eu/eli/reg/2026/1738/oj/deu". */
+    eli: z.string(),
+    visOptions: z.array(visOptionType),
+  }),
+});
+
+const baseFinding = {
+  // Matches a <!--finding:{id}:start--> / <!--finding:{id}:end--> marker pair
+  // embedded in the potenziale entry's markdown body.
+  id: z.string(),
+  locationLabel: z.string(), // "§ 14 S.2"
+  reasoning: z.string(), // short explanation why this was flagged
+  hint: z.string(), // experimental: suggestions, recommendations
+  // Verbatim quote the marker pair above wraps. Kept alongside the markers
+  // (not just used to place them) so the frontend can later match on this
+  // directly instead of the markers, without a skill/schema change.
+  quote: z.string(),
+};
+
+const findingType = z.discriminatedUnion("type", [
+  z.object({
+    ...baseFinding,
+    type: z.literal("Digitalcheck"),
+    tag: z.enum([
+      "Prinzip 1.1",
+      "Prinzip 1.2",
+      "Prinzip 1.3",
+      "Prinzip 1.4",
+      "Prinzip 1.5",
+      "Prinzip 2.1",
+      "Prinzip 2.2",
+      "Prinzip 2.3",
+      "Prinzip 2.4",
+      "Prinzip 2.5",
+      "Prinzip 3.1",
+      "Prinzip 3.2",
+      "Prinzip 4.1",
+      "Prinzip 4.2",
+      "Prinzip 4.3",
+      "Prinzip 4.4",
+      "Prinzip 4.5",
+      "Prinzip 5.1",
+      "Prinzip 5.2",
+      "EU-Interoperabilität",
+    ]),
+  }),
+  z.object({
+    ...baseFinding,
+    type: z.literal("Bürgercheck"),
+    tag: z.enum([
+      "Prinzip 1",
+      "Prinzip 2",
+      "Prinzip 3",
+      "Prinzip 4",
+      "Prinzip 5",
+    ]),
+  }),
+  z.object({
+    ...baseFinding,
+    type: z.literal("Praxischeck"),
+    tag: z.enum(["Placeholder PC"]), // TODO: define real Praxischeck tags
+  }),
+]);
+
+export type Finding = z.infer<typeof findingType>;
+
+const obligationType = z.object({
+  // Matches a <!--obligation:{id}:start--> / <!--obligation:{id}:end-->
+  // marker pair embedded in the potenziale entry's markdown body.
+  id: z.string(),
+  locationLabel: z.string(), // "§ 14 Abs. 2"
+  who: z.string(),
+  summary: z.string(),
+  // Verbatim quote the marker pair above wraps. Kept alongside the markers
+  // (not just used to place them) so the frontend can later match on this
+  // directly instead of the markers, without a skill/schema change.
+  quote: z.string(),
+});
+
+export type Obligation = z.infer<typeof obligationType>;
+
+const potenziale = defineCollection({
+  loader: glob({
+    pattern: "*.md",
+    base: "src/content/potenziale",
+  }),
+  schema: z.object({
+    title: z.string(),
+    eli: z.string().optional(),
+    findings: z.array(findingType),
+    obligations: z.array(obligationType).optional(),
+  }),
+});
+
 const articles = defineCollection({
   loader: glob({
     pattern: "**/*.mdx",
@@ -117,5 +223,7 @@ const articles = defineCollection({
 export const collections = {
   werkzeuge,
   visualisierungen,
+  kiVisualisierungen,
+  potenziale,
   articles,
 };

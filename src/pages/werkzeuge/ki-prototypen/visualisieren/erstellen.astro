@@ -1,0 +1,18 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Wizard from "./_Wizard.svelte";
+import { getVisualisierungExamples } from "./_examples.ts";
+
+export const frontmatter = {
+  title: "Visualisierung erstellen",
+  sitemap: false,
+};
+
+const examples = await getVisualisierungExamples();
+---
+
+<BaseLayout title={frontmatter.title}>
+  <div class="h-dvh">
+    <Wizard {examples} client:load />
+  </div>
+</BaseLayout>

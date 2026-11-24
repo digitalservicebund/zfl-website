@@ -1,0 +1,27 @@
+title: "Verordnung zu schwerwiegenden grenzüberschreitenden Gesundheitsgefahren (VO (EU) 2022/2371)"
+eli: "https://eur-lex.europa.eu/eli/reg/2022/2371/oj/deu"
+visOptions:
+  - name: "Frühwarnung über das EWRS"
+    visType: swimlane
+    filename: "warnmeldung"
+    articles: ["Art. 19", "Art. 20"]
+  - name: "Koordinierung der Reaktion"
+    visType: swimlane
+    filename: "koordinierung"
+    articles: ["Art. 21", "Art. 22"]
+  - name: "Notlage auf Unionsebene"
+    visType: swimlane
+    filename: "notlage"
+    articles: ["Art. 23-25"]
+  - name: "Vorsorgeplanung und Berichterstattung"
+    visType: swimlane
+    filename: "vorsorgeplanung"
+    articles: ["Art. 6-9"]
+  - name: "Gemeinsame Beschaffung"
+    visType: swimlane
+    filename: "beschaffung"
+    articles: ["Art. 12"]
+  - name: "Akteure und Zuständigkeiten"
+    visType: actors
+    filename: "akteure"
+    articles: []

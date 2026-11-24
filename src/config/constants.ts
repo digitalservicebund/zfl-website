@@ -47,18 +47,6 @@ export const BLOG_BESTANDSRECHTSANALYSE_URL = {
   url: "https://digitalservice.bund.de/blog/interdisziplinaer-zu-besseren-gesetzen",
 };
 
-export const PROTOTYP_PFLICHTEN_URL = {
-  url: "https://digitalservicebund.github.io/zfl-website/previews/prototyp/pflichten/werkzeuge/pflichten/",
-};
-
-export const PROTOTYP_POTENZIALE_URL = {
-  url: "https://digitalservicebund.github.io/zfl-website/previews/mermaid/werkzeuge/potenziale/",
-};
-
-export const PROTOTYP_RECHT_ERKUNDEN_URL = {
-  url: "https://digitalservicebund.github.io/zfl-website/previews/prototyp/rechtexplorer/werkzeuge/recht-erkunden/",
-};
-
 export const KI_NUTZENDENTEST_TEILNAHME_URL = {
   url: "https://docs.google.com/forms/d/e/1FAIpQLSfa2Gg9wSEL-tYTgjFu_QWHVte7No8A5nD_xuCyR1tChYqR_w/viewform",
 };

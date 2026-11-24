@@ -1,0 +1,35 @@
+---
+summary: "Das Antragsverfahren für die Förderung einer politischen Stiftung nach dem StiftFinG: Antrag bei der zuständigen obersten Bundesbehörde, Feststellung der Förderfähigkeit durch das BMI mit Erkundigung beim Verfassungsschutz und Bewilligung oder Ablehnung."
+---
+swimlane-beta TD
+    subgraph ST["Politische Stiftung"]
+        antrag(["Antrag auf Fördermittel aus dem<br/>Bundeshaushalt — <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 I S.1</a>"])
+        bericht["Öffentlicher Jahresbericht mit Gremien<br/>und Spenden über 10.000 € — <a href='{{ELI}}#art-z6_abs-z2' target='_blank' rel='noopener'>§6 II</a>;<br/>Wirtschaftsprüfung, Ergebnis an die<br/>Antragsstelle — <a href='{{ELI}}#art-z6_abs-z1' target='_blank' rel='noopener'>§6 I</a>"]
+    end
+
+    subgraph OBB["Oberste Bundesbehörde"]
+        eingang["Antrag geht ein (Aufgaben ggf. auf<br/>Bundesoberbehörde übertragen)<br/>— <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 I</a>"]
+        bewilligung["Bewilligung im Rahmen der Mittel des<br/>Haushaltsgesetzes, BHO gilt — <a href='{{ELI}}#art-z3_abs-z1' target='_blank' rel='noopener'>§3 I</a>"]
+        ablehnung(["Antrag abgelehnt; bei fehlender Gewähr<br/>(§2 IV) oder verfassungsfeindlicher<br/>Ausrichtung (§2 V) Förderung für die<br/>Wahlperiode ausgeschlossen — <a href='{{ELI}}#art-z3_abs-z2' target='_blank' rel='noopener'>§3 II</a>"])
+    end
+
+    subgraph BMI["Bundesministerium des Innern"]
+        pruefung["Prüfung von Anerkennung und<br/>Fördervoraussetzungen — <a href='{{ELI}}#art-z7_abs-z2' target='_blank' rel='noopener'>§7 II</a>"]
+        feststellung{"Anerkennung und<br/>Voraussetzungen nach<br/>§2 II-V festgestellt?<br/>— <a href='{{ELI}}#art-z2_abs-z1' target='_blank' rel='noopener'>§2 I</a>"}
+    end
+
+    subgraph VS["Verfassungsschutzbehörden"]
+        auskunft("Auskunft über bekannte Tatsachen zur<br/>Stiftung oder zu Personen — <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 I S.2</a>")
+    end
+
+    antrag --> eingang
+    eingang --> pruefung
+    pruefung -.->|Erkundigung| auskunft
+    auskunft -.-> feststellung
+    pruefung --> feststellung
+    feststellung -->|Ja| bewilligung
+    feststellung -->|Nein| ablehnung
+    bewilligung --> bericht
+
+    style bewilligung fill:#d4edda,stroke:#2d8a4a
+    style ablehnung fill:#f8d7da,stroke:#c0392b

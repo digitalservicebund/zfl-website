@@ -7,6 +7,10 @@ import KernAccordion from "@/components/KernAccordion.astro";
 import PrototypeSection from "./_PrototypeSection.astro";
 import {
   begleitungen,
+  werkzeuge_kiPrototypen_pflichten,
+  werkzeuge_kiPrototypen_potenziale,
+  werkzeuge_kiPrototypen_rechtErkunden,
+  werkzeuge_kiPrototypen_visualisieren,
   werkzeuge_praxistauglichkeit,
   werkzeuge_ressourcen,
 } from "@/config/routes";
@@ -17,9 +21,6 @@ import {
   DIGITALCHECK_PRINZIPIEN_URL,
   EU_AI_ACT_URL,
   KI_NUTZENDENTEST_TEILNAHME_URL,
-  PROTOTYP_PFLICHTEN_URL,
-  PROTOTYP_POTENZIALE_URL,
-  PROTOTYP_RECHT_ERKUNDEN_URL,
 } from "@/config/constants";
 import IconPlaylistAddCheck from "~icons/ic/baseline-playlist-add-check";
 import IconPeople from "~icons/ic/baseline-people";
@@ -168,7 +169,7 @@ const frontmatter = {
           image={bestandsrecht}
           imageAlt="Screenshot des Prototyps: tabellarische Übersicht exportierter Pflichten aus dem SGB XI"
           look="blue"
-          prototypeHref={PROTOTYP_PFLICHTEN_URL.url}
+          prototypeHref={werkzeuge_kiPrototypen_pflichten.path}
         >
           <p>
             Der Prototyp zur Bestandsrechtsanalyse filtert die wichtigsten
@@ -207,7 +208,7 @@ const frontmatter = {
           imageAlt="Screenshot des Prototyps: Prüfergebnisse zu einem Gesetzentwurf nach den Prinzipien des Digitalcheck"
           look="green"
           reversed
-          prototypeHref={PROTOTYP_POTENZIALE_URL.url}
+          prototypeHref={werkzeuge_kiPrototypen_potenziale.path}
         >
           <p>
             Dieser Prototyp analysiert Regelungsentwürfe anhand der
@@ -239,7 +240,7 @@ const frontmatter = {
           image={angrenzendesRecht}
           imageAlt="Screenshot des Prototyps: Übersicht relevanten Rechts, geordnet nach Normenhierarchie und Relevanzgrund"
           look="gray"
-          prototypeHref={PROTOTYP_RECHT_ERKUNDEN_URL.url}
+          prototypeHref={werkzeuge_kiPrototypen_rechtErkunden.path}
         >
           <p>
             Die Änderung eines Paragrafen kann sich ungewollt auf weitere
@@ -297,6 +298,7 @@ const frontmatter = {
           image={visualisierung}
           imageAlt="Screenshot des Prototyps: Flussdiagramm zum Anzeigeverfahren bei Massenentlassungen nach dem Kündigungsschutzgesetz"
           look="blue"
+          prototypeHref={werkzeuge_kiPrototypen_visualisieren.path}
         >
           <p>
             Visualisierungen helfen, komplexe Prozesse und Entscheidungslogiken

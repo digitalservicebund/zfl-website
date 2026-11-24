@@ -1,0 +1,27 @@
+title: Gesetz zur Regelung des Zugangs zu Informationen des Bundes
+eli: eli/bund/bgbl-1/2005/s2722/2020-06-27/1/deu
+visOptions:
+  - name: Anwendbarkeitsprüfung
+    visType: flowchart
+    filename: anwendbarkeit
+    articles: ["§1", "§2"]
+  - name: Antragsverfahren
+    visType: swimlane
+    filename: antragsverfahren
+    articles: ["§7", "§9"]
+  - name: Prüfschema Ausschlussgründe
+    visType: flowchart
+    filename: ausschlussgruende
+    articles: ["§§3-6"]
+  - name: Beteiligung Dritter
+    visType: swimlane
+    filename: drittbeteiligung
+    articles: ["§8"]
+  - name: Rechtsschutz und Bundesbeauftragter
+    visType: swimlane
+    filename: rechtsschutz
+    articles: ["§9", "§12"]
+  - name: Akteure und Zuständigkeiten
+    visType: actors
+    filename: akteure
+    articles: []

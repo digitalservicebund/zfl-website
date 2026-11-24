@@ -29,7 +29,7 @@ const { class: className, level } = Astro.props;
 
 <style>
   section {
-    :global(h1) {
+    :global(h1):not(:last-child) {
       margin-bottom: 24px;
     }
     :global(p) {

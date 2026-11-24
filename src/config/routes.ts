@@ -257,11 +257,38 @@ export const werkzeuge_kiPrototypen_pflichten = {
   isStagingOnly: false,
 } as const;
 
+export const werkzeuge_kiPrototypen_potenziale = {
+  key: "werkzeuge_kiPrototypen_potenziale",
+  path: "/werkzeuge/ki-prototypen/potenziale",
+  title: "Prototyp: Potenziale aufdecken",
+  parent: werkzeuge_kiPrototypen,
+  sitemap: false,
+  isStagingOnly: false,
+} as const;
+
 export const werkzeuge_kiPrototypen_rechtErkunden = {
   key: "werkzeuge_kiPrototypen_rechtErkunden",
   path: "/werkzeuge/ki-prototypen/recht-erkunden",
   title: "Prototyp: Angrenzendes Recht sichtbar machen",
   parent: werkzeuge_kiPrototypen,
+  sitemap: false,
+  isStagingOnly: false,
+} as const;
+
+export const werkzeuge_kiPrototypen_visualisieren = {
+  key: "werkzeuge_kiPrototypen_visualisieren",
+  path: "/werkzeuge/ki-prototypen/visualisieren",
+  title: "Prototyp: Gesetze visualisieren",
+  parent: werkzeuge_kiPrototypen,
+  sitemap: false,
+  isStagingOnly: false,
+} as const;
+
+export const werkzeuge_kiPrototypen_visualisieren_erstellen = {
+  key: "werkzeuge_kiPrototypen_visualisieren_erstellen",
+  path: "/werkzeuge/ki-prototypen/visualisieren/erstellen",
+  title: "Visualisierung erstellen",
+  parent: werkzeuge_kiPrototypen_visualisieren,
   sitemap: false,
   isStagingOnly: false,
 } as const;
@@ -369,7 +396,10 @@ export const allRoutes = [
   werkzeuge_kiInDerRechtsetzung,
   werkzeuge_kiPrototypen,
   werkzeuge_kiPrototypen_pflichten,
+  werkzeuge_kiPrototypen_potenziale,
   werkzeuge_kiPrototypen_rechtErkunden,
+  werkzeuge_kiPrototypen_visualisieren,
+  werkzeuge_kiPrototypen_visualisieren_erstellen,
   werkzeuge_praxistauglichkeit,
   werkzeuge_ressourcen,
   werkzeuge_ressourcen_flussdiagramme,
