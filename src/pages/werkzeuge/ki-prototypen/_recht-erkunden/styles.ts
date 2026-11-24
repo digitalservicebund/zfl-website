@@ -1,4 +1,4 @@
-import { tv } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 
 // Shared tv() slots for the Recht erkunden partials (see
 // Step1RechtBestimmen.astro, Step2RechtErkunden.astro, DetailSidebar.astro).
