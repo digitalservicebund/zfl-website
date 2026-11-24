@@ -23,7 +23,7 @@ export function parseMmdFrontmatter(source: string): {
   const body = source.slice(match[0].length);
   const summaryMatch = /^summary:\s*"((?:[^"\\]|\\.)*)"\s*$/m.exec(frontmatter);
   const summary = summaryMatch
-    ? summaryMatch[1].replaceAll('\\"', '"').replaceAll("\\\\", "\\")
+    ? summaryMatch[1].replaceAll(String.raw`\"`, '"').replaceAll("\\\\", "\\")
     : "";
 
   return { summary, body };

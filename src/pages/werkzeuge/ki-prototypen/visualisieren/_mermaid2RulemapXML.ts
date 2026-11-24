@@ -48,7 +48,7 @@ function cleanLabel(raw: string): string {
   return raw
     .replace(/<a\b[^>]*>(.*?)<\/a>/gis, "$1")
     .replace(/<br\s*\/?>/gi, " ")
-    .replaceAll('\\"', '"')
+    .replaceAll(String.raw`\"`, '"')
     .replace(/\s+/g, " ")
     .trim();
 }
