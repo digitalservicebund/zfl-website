@@ -97,3 +97,4 @@ Pre-commit/push hooks run: `commitlint` (conventional commits required), `lint`,
 - `doc/routes.md` — Route management guide
 - `doc/tailwind-variants.md` — `tailwind-variants` usage guide
 - `doc/icons.md` — Icon usage guide
+- `doc/live-ai-prototypes.md` — Live-AI backend for KI-Prototypen (`PUBLIC_TOOL_API`, previews)

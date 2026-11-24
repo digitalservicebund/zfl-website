@@ -55,7 +55,7 @@ fileignoreconfig:
   - filename: src/config/posthog.ts
     checksum: 2c449a89d7fa9be57170bc960a30f51381f9a5d8d046605a6e30c083886163dd
   - filename: src/env.d.ts
-    checksum: a3818462262eb3dbed12f1c2e6293bd7814eef316e81b6a084911fea1781d549
+    checksum: 7fa83dc93b5fd48ed336c7d3290ad1ab311bb32f8d8f8d135d79995813bd3284
   - filename: doc/adr/0004-configuration-management.md
     checksum: 367a262dfe679ea3254c86879a09d98b0e03863b4c514f58ccd3609afb58bdae
   - filename: src/pages/ueber-uns/Ansatz.jpg
@@ -203,10 +203,6 @@ fileignoreconfig:
     checksum: d7e2ee229a8eb9178dc754d84f6f50aa2de4de50bb870001b8b643c5dcc4c12c
   - filename: src/content/ki-visualisierungen/StiftFinG/mittelverteilung.mmd
     checksum: e2275ef24913e61566bac7c966ae4e75f351ee873090a023b31431409578033f
-  - filename: src/pages/werkzeuge/ki-prototypen/_shared/api.ts
-    allowed_patterns: [API_BASE_STORAGE_KEY]
-  - filename: src/pages/werkzeuge/ki-prototypen/_shared/apiBase.ts
-    allowed_patterns: [API_BASE_STORAGE_KEY]
   - filename: src/content/ki-visualisierungen/PflBG/anerkennung.mmd
     checksum: 2f7077b5dceeb465955d6641e9a7425df4ea5f468ed093a13b5546f9a2e4de1b
   - filename: src/content/ki-visualisierungen/PflBG/partielle_berufsausuebung.mmd
