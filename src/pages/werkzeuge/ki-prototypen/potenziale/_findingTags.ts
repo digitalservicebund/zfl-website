@@ -8,7 +8,7 @@ interface TagMeta {
   links?: { label: string; href: string }[];
 }
 
-// Pages on digitalcheck.bund.de/methoden/fuenf-prinzipien/, one per principle group.
+// Pages on digitalcheck.bund.de/prinzipien/, one per principle group.
 const PRINZIP_PAGES: Record<string, string> = {
   "1": "digitale-angebote-fuer-alle-nutzbar-gestalten",
   "2": "datenwiederverwendung-benoetigt-einheitliches-recht",
@@ -31,7 +31,7 @@ function prinzip(
       links: [
         {
           label: `Mehr zum Prinzip ${number}`,
-          href: `https://digitalcheck.bund.de/methoden/fuenf-prinzipien/${PRINZIP_PAGES[group]}#${anchor}`,
+          href: `https://digitalcheck.bund.de/prinzipien/${PRINZIP_PAGES[group]}#${anchor}`,
         },
         {
           label: "Beispiele ansehen",
