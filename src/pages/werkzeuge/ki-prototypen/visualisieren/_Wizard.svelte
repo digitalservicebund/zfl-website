@@ -59,8 +59,10 @@
   // the .mmd sources (see resolveNormLinks) are clickable.
   configureMermaid(true);
 
+  // Root-relative rather than relative, so moving this file doesn't silently
+  // turn the glob empty; keys then start with "/src/content/…" as well.
   const mermaidSources = import.meta.glob<string>(
-    "../../../content/ki-visualisierungen/*/*.mmd",
+    "/src/content/ki-visualisierungen/*/*.mmd",
     {
       query: "?raw",
       import: "default",
@@ -244,7 +246,7 @@
       wizard.isLoading = true;
       wizard.mermaidError = undefined;
 
-      const path = `../../../content/ki-visualisierungen/${example.short}/${option.filename}.mmd`;
+      const path = `/src/content/ki-visualisierungen/${example.short}/${option.filename}.mmd`;
       const eli = example.eli;
 
       const { promise: fakeDelay, cancel } = createFakeLoadingSequence(
