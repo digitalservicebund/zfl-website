@@ -1,1 +1,0 @@
-var e=!1,t=null;export{e as n,t};
