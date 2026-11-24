@@ -16,16 +16,14 @@ export function parseMmdFrontmatter(source: string): {
   summary: string;
   body: string;
 } {
-  const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?/);
+  const match = /^---\r?\n([\s\S]*?)\r?\n---\r?\n?/.exec(source);
   if (!match) return { summary: "", body: source };
 
   const frontmatter = match[1];
   const body = source.slice(match[0].length);
-  const summaryMatch = frontmatter.match(
-    /^summary:\s*"((?:[^"\\]|\\.)*)"\s*$/m,
-  );
+  const summaryMatch = /^summary:\s*"((?:[^"\\]|\\.)*)"\s*$/m.exec(frontmatter);
   const summary = summaryMatch
-    ? summaryMatch[1].replace(/\\"/g, '"').replace(/\\\\/g, "\\")
+    ? summaryMatch[1].replaceAll('\\"', '"').replaceAll("\\\\", "\\")
     : "";
 
   return { summary, body };

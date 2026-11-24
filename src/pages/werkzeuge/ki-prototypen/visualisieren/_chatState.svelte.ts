@@ -13,8 +13,8 @@ export class ChatState {
   messages = $state<ChatMessage[]>([]);
   status = $state<ChatStatus>("idle");
 
-  #backend: ChatBackend;
-  #initialMessages: ChatMessage[];
+  readonly #backend: ChatBackend;
+  readonly #initialMessages: ChatMessage[];
   #abortController: AbortController | undefined;
 
   /** initialMessages: shown when the chat starts and restored by reset(), e.g. a greeting */

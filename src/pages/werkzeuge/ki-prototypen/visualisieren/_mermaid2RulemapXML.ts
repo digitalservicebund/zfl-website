@@ -48,23 +48,39 @@ function cleanLabel(raw: string): string {
   return raw
     .replace(/<a\b[^>]*>(.*?)<\/a>/gis, "$1")
     .replace(/<br\s*\/?>/gi, " ")
-    .replace(/\\"/g, '"')
+    .replaceAll('\\"', '"')
     .replace(/\s+/g, " ")
     .trim();
 }
 
 function escapeXmlAttr(value: string): string {
   return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&apos;");
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&apos;");
 }
 
-const NODE_DEF_RE = /([A-Za-z0-9_]+)(\[|\{)"((?:\\.|[^"\\])*)"(\]|\})/g;
-const EDGE_RE =
-  /([A-Za-z0-9_]+)\s*--+>\s*(?:\|\s*(?:"([^"]*)"|([^|]*?))\s*\|\s*)?([A-Za-z0-9_]+)/g;
+// The leading \b keeps a failed match from being retried at every position
+// inside a long ID.
+const NODE_DEF_RE = /\b(\w+)([[{])"((?:\\.|[^"\\])*)"[\]}]/g;
+// The edge label is captured as is ("quoted" or plain, with surrounding
+// whitespace); edgeLabel() cleans it up.
+const EDGE_RE = /\b(\w+)\s*--+>\s*(?:\|("[^"]*"|[^|]*)\|\s*)?(\w+)/g;
+
+function edgeLabel(raw: string | undefined): string | undefined {
+  let label = raw?.trim();
+  if (
+    label &&
+    label.length >= 2 &&
+    label.startsWith('"') &&
+    label.endsWith('"')
+  ) {
+    label = label.slice(1, -1);
+  }
+  return label ? cleanLabel(label) : undefined;
+}
 
 function parseFlowchart(source: string): ParsedFlowchart {
   const nodes = new Map<string, FlowNode>();
@@ -79,15 +95,8 @@ function parseFlowchart(source: string): ParsedFlowchart {
   const structureOnly = source.replace(NODE_DEF_RE, (_match, id) => id);
 
   const edges: FlowEdge[] = [];
-  for (const [, from, quotedLabel, plainLabel, to] of structureOnly.matchAll(
-    EDGE_RE,
-  )) {
-    const rawLabel = quotedLabel ?? plainLabel;
-    edges.push({
-      from,
-      to,
-      label: rawLabel ? cleanLabel(rawLabel) : undefined,
-    });
+  for (const [, from, rawLabel, to] of structureOnly.matchAll(EDGE_RE)) {
+    edges.push({ from, to, label: edgeLabel(rawLabel) });
   }
 
   for (const { from, to } of edges) {
@@ -138,8 +147,10 @@ function buildTree(parsed: ParsedFlowchart): RulemapNode {
       buildNode(edge.to, edge.label, nextAncestors),
     );
 
-    const logic: RulemapNode["logic"] =
-      children.length === 1 ? "and" : node?.shape === "diamond" ? "xor" : "or";
+    let logic: RulemapNode["logic"];
+    if (children.length === 1) logic = "and";
+    else if (node?.shape === "diamond") logic = "xor";
+    else logic = "or";
 
     return { title, logic, children };
   }

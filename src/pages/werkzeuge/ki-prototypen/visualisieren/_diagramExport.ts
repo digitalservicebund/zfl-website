@@ -14,8 +14,16 @@ export function stripLinks(source: string): string {
 export function boldToMarkdown(source: string): string {
   return source.replace(
     /"([^"`]*<b>[^"`]*)"/gi,
-    (_, label: string) =>
-      `"\`${label.replace(/<b>\s*(.*?)\s*<\/b>/gi, "**$1**")}\`"`,
+    (_, label: string) => `"\`${boldTagsToMarkdown(label)}\`"`,
+  );
+}
+
+// Whitespace is trimmed in code rather than with \s* around the lazy group,
+// which would make the regex backtrack super-linearly.
+function boldTagsToMarkdown(label: string): string {
+  return label.replace(
+    /<b>(.*?)<\/b>/gi,
+    (_, text: string) => `**${text.trim()}**`,
   );
 }
 

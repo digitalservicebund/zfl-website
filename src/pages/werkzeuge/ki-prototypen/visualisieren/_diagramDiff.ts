@@ -9,16 +9,15 @@ const NODE_ID_PATTERN = /flowchart-(.+)-\d+$/;
 
 /** The node ID from the Mermaid source, stable across renders. */
 export function diagramNodeKey(element: Element): string | undefined {
-  return element.id.match(NODE_ID_PATTERN)?.[1];
+  return NODE_ID_PATTERN.exec(element.id)?.[1];
 }
 
 // Edges carry a data-id like "L_F1_F1B_0" on both the path and its label
 function edgeLabelTexts(doc: Document): Map<string, string> {
   return new Map(
-    [...doc.querySelectorAll(".edgeLabel [data-id]")].map((label) => [
-      label.getAttribute("data-id")!,
-      label.textContent ?? "",
-    ]),
+    [
+      ...doc.querySelectorAll<HTMLElement | SVGElement>(".edgeLabel [data-id]"),
+    ].map((label) => [label.dataset.id!, label.textContent ?? ""]),
   );
 }
 
@@ -37,8 +36,8 @@ function texts(doc: Document): Map<Element, { key: string; text: string }> {
     }
   }
   const labels = edgeLabelTexts(doc);
-  for (const edge of doc.querySelectorAll("path[data-id]")) {
-    const id = edge.getAttribute("data-id")!;
+  for (const edge of doc.querySelectorAll<SVGPathElement>("path[data-id]")) {
+    const id = edge.dataset.id!;
     result.set(edge, { key: `edge:${id}`, text: labels.get(id) ?? "" });
   }
   return result;
