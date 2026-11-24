@@ -112,13 +112,13 @@ fileignoreconfig:
   - filename: src/content/potenziale/ZirkRegV_buergercheck.md
     checksum: faef13c94bed18ee8203bd49d8ccea99abc8a2a2baa9759ed7f9d809f0c11f82
   - filename: .claude/skills/gesetz-visualisieren/SKILL.md
-    checksum: 4b94c331455bf27f3673e181a397da1e3ed8b5b730f8e211250e3aadb7d641b7
+    checksum: 24bbcac253d52a4728ee2110900a78bc8e7ebb770b728c644197861be4e5c318
   - filename: .claude/skills/vorhaben-checks/praxischeck.md
     checksum: 619ddebc8ecba2805a0c25981a2708ee9845a3534261aade12612ce7764704ba
   - filename: .claude/skills/vorhaben-checks/digitalcheck.md
     checksum: 5051e4b7042945790861ef7c625ba99c9b2aca151c9e823d12c93247d9bf51de
   - filename: .claude/skills/vorhaben-checks/buergercheck.md
-    checksum: c50e5a44d463b748d548df853948cd7e478d1a2e1ee51240e77cfa248a60649c
+    checksum: b5b860041e69a60bd64c19514bedbee7aa5afabbce5aba772c7e8a129e593e68
   - filename: src/content/potenziale/HeizkostenV_buergercheck.md
     checksum: 27f3b4e145771e0899a85d77aea83f42caaddb5c7027309ba67377aec1075470
   - filename: src/content/potenziale/LuftVG_digitalcheck.md
@@ -168,17 +168,17 @@ fileignoreconfig:
   - filename: src/content/werkzeuge/visualisierungen.png
     checksum: d68b2abea5a2f030c40821897777800100d7491f847bdea1993c190c6ed16800
   - filename: src/content/potenziale/URV.md
-    checksum: 82e2a9c2954faa113ad538146ca1f3d22b5261c2ef1ba3055cc05f17b2b11374
+    checksum: e85948ec8641fce6e94dde059f895eef4b4574e6c08a0bfddaf40d22a6fd80c1
   - filename: src/content/potenziale/KCanG.md
-    checksum: e22de6b41d2c15bb7c447d0465b78b7ea6f0f88334184fada7138f06bbd3f177
+    checksum: 26d9b34a076fa7c4f67e5ca8fdaaea54a474a6bf1b02146ca3a1a8383fe0aa4a
   - filename: src/content/potenziale/AsylG.md
     checksum: dba78284bd557c6e204d4971505766a758d1342185cad64555d1e9ad8ab86247
   - filename: src/content/potenziale/LuftVG.md
-    checksum: 686650737e96a0e0966dd82f141204b4382435e1a6cf68b132d35321fd935ded
+    checksum: fd30b3c3a0702c1ec7f4042927695bfe99407dc67e7032133b3312891367d300
   - filename: src/content/potenziale/BEEG.md
-    checksum: ff00c677d491d272b85c2139f6182f7f93227148ded590e1ac34fef34f2a018e
+    checksum: 3f5ff38a105faf25692d718a6d4d4e05ba16233f175064328aeba78d873a7dbf
   - filename: src/content/potenziale/TzBfG.md
-    checksum: 2849cd59f7125c2020341104d8e792808fc3c0dd7778208c8a8dfbbc3b2d87cb
+    checksum: d47f7e1f9e9316e82fb4e235bddfeccf0d309078946a7577dfeb5db0f13a0100
   - filename: src/pages/werkzeuge/ressourcen/technische-umsetzbarkeit.astro
     allowed_patterns: [IT-Anpassungen]
   - filename: src/pages/ueber/zahlen-und-fakten.astro # posthog dashboard links
@@ -190,17 +190,17 @@ fileignoreconfig:
   - filename: src/pages/werkzeuge/ki-prototypen/visualisieren/_wizardState.svelte.ts
     allowed_patterns: [WIZARD_CONTEXT_KEY]
   - filename: src/content/ki-visualisierungen/IfSG/akteure.mmd
-    checksum: 13f0a74a0442793b8ba5b3187c596ae893b2c3499baf5b7928172ec1af38e9b0
+    checksum: 6a70e13c686162c3af5d5f3a0b095e046452c236a975ae8c2ca0c011654d7c1f
   - filename: src/content/ki-visualisierungen/BKleingG/pachthoehe.mmd
     ignore_detectors: [filecontent]
   - filename: src/content/ki-visualisierungen/MuSchG/mitteilung_benachrichtigung.mmd
     checksum: af939badebd409324d6987bbcf78c825c394726d0525afa25e0bffd62261c3cc
   - filename: src/content/ki-visualisierungen/MuSchG/schutzmassnahmen_rangfolge.mmd
-    checksum: a1d83ab1b2a1fbdd9eb509fff401dee210eec561d96b70ebc2f24c487d8d93ac
+    checksum: b77e6565c620421688684beb673e073ecf38f563a13d14c4b5086d783c72550b
   - filename: src/content/ki-visualisierungen/URV/registrierung.mmd
-    checksum: 362577e6dea3376983aad592ef3c38b6961064b0d9dbfc0c399afbe03e54bac3
+    checksum: 3510cfabd00b007858fd6a257158c4e49ba668637d279cb0c360472aad2d1d84
   - filename: src/content/ki-visualisierungen/BEHG/emissionsberichterstattung.mmd
-    checksum: d7e2ee229a8eb9178dc754d84f6f50aa2de4de50bb870001b8b643c5dcc4c12c
+    checksum: 9d85ee748f5d25c2db447b71277ddbdc5fc54361fe1a184755f2eea039c54e44
   - filename: src/content/ki-visualisierungen/StiftFinG/mittelverteilung.mmd
     checksum: e2275ef24913e61566bac7c966ae4e75f351ee873090a023b31431409578033f
   - filename: src/content/ki-visualisierungen/PflBG/anerkennung.mmd
