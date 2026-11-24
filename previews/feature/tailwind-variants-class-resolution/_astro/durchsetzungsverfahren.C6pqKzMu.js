@@ -1,0 +1,34 @@
+var e=`---
+summary: "Das Durchsetzungsverfahren nach §27 DDG zwischen Koordinierungsstelle bzw. zuständiger Behörde und Anbieter von Vermittlungsdiensten: Aufforderung zu Stellungnahme und Abhilfe, Anordnung der erforderlichen Maßnahmen und Durchsetzung per Zwangsgeld."
+---
+swimlane-beta TD
+    subgraph BH["Koordinierungsstelle für digitale Dienste / zuständige Behörde"]
+        start(["Stellt fest: Anbieter von<br/>Vermittlungsdiensten erfüllt<br/>Verpflichtungen nach VO (EU) 2022/2065<br/>oder nach <a href='{{ELI}}#art-z25_abs-z1' target='_blank' rel='noopener'>§25 I</a> nicht — <a href='{{ELI}}#art-z27_abs-z2' target='_blank' rel='noopener'>§27 II S.1</a>"])
+        aufforderung["Aufforderung an den Anbieter — <a href='{{ELI}}#art-z27_abs-z2' target='_blank' rel='noopener'>§27 II<br/>S.1</a><br/>(Abhilfeverlangen nur gleichzeitig mit<br/>der Anordnung nach Abs. 3 anfechtbar<br/>— <a href='{{ELI}}#art-z27_abs-z2' target='_blank' rel='noopener'>§27 II S.2</a>)"]
+        abhilfe{"Abhilfeverlangen (Nr. 2)<br/>innerhalb der gesetzten Frist<br/>nachgekommen? — <a href='{{ELI}}#art-z27_abs-z3' target='_blank' rel='noopener'>§27 III S.1</a>"}
+        anordnung["Kann die erforderlichen Maßnahmen zur<br/>Sicherstellung der Einhaltung anordnen;<br/>setzt angemessene Frist — <a href='{{ELI}}#art-z27_abs-z3' target='_blank' rel='noopener'>§27 III</a>"]
+        entsprochen{"Den Maßnahmen innerhalb der<br/>Frist entsprochen? — <a href='{{ELI}}#art-z27_abs-z3' target='_blank' rel='noopener'>§27 III<br/>S.2</a>"}
+        erledigt(["Maßnahmen entsprochen"])
+        zwangsgeld(["Zur Durchsetzung der Anordnung:<br/>Zwangsgeld nach dem<br/>Verwaltungsvollstreckungsgesetz bis zu<br/>5% des durchschnittlichen weltweiten<br/>Tagesumsatzes oder der<br/>durchschnittlichen weltweiten<br/>Tageseinnahmen im vorangegangenen<br/>Geschäftsjahr, berechnet ab dem in der<br/>Androhung genannten Datum — <a href='{{ELI}}#art-z27_abs-z4' target='_blank' rel='noopener'>§27 IV</a>"])
+    end
+
+    subgraph AN["Anbieter von Vermittlungsdiensten"]
+        reaktion["Aufgefordert, innerhalb angemessener<br/>Frist<br/>1. zur Nichterfüllung Stellung zu<br/>nehmen,<br/>2. der Nichterfüllung abzuhelfen (oder<br/>unverzüglich) — <a href='{{ELI}}#art-z27_abs-z2' target='_blank' rel='noopener'>§27 II S.1 Nr.1, 2</a>"]
+        keineAnordnung(["Keine Anordnung nach <a href='{{ELI}}#art-z27_abs-z3' target='_blank' rel='noopener'>§27 III</a>"])
+        umsetzung["Angemessene Frist, um den Maßnahmen<br/>entsprechen zu können — <a href='{{ELI}}#art-z27_abs-z3' target='_blank' rel='noopener'>§27 III S.2</a>"]
+    end
+
+    start --> aufforderung
+    aufforderung --> reaktion
+    reaktion --> abhilfe
+    abhilfe -->|Ja| keineAnordnung
+    abhilfe -->|Nein| anordnung
+    anordnung --> umsetzung
+    umsetzung --> entsprochen
+    entsprochen -->|Ja| erledigt
+    entsprochen -->|Nein| zwangsgeld
+
+    style keineAnordnung fill:#d4edda,stroke:#2d8a4a
+    style erledigt fill:#d4edda,stroke:#2d8a4a
+    style zwangsgeld fill:#f8d7da,stroke:#c0392b
+`;export{e as default};
