@@ -14,7 +14,7 @@
 
   --color-darkblue-150: #c5d3ef;
   --color-darkblue-450: #6788cf;
-  
+
   --color-lavender-base: #e3e6f2;
   --color-lavender-200: #f6f7fb;
   --color-lavender-400: #eceef6;
@@ -24,6 +24,8 @@
   --color-kern-contextual: #6e7597;
   --color-icon-muted: #757575;
   --color-ds-violet: #4c2c92;
+
+  --container-a11y: 720px; /* 80ch @ 18px font size = 720px */
 
   --spacing-kern-default: var(--kern-metric-space-default);
 
@@ -244,11 +246,6 @@ address {
   &::before {
     @apply absolute -top-12 -right-12 -bottom-12 -left-12 content-[''];
   }
-}
-
-@utility max-w-a11y {
-  /* 80ch @ 18px font size = 720px */
-  max-width: 720px;
 }
 
 @utility hero-image-overlay {
