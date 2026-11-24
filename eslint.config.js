@@ -44,4 +44,31 @@ export default defineConfig(
       },
     },
   },
+  {
+    files: ["**/*.{js,ts,astro,svelte}"],
+    ignores: ["src/utils/tv.ts"],
+    rules: {
+      "@typescript-eslint/no-restricted-imports": [
+        "error",
+        {
+          paths: [
+            {
+              name: "tailwind-variants",
+              message:
+                "Import tv from @/utils/tv to use the merge config for the global tokens",
+              importNames: ["tv"],
+              allowTypeImports: true,
+            },
+            {
+              name: "tailwind-variants/config",
+              message:
+                "Import tv from @/utils/tv to use the merge config for the global tokens",
+              importNames: ["tv"],
+              allowTypeImports: true,
+            },
+          ],
+        },
+      ],
+    },
+  },
 );
