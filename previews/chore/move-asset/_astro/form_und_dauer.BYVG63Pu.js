@@ -1,0 +1,19 @@
+var e=`---
+summary: "Die Form und Geltungsdauer der Genehmigung zum Tragen der Uniform nach § 6 UnifV, die je nach Anlass mündlich oder schriftlich erteilt wird und befristet oder unbefristet gilt."
+---
+flowchart TD
+    A["Genehmigung wird erteilt"] --> B{"Anlass nach <a href='{{ELI}}/art-z3' target='_blank' rel='noopener'>§3 Nr. 6</a> und<br/>Zuziehung ausnahmsweise nur<br/>mündlich erfolgt?"}
+    B -->|Ja| C["Genehmigung kann ebenfalls mündlich<br/>erteilt werden — <a href='{{ELI}}#art-z6_abs-z1' target='_blank' rel='noopener'>§6 Abs. 1 S. 3</a><br/>Angaben zur Erreichbarkeit der<br/>genehmigenden Stelle bereithalten — <a href='{{ELI}}#art-z6_abs-z4' target='_blank' rel='noopener'>§6<br/>Abs. 4 S. 3</a>"]
+    B -->|Nein| D["Genehmigung bedarf der Schriftform — <a href='{{ELI}}#art-z6_abs-z1' target='_blank' rel='noopener'>§6<br/>Abs. 1 S. 1</a>"]
+    D --> E{"Anlass nach <a href='{{ELI}}/art-z3' target='_blank' rel='noopener'>§3 Nr. 6</a>?"}
+    E -->|Ja| F["Genehmigung kann mit der Entscheidung<br/>über die Zuziehung verbunden werden — <a href='{{ELI}}#art-z6_abs-z1' target='_blank' rel='noopener'>§6<br/>Abs. 1 S. 2</a><br/>gilt nur für den bestimmten Anlass — <a href='{{ELI}}#art-z6_abs-z2' target='_blank' rel='noopener'>§6<br/>Abs. 2 S. 1</a>"]
+    E -->|Nein| G{"Anlass nach <a href='{{ELI}}/art-z3' target='_blank' rel='noopener'>§3 Nr. 1 bis 4</a>?"}
+    G -->|Ja| H["Genehmigung wird unbefristet erteilt<br/>— <a href='{{ELI}}#art-z6_abs-z2' target='_blank' rel='noopener'>§6 Abs. 2 S. 1</a><br/>umfasst Hin- und Rückreise — <a href='{{ELI}}#art-z6_abs-z2' target='_blank' rel='noopener'>§6 Abs. 2<br/>S. 2</a>"]
+    G -->|Nein: Nr. 5| I["Genehmigung gilt nur für den bestimmten<br/>Anlass — <a href='{{ELI}}#art-z6_abs-z2' target='_blank' rel='noopener'>§6 Abs. 2 S. 1</a><br/>umfasst Hin- und Rückreise — <a href='{{ELI}}#art-z6_abs-z2' target='_blank' rel='noopener'>§6 Abs. 2<br/>S. 2</a>"]
+    C --> J["Genehmigungsbescheid ist beim<br/>Uniformtragen mitzuführen und auf<br/>Verlangen der Polizei/Feldjäger<br/>vorzuzeigen — <a href='{{ELI}}#art-z6_abs-z4' target='_blank' rel='noopener'>§6 Abs. 4 S. 1-2</a>"]
+    F --> J
+    H --> J
+    I --> J
+
+    style J fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};

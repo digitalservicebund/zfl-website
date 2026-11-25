@@ -1,0 +1,29 @@
+var e=`---
+summary: "Die Auswahl notwendiger Schutzmaßnahmen nach §28 IfSG (Beobachtung, Absonderung, Tätigkeitsverbot, Orts- oder Veranstaltungsbeschränkungen) sowie die Grenze, dass eine Heilbehandlung nicht angeordnet werden darf."
+---
+flowchart TD
+    START["Kranke, Krankheitsverdächtige,<br/>Ansteckungsverdächtige oder Ausscheider<br/>festgestellt (auch bei Verstorbenen)<br/>— <a href='{{ELI}}#art-z28_abs-z1' target='_blank' rel='noopener'>§28 Abs.1 S.1</a>"] --> PRUEF{"Ist eine Maßnahme zur<br/>Verhinderung der Verbreitung<br/>übertragbarer Krankheiten<br/>erforderlich? — <a href='{{ELI}}#art-z28_abs-z1' target='_blank' rel='noopener'>§28 Abs.1 S.1</a>"}
+
+    PRUEF -->|Nein| KEINE["Keine Schutzmaßnahme"]
+    PRUEF -->|Ja| ART{"Welche Maßnahme ist geeignet<br/>und erforderlich?"}
+
+    ART -->|Beobachtung| BEOB["Beobachtung anordnen — <a href='{{ELI}}/art-z29' target='_blank' rel='noopener'>§29</a>"]
+    ART -->|Absonderung| ABS["Absonderung anordnen — <a href='{{ELI}}/art-z30' target='_blank' rel='noopener'>§30</a>"]
+    ART -->|"Gefährdung Dritter durch<br/>berufliche Tätigkeit"| TV["Berufliches Tätigkeitsverbot anordnen<br/>— <a href='{{ELI}}/art-z31' target='_blank' rel='noopener'>§31</a>"]
+    ART -->|"Orts-/Verhaltensbeschränkung<br/>genügt"| ORT["Verpflichtung, bestimmte Orte nicht oder<br/>nur unter Bedingungen zu betreten oder<br/>zu verlassen — <a href='{{ELI}}#art-z28_abs-z1' target='_blank' rel='noopener'>§28 Abs.1 S.1</a>"]
+    ART -->|"Veranstaltungen/Gemeinschaftseinrichtungen<br/>betroffen"| VERA["Veranstaltungen beschränken oder<br/>verbieten; Einrichtungen nach <a href='{{ELI}}/art-z33' target='_blank' rel='noopener'>§33</a><br/>schließen — <a href='{{ELI}}#art-z28_abs-z1' target='_blank' rel='noopener'>§28 Abs.1 S.2</a>"]
+
+    BEOB --> GRENZE
+    ABS --> GRENZE
+    TV --> GRENZE
+    ORT --> GRENZE
+    VERA --> GRENZE
+
+    GRENZE{"Wird als Maßnahme eine<br/>Heilbehandlung angeordnet?<br/>— <a href='{{ELI}}#art-z28_abs-z1' target='_blank' rel='noopener'>§28 Abs.1 S.3</a>"}
+    GRENZE -->|Ja| UNZUL["Unzulässig: Heilbehandlung darf nicht<br/>angeordnet werden"]
+    GRENZE -->|Nein| ZUL["Maßnahme zulässig, ggf. mit<br/>Einschränkung von Grundrechten — <a href='{{ELI}}#art-z28_abs-z1' target='_blank' rel='noopener'>§28<br/>Abs.1 S.4</a>"]
+
+    style KEINE fill:#d4edda,stroke:#2d8a4a
+    style UNZUL fill:#f8d7da,stroke:#c0392b
+    style ZUL fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};

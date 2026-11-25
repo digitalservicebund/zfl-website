@@ -1,0 +1,164 @@
+{
+  "groups": [
+    {
+      "id": "finanz",
+      "label": "Finanzmarkt-Korpus",
+      "abbrevs": [
+        "aktg",
+        "aktgeg",
+        "anzv_2006",
+        "b_rsg_2007",
+        "b_rszulv",
+        "bafinbefugv",
+        "bgb",
+        "bgbeg",
+        "estg",
+        "ewpg",
+        "findag",
+        "findagebv",
+        "findasav",
+        "fkag",
+        "fmstfg",
+        "fvg_1971",
+        "gewo",
+        "gwg_2017",
+        "hgb",
+        "inhkontrollv",
+        "invstg_2018",
+        "kagb",
+        "kmag",
+        "kredwg",
+        "kstg_1977",
+        "pfandbg",
+        "reitg",
+        "sag",
+        "spruchg",
+        "ustg_1980",
+        "vag_2016",
+        "vermanlg",
+        "vermbg_2",
+        "versvergv_2016",
+        "vvg_2008",
+        "vvgeg",
+        "wipro",
+        "wp_g",
+        "wp_gangebv",
+        "wpaiv",
+        "wpapg",
+        "wpdpv_2018",
+        "wpdverov_2018",
+        "wphg",
+        "wpi-anzv",
+        "wpi-inhkontrollv",
+        "wpig",
+        "wppg",
+        "zag_2018",
+        "zaganzv",
+        "zahlpr_fbv",
+        "zkg"
+      ]
+    }
+  ],
+  "eu_de_links": [
+    {
+      "eu_abbrev": "32023R1114",
+      "de_abbrevs": ["ewpg", "kmag", "wpapg"],
+      "relation_label": "Markets in Crypto-Assets Regulation (MiCAR)"
+    },
+    {
+      "eu_abbrev": "32023R1113",
+      "de_abbrevs": ["gwg_2017", "kmag"],
+      "relation_label": "Transfer of Funds Regulation (TFR)"
+    },
+    {
+      "eu_abbrev": "32022R0858",
+      "de_abbrevs": ["ewpg", "wpapg", "wphg"],
+      "relation_label": "DLT-Pilotregelung"
+    },
+    {
+      "eu_abbrev": "32017R1129",
+      "de_abbrevs": ["b_rsg_2007", "wppg"],
+      "relation_label": "EU-Prospektverordnung"
+    },
+    {
+      "eu_abbrev": "32024L2809",
+      "de_abbrevs": ["aktg", "b_rsg_2007", "wppg"],
+      "relation_label": "EU Listing Act (Richtlinie-Teil)"
+    },
+    {
+      "eu_abbrev": "32014L0065",
+      "de_abbrevs": ["b_rsg_2007", "wphg"],
+      "relation_label": "Markets in Financial Instruments Directive II (MiFID II)"
+    },
+    {
+      "eu_abbrev": "32014R0600",
+      "de_abbrevs": ["b_rsg_2007", "wphg"],
+      "relation_label": "Markets in Financial Instruments Regulation (MiFIR)"
+    },
+    {
+      "eu_abbrev": "32014R0596",
+      "de_abbrevs": ["b_rsg_2007", "wphg"],
+      "relation_label": "Marktmissbrauchsverordnung (MAR)"
+    },
+    {
+      "eu_abbrev": "32019R2033",
+      "de_abbrevs": ["wpig"],
+      "relation_label": "Investment Firms Regulation (IFR)"
+    },
+    {
+      "eu_abbrev": "32019L2034",
+      "de_abbrevs": ["wpig"],
+      "relation_label": "Investment Firms Directive (IFD)"
+    },
+    {
+      "eu_abbrev": "32013R0575",
+      "de_abbrevs": ["kwgvermv"],
+      "relation_label": "Capital Requirements Regulation (CRR)"
+    },
+    {
+      "eu_abbrev": "32013L0036",
+      "de_abbrevs": ["kwgvermv"],
+      "relation_label": "Capital Requirements Directive (CRD)"
+    },
+    {
+      "eu_abbrev": "32014L0059",
+      "de_abbrevs": ["sag"],
+      "relation_label": "Bank Recovery and Resolution Directive (BRRD)"
+    },
+    {
+      "eu_abbrev": "32024L0927",
+      "de_abbrevs": ["kagb"],
+      "relation_label": "Alternative Investment Fund Managers Directive II (AIFMD II)"
+    },
+    {
+      "eu_abbrev": "32009L0065",
+      "de_abbrevs": ["kagb"],
+      "relation_label": "Organismen für gemeinsame Anlagen in Wertpapieren (OGAW / UCITS)"
+    },
+    {
+      "eu_abbrev": "32023R0606",
+      "de_abbrevs": ["kagb"],
+      "relation_label": "European Long-Term Investment Funds Regulation (ELTIF-VO)"
+    },
+    {
+      "eu_abbrev": "32024R1624",
+      "de_abbrevs": ["gwg_2017"],
+      "relation_label": "Anti-Money Laundering Regulation (AMLR)"
+    },
+    {
+      "eu_abbrev": "32024L1640",
+      "de_abbrevs": ["gwg_2017"],
+      "relation_label": "6. Geldwäscherichtlinie (AMLD 6)"
+    },
+    {
+      "eu_abbrev": "32009L0138",
+      "de_abbrevs": ["vag_2016"],
+      "relation_label": "Solvency II"
+    },
+    {
+      "eu_abbrev": "32016L0097",
+      "de_abbrevs": ["vag_2016", "vvg_2008"],
+      "relation_label": "Insurance Distribution Directive (IDD)"
+    }
+  ]
+}
