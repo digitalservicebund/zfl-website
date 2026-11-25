@@ -2,6 +2,7 @@
 // Flow, intent, and known divergences: see ./_recht-erkunden/README.md
 import Hero from "@/components/Hero.astro";
 import Layout from "@/layouts/Layout.astro";
+import AIDisclaimer from "./_shared/AIDisclaimer.astro";
 import DetailSidebar from "./_recht-erkunden/DetailSidebar.astro";
 import Step1RechtBestimmen from "./_recht-erkunden/Step1RechtBestimmen.astro";
 import Step2RechtErkunden from "./_recht-erkunden/Step2RechtErkunden.astro";
@@ -22,17 +23,21 @@ const description =
       <p>{description}</p>
     </Hero>
 
-    <div class="breakout breakout-grid bg-yellow-100 py-8">
-      <p class="mb-0">
-        <strong>Hinweis:</strong> Dieses Werkzeug ist ein illustrativer Prototyp
-        mit erfundenen Beispieldaten. Gesetzesnamen sind real, die dargestellten
-        Verbindungen, Zitate, Volltexte und Ähnlichkeits-Werte sind jedoch frei
-        erfunden und nicht rechtlich geprüft. Es zeigt, wie eine explorative
-        Rechtsrecherche für Gesetzesvorhaben aussehen könnte.
-      </p>
-    </div>
-
-    <section class="py-lg space-y-lg">
+    <section class="space-y-lg">
+      <AIDisclaimer>
+        <p>
+          Es zeigt mit erfundenen Beispieldaten, wie eine explorative
+          Rechtsrecherche für Gesetzesvorhaben aussehen könnte.
+        </p>
+        <ul>
+          <li>Gesetzesnamen sind real</li>
+          <li>
+            Die dargestellten Verbindungen, Zitate, Volltexte und
+            Ähnlichkeits-Werte sind jedoch frei erfunden und nicht rechtlich
+            geprüft
+          </li>
+        </ul>
+      </AIDisclaimer>
       <Step1RechtBestimmen />
 
       <div

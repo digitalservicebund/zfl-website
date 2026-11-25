@@ -1,7 +1,11 @@
-<div class="breakout breakout-grid bg-yellow-100 py-8">
-  <p class="mb-0">
-    <strong>Hinweis:</strong> Dieser Prototyp zeigt KI-generierte Inhalte.
-    <br />
-    Diese können falsch oder unsinnig sein.
-  </p>
+<div class="kern-alert kern-alert--warning max-w-a11y" role="alert">
+  <div class="kern-alert__header">
+    <span class="kern-icon kern-icon--warning" aria-hidden="true"></span>
+    <p class="kern-title">
+      {Astro.props.title ?? "Dieses Werkzeug ist ein Prototyp"}
+    </p>
+  </div>
+  <div class="kern-alert__body">
+    <slot />
+  </div>
 </div>

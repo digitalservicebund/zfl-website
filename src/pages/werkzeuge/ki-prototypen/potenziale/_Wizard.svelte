@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { untrack } from "svelte";
+  import { untrack, type Snippet } from "svelte";
   import { SvelteURLSearchParams, SvelteMap } from "svelte/reactivity";
   import { liveAi } from "@/config/features";
   import { werkzeuge_kiPrototypen_visualisieren_erstellen } from "@/config/routes";
@@ -19,8 +19,12 @@
   let {
     examples,
     visualisierbareShorts,
-  }: { examples: PotenzialeExample[]; visualisierbareShorts: string[] } =
-    $props();
+    children,
+  }: {
+    examples: PotenzialeExample[];
+    visualisierbareShorts: string[];
+    children?: Snippet;
+  } = $props();
 
   type VorhabenType = { id: string; label: string };
   const vorhabenTypes = [
@@ -218,6 +222,7 @@
 
 <div class="grid grid-cols-1 items-start lg:grid-cols-[1fr_auto]">
   <div class="breakout-grid py-lg min-w-0 space-y-32">
+    <div>{@render children?.()}</div>
     <!-- Analysing an own draft needs the live AI backend -->
     {#if liveAi}
       <div class="kern-form-input">

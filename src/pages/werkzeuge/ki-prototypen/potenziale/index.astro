@@ -31,7 +31,20 @@ const visualisierbareShorts = visualisierungen.map(({ filePath }) =>
     <Hero class="breakout-grid">
       <h1>{frontmatter.title}</h1>
     </Hero>
-    <AIDisclaimer />
-    <Wizard {examples} {visualisierbareShorts} client:load />
+    <Wizard {examples} {visualisierbareShorts} client:load>
+      <AIDisclaimer>
+        <p>
+          Wir erproben damit die KI-gestützte Prüfung von Regelungsentwürfe
+          anhand festgelegter Qualitätskriterien (z.B. Digitalcheck-Prinzipien).
+        </p>
+        <ul>
+          <li>Dieser Prototyp zeigt KI-generierte Inhalte</li>
+          <li>
+            Sie wurden nicht rechtlich geprüft, sie können unvollständig oder
+            fehlerhaft sein
+          </li>
+        </ul>
+      </AIDisclaimer>
+    </Wizard>
   </main>
 </Layout>

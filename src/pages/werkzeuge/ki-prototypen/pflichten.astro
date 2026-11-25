@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
+import AIDisclaimer from "./_shared/AIDisclaimer.astro";
 import { tv } from "@/utils/tv";
 import fs from "node:fs";
 import path from "node:path";
@@ -109,15 +110,24 @@ const { searchInput, countBadge, chip, analysisBadge, lawCard, th, td } =
       </p>
     </Hero>
 
-    <div class="breakout breakout-grid bg-yellow-100 py-8">
-      <p class="mb-0">
-        <strong>Hinweis:</strong> Dieses Werkzeug ist ein Prototyp. Wir erproben
-        damit, ob eine KI-gestützte Analyse von Bestandsrecht in der Praxis
-        hilft. Die angezeigten Pflichten wurden automatisiert mithilfe von
-        Künstlicher Intelligenz aus den Gesetzestexten extrahiert und nicht
-        rechtlich geprüft. Sie können unvollständig oder fehlerhaft sein und
-        ersetzen keine juristische Prüfung.
-      </p>
+    <div class="pt-lg">
+      <AIDisclaimer>
+        <p>
+          Wir erproben damit, ob die KI-gestützte Analyse von Bestandsrecht in
+          der Praxis hilft.
+        </p>
+        <ul>
+          <li>
+            Die angezeigten Pflichten wurden automatisch mithilfe von KI aus den
+            Gesetzestexten extrahiert
+          </li>
+          <li>
+            Sie wurden nicht rechtlich geprüft, sie können unvollständig oder
+            fehlerhaft sein
+          </li>
+          <li>Das Werkzeug ersetzt keine juristische Prüfung</li>
+        </ul>
+      </AIDisclaimer>
     </div>
 
     {/* Loading state */}
