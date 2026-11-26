@@ -21,6 +21,10 @@
   --color-lavender-surface-highlight: #e3e6f2;
 
   --color-surface-default: #f3f4f7;
+  --color-kern-border-contextual: var(--kern-color-decorative-border-contextual);
+  --color-kern-text-muted-contextual: var(
+    --kern-color-layout-text-muted-contextual
+  );
   --color-kern-contextual: #6e7597;
   --color-icon-muted: #757575;
   --color-ds-violet: #4c2c92;
