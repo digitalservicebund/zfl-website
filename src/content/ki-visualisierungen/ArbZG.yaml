@@ -1,5 +1,6 @@
 title: Arbeitszeitgesetz
 eli: eli/bund/bgbl-1/1994/s1171/2025-01-01/1/deu
+owners: [BMAS]
 visOptions:
   - name: Werktägliche Höchstarbeitszeit
     visType: flowchart

@@ -1,5 +1,6 @@
 title: Digitale-Dienste-Gesetz
 eli: eli/bund/bgbl-1/2024/149/2026-07-01/1/deu
+owners: [BMDS]
 visOptions:
   - name: Anwendungsbereichsprüfung
     visType: flowchart

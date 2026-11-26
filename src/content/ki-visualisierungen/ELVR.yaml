@@ -1,5 +1,6 @@
 title: "Verordnung über Anforderungen an die kreislauforientierte Konstruktion von Fahrzeugen und über die Bewirtschaftung von Altfahrzeugen (VO (EU) 2026/1738)"
 eli: "https://eur-lex.europa.eu/eli/reg/2026/1738/oj/deu"
+owners: [EU]
 visOptions:
   - name: "Anwendungsbereich"
     visType: flowchart

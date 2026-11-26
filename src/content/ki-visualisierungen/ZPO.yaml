@@ -6,6 +6,7 @@ title: Zivilprozessordnung
 # (dort gibt es keine Absatz-Anker). `eli` ist eine volle URL und wird vom
 # Wizard unverändert als Quell-Link verwendet (siehe resolveEliUrl).
 eli: "https://www.gesetze-im-internet.de/zpo/"
+owners: [BMJV]
 visOptions:
   - name: Forderungspfändung beim Drittschuldner
     visType: swimlane

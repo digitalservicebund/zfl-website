@@ -1,5 +1,6 @@
 title: Wohngeldgesetz
 eli: eli/bund/bgbl-1/2008/s1856/2026-07-01/1/deu
+owners: [BMWSB]
 visOptions:
   - name: Wohngeldberechtigung
     visType: flowchart

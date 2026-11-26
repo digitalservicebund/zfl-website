@@ -327,8 +327,17 @@ Speichern:
    - Falls das Gesetz dort noch keine Metadaten-Datei hat, eine neue Datei
      `{Abkuerzung}.yaml` (identisch zum Ordnernamen aus Schritt 1, z.B.
      `KSchG.yaml`) mit `title` (offizieller Name ohne Abkürzung), `eli`
-     (ELI-Pfad aus Schritt 2, Pflichtfeld) und leerem `visOptions`-Array
-     anlegen. Die Datei ist reine YAML-Daten, kein Markdown-Frontmatter.
+     (ELI-Pfad aus Schritt 2, Pflichtfeld), `owners` (Pflichtfeld, siehe
+     unten) und leerem `visOptions`-Array anlegen.
+   - `owners`: Liste der aktuell federführenden Bundesministerien als
+     Abkürzung aus `BUNDESMINISTERIEN` in `src/content.config.ts` (Ressortzuschnitt
+     nach Organisationserlass 2025, z.B. `[BMAS]`). Meist genau eines; mehrere
+     nur bei gemeinsamer Federführung (z.B. `[BMBFSFJ, BMG]` beim PflBG) oder
+     gemeinsam erlassenen Verordnungen. Für EU-Rechtsakte `[EU]`. Zuständigkeit
+     nach dem aktuellen Ressortzuschnitt bestimmen, nicht nach dem Ministerium,
+     das das Gesetz ursprünglich erarbeitet hat; im Zweifel recherchieren
+     (z.B. Lobbyregister/Bundesrat-Drucksachen zur letzten Änderung) statt
+     raten. Die Datei ist reine YAML-Daten, kein Markdown-Frontmatter.
    - Für jedes Prozessdiagramm ein `visOptions`-Objekt mit `name` (Prozessname aus
      Schritt 3), `visType` (`flowchart` oder `swimlane`, siehe Schritt 3),
      `filename` (Dateiname der `.mmd`-Datei ohne Verzeichnis und

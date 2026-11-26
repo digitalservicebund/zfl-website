@@ -1,5 +1,6 @@
 title: Straßenverkehrs-Ordnung
 eli: eli/bund/bgbl-1/2013/s367/2025-01-01/1/deu
+owners: [BMV]
 visOptions:
   - name: Vorfahrtsregeln-Prüfschema
     visType: flowchart

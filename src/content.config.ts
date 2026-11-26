@@ -102,6 +102,34 @@ const visualisierungen = defineCollection({
     }),
 });
 
+/** Federal ministries as cut by the Organisationserlass of 6 May 2025
+ * (BKOrgErl 2025), plus the Bundeskanzleramt. Update on the next re-cut. */
+export const BUNDESMINISTERIEN = [
+  "AA",
+  "BKAmt",
+  "BMAS",
+  "BMBFSFJ",
+  "BMDS",
+  "BMF",
+  "BMFTR",
+  "BMG",
+  "BMI",
+  "BMJV",
+  "BMLEH",
+  "BMUKN",
+  "BMV",
+  "BMVg",
+  "BMWE",
+  "BMWSB",
+  "BMZ",
+] as const;
+
+/** Who is responsible for a law: a federal ministry, or "EU" for EU
+ * legal acts (regulations etc.) that no German ministry owns. */
+export const LAW_OWNERS = [...BUNDESMINISTERIEN, "EU"] as const;
+
+export type LawOwner = (typeof LAW_OWNERS)[number];
+
 const kiVisualisierungen = defineCollection({
   loader: glob({
     pattern: "*.yaml",
@@ -115,6 +143,10 @@ const kiVisualisierungen = defineCollection({
      * Für EU-Rechtsakte (nicht in RIS indexiert) stattdessen eine volle
      * EUR-Lex-URL, z.B. "https://eur-lex.europa.eu/eli/reg/2026/1738/oj/deu". */
     eli: z.string(),
+    /** Ministries currently responsible ("federführend") for the law, per
+     * BUNDESMINISTERIEN. Usually one; several for jointly owned laws or
+     * Verordnungen. ["EU"] for EU legal acts, [] for non-law entries. */
+    owners: z.array(z.enum(LAW_OWNERS)),
     visOptions: z.array(visOptionType),
   }),
 });

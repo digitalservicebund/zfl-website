@@ -1,5 +1,6 @@
 title: Betriebskostenverordnung
 eli: eli/bund/bgbl-1/2003/s2347/2024-01-01/1/deu
+owners: [BMWSB]
 visOptions:
   - name: Abgrenzung Betriebskosten
     visType: flowchart

@@ -1,5 +1,6 @@
 title: Infektionsschutzgesetz
 eli: eli/bund/bgbl-1/2000/s1045/2026-07-02/1/deu
+owners: [BMG]
 visOptions:
   - name: Meldepflicht bei Erkrankung
     visType: swimlane

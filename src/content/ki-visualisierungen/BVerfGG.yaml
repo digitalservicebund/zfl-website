@@ -1,5 +1,6 @@
 title: Gesetz über das Bundesverfassungsgericht
 eli: eli/bund/bgbl-1/1951/s243/2026-01-01/1/deu
+owners: [BMJV]
 visOptions:
   - name: Verfassungsbeschwerde Zulässigkeit
     visType: flowchart

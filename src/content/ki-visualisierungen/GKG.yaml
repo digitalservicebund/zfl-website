@@ -1,5 +1,6 @@
 title: Gerichtskostengesetz
 eli: eli/bund/bgbl-1/2004/s718/2026-01-01/1/deu
+owners: [BMJV]
 visOptions:
   - name: Fälligkeit der Gerichtsgebühren
     visType: flowchart

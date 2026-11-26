@@ -1,5 +1,6 @@
 title: Bundeskleingartengesetz
 eli: eli/bund/bgbl-1/1983/s210/2006-10-01/1/deu
+owners: [BMWSB]
 visOptions:
   - name: Kleingarten-Begriffsprüfung
     visType: flowchart

@@ -1,5 +1,6 @@
 title: Asylgesetz
 eli: eli/bund/bgbl-1/1992/s1126/2026-07-29/1/deu
+owners: [BMI]
 visOptions:
   - name: Asylverfahren-Ablauf
     visType: swimlane

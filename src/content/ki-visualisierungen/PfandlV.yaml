@@ -1,5 +1,6 @@
 title: Verordnung über den Geschäftsbetrieb der gewerblichen Pfandleiher
 eli: eli/bund/bgbl-1/1961/s58/2025-01-01/1/deu
+owners: [BMWE]
 visOptions:
   - name: Annahme des Pfandes
     visType: flowchart

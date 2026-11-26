@@ -1,5 +1,6 @@
 title: "Verordnung zu schwerwiegenden grenzüberschreitenden Gesundheitsgefahren (VO (EU) 2022/2371)"
 eli: "https://eur-lex.europa.eu/eli/reg/2022/2371/oj/deu"
+owners: [EU]
 visOptions:
   - name: "Frühwarnung über das EWRS"
     visType: swimlane

@@ -1,5 +1,6 @@
 title: Luftverkehrsgesetz
 eli: eli/bund/banz-at/1922/s681/2026-07-29/1/deu
+owners: [BMV]
 visOptions:
   - name: Betriebsgenehmigung Luftfahrtunternehmen
     visType: flowchart
