@@ -1,0 +1,36 @@
+var e=`---
+summary: "Die Prüfschritte zur Zulässigkeit einer Übermittlung personenbezogener Daten in ein Drittland oder an eine internationale Organisation nach Art. 45 bis 49 DSGVO, von Angemessenheitsbeschluss über geeignete Garantien bis zu den Ausnahmetatbeständen im Einzelfall."
+---
+flowchart TD
+    A["Übermittlung personenbezogener Daten an<br/>ein Drittland oder eine internationale<br/>Organisation geplant"] --> B{"Angemessenheitsbeschluss der<br/>Kommission für das<br/>Drittland/den Sektor? — Art.<br/>45 Abs. 1, Abs. 3"}
+
+    B -->|"Ja"| Z1["Übermittlung ohne besondere Genehmigung<br/>zulässig — Art. 45 Abs. 1"]
+
+    B -->|"Nein"| C{"Geeignete Garantien vorhanden?<br/>— Art. 46 Abs. 1"}
+
+    C -->|"Ja — z.B.<br/>Standarddatenschutzklauseln,<br/>BCR, genehmigte<br/>Verhaltensregeln — Art. 46<br/>Abs. 2"| Z2["Übermittlung ohne zusätzliche<br/>Genehmigung der Aufsichtsbehörde<br/>zulässig"]
+
+    C -->|"Ja — z.B.<br/>Ad-hoc-Vertragsklauseln,<br/>Verwaltungsvereinbarungen<br/>— Art. 46 Abs. 3"| D["Genehmigung der zuständigen<br/>Aufsichtsbehörde erforderlich — Art. 46<br/>Abs. 3"]
+    D --> Z2
+
+    C -->|"Nein"| E{"Greift eine Ausnahme nach Art.<br/>49 Abs. 1 UAbs. 1?"}
+
+    E -->|"Ausdrückliche Einwilligung<br/>nach Risikoaufklärung — lit. a"| Z3["Übermittlung im Einzelfall zulässig<br/>— Art. 49 Abs. 1"]
+    E -->|"Vertragserfüllung oder<br/>-anbahnung — lit. b, c"| Z3
+    E -->|"Wichtige Gründe des<br/>öffentlichen Interesses — lit.<br/>d"| Z3
+    E -->|"Geltendmachung von<br/>Rechtsansprüchen — lit. e"| Z3
+    E -->|"Schutz lebenswichtiger<br/>Interessen — lit. f"| Z3
+    E -->|"Übermittlung aus öffentlichem<br/>Register — lit. g"| Z3
+
+    E -->|"Keine Ausnahme einschlägig"| F{"Nur gelegentliche, begrenzte<br/>Übermittlung zur Wahrung<br/>zwingender berechtigter<br/>Interessen, mit<br/>Interessenabwägung und<br/>dokumentierten Garantien?<br/>— Art. 49 Abs. 1 UAbs. 2"}
+
+    F -->|"Ja, und Aufsichtsbehörde sowie<br/>betroffene Person informiert"| Z4["Übermittlung ausnahmsweise zulässig<br/>— Art. 49 Abs. 1 UAbs. 2"]
+
+    F -->|"Nein"| N["Übermittlung unzulässig"]
+
+    style Z1 fill:#d4edda,stroke:#2d8a4a
+    style Z2 fill:#d4edda,stroke:#2d8a4a
+    style Z3 fill:#d4edda,stroke:#2d8a4a
+    style Z4 fill:#fff3cd,stroke:#c9a227
+    style N fill:#f8d7da,stroke:#c0392b
+`;export{e as default};

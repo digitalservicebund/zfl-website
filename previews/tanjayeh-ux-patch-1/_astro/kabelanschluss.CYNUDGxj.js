@@ -1,0 +1,28 @@
+var e=`---
+summary: "Welche Betriebskosten für Antennen- und Kabelanschlussanlagen nach §2 Nr. 15 BetrKV umlagefähig sind, abhängig vom Errichtungszeitpunkt der Anlage und der jeweiligen Anlagenart."
+---
+flowchart TD
+    A{"Anlage (Antenne/<br/>Verteilanlage) ab dem<br/>1. Dezember 2021 errichtet?<br/>— <a href='{{ELI}}#art-z2_abs-z' target='_blank' rel='noopener'>§2 Nr.15 S.2</a>"} -->|Ja| Z1["<a href='{{ELI}}#art-z2_abs-z' target='_blank' rel='noopener'>§2 Nr.15 Buchst. a und b</a><br/>nicht anwendbar<br/>— Betriebsstrom/Nutzungsentgelt für<br/>Antenne/Breitband nicht umlagefähig — <a href='{{ELI}}#art-z2_abs-z' target='_blank' rel='noopener'>§2<br/>Nr.15 S.2</a>"]
+
+    A -->|Nein, Bestandsanlage| B{"Um welche Art der Anlage<br/>handelt es sich?"}
+
+    B -->|"Gemeinschafts-Antennenanlage"| C["Betriebsstrom + Prüfung/ Einstellung<br/>durch Fachkraft — <a href='{{ELI}}#art-z2_abs-z' target='_blank' rel='noopener'>§2 Nr.15 Buchst. a</a>"]
+    B -->|"Private, mit Breitbandnetz<br/>verbundene Verteilanlage"| D["Betriebsstrom + laufende monatliche<br/>Grundgebühren — <a href='{{ELI}}#art-z2_abs-z' target='_blank' rel='noopener'>§2 Nr.15 Buchst. b</a>"]
+    B -->|"Gebäudeinterne Verteilanlage,<br/>vollständig per Glasfaser an<br/>Netz mit sehr hoher Kapazität<br/>angebunden UND freie<br/>Anbieterwahl möglich"| G["Betriebsstrom + Bereitstellungsentgelt<br/>gem. §72 I TKG — <a href='{{ELI}}#art-z2_abs-z' target='_blank' rel='noopener'>§2 Nr.15 Buchst. c</a><br/>(zeitlich unbefristet)"]
+
+    C --> E{"Vor dem<br/>30. Juni 2024? — <a href='{{ELI}}#art-z2_abs-z' target='_blank' rel='noopener'>§2 Nr.15<br/>Buchst. a</a>"}
+    D --> F{"Vor dem<br/>30. Juni 2024? — <a href='{{ELI}}#art-z2_abs-z' target='_blank' rel='noopener'>§2 Nr.15<br/>Buchst. b</a>"}
+
+    E -->|Ja| Z2["Zusätzlich umlagefähig:<br/>Nutzungsentgelt für anlagenfremde<br/>Antenne + Urheberrechts-Gebühren für<br/>Kabelweitersendung"]
+    E -->|Nein| Z3["Nur Betriebsstrom und Prüfungskosten<br/>umlagefähig"]
+
+    F -->|Ja| Z4["Zusätzlich umlagefähig:<br/>weitere Kosten entspr. Buchst. a"]
+    F -->|Nein| Z5["Nur Betriebsstrom und Grundgebühren<br/>umlagefähig"]
+
+    style Z1 fill:#f8d7da,stroke:#c0392b
+    style Z2 fill:#fff3cd,stroke:#c9a227
+    style Z3 fill:#d4edda,stroke:#2d8a4a
+    style Z4 fill:#fff3cd,stroke:#c9a227
+    style Z5 fill:#d4edda,stroke:#2d8a4a
+    style G fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};
