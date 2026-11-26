@@ -1,0 +1,23 @@
+var e=`---
+summary: "Die Prüfung, ob für einen Herkunfts- oder Drittstaat eine gesetzliche Sicherheitsvermutung nach dem AsylG greift, und welche Folgen dies für die Berufung auf das Asylrecht und die Einstufung des Antrags hat."
+---
+flowchart TD
+    A["Prüfung, ob eine gesetzliche<br/>Sicherheitsvermutung für einen Staat<br/>eingreift"] --> B{"Einreise aus einem Drittstaat<br/>i. S. d. Art. 16a Abs. 2 GG<br/>(EU-Mitgliedstaaten und Anlage<br/>I)? — <a href='{{ELI}}#art-z26a_abs-z1' target='_blank' rel='noopener'>§26a Abs. 1</a>, <a href='{{ELI}}#art-z26a_abs-z2' target='_blank' rel='noopener'>Abs. 2</a>"}
+    B -->|Ja| C{"Ausnahme: Aufenthaltstitel bei<br/>Einreise, Zuständigkeit<br/>Deutschlands oder Anordnung<br/>nach §18 Abs. 4 Nr. 2? — <a href='{{ELI}}#art-z26a_abs-z1' target='_blank' rel='noopener'>§26a<br/>Abs. 1 Nr. 1-3</a>"}
+    C -->|Ja| D["Berufung auf Art. 16a Abs. 1 GG möglich,<br/>reguläres Asylverfahren"]
+    C -->|Nein| E["Keine Berufung auf das Asylgrundrecht,<br/>keine Anerkennung als Asylberechtigter;<br/>Einreiseverweigerung bzw.<br/>Zurückschiebung an der Grenze — <a href='{{ELI}}#art-z26a_abs-z1' target='_blank' rel='noopener'>§26a<br/>Abs. 1 S. 1, 2</a>, <a href='{{ELI}}#art-z18_abs-z2' target='_blank' rel='noopener'>§18 Abs. 2 Nr. 1</a>"]
+    B -->|Nein| F{"Staat durch Rechtsverordnung<br/>als sicherer Drittstaat i. S.<br/>d. Art. 64 VO (EU) 2024/1348<br/>bestimmt? — <a href='{{ELI}}#art-z27_abs-z1' target='_blank' rel='noopener'>§27 Abs. 1</a>"}
+    F -->|Ja| G["Unzulässigkeit möglich, sofern Übernahme<br/>oder Rückübernahme durch diesen Staat<br/>gesichert ist — <a href='{{ELI}}#art-z27_abs-z1' target='_blank' rel='noopener'>§27 Abs. 1</a>"]
+    F -->|Nein| H{"Herkunftsstaat<br/>(Staatsangehörigkeit) in<br/>Anlage II als sicherer<br/>Herkunftsstaat i. S. d. Art.<br/>16a Abs. 3 GG gelistet? — <a href='{{ELI}}#art-z29a_abs-z2' target='_blank' rel='noopener'>§29a<br/>Abs. 2</a>"}
+    H -->|Ja| I["Regelvermutung: offensichtlich<br/>unbegründet, im Einzelfall widerlegbar<br/>— <a href='{{ELI}}#art-z29a_abs-z1' target='_blank' rel='noopener'>§29a Abs. 1</a>"]
+    H -->|Nein| J{"Herkunftsstaat durch<br/>Rechtsverordnung als sicherer<br/>Herkunftsstaat i. S. d. Art.<br/>64 VO (EU) 2024/1348 bestimmt?<br/>— <a href='{{ELI}}#art-z29b_abs-z1' target='_blank' rel='noopener'>§29b Abs. 1</a>"}
+    J -->|Ja| K["Beschleunigte Begründetheitsprüfung,<br/>ggf. Ausschluss bestimmter<br/>Vergünstigungen — <a href='{{ELI}}#art-z29b_abs-z1' target='_blank' rel='noopener'>§29b Abs. 1</a>, <a href='{{ELI}}#art-z29b_abs-z2' target='_blank' rel='noopener'>Abs. 2</a>"]
+    J -->|Nein| L["Keine gesetzliche Sicherheitsvermutung:<br/>reguläres Asylverfahren"]
+
+    style D fill:#d4edda,stroke:#2d8a4a
+    style E fill:#f8d7da,stroke:#c0392b
+    style G fill:#fff3cd,stroke:#c9a227
+    style I fill:#fff3cd,stroke:#c9a227
+    style K fill:#fff3cd,stroke:#c9a227
+    style L fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};

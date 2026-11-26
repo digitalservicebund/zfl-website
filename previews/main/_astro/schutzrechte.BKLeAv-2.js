@@ -1,0 +1,46 @@
+var e=`---
+summary: "Die Pflichten rund um das Schutzrecht an einer Diensterfindung: die Anmeldepflicht des Arbeitgebers im Inland mit ihren Ausnahmen, das Nachfristrecht des Arbeitnehmers, die Auslandsfreigabe und die Übertragung an den Arbeitnehmer, wenn der Arbeitgeber das Schutzrecht aufgeben will."
+---
+swimlane-beta TD
+    subgraph AG["Arbeitgeber"]
+        start(["Diensterfindung ist gemeldet;<br/>Arbeitgeber ist verpflichtet und<br/>allein berechtigt zur Anmeldung<br/>— <a href='{{ELI}}#art-z13_abs-z1' target='_blank' rel='noopener'>§13 I S.1</a>"])
+        pflicht{"Anmeldepflicht entfällt?<br/>Erfindung frei geworden,<br/>Arbeitnehmer stimmt Nicht-<br/>anmeldung zu oder Betriebs-<br/>geheimnis (<a href='{{ELI}}#art-z17_abs-z1' target='_blank' rel='noopener'>§17 I</a>, <a href='{{ELI}}#art-z17_abs-z2' target='_blank' rel='noopener'>II</a>)<br/>— <a href='{{ELI}}#art-z13_abs-z2' target='_blank' rel='noopener'>§13 II</a>"}
+        keinePflicht(["Keine Anmeldung durch den<br/>Arbeitgeber; ist die Erfindung frei,<br/>darf nur der Arbeitnehmer anmelden<br/>— <a href='{{ELI}}#art-z13_abs-z4' target='_blank' rel='noopener'>§13 IV</a>"])
+        unverzueglich{"Meldet der Arbeitgeber<br/>unverzüglich an?<br/>— <a href='{{ELI}}#art-z13_abs-z1' target='_blank' rel='noopener'>§13 I S.3</a>"}
+        verfahren["Anmeldung im Inland: Patent,<br/>sofern nicht Gebrauchsmuster<br/>zweckdienlicher — <a href='{{ELI}}#art-z13_abs-z1' target='_blank' rel='noopener'>§13 I S.2</a>;<br/>Abschriften an den Arbeitnehmer,<br/>Unterrichtung über den Fortgang<br/>— <a href='{{ELI}}#art-z15_abs-z1' target='_blank' rel='noopener'>§15 I</a>"]
+        ausland["Ausland: Anmeldung zulässig<br/>— <a href='{{ELI}}#art-z14_abs-z1' target='_blank' rel='noopener'>§14 I</a>; für übrige Staaten<br/>rechtzeitige Freigabe an den<br/>Arbeitnehmer — <a href='{{ELI}}#art-z14_abs-z2' target='_blank' rel='noopener'>§14 II</a>, ggf.<br/>mit Benutzungsvorbehalt<br/>— <a href='{{ELI}}#art-z14_abs-z3' target='_blank' rel='noopener'>§14 III</a>"]
+        aufgabe{"Anmeldung oder Schutzrecht<br/>vor Erfüllung des Vergütungs-<br/>anspruchs aufgeben?<br/>— <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 I</a>"}
+        weiter(["Arbeitgeber verfolgt die<br/>Anmeldung weiter bzw. erhält<br/>das Schutzrecht aufrecht"])
+        mitteilung["Mitteilung an den Arbeitnehmer<br/>— <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 I</a>; zugleich Vorbehalt eines<br/>nichtausschließlichen Benutzungs-<br/>rechts gegen angemessene<br/>Vergütung möglich — <a href='{{ELI}}#art-z16_abs-z3' target='_blank' rel='noopener'>§16 III</a>"]
+        verlangen{"Arbeitnehmer verlangt binnen<br/>3 Monaten nach Zugang der<br/>Mitteilung die Übertragung?<br/>— <a href='{{ELI}}#art-z16_abs-z2' target='_blank' rel='noopener'>§16 II</a>"}
+        aufgegeben(["Arbeitgeber darf das<br/>Recht aufgeben — <a href='{{ELI}}#art-z16_abs-z2' target='_blank' rel='noopener'>§16 II</a>"])
+    end
+
+    subgraph AN["Arbeitnehmer"]
+        nachfrist["Nach Inanspruchnahme: setzt<br/>angemessene Nachfrist;<br/>nach fruchtlosem Ablauf Anmeldung<br/>für den Arbeitgeber auf dessen<br/>Namen und Kosten — <a href='{{ELI}}#art-z13_abs-z3' target='_blank' rel='noopener'>§13 III</a>"]
+        unterstuetzung["Unterstützt auf Verlangen beim<br/>Erwerb des Schutzrechts, gibt<br/>erforderliche Erklärungen ab<br/>— <a href='{{ELI}}#art-z15_abs-z2' target='_blank' rel='noopener'>§15 II</a>"]
+        uebertragen(["Übertragung des Rechts auf<br/>Kosten des Arbeitnehmers,<br/>Aushändigung der Unterlagen<br/>— <a href='{{ELI}}#art-z16_abs-z1' target='_blank' rel='noopener'>§16 I</a>"])
+    end
+
+    start --> pflicht
+    pflicht -->|Ja| keinePflicht
+    pflicht -->|Nein| unverzueglich
+    unverzueglich -->|Ja| verfahren
+    unverzueglich -->|Nein| nachfrist
+    nachfrist --> verfahren
+    verfahren -.-> unterstuetzung
+    verfahren --> ausland
+    ausland --> aufgabe
+    aufgabe -->|Nein| weiter
+    aufgabe -->|Ja| mitteilung
+    mitteilung --> verlangen
+    verlangen -->|Ja| uebertragen
+    verlangen -->|Nein| aufgegeben
+    keinePflicht ~~~ unverzueglich
+    weiter ~~~ mitteilung
+
+    style keinePflicht fill:#fff3cd,stroke:#c9a227
+    style weiter fill:#d4edda,stroke:#2d8a4a
+    style uebertragen fill:#d4edda,stroke:#2d8a4a
+    style aufgegeben fill:#f8d7da,stroke:#c0392b
+`;export{e as default};

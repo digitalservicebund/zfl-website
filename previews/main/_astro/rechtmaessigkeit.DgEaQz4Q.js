@@ -1,0 +1,22 @@
+var e=`---
+summary: "Die Prüfung der Rechtmäßigkeit einer Verarbeitung personenbezogener Daten anhand der Erlaubnistatbestände des Art. 6 Abs. 1 DSGVO, einschließlich der Interessenabwägung beim berechtigten Interesse."
+---
+flowchart TD
+    A["Personenbezogene Daten sollen<br/>verarbeitet werden"] --> B{"Liegt eine der Bedingungen aus<br/>Art. 6 Abs. 1 vor?"}
+
+    B -->|"Einwilligung erteilt — Art. 6<br/>Abs. 1 lit. a"| Z["Verarbeitung ist rechtmäßig"]
+    B -->|"Vertragserfüllung/<br/>vorvertragliche Maßnahme<br/>— Art. 6 Abs. 1 lit. b"| Z
+    B -->|"Rechtliche Verpflichtung<br/>— Art. 6 Abs. 1 lit. c"| Z
+    B -->|"Schutz lebenswichtiger<br/>Interessen — Art. 6 Abs. 1<br/>lit. d"| Z
+    B -->|"Öffentliches Interesse/<br/>öffentliche Gewalt — Art. 6<br/>Abs. 1 lit. e"| Z
+    B -->|"Berechtigtes Interesse — Art.<br/>6 Abs. 1 lit. f"| C{"Ist der Verantwortliche eine<br/>Behörde in Erfüllung ihrer<br/>Aufgaben? — Art. 6 Abs. 1<br/>UAbs. 2"}
+    B -->|"Keine Bedingung erfüllt"| N["Verarbeitung ist unrechtmäßig"]
+
+    C -->|"Ja"| N
+    C -->|"Nein"| D{"Überwiegen Interessen,<br/>Grundrechte oder -freiheiten<br/>der betroffenen Person (insb.<br/>bei Kindern)? — Art. 6 Abs. 1<br/>lit. f"}
+    D -->|"Ja"| N
+    D -->|"Nein"| Z
+
+    style Z fill:#d4edda,stroke:#2d8a4a
+    style N fill:#f8d7da,stroke:#c0392b
+`;export{e as default};
