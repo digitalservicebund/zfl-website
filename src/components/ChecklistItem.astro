@@ -1,0 +1,27 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { tv } from "@/utils/tv";
+
+/**
+ * Item of a `Checklist`: a check icon, a heading and the default slot below it.
+ */
+interface Props extends HTMLAttributes<"li"> {
+  /** First line next to the icon. */
+  heading: string;
+}
+
+const styles = tv({ base: "flex items-start gap-8 md:gap-32" });
+
+const { heading, class: className, ...attrs } = Astro.props;
+---
+
+<li class={styles({ class: className })} {...attrs}>
+  <span
+    class="kern-icon kern-icon--check kern-icon--default bg-cosmic-blue-base! size-32 shrink-0"
+    aria-hidden="true"
+  ></span>
+  <div class="space-y-4">
+    <p class="kern-heading-small">{heading}</p>
+    <slot />
+  </div>
+</li>

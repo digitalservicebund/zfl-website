@@ -1,0 +1,24 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { tv } from "@/utils/tv";
+
+/**
+ * List with a check icon in front of each item. Use `ChecklistItem` for the items.
+ *
+ * @example
+ * <Checklist>
+ *   <ChecklistItem heading="Überschrift">
+ *     <p>Kurzer Text.</p>
+ *   </ChecklistItem>
+ * </Checklist>
+ */
+type Props = HTMLAttributes<"ul">;
+
+const styles = tv({ base: "list-unstyled max-w-a11y space-y-12" });
+
+const { class: className, ...attrs } = Astro.props;
+---
+
+<ul class={styles({ class: className })} {...attrs}>
+  <slot />
+</ul>

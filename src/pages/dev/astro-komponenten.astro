@@ -3,6 +3,8 @@ import Badge from "@/components/Badge.astro";
 import Banner from "@/components/Banner.astro";
 import Callout from "@/components/Callout.astro";
 import Chart from "@/components/Chart.astro";
+import Checklist from "@/components/Checklist.astro";
+import ChecklistItem from "@/components/ChecklistItem.astro";
 import InfoPanel from "@/components/InfoPanel.astro";
 import FeatureItem from "@/components/FeatureItem.astro";
 import FeatureSet from "@/components/FeatureSet.astro";
@@ -230,6 +232,28 @@ export const frontmatter = {
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ─── Checklist + ChecklistItem ─────────────────────────────────── -->
+    <section class="space-y-48">
+      <h2>Checklist + ChecklistItem</h2>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">
+          Checklist mit drei ChecklistItems
+        </p>
+        <Checklist>
+          <ChecklistItem heading="Erster Punkt">
+            <p>Kurzer Text zum ersten Punkt.</p>
+          </ChecklistItem>
+          <ChecklistItem heading="Zweiter Punkt">
+            <p>Kurzer Text zum zweiten Punkt.</p>
+          </ChecklistItem>
+          <ChecklistItem heading="Dritter Punkt">
+            <p>Kurzer Text zum dritten Punkt.</p>
+          </ChecklistItem>
+        </Checklist>
       </div>
     </section>
 
