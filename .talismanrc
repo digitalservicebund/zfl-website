@@ -99,6 +99,8 @@ fileignoreconfig:
     ignore_detectors: [filename]
   - filename: src/content/ki-visualisierungen/BKleingG/pachthoehe.mmd
     checksum: 4ef525f5b449fc5f5863fbc1964e4ecdae41363aabf295290f6ad825956dc1fd
+  - filename: src/content/ki-visualisierungen/SGB V/genehmigungsfiktion.mmd
+    checksum: 29d07e7abe5017b37a74d93d0410417a545ae57aa3bd133ef735f410e61bd77a
   - filename: src/pages/werkzeuge/ki-prototypen/visualisieren/_mermaid2RulemapXML.ts
     checksum: 01019ab0f49d7695a85a1e669ccca19f15620f8c6908a96eaa41c7a823a8e9f5
   - filename: src/pages/werkzeuge/ki-prototypen/_shared/ExampleFinder.svelte

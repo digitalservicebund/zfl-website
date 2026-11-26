@@ -1,0 +1,8 @@
+title: Gesetz zur Vorbeugung vor und Bekämpfung von Tierseuchen
+eli: eli/bund/bgbl-1/2013/s1324/2026-03-27/1/deu
+owners: [BMLEH]
+visOptions:
+  - name: Bejagungsanordnung bei Seuchen
+    visType: swimlane
+    filename: bejagungsanordnung
+    articles: ["§6"]

@@ -28,3 +28,7 @@ visOptions:
     visType: flowchart
     filename: einziehung
     articles: ["§835", "§836", "§841", "§843"]
+  - name: Gerichtliches Mahnverfahren
+    visType: swimlane
+    filename: mahnverfahren
+    articles: ["§688", "§694", "§696", "§699", "§700"]

@@ -1,0 +1,8 @@
+title: Bundeshaushaltsordnung
+eli: eli/bund/bgbl-1/1969/s1284/2026-05-12/1/deu
+owners: [BMF]
+visOptions:
+  - name: Zuwendung und Verwendungsnachweis
+    visType: swimlane
+    filename: zuwendungsverfahren
+    articles: ["§23", "§44"]

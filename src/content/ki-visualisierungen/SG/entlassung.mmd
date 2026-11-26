@@ -1,0 +1,48 @@
+---
+summary: "Die Entlassung von Berufssoldaten und Soldaten auf Zeit nach dem Soldatengesetz: Entlassung kraft Gesetzes, auf eigenen Antrag mit Mindestdienstzeit und Härtefallregel oder von Amts wegen, jeweils mit Zuständigkeit, Anhörung und Fristen bis zum Entlassungstag."
+---
+flowchart TD
+    start(["Entlassung eines Berufssoldaten<br/>oder Soldaten auf Zeit"])
+    anlass{"Was führt zur<br/>Entlassung?"}
+    kraft["Entlassen kraft Gesetzes bei Verlust der<br/>Eigenschaft als Deutscher; BMVg stellt den<br/>Tag der Beendigung fest — <a href='https://www.gesetze-im-internet.de/sg/__46.html' target='_blank' rel='noopener'>§46 I</a><br/>oder bei Ernennung zum Beamten — <a href='https://www.gesetze-im-internet.de/sg/__46.html' target='_blank' rel='noopener'>§46 IIIa</a><br/>(Soldaten auf Zeit entsprechend — <a href='https://www.gesetze-im-internet.de/sg/__55.html' target='_blank' rel='noopener'>§55 I</a>)"]
+
+    status{"Berufssoldat?"}
+    mindest{"Mindestdienstzeit abgeleistet?<br/>— <a href='https://www.gesetze-im-internet.de/sg/__46.html' target='_blank' rel='noopener'>§46 III-V</a>"}
+    haerte{"Verbleiben im Dienst eine<br/>besondere Härte (persönlich,<br/>häuslich, beruflich oder<br/>wirtschaftlich)?<br/>— <a href='https://www.gesetze-im-internet.de/sg/__46.html' target='_blank' rel='noopener'>§46 VI</a>, <a href='https://www.gesetze-im-internet.de/sg/__55.html' target='_blank' rel='noopener'>§55 III</a>"}
+    keinAnspruch(["Kein Anspruch auf Entlassung:<br/>Dienstverhältnis besteht fort"])
+    verlangen["Schriftliches Entlassungsverlangen<br/>beim Disziplinarvorgesetzten<br/>— <a href='https://www.gesetze-im-internet.de/sg/__46.html' target='_blank' rel='noopener'>§46 VII S.1</a>, <a href='https://www.gesetze-im-internet.de/sg/__55.html' target='_blank' rel='noopener'>§55 VI S.5</a>"]
+    ruecknahme{"Binnen 2 Wochen nach Zugang<br/>zurückgenommen?<br/>— <a href='https://www.gesetze-im-internet.de/sg/__46.html' target='_blank' rel='noopener'>§46 VII S.2</a>"}
+    zurueck(["Verlangen zurückgenommen:<br/>keine Entlassung"])
+
+    grund["Entlassungsgrund von Amts wegen, u.a.<br/>Ernennungshindernis, Täuschung,<br/>Eidverweigerung, Anerkennung als<br/>Kriegsdienstverweigerer — <a href='https://www.gesetze-im-internet.de/sg/__46.html' target='_blank' rel='noopener'>§46 II, IIa</a>;<br/>bei Soldaten auf Zeit zusätzlich<br/>Dienstunfähigkeit — <a href='https://www.gesetze-im-internet.de/sg/__55.html' target='_blank' rel='noopener'>§55 II</a>, mangelnde<br/>Eignung oder Dienstpflichtverletzung in<br/>den ersten 4 Dienstjahren — <a href='https://www.gesetze-im-internet.de/sg/__55.html' target='_blank' rel='noopener'>§55 IV, V</a>"]
+    anhoerung["Anhörung des Soldaten — <a href='https://www.gesetze-im-internet.de/sg/__47.html' target='_blank' rel='noopener'>§47 II</a><br/>(bei Täuschung oder Vorstrafe Verfügung<br/>binnen 6 Monaten ab Kenntnis — <a href='https://www.gesetze-im-internet.de/sg/__47.html' target='_blank' rel='noopener'>§47 III</a>)"]
+
+    verfuegung["Entlassungsverfügung durch die Stelle,<br/>die für die Ernennung zuständig wäre<br/>— <a href='https://www.gesetze-im-internet.de/sg/__47.html' target='_blank' rel='noopener'>§47 I</a>, <a href='https://www.gesetze-im-internet.de/sg/__55.html' target='_blank' rel='noopener'>§55 VI S.1</a>"]
+    zeitpunkt["Entlassungstag: auf Antrag der beantragte<br/>Zeitpunkt, Aufschub höchstens 3 Monate<br/>— <a href='https://www.gesetze-im-internet.de/sg/__46.html' target='_blank' rel='noopener'>§46 VII S.3</a>; von Amts wegen teils<br/>Mindestfristen für die Zustellung, z.B.<br/>3 Monate bei Dienstunfähigkeit<br/>— <a href='https://www.gesetze-im-internet.de/sg/__47.html' target='_blank' rel='noopener'>§47 IV</a>, <a href='https://www.gesetze-im-internet.de/sg/__55.html' target='_blank' rel='noopener'>§55 VI S.3-4</a>"]
+    ende(["Entlassung zum Entlassungstag:<br/>Dienstverhältnis endet"])
+
+    start --> anlass
+    anlass -->|"kraft Gesetzes"| kraft
+    kraft --> ende
+    anlass -->|"auf eigenen Antrag"| status
+    status -->|Ja| mindest
+    status -->|"Nein: Soldat auf Zeit"| haerte
+    mindest -->|Ja| verlangen
+    mindest -->|Nein| haerte
+    haerte -->|Ja| verlangen
+    haerte -->|Nein| keinAnspruch
+    verlangen --> ruecknahme
+    ruecknahme -->|Ja| zurueck
+    ruecknahme -->|Nein| verfuegung
+    anlass -->|"von Amts wegen"| grund
+    grund --> anhoerung
+    anhoerung --> verfuegung
+    verfuegung --> zeitpunkt
+    zeitpunkt --> ende
+
+    mindest -.- hinweisMindest["Nach Studium oder Fachausbildung<br/>dreifache Dauer, höchstens 10 Jahre<br/>— <a href='https://www.gesetze-im-internet.de/sg/__46.html' target='_blank' rel='noopener'>§46 III</a>; Berufsoffiziere<br/>mindestens 6 Dienstjahre — <a href='https://www.gesetze-im-internet.de/sg/__46.html' target='_blank' rel='noopener'>§46 V</a>"]
+
+    style ende fill:#d4edda,stroke:#2d8a4a
+    style keinAnspruch fill:#f8d7da,stroke:#c0392b
+    style zurueck fill:#fff3cd,stroke:#c9a227
+    style hinweisMindest fill:#f5f5f5,stroke:#999

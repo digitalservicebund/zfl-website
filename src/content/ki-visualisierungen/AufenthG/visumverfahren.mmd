@@ -1,0 +1,40 @@
+---
+summary: "Das Visumverfahren an den deutschen Auslandsvertretungen nach dem AufenthG: Unterscheidung von Schengen-Visum und nationalem Visum, Sicherheitsabgleich, Zustimmung der Ausländerbehörde nach § 31 AufenthV und Zustimmung der Bundesagentur für Arbeit bis zur Entscheidung über das Visum."
+---
+swimlane-beta TD
+    subgraph AS["Antragsteller/in"]
+        start(["Visumantrag bei der zuständigen<br/>Auslandsvertretung — <a href='{{ELI}}#art-z71_abs-z2' target='_blank' rel='noopener'>§71 II S.1</a>"])
+        erteilt(["Visum wird erteilt; Zeiten mit nationalem<br/>Visum zählen für spätere Aufenthaltstitel<br/>— <a href='{{ELI}}#art-z6_abs-z3' target='_blank' rel='noopener'>§6 III S.3</a>"])
+        abgelehnt(["Visum wird versagt"])
+    end
+
+    subgraph AV["Auslandsvertretung"]
+        art["Prüfung nach Aufenthaltszweck und -dauer:<br/>bis 90 Tage je 180 Tage Schengen-Visum<br/>nach dem Visakodex — <a href='{{ELI}}#art-z6_abs-z1' target='_blank' rel='noopener'>§6 I Nr.1</a>;<br/>längerfristig nationales Visum nach den<br/>Regeln des Aufenthaltstitels — <a href='{{ELI}}#art-z6_abs-z3' target='_blank' rel='noopener'>§6 III</a>"]
+        sicherheit["Sicherheitsabgleich: Antragsdaten über<br/>das Bundesverwaltungsamt an BND, BfV,<br/>MAD, BKA, Bundespolizei und ZKA<br/>— <a href='{{ELI}}#art-z73_abs-z1' target='_blank' rel='noopener'>§73 I</a>"]
+        zustpfl{"Zustimmung der<br/>Ausländerbehörde nötig?<br/>— §31 I S.1 AufenthV"}
+        beschaeft{"Beschäftigung, die der<br/>Zustimmung der BA<br/>bedarf? — <a href='{{ELI}}#art-z39_abs-z1' target='_blank' rel='noopener'>§39 I</a>"}
+        entscheid{"Voraussetzungen erfüllt,<br/>keine Versagungsgründe,<br/>nötige Zustimmungen<br/>liegen vor? — <a href='{{ELI}}#art-z6_abs-z1' target='_blank' rel='noopener'>§6 I</a>, <a href='{{ELI}}#art-z6_abs-z3' target='_blank' rel='noopener'>III</a>"}
+    end
+
+    subgraph ABH["Ausländerbehörde"]
+        abh["Behörde am künftigen Aufenthaltsort prüft<br/>und stimmt zu oder widerspricht — §31 I<br/>AufenthV; nötig u.a. bei über 90 Tagen<br/>Aufenthalt nicht zu Ausbildung/Erwerb,<br/>bei selbständiger Tätigkeit, nach Aufenthalt<br/>mit Duldung oder auf Anordnung des BMI<br/>nach dem Sicherheitsabgleich. In den<br/>beiden letzten Fällen gilt die Zustimmung<br/>als erteilt, wenn sie nicht binnen 10 Tagen<br/>widerspricht — §31 I S.3-4 AufenthV.<br/>Vorabzustimmung vor dem Antrag möglich<br/>— §31 III AufenthV"]
+    end
+
+    subgraph BA["Bundesagentur für Arbeit"]
+        ba["Prüft die Zustimmung zur Beschäftigung<br/>(u.a. keine ungünstigeren<br/>Arbeitsbedingungen, ggf. Vorrangprüfung)<br/>— <a href='{{ELI}}#art-z39_abs-z2' target='_blank' rel='noopener'>§39 II</a>, <a href='{{ELI}}#art-z39_abs-z3' target='_blank' rel='noopener'>III</a>"]
+    end
+
+    start --> art
+    art --> sicherheit
+    sicherheit --> zustpfl
+    zustpfl -->|Ja| abh
+    zustpfl -->|Nein| beschaeft
+    abh --> beschaeft
+    beschaeft -->|Ja| ba
+    beschaeft -->|Nein| entscheid
+    ba --> entscheid
+    entscheid -->|Ja| erteilt
+    entscheid -->|Nein| abgelehnt
+
+    style erteilt fill:#d4edda,stroke:#2d8a4a
+    style abgelehnt fill:#f8d7da,stroke:#c0392b

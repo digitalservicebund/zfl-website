@@ -1,0 +1,14 @@
+title: Neuntes Buch Sozialgesetzbuch – Rehabilitation und Teilhabe von Menschen mit Behinderungen
+# Das SGB IX ist nicht in der RIS-Search-Datenbank enthalten. Textquelle ist
+# daher gesetze-im-internet.de (eine Seite pro Paragraph). Die .mmd-Dateien
+# verwenden keine {{ELI}}-Platzhalter, sondern verlinken direkt auf die
+# Paragraphenseiten, z.B. https://www.gesetze-im-internet.de/sgb_9_2018/__14.html
+# (dort gibt es keine Absatz-Anker). `eli` ist eine volle URL und wird vom
+# Wizard unverändert als Quell-Link verwendet (siehe resolveEliUrl).
+eli: "https://www.gesetze-im-internet.de/sgb_9_2018/"
+owners: [BMAS]
+visOptions:
+  - name: Zuständigkeitsklärung Reha-Antrag
+    visType: swimlane
+    filename: zustaendigkeitsklaerung
+    articles: ["§14", "§15", "§18"]

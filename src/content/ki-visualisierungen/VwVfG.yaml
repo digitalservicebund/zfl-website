@@ -1,0 +1,8 @@
+title: Verwaltungsverfahrensgesetz
+eli: eli/bund/bgbl-1/1976/s1253/2026-07-22/1/deu
+owners: [BMI]
+visOptions:
+  - name: Amtshilfe zwischen Behörden
+    visType: swimlane
+    filename: amtshilfe
+    articles: ["§4", "§5", "§8"]

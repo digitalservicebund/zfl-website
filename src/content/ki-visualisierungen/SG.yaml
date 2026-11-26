@@ -1,0 +1,14 @@
+title: Gesetz über die Rechtsstellung der Soldaten
+# Das Soldatengesetz ist nicht in der RIS-Search-Datenbank enthalten.
+# Textquelle ist daher gesetze-im-internet.de (eine Seite pro Paragraph). Die
+# .mmd-Dateien verwenden keine {{ELI}}-Platzhalter, sondern verlinken direkt
+# auf die Paragraphenseiten, z.B. https://www.gesetze-im-internet.de/sg/__46.html
+# (dort gibt es keine Absatz-Anker). `eli` ist eine volle URL und wird vom
+# Wizard unverändert als Quell-Link verwendet (siehe resolveEliUrl).
+eli: "https://www.gesetze-im-internet.de/sg/"
+owners: [BMVg]
+visOptions:
+  - name: Entlassung aus dem Soldatenverhältnis
+    visType: flowchart
+    filename: entlassung
+    articles: ["§46", "§47", "§55"]

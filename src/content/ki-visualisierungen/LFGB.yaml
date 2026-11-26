@@ -1,0 +1,8 @@
+title: Lebensmittel-, Bedarfsgegenstände- und Futtermittelgesetzbuch
+eli: eli/bund/bgbl-1/2005/s2618/2026-02-03/1/deu
+owners: [BMLEH]
+visOptions:
+  - name: Information der Öffentlichkeit
+    visType: flowchart
+    filename: information_oeffentlichkeit
+    articles: ["§40"]

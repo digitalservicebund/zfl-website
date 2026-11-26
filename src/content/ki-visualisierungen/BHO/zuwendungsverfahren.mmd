@@ -1,0 +1,38 @@
+---
+summary: "Das Verfahren einer Zuwendung des Bundes nach der BHO von der Prüfung des erheblichen Bundesinteresses über den Zuwendungsbescheid bis zur Prüfung des Verwendungsnachweises, einschließlich der Festbetragsförderung für Kommunen und der Prüfung durch den Bundesrechnungshof."
+---
+swimlane-beta TD
+    subgraph BRH["Bundesrechnungshof"]
+        brh["Kann beim Zuwendungsempfänger prüfen,<br/>auch dessen sonstige Haushalts- und<br/>Wirtschaftsführung — <a href='{{ELI}}#art-z91_abs-z1' target='_blank' rel='noopener'>§91 I Nr. 3</a>, <a href='{{ELI}}#art-z91_abs-z2' target='_blank' rel='noopener'>§91 II</a>"]
+    end
+
+    subgraph ZE["Zuwendungsempfänger"]
+        antrag(["Antrag auf Zuwendung für ein Vorhaben<br/>einer Stelle außerhalb der Bundesverwaltung<br/>— VV-BHO zu §44"])
+        abgelehnt(["Antrag wird abgelehnt:<br/>keine Zuwendung"])
+        vorhaben["Führt das Vorhaben durch und ruft<br/>die Mittel nach Bedarf ab — VV-BHO zu §44"]
+        vn["Legt den Verwendungsnachweis vor<br/>(Sachbericht, zahlenmäßiger Nachweis)<br/>— VV-BHO zu §44"]
+    end
+
+    subgraph ZG["Zuwendungsgeber (Bewilligungsbehörde)"]
+        eingang("Antrag geht bei der<br/>Bewilligungsbehörde ein")
+        interesse{"Erhebliches Bundesinteresse,<br/>ohne Zuwendung nicht oder<br/>nicht ausreichend erfüllbar?<br/>— <a href='{{ELI}}#art-z44_abs-z1' target='_blank' rel='noopener'>§44 I S.1</a>, <a href='{{ELI}}#art-z23_abs-z' target='_blank' rel='noopener'>§23 S.1</a>"}
+        bescheid["Zuwendungsbescheid: bestimmt den Nachweis<br/>der zweckentsprechenden Verwendung und<br/>legt ein Prüfungsrecht fest — <a href='{{ELI}}#art-z44_abs-z1' target='_blank' rel='noopener'>§44 I S.2-3</a><br/>(an Kommunen bis 6 Mio. Euro grundsätzlich<br/>als Festbetrag mit vereinfachtem<br/>Verwendungsnachweis — <a href='{{ELI}}#art-z44_abs-z2' target='_blank' rel='noopener'>§44 II S.1-2</a>)"]
+        pruefung{"Zuwendung zweckentsprechend<br/>verwendet? (Prüfung des<br/>Verwendungsnachweises<br/>— VV-BHO zu §44)"}
+        abschluss(["Verwendung nachgewiesen:<br/>Verfahren abgeschlossen"])
+        widerruf(["Widerruf des Bescheids und Erstattung<br/>— §§49, 49a VwVfG"])
+    end
+
+    antrag --> eingang
+    eingang --> interesse
+    interesse -->|Nein| abgelehnt
+    interesse -->|Ja| bescheid
+    bescheid --> vorhaben
+    vorhaben --> vn
+    vn --> pruefung
+    vn -.-> brh
+    pruefung -->|Ja| abschluss
+    pruefung -->|Nein| widerruf
+
+    style abgelehnt fill:#f8d7da,stroke:#c0392b
+    style abschluss fill:#d4edda,stroke:#2d8a4a
+    style widerruf fill:#f8d7da,stroke:#c0392b

@@ -1,0 +1,14 @@
+title: Abgabenordnung
+# Die AO ist nicht in der RIS-Search-Datenbank enthalten. Textquelle ist
+# daher gesetze-im-internet.de (eine Seite pro Paragraph). Die .mmd-Dateien
+# verwenden keine {{ELI}}-Platzhalter, sondern verlinken direkt auf die
+# Paragraphenseiten, z.B. https://www.gesetze-im-internet.de/ao_1977/__355.html
+# (dort gibt es keine Absatz-Anker). `eli` ist eine volle URL und wird vom
+# Wizard unverändert als Quell-Link verwendet (siehe resolveEliUrl).
+eli: "https://www.gesetze-im-internet.de/ao_1977/"
+owners: [BMF]
+visOptions:
+  - name: Einspruchsverfahren
+    visType: flowchart
+    filename: einspruchsverfahren
+    articles: ["§347", "§355", "§367"]

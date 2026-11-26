@@ -1,0 +1,51 @@
+---
+summary: "Die Zuständigkeitsklärung bei Anträgen auf Leistungen zur Teilhabe nach dem SGB IX: Prüfung und Weiterleitung durch den erstangegangenen Träger, Bedarfsfeststellung und Beteiligung weiterer Träger durch den leistenden Träger, Entscheidungsfristen und Genehmigungsfiktion."
+---
+swimlane-beta TD
+    subgraph LB["Leistungsberechtigte"]
+        antrag(["Antrag auf Leistungen zur Teilhabe<br/>bei einem Rehabilitationsträger<br/>— <a href='https://www.gesetze-im-internet.de/sgb_9_2018/__14.html' target='_blank' rel='noopener'>§14 I S.1</a>"])
+        selbst(["Leistung gilt als genehmigt; bei<br/>Selbstbeschaffung erstattet der leistende<br/>Träger die Aufwendungen — <a href='https://www.gesetze-im-internet.de/sgb_9_2018/__18.html' target='_blank' rel='noopener'>§18 III, IV</a><br/>(nicht bei bekannt fehlendem Anspruch<br/>— <a href='https://www.gesetze-im-internet.de/sgb_9_2018/__18.html' target='_blank' rel='noopener'>§18 V</a>; nicht für Eingliederungshilfe,<br/>Jugendhilfe u.a. — <a href='https://www.gesetze-im-internet.de/sgb_9_2018/__18.html' target='_blank' rel='noopener'>§18 VII</a>)"])
+    end
+
+    subgraph T1["Erstangegangener Rehabilitationsträger"]
+        pruef{"Für die Leistung insgesamt<br/>nicht zuständig?<br/>(Prüfung binnen 2 Wochen<br/>nach Antragseingang<br/>— <a href='https://www.gesetze-im-internet.de/sgb_9_2018/__14.html' target='_blank' rel='noopener'>§14 I S.1</a>)"}
+        weiter["Leitet den Antrag unverzüglich an den<br/>nach seiner Auffassung zuständigen Träger<br/>weiter und unterrichtet den Antragsteller<br/>— <a href='https://www.gesetze-im-internet.de/sgb_9_2018/__14.html' target='_blank' rel='noopener'>§14 I S.2</a> (Ursache der Behinderung<br/>unklar: an den ursachenunabhängig<br/>leistenden Träger — <a href='https://www.gesetze-im-internet.de/sgb_9_2018/__14.html' target='_blank' rel='noopener'>§14 I S.3</a>)"]
+    end
+
+    subgraph LR["Leistender Rehabilitationsträger"]
+        eingang("Antrag geht beim zweitangegangenen<br/>Träger ein; Fristen beginnen neu<br/>— <a href='https://www.gesetze-im-internet.de/sgb_9_2018/__14.html' target='_blank' rel='noopener'>§14 II S.4</a> (weitere Weiterleitung<br/>nur im Einvernehmen, ohne neue Fristen<br/>— <a href='https://www.gesetze-im-internet.de/sgb_9_2018/__14.html' target='_blank' rel='noopener'>§14 III</a>)")
+        bedarf["Stellt den Rehabilitationsbedarf<br/>unverzüglich und umfassend fest<br/>— <a href='https://www.gesetze-im-internet.de/sgb_9_2018/__14.html' target='_blank' rel='noopener'>§14 II S.1</a>"]
+        mehrere{"Leistungen oder Feststellungen<br/>weiterer Träger nötig?<br/>— <a href='https://www.gesetze-im-internet.de/sgb_9_2018/__15.html' target='_blank' rel='noopener'>§15 I, II</a>"}
+        gutachten{"Gutachten erforderlich?<br/>— <a href='https://www.gesetze-im-internet.de/sgb_9_2018/__14.html' target='_blank' rel='noopener'>§14 II S.2-3</a>"}
+        zweiMonate{"Entscheidung binnen<br/>2 Monaten ab Antragseingang<br/>oder bis zu dem in einer<br/>begründeten Mitteilung<br/>genannten Tag? — <a href='https://www.gesetze-im-internet.de/sgb_9_2018/__18.html' target='_blank' rel='noopener'>§18 I-III</a>"}
+        entscheidung(["Entscheidung über den Antrag<br/>und Erbringung der Leistungen<br/>— <a href='https://www.gesetze-im-internet.de/sgb_9_2018/__14.html' target='_blank' rel='noopener'>§14 II S.1</a>, <a href='https://www.gesetze-im-internet.de/sgb_9_2018/__15.html' target='_blank' rel='noopener'>§15 III</a>"])
+    end
+
+    subgraph SV["Sachverständige"]
+        sachv["Erstellt das Gutachten binnen<br/>2 Wochen nach Auftragserteilung<br/>— <a href='https://www.gesetze-im-internet.de/sgb_9_2018/__17.html' target='_blank' rel='noopener'>§17 II S.1</a>"]
+    end
+
+    subgraph BT["Weitere Rehabilitationsträger"]
+        beteiligt["Entscheiden über abgetrennte Leistungen<br/>selbst — <a href='https://www.gesetze-im-internet.de/sgb_9_2018/__15.html' target='_blank' rel='noopener'>§15 I S.2</a> oder liefern<br/>Feststellungen binnen 2 Wochen, die den<br/>leistenden Träger binden — <a href='https://www.gesetze-im-internet.de/sgb_9_2018/__15.html' target='_blank' rel='noopener'>§15 II S.2</a>"]
+        erstattung(["Zuständiger Träger erstattet dem<br/>leistenden Träger die Aufwendungen<br/>(+ 5 % Verwaltungskostenpauschale)<br/>— <a href='https://www.gesetze-im-internet.de/sgb_9_2018/__16.html' target='_blank' rel='noopener'>§16 I-III</a>"])
+    end
+
+    antrag --> pruef
+    pruef -->|Ja| weiter
+    weiter --> eingang
+    pruef -->|"Nein: bleibt als leistender<br/>Träger zuständig"| bedarf
+    eingang --> bedarf
+    bedarf --> mehrere
+    mehrere -->|Ja| beteiligt
+    mehrere -->|Nein| gutachten
+    gutachten -->|"Ja: unverzüglicher Auftrag,<br/>i.d.R. drei Sachverständige<br/>zur Auswahl — <a href='https://www.gesetze-im-internet.de/sgb_9_2018/__17.html' target='_blank' rel='noopener'>§17 I</a>"| sachv
+    gutachten -->|"Nein: Frist 3 Wochen<br/>ab Antragseingang<br/>— <a href='https://www.gesetze-im-internet.de/sgb_9_2018/__14.html' target='_blank' rel='noopener'>§14 II S.2</a>"| zweiMonate
+    sachv -->|"Frist 2 Wochen ab<br/>Vorliegen des Gutachtens<br/>— <a href='https://www.gesetze-im-internet.de/sgb_9_2018/__14.html' target='_blank' rel='noopener'>§14 II S.3</a>"| zweiMonate
+    beteiligt -->|"Frist 6 Wochen ab Antragseingang,<br/>mit Teilhabeplankonferenz<br/>2 Monate — <a href='https://www.gesetze-im-internet.de/sgb_9_2018/__15.html' target='_blank' rel='noopener'>§15 IV</a>"| zweiMonate
+    zweiMonate -->|Ja| entscheidung
+    zweiMonate -->|"Nein: Genehmigungsfiktion<br/>— <a href='https://www.gesetze-im-internet.de/sgb_9_2018/__18.html' target='_blank' rel='noopener'>§18 III</a>"| selbst
+    entscheidung -.->|"Leistung fiel in die Zuständigkeit<br/>eines anderen Trägers"| erstattung
+
+    style entscheidung fill:#d4edda,stroke:#2d8a4a
+    style selbst fill:#fff3cd,stroke:#c9a227
+    style erstattung fill:#fff3cd,stroke:#c9a227

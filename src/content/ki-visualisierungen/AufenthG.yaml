@@ -1,0 +1,8 @@
+title: Gesetz über den Aufenthalt, die Erwerbstätigkeit und die Integration von Ausländern im Bundesgebiet
+eli: eli/bund/bgbl-1/2004/s1950/2026-10-22/1/deu
+owners: [BMI]
+visOptions:
+  - name: Visumverfahren an Auslandsvertretungen
+    visType: swimlane
+    filename: visumverfahren
+    articles: ["§6"]

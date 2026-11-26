@@ -1,0 +1,34 @@
+---
+summary: "Die verstärkte Bejagung zur Seuchenbekämpfung nach dem TierGesG: Verpflichtung des Jagdausübungsberechtigten durch Rechtsverordnung oder Verfügung, Prüfung der Wirksamkeit durch die Behörde, Anordnung der Bejagung durch andere Personen und Ersatz für den Jagdausübungsberechtigten."
+---
+swimlane-beta TD
+    subgraph VG["Verordnungsgeber"]
+        vo["Rechtsverordnung über die verstärkte<br/>Bejagung (Art und Umfang, Darlegung und<br/>Nachweis) — <a href='{{ELI}}#art-z6_abs-z1' target='_blank' rel='noopener'>§6 I Nr.28</a>, <a href='{{ELI}}#art-z6_abs-z6' target='_blank' rel='noopener'>§6 VI S.1</a><br/>(Landesregierungen, soweit das<br/>Bundesministerium keinen Gebrauch<br/>macht — <a href='{{ELI}}#art-z38_abs-z9' target='_blank' rel='noopener'>§38 IX</a>)"]
+    end
+
+    subgraph BEH["Zuständige Behörde"]
+        start(["Seuchenkranke oder infizierte Tiere<br/>halten sich in einem Gebiet auf<br/>— <a href='{{ELI}}#art-z6_abs-z6' target='_blank' rel='noopener'>§6 VI S.1</a>"])
+        anordnung["Verpflichtung des Jagdausübungsberechtigten<br/>nach der Verordnung oder, soweit sie keine<br/>Regelung trifft, per Verfügung — <a href='{{ELI}}#art-z38_abs-z11' target='_blank' rel='noopener'>§38 XI</a><br/>(Anfechtung ohne aufschiebende<br/>Wirkung — <a href='{{ELI}}#art-z37_abs-z' target='_blank' rel='noopener'>§37 S.1 Nr.9</a>)"]
+        pruefung{"Unverzügliche und<br/>wirksame Bekämpfung<br/>sichergestellt?<br/>— <a href='{{ELI}}#art-z6_abs-z6' target='_blank' rel='noopener'>§6 VI S.2</a>"}
+        dritte["Anordnung der Bejagung durch andere<br/>Personen — <a href='{{ELI}}#art-z6_abs-z6' target='_blank' rel='noopener'>§6 VI S.2</a> (Anfechtung<br/>ohne aufschiebende Wirkung — <a href='{{ELI}}#art-z37_abs-z' target='_blank' rel='noopener'>§37 S.2 Nr.2</a>)"]
+    end
+
+    subgraph AND["Andere Personen"]
+        bejagungDritte["Bejagung durch andere Personen als<br/>den Jagdausübungsberechtigten<br/>— <a href='{{ELI}}#art-z6_abs-z6' target='_blank' rel='noopener'>§6 VI S.2</a>"]
+    end
+
+    subgraph JAB["Jagdausübungsberechtigter"]
+        bejagung["Führt die verstärkte Bejagung durch<br/>und legt beabsichtigte und ergriffene<br/>Maßnahmen dar bzw. weist sie nach<br/>— <a href='{{ELI}}#art-z6_abs-z6' target='_blank' rel='noopener'>§6 VI S.1 Nr.1-2</a>"]
+        ersatz(["Angemessener Ersatz für erhöhten Aufwand<br/>oder Schaden nach Landesrecht<br/>(Inanspruchnahme als Nichtstörer)<br/>— <a href='{{ELI}}#art-z6_abs-z9' target='_blank' rel='noopener'>§6 IX S.1</a>; Kostenträger bestimmen die<br/>Länder — <a href='{{ELI}}#art-z6_abs-z9' target='_blank' rel='noopener'>§6 IX S.2</a>, <a href='{{ELI}}#art-z6_abs-z5' target='_blank' rel='noopener'>§6 V S.3</a>"])
+    end
+
+    start --> vo
+    vo --> anordnung
+    anordnung --> bejagung
+    bejagung --> pruefung
+    pruefung -->|"Ja"| ersatz
+    pruefung -->|"Nein"| dritte
+    dritte --> bejagungDritte
+    bejagungDritte -->|"überlässt erlegtes Wild<br/>auf Verlangen — <a href='{{ELI}}#art-z6_abs-z6' target='_blank' rel='noopener'>§6 VI S.3</a>"| ersatz
+
+    style ersatz fill:#d4edda,stroke:#2d8a4a
