@@ -238,6 +238,9 @@ fileignoreconfig:
     allowed_patterns:
       - storeKeys
       - keys are locals
+  - filename: src/pages/ueber/aktuelle-meldungen.astro
+    allowed_patterns:
+      - https://www.egovernment.de/bund-und-laender-gemeinsam-zu-digital-und-praxistauglichen-gesetzen-a-6285eff765889502debb1fec78e45983/
 scopeconfig:
   - scope: node
 allowed_patterns:
