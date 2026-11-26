@@ -1,18 +1,29 @@
 ---
-import MediaText from "@/components/MediaText.astro";
 import Hero from "@/components/Hero.astro";
 import FeatureSet from "@/components/FeatureSet.astro";
 import FeatureItem from "@/components/FeatureItem.astro";
+import InfoPanel from "@/components/InfoPanel.astro";
+import KernCard from "@/components/KernCard.astro";
 import illustration from "./illustration.svg";
-import gesetzentwurfImg from "./gesetzentwurf.png";
 import Layout from "@/layouts/Layout.astro";
 import { Image } from "astro:assets";
-import { ZFL_EMAIL_REGBEG, ZFL_PHONE_REGBEG } from "@/config/constants";
+import Zitat from "@/pages/werkzeuge/_assets/ki/zitat.svg";
+import analyseArbeitImg from "@/images/analyse-arbeit.jpg";
+import datenrechtImg from "@/images/Zusammenarbeit.png";
+import stromsteuerrechtImg from "@/images/Trainings.jpg";
 import IconArrowDownward from "~icons/ic/baseline-arrow-downward";
-import IconAccountTree from "~icons/ic/twotone-account-tree";
-import IconHub from "~icons/ic/twotone-hub";
-import IconLightbulb from "~icons/ic/twotone-lightbulb";
-import praxisbeispielVisImg from "@/content/visualisierungen/gesamtprozess-ueber-gesetz-und-verordnungen.jpg?url";
+import IconAdd from "~icons/ic/round-add";
+import IconCalendarToday from "~icons/ic/round-calendar-today";
+import IconComputer from "~icons/ic/round-computer";
+import IconRadar from "~icons/ic/round-radar";
+import IconDomain from "~icons/ic/round-domain";
+import IconEditNote from "~icons/ic/round-edit-note";
+import IconQuiz from "~icons/ic/round-quiz";
+import IconRoute from "~icons/ic/round-route";
+import IconStar from "~icons/ic/round-star";
+import ImageTextOverlay from "@/components/ImageTextOverlay.astro";
+import workshopImg from "@/images/regelungsbegleitung-workshop.jpg";
+import PackageCard from "@/components/PackageCard.astro";
 
 export const frontmatter = {
   title: "Regelungsbegleitung",
@@ -28,22 +39,25 @@ const description =
     <Hero level="main" class="overflow-clip">
       <div class="items-center gap-32 md:flex">
         <div>
-          <h1>Regelungsbegleitung</h1>
-          <p class="kern-subline kern-subline--large">
-            Individuelle Unterstützung für Ihr Vorhaben nutzen
+          <h1>Gezielte Unterstützung für Ihr Vorhaben</h1>
+          <p>
+            Im Rahmen einer Regelungsbegleitung ergänzt ein interdisziplinäres
+            Team Ihre fachliche Expertise. Gemeinsam schaffen Sie die Grundlage
+            für{" "}
+            <b>
+              praxisnahe, digitaltaugliche und adressatenorientierte Regelungen
+            </b>
+            .
           </p>
           <p>
-            Ein in Gesetzgebungspraxis erfahrenes interdisziplinäres Team
-            unterstützt Sie dabei, die Regelung praxisnah, digitaltauglich und
-            bürokratiearm zu gestalten.
-            <br />
-            Vertraulich und mit individuellem Fokus auf Ihr Vorhaben stehen
-            Ihnen während der Begleitung Kompetenzen in Design, Nutzerforschung,
-            IT, Produkt- und Prozessmanagement direkt zur Verfügung.
+            Haben Sie Interesse? Sie erreichen uns unter{" "}
+            <a href="tel:015170622421">0151&nbsp;/&nbsp;7062&nbsp;2421</a>{" "}
+            (Mo–Fr 9–15&nbsp;Uhr) oder per E-Mail an{" "}
+            <a href="mailto:begleitung@zfl.bund.de">begleitung@zfl.bund.de</a>.
           </p>
           <a class="kern-btn kern-btn--primary mt-32" href="#leistungspakete">
             <IconArrowDownward class="kern-label" aria-hidden />
-            <span class="kern-label">Leistungspakete anzeigen</span>
+            <span class="kern-label">Zu den Angeboten</span>
           </a>
         </div>
         <Image
@@ -55,184 +69,218 @@ const description =
       </div>
     </Hero>
     <section>
-      <h2>Ergebnisse der Zusammenarbeit</h2>
-      <p class="kern-body">
-        Wir unterstützen Sie dabei, Umsetzungsprozesse zu verstehen und
-        umzusetzen. Durch Ihre Rechtsetzungs-Expertise in Kombination mit
-        Methoden aus der agilen Software-Entwicklung entstehen somit praxisnahe
-        und bürokratiearme Gesetze, die Potentiale der Digitalisierung
-        bestmöglich ausschöpfen.
-      </p>
+      <ImageTextOverlay
+        image={workshopImg}
+        imageAlt="Vier Teilnehmerinnen und Teilnehmer stehen in einem Büro an einem Poster einer Nutzendenreise und besprechen sich."
+        look="lightLavender"
+      >
+        <h3>Was ist eine Regelungsbegleitung?</h3>
+        <p>
+          Regelungsbegleitungen sind ein Angebot des Zentrum für Legistik. Ein{" "}
+          <b>interdisziplinäres Team</b> ergänzt Ihr legistisches Fachwissen um
+          Kompetenzen aus den Bereichen Design, Nutzerzentrierung, IT und
+          Projektmanagement.
+        </p>
+        <p>
+          Vertraulich und in enger Abstimmung mit Ihnen erarbeitet das Team{" "}
+          <b>zentrale Konzeptbausteine</b> Ihres Vorhabens, veranschaulicht
+          komplexe Zusammenhänge und bezieht Adressatinnen und Adressaten aus
+          der Praxis frühzeitig ein.
+        </p>
+        <p>
+          Am Ende einer Begleitung haben Sie eine <b>fundierte Grundlage</b> für
+          die weitere Erarbeitung Ihres Vorhabens. / auf der Sie Ihre Regelung
+          aufbauen können / gestalten können
+        </p>
+      </ImageTextOverlay>
 
       <FeatureSet>
-        <FeatureItem
-          title="Sachverhalte visualisieren"
-          body="Komplexe Sachverhalte durch Prozess-Visualisierungen strukturieren, interne und externe Abstimmung vereinfachen"
-        >
-          <IconAccountTree slot="icon" class="size-full" />
+        <FeatureItem centered title="12 Ministerien unterstützt">
+          <IconDomain slot="icon" />
         </FeatureItem>
-        <FeatureItem
-          title="Umsetzung mitdenken"
-          body="Betroffenen-Perspektive frühzeitig identifizieren, bestehende Umsetzungshürden beheben"
-        >
-          <IconLightbulb slot="icon" class="size-full" />
+        <FeatureItem centered title="Über 30 Vorhaben begleitet">
+          <IconEditNote slot="icon" />
         </FeatureItem>
-        <FeatureItem
-          title="Prozesse strukturieren"
-          body="Methodische Unterstützung nutzen, Anleitungen für Praxis- und Digitaltauglichkeit erhalten"
-        >
-          <IconHub slot="icon" class="size-full" />
+        <FeatureItem centered title="93 % empfehlen das Angebot weiter">
+          <IconStar slot="icon" />
         </FeatureItem>
       </FeatureSet>
     </section>
-    <section id="leistungspakete">
-      <h2>Passende Leistungspakete für Ihr Vorhaben</h2>
-      <p class="pb-40">
-        In der folgenden Tabelle finden Sie unsere verschiedenen
-        Unterstützungsangebote im Vergleich. Alle Angebote sind kostenfrei und
-        werden vom BMDS finanziert.
+
+    <section id="leistungspakete" class="breakout bg-lavender-400">
+      <div class="w-full h-lvh mb-md bg-white border rounded-sm border-gray-300" />
+
+      <h2>Punktuelle Unterstützung</h2>
+      <p class="mb-md max-w-688">
+        Für Vorhaben, die keine mehrwöchige Begleitung benötigen, bietet Ihnen
+        das Team kompakte Arbeitspakete zur punktuellen Unterstützung.
       </p>
-      <div class="overflow-x-auto" tabindex="0">
-        <table class="zfl-table zfl-table--striped w-full table-fixed text-left">
-          <thead class="zfl-table__head">
-            <tr>
-              <th scope="col" class="w-150">
-                Kriterien
-              </th>
-              <th scope="col" class="w-235">
-                Paket S
-              </th>
-              <th scope="col" class="w-235">
-                Paket M
-              </th>
-              <th scope="col" class="w-235">
-                Paket L
-              </th>
-            </tr>
-          </thead>
-
-          <tbody class="zfl-table__body">
-            <tr>
-              <td class="font-bold">Fokus</td>
-              <td>Punktuelle Unterstützung bei Ihrer Fragestellung</td>
-              <td>Vertiefte Analyse Ihres Vorhabens</td>
-              <td>Langfristige Begleitung des Gesetzgebungsprozesses</td>
-            </tr>
-
-            <tr>
-              <td class="font-bold">Dauer</td>
-              <td>1 gemeinsame Arbeitssitzung</td>
-              <td>ca. 4 Wochen</td>
-              <td>Ab 5 Wochen</td>
-            </tr>
-
-            <tr>
-              <td class="font-bold">Team</td>
-              <td>
-                <p>1–2 Personen aus:</p>
-                <ul class="list-items">
-                  <li>Service Design</li>
-                  <li>Nutzerforschung</li>
-                </ul>
-              </td>
-              <td>
-                <p>3–4 Personen aus:</p>
-                <ul class="list-items">
-                  <li>Service Design</li>
-                  <li>Nutzerforschung</li>
-                  <li>Softwareentwicklung</li>
-                  <li>Produktmanagement</li>
-                  <li>Transformations&shy;management</li>
-                </ul>
-              </td>
-              <td>
-                <p>3–4 Personen aus:</p>
-                <ul class="list-items">
-                  <li>Service Design</li>
-                  <li>Nutzerforschung</li>
-                  <li>Softwareentwicklung</li>
-                  <li>Produktmanagement</li>
-                  <li>Transformations&shy;management</li>
-                </ul>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="font-bold">Zeitpunkt</td>
-              <td>Individuell nach Bedarf</td>
-              <td>Konzept- bis Entwurfsphase</td>
-              <td>Ab Start der Initiative</td>
-            </tr>
-
-            <tr>
-              <td class="font-bold">Tätigkeit (Beispiele)</td>
-              <td>
-                <ul class="list-items">
-                  <li>Umsetzungsperspektive besser verstehen</li>
-                  <li>gemeinsam visualisieren</li>
-                  <li>technische Fragen beantworten</li>
-                </ul>
-              </td>
-              <td>
-                <ul class="list-items">
-                  <li>
-                    Umsetzungsperspektive auf technischer, organisatorischer und
-                    rechtlicher Ebene durchdenken
-                  </li>
-                  <li>technische Lösungsideen entwickeln</li>
-                  <li>Machbarkeit validieren</li>
-                </ul>
-              </td>
-              <td>
-                <ul class="list-items">
-                  <li>Gemeinsame Analyse</li>
-                  <li>Unterstützung bei Workshops und Hausabstimmungen</li>
-                  <li>moderierter Austausch mit Umsetzungsakteuren</li>
-                  <li>Evaluation von Lösungen</li>
-                </ul>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="grid gap-32 md:grid-cols-2">
+        <PackageCard title="Problemanalyse" type="Workshop">
+          <IconQuiz slot="icon" />
+          <h4 class="kern-subline">Ausgangssituation</h4>
+          <p class="kern-body">
+            Ihr Vorhaben befindet sich noch am Anfang und Sie benötigen
+            Unterstützung beim Erschließen der Thematik oder beim methodischen
+            Vorgehen.
+          </p>
+          <h4 class="kern-subline">Angebot</h4>
+          <p class="kern-body">
+            Konzeption, Moderation und Nachbereitung eines zwei- bis
+            dreistündigen Workshops, in dem vorhandene Informationen
+            strukturiert und neue Perspektiven aufgedeckt werden.
+          </p>
+          <h4 class="kern-subline">Ergebnisse</h4>
+          <p class="kern-body">
+            Eine präzise Problembeschreibung, erste Konzeptansätze oder
+            methodische Grundlagen für das weitere Vorgehen.
+          </p>
+        </PackageCard>
+        <PackageCard title="Visualisierungen" type="Workshop">
+          <IconRoute slot="icon" />
+          <h4 class="kern-subline">Ausgangssituation</h4>
+          <p class="kern-body">
+            Sie benötigen für Ihren Regelungsentwurf eine visuelle Darstellung
+            der Inhalte, Abläufe oder der beteiligten Personen und
+            Organisationen.
+          </p>
+          <h4 class="kern-subline">Angebot</h4>
+          <p class="kern-body">
+            Konzeption, Moderation und Nachbereitung eines zwei- bis
+            dreistündigen Workshops, in dem die Darstellungsart gemeinsam
+            festgelegt und ausgearbeitet wird.
+          </p>
+          <h4 class="kern-subline">Ergebnisse</h4>
+          <p class="kern-body">
+            Ein bis zwei visuelle Darstellungen für Ihr Vorhaben, z.&nbsp;B. als
+            Flussdiagramm oder Rulemap.
+          </p>
+        </PackageCard>
+        <PackageCard title="Digitalcheck-Prüfung" type="Textarbeit">
+          <IconComputer slot="icon" />
+          <h4 class="kern-subline">Ausgangssituation</h4>
+          <p class="kern-body">
+            Sie arbeiten an einem Regelungsentwurf und möchten die{" "}
+            <a href="https://digitalcheck.bund.de/prinzipien">
+              Prinzipien des Digitalcheck
+            </a>{" "}
+            von Anfang an berücksichtigen und sicherstellen, dass die Inhalte
+            schlüssig sind.
+          </p>
+          <h4 class="kern-subline">Angebot</h4>
+          <p class="kern-body">
+            Prüfung der Inhalte auf Plausibilität und Digitaltauglichkeit. Eine
+            kursorische, unverbindliche Vorprüfung im Rahmen des Digitalcheck
+            ist ebenfalls möglich.
+          </p>
+          <h4 class="kern-subline">Ergebnisse</h4>
+          <p class="kern-body">
+            Eine kommentierte Fassung Ihres Textes mit konkreten und fundierten
+            Änderungsvorschlägen.
+          </p>
+        </PackageCard>
+        <div class="flex flex-col gap-8 p-24">
+          <IconAdd class="text-cosmic-blue-base size-48" aria-hidden="true" />
+          <h3 class="mt-0">Ihr individuelles Angebot</h3>
+          <p class="kern-body">
+            Falls keine der aufgeführten Lösungen zu Ihrem Vorhaben passt,
+            findet unser Team gemeinsam eine passende Lösung für Sie.
+          </p>
+        </div>
       </div>
     </section>
-    <section class="breakout bg-cosmic-blue-base text-white">
-      <h2>Regelungsbegleitung anfragen</h2>
-      <p>
-        Sie planen ein konkretes Regelungsvorhaben und wünschen sich eine
-        methodische Begleitung? Bei Fragen melden Sie sich unter:
-      </p>
-      <p>
-        Telefon: <a href={ZFL_PHONE_REGBEG.url}>{ZFL_PHONE_REGBEG.display}</a>
-      </p>
-      <p>
-        E-Mail: <a href={ZFL_EMAIL_REGBEG.url}>{ZFL_EMAIL_REGBEG.display}</a>
-      </p>
-    </section>
     <section>
-      <MediaText class="items-center" split="8-4">
-        <p class="kern-preline">Praxisbeispiel</p>
-        <h2 class="mt-0">
-          Einsatz einer Regelungsbegleitung für das Stromsteuerrecht
-        </h2>
-        <p class="kern-body italic">
-          „Die gründliche Analyse von Vollzugsprozessen hat uns geholfen, das
-          Zusammen­spiel zwischen den Regelungen und der Administration besser
-          zu verstehen und so den digitalen Vollzug zu gestalten.“
+      <InfoPanel look="blue" padding="large">
+        <h2>Jetzt unverbindlich informieren!</h2>
+        <p class="max-w-688">
+          Rufen Sie uns an unter{" "}
+          <a href="tel:015170622421" class="font-bold">
+            0151&nbsp;/&nbsp;7062&nbsp;2421
+          </a>{" "}
+          (Mo–Fr 9–15&nbsp;Uhr) oder schreiben Sie eine E-Mail an{" "}
+          <a href="mailto:begleitung@zfl.bund.de" class="font-bold">
+            begleitung@zfl.bund.de
+          </a>
+          .
         </p>
-        <a href="https://digitalservice.bund.de/blog/aktuelles-beispiel-fuer-digitaltaugliche-regelungen-das-stromsteuerrecht">
-          Zum Blogpost
-        </a>{" "}
-        / <a href={praxisbeispielVisImg}>Visualisierung ansehen</a> /{" "}
-        <a href="https://dip.bundestag.de/vorgang/gesetz-zur-modernisierung-und-zum-b%C3%BCrokratieabbau-im-strom-und-energiesteuerrecht/312306">
-          Aktuelle Fassung
-        </a>
-        <Image
-          slot="media"
-          src={gesetzentwurfImg}
-          alt="Symbolbild: ausgedruckter Gesetzentwurf"
+      </InfoPanel>
+
+      <FeatureSet>
+        <FeatureItem
+          centered
+          title="Interdisziplinäres Team"
+          body="Sie profitieren von umfassender Digital-, Visualisierungs- und Prozesskompetenz."
+          titleClass="kern-heading-medium"
+        >
+          <IconRadar slot="icon" />
+        </FeatureItem>
+        <FeatureItem
+          centered
+          title="Individuelle Gestaltung"
+          body="Formate, Methoden und Dauer werden auf Ihr Vorhaben zugeschnitten."
+          titleClass="kern-heading-medium"
+        >
+          <IconCalendarToday slot="icon" />
+        </FeatureItem>
+        <FeatureItem
+          centered
+          title="Kompakte Abstimmung"
+          body="Für die Zusammenarbeit genügen oft wenige Stunden pro Woche."
+          titleClass="kern-heading-medium"
+        >
+          <IconStar slot="icon" />
+        </FeatureItem>
+      </FeatureSet>
+    </section>
+
+    <section class="breakout bg-surface-default">
+      <figure class="flex flex-col items-center gap-16 text-center">
+        <Zitat class="text-lavender-base mb-16" aria-hidden="true" />
+        <blockquote class="max-w-688">
+          <p class="kern-subline kern-subline--large kern-subline-dark">
+            Die Zusammenarbeit war sehr hilfreich! Es sind neue Konzepte
+            entstanden. Ich war sehr angetan von der Durchdringungstiefe in der
+            Analyse. Das ist ein echter Mehrwert.
+          </p>
+        </blockquote>
+        <figcaption>– Referent, BMJV</figcaption>
+      </figure>
+    </section>
+
+    <section>
+      <h2>Beispiele aus Regelungsbegleitungen</h2>
+      <p>
+        Einige Ergebnisse vergangener Regelungsbegleitungen finden Sie hier.
+      </p>
+      <div class="mt-md grid grid-cols-1 gap-32 md:grid-cols-3">
+        <KernCard
+          headingLevel={3}
+          preline="BMLEH"
+          title="Interdisziplinär zu besseren Gesetzen"
+          subline="Thema: Dokumentations- und Meldepflichten"
+          href="https://digitalservice.bund.de/blog/interdisziplinaer-zu-besseren-gesetzen"
+          image={analyseArbeitImg}
+          imageAlt="Mehrere Personen sitzen um einen Tisch mit ausgedruckten Unterlagen und bunten Klebezetteln."
         />
-      </MediaText>
+        <KernCard
+          headingLevel={3}
+          preline="NKR · BMDS · BK"
+          title="Erst das Problem, dann die Lösung: Bürokratieabbau im Datenrecht"
+          subline="Thema: Dokumentations- und Meldepflichten"
+          href="https://digitalservice.bund.de/blog/erst-das-problem-dann-die-loesung-buerokratieabbau-im-datenrecht"
+          image={datenrechtImg}
+          imageAlt="Zwei Personen arbeiten an einem Whiteboard mit Notizen und Klebezetteln."
+        />
+        <KernCard
+          headingLevel={3}
+          preline="BMF"
+          title="Aktuelles Beispiel für digitaltaugliche Regelungen: das Stromsteuerrecht"
+          subline="Thema: Stromsteuerrecht"
+          href="https://digitalservice.bund.de/blog/aktuelles-beispiel-fuer-digitaltaugliche-regelungen-das-stromsteuerrecht"
+          image={stromsteuerrechtImg}
+          imageAlt="Eine Hand zeichnet ein Prozessdiagramm auf ausgedrucktes Papier."
+        />
+      </div>
     </section>
   </main>
 </Layout>
