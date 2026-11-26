@@ -1,0 +1,29 @@
+var e=`---
+summary: "Die Voraussetzungen und Ermessensspielräume der Behörde bei der Anordnung einer Absonderung nach §30 IfSG, einschließlich der Unterscheidung zwischen zwingender, ermessensabhängiger und zwangsweiser Absonderung."
+---
+flowchart TD
+    START["Kranker, Krankheitsverdächtiger,<br/>Ansteckungsverdächtiger oder Ausscheider<br/>festgestellt"] --> F1{"Erkrankung oder Verdacht auf<br/>Lungenpest oder von Mensch zu<br/>Mensch übertragbares<br/>hämorrhagisches Fieber? — <a href='{{ELI}}#art-z30_abs-z1' target='_blank' rel='noopener'>§30<br/>Abs.1 S.1</a>"}
+
+    F1 -->|Ja| ZWING["Behörde muss unverzüglich die<br/>Absonderung in einem Krankenhaus oder<br/>geeigneter Einrichtung anordnen<br/>(gebundene Entscheidung) — <a href='{{ELI}}#art-z30_abs-z1' target='_blank' rel='noopener'>§30 Abs.1 S.1</a>"]
+    F1 -->|Nein| F2{"Handelt es sich um einen<br/>Ausscheider? — <a href='{{ELI}}#art-z30_abs-z1' target='_blank' rel='noopener'>§30 Abs.1 S.2</a>"}
+
+    F2 -->|Nein| ERM["Behörde kann Absonderung in geeignetem<br/>Krankenhaus oder sonst geeigneter Weise<br/>anordnen (Ermessen) — <a href='{{ELI}}#art-z30_abs-z1' target='_blank' rel='noopener'>§30 Abs.1 S.2</a>"]
+    F2 -->|Ja| F3{"Befolgt der Ausscheider andere<br/>Schutzmaßnahmen nicht, kann<br/>oder würde er sie nicht<br/>befolgen und gefährdet dadurch<br/>seine Umgebung? — <a href='{{ELI}}#art-z30_abs-z1' target='_blank' rel='noopener'>§30 Abs.1<br/>S.2</a>"}
+
+    F3 -->|Nein| KEINE["Keine Absonderung des Ausscheiders"]
+    F3 -->|Ja| ERM
+
+    ZWING --> F4
+    ERM --> F4{"Kommt der Betroffene der<br/>Anordnung nicht nach, oder ist<br/>anzunehmen, dass er ihr nicht<br/>ausreichend Folge leisten<br/>wird? — <a href='{{ELI}}#art-z30_abs-z2' target='_blank' rel='noopener'>§30 Abs.2 S.1</a>"}
+
+    F4 -->|Ja| ZWANG["Zwangsweise Unterbringung in<br/>abgeschlossenem Krankenhaus(-teil) oder<br/>geeigneter abgeschlossener Einrichtung<br/>— <a href='{{ELI}}#art-z30_abs-z2' target='_blank' rel='noopener'>§30 Abs.2</a>"]
+    F4 -->|Nein| FREIW["Absonderung in offener Form;<br/>Betroffener hat Anordnungen zu befolgen<br/>und Maßnahmen zu dulden — <a href='{{ELI}}#art-z30_abs-z3' target='_blank' rel='noopener'>§30 Abs.3 S.1</a>"]
+
+    ZWANG --> ENDE["Absonderung bis zum Wegfall der<br/>Voraussetzungen"]
+    FREIW --> ENDE
+
+    style KEINE fill:#d4edda,stroke:#2d8a4a
+    style ZWANG fill:#f8d7da,stroke:#c0392b
+    style FREIW fill:#fff3cd,stroke:#c9a227
+    style ENDE fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};
