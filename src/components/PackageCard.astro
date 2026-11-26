@@ -7,6 +7,7 @@ import { tv } from "@/utils/tv";
  * Card with a title, an optional icon, and an optional badge.
  * Pass the icon in the `icon` slot.
  * The default slot is placed below the title: use `h4` and `p` elements, each `h4` gets a top margin.
+ * With `large`, the default slot sets its own spacing.
  *
  * @example
  * <PackageCard title="Titel" type="Label">
@@ -20,17 +21,34 @@ interface Props extends HTMLAttributes<"article"> {
   title: string;
   /** Label shown as a badge in the top-right corner. */
   type?: string;
+  /** Larger title, no automatic spacing in the default slot. Default: `false`. */
+  large?: boolean;
 }
 
 const styles = tv({
-  base: "border-kern-border-contextual flex flex-col rounded-sm border bg-white p-24 [&>h4]:mt-16",
+  slots: {
+    base: "border-kern-border-contextual flex flex-col rounded-sm border bg-white p-24",
+    heading: "my-8",
+  },
+  variants: {
+    large: {
+      false: {
+        base: "[&>h4]:mt-16",
+        heading: "kern-heading-medium",
+      },
+      true: {
+        heading: "kern-heading-large",
+      },
+    },
+  },
 });
 
-const { title, type, class: className, ...attrs } = Astro.props;
+const { title, type, large = false, class: className, ...attrs } = Astro.props;
+const { base, heading } = styles({ large });
 ---
 
-<article class={styles({ class: className })} {...attrs}>
-  <h3 class="my-8">{title}</h3>
+<article class={base({ class: className })} {...attrs}>
+  <h3 class={heading()}>{title}</h3>
   <div class="flex items-start gap-8 -order-1">
     {Astro.slots.has("icon") && (
       <div
