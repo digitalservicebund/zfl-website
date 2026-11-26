@@ -24,6 +24,7 @@ import IconStar from "~icons/ic/round-star";
 import ImageTextOverlay from "@/components/ImageTextOverlay.astro";
 import workshopImg from "@/images/regelungsbegleitung-workshop.jpg";
 import PackageCard from "@/components/PackageCard.astro";
+import OfferCard from "./_OfferCard.astro";
 
 export const frontmatter = {
   title: "Regelungsbegleitung",
@@ -74,7 +75,7 @@ const description =
         imageAlt="Vier Teilnehmerinnen und Teilnehmer stehen in einem Büro an einem Poster einer Nutzendenreise und besprechen sich."
         look="lightLavender"
       >
-        <h3>Was ist eine Regelungsbegleitung?</h3>
+        <h2>Was ist eine Regelungsbegleitung?</h2>
         <p>
           Regelungsbegleitungen sind ein Angebot des Zentrum für Legistik. Ein{" "}
           <b>interdisziplinäres Team</b> ergänzt Ihr legistisches Fachwissen um
@@ -108,7 +109,7 @@ const description =
     </section>
 
     <section id="leistungspakete" class="breakout bg-lavender-400">
-      <div class="w-full h-lvh mb-md bg-white border rounded-sm border-gray-300" />
+      <OfferCard />
 
       <h2>Punktuelle Unterstützung</h2>
       <p class="mb-md max-w-688">

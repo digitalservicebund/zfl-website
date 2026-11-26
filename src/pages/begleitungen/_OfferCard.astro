@@ -1,0 +1,100 @@
+---
+import PackageCard from "@/components/PackageCard.astro";
+import KernAccordion from "@/components/KernAccordion.astro";
+import Checklist from "@/components/Checklist.astro";
+import ChecklistItem from "@/components/ChecklistItem.astro";
+import {
+  werkzeuge_ressourcen_interviewleitfaden,
+  werkzeuge_ressourcen_visualisierungen,
+} from "@/config/routes";
+import IconGroups from "~icons/ic/round-groups";
+---
+
+<PackageCard title="Regelungsbegleitung" type="Mehrwöchige Unterstützung" large>
+  <IconGroups slot="icon" />
+
+  <div class="mt-32 grid gap-32 md:grid-cols-2">
+    <div>
+      <h4 class="kern-subline">Ausgangssituation</h4>
+      <p class="kern-body">
+        Sie stehen am Anfang eines Vorhabens, das z.&nbsp;B. technische
+        Anforderungen oder hohen Abstimmungsbedarf hat. Für die Klärung
+        zentraler Fragestellungen und die Entwicklung praxistauglicher Lösungen
+        bedarf es zusätzlicher Kompetenzen.
+      </p>
+    </div>
+    <div>
+      <h4 class="kern-subline">Angebot</h4>
+      <p class="kern-body">
+        Ein dreiköpfiges Team begleitet Ihr Vorhaben mit Methoden aus Design,
+        Nutzerzentrierung, IT und Projektmanagement. Dazu gehören{" "}
+        <a href={werkzeuge_ressourcen_visualisierungen.path}>
+          Visualisierungen komplexer Abläufe
+        </a>
+        , Problemanalysen und{" "}
+        <a href={werkzeuge_ressourcen_interviewleitfaden.path}>
+          Interviews mit Adressatinnen und Adressaten
+        </a>
+        .
+      </p>
+    </div>
+    <div>
+      <h4 class="kern-subline">Ergebnisse</h4>
+      <p class="kern-body">
+        Sie erhalten konkrete Arbeitsgrundlagen für die weitere Ausgestaltung
+        Ihres Vorhabens. Diese helfen Ihnen, Umsetzungshürden frühzeitig zu
+        erkennen sowie Praxis- und Digitaltauglichkeit von Anfang an
+        mitzudenken.
+      </p>
+    </div>
+    <div>
+      <h4 class="kern-subline">Zeitaufwand</h4>
+      <p class="kern-body">
+        Eine Begleitung dauert rund sechs Wochen. Ihr Referat stellt eine feste
+        Ansprechperson, die das Team für etwa zwei bis drei Stunden pro Woche
+        unterstützt, Fachwissen einbringt, relevante Materialien bereitstellt
+        und Kontakte vermittelt.
+      </p>
+    </div>
+  </div>
+
+  <div class="mt-32">
+    <h4 class="kern-subline">Beispielhafter Ablauf</h4>
+    {/* TODO: horizontal TimelineList */}
+    <div class="bg-surface-default rounded-sm mt-16 h-380"></div>
+  </div>
+
+  <KernAccordion
+    open
+    fullWidth={false}
+    class="mt-32 border-kern-border-contextual"
+  >
+    <span slot="header">
+      Eignet sich Ihr Vorhaben für eine Regelungsbegleitung?
+    </span>
+    <Checklist slot="body" class="space-y-24">
+      <ChecklistItem heading="Ihr Vorhaben steht am Anfang">
+        <p>
+          Ihr Vorhaben befindet sich in der Konzeptphase und es gibt noch
+          inhaltliche Gestaltungsspielräume.
+        </p>
+      </ChecklistItem>
+      <ChecklistItem heading="Sie haben Bedarf an zusätzlichen Kompetenzen">
+        <p>
+          Für zentrale Fragestellungen Ihres Vorhabens benötigen Sie
+          Unterstützung bei der Darstellung komplexer Abläufe, der Analyse
+          bestehender Prozesse oder Expertise aus Bereichen wie Digitalisierung
+          und IT.
+        </p>
+      </ChecklistItem>
+      <ChecklistItem heading="Sie sind bereit, Perspektiven aus der Praxis einzubeziehen">
+        <p>
+          Um Ihr Vorhaben praxistauglich zu gestalten, möchten Sie Adressatinnen
+          und Adressaten frühzeitig miteinbeziehen. Dies geschieht z.&nbsp;B. in
+          vertraulichen Gesprächen mit Bürgerinnen und Bürgern, Ansprechpersonen
+          aus der Wirtschaft sowie mit den Ländern.
+        </p>
+      </ChecklistItem>
+    </Checklist>
+  </KernAccordion>
+</PackageCard>
