@@ -1,3 +1,5 @@
+import type { LawOwner } from "@/content.config";
+
 export interface SearchEntry {
   /** Unique per diagram, e.g. "BEEG/anspruchsvoraussetzungen" */
   key: string;
@@ -9,6 +11,10 @@ export interface SearchEntry {
   summary: string;
   filename: string;
   href: string;
+  /** Articles the diagram is based on, e.g. ["§13", "§§18-20"] */
+  articles: string[];
+  /** Ministries responsible for the law */
+  owners: LawOwner[];
 }
 
 export const MIN_QUERY_LENGTH = 2;

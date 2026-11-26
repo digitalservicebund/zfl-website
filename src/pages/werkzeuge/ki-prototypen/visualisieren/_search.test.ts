@@ -14,6 +14,8 @@ function entry(
     summary,
     filename: name,
     href: "",
+    articles: [],
+    owners: [],
   };
 }
 

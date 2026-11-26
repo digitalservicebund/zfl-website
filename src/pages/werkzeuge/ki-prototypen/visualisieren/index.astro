@@ -32,10 +32,10 @@ function wizardHref(short: string, visualization: string) {
 
 // One entry per diagram that has a .mmd file
 const searchEntries: SearchEntry[] = await Promise.all(
-  examples.flatMap(({ short, title, visOptions }) =>
+  examples.flatMap(({ short, title, owners, visOptions }) =>
     visOptions
       .filter(({ filename }) => hasMmd(short, filename))
-      .map(async ({ name, filename = "" }) => ({
+      .map(async ({ name, filename = "", articles }) => ({
         key: `${short}/${filename}`,
         short,
         lawTitle: title,
@@ -43,6 +43,8 @@ const searchEntries: SearchEntry[] = await Promise.all(
         summary: (await loadMmd(short, filename)).summary,
         filename,
         href: wizardHref(short, name),
+        articles,
+        owners,
       })),
   ),
 );
@@ -103,17 +105,21 @@ const featuredExamples = featured.flatMap(({ short, visualization }) => {
       <section>
         <h2 class="pb-32">Beispiele ansehen</h2>
         <ul class="list-unstyled grid grid-cols-1 gap-24 md:grid-cols-3">
-          {featuredExamples.map(({ short, filename, name, href }) => (
-            <li>
-              <DiagramCard
-                client:load
-                short={short}
-                filename={filename}
-                title={name}
-                href={href}
-              />
-            </li>
-          ))}
+          {featuredExamples.map(
+            ({ short, filename, name, href, owners, articles }) => (
+              <li>
+                <DiagramCard
+                  client:load
+                  short={short}
+                  filename={filename}
+                  title={name}
+                  href={href}
+                  owners={owners}
+                  articles={articles}
+                />
+              </li>
+            ),
+          )}
         </ul>
       </section>
     )}

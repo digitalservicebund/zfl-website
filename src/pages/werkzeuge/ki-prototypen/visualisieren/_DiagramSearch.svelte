@@ -96,6 +96,7 @@
             filename={entry.filename}
             title={entry.name}
             href={entry.href}
+            articles={entry.articles}
           />
         </li>
       {/each}
