@@ -1,37 +1,52 @@
 <script lang="ts">
-  import mermaid from "mermaid";
-  import { onMount } from "svelte";
+  import { loadPreviewSource } from "./_previewSource.ts";
+  import { cachedPreview, renderPreview } from "./_previewRenderer.ts";
 
-  // `source` must carry its own Mermaid config (frontmatter): several
-  // previews render in parallel, so the global mermaid.initialize() config
-  // can't be switched per diagram.
-  let { source, id }: { source: string; id: string } = $props();
+  let { short, filename }: { short: string; filename: string } = $props();
 
-  // Fits the diagram to the preview's width, so it is never cropped at the
-  // sides; tall diagrams are cropped at the bottom by the parent instead.
-  // Small diagrams don't blow up beyond this zoom (relative to their natural
-  // size).
-  const MAX_SCALE = 0.5;
+  const key = $derived(`${short}/${filename}`);
+  let svg = $derived(cachedPreview(key));
+  let container: HTMLDivElement;
 
-  let svg = $state("");
-
-  onMount(() => {
-    mermaid.initialize({ startOnLoad: false });
-    mermaid.render(id, source).then(({ svg: rendered }) => {
-      // The first max-width is the one on the root <svg>, holding its
-      // natural width.
-      svg = rendered.replace(
-        /max-width:\s*([\d.]+)px/,
-        (_, width: string) =>
-          `width: 100%; max-width: ${Number(width) * MAX_SCALE}px`,
-      );
-    });
+  // Only renders once the preview (nearly) scrolls into view.
+  $effect(() => {
+    if (svg) return;
+    const controller = new AbortController();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        observer.disconnect();
+        renderPreview(
+          key,
+          () => loadPreviewSource(short, filename),
+          controller.signal,
+        )
+          .then((rendered) => {
+            if (rendered) svg = rendered;
+          })
+          .catch((error: unknown) => {
+            console.error(`Preview of ${key} failed`, error);
+          });
+      },
+      { rootMargin: "200px" },
+    );
+    observer.observe(container);
+    return () => {
+      observer.disconnect();
+      controller.abort();
+    };
   });
 </script>
 
-<div class="preview flex items-start justify-center" aria-hidden="true">
-  <!-- eslint-disable-next-line svelte/no-at-html-tags -- svg comes from mermaid.render() on our own bundled .mmd sources, not user input -->
-  {@html svg}
+<div
+  bind:this={container}
+  class="preview flex h-full items-start justify-center"
+  aria-hidden="true"
+>
+  {#if svg}
+    <!-- eslint-disable-next-line svelte/no-at-html-tags -- svg comes from mermaid.render() on our own bundled .mmd sources, not user input -->
+    {@html svg}
+  {/if}
 </div>
 
 <style>

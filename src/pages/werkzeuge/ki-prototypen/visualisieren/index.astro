@@ -1,18 +1,13 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
-import FeatureSet from "@/components/FeatureSet.astro";
-import FeatureItem from "@/components/FeatureItem.astro";
-import IconShare from "~icons/ic/twotone-share";
-import IconLightbulb from "~icons/ic/twotone-lightbulb";
-import IconEye from "~icons/ic/twotone-remove-red-eye";
 import { werkzeuge_kiPrototypen_visualisieren_erstellen } from "@/config/routes";
 import AIDisclaimer from "@/pages/werkzeuge/ki-prototypen/_shared/AIDisclaimer.astro";
 import { getVisualisierungExamples } from "./_examples.ts";
-import DiagramCard from "./_DiagramCard.astro";
-import { parseMmdFrontmatter } from "./_mmdFrontmatter.ts";
-import { wrappingWidthFor } from "./_mermaidConfig.ts";
-import { stripLinks } from "./_diagramExport.ts";
+import DiagramCard from "./_DiagramCard.svelte";
+import DiagramSearch from "./_DiagramSearch.svelte";
+import { hasMmd, loadMmd } from "./_previewSource.ts";
+import type { SearchEntry } from "./_search.ts";
 
 export const frontmatter = {
   title: "Prototyp: Gesetze visualisieren",
@@ -28,42 +23,36 @@ const featured = [
   { short: "AsylG", visualization: "Asylverfahren-Ablauf" },
   { short: "OZG", visualization: "Akteure und Zuständigkeiten" },
 ];
-const mermaidSources = import.meta.glob<string>(
-  "../../../../content/ki-visualisierungen/*/*.mmd",
-  { query: "?raw", import: "default" },
-);
 const examples = await getVisualisierungExamples();
-const featuredExamples = (
-  await Promise.all(
-    featured.map(async ({ short, visualization }) => {
-      const example = examples.find((e) => e.short === short);
-      const option = example?.visOptions.find((o) => o.name === visualization);
-      const loadSource =
-        mermaidSources[
-          `../../../../content/ki-visualisierungen/${short}/${option?.filename}.mmd`
-        ];
-      if (!option || !loadSource) return undefined;
-      // Links inside the labels would end up nested in the preview's link.
-      const body = stripLinks(parseMmdFrontmatter(await loadSource()).body);
-      // Per-diagram config, see _DiagramPreview.svelte
-      const config = `---
-config:
-  htmlLabels: true
-  flowchart:
-    htmlLabels: true
-    wrappingWidth: ${wrappingWidthFor(body)}
----
-`;
-      const params = new URLSearchParams({ norm: short, visualization });
-      return {
+
+function wizardHref(short: string, visualization: string) {
+  const params = new URLSearchParams({ norm: short, visualization });
+  return `${wizardPath}?${params}`;
+}
+
+// One entry per diagram that has a .mmd file
+const searchEntries: SearchEntry[] = await Promise.all(
+  examples.flatMap(({ short, title, visOptions }) =>
+    visOptions
+      .filter(({ filename }) => hasMmd(short, filename))
+      .map(async ({ name, filename = "" }) => ({
+        key: `${short}/${filename}`,
         short,
-        option,
-        source: config + body,
-        href: `${wizardPath}?${params}`,
-      };
-    }),
-  )
-).filter((e) => e !== undefined);
+        lawTitle: title,
+        name,
+        summary: (await loadMmd(short, filename)).summary,
+        filename,
+        href: wizardHref(short, name),
+      })),
+  ),
+);
+
+const featuredExamples = featured.flatMap(({ short, visualization }) => {
+  const entry = searchEntries.find(
+    (e) => e.short === short && e.name === visualization,
+  );
+  return entry ? [entry] : [];
+});
 ---
 
 <Layout title={frontmatter.title} excludeFromSearch>
@@ -102,56 +91,26 @@ config:
     </section>
 
     <section>
-      <h2>Warum eine Visualisierung erstellen?</h2>
-      <FeatureSet>
-        <FeatureItem>
-          <IconShare slot="icon" class="size-full" />
-          <p>
-            Frühzeitig <strong>Komplexität</strong> erkennen und{" "}
-            <strong>reduzieren</strong>
-          </p>
-        </FeatureItem>
-        <FeatureItem>
-          <IconLightbulb slot="icon" class="size-full" />
-          <p>
-            <strong>Chancen und Hürden</strong> der Digitalisierung erkennen
-          </p>
-        </FeatureItem>
-        <FeatureItem>
-          <IconEye slot="icon" class="size-full" />
-          <p>
-            <strong>Abstimmung</strong> vereinfachen, z.&nbsp;B. im Ressort und
-            mit Verbänden
-          </p>
-        </FeatureItem>
-      </FeatureSet>
-    </section>
-
-    <section class="breakout bg-lavender-200">
-      <h2 class="mb-24">Visualisierung jetzt starten</h2>
-      <p class="mb-32">
-        Visualisieren Sie den Vollzug Ihrer Regelung, um Zusammenhänge besser zu
-        verstehen und Ihr Vorhaben zu optimieren.
-      </p>
-      <div>
-        <a href={wizardPath} class="kern-btn kern-btn--primary">
-          <span class="kern-label">Jetzt starten</span>
-        </a>
-      </div>
+      <h2>Visualisierungen jetzt erstellen</h2>
+      <DiagramSearch
+        client:load
+        entries={searchEntries}
+        wizardHref={wizardPath}
+      />
     </section>
 
     {featuredExamples.length > 0 && (
       <section>
         <h2 class="pb-32">Beispiele ansehen</h2>
         <ul class="list-unstyled grid grid-cols-1 gap-24 md:grid-cols-3">
-          {featuredExamples.map(({ short, option, source, href }, i) => (
+          {featuredExamples.map(({ short, filename, name, href }) => (
             <li>
               <DiagramCard
-                preline={short}
-                title={option.name}
+                client:visible
+                short={short}
+                filename={filename}
+                title={name}
                 href={href}
-                source={source}
-                id={`beispiel-${i}`}
               />
             </li>
           ))}
