@@ -15,6 +15,7 @@ import KernBadge from "@/components/KernBadge.astro";
 import KernCard from "@/components/KernCard.astro";
 import MediaText from "@/components/MediaText.astro";
 import Modal from "@/components/modal/Modal.astro";
+import PackageCard from "@/components/PackageCard.astro";
 import PostTeaser from "@/components/PostTeaser.astro";
 import PrinzipBadge from "@/components/PrinzipBadge.astro";
 import SkipNavLink from "@/components/SkipNavLink.astro";
@@ -28,6 +29,8 @@ import IconBuild from "~icons/ic/outline-build";
 import IconDevices from "~icons/ic/outline-devices";
 import IconInfo from "~icons/ic/outline-info";
 import IconWidgets from "~icons/ic/twotone-widgets";
+import IconAdd from "~icons/ic/round-add";
+import IconQuiz from "~icons/ic/round-quiz";
 import { multiSeries, pieData, singleSeries } from "./_chart-data";
 
 export const frontmatter = {
@@ -62,6 +65,11 @@ export const frontmatter = {
         <div class="bg-lavender-400 p-16">
           <Badge look="white">Weißer Badge</Badge>
         </div>
+      </div>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">look: outline</p>
+        <Badge look="outline">Outline Badge</Badge>
       </div>
 
       <div class="space-y-32">
@@ -746,6 +754,34 @@ export const frontmatter = {
               decoding="async"
             />
           </Modal>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PackageCard ───────────────────────────────────────────────── -->
+    <section class="space-y-48">
+      <h2>PackageCard</h2>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">mit / ohne Icon und Badge</p>
+        <div class="bg-lavender-400 grid gap-32 p-16 md:grid-cols-2">
+          <PackageCard title="Titel" type="Badge">
+            <IconQuiz slot="icon" />
+            <h4 class="kern-subline">Erster Zwischentitel</h4>
+            <p class="kern-body">Kurzer Text zum ersten Zwischentitel.</p>
+            <h4 class="kern-subline">Zweiter Zwischentitel</h4>
+            <p class="kern-body">Kurzer Text zum zweiten Zwischentitel.</p>
+          </PackageCard>
+          <PackageCard title="Mit Icon, ohne Badge">
+            <IconAdd slot="icon" />
+            <p class="kern-body">Karte ohne type-Badge.</p>
+          </PackageCard>
+          <PackageCard title="Ohne Icon, mit Badge" type="Badge">
+            <p class="kern-body">Karte ohne Icon.</p>
+          </PackageCard>
+          <PackageCard title="Ohne Icon und Badge">
+            <p class="kern-body">Karte ohne Icon und Badge.</p>
+          </PackageCard>
         </div>
       </div>
     </section>
