@@ -1,10 +1,38 @@
-<details class="kern-accordion">
+---
+import type { HTMLAttributes } from "astro/types";
+import { tv } from "@/utils/tv";
+
+/**
+ * KERN accordion with `header` and `body` slots. Accepts `details` attributes like `open`.
+ *
+ * @example
+ * <KernAccordion open>
+ *   <span slot="header">Überschrift</span>
+ *   <p slot="body">Inhalt.</p>
+ * </KernAccordion>
+ */
+interface Props extends HTMLAttributes<"details"> {
+  /** Makes the body content full width. Default: `true`. */
+  fullWidth?: boolean;
+}
+
+const styles = tv({ base: "kern-accordion" });
+
+const { fullWidth = true, class: className, ...attrs } = Astro.props;
+---
+
+<details class={styles({ class: className })} {...attrs}>
   <summary class="kern-accordion__header">
     <span class="kern-title">
       <slot name="header" />
     </span>
   </summary>
-  <section class="kern-accordion__body accordion-body-full-width">
+  <section
+    class:list={[
+      "kern-accordion__body",
+      fullWidth && "accordion-body-full-width",
+    ]}
+  >
     <slot name="body" />
   </section>
 </details>

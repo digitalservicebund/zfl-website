@@ -600,6 +600,17 @@ export const frontmatter = {
           </KernAccordion>
         </div>
       </div>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">open, fullWidth: false</p>
+        <KernAccordion open fullWidth={false}>
+          <span slot="header">Geöffnet, mit eigener Breite</span>
+          <p slot="body">
+            Das Akkordeon ist beim Laden geöffnet. Der Absatz behält seine
+            max-width, statt die volle Breite zu nutzen.
+          </p>
+        </KernAccordion>
+      </div>
     </section>
 
     <!-- ─── KernCard ──────────────────────────────────────────────────── -->
