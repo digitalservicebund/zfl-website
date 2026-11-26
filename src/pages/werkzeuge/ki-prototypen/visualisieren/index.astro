@@ -106,7 +106,7 @@ const featuredExamples = featured.flatMap(({ short, visualization }) => {
           {featuredExamples.map(({ short, filename, name, href }) => (
             <li>
               <DiagramCard
-                client:visible
+                client:load
                 short={short}
                 filename={filename}
                 title={name}
