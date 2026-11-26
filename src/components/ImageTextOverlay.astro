@@ -4,6 +4,7 @@ import { Image } from "astro:assets";
 import InfoPanel, {
   type Props as InfoPanelProps,
 } from "@/components/InfoPanel.astro";
+import { tv } from "@/utils/tv";
 
 interface Props {
   image: ImageMetadata;
@@ -15,8 +16,27 @@ interface Props {
   icon?: string;
   look?: InfoPanelProps["look"];
   padding?: InfoPanelProps["padding"];
+  panelClass?: InfoPanelProps["class"];
   reversed?: boolean;
 }
+
+const panelStyles = tv({
+  base: "z-1 self-start lg:col-span-3 lg:w-600 lg:self-center",
+  variants: {
+    reversed: { true: "lg:col-start-4 lg:justify-self-end" },
+  },
+});
+
+const imageStyles = tv({
+  base: "object-cover lg:absolute lg:h-482 lg:w-727",
+  variants: {
+    reversed: {
+      true: "lg:left-1",
+      false: "lg:right-1",
+    },
+    imageBorder: { true: "border-lavender-base border" },
+  },
+});
 
 const {
   image,
@@ -28,6 +48,7 @@ const {
   icon = "arrow-forward",
   look = "gray",
   padding = "medium",
+  panelClass,
   reversed = false,
 } = Astro.props;
 ---
@@ -36,10 +57,7 @@ const {
   <InfoPanel
     look={look}
     padding={padding}
-    class:list={[
-      "z-1 self-start lg:col-span-3 lg:w-600 lg:self-center",
-      reversed && "lg:col-start-4 lg:justify-self-end",
-    ]}
+    class={panelStyles({ class: panelClass, reversed })}
   >
     <slot />
     {linkHref && linkText && (
@@ -56,11 +74,6 @@ const {
   <Image
     src={image}
     alt={imageAlt}
-    class:list={[
-      "object-cover lg:absolute lg:h-482 lg:w-727",
-      reversed ? "lg:left-1" : "lg:right-1",
-      imageBorder && "border border-lavender-base",
-      imageClass,
-    ]}
+    class={imageStyles({ class: imageClass, reversed, imageBorder })}
   />
 </div>
