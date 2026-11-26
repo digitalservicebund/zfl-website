@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { liveAi } from "@/config/features";
+  import { ZFL_EMAIL } from "@/config/constants";
+  import { mailto } from "@/utils/mailtoHelper";
   import DiagramCard from "./_DiagramCard.svelte";
   import {
     MIN_QUERY_LENGTH,
@@ -9,11 +10,14 @@
 
   interface Props {
     entries: SearchEntry[];
-    /** Wizard, offered when nothing matches and own drafts can be visualised */
-    wizardHref: string;
   }
 
-  let { entries, wizardHref }: Props = $props();
+  let { entries }: Props = $props();
+
+  const suggestionHref = mailto(
+    ZFL_EMAIL.url,
+    "Vorschlag für Gesetze visualisieren",
+  );
 
   const PAGE_SIZE = 9;
   const DEBOUNCE_MS = 200;
@@ -70,15 +74,23 @@
   </form>
 
   <div aria-live="polite">
-    {#if active}
+    {#if active && results.length === 0}
+      <div class="flex flex-col items-start gap-16">
+        <p class="kern-body mb-0 italic">
+          Keine Visualisierung gefunden. Ihr Gesetz ist nicht dabei? Schreiben
+          Sie uns!
+        </p>
+        <a class="kern-btn kern-btn--secondary" href={suggestionHref}>
+          <span
+            class="kern-icon kern-icon--mail kern-icon--default"
+            aria-hidden="true"
+          ></span>
+          <span class="kern-label">Vorschlag einreichen</span>
+        </a>
+      </div>
+    {:else if active}
       <p class="kern-body mb-0">
-        {#if results.length === 0}
-          Keine Visualisierung gefunden.
-          {#if liveAi}
-            Ihr Gesetz ist nicht dabei?
-            <a href={wizardHref}>Eigenen Entwurf visualisieren</a>
-          {/if}
-        {:else if results.length === 1}
+        {#if results.length === 1}
           1 Visualisierung gefunden
         {:else}
           {results.length} Visualisierungen gefunden

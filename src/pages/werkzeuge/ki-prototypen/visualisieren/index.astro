@@ -94,11 +94,7 @@ const featuredExamples = featured.flatMap(({ short, visualization }) => {
 
     <section>
       <h2>Visualisierungen jetzt erstellen</h2>
-      <DiagramSearch
-        client:load
-        entries={searchEntries}
-        wizardHref={wizardPath}
-      />
+      <DiagramSearch client:load entries={searchEntries} />
     </section>
 
     {featuredExamples.length > 0 && (
