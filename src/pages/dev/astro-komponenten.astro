@@ -3,6 +3,8 @@ import Badge from "@/components/Badge.astro";
 import Banner from "@/components/Banner.astro";
 import Callout from "@/components/Callout.astro";
 import Chart from "@/components/Chart.astro";
+import Checklist from "@/components/Checklist.astro";
+import ChecklistItem from "@/components/ChecklistItem.astro";
 import InfoPanel from "@/components/InfoPanel.astro";
 import FeatureItem from "@/components/FeatureItem.astro";
 import FeatureSet from "@/components/FeatureSet.astro";
@@ -15,11 +17,13 @@ import KernBadge from "@/components/KernBadge.astro";
 import KernCard from "@/components/KernCard.astro";
 import MediaText from "@/components/MediaText.astro";
 import Modal from "@/components/modal/Modal.astro";
+import PackageCard from "@/components/PackageCard.astro";
 import PostTeaser from "@/components/PostTeaser.astro";
 import PrinzipBadge from "@/components/PrinzipBadge.astro";
 import SkipNavLink from "@/components/SkipNavLink.astro";
 import StepNumber from "@/components/StepNumber.astro";
 import TimelineList from "@/components/TimelineList.astro";
+import TimelineListItem from "@/components/TimelineListItem.astro";
 import trainingImage from "@/images/Trainings.jpg";
 import Layout from "@/layouts/Layout.astro";
 import { Image as AstroImage } from "astro:assets";
@@ -28,6 +32,8 @@ import IconBuild from "~icons/ic/outline-build";
 import IconDevices from "~icons/ic/outline-devices";
 import IconInfo from "~icons/ic/outline-info";
 import IconWidgets from "~icons/ic/twotone-widgets";
+import IconAdd from "~icons/ic/round-add";
+import IconQuiz from "~icons/ic/round-quiz";
 import { multiSeries, pieData, singleSeries } from "./_chart-data";
 
 export const frontmatter = {
@@ -62,6 +68,16 @@ export const frontmatter = {
         <div class="bg-lavender-400 p-16">
           <Badge look="white">Weißer Badge</Badge>
         </div>
+      </div>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">look: outline</p>
+        <Badge look="outline">Outline Badge</Badge>
+      </div>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">look: timelineFilled</p>
+        <Badge look="timelineFilled">Woche 1</Badge>
       </div>
 
       <div class="space-y-32">
@@ -225,6 +241,28 @@ export const frontmatter = {
       </div>
     </section>
 
+    <!-- ─── Checklist + ChecklistItem ─────────────────────────────────── -->
+    <section class="space-y-48">
+      <h2>Checklist + ChecklistItem</h2>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">
+          Checklist mit drei ChecklistItems
+        </p>
+        <Checklist>
+          <ChecklistItem heading="Erster Punkt">
+            <p>Kurzer Text zum ersten Punkt.</p>
+          </ChecklistItem>
+          <ChecklistItem heading="Zweiter Punkt">
+            <p>Kurzer Text zum zweiten Punkt.</p>
+          </ChecklistItem>
+          <ChecklistItem heading="Dritter Punkt">
+            <p>Kurzer Text zum dritten Punkt.</p>
+          </ChecklistItem>
+        </Checklist>
+      </div>
+    </section>
+
     <!-- ─── InfoPanel ────────────────────────────────────────────────── -->
     <section class="space-y-48">
       <h2>InfoPanel</h2>
@@ -276,6 +314,14 @@ export const frontmatter = {
       </div>
 
       <div class="space-y-32">
+        <p class="variant-label kern-label">padding: large, look: blue</p>
+        <InfoPanel padding="large" look="blue">
+          <h3>Großes Padding</h3>
+          <p>Gleicher Innenabstand auf allen Seiten.</p>
+        </InfoPanel>
+      </div>
+
+      <div class="space-y-32">
         <p class="variant-label kern-label">mit Icon-Slot</p>
         <InfoPanel>
           <IconWidgets slot="icon" />
@@ -313,6 +359,25 @@ export const frontmatter = {
           >
             <IconDevices slot="icon" class="size-full" />
             <a href="#">Mehr erfahren</a>
+          </FeatureItem>
+        </FeatureSet>
+      </div>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">FeatureItem centered</p>
+        <FeatureSet>
+          <FeatureItem centered title="Erster Titel">
+            <IconCheckCircle slot="icon" />
+          </FeatureItem>
+          <FeatureItem
+            centered
+            title="Zweiter Titel"
+            body="Mit kleinerem Text."
+          >
+            <IconBuild slot="icon" />
+          </FeatureItem>
+          <FeatureItem centered title="Dritter Titel">
+            <IconDevices slot="icon" />
           </FeatureItem>
         </FeatureSet>
       </div>
@@ -541,6 +606,17 @@ export const frontmatter = {
           </KernAccordion>
         </div>
       </div>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">open, fullWidth: false</p>
+        <KernAccordion open fullWidth={false}>
+          <span slot="header">Geöffnet, mit eigener Breite</span>
+          <p slot="body">
+            Das Akkordeon ist beim Laden geöffnet. Der Absatz behält seine
+            max-width, statt die volle Breite zu nutzen.
+          </p>
+        </KernAccordion>
+      </div>
     </section>
 
     <!-- ─── KernCard ──────────────────────────────────────────────────── -->
@@ -723,6 +799,45 @@ export const frontmatter = {
       </div>
     </section>
 
+    <!-- ─── PackageCard ───────────────────────────────────────────────── -->
+    <section class="space-y-48">
+      <h2>PackageCard</h2>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">mit / ohne Icon und Badge</p>
+        <div class="bg-lavender-400 grid gap-32 p-16 md:grid-cols-2">
+          <PackageCard title="Titel" type="Badge">
+            <IconQuiz slot="icon" />
+            <h4 class="kern-subline">Erster Zwischentitel</h4>
+            <p class="kern-body">Kurzer Text zum ersten Zwischentitel.</p>
+            <h4 class="kern-subline">Zweiter Zwischentitel</h4>
+            <p class="kern-body">Kurzer Text zum zweiten Zwischentitel.</p>
+          </PackageCard>
+          <PackageCard title="Mit Icon, ohne Badge">
+            <IconAdd slot="icon" />
+            <p class="kern-body">Karte ohne type-Badge.</p>
+          </PackageCard>
+          <PackageCard title="Ohne Icon, mit Badge" type="Badge">
+            <p class="kern-body">Karte ohne Icon.</p>
+          </PackageCard>
+          <PackageCard title="Ohne Icon und Badge">
+            <p class="kern-body">Karte ohne Icon und Badge.</p>
+          </PackageCard>
+        </div>
+      </div>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">large</p>
+        <div class="bg-lavender-400 p-16">
+          <PackageCard title="Titel" type="Badge" large>
+            <IconQuiz slot="icon" />
+            <p class="kern-body mt-32">Erster Block.</p>
+            <p class="kern-body mt-32">Zweiter Block.</p>
+          </PackageCard>
+        </div>
+      </div>
+    </section>
+
     <!-- ─── PostTeaser ────────────────────────────────────────────────── -->
     <section class="space-y-48">
       <h2>PostTeaser</h2>
@@ -794,27 +909,83 @@ export const frontmatter = {
       </div>
     </section>
 
-    <!-- ─── TimelineList ──────────────────────────────────────────────── -->
+    <!-- ─── TimelineList + TimelineListItem ───────────────────────────── -->
     <section class="space-y-48">
-      <h2>TimelineList</h2>
+      <h2>TimelineList + TimelineListItem</h2>
 
       <div class="space-y-32">
+        <p class="variant-label kern-label">variant: default</p>
         <TimelineList>
-          <li>
+          <TimelineListItem>
             <h3>Phase 1: Analyse</h3>
             <p>Bestandsaufnahme der bestehenden Regelungen und Prozesse.</p>
-          </li>
-          <li>
+          </TimelineListItem>
+          <TimelineListItem>
             <h3>Phase 2: Entwurf</h3>
             <p>
               Erarbeitung eines Regelungsentwurfs unter Einbeziehung der
               Betroffenen.
             </p>
-          </li>
-          <li>
+          </TimelineListItem>
+          <TimelineListItem>
             <h3>Phase 3: Umsetzung</h3>
             <p>Inkraftsetzung und Begleitung der praktischen Umsetzung.</p>
-          </li>
+          </TimelineListItem>
+        </TimelineList>
+      </div>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">type: plain zwischen Einträgen</p>
+        <TimelineList>
+          <TimelineListItem>
+            <h3>Schritt 1</h3>
+            <p>Kurzer Text zum ersten Schritt.</p>
+          </TimelineListItem>
+          <TimelineListItem type="plain">
+            <h3>Schritt 2</h3>
+            <p>Hinweis ohne Punkt, die Linie läuft weiter.</p>
+          </TimelineListItem>
+          <TimelineListItem>
+            <h3>Schritt 3</h3>
+            <p>Kurzer Text zum dritten Schritt.</p>
+          </TimelineListItem>
+        </TimelineList>
+      </div>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">
+          variant: changelog, type: year, label
+        </p>
+        <TimelineList variant="changelog" class="[&_h3]:mt-16">
+          <TimelineListItem type="year" label="2026" />
+          <TimelineListItem label="Oktober 2026">
+            <h3>Erster Eintrag</h3>
+            <p>Kurzer Text zum ersten Eintrag.</p>
+          </TimelineListItem>
+          <TimelineListItem label="September 2026">
+            <h3>Zweiter Eintrag</h3>
+            <p>Kurzer Text zum zweiten Eintrag.</p>
+          </TimelineListItem>
+        </TimelineList>
+      </div>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">
+          variant: horizontal (ab lg), filledBadge
+        </p>
+        <TimelineList variant="horizontal" class="[&_h3]:mt-0">
+          <TimelineListItem label="Schritt 1" filledBadge>
+            <h3>Erster Schritt</h3>
+            <p>Kurzer Text zum ersten Schritt.</p>
+          </TimelineListItem>
+          <TimelineListItem label="Schritt 2" filledBadge>
+            <h3>Zweiter Schritt</h3>
+            <p>Kurzer Text zum zweiten Schritt.</p>
+          </TimelineListItem>
+          <TimelineListItem label="Schritt 3" filledBadge>
+            <h3>Dritter Schritt</h3>
+            <p>Kurzer Text zum dritten Schritt.</p>
+          </TimelineListItem>
         </TimelineList>
       </div>
     </section>

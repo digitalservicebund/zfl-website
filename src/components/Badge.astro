@@ -14,10 +14,14 @@ const styles = tv({
       hint: "text-cosmic-blue-base",
       gray: "bg-lavender-base",
       white: "bg-white",
+      outline:
+        "border-kern-contextual [&>span.kern-label]:text-kern-text-muted-contextual shrink-0 border bg-white [&>span.kern-label]:font-normal",
       timeline:
         "kern-badge--small bg-surface-default [&>span.kern-label]:font-normal",
       timelineYear:
-        "kern-badge timeline-year-badge border-cosmic-blue-base border bg-white [&>span.kern-label]:font-bold",
+        "border-cosmic-blue-base border bg-white [&>span.kern-label]:font-bold",
+      timelineFilled:
+        "kern-badge--small bg-cosmic-blue-base [&>span.kern-label]:font-normal [&>span.kern-label]:text-white",
     },
   },
 });

@@ -1,17 +1,62 @@
 ---
+import { tv } from "@/utils/tv";
+
+/**
+ * Feature with an icon tile, a title and a short text. Use inside a `FeatureSet`.
+ * Pass the icon in the `icon` slot.
+ * The default slot is placed after the body, e.g. for a link.
+ *
+ * @example
+ * <FeatureItem title="Titel" body="Kurzer Text.">
+ *   <IconStar slot="icon" class="size-full" />
+ *   <a href="#"> ... </a>
+ * </FeatureItem>
+ *
+ * <FeatureItem centered title="Titel">
+ *   <IconStar slot="icon" />
+ * </FeatureItem>
+ */
 interface Props {
+  /** Rendered as an h3 below the icon. */
   title?: string;
+  /** Short text below the title. */
   body?: string;
+  /** Centers the item and uses a larger title and icon. Default: `false`. */
+  centered?: boolean;
+  /** Extra classes for the title. */
+  titleClass?: string;
 }
 
-const { title, body } = Astro.props;
+const styles = tv({
+  slots: {
+    base: "flex flex-col gap-16 md:flex-1",
+    icon: "text-cosmic-blue-400 bg-lavender-400 flex size-110 flex-none items-center justify-center rounded-sm px-18 py-22",
+    title: "m-0",
+  },
+  variants: {
+    centered: {
+      true: {
+        base: "items-center text-center",
+        icon: "p-0 [&>svg]:size-74",
+        title: "kern-heading-large mt-8",
+      },
+      false: {
+        base: "md:pr-32",
+        title: "max-w-200",
+      },
+    },
+  },
+});
+
+const { title, body, centered = false, titleClass } = Astro.props;
+const { base, icon, title: titleStyles } = styles({ centered });
 ---
 
-<div class="flex flex-col gap-16 md:flex-1 md:pr-32">
-  <div class="text-cosmic-blue-400 bg-lavender-400 flex size-110 flex-none items-center justify-center rounded-sm px-18 py-22">
+<div class={base()}>
+  <div class={icon()}>
     <slot name="icon" />
   </div>
-  {title && <h3 class="m-0 max-w-200">{title}</h3>}
+  {title && <h3 class={titleStyles({ class: titleClass })}>{title}</h3>}
   {body && <p>{body}</p>}
   <slot />
 </div>

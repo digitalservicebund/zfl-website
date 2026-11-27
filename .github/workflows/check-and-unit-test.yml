@@ -57,6 +57,28 @@ jobs:
       - name: Run unit tests
         run: pnpm test
 
+      - name: Get installed Playwright version
+        run: |
+          echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('@playwright/test/package.json').version)")" >> $GITHUB_ENV
+
+      - name: Cache Playwright Chromium
+        id: playwright-cache-chromium
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v5
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-chromium-${{ env.PLAYWRIGHT_VERSION }}
+
+      - name: Install Playwright Chromium
+        if: steps.playwright-cache-chromium.outputs.cache-hit != 'true'
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Install Playwright Chromium - Cached
+        if: steps.playwright-cache-chromium.outputs.cache-hit == 'true'
+        run: pnpm exec playwright install-deps chromium
+
+      - name: Run browser tests
+        run: pnpm test:browser
+
       - name: Send failure to Slack
         uses: digitalservicebund/notify-on-failure-gha@b8fdda76a38fa8e94cf623ebdd03e4570bc4ceb0 # v1.9.0
         if: ${{ failure() }}

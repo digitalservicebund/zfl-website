@@ -1,93 +1,49 @@
 ---
 import type { HTMLAttributes } from "astro/types";
+import type { VariantProps } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 
-interface Props extends HTMLAttributes<"ol"> {
-  look?: "dc" | "zfl";
-  /** `changelog`: room for year badges, more spacing between and indentation of the items */
-  variant?: "default" | "changelog";
-}
+/**
+ * Timeline, vertical by default. Use `TimelineListItem` for the items.
+ * `variant="horizontal"` shows the items side by side from `lg`, e.g. for steps.
+ * Dot and line color: `--color-timeline-list` from the `@theme` in global.css.
+ *
+ * @example
+ * <TimelineList variant="changelog">
+ *   <TimelineListItem type="year" label="2026" />
+ *   <TimelineListItem label="Oktober 2026">
+ *     <h3>Titel</h3>
+ *     <p>Kurzer Text.</p>
+ *   </TimelineListItem>
+ * </TimelineList>
+ */
+interface Props extends HTMLAttributes<"ol">, VariantProps<typeof styles> {}
 
-const {
-  look = "zfl",
-  variant = "default",
-  class: className,
-  ...attrs
-} = Astro.props;
+const styles = tv({
+  base: [
+    "list-unstyled scroll-my-40",
+    "[:where(&>li)]:pb-24 [:where(&>li)]:pl-40",
+  ],
+  variants: {
+    /**
+     * - `changelog`: room for year badges, more spacing and indentation
+     * - `horizontal`: vertical on small screens, one column per item from `lg`
+     */
+    variant: {
+      default: "",
+      changelog: "ml-26 [:where(&>li)]:pb-40 [:where(&>li)]:pl-48",
+      horizontal:
+        "timeline-horizontal lg:grid lg:auto-cols-fr lg:grid-flow-col lg:gap-32 lg:[:where(&>li)]:p-0",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
+
+const { variant, class: className, ...attrs } = Astro.props;
 ---
 
-{/* Items: plain <li> (bullet), li.timeline-plain-item (no marker), li.timeline-year-item (.timeline-year-badge centered on the line) */}
-<ol
-  class:list={[
-    "timeline list-unstyled",
-    `timeline--${look}`,
-    `timeline--${variant}`,
-    className,
-  ]}
-  {...attrs}
->
+<ol role="list" class={styles({ variant, class: className })} {...attrs}>
   <slot />
 </ol>
-
-{/* is:global so direct child selectors (>) work on slotted items; components layer so utilities on items can override */}
-<style is:global>
-  @reference "@/styles/global.css";
-
-  /* Declare Tailwind's layer order in case this style loads before the global CSS */
-  @layer theme, base, components, utilities;
-
-  @layer components {
-    .timeline--dc {
-      --timeline-color: var(--color-kern-darkblue-850);
-    }
-    .timeline--zfl {
-      --timeline-color: var(--color-cosmic-blue-base);
-    }
-
-    .timeline {
-      @apply scroll-my-40;
-
-      /* Each item draws its own line segment below its marker, so no
-         background-colored ring is needed to separate line and marker. */
-      & > li {
-        @apply relative scroll-my-40 pb-24 pl-40;
-      }
-      /* Margin, not padding: utilities like list-unstyled reset the padding.
-         Leaves room for year badges centered on the line. */
-      &.timeline--changelog {
-        @apply ml-26;
-      }
-      &.timeline--changelog > li {
-        @apply pb-40 pl-48;
-      }
-      & > li::before {
-        content: "";
-        @apply absolute top-4 left-0 size-16 rounded-full bg-(--timeline-color);
-      }
-      & > li::after {
-        content: "";
-        @apply absolute top-24 bottom-0 left-[7.5px] w-px bg-(--timeline-color);
-      }
-
-      & > li.timeline-plain-item::before {
-        content: none;
-      }
-      & > li.timeline-plain-item::after {
-        @apply top-0;
-      }
-
-      /* Year labels keep some distance to the next entry. */
-      & > li.timeline-year-item {
-        @apply pb-32 pl-0;
-      }
-      & > li.timeline-year-item::before {
-        content: none;
-      }
-      & > li.timeline-year-item::after {
-        @apply top-auto h-28;
-      }
-      & > li.timeline-year-item > .timeline-year-badge {
-        @apply relative left-8 -translate-x-1/2;
-      }
-    }
-  }
-</style>

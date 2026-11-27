@@ -28,6 +28,15 @@ const containerTokens = tokens("container").filter(
   (token) => !notUtilityTokens.includes(token),
 );
 
+// every @utility kern-heading-* in kern-utils.css
+const kernUtils = readFileSync(
+  new URL("../styles/kern-utils.css", import.meta.url),
+  "utf8",
+);
+const kernHeadingUtilities = [
+  ...kernUtils.matchAll(/@utility kern-heading-([\w-]+)/g),
+].map(([, name]) => name!);
+
 const merge = (base: string, override: string) =>
   tv({ base })({ class: override });
 
@@ -35,6 +44,7 @@ describe("tv merge config", () => {
   it("finds the tokens in global.css", () => {
     expect(spacingTokens).toContain("md");
     expect(containerTokens).toContain("a11y");
+    expect(kernHeadingUtilities).toContain("medium");
   });
 
   for (const token of spacingTokens) {
@@ -49,6 +59,17 @@ describe("tv merge config", () => {
     it(`merges the container token ${token}`, () => {
       expect(merge(`max-w-${token}`, "max-w-[95vw]")).toBe("max-w-[95vw]");
       expect(merge("max-w-none", `max-w-${token}`)).toBe(`max-w-${token}`);
+    });
+  }
+
+  for (const size of kernHeadingUtilities) {
+    it(`merges the kern-heading utility ${size}`, () => {
+      expect(merge("kern-heading-display", `kern-heading-${size}`)).toBe(
+        `kern-heading-${size}`,
+      );
+      expect(merge(`kern-heading-${size}`, "kern-heading-small mt-8")).toBe(
+        "kern-heading-small mt-8",
+      );
     });
   }
 

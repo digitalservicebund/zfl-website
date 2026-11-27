@@ -1,0 +1,91 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import Badge from "./Badge.astro";
+import { tv } from "@/utils/tv";
+
+/**
+ * Item of a `TimelineList`.
+ * - `default`: dot on the line, optional `label` badge above the content
+ * - `plain`: no dot, the line continues
+ * - `year`: only a year badge centered on the line
+ */
+type Props = HTMLAttributes<"li"> &
+  (
+    | {
+        /** Default: `default`. */
+        type?: "default" | "plain";
+        /** Badge above the content, e.g. a date. */
+        label?: string;
+        /** Shows the `label` as a filled badge, e.g. for steps. Default: `false`. */
+        filledBadge?: boolean;
+      }
+    | {
+        type: "year";
+        /** The year shown on the line. */
+        label: string;
+        filledBadge?: never;
+      }
+  );
+
+const vertical = [
+  "before:bg-timeline-list before:absolute before:top-4 before:left-0 before:size-16 before:rounded-full",
+  "after:bg-timeline-list after:absolute after:top-24 after:bottom-0 after:left-[7.5px] after:w-px",
+];
+
+const horizontal = [
+  "lg:[.timeline-horizontal>&]:pt-72",
+  "lg:[.timeline-horizontal>&]:[&>.kern-badge]:absolute lg:[.timeline-horizontal>&]:[&>.kern-badge]:top-0 lg:[.timeline-horizontal>&]:[&>.kern-badge]:left-0",
+  "lg:[.timeline-horizontal>&]:before:top-40 lg:[.timeline-horizontal>&]:before:left-4",
+  "lg:[.timeline-horizontal>&]:after:top-[47.5px] lg:[.timeline-horizontal>&]:after:bottom-auto",
+  "lg:[.timeline-horizontal>&]:after:left-24 lg:[.timeline-horizontal>&]:after:-right-32",
+  "lg:[.timeline-horizontal>&]:after:h-px lg:[.timeline-horizontal>&]:after:w-auto",
+  "lg:[.timeline-horizontal>&]:last:after:right-0",
+];
+
+const styles = tv({
+  slots: {
+    // padding is set by the TimelineList variant
+    base: ["relative scroll-my-40", ...vertical, ...horizontal],
+    badge: "",
+  },
+  variants: {
+    type: {
+      default: {},
+      plain: { base: "before:content-none after:top-0" },
+      year: {
+        base: "pb-32 pl-0 before:content-none after:top-auto after:h-28",
+        badge: "relative left-8 -translate-x-1/2",
+      },
+    },
+  },
+  defaultVariants: {
+    type: "default",
+  },
+});
+
+const {
+  type,
+  label,
+  filledBadge = false,
+  class: className,
+  ...attrs
+} = Astro.props;
+const { base, badge } = styles({ type });
+---
+
+<li class={base({ class: className })} {...attrs}>
+  {type === "year" ? (
+    <Badge look="timelineYear" class={badge()}>
+      {label}
+    </Badge>
+  ) : (
+    <>
+      {label && (
+        <Badge look={filledBadge ? "timelineFilled" : "timeline"}>
+          {label}
+        </Badge>
+      )}
+      <slot />
+    </>
+  )}
+</li>

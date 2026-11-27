@@ -14,6 +14,7 @@ pnpm format:check     # Check formatting
 pnpm format:fix       # Auto-format with Prettier
 pnpm test             # Unit tests (Vitest)
 pnpm test <filename>  # Run specific test (e.g. pnpm test src/components/global/PageHeader.test.ts)
+pnpm test:browser     # Component styling tests in Chromium (Vitest browser mode, *.browser.test.ts)
 pnpm test:e2e         # E2E tests with Playwright against a production build, then a staging build
 pnpm test:e2e:staging     # Full e2e suite against a staging build
 pnpm test:e2e:production  # Full e2e suite against a production build
@@ -79,6 +80,7 @@ import { isProduction, isStaging, isPreview } from "@/config/stage";
 ### Testing
 
 - **Unit tests** (`*.test.ts` alongside source): Use `AstroContainer` to render Astro components — see `src/components/global/PageHeader.test.ts` for the pattern.
+- **Browser tests** (`*.browser.test.ts` alongside source): Vitest browser mode in Chromium, for checking a component's computed CSS (e.g. pseudo-elements). The `renderAstro` command in `vitest.browser.config.ts` renders the component in Node; the test imports the CSS it needs. See `src/components/TimelineList.browser.test.ts`.
 - **E2E tests** (`e2e/*.spec.ts`): Playwright with Chromium. Accessibility tests in `e2e/a11y.spec.ts` use `@axe-core/playwright` and run axe on all routes automatically.
 - **Stages in e2e**: the suite runs against both a production and a staging build, the same as CI. On PRs, CI runs staging in all browsers and production in Chromium only; on `main` it's the other way round.
 - Prefer semantic selectors in tests (`getByRole`, `aria-label`, visible text, stable attributes already needed by the UI). Avoid adding `data-testid` unless there is no reasonable semantic selector.

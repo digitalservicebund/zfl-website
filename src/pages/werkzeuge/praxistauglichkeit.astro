@@ -4,6 +4,8 @@ import Hero from "@/components/Hero.astro";
 import ImageTextOverlay from "@/components/ImageTextOverlay.astro";
 import KernCard from "@/components/KernCard.astro";
 import KernAccordion from "@/components/KernAccordion.astro";
+import Checklist from "@/components/Checklist.astro";
+import ChecklistItem from "@/components/ChecklistItem.astro";
 import { Image } from "astro:assets";
 import praxistauglichkeit from "@/images/praxistauglichkeit.png";
 import praxistauglichkeit_vortrag from "@/images/praxistauglichkeit_vortrag.jpg";
@@ -68,62 +70,32 @@ const praxistauglichkeitTools = allTools.filter(
         Praxistauglichkeit kann auf verschiedene Weise sichergestellt werden.
         Diese Eigenschaften liegen Praxistauglichkeit zugrunde:
       </p>
-      <ul class="list-unstyled checklist">
-        <li>
-          <span
-            class="kern-icon kern-icon--check kern-icon--default"
-            aria-hidden="true"
-          ></span>
-          <div class="space-y-4">
-            <p>
-              <b>Beteiligungsrunde im Präsenzformat organisieren:</b>
-            </p>
-            <p>
-              Ermöglichen Sie direkten Austausch zwischen Akteuren, denn das ist
-              die Grundlage für Praxistauglichkeit. Anders als bei Befragungen
-              sprechen alle Beteiligten unmittelbar miteinander.
-              Wechselwirkungen werden somit sofort offensichtlich.
-            </p>
-          </div>
-        </li>
-        <li>
-          <span
-            class="kern-icon kern-icon--check kern-icon--default"
-            aria-hidden="true"
-          ></span>
-          <div class="space-y-4">
-            <p>
-              <b>Unternehmens- und Behördenmitarbeitende einladen:</b>
-            </p>
-            <p>
-              Laden Sie betroffene Akteure aus Unternehmen und aus dem Vollzug
-              zu Ihrem Format ein. Durch Berücksichtigung verschiedener
-              Perspektiven vermeiden Sie Silo-Denken.
-            </p>
-          </div>
-        </li>
-        <li>
-          <span
-            class="kern-icon kern-icon--check kern-icon--default"
-            aria-hidden="true"
-          ></span>
-          <div class="space-y-4">
-            <p>
-              <b>
-                Gemeinsam Probleme, Hürden oder Verbesserungspotentiale
-                identifizieren:
-              </b>
-            </p>
-            <p>
-              Gehen Sie Schritt für Schritt durch die Visualisierung eines
-              Prozesses oder einer Regelung. Dadurch identifizieren Sie Hürden
-              und Potenziale. Die Erkenntnisse aus der Praxis und dem Alltag
-              unterstützen den Erkenntnisgewinn und fließen direkt in die
-              Regelung ein.
-            </p>
-          </div>
-        </li>
-      </ul>
+      <Checklist>
+        <ChecklistItem heading="Beteiligungsrunde im Präsenzformat organisieren:">
+          <p>
+            Ermöglichen Sie direkten Austausch zwischen Akteuren, denn das ist
+            die Grundlage für Praxistauglichkeit. Anders als bei Befragungen
+            sprechen alle Beteiligten unmittelbar miteinander. Wechselwirkungen
+            werden somit sofort offensichtlich.
+          </p>
+        </ChecklistItem>
+        <ChecklistItem heading="Unternehmens- und Behördenmitarbeitende einladen:">
+          <p>
+            Laden Sie betroffene Akteure aus Unternehmen und aus dem Vollzug zu
+            Ihrem Format ein. Durch Berücksichtigung verschiedener Perspektiven
+            vermeiden Sie Silo-Denken.
+          </p>
+        </ChecklistItem>
+        <ChecklistItem heading="Gemeinsam Probleme, Hürden oder Verbesserungspotentiale identifizieren:">
+          <p>
+            Gehen Sie Schritt für Schritt durch die Visualisierung eines
+            Prozesses oder einer Regelung. Dadurch identifizieren Sie Hürden und
+            Potenziale. Die Erkenntnisse aus der Praxis und dem Alltag
+            unterstützen den Erkenntnisgewinn und fließen direkt in die Regelung
+            ein.
+          </p>
+        </ChecklistItem>
+      </Checklist>
       <figure class="mt-lg space-y-24">
         <Image
           src={praxistauglichkeit_vortrag}
@@ -410,17 +382,3 @@ const praxistauglichkeitTools = allTools.filter(
     </section>
   </main>
 </Layout>
-
-<style>
-  @reference "@/styles/global.css";
-
-  ul.checklist {
-    @apply max-w-a11y space-y-12;
-    li {
-      @apply flex items-start gap-8 md:gap-32;
-      span.kern-icon {
-        @apply bg-cosmic-blue-base! size-32 shrink-0;
-      }
-    }
-  }
-</style>

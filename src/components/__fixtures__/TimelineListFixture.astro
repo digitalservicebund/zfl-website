@@ -1,0 +1,30 @@
+---
+/*
+  Test fixture for TimelineList.browser.test.ts: renders a TimelineList with
+  TimelineListItems from props, because the container can only pass slots as
+  plain HTML strings, not components.
+*/
+import type { ComponentProps } from "astro/types";
+import TimelineList from "@/components/TimelineList.astro";
+import TimelineListItem from "@/components/TimelineListItem.astro";
+
+export type FixtureItem = ComponentProps<typeof TimelineListItem> & {
+  /** Content of the item's default slot. */
+  html?: string;
+};
+
+interface Props {
+  list?: ComponentProps<typeof TimelineList>;
+  items: FixtureItem[];
+}
+
+const { list, items } = Astro.props;
+---
+
+<TimelineList {...list}>
+  {items.map(({ html, ...item }) => (
+    <TimelineListItem {...item}>
+      {html && <Fragment set:html={html} />}
+    </TimelineListItem>
+  ))}
+</TimelineList>
