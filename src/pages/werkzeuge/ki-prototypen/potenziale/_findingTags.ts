@@ -9,7 +9,7 @@ interface TagMeta {
   links?: { label: string; href: string }[];
 }
 
-// Pages on digitalcheck.bund.de/prinzipien/, one per principle group.
+// Pages under DIGITALCHECK_PRINZIPIEN_URL, one per principle group.
 const PRINZIP_PAGES: Record<string, string> = {
   "1": "digitale-angebote-fuer-alle-nutzbar-gestalten",
   "2": "datenwiederverwendung-benoetigt-einheitliches-recht",
