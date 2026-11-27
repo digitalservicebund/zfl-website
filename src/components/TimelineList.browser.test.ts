@@ -1,11 +1,10 @@
 import "@/styles/global.css";
-// The component's <style is:global> block, which the container output doesn't include
 import type { ContainerRenderOptions } from "astro/container";
 import type { ComponentProps } from "astro/types";
 import { beforeAll, describe, expect, it } from "vitest";
 import { commands } from "vitest/browser";
 import type TimelineList from "./TimelineList.astro";
-import "./TimelineList.astro?astro&type=style&index=0&lang.css";
+import type { FixtureItem } from "./__fixtures__/TimelineListFixture.astro";
 
 // Defined in vitest.browser.config.ts
 declare module "vitest/browser" {
@@ -17,21 +16,23 @@ declare module "vitest/browser" {
   }
 }
 
-type Props = ComponentProps<typeof TimelineList>;
-type Variant = NonNullable<Props["variant"]>;
+type ListProps = ComponentProps<typeof TimelineList>;
 type ItemType = "default" | "plain" | "year";
 
 // Theme color for dots and lines, set per repo in the @theme of global.css
 const COLOR_VAR = "--color-timeline-list";
 
 /*
-  What each dimension should produce. `satisfies Record<…>` turns a new
-  variant without expectations into a type error.
+  What each dimension should produce. Add a TimelineList variant here to test
+  it: the test can't read the variants from the .astro file, whose props are
+  untyped in .ts files.
 */
 const variantStyles = {
   default: { marginLeft: "0px", padding: { left: "40px", bottom: "24px" } },
   changelog: { marginLeft: "26px", padding: { left: "48px", bottom: "40px" } },
-} satisfies Record<Variant, unknown>;
+};
+
+type Variant = keyof typeof variantStyles;
 
 const itemStyles: Record<
   ItemType,
@@ -51,10 +52,10 @@ const itemStyles: Record<
   },
 };
 
-const itemHtml: Record<ItemType, string> = {
-  default: "<li><h3>Eintrag</h3><p>Zwei Zeilen<br />Text.</p></li>",
-  plain: '<li class="timeline-plain-item"><p>Hinweis</p></li>',
-  year: '<li class="timeline-year-item"><span class="timeline-year-badge kern-badge"><span class="kern-label">2026</span></span></li>',
+const items: Record<ItemType, FixtureItem> = {
+  default: { html: "<h3>Eintrag</h3><p>Zwei Zeilen<br />Text.</p>" },
+  plain: { type: "plain", html: "<p>Hinweis</p>" },
+  year: { type: "year", label: "2026" },
 };
 
 // Every item type, and each of them as first, middle and last item
@@ -72,10 +73,10 @@ const resolveColor = (variable: string) => {
   return color;
 };
 
-const render = async (props: Props, items: string) => {
+const render = async (list: ListProps, listItems: FixtureItem[]) => {
   document.body.innerHTML = await commands.renderAstro(
-    "/src/components/TimelineList.astro",
-    { props, slots: { default: items } },
+    "/src/components/__fixtures__/TimelineListFixture.astro",
+    { props: { list, items: listItems } },
   );
   return document.querySelector("ol")!;
 };
@@ -96,7 +97,7 @@ describe("TimelineList", () => {
     beforeAll(async () => {
       list = await render(
         { variant },
-        itemOrder.map((type) => itemHtml[type]).join(""),
+        itemOrder.map((type) => items[type]),
       );
       color = resolveColor(COLOR_VAR);
     });
@@ -160,10 +161,16 @@ describe("TimelineList", () => {
 });
 
 describe("TimelineList attributes and overrides", () => {
+  it("keeps list semantics without list markers", async () => {
+    const list = await render({}, [items.default]);
+    expect(list.getAttribute("role")).toBe("list");
+    expect(css(list).listStyleType).toBe("none");
+  });
+
   it("can be recolored per list through the theme variable", async () => {
     const list = await render(
       { class: "[--color-timeline-list:rgb(255,0,0)]" },
-      itemHtml.default,
+      [items.default],
     );
     const item = list.querySelector("li")!;
     expect(css(item, "::before").backgroundColor).toBe("rgb(255, 0, 0)");
@@ -171,39 +178,64 @@ describe("TimelineList attributes and overrides", () => {
   });
 
   it("merges a class on the list", async () => {
-    const list = await render(
-      { variant: "changelog", class: "[&_h3]:mt-16" },
-      itemHtml.default,
-    );
+    const list = await render({ variant: "changelog", class: "[&_h3]:mt-16" }, [
+      items.default,
+    ]);
     expect(css(list.querySelector("h3")!).marginTop).toBe("16px");
   });
 
   it("lets utilities on an item override the timeline styles", async () => {
-    const list = await render(
-      {},
-      '<li class="timeline-plain-item pt-8 after:hidden">Falls zutreffend:</li>',
-    );
+    const list = await render({}, [
+      { type: "plain", class: "pt-8 after:hidden", html: "Falls zutreffend:" },
+    ]);
     const item = list.querySelector("li")!;
     expect(css(item).paddingTop).toBe("8px");
     expect(css(item, "::after").display).toBe("none");
   });
 
+  it("lets a class on an item override the list's padding", async () => {
+    const list = await render({ variant: "changelog" }, [
+      { class: "pb-8 pl-16", html: "<h3>Eintrag</h3>" },
+    ]);
+    expect(css(list.querySelector("li")!)).toMatchObject({
+      paddingBottom: "8px",
+      paddingLeft: "16px",
+    });
+  });
+
+  it("puts the label badge above the content", async () => {
+    const list = await render({}, [
+      { label: "Oktober 2026", html: "<h3>Eintrag</h3>" },
+    ]);
+    const first = list.querySelector("li")!.firstElementChild!;
+    expect(first.classList).toContain("kern-badge");
+    expect(first.textContent?.trim()).toBe("Oktober 2026");
+  });
+
   it("centers year badges on the line", async () => {
-    const list = await render({ variant: "changelog" }, itemHtml.year);
-    const item = list.querySelector("li")!.getBoundingClientRect();
-    const badge = list
-      .querySelector(".timeline-year-badge")!
-      .getBoundingClientRect();
+    const list = await render({ variant: "changelog" }, [items.year]);
+    const item = list.querySelector("li")!;
+    const itemBox = item.getBoundingClientRect();
+    const badge = item.querySelector(".kern-badge")!.getBoundingClientRect();
+    expect(item.textContent?.trim()).toBe("2026");
     // the 1px line sits at 7.5px, so its center is 8px from the item's left edge
-    expect(badge.left + badge.width / 2).toBeCloseTo(item.left + 8, 0);
+    expect(badge.left + badge.width / 2).toBeCloseTo(itemBox.left + 8, 0);
   });
 
   it("passes attributes through to the list", async () => {
-    const list = await render(
-      { id: "timeline", "aria-label": "Ablauf" },
-      itemHtml.default,
-    );
+    const list = await render({ id: "timeline", "aria-label": "Ablauf" }, [
+      items.default,
+    ]);
     expect(list.id).toBe("timeline");
     expect(list.getAttribute("aria-label")).toBe("Ablauf");
+  });
+
+  it("passes attributes through to the items", async () => {
+    const list = await render({}, [
+      { "data-entry-index": "0", tabindex: -1, html: "<h3>Eintrag</h3>" },
+    ]);
+    const item = list.querySelector("li")!;
+    expect(item.dataset.entryIndex).toBe("0");
+    expect(item.tabIndex).toBe(-1);
   });
 });

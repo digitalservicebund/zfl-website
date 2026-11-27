@@ -1,75 +1,42 @@
 ---
 import type { HTMLAttributes } from "astro/types";
+import type { VariantProps } from "tailwind-variants";
+import { tv } from "@/utils/tv";
 
-interface Props extends HTMLAttributes<"ol"> {
-  /** `changelog`: room for year badges, more spacing between and indentation of the items */
-  variant?: "default" | "changelog";
-}
+/**
+ * Vertical timeline. Use `TimelineListItem` for the items.
+ * Dot and line color: `--color-timeline-list` from the `@theme` in global.css.
+ *
+ * @example
+ * <TimelineList variant="changelog">
+ *   <TimelineListItem type="year" label="2026" />
+ *   <TimelineListItem label="Oktober 2026">
+ *     <h3>Titel</h3>
+ *     <p>Kurzer Text.</p>
+ *   </TimelineListItem>
+ * </TimelineList>
+ */
+interface Props extends HTMLAttributes<"ol">, VariantProps<typeof styles> {}
 
-const { variant = "default", class: className, ...attrs } = Astro.props;
+// Sets the default spacing of the items (TimelineListItem). `:where()` has zero
+// specificity, so classes on an item override it.
+const styles = tv({
+  base: "list-unstyled scroll-my-40",
+  variants: {
+    /** `changelog`: room for year badges, more spacing and indentation. Default: `default`. */
+    variant: {
+      default: "[:where(&>li)]:pb-24 [:where(&>li)]:pl-40",
+      changelog: "ml-26 [:where(&>li)]:pb-40 [:where(&>li)]:pl-48",
+    },
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
+
+const { variant, class: className, ...attrs } = Astro.props;
 ---
 
-{/* Items: plain <li> (bullet), li.timeline-plain-item (no marker), li.timeline-year-item (.timeline-year-badge centered on the line) */}
-<ol
-  class:list={["timeline list-unstyled", `timeline--${variant}`, className]}
-  {...attrs}
->
+<ol role="list" class={styles({ variant, class: className })} {...attrs}>
   <slot />
 </ol>
-
-{/* is:global so direct child selectors (>) work on slotted items; components layer so utilities on items can override */}
-<style is:global>
-  @reference "@/styles/global.css";
-
-  /* Declare Tailwind's layer order in case this style loads before the global CSS */
-  @layer theme, base, components, utilities;
-
-  @layer components {
-    .timeline {
-      @apply scroll-my-40;
-
-      /* Each item draws its own line segment below its marker, so no
-         background-colored ring is needed to separate line and marker. */
-      & > li {
-        @apply relative scroll-my-40 pb-24 pl-40;
-      }
-      /* Margin, not padding: utilities like list-unstyled reset the padding.
-         Leaves room for year badges centered on the line. */
-      &.timeline--changelog {
-        @apply ml-26;
-      }
-      &.timeline--changelog > li {
-        @apply pb-40 pl-48;
-      }
-      & > li::before {
-        content: "";
-        @apply bg-timeline-list absolute top-4 left-0 size-16 rounded-full;
-      }
-      & > li::after {
-        content: "";
-        @apply bg-timeline-list absolute top-24 bottom-0 left-[7.5px] w-px;
-      }
-
-      & > li.timeline-plain-item::before {
-        content: none;
-      }
-      & > li.timeline-plain-item::after {
-        @apply top-0;
-      }
-
-      /* Year labels keep some distance to the next entry. */
-      & > li.timeline-year-item {
-        @apply pb-32 pl-0;
-      }
-      & > li.timeline-year-item::before {
-        content: none;
-      }
-      & > li.timeline-year-item::after {
-        @apply top-auto h-28;
-      }
-      & > li.timeline-year-item > .timeline-year-badge {
-        @apply relative left-8 -translate-x-1/2;
-      }
-    }
-  }
-</style>

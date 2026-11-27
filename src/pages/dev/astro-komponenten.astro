@@ -23,6 +23,7 @@ import PrinzipBadge from "@/components/PrinzipBadge.astro";
 import SkipNavLink from "@/components/SkipNavLink.astro";
 import StepNumber from "@/components/StepNumber.astro";
 import TimelineList from "@/components/TimelineList.astro";
+import TimelineListItem from "@/components/TimelineListItem.astro";
 import trainingImage from "@/images/Trainings.jpg";
 import Layout from "@/layouts/Layout.astro";
 import { Image as AstroImage } from "astro:assets";
@@ -903,27 +904,63 @@ export const frontmatter = {
       </div>
     </section>
 
-    <!-- ─── TimelineList ──────────────────────────────────────────────── -->
+    <!-- ─── TimelineList + TimelineListItem ───────────────────────────── -->
     <section class="space-y-48">
-      <h2>TimelineList</h2>
+      <h2>TimelineList + TimelineListItem</h2>
 
       <div class="space-y-32">
+        <p class="variant-label kern-label">variant: default</p>
         <TimelineList>
-          <li>
+          <TimelineListItem>
             <h3>Phase 1: Analyse</h3>
             <p>Bestandsaufnahme der bestehenden Regelungen und Prozesse.</p>
-          </li>
-          <li>
+          </TimelineListItem>
+          <TimelineListItem>
             <h3>Phase 2: Entwurf</h3>
             <p>
               Erarbeitung eines Regelungsentwurfs unter Einbeziehung der
               Betroffenen.
             </p>
-          </li>
-          <li>
+          </TimelineListItem>
+          <TimelineListItem>
             <h3>Phase 3: Umsetzung</h3>
             <p>Inkraftsetzung und Begleitung der praktischen Umsetzung.</p>
-          </li>
+          </TimelineListItem>
+        </TimelineList>
+      </div>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">type: plain zwischen Einträgen</p>
+        <TimelineList>
+          <TimelineListItem>
+            <h3>Schritt 1</h3>
+            <p>Kurzer Text zum ersten Schritt.</p>
+          </TimelineListItem>
+          <TimelineListItem type="plain">
+            <h3>Schritt 2</h3>
+            <p>Hinweis ohne Punkt, die Linie läuft weiter.</p>
+          </TimelineListItem>
+          <TimelineListItem>
+            <h3>Schritt 3</h3>
+            <p>Kurzer Text zum dritten Schritt.</p>
+          </TimelineListItem>
+        </TimelineList>
+      </div>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">
+          variant: changelog, type: year, label
+        </p>
+        <TimelineList variant="changelog" class="[&_h3]:mt-16">
+          <TimelineListItem type="year" label="2026" />
+          <TimelineListItem label="Oktober 2026">
+            <h3>Erster Eintrag</h3>
+            <p>Kurzer Text zum ersten Eintrag.</p>
+          </TimelineListItem>
+          <TimelineListItem label="September 2026">
+            <h3>Zweiter Eintrag</h3>
+            <p>Kurzer Text zum zweiten Eintrag.</p>
+          </TimelineListItem>
         </TimelineList>
       </div>
     </section>

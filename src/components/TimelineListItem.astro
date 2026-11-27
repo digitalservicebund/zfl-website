@@ -1,0 +1,69 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import Badge from "./Badge.astro";
+import { tv } from "@/utils/tv";
+
+/**
+ * Item of a `TimelineList`.
+ * - `default`: dot on the line, optional `label` badge above the content
+ * - `plain`: no dot, the line continues
+ * - `year`: only a year badge centered on the line
+ */
+type Props = HTMLAttributes<"li"> &
+  (
+    | {
+        /** Default: `default`. */
+        type?: "default" | "plain";
+        /** Badge above the content, e.g. a date. */
+        label?: string;
+      }
+    | {
+        type: "year";
+        /** The year shown on the line. */
+        label: string;
+      }
+  );
+
+const styles = tv({
+  slots: {
+    base: [
+      // padding is set by the TimelineList variant
+      "relative scroll-my-40",
+      // dot
+      "before:bg-timeline-list before:absolute before:top-4 before:left-0 before:size-16 before:rounded-full",
+      // line below the dot, down to the next item
+      "after:bg-timeline-list after:absolute after:top-24 after:bottom-0 after:left-[7.5px] after:w-px",
+    ],
+    badge: "",
+  },
+  variants: {
+    type: {
+      default: {},
+      plain: { base: "before:content-none after:top-0" },
+      year: {
+        base: "pb-32 pl-0 before:content-none after:top-auto after:h-28",
+        badge: "relative left-8 -translate-x-1/2",
+      },
+    },
+  },
+  defaultVariants: {
+    type: "default",
+  },
+});
+
+const { type, label, class: className, ...attrs } = Astro.props;
+const { base, badge } = styles({ type });
+---
+
+<li class={base({ class: className })} {...attrs}>
+  {type === "year" ? (
+    <Badge look="timelineYear" class={badge()}>
+      {label}
+    </Badge>
+  ) : (
+    <>
+      {label && <Badge look="timeline">{label}</Badge>}
+      <slot />
+    </>
+  )}
+</li>
