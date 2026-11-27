@@ -4,6 +4,6 @@ type: [Leitfaden]
 category: [Praxistauglichkeit]
 description: Die Prinzipien helfen Ihnen dabei, Chancen der digitalen Umsetzung auszuschöpfen und Hindernisse zu erkennen.
 source: Digitalcheck
-url: https://digitalcheck.bund.de/prinzipien
+url: https://digitalcheck.gov.de/prinzipien
 image: ./5-prinzipien-der-digitaltauglichkeit.png
 ---

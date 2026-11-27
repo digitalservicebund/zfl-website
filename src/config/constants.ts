@@ -24,7 +24,7 @@ export const ZFL_EMAIL_SCHULUNG = {
 };
 
 export const DIGITALCHECK_URL = {
-  url: "https://digitalcheck.bund.de",
+  url: "https://digitalcheck.gov.de",
 };
 
 export const DIGITALCHECK_PRINZIPIEN_URL = {
