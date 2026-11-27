@@ -1,0 +1,43 @@
+var e=`---
+summary: "Das Antrags- und Bewilligungsverfahren für Ausbildungsförderung nach dem BAföG: Antrag beim Amt für Ausbildungsförderung, Einkommensangaben von Eltern und Ehegatten, Anrechnung des Einkommens, Bescheid für den Bewilligungszeitraum, Leistungsnachweis ab dem 5. Fachsemester und Weiterzahlung bei rechtzeitigem Folgeantrag."
+---
+swimlane-beta TD
+    subgraph AST["Ausbildungsstätte"]
+        leistung["Bescheinigt nach Beginn des 4. Fachsemesters<br/>die üblichen Leistungen (oder Zwischenprüfung,<br/>ECTS-Nachweis) — <a href='https://www.gesetze-im-internet.de/baf_g/__48.html' target='_blank' rel='noopener'>§48 I</a>, <a href='https://www.gesetze-im-internet.de/baf_g/__47.html' target='_blank' rel='noopener'>§47 I</a>"]
+    end
+
+    subgraph AZ["Auszubildende"]
+        antrag(["Stellt schriftlich oder elektronisch einen<br/>Antrag beim örtlich zuständigen Amt,<br/>Angaben auf den Formblättern — <a href='https://www.gesetze-im-internet.de/baf_g/__46.html' target='_blank' rel='noopener'>§46 I, II</a><br/>(ggf. besonderer Antrag bei wesentlich<br/>niedrigerem Einkommen — <a href='https://www.gesetze-im-internet.de/baf_g/__24.html' target='_blank' rel='noopener'>§24 III</a>)"])
+        abschlag("Erstantrag: Ist binnen 6 Wochen keine<br/>Feststellung oder binnen 10 Wochen keine<br/>Zahlung möglich, für 4 Monate bis zu 4/5<br/>des voraussichtlichen Bedarfs unter<br/>Vorbehalt der Rückforderung — <a href='https://www.gesetze-im-internet.de/baf_g/__51.html' target='_blank' rel='noopener'>§51 II</a>")
+        zahlung["Erhält den Förderungsbetrag unbar und<br/>monatlich im Voraus — <a href='https://www.gesetze-im-internet.de/baf_g/__51.html' target='_blank' rel='noopener'>§51 I</a><br/>(Beträge unter 10 Euro entfallen — <a href='https://www.gesetze-im-internet.de/baf_g/__51.html' target='_blank' rel='noopener'>§51 IV</a>)"]
+        folge{"Folgeantrag im Wesentlichen<br/>vollständig mit Nachweisen<br/>spätestens 2 Monate vor<br/>Ablauf gestellt? — <a href='https://www.gesetze-im-internet.de/baf_g/__50.html' target='_blank' rel='noopener'>§50 IV</a>"}
+        weiter(["Ergeht bis Ablauf kein neuer Bescheid:<br/>Weiterzahlung nach dem früheren Bescheid<br/>unter Vorbehalt der Rückforderung<br/>— <a href='https://www.gesetze-im-internet.de/baf_g/__50.html' target='_blank' rel='noopener'>§50 IV S.1</a>"])
+        keinWeiter(["Keine Weiterzahlung nach dem früheren<br/>Bescheid, bis ein neuer Bescheid ergeht<br/>— <a href='https://www.gesetze-im-internet.de/baf_g/__50.html' target='_blank' rel='noopener'>§50 IV S.2</a>"])
+    end
+
+    subgraph AMT["Amt für Ausbildungsförderung"]
+        eingang("Antrag geht ein; Amt fordert Bescheinigungen<br/>der Ausbildungsstätte — <a href='https://www.gesetze-im-internet.de/baf_g/__47.html' target='_blank' rel='noopener'>§47 I</a> und<br/>Einkommensangaben an, ggf. mit<br/>angemessener Frist — <a href='https://www.gesetze-im-internet.de/baf_g/__47.html' target='_blank' rel='noopener'>§47 VI</a>")
+        anrechnung["Ermittelt den Bedarf und rechnet Einkommen<br/>und Vermögen des Auszubildenden, dann<br/>Einkommen von Ehegatten oder<br/>Lebenspartner und Eltern an — <a href='https://www.gesetze-im-internet.de/baf_g/__11.html' target='_blank' rel='noopener'>§11 II</a><br/>(Einkommen im vorletzten Kalenderjahr<br/>vor dem Bewilligungszeitraum — <a href='https://www.gesetze-im-internet.de/baf_g/__24.html' target='_blank' rel='noopener'>§24 I</a>)"]
+        bescheid["Teilt die Entscheidung schriftlich oder<br/>elektronisch mit (Bescheid) — <a href='https://www.gesetze-im-internet.de/baf_g/__50.html' target='_blank' rel='noopener'>§50 I</a>:<br/>Bedarf, Einkommen, Freibeträge und<br/>angerechnete Beträge — <a href='https://www.gesetze-im-internet.de/baf_g/__50.html' target='_blank' rel='noopener'>§50 II</a>;<br/>in der Regel für ein Jahr<br/>(Bewilligungszeitraum) — <a href='https://www.gesetze-im-internet.de/baf_g/__50.html' target='_blank' rel='noopener'>§50 III</a>"]
+    end
+
+    subgraph EL["Eltern, Ehegatte oder Lebenspartner"]
+        angaben["Machen Angaben zu ihrem Einkommen<br/>(Mitwirkung nach §60 SGB I) — <a href='https://www.gesetze-im-internet.de/baf_g/__47.html' target='_blank' rel='noopener'>§47 IV</a>;<br/>Arbeitgeber bescheinigt auf Verlangen<br/>den Arbeitslohn — <a href='https://www.gesetze-im-internet.de/baf_g/__47.html' target='_blank' rel='noopener'>§47 V Nr. 1</a>"]
+    end
+
+    antrag --> eingang
+    eingang --> angaben
+    eingang -.->|"Entscheidung<br/>verzögert sich"| abschlag
+    angaben --> anrechnung
+    anrechnung -->|"Liegt der Steuerbescheid noch nicht vor:<br/>Entscheidung nach glaubhaft gemachtem<br/>Einkommen, unter Vorbehalt der<br/>Rückforderung — <a href='https://www.gesetze-im-internet.de/baf_g/__24.html' target='_blank' rel='noopener'>§24 II</a>"| bescheid
+    bescheid -->|Bewilligung| zahlung
+    zahlung -->|"Hochschule, Akademie, Höhere<br/>Fachschule: ab dem 5. Fachsemester<br/>Förderung erst ab Vorlage"| leistung
+    leistung --> folge
+    folge -->|Ja| weiter
+    folge -->|Nein| keinWeiter
+    weiter ~~~ keinWeiter
+
+    style weiter fill:#d4edda,stroke:#2d8a4a
+    style keinWeiter fill:#f8d7da,stroke:#c0392b
+    style abschlag fill:#fff3cd,stroke:#c9a227
+`;export{e as default};
