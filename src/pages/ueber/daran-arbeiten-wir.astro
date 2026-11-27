@@ -4,7 +4,7 @@ import Hero from "@/components/Hero.astro";
 import KernCard from "@/components/KernCard.astro";
 import TimelineList from "@/components/TimelineList.astro";
 import Metadata from "./_Metadata.astro";
-import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
+import { DIGITALCHECK_URL, ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import {
   begleitungen,
   bessereRechtsetzung,
@@ -117,7 +117,7 @@ export const frontmatter = {
         </li>
         <li>
           <strong>Länder-Kooperationen:</strong> Der{" "}
-          <a href="https://digitalcheck.bund.de" target="_blank">
+          <a href={DIGITALCHECK_URL.url} target="_blank">
             Digitalcheck
           </a>{" "}
           wird gemäß der föderalen Modernisierungsagenda auch für die Länder ein

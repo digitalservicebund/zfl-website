@@ -3,7 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
 import KernCard from "@/components/KernCard.astro";
 import ImageTextOverlay from "@/components/ImageTextOverlay.astro";
-import { ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
+import { DIGITALCHECK_URL, ZFL_EMAIL, ZFL_PHONE } from "@/config/constants";
 import allgemeinImage from "@/images/Trainings.jpg";
 import zusammenarbeitImg from "@/images/Zusammenarbeit.png";
 import schulungImage from "@/images/computer.jpg";
@@ -116,7 +116,7 @@ export const frontmatter = {
           imageAlt="Symbolbild: Brainstorming"
         >
           <p>
-            <a href="https://digitalcheck.bund.de/" target="_blank">
+            <a href={DIGITALCHECK_URL.url} target="_blank">
               Neu beim Digitalcheck
             </a>
             : Navigation und Inhalte wurden zusammen mit Legistinnen und

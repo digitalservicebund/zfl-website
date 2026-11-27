@@ -24,11 +24,11 @@ export const ZFL_EMAIL_SCHULUNG = {
 };
 
 export const DIGITALCHECK_URL = {
-  url: "https://digitalcheck.bund.de/",
+  url: "https://digitalcheck.bund.de",
 };
 
 export const DIGITALCHECK_PRINZIPIEN_URL = {
-  url: "https://digitalcheck.bund.de/prinzipien",
+  url: `${DIGITALCHECK_URL.url}/prinzipien`,
 };
 
 export const EU_AI_ACT_URL = {

@@ -5,7 +5,7 @@ import Layout from "@/layouts/Layout.astro";
 import Metadata from "./_Metadata.astro";
 import StarRating from "./_StarRating.astro";
 import { begleitungen, schulungen, werkzeuge } from "@/config/routes";
-import { ZFL_EMAIL } from "@/config/constants";
+import { DIGITALCHECK_URL, ZFL_EMAIL } from "@/config/constants";
 import { mailto } from "@/utils/mailtoHelper";
 import {
   digitalcheckData,
@@ -179,7 +179,7 @@ const interopSum = getSum(interopData[0]);
         </a>
       </p>
       <p>
-        <a href="https://digitalcheck.bund.de" class="link-unstyled kern-link">
+        <a href={DIGITALCHECK_URL.url} class="link-unstyled kern-link">
           <span
             class="kern-icon kern-icon--arrow-forward kern-icon--default"
             aria-hidden="true"
@@ -243,7 +243,7 @@ const interopSum = getSum(interopData[0]);
         Element, um komplexe Regelungen und Prozesse verständlich abzubilden.
       </p>
       <p>
-        <a href="https://digitalcheck.bund.de" class="link-unstyled kern-link">
+        <a href={DIGITALCHECK_URL.url} class="link-unstyled kern-link">
           <span
             class="kern-icon kern-icon--arrow-forward kern-icon--default"
             aria-hidden="true"
@@ -288,7 +288,7 @@ const interopSum = getSum(interopData[0]);
       </p>
       <p>
         <a
-          href="https://digitalcheck.bund.de/interoperabel"
+          href={`${DIGITALCHECK_URL.url}/interoperabel`}
           class="link-unstyled kern-link"
         >
           <span

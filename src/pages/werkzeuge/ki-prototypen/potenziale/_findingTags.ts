@@ -1,3 +1,4 @@
+import { DIGITALCHECK_PRINZIPIEN_URL } from "@/config/constants";
 import { werkzeuge_digitaltauglichkeit_beispiele } from "@/config/routes";
 import type { Finding } from "@/content.config";
 
@@ -31,7 +32,7 @@ function prinzip(
       links: [
         {
           label: `Mehr zum Prinzip ${number}`,
-          href: `https://digitalcheck.bund.de/prinzipien/${PRINZIP_PAGES[group]}#${anchor}`,
+          href: `${DIGITALCHECK_PRINZIPIEN_URL.url}/${PRINZIP_PAGES[group]}#${anchor}`,
         },
         {
           label: "Beispiele ansehen",
