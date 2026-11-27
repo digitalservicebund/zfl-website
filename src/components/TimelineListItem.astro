@@ -16,24 +16,36 @@ type Props = HTMLAttributes<"li"> &
         type?: "default" | "plain";
         /** Badge above the content, e.g. a date. */
         label?: string;
+        /** Shows the `label` as a filled badge, e.g. for steps. Default: `false`. */
+        filledBadge?: boolean;
       }
     | {
         type: "year";
         /** The year shown on the line. */
         label: string;
+        filledBadge?: never;
       }
   );
 
+const vertical = [
+  "before:bg-timeline-list before:absolute before:top-4 before:left-0 before:size-16 before:rounded-full",
+  "after:bg-timeline-list after:absolute after:top-24 after:bottom-0 after:left-[7.5px] after:w-px",
+];
+
+const horizontal = [
+  "lg:[.timeline-horizontal>&]:pt-72",
+  "lg:[.timeline-horizontal>&]:[&>.kern-badge]:absolute lg:[.timeline-horizontal>&]:[&>.kern-badge]:top-0 lg:[.timeline-horizontal>&]:[&>.kern-badge]:left-0",
+  "lg:[.timeline-horizontal>&]:before:top-40 lg:[.timeline-horizontal>&]:before:left-4",
+  "lg:[.timeline-horizontal>&]:after:top-[47.5px] lg:[.timeline-horizontal>&]:after:bottom-auto",
+  "lg:[.timeline-horizontal>&]:after:left-24 lg:[.timeline-horizontal>&]:after:-right-32",
+  "lg:[.timeline-horizontal>&]:after:h-px lg:[.timeline-horizontal>&]:after:w-auto",
+  "lg:[.timeline-horizontal>&]:last:after:right-0",
+];
+
 const styles = tv({
   slots: {
-    base: [
-      // padding is set by the TimelineList variant
-      "relative scroll-my-40",
-      // dot
-      "before:bg-timeline-list before:absolute before:top-4 before:left-0 before:size-16 before:rounded-full",
-      // line below the dot, down to the next item
-      "after:bg-timeline-list after:absolute after:top-24 after:bottom-0 after:left-[7.5px] after:w-px",
-    ],
+    // padding is set by the TimelineList variant
+    base: ["relative scroll-my-40", ...vertical, ...horizontal],
     badge: "",
   },
   variants: {
@@ -51,7 +63,13 @@ const styles = tv({
   },
 });
 
-const { type, label, class: className, ...attrs } = Astro.props;
+const {
+  type,
+  label,
+  filledBadge = false,
+  class: className,
+  ...attrs
+} = Astro.props;
 const { base, badge } = styles({ type });
 ---
 
@@ -62,7 +80,11 @@ const { base, badge } = styles({ type });
     </Badge>
   ) : (
     <>
-      {label && <Badge look="timeline">{label}</Badge>}
+      {label && (
+        <Badge look={filledBadge ? "timelineFilled" : "timeline"}>
+          {label}
+        </Badge>
+      )}
       <slot />
     </>
   )}

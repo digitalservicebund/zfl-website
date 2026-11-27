@@ -1,8 +1,8 @@
 import "@/styles/global.css";
 import type { ContainerRenderOptions } from "astro/container";
 import type { ComponentProps } from "astro/types";
-import { beforeAll, describe, expect, it } from "vitest";
-import { commands } from "vitest/browser";
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { commands, page } from "vitest/browser";
 import type TimelineList from "./TimelineList.astro";
 import type { FixtureItem } from "./__fixtures__/TimelineListFixture.astro";
 
@@ -21,6 +21,9 @@ type ItemType = "default" | "plain" | "year";
 
 // Theme color for dots and lines, set per repo in the @theme of global.css
 const COLOR_VAR = "--color-timeline-list";
+
+// Vitest's default browser viewport, narrower than the lg breakpoint
+const DEFAULT_VIEWPORT = { width: 414, height: 896 };
 
 /*
   What each dimension should produce. Add a TimelineList variant here to test
@@ -237,5 +240,112 @@ describe("TimelineList attributes and overrides", () => {
     const item = list.querySelector("li")!;
     expect(item.dataset.entryIndex).toBe("0");
     expect(item.tabIndex).toBe(-1);
+  });
+});
+
+describe("TimelineList variant=horizontal", () => {
+  const steps: FixtureItem[] = ["Woche 1", "Woche 2–4", "Woche 5–6"].map(
+    (label) => ({
+      label,
+      filledBadge: true,
+      html: "<h5>Schritt</h5><ul><li>Punkt</li></ul>",
+    }),
+  );
+
+  describe("from lg", () => {
+    let list: HTMLOListElement;
+    let items: HTMLLIElement[];
+
+    beforeAll(async () => {
+      await page.viewport(1280, 800);
+      list = await render({ variant: "horizontal" }, steps);
+      items = [...list.children] as HTMLLIElement[];
+    });
+
+    afterAll(async () => {
+      await page.viewport(DEFAULT_VIEWPORT.width, DEFAULT_VIEWPORT.height);
+    });
+
+    it("lays the items out as equal columns, 32px apart", () => {
+      expect(css(list)).toMatchObject({ display: "grid", columnGap: "32px" });
+      const widths = items.map((item) => item.getBoundingClientRect().width);
+      for (const width of widths) expect(width).toBeCloseTo(widths[0]!, 0);
+      const [first, second] = items.map((item) => item.getBoundingClientRect());
+      expect(second!.top).toBeCloseTo(first!.top, 0);
+    });
+
+    it("removes the vertical padding", () => {
+      for (const item of items) {
+        expect(css(item)).toMatchObject({
+          paddingLeft: "0px",
+          paddingBottom: "0px",
+        });
+      }
+    });
+
+    it("puts the dot below the badge", () => {
+      expect(css(items[0]!, "::before")).toMatchObject({
+        top: "40px",
+        left: "4px",
+        width: "16px",
+        height: "16px",
+      });
+    });
+
+    it("draws the line from the dot through the gap to the next column", () => {
+      expect(css(items[0]!, "::after")).toMatchObject({
+        top: "47.5px",
+        left: "24px",
+        right: "-32px",
+        height: "1px",
+      });
+    });
+
+    it("ends the last line at its column", () => {
+      expect(css(items.at(-1)!, "::after").right).toBe("0px");
+    });
+
+    it("starts the content 72px below the top of the item", () => {
+      const item = items[0]!.getBoundingClientRect();
+      const heading = items[0]!.querySelector("h5")!.getBoundingClientRect();
+      expect(heading.top - item.top).toBeCloseTo(72, 0);
+    });
+
+    it("keeps the same layout for items without a label", async () => {
+      const mixed = await render({ variant: "horizontal" }, [
+        steps[0]!,
+        { html: "<h5>Schritt</h5>" },
+      ]);
+      const [withLabel, withoutLabel] = [...mixed.children];
+      const headingTop = (item: Element) =>
+        item.querySelector("h5")!.getBoundingClientRect().top -
+        item.getBoundingClientRect().top;
+      expect(headingTop(withoutLabel!)).toBeCloseTo(headingTop(withLabel!), 0);
+      expect(css(withoutLabel!, "::before").top).toBe("40px");
+      // render() replaced the page, so restore the list the other tests use
+      list = await render({ variant: "horizontal" }, steps);
+      items = [...list.children] as HTMLLIElement[];
+    });
+
+    it("uses the filled step badge", () => {
+      const badge = items[0]!.querySelector(".kern-badge")!;
+      expect(css(badge).backgroundColor).toBe(
+        resolveColor("--color-cosmic-blue-base"),
+      );
+    });
+  });
+
+  describe("below lg", () => {
+    it("falls back to the vertical timeline", async () => {
+      const list = await render({ variant: "horizontal" }, steps);
+      const item = list.children[0]!;
+      expect(css(list).display).toBe("block");
+      expect(css(item)).toMatchObject({
+        paddingLeft: variantStyles.default.padding.left,
+        paddingBottom: variantStyles.default.padding.bottom,
+      });
+      expect(css(item, "::before").top).toBe("4px");
+      expect(css(item, "::after").top).toBe("24px");
+    });
   });
 });

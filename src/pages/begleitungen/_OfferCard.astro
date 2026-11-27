@@ -3,6 +3,8 @@ import PackageCard from "@/components/PackageCard.astro";
 import KernAccordion from "@/components/KernAccordion.astro";
 import Checklist from "@/components/Checklist.astro";
 import ChecklistItem from "@/components/ChecklistItem.astro";
+import TimelineList from "@/components/TimelineList.astro";
+import TimelineListItem from "@/components/TimelineListItem.astro";
 import {
   werkzeuge_ressourcen_interviewleitfaden,
   werkzeuge_ressourcen_visualisierungen,
@@ -60,8 +62,52 @@ import IconGroups from "~icons/ic/round-groups";
 
   <div class="mt-32">
     <h4 class="kern-subline">Beispielhafter Ablauf</h4>
-    {/* TODO: horizontal TimelineList */}
-    <div class="bg-surface-default rounded-sm mt-16 h-380"></div>
+    {/* Figma: "Wochen" */}
+    <div class="bg-surface-default mt-16 px-16 py-32">
+      <TimelineList
+        variant="horizontal"
+        class="[&_h5]:kern-heading-medium [&_h5]:py-8 [&_ul]:mt-4 [&_ul]:space-y-8"
+      >
+        <TimelineListItem label="Woche 1" filledBadge>
+          <h5>Ausgangslage und Zielsetzung</h5>
+          <ul>
+            <li>
+              Sammlung zentraler Fragestellungen mit Blick auf
+              Praxistauglichkeit, Digitalisierung und bürokratiearme Umsetzung.
+            </li>
+            <li>
+              Festlegung der relevanten Schwerpunkte für die weitere Begleitung.
+            </li>
+          </ul>
+        </TimelineListItem>
+        <TimelineListItem label="Woche 2–4" filledBadge>
+          <h5>Bestandsaufnahme und Recherche</h5>
+          <ul>
+            <li>
+              Übersicht über den aktuellen Wissensstand, z.&nbsp;B. anhand
+              vorliegender Studien und geltenden Rechts.
+            </li>
+            <li>
+              Erhebung neuer Daten, z.&nbsp;B. durch Prozessanalysen oder
+              Gespräche mit Bürgerinnen und Bürgern.
+            </li>
+          </ul>
+        </TimelineListItem>
+        <TimelineListItem label="Woche 5–6" filledBadge>
+          <h5>Auswertung und Handlungsempfehlungen</h5>
+          <ul>
+            <li>
+              Dokumentation der gewonnenen Erkenntnisse und eine fundierte
+              Bewertung des Ist-Zustands.
+            </li>
+            <li>
+              Konkrete Empfehlungen und Anknüpfungspunkte für die weitere
+              Ausarbeitung des Vorhabens.
+            </li>
+          </ul>
+        </TimelineListItem>
+      </TimelineList>
+    </div>
   </div>
 
   <KernAccordion fullWidth={false} class="mt-32 border-kern-border-contextual">

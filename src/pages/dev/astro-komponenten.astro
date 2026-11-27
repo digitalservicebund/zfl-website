@@ -76,6 +76,11 @@ export const frontmatter = {
       </div>
 
       <div class="space-y-32">
+        <p class="variant-label kern-label">look: timelineFilled</p>
+        <Badge look="timelineFilled">Woche 1</Badge>
+      </div>
+
+      <div class="space-y-32">
         <p class="variant-label kern-label">mit Icon-Slot</p>
         <Badge look="hint">
           <IconInfo slot="icon" class="size-16" />
@@ -960,6 +965,26 @@ export const frontmatter = {
           <TimelineListItem label="September 2026">
             <h3>Zweiter Eintrag</h3>
             <p>Kurzer Text zum zweiten Eintrag.</p>
+          </TimelineListItem>
+        </TimelineList>
+      </div>
+
+      <div class="space-y-32">
+        <p class="variant-label kern-label">
+          variant: horizontal (ab lg), filledBadge
+        </p>
+        <TimelineList variant="horizontal" class="[&_h3]:mt-0">
+          <TimelineListItem label="Schritt 1" filledBadge>
+            <h3>Erster Schritt</h3>
+            <p>Kurzer Text zum ersten Schritt.</p>
+          </TimelineListItem>
+          <TimelineListItem label="Schritt 2" filledBadge>
+            <h3>Zweiter Schritt</h3>
+            <p>Kurzer Text zum zweiten Schritt.</p>
+          </TimelineListItem>
+          <TimelineListItem label="Schritt 3" filledBadge>
+            <h3>Dritter Schritt</h3>
+            <p>Kurzer Text zum dritten Schritt.</p>
           </TimelineListItem>
         </TimelineList>
       </div>

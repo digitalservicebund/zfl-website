@@ -4,7 +4,8 @@ import type { VariantProps } from "tailwind-variants";
 import { tv } from "@/utils/tv";
 
 /**
- * Vertical timeline. Use `TimelineListItem` for the items.
+ * Timeline, vertical by default. Use `TimelineListItem` for the items.
+ * `variant="horizontal"` shows the items side by side from `lg`, e.g. for steps.
  * Dot and line color: `--color-timeline-list` from the `@theme` in global.css.
  *
  * @example
@@ -18,15 +19,21 @@ import { tv } from "@/utils/tv";
  */
 interface Props extends HTMLAttributes<"ol">, VariantProps<typeof styles> {}
 
-// Sets the default spacing of the items (TimelineListItem). `:where()` has zero
-// specificity, so classes on an item override it.
 const styles = tv({
-  base: "list-unstyled scroll-my-40",
+  base: [
+    "list-unstyled scroll-my-40",
+    "[:where(&>li)]:pb-24 [:where(&>li)]:pl-40",
+  ],
   variants: {
-    /** `changelog`: room for year badges, more spacing and indentation. Default: `default`. */
+    /**
+     * - `changelog`: room for year badges, more spacing and indentation
+     * - `horizontal`: vertical on small screens, one column per item from `lg`
+     */
     variant: {
-      default: "[:where(&>li)]:pb-24 [:where(&>li)]:pl-40",
+      default: "",
       changelog: "ml-26 [:where(&>li)]:pb-40 [:where(&>li)]:pl-48",
+      horizontal:
+        "timeline-horizontal lg:grid lg:auto-cols-fr lg:grid-flow-col lg:gap-32 lg:[:where(&>li)]:p-0",
     },
   },
   defaultVariants: {
