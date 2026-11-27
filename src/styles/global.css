@@ -21,7 +21,9 @@
   --color-lavender-surface-highlight: #e3e6f2;
 
   --color-surface-default: #f3f4f7;
-  --color-kern-border-contextual: var(--kern-color-decorative-border-contextual);
+  --color-kern-border-contextual: var(
+    --kern-color-decorative-border-contextual
+  );
   --color-kern-text-muted-contextual: var(
     --kern-color-layout-text-muted-contextual
   );
@@ -51,6 +53,8 @@
 
   --max-content-width: 82rem;
   --container-padding-inline: clamp(1rem, 5vw, 3rem);
+
+  --color-timeline-list: var(--color-cosmic-blue-base);
 }
 
 @media (width >= 48rem) {
