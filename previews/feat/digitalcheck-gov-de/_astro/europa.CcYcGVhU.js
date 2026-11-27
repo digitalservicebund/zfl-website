@@ -1,0 +1,45 @@
+var e=`---
+summary: "Wie ein Betreiber kritischer Anlagen zur kritischen Einrichtung von besonderer Bedeutung für Europa wird (§9 KRITIS-Dachgesetz), welche Informationen dann an die Europäische Kommission gehen und wie eine Beratungsmission nach §10 abläuft."
+---
+swimlane-beta TD
+    subgraph BT["Betreiber kritischer Anlagen"]
+        start(["Gibt bei der Registrierung an, in oder<br/>für welche EU-Mitgliedstaaten er welche<br/>wesentlichen Dienste erbringt<br/>— <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 I Nr. 6</a>"])
+        gilt["Ab Eingang der Mitteilung gelten die<br/>Pflichten nach §§12, 13 auch in seiner<br/>Eigenschaft als kritische Einrichtung von<br/>besonderer Bedeutung für Europa<br/>— <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 III S.2</a>"]
+        mitwirkung["Unterstützt das BMI mit Informationen und<br/>gewährt der Beratungsmission Zugang zu<br/>Informationen, Systemen, Anlagen und<br/>Geschäftsräumen — <a href='{{ELI}}#art-z10_abs-z2' target='_blank' rel='noopener'>§10 II</a>, <a href='{{ELI}}#art-z10_abs-z3' target='_blank' rel='noopener'>III</a>"]
+        beruecksichtigt(["Berücksichtigt die Stellungnahme, die die<br/>Kommission auf Grundlage des Berichts der<br/>Beratungsmission abgibt, bei der<br/>Umsetzung der §§12, 13, 18 — <a href='{{ELI}}#art-z10_abs-z5' target='_blank' rel='noopener'>§10 V</a>"])
+    end
+
+    subgraph BBK["BBK"]
+        weiter1["Leitet die Angaben (§8 I Nr. 5)<br/>unverzüglich an die zuständige Behörde<br/>weiter — <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II S.1</a>"]
+        weiter2["Leitet die Mitteilung der Kommission<br/>unverzüglich an den Betreiber und die<br/>zuständige Behörde weiter — <a href='{{ELI}}#art-z9_abs-z3' target='_blank' rel='noopener'>§9 III S.1</a>"]
+    end
+
+    subgraph BMI["Bundesministerium des Innern (BMI)"]
+        meldung["Teilt diese Informationen unverzüglich<br/>der Europäischen Kommission mit<br/>— <a href='{{ELI}}#art-z9_abs-z2' target='_blank' rel='noopener'>§9 II S.2</a>"]
+        info(["Übermittelt im Benehmen mit dem<br/>zuständigen Fachministerium Teile der<br/>Risikoanalyse, Liste der Maßnahmen und<br/>der Aufsichtsmaßnahmen (ohne Angaben<br/>gegen wesentliche nationale<br/>Sicherheitsinteressen) — <a href='{{ELI}}#art-z9_abs-z4' target='_blank' rel='noopener'>§9 IV</a>"])
+        mission["Optional: beantragt eine Beratungsmission bei der<br/>Kommission oder stimmt einem Vorschlag<br/>der Kommission bzw. Antrag eines<br/>Mitgliedstaats zu (mit dem Fachministerium)<br/>— <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>§10 I</a>"]
+    end
+
+    subgraph EU["Europäische Kommission und Mitgliedstaaten"]
+        einstufung{"Dienst für oder in mind.<br/>6 Mitgliedstaaten und<br/>Mitteilung der Kommission<br/>über das BBK? — <a href='{{ELI}}#art-z9_abs-z1' target='_blank' rel='noopener'>§9 I</a>"}
+        keine(["Keine kritische Einrichtung von<br/>besonderer Bedeutung für Europa"])
+        antrag("Antrag der Kommission oder eines<br/>betroffenen Mitgliedstaats auf<br/>Informationen — <a href='{{ELI}}#art-z9_abs-z4' target='_blank' rel='noopener'>§9 IV</a>")
+    end
+
+    start --> weiter1
+    weiter1 --> meldung
+    meldung --> einstufung
+    einstufung -->|Nein| keine
+    einstufung -->|Ja| weiter2
+    weiter2 --> gilt
+    antrag -.-> info
+    mission --> mitwirkung
+    mitwirkung --> beruecksichtigt
+    keine ~~~ weiter2
+    gilt ~~~ antrag
+    info ~~~ mission
+
+    style keine fill:#f5f5f5,stroke:#999
+    style info fill:#d4edda,stroke:#2d8a4a
+    style beruecksichtigt fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};

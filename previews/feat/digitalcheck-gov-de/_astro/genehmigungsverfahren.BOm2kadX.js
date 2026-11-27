@@ -1,0 +1,50 @@
+var e=`---
+summary: "Das förmliche Genehmigungsverfahren für Anlagen nach dem BImSchG: Antrag, Vollständigkeitsprüfung, öffentliche Bekanntmachung mit Auslegung und Einwendungen, Beteiligung der berührten Behörden (Sternverfahren), optionale Erörterung und Entscheidung der Genehmigungsbehörde."
+---
+swimlane-beta TD
+    subgraph OE["Betroffene Öffentlichkeit"]
+        einw["Erhebt schriftlich oder elektronisch<br/>Einwendungen bis 2 Wochen nach Ende<br/>der Auslegung (IE-Anlagen: 1 Monat);<br/>spätere Einwendungen ausgeschlossen<br/>— <a href='https://www.gesetze-im-internet.de/bimschg/__10.html' target='_blank' rel='noopener'>§10 III S.8-9</a>"]
+    end
+
+    subgraph AS["Antragsteller"]
+        antrag(["Stellt schriftlichen oder elektronischen<br/>Antrag mit den Unterlagen zur Prüfung<br/>nach §6 — <a href='https://www.gesetze-im-internet.de/bimschg/__10.html' target='_blank' rel='noopener'>§10 I S.1-2</a>; Geheimnisse<br/>gekennzeichnet — <a href='https://www.gesetze-im-internet.de/bimschg/__10.html' target='_blank' rel='noopener'>§10 II</a>; bei IE-Anlagen<br/>Bericht über den Ausgangszustand — <a href='https://www.gesetze-im-internet.de/bimschg/__10.html' target='_blank' rel='noopener'>§10 Ia</a>"])
+        ergaenzt["Ergänzt die Unterlagen auf Verlangen<br/>innerhalb angemessener Frist — <a href='https://www.gesetze-im-internet.de/bimschg/__10.html' target='_blank' rel='noopener'>§10 I S.3</a>"]
+    end
+
+    subgraph GB["Genehmigungsbehörde"]
+        eingang("Antrag geht ein")
+        vollst{"Unterlagen vollständig?<br/>— <a href='https://www.gesetze-im-internet.de/bimschg/__10.html' target='_blank' rel='noopener'>§10 III S.1</a>"}
+        bekannt["Macht das Vorhaben auf ihrer<br/>Internetseite bekannt (Angaben nach<br/><a href='https://www.gesetze-im-internet.de/bimschg/__10.html' target='_blank' rel='noopener'>§10 IV</a>) und legt Antrag und Unterlagen<br/>1 Monat online aus — <a href='https://www.gesetze-im-internet.de/bimschg/__10.html' target='_blank' rel='noopener'>§10 III S.1-3</a>"]
+        einholen["Holt Stellungnahmen der Behörden ein,<br/>deren Aufgabenbereich berührt ist<br/>— <a href='https://www.gesetze-im-internet.de/bimschg/__10.html' target='_blank' rel='noopener'>§10 V S.1</a>"]
+        frist{"Stellungnahme binnen<br/>1 Monat eingegangen?<br/>— <a href='https://www.gesetze-im-internet.de/bimschg/__10.html' target='_blank' rel='noopener'>§10 V S.3</a>"}
+        ersatz["Behörde gilt als nicht äußerungswillig:<br/>Gutachten zu ihren Lasten oder eigene<br/>Stellungnahme — <a href='https://www.gesetze-im-internet.de/bimschg/__10.html' target='_blank' rel='noopener'>§10 V S.3, S.5</a>"]
+        pruef["Auf Antrag des Antragstellers ggf.<br/>Erörterung der rechtzeitigen Einwendungen<br/>(auch online, per Video oder Telefon)<br/>— <a href='https://www.gesetze-im-internet.de/bimschg/__10.html' target='_blank' rel='noopener'>§10 VI</a>; Entscheidung binnen<br/>7 Monaten ab vollständigem Antrag, einmal<br/>um bis zu 3 Monate verlängerbar — <a href='https://www.gesetze-im-internet.de/bimschg/__10.html' target='_blank' rel='noopener'>§10 VIa</a>"]
+        vor{"Voraussetzungen der<br/>Genehmigung erfüllt?<br/>— <a href='https://www.gesetze-im-internet.de/bimschg/__6.html' target='_blank' rel='noopener'>§6 I</a>"}
+        genehm(["Genehmigungsbescheid: schriftlich,<br/>begründet, Zustellung an Antragsteller<br/>und Einwender, ersetzbar durch öffentliche<br/>Bekanntmachung — <a href='https://www.gesetze-im-internet.de/bimschg/__10.html' target='_blank' rel='noopener'>§10 VII</a>, <a href='https://www.gesetze-im-internet.de/bimschg/__10.html' target='_blank' rel='noopener'>§10 VIII</a>"])
+        ablehn(["Antrag wird abgelehnt"])
+    end
+
+    subgraph BB["Beteiligte Behörden"]
+        stell["Geben Stellungnahme ab; vor Versagung<br/>einer Zustimmung Anhörung des<br/>Antragstellers — <a href='https://www.gesetze-im-internet.de/bimschg/__10.html' target='_blank' rel='noopener'>§10 V S.9</a>"]
+    end
+
+    antrag --> eingang
+    eingang --> vollst
+    vollst -->|Nein| ergaenzt
+    ergaenzt -->|"nach<br/>Ergänzung"| bekannt
+    vollst -->|Ja| bekannt
+    bekannt -->|"Auslegung"| einw
+    bekannt --> einholen
+    einholen --> stell
+    stell --> frist
+    frist -->|"Ja: Weiterleitung an den<br/>Antragsteller — <a href='https://www.gesetze-im-internet.de/bimschg/__10.html' target='_blank' rel='noopener'>§10 V S.2</a>"| pruef
+    frist -->|Nein| ersatz
+    ersatz --> pruef
+    einw -->|"nach Ablauf der<br/>Einwendungsfrist"| pruef
+    pruef --> vor
+    vor -->|Nein| ablehn
+    vor -->|Ja| genehm
+
+    style genehm fill:#d4edda,stroke:#2d8a4a
+    style ablehn fill:#f8d7da,stroke:#c0392b
+`;export{e as default};

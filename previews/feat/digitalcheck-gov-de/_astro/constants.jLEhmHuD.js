@@ -1,0 +1,1 @@
+var e={url:`mailto:kontakt@zfl.bund.de`,display:`kontakt@zfl.bund.de`},t={url:`${{url:`https://digitalcheck.gov.de`}.url}/prinzipien`};export{e as n,t};

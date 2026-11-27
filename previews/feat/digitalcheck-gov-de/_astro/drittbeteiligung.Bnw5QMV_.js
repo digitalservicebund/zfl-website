@@ -1,0 +1,42 @@
+var e=`---
+summary: "Das Verfahren nach §8 IFG, wenn ein Antrag auf Informationszugang Belange Dritter berührt: Anhörung des Dritten binnen eines Monats, schriftliche Entscheidung auch gegenüber dem Dritten und Zugang erst nach Bestandskraft oder zwei Wochen nach Anordnung der sofortigen Vollziehung."
+---
+swimlane-beta TD
+    subgraph AS["Antragsteller"]
+        antrag(["Antrag auf Informationszugang<br/>berührt Belange eines Dritten<br/>— <a href='{{ELI}}/art-z2' target='_blank' rel='noopener'>§2 Nr. 2</a>; bei Daten nach §5 Abs. 1, 2<br/>oder §6 zu begründen<br/>— <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 Abs. 1 S. 3</a>"])
+        ablehnung(["Antrag abgelehnt: Widerspruch<br/>und Verpflichtungsklage<br/>— <a href='{{ELI}}#art-z9_abs-z4' target='_blank' rel='noopener'>§9 Abs. 4</a>"])
+        zugang(["Informationszugang<br/>erfolgt — <a href='{{ELI}}#art-z8_abs-z2' target='_blank' rel='noopener'>§8 Abs. 2 S. 2</a>"])
+    end
+
+    subgraph BH["Behörde"]
+        anhaltspunkte{"Anhaltspunkte, dass der Dritte<br/>ein schutzwürdiges Interesse am<br/>Ausschluss des Zugangs haben<br/>kann? — <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 Abs. 1</a>"}
+        ohne(["Entscheidung ohne Beteiligung<br/>des Dritten — <a href='{{ELI}}#art-z7_abs-z1' target='_blank' rel='noopener'>§7 Abs. 1</a>"])
+        anhoerung["Gibt dem Dritten schriftlich<br/>Gelegenheit zur Stellungnahme<br/>innerhalb eines Monats<br/>— <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 Abs. 1</a>"]
+        entscheidung{"Schriftliche Entscheidung,<br/>auch dem Dritten bekannt<br/>gegeben — <a href='{{ELI}}#art-z8_abs-z2' target='_blank' rel='noopener'>§8 Abs. 2 S. 1</a>:<br/>Zugang gewährt?"}
+        vollziehung{"Sofortige Vollziehung<br/>angeordnet?<br/>— <a href='{{ELI}}#art-z8_abs-z2' target='_blank' rel='noopener'>§8 Abs. 2 S. 2</a>"}
+    end
+
+    subgraph DR["Dritter"]
+        stellungnahme("Kann binnen eines Monats<br/>Stellung nehmen oder in die<br/>Offenlegung einwilligen<br/>— <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 Abs. 1</a>, <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 Abs. 1</a>, <a href='{{ELI}}/art-z6' target='_blank' rel='noopener'>§6 S. 2</a>")
+        angefochten{"Widerspruch oder Klage<br/>gegen die Entscheidung?<br/>— <a href='{{ELI}}#art-z8_abs-z2' target='_blank' rel='noopener'>§8 Abs. 2 S. 3</a> i.V.m. <a href='{{ELI}}#art-z9_abs-z4' target='_blank' rel='noopener'>§9 Abs. 4</a>"}
+        bestandskraft(["Zugang erst, wenn die<br/>Entscheidung dem Dritten<br/>gegenüber bestandskräftig ist<br/>— <a href='{{ELI}}#art-z8_abs-z2' target='_blank' rel='noopener'>§8 Abs. 2 S. 2</a>"])
+    end
+
+    antrag --> anhaltspunkte
+    anhaltspunkte -->|Nein| ohne
+    anhaltspunkte -->|Ja| anhoerung
+    anhoerung --> stellungnahme
+    stellungnahme -->|"Stellungnahme<br/>oder Fristablauf"| entscheidung
+    entscheidung -->|Nein| ablehnung
+    entscheidung -->|Ja| vollziehung
+    vollziehung -->|"Ja: zwei Wochen nach<br/>Bekanntgabe der Anordnung<br/>an den Dritten"| zugang
+    vollziehung -->|Nein| angefochten
+    angefochten -->|"Nein:<br/>Bestandskraft"| zugang
+    angefochten -->|Ja| bestandskraft
+    ohne ~~~ anhoerung
+
+    style zugang fill:#d4edda,stroke:#2d8a4a
+    style ablehnung fill:#f8d7da,stroke:#c0392b
+    style ohne fill:#fff3cd,stroke:#c9a227
+    style bestandskraft fill:#fff3cd,stroke:#c9a227
+`;export{e as default};

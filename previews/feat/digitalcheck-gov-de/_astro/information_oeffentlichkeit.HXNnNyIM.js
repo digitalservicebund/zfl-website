@@ -1,0 +1,53 @@
+var e=`---
+summary: "Wann die zuständige Behörde nach dem LFGB die Öffentlichkeit unter Nennung von Erzeugnis und Unternehmen informieren muss, soll oder darf: Pflichtinformation bei Grenzwert- und erheblichen Verstößen, Ermessensfälle, Anhörung des Unternehmens sowie Berichtigung und Löschfrist."
+---
+flowchart TD
+    start(["Zuständige Behörde erhält Erkenntnisse<br/>über ein Lebensmittel, Futtermittel oder<br/>sonstiges Erzeugnis — <a href='{{ELI}}#art-z40_abs-z1' target='_blank' rel='noopener'>§40 I</a>"])
+    bvl["Bei nicht im Inland hergestellten und<br/>erkennbar nicht im Inland vertriebenen<br/>Erzeugnissen (z.B. nach Meldung eines<br/>anderen Mitgliedstaats) ist das BVL<br/>zuständig — <a href='{{ELI}}#art-z40_abs-z5' target='_blank' rel='noopener'>§40 V</a>"]
+    pflicht{"Durch Tatsachen hinreichend<br/>begründeter Verdacht eines<br/>Falls nach Abs. 1a?<br/>— <a href='{{ELI}}#art-z40_abs-z1a' target='_blank' rel='noopener'>§40 Ia S.1</a>"}
+    pflichtFaelle["Grenzwerte, Höchstgehalte oder -mengen<br/>überschritten (Nr. 1), nicht zugelassener<br/>oder verbotener Stoff (Nr. 2) oder<br/>sonstiger nicht unerheblicher oder<br/>wiederholter Verstoß (Gesundheit,<br/>Täuschung, Hygiene) mit Bußgeld ab 350 €<br/>oder Abgabe an die Staatsanwaltschaft<br/>(Nr. 3) — <a href='{{ELI}}#art-z40_abs-z1a' target='_blank' rel='noopener'>§40 Ia S.1</a><br/>Bei Proben mindestens zwei Untersuchungen;<br/>Verstöße gegen bauliche Anforderungen oder<br/>Aufzeichnungspflichten ohne Gefahr für<br/>Lebensmittel zählen nicht — <a href='{{ELI}}#art-z40_abs-z1a' target='_blank' rel='noopener'>§40 Ia S.1-2</a>"]
+    ermittlung{"Laufendes strafrechtliches<br/>Ermittlungsverfahren?<br/>— <a href='{{ELI}}#art-z40_abs-z1a' target='_blank' rel='noopener'>§40 Ia S.4</a>"}
+    benehmen["Herausgabe nur im Benehmen mit der<br/>Staatsanwaltschaft und wenn der<br/>Untersuchungszweck nicht gefährdet<br/>wird — <a href='{{ELI}}#art-z40_abs-z1a' target='_blank' rel='noopener'>§40 Ia S.4</a>"]
+    sollFall{"Fall nach Art. 10 VO (EG)<br/>Nr. 178/2002 oder Verdacht<br/>nach Abs. 1 S.2 Nr. 1-2<br/>(Gesundheitsrisiko)?<br/>— <a href='{{ELI}}#art-z40_abs-z1' target='_blank' rel='noopener'>§40 I S.1-2</a>"}
+    kannFall{"Fall nach Abs. 1 S.2<br/>Nr. 3-5 (z.B. ekelerregend,<br/>Täuschung, Nachteile für<br/>Mitbewerber)?<br/>— <a href='{{ELI}}#art-z40_abs-z1' target='_blank' rel='noopener'>§40 I S.2</a>"}
+    abwaegung{"Öffentliches Interesse<br/>überwiegt die Belange<br/>der Betroffenen?<br/>— <a href='{{ELI}}#art-z40_abs-z1' target='_blank' rel='noopener'>§40 I S.3</a>"}
+    keineInfo(["Keine Information der Öffentlichkeit<br/>nach §40 — <a href='{{ELI}}#art-z40_abs-z1' target='_blank' rel='noopener'>§40 I</a>"])
+    subsidiaer{"Unternehmer informiert<br/>selbst wirksam und<br/>rechtzeitig?<br/>— <a href='{{ELI}}#art-z40_abs-z2' target='_blank' rel='noopener'>§40 II S.1</a>"}
+    hinweis(["Behörde kann auf Information oder Rückruf<br/>des Unternehmers hinweisen, ohne Anhörung<br/>— <a href='{{ELI}}#art-z40_abs-z2' target='_blank' rel='noopener'>§40 II S.2</a>, <a href='{{ELI}}#art-z40_abs-z3' target='_blank' rel='noopener'>§40 III S.2</a>"])
+    anhoerung["Anhörung des Herstellers oder<br/>Inverkehrbringers, sofern der Zweck der<br/>Information nicht gefährdet wird<br/>— <a href='{{ELI}}#art-z40_abs-z3' target='_blank' rel='noopener'>§40 III S.1</a>"]
+    information["Information der Öffentlichkeit unter<br/>Nennung des Erzeugnisses und des<br/>Unternehmens — <a href='{{ELI}}#art-z40_abs-z1' target='_blank' rel='noopener'>§40 I S.1</a>, <a href='{{ELI}}#art-z40_abs-z1a' target='_blank' rel='noopener'>§40 Ia S.1</a><br/>(bei Hygieneverstößen auch Unternehmer<br/>und Betrieb — <a href='{{ELI}}#art-z40_abs-z1a' target='_blank' rel='noopener'>§40 Ia S.3</a>)"]
+    berichtigung["Information falsch: unverzügliche<br/>Richtigstellung auf Antrag des Betroffenen<br/>oder bei erheblichen Gemeinwohlbelangen;<br/>nach Mangelbeseitigung Hinweis darauf<br/>— <a href='{{ELI}}#art-z40_abs-z4' target='_blank' rel='noopener'>§40 IV</a>"]
+    loeschung{"Information nach<br/>Abs. 1a veröffentlicht?<br/>— <a href='{{ELI}}#art-z40_abs-z4a' target='_blank' rel='noopener'>§40 IVa</a>"}
+    entfernen(["Entfernung samt Zusätzen nach Abs. 4<br/>sechs Monate nach der Veröffentlichung<br/>— <a href='{{ELI}}#art-z40_abs-z4a' target='_blank' rel='noopener'>§40 IVa</a>"])
+    keineFrist(["Löschfrist nach <a href='{{ELI}}#art-z40_abs-z4a' target='_blank' rel='noopener'>§40 IVa</a> gilt nicht"])
+
+    start --> pflicht
+    start -.- bvl
+    pflicht -.- pflichtFaelle
+    pflicht -->|"Ja: Pflicht zur unverzüglichen<br/>Information"| ermittlung
+    pflicht -->|Nein| sollFall
+    ermittlung -->|Ja| benehmen
+    ermittlung -->|Nein| anhoerung
+    benehmen --> anhoerung
+    sollFall -->|"Ja: Behörde soll informieren"| subsidiaer
+    sollFall -->|Nein| kannFall
+    kannFall -->|Ja| abwaegung
+    kannFall -->|Nein| keineInfo
+    abwaegung -->|"Ja: Information zulässig"| subsidiaer
+    abwaegung -->|Nein| keineInfo
+    subsidiaer -->|Ja| hinweis
+    subsidiaer -->|Nein| anhoerung
+    anhoerung --> information
+    information -.- berichtigung
+    information --> loeschung
+    loeschung -->|Ja| entfernen
+    loeschung -->|Nein| keineFrist
+
+    style keineInfo fill:#f8d7da,stroke:#c0392b
+    style hinweis fill:#fff3cd,stroke:#c9a227
+    style entfernen fill:#d4edda,stroke:#2d8a4a
+    style keineFrist fill:#fff3cd,stroke:#c9a227
+    style bvl fill:#f5f5f5,stroke:#999
+    style pflichtFaelle fill:#f5f5f5,stroke:#999
+    style berichtigung fill:#f5f5f5,stroke:#999
+`;export{e as default};

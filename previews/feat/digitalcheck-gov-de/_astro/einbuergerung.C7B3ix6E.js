@@ -1,0 +1,47 @@
+var e=`---
+summary: "Unter welchen Voraussetzungen ein Anspruch auf Einbürgerung nach dem StAG besteht: Aufenthaltsdauer, Bekenntnisse, Aufenthaltsrecht, Lebensunterhalt, Straffreiheit, Sprach- und Gesellschaftskenntnisse sowie die Sicherheitsabfrage bei den Verfassungsschutzbehörden und die Ausschlussgründe."
+---
+flowchart TD
+    A(["Antrag auf Einbürgerung bei der<br/>Staatsangehörigkeitsbehörde — <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>§10 I S.1</a>"]) --> Q1{"Seit 5 Jahren rechtmäßiger<br/>gewöhnlicher Aufenthalt im<br/>Inland, handlungsfähig oder<br/>gesetzlich vertreten, Identität<br/>und Staatsangehörigkeit<br/>geklärt? — <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>§10 I S.1</a>"}
+
+    Q1 -->|Nein| Z1["Kein Anspruch auf Einbürgerung nach §10<br/>(ggf. Ermessenseinbürgerung — <a href='{{ELI}}/art-z8' target='_blank' rel='noopener'>§8</a>)"]
+    Q1 -.- H1["Ehegatte, Lebenspartner und minderjährige<br/>Kinder können auch ohne 5 Jahre<br/>Aufenthalt miteingebürgert werden — <a href='{{ELI}}#art-z10_abs-z2' target='_blank' rel='noopener'>§10 II</a>"]
+
+    Q1 -->|Ja| Q3{"Bekenntnis zur freiheitlichen<br/>demokratischen Grundordnung<br/>und Loyalitätserklärung<br/>— <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>§10 I S.1 Nr.1</a><br/>sowie zur historischen<br/>Verantwortung Deutschlands<br/>— <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>Nr.1a</a>?"}
+
+    Q3 -->|Nein| Z1
+    Q3 -->|Ja| Q4{"Unbefristetes<br/>Aufenthaltsrecht, Blaue Karte<br/>EU oder Titel zu einem nicht<br/>ausgeschlossenen Zweck?<br/>— <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>Nr.2</a>"}
+
+    Q4 -->|Nein| Z1
+    Q4 -->|Ja| Q5{"Lebensunterhalt ohne<br/>Bürgergeld/Sozialhilfe<br/>gesichert? — <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>Nr.3</a>"}
+
+    Q5 -->|Nein| Q5a{"Ausnahme: frühere Gast- oder<br/>Vertragsarbeitnehmer (Bezug<br/>nicht zu vertreten), Vollzeit<br/>20 der letzten 24 Monate<br/>oder Ehegatte einer solchen<br/>Person mit minderj. Kind?<br/>— <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>Nr.3 a-c</a>"}
+    Q5a -->|Nein| Z1
+    Q5a -->|Ja| Q6
+    Q5 -->|Ja| Q6{"Ermittlungs- oder<br/>Strafverfahren anhängig?<br/>— <a href='{{ELI}}#art-z12a_abs-z3' target='_blank' rel='noopener'>§12a III</a>"}
+
+    Q6 -->|Ja| Z2["Entscheidung bis zum Abschluss des<br/>Verfahrens bzw. bis zur Rechtskraft<br/>ausgesetzt — <a href='{{ELI}}#art-z12a_abs-z3' target='_blank' rel='noopener'>§12a III</a>"]
+    Q6 -->|Nein| Q7{"Keine Verurteilung zu Strafe<br/>und keine Maßregel wegen<br/>Schuldunfähigkeit? — <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>Nr.5</a>"}
+    Q7 -.- H2["Außer Betracht bleiben u.a. Maßnahmen<br/>nach JGG, Geldstrafe bis 90 Tagessätze,<br/>Bewährungsstrafe bis 3 Monate — nicht<br/>bei antisemitischer, rassistischer oder<br/>menschenverachtender Tat — <a href='{{ELI}}#art-z12a_abs-z1' target='_blank' rel='noopener'>§12a I</a>"]
+
+    Q7 -->|Nein| Z1
+    Q7 -->|Ja| Q8{"Deutschkenntnisse B1<br/>(unter 16 J.: altersgemäß)<br/>— <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>Nr.6</a>, <a href='{{ELI}}#art-z10_abs-z4' target='_blank' rel='noopener'>§10 IV</a> — und<br/>Kenntnisse der Rechts- und<br/>Gesellschaftsordnung (i.d.R.<br/>Einbürgerungstest)?<br/>— <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>Nr.7</a>, <a href='{{ELI}}#art-z10_abs-z5' target='_blank' rel='noopener'>§10 V</a>"}
+
+    Q8 -->|Nein| Z1
+    Q8 -.- H3["Absehen von Nr.6 und 7 bei Krankheit,<br/>Behinderung oder Alter — <a href='{{ELI}}#art-z10_abs-z6' target='_blank' rel='noopener'>§10 VI</a>;<br/>nur mündliche Alltagsverständigung bei<br/>Härte — <a href='{{ELI}}#art-z10_abs-z4a' target='_blank' rel='noopener'>§10 IVa</a> — oder früheren<br/>Gastarbeitern — <a href='{{ELI}}#art-z10_abs-z4' target='_blank' rel='noopener'>§10 IV S.3</a>,<br/>dann auch kein Test — <a href='{{ELI}}#art-z10_abs-z6' target='_blank' rel='noopener'>§10 VI S.2</a>"]
+
+    Q8 -->|Ja| S1["Sicherheitsabfrage: Die Behörde übermittelt<br/>die Daten (ab 16 J.) an die<br/>Verfassungsschutzbehörden, diese<br/>unterrichten unverzüglich — <a href='{{ELI}}#art-z37_abs-z' target='_blank' rel='noopener'>§37</a>"]
+
+    S1 --> Q10{"Ausschlussgrund?<br/>Extremistische Bestrebungen,<br/>unrichtiges Bekenntnis,<br/>schweres Ausweisungsinteresse,<br/>Mehrehe, Missachtung der<br/>Gleichberechtigung<br/>— <a href='{{ELI}}#art-z11_abs-z' target='_blank' rel='noopener'>§11 S.1</a>"}
+
+    Q10 -->|Ja| Z3["Einbürgerung ausgeschlossen — <a href='{{ELI}}#art-z11_abs-z' target='_blank' rel='noopener'>§11</a>"]
+    Q10 -->|Nein| Z4["Anspruch auf Einbürgerung — <a href='{{ELI}}#art-z10_abs-z1' target='_blank' rel='noopener'>§10 I S.1</a>"]
+
+    style Z1 fill:#f8d7da,stroke:#c0392b
+    style Z2 fill:#fff3cd,stroke:#c9a227
+    style Z3 fill:#f8d7da,stroke:#c0392b
+    style Z4 fill:#d4edda,stroke:#2d8a4a
+    style H1 fill:#f5f5f5,stroke:#999
+    style H2 fill:#f5f5f5,stroke:#999
+    style H3 fill:#f5f5f5,stroke:#999
+`;export{e as default};

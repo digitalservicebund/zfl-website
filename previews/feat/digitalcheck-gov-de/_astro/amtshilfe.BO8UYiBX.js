@@ -1,0 +1,59 @@
+var e=`---
+summary: "Der Ablauf der Amtshilfe zwischen Behörden nach dem VwVfG: Abgrenzung, Ersuchen, Verbots- und Verweigerungsgründe der ersuchten Behörde, Streitentscheidung durch die Aufsichtsbehörde, Durchführung und Kostenerstattung."
+---
+swimlane-beta TD
+    subgraph AB["Aufsichtsbehörde"]
+        aufsicht{"Pflicht zur Amtshilfe?<br/>(gemeinsame fachliche<br/>Aufsicht, sonst die der<br/>ersuchten Behörde)<br/>— <a href='{{ELI}}#art-z5_abs-z5' target='_blank' rel='noopener'>§5 V S.2</a>"}
+        keinePflicht(["Keine Pflicht zur Amtshilfe"])
+        pflicht(["Ersuchte Behörde muss die Amtshilfe<br/>leisten — <a href='{{ELI}}#art-z5_abs-z5' target='_blank' rel='noopener'>§5 V S.2</a>"])
+    end
+
+    subgraph EB["Ersuchende Behörde"]
+        start(["Benötigt Hilfe, z.B. weil sie die Amtshandlung<br/>rechtlich oder tatsächlich nicht selbst<br/>vornehmen kann, Tatsachen oder Beweismittel<br/>fehlen oder ihr Aufwand wesentlich größer<br/>wäre — <a href='{{ELI}}#art-z5_abs-z1' target='_blank' rel='noopener'>§5 I</a>"])
+        abgrenzung{"Weisungsverhältnis oder<br/>eigene Aufgabe der anderen<br/>Behörde? — <a href='{{ELI}}#art-z4_abs-z2' target='_blank' rel='noopener'>§4 II</a>"}
+        keineAH(["Keine Amtshilfe: Hilfe im Weisungsweg<br/>oder als eigene Aufgabe — <a href='{{ELI}}#art-z4_abs-z2' target='_blank' rel='noopener'>§4 II</a>"])
+        ersuchen["Ersuchen um Amtshilfe — <a href='{{ELI}}#art-z4_abs-z1' target='_blank' rel='noopener'>§4 I</a>;<br/>möglichst an Behörde der untersten Stufe<br/>des eigenen Verwaltungszweigs — <a href='{{ELI}}#art-z6_abs-z' target='_blank' rel='noopener'>§6</a>"]
+        bestehen{"Besteht auf der<br/>Amtshilfe? — <a href='{{ELI}}#art-z5_abs-z5' target='_blank' rel='noopener'>§5 V S.2</a>"}
+        verzicht(["Keine Amtshilfe durch diese Behörde"])
+        erstattung(["Erstattet Auslagen auf Anforderung;<br/>keine Verwaltungsgebühr — <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 I</a>"])
+    end
+
+    subgraph EH["Ersuchte Behörde"]
+        eingang("Ersuchen geht ein")
+        verbot{"Rechtlich nicht in der<br/>Lage oder erhebliche<br/>Nachteile für Bund oder<br/>Land? — <a href='{{ELI}}#art-z5_abs-z2' target='_blank' rel='noopener'>§5 II S.1</a>"}
+        verbotEnd(["Hilfe darf nicht geleistet werden<br/>— <a href='{{ELI}}#art-z5_abs-z2' target='_blank' rel='noopener'>§5 II S.1</a>"])
+        ermessen{"Verweigerungsgrund? Andere<br/>Behörde wesentlich einfacher,<br/>unverhältnismäßiger Aufwand,<br/>eigene Aufgaben ernstlich<br/>gefährdet — <a href='{{ELI}}#art-z5_abs-z3' target='_blank' rel='noopener'>§5 III</a> —<br/>oder Geheimhaltung<br/>— <a href='{{ELI}}#art-z5_abs-z2' target='_blank' rel='noopener'>§5 II S.2</a>?"}
+        mitteilung["Hält sich nicht für verpflichtet und teilt<br/>dies mit — <a href='{{ELI}}#art-z5_abs-z5' target='_blank' rel='noopener'>§5 V S.1</a> (Unzweckmäßigkeit<br/>ist kein Grund — <a href='{{ELI}}#art-z5_abs-z4' target='_blank' rel='noopener'>§5 IV</a>)"]
+        durchfuehrung["Führt die Amtshilfe nach ihrem Recht durch<br/>und verantwortet die Durchführung; die<br/>ersuchende Behörde verantwortet die<br/>Rechtmäßigkeit der Maßnahme — <a href='{{ELI}}/art-z7' target='_blank' rel='noopener'>§7</a>;<br/>Kosten Dritter stehen ihr zu — <a href='{{ELI}}#art-z8_abs-z2' target='_blank' rel='noopener'>§8 II</a>"]
+        kosten{"Auslagen über 35 Euro<br/>und anderer Rechtsträger?<br/>— <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 I S.2-3</a>"}
+        keineKosten(["Keine Erstattung; keine<br/>Verwaltungsgebühr — <a href='{{ELI}}#art-z8_abs-z1' target='_blank' rel='noopener'>§8 I</a>"])
+    end
+
+    start --> abgrenzung
+    abgrenzung -->|Ja| keineAH
+    abgrenzung -->|Nein| ersuchen
+    ersuchen --> eingang
+    eingang --> verbot
+    verbot -->|Ja| verbotEnd
+    verbot -->|Nein| ermessen
+    ermessen -->|Nein| durchfuehrung
+    ermessen -->|"Ja, Hilfe wird<br/>abgelehnt"| mitteilung
+    mitteilung --> bestehen
+    bestehen -->|Nein| verzicht
+    bestehen -->|Ja| aufsicht
+    aufsicht -->|Nein| keinePflicht
+    aufsicht -->|Ja| pflicht
+    durchfuehrung --> kosten
+    kosten -->|Ja| erstattung
+    kosten -->|Nein| keineKosten
+
+    verbotEnd ~~~ ermessen
+
+    style keineAH fill:#fff3cd,stroke:#c9a227
+    style verzicht fill:#f8d7da,stroke:#c0392b
+    style verbotEnd fill:#f8d7da,stroke:#c0392b
+    style keinePflicht fill:#f8d7da,stroke:#c0392b
+    style pflicht fill:#fff3cd,stroke:#c9a227
+    style erstattung fill:#d4edda,stroke:#2d8a4a
+    style keineKosten fill:#d4edda,stroke:#2d8a4a
+`;export{e as default};
